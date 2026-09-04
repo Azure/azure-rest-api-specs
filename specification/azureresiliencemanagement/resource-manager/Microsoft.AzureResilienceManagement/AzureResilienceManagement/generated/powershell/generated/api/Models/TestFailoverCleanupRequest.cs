@@ -11,12 +11,12 @@ namespace Sample.API.Models
         Sample.API.Models.ITestFailoverCleanupRequestInternal
     {
 
-        /// <summary>Backing field for <see cref="Comment" /> property.</summary>
-        private string _comment;
+        /// <summary>Backing field for <see cref="Comments" /> property.</summary>
+        private string _comments;
 
         /// <summary>Comments for test failover cleanup.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string Comment { get => this._comment; set => this._comment = value; }
+        public string Comments { get => this._comments; set => this._comments = value; }
 
         /// <summary>Creates an new <see cref="TestFailoverCleanupRequest" /> instance.</summary>
         public TestFailoverCleanupRequest()
@@ -38,7 +38,7 @@ namespace Sample.API.Models
         Description = @"Comments for test failover cleanup.",
         SerializedName = @"comments",
         PossibleTypes = new [] { typeof(string) })]
-        string Comment { get; set; }
+        string Comments { get; set; }
 
     }
     /// TestFailoverCleanup post action request.
@@ -46,7 +46,7 @@ namespace Sample.API.Models
 
     {
         /// <summary>Comments for test failover cleanup.</summary>
-        string Comment { get; set; }
+        string Comments { get; set; }
 
     }
 }

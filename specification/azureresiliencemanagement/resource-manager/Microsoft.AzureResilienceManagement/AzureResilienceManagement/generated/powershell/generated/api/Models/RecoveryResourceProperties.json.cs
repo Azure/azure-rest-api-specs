@@ -77,17 +77,17 @@ namespace Sample.API.Models
             }
             {_selectedProtectionSolutionSetting = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("selectedProtectionSolutionSetting"), out var __jsonSelectedProtectionSolutionSetting) ? Sample.API.Models.ResourceBaseProtectionSolutionSetting.FromJson(__jsonSelectedProtectionSolutionSetting) : _selectedProtectionSolutionSetting;}
             {_associatedIdentity = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("associatedIdentity"), out var __jsonAssociatedIdentity) ? Sample.API.Models.AssociatedIdentity.FromJson(__jsonAssociatedIdentity) : _associatedIdentity;}
-            {_errorDetail = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("errorDetails"), out var __jsonErrorDetails) ? Sample.API.Models.ErrorDetail.FromJson(__jsonErrorDetails) : _errorDetail;}
+            {_errorDetails = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("errorDetails"), out var __jsonErrorDetails) ? Sample.API.Models.ErrorDetail.FromJson(__jsonErrorDetails) : _errorDetails;}
             {_recoveryResourceUniqueId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("recoveryResourceUniqueId"), out var __jsonRecoveryResourceUniqueId) ? (string)__jsonRecoveryResourceUniqueId : (string)_recoveryResourceUniqueId;}
             {_provisioningState = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("provisioningState"), out var __jsonProvisioningState) ? (string)__jsonProvisioningState : (string)_provisioningState;}
             {_resourceId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("resourceId"), out var __jsonResourceId) ? (string)__jsonResourceId : (string)_resourceId;}
             {_resourceLocation = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("resourceLocation"), out var __jsonResourceLocation) ? (string)__jsonResourceLocation : (string)_resourceLocation;}
-            {_resourcePhysicalZone = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("resourcePhysicalZones"), out var __jsonResourcePhysicalZones) ? If( __jsonResourcePhysicalZones as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _resourcePhysicalZone;}
+            {_resourcePhysicalZones = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("resourcePhysicalZones"), out var __jsonResourcePhysicalZones) ? If( __jsonResourcePhysicalZones as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _resourcePhysicalZones;}
             {_inclusionState = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("inclusionState"), out var __jsonInclusionState) ? (string)__jsonInclusionState : (string)_inclusionState;}
             {_needsAttention = If( json?.PropertyT<Sample.API.Runtime.Json.JsonBoolean>("needsAttention"), out var __jsonNeedsAttention) ? (bool?)__jsonNeedsAttention : _needsAttention;}
-            {_attentionReason = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("attentionReasons"), out var __jsonAttentionReasons) ? If( __jsonAttentionReasons as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _attentionReason;}
+            {_attentionReasons = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("attentionReasons"), out var __jsonAttentionReasons) ? If( __jsonAttentionReasons as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _attentionReasons;}
             {_protectionStatus = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("protectionStatus"), out var __jsonProtectionStatus) ? (string)__jsonProtectionStatus : (string)_protectionStatus;}
-            {_resourceProtectionSolution = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("resourceProtectionSolutions"), out var __jsonResourceProtectionSolutions) ? If( __jsonResourceProtectionSolutions as Sample.API.Runtime.Json.JsonArray, out var __l) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__l, (__k)=>(Sample.API.Models.IResourceProtectionSolutionSettings) (Sample.API.Models.ResourceProtectionSolutionSettings.FromJson(__k) )) ))() : null : _resourceProtectionSolution;}
+            {_resourceProtectionSolutions = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("resourceProtectionSolutions"), out var __jsonResourceProtectionSolutions) ? If( __jsonResourceProtectionSolutions as Sample.API.Runtime.Json.JsonArray, out var __l) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__l, (__k)=>(Sample.API.Models.IResourceProtectionSolutionSettings) (Sample.API.Models.ResourceProtectionSolutionSettings.FromJson(__k) )) ))() : null : _resourceProtectionSolutions;}
             {_selectedProtectionSolutionType = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("selectedProtectionSolutionType"), out var __jsonSelectedProtectionSolutionType) ? (string)__jsonSelectedProtectionSolutionType : (string)_selectedProtectionSolutionType;}
             {_recoveryGroupId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("recoveryGroupId"), out var __jsonRecoveryGroupId) ? (string)__jsonRecoveryGroupId : (string)_recoveryGroupId;}
             AfterFromJson(json);
@@ -116,7 +116,7 @@ namespace Sample.API.Models
             AddIf( null != this._associatedIdentity ? (Sample.API.Runtime.Json.JsonNode) this._associatedIdentity.ToJson(null,serializationMode) : null, "associatedIdentity" ,container.Add );
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                AddIf( null != this._errorDetail ? (Sample.API.Runtime.Json.JsonNode) this._errorDetail.ToJson(null,serializationMode) : null, "errorDetails" ,container.Add );
+                AddIf( null != this._errorDetails ? (Sample.API.Runtime.Json.JsonNode) this._errorDetails.ToJson(null,serializationMode) : null, "errorDetails" ,container.Add );
             }
             AddIf( null != (((object)this._recoveryResourceUniqueId)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._recoveryResourceUniqueId.ToString()) : null, "recoveryResourceUniqueId" ,container.Add );
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
@@ -133,10 +133,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._resourcePhysicalZone)
+                if (null != this._resourcePhysicalZones)
                 {
                     var __w = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __x in this._resourcePhysicalZone )
+                    foreach( var __x in this._resourcePhysicalZones )
                     {
                         AddIf(null != (((object)__x)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__x.ToString()) : null ,__w.Add);
                     }
@@ -150,10 +150,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._attentionReason)
+                if (null != this._attentionReasons)
                 {
                     var __r = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __s in this._attentionReason )
+                    foreach( var __s in this._attentionReasons )
                     {
                         AddIf(null != (((object)__s)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__s.ToString()) : null ,__r.Add);
                     }
@@ -166,10 +166,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._resourceProtectionSolution)
+                if (null != this._resourceProtectionSolutions)
                 {
                     var __m = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __n in this._resourceProtectionSolution )
+                    foreach( var __n in this._resourceProtectionSolutions )
                     {
                         AddIf(__n?.ToJson(null, serializationMode) ,__m.Add);
                     }

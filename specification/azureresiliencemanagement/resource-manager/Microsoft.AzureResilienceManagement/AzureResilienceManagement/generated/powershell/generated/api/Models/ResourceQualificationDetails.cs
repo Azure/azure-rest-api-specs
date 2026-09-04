@@ -18,19 +18,19 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string DrillQualificationState { get => this._drillQualificationState; }
 
-        /// <summary>Backing field for <see cref="DrillsNotQualifiedReason" /> property.</summary>
-        private System.Collections.Generic.List<string> _drillsNotQualifiedReason;
+        /// <summary>Backing field for <see cref="DrillsNotQualifiedReasons" /> property.</summary>
+        private System.Collections.Generic.List<string> _drillsNotQualifiedReasons;
 
         /// <summary>Reasons for resource not qualified for the drills operation.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> DrillsNotQualifiedReason { get => this._drillsNotQualifiedReason; }
+        public System.Collections.Generic.List<string> DrillsNotQualifiedReasons { get => this._drillsNotQualifiedReasons; }
 
-        /// <summary>Backing field for <see cref="RecoveryNotQualifiedReason" /> property.</summary>
-        private System.Collections.Generic.List<string> _recoveryNotQualifiedReason;
+        /// <summary>Backing field for <see cref="RecoveryNotQualifiedReasons" /> property.</summary>
+        private System.Collections.Generic.List<string> _recoveryNotQualifiedReasons;
 
         /// <summary>Reasons for resource not qualified for the recovery operation.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> RecoveryNotQualifiedReason { get => this._recoveryNotQualifiedReason; }
+        public System.Collections.Generic.List<string> RecoveryNotQualifiedReasons { get => this._recoveryNotQualifiedReasons; }
 
         /// <summary>Backing field for <see cref="RecoveryQualificationState" /> property.</summary>
         private string _recoveryQualificationState;
@@ -42,11 +42,11 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for DrillQualificationState</summary>
         string Sample.API.Models.IResourceQualificationDetailsInternal.DrillQualificationState { get => this._drillQualificationState; set { {_drillQualificationState = value;} } }
 
-        /// <summary>Internal Acessors for DrillsNotQualifiedReason</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IResourceQualificationDetailsInternal.DrillsNotQualifiedReason { get => this._drillsNotQualifiedReason; set { {_drillsNotQualifiedReason = value;} } }
+        /// <summary>Internal Acessors for DrillsNotQualifiedReasons</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IResourceQualificationDetailsInternal.DrillsNotQualifiedReasons { get => this._drillsNotQualifiedReasons; set { {_drillsNotQualifiedReasons = value;} } }
 
-        /// <summary>Internal Acessors for RecoveryNotQualifiedReason</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IResourceQualificationDetailsInternal.RecoveryNotQualifiedReason { get => this._recoveryNotQualifiedReason; set { {_recoveryNotQualifiedReason = value;} } }
+        /// <summary>Internal Acessors for RecoveryNotQualifiedReasons</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IResourceQualificationDetailsInternal.RecoveryNotQualifiedReasons { get => this._recoveryNotQualifiedReasons; set { {_recoveryNotQualifiedReasons = value;} } }
 
         /// <summary>Internal Acessors for RecoveryQualificationState</summary>
         string Sample.API.Models.IResourceQualificationDetailsInternal.RecoveryQualificationState { get => this._recoveryQualificationState; set { {_recoveryQualificationState = value;} } }
@@ -84,7 +84,7 @@ namespace Sample.API.Models
         SerializedName = @"drillsNotQualifiedReasons",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("ResourceNotIncludedInRecoveryPlan", "ResourceNotIncludedInDrill", "ResourceLocationNotMatchingWithSourceLocation", "ResourceZoneNotMatchingWithSourceZone")]
-        System.Collections.Generic.List<string> DrillsNotQualifiedReason { get;  }
+        System.Collections.Generic.List<string> DrillsNotQualifiedReasons { get;  }
         /// <summary>Reasons for resource not qualified for the recovery operation.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -95,7 +95,7 @@ namespace Sample.API.Models
         Description = @"Reasons for resource not qualified for the recovery operation.",
         SerializedName = @"recoveryNotQualifiedReasons",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> RecoveryNotQualifiedReason { get;  }
+        System.Collections.Generic.List<string> RecoveryNotQualifiedReasons { get;  }
         /// <summary>Resource qualification state for the operation.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -119,9 +119,9 @@ namespace Sample.API.Models
         string DrillQualificationState { get; set; }
         /// <summary>Reasons for resource not qualified for the drills operation.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("ResourceNotIncludedInRecoveryPlan", "ResourceNotIncludedInDrill", "ResourceLocationNotMatchingWithSourceLocation", "ResourceZoneNotMatchingWithSourceZone")]
-        System.Collections.Generic.List<string> DrillsNotQualifiedReason { get; set; }
+        System.Collections.Generic.List<string> DrillsNotQualifiedReasons { get; set; }
         /// <summary>Reasons for resource not qualified for the recovery operation.</summary>
-        System.Collections.Generic.List<string> RecoveryNotQualifiedReason { get; set; }
+        System.Collections.Generic.List<string> RecoveryNotQualifiedReasons { get; set; }
         /// <summary>Resource qualification state for the operation.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Unknown", "Qualified", "NotQualified", "Excluded")]
         string RecoveryQualificationState { get; set; }

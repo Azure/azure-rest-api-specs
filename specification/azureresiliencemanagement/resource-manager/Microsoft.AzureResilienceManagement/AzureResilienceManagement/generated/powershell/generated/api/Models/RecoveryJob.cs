@@ -20,27 +20,27 @@ namespace Sample.API.Models
 
         /// <summary>The time elapsed during the execution of this job.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public global::System.TimeSpan? Duration { get => ((Sample.API.Models.IJobPropertiesInternal)Property).Duration; }
+        public global::System.TimeSpan? Duration { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).Duration; }
 
         /// <summary>The end time of the job execution.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public global::System.DateTime? EndTime { get => ((Sample.API.Models.IJobPropertiesInternal)Property).EndTime; }
+        public global::System.DateTime? EndTime { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).EndTime; }
 
         /// <summary>A code representing the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailErrorCode { get => ((Sample.API.Models.IJobPropertiesInternal)Property).ErrorDetailErrorCode; }
+        public string ErrorDetailErrorCode { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).ErrorDetailErrorCode; }
 
         /// <summary>A detailed message explaining the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailErrorMessage { get => ((Sample.API.Models.IJobPropertiesInternal)Property).ErrorDetailErrorMessage; }
+        public string ErrorDetailErrorMessage { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).ErrorDetailErrorMessage; }
 
         /// <summary>A list of recommendations to resolve the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> ErrorDetailRecommendation { get => ((Sample.API.Models.IJobPropertiesInternal)Property).ErrorDetailRecommendation; }
+        public System.Collections.Generic.List<string> ErrorDetailRecommendations { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).ErrorDetailRecommendations; }
 
         /// <summary>User consent for performing recovery action.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ExecutionConfigurationUserConsent { get => ((Sample.API.Models.IJobPropertiesInternal)Property).ExecutionConfigurationUserConsent; }
+        public string ExecutionConfigurationUserConsent { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).ExecutionConfigurationUserConsent; }
 
         /// <summary>
         /// Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
@@ -50,15 +50,15 @@ namespace Sample.API.Models
 
         /// <summary>Non localized error message on job execution.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string JobExtendedInfoDynamicErrorMessage { get => ((Sample.API.Models.IJobPropertiesInternal)Property).JobExtendedInfoDynamicErrorMessage; }
+        public string JobExtendedInfoDynamicErrorMessage { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).JobExtendedInfoDynamicErrorMessage; }
 
         /// <summary>List of tasks associated with this job.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IJobTaskDetail> JobExtendedInfoTasksList { get => ((Sample.API.Models.IJobPropertiesInternal)Property).JobExtendedInfoTasksList; }
+        public System.Collections.Generic.List<Sample.API.Models.IJobTaskDetail> JobExtendedInfoTasksList { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).JobExtendedInfoTasksList; }
 
         /// <summary>The type of job.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string JobType { get => ((Sample.API.Models.IJobPropertiesInternal)Property).JobType; }
+        public string JobType { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).JobType; }
 
         /// <summary>The name of the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
@@ -66,93 +66,89 @@ namespace Sample.API.Models
 
         /// <summary>The operation that this job is intended to perform.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string Operation { get => ((Sample.API.Models.IJobPropertiesInternal)Property).Operation; }
+        public string Operation { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).Operation; }
 
-        /// <summary>Backing field for <see cref="Property" /> property.</summary>
-        private Sample.API.Models.IRecoveryJobProperties _property;
+        /// <summary>Backing field for <see cref="Properties" /> property.</summary>
+        private Sample.API.Models.IRecoveryJobProperties _properties;
 
         /// <summary>The resource-specific properties for this resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IRecoveryJobProperties Property { get => (this._property = this._property ?? new Sample.API.Models.RecoveryJobProperties()); set => this._property = value; }
+        internal Sample.API.Models.IRecoveryJobProperties Properties { get => (this._properties = this._properties ?? new Sample.API.Models.RecoveryJobProperties()); set => this._properties = value; }
 
         /// <summary>The provisioning state of the recovery job.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ProvisioningState { get => ((Sample.API.Models.IRecoveryJobPropertiesInternal)Property).ProvisioningState; }
-
-        /// <summary>Gets the resource group name</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string ResourceGroupName { get => (new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Success ? new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Groups["resourceGroupName"].Value : null); }
+        public string ProvisioningState { get => ((Sample.API.Models.IRecoveryJobPropertiesInternal)Properties).ProvisioningState; }
 
         /// <summary>
         /// The resource for which this job was created. This is typically the resource that the job is intended to manage or operate
         /// on.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ResourceId { get => ((Sample.API.Models.IJobPropertiesInternal)Property).ResourceId; }
+        public string ResourceId { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).ResourceId; }
 
         /// <summary>Details of any retries that have been attempted for this job.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> RetryDetail { get => ((Sample.API.Models.IJobPropertiesInternal)Property).RetryDetail; set => ((Sample.API.Models.IJobPropertiesInternal)Property).RetryDetail = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> RetryDetails { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).RetryDetails; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).RetryDetails = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for Duration</summary>
-        global::System.TimeSpan? Sample.API.Models.IRecoveryJobInternal.Duration { get => ((Sample.API.Models.IJobPropertiesInternal)Property).Duration; set => ((Sample.API.Models.IJobPropertiesInternal)Property).Duration = value ?? default(global::System.TimeSpan); }
+        global::System.TimeSpan? Sample.API.Models.IRecoveryJobInternal.Duration { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).Duration; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).Duration = value ?? default(global::System.TimeSpan); }
 
         /// <summary>Internal Acessors for EndTime</summary>
-        global::System.DateTime? Sample.API.Models.IRecoveryJobInternal.EndTime { get => ((Sample.API.Models.IJobPropertiesInternal)Property).EndTime; set => ((Sample.API.Models.IJobPropertiesInternal)Property).EndTime = value ?? default(global::System.DateTime); }
-
-        /// <summary>Internal Acessors for ErrorDetail</summary>
-        Sample.API.Models.IJobErrorInfo Sample.API.Models.IRecoveryJobInternal.ErrorDetail { get => ((Sample.API.Models.IJobPropertiesInternal)Property).ErrorDetail; set => ((Sample.API.Models.IJobPropertiesInternal)Property).ErrorDetail = value ?? null /* model class */; }
+        global::System.DateTime? Sample.API.Models.IRecoveryJobInternal.EndTime { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).EndTime; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).EndTime = value ?? default(global::System.DateTime); }
 
         /// <summary>Internal Acessors for ErrorDetailErrorCode</summary>
-        string Sample.API.Models.IRecoveryJobInternal.ErrorDetailErrorCode { get => ((Sample.API.Models.IJobPropertiesInternal)Property).ErrorDetailErrorCode; set => ((Sample.API.Models.IJobPropertiesInternal)Property).ErrorDetailErrorCode = value ?? null; }
+        string Sample.API.Models.IRecoveryJobInternal.ErrorDetailErrorCode { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).ErrorDetailErrorCode; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).ErrorDetailErrorCode = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailErrorMessage</summary>
-        string Sample.API.Models.IRecoveryJobInternal.ErrorDetailErrorMessage { get => ((Sample.API.Models.IJobPropertiesInternal)Property).ErrorDetailErrorMessage; set => ((Sample.API.Models.IJobPropertiesInternal)Property).ErrorDetailErrorMessage = value ?? null; }
+        string Sample.API.Models.IRecoveryJobInternal.ErrorDetailErrorMessage { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).ErrorDetailErrorMessage; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).ErrorDetailErrorMessage = value ?? null; }
 
-        /// <summary>Internal Acessors for ErrorDetailRecommendation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IRecoveryJobInternal.ErrorDetailRecommendation { get => ((Sample.API.Models.IJobPropertiesInternal)Property).ErrorDetailRecommendation; set => ((Sample.API.Models.IJobPropertiesInternal)Property).ErrorDetailRecommendation = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for ErrorDetailRecommendations</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IRecoveryJobInternal.ErrorDetailRecommendations { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).ErrorDetailRecommendations; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).ErrorDetailRecommendations = value ?? null /* arrayOf */; }
 
-        /// <summary>Internal Acessors for ExecutionConfiguration</summary>
-        Sample.API.Models.IExecutionConfigurations Sample.API.Models.IRecoveryJobInternal.ExecutionConfiguration { get => ((Sample.API.Models.IJobPropertiesInternal)Property).ExecutionConfiguration; set => ((Sample.API.Models.IJobPropertiesInternal)Property).ExecutionConfiguration = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for ErrorDetails</summary>
+        Sample.API.Models.IJobErrorInfo Sample.API.Models.IRecoveryJobInternal.ErrorDetails { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).ErrorDetails; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).ErrorDetails = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for ExecutionConfigurationUserConsent</summary>
-        string Sample.API.Models.IRecoveryJobInternal.ExecutionConfigurationUserConsent { get => ((Sample.API.Models.IJobPropertiesInternal)Property).ExecutionConfigurationUserConsent; set => ((Sample.API.Models.IJobPropertiesInternal)Property).ExecutionConfigurationUserConsent = value ?? null; }
+        string Sample.API.Models.IRecoveryJobInternal.ExecutionConfigurationUserConsent { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).ExecutionConfigurationUserConsent; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).ExecutionConfigurationUserConsent = value ?? null; }
+
+        /// <summary>Internal Acessors for ExecutionConfigurations</summary>
+        Sample.API.Models.IExecutionConfigurations Sample.API.Models.IRecoveryJobInternal.ExecutionConfigurations { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).ExecutionConfigurations; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).ExecutionConfigurations = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for JobExtendedInfo</summary>
-        Sample.API.Models.IJobExtendedInfo Sample.API.Models.IRecoveryJobInternal.JobExtendedInfo { get => ((Sample.API.Models.IJobPropertiesInternal)Property).JobExtendedInfo; set => ((Sample.API.Models.IJobPropertiesInternal)Property).JobExtendedInfo = value ?? null /* model class */; }
+        Sample.API.Models.IJobExtendedInfo Sample.API.Models.IRecoveryJobInternal.JobExtendedInfo { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).JobExtendedInfo; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).JobExtendedInfo = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for JobExtendedInfoDynamicErrorMessage</summary>
-        string Sample.API.Models.IRecoveryJobInternal.JobExtendedInfoDynamicErrorMessage { get => ((Sample.API.Models.IJobPropertiesInternal)Property).JobExtendedInfoDynamicErrorMessage; set => ((Sample.API.Models.IJobPropertiesInternal)Property).JobExtendedInfoDynamicErrorMessage = value ?? null; }
+        string Sample.API.Models.IRecoveryJobInternal.JobExtendedInfoDynamicErrorMessage { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).JobExtendedInfoDynamicErrorMessage; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).JobExtendedInfoDynamicErrorMessage = value ?? null; }
 
         /// <summary>Internal Acessors for JobExtendedInfoTasksList</summary>
-        System.Collections.Generic.List<Sample.API.Models.IJobTaskDetail> Sample.API.Models.IRecoveryJobInternal.JobExtendedInfoTasksList { get => ((Sample.API.Models.IJobPropertiesInternal)Property).JobExtendedInfoTasksList; set => ((Sample.API.Models.IJobPropertiesInternal)Property).JobExtendedInfoTasksList = value ?? null /* arrayOf */; }
+        System.Collections.Generic.List<Sample.API.Models.IJobTaskDetail> Sample.API.Models.IRecoveryJobInternal.JobExtendedInfoTasksList { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).JobExtendedInfoTasksList; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).JobExtendedInfoTasksList = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for JobType</summary>
-        string Sample.API.Models.IRecoveryJobInternal.JobType { get => ((Sample.API.Models.IJobPropertiesInternal)Property).JobType; set => ((Sample.API.Models.IJobPropertiesInternal)Property).JobType = value ?? null; }
+        string Sample.API.Models.IRecoveryJobInternal.JobType { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).JobType; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).JobType = value ?? null; }
 
         /// <summary>Internal Acessors for Operation</summary>
-        string Sample.API.Models.IRecoveryJobInternal.Operation { get => ((Sample.API.Models.IJobPropertiesInternal)Property).Operation; set => ((Sample.API.Models.IJobPropertiesInternal)Property).Operation = value ?? null; }
+        string Sample.API.Models.IRecoveryJobInternal.Operation { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).Operation; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).Operation = value ?? null; }
 
-        /// <summary>Internal Acessors for Property</summary>
-        Sample.API.Models.IRecoveryJobProperties Sample.API.Models.IRecoveryJobInternal.Property { get => (this._property = this._property ?? new Sample.API.Models.RecoveryJobProperties()); set { {_property = value;} } }
+        /// <summary>Internal Acessors for Properties</summary>
+        Sample.API.Models.IRecoveryJobProperties Sample.API.Models.IRecoveryJobInternal.Properties { get => (this._properties = this._properties ?? new Sample.API.Models.RecoveryJobProperties()); set { {_properties = value;} } }
 
         /// <summary>Internal Acessors for ProvisioningState</summary>
-        string Sample.API.Models.IRecoveryJobInternal.ProvisioningState { get => ((Sample.API.Models.IRecoveryJobPropertiesInternal)Property).ProvisioningState; set => ((Sample.API.Models.IRecoveryJobPropertiesInternal)Property).ProvisioningState = value ?? null; }
+        string Sample.API.Models.IRecoveryJobInternal.ProvisioningState { get => ((Sample.API.Models.IRecoveryJobPropertiesInternal)Properties).ProvisioningState; set => ((Sample.API.Models.IRecoveryJobPropertiesInternal)Properties).ProvisioningState = value ?? null; }
 
         /// <summary>Internal Acessors for ResourceId</summary>
-        string Sample.API.Models.IRecoveryJobInternal.ResourceId { get => ((Sample.API.Models.IJobPropertiesInternal)Property).ResourceId; set => ((Sample.API.Models.IJobPropertiesInternal)Property).ResourceId = value ?? null; }
+        string Sample.API.Models.IRecoveryJobInternal.ResourceId { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).ResourceId; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).ResourceId = value ?? null; }
 
         /// <summary>Internal Acessors for StartTime</summary>
-        global::System.DateTime? Sample.API.Models.IRecoveryJobInternal.StartTime { get => ((Sample.API.Models.IJobPropertiesInternal)Property).StartTime; set => ((Sample.API.Models.IJobPropertiesInternal)Property).StartTime = value ?? default(global::System.DateTime); }
+        global::System.DateTime? Sample.API.Models.IRecoveryJobInternal.StartTime { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).StartTime; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).StartTime = value ?? default(global::System.DateTime); }
 
         /// <summary>Internal Acessors for Status</summary>
-        string Sample.API.Models.IRecoveryJobInternal.Status { get => ((Sample.API.Models.IJobPropertiesInternal)Property).Status; set => ((Sample.API.Models.IJobPropertiesInternal)Property).Status = value ?? null; }
+        string Sample.API.Models.IRecoveryJobInternal.Status { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).Status; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).Status = value ?? null; }
 
         /// <summary>Internal Acessors for TriggeredBy</summary>
-        string Sample.API.Models.IRecoveryJobInternal.TriggeredBy { get => ((Sample.API.Models.IJobPropertiesInternal)Property).TriggeredBy; set => ((Sample.API.Models.IJobPropertiesInternal)Property).TriggeredBy = value ?? null; }
+        string Sample.API.Models.IRecoveryJobInternal.TriggeredBy { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).TriggeredBy; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).TriggeredBy = value ?? null; }
 
-        /// <summary>Internal Acessors for UserComment</summary>
-        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> Sample.API.Models.IRecoveryJobInternal.UserComment { get => ((Sample.API.Models.IJobPropertiesInternal)Property).UserComment; set => ((Sample.API.Models.IJobPropertiesInternal)Property).UserComment = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for UserComments</summary>
+        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> Sample.API.Models.IRecoveryJobInternal.UserComments { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).UserComments; set => ((Sample.API.Models.IJobPropertiesInternal)Properties).UserComments = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for Id</summary>
         string Sample.API.Models.IResourceInternal.Id { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Id; set => ((Sample.API.Models.IResourceInternal)__proxyResource).Id = value ?? null; }
@@ -186,11 +182,11 @@ namespace Sample.API.Models
 
         /// <summary>The start time of the job execution.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public global::System.DateTime? StartTime { get => ((Sample.API.Models.IJobPropertiesInternal)Property).StartTime; }
+        public global::System.DateTime? StartTime { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).StartTime; }
 
         /// <summary>The current status of the job execution.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string Status { get => ((Sample.API.Models.IJobPropertiesInternal)Property).Status; }
+        public string Status { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).Status; }
 
         /// <summary>
         /// Azure Resource Manager metadata containing createdBy and modifiedBy information.
@@ -224,7 +220,7 @@ namespace Sample.API.Models
 
         /// <summary>Indicates whether the job was triggered by the system or a user.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string TriggeredBy { get => ((Sample.API.Models.IJobPropertiesInternal)Property).TriggeredBy; }
+        public string TriggeredBy { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).TriggeredBy; }
 
         /// <summary>
         /// The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
@@ -234,7 +230,7 @@ namespace Sample.API.Models
 
         /// <summary>User Comments.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComment { get => ((Sample.API.Models.IJobPropertiesInternal)Property).UserComment; }
+        public System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComments { get => ((Sample.API.Models.IJobPropertiesInternal)Properties).UserComments; }
 
         /// <summary>Creates an new <see cref="RecoveryJob" /> instance.</summary>
         public RecoveryJob()
@@ -313,7 +309,7 @@ namespace Sample.API.Models
         Description = @"A list of recommendations to resolve the error.",
         SerializedName = @"recommendations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> ErrorDetailRecommendation { get;  }
+        System.Collections.Generic.List<string> ErrorDetailRecommendations { get;  }
         /// <summary>User consent for performing recovery action.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -407,7 +403,7 @@ namespace Sample.API.Models
         Description = @"Details of any retries that have been attempted for this job.",
         SerializedName = @"retryDetails",
         PossibleTypes = new [] { typeof(Sample.API.Models.IJobRetryDetails) })]
-        System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> RetryDetail { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> RetryDetails { get; set; }
         /// <summary>The start time of the job execution.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -453,7 +449,7 @@ namespace Sample.API.Models
         Description = @"User Comments.",
         SerializedName = @"userComments",
         PossibleTypes = new [] { typeof(Sample.API.Models.IJobUserComment) })]
-        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComment { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComments { get;  }
 
     }
     /// Represents a recovery job resource in the Azure Resilience Management provider namespace.
@@ -464,19 +460,19 @@ namespace Sample.API.Models
         global::System.TimeSpan? Duration { get; set; }
         /// <summary>The end time of the job execution.</summary>
         global::System.DateTime? EndTime { get; set; }
-        /// <summary>Details of any errors that occurred during the execution of this job.</summary>
-        Sample.API.Models.IJobErrorInfo ErrorDetail { get; set; }
         /// <summary>A code representing the error.</summary>
         string ErrorDetailErrorCode { get; set; }
         /// <summary>A detailed message explaining the error.</summary>
         string ErrorDetailErrorMessage { get; set; }
         /// <summary>A list of recommendations to resolve the error.</summary>
-        System.Collections.Generic.List<string> ErrorDetailRecommendation { get; set; }
-        /// <summary>Execution configurations for the job.</summary>
-        Sample.API.Models.IExecutionConfigurations ExecutionConfiguration { get; set; }
+        System.Collections.Generic.List<string> ErrorDetailRecommendations { get; set; }
+        /// <summary>Details of any errors that occurred during the execution of this job.</summary>
+        Sample.API.Models.IJobErrorInfo ErrorDetails { get; set; }
         /// <summary>User consent for performing recovery action.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Unspecified", "Allowed")]
         string ExecutionConfigurationUserConsent { get; set; }
+        /// <summary>Execution configurations for the job.</summary>
+        Sample.API.Models.IExecutionConfigurations ExecutionConfigurations { get; set; }
         /// <summary>Additional information about the job.</summary>
         Sample.API.Models.IJobExtendedInfo JobExtendedInfo { get; set; }
         /// <summary>Non localized error message on job execution.</summary>
@@ -489,7 +485,7 @@ namespace Sample.API.Models
         /// <summary>The operation that this job is intended to perform.</summary>
         string Operation { get; set; }
         /// <summary>The resource-specific properties for this resource.</summary>
-        Sample.API.Models.IRecoveryJobProperties Property { get; set; }
+        Sample.API.Models.IRecoveryJobProperties Properties { get; set; }
         /// <summary>The provisioning state of the recovery job.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }
@@ -499,7 +495,7 @@ namespace Sample.API.Models
         /// </summary>
         string ResourceId { get; set; }
         /// <summary>Details of any retries that have been attempted for this job.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> RetryDetail { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> RetryDetails { get; set; }
         /// <summary>The start time of the job execution.</summary>
         global::System.DateTime? StartTime { get; set; }
         /// <summary>The current status of the job execution.</summary>
@@ -509,7 +505,7 @@ namespace Sample.API.Models
         [global::Sample.API.PSArgumentCompleterAttribute("System", "User")]
         string TriggeredBy { get; set; }
         /// <summary>User Comments.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComment { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComments { get; set; }
 
     }
 }

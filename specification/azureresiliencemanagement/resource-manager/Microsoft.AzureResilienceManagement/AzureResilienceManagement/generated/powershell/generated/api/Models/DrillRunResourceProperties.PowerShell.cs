@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.DrillRunResourceProperties"
         /// />.
         /// </summary>
@@ -112,17 +104,17 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetailErrorMessage = (string) content.GetValueForProperty("ErrorDetailErrorMessage",((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetailErrorMessage, global::System.Convert.ToString);
             }
-            if (content.Contains("ErrorDetailRecommendation"))
+            if (content.Contains("ErrorDetailRecommendations"))
             {
-                ((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetailRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("ErrorDetailRecommendation",((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetailRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetailRecommendations = (System.Collections.Generic.List<string>) content.GetValueForProperty("ErrorDetailRecommendations",((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetailRecommendations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("JobExtendedInfoDynamicErrorMessage"))
             {
                 ((Sample.API.Models.IJobResourcePropertiesInternal)this).JobExtendedInfoDynamicErrorMessage = (string) content.GetValueForProperty("JobExtendedInfoDynamicErrorMessage",((Sample.API.Models.IJobResourcePropertiesInternal)this).JobExtendedInfoDynamicErrorMessage, global::System.Convert.ToString);
             }
-            if (content.Contains("ErrorDetail"))
+            if (content.Contains("ErrorDetails"))
             {
-                ((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetail = (Sample.API.Models.IJobErrorInfo) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetail, Sample.API.Models.JobErrorInfoTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetails = (Sample.API.Models.IJobErrorInfo) content.GetValueForProperty("ErrorDetails",((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetails, Sample.API.Models.JobErrorInfoTypeConverter.ConvertFrom);
             }
             if (content.Contains("JobExtendedInfo"))
             {
@@ -152,13 +144,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IJobResourcePropertiesInternal)this).Operation = (string) content.GetValueForProperty("Operation",((Sample.API.Models.IJobResourcePropertiesInternal)this).Operation, global::System.Convert.ToString);
             }
-            if (content.Contains("RetryDetail"))
+            if (content.Contains("RetryDetails"))
             {
-                ((Sample.API.Models.IJobResourcePropertiesInternal)this).RetryDetail = (System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails>) content.GetValueForProperty("RetryDetail",((Sample.API.Models.IJobResourcePropertiesInternal)this).RetryDetail, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobRetryDetails>(__y, Sample.API.Models.JobRetryDetailsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IJobResourcePropertiesInternal)this).RetryDetails = (System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails>) content.GetValueForProperty("RetryDetails",((Sample.API.Models.IJobResourcePropertiesInternal)this).RetryDetails, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobRetryDetails>(__y, Sample.API.Models.JobRetryDetailsTypeConverter.ConvertFrom));
             }
-            if (content.Contains("UserComment"))
+            if (content.Contains("UserComments"))
             {
-                ((Sample.API.Models.IJobResourcePropertiesInternal)this).UserComment = (System.Collections.Generic.List<Sample.API.Models.IJobUserComment>) content.GetValueForProperty("UserComment",((Sample.API.Models.IJobResourcePropertiesInternal)this).UserComment, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobUserComment>(__y, Sample.API.Models.JobUserCommentTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IJobResourcePropertiesInternal)this).UserComments = (System.Collections.Generic.List<Sample.API.Models.IJobUserComment>) content.GetValueForProperty("UserComments",((Sample.API.Models.IJobResourcePropertiesInternal)this).UserComments, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobUserComment>(__y, Sample.API.Models.JobUserCommentTypeConverter.ConvertFrom));
             }
             if (content.Contains("JobId"))
             {
@@ -209,17 +201,17 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetailErrorMessage = (string) content.GetValueForProperty("ErrorDetailErrorMessage",((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetailErrorMessage, global::System.Convert.ToString);
             }
-            if (content.Contains("ErrorDetailRecommendation"))
+            if (content.Contains("ErrorDetailRecommendations"))
             {
-                ((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetailRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("ErrorDetailRecommendation",((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetailRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetailRecommendations = (System.Collections.Generic.List<string>) content.GetValueForProperty("ErrorDetailRecommendations",((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetailRecommendations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("JobExtendedInfoDynamicErrorMessage"))
             {
                 ((Sample.API.Models.IJobResourcePropertiesInternal)this).JobExtendedInfoDynamicErrorMessage = (string) content.GetValueForProperty("JobExtendedInfoDynamicErrorMessage",((Sample.API.Models.IJobResourcePropertiesInternal)this).JobExtendedInfoDynamicErrorMessage, global::System.Convert.ToString);
             }
-            if (content.Contains("ErrorDetail"))
+            if (content.Contains("ErrorDetails"))
             {
-                ((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetail = (Sample.API.Models.IJobErrorInfo) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetail, Sample.API.Models.JobErrorInfoTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetails = (Sample.API.Models.IJobErrorInfo) content.GetValueForProperty("ErrorDetails",((Sample.API.Models.IJobResourcePropertiesInternal)this).ErrorDetails, Sample.API.Models.JobErrorInfoTypeConverter.ConvertFrom);
             }
             if (content.Contains("JobExtendedInfo"))
             {
@@ -249,13 +241,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IJobResourcePropertiesInternal)this).Operation = (string) content.GetValueForProperty("Operation",((Sample.API.Models.IJobResourcePropertiesInternal)this).Operation, global::System.Convert.ToString);
             }
-            if (content.Contains("RetryDetail"))
+            if (content.Contains("RetryDetails"))
             {
-                ((Sample.API.Models.IJobResourcePropertiesInternal)this).RetryDetail = (System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails>) content.GetValueForProperty("RetryDetail",((Sample.API.Models.IJobResourcePropertiesInternal)this).RetryDetail, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobRetryDetails>(__y, Sample.API.Models.JobRetryDetailsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IJobResourcePropertiesInternal)this).RetryDetails = (System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails>) content.GetValueForProperty("RetryDetails",((Sample.API.Models.IJobResourcePropertiesInternal)this).RetryDetails, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobRetryDetails>(__y, Sample.API.Models.JobRetryDetailsTypeConverter.ConvertFrom));
             }
-            if (content.Contains("UserComment"))
+            if (content.Contains("UserComments"))
             {
-                ((Sample.API.Models.IJobResourcePropertiesInternal)this).UserComment = (System.Collections.Generic.List<Sample.API.Models.IJobUserComment>) content.GetValueForProperty("UserComment",((Sample.API.Models.IJobResourcePropertiesInternal)this).UserComment, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobUserComment>(__y, Sample.API.Models.JobUserCommentTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IJobResourcePropertiesInternal)this).UserComments = (System.Collections.Generic.List<Sample.API.Models.IJobUserComment>) content.GetValueForProperty("UserComments",((Sample.API.Models.IJobResourcePropertiesInternal)this).UserComments, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobUserComment>(__y, Sample.API.Models.JobUserCommentTypeConverter.ConvertFrom));
             }
             if (content.Contains("JobId"))
             {
@@ -287,18 +279,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Properties of a Drill Run resource.
     [System.ComponentModel.TypeConverter(typeof(DrillRunResourcePropertiesTypeConverter))]

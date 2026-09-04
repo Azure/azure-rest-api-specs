@@ -82,10 +82,10 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            if (null != this._recoveryResourceQualification)
+            if (null != this._recoveryResourceQualifications)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._recoveryResourceQualification )
+                foreach( var __x in this._recoveryResourceQualifications )
                 {
                     AddIf(__x?.ToJson(null, serializationMode) ,__w.Add);
                 }
@@ -107,7 +107,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_recoveryResourceQualification = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("recoveryResourceQualifications"), out var __jsonRecoveryResourceQualifications) ? If( __jsonRecoveryResourceQualifications as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IRecoveryResourceQualification>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IRecoveryResourceQualification) (Sample.API.Models.RecoveryResourceQualification.FromJson(__u) )) ))() : null : _recoveryResourceQualification;}
+            {_recoveryResourceQualifications = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("recoveryResourceQualifications"), out var __jsonRecoveryResourceQualifications) ? If( __jsonRecoveryResourceQualifications as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IRecoveryResourceQualification>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IRecoveryResourceQualification) (Sample.API.Models.RecoveryResourceQualification.FromJson(__u) )) ))() : null : _recoveryResourceQualifications;}
             AfterFromJson(json);
         }
     }

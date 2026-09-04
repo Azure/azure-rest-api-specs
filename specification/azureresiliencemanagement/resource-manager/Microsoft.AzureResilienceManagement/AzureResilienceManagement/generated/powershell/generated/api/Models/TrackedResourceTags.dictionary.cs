@@ -12,12 +12,6 @@ namespace Sample.API.Models
 
         global::System.Collections.Generic.IDictionary<global::System.String,string> Sample.API.Runtime.IAssociativeArray<string>.AdditionalProperties { get => __additionalProperties; }
 
-        int Sample.API.Runtime.IAssociativeArray<string>.Count { get => __additionalProperties.Count; }
-
-        global::System.Collections.Generic.IEnumerable<global::System.String> Sample.API.Runtime.IAssociativeArray<string>.Keys { get => __additionalProperties.Keys; }
-
-        global::System.Collections.Generic.IEnumerable<string> Sample.API.Runtime.IAssociativeArray<string>.Values { get => __additionalProperties.Values; }
-
         public string this[global::System.String index] { get => __additionalProperties[index]; set => __additionalProperties[index] = value; }
 
         /// <param name="key"></param>

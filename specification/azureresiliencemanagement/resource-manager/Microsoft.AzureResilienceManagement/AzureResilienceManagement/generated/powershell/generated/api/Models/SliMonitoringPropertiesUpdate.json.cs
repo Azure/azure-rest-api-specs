@@ -76,7 +76,7 @@ namespace Sample.API.Models
                 return;
             }
             {_identity = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("identity"), out var __jsonIdentity) ? Sample.API.Models.AssociatedIdentityUpdate.FromJson(__jsonIdentity) : _identity;}
-            {_sli = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("slis"), out var __jsonSlis) ? If( __jsonSlis as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.ISliSelection>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.ISliSelection) (Sample.API.Models.SliSelection.FromJson(__u) )) ))() : null : _sli;}
+            {_slis = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("slis"), out var __jsonSlis) ? If( __jsonSlis as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.ISliSelection>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.ISliSelection) (Sample.API.Models.SliSelection.FromJson(__u) )) ))() : null : _slis;}
             AfterFromJson(json);
         }
 
@@ -100,10 +100,10 @@ namespace Sample.API.Models
                 return container;
             }
             AddIf( null != this._identity ? (Sample.API.Runtime.Json.JsonNode) this._identity.ToJson(null,serializationMode) : null, "identity" ,container.Add );
-            if (null != this._sli)
+            if (null != this._slis)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._sli )
+                foreach( var __x in this._slis )
                 {
                     AddIf(__x?.ToJson(null, serializationMode) ,__w.Add);
                 }

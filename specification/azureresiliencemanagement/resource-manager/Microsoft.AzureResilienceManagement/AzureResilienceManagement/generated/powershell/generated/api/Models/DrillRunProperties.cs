@@ -54,10 +54,6 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public global::System.DateTime? EndTime { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).EndTime; }
 
-        /// <summary>Details of any errors that occurred during the execution of this job.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        internal Sample.API.Models.IJobErrorInfo ErrorDetail { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetail; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetail = value ?? null /* model class */; }
-
         /// <summary>A code representing the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public string ErrorDetailErrorCode { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetailErrorCode; }
@@ -68,15 +64,19 @@ namespace Sample.API.Models
 
         /// <summary>A list of recommendations to resolve the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public System.Collections.Generic.List<string> ErrorDetailRecommendation { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetailRecommendation; }
+        public System.Collections.Generic.List<string> ErrorDetailRecommendations { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetailRecommendations; }
 
-        /// <summary>Execution configurations for the job.</summary>
+        /// <summary>Details of any errors that occurred during the execution of this job.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        internal Sample.API.Models.IExecutionConfigurations ExecutionConfiguration { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ExecutionConfiguration; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ExecutionConfiguration = value ?? null /* model class */; }
+        internal Sample.API.Models.IJobErrorInfo ErrorDetails { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetails; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetails = value ?? null /* model class */; }
 
         /// <summary>User consent for performing recovery action.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public string ExecutionConfigurationUserConsent { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ExecutionConfigurationUserConsent; }
+
+        /// <summary>Execution configurations for the job.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
+        internal Sample.API.Models.IExecutionConfigurations ExecutionConfigurations { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ExecutionConfigurations; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ExecutionConfigurations = value ?? null /* model class */; }
 
         /// <summary>Additional information about the job.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
@@ -105,14 +105,14 @@ namespace Sample.API.Models
 
         /// <summary>A list of recommendations to resolve the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> LastErrorRecommendation { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastErrorRecommendation; }
+        public System.Collections.Generic.List<string> LastErrorRecommendations { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastErrorRecommendations; }
 
-        /// <summary>Backing field for <see cref="Note" /> property.</summary>
-        private System.Collections.Generic.List<string> _note;
+        /// <summary>Backing field for <see cref="Notes" /> property.</summary>
+        private System.Collections.Generic.List<string> _notes;
 
         /// <summary>Notes for this Drill.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> Note { get => this._note; }
+        public System.Collections.Generic.List<string> Notes { get => this._notes; }
 
         /// <summary>The operation that this job is intended to perform.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
@@ -127,7 +127,7 @@ namespace Sample.API.Models
 
         /// <summary>Formats the report is currently available for download in.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> ReportAvailableFormat { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).AvailableFormat; }
+        public System.Collections.Generic.List<string> ReportAvailableFormats { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).AvailableFormats; }
 
         /// <summary>Finalization state of the report. A finalized report is immutable.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
@@ -158,7 +158,7 @@ namespace Sample.API.Models
 
         /// <summary>Details of any retries that have been attempted for this job.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> RetryDetail { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).RetryDetail; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).RetryDetail = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> RetryDetails { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).RetryDetails; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).RetryDetails = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for Attestation</summary>
         string Sample.API.Models.IDrillRunPropertiesInternal.Attestation { get => this._attestation; set { {_attestation = value;} } }
@@ -178,17 +178,17 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for LastErrorMessage</summary>
         string Sample.API.Models.IDrillRunPropertiesInternal.LastErrorMessage { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastErrorMessage; set => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastErrorMessage = value ?? null; }
 
-        /// <summary>Internal Acessors for LastErrorRecommendation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillRunPropertiesInternal.LastErrorRecommendation { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastErrorRecommendation; set => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastErrorRecommendation = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for LastErrorRecommendations</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillRunPropertiesInternal.LastErrorRecommendations { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastErrorRecommendations; set => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastErrorRecommendations = value ?? null /* arrayOf */; }
 
-        /// <summary>Internal Acessors for Note</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillRunPropertiesInternal.Note { get => this._note; set { {_note = value;} } }
+        /// <summary>Internal Acessors for Notes</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillRunPropertiesInternal.Notes { get => this._notes; set { {_notes = value;} } }
 
         /// <summary>Internal Acessors for Report</summary>
         Sample.API.Models.IDrillReportSummary Sample.API.Models.IDrillRunPropertiesInternal.Report { get => (this._report = this._report ?? new Sample.API.Models.DrillReportSummary()); set { {_report = value;} } }
 
-        /// <summary>Internal Acessors for ReportAvailableFormat</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillRunPropertiesInternal.ReportAvailableFormat { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).AvailableFormat; set => ((Sample.API.Models.IDrillReportSummaryInternal)Report).AvailableFormat = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for ReportAvailableFormats</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillRunPropertiesInternal.ReportAvailableFormats { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).AvailableFormats; set => ((Sample.API.Models.IDrillReportSummaryInternal)Report).AvailableFormats = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ReportFinalizationState</summary>
         string Sample.API.Models.IDrillRunPropertiesInternal.ReportFinalizationState { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).FinalizationState; set => ((Sample.API.Models.IDrillReportSummaryInternal)Report).FinalizationState = value ?? null; }
@@ -217,23 +217,23 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for EndTime</summary>
         global::System.DateTime? Sample.API.Models.IJobPropertiesInternal.EndTime { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).EndTime; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).EndTime = value ?? default(global::System.DateTime); }
 
-        /// <summary>Internal Acessors for ErrorDetail</summary>
-        Sample.API.Models.IJobErrorInfo Sample.API.Models.IJobPropertiesInternal.ErrorDetail { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetail; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetail = value ?? null /* model class */; }
-
         /// <summary>Internal Acessors for ErrorDetailErrorCode</summary>
         string Sample.API.Models.IJobPropertiesInternal.ErrorDetailErrorCode { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetailErrorCode; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetailErrorCode = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailErrorMessage</summary>
         string Sample.API.Models.IJobPropertiesInternal.ErrorDetailErrorMessage { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetailErrorMessage; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetailErrorMessage = value ?? null; }
 
-        /// <summary>Internal Acessors for ErrorDetailRecommendation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IJobPropertiesInternal.ErrorDetailRecommendation { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetailRecommendation; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetailRecommendation = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for ErrorDetailRecommendations</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IJobPropertiesInternal.ErrorDetailRecommendations { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetailRecommendations; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetailRecommendations = value ?? null /* arrayOf */; }
 
-        /// <summary>Internal Acessors for ExecutionConfiguration</summary>
-        Sample.API.Models.IExecutionConfigurations Sample.API.Models.IJobPropertiesInternal.ExecutionConfiguration { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ExecutionConfiguration; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ExecutionConfiguration = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for ErrorDetails</summary>
+        Sample.API.Models.IJobErrorInfo Sample.API.Models.IJobPropertiesInternal.ErrorDetails { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetails; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ErrorDetails = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for ExecutionConfigurationUserConsent</summary>
         string Sample.API.Models.IJobPropertiesInternal.ExecutionConfigurationUserConsent { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ExecutionConfigurationUserConsent; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ExecutionConfigurationUserConsent = value ?? null; }
+
+        /// <summary>Internal Acessors for ExecutionConfigurations</summary>
+        Sample.API.Models.IExecutionConfigurations Sample.API.Models.IJobPropertiesInternal.ExecutionConfigurations { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ExecutionConfigurations; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ExecutionConfigurations = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for JobExtendedInfo</summary>
         Sample.API.Models.IJobExtendedInfo Sample.API.Models.IJobPropertiesInternal.JobExtendedInfo { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).JobExtendedInfo; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).JobExtendedInfo = value ?? null /* model class */; }
@@ -259,8 +259,8 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for TriggeredBy</summary>
         string Sample.API.Models.IJobPropertiesInternal.TriggeredBy { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).TriggeredBy; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).TriggeredBy = value ?? null; }
 
-        /// <summary>Internal Acessors for UserComment</summary>
-        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> Sample.API.Models.IJobPropertiesInternal.UserComment { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).UserComment; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).UserComment = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for UserComments</summary>
+        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> Sample.API.Models.IJobPropertiesInternal.UserComments { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).UserComments; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).UserComments = value ?? null /* arrayOf */; }
 
         /// <summary>The start time of the job execution.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
@@ -283,7 +283,7 @@ namespace Sample.API.Models
 
         /// <summary>User Comments.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComment { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).UserComment; }
+        public System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComments { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).UserComments; }
 
         /// <summary>Creates an new <see cref="DrillRunProperties" /> instance.</summary>
         public DrillRunProperties()
@@ -388,7 +388,7 @@ namespace Sample.API.Models
         Description = @"A list of recommendations to resolve the error.",
         SerializedName = @"recommendations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> LastErrorRecommendation { get;  }
+        System.Collections.Generic.List<string> LastErrorRecommendations { get;  }
         /// <summary>Notes for this Drill.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -399,7 +399,7 @@ namespace Sample.API.Models
         Description = @"Notes for this Drill.",
         SerializedName = @"notes",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> Note { get;  }
+        System.Collections.Generic.List<string> Notes { get;  }
         /// <summary>Formats the report is currently available for download in.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -411,7 +411,7 @@ namespace Sample.API.Models
         SerializedName = @"availableFormats",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Html")]
-        System.Collections.Generic.List<string> ReportAvailableFormat { get;  }
+        System.Collections.Generic.List<string> ReportAvailableFormats { get;  }
         /// <summary>Finalization state of the report. A finalized report is immutable.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -503,14 +503,14 @@ namespace Sample.API.Models
         /// <summary>Error message.</summary>
         string LastErrorMessage { get; set; }
         /// <summary>A list of recommendations to resolve the error.</summary>
-        System.Collections.Generic.List<string> LastErrorRecommendation { get; set; }
+        System.Collections.Generic.List<string> LastErrorRecommendations { get; set; }
         /// <summary>Notes for this Drill.</summary>
-        System.Collections.Generic.List<string> Note { get; set; }
+        System.Collections.Generic.List<string> Notes { get; set; }
         /// <summary>Summary of report generation for this Drill Run.</summary>
         Sample.API.Models.IDrillReportSummary Report { get; set; }
         /// <summary>Formats the report is currently available for download in.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Html")]
-        System.Collections.Generic.List<string> ReportAvailableFormat { get; set; }
+        System.Collections.Generic.List<string> ReportAvailableFormats { get; set; }
         /// <summary>Finalization state of the report. A finalized report is immutable.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("NotFinalized", "Finalized")]
         string ReportFinalizationState { get; set; }

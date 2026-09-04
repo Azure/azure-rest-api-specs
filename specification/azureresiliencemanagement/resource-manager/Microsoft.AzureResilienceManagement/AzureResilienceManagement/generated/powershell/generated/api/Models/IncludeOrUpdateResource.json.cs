@@ -73,7 +73,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_faultProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("faultProperties"), out var __jsonFaultProperties) ? Sample.API.Models.FaultProperties.FromJson(__jsonFaultProperties) : _faultProperty;}
+            {_faultProperties = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("faultProperties"), out var __jsonFaultProperties) ? Sample.API.Models.FaultProperties.FromJson(__jsonFaultProperties) : _faultProperties;}
             {_id = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("id"), out var __jsonId) ? (string)__jsonId : (string)_id;}
             AfterFromJson(json);
         }
@@ -97,7 +97,7 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != this._faultProperty ? (Sample.API.Runtime.Json.JsonNode) this._faultProperty.ToJson(null,serializationMode) : null, "faultProperties" ,container.Add );
+            AddIf( null != this._faultProperties ? (Sample.API.Runtime.Json.JsonNode) this._faultProperties.ToJson(null,serializationMode) : null, "faultProperties" ,container.Add );
             AddIf( null != (((object)this._id)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._id.ToString()) : null, "id" ,container.Add );
             AfterToJson(ref container);
             return container;

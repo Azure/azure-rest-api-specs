@@ -65,7 +65,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_errorDetail = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("errorDetails"), out var __jsonErrorDetails) ? Sample.API.Models.JobErrorInfo.FromJson(__jsonErrorDetails) : _errorDetail;}
+            {_errorDetails = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("errorDetails"), out var __jsonErrorDetails) ? Sample.API.Models.JobErrorInfo.FromJson(__jsonErrorDetails) : _errorDetails;}
             {_jobExtendedInfo = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("jobExtendedInfo"), out var __jsonJobExtendedInfo) ? Sample.API.Models.JobExtendedInfo.FromJson(__jsonJobExtendedInfo) : _jobExtendedInfo;}
             {_status = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("status"), out var __jsonStatus) ? (string)__jsonStatus : (string)_status;}
             {_startTime = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("startTime"), out var __jsonStartTime) ? global::System.DateTime.TryParse((string)__jsonStartTime, global::System.Globalization.CultureInfo.InvariantCulture, global::System.Globalization.DateTimeStyles.AdjustToUniversal, out var __jsonStartTimeValue) ? __jsonStartTimeValue : _startTime : _startTime;}
@@ -73,8 +73,8 @@ namespace Sample.API.Models
             {_duration = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("duration"), out var __jsonDuration) ? global::System.Xml.XmlConvert.ToTimeSpan( __jsonDuration ) : _duration;}
             {_resourceId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("resourceId"), out var __jsonResourceId) ? (string)__jsonResourceId : (string)_resourceId;}
             {_operation = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("operation"), out var __jsonOperation) ? (string)__jsonOperation : (string)_operation;}
-            {_retryDetail = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("retryDetails"), out var __jsonRetryDetails) ? If( __jsonRetryDetails as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IJobRetryDetails) (Sample.API.Models.JobRetryDetails.FromJson(__u) )) ))() : null : _retryDetail;}
-            {_userComment = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("userComments"), out var __jsonUserComments) ? If( __jsonUserComments as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IJobUserComment>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(Sample.API.Models.IJobUserComment) (Sample.API.Models.JobUserComment.FromJson(__p) )) ))() : null : _userComment;}
+            {_retryDetails = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("retryDetails"), out var __jsonRetryDetails) ? If( __jsonRetryDetails as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IJobRetryDetails) (Sample.API.Models.JobRetryDetails.FromJson(__u) )) ))() : null : _retryDetails;}
+            {_userComments = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("userComments"), out var __jsonUserComments) ? If( __jsonUserComments as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IJobUserComment>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(Sample.API.Models.IJobUserComment) (Sample.API.Models.JobUserComment.FromJson(__p) )) ))() : null : _userComments;}
             AfterFromJson(json);
         }
 
@@ -107,7 +107,7 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != this._errorDetail ? (Sample.API.Runtime.Json.JsonNode) this._errorDetail.ToJson(null,serializationMode) : null, "errorDetails" ,container.Add );
+            AddIf( null != this._errorDetails ? (Sample.API.Runtime.Json.JsonNode) this._errorDetails.ToJson(null,serializationMode) : null, "errorDetails" ,container.Add );
             AddIf( null != this._jobExtendedInfo ? (Sample.API.Runtime.Json.JsonNode) this._jobExtendedInfo.ToJson(null,serializationMode) : null, "jobExtendedInfo" ,container.Add );
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
@@ -133,10 +133,10 @@ namespace Sample.API.Models
             {
                 AddIf( null != (((object)this._operation)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._operation.ToString()) : null, "operation" ,container.Add );
             }
-            if (null != this._retryDetail)
+            if (null != this._retryDetails)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._retryDetail )
+                foreach( var __x in this._retryDetails )
                 {
                     AddIf(__x?.ToJson(null, serializationMode) ,__w.Add);
                 }
@@ -144,10 +144,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._userComment)
+                if (null != this._userComments)
                 {
                     var __r = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __s in this._userComment )
+                    foreach( var __s in this._userComments )
                     {
                         AddIf(__s?.ToJson(null, serializationMode) ,__r.Add);
                     }

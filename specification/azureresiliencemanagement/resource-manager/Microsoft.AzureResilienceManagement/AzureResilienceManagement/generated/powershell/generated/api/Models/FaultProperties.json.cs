@@ -66,7 +66,7 @@ namespace Sample.API.Models
             {_defaultFault = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("defaultFault"), out var __jsonDefaultFault) ? Sample.API.Models.FaultDetails.FromJson(__jsonDefaultFault) : _defaultFault;}
             {_overriddenDefaultFault = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("overriddenDefaultFault"), out var __jsonOverriddenDefaultFault) ? Sample.API.Models.FaultDetails.FromJson(__jsonOverriddenDefaultFault) : _overriddenDefaultFault;}
             {_customFault = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("customFault"), out var __jsonCustomFault) ? Sample.API.Models.CustomFaultDetails.FromJson(__jsonCustomFault) : _customFault;}
-            {_availableFault = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("availableFaults"), out var __jsonAvailableFaults) ? If( __jsonAvailableFaults as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IFaultDetails>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IFaultDetails) (Sample.API.Models.FaultDetails.FromJson(__u) )) ))() : null : _availableFault;}
+            {_availableFaults = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("availableFaults"), out var __jsonAvailableFaults) ? If( __jsonAvailableFaults as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IFaultDetails>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IFaultDetails) (Sample.API.Models.FaultDetails.FromJson(__u) )) ))() : null : _availableFaults;}
             AfterFromJson(json);
         }
 
@@ -107,10 +107,10 @@ namespace Sample.API.Models
             AddIf( null != this._customFault ? (Sample.API.Runtime.Json.JsonNode) this._customFault.ToJson(null,serializationMode) : null, "customFault" ,container.Add );
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._availableFault)
+                if (null != this._availableFaults)
                 {
                     var __w = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __x in this._availableFault )
+                    foreach( var __x in this._availableFaults )
                     {
                         AddIf(__x?.ToJson(null, serializationMode) ,__w.Add);
                     }

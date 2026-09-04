@@ -76,9 +76,9 @@ namespace Sample.API.Models
                 return;
             }
             __resourceBaseProtectionSolutionSetting = new Sample.API.Models.ResourceBaseProtectionSolutionSetting(json);
-            {_testFailoverParam = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("testFailoverParams"), out var __jsonTestFailoverParams) ? Sample.API.Models.ResourceSiteRecoveryTestFailoverParams.FromJson(__jsonTestFailoverParams) : _testFailoverParam;}
-            {_testFailoverCleanupParam = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("testFailoverCleanupParams"), out var __jsonTestFailoverCleanupParams) ? Sample.API.Models.ResourceSiteRecoveryTestFailoverCleanupParams.FromJson(__jsonTestFailoverCleanupParams) : _testFailoverCleanupParam;}
-            {_reprotectParam = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("reprotectParams"), out var __jsonReprotectParams) ? Sample.API.Models.ResourceSiteRecoveryReprotectParams.FromJson(__jsonReprotectParams) : _reprotectParam;}
+            {_testFailoverParams = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("testFailoverParams"), out var __jsonTestFailoverParams) ? Sample.API.Models.ResourceSiteRecoveryTestFailoverParams.FromJson(__jsonTestFailoverParams) : _testFailoverParams;}
+            {_testFailoverCleanupParams = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("testFailoverCleanupParams"), out var __jsonTestFailoverCleanupParams) ? Sample.API.Models.ResourceSiteRecoveryTestFailoverCleanupParams.FromJson(__jsonTestFailoverCleanupParams) : _testFailoverCleanupParams;}
+            {_reprotectParams = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("reprotectParams"), out var __jsonReprotectParams) ? Sample.API.Models.ResourceSiteRecoveryReprotectParams.FromJson(__jsonReprotectParams) : _reprotectParams;}
             AfterFromJson(json);
         }
 
@@ -103,9 +103,9 @@ namespace Sample.API.Models
                 return container;
             }
             __resourceBaseProtectionSolutionSetting?.ToJson(container, serializationMode);
-            AddIf( null != this._testFailoverParam ? (Sample.API.Runtime.Json.JsonNode) this._testFailoverParam.ToJson(null,serializationMode) : null, "testFailoverParams" ,container.Add );
-            AddIf( null != this._testFailoverCleanupParam ? (Sample.API.Runtime.Json.JsonNode) this._testFailoverCleanupParam.ToJson(null,serializationMode) : null, "testFailoverCleanupParams" ,container.Add );
-            AddIf( null != this._reprotectParam ? (Sample.API.Runtime.Json.JsonNode) this._reprotectParam.ToJson(null,serializationMode) : null, "reprotectParams" ,container.Add );
+            AddIf( null != this._testFailoverParams ? (Sample.API.Runtime.Json.JsonNode) this._testFailoverParams.ToJson(null,serializationMode) : null, "testFailoverParams" ,container.Add );
+            AddIf( null != this._testFailoverCleanupParams ? (Sample.API.Runtime.Json.JsonNode) this._testFailoverCleanupParams.ToJson(null,serializationMode) : null, "testFailoverCleanupParams" ,container.Add );
+            AddIf( null != this._reprotectParams ? (Sample.API.Runtime.Json.JsonNode) this._reprotectParams.ToJson(null,serializationMode) : null, "reprotectParams" ,container.Add );
             AfterToJson(ref container);
             return container;
         }

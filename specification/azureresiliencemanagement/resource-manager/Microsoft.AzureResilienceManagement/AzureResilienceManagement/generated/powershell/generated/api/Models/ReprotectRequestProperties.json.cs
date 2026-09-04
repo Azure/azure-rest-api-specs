@@ -73,7 +73,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_selectedResourceId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("selectedResourceIds"), out var __jsonSelectedResourceIds) ? If( __jsonSelectedResourceIds as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _selectedResourceId;}
+            {_selectedResourceIds = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("selectedResourceIds"), out var __jsonSelectedResourceIds) ? If( __jsonSelectedResourceIds as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _selectedResourceIds;}
             AfterFromJson(json);
         }
 
@@ -96,10 +96,10 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            if (null != this._selectedResourceId)
+            if (null != this._selectedResourceIds)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._selectedResourceId )
+                foreach( var __x in this._selectedResourceIds )
                 {
                     AddIf(null != (((object)__x)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__x.ToString()) : null ,__w.Add);
                 }

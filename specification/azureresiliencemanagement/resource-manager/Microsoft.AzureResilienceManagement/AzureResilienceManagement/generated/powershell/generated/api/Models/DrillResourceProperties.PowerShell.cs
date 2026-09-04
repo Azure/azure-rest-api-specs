@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.DrillResourceProperties"
         /// />.
         /// </summary>
@@ -96,9 +88,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("FaultProperty"))
+            if (content.Contains("FaultProperties"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultProperty = (Sample.API.Models.IFaultProperties) content.GetValueForProperty("FaultProperty",((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultProperty, Sample.API.Models.FaultPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultProperties = (Sample.API.Models.IFaultProperties) content.GetValueForProperty("FaultProperties",((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultProperties, Sample.API.Models.FaultPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("AttentionReason"))
             {
@@ -120,21 +112,21 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).ResourceType = (string) content.GetValueForProperty("ResourceType",((Sample.API.Models.IDrillResourcePropertiesInternal)this).ResourceType, global::System.Convert.ToString);
             }
-            if (content.Contains("ActiveLocation"))
+            if (content.Contains("ActiveLocations"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).ActiveLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActiveLocation",((Sample.API.Models.IDrillResourcePropertiesInternal)this).ActiveLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).ActiveLocations = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActiveLocations",((Sample.API.Models.IDrillResourcePropertiesInternal)this).ActiveLocations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("RecoveryLocation"))
+            if (content.Contains("RecoveryLocations"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).RecoveryLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryLocation",((Sample.API.Models.IDrillResourcePropertiesInternal)this).RecoveryLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).RecoveryLocations = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryLocations",((Sample.API.Models.IDrillResourcePropertiesInternal)this).RecoveryLocations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("ActivePhysicalZone"))
+            if (content.Contains("ActivePhysicalZones"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).ActivePhysicalZone = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActivePhysicalZone",((Sample.API.Models.IDrillResourcePropertiesInternal)this).ActivePhysicalZone, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).ActivePhysicalZones = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActivePhysicalZones",((Sample.API.Models.IDrillResourcePropertiesInternal)this).ActivePhysicalZones, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("RecoveryPhysicalZone"))
+            if (content.Contains("RecoveryPhysicalZones"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).RecoveryPhysicalZone = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryPhysicalZone",((Sample.API.Models.IDrillResourcePropertiesInternal)this).RecoveryPhysicalZone, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).RecoveryPhysicalZones = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryPhysicalZones",((Sample.API.Models.IDrillResourcePropertiesInternal)this).RecoveryPhysicalZones, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("InclusionState"))
             {
@@ -180,9 +172,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).ProvisioningState = (string) content.GetValueForProperty("ProvisioningState",((Sample.API.Models.IDrillResourcePropertiesInternal)this).ProvisioningState, global::System.Convert.ToString);
             }
-            if (content.Contains("FaultPropertyAvailableFault"))
+            if (content.Contains("FaultPropertyAvailableFaults"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultPropertyAvailableFault = (System.Collections.Generic.List<Sample.API.Models.IFaultDetails>) content.GetValueForProperty("FaultPropertyAvailableFault",((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultPropertyAvailableFault, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IFaultDetails>(__y, Sample.API.Models.FaultDetailsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultPropertyAvailableFaults = (System.Collections.Generic.List<Sample.API.Models.IFaultDetails>) content.GetValueForProperty("FaultPropertyAvailableFaults",((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultPropertyAvailableFaults, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IFaultDetails>(__y, Sample.API.Models.FaultDetailsTypeConverter.ConvertFrom));
             }
             if (content.Contains("FaultPropertyDefaultFault"))
             {
@@ -200,13 +192,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonFaultRbacOnTargetResource = (string) content.GetValueForProperty("AttentionReasonFaultRbacOnTargetResource",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonFaultRbacOnTargetResource, global::System.Convert.ToString);
             }
-            if (content.Contains("AttentionReasonRunbookFaultRbacOnTarget"))
+            if (content.Contains("AttentionReasonRunbookFaultRbacOnTargets"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonRunbookFaultRbacOnTarget = (string) content.GetValueForProperty("AttentionReasonRunbookFaultRbacOnTarget",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonRunbookFaultRbacOnTarget, global::System.Convert.ToString);
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonRunbookFaultRbacOnTargets = (string) content.GetValueForProperty("AttentionReasonRunbookFaultRbacOnTargets",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonRunbookFaultRbacOnTargets, global::System.Convert.ToString);
             }
-            if (content.Contains("AttentionReasonMonitoringRbacOnTarget"))
+            if (content.Contains("AttentionReasonMonitoringRbacOnTargets"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonMonitoringRbacOnTarget = (string) content.GetValueForProperty("AttentionReasonMonitoringRbacOnTarget",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonMonitoringRbacOnTarget, global::System.Convert.ToString);
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonMonitoringRbacOnTargets = (string) content.GetValueForProperty("AttentionReasonMonitoringRbacOnTargets",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonMonitoringRbacOnTargets, global::System.Convert.ToString);
             }
             if (content.Contains("AttentionReasonResourceState"))
             {
@@ -220,9 +212,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).RbacAssignmentErrorMessage = (string) content.GetValueForProperty("RbacAssignmentErrorMessage",((Sample.API.Models.IDrillResourcePropertiesInternal)this).RbacAssignmentErrorMessage, global::System.Convert.ToString);
             }
-            if (content.Contains("RbacAssignmentErrorRecommendation"))
+            if (content.Contains("RbacAssignmentErrorRecommendations"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).RbacAssignmentErrorRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("RbacAssignmentErrorRecommendation",((Sample.API.Models.IDrillResourcePropertiesInternal)this).RbacAssignmentErrorRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).RbacAssignmentErrorRecommendations = (System.Collections.Generic.List<string>) content.GetValueForProperty("RbacAssignmentErrorRecommendations",((Sample.API.Models.IDrillResourcePropertiesInternal)this).RbacAssignmentErrorRecommendations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("MonitoringRbacAssignmentErrorCode"))
             {
@@ -232,9 +224,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).MonitoringRbacAssignmentErrorMessage = (string) content.GetValueForProperty("MonitoringRbacAssignmentErrorMessage",((Sample.API.Models.IDrillResourcePropertiesInternal)this).MonitoringRbacAssignmentErrorMessage, global::System.Convert.ToString);
             }
-            if (content.Contains("MonitoringRbacAssignmentErrorRecommendation"))
+            if (content.Contains("MonitoringRbacAssignmentErrorRecommendations"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).MonitoringRbacAssignmentErrorRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("MonitoringRbacAssignmentErrorRecommendation",((Sample.API.Models.IDrillResourcePropertiesInternal)this).MonitoringRbacAssignmentErrorRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).MonitoringRbacAssignmentErrorRecommendations = (System.Collections.Generic.List<string>) content.GetValueForProperty("MonitoringRbacAssignmentErrorRecommendations",((Sample.API.Models.IDrillResourcePropertiesInternal)this).MonitoringRbacAssignmentErrorRecommendations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("DefaultFaultUrn"))
             {
@@ -285,9 +277,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("FaultProperty"))
+            if (content.Contains("FaultProperties"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultProperty = (Sample.API.Models.IFaultProperties) content.GetValueForProperty("FaultProperty",((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultProperty, Sample.API.Models.FaultPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultProperties = (Sample.API.Models.IFaultProperties) content.GetValueForProperty("FaultProperties",((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultProperties, Sample.API.Models.FaultPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("AttentionReason"))
             {
@@ -309,21 +301,21 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).ResourceType = (string) content.GetValueForProperty("ResourceType",((Sample.API.Models.IDrillResourcePropertiesInternal)this).ResourceType, global::System.Convert.ToString);
             }
-            if (content.Contains("ActiveLocation"))
+            if (content.Contains("ActiveLocations"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).ActiveLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActiveLocation",((Sample.API.Models.IDrillResourcePropertiesInternal)this).ActiveLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).ActiveLocations = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActiveLocations",((Sample.API.Models.IDrillResourcePropertiesInternal)this).ActiveLocations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("RecoveryLocation"))
+            if (content.Contains("RecoveryLocations"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).RecoveryLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryLocation",((Sample.API.Models.IDrillResourcePropertiesInternal)this).RecoveryLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).RecoveryLocations = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryLocations",((Sample.API.Models.IDrillResourcePropertiesInternal)this).RecoveryLocations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("ActivePhysicalZone"))
+            if (content.Contains("ActivePhysicalZones"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).ActivePhysicalZone = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActivePhysicalZone",((Sample.API.Models.IDrillResourcePropertiesInternal)this).ActivePhysicalZone, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).ActivePhysicalZones = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActivePhysicalZones",((Sample.API.Models.IDrillResourcePropertiesInternal)this).ActivePhysicalZones, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("RecoveryPhysicalZone"))
+            if (content.Contains("RecoveryPhysicalZones"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).RecoveryPhysicalZone = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryPhysicalZone",((Sample.API.Models.IDrillResourcePropertiesInternal)this).RecoveryPhysicalZone, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).RecoveryPhysicalZones = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryPhysicalZones",((Sample.API.Models.IDrillResourcePropertiesInternal)this).RecoveryPhysicalZones, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("InclusionState"))
             {
@@ -369,9 +361,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).ProvisioningState = (string) content.GetValueForProperty("ProvisioningState",((Sample.API.Models.IDrillResourcePropertiesInternal)this).ProvisioningState, global::System.Convert.ToString);
             }
-            if (content.Contains("FaultPropertyAvailableFault"))
+            if (content.Contains("FaultPropertyAvailableFaults"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultPropertyAvailableFault = (System.Collections.Generic.List<Sample.API.Models.IFaultDetails>) content.GetValueForProperty("FaultPropertyAvailableFault",((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultPropertyAvailableFault, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IFaultDetails>(__y, Sample.API.Models.FaultDetailsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultPropertyAvailableFaults = (System.Collections.Generic.List<Sample.API.Models.IFaultDetails>) content.GetValueForProperty("FaultPropertyAvailableFaults",((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultPropertyAvailableFaults, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IFaultDetails>(__y, Sample.API.Models.FaultDetailsTypeConverter.ConvertFrom));
             }
             if (content.Contains("FaultPropertyDefaultFault"))
             {
@@ -389,13 +381,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonFaultRbacOnTargetResource = (string) content.GetValueForProperty("AttentionReasonFaultRbacOnTargetResource",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonFaultRbacOnTargetResource, global::System.Convert.ToString);
             }
-            if (content.Contains("AttentionReasonRunbookFaultRbacOnTarget"))
+            if (content.Contains("AttentionReasonRunbookFaultRbacOnTargets"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonRunbookFaultRbacOnTarget = (string) content.GetValueForProperty("AttentionReasonRunbookFaultRbacOnTarget",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonRunbookFaultRbacOnTarget, global::System.Convert.ToString);
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonRunbookFaultRbacOnTargets = (string) content.GetValueForProperty("AttentionReasonRunbookFaultRbacOnTargets",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonRunbookFaultRbacOnTargets, global::System.Convert.ToString);
             }
-            if (content.Contains("AttentionReasonMonitoringRbacOnTarget"))
+            if (content.Contains("AttentionReasonMonitoringRbacOnTargets"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonMonitoringRbacOnTarget = (string) content.GetValueForProperty("AttentionReasonMonitoringRbacOnTarget",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonMonitoringRbacOnTarget, global::System.Convert.ToString);
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonMonitoringRbacOnTargets = (string) content.GetValueForProperty("AttentionReasonMonitoringRbacOnTargets",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonMonitoringRbacOnTargets, global::System.Convert.ToString);
             }
             if (content.Contains("AttentionReasonResourceState"))
             {
@@ -409,9 +401,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).RbacAssignmentErrorMessage = (string) content.GetValueForProperty("RbacAssignmentErrorMessage",((Sample.API.Models.IDrillResourcePropertiesInternal)this).RbacAssignmentErrorMessage, global::System.Convert.ToString);
             }
-            if (content.Contains("RbacAssignmentErrorRecommendation"))
+            if (content.Contains("RbacAssignmentErrorRecommendations"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).RbacAssignmentErrorRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("RbacAssignmentErrorRecommendation",((Sample.API.Models.IDrillResourcePropertiesInternal)this).RbacAssignmentErrorRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).RbacAssignmentErrorRecommendations = (System.Collections.Generic.List<string>) content.GetValueForProperty("RbacAssignmentErrorRecommendations",((Sample.API.Models.IDrillResourcePropertiesInternal)this).RbacAssignmentErrorRecommendations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("MonitoringRbacAssignmentErrorCode"))
             {
@@ -421,9 +413,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).MonitoringRbacAssignmentErrorMessage = (string) content.GetValueForProperty("MonitoringRbacAssignmentErrorMessage",((Sample.API.Models.IDrillResourcePropertiesInternal)this).MonitoringRbacAssignmentErrorMessage, global::System.Convert.ToString);
             }
-            if (content.Contains("MonitoringRbacAssignmentErrorRecommendation"))
+            if (content.Contains("MonitoringRbacAssignmentErrorRecommendations"))
             {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).MonitoringRbacAssignmentErrorRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("MonitoringRbacAssignmentErrorRecommendation",((Sample.API.Models.IDrillResourcePropertiesInternal)this).MonitoringRbacAssignmentErrorRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).MonitoringRbacAssignmentErrorRecommendations = (System.Collections.Generic.List<string>) content.GetValueForProperty("MonitoringRbacAssignmentErrorRecommendations",((Sample.API.Models.IDrillResourcePropertiesInternal)this).MonitoringRbacAssignmentErrorRecommendations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("DefaultFaultUrn"))
             {
@@ -471,18 +463,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Properties of the Resiliency Drill Resource
     [System.ComponentModel.TypeConverter(typeof(DrillResourcePropertiesTypeConverter))]

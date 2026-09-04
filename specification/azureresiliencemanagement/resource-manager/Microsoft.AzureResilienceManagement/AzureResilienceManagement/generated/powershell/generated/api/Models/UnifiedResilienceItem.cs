@@ -20,61 +20,61 @@ namespace Sample.API.Models
 
         /// <summary>Arm id of the goal assignment.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string GoalAssignmentId { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalAssignmentId; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalAssignmentId = value ?? null; }
+        public string GoalAssignmentId { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalAssignmentId; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalAssignmentId = value ?? null; }
 
         /// <summary>Computed recovery point estimated for the service group in minutes.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string GoalRegionalRecoveryPointEstimatedInMinute { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalRegionalRecoveryPointEstimatedInMinute; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalRegionalRecoveryPointEstimatedInMinute = value ?? null; }
+        public string GoalRegionalRecoveryPointEstimatedInMinutes { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalRegionalRecoveryPointEstimatedInMinutes; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalRegionalRecoveryPointEstimatedInMinutes = value ?? null; }
 
         /// <summary>Regional RPO set in resilience goal in minutes.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string GoalRegionalRecoveryPointObjectiveInMinute { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalRegionalRecoveryPointObjectiveInMinute; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalRegionalRecoveryPointObjectiveInMinute = value ?? null; }
+        public string GoalRegionalRecoveryPointObjectiveInMinutes { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalRegionalRecoveryPointObjectiveInMinutes; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalRegionalRecoveryPointObjectiveInMinutes = value ?? null; }
 
         /// <summary>Regional RPO status of the service group.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string GoalRegionalRecoveryPointObjectiveStatus { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalRegionalRecoveryPointObjectiveStatus; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalRegionalRecoveryPointObjectiveStatus = value ?? null; }
+        public string GoalRegionalRecoveryPointObjectiveStatus { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalRegionalRecoveryPointObjectiveStatus; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalRegionalRecoveryPointObjectiveStatus = value ?? null; }
 
         /// <summary>Computed RTA for the service group in minutes.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string GoalRegionalRecoveryTimeActualInMinute { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalRegionalRecoveryTimeActualInMinute; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalRegionalRecoveryTimeActualInMinute = value ?? null; }
+        public string GoalRegionalRecoveryTimeActualInMinutes { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalRegionalRecoveryTimeActualInMinutes; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalRegionalRecoveryTimeActualInMinutes = value ?? null; }
 
         /// <summary>Regional RTO set in resilience goal in minutes.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string GoalRegionalRecoveryTimeObjectiveInMinute { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalRegionalRecoveryTimeObjectiveInMinute; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalRegionalRecoveryTimeObjectiveInMinute = value ?? null; }
+        public string GoalRegionalRecoveryTimeObjectiveInMinutes { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalRegionalRecoveryTimeObjectiveInMinutes; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalRegionalRecoveryTimeObjectiveInMinutes = value ?? null; }
 
         /// <summary>Regional RTO status of the service group.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string GoalRegionalRecoveryTimeObjectiveStatus { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalRegionalRecoveryTimeObjectiveStatus; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalRegionalRecoveryTimeObjectiveStatus = value ?? null; }
+        public string GoalRegionalRecoveryTimeObjectiveStatus { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalRegionalRecoveryTimeObjectiveStatus; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalRegionalRecoveryTimeObjectiveStatus = value ?? null; }
 
         /// <summary>Whether the resource is required for disaster recovery.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string GoalRequireDisasterRecovery { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalRequireDisasterRecovery; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalRequireDisasterRecovery = value ?? null; }
+        public string GoalRequireDisasterRecovery { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalRequireDisasterRecovery; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalRequireDisasterRecovery = value ?? null; }
 
         /// <summary>Whether the resource is required for high availability.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string GoalRequireHighAvailability { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalRequireHighAvailability; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalRequireHighAvailability = value ?? null; }
+        public string GoalRequireHighAvailability { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalRequireHighAvailability; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalRequireHighAvailability = value ?? null; }
 
         /// <summary>Arm id of the goal template.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string GoalTemplateId { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalTemplateId; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).GoalTemplateId = value ?? null; }
+        public string GoalTemplateId { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalTemplateId; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).GoalTemplateId = value ?? null; }
 
         /// <summary>Count of resources that have high availability enabled.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public long? HighAvailabilityEnabledResourceCount { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).HighAvailabilityEnabledResourceCount; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).HighAvailabilityEnabledResourceCount = value ?? default(long); }
+        public long? HighAvailabilityEnabledResourceCount { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).HighAvailabilityEnabledResourceCount; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).HighAvailabilityEnabledResourceCount = value ?? default(long); }
 
         /// <summary>
         /// The date and time when the high availability recommendations were last evaluated.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public global::System.DateTime? HighAvailabilityEvaluationDateTime { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).HighAvailabilityEvaluationDateTime; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).HighAvailabilityEvaluationDateTime = value ?? default(global::System.DateTime); }
+        public global::System.DateTime? HighAvailabilityEvaluationDateTime { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).HighAvailabilityEvaluationDateTime; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).HighAvailabilityEvaluationDateTime = value ?? default(global::System.DateTime); }
 
         /// <summary>Count of resources that do not have high availability enabled.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public long? HighAvailabilityNotEnabledResourceCount { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).HighAvailabilityNotEnabledResourceCount; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).HighAvailabilityNotEnabledResourceCount = value ?? default(long); }
+        public long? HighAvailabilityNotEnabledResourceCount { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).HighAvailabilityNotEnabledResourceCount; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).HighAvailabilityNotEnabledResourceCount = value ?? default(long); }
 
         /// <summary>Count of resources that have not been evaluated for high availability.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public long? HighAvailabilityNotEvaluatedResourceCount { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).HighAvailabilityNotEvaluatedResourceCount; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).HighAvailabilityNotEvaluatedResourceCount = value ?? default(long); }
+        public long? HighAvailabilityNotEvaluatedResourceCount { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).HighAvailabilityNotEvaluatedResourceCount; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).HighAvailabilityNotEvaluatedResourceCount = value ?? default(long); }
 
         /// <summary>
         /// Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
@@ -84,26 +84,22 @@ namespace Sample.API.Models
 
         /// <summary>Last modified time of the unified resilience item.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public global::System.DateTime? LastModifiedTime { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).LastModifiedTime; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).LastModifiedTime = value ?? default(global::System.DateTime); }
+        public global::System.DateTime? LastModifiedTime { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).LastModifiedTime; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).LastModifiedTime = value ?? default(global::System.DateTime); }
 
         /// <summary>The name of the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public string Name { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Name; }
 
-        /// <summary>Backing field for <see cref="Property" /> property.</summary>
-        private Sample.API.Models.IUnifiedResilienceItemProperties _property;
+        /// <summary>Backing field for <see cref="Properties" /> property.</summary>
+        private Sample.API.Models.IUnifiedResilienceItemProperties _properties;
 
         /// <summary>The resource-specific properties for this resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IUnifiedResilienceItemProperties Property { get => (this._property = this._property ?? new Sample.API.Models.UnifiedResilienceItemProperties()); set => this._property = value; }
+        internal Sample.API.Models.IUnifiedResilienceItemProperties Properties { get => (this._properties = this._properties ?? new Sample.API.Models.UnifiedResilienceItemProperties()); set => this._properties = value; }
 
         /// <summary>Provisioning state</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ProvisioningState { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).ProvisioningState; }
-
-        /// <summary>Gets the resource group name</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string ResourceGroupName { get => (new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Success ? new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Groups["resourceGroupName"].Value : null); }
+        public string ProvisioningState { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).ProvisioningState; }
 
         /// <summary>Internal Acessors for Id</summary>
         string Sample.API.Models.IResourceInternal.Id { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Id; set => ((Sample.API.Models.IResourceInternal)__proxyResource).Id = value ?? null; }
@@ -135,20 +131,20 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for Type</summary>
         string Sample.API.Models.IResourceInternal.Type { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Type; set => ((Sample.API.Models.IResourceInternal)__proxyResource).Type = value ?? null; }
 
-        /// <summary>Internal Acessors for Goal</summary>
-        Sample.API.Models.IGoalsData Sample.API.Models.IUnifiedResilienceItemInternal.Goal { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).Goal; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).Goal = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for Goals</summary>
+        Sample.API.Models.IGoalsData Sample.API.Models.IUnifiedResilienceItemInternal.Goals { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).Goals; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).Goals = value ?? null /* model class */; }
 
-        /// <summary>Internal Acessors for Property</summary>
-        Sample.API.Models.IUnifiedResilienceItemProperties Sample.API.Models.IUnifiedResilienceItemInternal.Property { get => (this._property = this._property ?? new Sample.API.Models.UnifiedResilienceItemProperties()); set { {_property = value;} } }
+        /// <summary>Internal Acessors for Properties</summary>
+        Sample.API.Models.IUnifiedResilienceItemProperties Sample.API.Models.IUnifiedResilienceItemInternal.Properties { get => (this._properties = this._properties ?? new Sample.API.Models.UnifiedResilienceItemProperties()); set { {_properties = value;} } }
 
         /// <summary>Internal Acessors for ProvisioningState</summary>
-        string Sample.API.Models.IUnifiedResilienceItemInternal.ProvisioningState { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).ProvisioningState; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).ProvisioningState = value ?? null; }
-
-        /// <summary>Internal Acessors for Recommendation</summary>
-        Sample.API.Models.IRecommendationsData Sample.API.Models.IUnifiedResilienceItemInternal.Recommendation { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).Recommendation; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).Recommendation = value ?? null /* model class */; }
+        string Sample.API.Models.IUnifiedResilienceItemInternal.ProvisioningState { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).ProvisioningState; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).ProvisioningState = value ?? null; }
 
         /// <summary>Internal Acessors for RecommendationHighAvailability</summary>
-        Sample.API.Models.IRecommendationsHighAvailabilityData Sample.API.Models.IUnifiedResilienceItemInternal.RecommendationHighAvailability { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).RecommendationHighAvailability; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Property).RecommendationHighAvailability = value ?? null /* model class */; }
+        Sample.API.Models.IRecommendationsHighAvailabilityData Sample.API.Models.IUnifiedResilienceItemInternal.RecommendationHighAvailability { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).RecommendationHighAvailability; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).RecommendationHighAvailability = value ?? null /* model class */; }
+
+        /// <summary>Internal Acessors for Recommendations</summary>
+        Sample.API.Models.IRecommendationsData Sample.API.Models.IUnifiedResilienceItemInternal.Recommendations { get => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).Recommendations; set => ((Sample.API.Models.IUnifiedResilienceItemPropertiesInternal)Properties).Recommendations = value ?? null /* model class */; }
 
         /// <summary>
         /// Azure Resource Manager metadata containing createdBy and modifiedBy information.
@@ -231,7 +227,7 @@ namespace Sample.API.Models
         SerializedName = @"regionalRecoveryPointEstimatedInMinutes",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("PT15M", "PT1H", "PT4H", "PT24H")]
-        string GoalRegionalRecoveryPointEstimatedInMinute { get; set; }
+        string GoalRegionalRecoveryPointEstimatedInMinutes { get; set; }
         /// <summary>Regional RPO set in resilience goal in minutes.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -243,7 +239,7 @@ namespace Sample.API.Models
         SerializedName = @"regionalRecoveryPointObjectiveInMinutes",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("PT15M", "PT1H", "PT4H", "PT24H")]
-        string GoalRegionalRecoveryPointObjectiveInMinute { get; set; }
+        string GoalRegionalRecoveryPointObjectiveInMinutes { get; set; }
         /// <summary>Regional RPO status of the service group.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -267,7 +263,7 @@ namespace Sample.API.Models
         SerializedName = @"regionalRecoveryTimeActualInMinutes",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("PT15M", "PT1H", "PT4H", "PT24H")]
-        string GoalRegionalRecoveryTimeActualInMinute { get; set; }
+        string GoalRegionalRecoveryTimeActualInMinutes { get; set; }
         /// <summary>Regional RTO set in resilience goal in minutes.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -279,7 +275,7 @@ namespace Sample.API.Models
         SerializedName = @"regionalRecoveryTimeObjectiveInMinutes",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("PT15M", "PT1H", "PT4H", "PT24H")]
-        string GoalRegionalRecoveryTimeObjectiveInMinute { get; set; }
+        string GoalRegionalRecoveryTimeObjectiveInMinutes { get; set; }
         /// <summary>Regional RTO status of the service group.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -402,25 +398,23 @@ namespace Sample.API.Models
     internal partial interface IUnifiedResilienceItemInternal :
         Sample.API.Models.IProxyResourceInternal
     {
-        /// <summary>Computed and copied data of resilience goals.</summary>
-        Sample.API.Models.IGoalsData Goal { get; set; }
         /// <summary>Arm id of the goal assignment.</summary>
         string GoalAssignmentId { get; set; }
         /// <summary>Computed recovery point estimated for the service group in minutes.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("PT15M", "PT1H", "PT4H", "PT24H")]
-        string GoalRegionalRecoveryPointEstimatedInMinute { get; set; }
+        string GoalRegionalRecoveryPointEstimatedInMinutes { get; set; }
         /// <summary>Regional RPO set in resilience goal in minutes.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("PT15M", "PT1H", "PT4H", "PT24H")]
-        string GoalRegionalRecoveryPointObjectiveInMinute { get; set; }
+        string GoalRegionalRecoveryPointObjectiveInMinutes { get; set; }
         /// <summary>Regional RPO status of the service group.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("NotEvaluated", "Unhealthy", "Healthy")]
         string GoalRegionalRecoveryPointObjectiveStatus { get; set; }
         /// <summary>Computed RTA for the service group in minutes.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("PT15M", "PT1H", "PT4H", "PT24H")]
-        string GoalRegionalRecoveryTimeActualInMinute { get; set; }
+        string GoalRegionalRecoveryTimeActualInMinutes { get; set; }
         /// <summary>Regional RTO set in resilience goal in minutes.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("PT15M", "PT1H", "PT4H", "PT24H")]
-        string GoalRegionalRecoveryTimeObjectiveInMinute { get; set; }
+        string GoalRegionalRecoveryTimeObjectiveInMinutes { get; set; }
         /// <summary>Regional RTO status of the service group.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("NotEvaluated", "Unhealthy", "Healthy")]
         string GoalRegionalRecoveryTimeObjectiveStatus { get; set; }
@@ -432,6 +426,8 @@ namespace Sample.API.Models
         string GoalRequireHighAvailability { get; set; }
         /// <summary>Arm id of the goal template.</summary>
         string GoalTemplateId { get; set; }
+        /// <summary>Computed and copied data of resilience goals.</summary>
+        Sample.API.Models.IGoalsData Goals { get; set; }
         /// <summary>Count of resources that have high availability enabled.</summary>
         long? HighAvailabilityEnabledResourceCount { get; set; }
         /// <summary>
@@ -445,14 +441,14 @@ namespace Sample.API.Models
         /// <summary>Last modified time of the unified resilience item.</summary>
         global::System.DateTime? LastModifiedTime { get; set; }
         /// <summary>The resource-specific properties for this resource.</summary>
-        Sample.API.Models.IUnifiedResilienceItemProperties Property { get; set; }
+        Sample.API.Models.IUnifiedResilienceItemProperties Properties { get; set; }
         /// <summary>Provisioning state</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }
-        /// <summary>Computed and copied data of Azure recommendations.</summary>
-        Sample.API.Models.IRecommendationsData Recommendation { get; set; }
         /// <summary>The high availability section of resilience recommendation.</summary>
         Sample.API.Models.IRecommendationsHighAvailabilityData RecommendationHighAvailability { get; set; }
+        /// <summary>Computed and copied data of Azure recommendations.</summary>
+        Sample.API.Models.IRecommendationsData Recommendations { get; set; }
 
     }
 }

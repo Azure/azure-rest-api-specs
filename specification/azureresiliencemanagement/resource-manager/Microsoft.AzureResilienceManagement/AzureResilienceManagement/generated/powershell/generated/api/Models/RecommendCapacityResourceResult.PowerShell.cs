@@ -56,14 +56,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.RecommendCapacityResourceResult"
         /// />.
         /// </summary>
@@ -138,21 +130,21 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Category = (string) content.GetValueForProperty("Category",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Category, global::System.Convert.ToString);
             }
-            if (content.Contains("SuggestedRegion"))
+            if (content.Contains("SuggestedRegions"))
             {
-                ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).SuggestedRegion = (System.Collections.Generic.List<string>) content.GetValueForProperty("SuggestedRegion",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).SuggestedRegion, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).SuggestedRegions = (System.Collections.Generic.List<string>) content.GetValueForProperty("SuggestedRegions",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).SuggestedRegions, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("SuggestedSku"))
+            if (content.Contains("SuggestedSkus"))
             {
-                ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).SuggestedSku = (System.Collections.Generic.List<string>) content.GetValueForProperty("SuggestedSku",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).SuggestedSku, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).SuggestedSkus = (System.Collections.Generic.List<string>) content.GetValueForProperty("SuggestedSkus",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).SuggestedSkus, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("Step"))
+            if (content.Contains("Steps"))
             {
-                ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Step = (System.Collections.Generic.List<string>) content.GetValueForProperty("Step",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Step, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Steps = (System.Collections.Generic.List<string>) content.GetValueForProperty("Steps",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Steps, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("Link"))
+            if (content.Contains("Links"))
             {
-                ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Link = (System.Collections.Generic.List<string>) content.GetValueForProperty("Link",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Link, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Links = (System.Collections.Generic.List<string>) content.GetValueForProperty("Links",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Links, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             AfterDeserializeDictionary(content);
         }
@@ -199,21 +191,21 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Category = (string) content.GetValueForProperty("Category",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Category, global::System.Convert.ToString);
             }
-            if (content.Contains("SuggestedRegion"))
+            if (content.Contains("SuggestedRegions"))
             {
-                ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).SuggestedRegion = (System.Collections.Generic.List<string>) content.GetValueForProperty("SuggestedRegion",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).SuggestedRegion, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).SuggestedRegions = (System.Collections.Generic.List<string>) content.GetValueForProperty("SuggestedRegions",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).SuggestedRegions, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("SuggestedSku"))
+            if (content.Contains("SuggestedSkus"))
             {
-                ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).SuggestedSku = (System.Collections.Generic.List<string>) content.GetValueForProperty("SuggestedSku",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).SuggestedSku, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).SuggestedSkus = (System.Collections.Generic.List<string>) content.GetValueForProperty("SuggestedSkus",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).SuggestedSkus, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("Step"))
+            if (content.Contains("Steps"))
             {
-                ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Step = (System.Collections.Generic.List<string>) content.GetValueForProperty("Step",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Step, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Steps = (System.Collections.Generic.List<string>) content.GetValueForProperty("Steps",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Steps, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("Link"))
+            if (content.Contains("Links"))
             {
-                ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Link = (System.Collections.Generic.List<string>) content.GetValueForProperty("Link",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Link, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Links = (System.Collections.Generic.List<string>) content.GetValueForProperty("Links",((Sample.API.Models.IRecommendCapacityResourceResultInternal)this).Links, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             AfterDeserializePSObject(content);
         }
@@ -222,18 +214,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Resiliency assessment for a single Azure resource, including eligibility category, actionable guidance, and alternate
     /// configurations.

@@ -29,12 +29,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public System.Collections.Generic.List<string> ActiveLocations { get => this._activeLocations; }
 
-        /// <summary>Backing field for <see cref="ActivePhysicalZone" /> property.</summary>
-        private System.Collections.Generic.List<string> _activePhysicalZone;
+        /// <summary>Backing field for <see cref="ActivePhysicalZones" /> property.</summary>
+        private System.Collections.Generic.List<string> _activePhysicalZones;
 
         /// <summary>Active Resource location and physical zones of Azure Resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> ActivePhysicalZone { get => this._activePhysicalZone; }
+        public System.Collections.Generic.List<string> ActivePhysicalZones { get => this._activePhysicalZones; }
 
         /// <summary>Backing field for <see cref="FailoverState" /> property.</summary>
         private string _failoverState;
@@ -73,22 +73,22 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string ProtectionStatus { get => this._protectionStatus; }
 
-        /// <summary>Backing field for <see cref="RecoveryLocation" /> property.</summary>
-        private System.Collections.Generic.List<string> _recoveryLocation;
+        /// <summary>Backing field for <see cref="RecoveryLocations" /> property.</summary>
+        private System.Collections.Generic.List<string> _recoveryLocations;
 
         /// <summary>
         /// List of recovery locations of the Azure resource associated with the recovery orchestration plan and linked to the recovery
         /// resource.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> RecoveryLocation { get => this._recoveryLocation; }
+        public System.Collections.Generic.List<string> RecoveryLocations { get => this._recoveryLocations; }
 
-        /// <summary>Backing field for <see cref="ReplicaResource" /> property.</summary>
-        private System.Collections.Generic.List<string> _replicaResource;
+        /// <summary>Backing field for <see cref="ReplicaResources" /> property.</summary>
+        private System.Collections.Generic.List<string> _replicaResources;
 
         /// <summary>List of Replica resources to which replication is happening.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> ReplicaResource { get => this._replicaResource; }
+        public System.Collections.Generic.List<string> ReplicaResources { get => this._replicaResources; }
 
         /// <summary>Backing field for <see cref="ReplicationRole" /> property.</summary>
         private string _replicationRole;
@@ -112,8 +112,8 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for ActiveLocations</summary>
         System.Collections.Generic.List<string> Sample.API.Models.IResourceProtectionSolutionSettingsInternal.ActiveLocations { get => this._activeLocations; set { {_activeLocations = value;} } }
 
-        /// <summary>Internal Acessors for ActivePhysicalZone</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IResourceProtectionSolutionSettingsInternal.ActivePhysicalZone { get => this._activePhysicalZone; set { {_activePhysicalZone = value;} } }
+        /// <summary>Internal Acessors for ActivePhysicalZones</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IResourceProtectionSolutionSettingsInternal.ActivePhysicalZones { get => this._activePhysicalZones; set { {_activePhysicalZones = value;} } }
 
         /// <summary>Internal Acessors for FailoverState</summary>
         string Sample.API.Models.IResourceProtectionSolutionSettingsInternal.FailoverState { get => this._failoverState; set { {_failoverState = value;} } }
@@ -130,11 +130,11 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for ProtectionStatus</summary>
         string Sample.API.Models.IResourceProtectionSolutionSettingsInternal.ProtectionStatus { get => this._protectionStatus; set { {_protectionStatus = value;} } }
 
-        /// <summary>Internal Acessors for RecoveryLocation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IResourceProtectionSolutionSettingsInternal.RecoveryLocation { get => this._recoveryLocation; set { {_recoveryLocation = value;} } }
+        /// <summary>Internal Acessors for RecoveryLocations</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IResourceProtectionSolutionSettingsInternal.RecoveryLocations { get => this._recoveryLocations; set { {_recoveryLocations = value;} } }
 
-        /// <summary>Internal Acessors for ReplicaResource</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IResourceProtectionSolutionSettingsInternal.ReplicaResource { get => this._replicaResource; set { {_replicaResource = value;} } }
+        /// <summary>Internal Acessors for ReplicaResources</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IResourceProtectionSolutionSettingsInternal.ReplicaResources { get => this._replicaResources; set { {_replicaResources = value;} } }
 
         /// <summary>Internal Acessors for ReplicationRole</summary>
         string Sample.API.Models.IResourceProtectionSolutionSettingsInternal.ReplicationRole { get => this._replicationRole; set { {_replicationRole = value;} } }
@@ -198,7 +198,7 @@ namespace Sample.API.Models
         Description = @"Active Resource location and physical zones of Azure Resource.",
         SerializedName = @"activePhysicalZones",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> ActivePhysicalZone { get;  }
+        System.Collections.Generic.List<string> ActivePhysicalZones { get;  }
         /// <summary>Failover state of the recovery orchestration resource.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -272,7 +272,7 @@ namespace Sample.API.Models
         Description = @"List of recovery locations of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
         SerializedName = @"recoveryLocations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> RecoveryLocation { get;  }
+        System.Collections.Generic.List<string> RecoveryLocations { get;  }
         /// <summary>List of Replica resources to which replication is happening.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -283,7 +283,7 @@ namespace Sample.API.Models
         Description = @"List of Replica resources to which replication is happening.",
         SerializedName = @"replicaResources",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> ReplicaResource { get;  }
+        System.Collections.Generic.List<string> ReplicaResources { get;  }
         /// <summary>Specifies the role of the resource in the replication process.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -336,7 +336,7 @@ namespace Sample.API.Models
         /// </summary>
         System.Collections.Generic.List<string> ActiveLocations { get; set; }
         /// <summary>Active Resource location and physical zones of Azure Resource.</summary>
-        System.Collections.Generic.List<string> ActivePhysicalZone { get; set; }
+        System.Collections.Generic.List<string> ActivePhysicalZones { get; set; }
         /// <summary>Failover state of the recovery orchestration resource.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("None", "FailedOver", "FailedOverCommitPending", "FailedOverReprotectPending")]
         string FailoverState { get; set; }
@@ -356,9 +356,9 @@ namespace Sample.API.Models
         /// List of recovery locations of the Azure resource associated with the recovery orchestration plan and linked to the recovery
         /// resource.
         /// </summary>
-        System.Collections.Generic.List<string> RecoveryLocation { get; set; }
+        System.Collections.Generic.List<string> RecoveryLocations { get; set; }
         /// <summary>List of Replica resources to which replication is happening.</summary>
-        System.Collections.Generic.List<string> ReplicaResource { get; set; }
+        System.Collections.Generic.List<string> ReplicaResources { get; set; }
         /// <summary>Specifies the role of the resource in the replication process.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Unknown", "Primary", "Replica")]
         string ReplicationRole { get; set; }

@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.FaultProperties"
         /// />.
         /// </summary>
@@ -108,9 +100,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IFaultPropertiesInternal)this).CustomFault = (Sample.API.Models.ICustomFaultDetails) content.GetValueForProperty("CustomFault",((Sample.API.Models.IFaultPropertiesInternal)this).CustomFault, Sample.API.Models.CustomFaultDetailsTypeConverter.ConvertFrom);
             }
-            if (content.Contains("AvailableFault"))
+            if (content.Contains("AvailableFaults"))
             {
-                ((Sample.API.Models.IFaultPropertiesInternal)this).AvailableFault = (System.Collections.Generic.List<Sample.API.Models.IFaultDetails>) content.GetValueForProperty("AvailableFault",((Sample.API.Models.IFaultPropertiesInternal)this).AvailableFault, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IFaultDetails>(__y, Sample.API.Models.FaultDetailsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IFaultPropertiesInternal)this).AvailableFaults = (System.Collections.Generic.List<Sample.API.Models.IFaultDetails>) content.GetValueForProperty("AvailableFaults",((Sample.API.Models.IFaultPropertiesInternal)this).AvailableFaults, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IFaultDetails>(__y, Sample.API.Models.FaultDetailsTypeConverter.ConvertFrom));
             }
             if (content.Contains("DefaultFaultUrn"))
             {
@@ -173,9 +165,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IFaultPropertiesInternal)this).CustomFault = (Sample.API.Models.ICustomFaultDetails) content.GetValueForProperty("CustomFault",((Sample.API.Models.IFaultPropertiesInternal)this).CustomFault, Sample.API.Models.CustomFaultDetailsTypeConverter.ConvertFrom);
             }
-            if (content.Contains("AvailableFault"))
+            if (content.Contains("AvailableFaults"))
             {
-                ((Sample.API.Models.IFaultPropertiesInternal)this).AvailableFault = (System.Collections.Generic.List<Sample.API.Models.IFaultDetails>) content.GetValueForProperty("AvailableFault",((Sample.API.Models.IFaultPropertiesInternal)this).AvailableFault, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IFaultDetails>(__y, Sample.API.Models.FaultDetailsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IFaultPropertiesInternal)this).AvailableFaults = (System.Collections.Generic.List<Sample.API.Models.IFaultDetails>) content.GetValueForProperty("AvailableFaults",((Sample.API.Models.IFaultPropertiesInternal)this).AvailableFaults, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IFaultDetails>(__y, Sample.API.Models.FaultDetailsTypeConverter.ConvertFrom));
             }
             if (content.Contains("DefaultFaultUrn"))
             {
@@ -223,18 +215,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Fault Properties
     [System.ComponentModel.TypeConverter(typeof(FaultPropertiesTypeConverter))]

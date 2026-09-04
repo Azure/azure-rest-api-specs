@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.DrillsQualifiedResource"
         /// />.
         /// </summary>
@@ -100,9 +92,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).SelectedProtectionSolutionSetting = (Sample.API.Models.IResourceBaseProtectionSolutionSetting) content.GetValueForProperty("SelectedProtectionSolutionSetting",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).SelectedProtectionSolutionSetting, Sample.API.Models.ResourceBaseProtectionSolutionSettingTypeConverter.ConvertFrom);
             }
-            if (content.Contains("FaultProperty"))
+            if (content.Contains("FaultProperties"))
             {
-                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).FaultProperty = (Sample.API.Models.IFaultProperties) content.GetValueForProperty("FaultProperty",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).FaultProperty, Sample.API.Models.FaultPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).FaultProperties = (Sample.API.Models.IFaultProperties) content.GetValueForProperty("FaultProperties",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).FaultProperties, Sample.API.Models.FaultPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("ResourceId"))
             {
@@ -112,21 +104,21 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).DrillResourceId = (string) content.GetValueForProperty("DrillResourceId",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).DrillResourceId, global::System.Convert.ToString);
             }
-            if (content.Contains("ActiveLocation"))
+            if (content.Contains("ActiveLocations"))
             {
-                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ActiveLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActiveLocation",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ActiveLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ActiveLocations = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActiveLocations",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ActiveLocations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("RecoveryLocation"))
+            if (content.Contains("RecoveryLocations"))
             {
-                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).RecoveryLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryLocation",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).RecoveryLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).RecoveryLocations = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryLocations",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).RecoveryLocations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("ActivePhysicalZone"))
+            if (content.Contains("ActivePhysicalZones"))
             {
-                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ActivePhysicalZone = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActivePhysicalZone",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ActivePhysicalZone, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ActivePhysicalZones = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActivePhysicalZones",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ActivePhysicalZones, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("RecoveryPhysicalZone"))
+            if (content.Contains("RecoveryPhysicalZones"))
             {
-                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).RecoveryPhysicalZone = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryPhysicalZone",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).RecoveryPhysicalZone, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).RecoveryPhysicalZones = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryPhysicalZones",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).RecoveryPhysicalZones, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("DrillInclusionState"))
             {
@@ -144,9 +136,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).SelectedProtectionSolutionType = (string) content.GetValueForProperty("SelectedProtectionSolutionType",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).SelectedProtectionSolutionType, global::System.Convert.ToString);
             }
-            if (content.Contains("ResourceProtectionSolution"))
+            if (content.Contains("ResourceProtectionSolutions"))
             {
-                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ResourceProtectionSolution = (System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings>) content.GetValueForProperty("ResourceProtectionSolution",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ResourceProtectionSolution, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceProtectionSolutionSettings>(__y, Sample.API.Models.ResourceProtectionSolutionSettingsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ResourceProtectionSolutions = (System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings>) content.GetValueForProperty("ResourceProtectionSolutions",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ResourceProtectionSolutions, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceProtectionSolutionSettings>(__y, Sample.API.Models.ResourceProtectionSolutionSettingsTypeConverter.ConvertFrom));
             }
             if (content.Contains("FaultState"))
             {
@@ -156,9 +148,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ResourceProtectionSolutionDisplayName = (string) content.GetValueForProperty("ResourceProtectionSolutionDisplayName",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ResourceProtectionSolutionDisplayName, global::System.Convert.ToString);
             }
-            if (content.Contains("FaultPropertyAvailableFault"))
+            if (content.Contains("FaultPropertyAvailableFaults"))
             {
-                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).FaultPropertyAvailableFault = (System.Collections.Generic.List<Sample.API.Models.IFaultDetails>) content.GetValueForProperty("FaultPropertyAvailableFault",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).FaultPropertyAvailableFault, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IFaultDetails>(__y, Sample.API.Models.FaultDetailsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).FaultPropertyAvailableFaults = (System.Collections.Generic.List<Sample.API.Models.IFaultDetails>) content.GetValueForProperty("FaultPropertyAvailableFaults",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).FaultPropertyAvailableFaults, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IFaultDetails>(__y, Sample.API.Models.FaultDetailsTypeConverter.ConvertFrom));
             }
             if (content.Contains("SelectedProtectionSolutionSettingProtectionSolutionType"))
             {
@@ -229,9 +221,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).SelectedProtectionSolutionSetting = (Sample.API.Models.IResourceBaseProtectionSolutionSetting) content.GetValueForProperty("SelectedProtectionSolutionSetting",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).SelectedProtectionSolutionSetting, Sample.API.Models.ResourceBaseProtectionSolutionSettingTypeConverter.ConvertFrom);
             }
-            if (content.Contains("FaultProperty"))
+            if (content.Contains("FaultProperties"))
             {
-                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).FaultProperty = (Sample.API.Models.IFaultProperties) content.GetValueForProperty("FaultProperty",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).FaultProperty, Sample.API.Models.FaultPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).FaultProperties = (Sample.API.Models.IFaultProperties) content.GetValueForProperty("FaultProperties",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).FaultProperties, Sample.API.Models.FaultPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("ResourceId"))
             {
@@ -241,21 +233,21 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).DrillResourceId = (string) content.GetValueForProperty("DrillResourceId",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).DrillResourceId, global::System.Convert.ToString);
             }
-            if (content.Contains("ActiveLocation"))
+            if (content.Contains("ActiveLocations"))
             {
-                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ActiveLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActiveLocation",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ActiveLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ActiveLocations = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActiveLocations",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ActiveLocations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("RecoveryLocation"))
+            if (content.Contains("RecoveryLocations"))
             {
-                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).RecoveryLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryLocation",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).RecoveryLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).RecoveryLocations = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryLocations",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).RecoveryLocations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("ActivePhysicalZone"))
+            if (content.Contains("ActivePhysicalZones"))
             {
-                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ActivePhysicalZone = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActivePhysicalZone",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ActivePhysicalZone, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ActivePhysicalZones = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActivePhysicalZones",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ActivePhysicalZones, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("RecoveryPhysicalZone"))
+            if (content.Contains("RecoveryPhysicalZones"))
             {
-                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).RecoveryPhysicalZone = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryPhysicalZone",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).RecoveryPhysicalZone, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).RecoveryPhysicalZones = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryPhysicalZones",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).RecoveryPhysicalZones, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("DrillInclusionState"))
             {
@@ -273,9 +265,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).SelectedProtectionSolutionType = (string) content.GetValueForProperty("SelectedProtectionSolutionType",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).SelectedProtectionSolutionType, global::System.Convert.ToString);
             }
-            if (content.Contains("ResourceProtectionSolution"))
+            if (content.Contains("ResourceProtectionSolutions"))
             {
-                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ResourceProtectionSolution = (System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings>) content.GetValueForProperty("ResourceProtectionSolution",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ResourceProtectionSolution, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceProtectionSolutionSettings>(__y, Sample.API.Models.ResourceProtectionSolutionSettingsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ResourceProtectionSolutions = (System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings>) content.GetValueForProperty("ResourceProtectionSolutions",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ResourceProtectionSolutions, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceProtectionSolutionSettings>(__y, Sample.API.Models.ResourceProtectionSolutionSettingsTypeConverter.ConvertFrom));
             }
             if (content.Contains("FaultState"))
             {
@@ -285,9 +277,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ResourceProtectionSolutionDisplayName = (string) content.GetValueForProperty("ResourceProtectionSolutionDisplayName",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).ResourceProtectionSolutionDisplayName, global::System.Convert.ToString);
             }
-            if (content.Contains("FaultPropertyAvailableFault"))
+            if (content.Contains("FaultPropertyAvailableFaults"))
             {
-                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).FaultPropertyAvailableFault = (System.Collections.Generic.List<Sample.API.Models.IFaultDetails>) content.GetValueForProperty("FaultPropertyAvailableFault",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).FaultPropertyAvailableFault, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IFaultDetails>(__y, Sample.API.Models.FaultDetailsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IDrillsQualifiedResourceInternal)this).FaultPropertyAvailableFaults = (System.Collections.Generic.List<Sample.API.Models.IFaultDetails>) content.GetValueForProperty("FaultPropertyAvailableFaults",((Sample.API.Models.IDrillsQualifiedResourceInternal)this).FaultPropertyAvailableFaults, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IFaultDetails>(__y, Sample.API.Models.FaultDetailsTypeConverter.ConvertFrom));
             }
             if (content.Contains("SelectedProtectionSolutionSettingProtectionSolutionType"))
             {
@@ -351,18 +343,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Qualified resource.
     [System.ComponentModel.TypeConverter(typeof(DrillsQualifiedResourceTypeConverter))]

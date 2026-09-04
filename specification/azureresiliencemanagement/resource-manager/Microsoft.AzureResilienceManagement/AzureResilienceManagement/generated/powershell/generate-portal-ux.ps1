@@ -15,7 +15,7 @@ if(-not $NotIsolated) {
   return
 }
 
-$moduleName = 'Az.AzureResilienceManagement'
+$moduleName = 'Az.ResilienceManagement'
 $rootModuleName = ''
 if ($rootModuleName -eq "")
 {

@@ -75,8 +75,8 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_resourceCapacity = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("resourceCapacities"), out var __jsonResourceCapacities) ? If( __jsonResourceCapacities as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IRecommendCapacityResourceResult>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IRecommendCapacityResourceResult) (Sample.API.Models.RecommendCapacityResourceResult.FromJson(__u) )) ))() : null : _resourceCapacity;}
-            {_recommendation = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("recommendations"), out var __jsonRecommendations) ? If( __jsonRecommendations as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _recommendation;}
+            {_resourceCapacities = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("resourceCapacities"), out var __jsonResourceCapacities) ? If( __jsonResourceCapacities as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IRecommendCapacityResourceResult>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IRecommendCapacityResourceResult) (Sample.API.Models.RecommendCapacityResourceResult.FromJson(__u) )) ))() : null : _resourceCapacities;}
+            {_recommendations = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("recommendations"), out var __jsonRecommendations) ? If( __jsonRecommendations as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _recommendations;}
             {_agentError = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("agentError"), out var __jsonAgentError) ? (string)__jsonAgentError : (string)_agentError;}
             AfterFromJson(json);
         }
@@ -100,19 +100,19 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            if (null != this._resourceCapacity)
+            if (null != this._resourceCapacities)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._resourceCapacity )
+                foreach( var __x in this._resourceCapacities )
                 {
                     AddIf(__x?.ToJson(null, serializationMode) ,__w.Add);
                 }
                 container.Add("resourceCapacities",__w);
             }
-            if (null != this._recommendation)
+            if (null != this._recommendations)
             {
                 var __r = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __s in this._recommendation )
+                foreach( var __s in this._recommendations )
                 {
                     AddIf(null != (((object)__s)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__s.ToString()) : null ,__r.Add);
                 }

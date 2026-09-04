@@ -11,42 +11,42 @@ namespace Sample.API.Models
         Sample.API.Models.IDrillsQualifiedResourceInternal
     {
 
-        /// <summary>Backing field for <see cref="ActiveLocation" /> property.</summary>
-        private System.Collections.Generic.List<string> _activeLocation;
+        /// <summary>Backing field for <see cref="ActiveLocations" /> property.</summary>
+        private System.Collections.Generic.List<string> _activeLocations;
 
         /// <summary>Active Resource location and zones of Azure Resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> ActiveLocation { get => this._activeLocation; }
+        public System.Collections.Generic.List<string> ActiveLocations { get => this._activeLocations; }
 
-        /// <summary>Backing field for <see cref="ActivePhysicalZone" /> property.</summary>
-        private System.Collections.Generic.List<string> _activePhysicalZone;
+        /// <summary>Backing field for <see cref="ActivePhysicalZones" /> property.</summary>
+        private System.Collections.Generic.List<string> _activePhysicalZones;
 
         /// <summary>Active Resource location and physical zones of Azure Resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> ActivePhysicalZone { get => this._activePhysicalZone; }
+        public System.Collections.Generic.List<string> ActivePhysicalZones { get => this._activePhysicalZones; }
 
         /// <summary>fault name</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string CustomFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultName; }
+        public string CustomFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFaultName; }
 
         /// <summary>ID of ARM resource used for automation (e.g. Automation runbook URL).</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string CustomFaultScriptResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultScriptResourceId; }
+        public string CustomFaultScriptResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFaultScriptResourceId; }
 
         /// <summary>fault name</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultName; }
+        public string DefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultName; }
 
         /// <summary>
         /// ARMId of the target resource where fault will be applied. For non-NSG, same as ResourceId. For NSG, its the NSG resource
         /// and not the actual resource which is to be simulated for faulting.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultTargetResourceId; }
+        public string DefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultTargetResourceId; }
 
         /// <summary>fault urn.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultUrn; }
+        public string DefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultUrn; }
 
         /// <summary>Backing field for <see cref="DrillInclusionState" /> property.</summary>
         private string _drillInclusionState;
@@ -62,16 +62,16 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string DrillResourceId { get => this._drillResourceId; }
 
-        /// <summary>Backing field for <see cref="FaultProperty" /> property.</summary>
-        private Sample.API.Models.IFaultProperties _faultProperty;
+        /// <summary>Backing field for <see cref="FaultProperties" /> property.</summary>
+        private Sample.API.Models.IFaultProperties _faultProperties;
 
         /// <summary>Fault Properties</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IFaultProperties FaultProperty { get => (this._faultProperty = this._faultProperty ?? new Sample.API.Models.FaultProperties()); }
+        internal Sample.API.Models.IFaultProperties FaultProperties { get => (this._faultProperties = this._faultProperties ?? new Sample.API.Models.FaultProperties()); }
 
         /// <summary>Available faults for this resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).AvailableFault; }
+        public System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFaults { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).AvailableFaults; }
 
         /// <summary>Backing field for <see cref="FaultState" /> property.</summary>
         private string _faultState;
@@ -82,18 +82,18 @@ namespace Sample.API.Models
 
         /// <summary>fault name</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string OverriddenDefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultName; }
+        public string OverriddenDefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultName; }
 
         /// <summary>
         /// ARMId of the target resource where fault will be applied. For non-NSG, same as ResourceId. For NSG, its the NSG resource
         /// and not the actual resource which is to be simulated for faulting.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string OverriddenDefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultTargetResourceId; }
+        public string OverriddenDefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultTargetResourceId; }
 
         /// <summary>fault urn.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string OverriddenDefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultUrn; }
+        public string OverriddenDefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultUrn; }
 
         /// <summary>Backing field for <see cref="ProtectionStatus" /> property.</summary>
         private string _protectionStatus;
@@ -113,19 +113,19 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string RecoveryInclusionState { get => this._recoveryInclusionState; }
 
-        /// <summary>Backing field for <see cref="RecoveryLocation" /> property.</summary>
-        private System.Collections.Generic.List<string> _recoveryLocation;
+        /// <summary>Backing field for <see cref="RecoveryLocations" /> property.</summary>
+        private System.Collections.Generic.List<string> _recoveryLocations;
 
         /// <summary>Recovery Resource location and zones of HA Azure Resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> RecoveryLocation { get => this._recoveryLocation; }
+        public System.Collections.Generic.List<string> RecoveryLocations { get => this._recoveryLocations; }
 
-        /// <summary>Backing field for <see cref="RecoveryPhysicalZone" /> property.</summary>
-        private System.Collections.Generic.List<string> _recoveryPhysicalZone;
+        /// <summary>Backing field for <see cref="RecoveryPhysicalZones" /> property.</summary>
+        private System.Collections.Generic.List<string> _recoveryPhysicalZones;
 
         /// <summary>Recovery Resource location and physical zones of HA Azure Resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> RecoveryPhysicalZone { get => this._recoveryPhysicalZone; }
+        public System.Collections.Generic.List<string> RecoveryPhysicalZones { get => this._recoveryPhysicalZones; }
 
         /// <summary>Backing field for <see cref="ResourceId" /> property.</summary>
         private string _resourceId;
@@ -133,15 +133,6 @@ namespace Sample.API.Models
         /// <summary>ARM Resource ID of the Azure resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string ResourceId { get => this._resourceId; }
-
-        /// <summary>Backing field for <see cref="ResourceProtectionSolution" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> _resourceProtectionSolution;
-
-        /// <summary>
-        /// A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.
-        /// </summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolution { get => this._resourceProtectionSolution; }
 
         /// <summary>
         /// Backing field for <see cref="ResourceProtectionSolutionDisplayName" /> property.
@@ -152,26 +143,35 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string ResourceProtectionSolutionDisplayName { get => this._resourceProtectionSolutionDisplayName; }
 
-        /// <summary>Internal Acessors for ActiveLocation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillsQualifiedResourceInternal.ActiveLocation { get => this._activeLocation; set { {_activeLocation = value;} } }
+        /// <summary>Backing field for <see cref="ResourceProtectionSolutions" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> _resourceProtectionSolutions;
 
-        /// <summary>Internal Acessors for ActivePhysicalZone</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillsQualifiedResourceInternal.ActivePhysicalZone { get => this._activePhysicalZone; set { {_activePhysicalZone = value;} } }
+        /// <summary>
+        /// A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.
+        /// </summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
+        public System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolutions { get => this._resourceProtectionSolutions; }
+
+        /// <summary>Internal Acessors for ActiveLocations</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillsQualifiedResourceInternal.ActiveLocations { get => this._activeLocations; set { {_activeLocations = value;} } }
+
+        /// <summary>Internal Acessors for ActivePhysicalZones</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillsQualifiedResourceInternal.ActivePhysicalZones { get => this._activePhysicalZones; set { {_activePhysicalZones = value;} } }
 
         /// <summary>Internal Acessors for CustomFaultName</summary>
-        string Sample.API.Models.IDrillsQualifiedResourceInternal.CustomFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultName = value ?? null; }
+        string Sample.API.Models.IDrillsQualifiedResourceInternal.CustomFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFaultName = value ?? null; }
 
         /// <summary>Internal Acessors for CustomFaultScriptResourceId</summary>
-        string Sample.API.Models.IDrillsQualifiedResourceInternal.CustomFaultScriptResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultScriptResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultScriptResourceId = value ?? null; }
+        string Sample.API.Models.IDrillsQualifiedResourceInternal.CustomFaultScriptResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFaultScriptResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFaultScriptResourceId = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultFaultName</summary>
-        string Sample.API.Models.IDrillsQualifiedResourceInternal.DefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultName = value ?? null; }
+        string Sample.API.Models.IDrillsQualifiedResourceInternal.DefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultName = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultFaultTargetResourceId</summary>
-        string Sample.API.Models.IDrillsQualifiedResourceInternal.DefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultTargetResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultTargetResourceId = value ?? null; }
+        string Sample.API.Models.IDrillsQualifiedResourceInternal.DefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultTargetResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultTargetResourceId = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultFaultUrn</summary>
-        string Sample.API.Models.IDrillsQualifiedResourceInternal.DefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultUrn; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultUrn = value ?? null; }
+        string Sample.API.Models.IDrillsQualifiedResourceInternal.DefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultUrn; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultUrn = value ?? null; }
 
         /// <summary>Internal Acessors for DrillInclusionState</summary>
         string Sample.API.Models.IDrillsQualifiedResourceInternal.DrillInclusionState { get => this._drillInclusionState; set { {_drillInclusionState = value;} } }
@@ -179,32 +179,32 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for DrillResourceId</summary>
         string Sample.API.Models.IDrillsQualifiedResourceInternal.DrillResourceId { get => this._drillResourceId; set { {_drillResourceId = value;} } }
 
-        /// <summary>Internal Acessors for FaultProperty</summary>
-        Sample.API.Models.IFaultProperties Sample.API.Models.IDrillsQualifiedResourceInternal.FaultProperty { get => (this._faultProperty = this._faultProperty ?? new Sample.API.Models.FaultProperties()); set { {_faultProperty = value;} } }
+        /// <summary>Internal Acessors for FaultProperties</summary>
+        Sample.API.Models.IFaultProperties Sample.API.Models.IDrillsQualifiedResourceInternal.FaultProperties { get => (this._faultProperties = this._faultProperties ?? new Sample.API.Models.FaultProperties()); set { {_faultProperties = value;} } }
 
-        /// <summary>Internal Acessors for FaultPropertyAvailableFault</summary>
-        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> Sample.API.Models.IDrillsQualifiedResourceInternal.FaultPropertyAvailableFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).AvailableFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).AvailableFault = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for FaultPropertyAvailableFaults</summary>
+        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> Sample.API.Models.IDrillsQualifiedResourceInternal.FaultPropertyAvailableFaults { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).AvailableFaults; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).AvailableFaults = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for FaultPropertyCustomFault</summary>
-        Sample.API.Models.ICustomFaultDetails Sample.API.Models.IDrillsQualifiedResourceInternal.FaultPropertyCustomFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFault = value ?? null /* model class */; }
+        Sample.API.Models.ICustomFaultDetails Sample.API.Models.IDrillsQualifiedResourceInternal.FaultPropertyCustomFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFault = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for FaultPropertyDefaultFault</summary>
-        Sample.API.Models.IFaultDetails Sample.API.Models.IDrillsQualifiedResourceInternal.FaultPropertyDefaultFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFault = value ?? null /* model class */; }
+        Sample.API.Models.IFaultDetails Sample.API.Models.IDrillsQualifiedResourceInternal.FaultPropertyDefaultFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFault = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for FaultPropertyOverriddenDefaultFault</summary>
-        Sample.API.Models.IFaultDetails Sample.API.Models.IDrillsQualifiedResourceInternal.FaultPropertyOverriddenDefaultFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFault = value ?? null /* model class */; }
+        Sample.API.Models.IFaultDetails Sample.API.Models.IDrillsQualifiedResourceInternal.FaultPropertyOverriddenDefaultFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFault = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for FaultState</summary>
         string Sample.API.Models.IDrillsQualifiedResourceInternal.FaultState { get => this._faultState; set { {_faultState = value;} } }
 
         /// <summary>Internal Acessors for OverriddenDefaultFaultName</summary>
-        string Sample.API.Models.IDrillsQualifiedResourceInternal.OverriddenDefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultName = value ?? null; }
+        string Sample.API.Models.IDrillsQualifiedResourceInternal.OverriddenDefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultName = value ?? null; }
 
         /// <summary>Internal Acessors for OverriddenDefaultFaultTargetResourceId</summary>
-        string Sample.API.Models.IDrillsQualifiedResourceInternal.OverriddenDefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultTargetResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultTargetResourceId = value ?? null; }
+        string Sample.API.Models.IDrillsQualifiedResourceInternal.OverriddenDefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultTargetResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultTargetResourceId = value ?? null; }
 
         /// <summary>Internal Acessors for OverriddenDefaultFaultUrn</summary>
-        string Sample.API.Models.IDrillsQualifiedResourceInternal.OverriddenDefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultUrn; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultUrn = value ?? null; }
+        string Sample.API.Models.IDrillsQualifiedResourceInternal.OverriddenDefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultUrn; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultUrn = value ?? null; }
 
         /// <summary>Internal Acessors for ProtectionStatus</summary>
         string Sample.API.Models.IDrillsQualifiedResourceInternal.ProtectionStatus { get => this._protectionStatus; set { {_protectionStatus = value;} } }
@@ -212,20 +212,20 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for RecoveryInclusionState</summary>
         string Sample.API.Models.IDrillsQualifiedResourceInternal.RecoveryInclusionState { get => this._recoveryInclusionState; set { {_recoveryInclusionState = value;} } }
 
-        /// <summary>Internal Acessors for RecoveryLocation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillsQualifiedResourceInternal.RecoveryLocation { get => this._recoveryLocation; set { {_recoveryLocation = value;} } }
+        /// <summary>Internal Acessors for RecoveryLocations</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillsQualifiedResourceInternal.RecoveryLocations { get => this._recoveryLocations; set { {_recoveryLocations = value;} } }
 
-        /// <summary>Internal Acessors for RecoveryPhysicalZone</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillsQualifiedResourceInternal.RecoveryPhysicalZone { get => this._recoveryPhysicalZone; set { {_recoveryPhysicalZone = value;} } }
+        /// <summary>Internal Acessors for RecoveryPhysicalZones</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillsQualifiedResourceInternal.RecoveryPhysicalZones { get => this._recoveryPhysicalZones; set { {_recoveryPhysicalZones = value;} } }
 
         /// <summary>Internal Acessors for ResourceId</summary>
         string Sample.API.Models.IDrillsQualifiedResourceInternal.ResourceId { get => this._resourceId; set { {_resourceId = value;} } }
 
-        /// <summary>Internal Acessors for ResourceProtectionSolution</summary>
-        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> Sample.API.Models.IDrillsQualifiedResourceInternal.ResourceProtectionSolution { get => this._resourceProtectionSolution; set { {_resourceProtectionSolution = value;} } }
-
         /// <summary>Internal Acessors for ResourceProtectionSolutionDisplayName</summary>
         string Sample.API.Models.IDrillsQualifiedResourceInternal.ResourceProtectionSolutionDisplayName { get => this._resourceProtectionSolutionDisplayName; set { {_resourceProtectionSolutionDisplayName = value;} } }
+
+        /// <summary>Internal Acessors for ResourceProtectionSolutions</summary>
+        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> Sample.API.Models.IDrillsQualifiedResourceInternal.ResourceProtectionSolutions { get => this._resourceProtectionSolutions; set { {_resourceProtectionSolutions = value;} } }
 
         /// <summary>Internal Acessors for SelectedProtectionSolutionSetting</summary>
         Sample.API.Models.IResourceBaseProtectionSolutionSetting Sample.API.Models.IDrillsQualifiedResourceInternal.SelectedProtectionSolutionSetting { get => (this._selectedProtectionSolutionSetting = this._selectedProtectionSolutionSetting ?? new Sample.API.Models.ResourceBaseProtectionSolutionSetting()); set { {_selectedProtectionSolutionSetting = value;} } }
@@ -276,7 +276,7 @@ namespace Sample.API.Models
         Description = @"Active Resource location and zones of Azure Resource.",
         SerializedName = @"activeLocations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> ActiveLocation { get;  }
+        System.Collections.Generic.List<string> ActiveLocations { get;  }
         /// <summary>Active Resource location and physical zones of Azure Resource.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -287,7 +287,7 @@ namespace Sample.API.Models
         Description = @"Active Resource location and physical zones of Azure Resource.",
         SerializedName = @"activePhysicalZones",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> ActivePhysicalZone { get;  }
+        System.Collections.Generic.List<string> ActivePhysicalZones { get;  }
         /// <summary>fault name</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -379,7 +379,7 @@ namespace Sample.API.Models
         Description = @"Available faults for this resource.",
         SerializedName = @"availableFaults",
         PossibleTypes = new [] { typeof(Sample.API.Models.IFaultDetails) })]
-        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFault { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFaults { get;  }
         /// <summary>Fault State of the Drill resource</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -466,7 +466,7 @@ namespace Sample.API.Models
         Description = @"Recovery Resource location and zones of HA Azure Resource.",
         SerializedName = @"recoveryLocations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> RecoveryLocation { get;  }
+        System.Collections.Generic.List<string> RecoveryLocations { get;  }
         /// <summary>Recovery Resource location and physical zones of HA Azure Resource.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -477,7 +477,7 @@ namespace Sample.API.Models
         Description = @"Recovery Resource location and physical zones of HA Azure Resource.",
         SerializedName = @"recoveryPhysicalZones",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> RecoveryPhysicalZone { get;  }
+        System.Collections.Generic.List<string> RecoveryPhysicalZones { get;  }
         /// <summary>ARM Resource ID of the Azure resource.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -489,6 +489,17 @@ namespace Sample.API.Models
         SerializedName = @"resourceId",
         PossibleTypes = new [] { typeof(string) })]
         string ResourceId { get;  }
+        /// <summary>Resource Protection Solution Display Name</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = true,
+        Read = true,
+        Create = false,
+        Update = false,
+        Description = @"Resource Protection Solution Display Name",
+        SerializedName = @"resourceProtectionSolutionDisplayName",
+        PossibleTypes = new [] { typeof(string) })]
+        string ResourceProtectionSolutionDisplayName { get;  }
         /// <summary>
         /// A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.
         /// </summary>
@@ -501,18 +512,7 @@ namespace Sample.API.Models
         Description = @"A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.",
         SerializedName = @"resourceProtectionSolutions",
         PossibleTypes = new [] { typeof(Sample.API.Models.IResourceProtectionSolutionSettings) })]
-        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolution { get;  }
-        /// <summary>Resource Protection Solution Display Name</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = true,
-        Read = true,
-        Create = false,
-        Update = false,
-        Description = @"Resource Protection Solution Display Name",
-        SerializedName = @"resourceProtectionSolutionDisplayName",
-        PossibleTypes = new [] { typeof(string) })]
-        string ResourceProtectionSolutionDisplayName { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolutions { get;  }
         /// <summary>A setting that indicates the resource protected with which recovery solution.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -544,9 +544,9 @@ namespace Sample.API.Models
 
     {
         /// <summary>Active Resource location and zones of Azure Resource.</summary>
-        System.Collections.Generic.List<string> ActiveLocation { get; set; }
+        System.Collections.Generic.List<string> ActiveLocations { get; set; }
         /// <summary>Active Resource location and physical zones of Azure Resource.</summary>
-        System.Collections.Generic.List<string> ActivePhysicalZone { get; set; }
+        System.Collections.Generic.List<string> ActivePhysicalZones { get; set; }
         /// <summary>fault name</summary>
         string CustomFaultName { get; set; }
         /// <summary>ID of ARM resource used for automation (e.g. Automation runbook URL).</summary>
@@ -566,9 +566,9 @@ namespace Sample.API.Models
         /// <summary>Drill Resource ID of the Azure resource.</summary>
         string DrillResourceId { get; set; }
         /// <summary>Fault Properties</summary>
-        Sample.API.Models.IFaultProperties FaultProperty { get; set; }
+        Sample.API.Models.IFaultProperties FaultProperties { get; set; }
         /// <summary>Available faults for this resource.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFault { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFaults { get; set; }
         /// <summary>Custom Fault Details selected by user</summary>
         Sample.API.Models.ICustomFaultDetails FaultPropertyCustomFault { get; set; }
         /// <summary>Default fault provided by the system.</summary>
@@ -598,17 +598,17 @@ namespace Sample.API.Models
         [global::Sample.API.PSArgumentCompleterAttribute("Included", "Excluded")]
         string RecoveryInclusionState { get; set; }
         /// <summary>Recovery Resource location and zones of HA Azure Resource.</summary>
-        System.Collections.Generic.List<string> RecoveryLocation { get; set; }
+        System.Collections.Generic.List<string> RecoveryLocations { get; set; }
         /// <summary>Recovery Resource location and physical zones of HA Azure Resource.</summary>
-        System.Collections.Generic.List<string> RecoveryPhysicalZone { get; set; }
+        System.Collections.Generic.List<string> RecoveryPhysicalZones { get; set; }
         /// <summary>ARM Resource ID of the Azure resource.</summary>
         string ResourceId { get; set; }
+        /// <summary>Resource Protection Solution Display Name</summary>
+        string ResourceProtectionSolutionDisplayName { get; set; }
         /// <summary>
         /// A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.
         /// </summary>
-        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolution { get; set; }
-        /// <summary>Resource Protection Solution Display Name</summary>
-        string ResourceProtectionSolutionDisplayName { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolutions { get; set; }
         /// <summary>
         /// Resource protection solution settings of the protection solutions recovery orchestration resource is protected with.
         /// </summary>

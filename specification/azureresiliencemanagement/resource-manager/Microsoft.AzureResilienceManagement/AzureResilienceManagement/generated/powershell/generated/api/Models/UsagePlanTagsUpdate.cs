@@ -11,12 +11,12 @@ namespace Sample.API.Models
         Sample.API.Models.IUsagePlanTagsUpdateInternal
     {
 
-        /// <summary>Backing field for <see cref="Tag" /> property.</summary>
-        private Sample.API.Models.IUsagePlanTagsUpdateTags _tag;
+        /// <summary>Backing field for <see cref="Tags" /> property.</summary>
+        private Sample.API.Models.IUsagePlanTagsUpdateTags _tags;
 
         /// <summary>Resource tags.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public Sample.API.Models.IUsagePlanTagsUpdateTags Tag { get => (this._tag = this._tag ?? new Sample.API.Models.UsagePlanTagsUpdateTags()); set => this._tag = value; }
+        public Sample.API.Models.IUsagePlanTagsUpdateTags Tags { get => (this._tags = this._tags ?? new Sample.API.Models.UsagePlanTagsUpdateTags()); set => this._tags = value; }
 
         /// <summary>Creates an new <see cref="UsagePlanTagsUpdate" /> instance.</summary>
         public UsagePlanTagsUpdate()
@@ -38,7 +38,7 @@ namespace Sample.API.Models
         Description = @"Resource tags.",
         SerializedName = @"tags",
         PossibleTypes = new [] { typeof(Sample.API.Models.IUsagePlanTagsUpdateTags) })]
-        Sample.API.Models.IUsagePlanTagsUpdateTags Tag { get; set; }
+        Sample.API.Models.IUsagePlanTagsUpdateTags Tags { get; set; }
 
     }
     /// The type used for updating tags in UsagePlan resources.
@@ -46,7 +46,7 @@ namespace Sample.API.Models
 
     {
         /// <summary>Resource tags.</summary>
-        Sample.API.Models.IUsagePlanTagsUpdateTags Tag { get; set; }
+        Sample.API.Models.IUsagePlanTagsUpdateTags Tags { get; set; }
 
     }
 }

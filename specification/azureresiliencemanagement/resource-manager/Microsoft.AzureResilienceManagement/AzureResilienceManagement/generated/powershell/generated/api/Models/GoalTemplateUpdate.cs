@@ -18,7 +18,7 @@ namespace Sample.API.Models
 
         /// <summary>Type of Goal Template created by customer</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string GoalType { get => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Property).GoalType; set => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Property).GoalType = value ?? null; }
+        public string GoalType { get => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Properties).GoalType; set => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Properties).GoalType = value ?? null; }
 
         /// <summary>
         /// Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
@@ -30,35 +30,35 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public string Name { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Name; }
 
-        /// <summary>Backing field for <see cref="Property" /> property.</summary>
-        private Sample.API.Models.IGoalTemplatePropertiesUpdate _property;
+        /// <summary>Backing field for <see cref="Properties" /> property.</summary>
+        private Sample.API.Models.IGoalTemplatePropertiesUpdate _properties;
 
         /// <summary>The resource-specific properties for this resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IGoalTemplatePropertiesUpdate Property { get => (this._property = this._property ?? new Sample.API.Models.GoalTemplatePropertiesUpdate()); set => this._property = value; }
+        internal Sample.API.Models.IGoalTemplatePropertiesUpdate Properties { get => (this._properties = this._properties ?? new Sample.API.Models.GoalTemplatePropertiesUpdate()); set => this._properties = value; }
 
         /// <summary>
         /// Regional recovery point objective specified by customer. eg, PT15M for 15 minutes
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string RegionalRecoveryPointObjective { get => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Property).RegionalRecoveryPointObjective; set => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Property).RegionalRecoveryPointObjective = value ?? null; }
+        public string RegionalRecoveryPointObjective { get => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Properties).RegionalRecoveryPointObjective; set => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Properties).RegionalRecoveryPointObjective = value ?? null; }
 
         /// <summary>
         /// Regional recovery time objective specified by customer. eg, PT15M for 15 minutes
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string RegionalRecoveryTimeObjective { get => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Property).RegionalRecoveryTimeObjective; set => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Property).RegionalRecoveryTimeObjective = value ?? null; }
+        public string RegionalRecoveryTimeObjective { get => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Properties).RegionalRecoveryTimeObjective; set => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Properties).RegionalRecoveryTimeObjective = value ?? null; }
 
         /// <summary>Option specified by customer under disaster recovery section of goal template</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string RequireDisasterRecovery { get => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Property).RequireDisasterRecovery; set => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Property).RequireDisasterRecovery = value ?? null; }
+        public string RequireDisasterRecovery { get => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Properties).RequireDisasterRecovery; set => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Properties).RequireDisasterRecovery = value ?? null; }
 
         /// <summary>Option specified by customer under high availability section of goal template</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string RequireHighAvailability { get => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Property).RequireHighAvailability; set => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Property).RequireHighAvailability = value ?? null; }
+        public string RequireHighAvailability { get => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Properties).RequireHighAvailability; set => ((Sample.API.Models.IGoalTemplatePropertiesUpdateInternal)Properties).RequireHighAvailability = value ?? null; }
 
-        /// <summary>Internal Acessors for Property</summary>
-        Sample.API.Models.IGoalTemplatePropertiesUpdate Sample.API.Models.IGoalTemplateUpdateInternal.Property { get => (this._property = this._property ?? new Sample.API.Models.GoalTemplatePropertiesUpdate()); set { {_property = value;} } }
+        /// <summary>Internal Acessors for Properties</summary>
+        Sample.API.Models.IGoalTemplatePropertiesUpdate Sample.API.Models.IGoalTemplateUpdateInternal.Properties { get => (this._properties = this._properties ?? new Sample.API.Models.GoalTemplatePropertiesUpdate()); set { {_properties = value;} } }
 
         /// <summary>Internal Acessors for Id</summary>
         string Sample.API.Models.IResourceInternal.Id { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Id; set => ((Sample.API.Models.IResourceInternal)__proxyResource).Id = value ?? null; }
@@ -221,7 +221,7 @@ namespace Sample.API.Models
         [global::Sample.API.PSArgumentCompleterAttribute("Resiliency")]
         string GoalType { get; set; }
         /// <summary>The resource-specific properties for this resource.</summary>
-        Sample.API.Models.IGoalTemplatePropertiesUpdate Property { get; set; }
+        Sample.API.Models.IGoalTemplatePropertiesUpdate Properties { get; set; }
         /// <summary>
         /// Regional recovery point objective specified by customer. eg, PT15M for 15 minutes
         /// </summary>

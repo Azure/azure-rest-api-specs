@@ -22,49 +22,49 @@ namespace Sample.API.Models
         /// Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultGroupId { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupId; }
+        public string DefaultGroupId { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupId; }
 
         /// <summary>The name of the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultGroupName { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupName; }
+        public string DefaultGroupName { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupName; }
 
         /// <summary>The timestamp of resource creation (UTC).</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public global::System.DateTime? DefaultGroupSystemDataCreatedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataCreatedAt; }
+        public global::System.DateTime? DefaultGroupSystemDataCreatedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataCreatedAt; }
 
         /// <summary>The identity that created the resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultGroupSystemDataCreatedBy { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataCreatedBy; }
+        public string DefaultGroupSystemDataCreatedBy { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataCreatedBy; }
 
         /// <summary>The type of identity that created the resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultGroupSystemDataCreatedByType { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataCreatedByType; }
+        public string DefaultGroupSystemDataCreatedByType { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataCreatedByType; }
 
         /// <summary>The timestamp of resource last modification (UTC)</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public global::System.DateTime? DefaultGroupSystemDataLastModifiedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataLastModifiedAt; }
+        public global::System.DateTime? DefaultGroupSystemDataLastModifiedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataLastModifiedAt; }
 
         /// <summary>The identity that last modified the resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultGroupSystemDataLastModifiedBy { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataLastModifiedBy; }
+        public string DefaultGroupSystemDataLastModifiedBy { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataLastModifiedBy; }
 
         /// <summary>The type of identity that last modified the resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultGroupSystemDataLastModifiedByType { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataLastModifiedByType; }
+        public string DefaultGroupSystemDataLastModifiedByType { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataLastModifiedByType; }
 
         /// <summary>
         /// The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultGroupType { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupType; }
+        public string DefaultGroupType { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupType; }
 
         /// <summary>A description of the recovery orchestration group.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string Description { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).Description; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).Description = value ?? null; }
+        public string Description { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).Description; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).Description = value ?? null; }
 
         /// <summary>A unique id for the recovery orchestration group, which is a GUID.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string GroupUniqueId { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).GroupUniqueId; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).GroupUniqueId = value ?? null; }
+        public string GroupUniqueId { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).GroupUniqueId; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).GroupUniqueId = value ?? null; }
 
         /// <summary>
         /// Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
@@ -85,7 +85,7 @@ namespace Sample.API.Models
 
         /// <summary>The identities assigned to this resource by the user.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities IdentityUserAssignedIdentity { get => ((Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateInternal)Identity).UserAssignedIdentity; set => ((Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateInternal)Identity).UserAssignedIdentity = value ?? null /* model class */; }
+        public Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities IdentityUserAssignedIdentities { get => ((Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateInternal)Identity).UserAssignedIdentities; set => ((Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateInternal)Identity).UserAssignedIdentities = value ?? null /* model class */; }
 
         /// <summary>The name of the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
@@ -93,75 +93,75 @@ namespace Sample.API.Models
 
         /// <summary>The order ID of the recovery orchestration group.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public int? OrderId { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).OrderId; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).OrderId = value ?? default(int); }
+        public int? OrderId { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).OrderId; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).OrderId = value ?? default(int); }
 
         /// <summary>A description of the recovery orchestration plan.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string PlanDescription { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).PlanDescription; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).PlanDescription = value ?? null; }
+        public string PlanDescription { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).PlanDescription; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).PlanDescription = value ?? null; }
 
         /// <summary>Post-actions for the recovery orchestration group.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostAction { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).PostAction; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).PostAction = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostActions { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).PostActions; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).PostActions = value ?? null /* arrayOf */; }
 
         /// <summary>Pre-actions for the recovery orchestration group.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreAction { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).PreAction; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).PreAction = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreActions { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).PreActions; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).PreActions = value ?? null /* arrayOf */; }
 
-        /// <summary>Backing field for <see cref="Property" /> property.</summary>
-        private Sample.API.Models.IRecoveryPlanPropertiesUpdate _property;
+        /// <summary>Backing field for <see cref="Properties" /> property.</summary>
+        private Sample.API.Models.IRecoveryPlanPropertiesUpdate _properties;
 
         /// <summary>The resource-specific properties for this resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IRecoveryPlanPropertiesUpdate Property { get => (this._property = this._property ?? new Sample.API.Models.RecoveryPlanPropertiesUpdate()); set => this._property = value; }
+        internal Sample.API.Models.IRecoveryPlanPropertiesUpdate Properties { get => (this._properties = this._properties ?? new Sample.API.Models.RecoveryPlanPropertiesUpdate()); set => this._properties = value; }
 
         /// <summary>Additional recovery orchestration group settings.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> RecoveryGroupSettingAdditionalGroup { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).RecoveryGroupSettingAdditionalGroup; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).RecoveryGroupSettingAdditionalGroup = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> RecoveryGroupSettingAdditionalGroups { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).RecoveryGroupSettingAdditionalGroups; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).RecoveryGroupSettingAdditionalGroups = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for DefaultGroupId</summary>
-        string Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupId { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupId; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupId = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupId { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupId; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupId = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultGroupName</summary>
-        string Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupName { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupName; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupName = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupName { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupName; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupName = value ?? null; }
 
-        /// <summary>Internal Acessors for DefaultGroupProperty</summary>
-        Sample.API.Models.IRecoveryGroupPropertiesUpdate Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupProperty { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupProperty; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupProperty = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for DefaultGroupProperties</summary>
+        Sample.API.Models.IRecoveryGroupPropertiesUpdate Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupProperties { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupProperties; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupProperties = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for DefaultGroupSystemData</summary>
-        Sample.API.Models.ISystemData Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupSystemData { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemData; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemData = value ?? null /* model class */; }
+        Sample.API.Models.ISystemData Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupSystemData { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemData; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemData = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for DefaultGroupSystemDataCreatedAt</summary>
-        global::System.DateTime? Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupSystemDataCreatedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataCreatedAt; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataCreatedAt = value ?? default(global::System.DateTime); }
+        global::System.DateTime? Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupSystemDataCreatedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataCreatedAt; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataCreatedAt = value ?? default(global::System.DateTime); }
 
         /// <summary>Internal Acessors for DefaultGroupSystemDataCreatedBy</summary>
-        string Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupSystemDataCreatedBy { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataCreatedBy; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataCreatedBy = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupSystemDataCreatedBy { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataCreatedBy; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataCreatedBy = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultGroupSystemDataCreatedByType</summary>
-        string Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupSystemDataCreatedByType { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataCreatedByType; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataCreatedByType = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupSystemDataCreatedByType { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataCreatedByType; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataCreatedByType = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultGroupSystemDataLastModifiedAt</summary>
-        global::System.DateTime? Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupSystemDataLastModifiedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataLastModifiedAt; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataLastModifiedAt = value ?? default(global::System.DateTime); }
+        global::System.DateTime? Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupSystemDataLastModifiedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataLastModifiedAt; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataLastModifiedAt = value ?? default(global::System.DateTime); }
 
         /// <summary>Internal Acessors for DefaultGroupSystemDataLastModifiedBy</summary>
-        string Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupSystemDataLastModifiedBy { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataLastModifiedBy; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataLastModifiedBy = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupSystemDataLastModifiedBy { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataLastModifiedBy; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataLastModifiedBy = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultGroupSystemDataLastModifiedByType</summary>
-        string Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupSystemDataLastModifiedByType { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataLastModifiedByType; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupSystemDataLastModifiedByType = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupSystemDataLastModifiedByType { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataLastModifiedByType; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupSystemDataLastModifiedByType = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultGroupType</summary>
-        string Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupType { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupType; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).DefaultGroupType = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanUpdateInternal.DefaultGroupType { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupType; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).DefaultGroupType = value ?? null; }
 
         /// <summary>Internal Acessors for Identity</summary>
         Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdate Sample.API.Models.IRecoveryPlanUpdateInternal.Identity { get => (this._identity = this._identity ?? new Sample.API.Models.AzureResourceManagerCommonTypesManagedServiceIdentityUpdate()); set { {_identity = value;} } }
 
-        /// <summary>Internal Acessors for Property</summary>
-        Sample.API.Models.IRecoveryPlanPropertiesUpdate Sample.API.Models.IRecoveryPlanUpdateInternal.Property { get => (this._property = this._property ?? new Sample.API.Models.RecoveryPlanPropertiesUpdate()); set { {_property = value;} } }
+        /// <summary>Internal Acessors for Properties</summary>
+        Sample.API.Models.IRecoveryPlanPropertiesUpdate Sample.API.Models.IRecoveryPlanUpdateInternal.Properties { get => (this._properties = this._properties ?? new Sample.API.Models.RecoveryPlanPropertiesUpdate()); set { {_properties = value;} } }
 
         /// <summary>Internal Acessors for RecoveryGroupSettingDefaultGroup</summary>
-        Sample.API.Models.IRecoveryGroupUpdate Sample.API.Models.IRecoveryPlanUpdateInternal.RecoveryGroupSettingDefaultGroup { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).RecoveryGroupSettingDefaultGroup; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).RecoveryGroupSettingDefaultGroup = value ?? null /* model class */; }
+        Sample.API.Models.IRecoveryGroupUpdate Sample.API.Models.IRecoveryPlanUpdateInternal.RecoveryGroupSettingDefaultGroup { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).RecoveryGroupSettingDefaultGroup; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).RecoveryGroupSettingDefaultGroup = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for RecoveryGroupsSetting</summary>
-        Sample.API.Models.IRecoveryGroupsSettingUpdate Sample.API.Models.IRecoveryPlanUpdateInternal.RecoveryGroupsSetting { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).RecoveryGroupsSetting; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Property).RecoveryGroupsSetting = value ?? null /* model class */; }
+        Sample.API.Models.IRecoveryGroupsSettingUpdate Sample.API.Models.IRecoveryPlanUpdateInternal.RecoveryGroupsSetting { get => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).RecoveryGroupsSetting; set => ((Sample.API.Models.IRecoveryPlanPropertiesUpdateInternal)Properties).RecoveryGroupsSetting = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for Id</summary>
         string Sample.API.Models.IResourceInternal.Id { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Id; set => ((Sample.API.Models.IResourceInternal)__proxyResource).Id = value ?? null; }
@@ -262,7 +262,7 @@ namespace Sample.API.Models
         Create = false,
         Update = false,
         Description = @"Fully qualified resource ID for the resource. E.g. ""/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}""",
-        SerializedName = @"ResourceGroupName",
+        SerializedName = @"id",
         PossibleTypes = new [] { typeof(string) })]
         string DefaultGroupId { get;  }
         /// <summary>The name of the resource</summary>
@@ -401,7 +401,7 @@ namespace Sample.API.Models
         Description = @"The identities assigned to this resource by the user.",
         SerializedName = @"userAssignedIdentities",
         PossibleTypes = new [] { typeof(Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities) })]
-        Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities IdentityUserAssignedIdentity { get; set; }
+        Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities IdentityUserAssignedIdentities { get; set; }
         /// <summary>The order ID of the recovery orchestration group.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -434,7 +434,7 @@ namespace Sample.API.Models
         Description = @"Post-actions for the recovery orchestration group.",
         SerializedName = @"postActions",
         PossibleTypes = new [] { typeof(Sample.API.Models.IRecoveryGroupBaseAction) })]
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostAction { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostActions { get; set; }
         /// <summary>Pre-actions for the recovery orchestration group.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -445,7 +445,7 @@ namespace Sample.API.Models
         Description = @"Pre-actions for the recovery orchestration group.",
         SerializedName = @"preActions",
         PossibleTypes = new [] { typeof(Sample.API.Models.IRecoveryGroupBaseAction) })]
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreAction { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreActions { get; set; }
         /// <summary>Additional recovery orchestration group settings.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -456,7 +456,7 @@ namespace Sample.API.Models
         Description = @"Additional recovery orchestration group settings.",
         SerializedName = @"additionalGroups",
         PossibleTypes = new [] { typeof(Sample.API.Models.IRecoveryGroup) })]
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> RecoveryGroupSettingAdditionalGroup { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> RecoveryGroupSettingAdditionalGroups { get; set; }
 
     }
     /// Represents a recovery orchestration plan resource in the Azure Resilience Management provider namespace.
@@ -470,7 +470,7 @@ namespace Sample.API.Models
         /// <summary>The name of the resource</summary>
         string DefaultGroupName { get; set; }
         /// <summary>The resource-specific properties for this resource.</summary>
-        Sample.API.Models.IRecoveryGroupPropertiesUpdate DefaultGroupProperty { get; set; }
+        Sample.API.Models.IRecoveryGroupPropertiesUpdate DefaultGroupProperties { get; set; }
         /// <summary>
         /// Azure Resource Manager metadata containing createdBy and modifiedBy information.
         /// </summary>
@@ -503,19 +503,19 @@ namespace Sample.API.Models
         [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
         string IdentityType { get; set; }
         /// <summary>The identities assigned to this resource by the user.</summary>
-        Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities IdentityUserAssignedIdentity { get; set; }
+        Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities IdentityUserAssignedIdentities { get; set; }
         /// <summary>The order ID of the recovery orchestration group.</summary>
         int? OrderId { get; set; }
         /// <summary>A description of the recovery orchestration plan.</summary>
         string PlanDescription { get; set; }
         /// <summary>Post-actions for the recovery orchestration group.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostAction { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostActions { get; set; }
         /// <summary>Pre-actions for the recovery orchestration group.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreAction { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreActions { get; set; }
         /// <summary>The resource-specific properties for this resource.</summary>
-        Sample.API.Models.IRecoveryPlanPropertiesUpdate Property { get; set; }
+        Sample.API.Models.IRecoveryPlanPropertiesUpdate Properties { get; set; }
         /// <summary>Additional recovery orchestration group settings.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> RecoveryGroupSettingAdditionalGroup { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> RecoveryGroupSettingAdditionalGroups { get; set; }
         /// <summary>
         /// The default recovery orchestration group setting. Every recovery orchestration plan has a default recovery orchestration
         /// group.

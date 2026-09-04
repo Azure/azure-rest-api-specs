@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.RecoveryResourceQualification"
         /// />.
         /// </summary>
@@ -103,9 +95,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("OperationQualificationDetail"))
+            if (content.Contains("OperationQualificationDetails"))
             {
-                ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetail = (Sample.API.Models.IOperationQualificationDetails) content.GetValueForProperty("OperationQualificationDetail",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetail, Sample.API.Models.OperationQualificationDetailsTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetails = (Sample.API.Models.IOperationQualificationDetails) content.GetValueForProperty("OperationQualificationDetails",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetails, Sample.API.Models.OperationQualificationDetailsTypeConverter.ConvertFrom);
             }
             if (content.Contains("RecoveryResource"))
             {
@@ -115,13 +107,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailQualificationState = (string) content.GetValueForProperty("OperationQualificationDetailQualificationState",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailQualificationState, global::System.Convert.ToString);
             }
-            if (content.Contains("OperationQualificationDetailNotQualifiedReason"))
+            if (content.Contains("OperationQualificationDetailNotQualifiedReasons"))
             {
-                ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailNotQualifiedReason = (System.Collections.Generic.List<string>) content.GetValueForProperty("OperationQualificationDetailNotQualifiedReason",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailNotQualifiedReason, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailNotQualifiedReasons = (System.Collections.Generic.List<string>) content.GetValueForProperty("OperationQualificationDetailNotQualifiedReasons",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailNotQualifiedReasons, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("OperationQualificationDetailResourceFeasibilityReview"))
+            if (content.Contains("OperationQualificationDetailResourceFeasibilityReviews"))
             {
-                ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailResourceFeasibilityReview = (System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview>) content.GetValueForProperty("OperationQualificationDetailResourceFeasibilityReview",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailResourceFeasibilityReview, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceFeasibilityReview>(__y, Sample.API.Models.ResourceFeasibilityReviewTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailResourceFeasibilityReviews = (System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview>) content.GetValueForProperty("OperationQualificationDetailResourceFeasibilityReviews",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailResourceFeasibilityReviews, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceFeasibilityReview>(__y, Sample.API.Models.ResourceFeasibilityReviewTypeConverter.ConvertFrom));
             }
             AfterDeserializeDictionary(content);
         }
@@ -140,9 +132,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("OperationQualificationDetail"))
+            if (content.Contains("OperationQualificationDetails"))
             {
-                ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetail = (Sample.API.Models.IOperationQualificationDetails) content.GetValueForProperty("OperationQualificationDetail",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetail, Sample.API.Models.OperationQualificationDetailsTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetails = (Sample.API.Models.IOperationQualificationDetails) content.GetValueForProperty("OperationQualificationDetails",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetails, Sample.API.Models.OperationQualificationDetailsTypeConverter.ConvertFrom);
             }
             if (content.Contains("RecoveryResource"))
             {
@@ -152,13 +144,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailQualificationState = (string) content.GetValueForProperty("OperationQualificationDetailQualificationState",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailQualificationState, global::System.Convert.ToString);
             }
-            if (content.Contains("OperationQualificationDetailNotQualifiedReason"))
+            if (content.Contains("OperationQualificationDetailNotQualifiedReasons"))
             {
-                ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailNotQualifiedReason = (System.Collections.Generic.List<string>) content.GetValueForProperty("OperationQualificationDetailNotQualifiedReason",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailNotQualifiedReason, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailNotQualifiedReasons = (System.Collections.Generic.List<string>) content.GetValueForProperty("OperationQualificationDetailNotQualifiedReasons",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailNotQualifiedReasons, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("OperationQualificationDetailResourceFeasibilityReview"))
+            if (content.Contains("OperationQualificationDetailResourceFeasibilityReviews"))
             {
-                ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailResourceFeasibilityReview = (System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview>) content.GetValueForProperty("OperationQualificationDetailResourceFeasibilityReview",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailResourceFeasibilityReview, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceFeasibilityReview>(__y, Sample.API.Models.ResourceFeasibilityReviewTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailResourceFeasibilityReviews = (System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview>) content.GetValueForProperty("OperationQualificationDetailResourceFeasibilityReviews",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailResourceFeasibilityReviews, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceFeasibilityReview>(__y, Sample.API.Models.ResourceFeasibilityReviewTypeConverter.ConvertFrom));
             }
             AfterDeserializePSObject(content);
         }
@@ -167,18 +159,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Details of resource and its qualification for an operation
     [System.ComponentModel.TypeConverter(typeof(RecoveryResourceQualificationTypeConverter))]

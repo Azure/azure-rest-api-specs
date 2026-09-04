@@ -80,7 +80,7 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != this._tag ? (Sample.API.Runtime.Json.JsonNode) this._tag.ToJson(null,serializationMode) : null, "tags" ,container.Add );
+            AddIf( null != this._tags ? (Sample.API.Runtime.Json.JsonNode) this._tags.ToJson(null,serializationMode) : null, "tags" ,container.Add );
             AfterToJson(ref container);
             return container;
         }
@@ -97,7 +97,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_tag = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("tags"), out var __jsonTags) ? Sample.API.Models.UsagePlanTagsUpdateTags.FromJson(__jsonTags) : _tag;}
+            {_tags = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("tags"), out var __jsonTags) ? Sample.API.Models.UsagePlanTagsUpdateTags.FromJson(__jsonTags) : _tags;}
             AfterFromJson(json);
         }
     }

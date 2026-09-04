@@ -11,20 +11,20 @@ namespace Sample.API.Models
         Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal
     {
 
-        /// <summary>Backing field for <see cref="ChaosResourceIdentityForFault" /> property.</summary>
-        private Sample.API.Models.IAssociatedIdentityUpdate _chaosResourceIdentityForFault;
-
-        /// <summary>Identity to be used by the Chaos Resource for invoking faults on resources.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IAssociatedIdentityUpdate ChaosResourceIdentityForFault { get => (this._chaosResourceIdentityForFault = this._chaosResourceIdentityForFault ?? new Sample.API.Models.AssociatedIdentityUpdate()); set => this._chaosResourceIdentityForFault = value; }
-
         /// <summary>Identity type linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ChaosResourceIdentityForFaultType { get => ((Sample.API.Models.IAssociatedIdentityUpdateInternal)ChaosResourceIdentityForFault).Type; set => ((Sample.API.Models.IAssociatedIdentityUpdateInternal)ChaosResourceIdentityForFault).Type = value ?? null; }
+        public string ChaosResourceIdentityForFaultType { get => ((Sample.API.Models.IAssociatedIdentityUpdateInternal)ChaosResourceIdentityForFaults).Type; set => ((Sample.API.Models.IAssociatedIdentityUpdateInternal)ChaosResourceIdentityForFaults).Type = value ?? null; }
 
         /// <summary>User assigned identity id linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ChaosResourceIdentityForFaultUserAssignedIdentity { get => ((Sample.API.Models.IAssociatedIdentityUpdateInternal)ChaosResourceIdentityForFault).UserAssignedIdentity; set => ((Sample.API.Models.IAssociatedIdentityUpdateInternal)ChaosResourceIdentityForFault).UserAssignedIdentity = value ?? null; }
+        public string ChaosResourceIdentityForFaultUserAssignedIdentity { get => ((Sample.API.Models.IAssociatedIdentityUpdateInternal)ChaosResourceIdentityForFaults).UserAssignedIdentity; set => ((Sample.API.Models.IAssociatedIdentityUpdateInternal)ChaosResourceIdentityForFaults).UserAssignedIdentity = value ?? null; }
+
+        /// <summary>Backing field for <see cref="ChaosResourceIdentityForFaults" /> property.</summary>
+        private Sample.API.Models.IAssociatedIdentityUpdate _chaosResourceIdentityForFaults;
+
+        /// <summary>Identity to be used by the Chaos Resource for invoking faults on resources.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
+        internal Sample.API.Models.IAssociatedIdentityUpdate ChaosResourceIdentityForFaults { get => (this._chaosResourceIdentityForFaults = this._chaosResourceIdentityForFaults ?? new Sample.API.Models.AssociatedIdentityUpdate()); set => this._chaosResourceIdentityForFaults = value; }
 
         /// <summary>Backing field for <see cref="Identity" /> property.</summary>
         private Sample.API.Models.IAssociatedIdentityUpdate _identity;
@@ -41,8 +41,8 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
         public string IdentityUserAssignedIdentity { get => ((Sample.API.Models.IAssociatedIdentityUpdateInternal)Identity).UserAssignedIdentity; set => ((Sample.API.Models.IAssociatedIdentityUpdateInternal)Identity).UserAssignedIdentity = value ?? null; }
 
-        /// <summary>Internal Acessors for ChaosResourceIdentityForFault</summary>
-        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal.ChaosResourceIdentityForFault { get => (this._chaosResourceIdentityForFault = this._chaosResourceIdentityForFault ?? new Sample.API.Models.AssociatedIdentityUpdate()); set { {_chaosResourceIdentityForFault = value;} } }
+        /// <summary>Internal Acessors for ChaosResourceIdentityForFaults</summary>
+        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal.ChaosResourceIdentityForFaults { get => (this._chaosResourceIdentityForFaults = this._chaosResourceIdentityForFaults ?? new Sample.API.Models.AssociatedIdentityUpdate()); set { {_chaosResourceIdentityForFaults = value;} } }
 
         /// <summary>Internal Acessors for Identity</summary>
         Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal.Identity { get => (this._identity = this._identity ?? new Sample.API.Models.AssociatedIdentityUpdate()); set { {_identity = value;} } }
@@ -109,13 +109,13 @@ namespace Sample.API.Models
     internal partial interface IChaosResourcePropertiesOfDrillUpdateInternal
 
     {
-        /// <summary>Identity to be used by the Chaos Resource for invoking faults on resources.</summary>
-        Sample.API.Models.IAssociatedIdentityUpdate ChaosResourceIdentityForFault { get; set; }
         /// <summary>Identity type linked with the resource</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
         string ChaosResourceIdentityForFaultType { get; set; }
         /// <summary>User assigned identity id linked with the resource</summary>
         string ChaosResourceIdentityForFaultUserAssignedIdentity { get; set; }
+        /// <summary>Identity to be used by the Chaos Resource for invoking faults on resources.</summary>
+        Sample.API.Models.IAssociatedIdentityUpdate ChaosResourceIdentityForFaults { get; set; }
         /// <summary>Identity to use for Chaos Resource operations.</summary>
         Sample.API.Models.IAssociatedIdentityUpdate Identity { get; set; }
         /// <summary>Identity type linked with the resource</summary>

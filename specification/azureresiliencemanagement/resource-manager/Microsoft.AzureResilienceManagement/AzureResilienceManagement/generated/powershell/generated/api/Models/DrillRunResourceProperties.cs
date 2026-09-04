@@ -24,10 +24,6 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public global::System.DateTime? EndTime { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).EndTime; }
 
-        /// <summary>Details of any errors that occurred during the execution of this job.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        internal Sample.API.Models.IJobErrorInfo ErrorDetail { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetail; set => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetail = value ?? null /* model class */; }
-
         /// <summary>A code representing the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public string ErrorDetailErrorCode { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetailErrorCode; }
@@ -38,7 +34,11 @@ namespace Sample.API.Models
 
         /// <summary>A list of recommendations to resolve the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public System.Collections.Generic.List<string> ErrorDetailRecommendation { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetailRecommendation; }
+        public System.Collections.Generic.List<string> ErrorDetailRecommendations { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetailRecommendations; }
+
+        /// <summary>Details of any errors that occurred during the execution of this job.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
+        internal Sample.API.Models.IJobErrorInfo ErrorDetails { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetails; set => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetails = value ?? null /* model class */; }
 
         /// <summary>Additional information about the job.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
@@ -81,7 +81,7 @@ namespace Sample.API.Models
 
         /// <summary>Details of any retries that have been attempted for this job.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> RetryDetail { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).RetryDetail; set => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).RetryDetail = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> RetryDetails { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).RetryDetails; set => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).RetryDetails = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ProvisioningState</summary>
         string Sample.API.Models.IDrillRunResourcePropertiesInternal.ProvisioningState { get => this._provisioningState; set { {_provisioningState = value;} } }
@@ -92,17 +92,17 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for EndTime</summary>
         global::System.DateTime? Sample.API.Models.IJobResourcePropertiesInternal.EndTime { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).EndTime; set => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).EndTime = value ?? default(global::System.DateTime); }
 
-        /// <summary>Internal Acessors for ErrorDetail</summary>
-        Sample.API.Models.IJobErrorInfo Sample.API.Models.IJobResourcePropertiesInternal.ErrorDetail { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetail; set => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetail = value ?? null /* model class */; }
-
         /// <summary>Internal Acessors for ErrorDetailErrorCode</summary>
         string Sample.API.Models.IJobResourcePropertiesInternal.ErrorDetailErrorCode { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetailErrorCode; set => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetailErrorCode = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailErrorMessage</summary>
         string Sample.API.Models.IJobResourcePropertiesInternal.ErrorDetailErrorMessage { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetailErrorMessage; set => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetailErrorMessage = value ?? null; }
 
-        /// <summary>Internal Acessors for ErrorDetailRecommendation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IJobResourcePropertiesInternal.ErrorDetailRecommendation { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetailRecommendation; set => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetailRecommendation = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for ErrorDetailRecommendations</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IJobResourcePropertiesInternal.ErrorDetailRecommendations { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetailRecommendations; set => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetailRecommendations = value ?? null /* arrayOf */; }
+
+        /// <summary>Internal Acessors for ErrorDetails</summary>
+        Sample.API.Models.IJobErrorInfo Sample.API.Models.IJobResourcePropertiesInternal.ErrorDetails { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetails; set => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).ErrorDetails = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for JobExtendedInfo</summary>
         Sample.API.Models.IJobExtendedInfo Sample.API.Models.IJobResourcePropertiesInternal.JobExtendedInfo { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).JobExtendedInfo; set => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).JobExtendedInfo = value ?? null /* model class */; }
@@ -134,8 +134,8 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for TaskName</summary>
         string Sample.API.Models.IJobResourcePropertiesInternal.TaskName { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).TaskName; set => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).TaskName = value ?? null; }
 
-        /// <summary>Internal Acessors for UserComment</summary>
-        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> Sample.API.Models.IJobResourcePropertiesInternal.UserComment { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).UserComment; set => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).UserComment = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for UserComments</summary>
+        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> Sample.API.Models.IJobResourcePropertiesInternal.UserComments { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).UserComments; set => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).UserComments = value ?? null /* arrayOf */; }
 
         /// <summary>The start time of the job execution.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
@@ -155,7 +155,7 @@ namespace Sample.API.Models
 
         /// <summary>User Comments.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComment { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).UserComment; }
+        public System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComments { get => ((Sample.API.Models.IJobResourcePropertiesInternal)__jobResourceProperties).UserComments; }
 
         /// <summary>Creates an new <see cref="DrillRunResourceProperties" /> instance.</summary>
         public DrillRunResourceProperties()

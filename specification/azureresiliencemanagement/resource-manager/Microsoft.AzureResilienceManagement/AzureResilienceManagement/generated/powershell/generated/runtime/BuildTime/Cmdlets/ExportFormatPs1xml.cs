@@ -23,7 +23,7 @@ namespace Sample.API.Runtime.PowerShell
     private const string SupportNamespace = @"${$project.supportNamespace.fullName}";
     private const string PropertiesExcludedForTableview = @"";
 
-    private static readonly bool IsAzure = Convert.ToBoolean(@"true");
+    private static readonly bool IsAzure = Convert.ToBoolean(@"false");
 
     private static string SelectedBySuffix = @"#Multiple";
     

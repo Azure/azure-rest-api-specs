@@ -81,7 +81,7 @@ namespace Sample.API.Models
             {_percentComplete = If( json?.PropertyT<Sample.API.Runtime.Json.JsonNumber>("percentComplete"), out var __jsonPercentComplete) ? (float?)__jsonPercentComplete : _percentComplete;}
             {_startTime = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("startTime"), out var __jsonStartTime) ? global::System.DateTime.TryParse((string)__jsonStartTime, global::System.Globalization.CultureInfo.InvariantCulture, global::System.Globalization.DateTimeStyles.AdjustToUniversal, out var __jsonStartTimeValue) ? __jsonStartTimeValue : _startTime : _startTime;}
             {_endTime = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("endTime"), out var __jsonEndTime) ? global::System.DateTime.TryParse((string)__jsonEndTime, global::System.Globalization.CultureInfo.InvariantCulture, global::System.Globalization.DateTimeStyles.AdjustToUniversal, out var __jsonEndTimeValue) ? __jsonEndTimeValue : _endTime : _endTime;}
-            {_operation = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("operations"), out var __jsonOperations) ? If( __jsonOperations as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IOperationStatusResult>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IOperationStatusResult) (Sample.API.Models.OperationStatusResult.FromJson(__u) )) ))() : null : _operation;}
+            {_operations = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("operations"), out var __jsonOperations) ? If( __jsonOperations as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IOperationStatusResult>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IOperationStatusResult) (Sample.API.Models.OperationStatusResult.FromJson(__u) )) ))() : null : _operations;}
             AfterFromJson(json);
         }
 
@@ -115,10 +115,10 @@ namespace Sample.API.Models
             AddIf( null != this._percentComplete ? (Sample.API.Runtime.Json.JsonNode)new Sample.API.Runtime.Json.JsonNumber((float)this._percentComplete) : null, "percentComplete" ,container.Add );
             AddIf( null != this._startTime ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._startTime?.ToString(@"yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK",global::System.Globalization.CultureInfo.InvariantCulture)) : null, "startTime" ,container.Add );
             AddIf( null != this._endTime ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._endTime?.ToString(@"yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK",global::System.Globalization.CultureInfo.InvariantCulture)) : null, "endTime" ,container.Add );
-            if (null != this._operation)
+            if (null != this._operations)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._operation )
+                foreach( var __x in this._operations )
                 {
                     AddIf(__x?.ToJson(null, serializationMode) ,__w.Add);
                 }

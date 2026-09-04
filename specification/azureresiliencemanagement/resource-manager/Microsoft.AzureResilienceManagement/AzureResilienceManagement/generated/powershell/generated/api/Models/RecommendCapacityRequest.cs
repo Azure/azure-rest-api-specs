@@ -14,15 +14,15 @@ namespace Sample.API.Models
         Sample.API.Models.IRecommendCapacityRequestInternal
     {
 
-        /// <summary>Backing field for <see cref="ResourceId" /> property.</summary>
-        private System.Collections.Generic.List<string> _resourceId;
+        /// <summary>Backing field for <see cref="ResourceIds" /> property.</summary>
+        private System.Collections.Generic.List<string> _resourceIds;
 
         /// <summary>
         /// Azure resource IDs to evaluate for resiliency. Pass an empty array to automatically discover and evaluate non-resilient
         /// resources in the service group. Maximum 50 resources per request.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> ResourceId { get => this._resourceId; set => this._resourceId = value; }
+        public System.Collections.Generic.List<string> ResourceIds { get => this._resourceIds; set => this._resourceIds = value; }
 
         /// <summary>Creates an new <see cref="RecommendCapacityRequest" /> instance.</summary>
         public RecommendCapacityRequest()
@@ -48,7 +48,7 @@ namespace Sample.API.Models
         Description = @"Azure resource IDs to evaluate for resiliency. Pass an empty array to automatically discover and evaluate non-resilient resources in the service group. Maximum 50 resources per request.",
         SerializedName = @"resourceIds",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> ResourceId { get; set; }
+        System.Collections.Generic.List<string> ResourceIds { get; set; }
 
     }
     /// Request body for the recommend capacity action. Provide specific resource IDs to evaluate, or pass an empty array to let
@@ -60,7 +60,7 @@ namespace Sample.API.Models
         /// Azure resource IDs to evaluate for resiliency. Pass an empty array to automatically discover and evaluate non-resilient
         /// resources in the service group. Maximum 50 resources per request.
         /// </summary>
-        System.Collections.Generic.List<string> ResourceId { get; set; }
+        System.Collections.Generic.List<string> ResourceIds { get; set; }
 
     }
 }

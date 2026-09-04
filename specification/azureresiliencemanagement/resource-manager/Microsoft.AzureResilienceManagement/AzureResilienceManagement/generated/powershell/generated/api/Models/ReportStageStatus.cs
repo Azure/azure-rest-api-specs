@@ -49,7 +49,7 @@ namespace Sample.API.Models
 
         /// <summary>A list of recommendations to resolve the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> LastErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)LastError).Recommendation; }
+        public System.Collections.Generic.List<string> LastErrorRecommendations { get => ((Sample.API.Models.IErrorDetailsInternal)LastError).Recommendations; }
 
         /// <summary>Internal Acessors for GenerationStatus</summary>
         string Sample.API.Models.IReportStageStatusInternal.GenerationStatus { get => this._generationStatus; set { {_generationStatus = value;} } }
@@ -66,8 +66,8 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for LastErrorMessage</summary>
         string Sample.API.Models.IReportStageStatusInternal.LastErrorMessage { get => ((Sample.API.Models.IErrorDetailsInternal)LastError).Message; set => ((Sample.API.Models.IErrorDetailsInternal)LastError).Message = value ?? null; }
 
-        /// <summary>Internal Acessors for LastErrorRecommendation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IReportStageStatusInternal.LastErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)LastError).Recommendation; set => ((Sample.API.Models.IErrorDetailsInternal)LastError).Recommendation = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for LastErrorRecommendations</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IReportStageStatusInternal.LastErrorRecommendations { get => ((Sample.API.Models.IErrorDetailsInternal)LastError).Recommendations; set => ((Sample.API.Models.IErrorDetailsInternal)LastError).Recommendations = value ?? null /* arrayOf */; }
 
         /// <summary>Creates an new <see cref="ReportStageStatus" /> instance.</summary>
         public ReportStageStatus()
@@ -146,7 +146,7 @@ namespace Sample.API.Models
         Description = @"A list of recommendations to resolve the error.",
         SerializedName = @"recommendations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> LastErrorRecommendation { get;  }
+        System.Collections.Generic.List<string> LastErrorRecommendations { get;  }
 
     }
     /// Report generation status for a single Drill Run stage.
@@ -168,7 +168,7 @@ namespace Sample.API.Models
         /// <summary>Error message.</summary>
         string LastErrorMessage { get; set; }
         /// <summary>A list of recommendations to resolve the error.</summary>
-        System.Collections.Generic.List<string> LastErrorRecommendation { get; set; }
+        System.Collections.Generic.List<string> LastErrorRecommendations { get; set; }
 
     }
 }

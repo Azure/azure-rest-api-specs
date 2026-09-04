@@ -73,11 +73,11 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_errorDetail = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("errorDetails"), out var __jsonErrorDetails) ? Sample.API.Models.ErrorDetail.FromJson(__jsonErrorDetails) : _errorDetail;}
+            {_errorDetails = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("errorDetails"), out var __jsonErrorDetails) ? Sample.API.Models.ErrorDetail.FromJson(__jsonErrorDetails) : _errorDetails;}
             {_goalTemplateId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("goalTemplateId"), out var __jsonGoalTemplateId) ? (string)__jsonGoalTemplateId : (string)_goalTemplateId;}
             {_goalAssignmentType = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("goalAssignmentType"), out var __jsonGoalAssignmentType) ? (string)__jsonGoalAssignmentType : (string)_goalAssignmentType;}
             {_requireZonalResiliency = If( json?.PropertyT<Sample.API.Runtime.Json.JsonBoolean>("requireZonalResiliency"), out var __jsonRequireZonalResiliency) ? (bool?)__jsonRequireZonalResiliency : _requireZonalResiliency;}
-            {_serviceLevelResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("serviceLevelResources"), out var __jsonServiceLevelResources) ? If( __jsonServiceLevelResources as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IServiceLevelResource) (Sample.API.Models.ServiceLevelResource.FromJson(__u) )) ))() : null : _serviceLevelResource;}
+            {_serviceLevelResources = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("serviceLevelResources"), out var __jsonServiceLevelResources) ? If( __jsonServiceLevelResources as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IServiceLevelResource) (Sample.API.Models.ServiceLevelResource.FromJson(__u) )) ))() : null : _serviceLevelResources;}
             {_provisioningState = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("provisioningState"), out var __jsonProvisioningState) ? (string)__jsonProvisioningState : (string)_provisioningState;}
             AfterFromJson(json);
         }
@@ -103,15 +103,15 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                AddIf( null != this._errorDetail ? (Sample.API.Runtime.Json.JsonNode) this._errorDetail.ToJson(null,serializationMode) : null, "errorDetails" ,container.Add );
+                AddIf( null != this._errorDetails ? (Sample.API.Runtime.Json.JsonNode) this._errorDetails.ToJson(null,serializationMode) : null, "errorDetails" ,container.Add );
             }
             AddIf( null != (((object)this._goalTemplateId)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._goalTemplateId.ToString()) : null, "goalTemplateId" ,container.Add );
             AddIf( null != (((object)this._goalAssignmentType)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._goalAssignmentType.ToString()) : null, "goalAssignmentType" ,container.Add );
             AddIf( null != this._requireZonalResiliency ? (Sample.API.Runtime.Json.JsonNode)new Sample.API.Runtime.Json.JsonBoolean((bool)this._requireZonalResiliency) : null, "requireZonalResiliency" ,container.Add );
-            if (null != this._serviceLevelResource)
+            if (null != this._serviceLevelResources)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._serviceLevelResource )
+                foreach( var __x in this._serviceLevelResources )
                 {
                     AddIf(__x?.ToJson(null, serializationMode) ,__w.Add);
                 }

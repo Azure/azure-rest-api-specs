@@ -93,12 +93,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public string SystemDataLastModifiedByType { get => ((Sample.API.Models.IResourceInternal)__resource).SystemDataLastModifiedByType; }
 
-        /// <summary>Backing field for <see cref="Tag" /> property.</summary>
-        private Sample.API.Models.ITrackedResourceTags _tag;
+        /// <summary>Backing field for <see cref="Tags" /> property.</summary>
+        private Sample.API.Models.ITrackedResourceTags _tags;
 
         /// <summary>Resource tags.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public Sample.API.Models.ITrackedResourceTags Tag { get => (this._tag = this._tag ?? new Sample.API.Models.TrackedResourceTags()); set => this._tag = value; }
+        public Sample.API.Models.ITrackedResourceTags Tags { get => (this._tags = this._tags ?? new Sample.API.Models.TrackedResourceTags()); set => this._tags = value; }
 
         /// <summary>
         /// The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
@@ -150,7 +150,7 @@ namespace Sample.API.Models
         Description = @"Resource tags.",
         SerializedName = @"tags",
         PossibleTypes = new [] { typeof(Sample.API.Models.ITrackedResourceTags) })]
-        Sample.API.Models.ITrackedResourceTags Tag { get; set; }
+        Sample.API.Models.ITrackedResourceTags Tags { get; set; }
 
     }
     /// The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'
@@ -160,7 +160,7 @@ namespace Sample.API.Models
         /// <summary>The geo-location where the resource lives</summary>
         string Location { get; set; }
         /// <summary>Resource tags.</summary>
-        Sample.API.Models.ITrackedResourceTags Tag { get; set; }
+        Sample.API.Models.ITrackedResourceTags Tags { get; set; }
 
     }
 }

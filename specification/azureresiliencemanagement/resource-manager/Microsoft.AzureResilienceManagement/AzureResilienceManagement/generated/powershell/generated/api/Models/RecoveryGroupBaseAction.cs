@@ -27,14 +27,14 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string Name { get => this._name; set => this._name = value; }
 
-        /// <summary>Backing field for <see cref="TimeoutInMinute" /> property.</summary>
-        private int _timeoutInMinute;
+        /// <summary>Backing field for <see cref="TimeoutInMinutes" /> property.</summary>
+        private int _timeoutInMinutes;
 
         /// <summary>
         /// The maximum amount of time, in minutes, allowed for the action to complete before it times out.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public int TimeoutInMinute { get => this._timeoutInMinute; set => this._timeoutInMinute = value; }
+        public int TimeoutInMinutes { get => this._timeoutInMinutes; set => this._timeoutInMinutes = value; }
 
         /// <summary>Backing field for <see cref="Type" /> property.</summary>
         private string _type;
@@ -89,7 +89,7 @@ namespace Sample.API.Models
         Description = @"The maximum amount of time, in minutes, allowed for the action to complete before it times out.",
         SerializedName = @"timeoutInMinutes",
         PossibleTypes = new [] { typeof(int) })]
-        int TimeoutInMinute { get; set; }
+        int TimeoutInMinutes { get; set; }
         /// <summary>The type of the recovery orchestration group action.</summary>
         [Sample.API.Runtime.Info(
         Required = true,
@@ -117,7 +117,7 @@ namespace Sample.API.Models
         /// <summary>
         /// The maximum amount of time, in minutes, allowed for the action to complete before it times out.
         /// </summary>
-        int TimeoutInMinute { get; set; }
+        int TimeoutInMinutes { get; set; }
         /// <summary>The type of the recovery orchestration group action.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("ManualAction", "CustomRunbook")]
         string Type { get; set; }

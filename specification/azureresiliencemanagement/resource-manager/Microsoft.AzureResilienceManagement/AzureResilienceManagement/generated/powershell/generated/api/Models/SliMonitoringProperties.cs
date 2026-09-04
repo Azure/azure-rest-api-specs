@@ -34,15 +34,15 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for Identity</summary>
         Sample.API.Models.IAssociatedIdentity Sample.API.Models.ISliMonitoringPropertiesInternal.Identity { get => (this._identity = this._identity ?? new Sample.API.Models.AssociatedIdentity()); set { {_identity = value;} } }
 
-        /// <summary>Backing field for <see cref="Sli" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.ISliSelection> _sli;
+        /// <summary>Backing field for <see cref="Slis" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.ISliSelection> _slis;
 
         /// <summary>
         /// The SLIs selected for Drill monitoring. Maximum of two entries: at most one Availability and one Latency. Duplicate types
         /// or duplicate SLI Ids are rejected.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.ISliSelection> Sli { get => this._sli; set => this._sli = value; }
+        public System.Collections.Generic.List<Sample.API.Models.ISliSelection> Slis { get => this._slis; set => this._slis = value; }
 
         /// <summary>Creates an new <see cref="SliMonitoringProperties" /> instance.</summary>
         public SliMonitoringProperties()
@@ -90,7 +90,7 @@ namespace Sample.API.Models
         Description = @"The SLIs selected for Drill monitoring. Maximum of two entries: at most one Availability and one Latency. Duplicate types or duplicate SLI Ids are rejected.",
         SerializedName = @"slis",
         PossibleTypes = new [] { typeof(Sample.API.Models.ISliSelection) })]
-        System.Collections.Generic.List<Sample.API.Models.ISliSelection> Sli { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.ISliSelection> Slis { get; set; }
 
     }
     /// SLI monitoring properties of a Drill. At most two SLIs may be selected: at most one Availability and one Latency.
@@ -111,7 +111,7 @@ namespace Sample.API.Models
         /// The SLIs selected for Drill monitoring. Maximum of two entries: at most one Availability and one Latency. Duplicate types
         /// or duplicate SLI Ids are rejected.
         /// </summary>
-        System.Collections.Generic.List<Sample.API.Models.ISliSelection> Sli { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.ISliSelection> Slis { get; set; }
 
     }
 }

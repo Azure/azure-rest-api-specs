@@ -18,15 +18,15 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string InitialConfig { get => this._initialConfig; set => this._initialConfig = value; }
 
-        /// <summary>Backing field for <see cref="ResourceTypeCategory" /> property.</summary>
-        private System.Collections.Generic.List<string> _resourceTypeCategory;
+        /// <summary>Backing field for <see cref="ResourceTypeCategories" /> property.</summary>
+        private System.Collections.Generic.List<string> _resourceTypeCategories;
 
         /// <summary>An indication whether a intrested resource type is present in drill resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> ResourceTypeCategory { get => this._resourceTypeCategory; }
+        public System.Collections.Generic.List<string> ResourceTypeCategories { get => this._resourceTypeCategories; }
 
-        /// <summary>Internal Acessors for ResourceTypeCategory</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.ISystemMetadataInternal.ResourceTypeCategory { get => this._resourceTypeCategory; set { {_resourceTypeCategory = value;} } }
+        /// <summary>Internal Acessors for ResourceTypeCategories</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.ISystemMetadataInternal.ResourceTypeCategories { get => this._resourceTypeCategories; set { {_resourceTypeCategories = value;} } }
 
         /// <summary>Creates an new <see cref="SystemMetadata" /> instance.</summary>
         public SystemMetadata()
@@ -61,7 +61,7 @@ namespace Sample.API.Models
         SerializedName = @"resourceTypeCategories",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("AzureSiteRecoveryVMsPresent")]
-        System.Collections.Generic.List<string> ResourceTypeCategory { get;  }
+        System.Collections.Generic.List<string> ResourceTypeCategories { get;  }
 
     }
     /// Internal System Metadata, to be used by internal components only.
@@ -73,7 +73,7 @@ namespace Sample.API.Models
         string InitialConfig { get; set; }
         /// <summary>An indication whether a intrested resource type is present in drill resource.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("AzureSiteRecoveryVMsPresent")]
-        System.Collections.Generic.List<string> ResourceTypeCategory { get; set; }
+        System.Collections.Generic.List<string> ResourceTypeCategories { get; set; }
 
     }
 }

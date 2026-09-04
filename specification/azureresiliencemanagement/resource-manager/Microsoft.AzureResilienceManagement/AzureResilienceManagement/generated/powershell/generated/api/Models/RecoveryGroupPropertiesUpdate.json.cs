@@ -76,8 +76,8 @@ namespace Sample.API.Models
             {_groupUniqueId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("groupUniqueId"), out var __jsonGroupUniqueId) ? (string)__jsonGroupUniqueId : (string)_groupUniqueId;}
             {_orderId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonNumber>("orderId"), out var __jsonOrderId) ? (int?)__jsonOrderId : _orderId;}
             {_description = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("description"), out var __jsonDescription) ? (string)__jsonDescription : (string)_description;}
-            {_preAction = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("preActions"), out var __jsonPreActions) ? If( __jsonPreActions as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IRecoveryGroupBaseAction) (Sample.API.Models.RecoveryGroupBaseAction.FromJson(__u) )) ))() : null : _preAction;}
-            {_postAction = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("postActions"), out var __jsonPostActions) ? If( __jsonPostActions as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(Sample.API.Models.IRecoveryGroupBaseAction) (Sample.API.Models.RecoveryGroupBaseAction.FromJson(__p) )) ))() : null : _postAction;}
+            {_preActions = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("preActions"), out var __jsonPreActions) ? If( __jsonPreActions as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IRecoveryGroupBaseAction) (Sample.API.Models.RecoveryGroupBaseAction.FromJson(__u) )) ))() : null : _preActions;}
+            {_postActions = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("postActions"), out var __jsonPostActions) ? If( __jsonPostActions as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(Sample.API.Models.IRecoveryGroupBaseAction) (Sample.API.Models.RecoveryGroupBaseAction.FromJson(__p) )) ))() : null : _postActions;}
             AfterFromJson(json);
         }
 
@@ -103,19 +103,19 @@ namespace Sample.API.Models
             AddIf( null != (((object)this._groupUniqueId)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._groupUniqueId.ToString()) : null, "groupUniqueId" ,container.Add );
             AddIf( null != this._orderId ? (Sample.API.Runtime.Json.JsonNode)new Sample.API.Runtime.Json.JsonNumber((int)this._orderId) : null, "orderId" ,container.Add );
             AddIf( null != (((object)this._description)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._description.ToString()) : null, "description" ,container.Add );
-            if (null != this._preAction)
+            if (null != this._preActions)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._preAction )
+                foreach( var __x in this._preActions )
                 {
                     AddIf(__x?.ToJson(null, serializationMode) ,__w.Add);
                 }
                 container.Add("preActions",__w);
             }
-            if (null != this._postAction)
+            if (null != this._postActions)
             {
                 var __r = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __s in this._postAction )
+                foreach( var __s in this._postActions )
                 {
                     AddIf(__s?.ToJson(null, serializationMode) ,__r.Add);
                 }

@@ -31,7 +31,7 @@ namespace Sample.API.Runtime.PowerShell
         [Parameter(Mandatory = true)]
         public Guid ModuleGuid { get; set; }
 
-        private static readonly bool IsAzure = Convert.ToBoolean(@"true");
+        private static readonly bool IsAzure = Convert.ToBoolean(@"false");
         private const string CustomFolderRelative = "./custom";
         private const string Indent = Psd1Indent;
         private const string Undefined = "undefined";
@@ -71,7 +71,7 @@ namespace Sample.API.Runtime.PowerShell
                 var sb = new StringBuilder();
                 sb.AppendLine("@{");
                 sb.AppendLine($@"{GuidStart} = '{ModuleGuid}'");
-                sb.AppendLine($@"{Indent}RootModule = '{"./Az.AzureResilienceManagement.psm1"}'");
+                sb.AppendLine($@"{Indent}RootModule = '{"./Az.ResilienceManagement.psm1"}'");
                 sb.AppendLine($@"{Indent}ModuleVersion = '{version}'");
                 sb.AppendLine($@"{Indent}CompatiblePSEditions = 'Core', 'Desktop'");
                 sb.AppendLine($@"{Indent}Author = '{""}'");
@@ -94,7 +94,7 @@ namespace Sample.API.Runtime.PowerShell
                 }
                 else
                 {
-                    sb.AppendLine($@"{Indent}RequiredAssemblies = '{"./bin/Az.AzureResilienceManagement.private.dll"}'");
+                    sb.AppendLine($@"{Indent}RequiredAssemblies = '{"./bin/Az.ResilienceManagement.private.dll"}'");
                 }
 
                 // NestedModules
@@ -113,7 +113,7 @@ namespace Sample.API.Runtime.PowerShell
                     var customFormatPs1xmlFiles = Directory.GetFiles(CustomFolder)
                         .Where(f => f.EndsWith(".format.ps1xml"))
                         .Select(f => $"{CustomFolderRelative}/{Path.GetFileName(f)}");
-                    var formatList = customFormatPs1xmlFiles.Prepend("./Az.AzureResilienceManagement.format.ps1xml").ToPsList();
+                    var formatList = customFormatPs1xmlFiles.Prepend("./Az.ResilienceManagement.format.ps1xml").ToPsList();
                     sb.AppendLine($@"{Indent}FormatsToProcess = {formatList}");
                 }
 

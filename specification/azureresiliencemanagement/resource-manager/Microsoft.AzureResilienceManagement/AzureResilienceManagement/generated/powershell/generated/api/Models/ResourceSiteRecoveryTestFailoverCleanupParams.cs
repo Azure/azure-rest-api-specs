@@ -11,12 +11,12 @@ namespace Sample.API.Models
         Sample.API.Models.IResourceSiteRecoveryTestFailoverCleanupParamsInternal
     {
 
-        /// <summary>Backing field for <see cref="Comment" /> property.</summary>
-        private string _comment;
+        /// <summary>Backing field for <see cref="Comments" /> property.</summary>
+        private string _comments;
 
         /// <summary>Comments for testfailover cleanup</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string Comment { get => this._comment; set => this._comment = value; }
+        public string Comments { get => this._comments; set => this._comments = value; }
 
         /// <summary>
         /// Creates an new <see cref="ResourceSiteRecoveryTestFailoverCleanupParams" /> instance.
@@ -40,7 +40,7 @@ namespace Sample.API.Models
         Description = @"Comments for testfailover cleanup",
         SerializedName = @"comments",
         PossibleTypes = new [] { typeof(string) })]
-        string Comment { get; set; }
+        string Comments { get; set; }
 
     }
     /// Definition of recovery resource reprotect params for site recovery solution.
@@ -48,7 +48,7 @@ namespace Sample.API.Models
 
     {
         /// <summary>Comments for testfailover cleanup</summary>
-        string Comment { get; set; }
+        string Comments { get; set; }
 
     }
 }

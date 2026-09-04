@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.DrillResourceAttentionReason"
         /// />.
         /// </summary>
@@ -100,13 +92,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).FaultRbacOnTargetResource = (string) content.GetValueForProperty("FaultRbacOnTargetResource",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).FaultRbacOnTargetResource, global::System.Convert.ToString);
             }
-            if (content.Contains("RunbookFaultRbacOnTarget"))
+            if (content.Contains("RunbookFaultRbacOnTargets"))
             {
-                ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).RunbookFaultRbacOnTarget = (string) content.GetValueForProperty("RunbookFaultRbacOnTarget",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).RunbookFaultRbacOnTarget, global::System.Convert.ToString);
+                ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).RunbookFaultRbacOnTargets = (string) content.GetValueForProperty("RunbookFaultRbacOnTargets",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).RunbookFaultRbacOnTargets, global::System.Convert.ToString);
             }
-            if (content.Contains("MonitoringRbacOnTarget"))
+            if (content.Contains("MonitoringRbacOnTargets"))
             {
-                ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).MonitoringRbacOnTarget = (string) content.GetValueForProperty("MonitoringRbacOnTarget",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).MonitoringRbacOnTarget, global::System.Convert.ToString);
+                ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).MonitoringRbacOnTargets = (string) content.GetValueForProperty("MonitoringRbacOnTargets",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).MonitoringRbacOnTargets, global::System.Convert.ToString);
             }
             if (content.Contains("ResourceState"))
             {
@@ -133,13 +125,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).FaultRbacOnTargetResource = (string) content.GetValueForProperty("FaultRbacOnTargetResource",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).FaultRbacOnTargetResource, global::System.Convert.ToString);
             }
-            if (content.Contains("RunbookFaultRbacOnTarget"))
+            if (content.Contains("RunbookFaultRbacOnTargets"))
             {
-                ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).RunbookFaultRbacOnTarget = (string) content.GetValueForProperty("RunbookFaultRbacOnTarget",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).RunbookFaultRbacOnTarget, global::System.Convert.ToString);
+                ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).RunbookFaultRbacOnTargets = (string) content.GetValueForProperty("RunbookFaultRbacOnTargets",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).RunbookFaultRbacOnTargets, global::System.Convert.ToString);
             }
-            if (content.Contains("MonitoringRbacOnTarget"))
+            if (content.Contains("MonitoringRbacOnTargets"))
             {
-                ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).MonitoringRbacOnTarget = (string) content.GetValueForProperty("MonitoringRbacOnTarget",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).MonitoringRbacOnTarget, global::System.Convert.ToString);
+                ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).MonitoringRbacOnTargets = (string) content.GetValueForProperty("MonitoringRbacOnTargets",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).MonitoringRbacOnTargets, global::System.Convert.ToString);
             }
             if (content.Contains("ResourceState"))
             {
@@ -159,18 +151,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Reason why the Drill resource is in NeedsAttention state.
     [System.ComponentModel.TypeConverter(typeof(DrillResourceAttentionReasonTypeConverter))]

@@ -74,7 +74,7 @@ namespace Sample.API.Models
                 return;
             }
             {_defaultGroup = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("defaultGroup"), out var __jsonDefaultGroup) ? Sample.API.Models.RecoveryGroup.FromJson(__jsonDefaultGroup) : _defaultGroup;}
-            {_additionalGroup = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("additionalGroups"), out var __jsonAdditionalGroups) ? If( __jsonAdditionalGroups as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IRecoveryGroup) (Sample.API.Models.RecoveryGroup.FromJson(__u) )) ))() : null : _additionalGroup;}
+            {_additionalGroups = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("additionalGroups"), out var __jsonAdditionalGroups) ? If( __jsonAdditionalGroups as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IRecoveryGroup) (Sample.API.Models.RecoveryGroup.FromJson(__u) )) ))() : null : _additionalGroups;}
             AfterFromJson(json);
         }
 
@@ -98,10 +98,10 @@ namespace Sample.API.Models
                 return container;
             }
             AddIf( null != this._defaultGroup ? (Sample.API.Runtime.Json.JsonNode) this._defaultGroup.ToJson(null,serializationMode) : null, "defaultGroup" ,container.Add );
-            if (null != this._additionalGroup)
+            if (null != this._additionalGroups)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._additionalGroup )
+                foreach( var __x in this._additionalGroups )
                 {
                     AddIf(__x?.ToJson(null, serializationMode) ,__w.Add);
                 }

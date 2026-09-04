@@ -25,23 +25,23 @@ namespace Sample.API.Models
 
         /// <summary>The error additional info.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ErrorDetailAdditionalInfo; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ErrorDetailAdditionalInfo; }
 
         /// <summary>The error code.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailCode { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ErrorDetailCode; }
+        public string ErrorDetailCode { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ErrorDetailCode; }
 
         /// <summary>The error details.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> ErrorDetailDetails { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ErrorDetailDetails; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> ErrorDetailDetails { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ErrorDetailDetails; }
 
         /// <summary>The error message.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailMessage { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ErrorDetailMessage; }
+        public string ErrorDetailMessage { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ErrorDetailMessage; }
 
         /// <summary>The error target.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailTarget { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ErrorDetailTarget; }
+        public string ErrorDetailTarget { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ErrorDetailTarget; }
 
         /// <summary>
         /// Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
@@ -53,20 +53,16 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public string Name { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Name; }
 
-        /// <summary>Backing field for <see cref="Property" /> property.</summary>
-        private Sample.API.Models.IEnrollmentProperties _property;
+        /// <summary>Backing field for <see cref="Properties" /> property.</summary>
+        private Sample.API.Models.IEnrollmentProperties _properties;
 
         /// <summary>The resource-specific properties for this resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IEnrollmentProperties Property { get => (this._property = this._property ?? new Sample.API.Models.EnrollmentProperties()); set => this._property = value; }
+        internal Sample.API.Models.IEnrollmentProperties Properties { get => (this._properties = this._properties ?? new Sample.API.Models.EnrollmentProperties()); set => this._properties = value; }
 
         /// <summary>Provisioning state of the enrollment.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ProvisioningState { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ProvisioningState; }
-
-        /// <summary>Gets the resource group name</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string ResourceGroupName { get => (new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Success ? new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Groups["resourceGroupName"].Value : null); }
+        public string ProvisioningState { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ProvisioningState; }
 
         /// <summary>Backing field for <see cref="RetryAfter" /> property.</summary>
         private int? _retryAfter;
@@ -74,29 +70,29 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public int? RetryAfter { get => this._retryAfter; set => this._retryAfter = value; }
 
-        /// <summary>Internal Acessors for ErrorDetail</summary>
-        Sample.API.Models.IErrorDetail Sample.API.Models.IEnrollmentInternal.ErrorDetail { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ErrorDetail; set => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ErrorDetail = value ?? null /* model class */; }
-
         /// <summary>Internal Acessors for ErrorDetailAdditionalInfo</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IEnrollmentInternal.ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ErrorDetailAdditionalInfo; set => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ErrorDetailAdditionalInfo = value ?? null /* arrayOf */; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IEnrollmentInternal.ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ErrorDetailAdditionalInfo; set => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ErrorDetailAdditionalInfo = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ErrorDetailCode</summary>
-        string Sample.API.Models.IEnrollmentInternal.ErrorDetailCode { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ErrorDetailCode; set => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ErrorDetailCode = value ?? null; }
+        string Sample.API.Models.IEnrollmentInternal.ErrorDetailCode { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ErrorDetailCode; set => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ErrorDetailCode = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailDetails</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IEnrollmentInternal.ErrorDetailDetails { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ErrorDetailDetails; set => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ErrorDetailDetails = value ?? null /* arrayOf */; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IEnrollmentInternal.ErrorDetailDetails { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ErrorDetailDetails; set => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ErrorDetailDetails = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ErrorDetailMessage</summary>
-        string Sample.API.Models.IEnrollmentInternal.ErrorDetailMessage { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ErrorDetailMessage; set => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ErrorDetailMessage = value ?? null; }
+        string Sample.API.Models.IEnrollmentInternal.ErrorDetailMessage { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ErrorDetailMessage; set => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ErrorDetailMessage = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailTarget</summary>
-        string Sample.API.Models.IEnrollmentInternal.ErrorDetailTarget { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ErrorDetailTarget; set => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ErrorDetailTarget = value ?? null; }
+        string Sample.API.Models.IEnrollmentInternal.ErrorDetailTarget { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ErrorDetailTarget; set => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ErrorDetailTarget = value ?? null; }
 
-        /// <summary>Internal Acessors for Property</summary>
-        Sample.API.Models.IEnrollmentProperties Sample.API.Models.IEnrollmentInternal.Property { get => (this._property = this._property ?? new Sample.API.Models.EnrollmentProperties()); set { {_property = value;} } }
+        /// <summary>Internal Acessors for ErrorDetails</summary>
+        Sample.API.Models.IErrorDetail Sample.API.Models.IEnrollmentInternal.ErrorDetails { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ErrorDetails; set => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ErrorDetails = value ?? null /* model class */; }
+
+        /// <summary>Internal Acessors for Properties</summary>
+        Sample.API.Models.IEnrollmentProperties Sample.API.Models.IEnrollmentInternal.Properties { get => (this._properties = this._properties ?? new Sample.API.Models.EnrollmentProperties()); set { {_properties = value;} } }
 
         /// <summary>Internal Acessors for ProvisioningState</summary>
-        string Sample.API.Models.IEnrollmentInternal.ProvisioningState { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ProvisioningState; set => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ProvisioningState = value ?? null; }
+        string Sample.API.Models.IEnrollmentInternal.ProvisioningState { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ProvisioningState; set => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ProvisioningState = value ?? null; }
 
         /// <summary>Internal Acessors for Id</summary>
         string Sample.API.Models.IResourceInternal.Id { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Id; set => ((Sample.API.Models.IResourceInternal)__proxyResource).Id = value ?? null; }
@@ -130,7 +126,7 @@ namespace Sample.API.Models
 
         /// <summary>ARM resource identifier of the service group associated with this usage plan.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ServiceGroupId { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ServiceGroupId; set => ((Sample.API.Models.IEnrollmentPropertiesInternal)Property).ServiceGroupId = value ?? null; }
+        public string ServiceGroupId { get => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ServiceGroupId; set => ((Sample.API.Models.IEnrollmentPropertiesInternal)Properties).ServiceGroupId = value ?? null; }
 
         /// <summary>
         /// Azure Resource Manager metadata containing createdBy and modifiedBy information.
@@ -310,8 +306,6 @@ namespace Sample.API.Models
         Sample.API.Models.IProxyResourceInternal
     {
         string AzureAsyncOperation { get; set; }
-        /// <summary>Details of any errors encountered during Enrollment create or update.</summary>
-        Sample.API.Models.IErrorDetail ErrorDetail { get; set; }
         /// <summary>The error additional info.</summary>
         System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get; set; }
         /// <summary>The error code.</summary>
@@ -322,8 +316,10 @@ namespace Sample.API.Models
         string ErrorDetailMessage { get; set; }
         /// <summary>The error target.</summary>
         string ErrorDetailTarget { get; set; }
+        /// <summary>Details of any errors encountered during Enrollment create or update.</summary>
+        Sample.API.Models.IErrorDetail ErrorDetails { get; set; }
         /// <summary>The resource-specific properties for this resource.</summary>
-        Sample.API.Models.IEnrollmentProperties Property { get; set; }
+        Sample.API.Models.IEnrollmentProperties Properties { get; set; }
         /// <summary>Provisioning state of the enrollment.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }

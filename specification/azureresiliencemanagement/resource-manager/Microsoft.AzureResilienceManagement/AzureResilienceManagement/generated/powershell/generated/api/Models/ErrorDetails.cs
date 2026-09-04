@@ -25,12 +25,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string Message { get => this._message; set => this._message = value; }
 
-        /// <summary>Backing field for <see cref="Recommendation" /> property.</summary>
-        private System.Collections.Generic.List<string> _recommendation;
+        /// <summary>Backing field for <see cref="Recommendations" /> property.</summary>
+        private System.Collections.Generic.List<string> _recommendations;
 
         /// <summary>A list of recommendations to resolve the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> Recommendation { get => this._recommendation; set => this._recommendation = value; }
+        public System.Collections.Generic.List<string> Recommendations { get => this._recommendations; set => this._recommendations = value; }
 
         /// <summary>Creates an new <see cref="ErrorDetails" /> instance.</summary>
         public ErrorDetails()
@@ -74,7 +74,7 @@ namespace Sample.API.Models
         Description = @"A list of recommendations to resolve the error.",
         SerializedName = @"recommendations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> Recommendation { get; set; }
+        System.Collections.Generic.List<string> Recommendations { get; set; }
 
     }
     /// Errors in T&C / RBAC assignment.
@@ -86,7 +86,7 @@ namespace Sample.API.Models
         /// <summary>Error message.</summary>
         string Message { get; set; }
         /// <summary>A list of recommendations to resolve the error.</summary>
-        System.Collections.Generic.List<string> Recommendation { get; set; }
+        System.Collections.Generic.List<string> Recommendations { get; set; }
 
     }
 }

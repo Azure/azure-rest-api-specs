@@ -56,14 +56,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.DrillReportSummary"
         /// />.
         /// </summary>
@@ -111,9 +103,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillReportSummaryInternal)this).StageStatuses = (System.Collections.Generic.List<Sample.API.Models.IReportStageStatus>) content.GetValueForProperty("StageStatuses",((Sample.API.Models.IDrillReportSummaryInternal)this).StageStatuses, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IReportStageStatus>(__y, Sample.API.Models.ReportStageStatusTypeConverter.ConvertFrom));
             }
-            if (content.Contains("AvailableFormat"))
+            if (content.Contains("AvailableFormats"))
             {
-                ((Sample.API.Models.IDrillReportSummaryInternal)this).AvailableFormat = (System.Collections.Generic.List<string>) content.GetValueForProperty("AvailableFormat",((Sample.API.Models.IDrillReportSummaryInternal)this).AvailableFormat, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillReportSummaryInternal)this).AvailableFormats = (System.Collections.Generic.List<string>) content.GetValueForProperty("AvailableFormats",((Sample.API.Models.IDrillReportSummaryInternal)this).AvailableFormats, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("LastGeneratedTimestamp"))
             {
@@ -135,9 +127,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillReportSummaryInternal)this).LastErrorMessage = (string) content.GetValueForProperty("LastErrorMessage",((Sample.API.Models.IDrillReportSummaryInternal)this).LastErrorMessage, global::System.Convert.ToString);
             }
-            if (content.Contains("LastErrorRecommendation"))
+            if (content.Contains("LastErrorRecommendations"))
             {
-                ((Sample.API.Models.IDrillReportSummaryInternal)this).LastErrorRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("LastErrorRecommendation",((Sample.API.Models.IDrillReportSummaryInternal)this).LastErrorRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillReportSummaryInternal)this).LastErrorRecommendations = (System.Collections.Generic.List<string>) content.GetValueForProperty("LastErrorRecommendations",((Sample.API.Models.IDrillReportSummaryInternal)this).LastErrorRecommendations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             AfterDeserializeDictionary(content);
         }
@@ -168,9 +160,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillReportSummaryInternal)this).StageStatuses = (System.Collections.Generic.List<Sample.API.Models.IReportStageStatus>) content.GetValueForProperty("StageStatuses",((Sample.API.Models.IDrillReportSummaryInternal)this).StageStatuses, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IReportStageStatus>(__y, Sample.API.Models.ReportStageStatusTypeConverter.ConvertFrom));
             }
-            if (content.Contains("AvailableFormat"))
+            if (content.Contains("AvailableFormats"))
             {
-                ((Sample.API.Models.IDrillReportSummaryInternal)this).AvailableFormat = (System.Collections.Generic.List<string>) content.GetValueForProperty("AvailableFormat",((Sample.API.Models.IDrillReportSummaryInternal)this).AvailableFormat, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillReportSummaryInternal)this).AvailableFormats = (System.Collections.Generic.List<string>) content.GetValueForProperty("AvailableFormats",((Sample.API.Models.IDrillReportSummaryInternal)this).AvailableFormats, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("LastGeneratedTimestamp"))
             {
@@ -192,9 +184,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillReportSummaryInternal)this).LastErrorMessage = (string) content.GetValueForProperty("LastErrorMessage",((Sample.API.Models.IDrillReportSummaryInternal)this).LastErrorMessage, global::System.Convert.ToString);
             }
-            if (content.Contains("LastErrorRecommendation"))
+            if (content.Contains("LastErrorRecommendations"))
             {
-                ((Sample.API.Models.IDrillReportSummaryInternal)this).LastErrorRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("LastErrorRecommendation",((Sample.API.Models.IDrillReportSummaryInternal)this).LastErrorRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillReportSummaryInternal)this).LastErrorRecommendations = (System.Collections.Generic.List<string>) content.GetValueForProperty("LastErrorRecommendations",((Sample.API.Models.IDrillReportSummaryInternal)this).LastErrorRecommendations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             AfterDeserializePSObject(content);
         }
@@ -210,18 +202,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Public, read-only summary of report generation for a Drill Run. Exposes status and pointers only - the report content
     /// and internal storage locations are never surfaced.

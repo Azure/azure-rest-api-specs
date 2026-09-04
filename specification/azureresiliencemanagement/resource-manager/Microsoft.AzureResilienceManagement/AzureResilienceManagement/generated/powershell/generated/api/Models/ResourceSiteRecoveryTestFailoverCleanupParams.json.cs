@@ -76,7 +76,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_comment = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("comments"), out var __jsonComments) ? (string)__jsonComments : (string)_comment;}
+            {_comments = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("comments"), out var __jsonComments) ? (string)__jsonComments : (string)_comments;}
             AfterFromJson(json);
         }
 
@@ -101,7 +101,7 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != (((object)this._comment)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._comment.ToString()) : null, "comments" ,container.Add );
+            AddIf( null != (((object)this._comments)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._comments.ToString()) : null, "comments" ,container.Add );
             AfterToJson(ref container);
             return container;
         }

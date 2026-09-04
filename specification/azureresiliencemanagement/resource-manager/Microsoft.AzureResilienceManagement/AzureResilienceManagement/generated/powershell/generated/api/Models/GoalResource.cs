@@ -20,33 +20,33 @@ namespace Sample.API.Models
         /// Flag which depicts whether the Arm resource is manually attested for disaster recovery recommendation.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DisasterRecoveryAttestationStatus { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).DisasterRecoveryAttestationStatus; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).DisasterRecoveryAttestationStatus = value ?? null; }
+        public string DisasterRecoveryAttestationStatus { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).DisasterRecoveryAttestationStatus; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).DisasterRecoveryAttestationStatus = value ?? null; }
 
         /// <summary>
         /// Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DisasterRecoveryGoalParticipation { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).DisasterRecoveryGoalParticipation; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).DisasterRecoveryGoalParticipation = value ?? null; }
+        public string DisasterRecoveryGoalParticipation { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).DisasterRecoveryGoalParticipation; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).DisasterRecoveryGoalParticipation = value ?? null; }
 
         /// <summary>Reason for exclusion from disaster recovery goals.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ExclusionReasonForDisasterRecoveryGoal { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ExclusionReasonForDisasterRecoveryGoal; }
+        public string ExclusionReasonForDisasterRecoveryGoals { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ExclusionReasonForDisasterRecoveryGoals; }
 
         /// <summary>Reason for exclusion from high availability goals.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ExclusionReasonForHighAvailabilityGoal { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ExclusionReasonForHighAvailabilityGoal; }
+        public string ExclusionReasonForHighAvailabilityGoals { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ExclusionReasonForHighAvailabilityGoals; }
 
         /// <summary>
         /// Flag which depicts whether the Arm resource is manually attested for high availability recommendation.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string HighAvailabilityAttestationStatus { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).HighAvailabilityAttestationStatus; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).HighAvailabilityAttestationStatus = value ?? null; }
+        public string HighAvailabilityAttestationStatus { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).HighAvailabilityAttestationStatus; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).HighAvailabilityAttestationStatus = value ?? null; }
 
         /// <summary>
         /// Flag which depicts whether the Arm resource is excluded for high availability recommendation.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string HighAvailabilityGoalParticipation { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).HighAvailabilityGoalParticipation; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).HighAvailabilityGoalParticipation = value ?? null; }
+        public string HighAvailabilityGoalParticipation { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).HighAvailabilityGoalParticipation; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).HighAvailabilityGoalParticipation = value ?? null; }
 
         /// <summary>
         /// Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
@@ -58,45 +58,41 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public string Name { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Name; }
 
-        /// <summary>Backing field for <see cref="Property" /> property.</summary>
-        private Sample.API.Models.IGoalResourceProperties _property;
+        /// <summary>Backing field for <see cref="Properties" /> property.</summary>
+        private Sample.API.Models.IGoalResourceProperties _properties;
 
         /// <summary>The resource-specific properties for this resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IGoalResourceProperties Property { get => (this._property = this._property ?? new Sample.API.Models.GoalResourceProperties()); set => this._property = value; }
+        internal Sample.API.Models.IGoalResourceProperties Properties { get => (this._properties = this._properties ?? new Sample.API.Models.GoalResourceProperties()); set => this._properties = value; }
 
         /// <summary>Provisioning state</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ProvisioningState { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ProvisioningState; }
+        public string ProvisioningState { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ProvisioningState; }
 
         /// <summary>Arm Id of resource under the SG for which the extension resource is maintained.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ResourceArmId { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ResourceArmId; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ResourceArmId = value ?? null; }
+        public string ResourceArmId { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ResourceArmId; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ResourceArmId = value ?? null; }
 
-        /// <summary>Gets the resource group name</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string ResourceGroupName { get => (new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Success ? new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Groups["resourceGroupName"].Value : null); }
+        /// <summary>Internal Acessors for ExclusionReasonForDisasterRecoveryGoals</summary>
+        string Sample.API.Models.IGoalResourceInternal.ExclusionReasonForDisasterRecoveryGoals { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ExclusionReasonForDisasterRecoveryGoals; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ExclusionReasonForDisasterRecoveryGoals = value ?? null; }
 
-        /// <summary>Internal Acessors for ExclusionReasonForDisasterRecoveryGoal</summary>
-        string Sample.API.Models.IGoalResourceInternal.ExclusionReasonForDisasterRecoveryGoal { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ExclusionReasonForDisasterRecoveryGoal; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ExclusionReasonForDisasterRecoveryGoal = value ?? null; }
+        /// <summary>Internal Acessors for ExclusionReasonForHighAvailabilityGoals</summary>
+        string Sample.API.Models.IGoalResourceInternal.ExclusionReasonForHighAvailabilityGoals { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ExclusionReasonForHighAvailabilityGoals; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ExclusionReasonForHighAvailabilityGoals = value ?? null; }
 
-        /// <summary>Internal Acessors for ExclusionReasonForHighAvailabilityGoal</summary>
-        string Sample.API.Models.IGoalResourceInternal.ExclusionReasonForHighAvailabilityGoal { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ExclusionReasonForHighAvailabilityGoal; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ExclusionReasonForHighAvailabilityGoal = value ?? null; }
-
-        /// <summary>Internal Acessors for Property</summary>
-        Sample.API.Models.IGoalResourceProperties Sample.API.Models.IGoalResourceInternal.Property { get => (this._property = this._property ?? new Sample.API.Models.GoalResourceProperties()); set { {_property = value;} } }
+        /// <summary>Internal Acessors for Properties</summary>
+        Sample.API.Models.IGoalResourceProperties Sample.API.Models.IGoalResourceInternal.Properties { get => (this._properties = this._properties ?? new Sample.API.Models.GoalResourceProperties()); set { {_properties = value;} } }
 
         /// <summary>Internal Acessors for ProvisioningState</summary>
-        string Sample.API.Models.IGoalResourceInternal.ProvisioningState { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ProvisioningState; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ProvisioningState = value ?? null; }
+        string Sample.API.Models.IGoalResourceInternal.ProvisioningState { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ProvisioningState; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ProvisioningState = value ?? null; }
 
-        /// <summary>Internal Acessors for ServiceGroupMembership</summary>
-        System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> Sample.API.Models.IGoalResourceInternal.ServiceGroupMembership { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ServiceGroupMembership; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ServiceGroupMembership = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for ServiceGroupMemberships</summary>
+        System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> Sample.API.Models.IGoalResourceInternal.ServiceGroupMemberships { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ServiceGroupMemberships; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ServiceGroupMemberships = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ZonalResiliency</summary>
-        Sample.API.Models.IResiliencyProperties Sample.API.Models.IGoalResourceInternal.ZonalResiliency { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliency; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliency = value ?? null /* model class */; }
+        Sample.API.Models.IResiliencyProperties Sample.API.Models.IGoalResourceInternal.ZonalResiliency { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ZonalResiliency; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ZonalResiliency = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for ZonalResiliencyExclusionReason</summary>
-        string Sample.API.Models.IGoalResourceInternal.ZonalResiliencyExclusionReason { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyExclusionReason; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyExclusionReason = value ?? null; }
+        string Sample.API.Models.IGoalResourceInternal.ZonalResiliencyExclusionReason { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ZonalResiliencyExclusionReason; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ZonalResiliencyExclusionReason = value ?? null; }
 
         /// <summary>Internal Acessors for Id</summary>
         string Sample.API.Models.IResourceInternal.Id { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Id; set => ((Sample.API.Models.IResourceInternal)__proxyResource).Id = value ?? null; }
@@ -130,7 +126,7 @@ namespace Sample.API.Models
 
         /// <summary>List of service groups of which this resource is memberof.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> ServiceGroupMembership { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ServiceGroupMembership; }
+        public System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> ServiceGroupMemberships { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ServiceGroupMemberships; }
 
         /// <summary>
         /// Azure Resource Manager metadata containing createdBy and modifiedBy information.
@@ -170,27 +166,27 @@ namespace Sample.API.Models
 
         /// <summary>List of user confirmations for high availability solutions.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem> UserConfirmationForHighAvailability { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).UserConfirmationForHighAvailability; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).UserConfirmationForHighAvailability = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem> UserConfirmationForHighAvailability { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).UserConfirmationForHighAvailability; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).UserConfirmationForHighAvailability = value ?? null /* arrayOf */; }
 
         /// <summary>
         /// Flag which depicts whether the Arm resource is manually attested for resiliency recommendation.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ZonalResiliencyAttestationStatus { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyAttestationStatus; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyAttestationStatus = value ?? null; }
+        public string ZonalResiliencyAttestationStatus { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ZonalResiliencyAttestationStatus; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ZonalResiliencyAttestationStatus = value ?? null; }
 
         /// <summary>Reason for exclusion from resiliency goals.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ZonalResiliencyExclusionReason { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyExclusionReason; }
+        public string ZonalResiliencyExclusionReason { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ZonalResiliencyExclusionReason; }
 
         /// <summary>
         /// Flag which depicts whether the Arm resource is excluded for resiliency recommendation.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ZonalResiliencyGoalParticipation { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyGoalParticipation; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyGoalParticipation = value ?? null; }
+        public string ZonalResiliencyGoalParticipation { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ZonalResiliencyGoalParticipation; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ZonalResiliencyGoalParticipation = value ?? null; }
 
         /// <summary>List of user confirmations for resiliency solutions.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem> ZonalResiliencyUserConfirmation { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyUserConfirmation; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyUserConfirmation = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem> ZonalResiliencyUserConfirmation { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ZonalResiliencyUserConfirmation; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Properties).ZonalResiliencyUserConfirmation = value ?? null /* arrayOf */; }
 
         /// <summary>Creates an new <see cref="GoalResource" /> instance.</summary>
         public GoalResource()
@@ -254,7 +250,7 @@ namespace Sample.API.Models
         SerializedName = @"exclusionReasonForDisasterRecoveryGoals",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("UserSelectedExclusion", "FailedOverResource", "UnsupportedResource")]
-        string ExclusionReasonForDisasterRecoveryGoal { get;  }
+        string ExclusionReasonForDisasterRecoveryGoals { get;  }
         /// <summary>Reason for exclusion from high availability goals.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -266,7 +262,7 @@ namespace Sample.API.Models
         SerializedName = @"exclusionReasonForHighAvailabilityGoals",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("UserSelectedExclusion", "FailedOverResource", "UnsupportedResource")]
-        string ExclusionReasonForHighAvailabilityGoal { get;  }
+        string ExclusionReasonForHighAvailabilityGoals { get;  }
         /// <summary>
         /// Flag which depicts whether the Arm resource is manually attested for high availability recommendation.
         /// </summary>
@@ -328,7 +324,7 @@ namespace Sample.API.Models
         Description = @"List of service groups of which this resource is memberof.",
         SerializedName = @"serviceGroupMemberships",
         PossibleTypes = new [] { typeof(Sample.API.Models.IServiceGroupMembership) })]
-        System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> ServiceGroupMembership { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> ServiceGroupMemberships { get;  }
         /// <summary>List of user confirmations for high availability solutions.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -409,10 +405,10 @@ namespace Sample.API.Models
         string DisasterRecoveryGoalParticipation { get; set; }
         /// <summary>Reason for exclusion from disaster recovery goals.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("UserSelectedExclusion", "FailedOverResource", "UnsupportedResource")]
-        string ExclusionReasonForDisasterRecoveryGoal { get; set; }
+        string ExclusionReasonForDisasterRecoveryGoals { get; set; }
         /// <summary>Reason for exclusion from high availability goals.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("UserSelectedExclusion", "FailedOverResource", "UnsupportedResource")]
-        string ExclusionReasonForHighAvailabilityGoal { get; set; }
+        string ExclusionReasonForHighAvailabilityGoals { get; set; }
         /// <summary>
         /// Flag which depicts whether the Arm resource is manually attested for high availability recommendation.
         /// </summary>
@@ -424,14 +420,14 @@ namespace Sample.API.Models
         [global::Sample.API.PSArgumentCompleterAttribute("Excluded", "Included")]
         string HighAvailabilityGoalParticipation { get; set; }
         /// <summary>The resource-specific properties for this resource.</summary>
-        Sample.API.Models.IGoalResourceProperties Property { get; set; }
+        Sample.API.Models.IGoalResourceProperties Properties { get; set; }
         /// <summary>Provisioning state</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }
         /// <summary>Arm Id of resource under the SG for which the extension resource is maintained.</summary>
         string ResourceArmId { get; set; }
         /// <summary>List of service groups of which this resource is memberof.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> ServiceGroupMembership { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> ServiceGroupMemberships { get; set; }
         /// <summary>List of user confirmations for high availability solutions.</summary>
         System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem> UserConfirmationForHighAvailability { get; set; }
         /// <summary>

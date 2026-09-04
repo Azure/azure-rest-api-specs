@@ -12,12 +12,6 @@ namespace Sample.API.Models
 
         global::System.Collections.Generic.IDictionary<global::System.String,Sample.API.Models.IUserAssignedIdentity> Sample.API.Runtime.IAssociativeArray<Sample.API.Models.IUserAssignedIdentity>.AdditionalProperties { get => __additionalProperties; }
 
-        int Sample.API.Runtime.IAssociativeArray<Sample.API.Models.IUserAssignedIdentity>.Count { get => __additionalProperties.Count; }
-
-        global::System.Collections.Generic.IEnumerable<global::System.String> Sample.API.Runtime.IAssociativeArray<Sample.API.Models.IUserAssignedIdentity>.Keys { get => __additionalProperties.Keys; }
-
-        global::System.Collections.Generic.IEnumerable<Sample.API.Models.IUserAssignedIdentity> Sample.API.Runtime.IAssociativeArray<Sample.API.Models.IUserAssignedIdentity>.Values { get => __additionalProperties.Values; }
-
         public Sample.API.Models.IUserAssignedIdentity this[global::System.String index] { get => __additionalProperties[index]; set => __additionalProperties[index] = value; }
 
         /// <param name="key"></param>

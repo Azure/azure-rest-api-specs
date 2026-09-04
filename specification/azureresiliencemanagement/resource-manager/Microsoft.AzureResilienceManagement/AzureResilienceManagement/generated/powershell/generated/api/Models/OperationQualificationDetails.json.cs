@@ -74,8 +74,8 @@ namespace Sample.API.Models
                 return;
             }
             {_qualificationState = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("qualificationState"), out var __jsonQualificationState) ? (string)__jsonQualificationState : (string)_qualificationState;}
-            {_notQualifiedReason = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("notQualifiedReasons"), out var __jsonNotQualifiedReasons) ? If( __jsonNotQualifiedReasons as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _notQualifiedReason;}
-            {_resourceFeasibilityReview = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("resourceFeasibilityReviews"), out var __jsonResourceFeasibilityReviews) ? If( __jsonResourceFeasibilityReviews as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(Sample.API.Models.IResourceFeasibilityReview) (Sample.API.Models.ResourceFeasibilityReview.FromJson(__p) )) ))() : null : _resourceFeasibilityReview;}
+            {_notQualifiedReasons = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("notQualifiedReasons"), out var __jsonNotQualifiedReasons) ? If( __jsonNotQualifiedReasons as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _notQualifiedReasons;}
+            {_resourceFeasibilityReviews = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("resourceFeasibilityReviews"), out var __jsonResourceFeasibilityReviews) ? If( __jsonResourceFeasibilityReviews as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(Sample.API.Models.IResourceFeasibilityReview) (Sample.API.Models.ResourceFeasibilityReview.FromJson(__p) )) ))() : null : _resourceFeasibilityReviews;}
             AfterFromJson(json);
         }
 
@@ -99,19 +99,19 @@ namespace Sample.API.Models
                 return container;
             }
             AddIf( null != (((object)this._qualificationState)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._qualificationState.ToString()) : null, "qualificationState" ,container.Add );
-            if (null != this._notQualifiedReason)
+            if (null != this._notQualifiedReasons)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._notQualifiedReason )
+                foreach( var __x in this._notQualifiedReasons )
                 {
                     AddIf(null != (((object)__x)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__x.ToString()) : null ,__w.Add);
                 }
                 container.Add("notQualifiedReasons",__w);
             }
-            if (null != this._resourceFeasibilityReview)
+            if (null != this._resourceFeasibilityReviews)
             {
                 var __r = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __s in this._resourceFeasibilityReview )
+                foreach( var __s in this._resourceFeasibilityReviews )
                 {
                     AddIf(__s?.ToJson(null, serializationMode) ,__r.Add);
                 }

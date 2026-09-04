@@ -11,12 +11,12 @@ namespace Sample.API.Models
         Sample.API.Models.IFaultPropertiesInternal
     {
 
-        /// <summary>Backing field for <see cref="AvailableFault" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IFaultDetails> _availableFault;
+        /// <summary>Backing field for <see cref="AvailableFaults" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IFaultDetails> _availableFaults;
 
         /// <summary>Available faults for this resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IFaultDetails> AvailableFault { get => this._availableFault; }
+        public System.Collections.Generic.List<Sample.API.Models.IFaultDetails> AvailableFaults { get => this._availableFaults; }
 
         /// <summary>Backing field for <see cref="CustomFault" /> property.</summary>
         private Sample.API.Models.ICustomFaultDetails _customFault;
@@ -77,8 +77,8 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
         public string OverriddenDefaultFaultUrn { get => ((Sample.API.Models.IFaultDetailsInternal)OverriddenDefaultFault).FaultUrn; set => ((Sample.API.Models.IFaultDetailsInternal)OverriddenDefaultFault).FaultUrn = value ?? null; }
 
-        /// <summary>Internal Acessors for AvailableFault</summary>
-        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> Sample.API.Models.IFaultPropertiesInternal.AvailableFault { get => this._availableFault; set { {_availableFault = value;} } }
+        /// <summary>Internal Acessors for AvailableFaults</summary>
+        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> Sample.API.Models.IFaultPropertiesInternal.AvailableFaults { get => this._availableFaults; set { {_availableFaults = value;} } }
 
         /// <summary>Internal Acessors for CustomFault</summary>
         Sample.API.Models.ICustomFaultDetails Sample.API.Models.IFaultPropertiesInternal.CustomFault { get => (this._customFault = this._customFault ?? new Sample.API.Models.CustomFaultDetails()); set { {_customFault = value;} } }
@@ -118,7 +118,7 @@ namespace Sample.API.Models
         Description = @"Available faults for this resource.",
         SerializedName = @"availableFaults",
         PossibleTypes = new [] { typeof(Sample.API.Models.IFaultDetails) })]
-        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> AvailableFault { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> AvailableFaults { get;  }
         /// <summary>fault name</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -220,7 +220,7 @@ namespace Sample.API.Models
 
     {
         /// <summary>Available faults for this resource.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> AvailableFault { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> AvailableFaults { get; set; }
         /// <summary>Custom Fault Details selected by user</summary>
         Sample.API.Models.ICustomFaultDetails CustomFault { get; set; }
         /// <summary>fault name</summary>

@@ -55,14 +55,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.RecommendCapacityResult"
         /// />.
         /// </summary>
@@ -105,13 +97,13 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("ResourceCapacity"))
+            if (content.Contains("ResourceCapacities"))
             {
-                ((Sample.API.Models.IRecommendCapacityResultInternal)this).ResourceCapacity = (System.Collections.Generic.List<Sample.API.Models.IRecommendCapacityResourceResult>) content.GetValueForProperty("ResourceCapacity",((Sample.API.Models.IRecommendCapacityResultInternal)this).ResourceCapacity, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecommendCapacityResourceResult>(__y, Sample.API.Models.RecommendCapacityResourceResultTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecommendCapacityResultInternal)this).ResourceCapacities = (System.Collections.Generic.List<Sample.API.Models.IRecommendCapacityResourceResult>) content.GetValueForProperty("ResourceCapacities",((Sample.API.Models.IRecommendCapacityResultInternal)this).ResourceCapacities, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecommendCapacityResourceResult>(__y, Sample.API.Models.RecommendCapacityResourceResultTypeConverter.ConvertFrom));
             }
-            if (content.Contains("Recommendation"))
+            if (content.Contains("Recommendations"))
             {
-                ((Sample.API.Models.IRecommendCapacityResultInternal)this).Recommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("Recommendation",((Sample.API.Models.IRecommendCapacityResultInternal)this).Recommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecommendCapacityResultInternal)this).Recommendations = (System.Collections.Generic.List<string>) content.GetValueForProperty("Recommendations",((Sample.API.Models.IRecommendCapacityResultInternal)this).Recommendations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("AgentError"))
             {
@@ -134,13 +126,13 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("ResourceCapacity"))
+            if (content.Contains("ResourceCapacities"))
             {
-                ((Sample.API.Models.IRecommendCapacityResultInternal)this).ResourceCapacity = (System.Collections.Generic.List<Sample.API.Models.IRecommendCapacityResourceResult>) content.GetValueForProperty("ResourceCapacity",((Sample.API.Models.IRecommendCapacityResultInternal)this).ResourceCapacity, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecommendCapacityResourceResult>(__y, Sample.API.Models.RecommendCapacityResourceResultTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecommendCapacityResultInternal)this).ResourceCapacities = (System.Collections.Generic.List<Sample.API.Models.IRecommendCapacityResourceResult>) content.GetValueForProperty("ResourceCapacities",((Sample.API.Models.IRecommendCapacityResultInternal)this).ResourceCapacities, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecommendCapacityResourceResult>(__y, Sample.API.Models.RecommendCapacityResourceResultTypeConverter.ConvertFrom));
             }
-            if (content.Contains("Recommendation"))
+            if (content.Contains("Recommendations"))
             {
-                ((Sample.API.Models.IRecommendCapacityResultInternal)this).Recommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("Recommendation",((Sample.API.Models.IRecommendCapacityResultInternal)this).Recommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecommendCapacityResultInternal)this).Recommendations = (System.Collections.Generic.List<string>) content.GetValueForProperty("Recommendations",((Sample.API.Models.IRecommendCapacityResultInternal)this).Recommendations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("AgentError"))
             {
@@ -153,18 +145,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Result of a completed recommend capacity operation, containing per-resource assessments and cross-cutting recommendations.
     [System.ComponentModel.TypeConverter(typeof(RecommendCapacityResultTypeConverter))]

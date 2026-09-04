@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.GoalTemplateUpdate"
         /// />.
         /// </summary>
@@ -103,9 +95,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("Property"))
+            if (content.Contains("Properties"))
             {
-                ((Sample.API.Models.IGoalTemplateUpdateInternal)this).Property = (Sample.API.Models.IGoalTemplatePropertiesUpdate) content.GetValueForProperty("Property",((Sample.API.Models.IGoalTemplateUpdateInternal)this).Property, Sample.API.Models.GoalTemplatePropertiesUpdateTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IGoalTemplateUpdateInternal)this).Properties = (Sample.API.Models.IGoalTemplatePropertiesUpdate) content.GetValueForProperty("Properties",((Sample.API.Models.IGoalTemplateUpdateInternal)this).Properties, Sample.API.Models.GoalTemplatePropertiesUpdateTypeConverter.ConvertFrom);
             }
             if (content.Contains("SystemDataCreatedBy"))
             {
@@ -184,9 +176,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("Property"))
+            if (content.Contains("Properties"))
             {
-                ((Sample.API.Models.IGoalTemplateUpdateInternal)this).Property = (Sample.API.Models.IGoalTemplatePropertiesUpdate) content.GetValueForProperty("Property",((Sample.API.Models.IGoalTemplateUpdateInternal)this).Property, Sample.API.Models.GoalTemplatePropertiesUpdateTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IGoalTemplateUpdateInternal)this).Properties = (Sample.API.Models.IGoalTemplatePropertiesUpdate) content.GetValueForProperty("Properties",((Sample.API.Models.IGoalTemplateUpdateInternal)this).Properties, Sample.API.Models.GoalTemplatePropertiesUpdateTypeConverter.ConvertFrom);
             }
             if (content.Contains("SystemDataCreatedBy"))
             {
@@ -255,18 +247,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Goal template a AzureResilienceProviderHub resource
     [System.ComponentModel.TypeConverter(typeof(GoalTemplateUpdateTypeConverter))]

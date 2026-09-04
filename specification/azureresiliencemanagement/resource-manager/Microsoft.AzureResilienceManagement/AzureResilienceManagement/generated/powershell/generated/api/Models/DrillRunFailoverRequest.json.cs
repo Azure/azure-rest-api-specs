@@ -63,7 +63,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_failoverProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("failoverProperties"), out var __jsonFailoverProperties) ? Sample.API.Models.FailoverRequest.FromJson(__jsonFailoverProperties) : _failoverProperty;}
+            {_failoverProperties = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("failoverProperties"), out var __jsonFailoverProperties) ? Sample.API.Models.FailoverRequest.FromJson(__jsonFailoverProperties) : _failoverProperties;}
             {_autoFailover = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("autoFailover"), out var __jsonAutoFailover) ? (string)__jsonAutoFailover : (string)_autoFailover;}
             AfterFromJson(json);
         }
@@ -97,7 +97,7 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != this._failoverProperty ? (Sample.API.Runtime.Json.JsonNode) this._failoverProperty.ToJson(null,serializationMode) : null, "failoverProperties" ,container.Add );
+            AddIf( null != this._failoverProperties ? (Sample.API.Runtime.Json.JsonNode) this._failoverProperties.ToJson(null,serializationMode) : null, "failoverProperties" ,container.Add );
             AddIf( null != (((object)this._autoFailover)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._autoFailover.ToString()) : null, "autoFailover" ,container.Add );
             AfterToJson(ref container);
             return container;

@@ -23,21 +23,21 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string AgentError { get => this._agentError; set => this._agentError = value; }
 
-        /// <summary>Backing field for <see cref="Recommendation" /> property.</summary>
-        private System.Collections.Generic.List<string> _recommendation;
+        /// <summary>Backing field for <see cref="Recommendations" /> property.</summary>
+        private System.Collections.Generic.List<string> _recommendations;
 
         /// <summary>
         /// High-level recommendations that apply across multiple resources (e.g., regional migration patterns, common SKU upgrades).
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> Recommendation { get => this._recommendation; set => this._recommendation = value; }
+        public System.Collections.Generic.List<string> Recommendations { get => this._recommendations; set => this._recommendations = value; }
 
-        /// <summary>Backing field for <see cref="ResourceCapacity" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IRecommendCapacityResourceResult> _resourceCapacity;
+        /// <summary>Backing field for <see cref="ResourceCapacities" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IRecommendCapacityResourceResult> _resourceCapacities;
 
         /// <summary>Individual resiliency assessment for each evaluated resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IRecommendCapacityResourceResult> ResourceCapacity { get => this._resourceCapacity; set => this._resourceCapacity = value; }
+        public System.Collections.Generic.List<Sample.API.Models.IRecommendCapacityResourceResult> ResourceCapacities { get => this._resourceCapacities; set => this._resourceCapacities = value; }
 
         /// <summary>Creates an new <see cref="RecommendCapacityResult" /> instance.</summary>
         public RecommendCapacityResult()
@@ -75,7 +75,7 @@ namespace Sample.API.Models
         Description = @"High-level recommendations that apply across multiple resources (e.g., regional migration patterns, common SKU upgrades).",
         SerializedName = @"recommendations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> Recommendation { get; set; }
+        System.Collections.Generic.List<string> Recommendations { get; set; }
         /// <summary>Individual resiliency assessment for each evaluated resource.</summary>
         [Sample.API.Runtime.Info(
         Required = true,
@@ -86,7 +86,7 @@ namespace Sample.API.Models
         Description = @"Individual resiliency assessment for each evaluated resource.",
         SerializedName = @"resourceCapacities",
         PossibleTypes = new [] { typeof(Sample.API.Models.IRecommendCapacityResourceResult) })]
-        System.Collections.Generic.List<Sample.API.Models.IRecommendCapacityResourceResult> ResourceCapacity { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecommendCapacityResourceResult> ResourceCapacities { get; set; }
 
     }
     /// Result of a completed recommend capacity operation, containing per-resource assessments and cross-cutting recommendations.
@@ -101,9 +101,9 @@ namespace Sample.API.Models
         /// <summary>
         /// High-level recommendations that apply across multiple resources (e.g., regional migration patterns, common SKU upgrades).
         /// </summary>
-        System.Collections.Generic.List<string> Recommendation { get; set; }
+        System.Collections.Generic.List<string> Recommendations { get; set; }
         /// <summary>Individual resiliency assessment for each evaluated resource.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IRecommendCapacityResourceResult> ResourceCapacity { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecommendCapacityResourceResult> ResourceCapacities { get; set; }
 
     }
 }

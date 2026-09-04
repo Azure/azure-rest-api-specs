@@ -78,11 +78,11 @@ namespace Sample.API.Models
             {_resourceId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("resourceId"), out var __jsonResourceId) ? (string)__jsonResourceId : (string)_resourceId;}
             {_activeLocation = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("activeLocation"), out var __jsonActiveLocation) ? (string)__jsonActiveLocation : (string)_activeLocation;}
             {_activeLocations = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("activeLocations"), out var __jsonActiveLocations) ? If( __jsonActiveLocations as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _activeLocations;}
-            {_activePhysicalZone = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("activePhysicalZones"), out var __jsonActivePhysicalZones) ? If( __jsonActivePhysicalZones as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _activePhysicalZone;}
-            {_recoveryLocation = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("recoveryLocations"), out var __jsonRecoveryLocations) ? If( __jsonRecoveryLocations as Sample.API.Runtime.Json.JsonArray, out var __l) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__l, (__k)=>(string) (__k is Sample.API.Runtime.Json.JsonString __j ? (string)(__j.ToString()) : null)) ))() : null : _recoveryLocation;}
+            {_activePhysicalZones = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("activePhysicalZones"), out var __jsonActivePhysicalZones) ? If( __jsonActivePhysicalZones as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _activePhysicalZones;}
+            {_recoveryLocations = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("recoveryLocations"), out var __jsonRecoveryLocations) ? If( __jsonRecoveryLocations as Sample.API.Runtime.Json.JsonArray, out var __l) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__l, (__k)=>(string) (__k is Sample.API.Runtime.Json.JsonString __j ? (string)(__j.ToString()) : null)) ))() : null : _recoveryLocations;}
             {_replicationRole = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("replicationRole"), out var __jsonReplicationRole) ? (string)__jsonReplicationRole : (string)_replicationRole;}
             {_primaryResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("primaryResource"), out var __jsonPrimaryResource) ? (string)__jsonPrimaryResource : (string)_primaryResource;}
-            {_replicaResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("replicaResources"), out var __jsonReplicaResources) ? If( __jsonReplicaResources as Sample.API.Runtime.Json.JsonArray, out var __g) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__g, (__f)=>(string) (__f is Sample.API.Runtime.Json.JsonString __e ? (string)(__e.ToString()) : null)) ))() : null : _replicaResource;}
+            {_replicaResources = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("replicaResources"), out var __jsonReplicaResources) ? If( __jsonReplicaResources as Sample.API.Runtime.Json.JsonArray, out var __g) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__g, (__f)=>(string) (__f is Sample.API.Runtime.Json.JsonString __e ? (string)(__e.ToString()) : null)) ))() : null : _replicaResources;}
             {_isAutoFailover = If( json?.PropertyT<Sample.API.Runtime.Json.JsonBoolean>("isAutoFailover"), out var __jsonIsAutoFailover) ? (bool?)__jsonIsAutoFailover : _isAutoFailover;}
             {_failoverState = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("failoverState"), out var __jsonFailoverState) ? (string)__jsonFailoverState : (string)_failoverState;}
             {_testFailoverState = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("testFailoverState"), out var __jsonTestFailoverState) ? (string)__jsonTestFailoverState : (string)_testFailoverState;}
@@ -139,10 +139,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._activePhysicalZone)
+                if (null != this._activePhysicalZones)
                 {
                     var __r = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __s in this._activePhysicalZone )
+                    foreach( var __s in this._activePhysicalZones )
                     {
                         AddIf(null != (((object)__s)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__s.ToString()) : null ,__r.Add);
                     }
@@ -151,10 +151,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._recoveryLocation)
+                if (null != this._recoveryLocations)
                 {
                     var __m = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __n in this._recoveryLocation )
+                    foreach( var __n in this._recoveryLocations )
                     {
                         AddIf(null != (((object)__n)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__n.ToString()) : null ,__m.Add);
                     }
@@ -171,10 +171,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._replicaResource)
+                if (null != this._replicaResources)
                 {
                     var __h = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __i in this._replicaResource )
+                    foreach( var __i in this._replicaResources )
                     {
                         AddIf(null != (((object)__i)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__i.ToString()) : null ,__h.Add);
                     }

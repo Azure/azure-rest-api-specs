@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into a new instance of <see cref="Sample.API.Models.AzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponse"
         /// />.
         /// </summary>
@@ -94,9 +86,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IAzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponseInternal)this).Target = (string) content.GetValueForProperty("Target",((Sample.API.Models.IAzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponseInternal)this).Target, global::System.Convert.ToString);
             }
-            if (content.Contains("Detail"))
+            if (content.Contains("Details"))
             {
-                ((Sample.API.Models.IAzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponseInternal)this).Detail = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("Detail",((Sample.API.Models.IAzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponseInternal)this).Detail, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IAzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponseInternal)this).Details = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("Details",((Sample.API.Models.IAzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponseInternal)this).Details, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
             }
             if (content.Contains("AdditionalInfo"))
             {
@@ -139,9 +131,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IAzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponseInternal)this).Target = (string) content.GetValueForProperty("Target",((Sample.API.Models.IAzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponseInternal)this).Target, global::System.Convert.ToString);
             }
-            if (content.Contains("Detail"))
+            if (content.Contains("Details"))
             {
-                ((Sample.API.Models.IAzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponseInternal)this).Detail = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("Detail",((Sample.API.Models.IAzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponseInternal)this).Detail, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IAzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponseInternal)this).Details = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("Details",((Sample.API.Models.IAzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponseInternal)this).Details, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
             }
             if (content.Contains("AdditionalInfo"))
             {
@@ -192,18 +184,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Azure operation completed successfully.
     [System.ComponentModel.TypeConverter(typeof(AzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponseTypeConverter))]

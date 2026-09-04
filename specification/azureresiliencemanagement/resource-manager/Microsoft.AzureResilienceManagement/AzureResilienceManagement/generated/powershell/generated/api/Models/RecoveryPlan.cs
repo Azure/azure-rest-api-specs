@@ -29,65 +29,65 @@ namespace Sample.API.Models
         /// Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultGroupId { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupId; }
+        public string DefaultGroupId { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupId; }
 
         /// <summary>The name of the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultGroupName { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupName; }
+        public string DefaultGroupName { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupName; }
 
         /// <summary>The timestamp of resource creation (UTC).</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public global::System.DateTime? DefaultGroupSystemDataCreatedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataCreatedAt; }
+        public global::System.DateTime? DefaultGroupSystemDataCreatedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataCreatedAt; }
 
         /// <summary>The identity that created the resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultGroupSystemDataCreatedBy { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataCreatedBy; }
+        public string DefaultGroupSystemDataCreatedBy { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataCreatedBy; }
 
         /// <summary>The type of identity that created the resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultGroupSystemDataCreatedByType { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataCreatedByType; }
+        public string DefaultGroupSystemDataCreatedByType { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataCreatedByType; }
 
         /// <summary>The timestamp of resource last modification (UTC)</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public global::System.DateTime? DefaultGroupSystemDataLastModifiedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataLastModifiedAt; }
+        public global::System.DateTime? DefaultGroupSystemDataLastModifiedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataLastModifiedAt; }
 
         /// <summary>The identity that last modified the resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultGroupSystemDataLastModifiedBy { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataLastModifiedBy; }
+        public string DefaultGroupSystemDataLastModifiedBy { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataLastModifiedBy; }
 
         /// <summary>The type of identity that last modified the resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultGroupSystemDataLastModifiedByType { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataLastModifiedByType; }
+        public string DefaultGroupSystemDataLastModifiedByType { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataLastModifiedByType; }
 
         /// <summary>
         /// The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultGroupType { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupType; }
+        public string DefaultGroupType { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupType; }
 
         /// <summary>A description of the recovery orchestration group.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string Description { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).Description; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).Description = value ?? null; }
+        public string Description { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).Description; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).Description = value ?? null; }
 
         /// <summary>The error additional info.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailsAdditionalInfo { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ErrorDetailsAdditionalInfo; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailsAdditionalInfo { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ErrorDetailsAdditionalInfo; }
 
         /// <summary>The error code.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailsCode { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ErrorDetailsCode; }
+        public string ErrorDetailsCode { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ErrorDetailsCode; }
 
         /// <summary>The error message.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailsMessage { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ErrorDetailsMessage; }
+        public string ErrorDetailsMessage { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ErrorDetailsMessage; }
 
         /// <summary>The error target.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailsTarget { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ErrorDetailsTarget; }
+        public string ErrorDetailsTarget { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ErrorDetailsTarget; }
 
         /// <summary>A unique id for the recovery orchestration group, which is a GUID.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string GroupUniqueId { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).GroupUniqueId; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).GroupUniqueId = value ?? null; }
+        public string GroupUniqueId { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).GroupUniqueId; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).GroupUniqueId = value ?? null; }
 
         /// <summary>
         /// Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
@@ -126,59 +126,59 @@ namespace Sample.API.Models
         /// The dictionary values can be empty objects ({}) in requests.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities IdentityUserAssignedIdentity { get => ((Sample.API.Models.IManagedServiceIdentityInternal)Identity).UserAssignedIdentity; set => ((Sample.API.Models.IManagedServiceIdentityInternal)Identity).UserAssignedIdentity = value ?? null /* model class */; }
+        public Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities IdentityUserAssignedIdentities { get => ((Sample.API.Models.IManagedServiceIdentityInternal)Identity).UserAssignedIdentities; set => ((Sample.API.Models.IManagedServiceIdentityInternal)Identity).UserAssignedIdentities = value ?? null /* model class */; }
 
         /// <summary>The error additional info.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> LatestFailoverStatusErrorDetailsAdditionalInfo { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusErrorDetailsAdditionalInfo; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> LatestFailoverStatusErrorDetailsAdditionalInfo { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusErrorDetailsAdditionalInfo; }
 
         /// <summary>The error code.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string LatestFailoverStatusErrorDetailsCode { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusErrorDetailsCode; }
+        public string LatestFailoverStatusErrorDetailsCode { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusErrorDetailsCode; }
 
         /// <summary>The error message.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string LatestFailoverStatusErrorDetailsMessage { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusErrorDetailsMessage; }
+        public string LatestFailoverStatusErrorDetailsMessage { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusErrorDetailsMessage; }
 
         /// <summary>The error target.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string LatestFailoverStatusErrorDetailsTarget { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusErrorDetailsTarget; }
+        public string LatestFailoverStatusErrorDetailsTarget { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusErrorDetailsTarget; }
 
         /// <summary>The most recent execution time of the recovery orchestration plan in UTC.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public global::System.DateTime? LatestFailoverStatusLastExecutedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusLastExecutedAt; }
+        public global::System.DateTime? LatestFailoverStatusLastExecutedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusLastExecutedAt; }
 
         /// <summary>The status of the most recent execution of the recovery orchestration plan.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string LatestFailoverStatusOperationStatus { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusOperationStatus; }
+        public string LatestFailoverStatusOperationStatus { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusOperationStatus; }
 
         /// <summary>The actual recovery time of the most recent recovery orchestration plan.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public global::System.TimeSpan? LatestFailoverStatusRecoveryTimeActual { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusRecoveryTimeActual; }
+        public global::System.TimeSpan? LatestFailoverStatusRecoveryTimeActual { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusRecoveryTimeActual; }
 
         /// <summary>The error additional info.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> LatestValidationStatusErrorDetailsAdditionalInfo { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusErrorDetailsAdditionalInfo; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> LatestValidationStatusErrorDetailsAdditionalInfo { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusErrorDetailsAdditionalInfo; }
 
         /// <summary>The error code.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string LatestValidationStatusErrorDetailsCode { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusErrorDetailsCode; }
+        public string LatestValidationStatusErrorDetailsCode { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusErrorDetailsCode; }
 
         /// <summary>The error message.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string LatestValidationStatusErrorDetailsMessage { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusErrorDetailsMessage; }
+        public string LatestValidationStatusErrorDetailsMessage { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusErrorDetailsMessage; }
 
         /// <summary>The error target.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string LatestValidationStatusErrorDetailsTarget { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusErrorDetailsTarget; }
+        public string LatestValidationStatusErrorDetailsTarget { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusErrorDetailsTarget; }
 
         /// <summary>The most recent execution time of the recovery orchestration plan in UTC.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public global::System.DateTime? LatestValidationStatusLastExecutedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusLastExecutedAt; }
+        public global::System.DateTime? LatestValidationStatusLastExecutedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusLastExecutedAt; }
 
         /// <summary>The status of the most recent execution of the recovery orchestration plan.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string LatestValidationStatusOperationStatus { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusOperationStatus; }
+        public string LatestValidationStatusOperationStatus { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusOperationStatus; }
 
         /// <summary>The name of the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
@@ -186,60 +186,56 @@ namespace Sample.API.Models
 
         /// <summary>The order ID of the recovery orchestration group.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public int? OrderId { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).OrderId; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).OrderId = value ?? default(int); }
+        public int? OrderId { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).OrderId; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).OrderId = value ?? default(int); }
 
         /// <summary>A description of the recovery orchestration plan.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string PlanDescription { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).PlanDescription; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).PlanDescription = value ?? null; }
+        public string PlanDescription { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).PlanDescription; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).PlanDescription = value ?? null; }
 
         /// <summary>The current state of the recovery orchestration plan.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string PlanState { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).PlanState; }
+        public string PlanState { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).PlanState; }
 
         /// <summary>
         /// The type of the recovery orchestration plan, which can be set during creation but cannot be changed afterward.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string PlanType { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).PlanType; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).PlanType = value ?? null; }
+        public string PlanType { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).PlanType; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).PlanType = value ?? null; }
 
         /// <summary>Post-actions for the recovery orchestration group.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostAction { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).PostAction; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).PostAction = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostActions { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).PostActions; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).PostActions = value ?? null /* arrayOf */; }
 
         /// <summary>Pre-actions for the recovery orchestration group.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreAction { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).PreAction; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).PreAction = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreActions { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).PreActions; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).PreActions = value ?? null /* arrayOf */; }
 
-        /// <summary>The error details.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesErrorDetailsDetail { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ErrorDetailsDetail; }
-
-        /// <summary>The error details.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesLatestFailoverStatusErrorDetailsDetail { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusErrorDetailsDetail; }
-
-        /// <summary>The error details.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesLatestValidationStatusErrorDetailsDetail { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusErrorDetailsDetail; }
-
-        /// <summary>Backing field for <see cref="Property" /> property.</summary>
-        private Sample.API.Models.IRecoveryPlanProperties _property;
+        /// <summary>Backing field for <see cref="Properties" /> property.</summary>
+        private Sample.API.Models.IRecoveryPlanProperties _properties;
 
         /// <summary>The resource-specific properties for this resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IRecoveryPlanProperties Property { get => (this._property = this._property ?? new Sample.API.Models.RecoveryPlanProperties()); set => this._property = value; }
+        internal Sample.API.Models.IRecoveryPlanProperties Properties { get => (this._properties = this._properties ?? new Sample.API.Models.RecoveryPlanProperties()); set => this._properties = value; }
+
+        /// <summary>The error details.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesErrorDetailsDetails { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ErrorDetailsDetails; }
+
+        /// <summary>The error details.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesLatestFailoverStatusErrorDetailsDetails { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusErrorDetailsDetails; }
+
+        /// <summary>The error details.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesLatestValidationStatusErrorDetailsDetails { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusErrorDetailsDetails; }
 
         /// <summary>The provisioning state of the recovery orchestration plan.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ProvisioningState { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ProvisioningState; }
+        public string ProvisioningState { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ProvisioningState; }
 
         /// <summary>Additional recovery orchestration group settings.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> RecoveryGroupSettingAdditionalGroup { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).RecoveryGroupSettingAdditionalGroup; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).RecoveryGroupSettingAdditionalGroup = value ?? null /* arrayOf */; }
-
-        /// <summary>Gets the resource group name</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string ResourceGroupName { get => (new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Success ? new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Groups["resourceGroupName"].Value : null); }
+        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> RecoveryGroupSettingAdditionalGroups { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).RecoveryGroupSettingAdditionalGroups; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).RecoveryGroupSettingAdditionalGroups = value ?? null /* arrayOf */; }
 
         /// <summary>Backing field for <see cref="RetryAfter" /> property.</summary>
         private int? _retryAfter;
@@ -248,49 +244,49 @@ namespace Sample.API.Models
         public int? RetryAfter { get => this._retryAfter; set => this._retryAfter = value; }
 
         /// <summary>Internal Acessors for DefaultGroupId</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.DefaultGroupId { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupId; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupId = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.DefaultGroupId { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupId; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupId = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultGroupName</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.DefaultGroupName { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupName; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupName = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.DefaultGroupName { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupName; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupName = value ?? null; }
 
-        /// <summary>Internal Acessors for DefaultGroupProperty</summary>
-        Sample.API.Models.IRecoveryGroupProperties Sample.API.Models.IRecoveryPlanInternal.DefaultGroupProperty { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupProperty; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupProperty = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for DefaultGroupProperties</summary>
+        Sample.API.Models.IRecoveryGroupProperties Sample.API.Models.IRecoveryPlanInternal.DefaultGroupProperties { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupProperties; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupProperties = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for DefaultGroupSystemData</summary>
-        Sample.API.Models.ISystemData Sample.API.Models.IRecoveryPlanInternal.DefaultGroupSystemData { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemData; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemData = value ?? null /* model class */; }
+        Sample.API.Models.ISystemData Sample.API.Models.IRecoveryPlanInternal.DefaultGroupSystemData { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemData; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemData = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for DefaultGroupSystemDataCreatedAt</summary>
-        global::System.DateTime? Sample.API.Models.IRecoveryPlanInternal.DefaultGroupSystemDataCreatedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataCreatedAt; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataCreatedAt = value ?? default(global::System.DateTime); }
+        global::System.DateTime? Sample.API.Models.IRecoveryPlanInternal.DefaultGroupSystemDataCreatedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataCreatedAt; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataCreatedAt = value ?? default(global::System.DateTime); }
 
         /// <summary>Internal Acessors for DefaultGroupSystemDataCreatedBy</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.DefaultGroupSystemDataCreatedBy { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataCreatedBy; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataCreatedBy = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.DefaultGroupSystemDataCreatedBy { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataCreatedBy; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataCreatedBy = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultGroupSystemDataCreatedByType</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.DefaultGroupSystemDataCreatedByType { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataCreatedByType; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataCreatedByType = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.DefaultGroupSystemDataCreatedByType { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataCreatedByType; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataCreatedByType = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultGroupSystemDataLastModifiedAt</summary>
-        global::System.DateTime? Sample.API.Models.IRecoveryPlanInternal.DefaultGroupSystemDataLastModifiedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataLastModifiedAt; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataLastModifiedAt = value ?? default(global::System.DateTime); }
+        global::System.DateTime? Sample.API.Models.IRecoveryPlanInternal.DefaultGroupSystemDataLastModifiedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataLastModifiedAt; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataLastModifiedAt = value ?? default(global::System.DateTime); }
 
         /// <summary>Internal Acessors for DefaultGroupSystemDataLastModifiedBy</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.DefaultGroupSystemDataLastModifiedBy { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataLastModifiedBy; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataLastModifiedBy = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.DefaultGroupSystemDataLastModifiedBy { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataLastModifiedBy; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataLastModifiedBy = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultGroupSystemDataLastModifiedByType</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.DefaultGroupSystemDataLastModifiedByType { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataLastModifiedByType; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupSystemDataLastModifiedByType = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.DefaultGroupSystemDataLastModifiedByType { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataLastModifiedByType; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupSystemDataLastModifiedByType = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultGroupType</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.DefaultGroupType { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupType; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).DefaultGroupType = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.DefaultGroupType { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupType; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).DefaultGroupType = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailsAdditionalInfo</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IRecoveryPlanInternal.ErrorDetailsAdditionalInfo { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ErrorDetailsAdditionalInfo; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ErrorDetailsAdditionalInfo = value ?? null /* arrayOf */; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IRecoveryPlanInternal.ErrorDetailsAdditionalInfo { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ErrorDetailsAdditionalInfo; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ErrorDetailsAdditionalInfo = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ErrorDetailsCode</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.ErrorDetailsCode { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ErrorDetailsCode; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ErrorDetailsCode = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.ErrorDetailsCode { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ErrorDetailsCode; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ErrorDetailsCode = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailsMessage</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.ErrorDetailsMessage { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ErrorDetailsMessage; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ErrorDetailsMessage = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.ErrorDetailsMessage { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ErrorDetailsMessage; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ErrorDetailsMessage = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailsTarget</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.ErrorDetailsTarget { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ErrorDetailsTarget; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ErrorDetailsTarget = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.ErrorDetailsTarget { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ErrorDetailsTarget; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ErrorDetailsTarget = value ?? null; }
 
         /// <summary>Internal Acessors for Identity</summary>
         Sample.API.Models.IManagedServiceIdentity Sample.API.Models.IRecoveryPlanInternal.Identity { get => (this._identity = this._identity ?? new Sample.API.Models.ManagedServiceIdentity()); set { {_identity = value;} } }
@@ -302,82 +298,82 @@ namespace Sample.API.Models
         string Sample.API.Models.IRecoveryPlanInternal.IdentityTenantId { get => ((Sample.API.Models.IManagedServiceIdentityInternal)Identity).TenantId; set => ((Sample.API.Models.IManagedServiceIdentityInternal)Identity).TenantId = value ?? null; }
 
         /// <summary>Internal Acessors for LatestFailoverStatus</summary>
-        Sample.API.Models.IRecoveryPlanFailoverOperationStatus Sample.API.Models.IRecoveryPlanInternal.LatestFailoverStatus { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatus; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatus = value ?? null /* model class */; }
+        Sample.API.Models.IRecoveryPlanFailoverOperationStatus Sample.API.Models.IRecoveryPlanInternal.LatestFailoverStatus { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatus; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatus = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for LatestFailoverStatusErrorDetailsAdditionalInfo</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IRecoveryPlanInternal.LatestFailoverStatusErrorDetailsAdditionalInfo { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusErrorDetailsAdditionalInfo; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusErrorDetailsAdditionalInfo = value ?? null /* arrayOf */; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IRecoveryPlanInternal.LatestFailoverStatusErrorDetailsAdditionalInfo { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusErrorDetailsAdditionalInfo; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusErrorDetailsAdditionalInfo = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for LatestFailoverStatusErrorDetailsCode</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.LatestFailoverStatusErrorDetailsCode { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusErrorDetailsCode; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusErrorDetailsCode = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.LatestFailoverStatusErrorDetailsCode { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusErrorDetailsCode; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusErrorDetailsCode = value ?? null; }
 
         /// <summary>Internal Acessors for LatestFailoverStatusErrorDetailsMessage</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.LatestFailoverStatusErrorDetailsMessage { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusErrorDetailsMessage; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusErrorDetailsMessage = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.LatestFailoverStatusErrorDetailsMessage { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusErrorDetailsMessage; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusErrorDetailsMessage = value ?? null; }
 
         /// <summary>Internal Acessors for LatestFailoverStatusErrorDetailsTarget</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.LatestFailoverStatusErrorDetailsTarget { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusErrorDetailsTarget; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusErrorDetailsTarget = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.LatestFailoverStatusErrorDetailsTarget { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusErrorDetailsTarget; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusErrorDetailsTarget = value ?? null; }
 
         /// <summary>Internal Acessors for LatestFailoverStatusLastExecutedAt</summary>
-        global::System.DateTime? Sample.API.Models.IRecoveryPlanInternal.LatestFailoverStatusLastExecutedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusLastExecutedAt; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusLastExecutedAt = value ?? default(global::System.DateTime); }
+        global::System.DateTime? Sample.API.Models.IRecoveryPlanInternal.LatestFailoverStatusLastExecutedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusLastExecutedAt; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusLastExecutedAt = value ?? default(global::System.DateTime); }
 
         /// <summary>Internal Acessors for LatestFailoverStatusOperationStatus</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.LatestFailoverStatusOperationStatus { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusOperationStatus; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusOperationStatus = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.LatestFailoverStatusOperationStatus { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusOperationStatus; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusOperationStatus = value ?? null; }
 
         /// <summary>Internal Acessors for LatestFailoverStatusRecoveryTimeActual</summary>
-        global::System.TimeSpan? Sample.API.Models.IRecoveryPlanInternal.LatestFailoverStatusRecoveryTimeActual { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusRecoveryTimeActual; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusRecoveryTimeActual = value ?? default(global::System.TimeSpan); }
+        global::System.TimeSpan? Sample.API.Models.IRecoveryPlanInternal.LatestFailoverStatusRecoveryTimeActual { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusRecoveryTimeActual; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusRecoveryTimeActual = value ?? default(global::System.TimeSpan); }
 
         /// <summary>Internal Acessors for LatestValidationStatus</summary>
-        Sample.API.Models.IRecoveryPlanOperationStatus Sample.API.Models.IRecoveryPlanInternal.LatestValidationStatus { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatus; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatus = value ?? null /* model class */; }
+        Sample.API.Models.IRecoveryPlanOperationStatus Sample.API.Models.IRecoveryPlanInternal.LatestValidationStatus { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatus; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatus = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for LatestValidationStatusErrorDetailsAdditionalInfo</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IRecoveryPlanInternal.LatestValidationStatusErrorDetailsAdditionalInfo { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusErrorDetailsAdditionalInfo; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusErrorDetailsAdditionalInfo = value ?? null /* arrayOf */; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IRecoveryPlanInternal.LatestValidationStatusErrorDetailsAdditionalInfo { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusErrorDetailsAdditionalInfo; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusErrorDetailsAdditionalInfo = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for LatestValidationStatusErrorDetailsCode</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.LatestValidationStatusErrorDetailsCode { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusErrorDetailsCode; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusErrorDetailsCode = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.LatestValidationStatusErrorDetailsCode { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusErrorDetailsCode; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusErrorDetailsCode = value ?? null; }
 
         /// <summary>Internal Acessors for LatestValidationStatusErrorDetailsMessage</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.LatestValidationStatusErrorDetailsMessage { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusErrorDetailsMessage; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusErrorDetailsMessage = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.LatestValidationStatusErrorDetailsMessage { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusErrorDetailsMessage; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusErrorDetailsMessage = value ?? null; }
 
         /// <summary>Internal Acessors for LatestValidationStatusErrorDetailsTarget</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.LatestValidationStatusErrorDetailsTarget { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusErrorDetailsTarget; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusErrorDetailsTarget = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.LatestValidationStatusErrorDetailsTarget { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusErrorDetailsTarget; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusErrorDetailsTarget = value ?? null; }
 
         /// <summary>Internal Acessors for LatestValidationStatusLastExecutedAt</summary>
-        global::System.DateTime? Sample.API.Models.IRecoveryPlanInternal.LatestValidationStatusLastExecutedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusLastExecutedAt; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusLastExecutedAt = value ?? default(global::System.DateTime); }
+        global::System.DateTime? Sample.API.Models.IRecoveryPlanInternal.LatestValidationStatusLastExecutedAt { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusLastExecutedAt; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusLastExecutedAt = value ?? default(global::System.DateTime); }
 
         /// <summary>Internal Acessors for LatestValidationStatusOperationStatus</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.LatestValidationStatusOperationStatus { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusOperationStatus; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusOperationStatus = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.LatestValidationStatusOperationStatus { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusOperationStatus; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusOperationStatus = value ?? null; }
 
         /// <summary>Internal Acessors for PlanState</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.PlanState { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).PlanState; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).PlanState = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.PlanState { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).PlanState; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).PlanState = value ?? null; }
 
-        /// <summary>Internal Acessors for PropertiesErrorDetail</summary>
-        Sample.API.Models.IErrorDetail Sample.API.Models.IRecoveryPlanInternal.PropertiesErrorDetail { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ErrorDetail; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ErrorDetail = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for Properties</summary>
+        Sample.API.Models.IRecoveryPlanProperties Sample.API.Models.IRecoveryPlanInternal.Properties { get => (this._properties = this._properties ?? new Sample.API.Models.RecoveryPlanProperties()); set { {_properties = value;} } }
 
-        /// <summary>Internal Acessors for PropertiesErrorDetailsDetail</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IRecoveryPlanInternal.PropertiesErrorDetailsDetail { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ErrorDetailsDetail; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ErrorDetailsDetail = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for PropertiesErrorDetails</summary>
+        Sample.API.Models.IErrorDetail Sample.API.Models.IRecoveryPlanInternal.PropertiesErrorDetails { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ErrorDetails; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ErrorDetails = value ?? null /* model class */; }
 
-        /// <summary>Internal Acessors for PropertiesLatestFailoverStatusErrorDetail</summary>
-        Sample.API.Models.IErrorDetail Sample.API.Models.IRecoveryPlanInternal.PropertiesLatestFailoverStatusErrorDetail { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusErrorDetail; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusErrorDetail = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for PropertiesErrorDetailsDetails</summary>
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IRecoveryPlanInternal.PropertiesErrorDetailsDetails { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ErrorDetailsDetails; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ErrorDetailsDetails = value ?? null /* arrayOf */; }
 
-        /// <summary>Internal Acessors for PropertiesLatestFailoverStatusErrorDetailsDetail</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IRecoveryPlanInternal.PropertiesLatestFailoverStatusErrorDetailsDetail { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusErrorDetailsDetail; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestFailoverStatusErrorDetailsDetail = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for PropertiesLatestFailoverStatusErrorDetails</summary>
+        Sample.API.Models.IErrorDetail Sample.API.Models.IRecoveryPlanInternal.PropertiesLatestFailoverStatusErrorDetails { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusErrorDetails; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusErrorDetails = value ?? null /* model class */; }
 
-        /// <summary>Internal Acessors for PropertiesLatestValidationStatusErrorDetail</summary>
-        Sample.API.Models.IErrorDetail Sample.API.Models.IRecoveryPlanInternal.PropertiesLatestValidationStatusErrorDetail { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusErrorDetail; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusErrorDetail = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for PropertiesLatestFailoverStatusErrorDetailsDetails</summary>
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IRecoveryPlanInternal.PropertiesLatestFailoverStatusErrorDetailsDetails { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusErrorDetailsDetails; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestFailoverStatusErrorDetailsDetails = value ?? null /* arrayOf */; }
 
-        /// <summary>Internal Acessors for PropertiesLatestValidationStatusErrorDetailsDetail</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IRecoveryPlanInternal.PropertiesLatestValidationStatusErrorDetailsDetail { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusErrorDetailsDetail; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).LatestValidationStatusErrorDetailsDetail = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for PropertiesLatestValidationStatusErrorDetails</summary>
+        Sample.API.Models.IErrorDetail Sample.API.Models.IRecoveryPlanInternal.PropertiesLatestValidationStatusErrorDetails { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusErrorDetails; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusErrorDetails = value ?? null /* model class */; }
 
-        /// <summary>Internal Acessors for Property</summary>
-        Sample.API.Models.IRecoveryPlanProperties Sample.API.Models.IRecoveryPlanInternal.Property { get => (this._property = this._property ?? new Sample.API.Models.RecoveryPlanProperties()); set { {_property = value;} } }
+        /// <summary>Internal Acessors for PropertiesLatestValidationStatusErrorDetailsDetails</summary>
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IRecoveryPlanInternal.PropertiesLatestValidationStatusErrorDetailsDetails { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusErrorDetailsDetails; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).LatestValidationStatusErrorDetailsDetails = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ProvisioningState</summary>
-        string Sample.API.Models.IRecoveryPlanInternal.ProvisioningState { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ProvisioningState; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).ProvisioningState = value ?? null; }
+        string Sample.API.Models.IRecoveryPlanInternal.ProvisioningState { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ProvisioningState; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).ProvisioningState = value ?? null; }
 
         /// <summary>Internal Acessors for RecoveryGroupSettingDefaultGroup</summary>
-        Sample.API.Models.IRecoveryGroup Sample.API.Models.IRecoveryPlanInternal.RecoveryGroupSettingDefaultGroup { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).RecoveryGroupSettingDefaultGroup; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).RecoveryGroupSettingDefaultGroup = value ?? null /* model class */; }
+        Sample.API.Models.IRecoveryGroup Sample.API.Models.IRecoveryPlanInternal.RecoveryGroupSettingDefaultGroup { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).RecoveryGroupSettingDefaultGroup; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).RecoveryGroupSettingDefaultGroup = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for RecoveryGroupsSetting</summary>
-        Sample.API.Models.IRecoveryGroupsSetting Sample.API.Models.IRecoveryPlanInternal.RecoveryGroupsSetting { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).RecoveryGroupsSetting; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Property).RecoveryGroupsSetting = value ?? null /* model class */; }
+        Sample.API.Models.IRecoveryGroupsSetting Sample.API.Models.IRecoveryPlanInternal.RecoveryGroupsSetting { get => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).RecoveryGroupsSetting; set => ((Sample.API.Models.IRecoveryPlanPropertiesInternal)Properties).RecoveryGroupsSetting = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for Id</summary>
         string Sample.API.Models.IResourceInternal.Id { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Id; set => ((Sample.API.Models.IResourceInternal)__proxyResource).Id = value ?? null; }
@@ -501,7 +497,7 @@ namespace Sample.API.Models
         Create = false,
         Update = false,
         Description = @"Fully qualified resource ID for the resource. E.g. ""/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}""",
-        SerializedName = @"ResourceGroupName",
+        SerializedName = @"id",
         PossibleTypes = new [] { typeof(string) })]
         string DefaultGroupId { get;  }
         /// <summary>The name of the resource</summary>
@@ -716,7 +712,7 @@ namespace Sample.API.Models
         Description = @"The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
         SerializedName = @"userAssignedIdentities",
         PossibleTypes = new [] { typeof(Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities) })]
-        Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities IdentityUserAssignedIdentity { get; set; }
+        Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities IdentityUserAssignedIdentities { get; set; }
         /// <summary>The error additional info.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -920,7 +916,7 @@ namespace Sample.API.Models
         Description = @"Post-actions for the recovery orchestration group.",
         SerializedName = @"postActions",
         PossibleTypes = new [] { typeof(Sample.API.Models.IRecoveryGroupBaseAction) })]
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostAction { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostActions { get; set; }
         /// <summary>Pre-actions for the recovery orchestration group.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -931,7 +927,7 @@ namespace Sample.API.Models
         Description = @"Pre-actions for the recovery orchestration group.",
         SerializedName = @"preActions",
         PossibleTypes = new [] { typeof(Sample.API.Models.IRecoveryGroupBaseAction) })]
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreAction { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreActions { get; set; }
         /// <summary>The error details.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -942,7 +938,7 @@ namespace Sample.API.Models
         Description = @"The error details.",
         SerializedName = @"details",
         PossibleTypes = new [] { typeof(Sample.API.Models.IErrorDetail) })]
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesErrorDetailsDetail { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesErrorDetailsDetails { get;  }
         /// <summary>The error details.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -953,7 +949,7 @@ namespace Sample.API.Models
         Description = @"The error details.",
         SerializedName = @"details",
         PossibleTypes = new [] { typeof(Sample.API.Models.IErrorDetail) })]
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesLatestFailoverStatusErrorDetailsDetail { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesLatestFailoverStatusErrorDetailsDetails { get;  }
         /// <summary>The error details.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -964,7 +960,7 @@ namespace Sample.API.Models
         Description = @"The error details.",
         SerializedName = @"details",
         PossibleTypes = new [] { typeof(Sample.API.Models.IErrorDetail) })]
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesLatestValidationStatusErrorDetailsDetail { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesLatestValidationStatusErrorDetailsDetails { get;  }
         /// <summary>The provisioning state of the recovery orchestration plan.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -987,7 +983,7 @@ namespace Sample.API.Models
         Description = @"Additional recovery orchestration group settings.",
         SerializedName = @"additionalGroups",
         PossibleTypes = new [] { typeof(Sample.API.Models.IRecoveryGroup) })]
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> RecoveryGroupSettingAdditionalGroup { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> RecoveryGroupSettingAdditionalGroups { get; set; }
 
         [Sample.API.Runtime.Info(
         Required = false,
@@ -1013,7 +1009,7 @@ namespace Sample.API.Models
         /// <summary>The name of the resource</summary>
         string DefaultGroupName { get; set; }
         /// <summary>The resource-specific properties for this resource.</summary>
-        Sample.API.Models.IRecoveryGroupProperties DefaultGroupProperty { get; set; }
+        Sample.API.Models.IRecoveryGroupProperties DefaultGroupProperties { get; set; }
         /// <summary>
         /// Azure Resource Manager metadata containing createdBy and modifiedBy information.
         /// </summary>
@@ -1068,7 +1064,7 @@ namespace Sample.API.Models
         /// resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}.
         /// The dictionary values can be empty objects ({}) in requests.
         /// </summary>
-        Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities IdentityUserAssignedIdentity { get; set; }
+        Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities IdentityUserAssignedIdentities { get; set; }
         /// <summary>The status of the most recent failover operation executed.</summary>
         Sample.API.Models.IRecoveryPlanFailoverOperationStatus LatestFailoverStatus { get; set; }
         /// <summary>The error additional info.</summary>
@@ -1114,28 +1110,28 @@ namespace Sample.API.Models
         [global::Sample.API.PSArgumentCompleterAttribute("Regional", "Zonal")]
         string PlanType { get; set; }
         /// <summary>Post-actions for the recovery orchestration group.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostAction { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostActions { get; set; }
         /// <summary>Pre-actions for the recovery orchestration group.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreAction { get; set; }
-        /// <summary>Error details associated with the resource.</summary>
-        Sample.API.Models.IErrorDetail PropertiesErrorDetail { get; set; }
-        /// <summary>The error details.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesErrorDetailsDetail { get; set; }
-        /// <summary>Error details for the most recent execution of the recovery orchestration plan.</summary>
-        Sample.API.Models.IErrorDetail PropertiesLatestFailoverStatusErrorDetail { get; set; }
-        /// <summary>The error details.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesLatestFailoverStatusErrorDetailsDetail { get; set; }
-        /// <summary>Error details for the most recent execution of the recovery orchestration plan.</summary>
-        Sample.API.Models.IErrorDetail PropertiesLatestValidationStatusErrorDetail { get; set; }
-        /// <summary>The error details.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesLatestValidationStatusErrorDetailsDetail { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreActions { get; set; }
         /// <summary>The resource-specific properties for this resource.</summary>
-        Sample.API.Models.IRecoveryPlanProperties Property { get; set; }
+        Sample.API.Models.IRecoveryPlanProperties Properties { get; set; }
+        /// <summary>Error details associated with the resource.</summary>
+        Sample.API.Models.IErrorDetail PropertiesErrorDetails { get; set; }
+        /// <summary>The error details.</summary>
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesErrorDetailsDetails { get; set; }
+        /// <summary>Error details for the most recent execution of the recovery orchestration plan.</summary>
+        Sample.API.Models.IErrorDetail PropertiesLatestFailoverStatusErrorDetails { get; set; }
+        /// <summary>The error details.</summary>
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesLatestFailoverStatusErrorDetailsDetails { get; set; }
+        /// <summary>Error details for the most recent execution of the recovery orchestration plan.</summary>
+        Sample.API.Models.IErrorDetail PropertiesLatestValidationStatusErrorDetails { get; set; }
+        /// <summary>The error details.</summary>
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> PropertiesLatestValidationStatusErrorDetailsDetails { get; set; }
         /// <summary>The provisioning state of the recovery orchestration plan.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }
         /// <summary>Additional recovery orchestration group settings.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> RecoveryGroupSettingAdditionalGroup { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> RecoveryGroupSettingAdditionalGroups { get; set; }
         /// <summary>
         /// The default recovery orchestration group setting. Every recovery orchestration plan has a default recovery orchestration
         /// group.

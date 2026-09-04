@@ -18,7 +18,7 @@ function CreateModelCmdlet {
     if (''.length -gt 0) {
         $ModuleName = ''
     } else {
-        $ModuleName = 'Az.AzureResilienceManagement'
+        $ModuleName = 'Az.ResilienceManagement'
     }
     $CsFiles = Get-ChildItem -Path $ModelCsPath -Recurse -Filter *.cs
     $Content = ''
@@ -77,10 +77,10 @@ function CreateModelCmdlet {
         $ObjectTypeWithNamespace = "${Namespace}.${ObjectType}"
         $Prefix = ''
         # remove duplicated module name
-        if ($ObjectType.StartsWith('AzureResilienceManagement')) {
+        if ($ObjectType.StartsWith('AzResilienceManagement')) {
             $ModulePrefix = ''
         } else {
-            $ModulePrefix = 'AzureResilienceManagement'
+            $ModulePrefix = 'AzResilienceManagement'
         }
         $OutputPath = Join-Path -ChildPath "New-${Prefix}${ModulePrefix}${ObjectType}Object.ps1" -Path $OutputDir
 

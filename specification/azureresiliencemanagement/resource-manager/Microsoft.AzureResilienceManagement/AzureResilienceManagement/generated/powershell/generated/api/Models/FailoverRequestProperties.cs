@@ -11,36 +11,36 @@ namespace Sample.API.Models
         Sample.API.Models.IFailoverRequestPropertiesInternal
     {
 
-        /// <summary>Backing field for <see cref="ExecutionConfiguration" /> property.</summary>
-        private Sample.API.Models.IExecutionConfigurations _executionConfiguration;
+        /// <summary>User consent for performing recovery action.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public string ExecutionConfigurationUserConsent { get => ((Sample.API.Models.IExecutionConfigurationsInternal)ExecutionConfigurations).UserConsent; set => ((Sample.API.Models.IExecutionConfigurationsInternal)ExecutionConfigurations).UserConsent = value ?? null; }
+
+        /// <summary>Backing field for <see cref="ExecutionConfigurations" /> property.</summary>
+        private Sample.API.Models.IExecutionConfigurations _executionConfigurations;
 
         /// <summary>Execution configurations for the recovery action.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IExecutionConfigurations ExecutionConfiguration { get => (this._executionConfiguration = this._executionConfiguration ?? new Sample.API.Models.ExecutionConfigurations()); set => this._executionConfiguration = value; }
+        internal Sample.API.Models.IExecutionConfigurations ExecutionConfigurations { get => (this._executionConfigurations = this._executionConfigurations ?? new Sample.API.Models.ExecutionConfigurations()); set => this._executionConfigurations = value; }
 
-        /// <summary>User consent for performing recovery action.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ExecutionConfigurationUserConsent { get => ((Sample.API.Models.IExecutionConfigurationsInternal)ExecutionConfiguration).UserConsent; set => ((Sample.API.Models.IExecutionConfigurationsInternal)ExecutionConfiguration).UserConsent = value ?? null; }
+        /// <summary>Internal Acessors for ExecutionConfigurations</summary>
+        Sample.API.Models.IExecutionConfigurations Sample.API.Models.IFailoverRequestPropertiesInternal.ExecutionConfigurations { get => (this._executionConfigurations = this._executionConfigurations ?? new Sample.API.Models.ExecutionConfigurations()); set { {_executionConfigurations = value;} } }
 
-        /// <summary>Internal Acessors for ExecutionConfiguration</summary>
-        Sample.API.Models.IExecutionConfigurations Sample.API.Models.IFailoverRequestPropertiesInternal.ExecutionConfiguration { get => (this._executionConfiguration = this._executionConfiguration ?? new Sample.API.Models.ExecutionConfigurations()); set { {_executionConfiguration = value;} } }
-
-        /// <summary>Backing field for <see cref="SelectedResourceId" /> property.</summary>
-        private System.Collections.Generic.List<string> _selectedResourceId;
+        /// <summary>Backing field for <see cref="SelectedResourceIds" /> property.</summary>
+        private System.Collections.Generic.List<string> _selectedResourceIds;
 
         /// <summary>
         /// Selected recovery resource Ids to be processed. If not provided, all qualified resources based on the source location(s)
         /// will be processed.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> SelectedResourceId { get => this._selectedResourceId; set => this._selectedResourceId = value; }
+        public System.Collections.Generic.List<string> SelectedResourceIds { get => this._selectedResourceIds; set => this._selectedResourceIds = value; }
 
-        /// <summary>Backing field for <see cref="SourceLocation" /> property.</summary>
-        private System.Collections.Generic.List<string> _sourceLocation;
+        /// <summary>Backing field for <see cref="SourceLocations" /> property.</summary>
+        private System.Collections.Generic.List<string> _sourceLocations;
 
         /// <summary>Source locations from where resources to be failed-over.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> SourceLocation { get => this._sourceLocation; set => this._sourceLocation = value; }
+        public System.Collections.Generic.List<string> SourceLocations { get => this._sourceLocations; set => this._sourceLocations = value; }
 
         /// <summary>Creates an new <see cref="FailoverRequestProperties" /> instance.</summary>
         public FailoverRequestProperties()
@@ -77,7 +77,7 @@ namespace Sample.API.Models
         Description = @"Selected recovery resource Ids to be processed. If not provided, all qualified resources based on the source location(s) will be processed.",
         SerializedName = @"selectedResourceIds",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> SelectedResourceId { get; set; }
+        System.Collections.Generic.List<string> SelectedResourceIds { get; set; }
         /// <summary>Source locations from where resources to be failed-over.</summary>
         [Sample.API.Runtime.Info(
         Required = true,
@@ -88,25 +88,25 @@ namespace Sample.API.Models
         Description = @"Source locations from where resources to be failed-over.",
         SerializedName = @"sourceLocations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> SourceLocation { get; set; }
+        System.Collections.Generic.List<string> SourceLocations { get; set; }
 
     }
     /// Additional properties for Failover.
     internal partial interface IFailoverRequestPropertiesInternal
 
     {
-        /// <summary>Execution configurations for the recovery action.</summary>
-        Sample.API.Models.IExecutionConfigurations ExecutionConfiguration { get; set; }
         /// <summary>User consent for performing recovery action.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Unspecified", "Allowed")]
         string ExecutionConfigurationUserConsent { get; set; }
+        /// <summary>Execution configurations for the recovery action.</summary>
+        Sample.API.Models.IExecutionConfigurations ExecutionConfigurations { get; set; }
         /// <summary>
         /// Selected recovery resource Ids to be processed. If not provided, all qualified resources based on the source location(s)
         /// will be processed.
         /// </summary>
-        System.Collections.Generic.List<string> SelectedResourceId { get; set; }
+        System.Collections.Generic.List<string> SelectedResourceIds { get; set; }
         /// <summary>Source locations from where resources to be failed-over.</summary>
-        System.Collections.Generic.List<string> SourceLocation { get; set; }
+        System.Collections.Generic.List<string> SourceLocations { get; set; }
 
     }
 }

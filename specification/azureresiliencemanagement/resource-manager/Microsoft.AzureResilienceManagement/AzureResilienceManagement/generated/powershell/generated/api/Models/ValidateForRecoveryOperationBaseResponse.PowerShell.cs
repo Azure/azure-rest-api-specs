@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.ValidateForRecoveryOperationBaseResponse"
         /// />.
         /// </summary>
@@ -101,18 +93,6 @@ namespace Sample.API.Models
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
 
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
-
         /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into a new instance of <see cref="Sample.API.Models.ValidateForRecoveryOperationBaseResponse"
         /// />.
@@ -127,9 +107,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("RecoveryResourceQualification"))
+            if (content.Contains("RecoveryResourceQualifications"))
             {
-                ((Sample.API.Models.IValidateForRecoveryOperationBaseResponseInternal)this).RecoveryResourceQualification = (System.Collections.Generic.List<Sample.API.Models.IRecoveryResourceQualification>) content.GetValueForProperty("RecoveryResourceQualification",((Sample.API.Models.IValidateForRecoveryOperationBaseResponseInternal)this).RecoveryResourceQualification, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryResourceQualification>(__y, Sample.API.Models.RecoveryResourceQualificationTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IValidateForRecoveryOperationBaseResponseInternal)this).RecoveryResourceQualifications = (System.Collections.Generic.List<Sample.API.Models.IRecoveryResourceQualification>) content.GetValueForProperty("RecoveryResourceQualifications",((Sample.API.Models.IValidateForRecoveryOperationBaseResponseInternal)this).RecoveryResourceQualifications, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryResourceQualification>(__y, Sample.API.Models.RecoveryResourceQualificationTypeConverter.ConvertFrom));
             }
             AfterDeserializeDictionary(content);
         }
@@ -148,9 +128,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("RecoveryResourceQualification"))
+            if (content.Contains("RecoveryResourceQualifications"))
             {
-                ((Sample.API.Models.IValidateForRecoveryOperationBaseResponseInternal)this).RecoveryResourceQualification = (System.Collections.Generic.List<Sample.API.Models.IRecoveryResourceQualification>) content.GetValueForProperty("RecoveryResourceQualification",((Sample.API.Models.IValidateForRecoveryOperationBaseResponseInternal)this).RecoveryResourceQualification, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryResourceQualification>(__y, Sample.API.Models.RecoveryResourceQualificationTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IValidateForRecoveryOperationBaseResponseInternal)this).RecoveryResourceQualifications = (System.Collections.Generic.List<Sample.API.Models.IRecoveryResourceQualification>) content.GetValueForProperty("RecoveryResourceQualifications",((Sample.API.Models.IValidateForRecoveryOperationBaseResponseInternal)this).RecoveryResourceQualifications, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryResourceQualification>(__y, Sample.API.Models.RecoveryResourceQualificationTypeConverter.ConvertFrom));
             }
             AfterDeserializePSObject(content);
         }

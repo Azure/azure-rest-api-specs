@@ -80,7 +80,7 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != this._validateForExecutionProperty ? (Sample.API.Runtime.Json.JsonNode) this._validateForExecutionProperty.ToJson(null,serializationMode) : null, "validateForExecutionProperties" ,container.Add );
+            AddIf( null != this._validateForExecutionProperties ? (Sample.API.Runtime.Json.JsonNode) this._validateForExecutionProperties.ToJson(null,serializationMode) : null, "validateForExecutionProperties" ,container.Add );
             AfterToJson(ref container);
             return container;
         }
@@ -97,7 +97,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_validateForExecutionProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("validateForExecutionProperties"), out var __jsonValidateForExecutionProperties) ? Sample.API.Models.ValidateForExecutionProperties.FromJson(__jsonValidateForExecutionProperties) : _validateForExecutionProperty;}
+            {_validateForExecutionProperties = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("validateForExecutionProperties"), out var __jsonValidateForExecutionProperties) ? Sample.API.Models.ValidateForExecutionProperties.FromJson(__jsonValidateForExecutionProperties) : _validateForExecutionProperties;}
             AfterFromJson(json);
         }
     }

@@ -63,7 +63,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_errorDetail = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("errorDetails"), out var __jsonErrorDetails) ? Sample.API.Models.ErrorDetail.FromJson(__jsonErrorDetails) : _errorDetail;}
+            {_errorDetails = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("errorDetails"), out var __jsonErrorDetails) ? Sample.API.Models.ErrorDetail.FromJson(__jsonErrorDetails) : _errorDetails;}
             {_serviceGroupId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("serviceGroupId"), out var __jsonServiceGroupId) ? (string)__jsonServiceGroupId : (string)_serviceGroupId;}
             {_provisioningState = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("provisioningState"), out var __jsonProvisioningState) ? (string)__jsonProvisioningState : (string)_provisioningState;}
             AfterFromJson(json);
@@ -100,7 +100,7 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                AddIf( null != this._errorDetail ? (Sample.API.Runtime.Json.JsonNode) this._errorDetail.ToJson(null,serializationMode) : null, "errorDetails" ,container.Add );
+                AddIf( null != this._errorDetails ? (Sample.API.Runtime.Json.JsonNode) this._errorDetails.ToJson(null,serializationMode) : null, "errorDetails" ,container.Add );
             }
             AddIf( null != (((object)this._serviceGroupId)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._serviceGroupId.ToString()) : null, "serviceGroupId" ,container.Add );
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))

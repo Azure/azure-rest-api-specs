@@ -56,8 +56,8 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string FeasibilityType { get => this._feasibilityType; }
 
-        /// <summary>Backing field for <see cref="RecommendedTargetSku" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.ISkuDetails> _recommendedTargetSku;
+        /// <summary>Backing field for <see cref="RecommendedTargetSkus" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.ISkuDetails> _recommendedTargetSkus;
 
         /// <summary>
         /// Alternative SKUs surfaced for this review. Absent or empty means a `Flagged` review has no alternatives, an `Unavailable`
@@ -65,7 +65,7 @@ namespace Sample.API.Models
         /// should treat an absent array and an empty array identically.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.ISkuDetails> RecommendedTargetSku { get => this._recommendedTargetSku; set => this._recommendedTargetSku = value; }
+        public System.Collections.Generic.List<Sample.API.Models.ISkuDetails> RecommendedTargetSkus { get => this._recommendedTargetSkus; set => this._recommendedTargetSkus = value; }
 
         /// <summary>Backing field for <see cref="ResourceType" /> property.</summary>
         private string _resourceType;
@@ -192,7 +192,7 @@ namespace Sample.API.Models
         Description = @"Alternative SKUs surfaced for this review. Absent or empty means a `Flagged` review has no alternatives, an `Unavailable` review has no applicable recommendations to surface, or the review has a minimal `Passed` / `NotApplicable` outcome. Callers should treat an absent array and an empty array identically.",
         SerializedName = @"recommendedTargetSkus",
         PossibleTypes = new [] { typeof(Sample.API.Models.ISkuDetails) })]
-        System.Collections.Generic.List<Sample.API.Models.ISkuDetails> RecommendedTargetSku { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.ISkuDetails> RecommendedTargetSkus { get; set; }
         /// <summary>
         /// Fully qualified ARM resource type evaluated, e.g. `Microsoft.Compute/virtualMachines`.
         /// </summary>
@@ -250,7 +250,7 @@ namespace Sample.API.Models
         /// review has no applicable recommendations to surface, or the review has a minimal `Passed` / `NotApplicable` outcome. Callers
         /// should treat an absent array and an empty array identically.
         /// </summary>
-        System.Collections.Generic.List<Sample.API.Models.ISkuDetails> RecommendedTargetSku { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.ISkuDetails> RecommendedTargetSkus { get; set; }
         /// <summary>
         /// Fully qualified ARM resource type evaluated, e.g. `Microsoft.Compute/virtualMachines`.
         /// </summary>

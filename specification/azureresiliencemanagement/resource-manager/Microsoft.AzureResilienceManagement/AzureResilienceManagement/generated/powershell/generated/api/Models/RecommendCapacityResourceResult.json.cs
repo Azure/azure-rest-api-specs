@@ -83,10 +83,10 @@ namespace Sample.API.Models
             {_capacityAssessment = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("capacityAssessment"), out var __jsonCapacityAssessment) ? (string)__jsonCapacityAssessment : (string)_capacityAssessment;}
             {_error = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("error"), out var __jsonError) ? (string)__jsonError : (string)_error;}
             {_category = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("category"), out var __jsonCategory) ? (string)__jsonCategory : (string)_category;}
-            {_suggestedRegion = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("suggestedRegions"), out var __jsonSuggestedRegions) ? If( __jsonSuggestedRegions as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _suggestedRegion;}
-            {_suggestedSku = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("suggestedSkus"), out var __jsonSuggestedSkus) ? If( __jsonSuggestedSkus as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _suggestedSku;}
-            {_step = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("steps"), out var __jsonSteps) ? If( __jsonSteps as Sample.API.Runtime.Json.JsonArray, out var __l) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__l, (__k)=>(string) (__k is Sample.API.Runtime.Json.JsonString __j ? (string)(__j.ToString()) : null)) ))() : null : _step;}
-            {_link = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("links"), out var __jsonLinks) ? If( __jsonLinks as Sample.API.Runtime.Json.JsonArray, out var __g) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__g, (__f)=>(string) (__f is Sample.API.Runtime.Json.JsonString __e ? (string)(__e.ToString()) : null)) ))() : null : _link;}
+            {_suggestedRegions = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("suggestedRegions"), out var __jsonSuggestedRegions) ? If( __jsonSuggestedRegions as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _suggestedRegions;}
+            {_suggestedSkus = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("suggestedSkus"), out var __jsonSuggestedSkus) ? If( __jsonSuggestedSkus as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _suggestedSkus;}
+            {_steps = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("steps"), out var __jsonSteps) ? If( __jsonSteps as Sample.API.Runtime.Json.JsonArray, out var __l) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__l, (__k)=>(string) (__k is Sample.API.Runtime.Json.JsonString __j ? (string)(__j.ToString()) : null)) ))() : null : _steps;}
+            {_links = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("links"), out var __jsonLinks) ? If( __jsonLinks as Sample.API.Runtime.Json.JsonArray, out var __g) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__g, (__f)=>(string) (__f is Sample.API.Runtime.Json.JsonString __e ? (string)(__e.ToString()) : null)) ))() : null : _links;}
             AfterFromJson(json);
         }
 
@@ -116,37 +116,37 @@ namespace Sample.API.Models
             AddIf( null != (((object)this._capacityAssessment)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._capacityAssessment.ToString()) : null, "capacityAssessment" ,container.Add );
             AddIf( null != (((object)this._error)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._error.ToString()) : null, "error" ,container.Add );
             AddIf( null != (((object)this._category)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._category.ToString()) : null, "category" ,container.Add );
-            if (null != this._suggestedRegion)
+            if (null != this._suggestedRegions)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._suggestedRegion )
+                foreach( var __x in this._suggestedRegions )
                 {
                     AddIf(null != (((object)__x)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__x.ToString()) : null ,__w.Add);
                 }
                 container.Add("suggestedRegions",__w);
             }
-            if (null != this._suggestedSku)
+            if (null != this._suggestedSkus)
             {
                 var __r = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __s in this._suggestedSku )
+                foreach( var __s in this._suggestedSkus )
                 {
                     AddIf(null != (((object)__s)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__s.ToString()) : null ,__r.Add);
                 }
                 container.Add("suggestedSkus",__r);
             }
-            if (null != this._step)
+            if (null != this._steps)
             {
                 var __m = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __n in this._step )
+                foreach( var __n in this._steps )
                 {
                     AddIf(null != (((object)__n)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__n.ToString()) : null ,__m.Add);
                 }
                 container.Add("steps",__m);
             }
-            if (null != this._link)
+            if (null != this._links)
             {
                 var __h = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __i in this._link )
+                foreach( var __i in this._links )
                 {
                     AddIf(null != (((object)__i)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__i.ToString()) : null ,__h.Add);
                 }

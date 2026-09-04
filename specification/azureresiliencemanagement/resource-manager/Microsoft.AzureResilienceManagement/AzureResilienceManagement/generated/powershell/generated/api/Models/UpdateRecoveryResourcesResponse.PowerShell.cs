@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.UpdateRecoveryResourcesResponse"
         /// />.
         /// </summary>
@@ -98,18 +90,6 @@ namespace Sample.API.Models
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
 
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
-
         /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into a new instance of <see cref="Sample.API.Models.UpdateRecoveryResourcesResponse"
         /// />.
@@ -124,9 +104,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("FailedResource"))
+            if (content.Contains("FailedResources"))
             {
-                ((Sample.API.Models.IUpdateRecoveryResourcesResponseInternal)this).FailedResource = (System.Collections.Generic.List<Sample.API.Models.IRecoveryResource>) content.GetValueForProperty("FailedResource",((Sample.API.Models.IUpdateRecoveryResourcesResponseInternal)this).FailedResource, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryResource>(__y, Sample.API.Models.RecoveryResourceTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IUpdateRecoveryResourcesResponseInternal)this).FailedResources = (System.Collections.Generic.List<Sample.API.Models.IRecoveryResource>) content.GetValueForProperty("FailedResources",((Sample.API.Models.IUpdateRecoveryResourcesResponseInternal)this).FailedResources, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryResource>(__y, Sample.API.Models.RecoveryResourceTypeConverter.ConvertFrom));
             }
             AfterDeserializeDictionary(content);
         }
@@ -145,9 +125,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("FailedResource"))
+            if (content.Contains("FailedResources"))
             {
-                ((Sample.API.Models.IUpdateRecoveryResourcesResponseInternal)this).FailedResource = (System.Collections.Generic.List<Sample.API.Models.IRecoveryResource>) content.GetValueForProperty("FailedResource",((Sample.API.Models.IUpdateRecoveryResourcesResponseInternal)this).FailedResource, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryResource>(__y, Sample.API.Models.RecoveryResourceTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IUpdateRecoveryResourcesResponseInternal)this).FailedResources = (System.Collections.Generic.List<Sample.API.Models.IRecoveryResource>) content.GetValueForProperty("FailedResources",((Sample.API.Models.IUpdateRecoveryResourcesResponseInternal)this).FailedResources, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryResource>(__y, Sample.API.Models.RecoveryResourceTypeConverter.ConvertFrom));
             }
             AfterDeserializePSObject(content);
         }

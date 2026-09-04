@@ -25,12 +25,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string ErrorMessage { get => this._errorMessage; }
 
-        /// <summary>Backing field for <see cref="Recommendation" /> property.</summary>
-        private System.Collections.Generic.List<string> _recommendation;
+        /// <summary>Backing field for <see cref="Recommendations" /> property.</summary>
+        private System.Collections.Generic.List<string> _recommendations;
 
         /// <summary>A list of recommendations to resolve the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> Recommendation { get => this._recommendation; }
+        public System.Collections.Generic.List<string> Recommendations { get => this._recommendations; }
 
         /// <summary>Internal Acessors for ErrorCode</summary>
         string Sample.API.Models.IJobErrorInfoInternal.ErrorCode { get => this._errorCode; set { {_errorCode = value;} } }
@@ -38,8 +38,8 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for ErrorMessage</summary>
         string Sample.API.Models.IJobErrorInfoInternal.ErrorMessage { get => this._errorMessage; set { {_errorMessage = value;} } }
 
-        /// <summary>Internal Acessors for Recommendation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IJobErrorInfoInternal.Recommendation { get => this._recommendation; set { {_recommendation = value;} } }
+        /// <summary>Internal Acessors for Recommendations</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IJobErrorInfoInternal.Recommendations { get => this._recommendations; set { {_recommendations = value;} } }
 
         /// <summary>Creates an new <see cref="JobErrorInfo" /> instance.</summary>
         public JobErrorInfo()
@@ -83,7 +83,7 @@ namespace Sample.API.Models
         Description = @"A list of recommendations to resolve the error.",
         SerializedName = @"recommendations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> Recommendation { get;  }
+        System.Collections.Generic.List<string> Recommendations { get;  }
 
     }
     /// Job Error information.
@@ -95,7 +95,7 @@ namespace Sample.API.Models
         /// <summary>A detailed message explaining the error.</summary>
         string ErrorMessage { get; set; }
         /// <summary>A list of recommendations to resolve the error.</summary>
-        System.Collections.Generic.List<string> Recommendation { get; set; }
+        System.Collections.Generic.List<string> Recommendations { get; set; }
 
     }
 }

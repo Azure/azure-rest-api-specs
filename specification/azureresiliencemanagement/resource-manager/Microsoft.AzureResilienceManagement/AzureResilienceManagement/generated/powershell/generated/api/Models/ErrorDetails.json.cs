@@ -65,7 +65,7 @@ namespace Sample.API.Models
             }
             {_code = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("code"), out var __jsonCode) ? (string)__jsonCode : (string)_code;}
             {_message = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("message"), out var __jsonMessage) ? (string)__jsonMessage : (string)_message;}
-            {_recommendation = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("recommendations"), out var __jsonRecommendations) ? If( __jsonRecommendations as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _recommendation;}
+            {_recommendations = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("recommendations"), out var __jsonRecommendations) ? If( __jsonRecommendations as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _recommendations;}
             AfterFromJson(json);
         }
 
@@ -100,10 +100,10 @@ namespace Sample.API.Models
             }
             AddIf( null != (((object)this._code)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._code.ToString()) : null, "code" ,container.Add );
             AddIf( null != (((object)this._message)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._message.ToString()) : null, "message" ,container.Add );
-            if (null != this._recommendation)
+            if (null != this._recommendations)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._recommendation )
+                foreach( var __x in this._recommendations )
                 {
                     AddIf(null != (((object)__x)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__x.ToString()) : null ,__w.Add);
                 }

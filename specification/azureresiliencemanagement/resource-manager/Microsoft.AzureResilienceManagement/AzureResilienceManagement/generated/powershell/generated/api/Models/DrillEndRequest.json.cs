@@ -64,7 +64,7 @@ namespace Sample.API.Models
                 return;
             }
             {_attestation = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("attestation"), out var __jsonAttestation) ? (string)__jsonAttestation : (string)_attestation;}
-            {_attestationNote = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("attestationNotes"), out var __jsonAttestationNotes) ? (string)__jsonAttestationNotes : (string)_attestationNote;}
+            {_attestationNotes = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("attestationNotes"), out var __jsonAttestationNotes) ? (string)__jsonAttestationNotes : (string)_attestationNotes;}
             AfterFromJson(json);
         }
 
@@ -98,7 +98,7 @@ namespace Sample.API.Models
                 return container;
             }
             AddIf( null != (((object)this._attestation)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._attestation.ToString()) : null, "attestation" ,container.Add );
-            AddIf( null != (((object)this._attestationNote)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._attestationNote.ToString()) : null, "attestationNotes" ,container.Add );
+            AddIf( null != (((object)this._attestationNotes)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._attestationNotes.ToString()) : null, "attestationNotes" ,container.Add );
             AfterToJson(ref container);
             return container;
         }

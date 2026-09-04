@@ -73,7 +73,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_diskReprotectInputDetail = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("diskReprotectInputDetails"), out var __jsonDiskReprotectInputDetails) ? If( __jsonDiskReprotectInputDetails as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IDiskReprotectInputDetails) (Sample.API.Models.DiskReprotectInputDetails.FromJson(__u) )) ))() : null : _diskReprotectInputDetail;}
+            {_diskReprotectInputDetails = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("diskReprotectInputDetails"), out var __jsonDiskReprotectInputDetails) ? If( __jsonDiskReprotectInputDetails as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IDiskReprotectInputDetails) (Sample.API.Models.DiskReprotectInputDetails.FromJson(__u) )) ))() : null : _diskReprotectInputDetails;}
             AfterFromJson(json);
         }
 
@@ -97,10 +97,10 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            if (null != this._diskReprotectInputDetail)
+            if (null != this._diskReprotectInputDetails)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._diskReprotectInputDetail )
+                foreach( var __x in this._diskReprotectInputDetails )
                 {
                     AddIf(__x?.ToJson(null, serializationMode) ,__w.Add);
                 }

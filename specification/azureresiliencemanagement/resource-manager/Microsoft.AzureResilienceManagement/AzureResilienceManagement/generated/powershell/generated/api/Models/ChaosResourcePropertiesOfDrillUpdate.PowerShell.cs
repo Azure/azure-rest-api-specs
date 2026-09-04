@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into a new instance of <see cref="Sample.API.Models.ChaosResourcePropertiesOfDrillUpdate"
         /// />.
         /// </summary>
@@ -78,9 +70,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal)this).Identity = (Sample.API.Models.IAssociatedIdentityUpdate) content.GetValueForProperty("Identity",((Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal)this).Identity, Sample.API.Models.AssociatedIdentityUpdateTypeConverter.ConvertFrom);
             }
-            if (content.Contains("ChaosResourceIdentityForFault"))
+            if (content.Contains("ChaosResourceIdentityForFaults"))
             {
-                ((Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal)this).ChaosResourceIdentityForFault = (Sample.API.Models.IAssociatedIdentityUpdate) content.GetValueForProperty("ChaosResourceIdentityForFault",((Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal)this).ChaosResourceIdentityForFault, Sample.API.Models.AssociatedIdentityUpdateTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal)this).ChaosResourceIdentityForFaults = (Sample.API.Models.IAssociatedIdentityUpdate) content.GetValueForProperty("ChaosResourceIdentityForFaults",((Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal)this).ChaosResourceIdentityForFaults, Sample.API.Models.AssociatedIdentityUpdateTypeConverter.ConvertFrom);
             }
             if (content.Contains("IdentityType"))
             {
@@ -119,9 +111,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal)this).Identity = (Sample.API.Models.IAssociatedIdentityUpdate) content.GetValueForProperty("Identity",((Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal)this).Identity, Sample.API.Models.AssociatedIdentityUpdateTypeConverter.ConvertFrom);
             }
-            if (content.Contains("ChaosResourceIdentityForFault"))
+            if (content.Contains("ChaosResourceIdentityForFaults"))
             {
-                ((Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal)this).ChaosResourceIdentityForFault = (Sample.API.Models.IAssociatedIdentityUpdate) content.GetValueForProperty("ChaosResourceIdentityForFault",((Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal)this).ChaosResourceIdentityForFault, Sample.API.Models.AssociatedIdentityUpdateTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal)this).ChaosResourceIdentityForFaults = (Sample.API.Models.IAssociatedIdentityUpdate) content.GetValueForProperty("ChaosResourceIdentityForFaults",((Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal)this).ChaosResourceIdentityForFaults, Sample.API.Models.AssociatedIdentityUpdateTypeConverter.ConvertFrom);
             }
             if (content.Contains("IdentityType"))
             {
@@ -181,18 +173,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Chaos Resource properties.
     [System.ComponentModel.TypeConverter(typeof(ChaosResourcePropertiesOfDrillUpdateTypeConverter))]

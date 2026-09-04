@@ -80,10 +80,10 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            if (null != this._failedResource)
+            if (null != this._failedResources)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._failedResource )
+                foreach( var __x in this._failedResources )
                 {
                     AddIf(__x?.ToJson(null, serializationMode) ,__w.Add);
                 }
@@ -105,7 +105,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_failedResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("failedResources"), out var __jsonFailedResources) ? If( __jsonFailedResources as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IRecoveryResource>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IRecoveryResource) (Sample.API.Models.RecoveryResource.FromJson(__u) )) ))() : null : _failedResource;}
+            {_failedResources = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("failedResources"), out var __jsonFailedResources) ? If( __jsonFailedResources as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IRecoveryResource>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IRecoveryResource) (Sample.API.Models.RecoveryResource.FromJson(__u) )) ))() : null : _failedResources;}
             AfterFromJson(json);
         }
     }

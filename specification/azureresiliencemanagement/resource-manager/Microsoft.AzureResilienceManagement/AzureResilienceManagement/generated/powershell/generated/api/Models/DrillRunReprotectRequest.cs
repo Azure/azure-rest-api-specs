@@ -11,24 +11,24 @@ namespace Sample.API.Models
         Sample.API.Models.IDrillRunReprotectRequestInternal
     {
 
-        /// <summary>Backing field for <see cref="ReprotectProperty" /> property.</summary>
-        private Sample.API.Models.IReprotectRequest _reprotectProperty;
+        /// <summary>Backing field for <see cref="ReprotectProperties" /> property.</summary>
+        private Sample.API.Models.IReprotectRequest _reprotectProperties;
 
         /// <summary>The reprotect properties.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IReprotectRequest ReprotectProperty { get => (this._reprotectProperty = this._reprotectProperty ?? new Sample.API.Models.ReprotectRequest()); set => this._reprotectProperty = value; }
+        internal Sample.API.Models.IReprotectRequest ReprotectProperties { get => (this._reprotectProperties = this._reprotectProperties ?? new Sample.API.Models.ReprotectRequest()); set => this._reprotectProperties = value; }
 
         /// <summary>
         /// Selected recovery resource Ids to be processed. If not provided, all qualified resources will be processed.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> ReprotectRequestPropertySelectedResourceId { get => ((Sample.API.Models.IReprotectRequestInternal)ReprotectProperty).PropertySelectedResourceId; set => ((Sample.API.Models.IReprotectRequestInternal)ReprotectProperty).PropertySelectedResourceId = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<string> ReprotectRequestPropertySelectedResourceIds { get => ((Sample.API.Models.IReprotectRequestInternal)ReprotectProperties).ReprotectRequestPropertySelectedResourceIds; set => ((Sample.API.Models.IReprotectRequestInternal)ReprotectProperties).ReprotectRequestPropertySelectedResourceIds = value ?? null /* arrayOf */; }
 
-        /// <summary>Internal Acessors for ReprotectProperty</summary>
-        Sample.API.Models.IReprotectRequest Sample.API.Models.IDrillRunReprotectRequestInternal.ReprotectProperty { get => (this._reprotectProperty = this._reprotectProperty ?? new Sample.API.Models.ReprotectRequest()); set { {_reprotectProperty = value;} } }
+        /// <summary>Internal Acessors for ReprotectProperties</summary>
+        Sample.API.Models.IReprotectRequest Sample.API.Models.IDrillRunReprotectRequestInternal.ReprotectProperties { get => (this._reprotectProperties = this._reprotectProperties ?? new Sample.API.Models.ReprotectRequest()); set { {_reprotectProperties = value;} } }
 
-        /// <summary>Internal Acessors for ReprotectPropertyReprotectRequestProperty</summary>
-        Sample.API.Models.IReprotectRequestProperties Sample.API.Models.IDrillRunReprotectRequestInternal.ReprotectPropertyReprotectRequestProperty { get => ((Sample.API.Models.IReprotectRequestInternal)ReprotectProperty).Property; set => ((Sample.API.Models.IReprotectRequestInternal)ReprotectProperty).Property = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for ReprotectPropertyReprotectRequestProperties</summary>
+        Sample.API.Models.IReprotectRequestProperties Sample.API.Models.IDrillRunReprotectRequestInternal.ReprotectPropertyReprotectRequestProperties { get => ((Sample.API.Models.IReprotectRequestInternal)ReprotectProperties).ReprotectRequestProperties; set => ((Sample.API.Models.IReprotectRequestInternal)ReprotectProperties).ReprotectRequestProperties = value ?? null /* model class */; }
 
         /// <summary>Creates an new <see cref="DrillRunReprotectRequest" /> instance.</summary>
         public DrillRunReprotectRequest()
@@ -52,7 +52,7 @@ namespace Sample.API.Models
         Description = @"Selected recovery resource Ids to be processed. If not provided, all qualified resources will be processed.",
         SerializedName = @"selectedResourceIds",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> ReprotectRequestPropertySelectedResourceId { get; set; }
+        System.Collections.Generic.List<string> ReprotectRequestPropertySelectedResourceIds { get; set; }
 
     }
     /// Request body for Reprotect API.
@@ -60,13 +60,13 @@ namespace Sample.API.Models
 
     {
         /// <summary>The reprotect properties.</summary>
-        Sample.API.Models.IReprotectRequest ReprotectProperty { get; set; }
+        Sample.API.Models.IReprotectRequest ReprotectProperties { get; set; }
         /// <summary>Additional properties for Reprotect.</summary>
-        Sample.API.Models.IReprotectRequestProperties ReprotectPropertyReprotectRequestProperty { get; set; }
+        Sample.API.Models.IReprotectRequestProperties ReprotectPropertyReprotectRequestProperties { get; set; }
         /// <summary>
         /// Selected recovery resource Ids to be processed. If not provided, all qualified resources will be processed.
         /// </summary>
-        System.Collections.Generic.List<string> ReprotectRequestPropertySelectedResourceId { get; set; }
+        System.Collections.Generic.List<string> ReprotectRequestPropertySelectedResourceIds { get; set; }
 
     }
 }

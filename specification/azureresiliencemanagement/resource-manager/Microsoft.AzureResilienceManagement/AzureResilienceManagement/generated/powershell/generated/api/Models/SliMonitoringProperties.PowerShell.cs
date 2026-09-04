@@ -55,14 +55,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.SliMonitoringProperties"
         /// />.
         /// </summary>
@@ -109,9 +101,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.ISliMonitoringPropertiesInternal)this).Identity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("Identity",((Sample.API.Models.ISliMonitoringPropertiesInternal)this).Identity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
             }
-            if (content.Contains("Sli"))
+            if (content.Contains("Slis"))
             {
-                ((Sample.API.Models.ISliMonitoringPropertiesInternal)this).Sli = (System.Collections.Generic.List<Sample.API.Models.ISliSelection>) content.GetValueForProperty("Sli",((Sample.API.Models.ISliMonitoringPropertiesInternal)this).Sli, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.ISliSelection>(__y, Sample.API.Models.SliSelectionTypeConverter.ConvertFrom));
+                ((Sample.API.Models.ISliMonitoringPropertiesInternal)this).Slis = (System.Collections.Generic.List<Sample.API.Models.ISliSelection>) content.GetValueForProperty("Slis",((Sample.API.Models.ISliMonitoringPropertiesInternal)this).Slis, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.ISliSelection>(__y, Sample.API.Models.SliSelectionTypeConverter.ConvertFrom));
             }
             if (content.Contains("IdentityType"))
             {
@@ -142,9 +134,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.ISliMonitoringPropertiesInternal)this).Identity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("Identity",((Sample.API.Models.ISliMonitoringPropertiesInternal)this).Identity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
             }
-            if (content.Contains("Sli"))
+            if (content.Contains("Slis"))
             {
-                ((Sample.API.Models.ISliMonitoringPropertiesInternal)this).Sli = (System.Collections.Generic.List<Sample.API.Models.ISliSelection>) content.GetValueForProperty("Sli",((Sample.API.Models.ISliMonitoringPropertiesInternal)this).Sli, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.ISliSelection>(__y, Sample.API.Models.SliSelectionTypeConverter.ConvertFrom));
+                ((Sample.API.Models.ISliMonitoringPropertiesInternal)this).Slis = (System.Collections.Generic.List<Sample.API.Models.ISliSelection>) content.GetValueForProperty("Slis",((Sample.API.Models.ISliMonitoringPropertiesInternal)this).Slis, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.ISliSelection>(__y, Sample.API.Models.SliSelectionTypeConverter.ConvertFrom));
             }
             if (content.Contains("IdentityType"))
             {
@@ -161,18 +153,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// SLI monitoring properties of a Drill. At most two SLIs may be selected: at most one Availability and one Latency.
     [System.ComponentModel.TypeConverter(typeof(SliMonitoringPropertiesTypeConverter))]

@@ -75,7 +75,7 @@ namespace Sample.API.Models
             }
             {_commentType = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("commentType"), out var __jsonCommentType) ? (string)__jsonCommentType : (string)_commentType;}
             {_commentTime = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("commentTime"), out var __jsonCommentTime) ? global::System.DateTime.TryParse((string)__jsonCommentTime, global::System.Globalization.CultureInfo.InvariantCulture, global::System.Globalization.DateTimeStyles.AdjustToUniversal, out var __jsonCommentTimeValue) ? __jsonCommentTimeValue : _commentTime : _commentTime;}
-            {_comment = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("comments"), out var __jsonComments) ? (string)__jsonComments : (string)_comment;}
+            {_comments = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("comments"), out var __jsonComments) ? (string)__jsonComments : (string)_comments;}
             AfterFromJson(json);
         }
 
@@ -108,7 +108,7 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                AddIf( null != (((object)this._comment)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._comment.ToString()) : null, "comments" ,container.Add );
+                AddIf( null != (((object)this._comments)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._comments.ToString()) : null, "comments" ,container.Add );
             }
             AfterToJson(ref container);
             return container;

@@ -76,7 +76,7 @@ namespace Sample.API.Models
                 return;
             }
             __jobResourceProperties = new Sample.API.Models.JobResourceProperties(json);
-            {_recoveryGroupActionSetting = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("recoveryGroupActionSettings"), out var __jsonRecoveryGroupActionSettings) ? Sample.API.Models.RecoveryGroupActionSettings.FromJson(__jsonRecoveryGroupActionSettings) : _recoveryGroupActionSetting;}
+            {_recoveryGroupActionSettings = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("recoveryGroupActionSettings"), out var __jsonRecoveryGroupActionSettings) ? Sample.API.Models.RecoveryGroupActionSettings.FromJson(__jsonRecoveryGroupActionSettings) : _recoveryGroupActionSettings;}
             {_provisioningState = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("provisioningState"), out var __jsonProvisioningState) ? (string)__jsonProvisioningState : (string)_provisioningState;}
             {_protectionSolutionType = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("protectionSolutionType"), out var __jsonProtectionSolutionType) ? (string)__jsonProtectionSolutionType : (string)_protectionSolutionType;}
             AfterFromJson(json);
@@ -104,7 +104,7 @@ namespace Sample.API.Models
             __jobResourceProperties?.ToJson(container, serializationMode);
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                AddIf( null != this._recoveryGroupActionSetting ? (Sample.API.Runtime.Json.JsonNode) this._recoveryGroupActionSetting.ToJson(null,serializationMode) : null, "recoveryGroupActionSettings" ,container.Add );
+                AddIf( null != this._recoveryGroupActionSettings ? (Sample.API.Runtime.Json.JsonNode) this._recoveryGroupActionSettings.ToJson(null,serializationMode) : null, "recoveryGroupActionSettings" ,container.Add );
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {

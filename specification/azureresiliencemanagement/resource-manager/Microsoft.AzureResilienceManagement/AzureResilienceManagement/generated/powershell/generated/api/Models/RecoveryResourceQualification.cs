@@ -11,26 +11,26 @@ namespace Sample.API.Models
         Sample.API.Models.IRecoveryResourceQualificationInternal
     {
 
-        /// <summary>Backing field for <see cref="OperationQualificationDetail" /> property.</summary>
-        private Sample.API.Models.IOperationQualificationDetails _operationQualificationDetail;
-
-        /// <summary>Details of qualification for the operation.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IOperationQualificationDetails OperationQualificationDetail { get => (this._operationQualificationDetail = this._operationQualificationDetail ?? new Sample.API.Models.OperationQualificationDetails()); set => this._operationQualificationDetail = value; }
-
         /// <summary>Reasons for resource not qualified for the operation.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> OperationQualificationDetailNotQualifiedReason { get => ((Sample.API.Models.IOperationQualificationDetailsInternal)OperationQualificationDetail).NotQualifiedReason; set => ((Sample.API.Models.IOperationQualificationDetailsInternal)OperationQualificationDetail).NotQualifiedReason = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<string> OperationQualificationDetailNotQualifiedReasons { get => ((Sample.API.Models.IOperationQualificationDetailsInternal)OperationQualificationDetails).NotQualifiedReasons; set => ((Sample.API.Models.IOperationQualificationDetailsInternal)OperationQualificationDetails).NotQualifiedReasons = value ?? null /* arrayOf */; }
 
         /// <summary>Resource qualification state for the operation.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string OperationQualificationDetailQualificationState { get => ((Sample.API.Models.IOperationQualificationDetailsInternal)OperationQualificationDetail).QualificationState; set => ((Sample.API.Models.IOperationQualificationDetailsInternal)OperationQualificationDetail).QualificationState = value ; }
+        public string OperationQualificationDetailQualificationState { get => ((Sample.API.Models.IOperationQualificationDetailsInternal)OperationQualificationDetails).QualificationState; set => ((Sample.API.Models.IOperationQualificationDetailsInternal)OperationQualificationDetails).QualificationState = value ; }
 
         /// <summary>
         /// Advisory resource feasibility reviews. Absent when no review was evaluated for this resource.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview> OperationQualificationDetailResourceFeasibilityReview { get => ((Sample.API.Models.IOperationQualificationDetailsInternal)OperationQualificationDetail).ResourceFeasibilityReview; set => ((Sample.API.Models.IOperationQualificationDetailsInternal)OperationQualificationDetail).ResourceFeasibilityReview = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview> OperationQualificationDetailResourceFeasibilityReviews { get => ((Sample.API.Models.IOperationQualificationDetailsInternal)OperationQualificationDetails).ResourceFeasibilityReviews; set => ((Sample.API.Models.IOperationQualificationDetailsInternal)OperationQualificationDetails).ResourceFeasibilityReviews = value ?? null /* arrayOf */; }
+
+        /// <summary>Backing field for <see cref="OperationQualificationDetails" /> property.</summary>
+        private Sample.API.Models.IOperationQualificationDetails _operationQualificationDetails;
+
+        /// <summary>Details of qualification for the operation.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
+        internal Sample.API.Models.IOperationQualificationDetails OperationQualificationDetails { get => (this._operationQualificationDetails = this._operationQualificationDetails ?? new Sample.API.Models.OperationQualificationDetails()); set => this._operationQualificationDetails = value; }
 
         /// <summary>Backing field for <see cref="RecoveryResource" /> property.</summary>
         private Sample.API.Models.IRecoveryResource _recoveryResource;
@@ -39,8 +39,8 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public Sample.API.Models.IRecoveryResource RecoveryResource { get => (this._recoveryResource = this._recoveryResource ?? new Sample.API.Models.RecoveryResource()); set => this._recoveryResource = value; }
 
-        /// <summary>Internal Acessors for OperationQualificationDetail</summary>
-        Sample.API.Models.IOperationQualificationDetails Sample.API.Models.IRecoveryResourceQualificationInternal.OperationQualificationDetail { get => (this._operationQualificationDetail = this._operationQualificationDetail ?? new Sample.API.Models.OperationQualificationDetails()); set { {_operationQualificationDetail = value;} } }
+        /// <summary>Internal Acessors for OperationQualificationDetails</summary>
+        Sample.API.Models.IOperationQualificationDetails Sample.API.Models.IRecoveryResourceQualificationInternal.OperationQualificationDetails { get => (this._operationQualificationDetails = this._operationQualificationDetails ?? new Sample.API.Models.OperationQualificationDetails()); set { {_operationQualificationDetails = value;} } }
 
         /// <summary>Creates an new <see cref="RecoveryResourceQualification" /> instance.</summary>
         public RecoveryResourceQualification()
@@ -62,7 +62,7 @@ namespace Sample.API.Models
         Description = @"Reasons for resource not qualified for the operation.",
         SerializedName = @"notQualifiedReasons",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> OperationQualificationDetailNotQualifiedReason { get; set; }
+        System.Collections.Generic.List<string> OperationQualificationDetailNotQualifiedReasons { get; set; }
         /// <summary>Resource qualification state for the operation.</summary>
         [Sample.API.Runtime.Info(
         Required = true,
@@ -87,7 +87,7 @@ namespace Sample.API.Models
         Description = @"Advisory resource feasibility reviews. Absent when no review was evaluated for this resource.",
         SerializedName = @"resourceFeasibilityReviews",
         PossibleTypes = new [] { typeof(Sample.API.Models.IResourceFeasibilityReview) })]
-        System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview> OperationQualificationDetailResourceFeasibilityReview { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview> OperationQualificationDetailResourceFeasibilityReviews { get; set; }
         /// <summary>Recovery orchestration resource.</summary>
         [Sample.API.Runtime.Info(
         Required = true,
@@ -105,17 +105,17 @@ namespace Sample.API.Models
     internal partial interface IRecoveryResourceQualificationInternal
 
     {
-        /// <summary>Details of qualification for the operation.</summary>
-        Sample.API.Models.IOperationQualificationDetails OperationQualificationDetail { get; set; }
         /// <summary>Reasons for resource not qualified for the operation.</summary>
-        System.Collections.Generic.List<string> OperationQualificationDetailNotQualifiedReason { get; set; }
+        System.Collections.Generic.List<string> OperationQualificationDetailNotQualifiedReasons { get; set; }
         /// <summary>Resource qualification state for the operation.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Unknown", "Qualified", "NotQualified", "Excluded")]
         string OperationQualificationDetailQualificationState { get; set; }
         /// <summary>
         /// Advisory resource feasibility reviews. Absent when no review was evaluated for this resource.
         /// </summary>
-        System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview> OperationQualificationDetailResourceFeasibilityReview { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview> OperationQualificationDetailResourceFeasibilityReviews { get; set; }
+        /// <summary>Details of qualification for the operation.</summary>
+        Sample.API.Models.IOperationQualificationDetails OperationQualificationDetails { get; set; }
         /// <summary>Recovery orchestration resource.</summary>
         Sample.API.Models.IRecoveryResource RecoveryResource { get; set; }
 

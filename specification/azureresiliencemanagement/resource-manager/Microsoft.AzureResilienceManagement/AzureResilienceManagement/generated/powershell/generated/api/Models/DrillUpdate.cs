@@ -13,42 +13,42 @@ namespace Sample.API.Models
 
         /// <summary>Identity type linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ChaosResourceIdentityForFaultType { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).ChaosResourceIdentityForFaultType; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).ChaosResourceIdentityForFaultType = value ?? null; }
+        public string ChaosResourceIdentityForFaultType { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).ChaosResourceIdentityForFaultType; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).ChaosResourceIdentityForFaultType = value ?? null; }
 
         /// <summary>User assigned identity id linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ChaosResourceIdentityForFaultUserAssignedIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).ChaosResourceIdentityForFaultUserAssignedIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).ChaosResourceIdentityForFaultUserAssignedIdentity = value ?? null; }
+        public string ChaosResourceIdentityForFaultUserAssignedIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).ChaosResourceIdentityForFaultUserAssignedIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).ChaosResourceIdentityForFaultUserAssignedIdentity = value ?? null; }
 
         /// <summary>Identity type linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ChaosResourcePropertiesIdentityType { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).ChaosResourcePropertiesIdentityType; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).ChaosResourcePropertiesIdentityType = value ?? null; }
+        public string ChaosResourcePropertiesIdentityType { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).ChaosResourcePropertiesIdentityType; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).ChaosResourcePropertiesIdentityType = value ?? null; }
 
         /// <summary>User assigned identity id linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ChaosResourcePropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).ChaosResourcePropertiesIdentityUserAssignedIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).ChaosResourcePropertiesIdentityUserAssignedIdentity = value ?? null; }
+        public string ChaosResourcePropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).ChaosResourcePropertiesIdentityUserAssignedIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).ChaosResourcePropertiesIdentityUserAssignedIdentity = value ?? null; }
 
         /// <summary>Region where Drill's internal resources will be created.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DrillAssetPropertyRegion { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).DrillAssetPropertyRegion; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).DrillAssetPropertyRegion = value ?? null; }
+        public string DrillAssetPropertyRegion { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).DrillAssetPropertyRegion; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).DrillAssetPropertyRegion = value ?? null; }
 
         /// <summary>Subscription where Drill's internal resources will be created.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DrillAssetPropertySubscription { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).DrillAssetPropertySubscription; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).DrillAssetPropertySubscription = value ?? null; }
+        public string DrillAssetPropertySubscription { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).DrillAssetPropertySubscription; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).DrillAssetPropertySubscription = value ?? null; }
 
         /// <summary>Identity type linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string HealthModelMonitoringPropertiesIdentityType { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).HealthModelMonitoringPropertiesIdentityType; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).HealthModelMonitoringPropertiesIdentityType = value ?? null; }
+        public string HealthModelMonitoringPropertiesIdentityType { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).HealthModelMonitoringPropertiesIdentityType; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).HealthModelMonitoringPropertiesIdentityType = value ?? null; }
 
         /// <summary>User assigned identity id linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string HealthModelMonitoringPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).HealthModelMonitoringPropertiesIdentityUserAssignedIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).HealthModelMonitoringPropertiesIdentityUserAssignedIdentity = value ?? null; }
+        public string HealthModelMonitoringPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).HealthModelMonitoringPropertiesIdentityUserAssignedIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).HealthModelMonitoringPropertiesIdentityUserAssignedIdentity = value ?? null; }
 
         /// <summary>
         /// Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is
         /// the only identifier accepted on the wire.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string HealthModelMonitoringPropertyDiscoveryRuleId { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).HealthModelMonitoringPropertyDiscoveryRuleId; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).HealthModelMonitoringPropertyDiscoveryRuleId = value ?? null; }
+        public string HealthModelMonitoringPropertyDiscoveryRuleId { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).HealthModelMonitoringPropertyDiscoveryRuleId; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).HealthModelMonitoringPropertyDiscoveryRuleId = value ?? null; }
 
         /// <summary>Backing field for <see cref="Identity" /> property.</summary>
         private Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdate _identity;
@@ -63,91 +63,91 @@ namespace Sample.API.Models
 
         /// <summary>The identities assigned to this resource by the user.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities IdentityUserAssignedIdentity { get => ((Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateInternal)Identity).UserAssignedIdentity; set => ((Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateInternal)Identity).UserAssignedIdentity = value ?? null /* model class */; }
+        public Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities IdentityUserAssignedIdentities { get => ((Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateInternal)Identity).UserAssignedIdentities; set => ((Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateInternal)Identity).UserAssignedIdentities = value ?? null /* model class */; }
 
         /// <summary>Identity type linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string MonitoringPropertiesIdentityType { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).MonitoringPropertiesIdentityType; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).MonitoringPropertiesIdentityType = value ?? null; }
+        public string MonitoringPropertiesIdentityType { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).MonitoringPropertiesIdentityType; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).MonitoringPropertiesIdentityType = value ?? null; }
 
         /// <summary>User assigned identity id linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string MonitoringPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).MonitoringPropertiesIdentityUserAssignedIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).MonitoringPropertiesIdentityUserAssignedIdentity = value ?? null; }
+        public string MonitoringPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).MonitoringPropertiesIdentityUserAssignedIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).MonitoringPropertiesIdentityUserAssignedIdentity = value ?? null; }
 
-        /// <summary>Backing field for <see cref="Property" /> property.</summary>
-        private Sample.API.Models.IDrillUpdateProperties _property;
+        /// <summary>Backing field for <see cref="Properties" /> property.</summary>
+        private Sample.API.Models.IDrillUpdateProperties _properties;
 
         /// <summary>The resource-specific properties for this resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IDrillUpdateProperties Property { get => (this._property = this._property ?? new Sample.API.Models.DrillUpdateProperties()); set => this._property = value; }
+        internal Sample.API.Models.IDrillUpdateProperties Properties { get => (this._properties = this._properties ?? new Sample.API.Models.DrillUpdateProperties()); set => this._properties = value; }
 
         /// <summary>RBAC setup mode.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string RbacSetupMode { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).RbacSetupMode; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).RbacSetupMode = value ?? null; }
+        public string RbacSetupMode { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).RbacSetupMode; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).RbacSetupMode = value ?? null; }
 
         /// <summary>Identity type linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string RecoveryPlanPropertiesIdentityType { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).RecoveryPlanPropertiesIdentityType; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).RecoveryPlanPropertiesIdentityType = value ?? null; }
+        public string RecoveryPlanPropertiesIdentityType { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).RecoveryPlanPropertiesIdentityType; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).RecoveryPlanPropertiesIdentityType = value ?? null; }
 
         /// <summary>User assigned identity id linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string RecoveryPlanPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).RecoveryPlanPropertiesIdentityUserAssignedIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).RecoveryPlanPropertiesIdentityUserAssignedIdentity = value ?? null; }
+        public string RecoveryPlanPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).RecoveryPlanPropertiesIdentityUserAssignedIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).RecoveryPlanPropertiesIdentityUserAssignedIdentity = value ?? null; }
 
-        /// <summary>Internal Acessors for ChaosResourceProperty</summary>
-        Sample.API.Models.IChaosResourcePropertiesOfDrillUpdate Sample.API.Models.IDrillUpdateInternal.ChaosResourceProperty { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).ChaosResourceProperty; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).ChaosResourceProperty = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for ChaosResourceProperties</summary>
+        Sample.API.Models.IChaosResourcePropertiesOfDrillUpdate Sample.API.Models.IDrillUpdateInternal.ChaosResourceProperties { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).ChaosResourceProperties; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).ChaosResourceProperties = value ?? null /* model class */; }
 
-        /// <summary>Internal Acessors for ChaosResourcePropertyChaosResourceIdentityForFault</summary>
-        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdateInternal.ChaosResourcePropertyChaosResourceIdentityForFault { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).ChaosResourcePropertyChaosResourceIdentityForFault; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).ChaosResourcePropertyChaosResourceIdentityForFault = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for ChaosResourcePropertyChaosResourceIdentityForFaults</summary>
+        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdateInternal.ChaosResourcePropertyChaosResourceIdentityForFaults { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).ChaosResourcePropertyChaosResourceIdentityForFaults; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).ChaosResourcePropertyChaosResourceIdentityForFaults = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for ChaosResourcePropertyIdentity</summary>
-        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdateInternal.ChaosResourcePropertyIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).ChaosResourcePropertyIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).ChaosResourcePropertyIdentity = value ?? null /* model class */; }
+        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdateInternal.ChaosResourcePropertyIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).ChaosResourcePropertyIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).ChaosResourcePropertyIdentity = value ?? null /* model class */; }
 
-        /// <summary>Internal Acessors for DrillAssetProperty</summary>
-        Sample.API.Models.IAssetPropertiesOfDrillUpdate Sample.API.Models.IDrillUpdateInternal.DrillAssetProperty { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).DrillAssetProperty; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).DrillAssetProperty = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for DrillAssetProperties</summary>
+        Sample.API.Models.IAssetPropertiesOfDrillUpdate Sample.API.Models.IDrillUpdateInternal.DrillAssetProperties { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).DrillAssetProperties; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).DrillAssetProperties = value ?? null /* model class */; }
 
-        /// <summary>Internal Acessors for HealthModelMonitoringProperty</summary>
-        Sample.API.Models.IHealthModelMonitoringPropertiesUpdate Sample.API.Models.IDrillUpdateInternal.HealthModelMonitoringProperty { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).HealthModelMonitoringProperty; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).HealthModelMonitoringProperty = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for HealthModelMonitoringProperties</summary>
+        Sample.API.Models.IHealthModelMonitoringPropertiesUpdate Sample.API.Models.IDrillUpdateInternal.HealthModelMonitoringProperties { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).HealthModelMonitoringProperties; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).HealthModelMonitoringProperties = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for HealthModelMonitoringPropertyIdentity</summary>
-        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdateInternal.HealthModelMonitoringPropertyIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).HealthModelMonitoringPropertyIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).HealthModelMonitoringPropertyIdentity = value ?? null /* model class */; }
+        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdateInternal.HealthModelMonitoringPropertyIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).HealthModelMonitoringPropertyIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).HealthModelMonitoringPropertyIdentity = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for Identity</summary>
         Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdate Sample.API.Models.IDrillUpdateInternal.Identity { get => (this._identity = this._identity ?? new Sample.API.Models.AzureResourceManagerCommonTypesManagedServiceIdentityUpdate()); set { {_identity = value;} } }
 
-        /// <summary>Internal Acessors for MonitoringProperty</summary>
-        Sample.API.Models.IMonitoringPropertiesOfDrillUpdate Sample.API.Models.IDrillUpdateInternal.MonitoringProperty { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).MonitoringProperty; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).MonitoringProperty = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for MonitoringProperties</summary>
+        Sample.API.Models.IMonitoringPropertiesOfDrillUpdate Sample.API.Models.IDrillUpdateInternal.MonitoringProperties { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).MonitoringProperties; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).MonitoringProperties = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for MonitoringPropertyIdentity</summary>
-        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdateInternal.MonitoringPropertyIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).MonitoringPropertyIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).MonitoringPropertyIdentity = value ?? null /* model class */; }
+        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdateInternal.MonitoringPropertyIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).MonitoringPropertyIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).MonitoringPropertyIdentity = value ?? null /* model class */; }
 
-        /// <summary>Internal Acessors for Property</summary>
-        Sample.API.Models.IDrillUpdateProperties Sample.API.Models.IDrillUpdateInternal.Property { get => (this._property = this._property ?? new Sample.API.Models.DrillUpdateProperties()); set { {_property = value;} } }
+        /// <summary>Internal Acessors for Properties</summary>
+        Sample.API.Models.IDrillUpdateProperties Sample.API.Models.IDrillUpdateInternal.Properties { get => (this._properties = this._properties ?? new Sample.API.Models.DrillUpdateProperties()); set { {_properties = value;} } }
 
-        /// <summary>Internal Acessors for RecoveryPlanProperty</summary>
-        Sample.API.Models.IRecoveryPlanPropertiesOfDrillUpdate Sample.API.Models.IDrillUpdateInternal.RecoveryPlanProperty { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).RecoveryPlanProperty; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).RecoveryPlanProperty = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for RecoveryPlanProperties</summary>
+        Sample.API.Models.IRecoveryPlanPropertiesOfDrillUpdate Sample.API.Models.IDrillUpdateInternal.RecoveryPlanProperties { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).RecoveryPlanProperties; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).RecoveryPlanProperties = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for RecoveryPlanPropertyIdentity</summary>
-        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdateInternal.RecoveryPlanPropertyIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).RecoveryPlanPropertyIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).RecoveryPlanPropertyIdentity = value ?? null /* model class */; }
+        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdateInternal.RecoveryPlanPropertyIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).RecoveryPlanPropertyIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).RecoveryPlanPropertyIdentity = value ?? null /* model class */; }
 
-        /// <summary>Internal Acessors for SliMonitoringProperty</summary>
-        Sample.API.Models.ISliMonitoringPropertiesUpdate Sample.API.Models.IDrillUpdateInternal.SliMonitoringProperty { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).SliMonitoringProperty; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).SliMonitoringProperty = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for SliMonitoringProperties</summary>
+        Sample.API.Models.ISliMonitoringPropertiesUpdate Sample.API.Models.IDrillUpdateInternal.SliMonitoringProperties { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).SliMonitoringProperties; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).SliMonitoringProperties = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for SliMonitoringPropertyIdentity</summary>
-        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdateInternal.SliMonitoringPropertyIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).SliMonitoringPropertyIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).SliMonitoringPropertyIdentity = value ?? null /* model class */; }
+        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdateInternal.SliMonitoringPropertyIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).SliMonitoringPropertyIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).SliMonitoringPropertyIdentity = value ?? null /* model class */; }
 
         /// <summary>Identity type linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string SliMonitoringPropertiesIdentityType { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).SliMonitoringPropertiesIdentityType; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).SliMonitoringPropertiesIdentityType = value ?? null; }
+        public string SliMonitoringPropertiesIdentityType { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).SliMonitoringPropertiesIdentityType; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).SliMonitoringPropertiesIdentityType = value ?? null; }
 
         /// <summary>User assigned identity id linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string SliMonitoringPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).SliMonitoringPropertiesIdentityUserAssignedIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).SliMonitoringPropertiesIdentityUserAssignedIdentity = value ?? null; }
+        public string SliMonitoringPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).SliMonitoringPropertiesIdentityUserAssignedIdentity; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).SliMonitoringPropertiesIdentityUserAssignedIdentity = value ?? null; }
 
         /// <summary>
         /// The SLIs selected for Drill monitoring. Maximum of two entries: at most one Availability and one Latency. Duplicate types
         /// or duplicate SLI Ids are rejected.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.ISliSelection> SliMonitoringPropertySli { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).SliMonitoringPropertySli; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Property).SliMonitoringPropertySli = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.ISliSelection> SliMonitoringPropertySlis { get => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).SliMonitoringPropertySlis; set => ((Sample.API.Models.IDrillUpdatePropertiesInternal)Properties).SliMonitoringPropertySlis = value ?? null /* arrayOf */; }
 
         /// <summary>Creates an new <see cref="DrillUpdate" /> instance.</summary>
         public DrillUpdate()
@@ -286,7 +286,7 @@ namespace Sample.API.Models
         Description = @"The identities assigned to this resource by the user.",
         SerializedName = @"userAssignedIdentities",
         PossibleTypes = new [] { typeof(Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities) })]
-        Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities IdentityUserAssignedIdentity { get; set; }
+        Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities IdentityUserAssignedIdentities { get; set; }
         /// <summary>Identity type linked with the resource</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -381,7 +381,7 @@ namespace Sample.API.Models
         Description = @"The SLIs selected for Drill monitoring. Maximum of two entries: at most one Availability and one Latency. Duplicate types or duplicate SLI Ids are rejected.",
         SerializedName = @"slis",
         PossibleTypes = new [] { typeof(Sample.API.Models.ISliSelection) })]
-        System.Collections.Generic.List<Sample.API.Models.ISliSelection> SliMonitoringPropertySli { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.ISliSelection> SliMonitoringPropertySlis { get; set; }
 
     }
     /// The type used for update operations of the Drill.
@@ -393,32 +393,32 @@ namespace Sample.API.Models
         string ChaosResourceIdentityForFaultType { get; set; }
         /// <summary>User assigned identity id linked with the resource</summary>
         string ChaosResourceIdentityForFaultUserAssignedIdentity { get; set; }
+        /// <summary>Chaos Resource properties.</summary>
+        Sample.API.Models.IChaosResourcePropertiesOfDrillUpdate ChaosResourceProperties { get; set; }
         /// <summary>Identity type linked with the resource</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
         string ChaosResourcePropertiesIdentityType { get; set; }
         /// <summary>User assigned identity id linked with the resource</summary>
         string ChaosResourcePropertiesIdentityUserAssignedIdentity { get; set; }
-        /// <summary>Chaos Resource properties.</summary>
-        Sample.API.Models.IChaosResourcePropertiesOfDrillUpdate ChaosResourceProperty { get; set; }
         /// <summary>Identity to be used by the Chaos Resource for invoking faults on resources.</summary>
-        Sample.API.Models.IAssociatedIdentityUpdate ChaosResourcePropertyChaosResourceIdentityForFault { get; set; }
+        Sample.API.Models.IAssociatedIdentityUpdate ChaosResourcePropertyChaosResourceIdentityForFaults { get; set; }
         /// <summary>Identity to use for Chaos Resource operations.</summary>
         Sample.API.Models.IAssociatedIdentityUpdate ChaosResourcePropertyIdentity { get; set; }
         /// <summary>Properties for internal resources that are created for the Drill.</summary>
-        Sample.API.Models.IAssetPropertiesOfDrillUpdate DrillAssetProperty { get; set; }
+        Sample.API.Models.IAssetPropertiesOfDrillUpdate DrillAssetProperties { get; set; }
         /// <summary>Region where Drill's internal resources will be created.</summary>
         string DrillAssetPropertyRegion { get; set; }
         /// <summary>Subscription where Drill's internal resources will be created.</summary>
         string DrillAssetPropertySubscription { get; set; }
+        /// <summary>
+        /// Azure Health Model monitoring properties of the Drill. Send null to clear the selection.
+        /// </summary>
+        Sample.API.Models.IHealthModelMonitoringPropertiesUpdate HealthModelMonitoringProperties { get; set; }
         /// <summary>Identity type linked with the resource</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
         string HealthModelMonitoringPropertiesIdentityType { get; set; }
         /// <summary>User assigned identity id linked with the resource</summary>
         string HealthModelMonitoringPropertiesIdentityUserAssignedIdentity { get; set; }
-        /// <summary>
-        /// Azure Health Model monitoring properties of the Drill. Send null to clear the selection.
-        /// </summary>
-        Sample.API.Models.IHealthModelMonitoringPropertiesUpdate HealthModelMonitoringProperty { get; set; }
         /// <summary>
         /// Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is
         /// the only identifier accepted on the wire.
@@ -435,40 +435,40 @@ namespace Sample.API.Models
         [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
         string IdentityType { get; set; }
         /// <summary>The identities assigned to this resource by the user.</summary>
-        Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities IdentityUserAssignedIdentity { get; set; }
+        Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities IdentityUserAssignedIdentities { get; set; }
+        /// <summary>Monitoring properties of the Drill.</summary>
+        Sample.API.Models.IMonitoringPropertiesOfDrillUpdate MonitoringProperties { get; set; }
         /// <summary>Identity type linked with the resource</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
         string MonitoringPropertiesIdentityType { get; set; }
         /// <summary>User assigned identity id linked with the resource</summary>
         string MonitoringPropertiesIdentityUserAssignedIdentity { get; set; }
-        /// <summary>Monitoring properties of the Drill.</summary>
-        Sample.API.Models.IMonitoringPropertiesOfDrillUpdate MonitoringProperty { get; set; }
         /// <summary>Identity to use for Drill monitoring operations.</summary>
         Sample.API.Models.IAssociatedIdentityUpdate MonitoringPropertyIdentity { get; set; }
         /// <summary>The resource-specific properties for this resource.</summary>
-        Sample.API.Models.IDrillUpdateProperties Property { get; set; }
+        Sample.API.Models.IDrillUpdateProperties Properties { get; set; }
         /// <summary>RBAC setup mode.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("AutomatedCustomRole", "AutomatedBuiltinRoles", "Manual")]
         string RbacSetupMode { get; set; }
+        /// <summary>Recovery Plan properties.</summary>
+        Sample.API.Models.IRecoveryPlanPropertiesOfDrillUpdate RecoveryPlanProperties { get; set; }
         /// <summary>Identity type linked with the resource</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
         string RecoveryPlanPropertiesIdentityType { get; set; }
         /// <summary>User assigned identity id linked with the resource</summary>
         string RecoveryPlanPropertiesIdentityUserAssignedIdentity { get; set; }
-        /// <summary>Recovery Plan properties.</summary>
-        Sample.API.Models.IRecoveryPlanPropertiesOfDrillUpdate RecoveryPlanProperty { get; set; }
         /// <summary>Identity to use for RecoveryPlan operations.</summary>
         Sample.API.Models.IAssociatedIdentityUpdate RecoveryPlanPropertyIdentity { get; set; }
+        /// <summary>
+        /// SLI monitoring properties of the Drill. Send null to clear the selection; the submitted slis array is the new desired
+        /// state.
+        /// </summary>
+        Sample.API.Models.ISliMonitoringPropertiesUpdate SliMonitoringProperties { get; set; }
         /// <summary>Identity type linked with the resource</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
         string SliMonitoringPropertiesIdentityType { get; set; }
         /// <summary>User assigned identity id linked with the resource</summary>
         string SliMonitoringPropertiesIdentityUserAssignedIdentity { get; set; }
-        /// <summary>
-        /// SLI monitoring properties of the Drill. Send null to clear the selection; the submitted slis array is the new desired
-        /// state.
-        /// </summary>
-        Sample.API.Models.ISliMonitoringPropertiesUpdate SliMonitoringProperty { get; set; }
         /// <summary>
         /// Identity that the Drill uses to read evaluated SLI results from each SLI's destination Azure Monitor Workspace. The Drill
         /// is granted Monitoring Reader on every destination AMW of every selected SLI for this identity.
@@ -478,7 +478,7 @@ namespace Sample.API.Models
         /// The SLIs selected for Drill monitoring. Maximum of two entries: at most one Availability and one Latency. Duplicate types
         /// or duplicate SLI Ids are rejected.
         /// </summary>
-        System.Collections.Generic.List<Sample.API.Models.ISliSelection> SliMonitoringPropertySli { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.ISliSelection> SliMonitoringPropertySlis { get; set; }
 
     }
 }

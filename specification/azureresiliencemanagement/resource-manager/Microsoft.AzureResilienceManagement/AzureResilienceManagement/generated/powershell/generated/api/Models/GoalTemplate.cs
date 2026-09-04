@@ -25,27 +25,27 @@ namespace Sample.API.Models
 
         /// <summary>The error additional info.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ErrorDetailAdditionalInfo; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ErrorDetailAdditionalInfo; }
 
         /// <summary>The error code.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailCode { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ErrorDetailCode; }
+        public string ErrorDetailCode { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ErrorDetailCode; }
 
         /// <summary>The error details.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> ErrorDetailDetails { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ErrorDetailDetails; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> ErrorDetailDetails { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ErrorDetailDetails; }
 
         /// <summary>The error message.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailMessage { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ErrorDetailMessage; }
+        public string ErrorDetailMessage { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ErrorDetailMessage; }
 
         /// <summary>The error target.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailTarget { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ErrorDetailTarget; }
+        public string ErrorDetailTarget { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ErrorDetailTarget; }
 
         /// <summary>Type of Goal Template created by customer</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string GoalType { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).GoalType; }
+        public string GoalType { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).GoalType; }
 
         /// <summary>
         /// Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
@@ -57,40 +57,36 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public string Name { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Name; }
 
-        /// <summary>Backing field for <see cref="Property" /> property.</summary>
-        private Sample.API.Models.IGoalTemplateProperties _property;
+        /// <summary>Backing field for <see cref="Properties" /> property.</summary>
+        private Sample.API.Models.IGoalTemplateProperties _properties;
 
         /// <summary>The resource-specific properties for this resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IGoalTemplateProperties Property { get => (this._property = this._property ?? new Sample.API.Models.GoalTemplateProperties()); set => this._property = value; }
+        internal Sample.API.Models.IGoalTemplateProperties Properties { get => (this._properties = this._properties ?? new Sample.API.Models.GoalTemplateProperties()); set => this._properties = value; }
 
         /// <summary>Provisioning state</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ProvisioningState { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ProvisioningState; }
+        public string ProvisioningState { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ProvisioningState; }
 
         /// <summary>
         /// Regional recovery point objective specified by customer. eg, PT15M for 15 minutes
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string RegionalRecoveryPointObjective { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).RegionalRecoveryPointObjective; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).RegionalRecoveryPointObjective = value ?? null; }
+        public string RegionalRecoveryPointObjective { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).RegionalRecoveryPointObjective; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).RegionalRecoveryPointObjective = value ?? null; }
 
         /// <summary>
         /// Regional recovery time objective specified by customer. eg, PT15M for 15 minutes
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string RegionalRecoveryTimeObjective { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).RegionalRecoveryTimeObjective; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).RegionalRecoveryTimeObjective = value ?? null; }
+        public string RegionalRecoveryTimeObjective { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).RegionalRecoveryTimeObjective; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).RegionalRecoveryTimeObjective = value ?? null; }
 
         /// <summary>Option specified by customer under disaster recovery section of goal template</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string RequireDisasterRecovery { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).RequireDisasterRecovery; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).RequireDisasterRecovery = value ?? null; }
+        public string RequireDisasterRecovery { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).RequireDisasterRecovery; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).RequireDisasterRecovery = value ?? null; }
 
         /// <summary>Option specified by customer under high availability section of goal template</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string RequireHighAvailability { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).RequireHighAvailability; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).RequireHighAvailability = value ?? null; }
-
-        /// <summary>Gets the resource group name</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string ResourceGroupName { get => (new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Success ? new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Groups["resourceGroupName"].Value : null); }
+        public string RequireHighAvailability { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).RequireHighAvailability; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).RequireHighAvailability = value ?? null; }
 
         /// <summary>Backing field for <see cref="RetryAfter" /> property.</summary>
         private int? _retryAfter;
@@ -98,32 +94,32 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public int? RetryAfter { get => this._retryAfter; set => this._retryAfter = value; }
 
-        /// <summary>Internal Acessors for ErrorDetail</summary>
-        Sample.API.Models.IErrorDetail Sample.API.Models.IGoalTemplateInternal.ErrorDetail { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ErrorDetail; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ErrorDetail = value ?? null /* model class */; }
-
         /// <summary>Internal Acessors for ErrorDetailAdditionalInfo</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IGoalTemplateInternal.ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ErrorDetailAdditionalInfo; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ErrorDetailAdditionalInfo = value ?? null /* arrayOf */; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IGoalTemplateInternal.ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ErrorDetailAdditionalInfo; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ErrorDetailAdditionalInfo = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ErrorDetailCode</summary>
-        string Sample.API.Models.IGoalTemplateInternal.ErrorDetailCode { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ErrorDetailCode; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ErrorDetailCode = value ?? null; }
+        string Sample.API.Models.IGoalTemplateInternal.ErrorDetailCode { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ErrorDetailCode; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ErrorDetailCode = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailDetails</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IGoalTemplateInternal.ErrorDetailDetails { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ErrorDetailDetails; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ErrorDetailDetails = value ?? null /* arrayOf */; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IGoalTemplateInternal.ErrorDetailDetails { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ErrorDetailDetails; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ErrorDetailDetails = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ErrorDetailMessage</summary>
-        string Sample.API.Models.IGoalTemplateInternal.ErrorDetailMessage { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ErrorDetailMessage; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ErrorDetailMessage = value ?? null; }
+        string Sample.API.Models.IGoalTemplateInternal.ErrorDetailMessage { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ErrorDetailMessage; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ErrorDetailMessage = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailTarget</summary>
-        string Sample.API.Models.IGoalTemplateInternal.ErrorDetailTarget { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ErrorDetailTarget; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ErrorDetailTarget = value ?? null; }
+        string Sample.API.Models.IGoalTemplateInternal.ErrorDetailTarget { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ErrorDetailTarget; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ErrorDetailTarget = value ?? null; }
+
+        /// <summary>Internal Acessors for ErrorDetails</summary>
+        Sample.API.Models.IErrorDetail Sample.API.Models.IGoalTemplateInternal.ErrorDetails { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ErrorDetails; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ErrorDetails = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for GoalType</summary>
-        string Sample.API.Models.IGoalTemplateInternal.GoalType { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).GoalType; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).GoalType = value ?? null; }
+        string Sample.API.Models.IGoalTemplateInternal.GoalType { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).GoalType; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).GoalType = value ?? null; }
 
-        /// <summary>Internal Acessors for Property</summary>
-        Sample.API.Models.IGoalTemplateProperties Sample.API.Models.IGoalTemplateInternal.Property { get => (this._property = this._property ?? new Sample.API.Models.GoalTemplateProperties()); set { {_property = value;} } }
+        /// <summary>Internal Acessors for Properties</summary>
+        Sample.API.Models.IGoalTemplateProperties Sample.API.Models.IGoalTemplateInternal.Properties { get => (this._properties = this._properties ?? new Sample.API.Models.GoalTemplateProperties()); set { {_properties = value;} } }
 
         /// <summary>Internal Acessors for ProvisioningState</summary>
-        string Sample.API.Models.IGoalTemplateInternal.ProvisioningState { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ProvisioningState; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Property).ProvisioningState = value ?? null; }
+        string Sample.API.Models.IGoalTemplateInternal.ProvisioningState { get => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ProvisioningState; set => ((Sample.API.Models.IGoalTemplatePropertiesInternal)Properties).ProvisioningState = value ?? null; }
 
         /// <summary>Internal Acessors for Id</summary>
         string Sample.API.Models.IResourceInternal.Id { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Id; set => ((Sample.API.Models.IResourceInternal)__proxyResource).Id = value ?? null; }
@@ -384,8 +380,6 @@ namespace Sample.API.Models
         Sample.API.Models.IProxyResourceInternal
     {
         string AzureAsyncOperation { get; set; }
-        /// <summary>Details of any errors encountered during the operation.</summary>
-        Sample.API.Models.IErrorDetail ErrorDetail { get; set; }
         /// <summary>The error additional info.</summary>
         System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get; set; }
         /// <summary>The error code.</summary>
@@ -396,11 +390,13 @@ namespace Sample.API.Models
         string ErrorDetailMessage { get; set; }
         /// <summary>The error target.</summary>
         string ErrorDetailTarget { get; set; }
+        /// <summary>Details of any errors encountered during the operation.</summary>
+        Sample.API.Models.IErrorDetail ErrorDetails { get; set; }
         /// <summary>Type of Goal Template created by customer</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Resiliency")]
         string GoalType { get; set; }
         /// <summary>The resource-specific properties for this resource.</summary>
-        Sample.API.Models.IGoalTemplateProperties Property { get; set; }
+        Sample.API.Models.IGoalTemplateProperties Properties { get; set; }
         /// <summary>Provisioning state</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }

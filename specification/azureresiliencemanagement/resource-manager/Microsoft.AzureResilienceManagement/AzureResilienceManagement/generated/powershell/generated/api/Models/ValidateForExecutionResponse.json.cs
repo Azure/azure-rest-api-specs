@@ -82,10 +82,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._drillResourceQualification)
+                if (null != this._drillResourceQualifications)
                 {
                     var __w = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __x in this._drillResourceQualification )
+                    foreach( var __x in this._drillResourceQualifications )
                     {
                         AddIf(__x?.ToJson(null, serializationMode) ,__w.Add);
                     }
@@ -108,7 +108,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_drillResourceQualification = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("drillResourceQualifications"), out var __jsonDrillResourceQualifications) ? If( __jsonDrillResourceQualifications as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IDrillResourceQualification>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IDrillResourceQualification) (Sample.API.Models.DrillResourceQualification.FromJson(__u) )) ))() : null : _drillResourceQualification;}
+            {_drillResourceQualifications = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("drillResourceQualifications"), out var __jsonDrillResourceQualifications) ? If( __jsonDrillResourceQualifications as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IDrillResourceQualification>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IDrillResourceQualification) (Sample.API.Models.DrillResourceQualification.FromJson(__u) )) ))() : null : _drillResourceQualifications;}
             AfterFromJson(json);
         }
     }

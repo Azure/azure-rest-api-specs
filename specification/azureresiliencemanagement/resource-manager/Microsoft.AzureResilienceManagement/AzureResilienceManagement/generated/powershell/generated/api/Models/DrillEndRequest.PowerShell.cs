@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.DrillEndRequest"
         /// />.
         /// </summary>
@@ -100,9 +92,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillEndRequestInternal)this).Attestation = (string) content.GetValueForProperty("Attestation",((Sample.API.Models.IDrillEndRequestInternal)this).Attestation, global::System.Convert.ToString);
             }
-            if (content.Contains("AttestationNote"))
+            if (content.Contains("AttestationNotes"))
             {
-                ((Sample.API.Models.IDrillEndRequestInternal)this).AttestationNote = (string) content.GetValueForProperty("AttestationNote",((Sample.API.Models.IDrillEndRequestInternal)this).AttestationNote, global::System.Convert.ToString);
+                ((Sample.API.Models.IDrillEndRequestInternal)this).AttestationNotes = (string) content.GetValueForProperty("AttestationNotes",((Sample.API.Models.IDrillEndRequestInternal)this).AttestationNotes, global::System.Convert.ToString);
             }
             AfterDeserializeDictionary(content);
         }
@@ -125,9 +117,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillEndRequestInternal)this).Attestation = (string) content.GetValueForProperty("Attestation",((Sample.API.Models.IDrillEndRequestInternal)this).Attestation, global::System.Convert.ToString);
             }
-            if (content.Contains("AttestationNote"))
+            if (content.Contains("AttestationNotes"))
             {
-                ((Sample.API.Models.IDrillEndRequestInternal)this).AttestationNote = (string) content.GetValueForProperty("AttestationNote",((Sample.API.Models.IDrillEndRequestInternal)this).AttestationNote, global::System.Convert.ToString);
+                ((Sample.API.Models.IDrillEndRequestInternal)this).AttestationNotes = (string) content.GetValueForProperty("AttestationNotes",((Sample.API.Models.IDrillEndRequestInternal)this).AttestationNotes, global::System.Convert.ToString);
             }
             AfterDeserializePSObject(content);
         }
@@ -143,18 +135,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Request body of the End Action of Drill.
     [System.ComponentModel.TypeConverter(typeof(DrillEndRequestTypeConverter))]

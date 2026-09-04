@@ -68,7 +68,7 @@ namespace Sample.API.Models
             {_drillId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("drillId"), out var __jsonDrillId) ? (string)__jsonDrillId : (string)_drillId;}
             {_drillMode = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("drillMode"), out var __jsonDrillMode) ? (string)__jsonDrillMode : (string)_drillMode;}
             {_attestation = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("attestation"), out var __jsonAttestation) ? (string)__jsonAttestation : (string)_attestation;}
-            {_note = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("notes"), out var __jsonNotes) ? If( __jsonNotes as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _note;}
+            {_notes = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("notes"), out var __jsonNotes) ? If( __jsonNotes as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _notes;}
             {_supportedVerbsForStage = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("supportedVerbsForStage"), out var __jsonSupportedVerbsForStage) ? If( __jsonSupportedVerbsForStage as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.ISupportedVerbsForStage>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(Sample.API.Models.ISupportedVerbsForStage) (Sample.API.Models.SupportedVerbsForStage.FromJson(__p) )) ))() : null : _supportedVerbsForStage;}
             {_currentActiveOperationId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("currentActiveOperationId"), out var __jsonCurrentActiveOperationId) ? (string)__jsonCurrentActiveOperationId : (string)_currentActiveOperationId;}
             AfterFromJson(json);
@@ -122,10 +122,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._note)
+                if (null != this._notes)
                 {
                     var __w = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __x in this._note )
+                    foreach( var __x in this._notes )
                     {
                         AddIf(null != (((object)__x)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__x.ToString()) : null ,__w.Add);
                     }

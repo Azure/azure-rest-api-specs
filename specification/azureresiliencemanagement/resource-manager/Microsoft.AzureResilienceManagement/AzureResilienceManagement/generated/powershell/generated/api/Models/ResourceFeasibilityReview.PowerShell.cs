@@ -55,14 +55,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.ResourceFeasibilityReview"
         /// />.
         /// </summary>
@@ -121,9 +113,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IResourceFeasibilityReviewInternal)this).Status = (string) content.GetValueForProperty("Status",((Sample.API.Models.IResourceFeasibilityReviewInternal)this).Status, global::System.Convert.ToString);
             }
-            if (content.Contains("RecommendedTargetSku"))
+            if (content.Contains("RecommendedTargetSkus"))
             {
-                ((Sample.API.Models.IResourceFeasibilityReviewInternal)this).RecommendedTargetSku = (System.Collections.Generic.List<Sample.API.Models.ISkuDetails>) content.GetValueForProperty("RecommendedTargetSku",((Sample.API.Models.IResourceFeasibilityReviewInternal)this).RecommendedTargetSku, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.ISkuDetails>(__y, Sample.API.Models.SkuDetailsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IResourceFeasibilityReviewInternal)this).RecommendedTargetSkus = (System.Collections.Generic.List<Sample.API.Models.ISkuDetails>) content.GetValueForProperty("RecommendedTargetSkus",((Sample.API.Models.IResourceFeasibilityReviewInternal)this).RecommendedTargetSkus, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.ISkuDetails>(__y, Sample.API.Models.SkuDetailsTypeConverter.ConvertFrom));
             }
             if (content.Contains("CurrentTargetSkuSku"))
             {
@@ -182,9 +174,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IResourceFeasibilityReviewInternal)this).Status = (string) content.GetValueForProperty("Status",((Sample.API.Models.IResourceFeasibilityReviewInternal)this).Status, global::System.Convert.ToString);
             }
-            if (content.Contains("RecommendedTargetSku"))
+            if (content.Contains("RecommendedTargetSkus"))
             {
-                ((Sample.API.Models.IResourceFeasibilityReviewInternal)this).RecommendedTargetSku = (System.Collections.Generic.List<Sample.API.Models.ISkuDetails>) content.GetValueForProperty("RecommendedTargetSku",((Sample.API.Models.IResourceFeasibilityReviewInternal)this).RecommendedTargetSku, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.ISkuDetails>(__y, Sample.API.Models.SkuDetailsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IResourceFeasibilityReviewInternal)this).RecommendedTargetSkus = (System.Collections.Generic.List<Sample.API.Models.ISkuDetails>) content.GetValueForProperty("RecommendedTargetSkus",((Sample.API.Models.IResourceFeasibilityReviewInternal)this).RecommendedTargetSkus, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.ISkuDetails>(__y, Sample.API.Models.SkuDetailsTypeConverter.ConvertFrom));
             }
             if (content.Contains("CurrentTargetSkuSku"))
             {
@@ -217,18 +209,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Result of a single feasibility review performed against one resource in a recovery plan.
     [System.ComponentModel.TypeConverter(typeof(ResourceFeasibilityReviewTypeConverter))]

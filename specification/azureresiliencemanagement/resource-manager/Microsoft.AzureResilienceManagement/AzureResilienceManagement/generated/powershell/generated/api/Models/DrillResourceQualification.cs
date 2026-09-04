@@ -18,46 +18,46 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public Sample.API.Models.IDrillsQualifiedResource DrillsQualifiedResource { get => (this._drillsQualifiedResource = this._drillsQualifiedResource ?? new Sample.API.Models.DrillsQualifiedResource()); }
 
-        /// <summary>Backing field for <see cref="ResourceQualificationDetail" /> property.</summary>
-        private Sample.API.Models.IResourceQualificationDetails _resourceQualificationDetail;
-
-        /// <summary>Details of qualification for the operation.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IResourceQualificationDetails ResourceQualificationDetail { get => (this._resourceQualificationDetail = this._resourceQualificationDetail ?? new Sample.API.Models.ResourceQualificationDetails()); }
-
         /// <summary>Resource qualification state for the operation.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ResourceQualificationDetailDrillQualificationState { get => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetail).DrillQualificationState; }
+        public string ResourceQualificationDetailDrillQualificationState { get => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetails).DrillQualificationState; }
 
         /// <summary>Reasons for resource not qualified for the drills operation.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> ResourceQualificationDetailDrillsNotQualifiedReason { get => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetail).DrillsNotQualifiedReason; }
+        public System.Collections.Generic.List<string> ResourceQualificationDetailDrillsNotQualifiedReasons { get => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetails).DrillsNotQualifiedReasons; }
 
         /// <summary>Reasons for resource not qualified for the recovery operation.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> ResourceQualificationDetailRecoveryNotQualifiedReason { get => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetail).RecoveryNotQualifiedReason; }
+        public System.Collections.Generic.List<string> ResourceQualificationDetailRecoveryNotQualifiedReasons { get => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetails).RecoveryNotQualifiedReasons; }
 
         /// <summary>Resource qualification state for the operation.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ResourceQualificationDetailRecoveryQualificationState { get => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetail).RecoveryQualificationState; }
+        public string ResourceQualificationDetailRecoveryQualificationState { get => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetails).RecoveryQualificationState; }
+
+        /// <summary>Backing field for <see cref="ResourceQualificationDetails" /> property.</summary>
+        private Sample.API.Models.IResourceQualificationDetails _resourceQualificationDetails;
+
+        /// <summary>Details of qualification for the operation.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
+        internal Sample.API.Models.IResourceQualificationDetails ResourceQualificationDetails { get => (this._resourceQualificationDetails = this._resourceQualificationDetails ?? new Sample.API.Models.ResourceQualificationDetails()); }
 
         /// <summary>Internal Acessors for DrillsQualifiedResource</summary>
         Sample.API.Models.IDrillsQualifiedResource Sample.API.Models.IDrillResourceQualificationInternal.DrillsQualifiedResource { get => (this._drillsQualifiedResource = this._drillsQualifiedResource ?? new Sample.API.Models.DrillsQualifiedResource()); set { {_drillsQualifiedResource = value;} } }
 
-        /// <summary>Internal Acessors for ResourceQualificationDetail</summary>
-        Sample.API.Models.IResourceQualificationDetails Sample.API.Models.IDrillResourceQualificationInternal.ResourceQualificationDetail { get => (this._resourceQualificationDetail = this._resourceQualificationDetail ?? new Sample.API.Models.ResourceQualificationDetails()); set { {_resourceQualificationDetail = value;} } }
-
         /// <summary>Internal Acessors for ResourceQualificationDetailDrillQualificationState</summary>
-        string Sample.API.Models.IDrillResourceQualificationInternal.ResourceQualificationDetailDrillQualificationState { get => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetail).DrillQualificationState; set => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetail).DrillQualificationState = value ?? null; }
+        string Sample.API.Models.IDrillResourceQualificationInternal.ResourceQualificationDetailDrillQualificationState { get => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetails).DrillQualificationState; set => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetails).DrillQualificationState = value ?? null; }
 
-        /// <summary>Internal Acessors for ResourceQualificationDetailDrillsNotQualifiedReason</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourceQualificationInternal.ResourceQualificationDetailDrillsNotQualifiedReason { get => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetail).DrillsNotQualifiedReason; set => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetail).DrillsNotQualifiedReason = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for ResourceQualificationDetailDrillsNotQualifiedReasons</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourceQualificationInternal.ResourceQualificationDetailDrillsNotQualifiedReasons { get => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetails).DrillsNotQualifiedReasons; set => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetails).DrillsNotQualifiedReasons = value ?? null /* arrayOf */; }
 
-        /// <summary>Internal Acessors for ResourceQualificationDetailRecoveryNotQualifiedReason</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourceQualificationInternal.ResourceQualificationDetailRecoveryNotQualifiedReason { get => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetail).RecoveryNotQualifiedReason; set => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetail).RecoveryNotQualifiedReason = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for ResourceQualificationDetailRecoveryNotQualifiedReasons</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourceQualificationInternal.ResourceQualificationDetailRecoveryNotQualifiedReasons { get => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetails).RecoveryNotQualifiedReasons; set => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetails).RecoveryNotQualifiedReasons = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ResourceQualificationDetailRecoveryQualificationState</summary>
-        string Sample.API.Models.IDrillResourceQualificationInternal.ResourceQualificationDetailRecoveryQualificationState { get => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetail).RecoveryQualificationState; set => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetail).RecoveryQualificationState = value ?? null; }
+        string Sample.API.Models.IDrillResourceQualificationInternal.ResourceQualificationDetailRecoveryQualificationState { get => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetails).RecoveryQualificationState; set => ((Sample.API.Models.IResourceQualificationDetailsInternal)ResourceQualificationDetails).RecoveryQualificationState = value ?? null; }
+
+        /// <summary>Internal Acessors for ResourceQualificationDetails</summary>
+        Sample.API.Models.IResourceQualificationDetails Sample.API.Models.IDrillResourceQualificationInternal.ResourceQualificationDetails { get => (this._resourceQualificationDetails = this._resourceQualificationDetails ?? new Sample.API.Models.ResourceQualificationDetails()); set { {_resourceQualificationDetails = value;} } }
 
         /// <summary>Creates an new <see cref="DrillResourceQualification" /> instance.</summary>
         public DrillResourceQualification()
@@ -103,7 +103,7 @@ namespace Sample.API.Models
         SerializedName = @"drillsNotQualifiedReasons",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("ResourceNotIncludedInRecoveryPlan", "ResourceNotIncludedInDrill", "ResourceLocationNotMatchingWithSourceLocation", "ResourceZoneNotMatchingWithSourceZone")]
-        System.Collections.Generic.List<string> ResourceQualificationDetailDrillsNotQualifiedReason { get;  }
+        System.Collections.Generic.List<string> ResourceQualificationDetailDrillsNotQualifiedReasons { get;  }
         /// <summary>Reasons for resource not qualified for the recovery operation.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -114,7 +114,7 @@ namespace Sample.API.Models
         Description = @"Reasons for resource not qualified for the recovery operation.",
         SerializedName = @"recoveryNotQualifiedReasons",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> ResourceQualificationDetailRecoveryNotQualifiedReason { get;  }
+        System.Collections.Generic.List<string> ResourceQualificationDetailRecoveryNotQualifiedReasons { get;  }
         /// <summary>Resource qualification state for the operation.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -135,19 +135,19 @@ namespace Sample.API.Models
     {
         /// <summary>Drill resource.</summary>
         Sample.API.Models.IDrillsQualifiedResource DrillsQualifiedResource { get; set; }
-        /// <summary>Details of qualification for the operation.</summary>
-        Sample.API.Models.IResourceQualificationDetails ResourceQualificationDetail { get; set; }
         /// <summary>Resource qualification state for the operation.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Unknown", "Qualified", "NotQualified", "Excluded")]
         string ResourceQualificationDetailDrillQualificationState { get; set; }
         /// <summary>Reasons for resource not qualified for the drills operation.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("ResourceNotIncludedInRecoveryPlan", "ResourceNotIncludedInDrill", "ResourceLocationNotMatchingWithSourceLocation", "ResourceZoneNotMatchingWithSourceZone")]
-        System.Collections.Generic.List<string> ResourceQualificationDetailDrillsNotQualifiedReason { get; set; }
+        System.Collections.Generic.List<string> ResourceQualificationDetailDrillsNotQualifiedReasons { get; set; }
         /// <summary>Reasons for resource not qualified for the recovery operation.</summary>
-        System.Collections.Generic.List<string> ResourceQualificationDetailRecoveryNotQualifiedReason { get; set; }
+        System.Collections.Generic.List<string> ResourceQualificationDetailRecoveryNotQualifiedReasons { get; set; }
         /// <summary>Resource qualification state for the operation.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Unknown", "Qualified", "NotQualified", "Excluded")]
         string ResourceQualificationDetailRecoveryQualificationState { get; set; }
+        /// <summary>Details of qualification for the operation.</summary>
+        Sample.API.Models.IResourceQualificationDetails ResourceQualificationDetails { get; set; }
 
     }
 }

@@ -25,38 +25,38 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public global::System.DateTime? EndTime { get => this._endTime; }
 
-        /// <summary>Backing field for <see cref="ErrorDetail" /> property.</summary>
-        private Sample.API.Models.IJobErrorInfo _errorDetail;
-
-        /// <summary>Details of any errors that occurred during the execution of this job.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IJobErrorInfo ErrorDetail { get => (this._errorDetail = this._errorDetail ?? new Sample.API.Models.JobErrorInfo()); set => this._errorDetail = value; }
-
         /// <summary>A code representing the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailErrorCode { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).ErrorCode; }
+        public string ErrorDetailErrorCode { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).ErrorCode; }
 
         /// <summary>A detailed message explaining the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailErrorMessage { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).ErrorMessage; }
+        public string ErrorDetailErrorMessage { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).ErrorMessage; }
 
         /// <summary>A list of recommendations to resolve the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> ErrorDetailRecommendation { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).Recommendation; }
+        public System.Collections.Generic.List<string> ErrorDetailRecommendations { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).Recommendations; }
 
-        /// <summary>Backing field for <see cref="LinkedJobId" /> property.</summary>
-        private System.Collections.Generic.List<string> _linkedJobId;
+        /// <summary>Backing field for <see cref="ErrorDetails" /> property.</summary>
+        private Sample.API.Models.IJobErrorInfo _errorDetails;
+
+        /// <summary>Details of any errors that occurred during the execution of this job.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
+        internal Sample.API.Models.IJobErrorInfo ErrorDetails { get => (this._errorDetails = this._errorDetails ?? new Sample.API.Models.JobErrorInfo()); set => this._errorDetails = value; }
+
+        /// <summary>Backing field for <see cref="LinkedJobIds" /> property.</summary>
+        private System.Collections.Generic.List<string> _linkedJobIds;
 
         /// <summary>Identifiers of linked jobs to this task.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> LinkedJobId { get => this._linkedJobId; }
+        public System.Collections.Generic.List<string> LinkedJobIds { get => this._linkedJobIds; }
 
-        /// <summary>Backing field for <see cref="RetryDetail" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> _retryDetail;
+        /// <summary>Backing field for <see cref="RetryDetails" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> _retryDetails;
 
         /// <summary>Retry details of the task.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> RetryDetail { get => this._retryDetail; }
+        public System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> RetryDetails { get => this._retryDetails; }
 
         /// <summary>Internal Acessors for Duration</summary>
         global::System.TimeSpan? Sample.API.Models.IJobTaskDetailInternal.Duration { get => this._duration; set { {_duration = value;} } }
@@ -64,23 +64,23 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for EndTime</summary>
         global::System.DateTime? Sample.API.Models.IJobTaskDetailInternal.EndTime { get => this._endTime; set { {_endTime = value;} } }
 
-        /// <summary>Internal Acessors for ErrorDetail</summary>
-        Sample.API.Models.IJobErrorInfo Sample.API.Models.IJobTaskDetailInternal.ErrorDetail { get => (this._errorDetail = this._errorDetail ?? new Sample.API.Models.JobErrorInfo()); set { {_errorDetail = value;} } }
-
         /// <summary>Internal Acessors for ErrorDetailErrorCode</summary>
-        string Sample.API.Models.IJobTaskDetailInternal.ErrorDetailErrorCode { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).ErrorCode; set => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).ErrorCode = value ?? null; }
+        string Sample.API.Models.IJobTaskDetailInternal.ErrorDetailErrorCode { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).ErrorCode; set => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).ErrorCode = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailErrorMessage</summary>
-        string Sample.API.Models.IJobTaskDetailInternal.ErrorDetailErrorMessage { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).ErrorMessage; set => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).ErrorMessage = value ?? null; }
+        string Sample.API.Models.IJobTaskDetailInternal.ErrorDetailErrorMessage { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).ErrorMessage; set => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).ErrorMessage = value ?? null; }
 
-        /// <summary>Internal Acessors for ErrorDetailRecommendation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IJobTaskDetailInternal.ErrorDetailRecommendation { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).Recommendation; set => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).Recommendation = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for ErrorDetailRecommendations</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IJobTaskDetailInternal.ErrorDetailRecommendations { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).Recommendations; set => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).Recommendations = value ?? null /* arrayOf */; }
 
-        /// <summary>Internal Acessors for LinkedJobId</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IJobTaskDetailInternal.LinkedJobId { get => this._linkedJobId; set { {_linkedJobId = value;} } }
+        /// <summary>Internal Acessors for ErrorDetails</summary>
+        Sample.API.Models.IJobErrorInfo Sample.API.Models.IJobTaskDetailInternal.ErrorDetails { get => (this._errorDetails = this._errorDetails ?? new Sample.API.Models.JobErrorInfo()); set { {_errorDetails = value;} } }
 
-        /// <summary>Internal Acessors for RetryDetail</summary>
-        System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> Sample.API.Models.IJobTaskDetailInternal.RetryDetail { get => this._retryDetail; set { {_retryDetail = value;} } }
+        /// <summary>Internal Acessors for LinkedJobIds</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IJobTaskDetailInternal.LinkedJobIds { get => this._linkedJobIds; set { {_linkedJobIds = value;} } }
+
+        /// <summary>Internal Acessors for RetryDetails</summary>
+        System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> Sample.API.Models.IJobTaskDetailInternal.RetryDetails { get => this._retryDetails; set { {_retryDetails = value;} } }
 
         /// <summary>Internal Acessors for StartTime</summary>
         global::System.DateTime? Sample.API.Models.IJobTaskDetailInternal.StartTime { get => this._startTime; set { {_startTime = value;} } }
@@ -97,8 +97,8 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for TaskName</summary>
         string Sample.API.Models.IJobTaskDetailInternal.TaskName { get => this._taskName; set { {_taskName = value;} } }
 
-        /// <summary>Internal Acessors for UserComment</summary>
-        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> Sample.API.Models.IJobTaskDetailInternal.UserComment { get => this._userComment; set { {_userComment = value;} } }
+        /// <summary>Internal Acessors for UserComments</summary>
+        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> Sample.API.Models.IJobTaskDetailInternal.UserComments { get => this._userComments; set { {_userComments = value;} } }
 
         /// <summary>Backing field for <see cref="StartTime" /> property.</summary>
         private global::System.DateTime? _startTime;
@@ -135,12 +135,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string TaskName { get => this._taskName; }
 
-        /// <summary>Backing field for <see cref="UserComment" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IJobUserComment> _userComment;
+        /// <summary>Backing field for <see cref="UserComments" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IJobUserComment> _userComments;
 
         /// <summary>User Comments.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComment { get => this._userComment; }
+        public System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComments { get => this._userComments; }
 
         /// <summary>Creates an new <see cref="JobTaskDetail" /> instance.</summary>
         public JobTaskDetail()
@@ -206,7 +206,7 @@ namespace Sample.API.Models
         Description = @"A list of recommendations to resolve the error.",
         SerializedName = @"recommendations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> ErrorDetailRecommendation { get;  }
+        System.Collections.Generic.List<string> ErrorDetailRecommendations { get;  }
         /// <summary>Identifiers of linked jobs to this task.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -217,7 +217,7 @@ namespace Sample.API.Models
         Description = @"Identifiers of linked jobs to this task.",
         SerializedName = @"linkedJobIds",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> LinkedJobId { get;  }
+        System.Collections.Generic.List<string> LinkedJobIds { get;  }
         /// <summary>Retry details of the task.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -228,7 +228,7 @@ namespace Sample.API.Models
         Description = @"Retry details of the task.",
         SerializedName = @"retryDetails",
         PossibleTypes = new [] { typeof(Sample.API.Models.IJobRetryDetails) })]
-        System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> RetryDetail { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> RetryDetails { get;  }
         /// <summary>The start time of the job execution.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -295,7 +295,7 @@ namespace Sample.API.Models
         Description = @"User Comments.",
         SerializedName = @"userComments",
         PossibleTypes = new [] { typeof(Sample.API.Models.IJobUserComment) })]
-        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComment { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComments { get;  }
 
     }
     /// Job task details.
@@ -306,18 +306,18 @@ namespace Sample.API.Models
         global::System.TimeSpan? Duration { get; set; }
         /// <summary>The end time of the job execution.</summary>
         global::System.DateTime? EndTime { get; set; }
-        /// <summary>Details of any errors that occurred during the execution of this job.</summary>
-        Sample.API.Models.IJobErrorInfo ErrorDetail { get; set; }
         /// <summary>A code representing the error.</summary>
         string ErrorDetailErrorCode { get; set; }
         /// <summary>A detailed message explaining the error.</summary>
         string ErrorDetailErrorMessage { get; set; }
         /// <summary>A list of recommendations to resolve the error.</summary>
-        System.Collections.Generic.List<string> ErrorDetailRecommendation { get; set; }
+        System.Collections.Generic.List<string> ErrorDetailRecommendations { get; set; }
+        /// <summary>Details of any errors that occurred during the execution of this job.</summary>
+        Sample.API.Models.IJobErrorInfo ErrorDetails { get; set; }
         /// <summary>Identifiers of linked jobs to this task.</summary>
-        System.Collections.Generic.List<string> LinkedJobId { get; set; }
+        System.Collections.Generic.List<string> LinkedJobIds { get; set; }
         /// <summary>Retry details of the task.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> RetryDetail { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails> RetryDetails { get; set; }
         /// <summary>The start time of the job execution.</summary>
         global::System.DateTime? StartTime { get; set; }
         /// <summary>The current status of the job execution.</summary>
@@ -330,7 +330,7 @@ namespace Sample.API.Models
         /// <summary>Friendly name of the task.</summary>
         string TaskName { get; set; }
         /// <summary>User Comments.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComment { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComments { get; set; }
 
     }
 }

@@ -73,7 +73,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_errorDetail = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("errorDetails"), out var __jsonErrorDetails) ? Sample.API.Models.ErrorDetail.FromJson(__jsonErrorDetails) : _errorDetail;}
+            {_errorDetails = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("errorDetails"), out var __jsonErrorDetails) ? Sample.API.Models.ErrorDetail.FromJson(__jsonErrorDetails) : _errorDetails;}
             {_requireHighAvailability = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("requireHighAvailability"), out var __jsonRequireHighAvailability) ? (string)__jsonRequireHighAvailability : (string)_requireHighAvailability;}
             {_requireDisasterRecovery = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("requireDisasterRecovery"), out var __jsonRequireDisasterRecovery) ? (string)__jsonRequireDisasterRecovery : (string)_requireDisasterRecovery;}
             {_regionalRecoveryPointObjective = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("regionalRecoveryPointObjective"), out var __jsonRegionalRecoveryPointObjective) ? (string)__jsonRegionalRecoveryPointObjective : (string)_regionalRecoveryPointObjective;}
@@ -104,7 +104,7 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                AddIf( null != this._errorDetail ? (Sample.API.Runtime.Json.JsonNode) this._errorDetail.ToJson(null,serializationMode) : null, "errorDetails" ,container.Add );
+                AddIf( null != this._errorDetails ? (Sample.API.Runtime.Json.JsonNode) this._errorDetails.ToJson(null,serializationMode) : null, "errorDetails" ,container.Add );
             }
             AddIf( null != (((object)this._requireHighAvailability)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._requireHighAvailability.ToString()) : null, "requireHighAvailability" ,container.Add );
             AddIf( null != (((object)this._requireDisasterRecovery)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._requireDisasterRecovery.ToString()) : null, "requireDisasterRecovery" ,container.Add );
