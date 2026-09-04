@@ -1,0 +1,24 @@
+{
+  "title": "RunbookExecutions_GenerateUploadUrl_MaximumSet",
+  "operationId": "RunbookExecutions_GenerateUploadUrl",
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD",
+    "resourceGroupName": "rgwaves",
+    "projectName": "project1",
+    "runbookName": "runbook1",
+    "runbookExecutionName": "execution1",
+    "body": {
+      "path": "logs/validation.json"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "path": "logs/validation.json",
+        "uploadUrl": "https://contosostorage.blob.core.windows.net/executions/execution1/logs/validation.json?sv=2026-01-01&sig=redacted",
+        "expiresAt": "2026-08-01T14:00:00Z"
+      }
+    }
+  }
+}
