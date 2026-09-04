@@ -2724,6 +2724,33 @@ model HostPoolProperties {
    */
   @added(Versions.vLatestPreview)
   conditionalRdpProperty?: string;
+
+  /**
+   * The automatic update settings for supported first-party extensions.
+   * @Introduced in 2026-08-01-preview
+   */
+  @added(Versions.vLatestPreview)
+  firstPartyExtensionAutoUpdate?: FirstPartyExtensionAutoUpdateSettings;
+}
+
+/**
+ * The automatic update settings for supported first-party extensions.
+ * @Introduced in 2026-08-01-preview
+ */
+model FirstPartyExtensionAutoUpdateSettings {
+  /**
+   * Whether automatic updates are enabled for the Microsoft Multimedia Redirection extension.
+   * @Introduced in 2026-08-01-preview
+   */
+  @encodedName("application/json", "MicrosoftMultimediaRedirection")
+  microsoftMultimediaRedirection?: boolean;
+
+  /**
+   * Whether automatic updates are enabled for the Teams Media Optimization extension.
+   * @Introduced in 2026-08-01-preview
+   */
+  @encodedName("application/json", "TeamsMediaOptimization")
+  teamsMediaOptimization?: boolean;
 }
 
 /**
@@ -3833,6 +3860,13 @@ model HostPoolPatchProperties {
    */
   @added(Versions.vLatestPreview)
   conditionalRdpProperty?: string;
+
+  /**
+   * The automatic update settings for supported first-party extensions.
+   * @Introduced in 2026-08-01-preview
+   */
+  @added(Versions.vLatestPreview)
+  firstPartyExtensionAutoUpdate?: FirstPartyExtensionAutoUpdateSettings;
 }
 
 /**
@@ -5521,6 +5555,150 @@ model ProvisioningStatusProperty {
    * The custom properties of the SessionHost Provisioning Status.
    */
   properties?: SessionHostManagementProvisioningStatusProperties;
+}
+
+/**
+ * The source of the MSIX package.
+ * @Introduced in 2026-02-01-preview
+ */
+@added(Versions.vLatestPreview)
+union MsixPackageSource {
+  string,
+
+  /**
+   * Package sourced from Microsoft Store.
+   */
+  MicrosoftStore: "MicrosoftStore",
+
+  /**
+   * Package sourced from Winget.
+   */
+  Winget: "Winget",
+
+  /**
+   * Package sourced from private WPM repo.
+   */
+  PrivateWPMRepo: "PrivateWPMRepo",
+
+  /**
+   * Package sourced from customer input.
+   */
+  CustomerInput: "CustomerInput",
+}
+
+/**
+ * The output file type for the expanded MSIX file.
+ * @Introduced in 2026-02-01-preview
+ */
+@added(Versions.vLatestPreview)
+union OutputFileType {
+  string,
+
+  /**
+   * CIM file format.
+   */
+  CIM: "CIM",
+
+  /**
+   * VHDX file format.
+   */
+  VHDX: "VHDX",
+}
+
+/**
+ * Properties for expanding MSIX files.
+ * @Introduced in 2026-02-01-preview
+ */
+@added(Versions.vLatestPreview)
+model ExpandMsixFileRequestProperties {
+  /**
+   * List of URIs to MSIX files to expand.
+   */
+  msixFileUri?: string[];
+
+  /**
+   * The file share path containing MSIX files.
+   */
+  msixFileShare?: string;
+
+  /**
+   * List of UNC paths to MSIX files.
+   */
+  msixUncPath?: string[];
+
+  /**
+   * List of output file share paths where expanded files will be stored.
+   */
+  outputFileSharePath?: string[];
+
+  /**
+   * The source of the MSIX package.
+   */
+  msixPackageSource?: MsixPackageSource;
+
+  /**
+   * The output file type for the expanded MSIX file.
+   */
+  outputFileType?: OutputFileType;
+
+  /**
+   * The ARM path of the host pool is used to route the request to the appropriate region.
+   */
+  hostpoolArmPath?: string;
+}
+
+/**
+ * Request body for expanding MSIX files.
+ * @Introduced in 2026-02-01-preview
+ */
+@clientName("ExpandMsixFileContent", "csharp")
+@added(Versions.vLatestPreview)
+model ExpandMsixFileRequest {
+  /**
+   * Properties for expanding MSIX files.
+   */
+  properties?: ExpandMsixFileRequestProperties;
+}
+
+/**
+ * Details about a file expansion failure.
+ * @Introduced in 2026-02-01-preview
+ */
+@added(Versions.vLatestPreview)
+model ExpandMsixFileFailure {
+  /**
+   * The name of the file that failed to expand.
+   */
+  fileName?: string;
+
+  /**
+   * The error message describing why the expansion failed.
+   */
+  error?: string;
+}
+
+/**
+ * Result of expanding MSIX files.
+ * @Introduced in 2026-02-01-preview
+ */
+@added(Versions.vLatestPreview)
+model ExpandMsixFileResult {
+  /**
+   * List of successfully expanded files.
+   */
+  successes?: string[];
+
+  /**
+   * List of files that failed to expand.
+   */
+  @Azure.ResourceManager.identifiers(#[])
+  failures?: ExpandMsixFileFailure[];
+
+  /**
+   * Link to the next page of results.
+   */
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
 }
 
 /**
