@@ -3420,8 +3420,15 @@
       "properties": {
         "acrResourceId": {
           "type": "string",
-          "description": "Optional ACR resource ID for image builds. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{acrName}",
-          "pattern": "^/subscriptions/[a-fA-F0-9\\-]{36}/resourceGroups/[a-zA-Z0-9_\\-\\.()]+/providers/Microsoft\\.ContainerRegistry/registries/[a-zA-Z0-9]{5,50}$"
+          "format": "arm-id",
+          "description": "Optional Azure Container Registry resource ID for image builds.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerRegistry/registries"
+              }
+            ]
+          }
         },
         "ssoUrl": {
           "type": "string",
@@ -3604,8 +3611,15 @@
       "properties": {
         "acrResourceId": {
           "type": "string",
-          "description": "Optional ACR resource ID for image builds. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{acrName}",
-          "pattern": "^/subscriptions/[a-fA-F0-9\\-]{36}/resourceGroups/[a-zA-Z0-9_\\-\\.()]+/providers/Microsoft\\.ContainerRegistry/registries/[a-zA-Z0-9]{5,50}$"
+          "format": "arm-id",
+          "description": "Optional Azure Container Registry resource ID for image builds.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerRegistry/registries"
+              }
+            ]
+          }
         }
       }
     },

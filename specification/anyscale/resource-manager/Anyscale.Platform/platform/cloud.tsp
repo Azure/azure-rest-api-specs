@@ -7,6 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using Rest;
 using Http;
 using Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Anyscale.Platform;
@@ -24,9 +25,12 @@ model Cloud is TrackedResource<CloudProperties> {
 
 /** Properties of the cloud resource */
 model CloudProperties {
-  /** Optional ACR resource ID for image builds. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{acrName} */
-  @pattern("^/subscriptions/[a-fA-F0-9\\-]{36}/resourceGroups/[a-zA-Z0-9_\\-\\.()]+/providers/Microsoft\\.ContainerRegistry/registries/[a-zA-Z0-9]{5,50}$")
-  acrResourceId?: string;
+  /** Optional Azure Container Registry resource ID for image builds. */
+  acrResourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerRegistry/registries";
+    }
+  ]>;
 
   /** The SSO URL for the cloud */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
