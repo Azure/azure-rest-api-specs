@@ -30,6 +30,7 @@ namespace Azure.AI.Projects {
     azure_ai_search: "azure_ai_search",
     azure_function: "azure_function",
     bing_grounding: "bing_grounding",
+    browser_automation: "browser_automation",
     capture_structured_outputs: "capture_structured_outputs",
     openapi: "openapi",
 
@@ -380,6 +381,21 @@ namespace Azure.AI.Projects {
      * The Browser Automation Tool parameters.
      */
     browser_automation_preview: BrowserAutomationToolParameters;
+  }
+
+  /**
+   * The input definition information for a Browser Automation Tool, as used to configure an Agent.
+   */
+  model BrowserAutomationTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'browser_automation'.
+     */
+    type: "browser_automation";
+
+    /**
+     * The Browser Automation Tool parameters.
+     */
+    browser_automation: BrowserAutomationToolParameters;
   }
 
   /**
