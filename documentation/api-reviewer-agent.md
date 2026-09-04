@@ -596,9 +596,9 @@ The agent **does not**:
 - [Azure Resource Provider Contract (RPC)](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0)
 - [Getting Started with OpenAPI Specifications](Getting%20started%20with%20OpenAPI%20specifications.md)
 - [Getting Started with TypeSpec Specifications](Getting-started-with-TypeSpec-specifications.md)
-- [Breaking Changes Guidelines](Breaking%20changes%20guidelines.md)
+- [Azure Breaking Changes Policy](https://aka.ms/AzBreakingChangesPolicy)
 - [CI Fix Guide](ci-fix.md)
-- [Directory Structure](directory-structure.md)
+- [Directory Structure](https://aka.ms/azsdk/spec-dirs)
 
 ### Agent Files (under `.github/`)
 

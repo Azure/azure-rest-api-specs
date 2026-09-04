@@ -910,7 +910,7 @@ auto-invalidates if the underlying rule moves.
   required on tracked resources, not on proxy or extension resources.
   Anchor: `arm-api-review.instructions.md`, provisioning-state section.
 - **Enum value additions inside `x-ms-enum.modelAsString: true`.** Not a
-  breaking change. Anchor: `documentation/Breaking changes guidelines.md`.
+  breaking change. Anchor: [Azure Breaking Changes Policy](https://aka.ms/AzBreakingChangesPolicy).
 - **Suppressions carried forward from a prior version.** Only newly added
   suppressions require fresh justification. Anchor: reviewer Step 4 Section3
   ("Carried-over suppressions (OK)").

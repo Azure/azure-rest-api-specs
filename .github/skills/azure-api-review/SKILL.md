@@ -365,13 +365,13 @@ consumption.
 
 These documents in this repo provide additional context:
 
-- [Breaking changes guidelines](../../../documentation/Breaking%20changes%20guidelines.md)
+- [Breaking changes policy](https://aka.ms/AzBreakingChangesPolicy)
 - [Uniform versioning](../../../documentation/uniform-versioning.md)
-- [Directory structure](../../../documentation/directory-structure.md)
+- [Directory structure](https://aka.ms/azsdk/spec-dirs)
 - [OpenAPI authoring automated guidelines](../../../documentation/openapi-authoring-automated-guidelines.md)
-- [Swagger extensions](../../../documentation/swagger-extensions.md)
+- [Swagger extensions](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md)
 - [CI fix guide](../../../documentation/ci-fix.md)
-- [TypeSpec dev process](../../../documentation/typespec-rest-api-dev-process.md)
+- [TypeSpec dev process](https://github.com/Azure/azure-rest-api-specs/wiki/Azure-REST-API,-SDK-development-process-with-TypeSpec)
 
 ## Relationship to Instruction Files
 
