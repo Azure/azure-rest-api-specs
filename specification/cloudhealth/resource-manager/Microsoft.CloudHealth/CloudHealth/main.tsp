@@ -1099,12 +1099,12 @@ model ExternalSignalGroup {
 }
 
 @added(Versions.v2026_01_01_preview)
-@doc("An externally submitted signal instance assigned to an entity.")
+@doc("An externally submitted signal instance assigned to an entity. Its current observation comes from the most recently accepted health report.")
 model ExternalSignal extends SignalInstanceProperties {
   @doc("Kind of the signal instance")
   signalKind: SignalKind.ExternalSignal;
 
-  @doc("Evaluation rules for the external signal as submitted.")
+  @doc("Optional provenance snapshot of the evaluation rules supplied with the most recently accepted health report. These rules do not modify a signal definition.")
   evaluationRules?: EvaluationRule;
 }
 
@@ -1561,18 +1561,18 @@ model SignalHistoryDataPoint {
 }
 
 @added(Versions.v2026_01_01_preview)
-@doc("Health report that's submitted for a specific signal")
+@doc("Current health observation submitted for a specific signal.")
 model HealthReportRequest {
-  @doc("Name of the entity signal to report health for")
+  @doc("Name of the entity signal to report health for. An unknown name creates an external signal instance.")
   signalName: signalName;
 
-  @doc("Health state to report for the signal")
+  @doc("Authoritative health state reported by the submitter. The service does not recalculate it from the reported value or evaluation rules.")
   healthState: HealthState;
 
   @doc("Reported value of the signal")
   value?: float64;
 
-  @doc("Evaluation rules that were used to determine the reported health state")
+  @doc("Optional snapshot of the evaluation rules used by the submitter to determine the reported health state. These rules are provenance and do not modify configured signal rules.")
   evaluationRules?: HealthReportEvaluationRule;
 
   @doc("Number of minutes until the health report expires. Defaults to 60 (1 hour) if not specified.")
@@ -1842,7 +1842,7 @@ interface Entities {
   >;
 
   @added(Versions.v2026_01_01_preview)
-  @doc("Ingest a health report for a specific signal on an entity (the entity must already exist)")
+  @doc("Ingest a health report for a signal on an existing entity. A later report replaces the signal's current observation while previous values and health states remain available in signal history.")
   @post
   @action("ingestHealthReport")
   ingestHealthReport is ArmResourceActionNoContentSync<

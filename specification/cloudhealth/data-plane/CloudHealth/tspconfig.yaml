@@ -1,0 +1,39 @@
+parameters:
+  "service-dir":
+    default: "sdk/monitor"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
+options:
+  "@azure-tools/typespec-autorest":
+    emit-lro-options: "none"
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/cloudhealth.json"
+    examples-dir: "{project-root}/examples"
+    omit-unreachable-types: false
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-cloudhealth-data"
+    namespace: "azure.monitor.cloudhealth.data"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    package-name: "Azure.Monitor.CloudHealth.Data"
+    namespace: "{package-name}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/monitor-cloudhealth-data"
+    package-details:
+      name: "@azure/monitor-cloudhealth-data"
+    experimental-extensible-enums: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-cloudhealth-data"
+    namespace: com.azure.monitor.cloudhealth.data
+    flavor: azure
