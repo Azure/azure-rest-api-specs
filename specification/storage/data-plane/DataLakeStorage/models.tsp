@@ -1241,6 +1241,7 @@ alias ContentMD5ResponseHeader = {
 // ContentMD5ResponseHeaderBytes is to keep compat with Go.
 // see client.tsp @@alternateType(ContentMD5ResponseHeader.contentMD5, string, "go");
 // NOTE: replace with an override once it supports response types
+// TODO: https://github.com/Azure/azure-sdk-for-go/issues/27521
 
 /** The Content-MD5 response header. */
 alias ContentMD5ResponseHeaderBytes = {
