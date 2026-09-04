@@ -1,0 +1,30 @@
+{
+  "title": "Response with an unknown operation error during cancellation",
+  "operationId": "VirtualMachineBulkOperations_BulkCancel",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
+    "requestBody": {
+      "operationIds": [
+        "dddddddd-dddd-dddd-dddd-dddddddddddd"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "errorCode": "OperationNotFound",
+            "operation": {
+              "operationId": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+              "state": "Unknown"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

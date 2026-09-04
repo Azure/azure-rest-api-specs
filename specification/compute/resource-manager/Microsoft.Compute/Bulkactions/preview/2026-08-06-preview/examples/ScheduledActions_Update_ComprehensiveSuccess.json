@@ -1,0 +1,73 @@
+{
+  "title": "Update a recurring scheduled action schedule",
+  "description": "Updates the recurrence settings for a recurring scheduled action.",
+  "operationId": "ScheduledActions_Update",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "scheduledActionName": "weekday-start",
+    "properties": {
+      "properties": {
+        "schedule": {
+          "scheduledTime": "19:00:00",
+          "timeZone": "America/Los_Angeles",
+          "requestedWeekDays": [
+            "Monday"
+          ],
+          "requestedMonths": [
+            "January"
+          ],
+          "requestedDaysOfTheMonth": [
+            15
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-08-06-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-08-06-preview&monitor=true",
+        "Retry-After": 10
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "resourceType": "VirtualMachine",
+          "actionType": "Start",
+          "startTime": "2026-09-01T19:00:00-07:00",
+          "schedule": {
+            "scheduledTime": "19:00:00",
+            "timeZone": "America/Los_Angeles",
+            "requestedWeekDays": [
+              "Monday"
+            ],
+            "requestedMonths": [
+              "January"
+            ],
+            "requestedDaysOfTheMonth": [
+              15
+            ]
+          },
+          "notificationSettings": [],
+          "provisioningState": "Succeeded"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start",
+        "name": "weekday-start",
+        "type": "Microsoft.Compute/scheduledActions",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-04-17T00:23:55.288Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-04-17T00:23:55.288Z"
+        }
+      }
+    }
+  }
+}

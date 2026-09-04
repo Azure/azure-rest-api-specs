@@ -15,83 +15,83 @@ using TypeSpec.Versioning;
 namespace Microsoft.Compute;
 
 // ------------------ Enums ---------------
-@doc("The types of deadlines supported by Bulkactions")
+@doc("The deadline behavior for a bulk action.")
 union DeadlineType {
-  @doc("Default value of Unknown.")
+  @doc("The deadline behavior is not known.")
   Unknown: "Unknown",
 
-  @doc("Initiate the operation at the given deadline.")
+  @doc("Bulk Actions attempts to start the operation at the specified deadline.")
   InitiateAt: "InitiateAt",
 
-  @doc("Complete the operation by the given deadline.")
+  @doc("Bulk Actions attempts to complete the operation by the specified deadline.")
   CompleteBy: "CompleteBy",
 
   string,
 }
 
-@doc("The kind of bulk operation that can be performed on resources using Bulkactions API")
+@doc("The type of operation performed by Bulk Actions.")
 union ResourceOperationType {
-  @doc("The default value for this enum type")
+  @doc("The operation type is not known.")
   Unknown: "Unknown",
 
-  @doc("Start operations on the resources")
+  @doc("Starts the specified virtual machines.")
   Start: "Start",
 
-  @doc("Deallocate operations on the resources")
+  @doc("Deallocates the specified virtual machines.")
   Deallocate: "Deallocate",
 
-  @doc("Hibernate operations on the resources")
+  @doc("Hibernates the specified virtual machines.")
   Hibernate: "Hibernate",
 
-  @doc("Create operations on the resources")
+  @doc("Creates the specified virtual machines.")
   Create: "Create",
 
-  @doc("Delete operations on the resources")
+  @doc("Deletes the specified virtual machines.")
   Delete: "Delete",
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("Post-Start VM agent health-check sub-operation; surfaced when the customer opts into verifyVmAgentHealth on a Start request")
+  @doc("Retrieves virtual machine instance information to verify guest agent health after a start operation.")
   GetInstanceView: "GetInstanceView",
 
   string,
 }
 
-@doc("Values that define the states of operations in Bulkactions")
+@doc("The current state of a bulk action.")
 union OperationState {
-  @doc("The default value for the operation state enum")
+  @doc("The operation state is not known.")
   Unknown: "Unknown",
 
-  @doc("Operations that are pending scheduling")
+  @doc("The operation is waiting to be scheduled.")
   PendingScheduling: "PendingScheduling",
 
-  @doc("Operations that have been scheduled")
+  @doc("The operation has been scheduled.")
   Scheduled: "Scheduled",
 
-  @doc("Operations that are waiting to be executed")
+  @doc("The operation is waiting to begin.")
   PendingExecution: "PendingExecution",
 
-  @doc("Operations that are in the process of being executed")
+  @doc("The operation is in progress.")
   Executing: "Executing",
 
-  @doc("Operations that succeeded")
+  @doc("The operation completed successfully.")
   Succeeded: "Succeeded",
 
-  @doc("Operations that have failed")
+  @doc("The operation failed.")
   Failed: "Failed",
 
-  @doc("Operations that have been Cancelled by the user")
+  @doc("The operation was canceled by the customer.")
   Cancelled: "Cancelled",
 
-  @doc("Operations that are blocked")
+  @doc("The operation cannot currently make progress.")
   Blocked: "Blocked",
 
   string,
 }
 
 // ------------------ Models ---------------
-@doc("The resources needed for the user request")
+@doc("The virtual machines targeted by a bulk action.")
 model Resources {
-  @doc("The resource ids used for the request")
+  @doc("The Azure resource IDs of the target virtual machines.")
   ids: Array<armResourceIdentifier<[
     {
       type: "Microsoft.Compute/virtualMachines";
@@ -100,31 +100,31 @@ model Resources {
 }
 
 @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-@doc("The resources needed for the user request with the resourceContext")
+@doc("A virtual machine and optional customer-provided context for tracking its result.")
 model ResourceWithContext {
-  @doc("The resource ids used for the request")
+  @doc("The Azure resource ID of the target virtual machine.")
   resourceId: armResourceIdentifier<[
     {
       type: "Microsoft.Compute/virtualMachines";
     }
   ]>;
 
-  @doc("The operational context of the resourceId")
+  @doc("Opaque customer-provided context returned with the result for this virtual machine. Do not include secrets or personal data.")
   resourceContext: string;
 }
 
-@doc("The resources needed for the user request with the context for tracking purposes")
+@doc("The virtual machines targeted by a bulk action, with customer-provided tracking context.")
 @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
 model ResourcesWithContext {
   @identifiers(#["resourceId"])
-  @doc("The resource ids used for the request")
+  @doc("The target virtual machines and their customer-provided tracking context.")
   resources: Array<ResourceWithContext>;
 }
 
 @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-@doc("Resource notification details containing notification metadata like the resource context")
+@doc("Customer-provided context associated with a virtual machine result.")
 model ResourceNotificationDetails {
-  @doc("Resource context for notification tracking")
+  @doc("Opaque customer-provided context returned with the virtual machine result.")
   resourceContext?: string;
 }
 
@@ -133,57 +133,57 @@ model ResourceNotificationDetails {
  */
 // ----------- ExecuteCreateFlex ---------
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
-@doc("The supported operating system types for flex VM creation")
+@doc("The operating system type for virtual machines created with flexible allocation preferences.")
 union OsType {
-  @doc("Windows operating system")
+  @doc("Windows operating system.")
   Windows: "Windows",
 
-  @doc("Linux operating system")
+  @doc("Linux operating system.")
   Linux: "Linux",
 
   string,
 }
 
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
-@doc("The priority type for VM allocation")
+@doc("The priority type for virtual machine allocation.")
 union PriorityType {
-  @doc("Regular priority VMs")
+  @doc("Regular, non-Spot virtual machines.")
   Regular: "Regular",
 
-  @doc("Spot priority VMs")
+  @doc("Azure Spot Virtual Machines.")
   Spot: "Spot",
 
   string,
 }
 
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
-@doc("The allocation strategy for VM size selection")
+@doc("The strategy Bulk Actions uses to select a virtual machine size.")
 union AllocationStrategy {
-  @doc("Platform prioritizes VM sizes with the lowest hourly cost")
+  @doc("Bulk Actions prioritizes virtual machine sizes with the lowest hourly cost.")
   LowestPrice: "LowestPrice",
 
-  @doc("Customer specifies a rank for each VM size, platform uses VM sizes in rank order")
+  @doc("Bulk Actions considers virtual machine sizes in the customer-specified rank order.")
   Prioritized: "Prioritized",
 
-  @doc("Platform prioritizes VM sizes with the highest available capacity first")
+  @doc("Bulk Actions prioritizes virtual machine sizes with the highest available capacity.")
   CapacityOptimized: "CapacityOptimized",
 
   string,
 }
 
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
-@doc("The distribution strategy for zone allocation")
+@doc("The strategy Bulk Actions uses to distribute virtual machines across availability zones.")
 union DistributionStrategy {
-  @doc("Platform attempts to place as many VMs as possible in a single zone, falls back to multiple zones if needed")
+  @doc("Bulk Actions attempts to place as many virtual machines as possible in one availability zone and uses additional zones when needed.")
   BestEffortSingleZone: "BestEffortSingleZone",
 
-  @doc("Platform uses customer-provided zone rankings to allocate VMs")
+  @doc("Bulk Actions considers availability zones in the customer-specified rank order.")
   Prioritized: "Prioritized",
 
-  @doc("Platform attempts to evenly distribute VMs across all available zones with best effort")
+  @doc("Bulk Actions attempts to distribute virtual machines evenly across the available zones.")
   BestEffortBalanced: "BestEffortBalanced",
 
-  @doc("Platform must evenly distribute VMs across zones, request is rejected if exact balance cannot be achieved")
+  @doc("Bulk Actions distributes virtual machines evenly across zones and rejects the request when an even distribution cannot be achieved.")
   StrictBalanced: "StrictBalanced",
 
   string,
@@ -232,75 +232,75 @@ model PartialFulfillmentPolicy {
 }
 
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
-@doc("A VM size profile with a name and rank for flex VM creation")
+@doc("A virtual machine size and its selection priority.")
 model VmSizeProfile {
-  @doc("The name of the VM size, eg Standard_D2ads_v5")
+  @doc("The virtual machine SKU, for example `Standard_D2ads_v5`.")
   @minLength(1)
   name: string;
 
-  @doc("The rank of this VM size in the priority order")
+  @doc("The customer-defined priority rank for this virtual machine size.")
   rank: int32;
 }
 
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
-@doc("The priority profile for flex VM creation")
+@doc("The priority and allocation preferences for virtual machines.")
 model PriorityProfile {
-  @doc("The priority type for VM allocation")
+  @doc("The priority type for virtual machine allocation.")
   type?: PriorityType;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "maxPricePerVM has VM which does not follow camel casing"
-  @doc("Price per hour of each Spot VM will never exceed this. Available from 2026-04-06-preview.")
+  @doc("The maximum hourly price, in US dollars, for each Spot virtual machine.")
   maxPricePerVM?: float32;
 
-  @doc("Eviction Policy to follow when evicting Spot VMs. Available from 2026-04-06-preview.")
+  @doc("The action applied to a Spot virtual machine when Azure evicts it.")
   evictionPolicy?: EvictionPolicy;
 
-  @doc("The allocation strategy for VM size selection")
+  @doc("The strategy used to select a virtual machine size.")
   allocationStrategy?: AllocationStrategy;
 }
 
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
-@doc("A zone preference with a zone identifier and rank")
+@doc("An availability zone and its allocation priority.")
 model ZonePreference {
-  @doc("The zone identifier")
+  @doc("The availability zone identifier.")
   zone: string;
 
-  @doc("The rank of this zone in the priority order")
+  @doc("The customer-defined priority rank for this availability zone.")
   rank: int32;
 }
 
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
-@doc("The zone allocation policy for distributing VMs across availability zones")
+@doc("The preferences for distributing virtual machines across availability zones.")
 model ZoneAllocationPolicy {
-  @doc("The distribution strategy for zone allocation")
+  @doc("The strategy used to distribute virtual machines across availability zones.")
   distributionStrategy?: DistributionStrategy;
 
   @identifiers(#[])
-  @doc("The zone preferences for allocation priority")
+  @doc("The availability zones and their allocation priorities.")
   zonePreferences?: Array<ZonePreference>;
 }
 
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
-@doc("The flex properties for flexible VM creation")
+@doc("The allocation preferences for creating virtual machines for a virtual desktop infrastructure workload.")
 model FlexProperties {
   @identifiers(#[])
-  @doc("The list of VM size profiles to use for flex creation")
+  @doc("The virtual machine sizes that Bulk Actions can use, in customer-defined priority order.")
   @minItems(1)
   @maxItems(5)
   vmSizeProfiles: Array<VmSizeProfile>;
 
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
-  @doc("The operating system type for the VMs")
+  @doc("The operating system type for the virtual machines.")
   osType: OsType;
 
-  @doc("The priority profile for VM allocation")
+  @doc("The priority and allocation preferences for the virtual machines.")
   priorityProfile: PriorityProfile;
 
-  @doc("The zone allocation policy for distributing VMs across availability zones")
+  @doc("The preferences for distributing virtual machines across availability zones.")
   zoneAllocationPolicy?: ZoneAllocationPolicy;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The minimum number of VMs that must be successfully created for the request to proceed. If fewer than this number can be allocated, the entire request is automatically rejected.")
+  @doc("The minimum number of virtual machines that must be created. Bulk Actions rejects the request when it cannot allocate this number.")
   minCapacity?: int32;
 }
 
@@ -328,7 +328,7 @@ model BulkVMConfiguration {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 
-  @doc("Placement constraints for virtual machine hardware placement - see specification/compute/Compute.Management/models.tsp#Placement")
+  @doc("The availability zone placement constraints for the virtual machine.")
   placement?: Placement;
 
   /**
@@ -337,67 +337,67 @@ model BulkVMConfiguration {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 
-  @doc("Describes the properties of a Virtual Machine.")
+  @doc("The configuration properties for the virtual machine.")
   properties?: BulkactionVMProperties;
 
-  @doc("Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines.")
+  @doc("The Microsoft.Compute API version that defines the virtual machine configuration supplied in the request.")
   computeApiVersion?: string;
 
-  @doc("Identifier for the created virtual machine. If not provided, a name will be generated based on the resource prefix.")
+  @doc("The name of the virtual machine. When omitted, Bulk Actions generates a name from the resource prefix.")
   name?: string;
 }
 
-@doc("Resource creation data model")
+@doc("The shared and per-virtual-machine configuration for a bulk create action.")
 model ResourceProvisionPayload {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form JSON object to allow loosely-typed VM configuration passthrough"
-  @doc("Bulk Actions Virtual Machine Profile object that contains VM properties that are common across all VMs in this batch")
+  @doc("The virtual machine configuration as a JSON object applied to every virtual machine in the bulk create action.")
   @typeChangedFrom(Versions.`2026-07-06-preview`, BulkVMConfiguration)
   baseProfile?: Record<unknown>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form JSON objects to allow loosely-typed per-VM overrides"
-  @doc("Bulk Actions Virtual Machine Profile array, that contains VM properties that should be overridden for each VM in the batch")
+  @doc("The per-virtual-machine configuration overrides for the bulk create action.")
   @identifiers(#[])
   @typeChangedFrom(Versions.`2026-07-06-preview`, BulkVMConfiguration[])
   resourceOverrides?: Record<unknown>[];
 
-  @doc("Number of VMs to be created")
+  @doc("The number of virtual machines to create.")
   resourceCount: int32;
 
-  @doc("If resourceOverrides doesn't contain \"name\", the service will create a name based on the prefix and ResourceCount, e.g., resourceprefix-0, resourceprefix-1..")
+  @doc("The prefix used by Bulk Actions to generate virtual machine names when a per-virtual-machine override does not specify `name`.")
   resourcePrefix?: string;
 }
 
-@doc("Resource creation data model with Flex properties for VDI scenarios")
+@doc("The virtual machine configuration and flexible allocation preferences for a virtual desktop infrastructure workload.")
 model ResourceProvisionVdiPayload {
   ...ResourceProvisionPayload;
 
-  @doc("Flex properties used for VDI resource creation scenarios")
+  @doc("The flexible allocation preferences for the virtual desktop infrastructure workload.")
   flexProperties: FlexProperties;
 }
 
-@doc("The retry policy for the user request")
+@doc("The retry settings for a bulk action.")
 model RetryPolicy {
-  @doc("Retry count for user request")
+  @doc("The maximum number of retry attempts.")
   retryCount?: int32;
 
-  @doc("Retry window in minutes for user request")
+  @doc("The period, in minutes, during which Bulk Actions can retry the operation.")
   retryWindowInMinutes?: int32;
 
-  @doc("Action to take on failure")
+  @doc("The operation that Bulk Actions attempts when the requested operation fails.")
   onFailureAction?: ResourceOperationType;
 }
 
-@doc("Extra details needed to run the user's request")
+@doc("The execution settings for a bulk action.")
 model ExecutionParameters {
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("Details that could optimize the user's request")
+  @doc("The preference used to optimize execution of the bulk action.")
   optimizationPreference?: OptimizationPreference;
 
-  @doc("Retry policy the user can pass")
+  @doc("The retry settings for the bulk action.")
   retryPolicy?: RetryPolicy;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("When true on an executeStart request, run a post-Start VM agent health check and engage the fallback chain if the guest agent does not report Ready. Ignored for non-Start operations.")
+  @doc("If true, Bulk Actions verifies the virtual machine guest agent health after a start operation. Setting this property to true for any other operation causes the request to fail.")
   verifyVmAgentHealth?: boolean;
 
   @added(Microsoft.Compute.Versions.`2026-08-06-preview`)
@@ -418,79 +418,79 @@ model CapacityRecommendationParameters {
   availabilityZones?: boolean;
 }
 
-@doc("These describe errors that occur at the resource level")
+@doc("An error that occurred while processing one virtual machine.")
 model ResourceOperationError {
-  @doc("Code for the error eg 404, 500")
+  @doc("A code that identifies the error.")
   errorCode: string;
 
-  @doc("Detailed message about the error")
+  @doc("A message that describes the error.")
   errorDetails: string;
 }
 
 @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
 @doc("Information about the flexible allocation of a virtual machine.")
 model VmAllocationInfo {
-  @doc("The name of the VM size, eg Standard_D2ads_v5")
+  @doc("The virtual machine SKU, for example `Standard_D2ads_v5`.")
   vmSize?: string;
 
-  @doc("The zone identifier")
+  @doc("The availability zone identifier.")
   zone?: string;
 }
 
-@doc("Describes the fallback operation that was performed")
+@doc("Information about an additional operation attempted after the requested operation did not succeed.")
 model FallbackOperationInfo {
-  @doc("The last operation type that was performed as a fallback")
+  @doc("The type of the additional operation.")
   lastOpType: ResourceOperationType;
 
-  @doc("The status of the fallback operation")
+  @doc("The status of the additional operation.")
   status: string;
 
-  @doc("The error code if the fallback operation failed")
+  @doc("The error returned when the additional operation did not succeed.")
   error?: ResourceOperationError;
 }
 
-@doc("The details of a response from an operation on a resource")
+@doc("The status and settings for an operation on one virtual machine.")
 model ResourceOperationDetails {
-  @doc("Operation identifier for the unique operation")
+  @doc("The operation ID used to track the action for this virtual machine.")
   operationId: string;
 
-  @doc("Unique identifier for the resource involved in the operation, for example Azure resource ID")
+  @doc("The Azure resource ID of the virtual machine.")
   resourceId?: armResourceIdentifier;
 
-  @doc("Type of operation performed on the resources")
+  @doc("The type of operation performed on the virtual machine.")
   opType?: ResourceOperationType = ResourceOperationType.Unknown;
 
-  @doc("Subscription id attached to the request")
+  @doc("The subscription ID associated with the bulk action.")
   subscriptionId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
-  @doc("Deadline for the operation")
+  @doc("The requested deadline for the operation.")
   deadline?: offsetDateTime;
 
-  @doc("Type of deadline of the operation")
+  @doc("The behavior associated with the operation deadline.")
   deadlineType?: DeadlineType = DeadlineType.Unknown;
 
-  @doc("Current state of the operation")
+  @doc("The current state of the operation.")
   state?: OperationState = OperationState.Unknown;
 
-  @doc("Timezone for the operation")
+  @doc("The time zone used to interpret the operation deadline.")
   timezone?: string;
 
-  @doc("Operation level errors if they exist")
+  @doc("The error returned for the virtual machine, if the operation did not succeed.")
   resourceOperationError?: ResourceOperationError;
 
-  @doc("Fallback operation details if a fallback was performed")
+  @doc("Information about an additional operation attempted after the requested operation did not succeed.")
   fallbackOperationInfo?: FallbackOperationInfo;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
-  @doc("Time the operation was complete if errors are null")
+  @doc("The date and time when the operation completed.")
   completedAt?: offsetDateTime;
 
-  @doc("Retry policy the user can pass")
+  @doc("The retry settings for the bulk action.")
   retryPolicy?: RetryPolicy;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("Resource notification details.")
+  @doc("The customer-provided context associated with the virtual machine result.")
   resourceNotificationDetails?: ResourceNotificationDetails;
 
   @added(Microsoft.Compute.Versions.`2026-08-06-preview`)
@@ -582,311 +582,311 @@ model CapacityRecommendation {
 @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
 @doc("Information about a virtual machine.")
 model VirtualMachineInfo {
-  @doc("The name of the VM size, eg Standard_D2ads_v5")
+  @doc("The virtual machine SKU, for example `Standard_D2ads_v5`.")
   vmSize?: string;
 
-  @doc("The zone identifier")
+  @doc("The availability zone identifier.")
   zone?: string;
 }
 
-@doc("High level response from an operation on a resource")
+@doc("The result of a bulk action for one virtual machine.")
 model ResourceOperation {
-  @doc("Unique identifier for the resource involved in the operation, for example Azure resource ID")
+  @doc("The Azure resource ID of the virtual machine.")
   resourceId?: armResourceIdentifier;
 
-  @doc("Resource level error code if it exists")
+  @doc("A code that identifies the error for the virtual machine.")
   errorCode?: string;
 
-  @doc("Resource level error details if they exist")
+  @doc("A message that describes the error for the virtual machine.")
   errorDetails?: string;
 
-  @doc("Details of the operation performed on a resource")
+  @doc("The status and settings for the operation on the virtual machine.")
   operation?: ResourceOperationDetails;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("Information about the virtual machine")
+  @doc("Information about the virtual machine selected for the operation.")
   virtualMachineInfo?: VirtualMachineInfo;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
-@doc("This defines a list of operation errors associated with a unique operationId")
+@doc("An error associated with the action for one virtual machine.")
 model OperationErrorDetails {
-  @doc("The error code of the operation")
+  @doc("A code that identifies the error.")
   errorCode: string;
 
-  @doc("The error details of the operation")
+  @doc("A message that describes the error.")
   errorDetails: string;
 
-  @doc("The timestamp of the error occurrence")
+  @doc("The date and time when the error occurred.")
   timestamp?: offsetDateTime;
 
-  @doc("The timestamp of the error occurrence")
+  @doc("The date and time when the error occurred.")
   timeStamp?: offsetDateTime;
 
-  @doc("The compute operationid of the Start/Deallocate/Hibernate request")
+  @doc("The Azure Compute operation name associated with the virtual machine operation.")
   azureOperationName?: string;
 
-  @doc("The compute operationid of the Start/Deallocate/Hibernate request")
+  @doc("The Azure Compute operation identifier associated with the virtual machine operation.")
   crpOperationId?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
-@doc("This is the first level of operation errors from the request when clients get errors per vm operation")
+@doc("The errors returned for one virtual machine operation.")
 model OperationErrorsResult {
-  @doc("The operationId identifying a vm operation")
+  @doc("The operation ID used to track the action for this virtual machine.")
   operationId?: string;
 
-  @doc("The creation time of the error result")
+  @doc("The date and time when the error result was created.")
   creationTime?: offsetDateTime;
 
-  @doc("The activation time of a vm operation")
+  @doc("The date and time when the virtual machine operation started.")
   activationTime?: offsetDateTime;
 
-  @doc("The completion time of the operation if the operation was completed")
+  @doc("The date and time when the operation completed.")
   completedAt?: offsetDateTime;
 
   @identifiers(#[])
-  @doc("A list of errors associated with the operationid")
+  @doc("The errors associated with the action for this virtual machine.")
   operationErrors?: Array<OperationErrorDetails>;
 
-  @doc("Request level error code")
+  @doc("A code that identifies the request error.")
   requestErrorCode?: string;
 
-  @doc("Request level error details")
+  @doc("A message that describes the request error.")
   requestErrorDetails?: string;
 }
 
-@doc("The response from a deallocate request")
+@doc("The result of a bulk deallocate action.")
 model DeallocateResourceOperationResponse {
-  @doc("The description of the operation response")
+  @doc("A description of the bulk action result.")
   description: string;
 
-  @doc("The type of resources used in the deallocate request eg virtual machines")
+  @doc("The type of resources targeted by the bulk action.")
   type: string;
 
-  @doc("The location of the deallocate request eg westus")
+  @doc("The Azure region where Bulk Actions processes the request.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
   @identifiers(#["resourceId"])
-  @doc("The results from the deallocate request if no errors exist")
+  @doc("The result for each virtual machine.")
   results?: Array<ResourceOperation>;
 }
 
-@doc("The response from a start request")
+@doc("The result of a bulk start action.")
 model StartResourceOperationResponse {
-  @doc("The description of the operation response")
+  @doc("A description of the bulk action result.")
   description: string;
 
-  @doc("The type of resources used in the start request eg virtual machines")
+  @doc("The type of resources targeted by the bulk action.")
   type: string;
 
-  @doc("The location of the start request eg westus")
+  @doc("The Azure region where Bulk Actions processes the request.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
   @identifiers(#["resourceId"])
-  @doc("The results from the start request if no errors exist")
+  @doc("The result for each virtual machine.")
   results?: Array<ResourceOperation>;
 }
 
-@doc("The response from a Hibernate request")
+@doc("The result of a bulk hibernate action.")
 model HibernateResourceOperationResponse {
-  @doc("The description of the operation response")
+  @doc("A description of the bulk action result.")
   description: string;
 
-  @doc("The type of resources used in the Hibernate request eg virtual machines")
+  @doc("The type of resources targeted by the bulk action.")
   type: string;
 
-  @doc("The location of the Hibernate request eg westus")
+  @doc("The Azure region where Bulk Actions processes the request.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
   @identifiers(#["resourceId"])
-  @doc("The results from the Hibernate request if no errors exist")
+  @doc("The result for each virtual machine.")
   results?: Array<ResourceOperation>;
 }
 
 // ----------- Execute Operations Request ---------
-@doc("The ExecuteDeallocateRequest request for executeDeallocate operations")
+@doc("The virtual machines and execution settings for a bulk deallocate action.")
 model ExecuteDeallocateRequest {
-  @doc("The execution parameters for the request")
+  @doc("The execution settings for the bulk action.")
   executionParameters: ExecutionParameters;
 
-  @doc("The resources for the request")
+  @doc("The target virtual machines. Do not specify this property together with `resourcesWithContext`.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  @doc("The target virtual machines with customer-provided tracking context. Do not specify this property together with `resources`.")
   resourcesWithContext?: ResourcesWithContext;
 }
 
-@doc("The ExecuteHibernateRequest request for executeHibernate operations")
+@doc("The virtual machines and execution settings for a bulk hibernate action.")
 model ExecuteHibernateRequest {
-  @doc("The execution parameters for the request")
+  @doc("The execution settings for the bulk action.")
   executionParameters: ExecutionParameters;
 
-  @doc("The resources for the request")
+  @doc("The target virtual machines. Do not specify this property together with `resourcesWithContext`.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  @doc("The target virtual machines with customer-provided tracking context. Do not specify this property together with `resources`.")
   resourcesWithContext?: ResourcesWithContext;
 }
 
-@doc("The ExecuteStartRequest request for executeStart operations")
+@doc("The virtual machines and execution settings for a bulk start action.")
 model ExecuteStartRequest {
-  @doc("The execution parameters for the request")
+  @doc("The execution settings for the bulk action.")
   executionParameters: ExecutionParameters;
 
-  @doc("The resources for the request")
+  @doc("The target virtual machines. Do not specify this property together with `resourcesWithContext`.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  @doc("The target virtual machines with customer-provided tracking context. Do not specify this property together with `resources`.")
   resourcesWithContext?: ResourcesWithContext;
 }
 
-@doc("The ExecuteCreateRequest request for create operations")
+@doc("The virtual machine configuration and execution settings for a bulk create action.")
 model ExecuteCreateRequest {
-  @doc("resource creation payload")
+  @doc("The shared and per-virtual-machine creation configuration.")
   resourceConfigParameters: ResourceProvisionPayload;
 
-  @doc("The execution parameters for the request")
+  @doc("The execution settings for the bulk action.")
   executionParameters: ExecutionParameters;
 }
 
-@doc("The VdiCreateRequest request for create operations")
+@doc("The virtual machine configuration and flexible allocation preferences for a virtual desktop infrastructure workload.")
 model ExecuteVdiCreateRequest {
-  @doc("resource creation payload")
+  @doc("The creation configuration and flexible allocation preferences.")
   resourceConfigParameters: ResourceProvisionVdiPayload;
 
-  @doc("The execution parameters for the request")
+  @doc("The execution settings for the bulk action.")
   executionParameters: ExecutionParameters;
 }
 
-@doc("Per-resource override entry for reimage requests")
+@doc("A reimage configuration override for one virtual machine.")
 model ReimageResourceOverride {
-  @doc("The Azure resource ID of the virtual machine for this override")
+  @doc("The Azure resource ID of the virtual machine to which the override applies.")
   resourceId: armResourceIdentifier<[
     {
       type: "Microsoft.Compute/virtualMachines";
     }
   ]>;
 
-  @doc("Per-resource reimage profile override")
+  @doc("The reimage configuration for this virtual machine.")
   profile: VirtualMachineReimageParameters;
 }
 
-@doc("Reimage payload with common profile and per-resource overrides")
+@doc("The shared and per-virtual-machine configuration for a bulk reimage action.")
 model ReimagePayload {
-  @doc("Common reimage profile applied to all resources unless overridden")
+  @doc("The reimage configuration applied to every virtual machine unless a per-virtual-machine override is provided.")
   baseProfile?: VirtualMachineReimageParameters;
 
   @identifiers(#[])
-  @doc("Per-resource reimage overrides")
+  @doc("The reimage configuration overrides for individual virtual machines.")
   resourceOverrides?: ReimageResourceOverride[];
 }
 
-@doc("The ExecuteReimageRequest request for reimage operations")
+@doc("The virtual machines and configuration for a bulk reimage action.")
 model ExecuteReimageRequest {
-  @doc("The execution parameters for the request")
+  @doc("The execution settings for the bulk action.")
   executionParameters: ExecutionParameters;
 
-  @doc("The resources for the request")
+  @doc("The target virtual machines. Do not specify this property together with `resourcesWithContext`.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  @doc("The target virtual machines with customer-provided tracking context. Do not specify this property together with `resources`.")
   resourcesWithContext?: ResourcesWithContext;
 
-  @doc("Reimage parameters including base profile and per-resource overrides")
+  @doc("The shared and per-virtual-machine reimage configuration.")
   reimageParameters?: ReimagePayload;
 }
 
-@doc("The response from a create request")
+@doc("The result of a bulk create action.")
 model CreateResourceOperationResponse {
-  @doc("The description of the operation response")
+  @doc("A description of the bulk action result.")
   description: string;
 
-  @doc("The type of resources used in the create request eg virtual machines")
+  @doc("The type of resources targeted by the bulk action.")
   type: string;
 
-  @doc("The location of the create request eg westus")
+  @doc("The Azure region where Bulk Actions processes the request.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
   @identifiers(#["resourceId"])
-  @doc("The results from the create request if no errors exist")
+  @doc("The result for each virtual machine.")
   results?: Array<ResourceOperation>;
 }
 
-@doc("The response from a reimage request")
+@doc("The result of a bulk reimage action.")
 model ReimageResourceOperationResponse {
-  @doc("The description of the operation response")
+  @doc("A description of the bulk action result.")
   description: string;
 
-  @doc("The type of resources used in the reimage request eg virtual machines")
+  @doc("The type of resources targeted by the bulk action.")
   type: string;
 
-  @doc("The location of the reimage request eg westus")
+  @doc("The Azure region where Bulk Actions processes the request.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
   @identifiers(#["resourceId"])
-  @doc("The results from the reimage request if no errors exist")
+  @doc("The result for each virtual machine.")
   results?: Array<ResourceOperation>;
 }
 
-@doc("The response from a delete request")
+@doc("The result of a bulk delete action.")
 model DeleteResourceOperationResponse {
-  @doc("The description of the operation response")
+  @doc("A description of the bulk action result.")
   description: string;
 
-  @doc("The type of resources used in the delete request eg virtual machines")
+  @doc("The type of resources targeted by the bulk action.")
   type: string;
 
-  @doc("The location of the delete request eg westus")
+  @doc("The Azure region where Bulk Actions processes the request.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
   @identifiers(#["resourceId"])
-  @doc("The results from the delete request if no errors exist")
+  @doc("The result for each virtual machine.")
   results?: Array<ResourceOperation>;
 }
 
-@doc("The ExecuteDeleteRequest for delete VM operation")
+@doc("The virtual machines and execution settings for a bulk delete action.")
 model ExecuteDeleteRequest {
-  @doc("The execution parameters for the request")
+  @doc("The execution settings for the bulk action.")
   executionParameters: ExecutionParameters;
 
-  @doc("The resources for the request")
+  @doc("The target virtual machines. Do not specify this property together with `resourcesWithContext`.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  @doc("The target virtual machines with customer-provided tracking context. Do not specify this property together with `resources`.")
   resourcesWithContext?: ResourcesWithContext;
 
-  @doc("Forced delete resource item")
+  @doc("Indicates whether Bulk Actions uses forced deletion for the target virtual machines.")
   forceDeletion?: boolean;
 }
 
 // ----------- GetOperationStatus ---------
-@doc("This is the request to get operation status using operationids")
+@doc("The operation for which current status should be returned.")
 model GetOperationStatusRequest {
-  @doc("The list of operation ids to get the status of")
+  @doc("The Bulk Action Operation Ids that identify the operations for which current status should be returned.")
   operationIds: Array<string>;
 }
 
-@doc("This is the response from a get operations status request")
+@doc("The current results for the requested operations.")
 model GetOperationStatusResponse {
   @identifiers(#["resourceId"])
-  @doc("An array of resource operations based on their operation ids")
+  @doc("The current result for each requested operation.")
   results: Array<ResourceOperation>;
 }
 
@@ -904,32 +904,32 @@ model BulkCreateCustomOperationStatusListResult {
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@doc("Static read response for the singleton bulk VM operations proxy endpoint")
+@doc("The singleton endpoint used to access Virtual Machine Bulk Operations.")
 model BulkVmOperationsReadResponse {
-  @doc("Fully qualified resource ID for the singleton bulk VM operations proxy resource")
+  @doc("The fully qualified Azure resource ID of the singleton endpoint.")
   @visibility(Lifecycle.Read)
   id: string;
 
-  @doc("Echoes the singleton proxy resource name")
+  @doc("The name of the singleton endpoint.")
   @visibility(Lifecycle.Read)
   name: "bulkVmOperations";
 
-  @doc("Resource type of the singleton bulk VM operations proxy resource")
+  @doc("The Azure resource type of the singleton endpoint.")
   @visibility(Lifecycle.Read)
   type: "Microsoft.Compute/locations/virtualMachines/bulkVmOperations";
 }
 
 // ----------- CancelOperations ---------
-@doc("This is the request to cancel running operations in scheduled actions using the operation ids")
+@doc("The eligible operations to cancel.")
 model CancelOperationsRequest {
-  @doc("The list of operation ids to cancel operations on")
+  @doc("The Bulk Action Operation Ids that identify the operations to cancel.")
   operationIds: Array<string>;
 }
 
-@doc("This is the response from a cancel operations request")
+@doc("The results of the cancellation requests.")
 model CancelOperationsResponse {
   @identifiers(#["resourceId"])
-  @doc("An array of resource operations that were successfully cancelled")
+  @doc("The current result for each operation submitted for cancellation.")
   results: Array<ResourceOperation>;
 }
 
@@ -937,27 +937,27 @@ model CancelOperationsResponse {
 @@identifiers(ListBulkOperationErrorsResponse.value, #[]);
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
-@doc("The response from listing bulk operation errors")
+@doc("A paged list of recent bulk action errors.")
 model ListBulkOperationErrorsResponse is Azure.Core.Page<ResourceOperation>;
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
-@doc("The response from acknowledging bulk operation errors")
+@doc("The result of acknowledging errors for specified operations.")
 model AcknowledgeBulkOperationErrorsResponse {
-  @doc("The set of operation ids that were newly acknowledged")
+  @doc("The Bulk Action Operation Ids that identify operations with acknowledged errors.")
   acknowledged: Array<string>;
 
-  @doc("The set of operation ids that were not found in the completed operations store")
+  @doc("The Bulk Action Operation Ids that were not found or are no longer available.")
   notFound: Array<string>;
 
-  @doc("The set of operation ids that were skipped because they were already acknowledged, not failed, or belong to a different scope")
+  @doc("The Bulk Action Operation Ids that identify operations with errors that could not be acknowledged.")
   skipped: Array<string>;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
-@doc("The request to acknowledge bulk operation errors")
+@doc("The operations for which errors should be acknowledged.")
 model AcknowledgeBulkOperationErrorsRequest {
-  @doc("The set of operation ids to acknowledge.")
+  @doc("The Bulk Action Operation Ids that identify operations for which errors should be acknowledged.")
   operationIds: Array<string>;
 }

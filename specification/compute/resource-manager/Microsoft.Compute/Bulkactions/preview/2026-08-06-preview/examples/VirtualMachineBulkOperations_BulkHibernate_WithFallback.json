@@ -1,0 +1,84 @@
+{
+  "title": "Hibernate virtual machines with a deallocation fallback",
+  "operationId": "VirtualMachineBulkOperations_BulkHibernate",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
+    "requestBody": {
+      "executionParameters": {
+        "retryPolicy": {
+          "retryCount": 2,
+          "retryWindowInMinutes": 30,
+          "onFailureAction": "Deallocate"
+        }
+      },
+      "resourcesWithContext": {
+        "resources": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+            "resourceContext": "maintenance-window-01"
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+            "resourceContext": "maintenance-window-01"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "description": "Hibernate Resource request",
+        "type": "VirtualMachines",
+        "location": "eastus",
+        "results": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+            "operation": {
+              "operationId": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+              "opType": "Hibernate",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "deadline": "2026-07-10T18:00:00Z",
+              "deadlineType": "InitiateAt",
+              "state": "PendingScheduling",
+              "timezone": "UTC",
+              "retryPolicy": {
+                "retryCount": 2,
+                "retryWindowInMinutes": 30,
+                "onFailureAction": "Deallocate"
+              },
+              "resourceNotificationDetails": {
+                "resourceContext": "maintenance-window-01"
+              }
+            }
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+            "operation": {
+              "operationId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+              "opType": "Hibernate",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "deadline": "2026-07-10T18:00:00Z",
+              "deadlineType": "InitiateAt",
+              "state": "PendingScheduling",
+              "timezone": "UTC",
+              "retryPolicy": {
+                "retryCount": 2,
+                "retryWindowInMinutes": 30,
+                "onFailureAction": "Deallocate"
+              },
+              "resourceNotificationDetails": {
+                "resourceContext": "maintenance-window-01"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

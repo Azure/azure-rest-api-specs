@@ -1,0 +1,53 @@
+{
+  "title": "Response when a resource prefix is missing",
+  "operationId": "VirtualMachineBulkOperations_BulkCreate",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
+    "requestBody": {
+      "resourceConfigParameters": {
+        "baseProfile": {
+          "properties": {
+            "hardwareProfile": {
+              "vmSize": "Standard_Z999_v5"
+            }
+          }
+        },
+        "resourceCount": 2
+      },
+      "executionParameters": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "VirtualMachines",
+        "location": "eastus",
+        "description": "Create Resource request",
+        "results": []
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "BadRequestException",
+          "message": "Resource count 2 is greater than the number of resource overrides 0 and prefix is empty.",
+          "additionalInfo": [
+            {
+              "type": "ScheduledActionsError",
+              "info": {
+                "status": "Failed",
+                "timeStamp": "2026-08-31T18:00:00Z",
+                "innerError": {
+                  "innerException": null
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

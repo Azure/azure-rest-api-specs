@@ -33,7 +33,7 @@ alias LocationParameter = {
 );
 @@doc(
   VirtualMachineBulkOperations.bulkDeallocate::parameters.body,
-  "The request body"
+  "The virtual machines to deallocate and the execution settings for the bulk action."
 );
 @@clientName(
   VirtualMachineBulkOperations.bulkHibernate::parameters.body,
@@ -41,7 +41,7 @@ alias LocationParameter = {
 );
 @@doc(
   VirtualMachineBulkOperations.bulkHibernate::parameters.body,
-  "The request body"
+  "The virtual machines to hibernate and the execution settings for the bulk action."
 );
 @@clientName(
   VirtualMachineBulkOperations.bulkStart::parameters.body,
@@ -49,7 +49,7 @@ alias LocationParameter = {
 );
 @@doc(
   VirtualMachineBulkOperations.bulkStart::parameters.body,
-  "The request body"
+  "The virtual machines to start and the execution settings for the bulk action."
 );
 @@clientName(
   VirtualMachineBulkOperations.bulkCreate::parameters.body,
@@ -57,7 +57,7 @@ alias LocationParameter = {
 );
 @@doc(
   VirtualMachineBulkOperations.bulkCreate::parameters.body,
-  "The request body"
+  "The virtual machine configuration and execution settings for the bulk create action."
 );
 @@clientName(
   VirtualMachineBulkOperations.bulkVdiFlexCreate::parameters.body,
@@ -65,7 +65,7 @@ alias LocationParameter = {
 );
 @@doc(
   VirtualMachineBulkOperations.bulkVdiFlexCreate::parameters.body,
-  "The request body"
+  "The virtual desktop infrastructure configuration and allocation preferences for the bulk create action."
 );
 @@clientName(
   VirtualMachineBulkOperations.bulkDelete::parameters.body,
@@ -73,7 +73,7 @@ alias LocationParameter = {
 );
 @@doc(
   VirtualMachineBulkOperations.bulkDelete::parameters.body,
-  "The request body"
+  "The virtual machines to delete and the execution settings for the bulk action."
 );
 @@clientName(
   VirtualMachineBulkOperations.bulkReimage::parameters.body,
@@ -81,7 +81,7 @@ alias LocationParameter = {
 );
 @@doc(
   VirtualMachineBulkOperations.bulkReimage::parameters.body,
-  "The request body"
+  "The virtual machines to reimage and the execution settings for the bulk action."
 );
 @@clientName(
   VirtualMachineBulkOperations.bulkGetOperationsStatus::parameters.body,
@@ -89,7 +89,7 @@ alias LocationParameter = {
 );
 @@doc(
   VirtualMachineBulkOperations.bulkGetOperationsStatus::parameters.body,
-  "The request body"
+  "The Bulk Action Operation Ids that identify the operations for which current status should be returned."
 );
 @@clientName(
   VirtualMachineBulkOperations.bulkCancel::parameters.body,
@@ -97,13 +97,13 @@ alias LocationParameter = {
 );
 @@doc(
   VirtualMachineBulkOperations.bulkCancel::parameters.body,
-  "The request body"
+  "The Bulk Action Operation Ids that identify the operations to cancel."
 );
 
 @armResourceOperations(#{ omitTags: true })
 interface VirtualMachineBulkOperations {
   // -------------- Routes -------------
-  /** BulkDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  /** Deallocates one or more virtual machines. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status. */
   @post
   @autoRoute
   @armResourceCollectionAction
@@ -114,11 +114,11 @@ interface VirtualMachineBulkOperations {
     ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
-    @doc("The request body")
+    @doc("The virtual machines to deallocate and the execution settings for the bulk action.")
     @body
     body: ExecuteDeallocateRequest,
   ): ArmResponse<DeallocateResourceOperationResponse> | ErrorResponse;
-  /** BulkHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  /** Hibernates one or more virtual machines that support hibernation. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status. */
   @post
   @autoRoute
   @armResourceCollectionAction
@@ -129,12 +129,12 @@ interface VirtualMachineBulkOperations {
     ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
-    @doc("The request body")
+    @doc("The virtual machines to hibernate and the execution settings for the bulk action.")
     @body
     body: ExecuteHibernateRequest,
   ): ArmResponse<HibernateResourceOperationResponse> | ErrorResponse;
 
-  /** BulkStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  /** Starts one or more virtual machines. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status. */
   @post
   @autoRoute
   @armResourceCollectionAction
@@ -145,12 +145,12 @@ interface VirtualMachineBulkOperations {
     ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
-    @doc("The request body")
+    @doc("The virtual machines to start and the execution settings for the bulk action.")
     @body
     body: ExecuteStartRequest,
   ): ArmResponse<StartResourceOperationResponse> | ErrorResponse;
 
-  /** BulkCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  /** Creates one or more virtual machines from a common configuration and optional per-virtual-machine overrides. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status. */
   @removed(Versions.`2026-06-06`)
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
   @post
@@ -163,12 +163,12 @@ interface VirtualMachineBulkOperations {
     ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
-    @doc("The request body")
+    @doc("The virtual machine configuration and execution settings for the bulk create action.")
     @body
     body: ExecuteCreateRequest,
   ): ArmResponse<CreateResourceOperationResponse> | ErrorResponse;
 
-  /** BulkVdiFlexCreate: Bulk create  operation for a batch of virtual machines, this operation supports flex properties to give options on Sku and zone selection. */
+  /** Creates one or more virtual machines for a virtual desktop infrastructure workload by using flexible SKU and availability zone preferences. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status. */
   @removed(Versions.`2026-06-06`)
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
   @post
@@ -181,12 +181,12 @@ interface VirtualMachineBulkOperations {
     ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
-    @doc("The request body")
+    @doc("The virtual desktop infrastructure configuration and allocation preferences for the bulk create action.")
     @body
     body: ExecuteVdiCreateRequest,
   ): ArmResponse<CreateResourceOperationResponse> | ErrorResponse;
 
-  /** BulkDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  /** Deletes one or more virtual machines. This operation is destructive. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status. */
   @post
   @autoRoute
   @armResourceCollectionAction
@@ -197,12 +197,12 @@ interface VirtualMachineBulkOperations {
     ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
-    @doc("The request body")
+    @doc("The virtual machines to delete and the execution settings for the bulk action.")
     @body
     body: ExecuteDeleteRequest,
   ): ArmResponse<DeleteResourceOperationResponse> | ErrorResponse;
 
-  /** BulkGetOperationsStatus: Polling endpoint to read status of operations performed on virtual machines */
+  /** Gets the current status of operations identified by their Bulk Action Operation Ids. */
   @post
   @autoRoute
   @armResourceCollectionAction
@@ -213,12 +213,12 @@ interface VirtualMachineBulkOperations {
     ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
-    @doc("The request body")
+    @doc("The Bulk Action Operation Ids that identify the operations for which current status should be returned.")
     @body
     body: GetOperationStatusRequest,
   ): ArmResponse<GetOperationStatusResponse> | ErrorResponse;
 
-  /** BulkCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request */
+  /** Cancel one or more Bulk Actions operations by Bulk Action Operation Ids. Cancellation is best effort and work that has already completed is not reversed. */
   @post
   @autoRoute
   @armResourceCollectionAction
@@ -229,12 +229,12 @@ interface VirtualMachineBulkOperations {
     ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
-    @doc("The request body")
+    @doc("The Bulk Action Operation Ids that identify the operations to cancel.")
     @body
     body: CancelOperationsRequest,
   ): ArmResponse<CancelOperationsResponse> | ErrorResponse;
 
-  /** BulkReimage: Execute reimage operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  /** Reimages one or more virtual machines. Reimaging is destructive and can replace operating system disk contents. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status. */
   @removed(Versions.`2026-06-06`)
   @added(Versions.`2026-07-06-preview`)
   @post
@@ -247,12 +247,12 @@ interface VirtualMachineBulkOperations {
     ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
-    @doc("The request body")
+    @doc("The virtual machines to reimage and the execution settings for the bulk action.")
     @body
     body: ExecuteReimageRequest,
   ): ArmResponse<ReimageResourceOperationResponse> | ErrorResponse;
 
-  /** BulkListOperationErrors: List bulk operation errors for a resource group */
+  /** Lists recent errors for operations in a resource group. */
   @added(Versions.`2026-07-06-preview`)
   @get
   @autoRoute
@@ -265,11 +265,11 @@ interface VirtualMachineBulkOperations {
     ...LocationParameter,
 
     @query("lookbackInMinutes")
-    @doc("The number of minutes to look back for errors.")
+    @doc("The number of minutes before the current time to include when listing bulk action errors.")
     lookbackInMinutes?: int32,
   ): ArmResponse<ListBulkOperationErrorsResponse> | ErrorResponse;
 
-  /** BulkAcknowledgeOperationErrors: Acknowledge bulk operation errors for a resource group */
+  /** Acknowledges errors for specified operations in a resource group. */
   @added(Versions.`2026-07-06-preview`)
   @post
   @autoRoute
@@ -282,7 +282,7 @@ interface VirtualMachineBulkOperations {
     ...LocationParameter,
 
     @body
-    @doc("The list of operation ids to acknowledge")
+    @doc("The Bulk Action Operation Ids that identify operations for which errors should be acknowledged.")
     body: AcknowledgeBulkOperationErrorsRequest,
   ): ArmResponse<AcknowledgeBulkOperationErrorsResponse> | ErrorResponse;
 }

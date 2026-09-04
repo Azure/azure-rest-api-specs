@@ -1,0 +1,28 @@
+{
+  "title": "Acknowledge multiple operation errors",
+  "operationId": "VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
+    "body": {
+      "operationIds": [
+        "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "acknowledged": [
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+        ],
+        "notFound": [],
+        "skipped": []
+      }
+    }
+  }
+}
