@@ -69382,6 +69382,7 @@ components:
           mcp_list_tools: '#/components/schemas/OpenAI.RealtimeMCPListTools'
           mcp_call: '#/components/schemas/OpenAI.RealtimeMCPToolCall'
           mcp_approval_request: '#/components/schemas/OpenAI.RealtimeMCPApprovalRequest'
+          system_tool: '#/components/schemas/VoiceAgentResponseSystemToolItem'
       description: A single item within a Realtime conversation.
       x-ms-foundry-meta:
         required_previews:
@@ -69749,6 +69750,7 @@ components:
             - mcp_call
             - mcp_approval_request
             - message
+            - system_tool
     OpenAI.RealtimeCreateClientSecretRequest:
       type: object
       properties:
@@ -82794,6 +82796,56 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    VoiceAgentResponseSystemToolItem:
+      type: object
+      required:
+        - id
+        - type
+        - status
+        - name
+        - call_id
+        - arguments
+      properties:
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (in seconds) for when the item was persisted.
+          readOnly: true
+        response_id:
+          type: string
+          description: The id of the response that produced this item, when applicable.
+          readOnly: true
+        id:
+          type: string
+          description: The server-generated identifier for the response item.
+        object:
+          type: string
+          enum:
+            - realtime.item
+          description: The object type. Always `realtime.item`.
+          default: realtime.item
+        type:
+          type: string
+          enum:
+            - system_tool
+          description: The item type. Always `system_tool`.
+        status:
+          $ref: '#/components/schemas/VoiceAgentSystemToolCallStatus'
+          description: The lifecycle status of the system-tool invocation.
+        name:
+          $ref: '#/components/schemas/VoiceAgentSystemToolName'
+          description: The service-managed system-tool name.
+        call_id:
+          type: string
+          description: The model-generated identifier that correlates the tool item and its lifecycle events.
+        arguments:
+          type: string
+          description: The JSON-encoded system-tool arguments. This value is empty while argument generation is in progress.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
+      description: A service-managed system-tool invocation emitted by a voice-agent session.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentSemanticVadTurnDetection:
       type: object
       required:
@@ -82992,10 +83044,25 @@ components:
           description: The service-managed control action. Known values are stable; additional values may be added over time.
         description:
           type: string
-          description: An optional description of the system tool.
+          description: |-
+            Optional model-facing guidance for when and how to invoke the system tool. For `end_conversation`, omit this
+            property or use an empty string to apply the service default, which instructs the model to speak a closing
+            assistant message before invoking the tool. A non-empty value replaces the service default.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTool'
       description: A service-managed control that acts on the active voice session without customer code or external authentication.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentSystemToolCallStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - in_progress
+            - completed
+            - incomplete
+      description: The lifecycle status of a service-managed system-tool invocation.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
