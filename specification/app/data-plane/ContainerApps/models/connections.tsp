@@ -1,3 +1,4 @@
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Response identifies a JSON response body; Result is reserved for HTTP response envelopes."
 namespace ContainerAppsSandbox {
   /** AuthorizeConnectionContent wire model. */
   model AuthorizeConnectionContent {
@@ -5,60 +6,66 @@ namespace ContainerAppsSandbox {
     parameterValues: Record<string>;
   }
 
-  /** ConnectionCreateContent wire model. */
-  model ConnectionCreateContent {
-    /** name value. */
+  /** Request body for creating a connection. */
+  model CreateConnectionContent {
+    /** Connection name. */
     name: string;
 
-    /** type value. */
+    /** Connection type. */
     type: string;
 
-    /** labels value. */
+    /** Customer-defined labels. */
     labels?: Record<string>;
 
-    /** parameterValueSetName value. */
+    /** Parameter value set selected when creating the connection. */
     parameterValueSetName?: string;
 
-    /** parameterValueSetValues value. */
+    /** Sensitive parameter values supplied when creating the connection. */
+    @secret
     parameterValueSetValues?: Record<string>;
 
-    /** policyRules value. */
+    /** Runtime policy rules. */
     policyRules?: McpPolicyRule[];
 
-    /** enabledToolGroups value. */
+    /** Enabled tool groups. */
     enabledToolGroups?: string[];
   }
 
-  /** Connection wire model. */
+  /** Customer-facing connection resource returned by the service. */
   model Connection {
-    /** id value. */
+    /** Connection identifier assigned by the service. */
+    @visibility(Lifecycle.Read)
     id: ConnectionId;
 
-    /** name value. */
+    /** Connection name. */
     name: string;
 
-    /** type value. */
+    /** Connection type. */
     type: string;
 
-    /** state value. */
+    /** Current connection state. */
+    @visibility(Lifecycle.Read)
     state: string;
 
-    /** labels value. */
+    /** Customer-defined labels. */
     labels?: Record<string>;
 
-    /** createdAt value. */
+    /** Creation timestamp assigned by the service. */
+    @visibility(Lifecycle.Read)
     createdAt?: utcDateTime;
 
-    /** deletable value. */
+    /** Whether the connection can currently be deleted. */
+    @visibility(Lifecycle.Read)
     deletable?: boolean;
 
-    /** usedBySandboxIds value. */
+    /** Sandboxes currently using this connection. */
+    @visibility(Lifecycle.Read)
     usedBySandboxIds?: string[];
 
-    /** policyRules value. */
+    /** Runtime policy rules. */
     policyRules?: McpPolicyRule[];
 
-    /** enabledToolGroups value. */
+    /** Enabled tool groups. */
     enabledToolGroups?: string[];
   }
 
@@ -69,8 +76,8 @@ namespace ContainerAppsSandbox {
     redirectUrl?: string;
   }
 
-  /** GenerateConsentLinkResult wire model. */
-  model GenerateConsentLinkResult {
+  /** Consent-link response body. */
+  model GenerateConsentLinkResponse {
     /** consentLink value. */
     consentLink: string;
   }

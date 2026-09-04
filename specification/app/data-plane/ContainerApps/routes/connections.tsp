@@ -44,7 +44,7 @@ alias GetConnectionErrors =
   | ErrorResult<500>;
 
 /** OK. */
-model PostConnectionResponse200 {
+model PostConnectionResult200 {
   /** HTTP response status code. */
   @statusCode statusCode: 200;
 
@@ -53,7 +53,7 @@ model PostConnectionResponse200 {
 }
 
 /** Created. */
-model PostConnectionResponse201 {
+model PostConnectionResult201 {
   /** HTTP response status code. */
   @statusCode statusCode: 201;
 
@@ -62,9 +62,7 @@ model PostConnectionResponse201 {
 }
 
 /** Successful responses returned by postConnection. */
-alias PostConnectionResponse =
-  | PostConnectionResponse200
-  | PostConnectionResponse201;
+alias PostConnectionResult = PostConnectionResult200 | PostConnectionResult201;
 
 /** Errors returned by postConnection. */
 alias PostConnectionErrors =
@@ -94,7 +92,7 @@ model PostConnectionConsentLinkResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: GenerateConsentLinkResult;
+  @body body: GenerateConsentLinkResponse;
 }
 
 /** Errors returned by postConnectionConsentLink. */
@@ -213,9 +211,9 @@ interface ConnectionsOperations {
       ...AzureResourceScope;
 
       /** Request body. */
-      @body body: ConnectionCreateContent;
+      @body body: CreateConnectionContent;
     },
-    PostConnectionResponse,
+    PostConnectionResult,
     DataPlaneStandardTraits,
     PostConnectionErrors
   >;

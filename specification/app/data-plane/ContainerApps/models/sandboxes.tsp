@@ -2,13 +2,13 @@ using TypeSpec.Rest;
 
 namespace ContainerAppsSandbox;
 
-/** Sandbox response fields wire model. */
+/** Customer-facing sandbox resource returned by the service. */
 @resource("sandboxes")
 model Sandbox {
-  /** id value. */
+  /** Sandbox identifier assigned by the service. */
   @key("id")
   @visibility(Lifecycle.Read)
-  id: string;
+  id: SandboxId;
 
   /** labels value. */
   labels?: Record<string>;
@@ -19,80 +19,77 @@ model Sandbox {
   /** Cmd override for the sandbox container. */
   cmd?: string[];
 
-  /** sourcesRef value. */
+  /** Sandbox source returned by the service. */
   sourcesRef: SandboxSource;
 
-  /** resources value. */
+  /** Sandbox resources returned by the service. */
   resources: SandboxResources;
 
-  /** createdAt value. */
+  /** Creation timestamp assigned by the service. */
   createdAt?: utcDateTime;
 
-  /** state value. */
+  /** Current sandbox state. */
   state?: SandboxState;
 
-  /** stateDetails value. */
+  /** Current sandbox state details. */
   stateDetails?: SandboxStateDetails;
 
-  /** snapshotId value. */
+  /** Snapshot identifier assigned by the service. */
   snapshotId?: string;
 
-  /** coldStorageSizeInMB value. */
+  /** Cold-storage size assigned by the service. */
   @encodedName("application/json", "coldStorageSizeInMB")
   coldStorageSizeInMb?: MegaBytes;
 
-  /** ports value. */
+  /** Ports exposed on the sandbox. */
   ports?: SandboxPort[];
 
   /** List of connection IDs associated with this sandbox. */
   connections?: string[];
 
-  /** AI Gateway connections associated with this sandbox (3P flow). */
+  /** AI Gateway connections associated with this sandbox. */
   gatewayConnections?: GatewayConnection[];
 
   /** Sandbox-group credential names associated with this sandbox. */
   credentialRefs?: string[];
 
-  /** egressPolicy value. */
+  /** Egress policy applied to the sandbox. */
   egressPolicy?: SandboxEgressPolicy;
 
-  /** sandboxGroupId value. */
+  /** Optional sandbox group identifier. */
   sandboxGroupId?: string;
 
-  /** The Azure region where this sandbox is running (extracted from cluster hostname). */
+  /** The Azure region where this sandbox is running. */
   region?: string;
 
-  /** lifecycle value. */
+  /** Lifecycle policy applied to the sandbox. */
   lifecycle?: SandboxLifecyclePolicy;
 
-  /** debug value. */
-  debug?: DebugInfo;
-
-  /** The apps domain URL for sandboxes with type=app label. Only populated when the sandbox has the type=app label and AppsDnsSuffix is configured. */
+  /** The apps domain URL for sandboxes with type=app label. */
   appUrl?: string;
 
-  /** The base URL for data plane operations (exec, files, ports, etc.). Client SDKs should use this URL for all data plane calls. Currently points to the Global API, but may be redirected to cluster-direct URLs in the future. */
+  /** The base URL for data plane operations. */
   managementUrl?: string;
 
-  /** agentIdentity value. */
+  /** Agent identity assigned to the sandbox. */
   agentIdentity?: SandboxAgentIdentityRef;
 
   /** Volume mounts attached to this sandbox. */
   volumes?: SandboxVolume[];
 
-  /** Content packages that were downloaded to this sandbox during creation. */
+  /** Content packages downloaded to this sandbox during creation. */
   contentPackageDownloads?: SandboxContentPackageDownload[];
 
-  /** The name of the vnet connection used when creating this sandbox, if any. */
+  /** The name of the VNet connection used by the sandbox. */
   vnetConnectionName?: string;
 
-  /** Optional identity settings that control which managed identities from the group are available to this sandbox and in which lifecycle phases. */
+  /** Identity settings applied to the sandbox. */
   identitySettings?: IdentitySetting[];
 
-  /** Static outbound (egress) IP addresses for the cluster hosting this sandbox. Populated when live cluster data is available (sandbox is running). Null when the sandbox is stopped or cluster data is unavailable. Customers can use these to configure IP-based allowlists on downstream resources. */
+  /** Static outbound IP addresses for the cluster hosting this sandbox. */
   outboundIpAddresses?: string[];
 
-  /** Live per-container runtime statuses for pod sandboxes. Omitted when unavailable. */
+  /** Live per-container runtime statuses for pod sandboxes. */
   containerStatuses?: ContainerStatus[];
 }
 
@@ -106,9 +103,6 @@ union AutoDeleteTrigger {
   /** Serialized AutoDeleteTrigger value. */
   AfterCreation: "AfterCreation",
 }
-
-/** Represents a base64-encoded value. */
-scalar Base64 extends string;
 
 /** Probe configuration for checking a container's startup, liveness, or readiness state. */
 model ContainerProbe {
@@ -305,15 +299,6 @@ scalar ContentPackageId extends string;
 
 /** Kubernetes-style CPU resource quantity string (e.g. "500m", "2", "0.5"). */
 scalar CpuQuantity extends string;
-
-/** Debug information that can be included in API responses. */
-model DebugInfo {
-  /** The OTEL trace ID for correlating logs and requests across services. */
-  traceId?: string;
-
-  /** Performance spans for waterfall visualization. Flat list with parent-child relationships via ParentId. */
-  traces?: PerfTrace[];
-}
 
 /** DiskImageId wire value. */
 scalar DiskImageId extends string;
@@ -585,66 +570,58 @@ union FsGroupChangePolicy {
   None: "None",
 }
 
-/** The type of managed identity to use for a gateway connection. */
-union GatewayConnectionAuthType {
+/** The type of managed identity used for service authentication. */
+union ManagedIdentityAuthenticationType {
   string,
 
-  /** Serialized GatewayConnectionAuthType value. */
-  SystemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
+  /** Uses the sandbox group's system-assigned managed identity. */
+  SystemAssigned: "SystemAssigned",
 
-  /** Serialized GatewayConnectionAuthType value. */
-  UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
+  /** Uses a user-assigned managed identity. */
+  UserAssigned: "UserAssigned",
 }
 
-/** Authentication configuration specifying which managed identity to use for a connection at runtime. */
-model GatewayConnectionAuth {
-  /** The type of managed identity to use: "SystemAssignedManagedIdentity" or "UserAssignedManagedIdentity". */
-  type: GatewayConnectionAuthType;
+/** Managed identity authentication configuration. */
+model ManagedIdentityAuthentication {
+  /** The type of managed identity to use. */
+  type: ManagedIdentityAuthenticationType;
 
-  /** ARM resource ID of the user-assigned managed identity. Required when GatewayConnectionAuthType GatewayConnectionAuth.Type is GatewayConnectionAuthType.UserAssignedManagedIdentity, omitted when GatewayConnectionAuthType.SystemAssignedManagedIdentity. */
+  /** Required for UserAssigned and omitted for SystemAssigned. */
   identityResourceId?: string;
 }
 
-/** Represents an AI Gateway connection to associate with a sandbox (3P flow). On sandbox requests: only string GatewayConnection.ResourceId is required; full details are resolved from the parent sandbox group. On sandbox responses: legacy sandboxes include all fields; new sandboxes include only string GatewayConnection.ResourceId. */
+/** Authentication returned for a gateway connection. */
+model GatewayAuthentication {
+  /** Managed identity used by the connection. */
+  identity?: ManagedIdentityAuthentication;
+}
+
+/** Customer-facing AI Gateway connection associated with a sandbox. */
 model GatewayConnection {
   /** ARM resource ID of the AI Gateway MCP server config or connection. Format: /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Web/aiGateways/{gw}/mcpServerConfigs/{config} or: /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Web/connectorGateways/{gw}/connections/{conn} */
   resourceId: string;
 
-  /** Optional user-friendly name for this connection. Used as the key in mcp-config.json and connections.json. When not provided, derived from the last segment of string GatewayConnection.ResourceId. */
+  /** Optional user-friendly name resolved by the service. */
+  @visibility(Lifecycle.Read)
   name?: string;
 
-  /** MCP server endpoint URL for invoking the connection (agent discovery). Resolved from the parent sandbox group; not required on sandbox requests. */
+  /** MCP server endpoint URL resolved by the service. */
+  @visibility(Lifecycle.Read)
   mcpRuntimeUrl?: string;
 
-  /** Direct API Hub connection endpoint URL for app invocation (non-MCP). Resolved from the parent sandbox group; not required on sandbox requests. */
+  /** Direct connection endpoint URL resolved by the service. */
+  @visibility(Lifecycle.Read)
   connectionRuntimeUrl?: string;
 
-  /** authentication value. */
-  authentication?: GatewayConnectionAuth;
+  /** Authentication resolved by the service. */
+  @visibility(Lifecycle.Read)
+  authentication?: GatewayAuthentication;
 }
 
-/** Request to add a port to a sandbox. */
-model AddPortRequest {
-  /** Optional name for the port (must be unique per sandbox if provided). */
-  name?: string;
-
-  /** The port number to expose (required, must be unique per sandbox). */
-  port: SandboxPortNumber;
-
-  /** auth value. */
-  auth?: PortAuthConfig;
-
-  /** activationMode value. */
-  activationMode?: PortActivationMode;
-
-  /** The HTTP protocol version to use when forwarding requests to this port. Defaults to Http (HTTP/1.1). */
-  protocol?: PortProtocol;
-
-  /** ipAccessControl value. */
-  ipAccessControl?: IpAccessControl;
-
-  /** cors value. */
-  cors?: PortCorsConfig;
+/** AI Gateway connection reference used when creating a sandbox. */
+model CreateSandboxGatewayConnectionContent {
+  /** ARM resource ID of the AI Gateway MCP server config or connection. */
+  resourceId: string;
 }
 
 /** Per-container resource configuration. CPU and Memory set cgroup limits inside the VM. Disk controls writable layer sizing. */
@@ -664,8 +641,11 @@ model ContainerSpec {
   /** name value. */
   name: PodContainerName;
 
-  /** diskImage value. */
-  diskImage: SandboxSourceDiskImage;
+  /** Optional disk image used as the container source. */
+  diskImage?: SandboxSourceDiskImage;
+
+  /** Optional artifact version used as the container source. */
+  artifactVersion?: SandboxSourceArtifactVersion;
 
   /** command value. */
   command?: string[];
@@ -983,6 +963,7 @@ model SandboxPort {
   port: SandboxPortNumber;
 
   /** The URL to access the port on the sandbox (required). */
+  @visibility(Lifecycle.Read)
   url: url;
 
   /** auth value. */
@@ -1001,91 +982,110 @@ model SandboxPort {
   cors?: PortCorsConfig;
 }
 
+/** Port configuration used when creating a sandbox. */
+model CreateSandboxPortContent {
+  /** Optional name for the port. */
+  name?: string;
+
+  /** The port number to expose on the sandbox. */
+  port: SandboxPortNumber;
+
+  /** Authentication configuration for the port. */
+  auth?: PortAuthConfig;
+
+  /** Port activation mode. */
+  activationMode?: PortActivationMode;
+
+  /** HTTP protocol version used when forwarding requests to this port. */
+  protocol?: PortProtocol;
+
+  /** IP access control configuration for the port. */
+  ipAccessControl?: IpAccessControl;
+
+  /** CORS configuration for the port. */
+  cors?: PortCorsConfig;
+}
+
 /** Preset-specific properties for sandbox creation. These properties configure optional features for specific preset types. */
 model SandboxPresetProperties {
   /** Whether to enable the WorkIQ connection for the GitHubCopilot preset. When true, the WorkIQ managed API must be available in the region. */
   isWorkIqConnectionEnabled?: boolean;
 }
 
-/** Sandbox request wire model. */
-model SandboxRequest {
+/** Request body for creating a sandbox. */
+model CreateSandboxContent {
   /** labels value. */
   labels?: Record<string>;
 
-  /** entrypoint value. */
+  /** Entrypoint override for the sandbox container. */
   entrypoint?: string[];
 
-  /** cmd value. */
+  /** Cmd override for the sandbox container. */
   cmd?: string[];
 
-  /** Optional environment variables to set in the sandbox container. These variables will override any environment variables with the same key from the image. Cannot be specified when creating from a snapshot. The combined UTF-8 size of the environment entries in KEY=VALUE format must not exceed 1.75 MiB. Entries above the Linux 128 KiB per-entry limit are logged for compatibility monitoring. */
+  /** Optional environment variables set when creating the sandbox. */
   environment?: Record<string>;
 
-  /** sourcesRef value. */
+  /** Sandbox source. This may be omitted when the service can resolve a default. */
   sourcesRef?: SandboxSource;
 
-  /** resources value. */
+  /** Sandbox resources. This may be omitted when the service can resolve defaults. */
   resources?: SandboxResources;
 
-  /** Optional list of connection IDs to associate with the sandbox (1P flow). */
+  /** Ports to expose when creating the sandbox. */
+  ports?: CreateSandboxPortContent[];
+
+  /** List of connection IDs to associate with the sandbox. */
   connections?: string[];
 
-  /** Optional list of AI Gateway connections for 3P sandbox creation. Each entry contains the MCP server config resource ID, MCP runtime URL, and identity configuration. Mutually exclusive with IReadOnlyList&lt;ConnectionId&gt;? SandboxContent.Connections — do not provide both. Maximum of 10 entries. */
-  gatewayConnections?: GatewayConnection[];
+  /** AI Gateway connections to associate with the sandbox. */
+  gatewayConnections?: CreateSandboxGatewayConnectionContent[];
 
-  /** Optional list of sandbox-group credential names to associate with the sandbox. Each name must reference a credential configured on the parent sandbox group. */
+  /** Sandbox-group credential names to associate with the sandbox. */
   credentialRefs?: string[];
 
-  /** Optional list of ports to expose on the sandbox during creation. */
-  ports?: AddPortRequest[];
-
-  /** egressPolicy value. */
+  /** Egress policy to apply to the sandbox. */
   egressPolicy?: SandboxEgressPolicy;
 
-  /** Optional reference to a named egress policy. When specified, the named policy's rules are resolved and merged with any inline rules (inline rules take precedence). The named policy must exist in the sandbox's sandbox group. */
+  /** Optional reference to a named egress policy. */
   egressPolicyId?: string;
 
-  /** sandboxGroupId value. */
+  /** Optional sandbox group identifier. */
   sandboxGroupId?: string;
 
-  /** presetSandboxType value. */
+  /** Optional preset used when creating the sandbox. */
   presetSandboxType?: PresetSandboxType;
 
-  /** Optional Anthropic API key for Claude preset. Only used when presetSandboxType is Claude. */
+  /** Sensitive Anthropic API key used by the Claude preset. */
+  @secret
   anthropicApiKey?: string;
 
-  /** presetProperties value. */
+  /** Preset-specific creation properties. */
   presetProperties?: SandboxPresetProperties;
 
-  /** lifecycle value. */
+  /** Lifecycle policy for the sandbox. */
   lifecycle?: SandboxLifecyclePolicy;
 
-  /** agentIdentity value. */
+  /** Agent identity to assign to the sandbox. */
   agentIdentity?: SandboxAgentIdentityRef;
 
-  /** Optional identity settings that control which managed identities from the group are available to this sandbox and in which lifecycle phases. When null or empty, the default delegation behavior applies (delegated-only when any delegated identity exists). */
-  identitySettings?: IdentitySetting[];
-
-  /** telemetryConfig value. */
-  telemetryConfig?: TelemetryConfig;
-
-  /** Optional list of volumes to mount in the sandbox. When SandboxSource? SandboxContent.SourcesRef.Snapshot is set, the listed volumes are attached after the sandbox is restored from the snapshot — semantically equivalent to restoring the sandbox first and then calling the dynamic add-volume-mount API. In that mode the volumes must all be data disks, the snapshot must be non-pod, and the snapshot must not already have its own attached volumes; cluster placement is constrained to a cluster that already holds the referenced data disks (cross-cluster download is not supported). Those rules are enforced downstream after the snapshot/volume Cosmos lookups. */
+  /** Volume mounts to attach to the sandbox. */
   volumes?: SandboxVolume[];
 
-  /** projectId value. */
-  projectId?: ProjectId;
-
-  /** Optional list of content packages to download onto the sandbox during creation. Each entry specifies a content package ID and target path where it will be downloaded. */
+  /** Content packages to download during sandbox creation. */
   contentPackageDownloads?: SandboxContentPackageDownload[];
 
-  /** Optional vnet connection name to use for VNET injection. When specified, the sandbox traffic will be routed through the VNET identified by this connection. Requires the sandbox to be created within an ARM-managed sandbox group that has the named vnet connection. */
+  /** The name of the VNet connection to use. */
   vnetConnectionName?: string;
 
-  /** Optional system vnet connection name for system-managed VNET injection. Works identically to string? SandboxContent.VnetConnectionName but references a system VNet connection. */
-  systemVnetConnectionName?: string;
+  /** Identity settings to apply to the sandbox. */
+  identitySettings?: IdentitySetting[];
 
-  /** Indicates this sandbox is created within a sandbox group that has resource delegations. Resolved from the sandbox group at the controller level and forwarded to the cluster so the Identity Proxy can suppress non-delegated identities even when no delegated identities exist yet. */
-  isDelegationBackingResource?: boolean;
+  /** Telemetry configuration to apply to the sandbox. */
+  telemetryConfig?: TelemetryConfig;
+
+  /** Optional project associated with the sandbox. */
+  projectId?: ProjectId;
 }
 
 /** SandboxResources wire model. */
@@ -1098,7 +1098,6 @@ model SandboxResources {
 
   /** disk value. */
   disk?: StorageQuantity;
-
 }
 
 /** Sandbox source disk image wire model. */
@@ -1285,24 +1284,6 @@ scalar MegaBytes extends string;
 
 /** Kubernetes-style memory resource quantity string (e.g. "256Mi", "1Gi", "2048"). */
 scalar MemoryQuantity extends string;
-
-/** Represents a performance span for waterfall visualization. */
-model PerfTrace {
-  /** Base64-encoded span ID (12-char). */
-  id: Base64;
-
-  /** parentId value. */
-  parentId: Base64;
-
-  /** Unix timestamp in milliseconds when the span started. */
-  startMs: int64;
-
-  /** Span duration in milliseconds. */
-  durationMs: int64;
-
-  /** Descriptive name (e.g., "NodeAgent.InjectVmm"). */
-  name: string;
-}
 
 /** User-provided container name within a pod. DNS label format: lowercase alphanumeric + hyphens, 1-63 chars, must start and end with alphanumeric. */
 scalar PodContainerName extends string;

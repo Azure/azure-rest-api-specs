@@ -14,13 +14,8 @@ namespace ContainerAppsSandbox {
 
   /** Successful Sandbox create response. */
   model SandboxCreatedResult {
-    /**
-     * HTTP response status code. The service returns 200 on a successful create, not the
-     * conventional 201 for PUT. The generated clients build a status classifier from this and
-     * surface anything not listed as a failure, so this must track the service exactly - the
-     * earlier declaration of 201 made every successful create throw RequestFailedException.
-     */
-    @statusCode statusCode: 200;
+    /** HTTP response status code. */
+    @statusCode statusCode: 201;
 
     /** Created sandbox. */
     @body body: Sandbox;
@@ -61,7 +56,7 @@ namespace ContainerAppsSandbox {
   alias GetErrors = ErrorResult<401> | ErrorResult<404> | ErrorResult<500>;
 
   /** Errors returned when deleting a sandbox. */
-  alias DeleteErrors = ErrorResult<401> | ErrorResult<500> | ErrorResult<503>;
+  alias DeleteErrors = ErrorResult<401> | ErrorResult<500>;
 }
 
 namespace ContainerAppsSandbox {
@@ -99,11 +94,8 @@ namespace ContainerAppsSandbox {
       {
         ...AzureResourceScope;
 
-        /** Includes server debug timing information in the response. */
-        @query includeDebug?: boolean = false;
-
         /** Sandbox create request. */
-        @body request: SandboxRequest;
+        @body content: CreateSandboxContent;
       },
       SandboxCreatedResult,
       DataPlaneStandardTraits,

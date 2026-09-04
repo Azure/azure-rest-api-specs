@@ -19,31 +19,41 @@ model SnapshotResources {
 
   /** disk value. */
   disk?: StorageQuantity;
-
 }
 
-/** Snapshot wire model. */
+/** Request body for creating a snapshot. */
+model CreateSnapshotContent {
+  /** Customer-defined labels. */
+  labels?: Record<string>;
+}
+
+/** Customer-facing snapshot resource returned by the service. */
 model Snapshot {
-  /** id value. */
+  /** Snapshot identifier assigned by the service. */
+  @visibility(Lifecycle.Read)
   id: string;
 
-  /** labels value. */
+  /** Customer-defined labels. */
   labels?: Record<string>;
 
-  /** sandboxId value. */
+  /** Source sandbox identifier assigned by the service. */
+  @visibility(Lifecycle.Read)
   sandboxId?: SandboxId;
 
-  /** createdAtUtc value. */
+  /** Creation timestamp assigned by the service. */
+  @visibility(Lifecycle.Read)
   createdAtUtc: utcDateTime;
 
-  /** resources value. */
+  /** Captured resources assigned by the service. */
+  @visibility(Lifecycle.Read)
   resources?: SnapshotResources;
 
-  /** sourcePodContainers value. */
+  /** Captured pod containers assigned by the service. */
+  @visibility(Lifecycle.Read)
   sourcePodContainers?: SnapshotPodContainer[];
 
-  /** sizeInMB value. */
+  /** Snapshot size assigned by the service. */
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "sizeInMB")
   sizeInMb?: MegaBytes;
-
 }

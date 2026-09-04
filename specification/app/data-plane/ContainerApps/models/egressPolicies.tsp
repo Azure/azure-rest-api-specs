@@ -1,13 +1,15 @@
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Response identifies a JSON response body; Result is reserved for HTTP response envelopes."
 namespace ContainerAppsSandbox {
-  /** NamedEgressPolicyListResult wire model. */
-  model NamedEgressPolicyListResult {
+  /** Named egress policy list response body. */
+  model NamedEgressPolicyListResponse {
     /** egressPolicies value. */
     egressPolicies: NamedEgressPolicy[];
   }
 
-  /** NamedEgressPolicy wire model. */
+  /** Customer-facing named egress policy resource. */
   model NamedEgressPolicy {
-    /** id value. */
+    /** Policy identifier assigned by the service. */
+    @visibility(Lifecycle.Read)
     id: string;
 
     /** name value. */
@@ -25,28 +27,12 @@ namespace ContainerAppsSandbox {
     /** rules value. */
     rules?: EgressPolicyRule[];
 
-    /** createdAt value. */
+    /** Creation timestamp assigned by the service. */
+    @visibility(Lifecycle.Read)
     createdAt?: utcDateTime;
 
-    /** updatedAt value. */
+    /** Last-update timestamp assigned by the service. */
+    @visibility(Lifecycle.Read)
     updatedAt?: utcDateTime;
-  }
-
-  /** NamedEgressPolicyUpsert wire model. */
-  model NamedEgressPolicyUpsert {
-    /** name value. */
-    name: string;
-
-    /** description value. */
-    description?: string;
-
-    /** defaultAction value. */
-    defaultAction: EgressPolicyAction;
-
-    /** enforcementMode value. */
-    enforcementMode?: EgressPolicyEnforcementMode;
-
-    /** rules value. */
-    rules?: EgressPolicyRule[];
   }
 }

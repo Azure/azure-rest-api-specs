@@ -4,21 +4,19 @@ using Azure.Core;
 namespace ContainerAppsSandbox;
 
 /** Accepted. */
-model DeleteSnapshotResponse202 {
+model DeleteSnapshotResult202 {
   /** HTTP response status code. */
   @statusCode statusCode: 202;
 }
 
 /** No Content. */
-model DeleteSnapshotResponse204 {
+model DeleteSnapshotResult204 {
   /** HTTP response status code. */
   @statusCode statusCode: 204;
 }
 
 /** Successful responses returned by deleteSnapshot. */
-alias DeleteSnapshotResponse =
-  | DeleteSnapshotResponse202
-  | DeleteSnapshotResponse204;
+alias DeleteSnapshotResult = DeleteSnapshotResult202 | DeleteSnapshotResult204;
 
 /** Errors returned by deleteSnapshot. */
 alias DeleteSnapshotErrors = ErrorResult<401> | ErrorResult<500>;
@@ -77,7 +75,7 @@ interface SnapshotsOperations {
       /** id parameter. */
       @path id: string;
     },
-    DeleteSnapshotResponse,
+    DeleteSnapshotResult,
     DataPlaneStandardTraits,
     DeleteSnapshotErrors
   >;

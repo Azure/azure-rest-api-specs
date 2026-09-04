@@ -1,3 +1,4 @@
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Response identifies a JSON response body; Result is reserved for HTTP response envelopes."
 namespace ContainerAppsSandbox {
   /** ARM resource ID for an Azure Storage blob container. */
   scalar ArmStorageContainerId extends string;
@@ -88,8 +89,8 @@ namespace ContainerAppsSandbox {
     resourceId: ArmUserAssignedIdentityId;
   }
 
-  /** VolumeCountResult wire model. */
-  model VolumeCountResult {
+  /** Volume-count response body. */
+  model VolumeCountResponse {
     /** counts value. */
     counts: VolumeTypeCount[];
   }
@@ -97,8 +98,8 @@ namespace ContainerAppsSandbox {
   /** VolumeItemName wire model. */
   scalar VolumeItemName extends string;
 
-  /** VolumeListDirectoryResult wire model. */
-  model VolumeListDirectoryResult {
+  /** Volume-directory-listing response body. */
+  model VolumeListDirectoryResponse {
     /** path value. */
     path: VolumePath;
 
@@ -121,98 +122,56 @@ namespace ContainerAppsSandbox {
     isDirectory: boolean;
 
     /** sizeBytes value. */
-    sizeBytes: Bytes;
+    sizeBytes?: Bytes;
 
     /** lastModifiedUtc value. */
-    lastModifiedUtc: utcDateTime;
+    lastModifiedUtc?: utcDateTime;
 
     /** contentType value. */
-    contentType: string;
+    contentType?: string;
 
     /** An HTTP entity tag used for optimistic concurrency, as defined by RFC 9110. */
     eTag?: string;
   }
 
-  /** The supported volume request types. */
-  union VolumeRequestType {
+  /** Current backing-storage provisioning state. */
+  union VolumeProvisioningState {
     string,
 
-    /** An Azure Blob volume. */
-    AzureBlob: "AzureBlob",
+    /** Backing storage is still being provisioned. */
+    Provisioning: "Provisioning",
 
-    /** A bring-your-own Azure Blob volume. */
-    AzureBlobByo: "AzureBlobByo",
-
-    /** An Azure Files CIFS volume. */
-    AzureFileCifs: "AzureFileCifs",
-
-    /** An Azure Files NFS volume. */
-    AzureFileNfs: "AzureFileNfs",
-
-    /** A data disk volume. */
-    DataDisk: "DataDisk",
+    /** Backing storage is ready. */
+    Succeeded: "Succeeded",
   }
 
-  /** VolumeContent wire model. */
-  @discriminator("type")
-  model VolumeContent {
-    /** The volume request type. */
-    type: VolumeRequestType;
+  /** Elastic SAN storage SKU. */
+  union EsanSku {
+    string,
 
-    /** labels value. */
-    labels?: Record<string>;
+    /** Premium zone-redundant storage. */
+    PremiumZrs: "Premium_ZRS",
+
+    /** Premium locally-redundant storage. */
+    PremiumLrs: "Premium_LRS",
   }
 
-  /** VolumeRequestAzureBlobByoVolumeContent wire model. */
-  model VolumeRequestAzureBlobByoVolumeContent extends VolumeContent {
-    /** Represents the type of volume. */
-    type: "AzureBlobByo";
-
-    /** storageContainerResourceId value. */
-    storageContainerResourceId: ArmStorageContainerId;
-
-    /** auth value. */
-    auth: AzureBlobByoVolumeAuth;
-  }
-
-  /** VolumeRequestAzureBlobVolumeContent wire model. */
-  model VolumeRequestAzureBlobVolumeContent extends VolumeContent {
-    /** Represents the type of volume. */
-    type: "AzureBlob";
-  }
-
-  /** VolumeRequestAzureFileCifsVolumeContent wire model. */
-  model VolumeRequestAzureFileCifsVolumeContent extends VolumeContent {
-    /** Represents the type of volume. */
-    type: "AzureFileCifs";
-  }
-
-  /** VolumeRequestAzureFileNfsVolumeContent wire model. */
-  model VolumeRequestAzureFileNfsVolumeContent extends VolumeContent {
-    /** Represents the type of volume. */
-    type: "AzureFileNfs";
-  }
-
-  /** VolumeRequestDataDiskVolumeContent wire model. */
-  model VolumeRequestDataDiskVolumeContent extends VolumeContent {
-    /** Represents the type of volume. */
-    type: "DataDisk";
-
-    /** size value. */
-    size: StorageQuantity;
-  }
-
-  /** Volume wire model. */
+  /** Customer-facing volume resource. */
   @discriminator("type")
   model Volume {
     /** Represents the type of volume. */
     type: VolumeType;
 
-    /** volumeName value. */
+    /** Volume name assigned from the route by the service. */
+    @visibility(Lifecycle.Read)
     volumeName: VolumeName;
 
     /** labels value. */
     labels?: Record<string>;
+
+    /** Current provisioning state assigned by the service. */
+    @visibility(Lifecycle.Read)
+    provisioningState: VolumeProvisioningState;
   }
 
   /** AzureBlobByoVolume wire model. */
@@ -233,6 +192,7 @@ namespace ContainerAppsSandbox {
     type: "AzureBlob";
 
     /** usage value. */
+    @visibility(Lifecycle.Read)
     usage?: BlobVolumeUsage;
   }
 
@@ -256,17 +216,34 @@ namespace ContainerAppsSandbox {
     /** size value. */
     size: StorageQuantity;
 
-    /** isAttached value. */
+    /** Whether the volume is currently attached. */
+    @visibility(Lifecycle.Read)
     isAttached: boolean;
 
     /** Resource name of an AKS managed cluster. */
+    @visibility(Lifecycle.Read)
     clusterId?: string;
 
     /** attachedSandboxId value. */
+    @visibility(Lifecycle.Read)
     attachedSandboxId?: string;
 
     /** usage value. */
+    @visibility(Lifecycle.Read)
     usage?: DataDiskVolumeUsage;
+  }
+
+  /** Elastic SAN volume. */
+  model EsanVolume extends Volume {
+    /** Represents the type of volume. */
+    type: "Esan";
+
+    /** Requested and provisioned volume size. */
+    size: StorageQuantity;
+
+    /** SKU selected by the service. */
+    @visibility(Lifecycle.Read)
+    sku: EsanSku;
   }
 
   /** Represents the type of volume. */
@@ -288,6 +265,9 @@ namespace ContainerAppsSandbox {
 
     /** DataDisk variant. */
     DataDisk: "DataDisk",
+
+    /** Elastic SAN variant. */
+    Esan: "Esan",
   }
 
   /** VolumeTypeCount wire model. */

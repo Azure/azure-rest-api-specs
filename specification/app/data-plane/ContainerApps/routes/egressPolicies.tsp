@@ -21,7 +21,7 @@ model ListEgressPolicyResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: NamedEgressPolicyListResult;
+  @body body: NamedEgressPolicyListResponse;
 }
 
 /** Errors returned by listEgressPolicies. */
@@ -43,7 +43,7 @@ alias GetEgressPolicyErrors =
   | ErrorResult<500>;
 
 /** OK. */
-model PutEgressPolicyResponse200 {
+model PutEgressPolicyResult200 {
   /** HTTP response status code. */
   @statusCode statusCode: 200;
 
@@ -52,7 +52,7 @@ model PutEgressPolicyResponse200 {
 }
 
 /** Created. */
-model PutEgressPolicyResponse201 {
+model PutEgressPolicyResult201 {
   /** HTTP response status code. */
   @statusCode statusCode: 201;
 
@@ -61,9 +61,9 @@ model PutEgressPolicyResponse201 {
 }
 
 /** Successful responses returned by putEgressPolicy. */
-alias PutEgressPolicyResponse =
-  | PutEgressPolicyResponse200
-  | PutEgressPolicyResponse201;
+alias PutEgressPolicyResult =
+  | PutEgressPolicyResult200
+  | PutEgressPolicyResult201;
 
 /** Errors returned by putEgressPolicy. */
 alias PutEgressPolicyErrors =
@@ -132,9 +132,9 @@ interface EgressPoliciesOperations {
       @path policyId: string;
 
       /** Request body. */
-      @body body: NamedEgressPolicyUpsert;
+      @body body: NamedEgressPolicy;
     },
-    PutEgressPolicyResponse,
+    PutEgressPolicyResult,
     DataPlaneStandardTraits,
     PutEgressPolicyErrors
   >;

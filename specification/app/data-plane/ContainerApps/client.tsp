@@ -9,12 +9,9 @@ namespace ContainerAppsSandbox;
 // Client-surface customizations. Every rule here is scoped to "csharp", so none of them affect the
 // wire contract or the emitted OpenAPI under stable/ and preview/.
 //
-// Only types the emitter actually materializes can be renamed. HTTP envelope models
-// (SandboxListResult, SandboxCreatedResult, SandboxDeletedResult,
-// SandboxDeletedNoContentResult, SandboxResult, SandboxExecutionTokensContent,
-// ErrorResult) are unwrapped by the emitter into
-// Response<T> / Response and never become C# classes, so @@clientName on them is silently a no-op.
-// Seven such dead rules were removed; do not add more.
+// Only types the emitter actually materializes can be renamed. HTTP envelope models ending in
+// Result are unwrapped into Response<T> / Response and never become C# classes, so @@clientName
+// rules on them are ineffective.
 
 // The service namespace is ContainerAppsSandbox, so the emitter derives the root client name
 // (ContainerAppsSandboxClient) on its own - no override needed for it.
@@ -31,8 +28,3 @@ namespace ContainerAppsSandbox;
   "connectionRuntimeUri",
   "csharp"
 );
-
-// Request bodies surface as "Content" per the Azure .NET guidelines. These two are the only
-// request models the emitter materializes as classes.
-@@clientName(SandboxRequest, "SandboxContent", "csharp");
-@@clientName(AddPortRequest, "AddPortContent", "csharp");

@@ -1,4 +1,16 @@
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Response identifies a JSON response body; Result is reserved for HTTP response envelopes."
 namespace ContainerAppsSandbox {
+  /** Managed identity type stored for a gateway-connection credential. */
+  union GatewayConnectionAuthType {
+    string,
+
+    /** Uses the sandbox group's system-assigned managed identity. */
+    SystemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
+
+    /** Uses a user-assigned managed identity. */
+    UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
+  }
+
   /** Represents the state of a connection. */
   union ConnectionState {
     /** StringValue variant. */
@@ -56,8 +68,8 @@ namespace ContainerAppsSandbox {
     Claude: "Claude",
   }
 
-  /** SandboxGroupCredentialContent wire model. */
-  model SandboxGroupCredentialContent {
+  /** Request body for creating or updating a sandbox-group credential. */
+  model CreateSandboxGroupCredentialContent {
     /** displayName value. */
     displayName?: string;
 
@@ -68,9 +80,10 @@ namespace ContainerAppsSandbox {
     source: SandboxGroupCredentialSource;
   }
 
-  /** SandboxGroupCredential wire model. */
+  /** Customer-facing sandbox-group credential resource returned by the service. */
   model SandboxGroupCredential {
-    /** name value. */
+    /** Credential name assigned by the service. */
+    @visibility(Lifecycle.Read)
     name: string;
 
     /** displayName value. */
@@ -79,13 +92,15 @@ namespace ContainerAppsSandbox {
     /** provider value. */
     provider: SandboxGroupCredentialProvider;
 
-    /** state value. */
+    /** Current credential state. */
+    @visibility(Lifecycle.Read)
     state: ConnectionState;
 
     /** source value. */
     source: SandboxGroupCredentialSource;
 
-    /** origin value. */
+    /** Origin of the credential. */
+    @visibility(Lifecycle.Read)
     origin: SandboxGroupCredentialOrigin;
   }
 

@@ -21,7 +21,7 @@ model GetSecretsResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: SecretListResult;
+  @body body: SecretListResponse;
 }
 
 /** Errors returned by getSecrets. */
@@ -33,7 +33,7 @@ model GetSecretKeysResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: SecretKeysResult;
+  @body body: SecretKeysResponse;
 }
 
 /** Errors returned by getSecretKeys. */
@@ -48,7 +48,7 @@ model PostSecretPeekResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: SecretPeekResult;
+  @body body: SecretPeekResponse;
 }
 
 /** Errors returned by postSecretPeek. */
@@ -58,7 +58,7 @@ alias PostSecretPeekErrors =
   | ErrorResult<500>;
 
 /** OK. */
-model PutSecretResponse200 {
+model PutSecretResult200 {
   /** HTTP response status code. */
   @statusCode statusCode: 200;
 
@@ -67,7 +67,7 @@ model PutSecretResponse200 {
 }
 
 /** Created. */
-model PutSecretResponse201 {
+model PutSecretResult201 {
   /** HTTP response status code. */
   @statusCode statusCode: 201;
 
@@ -76,7 +76,7 @@ model PutSecretResponse201 {
 }
 
 /** Successful responses returned by putSecret. */
-alias PutSecretResponse = PutSecretResponse200 | PutSecretResponse201;
+alias PutSecretResult = PutSecretResult200 | PutSecretResult201;
 
 /** Errors returned by putSecret. */
 alias PutSecretErrors = ErrorResult<400> | ErrorResult<401> | ErrorResult<500>;
@@ -158,9 +158,9 @@ interface SecretsOperations {
       @path secretId: string;
 
       /** Request body. */
-      @body body: SecretUpsertContent;
+      @body body: CreateSecretContent;
     },
-    PutSecretResponse,
+    PutSecretResult,
     DataPlaneStandardTraits,
     PutSecretErrors
   >;

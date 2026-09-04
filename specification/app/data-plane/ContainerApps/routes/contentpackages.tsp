@@ -4,21 +4,21 @@ using Azure.Core;
 namespace ContainerAppsSandbox;
 
 /** Accepted. */
-model DeleteContentPackageResponse202 {
+model DeleteContentPackageResult202 {
   /** HTTP response status code. */
   @statusCode statusCode: 202;
 }
 
 /** No Content. */
-model DeleteContentPackageResponse204 {
+model DeleteContentPackageResult204 {
   /** HTTP response status code. */
   @statusCode statusCode: 204;
 }
 
 /** Successful responses returned by deleteContentPackage. */
-alias DeleteContentPackageResponse =
-  | DeleteContentPackageResponse202
-  | DeleteContentPackageResponse204;
+alias DeleteContentPackageResult =
+  | DeleteContentPackageResult202
+  | DeleteContentPackageResult204;
 
 /** Errors returned by deleteContentPackage. */
 alias DeleteContentPackageErrors = ErrorResult<401> | ErrorResult<500>;
@@ -29,7 +29,7 @@ model ListContentPackageResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: ContentPackageListResult;
+  @body body: ContentPackageListResponse;
 }
 
 /** Errors returned by listContentPackages. */
@@ -79,7 +79,7 @@ alias PostContentPackageUploadErrors =
 interface ContentPackagesOperations {
   /** Deletes a content package by ID. */
   @summary("Deletes a content package by ID.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/ContentPackages/{id}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/contentpackages/{id}")
   @delete
   deleteContentPackage is Foundations.Operation<
     {
@@ -88,14 +88,14 @@ interface ContentPackagesOperations {
       /** id parameter. */
       @path id: string;
     },
-    DeleteContentPackageResponse,
+    DeleteContentPackageResult,
     DataPlaneStandardTraits,
     DeleteContentPackageErrors
   >;
 
   /** Lists content packages for the sandbox group. */
   @summary("Lists content packages for the sandbox group.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/ContentPackages")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/contentpackages")
   @get
   listContentPackages is Foundations.Operation<
     {
@@ -117,7 +117,7 @@ interface ContentPackagesOperations {
 
   /** Gets a specific content package by ID. */
   @summary("Gets a specific content package by ID.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/ContentPackages/{id}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/contentpackages/{id}")
   @get
   getContentPackage is Foundations.Operation<
     {
@@ -133,11 +133,17 @@ interface ContentPackagesOperations {
 
   /** Creates a content package by uploading binary content. The request body should contain the binary content of the package, and optional labels can be provided as query parameters. The response will include details of the created content package. */
   @summary("Uploads a content package.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/ContentPackages/upload")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/contentpackages/upload")
   @post
   postContentPackageUpload is Foundations.Operation<
     {
       ...AzureResourceScope;
+
+      /** Media type of the uploaded content. */
+      @header contentType?: string;
+
+      /** Binary content of the package. */
+      @body content: bytes;
 
       /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
       @query labels?: string;

@@ -106,7 +106,7 @@ interface CredentialsOperations {
       @path credentialName: string;
 
       /** Request body. */
-      @body body: SandboxGroupCredentialContent;
+      @body body: CreateSandboxGroupCredentialContent;
     },
     PutCredentialResult,
     DataPlaneStandardTraits,

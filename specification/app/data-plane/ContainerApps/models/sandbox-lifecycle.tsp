@@ -1,3 +1,4 @@
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Response identifies a JSON response body; Result is reserved for HTTP response envelopes."
 namespace ContainerAppsSandbox {
   /** CPU usage counters and load averages. */
   model CpuStats {
@@ -83,8 +84,8 @@ namespace ContainerAppsSandbox {
     txPackets?: int32;
   }
 
-  /** SandboxExecuteCommandContent wire model. */
-  model SandboxExecuteCommandContent {
+  /** ExecuteSandboxCommandContent wire model. */
+  model ExecuteSandboxCommandContent {
     /** command value. */
     command: string;
 
@@ -104,8 +105,8 @@ namespace ContainerAppsSandbox {
     activationMode?: PortActivationMode;
   }
 
-  /** SandboxExecuteCommandResult wire model. */
-  model SandboxExecuteCommand {
+  /** Execute-command response body. */
+  model SandboxExecuteCommandResponse {
     /** exitCode value. */
     exitCode: int32;
 
@@ -119,8 +120,8 @@ namespace ContainerAppsSandbox {
     executionTimeMs: int64;
   }
 
-  /** SandboxExecuteShellCommandContent wire model. */
-  model SandboxExecuteShellCommandContent {
+  /** ExecuteSandboxShellCommandContent wire model. */
+  model ExecuteSandboxShellCommandContent {
     /** command value. */
     command: string;
 
@@ -140,8 +141,8 @@ namespace ContainerAppsSandbox {
     activationMode?: PortActivationMode;
   }
 
-  /** SandboxExecuteShellCommandResult wire model. */
-  model SandboxExecuteShellCommandResult {
+  /** Execute-shell-command response body. */
+  model SandboxExecuteShellCommandResponse {
     /** exitCode value. */
     exitCode: int32;
 
@@ -158,8 +159,8 @@ namespace ContainerAppsSandbox {
   /** SandboxGroupId wire model. */
   scalar SandboxGroupId extends string;
 
-  /** SandboxStatsResult wire model. */
-  model SandboxStatsResult {
+  /** Sandbox statistics response body. */
+  model SandboxStatsResponse {
     /** tokenUsage value. */
     tokenUsage?: TokenUsageStats;
 

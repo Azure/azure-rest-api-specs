@@ -9,7 +9,7 @@ model GetSandboxEgressDecisions2Result {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: EgressDecisionsResult;
+  @body body: EgressDecisionsResponse;
 }
 
 /** Errors returned by getSandboxEgressDecisions2. */
@@ -25,7 +25,7 @@ model GetSandboxPortsResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: PortsListResult;
+  @body body: PortsListResponse;
 }
 
 /** Errors returned by getSandboxPorts. */
@@ -41,7 +41,7 @@ model PatchSandboxPortResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: PortsListResult;
+  @body body: PortsListResponse;
 }
 
 /** Errors returned by patchSandboxPort. */
@@ -58,7 +58,7 @@ model PostSandboxConnectionAddResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: ConnectionsListResult;
+  @body body: ConnectionsListResponse;
 }
 
 /** Errors returned by postSandboxConnectionAdd. */
@@ -92,7 +92,7 @@ model PostSandboxPortAddResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: PortsListResult;
+  @body body: PortsListResponse;
 }
 
 /** Errors returned by postSandboxPortAdd. */
@@ -109,7 +109,7 @@ model PostSandboxPortRemoveResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: PortsListResult;
+  @body body: PortsListResponse;
 }
 
 /** Errors returned by postSandboxPortRemove. */
@@ -126,7 +126,7 @@ model PutSandboxPortsResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: PortsListResult;
+  @body body: PortsListResponse;
 }
 
 /** Errors returned by putSandboxPorts. */
@@ -185,7 +185,7 @@ interface SandboxNetworkingOperations {
       @path id: string;
 
       /** Request body. */
-      @body body: PatchPortContent;
+      @body body: UpdateSandboxPortContent;
     },
     PatchSandboxPortResult,
     DataPlaneStandardTraits,
@@ -242,7 +242,7 @@ interface SandboxNetworkingOperations {
       @path id: string;
 
       /** Request body. */
-      @body body: AddPortRequest;
+      @body body: CreateSandboxPortContent;
     },
     PostSandboxPortAddResult,
     DataPlaneStandardTraits,

@@ -1,3 +1,4 @@
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Response identifies a JSON response body; Result is reserved for HTTP response envelopes."
 namespace ContainerAppsSandbox {
   /** AddConnectionContent wire model. */
   model AddConnectionContent {
@@ -5,8 +6,8 @@ namespace ContainerAppsSandbox {
     connectionId: ConnectionId;
   }
 
-  /** ConnectionsListResult wire model. */
-  model ConnectionsListResult {
+  /** Connection-list response body. */
+  model ConnectionsListResponse {
     /** connectionIds value. */
     connectionIds: string[];
   }
@@ -38,10 +39,10 @@ namespace ContainerAppsSandbox {
     matchedRule?: string;
   }
 
-  /** EgressDecisionsResult wire model. */
-  model EgressDecisionsResult {
-    /** networkEgress value. */
-    networkEgress: NetworkEgressDecisions;
+  /** Egress-decisions response body. */
+  model EgressDecisionsResponse {
+    /** HTTP egress decisions. */
+    http: NetworkEgressDecisions;
 
     /** statefulTcp value. */
     statefulTcp?: StatefulTcpEgress;
@@ -59,8 +60,8 @@ namespace ContainerAppsSandbox {
     denied: EgressDecisionEntry[];
   }
 
-  /** PatchPortContent wire model. */
-  model PatchPortContent {
+  /** Partial update for one sandbox port. */
+  model UpdateSandboxPortContent {
     /** port value. */
     port?: int32;
 
@@ -83,8 +84,8 @@ namespace ContainerAppsSandbox {
     cors?: PortCorsConfig;
   }
 
-  /** PortsListResult wire model. */
-  model PortsListResult {
+  /** Port-list response body. */
+  model PortsListResponse {
     /** ports value. */
     ports: SandboxPort[];
   }
@@ -155,6 +156,37 @@ namespace ContainerAppsSandbox {
   /** UpdatePortsContent wire model. */
   model UpdatePortsContent {
     /** ports value. */
-    ports: SandboxPort[];
+    ports: SandboxPortUpdate[];
+  }
+
+  /**
+   * Complete port representation accepted by the replace-all ports operation.
+   * The current service contract requires the URL even though it is normally
+   * assigned by the service.
+   */
+  model SandboxPortUpdate {
+    /** Optional port name. */
+    name?: string;
+
+    /** Port number. */
+    port: SandboxPortNumber;
+
+    /** Current port URL required by the replace-all operation. */
+    url: url;
+
+    /** Authentication configuration. */
+    auth?: PortAuthConfig;
+
+    /** Activation mode. */
+    activationMode?: PortActivationMode;
+
+    /** HTTP protocol. */
+    protocol?: PortProtocol;
+
+    /** IP access-control configuration. */
+    ipAccessControl?: IpAccessControl;
+
+    /** CORS configuration. */
+    cors?: PortCorsConfig;
   }
 }

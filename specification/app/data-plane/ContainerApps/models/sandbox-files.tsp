@@ -1,6 +1,7 @@
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Response identifies a JSON response body; Result is reserved for HTTP response envelopes."
 namespace ContainerAppsSandbox {
-  /** DirListingResult wire model. */
-  model DirListingResult {
+  /** Directory-listing response body. */
+  model DirListingResponse {
     /** path value. */
     path: string;
 
@@ -35,8 +36,8 @@ namespace ContainerAppsSandbox {
     modifiedTime: int64;
   }
 
-  /** FileOpStatusResult wire model. */
-  model FileOpStatusResult {
+  /** File-operation response body. */
+  model FileOpStatusResponse {
     /** success value. */
     success: boolean;
 
@@ -59,8 +60,8 @@ namespace ContainerAppsSandbox {
     mode?: int32;
   }
 
-  /** WriteFileResult wire model. */
-  model WriteFileResult {
+  /** Write-file response body. */
+  model WriteFileResponse {
     /** success value. */
     success: boolean;
 

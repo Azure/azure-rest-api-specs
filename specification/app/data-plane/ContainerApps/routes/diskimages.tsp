@@ -4,21 +4,21 @@ using Azure.Core;
 namespace ContainerAppsSandbox;
 
 /** Accepted. */
-model DeleteDiskImageResponse202 {
+model DeleteDiskImageResult202 {
   /** HTTP response status code. */
   @statusCode statusCode: 202;
 }
 
 /** No Content. */
-model DeleteDiskImageResponse204 {
+model DeleteDiskImageResult204 {
   /** HTTP response status code. */
   @statusCode statusCode: 204;
 }
 
 /** Successful responses returned by deleteDiskImage. */
-alias DeleteDiskImageResponse =
-  | DeleteDiskImageResponse202
-  | DeleteDiskImageResponse204;
+alias DeleteDiskImageResult =
+  | DeleteDiskImageResult202
+  | DeleteDiskImageResult204;
 
 /** Errors returned by deleteDiskImage. */
 alias DeleteDiskImageErrors =
@@ -43,7 +43,7 @@ model GetDiskImageOperationResult {
   /** HTTP response status code. */
   @statusCode statusCode: 200;
 
-  ...DiskImageOperationResult;
+  ...DiskImageOperationResponse;
 }
 
 /** Errors returned by getDiskImageOperation. */
@@ -116,7 +116,7 @@ model PutDiskImageAsyncResult {
   @statusCode statusCode: 202;
 
   /** Response body. */
-  @body body: DiskImageOperationResult;
+  @body body: DiskImageOperationResponse;
 }
 
 /** Errors returned by putDiskImageAsync. */
@@ -132,7 +132,7 @@ alias PutDiskImageAsyncErrors =
 interface DiskImagesOperations {
   /** Deletes a disk image by ID. */
   @summary("Deletes a disk image by ID.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/DiskImages/{id}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/{id}")
   @delete
   deleteDiskImage is Foundations.Operation<
     {
@@ -141,14 +141,14 @@ interface DiskImagesOperations {
       /** id parameter. */
       @path id: string;
     },
-    DeleteDiskImageResponse,
+    DeleteDiskImageResult,
     DataPlaneStandardTraits,
     DeleteDiskImageErrors
   >;
 
   /** Returns disk images scoped to the specified sandbox group. */
   @summary("Lists disk images in a sandbox group, with pagination support.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/DiskImages")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages")
   @get
   listDiskImages is Foundations.Operation<
     {
@@ -172,7 +172,7 @@ interface DiskImagesOperations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "An explicit operation ID is required to avoid repeating the noun and violating OperationIdNounVerb."
   @summary("Gets the status of an async disk image operation.")
   @TypeSpec.OpenAPI.operationId("DiskImagesOperations_Get")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/DiskImages/operations/{operationId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/operations/{operationId}")
   @get
   getDiskImageOperation is Foundations.Operation<
     {
@@ -188,7 +188,7 @@ interface DiskImagesOperations {
 
   /** Public images are admin-curated and shared across all sandbox groups. */
   @summary("Lists all public disk images available to the caller.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/DiskImages/public")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/public")
   @get
   listDiskImagesPublic is Foundations.Operation<
     {
@@ -207,7 +207,7 @@ interface DiskImagesOperations {
 
   /** Public images are global and shared across all sandbox groups. */
   @summary("Gets a specific public disk image by name.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/DiskImages/public/{name}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/public/{name}")
   @get
   getDiskImagePublic is Foundations.Operation<
     {
@@ -223,7 +223,7 @@ interface DiskImagesOperations {
 
   /** Gets a specific disk image by ID. */
   @summary("Gets a specific disk image by ID.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/DiskImages/{id}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/{id}")
   @get
   getDiskImage is Foundations.Operation<
     {
@@ -239,7 +239,7 @@ interface DiskImagesOperations {
 
   /** Creates a new disk image from an OCI image reference. */
   @summary("Creates a new disk image from an OCI image reference.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/DiskImages")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages")
   @put
   putDiskImage is Foundations.Operation<
     {
@@ -256,7 +256,7 @@ interface DiskImagesOperations {
   /** Creates a disk image asynchronously from an OCI image reference. */
   @summary("Creates a disk image asynchronously from an OCI image reference.")
   @pollingOperation(DiskImagesOperations.getDiskImageOperation)
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/DiskImages/async")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/async")
   @put
   putDiskImageAsync is Foundations.LongRunningOperation<
     {

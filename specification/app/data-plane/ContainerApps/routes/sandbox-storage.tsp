@@ -9,7 +9,7 @@ model PostSandboxCommitResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: CommitSandboxResult;
+  @body body: CommitSandboxResponse;
 }
 
 /** Errors returned by postSandboxCommit. */
@@ -153,7 +153,7 @@ interface SandboxStorageOperations {
       @path id: string;
 
       /** Request body. */
-      @body body: SnapshotContent;
+      @body body: CreateSnapshotContent;
     },
     PostSandboxSnapshotResult,
     DataPlaneStandardTraits,

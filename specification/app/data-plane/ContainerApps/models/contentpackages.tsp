@@ -1,6 +1,7 @@
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Response identifies a JSON response body; Result is reserved for HTTP response envelopes."
 namespace ContainerAppsSandbox {
-  /** ContentPackageListResult wire model. */
-  model ContentPackageListResult {
+  /** Content-package list response body. */
+  model ContentPackageListResponse {
     /** value value. */
     value: ContentPackage[];
   }

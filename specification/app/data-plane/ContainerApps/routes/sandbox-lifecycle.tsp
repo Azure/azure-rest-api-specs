@@ -21,7 +21,7 @@ model GetSandboxStatsResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: SandboxStatsResult;
+  @body body: SandboxStatsResponse;
 }
 
 /** Errors returned by getSandboxStats. */
@@ -68,7 +68,7 @@ model PostSandboxExecuteCommandResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: SandboxExecuteCommand;
+  @body body: SandboxExecuteCommandResponse;
 }
 
 /** Errors returned by postSandboxExecuteCommand. */
@@ -84,7 +84,7 @@ model PostSandboxExecuteShellCommandResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: SandboxExecuteShellCommandResult;
+  @body body: SandboxExecuteShellCommandResponse;
 }
 
 /** Errors returned by postSandboxExecuteShellCommand. */
@@ -248,7 +248,7 @@ interface SandboxLifecycleOperations {
       @query containerName?: string;
 
       /** Request body. */
-      @body body: SandboxExecuteCommandContent;
+      @body body: ExecuteSandboxCommandContent;
     },
     PostSandboxExecuteCommandResult,
     DataPlaneStandardTraits,
@@ -270,7 +270,7 @@ interface SandboxLifecycleOperations {
       @query containerName?: string;
 
       /** Request body. */
-      @body body: SandboxExecuteShellCommandContent;
+      @body body: ExecuteSandboxShellCommandContent;
     },
     PostSandboxExecuteShellCommandResult,
     DataPlaneStandardTraits,

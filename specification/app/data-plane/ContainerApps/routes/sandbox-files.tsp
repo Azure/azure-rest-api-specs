@@ -9,7 +9,7 @@ model DeleteSandboxFileResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: FileOpStatusResult;
+  @body body: FileOpStatusResponse;
 }
 
 /** Errors returned by deleteSandboxFile. */
@@ -39,7 +39,7 @@ model GetSandboxFilesListResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: DirListingResult;
+  @body body: DirListingResponse;
 }
 
 /** Errors returned by getSandboxFilesList. */
@@ -69,7 +69,7 @@ model PostSandboxFileMkdirResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: FileOpStatusResult;
+  @body body: FileOpStatusResponse;
 }
 
 /** Errors returned by postSandboxFileMkdir. */
@@ -84,7 +84,7 @@ model PutSandboxFileResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: WriteFileResult;
+  @body body: WriteFileResponse;
 }
 
 /** Errors returned by putSandboxFile. */
@@ -135,7 +135,7 @@ interface SandboxFilesOperations {
       @path id: string;
 
       /** path parameter. */
-      @query path?: string;
+      @query path: string;
 
       /** containerName parameter. */
       @query containerName?: string;
@@ -157,7 +157,7 @@ interface SandboxFilesOperations {
       @path id: string;
 
       /** path parameter. */
-      @query path?: string;
+      @query path: string;
 
       /** containerName parameter. */
       @query containerName?: string;
@@ -179,7 +179,7 @@ interface SandboxFilesOperations {
       @path id: string;
 
       /** path parameter. */
-      @query path?: string;
+      @query path: string;
 
       /** containerName parameter. */
       @query containerName?: string;
@@ -230,7 +230,7 @@ interface SandboxFilesOperations {
       @path id: string;
 
       /** path parameter. */
-      @query path?: string;
+      @query path: string;
 
       /** createDirs parameter. */
       @query createDirs?: boolean;

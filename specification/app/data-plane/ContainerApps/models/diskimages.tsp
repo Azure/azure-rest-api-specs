@@ -1,4 +1,5 @@
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Wire property names are preserved from the source contract; C# names can be customized separately in client.tsp."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Response identifies a JSON response body; Result is reserved for HTTP response envelopes."
 namespace ContainerAppsSandbox {
   /** AsyncOperationId wire model. */
   scalar AsyncOperationId extends string;
@@ -30,21 +31,6 @@ namespace ContainerAppsSandbox {
   /** ContainerImageUrlWithTag wire model. */
   scalar ContainerImageUrlWithTag extends string;
 
-  /** CreateDiskImageContent wire model. */
-  model CreateDiskImageContent {
-    /** source value. */
-    source: CreateDiskImageSource;
-
-    /** name value. */
-    name?: string;
-
-    /** labels value. */
-    labels?: Record<string>;
-
-    /** vnetConnectionName value. */
-    vnetConnectionName?: string;
-  }
-
   /** The supported disk image source types. */
   union CreateDiskImageSourceKind {
     string,
@@ -69,6 +55,7 @@ namespace ContainerAppsSandbox {
     kind: "blob";
 
     /** blobSourceUri value. */
+    @secret
     blobSourceUri: BlobUri;
   }
 
@@ -80,15 +67,22 @@ namespace ContainerAppsSandbox {
     /** imageUrl value. */
     imageUrl: ContainerImageUrlWithTag;
 
-    /** registryCredentials value. */
-    registryCredentials?: RegistryCredentials;
-
-    /** managedIdentityClientId value. */
-    managedIdentityClientId?: string;
+    /** Authentication used to access the registry. */
+    authentication?: RegistryAuthentication;
   }
 
-  /** DiskImageOperationResult wire model. */
-  model DiskImageOperationResult {
+  /** Registry authentication options. Exactly one option must be supplied. */
+  model RegistryAuthentication {
+    /** Username and token authentication. */
+    @secret
+    registryCredentials?: RegistryCredentials;
+
+    /** Managed identity authentication. */
+    identity?: ManagedIdentityAuthentication;
+  }
+
+  /** Disk-image operation response body. */
+  model DiskImageOperationResponse {
     /** operationId value. */
     @Azure.Core.pollingOperationParameter("operationId")
     operationId: AsyncOperationId;
@@ -129,27 +123,45 @@ namespace ContainerAppsSandbox {
     token: string;
   }
 
-  /** DiskImage wire model. */
-  model DiskImage {
-    /** id value. */
-    id: DiskImageId;
+  /** Request body for creating a disk image. */
+  model CreateDiskImageContent {
+    /** Source used to create the disk image. */
+    source: CreateDiskImageSource;
 
-    /** name value. */
+    /** Disk image name. */
     name?: string;
 
-    /** labels value. */
+    /** Customer-defined labels. */
+    labels?: Record<string>;
+
+    /** VNet connection used while creating the disk image. */
+    vnetConnectionName?: string;
+  }
+
+  /** Customer-facing disk image resource returned by the service. */
+  model DiskImage {
+    /** Disk image identifier assigned by the service. */
+    @visibility(Lifecycle.Read)
+    id: DiskImageId;
+
+    /** Disk image name. */
+    name?: string;
+
+    /** Customer-defined labels. */
     labels: Record<string>;
 
-    /** image value. */
+    /** Resolved image metadata assigned by the service. */
+    @visibility(Lifecycle.Read)
     image: DiskImageImage;
 
-    /** status value. */
+    /** Current disk-image status. */
+    @visibility(Lifecycle.Read)
     status: DiskImageStatus;
 
-    /** sizeInMB value. */
+    /** Disk-image size assigned by the service. */
+    @visibility(Lifecycle.Read)
     @encodedName("application/json", "sizeInMB")
     sizeInMb?: MegaBytes;
-
   }
 
   /** DiskImageStatus wire model. */

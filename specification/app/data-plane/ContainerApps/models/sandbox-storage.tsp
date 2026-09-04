@@ -1,3 +1,4 @@
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Response identifies a JSON response body; Result is reserved for HTTP response envelopes."
 namespace ContainerAppsSandbox {
   /** AddPodVolumeMountsContent wire model. */
   model AddPodVolumeMountsContent {
@@ -20,8 +21,8 @@ namespace ContainerAppsSandbox {
     labels?: Record<string>;
   }
 
-  /** CommitSandboxResult wire model. */
-  model CommitSandboxResult {
+  /** Commit-sandbox response body. */
+  model CommitSandboxResponse {
     /** diskImage value. */
     diskImage: DiskImage;
   }
@@ -42,11 +43,5 @@ namespace ContainerAppsSandbox {
 
     /** targetPath value. */
     targetPath: AbsoluteFilePath;
-  }
-
-  /** SnapshotContent wire model. */
-  model SnapshotContent {
-    /** labels value. */
-    labels?: Record<string>;
   }
 }

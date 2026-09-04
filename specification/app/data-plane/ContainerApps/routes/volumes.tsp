@@ -48,7 +48,7 @@ model GetVolumesCountResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: VolumeCountResult;
+  @body body: VolumeCountResponse;
 }
 
 /** Errors returned by getVolumesCount. */
@@ -72,7 +72,7 @@ model GetVolumeFilesResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: VolumeListDirectoryResult;
+  @body body: VolumeListDirectoryResponse;
 }
 
 /** Errors returned by getVolumeFiles. */
@@ -346,7 +346,7 @@ interface VolumesOperations {
       @path volumeName: string;
 
       /** Request body. */
-      @body body: VolumeContent;
+      @body body: Volume;
     },
     PutVolumeResult,
     DataPlaneStandardTraits,
