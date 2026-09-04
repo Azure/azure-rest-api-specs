@@ -30309,7 +30309,7 @@
             "description": "Input type of the evaluation taxonomy."
           },
           "target": {
-            "$ref": "#/components/schemas/Target",
+            "$ref": "#/components/schemas/FoundryEvaluationTarget",
             "description": "Target configuration for the agent."
           },
           "riskCategories": {
@@ -30343,7 +30343,7 @@
             "description": "Input type of the evaluation taxonomy."
           },
           "target": {
-            "$ref": "#/components/schemas/TargetUpdate",
+            "$ref": "#/components/schemas/FoundryEvaluationTargetUpdate",
             "description": "Target configuration for the agent."
           },
           "riskCategories": {
@@ -30742,7 +30742,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/Target"
+            "$ref": "#/components/schemas/FoundryEvaluationTarget"
           }
         ],
         "description": "Represents a target specifying an Azure AI agent."
@@ -30781,7 +30781,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/TargetUpdate"
+            "$ref": "#/components/schemas/FoundryEvaluationTargetUpdate"
           }
         ],
         "description": "Represents a target specifying an Azure AI agent."
@@ -30920,7 +30920,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/Target"
+            "$ref": "#/components/schemas/FoundryEvaluationTarget"
           }
         ],
         "description": "Represents a target specifying an Azure AI model for operations requiring model selection."
@@ -30946,7 +30946,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/TargetUpdate"
+            "$ref": "#/components/schemas/FoundryEvaluationTargetUpdate"
           }
         ],
         "description": "Represents a target specifying an Azure AI model for operations requiring model selection."
@@ -30969,7 +30969,7 @@
           },
           "item_generation_params": {
             "$ref": "#/components/schemas/ResponseRetrievalItemGenerationParams",
-            "description": "The parameters for item generation."
+            "description": "Configuration for retrieving and preparing stored response history as evaluation input items."
           },
           "max_runs_hourly": {
             "type": "integer",
@@ -32938,55 +32938,6 @@
           }
         ],
         "description": "Evaluation rule action for continuous evaluation."
-      },
-      "ConversationGenPreviewItemGenerationParams": {
-        "type": "object",
-        "required": [
-          "type",
-          "model"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "conversation_gen_preview"
-            ],
-            "description": "The type of item generation parameters, always `conversation_gen_preview`."
-          },
-          "model": {
-            "type": "string",
-            "description": "The model deployment used for simulation, in the format '{connectionName}/modelDeploymentName'."
-          },
-          "max_turns": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum number of turns per simulated conversation. Defaults to 20.",
-            "default": 20
-          },
-          "num_conversations": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of simulated conversations to generate per test scenario. Defaults to 5.",
-            "default": 5
-          },
-          "data_mapping": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "type": "string"
-            },
-            "description": "Mapping from source fields to response_id field, which is required for retrieving chat history."
-          },
-          "sampling_params": {
-            "$ref": "#/components/schemas/ModelSamplingParams",
-            "description": "Sampling parameters for the conversation generation."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ItemGenerationParams"
-          }
-        ],
-        "description": "Represents the parameters for conversation simulation item generation."
       },
       "ConversationIdTraceSource": {
         "type": "object",
@@ -35111,9 +35062,14 @@
             "$ref": "#/components/schemas/EvaluationLevel",
             "description": "The level at which evaluation is performed. Defaults to 'turn' if not specified.",
             "default": "turn"
+          },
+          "output_dataset": {
+            "$ref": "#/components/schemas/EvaluationDataset",
+            "description": "Dataset produced by the evaluation run. Present when the run creates a versioned Foundry dataset; otherwise omitted.",
+            "readOnly": true
           }
         },
-        "description": "A schema representing an evaluation run.",
+        "description": "An evaluation run, including Foundry-specific metadata and optional output dataset information.",
         "title": "EvalRun",
         "x-oaiMeta": {
           "name": "The eval run object",
@@ -35142,7 +35098,8 @@
             "csv": "#/components/schemas/EvalCsvRunDataSource",
             "azure_ai_red_team": "#/components/schemas/RedTeamEvalRunDataSource",
             "azure_ai_trace_data_source_preview": "#/components/schemas/AzureAITraceDataSourcePreviewEvalRunDataSource",
-            "azure_ai_benchmark_preview": "#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource"
+            "azure_ai_benchmark_preview": "#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource",
+            "azure_ai_user_conversation_simulation_preview": "#/components/schemas/UserConversationSimulationEvalRunDataSource"
           }
         },
         "description": "Base class for run data sources with discriminator support."
@@ -35469,6 +35426,95 @@
           ]
         }
       },
+      "EvaluationAudioTranscriptionModel": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "mai-transcribe-1",
+              "azure-speech"
+            ]
+          }
+        ],
+        "description": "Supported speech-to-text transcription models. The union is extensible for additional models."
+      },
+      "EvaluationAudioTranscriptionModelConfiguration": {
+        "type": "object",
+        "required": [
+          "model"
+        ],
+        "properties": {
+          "model": {
+            "$ref": "#/components/schemas/EvaluationAudioTranscriptionModel",
+            "description": "The transcription model."
+          }
+        },
+        "description": "Configuration for speech-to-text transcription used during evaluation."
+      },
+      "EvaluationAzureRealtimeNativeVoiceModelConfiguration": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure-realtime-native"
+            ],
+            "description": "The voice kind. Always `azure-realtime-native`."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The Azure realtime-native voice name. When omitted, the service defaults to `ava`.",
+            "default": "ava"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationVoiceModelConfiguration"
+          }
+        ],
+        "description": "Configures an Azure realtime-native voice for evaluation."
+      },
+      "EvaluationAzureStandardVoiceModelConfiguration": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure-standard"
+            ],
+            "description": "The voice kind. Always `azure-standard`."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The Azure neural voice name."
+          },
+          "temperature": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "The synthesis temperature, from 0 to 1. When omitted, the service defaults to the underlying voice model's default temperature."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationVoiceModelConfiguration"
+          }
+        ],
+        "description": "Configures an Azure standard neural voice for evaluation."
+      },
       "EvaluationComparisonInsightRequest": {
         "type": "object",
         "required": [
@@ -35552,6 +35598,29 @@
           ]
         }
       },
+      "EvaluationDataset": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "version"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Service-assigned identifier of the dataset."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the dataset."
+          },
+          "version": {
+            "type": "string",
+            "description": "Version of the dataset."
+          }
+        },
+        "description": "Identifies a versioned Foundry dataset associated with an evaluation."
+      },
       "EvaluationLevel": {
         "anyOf": [
           {
@@ -35566,6 +35635,58 @@
           }
         ],
         "description": "The level at which evaluation is performed."
+      },
+      "EvaluationModelConfiguration": {
+        "type": "object",
+        "required": [
+          "model"
+        ],
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Model deployment that generates simulated user turns, in the format `{connectionName}/modelDeploymentName`."
+          },
+          "sampling_params": {
+            "$ref": "#/components/schemas/ModelSamplingParams",
+            "description": "Sampling parameters applied when the simulation model produces user turns."
+          },
+          "transcription_model": {
+            "$ref": "#/components/schemas/EvaluationAudioTranscriptionModelConfiguration",
+            "description": "Transcription model configuration used to convert simulated user speech to text. Omit for text-only simulation."
+          },
+          "voice_model": {
+            "$ref": "#/components/schemas/EvaluationVoiceModelConfiguration",
+            "description": "Voice model configuration used to convert simulated user text to speech. Omit for text-only simulation."
+          }
+        },
+        "description": "Configures the model that plays the simulated user. This model is separate from the evaluated `target`."
+      },
+      "EvaluationOpenAIVoiceModelConfiguration": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "openai"
+            ],
+            "description": "The voice kind. Always `openai`."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The OpenAI built-in voice name."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationVoiceModelConfiguration"
+          }
+        ],
+        "description": "Configures an OpenAI built-in voice for evaluation."
       },
       "EvaluationResultSample": {
         "type": "object",
@@ -36024,6 +36145,27 @@
             "Evaluations=V1Preview"
           ]
         }
+      },
+      "EvaluationVoiceModelConfiguration": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The voice kind."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "openai": "#/components/schemas/EvaluationOpenAIVoiceModelConfiguration",
+            "azure-standard": "#/components/schemas/EvaluationAzureStandardVoiceModelConfiguration",
+            "azure-realtime-native": "#/components/schemas/EvaluationAzureRealtimeNativeVoiceModelConfiguration"
+          }
+        },
+        "description": "Voice configuration used to convert text to speech for evaluation. All supported voice types use the Voice Live endpoint under the hood."
       },
       "EvaluatorCategory": {
         "anyOf": [
@@ -37159,6 +37301,46 @@
         "format": "int32",
         "description": "A duration encoded as an integer number of milliseconds."
       },
+      "FoundryEvaluationTarget": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of target."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "azure_ai_model": "#/components/schemas/AzureAIModelTarget",
+            "azure_ai_agent": "#/components/schemas/AzureAIAgentTarget"
+          }
+        },
+        "description": "Base class for targets with discriminator support."
+      },
+      "FoundryEvaluationTargetUpdate": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of target."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "azure_ai_model": "#/components/schemas/AzureAIModelTargetUpdate",
+            "azure_ai_agent": "#/components/schemas/AzureAIAgentTargetUpdate"
+          }
+        },
+        "description": "Base class for targets with discriminator support."
+      },
       "FoundryModelArtifactProfileCategory": {
         "anyOf": [
           {
@@ -38162,7 +38344,7 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/ItemGenerationParamsType",
-            "description": "The type of item generation parameters to use."
+            "description": "Preparation workflow to use. This discriminator determines which additional parameters are available."
           }
         },
         "discriminator": {
@@ -38172,12 +38354,11 @@
             "red_team_seed_prompts": "#/components/schemas/RedTeamSeedPromptsItemGenerationParams",
             "red_team_taxonomy": "#/components/schemas/RedTeamTaxonomyItemGenerationParams",
             "response_retrieval": "#/components/schemas/ResponseRetrievalItemGenerationParams",
-            "conversation_gen_preview": "#/components/schemas/ConversationGenPreviewItemGenerationParams",
             "target_completion": "#/components/schemas/TargetCompletionItemGenerationParams",
             "synthetic_data_gen_preview": "#/components/schemas/SyntheticDataGenerationPreviewItemGenerationParams"
           }
         },
-        "description": "Represents the set of parameters used to control item generation operations."
+        "description": "Configures how the service prepares input items for an evaluation run before applying testing criteria.\n\nDepending on `type`, preparation can generate new inputs, retrieve existing responses, transform source data, or simulate conversations. Each `type` selects a workflow-specific model with the parameters required by that preparation workflow. These parameters do not define the evaluated target or the testing criteria."
       },
       "ItemGenerationParamsType": {
         "anyOf": [
@@ -38192,12 +38373,11 @@
               "red_team_seed_prompts",
               "red_team_taxonomy",
               "synthetic_data_gen_preview",
-              "conversation_gen_preview",
               "target_completion"
             ]
           }
         ],
-        "description": "The types of parameters for red team item generation."
+        "description": "Identifies how evaluation input items are prepared before evaluation."
       },
       "JobStatus": {
         "anyOf": [
@@ -78597,10 +78777,10 @@
           },
           "item_generation_params": {
             "$ref": "#/components/schemas/ItemGenerationParams",
-            "description": "The parameters for item generation."
+            "description": "Configuration for generating the adversarial input items evaluated by this run."
           },
           "target": {
-            "$ref": "#/components/schemas/Target",
+            "$ref": "#/components/schemas/FoundryEvaluationTarget",
             "description": "The target configuration for the evaluation."
           }
         },
@@ -80413,10 +80593,10 @@
           },
           "item_generation_params": {
             "$ref": "#/components/schemas/SyntheticDataGenerationPreviewItemGenerationParams",
-            "description": "The parameters for item generation."
+            "description": "Configuration for generating the synthetic input items evaluated by this run."
           },
           "target": {
-            "$ref": "#/components/schemas/Target",
+            "$ref": "#/components/schemas/FoundryEvaluationTarget",
             "description": "The target configuration for the evaluation."
           },
           "input_messages": {
@@ -80484,26 +80664,6 @@
         ],
         "description": "Represents the parameters for synthetic data generation item generation."
       },
-      "Target": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "The type of target."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "azure_ai_model": "#/components/schemas/AzureAIModelTarget",
-            "azure_ai_agent": "#/components/schemas/AzureAIAgentTarget"
-          }
-        },
-        "description": "Base class for targets with discriminator support."
-      },
       "TargetCompletionEvalRunDataSource": {
         "type": "object",
         "required": [
@@ -80535,7 +80695,7 @@
             "description": "The source configuration for inline or file data."
           },
           "target": {
-            "$ref": "#/components/schemas/Target",
+            "$ref": "#/components/schemas/FoundryEvaluationTarget",
             "description": "The target configuration for the evaluation."
           },
           "item_generation_params": {
@@ -80577,26 +80737,6 @@
           }
         ],
         "description": "Represents the parameters for target completion item generation."
-      },
-      "TargetUpdate": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "The type of target."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "azure_ai_model": "#/components/schemas/AzureAIModelTargetUpdate",
-            "azure_ai_agent": "#/components/schemas/AzureAIAgentTargetUpdate"
-          }
-        },
-        "description": "Base class for targets with discriminator support."
       },
       "TaxonomyCategory": {
         "type": "object",
@@ -81863,6 +82003,244 @@
             "description": "The version identifier that the toolbox should point to. When set, the toolbox's default version will resolve to this version instead of the latest."
           }
         }
+      },
+      "UserConversationSimulationAudioEffect": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "street_traffic",
+              "crowd_chatter",
+              "background_tv",
+              "metro_station",
+              "telephonic_voice"
+            ]
+          }
+        ],
+        "description": "Effect that can be applied to simulated conversation audio. The union is extensible for additional effects."
+      },
+      "UserConversationSimulationAudioEffectsConfiguration": {
+        "type": "object",
+        "properties": {
+          "effects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserConversationSimulationAudioEffect"
+            },
+            "description": "Effects to apply to simulated audio."
+          },
+          "volume_percentage": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Volume of the configured audio effects, as a percentage from 1 through 100. When omitted, the service defaults to 15.",
+            "default": 15
+          }
+        },
+        "description": "Configures effects applied to simulated conversation audio."
+      },
+      "UserConversationSimulationConfiguration": {
+        "type": "object",
+        "properties": {
+          "max_num_turns": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Hard limit on turns in each conversation. When omitted, the service defaults to 20.",
+            "default": 20
+          },
+          "conversation_repetitions": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Number of independent conversation repetitions for each test case. Defaults to 1 when not specified at either the data-source or test-case level.",
+            "default": 1
+          },
+          "desired_num_turns": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Target number of turns in each conversation. The effective value cannot exceed the effective `max_num_turns`. When omitted, no target is set and the simulation model determines the conversation length dynamically from the scenario."
+          },
+          "audio_effects": {
+            "$ref": "#/components/schemas/UserConversationSimulationAudioEffectsConfiguration",
+            "description": "Audio effects applied to voice conversation simulations. This property is ignored for text-only simulations."
+          },
+          "user_behavior": {
+            "$ref": "#/components/schemas/UserConversationSimulationUserBehaviorConfiguration",
+            "description": "Conversation behavior of the simulated user."
+          }
+        },
+        "description": "Configures the number, length, audio effects, and simulated user behavior of conversations."
+      },
+      "UserConversationSimulationDefaultInterruptionConfiguration": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "description": "The interruption type, always `default`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UserConversationSimulationInterruptionConfiguration"
+          }
+        ],
+        "description": "Configures the default interruption behavior for the simulated user."
+      },
+      "UserConversationSimulationEvalRunDataSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "source",
+          "target",
+          "model_configuration"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_ai_user_conversation_simulation_preview"
+            ],
+            "description": "The type of data source, always `azure_ai_user_conversation_simulation_preview`."
+          },
+          "source": {
+            "$ref": "#/components/schemas/UserConversationSimulationSource",
+            "description": "Test scenarios supplied as JSONL rows or strongly typed inline test cases."
+          },
+          "target": {
+            "$ref": "#/components/schemas/FoundryEvaluationTarget",
+            "description": "Model or agent being evaluated. It receives turns from the simulated user."
+          },
+          "model_configuration": {
+            "$ref": "#/components/schemas/EvaluationModelConfiguration",
+            "description": "Model used to simulate the user side of each conversation by generating turns sent to the evaluated `target`."
+          },
+          "default_simulation_configuration": {
+            "$ref": "#/components/schemas/UserConversationSimulationConfiguration",
+            "description": "Default configuration for generating simulated user conversations. Properties in a test case's `simulation_configuration` override the corresponding defaults."
+          },
+          "data_mapping": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Maps JSONL dataset attributes to user conversation simulation inputs when their names differ from the defaults. The default attribute names are `test_case_id`, `test_case_category`, `test_case_description`, and `simulation_configuration`, matching `UserConversationSimulationTestCase`. Omit when the dataset uses these names or when using `inline_user_conversation_simulation`."
+          },
+          "enable_conversation_dataset_generation": {
+            "type": "boolean",
+            "description": "Whether to write all generated conversations to a file in a versioned Foundry dataset, providing visibility into the generated conversations. The dataset can be reused in future evaluation runs. When enabled, the completed run includes `output_dataset`. When omitted, the service defaults to `false`.",
+            "default": false
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalRunDataSource"
+          }
+        ],
+        "description": "Evaluates a model or agent by simulating user conversations against it.\n\nEach source item defines a test scenario. Use a JSONL source or an `inline_user_conversation_simulation` source with strongly typed test cases. JSONL attributes use the inline test-case property names by default; specify `data_mapping` only when the dataset uses different names. The model specified by `model_configuration` generates the simulated user's turns and drives the conversation with `target` until it reaches the desired length or maximum turn limit. The evaluation's testing criteria are then applied to the conversation."
+      },
+      "UserConversationSimulationInlineTestCasesSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "test_cases"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "inline_user_conversation_simulation"
+            ],
+            "description": "The source type. Always `inline_user_conversation_simulation`."
+          },
+          "test_cases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserConversationSimulationTestCase"
+            },
+            "minItems": 1,
+            "description": "Test scenarios from which user conversations are simulated. At least one test case is required."
+          }
+        },
+        "description": "Supplies strongly typed test scenarios directly in the evaluation run request."
+      },
+      "UserConversationSimulationInterruptionConfiguration": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The interruption type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "default": "#/components/schemas/UserConversationSimulationDefaultInterruptionConfiguration"
+          }
+        },
+        "description": "Configuration for simulated user interruption behavior."
+      },
+      "UserConversationSimulationSource": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.EvalJsonlFileContentSource"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.EvalJsonlFileIdSource"
+          },
+          {
+            "$ref": "#/components/schemas/UserConversationSimulationInlineTestCasesSource"
+          }
+        ],
+        "description": "Sources supported by user conversation simulation."
+      },
+      "UserConversationSimulationTestCase": {
+        "type": "object",
+        "properties": {
+          "test_case_id": {
+            "type": "string",
+            "description": "Identifier for the test case. When omitted, the service generates a random identifier."
+          },
+          "test_case_category": {
+            "type": "string",
+            "description": "Category used to group related test cases. When omitted, the service leaves the category null."
+          },
+          "test_case_description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2500,
+            "description": "Scenario, simulated user goal, and behavioral constraints that guide the conversation. The length must be from 1 through 2,500 characters."
+          },
+          "simulation_configuration": {
+            "$ref": "#/components/schemas/UserConversationSimulationConfiguration",
+            "description": "Configuration for conversations generated from this test case. Each specified property overrides the corresponding property in `default_simulation_configuration`."
+          }
+        },
+        "description": "Defines one test scenario. Simulation configuration properties specified here override the corresponding data-source defaults."
+      },
+      "UserConversationSimulationUserBehaviorConfiguration": {
+        "type": "object",
+        "properties": {
+          "interruption": {
+            "$ref": "#/components/schemas/UserConversationSimulationInterruptionConfiguration",
+            "description": "Configures how the simulated user interrupts the target while it is speaking. Omit to disable interruption."
+          }
+        },
+        "description": "Configures conversation behavior for the simulated user."
       },
       "UserProfileMemoryItem": {
         "type": "object",

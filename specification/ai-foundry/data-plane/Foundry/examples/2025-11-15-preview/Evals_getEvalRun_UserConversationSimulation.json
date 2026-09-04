@@ -1,5 +1,5 @@
 {
-  "title": "Evals_getEvalRun_ConversationSimulation",
+  "title": "Evals_getEvalRun_UserConversationSimulation",
   "operationId": "Evals_getEvalRun",
   "parameters": {
     "api-version": "2025-11-15-preview",
@@ -43,22 +43,38 @@
           }
         ],
         "data_source": {
-          "type": "azure_ai_conversation_simulation_preview",
-          "item_generation_params": {
-            "type": "conversation_gen_preview",
+          "type": "azure_ai_user_conversation_simulation_preview",
+          "source": {
+            "type": "file_id",
+            "id": "azureai://accounts/my-account/projects/my-project/data/conversation-eval-test-scenarios"
+          },
+          "model_configuration": {
             "model": "connection-name/gpt-4o",
-            "max_turns": 5,
-            "num_conversations": 3,
-            "source": {
-              "type": "file_id",
-              "id": "azureai://accounts/my-account/projects/my-project/data/conversation-eval-test-scenarios"
+            "sampling_params": {
+              "temperature": 0.7
             }
+          },
+          "default_simulation_configuration": {
+            "max_num_turns": 5,
+            "conversation_repetitions": 3,
+            "desired_num_turns": 4
+          },
+          "data_mapping": {
+            "test_case_description": "test_case_description",
+            "simulation_configuration": "simulation_configuration",
+            "id": "id"
           },
           "target": {
             "type": "azure_ai_agent",
             "name": "my-support-agent",
             "version": "2"
-          }
+          },
+          "enable_conversation_dataset_generation": true
+        },
+        "output_dataset": {
+          "id": "dataset_123",
+          "name": "conversation-eval-output",
+          "version": "1"
         },
         "error": null,
         "metadata": {}

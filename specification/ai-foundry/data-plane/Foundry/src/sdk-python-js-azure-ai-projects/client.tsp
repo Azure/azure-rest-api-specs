@@ -521,11 +521,10 @@ using Azure.AI.Projects;
 // Override default JS emitter behavior that emits "delete<model>". ("delete" is a reserved word, but we want to use namespaced "delete" for JS).
 @@clientName(EvaluationTaxonomies.delete, "delete", "javascript");
 
-// Note that we can't rename it in src\openai-evaluations\models.tsp, since in
-// src\evaluations\models.tsp we already define EvaluationTarget (not for v1).
-// If/when src\evaluations will be removed, consider doing the rename in
-// src\openai-evaluations\models.tsp instead.
-@@clientName(Target, "EvaluationTarget");
+// The openai-evaluations model is named FoundryEvaluationTarget in TypeSpec (to avoid
+// conflicting with the unrelated EvaluationTarget defined in src\evaluations\models.tsp),
+// but exposed to python/js clients as EvaluationTarget.
+@@clientName(FoundryEvaluationTarget, "EvaluationTarget");
 
 // --------------------------------------------------------------------------------
 // To support custom client-side handling of "opt-in" to preview features.
