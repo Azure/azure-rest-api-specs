@@ -28,6 +28,8 @@ namespace Microsoft.NetApp;
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 @parentResource(ElasticAccount)
 model ElasticSnapshotPolicy
   is TrackedResource<ElasticSnapshotPolicyProperties> {
@@ -54,6 +56,8 @@ model ElasticSnapshotPolicy
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ElasticSnapshotPolicyProperties {
   /**
    * Schedule for hourly snapshots
@@ -95,6 +99,8 @@ model ElasticSnapshotPolicyProperties {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 union PolicyStatus {
   string,
 
@@ -117,6 +123,8 @@ union PolicyStatus {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ElasticSnapshotPolicyHourlySchedule {
   /** Hourly snapshot count to keep */
   @minValue(0)
@@ -142,6 +150,8 @@ model ElasticSnapshotPolicyHourlySchedule {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ElasticSnapshotPolicyDailySchedule {
   /** Daily snapshot count to keep */
   @minValue(0)
@@ -173,6 +183,8 @@ model ElasticSnapshotPolicyDailySchedule {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ElasticSnapshotPolicyWeeklySchedule {
   /** Weekly snapshot count to keep */
   @minValue(0)
@@ -208,6 +220,8 @@ model ElasticSnapshotPolicyWeeklySchedule {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ElasticSnapshotPolicyMonthlySchedule {
   /** Monthly snapshot count to keep */
   @minValue(0)
@@ -245,6 +259,8 @@ model ElasticSnapshotPolicyMonthlySchedule {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 union DayOfWeek {
   string,
 
@@ -287,6 +303,8 @@ interface ElasticSnapshotPolicies {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   get is ArmResourceRead<ElasticSnapshotPolicy>;
 
   @added(Versions.v2025_12_15_preview)
@@ -300,6 +318,8 @@ interface ElasticSnapshotPolicies {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticSnapshotPolicy>;
 
   @added(Versions.v2025_12_15_preview)
@@ -313,6 +333,8 @@ interface ElasticSnapshotPolicies {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   update is ArmCustomPatchAsync<
     ElasticSnapshotPolicy,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -333,6 +355,8 @@ interface ElasticSnapshotPolicies {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticSnapshotPolicy>;
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
@@ -345,6 +369,8 @@ interface ElasticSnapshotPolicies {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   listByElasticAccount is ArmResourceListByParent<ElasticSnapshotPolicy>;
 
   /**
@@ -364,6 +390,8 @@ interface ElasticSnapshotPolicies {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   listElasticVolumes is ArmResourceActionSync<
     ElasticSnapshotPolicy,
     void,
