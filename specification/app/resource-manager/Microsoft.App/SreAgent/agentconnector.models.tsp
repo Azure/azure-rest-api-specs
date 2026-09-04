@@ -11,8 +11,4 @@ model AgentConnectorProperties {
 
   /** The type of the data connector */
   dataConnectorType?: string;
-
-  /** Source of the data connector - "Agent" when directly stored in agent, "AgentSpace" when inherited */
-  @visibility(Lifecycle.Read)
-  source?: string;
 }

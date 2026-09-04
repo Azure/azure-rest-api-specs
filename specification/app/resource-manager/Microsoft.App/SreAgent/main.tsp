@@ -3,8 +3,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./commontypes.tsp";
 import "./agent.tsp";
 import "./agentconnector.tsp";
-import "./agentspace.tsp";
-import "./agentspaceconnector.tsp";
 import "./supportedagentmodel.tsp";
 
 using Versioning;
