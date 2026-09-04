@@ -487,6 +487,20 @@ union AllocationStrategy {
   Prioritized: "Prioritized",
 }
 
+/**
+ * Specifies how VM SKUs are distributed across instances in the virtual machine scale set.
+ */
+@added(Versions.v2026_09_01)
+union SkuDistributionMode {
+  string,
+
+  /** VMs may use different SKUs from the SkuProfile list (multi-SKU). This is the default behavior. */
+  Heterogeneous: "Heterogeneous",
+
+  /** All VMs use a single SKU selected from the SkuProfile list. */
+  Homogeneous: "Homogeneous",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExpandTypesForGetVMScaleSets {
   string,
@@ -3087,6 +3101,14 @@ model VirtualMachineScaleSetIPConfigurationProperties {
   privateIPAddressVersion?: IPVersion;
 
   /**
+   * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
+   */
+  @added(Versions.v2026_09_01)
+  @minValue(1)
+  @maxValue(128)
+  privateIPAddressPrefixLength?: int32;
+
+  /**
    * Specifies an array of references to backend address pools of application gateways. A scale set can reference backend address pools of multiple application gateways. Multiple scale sets cannot use the same application gateway.
    */
   applicationGatewayBackendAddressPools?: SubResource[];
@@ -3885,6 +3907,12 @@ model SkuProfile {
   allocationStrategy?: AllocationStrategy;
 
   /**
+   * Specifies how VM SKUs are distributed across instances. Heterogeneous (default) allows multiple SKUs; Homogeneous pins all VMs to a single selected SKU from the SkuProfile list.
+   */
+  @added(Versions.v2026_09_01)
+  skuDistributionMode?: SkuDistributionMode;
+
+  /**
    * Specifies the policy that controls whether the platform may automatically migrate scale set instances to a different VM size from the SKU profile depending on platform demands. When omitted, automatic SKU migration is disabled.
    */
   @added(Versions.v2026_03_01)
@@ -4412,6 +4440,15 @@ model VirtualMachineScaleSetUpdateIPConfigurationProperties {
    * Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
    */
   privateIPAddressVersion?: IPVersion;
+
+  /**
+   * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable only on the update (PATCH) model so callers can explicitly clear an allocated prefix; the create/read models use a plain optional int32."
+  @added(Versions.v2026_09_01)
+  @minValue(1)
+  @maxValue(128)
+  privateIPAddressPrefixLength?: int32 | null;
 
   /**
    * The application gateway backend address pools.
@@ -6216,6 +6253,14 @@ model VirtualMachineNetworkInterfaceIPConfigurationProperties {
    * Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
    */
   privateIPAddressVersion?: IPVersions;
+
+  /**
+   * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
+   */
+  @added(Versions.v2026_09_01)
+  @minValue(1)
+  @maxValue(128)
+  privateIPAddressPrefixLength?: int32;
 
   /**
    * Specifies an array of references to application security group.
