@@ -2,25 +2,26 @@
 name: SDK Breaking Change Analysis
 description: Analyze SDK breaking changes after SDK breaking-change labels are produced.
 on:
+  issue_comment:
+    types: [created]
   workflow_dispatch:
     inputs:
-      details_url:
-        description: "Azure Pipelines SDK Validation build URL"
+      pr_number:
+        description: "Pull request number to analyze"
         required: true
         type: string
-  workflow_run:
-    workflows: ["SDK Breaking Change Labels"]
-    types: [completed]
-    branches: [main]
+  roles: [admin, maintainer, write]
 if: >-
   github.event_name == 'workflow_dispatch' ||
-  (github.event.workflow_run.conclusion == 'success' &&
-  contains(github.event.workflow_run.display_title, 'SDK Validation'))
+  (github.event_name == 'issue_comment' &&
+  github.event.action == 'created' &&
+  github.event.issue.pull_request != null &&
+  github.event.comment.body == '/sdk-breaking-change-analysis')
 permissions:
-  actions: read
+  checks: read
   contents: read
   copilot-requests: write
-  id-token: write
+  pull-requests: read
 engine:
   id: copilot
 imports:
@@ -32,69 +33,69 @@ mcp-servers:
       - "-v"
       - "/tmp/bin:/tmp/bin:ro"
       - "-v"
-      - "/tmp/gh-aw/agent/sdk-changes:/tmp/gh-aw/agent/sdk-changes:ro"
+      - "${{ github.workspace }}/repositories:/workspace/repositories:ro"
     entrypoint: "/tmp/bin/azsdk"
     entrypointArgs: ["mcp"]
     allowed: ["azsdk_package_detect_breaking_changes"]
 pre-agent-steps:
-  - if: github.event_name == 'workflow_run'
-    name: Download ADO details URL
-    uses: actions/download-artifact@v8
+  - name: Resolve repositories
+    id: resolve-source
+    uses: actions/github-script@v8
+    env:
+      PR_NUMBER: ${{ github.event.issue.number || inputs.pr_number }}
     with:
-      name: "ado-details"
-      path: "/tmp/gh-aw/agent/ado-details"
-      run-id: ${{ github.event.workflow_run.id }}
-      github-token: ${{ github.token }}
-
-  - if: github.event.repository.name == 'azure-rest-api-specs-pr'
-    name: Azure Login with Workload Identity Federation
-    uses: azure/login@v3
-    with:
-      client-id: "205398f1-715f-40a7-8d52-856097f28281"
-      tenant-id: "72f988bf-86f1-41af-91ab-2d7cd011db47"
-      allow-no-subscriptions: true
-
-  - if: github.event.repository.name == 'azure-rest-api-specs-pr'
-    name: Get ADO Token via Managed Identity
-    run: |
-      ADO_TOKEN=$(az account get-access-token --resource "499b84ac-1321-427f-aa17-267ca6975798" --query "accessToken" -o tsv)
-      echo "ADO_TOKEN=$ADO_TOKEN" >> "$GITHUB_ENV"
+      script: |
+        const pullNumber = Number(process.env.PR_NUMBER);
+        if (!Number.isSafeInteger(pullNumber) || pullNumber <= 0) {
+          throw new Error(`Invalid pull request number: ${process.env.PR_NUMBER}`);
+        }
+        const { data: pull } = await github.rest.pulls.get({
+          ...context.repo,
+          pull_number: pullNumber,
+        });
+        const { resolveSdkValidationRepository } =
+          await import("${{ github.workspace }}/.github/workflows/src/sdk-breaking-change-analysis.js");
+        const sdkRepository = await resolveSdkValidationRepository({
+          github,
+          owner: context.repo.owner,
+          repo: context.repo.repo,
+          headSha: pull.head.sha,
+          pullNumber,
+        });
+        core.setOutput("repository", pull.head.repo.full_name);
+        core.setOutput("ref", pull.head.sha);
+        core.setOutput("sdk-repository", sdkRepository);
 
   - name: Install dependencies for github-script actions
     uses: ./.github/actions/install-deps-github-script
 
-  - name: Read SDK changes from Azure Pipelines
-    uses: actions/github-script@v8
-    env:
-      DETAILS_URL: ${{ inputs.details_url }}
+  - name: Checkout specification PR source
+    uses: actions/checkout@v7
     with:
-      script: |
-        const fs = await import("node:fs");
-        const { downloadSdkChangesFromPipelineArtifact } =
-          await import("${{ github.workspace }}/.github/workflows/src/sdk-breaking-change-analysis.js");
-        const detailsUrl = process.env.DETAILS_URL ||
-          fs.readFileSync("/tmp/gh-aw/agent/ado-details/ado-details-url", "utf8");
-        await downloadSdkChangesFromPipelineArtifact({
-          detailsUrl,
-          destinationPath: "/tmp/gh-aw/agent/sdk-changes/sdk-changes.json",
-          core,
-        });
+      repository: ${{ steps.resolve-source.outputs.repository }}
+      ref: ${{ steps.resolve-source.outputs.ref }}
+      path: "repositories/spec"
+      persist-credentials: false
+
+  - name: Checkout target SDK repository
+    uses: actions/checkout@v7
+    with:
+      repository: Azure/${{ steps.resolve-source.outputs.sdk-repository }}
+      ref: "main"
+      path: "repositories/sdk"
+      persist-credentials: false
 ---
 
 # SDK Breaking Change Analysis
 
-Read `/tmp/gh-aw/agent/sdk-changes/sdk-changes.json`. Validate that it is a JSON object containing:
+This workflow runs when an authorized user comments `/sdk-breaking-change-analysis` on a pull request, or through manual dispatch.
 
-- `changes`: a string containing the SDK changes in Markdown format.
-- `hasBreakingChange`: a boolean.
-
-Then call the `azsdk_package_detect_breaking_changes` tool exactly once with this input:
+Call the `azsdk_package_detect_breaking_changes` tool exactly once with this input:
 
 ```json
 {
-  "packagePath": "the-path-to-the-sdk",
-  "localSdkChangeJsonFilePath": "/tmp/gh-aw/agent/sdk-changes/sdk-changes.json"
+  "packagePath": "/workspace/repositories/sdk"
 }
 ```
 
-The JSON file was extracted directly from the Azure Pipeline `spec-gen-sdk-artifact` during this workflow. Report the tool result without modifying repository files.
+The specification PR source is available at `/workspace/repositories/spec`, and the target SDK repository is available at `/workspace/repositories/sdk`. Both are read-only. Report the tool result without modifying repository files.

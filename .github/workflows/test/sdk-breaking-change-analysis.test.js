@@ -1,64 +1,51 @@
-import fs from "node:fs";
-import os from "node:os";
-import path from "node:path";
-
-import { beforeEach, describe, expect, it, vi } from "vitest";
-import { getAzurePipelineArtifact } from "../src/artifacts.js";
-import {
-  downloadSdkChangesFromPipelineArtifact,
-  readSdkChangesFromPipelineArtifact,
-} from "../src/sdk-breaking-change-analysis.js";
-import { createMockCore } from "./mocks.js";
-
-vi.mock("../src/artifacts.js", async (importOriginal) => ({
-  ...(await importOriginal()),
-  getAzurePipelineArtifact: vi.fn(),
-}));
-
-const mockCore = createMockCore();
+import { describe, expect, it } from "vitest";
+import { resolveSdkValidationRepository } from "../src/sdk-breaking-change-analysis.js";
+import { createMockGithub } from "./mocks.js";
 
 describe("sdk-breaking-change-analysis", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  it("reads sdkChanges from the spec-gen-sdk pipeline artifact", async () => {
-    const sdkChanges = { changes: "Removed operation", hasBreakingChange: true };
-    vi.mocked(getAzurePipelineArtifact).mockResolvedValue({
-      artifactData: JSON.stringify(sdkChanges),
+  it("resolves the latest completed SDK Validation repository", async () => {
+    const github = createMockGithub();
+    github.rest.checks.listForRef.mockResolvedValue({
+      data: {
+        check_runs: [
+          {
+            app: { name: "Azure Pipelines" },
+            name: "SDK Validation - Go",
+            status: "completed",
+            completed_at: "2026-09-03T10:00:00Z",
+            details_url: "https://dev.azure.com/project/_build/results?buildId=1",
+          },
+          {
+            app: { name: "Azure Pipelines" },
+            name: "SDK Validation - Python",
+            status: "completed",
+            completed_at: "2026-09-03T11:00:00Z",
+            details_url: "https://dev.azure.com/project/_build/results?buildId=2",
+          },
+        ],
+      },
     });
 
-    const result = await readSdkChangesFromPipelineArtifact({
-      detailsUrl: "https://dev.azure.com/project/_build/results?buildId=12345",
-      core: mockCore,
-    });
-
-    expect(result).toEqual(sdkChanges);
-    expect(getAzurePipelineArtifact).toHaveBeenCalledWith(
-      expect.objectContaining({
-        ado_build_id: "12345",
-        ado_project_url: "https://dev.azure.com/project",
-        artifactName: "spec-gen-sdk-artifact",
-        artifactFileName: "spec-gen-sdk-artifact.json",
+    await expect(
+      resolveSdkValidationRepository({
+        github,
+        owner: "owner",
+        repo: "repo",
+        headSha: "head-sha",
+        pullNumber: 42,
       }),
-    );
+    ).resolves.toBe("azure-sdk-for-python");
   });
 
-  it("downloads sdkChanges to the destination file", async () => {
-    const sdkChanges = { changes: "Removed operation", hasBreakingChange: true };
-    vi.mocked(getAzurePipelineArtifact).mockResolvedValue({
-      artifactData: JSON.stringify(sdkChanges),
-    });
-    const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "sdk-changes-"));
-    const destinationPath = path.join(temporaryDirectory, "nested", "sdk-changes.json");
-
-    await downloadSdkChangesFromPipelineArtifact({
-      detailsUrl: "https://dev.azure.com/project/_build/results?buildId=12345",
-      destinationPath,
-      core: mockCore,
-    });
-
-    expect(JSON.parse(fs.readFileSync(destinationPath, "utf8"))).toEqual(sdkChanges);
-    fs.rmSync(temporaryDirectory, { recursive: true, force: true });
+  it("rejects SDK Validation checks without a recognized language", async () => {
+    await expect(
+      resolveSdkValidationRepository({
+        github: createMockGithub(),
+        owner: "owner",
+        repo: "repo",
+        headSha: "head-sha",
+        pullNumber: 42,
+      }),
+    ).rejects.toThrow("recognized language");
   });
 });
