@@ -12,9 +12,9 @@ vi.mock("../../src/comment.js", () => ({
 
 vi.mock("../../src/typespec-suppressions/suppressions-comment.js", () => ({
   buildSuppressionsComment: vi.fn(),
+  SUPPRESSION_REVIEW_REQUIRED_LABEL: "TypeSpecSuppressionReviewRequired",
   TYPESPEC_SUPPRESSIONS_COMMENT_IDENTIFIER: "TypeSpecSuppressionsReview",
-  TYPESPEC_SUPPRESSIONS_SECTION_TITLE:
-    "TypeSpec suppressions requiring review (testing, non-blocking)",
+  TYPESPEC_SUPPRESSIONS_SECTION_TITLE: "TypeSpec suppressions requiring review",
 }));
 
 const { extractInputs } = await import("../../src/context.js");
@@ -70,7 +70,10 @@ describe("post-results", () => {
 
   it("posts the sticky comment when suppressions require review", async () => {
     const github = githubWithLabels([]);
-    vi.mocked(buildSuppressionsComment).mockResolvedValue("BODY: suppressions requiring review");
+    vi.mocked(buildSuppressionsComment).mockResolvedValue({
+      body: "BODY: suppressions requiring review",
+      requiresApproval: true,
+    });
 
     await postSuppressionsResults(args(github));
 
@@ -94,9 +97,69 @@ describe("post-results", () => {
     );
   });
 
+  it("applies the TypeSpecSuppressionReviewRequired label when requiresApproval is true and label is absent", async () => {
+    const github = githubWithLabels([]);
+    vi.mocked(buildSuppressionsComment).mockResolvedValue({
+      body: "BODY",
+      requiresApproval: true,
+    });
+
+    await postSuppressionsResults(args(github));
+
+    expect(github.rest.issues.addLabels).toHaveBeenCalledWith({
+      owner: "test-owner",
+      repo: "test-repo",
+      issue_number: 42,
+      labels: ["TypeSpecSuppressionReviewRequired"],
+    });
+    expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+  });
+
+  it("does not re-apply the TypeSpecSuppressionReviewRequired label when already present", async () => {
+    const github = githubWithLabels(["TypeSpecSuppressionReviewRequired"]);
+    vi.mocked(buildSuppressionsComment).mockResolvedValue({
+      body: "BODY",
+      requiresApproval: true,
+    });
+
+    await postSuppressionsResults(args(github));
+
+    expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+    expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+  });
+
+  it("removes the TypeSpecSuppressionReviewRequired label when requiresApproval becomes false", async () => {
+    const github = githubWithLabels(["TypeSpecSuppressionReviewRequired"]);
+    vi.mocked(buildSuppressionsComment).mockResolvedValue({
+      body: undefined,
+      requiresApproval: false,
+    });
+
+    await postSuppressionsResults(args(github));
+
+    expect(github.rest.issues.removeLabel).toHaveBeenCalledWith({
+      owner: "test-owner",
+      repo: "test-repo",
+      issue_number: 42,
+      name: "TypeSpecSuppressionReviewRequired",
+    });
+    expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+  });
+
+  it("does not touch labels when the analysis result is unavailable", async () => {
+    const github = githubWithLabels([]);
+    vi.mocked(buildSuppressionsComment).mockResolvedValue(undefined);
+
+    await postSuppressionsResults(args(github));
+
+    expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+    expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+    expect(commentOrUpdate).not.toHaveBeenCalled();
+  });
+
   it("passes the current PR labels through for approval state", async () => {
     const github = githubWithLabels(["Approved-TypeSpecSuppression", "other"]);
-    vi.mocked(buildSuppressionsComment).mockResolvedValue("BODY");
+    vi.mocked(buildSuppressionsComment).mockResolvedValue({ body: "BODY", requiresApproval: true });
 
     await postSuppressionsResults(args(github));
 
@@ -113,7 +176,10 @@ describe("post-results", () => {
 
   it("resolves an existing comment when nothing requires review", async () => {
     const github = githubWithLabels([]);
-    vi.mocked(buildSuppressionsComment).mockResolvedValue(undefined);
+    vi.mocked(buildSuppressionsComment).mockResolvedValue({
+      body: undefined,
+      requiresApproval: false,
+    });
     vi.mocked(parseExistingComments).mockReturnValue([99, "previous body"]);
 
     await postSuppressionsResults(args(github));
@@ -127,7 +193,10 @@ describe("post-results", () => {
 
   it("does nothing when nothing requires review and no prior comment exists", async () => {
     const github = githubWithLabels([]);
-    vi.mocked(buildSuppressionsComment).mockResolvedValue(undefined);
+    vi.mocked(buildSuppressionsComment).mockResolvedValue({
+      body: undefined,
+      requiresApproval: false,
+    });
     vi.mocked(parseExistingComments).mockReturnValue([undefined, undefined]);
 
     await postSuppressionsResults(args(github));
