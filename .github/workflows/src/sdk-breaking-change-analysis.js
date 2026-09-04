@@ -36,7 +36,7 @@ export async function readSdkChangesFromPipelineArtifact({
     throw new Error(`Artifact '${ARTIFACT_NAME}' was not found or could not be downloaded.`);
   }
 
-  return SdkChangeSchema.parse(JSON.parse(artifactData)).sdkChanges ?? null;
+  return SdkChangeSchema.parse(JSON.parse(artifactData));
 }
 
 /**

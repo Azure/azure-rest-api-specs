@@ -2,13 +2,22 @@
 name: SDK Breaking Change Analysis
 description: Analyze SDK breaking changes after SDK breaking-change labels are produced.
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       details_url:
         description: "Azure Pipelines SDK Validation build URL"
         required: true
         type: string
+  workflow_run:
+    workflows: ["SDK Breaking Change Labels"]
+    types: [completed]
+    branches: [main]
+if: >-
+  github.event_name == 'workflow_dispatch' ||
+  (github.event.workflow_run.conclusion == 'success' &&
+  contains(github.event.workflow_run.display_title, 'SDK Validation'))
 permissions:
+  actions: read
   contents: read
   copilot-requests: write
   id-token: write
@@ -28,6 +37,15 @@ mcp-servers:
     entrypointArgs: ["mcp"]
     allowed: ["azsdk_package_detect_breaking_changes"]
 pre-agent-steps:
+  - if: github.event_name == 'workflow_run'
+    name: Download ADO details URL
+    uses: actions/download-artifact@v8
+    with:
+      name: "ado-details"
+      path: "/tmp/gh-aw/agent/ado-details"
+      run-id: ${{ github.event.workflow_run.id }}
+      github-token: ${{ github.token }}
+
   - if: github.event.repository.name == 'azure-rest-api-specs-pr'
     name: Azure Login with Workload Identity Federation
     uses: azure/login@v3
@@ -51,10 +69,13 @@ pre-agent-steps:
       DETAILS_URL: ${{ inputs.details_url }}
     with:
       script: |
+        const fs = await import("node:fs");
         const { downloadSdkChangesFromPipelineArtifact } =
           await import("${{ github.workspace }}/.github/workflows/src/sdk-breaking-change-analysis.js");
+        const detailsUrl = process.env.DETAILS_URL ||
+          fs.readFileSync("/tmp/gh-aw/agent/ado-details/ado-details-url", "utf8");
         await downloadSdkChangesFromPipelineArtifact({
-          detailsUrl: process.env.DETAILS_URL,
+          detailsUrl,
           destinationPath: "/tmp/gh-aw/agent/sdk-changes/sdk-changes.json",
           core,
         });

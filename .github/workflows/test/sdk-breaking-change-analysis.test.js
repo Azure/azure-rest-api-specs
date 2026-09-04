@@ -3,7 +3,6 @@ import os from "node:os";
 import path from "node:path";
 
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { createMockSpecGenSdkArtifactInfo } from "../../shared/test/sdk-types.js";
 import { getAzurePipelineArtifact } from "../src/artifacts.js";
 import {
   downloadSdkChangesFromPipelineArtifact,
@@ -26,7 +25,7 @@ describe("sdk-breaking-change-analysis", () => {
   it("reads sdkChanges from the spec-gen-sdk pipeline artifact", async () => {
     const sdkChanges = { changes: "Removed operation", hasBreakingChange: true };
     vi.mocked(getAzurePipelineArtifact).mockResolvedValue({
-      artifactData: JSON.stringify(createMockSpecGenSdkArtifactInfo({ sdkChanges })),
+      artifactData: JSON.stringify(sdkChanges),
     });
 
     const result = await readSdkChangesFromPipelineArtifact({
@@ -48,7 +47,7 @@ describe("sdk-breaking-change-analysis", () => {
   it("downloads sdkChanges to the destination file", async () => {
     const sdkChanges = { changes: "Removed operation", hasBreakingChange: true };
     vi.mocked(getAzurePipelineArtifact).mockResolvedValue({
-      artifactData: JSON.stringify(createMockSpecGenSdkArtifactInfo({ sdkChanges })),
+      artifactData: JSON.stringify(sdkChanges),
     });
     const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "sdk-changes-"));
     const destinationPath = path.join(temporaryDirectory, "nested", "sdk-changes.json");
