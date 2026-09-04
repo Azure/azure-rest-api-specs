@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2026-03-02-preview",
+    "environmentName": "managedEnv",
+    "resourceGroupName": "examplerg",
+    "storageName": "storage1",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/managedEnv/storages/storage1",
+        "name": "storage1",
+        "type": "Microsoft.App/managedEnvironments/storages",
+        "properties": {
+          "azureFile": {
+            "accountName": "account1",
+            "shareName": "share1",
+            "accessMode": "ReadWrite",
+            "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "ManagedEnvironmentsStorages_Get",
+  "title": "Get an environment storage with managed identity"
+}
