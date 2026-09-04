@@ -4289,6 +4289,19 @@ model BackupShortTermRetentionPolicyProperties {
    * The differential backup interval in hours. This is how many interval hours between each differential backup will be supported. This is only applicable to live databases but not dropped databases.
    */
   diffBackupIntervalInHours?: DiffBackupIntervalInHours;
+
+  /**
+   * Whether to lock the immutability of the backups governed by this short term retention policy.
+   */
+  @added(Versions.v2026_08_01_preview)
+  lockImmutability?: boolean;
+
+  /**
+   * The immutability status of the backups governed by this short term retention policy.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  immutabilityStatus?: ImmutabilityStatus;
 }
 
 /**
@@ -4414,6 +4427,15 @@ model ServerBlobAuditingPolicyProperties {
    * Specifies whether Managed Identity is used to access blob storage
    */
   isManagedIdentityInUse?: boolean;
+
+  /**
+   * Specifies the required fields to include in audit events (optional).
+   * Each item must be a valid audit_event field name.
+   * Can only be specified when isAzureMonitorTargetEnabled is true.
+   * For the complete list of valid field names, see the audit_event table schema documentation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  requiredFields?: string[];
 
   /**
    * Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.
@@ -4552,6 +4574,15 @@ model DatabaseBlobAuditingPolicyProperties {
    * Specifies whether Managed Identity is used to access blob storage
    */
   isManagedIdentityInUse?: boolean;
+
+  /**
+   * Specifies the required fields to include in audit events (optional).
+   * Each item must be a valid audit_event field name.
+   * Can only be specified when isAzureMonitorTargetEnabled is true.
+   * For the complete list of valid field names, see the audit_event table schema documentation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  requiredFields?: string[];
 
   /**
    * Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.
@@ -4695,6 +4726,15 @@ model ExtendedDatabaseBlobAuditingPolicyProperties {
    * Specifies whether Managed Identity is used to access blob storage
    */
   isManagedIdentityInUse?: boolean;
+
+  /**
+   * Specifies the required fields to include in audit events (optional).
+   * Each item must be a valid audit_event field name.
+   * Can only be specified when isAzureMonitorTargetEnabled is true.
+   * For the complete list of valid field names, see the audit_event table schema documentation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  requiredFields?: string[];
 
   /**
    * Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.
@@ -4853,6 +4893,15 @@ model ExtendedServerBlobAuditingPolicyProperties {
    * Specifies whether Managed Identity is used to access blob storage
    */
   isManagedIdentityInUse?: boolean;
+
+  /**
+   * Specifies the required fields to include in audit events (optional).
+   * Each item must be a valid audit_event field name.
+   * Can only be specified when isAzureMonitorTargetEnabled is true.
+   * For the complete list of valid field names, see the audit_event table schema documentation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  requiredFields?: string[];
 
   /**
    * Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.
@@ -7625,6 +7674,27 @@ model DistributedAvailabilityGroupProperties {
    */
   @added(Versions.v2025_08_01_preview)
   linkMode?: LinkModeType;
+
+  /**
+   * Most recent error code for the distributed availability group.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  mostRecentError?: string;
+
+  /**
+   * Time of the most recent error for the distributed availability group.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  mostRecentErrorTime?: utcDateTime;
+
+  /**
+   * Most recent error message for the distributed availability group.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  mostRecentErrorMessage?: string;
 
   /**
    * Databases in the distributed availability group
@@ -10917,6 +10987,34 @@ model ManagedInstanceLongTermRetentionBackupProperties {
    */
   @visibility(Lifecycle.Read)
   backupStorageAccessTier?: BackupStorageAccessTier;
+
+  /**
+   * The setting whether the LTR backup is immutable
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_08_01_preview)
+  isBackupImmutable?: boolean;
+
+  /**
+   * The setting for whether or not time-based immutability is enabled for the LTR backup. When time-based immutability is enabled and locked, the backup cannot be deleted until BackupExpirationTime.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_08_01_preview)
+  timeBasedImmutability?: TimeBasedImmutability;
+
+  /**
+   * The time-based immutability mode. Only applicable if time-based immutability is enabled.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_08_01_preview)
+  timeBasedImmutabilityMode?: TimeBasedImmutabilityMode;
+
+  /**
+   * The setting for whether LegalHold is enabled or disabled on the LTR backup. When LegalHold is enabled, the backup cannot be deleted until the LegalHold is removed.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_08_01_preview)
+  legalHoldImmutability?: SetLegalHoldImmutability;
 }
 
 /**
@@ -11034,6 +11132,29 @@ model MaintenanceWindowsProperties {
 }
 
 /**
+ * The immutability status of the backups governed by this short term retention policy.
+ */
+@added(Versions.v2026_08_01_preview)
+union ImmutabilityStatus {
+  string,
+
+  /**
+   * Disabled
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Enabled
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Locked
+   */
+  Locked: "Locked",
+}
+
+/**
  * Properties of a short term retention policy
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -11042,6 +11163,20 @@ model ManagedBackupShortTermRetentionPolicyProperties {
    * The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
    */
   retentionDays?: int32;
+
+  /**
+   * Whether to lock the immutability of the backups governed by this short term retention policy.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  lockImmutability?: boolean;
+
+  /**
+   * The immutability status of the backups governed by this short term retention policy.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  immutabilityStatus?: ImmutabilityStatus;
 }
 
 /**
@@ -12329,6 +12464,18 @@ model ManagedInstanceLongTermRetentionPolicyProperties {
    * The BackupStorageAccessTier for the LTR backups
    */
   backupStorageAccessTier?: BackupStorageAccessTier;
+
+  /**
+   * The setting for whether to enable time-based immutability for future backups. When set, future backups will have TimeBasedImmutability enabled.
+   */
+  @added(Versions.v2026_08_01_preview)
+  timeBasedImmutability?: TimeBasedImmutability;
+
+  /**
+   * The setting for time-based immutability mode for future backup (Value can be either Locked or UnLocked. Only effective if TimeBasedImmutability is enabled). Caution: Immutability of LTR backup cannot be removed if TimeBasedImmutabilityMode is Locked.
+   */
+  @added(Versions.v2026_08_01_preview)
+  timeBasedImmutabilityMode?: TimeBasedImmutabilityMode;
 
   /**
    * The weekly retention policy for an LTR backup in an ISO 8601 format.
