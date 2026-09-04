@@ -237,3 +237,5 @@ model HcpOpenShiftClusterUpdate is UpdateableProperties<HcpOpenShiftCluster>;
   UpdateableProperties<NodePoolProperties>,
   "javascript"
 );
+
+@@clientName(Microsoft.RedHatOpenShift, "RedHatOpenShiftHcpClient", "python");
