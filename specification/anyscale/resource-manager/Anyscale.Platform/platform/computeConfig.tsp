@@ -177,7 +177,7 @@ model WorkerNode extends NodeType {
   maxNodes?: int32;
 
   /** Market type of the instances. */
-  marketType?: MarketType = MarketType.OnDemand;
+  marketType?: MarketType;
 }
 
 @armResourceOperations

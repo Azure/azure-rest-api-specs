@@ -4820,35 +4820,8 @@
           "description": "Maximum number of nodes of this type that can be running in the cluster."
         },
         "marketType": {
-          "type": "string",
-          "description": "Market type of the instances.",
-          "default": "OnDemand",
-          "enum": [
-            "OnDemand",
-            "Spot",
-            "PreferSpot"
-          ],
-          "x-ms-enum": {
-            "name": "MarketType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "OnDemand",
-                "value": "OnDemand",
-                "description": "Use on-demand instances only."
-              },
-              {
-                "name": "Spot",
-                "value": "Spot",
-                "description": "Use spot instances only."
-              },
-              {
-                "name": "PreferSpot",
-                "value": "PreferSpot",
-                "description": "Prefer to use spot instances but fall back to on-demand if necessary."
-              }
-            ]
-          }
+          "$ref": "#/definitions/MarketType",
+          "description": "Market type of the instances."
         }
       },
       "allOf": [
