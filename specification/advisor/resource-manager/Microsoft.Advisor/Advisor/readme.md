@@ -26,7 +26,30 @@ These are the global settings for the Advisor API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-03-preview
+tag: package-2026-10
+```
+
+### Tag: package-2026-10
+
+These settings apply only when `--tag=package-2026-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-10'
+input-file:
+  - stable/2026-10-01/openapi.json
+suppressions:
+  - code: ArmResourcePropertiesBag
+    reason: Suppressing for now to avoid breaking change.
+    from:
+      - openapi.json
+    where:
+      - $.definitions["AssessmentResult"]
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Suppressing for now to avoid breaking change.
+    from:
+      - openapi.json
+    where:
+      - $.definitions["AssessmentTypeListResult"]
+      - $.definitions["WorkloadListResult"]
 ```
 
 ### Tag: package-2026-03-preview
