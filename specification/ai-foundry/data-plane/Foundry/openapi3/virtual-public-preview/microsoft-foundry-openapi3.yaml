@@ -3,6 +3,7 @@ info:
   title: Microsoft Foundry
   version: virtual-public-preview
 tags:
+  - name: Agent Insight Monitors
   - name: Voice Agent WebSocket
   - name: Agent Conversations
   - name: AgentServer Task Storage
@@ -32,6 +33,8 @@ tags:
   - name: Agent Versions
     parent: Agents Root
   - name: Agent Containers
+    parent: Agents Root
+  - name: Agent Microsoft 365 Publishing
     parent: Agents Root
   - name: Platform APIs
   - name: Datasets
@@ -116,6 +119,920 @@ tags:
   - name: Insights
     parent: Evaluations
 paths:
+  /agent_insight_monitors:
+    get:
+      operationId: AgentInsightMonitors_list
+      description: List Agent Insights monitors, optionally filtered by agent name.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: after
+          in: query
+          required: false
+          description: A cursor that identifies the last item in the previous page.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: A cursor that identifies the first item in the next page.
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: The maximum number of items to return. Defaults to 20.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 100
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order by creation time. Defaults to descending.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+            default: desc
+          explode: false
+        - name: agent_name
+          in: query
+          required: false
+          description: Filter monitors by agent name.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AgentInsightMonitorListItem'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    post:
+      operationId: AgentInsightMonitors_create
+      description: Create an Agent Insights monitor for an agent.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Location:
+              required: true
+              description: URL of the created monitor.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInsightMonitor'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentInsightMonitorCreate'
+        description: The monitor to create.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+  /agent_insight_monitors/{monitor_id}:
+    get:
+      operationId: AgentInsightMonitors_get
+      description: Get an Agent Insights monitor.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInsightMonitor'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    delete:
+      operationId: AgentInsightMonitors_delete
+      description: Delete an Agent Insights monitor and all of its runs, insights, and state.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    patch:
+      operationId: AgentInsightMonitors_update
+      description: Update an Agent Insights monitor.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInsightMonitor'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+      requestBody:
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/AgentInsightMonitorUpdate'
+        description: The monitor fields to update.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+  /agent_insight_monitors/{monitor_id}/insights:
+    get:
+      operationId: AgentInsightMonitors_listInsights
+      description: List current insights for an Agent Insights monitor.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: after
+          in: query
+          required: false
+          description: A cursor that identifies the last item in the previous page.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: A cursor that identifies the first item in the next page.
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: The maximum number of items to return. Defaults to 20.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 100
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order by creation time. Defaults to descending.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+            default: desc
+          explode: false
+        - name: category
+          in: query
+          required: false
+          description: Filter insights by category.
+          schema:
+            type: string
+          explode: false
+        - name: severity
+          in: query
+          required: false
+          description: Filter insights by severity.
+          schema:
+            $ref: '#/components/schemas/AgentInsightSeverity'
+          explode: false
+        - name: status
+          in: query
+          required: false
+          description: Filter insights by lifecycle status.
+          schema:
+            $ref: '#/components/schemas/AgentInsightStatus'
+          explode: false
+        - name: include_details
+          in: query
+          required: false
+          description: Whether to include expanded insight details such as evidence and run links in the response. Defaults to false.
+          schema:
+            type: boolean
+            default: false
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AgentInsight'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+  /agent_insight_monitors/{monitor_id}/insights/{insight_id}:
+    get:
+      operationId: AgentInsightMonitors_getInsight
+      description: Get a full insight for an Agent Insights monitor.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: insight_id
+          in: path
+          required: true
+          description: The identifier of the insight.
+          schema:
+            type: string
+        - name: include_details
+          in: query
+          required: false
+          description: Whether to include expanded insight details such as evidence and run links in the response. Defaults to false.
+          schema:
+            type: boolean
+            default: false
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInsight'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    patch:
+      operationId: AgentInsightMonitors_updateInsight
+      description: Update the lifecycle status of an insight.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: insight_id
+          in: path
+          required: true
+          description: The identifier of the insight.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInsight'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+      requestBody:
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/AgentInsightUpdate'
+        description: The insight fields to update.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+  /agent_insight_monitors/{monitor_id}/runs:
+    post:
+      operationId: AgentInsightMonitors_createRun
+      description: Start an Agent Insights run for a monitor.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: Operation-Id
+          in: header
+          required: false
+          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
+          schema:
+            type: string
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Operation-Location:
+              required: true
+              description: URL to poll for the job status.
+              schema:
+                type: string
+            Location:
+              required: true
+              description: URL of the created job resource.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInsightRun'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentInsightRunCreate'
+        description: Run inputs. Send an empty object to use the default 168-hour lookback window.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    get:
+      operationId: AgentInsightMonitors_listRuns
+      description: List Agent Insights runs for a monitor.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: after
+          in: query
+          required: false
+          description: A cursor that identifies the last item in the previous page.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: A cursor that identifies the first item in the next page.
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: The maximum number of items to return. Defaults to 20.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 100
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order by creation time. Defaults to descending.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+            default: desc
+          explode: false
+        - name: status
+          in: query
+          required: false
+          description: Filter runs by status.
+          schema:
+            $ref: '#/components/schemas/JobStatus'
+          explode: false
+        - name: trigger
+          in: query
+          required: false
+          description: Filter runs by trigger.
+          schema:
+            $ref: '#/components/schemas/AgentInsightRunTrigger'
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AgentInsightRun'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+  /agent_insight_monitors/{monitor_id}/runs/{run_id}:
+    get:
+      operationId: AgentInsightMonitors_getRun
+      description: Get an Agent Insights run.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: run_id
+          in: path
+          required: true
+          description: The identifier of the run.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInsightRun'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+  /agent_insight_monitors/{monitor_id}/runs/{run_id}:cancel:
+    post:
+      operationId: AgentInsightMonitors_cancelRun
+      description: Cancel an Agent Insights run.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: run_id
+          in: path
+          required: true
+          description: The identifier of the run.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInsightRun'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+  /agent_insight_monitors/{monitor_id}:reset:
+    post:
+      operationId: AgentInsightMonitors_reset
+      description: Reset an Agent Insights monitor's overview, checkpoint, and active insight state.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentInsights=V1Preview
+        - name: monitor_id
+          in: path
+          required: true
+          description: The identifier of the monitor.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
   /agent_optimization_jobs:
     post:
       operationId: AgentOptimizationJobs_create
@@ -521,6 +1438,7 @@ paths:
           - ExternalAgents=V1Preview
           - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
+          - DigitalWorker=V1Preview
       tags:
         - Agents
       requestBody:
@@ -2884,6 +3802,152 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateAgentFromManifestRequest'
+  /agents/{agent_name}/microsoft365/publish:
+    post:
+      operationId: Microsoft365Publishing_publishAgentToMicrosoft365
+      summary: Publish an agent to Microsoft 365
+      description: |-
+        Publishes a Foundry agent to Microsoft 365 / Microsoft Teams and returns the published title and
+        Teams app ids.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent to publish.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft365PublishResponse'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Microsoft 365 Publishing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Microsoft365PublishRequest'
+  /agents/{agent_name}/microsoft365/publishdefaults:
+    get:
+      operationId: Microsoft365Publishing_getMicrosoft365PublishDefaults
+      summary: Get Microsoft 365 publish defaults
+      description: |-
+        Returns default and previously-published values used to pre-populate a Microsoft 365 publish
+        request for a Foundry agent.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent to get publish defaults for.
+          schema:
+            type: string
+        - name: publishAsDigitalWorker
+          in: query
+          required: false
+          description: When true, returns defaults for publishing the agent as an autopilot (digital worker) agent.
+          schema:
+            type: boolean
+            default: false
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft365PublishDefaults'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Microsoft 365 Publishing
+  /agents/{agent_name}/microsoft365/zip:
+    post:
+      operationId: Microsoft365Publishing_getMicrosoft365AppPackage
+      summary: Generate a Microsoft 365 app package
+      description: |-
+        Generates the Microsoft Teams app package (zip) for a Foundry agent from the supplied publish
+        request, without publishing it. Returns the app package as `application/zip`.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent to generate the app package for.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The generated Microsoft 365 app package (Microsoft Teams app zip).
+          content:
+            application/zip:
+              schema:
+                contentMediaType: application/zip
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Microsoft 365 Publishing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Microsoft365PublishRequest'
   /agents/{agent_name}/operations:
     get:
       operationId: AgentContainers_listAgentContainerOperations
@@ -3119,6 +4183,7 @@ paths:
           - ExternalAgents=V1Preview
           - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
+          - DigitalWorker=V1Preview
       tags:
         - Agent Versions
       requestBody:
@@ -41809,6 +42874,7 @@ components:
         - ExternalAgents=V1Preview
         - DraftAgents=V1Preview
         - VoiceAgents=V1Preview
+        - DigitalWorker=V1Preview
         - HostedAgents=V1Preview
         - ContainerAgents=V1Preview
       description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
@@ -42135,6 +43201,698 @@ components:
             - active
             - disabled
       description: The status of an agent identity, applicable to both the agent instance identity and the agent blueprint.
+    AgentInsight:
+      type: object
+      required:
+        - id
+        - monitor_id
+        - agent_name
+        - agent_version
+        - title
+        - severity
+        - category
+        - status
+        - trace_count
+        - created_at
+        - updated_at
+        - description
+      properties:
+        id:
+          type: string
+          description: The insight identifier.
+          readOnly: true
+        monitor_id:
+          type: string
+          description: The Agent Insights monitor this insight belongs to.
+          readOnly: true
+        agent_name:
+          type: string
+          description: The agent this insight belongs to.
+          readOnly: true
+        agent_version:
+          type: string
+          description: The latest immutable agent version associated with this insight.
+          readOnly: true
+        title:
+          type: string
+          description: A short title for the issue.
+          readOnly: true
+        severity:
+          $ref: '#/components/schemas/AgentInsightSeverity'
+          description: The severity of the issue.
+          readOnly: true
+        category:
+          type: string
+          description: An open, service-generated category label for the issue. Clients must accept previously unseen values.
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/AgentInsightStatus'
+          description: The lifecycle status of the insight.
+          readOnly: true
+        trace_count:
+          type: integer
+          format: int32
+          description: The number of traces that provide evidence for this insight.
+          readOnly: true
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when this insight was created.
+          readOnly: true
+        updated_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when this insight was last updated.
+          readOnly: true
+        description:
+          type: string
+          description: The root-cause diagnosis for the issue.
+          readOnly: true
+        details:
+          $ref: '#/components/schemas/AgentInsightDetails'
+          description: Additional insight details. Omitted unless details are requested.
+          readOnly: true
+      description: A persisted issue discovered from an agent's traces.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightDetails:
+      type: object
+      required:
+        - highlighted_traces
+        - linked_traces
+        - recommended_actions
+      properties:
+        highlighted_traces:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentInsightHighlightedTrace'
+          maxItems: 5
+          description: Up to 5 highlighted traces that provide evidence for this insight.
+        linked_traces:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentInsightLinkedTrace'
+          maxItems: 200
+          description: Up to 200 most recent traces linked to this insight as supporting evidence.
+        recommended_actions:
+          $ref: '#/components/schemas/AgentInsightRecommendedAction'
+          description: The recommended remediation for this insight.
+      description: Additional insight details. Omitted unless details are requested.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightEstimatedCost:
+      type: object
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: number
+          format: double
+          description: Estimated cost amount.
+        currency:
+          type: string
+          enum:
+            - USD
+          description: Currency for the estimated cost amount. Agent Insights estimates are reported in US dollars.
+      description: Estimated Agent Insights cost.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightHighlightedTrace:
+      type: object
+      required:
+        - trace_id
+        - summary
+        - duration_ms
+        - timestamp
+      properties:
+        trace_id:
+          type: string
+          description: The trace identifier.
+          readOnly: true
+        summary:
+          type: string
+          description: A short summary of the trace.
+        duration_ms:
+          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          description: The end-to-end duration of the trace in milliseconds.
+        total_tokens:
+          type: integer
+          format: int32
+          description: Aggregate input and output tokens reported across all model inference calls in this trace, including calls to different models. Intended for relative usage comparison, not cost estimation.
+        timestamp:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when the trace was recorded.
+      description: A highlighted trace that provides evidence for an agent insight.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightLinkedTrace:
+      type: object
+      required:
+        - trace_id
+        - timestamp
+      properties:
+        trace_id:
+          type: string
+          description: The trace identifier.
+          readOnly: true
+        timestamp:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when the trace was recorded.
+          readOnly: true
+      description: A lightweight trace reference linked to an agent insight as supporting evidence.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightMonitor:
+      type: object
+      required:
+        - id
+        - agent_name
+        - enabled
+        - run_interval_hours
+        - model_deployment_name
+        - suspension
+        - overview
+        - updated_at
+      properties:
+        id:
+          type: string
+          description: The monitor identifier.
+          readOnly: true
+        agent_name:
+          type: string
+          description: The agent this monitor analyzes. There can be only one monitor per agent.
+          readOnly: true
+        enabled:
+          type: boolean
+          description: Whether scheduled insight generation is armed for the monitor.
+          readOnly: true
+        run_interval_hours:
+          type: number
+          format: double
+          minimum: 3
+          maximum: 2160
+          description: Interval between scheduled insight runs, in hours.
+          readOnly: true
+        model_deployment_name:
+          type: string
+          description: The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'.
+          readOnly: true
+        next_scheduled_run_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The next time a scheduled agent insight run will start. Omitted when scheduled generation is disabled.
+          readOnly: true
+        estimated_cost:
+          $ref: '#/components/schemas/AgentInsightEstimatedCost'
+          description: Estimated cost accumulated by Agent Insights for this monitor.
+          readOnly: true
+        suspension:
+          anyOf:
+            - $ref: '#/components/schemas/AgentInsightSuspension'
+            - type: 'null'
+          description: Why the system suspended scheduled generation. Null when the monitor is not suspended.
+          readOnly: true
+        overview:
+          anyOf:
+            - $ref: '#/components/schemas/AgentInsightsOverview'
+            - type: 'null'
+          description: The effective overview, or null before an overview is available.
+          readOnly: true
+        updated_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when this monitor was last updated.
+          readOnly: true
+      description: A per-agent Agent Insights monitor that owns configuration, runs, and discovered insights.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightMonitorCreate:
+      type: object
+      required:
+        - agent_name
+        - model_deployment_name
+      properties:
+        agent_name:
+          type: string
+          description: The agent this monitor should analyze.
+        enabled:
+          type: boolean
+          description: Whether scheduled insight generation should be armed. Defaults to false.
+          default: false
+        run_interval_hours:
+          type: number
+          format: double
+          minimum: 3
+          maximum: 2160
+          description: Interval between scheduled insight runs, in hours. Defaults to 6.
+          default: 6
+        model_deployment_name:
+          type: string
+          description: The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'.
+      description: Fields accepted when creating an Agent Insights monitor for an agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightMonitorListItem:
+      type: object
+      required:
+        - id
+        - agent_name
+        - enabled
+        - run_interval_hours
+        - model_deployment_name
+        - suspension
+        - updated_at
+      properties:
+        id:
+          type: string
+          description: The monitor identifier.
+          readOnly: true
+        agent_name:
+          type: string
+          description: The agent this monitor analyzes. There can be only one monitor per agent.
+          readOnly: true
+        enabled:
+          type: boolean
+          description: Whether scheduled insight generation is armed for the monitor.
+          readOnly: true
+        run_interval_hours:
+          type: number
+          format: double
+          minimum: 3
+          maximum: 2160
+          description: Interval between scheduled insight runs, in hours.
+          readOnly: true
+        model_deployment_name:
+          type: string
+          description: The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'.
+          readOnly: true
+        next_scheduled_run_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The next time a scheduled agent insight run will start. Omitted when scheduled generation is disabled.
+          readOnly: true
+        estimated_cost:
+          $ref: '#/components/schemas/AgentInsightEstimatedCost'
+          description: Estimated cost accumulated by Agent Insights for this monitor.
+          readOnly: true
+        suspension:
+          anyOf:
+            - $ref: '#/components/schemas/AgentInsightSuspension'
+            - type: 'null'
+          description: Why the system suspended scheduled generation. Null when the monitor is not suspended.
+          readOnly: true
+        updated_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when this monitor was last updated.
+          readOnly: true
+      description: An Agent Insights monitor summary returned by list operations.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightMonitorUpdate:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether scheduled insight generation is armed for the monitor.
+        run_interval_hours:
+          type: number
+          format: double
+          minimum: 3
+          maximum: 2160
+          description: Interval between scheduled insight runs, in hours.
+        model_deployment_name:
+          type: string
+          description: The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'.
+        overview_override:
+          anyOf:
+            - $ref: '#/components/schemas/AgentInsightsOverviewOverride'
+            - type: 'null'
+          description: |-
+            Sets the effective user overview, or clears it when explicitly set to null. Omission leaves
+            the overview unchanged. This field cannot be combined with other monitor updates.
+      description: Fields that can be updated on an Agent Insights monitor.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightOverviewSource:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - generated
+            - user_override
+      description: Identifies where an Agent Insights overview came from.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightPromptSurface:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - instructions
+            - tool
+      description: The Prompt surface changed by a proposed fix.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightProposedFix:
+      type: object
+      required:
+        - kind
+        - text
+      properties:
+        kind:
+          $ref: '#/components/schemas/AgentInsightProposedFixKind'
+          description: The proposed-fix discriminator.
+        text:
+          type: string
+          description: The human-readable remediation guidance.
+        changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentInsightProposedFixChange'
+          description: The concrete changes. Omitted for a prose-only fix.
+      description: A recommended fix for an agent insight.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightProposedFixChange:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The source path changed by a code change.
+        language:
+          type: string
+          description: The language of the changed source path.
+        diff:
+          type: string
+          description: The unified diff for the changed source path.
+        surface:
+          $ref: '#/components/schemas/AgentInsightPromptSurface'
+          description: The Prompt surface changed by a Prompt change.
+        target:
+          type: string
+          description: The user-visible target within a Prompt surface, when needed.
+        old_value:
+          anyOf:
+            - {}
+            - type: 'null'
+          description: The bounded Prompt value before the change. Present for Prompt changes, including when null.
+        new_value:
+          anyOf:
+            - {}
+            - type: 'null'
+          description: The bounded Prompt value after the change. Present for Prompt changes, including when null.
+      description: A customer-renderable change in a proposed fix.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightProposedFixKind:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - prose
+            - code_change
+            - prompt_change
+      description: The customer-renderable kind of an agent insight's proposed fix.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightRecommendedAction:
+      type: object
+      required:
+        - proposed_fix
+      properties:
+        proposed_fix:
+          $ref: '#/components/schemas/AgentInsightProposedFix'
+          description: The single recommended fix for the issue represented by the insight.
+      description: The recommended remediation for an agent insight.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightRun:
+      type: object
+      required:
+        - id
+        - status
+        - monitor_id
+        - agent_name
+        - trigger
+        - created_at
+        - updated_at
+        - window_start
+        - window_end
+        - model_deployment_name
+      properties:
+        id:
+          type: string
+          description: Server-assigned unique identifier.
+          readOnly: true
+        inputs:
+          $ref: '#/components/schemas/AgentInsightRunCreate'
+          description: Caller-supplied inputs.
+        result:
+          $ref: '#/components/schemas/AgentInsightRunResult'
+          description: Result produced on success.
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/JobStatus'
+          description: Current lifecycle status.
+          readOnly: true
+        error:
+          $ref: '#/components/schemas/OpenAI.Error'
+          description: Error details — populated only on failure.
+          readOnly: true
+        monitor_id:
+          type: string
+          description: The Agent Insights monitor this run belongs to.
+          readOnly: true
+        agent_name:
+          type: string
+          description: The agent whose traces are analyzed by this run.
+          readOnly: true
+        trigger:
+          $ref: '#/components/schemas/AgentInsightRunTrigger'
+          description: The trigger that started the run.
+          readOnly: true
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when this run was created.
+          readOnly: true
+        updated_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when this run was last updated.
+          readOnly: true
+        window_start:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The start of the trace window analyzed by this run.
+          readOnly: true
+        window_end:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The end of the trace window analyzed by this run.
+          readOnly: true
+        started_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when this run started processing.
+          readOnly: true
+        completed_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when this run reached a terminal status.
+          readOnly: true
+        model_deployment_name:
+          type: string
+          description: The model deployment used to analyze traces for this run.
+          readOnly: true
+      description: A long-running run that analyzes one agent's traces and updates that agent's insights.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightRunCreate:
+      type: object
+      properties:
+        lookback_hours:
+          type: number
+          format: double
+          maximum: 2160
+          description: Optional finite positive number of hours of trace history to analyze, up to 2,160. Defaults to 168.
+          exclusiveMinimum: 0
+          default: 168
+      description: Inputs used when creating an agent insight run.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightRunResult:
+      type: object
+      required:
+        - traces_in_window
+        - traces_analyzed
+        - insights_created
+        - insights_updated
+        - insights_reopened
+        - token_usage
+      properties:
+        traces_in_window:
+          type: integer
+          format: int32
+          description: The number of traces in the analyzed time window.
+        traces_analyzed:
+          type: integer
+          format: int32
+          description: The number of traces analyzed by the run.
+        insights_created:
+          type: integer
+          format: int32
+          description: The number of insights created by the run.
+        insights_updated:
+          type: integer
+          format: int32
+          description: The number of insights updated by the run.
+        insights_reopened:
+          type: integer
+          format: int32
+          description: The number of insights reopened by the run.
+        token_usage:
+          $ref: '#/components/schemas/AgentInsightTokenUsage'
+          description: Token usage for the run's insight-generation analysis.
+      description: Result statistics produced when an agent insight run succeeds.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightRunTrigger:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - on_demand
+            - scheduled
+      description: The trigger that started an agent insight run.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightSeverity:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - high
+            - medium
+            - low
+      description: The severity of an agent insight.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - active
+            - resolved
+            - ignored
+      description: The lifecycle status of an agent insight.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightSuspension:
+      type: object
+      required:
+        - code
+        - message
+        - occurred_at
+      properties:
+        code:
+          type: string
+          description: Stable, machine-readable suspension category.
+        message:
+          type: string
+          description: Human-readable description of the suspension.
+        occurred_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when the suspension occurred.
+        details:
+          type: object
+          unevaluatedProperties: {}
+          description: Additional reason-specific suspension details.
+      description: Structured reason why scheduled generation is suspended for a monitor.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightTokenUsage:
+      type: object
+      required:
+        - input_tokens
+        - output_tokens
+        - total_tokens
+      properties:
+        input_tokens:
+          type: integer
+          format: int32
+          description: The number of input tokens used by the run.
+        output_tokens:
+          type: integer
+          format: int32
+          description: The number of output tokens used by the run.
+        cached_tokens:
+          type: integer
+          format: int32
+          description: The number of input tokens served from cache.
+        total_tokens:
+          type: integer
+          format: int32
+          description: The total number of tokens used by the run.
+      description: Token usage for an Agent Insights run.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightUpdate:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/AgentInsightStatus'
+          description: The lifecycle status to apply to the insight.
+      description: Fields that can be updated on an agent insight.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightsOverview:
+      type: object
+      required:
+        - content
+        - source
+        - updated_at
+      properties:
+        content:
+          type: string
+          description: The overview content.
+        source:
+          $ref: '#/components/schemas/AgentInsightOverviewSource'
+          description: Where the effective overview came from.
+        updated_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when this overview was last updated.
+      description: The effective overview for an Agent Insights monitor.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightsOverviewOverride:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          description: The nonblank overview content, limited to 64 KiB when encoded as UTF-8.
+      description: A user-provided overview that becomes effective immediately and seeds the next generation.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentKind:
       anyOf:
         - type: string
@@ -42186,6 +43944,12 @@ components:
         agent_endpoint:
           $ref: '#/components/schemas/AgentEndpointConfig'
           description: The endpoint configuration for the agent
+        digital_worker_type:
+          $ref: '#/components/schemas/DigitalWorkerType'
+          description: (Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DigitalWorker=V1Preview
         instance_identity:
           $ref: '#/components/schemas/AgentIdentity'
           description: The instance identity of the agent
@@ -45094,9 +46858,16 @@ components:
               - ExternalAgents=V1Preview
               - VoiceAgents=V1Preview
               - DraftAgents=V1Preview
+              - DigitalWorker=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
+        digital_worker_type:
+          $ref: '#/components/schemas/DigitalWorkerType'
+          description: (Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DigitalWorker=V1Preview
         draft:
           type: boolean
           description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
@@ -45116,6 +46887,7 @@ components:
           - ExternalAgents=V1Preview
           - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
+          - DigitalWorker=V1Preview
     CreateAgentSessionRequest:
       type: object
       required:
@@ -45228,9 +47000,16 @@ components:
               - ExternalAgents=V1Preview
               - VoiceAgents=V1Preview
               - DraftAgents=V1Preview
+              - DigitalWorker=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
+        digital_worker_type:
+          $ref: '#/components/schemas/DigitalWorkerType'
+          description: (Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DigitalWorker=V1Preview
         draft:
           type: boolean
           description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
@@ -46165,6 +47944,13 @@ components:
       allOf:
         - $ref: '#/components/schemas/Message'
       description: A message authored by a developer to guide the model during evaluation.
+    DigitalWorkerType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - m365
+      description: The type of digital worker.
     Dimension:
       type: object
       required:
@@ -50268,6 +52054,185 @@ components:
           user: '#/components/schemas/UserMessage'
           assistant: '#/components/schemas/AssistantMessage'
       description: Abstract base model representing a single message in a conversation.
+    Microsoft365PermissionScopes:
+      type: object
+      required:
+        - resourceAppId
+        - scopes
+      properties:
+        resourceAppId:
+          type: string
+          description: Application id of the resource that exposes the requested delegated scopes.
+        scopes:
+          type: array
+          items:
+            type: string
+          description: Delegated scope names requested from the resource application. Must not be empty.
+      description: A set of delegated permission scopes requested from a single resource application.
+    Microsoft365PublishDefaults:
+      type: object
+      properties:
+        appPublishScope:
+          $ref: '#/components/schemas/Microsoft365PublishScope'
+          description: The publish scope.
+        agentName:
+          type: string
+          description: The agent name.
+        agentDisplayName:
+          type: string
+          description: |-
+            The user-facing display name for the agent. Defaults to the agent name if not previously
+            overridden.
+        appRegistrationClientId:
+          type: string
+          description: The app-registration client id associated with the agent.
+        botServiceArmId:
+          type: string
+          description: ARM resource id of the Azure Bot Service associated with the previously-published app, if any.
+        appVersion:
+          type: string
+          description: The most recently published app version.
+        recommendedNextAppVersion:
+          type: string
+          description: The recommended next app version (the most recent app version, incremented).
+        titleId:
+          type: string
+          description: The Microsoft 365 title id of the previously-published app, if any.
+        teamsAppId:
+          type: string
+          description: The Microsoft Teams app id of the previously-published app, if any.
+        shortDescription:
+          type: string
+          description: Short, one-line description shown in the Teams app listing.
+        fullDescription:
+          type: string
+          description: Full description shown on the Teams app details page.
+        developerName:
+          type: string
+          description: Display name of the developer / publisher.
+        developerWebsiteUrl:
+          type: string
+          format: uri
+          description: Developer / publisher website URL.
+        privacyUrl:
+          type: string
+          format: uri
+          description: Privacy policy URL.
+        termsOfUseUrl:
+          type: string
+          format: uri
+          description: Terms-of-use URL.
+      description: |-
+        Default and previously-published values used to pre-populate a Microsoft 365 publish request for a
+        Foundry agent.
+    Microsoft365PublishRequest:
+      type: object
+      required:
+        - publishScope
+      properties:
+        agentDisplayName:
+          type: string
+          description: |-
+            Display name used as the published Teams app name. When omitted, the agent name from the route is
+            used.
+        botServiceArmId:
+          type: string
+          description: |-
+            ARM resource id of the Azure Bot Service that fronts this agent in Microsoft Teams. Required for
+            workspaces on the default bot-based Teams backend; optional for workspaces on the API-based backend.
+            Must not be supplied when `publishAsAutopilot` is true.
+        publishAsAutopilot:
+          type: boolean
+          description: |-
+            When true, the agent is published as an autopilot (digital worker) agent: the bot id is taken from
+            the agent's blueprint identity and the generated Teams manifest is marked as a digital worker.
+        accessBoundaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivityProtocolAccessBoundary'
+          description: |-
+            Activity-protocol access boundaries to apply to the agent when publishing as an autopilot agent.
+            An empty list clears the existing boundaries. When omitted, the existing boundaries are left
+            unchanged.
+        optionalPermissionScopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Microsoft365PermissionScopes'
+          description: |-
+            Exact selection of delegated permission scopes to grant to the autopilot blueprint. May only be
+            supplied when `publishAsAutopilot` is true. When omitted or empty, the platform's default
+            permission set is used. Mandatory platform permissions are always granted and are not affected by
+            this value.
+        publishScope:
+          $ref: '#/components/schemas/Microsoft365PublishScope'
+          description: Publish scope for the Teams app.
+        canRespondWithoutMention:
+          type: boolean
+          description: |-
+            Controls how the published agent responds to Teams messages: when true it responds to all messages
+            on its surfaces, when false only when it is at-mentioned. When omitted, the agent's existing Teams
+            message-notification setting is left unchanged.
+        appVersion:
+          type: string
+          description: |-
+            App version (for example `1.2.3`) written into the Teams manifest. May contain only digits and
+            periods, must not start with `0`, and must end with a digit. When omitted, a platform default is
+            used.
+        shortDescription:
+          type: string
+          description: Short, one-line description shown in the Teams app listing.
+        fullDescription:
+          type: string
+          description: Full description shown on the Teams app details page.
+        developerName:
+          type: string
+          description: Display name of the developer / publisher shown in the Teams app listing.
+        developerWebsiteUrl:
+          type: string
+          format: uri
+          description: Developer / publisher website URL shown in the Teams app listing. Must be an https URL.
+        privacyUrl:
+          type: string
+          format: uri
+          description: Privacy policy URL shown in the Teams app listing. Must be an http or https URL.
+        termsOfUseUrl:
+          type: string
+          format: uri
+          description: Terms-of-use URL shown in the Teams app listing.
+        colorIconBase64:
+          type: string
+          description: |-
+            Optional base64-encoded PNG used as the color (full-bleed) icon in the Teams app package. Must be a
+            192x192 PNG (perfect square, no border or rounded corners). Max 1 MB after decode. When omitted, the
+            platform default color icon is used.
+        outlineIconBase64:
+          type: string
+          description: |-
+            Optional base64-encoded PNG used as the outline icon in the Teams app package. Must be a 32x32 PNG.
+            Max 1 MB after decode. When omitted, the platform default outline icon is used.
+      description: |-
+        Request body for publishing a Foundry agent to Microsoft 365 / Microsoft Teams. The agent is
+        identified by the `agent_name` in the route and resolved server-side, so the agent id, bot id, and
+        app-registration id are not supplied in the body.
+    Microsoft365PublishResponse:
+      type: object
+      properties:
+        titleId:
+          type: string
+          description: The Microsoft 365 title id of the published app.
+        teamsAppId:
+          type: string
+          description: The Microsoft Teams app id of the published app.
+      description: Response from publishing an agent to Microsoft 365 / Microsoft Teams.
+    Microsoft365PublishScope:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - Personal
+            - Shared
+            - Tenant
+      description: The publish scope for the generated Microsoft Teams app.
     MicrosoftFabricPreviewTool:
       type: object
       required:
@@ -70020,9 +71985,6 @@ components:
           mcp_call: '#/components/schemas/OpenAI.RealtimeMCPToolCall'
           mcp_approval_request: '#/components/schemas/OpenAI.RealtimeMCPApprovalRequest'
       description: A single item within a Realtime conversation.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemFunctionCall:
       type: object
       required:
@@ -70061,21 +72023,10 @@ components:
         arguments:
           type: string
           description: 'The arguments of the function call. This is a JSON-encoded string representing the arguments passed to the function, for example `{"arg1": "value1", "arg2": 42}`.'
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A function call item in a Realtime conversation.
       title: Realtime function call item
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemFunctionCallOutput:
       type: object
       required:
@@ -70111,24 +72062,10 @@ components:
         output:
           type: string
           description: The output of the function call, this is free text and can contain any information or simply be empty.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-        name:
-          type: string
-          description: "The name of the function that was called. A Foundry extension: OpenAI's function_call_output does not carry the function name, only `call_id`."
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A function call output item in a Realtime conversation.
       title: Realtime function call output item
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemType:
       anyOf:
         - type: string
@@ -70301,21 +72238,10 @@ components:
         arguments:
           type: string
           description: A JSON string of arguments for the tool.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A Realtime item requesting human approval of a tool invocation.
       title: Realtime MCP approval request
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPApprovalResponse:
       type: object
       required:
@@ -70343,21 +72269,10 @@ components:
           anyOf:
             - type: string
             - type: 'null'
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A Realtime item responding to an MCP approval request.
       title: Realtime MCP approval response
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPError:
       type: object
       required:
@@ -70414,21 +72329,10 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.MCPListToolsTool'
           description: The tools available on the server.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A Realtime item listing tools available on an MCP server.
       title: Realtime MCP list tools
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPProtocolError:
       type: object
       required:
@@ -70485,21 +72389,10 @@ components:
             - type: 'null'
         error:
           $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A Realtime item representing an invocation of a tool on an MCP server.
       title: Realtime MCP tool call
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPToolExecutionError:
       type: object
       required:
@@ -78665,7 +80558,76 @@ components:
         rai_policy_name:
           type: string
           description: The name of the RAI policy to apply.
+        invocations_moderation:
+          $ref: '#/components/schemas/RaiInvocationModeration'
+          description: |-
+            Author-declared configuration telling the platform where user/agent text lives in the
+            agent-defined invocations request/response bodies, so content-safety guardrails can extract
+            and moderate it. Optional; a rai_config without it leaves the invocations path without
+            content-safety moderation.
       description: Configuration for Responsible AI (RAI) content filtering and safety features.
+    RaiInvocationContentType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - json
+            - text
+      description: How an invocations request/response body is parsed to locate text for content-safety moderation.
+    RaiInvocationMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - non_streaming
+            - streaming
+            - both
+      description: Author-declared response shape for the invocations protocol.
+    RaiInvocationModeration:
+      type: object
+      required:
+        - response_mode
+      properties:
+        input_content_type:
+          $ref: '#/components/schemas/RaiInvocationContentType'
+          description: How the REQUEST body is parsed. When omitted, the service defaults to `json`.
+          default: json
+        output_content_type:
+          $ref: '#/components/schemas/RaiInvocationContentType'
+          description: How the RESPONSE body is parsed. When omitted, the service defaults to `json`.
+          default: json
+        response_mode:
+          $ref: '#/components/schemas/RaiInvocationMode'
+          description: Author-declared response shape; drives which output gate runs and which fields are required.
+        input_paths:
+          type: array
+          items:
+            type: string
+          description: Path(s) to user text in the REQUEST body. Required when input_content_type is `json`.
+        output_paths:
+          type: array
+          items:
+            type: string
+          description: Path(s) to agent text in a NON-STREAMING response body. Required when response_mode is non_streaming/both and output_content_type is `json`.
+        stream_selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/RaiSseTextSelector'
+          description: One SSE event->field selector per event type carrying text. Required when response_mode is streaming/both and output_content_type is `json`.
+      description: Declares where request/response text lives so content-safety guardrails can extract it.
+    RaiSseTextSelector:
+      type: object
+      required:
+        - event_type
+      properties:
+        event_type:
+          type: string
+          description: The SSE event `type` value that carries text.
+        text_field:
+          type: string
+          description: The field on a matched event holding the text delta. When omitted, the service defaults to `delta`.
+          default: delta
+      description: An SSE event-type to text-field selector for streaming invocation output.
     RecurrenceSchedule:
       type: object
       required:
@@ -79051,6 +81013,17 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V2Preview
+    RoutineAuthorization:
+      type: object
+      properties:
+        identity:
+          $ref: '#/components/schemas/RoutineDispatchIdentity'
+          description: The identity used when dispatching the routine. Defaults to agent when omitted; set to creator only when the customer opts in to creator identity dispatch.
+          default: agent
+      description: Optional authorization configuration for a routine dispatch.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V2Preview
     RoutineCreateOrUpdateRequest:
       type: object
       properties:
@@ -79069,7 +81042,21 @@ components:
         action:
           $ref: '#/components/schemas/RoutineAction'
           description: The action executed when the routine fires.
+        authorization:
+          $ref: '#/components/schemas/RoutineAuthorization'
+          description: Optional authorization configuration for dispatching a newly created routine. Ignored when updating an existing routine.
       description: The request body used to create or update a routine.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V2Preview
+    RoutineDispatchIdentity:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - agent
+            - creator
+      description: The supported identities for routine dispatch authorization.
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V2Preview
@@ -81075,6 +83062,7 @@ components:
               - ExternalAgents=V1Preview
               - VoiceAgents=V1Preview
               - DraftAgents=V1Preview
+              - DigitalWorker=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
@@ -81084,6 +83072,7 @@ components:
           - ExternalAgents=V1Preview
           - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
+          - DigitalWorker=V1Preview
     UpdateEvalParametersBody:
       type: object
       properties:
@@ -82723,68 +84712,7 @@ components:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the response completed.
       allOf:
-        - type: object
-          properties:
-            id:
-              type: string
-              description: The unique ID of the response, will look like `resp_1234`.
-            object:
-              type: string
-              enum:
-                - realtime.response
-              description: The object type, must be `realtime.response`.
-              x-stainless-const: true
-            status:
-              type: string
-              enum:
-                - completed
-                - cancelled
-                - failed
-                - incomplete
-                - in_progress
-              description: |-
-                The final status of the response (`completed`, `cancelled`, `failed`, or
-                  `incomplete`, `in_progress`).
-            status_details:
-              $ref: '#/components/schemas/OpenAI.RealtimeResponseStatusDetails'
-              description: Additional details about the status.
-            usage:
-              $ref: '#/components/schemas/OpenAI.RealtimeResponseUsage'
-              description: |-
-                Usage statistics for the Response, this will correspond to billing. A
-                  Realtime API session will maintain a conversation context and append new
-                  Items to the Conversation, thus output from previous turns (text and
-                  audio tokens) will become the input for later turns.
-            conversation_id:
-              type: string
-              description: |-
-                Which conversation the response is added to, determined by the `conversation`
-                  field in the `response.create` event. If `auto`, the response will be added to
-                  the default conversation and the value of `conversation_id` will be an id like
-                  `conv_1234`. If `none`, the response will not be added to any conversation and
-                  the value of `conversation_id` will be `null`. If responses are being triggered
-                  automatically by VAD the response will be added to the default conversation
-            output_modalities:
-              type: array
-              items:
-                type: string
-                enum:
-                  - text
-                  - audio
-              description: |-
-                The set of modalities the model used to respond, currently the only possible values are
-                  `[\"audio\"]`, `[\"text\"]`. Audio output always include a text transcript. Setting the
-                  output to mode `text` will disable audio output from the model.
-            max_output_tokens:
-              oneOf:
-                - $ref: '#/components/schemas/OpenAI.integer'
-                - type: string
-                  enum:
-                    - inf
-              description: |-
-                Maximum number of output tokens for a single assistant response,
-                  inclusive of tool calls, that was used in this response.
-          description: The template for omitting properties.
+        - $ref: '#/components/schemas/VoiceResponseBase'
       description: |-
         A persisted voice response representing one model inference turn within a conversation. In list results the
         `output` projection may be omitted; retrieve the
@@ -82823,6 +84751,69 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    VoiceResponseBase:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the response, will look like `resp_1234`.
+        object:
+          type: string
+          enum:
+            - realtime.response
+          description: The object type, must be `realtime.response`.
+          x-stainless-const: true
+        status:
+          type: string
+          enum:
+            - completed
+            - cancelled
+            - failed
+            - incomplete
+            - in_progress
+          description: |-
+            The final status of the response (`completed`, `cancelled`, `failed`, or
+              `incomplete`, `in_progress`).
+        status_details:
+          $ref: '#/components/schemas/OpenAI.RealtimeResponseStatusDetails'
+          description: Additional details about the status.
+        usage:
+          $ref: '#/components/schemas/OpenAI.RealtimeResponseUsage'
+          description: |-
+            Usage statistics for the Response, this will correspond to billing. A
+              Realtime API session will maintain a conversation context and append new
+              Items to the Conversation, thus output from previous turns (text and
+              audio tokens) will become the input for later turns.
+        conversation_id:
+          type: string
+          description: |-
+            Which conversation the response is added to, determined by the `conversation`
+              field in the `response.create` event. If `auto`, the response will be added to
+              the default conversation and the value of `conversation_id` will be an id like
+              `conv_1234`. If `none`, the response will not be added to any conversation and
+              the value of `conversation_id` will be `null`. If responses are being triggered
+              automatically by VAD the response will be added to the default conversation
+        output_modalities:
+          type: array
+          items:
+            type: string
+            enum:
+              - text
+              - audio
+          description: |-
+            The set of modalities the model used to respond, currently the only possible values are
+              `[\"audio\"]`, `[\"text\"]`. Audio output always include a text transcript. Setting the
+              output to mode `text` will disable audio output from the model.
+        max_output_tokens:
+          oneOf:
+            - $ref: '#/components/schemas/OpenAI.integer'
+            - type: string
+              enum:
+                - inf
+          description: |-
+            Maximum number of output tokens for a single assistant response,
+              inclusive of tool calls, that was used in this response.
+      description: Properties shared by persisted voice responses.
     VoiceType:
       anyOf:
         - type: string

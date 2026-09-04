@@ -5,16 +5,18 @@
 
 // Stable operations (GA routes) with preview features (optional opt-in request headers)
 import "../agents/routes.tsp";
-import "../voice-agents/routes.tsp";
 import "../evaluation-rules/routes.tsp";
 
 // Stable operation (GA routes) without preview features
+import "../agents-microsoft365/routes.tsp";
 import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
 import "../deployments/routes.tsp";
 import "../indexes/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
+// import "../voice-agents/routes.tsp";
+import "../agent-insights/routes.tsp";
 import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
@@ -32,6 +34,7 @@ import "../agents-optimization/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "../sdk-common/ops-relocation-agents.tsp";
+import "../sdk-common/ops-relocation-agent-insights.tsp";
 import "../sdk-common/ops-relocation-projects.tsp";
 import "../sdk-common/error.default.tsp";
 
@@ -80,6 +83,29 @@ using Azure.AI.Projects;
   "python"
 );
 
+@@clientName(
+  Microsoft365Publishing.publishAgentToMicrosoft365,
+  "publish_to_microsoft365"
+);
+@@clientName(
+  Microsoft365Publishing.getMicrosoft365AppPackage,
+  "get_microsoft365_package"
+);
+@@clientName(
+  Microsoft365Publishing.getMicrosoft365PublishDefaults,
+  "get_microsoft365_publish_defaults"
+);
+@@clientName(
+  Microsoft365PublishResponse,
+  "Microsoft365PublishResult",
+  "python"
+);
+@@clientName(
+  Microsoft365AppPackageResponse,
+  "Microsoft365AppPackageResult",
+  "python"
+);
+
 // Exclude these operations entirely from the Python SDK.
 // Note that JavaScript SDK already shipped 2.0.0 with these, so they can't be removed.
 @@scope(Agents.createAgent, "!(python)");
@@ -94,6 +120,9 @@ using Azure.AI.Projects;
 
 @@clientName(AgentObject, "Agent", "javascript");
 @@clientName(AgentVersionObject, "AgentVersion", "javascript");
+
+// Preserve the existing JavaScript operation name.
+@@clientName(EvaluationRules.delete, "delete", "javascript");
 
 // Python emitter creates enum values ENUM_1_G = "1g", ENUM_4_G = "4g" etc. Override it here as below.
 @@clientName(OpenAI.ContainerMemoryLimit.`1g`, exact("MEMORY_1GB"), "python");
@@ -267,6 +296,9 @@ using Azure.AI.Projects;
 // Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
 @@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
 
+@@clientName(OpenAI.RealtimeMcpErrorType, "RealtimeMCPErrorType", "javascript");
+@@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMCPHttpError", "javascript");
+
 // Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
 @@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
 @@clientName(
@@ -437,8 +469,18 @@ using Azure.AI.Projects;
 );
 
 // --------------------------------------------------------------------------------
+// Beta Agent Insights sub‐client
+// --------------------------------------------------------------------------------
+
+// Override default JS emitter behavior that emits "delete<model>". ("delete" is a reserved word, but we want to use namespaced "delete" for JS).
+@@clientName(AgentInsightMonitors.delete, "delete", "javascript");
+
+// --------------------------------------------------------------------------------
 // Beta Schedules sub‐client
 // --------------------------------------------------------------------------------
+
+// Override default JS emitter behavior that emits "delete<model>". ("delete" is a reserved word, but we want to use namespaced "delete" for JS).
+@@clientName(Schedules.delete, "delete", "javascript");
 
 @@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
 @@clientName(Schedule.id, "schedule_id");
@@ -475,6 +517,9 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Beta Evaluation Taxonomies sub-client
 // --------------------------------------------------------------------------------
+
+// Override default JS emitter behavior that emits "delete<model>". ("delete" is a reserved word, but we want to use namespaced "delete" for JS).
+@@clientName(EvaluationTaxonomies.delete, "delete", "javascript");
 
 // Note that we can't rename it in src\openai-evaluations\models.tsp, since in
 // src\evaluations\models.tsp we already define EvaluationTarget (not for v1).
