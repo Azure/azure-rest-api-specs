@@ -250,7 +250,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientOption(Storage.Queues, "includeRootSlash", false, "python,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy sdks"
-@@Legacy.disablePageable(Service.getQueues, "python,javascript,csharp");
+@@Legacy.disablePageable(Service.getQueues, "python,javascript,csharp,java");
 
 @@alternateType(UserDelegationKey.signedExpiry, string, "python");
 @@alternateType(UserDelegationKey.signedStart, string, "python");
