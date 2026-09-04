@@ -1,0 +1,36 @@
+{
+  "operationId": "SuiteOffers_GetProviderStatus",
+  "title": "Get suite offer provider status.",
+  "parameters": {
+    "api-version": "2026-01-15-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "providerId": "provider1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "provider1",
+        "currentAvailability": "Available",
+        "targets": [
+          {
+            "id": "provider1.target1",
+            "currentAvailability": "Available",
+            "averageQueueTime": 1679,
+            "statusPage": "https://status.provider1.example",
+            "numQubits": 80,
+            "targetProfile": "unrestricted",
+            "metadata": {
+              "key": "value"
+            }
+          },
+          {
+            "id": "provider1.target2",
+            "currentAvailability": "Available",
+            "averageQueueTime": 0,
+            "statusPage": "https://status.provider1.example"
+          }
+        ]
+      }
+    }
+  }
+}

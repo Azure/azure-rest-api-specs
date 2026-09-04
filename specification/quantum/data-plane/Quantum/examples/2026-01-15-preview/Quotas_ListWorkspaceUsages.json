@@ -1,0 +1,28 @@
+{
+  "operationId": "Quotas_ListWorkspaceUsages",
+  "title": "Get workspace quota usages.",
+  "parameters": {
+    "api-version": "2026-01-15-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "myresourcegroup",
+    "workspaceName": "myworkspace",
+    "providerId": "Microsoft"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "providerId": "Microsoft",
+            "scope": "WorkspaceTarget",
+            "targetId": "microsoft.estimator",
+            "usage": {
+              "standardMinutesLifetime": 42.0
+            },
+            "lastModifiedTime": "2026-01-11T08:15:00Z"
+          }
+        ]
+      }
+    }
+  }
+}

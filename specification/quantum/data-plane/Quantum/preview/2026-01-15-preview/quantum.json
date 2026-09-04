@@ -66,6 +66,117 @@
   },
   "tags": [],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Quantum/suiteOffers/{providerId}/providerStatus": {
+      "get": {
+        "operationId": "SuiteOffers_GetProviderStatus",
+        "description": "Get the provider status, including target statuses, for the given suite offer provider in the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "providerId",
+            "in": "path",
+            "description": "The unique identifier for the provider.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProviderStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get suite offer provider status.": {
+            "$ref": "./examples/SuiteOffers_GetProviderStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Quantum/suiteOffers/{providerId}/quotaUsages": {
+      "get": {
+        "operationId": "SuiteOffers_ListQuotaUsages",
+        "description": "List quota usages for the given suite offer provider in the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "providerId",
+            "in": "path",
+            "description": "The unique identifier for the provider.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedQuotaUsageData"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get suite offer quota usages.": {
+            "$ref": "./examples/SuiteOffers_ListQuotaUsages.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs": {
       "get": {
         "operationId": "Jobs_List",
@@ -623,6 +734,61 @@
         "x-ms-examples": {
           "Get provider and target statuses.": {
             "$ref": "./examples/Providers_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/quotaUsages": {
+      "get": {
+        "operationId": "Quotas_ListWorkspaceUsages",
+        "description": "List quota usages for the given workspace. This operation is only available for v2 workspaces.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CommonParams.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/CommonParams.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/CommonParams.workspaceName"
+          },
+          {
+            "name": "providerId",
+            "in": "query",
+            "description": "The unique identifier for the provider to get quota usages for.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedQuotaUsageData"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get workspace quota usages.": {
+            "$ref": "./examples/Quotas_ListWorkspaceUsages.json"
           }
         },
         "x-ms-pageable": {
@@ -2010,6 +2176,27 @@
         "value"
       ]
     },
+    "PagedQuotaUsageData": {
+      "type": "object",
+      "description": "Paged collection of QuotaUsageData items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QuotaUsageData items on this page",
+          "items": {
+            "$ref": "#/definitions/QuotaUsageData"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PagedSessionDetails": {
       "type": "object",
       "description": "Paged collection of SessionDetails items",
@@ -2182,6 +2369,52 @@
         "period"
       ]
     },
+    "QuotaUsageData": {
+      "type": "object",
+      "description": "Quota usage data for a suite offer provider.",
+      "properties": {
+        "providerId": {
+          "type": "string",
+          "description": "The unique identifier for the provider.",
+          "readOnly": true
+        },
+        "scope": {
+          "$ref": "#/definitions/SuiteOfferScope",
+          "description": "The scope at which the quota usage is applied.",
+          "readOnly": true
+        },
+        "targetId": {
+          "type": "string",
+          "description": "The unique identifier for the target, when the usage is scoped to a target.",
+          "readOnly": true
+        },
+        "usage": {
+          "$ref": "#/definitions/Usage",
+          "description": "The accumulated quota usage values.",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the quota usage was last modified.",
+          "readOnly": true
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Additional metadata associated with the quota usage.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "providerId",
+        "scope",
+        "usage",
+        "lastModifiedTime"
+      ]
+    },
     "SasUriResponse": {
       "type": "object",
       "description": "SAS URI operation response.",
@@ -2298,6 +2531,36 @@
             "name": "TimedOut",
             "value": "TimedOut",
             "description": "The session timed out."
+          }
+        ]
+      }
+    },
+    "SuiteOfferScope": {
+      "type": "string",
+      "description": "The scope at which the suite offer quota usage is applied.",
+      "enum": [
+        "Target",
+        "SubscriptionTarget",
+        "WorkspaceTarget"
+      ],
+      "x-ms-enum": {
+        "name": "SuiteOfferScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Target",
+            "value": "Target",
+            "description": "The usage is applied at the target level."
+          },
+          {
+            "name": "SubscriptionTarget",
+            "value": "SubscriptionTarget",
+            "description": "The usage is applied at the subscription target level."
+          },
+          {
+            "name": "WorkspaceTarget",
+            "value": "WorkspaceTarget",
+            "description": "The usage is applied at the workspace target level."
           }
         ]
       }
