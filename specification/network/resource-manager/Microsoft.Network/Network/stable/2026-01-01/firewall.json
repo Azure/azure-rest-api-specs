@@ -305,6 +305,9 @@
           "Create Azure Firewall With AFC Control Plane": {
             "$ref": "./examples/AzureFirewallPutWithAfcConfiguration.json"
           },
+          "Create Azure Firewall With AI Security Add-On": {
+            "$ref": "./examples/AzureFirewallPutWithAiSecurityAddOn.json"
+          },
           "Create Azure Firewall With Additional Properties": {
             "$ref": "./examples/AzureFirewallPutWithAdditionalProperties.json"
           },
@@ -1376,6 +1379,10 @@
           "$ref": "#/definitions/AfcConfiguration",
           "description": "AFC configuration for the Azure Firewall.",
           "readOnly": true
+        },
+        "aiSecurityAddOn": {
+          "type": "boolean",
+          "description": "Indicates whether the AI security add-on is enabled for the Azure Firewall."
         }
       }
     },

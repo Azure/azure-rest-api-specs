@@ -9815,6 +9815,12 @@ model AzureFirewallPropertiesFormat {
   @added(Versions.v2025_07_01)
   @visibility(Lifecycle.Read)
   afcConfiguration?: AfcConfiguration;
+
+  /**
+   * Indicates whether the AI security add-on is enabled for the Azure Firewall.
+   */
+  @added(Versions.v2026_01_01)
+  aiSecurityAddOn?: boolean;
 }
 
 /**

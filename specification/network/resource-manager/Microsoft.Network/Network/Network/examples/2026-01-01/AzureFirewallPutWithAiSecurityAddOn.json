@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "azureFirewallName": "azurefirewall",
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "aiSecurityAddOn": true,
+        "ipConfigurations": [
+          {
+            "name": "azureFirewallIpConfiguration",
+            "properties": {
+              "publicIPAddress": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/pipName"
+              },
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/AzureFirewallSubnet"
+              }
+            }
+          }
+        ],
+        "sku": {
+          "name": "AZFW_VNet",
+          "tier": "Premium"
+        },
+        "threatIntelMode": "Alert"
+      },
+      "tags": {
+        "key1": "value1"
+      },
+      "zones": []
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "azurefirewall",
+        "type": "Microsoft.Network/azureFirewalls",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azurefirewall",
+        "location": "West US",
+        "properties": {
+          "aiSecurityAddOn": true,
+          "ipConfigurations": [
+            {
+              "name": "azureFirewallIpConfiguration",
+              "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azurefirewall/ipConfigurations/azureFirewallIpConfiguration",
+              "properties": {
+                "privateIPAddress": "10.0.0.0",
+                "provisioningState": "Succeeded",
+                "publicIPAddress": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/pipName"
+                },
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/AzureFirewallSubnet"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "sku": {
+            "name": "AZFW_VNet",
+            "tier": "Premium"
+          },
+          "threatIntelMode": "Alert"
+        },
+        "tags": {
+          "key1": "value1"
+        },
+        "zones": []
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/00000000-0000-0000-0000-000000000000?api-version=2026-01-01",
+        "Retry-After": 10
+      },
+      "body": {
+        "name": "azurefirewall",
+        "type": "Microsoft.Network/azureFirewalls",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azurefirewall",
+        "location": "West US",
+        "properties": {
+          "aiSecurityAddOn": true,
+          "ipConfigurations": [
+            {
+              "name": "azureFirewallIpConfiguration",
+              "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azurefirewall/ipConfigurations/azureFirewallIpConfiguration",
+              "properties": {
+                "privateIPAddress": "10.0.0.0",
+                "provisioningState": "Succeeded",
+                "publicIPAddress": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/pipName"
+                },
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/AzureFirewallSubnet"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "sku": {
+            "name": "AZFW_VNet",
+            "tier": "Premium"
+          },
+          "threatIntelMode": "Alert"
+        },
+        "tags": {
+          "key1": "value1"
+        },
+        "zones": []
+      }
+    }
+  },
+  "operationId": "AzureFirewalls_CreateOrUpdate",
+  "title": "Create Azure Firewall With AI Security Add-On"
+}
