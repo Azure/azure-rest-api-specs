@@ -35,6 +35,16 @@ export default async function postSuppressionsResults({ github, context, core })
     repo,
     pull_number: issue_number,
   });
+
+  // A workflow for an older commit can finish after a newer synchronize event.
+  // Never let that stale run overwrite the sticky comment for the current PR head.
+  if (pr.head.sha !== head_sha) {
+    core.info(
+      `Skipping stale TypeSpec suppressions result for ${head_sha}; current PR head is ${pr.head.sha}.`,
+    );
+    return;
+  }
+
   /** @type {string[]} */
   const labelNames = pr.labels.map((/** @type {{ name?: string }} */ label) => label.name ?? "");
 
