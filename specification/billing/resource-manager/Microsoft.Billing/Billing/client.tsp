@@ -271,6 +271,11 @@ using Microsoft.Billing;
   "csharp"
 );
 @@clientName(
+  BillingSubscriptionAliasProperties.provisioningState,
+  "SubscriptionAliasProvisioningState",
+  "csharp"
+);
+@@clientName(
   BillingSubscriptionProperties.beneficiaryTenantId,
   "BeneficiaryTenantId",
   "csharp"
