@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2025-03-30",
+    "artifactStoreName": "TestArtifactStore",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "managedResourceGroupConfiguration": {
+          "name": "testRg",
+          "location": "eastus"
+        },
+        "replicationStrategy": "SingleReplication",
+        "storeType": "AzureContainerRegistry"
+      }
+    },
+    "publisherName": "TestPublisher",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestArtifactStore",
+        "type": "microsoft.hybridnetwork/publishers/artifactStores",
+        "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
+        "location": "eastus",
+        "properties": {
+          "managedResourceGroupConfiguration": {
+            "name": "testRg",
+            "location": "eastus"
+          },
+          "replicationStrategy": "SingleReplication",
+          "storageResourceId": "TestResourceId",
+          "storeType": "AzureContainerRegistry"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "TestArtifactStore",
+        "type": "microsoft.hybridnetwork/publishers/artifactStores",
+        "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
+        "location": "eastus",
+        "properties": {
+          "managedResourceGroupConfiguration": {
+            "name": "testRg",
+            "location": "eastus"
+          },
+          "replicationStrategy": "SingleReplication",
+          "storageResourceId": "TestResourceId",
+          "storeType": "AzureContainerRegistry"
+        }
+      }
+    }
+  },
+  "operationId": "ArtifactStores_CreateOrUpdate",
+  "title": "Create or update an artifact store of publisher resource"
+}
