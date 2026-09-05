@@ -576,7 +576,6 @@ op deleteJobPreview<AreaPreviewLabel extends
 @encode(DateTimeKnownEncoding.unixTimestamp, int32)
 scalar FoundryTimestamp extends utcDateTime;
 
-#suppress "@azure-tools/typespec-azure-core/known-encoding" "Foundry wire contracts encode second-granularity duration values as integers."
 @doc("A duration encoded as an integer number of seconds.")
 @encode(DurationKnownEncoding.seconds, int32)
 scalar FoundryDurationSeconds extends duration;
