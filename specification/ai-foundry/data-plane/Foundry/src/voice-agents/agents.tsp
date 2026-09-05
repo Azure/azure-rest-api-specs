@@ -100,16 +100,18 @@ model VoiceAgentLlmInterimResponseConfig
   `GET /agents/{agent_name}/endpoint/protocols/voice`. Every create or update produces a new immutable version.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@removed(Versions.v1)
 model VoiceAgentDefinition extends AgentDefinition {
   @doc("The kind discriminator for a voice agent definition. Always `voice`.")
   kind: AgentKind.voice;
 
-  @doc("How the model backing this agent is served. Together with `model`, this selects the model up front. `managed` uses a service-managed model; `self_deployed` uses the customer's own Foundry deployment. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.")
-  model_type: VoiceModelType;
+  @doc("How the model backing this voice agent is served. Required with `model` for a model-backed voice agent and omitted when `conversation_engine` is provided. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.")
+  model_type?: VoiceModelType;
 
-  @doc("The model to use for this agent, paired with `model_type`: the service-managed model name when `model_type` is `managed`, or the customer's Foundry deployment name when `model_type` is `self_deployed`. The model must support realtime or cascaded voice. The service derives the architecture from the selected model.")
-  `model`: string;
+  @doc("The model to use for this agent. Required with `model_type` for a model-backed voice agent and omitted when `conversation_engine` is provided. The model must support realtime or cascaded voice.")
+  `model`?: string;
+
+  @doc("The engine that owns conversation handling for this voice agent. Exactly one of this property and the model-backed configuration (`model_type` with `model`) must be provided. When this property is provided, `model_type`, `model`, `instructions`, `tools`, and `tool_choice` must be omitted, and `greeting.tool_choice` cannot be `required`, because the engine owns the conversation logic. The initial implementation supports a hosted-agent engine.")
+  conversation_engine?: VoiceConversationEngine;
 
   @doc("A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.")
   instructions?: string;
@@ -161,6 +163,9 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
+  @doc("Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.")
+  subagent_config?: VoiceAgentSubagentConfig;
+
   @doc("""
     Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
     `false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event
@@ -170,6 +175,67 @@ model VoiceAgentDefinition extends AgentDefinition {
     is not part of the persisted conversation content.
     """)
   store?: boolean = false;
+}
+
+@doc("Configuration for sibling Foundry text agents that a voice agent may consult.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSubagentConfig {
+  @doc("The sibling Foundry text agents, in the same project, that this voice agent may consult.")
+  @minItems(1)
+  subagents: VoiceAgentSubagent[];
+}
+
+@doc("A sibling Foundry text agent that a voice agent may consult as a background specialist.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSubagent {
+  @doc("The name of the subagent. The subagent must be in the same project as the voice agent.")
+  agent_name: string;
+
+  @doc("The version of the subagent. When omitted, the active version is used.")
+  agent_version?: string;
+
+  @doc("A description of the subagent's capabilities, used by the voice agent to decide whether to forward a query.")
+  agent_capabilities: string;
+
+  @doc("Policy for acknowledging forwarded requests and filling gaps while waiting for this subagent's response.")
+  response_policy?: VoiceAgentSubagentResponsePolicy;
+
+  @doc("The wall-clock timeout, in seconds, for each invocation of this subagent. When omitted, the service timeout is used.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  @minValue(duration.fromISO("PT5S"))
+  @maxValue(duration.fromISO("PT20M"))
+  invoke_timeout_seconds?: duration;
+}
+
+@doc("Policy for delivering responses while a voice agent waits for a subagent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSubagentResponsePolicy {
+  @doc("Whether the voice agent provides an immediate acknowledgement before forwarding a request to a subagent.")
+  immediate_ack?: boolean;
+
+  @doc("The number of seconds without subagent content or user input before the voice agent provides a gap-filling response.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  @minValue(duration.fromISO("PT5S"))
+  @maxValue(duration.fromISO("PT2M"))
+  gap_filling_interval?: duration;
+
+  @doc("Instructions used to generate the immediate acknowledgement.")
+  ack_instructions?: string;
+
+  @doc("Instructions used to generate gap-filling speech while waiting for progress.")
+  gap_filling_instructions?: string;
+
+  @doc("Whether progress updates are emitted incrementally instead of only when the subagent invocation completes. Defaults to `false`.")
+  enable_delta_progress?: boolean = false;
+
+  @doc("Instructions used to summarize streamed subagent progress for speech.")
+  progress_instructions?: string;
+
+  @doc("The minimum number of seconds between spoken progress updates.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  @minValue(duration.fromISO("PT5S"))
+  @maxValue(duration.fromISO("PT5M"))
+  progress_update_interval?: duration;
 }
 
 @doc("Session-start greeting configuration for a voice agent.")
@@ -216,6 +282,34 @@ union VoiceModelType {
 
   @doc("The service uses the customer's own Foundry deployment named by `model`.")
   self_deployed: "self_deployed",
+}
+
+@doc("An engine that owns conversation handling for a voice agent.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceConversationEngine {
+  @doc("The conversation engine type.")
+  type: string;
+}
+
+@doc("A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must support the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceHostedAgentConversationEngine extends VoiceConversationEngine {
+  ...Record<never>;
+
+  @doc("Selects a hosted Foundry agent as the conversation engine.")
+  type: "hosted_agent";
+
+  @doc("The non-empty DNS-like name of the target hosted text agent in the same project.")
+  @minLength(1)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$")
+  name: string;
+
+  @doc("The target agent version. Omit this property to select the latest version when the voice session starts. When supplied, use a positive integer or `draft-{positive-unix-timestamp}` whose numeric component fits in a signed 64-bit integer.")
+  @pattern("^(?:[1-9][0-9]{0,18}|draft-[1-9][0-9]{0,18})$")
+  @maxLength(25)
+  version?: string;
 }
 
 @doc("A tool usable by a voice agent.")
@@ -818,9 +912,6 @@ union VoiceAgentAvatarOutputProtocol {
   string,
   webrtc: "webrtc",
   websocket: "websocket",
-
-  @doc("Binary WebSocket transport.")
-  websocket_binary: "websocket-binary",
 }
 
 @doc("An output modality the agent may produce. `animation` and `avatar` are used when an avatar is configured.")
@@ -841,7 +932,6 @@ union VoiceOutputModality {
   definition, so the caller can edit or override any of them afterward via standard agent versioning.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@removed(Versions.v1)
 model GenerateVoiceAgentRequest {
   @doc("The agent kind. Always `voice`.")
   kind: AgentKind.voice;
@@ -885,7 +975,6 @@ model GenerateVoiceAgentRequest {
 
 @doc("The kind-specific inputs for generating and creating an agent.")
 @oneOf
-@removed(Versions.v1)
 union GenerateAgentRequest {
   voice: GenerateVoiceAgentRequest,
 }
