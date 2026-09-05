@@ -493,7 +493,7 @@ model TelephonyTransferDestination {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model PSTNTelephonyTransferDestination extends TelephonyTransferDestination {
   @doc("The PSTN destination type.")
-  kind: "pstn";
+  kind: TelephonyTransferDestinationKind.pstn;
 
   @doc("The E.164 phone number to call.")
   @pattern("^\\+[1-9]\\d{6,14}$")
@@ -504,7 +504,7 @@ model PSTNTelephonyTransferDestination extends TelephonyTransferDestination {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TeamsTelephonyTransferDestination extends TelephonyTransferDestination {
   @doc("The Microsoft Teams destination type.")
-  kind: "teams";
+  kind: TelephonyTransferDestinationKind.teams;
 
   @doc("The Microsoft Teams user or resource-account identifier.")
   @minLength(1)
@@ -516,7 +516,7 @@ model TeamsTelephonyTransferDestination extends TelephonyTransferDestination {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model SipTelephonyTransferDestination extends TelephonyTransferDestination {
   @doc("The SIP destination type.")
-  kind: "sip";
+  kind: TelephonyTransferDestinationKind.sip;
 
   @doc("The SIP or SIPS URI to call.")
   value: url;
@@ -563,7 +563,7 @@ model CreateTelephonyBindingRequest {
 model CreateTeamsPhoneExtensionTelephonyBindingRequest
   extends CreateTelephonyBindingRequest {
   @doc("The Microsoft Teams Phone Extension provider.")
-  provider: "teams_phone_extension";
+  provider: TelephonyProvider.teams_phone_extension;
 
   @doc("The optional display phone number for the Teams resource account.")
   @maxLength(64)
@@ -579,7 +579,7 @@ model CreateTeamsPhoneExtensionTelephonyBindingRequest
 model CreateTwilioTelephonyBindingRequest
   extends CreateTelephonyBindingRequest {
   @doc("The Twilio provider.")
-  provider: "twilio";
+  provider: TelephonyProvider.twilio;
 
   @doc("The Twilio E.164 phone number.")
   @pattern("^\\+[1-9]\\d{6,14}$")
@@ -637,7 +637,7 @@ model TelephonyBinding {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TeamsPhoneExtensionTelephonyBinding extends TelephonyBinding {
   @doc("The Microsoft Teams Phone Extension provider.")
-  provider: "teams_phone_extension";
+  provider: TelephonyProvider.teams_phone_extension;
 
   @doc("The optional display phone number for the Teams resource account.")
   @maxLength(64)
@@ -651,7 +651,7 @@ model TeamsPhoneExtensionTelephonyBinding extends TelephonyBinding {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TwilioTelephonyBinding extends TelephonyBinding {
   @doc("The Twilio provider.")
-  provider: "twilio";
+  provider: TelephonyProvider.twilio;
 
   @doc("The Twilio E.164 phone number.")
   @pattern("^\\+[1-9]\\d{6,14}$")
@@ -693,7 +693,7 @@ model TelephonyBindingListItem {
 model TeamsPhoneExtensionTelephonyBindingListItem
   extends TelephonyBindingListItem {
   @doc("The Microsoft Teams Phone Extension provider.")
-  provider: "teams_phone_extension";
+  provider: TelephonyProvider.teams_phone_extension;
 
   @doc("The optional display phone number for the Teams resource account.")
   @maxLength(64)
@@ -707,7 +707,7 @@ model TeamsPhoneExtensionTelephonyBindingListItem
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TwilioTelephonyBindingListItem extends TelephonyBindingListItem {
   @doc("The Twilio provider.")
-  provider: "twilio";
+  provider: TelephonyProvider.twilio;
 
   @doc("The Twilio E.164 phone number.")
   @pattern("^\\+[1-9]\\d{6,14}$")
@@ -1169,49 +1169,83 @@ scalar TelephonyCampaignRecipientImportId extends string;
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyOperationId extends string;
 
+@doc("The type of destination for an outbound call.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyOutboundDestinationType {
+  string,
+
+  @doc("An E.164 phone number.")
+  phone_number: "phone_number",
+}
+
 @doc("The destination of an outbound call.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyOutboundDestination {
   @doc("The destination type. Only E.164 phone numbers are currently supported.")
-  type: "phone_number";
+  type: TelephonyOutboundDestinationType;
 
   @doc("The destination E.164 phone number.")
   @pattern("^\\+[1-9]\\d{1,14}$")
   value: string;
 }
 
-@doc("The retry policy for one durable outbound call intent. `max_attempts` includes the first attempt.")
+@doc("The retry strategy for an outbound call.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyOutboundRetryPolicyType {
+  string,
+
+  @doc("Retry after a fixed interval between attempts.")
+  fixed_interval: "fixed_interval",
+}
+
+@doc("The retry policy for one durable outbound call intent. `max_attempts` includes the first attempt. Strategy-specific settings are defined by the derived policy.")
+@discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyOutboundRetryPolicy {
+  @doc("The retry strategy. Only fixed-interval retries are currently supported.")
+  type: TelephonyOutboundRetryPolicyType;
+
   @doc("The maximum number of provider attempts, including the first attempt. Defaults to 1.")
   @minValue(1)
   @maxValue(5)
   max_attempts?: int32 = 1;
+}
 
-  @doc("The delay in seconds between attempts. It must be 0 when `max_attempts` is 1, and from 60 through 86400 when retries are enabled.")
+@doc("A retry policy with a fixed interval between outbound call attempts.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyOutboundFixedIntervalRetryPolicy
+  extends TelephonyOutboundRetryPolicy {
+  @doc("The fixed-interval retry strategy.")
+  type: TelephonyOutboundRetryPolicyType.fixed_interval;
+
+  @doc("The fixed delay in seconds between attempts. It must be 0 when `max_attempts` is 1, and from 60 through 86400 when retries are enabled.")
   interval?: FoundryDurationSeconds;
 }
 
 @doc("The frozen retry policy returned for an outbound call or campaign.")
+@discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("TelephonyOutboundRetryPolicyResult", "csharp")
 model TelephonyOutboundRetryPolicyResponse {
+  @doc("The retry strategy.")
+  type: TelephonyOutboundRetryPolicyType;
+
   @doc("The maximum number of provider attempts, including the first attempt.")
   @minValue(1)
   @maxValue(5)
   max_attempts: int32;
-
-  @doc("The delay in seconds between attempts.")
-  interval: FoundryDurationSeconds;
 }
 
-@doc("A scalar structured-input value supplied for one outbound call. Nested objects, arrays, and null are not accepted.")
+@doc("The frozen fixed-interval retry policy returned for an outbound call or campaign.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyStructuredInputValue {
-  string_value: string,
-  number_value: float64,
-  integer_value: int64,
-  boolean_value: boolean,
+@clientName("TelephonyOutboundFixedIntervalRetryPolicyResult", "csharp")
+model TelephonyOutboundFixedIntervalRetryPolicyResponse
+  extends TelephonyOutboundRetryPolicyResponse {
+  @doc("The fixed-interval retry strategy.")
+  type: TelephonyOutboundRetryPolicyType.fixed_interval;
+
+  @doc("The fixed delay in seconds between attempts.")
+  interval: FoundryDurationSeconds;
 }
 
 @doc("The optional execution window for a direct outbound call.")
@@ -1222,10 +1256,6 @@ model TelephonyCallJobSchedule {
 
   @doc("The instant after which the call job expires without dispatch.")
   expires_at?: FoundryTimestamp;
-
-  @doc("The optional IANA time-zone name associated with the schedule.")
-  @minLength(1)
-  time_zone?: string;
 }
 
 @doc("Customer-controlled configuration shared by direct and campaign-created call jobs.")
@@ -1241,8 +1271,8 @@ model TelephonyCallJobConfiguration {
   @minLength(1)
   purpose?: string;
 
-  @doc("Flat scalar structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.")
-  structured_inputs?: Record<TelephonyStructuredInputValue>;
+  @doc("Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.")
+  structured_inputs?: Record<unknown>;
 
   @doc("The optional execution window.")
   schedule?: TelephonyCallJobSchedule;
@@ -1479,16 +1509,29 @@ union TelephonyCampaignRecipientImportFormat {
 @doc("Source fields or CSV columns mapped into each campaign recipient. Every unmapped CSV column or JSON/JSONL top-level property becomes a same-named structured input. CSV cells are preserved as strings until Agent-declared inputs are parsed according to their schemas; additional inputs remain strings.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignRecipientMapping {
-  @minLength(1) destination: string;
-  @minLength(1) recipient_key: string;
+  @doc("The source field containing the destination E.164 phone number. Defaults to `destination`. The source field is required for each recipient.")
+  @minLength(1)
+  destination: string = "destination";
 
-  @doc("Required when `duplicate_handling` is `keep_each`.")
-  recipient_item_key?: string;
+  @doc("The source field containing the recipient key. Defaults to `recipient_key`. The source field is required for each recipient.")
+  @minLength(1)
+  recipient_key: string = "recipient_key";
 
-  time_zone?: string;
-  not_before?: string;
-  expires_at?: string;
+  @doc("The source field containing the recipient item key. Defaults to `recipient_item_key`. The source field is required when `duplicate_handling` is `keep_each`; otherwise it may be absent.")
+  recipient_item_key?: string = "recipient_item_key";
+
+  @doc("The source field containing the earliest dispatch time as a Unix timestamp in seconds. Defaults to `not_before`. If the source field is absent, no per-recipient start bound is applied.")
+  not_before?: string = "not_before";
+
+  @doc("The source field containing the expiry time as a Unix timestamp in seconds. Defaults to `expires_at`. If the source field is absent, no per-recipient expiry bound is applied.")
+  expires_at?: string = "expires_at";
 }
+
+@doc("Optional source-field mappings for a recipient import. Each omitted entry uses its same-named source field.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("TelephonyCampaignRecipientMappingContent", "csharp")
+model TelephonyCampaignRecipientMappingRequest
+  is OptionalProperties<TelephonyCampaignRecipientMapping>;
 
 @doc("How duplicate recipient keys in an import are handled.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -1503,7 +1546,10 @@ union TelephonyCampaignDuplicateHandling {
 @clientName("ImportTelephonyCampaignRecipientsContent", "csharp")
 model ImportTelephonyCampaignRecipientsRequest {
   source: TelephonyCampaignRecipientImportSource;
-  mapping: TelephonyCampaignRecipientMapping;
+
+  @doc("Mappings from recipient properties to source fields or columns. Omit this property or an individual entry to use same-named source fields. Destination and recipient-key source fields are required. Optional source fields may be absent, except the recipient item key when `duplicate_handling` is `keep_each`.")
+  mapping?: TelephonyCampaignRecipientMappingRequest = #{};
+
   duplicate_handling?: TelephonyCampaignDuplicateHandling = TelephonyCampaignDuplicateHandling.reject;
 }
 

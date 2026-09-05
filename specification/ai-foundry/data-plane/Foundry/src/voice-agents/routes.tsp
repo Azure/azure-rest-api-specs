@@ -690,7 +690,7 @@ interface AgentTelephony {
   /** Creates one durable direct outbound call job. The latest agent definition is resolved when each attempt executes. */
   @summary("Create an outbound telephony call job")
   @post
-  @route("/agents/{agent_name}/telephony/call-jobs")
+  @route("/agents/{agent_name}/telephony/call_jobs")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   createTelephonyCallJob is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -713,7 +713,7 @@ interface AgentTelephony {
   /** Retrieves a durable direct or campaign-created outbound call job. */
   @summary("Get an outbound telephony call job")
   @get
-  @route("/agents/{agent_name}/telephony/call-jobs/{call_job_id}")
+  @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   getTelephonyCallJob is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -727,7 +727,7 @@ interface AgentTelephony {
   /** Requests cancellation of a durable outbound call job. A connected call is allowed to finish. */
   @summary("Cancel an outbound telephony call job")
   @post
-  @route("/agents/{agent_name}/telephony/call-jobs/{call_job_id}:cancel")
+  @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}:cancel")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   cancelTelephonyCallJob is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -792,7 +792,7 @@ interface AgentTelephony {
   /** Retrieves the durable status and counters for a campaign recipient import. */
   @summary("Get an outbound telephony campaign recipient import")
   @get
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}/recipient-imports/{import_id}")
+  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}/recipient_imports/{import_id}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   getTelephonyCampaignRecipientImport is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,

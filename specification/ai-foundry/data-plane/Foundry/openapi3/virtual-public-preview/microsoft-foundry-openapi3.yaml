@@ -4668,7 +4668,7 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-  /agents/{agent_name}/telephony/call-jobs:
+  /agents/{agent_name}/telephony/call_jobs:
     post:
       operationId: AgentTelephony_createTelephonyCallJob
       summary: Create an outbound telephony call job
@@ -4747,7 +4747,7 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-  /agents/{agent_name}/telephony/call-jobs/{call_job_id}:
+  /agents/{agent_name}/telephony/call_jobs/{call_job_id}:
     get:
       operationId: AgentTelephony_getTelephonyCallJob
       summary: Get an outbound telephony call job
@@ -4807,7 +4807,7 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-  /agents/{agent_name}/telephony/call-jobs/{call_job_id}:cancel:
+  /agents/{agent_name}/telephony/call_jobs/{call_job_id}:cancel:
     post:
       operationId: AgentTelephony_cancelTelephonyCallJob
       summary: Cancel an outbound telephony call job
@@ -5323,7 +5323,7 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-  /agents/{agent_name}/telephony/campaigns/{campaign_id}/recipient-imports/{import_id}:
+  /agents/{agent_name}/telephony/campaigns/{campaign_id}/recipient_imports/{import_id}:
     get:
       operationId: AgentTelephony_getTelephonyCampaignRecipientImport
       summary: Get an outbound telephony campaign recipient import
@@ -49033,9 +49033,8 @@ components:
           description: An optional customer-declared purpose for placing the call.
         structured_inputs:
           type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/TelephonyStructuredInputValue'
-          description: Flat scalar structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.
+          unevaluatedProperties: {}
+          description: Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.
         schedule:
           $ref: '#/components/schemas/TelephonyCallJobSchedule'
           description: The optional execution window.
@@ -52862,12 +52861,13 @@ components:
       type: object
       required:
         - source
-        - mapping
       properties:
         source:
           $ref: '#/components/schemas/TelephonyCampaignRecipientImportSource'
         mapping:
-          $ref: '#/components/schemas/TelephonyCampaignRecipientMapping'
+          $ref: '#/components/schemas/TelephonyCampaignRecipientMappingRequest'
+          description: Mappings from recipient properties to source fields or columns. Omit this property or an individual entry to use same-named source fields. Destination and recipient-key source fields are required. Optional source fields may be absent, except the recipient item key when `duplicate_handling` is `keep_each`.
+          default: {}
         duplicate_handling:
           $ref: '#/components/schemas/TelephonyCampaignDuplicateHandling'
           default: reject
@@ -85220,9 +85220,8 @@ components:
           description: An optional customer-declared purpose for placing the call.
         structured_inputs:
           type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/TelephonyStructuredInputValue'
-          description: Flat scalar structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.
+          unevaluatedProperties: {}
+          description: Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.
         schedule:
           $ref: '#/components/schemas/TelephonyCallJobSchedule'
           description: The optional execution window.
@@ -85313,10 +85312,6 @@ components:
         expires_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The instant after which the call job expires without dispatch.
-        time_zone:
-          type: string
-          minLength: 1
-          description: The optional IANA time-zone name associated with the schedule.
       description: The optional execution window for a direct outbound call.
       x-ms-foundry-meta:
         required_previews:
@@ -86079,19 +86074,55 @@ components:
         destination:
           type: string
           minLength: 1
+          description: The source field containing the destination E.164 phone number. Defaults to `destination`. The source field is required for each recipient.
+          default: destination
         recipient_key:
           type: string
           minLength: 1
+          description: The source field containing the recipient key. Defaults to `recipient_key`. The source field is required for each recipient.
+          default: recipient_key
         recipient_item_key:
           type: string
-          description: Required when `duplicate_handling` is `keep_each`.
-        time_zone:
-          type: string
+          description: The source field containing the recipient item key. Defaults to `recipient_item_key`. The source field is required when `duplicate_handling` is `keep_each`; otherwise it may be absent.
+          default: recipient_item_key
         not_before:
           type: string
+          description: The source field containing the earliest dispatch time as a Unix timestamp in seconds. Defaults to `not_before`. If the source field is absent, no per-recipient start bound is applied.
+          default: not_before
         expires_at:
           type: string
+          description: The source field containing the expiry time as a Unix timestamp in seconds. Defaults to `expires_at`. If the source field is absent, no per-recipient expiry bound is applied.
+          default: expires_at
       description: Source fields or CSV columns mapped into each campaign recipient. Every unmapped CSV column or JSON/JSONL top-level property becomes a same-named structured input. CSV cells are preserved as strings until Agent-declared inputs are parsed according to their schemas; additional inputs remain strings.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyCampaignRecipientMappingRequest:
+      type: object
+      properties:
+        destination:
+          type: string
+          minLength: 1
+          description: The source field containing the destination E.164 phone number. Defaults to `destination`. The source field is required for each recipient.
+          default: destination
+        recipient_key:
+          type: string
+          minLength: 1
+          description: The source field containing the recipient key. Defaults to `recipient_key`. The source field is required for each recipient.
+          default: recipient_key
+        recipient_item_key:
+          type: string
+          description: The source field containing the recipient item key. Defaults to `recipient_item_key`. The source field is required when `duplicate_handling` is `keep_each`; otherwise it may be absent.
+          default: recipient_item_key
+        not_before:
+          type: string
+          description: The source field containing the earliest dispatch time as a Unix timestamp in seconds. Defaults to `not_before`. If the source field is absent, no per-recipient start bound is applied.
+          default: not_before
+        expires_at:
+          type: string
+          description: The source field containing the expiry time as a Unix timestamp in seconds. Defaults to `expires_at`. If the source field is absent, no per-recipient expiry bound is applied.
+          default: expires_at
+      description: Optional source-field mappings for a recipient import. Each omitted entry uses its same-named source field.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -86183,9 +86214,7 @@ components:
         - value
       properties:
         type:
-          type: string
-          enum:
-            - phone_number
+          $ref: '#/components/schemas/TelephonyOutboundDestinationType'
           description: The destination type. Only E.164 phone numbers are currently supported.
         value:
           type: string
@@ -86195,9 +86224,63 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    TelephonyOutboundDestinationType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - phone_number
+      description: The type of destination for an outbound call.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyOutboundFixedIntervalRetryPolicy:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - fixed_interval
+          description: The fixed-interval retry strategy.
+        interval:
+          $ref: '#/components/schemas/FoundryDurationSeconds'
+          description: The fixed delay in seconds between attempts. It must be 0 when `max_attempts` is 1, and from 60 through 86400 when retries are enabled.
+      allOf:
+        - $ref: '#/components/schemas/TelephonyOutboundRetryPolicy'
+      description: A retry policy with a fixed interval between outbound call attempts.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyOutboundFixedIntervalRetryPolicyResponse:
+      type: object
+      required:
+        - type
+        - interval
+      properties:
+        type:
+          type: string
+          enum:
+            - fixed_interval
+          description: The fixed-interval retry strategy.
+        interval:
+          $ref: '#/components/schemas/FoundryDurationSeconds'
+          description: The fixed delay in seconds between attempts.
+      allOf:
+        - $ref: '#/components/schemas/TelephonyOutboundRetryPolicyResponse'
+      description: The frozen fixed-interval retry policy returned for an outbound call or campaign.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     TelephonyOutboundRetryPolicy:
       type: object
+      required:
+        - type
       properties:
+        type:
+          $ref: '#/components/schemas/TelephonyOutboundRetryPolicyType'
+          description: The retry strategy. Only fixed-interval retries are currently supported.
         max_attempts:
           type: integer
           format: int32
@@ -86205,29 +86288,44 @@ components:
           maximum: 5
           description: The maximum number of provider attempts, including the first attempt. Defaults to 1.
           default: 1
-        interval:
-          $ref: '#/components/schemas/FoundryDurationSeconds'
-          description: The delay in seconds between attempts. It must be 0 when `max_attempts` is 1, and from 60 through 86400 when retries are enabled.
-      description: The retry policy for one durable outbound call intent. `max_attempts` includes the first attempt.
+      discriminator:
+        propertyName: type
+        mapping:
+          fixed_interval: '#/components/schemas/TelephonyOutboundFixedIntervalRetryPolicy'
+      description: The retry policy for one durable outbound call intent. `max_attempts` includes the first attempt. Strategy-specific settings are defined by the derived policy.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
     TelephonyOutboundRetryPolicyResponse:
       type: object
       required:
+        - type
         - max_attempts
-        - interval
       properties:
+        type:
+          $ref: '#/components/schemas/TelephonyOutboundRetryPolicyType'
+          description: The retry strategy.
         max_attempts:
           type: integer
           format: int32
           minimum: 1
           maximum: 5
           description: The maximum number of provider attempts, including the first attempt.
-        interval:
-          $ref: '#/components/schemas/FoundryDurationSeconds'
-          description: The delay in seconds between attempts.
+      discriminator:
+        propertyName: type
+        mapping:
+          fixed_interval: '#/components/schemas/TelephonyOutboundFixedIntervalRetryPolicyResponse'
       description: The frozen retry policy returned for an outbound call or campaign.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyOutboundRetryPolicyType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - fixed_interval
+      description: The retry strategy for an outbound call.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -86239,18 +86337,6 @@ components:
             - teams_phone_extension
             - twilio
       description: A telephony provider supported by an agent binding. Known values are stable; additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    TelephonyStructuredInputValue:
-      anyOf:
-        - type: string
-        - type: number
-          format: double
-        - type: integer
-          format: int64
-        - type: boolean
-      description: A scalar structured-input value supplied for one outbound call. Nested objects, arrays, and null are not accepted.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
