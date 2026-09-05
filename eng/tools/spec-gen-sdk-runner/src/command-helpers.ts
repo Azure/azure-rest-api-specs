@@ -506,6 +506,16 @@ function isAzsdkCliAvailable(): boolean {
 }
 
 /**
+ * Whether azsdk-cli SDK breaking-change detection is enabled for this run.
+ *
+ * Code-level feature flag: flip to `true` and merge to enable the whole
+ * integration.
+ */
+export function isBreakingChangeDetectionEnabled(): boolean {
+  return false;
+}
+
+/**
  * Prepare the azsdk pkg generate command arguments.
  *
  * @param commandInput - The spec-gen-sdk command input.
@@ -551,6 +561,25 @@ export function prepareAzsdkPackCommand(packagePath: string, outputPath?: string
   if (outputPath) {
     args.push("--output-path", outputPath);
   }
+  return args;
+}
+
+/**
+ * Prepare the azsdk pkg detect-breaking-change command arguments.
+ *
+ * @param packagePath - Absolute path to the generated SDK package directory.
+ * @param tspConfigFullPath - Optional absolute path to the tspconfig.yaml file.
+ * @returns Array of arguments for the azsdk detect-breaking-change command.
+ */
+export function prepareAzsdkDetectBreakingChangeCommand(
+  packagePath: string,
+  tspConfigFullPath?: string,
+): string[] {
+  const args = ["pkg", "detect-breaking-change", "--package-path", packagePath];
+  if (tspConfigFullPath) {
+    args.push("--tsp-config-path", tspConfigFullPath);
+  }
+  args.push("--output", "json");
   return args;
 }
 

@@ -4,9 +4,11 @@ import path from "node:path";
 import { inspect } from "node:util";
 import {
   type AzsdkBuildResponse,
+  type AzsdkDetectBreakingChangeResponse,
   type AzsdkGenerateResponse,
   type AzsdkPackResponse,
   buildExecutionReport,
+  getBreakingChangeSignal,
   parseAzsdkResponse,
 } from "./azsdk-adapter.ts";
 import {
@@ -16,9 +18,11 @@ import {
   getExecutionReport,
   getSpecPaths,
   installLanguageToolchain,
+  isBreakingChangeDetectionEnabled,
   logIssuesToPipeline,
   parseArguments,
   prepareAzsdkBuildCommand,
+  prepareAzsdkDetectBreakingChangeCommand,
   prepareAzsdkGenerateCommand,
   prepareAzsdkPackCommand,
   prepareSpecGenSdkCommand,
@@ -318,6 +322,46 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
   return { statusCode, executionResult: executionReport?.executionResult ?? "" };
 }
 
+/**
+ * Run azsdk-cli SDK breaking-change detection for each generated package in the
+ * execution report and fold the result into it. Non-fatal by contract: any
+ * failure leaves the package's existing breaking-change label untouched.
+ */
+async function detectSdkBreakingChange(
+  commandInput: SpecGenSdkCmdInput,
+  tspConfigRelativePath: string,
+  executionReport: ExecutionReport,
+): Promise<void> {
+  const azsdkExe = process.env.AZSDK || "azsdk";
+  const tspConfigFullPath = path.join(commandInput.localSpecRepoPath, tspConfigRelativePath);
+  for (const pkg of executionReport.packages) {
+    if (!pkg.packageRootPath) {
+      logMessage(
+        `Skipping breaking-change detection: no packageRootPath for ${pkg.packageName ?? "unknown package"}`,
+        LogLevel.Warn,
+      );
+      continue;
+    }
+    let signal: boolean | undefined;
+    try {
+      const args = prepareAzsdkDetectBreakingChangeCommand(pkg.packageRootPath, tspConfigFullPath);
+      logMessage(`Running: ${azsdkExe} ${args.join(" ")}`, LogLevel.Info);
+      const output = await runCommandWithOutput(azsdkExe, args);
+      const response = parseAzsdkResponse<AzsdkDetectBreakingChangeResponse>(output);
+      signal = getBreakingChangeSignal(response);
+      logMessage(`azsdk pkg detect-breaking-change hasBreakingChange: ${signal}`, LogLevel.Info);
+    } catch (error) {
+      logMessage(`Error running azsdk pkg detect-breaking-change:${inspect(error)}`, LogLevel.Warn);
+    }
+
+    // A definitive result is the single source of truth for the label; an
+    // error/unknown result leaves the spec-gen-sdk value in place.
+    if (signal !== undefined) {
+      pkg.shouldLabelBreakingChange = signal;
+    }
+  }
+}
+
 /* Generate SDKs for spec pull request */
 export async function generateSdkForSpecPr(): Promise<CommandResult> {
   // Parse the arguments
@@ -340,6 +384,7 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
   let currentExecutionResult: string;
   let stagedArtifactsFolder = "";
   const apiViewRequestData: APIViewRequestData[] = [];
+  const breakingChangeDetectionEnabled = isBreakingChangeDetectionEnabled();
   // Tracks whether the SDK repo is currently checked out on a non-`main` branch
   // due to a `sdk-validation.yaml` pin from a previous spec in this run.
   let sdkRepoBranchSwitched = false;
@@ -478,6 +523,21 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
         logMessage(`Runner: error reading execution-report.json:${inspect(error)}`, LogLevel.Error);
         statusCode = 1;
         executionReport = undefined;
+      }
+    }
+
+    // Run azsdk-cli breaking-change detection (spec-PR only, feature-flagged) and
+    // let its definitive result override the label from spec-gen-sdk.
+    if (
+      breakingChangeDetectionEnabled &&
+      changedSpec.typespecProject &&
+      executionReport &&
+      executionReport.packages.length > 0
+    ) {
+      try {
+        await detectSdkBreakingChange(commandInput, changedSpec.typespecProject, executionReport);
+      } catch (error) {
+        logMessage(`Runner: error in breaking-change detection:${inspect(error)}`, LogLevel.Warn);
       }
     }
 
