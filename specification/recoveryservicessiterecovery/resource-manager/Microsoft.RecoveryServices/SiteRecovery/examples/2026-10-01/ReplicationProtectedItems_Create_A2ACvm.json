@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "api-version": "2026-10-01",
+    "fabricName": "CentralUSCanSite",
+    "input": {
+      "properties": {
+        "policyId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.RecoveryServices/vaults/priyanponeboxvault/replicationPolicies/a2aPolicy",
+        "protectableItemId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.RecoveryServices/vaults/priyanponeboxvault/replicationFabrics/CentralUSCanSite/replicationProtectionContainers/CentralUSCancloud/replicationProtectableItems/a2aCvmVm",
+        "providerSpecificDetails": {
+          "instanceType": "A2A",
+          "fabricObjectId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.Compute/virtualMachines/a2aCvmVm",
+          "recoveryContainerId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.RecoveryServices/vaults/priyanponeboxvault/replicationFabrics/EUSCanSite/replicationProtectionContainers/euscancloud",
+          "recoveryResourceGroupId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg",
+          "vmManagedDisks": [
+            {
+              "diskId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.Compute/disks/a2aCvmVm-osdisk",
+              "primaryStagingAzureStorageAccountId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.Storage/storageAccounts/a2acache",
+              "recoveryResourceGroupId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg",
+              "recoveryReplicaDiskAccountType": "Premium_LRS",
+              "recoveryTargetDiskAccountType": "Premium_LRS",
+              "confidentialDiskEncryptionInfo": {
+                "recoveryReplicaConfidentialDiskEncryptionSetId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.Compute/diskEncryptionSets/cvm-replica-des",
+                "recoveryTargetConfidentialDiskEncryptionSetId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.Compute/diskEncryptionSets/cvm-target-des"
+              }
+            }
+          ],
+          "recoveryConfidentialDataDiskEncryptionIdentity": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/cvm-cdde-uami"
+        }
+      }
+    },
+    "protectionContainerName": "CentralUSCancloud",
+    "replicatedProtectedItemName": "a2aCvmVm",
+    "resourceGroupName": "priyanprg",
+    "resourceName": "priyanponeboxvault",
+    "subscriptionId": "42195872-7e70-4f8a-837f-84b28ecbb78b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "a2aCvmVm",
+        "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems",
+        "id": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.RecoveryServices/vaults/priyanponeboxvault/replicationFabrics/CentralUSCanSite/replicationProtectionContainers/CentralUSCancloud/replicationProtectedItems/a2aCvmVm",
+        "properties": {
+          "activeLocation": "Primary",
+          "allowedOperations": [
+            "PlannedFailover",
+            "UnplannedFailover",
+            "DisableProtection",
+            "TestFailover"
+          ],
+          "friendlyName": "a2aCvmVm",
+          "policyFriendlyName": "a2aPolicy",
+          "policyId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.RecoveryServices/vaults/priyanponeboxvault/replicationPolicies/a2aPolicy",
+          "primaryFabricFriendlyName": "Central US",
+          "primaryProtectionContainerFriendlyName": "CentralUSCancloud",
+          "protectableItemId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.RecoveryServices/vaults/priyanponeboxvault/replicationFabrics/CentralUSCanSite/replicationProtectionContainers/CentralUSCancloud/replicationProtectableItems/a2aCvmVm",
+          "protectedItemType": "A2A",
+          "protectionState": "Protected",
+          "protectionStateDescription": "Protected",
+          "providerSpecificDetails": {
+            "instanceType": "A2A",
+            "fabricObjectId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.Compute/virtualMachines/a2aCvmVm",
+            "recoveryConfidentialDataDiskEncryptionIdentity": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/cvm-cdde-uami",
+            "protectedManagedDisks": [
+              {
+                "diskId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.Compute/disks/a2aCvmVm-osdisk",
+                "recoveryResourceGroupId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg",
+                "recoveryReplicaDiskAccountType": "Premium_LRS",
+                "recoveryTargetDiskAccountType": "Premium_LRS",
+                "confidentialDiskEncryptionInfo": {
+                  "recoveryReplicaConfidentialDiskEncryptionSetId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.Compute/diskEncryptionSets/cvm-replica-des",
+                  "recoveryTargetConfidentialDiskEncryptionSetId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.Compute/diskEncryptionSets/cvm-target-des"
+                }
+              }
+            ]
+          },
+          "replicationHealth": "Normal",
+          "testFailoverState": "None",
+          "testFailoverStateDescription": "None"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.RecoveryServices/vaults/priyanponeboxvault/replicationOperationStatus/a93f3cd5-9035-4b1e-a2c9-b16df6d5d34b?api-version=2026-10-01"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.RecoveryServices/vaults/priyanponeboxvault/replicationOperationStatus/a93f3cd5-9035-4b1e-a2c9-b16df6d5d34b?api-version=2026-10-01",
+        "Retry-After": 30
+      }
+    }
+  },
+  "operationId": "ReplicationProtectedItems_Create",
+  "title": "Enables protection for an A2A confidential VM with CMK disk encryption."
+}
