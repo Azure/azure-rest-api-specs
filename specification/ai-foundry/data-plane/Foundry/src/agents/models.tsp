@@ -537,6 +537,30 @@ union CodeDependencyResolution {
   remote_build: "remote_build",
 }
 
+@doc("Supported protocol versions for a hosted agent serving as a Voice Live conversation engine.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview] }
+)
+union VoiceLiveConversationEngineProtocolVersion {
+  string,
+
+  @doc("Voice Live conversation engine protocol 1.0.")
+  v1_0: "1.0",
+}
+
+@doc("The capability for a hosted agent to serve as a Voice Live conversation engine.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview] }
+)
+model VoiceLiveConversationEngineCapability {
+  ...Record<never>;
+
+  @doc("The exact application protocol version implemented by the hosted agent for Voice Live conversations. The service currently supports version `1.0`.")
+  protocol_version: VoiceLiveConversationEngineProtocolVersion;
+}
+
 @doc("""
   The external agent definition. Represents a third-party agent hosted outside Foundry (for example, on GCP or AWS).
   Registration is metadata-only: Foundry records the agent definition to light up observability experiences (traces, evaluations)
@@ -588,6 +612,15 @@ model HostedAgentDefinition extends AgentDefinition {
     #{ protocol: "a2a", version: "v0.3.0" }
   ])
   protocol_versions?: ProtocolVersionRecord[];
+
+  @doc("Declares that this hosted agent can serve as a Voice Live conversation engine. When provided, `protocol_versions` must include the `invocations_ws` endpoint protocol.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      conditional_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview],
+    }
+  )
+  voice_live_conversation_engine?: VoiceLiveConversationEngineCapability;
 
   @doc("Code-based deployment configuration. Provide this for code-based deployments. Mutually exclusive with container_configuration — the service validates that exactly one is set.")
   code_configuration?: CodeConfiguration;

@@ -1,0 +1,65 @@
+{
+  "title": "Agents_CreateHostedAgent_VoiceLiveConversationEngine",
+  "operationId": "Agents_createAgent_Agents_createAgentFromCode",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "VoiceAgents=V1Preview",
+    "name": "customer-support-text-agent",
+    "description": "A hosted customer support agent that can serve as a Voice Live conversation engine.",
+    "definition": {
+      "kind": "hosted",
+      "container_configuration": {
+        "image": "my-registry.azurecr.io/customer-support-agent:latest"
+      },
+      "cpu": "0.25",
+      "memory": "0.5Gi",
+      "protocol_versions": [
+        {
+          "protocol": "invocations_ws",
+          "version": "1.0.0"
+        }
+      ],
+      "voice_live_conversation_engine": {
+        "protocol_version": "1.0"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "agent",
+        "id": "agent_customer_support_text",
+        "name": "customer-support-text-agent",
+        "state": "enabled",
+        "versions": {
+          "latest": {
+            "metadata": null,
+            "object": "agent.version",
+            "id": "agent_customer_support_text:1",
+            "name": "customer-support-text-agent",
+            "version": "1",
+            "created_at": 1785772800,
+            "description": "A hosted customer support agent that can serve as a Voice Live conversation engine.",
+            "definition": {
+              "kind": "hosted",
+              "container_configuration": {
+                "image": "my-registry.azurecr.io/customer-support-agent:latest"
+              },
+              "cpu": "0.25",
+              "memory": "0.5Gi",
+              "protocol_versions": [
+                {
+                  "protocol": "invocations_ws",
+                  "version": "1.0.0"
+                }
+              ],
+              "voice_live_conversation_engine": {
+                "protocol_version": "1.0"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

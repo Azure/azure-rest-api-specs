@@ -40735,6 +40735,15 @@
               ]
             ]
           },
+          "voice_live_conversation_engine": {
+            "$ref": "#/components/schemas/VoiceLiveConversationEngineCapability",
+            "description": "Declares that this hosted agent can serve as a Voice Live conversation engine. When provided, `protocol_versions` must include the `invocations_ws` endpoint protocol.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
           "code_configuration": {
             "$ref": "#/components/schemas/CodeConfiguration",
             "description": "Code-based deployment configuration. Provide this for code-based deployments. Mutually exclusive with container_configuration — the service validates that exactly one is set."
@@ -89549,6 +89558,46 @@
           }
         },
         "description": "Metadata for a single conversation item's audio segment. For bring-your-own-storage (BYOS), the response includes\n`blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own\ncredentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's\n`/audio/content` route.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceLiveConversationEngineCapability": {
+        "type": "object",
+        "required": [
+          "protocol_version"
+        ],
+        "properties": {
+          "protocol_version": {
+            "$ref": "#/components/schemas/VoiceLiveConversationEngineProtocolVersion",
+            "description": "The exact application protocol version implemented by the hosted agent for Voice Live conversations. The service currently supports version `1.0`."
+          }
+        },
+        "unevaluatedProperties": {
+          "not": {}
+        },
+        "description": "The capability for a hosted agent to serve as a Voice Live conversation engine.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceLiveConversationEngineProtocolVersion": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "1.0"
+            ]
+          }
+        ],
+        "description": "Supported protocol versions for a hosted agent serving as a Voice Live conversation engine.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
