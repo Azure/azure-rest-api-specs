@@ -6610,6 +6610,12 @@ model A2AVmManagedDiskInputDetails {
    */
   @added(Versions.v2026_02_01)
   recoveryPublicNetworkAccess?: DiskPublicNetworkAccess;
+
+  /**
+   * The confidential disk encryption info for the managed disk. Applicable to CMK confidential VMs.
+   */
+  @added(Versions.v2026_10_01)
+  confidentialDiskEncryptionInfo?: ConfidentialDiskEncryptionInfo;
 }
 
 /**
@@ -6655,6 +6661,45 @@ model KeyEncryptionKeyInfo {
    * The KeyVault resource ARM Id for key.
    */
   keyVaultResourceArmId?: string;
+}
+
+/**
+ * Confidential disk encryption info for a CMK confidential VM managed disk.
+ */
+@added(Versions.v2026_10_01)
+model ConfidentialDiskEncryptionInfo {
+  /**
+   * The confidential disk encryption set ARM Id used for the replica disk. Applicable to CMK confidential VMs.
+   */
+  recoveryReplicaConfidentialDiskEncryptionSetId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/diskEncryptionSets";
+    }
+  ]>;
+
+  /**
+   * The confidential disk encryption set ARM Id used for the target disk after failover. Applicable to CMK confidential VMs.
+   */
+  recoveryTargetConfidentialDiskEncryptionSetId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/diskEncryptionSets";
+    }
+  ]>;
+}
+
+/**
+ * Confidential disk encryption info used while updating replication of a CMK confidential VM managed disk.
+ */
+@added(Versions.v2026_10_01)
+model UpdateConfidentialDiskEncryptionInfo {
+  /**
+   * The confidential disk encryption set ARM Id used for the target disk after failover. Applicable to CMK confidential VMs.
+   */
+  recoveryTargetConfidentialDiskEncryptionSetId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/diskEncryptionSets";
+    }
+  ]>;
 }
 
 /**
@@ -7273,6 +7318,16 @@ model A2AEnableProtectionInput extends EnableProtectionProviderSpecificInput {
   autoProtectionOfDataDisk?: AutoProtectionOfDataDisk;
 
   /**
+   * The confidential data disk encryption user-assigned identity ARM Id. Applicable to CMK confidential VM data disks.
+   */
+  @added(Versions.v2026_10_01)
+  recoveryConfidentialDataDiskEncryptionIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  /**
    * The class type.
    */
   instanceType: "A2A";
@@ -7825,6 +7880,12 @@ model A2AProtectedManagedDiskDetails {
    */
   @added(Versions.v2026_02_01)
   recoveryPublicNetworkAccess?: DiskPublicNetworkAccess;
+
+  /**
+   * The confidential disk encryption info for the managed disk. Applicable to CMK confidential VMs.
+   */
+  @added(Versions.v2026_10_01)
+  confidentialDiskEncryptionInfo?: ConfidentialDiskEncryptionInfo;
 }
 
 /**
@@ -8270,6 +8331,16 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
    * the platform fault domain.
    */
   platformFaultDomain?: int32;
+
+  /**
+   * The confidential data disk encryption user-assigned identity ARM Id. Applicable to CMK confidential VM data disks.
+   */
+  @added(Versions.v2026_10_01)
+  recoveryConfidentialDataDiskEncryptionIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 
   /**
    * Gets the Instance type.
@@ -8948,6 +9019,16 @@ model A2ASwitchProtectionInput extends SwitchProtectionProviderSpecificInput {
   diskEncryptionInfo?: DiskEncryptionInfo;
 
   /**
+   * The confidential data disk encryption user-assigned identity ARM Id. Applicable to CMK confidential VM data disks.
+   */
+  @added(Versions.v2026_10_01)
+  recoveryConfidentialDataDiskEncryptionIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  /**
    * Gets the Instance type.
    */
   instanceType: "A2A";
@@ -9085,6 +9166,16 @@ model A2AUpdateReplicationProtectedItemInput
   platformFaultDomain?: int32;
 
   /**
+   * The confidential data disk encryption user-assigned identity ARM Id. Applicable to CMK confidential VM data disks.
+   */
+  @added(Versions.v2026_10_01)
+  recoveryConfidentialDataDiskEncryptionIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  /**
    * The class type.
    */
   instanceType: "A2A";
@@ -9124,6 +9215,12 @@ model A2AVmManagedDiskUpdateDetails {
    * The target disk name for test failover operation.
    */
   tfoDiskName?: string;
+
+  /**
+   * The confidential disk encryption info to update for the managed disk. Only the recovery target confidential disk encryption set can be updated after protection is enabled; the replica confidential disk encryption set is immutable. Applicable to CMK confidential VMs.
+   */
+  @added(Versions.v2026_10_01)
+  confidentialDiskEncryptionInfo?: UpdateConfidentialDiskEncryptionInfo;
 }
 
 /**

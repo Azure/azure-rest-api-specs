@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2026-10-01",
+    "fabricName": "CentralUSCanSite",
+    "protectionContainerName": "CentralUSCancloud",
+    "resourceGroupName": "priyanprg",
+    "resourceName": "priyanponeboxvault",
+    "subscriptionId": "42195872-7e70-4f8a-837f-84b28ecbb78b",
+    "switchInput": {
+      "properties": {
+        "providerSpecificDetails": {
+          "instanceType": "A2A",
+          "recoveryContainerId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.RecoveryServices/vaults/priyanponeboxvault/replicationFabrics/EUSCanSite/replicationProtectionContainers/euscancloud",
+          "recoveryResourceGroupId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg",
+          "vmManagedDisks": [
+            {
+              "diskId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.Compute/disks/a2aSwapOsVm-osdisk",
+              "primaryStagingAzureStorageAccountId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.Storage/storageAccounts/a2acache",
+              "recoveryResourceGroupId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg",
+              "recoveryReplicaDiskAccountType": "Premium_LRS",
+              "recoveryTargetDiskAccountType": "Premium_LRS",
+              "confidentialDiskEncryptionInfo": {
+                "recoveryReplicaConfidentialDiskEncryptionSetId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.Compute/diskEncryptionSets/cvm-replica-des",
+                "recoveryTargetConfidentialDiskEncryptionSetId": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.Compute/diskEncryptionSets/cvm-target-des"
+              }
+            }
+          ],
+          "recoveryConfidentialDataDiskEncryptionIdentity": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/cvm-cdde-uami"
+        },
+        "replicationProtectedItemName": "a2aSwapOsVm"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "euscancloud",
+        "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers",
+        "id": "/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.RecoveryServices/vaults/priyanponeboxvault/replicationFabrics/EUSCanSite/replicationProtectionContainers/euscancloud",
+        "properties": {
+          "fabricFriendlyName": "East US 2 EUAP",
+          "fabricType": "Azure",
+          "friendlyName": "euscancloud",
+          "pairingStatus": "Paired",
+          "protectedItemCount": 0,
+          "role": "Primary"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.RecoveryServices/vaults/priyanponeboxvault/replicationOperationStatus/a93f3cd5-9035-4b1e-a2c9-b16df6d5d34b?api-version=2026-10-01"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/42195872-7e70-4f8a-837f-84b28ecbb78b/resourceGroups/priyanprg/providers/Microsoft.RecoveryServices/vaults/priyanponeboxvault/replicationOperationStatus/a93f3cd5-9035-4b1e-a2c9-b16df6d5d34b?api-version=2026-10-01",
+        "Retry-After": 30
+      }
+    }
+  },
+  "operationId": "ReplicationProtectionContainers_SwitchProtection",
+  "title": "Switches protection from one container to another or one replication provider to another."
+}
