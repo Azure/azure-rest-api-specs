@@ -285,7 +285,11 @@ using Microsoft.OperationalInsights;
   "csharp"
 );
 @@clientName(ClusterSku, "OperationalInsightsClusterSku", "csharp");
-@@clientName(Capacity, "OperationalInsightsClusterCapacity", "csharp");
+@@clientName(
+  Customizations.Capacity,
+  "OperationalInsightsClusterCapacity",
+  "csharp"
+);
 @@clientName(Type, "OperationalInsightsDataExportDestinationType", "csharp");
 @@clientName(DataSourceKind, "OperationalInsightsDataSourceKind", "csharp");
 @@clientName(
@@ -413,7 +417,7 @@ using Microsoft.OperationalInsights;
   "csharp"
 );
 @@clientName(
-  CapacityReservationLevel,
+  Customizations.CapacityReservationLevel,
   "OperationalInsightsWorkspaceCapacityReservationLevel",
   "csharp"
 );
@@ -425,10 +429,10 @@ using Microsoft.OperationalInsights;
   "csharp"
 );
 
-@@alternateType(ClusterSku.capacity, Capacity, "csharp");
+@@alternateType(ClusterSku.capacity, Customizations.Capacity, "csharp");
 @@alternateType(
   WorkspaceSku.capacityReservationLevel,
-  CapacityReservationLevel,
+  Customizations.CapacityReservationLevel,
   "csharp"
 );
 @@clientName(
@@ -617,27 +621,57 @@ using Microsoft.OperationalInsights;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve previous .NET pageable shape for workspace schema values"
 @@markAsPageable(Workspaces.schemaGet, "csharp");
 
-namespace Microsoft.OperationalInsights {
+namespace Customizations {
+  /** The supported capacity reservation levels for an Operational Insights cluster. */
   #suppress "@azure-tools/typespec-azure-core/no-enum" "Preserve previous .NET numeric enum shape used by @@alternateType for SDK compatibility"
   enum Capacity {
+    /** A capacity reservation of 500 GB. */
     FiveHundred: 500,
+
+    /** A capacity reservation of 1,000 GB. */
     TenHundred: 1000,
+
+    /** A capacity reservation of 2,000 GB. */
     TwoThousand: 2000,
+
+    /** A capacity reservation of 5,000 GB. */
     FiveThousand: 5000,
   }
 
+  /** The supported workspace capacity reservation levels in GB per day. */
   #suppress "@azure-tools/typespec-azure-core/no-enum" "Preserve previous .NET numeric enum shape used by @@alternateType for SDK compatibility"
   enum CapacityReservationLevel {
+    /** A capacity reservation of 100 GB per day. */
     OneHundred: 100,
+
+    /** A capacity reservation of 200 GB per day. */
     TwoHundred: 200,
+
+    /** A capacity reservation of 300 GB per day. */
     ThreeHundred: 300,
+
+    /** A capacity reservation of 400 GB per day. */
     FourHundred: 400,
+
+    /** A capacity reservation of 500 GB per day. */
     FiveHundred: 500,
+
+    /** A capacity reservation of 1,000 GB per day. */
     TenHundred: 1000,
+
+    /** A capacity reservation of 2,000 GB per day. */
     TwoThousand: 2000,
+
+    /** A capacity reservation of 5,000 GB per day. */
     FiveThousand: 5000,
+
+    /** A capacity reservation of 10,000 GB per day. */
     TenThousand: 10000,
+
+    /** A capacity reservation of 25,000 GB per day. */
     TwentyFiveThousand: 25000,
+
+    /** A capacity reservation of 50,000 GB per day. */
     FiftyThousand: 50000,
   }
 }

@@ -4,8 +4,9 @@ import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using Microsoft.RecoveryServices;
 
-namespace Microsoft.RecoveryServices;
+namespace Customizations;
 
 @@clientLocation(getOperationStatus, Operations, "go");
 @@clientLocation(getOperationResult, Operations, "go");

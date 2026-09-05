@@ -4,8 +4,7 @@ import "./main.tsp";
 
 using Azure.Core;
 using Azure.ClientGenerator.Core;
-
-namespace Microsoft.Kubernetes;
+using Microsoft.Kubernetes;
 
 // This RP is using common-types v3, in which the type of this id is still string.
 @@scope(Operations.list, "!csharp");
