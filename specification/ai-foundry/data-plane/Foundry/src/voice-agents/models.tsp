@@ -1380,7 +1380,12 @@ alias TelephonyCallJobAcceptedResponse = TypeSpec.Http.Response<202> &
 
 @doc("When a published outbound campaign becomes eligible to dispatch calls.")
 union TelephonyCampaignScheduleType {
+  string,
+
+  @doc("Calls are eligible immediately after publication.")
   immediate: "immediate",
+
+  @doc("Calls are eligible at the scheduled start instant.")
   scheduled: "scheduled",
 }
 
@@ -1501,8 +1506,15 @@ model TelephonyCampaignRecipientImportSource {
 @doc("A supported Dataset recipient file format.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCampaignRecipientImportFormat {
+  string,
+
+  @doc("A comma-separated values file.")
   csv: "csv",
+
+  @doc("A JSON file containing an array of recipient objects.")
   json: "json",
+
+  @doc("A JSON Lines file containing one recipient object per line.")
   jsonl: "jsonl",
 }
 
@@ -1536,8 +1548,15 @@ model TelephonyCampaignRecipientMappingRequest
 @doc("How duplicate recipient keys in an import are handled.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCampaignDuplicateHandling {
+  string,
+
+  @doc("Reject duplicate recipient keys.")
   reject: "reject",
+
+  @doc("Keep each recipient entry, distinguishing duplicates by recipient item key.")
   keep_each: "keep_each",
+
+  @doc("Merge entries with the same recipient key.")
   merge: "merge",
 }
 
@@ -1652,6 +1671,10 @@ model TelephonyOperation {
   status: TelephonyOperationStatus;
 
   created_at?: FoundryTimestamp;
+
+  @lroErrorResult
   error?: ApiError;
+
+  @lroResult
   resource?: TelephonyOperationResource;
 }

@@ -85881,11 +85881,13 @@ components:
         required_previews:
           - VoiceAgents=V1Preview
     TelephonyCampaignDuplicateHandling:
-      type: string
-      enum:
-        - reject
-        - keep_each
-        - merge
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - reject
+            - keep_each
+            - merge
       description: How duplicate recipient keys in an import are handled.
       x-ms-foundry-meta:
         required_previews:
@@ -86009,11 +86011,13 @@ components:
         required_previews:
           - VoiceAgents=V1Preview
     TelephonyCampaignRecipientImportFormat:
-      type: string
-      enum:
-        - csv
-        - json
-        - jsonl
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - csv
+            - json
+            - jsonl
       description: A supported Dataset recipient file format.
       x-ms-foundry-meta:
         required_previews:
@@ -86142,10 +86146,12 @@ components:
         required_previews:
           - VoiceAgents=V1Preview
     TelephonyCampaignScheduleType:
-      type: string
-      enum:
-        - immediate
-        - scheduled
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - immediate
+            - scheduled
       description: When a published outbound campaign becomes eligible to dispatch calls.
     TelephonyOperation:
       type: object
