@@ -6,6 +6,7 @@ import "./protocol.tsp";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Azure.AI.Projects;
 
@@ -684,5 +685,209 @@ interface AgentTelephony {
       ...TelephonyTransferTargets;
     },
     TelephonyTransferTargetsResponse
+  >;
+
+  /** Creates one durable direct outbound call job. The latest agent definition is resolved when each attempt executes. */
+  @summary("Create an outbound telephony call job")
+  @post
+  @route("/agents/{agent_name}/telephony/call-jobs")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  createTelephonyCallJob is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that executes the call. */
+      @path agent_name: string;
+
+      /** A customer-generated idempotency key. Reusing it with an equivalent request returns the same call job. */
+      @header("Idempotency-Key")
+      @minLength(1)
+      @maxLength(256)
+      idempotency_key: string;
+
+      /** The direct outbound call to create. */
+      @body body: CreateTelephonyCallJobRequest;
+    },
+    TelephonyCallJobAcceptedResponse
+  >;
+
+  /** Retrieves a durable direct or campaign-created outbound call job. */
+  @summary("Get an outbound telephony call job")
+  @get
+  @route("/agents/{agent_name}/telephony/call-jobs/{call_job_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  getTelephonyCallJob is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @path agent_name: string;
+      @path call_job_id: TelephonyCallJobId;
+    },
+    TelephonyCallJobResponse
+  >;
+
+  /** Requests cancellation of a durable outbound call job. A connected call is allowed to finish. */
+  @summary("Cancel an outbound telephony call job")
+  @post
+  @route("/agents/{agent_name}/telephony/call-jobs/{call_job_id}:cancel")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  cancelTelephonyCallJob is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @path agent_name: string;
+      @path call_job_id: TelephonyCallJobId;
+      ...TelephonyIfMatchHeader;
+    },
+    TelephonyCallJobResponse | TelephonyCallJobAcceptedResponse
+  >;
+
+  /** Creates a draft outbound campaign. Recipients are imported and validated before the campaign can be published. */
+  @summary("Create an outbound telephony campaign")
+  @post
+  @route("/agents/{agent_name}/telephony/campaigns")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  createTelephonyCampaign is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @path agent_name: string;
+      @body body: CreateTelephonyCampaignRequest;
+    },
+    TelephonyCampaignCreatedResponse
+  >;
+
+  /** Retrieves an outbound campaign, including configuration, execution state, and aggregate call-job counts. */
+  @summary("Get an outbound telephony campaign")
+  @get
+  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  getTelephonyCampaign is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @path agent_name: string;
+      @path campaign_id: TelephonyCampaignId;
+    },
+    TelephonyCampaign
+  >;
+
+  /** Starts an asynchronous import of campaign recipients from a Dataset CSV, JSON array, or JSONL file. */
+  @summary("Import outbound telephony campaign recipients")
+  @post
+  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}/recipients:import")
+  @pollingOperation(AgentTelephony.getTelephonyOperation)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  importTelephonyCampaignRecipients is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @path agent_name: string;
+      @path campaign_id: TelephonyCampaignId;
+
+      @header("Idempotency-Key")
+      @minLength(1)
+      @maxLength(256)
+      idempotency_key: string;
+
+      @body body: ImportTelephonyCampaignRecipientsRequest;
+    },
+    TelephonyCampaignOperationAcceptedResponse
+  >;
+
+  /** Retrieves the durable status and counters for a campaign recipient import. */
+  @summary("Get an outbound telephony campaign recipient import")
+  @get
+  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}/recipient-imports/{import_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  getTelephonyCampaignRecipientImport is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @path agent_name: string;
+      @path campaign_id: TelephonyCampaignId;
+      @path import_id: TelephonyCampaignRecipientImportId;
+    },
+    TelephonyCampaignRecipientImport
+  >;
+
+  /** Starts asynchronous validation of the current campaign draft and imported recipient snapshot. */
+  @summary("Validate an outbound telephony campaign")
+  @post
+  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}:validate")
+  @pollingOperation(AgentTelephony.getTelephonyOperation)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  validateTelephonyCampaign is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @path agent_name: string;
+      @path campaign_id: TelephonyCampaignId;
+    },
+    TelephonyCampaignOperationAcceptedResponse
+  >;
+
+  /** Permanently locks the validated campaign draft and starts asynchronous call-job materialization. */
+  @summary("Publish an outbound telephony campaign")
+  @post
+  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}:publish")
+  @pollingOperation(AgentTelephony.getTelephonyOperation)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  publishTelephonyCampaign is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @path agent_name: string;
+      @path campaign_id: TelephonyCampaignId;
+      @body body: PublishTelephonyCampaignRequest;
+    },
+    TelephonyCampaignOperationAcceptedResponse
+  >;
+
+  /** Pauses dispatch of call jobs owned by a published campaign. */
+  @summary("Pause an outbound telephony campaign")
+  @post
+  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}:pause")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  pauseTelephonyCampaign is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @path agent_name: string;
+      @path campaign_id: TelephonyCampaignId;
+    },
+    TelephonyCampaign
+  >;
+
+  /** Resumes dispatch of call jobs owned by a paused campaign. */
+  @summary("Resume an outbound telephony campaign")
+  @post
+  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}:resume")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  resumeTelephonyCampaign is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @path agent_name: string;
+      @path campaign_id: TelephonyCampaignId;
+    },
+    TelephonyCampaign
+  >;
+
+  /** Cancels a campaign and prevents any further call-job dispatch. */
+  @summary("Cancel an outbound telephony campaign")
+  @post
+  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}:cancel")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  cancelTelephonyCampaign is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @path agent_name: string;
+      @path campaign_id: TelephonyCampaignId;
+    },
+    TelephonyCampaign
+  >;
+
+  /** Retrieves an asynchronous outbound campaign operation. */
+  @summary("Get an outbound telephony operation")
+  @get
+  @route("/agents/{agent_name}/telephony/operations/{operation_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  getTelephonyOperation is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @path agent_name: string;
+      @path operation_id: TelephonyOperationId;
+    },
+    TelephonyOperation
   >;
 }
