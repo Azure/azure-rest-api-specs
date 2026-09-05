@@ -6551,6 +6551,357 @@
         }
       }
     },
+    "/agents/{agent_name}/telephony/call_jobs": {
+      "post": {
+        "operationId": "AgentTelephony_createTelephonyCallJob",
+        "summary": "Create an outbound telephony call job",
+        "description": "Creates one durable direct outbound call job. The latest agent definition is resolved when each attempt executes.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent that executes the call.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "description": "A customer-generated idempotency key. Reusing it with an equivalent request returns the same call job.",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "ETag": {
+                "required": true,
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.eTag"
+                }
+              },
+              "Location": {
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "required": true,
+                "schema": {
+                  "$ref": "#/components/schemas/FoundryDurationSeconds"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyCallJob"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTelephonyCallJobRequest"
+              }
+            }
+          },
+          "description": "The direct outbound call to create."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/call_jobs/{call_job_id}": {
+      "get": {
+        "operationId": "AgentTelephony_getTelephonyCallJob",
+        "summary": "Get an outbound telephony call job",
+        "description": "Retrieves a durable direct or campaign-created outbound call job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "call_job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyCallJobId"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "ETag": {
+                "required": true,
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.eTag"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyCallJob"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/call_jobs/{call_job_id}:cancel": {
+      "post": {
+        "operationId": "AgentTelephony_cancelTelephonyCallJob",
+        "summary": "Cancel an outbound telephony call job",
+        "description": "Requests cancellation of a durable outbound call job. A connected call is allowed to finish.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "call_job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyCallJobId"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity tag returned by the latest read. The request fails if the resource changed since that read.",
+            "schema": {
+              "$ref": "#/components/schemas/Azure.Core.eTag"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "ETag": {
+                "required": true,
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.eTag"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyCallJob"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "ETag": {
+                "required": true,
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.eTag"
+                }
+              },
+              "Location": {
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "required": true,
+                "schema": {
+                  "$ref": "#/components/schemas/FoundryDurationSeconds"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyCallJob"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
     "/agents/{agent_name}/telephony/calls": {
       "get": {
         "operationId": "AgentTelephony_listTelephonyCalls",
@@ -7009,6 +7360,966 @@
             }
           }
         },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/campaigns": {
+      "post": {
+        "operationId": "AgentTelephony_createTelephonyCampaign",
+        "summary": "Create an outbound telephony campaign",
+        "description": "Creates a draft outbound campaign. Recipients are imported and validated before the campaign can be published.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Location": {
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyCampaign"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTelephonyCampaignRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/campaigns/{campaign_id}": {
+      "get": {
+        "operationId": "AgentTelephony_getTelephonyCampaign",
+        "summary": "Get an outbound telephony campaign",
+        "description": "Retrieves an outbound campaign, including configuration, execution state, and aggregate call-job counts.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "campaign_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyCampaignId"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyCampaign"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/campaigns/{campaign_id}/recipient_imports/{import_id}": {
+      "get": {
+        "operationId": "AgentTelephony_getTelephonyCampaignRecipientImport",
+        "summary": "Get an outbound telephony campaign recipient import",
+        "description": "Retrieves the durable status and counters for a campaign recipient import.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "campaign_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyCampaignId"
+            }
+          },
+          {
+            "name": "import_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyCampaignRecipientImportId"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyCampaignRecipientImport"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/campaigns/{campaign_id}/recipients:import": {
+      "post": {
+        "operationId": "AgentTelephony_importTelephonyCampaignRecipients",
+        "summary": "Import outbound telephony campaign recipients",
+        "description": "Starts an asynchronous import of campaign recipients from a Dataset CSV, JSON array, or JSONL file.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "campaign_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyCampaignId"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "required": true,
+                "schema": {
+                  "$ref": "#/components/schemas/FoundryDurationSeconds"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyCampaignOperation"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportTelephonyCampaignRecipientsRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/campaigns/{campaign_id}:cancel": {
+      "post": {
+        "operationId": "AgentTelephony_cancelTelephonyCampaign",
+        "summary": "Cancel an outbound telephony campaign",
+        "description": "Cancels a campaign and prevents any further call-job dispatch.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "campaign_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyCampaignId"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyCampaign"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/campaigns/{campaign_id}:pause": {
+      "post": {
+        "operationId": "AgentTelephony_pauseTelephonyCampaign",
+        "summary": "Pause an outbound telephony campaign",
+        "description": "Pauses dispatch of call jobs owned by a published campaign.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "campaign_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyCampaignId"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyCampaign"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/campaigns/{campaign_id}:publish": {
+      "post": {
+        "operationId": "AgentTelephony_publishTelephonyCampaign",
+        "summary": "Publish an outbound telephony campaign",
+        "description": "Permanently locks the validated campaign draft and starts asynchronous call-job materialization.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "campaign_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyCampaignId"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "required": true,
+                "schema": {
+                  "$ref": "#/components/schemas/FoundryDurationSeconds"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyCampaignOperation"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PublishTelephonyCampaignRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/campaigns/{campaign_id}:resume": {
+      "post": {
+        "operationId": "AgentTelephony_resumeTelephonyCampaign",
+        "summary": "Resume an outbound telephony campaign",
+        "description": "Resumes dispatch of call jobs owned by a paused campaign.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "campaign_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyCampaignId"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyCampaign"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/campaigns/{campaign_id}:validate": {
+      "post": {
+        "operationId": "AgentTelephony_validateTelephonyCampaign",
+        "summary": "Validate an outbound telephony campaign",
+        "description": "Starts asynchronous validation of the current campaign draft and imported recipient snapshot.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "campaign_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyCampaignId"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "required": true,
+                "schema": {
+                  "$ref": "#/components/schemas/FoundryDurationSeconds"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyCampaignOperation"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/telephony/operations/{operation_id}": {
+      "get": {
+        "operationId": "AgentTelephony_getTelephonyOperation",
+        "summary": "Get an outbound telephony operation",
+        "description": "Retrieves an asynchronous outbound campaign operation.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "operation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyOperationId"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TelephonyOperation"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Telephony"
+        ],
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -36629,6 +37940,84 @@
           ]
         }
       },
+      "CreateTelephonyCallJobRequest": {
+        "type": "object",
+        "required": [
+          "destination",
+          "telephony_binding_id"
+        ],
+        "properties": {
+          "destination": {
+            "$ref": "#/components/schemas/TelephonyOutboundDestination",
+            "description": "The phone destination to call."
+          },
+          "telephony_binding_id": {
+            "$ref": "#/components/schemas/TelephonyBindingId",
+            "description": "The active agent telephony binding used to originate the call."
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1,
+            "description": "An optional customer-declared purpose for placing the call."
+          },
+          "structured_inputs": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables."
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/TelephonyCallJobSchedule",
+            "description": "The optional execution window."
+          },
+          "retry_policy": {
+            "$ref": "#/components/schemas/TelephonyOutboundRetryPolicy",
+            "description": "The provider-attempt retry policy. Omit it for one attempt with no retry delay."
+          }
+        },
+        "description": "A request to create one durable direct outbound call job.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "CreateTelephonyCampaignRequest": {
+        "type": "object",
+        "required": [
+          "display_name",
+          "telephony_binding_id"
+        ],
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "A customer-visible name for the campaign."
+          },
+          "telephony_binding_id": {
+            "$ref": "#/components/schemas/TelephonyBindingId",
+            "description": "The active agent telephony binding used to originate campaign calls."
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1,
+            "description": "An optional customer-declared purpose for campaign calls."
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/TelephonyCampaignSchedule",
+            "description": "When the published campaign becomes eligible to dispatch calls."
+          },
+          "retry_policy": {
+            "$ref": "#/components/schemas/TelephonyOutboundRetryPolicy",
+            "description": "The provider-attempt retry policy inherited by every materialized call job."
+          }
+        },
+        "description": "A request to create a draft outbound campaign.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "CreateTwilioTelephonyBindingRequest": {
         "type": "object",
         "required": [
@@ -40319,6 +41708,11 @@
         "format": "int32",
         "description": "A duration encoded as an integer number of milliseconds."
       },
+      "FoundryDurationSeconds": {
+        "type": "integer",
+        "format": "int32",
+        "description": "A duration encoded as an integer number of seconds."
+      },
       "FoundryModelArtifactProfileCategory": {
         "anyOf": [
           {
@@ -40812,6 +42206,32 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "ImportTelephonyCampaignRecipientsRequest": {
+        "type": "object",
+        "required": [
+          "source"
+        ],
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/TelephonyCampaignRecipientImportSource"
+          },
+          "mapping": {
+            "$ref": "#/components/schemas/TelephonyCampaignRecipientMappingRequest",
+            "description": "Mappings from recipient properties to source fields or columns. Omit this property or an individual entry to use same-named source fields. Destination and recipient-key source fields are required. Optional source fields may be absent, except the recipient item key when `duplicate_handling` is `keep_each`.",
+            "default": {}
+          },
+          "duplicate_handling": {
+            "$ref": "#/components/schemas/TelephonyCampaignDuplicateHandling",
+            "default": "reject"
+          }
+        },
+        "description": "A request to import campaign recipients from a Dataset CSV, JSON array, or JSONL file. Imported Agent-declared structured inputs follow the Agent definition's schema, required, and default-value semantics.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
           ]
         }
       },
@@ -51336,7 +52756,7 @@
                 }
               }
             ],
-            "description": "The image(s) to edit. Must be a supported image file or an array of images.\n  For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, and `gpt-image-2-2026-04-21`), each image should be a `png`, `webp`, or `jpg`\n  file less than 50MB. You can provide up to 16 images.\n  `chatgpt-image-latest` follows the same input constraints as GPT image models.\n  For `dall-e-2`, you can only provide one image, and it should be a square\n  `png` file less than 4MB."
+            "description": "The image(s) to edit. Must be a supported image file or an array of images.\n  For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, and `gpt-image-1.5`), each image should be a `png`, `webp`, or `jpg`\n  file less than 50MB. You can provide up to 16 images.\n  `chatgpt-image-latest` follows the same input constraints as GPT image models.\n  For `dall-e-2`, you can only provide one image, and it should be a square\n  `png` file less than 4MB."
           },
           "prompt": {
             "type": "string",
@@ -51359,7 +52779,7 @@
                 "type": "null"
               }
             ],
-            "description": "Set the background of the generated image(s). This parameter is only\n  supported for the GPT image models. Must be one of `transparent`, `opaque`,\n  or `auto` (default value). When `auto` is used, the model will automatically\n  determine the best background for the image.\n  Transparent backgrounds are available for supported GPT Image models. For\n  `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When\n  using `transparent`, set the output format to `png` or `webp`."
+            "description": "Allows to set transparency for the background of the generated image(s).\n  This parameter is only supported for the GPT image models. Must be one of\n  `transparent`, `opaque` or `auto` (default value). When `auto` is used, the\n  model will automatically determine the best background for the image.\n  If `transparent`, the output format needs to support transparency, so it\n  should be set to either `png` (default value) or `webp`."
           },
           "model": {
             "anyOf": [
@@ -51370,8 +52790,6 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
-                  "gpt-image-2",
-                  "gpt-image-2-2026-04-21",
                   "dall-e-2",
                   "gpt-image-1",
                   "gpt-image-1-mini",
@@ -51382,7 +52800,7 @@
                 "type": "null"
               }
             ],
-            "description": "The model to use for image generation. One of `dall-e-2` or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, or `chatgpt-image-latest`). Defaults to `gpt-image-1.5`.",
+            "description": "The model to use for image generation. Defaults to `gpt-image-1.5`.",
             "x-oaiTypeLabel": "string"
           },
           "n": {
@@ -51531,8 +52949,6 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
-                  "gpt-image-2",
-                  "gpt-image-2-2026-04-21",
                   "dall-e-2",
                   "dall-e-3",
                   "gpt-image-1",
@@ -51543,7 +52959,7 @@
                 "type": "null"
               }
             ],
-            "description": "The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.",
+            "description": "The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.",
             "x-oaiTypeLabel": "string",
             "default": "dall-e-2"
           },
@@ -51695,7 +53111,7 @@
                 "type": "null"
               }
             ],
-            "description": "Set the background of the generated image(s). This parameter is only\n  supported for the GPT image models. Must be one of `transparent`, `opaque`,\n  or `auto` (default value). When `auto` is used, the model will automatically\n  determine the best background for the image.\n  Transparent backgrounds are available for supported GPT Image models. For\n  `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When\n  using `transparent`, set the output format to `png` or `webp`.",
+            "description": "Allows to set transparency for the background of the generated image(s).\n  This parameter is only supported for the GPT image models. Must be one of\n  `transparent`, `opaque` or `auto` (default value). When `auto` is used, the\n  model will automatically determine the best background for the image.\n  If `transparent`, the output format needs to support transparency, so it\n  should be set to either `png` (default value) or `webp`.",
             "default": "auto"
           },
           "style": {
@@ -54451,8 +55867,6 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
-                  "gpt-image-2",
-                  "gpt-image-2-2026-04-21",
                   "gpt-image-1",
                   "gpt-image-1-mini",
                   "chatgpt-image-latest"
@@ -54462,7 +55876,7 @@
                 "type": "null"
               }
             ],
-            "description": "The GPT image model to use for image editing, including `gpt-image-2` and its dated snapshot `gpt-image-2-2026-04-21`.",
+            "description": "The model to use for image editing.",
             "x-oaiTypeLabel": "string",
             "default": "gpt-image-1.5"
           },
@@ -54609,7 +56023,7 @@
                 "type": "null"
               }
             ],
-            "description": "Set the background of the generated image output. Transparent backgrounds are available for supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When using `transparent`, set the output format to `png` or `webp`.",
+            "description": "Background behavior for generated image output.",
             "default": "auto"
           },
           "stream": {
@@ -58151,9 +59565,7 @@
                 "enum": [
                   "gpt-image-1",
                   "gpt-image-1-mini",
-                  "gpt-image-1.5",
-                  "gpt-image-2",
-                  "gpt-image-2-2026-04-21"
+                  "gpt-image-1.5"
                 ]
               }
             ],
@@ -58221,7 +59633,7 @@
               "opaque",
               "auto"
             ],
-            "description": "Set the background of the generated image. One of `transparent`,\n  `opaque`, or `auto`. Transparent backgrounds are available for\n  supported GPT Image models. For `gpt-image-2` and\n  `gpt-image-2-2026-04-21`, this support is in preview. When using\n  `transparent`, set the output format to `png` or `webp`. Default: `auto`.",
+            "description": "Background type for the generated image. One of `transparent`,\n  `opaque`, or `auto`. Default: `auto`.",
             "default": "auto"
           },
           "input_fidelity": {
@@ -59291,7 +60703,7 @@
           },
           "encrypted_content": {
             "type": "string",
-            "maxLength": 20971520,
+            "maxLength": 10485760,
             "description": "The encrypted content of the compaction summary."
           }
         },
@@ -61048,7 +62460,7 @@
           },
           "encrypted_content": {
             "type": "string",
-            "maxLength": 20971520,
+            "maxLength": 10485760,
             "description": "The encrypted content of the compaction summary."
           }
         },
@@ -82472,6 +83884,24 @@
         ],
         "description": "The Microsoft Agent Certification review status of the Microsoft 365 store title published for an agent."
       },
+      "PublishTelephonyCampaignRequest": {
+        "type": "object",
+        "required": [
+          "validation_id"
+        ],
+        "properties": {
+          "validation_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "description": "A request to publish a validated outbound campaign draft.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "RaiConfig": {
         "type": "object",
         "required": [
@@ -85295,6 +86725,200 @@
         "maxLength": 128,
         "description": "A service-generated telephony call identifier."
       },
+      "TelephonyCallJob": {
+        "type": "object",
+        "required": [
+          "destination",
+          "telephony_binding_id",
+          "id",
+          "object",
+          "agent_name",
+          "status",
+          "retry_policy",
+          "attempt_count",
+          "revision",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "destination": {
+            "$ref": "#/components/schemas/TelephonyOutboundDestination",
+            "description": "The phone destination to call."
+          },
+          "telephony_binding_id": {
+            "$ref": "#/components/schemas/TelephonyBindingId",
+            "description": "The active agent telephony binding used to originate the call."
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1,
+            "description": "An optional customer-declared purpose for placing the call."
+          },
+          "structured_inputs": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables."
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/TelephonyCallJobSchedule",
+            "description": "The optional execution window."
+          },
+          "id": {
+            "$ref": "#/components/schemas/TelephonyCallJobId",
+            "description": "The service-generated call-job identifier."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "telephony.call_job"
+            ],
+            "description": "The object type. Always `telephony.call_job`."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The name of the voice agent used at execution time."
+          },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyCallJobStatus",
+            "description": "The current call-job lifecycle status."
+          },
+          "cancellation": {
+            "$ref": "#/components/schemas/TelephonyCallJobCancellation",
+            "description": "The recorded cancellation request, when cancellation was requested."
+          },
+          "retry_policy": {
+            "$ref": "#/components/schemas/TelephonyOutboundRetryPolicyResponse",
+            "description": "The frozen provider-attempt retry policy."
+          },
+          "attempt_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "The number of provider attempts created so far."
+          },
+          "next_attempt_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp in seconds at which the next retry becomes eligible."
+          },
+          "terminal_reason": {
+            "type": "string",
+            "description": "The stable reason for the terminal status, when available."
+          },
+          "revision": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "description": "The monotonically increasing optimistic-concurrency revision."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp in seconds when the call job was created."
+          },
+          "updated_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp in seconds when the call job was last updated."
+          }
+        },
+        "description": "A durable direct or campaign-created outbound call intent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallJobCancellation": {
+        "type": "object",
+        "required": [
+          "requested_by",
+          "mode",
+          "requested_at",
+          "revision"
+        ],
+        "properties": {
+          "requested_by": {
+            "type": "string",
+            "description": "The authenticated principal that requested cancellation."
+          },
+          "mode": {
+            "type": "string",
+            "description": "The cancellation mode applied to the call job."
+          },
+          "requested_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp in seconds when cancellation was requested."
+          },
+          "revision": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "description": "The call-job revision at which cancellation was recorded."
+          }
+        },
+        "description": "A cancellation request recorded for an outbound call job.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallJobId": {
+        "type": "string",
+        "description": "A service-generated durable outbound call-job identifier.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallJobSchedule": {
+        "type": "object",
+        "properties": {
+          "not_before": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The earliest instant at which dispatch may begin."
+          },
+          "expires_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The instant after which the call job expires without dispatch."
+          }
+        },
+        "description": "The optional execution window for a direct outbound call.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallJobStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "accepted",
+              "waiting_for_schedule",
+              "queued",
+              "dispatching",
+              "in_progress",
+              "waiting_for_retry",
+              "cancellation_requested",
+              "completed",
+              "blocked",
+              "expired",
+              "failed",
+              "cancelled"
+            ]
+          }
+        ],
+        "description": "The lifecycle status of a durable outbound call job.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "TelephonyCallLifecycleEvent": {
         "type": "object",
         "required": [
@@ -85887,6 +87511,846 @@
           }
         },
         "description": "A request to transfer an active telephony call to a configured target.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaign": {
+        "type": "object",
+        "required": [
+          "display_name",
+          "telephony_binding_id",
+          "id",
+          "object",
+          "agent_name",
+          "configuration_status",
+          "execution_status",
+          "retry_policy",
+          "call_job_counts",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "A customer-visible name for the campaign."
+          },
+          "telephony_binding_id": {
+            "$ref": "#/components/schemas/TelephonyBindingId",
+            "description": "The active agent telephony binding used to originate campaign calls."
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1,
+            "description": "An optional customer-declared purpose for campaign calls."
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/TelephonyCampaignSchedule",
+            "description": "When the published campaign becomes eligible to dispatch calls."
+          },
+          "id": {
+            "$ref": "#/components/schemas/TelephonyCampaignId"
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "telephony.campaign"
+            ]
+          },
+          "agent_name": {
+            "type": "string"
+          },
+          "configuration_status": {
+            "$ref": "#/components/schemas/TelephonyCampaignConfigurationStatus"
+          },
+          "execution_status": {
+            "$ref": "#/components/schemas/TelephonyCampaignExecutionStatus"
+          },
+          "retry_policy": {
+            "$ref": "#/components/schemas/TelephonyOutboundRetryPolicyResponse"
+          },
+          "latest_successful_validation_id": {
+            "type": "string"
+          },
+          "active_validation_id": {
+            "type": "string"
+          },
+          "active_recipient_import_id": {
+            "$ref": "#/components/schemas/TelephonyCampaignRecipientImportId"
+          },
+          "published_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp"
+          },
+          "call_job_counts": {
+            "$ref": "#/components/schemas/TelephonyCampaignCallJobCounts"
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp"
+          },
+          "updated_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp"
+          }
+        },
+        "description": "A durable outbound campaign owned by a voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaignCallJobCounts": {
+        "type": "object",
+        "required": [
+          "total",
+          "pending",
+          "in_progress",
+          "completed",
+          "failed",
+          "blocked",
+          "cancelled",
+          "expired"
+        ],
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pending": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "in_progress": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "completed": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "failed": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "blocked": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "cancelled": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "expired": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "description": "Aggregate call-job counts for an outbound campaign.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaignConfigurationStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "draft",
+              "importing",
+              "validating",
+              "publishing",
+              "published",
+              "publish_failed"
+            ]
+          }
+        ],
+        "description": "The immutable-configuration lifecycle status of an outbound campaign.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaignDuplicateHandling": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "reject",
+              "keep_each",
+              "merge"
+            ]
+          }
+        ],
+        "description": "How duplicate recipient keys in an import are handled.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaignExecutionStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "none",
+              "scheduled",
+              "running",
+              "paused",
+              "completed",
+              "failed",
+              "cancelled"
+            ]
+          }
+        ],
+        "description": "The execution lifecycle status of a published outbound campaign.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaignId": {
+        "type": "string",
+        "description": "A service-generated outbound campaign identifier.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaignOperation": {
+        "type": "object",
+        "required": [
+          "id",
+          "object",
+          "kind",
+          "status",
+          "campaign_id"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/TelephonyOperationId"
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "telephony.campaign.operation"
+            ]
+          },
+          "kind": {
+            "$ref": "#/components/schemas/TelephonyCampaignOperationKind"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyOperationStatus"
+          },
+          "campaign_id": {
+            "$ref": "#/components/schemas/TelephonyCampaignId"
+          },
+          "recipient_import_id": {
+            "$ref": "#/components/schemas/TelephonyCampaignRecipientImportId"
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp"
+          }
+        },
+        "description": "An accepted outbound campaign operation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaignOperationKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "recipient_import",
+              "validation",
+              "publish"
+            ]
+          }
+        ],
+        "description": "The kind of asynchronous outbound campaign operation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaignRecipientImport": {
+        "type": "object",
+        "required": [
+          "id",
+          "object",
+          "campaign_id",
+          "status",
+          "source",
+          "duplicate_handling",
+          "rows_processed",
+          "eligible_recipient_count",
+          "invalid_recipient_count",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/TelephonyCampaignRecipientImportId"
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "telephony.campaign.recipient_import"
+            ]
+          },
+          "campaign_id": {
+            "$ref": "#/components/schemas/TelephonyCampaignId"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyCampaignRecipientImportStatus"
+          },
+          "source": {
+            "$ref": "#/components/schemas/TelephonyCampaignRecipientImportSource"
+          },
+          "mapping": {
+            "$ref": "#/components/schemas/TelephonyCampaignRecipientMapping"
+          },
+          "duplicate_handling": {
+            "$ref": "#/components/schemas/TelephonyCampaignDuplicateHandling"
+          },
+          "rows_processed": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "eligible_recipient_count": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "invalid_recipient_count": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "error_code": {
+            "type": "string"
+          },
+          "error_message": {
+            "type": "string"
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp"
+          },
+          "updated_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp"
+          }
+        },
+        "description": "A durable campaign recipient-import record.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaignRecipientImportFormat": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "csv",
+              "json",
+              "jsonl"
+            ]
+          }
+        ],
+        "description": "A supported Dataset recipient file format.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaignRecipientImportId": {
+        "type": "string",
+        "description": "A service-generated outbound campaign recipient-import identifier.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaignRecipientImportSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "dataset_name",
+          "dataset_version",
+          "file_name",
+          "format"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "dataset"
+            ]
+          },
+          "dataset_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "dataset_version": {
+            "type": "string",
+            "minLength": 1
+          },
+          "file_name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "A relative path to a CSV, JSON array, or JSONL file in the Dataset version."
+          },
+          "format": {
+            "$ref": "#/components/schemas/TelephonyCampaignRecipientImportFormat"
+          }
+        },
+        "description": "A Dataset source for campaign recipient import.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaignRecipientImportStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "running",
+              "succeeded",
+              "failed"
+            ]
+          }
+        ],
+        "description": "The lifecycle status of a campaign recipient import.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaignRecipientMapping": {
+        "type": "object",
+        "required": [
+          "destination",
+          "recipient_key"
+        ],
+        "properties": {
+          "destination": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The source field containing the destination E.164 phone number. Defaults to `destination`. The source field is required for each recipient.",
+            "default": "destination"
+          },
+          "recipient_key": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The source field containing the recipient key. Defaults to `recipient_key`. The source field is required for each recipient.",
+            "default": "recipient_key"
+          },
+          "recipient_item_key": {
+            "type": "string",
+            "description": "The source field containing the recipient item key. Defaults to `recipient_item_key`. The source field is required when `duplicate_handling` is `keep_each`; otherwise it may be absent.",
+            "default": "recipient_item_key"
+          },
+          "not_before": {
+            "type": "string",
+            "description": "The source field containing the earliest dispatch time as a Unix timestamp in seconds. Defaults to `not_before`. If the source field is absent, no per-recipient start bound is applied.",
+            "default": "not_before"
+          },
+          "expires_at": {
+            "type": "string",
+            "description": "The source field containing the expiry time as a Unix timestamp in seconds. Defaults to `expires_at`. If the source field is absent, no per-recipient expiry bound is applied.",
+            "default": "expires_at"
+          }
+        },
+        "description": "Source fields or CSV columns mapped into each campaign recipient. Every unmapped CSV column or JSON/JSONL top-level property becomes a same-named structured input. CSV cells are preserved as strings until Agent-declared inputs are parsed according to their schemas; additional inputs remain strings.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaignRecipientMappingRequest": {
+        "type": "object",
+        "properties": {
+          "destination": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The source field containing the destination E.164 phone number. Defaults to `destination`. The source field is required for each recipient.",
+            "default": "destination"
+          },
+          "recipient_key": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The source field containing the recipient key. Defaults to `recipient_key`. The source field is required for each recipient.",
+            "default": "recipient_key"
+          },
+          "recipient_item_key": {
+            "type": "string",
+            "description": "The source field containing the recipient item key. Defaults to `recipient_item_key`. The source field is required when `duplicate_handling` is `keep_each`; otherwise it may be absent.",
+            "default": "recipient_item_key"
+          },
+          "not_before": {
+            "type": "string",
+            "description": "The source field containing the earliest dispatch time as a Unix timestamp in seconds. Defaults to `not_before`. If the source field is absent, no per-recipient start bound is applied.",
+            "default": "not_before"
+          },
+          "expires_at": {
+            "type": "string",
+            "description": "The source field containing the expiry time as a Unix timestamp in seconds. Defaults to `expires_at`. If the source field is absent, no per-recipient expiry bound is applied.",
+            "default": "expires_at"
+          }
+        },
+        "description": "Optional source-field mappings for a recipient import. Each omitted entry uses its same-named source field.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaignSchedule": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/TelephonyCampaignScheduleType",
+            "description": "Whether calls are eligible immediately after publication or at a future instant."
+          },
+          "start_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The scheduled start instant. Required only when `type` is `scheduled`."
+          }
+        },
+        "description": "The schedule for an outbound campaign.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaignScheduleType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "immediate",
+              "scheduled"
+            ]
+          }
+        ],
+        "description": "When a published outbound campaign becomes eligible to dispatch calls."
+      },
+      "TelephonyOperation": {
+        "type": "object",
+        "required": [
+          "id",
+          "object",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/TelephonyOperationId"
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "telephony.operation"
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyOperationStatus"
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp"
+          },
+          "error": {
+            "$ref": "#/components/schemas/OpenAI.Error"
+          },
+          "resource": {
+            "$ref": "#/components/schemas/TelephonyOperationResource"
+          }
+        },
+        "description": "An asynchronous outbound telephony operation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyOperationId": {
+        "type": "string",
+        "description": "A service-generated outbound telephony operation identifier.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyOperationResource": {
+        "type": "object",
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "description": "A resource produced by a successful outbound telephony operation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyOperationStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "not_started",
+              "running",
+              "succeeded",
+              "failed",
+              "cancelled",
+              "unknown"
+            ]
+          }
+        ],
+        "description": "The lifecycle status of an outbound telephony operation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyOutboundDestination": {
+        "type": "object",
+        "required": [
+          "type",
+          "value"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/TelephonyOutboundDestinationType",
+            "description": "The destination type. Only E.164 phone numbers are currently supported."
+          },
+          "value": {
+            "type": "string",
+            "pattern": "^\\+[1-9]\\d{1,14}$",
+            "description": "The destination E.164 phone number."
+          }
+        },
+        "description": "The destination of an outbound call.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyOutboundDestinationType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "phone_number"
+            ]
+          }
+        ],
+        "description": "The type of destination for an outbound call.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyOutboundFixedIntervalRetryPolicy": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "fixed_interval"
+            ],
+            "description": "The fixed-interval retry strategy."
+          },
+          "interval": {
+            "$ref": "#/components/schemas/FoundryDurationSeconds",
+            "description": "The fixed delay in seconds between attempts. It must be 0 when `max_attempts` is 1, and from 60 through 86400 when retries are enabled."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyOutboundRetryPolicy"
+          }
+        ],
+        "description": "A retry policy with a fixed interval between outbound call attempts.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyOutboundFixedIntervalRetryPolicyResponse": {
+        "type": "object",
+        "required": [
+          "type",
+          "interval"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "fixed_interval"
+            ],
+            "description": "The fixed-interval retry strategy."
+          },
+          "interval": {
+            "$ref": "#/components/schemas/FoundryDurationSeconds",
+            "description": "The fixed delay in seconds between attempts."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyOutboundRetryPolicyResponse"
+          }
+        ],
+        "description": "The frozen fixed-interval retry policy returned for an outbound call or campaign.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyOutboundRetryPolicy": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/TelephonyOutboundRetryPolicyType",
+            "description": "The retry strategy. Only fixed-interval retries are currently supported."
+          },
+          "max_attempts": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "The maximum number of provider attempts, including the first attempt. Defaults to 1.",
+            "default": 1
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "fixed_interval": "#/components/schemas/TelephonyOutboundFixedIntervalRetryPolicy"
+          }
+        },
+        "description": "The retry policy for one durable outbound call intent. `max_attempts` includes the first attempt. Strategy-specific settings are defined by the derived policy.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyOutboundRetryPolicyResponse": {
+        "type": "object",
+        "required": [
+          "type",
+          "max_attempts"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/TelephonyOutboundRetryPolicyType",
+            "description": "The retry strategy."
+          },
+          "max_attempts": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "The maximum number of provider attempts, including the first attempt."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "fixed_interval": "#/components/schemas/TelephonyOutboundFixedIntervalRetryPolicyResponse"
+          }
+        },
+        "description": "The frozen retry policy returned for an outbound call or campaign.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyOutboundRetryPolicyType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "fixed_interval"
+            ]
+          }
+        ],
+        "description": "The retry strategy for an outbound call.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
