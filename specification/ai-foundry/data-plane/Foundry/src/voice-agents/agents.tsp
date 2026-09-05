@@ -385,7 +385,11 @@ model VoiceAgentSystemTool extends VoiceAgentTool {
   @doc("The service-managed control action. Known values are stable; additional values may be added over time.")
   name: VoiceAgentSystemToolName;
 
-  @doc("An optional description of the system tool.")
+  @doc("""
+    Optional model-facing guidance for when and how to invoke the system tool. For `end_conversation`, omit this
+    property or use an empty string to apply the service default, which instructs the model to speak a closing
+    assistant message before invoking the tool. A non-empty value replaces the service default.
+    """)
   description?: string;
 }
 
@@ -394,7 +398,7 @@ model VoiceAgentSystemTool extends VoiceAgentTool {
 union VoiceAgentSystemToolName {
   string,
 
-  @doc("Ends the active conversation.")
+  @doc("Ends the active conversation after pending response output, including farewell audio, has finished.")
   end_conversation: "end_conversation",
 }
 

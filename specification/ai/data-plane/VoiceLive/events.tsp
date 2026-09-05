@@ -87,6 +87,18 @@ union ServerEventType {
   response_function_call_arguments_done: "response.function_call_arguments.done",
 
   @added(Versions.v2026_01_01_preview)
+  response_system_tool_arguments_delta: "response.system_tool_arguments.delta",
+
+  @added(Versions.v2026_01_01_preview)
+  response_system_tool_arguments_done: "response.system_tool_arguments.done",
+
+  @added(Versions.v2026_01_01_preview)
+  session_end_conversation_cancelled: "session.end_conversation.cancelled",
+
+  @added(Versions.v2026_01_01_preview)
+  session_end_conversation_completed: "session.end_conversation.completed",
+
+  @added(Versions.v2026_01_01_preview)
   mcp_list_tools_in_progress: "mcp_list_tools.in_progress",
 
   @added(Versions.v2026_01_01_preview)

@@ -1400,6 +1400,90 @@ model ServerEventResponseFunctionCallArgumentsDone extends ServerEvent {
   name: string;
 }
 
+/** Returned when the model-generated arguments for a service-managed system tool are updated. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
+@usage(ResponseUsage)
+model ServerEventResponseSystemToolArgumentsDelta extends ServerEvent {
+  /** The event type, must be `response.system_tool_arguments.delta`. */
+  type: ServerEventType.response_system_tool_arguments_delta;
+
+  /** The ID of the response containing the system-tool invocation. */
+  response_id: string;
+
+  /** The ID of the system-tool response item. */
+  item_id: string;
+
+  /** The zero-based index of the system-tool item in the response output. */
+  output_index: int32;
+
+  /** The model-generated ID of the system-tool invocation. */
+  call_id: string;
+
+  /** An incremental fragment of the JSON-encoded system-tool arguments. */
+  delta: string;
+
+  /** Optional upstream obfuscation metadata. */
+  obfuscation?: string;
+}
+
+/** Returned when the model-generated arguments for a service-managed system tool finish streaming. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
+@usage(ResponseUsage)
+model ServerEventResponseSystemToolArgumentsDone extends ServerEvent {
+  /** The event type, must be `response.system_tool_arguments.done`. */
+  type: ServerEventType.response_system_tool_arguments_done;
+
+  /** The ID of the response containing the system-tool invocation. */
+  response_id: string;
+
+  /** The ID of the system-tool response item. */
+  item_id: string;
+
+  /** The zero-based index of the system-tool item in the response output. */
+  output_index: int32;
+
+  /** The model-generated ID of the system-tool invocation. */
+  call_id: string;
+
+  /** The service-managed system-tool name. */
+  name: string;
+
+  /** The complete JSON-encoded system-tool arguments. */
+  arguments: string;
+}
+
+/**
+ * Returned when new user input cancels a pending `end_conversation` close attempt. The session remains open and a
+ * later tool invocation may begin another close attempt.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
+@usage(ResponseUsage)
+model ServerEventSessionEndConversationCancelled extends ServerEvent {
+  /** The event type, must be `session.end_conversation.cancelled`. */
+  type: ServerEventType.session_end_conversation_cancelled;
+
+  /** The `call_id` of the corresponding `system_tool` response item. */
+  id: string;
+}
+
+/**
+ * Returned after pending farewell output has drained and VoiceLive commits to closing the WebSocket with close code
+ * `1001`.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
+@usage(ResponseUsage)
+model ServerEventSessionEndConversationCompleted extends ServerEvent {
+  /** The event type, must be `session.end_conversation.completed`. */
+  type: ServerEventType.session_end_conversation_completed;
+
+  /** The `call_id` of the corresponding `system_tool` response item. */
+  id: string;
+}
+
 /** MCP list tools in progress message. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @added(Versions.v2026_01_01_preview)

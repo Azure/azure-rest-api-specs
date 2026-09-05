@@ -7,7 +7,6 @@ namespace VoiceLive;
 
 /**
  * The supported tool type discriminators for voicelive tools.
- * Currently, only 'function' tools are supported.
  */
 union ToolType {
   string,
@@ -15,6 +14,9 @@ union ToolType {
 
   @added(Versions.v2026_01_01_preview)
   mcp: "mcp",
+
+  @added(Versions.v2026_01_01_preview)
+  end_conversation: "end_conversation",
 }
 
 /**
@@ -36,6 +38,25 @@ model FunctionTool extends Tool {
   name: string;
   description?: string;
   parameters?: unknown;
+}
+
+/**
+ * A service-managed tool that gracefully ends the active conversation. The model supplies a required, non-empty
+ * `reason` argument when invoking the tool. VoiceLive waits for pending response output, including farewell audio,
+ * before closing the WebSocket.
+ */
+@added(Versions.v2026_01_01_preview)
+@usage(RequestUsage)
+model EndConversationTool extends Tool {
+  /** The tool type. Always `end_conversation`. */
+  type: ToolType.end_conversation;
+
+  /**
+   * Optional model-facing guidance for when and how to invoke the tool. Omit this property or use an empty string to
+   * apply the service default, which instructs the model to speak a closing assistant message before invoking the
+   * tool. A non-empty value replaces the service default.
+   */
+  description?: string;
 }
 
 /**

@@ -17,6 +17,12 @@ alias VoiceAgentClientEventUsage = Usage.input | Usage.json;
 alias VoiceAgentServerEventUsage = Usage.output | Usage.json;
 alias VoiceAgentWebSocketMessageUsage = Usage.input | Usage.output | Usage.json;
 
+@doc("Additional conversation-item discriminators emitted by a voice-agent session.")
+union VoiceAgentConversationItemTypeExtension {
+  @doc("A service-managed system-tool invocation.")
+  system_tool: "system_tool",
+}
+
 union VoiceAgentClientEventTypeExtension {
   session_avatar_connect: "session.avatar.connect",
   rtc_call_sdp_create: "rtc.call.sdp.create",
@@ -24,6 +30,10 @@ union VoiceAgentClientEventTypeExtension {
 
 union VoiceAgentServerEventTypeExtension {
   warning: "warning",
+  response_system_tool_arguments_delta: "response.system_tool_arguments.delta",
+  response_system_tool_arguments_done: "response.system_tool_arguments.done",
+  session_end_conversation_cancelled: "session.end_conversation.cancelled",
+  session_end_conversation_completed: "session.end_conversation.completed",
   session_subagent_started: "session.subagent.started",
   session_subagent_completed: "session.subagent.completed",
   session_subagent_aborted: "session.subagent.aborted",
@@ -41,6 +51,11 @@ union VoiceAgentServerEventTypeExtension {
   response_video_delta: "response.video.delta",
 }
 
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Registering Voice-only literals in the imported OpenAI discriminator union preserves a single polymorphic hierarchy."
+@@copyVariants(
+  OpenAI.RealtimeConversationItemType,
+  VoiceAgentConversationItemTypeExtension
+);
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Registering Voice-only literals in the imported OpenAI discriminator union preserves a single polymorphic hierarchy."
 @@copyVariants(
   OpenAI.RealtimeClientEventType,
@@ -135,6 +150,8 @@ union VoiceAgentServerEvent {
   response_done: OpenAI.RealtimeServerEventResponseDone,
   response_function_call_arguments_delta: OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDelta,
   response_function_call_arguments_done: OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDone,
+  response_system_tool_arguments_delta: VoiceAgentServerEventResponseSystemToolArgumentsDelta,
+  response_system_tool_arguments_done: VoiceAgentServerEventResponseSystemToolArgumentsDone,
   response_mcp_call_arguments_delta: OpenAI.RealtimeServerEventResponseMCPCallArgumentsDelta,
   response_mcp_call_arguments_done: OpenAI.RealtimeServerEventResponseMCPCallArgumentsDone,
   response_mcp_call_completed: OpenAI.RealtimeServerEventResponseMCPCallCompleted,
@@ -145,6 +162,8 @@ union VoiceAgentServerEvent {
   response_output_text_delta: OpenAI.RealtimeServerEventResponseTextDelta,
   response_output_text_done: OpenAI.RealtimeServerEventResponseTextDone,
   session_created: OpenAI.RealtimeServerEventSessionCreated,
+  session_end_conversation_cancelled: VoiceAgentServerEventSessionEndConversationCancelled,
+  session_end_conversation_completed: VoiceAgentServerEventSessionEndConversationCompleted,
   session_subagent_started: VoiceAgentServerEventSessionSubagentStarted,
   session_subagent_completed: VoiceAgentServerEventSessionSubagentCompleted,
   session_subagent_aborted: VoiceAgentServerEventSessionSubagentAborted,
@@ -317,6 +336,49 @@ model VoiceAgentRealtimeResponseBase {
   ...OmitProperties<OpenAI.RealtimeResponse, "audio" | "output">;
 }
 
+@doc("The lifecycle status of a service-managed system-tool invocation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentSystemToolCallStatus {
+  string,
+
+  @doc("The system tool is still receiving model-generated arguments.")
+  in_progress: "in_progress",
+
+  @doc("The system-tool arguments are complete.")
+  completed: "completed",
+
+  @doc("The system-tool invocation ended before all arguments were generated.")
+  incomplete: "incomplete",
+}
+
+@doc("A service-managed system-tool invocation emitted by a voice-agent session.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentResponseSystemToolItem extends OpenAI.RealtimeConversationItem {
+  ...VoiceConversationItemPersistence;
+
+  @doc("The server-generated identifier for the response item.")
+  id: string;
+
+  @doc("The object type. Always `realtime.item`.")
+  object?: "realtime.item" = "realtime.item";
+
+  @doc("The item type. Always `system_tool`.")
+  type: "system_tool";
+
+  @doc("The lifecycle status of the system-tool invocation.")
+  status: VoiceAgentSystemToolCallStatus;
+
+  @doc("The service-managed system-tool name.")
+  name: VoiceAgentSystemToolName;
+
+  @doc("The model-generated identifier that correlates the tool item and its lifecycle events.")
+  call_id: string;
+
+  @doc("The JSON-encoded system-tool arguments. This value is empty while argument generation is in progress.")
+  arguments: string;
+}
+
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the upstream live response contract, including conversation_id, while replacing audio and output."
 @doc("A live realtime response returned by the voice-agent service in both `response.created` and `response.done` events.")
@@ -426,6 +488,97 @@ model VoiceAgentClientEventSessionUpdate {
   OpenAI.RealtimeServerEventSessionUpdated.session,
   VoiceAgentSessionResponse
 );
+
+@doc("The `response.system_tool_arguments.delta` server event.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentServerEventResponseSystemToolArgumentsDelta
+  extends OpenAI.RealtimeServerEvent {
+  @doc("The server-generated event identifier.")
+  event_id: string;
+
+  @doc("The event type. Always `response.system_tool_arguments.delta`.")
+  type: "response.system_tool_arguments.delta";
+
+  @doc("The identifier of the response that contains the system-tool invocation.")
+  response_id: string;
+
+  @doc("The identifier of the system-tool response item.")
+  item_id: string;
+
+  @doc("The zero-based index of the system-tool item in the response output.")
+  output_index: int32;
+
+  @doc("The model-generated identifier for the system-tool invocation.")
+  call_id: string;
+
+  @doc("An incremental fragment of the JSON-encoded system-tool arguments.")
+  delta: string;
+
+  @doc("Optional upstream obfuscation metadata.")
+  obfuscation?: string;
+}
+
+@doc("The `response.system_tool_arguments.done` server event.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentServerEventResponseSystemToolArgumentsDone
+  extends OpenAI.RealtimeServerEvent {
+  @doc("The server-generated event identifier.")
+  event_id: string;
+
+  @doc("The event type. Always `response.system_tool_arguments.done`.")
+  type: "response.system_tool_arguments.done";
+
+  @doc("The identifier of the response that contains the system-tool invocation.")
+  response_id: string;
+
+  @doc("The identifier of the system-tool response item.")
+  item_id: string;
+
+  @doc("The zero-based index of the system-tool item in the response output.")
+  output_index: int32;
+
+  @doc("The model-generated identifier for the system-tool invocation.")
+  call_id: string;
+
+  @doc("The service-managed system-tool name.")
+  name: VoiceAgentSystemToolName;
+
+  @doc("The complete JSON-encoded system-tool arguments.")
+  arguments: string;
+}
+
+@doc("Fields shared by server events that report an end-conversation close attempt.")
+model VoiceAgentServerEventSessionEndConversationLifecycle {
+  @doc("The server-generated event identifier.")
+  event_id: string;
+
+  @doc("The tool-call identifier for the `end_conversation` invocation.")
+  id: string;
+}
+
+@doc("The `session.end_conversation.cancelled` server event. New user input cancelled the pending close, so the session remains open.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentServerEventSessionEndConversationCancelled
+  extends OpenAI.RealtimeServerEvent {
+  ...VoiceAgentServerEventSessionEndConversationLifecycle;
+
+  @doc("The event type. Always `session.end_conversation.cancelled`.")
+  type: "session.end_conversation.cancelled";
+}
+
+@doc("The `session.end_conversation.completed` server event. Pending response output has drained and the service has committed to closing the WebSocket.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentServerEventSessionEndConversationCompleted
+  extends OpenAI.RealtimeServerEvent {
+  ...VoiceAgentServerEventSessionEndConversationLifecycle;
+
+  @doc("The event type. Always `session.end_conversation.completed`.")
+  type: "session.end_conversation.completed";
+}
 
 @doc("Fields shared by server events that report the lifecycle of a subagent consultation.")
 model VoiceAgentServerEventSessionSubagentLifecycle {
