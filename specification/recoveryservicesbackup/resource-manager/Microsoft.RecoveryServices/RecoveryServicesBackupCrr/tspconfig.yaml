@@ -1,0 +1,63 @@
+parameters:
+  "service-dir":
+    default: "sdk/recoveryservicesbackup"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: false
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/bms.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.RecoveryServices.CrossRegionRestore"
+    emitter-output-dir: "{output-dir}/sdk/recoveryservices-backup/{namespace}"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/recoveryservices"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-recoveryservicescrossregionrestore"
+    namespace: "azure.mgmt.recoveryservicescrossregionrestore"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-recoveryservices-crossregionrestore"
+    namespace: "com.azure.resourcemanager.recoveryservices.crossregionrestore"
+    service-name: "Recovery Services Backup Cross-Region-Restore"
+    flavor: azure
+    use-object-for-unknown: true
+  "@azure-tools/typespec-ts":
+    compatibility-lro: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-recoveryservicescrossregionrestore"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-recoveryservicescrossregionrestore"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/recoveryservices"
+    emitter-output-dir: "{output-dir}/{service-dir}/armrecoveryservicescrossregionrestore"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armrecoveryservicescrossregionrestore"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  disable:
+    "@azure-tools/typespec-azure-core/casing-style": "Faithful migration of the frozen stable/2023-01-15 CRR contract. The original hand-written swagger uses model/property/interface names that are not PascalCase/camelCase (e.g. KEKDetails, IaasVMRestoreRequest, OperationStatusProvisionILRExtendedInfo, deferredDeleteSyncTimeInUTC, BackupUsageSummariesCRR). These names are part of the published wire contract and must be preserved byte-for-byte."
+    "@azure-tools/typespec-azure-core/composition-over-inheritance": "Faithful migration. The original swagger models a discriminated type hierarchy via allOf/extends (RestoreRequest, ProtectedItem, Job, OperationStatusExtendedInfo, etc.). Preserving the inheritance shape is required to emit an identical bms.json."
+    "@azure-tools/typespec-azure-core/documentation-required": "Faithful migration. A few frozen 2023-01-15 operations (e.g. AadProperties_Get, vaultstorageconfig reads) do not carry descriptions in the original contract; adding docs would change the emitted swagger."
+    "@azure-tools/typespec-azure-core/no-legacy-usage": "Faithful migration. RecoveryPointResource and BackupResourceConfigResource carry a legacy optional 'location' and are modeled with Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation to reproduce the original envelope exactly. They are read-only/singleton proxy resources, not true tracked resources."
+    "@azure-tools/typespec-azure-core/no-openapi-client-extensions": "Faithful migration. The original CRR list operations emit x-ms-pageable with nextLinkName:null. This is reproduced via @@extension to keep the generated bms.json identical to stable/2023-01-15."
+    "@azure-tools/typespec-azure-core/no-string-discriminator": "Faithful migration. The original contract uses plain-string discriminators (objectType, jobType, protectedItemType). Converting to an extensible union would alter the emitted schema."
+    "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels": "Faithful migration. The frozen CRR paths are subscription/location-scoped singletons whose nesting depth exceeds the ARM-standard limit; the legacy path shape must be preserved."
+    "@azure-tools/typespec-azure-resource-manager/lro-location-header": "Faithful migration. The original CRR trigger/operation-result operations (CrossRegionRestore_Trigger, CrrOperationResults_Get) do not emit a Location header on 202; adding one would change the contract."
+    "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint": "Faithful migration. The CRR passive-stamp surface does not expose the standard Microsoft.RecoveryServices/operations list; that endpoint is owned by the main RecoveryServicesBackup spec, not this CRR-only project."
+    "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers": "Faithful migration. The original array properties (e.g. details, recoveryPointTierDetails, clientScripts, errorDetails, tasksList) have no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the contract."
+    "@azure-tools/typespec-azure-resource-manager/no-empty-model": "Faithful migration. The original RecoveryPoints_GetAccessToken 400 response (AccessTokenBadRequestResponse) is an empty model in the frozen contract."
+    "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation": "Faithful migration. BackupResourceConfigResource and RecoveryPointResource are read-only/singleton proxy resources; the original contract intentionally has no delete operation."
+    "@azure-tools/typespec-azure-resource-manager/no-response-body": "Faithful migration. Certain frozen CRR operations return success status codes with no body, matching the original stable/2023-01-15 contract."
