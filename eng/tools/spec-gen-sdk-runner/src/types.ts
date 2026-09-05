@@ -27,6 +27,7 @@ export interface ExecutionReportPackage {
   installationInstructions?: string;
   apiViewArtifact?: string;
   shouldLabelBreakingChange?: boolean;
+  packageRootPath?: string;
 }
 
 /**
