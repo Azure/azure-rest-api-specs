@@ -269,6 +269,7 @@ namespace Azure.AI.Projects.Beta {
 @@clientName(AgentOptimizationCandidate.avg_tokens, "averageTokens");
 @@clientName(AgentOptimizationCandidate.eval_id, "evaluationId");
 @@clientName(AgentOptimizationCandidate.eval_run_id, "evaluationRunId");
+@@clientName(AgentOptimizationJobProgress.elapsed_seconds, "elapsed");
 
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
 @@clientName(Microsoft365PublishResponse, "Microsoft365PublishResult");
@@ -630,6 +631,17 @@ model TimeZoneType {}
 @@alternateType(
   OpenAI.WebSearchApproximateLocation.timezone,
   TimeZoneType,
+  "java"
+);
+
+// Java-only helper scalar so `elapsed_seconds` (wire = fractional seconds as float64)
+// is exposed to callers as java.time.Duration while keeping the wire format unchanged.
+@encode(DurationKnownEncoding.seconds, float64)
+scalar DurationInFloatSeconds extends duration;
+
+@@alternateType(
+  AgentOptimizationJobProgress.elapsed_seconds,
+  DurationInFloatSeconds,
   "java"
 );
 
