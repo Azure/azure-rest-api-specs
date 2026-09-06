@@ -32,7 +32,7 @@ These settings apply only when `--tag=package-2026-08-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2026-08-01-preview'
 input-file:
-  - Azure.Contoso.WidgetManager/preview/2026-08-01-preview/widgets.json
+  - preview/2026-08-01-preview/widgetanalytics.json
 ```
 
 ### Suppress non-TypeSpec SDK related linting rules
