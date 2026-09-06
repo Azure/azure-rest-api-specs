@@ -45,6 +45,9 @@
         "description": "Gets the size category of a widget.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "widgetName",
             "in": "query",
             "description": "The widget name.",
@@ -57,6 +60,18 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/WidgetSizeResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         }
