@@ -35,7 +35,7 @@ mcp-servers:
       - "-v"
       - "/tmp/bin:/tmp/bin:ro"
       - "-v"
-      - "${{ github.workspace }}/repositories:/workspace/repositories"
+      - "${{ github.workspace }}/repositories:${{ github.workspace }}/repositories"
     entrypoint: "/tmp/bin/azsdk"
     entrypointArgs: ["mcp"]
     allowed:
@@ -99,12 +99,13 @@ pre-agent-steps:
       script: |
         const fs = await import("node:fs/promises");
         const contextPath = "/tmp/gh-aw/sdk-breaking-change-context.json";
+        const repositoryRoot = `${{ github.workspace }}/repositories`;
         await fs.writeFile(
           contextPath,
           JSON.stringify({
             sdkRepository: process.env.SDK_REPOSITORY,
-            localSdkRepoPath: `/workspace/repositories/${process.env.SDK_REPOSITORY}`,
-            tspConfigPath: "/workspace/repositories/azure-rest-api-specs/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/tspconfig.yaml",
+            localSdkRepoPath: `${repositoryRoot}/${process.env.SDK_REPOSITORY}`,
+            tspConfigPath: `${repositoryRoot}/azure-rest-api-specs/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/tspconfig.yaml`,
           }),
         );
 
@@ -124,6 +125,9 @@ This workflow runs when an authorized user comments `/azsdk sdk-breaking-change-
 
 Read `/tmp/gh-aw/sdk-breaking-change-context.json`. Use its `localSdkRepoPath` and `tspConfigPath` values unchanged in the tool calls below.
 
+Before invoking any MCP tool, run `test -d "<localSdkRepoPath from the context file>"` to verify that `localSdkRepoPath` exists and is a directory. If the check fails, stop and report the missing path without invoking any MCP tool.
+
+
 The configured MCP server is exposed as the `azure-sdk` CLI executable. It is not the `azsdk` executable. Do not inspect `AZSDK_CLI_PATH`, run `command -v azsdk`, invoke `azsdk`, perform setup verification, or create a tracking issue. The workflow has already installed and started the MCP server.
 
 Perform these steps in order. Stop and report the error if any step fails.
@@ -133,7 +137,7 @@ For every MCP call, write the exact parameters to a JSON file, log the tool name
 azure-sdk <tool-name> . < <parameters-file>
 ```
 
-Do not call `azure-sdk --help` or perform any other preliminary command.
+Do not call `azure-sdk --help` or perform any other preliminary command except the required `localSdkRepoPath` directory check.
 
 1. Invoke `azure-sdk azsdk_package_generate_code .` exactly once with this input shape and the values from the context file:
 
