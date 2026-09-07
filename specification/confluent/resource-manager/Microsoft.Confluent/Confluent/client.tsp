@@ -311,3 +311,16 @@ using Microsoft.Confluent;
   armResourceIdentifier,
   "csharp"
 );
+@@clientName(
+  AzureCosmosDBSourceConnectorServiceInfo.cosmosMessageKeyEnabled,
+  "IsCosmosMessageKeyEnabled",
+  "csharp"
+);
+@@clientName(SCClusterRecord, "ConfluentCluster", "csharp");
+@@clientName(SCEnvironmentRecord, "ConfluentEnvironment", "csharp");
+@@alternateType(SaaSData.saaSResourceId, armResourceIdentifier, "csharp");
+@@alternateType(
+  LatestLinkedSaaSResponse.saaSResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
