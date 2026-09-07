@@ -118,48 +118,5 @@ using Microsoft.Network;
 @@alternateType(DnssecConfig.etag, Azure.Core.eTag, "csharp");
 @@alternateType(RecordSet.etag, Azure.Core.eTag, "csharp");
 @@alternateType(Zone.etag, Azure.Core.eTag, "csharp");
-@@alternateType(
-  RecordSetProperties.targetResource,
-  Azure.ResourceManager.Models.WritableSubResource,
-  "csharp"
-);
-@@alternateType(
-  RecordSetProperties.trafficManagementProfile,
-  Azure.ResourceManager.Models.WritableSubResource,
-  "csharp"
-);
-@@alternateType(
-  ZoneProperties.registrationVirtualNetworks,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(
-  ZoneProperties.resolutionVirtualNetworks,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(
-  DnsResourceReferenceRequestProperties.targetResources,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(
-  DnsResourceReference.dnsResources,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(
-  DnsResourceReference.targetResource,
-  Azure.ResourceManager.Models.WritableSubResource,
-  "csharp"
-);
 @@alternateType(ARecord.ipv4Address, Azure.Core.ipV4Address, "csharp");
 @@alternateType(AaaaRecord.ipv6Address, Azure.Core.ipV6Address, "csharp");
-
-namespace Azure.ResourceManager.Models {
-  /** Represents a reference to an existing resource by its id. */
-  model WritableSubResource {
-    /** The resource id. */
-    id?: Azure.Core.armResourceIdentifier;
-  }
-}
