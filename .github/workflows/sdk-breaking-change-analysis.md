@@ -157,7 +157,6 @@ Perform these steps in order. Run each command exactly once, capture its complet
 azsdk package generate \
   --local-sdk-repo-path "<localSdkRepoPath from the context file>" \
   --tsp-config-path "<tspConfigPath from the context file>" \
-  --output json
 ```
 
 2. Read the generated package path from the successful JSON output. Accept the CLI's package-path property name as emitted. Require it to be a non-empty absolute path to an existing directory; otherwise stop and report the invalid generation result. Do not guess or derive the package path from the SDK repository name.
@@ -166,7 +165,6 @@ azsdk package generate \
 ```bash
 azsdk package build \
   --package-path "<package path returned by azsdk package generate>" \
-  --output json
 ```
 
 4. Detect SDK breaking changes:
@@ -175,7 +173,6 @@ azsdk package build \
 azsdk package detect-breaking-change \
   --package-path "<package path returned by azsdk package generate>" \
   --tsp-config-path "<tspConfigPath from the context file>" \
-  --output json
 ```
 
 Use the generated package path unchanged for both subsequent commands. Report the generation, build, and breaking-change detection results. Do not modify files outside the generated SDK package.
