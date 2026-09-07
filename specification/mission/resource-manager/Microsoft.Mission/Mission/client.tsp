@@ -40,6 +40,11 @@ using Microsoft.Mission;
   "VirtualEnclaveApprovalDeletionCallbackResourceAction",
   "csharp"
 );
+@@clientName(
+  CommunityPolicyOverride,
+  "CommunityPropertiesPolicyOverride",
+  "csharp"
+);
 
 @@clientName(
   Azure.ResourceManager.CommonTypes.MoboBrokerResource,

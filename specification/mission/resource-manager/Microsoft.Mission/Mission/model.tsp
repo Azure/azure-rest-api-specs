@@ -159,6 +159,18 @@ union ApprovalDeletionCallbackResourceRequestAction {
   Update: "Update",
 }
 
+@added(Microsoft.Mission.Versions.v2025_05_01_preview)
+@doc("The policy override setting for a community.")
+union CommunityPolicyOverride {
+  string,
+
+  @doc("Apply enclave-specific policies.")
+  Enclave: "Enclave",
+
+  @doc("Do not apply a policy override.")
+  None: "None",
+}
+
 @doc("Arm resource update successful")
 model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.Resource>
   is ArmResponse<TResource>;

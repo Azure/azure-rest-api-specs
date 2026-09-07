@@ -4888,15 +4888,8 @@
           "x-ms-identifiers": []
         },
         "policyOverride": {
-          "type": "string",
-          "description": "Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement.",
-          "enum": [
-            "Enclave",
-            "None"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/CommunityPolicyOverride",
+          "description": "Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement."
         },
         "communityRoleAssignments": {
           "type": "array",
@@ -4930,6 +4923,30 @@
             "type": "string"
           }
         }
+      }
+    },
+    "CommunityPolicyOverride": {
+      "type": "string",
+      "description": "The policy override setting for a community.",
+      "enum": [
+        "Enclave",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "CommunityPolicyOverride",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enclave",
+            "value": "Enclave",
+            "description": "Apply enclave-specific policies."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Do not apply a policy override."
+          }
+        ]
       }
     },
     "CommunityProperties": {
@@ -4985,15 +5002,8 @@
           "x-ms-identifiers": []
         },
         "policyOverride": {
-          "type": "string",
-          "description": "Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement.",
-          "enum": [
-            "Enclave",
-            "None"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/CommunityPolicyOverride",
+          "description": "Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement."
         },
         "communityRoleAssignments": {
           "type": "array",
