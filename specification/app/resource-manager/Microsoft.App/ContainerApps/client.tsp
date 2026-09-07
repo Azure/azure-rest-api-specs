@@ -986,13 +986,8 @@ union OpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
-// Preserve the released C# managed-environment resource names after 2026-07-01
-// introduced a second private endpoint connection resource under container apps.
-@@clientName(
-  PrivateEndpointConnections,
-  "ContainerAppPrivateEndpointConnections",
-  "csharp"
-);
+// Give the new 2026-07-01 container-app child a distinct C# name so the SDKs can
+// preserve the released managed-environment resource names with CodeGenType.
 @@clientName(
   ContainerAppPrivateEndpointConnections,
   "ContainerAppContainerPrivateEndpointConnections",
