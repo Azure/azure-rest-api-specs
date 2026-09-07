@@ -1,72 +1,72 @@
 {
   "parameters": {
-    "api-version": "2025-10-08",
+    "api-version": "2026-06-01",
     "globalRulestackName": "lrs1",
     "priority": "1"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "type": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "id": "aaaaaaaaaaaaaaaaaaaaaa",
+        "name": "1",
+        "type": "PaloAltoNetworks.Cloudngfw/globalRulestacks/preRules",
+        "id": "/providers/PaloAltoNetworks.Cloudngfw/globalRulestacks/lrs1/preRules/1",
         "properties": {
-          "description": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "description": "Sample rule for demonstration purposes.",
           "actionType": "Allow",
           "applications": [
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            "web-browsing"
           ],
-          "auditComment": "aaa",
+          "auditComment": "Reviewed and approved by the network security team.",
           "category": {
             "feeds": [
-              "aaaaaaaaaaaa"
+              "threat-intel-feed"
             ],
             "urlCustom": [
-              "aaaaa"
+              "www.contoso.com"
             ]
           },
           "decryptionRuleType": "SSLOutboundInspection",
           "destination": {
             "cidrs": [
-              "aaaaaaa"
+              "10.0.0.0/24"
             ],
             "countries": [
-              "aaaaaaaaaaaaaa"
+              "US"
             ],
             "feeds": [
-              "aaaaaaaaaaaaaaaaaaaaaaaaaa"
+              "threat-intel-feed"
             ],
             "fqdnLists": [
-              "aaaaaaaaaaaaa"
+              "allowed-fqdn-list"
             ],
             "prefixLists": [
-              "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              "corp-prefix-list"
             ]
           },
           "enableLogging": "DISABLED",
-          "etag": "aaaaaaaaaaaaaaaaaaaa",
-          "inboundInspectionCertificate": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "etag": "a3f5c9e1b7d2",
+          "inboundInspectionCertificate": "inbound-inspection-cert",
           "negateDestination": "TRUE",
           "negateSource": "TRUE",
           "priority": 24,
           "protocolPortList": [
-            "aaaaaaaaaaaa"
+            "tcp/443"
           ],
           "provisioningState": "Accepted",
-          "ruleName": "aaaaaaaaaaaaaaaaaaaaaaaaa",
+          "ruleName": "allow-outbound-web",
           "ruleState": "DISABLED",
           "source": {
             "cidrs": [
-              "aaa"
+              "10.0.0.0/24"
             ],
             "countries": [
-              "aaaaa"
+              "US"
             ],
             "feeds": [
-              "aaaaaaaaaaaaaaaaaaa"
+              "threat-intel-feed"
             ],
             "prefixLists": [
-              "aaaaaaaaaaaaaaaaaaaa"
+              "corp-prefix-list"
             ]
           },
           "tags": [
@@ -75,7 +75,7 @@
               "value": "value"
             }
           ],
-          "protocol": "aaaa"
+          "protocol": "TCP"
         },
         "systemData": {
           "createdAt": "2022-09-09T05:08:24.229Z",

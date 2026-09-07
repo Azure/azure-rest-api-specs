@@ -265,9 +265,15 @@ union BillingCycle {
 @added(Versions.v2026_01_26_preview)
 union FirewallSkuType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * Standard firewall SKU.
+   */
   STANDARD: "STANDARD",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * Premium firewall SKU.
+   */
   PREMIUM: "PREMIUM",
 }
 
@@ -1281,7 +1287,7 @@ model FirewallDeploymentProperties {
    * Firewall SKU type, Default will be STANDARD.
    */
   @added(Versions.v2026_01_26_preview)
-  firewallSku?: string = "STANDARD";
+  firewallSku?: FirewallSkuType = FirewallSkuType.STANDARD;
 
   /**
    * Time in minutes to keep serving existing traffic during scale-in or upgrade events before removing a firewall instance. Can only be set on PUT, not updatable via PATCH, Default will be 15.
