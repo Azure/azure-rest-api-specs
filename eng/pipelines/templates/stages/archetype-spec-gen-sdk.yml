@@ -128,6 +128,8 @@ stages:
           Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"
           $prUrl = ""
           Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
+          $buildFailedLabel = ""
+          Write-Host "##vso[task.setvariable variable=BuildFailedLabel]$buildFailedLabel"
         displayName: "Create Run Time Variables"
 
       - ${{ if and(eq(variables['System.TeamProject'], 'internal'), ne(variables['Build.Reason'], 'PullRequest')) }}:
@@ -376,6 +378,7 @@ stages:
               -AuthToken "$(GH_TOKEN)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
               -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
+              -PRLabels "$(BuildFailedLabel)"
               -OpenAsDraft $$(OpenSdkPullRequestAsDraft)
               -UpdateExistingPullRequest $true
 
