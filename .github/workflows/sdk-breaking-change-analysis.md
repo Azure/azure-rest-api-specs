@@ -124,10 +124,18 @@ This workflow runs when an authorized user comments `/azsdk sdk-breaking-change-
 
 Read `/tmp/gh-aw/sdk-breaking-change-context.json`. Use its `localSdkRepoPath` and `tspConfigPath` values unchanged in the tool calls below.
 
-Perform these steps in order. Stop and report the error if any step fails.
-Immediately before each tool call, log the tool name and exact parameters as JSON, then invoke the tool with that same JSON object.
+The configured MCP server is exposed as the `azure-sdk` CLI executable. It is not the `azsdk` executable. Do not inspect `AZSDK_CLI_PATH`, run `command -v azsdk`, invoke `azsdk`, perform setup verification, or create a tracking issue. The workflow has already installed and started the MCP server.
 
-1. Call `azsdk_package_generate_code` exactly once with this input shape and the values from the context file:
+Perform these steps in order. Stop and report the error if any step fails.
+For every MCP call, write the exact parameters to a JSON file, log the tool name and compact JSON parameters, then invoke the tool through the gh-aw CLI transport using this form:
+
+```bash
+azure-sdk <tool-name> . < <parameters-file>
+```
+
+Do not call `azure-sdk --help` or perform any other preliminary command.
+
+1. Invoke `azure-sdk azsdk_package_generate_code .` exactly once with this input shape and the values from the context file:
 
 ```json
 {
@@ -139,8 +147,8 @@ Immediately before each tool call, log the tool name and exact parameters as JSO
 ```
 
 2. Read `packagePath` from the successful `azsdk_package_generate_code` result.
-3. Call `azsdk_package_build_code` exactly once with that `packagePath`.
-4. Call `azsdk_package_detect_breaking_changes` exactly once with both parameters:
+3. Invoke `azure-sdk azsdk_package_build_code .` exactly once with a JSON object containing that `packagePath`.
+4. Invoke `azure-sdk azsdk_package_detect_breaking_changes .` exactly once with both parameters:
 
 ```json
 {
