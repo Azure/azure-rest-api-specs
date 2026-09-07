@@ -419,12 +419,6 @@ model RelayNamespaceProperties {
    */
   @added(Versions.v2026_07_01_preview)
   disableLocalAuth?: boolean;
-
-  /**
-   * Alternate name for namespace
-   */
-  @added(Versions.v2026_07_01_preview)
-  alternateName?: string;
 }
 
 /**
