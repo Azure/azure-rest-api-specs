@@ -61,15 +61,16 @@ pre-agent-steps:
           ...context.repo,
           pull_number: pullNumber,
         });
-        const { resolveSdkValidationRepository } =
-          await import("${{ github.workspace }}/.github/workflows/src/sdk-breaking-change-analysis.js");
-        const sdkRepository = await resolveSdkValidationRepository({
-          github,
-          owner: context.repo.owner,
-          repo: context.repo.repo,
-          headSha: pull.head.sha,
-          pullNumber,
-        });
+        //const { resolveSdkValidationRepository } =
+        //  await import("${{ github.workspace }}/.github/workflows/src/sdk-breaking-change-analysis.js");
+        //const sdkRepository = await resolveSdkValidationRepository({
+        //  github,
+        //  owner: context.repo.owner,
+        //  repo: context.repo.repo,
+        //  headSha: pull.head.sha,
+        //  pullNumber,
+        //});
+        const sdkRepository = "azure-sdk-for-go";
         core.setOutput("repository", pull.head.repo.full_name);
         core.setOutput("ref", pull.head.sha);
         core.setOutput("sdk-repository", sdkRepository);
