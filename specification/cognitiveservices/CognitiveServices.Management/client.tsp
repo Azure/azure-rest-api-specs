@@ -224,6 +224,11 @@ op regenerateKeyCustom(
 );
 @@clientName(AgentDeployment, "CognitiveServicesAgentDeployment", "csharp");
 @@clientName(
+  ArcDeploymentVllmParameters,
+  "CognitiveServicesArcDeploymentVllmProperties",
+  "csharp"
+);
+@@clientName(
   AgentDeploymentProperties,
   "CognitiveServicesAgentDeploymentProperties",
   "csharp"
@@ -1112,9 +1117,20 @@ op regenerateKeyCustom(
   "LastOperationOn",
   "csharp"
 );
+@@clientName(
+  ArcDeploymentProvisioningDetails.lastOperationTimestamp,
+  "LastOperationOn",
+  "csharp"
+);
+@@clientName(
+  ArcDeploymentVllmParameters.enforceEager,
+  "IsEagerExecutionEnforced",
+  "csharp"
+);
 @@clientName(SshSettings.adminEnabled, "IsAdminEnabled", "csharp");
 
 // Type changes: use standard ARM types for etag, location, identity
+@@alternateType(ArcDeployment.etag, eTag, "csharp");
 @@alternateType(Compute.etag, eTag, "csharp");
 @@alternateType(ComputeProperties.location, azureLocation, "csharp");
 @@alternateType(

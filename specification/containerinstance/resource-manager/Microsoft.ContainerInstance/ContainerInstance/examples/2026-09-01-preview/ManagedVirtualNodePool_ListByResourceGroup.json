@@ -1,0 +1,36 @@
+{
+  "operationId": "ManagedVirtualNodePools_ListByResourceGroup",
+  "title": "List managed virtual node pools by resource group",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "demo",
+    "api-version": "2026-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerInstance/managedVirtualNodePools/demo-pool",
+            "name": "demo-pool",
+            "type": "Microsoft.ContainerInstance/managedVirtualNodePools",
+            "location": "eastus",
+            "tags": {
+              "env": "prod"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "aksClusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerService/managedClusters/demo-aks",
+              "managedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ManagedIdentity/userAssignedIdentities/demo-mi",
+              "aiAgentGroupResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerInstance/aiAgentsGroups/demo-aag",
+              "subnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.Network/virtualNetworks/demo-vnet/subnets/demo-subnet",
+              "minNodes": 1,
+              "maxNodes": 5
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerInstance/managedVirtualNodePools?api-version=2026-09-01-preview&%24skipToken=token"
+      }
+    }
+  }
+}
