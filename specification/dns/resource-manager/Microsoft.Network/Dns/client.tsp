@@ -100,11 +100,15 @@ using Microsoft.Network;
   "csharp"
 );
 @@clientName(ZoneProperties.numberOfRecordSets, "numberOfRecords", "csharp");
+// The .NET SDK retains RegistrationVirtualNetworks as an obsolete
+// WritableSubResource compatibility property.
 @@clientName(
   ZoneProperties.registrationVirtualNetworks,
   "RegistrationVirtualNetworkReferences",
   "csharp"
 );
+// The .NET SDK retains ResolutionVirtualNetworks as an obsolete
+// WritableSubResource compatibility property.
 @@clientName(
   ZoneProperties.resolutionVirtualNetworks,
   "ResolutionVirtualNetworkReferences",
@@ -115,6 +119,8 @@ using Microsoft.Network;
   "DnsResourceReferenceContent",
   "csharp"
 );
+// The .NET SDK retains TargetResources as an obsolete WritableSubResource
+// compatibility property.
 @@clientName(
   DnsResourceReferenceRequestProperties.targetResources,
   "TargetResourceReferences",
