@@ -316,8 +316,6 @@ using Microsoft.Confluent;
   "IsCosmosMessageKeyEnabled",
   "csharp"
 );
-@@clientName(SCClusterRecord, "ConfluentCluster", "csharp");
-@@clientName(SCEnvironmentRecord, "ConfluentEnvironment", "csharp");
 @@alternateType(SaaSData.saaSResourceId, armResourceIdentifier, "csharp");
 @@alternateType(
   LatestLinkedSaaSResponse.saaSResourceId,
