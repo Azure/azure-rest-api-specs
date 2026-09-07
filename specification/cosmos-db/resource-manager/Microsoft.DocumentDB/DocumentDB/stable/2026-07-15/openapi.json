@@ -16097,6 +16097,11 @@
         "migrationState": {
           "$ref": "#/definitions/BackupPolicyMigrationState",
           "description": "The object representing the state of the migration between the backup policies."
+        },
+        "backupRetentionLockExpirationTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC timestamp until which changes that reduce backup retention are locked.\nWhile active, this timestamp can only be extended."
         }
       },
       "discriminator": "type",
