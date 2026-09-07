@@ -19,7 +19,7 @@ model ApprovalCallbackRequest {
   resourceRequestAction: ApprovalCallbackResourceRequestAction;
 
   @doc("Approval status indicating 'Approved' or 'Rejected'")
-  approvalStatus: ApprovalCallbackStatus;
+  approvalStatus: ApprovalCallbackRequestApprovalStatus;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Payload requested by client upon approval action")
@@ -30,7 +30,7 @@ model ApprovalCallbackRequest {
 @doc("Request body for calling post-action")
 model ApprovalActionRequest {
   @doc("Approval status indicating 'Approved' or 'Rejected'")
-  approvalStatus: ApprovalActionStatus;
+  approvalStatus: ApprovalActionRequestApprovalStatus;
 }
 
 // Define a model for the approval initator callback response

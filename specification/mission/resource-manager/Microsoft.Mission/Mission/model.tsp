@@ -160,7 +160,7 @@ union ApprovalDeletionCallbackResourceRequestAction {
 }
 
 @doc("The approval status for an approval callback request.")
-union ApprovalCallbackStatus {
+union ApprovalCallbackRequestApprovalStatus {
   string,
 
   @doc("The request is approved.")
@@ -171,7 +171,7 @@ union ApprovalCallbackStatus {
 }
 
 @doc("The approval status for an approval action request.")
-union ApprovalActionStatus {
+union ApprovalActionRequestApprovalStatus {
   string,
 
   @doc("The request is approved.")

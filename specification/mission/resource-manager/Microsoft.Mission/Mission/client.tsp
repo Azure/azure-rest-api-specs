@@ -41,17 +41,6 @@ using Microsoft.Mission;
   "csharp"
 );
 @@clientName(
-  ApprovalCallbackStatus,
-  "ApprovalCallbackRequestApprovalStatus",
-  "csharp"
-);
-@@clientName(
-  ApprovalActionStatus,
-  "ApprovalActionRequestApprovalStatus",
-  "csharp"
-);
-
-@@clientName(
   Azure.ResourceManager.CommonTypes.MoboBrokerResource,
   "VirtualEnclaveManagedOnBehalfOfBroker",
   "csharp"
