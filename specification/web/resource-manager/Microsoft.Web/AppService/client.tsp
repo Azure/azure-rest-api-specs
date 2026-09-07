@@ -3820,8 +3820,8 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   CsmPublishingCredentialsPoliciesEntity,
   "provisioning-resource-name",
   #{
-    `Microsoft.Web/sites/basicPublishingCredentialsPolicies`: "WebSiteFtpPublishingCredentialsPolicy",
-    `Microsoft.Web/sites/slots/basicPublishingCredentialsPolicies`: "WebSiteSlotFtpPublishingCredentialsPolicy",
+    `Microsoft.Web/sites/basicPublishingCredentialsPolicies`: "WebSitePublishingCredentialsPolicy",
+    `Microsoft.Web/sites/slots/basicPublishingCredentialsPolicies`: "WebSiteSlotPublishingCredentialsPolicy",
   },
   "csharp"
 );
