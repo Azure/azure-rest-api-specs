@@ -20,34 +20,20 @@
 
 ### Case 1 — Add ARM Resource Type
 
-Collect: target API version, resource name (PascalCase), hierarchy (top-level or
-nested + parent), properties (name, type, required/optional), and whether PUT,
-PATCH, and DELETE complete before the initial response or require LRO polling.
+Collect: target API version, resource name (PascalCase), hierarchy (top-level or nested + parent), properties (name, type, required/optional).
 
-Defaults: top-level → `TrackedResource`, child → `ProxyResource`. Operations:
-`createOrUpdate` (PUT), `get`, `update` (PATCH), `delete`, list by parent.
-Top-level adds list by subscription.
+Defaults: top-level → `TrackedResource`, child → `ProxyResource`. Operations: `createOrReplace` (PUT/async), `get`, `update/patch`, `delete` (async), list by parent. Top-level adds list by subscription.
 
-> Use `createOrUpdate` as the operation name with an
-> `ArmResourceCreateOrReplaceSync` or `ArmResourceCreateOrReplaceAsync`
-> template. Choose sync or async templates for PUT, PATCH, and DELETE to match
-> actual runtime behavior; do not infer completion behavior from the HTTP
-> method. Use `ArmCustomPatch` for PATCH.
+> Use `createOrReplace` (not `createOrUpdate`). Use `ArmCustomPatch` for PATCH.
 > Top-level tracked resources MUST have `listByResourceGroup` and `listBySubscription`.
 
 ### Case 2 — Add ARM Resource Operation
 
-Collect: target resource, operation type (CRUD or custom), operation name
-(custom actions), request/response models (custom actions), and whether the
-operation completes before the initial response or requires LRO polling.
+Collect: target resource, operation type (CRUD or custom), operation name (custom actions), request/response models (custom actions).
 
-Defaults: GET, LIST, and HEAD are synchronous. For PUT, PATCH, DELETE, and
-POST/action, choose sync or async to match actual runtime behavior; ask the user
-when completion behavior is not supplied.
+Defaults: never async → GET, LIST, HEAD. Default async → PUT, DELETE. Default sync → PATCH. Always ask user → POST/action.
 
-> Use `createOrUpdate` as the operation name with an
-> `ArmResourceCreateOrReplaceSync` or `ArmResourceCreateOrReplaceAsync`
-> template. Use `ArmCustomPatch` for PATCH.
+> Use `createOrReplace` (not `createOrUpdate`). Use `ArmCustomPatch` for PATCH.
 > For async POST, use ARM combined headers: `LroHeaders = ArmCombinedLroHeaders<FinalResult = ExportResult>`.
 
 ### Case 3 — API Versioning
