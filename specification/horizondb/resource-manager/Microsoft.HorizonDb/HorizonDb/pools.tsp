@@ -108,7 +108,7 @@ model PoolProperties {
   parameterGroup: PoolParameterGroupReference;
 
   @added(Versions.v2026_09_01)
-  @doc("The scheduled maintenance configuration for the pool. When maintenanceManagementType is User, dayOfWeek, startHourUtc, and startMinuteUtc are required. Those schedule properties must be absent when maintenanceManagementType is System.")
+  @doc("The scheduled maintenance configuration for the pool. The properties available depend on the selected maintenance management type.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   scheduledMaintenance?: ScheduledMaintenanceProperties;
 
@@ -136,7 +136,7 @@ model PoolPropertiesForPatchUpdate {
   parameterGroup?: PoolParameterGroupReferenceForPatchUpdate;
 
   @added(Versions.v2026_09_01)
-  @doc("The scheduled maintenance configuration to update for the pool. When supplied, the complete System or User configuration is required. Omission preserves the current configuration.")
+  @doc("The scheduled maintenance configuration to update for the pool. When supplied, the complete configuration for the selected maintenance management type is required. Omission preserves the current configuration.")
   @visibility(Lifecycle.Update)
   scheduledMaintenance?: ScheduledMaintenanceProperties;
 }

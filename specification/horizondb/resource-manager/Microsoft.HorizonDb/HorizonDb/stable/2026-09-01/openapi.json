@@ -7342,7 +7342,7 @@
     },
     "DefaultParameterGroup": {
       "type": "object",
-      "description": "A default parameter group available in a specific region. For each PostgreSQL version, the DefaultParameterGroups APIs return at most one default parameter group in a location.",
+      "description": "A default parameter group available in a specific region. It contains engine-defined parameters and excludes service and other non-engine entries. For each PostgreSQL version, the DefaultParameterGroups APIs return at most one default parameter group in a location.",
       "properties": {
         "name": {
           "type": "string",
@@ -7350,7 +7350,7 @@
         },
         "parameters": {
           "type": "array",
-          "description": "Parameters in the default parameter group.",
+          "description": "Engine-defined parameters in the default parameter group. Service and other non-engine entries are excluded.",
           "items": {
             "$ref": "#/definitions/ParameterProperties"
           },
@@ -8605,6 +8605,16 @@
             "create"
           ]
         },
+        "defaultValue": {
+          "type": "string",
+          "description": "The system-defined default value of the parameter, independent of the effective value.",
+          "readOnly": true
+        },
+        "valueSource": {
+          "$ref": "#/definitions/ParameterValueSource",
+          "description": "The source of the effective parameter value. UserOverride means that the value was explicitly supplied by the user, even when it equals defaultValue.",
+          "readOnly": true
+        },
         "dataType": {
           "type": "string",
           "description": "The data type of the parameter.",
@@ -8622,7 +8632,7 @@
         },
         "isReadOnly": {
           "type": "boolean",
-          "description": "Whether the parameter is a read-only parameter.",
+          "description": "Whether the parameter is read-only. Read-only parameters cannot be overridden.",
           "readOnly": true
         },
         "documentationLink": {
@@ -8636,6 +8646,30 @@
           "description": "The unit of measurement for the parameter.",
           "readOnly": true
         }
+      }
+    },
+    "ParameterValueSource": {
+      "type": "string",
+      "description": "The source of the effective value assigned to a HorizonDB parameter.",
+      "enum": [
+        "SystemDefault",
+        "UserOverride"
+      ],
+      "x-ms-enum": {
+        "name": "ParameterValueSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemDefault",
+            "value": "SystemDefault",
+            "description": "The effective value is the system-defined default."
+          },
+          {
+            "name": "UserOverride",
+            "value": "UserOverride",
+            "description": "The effective value was explicitly supplied by the user, even when it equals the system-defined default value."
+          }
+        ]
       }
     },
     "PasswordAuthentication": {
@@ -9043,7 +9077,7 @@
         },
         "scheduledMaintenance": {
           "$ref": "#/definitions/ScheduledMaintenanceProperties",
-          "description": "The scheduled maintenance configuration for the pool. When maintenanceManagementType is User, dayOfWeek, startHourUtc, and startMinuteUtc are required. Those schedule properties must be absent when maintenanceManagementType is System.",
+          "description": "The scheduled maintenance configuration for the pool. The properties available depend on the selected maintenance management type.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -9088,7 +9122,7 @@
         },
         "scheduledMaintenance": {
           "$ref": "#/definitions/ScheduledMaintenanceProperties",
-          "description": "The scheduled maintenance configuration to update for the pool. When supplied, the complete System or User configuration is required. Omission preserves the current configuration.",
+          "description": "The scheduled maintenance configuration to update for the pool. When supplied, the complete configuration for the selected maintenance management type is required. Omission preserves the current configuration.",
           "x-ms-mutability": [
             "update"
           ]
@@ -9480,66 +9514,11 @@
         ]
       }
     },
-    "ScheduledMaintenanceDayOfWeek": {
-      "type": "string",
-      "description": "The day of the week for user-managed scheduled maintenance.",
-      "enum": [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
-      "x-ms-enum": {
-        "name": "ScheduledMaintenanceDayOfWeek",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Sunday",
-            "value": "Sunday",
-            "description": "Sunday."
-          },
-          {
-            "name": "Monday",
-            "value": "Monday",
-            "description": "Monday."
-          },
-          {
-            "name": "Tuesday",
-            "value": "Tuesday",
-            "description": "Tuesday."
-          },
-          {
-            "name": "Wednesday",
-            "value": "Wednesday",
-            "description": "Wednesday."
-          },
-          {
-            "name": "Thursday",
-            "value": "Thursday",
-            "description": "Thursday."
-          },
-          {
-            "name": "Friday",
-            "value": "Friday",
-            "description": "Friday."
-          },
-          {
-            "name": "Saturday",
-            "value": "Saturday",
-            "description": "Saturday."
-          }
-        ]
-      }
-    },
     "ScheduledMaintenanceManagementType": {
       "type": "string",
       "description": "Specifies who manages scheduled maintenance for a HorizonDB pool.",
       "enum": [
-        "System",
-        "User"
+        "System"
       ],
       "x-ms-enum": {
         "name": "ScheduledMaintenanceManagementType",
@@ -9549,11 +9528,6 @@
             "name": "System",
             "value": "System",
             "description": "Scheduled maintenance is managed by the system."
-          },
-          {
-            "name": "User",
-            "value": "User",
-            "description": "Scheduled maintenance is managed by the user."
           }
         ]
       }
@@ -9705,56 +9679,6 @@
         }
       ],
       "x-ms-discriminator-value": "System"
-    },
-    "UserScheduledMaintenanceProperties": {
-      "type": "object",
-      "description": "The user-managed weekly scheduled maintenance configuration for a HorizonDB pool.",
-      "properties": {
-        "dayOfWeek": {
-          "$ref": "#/definitions/ScheduledMaintenanceDayOfWeek",
-          "description": "The day of the week on which user-managed maintenance starts.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "startHourUtc": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The hour, in UTC, at which user-managed maintenance starts. Valid values range from 0 through 23.",
-          "minimum": 0,
-          "maximum": 23,
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "startMinuteUtc": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The minute, in UTC, at which user-managed maintenance starts. Valid values range from 0 through 59.",
-          "minimum": 0,
-          "maximum": 59,
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "dayOfWeek",
-        "startHourUtc",
-        "startMinuteUtc"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ScheduledMaintenanceProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "User"
     },
     "WritableDescription": {
       "type": "string",

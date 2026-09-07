@@ -112,6 +112,18 @@ model LegacyParameterProperties {
 }
 
 @added(Versions.v2026_09_01)
+@doc("The source of the effective value assigned to a HorizonDB parameter.")
+union ParameterValueSource {
+  string,
+
+  /** The effective value is the system-defined default. */
+  SystemDefault: "SystemDefault",
+
+  /** The effective value was explicitly supplied by the user, even when it equals the system-defined default value. */
+  UserOverride: "UserOverride",
+}
+
+@added(Versions.v2026_09_01)
 @doc("Properties of a HorizonDB parameter.")
 model ParameterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
@@ -126,6 +138,16 @@ model ParameterProperties {
   @doc("The value of the configuration.")
   value?: string;
 
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
+  @doc("The system-defined default value of the parameter, independent of the effective value.")
+  defaultValue?: string;
+
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
+  @doc("The source of the effective parameter value. UserOverride means that the value was explicitly supplied by the user, even when it equals defaultValue.")
+  valueSource?: ParameterValueSource;
+
   @visibility(Lifecycle.Read)
   @doc("The data type of the parameter.")
   dataType?: string;
@@ -139,7 +161,7 @@ model ParameterProperties {
   isDynamic?: boolean;
 
   @visibility(Lifecycle.Read)
-  @doc("Whether the parameter is a read-only parameter.")
+  @doc("Whether the parameter is read-only. Read-only parameters cannot be overridden.")
   isReadOnly?: boolean;
 
   @visibility(Lifecycle.Read)
@@ -217,12 +239,12 @@ model ParameterGroupConnectionProperties {
 }
 
 @added(Versions.v2026_09_01)
-@doc("A default parameter group available in a specific region. For each PostgreSQL version, the DefaultParameterGroups APIs return at most one default parameter group in a location.")
+@doc("A default parameter group available in a specific region. It contains engine-defined parameters and excludes service and other non-engine entries. For each PostgreSQL version, the DefaultParameterGroups APIs return at most one default parameter group in a location.")
 model DefaultParameterGroup {
   @doc("The unique name of the default parameter group.")
   name: string;
 
-  @doc("Parameters in the default parameter group.")
+  @doc("Engine-defined parameters in the default parameter group. Service and other non-engine entries are excluded.")
   @identifiers(#["name"])
   parameters: ParameterProperties[];
 

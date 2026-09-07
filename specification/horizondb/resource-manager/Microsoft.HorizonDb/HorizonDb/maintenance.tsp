@@ -45,28 +45,28 @@ model SystemScheduledMaintenanceProperties
   maintenanceManagementType: "System";
 }
 
-@added(Versions.v2026_09_01)
+@added(Versions.v2027_03_01_preview)
 @doc("The user-managed weekly scheduled maintenance configuration for a HorizonDB pool.")
 model UserScheduledMaintenanceProperties
   extends ScheduledMaintenanceProperties {
-  @added(Versions.v2026_09_01)
+  @added(Versions.v2027_03_01_preview)
   @doc("Specifies that scheduled maintenance is managed by the user.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   maintenanceManagementType: "User";
 
-  @added(Versions.v2026_09_01)
+  @added(Versions.v2027_03_01_preview)
   @doc("The day of the week on which user-managed maintenance starts.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   dayOfWeek: ScheduledMaintenanceDayOfWeek;
 
-  @added(Versions.v2026_09_01)
+  @added(Versions.v2027_03_01_preview)
   @minValue(0)
   @maxValue(23)
   @doc("The hour, in UTC, at which user-managed maintenance starts. Valid values range from 0 through 23.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   startHourUtc: int32;
 
-  @added(Versions.v2026_09_01)
+  @added(Versions.v2027_03_01_preview)
   @minValue(0)
   @maxValue(59)
   @doc("The minute, in UTC, at which user-managed maintenance starts. Valid values range from 0 through 59.")
@@ -172,10 +172,11 @@ union ScheduledMaintenanceManagementType {
   System: "System",
 
   /** Scheduled maintenance is managed by the user. */
+  @added(Versions.v2027_03_01_preview)
   User: "User",
 }
 
-@added(Versions.v2026_09_01)
+@added(Versions.v2027_03_01_preview)
 @doc("The day of the week for user-managed scheduled maintenance.")
 union ScheduledMaintenanceDayOfWeek {
   string,
