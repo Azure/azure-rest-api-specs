@@ -100,8 +100,23 @@ using Microsoft.Network;
 );
 @@clientName(ZoneProperties.numberOfRecordSets, "numberOfRecords", "csharp");
 @@clientName(
+  ZoneProperties.registrationVirtualNetworks,
+  "RegistrationVirtualNetworkReferences",
+  "csharp"
+);
+@@clientName(
+  ZoneProperties.resolutionVirtualNetworks,
+  "ResolutionVirtualNetworkReferences",
+  "csharp"
+);
+@@clientName(
   DnsResourceReferenceRequest,
   "DnsResourceReferenceContent",
+  "csharp"
+);
+@@clientName(
+  DnsResourceReferenceRequestProperties.targetResources,
+  "TargetResourceReferences",
   "csharp"
 );
 @@clientName(ARecord.ipv4Address, "IPv4Address", "csharp");
