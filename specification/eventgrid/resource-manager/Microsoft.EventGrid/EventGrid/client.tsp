@@ -450,7 +450,15 @@ union PrivateEndpointConnectionsParentTypeCsharp {
   Azure.ResourceManager.Foundations.ExtendedLocation,
   "csharp"
 );
+@@alternateType(CustomDomainConfiguration.certificateUrl, url, "csharp");
+@@alternateType(InlineEventProperties.documentationUrl, url, "csharp");
+@@alternateType(InlineEventProperties.dataSchemaUrl, url, "csharp");
 @@alternateType(IssuerCertificateInfo.certificateUrl, url, "csharp");
+@@alternateType(
+  PartnerTopicInfo.azureSubscriptionId,
+  Azure.Core.uuid,
+  "csharp"
+);
 @@alternateType(
   EventSubscriptionsOperationGroup.listRegionalBySubscription::parameters.location,
   Azure.Core.azureLocation,
