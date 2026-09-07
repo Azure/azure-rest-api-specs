@@ -12,31 +12,31 @@ options:
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-sreagent"
-    namespace: "azure.mgmt.sreagent"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-appservicesreagent"
+    namespace: "azure.mgmt.appservicesreagent"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
     service-dir: "sdk/sreagent"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-sreagent"
-    namespace: "com.azure.resourcemanager.sreagent"
-    service-name: "sreagent"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-appservice-sreagent"
+    namespace: "com.azure.resourcemanager.appservice.sreagent"
+    service-name: "AppServiceSreAgent"
     flavor: azure
     use-object-for-unknown: true
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-sreagent"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-appservice-sreagent"
     experimental-extensible-enums: true
     flavor: azure
     package-details:
-      name: "@azure/arm-sreagent"
+      name: "@azure/arm-appservice-sreagent"
   "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.SreAgent"
+    namespace: "Azure.ResourceManager.AppService.SreAgent"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/sreagent"
-    emitter-output-dir: "{output-dir}/{service-dir}/armsreagent"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsreagent"
+    emitter-output-dir: "{output-dir}/{service-dir}/armappservicesreagent"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappservicesreagent"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
