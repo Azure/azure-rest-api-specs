@@ -402,3 +402,4 @@ using Microsoft.ContainerInstance;
   "ContainerSandboxGroupAccessToken",
   "csharp"
 );
+@@clientName(SandboxGroupAccessToken.notAfter, "NotAfterOn", "csharp");
