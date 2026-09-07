@@ -29,6 +29,8 @@ imports:
 mcp-servers:
   azure-sdk:
     container: "ubuntu:24.04"
+    env:
+      DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: "1"
     args:
       - "-v"
       - "/tmp/bin:/tmp/bin:ro"
@@ -59,26 +61,25 @@ pre-agent-steps:
           ...context.repo,
           pull_number: pullNumber,
         });
-        // const { resolveSdkValidationRepository } =
-        //   await import("${{ github.workspace }}/.github/workflows/src/sdk-breaking-change-analysis.js");
-        // const sdkRepository = await resolveSdkValidationRepository({
-        //   github,
-        //   owner: context.repo.owner,
-        //   repo: context.repo.repo,
-        //   headSha: pull.head.sha,
-        //   pullNumber,
-        // });
+        const { resolveSdkValidationRepository } =
+          await import("${{ github.workspace }}/.github/workflows/src/sdk-breaking-change-analysis.js");
+        const sdkRepository = await resolveSdkValidationRepository({
+          github,
+          owner: context.repo.owner,
+          repo: context.repo.repo,
+          headSha: pull.head.sha,
+          pullNumber,
+        });
         core.setOutput("repository", pull.head.repo.full_name);
         core.setOutput("ref", pull.head.sha);
-        // core.setOutput("sdk-repository", sdkRepository);
-        core.setOutput("sdk-repository", "azure-sdk-for-go");
+        core.setOutput("sdk-repository", sdkRepository);
 
   - name: Checkout specification PR source
     uses: actions/checkout@v7
     with:
       repository: ${{ steps.resolve-source.outputs.repository }}
       ref: ${{ steps.resolve-source.outputs.ref }}
-      path: "repositories"
+      path: "repositories/azure-rest-api-specs"
       persist-credentials: false
 
   - name: Checkout target SDK repository
@@ -86,8 +87,25 @@ pre-agent-steps:
     with:
       repository: Azure/${{ steps.resolve-source.outputs.sdk-repository }}
       ref: "main"
-      path: "repositories"
+      path: "repositories/${{ steps.resolve-source.outputs.sdk-repository }}"
       persist-credentials: false
+
+  - name: Write SDK analysis context
+    uses: actions/github-script@v8
+    env:
+      SDK_REPOSITORY: ${{ steps.resolve-source.outputs.sdk-repository }}
+    with:
+      script: |
+        const fs = await import("node:fs/promises");
+        const contextPath = "/tmp/gh-aw/sdk-breaking-change-context.json";
+        await fs.writeFile(
+          contextPath,
+          JSON.stringify({
+            sdkRepository: process.env.SDK_REPOSITORY,
+            localSdkRepoPath: `/workspace/repositories/${process.env.SDK_REPOSITORY}`,
+            tspConfigPath: "/workspace/repositories/azure-rest-api-specs/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/tspconfig.yaml",
+          }),
+        );
 ---
 
 # SDK Breaking Change Analysis
@@ -96,21 +114,29 @@ This workflow runs when an authorized user comments `/azsdk sdk-breaking-change-
 
 
 
-Use these paths:
-
-- TypeSpec configuration: `/workspace/repositories/azure-rest-api-specs/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/tspconfig.yaml`
+Read `/tmp/gh-aw/sdk-breaking-change-context.json`. Use its `localSdkRepoPath` and `tspConfigPath` values unchanged in the tool calls below.
 
 Perform these steps in order. Stop and report the error if any step fails.
 
-1. Call `azsdk_package_generate_code` exactly once with the TypeSpec configuration path.
-2. Read `packagePath`_package_generate_code` result.
-3. Call `azsdk_package_build_code` exactly  from the successful `azsdkonce with that `packagePath`.
+1. Call `azsdk_package_generate_code` exactly once with this input shape and the values from the context file:
+
+```json
+{
+  "localSdkRepoPath": "<localSdkRepoPath from the context file>",
+  "tspConfigPath": "<tspConfigPath from the context file>",
+  "tspLocationPath": "",
+  "emitterOptions": ""
+}
+```
+
+2. Read `packagePath` from the successful `azsdk_package_generate_code` result.
+3. Call `azsdk_package_build_code` exactly once with that `packagePath`.
 4. Call `azsdk_package_detect_breaking_changes` exactly once with both parameters:
 
 ```json
 {
   "packagePath": "<packagePath returned by azsdk_package_generate_code>",
-  "tspConfigPath": "/workspace/repositories/azure-rest-api-specs/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/tspconfig.yaml"
+  "tspConfigPath": "<tspConfigPath from the context file>"
 }
 ```
 
