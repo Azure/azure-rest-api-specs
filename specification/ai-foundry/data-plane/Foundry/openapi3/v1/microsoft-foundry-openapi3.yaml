@@ -42157,9 +42157,6 @@ components:
           type: string
           description: The ID of the project connection to your Azure Playwright resource.
       description: Definition of input parameters for the connection used by the Browser Automation Tool.
-      x-ms-foundry-meta:
-        required_previews:
-          - preview_tool
     BrowserAutomationToolParameters:
       type: object
       required:
@@ -42169,9 +42166,6 @@ components:
           $ref: '#/components/schemas/BrowserAutomationToolConnectionParameters'
           description: The project connection parameters associated with the Browser Automation Tool.
       description: Definition of input parameters for the Browser Automation Tool.
-      x-ms-foundry-meta:
-        required_previews:
-          - preview_tool
     BrowserAutomationToolboxTool:
       type: object
       required:
@@ -77634,7 +77628,6 @@ components:
         - openapi
         - a2a_preview
         - browser_automation_preview
-        - browser_automation
         - reminder_preview
         - work_iq_preview
         - fabric_iq_preview
@@ -77643,6 +77636,7 @@ components:
         - a2a
         - shell
         - web_iq_preview
+        - browser_automation
       description: Supported tool types for tools stored in a toolbox.
     ToolboxVersionObject:
       type: object

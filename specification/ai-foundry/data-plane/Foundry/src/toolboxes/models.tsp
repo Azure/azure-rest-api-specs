@@ -99,7 +99,6 @@ union ToolboxToolType {
   openapi: ToolboxOpenApiToolType,
   a2a_preview: ToolboxA2APreviewToolType,
   browser_automation_preview: ToolboxBrowserAutomationPreviewToolType,
-  browser_automation: ToolboxBrowserAutomationToolType,
   reminder_preview: ToolboxReminderPreviewToolType,
   work_iq_preview: ToolboxWorkIQPreviewToolType,
   fabric_iq_preview: ToolboxFabricIQPreviewToolType,
@@ -108,6 +107,7 @@ union ToolboxToolType {
   a2a: ToolboxA2AToolType,
   shell: ToolboxShellToolType,
   web_iq_preview: ToolboxWebIQPreviewToolType,
+  browser_automation: ToolboxBrowserAutomationToolType,
 }
 
 /**
