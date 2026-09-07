@@ -90,6 +90,16 @@ pre-agent-steps:
     with:
       dotnet-version: "10.0.x"
 
+  - name: Install golangci-lint
+    shell: bash
+    run: |
+      set -euo pipefail
+      GO_BIN="$(go env GOPATH)/bin"
+      echo "$GO_BIN" >> "$GITHUB_PATH"
+      export PATH="$GO_BIN:$PATH"
+      go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.11.2
+      golangci-lint --version
+
   - name: Set up SDK development environment
     shell: bash
     env:
