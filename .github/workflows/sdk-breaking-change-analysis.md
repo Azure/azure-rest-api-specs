@@ -107,6 +107,13 @@ pre-agent-steps:
             tspConfigPath: "/workspace/repositories/azure-rest-api-specs/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/tspconfig.yaml",
           }),
         );
+
+  - name: Upload SDK analysis context
+    uses: actions/upload-artifact@v7
+    with:
+      name: "sdk-breaking-change-context"
+      path: "/tmp/gh-aw/sdk-breaking-change-context.json"
+      retention-days: 7
 ---
 
 # SDK Breaking Change Analysis
@@ -118,6 +125,7 @@ This workflow runs when an authorized user comments `/azsdk sdk-breaking-change-
 Read `/tmp/gh-aw/sdk-breaking-change-context.json`. Use its `localSdkRepoPath` and `tspConfigPath` values unchanged in the tool calls below.
 
 Perform these steps in order. Stop and report the error if any step fails.
+Immediately before each tool call, log the tool name and exact parameters as JSON, then invoke the tool with that same JSON object.
 
 1. Call `azsdk_package_generate_code` exactly once with this input shape and the values from the context file:
 
