@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
@@ -42,13 +43,20 @@ export async function generateTypeSpecMetadata(folder, options = {}) {
   const temporaryDirectory = await mkdtemp(join(tmpdir(), "typespec-metadata-"));
   const metadataFile = join(temporaryDirectory, "typespec-metadata.json");
 
+  const mainTspPath = join(absoluteFolder, "main.tsp");
+  const clientTspPath = join(absoluteFolder, "client.tsp");
+  let tspCompileTarget = absoluteFolder;
+  if (!existsSync(mainTspPath) && existsSync(clientTspPath)) {
+    tspCompileTarget = clientTspPath;
+  }
+
   try {
     try {
       await execNpmExec(
         [
           "tsp",
           "compile",
-          absoluteFolder,
+          tspCompileTarget,
           "--emit",
           "@azure-tools/typespec-metadata",
           "--option",
