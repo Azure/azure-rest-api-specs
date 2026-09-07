@@ -83,6 +83,7 @@ using Microsoft.Network;
 @@clientName(Zone, "DnsZone", "csharp");
 @@clientName(ZoneType, "DnsZoneType", "csharp");
 @@clientName(SigningKey, "DnsSigningKey", "csharp");
+@@clientName(SubResource, "DnsSubResourceInfo", "csharp");
 @@clientName(RecordSet, "DnsRecord", "csharp");
 @@clientName(NsRecord.nsdname, "DnsNSDomainName", "csharp");
 @@clientName(PtrRecord.ptrdname, "DnsPtrDomainName", "csharp");
