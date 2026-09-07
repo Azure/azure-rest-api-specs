@@ -57,9 +57,11 @@ pre-agent-steps:
         //  pullNumber,
         //});
         const sdkRepository = "azure-sdk-for-go";
+        const sdkLanguage = "go"
         core.setOutput("repository", pull.head.repo.full_name);
         core.setOutput("ref", pull.head.sha);
         core.setOutput("sdk-repository", sdkRepository);
+        core.setOutput("sdk-language", sdkLanguage);
 
   - name: Checkout specification PR source
     uses: actions/checkout@v7
@@ -76,6 +78,17 @@ pre-agent-steps:
       ref: "main"
       path: "repositories/${{ steps.resolve-source.outputs.sdk-repository }}"
       persist-credentials: false
+
+  - name: Set up SDK development environment
+    shell: bash
+    env:
+      SDK_REPOSITORY_PATH: ${{ github.workspace }}/repositories/${{ steps.resolve-source.outputs.sdk-repository }}
+      $SDK_LANGUAGE: ${{ github.workspace }}/repositories/${{ steps.resolve-source.outputs.sdk-language }}
+    run: |
+      set -euo pipefail
+      echo "$AZSDK_CLI_PATH" >> "$GITHUB_PATH"
+      export PATH="$AZSDK_CLI_PATH:$PATH"
+      azsdk verify setup install --languages "$SDK_LANGUAGE" --package-path "$SDK_REPOSITORY_PATH" --yes
 
   - name: Write SDK analysis context
     uses: actions/github-script@v8
