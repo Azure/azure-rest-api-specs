@@ -4090,15 +4090,8 @@
       "description": "Request body for calling post-action",
       "properties": {
         "approvalStatus": {
-          "type": "string",
-          "description": "Approval status indicating 'Approved' or 'Rejected'",
-          "enum": [
-            "Approved",
-            "Rejected"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ApprovalActionStatus",
+          "description": "Approval status indicating 'Approved' or 'Rejected'"
         }
       },
       "required": [
@@ -4118,6 +4111,30 @@
         "message"
       ]
     },
+    "ApprovalActionStatus": {
+      "type": "string",
+      "description": "The approval status for an approval action request.",
+      "enum": [
+        "Approved",
+        "Rejected"
+      ],
+      "x-ms-enum": {
+        "name": "ApprovalActionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The request is approved."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "The request is rejected."
+          }
+        ]
+      }
+    },
     "ApprovalCallbackRequest": {
       "type": "object",
       "description": "Request body for calling post-action",
@@ -4127,15 +4144,8 @@
           "description": "Resource request action indicating action which needed to be performed upon calling approval-callback post action"
         },
         "approvalStatus": {
-          "type": "string",
-          "description": "Approval status indicating 'Approved' or 'Rejected'",
-          "enum": [
-            "Approved",
-            "Rejected"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ApprovalCallbackStatus",
+          "description": "Approval status indicating 'Approved' or 'Rejected'"
         },
         "approvalCallbackPayload": {
           "type": "string",
@@ -4179,6 +4189,30 @@
             "name": "Reset",
             "value": "Reset",
             "description": "Reset the resource."
+          }
+        ]
+      }
+    },
+    "ApprovalCallbackStatus": {
+      "type": "string",
+      "description": "The approval status for an approval callback request.",
+      "enum": [
+        "Approved",
+        "Rejected"
+      ],
+      "x-ms-enum": {
+        "name": "ApprovalCallbackStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The request is approved."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "The request is rejected."
           }
         ]
       }

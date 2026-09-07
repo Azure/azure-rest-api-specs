@@ -159,6 +159,28 @@ union ApprovalDeletionCallbackResourceRequestAction {
   Update: "Update",
 }
 
+@doc("The approval status for an approval callback request.")
+union ApprovalCallbackStatus {
+  string,
+
+  @doc("The request is approved.")
+  Approved: "Approved",
+
+  @doc("The request is rejected.")
+  Rejected: "Rejected",
+}
+
+@doc("The approval status for an approval action request.")
+union ApprovalActionStatus {
+  string,
+
+  @doc("The request is approved.")
+  Approved: "Approved",
+
+  @doc("The request is rejected.")
+  Rejected: "Rejected",
+}
+
 @added(Microsoft.Mission.Versions.v2025_05_01_preview)
 @doc("The policy override setting for a community.")
 union CommunityPolicyOverride {
