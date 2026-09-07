@@ -41,12 +41,6 @@ using Microsoft.Mission;
   "csharp"
 );
 @@clientName(
-  CommunityPolicyOverride,
-  "CommunityPropertiesPolicyOverride",
-  "csharp"
-);
-
-@@clientName(
   Azure.ResourceManager.CommonTypes.MoboBrokerResource,
   "VirtualEnclaveManagedOnBehalfOfBroker",
   "csharp"
