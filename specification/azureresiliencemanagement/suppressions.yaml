@@ -23,3 +23,36 @@
     Older preview API version retained for compatibility. The default tag points to
     2026-04-01-preview; consumers needing 2025-02-01-preview should use the per-version
     tag package-2025-02-01-preview.
+
+- tool: Swagger Avocado
+  path: resource-manager/Microsoft.AzureResilienceManagement/AzureResilienceManagement/preview/2026-04-01-preview/openapi.json
+  reason: >
+    The default tag (package-2026-09-01-preview) intentionally does not include the
+    goalTemplates paths. The GoalTemplate resource type is deprecated and removed in
+    2026-09-01-preview as part of Goal Template deprecation; resiliency posture now lives
+    directly on GoalAssignment (requireZonalResiliency) and GoalResource (zonalResiliency).
+    This older preview version still contains those paths, so Avocado reports
+    MISSING_APIS_IN_DEFAULT_TAG. Consumers still needing GoalTemplates should use the
+    per-version tag package-2026-04-01-preview.
+
+- tool: Swagger Avocado
+  path: resource-manager/Microsoft.AzureResilienceManagement/AzureResilienceManagement/preview/2026-06-01-preview/openapi.json
+  reason: >
+    The default tag (package-2026-09-01-preview) intentionally does not include the
+    goalTemplates paths. The GoalTemplate resource type is deprecated and removed in
+    2026-09-01-preview as part of Goal Template deprecation; resiliency posture now lives
+    directly on GoalAssignment (requireZonalResiliency) and GoalResource (zonalResiliency).
+    This older preview version still contains those paths, so Avocado reports
+    MISSING_APIS_IN_DEFAULT_TAG. Consumers still needing GoalTemplates should use the
+    per-version tag package-2026-06-01-preview.
+
+- tool: Swagger Avocado
+  path: resource-manager/Microsoft.AzureResilienceManagement/AzureResilienceManagement/preview/2026-08-31-preview/openapi.json
+  reason: >
+    The default tag (package-2026-09-01-preview) intentionally does not include the
+    goalTemplates paths. The GoalTemplate resource type is deprecated and removed in
+    2026-09-01-preview as part of Goal Template deprecation; resiliency posture now lives
+    directly on GoalAssignment (requireZonalResiliency) and GoalResource (zonalResiliency).
+    This older preview version still contains those paths, so Avocado reports
+    MISSING_APIS_IN_DEFAULT_TAG. Consumers still needing GoalTemplates should use the
+    per-version tag package-2026-08-31-preview.
