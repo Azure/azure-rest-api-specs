@@ -57,7 +57,7 @@ pre-agent-steps:
         //  pullNumber,
         //});
         const sdkRepository = "azure-sdk-for-go";
-        const sdkLanguage = "go"
+        const sdkLanguage = "go";
         core.setOutput("repository", pull.head.repo.full_name);
         core.setOutput("ref", pull.head.sha);
         core.setOutput("sdk-repository", sdkRepository);
@@ -83,7 +83,7 @@ pre-agent-steps:
     shell: bash
     env:
       SDK_REPOSITORY_PATH: ${{ github.workspace }}/repositories/${{ steps.resolve-source.outputs.sdk-repository }}
-      $SDK_LANGUAGE: ${{ github.workspace }}/repositories/${{ steps.resolve-source.outputs.sdk-language }}
+      SDK_LANGUAGE: ${{ steps.resolve-source.outputs.sdk-language }}
     run: |
       set -euo pipefail
       echo "$AZSDK_CLI_PATH" >> "$GITHUB_PATH"
