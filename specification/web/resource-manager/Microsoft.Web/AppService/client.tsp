@@ -3814,6 +3814,18 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   "csharp"
 );
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Provisioning resource names"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Provisioning resource names"
+@@clientOption(
+  CsmPublishingCredentialsPoliciesEntity,
+  "provisioning-resource-name",
+  #{
+    `Microsoft.Web/sites/basicPublishingCredentialsPolicies`: "WebSiteFtpPublishingCredentialsPolicy",
+    `Microsoft.Web/sites/slots/basicPublishingCredentialsPolicies`: "WebSiteSlotFtpPublishingCredentialsPolicy",
+  },
+  "csharp"
+);
+
 @@clientName(AddressResponse, "AppServiceEnvironmentAddress", "csharp");
 @@clientName(AllowedPrincipals, "AppServiceAadAllowedPrincipals", "csharp");
 @@clientName(AnalysisData, "AnalysisDetectorEvidences", "csharp");
