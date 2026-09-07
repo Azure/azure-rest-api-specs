@@ -79,6 +79,17 @@ pre-agent-steps:
       path: "repositories/${{ steps.resolve-source.outputs.sdk-repository }}"
       persist-credentials: false
 
+  - name: Set up Go
+    uses: actions/setup-go@v7
+    with:
+      go-version: "1.25.x"
+      cache: false
+
+  - name: Set up .NET
+    uses: actions/setup-dotnet@v6
+    with:
+      dotnet-version: "10.0.x"
+
   - name: Set up SDK development environment
     shell: bash
     env:
