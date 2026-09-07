@@ -37,7 +37,7 @@ namespace Customizations;
 @@clientName(
   FilteredBlobResponse,
   "FilterBlobSegment",
-  "python,csharp,javascript,go"
+  "python,csharp,javascript,go,java"
 );
 @@clientName(FilteredBlobResponse.blobItems, "blobs", "javascript,go");
 @@clientName(
@@ -767,7 +767,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(
   ListBlobsHierarchicalResponse,
   "ListBlobsHierarchySegmentResponse",
-  "go"
+  "go,java"
 );
 @@clientName(ListBlobsHierarchicalResponse.hierarchicalList, "segment", "go");
 @@clientName(ListBlobsResponse.blobItems, "segment", "go");
