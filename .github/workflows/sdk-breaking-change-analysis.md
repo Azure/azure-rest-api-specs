@@ -26,22 +26,8 @@ engine:
   id: copilot
 imports:
   - shared-github-aw-imports/install_azsdk_cli_import.md
-mcp-servers:
-  azure-sdk:
-    container: "ubuntu:24.04"
-    env:
-      DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: "1"
-    args:
-      - "-v"
-      - "/tmp/bin:/tmp/bin:ro"
-      - "-v"
-      - "${{ github.workspace }}/repositories:${{ github.workspace }}/repositories"
-    entrypoint: "/tmp/bin/azsdk"
-    entrypointArgs: ["mcp"]
-    allowed:
-      - "azsdk_package_generate_code"
-      - "azsdk_package_build_code"
-      - "azsdk_package_detect_breaking_changes"
+env:
+  AZSDK_CLI_PATH: /tmp/bin
 pre-agent-steps:
   - name: Install dependencies for github-script actions
     uses: ./.github/actions/install-deps-github-script
@@ -123,42 +109,39 @@ This workflow runs when an authorized user comments `/azsdk sdk-breaking-change-
 
 
 
-Read `/tmp/gh-aw/sdk-breaking-change-context.json`. Use its `localSdkRepoPath` and `tspConfigPath` values unchanged in the tool calls below.
+Read `/tmp/gh-aw/sdk-breaking-change-context.json`. Use its `localSdkRepoPath` and `tspConfigPath` values unchanged in the commands below.
 
-Before invoking any MCP tool, run `test -d "<localSdkRepoPath from the context file>"` to verify that `localSdkRepoPath` exists and is a directory. If the check fails, stop and report the missing path without invoking any MCP tool.
+The workflow has installed the `azsdk` CLI in `$AZSDK_CLI_PATH`. Add that directory to `PATH`, then run `command -v azsdk` exactly once to verify that the CLI is available. Do not invoke an MCP server or use MCP tools.
 
+Run `test -d "<localSdkRepoPath from the context file>"` and `test -f "<tspConfigPath from the context file>"` before running any `azsdk package` command. If either check fails, stop and report the missing path.
 
-The configured MCP server is exposed as the `azure-sdk` CLI executable. It is not the `azsdk` executable. Do not inspect `AZSDK_CLI_PATH`, run `command -v azsdk`, invoke `azsdk`, perform setup verification, or create a tracking issue. The workflow has already installed and started the MCP server.
+Perform these steps in order. Run each command exactly once, capture its complete output, and stop and report the error if it exits with a nonzero status.
 
-Perform these steps in order. Stop and report the error if any step fails.
-For every MCP call, write the exact parameters to a JSON file, log the tool name and compact JSON parameters, then invoke the tool through the gh-aw CLI transport using this form:
+1. Generate the SDK and request machine-readable output:
 
 ```bash
-azure-sdk <tool-name> . < <parameters-file>
+azsdk package generate \
+  --local-sdk-repo-path "<localSdkRepoPath from the context file>" \
+  --tsp-config-path "<tspConfigPath from the context file>" \
+  --output json
 ```
 
-Do not call `azure-sdk --help` or perform any other preliminary command except the required `localSdkRepoPath` directory check.
+2. Read the generated package path from the successful JSON output. Accept the CLI's package-path property name as emitted. Require it to be a non-empty absolute path to an existing directory; otherwise stop and report the invalid generation result. Do not guess or derive the package path from the SDK repository name.
+3. Build that generated package:
 
-1. Invoke `azure-sdk azsdk_package_generate_code .` exactly once with this input shape and the values from the context file:
-
-```json
-{
-  "localSdkRepoPath": "<localSdkRepoPath from the context file>",
-  "tspConfigPath": "<tspConfigPath from the context file>",
-  "tspLocationPath": "",
-  "emitterOptions": ""
-}
+```bash
+azsdk package build \
+  --package-path "<package path returned by azsdk package generate>" \
+  --output json
 ```
 
-2. Read `packagePath` from the successful `azsdk_package_generate_code` result.
-3. Invoke `azure-sdk azsdk_package_build_code .` exactly once with a JSON object containing that `packagePath`.
-4. Invoke `azure-sdk azsdk_package_detect_breaking_changes .` exactly once with both parameters:
+4. Detect SDK breaking changes:
 
-```json
-{
-  "packagePath": "<packagePath returned by azsdk_package_generate_code>",
-  "tspConfigPath": "<tspConfigPath from the context file>"
-}
+```bash
+azsdk package detect-breaking-change \
+  --package-path "<package path returned by azsdk package generate>" \
+  --tsp-config-path "<tspConfigPath from the context file>" \
+  --output json
 ```
 
-Use the returned `packagePath` unchanged for both subsequent tool calls. Do not guess or derive it from the SDK repository name. Report the generation, build, and breaking-change detection results. Do not modify files outside the generated SDK package.
+Use the generated package path unchanged for both subsequent commands. Report the generation, build, and breaking-change detection results. Do not modify files outside the generated SDK package.
