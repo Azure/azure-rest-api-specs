@@ -1864,7 +1864,7 @@
         "tags": [
           "HorizonDbParameterGroups"
         ],
-        "description": "Updates an existing HorizonDB parameter group. A request-wide applyMethod is required and controls when dynamic parameter changes become effective on connected pools. Static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. The operation fails with a conflict while a previous update to this parameter group is still being applied to connected pools.",
+        "description": "Updates an existing HorizonDB parameter group. The applyImmediately property controls whether parameter changes are applied immediately to connected resources. The operation fails with a conflict while a previous update to this parameter group is still being applied.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"

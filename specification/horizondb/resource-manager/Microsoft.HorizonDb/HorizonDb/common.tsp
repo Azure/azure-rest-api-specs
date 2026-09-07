@@ -11,12 +11,12 @@ using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("A user-supplied description with a maximum length of 1024 characters.")
 @maxLength(1024)
 scalar WritableDescription extends string;
 
-@removed(Versions.v2026_10_01)
+@removed(Versions.v2026_09_01)
 @doc("Current states.")
 union State {
   string,
@@ -54,8 +54,8 @@ union State {
   Upgrading: "Upgrading",
 }
 
-@added(Versions.v2026_10_01)
-@doc("A PostgreSQL major version supported by HorizonDB. API version 2026-10-01 accepts only 17. Future API versions may add named values, and clients must tolerate unknown values returned by the service.")
+@added(Versions.v2026_09_01)
+@doc("A PostgreSQL major version supported by HorizonDB. API version 2026-09-01 accepts only 17. Future API versions may add named values, and clients must tolerate unknown values returned by the service.")
 union PostgreSqlVersion {
   string,
 

@@ -227,16 +227,6 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.ParameterGroupProperties.applyMethod,
-  "ApplyMethod",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.ParameterGroupPropertiesForPatchUpdate.applyMethod,
-  "ApplyMethod",
-  "csharp"
-);
-@@clientName(
   Microsoft.HorizonDb.ClusterProperties.pointInTimeUtc,
   "PointInTimeUtc",
   "csharp"

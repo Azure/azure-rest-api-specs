@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Represents an available backup for a HorizonDB cluster.")
 @parentResource(Cluster)
 model Backup is Azure.ResourceManager.ProxyResource<BackupResourceProperties> {
@@ -25,7 +25,7 @@ model Backup is Azure.ResourceManager.ProxyResource<BackupResourceProperties> {
   name: string;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Backup configuration properties for a HorizonDB cluster.")
 model BackupProperties {
   @doc("The geo-redundancy state.")
@@ -38,13 +38,13 @@ model BackupProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   retentionDays?: int32 = 7;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("The earliest point in time, in UTC, to which the cluster can currently be restored.")
   @visibility(Lifecycle.Read)
   earliestRestorePointUtc?: utcDateTime;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Backup configuration properties for updating a HorizonDB cluster.")
 model BackupPropertiesForPatchUpdate {
   @doc("The number of days that automatic backups are retained.")
@@ -55,7 +55,7 @@ model BackupPropertiesForPatchUpdate {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backups are immutable point-in-time records and do not have a resource provisioning state."
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Properties of an available HorizonDB backup.")
 model BackupResourceProperties {
   @doc("The date and time when the backup was taken, in UTC.")
@@ -75,7 +75,7 @@ model BackupResourceProperties {
   expiredAtUtc?: utcDateTime;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Indicates the geo-redundancy state.")
 union GeoRedundancyState {
   string,
@@ -87,7 +87,7 @@ union GeoRedundancyState {
   Disabled: "Disabled",
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("The type of a HorizonDB backup. New values may be added over time.")
 union BackupType {
   string,
@@ -100,7 +100,7 @@ union BackupType {
   User: "User",
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Backup operations for HorizonDB clusters.")
 @armResourceOperations
 interface Backups {

@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
 
-@removed(Versions.v2026_10_01)
+@removed(Versions.v2026_09_01)
 @doc("Represents the HorizonDB replica.")
 @parentResource(Pool)
 model HorizonDbReplica
@@ -122,7 +122,7 @@ union ClusterReplicationState {
   Error: "Error",
 }
 
-@removed(Versions.v2026_10_01)
+@removed(Versions.v2026_09_01)
 @doc("Properties of a HorizonDB replica.")
 model HorizonDbReplicaProperties {
   @doc("Role of the replica.")
@@ -145,7 +145,7 @@ model HorizonDbReplicaProperties {
   provisioningState?: ProvisioningState;
 }
 
-@removed(Versions.v2026_10_01)
+@removed(Versions.v2026_09_01)
 @doc("Properties of a HorizonDB replica for update operations.")
 model HorizonDbReplicaPropertiesForPatchUpdate {
   @visibility(Lifecycle.Update)
@@ -153,14 +153,14 @@ model HorizonDbReplicaPropertiesForPatchUpdate {
   role?: ReplicaRole;
 }
 
-@removed(Versions.v2026_10_01)
+@removed(Versions.v2026_09_01)
 @doc("HorizonDB replica for update operations.")
 model HorizonDbReplicaForPatchUpdate {
   @doc("Properties of a HorizonDB replica for update operations.")
   properties?: HorizonDbReplicaPropertiesForPatchUpdate;
 }
 
-@removed(Versions.v2026_10_01)
+@removed(Versions.v2026_09_01)
 @doc("Role of the replica.")
 union ReplicaRole {
   string,
@@ -172,7 +172,7 @@ union ReplicaRole {
   ReadWrite: "ReadWrite",
 }
 
-@removed(Versions.v2026_10_01)
+@removed(Versions.v2026_09_01)
 @armResourceOperations
 interface HorizonDbReplicas {
   @doc("Gets information about a HorizonDB replica.")

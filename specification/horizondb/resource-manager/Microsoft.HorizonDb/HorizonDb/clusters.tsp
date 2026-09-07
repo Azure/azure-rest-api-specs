@@ -23,30 +23,30 @@ scalar LegacyClusterName extends string;
 @maxLength(63)
 scalar ClusterName extends string;
 
-@renamedFrom(Versions.v2026_10_01, "HorizonDbCluster")
+@renamedFrom(Versions.v2026_09_01, "HorizonDbCluster")
 @doc("Represents the HorizonDB cluster.")
 model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
   @doc("The name of the HorizonDB cluster.")
   @key("clusterName")
   @path
   @segment("clusters")
-  @typeChangedFrom(Versions.v2026_10_01, LegacyClusterName)
+  @typeChangedFrom(Versions.v2026_09_01, LegacyClusterName)
   name: ClusterName;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-@renamedFrom(Versions.v2026_10_01, "HorizonDbClusterProperties")
+@renamedFrom(Versions.v2026_09_01, "HorizonDbClusterProperties")
 @doc("Properties of a HorizonDB cluster.")
 model ClusterProperties {
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("The administrator login name.")
   @minLength(1)
   @maxLength(63)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   administratorLogin: string;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("The administrator login password.")
   @secret
   @minLength(8)
@@ -54,42 +54,42 @@ model ClusterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update)
   administratorLoginPassword?: string;
 
-  @removed(Versions.v2026_10_01)
-  @renamedFrom(Versions.v2026_10_01, "version")
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "version")
   @doc("The version of PostgreSQL used by the HorizonDB cluster.")
   legacyPgVersion?: string;
 
-  @added(Versions.v2026_10_01)
-  @doc("The PostgreSQL major version used by the HorizonDB cluster. API version 2026-10-01 accepts only 17. This property is required on every PUT and is immutable after creation. On replacement, resubmitting the existing value is accepted and changing it is rejected. For point-in-time restore, PostgreSQL version is the only new-cluster property inherited from the source backup metadata, and the value in the request must match that version. All other new-cluster configuration comes from the request or service defaults. Future API versions may add supported values without changing this property type.")
+  @added(Versions.v2026_09_01)
+  @doc("The PostgreSQL major version used by the HorizonDB cluster. API version 2026-09-01 accepts only 17. This property is required on every PUT and is immutable after creation. On replacement, resubmitting the existing value is accepted and changing it is rejected. For point-in-time restore, PostgreSQL version is the only new-cluster property inherited from the source backup metadata, and the value in the request must match that version. All other new-cluster configuration comes from the request or service defaults. Future API versions may add supported values without changing this property type.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   postgreSqlVersion: PostgreSqlVersion;
 
-  @removed(Versions.v2026_10_01)
-  @renamedFrom(Versions.v2026_10_01, "createMode")
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "createMode")
   @doc("The mode to create a new HorizonDB cluster.")
   legacyCreateMode?: CreateModeCluster;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must match the source backup's major version, and the target cluster location must match the source cluster location until cross-region point-in-time restore is supported. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   creationMode?: ClusterCreateMode;
 
-  @removed(Versions.v2026_10_01)
-  @renamedFrom(Versions.v2026_10_01, "pointInTimeUTC")
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "pointInTimeUTC")
   @doc("Restore point creation time specifying the time to restore from.")
   legacyPointInTime?: utcDateTime;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("The requested point in time, in UTC, to restore from. This property is required when creationMode is PointInTimeRestore and must be absent for other creation modes or when creationMode is omitted. The service honors this value for same-region restore. Until cross-region point-in-time restore is supported, the target cluster location must match the source cluster location; a cross-region request is rejected synchronously with 400 CrossRegionPointInTimeRestoreNotSupported and does not create or modify a resource. This property can only be specified during resource creation.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   pointInTimeUtc?: utcDateTime;
 
-  @removed(Versions.v2026_10_01)
-  @renamedFrom(Versions.v2026_10_01, "sourceClusterResourceId")
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "sourceClusterResourceId")
   @doc("The source cluster resource ID for restore or node creation.")
   legacySourceClusterResourceId?: armResourceIdentifier;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("The Azure resource ID of the source HorizonDB cluster used by the selected creation mode. This property is required for PointInTimeRestore and other source-based creation modes, and must be absent when creationMode is Create or omitted. Until cross-region point-in-time restore is supported, PointInTimeRestore requires the target and source clusters to be in the same Azure region. A source cluster does not need to have a pool to be restored, provided an available backup exists. This immutable creation-provenance value does not change after creation.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   creationSourceClusterResourceId?: armResourceIdentifier<[
@@ -103,38 +103,38 @@ model ClusterProperties {
   @visibility(Lifecycle.Read)
   replication?: ClusterReplicationProperties;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("The pool name for restore or node operations.")
   poolName?: string;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Number of replicas.")
   @minValue(1)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   replicaCount?: int32;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Number of vCores.")
   @minValue(1)
   @maxValue(96)
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   vCores?: int32;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("The processor type for the HorizonDB cluster.")
   processorType?: string;
 
-  @removed(Versions.v2026_10_01)
-  @renamedFrom(Versions.v2026_10_01, "network")
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "network")
   @doc("The network related info.")
   legacyNetwork?: Network;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("The network configuration for the cluster. When this object is omitted, the service defaults it to publicAccess Disabled.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   network?: Network = #{ publicAccess: "Disabled" };
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("The backup configuration for the cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   backup?: BackupProperties;
@@ -144,24 +144,24 @@ model ClusterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   deletion?: ClusterDeletionProperties;
 
-  @typeChangedFrom(Versions.v2026_10_01, State)
-  @madeRequired(Versions.v2026_10_01)
+  @typeChangedFrom(Versions.v2026_09_01, State)
+  @madeRequired(Versions.v2026_09_01)
   @doc("Current state of the cluster.")
   @visibility(Lifecycle.Read)
   state: ClusterState;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("The fully qualified domain name of the cluster.")
   @visibility(Lifecycle.Read)
   fullyQualifiedDomainName?: string;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("The fully qualified domain name used for readonly endpoint for the cluster.")
   @visibility(Lifecycle.Read)
   readonlyEndpoint?: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "API version 2026-10-01 guarantees provisioningState in every Cluster response; the 2026-01-20-preview projection remains optional."
-  @madeRequired(Versions.v2026_10_01)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "API version 2026-09-01 guarantees provisioningState in every Cluster response; the 2026-01-20-preview projection remains optional."
+  @madeRequired(Versions.v2026_09_01)
   @doc("The provisioning state of the cluster.")
   @visibility(Lifecycle.Read)
   provisioningState: ProvisioningState;
@@ -171,37 +171,37 @@ model ClusterProperties {
   @visibility(Lifecycle.Read)
   readWritePool: ReadWritePoolProperties;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Defines how replicas are placed across availability zones.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   zonePlacementPolicy?: ZonePlacementEnforcement;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Defines connection to a parameter group.")
   @visibility(Lifecycle.Update, Lifecycle.Read)
   parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
 
   @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Authentication configuration for the HorizonDB cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   authConfig?: HorizonDbClusterAuthConfig;
 
   @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("The compute model for the cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   computeModel?: HorizonDbComputeModel;
 
   @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Mirroring configuration for the HorizonDB cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   mirroring?: HorizonDbClusterMirroring;
 }
 
 @added(Versions.v2026_05_01_preview)
-@removed(Versions.v2026_10_01)
+@removed(Versions.v2026_09_01)
 @doc("Mirroring configuration for a HorizonDB cluster.")
 model HorizonDbClusterMirroring {
   @doc("The names of the databases to mirror.")
@@ -216,7 +216,7 @@ model HorizonDbClusterMirroring {
 }
 
 @added(Versions.v2026_05_01_preview)
-@removed(Versions.v2026_10_01)
+@removed(Versions.v2026_09_01)
 @doc("Authentication configuration for a HorizonDB cluster.")
 model HorizonDbClusterAuthConfig {
   @doc("Indicates whether Microsoft Entra ID authentication is enabled or disabled.")
@@ -230,7 +230,7 @@ model HorizonDbClusterAuthConfig {
 }
 
 @added(Versions.v2026_05_01_preview)
-@removed(Versions.v2026_10_01)
+@removed(Versions.v2026_09_01)
 @doc("The compute model for a HorizonDB cluster.")
 model HorizonDbComputeModel {
   @doc("The compute model type. Supported values: 'Provisioned', 'Serverless'.")
@@ -247,7 +247,7 @@ model HorizonDbComputeModel {
 }
 
 @added(Versions.v2026_05_01_preview)
-@removed(Versions.v2026_10_01)
+@removed(Versions.v2026_09_01)
 @doc("The compute model type.")
 union HorizonDbComputeModelType {
   string,
@@ -301,7 +301,7 @@ model ReadWritePoolProperties {
   zoneRedundancy: ReadWritePoolZoneRedundancyProperties;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("An Azure resource ID that identifies a HorizonDB cluster.")
 scalar HorizonDbClusterResourceId
   extends armResourceIdentifier<[
@@ -334,10 +334,10 @@ union ZoneRedundancyState {
   NotReady: "NotReady",
 }
 
-@renamedFrom(Versions.v2026_10_01, "HorizonDbClusterPropertiesForPatchUpdate")
+@renamedFrom(Versions.v2026_09_01, "HorizonDbClusterPropertiesForPatchUpdate")
 @doc("Properties of a HorizonDB cluster for update operations.")
 model ClusterPropertiesForPatchUpdate {
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @secret
   @minLength(8)
   @maxLength(128)
@@ -345,41 +345,41 @@ model ClusterPropertiesForPatchUpdate {
   @visibility(Lifecycle.Update)
   administratorLoginPassword?: string;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("The network configuration to update for the cluster.")
   @visibility(Lifecycle.Update)
   network?: NetworkForPatchUpdate;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Number of vCores.")
   @minValue(1)
   @maxValue(96)
   @visibility(Lifecycle.Update)
   vCores?: int32;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Defines connection to a parameter group.")
   parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
 
   @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Authentication configuration for the HorizonDB cluster.")
   @visibility(Lifecycle.Update)
   authConfig?: HorizonDbClusterAuthConfig;
 
   @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("The compute model for the cluster.")
   @visibility(Lifecycle.Update)
   computeModel?: HorizonDbComputeModel;
 
   @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Mirroring configuration for the HorizonDB cluster.")
   @visibility(Lifecycle.Update)
   mirroring?: HorizonDbClusterMirroring;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("The backup configuration for the cluster.")
   @visibility(Lifecycle.Update)
   backup?: BackupPropertiesForPatchUpdate;
@@ -390,7 +390,7 @@ model ClusterPropertiesForPatchUpdate {
   deletion?: ClusterDeletionPropertiesForPatchUpdate;
 }
 
-@renamedFrom(Versions.v2026_10_01, "HorizonDbClusterForPatchUpdate")
+@renamedFrom(Versions.v2026_09_01, "HorizonDbClusterForPatchUpdate")
 @doc("HorizonDB cluster for update operations.")
 model ClusterForPatchUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
@@ -430,30 +430,27 @@ model ClusterDeletionPropertiesForPatchUpdate {
 @added(Versions.v2027_03_01_preview)
 @doc("Parameters for designating a pool to host the cluster's read-write node.")
 model DesignateReadWritePoolRequest {
-  @doc("The Azure resource ID of the existing pool to designate as the read-write pool. The pool must be a child resource of the cluster on which this action is invoked. A resource ID for a pool in another cluster is rejected.")
+  @doc("The Azure resource ID of the existing pool to designate as the read-write pool. The pool must be a child resource of the cluster on which this action is invoked. A resource ID for a pool in another cluster is rejected. The pool can be designated when it has no active or running compute; in that case, the cluster has no active read-write node until compute becomes available in the designated pool.")
   poolResourceId: PoolResourceId;
-
-  @doc("Indicates whether the operation can succeed when the named target pool has no active or running compute, leaving the cluster without an active or running read-write node. The default is false.")
-  allowNoActiveReadWriteNode?: boolean = false;
 }
 
 @doc("Network properties.")
 model Network {
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "publicNetworkAccess is a configuration flag, not sensitive data"
-  @removed(Versions.v2026_10_01)
-  @renamedFrom(Versions.v2026_10_01, "publicNetworkAccess")
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "publicNetworkAccess")
   @doc("The flag indicating whether public ip is requested.")
   @visibility(Lifecycle.Read)
   legacyPublicNetworkAccess?: PublicNetworkAccessState;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "publicAccess is a configuration flag, not sensitive data"
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("Specifies whether public access is enabled for the cluster. The service defaults to Disabled when this property is omitted.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   publicAccess?: PublicNetworkAccessState = PublicNetworkAccessState.Disabled;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Network properties for updating a HorizonDB cluster.")
 model NetworkForPatchUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "publicAccess is a configuration flag, not sensitive data"
@@ -470,14 +467,14 @@ union CreateModeCluster {
   Create: "Create",
 
   /** Update an existing cluster */
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   Update: "Update",
 
   /** Create cluster from point-in-time restore */
   PointInTimeRestore: "PointInTimeRestore",
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Controls how a HorizonDB cluster PUT request is processed.")
 union ClusterCreateMode {
   string,
@@ -493,7 +490,7 @@ union ClusterCreateMode {
   AsyncReplica: "AsyncReplica",
 }
 
-@renamedFrom(Versions.v2026_10_01, "ZonePlacementPolicy")
+@renamedFrom(Versions.v2026_09_01, "ZonePlacementPolicy")
 @doc("The zone placement enforcement option.")
 union ZonePlacementEnforcement {
   string,
@@ -505,7 +502,7 @@ union ZonePlacementEnforcement {
   BestEffort: "BestEffort",
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Current state of a HorizonDB cluster.")
 union ClusterState {
   string,
@@ -560,7 +557,7 @@ model ClusterUpdateAcceptedHeaders is ArmLroLocationHeader<
   Cluster,
   string
 > {
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("A link to the status monitor for the cluster update operation.")
   @Azure.Core.pollingLocation(
     Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>
@@ -569,7 +566,7 @@ model ClusterUpdateAcceptedHeaders is ArmLroLocationHeader<
   azureAsyncOperation?: string;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Long-running operation headers returned when an asynchronous HorizonDB cluster create or replacement is accepted.")
 model ClusterCreateOrReplaceLroHeaders {
   @doc("A link to the status monitor for the cluster create or replacement operation.")
@@ -579,7 +576,7 @@ model ClusterCreateOrReplaceLroHeaders {
   ...Azure.Core.Foundations.RetryAfterHeader;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("The response returned when an asynchronous HorizonDB cluster replacement is accepted.")
 model ClusterReplaceAcceptedResponse {
   ...OkResponse;
@@ -590,7 +587,7 @@ model ClusterReplaceAcceptedResponse {
   body: Cluster;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("The response returned when asynchronous HorizonDB cluster creation is accepted.")
 model ClusterCreateAcceptedResponse {
   ...CreatedResponse;
@@ -601,20 +598,20 @@ model ClusterCreateAcceptedResponse {
   body: Cluster;
 }
 
-@renamedFrom(Versions.v2026_10_01, "HorizonDbClusters")
+@renamedFrom(Versions.v2026_09_01, "HorizonDbClusters")
 @armResourceOperations
 interface Clusters {
   @doc("Gets information about a HorizonDB cluster.")
   get is ArmResourceRead<Cluster>;
 
   @doc("Creates a new HorizonDB cluster or updates an existing cluster.")
-  @removed(Versions.v2026_10_01)
-  @renamedFrom(Versions.v2026_10_01, "createOrUpdate")
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "createOrUpdate")
   @sharedRoute
   createOrUpdateLegacy is ArmResourceCreateOrReplaceAsync<Cluster>;
 
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The AutoRest emitter infers final-state-via from polling metadata. Marking this standard ARM PUT as an LRO without polling decorators emits x-ms-long-running-operation while intentionally omitting x-ms-long-running-operation-options."
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("Creates a new HorizonDB cluster or replaces an existing cluster. PointInTimeRestore creates the new Cluster resource and hydrates its service-owned database storage from an available source backup. It does not clone source pools, Pool-scoped endpoints, firewall rules, parameter-group associations, or other child resources. The new Cluster receives its service-generated Cluster-scoped Endpoint named cluster. PostgreSQL version is inherited from backup metadata; all other new-cluster configuration comes from the request or service defaults. Until cross-region point-in-time restore is supported, the target cluster location must match the source cluster location; a cross-region request is rejected synchronously with 400 CrossRegionPointInTimeRestoreNotSupported and does not create or modify a resource.")
   @sharedRoute
   @Azure.ClientGenerator.Core.Legacy.markAsLro
@@ -637,8 +634,8 @@ interface Clusters {
   >;
 
   @doc("Deletes a HorizonDB cluster.")
-  @removed(Versions.v2026_10_01)
-  @renamedFrom(Versions.v2026_10_01, "delete")
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "delete")
   @sharedRoute
   deleteLegacy is ArmResourceDeleteWithoutOkAsync<
     Cluster,
@@ -648,7 +645,7 @@ interface Clusters {
       | ArmDeletedNoContentResponse
   >;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("Deletes a HorizonDB cluster, its Cluster-scoped Endpoint, and all remaining child resources. For an accepted deletion, the long-running operation remains nonterminal until physical deletion completes and point GET returns 404 Not Found.")
   @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -666,7 +663,7 @@ interface Clusters {
   listBySubscription is ArmListBySubscription<Cluster>;
 
   @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Starts a stopped HorizonDB cluster.")
   start is ArmResourceActionAsync<
     Cluster,
@@ -676,7 +673,7 @@ interface Clusters {
   >;
 
   @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Stops a running HorizonDB cluster.")
   stop is ArmResourceActionAsync<
     Cluster,
@@ -686,7 +683,7 @@ interface Clusters {
   >;
 
   @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Restarts a HorizonDB cluster.")
   restart is ArmResourceActionAsync<
     Cluster,
@@ -750,7 +747,7 @@ interface Clusters {
   >;
 
   @added(Versions.v2027_03_01_preview)
-  @doc("Designates an existing pool to host the cluster's read-write node. This POST action can be authorized separately from general cluster write permissions. The pool resource ID must identify a child resource of this cluster; a pool in another cluster is rejected. On success, the service sets readWritePool.designatedPoolResourceId to the requested resource ID. Endpoint scopes, roles, FQDNs, aliases, and firewall rules do not change during designation.")
+  @doc("Designates an existing pool to host the cluster's read-write node. This POST action can be authorized separately from general cluster write permissions. The pool resource ID must identify a child resource of this cluster; a pool in another cluster is rejected. A pool with no active or running compute can be designated without an additional opt-in property; the cluster then has no active read-write node until compute becomes available in the designated pool. On success, the service sets readWritePool.designatedPoolResourceId to the requested resource ID. Endpoint scopes, roles, FQDNs, aliases, and firewall rules do not change during designation.")
   @action("designateReadWritePool")
   designateReadWritePool is ArmResourceActionAsyncBase<
     Cluster,
@@ -781,7 +778,7 @@ interface Clusters {
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("Triggers a failover operation for the HorizonDB cluster. The service selects the new read-write node using the same mechanics as automatic failover.")
   @action("failover")
   failover is ArmResourceActionAsyncBase<

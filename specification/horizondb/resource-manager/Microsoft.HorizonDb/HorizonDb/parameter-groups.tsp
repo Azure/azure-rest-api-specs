@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
 
-@renamedFrom(Versions.v2026_10_01, "HorizonDbParameterGroup")
+@renamedFrom(Versions.v2026_09_01, "HorizonDbParameterGroup")
 @doc("Represents the HorizonDB parameter group.")
 model ParameterGroup
   is Azure.ResourceManager.TrackedResource<ParameterGroupProperties> {
@@ -25,61 +25,55 @@ model ParameterGroup
   name: string;
 }
 
-@renamedFrom(Versions.v2026_10_01, "HorizonDbParameterGroupProperties")
+@renamedFrom(Versions.v2026_09_01, "HorizonDbParameterGroupProperties")
 @doc("Properties of a HorizonDB parameter group.")
 model ParameterGroupProperties {
   @doc("Parameters in the parameter group.")
   @identifiers(#["name"])
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  @typeChangedFrom(Versions.v2026_10_01, LegacyParameterProperties[])
+  @typeChangedFrom(Versions.v2026_09_01, LegacyParameterProperties[])
   parameters?: ParameterProperties[];
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Description of the parameter group.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  @renamedFrom(Versions.v2026_10_01, "description")
+  @renamedFrom(Versions.v2026_09_01, "description")
   legacyDescription?: string;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("Description of the parameter group. The maximum length is 1024 characters.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   description?: WritableDescription;
 
-  @removed(Versions.v2026_10_01)
-  @renamedFrom(Versions.v2026_10_01, "pgVersion")
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "pgVersion")
   @doc("PostgreSQL version for the parameter group.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   legacyPgVersion?: int32;
 
-  @removed(Versions.v2026_10_01)
-  @renamedFrom(Versions.v2026_10_01, "version")
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "version")
   @doc("Current version of the parameter group.")
   @visibility(Lifecycle.Read)
   currentVersion?: int32;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("The PostgreSQL major version for the parameter group. This property is required during creation and is immutable thereafter. The service selects the unique location-scoped default parameter group for this version in the resource location. The DefaultParameterGroups APIs return at most one default parameter group for each PostgreSQL version in a location, so this selection is unambiguous.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   postgreSqlVersion: PostgreSqlVersion;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Indicates whether the parameters should be applied immediately.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   applyImmediately?: boolean;
-
-  @added(Versions.v2026_10_01)
-  @renamedFrom(Versions.v2026_10_01, "applyImmediately")
-  @doc("Determines when dynamic parameter changes become effective. Static parameter changes always require a restart of each connected pool, regardless of this value.")
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  applyMethod?: ParameterApplyMethod;
 
   @doc("The provisioning state of the parameter group.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-@removed(Versions.v2026_10_01)
-@renamedFrom(Versions.v2026_10_01, "ParameterProperties")
+@removed(Versions.v2026_09_01)
+@renamedFrom(Versions.v2026_09_01, "ParameterProperties")
 @doc("Properties of a HorizonDB parameters.")
 model LegacyParameterProperties {
   @doc("The name of the parameter.")
@@ -117,7 +111,7 @@ model LegacyParameterProperties {
   unit?: string;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Properties of a HorizonDB parameter.")
 model ParameterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
@@ -158,7 +152,7 @@ model ParameterProperties {
 }
 
 @renamedFrom(
-  Versions.v2026_10_01,
+  Versions.v2026_09_01,
   "HorizonDbParameterGroupPropertiesForPatchUpdate"
 )
 @doc("Properties of a HorizonDB parameter group for update operations.")
@@ -166,33 +160,27 @@ model ParameterGroupPropertiesForPatchUpdate {
   @doc("Parameters in the parameter group.")
   @identifiers(#["name"])
   @visibility(Lifecycle.Update)
-  @typeChangedFrom(Versions.v2026_10_01, LegacyParameterProperties[])
+  @typeChangedFrom(Versions.v2026_09_01, LegacyParameterProperties[])
   parameters?: ParameterProperties[];
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Description of the parameter group.")
   @visibility(Lifecycle.Update)
-  @renamedFrom(Versions.v2026_10_01, "description")
+  @renamedFrom(Versions.v2026_09_01, "description")
   legacyDescription?: string;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("Description of the parameter group. The maximum length is 1024 characters.")
   @visibility(Lifecycle.Update)
   description?: WritableDescription;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Indicates whether the parameters should be applied immediately.")
   @visibility(Lifecycle.Update)
   applyImmediately?: boolean;
-
-  @added(Versions.v2026_10_01)
-  @renamedFrom(Versions.v2026_10_01, "applyImmediately")
-  @doc("Determines when dynamic parameter changes in this request become effective. This property is required when parameters is supplied and optional otherwise. Static parameter changes always require a restart of each connected pool, regardless of this value.")
-  @visibility(Lifecycle.Update)
-  applyMethod?: ParameterApplyMethod;
 }
 
-@renamedFrom(Versions.v2026_10_01, "HorizonDbParameterGroupForPatchUpdate")
+@renamedFrom(Versions.v2026_09_01, "HorizonDbParameterGroupForPatchUpdate")
 @doc("HorizonDB parameter group for update operations.")
 model ParameterGroupForPatchUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
@@ -202,33 +190,33 @@ model ParameterGroupForPatchUpdate {
 }
 
 @renamedFrom(
-  Versions.v2026_10_01,
+  Versions.v2026_09_01,
   "HorizonDbParameterGroupConnectionProperties"
 )
 @doc("Connection information for HorizonDB parameter group.")
 model ParameterGroupConnectionProperties {
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("The name of the connected resource.")
   @visibility(Lifecycle.Read)
   name?: string;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("The resource ID of the connected resource.")
   @visibility(Lifecycle.Read)
   id?: armResourceIdentifier;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("The type of the resource.")
   @visibility(Lifecycle.Read)
   type?: string;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("The Azure resource ID of the connected HorizonDB pool.")
   @visibility(Lifecycle.Read)
   poolResourceId: PoolResourceId;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("A default parameter group available in a specific region. For each PostgreSQL version, the DefaultParameterGroups APIs return at most one default parameter group in a location.")
 model DefaultParameterGroup {
   @doc("The unique name of the default parameter group.")
@@ -253,16 +241,16 @@ model HorizonDbClusterParameterGroupConnectionProperties {
 
   @doc("Indication of if parameter group is applied on HorizonDB resource.")
   @visibility(Lifecycle.Read)
-  @typeChangedFrom(Versions.v2026_10_01, string)
+  @typeChangedFrom(Versions.v2026_09_01, string)
   syncStatus?: ParameterGroupSyncStatus;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Indicates whether the parameters should be applied immediately.")
   @visibility(Lifecycle.Update, Lifecycle.Read)
   applyImmediately?: boolean;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Controls when dynamic parameter changes become effective. Static parameter changes always become effective only after a pool restart, whether initiated by the customer or performed during scheduled maintenance.")
 union ParameterApplyMethod {
   string,
@@ -274,7 +262,7 @@ union ParameterApplyMethod {
   PendingReboot: "PendingReboot",
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Indicates synchronization status between a HorizonDB resource and its parameter group.")
 union ParameterGroupSyncStatus {
   string,
@@ -292,7 +280,7 @@ union ParameterGroupSyncStatus {
   PendingReboot: "PendingReboot",
 }
 
-@renamedFrom(Versions.v2026_10_01, "HorizonDbParameterGroups")
+@renamedFrom(Versions.v2026_09_01, "HorizonDbParameterGroups")
 @armResourceOperations
 interface ParameterGroups {
   @doc("Gets information about a HorizonDB parameter group.")
@@ -302,15 +290,15 @@ interface ParameterGroups {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ParameterGroup>;
 
-  @removed(Versions.v2026_10_01)
-  @renamedFrom(Versions.v2026_10_01, "update")
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "update")
   @sharedRoute
-  @doc("Updates an existing HorizonDB parameter group. A request-wide applyMethod is required and controls when dynamic parameter changes become effective on connected pools. Static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. The operation fails with a conflict while a previous update to this parameter group is still being applied to connected pools.")
+  @doc("Updates an existing HorizonDB parameter group. The applyImmediately property controls whether parameter changes are applied immediately to connected resources. The operation fails with a conflict while a previous update to this parameter group is still being applied.")
   updateV1 is ArmCustomPatchAsync<ParameterGroup, ParameterGroupForPatchUpdate>;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @sharedRoute
-  @doc("Updates an existing HorizonDB parameter group. When parameters is supplied, applyMethod is required and controls when dynamic parameter changes become effective on connected pools. Tags-only and description-only updates do not require applyMethod. Static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. The operation fails with a conflict while a previous update to this parameter group is still being applied to connected pools.")
+  @doc("Updates an existing HorizonDB parameter group. Each connected pool's applyMethod setting controls when dynamic parameter changes become effective for that pool. Static parameter changes always require a customer-triggered pool restart or a restart during scheduled maintenance. The operation fails with a conflict while a previous update to this parameter group is still being processed.")
   update is ArmCustomPatchAsync<ParameterGroup, ParameterGroupForPatchUpdate>;
 
   @doc("Deletes a HorizonDB parameter group. Deletion fails with a conflict when the parameter group is associated with one or more pools.")
@@ -338,7 +326,7 @@ interface ParameterGroups {
     ArmResponse<Azure.ResourceManager.ResourceListResult<ParameterGroupConnectionProperties>>
   >;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("Lists parameter groups filtered by version number.")
   @get
   @list
@@ -356,7 +344,7 @@ interface ParameterGroups {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom non-resource subscription-level operation with explicit route and parameters."
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/parameterGroups")
 interface DefaultParameterGroups {
   @doc("Lists default parameter groups available for a subscription in a specific region. The response contains at most one default parameter group for each PostgreSQL version.")

@@ -11,13 +11,13 @@ using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("An IPv4 address in dotted-decimal notation.")
 @pattern("^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])[.]){3}(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])$")
 scalar DottedDecimalIpv4Address extends string;
 
-@removed(Versions.v2026_10_01)
-@renamedFrom(Versions.v2026_10_01, "HorizonDbFirewallRule")
+@removed(Versions.v2026_09_01)
+@renamedFrom(Versions.v2026_09_01, "HorizonDbFirewallRule")
 @doc("Represents the HorizonDB firewall rule.")
 @parentResource(Pool)
 model LegacyHorizonDbFirewallRule
@@ -32,7 +32,7 @@ model LegacyHorizonDbFirewallRule
   name: string;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Represents a customer-managed firewall rule for a HorizonDB endpoint.")
 @parentResource(Endpoint)
 model FirewallRule
@@ -47,38 +47,38 @@ model FirewallRule
   name: string;
 }
 
-@renamedFrom(Versions.v2026_10_01, "HorizonDbFirewallRuleProperties")
+@renamedFrom(Versions.v2026_09_01, "HorizonDbFirewallRuleProperties")
 @doc("Properties of a HorizonDB firewall rule.")
 model FirewallRuleProperties {
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("The start IP address of the firewall rule (IPv4).")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  @renamedFrom(Versions.v2026_10_01, "startIpAddress")
+  @renamedFrom(Versions.v2026_09_01, "startIpAddress")
   legacyStartIpAddress: string;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("The start IPv4 address of the firewall rule in dotted-decimal notation.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   startIpAddress: DottedDecimalIpv4Address;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("The end IP address of the firewall rule (IPv4).")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  @renamedFrom(Versions.v2026_10_01, "endIpAddress")
+  @renamedFrom(Versions.v2026_09_01, "endIpAddress")
   legacyEndIpAddress: string;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("The end IPv4 address of the firewall rule in dotted-decimal notation. This address must be numerically greater than or equal to startIpAddress.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   endIpAddress: DottedDecimalIpv4Address;
 
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   @doc("The description of the HorizonDB firewall rule.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  @renamedFrom(Versions.v2026_10_01, "description")
+  @renamedFrom(Versions.v2026_09_01, "description")
   legacyDescription?: string;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("The description of the HorizonDB firewall rule. The maximum length is 1024 characters.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   description?: WritableDescription;
@@ -88,7 +88,7 @@ model FirewallRuleProperties {
   provisioningState?: ProvisioningState;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Properties of a HorizonDB endpoint firewall rule for update operations. Omitted properties preserve their current values. The service validates the effective IP range after merging the supplied values with the existing rule.")
 model FirewallRulePropertiesForPatchUpdate {
   @doc("The start IPv4 address to apply in dotted-decimal notation. The resulting effective start address must be numerically less than or equal to the effective end address.")
@@ -104,14 +104,14 @@ model FirewallRulePropertiesForPatchUpdate {
   description?: WritableDescription;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("A HorizonDB endpoint firewall rule update request.")
 model FirewallRuleForPatchUpdate {
   @doc("The properties to update. Omission preserves all current firewall rule properties.")
   properties?: FirewallRulePropertiesForPatchUpdate;
 }
 
-@removed(Versions.v2026_10_01)
+@removed(Versions.v2026_09_01)
 @armResourceOperations
 interface HorizonDbFirewallRules {
   @doc("Gets information about a HorizonDB firewall rule.")
@@ -134,7 +134,7 @@ interface HorizonDbFirewallRules {
   >;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @armResourceOperations
 interface FirewallRules {
   @doc("Gets information about a HorizonDB endpoint firewall rule.")

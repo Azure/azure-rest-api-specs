@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
 
-@renamedFrom(Versions.v2026_10_01, "HorizonDbPrivateLinkResource")
+@renamedFrom(Versions.v2026_09_01, "HorizonDbPrivateLinkResource")
 @doc("Represents the HorizonDB private link resource.")
 @parentResource(Cluster)
 model PrivateLinkResource
@@ -28,7 +28,7 @@ model PrivateLinkResource
 
 alias PrivateEndpointOperations = Azure.ResourceManager.PrivateEndpoints<PrivateEndpointConnection>;
 
-@renamedFrom(Versions.v2026_10_01, "HorizonDbPrivateEndpointConnections")
+@renamedFrom(Versions.v2026_09_01, "HorizonDbPrivateEndpointConnections")
 @armResourceOperations
 interface PrivateEndpointConnections {
   @doc("Gets a private endpoint connection.")
@@ -52,7 +52,7 @@ interface PrivateEndpointConnections {
     PrivateEndpointConnectionResource
   >;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @sharedRoute
   update is PrivateEndpointOperations.CustomPatchAsync<
     Cluster,
@@ -61,7 +61,7 @@ interface PrivateEndpointConnections {
 
   @doc("Approves or rejects a private endpoint connection.")
   @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01)
+  @removed(Versions.v2026_09_01)
   updateStatus is PrivateEndpointOperations.CreateOrReplaceSync<
     Cluster,
     PrivateEndpointConnectionResource
@@ -78,7 +78,7 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@renamedFrom(Versions.v2026_10_01, "HorizonDbPrivateLinkResources")
+@renamedFrom(Versions.v2026_09_01, "HorizonDbPrivateLinkResources")
 @armResourceOperations
 interface PrivateLinkResources {
   @doc("Gets a private link resource.")

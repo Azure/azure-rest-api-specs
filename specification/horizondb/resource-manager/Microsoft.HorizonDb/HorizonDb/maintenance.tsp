@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Represents a maintenance event for a HorizonDB pool.")
 @parentResource(Pool)
 model MaintenanceEvent
@@ -26,7 +26,7 @@ model MaintenanceEvent
   name: string;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("The scheduled maintenance configuration for a HorizonDB pool.")
 @discriminator("maintenanceManagementType")
 model ScheduledMaintenanceProperties {
@@ -35,38 +35,38 @@ model ScheduledMaintenanceProperties {
   maintenanceManagementType: ScheduledMaintenanceManagementType;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("The system-managed scheduled maintenance configuration for a HorizonDB pool. User-managed schedule properties must be absent.")
 model SystemScheduledMaintenanceProperties
   extends ScheduledMaintenanceProperties {
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("Specifies that scheduled maintenance is managed by the system.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   maintenanceManagementType: "System";
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("The user-managed weekly scheduled maintenance configuration for a HorizonDB pool.")
 model UserScheduledMaintenanceProperties
   extends ScheduledMaintenanceProperties {
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("Specifies that scheduled maintenance is managed by the user.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   maintenanceManagementType: "User";
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @doc("The day of the week on which user-managed maintenance starts.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   dayOfWeek: ScheduledMaintenanceDayOfWeek;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @minValue(0)
   @maxValue(23)
   @doc("The hour, in UTC, at which user-managed maintenance starts. Valid values range from 0 through 23.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   startHourUtc: int32;
 
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_09_01)
   @minValue(0)
   @maxValue(59)
   @doc("The minute, in UTC, at which user-managed maintenance starts. Valid values range from 0 through 59.")
@@ -75,7 +75,7 @@ model UserScheduledMaintenanceProperties
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Maintenance events are read-only resources that do not have a provisioning lifecycle."
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Properties of a maintenance event resource.")
 model MaintenanceEventProperties {
   @doc("A service-generated identifier for this maintenance event, assigned by the platform. The format is not contractual, and clients should not attempt to parse or construct this value.")
@@ -127,14 +127,14 @@ model MaintenanceEventProperties {
   originalStartTimeUtc: utcDateTime;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Parameters for rescheduling a maintenance event.")
 model MaintenanceEventRescheduleRequest {
   @doc("The new start time in RFC 3339 format.")
   postponeToDateTimeUtc: utcDateTime;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("The response from a maintenance event reschedule or apply-now action.")
 model MaintenanceEventActionResponse {
   @doc("The maintenance event identifier.")
@@ -163,7 +163,7 @@ model MaintenanceEventActionResponse {
   lastUpdatedTimeUtc?: utcDateTime;
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Specifies who manages scheduled maintenance for a HorizonDB pool.")
 union ScheduledMaintenanceManagementType {
   string,
@@ -175,7 +175,7 @@ union ScheduledMaintenanceManagementType {
   User: "User",
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("The day of the week for user-managed scheduled maintenance.")
 union ScheduledMaintenanceDayOfWeek {
   string,
@@ -202,7 +202,7 @@ union ScheduledMaintenanceDayOfWeek {
   Saturday: "Saturday",
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("The status of a maintenance event.")
 union MaintenanceEventStatus {
   string,
@@ -223,7 +223,7 @@ union MaintenanceEventStatus {
   Canceled: "Canceled",
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("The type of a maintenance event.")
 union MaintenanceType {
   string,
@@ -232,7 +232,7 @@ union MaintenanceType {
   PlannedMaintenance: "PlannedMaintenance",
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("A filter for maintenance event status.")
 union MaintenanceEventStatusFilter {
   string,
@@ -244,7 +244,7 @@ union MaintenanceEventStatusFilter {
   Past: "Past",
 }
 
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_09_01)
 @doc("Maintenance event operations for HorizonDB pools.")
 @armResourceOperations
 interface MaintenanceEvents {

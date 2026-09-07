@@ -85,16 +85,16 @@
       "name": "ParameterGroups"
     },
     {
-      "name": "CdcCapabilities"
+      "name": "ChangeDataCaptureCapabilities"
     },
     {
-      "name": "CdcDestinations"
+      "name": "ChangeDataCaptureDestinations"
     },
     {
       "name": "IdentityAssignments"
     },
     {
-      "name": "CdcConfigurations"
+      "name": "ChangeDataCaptureConfigurations"
     }
   ],
   "paths": {
@@ -166,6 +166,47 @@
         "x-ms-examples": {
           "List HorizonDB clusters in a subscription": {
             "$ref": "./examples/Clusters_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/capabilities": {
+      "get": {
+        "operationId": "Capabilities_List",
+        "description": "Lists HorizonDB capabilities available to a subscription in a specific region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The Azure region for which to list HorizonDB capabilities.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocationCapabilityListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List HorizonDB capabilities by subscription and region": {
+            "$ref": "./examples/Capabilities_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1302,11 +1343,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdc": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCapture": {
       "get": {
-        "operationId": "CdcCapabilities_List",
+        "operationId": "ChangeDataCaptureCapabilities_List",
         "tags": [
-          "CdcCapabilities"
+          "ChangeDataCaptureCapabilities"
         ],
         "description": "Lists the optional singleton change data capture capability for a cluster. The result contains zero or one item.",
         "parameters": [
@@ -1334,7 +1375,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CdcCapabilityListResult"
+              "$ref": "#/definitions/ChangeDataCaptureCapabilityListResult"
             }
           },
           "default": {
@@ -1346,7 +1387,7 @@
         },
         "x-ms-examples": {
           "List the optional cluster change data capture capability": {
-            "$ref": "./examples/CdcCapabilities_List.json"
+            "$ref": "./examples/ChangeDataCaptureCapabilities_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1354,11 +1395,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdc/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCapture/default": {
       "get": {
-        "operationId": "CdcCapabilities_Get",
+        "operationId": "ChangeDataCaptureCapabilities_Get",
         "tags": [
-          "CdcCapabilities"
+          "ChangeDataCaptureCapabilities"
         ],
         "description": "Gets the singleton change data capture capability for a HorizonDB cluster.",
         "parameters": [
@@ -1386,7 +1427,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CdcCapability"
+              "$ref": "#/definitions/ChangeDataCaptureCapability"
             }
           },
           "default": {
@@ -1398,14 +1439,14 @@
         },
         "x-ms-examples": {
           "Get the cluster change data capture capability": {
-            "$ref": "./examples/CdcCapabilities_Get.json"
+            "$ref": "./examples/ChangeDataCaptureCapabilities_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "CdcCapabilities_CreateOrUpdate",
+        "operationId": "ChangeDataCaptureCapabilities_CreateOrUpdate",
         "tags": [
-          "CdcCapabilities"
+          "ChangeDataCaptureCapabilities"
         ],
         "description": "Creates or replaces the singleton change data capture capability and reconciles shared engine prerequisites.",
         "parameters": [
@@ -1434,21 +1475,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CdcCapability"
+              "$ref": "#/definitions/ChangeDataCaptureCapability"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'CdcCapability' update operation succeeded",
+            "description": "Resource 'ChangeDataCaptureCapability' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/CdcCapability"
+              "$ref": "#/definitions/ChangeDataCaptureCapability"
             }
           },
           "201": {
-            "description": "Resource 'CdcCapability' create operation succeeded",
+            "description": "Resource 'ChangeDataCaptureCapability' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/CdcCapability"
+              "$ref": "#/definitions/ChangeDataCaptureCapability"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1471,19 +1512,19 @@
         },
         "x-ms-examples": {
           "Enable the cluster change data capture capability": {
-            "$ref": "./examples/CdcCapabilities_CreateOrUpdate.json"
+            "$ref": "./examples/ChangeDataCaptureCapabilities_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/CdcCapability"
+          "final-state-schema": "#/definitions/ChangeDataCaptureCapability"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "CdcCapabilities_Update",
+        "operationId": "ChangeDataCaptureCapabilities_Update",
         "tags": [
-          "CdcCapabilities"
+          "ChangeDataCaptureCapabilities"
         ],
         "description": "Updates mutable change data capture capability properties. Omitted properties preserve their current values.",
         "parameters": [
@@ -1512,7 +1553,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CdcCapabilityForPatchUpdate"
+              "$ref": "#/definitions/ChangeDataCaptureCapabilityForPatchUpdate"
             }
           }
         ],
@@ -1520,7 +1561,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CdcCapability"
+              "$ref": "#/definitions/ChangeDataCaptureCapability"
             }
           },
           "202": {
@@ -1546,19 +1587,19 @@
         },
         "x-ms-examples": {
           "Update the cluster change data capture capability": {
-            "$ref": "./examples/CdcCapabilities_Update.json"
+            "$ref": "./examples/ChangeDataCaptureCapabilities_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/CdcCapability"
+          "final-state-schema": "#/definitions/ChangeDataCaptureCapability"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "CdcCapabilities_Delete",
+        "operationId": "ChangeDataCaptureCapabilities_Delete",
         "tags": [
-          "CdcCapabilities"
+          "ChangeDataCaptureCapabilities"
         ],
         "description": "Deletes the change data capture capability after all change data capture destinations and configurations have been removed.",
         "parameters": [
@@ -1609,7 +1650,7 @@
         },
         "x-ms-examples": {
           "Delete the cluster change data capture capability": {
-            "$ref": "./examples/CdcCapabilities_Delete.json"
+            "$ref": "./examples/ChangeDataCaptureCapabilities_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1618,11 +1659,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdcConfigurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCaptureConfigurations": {
       "get": {
-        "operationId": "CdcConfigurations_List",
+        "operationId": "ChangeDataCaptureConfigurations_List",
         "tags": [
-          "CdcConfigurations"
+          "ChangeDataCaptureConfigurations"
         ],
         "description": "Lists change data capture configurations in a HorizonDB cluster.",
         "parameters": [
@@ -1650,7 +1691,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CdcConfigurationListResult"
+              "$ref": "#/definitions/ChangeDataCaptureConfigurationListResult"
             }
           },
           "default": {
@@ -1662,7 +1703,7 @@
         },
         "x-ms-examples": {
           "List Microsoft Fabric Mirroring configurations": {
-            "$ref": "./examples/CdcConfigurations_List.json"
+            "$ref": "./examples/ChangeDataCaptureConfigurations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1670,11 +1711,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdcConfigurations/{configurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCaptureConfigurations/{configurationName}": {
       "get": {
-        "operationId": "CdcConfigurations_Get",
+        "operationId": "ChangeDataCaptureConfigurations_Get",
         "tags": [
-          "CdcConfigurations"
+          "ChangeDataCaptureConfigurations"
         ],
         "description": "Gets a change data capture configuration.",
         "parameters": [
@@ -1712,7 +1753,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CdcConfiguration"
+              "$ref": "#/definitions/ChangeDataCaptureConfiguration"
             }
           },
           "default": {
@@ -1724,14 +1765,14 @@
         },
         "x-ms-examples": {
           "Get a Microsoft Fabric Mirroring configuration": {
-            "$ref": "./examples/CdcConfigurations_Get.json"
+            "$ref": "./examples/ChangeDataCaptureConfigurations_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "CdcConfigurations_CreateOrUpdate",
+        "operationId": "ChangeDataCaptureConfigurations_CreateOrUpdate",
         "tags": [
-          "CdcConfigurations"
+          "ChangeDataCaptureConfigurations"
         ],
         "description": "Creates or replaces a change data capture configuration that enrolls a PostgreSQL database for Microsoft Fabric Mirroring.",
         "parameters": [
@@ -1770,21 +1811,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CdcConfiguration"
+              "$ref": "#/definitions/ChangeDataCaptureConfiguration"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'CdcConfiguration' update operation succeeded",
+            "description": "Resource 'ChangeDataCaptureConfiguration' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/CdcConfiguration"
+              "$ref": "#/definitions/ChangeDataCaptureConfiguration"
             }
           },
           "201": {
-            "description": "Resource 'CdcConfiguration' create operation succeeded",
+            "description": "Resource 'ChangeDataCaptureConfiguration' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/CdcConfiguration"
+              "$ref": "#/definitions/ChangeDataCaptureConfiguration"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1807,19 +1848,19 @@
         },
         "x-ms-examples": {
           "Enroll a database for Microsoft Fabric Mirroring": {
-            "$ref": "./examples/CdcConfigurations_CreateOrUpdate.json"
+            "$ref": "./examples/ChangeDataCaptureConfigurations_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/CdcConfiguration"
+          "final-state-schema": "#/definitions/ChangeDataCaptureConfiguration"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "CdcConfigurations_Update",
+        "operationId": "ChangeDataCaptureConfigurations_Update",
         "tags": [
-          "CdcConfigurations"
+          "ChangeDataCaptureConfigurations"
         ],
         "description": "Updates mutable change data capture configuration properties. Omitted properties preserve their current values.",
         "parameters": [
@@ -1858,7 +1899,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CdcConfigurationForPatchUpdate"
+              "$ref": "#/definitions/ChangeDataCaptureConfigurationForPatchUpdate"
             }
           }
         ],
@@ -1866,7 +1907,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CdcConfiguration"
+              "$ref": "#/definitions/ChangeDataCaptureConfiguration"
             }
           },
           "202": {
@@ -1892,19 +1933,19 @@
         },
         "x-ms-examples": {
           "Disable a Microsoft Fabric Mirroring configuration": {
-            "$ref": "./examples/CdcConfigurations_Update.json"
+            "$ref": "./examples/ChangeDataCaptureConfigurations_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/CdcConfiguration"
+          "final-state-schema": "#/definitions/ChangeDataCaptureConfiguration"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "CdcConfigurations_Delete",
+        "operationId": "ChangeDataCaptureConfigurations_Delete",
         "tags": [
-          "CdcConfigurations"
+          "ChangeDataCaptureConfigurations"
         ],
         "description": "Deletes a change data capture configuration after destination-side replication has been stopped or detached. This operation never deletes the Microsoft Fabric mirrored-database item.",
         "parameters": [
@@ -1965,7 +2006,7 @@
         },
         "x-ms-examples": {
           "Delete a Microsoft Fabric Mirroring configuration": {
-            "$ref": "./examples/CdcConfigurations_Delete.json"
+            "$ref": "./examples/ChangeDataCaptureConfigurations_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1974,11 +2015,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdcDestinations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCaptureDestinations": {
       "get": {
-        "operationId": "CdcDestinations_List",
+        "operationId": "ChangeDataCaptureDestinations_List",
         "tags": [
-          "CdcDestinations"
+          "ChangeDataCaptureDestinations"
         ],
         "description": "Lists change data capture destinations in a HorizonDB cluster.",
         "parameters": [
@@ -2006,7 +2047,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CdcDestinationListResult"
+              "$ref": "#/definitions/ChangeDataCaptureDestinationListResult"
             }
           },
           "default": {
@@ -2018,7 +2059,7 @@
         },
         "x-ms-examples": {
           "List Microsoft Fabric change data capture destinations": {
-            "$ref": "./examples/CdcDestinations_List.json"
+            "$ref": "./examples/ChangeDataCaptureDestinations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -2026,11 +2067,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdcDestinations/{destinationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCaptureDestinations/{destinationName}": {
       "get": {
-        "operationId": "CdcDestinations_Get",
+        "operationId": "ChangeDataCaptureDestinations_Get",
         "tags": [
-          "CdcDestinations"
+          "ChangeDataCaptureDestinations"
         ],
         "description": "Gets a change data capture destination.",
         "parameters": [
@@ -2068,7 +2109,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CdcDestination"
+              "$ref": "#/definitions/ChangeDataCaptureDestination"
             }
           },
           "default": {
@@ -2080,14 +2121,14 @@
         },
         "x-ms-examples": {
           "Get a Microsoft Fabric change data capture destination": {
-            "$ref": "./examples/CdcDestinations_Get.json"
+            "$ref": "./examples/ChangeDataCaptureDestinations_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "CdcDestinations_CreateOrUpdate",
+        "operationId": "ChangeDataCaptureDestinations_CreateOrUpdate",
         "tags": [
-          "CdcDestinations"
+          "ChangeDataCaptureDestinations"
         ],
         "description": "Creates or replaces a Microsoft Fabric change data capture destination.",
         "parameters": [
@@ -2126,21 +2167,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CdcDestination"
+              "$ref": "#/definitions/ChangeDataCaptureDestination"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'CdcDestination' update operation succeeded",
+            "description": "Resource 'ChangeDataCaptureDestination' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/CdcDestination"
+              "$ref": "#/definitions/ChangeDataCaptureDestination"
             }
           },
           "201": {
-            "description": "Resource 'CdcDestination' create operation succeeded",
+            "description": "Resource 'ChangeDataCaptureDestination' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/CdcDestination"
+              "$ref": "#/definitions/ChangeDataCaptureDestination"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -2163,19 +2204,19 @@
         },
         "x-ms-examples": {
           "Create a Microsoft Fabric change data capture destination": {
-            "$ref": "./examples/CdcDestinations_CreateOrUpdate.json"
+            "$ref": "./examples/ChangeDataCaptureDestinations_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/CdcDestination"
+          "final-state-schema": "#/definitions/ChangeDataCaptureDestination"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "CdcDestinations_Update",
+        "operationId": "ChangeDataCaptureDestinations_Update",
         "tags": [
-          "CdcDestinations"
+          "ChangeDataCaptureDestinations"
         ],
         "description": "Updates mutable change data capture destination properties. Omitted properties preserve their current values.",
         "parameters": [
@@ -2214,7 +2255,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CdcDestinationForPatchUpdate"
+              "$ref": "#/definitions/ChangeDataCaptureDestinationForPatchUpdate"
             }
           }
         ],
@@ -2222,7 +2263,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CdcDestination"
+              "$ref": "#/definitions/ChangeDataCaptureDestination"
             }
           },
           "202": {
@@ -2248,19 +2289,19 @@
         },
         "x-ms-examples": {
           "Disable a Microsoft Fabric change data capture destination": {
-            "$ref": "./examples/CdcDestinations_Update.json"
+            "$ref": "./examples/ChangeDataCaptureDestinations_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/CdcDestination"
+          "final-state-schema": "#/definitions/ChangeDataCaptureDestination"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "CdcDestinations_Delete",
+        "operationId": "ChangeDataCaptureDestinations_Delete",
         "tags": [
-          "CdcDestinations"
+          "ChangeDataCaptureDestinations"
         ],
         "description": "Deletes a change data capture destination after all referencing configurations and identity assignments have been removed.",
         "parameters": [
@@ -2321,7 +2362,7 @@
         },
         "x-ms-examples": {
           "Delete a Microsoft Fabric change data capture destination": {
-            "$ref": "./examples/CdcDestinations_Delete.json"
+            "$ref": "./examples/ChangeDataCaptureDestinations_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2330,11 +2371,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdcDestinations/{destinationName}/activateIdentity": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCaptureDestinations/{destinationName}/activateIdentity": {
       "post": {
-        "operationId": "CdcDestinations_ActivateIdentity",
+        "operationId": "ChangeDataCaptureDestinations_ActivateIdentity",
         "tags": [
-          "CdcDestinations"
+          "ChangeDataCaptureDestinations"
         ],
         "description": "Atomically activates a validated identity assignment for this destination. If-Match is evaluated against the destination entity tag. Activating the already-active assignment succeeds idempotently.",
         "parameters": [
@@ -2348,7 +2389,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CdcDestinationIfMatchParameter"
+            "$ref": "#/parameters/ChangeDataCaptureDestinationIfMatchParameter"
           },
           {
             "name": "clusterName",
@@ -2376,7 +2417,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ActivateCdcIdentityRequest"
+              "$ref": "#/definitions/ActivateChangeDataCaptureIdentityRequest"
             }
           }
         ],
@@ -2384,7 +2425,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ActivateCdcIdentityResult"
+              "$ref": "#/definitions/ActivateChangeDataCaptureIdentityResult"
             }
           },
           "202": {
@@ -2410,17 +2451,17 @@
         },
         "x-ms-examples": {
           "Activate a validated identity assignment for a change data capture destination": {
-            "$ref": "./examples/CdcDestinations_ActivateIdentity.json"
+            "$ref": "./examples/ChangeDataCaptureDestinations_ActivateIdentity.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/ActivateCdcIdentityResult"
+          "final-state-schema": "#/definitions/ActivateChangeDataCaptureIdentityResult"
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdcDestinations/{destinationName}/identityAssignments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCaptureDestinations/{destinationName}/identityAssignments": {
       "get": {
         "operationId": "IdentityAssignments_List",
         "tags": [
@@ -2482,7 +2523,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdcDestinations/{destinationName}/identityAssignments/{assignmentName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCaptureDestinations/{destinationName}/identityAssignments/{assignmentName}": {
       "get": {
         "operationId": "IdentityAssignments_Get",
         "tags": [
@@ -2808,7 +2849,7 @@
         "tags": [
           "Clusters"
         ],
-        "description": "Designates an existing pool to host the cluster's read-write node. This POST action can be authorized separately from general cluster write permissions. The pool resource ID must identify a child resource of this cluster; a pool in another cluster is rejected. On success, the service sets readWritePool.designatedPoolResourceId to the requested resource ID. Endpoint scopes, roles, FQDNs, aliases, and firewall rules do not change during designation.",
+        "description": "Designates an existing pool to host the cluster's read-write node. This POST action can be authorized separately from general cluster write permissions. The pool resource ID must identify a child resource of this cluster; a pool in another cluster is rejected. A pool with no active or running compute can be designated without an additional opt-in property; the cluster then has no active read-write node until compute becomes available in the designated pool. On success, the service sets readWritePool.designatedPoolResourceId to the requested resource ID. Endpoint scopes, roles, FQDNs, aliases, and firewall rules do not change during designation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -3919,7 +3960,7 @@
         "tags": [
           "Pools"
         ],
-        "description": "Creates a new HorizonDB pool or updates an existing pool, including its desired node allocation, compute model, or associated parameter group. A pool name can be the same as its parent cluster name. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically uses it to host the cluster's read-write node when an eligible node is available. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. Every pool must be associated with a parameter group, so parameterGroup, parameterGroupResourceId, and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. For a Serverless compute model, the service validates that minVCores is less than or equal to maxVCores. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
+        "description": "Creates a new HorizonDB pool or updates an existing pool, including its desired node allocation, compute model, or associated parameter group. A pool name can be the same as its parent cluster name. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically uses it to host the cluster's read-write node when an eligible node is available. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. Every pool must be associated with a parameter group, so parameterGroup, parameterGroupResourceId, and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated before the resource is changed. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -4006,7 +4047,7 @@
         "tags": [
           "Pools"
         ],
-        "description": "Updates an existing HorizonDB pool, including its desired node allocation, selected compute model properties, the compute model type, or its associated parameter group. When parameterGroup is supplied, both parameterGroupResourceId and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. For an effective Serverless compute model, the service validates that the recursively merged minVCores value is less than or equal to the recursively merged maxVCores value. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
+        "description": "Updates an existing HorizonDB pool, including its desired node allocation, selected compute model properties, the compute model type, or its associated parameter group. When parameterGroup is supplied, both parameterGroupResourceId and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated against the recursively merged configuration. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -5758,7 +5799,7 @@
         "tags": [
           "ParameterGroups"
         ],
-        "description": "Updates an existing HorizonDB parameter group. When parameters is supplied, applyMethod is required and controls when dynamic parameter changes become effective on connected pools. Tags-only and description-only updates do not require applyMethod. Static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. The operation fails with a conflict while a previous update to this parameter group is still being applied to connected pools.",
+        "description": "Updates an existing HorizonDB parameter group. Each connected pool's applyMethod setting controls when dynamic parameter changes become effective for that pool. Static parameter changes always require a customer-triggered pool restart or a restart during scheduled maintenance. The operation fails with a conflict while a previous update to this parameter group is still being processed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -6262,12 +6303,12 @@
     }
   },
   "definitions": {
-    "ActivateCdcIdentityRequest": {
+    "ActivateChangeDataCaptureIdentityRequest": {
       "type": "object",
       "description": "The request to activate an identity assignment for a change data capture destination.",
       "properties": {
         "identityAssignmentResourceId": {
-          "$ref": "#/definitions/CdcIdentityAssignmentResourceId",
+          "$ref": "#/definitions/ChangeDataCaptureIdentityAssignmentResourceId",
           "description": "The resource ID of an inactive, successfully validated identity assignment under the destination receiving the action."
         },
         "drainExistingSessions": {
@@ -6279,7 +6320,7 @@
         "identityAssignmentResourceId"
       ]
     },
-    "ActivateCdcIdentityResult": {
+    "ActivateChangeDataCaptureIdentityResult": {
       "type": "object",
       "description": "The completed result of activating a change data capture destination identity.",
       "properties": {
@@ -6295,12 +6336,12 @@
           "readOnly": true
         },
         "targetIdentityAssignmentResourceId": {
-          "$ref": "#/definitions/CdcIdentityAssignmentResourceId",
+          "$ref": "#/definitions/ChangeDataCaptureIdentityAssignmentResourceId",
           "description": "The resource ID of the newly active identity assignment.",
           "readOnly": true
         },
         "previousIdentityAssignmentResourceId": {
-          "$ref": "#/definitions/CdcIdentityAssignmentResourceId",
+          "$ref": "#/definitions/ChangeDataCaptureIdentityAssignmentResourceId",
           "description": "The resource ID of the previously active identity assignment, when one existed.",
           "readOnly": true
         }
@@ -6435,6 +6476,10 @@
           }
         ]
       }
+    },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
     },
     "Azure.ResourceManager.PrivateEndpointConnectionUpdate": {
       "type": "object",
@@ -6601,12 +6646,36 @@
         ]
       }
     },
-    "CdcCapability": {
+    "CapabilityStatus": {
+      "type": "string",
+      "description": "The availability status of a HorizonDB capability.",
+      "enum": [
+        "Available",
+        "Default"
+      ],
+      "x-ms-enum": {
+        "name": "CapabilityStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "The capability is available."
+          },
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "The capability is available and selected by default."
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureCapability": {
       "type": "object",
       "description": "The singleton change data capture capability for a HorizonDB cluster.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CdcCapabilityProperties",
+          "$ref": "#/definitions/ChangeDataCaptureCapabilityProperties",
           "description": "The resource-specific properties for this resource."
         },
         "eTag": {
@@ -6621,25 +6690,25 @@
         }
       ]
     },
-    "CdcCapabilityForPatchUpdate": {
+    "ChangeDataCaptureCapabilityForPatchUpdate": {
       "type": "object",
       "description": "A sparse update request for the singleton change data capture capability.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CdcCapabilityPropertiesForPatchUpdate",
+          "$ref": "#/definitions/ChangeDataCaptureCapabilityPropertiesForPatchUpdate",
           "description": "The capability properties to update."
         }
       }
     },
-    "CdcCapabilityListResult": {
+    "ChangeDataCaptureCapabilityListResult": {
       "type": "object",
-      "description": "The response of a CdcCapability list operation.",
+      "description": "The response of a ChangeDataCaptureCapability list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The CdcCapability items on this page",
+          "description": "The ChangeDataCaptureCapability items on this page",
           "items": {
-            "$ref": "#/definitions/CdcCapability"
+            "$ref": "#/definitions/ChangeDataCaptureCapability"
           }
         },
         "nextLink": {
@@ -6652,12 +6721,12 @@
         "value"
       ]
     },
-    "CdcCapabilityProperties": {
+    "ChangeDataCaptureCapabilityProperties": {
       "type": "object",
       "description": "The properties of the singleton change data capture capability.",
       "properties": {
         "desiredState": {
-          "$ref": "#/definitions/CdcDesiredState",
+          "$ref": "#/definitions/ChangeDataCaptureDesiredState",
           "description": "The requested capability state.",
           "x-ms-mutability": [
             "read",
@@ -6666,7 +6735,7 @@
           ]
         },
         "effectiveState": {
-          "$ref": "#/definitions/CdcEffectiveState",
+          "$ref": "#/definitions/ChangeDataCaptureEffectiveState",
           "description": "The current effective capability state.",
           "readOnly": true
         },
@@ -6685,17 +6754,17 @@
           ]
         },
         "replicationArchitecture": {
-          "$ref": "#/definitions/CdcReplicationArchitecture",
+          "$ref": "#/definitions/ChangeDataCaptureReplicationArchitecture",
           "description": "The implementation architecture currently used for change capture.",
           "readOnly": true
         },
         "extension": {
-          "$ref": "#/definitions/CdcExtensionStatus",
+          "$ref": "#/definitions/ChangeDataCaptureExtensionStatus",
           "description": "The installed change data capture extension and its current lifecycle state.",
           "readOnly": true
         },
         "prerequisites": {
-          "$ref": "#/definitions/CdcPrerequisiteStatus",
+          "$ref": "#/definitions/ChangeDataCapturePrerequisiteStatus",
           "description": "The current readiness of change data capture engine and read-write endpoint prerequisites.",
           "readOnly": true
         },
@@ -6712,7 +6781,7 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/CdcStatus",
+          "$ref": "#/definitions/ChangeDataCaptureStatus",
           "description": "Customer-safe health information for the capability.",
           "readOnly": true
         }
@@ -6728,12 +6797,12 @@
         "status"
       ]
     },
-    "CdcCapabilityPropertiesForPatchUpdate": {
+    "ChangeDataCaptureCapabilityPropertiesForPatchUpdate": {
       "type": "object",
       "description": "Properties for updating the singleton change data capture capability. Omitted properties preserve their current values.",
       "properties": {
         "desiredState": {
-          "$ref": "#/definitions/CdcDesiredState",
+          "$ref": "#/definitions/ChangeDataCaptureDesiredState",
           "description": "The requested capability state.",
           "x-ms-mutability": [
             "update"
@@ -6748,12 +6817,12 @@
         }
       }
     },
-    "CdcConfiguration": {
+    "ChangeDataCaptureConfiguration": {
       "type": "object",
       "description": "A HorizonDB database enrollment for Microsoft Fabric Mirroring.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CdcConfigurationProperties",
+          "$ref": "#/definitions/ChangeDataCaptureConfigurationProperties",
           "description": "The resource-specific properties for this resource."
         },
         "eTag": {
@@ -6768,25 +6837,25 @@
         }
       ]
     },
-    "CdcConfigurationForPatchUpdate": {
+    "ChangeDataCaptureConfigurationForPatchUpdate": {
       "type": "object",
       "description": "A sparse update request for a change data capture configuration.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CdcConfigurationPropertiesForPatchUpdate",
+          "$ref": "#/definitions/ChangeDataCaptureConfigurationPropertiesForPatchUpdate",
           "description": "The configuration properties to update."
         }
       }
     },
-    "CdcConfigurationListResult": {
+    "ChangeDataCaptureConfigurationListResult": {
       "type": "object",
-      "description": "The response of a CdcConfiguration list operation.",
+      "description": "The response of a ChangeDataCaptureConfiguration list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The CdcConfiguration items on this page",
+          "description": "The ChangeDataCaptureConfiguration items on this page",
           "items": {
-            "$ref": "#/definitions/CdcConfiguration"
+            "$ref": "#/definitions/ChangeDataCaptureConfiguration"
           }
         },
         "nextLink": {
@@ -6799,7 +6868,7 @@
         "value"
       ]
     },
-    "CdcConfigurationProperties": {
+    "ChangeDataCaptureConfigurationProperties": {
       "type": "object",
       "description": "The properties of a Microsoft Fabric Mirroring configuration.",
       "properties": {
@@ -6812,15 +6881,15 @@
           ]
         },
         "usageProfile": {
-          "$ref": "#/definitions/CdcUsageProfile",
-          "description": "The immutable usage profile. API version 2026-10-01 accepts Mirroring only.",
+          "$ref": "#/definitions/ChangeDataCaptureUsageProfile",
+          "description": "The immutable usage profile. API version 2026-09-01 accepts Mirroring only.",
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
         "destinationResourceId": {
-          "$ref": "#/definitions/CdcDestinationResourceId",
+          "$ref": "#/definitions/ChangeDataCaptureDestinationResourceId",
           "description": "The immutable resource ID of an enabled change data capture destination under the same cluster.",
           "x-ms-mutability": [
             "read",
@@ -6833,7 +6902,7 @@
           "readOnly": true
         },
         "desiredState": {
-          "$ref": "#/definitions/CdcDesiredState",
+          "$ref": "#/definitions/ChangeDataCaptureDesiredState",
           "description": "The requested configuration state.",
           "x-ms-mutability": [
             "read",
@@ -6842,7 +6911,7 @@
           ]
         },
         "effectiveState": {
-          "$ref": "#/definitions/CdcEffectiveState",
+          "$ref": "#/definitions/ChangeDataCaptureEffectiveState",
           "description": "The current effective configuration state.",
           "readOnly": true
         },
@@ -6852,22 +6921,22 @@
           "readOnly": true
         },
         "extension": {
-          "$ref": "#/definitions/CdcExtensionStatus",
+          "$ref": "#/definitions/ChangeDataCaptureExtensionStatus",
           "description": "The change data capture extension state for the enrolled database.",
           "readOnly": true
         },
         "replication": {
-          "$ref": "#/definitions/CdcReplicationStatus",
+          "$ref": "#/definitions/ChangeDataCaptureReplicationStatus",
           "description": "The known status of the destination-owned replication session.",
           "readOnly": true
         },
         "topology": {
-          "$ref": "#/definitions/CdcTopologyBindingStatus",
+          "$ref": "#/definitions/ChangeDataCaptureTopologyBindingStatus",
           "description": "The current writer-topology binding for this logical stream.",
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/CdcStatus",
+          "$ref": "#/definitions/ChangeDataCaptureStatus",
           "description": "Customer-safe health information for the configuration.",
           "readOnly": true
         }
@@ -6885,12 +6954,12 @@
         "status"
       ]
     },
-    "CdcConfigurationPropertiesForPatchUpdate": {
+    "ChangeDataCaptureConfigurationPropertiesForPatchUpdate": {
       "type": "object",
       "description": "Properties for updating a change data capture configuration. Omitted properties preserve their current values.",
       "properties": {
         "desiredState": {
-          "$ref": "#/definitions/CdcDesiredState",
+          "$ref": "#/definitions/ChangeDataCaptureDesiredState",
           "description": "The requested configuration state.",
           "x-ms-mutability": [
             "update"
@@ -6898,19 +6967,19 @@
         }
       }
     },
-    "CdcConfigurationResourceId": {
+    "ChangeDataCaptureConfigurationResourceId": {
       "type": "string",
       "format": "arm-id",
       "description": "An Azure resource ID that identifies a HorizonDB change data capture configuration.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
-            "type": "Microsoft.HorizonDb/clusters/cdcConfigurations"
+            "type": "Microsoft.HorizonDb/clusters/changeDataCaptureConfigurations"
           }
         ]
       }
     },
-    "CdcDesiredState": {
+    "ChangeDataCaptureDesiredState": {
       "type": "string",
       "description": "The requested state of a HorizonDB change data capture capability, destination, or configuration.",
       "enum": [
@@ -6918,7 +6987,7 @@
         "Disabled"
       ],
       "x-ms-enum": {
-        "name": "CdcDesiredState",
+        "name": "ChangeDataCaptureDesiredState",
         "modelAsString": true,
         "values": [
           {
@@ -6934,12 +7003,12 @@
         ]
       }
     },
-    "CdcDestination": {
+    "ChangeDataCaptureDestination": {
       "type": "object",
       "description": "A reusable Microsoft Fabric destination for HorizonDB change data capture configurations.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CdcDestinationProperties",
+          "$ref": "#/definitions/ChangeDataCaptureDestinationProperties",
           "description": "The resource-specific properties for this resource."
         },
         "eTag": {
@@ -6954,12 +7023,12 @@
         }
       ]
     },
-    "CdcDestinationDetails": {
+    "ChangeDataCaptureDestinationDetails": {
       "type": "object",
       "description": "Destination-specific settings discriminated by destinationType.",
       "properties": {
         "destinationType": {
-          "$ref": "#/definitions/CdcDestinationType",
+          "$ref": "#/definitions/ChangeDataCaptureDestinationType",
           "description": "The destination family.",
           "x-ms-mutability": [
             "read",
@@ -6967,7 +7036,7 @@
           ]
         },
         "protocol": {
-          "$ref": "#/definitions/CdcProtocol",
+          "$ref": "#/definitions/ChangeDataCaptureProtocol",
           "description": "The protocol used to communicate with the destination.",
           "x-ms-mutability": [
             "read",
@@ -6981,7 +7050,7 @@
         "protocol"
       ]
     },
-    "CdcDestinationEffectiveState": {
+    "ChangeDataCaptureDestinationEffectiveState": {
       "type": "string",
       "description": "The effective state of a HorizonDB change data capture destination.",
       "enum": [
@@ -6994,7 +7063,7 @@
         "Failed"
       ],
       "x-ms-enum": {
-        "name": "CdcDestinationEffectiveState",
+        "name": "ChangeDataCaptureDestinationEffectiveState",
         "modelAsString": true,
         "values": [
           {
@@ -7035,25 +7104,25 @@
         ]
       }
     },
-    "CdcDestinationForPatchUpdate": {
+    "ChangeDataCaptureDestinationForPatchUpdate": {
       "type": "object",
       "description": "A sparse update request for a change data capture destination.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CdcDestinationPropertiesForPatchUpdate",
+          "$ref": "#/definitions/ChangeDataCaptureDestinationPropertiesForPatchUpdate",
           "description": "The destination properties to update."
         }
       }
     },
-    "CdcDestinationListResult": {
+    "ChangeDataCaptureDestinationListResult": {
       "type": "object",
-      "description": "The response of a CdcDestination list operation.",
+      "description": "The response of a ChangeDataCaptureDestination list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The CdcDestination items on this page",
+          "description": "The ChangeDataCaptureDestination items on this page",
           "items": {
-            "$ref": "#/definitions/CdcDestination"
+            "$ref": "#/definitions/ChangeDataCaptureDestination"
           }
         },
         "nextLink": {
@@ -7066,12 +7135,12 @@
         "value"
       ]
     },
-    "CdcDestinationProperties": {
+    "ChangeDataCaptureDestinationProperties": {
       "type": "object",
       "description": "The properties of a Microsoft Fabric change data capture destination.",
       "properties": {
         "destination": {
-          "$ref": "#/definitions/CdcDestinationDetails",
+          "$ref": "#/definitions/ChangeDataCaptureDestinationDetails",
           "description": "The immutable Microsoft Fabric destination settings. Resubmitting the same values is accepted; changing them requires deleting and recreating the destination.",
           "x-ms-mutability": [
             "read",
@@ -7079,7 +7148,7 @@
           ]
         },
         "desiredState": {
-          "$ref": "#/definitions/CdcDesiredState",
+          "$ref": "#/definitions/ChangeDataCaptureDesiredState",
           "description": "The requested destination state.",
           "x-ms-mutability": [
             "read",
@@ -7088,7 +7157,7 @@
           ]
         },
         "effectiveState": {
-          "$ref": "#/definitions/CdcDestinationEffectiveState",
+          "$ref": "#/definitions/ChangeDataCaptureDestinationEffectiveState",
           "description": "The current effective destination state.",
           "readOnly": true
         },
@@ -7098,7 +7167,7 @@
           "readOnly": true
         },
         "activeIdentityAssignmentResourceId": {
-          "$ref": "#/definitions/CdcIdentityAssignmentResourceId",
+          "$ref": "#/definitions/ChangeDataCaptureIdentityAssignmentResourceId",
           "description": "The resource ID of the currently active identity assignment, if one is active.",
           "readOnly": true
         },
@@ -7109,7 +7178,7 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/CdcStatus",
+          "$ref": "#/definitions/ChangeDataCaptureStatus",
           "description": "Customer-safe health information for the destination.",
           "readOnly": true
         }
@@ -7122,12 +7191,12 @@
         "status"
       ]
     },
-    "CdcDestinationPropertiesForPatchUpdate": {
+    "ChangeDataCaptureDestinationPropertiesForPatchUpdate": {
       "type": "object",
       "description": "Properties for updating a change data capture destination. Omitted properties preserve their current values.",
       "properties": {
         "desiredState": {
-          "$ref": "#/definitions/CdcDesiredState",
+          "$ref": "#/definitions/ChangeDataCaptureDesiredState",
           "description": "The requested destination state.",
           "x-ms-mutability": [
             "update"
@@ -7135,26 +7204,26 @@
         }
       }
     },
-    "CdcDestinationResourceId": {
+    "ChangeDataCaptureDestinationResourceId": {
       "type": "string",
       "format": "arm-id",
       "description": "An Azure resource ID that identifies a HorizonDB change data capture destination.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
-            "type": "Microsoft.HorizonDb/clusters/cdcDestinations"
+            "type": "Microsoft.HorizonDb/clusters/changeDataCaptureDestinations"
           }
         ]
       }
     },
-    "CdcDestinationType": {
+    "ChangeDataCaptureDestinationType": {
       "type": "string",
       "description": "The destination type supported by this API version.",
       "enum": [
         "Fabric"
       ],
       "x-ms-enum": {
-        "name": "CdcDestinationType",
+        "name": "ChangeDataCaptureDestinationType",
         "modelAsString": true,
         "values": [
           {
@@ -7165,7 +7234,7 @@
         ]
       }
     },
-    "CdcEffectiveState": {
+    "ChangeDataCaptureEffectiveState": {
       "type": "string",
       "description": "The effective state of a HorizonDB change data capture capability or configuration.",
       "enum": [
@@ -7177,7 +7246,7 @@
         "Failed"
       ],
       "x-ms-enum": {
-        "name": "CdcEffectiveState",
+        "name": "ChangeDataCaptureEffectiveState",
         "modelAsString": true,
         "values": [
           {
@@ -7213,7 +7282,7 @@
         ]
       }
     },
-    "CdcEngineConfigurationState": {
+    "ChangeDataCaptureEngineConfigurationState": {
       "type": "string",
       "description": "The readiness of HorizonDB engine settings required for change data capture.",
       "enum": [
@@ -7223,7 +7292,7 @@
         "Failed"
       ],
       "x-ms-enum": {
-        "name": "CdcEngineConfigurationState",
+        "name": "ChangeDataCaptureEngineConfigurationState",
         "modelAsString": true,
         "values": [
           {
@@ -7249,7 +7318,7 @@
         ]
       }
     },
-    "CdcExtensionState": {
+    "ChangeDataCaptureExtensionState": {
       "type": "string",
       "description": "The lifecycle state of the HorizonDB change data capture extension.",
       "enum": [
@@ -7261,7 +7330,7 @@
         "Failed"
       ],
       "x-ms-enum": {
-        "name": "CdcExtensionState",
+        "name": "ChangeDataCaptureExtensionState",
         "modelAsString": true,
         "values": [
           {
@@ -7297,7 +7366,7 @@
         ]
       }
     },
-    "CdcExtensionStatus": {
+    "ChangeDataCaptureExtensionStatus": {
       "type": "object",
       "description": "The installed HorizonDB change data capture extension and its current state.",
       "properties": {
@@ -7312,7 +7381,7 @@
           "readOnly": true
         },
         "state": {
-          "$ref": "#/definitions/CdcExtensionState",
+          "$ref": "#/definitions/ChangeDataCaptureExtensionState",
           "description": "The current extension lifecycle state.",
           "readOnly": true
         }
@@ -7323,7 +7392,7 @@
         "state"
       ]
     },
-    "CdcIdentityActivationState": {
+    "ChangeDataCaptureIdentityActivationState": {
       "type": "string",
       "description": "The activation state of a change data capture identity assignment.",
       "enum": [
@@ -7334,7 +7403,7 @@
         "Failed"
       ],
       "x-ms-enum": {
-        "name": "CdcIdentityActivationState",
+        "name": "ChangeDataCaptureIdentityActivationState",
         "modelAsString": true,
         "values": [
           {
@@ -7365,12 +7434,12 @@
         ]
       }
     },
-    "CdcIdentityAssignmentProperties": {
+    "ChangeDataCaptureIdentityAssignmentProperties": {
       "type": "object",
       "description": "The properties of a change data capture identity assignment.",
       "properties": {
         "identityResourceId": {
-          "$ref": "#/definitions/CdcUserAssignedIdentityResourceId",
+          "$ref": "#/definitions/ChangeDataCaptureUserAssignedIdentityResourceId",
           "description": "The immutable resource ID of the user-assigned managed identity. Resubmitting the same value is accepted; changing it requires deleting and recreating the assignment.",
           "x-ms-mutability": [
             "read",
@@ -7378,12 +7447,12 @@
           ]
         },
         "effectiveState": {
-          "$ref": "#/definitions/CdcIdentityAssignmentState",
+          "$ref": "#/definitions/ChangeDataCaptureIdentityAssignmentState",
           "description": "The current assignment lifecycle state.",
           "readOnly": true
         },
         "activationState": {
-          "$ref": "#/definitions/CdcIdentityActivationState",
+          "$ref": "#/definitions/ChangeDataCaptureIdentityActivationState",
           "description": "The current activation state within the parent destination.",
           "readOnly": true
         },
@@ -7408,7 +7477,7 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/CdcStatus",
+          "$ref": "#/definitions/ChangeDataCaptureStatus",
           "description": "Customer-safe health information for the identity assignment.",
           "readOnly": true
         }
@@ -7423,19 +7492,19 @@
         "status"
       ]
     },
-    "CdcIdentityAssignmentResourceId": {
+    "ChangeDataCaptureIdentityAssignmentResourceId": {
       "type": "string",
       "format": "arm-id",
       "description": "An Azure resource ID that identifies a HorizonDB change data capture identity assignment.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
-            "type": "Microsoft.HorizonDb/clusters/cdcDestinations/identityAssignments"
+            "type": "Microsoft.HorizonDb/clusters/changeDataCaptureDestinations/identityAssignments"
           }
         ]
       }
     },
-    "CdcIdentityAssignmentState": {
+    "ChangeDataCaptureIdentityAssignmentState": {
       "type": "string",
       "description": "The lifecycle state of a change data capture identity assignment.",
       "enum": [
@@ -7445,7 +7514,7 @@
         "Failed"
       ],
       "x-ms-enum": {
-        "name": "CdcIdentityAssignmentState",
+        "name": "ChangeDataCaptureIdentityAssignmentState",
         "modelAsString": true,
         "values": [
           {
@@ -7471,7 +7540,7 @@
         ]
       }
     },
-    "CdcIdentityValidationState": {
+    "ChangeDataCaptureIdentityValidationState": {
       "type": "string",
       "description": "The validation state of a change data capture identity assignment.",
       "enum": [
@@ -7481,7 +7550,7 @@
         "Failed"
       ],
       "x-ms-enum": {
-        "name": "CdcIdentityValidationState",
+        "name": "ChangeDataCaptureIdentityValidationState",
         "modelAsString": true,
         "values": [
           {
@@ -7508,17 +7577,17 @@
       },
       "readOnly": true
     },
-    "CdcPrerequisiteStatus": {
+    "ChangeDataCapturePrerequisiteStatus": {
       "type": "object",
       "description": "The current readiness of prerequisites shared by change data capture configurations.",
       "properties": {
         "engineConfigurationState": {
-          "$ref": "#/definitions/CdcEngineConfigurationState",
+          "$ref": "#/definitions/ChangeDataCaptureEngineConfigurationState",
           "description": "The readiness of the required engine configuration.",
           "readOnly": true
         },
         "readWriteEndpointState": {
-          "$ref": "#/definitions/CdcReadWriteEndpointState",
+          "$ref": "#/definitions/ChangeDataCaptureReadWriteEndpointState",
           "description": "The availability of the read-write endpoint required for engine mutations.",
           "readOnly": true
         }
@@ -7528,14 +7597,14 @@
         "readWriteEndpointState"
       ]
     },
-    "CdcProtocol": {
+    "ChangeDataCaptureProtocol": {
       "type": "string",
       "description": "The protocol used to communicate with a change data capture destination.",
       "enum": [
         "Native"
       ],
       "x-ms-enum": {
-        "name": "CdcProtocol",
+        "name": "ChangeDataCaptureProtocol",
         "modelAsString": true,
         "values": [
           {
@@ -7546,7 +7615,7 @@
         ]
       }
     },
-    "CdcReadWriteEndpointState": {
+    "ChangeDataCaptureReadWriteEndpointState": {
       "type": "string",
       "description": "The availability of a read-write endpoint for change data capture engine mutations.",
       "enum": [
@@ -7554,7 +7623,7 @@
         "Unavailable"
       ],
       "x-ms-enum": {
-        "name": "CdcReadWriteEndpointState",
+        "name": "ChangeDataCaptureReadWriteEndpointState",
         "modelAsString": true,
         "values": [
           {
@@ -7570,7 +7639,7 @@
         ]
       }
     },
-    "CdcReplicationArchitecture": {
+    "ChangeDataCaptureReplicationArchitecture": {
       "type": "string",
       "description": "The implementation architecture used to capture and publish changes.",
       "enum": [
@@ -7579,7 +7648,7 @@
         "Hybrid"
       ],
       "x-ms-enum": {
-        "name": "CdcReplicationArchitecture",
+        "name": "ChangeDataCaptureReplicationArchitecture",
         "modelAsString": true,
         "values": [
           {
@@ -7600,7 +7669,7 @@
         ]
       }
     },
-    "CdcReplicationState": {
+    "ChangeDataCaptureReplicationState": {
       "type": "string",
       "description": "The state of a destination-owned replication session.",
       "enum": [
@@ -7615,7 +7684,7 @@
         "Failed"
       ],
       "x-ms-enum": {
-        "name": "CdcReplicationState",
+        "name": "ChangeDataCaptureReplicationState",
         "modelAsString": true,
         "values": [
           {
@@ -7666,12 +7735,12 @@
         ]
       }
     },
-    "CdcReplicationStatus": {
+    "ChangeDataCaptureReplicationStatus": {
       "type": "object",
       "description": "The destination-owned replication-session status known to HorizonDB.",
       "properties": {
         "state": {
-          "$ref": "#/definitions/CdcReplicationState",
+          "$ref": "#/definitions/ChangeDataCaptureReplicationState",
           "description": "The current replication-session state.",
           "readOnly": true
         },
@@ -7691,7 +7760,7 @@
         "state"
       ]
     },
-    "CdcStatus": {
+    "ChangeDataCaptureStatus": {
       "type": "object",
       "description": "Customer-safe health information for a HorizonDB change data capture resource.",
       "properties": {
@@ -7711,7 +7780,7 @@
         "message"
       ]
     },
-    "CdcTopologyBindingState": {
+    "ChangeDataCaptureTopologyBindingState": {
       "type": "string",
       "description": "The relationship of a change data capture configuration to the current writer topology.",
       "enum": [
@@ -7722,7 +7791,7 @@
         "Conflict"
       ],
       "x-ms-enum": {
-        "name": "CdcTopologyBindingState",
+        "name": "ChangeDataCaptureTopologyBindingState",
         "modelAsString": true,
         "values": [
           {
@@ -7753,12 +7822,12 @@
         ]
       }
     },
-    "CdcTopologyBindingStatus": {
+    "ChangeDataCaptureTopologyBindingStatus": {
       "type": "object",
       "description": "The current writer-topology binding of a change data capture configuration.",
       "properties": {
         "state": {
-          "$ref": "#/definitions/CdcTopologyBindingState",
+          "$ref": "#/definitions/ChangeDataCaptureTopologyBindingState",
           "description": "The configuration's relationship to the current writer topology.",
           "readOnly": true
         },
@@ -7774,7 +7843,7 @@
           "readOnly": true
         },
         "replacementConfigurationResourceId": {
-          "$ref": "#/definitions/CdcConfigurationResourceId",
+          "$ref": "#/definitions/ChangeDataCaptureConfigurationResourceId",
           "description": "The replacement configuration resource ID when this projection has been superseded or requires rebinding.",
           "readOnly": true
         }
@@ -7785,14 +7854,14 @@
         "activeClusterResourceId"
       ]
     },
-    "CdcUsageProfile": {
+    "ChangeDataCaptureUsageProfile": {
       "type": "string",
       "description": "The reason that a change data capture configuration exists.",
       "enum": [
         "Mirroring"
       ],
       "x-ms-enum": {
-        "name": "CdcUsageProfile",
+        "name": "ChangeDataCaptureUsageProfile",
         "modelAsString": true,
         "values": [
           {
@@ -7803,7 +7872,7 @@
         ]
       }
     },
-    "CdcUserAssignedIdentityResourceId": {
+    "ChangeDataCaptureUserAssignedIdentityResourceId": {
       "type": "string",
       "format": "arm-id",
       "description": "An Azure resource ID that identifies a user-assigned managed identity.",
@@ -7832,6 +7901,44 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
+      ]
+    },
+    "ClusterCapability": {
+      "type": "object",
+      "description": "The HorizonDB Cluster capabilities available in a location.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of HorizonDB Clusters in the region.",
+          "readOnly": true
+        },
+        "supportedPostgreSqlVersions": {
+          "type": "array",
+          "description": "The PostgreSQL major versions supported by Clusters in the region.",
+          "items": {
+            "$ref": "#/definitions/PostgreSqlVersionCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "supportedFeatures": {
+          "type": "array",
+          "description": "Additional Cluster features supported in the region.",
+          "items": {
+            "$ref": "#/definitions/ClusterFeatureCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "supportedPostgreSqlVersions",
+        "supportedFeatures"
       ]
     },
     "ClusterCreateMode": {
@@ -7951,6 +8058,26 @@
         }
       }
     },
+    "ClusterFeatureCapability": {
+      "type": "object",
+      "description": "A HorizonDB Cluster feature supported in a location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Cluster feature.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of the Cluster feature.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "status"
+      ]
+    },
     "ClusterForPatchUpdate": {
       "type": "object",
       "description": "HorizonDB cluster for update operations.",
@@ -7999,7 +8126,7 @@
       "properties": {
         "postgreSqlVersion": {
           "$ref": "#/definitions/PostgreSqlVersion",
-          "description": "The PostgreSQL major version used by the HorizonDB cluster. API version 2026-10-01 accepts only 17. This property is required on every PUT and is immutable after creation. On replacement, resubmitting the existing value is accepted and changing it is rejected. For point-in-time restore, PostgreSQL version is the only new-cluster property inherited from the source backup metadata, and the value in the request must match that version. All other new-cluster configuration comes from the request or service defaults. Future API versions may add supported values without changing this property type.",
+          "description": "The PostgreSQL major version used by the HorizonDB cluster. API version 2026-09-01 accepts only 17. This property is required on every PUT and is immutable after creation. On replacement, resubmitting the existing value is accepted and changing it is rejected. For point-in-time restore, PostgreSQL version is the only new-cluster property inherited from the source backup metadata, and the value in the request must match that version. All other new-cluster configuration comes from the request or service defaults. Future API versions may add supported values without changing this property type.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -8359,6 +8486,92 @@
         "value"
       ]
     },
+    "ComputeGenerationCapability": {
+      "type": "object",
+      "description": "The capabilities of a HorizonDB compute generation.",
+      "properties": {
+        "computeGeneration": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The numeric compute generation used when configuring a HorizonDB pool.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of the compute generation.",
+          "readOnly": true
+        },
+        "supportedComputeModels": {
+          "type": "array",
+          "description": "The compute models supported by the compute generation.",
+          "items": {
+            "$ref": "#/definitions/ComputeModelCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "type"
+          ]
+        }
+      },
+      "required": [
+        "computeGeneration",
+        "status",
+        "supportedComputeModels"
+      ]
+    },
+    "ComputeModelCapability": {
+      "type": "object",
+      "description": "The capabilities of a HorizonDB compute model.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PoolComputeModelType",
+          "description": "The compute model represented by these capabilities.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of the compute model.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "status"
+      ]
+    },
+    "ComputeProcessorCapability": {
+      "type": "object",
+      "description": "The capabilities of a processor family supported by HorizonDB.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/ComputeProcessorType",
+          "description": "The name of the processor family.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of the processor family.",
+          "readOnly": true
+        },
+        "supportedGenerations": {
+          "type": "array",
+          "description": "The compute generations supported by the processor family.",
+          "items": {
+            "$ref": "#/definitions/ComputeGenerationCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "computeGeneration"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "status",
+        "supportedGenerations"
+      ]
+    },
     "ComputeProcessorType": {
       "type": "string",
       "description": "The compute processor type.",
@@ -8382,6 +8595,34 @@
           }
         ]
       }
+    },
+    "ComputeSizeCapability": {
+      "type": "object",
+      "description": "A vCore configuration supported by a HorizonDB processor generation.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of the vCore configuration.",
+          "readOnly": true
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of vCores in the configuration.",
+          "readOnly": true
+        },
+        "memoryPerVCoreInMb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The memory in megabytes available for each vCore.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "vCores",
+        "memoryPerVCoreInMb"
+      ]
     },
     "DefaultParameterGroup": {
       "type": "object",
@@ -8443,12 +8684,7 @@
       "properties": {
         "poolResourceId": {
           "$ref": "#/definitions/PoolResourceId",
-          "description": "The Azure resource ID of the existing pool to designate as the read-write pool. The pool must be a child resource of the cluster on which this action is invoked. A resource ID for a pool in another cluster is rejected."
-        },
-        "allowNoActiveReadWriteNode": {
-          "type": "boolean",
-          "description": "Indicates whether the operation can succeed when the named target pool has no active or running compute, leaving the cluster without an active or running read-write node. The default is false.",
-          "default": false
+          "description": "The Azure resource ID of the existing pool to designate as the read-write pool. The pool must be a child resource of the cluster on which this action is invoked. A resource ID for a pool in another cluster is rejected. The pool can be designated when it has no active or running compute; in that case, the cluster has no active read-write node until compute becomes available in the designated pool."
         }
       },
       "required": [
@@ -8698,7 +8934,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/CdcDestinationDetails"
+          "$ref": "#/definitions/ChangeDataCaptureDestinationDetails"
         }
       ],
       "x-ms-discriminator-value": "Fabric"
@@ -8902,7 +9138,7 @@
       "description": "A user-assigned managed identity authorized for a HorizonDB change data capture destination.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CdcIdentityAssignmentProperties",
+          "$ref": "#/definitions/ChangeDataCaptureIdentityAssignmentProperties",
           "description": "The resource-specific properties for this resource."
         },
         "eTag": {
@@ -8943,7 +9179,7 @@
       "description": "The current validation result for a change data capture identity assignment.",
       "properties": {
         "state": {
-          "$ref": "#/definitions/CdcIdentityValidationState",
+          "$ref": "#/definitions/ChangeDataCaptureIdentityValidationState",
           "description": "The current validation state.",
           "readOnly": true
         },
@@ -8961,6 +9197,59 @@
       },
       "required": [
         "state"
+      ]
+    },
+    "LocationCapability": {
+      "type": "object",
+      "description": "The HorizonDB capabilities available to a subscription in a location.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure region represented by this capability entry.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of HorizonDB in the region.",
+          "readOnly": true
+        },
+        "clusterCapabilities": {
+          "$ref": "#/definitions/ClusterCapability",
+          "description": "The Cluster capabilities available in the region.",
+          "readOnly": true
+        },
+        "poolCapabilities": {
+          "$ref": "#/definitions/PoolCapability",
+          "description": "The Pool capabilities available in the region, including processor, generation, and compute-model details.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "location",
+        "status",
+        "clusterCapabilities",
+        "poolCapabilities"
+      ]
+    },
+    "LocationCapabilityListResult": {
+      "type": "object",
+      "description": "The response of a LocationCapability list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LocationCapability items on this page",
+          "items": {
+            "$ref": "#/definitions/LocationCapability"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "MaintenanceEvent": {
@@ -9569,15 +9858,6 @@
             "create"
           ]
         },
-        "applyMethod": {
-          "$ref": "#/definitions/ParameterApplyMethod",
-          "description": "Determines when dynamic parameter changes become effective. Static parameter changes always require a restart of each connected pool, regardless of this value.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the parameter group.",
@@ -9608,13 +9888,6 @@
         "description": {
           "$ref": "#/definitions/WritableDescription",
           "description": "Description of the parameter group. The maximum length is 1024 characters.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
-        "applyMethod": {
-          "$ref": "#/definitions/ParameterApplyMethod",
-          "description": "Determines when dynamic parameter changes in this request become effective. This property is required when parameters is supplied and optional otherwise. Static parameter changes always require a restart of each connected pool, regardless of this value.",
           "x-ms-mutability": [
             "update"
           ]
@@ -9811,6 +10084,44 @@
         }
       ]
     },
+    "PoolCapability": {
+      "type": "object",
+      "description": "The HorizonDB Pool capabilities available in a location.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of HorizonDB Pools in the region.",
+          "readOnly": true
+        },
+        "supportedProcessors": {
+          "type": "array",
+          "description": "The processor families and their compute capabilities supported by Pools in the region.",
+          "items": {
+            "$ref": "#/definitions/ComputeProcessorCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "supportedFeatures": {
+          "type": "array",
+          "description": "Additional Pool features supported in the region independently of a processor, generation, or compute model.",
+          "items": {
+            "$ref": "#/definitions/PoolFeatureCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "supportedProcessors",
+        "supportedFeatures"
+      ]
+    },
     "PoolComputeModel": {
       "type": "object",
       "description": "The compute model for a HorizonDB pool.",
@@ -9852,7 +10163,7 @@
     },
     "PoolComputeModelForPatchUpdate": {
       "type": "object",
-      "description": "The compute model properties of a HorizonDB pool that can be updated. The object is recursively mergeable: omitted properties preserve their current values. Properties that do not apply to the current or target compute model type are rejected. When type changes, the request must include the complete target compute model. For an effective Serverless model, the merged minVCores value must be less than or equal to the merged maxVCores value; invalid requests are rejected without changing the resource.",
+      "description": "The compute model properties of a HorizonDB pool that can be updated. The object is recursively mergeable: omitted properties preserve their current values. Properties that do not apply to the current or target compute model type are rejected. When type changes, the request must include the complete target compute model. Subtype-specific constraints are validated against the effective merged configuration; invalid requests are rejected without changing the resource.",
       "properties": {
         "type": {
           "$ref": "#/definitions/PoolComputeModelType",
@@ -9923,6 +10234,26 @@
           }
         ]
       }
+    },
+    "PoolFeatureCapability": {
+      "type": "object",
+      "description": "A HorizonDB Pool feature supported in a location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Pool feature.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of the Pool feature.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "status"
+      ]
     },
     "PoolForPatchUpdate": {
       "type": "object",
@@ -10108,7 +10439,7 @@
       "properties": {
         "computeModel": {
           "$ref": "#/definitions/PoolComputeModelForPatchUpdate",
-          "description": "The compute model properties to update. Omitted properties preserve their current values. To change the compute model type between Provisioned and Serverless, supply the complete target compute model, including type, computeProcessor, computeGeneration, and all properties required by the target type.",
+          "description": "The compute model properties to update. Omitted properties preserve their current values. To change the compute model type, supply the complete target compute model, including type, computeProcessor, computeGeneration, and all properties required by the target type.",
           "x-ms-mutability": [
             "update"
           ]
@@ -10226,9 +10557,33 @@
         ]
       }
     },
+    "PostgreSqlCapabilityVersion": {
+      "type": "string",
+      "description": "A PostgreSQL major version advertised by the HorizonDB capabilities API.",
+      "enum": [
+        "16",
+        "17"
+      ],
+      "x-ms-enum": {
+        "name": "PostgreSqlCapabilityVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "V16",
+            "value": "16",
+            "description": "PostgreSQL major version 16."
+          },
+          {
+            "name": "V17",
+            "value": "17",
+            "description": "PostgreSQL major version 17."
+          }
+        ]
+      }
+    },
     "PostgreSqlVersion": {
       "type": "string",
-      "description": "A PostgreSQL major version supported by HorizonDB. API version 2026-10-01 accepts only 17. Future API versions may add named values, and clients must tolerate unknown values returned by the service.",
+      "description": "A PostgreSQL major version supported by HorizonDB. API version 2026-09-01 accepts only 17. Future API versions may add named values, and clients must tolerate unknown values returned by the service.",
       "enum": [
         "17"
       ],
@@ -10243,6 +10598,35 @@
           }
         ]
       }
+    },
+    "PostgreSqlVersionCapability": {
+      "type": "object",
+      "description": "The capabilities of a PostgreSQL major version supported by HorizonDB.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/PostgreSqlCapabilityVersion",
+          "description": "The PostgreSQL major version.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of the PostgreSQL major version.",
+          "readOnly": true
+        },
+        "supportedVersionsToUpgrade": {
+          "type": "array",
+          "description": "The PostgreSQL major versions to which this version can be upgraded.",
+          "items": {
+            "$ref": "#/definitions/PostgreSqlCapabilityVersion"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "status",
+        "supportedVersionsToUpgrade"
+      ]
     },
     "PrincipalTypes": {
       "type": "string",
@@ -10336,6 +10720,39 @@
       "required": [
         "value"
       ]
+    },
+    "ProvisionedComputeModelCapability": {
+      "type": "object",
+      "description": "The capabilities of the Provisioned compute model.",
+      "properties": {
+        "defaultVCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The default number of provisioned vCores.",
+          "readOnly": true
+        },
+        "supportedComputeSizes": {
+          "type": "array",
+          "description": "The supported provisioned compute sizes.",
+          "items": {
+            "$ref": "#/definitions/ComputeSizeCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "vCores"
+          ]
+        }
+      },
+      "required": [
+        "defaultVCoreCount",
+        "supportedComputeSizes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeModelCapability"
+        }
+      ],
+      "x-ms-discriminator-value": "Provisioned"
     },
     "ProvisionedHorizonDbPoolComputeModel": {
       "type": "object",
@@ -10576,6 +10993,44 @@
         "maintenanceManagementType"
       ]
     },
+    "ServerlessComputeModelCapability": {
+      "type": "object",
+      "description": "The capabilities of the Serverless compute model.",
+      "properties": {
+        "minimumVCores": {
+          "$ref": "#/definitions/ServerlessPoolVCores",
+          "description": "The lowest Serverless capacity supported by the compute generation, in vCores.",
+          "readOnly": true
+        },
+        "maximumVCores": {
+          "$ref": "#/definitions/ServerlessPoolVCores",
+          "description": "The highest Serverless capacity supported by the compute generation, in vCores.",
+          "readOnly": true
+        },
+        "defaultMinVCores": {
+          "$ref": "#/definitions/ServerlessPoolVCores",
+          "description": "The default minimum Serverless autoscaling bound, in vCores.",
+          "readOnly": true
+        },
+        "defaultMaxVCores": {
+          "$ref": "#/definitions/ServerlessPoolVCores",
+          "description": "The default maximum Serverless autoscaling bound, in vCores.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "minimumVCores",
+        "maximumVCores",
+        "defaultMinVCores",
+        "defaultMaxVCores"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeModelCapability"
+        }
+      ],
+      "x-ms-discriminator-value": "Serverless"
+    },
     "ServerlessHorizonDbPoolComputeModel": {
       "type": "object",
       "description": "A serverless compute model for a HorizonDB pool. minVCores must be less than or equal to maxVCores.",
@@ -10657,7 +11112,7 @@
       "type": "object",
       "description": "Properties of a system-managed AI model. All properties are generated by the service and are read-only.",
       "properties": {
-        "id": {
+        "internalModelId": {
           "type": "string",
           "description": "The service-internal identifier of the system AI model. This is an opaque identifier, and clients should not parse or construct it.",
           "readOnly": true
@@ -10969,7 +11424,7 @@
     }
   },
   "parameters": {
-    "CdcDestinationIfMatchParameter": {
+    "ChangeDataCaptureDestinationIfMatchParameter": {
       "name": "If-Match",
       "in": "header",
       "description": "The destination entity tag. The action proceeds only when this value matches the destination's current entity tag.",
