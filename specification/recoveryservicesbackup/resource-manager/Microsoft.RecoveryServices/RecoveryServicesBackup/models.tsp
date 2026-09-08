@@ -8689,6 +8689,12 @@ model BMSRefreshContainersQueryObject {
    * Backup management type for this container.
    */
   backupManagementType?: BackupManagementType;
+
+  /**
+   * Subscription containing the containers to discover.
+   */
+  @added(Versions.v2026_10_01)
+  containerSubscriptionId?: string;
 }
 
 /**
