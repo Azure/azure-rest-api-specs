@@ -1,0 +1,32 @@
+{
+  "operationId": "Documents_Get",
+  "title": "SearchIndexGetDocument",
+  "parameters": {
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "key": "1",
+    "indexName": "preview-test",
+    "api-version": "2026-08-01-preview",
+    "$select": [
+      "id",
+      "description",
+      "name",
+      "category",
+      "ownerId"
+    ],
+    "Accept": "application/json;odata.metadata=none",
+    "x-ms-query-source-authorization": "00000000-0000-0000-0000-000000000000",
+    "x-ms-enable-elevated-read": null,
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "1",
+        "name": "test",
+        "description": "test1 hello",
+        "category": "purple",
+        "ownerId": "sam"
+      }
+    }
+  }
+}

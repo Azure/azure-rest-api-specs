@@ -337,10 +337,11 @@ interface BulkCreateCustom {
 
   @added(Versions.`2026-08-06-preview`)
   @doc("Gets the operation status for virtual machines in a BulkCreateCustom operation.")
+  @list
   virtualMachinesGetOperationStatus is ArmResourceActionSync<
     Resource = LocationBasedBulkCreateCustom,
     Request = void,
-    Response = ArmResponse<GetOperationStatusResponse>,
+    Response = ArmResponse<BulkCreateCustomOperationStatusListResult>,
     Parameters = BulkCreateCustomId
   >;
 

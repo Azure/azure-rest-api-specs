@@ -2,9 +2,11 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using OpenAPI;
 using Versioning;
+using Azure.ClientGenerator.Core;
 
 @versioned(Versions)
 namespace Microsoft.IoTFirmwareDefense;
@@ -83,6 +85,10 @@ union SummaryType {
   @added(Versions.v2025_12_01_preview)
   PasswordHash: "PasswordHash",
 
+  @doc("The summary contains information about the unsafe function call analysis results")
+  @added(Versions.v2026_06_01_preview)
+  UnsafeFunctionCalls: "UnsafeFunctionCalls",
+
   string,
 }
 
@@ -141,6 +147,40 @@ model BinaryHardeningFeatures {
 
   @doc("Flag indicating if debug symbols have been stripped from the binary.")
   stripped?: boolean;
+}
+
+@doc("Function call count for a specific function.")
+@added(Versions.v2026_06_01_preview)
+model FunctionCall {
+  @doc("The name of the function.")
+  functionName: string;
+
+  @doc("The number of calls to this function within a single binary.")
+  count: int64;
+}
+
+@doc("Unsafe function call analysis results for a binary.")
+@added(Versions.v2026_06_01_preview)
+model UnsafeFunctionCallsResult {
+  @doc("The name of the binary in the firmware.")
+  fileName?: string;
+
+  @doc("The full path to the binary in the firmware.")
+  filePath?: string;
+
+  @doc("List of unsafe function calls and their counts in the binary.")
+  @Azure.ResourceManager.identifiers(#[])
+  unsafeFunctionCalls?: FunctionCall[];
+
+  @doc("Total unsafe function call count in the binary.")
+  totalUnsafeCallCount?: int64;
+
+  @doc("Total number of network-related function calls in the binary.")
+  totalNetworkCallCount?: int64;
+
+  @doc("The status of the last operation.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 }
 
 @doc("Activities for which the cryptographic certificate can be used.")
@@ -685,8 +725,8 @@ model WorkspaceProperties {
   provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Properties for generating an upload URL")
+@clientName("GenerateUploadUrlContent", "csharp")
 model GenerateUploadUrlRequest {
   @doc("A unique ID for the firmware to be uploaded.")
   firmwareId?: string;
@@ -859,6 +899,26 @@ model PasswordHashSummaryResource extends SummaryResourceProperties {
 
   @doc("Describes the type of summary object.")
   summaryType: SummaryType.PasswordHash;
+}
+
+@doc("Properties for unsafe function calls analysis summary.")
+@added(Versions.v2026_06_01_preview)
+model UnsafeFunctionCallsSummaryResource extends SummaryResourceProperties {
+  @doc("Total number of files analyzed for unsafe function calls.")
+  totalFileCount?: int64;
+
+  @doc("Total number of unsafe function calls found.")
+  totalUnsafeCallCount?: int64;
+
+  @doc("Total number of network calls found.")
+  totalNetworkCallCount?: int64;
+
+  @doc("Total unsafe function call counts per function across all binaries.")
+  @Azure.ResourceManager.identifiers(#[])
+  unsafeCallTotals?: FunctionCall[];
+
+  @doc("Describes the type of summary object.")
+  summaryType: SummaryType.UnsafeFunctionCalls;
 }
 
 @doc("Properties of a workspaces usage metrics.")

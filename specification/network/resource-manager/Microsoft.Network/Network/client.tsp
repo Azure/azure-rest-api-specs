@@ -1696,6 +1696,121 @@ union ProvisioningStateUnion {
 @@clientName(AzureFirewallSkuName.AZFW_VNet, "AZFWVnet", "go");
 
 // C# management-plane migration naming compatibility.
+@@clientName(
+  Microsoft.Network.ConnectionAnalyzer.type,
+  "ResourceType",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.FirewallPolicyPropertiesFormat.afcManaged,
+  "IsAfcManaged",
+  "csharp"
+);
+@@clientName(
+  Common.PublicIPAddressPropertiesFormat.upgradedToV2,
+  "IsUpgradedToV2",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.PublicIPPrefixPropertiesFormat.upgradedToV2,
+  "IsUpgradedToV2",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ConnectivityCheckSettings.generatePath,
+  "ShouldGeneratePath",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.MoveIpConfigurationsRequest,
+  "MoveIpConfigurationsContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.NetworkVirtualApplianceCommitMigrationRequest,
+  "NetworkVirtualApplianceCommitMigrationContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.NetworkVirtualAppliancePrepareMigrationRequest,
+  "NetworkVirtualAppliancePrepareMigrationContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.NetworkVirtualApplianceExecuteMigrationRequest,
+  "NetworkVirtualApplianceExecuteMigrationContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.GenerateExpressRouteLagsLOARequest,
+  "GenerateExpressRouteLagsLoaContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.GenerateExpressRouteLagsLOAResult,
+  "GenerateExpressRouteLagsLoaResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ConnectionAnalyzerQueryStatusResult.expiryInUtc,
+  "ExpiresOn",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.DiagnosticOperation,
+  "ConnectionAnalyzerDiagnosticOperation",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.DiagnosticOperationResult,
+  "ConnectionAnalyzerDiagnosticOperationResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.DiagnosticOperationsSettings,
+  "ConnectionAnalyzerDiagnosticOperationsSettings",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ProtocolSettings,
+  "ConnectionAnalyzerProtocolSettings",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.StorageAccountSettings,
+  "ConnectionAnalyzerStorageAccountSettings",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.KubeLabelSelector,
+  "FirewallPolicyKubeLabelSelector",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.LabelSelectorExpression,
+  "FirewallPolicyLabelSelectorExpression",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.LabelSelectorOperator,
+  "FirewallPolicyLabelSelectorOperator",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.MigrationType,
+  "NetworkVirtualApplianceMigrationType",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ResiliencyLevel,
+  "ExpressRouteCircuitResiliencyLevel",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ServiceGatewayActionOkResponseBody,
+  "ServiceGatewayActionResult",
+  "csharp"
+);
 @@clientName(Commit, "NetworkManagerConfigurationCommit", "csharp");
 @@clientName(Subgroup, "InterconnectGroupSubgroup", "csharp");
 @@clientName(VM, "BastionShareableLinkVirtualMachine", "csharp");
@@ -5471,6 +5586,18 @@ op replaceprivateDnsZoneGroupsList(
 
 @@alternateType(
   Microsoft.Network.VirtualNetworkGateway.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.ExpressRouteLag.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.ExpressRouteLagUpdateTagsOrIdentityRequest.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
