@@ -10,13 +10,21 @@ on:
         description: "Pull request number to analyze"
         required: true
         type: string
+      sdk_language:
+        description: "SDK language: Cpp, DotNet, Go, Java, JavaScript, Python, or Rust"
+        required: true
+        type: string
+      tsp_config_path:
+        description: "Repository-relative path to tspconfig.yaml under specification/"
+        required: true
+        type: string
   roles: [admin, maintainer, write]
 if: >-
   github.event_name == 'workflow_dispatch' ||
   (github.event_name == 'issue_comment' &&
   github.event.action == 'created' &&
   github.event.issue.pull_request != null &&
-  github.event.comment.body == '/azsdk sdk-breaking-analysis')
+  startsWith(github.event.comment.body, '/azsdk sdk-breaking-analysis '))
 permissions:
   checks: read
   contents: read
@@ -37,6 +45,10 @@ pre-agent-steps:
     uses: actions/github-script@v8
     env:
       PR_NUMBER: ${{ github.event.issue.number || inputs.pr_number }}
+      SDK_LANGUAGE_INPUT: ${{ inputs.sdk_language }}
+      TSP_CONFIG_PATH_INPUT: ${{ inputs.tsp_config_path }}
+      TRIGGER_NAME: ${{ github.event_name }}
+      TRIGGER_COMMENT: ${{ github.event.comment.body }}
     with:
       script: |
         const pullNumber = Number(process.env.PR_NUMBER);
@@ -47,21 +59,59 @@ pre-agent-steps:
           ...context.repo,
           pull_number: pullNumber,
         });
-        //const { resolveSdkValidationRepository } =
-        //  await import("${{ github.workspace }}/.github/workflows/src/sdk-breaking-change-analysis.js");
-        //const sdkRepository = await resolveSdkValidationRepository({
-        //  github,
-        //  owner: context.repo.owner,
-        //  repo: context.repo.repo,
-        //  headSha: pull.head.sha,
-        //  pullNumber,
-        //});
-        const sdkRepository = "azure-sdk-for-go";
-        const sdkLanguage = "go";
+
+        let sdkLanguageInput;
+        let tspConfigPath;
+        if (process.env.TRIGGER_NAME === "workflow_dispatch") {
+          sdkLanguageInput = process.env.SDK_LANGUAGE_INPUT;
+          tspConfigPath = process.env.TSP_CONFIG_PATH_INPUT;
+        } else {
+          const parts = process.env.TRIGGER_COMMENT.trim().split(/\s+/);
+          if (
+            parts.length !== 4 ||
+            parts[0] !== "/azsdk" ||
+            parts[1] !== "sdk-breaking-analysis"
+          ) {
+            throw new Error(
+              "Expected comment: /azsdk sdk-breaking-analysis <tsp-config-path> <sdk-language>",
+            );
+          }
+          [, , tspConfigPath, sdkLanguageInput] = parts;
+        }
+
+        const languages = {
+          cpp: { language: "Cpp", repository: "azure-sdk-for-cpp" },
+          csharp: { language: "DotNet", repository: "azure-sdk-for-net" },
+          ".net": { language: "DotNet", repository: "azure-sdk-for-net" },
+          dotnet: { language: "DotNet", repository: "azure-sdk-for-net" },
+          go: { language: "Go", repository: "azure-sdk-for-go" },
+          java: { language: "Java", repository: "azure-sdk-for-java" },
+          javascript: { language: "JavaScript", repository: "azure-sdk-for-js" },
+          js: { language: "JavaScript", repository: "azure-sdk-for-js" },
+          python: { language: "Python", repository: "azure-sdk-for-python" },
+          rust: { language: "Rust", repository: "azure-sdk-for-rust" },
+          typescript: { language: "JavaScript", repository: "azure-sdk-for-js" },
+          ts: { language: "JavaScript", repository: "azure-sdk-for-js" },
+        };
+        const languageConfig = languages[sdkLanguageInput?.trim().toLowerCase()];
+        if (!languageConfig) {
+          throw new Error(`Unsupported SDK language: ${sdkLanguageInput}`);
+        }
+
+        tspConfigPath = tspConfigPath?.trim().replaceAll("\\", "/");
+        if (
+          !tspConfigPath?.startsWith("specification/") ||
+          !tspConfigPath.endsWith("/tspconfig.yaml") ||
+          tspConfigPath.split("/").includes("..")
+        ) {
+          throw new Error(`Invalid TypeSpec config path: ${tspConfigPath}`);
+        }
+
         core.setOutput("repository", pull.head.repo.full_name);
         core.setOutput("ref", pull.head.sha);
-        core.setOutput("sdk-repository", sdkRepository);
-        core.setOutput("sdk-language", sdkLanguage);
+        core.setOutput("sdk-repository", languageConfig.repository);
+        core.setOutput("sdk-language", languageConfig.language);
+        core.setOutput("tsp-config-path", tspConfigPath);
 
   - name: Checkout specification PR source
     uses: actions/checkout@v7
@@ -79,18 +129,36 @@ pre-agent-steps:
       path: "repositories/${{ steps.resolve-source.outputs.sdk-repository }}"
       persist-credentials: false
 
+  - name: Resolve TypeSpec config path
+    id: resolve-tsp-config
+    shell: bash
+    env:
+      SPEC_REPOSITORY_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs
+      TSP_CONFIG_RELATIVE_PATH: ${{ steps.resolve-source.outputs.tsp-config-path }}
+    run: |
+      set -euo pipefail
+      tsp_config_path="$(realpath "$SPEC_REPOSITORY_PATH/$TSP_CONFIG_RELATIVE_PATH")"
+      if [[ ! -f "$tsp_config_path" || "$tsp_config_path" != "$SPEC_REPOSITORY_PATH"/specification/*/tspconfig.yaml ]]; then
+        echo "Invalid or missing TypeSpec config: $TSP_CONFIG_RELATIVE_PATH" >&2
+        exit 1
+      fi
+      echo "path=$tsp_config_path" >> "$GITHUB_OUTPUT"
+
   - name: Set up Go
+    if: steps.resolve-source.outputs.sdk-language == 'Go'
     uses: actions/setup-go@v7
     with:
       go-version: "1.25.x"
       cache: false
 
   - name: Set up .NET
+    if: steps.resolve-source.outputs.sdk-language == 'DotNet'
     uses: actions/setup-dotnet@v6
     with:
       dotnet-version: "10.0.x"
 
   - name: Install golangci-lint
+    if: steps.resolve-source.outputs.sdk-language == 'Go'
     shell: bash
     run: |
       set -euo pipefail
@@ -115,6 +183,8 @@ pre-agent-steps:
     uses: actions/github-script@v8
     env:
       SDK_REPOSITORY: ${{ steps.resolve-source.outputs.sdk-repository }}
+      SDK_LANGUAGE: ${{ steps.resolve-source.outputs.sdk-language }}
+      TSP_CONFIG_PATH: ${{ steps.resolve-tsp-config.outputs.path }}
     with:
       script: |
         const fs = await import("node:fs/promises");
@@ -124,8 +194,9 @@ pre-agent-steps:
           contextPath,
           JSON.stringify({
             sdkRepository: process.env.SDK_REPOSITORY,
+            sdkLanguage: process.env.SDK_LANGUAGE,
             localSdkRepoPath: `${repositoryRoot}/${process.env.SDK_REPOSITORY}`,
-            tspConfigPath: `${repositoryRoot}/azure-rest-api-specs/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/tspconfig.yaml`,
+            tspConfigPath: process.env.TSP_CONFIG_PATH,
           }),
         );
 
@@ -134,7 +205,7 @@ pre-agent-steps:
     shell: bash
     env:
       LOCAL_SDK_REPO_PATH: ${{ github.workspace }}/repositories/${{ steps.resolve-source.outputs.sdk-repository }}
-      TSP_CONFIG_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/tspconfig.yaml
+      TSP_CONFIG_PATH: ${{ steps.resolve-tsp-config.outputs.path }}
     run: |
       set -euo pipefail
       export PATH="$AZSDK_CLI_PATH:$PATH"
@@ -180,7 +251,7 @@ pre-agent-steps:
     shell: bash
     env:
       PACKAGE_PATH: ${{ steps.generate-sdk.outputs.package-path }}
-      TSP_CONFIG_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/tspconfig.yaml
+      TSP_CONFIG_PATH: ${{ steps.resolve-tsp-config.outputs.path }}
     run: |
       set -euo pipefail
       export PATH="$AZSDK_CLI_PATH:$PATH"
