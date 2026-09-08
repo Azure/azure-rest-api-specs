@@ -206,10 +206,9 @@ interface Clusters {
   executeScriptActions is ArmResourceActionAsyncBase<
     Cluster,
     ExecuteScriptActionParameters,
-
-      | OkResponse
-      | ClustersExecuteScriptActionsBadRequestError
-      | ArmAcceptedLroResponse,
+    | OkResponse
+    | ClustersExecuteScriptActionsBadRequestError
+    | ArmAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
     Error = ErrorResponse
   >;

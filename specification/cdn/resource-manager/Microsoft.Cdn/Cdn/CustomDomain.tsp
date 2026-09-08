@@ -84,12 +84,11 @@ interface CustomDomains {
   disableCustomHttps is ArmResourceActionAsyncBase<
     CustomDomain,
     void,
-
-      | ArmResponse<CustomDomain>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
-          @bodyRoot
-          _: CustomDomain;
-        }),
+    | ArmResponse<CustomDomain>
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
+        @bodyRoot
+        _: CustomDomain;
+      }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<CustomDomain>
   >;
 
@@ -100,12 +99,11 @@ interface CustomDomains {
   enableCustomHttps is ArmResourceActionAsyncBase<
     CustomDomain,
     CustomDomainHttpsParameters,
-
-      | ArmResponse<CustomDomain>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
-          @bodyRoot
-          _: CustomDomain;
-        }),
+    | ArmResponse<CustomDomain>
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
+        @bodyRoot
+        _: CustomDomain;
+      }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<CustomDomain>,
     OptionalRequestBody = true
   >;

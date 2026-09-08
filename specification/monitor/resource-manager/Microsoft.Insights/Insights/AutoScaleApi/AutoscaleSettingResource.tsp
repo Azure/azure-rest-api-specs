@@ -13,8 +13,10 @@ namespace AutoScaleApi;
 /**
  * The autoscale setting resource.
  */
-model AutoscaleSettingResource
-  is Azure.ResourceManager.TrackedResource<AutoscaleSetting, false> {
+model AutoscaleSettingResource is Azure.ResourceManager.TrackedResource<
+  AutoscaleSetting,
+  false
+> {
   ...ResourceNameParameter<
     Resource = AutoscaleSettingResource,
     KeyName = "autoscaleSettingName",

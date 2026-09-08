@@ -21,14 +21,18 @@ model SqlAssessmentV3 is ProxyResource<SqlAssessmentV3Properties> {
 }
 
 @doc("SQL assessment properties class.")
-model SqlAssessmentV3Properties
-  is AssessmentProperties<Scope, SqlAssessmentSettings, AssessmentDetails> {
+model SqlAssessmentV3Properties is AssessmentProperties<
+  Scope,
+  SqlAssessmentSettings,
+  AssessmentDetails
+> {
   @doc("Gets or sets the machine assessment ARM ID for VM fallback.")
   fallbackMachineAssessmentArmId?: string;
 }
 
 @doc("SQL assessment settings class.")
 model SqlAssessmentSettings is AssessmentSettings {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Gets or sets user configurable setting to display the azure hybrid use benefit.")
   osLicense?: OsLicense;
 

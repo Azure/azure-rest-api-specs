@@ -13,8 +13,10 @@ namespace Microsoft.ElasticSan;
 /**
  * Response for ElasticSan request.
  */
-model ElasticSan
-  is Azure.ResourceManager.TrackedResource<ElasticSanProperties, false> {
+model ElasticSan is Azure.ResourceManager.TrackedResource<
+  ElasticSanProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ElasticSan,
     KeyName = "elasticSanName",

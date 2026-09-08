@@ -14,7 +14,6 @@ import {
   generateArtifact,
   getBreakingChangeInfo,
   getExecutionReport,
-  getServiceFolderPath,
   getSpecPaths,
   installLanguageToolchain,
   logIssuesToPipeline,
@@ -31,16 +30,66 @@ import {
 import { checkEmitterEnabled, type EmitterCheckResult } from "./emitter-check.ts";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.ts";
 import { validatePythonPackagesOnPyPI } from "./python-pypi-validation.ts";
+import { resolveSdkRepoBranch } from "./sdk-validation-config.ts";
 import { detectChangedSpecConfigFiles } from "./spec-helpers.ts";
 import { type CommandResult, type ExecutionReport, type SpecGenSdkCmdInput } from "./types.ts";
 import {
+  checkoutMainBranch,
+  checkoutSdkBranch,
   execAsync,
+  getServiceFolderPath,
   isPrivateSpecRepo,
   resetGitRepo,
   runCommandWithOutput,
   runSpecGenSdkCommand,
   type SpecConfigs,
 } from "./utils.ts";
+
+/**
+ * Apply an SDK repo branch pin for a single spec in the public spec-PR flow.
+ *
+ * Resolves the `repo-branch` pin from `sdk-validation.yaml` (project, API plane,
+ * then service level) for the current SDK language and checks it out. Normalizes
+ * back to `main` when there is no pin, an invalid/missing branch, or the flow is
+ * not applicable but a previous spec had switched away.
+ *
+ * The feature is dormant unless the run is a public spec PR (a PR number is set
+ * and the spec repo is not a private `-pr` mirror).
+ *
+ * @returns whether the SDK repo is now on a non-`main` branch.
+ */
+async function applySdkRepoBranchForSpec(
+  commandInput: SpecGenSdkCmdInput,
+  specConfigRelativePath: string | undefined,
+  currentlyOnNonMainBranch: boolean,
+): Promise<boolean> {
+  // Only applies to the public spec-PR flow.
+  if (!commandInput.prNumber || isPrivateSpecRepo(commandInput.specRepoHttpsUrl)) {
+    return false;
+  }
+
+  const target = specConfigRelativePath
+    ? resolveSdkRepoBranch(
+        specConfigRelativePath,
+        commandInput.sdkLanguage,
+        commandInput.localSpecRepoPath,
+      )
+    : undefined;
+
+  if (target) {
+    const switched = await checkoutSdkBranch(commandInput.localSdkRepoPath, target);
+    if (switched) {
+      return true;
+    }
+    // A confirmed missing branch falls back to `main`. Operational git failures throw.
+  }
+
+  // No pin (or fallback): return to `main` only if a previous spec switched away.
+  if (currentlyOnNonMainBranch) {
+    await checkoutMainBranch(commandInput.localSdkRepoPath);
+  }
+  return false;
+}
 
 /**
  * Run the azsdk-cli generation flow for a single TypeSpec spec:
@@ -291,6 +340,9 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
   let currentExecutionResult: string;
   let stagedArtifactsFolder = "";
   const apiViewRequestData: APIViewRequestData[] = [];
+  // Tracks whether the SDK repo is currently checked out on a non-`main` branch
+  // due to a `sdk-validation.yaml` pin from a previous spec in this run.
+  let sdkRepoBranchSwitched = false;
 
   if (changedSpecs.length === 0) {
     sdkGenerationExecuted = false;
@@ -354,6 +406,11 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
       // azsdk-cli path for TypeSpec specs
       try {
         await resetGitRepo(commandInput.localSdkRepoPath);
+        sdkRepoBranchSwitched = await applySdkRepoBranchForSpec(
+          commandInput,
+          changedSpec.typespecProject ?? changedSpec.readmeMd,
+          sdkRepoBranchSwitched,
+        );
         const result = await runAzsdkGeneration(commandInput, changedSpec.typespecProject);
         executionReport = result.executionReport;
         if (result.statusCode !== 0) {
@@ -378,6 +435,11 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
 
       try {
         await resetGitRepo(commandInput.localSdkRepoPath);
+        sdkRepoBranchSwitched = await applySdkRepoBranchForSpec(
+          commandInput,
+          changedSpec.typespecProject ?? changedSpec.readmeMd,
+          sdkRepoBranchSwitched,
+        );
         await runSpecGenSdkCommand(specGenSdkCommand);
         logMessage("Runner command executed successfully");
       } catch (error) {

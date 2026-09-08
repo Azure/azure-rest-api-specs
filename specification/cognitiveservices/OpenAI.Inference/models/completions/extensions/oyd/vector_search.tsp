@@ -124,6 +124,7 @@ union OnYourDataVectorSearchAuthenticationType {
 /**
  * The authentication options for Azure OpenAI On Your Data vector search.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @discriminator("type")
 @added(ServiceApiVersions.v2024_05_01_Preview)
 model OnYourDataVectorSearchAuthenticationOptions {
@@ -134,6 +135,7 @@ model OnYourDataVectorSearchAuthenticationOptions {
 /**
  * The authentication options for Azure OpenAI On Your Data when using an API key.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_Preview)
 model OnYourDataVectorSearchApiKeyAuthenticationOptions
   extends OnYourDataVectorSearchAuthenticationOptions {
@@ -147,6 +149,7 @@ model OnYourDataVectorSearchApiKeyAuthenticationOptions
 /**
  * The authentication options for Azure OpenAI On Your Data vector search when using access token.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_05_01_Preview)
 model OnYourDataVectorSearchAccessTokenAuthenticationOptions
   extends OnYourDataVectorSearchAuthenticationOptions {

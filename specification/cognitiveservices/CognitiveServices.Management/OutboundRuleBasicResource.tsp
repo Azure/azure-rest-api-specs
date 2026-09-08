@@ -13,8 +13,10 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.CognitiveServices;
 
 @parentResource(ManagedNetworkSettingsPropertiesBasicResource)
-model OutboundRuleBasicResource
-  is Azure.ResourceManager.ProxyResource<OutboundRule, false> {
+model OutboundRuleBasicResource is Azure.ResourceManager.ProxyResource<
+  OutboundRule,
+  false
+> {
   ...ResourceNameParameter<
     Resource = OutboundRuleBasicResource,
     KeyName = "ruleName",

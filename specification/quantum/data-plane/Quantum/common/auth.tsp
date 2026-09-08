@@ -22,5 +22,7 @@ model AzureEntraAuth
   ]>;
 
 /** Azure Api-Key Authentication */
-model AzureApiKeyAuth
-  is ApiKeyAuth<ApiKeyLocation.header, "x-ms-quantum-api-key">;
+model AzureApiKeyAuth is ApiKeyAuth<
+  ApiKeyLocation.header,
+  "x-ms-quantum-api-key"
+>;

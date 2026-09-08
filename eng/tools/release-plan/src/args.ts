@@ -27,9 +27,6 @@ export function parseCliArguments(argv: string[] = process.argv.slice(2)): CliAr
         short: "w",
         default: process.cwd(),
       },
-      "azsdk-path": {
-        type: "string",
-      },
       "output-file": {
         type: "string",
       },
@@ -73,7 +70,6 @@ export function parseCliArguments(argv: string[] = process.argv.slice(2)): CliAr
   }
 
   const workspace = path.resolve(String(values.workspace ?? process.cwd()));
-  const azsdkPath = String(values["azsdk-path"] ?? "").trim() || undefined;
   const outputFile = String(values["output-file"] ?? "").trim() || undefined;
   const testReleaseRaw = String(values["test-release-plan"] ?? "false")
     .trim()
@@ -89,7 +85,6 @@ export function parseCliArguments(argv: string[] = process.argv.slice(2)): CliAr
     owner,
     repo,
     workspace,
-    azsdkPath,
     outputFile,
     testReleasePlan,
   };
@@ -108,7 +103,7 @@ function showHelp(): void {
   );
   console.log("  -r, --repo            GitHub repository in owner/repo format");
   console.log("  -w, --workspace       Path to local repo root (default: cwd)");
-  console.log("      --azsdk-path      Absolute path to the azsdk executable");
+  console.log("                        Uses AZSDK environment variable for the azsdk executable");
   console.log("      --output-file     Write JSON result to this file path");
   console.log(
     "      --test-release-plan  Create release plan as test (true|false, default: false)",

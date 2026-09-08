@@ -45,3 +45,20 @@ using Microsoft.Education;
 
 @@clientName(GrantType, "EducationGrantType", "csharp");
 @@clientName(GrantStatus, "EducationGrantStatus", "csharp");
+
+@@clientName(LabDetails, "EducationLab", "csharp");
+@@clientName(StudentDetails, "EducationStudent", "csharp");
+@@clientName(JoinRequestDetails, "EducationJoinRequest", "csharp");
+
+// TODO: these two properties are flattened in original spec, and it causes duplicate members in c# sdk code
+// let service team fix spec, see https://github.com/Azure/azure-sdk-for-net/issues/60644#issuecomment-4979513139
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "workaround avoid generating duplicate members"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LabProperties.totalBudget,
+  "!csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "workaround avoid generating duplicate members"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LabProperties.totalAllocatedBudget,
+  "!csharp"
+);

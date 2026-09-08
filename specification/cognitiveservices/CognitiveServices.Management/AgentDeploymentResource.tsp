@@ -49,8 +49,10 @@ alias AgentDeploymentsListParameters = {
  * Agent Deployment resource
  */
 @parentResource(Project)
-model AgentDeployment
-  is Azure.ResourceManager.ProxyResource<AgentDeploymentProperties, false> {
+model AgentDeployment is Azure.ResourceManager.ProxyResource<
+  AgentDeploymentProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = AgentDeployment,
     KeyName = "deploymentName",

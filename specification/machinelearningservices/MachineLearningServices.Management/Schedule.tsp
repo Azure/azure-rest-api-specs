@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Workspace)
-model Schedule
-  is Azure.ResourceManager.ProxyResource<ScheduleProperties, false> {
+model Schedule is Azure.ResourceManager.ProxyResource<
+  ScheduleProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Schedule,
     KeyName = "name",

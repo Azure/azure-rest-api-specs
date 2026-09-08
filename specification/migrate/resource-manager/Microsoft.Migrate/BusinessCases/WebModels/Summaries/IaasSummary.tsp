@@ -91,6 +91,7 @@ model AzureIaasVmSummary {
   @visibility(Lifecycle.Read)
   estimatedCost?: float32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("OS licensing cost.")
   @visibility(Lifecycle.Read)
   osLicensingCost?: float32;
@@ -129,6 +130,7 @@ model AzureIaasSqlSummary {
   @visibility(Lifecycle.Read)
   estimatedCost?: float32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("OS licensing cost.")
   @visibility(Lifecycle.Read)
   osLicensingCost?: float32;
@@ -184,6 +186,7 @@ model OnPremisesIaasSummary {
   @visibility(Lifecycle.Read)
   onPremisesIaasCostForDecommissioned?: CostDetails;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The OS licensing details.")
   @visibility(Lifecycle.Read)
   @identifiers(#[])
@@ -203,6 +206,7 @@ model OnPremisesIaasSummary {
   @identifiers(#[])
   distributionByVirtualization?: DistributionByVirtualization[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Iaas OS Support Status Distribution.")
   @visibility(Lifecycle.Read)
   iaasOsSupportStatusDistribution?: SupportStatusDistribution;
@@ -211,6 +215,7 @@ model OnPremisesIaasSummary {
   @visibility(Lifecycle.Read)
   iaasSqlSupportStatusDistribution?: SupportStatusDistribution;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("OS Service Pack Insight.")
   @visibility(Lifecycle.Read)
   osServicePackInsight?: ServicePackInsight;
@@ -243,8 +248,10 @@ model OnPremisesIaasSummary {
   onPremisesIaasDecommissionedSustainabilityDetails?: CarbonEmissionsDetails;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("The Iaas OS licensing details.")
 model IaasOsLicensingDetails {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The OS type.")
   @visibility(Lifecycle.Read)
   osType?: string;

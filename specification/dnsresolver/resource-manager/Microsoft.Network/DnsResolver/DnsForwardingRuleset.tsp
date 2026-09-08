@@ -11,11 +11,10 @@ namespace Microsoft.Network;
 /**
  * Describes a DNS forwarding ruleset.
  */
-model DnsForwardingRuleset
-  is Azure.ResourceManager.TrackedResource<
-    DnsForwardingRulesetProperties,
-    false
-  > {
+model DnsForwardingRuleset is Azure.ResourceManager.TrackedResource<
+  DnsForwardingRulesetProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DnsForwardingRuleset,
     KeyName = "dnsForwardingRulesetName",

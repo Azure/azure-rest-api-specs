@@ -2204,6 +2204,7 @@ model RegionConfigurationResponse {
 /**
  * Schedule availability for given sku in a region.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ScheduleAvailabilityResponse {
   /**
    * List of dates available to schedule
@@ -2215,6 +2216,7 @@ model ScheduleAvailabilityResponse {
 /**
  * Transport options available for given sku in a region.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TransportAvailabilityResponse {
   /**
    * List of transport availability details for given region
@@ -2238,6 +2240,7 @@ model TransportAvailabilityDetails {
 /**
  * Device capabilities for given sku in a region
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DeviceCapabilityResponse {
   /**
    * List of device capabilities available for a given region and a given sku

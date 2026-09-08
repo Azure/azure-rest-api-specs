@@ -15,8 +15,10 @@ namespace Microsoft.DataFactory;
  * Managed Virtual Network resource type.
  */
 @parentResource(Factory)
-model ManagedVirtualNetworkResource
-  is Azure.ResourceManager.ProxyResource<ManagedVirtualNetwork, false> {
+model ManagedVirtualNetworkResource is Azure.ResourceManager.ProxyResource<
+  ManagedVirtualNetwork,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ManagedVirtualNetworkResource,
     KeyName = "managedVirtualNetworkName",

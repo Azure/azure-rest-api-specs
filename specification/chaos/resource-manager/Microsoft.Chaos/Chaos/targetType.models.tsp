@@ -17,8 +17,10 @@ namespace Microsoft.Chaos;
  */
 @subscriptionResource
 @parentResource(SubscriptionLocationResource)
-model TargetType
-  is Azure.ResourceManager.ProxyResource<TargetTypeProperties, false> {
+model TargetType is Azure.ResourceManager.ProxyResource<
+  TargetTypeProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = TargetType,
     KeyName = "targetTypeName",

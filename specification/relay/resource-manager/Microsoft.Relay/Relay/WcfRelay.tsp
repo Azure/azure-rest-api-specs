@@ -31,13 +31,12 @@ model WcfRelay is Azure.ResourceManager.ProxyResource<WcfRelayProperties> {
 
 @@minLength(WcfRelayNameParameter.name, 1);
 @@doc(WcfRelayNameParameter.name, "The relay name.");
-model WcfRelayNameParameter
-  is ResourceNameParameter<
-    Resource = WcfRelay,
-    KeyName = "relayName",
-    SegmentName = "wcfRelays",
-    NamePattern = ""
-  >;
+model WcfRelayNameParameter is ResourceNameParameter<
+  Resource = WcfRelay,
+  KeyName = "relayName",
+  SegmentName = "wcfRelays",
+  NamePattern = ""
+>;
 
 @armResourceOperations
 interface WcfRelaysOps {

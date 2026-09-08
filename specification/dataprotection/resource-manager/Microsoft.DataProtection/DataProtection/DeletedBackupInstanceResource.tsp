@@ -45,6 +45,7 @@ interface DeletedBackupInstanceResources {
     Error = CloudError
   >;
 
+  @doc("A long-running resource action.")
   undelete is ArmResourceActionAsync<
     DeletedBackupInstanceResource,
     void,

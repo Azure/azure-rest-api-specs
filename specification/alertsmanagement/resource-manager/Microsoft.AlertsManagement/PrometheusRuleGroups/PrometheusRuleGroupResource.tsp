@@ -13,11 +13,10 @@ namespace Microsoft.AlertsManagement;
 /**
  * The Prometheus rule group resource.
  */
-model PrometheusRuleGroupResource
-  is Azure.ResourceManager.TrackedResource<
-    PrometheusRuleGroupProperties,
-    false
-  > {
+model PrometheusRuleGroupResource is Azure.ResourceManager.TrackedResource<
+  PrometheusRuleGroupProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = PrometheusRuleGroupResource,
     KeyName = "ruleGroupName",

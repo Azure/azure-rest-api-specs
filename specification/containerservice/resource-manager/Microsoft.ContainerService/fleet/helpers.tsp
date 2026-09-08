@@ -3,6 +3,7 @@ import "@typespec/rest";
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -87,7 +88,9 @@ op FleetArmResourceCreateOrUpdateAsync<
 ): ArmResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
 
 // this is a copy of ArmResourceDeleteAsync that adds the location header to comply with arm linter.
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "this is a template"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "this is a template"
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "inlining the response with a header does not present a risk"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
 @autoRoute
@@ -106,3 +109,30 @@ op FleetArmResourceDeleteAsync<
   | (ArmDeleteAcceptedResponse & ArmLroLocationHeader)
   | ArmDeletedNoContentResponse
   | ErrorResponse;
+
+@doc("The days of a week.")
+@added(Versions.v2026_06_02_preview)
+union DayOfWeek {
+  string,
+
+  @doc("The day Monday.")
+  Monday: "Monday",
+
+  @doc("The day Tuesday.")
+  Tuesday: "Tuesday",
+
+  @doc("The day Wednesday.")
+  Wednesday: "Wednesday",
+
+  @doc("The day Thursday.")
+  Thursday: "Thursday",
+
+  @doc("The day Friday.")
+  Friday: "Friday",
+
+  @doc("The day Saturday.")
+  Saturday: "Saturday",
+
+  @doc("The day Sunday.")
+  Sunday: "Sunday",
+}

@@ -17,8 +17,10 @@ namespace Microsoft.Storage;
  */
 @parentResource(StorageAccount)
 @added(Versions.v2025_08_01)
-model DataShare
-  is Azure.ResourceManager.TrackedResource<StorageDataShareProperties, false> {
+model DataShare is Azure.ResourceManager.TrackedResource<
+  StorageDataShareProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DataShare,
     KeyName = "dataShareName",

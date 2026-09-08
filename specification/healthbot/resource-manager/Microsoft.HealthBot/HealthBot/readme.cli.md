@@ -1,0 +1,1 @@
+## CLI common settings for all command line tools

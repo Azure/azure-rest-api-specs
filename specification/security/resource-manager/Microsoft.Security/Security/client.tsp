@@ -33,12 +33,13 @@ import "./TasksAPI/main.tsp";
 import "./csharp-arm-models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/http";
 import "@typespec/versioning";
 
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using TypeSpec.Versioning;
-using TypeSpec.Http;
+using Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.Core;
@@ -112,7 +113,9 @@ model PrivateLinkNameParameter {
   privateLinkName: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op privateLinksGetCustomization(
   ...ApiVersionParameter,
@@ -129,7 +132,9 @@ op privateLinksGetCustomization(
   "!python,!java,!javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op privateLinksCreateCustomization(
   ...ApiVersionParameter,
@@ -158,7 +163,9 @@ op privateLinksCreateCustomization(
   "!python,!java,!javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op privateLinksUpdateCustomization(
   ...ApiVersionParameter,
@@ -181,7 +188,9 @@ op privateLinksUpdateCustomization(
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op privateLinksDeleteCustomization(
   ...ApiVersionParameter,
@@ -203,7 +212,9 @@ op privateLinksDeleteCustomization(
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op privateLinksHeadCustomization(
   ...ApiVersionParameter,
@@ -242,7 +253,9 @@ op privateLinksHeadCustomization(
 );
 @@access(DefenderFoDatabasesAwsOfferingDatabasesDspm, Access.public, "csharp");
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op privateEndpointConnectionsListCustomization(
   ...ApiVersionParameter,
@@ -261,7 +274,9 @@ op privateEndpointConnectionsListCustomization(
   "!python,!java,!javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op privateEndpointConnectionsGetCustomization(
   ...ApiVersionParameter,
@@ -270,6 +285,8 @@ op privateEndpointConnectionsGetCustomization(
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ...PrivateLinkNameParameter,
+
+  @path
   privateEndpointConnectionName: string,
 ): ArmResponse<Azure.ResourceManager.PrivateEndpointConnection> | ErrorResponse;
 
@@ -279,7 +296,9 @@ op privateEndpointConnectionsGetCustomization(
   "!python,!java,!javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op privateEndpointConnectionsCreateOrUpdateCustomization(
   ...ApiVersionParameter,
@@ -288,8 +307,11 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ...PrivateLinkNameParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
   privateEndpointConnectionName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource: PrivateLinksAPI.PrivateEndpointConnection,
 ):
@@ -312,7 +334,9 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op privateEndpointConnectionsDeleteCustomization(
   ...ApiVersionParameter,
@@ -321,7 +345,9 @@ op privateEndpointConnectionsDeleteCustomization(
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ...PrivateLinkNameParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
   privateEndpointConnectionName: string,
 ):
   | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
@@ -335,7 +361,9 @@ op privateEndpointConnectionsDeleteCustomization(
   "!python,!java,!javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op privateLinkResourcesListCustomization(
   ...ApiVersionParameter,
@@ -352,7 +380,9 @@ op privateLinkResourcesListCustomization(
   "!python,!java,!javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op privateLinkResourcesGetCustomization(
   ...ApiVersionParameter,
@@ -361,7 +391,9 @@ op privateLinkResourcesGetCustomization(
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ...PrivateLinkNameParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
   groupId: string,
 ): ArmResponse<PrivateLinkGroupResource> | ErrorResponse;
 
@@ -2180,7 +2212,9 @@ union CSharpServerVulnerabilityAssessmentName {
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op sqlVulnerabilityAssessmentScansGet(
   ...ApiVersionParameter,
@@ -2205,7 +2239,9 @@ op sqlVulnerabilityAssessmentScansGet(
 
 @@override(ScanV2s.get, sqlVulnerabilityAssessmentScansGet);
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op sqlVulnerabilityAssessmentScanResultsList(
   ...ApiVersionParameter,
@@ -2233,7 +2269,9 @@ op sqlVulnerabilityAssessmentScanResultsList(
   sqlVulnerabilityAssessmentScanResultsList
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op sqlVulnerabilityAssessmentScanResultsGet(
   ...ApiVersionParameter,
@@ -2266,7 +2304,9 @@ op sqlVulnerabilityAssessmentScanResultsGet(
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op alertsListResourceGroupLevelByRegionCustomized(
   ...ApiVersionParameter,

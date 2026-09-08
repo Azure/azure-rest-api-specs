@@ -13,8 +13,10 @@ namespace Microsoft.DevTestLab;
  * An Azure Resource Manager template.
  */
 @parentResource(ArtifactSource)
-model ArmTemplate
-  is Azure.ResourceManager.ProxyResource<ArmTemplateProperties, false> {
+model ArmTemplate is Azure.ResourceManager.ProxyResource<
+  ArmTemplateProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ArmTemplate,
     KeyName = "armTemplateName",

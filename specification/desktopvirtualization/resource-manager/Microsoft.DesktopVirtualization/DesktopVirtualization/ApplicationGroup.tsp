@@ -15,8 +15,10 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Represents a ApplicationGroup definition.
  */
-model ApplicationGroup
-  is Azure.ResourceManager.TrackedResource<ApplicationGroupProperties, false> {
+model ApplicationGroup is Azure.ResourceManager.TrackedResource<
+  ApplicationGroupProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ApplicationGroup,
     KeyName = "applicationGroupName",

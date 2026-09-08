@@ -15,11 +15,10 @@ using Common;
 namespace SecuritySolutionsAPI;
 
 @parentResource(ArmLocationResource)
-model DiscoveredSecuritySolution
-  is Azure.ResourceManager.ProxyResource<
-    DiscoveredSecuritySolutionProperties,
-    false
-  > {
+model DiscoveredSecuritySolution is Azure.ResourceManager.ProxyResource<
+  DiscoveredSecuritySolutionProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DiscoveredSecuritySolution,
     KeyName = "discoveredSecuritySolutionName",
