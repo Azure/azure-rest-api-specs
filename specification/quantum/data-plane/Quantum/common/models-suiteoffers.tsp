@@ -12,8 +12,8 @@ using TypeSpec.Versioning;
 
 namespace Quantum.Workspace;
 
-/** A paged list of quota usage data. */
-alias PagedQuotaUsageData = Azure.Core.Page<QuotaUsageData>;
+/** A paged list of quota usage. */
+alias PagedQuotaUsage = Azure.Core.Page<QuotaUsage>;
 
 /** The scope at which the suite offer quota usage is applied. */
 @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
@@ -30,14 +30,14 @@ union SuiteOfferScope {
   WorkspaceTarget: "WorkspaceTarget",
 }
 
-/** Quota usage data for a suite offer provider. */
+/** Quota usage for a suite offer provider. */
 @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
 @resource("quotaUsages")
-model QuotaUsageData {
-  /** QuotaUsageData faux key. */
+model QuotaUsage {
+  /** QuotaUsage faux key. */
   @key
   @visibility(Lifecycle.Read)
-  // A faux key is needed to tag the QuotaUsageData as a resource.
+  // A faux key is needed to tag the QuotaUsage as a resource.
   key: never;
 
   /** The unique identifier for the provider. */

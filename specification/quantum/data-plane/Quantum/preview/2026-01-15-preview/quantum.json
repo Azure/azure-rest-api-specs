@@ -151,7 +151,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedQuotaUsageData"
+              "$ref": "#/definitions/PagedQuotaUsage"
             }
           },
           "default": {
@@ -770,7 +770,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedQuotaUsageData"
+              "$ref": "#/definitions/PagedQuotaUsage"
             }
           },
           "default": {
@@ -2176,15 +2176,15 @@
         "value"
       ]
     },
-    "PagedQuotaUsageData": {
+    "PagedQuotaUsage": {
       "type": "object",
-      "description": "Paged collection of QuotaUsageData items",
+      "description": "Paged collection of QuotaUsage items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The QuotaUsageData items on this page",
+          "description": "The QuotaUsage items on this page",
           "items": {
-            "$ref": "#/definitions/QuotaUsageData"
+            "$ref": "#/definitions/QuotaUsage"
           }
         },
         "nextLink": {
@@ -2369,9 +2369,9 @@
         "period"
       ]
     },
-    "QuotaUsageData": {
+    "QuotaUsage": {
       "type": "object",
-      "description": "Quota usage data for a suite offer provider.",
+      "description": "Quota usage for a suite offer provider.",
       "properties": {
         "providerId": {
           "type": "string",

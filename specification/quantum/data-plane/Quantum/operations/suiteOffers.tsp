@@ -19,8 +19,8 @@ namespace Quantum.Workspace.Services {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Subscription-scoped custom route not covered by the standard workspace resource operations."
     @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
     listQuotaUsages is CustomListOperation<
-      Resource = QuotaUsageData,
-      Response = PagedQuotaUsageData,
+      Resource = QuotaUsage,
+      Response = PagedQuotaUsage,
       Parameters = {
         /** The Azure subscription ID. */
         @path
