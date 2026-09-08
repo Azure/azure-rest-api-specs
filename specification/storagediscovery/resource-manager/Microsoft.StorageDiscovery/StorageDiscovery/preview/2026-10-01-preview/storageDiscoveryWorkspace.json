@@ -753,6 +753,24 @@
         "capacityDetails"
       ]
     },
+    "AzureBlobStorageCapabilityUpdate": {
+      "type": "object",
+      "description": "The Azure Blob Storage capability configuration that can be updated.",
+      "properties": {
+        "capacityDetails": {
+          "$ref": "#/definitions/CapacityDetailsUpdate",
+          "description": "The capacity details configuration to update for Azure Blob Storage."
+        },
+        "prefixDefinitions": {
+          "type": "array",
+          "description": "The prefix definitions to update for Azure Blob Storage.",
+          "items": {
+            "$ref": "#/definitions/PrefixDefinitionUpdate"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "CapabilityStatus": {
       "type": "string",
       "description": "The enablement status of a storage discovery capability.",
@@ -789,6 +807,16 @@
       "required": [
         "status"
       ]
+    },
+    "CapacityDetailsUpdate": {
+      "type": "object",
+      "description": "The capacity details configuration that can be updated.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The enablement status to update for the capacity details capability."
+        }
+      }
     },
     "GetReportContent": {
       "type": "object",
@@ -853,6 +881,32 @@
         "containerName",
         "prefix"
       ]
+    },
+    "PrefixDefinitionUpdate": {
+      "type": "object",
+      "description": "A prefix definition that can be updated.",
+      "properties": {
+        "storageAccountName": {
+          "type": "string",
+          "description": "The name of the storage account.",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[a-z0-9]{3,24}$"
+        },
+        "containerName": {
+          "type": "string",
+          "description": "The name of the blob container within the storage account.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
+        },
+        "prefix": {
+          "type": "string",
+          "description": "The blob prefix within the container to scope capacity details to. An empty value scopes to the entire container. Must not start with a '/'.",
+          "maxLength": 1024,
+          "pattern": "^([^/].*)?$"
+        }
+      }
     },
     "ReportProperties": {
       "type": "object",
@@ -960,6 +1014,16 @@
       "required": [
         "azureBlobStorage"
       ]
+    },
+    "StorageDiscoveryCapabilitiesUpdate": {
+      "type": "object",
+      "description": "The capabilities that can be updated for a storage discovery workspace.",
+      "properties": {
+        "azureBlobStorage": {
+          "$ref": "#/definitions/AzureBlobStorageCapabilityUpdate",
+          "description": "The Azure Blob Storage capability configuration to update."
+        }
+      }
     },
     "StorageDiscoveryResourceType": {
       "type": "string",
@@ -1168,10 +1232,6 @@
           "type": "string",
           "description": "The description of the storage discovery workspace"
         },
-        "capabilities": {
-          "$ref": "#/definitions/StorageDiscoveryCapabilities",
-          "description": "The capabilities configured for the storage discovery workspace."
-        },
         "workspaceRoots": {
           "type": "array",
           "description": "The view level storage discovery data estate",
@@ -1202,6 +1262,10 @@
           "x-ms-identifiers": [
             "displayName"
           ]
+        },
+        "capabilities": {
+          "$ref": "#/definitions/StorageDiscoveryCapabilitiesUpdate",
+          "description": "The capabilities configured for the storage discovery workspace."
         }
       }
     },

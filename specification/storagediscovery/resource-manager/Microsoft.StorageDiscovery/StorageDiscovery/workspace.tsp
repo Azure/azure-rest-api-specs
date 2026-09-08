@@ -59,7 +59,51 @@ union StorageDiscoverySku {
 }
 
 model StorageDiscoveryWorkspacePropertiesUpdate
-  is UpdateableProperties<OptionalProperties<OmitDefaults<StorageDiscoveryWorkspaceProperties>>>;
+  is UpdateableProperties<OptionalProperties<OmitDefaults<OmitProperties<
+    StorageDiscoveryWorkspaceProperties,
+    "capabilities"
+  >>>> {
+  @doc("The capabilities configured for the storage discovery workspace.")
+  @added(ApiVersion.v2026_10_01_preview)
+  capabilities?: StorageDiscoveryCapabilitiesUpdate;
+}
+
+/**
+ * The capabilities that can be updated for a storage discovery workspace.
+ */
+@added(ApiVersion.v2026_10_01_preview)
+model StorageDiscoveryCapabilitiesUpdate {
+  @doc("The Azure Blob Storage capability configuration to update.")
+  azureBlobStorage?: AzureBlobStorageCapabilityUpdate;
+}
+
+/**
+ * The Azure Blob Storage capability configuration that can be updated.
+ */
+@added(ApiVersion.v2026_10_01_preview)
+model AzureBlobStorageCapabilityUpdate {
+  @doc("The capacity details configuration to update for Azure Blob Storage.")
+  capacityDetails?: CapacityDetailsUpdate;
+
+  @doc("The prefix definitions to update for Azure Blob Storage.")
+  @identifiers(#[])
+  prefixDefinitions?: PrefixDefinitionUpdate[];
+}
+
+/**
+ * The capacity details configuration that can be updated.
+ */
+@added(ApiVersion.v2026_10_01_preview)
+model CapacityDetailsUpdate {
+  @doc("The enablement status to update for the capacity details capability.")
+  status?: CapabilityStatus;
+}
+
+/**
+ * A prefix definition that can be updated.
+ */
+@added(ApiVersion.v2026_10_01_preview)
+model PrefixDefinitionUpdate is OptionalProperties<PrefixDefinition>;
 
 model StorageDiscoveryWorkspaceUpdate
   is UpdateableProperties<OptionalProperties<OmitDefaults<OmitProperties<
