@@ -168,7 +168,7 @@
           }
         },
         "x-ms-examples": {
-          "Get suite offer quota usages.": {
+          "List suite offer quota usages.": {
             "$ref": "./examples/SuiteOffers_ListQuotaUsages.json"
           }
         },
@@ -732,7 +732,7 @@
           }
         },
         "x-ms-examples": {
-          "Get provider and target statuses.": {
+          "List provider and target statuses.": {
             "$ref": "./examples/Providers_List.json"
           }
         },
@@ -787,7 +787,7 @@
           }
         },
         "x-ms-examples": {
-          "Get workspace quota usages.": {
+          "List workspace quota usages.": {
             "$ref": "./examples/Quotas_ListWorkspaceUsages.json"
           }
         },
@@ -2613,6 +2613,18 @@
           "type": "integer",
           "format": "int64",
           "description": "Average queue time in seconds.",
+          "readOnly": true
+        },
+        "averageQueueTimeHighPriority": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Average high-priority queue time in seconds.",
+          "readOnly": true
+        },
+        "averageQueueTimeStandardPriority": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Average standard-priority queue time in seconds.",
           "readOnly": true
         },
         "statusPage": {
