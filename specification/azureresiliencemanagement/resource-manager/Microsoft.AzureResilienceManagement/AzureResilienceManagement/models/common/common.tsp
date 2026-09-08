@@ -314,6 +314,23 @@ union ResourceProtectionSolutionType {
   string,
 }
 
+@doc("ISO 8601 duration formats.")
+union IsoDuration {
+  @doc("15 minutes.")
+  PT15M: "PT15M",
+
+  @doc("1 hour.")
+  PT1H: "PT1H",
+
+  @doc("4 hours.")
+  PT4H: "PT4H",
+
+  @doc("24 hours.")
+  PT24H: "PT24H",
+
+  string,
+}
+
 @doc("Model for service group membership.")
 model ServiceGroupMembership {
   @doc("Arm Id of the service group.")
