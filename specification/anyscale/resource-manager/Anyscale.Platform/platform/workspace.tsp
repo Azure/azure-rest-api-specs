@@ -33,7 +33,7 @@ model WorkspaceProperties {
   /** The Ray container image reference to use for the workspace, such as registry/repository:tag or registry/repository\@sha256:digest. */
   imageUri: string;
 
-  /** If set to a positive number, Anyscale will terminate the workspace this many minutes after the workspace is idle. Idle time is defined as the time during which a workspace is not running a user command. To disable, set this field to 0. */
+  /** The number of minutes of inactivity before Anyscale terminates the workspace. Idle time is defined as the time during which a workspace is not running a user command. Set to 0 to disable automatic termination. */
   @minValue(0)
   idleTerminationMinutes?: int32;
 
