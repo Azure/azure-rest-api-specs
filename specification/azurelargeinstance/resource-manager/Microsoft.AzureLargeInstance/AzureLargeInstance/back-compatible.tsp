@@ -45,3 +45,16 @@ using Azure.ClientGenerator.Core;
   AzureLargeStorageInstances.listBySubscription,
   "AzureLargeStorageInstance"
 );
+
+@@clientName(AzureLargeInstances.restart::parameters.body, "forceParameter");
+@@doc(
+  AzureLargeInstances.restart::parameters.body,
+  "When set to 'active', this parameter empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server"
+);
+
+#suppress "deprecated" "Back compatibility"
+@@encodedName(
+  AzureLargeInstances.update::parameters.properties,
+  "application/json",
+  "tagsParameter"
+);
