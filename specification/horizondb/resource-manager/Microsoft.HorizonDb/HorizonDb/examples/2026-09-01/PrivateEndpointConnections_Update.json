@@ -1,13 +1,13 @@
 {
-  "operationId": "HorizonDbPrivateEndpointConnections_UpdateStatus",
-  "title": "Approve or reject a private endpoint connection",
+  "operationId": "PrivateEndpointConnections_Update",
+  "title": "Update a private endpoint connection",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "exampleresourcegroup",
     "clusterName": "examplecluster",
     "privateEndpointConnectionName": "exampleprivateendpointconnection.1fa229cd-bf3f-47f0-8c49-afb36723997e",
     "api-version": "2026-09-01",
-    "resource": {
+    "properties": {
       "properties": {
         "privateLinkServiceConnectionState": {
           "status": "Approved",
@@ -18,23 +18,6 @@
   },
   "responses": {
     "200": {
-      "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/privateEndpointConnections/exampleprivateendpointconnection.1fa229cd-bf3f-47f0-8c49-afb36723997e",
-        "name": "exampleprivateendpointconnection.1fa229cd-bf3f-47f0-8c49-afb36723997e",
-        "type": "Microsoft.HorizonDb/clusters/privateEndpointConnections",
-        "properties": {
-          "privateEndpoint": {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateEndpoints/examplePrivateEndpoint"
-          },
-          "privateLinkServiceConnectionState": {
-            "status": "Approved",
-            "description": "Approved by johndoe@contoso.com"
-          },
-          "provisioningState": "Succeeded"
-        }
-      }
-    },
-    "201": {
       "body": {
         "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/privateEndpointConnections/exampleprivateendpointconnection.1fa229cd-bf3f-47f0-8c49-afb36723997e",
         "name": "exampleprivateendpointconnection.1fa229cd-bf3f-47f0-8c49-afb36723997e",

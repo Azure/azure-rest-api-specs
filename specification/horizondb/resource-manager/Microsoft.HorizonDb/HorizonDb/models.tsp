@@ -127,9 +127,10 @@ model FirewallRule
   name: string;
 }
 
+@renamedFrom(Versions.v2026_09_01, "HorizonDbPrivateLinkResource")
 @doc("Represents the HorizonDB private link resource.")
 @parentResource(Cluster)
-model HorizonDbPrivateLinkResource
+model PrivateLinkResource
   is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
   @doc("The name of the private link resource.")
   @pattern("^.*$")

@@ -135,32 +135,32 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(Microsoft.HorizonDb.Pools, "HorizonDBPools", "csharp");
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections,
+  Microsoft.HorizonDb.PrivateEndpointConnections,
   "HorizonDBPrivateEndpointConnections",
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections.update,
+  Microsoft.HorizonDb.PrivateEndpointConnections.update,
   "updatePrivateEndpointConnection",
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections.updateStatus,
+  Microsoft.HorizonDb.PrivateEndpointConnections.updateStatus,
   "updateStatusPrivateEndpointConnection",
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections.delete,
+  Microsoft.HorizonDb.PrivateEndpointConnections.delete,
   "deletePrivateEndpointConnection",
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbPrivateLinkResource,
+  Microsoft.HorizonDb.PrivateLinkResource,
   "HorizonDBPrivateLinkResource",
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbPrivateLinkResources,
+  Microsoft.HorizonDb.PrivateLinkResources,
   "HorizonDBPrivateLinkResources",
   "csharp"
 );

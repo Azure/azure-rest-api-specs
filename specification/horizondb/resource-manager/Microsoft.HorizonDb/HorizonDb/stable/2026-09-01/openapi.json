@@ -55,10 +55,10 @@
       "name": "FirewallRules"
     },
     {
-      "name": "HorizonDbPrivateEndpointConnections"
+      "name": "PrivateEndpointConnections"
     },
     {
-      "name": "HorizonDbPrivateLinkResources"
+      "name": "PrivateLinkResources"
     },
     {
       "name": "ParameterGroups"
@@ -4848,9 +4848,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/privateEndpointConnections": {
       "get": {
-        "operationId": "HorizonDbPrivateEndpointConnections_List",
+        "operationId": "PrivateEndpointConnections_List",
         "tags": [
-          "HorizonDbPrivateEndpointConnections"
+          "PrivateEndpointConnections"
         ],
         "description": "Lists private endpoint connections in a HorizonDB cluster.",
         "parameters": [
@@ -4900,9 +4900,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
-        "operationId": "HorizonDbPrivateEndpointConnections_Get",
+        "operationId": "PrivateEndpointConnections_Get",
         "tags": [
-          "HorizonDbPrivateEndpointConnections"
+          "PrivateEndpointConnections"
         ],
         "description": "Gets a private endpoint connection.",
         "parameters": [
@@ -4949,12 +4949,12 @@
           }
         }
       },
-      "put": {
-        "operationId": "HorizonDbPrivateEndpointConnections_UpdateStatus",
+      "patch": {
+        "operationId": "PrivateEndpointConnections_Update",
         "tags": [
-          "HorizonDbPrivateEndpointConnections"
+          "PrivateEndpointConnections"
         ],
-        "description": "Approves or rejects a private endpoint connection.",
+        "description": "Update a Cluster PrivateEndpointConnection",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -4979,26 +4979,34 @@
             "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
-            "name": "resource",
+            "name": "properties",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/Azure.ResourceManager.PrivateEndpointConnectionUpdate"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'PrivateEndpointConnectionResource' update operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
-          "201": {
-            "description": "Resource 'PrivateEndpointConnectionResource' create operation succeeded",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -5009,15 +5017,20 @@
           }
         },
         "x-ms-examples": {
-          "Approve or reject a private endpoint connection": {
-            "$ref": "./examples/PrivateEndpointConnections_UpdateStatus.json"
+          "Update a private endpoint connection": {
+            "$ref": "./examples/PrivateEndpointConnections_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "HorizonDbPrivateEndpointConnections_Delete",
+        "operationId": "PrivateEndpointConnections_Delete",
         "tags": [
-          "HorizonDbPrivateEndpointConnections"
+          "PrivateEndpointConnections"
         ],
         "description": "Deletes a private endpoint connection.",
         "parameters": [
@@ -5087,9 +5100,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/privateLinkResources": {
       "get": {
-        "operationId": "HorizonDbPrivateLinkResources_List",
+        "operationId": "PrivateLinkResources_List",
         "tags": [
-          "HorizonDbPrivateLinkResources"
+          "PrivateLinkResources"
         ],
         "description": "Lists private link resources in a HorizonDB cluster.",
         "parameters": [
@@ -5117,7 +5130,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbPrivateLinkResourceListResult"
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -5139,9 +5152,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/privateLinkResources/{groupName}": {
       "get": {
-        "operationId": "HorizonDbPrivateLinkResources_Get",
+        "operationId": "PrivateLinkResources_Get",
         "tags": [
-          "HorizonDbPrivateLinkResources"
+          "PrivateLinkResources"
         ],
         "description": "Gets a private link resource.",
         "parameters": [
@@ -5179,7 +5192,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbPrivateLinkResource"
+              "$ref": "#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -5738,6 +5751,26 @@
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "Azure.ResourceManager.PrivateEndpointConnectionUpdate": {
+      "type": "object",
+      "description": "PATCH model for private endpoint connections",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The private endpoint connection properties",
+          "properties": {
+            "privateEndpoint": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpoint",
+              "description": "The private endpoint resource."
+            },
+            "privateLinkServiceConnectionState": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkServiceConnectionState",
+              "description": "A collection of information about the state of the connection between service consumer and provider."
+            }
+          }
+        }
+      }
     },
     "Backup": {
       "type": "object",
@@ -8029,42 +8062,6 @@
         ]
       }
     },
-    "HorizonDbPrivateLinkResource": {
-      "type": "object",
-      "description": "Represents the HorizonDB private link resource.",
-      "properties": {
-        "properties": {
-          "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResourceProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "HorizonDbPrivateLinkResourceListResult": {
-      "type": "object",
-      "description": "The response of a HorizonDbPrivateLinkResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The HorizonDbPrivateLinkResource items on this page",
-          "items": {
-            "$ref": "#/definitions/HorizonDbPrivateLinkResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "HorizonDbReplica": {
       "type": "object",
       "description": "Represents the HorizonDB replica.",
@@ -9781,6 +9778,42 @@
           "description": "The PrivateEndpointConnectionResource items on this page",
           "items": {
             "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "Represents the HorizonDB private link resource.",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a PrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
           }
         },
         "nextLink": {

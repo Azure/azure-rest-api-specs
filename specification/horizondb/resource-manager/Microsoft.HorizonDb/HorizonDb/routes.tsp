@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
 
-alias HorizonDbPrivateEndpointOperations = Azure.ResourceManager.PrivateEndpoints<PrivateEndpointConnection>;
+alias PrivateEndpointOperations = Azure.ResourceManager.PrivateEndpoints<PrivateEndpointConnection>;
 
 @renamedFrom(Versions.v2026_09_01, "HorizonDbClusters")
 @armResourceOperations
@@ -312,36 +312,47 @@ interface FirewallRules {
   >;
 }
 
+@renamedFrom(Versions.v2026_09_01, "HorizonDbPrivateEndpointConnections")
 @armResourceOperations
-interface HorizonDbPrivateEndpointConnections {
+interface PrivateEndpointConnections {
   @doc("Gets a private endpoint connection.")
-  get is HorizonDbPrivateEndpointOperations.Read<
+  get is PrivateEndpointOperations.Read<
     Cluster,
     PrivateEndpointConnectionResource
   >;
 
   @doc("Lists private endpoint connections in a HorizonDB cluster.")
-  list is HorizonDbPrivateEndpointOperations.ListByParent<
+  list is PrivateEndpointOperations.ListByParent<
     Cluster,
     PrivateEndpointConnectionResource
   >;
 
   @doc("Updates a private endpoint connection.")
   @removed(Versions.v2026_05_01_preview)
-  update is HorizonDbPrivateEndpointOperations.CustomPatchAsync<
+  @renamedFrom(Versions.v2026_05_01_preview, "update")
+  @sharedRoute
+  updateLegacy is PrivateEndpointOperations.CustomPatchAsync<
+    Cluster,
+    PrivateEndpointConnectionResource
+  >;
+
+  @added(Versions.v2026_09_01)
+  @sharedRoute
+  update is PrivateEndpointOperations.CustomPatchAsync<
     Cluster,
     PrivateEndpointConnectionResource
   >;
 
   @doc("Approves or rejects a private endpoint connection.")
   @added(Versions.v2026_05_01_preview)
-  updateStatus is HorizonDbPrivateEndpointOperations.CreateOrReplaceSync<
+  @removed(Versions.v2026_09_01)
+  updateStatus is PrivateEndpointOperations.CreateOrReplaceSync<
     Cluster,
     PrivateEndpointConnectionResource
   >;
 
   @doc("Deletes a private endpoint connection.")
-  delete is HorizonDbPrivateEndpointOperations.DeleteAsync<
+  delete is PrivateEndpointOperations.DeleteAsync<
     Cluster,
     PrivateEndpointConnectionResource,
     Response =
@@ -351,13 +362,14 @@ interface HorizonDbPrivateEndpointConnections {
   >;
 }
 
+@renamedFrom(Versions.v2026_09_01, "HorizonDbPrivateLinkResources")
 @armResourceOperations
-interface HorizonDbPrivateLinkResources {
+interface PrivateLinkResources {
   @doc("Gets a private link resource.")
-  get is ArmResourceRead<HorizonDbPrivateLinkResource>;
+  get is ArmResourceRead<PrivateLinkResource>;
 
   @doc("Lists private link resources in a HorizonDB cluster.")
-  list is ArmResourceListByParent<HorizonDbPrivateLinkResource>;
+  list is ArmResourceListByParent<PrivateLinkResource>;
 }
 
 @renamedFrom(Versions.v2026_09_01, "HorizonDbParameterGroups")
