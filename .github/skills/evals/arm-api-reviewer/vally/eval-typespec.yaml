@@ -19,8 +19,8 @@ tags:
 defaults:
   runs: 1
   timeout: "300s"
-  model: gpt-5.4
-  judge_model: gpt-5.4
+  model: gpt-5.6-sol?effort=high
+  judge_model: claude-sonnet-4.6
 
 scoring:
   threshold: 0.7
@@ -170,3 +170,42 @@ stimuli:
       - "Did NOT flag the @identifiers(#[]) on diagnosticSnapshots -- explicit empty identifier list is the correct pattern for arrays with no identity (positive control)"
       - "Did NOT flag customLabels -- the ClusterLabel item type uses @key on labelKey, which automatically derives x-ms-identifiers (positive control)"
       - 'Never suggested @extension("x-ms-identifiers", ...) as a fix in any finding'
+
+  # 070005 -- operation name and sync/async template alignment
+  - name: validate-arm-operation-template-alignment
+    prompt: |
+      Review this TypeSpec ARM resource operations interface. The service team
+      has confirmed that PUT, PATCH, and DELETE always finish before returning
+      their initial response, so the synchronous templates are intentional.
+
+      ```tsp
+      @armResourceOperations
+      interface Widgets {
+        get is ArmResourceRead<Widget>;
+        createOrReplace is ArmResourceCreateOrReplaceSync<Widget>;
+        update is ArmCustomPatchSync<Widget, WidgetPatch>;
+        delete is ArmResourceDeleteSync<Widget>;
+        listByResourceGroup is ArmResourceListByParent<Widget>;
+        listBySubscription is ArmListBySubscription<Widget>;
+      }
+      ```
+
+      Report only operation-template or operation-naming findings. Explain
+      whether the operation name and each sync/async choice are valid.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "createOrUpdate"
+      - type: output-not-matches
+        config:
+          pattern: "(?i)(PUT|DELETE) (must|should) (be|use) (an? )?(async|asynchronous)|must use ArmResource(CreateOrReplaceAsync|DeleteWithoutOkAsync)"
+      - type: prompt
+    rubric:
+      - "Flagged createOrReplace as the wrong operation name and recommended createOrUpdate"
+      - "Kept ArmResourceCreateOrReplaceSync as the valid PUT template because the operation completes synchronously"
+      - "Kept ArmCustomPatchSync as the recommended custom PATCH template"
+      - "Kept ArmResourceDeleteSync as valid because the operation completes synchronously"
+      - "Distinguished the createOrUpdate client operation name from the ArmResourceCreateOrReplaceSync template name"
