@@ -41,7 +41,11 @@ model IotHubDeviceCapabilityProperties extends DeviceCapabilityProperties {
   capabilityType: CapabilityType.IoTHub;
 
   /** The full ARM Resource ID for the IoT Hub's authentication profile. This must be a sibling resource under the same device. */
-  authenticationProfileResourceId: string;
+  authenticationProfileResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/namespaces/registryDevices/authenticationProfiles";
+    }
+  ]>;
 
   /** The messaging endpoint name as returned by the GetNamespace API. */
   @visibility(Lifecycle.Read, Lifecycle.Create)

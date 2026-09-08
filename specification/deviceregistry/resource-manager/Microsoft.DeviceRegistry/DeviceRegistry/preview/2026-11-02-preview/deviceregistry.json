@@ -4587,14 +4587,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "filter"
-          },
-          {
-            "name": "$orderBy",
-            "in": "query",
-            "description": "An OData order by expression to sort the results. For example, \"status asc\" or \"status desc\".",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "orderBy"
           }
         ],
         "responses": {
@@ -5007,14 +4999,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "filter"
-          },
-          {
-            "name": "$orderBy",
-            "in": "query",
-            "description": "An OData order by expression to sort the results. For example, \"status asc\" or \"status desc\".",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "orderBy"
           }
         ],
         "responses": {
@@ -6383,9 +6367,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/registryDevices/{registryDeviceName}/authenticationProfiles/{authenticationProfileName}/getKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/registryDevices/{registryDeviceName}/authenticationProfiles/{authenticationProfileName}/listKeys": {
       "post": {
-        "operationId": "RegistryDeviceAuthenticationProfiles_GetKeys",
+        "operationId": "RegistryDeviceAuthenticationProfiles_ListKeys",
         "tags": [
           "RegistryDeviceAuthenticationProfiles"
         ],
@@ -6446,8 +6430,8 @@
           }
         },
         "x-ms-examples": {
-          "GetKeys_RegistryDeviceAuthenticationProfile": {
-            "$ref": "./examples/GetKeys_RegistryDeviceAuthenticationProfile.json"
+          "ListKeys_RegistryDeviceAuthenticationProfile": {
+            "$ref": "./examples/ListKeys_RegistryDeviceAuthenticationProfile.json"
           }
         }
       }
@@ -9671,7 +9655,7 @@
     },
     "GetDeviceAuthenticationProfileKeysResponse": {
       "type": "object",
-      "description": "Response body for the getKeys action.",
+      "description": "Response body for the listKeys action.",
       "properties": {
         "symmetricKey": {
           "$ref": "#/definitions/SymmetricKeyCredentials",
@@ -9807,7 +9791,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ARM resource ID of the group member."
+          "format": "arm-id",
+          "description": "The ARM resource ID of the group member.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DeviceRegistry/namespaces/registryDevices"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -10557,7 +10549,15 @@
       "properties": {
         "authenticationProfileResourceId": {
           "type": "string",
-          "description": "The full ARM Resource ID for the IoT Hub's authentication profile. This must be a sibling resource under the same device."
+          "format": "arm-id",
+          "description": "The full ARM Resource ID for the IoT Hub's authentication profile. This must be a sibling resource under the same device.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DeviceRegistry/namespaces/registryDevices/authenticationProfiles"
+              }
+            ]
+          }
         },
         "messagingEndpointName": {
           "type": "string",
@@ -10800,7 +10800,15 @@
         },
         "resourceId": {
           "type": "string",
-          "description": "The ADR resource's ID. Populated when `resourceType` is `Microsoft.DeviceRegistry/namespaces/registryDevices`."
+          "format": "arm-id",
+          "description": "The ADR resource's ID. Populated when `resourceType` is `Microsoft.DeviceRegistry/namespaces/registryDevices`.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DeviceRegistry/namespaces/registryDevices"
+              }
+            ]
+          }
         },
         "resourceUuid": {
           "type": "string",
