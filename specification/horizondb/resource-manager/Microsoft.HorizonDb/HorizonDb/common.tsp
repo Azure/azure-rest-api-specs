@@ -55,12 +55,16 @@ union State {
 }
 
 @added(Versions.v2026_09_01)
-@doc("A PostgreSQL major version supported by HorizonDB. API version 2026-09-01 accepts only 17. Future API versions may add named values, and clients must tolerate unknown values returned by the service.")
+@doc("A PostgreSQL major version supported by HorizonDB. API version 2026-09-01 accepts only 17. API version 2027-03-01-preview accepts 17 and 18. Future API versions may add named values, and clients must tolerate unknown values returned by the service.")
 union PostgreSqlVersion {
   string,
 
   /** PostgreSQL major version 17. */
   V17: "17",
+
+  /** PostgreSQL major version 18. */
+  @added(Versions.v2027_03_01_preview)
+  V18: "18",
 }
 
 @doc("Indicates if public network access is enabled or not.")

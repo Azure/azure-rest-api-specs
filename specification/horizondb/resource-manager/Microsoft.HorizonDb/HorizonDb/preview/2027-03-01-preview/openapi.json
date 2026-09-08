@@ -296,6 +296,9 @@
         "x-ms-examples": {
           "Get a default HorizonDB parameter group by subscription, location, and name": {
             "$ref": "./examples/DefaultParameterGroups_Get.json"
+          },
+          "Get the default HorizonDB parameter group for PostgreSQL 18": {
+            "$ref": "./examples/DefaultParameterGroups_GetPostgreSql18.json"
           }
         }
       }
@@ -559,6 +562,9 @@
           }
         },
         "x-ms-examples": {
+          "Create a HorizonDB cluster using PostgreSQL 18": {
+            "$ref": "./examples/Clusters_CreateOrUpdatePostgreSql18.json"
+          },
           "Create a HorizonDB cluster with minimum configuration and service defaults": {
             "$ref": "./examples/Clusters_CreateOrUpdateMinimumDefaults.json"
           },
@@ -573,9 +579,6 @@
           },
           "Reject asynchronous replica creation with a restore point": {
             "$ref": "./examples/Clusters_CreateOrUpdateInvalidAsyncReplicaWithPointInTime.json"
-          },
-          "Reject changing the PostgreSQL major version during replacement": {
-            "$ref": "./examples/Clusters_CreateOrUpdateChangePostgreSqlVersion.json"
           },
           "Reject creating a third-level asynchronous replica": {
             "$ref": "./examples/Clusters_CreateOrUpdateThirdReplicaLevel.json"
@@ -594,6 +597,9 @@
           },
           "Restore a HorizonDB cluster to a point in time": {
             "$ref": "./examples/Clusters_CreateOrUpdatePointInTimeRestore.json"
+          },
+          "Upgrade a HorizonDB cluster from PostgreSQL 17 to 18": {
+            "$ref": "./examples/Clusters_CreateOrUpdateChangePostgreSqlVersion.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -8126,9 +8132,10 @@
       "properties": {
         "postgreSqlVersion": {
           "$ref": "#/definitions/PostgreSqlVersion",
-          "description": "The PostgreSQL major version used by the HorizonDB cluster. API version 2026-09-01 accepts only 17. This property is required on every PUT and is immutable after creation. On replacement, resubmitting the existing value is accepted and changing it is rejected. For point-in-time restore, PostgreSQL version is the only new-cluster property inherited from the source backup metadata, and the value in the request must match that version. All other new-cluster configuration comes from the request or service defaults. Future API versions may add supported values without changing this property type.",
+          "description": "The PostgreSQL major version used by the HorizonDB cluster. API version 2027-03-01-preview accepts 17 and 18. This property is required on every PUT. A cluster using PostgreSQL 17 can be upgraded to 18 by changing this value to 18 in a replacement PUT. Downgrades and changes other than a supported upgrade advertised by the capabilities API are rejected. Resubmitting the current value is accepted. For point-in-time restore, the requested value must match the source backup's major version.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -10595,31 +10602,32 @@
       "type": "string",
       "description": "A PostgreSQL major version advertised by the HorizonDB capabilities API.",
       "enum": [
-        "16",
-        "17"
+        "17",
+        "18"
       ],
       "x-ms-enum": {
         "name": "PostgreSqlCapabilityVersion",
         "modelAsString": true,
         "values": [
           {
-            "name": "V16",
-            "value": "16",
-            "description": "PostgreSQL major version 16."
-          },
-          {
             "name": "V17",
             "value": "17",
             "description": "PostgreSQL major version 17."
+          },
+          {
+            "name": "V18",
+            "value": "18",
+            "description": "PostgreSQL major version 18."
           }
         ]
       }
     },
     "PostgreSqlVersion": {
       "type": "string",
-      "description": "A PostgreSQL major version supported by HorizonDB. API version 2026-09-01 accepts only 17. Future API versions may add named values, and clients must tolerate unknown values returned by the service.",
+      "description": "A PostgreSQL major version supported by HorizonDB. API version 2026-09-01 accepts only 17. API version 2027-03-01-preview accepts 17 and 18. Future API versions may add named values, and clients must tolerate unknown values returned by the service.",
       "enum": [
-        "17"
+        "17",
+        "18"
       ],
       "x-ms-enum": {
         "name": "PostgreSqlVersion",
@@ -10629,6 +10637,11 @@
             "name": "V17",
             "value": "17",
             "description": "PostgreSQL major version 17."
+          },
+          {
+            "name": "V18",
+            "value": "18",
+            "description": "PostgreSQL major version 18."
           }
         ]
       }

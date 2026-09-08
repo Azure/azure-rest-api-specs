@@ -1,6 +1,6 @@
 {
   "operationId": "Clusters_CreateOrUpdate",
-  "title": "Reject changing the PostgreSQL major version during replacement",
+  "title": "Reject PostgreSQL 18 in the GA API version",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "example-resource-group",
@@ -17,8 +17,8 @@
     "400": {
       "body": {
         "error": {
-          "code": "PropertyChangeNotAllowed",
-          "message": "The postgreSqlVersion property is immutable and cannot be changed from 17 to 18."
+          "code": "UnsupportedPostgreSqlVersion",
+          "message": "API version 2026-09-01 supports only PostgreSQL major version 17."
         }
       }
     }

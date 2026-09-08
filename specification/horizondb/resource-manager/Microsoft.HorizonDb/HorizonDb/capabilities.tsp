@@ -28,11 +28,12 @@ union CapabilityStatus {
 union PostgreSqlCapabilityVersion {
   string,
 
-  /** PostgreSQL major version 16. */
-  V16: "16",
-
   /** PostgreSQL major version 17. */
   V17: "17",
+
+  /** PostgreSQL major version 18. */
+  @added(Versions.v2027_03_01_preview)
+  V18: "18",
 }
 
 @added(Versions.v2026_09_01)

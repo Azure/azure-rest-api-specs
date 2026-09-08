@@ -7,7 +7,11 @@
     "clusterName": "example-cluster",
     "configurationName": "sales-database",
     "api-version": "2027-03-01-preview",
-    "properties": { "properties": { "desiredState": "Disabled" } }
+    "properties": {
+      "properties": {
+        "desiredState": "Disabled"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -24,14 +28,23 @@
           "desiredState": "Disabled",
           "effectiveState": "Disabled",
           "provisioningState": "Succeeded",
-            "extension": { "name": "horizondb_change_data_capture", "version": "1.0", "state": "Ready" },
-          "replication": { "state": "NotConnected" },
+          "extension": {
+            "name": "horizondb_change_data_capture",
+            "version": "1.0",
+            "state": "Ready"
+          },
+          "replication": {
+            "state": "NotConnected"
+          },
           "topology": {
             "state": "Active",
             "generation": 1,
             "activeClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster"
           },
-          "status": { "code": "Disabled", "message": "The database is not publishing changes to Microsoft Fabric." }
+          "status": {
+            "code": "Disabled",
+            "message": "The database is not publishing changes to Microsoft Fabric."
+          }
         }
       }
     },

@@ -60,8 +60,15 @@ model ClusterProperties {
   legacyPgVersion?: string;
 
   @added(Versions.v2026_09_01)
-  @doc("The PostgreSQL major version used by the HorizonDB cluster. API version 2026-09-01 accepts only 17. This property is required on every PUT and is immutable after creation. On replacement, resubmitting the existing value is accepted and changing it is rejected. For point-in-time restore, PostgreSQL version is the only new-cluster property inherited from the source backup metadata, and the value in the request must match that version. All other new-cluster configuration comes from the request or service defaults. Future API versions may add supported values without changing this property type.")
+  @removed(Versions.v2027_03_01_preview)
+  @renamedFrom(Versions.v2027_03_01_preview, "postgreSqlVersion")
+  @doc("The PostgreSQL major version used by the HorizonDB cluster. API version 2026-09-01 accepts only 17. This property is required on every PUT and is immutable after creation. On replacement, resubmitting 17 is accepted and any other value is rejected. For point-in-time restore, PostgreSQL version is the only new-cluster property inherited from the source backup metadata, and the value in the request must match that version. All other new-cluster configuration comes from the request or service defaults.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
+  legacyPostgreSqlVersion: PostgreSqlVersion;
+
+  @added(Versions.v2027_03_01_preview)
+  @doc("The PostgreSQL major version used by the HorizonDB cluster. API version 2027-03-01-preview accepts 17 and 18. This property is required on every PUT. A cluster using PostgreSQL 17 can be upgraded to 18 by changing this value to 18 in a replacement PUT. Downgrades and changes other than a supported upgrade advertised by the capabilities API are rejected. Resubmitting the current value is accepted. For point-in-time restore, the requested value must match the source backup's major version.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   postgreSqlVersion: PostgreSqlVersion;
 
   @removed(Versions.v2026_09_01)

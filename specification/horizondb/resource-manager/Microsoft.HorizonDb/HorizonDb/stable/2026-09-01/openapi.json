@@ -67,9 +67,6 @@
       "name": "Backups"
     },
     {
-      "name": "SystemAiModels"
-    },
-    {
       "name": "FirewallRules"
     },
     {
@@ -520,7 +517,7 @@
           "Reject Create mode with restore properties": {
             "$ref": "./examples/Clusters_CreateOrUpdateInvalidCreateWithRestoreProperties.json"
           },
-          "Reject changing the PostgreSQL major version during replacement": {
+          "Reject PostgreSQL 18 in the GA API version": {
             "$ref": "./examples/Clusters_CreateOrUpdateChangePostgreSqlVersion.json"
           },
           "Reject cross-region point-in-time restore until it is supported": {
@@ -4869,114 +4866,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/systemAiModels": {
-      "get": {
-        "operationId": "SystemAiModels_List",
-        "tags": [
-          "SystemAiModels"
-        ],
-        "description": "Lists the system-managed AI models for a provisioned HorizonDB cluster.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SystemAiModelListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List system-managed AI models for a HorizonDB cluster": {
-            "$ref": "./examples/SystemAiModels_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/systemAiModels/{objectId}": {
-      "get": {
-        "operationId": "SystemAiModels_Get",
-        "tags": [
-          "SystemAiModels"
-        ],
-        "description": "Gets a system-managed AI model for a provisioned HorizonDB cluster.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "objectId",
-            "in": "path",
-            "description": "The name of the SystemAiModel",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SystemAiModel"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a system-managed AI model for a HorizonDB cluster": {
-            "$ref": "./examples/SystemAiModels_Get.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups": {
       "get": {
         "operationId": "ParameterGroups_ListByResourceGroup",
@@ -7066,7 +6955,7 @@
       "properties": {
         "postgreSqlVersion": {
           "$ref": "#/definitions/PostgreSqlVersion",
-          "description": "The PostgreSQL major version used by the HorizonDB cluster. API version 2026-09-01 accepts only 17. This property is required on every PUT and is immutable after creation. On replacement, resubmitting the existing value is accepted and changing it is rejected. For point-in-time restore, PostgreSQL version is the only new-cluster property inherited from the source backup metadata, and the value in the request must match that version. All other new-cluster configuration comes from the request or service defaults. Future API versions may add supported values without changing this property type.",
+          "description": "The PostgreSQL major version used by the HorizonDB cluster. API version 2026-09-01 accepts only 17. This property is required on every PUT and is immutable after creation. On replacement, resubmitting 17 is accepted and any other value is rejected. For point-in-time restore, PostgreSQL version is the only new-cluster property inherited from the source backup metadata, and the value in the request must match that version. All other new-cluster configuration comes from the request or service defaults.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -9223,18 +9112,12 @@
       "type": "string",
       "description": "A PostgreSQL major version advertised by the HorizonDB capabilities API.",
       "enum": [
-        "16",
         "17"
       ],
       "x-ms-enum": {
         "name": "PostgreSqlCapabilityVersion",
         "modelAsString": true,
         "values": [
-          {
-            "name": "V16",
-            "value": "16",
-            "description": "PostgreSQL major version 16."
-          },
           {
             "name": "V17",
             "value": "17",
@@ -9245,7 +9128,7 @@
     },
     "PostgreSqlVersion": {
       "type": "string",
-      "description": "A PostgreSQL major version supported by HorizonDB. API version 2026-09-01 accepts only 17. Future API versions may add named values, and clients must tolerate unknown values returned by the service.",
+      "description": "A PostgreSQL major version supported by HorizonDB. API version 2026-09-01 accepts only 17. API version 2027-03-01-preview accepts 17 and 18. Future API versions may add named values, and clients must tolerate unknown values returned by the service.",
       "enum": [
         "17"
       ],
@@ -9550,125 +9433,6 @@
       "required": [
         "maintenanceManagementType"
       ]
-    },
-    "SystemAiModel": {
-      "type": "object",
-      "description": "Represents a system-managed AI model for a HorizonDB cluster. System AI models are supported only on provisioned clusters.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SystemAiModelProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "SystemAiModelListResult": {
-      "type": "object",
-      "description": "The response of a SystemAiModel list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The SystemAiModel items on this page",
-          "items": {
-            "$ref": "#/definitions/SystemAiModel"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "SystemAiModelProperties": {
-      "type": "object",
-      "description": "Properties of a system-managed AI model. All properties are generated by the service and are read-only.",
-      "properties": {
-        "internalModelId": {
-          "type": "string",
-          "description": "The service-internal identifier of the system AI model. This is an opaque identifier, and clients should not parse or construct it.",
-          "readOnly": true
-        },
-        "modelName": {
-          "type": "string",
-          "description": "The model name assigned by the service.",
-          "readOnly": true
-        },
-        "alias": {
-          "type": "string",
-          "description": "The alias assigned to the system AI model by the service.",
-          "readOnly": true
-        },
-        "version": {
-          "type": "string",
-          "description": "The version assigned to the system AI model by the service.",
-          "readOnly": true
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "The deployment name of the system AI model.",
-          "readOnly": true
-        },
-        "format": {
-          "type": "string",
-          "description": "The format of the system AI model.",
-          "readOnly": true
-        },
-        "createdAtUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time when the system AI model was created, in UTC.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/SystemAiModelStatus",
-          "description": "The lifecycle status of the system AI model.",
-          "readOnly": true
-        }
-      }
-    },
-    "SystemAiModelStatus": {
-      "type": "string",
-      "description": "The lifecycle status of a system-managed AI model.",
-      "enum": [
-        "Provisioning",
-        "Ready",
-        "Deleting",
-        "Unknown"
-      ],
-      "x-ms-enum": {
-        "name": "SystemAiModelStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The system AI model is being provisioned."
-          },
-          {
-            "name": "Ready",
-            "value": "Ready",
-            "description": "The system AI model is ready for use."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The system AI model is being deleted."
-          },
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "The lifecycle status of the system AI model is unknown."
-          }
-        ]
-      }
     },
     "SystemScheduledMaintenanceProperties": {
       "type": "object",

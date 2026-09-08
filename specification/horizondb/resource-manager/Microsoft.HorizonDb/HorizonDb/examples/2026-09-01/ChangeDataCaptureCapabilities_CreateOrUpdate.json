@@ -7,7 +7,10 @@
     "clusterName": "example-cluster",
     "api-version": "2026-09-01",
     "resource": {
-      "properties": { "desiredState": "Enabled", "autoUpgradeExtension": true }
+      "properties": {
+        "desiredState": "Enabled",
+        "autoUpgradeExtension": true
+      }
     }
   },
   "responses": {
@@ -23,11 +26,21 @@
           "provisioningState": "Succeeded",
           "autoUpgradeExtension": true,
           "replicationArchitecture": "Hybrid",
-            "extension": { "name": "horizondb_change_data_capture", "version": "1.0", "state": "Ready" },
-          "prerequisites": { "engineConfigurationState": "Ready", "readWriteEndpointState": "Ready" },
+          "extension": {
+            "name": "horizondb_change_data_capture",
+            "version": "1.0",
+            "state": "Ready"
+          },
+          "prerequisites": {
+            "engineConfigurationState": "Ready",
+            "readWriteEndpointState": "Ready"
+          },
           "destinationCount": 0,
           "configurationCount": 0,
-          "status": { "code": "Ready", "message": "Change data capture is ready." }
+          "status": {
+            "code": "Ready",
+            "message": "Change data capture is ready."
+          }
         }
       }
     },
@@ -47,11 +60,21 @@
           "provisioningState": "Provisioning",
           "autoUpgradeExtension": true,
           "replicationArchitecture": "Hybrid",
-            "extension": { "name": "horizondb_change_data_capture", "version": "1.0", "state": "Installing" },
-          "prerequisites": { "engineConfigurationState": "Reconciling", "readWriteEndpointState": "Ready" },
+          "extension": {
+            "name": "horizondb_change_data_capture",
+            "version": "1.0",
+            "state": "Installing"
+          },
+          "prerequisites": {
+            "engineConfigurationState": "Reconciling",
+            "readWriteEndpointState": "Ready"
+          },
           "destinationCount": 0,
           "configurationCount": 0,
-          "status": { "code": "Enabling", "message": "Change data capture is being enabled." }
+          "status": {
+            "code": "Enabling",
+            "message": "Change data capture is being enabled."
+          }
         }
       }
     }

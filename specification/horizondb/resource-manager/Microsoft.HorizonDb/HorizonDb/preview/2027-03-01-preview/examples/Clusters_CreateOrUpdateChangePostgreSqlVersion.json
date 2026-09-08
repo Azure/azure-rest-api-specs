@@ -1,6 +1,6 @@
 {
   "operationId": "Clusters_CreateOrUpdate",
-  "title": "Reject changing the PostgreSQL major version during replacement",
+  "title": "Upgrade a HorizonDB cluster from PostgreSQL 17 to 18",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "example-resource-group",
@@ -14,11 +14,31 @@
     }
   },
   "responses": {
-    "400": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/18181818-1818-1818-1818-181818181818?api-version=2027-03-01-preview",
+        "Retry-After": "30"
+      },
       "body": {
-        "error": {
-          "code": "PropertyChangeNotAllowed",
-          "message": "The postgreSqlVersion property is immutable and cannot be changed from 17 to 18."
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster",
+        "name": "example-cluster",
+        "type": "Microsoft.HorizonDb/clusters",
+        "location": "eastus2",
+        "properties": {
+          "postgreSqlVersion": "18",
+          "creationMode": "Create",
+          "state": "Updating",
+          "provisioningState": "InProgress",
+          "readWritePool": {
+            "zoneRedundancy": {
+              "state": "NotReady",
+              "unavailableReason": "The cluster is being upgraded to PostgreSQL 18."
+            },
+            "failover": {
+              "state": "NotReady",
+              "unavailableReason": "The cluster is being upgraded to PostgreSQL 18."
+            }
+          }
         }
       }
     }

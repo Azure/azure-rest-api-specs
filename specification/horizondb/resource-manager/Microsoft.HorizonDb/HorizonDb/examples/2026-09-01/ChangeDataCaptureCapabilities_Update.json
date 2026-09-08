@@ -6,7 +6,11 @@
     "resourceGroupName": "example-resource-group",
     "clusterName": "example-cluster",
     "api-version": "2026-09-01",
-    "properties": { "properties": { "autoUpgradeExtension": false } }
+    "properties": {
+      "properties": {
+        "autoUpgradeExtension": false
+      }
+    }
   },
   "responses": {
     "200": {
@@ -21,11 +25,21 @@
           "provisioningState": "Succeeded",
           "autoUpgradeExtension": false,
           "replicationArchitecture": "Hybrid",
-            "extension": { "name": "horizondb_change_data_capture", "version": "1.0", "state": "Ready" },
-          "prerequisites": { "engineConfigurationState": "Ready", "readWriteEndpointState": "Ready" },
+          "extension": {
+            "name": "horizondb_change_data_capture",
+            "version": "1.0",
+            "state": "Ready"
+          },
+          "prerequisites": {
+            "engineConfigurationState": "Ready",
+            "readWriteEndpointState": "Ready"
+          },
           "destinationCount": 1,
           "configurationCount": 1,
-          "status": { "code": "Ready", "message": "Change data capture is ready." }
+          "status": {
+            "code": "Ready",
+            "message": "Change data capture is ready."
+          }
         }
       }
     },

@@ -16,124 +16,182 @@
             "clusterCapabilities": {
               "status": "Available",
               "supportedPostgreSqlVersions": [
-                { "name": "16", "status": "Available", "supportedVersionsToUpgrade": ["17"] },
-                { "name": "17", "status": "Default", "supportedVersionsToUpgrade": [] }
+                {
+                  "name": "17",
+                  "status": "Default",
+                  "supportedVersionsToUpgrade": [
+                    "18"
+                  ]
+                },
+                {
+                  "name": "18",
+                  "status": "Available",
+                  "supportedVersionsToUpgrade": []
+                }
               ],
               "supportedFeatures": []
             },
             "poolCapabilities": {
               "status": "Available",
               "supportedProcessors": [
-              {
-                "name": "AMD",
-                "status": "Default",
-                "supportedGenerations": [
-                  {
-                    "computeGeneration": 1,
-                    "status": "Available",
-                    "supportedComputeModels": [
-                      {
-                        "type": "Provisioned",
-                        "status": "Default",
-                        "defaultVCoreCount": 2,
-                        "supportedComputeSizes": [
-                          { "status": "Default", "vCores": 2, "memoryPerVCoreInMb": 8192 },
-                          { "status": "Available", "vCores": 4, "memoryPerVCoreInMb": 8192 }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "computeGeneration": 2,
-                    "status": "Available",
-                    "supportedComputeModels": [
-                      {
-                        "type": "Provisioned",
-                        "status": "Default",
-                        "defaultVCoreCount": 2,
-                        "supportedComputeSizes": [
-                          { "status": "Default", "vCores": 2, "memoryPerVCoreInMb": 8192 },
-                          { "status": "Available", "vCores": 4, "memoryPerVCoreInMb": 8192 }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "computeGeneration": 3,
-                    "status": "Available",
-                    "supportedComputeModels": [
-                      {
-                        "type": "Provisioned",
-                        "status": "Default",
-                        "defaultVCoreCount": 2,
-                        "supportedComputeSizes": [
-                          { "status": "Default", "vCores": 2, "memoryPerVCoreInMb": 8192 },
-                          { "status": "Available", "vCores": 4, "memoryPerVCoreInMb": 8192 }
-                        ]
-                      },
-                      {
-                        "type": "Serverless",
-                        "status": "Available",
-                        "minimumVCores": 0.5,
-                        "maximumVCores": 192,
-                        "defaultMinVCores": 0.5,
-                        "defaultMaxVCores": 16
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "name": "Intel",
-                "status": "Available",
-                "supportedGenerations": [
-                  {
-                    "computeGeneration": 1,
-                    "status": "Available",
-                    "supportedComputeModels": [
-                      {
-                        "type": "Provisioned",
-                        "status": "Default",
-                        "defaultVCoreCount": 2,
-                        "supportedComputeSizes": [
-                          { "status": "Default", "vCores": 2, "memoryPerVCoreInMb": 8192 },
-                          { "status": "Available", "vCores": 4, "memoryPerVCoreInMb": 8192 }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "computeGeneration": 2,
-                    "status": "Available",
-                    "supportedComputeModels": [
-                      {
-                        "type": "Provisioned",
-                        "status": "Default",
-                        "defaultVCoreCount": 2,
-                        "supportedComputeSizes": [
-                          { "status": "Default", "vCores": 2, "memoryPerVCoreInMb": 8192 },
-                          { "status": "Available", "vCores": 4, "memoryPerVCoreInMb": 8192 }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "computeGeneration": 3,
-                    "status": "Available",
-                    "supportedComputeModels": [
-                      {
-                        "type": "Provisioned",
-                        "status": "Default",
-                        "defaultVCoreCount": 2,
-                        "supportedComputeSizes": [
-                          { "status": "Default", "vCores": 2, "memoryPerVCoreInMb": 8192 },
-                          { "status": "Available", "vCores": 4, "memoryPerVCoreInMb": 8192 }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
+                {
+                  "name": "AMD",
+                  "status": "Default",
+                  "supportedGenerations": [
+                    {
+                      "computeGeneration": 1,
+                      "status": "Available",
+                      "supportedComputeModels": [
+                        {
+                          "type": "Provisioned",
+                          "status": "Default",
+                          "defaultVCoreCount": 2,
+                          "supportedComputeSizes": [
+                            {
+                              "status": "Default",
+                              "vCores": 2,
+                              "memoryPerVCoreInMb": 8192
+                            },
+                            {
+                              "status": "Available",
+                              "vCores": 4,
+                              "memoryPerVCoreInMb": 8192
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "computeGeneration": 2,
+                      "status": "Available",
+                      "supportedComputeModels": [
+                        {
+                          "type": "Provisioned",
+                          "status": "Default",
+                          "defaultVCoreCount": 2,
+                          "supportedComputeSizes": [
+                            {
+                              "status": "Default",
+                              "vCores": 2,
+                              "memoryPerVCoreInMb": 8192
+                            },
+                            {
+                              "status": "Available",
+                              "vCores": 4,
+                              "memoryPerVCoreInMb": 8192
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "computeGeneration": 3,
+                      "status": "Available",
+                      "supportedComputeModels": [
+                        {
+                          "type": "Provisioned",
+                          "status": "Default",
+                          "defaultVCoreCount": 2,
+                          "supportedComputeSizes": [
+                            {
+                              "status": "Default",
+                              "vCores": 2,
+                              "memoryPerVCoreInMb": 8192
+                            },
+                            {
+                              "status": "Available",
+                              "vCores": 4,
+                              "memoryPerVCoreInMb": 8192
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Serverless",
+                          "status": "Available",
+                          "minimumVCores": 0.5,
+                          "maximumVCores": 192,
+                          "defaultMinVCores": 0.5,
+                          "defaultMaxVCores": 16
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Intel",
+                  "status": "Available",
+                  "supportedGenerations": [
+                    {
+                      "computeGeneration": 1,
+                      "status": "Available",
+                      "supportedComputeModels": [
+                        {
+                          "type": "Provisioned",
+                          "status": "Default",
+                          "defaultVCoreCount": 2,
+                          "supportedComputeSizes": [
+                            {
+                              "status": "Default",
+                              "vCores": 2,
+                              "memoryPerVCoreInMb": 8192
+                            },
+                            {
+                              "status": "Available",
+                              "vCores": 4,
+                              "memoryPerVCoreInMb": 8192
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "computeGeneration": 2,
+                      "status": "Available",
+                      "supportedComputeModels": [
+                        {
+                          "type": "Provisioned",
+                          "status": "Default",
+                          "defaultVCoreCount": 2,
+                          "supportedComputeSizes": [
+                            {
+                              "status": "Default",
+                              "vCores": 2,
+                              "memoryPerVCoreInMb": 8192
+                            },
+                            {
+                              "status": "Available",
+                              "vCores": 4,
+                              "memoryPerVCoreInMb": 8192
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "computeGeneration": 3,
+                      "status": "Available",
+                      "supportedComputeModels": [
+                        {
+                          "type": "Provisioned",
+                          "status": "Default",
+                          "defaultVCoreCount": 2,
+                          "supportedComputeSizes": [
+                            {
+                              "status": "Default",
+                              "vCores": 2,
+                              "memoryPerVCoreInMb": 8192
+                            },
+                            {
+                              "status": "Available",
+                              "vCores": 4,
+                              "memoryPerVCoreInMb": 8192
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
               ],
               "supportedFeatures": []
             }
