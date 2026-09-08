@@ -197,7 +197,7 @@ model PrefixDefinition {
 
   @doc("The blob prefix within the container to scope capacity details to. An empty value scopes to the entire container. Must not start with a '/'.")
   @maxLength(1024)
-  prefix: string;
+  prefix?: string;
 }
 
 /**
