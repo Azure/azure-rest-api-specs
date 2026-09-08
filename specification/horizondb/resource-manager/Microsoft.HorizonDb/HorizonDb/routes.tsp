@@ -266,24 +266,44 @@ interface HorizonDbPrivateLinkResources {
   list is ArmResourceListByParent<HorizonDbPrivateLinkResource>;
 }
 
+@renamedFrom(Versions.v2026_09_01, "HorizonDbParameterGroups")
 @armResourceOperations
-interface HorizonDbParameterGroups {
+interface ParameterGroups {
   @doc("Gets information about a HorizonDB parameter group.")
-  get is ArmResourceRead<HorizonDbParameterGroup>;
+  get is ArmResourceRead<ParameterGroup>;
 
   @doc("Creates a new HorizonDB parameter group or updates an existing parameter group.")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<HorizonDbParameterGroup>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ParameterGroup>;
 
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "update")
+  @sharedRoute
   @doc("Updates an existing HorizonDB parameter group.")
-  update is ArmCustomPatchAsync<
-    HorizonDbParameterGroup,
-    HorizonDbParameterGroupForPatchUpdate
+  updateV1 is ArmCustomPatchAsync<ParameterGroup, ParameterGroupForPatchUpdate>;
+
+  @added(Versions.v2026_09_01)
+  @sharedRoute
+  @doc("Updates an existing HorizonDB parameter group. Each connected pool's applyMethod setting controls when dynamic parameter changes become effective for that pool. Static parameter changes always require a customer-triggered pool restart or a restart during scheduled maintenance. The operation fails with a conflict while a previous update to this parameter group is still being processed.")
+  update is ArmCustomPatchAsync<ParameterGroup, ParameterGroupForPatchUpdate>;
+
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "delete")
+  @sharedRoute
+  @doc("Deletes a HorizonDB parameter group.")
+  deleteV1 is ArmResourceDeleteWithoutOkAsync<
+    ParameterGroup,
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
-  @doc("Deletes a HorizonDB parameter group.")
+  @added(Versions.v2026_09_01)
+  @sharedRoute
+  @doc("Deletes a HorizonDB parameter group. Deletion fails with a conflict when the parameter group is associated with one or more pools.")
   delete is ArmResourceDeleteWithoutOkAsync<
-    HorizonDbParameterGroup,
+    ParameterGroup,
     Response =
       | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
           Azure.Core.Foundations.RetryAfterHeader>
@@ -291,35 +311,75 @@ interface HorizonDbParameterGroups {
   >;
 
   @doc("Lists all HorizonDB parameter groups in a resource group.")
-  listByResourceGroup is ArmResourceListByParent<HorizonDbParameterGroup>;
+  listByResourceGroup is ArmResourceListByParent<ParameterGroup>;
 
   @doc("Lists all HorizonDB parameter groups in a subscription.")
-  listBySubscription is ArmListBySubscription<HorizonDbParameterGroup>;
+  listBySubscription is ArmListBySubscription<ParameterGroup>;
 
   @doc("Gets all connections to a parameter group.")
   @get
   @list
   @action("connections")
   listConnections is ArmResourceActionSync<
-    HorizonDbParameterGroup,
+    ParameterGroup,
     void,
-    ArmResponse<Azure.ResourceManager.ResourceListResult<HorizonDbParameterGroupConnectionProperties>>
+    ArmResponse<Azure.ResourceManager.ResourceListResult<ParameterGroupConnectionProperties>>
   >;
 
+  @removed(Versions.v2026_09_01)
   @doc("Lists parameter groups filtered by version number.")
   @get
   @list
   @action("versions")
   listVersions is ArmResourceActionSync<
-    HorizonDbParameterGroup,
+    ParameterGroup,
     void,
-    ArmResponse<Azure.ResourceManager.ResourceListResult<HorizonDbParameterGroup>>,
+    ArmResponse<Azure.ResourceManager.ResourceListResult<ParameterGroup>>,
     Parameters = {
       @doc("The version number to filter by.")
       @query
       version?: int32;
     }
   >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom non-resource subscription-level operation with explicit route and parameters."
+@added(Versions.v2026_09_01)
+@route("/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/parameterGroups")
+interface DefaultParameterGroups {
+  @doc("Lists default parameter groups available for a subscription in a specific region. The response contains at most one default parameter group for each PostgreSQL version.")
+  @get
+  @list
+  listDefaultParameterGroupsBySubscriptionAndRegion(
+    ...ApiVersionParameter,
+
+    @doc("The Azure subscription ID.")
+    @path
+    subscriptionId: string,
+
+    @doc("The Azure region for which to list default parameter groups.")
+    @path
+    location: Azure.Core.azureLocation,
+  ): ArmResponse<Azure.ResourceManager.ResourceListResult<DefaultParameterGroup>>;
+
+  @doc("Gets a default parameter group available for a subscription in a specific region. Each PostgreSQL version has at most one default parameter group in a location.")
+  @route("/{name}")
+  @get
+  getDefaultParameterGroup(
+    ...ApiVersionParameter,
+
+    @doc("The Azure subscription ID.")
+    @path
+    subscriptionId: string,
+
+    @doc("The Azure region containing the default parameter group.")
+    @path
+    location: Azure.Core.azureLocation,
+
+    @doc("The name of the default parameter group.")
+    @path
+    name: string,
+  ): ArmResponse<DefaultParameterGroup>;
 }
 
 @added(Versions.v2026_05_01_preview)

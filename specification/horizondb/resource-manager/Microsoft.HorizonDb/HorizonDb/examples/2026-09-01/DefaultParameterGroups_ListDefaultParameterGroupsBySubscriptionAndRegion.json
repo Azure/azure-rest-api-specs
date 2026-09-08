@@ -1,0 +1,37 @@
+{
+  "operationId": "DefaultParameterGroups_ListDefaultParameterGroupsBySubscriptionAndRegion",
+  "title": "List default parameter groups in a region",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "location": "westus2",
+    "api-version": "2026-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default-postgresql-17",
+            "parameters": [
+              {
+                "name": "max_connections",
+                "description": "Sets the maximum number of concurrent connections.",
+                "value": "100",
+                "defaultValue": "100",
+                "valueSource": "SystemDefault",
+                "dataType": "integer",
+                "allowedValues": "100-5000",
+                "isDynamic": true,
+                "isReadOnly": false,
+                "documentationLink": "https://www.postgresql.org/docs/17/runtime-config-connection.html",
+                "unit": "connections"
+              }
+            ],
+            "description": "The default parameter group for PostgreSQL 17.",
+            "postgreSqlVersion": "17"
+          }
+        ]
+      }
+    }
+  }
+}

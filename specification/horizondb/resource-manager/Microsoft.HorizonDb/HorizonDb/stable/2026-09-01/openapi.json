@@ -61,7 +61,7 @@
       "name": "HorizonDbPrivateLinkResources"
     },
     {
-      "name": "HorizonDbParameterGroups"
+      "name": "ParameterGroups"
     },
     {
       "name": "MicrosoftEntraAdministrators"
@@ -214,11 +214,97 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/parameterGroups": {
+      "get": {
+        "operationId": "DefaultParameterGroups_ListDefaultParameterGroupsBySubscriptionAndRegion",
+        "description": "Lists default parameter groups available for a subscription in a specific region. The response contains at most one default parameter group for each PostgreSQL version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The Azure region for which to list default parameter groups.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DefaultParameterGroupListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List default parameter groups in a region": {
+            "$ref": "./examples/DefaultParameterGroups_ListDefaultParameterGroupsBySubscriptionAndRegion.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/parameterGroups/{name}": {
+      "get": {
+        "operationId": "DefaultParameterGroups_GetDefaultParameterGroup",
+        "description": "Gets a default parameter group available for a subscription in a specific region. Each PostgreSQL version has at most one default parameter group in a location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The Azure region containing the default parameter group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the default parameter group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DefaultParameterGroup"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a default parameter group": {
+            "$ref": "./examples/DefaultParameterGroups_GetDefaultParameterGroup.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/parameterGroups": {
       "get": {
-        "operationId": "HorizonDbParameterGroups_ListBySubscription",
+        "operationId": "ParameterGroups_ListBySubscription",
         "tags": [
-          "HorizonDbParameterGroups"
+          "ParameterGroups"
         ],
         "description": "Lists all HorizonDB parameter groups in a subscription.",
         "parameters": [
@@ -233,7 +319,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbParameterGroupListResult"
+              "$ref": "#/definitions/ParameterGroupListResult"
             }
           },
           "default": {
@@ -4542,9 +4628,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups": {
       "get": {
-        "operationId": "HorizonDbParameterGroups_ListByResourceGroup",
+        "operationId": "ParameterGroups_ListByResourceGroup",
         "tags": [
-          "HorizonDbParameterGroups"
+          "ParameterGroups"
         ],
         "description": "Lists all HorizonDB parameter groups in a resource group.",
         "parameters": [
@@ -4562,7 +4648,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbParameterGroupListResult"
+              "$ref": "#/definitions/ParameterGroupListResult"
             }
           },
           "default": {
@@ -4584,9 +4670,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups/{parameterGroupName}": {
       "get": {
-        "operationId": "HorizonDbParameterGroups_Get",
+        "operationId": "ParameterGroups_Get",
         "tags": [
-          "HorizonDbParameterGroups"
+          "ParameterGroups"
         ],
         "description": "Gets information about a HorizonDB parameter group.",
         "parameters": [
@@ -4614,7 +4700,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbParameterGroup"
+              "$ref": "#/definitions/ParameterGroup"
             }
           },
           "default": {
@@ -4631,9 +4717,9 @@
         }
       },
       "put": {
-        "operationId": "HorizonDbParameterGroups_CreateOrUpdate",
+        "operationId": "ParameterGroups_CreateOrUpdate",
         "tags": [
-          "HorizonDbParameterGroups"
+          "ParameterGroups"
         ],
         "description": "Creates a new HorizonDB parameter group or updates an existing parameter group.",
         "parameters": [
@@ -4662,21 +4748,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HorizonDbParameterGroup"
+              "$ref": "#/definitions/ParameterGroup"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'HorizonDbParameterGroup' update operation succeeded",
+            "description": "Resource 'ParameterGroup' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/HorizonDbParameterGroup"
+              "$ref": "#/definitions/ParameterGroup"
             }
           },
           "201": {
-            "description": "Resource 'HorizonDbParameterGroup' create operation succeeded",
+            "description": "Resource 'ParameterGroup' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/HorizonDbParameterGroup"
+              "$ref": "#/definitions/ParameterGroup"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -4704,16 +4790,16 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/HorizonDbParameterGroup"
+          "final-state-schema": "#/definitions/ParameterGroup"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "HorizonDbParameterGroups_Update",
+        "operationId": "ParameterGroups_Update",
         "tags": [
-          "HorizonDbParameterGroups"
+          "ParameterGroups"
         ],
-        "description": "Updates an existing HorizonDB parameter group.",
+        "description": "Updates an existing HorizonDB parameter group. Each connected pool's applyMethod setting controls when dynamic parameter changes become effective for that pool. Static parameter changes always require a customer-triggered pool restart or a restart during scheduled maintenance. The operation fails with a conflict while a previous update to this parameter group is still being processed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -4740,7 +4826,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HorizonDbParameterGroupForPatchUpdate"
+              "$ref": "#/definitions/ParameterGroupForPatchUpdate"
             }
           }
         ],
@@ -4748,7 +4834,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbParameterGroup"
+              "$ref": "#/definitions/ParameterGroup"
             }
           },
           "202": {
@@ -4779,16 +4865,16 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/HorizonDbParameterGroup"
+          "final-state-schema": "#/definitions/ParameterGroup"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "HorizonDbParameterGroups_Delete",
+        "operationId": "ParameterGroups_Delete",
         "tags": [
-          "HorizonDbParameterGroups"
+          "ParameterGroups"
         ],
-        "description": "Deletes a HorizonDB parameter group.",
+        "description": "Deletes a HorizonDB parameter group. Deletion fails with a conflict when the parameter group is associated with one or more pools.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -4853,9 +4939,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups/{parameterGroupName}/connections": {
       "get": {
-        "operationId": "HorizonDbParameterGroups_ListConnections",
+        "operationId": "ParameterGroups_ListConnections",
         "tags": [
-          "HorizonDbParameterGroups"
+          "ParameterGroups"
         ],
         "description": "Gets all connections to a parameter group.",
         "parameters": [
@@ -4883,7 +4969,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbParameterGroupConnectionPropertiesListResult"
+              "$ref": "#/definitions/ParameterGroupConnectionPropertiesListResult"
             }
           },
           "default": {
@@ -4896,66 +4982,6 @@
         "x-ms-examples": {
           "List connections for a HorizonDB parameter group": {
             "$ref": "./examples/ParameterGroups_ListConnections.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups/{parameterGroupName}/versions": {
-      "get": {
-        "operationId": "HorizonDbParameterGroups_ListVersions",
-        "tags": [
-          "HorizonDbParameterGroups"
-        ],
-        "description": "Lists parameter groups filtered by version number.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "parameterGroupName",
-            "in": "path",
-            "description": "The name of the HorizonDB parameter group.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "version",
-            "in": "query",
-            "description": "The version number to filter by.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HorizonDbParameterGroupListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List parameter groups filtered by version": {
-            "$ref": "./examples/ParameterGroups_ListVersions.json"
           }
         },
         "x-ms-pageable": {
@@ -6953,6 +6979,60 @@
         ]
       }
     },
+    "DefaultParameterGroup": {
+      "type": "object",
+      "description": "A default parameter group available in a specific region. It contains engine-defined parameters and excludes service and other non-engine entries. For each PostgreSQL version, the DefaultParameterGroups APIs return at most one default parameter group in a location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the default parameter group."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Engine-defined parameters in the default parameter group. Service and other non-engine entries are excluded.",
+          "items": {
+            "$ref": "#/definitions/ParameterProperties"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the default parameter group."
+        },
+        "postgreSqlVersion": {
+          "$ref": "#/definitions/PostgreSqlVersion",
+          "description": "PostgreSQL version for which this default parameter group is valid."
+        }
+      },
+      "required": [
+        "name",
+        "parameters",
+        "postgreSqlVersion"
+      ]
+    },
+    "DefaultParameterGroupListResult": {
+      "type": "object",
+      "description": "The response of a DefaultParameterGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DefaultParameterGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/DefaultParameterGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "DottedDecimalIpv4Address": {
       "type": "string",
       "description": "An IPv4 address in dotted-decimal notation.",
@@ -7381,194 +7461,6 @@
             "type": "Microsoft.HorizonDb/clusters"
           }
         ]
-      }
-    },
-    "HorizonDbParameterGroup": {
-      "type": "object",
-      "description": "Represents the HorizonDB parameter group.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HorizonDbParameterGroupProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "HorizonDbParameterGroupConnectionProperties": {
-      "type": "object",
-      "description": "Connection information for HorizonDB parameter group.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the connected resource.",
-          "readOnly": true
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource ID of the connected resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource.",
-          "readOnly": true
-        }
-      }
-    },
-    "HorizonDbParameterGroupConnectionPropertiesListResult": {
-      "type": "object",
-      "description": "The response of a HorizonDbParameterGroupConnectionProperties list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The HorizonDbParameterGroupConnectionProperties items on this page",
-          "items": {
-            "$ref": "#/definitions/HorizonDbParameterGroupConnectionProperties"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "HorizonDbParameterGroupForPatchUpdate": {
-      "type": "object",
-      "description": "HorizonDB parameter group for update operations.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/HorizonDbParameterGroupPropertiesForPatchUpdate",
-          "description": "The properties that can be updated for a HorizonDB parameter group."
-        }
-      }
-    },
-    "HorizonDbParameterGroupListResult": {
-      "type": "object",
-      "description": "The response of a HorizonDbParameterGroup list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The HorizonDbParameterGroup items on this page",
-          "items": {
-            "$ref": "#/definitions/HorizonDbParameterGroup"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "HorizonDbParameterGroupProperties": {
-      "type": "object",
-      "description": "Properties of a HorizonDB parameter group.",
-      "properties": {
-        "parameters": {
-          "type": "array",
-          "description": "Parameters in the parameter group.",
-          "items": {
-            "$ref": "#/definitions/ParameterProperties"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the parameter group.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "pgVersion": {
-          "type": "integer",
-          "format": "int32",
-          "description": "PostgreSQL version for the parameter group.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "version": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Current version of the parameter group.",
-          "readOnly": true
-        },
-        "applyImmediately": {
-          "type": "boolean",
-          "description": "Indicates whether the parameters should be applied immediately.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the parameter group.",
-          "readOnly": true
-        }
-      }
-    },
-    "HorizonDbParameterGroupPropertiesForPatchUpdate": {
-      "type": "object",
-      "description": "Properties of a HorizonDB parameter group for update operations.",
-      "properties": {
-        "parameters": {
-          "type": "array",
-          "description": "Parameters in the parameter group.",
-          "items": {
-            "$ref": "#/definitions/ParameterProperties"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the parameter group.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
-        "applyImmediately": {
-          "type": "boolean",
-          "description": "Indicates whether the parameters should be applied immediately.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        }
       }
     },
     "HorizonDbPool": {
@@ -8430,13 +8322,178 @@
         ]
       }
     },
+    "ParameterGroup": {
+      "type": "object",
+      "description": "Represents the HorizonDB parameter group.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ParameterGroupProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ParameterGroupConnectionProperties": {
+      "type": "object",
+      "description": "Connection information for HorizonDB parameter group.",
+      "properties": {
+        "poolResourceId": {
+          "$ref": "#/definitions/PoolResourceId",
+          "description": "The Azure resource ID of the connected HorizonDB pool.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "poolResourceId"
+      ]
+    },
+    "ParameterGroupConnectionPropertiesListResult": {
+      "type": "object",
+      "description": "The response of a ParameterGroupConnectionProperties list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ParameterGroupConnectionProperties items on this page",
+          "items": {
+            "$ref": "#/definitions/ParameterGroupConnectionProperties"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ParameterGroupForPatchUpdate": {
+      "type": "object",
+      "description": "HorizonDB parameter group for update operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ParameterGroupPropertiesForPatchUpdate",
+          "description": "The properties that can be updated for a HorizonDB parameter group."
+        }
+      }
+    },
+    "ParameterGroupListResult": {
+      "type": "object",
+      "description": "The response of a ParameterGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ParameterGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/ParameterGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ParameterGroupProperties": {
+      "type": "object",
+      "description": "Properties of a HorizonDB parameter group.",
+      "properties": {
+        "parameters": {
+          "type": "array",
+          "description": "Parameters in the parameter group.",
+          "items": {
+            "$ref": "#/definitions/ParameterProperties"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "description": {
+          "$ref": "#/definitions/WritableDescription",
+          "description": "Description of the parameter group. The maximum length is 1024 characters.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "postgreSqlVersion": {
+          "$ref": "#/definitions/PostgreSqlVersion",
+          "description": "The PostgreSQL major version for the parameter group. This property is required during creation and is immutable thereafter. The service selects the unique location-scoped default parameter group for this version in the resource location. The DefaultParameterGroups APIs return at most one default parameter group for each PostgreSQL version in a location, so this selection is unambiguous.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the parameter group.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "postgreSqlVersion"
+      ]
+    },
+    "ParameterGroupPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Properties of a HorizonDB parameter group for update operations.",
+      "properties": {
+        "parameters": {
+          "type": "array",
+          "description": "Parameters in the parameter group.",
+          "items": {
+            "$ref": "#/definitions/ParameterProperties"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "description": {
+          "$ref": "#/definitions/WritableDescription",
+          "description": "Description of the parameter group. The maximum length is 1024 characters.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
     "ParameterProperties": {
       "type": "object",
-      "description": "Properties of a HorizonDB parameters.",
+      "description": "Properties of a HorizonDB parameter.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the parameter."
+          "description": "The name of the parameter.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "description": {
           "type": "string",
@@ -8445,7 +8502,22 @@
         },
         "value": {
           "type": "string",
-          "description": "The value of the configuration."
+          "description": "The value of the configuration.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "The system-defined default value of the parameter, independent of the effective value.",
+          "readOnly": true
+        },
+        "valueSource": {
+          "$ref": "#/definitions/ParameterValueSource",
+          "description": "The source of the effective parameter value. UserOverride means that the value was explicitly supplied by the user, even when it equals defaultValue.",
+          "readOnly": true
         },
         "dataType": {
           "type": "string",
@@ -8464,7 +8536,7 @@
         },
         "isReadOnly": {
           "type": "boolean",
-          "description": "Whether the parameter is a read-only parameter.",
+          "description": "Whether the parameter is read-only. Read-only parameters cannot be overridden.",
           "readOnly": true
         },
         "documentationLink": {
@@ -8478,6 +8550,30 @@
           "description": "The unit of measurement for the parameter.",
           "readOnly": true
         }
+      }
+    },
+    "ParameterValueSource": {
+      "type": "string",
+      "description": "The source of the effective value assigned to a HorizonDB parameter.",
+      "enum": [
+        "SystemDefault",
+        "UserOverride"
+      ],
+      "x-ms-enum": {
+        "name": "ParameterValueSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemDefault",
+            "value": "SystemDefault",
+            "description": "The effective value is the system-defined default."
+          },
+          {
+            "name": "UserOverride",
+            "value": "UserOverride",
+            "description": "The effective value was explicitly supplied by the user, even when it equals the system-defined default value."
+          }
+        ]
       }
     },
     "PasswordAuthentication": {

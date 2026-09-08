@@ -98,32 +98,32 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbParameterGroup,
+  Microsoft.HorizonDb.ParameterGroup,
   "HorizonDBParameterGroup",
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbParameterGroupConnectionProperties,
+  Microsoft.HorizonDb.ParameterGroupConnectionProperties,
   "HorizonDBParameterGroupConnectionProperties",
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbParameterGroupForPatchUpdate,
+  Microsoft.HorizonDb.ParameterGroupForPatchUpdate,
   "HorizonDBParameterGroupPatch",
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbParameterGroupProperties,
+  Microsoft.HorizonDb.ParameterGroupProperties,
   "HorizonDBParameterGroupProperties",
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbParameterGroupPropertiesForPatchUpdate,
+  Microsoft.HorizonDb.ParameterGroupPropertiesForPatchUpdate,
   "HorizonDBParameterGroupPatchProperties",
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbParameterGroups,
+  Microsoft.HorizonDb.ParameterGroups,
   "HorizonDBParameterGroups",
   "csharp"
 );
@@ -195,11 +195,6 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.ParameterProperties,
-  "HorizonDBParameterProperties",
-  "csharp"
-);
-@@clientName(
   Microsoft.HorizonDb.ProvisioningState,
   "HorizonDBProvisioningState",
   "csharp"
@@ -232,12 +227,12 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbParameterGroupProperties.applyImmediately,
+  Microsoft.HorizonDb.ParameterGroupProperties.applyImmediately,
   "ShouldApplyImmediately",
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbParameterGroupPropertiesForPatchUpdate.applyImmediately,
+  Microsoft.HorizonDb.ParameterGroupPropertiesForPatchUpdate.applyImmediately,
   "ShouldApplyImmediately",
   "csharp"
 );
@@ -252,7 +247,7 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbParameterGroupProperties.pgVersion,
+  Microsoft.HorizonDb.ParameterGroupProperties.legacyPgVersion,
   "PostgreSqlVersion",
   "csharp"
 );
