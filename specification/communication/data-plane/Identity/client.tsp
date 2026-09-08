@@ -26,15 +26,26 @@ using Azure.ClientGenerator.Core;
 namespace ClientCustomizations;
 
 // ---------------------------------------------------------------------------
-// 1. Token scope enum rename — UNSCOPED (applies to every language).
+// 1. Token scope enum rename — scoped to the SDK languages that ship this name.
 //
-// Java and Python both carry this identical rename in their existing AutoRest
-// configuration, so it is applied unscoped rather than duplicated per language.
-// Was, in both languages: x-ms-enum.name = "CommunicationTokenScope".
+// Java, Python and .NET all carry this identical rename in their existing
+// configuration, so it is applied once rather than duplicated per language.
+// Was, in each: x-ms-enum.name / [CodeGenType] = "CommunicationTokenScope".
+//
+// MUST stay scoped. An unscoped @@clientName also reaches the
+// @azure-tools/typespec-autorest emitter and renames the definition in the
+// emitted swagger for EVERY api-version, including already-published ones.
+// Verified by CI: unscoped produced a diff in both stable/2025-06-30 and
+// stable/2026-09-23 CommunicationIdentity.json.
+//
+// JavaScript is deliberately excluded: its shipped public name is `TokenScope`,
+// declared independently in src/models.ts, and the generated type is never
+// re-exported. Verified as a no-op there.
 // ---------------------------------------------------------------------------
 @@clientName(
   Azure.Communication.Identity.CommunicationIdentityTokenScope,
-  "CommunicationTokenScope"
+  "CommunicationTokenScope",
+  "java,python,csharp"
 );
 
 // ---------------------------------------------------------------------------
