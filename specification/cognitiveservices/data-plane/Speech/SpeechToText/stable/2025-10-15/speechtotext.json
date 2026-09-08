@@ -3650,6 +3650,9 @@
         "x-ms-examples": {
           "Transcribe an audio file": {
             "$ref": "./examples/transcribe_file.json"
+          },
+          "Transcribe with enhanced model options": {
+            "$ref": "./examples/transcribe_enhanced_model_options.json"
           }
         }
       }
@@ -4712,6 +4715,18 @@
         }
       }
     },
+    "EnhancedModeModelOptions": {
+      "description": "Model-specific options for enhanced transcription.",
+      "type": "object",
+      "properties": {
+        "timestamps": {
+          "$ref": "#/definitions/EnhancedModeTimestampGranularity"
+        },
+        "transcribeStyle": {
+          "$ref": "#/definitions/EnhancedModeTranscriptionStyle"
+        }
+      }
+    },
     "EnhancedModeProperties": {
       "description": "The enhanced mode settings. Enhanced mode settings must be specified to enable enhanced mode.",
       "type": "object",
@@ -4734,7 +4749,68 @@
           "items": {
             "type": "string"
           }
+        },
+        "model": {
+          "description": "The enhanced transcription model to use.",
+          "type": "string"
+        },
+        "modelOptions": {
+          "$ref": "#/definitions/EnhancedModeModelOptions"
         }
+      }
+    },
+    "EnhancedModeTimestampGranularity": {
+      "description": "Timestamp granularity for enhanced transcription output. New values may be added in future API versions.",
+      "enum": [
+        "word",
+        "segment",
+        "none"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EnhancedModeTimestampGranularity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Word",
+            "value": "word",
+            "description": "Include timestamps for each word."
+          },
+          {
+            "name": "Segment",
+            "value": "segment",
+            "description": "Include timestamps for each transcript segment."
+          },
+          {
+            "name": "None",
+            "value": "none",
+            "description": "Do not include timestamps."
+          }
+        ]
+      }
+    },
+    "EnhancedModeTranscriptionStyle": {
+      "description": "Transcription styles supported by enhanced transcription models. New values may be added in future API versions.",
+      "enum": [
+        "verbatim",
+        "clean"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EnhancedModeTranscriptionStyle",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Verbatim",
+            "value": "verbatim",
+            "description": "Preserve the spoken wording in the transcript."
+          },
+          {
+            "name": "Clean",
+            "value": "clean",
+            "description": "Produce a cleaned-up transcript."
+          }
+        ]
       }
     },
     "EntityError": {

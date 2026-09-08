@@ -27,9 +27,43 @@ union ProfanityFilterMode {
   string,
 }
 
+/** Timestamp granularity for enhanced transcription output. New values may be added in future API versions. */
+union EnhancedModeTimestampGranularity {
+  /** Include timestamps for each word. */
+  Word: "word",
+
+  /** Include timestamps for each transcript segment. */
+  Segment: "segment",
+
+  /** Do not include timestamps. */
+  None: "none",
+
+  string,
+}
+
+/** Transcription styles supported by enhanced transcription models. New values may be added in future API versions. */
+union EnhancedModeTranscriptionStyle {
+  /** Preserve the spoken wording in the transcript. */
+  Verbatim: "verbatim",
+
+  /** Produce a cleaned-up transcript. */
+  Clean: "clean",
+
+  string,
+}
+
+/** Model-specific options for enhanced transcription. */
+model EnhancedModeModelOptions {
+  /** Timestamp granularity for the transcription output. */
+  timestamps?: EnhancedModeTimestampGranularity;
+
+  /** Style to use for the transcription output. */
+  transcribeStyle?: EnhancedModeTranscriptionStyle;
+}
+
 @doc("Enhanced mode properties for transcription.")
 model EnhancedModeProperties {
-  @doc("Enable enhanced mode for transcription. This is automatically set to true when task, targetLanguage, or prompt are specified.")
+  @doc("Enable enhanced mode for transcription. SDKs automatically set this to true when task, targetLanguage, prompt, model, or modelOptions are specified.")
   @visibility(Lifecycle.Read)
   enabled?: boolean;
 
@@ -41,6 +75,12 @@ model EnhancedModeProperties {
 
   @doc("A list of user prompts.")
   prompt?: string[];
+
+  /** The enhanced transcription model to use. */
+  `model`?: string;
+
+  /** Model-specific options for enhanced transcription. */
+  modelOptions?: EnhancedModeModelOptions;
 }
 
 @doc("Phrase list properties for transcription.")
