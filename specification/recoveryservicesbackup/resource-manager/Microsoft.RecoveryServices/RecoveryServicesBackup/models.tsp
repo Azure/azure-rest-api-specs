@@ -5615,8 +5615,8 @@ model DiskInformation {
 }
 
 /**
- * Base class for additional details of a backup copy. Workload-specific additional details are derived from this
- * class.
+ * Base class for additional details of a recovery point. Workload-specific additional details are derived from
+ * this class.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "RP is an established acronym in the BMS contract; the model name matches the service data contract."
 @added(Versions.v2026_10_01)
@@ -5630,7 +5630,7 @@ model RPExtendedInfo {
 }
 
 /**
- * Additional details of an IaaS VM backup copy.
+ * Additional details of an IaaS VM recovery point.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IaasVM and RP are established acronyms in the BMS contract; the model name matches the service data contract."
 @added(Versions.v2026_10_01)
@@ -5651,7 +5651,7 @@ model IaasVMRPExtendedInfo extends RPExtendedInfo {
 }
 
 /**
- * Additional details of a backup copy, wrapped in a resource envelope.
+ * Additional details of a recovery point, wrapped in a resource envelope.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "RP is an established acronym in the BMS contract; the model name matches the service data contract."
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Matches the existing BMS resource envelope pattern used by RestoreRequestResource, BackupRequestResource and ILRRequestResource."
@@ -5666,7 +5666,7 @@ model RPExtendedInfoResource extends Resource {
 }
 
 /**
- * Dictionary of the additional details of backup copies, keyed by recovery point ARM id.
+ * Dictionary of the additional details of recovery points, keyed by recovery point ARM id.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "RP is an established acronym in the BMS contract; the model name matches the service data contract."
 @added(Versions.v2026_10_01)

@@ -10668,7 +10668,7 @@
     },
     "IaasVMRPExtendedInfo": {
       "type": "object",
-      "description": "Additional details of an IaaS VM backup copy.",
+      "description": "Additional details of an IaaS VM recovery point.",
       "properties": {
         "osDisk": {
           "$ref": "#/definitions/DiskInformation",
@@ -13564,7 +13564,7 @@
     },
     "RPExtendedInfo": {
       "type": "object",
-      "description": "Base class for additional details of a backup copy. Workload-specific additional details are derived from this\nclass.",
+      "description": "Base class for additional details of a recovery point. Workload-specific additional details are derived from\nthis class.",
       "properties": {
         "objectType": {
           "type": "string",
@@ -13578,7 +13578,7 @@
     },
     "RPExtendedInfoResource": {
       "type": "object",
-      "description": "Additional details of a backup copy, wrapped in a resource envelope.",
+      "description": "Additional details of a recovery point, wrapped in a resource envelope.",
       "properties": {
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
@@ -13608,7 +13608,7 @@
     },
     "RPExtendedInfoResourceDictionary": {
       "type": "object",
-      "description": "Dictionary of the additional details of backup copies, keyed by recovery point ARM id.",
+      "description": "Dictionary of the additional details of recovery points, keyed by recovery point ARM id.",
       "properties": {
         "value": {
           "type": "object",
