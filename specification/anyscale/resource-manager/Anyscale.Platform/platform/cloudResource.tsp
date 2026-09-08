@@ -127,7 +127,4 @@ interface CloudResources {
 
   /** List cloud resources by resource group */
   listByResourceGroup is ArmResourceListByParent<CloudResource>;
-
-  /** List cloud resources by subscription */
-  listBySubscription is ArmListBySubscription<CloudResource>;
 }
