@@ -152,6 +152,47 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/capabilities": {
+      "get": {
+        "operationId": "Capabilities_List",
+        "description": "Lists HorizonDB capabilities available to a subscription in a specific region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The Azure region for which to list HorizonDB capabilities.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocationCapabilityListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List capabilities in a location": {
+            "$ref": "./examples/Capabilities_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/parameterGroups": {
       "get": {
         "operationId": "HorizonDbParameterGroups_ListBySubscription",
@@ -3243,6 +3284,206 @@
         ]
       }
     },
+    "CapabilityStatus": {
+      "type": "string",
+      "description": "The availability status of a HorizonDB capability.",
+      "enum": [
+        "Available",
+        "Default"
+      ],
+      "x-ms-enum": {
+        "name": "CapabilityStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "The capability is available."
+          },
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "The capability is available and selected by default."
+          }
+        ]
+      }
+    },
+    "ClusterCapability": {
+      "type": "object",
+      "description": "The HorizonDB Cluster capabilities available in a location.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of HorizonDB Clusters in the region.",
+          "readOnly": true
+        },
+        "supportedPostgreSqlVersions": {
+          "type": "array",
+          "description": "The PostgreSQL major versions supported by Clusters in the region.",
+          "items": {
+            "$ref": "#/definitions/PostgreSqlVersionCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "supportedFeatures": {
+          "type": "array",
+          "description": "Additional Cluster features supported in the region.",
+          "items": {
+            "$ref": "#/definitions/ClusterFeatureCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "supportedPostgreSqlVersions",
+        "supportedFeatures"
+      ]
+    },
+    "ClusterFeatureCapability": {
+      "type": "object",
+      "description": "A HorizonDB Cluster feature supported in a location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Cluster feature.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of the Cluster feature.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "status"
+      ]
+    },
+    "ComputeGenerationCapability": {
+      "type": "object",
+      "description": "The capabilities of a HorizonDB compute generation.",
+      "properties": {
+        "computeGeneration": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The numeric compute generation used when configuring a HorizonDB pool.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of the compute generation.",
+          "readOnly": true
+        },
+        "supportedComputeModels": {
+          "type": "array",
+          "description": "The compute models supported by the compute generation.",
+          "items": {
+            "$ref": "#/definitions/ComputeModelCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "type"
+          ]
+        }
+      },
+      "required": [
+        "computeGeneration",
+        "status",
+        "supportedComputeModels"
+      ]
+    },
+    "ComputeModelCapability": {
+      "type": "object",
+      "description": "The capabilities of a HorizonDB compute model.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PoolComputeModelType",
+          "description": "The compute model represented by these capabilities.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of the compute model.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "status"
+      ]
+    },
+    "ComputeProcessorCapability": {
+      "type": "object",
+      "description": "The capabilities of a processor family supported by HorizonDB.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/ComputeProcessorType",
+          "description": "The name of the processor family.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of the processor family.",
+          "readOnly": true
+        },
+        "supportedGenerations": {
+          "type": "array",
+          "description": "The compute generations supported by the processor family.",
+          "items": {
+            "$ref": "#/definitions/ComputeGenerationCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "computeGeneration"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "status",
+        "supportedGenerations"
+      ]
+    },
+    "ComputeProcessorType": {
+      "type": "string",
+      "description": "A processor family supported by HorizonDB."
+    },
+    "ComputeSizeCapability": {
+      "type": "object",
+      "description": "A vCore configuration supported by a HorizonDB processor generation.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of the vCore configuration.",
+          "readOnly": true
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of vCores in the configuration.",
+          "readOnly": true
+        },
+        "memoryPerVCoreInMb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The memory in megabytes available for each vCore.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "vCores",
+        "memoryPerVCoreInMb"
+      ]
+    },
     "CreateModeCluster": {
       "type": "string",
       "description": "The mode to create a new HorizonDB cluster.",
@@ -4194,6 +4435,59 @@
         }
       }
     },
+    "LocationCapability": {
+      "type": "object",
+      "description": "The HorizonDB capabilities available to a subscription in a location.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure region represented by this capability entry.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of HorizonDB in the region.",
+          "readOnly": true
+        },
+        "clusterCapabilities": {
+          "$ref": "#/definitions/ClusterCapability",
+          "description": "The Cluster capabilities available in the region.",
+          "readOnly": true
+        },
+        "poolCapabilities": {
+          "$ref": "#/definitions/PoolCapability",
+          "description": "The Pool capabilities available in the region, including processor, generation, and compute-model details.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "location",
+        "status",
+        "clusterCapabilities",
+        "poolCapabilities"
+      ]
+    },
+    "LocationCapabilityListResult": {
+      "type": "object",
+      "description": "The response of a LocationCapability list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LocationCapability items on this page",
+          "items": {
+            "$ref": "#/definitions/LocationCapability"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "MicrosoftEntraAdministrator": {
       "type": "object",
       "description": "Represents a PostgreSQL role that is a member of the azure_pg_admin role and is mapped to a Microsoft Entra principal.",
@@ -4508,9 +4802,132 @@
         }
       }
     },
+    "PoolCapability": {
+      "type": "object",
+      "description": "The HorizonDB Pool capabilities available in a location.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of HorizonDB Pools in the region.",
+          "readOnly": true
+        },
+        "supportedProcessors": {
+          "type": "array",
+          "description": "The processor families and their compute capabilities supported by Pools in the region.",
+          "items": {
+            "$ref": "#/definitions/ComputeProcessorCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "supportedFeatures": {
+          "type": "array",
+          "description": "Additional Pool features supported in the region independently of a processor, generation, or compute model.",
+          "items": {
+            "$ref": "#/definitions/PoolFeatureCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "supportedProcessors",
+        "supportedFeatures"
+      ]
+    },
+    "PoolComputeModelType": {
+      "type": "string",
+      "description": "A compute model supported by a HorizonDB pool.",
+      "enum": [
+        "Provisioned"
+      ],
+      "x-ms-enum": {
+        "name": "PoolComputeModelType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioned",
+            "value": "Provisioned",
+            "description": "Provisioned compute."
+          }
+        ]
+      }
+    },
+    "PoolFeatureCapability": {
+      "type": "object",
+      "description": "A HorizonDB Pool feature supported in a location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Pool feature.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of the Pool feature.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "status"
+      ]
+    },
+    "PostgreSqlCapabilityVersion": {
+      "type": "string",
+      "description": "A PostgreSQL major version advertised by the HorizonDB capabilities API.",
+      "enum": [
+        "17"
+      ],
+      "x-ms-enum": {
+        "name": "PostgreSqlCapabilityVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "V17",
+            "value": "17",
+            "description": "PostgreSQL major version 17."
+          }
+        ]
+      }
+    },
     "PostgreSqlVersion": {
       "type": "string",
       "description": "The PostgreSQL version of a HorizonDB cluster or backup."
+    },
+    "PostgreSqlVersionCapability": {
+      "type": "object",
+      "description": "The capabilities of a PostgreSQL major version supported by HorizonDB.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/PostgreSqlCapabilityVersion",
+          "description": "The PostgreSQL major version.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CapabilityStatus",
+          "description": "The availability status of the PostgreSQL major version.",
+          "readOnly": true
+        },
+        "supportedVersionsToUpgrade": {
+          "type": "array",
+          "description": "The PostgreSQL major versions to which this version can be upgraded.",
+          "items": {
+            "$ref": "#/definitions/PostgreSqlCapabilityVersion"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "status",
+        "supportedVersionsToUpgrade"
+      ]
     },
     "PrincipalTypes": {
       "type": "string",
@@ -4568,6 +4985,39 @@
       "required": [
         "value"
       ]
+    },
+    "ProvisionedComputeModelCapability": {
+      "type": "object",
+      "description": "The capabilities of the Provisioned compute model.",
+      "properties": {
+        "defaultVCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The default number of provisioned vCores.",
+          "readOnly": true
+        },
+        "supportedComputeSizes": {
+          "type": "array",
+          "description": "The supported provisioned compute sizes.",
+          "items": {
+            "$ref": "#/definitions/ComputeSizeCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "vCores"
+          ]
+        }
+      },
+      "required": [
+        "defaultVCoreCount",
+        "supportedComputeSizes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeModelCapability"
+        }
+      ],
+      "x-ms-discriminator-value": "Provisioned"
     },
     "ProvisioningState": {
       "type": "string",

@@ -339,3 +339,23 @@ interface Backups {
   @doc("Lists the backups available for a HorizonDB cluster. Expired automatic backups are omitted.")
   list is ArmResourceListByParent<Backup>;
 }
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This is a custom non-resource subscription-level discovery operation with an explicit route and parameters."
+@added(Versions.v2026_09_01)
+@route("/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/capabilities")
+interface Capabilities {
+  @doc("Lists HorizonDB capabilities available to a subscription in a specific region.")
+  @get
+  @list
+  list(
+    ...ApiVersionParameter,
+
+    @doc("The Azure subscription ID.")
+    @path
+    subscriptionId: string,
+
+    @doc("The Azure region for which to list HorizonDB capabilities.")
+    @path
+    location: Azure.Core.azureLocation,
+  ): ArmResponse<Azure.ResourceManager.ResourceListResult<LocationCapability>>;
+}

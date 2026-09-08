@@ -1,0 +1,77 @@
+{
+  "operationId": "Capabilities_List",
+  "title": "List capabilities in a location",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "location": "westus2",
+    "api-version": "2026-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "location": "westus2",
+            "status": "Available",
+            "clusterCapabilities": {
+              "status": "Available",
+              "supportedPostgreSqlVersions": [
+                {
+                  "name": "17",
+                  "status": "Default",
+                  "supportedVersionsToUpgrade": []
+                }
+              ],
+              "supportedFeatures": [
+                {
+                  "name": "GeoRedundantBackup",
+                  "status": "Available"
+                }
+              ]
+            },
+            "poolCapabilities": {
+              "status": "Available",
+              "supportedProcessors": [
+                {
+                  "name": "AMD",
+                  "status": "Default",
+                  "supportedGenerations": [
+                    {
+                      "computeGeneration": 5,
+                      "status": "Default",
+                      "supportedComputeModels": [
+                        {
+                          "type": "Provisioned",
+                          "status": "Default",
+                          "defaultVCoreCount": 4,
+                          "supportedComputeSizes": [
+                            {
+                              "status": "Default",
+                              "vCores": 4,
+                              "memoryPerVCoreInMb": 8192
+                            },
+                            {
+                              "status": "Available",
+                              "vCores": 8,
+                              "memoryPerVCoreInMb": 8192
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "supportedFeatures": [
+                {
+                  "name": "ZoneRedundancy",
+                  "status": "Available"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

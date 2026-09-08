@@ -733,6 +733,217 @@ union BackupType {
 @doc("The PostgreSQL version of a HorizonDB cluster or backup.")
 scalar PostgreSqlVersion extends string;
 
+@added(Versions.v2026_09_01)
+@doc("The availability status of a HorizonDB capability.")
+union CapabilityStatus {
+  string,
+
+  /** The capability is available. */
+  Available: "Available",
+
+  /** The capability is available and selected by default. */
+  Default: "Default",
+}
+
+@added(Versions.v2026_09_01)
+@doc("A PostgreSQL major version advertised by the HorizonDB capabilities API.")
+union PostgreSqlCapabilityVersion {
+  string,
+
+  /** PostgreSQL major version 17. */
+  V17: "17",
+}
+
+@added(Versions.v2026_09_01)
+@doc("A compute model supported by a HorizonDB pool.")
+union PoolComputeModelType {
+  string,
+
+  /** Provisioned compute. */
+  Provisioned: "Provisioned",
+}
+
+@added(Versions.v2026_09_01)
+@doc("A processor family supported by HorizonDB.")
+scalar ComputeProcessorType extends string;
+
+@added(Versions.v2026_09_01)
+@doc("A vCore configuration supported by a HorizonDB processor generation.")
+model ComputeSizeCapability {
+  @doc("The availability status of the vCore configuration.")
+  @visibility(Lifecycle.Read)
+  status: CapabilityStatus;
+
+  @doc("The number of vCores in the configuration.")
+  @visibility(Lifecycle.Read)
+  vCores: int32;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "memoryPerVCoreInMb preserves the HorizonDB VCore terminology in the public wire contract."
+  @doc("The memory in megabytes available for each vCore.")
+  @visibility(Lifecycle.Read)
+  memoryPerVCoreInMb: int64;
+}
+
+@added(Versions.v2026_09_01)
+@doc("The capabilities of a HorizonDB compute model.")
+@discriminator("type")
+model ComputeModelCapability {
+  @doc("The compute model represented by these capabilities.")
+  @visibility(Lifecycle.Read)
+  type: PoolComputeModelType;
+
+  @doc("The availability status of the compute model.")
+  @visibility(Lifecycle.Read)
+  status: CapabilityStatus;
+}
+
+@added(Versions.v2026_09_01)
+@doc("The capabilities of the Provisioned compute model.")
+model ProvisionedComputeModelCapability extends ComputeModelCapability {
+  @doc("The compute model represented by these capabilities.")
+  type: "Provisioned";
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "defaultVCoreCount preserves the HorizonDB VCore terminology in the public wire contract."
+  @doc("The default number of provisioned vCores.")
+  @visibility(Lifecycle.Read)
+  defaultVCoreCount: int32;
+
+  @doc("The supported provisioned compute sizes.")
+  @visibility(Lifecycle.Read)
+  @identifiers(#["vCores"])
+  supportedComputeSizes: ComputeSizeCapability[];
+}
+
+@added(Versions.v2026_09_01)
+@doc("The capabilities of a HorizonDB compute generation.")
+model ComputeGenerationCapability {
+  @doc("The numeric compute generation used when configuring a HorizonDB pool.")
+  @visibility(Lifecycle.Read)
+  computeGeneration: int32;
+
+  @doc("The availability status of the compute generation.")
+  @visibility(Lifecycle.Read)
+  status: CapabilityStatus;
+
+  @doc("The compute models supported by the compute generation.")
+  @visibility(Lifecycle.Read)
+  @identifiers(#["type"])
+  supportedComputeModels: ComputeModelCapability[];
+}
+
+@added(Versions.v2026_09_01)
+@doc("The capabilities of a processor family supported by HorizonDB.")
+model ComputeProcessorCapability {
+  @doc("The name of the processor family.")
+  @visibility(Lifecycle.Read)
+  name: ComputeProcessorType;
+
+  @doc("The availability status of the processor family.")
+  @visibility(Lifecycle.Read)
+  status: CapabilityStatus;
+
+  @doc("The compute generations supported by the processor family.")
+  @visibility(Lifecycle.Read)
+  @identifiers(#["computeGeneration"])
+  supportedGenerations: ComputeGenerationCapability[];
+}
+
+@added(Versions.v2026_09_01)
+@doc("The capabilities of a PostgreSQL major version supported by HorizonDB.")
+model PostgreSqlVersionCapability {
+  @doc("The PostgreSQL major version.")
+  @visibility(Lifecycle.Read)
+  name: PostgreSqlCapabilityVersion;
+
+  @doc("The availability status of the PostgreSQL major version.")
+  @visibility(Lifecycle.Read)
+  status: CapabilityStatus;
+
+  @doc("The PostgreSQL major versions to which this version can be upgraded.")
+  @visibility(Lifecycle.Read)
+  supportedVersionsToUpgrade: PostgreSqlCapabilityVersion[];
+}
+
+@added(Versions.v2026_09_01)
+@doc("A HorizonDB Cluster feature supported in a location.")
+model ClusterFeatureCapability {
+  @doc("The name of the Cluster feature.")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("The availability status of the Cluster feature.")
+  @visibility(Lifecycle.Read)
+  status: CapabilityStatus;
+}
+
+@added(Versions.v2026_09_01)
+@doc("The HorizonDB Cluster capabilities available in a location.")
+model ClusterCapability {
+  @doc("The availability status of HorizonDB Clusters in the region.")
+  @visibility(Lifecycle.Read)
+  status: CapabilityStatus;
+
+  @doc("The PostgreSQL major versions supported by Clusters in the region.")
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  supportedPostgreSqlVersions: PostgreSqlVersionCapability[];
+
+  @doc("Additional Cluster features supported in the region.")
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  supportedFeatures: ClusterFeatureCapability[];
+}
+
+@added(Versions.v2026_09_01)
+@doc("A HorizonDB Pool feature supported in a location.")
+model PoolFeatureCapability {
+  @doc("The name of the Pool feature.")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("The availability status of the Pool feature.")
+  @visibility(Lifecycle.Read)
+  status: CapabilityStatus;
+}
+
+@added(Versions.v2026_09_01)
+@doc("The HorizonDB Pool capabilities available in a location.")
+model PoolCapability {
+  @doc("The availability status of HorizonDB Pools in the region.")
+  @visibility(Lifecycle.Read)
+  status: CapabilityStatus;
+
+  @doc("The processor families and their compute capabilities supported by Pools in the region.")
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  supportedProcessors: ComputeProcessorCapability[];
+
+  @doc("Additional Pool features supported in the region independently of a processor, generation, or compute model.")
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  supportedFeatures: PoolFeatureCapability[];
+}
+
+@added(Versions.v2026_09_01)
+@doc("The HorizonDB capabilities available to a subscription in a location.")
+model LocationCapability {
+  @doc("The Azure region represented by this capability entry.")
+  @visibility(Lifecycle.Read)
+  location: azureLocation;
+
+  @doc("The availability status of HorizonDB in the region.")
+  @visibility(Lifecycle.Read)
+  status: CapabilityStatus;
+
+  @doc("The Cluster capabilities available in the region.")
+  @visibility(Lifecycle.Read)
+  clusterCapabilities: ClusterCapability;
+
+  @doc("The Pool capabilities available in the region, including processor, generation, and compute-model details.")
+  @visibility(Lifecycle.Read)
+  poolCapabilities: PoolCapability;
+}
+
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_09_01)
 @renamedFrom(Versions.v2026_09_01, "PrincipalTypes")
