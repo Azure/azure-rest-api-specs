@@ -25,7 +25,7 @@ These are the global settings for the Azure Device Registry.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2026-11-02
+tag: package-2026-11
 ```
 
 ```yaml
