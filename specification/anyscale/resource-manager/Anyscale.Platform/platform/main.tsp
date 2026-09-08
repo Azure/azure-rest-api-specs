@@ -24,5 +24,7 @@ using Azure.ResourceManager;
 @versioned(Versions)
 namespace Anyscale.Platform;
 
+@@visibility(Azure.Core.Page.nextLink, Lifecycle.Read);
+
 /** Operations interface */
 interface Operations extends Azure.ResourceManager.Operations {}
