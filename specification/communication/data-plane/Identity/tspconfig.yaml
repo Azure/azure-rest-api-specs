@@ -21,11 +21,13 @@ options:
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-communication-identity"
     namespace: "azure.communication.identity"
+    generation-subdir: "_generated"
     flavor: azure
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-communication-identity"
     namespace: com.azure.communication.identity
     service-name: Identity
+    partial-update: true
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/communication-identity-rest"
