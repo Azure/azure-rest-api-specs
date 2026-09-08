@@ -21,6 +21,7 @@ on:
 permissions:
   contents: read
   copilot-requests: write
+  issues: write
   pull-requests: write
 
 jobs:
@@ -267,29 +268,6 @@ jobs:
             --tsp-config-path "$TSP_CONFIG_PATH" \
             --output json | tee "$RUNNER_TEMP/sdk-breaking-change-results/breaking-changes.json"
 
-      - name: Comment SDK breaking changes on pull request
-        uses: actions/github-script@v9
-        env:
-          PR_NUMBER: ${{ github.event.issue.number || inputs.pr_number }}
-          RESULT_PATH: ${{ runner.temp }}/sdk-breaking-change-results/breaking-changes.json
-          SDK_LANGUAGE: ${{ steps.resolve-source.outputs.sdk-language }}
-        with:
-          script: |
-            const fs = await import("node:fs/promises");
-            const pullNumber = Number(process.env.PR_NUMBER);
-            const result = await fs.readFile(process.env.RESULT_PATH, "utf8");
-            const title = `## SDK Breaking changes for ${process.env.SDK_LANGUAGE}`;
-            const maxResultLength = 60000;
-            const displayedResult =
-              result.length <= maxResultLength
-                ? result
-                : `${result.slice(0, maxResultLength)}\n\n... Result truncated. See the workflow artifact for the complete output.`;
-            await github.rest.issues.createComment({
-              ...context.repo,
-              issue_number: pullNumber,
-              body: `${title}\n\n\`\`\`json\n${displayedResult}\n\`\`\``,
-            });
-
       - name: Publish result summary
         if: always()
         shell: bash
@@ -309,6 +287,7 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload SDK analysis results
+        id: upload-results
         if: always()
         uses: actions/upload-artifact@v7
         with:
@@ -316,3 +295,62 @@ jobs:
           path: ${{ runner.temp }}/sdk-breaking-change-results
           if-no-files-found: warn
           retention-days: 7
+
+      - name: Surface SDK breaking changes on pull request
+        if: success()
+        uses: actions/github-script@v9
+        env:
+          ARTIFACT_URL: ${{ steps.upload-results.outputs.artifact-url }}
+          PR_NUMBER: ${{ github.event.issue.number || inputs.pr_number }}
+          RESULT_PATH: ${{ runner.temp }}/sdk-breaking-change-results/breaking-changes.json
+          SDK_LANGUAGE: ${{ steps.resolve-source.outputs.sdk-language }}
+          TRIGGER_NAME: ${{ github.event_name }}
+        with:
+          script: |
+            const fs = await import("node:fs/promises");
+            const pullNumber = Number(process.env.PR_NUMBER);
+            const response = JSON.parse(await fs.readFile(process.env.RESULT_PATH, "utf8"));
+            const changes = response?.result?.breakingChanges ?? [];
+            const checkboxes = changes.length
+              ? changes.map((change) => {
+                  const text = String(change.breakingChange ?? change)
+                    .trim()
+                    .replaceAll("\r", "")
+                    .replaceAll("\n", "\n  ");
+                  return `- [ ] ${text}`;
+                })
+              : ["- [x] No SDK breaking changes detected."];
+
+            if (!process.env.ARTIFACT_URL) {
+              throw new Error("SDK breaking-change result artifact URL was not produced.");
+            }
+            const report = [
+              `## SDK Breaking changes for ${process.env.SDK_LANGUAGE}`,
+              "",
+              ...checkboxes,
+              "",
+              `[SDK breaking change details](${process.env.ARTIFACT_URL})`,
+            ].join("\n");
+
+            if (process.env.TRIGGER_NAME === "issue_comment") {
+              const originalBody = context.payload.comment.body.trimEnd();
+              try {
+                await github.rest.issues.updateComment({
+                  ...context.repo,
+                  comment_id: context.payload.comment.id,
+                  body: `${originalBody}\n\n${report}`,
+                });
+                return;
+              } catch (error) {
+                if (error.status !== 403) throw error;
+                core.warning(
+                  "The workflow token cannot edit a comment authored by another user; posting the result as a new PR comment instead.",
+                );
+              }
+            }
+
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: pullNumber,
+              body: report,
+            });
