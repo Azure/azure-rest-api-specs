@@ -35,6 +35,7 @@ union AttestationState {
 }
 
 @doc("Enum for the requirement status of the resource in the goal.")
+@removed(Versions.v2026_08_31_preview)
 union RequirementSelected {
   string,
 
@@ -54,6 +55,7 @@ union GoalAssignmentType {
 }
 
 @doc("Supported type of goal.")
+@removed(Versions.v2026_08_31_preview)
 union GoalType {
   string,
 
