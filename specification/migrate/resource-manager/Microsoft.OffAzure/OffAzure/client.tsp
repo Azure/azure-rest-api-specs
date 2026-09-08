@@ -51,28 +51,33 @@ using Microsoft.OffAzure;
 
 // Resolve C# analyzer model suffix rules.
 @@clientName(
+  DependencyMapServiceMapextensionsDependencyMapRequestFilters,
+  "MigrationDiscoveryDependencyMapServiceMapExtensionsDependencyMapRequestFilters",
+  "csharp"
+);
+@@clientName(
   DependencyMapServiceMapextensionsClientGroupMembersRequest,
-  "MigrationDiscoveryDependencyMapServiceMapextensionsClientGroupMembersRequestContent",
+  "MigrationDiscoveryDependencyMapServiceMapExtensionsClientGroupMembersContent",
   "csharp"
 );
 @@clientName(
   DependencyMapServiceMapextensionsExportDependenciesRequest,
-  "MigrationDiscoveryDependencyMapServiceMapextensionsExportDependenciesRequestContent",
+  "MigrationDiscoveryDependencyMapServiceMapExtensionsExportDependenciesContent",
   "csharp"
 );
 @@clientName(
   DependencyMapServiceMapextensionsScopeMapRequest,
-  "MigrationDiscoveryDependencyMapServiceMapextensionsScopeMapRequestContent",
+  "MigrationDiscoveryDependencyMapServiceMapExtensionsScopeMapContent",
   "csharp"
 );
 @@clientName(
   DependencyMapServiceMapextensionsServerGroupMembersRequest,
-  "MigrationDiscoveryDependencyMapServiceMapextensionsServerGroupMembersRequestContent",
+  "MigrationDiscoveryDependencyMapServiceMapExtensionsServerGroupMembersContent",
   "csharp"
 );
 @@clientName(
   DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest,
-  "MigrationDiscoveryDependencyMapServiceMapextensionsSingleMachineDetailedMapRequestContent",
+  "MigrationDiscoveryDependencyMapServiceMapExtensionsSingleMachineDetailedMapContent",
   "csharp"
 );
 @@clientName(ErrorSummaryRequest, "MigrationDiscoveryErrorSummaryRequestContent", "csharp");
@@ -86,7 +91,72 @@ using Microsoft.OffAzure;
 @@clientName(ExportWebAppsRequest, "MigrationDiscoveryExportWebAppsRequestContent", "csharp");
 @@clientName(FileMetaData, "FileMetadata", "csharp");
 @@clientName(MachineMetadataCollection, "MigrationDiscoveryMachineMetadataList", "csharp");
+@@clientName(ProxySiteRefreshBody, "ProxySiteRefreshContent", "csharp");
 @@clientName(SasUriResponse, "MigrationDiscoverySasUriResult", "csharp");
 @@clientName(ServerSiteUsageResponse, "MigrationDiscoveryServerSiteUsageResult", "csharp");
 @@clientName(SiteHealthSummaryCollection, "MigrationDiscoverySiteHealthSummaryList", "csharp");
+@@clientName(SQLInventoryImportBody, "SqlInventoryImportContent", "csharp");
+@@clientName(SqlSiteRefreshBody, "SqlSiteRefreshContent", "csharp");
 @@clientName(WebAppPropertiesCollection, "MigrationDiscoveryWebAppPropertiesList", "csharp");
+
+// Resolve C# status member spelling without changing wire values.
+@@clientName(
+  ApplicationDiscoveryScopeStatus.DiscoveryPartiallySucceded,
+  "DiscoveryPartiallySucceeded",
+  "csharp"
+);
+@@clientName(
+  ApplicationDiscoveryScopeStatus.DiscoverySucceededAtleastOnce,
+  "DiscoverySucceededAtLeastOnce",
+  "csharp"
+);
+@@clientName(
+  DependencyMapDiscoveryScopeStatus.DiscoveryPartiallySucceded,
+  "DiscoveryPartiallySucceeded",
+  "csharp"
+);
+@@clientName(
+  DependencyMapDiscoveryScopeStatus.DiscoverySucceededAtleastOnce,
+  "DiscoverySucceededAtLeastOnce",
+  "csharp"
+);
+@@clientName(
+  DiscoveryScopeStatus.DiscoveryPartiallySucceded,
+  "DiscoveryPartiallySucceeded",
+  "csharp"
+);
+@@clientName(
+  DiscoveryScopeStatus.DiscoverySucceededAtleastOnce,
+  "DiscoverySucceededAtLeastOnce",
+  "csharp"
+);
+@@clientName(
+  ShallowDiscoveryStatus.DiscoveryPartiallySucceded,
+  "DiscoveryPartiallySucceeded",
+  "csharp"
+);
+@@clientName(
+  ShallowDiscoveryStatus.DiscoverySucceededAtleastOnce,
+  "DiscoverySucceededAtLeastOnce",
+  "csharp"
+);
+@@clientName(
+  SQLDiscoveryScopeStatus.DiscoveryPartiallySucceded,
+  "DiscoveryPartiallySucceeded",
+  "csharp"
+);
+@@clientName(
+  SQLDiscoveryScopeStatus.DiscoverySucceededAtleastOnce,
+  "DiscoverySucceededAtLeastOnce",
+  "csharp"
+);
+@@clientName(
+  StaticDiscoveryScopeStatus.DiscoveryPartiallySucceded,
+  "DiscoveryPartiallySucceeded",
+  "csharp"
+);
+@@clientName(
+  StaticDiscoveryScopeStatus.DiscoverySucceededAtleastOnce,
+  "DiscoverySucceededAtLeastOnce",
+  "csharp"
+);
