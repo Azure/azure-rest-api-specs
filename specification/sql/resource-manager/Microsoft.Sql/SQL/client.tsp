@@ -665,22 +665,17 @@ using Microsoft.Sql;
 );
 
 @@alternateType(
-  DatabaseIdentity.userAssignedIdentities,
-  Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity>,
+  DatabaseUserIdentity,
+  Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
   "csharp"
 );
 @@alternateType(
-  JobAgentIdentity.userAssignedIdentities,
-  Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity>,
+  JobAgentUserAssignedIdentity,
+  Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
   "csharp"
 );
 @@alternateType(
-  ManagedInstance.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp"
-);
-@@alternateType(
-  Server.identity,
+  ResourceIdentity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
