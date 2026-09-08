@@ -13,7 +13,7 @@ namespace Microsoft.HorizonDb;
 
 @added(Versions.v2026_09_01)
 @doc("A service-managed node allocated to a HorizonDB pool.")
-@parentResource(HorizonDbPool)
+@parentResource(Pool)
 model Node is Azure.ResourceManager.ProxyResource<NodeProperties> {
   ...ResourceNameParameter<
     Resource = Node,

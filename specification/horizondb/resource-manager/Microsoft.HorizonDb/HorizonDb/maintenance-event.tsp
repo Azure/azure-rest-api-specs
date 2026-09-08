@@ -13,7 +13,7 @@ namespace Microsoft.HorizonDb;
 
 @added(Versions.v2026_09_01)
 @doc("Represents a maintenance event for a HorizonDB pool.")
-@parentResource(HorizonDbPool)
+@parentResource(Pool)
 model MaintenanceEvent
   is Azure.ResourceManager.ProxyResource<MaintenanceEventProperties> {
   @doc("The identifier of the maintenance event.")

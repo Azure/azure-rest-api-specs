@@ -1,12 +1,24 @@
 {
-  "operationId": "Pools_Get",
-  "title": "Get a HorizonDB pool",
+  "operationId": "Pools_Update",
+  "title": "Update a HorizonDB pool",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "exampleresourcegroup",
     "clusterName": "examplecluster",
     "poolName": "examplepool",
-    "api-version": "2026-09-01"
+    "api-version": "2026-09-01",
+    "properties": {
+      "properties": {
+        "computeModel": {
+          "vCores": 8
+        },
+        "desiredNodeCount": 3,
+        "parameterGroup": {
+          "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/parameterGroups/exampleparametergroup",
+          "applyMethod": "PendingReboot"
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -15,24 +27,24 @@
         "name": "examplepool",
         "type": "Microsoft.HorizonDb/clusters/pools",
         "properties": {
-          "state": "Ready",
+          "state": "Updating",
           "computeModel": {
             "type": "Provisioned",
             "computeProcessor": "Intel",
             "computeGeneration": 1,
-            "vCores": 4
+            "vCores": 8
           },
-          "desiredNodeCount": 2,
+          "desiredNodeCount": 3,
           "allocatedNodeCount": 2,
           "parameterGroup": {
             "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/parameterGroups/exampleparametergroup",
-            "applyMethod": "Immediate",
-            "syncStatus": "InSync"
+            "applyMethod": "PendingReboot",
+            "syncStatus": "PendingReboot"
           },
           "scheduledMaintenance": {
             "maintenanceManagementType": "System"
           },
-          "provisioningState": "Succeeded"
+          "provisioningState": "InProgress"
         }
       }
     }

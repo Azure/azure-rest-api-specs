@@ -1,5 +1,5 @@
 {
-  "operationId": "HorizonDbPools_Get",
+  "operationId": "Pools_Get",
   "title": "Get a HorizonDB pool",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
@@ -15,9 +15,23 @@
         "name": "examplepool",
         "type": "Microsoft.HorizonDb/clusters/pools",
         "properties": {
-          "location": "westus2",
-          "state": "Succeeded",
-          "replicaCount": 2,
+          "state": "Ready",
+          "computeModel": {
+            "type": "Provisioned",
+            "computeProcessor": "Intel",
+            "computeGeneration": 1,
+            "vCores": 4
+          },
+          "desiredNodeCount": 2,
+          "allocatedNodeCount": 2,
+          "parameterGroup": {
+            "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/parameterGroups/exampleparametergroup",
+            "applyMethod": "Immediate",
+            "syncStatus": "InSync"
+          },
+          "scheduledMaintenance": {
+            "maintenanceManagementType": "System"
+          },
           "provisioningState": "Succeeded"
         }
       }

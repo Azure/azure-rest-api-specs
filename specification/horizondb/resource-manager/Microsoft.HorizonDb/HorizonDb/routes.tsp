@@ -132,13 +132,107 @@ interface Clusters {
   >;
 }
 
+@renamedFrom(Versions.v2026_09_01, "HorizonDbPools")
 @armResourceOperations
-interface HorizonDbPools {
+interface Pools {
   @doc("Gets information about a HorizonDB pool.")
-  get is ArmResourceRead<HorizonDbPool>;
+  get is ArmResourceRead<Pool>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The AutoRest emitter infers final-state-via from polling metadata. Marking this standard ARM PUT as an LRO without polling decorators emits x-ms-long-running-operation while intentionally omitting x-ms-long-running-operation-options."
+  @added(Versions.v2026_09_01)
+  @doc("Creates a new HorizonDB pool or updates an existing pool, including its desired node allocation, compute model, or associated parameter group. A pool name can be the same as its parent cluster name. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically uses it to host the cluster's read-write node when an eligible node is available. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. Every pool must be associated with a parameter group, so parameterGroup, parameterGroupResourceId, and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated before the resource is changed. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
+  @sharedRoute
+  @Azure.ClientGenerator.Core.Legacy.markAsLro
+  @autoRoute
+  @armResourceCreateOrUpdate(Pool)
+  @put
+  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    ResourceInstanceParameters<Pool>,
+    Pool,
+    ArmResourceUpdatedResponse<Pool> | PoolCreateAcceptedResponse,
+    ErrorResponse
+  >;
+
+  @added(Versions.v2026_09_01)
+  @doc("Updates an existing HorizonDB pool, including its desired node allocation, selected compute model properties, the compute model type, or its associated parameter group. When parameterGroup is supplied, both parameterGroupResourceId and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated against the recursively merged configuration. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
+  update is ArmCustomPatchAsync<Pool, PoolForPatchUpdate>;
+
+  @added(Versions.v2026_09_01)
+  @doc("Deletes a HorizonDB pool together with the Pool-scoped Endpoint whose associatedResourceId identifies that Pool and all FirewallRule children of that Endpoint. The Endpoint cannot outlive or be deleted independently from its Pool.")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Pool,
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
+  >;
 
   @doc("Lists all HorizonDB pools in a cluster.")
-  list is ArmResourceListByParent<HorizonDbPool>;
+  list is ArmResourceListByParent<Pool>;
+
+  @added(Versions.v2026_09_01)
+  @doc("Starts a stopped or shut down HorizonDB pool. Power operations are supported only at pool scope in this API version; there is no cluster-level start action. When the pool transitions from Stopped or Shutdown to Ready, completion applies pending dynamic and static parameter changes. When the pool is already Ready, the operation succeeds as a true idempotent no-op and leaves pending parameter changes pending. The operation is allowed when allocatedNodeCount is 0. After the Pool is running, its Pool-scoped ReadOnly Endpoint routes only when at least one allocated node is not currently playing the read-write role. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.")
+  @action("start")
+  start is ArmResourceActionAsyncBase<
+    Pool,
+    void,
+    | ArmAcceptedLroResponse<
+        "Resource operation accepted.",
+        LroHeaders = ArmLroLocationHeader &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader
+      >
+    | ArmResponse<Pool>,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Pool>
+  >;
+
+  @added(Versions.v2026_09_01)
+  @doc("Stops a running HorizonDB pool without deallocating compute. Power operations are supported only at pool scope in this API version; there is no cluster-level stop action. The operation succeeds as an idempotent no-op when the pool is already Stopped. It is allowed when allocatedNodeCount is 0. The Pool-scoped ReadOnly Endpoint remains discoverable but has no routing destination while the Pool is Stopped. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.")
+  @action("stop")
+  stop is ArmResourceActionAsyncBase<
+    Pool,
+    void,
+    | ArmAcceptedLroResponse<
+        "Resource operation accepted.",
+        LroHeaders = ArmLroLocationHeader &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader
+      >
+    | ArmResponse<Pool>,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Pool>
+  >;
+
+  @added(Versions.v2026_09_01)
+  @doc("Shuts down a running or stopped HorizonDB pool and deallocates compute. Power operations are supported only at pool scope in this API version; there is no cluster-level shutdown action. The operation succeeds as an idempotent no-op when the pool is already Shutdown. It is allowed when allocatedNodeCount is 0. The Pool-scoped ReadOnly Endpoint remains discoverable but has no routing destination while the Pool is Shutdown. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.")
+  @action("shutdown")
+  shutdown is ArmResourceActionAsyncBase<
+    Pool,
+    void,
+    | ArmAcceptedLroResponse<
+        "Resource operation accepted.",
+        LroHeaders = ArmLroLocationHeader &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader
+      >
+    | ArmResponse<Pool>,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Pool>
+  >;
+
+  @added(Versions.v2026_09_01)
+  @doc("Restarts the PostgreSQL container on all allocated nodes in a ready HorizonDB pool and applies pending dynamic and static parameter changes. Power operations are supported only at pool scope in this API version; there is no cluster-level restart action. When allocatedNodeCount is 0, the operation succeeds without restarting any nodes, pending changes are considered applied, parameterGroup.syncStatus becomes InSync, and the resulting configuration applies to nodes allocated later. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.")
+  @action("restart")
+  restart is ArmResourceActionAsyncBase<
+    Pool,
+    void,
+    | ArmAcceptedLroResponse<
+        "Resource operation accepted.",
+        LroHeaders = ArmLroLocationHeader &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader
+      >
+    | ArmResponse<Pool>,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Pool>
+  >;
 }
 
 @armResourceOperations

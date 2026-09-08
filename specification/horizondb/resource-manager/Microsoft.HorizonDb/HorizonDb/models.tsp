@@ -35,24 +35,50 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
+@doc("A HorizonDB pool name used before allowing one-character names.")
+@pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
+@minLength(1)
+@maxLength(63)
+scalar LegacyPoolName extends string;
+
+@doc("A lowercase enforced name as a HorizonDB pool name.")
+@pattern("^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$")
+@minLength(1)
+@maxLength(63)
+scalar PoolName extends string;
+
+@added(Versions.v2026_09_01)
+@doc("A provisioned HorizonDB pool compute capacity in vCores, from 1 through 192.")
+@minValue(1)
+@maxValue(192)
+scalar ProvisionedPoolVCores extends int32;
+
+@added(Versions.v2026_09_01)
+@doc("A HorizonDB pool node count, from 0 through 16.")
+@minValue(0)
+@maxValue(16)
+scalar PoolNodeCount extends int32;
+
+@renamedFrom(Versions.v2026_09_01, "HorizonDbPool")
 @doc("Represents the HorizonDB pool.")
 @parentResource(Cluster)
-model HorizonDbPool
-  is Azure.ResourceManager.ProxyResource<HorizonDbPoolProperties> {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
+model Pool is Azure.ResourceManager.ProxyResource<PoolProperties> {
   @doc("The name of the HorizonDB pool.")
-  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
-  @minLength(1)
-  @maxLength(63)
   @key("poolName")
   @path
   @segment("pools")
-  name: string;
+  @typeChangedFrom(Versions.v2026_09_01, LegacyPoolName)
+  name: PoolName;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Tags are valid in v2026-01-20-preview and removed in v2026-09-01"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> is acceptable for tags in this version"
+  @removed(Versions.v2026_09_01)
+  @doc("Resource tags.")
+  tags?: Record<string>;
 }
 
 @doc("Represents the HorizonDB replica.")
-@parentResource(HorizonDbPool)
+@parentResource(Pool)
 model HorizonDbReplica
   is Azure.ResourceManager.ProxyResource<HorizonDbReplicaProperties> {
   @doc("The name of the HorizonDB replica.")
@@ -73,7 +99,7 @@ scalar DottedDecimalIpv4Address extends string;
 @removed(Versions.v2026_09_01)
 @renamedFrom(Versions.v2026_09_01, "HorizonDbFirewallRule")
 @doc("Represents the HorizonDB firewall rule.")
-@parentResource(HorizonDbPool)
+@parentResource(Pool)
 model LegacyHorizonDbFirewallRule
   is Azure.ResourceManager.ProxyResource<FirewallRuleProperties> {
   @doc("The name of the HorizonDB firewall rule.")
@@ -460,13 +486,34 @@ scalar HorizonDbClusterResourceId
   ]>;
 
 @added(Versions.v2026_09_01)
-@doc("An Azure resource ID that identifies a HorizonDB pool.")
+@doc("The Azure resource ID of a HorizonDB pool.")
 scalar PoolResourceId
   extends armResourceIdentifier<[
     {
       type: "Microsoft.HorizonDb/clusters/pools",
     }
   ]>;
+
+@added(Versions.v2026_09_01)
+@doc("Long-running operation headers returned when asynchronous HorizonDB pool creation is accepted.")
+model PoolCreateLroHeaders {
+  @doc("A link to the status monitor for the pool creation operation.")
+  @header("Azure-AsyncOperation")
+  azureAsyncOperation?: string;
+
+  ...Azure.Core.Foundations.RetryAfterHeader;
+}
+
+@added(Versions.v2026_09_01)
+@doc("The response returned when asynchronous HorizonDB pool creation is accepted.")
+model PoolCreateAcceptedResponse {
+  ...CreatedResponse;
+  ...PoolCreateLroHeaders;
+
+  @doc("The HorizonDB pool with a non-terminal provisioning state.")
+  @bodyRoot
+  body: Pool;
+}
 
 @added(Versions.v2026_09_01)
 @doc("The readiness state for automatic and caller-requested failover.")
@@ -556,33 +603,191 @@ model ClusterForPatchUpdate {
 @@added(Cluster.identity, Versions.v2026_05_01_preview);
 @@added(ClusterForPatchUpdate.identity, Versions.v2026_05_01_preview);
 
+@renamedFrom(Versions.v2026_09_01, "HorizonDbPoolProperties")
 @doc("Properties of a HorizonDB pool.")
-model HorizonDbPoolProperties {
+model PoolProperties {
   @doc("The location of the HorizonDB pool.")
+  @removed(Versions.v2026_09_01)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: azureLocation;
 
-  @removed(Versions.v2026_09_01)
+  @typeChangedFrom(Versions.v2026_09_01, State)
   @doc("Current state of the pool.")
   @visibility(Lifecycle.Read)
-  state?: State;
+  state?: PoolState;
 
+  @removed(Versions.v2026_09_01)
   @doc("Number of replicas in the pool.")
   @visibility(Lifecycle.Read)
   replicaCount?: int32;
 
+  @removed(Versions.v2026_09_01)
   @doc("The version of the HorizonDB pool.")
   @visibility(Lifecycle.Read)
   version?: string;
 
+  @removed(Versions.v2026_09_01)
   @doc("The create mode for the pool.")
   @visibility(Lifecycle.Read)
   createMode?: CreateModePool;
+
+  @added(Versions.v2026_09_01)
+  @doc("The compute model for the HorizonDB pool.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  computeModel?: PoolComputeModel;
+
+  @added(Versions.v2026_09_01)
+  @doc("The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource and its name, compute configuration, maintenance configuration, and parameter-group association, but allocates no nodes; it does not delete the pool. A request that would leave a pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  desiredNodeCount?: PoolNodeCount;
+
+  @added(Versions.v2026_09_01)
+  @doc("The number of nodes currently allocated and assigned to the pool, regardless of their operational state or the operational state of the pool.")
+  @visibility(Lifecycle.Read)
+  allocatedNodeCount: PoolNodeCount;
+
+  @added(Versions.v2026_09_01)
+  @doc("The required default or custom parameter group associated with the pool.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  parameterGroup: PoolParameterGroupReference;
+
+  @added(Versions.v2026_09_01)
+  @doc("The scheduled maintenance configuration for the pool. The properties available depend on the selected maintenance management type.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  scheduledMaintenance?: ScheduledMaintenanceProperties;
 
   @doc("The provisioning state of the pool.")
   @typeChangedFrom(Versions.v2026_09_01, LegacyProvisioningState)
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+@renamedFrom(Versions.v2026_09_01, "HorizonDbPoolPropertiesForPatchUpdate")
+@doc("Properties of a HorizonDB pool for update operations.")
+model PoolPropertiesForPatchUpdate {
+  @added(Versions.v2026_09_01)
+  @doc("The compute model properties to update. Omitted properties preserve their current values. To change the compute model type, supply the complete target compute model, including type, computeProcessor, computeGeneration, and all properties required by the target type.")
+  @visibility(Lifecycle.Update)
+  computeModel?: PoolComputeModelForPatchUpdate;
+
+  @added(Versions.v2026_09_01)
+  @doc("The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource and its configuration but allocates no nodes; it does not delete the pool. Omission preserves the current target. A request that would leave a pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
+  @visibility(Lifecycle.Update)
+  desiredNodeCount?: PoolNodeCount;
+
+  @added(Versions.v2026_09_01)
+  @doc("The default or custom parameter group to associate with the pool. Omission preserves the current association.")
+  @visibility(Lifecycle.Update)
+  parameterGroup?: PoolParameterGroupReferenceForPatchUpdate;
+
+  @added(Versions.v2026_09_01)
+  @doc("The scheduled maintenance configuration to update for the pool. When supplied, the complete configuration for the selected maintenance management type is required. Omission preserves the current configuration.")
+  @visibility(Lifecycle.Update)
+  scheduledMaintenance?: ScheduledMaintenanceProperties;
+}
+
+@added(Versions.v2026_09_01)
+@doc("A reference to the default or custom parameter group associated with a HorizonDB pool.")
+model PoolParameterGroupReference {
+  @doc("The Azure resource ID of the default or custom parameter group.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  parameterGroupResourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.HorizonDb/parameterGroups";
+    },
+    {
+      type: "Microsoft.HorizonDb/locations/parameterGroups";
+    }
+  ]>;
+
+  @doc("Determines when dynamic parameter changes from the associated parameter group become effective. Static parameter changes always require a pool restart, regardless of this value.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  applyMethod: ParameterApplyMethod;
+
+  @doc("The synchronization status between the pool and its parameter group.")
+  @visibility(Lifecycle.Read)
+  syncStatus?: ParameterGroupSyncStatus;
+}
+
+@added(Versions.v2026_09_01)
+@doc("A parameter group reference for updating a HorizonDB pool.")
+model PoolParameterGroupReferenceForPatchUpdate {
+  @doc("The Azure resource ID of the default or custom parameter group to associate with the pool.")
+  @visibility(Lifecycle.Update)
+  parameterGroupResourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.HorizonDb/parameterGroups";
+    },
+    {
+      type: "Microsoft.HorizonDb/locations/parameterGroups";
+    }
+  ]>;
+
+  @doc("Determines when dynamic parameter changes from the associated parameter group become effective. Static parameter changes always require a pool restart, regardless of this value.")
+  @visibility(Lifecycle.Update)
+  applyMethod: ParameterApplyMethod;
+}
+
+@renamedFrom(Versions.v2026_09_01, "HorizonDbPoolForPatchUpdate")
+@doc("HorizonDB pool for update operations.")
+model PoolForPatchUpdate {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> is acceptable for tags in this version"
+  @removed(Versions.v2026_09_01)
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The properties that can be updated for a HorizonDB pool.")
+  properties?: PoolPropertiesForPatchUpdate;
+}
+
+@added(Versions.v2026_09_01)
+@doc("The compute model for a HorizonDB pool.")
+@discriminator("type")
+model PoolComputeModel {
+  @doc("The type of compute model.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  type: PoolComputeModelType;
+
+  @doc("The processor type for the compute model.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  computeProcessor?: ComputeProcessorType;
+
+  @doc("The compute generation for the compute model.")
+  @minValue(1)
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  computeGeneration?: int32;
+}
+
+@added(Versions.v2026_09_01)
+@doc("A provisioned compute model for a HorizonDB pool.")
+model ProvisionedHorizonDbPoolComputeModel extends PoolComputeModel {
+  @doc("The type of compute model.")
+  type: "Provisioned";
+
+  @doc("The number of provisioned vCores. Allowed values are 1 through 192.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  vCores: ProvisionedPoolVCores;
+}
+
+@added(Versions.v2026_09_01)
+@doc("The compute model properties of a HorizonDB pool that can be updated. The object is recursively mergeable: omitted properties preserve their current values. Properties that do not apply to the current or target compute model type are rejected. When type changes, the request must include the complete target compute model. Subtype-specific constraints are validated against the effective merged configuration; invalid requests are rejected without changing the resource.")
+model PoolComputeModelForPatchUpdate {
+  @doc("The compute model type. Omit this property to retain the current type. Resubmitting the current type succeeds as an idempotent no-op. To change the type, supply all common properties and all properties required by the target type.")
+  @visibility(Lifecycle.Update)
+  type?: PoolComputeModelType;
+
+  @doc("The processor type for the compute model. Omission preserves the current processor type.")
+  @visibility(Lifecycle.Update)
+  computeProcessor?: ComputeProcessorType;
+
+  @doc("The compute generation for the compute model. Omission preserves the current compute generation.")
+  @minValue(1)
+  @visibility(Lifecycle.Update)
+  computeGeneration?: int32;
+
+  @doc("The number of provisioned vCores. Allowed values are 1 through 192. This property applies only to a Provisioned compute model. Omission preserves the current value.")
+  @visibility(Lifecycle.Update)
+  vCores?: ProvisionedPoolVCores;
 }
 
 @doc("Network properties.")
@@ -1025,17 +1230,25 @@ union PostgreSqlCapabilityVersion {
 }
 
 @added(Versions.v2026_09_01)
-@doc("A compute model supported by a HorizonDB pool.")
+@doc("The compute model type.")
 union PoolComputeModelType {
   string,
 
-  /** Provisioned compute. */
+  /** Provisioned compute model */
   Provisioned: "Provisioned",
 }
 
 @added(Versions.v2026_09_01)
-@doc("A processor family supported by HorizonDB.")
-scalar ComputeProcessorType extends string;
+@doc("The compute processor type.")
+union ComputeProcessorType {
+  string,
+
+  /** Intel processor */
+  Intel: "Intel",
+
+  /** AMD processor */
+  AMD: "AMD",
+}
 
 @added(Versions.v2026_09_01)
 @doc("A vCore configuration supported by a HorizonDB processor generation.")
@@ -1288,6 +1501,45 @@ union CreateModePool {
 
   /** Update an existing pool */
   Update: "Update",
+}
+
+@added(Versions.v2026_09_01)
+@doc("Current state of a HorizonDB pool.")
+union PoolState {
+  string,
+
+  /** Is ready and operational */
+  Ready: "Ready",
+
+  /** Is provisioning */
+  Provisioning: "Provisioning",
+
+  /** Is being deleted */
+  Deleting: "Deleting",
+
+  /** Is inaccessible */
+  Inaccessible: "Inaccessible",
+
+  /** Is being updated */
+  Updating: "Updating",
+
+  /** Is starting up */
+  Starting: "Starting",
+
+  /** Is stopping */
+  Stopping: "Stopping",
+
+  /** Is stopped */
+  Stopped: "Stopped",
+
+  /** Is restarting */
+  Restarting: "Restarting",
+
+  /** Is shutting down */
+  ShuttingDown: "ShuttingDown",
+
+  /** Is shut down */
+  Shutdown: "Shutdown",
 }
 
 @renamedFrom(Versions.v2026_09_01, "ZonePlacementPolicy")

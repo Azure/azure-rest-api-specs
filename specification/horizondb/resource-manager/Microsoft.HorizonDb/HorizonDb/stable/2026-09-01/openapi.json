@@ -46,7 +46,7 @@
       "name": "Clusters"
     },
     {
-      "name": "HorizonDbPools"
+      "name": "Pools"
     },
     {
       "name": "HorizonDbReplicas"
@@ -3275,9 +3275,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools": {
       "get": {
-        "operationId": "HorizonDbPools_List",
+        "operationId": "Pools_List",
         "tags": [
-          "HorizonDbPools"
+          "Pools"
         ],
         "description": "Lists all HorizonDB pools in a cluster.",
         "parameters": [
@@ -3305,7 +3305,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbPoolListResult"
+              "$ref": "#/definitions/PoolListResult"
             }
           },
           "default": {
@@ -3327,9 +3327,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}": {
       "get": {
-        "operationId": "HorizonDbPools_Get",
+        "operationId": "Pools_Get",
         "tags": [
-          "HorizonDbPools"
+          "Pools"
         ],
         "description": "Gets information about a HorizonDB pool.",
         "parameters": [
@@ -3360,14 +3360,14 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbPool"
+              "$ref": "#/definitions/Pool"
             }
           },
           "default": {
@@ -3382,6 +3382,252 @@
             "$ref": "./examples/Pools_Get.json"
           }
         }
+      },
+      "put": {
+        "operationId": "Pools_CreateOrUpdate",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Creates a new HorizonDB pool or updates an existing pool, including its desired node allocation, compute model, or associated parameter group. A pool name can be the same as its parent cluster name. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically uses it to host the cluster's read-write node when an eligible node is available. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. Every pool must be associated with a parameter group, so parameterGroup, parameterGroupResourceId, and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated before the resource is changed. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDB pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Pool' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "201": {
+            "description": "The response returned when asynchronous HorizonDB pool creation is accepted.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor for the pool creation operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a HorizonDB pool": {
+            "$ref": "./examples/Pools_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Pools_Update",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Updates an existing HorizonDB pool, including its desired node allocation, selected compute model properties, the compute model type, or its associated parameter group. When parameterGroup is supplied, both parameterGroupResourceId and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated against the recursively merged configuration. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDB pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PoolForPatchUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a HorizonDB pool": {
+            "$ref": "./examples/Pools_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Pool"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Pools_Delete",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Deletes a HorizonDB pool together with the Pool-scoped Endpoint whose associatedResourceId identifies that Pool and all FirewallRule children of that Endpoint. The Endpoint cannot outlive or be deleted independently from its Pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDB pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a HorizonDB pool": {
+            "$ref": "./examples/Pools_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/maintenanceEvents": {
@@ -3419,7 +3665,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "maintenanceStatus",
@@ -3508,7 +3754,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "maintenanceEventId",
@@ -3577,7 +3823,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "maintenanceEventId",
@@ -3670,7 +3916,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "maintenanceEventId",
@@ -3772,7 +4018,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -3834,7 +4080,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "nodeName",
@@ -3900,7 +4146,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -3962,7 +4208,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "replicaName",
@@ -4029,7 +4275,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "replicaName",
@@ -4127,7 +4373,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "replicaName",
@@ -4222,7 +4468,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "replicaName",
@@ -4268,6 +4514,330 @@
         "x-ms-examples": {
           "Delete a HorizonDB replica": {
             "$ref": "./examples/Replicas_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/restart": {
+      "post": {
+        "operationId": "Pools_Restart",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Restarts the PostgreSQL container on all allocated nodes in a ready HorizonDB pool and applies pending dynamic and static parameter changes. Power operations are supported only at pool scope in this API version; there is no cluster-level restart action. When allocatedNodeCount is 0, the operation succeeds without restarting any nodes, pending changes are considered applied, parameterGroup.syncStatus becomes InSync, and the resulting configuration applies to nodes allocated later. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDB pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restart a HorizonDB pool": {
+            "$ref": "./examples/Pools_Restart.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/shutdown": {
+      "post": {
+        "operationId": "Pools_Shutdown",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Shuts down a running or stopped HorizonDB pool and deallocates compute. Power operations are supported only at pool scope in this API version; there is no cluster-level shutdown action. The operation succeeds as an idempotent no-op when the pool is already Shutdown. It is allowed when allocatedNodeCount is 0. The Pool-scoped ReadOnly Endpoint remains discoverable but has no routing destination while the Pool is Shutdown. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDB pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Shut down a HorizonDB pool": {
+            "$ref": "./examples/Pools_Shutdown.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/start": {
+      "post": {
+        "operationId": "Pools_Start",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Starts a stopped or shut down HorizonDB pool. Power operations are supported only at pool scope in this API version; there is no cluster-level start action. When the pool transitions from Stopped or Shutdown to Ready, completion applies pending dynamic and static parameter changes. When the pool is already Ready, the operation succeeds as a true idempotent no-op and leaves pending parameter changes pending. The operation is allowed when allocatedNodeCount is 0. After the Pool is running, its Pool-scoped ReadOnly Endpoint routes only when at least one allocated node is not currently playing the read-write role. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDB pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start a HorizonDB pool": {
+            "$ref": "./examples/Pools_Start.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/stop": {
+      "post": {
+        "operationId": "Pools_Stop",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Stops a running HorizonDB pool without deallocating compute. Power operations are supported only at pool scope in this API version; there is no cluster-level stop action. The operation succeeds as an idempotent no-op when the pool is already Stopped. It is allowed when allocatedNodeCount is 0. The Pool-scoped ReadOnly Endpoint remains discoverable but has no routing destination while the Pool is Stopped. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDB pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop a HorizonDB pool": {
+            "$ref": "./examples/Pools_Stop.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6925,7 +7495,27 @@
     },
     "ComputeProcessorType": {
       "type": "string",
-      "description": "A processor family supported by HorizonDB."
+      "description": "The compute processor type.",
+      "enum": [
+        "Intel",
+        "AMD"
+      ],
+      "x-ms-enum": {
+        "name": "ComputeProcessorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Intel",
+            "value": "Intel",
+            "description": "Intel processor"
+          },
+          {
+            "name": "AMD",
+            "value": "AMD",
+            "description": "AMD processor"
+          }
+        ]
+      }
     },
     "ComputeSizeCapability": {
       "type": "object",
@@ -6954,30 +7544,6 @@
         "vCores",
         "memoryPerVCoreInMb"
       ]
-    },
-    "CreateModePool": {
-      "type": "string",
-      "description": "The mode to create a new HorizonDB cluster.",
-      "enum": [
-        "Create",
-        "Update"
-      ],
-      "x-ms-enum": {
-        "name": "CreateModePool",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Create",
-            "value": "Create",
-            "description": "Create a new pool"
-          },
-          {
-            "name": "Update",
-            "value": "Update",
-            "description": "Update an existing pool"
-          }
-        ]
-      }
     },
     "DefaultParameterGroup": {
       "type": "object",
@@ -7461,84 +8027,6 @@
             "type": "Microsoft.HorizonDb/clusters"
           }
         ]
-      }
-    },
-    "HorizonDbPool": {
-      "type": "object",
-      "description": "Represents the HorizonDB pool.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HorizonDbPoolProperties",
-          "description": "The resource-specific properties for this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "HorizonDbPoolListResult": {
-      "type": "object",
-      "description": "The response of a HorizonDbPool list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The HorizonDbPool items on this page",
-          "items": {
-            "$ref": "#/definitions/HorizonDbPool"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "HorizonDbPoolProperties": {
-      "type": "object",
-      "description": "Properties of a HorizonDB pool.",
-      "properties": {
-        "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the HorizonDB pool.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "replicaCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of replicas in the pool.",
-          "readOnly": true
-        },
-        "version": {
-          "type": "string",
-          "description": "The version of the HorizonDB pool.",
-          "readOnly": true
-        },
-        "createMode": {
-          "$ref": "#/definitions/CreateModePool",
-          "description": "The create mode for the pool.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the pool.",
-          "readOnly": true
-        }
       }
     },
     "HorizonDbPrivateLinkResource": {
@@ -8322,6 +8810,30 @@
         ]
       }
     },
+    "ParameterApplyMethod": {
+      "type": "string",
+      "description": "Controls when dynamic parameter changes become effective. Static parameter changes always become effective only after a pool restart, whether initiated by the customer or performed during scheduled maintenance.",
+      "enum": [
+        "Immediate",
+        "PendingReboot"
+      ],
+      "x-ms-enum": {
+        "name": "ParameterApplyMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Immediate",
+            "value": "Immediate",
+            "description": "Apply dynamic parameter changes immediately. Static parameter changes remain pending until the pool restarts."
+          },
+          {
+            "name": "PendingReboot",
+            "value": "PendingReboot",
+            "description": "Apply dynamic and static parameter changes when the pool next restarts, whether initiated by the customer or performed during scheduled maintenance."
+          }
+        ]
+      }
+    },
     "ParameterGroup": {
       "type": "object",
       "description": "Represents the HorizonDB parameter group.",
@@ -8480,6 +8992,42 @@
             "update"
           ]
         }
+      }
+    },
+    "ParameterGroupSyncStatus": {
+      "type": "string",
+      "description": "Indicates synchronization status between a HorizonDB resource and its parameter group.",
+      "enum": [
+        "Applying",
+        "InSync",
+        "FailedToApply",
+        "PendingReboot"
+      ],
+      "x-ms-enum": {
+        "name": "ParameterGroupSyncStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Applying",
+            "value": "Applying",
+            "description": "Parameter updates are currently being applied."
+          },
+          {
+            "name": "InSync",
+            "value": "InSync",
+            "description": "Parameter values are synchronized and up to date."
+          },
+          {
+            "name": "FailedToApply",
+            "value": "FailedToApply",
+            "description": "Applying parameter updates failed."
+          },
+          {
+            "name": "PendingReboot",
+            "value": "PendingReboot",
+            "description": "Parameter updates are pending and require a reboot to take effect."
+          }
+        ]
       }
     },
     "ParameterProperties": {
@@ -8655,6 +9203,21 @@
         }
       }
     },
+    "Pool": {
+      "type": "object",
+      "description": "Represents the HorizonDB pool.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PoolProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "PoolCapability": {
       "type": "object",
       "description": "The HorizonDB Pool capabilities available in a location.",
@@ -8693,9 +9256,84 @@
         "supportedFeatures"
       ]
     },
+    "PoolComputeModel": {
+      "type": "object",
+      "description": "The compute model for a HorizonDB pool.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PoolComputeModelType",
+          "description": "The type of compute model.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "computeProcessor": {
+          "$ref": "#/definitions/ComputeProcessorType",
+          "description": "The processor type for the compute model.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "computeGeneration": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The compute generation for the compute model.",
+          "minimum": 1,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "PoolComputeModelForPatchUpdate": {
+      "type": "object",
+      "description": "The compute model properties of a HorizonDB pool that can be updated. The object is recursively mergeable: omitted properties preserve their current values. Properties that do not apply to the current or target compute model type are rejected. When type changes, the request must include the complete target compute model. Subtype-specific constraints are validated against the effective merged configuration; invalid requests are rejected without changing the resource.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PoolComputeModelType",
+          "description": "The compute model type. Omit this property to retain the current type. Resubmitting the current type succeeds as an idempotent no-op. To change the type, supply all common properties and all properties required by the target type.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "computeProcessor": {
+          "$ref": "#/definitions/ComputeProcessorType",
+          "description": "The processor type for the compute model. Omission preserves the current processor type.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "computeGeneration": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The compute generation for the compute model. Omission preserves the current compute generation.",
+          "minimum": 1,
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "vCores": {
+          "$ref": "#/definitions/ProvisionedPoolVCores",
+          "description": "The number of provisioned vCores. Allowed values are 1 through 192. This property applies only to a Provisioned compute model. Omission preserves the current value.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
     "PoolComputeModelType": {
       "type": "string",
-      "description": "A compute model supported by a HorizonDB pool.",
+      "description": "The compute model type.",
       "enum": [
         "Provisioned"
       ],
@@ -8706,7 +9344,7 @@
           {
             "name": "Provisioned",
             "value": "Provisioned",
-            "description": "Provisioned compute."
+            "description": "Provisioned compute model"
           }
         ]
       }
@@ -8731,14 +9369,304 @@
         "status"
       ]
     },
+    "PoolForPatchUpdate": {
+      "type": "object",
+      "description": "HorizonDB pool for update operations.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PoolPropertiesForPatchUpdate",
+          "description": "The properties that can be updated for a HorizonDB pool."
+        }
+      }
+    },
+    "PoolListResult": {
+      "type": "object",
+      "description": "The response of a Pool list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Pool items on this page",
+          "items": {
+            "$ref": "#/definitions/Pool"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PoolNodeCount": {
+      "type": "integer",
+      "format": "int32",
+      "description": "A HorizonDB pool node count, from 0 through 16.",
+      "minimum": 0,
+      "maximum": 16
+    },
+    "PoolParameterGroupReference": {
+      "type": "object",
+      "description": "A reference to the default or custom parameter group associated with a HorizonDB pool.",
+      "properties": {
+        "parameterGroupResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the default or custom parameter group.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HorizonDb/parameterGroups"
+              },
+              {
+                "type": "Microsoft.HorizonDb/locations/parameterGroups"
+              }
+            ]
+          }
+        },
+        "applyMethod": {
+          "$ref": "#/definitions/ParameterApplyMethod",
+          "description": "Determines when dynamic parameter changes from the associated parameter group become effective. Static parameter changes always require a pool restart, regardless of this value.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "syncStatus": {
+          "$ref": "#/definitions/ParameterGroupSyncStatus",
+          "description": "The synchronization status between the pool and its parameter group.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "parameterGroupResourceId",
+        "applyMethod"
+      ]
+    },
+    "PoolParameterGroupReferenceForPatchUpdate": {
+      "type": "object",
+      "description": "A parameter group reference for updating a HorizonDB pool.",
+      "properties": {
+        "parameterGroupResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the default or custom parameter group to associate with the pool.",
+          "x-ms-mutability": [
+            "update"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HorizonDb/parameterGroups"
+              },
+              {
+                "type": "Microsoft.HorizonDb/locations/parameterGroups"
+              }
+            ]
+          }
+        },
+        "applyMethod": {
+          "$ref": "#/definitions/ParameterApplyMethod",
+          "description": "Determines when dynamic parameter changes from the associated parameter group become effective. Static parameter changes always require a pool restart, regardless of this value.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      },
+      "required": [
+        "parameterGroupResourceId",
+        "applyMethod"
+      ]
+    },
+    "PoolProperties": {
+      "type": "object",
+      "description": "Properties of a HorizonDB pool.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/PoolState",
+          "description": "Current state of the pool.",
+          "readOnly": true
+        },
+        "computeModel": {
+          "$ref": "#/definitions/PoolComputeModel",
+          "description": "The compute model for the HorizonDB pool.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "desiredNodeCount": {
+          "$ref": "#/definitions/PoolNodeCount",
+          "description": "The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource and its name, compute configuration, maintenance configuration, and parameter-group association, but allocates no nodes; it does not delete the pool. A request that would leave a pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "allocatedNodeCount": {
+          "$ref": "#/definitions/PoolNodeCount",
+          "description": "The number of nodes currently allocated and assigned to the pool, regardless of their operational state or the operational state of the pool.",
+          "readOnly": true
+        },
+        "parameterGroup": {
+          "$ref": "#/definitions/PoolParameterGroupReference",
+          "description": "The required default or custom parameter group associated with the pool.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "scheduledMaintenance": {
+          "$ref": "#/definitions/ScheduledMaintenanceProperties",
+          "description": "The scheduled maintenance configuration for the pool. The properties available depend on the selected maintenance management type.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the pool.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "allocatedNodeCount",
+        "parameterGroup"
+      ]
+    },
+    "PoolPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Properties of a HorizonDB pool for update operations.",
+      "properties": {
+        "computeModel": {
+          "$ref": "#/definitions/PoolComputeModelForPatchUpdate",
+          "description": "The compute model properties to update. Omitted properties preserve their current values. To change the compute model type, supply the complete target compute model, including type, computeProcessor, computeGeneration, and all properties required by the target type.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "desiredNodeCount": {
+          "$ref": "#/definitions/PoolNodeCount",
+          "description": "The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource and its configuration but allocates no nodes; it does not delete the pool. Omission preserves the current target. A request that would leave a pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "parameterGroup": {
+          "$ref": "#/definitions/PoolParameterGroupReferenceForPatchUpdate",
+          "description": "The default or custom parameter group to associate with the pool. Omission preserves the current association.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "scheduledMaintenance": {
+          "$ref": "#/definitions/ScheduledMaintenanceProperties",
+          "description": "The scheduled maintenance configuration to update for the pool. When supplied, the complete configuration for the selected maintenance management type is required. Omission preserves the current configuration.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
     "PoolResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "An Azure resource ID that identifies a HorizonDB pool.",
+      "description": "The Azure resource ID of a HorizonDB pool.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
             "type": "Microsoft.HorizonDb/clusters/pools"
+          }
+        ]
+      }
+    },
+    "PoolState": {
+      "type": "string",
+      "description": "Current state of a HorizonDB pool.",
+      "enum": [
+        "Ready",
+        "Provisioning",
+        "Deleting",
+        "Inaccessible",
+        "Updating",
+        "Starting",
+        "Stopping",
+        "Stopped",
+        "Restarting",
+        "ShuttingDown",
+        "Shutdown"
+      ],
+      "x-ms-enum": {
+        "name": "PoolState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "Is ready and operational"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Is provisioning"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Is being deleted"
+          },
+          {
+            "name": "Inaccessible",
+            "value": "Inaccessible",
+            "description": "Is inaccessible"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Is being updated"
+          },
+          {
+            "name": "Starting",
+            "value": "Starting",
+            "description": "Is starting up"
+          },
+          {
+            "name": "Stopping",
+            "value": "Stopping",
+            "description": "Is stopping"
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "Is stopped"
+          },
+          {
+            "name": "Restarting",
+            "value": "Restarting",
+            "description": "Is restarting"
+          },
+          {
+            "name": "ShuttingDown",
+            "value": "ShuttingDown",
+            "description": "Is shutting down"
+          },
+          {
+            "name": "Shutdown",
+            "value": "Shutdown",
+            "description": "Is shut down"
           }
         ]
       }
@@ -8898,6 +9826,37 @@
       ],
       "x-ms-discriminator-value": "Provisioned"
     },
+    "ProvisionedHorizonDbPoolComputeModel": {
+      "type": "object",
+      "description": "A provisioned compute model for a HorizonDB pool.",
+      "properties": {
+        "vCores": {
+          "$ref": "#/definitions/ProvisionedPoolVCores",
+          "description": "The number of provisioned vCores. Allowed values are 1 through 192.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "vCores"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PoolComputeModel"
+        }
+      ],
+      "x-ms-discriminator-value": "Provisioned"
+    },
+    "ProvisionedPoolVCores": {
+      "type": "integer",
+      "format": "int32",
+      "description": "A provisioned HorizonDB pool compute capacity in vCores, from 1 through 192.",
+      "minimum": 1,
+      "maximum": 192
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "The provisioning state.",
@@ -9032,6 +9991,53 @@
           }
         ]
       }
+    },
+    "ScheduledMaintenanceManagementType": {
+      "type": "string",
+      "description": "Specifies who manages scheduled maintenance for a HorizonDB pool.",
+      "enum": [
+        "System"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduledMaintenanceManagementType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "System",
+            "value": "System",
+            "description": "Scheduled maintenance is managed by the system."
+          }
+        ]
+      }
+    },
+    "ScheduledMaintenanceProperties": {
+      "type": "object",
+      "description": "The scheduled maintenance configuration for a HorizonDB pool.",
+      "properties": {
+        "maintenanceManagementType": {
+          "$ref": "#/definitions/ScheduledMaintenanceManagementType",
+          "description": "Specifies whether scheduled maintenance is managed by the system or by the user.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "maintenanceManagementType",
+      "required": [
+        "maintenanceManagementType"
+      ]
+    },
+    "SystemScheduledMaintenanceProperties": {
+      "type": "object",
+      "description": "The system-managed scheduled maintenance configuration for a HorizonDB pool. User-managed schedule properties must be absent.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScheduledMaintenanceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "System"
     },
     "WritableDescription": {
       "type": "string",

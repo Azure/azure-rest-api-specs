@@ -127,13 +127,13 @@ using Azure.ClientGenerator.Core;
   "HorizonDBParameterGroups",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbPool, "HorizonDBPool", "csharp");
+@@clientName(Microsoft.HorizonDb.Pool, "HorizonDBPool", "csharp");
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbPoolProperties,
+  Microsoft.HorizonDb.PoolProperties,
   "HorizonDBPoolProperties",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbPools, "HorizonDBPools", "csharp");
+@@clientName(Microsoft.HorizonDb.Pools, "HorizonDBPools", "csharp");
 @@clientName(
   Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections,
   "HorizonDBPrivateEndpointConnections",

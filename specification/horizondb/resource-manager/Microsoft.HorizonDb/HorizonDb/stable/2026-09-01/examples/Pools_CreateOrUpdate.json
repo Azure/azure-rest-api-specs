@@ -1,0 +1,62 @@
+{
+  "operationId": "Pools_CreateOrUpdate",
+  "title": "Create or update a HorizonDB pool",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "clusterName": "examplecluster",
+    "poolName": "examplepool",
+    "api-version": "2026-09-01",
+    "resource": {
+      "properties": {
+        "computeModel": {
+          "type": "Provisioned",
+          "computeProcessor": "Intel",
+          "computeGeneration": 1,
+          "vCores": 4
+        },
+        "desiredNodeCount": 2,
+        "parameterGroup": {
+          "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/parameterGroups/exampleparametergroup",
+          "applyMethod": "Immediate"
+        },
+        "scheduledMaintenance": {
+          "maintenanceManagementType": "System"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/westus2/operationStatuses/ffffffff-ffff-ffff-ffff-ffffffffffff?api-version=2026-09-01",
+        "Retry-After": 30
+      },
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/examplepool",
+        "name": "examplepool",
+        "type": "Microsoft.HorizonDb/clusters/pools",
+        "properties": {
+          "state": "Provisioning",
+          "computeModel": {
+            "type": "Provisioned",
+            "computeProcessor": "Intel",
+            "computeGeneration": 1,
+            "vCores": 4
+          },
+          "desiredNodeCount": 2,
+          "allocatedNodeCount": 0,
+          "parameterGroup": {
+            "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/parameterGroups/exampleparametergroup",
+            "applyMethod": "Immediate",
+            "syncStatus": "Applying"
+          },
+          "scheduledMaintenance": {
+            "maintenanceManagementType": "System"
+          },
+          "provisioningState": "Provisioning"
+        }
+      }
+    }
+  }
+}
