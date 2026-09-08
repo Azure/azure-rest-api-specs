@@ -173,7 +173,7 @@ model ClusterProperties {
   @visibility(Lifecycle.Read)
   provisioningState: ProvisioningState;
 
-  @added(Versions.v2027_03_01_preview)
+  @added(Versions.v2026_09_01)
   @doc("The current designated read-write pool and read-write status for the cluster.")
   @visibility(Lifecycle.Read)
   readWritePool: ReadWritePoolProperties;
@@ -266,7 +266,7 @@ union HorizonDbComputeModelType {
   Serverless: "Serverless",
 }
 
-@added(Versions.v2027_03_01_preview)
+@added(Versions.v2026_09_01)
 @doc("The current automatic and requested failover eligibility for a cluster.")
 model FailoverProperties {
   @doc("The current readiness state for both automatic failover and a caller-requested failover operation.")
@@ -278,7 +278,7 @@ model FailoverProperties {
   unavailableReason?: string;
 }
 
-@added(Versions.v2027_03_01_preview)
+@added(Versions.v2026_09_01)
 @doc("The current zone redundancy status for the read-write node.")
 model ReadWritePoolZoneRedundancyProperties {
   @doc("The current zone-redundancy readiness state for the read-write node. The state is NotReady when no read-write pool is designated.")
@@ -290,19 +290,19 @@ model ReadWritePoolZoneRedundancyProperties {
   unavailableReason?: string;
 }
 
-@added(Versions.v2027_03_01_preview)
+@added(Versions.v2026_09_01)
 @doc("The current designated read-write pool and read-write status for a HorizonDB cluster. When a pool is created while the cluster currently has no pools, the service automatically designates the new pool as the read-write pool. This behavior also applies after all pools that existed earlier in the cluster's lifetime have been deleted.")
 model ReadWritePoolProperties {
   @doc("The Azure resource ID of the pool designated to host the cluster's read-write node. The pool is a child resource of this cluster. When a pool is created while the cluster currently has no pools, the service automatically sets this property to the new pool's resource ID, including when all pools that existed earlier in the cluster's lifetime were deleted. This property is absent when no pool is designated, such as after clearReadWritePool succeeds.")
   @visibility(Lifecycle.Read)
   designatedPoolResourceId?: PoolResourceId;
 
-  @added(Versions.v2027_03_01_preview)
+  @added(Versions.v2026_09_01)
   @doc("The current failover status for the read-write node. This object is always returned on reads. When failover is not ready, state is NotReady and unavailableReason explains why.")
   @visibility(Lifecycle.Read)
   failover: FailoverProperties;
 
-  @added(Versions.v2027_03_01_preview)
+  @added(Versions.v2026_09_01)
   @doc("The current zone redundancy status for the read-write node. This object is always returned on reads. When zone redundancy is not ready, state is NotReady and unavailableReason explains why.")
   @visibility(Lifecycle.Read)
   zoneRedundancy: ReadWritePoolZoneRedundancyProperties;
@@ -317,7 +317,7 @@ scalar HorizonDbClusterResourceId
     }
   ]>;
 
-@added(Versions.v2027_03_01_preview)
+@added(Versions.v2026_09_01)
 @doc("The readiness state for automatic and caller-requested failover.")
 union FailoverState {
   string,
@@ -329,7 +329,7 @@ union FailoverState {
   NotReady: "NotReady",
 }
 
-@added(Versions.v2027_03_01_preview)
+@added(Versions.v2026_09_01)
 @doc("The readiness state for zone redundancy of the read-write node.")
 union ZoneRedundancyState {
   string,

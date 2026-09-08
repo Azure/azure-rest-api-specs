@@ -49,7 +49,18 @@
             "earliestRestorePointUtc": "2026-07-27T02:00:00Z"
           },
           "state": "Updating",
-          "provisioningState": "InProgress"
+          "provisioningState": "InProgress",
+          "readWritePool": {
+            "designatedPoolResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01",
+            "zoneRedundancy": {
+              "state": "NotReady",
+              "unavailableReason": "The designated read-write pool has fewer than two nodes."
+            },
+            "failover": {
+              "state": "NotReady",
+              "unavailableReason": "The designated read-write pool has fewer than two nodes."
+            }
+          }
         }
       }
     },
@@ -78,7 +89,17 @@
             "earliestRestorePointUtc": "2026-07-27T02:00:00Z"
           },
           "state": "Provisioning",
-          "provisioningState": "Provisioning"
+          "provisioningState": "Provisioning",
+          "readWritePool": {
+            "zoneRedundancy": {
+              "state": "NotReady",
+              "unavailableReason": "No read-write pool is designated."
+            },
+            "failover": {
+              "state": "NotReady",
+              "unavailableReason": "No read-write pool is designated."
+            }
+          }
         }
       }
     }

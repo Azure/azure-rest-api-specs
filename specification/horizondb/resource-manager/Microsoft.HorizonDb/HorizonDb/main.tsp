@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
 import "./clusters.tsp";
 import "./pools.tsp";
+import "./nodes.tsp";
 import "./replication.tsp";
 import "./endpoints.tsp";
 import "./authentication.tsp";
