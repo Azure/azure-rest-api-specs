@@ -106,7 +106,6 @@ interface OperationStatus {
 
 @@segment(OperationStatus.get::parameters.operationId, "operationStatuses");
 
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "consistent with existing OperationStatus interface"
 @added(Versions.v2026_11_01)
 @armResourceOperations
 interface AsyncOperationStatus {

@@ -78,7 +78,11 @@ model GroupListMembersResult {
 @doc("An individual member of the group, returned as part of the list members operation.")
 model GroupListMember {
   @doc("The ARM resource ID of the group member.")
-  id: string;
+  id: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/namespaces/registryDevices";
+    }
+  ]>;
 }
 
 @added(Versions.v2026_11_02_preview)
