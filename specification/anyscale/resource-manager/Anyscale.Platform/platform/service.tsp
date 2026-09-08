@@ -291,5 +291,4 @@ interface Services {
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
   listByResourceGroup is ArmResourceListByParent<Service>;
-  listBySubscription is ArmListBySubscription<Service>;
 }

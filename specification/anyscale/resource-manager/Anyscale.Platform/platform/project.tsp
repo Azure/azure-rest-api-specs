@@ -45,5 +45,4 @@ interface Projects {
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
   listByResourceGroup is ArmResourceListByParent<Project>;
-  listBySubscription is ArmListBySubscription<Project>;
 }

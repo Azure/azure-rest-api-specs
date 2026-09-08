@@ -84,5 +84,4 @@ interface Workspaces {
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
   listByResourceGroup is ArmResourceListByParent<Workspace>;
-  listBySubscription is ArmListBySubscription<Workspace>;
 }

@@ -209,5 +209,4 @@ interface ComputeConfigs {
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
   listByResourceGroup is ArmResourceListByParent<ComputeConfig>;
-  listBySubscription is ArmListBySubscription<ComputeConfig>;
 }

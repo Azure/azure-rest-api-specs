@@ -108,5 +108,4 @@ interface Jobs {
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
   listByResourceGroup is ArmResourceListByParent<Job>;
-  listBySubscription is ArmListBySubscription<Job>;
 }

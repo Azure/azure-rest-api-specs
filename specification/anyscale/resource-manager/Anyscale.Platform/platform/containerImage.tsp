@@ -82,5 +82,4 @@ interface ContainerImages {
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
   listByResourceGroup is ArmResourceListByParent<ContainerImage>;
-  listBySubscription is ArmListBySubscription<ContainerImage>;
 }
