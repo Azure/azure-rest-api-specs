@@ -211,31 +211,6 @@ union OptOutHeaderType {
 }
 
 /**
- * The readiness.
- */
-union Readiness {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ClosingDown: "ClosingDown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Deprecated: "Deprecated",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  GA: "GA",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  InDevelopment: "InDevelopment",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  InternalOnly: "InternalOnly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  PrivatePreview: "PrivatePreview",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  PublicPreview: "PublicPreview",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  RemovedFromARM: "RemovedFromARM",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Retired: "Retired",
-}
-
-/**
  * Type of server failure response message.
  */
 union ServerFailureResponseMessageType {
@@ -1175,43 +1150,12 @@ union Role {
 }
 
 /**
- * The environment type.
+ * The resource access policy.
  */
-union AvailableCheckInManifestEnvironment {
+union ResourceAccessPolicy {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NotSpecified: "NotSpecified",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Canary: "Canary",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Prod: "Prod",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  All: "All",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Mooncake: "Mooncake",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Fairfax: "Fairfax",
-}
-
-/**
- * The service feature flag.
- */
-union ServiceFeatureFlagAction {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  DoNotCreate: "DoNotCreate",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Create: "Create",
-}
-
-/**
- * The resource access policy.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum ResourceAccessPolicy {
-  NotSpecified,
-  AcisReadAllowed,
-  AcisActionAllowed,
 }
 
 /**
@@ -1746,11 +1690,6 @@ model ResourceProviderManifestProperties {
   resourceProviderAuthorizationRules?: ResourceProviderAuthorizationRules;
 
   /**
-   * The dsts configuration.
-   */
-  dstsConfiguration?: ResourceProviderManifestPropertiesDstsConfiguration;
-
-  /**
    * Notification options.
    */
   notificationOptions?: NotificationOptions;
@@ -1905,12 +1844,6 @@ model ResourceProviderManagement {
   incidentContactEmail?: string;
 
   /**
-   * The service tree infos.
-   */
-  @identifiers(#[])
-  serviceTreeInfos?: ServiceTreeInfo[];
-
-  /**
    * The resource access policy.
    */
   resourceAccessPolicy?: ResourceAccessPolicy;
@@ -1962,24 +1895,6 @@ model ResourceProviderManagement {
    */
   @added(Versions.v2026_02_01_preview)
   featureApprovalClaims?: string[];
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ServiceTreeInfo {
-  /**
-   * The service id.
-   */
-  serviceId?: string;
-
-  /**
-   * The component id.
-   */
-  componentId?: string;
-
-  /**
-   * The readiness.
-   */
-  readiness?: Readiness;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2147,31 +2062,6 @@ model FanoutLinkedNotificationRule {
    */
   @identifiers(#[])
   endpoints?: ResourceProviderEndpoint[];
-
-  /**
-   * The dsts configuration.
-   */
-  dstsConfiguration?: FanoutLinkedNotificationRuleDstsConfiguration;
-}
-
-/**
- * The dsts configuration.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model FanoutLinkedNotificationRuleDstsConfiguration extends DstsConfiguration {}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DstsConfiguration {
-  /**
-   * The service name.
-   */
-  serviceName: string;
-
-  /**
-   * This is a URI property.
-   */
-  serviceDnsName?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2194,14 +2084,6 @@ model AsyncOperationPollingRules {
    */
   additionalOptions?: AdditionalOptionsAsyncOperation;
 }
-
-/**
- * The dsts configuration.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ResourceProviderManifestPropertiesDstsConfiguration
-  extends DstsConfiguration {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceHydrationAccount {
@@ -2432,12 +2314,6 @@ model ResourceTypeRegistrationProperties {
   disallowedActionVerbs?: string[];
 
   /**
-   * The service tree infos.
-   */
-  @identifiers(#[])
-  serviceTreeInfos?: ServiceTreeInfo[];
-
-  /**
    * The request header options.
    */
   requestHeaderOptions?: ResourceTypeRegistrationPropertiesRequestHeaderOptions;
@@ -2604,11 +2480,6 @@ model ResourceTypeRegistrationProperties {
    * The availability zone rule.
    */
   availabilityZoneRule?: ResourceTypeRegistrationPropertiesAvailabilityZoneRule;
-
-  /**
-   * The dsts configuration.
-   */
-  dstsConfiguration?: ResourceTypeRegistrationPropertiesDstsConfiguration;
 
   /**
    * Async timeout rules
@@ -2804,11 +2675,6 @@ model ResourceTypeEndpoint {
   zones?: string[];
 
   /**
-   * The dsts configuration.
-   */
-  dstsConfiguration?: ResourceTypeEndpointDstsConfiguration;
-
-  /**
    * The data boundary.
    */
   dataBoundary?: DataBoundary;
@@ -2838,13 +2704,6 @@ model ResourceTypeExtension {
    */
   timeout?: duration;
 }
-
-/**
- * The dsts configuration.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ResourceTypeEndpointDstsConfiguration extends DstsConfiguration {}
 
 /**
  * The extension options.
@@ -3357,14 +3216,6 @@ model ResourceTypeRegistrationPropertiesAvailabilityZoneRule {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   availabilityZonePolicy?: AvailabilityZonePolicy;
 }
-
-/**
- * The dsts configuration.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ResourceTypeRegistrationPropertiesDstsConfiguration
-  extends DstsConfiguration {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AsyncTimeoutRule {
@@ -4228,12 +4079,6 @@ model ResourceType {
    */
   @identifiers(#[])
   subscriptionStateRules?: SubscriptionStateRule[];
-
-  /**
-   * The service tree infos.
-   */
-  @identifiers(#[])
-  serviceTreeInfos?: ServiceTreeInfo[];
 
   /**
    * The request header options.
@@ -5109,174 +4954,6 @@ model ProviderMonitorSettingProperties {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProviderMonitorSettingArrayResponseWithContinuation
   is Azure.Core.Page<ProviderMonitorSetting>;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model FrontloadPayload {
-  /**
-   * Properties of the frontload payload.
-   */
-  properties: FrontloadPayloadProperties;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model FrontloadPayloadProperties {
-  /**
-   * The operation type.
-   */
-  operationType: string;
-
-  /**
-   * The provider namespace.
-   */
-  providerNamespace: string;
-
-  /**
-   * The frontload location.
-   */
-  frontloadLocation: string;
-
-  /**
-   * The copy from location.
-   */
-  copyFromLocation: string;
-
-  /**
-   * The environment type.
-   */
-  environmentType: AvailableCheckInManifestEnvironment;
-
-  /**
-   * The service feature flag.
-   */
-  serviceFeatureFlag: ServiceFeatureFlagAction;
-
-  /**
-   * The resource types to include.
-   */
-  includeResourceTypes: string[];
-
-  /**
-   * The resource types to exclude.
-   */
-  excludeResourceTypes: string[];
-
-  /**
-   * The manifest level fields to override.
-   */
-  overrideManifestLevelFields: FrontloadPayloadPropertiesOverrideManifestLevelFields;
-
-  /**
-   * The endpoint level fields to override.
-   */
-  overrideEndpointLevelFields: FrontloadPayloadPropertiesOverrideEndpointLevelFields;
-
-  /**
-   * The fields to ignore.
-   */
-  ignoreFields: string[];
-}
-
-/**
- * The manifest level fields to override.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model FrontloadPayloadPropertiesOverrideManifestLevelFields
-  extends ManifestLevelPropertyBag {}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ManifestLevelPropertyBag {
-  /**
-   * The resource hydration accounts.
-   */
-  @identifiers(#["accountName"])
-  resourceHydrationAccounts?: ResourceHydrationAccount[];
-}
-
-/**
- * The endpoint level fields to override.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model FrontloadPayloadPropertiesOverrideEndpointLevelFields
-  extends ResourceTypeEndpointBase {}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ResourceTypeEndpointBase {
-  /**
-   * Whether it's enabled.
-   */
-  enabled: boolean;
-
-  /**
-   * The api versions.
-   */
-  apiVersions: string[];
-
-  /**
-   * The endpoint uri.
-   */
-  endpointUri: string;
-
-  /**
-   * The locations.
-   */
-  locations: string[];
-
-  /**
-   * The required features.
-   */
-  requiredFeatures: string[];
-
-  /**
-   * The features rule.
-   */
-  featuresRule: ResourceTypeEndpointBaseFeaturesRule;
-
-  /**
-   * This is a TimeSpan property.
-   */
-  timeout: duration;
-
-  /**
-   * The endpoint type.
-   */
-  endpointType: EndpointType;
-
-  /**
-   * The dsts configuration.
-   */
-  dstsConfiguration: ResourceTypeEndpointBaseDstsConfiguration;
-
-  /**
-   * The sku link.
-   */
-  skuLink: string;
-
-  /**
-   * The api version.
-   */
-  apiVersion: string;
-
-  /**
-   * The zones.
-   */
-  zones: string[];
-}
-
-/**
- * The features rule.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ResourceTypeEndpointBaseFeaturesRule extends FeaturesRule {}
-
-/**
- * The dsts configuration.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ResourceTypeEndpointBaseDstsConfiguration extends DstsConfiguration {}
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

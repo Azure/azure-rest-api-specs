@@ -28,6 +28,8 @@ options:
     resource-collection-associations:
       - resource: Certificate
         collection: ConnectedEnvironmentsCertificates
+      - resource: PrivateEndpointConnection
+        collection: ManagedEnvironmentPrivateEndpointConnections
     rename-model:
       OpenIdConnectClientCredentialMethod: ClientCredentialMethod
   "@azure-tools/typespec-ts":
@@ -51,6 +53,10 @@ options:
     emitter-output-dir: "{output-dir}/sdk/containerapps/Azure.ResourceManager.AppContainers"
     namespace: "Azure.ResourceManager.AppContainers"
     enable-wire-path-attribute: true
+  "@azure-typespec/http-client-csharp-provisioning":
+    emitter-output-dir: "{output-dir}/sdk/containerapps/Azure.Provisioning.AppContainers"
+    namespace: "Azure.Provisioning.AppContainers"
+    api-version: "2025-10-02-preview"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
