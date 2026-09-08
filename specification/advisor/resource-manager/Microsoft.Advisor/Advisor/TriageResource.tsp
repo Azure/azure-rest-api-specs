@@ -52,6 +52,7 @@ interface TriageResources {
    * Get a triage resource for a given review and recommendation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @deprecated("This operation is deprecated.")
   @summary("Get existing triage resource.")
   @operationId("triageResources_Get")
   get is TriageResourceOps.Read<
@@ -78,6 +79,7 @@ interface TriageResources {
    * List all triage resources that belong to a review and recommendation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @deprecated("This operation is deprecated.")
   @summary("List triage resources based on a review and recommendation.")
   @segment("providers/Microsoft.Advisor/triageResources")
   @operationId("triageResources_List")
