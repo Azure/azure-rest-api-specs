@@ -365,6 +365,13 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.Queues, "omitSlashFromEmptyRoute", true, "csharp");
 
+// Queue metadata is a dynamic x-ms-meta-<key> header collection. alternateType types the property as a map
+// and collectionHeaderPrefix tells the emitter to deserialize the x-ms-meta-* headers into it
+// (typespec-java >= 0.46.3).
+@@alternateType(MetadataHeaders.metadata, Record<string>, "java");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(MetadataHeaders.metadata, "collectionHeaderPrefix", "x-ms-meta-", "java");
+
 @@clientName(SentMessage, "SendMessageResult", "java");
 @@clientName(ReceivedMessage, "QueueMessageItemInternal", "java");
 @@clientName(PeekedMessage, "PeekedMessageItemInternal", "java");
