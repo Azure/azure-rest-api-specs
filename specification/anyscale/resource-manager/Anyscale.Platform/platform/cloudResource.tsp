@@ -15,7 +15,7 @@ namespace Anyscale.Platform;
 /** Anyscale cloud resource */
 @parentResource(Cloud)
 @resource("cloudResources")
-model CloudResource is ProxyResource<CloudResourceProperties> {
+model CloudResource is TrackedResource<CloudResourceProperties> {
   /** The name of the cloud resource */
   @pattern("^[a-zA-Z0-9]*$")
   @key("cloudResourceName")
@@ -127,4 +127,7 @@ interface CloudResources {
 
   /** List cloud resources by resource group */
   listByResourceGroup is ArmResourceListByParent<CloudResource>;
+
+  /** List cloud resources by subscription */
+  listBySubscription is ArmListBySubscription<CloudResource>;
 }

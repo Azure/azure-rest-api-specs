@@ -328,6 +328,53 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Anyscale.Platform/clouds/{cloudName}/cloudResources": {
+      "get": {
+        "operationId": "CloudResources_ListBySubscription",
+        "tags": [
+          "CloudResources"
+        ],
+        "description": "List cloud resources by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "cloudName",
+            "in": "path",
+            "description": "The name of the cloud",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudResources_ListBySubscription": {
+            "$ref": "./examples/CloudResources_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Anyscale.Platform/clouds/{cloudName}/computeConfigs": {
       "get": {
         "operationId": "ComputeConfigs_ListBySubscription",
@@ -3407,7 +3454,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -3500,6 +3547,13 @@
       "type": "object",
       "description": "The type used for update operations of the CloudResource.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
           "$ref": "#/definitions/CloudResourceUpdateProperties",
           "description": "The resource-specific properties for this resource."
