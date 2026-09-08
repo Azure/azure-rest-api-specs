@@ -2635,7 +2635,6 @@ model ResourceTypeRegistrationProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Endpoint registration operations complete synchronously and do not expose provisioning state."
 model ResourceTypeEndpoint {
   /**
    * Resource type endpoint kind. This Metadata is also used by portal/tooling/etc to render different UX experiences for resources of the same type.

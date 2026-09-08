@@ -15,14 +15,30 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.ProviderHub;
 
 /**
+ * Properties of an independently managed endpoint definition.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Endpoint registration operations complete synchronously and do not expose provisioning state."
+@added(Versions.v2026_09_01_preview)
+model EndpointRegistrationProperties is OmitProperties<
+  ResourceTypeEndpoint,
+  "kind"
+>;
+
+/**
  * An independently managed endpoint definition for a Resource Type Registration.
  */
 @added(Versions.v2026_09_01_preview)
 @parentResource(ResourceTypeRegistration)
 model EndpointRegistration is Azure.ResourceManager.ProxyResource<
-  ResourceTypeEndpoint,
+  EndpointRegistrationProperties,
   false
 > {
+  /** The endpoint kind used to select the routing behavior. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "kind is a standard ARM resource envelope property; it is declared directly to preserve the service's Managed default."
+  @pattern("^[-\\w\\._,\\(\\\\\\)]+$")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  kind?: ResourceTypeEndpointKind = ResourceTypeEndpointKind.Managed;
+
   ...ResourceNameParameter<
     Resource = EndpointRegistration,
     KeyName = "endpointName",

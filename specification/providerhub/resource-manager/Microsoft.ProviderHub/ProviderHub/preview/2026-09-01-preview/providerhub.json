@@ -5595,8 +5595,38 @@
       "description": "An independently managed endpoint definition for a Resource Type Registration.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ResourceTypeEndpoint",
+          "$ref": "#/definitions/EndpointRegistrationProperties",
           "description": "The endpoint configuration."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The endpoint kind used to select the routing behavior.",
+          "default": "Managed",
+          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "enum": [
+            "Managed",
+            "Direct"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceTypeEndpointKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Managed",
+                "value": "Managed",
+                "description": "Endpoint served by ProviderHub service"
+              },
+              {
+                "name": "Direct",
+                "value": "Direct",
+                "description": "Endpoint served by the onboarded Resource Provider Service."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -5623,6 +5653,87 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of endpoint registrations."
+        }
+      }
+    },
+    "EndpointRegistrationProperties": {
+      "type": "object",
+      "description": "Properties of an independently managed endpoint definition.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the endpoint is enabled."
+        },
+        "apiVersions": {
+          "type": "array",
+          "description": "The api versions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locations": {
+          "type": "array",
+          "description": "The locations.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredFeatures": {
+          "type": "array",
+          "description": "The required features.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "featuresRule": {
+          "$ref": "#/definitions/ResourceTypeEndpointFeaturesRule",
+          "description": "The features rule."
+        },
+        "extensions": {
+          "type": "array",
+          "description": "The extensions.",
+          "items": {
+            "$ref": "#/definitions/ResourceTypeExtension"
+          },
+          "x-ms-identifiers": [
+            "endpointUri"
+          ]
+        },
+        "timeout": {
+          "type": "string",
+          "format": "duration",
+          "description": "The timeout."
+        },
+        "endpointType": {
+          "$ref": "#/definitions/EndpointTypeResourceType",
+          "description": "The endpoint type."
+        },
+        "tokenAuthConfiguration": {
+          "$ref": "#/definitions/TokenAuthConfiguration",
+          "description": "The token auth configuration."
+        },
+        "skuLink": {
+          "type": "string",
+          "description": "The sku link."
+        },
+        "endpointUri": {
+          "type": "string",
+          "description": "The endpoint uri."
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "Api version."
+        },
+        "zones": {
+          "type": "array",
+          "description": "List of zones.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dataBoundary": {
+          "$ref": "#/definitions/DataBoundary",
+          "description": "The data boundary."
         }
       }
     },
