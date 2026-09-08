@@ -102,6 +102,17 @@ model LogicalResources {
   customResources?: {};
 }
 
+/** CPU architecture type. */
+union CpuArchitecture {
+  /** x86 64-bit architecture. */
+  X86_64: "x86_64",
+
+  /** ARM 64-bit architecture. */
+  Arm64: "arm64",
+
+  string,
+}
+
 /**
  * Physical resources for the underlying node type.
  */
@@ -121,8 +132,8 @@ model PhysicalResources {
   /** Type of accelerator (e.g., 'T4', 'L4', 'H100'). */
   accelerator?: string;
 
-  /** CPU architecture type. Valid values: 'x86_64' (default), 'arm64'. */
-  cpuArchitecture?: string;
+  /** CPU architecture type. */
+  cpuArchitecture?: CpuArchitecture;
 }
 
 /** Configuration of a node group. */

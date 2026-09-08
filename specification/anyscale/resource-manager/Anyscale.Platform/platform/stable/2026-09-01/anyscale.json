@@ -4018,6 +4018,30 @@
         }
       }
     },
+    "CpuArchitecture": {
+      "type": "string",
+      "description": "CPU architecture type.",
+      "enum": [
+        "x86_64",
+        "arm64"
+      ],
+      "x-ms-enum": {
+        "name": "CpuArchitecture",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "X86_64",
+            "value": "x86_64",
+            "description": "x86 64-bit architecture."
+          },
+          {
+            "name": "Arm64",
+            "value": "arm64",
+            "description": "ARM 64-bit architecture."
+          }
+        ]
+      }
+    },
     "Job": {
       "type": "object",
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
@@ -4326,8 +4350,8 @@
           "description": "Type of accelerator (e.g., 'T4', 'L4', 'H100')."
         },
         "cpuArchitecture": {
-          "type": "string",
-          "description": "CPU architecture type. Valid values: 'x86_64' (default), 'arm64'."
+          "$ref": "#/definitions/CpuArchitecture",
+          "description": "CPU architecture type."
         }
       }
     },
