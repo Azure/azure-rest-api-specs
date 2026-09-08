@@ -74,6 +74,18 @@
     },
     {
       "name": "Backups"
+    },
+    {
+      "name": "ChangeDataCaptureCapabilities"
+    },
+    {
+      "name": "ChangeDataCaptureDestinations"
+    },
+    {
+      "name": "IdentityAssignments"
+    },
+    {
+      "name": "ChangeDataCaptureConfigurations"
     }
   ],
   "paths": {
@@ -914,6 +926,1335 @@
             "$ref": "./examples/Backups_Get.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCapture": {
+      "get": {
+        "operationId": "ChangeDataCaptureCapabilities_List",
+        "tags": [
+          "ChangeDataCaptureCapabilities"
+        ],
+        "description": "Lists the optional singleton change data capture capability for a cluster. The result contains zero or one item.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureCapabilityListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCapture/default": {
+      "get": {
+        "operationId": "ChangeDataCaptureCapabilities_Get",
+        "tags": [
+          "ChangeDataCaptureCapabilities"
+        ],
+        "description": "Gets the singleton change data capture capability for a HorizonDB cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureCapability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "ChangeDataCaptureCapabilities_CreateOrUpdate",
+        "tags": [
+          "ChangeDataCaptureCapabilities"
+        ],
+        "description": "Creates or replaces the singleton change data capture capability and reconciles shared engine prerequisites.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureCapability"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ChangeDataCaptureCapability' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureCapability"
+            }
+          },
+          "201": {
+            "description": "Resource 'ChangeDataCaptureCapability' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureCapability"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ChangeDataCaptureCapability"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ChangeDataCaptureCapabilities_Update",
+        "tags": [
+          "ChangeDataCaptureCapabilities"
+        ],
+        "description": "Updates mutable change data capture capability properties. Omitted properties preserve their current values.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureCapabilityForPatchUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureCapability"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ChangeDataCaptureCapability"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ChangeDataCaptureCapabilities_Delete",
+        "tags": [
+          "ChangeDataCaptureCapabilities"
+        ],
+        "description": "Deletes the change data capture capability after all change data capture destinations and configurations have been removed.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCaptureConfigurations": {
+      "get": {
+        "operationId": "ChangeDataCaptureConfigurations_List",
+        "tags": [
+          "ChangeDataCaptureConfigurations"
+        ],
+        "description": "Lists change data capture configurations in a HorizonDB cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCaptureConfigurations/{configurationName}": {
+      "get": {
+        "operationId": "ChangeDataCaptureConfigurations_Get",
+        "tags": [
+          "ChangeDataCaptureConfigurations"
+        ],
+        "description": "Gets a change data capture configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The caller-selected ARM-safe name of the change data capture configuration. The exact PostgreSQL database name is stored in properties.databaseName.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "ChangeDataCaptureConfigurations_CreateOrUpdate",
+        "tags": [
+          "ChangeDataCaptureConfigurations"
+        ],
+        "description": "Creates or replaces a change data capture configuration that enrolls a PostgreSQL database for Microsoft Fabric Mirroring.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The caller-selected ARM-safe name of the change data capture configuration. The exact PostgreSQL database name is stored in properties.databaseName.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ChangeDataCaptureConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'ChangeDataCaptureConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureConfiguration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ChangeDataCaptureConfiguration"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ChangeDataCaptureConfigurations_Update",
+        "tags": [
+          "ChangeDataCaptureConfigurations"
+        ],
+        "description": "Updates mutable change data capture configuration properties. Omitted properties preserve their current values.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The caller-selected ARM-safe name of the change data capture configuration. The exact PostgreSQL database name is stored in properties.databaseName.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureConfigurationForPatchUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureConfiguration"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ChangeDataCaptureConfiguration"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ChangeDataCaptureConfigurations_Delete",
+        "tags": [
+          "ChangeDataCaptureConfigurations"
+        ],
+        "description": "Deletes a change data capture configuration after destination-side replication has been stopped or detached. This operation never deletes the Microsoft Fabric mirrored-database item.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The caller-selected ARM-safe name of the change data capture configuration. The exact PostgreSQL database name is stored in properties.databaseName.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCaptureDestinations": {
+      "get": {
+        "operationId": "ChangeDataCaptureDestinations_List",
+        "tags": [
+          "ChangeDataCaptureDestinations"
+        ],
+        "description": "Lists change data capture destinations in a HorizonDB cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureDestinationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCaptureDestinations/{destinationName}": {
+      "get": {
+        "operationId": "ChangeDataCaptureDestinations_Get",
+        "tags": [
+          "ChangeDataCaptureDestinations"
+        ],
+        "description": "Gets a change data capture destination.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureDestination"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "ChangeDataCaptureDestinations_CreateOrUpdate",
+        "tags": [
+          "ChangeDataCaptureDestinations"
+        ],
+        "description": "Creates or replaces a Microsoft Fabric change data capture destination.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureDestination"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ChangeDataCaptureDestination' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureDestination"
+            }
+          },
+          "201": {
+            "description": "Resource 'ChangeDataCaptureDestination' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureDestination"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ChangeDataCaptureDestination"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ChangeDataCaptureDestinations_Update",
+        "tags": [
+          "ChangeDataCaptureDestinations"
+        ],
+        "description": "Updates mutable change data capture destination properties. Omitted properties preserve their current values.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureDestinationForPatchUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureDestination"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ChangeDataCaptureDestination"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ChangeDataCaptureDestinations_Delete",
+        "tags": [
+          "ChangeDataCaptureDestinations"
+        ],
+        "description": "Deletes a change data capture destination after all referencing configurations and identity assignments have been removed.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCaptureDestinations/{destinationName}/activateIdentity": {
+      "post": {
+        "operationId": "ChangeDataCaptureDestinations_ActivateIdentity",
+        "tags": [
+          "ChangeDataCaptureDestinations"
+        ],
+        "description": "Atomically activates a validated identity assignment for this destination. If-Match is evaluated against the destination entity tag. Activating the already-active assignment succeeds idempotently.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ChangeDataCaptureDestinationIfMatchParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActivateChangeDataCaptureIdentityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ActivateChangeDataCaptureIdentityResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ActivateChangeDataCaptureIdentityResult"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCaptureDestinations/{destinationName}/identityAssignments": {
+      "get": {
+        "operationId": "IdentityAssignments_List",
+        "tags": [
+          "IdentityAssignments"
+        ],
+        "description": "Lists identity assignments for a change data capture destination.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IdentityAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCaptureDestinations/{destinationName}/identityAssignments/{assignmentName}": {
+      "get": {
+        "operationId": "IdentityAssignments_Get",
+        "tags": [
+          "IdentityAssignments"
+        ],
+        "description": "Gets a change data capture identity assignment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "assignmentName",
+            "in": "path",
+            "description": "The caller-selected name of the identity assignment.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IdentityAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "IdentityAssignments_CreateOrUpdate",
+        "tags": [
+          "IdentityAssignments"
+        ],
+        "description": "Creates or idempotently replaces a change data capture identity assignment. The identity resource ID is immutable.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "assignmentName",
+            "in": "path",
+            "description": "The caller-selected name of the identity assignment.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IdentityAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'IdentityAssignment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IdentityAssignment"
+            }
+          },
+          "201": {
+            "description": "Resource 'IdentityAssignment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IdentityAssignment"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/IdentityAssignment"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "IdentityAssignments_Delete",
+        "tags": [
+          "IdentityAssignments"
+        ],
+        "description": "Deletes an inactive change data capture identity assignment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "assignmentName",
+            "in": "path",
+            "description": "The caller-selected name of the identity assignment.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/microsoftEntraAdministrators": {
@@ -3015,6 +4356,54 @@
     }
   },
   "definitions": {
+    "ActivateChangeDataCaptureIdentityRequest": {
+      "type": "object",
+      "description": "The request to activate an identity assignment for a change data capture destination.",
+      "properties": {
+        "identityAssignmentResourceId": {
+          "$ref": "#/definitions/ChangeDataCaptureIdentityAssignmentResourceId",
+          "description": "The resource ID of an inactive, successfully validated identity assignment under the destination receiving the action."
+        },
+        "drainExistingSessions": {
+          "type": "boolean",
+          "description": "Whether existing destination sessions should drain before the identity cutover. The default is false."
+        }
+      },
+      "required": [
+        "identityAssignmentResourceId"
+      ]
+    },
+    "ActivateChangeDataCaptureIdentityResult": {
+      "type": "object",
+      "description": "The completed result of activating a change data capture destination identity.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The completed activation status.",
+          "enum": [
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        },
+        "targetIdentityAssignmentResourceId": {
+          "$ref": "#/definitions/ChangeDataCaptureIdentityAssignmentResourceId",
+          "description": "The resource ID of the newly active identity assignment.",
+          "readOnly": true
+        },
+        "previousIdentityAssignmentResourceId": {
+          "$ref": "#/definitions/ChangeDataCaptureIdentityAssignmentResourceId",
+          "description": "The resource ID of the previously active identity assignment, when one existed.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "targetIdentityAssignmentResourceId"
+      ]
+    },
     "Authentication": {
       "type": "object",
       "description": "A service-created authentication configuration returned by the authentications collection. The resource name is passwordMethod or microsoftEntra.",
@@ -3308,6 +4697,1220 @@
         ]
       }
     },
+    "ChangeDataCaptureCapability": {
+      "type": "object",
+      "description": "The singleton change data capture capability for a HorizonDB cluster.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeDataCaptureCapabilityProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ChangeDataCaptureCapabilityForPatchUpdate": {
+      "type": "object",
+      "description": "A sparse update request for the singleton change data capture capability.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeDataCaptureCapabilityPropertiesForPatchUpdate",
+          "description": "The capability properties to update."
+        }
+      }
+    },
+    "ChangeDataCaptureCapabilityListResult": {
+      "type": "object",
+      "description": "The response of a ChangeDataCaptureCapability list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ChangeDataCaptureCapability items on this page",
+          "items": {
+            "$ref": "#/definitions/ChangeDataCaptureCapability"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ChangeDataCaptureCapabilityProperties": {
+      "type": "object",
+      "description": "The properties of the singleton change data capture capability.",
+      "properties": {
+        "desiredState": {
+          "$ref": "#/definitions/ChangeDataCaptureDesiredState",
+          "description": "The requested capability state.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "effectiveState": {
+          "$ref": "#/definitions/ChangeDataCaptureEffectiveState",
+          "description": "The current effective capability state.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the latest capability mutation.",
+          "readOnly": true
+        },
+        "autoUpgradeExtension": {
+          "type": "boolean",
+          "description": "Whether HorizonDB may automatically upgrade the service-owned change data capture extension within the supported compatibility policy.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "replicationArchitecture": {
+          "$ref": "#/definitions/ChangeDataCaptureReplicationArchitecture",
+          "description": "The implementation architecture currently used for change capture.",
+          "readOnly": true
+        },
+        "extension": {
+          "$ref": "#/definitions/ChangeDataCaptureExtensionStatus",
+          "description": "The installed change data capture extension and its current lifecycle state.",
+          "readOnly": true
+        },
+        "prerequisites": {
+          "$ref": "#/definitions/ChangeDataCapturePrerequisiteStatus",
+          "description": "The current readiness of change data capture engine and read-write endpoint prerequisites.",
+          "readOnly": true
+        },
+        "destinationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of change data capture destinations under this cluster.",
+          "readOnly": true
+        },
+        "configurationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of change data capture configurations under this cluster.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ChangeDataCaptureStatus",
+          "description": "Customer-safe health information for the capability.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "desiredState",
+        "effectiveState",
+        "replicationArchitecture",
+        "extension",
+        "prerequisites",
+        "destinationCount",
+        "configurationCount",
+        "status"
+      ]
+    },
+    "ChangeDataCaptureCapabilityPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Properties for updating the singleton change data capture capability. Omitted properties preserve their current values.",
+      "properties": {
+        "desiredState": {
+          "$ref": "#/definitions/ChangeDataCaptureDesiredState",
+          "description": "The requested capability state.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "autoUpgradeExtension": {
+          "type": "boolean",
+          "description": "Whether HorizonDB may automatically upgrade the service-owned change data capture extension within the supported compatibility policy.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
+    "ChangeDataCaptureConfiguration": {
+      "type": "object",
+      "description": "A HorizonDB database enrollment for Microsoft Fabric Mirroring.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeDataCaptureConfigurationProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ChangeDataCaptureConfigurationForPatchUpdate": {
+      "type": "object",
+      "description": "A sparse update request for a change data capture configuration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeDataCaptureConfigurationPropertiesForPatchUpdate",
+          "description": "The configuration properties to update."
+        }
+      }
+    },
+    "ChangeDataCaptureConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a ChangeDataCaptureConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ChangeDataCaptureConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/ChangeDataCaptureConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ChangeDataCaptureConfigurationProperties": {
+      "type": "object",
+      "description": "The properties of a Microsoft Fabric Mirroring configuration.",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The exact PostgreSQL database name enrolled in this logical stream. This value is immutable.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "usageProfile": {
+          "$ref": "#/definitions/ChangeDataCaptureUsageProfile",
+          "description": "The immutable usage profile. API version 2026-09-01 accepts Mirroring only.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "destinationResourceId": {
+          "$ref": "#/definitions/ChangeDataCaptureDestinationResourceId",
+          "description": "The immutable resource ID of an enabled change data capture destination under the same cluster.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "logicalStreamId": {
+          "type": "string",
+          "description": "A service-generated identifier for the logical stream, represented as an RFC 4122 GUID. This value remains stable when a writer role moves and the service materializes a replacement ARM resource under the new writer cluster.",
+          "readOnly": true
+        },
+        "desiredState": {
+          "$ref": "#/definitions/ChangeDataCaptureDesiredState",
+          "description": "The requested configuration state.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "effectiveState": {
+          "$ref": "#/definitions/ChangeDataCaptureEffectiveState",
+          "description": "The current effective configuration state.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the latest configuration mutation.",
+          "readOnly": true
+        },
+        "extension": {
+          "$ref": "#/definitions/ChangeDataCaptureExtensionStatus",
+          "description": "The change data capture extension state for the enrolled database.",
+          "readOnly": true
+        },
+        "replication": {
+          "$ref": "#/definitions/ChangeDataCaptureReplicationStatus",
+          "description": "The known status of the destination-owned replication session.",
+          "readOnly": true
+        },
+        "topology": {
+          "$ref": "#/definitions/ChangeDataCaptureTopologyBindingStatus",
+          "description": "The current writer-topology binding for this logical stream.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ChangeDataCaptureStatus",
+          "description": "Customer-safe health information for the configuration.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "databaseName",
+        "usageProfile",
+        "destinationResourceId",
+        "logicalStreamId",
+        "desiredState",
+        "effectiveState",
+        "extension",
+        "replication",
+        "topology",
+        "status"
+      ]
+    },
+    "ChangeDataCaptureConfigurationPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Properties for updating a change data capture configuration. Omitted properties preserve their current values.",
+      "properties": {
+        "desiredState": {
+          "$ref": "#/definitions/ChangeDataCaptureDesiredState",
+          "description": "The requested configuration state.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
+    "ChangeDataCaptureConfigurationResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "An Azure resource ID that identifies a HorizonDB change data capture configuration.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.HorizonDb/clusters/changeDataCaptureConfigurations"
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureDesiredState": {
+      "type": "string",
+      "description": "The requested state of a HorizonDB change data capture capability, destination, or configuration.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeDataCaptureDesiredState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The resource should be enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The resource should be disabled."
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureDestination": {
+      "type": "object",
+      "description": "A reusable Microsoft Fabric destination for HorizonDB change data capture configurations.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeDataCaptureDestinationProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ChangeDataCaptureDestinationDetails": {
+      "type": "object",
+      "description": "Destination-specific settings discriminated by destinationType.",
+      "properties": {
+        "destinationType": {
+          "$ref": "#/definitions/ChangeDataCaptureDestinationType",
+          "description": "The destination family.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "protocol": {
+          "$ref": "#/definitions/ChangeDataCaptureProtocol",
+          "description": "The protocol used to communicate with the destination.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "destinationType",
+      "required": [
+        "destinationType",
+        "protocol"
+      ]
+    },
+    "ChangeDataCaptureDestinationEffectiveState": {
+      "type": "string",
+      "description": "The effective state of a HorizonDB change data capture destination.",
+      "enum": [
+        "WaitingForIdentity",
+        "Enabling",
+        "Enabled",
+        "Disabling",
+        "Disabled",
+        "Degraded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeDataCaptureDestinationEffectiveState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WaitingForIdentity",
+            "value": "WaitingForIdentity",
+            "description": "The destination is waiting for a validated active identity assignment."
+          },
+          {
+            "name": "Enabling",
+            "value": "Enabling",
+            "description": "The destination is being enabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The destination is enabled."
+          },
+          {
+            "name": "Disabling",
+            "value": "Disabling",
+            "description": "The destination is being disabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The destination is disabled."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "The destination is available with reduced functionality or impaired health."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The destination is not operational because reconciliation failed."
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureDestinationForPatchUpdate": {
+      "type": "object",
+      "description": "A sparse update request for a change data capture destination.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeDataCaptureDestinationPropertiesForPatchUpdate",
+          "description": "The destination properties to update."
+        }
+      }
+    },
+    "ChangeDataCaptureDestinationListResult": {
+      "type": "object",
+      "description": "The response of a ChangeDataCaptureDestination list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ChangeDataCaptureDestination items on this page",
+          "items": {
+            "$ref": "#/definitions/ChangeDataCaptureDestination"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ChangeDataCaptureDestinationProperties": {
+      "type": "object",
+      "description": "The properties of a Microsoft Fabric change data capture destination.",
+      "properties": {
+        "destination": {
+          "$ref": "#/definitions/ChangeDataCaptureDestinationDetails",
+          "description": "The immutable Microsoft Fabric destination settings. Resubmitting the same values is accepted; changing them requires deleting and recreating the destination.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "desiredState": {
+          "$ref": "#/definitions/ChangeDataCaptureDesiredState",
+          "description": "The requested destination state.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "effectiveState": {
+          "$ref": "#/definitions/ChangeDataCaptureDestinationEffectiveState",
+          "description": "The current effective destination state.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the latest destination mutation.",
+          "readOnly": true
+        },
+        "activeIdentityAssignmentResourceId": {
+          "$ref": "#/definitions/ChangeDataCaptureIdentityAssignmentResourceId",
+          "description": "The resource ID of the currently active identity assignment, if one is active.",
+          "readOnly": true
+        },
+        "configurationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of change data capture configurations that reference this destination.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ChangeDataCaptureStatus",
+          "description": "Customer-safe health information for the destination.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "destination",
+        "desiredState",
+        "effectiveState",
+        "configurationCount",
+        "status"
+      ]
+    },
+    "ChangeDataCaptureDestinationPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Properties for updating a change data capture destination. Omitted properties preserve their current values.",
+      "properties": {
+        "desiredState": {
+          "$ref": "#/definitions/ChangeDataCaptureDesiredState",
+          "description": "The requested destination state.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
+    "ChangeDataCaptureDestinationResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "An Azure resource ID that identifies a HorizonDB change data capture destination.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.HorizonDb/clusters/changeDataCaptureDestinations"
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureDestinationType": {
+      "type": "string",
+      "description": "The destination type supported by this API version.",
+      "enum": [
+        "Fabric"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeDataCaptureDestinationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fabric",
+            "value": "Fabric",
+            "description": "A Microsoft Fabric destination."
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureEffectiveState": {
+      "type": "string",
+      "description": "The effective state of a HorizonDB change data capture capability or configuration.",
+      "enum": [
+        "Enabling",
+        "Enabled",
+        "Disabling",
+        "Disabled",
+        "Degraded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeDataCaptureEffectiveState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabling",
+            "value": "Enabling",
+            "description": "The resource is being enabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The resource is enabled."
+          },
+          {
+            "name": "Disabling",
+            "value": "Disabling",
+            "description": "The resource is being disabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The resource is disabled."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "The resource is available with reduced functionality or impaired health."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource is not operational because reconciliation failed."
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureEngineConfigurationState": {
+      "type": "string",
+      "description": "The readiness of HorizonDB engine settings required for change data capture.",
+      "enum": [
+        "Ready",
+        "NotReady",
+        "Reconciling",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeDataCaptureEngineConfigurationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "The required engine settings are ready."
+          },
+          {
+            "name": "NotReady",
+            "value": "NotReady",
+            "description": "One or more required engine settings are not ready."
+          },
+          {
+            "name": "Reconciling",
+            "value": "Reconciling",
+            "description": "The service is reconciling required engine settings."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Engine-setting reconciliation failed."
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureExtensionState": {
+      "type": "string",
+      "description": "The lifecycle state of the HorizonDB change data capture extension.",
+      "enum": [
+        "NotInstalled",
+        "Installing",
+        "Ready",
+        "Upgrading",
+        "Removing",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeDataCaptureExtensionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotInstalled",
+            "value": "NotInstalled",
+            "description": "The extension is not installed."
+          },
+          {
+            "name": "Installing",
+            "value": "Installing",
+            "description": "The extension is being installed."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "The extension is ready."
+          },
+          {
+            "name": "Upgrading",
+            "value": "Upgrading",
+            "description": "The extension is being upgraded."
+          },
+          {
+            "name": "Removing",
+            "value": "Removing",
+            "description": "The extension is being removed."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The extension operation failed."
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureExtensionStatus": {
+      "type": "object",
+      "description": "The installed HorizonDB change data capture extension and its current state.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The extension name.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The installed extension version.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/ChangeDataCaptureExtensionState",
+          "description": "The current extension lifecycle state.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "state"
+      ]
+    },
+    "ChangeDataCaptureIdentityActivationState": {
+      "type": "string",
+      "description": "The activation state of a change data capture identity assignment.",
+      "enum": [
+        "Inactive",
+        "Activating",
+        "Active",
+        "Deactivating",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeDataCaptureIdentityActivationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "The identity assignment is not active."
+          },
+          {
+            "name": "Activating",
+            "value": "Activating",
+            "description": "The identity assignment is being activated."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The identity assignment is active."
+          },
+          {
+            "name": "Deactivating",
+            "value": "Deactivating",
+            "description": "The identity assignment is being deactivated."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The identity activation transition failed."
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureIdentityAssignmentProperties": {
+      "type": "object",
+      "description": "The properties of a change data capture identity assignment.",
+      "properties": {
+        "identityResourceId": {
+          "$ref": "#/definitions/ChangeDataCaptureUserAssignedIdentityResourceId",
+          "description": "The immutable resource ID of the user-assigned managed identity. Resubmitting the same value is accepted; changing it requires deleting and recreating the assignment.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "effectiveState": {
+          "$ref": "#/definitions/ChangeDataCaptureIdentityAssignmentState",
+          "description": "The current assignment lifecycle state.",
+          "readOnly": true
+        },
+        "activationState": {
+          "$ref": "#/definitions/ChangeDataCaptureIdentityActivationState",
+          "description": "The current activation state within the parent destination.",
+          "readOnly": true
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The Microsoft Entra principal ID resolved from the user-assigned managed identity, represented as an RFC 4122 GUID.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The Microsoft Entra tenant ID resolved from the user-assigned managed identity, represented as an RFC 4122 GUID.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the latest identity-assignment mutation.",
+          "readOnly": true
+        },
+        "validation": {
+          "$ref": "#/definitions/IdentityValidationStatus",
+          "description": "The latest validation result for this identity assignment.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ChangeDataCaptureStatus",
+          "description": "Customer-safe health information for the identity assignment.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "identityResourceId",
+        "effectiveState",
+        "activationState",
+        "principalId",
+        "tenantId",
+        "validation",
+        "status"
+      ]
+    },
+    "ChangeDataCaptureIdentityAssignmentResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "An Azure resource ID that identifies a HorizonDB change data capture identity assignment.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.HorizonDb/clusters/changeDataCaptureDestinations/identityAssignments"
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureIdentityAssignmentState": {
+      "type": "string",
+      "description": "The lifecycle state of a change data capture identity assignment.",
+      "enum": [
+        "Assigning",
+        "Assigned",
+        "Removing",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeDataCaptureIdentityAssignmentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Assigning",
+            "value": "Assigning",
+            "description": "The identity is being assigned."
+          },
+          {
+            "name": "Assigned",
+            "value": "Assigned",
+            "description": "The identity is assigned."
+          },
+          {
+            "name": "Removing",
+            "value": "Removing",
+            "description": "The identity assignment is being removed."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The identity assignment operation failed."
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureIdentityValidationState": {
+      "type": "string",
+      "description": "The validation state of a change data capture identity assignment.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeDataCaptureIdentityValidationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Identity validation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Identity validation is running."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Identity validation succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Identity validation failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ChangeDataCapturePrerequisiteStatus": {
+      "type": "object",
+      "description": "The current readiness of prerequisites shared by change data capture configurations.",
+      "properties": {
+        "engineConfigurationState": {
+          "$ref": "#/definitions/ChangeDataCaptureEngineConfigurationState",
+          "description": "The readiness of the required engine configuration.",
+          "readOnly": true
+        },
+        "readWriteEndpointState": {
+          "$ref": "#/definitions/ChangeDataCaptureReadWriteEndpointState",
+          "description": "The availability of the read-write endpoint required for engine mutations.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "engineConfigurationState",
+        "readWriteEndpointState"
+      ]
+    },
+    "ChangeDataCaptureProtocol": {
+      "type": "string",
+      "description": "The protocol used to communicate with a change data capture destination.",
+      "enum": [
+        "Native"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeDataCaptureProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Native",
+            "value": "Native",
+            "description": "The destination's native protocol."
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureReadWriteEndpointState": {
+      "type": "string",
+      "description": "The availability of a read-write endpoint for change data capture engine mutations.",
+      "enum": [
+        "Ready",
+        "Unavailable"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeDataCaptureReadWriteEndpointState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "An eligible read-write endpoint is ready."
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "No eligible read-write endpoint is currently available."
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureReplicationArchitecture": {
+      "type": "string",
+      "description": "The implementation architecture used to capture and publish changes.",
+      "enum": [
+        "ComputeBased",
+        "StorageBased",
+        "Hybrid"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeDataCaptureReplicationArchitecture",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ComputeBased",
+            "value": "ComputeBased",
+            "description": "Change capture runs with the HorizonDB compute layer."
+          },
+          {
+            "name": "StorageBased",
+            "value": "StorageBased",
+            "description": "Change capture runs with the HorizonDB storage layer."
+          },
+          {
+            "name": "Hybrid",
+            "value": "Hybrid",
+            "description": "Change capture uses both compute and storage components."
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureReplicationState": {
+      "type": "string",
+      "description": "The state of a destination-owned replication session.",
+      "enum": [
+        "NotApplicable",
+        "NotConnected",
+        "Connecting",
+        "Replicating",
+        "Reconnecting",
+        "Paused",
+        "Stopping",
+        "Degraded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeDataCaptureReplicationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "A destination session does not apply to the current resource state."
+          },
+          {
+            "name": "NotConnected",
+            "value": "NotConnected",
+            "description": "No destination session is connected."
+          },
+          {
+            "name": "Connecting",
+            "value": "Connecting",
+            "description": "A destination session is connecting."
+          },
+          {
+            "name": "Replicating",
+            "value": "Replicating",
+            "description": "A destination session is replicating changes."
+          },
+          {
+            "name": "Reconnecting",
+            "value": "Reconnecting",
+            "description": "A destination session is reconnecting after an interruption."
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "The destination session is paused."
+          },
+          {
+            "name": "Stopping",
+            "value": "Stopping",
+            "description": "The destination session is stopping."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "The destination session is operating with impaired health."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The destination session failed."
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureReplicationStatus": {
+      "type": "object",
+      "description": "The destination-owned replication-session status known to HorizonDB.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ChangeDataCaptureReplicationState",
+          "description": "The current replication-session state.",
+          "readOnly": true
+        },
+        "externalArtifactId": {
+          "type": "string",
+          "description": "An opaque identifier of a destination-owned artifact, such as a Microsoft Fabric mirrored-database item. HorizonDB does not create, update, or delete the identified artifact.",
+          "readOnly": true
+        },
+        "lastConnectedAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time, in UTC, when a destination session most recently connected.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "ChangeDataCaptureStatus": {
+      "type": "object",
+      "description": "Customer-safe health information for a HorizonDB change data capture resource.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A stable machine-readable status code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A localized customer-safe description of the current status.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ChangeDataCaptureTopologyBindingState": {
+      "type": "string",
+      "description": "The relationship of a change data capture configuration to the current writer topology.",
+      "enum": [
+        "Active",
+        "Reconciling",
+        "RebindRequired",
+        "Superseded",
+        "Conflict"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeDataCaptureTopologyBindingState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The configuration belongs to the current active writer."
+          },
+          {
+            "name": "Reconciling",
+            "value": "Reconciling",
+            "description": "The service is reconciling the configuration after a writer change."
+          },
+          {
+            "name": "RebindRequired",
+            "value": "RebindRequired",
+            "description": "The destination session must bind to a replacement configuration resource ID."
+          },
+          {
+            "name": "Superseded",
+            "value": "Superseded",
+            "description": "The configuration belongs to a former writer and has been replaced."
+          },
+          {
+            "name": "Conflict",
+            "value": "Conflict",
+            "description": "Equivalent change data capture state could not be materialized without overwriting unrelated state."
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureTopologyBindingStatus": {
+      "type": "object",
+      "description": "The current writer-topology binding of a change data capture configuration.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ChangeDataCaptureTopologyBindingState",
+          "description": "The configuration's relationship to the current writer topology.",
+          "readOnly": true
+        },
+        "generation": {
+          "type": "integer",
+          "format": "int64",
+          "description": "A monotonically increasing topology generation for this logical stream.",
+          "readOnly": true
+        },
+        "activeClusterResourceId": {
+          "$ref": "#/definitions/HorizonDbClusterResourceId",
+          "description": "The Azure resource ID of the cluster that currently owns the active configuration projection.",
+          "readOnly": true
+        },
+        "replacementConfigurationResourceId": {
+          "$ref": "#/definitions/ChangeDataCaptureConfigurationResourceId",
+          "description": "The replacement configuration resource ID when this projection has been superseded or requires rebinding.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state",
+        "generation",
+        "activeClusterResourceId"
+      ]
+    },
+    "ChangeDataCaptureUsageProfile": {
+      "type": "string",
+      "description": "The reason that a change data capture configuration exists.",
+      "enum": [
+        "Mirroring"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeDataCaptureUsageProfile",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mirroring",
+            "value": "Mirroring",
+            "description": "The configuration publishes database changes for Microsoft Fabric Mirroring."
+          }
+        ]
+      }
+    },
+    "ChangeDataCaptureUserAssignedIdentityResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "An Azure resource ID that identifies a user-assigned managed identity.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+          }
+        ]
+      }
+    },
     "ClusterCapability": {
       "type": "object",
       "description": "The HorizonDB Cluster capabilities available in a location.",
@@ -3537,6 +6140,44 @@
           }
         ]
       }
+    },
+    "FabricDestinationDetails": {
+      "type": "object",
+      "description": "Settings for a Microsoft Fabric destination.",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": "Specifies the Microsoft Fabric native destination protocol.",
+          "enum": [
+            "Native"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The opaque identifier of the Microsoft Fabric workspace that owns the destination artifact.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "protocol",
+        "workspaceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChangeDataCaptureDestinationDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "Fabric"
     },
     "GeoRedundancyState": {
       "type": "string",
@@ -3906,6 +6547,18 @@
             "update"
           ]
         }
+      }
+    },
+    "HorizonDbClusterResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "An Azure resource ID that identifies a HorizonDB cluster.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.HorizonDb/clusters"
+          }
+        ]
       }
     },
     "HorizonDbComputeModel": {
@@ -4434,6 +7087,72 @@
           ]
         }
       }
+    },
+    "IdentityAssignment": {
+      "type": "object",
+      "description": "A user-assigned managed identity authorized for a HorizonDB change data capture destination.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeDataCaptureIdentityAssignmentProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "IdentityAssignmentListResult": {
+      "type": "object",
+      "description": "The response of a IdentityAssignment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The IdentityAssignment items on this page",
+          "items": {
+            "$ref": "#/definitions/IdentityAssignment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IdentityValidationStatus": {
+      "type": "object",
+      "description": "The current validation result for a change data capture identity assignment.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ChangeDataCaptureIdentityValidationState",
+          "description": "The current validation state.",
+          "readOnly": true
+        },
+        "validatedAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time, in UTC, when validation most recently completed.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "The customer-safe validation error when validation failed.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state"
+      ]
     },
     "LocationCapability": {
       "type": "object",
@@ -5207,5 +7926,15 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "ChangeDataCaptureDestinationIfMatchParameter": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "The destination entity tag. The action proceeds only when this value matches the destination's current entity tag.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    }
+  }
 }
