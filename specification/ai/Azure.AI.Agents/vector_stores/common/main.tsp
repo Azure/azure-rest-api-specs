@@ -7,6 +7,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Agents;
 
 /** Options to configure a vector store static chunking strategy. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_05_01)
 model VectorStoreStaticChunkingStrategyOptions {
   /** The maximum number of tokens in each chunk. The default value is 800. The minimum value is 100 and the maximum value is 4096. */
@@ -49,6 +50,7 @@ model VectorStoreAutoChunkingStrategyRequest
 }
 
 /** A statically configured chunking strategy. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_05_01)
 model VectorStoreStaticChunkingStrategyRequest
   extends VectorStoreChunkingStrategyRequest {
@@ -67,6 +69,7 @@ union VectorStoreChunkingStrategyResponseType {
 }
 
 /** An abstract representation of a vector store chunking strategy configuration. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @discriminator("type")
 @added(Versions.v2025_05_01)
 model VectorStoreChunkingStrategyResponse {
@@ -77,6 +80,7 @@ model VectorStoreChunkingStrategyResponse {
 /**
  * This is returned when the chunking strategy is unknown. Typically, this is because the file was indexed before the chunking_strategy concept was introduced in the API.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_05_01)
 model VectorStoreAutoChunkingStrategyResponse
   extends VectorStoreChunkingStrategyResponse {
@@ -85,6 +89,7 @@ model VectorStoreAutoChunkingStrategyResponse
 }
 
 /** A statically configured chunking strategy. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_05_01)
 model VectorStoreStaticChunkingStrategyResponse
   extends VectorStoreChunkingStrategyResponse {

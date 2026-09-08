@@ -50,7 +50,7 @@ describe("renderSuppressionsCommentBody", () => {
   const options = {
     owner: "test-owner",
     repo: "test-repo",
-    head_sha: "abc123",
+    pullNumber: 42,
     isApproved: false,
     runUrl: "https://github.com/test-owner/test-repo/actions/runs/123",
   };
@@ -81,7 +81,13 @@ describe("renderSuppressionsCommentBody", () => {
 
     expect(body).toContain("## TypeSpec suppressions requiring review");
     expect(body).toContain("Suppressions are strongly discouraged");
-    expect(body).toContain("❌ Approval required — 1 suppression");
+    expect(body).toContain(
+      "❌ Approval required (currently under testing, review NOT enforced) — 1 suppression",
+    );
+    // Source link text is the file name + line only (full path stays in the href).
+    expect(body).toContain(
+      '<a href="https://github.com/test-owner/test-repo/pull/42/files#diff-efaa719245fb34e480918c08f8fe8f5b6f620477e1053f1d6f0e2a0ca5f05e69R12">main.tsp#L12</a>',
+    );
   });
 
   it("reflects approval status in the heading and status cells", () => {
@@ -106,7 +112,9 @@ describe("renderSuppressionsCommentBody", () => {
       ...options,
       isApproved: false,
     });
-    expect(pending).toContain("❌ Approval required");
+    expect(pending).toContain(
+      "❌ Approval required (currently under testing, review NOT enforced)",
+    );
     expect(pending).toContain('<td align="center">❌</td>');
 
     const approved = renderSuppressionsCommentBody(report, {
@@ -187,12 +195,13 @@ describe("buildSuppressionsComment", async () => {
         "test-owner",
         "test-repo",
         "abc123",
+        42,
         [],
       );
 
       expect(body).toContain("Approved-TypeSpecSuppression");
       expect(body).toContain(
-        "https://github.com/test-owner/test-repo/blob/abc123/specification/demo/resource-manager/Microsoft.Demo/Demo/main.tsp#L12",
+        "https://github.com/test-owner/test-repo/pull/42/files#diff-58603b41f47740a3dc47d775ed130073a0a767b9e9d23f2725ce1720a38e5df1R12",
       );
       expect(body).toContain("New suppressions (1)");
       expect(body).toContain("Changed suppressions (1)");
@@ -201,7 +210,9 @@ describe("buildSuppressionsComment", async () => {
       );
       expect(body).toContain("Suppressions are strongly discouraged");
       expect(body).toContain("https://aka.ms/tsp-suppress/feedback");
-      expect(body).toContain("❌ Approval required — 2 suppressions");
+      expect(body).toContain(
+        "❌ Approval required (currently under testing, review NOT enforced) — 2 suppressions",
+      );
     },
   );
 
@@ -234,6 +245,7 @@ describe("buildSuppressionsComment", async () => {
         "test-owner",
         "test-repo",
         "abc123",
+        42,
         [],
       );
 
@@ -273,9 +285,12 @@ describe("buildSuppressionsComment", async () => {
         "test-owner",
         "test-repo",
         "abc123",
+        42,
         [],
       );
-      expect(pending).toContain("❌ Approval required");
+      expect(pending).toContain(
+        "❌ Approval required (currently under testing, review NOT enforced)",
+      );
       expect(pending).toContain('<td align="center">❌</td>');
 
       const approved = await buildSuppressionsComment(
@@ -284,6 +299,7 @@ describe("buildSuppressionsComment", async () => {
         "test-owner",
         "test-repo",
         "abc123",
+        42,
         ["Approved-TypeSpecSuppression"],
       );
       expect(approved).toContain("✅ Approved");
@@ -320,6 +336,7 @@ describe("buildSuppressionsComment", async () => {
         "test-owner",
         "test-repo",
         "abc123",
+        42,
         [],
       );
 
@@ -379,6 +396,7 @@ describe("buildSuppressionsComment", async () => {
         "test-owner",
         "test-repo",
         "abc123",
+        42,
         [],
       );
 
@@ -440,6 +458,7 @@ describe("buildSuppressionsComment", async () => {
         "test-owner",
         "test-repo",
         "abc123",
+        42,
         [],
       );
 
@@ -484,7 +503,7 @@ describe("buildSuppressionsComment", async () => {
       );
 
       await expect(
-        buildSuppressionsComment(github, mockCore, "test-owner", "test-repo", "abc123", []),
+        buildSuppressionsComment(github, mockCore, "test-owner", "test-repo", "abc123", 42, []),
       ).resolves.toBeUndefined();
     },
   );
@@ -495,7 +514,7 @@ describe("buildSuppressionsComment", async () => {
     // No workflow runs are mocked (createMockGithub defaults to an empty list),
     // so there is no completed Analyze Code run / report artifact to render.
     await expect(
-      buildSuppressionsComment(github, mockCore, "test-owner", "test-repo", "abc123", []),
+      buildSuppressionsComment(github, mockCore, "test-owner", "test-repo", "abc123", 42, []),
     ).resolves.toBeUndefined();
   });
 });

@@ -5,6 +5,7 @@ using Azure.ClientGenerator.Core;
 using AzureMonitorExporter;
 
 @@clientName(AzureMonitorExporter, "ApplicationInsightsClient", "!autorest");
+@@clientName(AzureMonitorExporter, "ApplicationInsightsClient", "javascript");
 @@clientName(AzureMonitorExporter, "ApplicationInsightsRestClient", "csharp");
 @@clientName(AzureMonitorExporter, "AzureMonitorClient", "python");
 

@@ -41,6 +41,7 @@ model EdgeAction is TrackedResource<EdgeActionProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-client-flatten' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to explicit modeling without flattening."
 @@extension(EdgeAction.properties, "x-ms-client-flatten", true);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
 @@extension(EdgeAction.properties, "x-ms-mutability", #["read", "create"]);
@@ -56,6 +57,7 @@ model EdgeActionVersion is TrackedResource<EdgeActionVersionProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-client-flatten' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to explicit modeling without flattening."
 @@extension(EdgeActionVersion.properties, "x-ms-client-flatten", true);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
 @@extension(
@@ -76,6 +78,7 @@ model EdgeActionExecutionFilter
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-client-flatten' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to explicit modeling without flattening."
 @@extension(EdgeActionExecutionFilter.properties, "x-ms-client-flatten", true);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
 @@extension(

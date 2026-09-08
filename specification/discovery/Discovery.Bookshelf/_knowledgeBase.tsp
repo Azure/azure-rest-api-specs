@@ -360,6 +360,7 @@ interface KnowledgeBases {
         @header("Operation-Location")
         operationLocation: ResourceLocation<KnowledgeBase>;
 
+        #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
         @body body: {
           @doc("The unique ID of the operation.")
           id: string;

@@ -4,6 +4,8 @@ import "../agents/models.tsp";
 import "../skills/models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -70,14 +72,18 @@ alias ToolFields<Source> = {
 alias ToolboxCodeInterpreterToolType = "code_interpreter";
 alias ToolboxFileSearchToolType = "file_search";
 alias ToolboxWebSearchToolType = "web_search";
+alias ToolboxShellToolType = "shell";
 alias ToolboxMCPToolType = "mcp";
 alias ToolboxAzureAISearchToolType = "azure_ai_search";
 alias ToolboxOpenApiToolType = "openapi";
+alias ToolboxA2AToolType = "a2a";
 alias ToolboxA2APreviewToolType = "a2a_preview";
 alias ToolboxBrowserAutomationPreviewToolType = "browser_automation_preview";
 alias ToolboxReminderPreviewToolType = "reminder_preview";
 alias ToolboxWorkIQPreviewToolType = "work_iq_preview";
 alias ToolboxFabricIQPreviewToolType = "fabric_iq_preview";
+alias ToolboxWebIQPreviewToolType = "web_iq_preview";
+alias ToolboxSearchToolType = "toolbox_search";
 alias ToolboxSearchPreviewToolType = "toolbox_search_preview";
 
 /**
@@ -95,7 +101,11 @@ union ToolboxToolType {
   reminder_preview: ToolboxReminderPreviewToolType,
   work_iq_preview: ToolboxWorkIQPreviewToolType,
   fabric_iq_preview: ToolboxFabricIQPreviewToolType,
+  toolbox_search: ToolboxSearchToolType,
   toolbox_search_preview: ToolboxSearchPreviewToolType,
+  a2a: ToolboxA2AToolType,
+  shell: ToolboxShellToolType,
+  web_iq_preview: ToolboxWebIQPreviewToolType,
 }
 
 /**
@@ -137,6 +147,88 @@ model WebSearchToolboxTool extends ToolboxTool {
 }
 
 /**
+ * An execution environment for a shell tool stored in a toolbox. This environment model is scoped to toolbox configuration and does not modify the OpenAI shell environment contract.
+ */
+@discriminator("type")
+model ToolboxShellEnvironment {
+  /**
+   * The type of the shell execution environment.
+   */
+  type: string;
+}
+
+/**
+ * Network access policy for an automatically provisioned toolbox shell container.
+ */
+@discriminator("type")
+model ToolboxShellNetworkPolicy {
+  /**
+   * The type of network access policy.
+   */
+  type: string;
+}
+
+/**
+ * A network policy that disables outbound access from a toolbox shell container.
+ */
+model ToolboxShellNetworkPolicyDisabled extends ToolboxShellNetworkPolicy {
+  /**
+   * The type of network access policy. Always `disabled`.
+   */
+  type: "disabled";
+}
+
+/**
+ * An automatically provisioned container environment for a shell tool stored in a toolbox.
+ */
+model ToolboxShellContainerAutoEnvironment extends ToolboxShellEnvironment {
+  /**
+   * The type of the shell execution environment. Always `container_auto`.
+   */
+  type: "container_auto";
+
+  ...OmitProperties<OpenAI.ContainerAutoParam, "type" | "network_policy">;
+
+  /**
+   * The network access policy for the container. When omitted, the service defaults to disabled outbound network access.
+   */
+  network_policy?: ToolboxShellNetworkPolicy;
+}
+
+/**
+ * An existing container environment for a shell tool stored in a toolbox.
+ */
+model ToolboxShellContainerReferenceEnvironment
+  extends ToolboxShellEnvironment {
+  /**
+   * The type of the shell execution environment. Always `container_reference`.
+   */
+  type: "container_reference";
+
+  ...OmitProperties<
+    OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam,
+    "type"
+  >;
+}
+
+/**
+ * A shell tool stored in a toolbox. This model is additive to toolbox configuration and does not modify the OpenAI tool contract or existing toolbox tool definitions.
+ */
+model ShellToolboxTool extends ToolboxTool {
+  /**
+   * The type of the tool. Always `shell`.
+   */
+  type: ToolboxShellToolType;
+
+  ...OmitProperties<ToolFields<OpenAI.FunctionShellToolParam>, "environment">;
+
+  /**
+   * The environment in which shell commands are executed. Specify an automatically provisioned container or an existing container.
+   */
+  environment: ToolboxShellEnvironment;
+}
+
+/**
  * An MCP tool stored in a toolbox.
  */
 model MCPToolboxTool extends ToolboxTool {
@@ -163,6 +255,15 @@ model OpenApiToolboxTool extends ToolboxTool {
 /**
  * An A2A tool stored in a toolbox.
  */
+model A2AToolboxTool extends ToolboxTool {
+  type: ToolboxA2AToolType;
+  ...ToolFields<A2ATool>;
+}
+
+/**
+ * An A2A tool stored in a toolbox.
+ */
+@extension("x-ms-foundry-meta", PreviewTool)
 model A2APreviewToolboxTool extends ToolboxTool {
   type: ToolboxA2APreviewToolType;
   ...ToolFields<A2APreviewTool>;
@@ -171,6 +272,7 @@ model A2APreviewToolboxTool extends ToolboxTool {
 /**
  * A browser automation tool stored in a toolbox.
  */
+@extension("x-ms-foundry-meta", PreviewTool)
 model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
   type: ToolboxBrowserAutomationPreviewToolType;
   ...ToolFields<BrowserAutomationPreviewTool>;
@@ -179,6 +281,7 @@ model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
 /**
  * A reminder tool stored in a toolbox.
  */
+@extension("x-ms-foundry-meta", PreviewTool)
 model ReminderPreviewToolboxTool extends ToolboxTool {
   type: ToolboxReminderPreviewToolType;
 }
@@ -186,6 +289,7 @@ model ReminderPreviewToolboxTool extends ToolboxTool {
 /**
  * A WorkIQ tool stored in a toolbox.
  */
+@extension("x-ms-foundry-meta", PreviewTool)
 model WorkIQPreviewToolboxTool extends ToolboxTool {
   type: ToolboxWorkIQPreviewToolType;
   ...ToolFields<WorkIQPreviewTool>;
@@ -194,19 +298,40 @@ model WorkIQPreviewToolboxTool extends ToolboxTool {
 /**
  * A FabricIQ tool stored in a toolbox.
  */
+@extension("x-ms-foundry-meta", PreviewTool)
 model FabricIQPreviewToolboxTool extends ToolboxTool {
   type: ToolboxFabricIQPreviewToolType;
   ...ToolFields<FabricIQPreviewTool>;
 }
 
 /**
+ * A WebIQ tool stored in a toolbox.
+ */
+@extension("x-ms-foundry-meta", PreviewTool)
+model WebIQPreviewToolboxTool extends ToolboxTool {
+  type: ToolboxWebIQPreviewToolType;
+  ...ToolFields<WebIQPreviewTool>;
+}
+
+/**
  * A toolbox search tool stored in a toolbox.
  */
+@extension("x-ms-foundry-meta", PreviewTool)
 model ToolboxSearchPreviewToolboxTool extends ToolboxTool {
   /**
    * The type of the tool. Always `toolbox_search_preview`.
    */
   type: ToolboxSearchPreviewToolType;
+}
+
+/**
+ * A toolbox search tool stored in a toolbox.
+ */
+model ToolSearchToolboxTool extends ToolboxTool {
+  /**
+   * The type of the tool. Always `toolbox_search`.
+   */
+  type: ToolboxSearchToolType;
 }
 @doc("Policy configuration for a toolbox, including content safety and other governance settings.")
 model ToolboxPolicies {
@@ -335,6 +460,7 @@ alias DeleteToolboxRequest = {
   name: string;
 };
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateToolboxRequest {
   @doc("The name of the toolbox to update.")
   @path

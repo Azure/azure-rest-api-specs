@@ -245,6 +245,7 @@ model NginxDeploymentApiKeyResponseProperties {
 /**
  * Nginx Deployment Api Key List Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NginxDeploymentApiKeyListResponse
   is Azure.Core.Page<NginxDeploymentApiKeyResponse>;
 
@@ -297,11 +298,13 @@ model NginxCertificateErrorResponseBody {
 /**
  * Nginx Certificate List Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NginxCertificateListResponse is Azure.Core.Page<NginxCertificate>;
 
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NginxConfigurationListResponse
   is Azure.Core.Page<NginxConfigurationResponse>;
 
@@ -998,6 +1001,7 @@ model NginxDeploymentUpdatePropertiesNginxAppProtect {
 /**
  * Nginx Deployment List Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NginxDeploymentListResponse is Azure.Core.Page<NginxDeployment>;
 
 /**
@@ -1107,6 +1111,7 @@ model NginxDeploymentDefaultWafPolicyProperties {
 /**
  * Nginx Deployment Waf Policy List Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NginxDeploymentWafPolicyListResponse
   is Azure.Core.Page<NginxDeploymentWafPolicyMetadata>;
 
@@ -1189,6 +1194,7 @@ model NginxDeploymentWafPolicyError {
 /**
  * Nginx Deployment Waf Policy Analysis Create Request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_11_01)
 model NginxDeploymentWafPolicyAnalysisCreateRequest {
   /**
@@ -1217,6 +1223,7 @@ model NginxDeploymentWafPolicyAnalysisData {
 /**
  * Nginx Deployment Waf Policy Analysis Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_11_01)
 model NginxDeploymentWafPolicyAnalysisResponse {
   /**

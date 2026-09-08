@@ -220,6 +220,19 @@ interface FleetManagedNamespaces {
 
   listByFleet is ArmResourceListByParent<FleetManagedNamespace>;
 
+  @sharedRoute
+  @removed(Versions.v2026_06_02_preview)
+  @renamedFrom(Versions.v2026_06_02_preview, "update")
+  updateOld is ArmCustomPatchAsync<
+    FleetManagedNamespace,
+    FleetManagedNamespacePatch,
+    Azure.ResourceManager.Foundations.BaseParameters<FleetManagedNamespace> &
+      IfMatchParameters<FleetManagedNamespace>
+  >;
+
+  @sharedRoute
+  @added(Versions.v2026_06_02_preview)
+  @Azure.Core.useFinalStateVia("original-uri")
   update is ArmCustomPatchAsync<
     FleetManagedNamespace,
     FleetManagedNamespacePatch,
@@ -233,4 +246,41 @@ interface FleetManagedNamespaces {
 model FleetManagedNamespacePatch {
   /* The ARM tags of the fleet managed namespace resource.*/
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  @added(Versions.v2026_06_02_preview)
+  @doc("The updatable properties of the fleet managed namespace.")
+  properties?: FleetManagedNamespacePropertiesPatch;
+}
+
+@added(Versions.v2026_06_02_preview)
+@doc("The properties of a fleet managed namespace that can be patched.")
+model FleetManagedNamespacePropertiesPatch {
+  @doc("The namespace properties for the fleet managed namespace.")
+  managedNamespaceProperties?: ManagedNamespaceProperties;
+
+  @doc("Action if the managed namespace with the same name already exists.")
+  adoptionPolicy?: AdoptionPolicy;
+
+  @doc("Delete options of a fleet managed namespace.")
+  deletePolicy?: DeletePolicy;
+
+  @doc("The profile of the propagation to create the namespace.")
+  propagationPolicy?: PropagationPolicyPatch;
+}
+
+@added(Versions.v2026_06_02_preview)
+@doc("The propagation settings that can be patched.")
+model PropagationPolicyPatch {
+  @doc("The type of the policy to be used.")
+  type?: PropagationType;
+
+  @doc("The placement profile that can be patched.")
+  placementProfile?: PlacementProfilePatch;
+}
+
+@added(Versions.v2026_06_02_preview)
+@doc("The placement profile settings that can be patched.")
+model PlacementProfilePatch {
+  @doc("The default ClusterResourcePlacement policy configuration that can be patched.")
+  defaultClusterResourcePlacement?: ClusterResourcePlacementSpecPatch;
 }

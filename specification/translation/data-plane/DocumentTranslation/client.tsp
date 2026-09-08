@@ -164,6 +164,18 @@ interface SingleDocumentTranslationClient {
 );
 
 @@clientName(
+  DocumentTranslationClient.getDocumentsStatus,
+  "listDocumentStatuses",
+  "javascript"
+);
+
+@@clientName(
+  DocumentTranslationClient.getTranslationsStatus,
+  "listTranslationStatuses",
+  "javascript"
+);
+
+@@clientName(
   DocumentTranslation.TranslationStatus.createdDateTimeUtc,
   "created_on",
   "python"
@@ -183,7 +195,7 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(
   DocumentTranslation.TranslationStatus.lastActionDateTimeUtc,
-  "lastActionAt",
+  "updatedAt",
   "javascript"
 );
 
@@ -305,6 +317,18 @@ interface SingleDocumentTranslationClient {
   DocumentTranslation.DocumentStatus.imageCharacterDetected,
   "image_characters_detected",
   "python"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.imageCharged,
+  "imagesCharged",
+  "csharp"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.imageCharacterDetected,
+  "imageCharactersDetected",
+  "csharp"
 );
 
 @@clientName(
