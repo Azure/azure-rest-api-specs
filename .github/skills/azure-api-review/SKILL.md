@@ -6,6 +6,8 @@ metadata:
 description: "Shared Azure REST API review rules for OpenAPI (Swagger) and TypeSpec specifications. Contains cross-cutting review guidelines plus plane-specific references used by the ARM and data-plane API reviewers, code review agents, and CI workflows. USE FOR: reviewing API specs for naming, security, property design, resource lifecycle, error design, and versioning compliance. DO NOT USE FOR: authoring TypeSpec files (use azure-typespec-author), SDK generation, or releasing packages."
 ---
 
+<!-- Upstream alignment: 2026-08-15 -->
+
 # Azure API Review -- Shared Rules
 
 This skill contains **cross-cutting API review rules** that apply regardless of whether the specification is authored in OpenAPI v2 (Swagger) JSON or TypeSpec. These rules are the single source of truth -- referenced by the format-specific instruction files and review agents.
@@ -30,15 +32,16 @@ must not load the other plane's files** -- see "Anti-inheritance" below.
 
 ### Cross-cutting (both planes)
 
-| Reference                                                         | Rule Area                                                                          | Key Rule IDs                                  |
-| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------- |
-| [secret-detection.md](references/secret-detection.md)             | Proactive secret detection in API properties                                       | SEC-SECRET-DETECT                             |
-| [pattern-validation.md](references/pattern-validation.md)         | Allowlist vs. denylist `pattern` constraints; Unicode bypass risk; severity matrix | OAPI-PATTERN-ALLOWLIST                        |
-| [think-in-graphs.md](references/think-in-graphs.md)               | Whole-graph review method: orphans, asymmetry, cross-model reachability            | --                                            |
-| [example-quality.md](references/example-quality.md)               | Example file quality: orphan detection, coverage, descriptive values               | EX-ORPHAN, EX-COVERAGE, EX-DESCRIPTIVE-VALUES |
-| [enum-best-practices.md](references/enum-best-practices.md)       | Enum extensibility and boolean alternatives                                        | --                                            |
-| [downstream-ci-impact.md](references/downstream-ci-impact.md)     | Do not recommend a fix that trips a required CI check                              | --                                            |
-| [reviewer-posted-parity.md](references/reviewer-posted-parity.md) | Presented-vs-posted parity and cross-session reconciliation for ARM reviewers      | --                                            |
+| Reference                                                                                 | Rule Area                                                                          | Key Rule IDs                                              |
+| ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| [secret-detection.md](references/secret-detection.md)                                     | Proactive secret detection in API properties                                       | SEC-SECRET-DETECT                                         |
+| [pattern-validation.md](references/pattern-validation.md)                                 | Allowlist vs. denylist `pattern` constraints; Unicode bypass risk; severity matrix | OAPI-PATTERN-ALLOWLIST                                    |
+| [think-in-graphs.md](references/think-in-graphs.md)                                       | Whole-graph review method: orphans, asymmetry, cross-model reachability            | --                                                        |
+| [example-quality.md](references/example-quality.md)                                       | Example payload correctness, orphan detection, coverage, descriptive values        | EX-PAYLOAD, EX-ORPHAN, EX-COVERAGE, EX-DESCRIPTIVE-VALUES |
+| [enum-best-practices.md](references/enum-best-practices.md)                               | Enum extensibility and boolean alternatives                                        | --                                                        |
+| [downstream-ci-impact.md](references/downstream-ci-impact.md)                             | Do not recommend a fix that trips a required CI check                              | --                                                        |
+| [reviewer-posted-parity.md](references/reviewer-posted-parity.md)                         | Presented-vs-posted parity and cross-session reconciliation for ARM reviewers      | --                                                        |
+| [api-version-lifecycle-and-branches.md](references/api-version-lifecycle-and-branches.md) | Which repo, branch, and folder each API version lifecycle stage may live in        | APIVER-\*                                                 |
 
 ### ARM control-plane only
 
@@ -97,9 +100,10 @@ Copilot Chat review, the ready-for-ARM GitHub Actions workflow, and an authorize
 `/arm-review` request. Before an ARM reviewer posts, it inventories all
 paginated inline review threads, top-level PR conversation comments, and pull
 request review bodies. Human-authored and agent-authored feedback both count,
-including resolved, outdated, and marker-free items. The agent marker controls
-thread ownership and resolution only; it never controls whether prior feedback
-counts as coverage.
+including resolved, outdated, and marker-free items. Marker text is attribution,
+not authentication. Trusted ownership for autonomous resolution requires both a
+valid marker and author `github-actions[bot]`; all prior feedback counts as
+coverage regardless.
 
 Match by semantic finding identity: the same rule or review topic, affected API
 element, and corrective outcome. Exact wording, author, entry point, comment
@@ -110,16 +114,20 @@ one of the literal uppercase tokens below. Do not substitute synonyms such as
 reply"; downstream Critic and execution steps parse these exact tokens. The
 rationale records material non-identity differences (for example, shifted line
 number, top-level versus inline surface, human origin, or missing marker) and
-states why they do not make the finding new. Use these canonical actions:
+states why they do not make the finding new. Line movement does not make a
+finding new, but it does select the action. Apply this precedence:
+`CLARIFY-CONFLICT` for incompatible guidance, the applicable line-shift action
+for a shifted inline anchor, `SKIP-COVERED` for other actionable coverage, then
+`POST-NEW`. Use these canonical actions:
 
 - `SKIP-COVERED`: actionable prior feedback already covers the same finding.
-  Do not post another standalone finding. Use the literal `SKIP-COVERED` token
-  even for human-authored top-level comments, review bodies, resolved threads,
-  shifted lines, or marker-free feedback.
+  No matching inline anchor shifted. Do not post another standalone finding.
+  Use the literal `SKIP-COVERED` token even for human-authored top-level
+  comments, review bodies, resolved threads, or marker-free feedback.
 - `REPLY-LINE-SHIFT`: a human-origin inline finding still applies at a moved
   line. Reply in that thread and leave it unresolved.
-- `RESOLVE-AND-REPOST`: an agent-origin inline finding still applies at a moved
-  line. Resolve the stale thread and post one replacement at the current line.
+- `RESOLVE-AND-REPOST`: a trusted workflow-owned inline finding still applies
+  at a moved line. Resolve the stale thread and post one replacement.
 - `CLARIFY-CONFLICT`: prior feedback for the same semantic finding gives
   materially incompatible guidance. Do not post a competing finding. Reply in
   the existing inline thread, or post one consolidated top-level clarification
@@ -138,7 +146,7 @@ all candidates as `POST-NEW`.
 
 These external documents are the upstream authorities. When they conflict with each other, the precedence order is:
 
-1. **[Azure Resource Provider Contract (RPC)](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0)** -- ARM control-plane contract (highest precedence for ARM resources)
+1. **[Azure Resource Provider Contract (RPC)](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10)** -- ARM control-plane contract (highest precedence for ARM resources)
 2. **[Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)** -- general Azure API design (highest precedence for data-plane)
 3. **[TypeSpec Azure library docs](https://azure.github.io/typespec-azure/docs/intro/)** -- TypeSpec-specific patterns for Azure
 4. **[ARM wiki / RP guidelines](https://armwiki.azurewebsites.net/api_contracts/guidelines/rpguidelines.html)** -- supplementary ARM guidance
