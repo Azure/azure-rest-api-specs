@@ -123,6 +123,32 @@ model MicrosoftEntraAdministrator
   name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The resource has the fixed literal name passwordMethod, which is more restrictive than a pattern."
+@added(Versions.v2026_09_01)
+@doc("The service-created PostgreSQL username-and-password authentication method for a HorizonDB cluster. This resource configures the authentication mechanism, including its enabled state and administrator login credentials; it is not a password-only resource.")
+@parentResource(HorizonDbCluster)
+model PasswordAuthentication
+  is Azure.ResourceManager.ProxyResource<PasswordAuthenticationProperties> {
+  @doc("The fixed name of the PostgreSQL username-and-password authentication method.")
+  @key("authenticationName")
+  @path
+  @segment("authentications")
+  name: "passwordMethod";
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The resource has the fixed literal name microsoftEntra, which is more restrictive than a pattern."
+@added(Versions.v2026_09_01)
+@doc("The service-created Microsoft Entra authentication method for a HorizonDB cluster.")
+@parentResource(HorizonDbCluster)
+model MicrosoftEntraAuthentication
+  is Azure.ResourceManager.ProxyResource<MicrosoftEntraAuthenticationProperties> {
+  @doc("The fixed name of the Microsoft Entra authentication method.")
+  @key("authenticationName")
+  @path
+  @segment("authentications")
+  name: "microsoftEntra";
+}
+
 @doc("Properties of a HorizonDB cluster.")
 model HorizonDbClusterProperties {
   @doc("The administrator login name.")
@@ -497,6 +523,118 @@ model MicrosoftEntraAdministratorAdd {
   properties: MicrosoftEntraAdministratorPropertiesForAdd;
 }
 
+@added(Versions.v2026_09_01)
+@doc("A service-created authentication configuration returned by the authentications collection. The resource name is passwordMethod or microsoftEntra.")
+model Authentication {
+  @doc("The Azure resource ID of the service-created authentication configuration.")
+  @visibility(Lifecycle.Read)
+  id: armResourceIdentifier;
+
+  @doc("The fixed name of the service-created authentication configuration.")
+  @visibility(Lifecycle.Read)
+  name: AuthenticationName;
+
+  @doc("The Azure resource type.")
+  @visibility(Lifecycle.Read)
+  type: "Microsoft.HorizonDb/clusters/authentications";
+
+  @doc("The authentication configuration properties.")
+  @visibility(Lifecycle.Read)
+  properties: AuthenticationProperties;
+}
+
+@added(Versions.v2026_09_01)
+@doc("The name of a service-created authentication configuration.")
+union AuthenticationName {
+  string,
+
+  @doc("PostgreSQL username-and-password authentication.")
+  PasswordMethod: "passwordMethod",
+
+  @doc("Microsoft Entra authentication.")
+  MicrosoftEntra: "microsoftEntra",
+}
+
+@added(Versions.v2026_09_01)
+@doc("Common read-only properties of a service-created authentication configuration.")
+model AuthenticationProperties {
+  @doc("The state of the authentication configuration.")
+  @visibility(Lifecycle.Read)
+  state: AuthenticationState;
+
+  @doc("The provisioning state of the authentication configuration.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_09_01)
+@doc("Properties of the service-created PostgreSQL username-and-password authentication method. The control plane stores no administrator identity; PostgreSQL is the source of truth for the sole member of the service-owned administrator role.")
+model PasswordAuthenticationProperties {
+  @doc("The state of PostgreSQL username-and-password authentication.")
+  @visibility(Lifecycle.Read)
+  state: AuthenticationState;
+
+  @doc("The provisioning state of the PostgreSQL username-and-password authentication method.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_09_01)
+@doc("Properties of the service-created Microsoft Entra authentication method.")
+model MicrosoftEntraAuthenticationProperties {
+  @doc("The state of Microsoft Entra authentication.")
+  @visibility(Lifecycle.Read)
+  state: AuthenticationState;
+
+  @doc("The provisioning state of the Microsoft Entra authentication method.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_09_01)
+@doc("Properties for updating PostgreSQL username-and-password authentication. Omitted properties preserve their current values. State-only requests enable or disable the authentication mechanism. Credentials are secrets and are never returned or stored by the control plane. Login-only, password-only, and combined credential updates require this authentication method to already be Enabled unless the request also sets state to Enabled.")
+model PasswordAuthenticationPropertiesForPatchUpdate {
+  @doc("The target password-authentication state. Enabled or Disabled can be supplied without credentials to toggle the feature. Disabled cannot be combined with administratorLogin or administratorLoginPassword. Disabling password authentication does not remove or modify existing database users or roles.")
+  @visibility(Lifecycle.Update)
+  state?: AuthenticationState;
+
+  @doc("The PostgreSQL administrator role name. A login-only update requires password authentication to already be Enabled unless state is set to Enabled in this request, and requires exactly one member in the AzureSU-owned special group. The current name is an idempotent no-op; a different name renames the current member only when that target role does not already exist. When supplied together with administratorLoginPassword, this value can create the administrator if the special group has no member, reset the matching member's password, or rename a differently named member and reset its password.")
+  @secret
+  @minLength(1)
+  @maxLength(63)
+  @visibility(Lifecycle.Update)
+  administratorLogin?: string;
+
+  @doc("The PostgreSQL administrator password. A password-only update requires password authentication to already be Enabled unless state is set to Enabled in this request, and requires exactly one member in the AzureSU-owned special group. When supplied together with administratorLogin, it can create the administrator if the special group has no member, reset the matching member's password, or rename a differently named member and reset its password.")
+  @secret
+  @minLength(8)
+  @maxLength(128)
+  @visibility(Lifecycle.Update)
+  administratorLoginPassword?: string;
+}
+
+@added(Versions.v2026_09_01)
+@doc("Properties for updating Microsoft Entra authentication. State Enabled enables the feature and State Disabled disables it. Disabling Microsoft Entra authentication does not remove or modify database roles or users previously created through the MicrosoftEntraAdministrators control-plane API or directly through pgaadauth extension functions.")
+model MicrosoftEntraAuthenticationPropertiesForPatchUpdate {
+  @doc("The target Microsoft Entra authentication state. Omission preserves the current state.")
+  @visibility(Lifecycle.Update)
+  state?: AuthenticationState;
+}
+
+@added(Versions.v2026_09_01)
+@doc("A sparse update request for PostgreSQL username-and-password authentication.")
+model PasswordAuthenticationForPatchUpdate {
+  @doc("The PostgreSQL username-and-password authentication properties to update.")
+  properties?: PasswordAuthenticationPropertiesForPatchUpdate;
+}
+
+@added(Versions.v2026_09_01)
+@doc("A sparse update request for Microsoft Entra authentication.")
+model MicrosoftEntraAuthenticationForPatchUpdate {
+  @doc("The Microsoft Entra authentication properties to update.")
+  properties?: MicrosoftEntraAuthenticationPropertiesForPatchUpdate;
+}
+
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_09_01)
 @renamedFrom(Versions.v2026_09_01, "PrincipalTypes")
@@ -608,6 +746,7 @@ union State {
   Upgrading: "Upgrading",
 }
 
+@added(Versions.v2026_05_01_preview)
 @doc("Indicates if authentication state is enabled or not.")
 union AuthenticationState {
   string,

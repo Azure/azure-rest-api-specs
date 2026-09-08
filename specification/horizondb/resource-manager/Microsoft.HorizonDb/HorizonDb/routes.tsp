@@ -287,3 +287,44 @@ interface MicrosoftEntraAdministrators {
   @doc("Lists the PostgreSQL roles in a cluster that are members of azure_pg_admin and mapped to Microsoft Entra principals.")
   list is ArmResourceListByParent<MicrosoftEntraAdministrator>;
 }
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Authentication method instances are service-created with the cluster and cannot be deleted independently."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-put-operation" "Authentication method instances are service-created with the cluster; customers update an existing instance through PATCH and cannot create additional instances."
+@added(Versions.v2026_09_01)
+@doc("Operations for the service-created PostgreSQL username-and-password authentication method of a HorizonDB cluster.")
+@armResourceOperations
+interface PasswordAuthentications {
+  @doc("Gets the service-created PostgreSQL username-and-password authentication method.")
+  get is ArmResourceRead<PasswordAuthentication>;
+
+  @doc("Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. A state-only request enables or disables the authentication mechanism; disabling cannot include credentials and does not remove or modify existing database users or roles. Login-only, password-only, and combined credential updates require this method to already be Enabled unless this request also sets state to Enabled. PostgreSQL is the sole source of truth; the control plane stores no administrator identity or credentials. The service bootstraps an AzureSU-owned special group, only AzureSU can grant or revoke its membership, and at most one user role can be a member. Login-only or password-only updates require exactly one current member. A combined administratorLogin and administratorLoginPassword request creates and adds a new user when no member exists, resets the password when the member name matches, or renames the member and resets its password when names differ. A requested name that already exists outside the special group is rejected to prevent privilege elevation. Both authentication methods may be Disabled.")
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
+    PasswordAuthentication,
+    PatchModel = PasswordAuthenticationForPatchUpdate
+  >;
+
+  @doc("Lists the two service-created authentication configurations for the cluster: passwordMethod and microsoftEntra.")
+  list is ArmResourceListByParent<
+    PasswordAuthentication,
+    Response = ArmResponse<Azure.ResourceManager.ResourceListCustomResult<Authentication>>
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Authentication method instances are service-created with the cluster and cannot be deleted independently."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-put-operation" "Authentication method instances are service-created with the cluster; customers update an existing instance through PATCH and cannot create additional instances."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-list-operation" "The shared authentications collection list operation is defined by PasswordAuthentications.list and returns both constrained resource instances."
+@added(Versions.v2026_09_01)
+@doc("Operations for the service-created Microsoft Entra authentication method of a HorizonDB cluster.")
+@armResourceOperations
+interface MicrosoftEntraAuthentications {
+  @doc("Gets the service-created Microsoft Entra authentication method.")
+  get is ArmResourceRead<MicrosoftEntraAuthentication>;
+
+  @doc("Updates the service-created Microsoft Entra authentication method. State Enabled enables the feature and State Disabled disables it; no additional properties are required. Disabling the feature does not remove or modify database roles or users previously created through the MicrosoftEntraAdministrators control-plane API or directly through pgaadauth extension functions. The method may be Disabled even when password authentication is also Disabled.")
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
+    MicrosoftEntraAuthentication,
+    PatchModel = MicrosoftEntraAuthenticationForPatchUpdate
+  >;
+}
