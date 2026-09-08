@@ -36,6 +36,9 @@ describe("sdk-breaking-change-labels", () => {
   beforeEach(() => {
     // Reset mocks
     vi.clearAllMocks();
+    mockGithub.rest.pulls.get.mockResolvedValue({
+      data: { base: { ref: "main" } },
+    });
   });
 
   describe("getLabelAndAction", () => {
@@ -100,8 +103,90 @@ describe("sdk-breaking-change-labels", () => {
         labelAction: LabelAction.Add,
         issueNumber: 123,
       });
+      expect(mockGithub.rest.pulls.get).toHaveBeenCalledWith({
+        owner: "owner",
+        repo: "repo",
+        pull_number: 123,
+      });
     });
-    it("should correctly set labelAction to Remove", async () => {
+    it.each(["main", "RPSaaSMaster"])(
+      "should retain the label action for the %s target branch",
+      async (targetBranch) => {
+        const mockInputs = {
+          details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
+        };
+        const { extractInputs } = await import("../src/context.js");
+        /** @type {import("vitest").Mock} */ (extractInputs).mockResolvedValue(mockInputs);
+        mockGithub.rest.pulls.get.mockResolvedValue({
+          data: { base: { ref: targetBranch } },
+        });
+        mockFetch
+          .mockResolvedValueOnce({
+            ok: true,
+            json: vi.fn().mockResolvedValue({
+              resource: { downloadUrl: "https://dev.azure.com/download?format=zip" },
+            }),
+          })
+          .mockResolvedValueOnce({
+            ok: true,
+            text: vi.fn().mockResolvedValue(
+              JSON.stringify(
+                createMockSpecGenSdkArtifactInfo({
+                  labelAction: true,
+                  language: "azure-sdk-for-js",
+                  prNumber: "123",
+                }),
+              ),
+            ),
+          });
+
+        const result = await getLabelAndAction({
+          github: mockGithub,
+          context: mockContext,
+          core: mockCore,
+        });
+
+        expect(result.labelAction).toBe(LabelAction.Add);
+      },
+    );
+    it("should suppress the label action for other target branches", async () => {
+      const mockInputs = {
+        details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
+      };
+      const { extractInputs } = await import("../src/context.js");
+      /** @type {import("vitest").Mock} */ (extractInputs).mockResolvedValue(mockInputs);
+      mockGithub.rest.pulls.get.mockResolvedValue({
+        data: { base: { ref: "release-feature" } },
+      });
+      mockFetch
+        .mockResolvedValueOnce({
+          ok: true,
+          json: vi.fn().mockResolvedValue({
+            resource: { downloadUrl: "https://dev.azure.com/download?format=zip" },
+          }),
+        })
+        .mockResolvedValueOnce({
+          ok: true,
+          text: vi.fn().mockResolvedValue(
+            JSON.stringify(
+              createMockSpecGenSdkArtifactInfo({
+                labelAction: true,
+                language: "azure-sdk-for-js",
+                prNumber: "123",
+              }),
+            ),
+          ),
+        });
+
+      const result = await getLabelAndAction({
+        github: mockGithub,
+        context: mockContext,
+        core: mockCore,
+      });
+
+      expect(result.labelAction).toBe(LabelAction.None);
+    });
+    it("should retain labelAction Remove without checking the target branch", async () => {
       // Setup inputs
       const inputs = {
         details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
@@ -157,6 +242,7 @@ describe("sdk-breaking-change-labels", () => {
         labelAction: LabelAction.Remove,
         issueNumber: 123,
       });
+      expect(mockGithub.rest.pulls.get).not.toHaveBeenCalled();
     });
     it("should correctly set labelAction to none when label name is empty", async () => {
       // Setup inputs

@@ -190,12 +190,14 @@ interface DrillRuns {
   @armResourceAction(DrillRun)
   @post
   @doc("This returns a short-lived, read-only URL to download the report for this Drill Run. The URL expires at the returned expiryTimestamp and grants access to that single report only.")
-  listReportDownloadUrl is ArmResourceActionSync<
+  listReportDownloadUrl is ArmResourceActionAsync<
     DrillRun,
     ListReportDownloadUrlRequest,
     ListReportDownloadUrlResponse,
-    ServiceGroupParameters,
-    OptionalRequestBody = true
+    ServiceGroupAndRequestHeadersParameters,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 

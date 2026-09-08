@@ -42,6 +42,16 @@ namespace Customizations;
 );
 @@clientName(RuntimeJavaJavaAgent, "ContainerAppRuntimeJavaAgent", "csharp");
 @@clientName(
+  CheckMigrationEligibilityRequest,
+  "CheckMigrationEligibilityContent",
+  "csharp"
+);
+@@clientName(
+  CheckMigrationEligibilityResponse,
+  "CheckMigrationEligibilityResult",
+  "csharp"
+);
+@@clientName(
   RuntimeJavaJavaAgentLogging.loggerSettings,
   "LoggerSettings",
   "csharp"
@@ -159,11 +169,33 @@ union OpenIdConnectClientCredentialMethod {
 
 @@alternateType(ManagedEnvironmentProperties.staticIp, ipV4Address, "csharp");
 
-@@alternateType(RegistryInfo.registryUrl, url, "csharp");
+@@alternateType(AppLocationParameter.location, azureLocation, "csharp");
+
+@@alternateType(OpenIdConnectConfig.certificationUri, url, "csharp");
+
+@@alternateType(SecretKeyVaultProperties.keyVaultUrl, url, "csharp");
+
+@@alternateType(
+  VnetConfiguration.infrastructureSubnetId,
+  armResourceIdentifier,
+  "csharp"
+);
+
+@@alternateType(AzureCredentials.tenantId, uuid, "csharp");
+
+@@alternateType(CustomDomain.certificateId, armResourceIdentifier, "csharp");
+
+@@alternateType(ServiceBind.serviceId, armResourceIdentifier, "csharp");
+
+@@alternateType(Secret.keyVaultUrl, url, "csharp");
 
 @@alternateType(SourceControlProperties.repoUrl, url, "csharp");
 
 // C# @@clientName customizations.
+@@clientName(Affinity, "StickySessionAffinity", "csharp");
+
+@@clientName(IngressStickySessions.affinity, "StickySessionAffinity", "csharp");
+
 @@clientName(
   AvailableWorkloadProfilesOperationGroup.get,
   "GetAvailableWorkloadProfiles",
@@ -181,6 +213,8 @@ union OpenIdConnectClientCredentialMethod {
 @@clientName(BuildCollection, "BuildList", "csharp");
 
 @@clientName(BuildToken.expires, "ExpiresOn", "csharp");
+
+@@clientName(Header, "ContainerAppOtlpHeader", "csharp");
 
 @@clientName(
   ManagedEnvironments.list,
@@ -206,6 +240,11 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(
   ContainerAppsLabelHistory.listLabelHistory,
+  "ListLabelHistory",
+  "csharp"
+);
+@@clientName(
+  ContainerAppsLabelHistoryPreview.listLabelHistory,
   "ListLabelHistory",
   "csharp"
 );
@@ -1207,6 +1246,7 @@ union OpenIdConnectClientCredentialMethod {
 
 // C# @@scope customizations.
 @@scope(ContainerAppsLabelHistory.listLabelHistory, "!csharp");
+@@scope(ContainerAppsLabelHistoryPreview.listLabelHistory, "!csharp");
 
 // C# @@usage customizations.
 @@usage(LogicAppProperties, Azure.ClientGenerator.Core.Usage.input, "csharp");
@@ -1390,3 +1430,26 @@ union OpenIdConnectClientCredentialMethod {
 #suppress "deprecated" "Preserve the previous flattened C# token store property during MPG migration"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous flattened C# token store property during MPG migration"
 @@flattenProperty(TokenStore.azureBlobStorage, "csharp");
+
+// Preserve provisioning resource metadata from the reflection-based generator.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  ContainerApp,
+  "resource-name-constraint",
+  #{ minLength: 2, maxLength: 32, pattern: "^[a-zA-Z0-9-]+$" },
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning compatibility"
+@@clientOption(
+  ManagedEnvironment,
+  "resource-rbac-roles",
+  #{
+    Contributor: "b24988ac-6180-42a0-ab88-20f7382dd24c",
+    Owner: "8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+    Reader: "acdd72a7-3385-48ef-bd42-f606fba81ae7",
+  },
+  "csharp"
+);
