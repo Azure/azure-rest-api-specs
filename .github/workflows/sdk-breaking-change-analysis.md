@@ -168,6 +168,17 @@ pre-agent-steps:
       go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.11.2
       golangci-lint --version
 
+  - name: Set up GitHub Copilot CLI
+    id: setup-copilot-cli
+    shell: bash
+    run: |
+      set -euo pipefail
+      npm_config_ignore_scripts=false npm install --global @github/copilot
+      copilot_path="$(command -v copilot)"
+      test -x "$copilot_path"
+      copilot --version
+      echo "path=$copilot_path" >> "$GITHUB_OUTPUT"
+
   - name: Set up SDK development environment
     shell: bash
     env:
@@ -250,6 +261,8 @@ pre-agent-steps:
   - name: Detect SDK breaking changes
     shell: bash
     env:
+      AZSDK_COPILOT_CLI_PATH: ${{ steps.setup-copilot-cli.outputs.path }}
+      AZSDK_COPILOT_GITHUB_TOKEN: ${{ github.token }}
       PACKAGE_PATH: ${{ steps.generate-sdk.outputs.package-path }}
       TSP_CONFIG_PATH: ${{ steps.resolve-tsp-config.outputs.path }}
     run: |
