@@ -64,7 +64,7 @@
       "name": "HorizonDbParameterGroups"
     },
     {
-      "name": "HorizonDbAdministrators"
+      "name": "MicrosoftEntraAdministrators"
     }
   ],
   "paths": {
@@ -493,13 +493,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/administrators": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/microsoftEntraAdministrators": {
       "get": {
-        "operationId": "HorizonDbAdministrators_List",
+        "operationId": "MicrosoftEntraAdministrators_List",
         "tags": [
-          "HorizonDbAdministrators"
+          "MicrosoftEntraAdministrators"
         ],
-        "description": "Lists all HorizonDB administrators in a cluster.",
+        "description": "Lists the PostgreSQL roles in a cluster that are members of azure_pg_admin and mapped to Microsoft Entra principals.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -525,7 +525,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbAdministratorListResult"
+              "$ref": "#/definitions/MicrosoftEntraAdministratorListResult"
             }
           },
           "default": {
@@ -536,7 +536,7 @@
           }
         },
         "x-ms-examples": {
-          "List HorizonDB administrators in a cluster": {
+          "List PostgreSQL roles mapped to Microsoft Entra principals in a cluster": {
             "$ref": "./examples/Administrators_List.json"
           }
         },
@@ -545,13 +545,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/administrators/{objectId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/microsoftEntraAdministrators/{objectId}": {
       "get": {
-        "operationId": "HorizonDbAdministrators_Get",
+        "operationId": "MicrosoftEntraAdministrators_Get",
         "tags": [
-          "HorizonDbAdministrators"
+          "MicrosoftEntraAdministrators"
         ],
-        "description": "Gets information about a HorizonDB administrator.",
+        "description": "Gets information about a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -575,7 +575,7 @@
           {
             "name": "objectId",
             "in": "path",
-            "description": "The Entra ID object identifier of the principal (an RFC 4122 GUID).",
+            "description": "The Microsoft Entra object identifier of the principal mapped to the PostgreSQL role, represented as an RFC 4122 GUID.",
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
@@ -585,7 +585,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbAdministrator"
+              "$ref": "#/definitions/MicrosoftEntraAdministrator"
             }
           },
           "default": {
@@ -596,17 +596,17 @@
           }
         },
         "x-ms-examples": {
-          "Get a HorizonDB administrator": {
+          "Get a PostgreSQL role mapped to a Microsoft Entra principal": {
             "$ref": "./examples/Administrators_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "HorizonDbAdministrators_CreateOrUpdate",
+        "operationId": "MicrosoftEntraAdministrators_CreateOrUpdate",
         "tags": [
-          "HorizonDbAdministrators"
+          "MicrosoftEntraAdministrators"
         ],
-        "description": "Creates a new HorizonDB administrator or updates an existing administrator.",
+        "description": "Creates or updates a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -630,7 +630,7 @@
           {
             "name": "objectId",
             "in": "path",
-            "description": "The Entra ID object identifier of the principal (an RFC 4122 GUID).",
+            "description": "The Microsoft Entra object identifier of the principal mapped to the PostgreSQL role, represented as an RFC 4122 GUID.",
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
@@ -641,21 +641,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HorizonDbAdministratorAdd"
+              "$ref": "#/definitions/MicrosoftEntraAdministratorAdd"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'HorizonDbAdministrator' update operation succeeded",
+            "description": "Resource 'MicrosoftEntraAdministrator' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/HorizonDbAdministrator"
+              "$ref": "#/definitions/MicrosoftEntraAdministrator"
             }
           },
           "201": {
-            "description": "Resource 'HorizonDbAdministrator' create operation succeeded",
+            "description": "Resource 'MicrosoftEntraAdministrator' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/HorizonDbAdministrator"
+              "$ref": "#/definitions/MicrosoftEntraAdministrator"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -677,22 +677,22 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a HorizonDB administrator": {
+          "Create or update a PostgreSQL role mapped to a Microsoft Entra principal": {
             "$ref": "./examples/Administrators_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/HorizonDbAdministrator"
+          "final-state-schema": "#/definitions/MicrosoftEntraAdministrator"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "HorizonDbAdministrators_Delete",
+        "operationId": "MicrosoftEntraAdministrators_Delete",
         "tags": [
-          "HorizonDbAdministrators"
+          "MicrosoftEntraAdministrators"
         ],
-        "description": "Deletes a HorizonDB administrator.",
+        "description": "Deletes a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -716,7 +716,7 @@
           {
             "name": "objectId",
             "in": "path",
-            "description": "The Entra ID object identifier of the principal (an RFC 4122 GUID).",
+            "description": "The Microsoft Entra object identifier of the principal mapped to the PostgreSQL role, represented as an RFC 4122 GUID.",
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
@@ -753,7 +753,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete a HorizonDB administrator": {
+          "Delete a PostgreSQL role mapped to a Microsoft Entra principal": {
             "$ref": "./examples/Administrators_Delete.json"
           }
         },
@@ -2674,123 +2674,6 @@
         ]
       }
     },
-    "HorizonDbAdministrator": {
-      "type": "object",
-      "description": "Represents an Entra ID administrator configured on a HorizonDB cluster.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HorizonDbAdministratorProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "HorizonDbAdministratorAdd": {
-      "type": "object",
-      "description": "The request body for adding a HorizonDB administrator.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HorizonDbAdministratorPropertiesForAdd",
-          "description": "The properties for adding a HorizonDB administrator."
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "HorizonDbAdministratorListResult": {
-      "type": "object",
-      "description": "The response of a HorizonDbAdministrator list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The HorizonDbAdministrator items on this page",
-          "items": {
-            "$ref": "#/definitions/HorizonDbAdministrator"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "HorizonDbAdministratorProperties": {
-      "type": "object",
-      "description": "Properties of a HorizonDB administrator.",
-      "properties": {
-        "principalName": {
-          "type": "string",
-          "description": "The display name or UPN of the Entra ID principal. For users, typically the User Principal Name (e.g., admin@contoso.com). For groups, the group display name. For service principals, the application display name.",
-          "maxLength": 256,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "principalType": {
-          "$ref": "#/definitions/PrincipalTypes",
-          "description": "The type of the Entra ID principal.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "objectId": {
-          "type": "string",
-          "description": "The Entra ID object identifier of the principal (an RFC 4122 GUID). On PUT requests, this value comes from the URI path parameter.",
-          "readOnly": true
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The Entra ID tenant identifier (an RFC 4122 GUID). If omitted, defaults to the tenant of the subscription.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the administrator.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "principalName",
-        "principalType"
-      ]
-    },
-    "HorizonDbAdministratorPropertiesForAdd": {
-      "type": "object",
-      "description": "The properties for adding a HorizonDB administrator.",
-      "properties": {
-        "principalName": {
-          "type": "string",
-          "description": "The display name or UPN of the Entra ID principal. For users, typically the User Principal Name (e.g., admin@contoso.com). For groups, the group display name. For service principals, the application display name.",
-          "maxLength": 256
-        },
-        "principalType": {
-          "$ref": "#/definitions/PrincipalTypes",
-          "description": "The type of the Entra ID principal."
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The Entra ID tenant identifier (an RFC 4122 GUID). If omitted, defaults to the tenant of the subscription."
-        }
-      },
-      "required": [
-        "principalName",
-        "principalType"
-      ]
-    },
     "HorizonDbCluster": {
       "type": "object",
       "description": "Represents the HorizonDB cluster.",
@@ -3648,6 +3531,123 @@
         }
       }
     },
+    "MicrosoftEntraAdministrator": {
+      "type": "object",
+      "description": "Represents a PostgreSQL role that is a member of the azure_pg_admin role and is mapped to a Microsoft Entra principal.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MicrosoftEntraAdministratorProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MicrosoftEntraAdministratorAdd": {
+      "type": "object",
+      "description": "The request body for creating or updating a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MicrosoftEntraAdministratorPropertiesForAdd",
+          "description": "The PostgreSQL role and Microsoft Entra principal mapping properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "MicrosoftEntraAdministratorListResult": {
+      "type": "object",
+      "description": "The response of a MicrosoftEntraAdministrator list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MicrosoftEntraAdministrator items on this page",
+          "items": {
+            "$ref": "#/definitions/MicrosoftEntraAdministrator"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MicrosoftEntraAdministratorProperties": {
+      "type": "object",
+      "description": "Properties of a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.",
+      "properties": {
+        "principalName": {
+          "type": "string",
+          "description": "The display name or user principal name of the Microsoft Entra principal mapped to the PostgreSQL role. For users, this is typically the user principal name, such as admin@contoso.com. For groups, this is the group display name. For service principals, this is the application display name.",
+          "maxLength": 256,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "principalType": {
+          "$ref": "#/definitions/PrincipalTypes",
+          "description": "The type of Microsoft Entra principal mapped to the PostgreSQL role.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "objectId": {
+          "type": "string",
+          "description": "The Microsoft Entra object identifier of the principal mapped to the PostgreSQL role, represented as an RFC 4122 GUID. On PUT requests, this value comes from the URI path parameter.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The identifier of the Microsoft Entra tenant containing the mapped principal, represented as an RFC 4122 GUID. If omitted, this value defaults to the tenant of the subscription.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the PostgreSQL role and Microsoft Entra principal mapping.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "principalName",
+        "principalType"
+      ]
+    },
+    "MicrosoftEntraAdministratorPropertiesForAdd": {
+      "type": "object",
+      "description": "Properties for creating or updating a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.",
+      "properties": {
+        "principalName": {
+          "type": "string",
+          "description": "The display name or user principal name of the Microsoft Entra principal to map to the PostgreSQL role. For users, this is typically the user principal name, such as admin@contoso.com. For groups, this is the group display name. For service principals, this is the application display name.",
+          "maxLength": 256
+        },
+        "principalType": {
+          "$ref": "#/definitions/PrincipalTypes",
+          "description": "The type of Microsoft Entra principal to map to the PostgreSQL role."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The identifier of the Microsoft Entra tenant containing the principal to map, represented as an RFC 4122 GUID. If omitted, this value defaults to the tenant of the subscription."
+        }
+      },
+      "required": [
+        "principalName",
+        "principalType"
+      ]
+    },
     "Network": {
       "type": "object",
       "description": "Network properties.",
@@ -3711,7 +3711,7 @@
     },
     "PrincipalTypes": {
       "type": "string",
-      "description": "The type of the Entra ID principal.",
+      "description": "The type of Microsoft Entra principal mapped to a PostgreSQL role.",
       "enum": [
         "Unknown",
         "User",
@@ -3725,22 +3725,22 @@
           {
             "name": "Unknown",
             "value": "Unknown",
-            "description": "Unknown or unrecognized type (internal only, not accepted in requests)."
+            "description": "An unknown or unrecognized type. This value is for internal use and is not accepted in requests."
           },
           {
             "name": "User",
             "value": "User",
-            "description": "An Entra ID user account (UPN-based principal)."
+            "description": "A Microsoft Entra ID user account."
           },
           {
             "name": "Group",
             "value": "Group",
-            "description": "An Entra ID security group. All members of the group inherit admin privileges."
+            "description": "A Microsoft Entra ID security group. All members of the group inherit administrator privileges."
           },
           {
             "name": "ServicePrincipal",
             "value": "ServicePrincipal",
-            "description": "An Entra ID application / service principal (used for automated workloads)."
+            "description": "A Microsoft Entra ID application or service principal used for automated workloads."
           }
         ]
       }

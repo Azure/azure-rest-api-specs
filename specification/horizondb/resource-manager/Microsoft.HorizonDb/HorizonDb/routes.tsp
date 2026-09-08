@@ -235,6 +235,7 @@ interface HorizonDbParameterGroups {
 }
 
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_09_01)
 @armResourceOperations
 interface HorizonDbAdministrators {
   @doc("Gets information about a HorizonDB administrator.")
@@ -258,4 +259,31 @@ interface HorizonDbAdministrators {
 
   @doc("Lists all HorizonDB administrators in a cluster.")
   list is ArmResourceListByParent<HorizonDbAdministrator>;
+}
+
+@added(Versions.v2026_09_01)
+@doc("Operations for PostgreSQL roles that are members of azure_pg_admin and mapped to Microsoft Entra principals.")
+@armResourceOperations
+interface MicrosoftEntraAdministrators {
+  @doc("Gets information about a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
+  get is ArmResourceRead<MicrosoftEntraAdministrator>;
+
+  @doc("Creates or updates a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+    MicrosoftEntraAdministrator,
+    Request = MicrosoftEntraAdministratorAdd
+  >;
+
+  @doc("Deletes a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    MicrosoftEntraAdministrator,
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
+  >;
+
+  @doc("Lists the PostgreSQL roles in a cluster that are members of azure_pg_admin and mapped to Microsoft Entra principals.")
+  list is ArmResourceListByParent<MicrosoftEntraAdministrator>;
 }

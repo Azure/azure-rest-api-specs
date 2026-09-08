@@ -41,10 +41,10 @@ input-file:
 suppressions:
   - code: PutRequestResponseSchemeArm
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/administrators/{objectId}"].put
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/microsoftEntraAdministrators/{objectId}"].put
     reason: >-
-      The administrator create (PUT) accepts a dedicated add model
-      (HorizonDbAdministratorAdd) whose properties are a subset of the resource
+      The Microsoft Entra administrator create (PUT) accepts a dedicated add model
+      (MicrosoftEntraAdministratorAdd) whose properties are a subset of the resource
       read model. objectId are read-only fields returned by GET but not accepted on PUT.
       The resource has no updatable fields beyond create, so no PATCH operation is provided.
 ```
