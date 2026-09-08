@@ -9066,7 +9066,7 @@
         },
         "metricsEmitted": {
           "type": "array",
-          "description": "The metrics emitted by the rule. If omitted in a create or update request, the service enables all metrics supported by the selected rule type.",
+          "description": "The metrics emitted by the rule.",
           "items": {
             "$ref": "#/definitions/MetricsEmitted"
           }
@@ -9078,6 +9078,7 @@
       },
       "required": [
         "enabled",
+        "metricsEmitted",
         "ruleConfig"
       ]
     },

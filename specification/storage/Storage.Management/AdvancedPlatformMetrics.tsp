@@ -103,11 +103,9 @@ model AdvancedPlatformMetricsRuleProperties {
   @renamedFrom(Versions.v2026_09_01, "metricsEmitted")
   oldMetricsEmitted?: MetricsEmitted[];
 
-  /**
-   * The metrics emitted by the rule. If omitted in a create or update request, the service enables all metrics supported by the selected rule type.
-   */
+  /** The metrics emitted by the rule. */
   @added(Versions.v2026_09_01)
-  metricsEmitted?: MetricsEmitted[];
+  metricsEmitted: MetricsEmitted[];
 
   /**
    * Configuration for the advanced platform metrics rule.
