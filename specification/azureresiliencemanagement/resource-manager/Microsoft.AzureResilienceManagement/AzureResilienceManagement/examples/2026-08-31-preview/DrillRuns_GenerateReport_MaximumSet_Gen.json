@@ -1,0 +1,36 @@
+{
+  "title": "DrillRuns_GenerateReport_MaximumSet",
+  "operationId": "DrillRuns_GenerateReport",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2026-08-31-preview",
+    "operation-id": "qmn",
+    "drillName": "drill1",
+    "drillRunName": "ca92602e-53bf-43d2-ae62-d3fc940474b3"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    },
+    "200": {
+      "body": {
+        "generationStatus": "Succeeded",
+        "stageStatuses": [
+          {
+            "drillRunStage": "FaultInjection",
+            "generationStatus": "Succeeded",
+            "lastAttemptTimestamp": "2026-08-31T10:35:00.000Z"
+          }
+        ],
+        "availableFormats": [
+          "Html"
+        ],
+        "lastGeneratedTimestamp": "2026-08-31T10:35:00.000Z",
+        "schemaVersion": "1.0",
+        "finalizationState": "NotFinalized"
+      }
+    }
+  }
+}

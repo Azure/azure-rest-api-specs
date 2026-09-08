@@ -20,3 +20,29 @@ using Azure.ClientGenerator.Core;
   string,
   "javascript"
 );
+
+@@access(
+  Microsoft.CodeTransparency.GetPublicKeysResponse,
+  Access.internal,
+  "csharp"
+);
+@@access(Microsoft.CodeTransparency.JsonWebKeySet, Access.internal, "csharp");
+@@access(
+  Microsoft.CodeTransparency.PublicJsonWebKey,
+  Access.internal,
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.CodeTransparency.getPublicKeys,
+  "getPublicKeysPreview",
+  "csharp"
+);
+@@clientName(
+  Microsoft.CodeTransparency.getPublicKeysV09,
+  "getPublicKeys",
+  "csharp"
+);
+@@convenientAPI(Microsoft.CodeTransparency.getPublicKeysV09, false, "csharp");
+@@convenientAPI(Microsoft.CodeTransparency.listScittKeys, false, "csharp");
+@@convenientAPI(Microsoft.CodeTransparency.getScittKey, false, "csharp");
