@@ -16,7 +16,8 @@ namespace Anyscale.Platform;
 @resource("containerImages")
 model ContainerImage is ProxyResource<ContainerImageProperties> {
   /** The name of container image. */
-  @pattern("^[a-zA-Z0-9_-]*$")
+  @pattern("^[a-zA-Z0-9_-]+$")
+  @maxLength(256)
   @key("containerImageName")
   @path
   @segment("containerImages")

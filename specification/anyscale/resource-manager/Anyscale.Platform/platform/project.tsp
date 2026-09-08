@@ -17,7 +17,8 @@ namespace Anyscale.Platform;
 @resource("projects")
 model Project is ProxyResource<ProjectProperties> {
   /** The name of the project. */
-  @pattern("^[a-zA-Z0-9_-]*$")
+  @pattern("^[a-zA-Z0-9_-]+$")
+  @maxLength(256)
   @key("projectName")
   @path
   @segment("projects")

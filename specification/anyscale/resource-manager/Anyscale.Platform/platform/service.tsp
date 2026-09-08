@@ -18,7 +18,8 @@ namespace Anyscale.Platform;
 @resource("services")
 model Service is ProxyResource<ServiceProperties> {
   /** The name of the Anyscale service. */
-  @pattern("^[a-zA-Z0-9_-]*$")
+  @pattern("^[a-zA-Z0-9_-]+$")
+  @maxLength(256)
   @key("serviceName")
   @path
   @segment("services")

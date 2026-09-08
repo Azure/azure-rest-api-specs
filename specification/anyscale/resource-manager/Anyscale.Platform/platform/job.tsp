@@ -17,7 +17,8 @@ namespace Anyscale.Platform;
 @resource("jobs")
 model Job is ProxyResource<JobProperties> {
   /** The name of the job. */
-  @pattern("^[a-zA-Z0-9_-]*$")
+  @pattern("^[a-zA-Z0-9_-]+$")
+  @maxLength(256)
   @key("jobName")
   @path
   @segment("jobs")

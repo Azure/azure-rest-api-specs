@@ -16,7 +16,8 @@ namespace Anyscale.Platform;
 @resource("computeConfigs")
 model ComputeConfig is ProxyResource<ComputeConfigProperties> {
   /** The name of the compute config. */
-  @pattern("^[a-zA-Z0-9_-]*$")
+  @pattern("^[a-zA-Z0-9_-]+$")
+  @maxLength(256)
   @key("computeConfigName")
   @path
   @segment("computeConfigs")
