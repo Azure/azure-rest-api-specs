@@ -90,18 +90,11 @@ model AIManagerPatch {
 interface AIManagers {
   get is ArmResourceRead<AIManager>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The polling-only Azure-AsyncOperation header must emit an LRO without final-state-via metadata."
-  @Azure.ClientGenerator.Core.Legacy.markAsLro
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AIManager,
     BaseParameters = Azure.ResourceManager.Foundations.BaseParameters<AIManager> &
       IfMatchParameters<AIManager> &
-      IfNoneMatchParameters<AIManager>,
-    LroHeaders = ArmPollingOnlyAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
-    Response =
-      | ArmResourceUpdatedResponse<AIManager>
-      | ArmResourceCreatedPollingOnlyResponse<AIManager>
+      IfNoneMatchParameters<AIManager>
   >;
 
   update is ArmCustomPatchSync<
@@ -111,15 +104,10 @@ interface AIManagers {
       IfMatchParameters<AIManager>
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "This DELETE is asynchronous via markAsLro; semantic polling metadata would emit the unwanted final-state-via option."
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The polling-only Location header must emit an LRO without final-state-via metadata."
-  @Azure.ClientGenerator.Core.Legacy.markAsLro
   delete is ArmResourceDeleteWithoutOkAsync<
     AIManager,
-    BaseParameters = Azure.ResourceManager.Foundations.BaseParameters<AIManager> &
-      IfMatchParameters<AIManager>,
-    LroHeaders = ArmPollingOnlyLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    Azure.ResourceManager.Foundations.BaseParameters<AIManager> &
+      IfMatchParameters<AIManager>
   >;
 
   listByResourceGroup is ArmResourceListByParent<AIManager>;

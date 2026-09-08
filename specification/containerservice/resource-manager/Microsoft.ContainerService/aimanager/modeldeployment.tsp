@@ -219,30 +219,19 @@ model AutoscaleProfile {
 interface ModelDeployments {
   get is ArmResourceRead<ModelDeployment>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The polling-only Azure-AsyncOperation header must emit an LRO without final-state-via metadata."
   @doc("Create or update a `ModelDeployment`. This is a full-replace operation: any optional property omitted from the request body is reset to its default value, or cleared if it has no default. To safely modify a subset of fields, perform a GET, modify the returned resource, and PUT it back using the returned ETag via the `If-Match` header to avoid concurrent overwrites.")
-  @Azure.ClientGenerator.Core.Legacy.markAsLro
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ModelDeployment,
     BaseParameters = Azure.ResourceManager.Foundations.BaseParameters<ModelDeployment> &
       IfMatchParameters<ModelDeployment> &
-      IfNoneMatchParameters<ModelDeployment>,
-    LroHeaders = ArmPollingOnlyAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
-    Response =
-      | ArmResourceUpdatedResponse<ModelDeployment>
-      | ArmResourceCreatedPollingOnlyResponse<ModelDeployment>
+      IfNoneMatchParameters<ModelDeployment>
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "This DELETE is asynchronous via markAsLro; semantic polling metadata would emit the unwanted final-state-via option."
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The polling-only headers must emit an LRO without final-state-via metadata."
-  @Azure.ClientGenerator.Core.Legacy.markAsLro
   delete is ArmResourceDeleteWithoutOkAsync<
     ModelDeployment,
-    BaseParameters = Azure.ResourceManager.Foundations.BaseParameters<ModelDeployment> &
+    Azure.ResourceManager.Foundations.BaseParameters<ModelDeployment> &
       IfMatchParameters<ModelDeployment>,
-    LroHeaders = ArmPollingOnlyAsyncOperationHeader &
-      ArmPollingOnlyLocationHeader &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

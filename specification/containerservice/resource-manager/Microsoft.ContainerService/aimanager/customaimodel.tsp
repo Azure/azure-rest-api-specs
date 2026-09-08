@@ -103,30 +103,18 @@ union CustomAIModelProvisioningState {
 interface CustomAIModels {
   get is ArmResourceRead<CustomAIModel>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The polling-only Azure-AsyncOperation header must emit an LRO without final-state-via metadata."
   @doc("Create or update a `CustomAIModel`. This is a full-replace operation: any optional property omitted from the request body is reset to its default value, or cleared if it has no default. To safely modify a subset of fields (e.g. `description`), perform a GET, modify the returned resource, and PUT it back using the returned ETag via the `If-Match` header. A PUT that changes the immutable `modelId` or `modelSourceResourceId` is rejected.")
-  @Azure.ClientGenerator.Core.Legacy.markAsLro
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CustomAIModel,
     BaseParameters = Azure.ResourceManager.Foundations.BaseParameters<CustomAIModel> &
       IfMatchParameters<CustomAIModel> &
-      IfNoneMatchParameters<CustomAIModel>,
-    LroHeaders = ArmPollingOnlyAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
-    Response =
-      | ArmResourceUpdatedResponse<CustomAIModel>
-      | ArmResourceCreatedPollingOnlyResponse<CustomAIModel>
+      IfNoneMatchParameters<CustomAIModel>
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "This DELETE is asynchronous via markAsLro; semantic polling metadata would emit the unwanted final-state-via option."
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The polling-only Location header must emit an LRO without final-state-via metadata."
-  @Azure.ClientGenerator.Core.Legacy.markAsLro
   delete is ArmResourceDeleteWithoutOkAsync<
     CustomAIModel,
-    BaseParameters = Azure.ResourceManager.Foundations.BaseParameters<CustomAIModel> &
-      IfMatchParameters<CustomAIModel>,
-    LroHeaders = ArmPollingOnlyLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    Azure.ResourceManager.Foundations.BaseParameters<CustomAIModel> &
+      IfMatchParameters<CustomAIModel>
   >;
 
   list is ArmResourceListByParent<CustomAIModel>;
