@@ -45,6 +45,12 @@ jobs:
     # ubuntu-slim: REST-only job (no build) that runs on every Summarize Checks completion,
     # matching the other label-reaction workflows (arm-auto-signoff-status, update-labels).
     runs-on: ubuntu-slim
+    # Gate the App-token step on the secret being present: the `env` context is available in a
+    # step `if`, but the `secrets` context is not. Until AZURE_SDK_AUTOMATION_APP_ID is
+    # provisioned, APP_ID is empty, the token step is skipped, and the job falls back to the
+    # default GITHUB_TOKEN (team resolution 422s on that path, i.e. no worse than today).
+    env:
+      APP_ID: ${{ secrets.AZURE_SDK_AUTOMATION_APP_ID }}
     steps:
       # IMPORTANT: This workflow uses pull_request_target, which runs with repo write
       # permissions. Only base-branch code is checked out below, and no PR-head code is
@@ -57,9 +63,30 @@ jobs:
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
 
+      # Mint a short-lived installation token from the azure-sdk-automation GitHub App so the
+      # reviewer-team request can resolve the org team. The default GITHUB_TOKEN cannot read org
+      # team membership (members:read), so requesting the team fails with HTTP 422 (#45985). The
+      # App is installed on the Azure org with members:read; a repo-scoped token still carries
+      # that org permission. Scoped to the minimum this job's REST calls need.
+      - name: Mint azure-sdk-automation App token
+        id: app-token
+        if: ${{ env.APP_ID != '' }}
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.AZURE_SDK_AUTOMATION_APP_ID }}
+          private-key: ${{ secrets.AZURE_SDK_AUTOMATION_PRIVATE_KEY }}
+          permission-members: read
+          permission-pull-requests: write
+          permission-issues: read
+          permission-actions: read
+          permission-contents: read
+
       - name: Assign data-plane review team
         uses: actions/github-script@v8
         with:
+          # App token (org members:read) resolves the team so native auto-delegation can pick a
+          # member. Falls back to GITHUB_TOKEN until the App secrets land (422s, as today).
+          github-token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
           script: |
             const { default: assignReviewers } =
               await import('${{ github.workspace }}/.github/workflows/src/data-plane-review/assign-reviewers.js');
