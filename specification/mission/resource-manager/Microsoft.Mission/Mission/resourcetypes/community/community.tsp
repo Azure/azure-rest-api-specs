@@ -212,7 +212,7 @@ model CommunityBaseModel {
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement.")
-  policyOverride?: CommunityPolicyOverride;
+  policyOverride?: CommunityPropertiesPolicyOverride;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Community role assignments")

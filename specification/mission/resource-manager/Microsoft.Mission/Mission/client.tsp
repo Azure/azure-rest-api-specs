@@ -20,24 +20,29 @@ using Microsoft.Mission;
   "csharp"
 );
 @@clientName(
-  MaintenanceModeConfigurationMode,
+  MaintenanceModeConfigurationModelMode,
   "VirtualEnclaveMaintenanceModeConfigurationMode",
   "csharp"
 );
 @@clientName(
-  MaintenanceModeConfigurationJustification,
+  MaintenanceModeConfigurationModelJustification,
   "VirtualEnclaveMaintenanceModeJustification",
   "csharp"
 );
 @@clientName(PrincipalType, "VirtualEnclavePrincipalType", "csharp");
 @@clientName(
-  ApprovalCallbackResourceRequestAction,
+  ApprovalCallbackRequestResourceRequestAction,
   "VirtualEnclaveApprovalCallbackResourceAction",
   "csharp"
 );
 @@clientName(
-  ApprovalDeletionCallbackResourceRequestAction,
+  ApprovalDeletionCallbackRequestResourceRequestAction,
   "VirtualEnclaveApprovalDeletionCallbackResourceAction",
+  "csharp"
+);
+@@clientName(
+  CommunityPropertiesPolicyOverride,
+  "CommunityPolicyOverride",
   "csharp"
 );
 @@clientName(

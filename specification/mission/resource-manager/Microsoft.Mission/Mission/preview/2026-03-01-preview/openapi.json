@@ -4140,7 +4140,7 @@
       "description": "Request body for calling post-action",
       "properties": {
         "resourceRequestAction": {
-          "$ref": "#/definitions/ApprovalCallbackResourceRequestAction",
+          "$ref": "#/definitions/ApprovalCallbackRequestResourceRequestAction",
           "description": "Resource request action indicating action which needed to be performed upon calling approval-callback post action"
         },
         "approvalStatus": {
@@ -4181,7 +4181,7 @@
         ]
       }
     },
-    "ApprovalCallbackResourceRequestAction": {
+    "ApprovalCallbackRequestResourceRequestAction": {
       "type": "string",
       "description": "The resource action for an approval callback.",
       "enum": [
@@ -4191,7 +4191,7 @@
         "Reset"
       ],
       "x-ms-enum": {
-        "name": "ApprovalCallbackResourceRequestAction",
+        "name": "ApprovalCallbackRequestResourceRequestAction",
         "modelAsString": true,
         "values": [
           {
@@ -4222,7 +4222,7 @@
       "description": "Request body for calling post-action",
       "properties": {
         "resourceRequestAction": {
-          "$ref": "#/definitions/ApprovalDeletionCallbackResourceRequestAction",
+          "$ref": "#/definitions/ApprovalDeletionCallbackRequestResourceRequestAction",
           "description": "Resource request action indicating action which needed to be performed upon calling approval-deletion-callback post action"
         }
       },
@@ -4230,7 +4230,7 @@
         "resourceRequestAction"
       ]
     },
-    "ApprovalDeletionCallbackResourceRequestAction": {
+    "ApprovalDeletionCallbackRequestResourceRequestAction": {
       "type": "string",
       "description": "The resource action for an approval deletion callback.",
       "enum": [
@@ -4239,7 +4239,7 @@
         "Update"
       ],
       "x-ms-enum": {
-        "name": "ApprovalDeletionCallbackResourceRequestAction",
+        "name": "ApprovalDeletionCallbackRequestResourceRequestAction",
         "modelAsString": true,
         "values": [
           {
@@ -4922,7 +4922,7 @@
           "x-ms-identifiers": []
         },
         "policyOverride": {
-          "$ref": "#/definitions/CommunityPolicyOverride",
+          "$ref": "#/definitions/CommunityPropertiesPolicyOverride",
           "description": "Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement."
         },
         "communityRoleAssignments": {
@@ -4957,30 +4957,6 @@
             "type": "string"
           }
         }
-      }
-    },
-    "CommunityPolicyOverride": {
-      "type": "string",
-      "description": "The policy override setting for a community.",
-      "enum": [
-        "Enclave",
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "CommunityPolicyOverride",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enclave",
-            "value": "Enclave",
-            "description": "Apply enclave-specific policies."
-          },
-          {
-            "name": "None",
-            "value": "None",
-            "description": "Do not apply a policy override."
-          }
-        ]
       }
     },
     "CommunityProperties": {
@@ -5036,7 +5012,7 @@
           "x-ms-identifiers": []
         },
         "policyOverride": {
-          "$ref": "#/definitions/CommunityPolicyOverride",
+          "$ref": "#/definitions/CommunityPropertiesPolicyOverride",
           "description": "Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement."
         },
         "communityRoleAssignments": {
@@ -5107,6 +5083,30 @@
             "type": "string"
           }
         }
+      }
+    },
+    "CommunityPropertiesPolicyOverride": {
+      "type": "string",
+      "description": "The policy override setting for a community.",
+      "enum": [
+        "Enclave",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "CommunityPropertiesPolicyOverride",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enclave",
+            "value": "Enclave",
+            "description": "Apply enclave-specific policies."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Do not apply a policy override."
+          }
+        ]
       }
     },
     "CommunityResource": {
@@ -6126,78 +6126,6 @@
         ]
       }
     },
-    "MaintenanceModeConfigurationJustification": {
-      "type": "string",
-      "description": "The justification for entering or exiting virtual enclave maintenance mode.",
-      "enum": [
-        "Networking",
-        "Governance",
-        "Off"
-      ],
-      "x-ms-enum": {
-        "name": "MaintenanceModeConfigurationJustification",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Networking",
-            "value": "Networking",
-            "description": "Maintenance mode is required for networking changes."
-          },
-          {
-            "name": "Governance",
-            "value": "Governance",
-            "description": "Maintenance mode is required for governance changes."
-          },
-          {
-            "name": "Off",
-            "value": "Off",
-            "description": "No maintenance mode justification applies."
-          }
-        ]
-      }
-    },
-    "MaintenanceModeConfigurationMode": {
-      "type": "string",
-      "description": "The maintenance mode for a virtual enclave.",
-      "enum": [
-        "On",
-        "CanNotDelete",
-        "Off",
-        "General",
-        "Advanced"
-      ],
-      "x-ms-enum": {
-        "name": "MaintenanceModeConfigurationMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "On",
-            "value": "On",
-            "description": "Maintenance mode is on."
-          },
-          {
-            "name": "CannotDelete",
-            "value": "CanNotDelete",
-            "description": "Resources cannot be deleted while maintenance mode is active."
-          },
-          {
-            "name": "Off",
-            "value": "Off",
-            "description": "Maintenance mode is off."
-          },
-          {
-            "name": "General",
-            "value": "General",
-            "description": "General maintenance mode is active."
-          },
-          {
-            "name": "Advanced",
-            "value": "Advanced",
-            "description": "Advanced maintenance mode is active."
-          }
-        ]
-      }
-    },
     "MaintenanceModeConfigurationModel": {
       "type": "object",
       "description": "Maintenance Mode",
@@ -6214,7 +6142,7 @@
             "Advanced"
           ],
           "x-ms-enum": {
-            "name": "MaintenanceModeConfigurationMode",
+            "name": "MaintenanceModeConfigurationModelMode",
             "modelAsString": true,
             "values": [
               {
@@ -6263,7 +6191,7 @@
             "Off"
           ],
           "x-ms-enum": {
-            "name": "MaintenanceModeConfigurationJustification",
+            "name": "MaintenanceModeConfigurationModelJustification",
             "modelAsString": true,
             "values": [
               {
@@ -6289,12 +6217,84 @@
         "mode"
       ]
     },
+    "MaintenanceModeConfigurationModelJustification": {
+      "type": "string",
+      "description": "The justification for entering or exiting virtual enclave maintenance mode.",
+      "enum": [
+        "Networking",
+        "Governance",
+        "Off"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceModeConfigurationModelJustification",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Networking",
+            "value": "Networking",
+            "description": "Maintenance mode is required for networking changes."
+          },
+          {
+            "name": "Governance",
+            "value": "Governance",
+            "description": "Maintenance mode is required for governance changes."
+          },
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "No maintenance mode justification applies."
+          }
+        ]
+      }
+    },
+    "MaintenanceModeConfigurationModelMode": {
+      "type": "string",
+      "description": "The maintenance mode for a virtual enclave.",
+      "enum": [
+        "On",
+        "CanNotDelete",
+        "Off",
+        "General",
+        "Advanced"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceModeConfigurationModelMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "On",
+            "value": "On",
+            "description": "Maintenance mode is on."
+          },
+          {
+            "name": "CannotDelete",
+            "value": "CanNotDelete",
+            "description": "Resources cannot be deleted while maintenance mode is active."
+          },
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "Maintenance mode is off."
+          },
+          {
+            "name": "General",
+            "value": "General",
+            "description": "General maintenance mode is active."
+          },
+          {
+            "name": "Advanced",
+            "value": "Advanced",
+            "description": "Advanced maintenance mode is active."
+          }
+        ]
+      }
+    },
     "MaintenanceModeConfigurationPatchModel": {
       "type": "object",
       "description": "Maintenance Mode Patch Model",
       "properties": {
         "mode": {
-          "$ref": "#/definitions/MaintenanceModeConfigurationMode",
+          "$ref": "#/definitions/MaintenanceModeConfigurationModelMode",
           "description": "Current mode of Maintenance Mode Configuration"
         },
         "principals": {
@@ -6305,7 +6305,7 @@
           }
         },
         "justification": {
-          "$ref": "#/definitions/MaintenanceModeConfigurationJustification",
+          "$ref": "#/definitions/MaintenanceModeConfigurationModelJustification",
           "description": "Justification for entering or exiting Maintenance Mode"
         }
       }

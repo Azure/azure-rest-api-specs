@@ -6,13 +6,13 @@ namespace Microsoft.Mission;
 @doc("Maintenance Mode")
 model MaintenanceModeConfigurationModel {
   @doc("Current mode of Maintenance Mode Configuration")
-  mode: MaintenanceModeConfigurationMode = "Off";
+  mode: MaintenanceModeConfigurationModelMode = "Off";
 
   @doc("The user, group or service principal object affected by Maintenance Mode")
   principals?: Principal[] = #[];
 
   @doc("Justification for entering or exiting Maintenance Mode")
-  justification?: MaintenanceModeConfigurationJustification = "Off";
+  justification?: MaintenanceModeConfigurationModelJustification = "Off";
 }
 
 @doc("Maintenance Mode Patch Model")

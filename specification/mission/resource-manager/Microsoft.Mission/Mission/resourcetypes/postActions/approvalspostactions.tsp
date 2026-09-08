@@ -16,7 +16,7 @@ model ApprovalCallbackRequest {
   resourceId: armResourceIdentifier;
 
   @doc("Resource request action indicating action which needed to be performed upon calling approval-callback post action")
-  resourceRequestAction: ApprovalCallbackResourceRequestAction;
+  resourceRequestAction: ApprovalCallbackRequestResourceRequestAction;
 
   @doc("Approval status indicating 'Approved' or 'Rejected'")
   approvalStatus: ApprovalCallbackRequestApprovalStatus;
@@ -43,5 +43,5 @@ model ApprovalActionResponse {
 @doc("Request body for calling post-action")
 model ApprovalDeletionCallbackRequest {
   @doc("Resource request action indicating action which needed to be performed upon calling approval-deletion-callback post action")
-  resourceRequestAction: ApprovalDeletionCallbackResourceRequestAction;
+  resourceRequestAction: ApprovalDeletionCallbackRequestResourceRequestAction;
 }

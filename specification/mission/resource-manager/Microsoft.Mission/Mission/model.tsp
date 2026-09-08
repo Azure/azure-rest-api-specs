@@ -81,7 +81,7 @@ union GovernedServiceItemPolicyAction {
 }
 
 @doc("The maintenance mode for a virtual enclave.")
-union MaintenanceModeConfigurationMode {
+union MaintenanceModeConfigurationModelMode {
   string,
 
   @doc("Maintenance mode is on.")
@@ -101,7 +101,7 @@ union MaintenanceModeConfigurationMode {
 }
 
 @doc("The justification for entering or exiting virtual enclave maintenance mode.")
-union MaintenanceModeConfigurationJustification {
+union MaintenanceModeConfigurationModelJustification {
   string,
 
   @doc("Maintenance mode is required for networking changes.")
@@ -129,7 +129,7 @@ union PrincipalType {
 }
 
 @doc("The resource action for an approval callback.")
-union ApprovalCallbackResourceRequestAction {
+union ApprovalCallbackRequestResourceRequestAction {
   string,
 
   @doc("Create the resource.")
@@ -146,7 +146,7 @@ union ApprovalCallbackResourceRequestAction {
 }
 
 @doc("The resource action for an approval deletion callback.")
-union ApprovalDeletionCallbackResourceRequestAction {
+union ApprovalDeletionCallbackRequestResourceRequestAction {
   string,
 
   @doc("Create the resource.")
@@ -183,7 +183,7 @@ union ApprovalActionRequestApprovalStatus {
 
 @added(Microsoft.Mission.Versions.v2025_05_01_preview)
 @doc("The policy override setting for a community.")
-union CommunityPolicyOverride {
+union CommunityPropertiesPolicyOverride {
   string,
 
   @doc("Apply enclave-specific policies.")
