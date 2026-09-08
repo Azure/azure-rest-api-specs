@@ -88,7 +88,7 @@ union MaintenanceModeConfigurationModelMode {
   On: "On",
 
   @doc("Resources cannot be deleted while maintenance mode is active.")
-  CannotDelete: "CanNotDelete",
+  CanNotDelete: "CanNotDelete",
 
   @doc("Maintenance mode is off.")
   Off: "Off",

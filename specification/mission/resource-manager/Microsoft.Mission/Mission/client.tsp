@@ -25,6 +25,11 @@ using Microsoft.Mission;
   "csharp"
 );
 @@clientName(
+  MaintenanceModeConfigurationModelMode.CanNotDelete,
+  "CannotDelete",
+  "csharp"
+);
+@@clientName(
   MaintenanceModeConfigurationModelJustification,
   "VirtualEnclaveMaintenanceModeJustification",
   "csharp"
