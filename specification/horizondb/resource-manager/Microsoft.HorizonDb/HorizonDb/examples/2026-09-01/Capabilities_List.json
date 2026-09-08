@@ -1,9 +1,9 @@
 {
   "operationId": "Capabilities_List",
-  "title": "List capabilities in a location",
+  "title": "List HorizonDB capabilities by subscription and region",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "location": "westus2",
+    "location": "eastus2",
     "api-version": "2026-09-01"
   },
   "responses": {
@@ -11,7 +11,7 @@
       "body": {
         "value": [
           {
-            "location": "westus2",
+            "location": "eastus2",
             "status": "Available",
             "clusterCapabilities": {
               "status": "Available",
@@ -22,12 +22,7 @@
                   "supportedVersionsToUpgrade": []
                 }
               ],
-              "supportedFeatures": [
-                {
-                  "name": "GeoRedundantBackup",
-                  "status": "Available"
-                }
-              ]
+              "supportedFeatures": []
             },
             "poolCapabilities": {
               "status": "Available",
@@ -37,22 +32,143 @@
                   "status": "Default",
                   "supportedGenerations": [
                     {
-                      "computeGeneration": 5,
-                      "status": "Default",
+                      "computeGeneration": 1,
+                      "status": "Available",
                       "supportedComputeModels": [
                         {
                           "type": "Provisioned",
                           "status": "Default",
-                          "defaultVCoreCount": 4,
+                          "defaultVCoreCount": 2,
                           "supportedComputeSizes": [
                             {
                               "status": "Default",
-                              "vCores": 4,
+                              "vCores": 2,
                               "memoryPerVCoreInMb": 8192
                             },
                             {
                               "status": "Available",
-                              "vCores": 8,
+                              "vCores": 4,
+                              "memoryPerVCoreInMb": 8192
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "computeGeneration": 2,
+                      "status": "Available",
+                      "supportedComputeModels": [
+                        {
+                          "type": "Provisioned",
+                          "status": "Default",
+                          "defaultVCoreCount": 2,
+                          "supportedComputeSizes": [
+                            {
+                              "status": "Default",
+                              "vCores": 2,
+                              "memoryPerVCoreInMb": 8192
+                            },
+                            {
+                              "status": "Available",
+                              "vCores": 4,
+                              "memoryPerVCoreInMb": 8192
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "computeGeneration": 3,
+                      "status": "Available",
+                      "supportedComputeModels": [
+                        {
+                          "type": "Provisioned",
+                          "status": "Default",
+                          "defaultVCoreCount": 2,
+                          "supportedComputeSizes": [
+                            {
+                              "status": "Default",
+                              "vCores": 2,
+                              "memoryPerVCoreInMb": 8192
+                            },
+                            {
+                              "status": "Available",
+                              "vCores": 4,
+                              "memoryPerVCoreInMb": 8192
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Intel",
+                  "status": "Available",
+                  "supportedGenerations": [
+                    {
+                      "computeGeneration": 1,
+                      "status": "Available",
+                      "supportedComputeModels": [
+                        {
+                          "type": "Provisioned",
+                          "status": "Default",
+                          "defaultVCoreCount": 2,
+                          "supportedComputeSizes": [
+                            {
+                              "status": "Default",
+                              "vCores": 2,
+                              "memoryPerVCoreInMb": 8192
+                            },
+                            {
+                              "status": "Available",
+                              "vCores": 4,
+                              "memoryPerVCoreInMb": 8192
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "computeGeneration": 2,
+                      "status": "Available",
+                      "supportedComputeModels": [
+                        {
+                          "type": "Provisioned",
+                          "status": "Default",
+                          "defaultVCoreCount": 2,
+                          "supportedComputeSizes": [
+                            {
+                              "status": "Default",
+                              "vCores": 2,
+                              "memoryPerVCoreInMb": 8192
+                            },
+                            {
+                              "status": "Available",
+                              "vCores": 4,
+                              "memoryPerVCoreInMb": 8192
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "computeGeneration": 3,
+                      "status": "Available",
+                      "supportedComputeModels": [
+                        {
+                          "type": "Provisioned",
+                          "status": "Default",
+                          "defaultVCoreCount": 2,
+                          "supportedComputeSizes": [
+                            {
+                              "status": "Default",
+                              "vCores": 2,
+                              "memoryPerVCoreInMb": 8192
+                            },
+                            {
+                              "status": "Available",
+                              "vCores": 4,
                               "memoryPerVCoreInMb": 8192
                             }
                           ]
@@ -62,12 +178,7 @@
                   ]
                 }
               ],
-              "supportedFeatures": [
-                {
-                  "name": "ZoneRedundancy",
-                  "status": "Available"
-                }
-              ]
+              "supportedFeatures": []
             }
           }
         ]

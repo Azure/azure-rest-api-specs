@@ -122,7 +122,7 @@
           }
         },
         "x-ms-examples": {
-          "List operations for Microsoft.HorizonDB": {
+          "List operations for Microsoft.HorizonDb": {
             "$ref": "./examples/Operations_List.json"
           }
         },
@@ -161,7 +161,7 @@
           }
         },
         "x-ms-examples": {
-          "List HorizonDB clusters by subscription": {
+          "List HorizonDB clusters in a subscription": {
             "$ref": "./examples/Clusters_ListBySubscription.json"
           }
         },
@@ -202,7 +202,7 @@
           }
         },
         "x-ms-examples": {
-          "List capabilities in a location": {
+          "List HorizonDB capabilities by subscription and region": {
             "$ref": "./examples/Capabilities_List.json"
           }
         },
@@ -243,8 +243,8 @@
           }
         },
         "x-ms-examples": {
-          "List default parameter groups in a region": {
-            "$ref": "./examples/DefaultParameterGroups_ListDefaultParameterGroupsBySubscriptionAndRegion.json"
+          "List default HorizonDB parameter groups by subscription and region": {
+            "$ref": "./examples/DefaultParameterGroups_List.json"
           }
         },
         "x-ms-pageable": {
@@ -291,8 +291,8 @@
           }
         },
         "x-ms-examples": {
-          "Get a default parameter group": {
-            "$ref": "./examples/DefaultParameterGroups_GetDefaultParameterGroup.json"
+          "Get a default HorizonDB parameter group by subscription, location, and name": {
+            "$ref": "./examples/DefaultParameterGroups_Get.json"
           }
         }
       }
@@ -423,6 +423,12 @@
         "x-ms-examples": {
           "Get a HorizonDB cluster": {
             "$ref": "./examples/Clusters_Get.json"
+          },
+          "Get a cluster after pool creation while it had no existing pools": {
+            "$ref": "./examples/Clusters_GetAfterPoolCreationOnEmptyCluster.json"
+          },
+          "Get a minimum HorizonDB cluster with materialized service defaults": {
+            "$ref": "./examples/Clusters_GetMinimumDefaults.json"
           }
         }
       },
@@ -505,8 +511,26 @@
           }
         },
         "x-ms-examples": {
-          "Create or replace a HorizonDB cluster": {
+          "Create a HorizonDB cluster with minimum configuration and service defaults": {
+            "$ref": "./examples/Clusters_CreateOrUpdateMinimumDefaults.json"
+          },
+          "Create or update a HorizonDB cluster": {
             "$ref": "./examples/Clusters_CreateOrUpdate.json"
+          },
+          "Reject Create mode with restore properties": {
+            "$ref": "./examples/Clusters_CreateOrUpdateInvalidCreateWithRestoreProperties.json"
+          },
+          "Reject PostgreSQL 18 in the GA API version": {
+            "$ref": "./examples/Clusters_CreateOrUpdateChangePostgreSqlVersion.json"
+          },
+          "Reject cross-region point-in-time restore until it is supported": {
+            "$ref": "./examples/Clusters_CreateOrUpdateCrossRegionPointInTimeRestore.json"
+          },
+          "Reject point-in-time restore without a creation source": {
+            "$ref": "./examples/Clusters_CreateOrUpdateInvalidPointInTimeRestoreMissingSource.json"
+          },
+          "Restore a HorizonDB cluster to a point in time": {
+            "$ref": "./examples/Clusters_CreateOrUpdatePointInTimeRestore.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -580,7 +604,7 @@
           }
         },
         "x-ms-examples": {
-          "Update a HorizonDB cluster": {
+          "Rename the PostgreSQL administrator role and reset its password while updating a HorizonDB cluster": {
             "$ref": "./examples/Clusters_Update.json"
           }
         },
@@ -701,8 +725,8 @@
           }
         },
         "x-ms-examples": {
-          "List authentication methods": {
-            "$ref": "./examples/Authentications_List.json"
+          "List the service-created authentication methods": {
+            "$ref": "./examples/PasswordAuthentications_List.json"
           }
         },
         "x-ms-pageable": {
@@ -753,7 +777,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Microsoft Entra authentication": {
+          "Get the Microsoft Entra authentication method": {
             "$ref": "./examples/MicrosoftEntraAuthentications_Get.json"
           }
         }
@@ -809,8 +833,11 @@
           }
         },
         "x-ms-examples": {
-          "Update Microsoft Entra authentication": {
-            "$ref": "./examples/MicrosoftEntraAuthentications_Update.json"
+          "Disable Microsoft Entra authentication without modifying existing database roles": {
+            "$ref": "./examples/MicrosoftEntraAuthentications_Disable.json"
+          },
+          "Enable Microsoft Entra authentication": {
+            "$ref": "./examples/MicrosoftEntraAuthentications_Enable.json"
           }
         }
       }
@@ -858,7 +885,7 @@
           }
         },
         "x-ms-examples": {
-          "Get password authentication": {
+          "Get the password authentication method": {
             "$ref": "./examples/PasswordAuthentications_Get.json"
           }
         }
@@ -914,8 +941,65 @@
           }
         },
         "x-ms-examples": {
-          "Update password authentication": {
-            "$ref": "./examples/PasswordAuthentications_Update.json"
+          "Create the administrator when password authentication is enabled and no special-group member exists": {
+            "$ref": "./examples/PasswordAuthentications_CreateAdministrator.json"
+          },
+          "Disable password authentication": {
+            "$ref": "./examples/PasswordAuthentications_Disable.json"
+          },
+          "Enable password authentication and create the administrator when no special-group member exists": {
+            "$ref": "./examples/PasswordAuthentications_CreateAdministratorAndEnable.json"
+          },
+          "Enable password authentication and rename the existing administrator": {
+            "$ref": "./examples/PasswordAuthentications_RenameAdministratorAndEnable.json"
+          },
+          "Enable password authentication and reset the existing administrator password": {
+            "$ref": "./examples/PasswordAuthentications_ResetPasswordAndEnable.json"
+          },
+          "Enable password authentication without changing database roles": {
+            "$ref": "./examples/PasswordAuthentications_Enable.json"
+          },
+          "Enable password authentication, rename the administrator, and reset its password": {
+            "$ref": "./examples/PasswordAuthentications_RenameAndResetPasswordAndEnable.json"
+          },
+          "Reject administrator creation when the requested role exists outside the special group": {
+            "$ref": "./examples/PasswordAuthentications_CreateAdministratorLoginConflict.json"
+          },
+          "Reject administrator rename while password authentication is disabled": {
+            "$ref": "./examples/PasswordAuthentications_RenameAdministratorWhileDisabled.json"
+          },
+          "Reject an administrator login that already exists outside the special role": {
+            "$ref": "./examples/PasswordAuthentications_AdministratorLoginConflict.json"
+          },
+          "Reject combined administrator update while password authentication is disabled": {
+            "$ref": "./examples/PasswordAuthentications_RenameAndResetWhileDisabled.json"
+          },
+          "Reject credentials while disabling password authentication": {
+            "$ref": "./examples/PasswordAuthentications_DisabledWithCredentials.json"
+          },
+          "Reject password reset when the AzureSU-owned special group has no member": {
+            "$ref": "./examples/PasswordAuthentications_ResetPasswordAdministratorNotFound.json"
+          },
+          "Reject password reset while password authentication is disabled": {
+            "$ref": "./examples/PasswordAuthentications_ResetPasswordWhileDisabled.json"
+          },
+          "Reject password update when the special role has multiple members": {
+            "$ref": "./examples/PasswordAuthentications_InvalidGroupMembership.json"
+          },
+          "Reject rename when the special administrator role has no member": {
+            "$ref": "./examples/PasswordAuthentications_AdministratorNotFound.json"
+          },
+          "Rename a differently named PostgreSQL administrator role and reset its password": {
+            "$ref": "./examples/PasswordAuthentications_RenameAndResetPassword.json"
+          },
+          "Rename the sole PostgreSQL administrator role": {
+            "$ref": "./examples/PasswordAuthentications_RenameAdministrator.json"
+          },
+          "Reset the password when the requested and current administrator names match": {
+            "$ref": "./examples/PasswordAuthentications_ResetMatchingAdministratorPassword.json"
+          },
+          "Reset the sole PostgreSQL administrator role password": {
+            "$ref": "./examples/PasswordAuthentications_ResetPassword.json"
           }
         }
       }
@@ -963,7 +1047,7 @@
           }
         },
         "x-ms-examples": {
-          "List backups": {
+          "List available backups for a HorizonDB cluster": {
             "$ref": "./examples/Backups_List.json"
           }
         },
@@ -1025,7 +1109,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a backup": {
+          "Get an available automatic backup for a HorizonDB cluster": {
             "$ref": "./examples/Backups_Get.json"
           }
         }
@@ -1073,6 +1157,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List the optional cluster change data capture capability": {
+            "$ref": "./examples/ChangeDataCaptureCapabilities_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1118,6 +1207,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the cluster change data capture capability": {
+            "$ref": "./examples/ChangeDataCaptureCapabilities_Get.json"
           }
         }
       },
@@ -1186,6 +1280,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Enable the cluster change data capture capability": {
+            "$ref": "./examples/ChangeDataCaptureCapabilities_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1258,6 +1357,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update the cluster change data capture capability": {
+            "$ref": "./examples/ChangeDataCaptureCapabilities_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ChangeDataCaptureCapability"
@@ -1316,6 +1420,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete the cluster change data capture capability": {
+            "$ref": "./examples/ChangeDataCaptureCapabilities_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1362,6 +1471,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Microsoft Fabric Mirroring configurations": {
+            "$ref": "./examples/ChangeDataCaptureConfigurations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1419,6 +1533,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Microsoft Fabric Mirroring configuration": {
+            "$ref": "./examples/ChangeDataCaptureConfigurations_Get.json"
           }
         }
       },
@@ -1497,6 +1616,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Enroll a database for Microsoft Fabric Mirroring": {
+            "$ref": "./examples/ChangeDataCaptureConfigurations_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1579,6 +1703,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Disable a Microsoft Fabric Mirroring configuration": {
+            "$ref": "./examples/ChangeDataCaptureConfigurations_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ChangeDataCaptureConfiguration"
@@ -1647,6 +1776,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a Microsoft Fabric Mirroring configuration": {
+            "$ref": "./examples/ChangeDataCaptureConfigurations_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1693,6 +1827,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Microsoft Fabric change data capture destinations": {
+            "$ref": "./examples/ChangeDataCaptureDestinations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1750,6 +1889,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Microsoft Fabric change data capture destination": {
+            "$ref": "./examples/ChangeDataCaptureDestinations_Get.json"
           }
         }
       },
@@ -1828,6 +1972,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a Microsoft Fabric change data capture destination": {
+            "$ref": "./examples/ChangeDataCaptureDestinations_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1910,6 +2059,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Disable a Microsoft Fabric change data capture destination": {
+            "$ref": "./examples/ChangeDataCaptureDestinations_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ChangeDataCaptureDestination"
@@ -1976,6 +2130,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Microsoft Fabric change data capture destination": {
+            "$ref": "./examples/ChangeDataCaptureDestinations_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2062,6 +2221,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Activate a validated identity assignment for a change data capture destination": {
+            "$ref": "./examples/ChangeDataCaptureDestinations_ActivateIdentity.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ActivateChangeDataCaptureIdentityResult"
@@ -2119,6 +2283,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List change data capture identity assignments": {
+            "$ref": "./examples/IdentityAssignments_List.json"
           }
         },
         "x-ms-pageable": {
@@ -2186,6 +2355,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a change data capture identity assignment": {
+            "$ref": "./examples/IdentityAssignments_Get.json"
           }
         }
       },
@@ -2276,6 +2450,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create a change data capture identity assignment": {
+            "$ref": "./examples/IdentityAssignments_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/IdentityAssignment"
@@ -2354,6 +2533,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete an inactive change data capture identity assignment": {
+            "$ref": "./examples/IdentityAssignments_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2403,7 +2587,7 @@
           }
         },
         "x-ms-examples": {
-          "List HorizonDB endpoints": {
+          "List HorizonDB endpoints in a cluster": {
             "$ref": "./examples/Endpoints_List.json"
           }
         },
@@ -2467,6 +2651,9 @@
         "x-ms-examples": {
           "Get a HorizonDB endpoint": {
             "$ref": "./examples/Endpoints_Get.json"
+          },
+          "Get a read-only HorizonDB pool endpoint": {
+            "$ref": "./examples/Endpoints_GetReadOnly.json"
           }
         }
       },
@@ -2531,7 +2718,10 @@
           }
         },
         "x-ms-examples": {
-          "Update a HorizonDB endpoint alias": {
+          "Remove the alias from a HorizonDB endpoint": {
+            "$ref": "./examples/Endpoints_UpdateRemoveAlias.json"
+          },
+          "Set an alias on a HorizonDB endpoint": {
             "$ref": "./examples/Endpoints_Update.json"
           }
         }
@@ -2590,7 +2780,7 @@
           }
         },
         "x-ms-examples": {
-          "List HorizonDB firewall rules in an endpoint": {
+          "List firewall rules on a HorizonDB endpoint": {
             "$ref": "./examples/FirewallRules_List.json"
           }
         },
@@ -2662,7 +2852,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a HorizonDB endpoint firewall rule": {
+          "Get a firewall rule on a HorizonDB endpoint": {
             "$ref": "./examples/FirewallRules_Get.json"
           }
         }
@@ -2755,7 +2945,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or replace a HorizonDB endpoint firewall rule": {
+          "Create or update a firewall rule on a HorizonDB endpoint": {
             "$ref": "./examples/FirewallRules_CreateOrUpdate.json"
           }
         },
@@ -2836,7 +3026,7 @@
           }
         },
         "x-ms-examples": {
-          "Update a HorizonDB endpoint firewall rule": {
+          "Update selected properties of a firewall rule on a HorizonDB endpoint": {
             "$ref": "./examples/FirewallRules_Update.json"
           }
         }
@@ -2919,7 +3109,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete a HorizonDB endpoint firewall rule": {
+          "Delete a firewall rule from a HorizonDB endpoint": {
             "$ref": "./examples/FirewallRules_Delete.json"
           }
         },
@@ -3043,8 +3233,8 @@
           }
         },
         "x-ms-examples": {
-          "List PostgreSQL roles mapped to Microsoft Entra principals in a cluster": {
-            "$ref": "./examples/Administrators_List.json"
+          "List Microsoft Entra administrators for a HorizonDB cluster": {
+            "$ref": "./examples/MicrosoftEntraAdministrators_List.json"
           }
         },
         "x-ms-pageable": {
@@ -3103,8 +3293,8 @@
           }
         },
         "x-ms-examples": {
-          "Get a PostgreSQL role mapped to a Microsoft Entra principal": {
-            "$ref": "./examples/Administrators_Get.json"
+          "Get a Microsoft Entra administrator for a HorizonDB cluster": {
+            "$ref": "./examples/MicrosoftEntraAdministrators_Get.json"
           }
         }
       },
@@ -3184,8 +3374,8 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a PostgreSQL role mapped to a Microsoft Entra principal": {
-            "$ref": "./examples/Administrators_CreateOrUpdate.json"
+          "Create or replace a Microsoft Entra administrator for a HorizonDB cluster": {
+            "$ref": "./examples/MicrosoftEntraAdministrators_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3260,8 +3450,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete a PostgreSQL role mapped to a Microsoft Entra principal": {
-            "$ref": "./examples/Administrators_Delete.json"
+          "Delete a Microsoft Entra administrator from a HorizonDB cluster": {
+            "$ref": "./examples/MicrosoftEntraAdministrators_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3458,7 +3648,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a HorizonDB pool": {
+          "Create a minimum provisioned HorizonDB pool": {
             "$ref": "./examples/Pools_CreateOrUpdate.json"
           }
         },
@@ -3539,7 +3729,16 @@
           }
         },
         "x-ms-examples": {
-          "Update a HorizonDB pool": {
+          "Associate a HorizonDB pool with a parameter group immediately": {
+            "$ref": "./examples/Pools_UpdateParameterGroupImmediate.json"
+          },
+          "Associate a HorizonDB pool with a parameter group pending reboot": {
+            "$ref": "./examples/Pools_UpdateParameterGroupPendingReboot.json"
+          },
+          "Scale a HorizonDB pool to zero after clearing its read-write designation": {
+            "$ref": "./examples/Pools_UpdateScaleToZero.json"
+          },
+          "Update a single HorizonDB pool compute property": {
             "$ref": "./examples/Pools_Update.json"
           }
         },
@@ -3707,8 +3906,11 @@
           }
         },
         "x-ms-examples": {
-          "List upcoming maintenance events": {
+          "List maintenance events for a HorizonDB pool.": {
             "$ref": "./examples/MaintenanceEvents_List.json"
+          },
+          "List upcoming maintenance events for a HorizonDB pool.": {
+            "$ref": "./examples/MaintenanceEvents_ListWithFilter.json"
           }
         },
         "x-ms-pageable": {
@@ -3779,7 +3981,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a maintenance event": {
+          "Get information about a maintenance event for a HorizonDB pool.": {
             "$ref": "./examples/MaintenanceEvents_Get.json"
           }
         }
@@ -3867,7 +4069,7 @@
           }
         },
         "x-ms-examples": {
-          "Apply a maintenance event now": {
+          "Apply a maintenance event immediately for a HorizonDB pool.": {
             "$ref": "./examples/MaintenanceEvents_ApplyNow.json"
           }
         },
@@ -3969,7 +4171,7 @@
           }
         },
         "x-ms-examples": {
-          "Reschedule a maintenance event": {
+          "Reschedule a maintenance event for a HorizonDB pool.": {
             "$ref": "./examples/MaintenanceEvents_Reschedule.json"
           }
         },
@@ -4033,7 +4235,7 @@
           }
         },
         "x-ms-examples": {
-          "List nodes": {
+          "List the nodes allocated to a HorizonDB pool": {
             "$ref": "./examples/Nodes_List.json"
           }
         },
@@ -4102,7 +4304,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a node": {
+          "Get a HorizonDB node": {
             "$ref": "./examples/Nodes_Get.json"
           }
         }
@@ -4179,7 +4381,7 @@
           }
         },
         "x-ms-examples": {
-          "Restart a HorizonDB pool": {
+          "Restart PostgreSQL containers in a HorizonDB pool": {
             "$ref": "./examples/Pools_Restart.json"
           }
         },
@@ -4260,7 +4462,7 @@
           }
         },
         "x-ms-examples": {
-          "Shut down a HorizonDB pool": {
+          "Shut down and deallocate a HorizonDB pool": {
             "$ref": "./examples/Pools_Shutdown.json"
           }
         },
@@ -4475,7 +4677,7 @@
           }
         },
         "x-ms-examples": {
-          "List all private endpoint connections on a cluster": {
+          "List private endpoint connections on a HorizonDB cluster": {
             "$ref": "./examples/PrivateEndpointConnections_List.json"
           }
         },
@@ -4603,7 +4805,7 @@
           }
         },
         "x-ms-examples": {
-          "Update a private endpoint connection": {
+          "Approve a private endpoint connection": {
             "$ref": "./examples/PrivateEndpointConnections_Update.json"
           }
         },
@@ -4727,7 +4929,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets private link resources for HorizonDB": {
+          "List HorizonDB private link resources": {
             "$ref": "./examples/PrivateLinkResources_List.json"
           }
         },
@@ -4789,7 +4991,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets a private link resource for HorizonDB": {
+          "Get a HorizonDB private link resource": {
             "$ref": "./examples/PrivateLinkResources_Get.json"
           }
         }
@@ -4953,7 +5155,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a HorizonDB parameter group": {
+          "Create or update a HorizonDB parameter group for a PostgreSQL version": {
             "$ref": "./examples/ParameterGroups_CreateOrUpdate.json"
           }
         },
@@ -5149,7 +5351,7 @@
           }
         },
         "x-ms-examples": {
-          "List connections for a HorizonDB parameter group": {
+          "List HorizonDB pools connected to a parameter group": {
             "$ref": "./examples/ParameterGroups_ListConnections.json"
           }
         },

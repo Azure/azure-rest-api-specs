@@ -1,16 +1,16 @@
 {
   "operationId": "Endpoints_Update",
-  "title": "Update a HorizonDB endpoint alias",
+  "title": "Set an alias on a HorizonDB endpoint",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "resourceGroupName": "exampleresourcegroup",
-    "clusterName": "examplecluster",
-    "endpointName": "cluster",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "endpointName": "pool-01",
     "api-version": "2026-09-01",
     "properties": {
       "properties": {
         "aliases": [
-          "examplealias"
+          "orders"
         ]
       }
     }
@@ -18,19 +18,19 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/endpoints/cluster",
-        "name": "cluster",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/endpoints/pool-01",
+        "name": "pool-01",
         "type": "Microsoft.HorizonDb/clusters/endpoints",
         "properties": {
-          "scope": "Cluster",
-          "associatedResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster",
-          "fullyQualifiedDomainName": "examplecluster.ffffffffffff.westus2.horizondb.azure.com",
-          "role": "ReadWrite",
+          "scope": "Pool",
+          "associatedResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01",
+          "fullyQualifiedDomainName": "primary.example-cluster.ffffffffffff.eastus2.horizondb.azure.com",
+          "role": "ReadOnly",
           "aliases": [
-            "examplealias"
+            "orders"
           ],
           "aliasFullyQualifiedDomainNames": [
-            "examplealias.horizondb.azure.com"
+            "orders.horizondb.azure.com"
           ]
         }
       }

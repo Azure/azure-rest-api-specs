@@ -1,11 +1,11 @@
 {
   "operationId": "FirewallRules_List",
-  "title": "List HorizonDB firewall rules in an endpoint",
+  "title": "List firewall rules on a HorizonDB endpoint",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "resourceGroupName": "exampleresourcegroup",
-    "clusterName": "examplecluster",
-    "endpointName": "cluster",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "endpointName": "pool-01",
     "api-version": "2026-09-01"
   },
   "responses": {
@@ -13,24 +13,13 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/endpoints/cluster/firewallRules/allowCorporateNetwork",
-            "name": "allowCorporateNetwork",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/endpoints/pool-01/firewallRules/example-firewall-rule-01",
+            "name": "example-firewall-rule-01",
             "type": "Microsoft.HorizonDb/clusters/endpoints/firewallRules",
             "properties": {
               "startIpAddress": "10.0.0.1",
-              "endIpAddress": "10.0.0.255",
-              "description": "Allow access from corporate network",
-              "provisioningState": "Succeeded"
-            }
-          },
-          {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/endpoints/cluster/firewallRules/allowDeveloperAccess",
-            "name": "allowDeveloperAccess",
-            "type": "Microsoft.HorizonDb/clusters/endpoints/firewallRules",
-            "properties": {
-              "startIpAddress": "192.168.1.10",
-              "endIpAddress": "192.168.1.10",
-              "description": "Allow developer access",
+              "endIpAddress": "10.0.0.254",
+              "description": "Allow access from the corporate network",
               "provisioningState": "Succeeded"
             }
           }

@@ -5,15 +5,32 @@
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "exampleresourcegroup",
     "clusterName": "examplecluster",
-    "poolName": "examplepool",
+    "poolName": "example-pool-01",
     "api-version": "2026-09-01"
   },
   "responses": {
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/westus2/operationStatuses/ffffffff-ffff-ffff-ffff-ffffffffffff?api-version=2026-09-01",
-        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/westus2/operationResults/ffffffff-ffff-ffff-ffff-ffffffffffff",
-        "Retry-After": 30
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/example-pool-01/operationStatuses/22222222-2222-2222-2222-222222222222",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/example-pool-01/operationResults/22222222-2222-2222-2222-222222222222",
+        "Retry-After": 10
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/example-pool-01",
+        "name": "example-pool-01",
+        "type": "Microsoft.HorizonDb/clusters/pools",
+        "properties": {
+          "state": "Stopped",
+          "allocatedNodeCount": 0,
+          "parameterGroup": {
+            "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/parameterGroups/production-parameters",
+            "applyMethod": "Immediate",
+            "syncStatus": "InSync"
+          },
+          "provisioningState": "Succeeded"
+        }
       }
     }
   }

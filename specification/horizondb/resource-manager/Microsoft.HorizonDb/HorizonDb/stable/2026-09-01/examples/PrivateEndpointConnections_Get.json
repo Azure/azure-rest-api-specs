@@ -3,30 +3,30 @@
   "title": "Get a private endpoint connection",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "resourceGroupName": "exampleresourcegroup",
-    "clusterName": "examplecluster",
-    "privateEndpointConnectionName": "exampleprivateendpointconnection.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "privateEndpointConnectionName": "example-private-endpoint-connection",
     "api-version": "2026-09-01"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "exampleprivateendpointconnection.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/privateEndpointConnections/example-private-endpoint-connection",
+        "name": "example-private-endpoint-connection",
         "type": "Microsoft.HorizonDb/clusters/privateEndpointConnections",
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/privateEndpointConnections/exampleprivateendpointconnection.1fa229cd-bf3f-47f0-8c49-afb36723997e",
         "properties": {
           "groupIds": [
             "default"
           ],
           "privateEndpoint": {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/network-resource-group/providers/Microsoft.Network/privateEndpoints/example-private-endpoint"
           },
           "privateLinkServiceConnectionState": {
-            "description": "Auto-approved",
-            "actionsRequired": "None",
-            "status": "Approved"
+            "status": "Approved",
+            "description": "Approved for the production database network",
+            "actionsRequired": "None"
           },
-          "provisioningState": "Ready"
+          "provisioningState": "Succeeded"
         }
       }
     }
