@@ -22,6 +22,7 @@ input-file:
 ```yaml $(python)
 python-mode: create
 package-name: azure-mgmt-credvalidation
+package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
