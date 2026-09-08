@@ -23,3 +23,29 @@
     Older preview API version retained for compatibility. The default tag points to
     2026-04-01-preview; consumers needing 2025-02-01-preview should use the per-version
     tag package-2025-02-01-preview.
+
+- tool: Swagger Avocado
+  path: resource-manager/Microsoft.AzureResilienceManagement/AzureResilienceManagement/preview/2026-06-01-preview/openapi.json
+  reason: >
+    MISSING_APIS_IN_DEFAULT_TAG for the goalTemplates paths. The GoalTemplate resource type is
+    intentionally removed starting in 2026-08-31-preview (the default tag) as part of Goal
+    Template deprecation - resiliency posture now lives directly on GoalAssignment
+    (requireZonalResiliency) and GoalResource (zonalResiliency). This older preview version
+    still contains those paths, so Avocado reports the removed paths as missing from the
+    default tag. All affected api-versions are preview (no GA/Breaking Change Board approval
+    required), and these are service-group-folder APIs, a known Avocado false-positive
+    (https://github.com/Azure/azure-sdk-tools/issues/6201). Consumers still needing
+    GoalTemplates should use the per-version tag package-2026-06-01-preview.
+
+- tool: Swagger Avocado
+  path: resource-manager/Microsoft.AzureResilienceManagement/AzureResilienceManagement/preview/2026-04-01-preview/openapi.json
+  reason: >
+    MISSING_APIS_IN_DEFAULT_TAG for the goalTemplates paths. The GoalTemplate resource type is
+    intentionally removed starting in 2026-08-31-preview (the default tag) as part of Goal
+    Template deprecation - resiliency posture now lives directly on GoalAssignment
+    (requireZonalResiliency) and GoalResource (zonalResiliency). This older preview version
+    still contains those paths, so Avocado reports the removed paths as missing from the
+    default tag. All affected api-versions are preview (no GA/Breaking Change Board approval
+    required), and these are service-group-folder APIs, a known Avocado false-positive
+    (https://github.com/Azure/azure-sdk-tools/issues/6201). Consumers still needing
+    GoalTemplates should use the per-version tag package-2026-04-01-preview.
