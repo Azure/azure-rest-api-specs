@@ -40,4 +40,10 @@ enum Versions {
    * The 2022-04-01 API version.
    */
   v2022_04_01: "2022-04-01",
+
+  /**
+   * The 2026-07-01-preview API version.
+   */
+  @Azure.Core.previewVersion
+  v2026_07_01_preview: "2026-07-01-preview",
 }
