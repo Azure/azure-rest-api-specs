@@ -129,11 +129,73 @@ pre-agent-steps:
           }),
         );
 
+  - name: Generate SDK
+    id: generate-sdk
+    shell: bash
+    env:
+      LOCAL_SDK_REPO_PATH: ${{ github.workspace }}/repositories/${{ steps.resolve-source.outputs.sdk-repository }}
+      TSP_CONFIG_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/tspconfig.yaml
+    run: |
+      set -euo pipefail
+      export PATH="$AZSDK_CLI_PATH:$PATH"
+      results_dir="/tmp/gh-aw/sdk-breaking-change-results"
+      marker="$RUNNER_TEMP/azsdk-generation-started"
+      mkdir -p "$results_dir"
+      touch "$marker"
+
+      azsdk package generate \
+        --local-sdk-repo-path "$LOCAL_SDK_REPO_PATH" \
+        --tsp-config-path "$TSP_CONFIG_PATH" \
+        --output json | tee "$results_dir/generate.json"
+
+      mapfile -d '' generated_configs < <(
+        find "$LOCAL_SDK_REPO_PATH" -type f -name tsp-location.yaml -newer "$marker" -print0
+      )
+      if [[ ${#generated_configs[@]} -ne 1 ]]; then
+        echo "Expected exactly one generated tsp-location.yaml, found ${#generated_configs[@]}." >&2
+        printf '  %s\n' "${generated_configs[@]}" >&2
+        exit 1
+      fi
+
+      package_path="$(realpath "$(dirname "${generated_configs[0]}")")"
+      if [[ ! -d "$package_path" || "$package_path" != "$LOCAL_SDK_REPO_PATH"/* ]]; then
+        echo "Invalid generated package path: $package_path" >&2
+        exit 1
+      fi
+      echo "package-path=$package_path" >> "$GITHUB_OUTPUT"
+      printf '%s\n' "$package_path" | tee "$results_dir/package-path.txt"
+
+  - name: Build generated SDK
+    shell: bash
+    env:
+      PACKAGE_PATH: ${{ steps.generate-sdk.outputs.package-path }}
+    run: |
+      set -euo pipefail
+      export PATH="$AZSDK_CLI_PATH:$PATH"
+      azsdk package build \
+        --package-path "$PACKAGE_PATH" \
+        --output json | tee /tmp/gh-aw/sdk-breaking-change-results/build.json
+
+  - name: Detect SDK breaking changes
+    shell: bash
+    env:
+      PACKAGE_PATH: ${{ steps.generate-sdk.outputs.package-path }}
+      TSP_CONFIG_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/tspconfig.yaml
+    run: |
+      set -euo pipefail
+      export PATH="$AZSDK_CLI_PATH:$PATH"
+      azsdk package detect-breaking-change \
+        --package-path "$PACKAGE_PATH" \
+        --tsp-config-path "$TSP_CONFIG_PATH" \
+        --output json | tee /tmp/gh-aw/sdk-breaking-change-results/breaking-changes.json
+
   - name: Upload SDK analysis context
     uses: actions/upload-artifact@v7
     with:
       name: "sdk-breaking-change-context"
-      path: "/tmp/gh-aw/sdk-breaking-change-context.json"
+      path: |
+        /tmp/gh-aw/sdk-breaking-change-context.json
+        /tmp/gh-aw/sdk-breaking-change-results
       retention-days: 7
 ---
 
@@ -143,36 +205,6 @@ This workflow runs when an authorized user comments `/azsdk sdk-breaking-change-
 
 
 
-Read `/tmp/gh-aw/sdk-breaking-change-context.json`. Use its `localSdkRepoPath` and `tspConfigPath` values unchanged in the commands below.
+SDK generation, build, and breaking-change detection have already run in deterministic workflow steps. Do not run `azsdk`, invoke an MCP server, or repeat any of those operations.
 
-The workflow has installed the `azsdk` CLI in `$AZSDK_CLI_PATH`. Add that directory to `PATH`, then run `command -v azsdk` exactly once to verify that the CLI is available. Do not invoke an MCP server or use MCP tools.
-
-Run `test -d "<localSdkRepoPath from the context file>"` and `test -f "<tspConfigPath from the context file>"` before running any `azsdk package` command. If either check fails, stop and report the missing path.
-
-Perform these steps in order. Run each command exactly once, capture its complete output, and stop and report the error if it exits with a nonzero status.
-
-1. Generate the SDK and request machine-readable output:
-
-```bash
-azsdk package generate \
-  --local-sdk-repo-path "<localSdkRepoPath from the context file>" \
-  --tsp-config-path "<tspConfigPath from the context file>" \
-```
-
-2. Read the generated package path from the successful JSON output. Accept the CLI's package-path property name as emitted. Require it to be a non-empty absolute path to an existing directory; otherwise stop and report the invalid generation result. Do not guess or derive the package path from the SDK repository name.
-3. Build that generated package:
-
-```bash
-azsdk package build \
-  --package-path "<package path returned by azsdk package generate>" \
-```
-
-4. Detect SDK breaking changes:
-
-```bash
-azsdk package detect-breaking-change \
-  --package-path "<package path returned by azsdk package generate>" \
-  --tsp-config-path "<tspConfigPath from the context file>" \
-```
-
-Use the generated package path unchanged for both subsequent commands. Report the generation, build, and breaking-change detection results. Do not modify files outside the generated SDK package.
+Read `/tmp/gh-aw/sdk-breaking-change-context.json` and all files under `/tmp/gh-aw/sdk-breaking-change-results`. Report the package path and concise generation, build, and breaking-change detection results. Include all detected breaking changes and clearly state when none were detected.
