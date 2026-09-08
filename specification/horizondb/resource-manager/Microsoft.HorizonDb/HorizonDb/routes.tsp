@@ -235,6 +235,7 @@ interface Pools {
   >;
 }
 
+@removed(Versions.v2026_09_01)
 @armResourceOperations
 interface HorizonDbReplicas {
   @doc("Gets information about a HorizonDB replica.")

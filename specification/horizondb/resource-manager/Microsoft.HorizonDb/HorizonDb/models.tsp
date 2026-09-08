@@ -77,6 +77,7 @@ model Pool is Azure.ResourceManager.ProxyResource<PoolProperties> {
   tags?: Record<string>;
 }
 
+@removed(Versions.v2026_09_01)
 @doc("Represents the HorizonDB replica.")
 @parentResource(Pool)
 model HorizonDbReplica
@@ -816,6 +817,7 @@ model NetworkForPatchUpdate {
   publicAccess?: PublicNetworkAccessState;
 }
 
+@removed(Versions.v2026_09_01)
 @doc("Properties of a HorizonDB replica.")
 model HorizonDbReplicaProperties {
   @doc("Role of the replica.")
@@ -840,6 +842,7 @@ model HorizonDbReplicaProperties {
   provisioningState?: ProvisioningState;
 }
 
+@removed(Versions.v2026_09_01)
 @doc("Properties of a HorizonDB replica for update operations.")
 model HorizonDbReplicaPropertiesForPatchUpdate {
   @visibility(Lifecycle.Update)
@@ -847,6 +850,7 @@ model HorizonDbReplicaPropertiesForPatchUpdate {
   role?: ReplicaRole;
 }
 
+@removed(Versions.v2026_09_01)
 @doc("HorizonDB replica for update operations.")
 model HorizonDbReplicaForPatchUpdate {
   @doc("Properties of a HorizonDB replica for update operations.")
@@ -1684,6 +1688,7 @@ union PublicNetworkAccessState {
   Disabled: "Disabled",
 }
 
+@removed(Versions.v2026_09_01)
 @doc("Role of the replica.")
 union ReplicaRole {
   string,
