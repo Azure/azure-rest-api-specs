@@ -185,7 +185,7 @@ model RemediationMethod {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This read-only metadata resource describes remediation content and has no provisioning lifecycle."
 @added(Versions.v2026_09_01_preview)
 model RemediationProperties {
-  /** The recommendation type identifier associated with the remediation. */
+  /** The UUID-formatted recommendation type identifier associated with the remediation. */
   @visibility(Lifecycle.Read)
   recommendationTypeId: string;
 
