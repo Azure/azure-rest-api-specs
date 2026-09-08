@@ -98,6 +98,7 @@ interface GoalAssignments {
 }
 
 @armResourceOperations
+@removed(Versions.v2026_08_31_preview)
 interface GoalTemplates {
   @route(ServiceGroupRoute)
   get is ArmResourceRead<GoalTemplate, ServiceGroupParameters>;
