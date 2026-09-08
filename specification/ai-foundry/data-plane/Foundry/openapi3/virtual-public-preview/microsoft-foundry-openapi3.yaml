@@ -13764,7 +13764,7 @@ paths:
             }
   /openai/v1/chat/completions:
     get:
-      operationId: Chat_listChatCompletions
+      operationId: ChatGenerated_listChatCompletions
       summary: List chat completions
       description: Lists chat completions matching the request filters.
       parameters:
@@ -13957,7 +13957,16 @@ paths:
       operationId: Chat_createChatCompletion
       summary: Create a chat completion
       description: Creates a chat completion from the supplied request.
-      parameters: []
+      parameters:
+        - name: x-ms-session-id
+          in: header
+          required: false
+          description: An opaque, application-owned conversation identifier. The value is not returned in the response and must not contain secrets or personally identifiable information.
+          schema:
+            type: string
+          x-ms-foundry-meta:
+            conditional_previews:
+              - ModelRouterControls=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -15138,7 +15147,7 @@ paths:
               }
   /openai/v1/chat/completions/{completion_id}:
     delete:
-      operationId: Chat_deleteChatCompletion
+      operationId: ChatGenerated_deleteChatCompletion
       summary: Delete a chat completion
       description: Deletes a chat completion by its identifier.
       parameters:
@@ -15253,7 +15262,7 @@ paths:
               "deleted": true
             }
     get:
-      operationId: Chat_getChatCompletion
+      operationId: ChatGenerated_getChatCompletion
       summary: Get a chat completion
       description: Retrieves a chat completion by its identifier.
       parameters:
@@ -15402,7 +15411,7 @@ paths:
               "response_format": null
             }
     post:
-      operationId: Chat_updateChatCompletion
+      operationId: ChatGenerated_updateChatCompletion
       summary: Update a chat completion
       description: Updates a chat completion with the supplied changes.
       parameters:
@@ -15583,7 +15592,7 @@ paths:
             }
   /openai/v1/chat/completions/{completion_id}/messages:
     get:
-      operationId: Chat_getChatCompletionMessages
+      operationId: ChatGenerated_getChatCompletionMessages
       summary: Get chat completion messages
       description: Retrieves chat completion messages by its identifier.
       parameters:
@@ -27899,6 +27908,15 @@ paths:
           description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
+        - name: x-ms-session-id
+          in: header
+          required: false
+          description: An opaque, application-owned conversation identifier. The value is not returned in the response and must not contain secrets or personally identifiable information.
+          schema:
+            type: string
+          x-ms-foundry-meta:
+            conditional_previews:
+              - ModelRouterControls=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -28291,6 +28309,15 @@ paths:
                 user_security_context:
                   $ref: '#/components/schemas/AzureUserSecurityContext'
                   description: User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
+                routing_config:
+                  $ref: '#/components/schemas/RoutingConfiguration'
+                  description: |-
+                    Per-request configuration for Model Router inference calls.
+                    Supported on Model Router endpoints (deployed or instant if supported).
+                    Returns a 400 (Bad Request) error when the target is not a Model Router endpoint.
+                  x-ms-foundry-meta:
+                    conditional_previews:
+                      - ModelRouterControls=V1Preview
       x-oaiMeta:
         name: Create a model response
         group: responses
@@ -52411,6 +52438,9 @@ components:
         mode:
           $ref: '#/components/schemas/ModelRouterMode'
           description: The routing mode for the request.
+        session_affinity:
+          $ref: '#/components/schemas/SessionAffinityDetails'
+          description: Session affinity metadata for the routing decision. Omitted when affinity metadata is unavailable or the preview feature is not enabled.
         routing_trace:
           type: array
           items:
@@ -54482,10 +54512,10 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          image_url: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartImage'
           input_audio: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartAudio'
           file: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartFile'
           text: '#/components/schemas/OpenAI.ChatCompletionRequestUserMessageContentPartChatCompletionRequestMessageContentPartText'
+          image_url: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartImage'
     OpenAI.ChatCompletionRequestUserMessageContentPartChatCompletionRequestMessageContentPartText:
       type: object
       required:
@@ -57291,6 +57321,12 @@ components:
         user_security_context:
           $ref: '#/components/schemas/AzureUserSecurityContext'
           description: User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
+        routing_config:
+          $ref: '#/components/schemas/RoutingConfiguration'
+          description: Per-request configuration for Model Router inference calls.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - ModelRouterControls=V1Preview
     OpenAI.CreateChatCompletionRequestAudio:
       type: object
       required:
@@ -81757,6 +81793,21 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V2Preview
+    RoutingConfiguration:
+      type: object
+      properties:
+        session_affinity:
+          $ref: '#/components/schemas/SessionAffinityConfiguration'
+          description: |-
+            Session affinity configuration for reusing an eligible model across requests in the same conversation.
+            If omitted, sticky affinity is used when a supported conversation identifier is available.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - ModelRouterControls=V1Preview
+      description: |-
+        Per-request configuration for Model Router inference calls.
+        Supported on Model Router endpoints (deployed or instant if supported).
+        Returns a 400 (Bad Request) error when the target is not a Model Router endpoint.
     RoutingTraceEntry:
       type: object
       required:
@@ -82081,6 +82132,86 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Schedules=V1Preview
+    SessionAffinityConfiguration:
+      type: object
+      properties:
+        mode:
+          $ref: '#/components/schemas/SessionAffinityRequestMode'
+          description: Controls whether Model Router applies session affinity to this request.
+          default: sticky
+        session_id:
+          type: string
+          description: |-
+            An opaque, application-owned conversation identifier. Use the same value for related requests.
+            The value is not returned in the response and must not contain secrets or personally identifiable information.
+      description: Request settings that control Model Router session affinity.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - ModelRouterControls=V1Preview
+    SessionAffinityDecision:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - initialize
+            - retain
+            - switch
+      description: Final outcomes reported for Model Router session affinity.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - ModelRouterControls=V1Preview
+    SessionAffinityDetails:
+      type: object
+      required:
+        - mode
+      properties:
+        mode:
+          $ref: '#/components/schemas/SessionAffinityMode'
+          description: The effective session affinity mode.
+        source:
+          $ref: '#/components/schemas/SessionAffinitySource'
+          description: The identity source selected after applying precedence. `conversation` and `previous_response_id` apply only to the Responses API. Omitted when affinity is disabled.
+        decision:
+          $ref: '#/components/schemas/SessionAffinityDecision'
+          description: The final affinity outcome for the model that served the response. Omitted when affinity is disabled or no usable identity was available.
+      description: Effective Model Router session affinity metadata for a request.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - ModelRouterControls=V1Preview
+    SessionAffinityMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - sticky
+            - none
+      description: Effective modes reported for Model Router session affinity.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - ModelRouterControls=V1Preview
+    SessionAffinityRequestMode:
+      type: string
+      enum:
+        - sticky
+        - none
+      description: Request modes supported by Model Router session affinity.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - ModelRouterControls=V1Preview
+    SessionAffinitySource:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - session_id_payload
+            - session_id_header
+            - not_available
+            - conversation
+            - previous_response_id
+      description: Conversation identifier sources supported by Model Router session affinity.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - ModelRouterControls=V1Preview
     SessionConfiguration:
       type: object
       properties:
