@@ -1,12 +1,17 @@
 # Data-Plane API Review - Assign Reviewers
 #
-# When the `APIStewardshipBoard-ReviewRequested` label is applied to a data-plane PR,
-# request review from the `azure-data-plane-api-reviewers` team. The team has GitHub
-# code-review auto-assignment enabled, so GitHub delegates the request to one team
-# member using the team's routing algorithm. Removing the label is intentionally not
-# handled: native delegation owns the individual reviewer, so the workflow never removes
-# a reviewer it did not pick, and it does not subscribe to `unlabeled` events. Applying
-# `APIStewardshipBoard-SignedOff` clears the request label.
+# Requests review from the `azure-data-plane-api-reviewers` team on data-plane PRs that need
+# stewardship review. The team has GitHub code-review auto-assignment enabled, so GitHub
+# picks the individual member; this workflow only requests the team.
+#
+# Two triggers, because the `data-plane-review-requested` label can arrive two ways:
+#   - `pull_request_target: labeled` — the label applied manually.
+#   - `workflow_run` on "Summarize Checks" — the auto-applied label. It is applied with the
+#     default GITHUB_TOKEN, which does not re-trigger `labeled` workflows, so this path
+#     reconciles the request from the PR's live labels instead.
+#
+# Sign-off and `unlabeled` are not handled: the durable `data-plane-review-signoff` label
+# gates merge on its own, and native delegation owns the individual reviewer.
 name: "Data-Plane API Review - Assign Reviewers"
 
 on:
@@ -15,21 +20,31 @@ on:
       - labeled
     branches:
       - main
+  workflow_run:
+    workflows:
+      - "Summarize Checks"
+    types:
+      - completed
 
 permissions:
+  actions: read # extractInputs reads issue-number/head-sha handoff artifacts on workflow_run
   contents: read
   pull-requests: write
 
-# Serialize runs per PR so racing label events do not interleave. Do not cancel
-# in-progress runs: a cancelled run could drop a team request mid-flight.
-concurrency:
-  group: data-plane-review-assignment-${{ github.event.pull_request.number }}
-  cancel-in-progress: false
+# No `concurrency` block: the job is idempotent, like the other workflow_run label-reaction
+# workflows here. A PR-scoped group isn't possible on the workflow_run path anyway
+# (workflow_run.head_sha is the base tip, shared across open PRs).
 
 jobs:
   assign-reviewers:
     name: Assign Data-Plane Review Team
-    runs-on: ubuntu-24.04
+    # Skip Summarize Checks runs that did not succeed: nothing to reconcile.
+    if: >-
+      ${{ github.event_name == 'pull_request_target' ||
+          github.event.workflow_run.conclusion == 'success' }}
+    # ubuntu-slim: REST-only job (no build) that runs on every Summarize Checks completion,
+    # matching the other label-reaction workflows (arm-auto-signoff-status, update-labels).
+    runs-on: ubuntu-slim
     steps:
       # IMPORTANT: This workflow uses pull_request_target, which runs with repo write
       # permissions. Only base-branch code is checked out below, and no PR-head code is
