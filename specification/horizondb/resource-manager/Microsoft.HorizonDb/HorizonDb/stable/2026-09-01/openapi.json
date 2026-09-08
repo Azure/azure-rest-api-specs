@@ -92,6 +92,9 @@
     },
     {
       "name": "MaintenanceEvents"
+    },
+    {
+      "name": "Nodes"
     }
   ],
   "paths": {
@@ -3646,6 +3649,134 @@
           "final-state-schema": "#/definitions/MaintenanceEventActionResponse"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/nodes": {
+      "get": {
+        "operationId": "Nodes_List",
+        "tags": [
+          "Nodes"
+        ],
+        "description": "Lists the nodes allocated to a HorizonDB pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDB pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List nodes": {
+            "$ref": "./examples/Nodes_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/nodes/{nodeName}": {
+      "get": {
+        "operationId": "Nodes_Get",
+        "tags": [
+          "Nodes"
+        ],
+        "description": "Gets a node allocated to a HorizonDB pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDB pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the Node",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Node"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a node": {
+            "$ref": "./examples/Nodes_Get.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/replicas": {
@@ -8217,6 +8348,86 @@
             "update"
           ]
         }
+      }
+    },
+    "Node": {
+      "type": "object",
+      "description": "A service-managed node allocated to a HorizonDB pool.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NodeProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NodeListResult": {
+      "type": "object",
+      "description": "The response of a Node list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Node items on this page",
+          "items": {
+            "$ref": "#/definitions/Node"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NodeProperties": {
+      "type": "object",
+      "description": "Properties of a service-managed HorizonDB node.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/NodeRole",
+          "description": "The current role performed by the node within its pool.",
+          "readOnly": true
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "The availability zone in which the node is deployed.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "role",
+        "availabilityZone"
+      ]
+    },
+    "NodeRole": {
+      "type": "string",
+      "description": "The role performed by a node within its HorizonDB pool.",
+      "enum": [
+        "ReadWrite",
+        "ReadOnly"
+      ],
+      "x-ms-enum": {
+        "name": "NodeRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ReadWrite",
+            "value": "ReadWrite",
+            "description": "The node accepts read and write traffic for its cluster."
+          },
+          {
+            "name": "ReadOnly",
+            "value": "ReadOnly",
+            "description": "The node accepts read-only traffic."
+          }
+        ]
       }
     },
     "ParameterProperties": {

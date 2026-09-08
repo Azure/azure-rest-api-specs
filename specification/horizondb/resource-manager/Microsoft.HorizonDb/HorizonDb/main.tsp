@@ -7,6 +7,7 @@ import "./routes.tsp";
 import "./change-data-capture.tsp";
 import "./endpoints.tsp";
 import "./maintenance-event.tsp";
+import "./nodes.tsp";
 import "./client.tsp";
 
 using TypeSpec.Versioning;

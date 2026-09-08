@@ -1,0 +1,37 @@
+{
+  "operationId": "Nodes_List",
+  "title": "List nodes",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "clusterName": "examplecluster",
+    "poolName": "examplepool",
+    "api-version": "2026-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/examplepool/nodes/example-node-01",
+            "name": "example-node-01",
+            "type": "Microsoft.HorizonDb/clusters/pools/nodes",
+            "properties": {
+              "role": "ReadWrite",
+              "availabilityZone": "1"
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/examplepool/nodes/example-node-02",
+            "name": "example-node-02",
+            "type": "Microsoft.HorizonDb/clusters/pools/nodes",
+            "properties": {
+              "role": "ReadOnly",
+              "availabilityZone": "2"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
