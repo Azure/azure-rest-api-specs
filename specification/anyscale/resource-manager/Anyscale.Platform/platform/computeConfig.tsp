@@ -66,6 +66,7 @@ model ComputeConfigSpecOption {
   headNode: NodeType;
 
   /** The node types to use for the worker nodes. */
+  @identifiers(#["name"])
   workerNodes?: WorkerNode[];
 
   /** The availability zones that sessions are allowed to be launched in, e.g. "eastus-1". If not specified or "any" is provided as the option, any AZ may be used. If "any" is provided, it must be the only item in the list. */
