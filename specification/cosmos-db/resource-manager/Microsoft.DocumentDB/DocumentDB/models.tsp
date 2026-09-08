@@ -4423,6 +4423,18 @@ model FullTextPolicy {
   defaultLanguage?: string;
 
   /**
+   * The full text package type.
+   */
+  @added(Versions.v2026_09_01_preview)
+  package?: string;
+
+  /**
+   * The default full text analysis specification inherited by full text paths that omit these settings.
+   */
+  @added(Versions.v2026_09_01_preview)
+  defaultSpec?: FullTextSpec;
+
+  /**
    * List of FullText Paths
    */
   @identifiers(#[])
@@ -4442,6 +4454,72 @@ model FullTextPath {
    * The language of the full text field in the document.
    */
   language?: string;
+
+  /**
+   * The tokenizer method for this path.
+   */
+  @added(Versions.v2026_09_01_preview)
+  tokenizer?: string;
+
+  /**
+   * The filter pipeline applied to this path.
+   */
+  @added(Versions.v2026_09_01_preview)
+  filters?: string[];
+
+  /**
+   * The stop word list kind for this path.
+   */
+  @added(Versions.v2026_09_01_preview)
+  stopWordListKind?: string;
+
+  /**
+   * Custom words to add to the stop word list for this path.
+   */
+  @added(Versions.v2026_09_01_preview)
+  addStopWords?: string[];
+
+  /**
+   * Words to remove from the built-in stop word list for this path.
+   */
+  @added(Versions.v2026_09_01_preview)
+  removeStopWords?: string[];
+}
+
+/**
+ * The default full text analysis specification for a full text policy.
+ */
+@added(Versions.v2026_09_01_preview)
+model FullTextSpec {
+  /**
+   * The language of the full text analysis.
+   */
+  language?: string;
+
+  /**
+   * The tokenizer method of the full text analysis.
+   */
+  tokenizer?: string;
+
+  /**
+   * The filter pipeline of the full text analysis.
+   */
+  filters?: string[];
+
+  /**
+   * The stop word list kind of the full text analysis.
+   */
+  stopWordListKind?: string;
+
+  /**
+   * Custom words to add to the stop word list.
+   */
+  addStopWords?: string[];
+
+  /**
+   * Words to remove from the built-in stop word list.
+   */
+  removeStopWords?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
