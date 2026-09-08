@@ -423,8 +423,6 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 @@clientLocation(QueueClient.updateMessage, QueueClient, "java");
 @@clientLocation(QueueClient.deleteMessage, QueueClient, "java");
 
-// Required: returns the response headers as the model the hand-written clients consume. Without it the
-// header model moves to the ResponseBase header slot and the body becomes Void.
 @@clientOption(Queue.getProperties, "responseHeadersAsModel", true, "java");
 @@clientOption(Queue.updateMessage, "responseHeadersAsModel", true, "java");
 
