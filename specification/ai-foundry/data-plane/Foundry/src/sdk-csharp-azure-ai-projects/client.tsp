@@ -308,14 +308,14 @@ namespace Azure.AI.Projects;
 
 // --------------------------------------------------------------------------------
 // Export Azure Tool types from the OpenAI package instead of re-emitting them.
-// Each target verified public in OpenAI 3.0.0-alpha.20260819.1.
+// Each target verified public in OpenAI 3.0.0-alpha.20260908.3.
 // --------------------------------------------------------------------------------
 @@alternateType(
   Azure.AI.Projects.A2APreviewTool,
   {
     identity: "Azure.AI.Extensions.OpenAI.A2APreviewTool",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -324,7 +324,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.AzureAISearchTool",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -333,7 +333,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.AzureAISearchToolIndex",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -342,7 +342,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.AzureAISearchToolOptions",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -351,7 +351,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.AzureFunctionBinding",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -360,7 +360,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.AzureFunctionDefinition",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -369,7 +369,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.AzureFunctionStorageQueue",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -378,7 +378,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.AzureFunctionTool",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -387,7 +387,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchPreviewTool",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -396,7 +396,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.BingGroundingTool",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -405,7 +405,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchConfiguration",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -414,7 +414,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.BingCustomSearchToolOptions",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -423,7 +423,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.BingGroundingSearchConfiguration",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -432,7 +432,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.BingGroundingSearchToolOptions",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -441,7 +441,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationPreviewTool",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -450,7 +450,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationToolConnectionParameters",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -459,7 +459,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationToolOptions",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -468,7 +468,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.CaptureStructuredOutputsTool",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -477,7 +477,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.FabricIQPreviewTool",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -486,7 +486,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.FabricDataAgentToolOptions",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -495,7 +495,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.MemorySearchPreviewTool",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -504,7 +504,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.MemorySearchResultOptions",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -513,7 +513,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.MicrosoftFabricPreviewTool",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -522,7 +522,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.OpenAPIAnonymousAuthenticationDetails",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -531,7 +531,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.OpenApiAuthenticationDetails",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -540,7 +540,7 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.OpenAPITool",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
@@ -549,7 +549,16 @@ namespace Azure.AI.Projects;
   {
     identity: "Azure.AI.Extensions.OpenAI.SharepointPreviewTool",
     package: "Azure.AI.Extensions.OpenAI",
-    minVersion: "3.0.0-alpha.20260819.1",
+    minVersion: "3.0.0-alpha.20260908.3",
+  },
+  "csharp"
+);
+@@alternateType(
+  Azure.AI.Projects.WebIQPreviewTool,
+  {
+    identity: "Azure.AI.Extensions.OpenAI.WebIQPreviewTool",
+    package: "Azure.AI.Extensions.OpenAI",
+    minVersion: "3.0.0-alpha.20260908.3",
   },
   "csharp"
 );
