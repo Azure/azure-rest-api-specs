@@ -365,9 +365,6 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.Queues, "omitSlashFromEmptyRoute", true, "csharp");
 
-// Queue metadata is a dynamic x-ms-meta-<key> header collection. alternateType types the property as a map
-// and collectionHeaderPrefix tells the emitter to deserialize the x-ms-meta-* headers into it
-// (typespec-java >= 0.46.3).
 @@alternateType(MetadataHeaders.metadata, Record<string>, "java");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(MetadataHeaders.metadata, "collectionHeaderPrefix", "x-ms-meta-", "java");
@@ -426,14 +423,11 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 @@clientLocation(QueueClient.updateMessage, QueueClient, "java");
 @@clientLocation(QueueClient.deleteMessage, QueueClient, "java");
 
-// Return response headers as a strongly-typed model for the header-only (no body) operations whose
-// results the hand-written clients build from response headers, so header model classes are generated
-// instead of reading HttpHeaders directly (typespec#11420, typespec-java >= 0.45.11).
+// Required: returns the response headers as the model the hand-written clients consume. Without it the
+// header model moves to the ResponseBase header slot and the body becomes Void.
 @@clientOption(Queue.getProperties, "responseHeadersAsModel", true, "java");
 @@clientOption(Queue.updateMessage, "responseHeadersAsModel", true, "java");
 
-// Generate the error-code enum and the list-queues response model for Java (the hand-written layer consumes them),
-// matching the go/csharp shape.
 @@access(StorageErrorCode, Access.public, "java");
 @@usage(StorageErrorCode, Usage.output, "java");
 @@clientName(ListQueuesResponse, "ListQueuesSegmentResponse", "java");
