@@ -1,0 +1,25 @@
+{
+  "operationId": "MaintenanceEvents_ApplyNow",
+  "title": "Apply a maintenance event now",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "clusterName": "examplecluster",
+    "poolName": "examplepool",
+    "maintenanceEventId": "DB01-A23",
+    "api-version": "2026-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "maintenanceEventId": "DB01-A23",
+        "poolResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/examplepool",
+        "status": "InProgress",
+        "plannedStartTimeUtc": "2026-09-01T12:05:00Z",
+        "plannedEndTimeUtc": "2026-09-01T13:05:00Z",
+        "appliedNow": true,
+        "lastUpdatedTimeUtc": "2026-09-01T12:05:00Z"
+      }
+    }
+  }
+}

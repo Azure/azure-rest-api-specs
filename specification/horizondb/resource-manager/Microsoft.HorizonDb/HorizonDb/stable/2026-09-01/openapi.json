@@ -89,6 +89,9 @@
     },
     {
       "name": "Endpoints"
+    },
+    {
+      "name": "MaintenanceEvents"
     }
   ],
   "paths": {
@@ -3290,6 +3293,359 @@
             "$ref": "./examples/Pools_Get.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/maintenanceEvents": {
+      "get": {
+        "operationId": "MaintenanceEvents_List",
+        "tags": [
+          "MaintenanceEvents"
+        ],
+        "description": "Lists maintenance events for a HorizonDB pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDB pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "maintenanceStatus",
+            "in": "query",
+            "description": "Filters maintenance events by status.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Upcoming",
+              "Past"
+            ],
+            "x-ms-enum": {
+              "name": "MaintenanceEventStatusFilter",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Upcoming",
+                  "value": "Upcoming",
+                  "description": "Return events that have a scheduled or in-progress status."
+                },
+                {
+                  "name": "Past",
+                  "value": "Past",
+                  "description": "Return events that have a completed status."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceEventListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List upcoming maintenance events": {
+            "$ref": "./examples/MaintenanceEvents_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/maintenanceEvents/{maintenanceEventId}": {
+      "get": {
+        "operationId": "MaintenanceEvents_Get",
+        "tags": [
+          "MaintenanceEvents"
+        ],
+        "description": "Gets information about a maintenance event for a HorizonDB pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDB pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "maintenanceEventId",
+            "in": "path",
+            "description": "The identifier of the maintenance event.",
+            "required": true,
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 8,
+            "pattern": "^[A-Z0-9]{4}-[A-Z0-9]{3}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceEvent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a maintenance event": {
+            "$ref": "./examples/MaintenanceEvents_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/maintenanceEvents/{maintenanceEventId}/applyNow": {
+      "post": {
+        "operationId": "MaintenanceEvents_ApplyNow",
+        "tags": [
+          "MaintenanceEvents"
+        ],
+        "description": "Applies the maintenance event immediately.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDB pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "maintenanceEventId",
+            "in": "path",
+            "description": "The identifier of the maintenance event.",
+            "required": true,
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 8,
+            "pattern": "^[A-Z0-9]{4}-[A-Z0-9]{3}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceEventActionResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apply a maintenance event now": {
+            "$ref": "./examples/MaintenanceEvents_ApplyNow.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MaintenanceEventActionResponse"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/maintenanceEvents/{maintenanceEventId}/reschedule": {
+      "post": {
+        "operationId": "MaintenanceEvents_Reschedule",
+        "tags": [
+          "MaintenanceEvents"
+        ],
+        "description": "Reschedules a maintenance event to a new date and time.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDB pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "maintenanceEventId",
+            "in": "path",
+            "description": "The identifier of the maintenance event.",
+            "required": true,
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 8,
+            "pattern": "^[A-Z0-9]{4}-[A-Z0-9]{3}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MaintenanceEventRescheduleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceEventActionResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reschedule a maintenance event": {
+            "$ref": "./examples/MaintenanceEvents_Reschedule.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MaintenanceEventActionResponse"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/replicas": {
@@ -7404,6 +7760,241 @@
       "required": [
         "value"
       ]
+    },
+    "MaintenanceEvent": {
+      "type": "object",
+      "description": "Represents a maintenance event for a HorizonDB pool.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MaintenanceEventProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MaintenanceEventActionResponse": {
+      "type": "object",
+      "description": "The response from a maintenance event reschedule or apply-now action.",
+      "properties": {
+        "maintenanceEventId": {
+          "type": "string",
+          "description": "The maintenance event identifier."
+        },
+        "poolResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The full Azure resource ID of the HorizonDB pool.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HorizonDb/clusters/pools"
+              }
+            ]
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/MaintenanceEventStatus",
+          "description": "The status of the maintenance event."
+        },
+        "plannedStartTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The planned start time of the maintenance event in UTC."
+        },
+        "plannedEndTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The planned end time of the maintenance event in UTC."
+        },
+        "appliedNow": {
+          "type": "boolean",
+          "description": "Indicates whether the maintenance event was requested to be applied immediately. The value is true for apply-now and false for reschedule."
+        },
+        "lastUpdatedTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when this maintenance event record was last updated, in UTC."
+        }
+      }
+    },
+    "MaintenanceEventListResult": {
+      "type": "object",
+      "description": "The response of a MaintenanceEvent list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MaintenanceEvent items on this page",
+          "items": {
+            "$ref": "#/definitions/MaintenanceEvent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MaintenanceEventProperties": {
+      "type": "object",
+      "description": "Properties of a maintenance event resource.",
+      "properties": {
+        "maintenanceEventId": {
+          "type": "string",
+          "description": "A service-generated identifier for this maintenance event, assigned by the platform. The format is not contractual, and clients should not attempt to parse or construct this value.",
+          "readOnly": true
+        },
+        "maintenanceType": {
+          "$ref": "#/definitions/MaintenanceType",
+          "description": "The maintenance type.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The human-readable description of the maintenance event.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/MaintenanceEventStatus",
+          "description": "The customer-facing status of the maintenance event.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The scheduled start time of the maintenance event in UTC.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The scheduled end time of the maintenance event in UTC.",
+          "readOnly": true
+        },
+        "estimatedDowntime": {
+          "type": "string",
+          "description": "The estimated downtime as an ISO 8601 duration string, for example, 'PT60S' for 60 seconds.",
+          "readOnly": true
+        },
+        "deferrable": {
+          "type": "boolean",
+          "description": "Indicates whether the customer can reschedule this maintenance event.",
+          "readOnly": true
+        },
+        "deferralDeadlineUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The latest date and time to which this maintenance event can be postponed, in UTC. This property is present only when deferrable is true.",
+          "readOnly": true
+        },
+        "rescheduledFromUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The scheduled start time before the most recent reschedule, in UTC. This property is absent if the event has never been rescheduled.",
+          "readOnly": true
+        },
+        "lastUpdatedTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when this maintenance event record was last updated, in UTC.",
+          "readOnly": true
+        },
+        "originalStartTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The initially scheduled start time before any reschedule, in UTC. This value equals startTimeUtc when the event has never been rescheduled.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "maintenanceType",
+        "status",
+        "startTimeUtc",
+        "endTimeUtc",
+        "deferrable",
+        "originalStartTimeUtc"
+      ]
+    },
+    "MaintenanceEventRescheduleRequest": {
+      "type": "object",
+      "description": "Parameters for rescheduling a maintenance event.",
+      "properties": {
+        "postponeToDateTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The new start time in RFC 3339 format."
+        }
+      },
+      "required": [
+        "postponeToDateTimeUtc"
+      ]
+    },
+    "MaintenanceEventStatus": {
+      "type": "string",
+      "description": "The status of a maintenance event.",
+      "enum": [
+        "Planned",
+        "InProgress",
+        "Complete",
+        "Rescheduled",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceEventStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Planned",
+            "value": "Planned",
+            "description": "The maintenance event is scheduled and has not yet started."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The maintenance event is currently in progress."
+          },
+          {
+            "name": "Complete",
+            "value": "Complete",
+            "description": "The maintenance event completed successfully."
+          },
+          {
+            "name": "Rescheduled",
+            "value": "Rescheduled",
+            "description": "The customer rescheduled the maintenance event."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The maintenance event was canceled, failed, or timed out."
+          }
+        ]
+      }
+    },
+    "MaintenanceType": {
+      "type": "string",
+      "description": "The type of a maintenance event.",
+      "enum": [
+        "PlannedMaintenance"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PlannedMaintenance",
+            "value": "PlannedMaintenance",
+            "description": "A planned maintenance event."
+          }
+        ]
+      }
     },
     "MicrosoftEntraAdministrator": {
       "type": "object",
