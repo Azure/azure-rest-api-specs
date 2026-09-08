@@ -140,10 +140,15 @@ interface ModelSources {
       | ArmResourceCreatedPollingOnlyResponse<ModelSource>
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "This DELETE is asynchronous via markAsLro; semantic polling metadata would emit the unwanted final-state-via option."
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The polling-only Location header must emit an LRO without final-state-via metadata."
+  @Azure.ClientGenerator.Core.Legacy.markAsLro
   delete is ArmResourceDeleteWithoutOkAsync<
     ModelSource,
-    Azure.ResourceManager.Foundations.BaseParameters<ModelSource> &
-      IfMatchParameters<ModelSource>
+    BaseParameters = Azure.ResourceManager.Foundations.BaseParameters<ModelSource> &
+      IfMatchParameters<ModelSource>,
+    LroHeaders = ArmPollingOnlyLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   list is ArmResourceListByParent<ModelSource>;

@@ -31,6 +31,13 @@ model ArmPollingOnlyAsyncOperationHeader {
   azureAsyncOperation?: string;
 }
 
+@doc("The polling header for an asynchronous Azure operation.")
+model ArmPollingOnlyLocationHeader {
+  @doc("The Location header contains the URL where the status of the long running operation can be checked.")
+  @header("Location")
+  location?: string;
+}
+
 @doc("Resource '{name}' create operation succeeded", Resource)
 model ArmResourceCreatedPollingOnlyResponse<Resource extends Azure.ResourceManager.Foundations.SimpleResource> {
   ...CreatedResponse;
