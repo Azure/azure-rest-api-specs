@@ -257,6 +257,10 @@ interface JobRuns {
       @doc("An OData filter expression to restrict results by job run status. Supports equality on the status property, e.g. \"status eq 'Active'\", and the \"in\" operator for multiple statuses, e.g. \"status in ('Active', 'Scheduled')\". Accepted status values: Scheduled, Active, Succeeded, Failed, TimedOut, Canceled. When omitted, all job runs are returned.")
       @query("$filter")
       filter?: string;
+
+      @doc("An OData order by expression to sort the results. For example, \"status asc\" or \"status desc\".")
+      @query("$orderBy")
+      orderBy?: string;
     }
   >;
 
@@ -308,5 +312,9 @@ interface JobRunsByNamespace {
     @doc("An OData filter expression to restrict results by job run status. Supports equality on the status property, e.g. \"status eq 'Active'\", and the \"in\" operator for multiple statuses, e.g. \"status in ('Active', 'Scheduled')\". Accepted status values: Scheduled, Active, Succeeded, Failed, TimedOut, Canceled. When omitted, all job runs are returned.")
     @query("$filter")
     filter?: string,
+
+    @doc("An OData order by expression to sort the results. For example, \"status asc\" or \"status desc\".")
+    @query("$orderBy")
+    orderBy?: string,
   ): ArmResponse<ResourceListResult<JobRun>> | ErrorResponse;
 }
