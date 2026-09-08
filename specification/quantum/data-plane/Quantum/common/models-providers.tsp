@@ -75,12 +75,12 @@ model TargetStatus {
   /** Average high-priority queue time in seconds. */
   @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
-  averageQueueTimeHighPriority: int64;
+  averageQueueTimeHighPriority?: int64;
 
   /** Average standard-priority queue time in seconds. */
   @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
-  averageQueueTimeStandardPriority: int64;
+  averageQueueTimeStandardPriority?: int64;
 
   /** A page with detailed status of the provider. */
   @visibility(Lifecycle.Read)
