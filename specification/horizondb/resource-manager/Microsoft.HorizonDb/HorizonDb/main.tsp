@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./routes.tsp";
 import "./change-data-capture.tsp";
+import "./endpoints.tsp";
 import "./client.tsp";
 
 using TypeSpec.Versioning;

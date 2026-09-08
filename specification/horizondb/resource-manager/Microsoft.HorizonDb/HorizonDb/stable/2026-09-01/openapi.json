@@ -86,6 +86,9 @@
     },
     {
       "name": "ChangeDataCaptureConfigurations"
+    },
+    {
+      "name": "Endpoints"
     }
   ],
   "paths": {
@@ -2266,6 +2269,183 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/endpoints": {
+      "get": {
+        "operationId": "Endpoints_List",
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Lists the service-generated Endpoints in a cluster. The collection contains the Cluster-scoped Endpoint named cluster and one Pool-scoped Endpoint for each pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EndpointListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List HorizonDB endpoints": {
+            "$ref": "./examples/Endpoints_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/endpoints/{endpointName}": {
+      "get": {
+        "operationId": "Endpoints_Get",
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Gets information about a service-generated HorizonDB Cluster- or Pool-scoped Endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The service-generated name of the HorizonDB endpoint. The Cluster-scoped Endpoint is named cluster. Pool-scoped Endpoint names use the form pool-NN, where NN is a two-digit sequence number.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a HorizonDB endpoint": {
+            "$ref": "./examples/Endpoints_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Endpoints_Update",
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Replaces the DNS alias list of a service-generated HorizonDB endpoint. An empty list removes the endpoint's aliased CNAME. Only one alias is currently supported.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The service-generated name of the HorizonDB endpoint. The Cluster-scoped Endpoint is named cluster. Pool-scoped Endpoint names use the form pool-NN, where NN is a two-digit sequence number.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EndpointForPatchUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a HorizonDB endpoint alias": {
+            "$ref": "./examples/Endpoints_Update.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/failover": {
@@ -6206,6 +6386,199 @@
             "name": "Update",
             "value": "Update",
             "description": "Update an existing pool"
+          }
+        ]
+      }
+    },
+    "Endpoint": {
+      "type": "object",
+      "description": "Represents a service-generated, service-managed HorizonDB endpoint. The Cluster-scoped Endpoint is created and deleted with its parent Cluster. A Pool-scoped Endpoint is created and deleted with the Pool identified by associatedResourceId. Endpoints cannot be created or deleted independently from their lifecycle owner.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EndpointAlias": {
+      "type": "string",
+      "description": "A customer-selected lowercase DNS segment used as a HorizonDB endpoint alias.",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+    },
+    "EndpointAssociatedResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "The Azure resource ID of the HorizonDB cluster or pool associated with an endpoint.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.HorizonDb/clusters"
+          },
+          {
+            "type": "Microsoft.HorizonDb/clusters/pools"
+          }
+        ]
+      }
+    },
+    "EndpointForPatchUpdate": {
+      "type": "object",
+      "description": "A service-generated HorizonDB endpoint update request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EndpointPropertiesForPatchUpdate",
+          "description": "The endpoint properties to update."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "EndpointListResult": {
+      "type": "object",
+      "description": "The response of a Endpoint list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Endpoint items on this page",
+          "items": {
+            "$ref": "#/definitions/Endpoint"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EndpointProperties": {
+      "type": "object",
+      "description": "Properties of a service-generated HorizonDB endpoint.",
+      "properties": {
+        "scope": {
+          "$ref": "#/definitions/EndpointScope",
+          "description": "The scope of the endpoint. Cluster-scoped Endpoints provide the cluster connection, and Pool-scoped Endpoints provide read-only connections to eligible nodes in one pool.",
+          "readOnly": true
+        },
+        "associatedResourceId": {
+          "$ref": "#/definitions/EndpointAssociatedResourceId",
+          "description": "The Azure resource ID of the Endpoint's lifecycle owner. For Cluster scope, this identifies the parent Cluster with which the Endpoint is created and deleted. For Pool scope, this identifies the Pool with which the Endpoint and its FirewallRule children are created and deleted; the Pool must be a child of the Endpoint's parent Cluster.",
+          "readOnly": true
+        },
+        "fullyQualifiedDomainName": {
+          "type": "string",
+          "description": "The service-generated fully qualified domain name of the endpoint. A Cluster-scoped Endpoint uses <cluster>.<clusterid>.<region>.horizondb.azure.com. A Pool-scoped Endpoint uses <poolid>.<cluster>.<clusterid>.<region>.horizondb.azure.com.",
+          "readOnly": true
+        },
+        "role": {
+          "$ref": "#/definitions/EndpointRole",
+          "description": "The routing role of the endpoint. A Cluster-scoped Endpoint normally has the ReadWrite role. Pool-scoped Endpoints have the ReadOnly role and route only to allocated nodes in the associated Pool that are not currently playing the read-write role. A Pool-scoped ReadOnly Endpoint has no routing destination unless at least one such node exists, including when the Pool is Stopped or Shutdown, has zero allocated nodes, or has only one allocated node and that node is playing the read-write role.",
+          "readOnly": true
+        },
+        "aliases": {
+          "type": "array",
+          "description": "The customer-selected DNS aliases for the endpoint. An empty list means that the endpoint has no aliased CNAME. Only one alias is currently supported.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/EndpointAlias"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "aliasFullyQualifiedDomainNames": {
+          "type": "array",
+          "description": "The fully qualified domain names formed from aliases by appending the .horizondb.azure.com suffix. The list is empty when aliases is empty.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "scope",
+        "associatedResourceId",
+        "fullyQualifiedDomainName",
+        "role",
+        "aliases",
+        "aliasFullyQualifiedDomainNames"
+      ]
+    },
+    "EndpointPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Properties of a service-generated HorizonDB endpoint for an update operation.",
+      "properties": {
+        "aliases": {
+          "type": "array",
+          "description": "The replacement DNS alias list. An empty list removes the aliased CNAME. Only one alias is currently supported.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/EndpointAlias"
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      },
+      "required": [
+        "aliases"
+      ]
+    },
+    "EndpointRole": {
+      "type": "string",
+      "description": "Role of the endpoint.",
+      "enum": [
+        "ReadOnly",
+        "ReadWrite"
+      ],
+      "x-ms-enum": {
+        "name": "EndpointRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ReadOnly",
+            "value": "ReadOnly",
+            "description": "The Endpoint accepts read-only traffic. This applies to Pool-scoped Endpoints and may apply to other endpoint scenarios introduced by later API versions."
+          },
+          {
+            "name": "ReadWrite",
+            "value": "ReadWrite",
+            "description": "The Cluster-scoped Endpoint accepts read and write traffic."
+          }
+        ]
+      }
+    },
+    "EndpointScope": {
+      "type": "string",
+      "description": "The scope of a HorizonDB endpoint.",
+      "enum": [
+        "Cluster",
+        "Pool"
+      ],
+      "x-ms-enum": {
+        "name": "EndpointScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cluster",
+            "value": "Cluster",
+            "description": "The Endpoint is associated with its parent Cluster."
+          },
+          {
+            "name": "Pool",
+            "value": "Pool",
+            "description": "The Endpoint is associated with a Pool under its parent Cluster and has the ReadOnly role."
           }
         ]
       }

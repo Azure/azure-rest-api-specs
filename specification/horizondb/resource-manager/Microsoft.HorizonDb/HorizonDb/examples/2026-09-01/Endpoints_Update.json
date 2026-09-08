@@ -1,0 +1,39 @@
+{
+  "operationId": "Endpoints_Update",
+  "title": "Update a HorizonDB endpoint alias",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "clusterName": "examplecluster",
+    "endpointName": "cluster",
+    "api-version": "2026-09-01",
+    "properties": {
+      "properties": {
+        "aliases": [
+          "examplealias"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/endpoints/cluster",
+        "name": "cluster",
+        "type": "Microsoft.HorizonDb/clusters/endpoints",
+        "properties": {
+          "scope": "Cluster",
+          "associatedResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster",
+          "fullyQualifiedDomainName": "examplecluster.ffffffffffff.westus2.horizondb.azure.com",
+          "role": "ReadWrite",
+          "aliases": [
+            "examplealias"
+          ],
+          "aliasFullyQualifiedDomainNames": [
+            "examplealias.horizondb.azure.com"
+          ]
+        }
+      }
+    }
+  }
+}
