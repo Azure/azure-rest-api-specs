@@ -1,6 +1,6 @@
 // client.tsp — SDK client customizations for ACS Communication Identity.
 //
-// Re-expresses the AutoRest directives and customization-class behaviour that previously
+// Re-expresses the AutoRest directives and customization-class behavior that previously
 // lived in each language repo. Every rename below is baked into an already-shipped public
 // API, so dropping one is a customer-visible break.
 //
@@ -32,7 +32,8 @@ namespace ClientCustomizations;
 // configuration, so it is applied unscoped rather than duplicated per language.
 // Was, in both languages: x-ms-enum.name = "CommunicationTokenScope".
 // ---------------------------------------------------------------------------
-@@clientName(Azure.Communication.Identity.CommunicationIdentityTokenScope,
+@@clientName(
+  Azure.Communication.Identity.CommunicationIdentityTokenScope,
   "CommunicationTokenScope"
 );
 
@@ -41,7 +42,8 @@ namespace ClientCustomizations;
 // Was: AutoRest directive `rename-model: TeamsUserExchangeTokenRequest ->
 // GetTokenForTeamsUserOptions`.
 // ---------------------------------------------------------------------------
-@@clientName(Azure.Communication.Identity.TeamsUserExchangeTokenRequest,
+@@clientName(
+  Azure.Communication.Identity.TeamsUserExchangeTokenRequest,
   "GetTokenForTeamsUserOptions",
   "java"
 );
@@ -52,15 +54,18 @@ namespace ClientCustomizations;
 // The companion `required: [token, appId, userId]` directive is now redundant:
 // all three are already required in models.tsp.
 // ---------------------------------------------------------------------------
-@@clientName(Azure.Communication.Identity.TeamsUserExchangeTokenRequest.token,
+@@clientName(
+  Azure.Communication.Identity.TeamsUserExchangeTokenRequest.token,
   "teamsUserAadToken",
   "java"
 );
-@@clientName(Azure.Communication.Identity.TeamsUserExchangeTokenRequest.appId,
+@@clientName(
+  Azure.Communication.Identity.TeamsUserExchangeTokenRequest.appId,
   "clientId",
   "java"
 );
-@@clientName(Azure.Communication.Identity.TeamsUserExchangeTokenRequest.userId,
+@@clientName(
+  Azure.Communication.Identity.TeamsUserExchangeTokenRequest.userId,
   "userObjectId",
   "java"
 );
@@ -81,41 +86,64 @@ namespace ClientCustomizations;
 // `implementation.models` automatically — `custom-types` and `custom-types-subpackage`
 // are NOT required alongside this.
 // ---------------------------------------------------------------------------
-@@access(Azure.Communication.Identity.IdentityOperations.create, Access.internal, "java");
-@@access(Azure.Communication.Identity.IdentityOperations.delete, Access.internal, "java");
-@@access(Azure.Communication.Identity.IdentityOperations.revokeAccessTokens,
+@@access(
+  Azure.Communication.Identity.IdentityOperations.create,
   Access.internal,
   "java"
 );
-@@access(Azure.Communication.Identity.IdentityOperations.issueAccessToken,
+@@access(
+  Azure.Communication.Identity.IdentityOperations.delete,
   Access.internal,
   "java"
 );
-@@access(Azure.Communication.Identity.TeamsUserOperations.exchangeTeamsUserAccessToken,
+@@access(
+  Azure.Communication.Identity.IdentityOperations.revokeAccessTokens,
   Access.internal,
   "java"
 );
-@@access(Azure.Communication.Identity.TeamsExtensionOperations.exchangeToken,
+@@access(
+  Azure.Communication.Identity.IdentityOperations.issueAccessToken,
   Access.internal,
   "java"
 );
-@@access(Azure.Communication.Identity.TeamsExtensionOperations.getAssignment,
+@@access(
+  Azure.Communication.Identity.TeamsUserOperations.exchangeTeamsUserAccessToken,
   Access.internal,
   "java"
 );
-@@access(Azure.Communication.Identity.TeamsExtensionOperations.upsertAssignment,
+@@access(
+  Azure.Communication.Identity.TeamsExtensionOperations.exchangeToken,
   Access.internal,
   "java"
 );
-@@access(Azure.Communication.Identity.TeamsExtensionOperations.deleteAssignment,
+@@access(
+  Azure.Communication.Identity.TeamsExtensionOperations.getAssignment,
+  Access.internal,
+  "java"
+);
+@@access(
+  Azure.Communication.Identity.TeamsExtensionOperations.upsertAssignment,
+  Access.internal,
+  "java"
+);
+@@access(
+  Azure.Communication.Identity.TeamsExtensionOperations.deleteAssignment,
   Access.internal,
   "java"
 );
 
 // The two renamed types stay on the public Java surface even though every operation
 // referencing them is internal. Without these, Access.internal propagates to them.
-@@access(Azure.Communication.Identity.TeamsUserExchangeTokenRequest, Access.public, "java");
-@@access(Azure.Communication.Identity.CommunicationIdentityTokenScope, Access.public, "java");
+@@access(
+  Azure.Communication.Identity.TeamsUserExchangeTokenRequest,
+  Access.public,
+  "java"
+);
+@@access(
+  Azure.Communication.Identity.CommunicationIdentityTokenScope,
+  Access.public,
+  "java"
+);
 
 // ---------------------------------------------------------------------------
 // 5. Token result model rename — .NET.
@@ -128,7 +156,8 @@ namespace ClientCustomizations;
 // The shipped 1.3.1 public surface (read from the release tag) carries
 // `CommunicationUserIdentifierAndToken`, so dropping this is a customer-visible break.
 // ---------------------------------------------------------------------------
-@@clientName(Azure.Communication.Identity.CommunicationIdentityAccessTokenResult,
+@@clientName(
+  Azure.Communication.Identity.CommunicationIdentityAccessTokenResult,
   "CommunicationUserIdentifierAndToken",
   "csharp"
 );
