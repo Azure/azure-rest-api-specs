@@ -68,25 +68,17 @@ interface VirtualMachineInstances {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   /** The operation to update a virtual machine instance. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation-options' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @summary("Updates a virtual machine.")
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
     VirtualMachineInstance,
-    VirtualMachineInstanceUpdate
+    VirtualMachineInstanceUpdate,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = VirtualMachineInstance> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
   /** The operation to delete a virtual machine instance. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation-options' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @summary("Deletes an virtual machine.")
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineInstance,
     {
@@ -96,7 +88,9 @@ interface VirtualMachineInstances {
       /** Whether to disable the VM from azure and also delete it from Vmm. */
       @query("deleteFromHost")
       deleteFromHost?: DeleteFromHost;
-    }
+    },
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = VirtualMachineInstance> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
   /** Lists all of the virtual machine instances within the specified parent resource. */
   @summary("Implements List virtual machine instances.")

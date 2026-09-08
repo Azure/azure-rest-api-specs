@@ -39,28 +39,24 @@ interface Clouds {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   /** Updates the Clouds resource. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation-options' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @summary("Implements the Clouds PATCH method.")
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
-  update is ArmTagsPatchAsync<Cloud>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  update is ArmTagsPatchAsync<
+    Cloud,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Cloud> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
   /** Deregisters the ScVmm fabric cloud from Azure. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation-options' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @summary("Implements Cloud resource DELETE method.")
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     Cloud,
     {
       ...Foundations.BaseParameters<Cloud>;
       ...QueryForceDelete;
-    }
+    },
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Cloud> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
   /** List of Clouds in a resource group. */
   @summary("Implements GET Clouds in a resource group.")
