@@ -32,9 +32,7 @@ model ArmPollingOnlyAsyncOperationHeader {
 }
 
 @doc("Resource '{name}' create operation succeeded", Resource)
-model ArmResourceCreatedPollingOnlyResponse<
-  Resource extends Azure.ResourceManager.Foundations.SimpleResource
-> {
+model ArmResourceCreatedPollingOnlyResponse<Resource extends Azure.ResourceManager.Foundations.SimpleResource> {
   ...CreatedResponse;
   ...ArmPollingOnlyAsyncOperationHeader;
   ...Azure.Core.Foundations.RetryAfterHeader;
@@ -60,4 +58,3 @@ model CredentialResult {
   @secret
   value?: bytes;
 }
-
