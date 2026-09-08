@@ -149,6 +149,20 @@ model MicrosoftEntraAuthentication
   name: "microsoftEntra";
 }
 
+@added(Versions.v2026_09_01)
+@doc("Represents an available backup for a HorizonDB cluster.")
+@parentResource(HorizonDbCluster)
+model Backup is Azure.ResourceManager.ProxyResource<BackupResourceProperties> {
+  @doc("The name of the HorizonDB backup.")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,62}$")
+  @minLength(1)
+  @maxLength(63)
+  @key("backupName")
+  @path
+  @segment("backups")
+  name: string;
+}
+
 @doc("Properties of a HorizonDB cluster.")
 model HorizonDbClusterProperties {
   @doc("The administrator login name.")
@@ -220,6 +234,11 @@ model HorizonDbClusterProperties {
   @doc("Defines connection to a parameter group.")
   @visibility(Lifecycle.Update, Lifecycle.Read)
   parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
+
+  @added(Versions.v2026_09_01)
+  @doc("Backup configuration for the HorizonDB cluster.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  backup?: BackupProperties;
 
   @added(Versions.v2026_05_01_preview)
   @doc("Authentication configuration for the HorizonDB cluster.")
@@ -308,6 +327,11 @@ model HorizonDbClusterPropertiesForPatchUpdate {
 
   @doc("Defines connection to a parameter group.")
   parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
+
+  @added(Versions.v2026_09_01)
+  @doc("Backup configuration for the HorizonDB cluster.")
+  @visibility(Lifecycle.Update)
+  backup?: BackupPropertiesForPatchUpdate;
 
   @added(Versions.v2026_05_01_preview)
   @doc("Authentication configuration for the HorizonDB cluster.")
@@ -634,6 +658,80 @@ model MicrosoftEntraAuthenticationForPatchUpdate {
   @doc("The Microsoft Entra authentication properties to update.")
   properties?: MicrosoftEntraAuthenticationPropertiesForPatchUpdate;
 }
+
+@added(Versions.v2026_09_01)
+@doc("Backup configuration properties for a HorizonDB cluster.")
+model BackupProperties {
+  @doc("The geo-redundancy state.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  geoRedundancy: GeoRedundancyState;
+
+  @doc("The number of days that automatic backups are retained. The service defaults to 7 days when this property is omitted.")
+  @minValue(1)
+  @maxValue(35)
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  retentionDays?: int32 = 7;
+
+  @doc("The earliest point in time, in UTC, to which the cluster can currently be restored.")
+  @visibility(Lifecycle.Read)
+  earliestRestorePointUtc?: utcDateTime;
+}
+
+@added(Versions.v2026_09_01)
+@doc("Backup configuration properties for updating a HorizonDB cluster.")
+model BackupPropertiesForPatchUpdate {
+  @doc("The number of days that automatic backups are retained.")
+  @minValue(1)
+  @maxValue(35)
+  @visibility(Lifecycle.Update)
+  retentionDays?: int32;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backups are immutable point-in-time records and do not have a resource provisioning state."
+@added(Versions.v2026_09_01)
+@doc("Properties of an available HorizonDB backup.")
+model BackupResourceProperties {
+  @doc("The date and time when the backup was taken, in UTC.")
+  @visibility(Lifecycle.Read)
+  takenAtUtc: utcDateTime;
+
+  @doc("The PostgreSQL version of the backed-up cluster.")
+  @visibility(Lifecycle.Read)
+  postgreSqlVersion: PostgreSqlVersion;
+
+  @doc("The type of the backup.")
+  @visibility(Lifecycle.Read)
+  backupType: BackupType;
+
+  @doc("The date and time when an automatic backup expires, in UTC. This property can be absent for backup types that do not expire automatically.")
+  @visibility(Lifecycle.Read)
+  expiredAtUtc?: utcDateTime;
+}
+
+@added(Versions.v2026_09_01)
+@doc("Indicates the geo-redundancy state.")
+union GeoRedundancyState {
+  string,
+
+  @doc("Geo-redundancy is enabled")
+  Enabled: "Enabled",
+
+  @doc("Geo-redundancy is disabled")
+  Disabled: "Disabled",
+}
+
+@added(Versions.v2026_09_01)
+@doc("The type of a HorizonDB backup. New values may be added over time.")
+union BackupType {
+  string,
+
+  /** A backup created automatically by the HorizonDB service. */
+  System: "System",
+}
+
+@added(Versions.v2026_09_01)
+@doc("The PostgreSQL version of a HorizonDB cluster or backup.")
+scalar PostgreSqlVersion extends string;
 
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_09_01)

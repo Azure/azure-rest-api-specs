@@ -71,6 +71,9 @@
     },
     {
       "name": "MicrosoftEntraAuthentications"
+    },
+    {
+      "name": "Backups"
     }
   ],
   "paths": {
@@ -757,6 +760,117 @@
         "x-ms-examples": {
           "Update password authentication": {
             "$ref": "./examples/PasswordAuthentications_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/backups": {
+      "get": {
+        "operationId": "Backups_List",
+        "tags": [
+          "Backups"
+        ],
+        "description": "Lists the backups available for a HorizonDB cluster. Expired automatic backups are omitted.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BackupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List backups": {
+            "$ref": "./examples/Backups_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/backups/{backupName}": {
+      "get": {
+        "operationId": "Backups_Get",
+        "tags": [
+          "Backups"
+        ],
+        "description": "Gets an available backup for a HorizonDB cluster. Expired automatic backups are not available through this operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The name of the HorizonDB backup.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Backup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a backup": {
+            "$ref": "./examples/Backups_Get.json"
           }
         }
       }
@@ -2990,6 +3104,145 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
+    "Backup": {
+      "type": "object",
+      "description": "Represents an available backup for a HorizonDB cluster.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackupResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "BackupListResult": {
+      "type": "object",
+      "description": "The response of a Backup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Backup items on this page",
+          "items": {
+            "$ref": "#/definitions/Backup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BackupProperties": {
+      "type": "object",
+      "description": "Backup configuration properties for a HorizonDB cluster.",
+      "properties": {
+        "geoRedundancy": {
+          "$ref": "#/definitions/GeoRedundancyState",
+          "description": "The geo-redundancy state.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "retentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of days that automatic backups are retained. The service defaults to 7 days when this property is omitted.",
+          "default": 7,
+          "minimum": 1,
+          "maximum": 35,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "earliestRestorePointUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The earliest point in time, in UTC, to which the cluster can currently be restored.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "geoRedundancy"
+      ]
+    },
+    "BackupPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Backup configuration properties for updating a HorizonDB cluster.",
+      "properties": {
+        "retentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of days that automatic backups are retained.",
+          "minimum": 1,
+          "maximum": 35,
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
+    "BackupResourceProperties": {
+      "type": "object",
+      "description": "Properties of an available HorizonDB backup.",
+      "properties": {
+        "takenAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the backup was taken, in UTC.",
+          "readOnly": true
+        },
+        "postgreSqlVersion": {
+          "$ref": "#/definitions/PostgreSqlVersion",
+          "description": "The PostgreSQL version of the backed-up cluster.",
+          "readOnly": true
+        },
+        "backupType": {
+          "$ref": "#/definitions/BackupType",
+          "description": "The type of the backup.",
+          "readOnly": true
+        },
+        "expiredAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when an automatic backup expires, in UTC. This property can be absent for backup types that do not expire automatically.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "takenAtUtc",
+        "postgreSqlVersion",
+        "backupType"
+      ]
+    },
+    "BackupType": {
+      "type": "string",
+      "description": "The type of a HorizonDB backup. New values may be added over time.",
+      "enum": [
+        "System"
+      ],
+      "x-ms-enum": {
+        "name": "BackupType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "System",
+            "value": "System",
+            "description": "A backup created automatically by the HorizonDB service."
+          }
+        ]
+      }
+    },
     "CreateModeCluster": {
       "type": "string",
       "description": "The mode to create a new HorizonDB cluster.",
@@ -3040,6 +3293,30 @@
             "name": "Update",
             "value": "Update",
             "description": "Update an existing pool"
+          }
+        ]
+      }
+    },
+    "GeoRedundancyState": {
+      "type": "string",
+      "description": "Indicates the geo-redundancy state.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "GeoRedundancyState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Geo-redundancy is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Geo-redundancy is disabled"
           }
         ]
       }
@@ -3290,6 +3567,15 @@
             "update"
           ]
         },
+        "backup": {
+          "$ref": "#/definitions/BackupProperties",
+          "description": "Backup configuration for the HorizonDB cluster.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "authConfig": {
           "$ref": "#/definitions/HorizonDbClusterAuthConfig",
           "description": "Authentication configuration for the HorizonDB cluster.",
@@ -3350,6 +3636,13 @@
         "parameterGroup": {
           "$ref": "#/definitions/HorizonDbClusterParameterGroupConnectionProperties",
           "description": "Defines connection to a parameter group."
+        },
+        "backup": {
+          "$ref": "#/definitions/BackupPropertiesForPatchUpdate",
+          "description": "Backup configuration for the HorizonDB cluster.",
+          "x-ms-mutability": [
+            "update"
+          ]
         },
         "authConfig": {
           "$ref": "#/definitions/HorizonDbClusterAuthConfig",
@@ -4214,6 +4507,10 @@
           "x-ms-secret": true
         }
       }
+    },
+    "PostgreSqlVersion": {
+      "type": "string",
+      "description": "The PostgreSQL version of a HorizonDB cluster or backup."
     },
     "PrincipalTypes": {
       "type": "string",

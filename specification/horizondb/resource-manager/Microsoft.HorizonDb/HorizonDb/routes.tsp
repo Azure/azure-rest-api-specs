@@ -328,3 +328,14 @@ interface MicrosoftEntraAuthentications {
     PatchModel = MicrosoftEntraAuthenticationForPatchUpdate
   >;
 }
+
+@added(Versions.v2026_09_01)
+@doc("Backup operations for HorizonDB clusters.")
+@armResourceOperations
+interface Backups {
+  @doc("Gets an available backup for a HorizonDB cluster. Expired automatic backups are not available through this operation.")
+  get is ArmResourceRead<Backup>;
+
+  @doc("Lists the backups available for a HorizonDB cluster. Expired automatic backups are omitted.")
+  list is ArmResourceListByParent<Backup>;
+}
