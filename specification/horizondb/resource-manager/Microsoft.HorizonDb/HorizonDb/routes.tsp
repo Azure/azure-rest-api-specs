@@ -169,21 +169,48 @@ interface HorizonDbReplicas {
   >;
 }
 
+@removed(Versions.v2026_09_01)
 @armResourceOperations
 interface HorizonDbFirewallRules {
   @doc("Gets information about a HorizonDB firewall rule.")
-  get is ArmResourceRead<HorizonDbFirewallRule>;
+  get is ArmResourceRead<LegacyHorizonDbFirewallRule>;
 
   @doc("Lists all HorizonDB firewall rules in a pool.")
-  list is ArmResourceListByParent<HorizonDbFirewallRule>;
+  list is ArmResourceListByParent<LegacyHorizonDbFirewallRule>;
 
   @doc("Creates a new HorizonDB firewall rule or updates an existing rule.")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<HorizonDbFirewallRule>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<LegacyHorizonDbFirewallRule>;
 
   @doc("Deletes a HorizonDB firewall rule.")
   delete is ArmResourceDeleteWithoutOkAsync<
-    HorizonDbFirewallRule,
+    LegacyHorizonDbFirewallRule,
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
+  >;
+}
+
+@added(Versions.v2026_09_01)
+@armResourceOperations
+interface FirewallRules {
+  @doc("Gets information about a HorizonDB endpoint firewall rule.")
+  get is ArmResourceRead<FirewallRule>;
+
+  @doc("Lists all HorizonDB firewall rules in an endpoint.")
+  list is ArmResourceListByParent<FirewallRule>;
+
+  @doc("Creates or replaces a HorizonDB endpoint firewall rule.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<FirewallRule>;
+
+  @doc("Updates selected properties of a HorizonDB endpoint firewall rule. Omitted properties preserve their current values.")
+  update is ArmCustomPatchSync<FirewallRule, FirewallRuleForPatchUpdate>;
+
+  @doc("Deletes a HorizonDB endpoint firewall rule.")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    FirewallRule,
     Response =
       | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
           Azure.Core.Foundations.RetryAfterHeader>

@@ -65,11 +65,33 @@ model HorizonDbReplica
   name: string;
 }
 
+@added(Versions.v2026_09_01)
+@doc("An IPv4 address in dotted-decimal notation.")
+@pattern("^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])[.]){3}(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])$")
+scalar DottedDecimalIpv4Address extends string;
+
+@removed(Versions.v2026_09_01)
+@renamedFrom(Versions.v2026_09_01, "HorizonDbFirewallRule")
 @doc("Represents the HorizonDB firewall rule.")
 @parentResource(HorizonDbPool)
-model HorizonDbFirewallRule
-  is Azure.ResourceManager.ProxyResource<HorizonDbFirewallRuleProperties> {
+model LegacyHorizonDbFirewallRule
+  is Azure.ResourceManager.ProxyResource<FirewallRuleProperties> {
   @doc("The name of the HorizonDB firewall rule.")
+  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
+  @minLength(1)
+  @maxLength(128)
+  @key("firewallRuleName")
+  @path
+  @segment("firewallRules")
+  name: string;
+}
+
+@added(Versions.v2026_09_01)
+@doc("Represents a customer-managed firewall rule for a HorizonDB endpoint.")
+@parentResource(Endpoint)
+model FirewallRule
+  is Azure.ResourceManager.ProxyResource<FirewallRuleProperties> {
+  @doc("The name of the HorizonDB endpoint firewall rule.")
   @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
   @minLength(1)
   @maxLength(128)
@@ -624,26 +646,69 @@ model HorizonDbReplicaForPatchUpdate {
   properties?: HorizonDbReplicaPropertiesForPatchUpdate;
 }
 
+@renamedFrom(Versions.v2026_09_01, "HorizonDbFirewallRuleProperties")
 @doc("Properties of a HorizonDB firewall rule.")
-model HorizonDbFirewallRuleProperties {
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+model FirewallRuleProperties {
+  @removed(Versions.v2026_09_01)
   @doc("The start IP address of the firewall rule (IPv4).")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  startIpAddress: string;
+  @renamedFrom(Versions.v2026_09_01, "startIpAddress")
+  legacyStartIpAddress: string;
 
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  @added(Versions.v2026_09_01)
+  @doc("The start IPv4 address of the firewall rule in dotted-decimal notation.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  startIpAddress: DottedDecimalIpv4Address;
+
+  @removed(Versions.v2026_09_01)
   @doc("The end IP address of the firewall rule (IPv4).")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  endIpAddress: string;
+  @renamedFrom(Versions.v2026_09_01, "endIpAddress")
+  legacyEndIpAddress: string;
 
+  @added(Versions.v2026_09_01)
+  @doc("The end IPv4 address of the firewall rule in dotted-decimal notation. This address must be numerically greater than or equal to startIpAddress.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  endIpAddress: DottedDecimalIpv4Address;
+
+  @removed(Versions.v2026_09_01)
   @doc("The description of the HorizonDB firewall rule.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  description?: string;
+  @renamedFrom(Versions.v2026_09_01, "description")
+  legacyDescription?: string;
+
+  @added(Versions.v2026_09_01)
+  @doc("The description of the HorizonDB firewall rule. The maximum length is 1024 characters.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  description?: WritableDescription;
 
   @doc("The provisioning state of the firewall rule.")
   @typeChangedFrom(Versions.v2026_09_01, LegacyProvisioningState)
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_09_01)
+@doc("Properties of a HorizonDB endpoint firewall rule for update operations. Omitted properties preserve their current values. The service validates the effective IP range after merging the supplied values with the existing rule.")
+model FirewallRulePropertiesForPatchUpdate {
+  @doc("The start IPv4 address to apply in dotted-decimal notation. The resulting effective start address must be numerically less than or equal to the effective end address.")
+  @visibility(Lifecycle.Update)
+  startIpAddress?: DottedDecimalIpv4Address;
+
+  @doc("The end IPv4 address to apply in dotted-decimal notation. The resulting effective end address must be numerically greater than or equal to the effective start address.")
+  @visibility(Lifecycle.Update)
+  endIpAddress?: DottedDecimalIpv4Address;
+
+  @doc("The description to apply to the HorizonDB firewall rule. The maximum length is 1024 characters.")
+  @visibility(Lifecycle.Update)
+  description?: WritableDescription;
+}
+
+@added(Versions.v2026_09_01)
+@doc("A HorizonDB endpoint firewall rule update request.")
+model FirewallRuleForPatchUpdate {
+  @doc("The properties to update. Omission preserves all current firewall rule properties.")
+  properties?: FirewallRulePropertiesForPatchUpdate;
 }
 
 @added(Versions.v2026_05_01_preview)

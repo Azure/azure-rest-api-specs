@@ -52,7 +52,7 @@
       "name": "HorizonDbReplicas"
     },
     {
-      "name": "HorizonDbFirewallRules"
+      "name": "FirewallRules"
     },
     {
       "name": "HorizonDbPrivateEndpointConnections"
@@ -2448,6 +2448,398 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/endpoints/{endpointName}/firewallRules": {
+      "get": {
+        "operationId": "FirewallRules_List",
+        "tags": [
+          "FirewallRules"
+        ],
+        "description": "Lists all HorizonDB firewall rules in an endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The service-generated name of the HorizonDB endpoint. The Cluster-scoped Endpoint is named cluster. Pool-scoped Endpoint names use the form pool-NN, where NN is a two-digit sequence number.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List HorizonDB firewall rules in an endpoint": {
+            "$ref": "./examples/FirewallRules_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/endpoints/{endpointName}/firewallRules/{firewallRuleName}": {
+      "get": {
+        "operationId": "FirewallRules_Get",
+        "tags": [
+          "FirewallRules"
+        ],
+        "description": "Gets information about a HorizonDB endpoint firewall rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The service-generated name of the HorizonDB endpoint. The Cluster-scoped Endpoint is named cluster. Pool-scoped Endpoint names use the form pool-NN, where NN is a two-digit sequence number.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "description": "The name of the HorizonDB endpoint firewall rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a HorizonDB endpoint firewall rule": {
+            "$ref": "./examples/FirewallRules_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FirewallRules_CreateOrUpdate",
+        "tags": [
+          "FirewallRules"
+        ],
+        "description": "Creates or replaces a HorizonDB endpoint firewall rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The service-generated name of the HorizonDB endpoint. The Cluster-scoped Endpoint is named cluster. Pool-scoped Endpoint names use the form pool-NN, where NN is a two-digit sequence number.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "description": "The name of the HorizonDB endpoint firewall rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FirewallRule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'FirewallRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or replace a HorizonDB endpoint firewall rule": {
+            "$ref": "./examples/FirewallRules_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/FirewallRule"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "FirewallRules_Update",
+        "tags": [
+          "FirewallRules"
+        ],
+        "description": "Updates selected properties of a HorizonDB endpoint firewall rule. Omitted properties preserve their current values.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The service-generated name of the HorizonDB endpoint. The Cluster-scoped Endpoint is named cluster. Pool-scoped Endpoint names use the form pool-NN, where NN is a two-digit sequence number.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "description": "The name of the HorizonDB endpoint firewall rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallRuleForPatchUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a HorizonDB endpoint firewall rule": {
+            "$ref": "./examples/FirewallRules_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FirewallRules_Delete",
+        "tags": [
+          "FirewallRules"
+        ],
+        "description": "Deletes a HorizonDB endpoint firewall rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The service-generated name of the HorizonDB endpoint. The Cluster-scoped Endpoint is named cluster. Pool-scoped Endpoint names use the form pool-NN, where NN is a two-digit sequence number.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "description": "The name of the HorizonDB endpoint firewall rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a HorizonDB endpoint firewall rule": {
+            "$ref": "./examples/FirewallRules_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/failover": {
       "post": {
         "operationId": "Clusters_Failover",
@@ -2898,322 +3290,6 @@
             "$ref": "./examples/Pools_Get.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/firewallRules": {
-      "get": {
-        "operationId": "HorizonDbFirewallRules_List",
-        "tags": [
-          "HorizonDbFirewallRules"
-        ],
-        "description": "Lists all HorizonDB firewall rules in a pool.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "description": "The name of the HorizonDB pool.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HorizonDbFirewallRuleListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List HorizonDB firewall rules in a pool": {
-            "$ref": "./examples/FirewallRules_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/firewallRules/{firewallRuleName}": {
-      "get": {
-        "operationId": "HorizonDbFirewallRules_Get",
-        "tags": [
-          "HorizonDbFirewallRules"
-        ],
-        "description": "Gets information about a HorizonDB firewall rule.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "description": "The name of the HorizonDB pool.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "firewallRuleName",
-            "in": "path",
-            "description": "The name of the HorizonDB firewall rule.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HorizonDbFirewallRule"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a HorizonDB firewall rule": {
-            "$ref": "./examples/FirewallRules_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "HorizonDbFirewallRules_CreateOrUpdate",
-        "tags": [
-          "HorizonDbFirewallRules"
-        ],
-        "description": "Creates a new HorizonDB firewall rule or updates an existing rule.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "description": "The name of the HorizonDB pool.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "firewallRuleName",
-            "in": "path",
-            "description": "The name of the HorizonDB firewall rule.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/HorizonDbFirewallRule"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'HorizonDbFirewallRule' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/HorizonDbFirewallRule"
-            }
-          },
-          "201": {
-            "description": "Resource 'HorizonDbFirewallRule' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/HorizonDbFirewallRule"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or update a HorizonDB firewall rule": {
-            "$ref": "./examples/FirewallRules_CreateOrUpdate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/HorizonDbFirewallRule"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "HorizonDbFirewallRules_Delete",
-        "tags": [
-          "HorizonDbFirewallRules"
-        ],
-        "description": "Deletes a HorizonDB firewall rule.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "description": "The name of the HorizonDB pool.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "firewallRuleName",
-            "in": "path",
-            "description": "The name of the HorizonDB firewall rule.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a HorizonDB firewall rule": {
-            "$ref": "./examples/FirewallRules_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/replicas": {
@@ -6390,6 +6466,11 @@
         ]
       }
     },
+    "DottedDecimalIpv4Address": {
+      "type": "string",
+      "description": "An IPv4 address in dotted-decimal notation.",
+      "pattern": "^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])[.]){3}(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])$"
+    },
     "Endpoint": {
       "type": "object",
       "description": "Represents a service-generated, service-managed HorizonDB endpoint. The Cluster-scoped Endpoint is created and deleted with its parent Cluster. A Pool-scoped Endpoint is created and deleted with the Pool identified by associatedResourceId. Endpoints cannot be created or deleted independently from their lifecycle owner.",
@@ -6664,6 +6745,121 @@
         ]
       }
     },
+    "FirewallRule": {
+      "type": "object",
+      "description": "Represents a customer-managed firewall rule for a HorizonDB endpoint.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FirewallRuleProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FirewallRuleForPatchUpdate": {
+      "type": "object",
+      "description": "A HorizonDB endpoint firewall rule update request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FirewallRulePropertiesForPatchUpdate",
+          "description": "The properties to update. Omission preserves all current firewall rule properties."
+        }
+      }
+    },
+    "FirewallRuleListResult": {
+      "type": "object",
+      "description": "The response of a FirewallRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FirewallRule items on this page",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FirewallRuleProperties": {
+      "type": "object",
+      "description": "Properties of a HorizonDB firewall rule.",
+      "properties": {
+        "startIpAddress": {
+          "$ref": "#/definitions/DottedDecimalIpv4Address",
+          "description": "The start IPv4 address of the firewall rule in dotted-decimal notation.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "endIpAddress": {
+          "$ref": "#/definitions/DottedDecimalIpv4Address",
+          "description": "The end IPv4 address of the firewall rule in dotted-decimal notation. This address must be numerically greater than or equal to startIpAddress.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "description": {
+          "$ref": "#/definitions/WritableDescription",
+          "description": "The description of the HorizonDB firewall rule. The maximum length is 1024 characters.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the firewall rule.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "startIpAddress",
+        "endIpAddress"
+      ]
+    },
+    "FirewallRulePropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Properties of a HorizonDB endpoint firewall rule for update operations. Omitted properties preserve their current values. The service validates the effective IP range after merging the supplied values with the existing rule.",
+      "properties": {
+        "startIpAddress": {
+          "$ref": "#/definitions/DottedDecimalIpv4Address",
+          "description": "The start IPv4 address to apply in dotted-decimal notation. The resulting effective start address must be numerically less than or equal to the effective end address.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "endIpAddress": {
+          "$ref": "#/definitions/DottedDecimalIpv4Address",
+          "description": "The end IPv4 address to apply in dotted-decimal notation. The resulting effective end address must be numerically greater than or equal to the effective start address.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "description": {
+          "$ref": "#/definitions/WritableDescription",
+          "description": "The description to apply to the HorizonDB firewall rule. The maximum length is 1024 characters.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
     "GeoRedundancyState": {
       "type": "string",
       "description": "Indicates the geo-redundancy state.",
@@ -6699,84 +6895,6 @@
           }
         ]
       }
-    },
-    "HorizonDbFirewallRule": {
-      "type": "object",
-      "description": "Represents the HorizonDB firewall rule.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HorizonDbFirewallRuleProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "HorizonDbFirewallRuleListResult": {
-      "type": "object",
-      "description": "The response of a HorizonDbFirewallRule list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The HorizonDbFirewallRule items on this page",
-          "items": {
-            "$ref": "#/definitions/HorizonDbFirewallRule"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "HorizonDbFirewallRuleProperties": {
-      "type": "object",
-      "description": "Properties of a HorizonDB firewall rule.",
-      "properties": {
-        "startIpAddress": {
-          "type": "string",
-          "description": "The start IP address of the firewall rule (IPv4).",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "endIpAddress": {
-          "type": "string",
-          "description": "The end IP address of the firewall rule (IPv4).",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the HorizonDB firewall rule.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the firewall rule.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "startIpAddress",
-        "endIpAddress"
-      ]
     },
     "HorizonDbParameterGroup": {
       "type": "object",
@@ -8016,6 +8134,11 @@
           }
         ]
       }
+    },
+    "WritableDescription": {
+      "type": "string",
+      "description": "A user-supplied description with a maximum length of 1024 characters.",
+      "maxLength": 1024
     },
     "ZoneRedundancyState": {
       "type": "string",

@@ -83,12 +83,12 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(Microsoft.HorizonDb.Clusters, "HorizonDBClusters", "csharp");
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbFirewallRule,
+  Microsoft.HorizonDb.LegacyHorizonDbFirewallRule,
   "HorizonDBFirewallRule",
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbFirewallRuleProperties,
+  Microsoft.HorizonDb.FirewallRuleProperties,
   "HorizonDBFirewallRuleProperties",
   "csharp"
 );

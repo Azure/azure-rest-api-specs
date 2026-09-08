@@ -1,13 +1,19 @@
 {
-  "operationId": "FirewallRules_Get",
-  "title": "Get a HorizonDB endpoint firewall rule",
+  "operationId": "FirewallRules_Update",
+  "title": "Update a HorizonDB endpoint firewall rule",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "exampleresourcegroup",
     "clusterName": "examplecluster",
     "endpointName": "cluster",
     "firewallRuleName": "examplefirewallrule",
-    "api-version": "2026-09-01"
+    "api-version": "2026-09-01",
+    "properties": {
+      "properties": {
+        "endIpAddress": "10.0.0.20",
+        "description": "Allow access from the expanded corporate network"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -17,8 +23,8 @@
         "type": "Microsoft.HorizonDb/clusters/endpoints/firewallRules",
         "properties": {
           "startIpAddress": "10.0.0.1",
-          "endIpAddress": "10.0.0.10",
-          "description": "Allow access from corporate network",
+          "endIpAddress": "10.0.0.20",
+          "description": "Allow access from the expanded corporate network",
           "provisioningState": "Succeeded"
         }
       }
