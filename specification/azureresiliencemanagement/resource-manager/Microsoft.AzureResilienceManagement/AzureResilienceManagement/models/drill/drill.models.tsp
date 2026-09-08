@@ -59,6 +59,10 @@ model DrillProperties {
   @doc("ROPlan properties.")
   recoveryPlanProperties?: RecoveryPlanPropertiesOfDrill;
 
+  @doc("Goal Assignment properties.")
+  @added(Versions.v2026_09_01_preview)
+  goalAssignmentProperties?: GoalAssignmentPropertiesOfDrill;
+
   @doc("Properties for internal resources that are created for the Drill.")
   @added(Versions.v2026_03_01_preview)
   drillAssetProperties?: AssetPropertiesOfDrill;
@@ -150,6 +154,11 @@ model LastRunProperties {
   @doc("Attestation state of the last run of this Drill.")
   @visibility(Lifecycle.Read)
   lastRunAttestation?: DrillAttestation;
+
+  @doc("Actual recovery time of the last run of this Drill.")
+  @added(Versions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read)
+  lastRunRecoveryTimeActual?: duration;
 }
 
 @doc("Definition of Zonal Drill properties.")
@@ -409,6 +418,24 @@ model RecoveryPlanPropertiesOfDrill {
 }
 
 /**
+ * Model that represents the Goal Assignment properties
+ */
+@doc("Goal assignment properties.")
+@added(Versions.v2026_09_01_preview)
+model GoalAssignmentPropertiesOfDrill {
+  @doc("Identity to use for goal assignment operations.")
+  identity: AssociatedIdentity;
+
+  @doc("Goal assignment id.")
+  @visibility(Lifecycle.Read)
+  goalAssignmentId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureResilienceManagement/goalAssignments";
+    }
+  ]>;
+}
+
+/**
  * Model that represents the Chaos Experiment properties
  */
 @doc("Chaos Experiment properties.")
@@ -642,6 +669,22 @@ model AttentionReason {
   @identifiers(#[])
   @added(Versions.v2026_08_31_preview)
   sliAttentionStatuses?: SliAttentionStatus[];
+
+  @doc("Drill object does not have the necessary RBAC on Goal Assignment.")
+  @added(Versions.v2026_09_01_preview)
+  drillRbacOnGoalAssignment?: RBACState;
+
+  @doc("Permissions needed by the Drill MSI on Goal Assignment.")
+  @added(Versions.v2026_09_01_preview)
+  rbacNeededForDrillOnGoalAssignment?: string[];
+
+  @doc("Goal Assignment not present.")
+  @added(Versions.v2026_09_01_preview)
+  goalAssignment?: ExtensionObjectState;
+
+  @doc("Recovery plan not present.")
+  @added(Versions.v2026_09_01_preview)
+  recoveryPlan?: ExtensionObjectState;
 }
 
 @doc("Internal System Metadata, to be used by internal components only.")
@@ -786,6 +829,10 @@ model DrillPatchProperties {
 
   @doc("Recovery Plan properties.")
   recoveryPlanProperties?: RecoveryPlanPropertiesOfDrill;
+
+  @doc("Goal Assignment properties.")
+  @added(Versions.v2026_09_01_preview)
+  goalAssignmentProperties?: GoalAssignmentPropertiesOfDrill;
 
   @doc("Properties for internal resources that are created for the Drill.")
   @added(Versions.v2026_03_01_preview)

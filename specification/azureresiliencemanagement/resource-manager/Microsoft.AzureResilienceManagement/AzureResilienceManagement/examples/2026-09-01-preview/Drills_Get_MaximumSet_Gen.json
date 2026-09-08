@@ -75,7 +75,13 @@
                 "drillRbacOnDestinationAmw": "Set",
                 "rbacNeededOnDestinationAmws": []
               }
-            ]
+            ],
+            "drillRbacOnGoalAssignment": "Set",
+            "rbacNeededForDrillOnGoalAssignment": [
+              "Microsoft.AzureResilienceManagement/goalAssignments/read"
+            ],
+            "goalAssignment": "Exists",
+            "recoveryPlan": "Exists"
           },
           "systemMetadata": {
             "initialConfig": "Pending",
@@ -88,7 +94,8 @@
             "lastRunState": "NotStarted",
             "lastRunAttestation": "Success",
             "lastRunTime": "2025-05-05T05:36:37.151Z",
-            "lastRunDuration": "PT6M"
+            "lastRunDuration": "PT6M",
+            "lastRunRecoveryTimeActual": "PT5M"
           },
           "executionReadinessState": "Ready",
           "recoveryPlanProperties": {
@@ -152,6 +159,13 @@
                 "type": "Latency"
               }
             ]
+          },
+          "goalAssignmentProperties": {
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            },
+            "goalAssignmentId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/goalAssignments/goalAssignment1"
           }
         },
         "identity": {

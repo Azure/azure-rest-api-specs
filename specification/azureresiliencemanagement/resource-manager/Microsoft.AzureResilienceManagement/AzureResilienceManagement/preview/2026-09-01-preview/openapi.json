@@ -5194,6 +5194,25 @@
             "$ref": "#/definitions/SliAttentionStatus"
           },
           "x-ms-identifiers": []
+        },
+        "drillRbacOnGoalAssignment": {
+          "$ref": "#/definitions/RBACState",
+          "description": "Drill object does not have the necessary RBAC on Goal Assignment."
+        },
+        "rbacNeededForDrillOnGoalAssignment": {
+          "type": "array",
+          "description": "Permissions needed by the Drill MSI on Goal Assignment.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "goalAssignment": {
+          "$ref": "#/definitions/ExtensionObjectState",
+          "description": "Goal Assignment not present."
+        },
+        "recoveryPlan": {
+          "$ref": "#/definitions/ExtensionObjectState",
+          "description": "Recovery plan not present."
         }
       }
     },
@@ -5638,6 +5657,10 @@
           "$ref": "#/definitions/RecoveryPlanPropertiesOfDrill",
           "description": "Recovery Plan properties."
         },
+        "goalAssignmentProperties": {
+          "$ref": "#/definitions/GoalAssignmentPropertiesOfDrill",
+          "description": "Goal Assignment properties."
+        },
         "drillAssetProperties": {
           "$ref": "#/definitions/AssetPropertiesOfDrill",
           "description": "Properties for internal resources that are created for the Drill."
@@ -5691,6 +5714,10 @@
         "recoveryPlanProperties": {
           "$ref": "#/definitions/RecoveryPlanPropertiesOfDrill",
           "description": "ROPlan properties."
+        },
+        "goalAssignmentProperties": {
+          "$ref": "#/definitions/GoalAssignmentPropertiesOfDrill",
+          "description": "Goal Assignment properties."
         },
         "drillAssetProperties": {
           "$ref": "#/definitions/AssetPropertiesOfDrill",
@@ -6455,6 +6482,11 @@
           "$ref": "#/definitions/DrillReportSummary",
           "description": "Summary of report generation for this Drill Run.",
           "readOnly": true
+        },
+        "recoveryTimeObjective": {
+          "$ref": "#/definitions/IsoDuration",
+          "description": "Recovery time objective for the drill run.",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -6666,6 +6698,10 @@
         "recoveryPlanProperties": {
           "$ref": "#/definitions/RecoveryPlanPropertiesOfDrillUpdate",
           "description": "Recovery Plan properties."
+        },
+        "goalAssignmentProperties": {
+          "$ref": "#/definitions/GoalAssignmentPropertiesOfDrillUpdate",
+          "description": "Goal Assignment properties."
         },
         "drillAssetProperties": {
           "$ref": "#/definitions/AssetPropertiesOfDrillUpdate",
@@ -7322,6 +7358,42 @@
       "required": [
         "requireZonalResiliency"
       ]
+    },
+    "GoalAssignmentPropertiesOfDrill": {
+      "type": "object",
+      "description": "Goal assignment properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AssociatedIdentity",
+          "description": "Identity to use for goal assignment operations."
+        },
+        "goalAssignmentId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Goal assignment id.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureResilienceManagement/goalAssignments"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "identity"
+      ]
+    },
+    "GoalAssignmentPropertiesOfDrillUpdate": {
+      "type": "object",
+      "description": "Goal assignment properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AssociatedIdentityUpdate",
+          "description": "Identity to use for goal assignment operations."
+        }
+      }
     },
     "GoalAssignmentPropertiesUpdate": {
       "type": "object",
@@ -8273,6 +8345,12 @@
         "lastRunAttestation": {
           "$ref": "#/definitions/DrillAttestation",
           "description": "Attestation state of the last run of this Drill.",
+          "readOnly": true
+        },
+        "lastRunRecoveryTimeActual": {
+          "type": "string",
+          "format": "duration",
+          "description": "Actual recovery time of the last run of this Drill.",
           "readOnly": true
         }
       }
