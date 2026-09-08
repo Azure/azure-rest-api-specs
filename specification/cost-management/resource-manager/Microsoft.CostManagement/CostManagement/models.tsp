@@ -1576,6 +1576,20 @@ model RecommendationUsageDetails {
    */
   @visibility(Lifecycle.Read)
   charges?: decimal[];
+
+  /**
+   * On-demand costs charges after applying the benefit for each hour between firstConsumptionDate and lastConsumptionDate. This array has the same length and hourly ordering as charges.
+   */
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
+  postBenefitCharges?: float64[];
+
+  /**
+   * Benefit charges for each hour between firstConsumptionDate and lastConsumptionDate. This array has the same length and hourly ordering as charges.
+   */
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
+  benefitCharges?: float64[];
 }
 
 /**
