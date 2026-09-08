@@ -21,7 +21,7 @@ on:
 permissions:
   contents: read
   copilot-requests: write
-  pull-requests: read
+  pull-requests: write
 
 jobs:
   analyze:
@@ -266,6 +266,29 @@ jobs:
             --package-path "$PACKAGE_PATH" \
             --tsp-config-path "$TSP_CONFIG_PATH" \
             --output json | tee "$RUNNER_TEMP/sdk-breaking-change-results/breaking-changes.json"
+
+      - name: Comment SDK breaking changes on pull request
+        uses: actions/github-script@v9
+        env:
+          PR_NUMBER: ${{ github.event.issue.number || inputs.pr_number }}
+          RESULT_PATH: ${{ runner.temp }}/sdk-breaking-change-results/breaking-changes.json
+          SDK_LANGUAGE: ${{ steps.resolve-source.outputs.sdk-language }}
+        with:
+          script: |
+            const fs = await import("node:fs/promises");
+            const pullNumber = Number(process.env.PR_NUMBER);
+            const result = await fs.readFile(process.env.RESULT_PATH, "utf8");
+            const title = `## SDK Breaking changes for ${process.env.SDK_LANGUAGE}`;
+            const maxResultLength = 60000;
+            const displayedResult =
+              result.length <= maxResultLength
+                ? result
+                : `${result.slice(0, maxResultLength)}\n\n... Result truncated. See the workflow artifact for the complete output.`;
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: pullNumber,
+              body: `${title}\n\n\`\`\`json\n${displayedResult}\n\`\`\``,
+            });
 
       - name: Publish result summary
         if: always()
