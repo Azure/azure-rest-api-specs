@@ -16,7 +16,7 @@ using Azure.ResourceManager;
 namespace Microsoft.ContainerService;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
-@doc("The ARM resource id of an AIModel.")
+@doc("The Azure resource ID of an AIModel.")
 scalar AIModelResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
@@ -27,7 +27,7 @@ scalar AIModelResourceId
     }
   ]>;
 
-@doc("The ARM resource id of a ModelSource.")
+@doc("The Azure resource ID of a ModelSource.")
 scalar ModelSourceResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
@@ -63,12 +63,12 @@ model ModelDeploymentProperties {
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("""
-    Full ARM resource id of the model to deploy. Immutable after creation.
+    Full Azure resource ID of the model to deploy. Immutable after creation.
     """)
   modelResourceId: AIModelResourceId;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("Full ARM resource id of a `ModelSource` to use when pulling artifacts for this deployment. Immutable after creation.")
+  @doc("Full Azure resource ID of a `ModelSource` to use when pulling artifacts for this deployment. Immutable after creation.")
   modelSourceResourceId?: ModelSourceResourceId;
 
   @doc("Runtime performance mode.")
@@ -219,12 +219,19 @@ model AutoscaleProfile {
 interface ModelDeployments {
   get is ArmResourceRead<ModelDeployment>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The polling-only Azure-AsyncOperation header must emit an LRO without final-state-via metadata."
   @doc("Create or update a `ModelDeployment`. This is a full-replace operation: any optional property omitted from the request body is reset to its default value, or cleared if it has no default. To safely modify a subset of fields, perform a GET, modify the returned resource, and PUT it back using the returned ETag via the `If-Match` header to avoid concurrent overwrites.")
+  @Azure.ClientGenerator.Core.Legacy.markAsLro
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ModelDeployment,
-    Azure.ResourceManager.Foundations.BaseParameters<ModelDeployment> &
+    BaseParameters = Azure.ResourceManager.Foundations.BaseParameters<ModelDeployment> &
       IfMatchParameters<ModelDeployment> &
-      IfNoneMatchParameters<ModelDeployment>
+      IfNoneMatchParameters<ModelDeployment>,
+    LroHeaders = ArmPollingOnlyAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response =
+      | ArmResourceUpdatedResponse<ModelDeployment>
+      | ArmResourceCreatedPollingOnlyResponse<ModelDeployment>
   >;
 
   delete is ArmResourceDeleteWithoutOkAsync<

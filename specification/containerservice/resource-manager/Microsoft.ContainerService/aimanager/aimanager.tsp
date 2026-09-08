@@ -48,7 +48,7 @@ model AIManagerProperties {
 
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("""
-    The ARM resource ID of an existing AKS cluster to attach (bring-your-own). When omitted, AI Manager provisions and manages its own underlying cluster. The referenced cluster must be in the same region as this AI Manager, but may reside in a different subscription within the same Microsoft Entra tenant. This property is immutable after creation.
+    The Azure resource ID of an existing AKS cluster to attach (bring-your-own). When omitted, AI Manager provisions and manages its own underlying cluster. The referenced cluster must be in the same region as this AI Manager, but may reside in a different subscription within the same Microsoft Entra tenant. This property is immutable after creation.
     """)
   clusterResourceId?: ClusterResourceId;
 }
@@ -90,11 +90,18 @@ model AIManagerPatch {
 interface AIManagers {
   get is ArmResourceRead<AIManager>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The polling-only Azure-AsyncOperation header must emit an LRO without final-state-via metadata."
+  @Azure.ClientGenerator.Core.Legacy.markAsLro
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AIManager,
-    Azure.ResourceManager.Foundations.BaseParameters<AIManager> &
+    BaseParameters = Azure.ResourceManager.Foundations.BaseParameters<AIManager> &
       IfMatchParameters<AIManager> &
-      IfNoneMatchParameters<AIManager>
+      IfNoneMatchParameters<AIManager>,
+    LroHeaders = ArmPollingOnlyAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response =
+      | ArmResourceUpdatedResponse<AIManager>
+      | ArmResourceCreatedPollingOnlyResponse<AIManager>
   >;
 
   update is ArmCustomPatchSync<

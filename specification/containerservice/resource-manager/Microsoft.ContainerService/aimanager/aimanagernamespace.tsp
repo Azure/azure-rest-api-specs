@@ -60,11 +60,18 @@ union AIManagerNamespaceProvisioningState {
 interface AIManagerNamespaces {
   get is ArmResourceRead<AIManagerNamespace>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The polling-only Azure-AsyncOperation header must emit an LRO without final-state-via metadata."
+  @Azure.ClientGenerator.Core.Legacy.markAsLro
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     AIManagerNamespace,
-    Azure.ResourceManager.Foundations.BaseParameters<AIManagerNamespace> &
+    BaseParameters = Azure.ResourceManager.Foundations.BaseParameters<AIManagerNamespace> &
       IfMatchParameters<AIManagerNamespace> &
-      IfNoneMatchParameters<AIManagerNamespace>
+      IfNoneMatchParameters<AIManagerNamespace>,
+    LroHeaders = ArmPollingOnlyAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response =
+      | ArmResourceUpdatedResponse<AIManagerNamespace>
+      | ArmResourceCreatedPollingOnlyResponse<AIManagerNamespace>
   >;
 
   delete is ArmResourceDeleteWithoutOkAsync<

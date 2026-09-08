@@ -12,7 +12,7 @@ using Azure.ResourceManager;
 namespace Microsoft.ContainerService;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Foundry is a valid name"
-@doc("The ARM resource id of a Microsoft Foundry project. The account is the parent of this resource and is derived from it.")
+@doc("The Azure resource ID of a Microsoft Foundry project. The account is the parent of this resource and is derived from it.")
 scalar FoundryProjectResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
@@ -125,12 +125,19 @@ model MicrosoftFoundrySource {
 interface ModelSources {
   get is ArmResourceRead<ModelSource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The polling-only Azure-AsyncOperation header must emit an LRO without final-state-via metadata."
   @doc("Create or update a `ModelSource`. This is a full-replace operation: any optional property omitted from the request body is reset to its default value, or cleared if it has no default. To safely modify a subset of fields, perform a GET, modify the returned resource, and PUT it back using the returned ETag via the `If-Match` header to avoid concurrent overwrites.")
+  @Azure.ClientGenerator.Core.Legacy.markAsLro
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ModelSource,
-    Azure.ResourceManager.Foundations.BaseParameters<ModelSource> &
+    BaseParameters = Azure.ResourceManager.Foundations.BaseParameters<ModelSource> &
       IfMatchParameters<ModelSource> &
-      IfNoneMatchParameters<ModelSource>
+      IfNoneMatchParameters<ModelSource>,
+    LroHeaders = ArmPollingOnlyAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response =
+      | ArmResourceUpdatedResponse<ModelSource>
+      | ArmResourceCreatedPollingOnlyResponse<ModelSource>
   >;
 
   delete is ArmResourceDeleteWithoutOkAsync<

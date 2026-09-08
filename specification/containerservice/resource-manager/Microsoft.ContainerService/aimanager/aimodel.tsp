@@ -142,7 +142,7 @@ model ServingPerformanceEstimation {
   relativeThroughputScore: float32;
 }
 
-@doc("Reason explaining why a `CalculateCostPlan` is not deployable. This is a per-plan annotation surfaced inside a successful `calculateCost` response, not an ARM error envelope.")
+@doc("Reason explaining why a `CalculateCostPlan` is not deployable. This is a per-plan annotation surfaced inside a successful `calculateCost` response, not an Azure Resource Manager error envelope.")
 model InfeasibilityReason {
   @visibility(Lifecycle.Read)
   @doc("Machine-readable reason code.")
@@ -179,7 +179,7 @@ interface AIModels {
   @action("calculateCost")
   calculateCost is ArmResourceActionSync<
     AIModel,
-    CalculateCostRequest,
+    void,
     ArmResponse<CalculateCostResponse>
   >;
 }

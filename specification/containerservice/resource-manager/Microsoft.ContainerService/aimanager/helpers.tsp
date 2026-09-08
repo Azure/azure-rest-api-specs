@@ -24,6 +24,23 @@ alias IfMatchHeadersParameters<T extends Azure.ResourceManager.Foundations.Resou
   ...IfNoneMatchParameters<T>;
 };
 
+@doc("The polling header for an asynchronous Azure operation.")
+model ArmPollingOnlyAsyncOperationHeader {
+  @doc("A link to the status monitor")
+  @header("Azure-AsyncOperation")
+  azureAsyncOperation?: string;
+}
+
+@doc("Resource '{name}' create operation succeeded", Resource)
+model ArmResourceCreatedPollingOnlyResponse<
+  Resource extends Azure.ResourceManager.Foundations.SimpleResource
+> {
+  ...CreatedResponse;
+  ...ArmPollingOnlyAsyncOperationHeader;
+  ...Azure.Core.Foundations.RetryAfterHeader;
+  ...Body<Resource>;
+}
+
 @doc("The list credential result response.")
 model CredentialResults {
   @doc("Array of credential results.")
@@ -43,3 +60,4 @@ model CredentialResult {
   @secret
   value?: bytes;
 }
+

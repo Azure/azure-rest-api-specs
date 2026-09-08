@@ -254,15 +254,6 @@
             "minLength": 16,
             "maxLength": 16,
             "pattern": "^[0-9a-f]{16}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CalculateCostRequest"
-            }
           }
         ],
         "responses": {
@@ -469,9 +460,6 @@
           "Creates or updates an AI Manager resource.": {
             "$ref": "./examples/AIManagers_CreateOrUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -817,9 +805,6 @@
           "Create or update a CustomAIModel": {
             "$ref": "./examples/CustomAIModels_CreateOrUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -1223,9 +1208,6 @@
             "$ref": "./examples/ModelSources_CreateOrUpdate.json"
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -1516,9 +1498,6 @@
           "Creates or updates an AI Manager namespace resource.": {
             "$ref": "./examples/AIManagerNamespaces_CreateOrUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -1964,9 +1943,6 @@
             "$ref": "./examples/ModelDeployments_CreateOrUpdate.json"
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -2323,7 +2299,7 @@
         },
         "clusterResourceId": {
           "$ref": "#/definitions/ClusterResourceId",
-          "description": "The ARM resource ID of an existing AKS cluster to attach (bring-your-own). When omitted, AI Manager provisions and manages its own underlying cluster. The referenced cluster must be in the same region as this AI Manager, but may reside in a different subscription within the same Microsoft Entra tenant. This property is immutable after creation.",
+          "description": "The Azure resource ID of an existing AKS cluster to attach (bring-your-own). When omitted, AI Manager provisions and manages its own underlying cluster. The referenced cluster must be in the same region as this AI Manager, but may reside in a different subscription within the same Microsoft Entra tenant. This property is immutable after creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -2444,7 +2420,7 @@
     "AIModelResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "The ARM resource id of an AIModel.",
+      "description": "The Azure resource ID of an AIModel.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -2614,10 +2590,6 @@
         "vmHourlyPrice",
         "feasible"
       ]
-    },
-    "CalculateCostRequest": {
-      "type": "object",
-      "description": "Request body for the AI model `calculateCost` action."
     },
     "CalculateCostResponse": {
       "type": "object",
@@ -2897,7 +2869,7 @@
     "FoundryProjectResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "The ARM resource id of a Microsoft Foundry project. The account is the parent of this resource and is derived from it.",
+      "description": "The Azure resource ID of a Microsoft Foundry project. The account is the parent of this resource and is derived from it.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -2908,7 +2880,7 @@
     },
     "InfeasibilityReason": {
       "type": "object",
-      "description": "Reason explaining why a `CalculateCostPlan` is not deployable. This is a per-plan annotation surfaced inside a successful `calculateCost` response, not an ARM error envelope.",
+      "description": "Reason explaining why a `CalculateCostPlan` is not deployable. This is a per-plan annotation surfaced inside a successful `calculateCost` response, not an Azure Resource Manager error envelope.",
       "properties": {
         "code": {
           "$ref": "#/definitions/InfeasibleCode",
@@ -3115,7 +3087,7 @@
         },
         "modelResourceId": {
           "$ref": "#/definitions/AIModelResourceId",
-          "description": "Full ARM resource id of the model to deploy. Immutable after creation.",
+          "description": "Full Azure resource ID of the model to deploy. Immutable after creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3123,7 +3095,7 @@
         },
         "modelSourceResourceId": {
           "$ref": "#/definitions/ModelSourceResourceId",
-          "description": "Full ARM resource id of a `ModelSource` to use when pulling artifacts for this deployment. Immutable after creation.",
+          "description": "Full Azure resource ID of a `ModelSource` to use when pulling artifacts for this deployment. Immutable after creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3348,7 +3320,7 @@
     "ModelSourceResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "The ARM resource id of a ModelSource.",
+      "description": "The Azure resource ID of a ModelSource.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
