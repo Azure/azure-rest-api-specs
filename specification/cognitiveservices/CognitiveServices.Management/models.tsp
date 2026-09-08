@@ -6308,11 +6308,10 @@ model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
 @added(Versions.v2026_09_15_preview)
 model GatedModelAccessProperties {
   /**
-   * The project-scoped connection used to authorize access to a gated model during deployment creation.
+   * The reference to the project-scoped connection used to authorize access to a gated model during deployment creation.
    * The expected format is projects/{projectName}/connections/{connectionName}.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The value is a project-scoped connection resource reference and does not contain connection credentials or secrets."
-  connection: string;
+  connectionReference: string;
 }
 
 /**
