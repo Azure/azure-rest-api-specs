@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "HorizonDbClusters"
+      "name": "Clusters"
     },
     {
       "name": "HorizonDbPools"
@@ -127,9 +127,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/clusters": {
       "get": {
-        "operationId": "HorizonDbClusters_ListBySubscription",
+        "operationId": "Clusters_ListBySubscription",
         "tags": [
-          "HorizonDbClusters"
+          "Clusters"
         ],
         "description": "Lists all HorizonDB clusters in a subscription.",
         "parameters": [
@@ -144,7 +144,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbClusterListResult"
+              "$ref": "#/definitions/ClusterListResult"
             }
           },
           "default": {
@@ -246,9 +246,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters": {
       "get": {
-        "operationId": "HorizonDbClusters_ListByResourceGroup",
+        "operationId": "Clusters_ListByResourceGroup",
         "tags": [
-          "HorizonDbClusters"
+          "Clusters"
         ],
         "description": "Lists all HorizonDB clusters in a resource group.",
         "parameters": [
@@ -266,7 +266,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbClusterListResult"
+              "$ref": "#/definitions/ClusterListResult"
             }
           },
           "default": {
@@ -288,9 +288,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}": {
       "get": {
-        "operationId": "HorizonDbClusters_Get",
+        "operationId": "Clusters_Get",
         "tags": [
-          "HorizonDbClusters"
+          "Clusters"
         ],
         "description": "Gets information about a HorizonDB cluster.",
         "parameters": [
@@ -311,14 +311,14 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbCluster"
+              "$ref": "#/definitions/Cluster"
             }
           },
           "default": {
@@ -335,11 +335,11 @@
         }
       },
       "put": {
-        "operationId": "HorizonDbClusters_CreateOrUpdate",
+        "operationId": "Clusters_CreateOrUpdate",
         "tags": [
-          "HorizonDbClusters"
+          "Clusters"
         ],
-        "description": "Creates a new HorizonDB cluster or updates an existing cluster.",
+        "description": "Creates a new HorizonDB cluster or replaces an existing cluster. PointInTimeRestore creates the new Cluster resource and hydrates its service-owned database storage from an available source backup. It does not clone source pools, Pool-scoped endpoints, firewall rules, parameter-group associations, or other child resources. The new Cluster receives its service-generated Cluster-scoped Endpoint named cluster. PostgreSQL version is inherited from backup metadata; all other new-cluster configuration comes from the request or service defaults. Until cross-region point-in-time restore is supported, the target cluster location must match the source cluster location; a cross-region request is rejected synchronously with 400 CrossRegionPointInTimeRestoreNotSupported and does not create or modify a resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -358,7 +358,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "resource",
@@ -366,26 +366,37 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HorizonDbCluster"
+              "$ref": "#/definitions/Cluster"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'HorizonDbCluster' update operation succeeded",
+            "description": "The response returned when an asynchronous HorizonDB cluster replacement is accepted.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbCluster"
-            }
-          },
-          "201": {
-            "description": "Resource 'HorizonDbCluster' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/HorizonDbCluster"
+              "$ref": "#/definitions/Cluster"
             },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "A link to the status monitor for the cluster create or replacement operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "201": {
+            "description": "The response returned when asynchronous HorizonDB cluster creation is accepted.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor for the cluster create or replacement operation."
               },
               "Retry-After": {
                 "type": "integer",
@@ -402,22 +413,18 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a HorizonDB cluster": {
+          "Create or replace a HorizonDB cluster": {
             "$ref": "./examples/Clusters_CreateOrUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/HorizonDbCluster"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "HorizonDbClusters_Update",
+        "operationId": "Clusters_Update",
         "tags": [
-          "HorizonDbClusters"
+          "Clusters"
         ],
-        "description": "Updates an existing HorizonDB cluster (e.g., tags, virtual cores, replica count).",
+        "description": "Updates an existing HorizonDB cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -436,7 +443,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "properties",
@@ -444,7 +451,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HorizonDbClusterForPatchUpdate"
+              "$ref": "#/definitions/ClusterForPatchUpdate"
             }
           }
         ],
@@ -452,12 +459,16 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HorizonDbCluster"
+              "$ref": "#/definitions/Cluster"
             }
           },
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor for the cluster update operation."
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -483,16 +494,16 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/HorizonDbCluster"
+          "final-state-schema": "#/definitions/Cluster"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "HorizonDbClusters_Delete",
+        "operationId": "Clusters_Delete",
         "tags": [
-          "HorizonDbClusters"
+          "Clusters"
         ],
-        "description": "Deletes a HorizonDB cluster.",
+        "description": "Deletes a HorizonDB cluster, its Cluster-scoped Endpoint, and all remaining child resources. For an accepted deletion, the long-running operation remains nonterminal until physical deletion completes and point GET returns 404 Not Found.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -511,7 +522,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -580,7 +591,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -632,7 +643,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -679,7 +690,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "properties",
@@ -737,7 +748,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -784,7 +795,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "properties",
@@ -842,7 +853,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -894,7 +905,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "backupName",
@@ -953,7 +964,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -1000,7 +1011,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -1042,7 +1053,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "resource",
@@ -1115,7 +1126,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "properties",
@@ -1185,7 +1196,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -1244,7 +1255,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -1291,7 +1302,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "configurationName",
@@ -1343,7 +1354,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "configurationName",
@@ -1426,7 +1437,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "configurationName",
@@ -1506,7 +1517,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "configurationName",
@@ -1575,7 +1586,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -1622,7 +1633,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "destinationName",
@@ -1674,7 +1685,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "destinationName",
@@ -1757,7 +1768,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "destinationName",
@@ -1837,7 +1848,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "destinationName",
@@ -1909,7 +1920,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "destinationName",
@@ -1991,7 +2002,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "destinationName",
@@ -2048,7 +2059,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "destinationName",
@@ -2110,7 +2121,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "destinationName",
@@ -2203,7 +2214,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "destinationName",
@@ -2257,6 +2268,77 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/failover": {
+      "post": {
+        "operationId": "Clusters_Failover",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Triggers a failover operation for the HorizonDB cluster. The service selects the new read-write node using the same mechanics as automatic failover.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fail over a HorizonDB cluster": {
+            "$ref": "./examples/Clusters_Failover.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/microsoftEntraAdministrators": {
       "get": {
         "operationId": "MicrosoftEntraAdministrators_List",
@@ -2282,7 +2364,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -2334,7 +2416,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "objectId",
@@ -2389,7 +2471,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "objectId",
@@ -2475,7 +2557,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "objectId",
@@ -2552,7 +2634,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -2604,7 +2686,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "poolName",
@@ -2663,7 +2745,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "poolName",
@@ -2725,7 +2807,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "poolName",
@@ -2792,7 +2874,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "poolName",
@@ -2890,7 +2972,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "poolName",
@@ -2979,7 +3061,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "poolName",
@@ -3041,7 +3123,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "poolName",
@@ -3108,7 +3190,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "poolName",
@@ -3206,7 +3288,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "poolName",
@@ -3301,7 +3383,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "poolName",
@@ -3390,7 +3472,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -3442,7 +3524,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
@@ -3492,7 +3574,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
@@ -3557,7 +3639,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
@@ -3629,7 +3711,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -3681,7 +3763,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "groupName",
@@ -3713,222 +3795,6 @@
             "$ref": "./examples/PrivateLinkResources_Get.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/restart": {
-      "post": {
-        "operationId": "HorizonDbClusters_Restart",
-        "tags": [
-          "HorizonDbClusters"
-        ],
-        "description": "Restarts a HorizonDB cluster.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HorizonDbCluster"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Restart a HorizonDB cluster": {
-            "$ref": "./examples/Clusters_Restart.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/start": {
-      "post": {
-        "operationId": "HorizonDbClusters_Start",
-        "tags": [
-          "HorizonDbClusters"
-        ],
-        "description": "Starts a stopped HorizonDB cluster.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HorizonDbCluster"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Start a HorizonDB cluster": {
-            "$ref": "./examples/Clusters_Start.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/stop": {
-      "post": {
-        "operationId": "HorizonDbClusters_Stop",
-        "tags": [
-          "HorizonDbClusters"
-        ],
-        "description": "Stops a running HorizonDB cluster.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HorizonDbCluster"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Stop a HorizonDB cluster": {
-            "$ref": "./examples/Clusters_Stop.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups": {
@@ -5911,6 +5777,25 @@
         ]
       }
     },
+    "Cluster": {
+      "type": "object",
+      "description": "Represents the HorizonDB cluster.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
     "ClusterCapability": {
       "type": "object",
       "description": "The HorizonDB Cluster capabilities available in a location.",
@@ -5949,6 +5834,30 @@
         "supportedFeatures"
       ]
     },
+    "ClusterCreateMode": {
+      "type": "string",
+      "description": "Controls how a HorizonDB cluster PUT request is processed.",
+      "enum": [
+        "Create",
+        "PointInTimeRestore"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterCreateMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Create",
+            "value": "Create",
+            "description": "Process the request as a normal cluster creation."
+          },
+          {
+            "name": "PointInTimeRestore",
+            "value": "PointInTimeRestore",
+            "description": "Create the cluster from a point-in-time restore."
+          }
+        ]
+      }
+    },
     "ClusterFeatureCapability": {
       "type": "object",
       "description": "A HorizonDB Cluster feature supported in a location.",
@@ -5968,6 +5877,196 @@
         "name",
         "status"
       ]
+    },
+    "ClusterForPatchUpdate": {
+      "type": "object",
+      "description": "HorizonDB cluster for update operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/ClusterPropertiesForPatchUpdate",
+          "description": "The properties that can be updated for a HorizonDB cluster."
+        }
+      }
+    },
+    "ClusterListResult": {
+      "type": "object",
+      "description": "The response of a Cluster list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Cluster items on this page",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ClusterProperties": {
+      "type": "object",
+      "description": "Properties of a HorizonDB cluster.",
+      "properties": {
+        "postgreSqlVersion": {
+          "$ref": "#/definitions/PostgreSqlVersion",
+          "description": "The PostgreSQL major version used by the HorizonDB cluster. API version 2026-09-01 accepts only 17. This property is required on every PUT and is immutable after creation. On replacement, resubmitting 17 is accepted and any other value is rejected. For point-in-time restore, PostgreSQL version is the only new-cluster property inherited from the source backup metadata, and the value in the request must match that version. All other new-cluster configuration comes from the request or service defaults.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "creationMode": {
+          "$ref": "#/definitions/ClusterCreateMode",
+          "description": "The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must match the source backup's major version, and the target cluster location must match the source cluster location until cross-region point-in-time restore is supported. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "pointInTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The requested point in time, in UTC, to restore from. This property is required when creationMode is PointInTimeRestore and must be absent for other creation modes or when creationMode is omitted. The service honors this value for same-region restore. Until cross-region point-in-time restore is supported, the target cluster location must match the source cluster location; a cross-region request is rejected synchronously with 400 CrossRegionPointInTimeRestoreNotSupported and does not create or modify a resource. This property can only be specified during resource creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "creationSourceClusterResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the source HorizonDB cluster used by the selected creation mode. This property is required for PointInTimeRestore and other source-based creation modes, and must be absent when creationMode is Create or omitted. Until cross-region point-in-time restore is supported, PointInTimeRestore requires the target and source clusters to be in the same Azure region. A source cluster does not need to have a pool to be restored, provided an available backup exists. This immutable creation-provenance value does not change after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HorizonDb/clusters"
+              }
+            ]
+          }
+        },
+        "network": {
+          "$ref": "#/definitions/Network",
+          "description": "The network configuration for the cluster. When this object is omitted, the service defaults it to publicAccess Disabled.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "backup": {
+          "$ref": "#/definitions/BackupProperties",
+          "description": "The backup configuration for the cluster.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "state": {
+          "$ref": "#/definitions/ClusterState",
+          "description": "Current state of the cluster.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the cluster.",
+          "readOnly": true
+        },
+        "readWritePool": {
+          "$ref": "#/definitions/ReadWritePoolProperties",
+          "description": "The current designated read-write pool and read-write status for the cluster.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "postgreSqlVersion",
+        "state",
+        "provisioningState",
+        "readWritePool"
+      ]
+    },
+    "ClusterPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Properties of a HorizonDB cluster for update operations.",
+      "properties": {
+        "network": {
+          "$ref": "#/definitions/NetworkForPatchUpdate",
+          "description": "The network configuration to update for the cluster.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "backup": {
+          "$ref": "#/definitions/BackupPropertiesForPatchUpdate",
+          "description": "The backup configuration for the cluster.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
+    "ClusterState": {
+      "type": "string",
+      "description": "Current state of a HorizonDB cluster.",
+      "enum": [
+        "Ready",
+        "Provisioning",
+        "Deleting",
+        "Inaccessible",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "Is ready and operational"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Is provisioning"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Is being deleted"
+          },
+          {
+            "name": "Inaccessible",
+            "value": "Inaccessible",
+            "description": "Is inaccessible"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Is being updated"
+          }
+        ]
+      }
     },
     "ComputeGenerationCapability": {
       "type": "object",
@@ -6087,36 +6186,6 @@
         "memoryPerVCoreInMb"
       ]
     },
-    "CreateModeCluster": {
-      "type": "string",
-      "description": "The mode to create a new HorizonDB cluster.",
-      "enum": [
-        "Create",
-        "Update",
-        "PointInTimeRestore"
-      ],
-      "x-ms-enum": {
-        "name": "CreateModeCluster",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Create",
-            "value": "Create",
-            "description": "Create a new cluster"
-          },
-          {
-            "name": "Update",
-            "value": "Update",
-            "description": "Update an existing cluster"
-          },
-          {
-            "name": "PointInTimeRestore",
-            "value": "PointInTimeRestore",
-            "description": "Create cluster from point-in-time restore"
-          }
-        ]
-      }
-    },
     "CreateModePool": {
       "type": "string",
       "description": "The mode to create a new HorizonDB cluster.",
@@ -6179,6 +6248,49 @@
       ],
       "x-ms-discriminator-value": "Fabric"
     },
+    "FailoverProperties": {
+      "type": "object",
+      "description": "The current automatic and requested failover eligibility for a cluster.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/FailoverState",
+          "description": "The current readiness state for both automatic failover and a caller-requested failover operation.",
+          "readOnly": true
+        },
+        "unavailableReason": {
+          "type": "string",
+          "description": "The reason failover is not ready. This property is present only when state is NotReady and absent when state is Ready. Valid reasons are that no read-write pool is designated, the designated read-write pool has fewer than two nodes, the designated read-write pool is stopped or shut down, or its read-only nodes are not functional.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "FailoverState": {
+      "type": "string",
+      "description": "The readiness state for automatic and caller-requested failover.",
+      "enum": [
+        "Ready",
+        "NotReady"
+      ],
+      "x-ms-enum": {
+        "name": "FailoverState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "Failover is ready."
+          },
+          {
+            "name": "NotReady",
+            "value": "NotReady",
+            "description": "Failover is not ready. Inspect unavailableReason for details."
+          }
+        ]
+      }
+    },
     "GeoRedundancyState": {
       "type": "string",
       "description": "Indicates the geo-redundancy state.",
@@ -6203,352 +6315,6 @@
         ]
       }
     },
-    "HorizonDbCluster": {
-      "type": "object",
-      "description": "Represents the HorizonDB cluster.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HorizonDbClusterProperties",
-          "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "HorizonDbClusterAuthConfig": {
-      "type": "object",
-      "description": "Authentication configuration for a HorizonDB cluster.",
-      "properties": {
-        "entraIdAuth": {
-          "$ref": "#/definitions/AuthenticationState",
-          "description": "Indicates whether Microsoft Entra ID authentication is enabled or disabled."
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The Microsoft Entra tenant ID."
-        },
-        "passwordAuth": {
-          "$ref": "#/definitions/AuthenticationState",
-          "description": "Indicates whether password authentication is enabled or disabled."
-        }
-      }
-    },
-    "HorizonDbClusterForPatchUpdate": {
-      "type": "object",
-      "description": "HorizonDB cluster for update operations.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "properties": {
-          "$ref": "#/definitions/HorizonDbClusterPropertiesForPatchUpdate",
-          "description": "The properties that can be updated for a HorizonDB cluster."
-        }
-      }
-    },
-    "HorizonDbClusterListResult": {
-      "type": "object",
-      "description": "The response of a HorizonDbCluster list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The HorizonDbCluster items on this page",
-          "items": {
-            "$ref": "#/definitions/HorizonDbCluster"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "HorizonDbClusterMirroring": {
-      "type": "object",
-      "description": "Mirroring configuration for a HorizonDB cluster.",
-      "properties": {
-        "databaseNames": {
-          "type": "array",
-          "description": "The names of the databases to mirror.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "userAssignedIdentityId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource ID of the user-assigned managed identity used for mirroring.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
-        }
-      }
-    },
-    "HorizonDbClusterParameterGroupConnectionProperties": {
-      "type": "object",
-      "description": "Connection information for HorizonDB parameter group.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource ID of the connected parameter group.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        },
-        "syncStatus": {
-          "type": "string",
-          "description": "Indication of if parameter group is applied on HorizonDB resource.",
-          "readOnly": true
-        },
-        "applyImmediately": {
-          "type": "boolean",
-          "description": "Indicates whether the parameters should be applied immediately.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        }
-      }
-    },
-    "HorizonDbClusterProperties": {
-      "type": "object",
-      "description": "Properties of a HorizonDB cluster.",
-      "properties": {
-        "administratorLogin": {
-          "type": "string",
-          "description": "The administrator login name.",
-          "minLength": 1,
-          "maxLength": 63,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "administratorLoginPassword": {
-          "type": "string",
-          "format": "password",
-          "description": "The administrator login password.",
-          "minLength": 8,
-          "maxLength": 128,
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
-        },
-        "version": {
-          "type": "string",
-          "description": "The version of the HorizonDB cluster."
-        },
-        "createMode": {
-          "$ref": "#/definitions/CreateModeCluster",
-          "description": "The mode to create a new HorizonDB cluster."
-        },
-        "pointInTimeUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Restore point creation time specifying the time to restore from."
-        },
-        "sourceClusterResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The source cluster resource ID for restore or replica creation."
-        },
-        "poolName": {
-          "type": "string",
-          "description": "The pool name for restore or replica operations."
-        },
-        "replicaCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of replicas.",
-          "minimum": 1,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "vCores": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of vCores.",
-          "minimum": 1,
-          "maximum": 96,
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "processorType": {
-          "type": "string",
-          "description": "The processor type for the HorizonDB cluster."
-        },
-        "network": {
-          "$ref": "#/definitions/Network",
-          "description": "The network related info."
-        },
-        "state": {
-          "$ref": "#/definitions/State",
-          "description": "Current state of the cluster.",
-          "readOnly": true
-        },
-        "fullyQualifiedDomainName": {
-          "type": "string",
-          "description": "The fully qualified domain name of the cluster.",
-          "readOnly": true
-        },
-        "readonlyEndpoint": {
-          "type": "string",
-          "description": "The fully qualified domain name used for readonly endpoint for the cluster.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the cluster.",
-          "readOnly": true
-        },
-        "zonePlacementPolicy": {
-          "$ref": "#/definitions/ZonePlacementPolicy",
-          "description": "Defines how replicas are placed across availability zones.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "parameterGroup": {
-          "$ref": "#/definitions/HorizonDbClusterParameterGroupConnectionProperties",
-          "description": "Defines connection to a parameter group.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        },
-        "backup": {
-          "$ref": "#/definitions/BackupProperties",
-          "description": "Backup configuration for the HorizonDB cluster.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "authConfig": {
-          "$ref": "#/definitions/HorizonDbClusterAuthConfig",
-          "description": "Authentication configuration for the HorizonDB cluster.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "computeModel": {
-          "$ref": "#/definitions/HorizonDbComputeModel",
-          "description": "The compute model for the cluster.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "mirroring": {
-          "$ref": "#/definitions/HorizonDbClusterMirroring",
-          "description": "Mirroring configuration for the HorizonDB cluster.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "administratorLogin"
-      ]
-    },
-    "HorizonDbClusterPropertiesForPatchUpdate": {
-      "type": "object",
-      "description": "Properties of a HorizonDB cluster for update operations.",
-      "properties": {
-        "administratorLoginPassword": {
-          "type": "string",
-          "format": "password",
-          "description": "The administrator login password.",
-          "minLength": 8,
-          "maxLength": 128,
-          "x-ms-mutability": [
-            "update"
-          ],
-          "x-ms-secret": true
-        },
-        "vCores": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of vCores.",
-          "minimum": 1,
-          "maximum": 96,
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
-        "parameterGroup": {
-          "$ref": "#/definitions/HorizonDbClusterParameterGroupConnectionProperties",
-          "description": "Defines connection to a parameter group."
-        },
-        "backup": {
-          "$ref": "#/definitions/BackupPropertiesForPatchUpdate",
-          "description": "Backup configuration for the HorizonDB cluster.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
-        "authConfig": {
-          "$ref": "#/definitions/HorizonDbClusterAuthConfig",
-          "description": "Authentication configuration for the HorizonDB cluster.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
-        "computeModel": {
-          "$ref": "#/definitions/HorizonDbComputeModel",
-          "description": "The compute model for the cluster.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
-        "mirroring": {
-          "$ref": "#/definitions/HorizonDbClusterMirroring",
-          "description": "Mirroring configuration for the HorizonDB cluster.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        }
-      }
-    },
     "HorizonDbClusterResourceId": {
       "type": "string",
       "format": "arm-id",
@@ -6557,55 +6323,6 @@
         "allowedResources": [
           {
             "type": "Microsoft.HorizonDb/clusters"
-          }
-        ]
-      }
-    },
-    "HorizonDbComputeModel": {
-      "type": "object",
-      "description": "The compute model for a HorizonDB cluster.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/HorizonDbComputeModelType",
-          "description": "The compute model type. Supported values: 'Provisioned', 'Serverless'."
-        },
-        "vCores": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The fixed vCore count for Provisioned compute."
-        },
-        "minvCores": {
-          "type": "number",
-          "format": "double",
-          "description": "The minimum vCores for Serverless compute. Defines the lower autoscaling bound."
-        },
-        "maxvCores": {
-          "type": "number",
-          "format": "double",
-          "description": "The maximum vCores for Serverless compute. Defines the upper autoscaling bound."
-        }
-      }
-    },
-    "HorizonDbComputeModelType": {
-      "type": "string",
-      "description": "The compute model type.",
-      "enum": [
-        "Provisioned",
-        "Serverless"
-      ],
-      "x-ms-enum": {
-        "name": "HorizonDbComputeModelType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Provisioned",
-            "value": "Provisioned",
-            "description": "Provisioned compute."
-          },
-          {
-            "name": "Serverless",
-            "value": "Serverless",
-            "description": "Serverless compute."
           }
         ]
       }
@@ -7385,10 +7102,48 @@
       "type": "object",
       "description": "Network properties.",
       "properties": {
-        "publicNetworkAccess": {
+        "publicAccess": {
+          "type": "string",
+          "description": "Specifies whether public access is enabled for the cluster. The service defaults to Disabled when this property is omitted.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccessState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Public network access is enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Public network access is disabled"
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "NetworkForPatchUpdate": {
+      "type": "object",
+      "description": "Network properties for updating a HorizonDB cluster.",
+      "properties": {
+        "publicAccess": {
           "$ref": "#/definitions/PublicNetworkAccessState",
-          "description": "The flag indicating whether public ip is requested.",
-          "readOnly": true
+          "description": "Specifies whether public access is enabled for the cluster. Omission preserves the current value.",
+          "x-ms-mutability": [
+            "update"
+          ]
         }
       }
     },
@@ -7596,6 +7351,18 @@
         "name",
         "status"
       ]
+    },
+    "PoolResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "An Azure resource ID that identifies a HorizonDB pool.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.HorizonDb/clusters/pools"
+          }
+        ]
+      }
     },
     "PostgreSqlCapabilityVersion": {
       "type": "string",
@@ -7805,6 +7572,50 @@
         ]
       }
     },
+    "ReadWritePoolProperties": {
+      "type": "object",
+      "description": "The current designated read-write pool and read-write status for a HorizonDB cluster. When a pool is created while the cluster currently has no pools, the service automatically designates the new pool as the read-write pool. This behavior also applies after all pools that existed earlier in the cluster's lifetime have been deleted.",
+      "properties": {
+        "designatedPoolResourceId": {
+          "$ref": "#/definitions/PoolResourceId",
+          "description": "The Azure resource ID of the pool designated to host the cluster's read-write node. The pool is a child resource of this cluster. When a pool is created while the cluster currently has no pools, the service automatically sets this property to the new pool's resource ID, including when all pools that existed earlier in the cluster's lifetime were deleted. This property is absent when no pool is designated.",
+          "readOnly": true
+        },
+        "failover": {
+          "$ref": "#/definitions/FailoverProperties",
+          "description": "The current failover status for the read-write node. This object is always returned on reads. When failover is not ready, state is NotReady and unavailableReason explains why.",
+          "readOnly": true
+        },
+        "zoneRedundancy": {
+          "$ref": "#/definitions/ReadWritePoolZoneRedundancyProperties",
+          "description": "The current zone redundancy status for the read-write node. This object is always returned on reads. When zone redundancy is not ready, state is NotReady and unavailableReason explains why.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "failover",
+        "zoneRedundancy"
+      ]
+    },
+    "ReadWritePoolZoneRedundancyProperties": {
+      "type": "object",
+      "description": "The current zone redundancy status for the read-write node.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ZoneRedundancyState",
+          "description": "The current zone-redundancy readiness state for the read-write node. The state is NotReady when no read-write pool is designated.",
+          "readOnly": true
+        },
+        "unavailableReason": {
+          "type": "string",
+          "description": "The reason zone redundancy is not ready. This property is present only when state is NotReady and absent when state is Ready. Valid reasons are that no read-write pool is designated, the designated read-write pool has fewer than two nodes, all nodes in the designated read-write pool are deployed in a single availability zone, or the region does not support availability zones.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
     "ReplicaRole": {
       "type": "string",
       "description": "Role of the replica.",
@@ -7901,26 +7712,26 @@
         ]
       }
     },
-    "ZonePlacementPolicy": {
+    "ZoneRedundancyState": {
       "type": "string",
-      "description": "The zone redundancy option for the cluster.",
+      "description": "The readiness state for zone redundancy of the read-write node.",
       "enum": [
-        "Strict",
-        "BestEffort"
+        "Ready",
+        "NotReady"
       ],
       "x-ms-enum": {
-        "name": "ZonePlacementPolicy",
+        "name": "ZoneRedundancyState",
         "modelAsString": true,
         "values": [
           {
-            "name": "Strict",
-            "value": "Strict",
-            "description": "Enforce zonal redundancy"
+            "name": "Ready",
+            "value": "Ready",
+            "description": "Zone redundancy is ready."
           },
           {
-            "name": "BestEffort",
-            "value": "BestEffort",
-            "description": "Best-effort placement (default)"
+            "name": "NotReady",
+            "value": "NotReady",
+            "description": "Zone redundancy is not ready. Inspect unavailableReason for details."
           }
         ]
       }

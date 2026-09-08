@@ -18,15 +18,6 @@ namespace Microsoft.HorizonDb;
 scalar ChangeDataCaptureResourceName extends string;
 
 @added(Versions.v2026_09_01)
-@doc("An Azure resource ID that identifies a HorizonDB cluster.")
-scalar HorizonDbClusterResourceId
-  extends armResourceIdentifier<[
-    {
-      type: "Microsoft.HorizonDb/clusters",
-    }
-  ]>;
-
-@added(Versions.v2026_09_01)
 @doc("An Azure resource ID that identifies a HorizonDB change data capture destination.")
 scalar ChangeDataCaptureDestinationResourceId
   extends armResourceIdentifier<[
@@ -65,7 +56,7 @@ scalar ChangeDataCaptureUserAssignedIdentityResourceId
 @added(Versions.v2026_09_01)
 @doc("The singleton change data capture capability for a HorizonDB cluster.")
 @singleton("default")
-@parentResource(HorizonDbCluster)
+@parentResource(Cluster)
 model ChangeDataCaptureCapability
   is Azure.ResourceManager.ProxyResource<ChangeDataCaptureCapabilityProperties> {
   ...ResourceNameParameter<
@@ -79,7 +70,7 @@ model ChangeDataCaptureCapability
 
 @added(Versions.v2026_09_01)
 @doc("A reusable Microsoft Fabric destination for HorizonDB change data capture configurations.")
-@parentResource(HorizonDbCluster)
+@parentResource(Cluster)
 model ChangeDataCaptureDestination
   is Azure.ResourceManager.ProxyResource<ChangeDataCaptureDestinationProperties> {
   @doc("The caller-selected name of the change data capture destination.")
@@ -107,7 +98,7 @@ model IdentityAssignment
 
 @added(Versions.v2026_09_01)
 @doc("A HorizonDB database enrollment for Microsoft Fabric Mirroring.")
-@parentResource(HorizonDbCluster)
+@parentResource(Cluster)
 model ChangeDataCaptureConfiguration
   is Azure.ResourceManager.ProxyResource<ChangeDataCaptureConfigurationProperties> {
   @doc("The caller-selected ARM-safe name of the change data capture configuration. The exact PostgreSQL database name is stored in properties.databaseName.")

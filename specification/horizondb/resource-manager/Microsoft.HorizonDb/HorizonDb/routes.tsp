@@ -13,24 +13,66 @@ namespace Microsoft.HorizonDb;
 
 alias HorizonDbPrivateEndpointOperations = Azure.ResourceManager.PrivateEndpoints<PrivateEndpointConnection>;
 
+@renamedFrom(Versions.v2026_09_01, "HorizonDbClusters")
 @armResourceOperations
-interface HorizonDbClusters {
+interface Clusters {
   @doc("Gets information about a HorizonDB cluster.")
-  get is ArmResourceRead<HorizonDbCluster>;
+  get is ArmResourceRead<Cluster>;
 
   @doc("Creates a new HorizonDB cluster or updates an existing cluster.")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<HorizonDbCluster>;
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "createOrUpdate")
+  @sharedRoute
+  createOrUpdateLegacy is ArmResourceCreateOrReplaceAsync<Cluster>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The AutoRest emitter infers final-state-via from polling metadata. Marking this standard ARM PUT as an LRO without polling decorators emits x-ms-long-running-operation while intentionally omitting x-ms-long-running-operation-options."
+  @added(Versions.v2026_09_01)
+  @doc("Creates a new HorizonDB cluster or replaces an existing cluster. PointInTimeRestore creates the new Cluster resource and hydrates its service-owned database storage from an available source backup. It does not clone source pools, Pool-scoped endpoints, firewall rules, parameter-group associations, or other child resources. The new Cluster receives its service-generated Cluster-scoped Endpoint named cluster. PostgreSQL version is inherited from backup metadata; all other new-cluster configuration comes from the request or service defaults. Until cross-region point-in-time restore is supported, the target cluster location must match the source cluster location; a cross-region request is rejected synchronously with 400 CrossRegionPointInTimeRestoreNotSupported and does not create or modify a resource.")
+  @sharedRoute
+  @Azure.ClientGenerator.Core.Legacy.markAsLro
+  @autoRoute
+  @armResourceCreateOrUpdate(Cluster)
+  @put
+  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    ResourceInstanceParameters<Cluster>,
+    Cluster,
+    ClusterReplaceAcceptedResponse | ClusterCreateAcceptedResponse,
+    ErrorResponse
+  >;
+
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "update")
+  @sharedRoute
   @doc("Updates an existing HorizonDB cluster (e.g., tags, virtual cores, replica count).")
+  updateLegacy is ArmCustomPatchAsync<Cluster, ClusterForPatchUpdate>;
+
+  @added(Versions.v2026_09_01)
+  @sharedRoute
+  @doc("Updates an existing HorizonDB cluster.")
   update is ArmCustomPatchAsync<
-    HorizonDbCluster,
-    HorizonDbClusterForPatchUpdate
+    Cluster,
+    ClusterForPatchUpdate,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
+    ClusterUpdateAcceptedHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @doc("Deletes a HorizonDB cluster.")
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "delete")
+  @sharedRoute
+  deleteLegacy is ArmResourceDeleteWithoutOkAsync<
+    Cluster,
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
+  >;
+
+  @added(Versions.v2026_09_01)
+  @doc("Deletes a HorizonDB cluster, its Cluster-scoped Endpoint, and all remaining child resources. For an accepted deletion, the long-running operation remains nonterminal until physical deletion completes and point GET returns 404 Not Found.")
+  @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<
-    HorizonDbCluster,
+    Cluster,
     Response =
       | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
           Azure.Core.Foundations.RetryAfterHeader>
@@ -38,36 +80,55 @@ interface HorizonDbClusters {
   >;
 
   @doc("Lists all HorizonDB clusters in a resource group.")
-  listByResourceGroup is ArmResourceListByParent<HorizonDbCluster>;
+  listByResourceGroup is ArmResourceListByParent<Cluster>;
 
   @doc("Lists all HorizonDB clusters in a subscription.")
-  listBySubscription is ArmListBySubscription<HorizonDbCluster>;
+  listBySubscription is ArmListBySubscription<Cluster>;
 
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_09_01)
   @doc("Starts a stopped HorizonDB cluster.")
   start is ArmResourceActionAsync<
-    HorizonDbCluster,
+    Cluster,
     void,
-    ArmResponse<HorizonDbCluster>,
+    ArmResponse<Cluster>,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_09_01)
   @doc("Stops a running HorizonDB cluster.")
   stop is ArmResourceActionAsync<
-    HorizonDbCluster,
+    Cluster,
     void,
-    ArmResponse<HorizonDbCluster>,
+    ArmResponse<Cluster>,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_09_01)
   @doc("Restarts a HorizonDB cluster.")
   restart is ArmResourceActionAsync<
-    HorizonDbCluster,
+    Cluster,
     void,
-    ArmResponse<HorizonDbCluster>,
+    ArmResponse<Cluster>,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @added(Versions.v2026_09_01)
+  @doc("Triggers a failover operation for the HorizonDB cluster. The service selects the new read-write node using the same mechanics as automatic failover.")
+  @action("failover")
+  failover is ArmResourceActionAsyncBase<
+    Cluster,
+    void,
+    | ArmAcceptedLroResponse<
+        "Resource operation accepted.",
+        LroHeaders = ArmLroLocationHeader &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader
+      >
+    | ArmResponse<Cluster>,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 }
 
@@ -134,33 +195,33 @@ interface HorizonDbFirewallRules {
 interface HorizonDbPrivateEndpointConnections {
   @doc("Gets a private endpoint connection.")
   get is HorizonDbPrivateEndpointOperations.Read<
-    HorizonDbCluster,
+    Cluster,
     PrivateEndpointConnectionResource
   >;
 
   @doc("Lists private endpoint connections in a HorizonDB cluster.")
   list is HorizonDbPrivateEndpointOperations.ListByParent<
-    HorizonDbCluster,
+    Cluster,
     PrivateEndpointConnectionResource
   >;
 
   @doc("Updates a private endpoint connection.")
   @removed(Versions.v2026_05_01_preview)
   update is HorizonDbPrivateEndpointOperations.CustomPatchAsync<
-    HorizonDbCluster,
+    Cluster,
     PrivateEndpointConnectionResource
   >;
 
   @doc("Approves or rejects a private endpoint connection.")
   @added(Versions.v2026_05_01_preview)
   updateStatus is HorizonDbPrivateEndpointOperations.CreateOrReplaceSync<
-    HorizonDbCluster,
+    Cluster,
     PrivateEndpointConnectionResource
   >;
 
   @doc("Deletes a private endpoint connection.")
   delete is HorizonDbPrivateEndpointOperations.DeleteAsync<
-    HorizonDbCluster,
+    Cluster,
     PrivateEndpointConnectionResource,
     Response =
       | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &

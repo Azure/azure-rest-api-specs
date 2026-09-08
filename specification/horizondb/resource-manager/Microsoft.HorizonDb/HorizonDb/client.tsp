@@ -30,11 +30,7 @@ using Azure.ClientGenerator.Core;
   "HorizonDBAuthenticationState",
   "csharp"
 );
-@@clientName(
-  Microsoft.HorizonDb.HorizonDbCluster,
-  "HorizonDBCluster",
-  "csharp"
-);
+@@clientName(Microsoft.HorizonDb.Cluster, "HorizonDBCluster", "csharp");
 @@clientName(
   Microsoft.HorizonDb.HorizonDbAdministrator,
   "HorizonDBAdministrator",
@@ -66,7 +62,7 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbClusterForPatchUpdate,
+  Microsoft.HorizonDb.ClusterForPatchUpdate,
   "HorizonDBClusterPatch",
   "csharp"
 );
@@ -76,20 +72,16 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbClusterProperties,
+  Microsoft.HorizonDb.ClusterProperties,
   "HorizonDBClusterProperties",
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbClusterPropertiesForPatchUpdate,
+  Microsoft.HorizonDb.ClusterPropertiesForPatchUpdate,
   "HorizonDBClusterPatchProperties",
   "csharp"
 );
-@@clientName(
-  Microsoft.HorizonDb.HorizonDbClusters,
-  "HorizonDBClusters",
-  "csharp"
-);
+@@clientName(Microsoft.HorizonDb.Clusters, "HorizonDBClusters", "csharp");
 @@clientName(
   Microsoft.HorizonDb.HorizonDbFirewallRule,
   "HorizonDBFirewallRule",
@@ -220,7 +212,7 @@ using Azure.ClientGenerator.Core;
 @@clientName(Microsoft.HorizonDb.ReplicaRole, "HorizonDBReplicaRole", "csharp");
 @@clientName(Microsoft.HorizonDb.State, "HorizonDBClusterState", "csharp");
 @@clientName(
-  Microsoft.HorizonDb.ZonePlacementPolicy,
+  Microsoft.HorizonDb.ZonePlacementEnforcement,
   "HorizonDBZonePlacementPolicy",
   "csharp"
 );
@@ -250,12 +242,12 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbClusterProperties.pointInTimeUTC,
+  Microsoft.HorizonDb.ClusterProperties.legacyPointInTime,
   "PointInTimeUtcOn",
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbClusterProperties.readonlyEndpoint,
+  Microsoft.HorizonDb.ClusterProperties.readonlyEndpoint,
   "ReadOnlyEndpoint",
   "csharp"
 );
