@@ -4411,6 +4411,58 @@ model VectorEmbedding {
    * The number of dimensions in the vector.
    */
   dimensions: int32;
+
+  /**
+   * The embedding source configuration to automatically generate embeddings at the configured paths.
+   */
+  @added(Versions.v2026_09_01_preview)
+  embeddingSource?: EmbeddingSource;
+}
+
+/**
+ * Represents the embedding source configuration for Integrated Embeddings.
+ * When specified on a vector embedding, the service will automatically generate embeddings from source document fields.
+ */
+@added(Versions.v2026_09_01_preview)
+model EmbeddingSource {
+  /**
+   * The non-empty list of top-level source paths in the document to generate
+   * embeddings from. A source path cannot be the same as the destination vector
+   * embedding path.
+   */
+  @minItems(1)
+  sourcePaths: string[];
+
+  /**
+   * The endpoint URL of the AI model provider resource.
+   */
+  endpoint: string;
+
+  /**
+   * The model deployment name used for generating embeddings.
+   */
+  deploymentName: string;
+
+  /**
+   * The name of the embedding model.
+   */
+  modelName: string;
+
+  /**
+   * The authentication type Azure Cosmos DB uses when calling the embedding model endpoint.
+   */
+  authType: EmbeddingSourceAuthenticationType;
+}
+
+/**
+ * The type of authentication to use when calling the embedding provider API.
+ */
+@added(Versions.v2026_09_01_preview)
+union EmbeddingSourceAuthenticationType {
+  string,
+
+  /** Microsoft Entra ID based authentication. */
+  Entra: "Entra",
 }
 
 /**
