@@ -5,7 +5,7 @@
 ## Configuration
 
 ```yaml
-title: MsengEnumClient
+title: CredValidationClient
 openapi-type: arm
 tag: package-2026-01-01
 ```
@@ -14,14 +14,14 @@ tag: package-2026-01-01
 
 ```yaml $(tag) == 'package-2026-01-01'
 input-file:
-  - mseng.json
+  - credvalidation.json
 ```
 
 ## Python
 
 ```yaml $(python)
 python-mode: create
-package-name: azure-mgmt-msengenum
+package-name: azure-mgmt-credvalidation
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
