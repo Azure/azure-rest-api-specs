@@ -987,6 +987,12 @@ union OpenIdConnectClientCredentialMethod {
 );
 
 @@clientName(
+  ContainerAppPrivateEndpointConnections,
+  "ContainerAppContainerPrivateEndpointConnections",
+  "csharp"
+);
+
+@@clientName(
   PrivateEndpointConnectionProvisioningState,
   "ContainerAppPrivateEndpointConnectionProvisioningState",
   "csharp"
