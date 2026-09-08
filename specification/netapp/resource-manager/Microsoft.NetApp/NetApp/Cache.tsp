@@ -217,17 +217,17 @@ model SmbSettings {
   smbEncryption?: SmbEncryptionState;
 
   /**
-   * Enables access-based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume
+   * Enables access-based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol cache
    */
   smbAccessBasedEnumeration?: SmbAccessBasedEnumeration;
 
   /**
-   * Enables non-browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume
+   * Enables non-browsable property for SMB Shares. Only applicable for SMB/DualProtocol cache
    */
   smbNonBrowsable?: SmbNonBrowsable;
 
   /**
-   * Enables or disables SMB opportunistic lock property for SMB Shares. Only applicable for SMB/DualProtocol volume
+   * Enables or disables SMB opportunistic lock property for SMB Shares. Only applicable for SMB/DualProtocol cache
    */
   @added(Versions.v2026_07_15_preview)
   smbOplocks?: SmbOplocks;
