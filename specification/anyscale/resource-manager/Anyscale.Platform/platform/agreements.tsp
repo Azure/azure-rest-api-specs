@@ -18,6 +18,7 @@ namespace Anyscale.Platform;
 model Agreement is ProxyResource<AgreementProperties> {
   /** The name that uniquely identifies the agreement (e.g. "default" for the primary terms). */
   @pattern("^[a-zA-Z0-9_-]+$")
+  @maxLength(256)
   @key("agreementName")
   @path
   @segment("agreements")

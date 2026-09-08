@@ -17,7 +17,8 @@ namespace Anyscale.Platform;
 @resource("cloudResources")
 model CloudResource is TrackedResource<CloudResourceProperties> {
   /** The name of the cloud resource */
-  @pattern("^[a-zA-Z0-9]*$")
+  @pattern("^[a-zA-Z0-9_-]+$")
+  @maxLength(256)
   @key("cloudResourceName")
   @path
   @segment("cloudResources")
