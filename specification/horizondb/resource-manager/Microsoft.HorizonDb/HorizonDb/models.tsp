@@ -288,6 +288,7 @@ model ClusterProperties {
   readonlyEndpoint?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "API version 2026-09-01 guarantees provisioningState in every Cluster response; the 2026-01-20-preview projection remains optional."
+  @typeChangedFrom(Versions.v2026_09_01, LegacyProvisioningState)
   @madeRequired(Versions.v2026_09_01)
   @doc("The provisioning state of the cluster.")
   @visibility(Lifecycle.Read)
@@ -538,6 +539,7 @@ model HorizonDbPoolProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: azureLocation;
 
+  @removed(Versions.v2026_09_01)
   @doc("Current state of the pool.")
   @visibility(Lifecycle.Read)
   state?: State;
@@ -555,6 +557,7 @@ model HorizonDbPoolProperties {
   createMode?: CreateModePool;
 
   @doc("The provisioning state of the pool.")
+  @typeChangedFrom(Versions.v2026_09_01, LegacyProvisioningState)
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
@@ -590,6 +593,7 @@ model HorizonDbReplicaProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   role?: ReplicaRole;
 
+  @removed(Versions.v2026_09_01)
   @doc("Current status of the replica.")
   @visibility(Lifecycle.Read)
   status?: State;
@@ -602,6 +606,7 @@ model HorizonDbReplicaProperties {
   availabilityZone?: string;
 
   @doc("The provisioning state of the replica.")
+  @typeChangedFrom(Versions.v2026_09_01, LegacyProvisioningState)
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
@@ -636,6 +641,7 @@ model HorizonDbFirewallRuleProperties {
   description?: string;
 
   @doc("The provisioning state of the firewall rule.")
+  @typeChangedFrom(Versions.v2026_09_01, LegacyProvisioningState)
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
@@ -663,7 +669,7 @@ model HorizonDbAdministratorProperties {
 
   @doc("The provisioning state of the administrator.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: LegacyProvisioningState;
 }
 
 @added(Versions.v2026_09_01)
@@ -918,8 +924,18 @@ union BackupType {
 }
 
 @added(Versions.v2026_09_01)
-@doc("The PostgreSQL version of a HorizonDB cluster or backup.")
-scalar PostgreSqlVersion extends string;
+@doc("A user-supplied description with a maximum length of 1024 characters.")
+@maxLength(1024)
+scalar WritableDescription extends string;
+
+@added(Versions.v2026_09_01)
+@doc("A PostgreSQL major version supported by HorizonDB. API version 2026-09-01 accepts only 17. Future API versions may add named values, and clients must tolerate unknown values returned by the service.")
+union PostgreSqlVersion {
+  string,
+
+  /** PostgreSQL major version 17. */
+  V17: "17",
+}
 
 @added(Versions.v2026_09_01)
 @doc("The availability status of a HorizonDB capability.")
@@ -1220,6 +1236,7 @@ union ZonePlacementEnforcement {
   BestEffort: "BestEffort",
 }
 
+@removed(Versions.v2026_09_01)
 @doc("Current states.")
 union State {
   string,
@@ -1359,8 +1376,10 @@ union ReplicaRole {
   ReadWrite: "ReadWrite",
 }
 
+@removed(Versions.v2026_09_01)
+@renamedFrom(Versions.v2026_09_01, "ProvisioningState")
 @doc("The provisioning state.")
-union ProvisioningState {
+union LegacyProvisioningState {
   string,
 
   /** Provisioning completed successfully */
@@ -1376,6 +1395,19 @@ union ProvisioningState {
   InProgress: "InProgress",
 
   /** Provisioning is in progress */
+  Provisioning: "Provisioning",
+}
+
+@added(Versions.v2026_09_01)
+@doc("The provisioning state.")
+@lroStatus
+union ProvisioningState {
+  Azure.ResourceManager.ResourceProvisioningState,
+
+  /** The HorizonDB resource operation is actively running. */
+  InProgress: "InProgress",
+
+  /** The HorizonDB resource is still provisioning. */
   Provisioning: "Provisioning",
 }
 
@@ -1403,6 +1435,7 @@ model HorizonDbParameterGroupProperties {
   applyImmediately?: boolean;
 
   @doc("The provisioning state of the parameter group.")
+  @typeChangedFrom(Versions.v2026_09_01, LegacyProvisioningState)
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }

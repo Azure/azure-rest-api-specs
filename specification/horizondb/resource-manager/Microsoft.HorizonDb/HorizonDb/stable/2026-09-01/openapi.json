@@ -6648,11 +6648,6 @@
             "create"
           ]
         },
-        "state": {
-          "$ref": "#/definitions/State",
-          "description": "Current state of the pool.",
-          "readOnly": true
-        },
         "replicaCount": {
           "type": "integer",
           "format": "int32",
@@ -6770,11 +6765,6 @@
             "update",
             "create"
           ]
-        },
-        "status": {
-          "$ref": "#/definitions/State",
-          "description": "Current status of the replica.",
-          "readOnly": true
         },
         "fullyQualifiedDomainName": {
           "type": "string",
@@ -7384,7 +7374,21 @@
     },
     "PostgreSqlVersion": {
       "type": "string",
-      "description": "The PostgreSQL version of a HorizonDB cluster or backup."
+      "description": "A PostgreSQL major version supported by HorizonDB. API version 2026-09-01 accepts only 17. Future API versions may add named values, and clients must tolerate unknown values returned by the service.",
+      "enum": [
+        "17"
+      ],
+      "x-ms-enum": {
+        "name": "PostgreSqlVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "V17",
+            "value": "17",
+            "description": "PostgreSQL major version 17."
+          }
+        ]
+      }
     },
     "PostgreSqlVersionCapability": {
       "type": "object",
@@ -7522,27 +7526,27 @@
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Provisioning completed successfully"
+            "description": "Resource has been created."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Provisioning failed"
+            "description": "Resource creation failed."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "Provisioning was canceled"
+            "description": "Resource creation was canceled."
           },
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "Provisioning is in progress"
+            "description": "The HorizonDB resource operation is actively running."
           },
           {
             "name": "Provisioning",
             "value": "Provisioning",
-            "description": "Provisioning is in progress"
+            "description": "The HorizonDB resource is still provisioning."
           }
         ]
       },
@@ -7636,78 +7640,6 @@
             "name": "ReadWrite",
             "value": "ReadWrite",
             "description": "ReadWrite replica"
-          }
-        ]
-      }
-    },
-    "State": {
-      "type": "string",
-      "description": "Current states.",
-      "enum": [
-        "Ready",
-        "Dropping",
-        "Disabled",
-        "Starting",
-        "Stopping",
-        "Stopped",
-        "Updating",
-        "Healthy",
-        "Succeeded",
-        "Upgrading"
-      ],
-      "x-ms-enum": {
-        "name": "State",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Ready",
-            "value": "Ready",
-            "description": "Is ready and operational"
-          },
-          {
-            "name": "Dropping",
-            "value": "Dropping",
-            "description": "Is being dropped/deleted"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Is disabled"
-          },
-          {
-            "name": "Starting",
-            "value": "Starting",
-            "description": "Is starting up"
-          },
-          {
-            "name": "Stopping",
-            "value": "Stopping",
-            "description": "Is stopping"
-          },
-          {
-            "name": "Stopped",
-            "value": "Stopped",
-            "description": "Is stopped"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "Is being updated"
-          },
-          {
-            "name": "Healthy",
-            "value": "Healthy",
-            "description": "Is healthy"
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Is succeeded"
-          },
-          {
-            "name": "Upgrading",
-            "value": "Upgrading",
-            "description": "Is upgrading"
           }
         ]
       }
