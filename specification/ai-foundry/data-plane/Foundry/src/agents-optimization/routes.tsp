@@ -1,4 +1,4 @@
-// Routes for the AgentsOptimization data-plane surface (V3Preview).
+// Routes for the AgentsOptimization data-plane surface (v1 GA).
 // Follows the Foundry job-lifecycle pattern from servicepatterns.tsp
 // (same pattern as data_generation_jobs, evaluation suites).
 
@@ -23,21 +23,15 @@ interface AgentOptimizationJobs {
    */
   @summary("Create an agent optimization job")
   @route("agent_optimization_jobs")
-  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   @pollingOperation(AgentOptimizationJobs.get)
-  create is postJobPreview<
-    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
-    AgentOptimizationJob
-  >;
+  create is postJob<AgentOptimizationJob>;
 
   /**
    * Estimates dataset row count, per-layer model call volumes, and (when pricing is available) cost bands for an optimization job with the given inputs, without submitting the job.
    */
   @summary("Estimate an agent optimization job")
   @route("agent_optimization_jobs:estimate")
-  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-  estimate is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
+  estimate is FoundryDataPlaneOperation<
     {
       /** The inputs to estimate against. */
       @body inputs: AgentOptimizationEstimateJobInputs;
@@ -50,20 +44,14 @@ interface AgentOptimizationJobs {
    */
   @summary("Get an agent optimization job")
   @route("agent_optimization_jobs/{jobId}")
-  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-  get is queryJobStatusPreview<
-    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
-    AgentOptimizationJob
-  >;
+  get is queryJobStatus<AgentOptimizationJob>;
 
   /**
    * Lists optimization jobs with cursor pagination and optional status or agent name filters.
    */
   @summary("List agent optimization jobs")
   @route("agent_optimization_jobs")
-  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-  list is listJobsPreview<
-    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
+  list is listJobs<
     AgentOptimizationJob,
     {
       @doc("Filter to jobs in this lifecycle state.")
@@ -81,11 +69,7 @@ interface AgentOptimizationJobs {
    */
   @summary("Cancel an agent optimization job")
   @route("agent_optimization_jobs/{jobId}:cancel")
-  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-  cancel is cancelJobPreview<
-    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
-    AgentOptimizationJob
-  >;
+  cancel is cancelJob<AgentOptimizationJob>;
 
   /**
    * Deletes the job and its candidate artifacts, canceling the job first if it is non-terminal.
@@ -93,10 +77,8 @@ interface AgentOptimizationJobs {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
   @summary("Delete an agent optimization job")
   @route("agent_optimization_jobs/{jobId}")
-  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   @delete
-  delete is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
+  delete is FoundryDataPlaneOperation<
     {
       /** The ID of the job to delete. */
       @path jobId: string;
@@ -120,10 +102,8 @@ interface AgentOptimizationJobCandidates {
    */
   @summary("List candidates for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates")
-  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   @list
-  listCandidates is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
+  listCandidates is FoundryDataPlaneOperation<
     {
       /** The ID of the parent optimization job. */
       @path jobId: string;
@@ -141,9 +121,7 @@ interface AgentOptimizationJobCandidates {
    */
   @summary("Get a candidate for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}")
-  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-  getCandidate is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
+  getCandidate is FoundryDataPlaneOperation<
     {
       /** The ID of the parent optimization job. */
       @path jobId: string;
@@ -162,9 +140,7 @@ interface AgentOptimizationJobCandidates {
    */
   @summary("Promote a candidate for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}:promote")
-  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-  promoteCandidate is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.agents_optimization_v3_preview,
+  promoteCandidate is FoundryDataPlaneOperation<
     {
       /** The ID of the parent optimization job. */
       @path jobId: string;

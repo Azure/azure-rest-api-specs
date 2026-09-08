@@ -234,18 +234,6 @@
         "description": "Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry.",
         "parameters": [
           {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AgentsOptimization=V3Preview"
-              ]
-            }
-          },
-          {
             "name": "Operation-Id",
             "in": "header",
             "required": false,
@@ -326,11 +314,6 @@
             }
           },
           "description": "The job to create."
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
         }
       },
       "get": {
@@ -338,18 +321,6 @@
         "summary": "List agent optimization jobs",
         "description": "Lists optimization jobs with cursor pagination and optional status or agent name filters.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AgentsOptimization=V3Preview"
-              ]
-            }
-          },
           {
             "name": "limit",
             "in": "query",
@@ -483,12 +454,7 @@
         },
         "tags": [
           "AgentOptimizationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        ]
       }
     },
     "/agent_optimization_jobs/{jobId}": {
@@ -497,18 +463,6 @@
         "summary": "Get an agent optimization job",
         "description": "Retrieves an optimization job by its identifier.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AgentsOptimization=V3Preview"
-              ]
-            }
-          },
           {
             "name": "jobId",
             "in": "path",
@@ -573,30 +527,13 @@
         },
         "tags": [
           "AgentOptimizationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        ]
       },
       "delete": {
         "operationId": "AgentOptimizationJobs_delete",
         "summary": "Delete an agent optimization job",
         "description": "Deletes the job and its candidate artifacts, canceling the job first if it is non-terminal.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AgentsOptimization=V3Preview"
-              ]
-            }
-          },
           {
             "name": "jobId",
             "in": "path",
@@ -655,12 +592,7 @@
         },
         "tags": [
           "AgentOptimizationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        ]
       }
     },
     "/agent_optimization_jobs/{jobId}/candidates": {
@@ -669,18 +601,6 @@
         "summary": "List candidates for an agent optimization job",
         "description": "Lists candidates for the given optimization job with cursor pagination. Each item is an `AgentOptimizationCandidate` — mutation *keys* identify which agent attributes changed, but the customer-supplied mutation *values* are returned as `null` unless the client passes `expand=mutations`. Per-task result files are always fetched via GET /candidates/{candidateId}.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AgentsOptimization=V3Preview"
-              ]
-            }
-          },
           {
             "name": "jobId",
             "in": "path",
@@ -813,12 +733,7 @@
         },
         "tags": [
           "AgentOptimizationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        ]
       }
     },
     "/agent_optimization_jobs/{jobId}/candidates/{candidateId}": {
@@ -827,18 +742,6 @@
         "summary": "Get a candidate for an agent optimization job",
         "description": "Retrieves a single candidate. Mutation values are always included when a client hits the GET endpoint directly; the `expand` parameter exists for consistency with LIST but is optional here.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AgentsOptimization=V3Preview"
-              ]
-            }
-          },
           {
             "name": "jobId",
             "in": "path",
@@ -912,12 +815,7 @@
         },
         "tags": [
           "AgentOptimizationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        ]
       }
     },
     "/agent_optimization_jobs/{jobId}/candidates/{candidateId}:promote": {
@@ -926,18 +824,6 @@
         "summary": "Promote a candidate for an agent optimization job",
         "description": "Promotes a candidate onto a Foundry agent version, applying the candidate's mutations to the agent's registered configuration. For prompt agents the target agent is derived from the job's stored baseline configuration and the request body fields are ignored.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AgentsOptimization=V3Preview"
-              ]
-            }
-          },
           {
             "name": "jobId",
             "in": "path",
@@ -1012,11 +898,6 @@
             }
           },
           "description": "Target agent information for the promotion."
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
         }
       }
     },
@@ -1026,18 +907,6 @@
         "summary": "Cancel an agent optimization job",
         "description": "Requests cancellation of a running or queued job. Returns 409 Conflict if the job is already in a terminal state.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AgentsOptimization=V3Preview"
-              ]
-            }
-          },
           {
             "name": "jobId",
             "in": "path",
@@ -1092,12 +961,7 @@
         },
         "tags": [
           "AgentOptimizationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        ]
       }
     },
     "/agent_optimization_jobs:estimate": {
@@ -1106,18 +970,6 @@
         "summary": "Estimate an agent optimization job",
         "description": "Estimates dataset row count, per-layer model call volumes, and (when pricing is available) cost bands for an optimization job with the given inputs, without submitting the job.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AgentsOptimization=V3Preview"
-              ]
-            }
-          },
           {
             "name": "api-version",
             "in": "query",
@@ -1174,11 +1026,6 @@
             }
           },
           "description": "The inputs to estimate against."
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
         }
       }
     },
@@ -30441,12 +30288,7 @@
             "description": "Manifest of artifact files stored for this candidate (config, results, diagnostics)."
           }
         },
-        "description": "A single candidate produced by an optimization job. Represents both LIST and detail views: the LIST context populates aggregate scoring fields and the mutation keys (with values null), and a client can request the full mutation payload via the `expand=mutations` query parameter or a `GET /candidates/{id}` call.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "A single candidate produced by an optimization job. Represents both LIST and detail views: the LIST context populates aggregate scoring fields and the mutation keys (with values null), and a client can request the full mutation payload via the `expand=mutations` query parameter or a `GET /candidates/{id}` call."
       },
       "AgentOptimizationCandidateFileInfo": {
         "type": "object",
@@ -30470,12 +30312,7 @@
             "description": "File size in bytes."
           }
         },
-        "description": "A single candidate file artifact stored in the job's output blob.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "A single candidate file artifact stored in the job's output blob."
       },
       "AgentOptimizationCompletionStatus": {
         "anyOf": [
@@ -30491,12 +30328,7 @@
             ]
           }
         ],
-        "description": "Terminal completion classification for a successful optimization job.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Terminal completion classification for a successful optimization job."
       },
       "AgentOptimizationConfig": {
         "type": "object",
@@ -30526,12 +30358,7 @@
             "description": "Agent tools."
           }
         },
-        "description": "Structured baseline configuration for the agent being optimized.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Structured baseline configuration for the agent being optimized."
       },
       "AgentOptimizationDatasetCriterion": {
         "type": "object",
@@ -30549,12 +30376,7 @@
             "description": "Criterion instruction / description."
           }
         },
-        "description": "Evaluation criterion: a name + instruction pair used for per-item scoring.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Evaluation criterion: a name + instruction pair used for per-item scoring."
       },
       "AgentOptimizationDatasetInput": {
         "type": "object",
@@ -30574,12 +30396,7 @@
             "reference": "#/components/schemas/AgentOptimizationReferenceDatasetInput"
           }
         },
-        "description": "Base discriminated model for dataset input. Either inline items or a registered reference.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Base discriminated model for dataset input. Either inline items or a registered reference."
       },
       "AgentOptimizationDatasetInputType": {
         "anyOf": [
@@ -30594,12 +30411,7 @@
             ]
           }
         ],
-        "description": "Discriminator values for the dataset input union.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Discriminator values for the dataset input union."
       },
       "AgentOptimizationDatasetItem": {
         "type": "object",
@@ -30627,12 +30439,7 @@
             "description": "Per-item evaluation criteria."
           }
         },
-        "description": "A single item in an inline dataset.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "A single item in an inline dataset."
       },
       "AgentOptimizationEstimateBand": {
         "type": "object",
@@ -30658,12 +30465,7 @@
             "description": "Upper bound."
           }
         },
-        "description": "A low/typical/ceiling range for an estimated quantity.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "A low/typical/ceiling range for an estimated quantity."
       },
       "AgentOptimizationEstimateDollars": {
         "type": "object",
@@ -30699,12 +30501,7 @@
             "description": "Cost layers excluded from total because no pricing data was available for their model."
           }
         },
-        "description": "Estimated cost breakdown. Present only when at least one contributing model has pricing data available.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Estimated cost breakdown. Present only when at least one contributing model has pricing data available."
       },
       "AgentOptimizationEstimateJobInputs": {
         "type": "object",
@@ -30739,12 +30536,7 @@
             "description": "Estimate-specific tuning knobs."
           }
         },
-        "description": "Inputs for :estimate. Same shape as AgentOptimizationJobInputs but the options field is AgentOptimizationEstimateOptions.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Inputs for :estimate. Same shape as AgentOptimizationJobInputs but the options field is AgentOptimizationEstimateOptions."
       },
       "AgentOptimizationEstimateOptions": {
         "type": "object",
@@ -30823,12 +30615,7 @@
             "description": "Validation dataset size hint. Used to project call counts when validation_dataset is a registered reference (row count is unknown at estimate time). If not provided, server infers from an inline validation_dataset when present."
           }
         },
-        "description": "Options for :estimate. Extends AgentOptimizationOptions with estimate-only fields.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Options for :estimate. Extends AgentOptimizationOptions with estimate-only fields."
       },
       "AgentOptimizationEstimateResponse": {
         "type": "object",
@@ -30858,12 +30645,7 @@
             "description": "The pricing snapshot date used for cost estimation."
           }
         },
-        "description": "Response body for :estimate.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Response body for :estimate."
       },
       "AgentOptimizationEvaluatorRef": {
         "type": "object",
@@ -30885,12 +30667,7 @@
             "description": "Optional parameters passed to the evaluator at initialization. Shape is evaluator-specific."
           }
         },
-        "description": "Reference to a named evaluator, optionally pinned to a version.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Reference to a named evaluator, optionally pinned to a version."
       },
       "AgentOptimizationInProgressCandidateInfo": {
         "type": "object",
@@ -30907,12 +30684,7 @@
             "description": "Whether the candidate configuration has been fully generated (vs. still being reflected on)."
           }
         },
-        "description": "Metadata for the candidate currently under evaluation. Present only during in_progress with progressive-update visibility.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Metadata for the candidate currently under evaluation. Present only during in_progress with progressive-update visibility."
       },
       "AgentOptimizationInlineDatasetInput": {
         "type": "object",
@@ -30941,12 +30713,7 @@
             "$ref": "#/components/schemas/AgentOptimizationDatasetInput"
           }
         ],
-        "description": "Inline dataset — items supplied directly in the request body.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Inline dataset — items supplied directly in the request body."
       },
       "AgentOptimizationJob": {
         "type": "object",
@@ -31010,12 +30777,7 @@
             "readOnly": true
           }
         },
-        "description": "Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates."
       },
       "AgentOptimizationJobInputs": {
         "type": "object",
@@ -31050,12 +30812,7 @@
             "description": "Tuning knobs."
           }
         },
-        "description": "Caller-supplied inputs for an optimization job.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Caller-supplied inputs for an optimization job."
       },
       "AgentOptimizationJobProgress": {
         "type": "object",
@@ -31093,12 +30850,7 @@
             "description": "Populated once any candidate from this job has been promoted to an agent version."
           }
         },
-        "description": "In-flight progress. Preserved on terminal states (with in_progress_candidate omitted).",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "In-flight progress. Preserved on terminal states (with in_progress_candidate omitted)."
       },
       "AgentOptimizationJobResult": {
         "type": "object",
@@ -31137,12 +30889,7 @@
             "description": "Aggregate latency per layer × model, from server-measured sources only. Always present; empty array when no server-measured latency signals were surfaced (e.g. an early-failure run or an all-hosted judge run whose evaluators do not report latency_ms)."
           }
         },
-        "description": "Terminal-state or partial in-flight result body. On success/failure it holds the final scored candidate set; while in_progress it may hold a partial snapshot (baseline + any candidates whose evaluation has completed).",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Terminal-state or partial in-flight result body. On success/failure it holds the final scored candidate set; while in_progress it may hold a partial snapshot (baseline + any candidates whose evaluation has completed)."
       },
       "AgentOptimizationLatencyUsageEntry": {
         "type": "object",
@@ -31172,12 +30919,7 @@
             "description": "Total number of calls contributing to this entry."
           }
         },
-        "description": "Aggregated wall-clock latency attributable to a single layer of the optimization loop. Sourced from server-measured signals (Foundry's `sample.latency_ms` on the target rollout and evaluator responses). Layers without a server-measured source are omitted from the array rather than populated with client-observed timings that would conflate real model latency with local retry/network overhead.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Aggregated wall-clock latency attributable to a single layer of the optimization loop. Sourced from server-measured signals (Foundry's `sample.latency_ms` on the target rollout and evaluator responses). Layers without a server-measured source are omitted from the array rather than populated with client-observed timings that would conflate real model latency with local retry/network overhead."
       },
       "AgentOptimizationLayer": {
         "anyOf": [
@@ -31193,12 +30935,7 @@
             ]
           }
         ],
-        "description": "Which layer of the optimization loop generated a token/latency usage entry.\n\nPopulation status for `latency_usage` (as of the initial GA of this contract):\n- `agent`     — populated when Foundry's agent runtime surfaces `sample.latency_ms`\n(server-measured on the target rollout).\n- `judge`     — populated when a Foundry evaluator surfaces `sample.latency_ms`\n(server-measured on the evaluator call).\n- `reflection`— **not currently populated**. The optimizer's reflection/mutation\nmodel calls are not yet reported with a server-measured latency\nsource; this member is reserved so consumers can begin filtering\nfor it today without a breaking change when the signal ships.\n\n`token_usage` populates all three layers.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Which layer of the optimization loop generated a token/latency usage entry.\n\nPopulation status for `latency_usage` (as of the initial GA of this contract):\n- `agent`     — populated when Foundry's agent runtime surfaces `sample.latency_ms`\n(server-measured on the target rollout).\n- `judge`     — populated when a Foundry evaluator surfaces `sample.latency_ms`\n(server-measured on the evaluator call).\n- `reflection`— **not currently populated**. The optimizer's reflection/mutation\nmodel calls are not yet reported with a server-measured latency\nsource; this member is reserved so consumers can begin filtering\nfor it today without a breaking change when the signal ships.\n\n`token_usage` populates all three layers."
       },
       "AgentOptimizationOptions": {
         "type": "object",
@@ -31271,12 +31008,7 @@
             "description": "Structured baseline configuration for the agent being optimized. When omitted, the server resolves baseline from the agent identifier."
           }
         },
-        "description": "Tuning knobs for an optimization job.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Tuning knobs for an optimization job."
       },
       "AgentOptimizationReferenceDatasetInput": {
         "type": "object",
@@ -31306,12 +31038,7 @@
             "$ref": "#/components/schemas/AgentOptimizationDatasetInput"
           }
         ],
-        "description": "Reference to a registered Foundry dataset.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Reference to a registered Foundry dataset."
       },
       "AgentOptimizationStrategy": {
         "anyOf": [
@@ -31325,12 +31052,7 @@
             ]
           }
         ],
-        "description": "Optimization strategy identifier. Open string so the SDK stays usable when new strategies ship server-side; known values are enumerated as members.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Optimization strategy identifier. Open string so the SDK stays usable when new strategies ship server-side; known values are enumerated as members."
       },
       "AgentOptimizationTokenUsageEntry": {
         "type": "object",
@@ -31373,12 +31095,7 @@
             "description": "Reasoning tokens counted separately by reasoning models. Included in output_tokens (not additive). Defaults to 0 when the model did not report this metric."
           }
         },
-        "description": "Aggregated token usage attributable to a single layer of the optimization loop.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Aggregated token usage attributable to a single layer of the optimization loop."
       },
       "AgentReference": {
         "type": "object",
@@ -79511,12 +79228,7 @@
             "description": "Pinned agent version. Defaults to latest if omitted."
           }
         },
-        "description": "Identifies the registered Foundry agent to optimize. Baseline configuration is resolved automatically, or overridden with skills, tools, or system prompt specified in options.optimization_config.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Identifies the registered Foundry agent to optimize. Baseline configuration is resolved automatically, or overridden with skills, tools, or system prompt specified in options.optimization_config."
       },
       "OtlpTelemetryEndpoint": {
         "type": "object",
@@ -79935,12 +79647,7 @@
             "description": "Target agent version. When omitted, a new version is created."
           }
         },
-        "description": "Request body for POST /candidates/{id}:promote. For prompt agents these fields are ignored; the target agent is resolved from the job's stored baseline configuration.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Request body for POST /candidates/{id}:promote. For prompt agents these fields are ignored; the target agent is resolved from the job's stored baseline configuration."
       },
       "PromoteAgentOptimizationCandidateResponse": {
         "type": "object",
@@ -79972,12 +79679,7 @@
             "description": "Whether a new agent version was created during promotion."
           }
         },
-        "description": "Response body for POST /candidates/{id}:promote.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Response body for POST /candidates/{id}:promote."
       },
       "PromotionInfo": {
         "type": "object",
@@ -80005,12 +79707,7 @@
             "description": "Version of the Foundry agent this candidate was promoted to."
           }
         },
-        "description": "Promotion metadata recorded when a candidate is deployed to a Foundry agent version.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Promotion metadata recorded when a candidate is deployed to a Foundry agent version."
       },
       "PromptAgentDefinition": {
         "type": "object",
@@ -82322,12 +82019,7 @@
             ]
           }
         ],
-        "description": "Agent attribute that can be optimized.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "AgentsOptimization=V3Preview"
-          ]
-        }
+        "description": "Agent attribute that can be optimized."
       },
       "TargetCompletionEvalRunDataSource": {
         "type": "object",
