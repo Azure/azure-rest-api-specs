@@ -15,7 +15,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.CognitiveServices;
 
 /**
- * Cognitive Services account managed compute deployment, backed by managed compute (GPU) resources.
+ * Cognitive Services account deployment backed by accelerator-managed compute or a VM compute resource.
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
@@ -31,9 +31,12 @@ model ManagedComputeDeployment
     SegmentName = "managedComputeDeployments",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+  ...ManagedServiceIdentityProperty;
 
   /**
-   * The resource model definition representing SKU
+   * The deployment SKU. Use VmManagedCompute for a deployment on a VM compute resource.
+   * The SKU name cannot change after creation. Capacity is the number of deployment instances and must be positive on creation.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc defines its own Sku model — using ResourceSkuProperty causes duplicate-client-name errors in Java/Python SDK generation due to collision with ARM common-type Sku"
   sku?: Sku;
@@ -61,7 +64,18 @@ interface ManagedComputeDeployments {
   /**
    * Creates or updates a managed compute deployment associated with the Cognitive Services account.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ManagedComputeDeployment>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ManagedComputeDeployment,
+    Parameters = {
+      /**
+       * Foundry project used when creating a VmManagedCompute deployment. If omitted, the account's default project is used.
+       * A project must be specified through this header or configured as the account default.
+       */
+      @added(Versions.v2026_07_15_preview)
+      @header("x-ms-foundry-project-name")
+      foundryProjectName?: string;
+    }
+  >;
 
   /**
    * Updates the specified managed compute deployment associated with the Cognitive Services account.
@@ -111,6 +125,17 @@ interface ManagedComputeDeployments {
   "The name of the managed compute deployment associated with the Cognitive Services Account"
 );
 @@encodedName(ManagedComputeDeployment.etag, "application/json", "etag");
+@@added(ManagedComputeDeployment.tags, Versions.v2026_07_15_preview);
+@@added(ManagedComputeDeployment.identity, Versions.v2026_07_15_preview);
+@@visibility(
+  ManagedComputeDeployment.identity,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@doc(
+  ManagedComputeDeployment.identity,
+  "Managed identity used when creating a VmManagedCompute deployment. Specify a user-assigned managed identity using its Azure resource ID. Updating the deployment identity is not supported."
+);
 @@doc(
   ManagedComputeDeployment.properties,
   "Properties of the Cognitive Services managed compute deployment."

@@ -1,6 +1,6 @@
 {
   "operationId": "ManagedComputeDeployments_CreateOrUpdate",
-  "title": "CreateOrUpdateVmManagedComputeDeployment",
+  "title": "CreateOrUpdateVmManagedComputeDeploymentWithRegistryAssets",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resourceGroupName",
@@ -11,8 +11,12 @@
     "resource": {
       "properties": {
         "model": "azureml://registries/azureml-openai-oss/models/gpt-oss-120b/versions/4",
-        "deploymentTemplate": "projects/my-project/deploymentTemplates/gpt-oss-120b-vllm-tuned/versions/2",
-        "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool"
+        "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/gpt-oss-120b-short-context/versions/1",
+        "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
+        "versionUpgradeOption": "NoAutoUpgrade",
+        "allowlistedObjectIds": [
+          "00000000-0000-0000-0000-000000000001"
+        ]
       },
       "identity": {
         "type": "UserAssigned",
@@ -20,9 +24,12 @@
           "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/deploymentIdentity": {}
         }
       },
+      "tags": {
+        "environment": "development"
+      },
       "sku": {
         "name": "VmManagedCompute",
-        "capacity": 2
+        "capacity": 1
       }
     }
   },
@@ -32,27 +39,25 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/gpt-oss-120b-byoc",
         "name": "gpt-oss-120b-byoc",
         "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
-        "etag": "\"0x8D...\"",
         "properties": {
           "model": "azureml://registries/azureml-openai-oss/models/gpt-oss-120b/versions/4",
-          "deploymentTemplate": "projects/my-project/deploymentTemplates/gpt-oss-120b-vllm-tuned/versions/2",
+          "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/gpt-oss-120b-short-context/versions/1",
           "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
-          "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
-          "capabilities": {
-            "assetsV2": "true"
-          },
+          "versionUpgradeOption": "NoAutoUpgrade",
+          "allowlistedObjectIds": [
+            "00000000-0000-0000-0000-000000000001"
+          ],
           "provisioningState": "Succeeded",
-          "provisioningDetails": {
-            "message": "Deployment is healthy and serving traffic.",
-            "lastOperationTimestamp": "2026-04-12T10:25:00Z"
-          },
           "routes": {
             "chatCompletionsScoringPath": "/managed-deployments/gpt-oss-120b-byoc/v1/chat/completions"
           }
         },
+        "tags": {
+          "environment": "development"
+        },
         "sku": {
           "name": "VmManagedCompute",
-          "capacity": 2
+          "capacity": 1
         }
       }
     },
@@ -67,13 +72,20 @@
         "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
         "properties": {
           "model": "azureml://registries/azureml-openai-oss/models/gpt-oss-120b/versions/4",
-          "deploymentTemplate": "projects/my-project/deploymentTemplates/gpt-oss-120b-vllm-tuned/versions/2",
+          "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/gpt-oss-120b-short-context/versions/1",
           "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
+          "versionUpgradeOption": "NoAutoUpgrade",
+          "allowlistedObjectIds": [
+            "00000000-0000-0000-0000-000000000001"
+          ],
           "provisioningState": "Accepted"
+        },
+        "tags": {
+          "environment": "development"
         },
         "sku": {
           "name": "VmManagedCompute",
-          "capacity": 2
+          "capacity": 1
         }
       }
     }

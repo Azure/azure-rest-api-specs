@@ -4960,6 +4960,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
           },
           {
+            "name": "x-ms-foundry-project-name",
+            "in": "header",
+            "description": "Foundry project used when creating a VmManagedCompute deployment. If omitted, the account's default project is used.\nA project must be specified through this header or configured as the account default.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "foundryProjectName"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "The managed compute deployment properties.",
@@ -5006,6 +5014,9 @@
           },
           "CreateOrUpdateVmManagedComputeDeployment": {
             "$ref": "./examples/CreateOrUpdateVmManagedComputeDeployment.json"
+          },
+          "CreateOrUpdateVmManagedComputeDeploymentWithRegistryAssets": {
+            "$ref": "./examples/CreateOrUpdateVmManagedComputeDeploymentWithRegistryAssets.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5175,6 +5186,9 @@
         "x-ms-examples": {
           "DeleteManagedComputeDeployment": {
             "$ref": "./examples/DeleteManagedComputeDeployment.json"
+          },
+          "DeleteVmManagedComputeDeployment": {
+            "$ref": "./examples/DeleteVmManagedComputeDeployment.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -16903,15 +16917,30 @@
     },
     "ManagedComputeDeployment": {
       "type": "object",
-      "description": "Cognitive Services account managed compute deployment, backed by managed compute (GPU) resources.",
+      "description": "Cognitive Services account deployment backed by accelerator-managed compute or a VM compute resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ManagedComputeDeploymentProperties",
           "description": "Properties of the Cognitive Services managed compute deployment."
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed identity used when creating a VmManagedCompute deployment. Specify a user-assigned managed identity using its Azure resource ID. Updating the deployment identity is not supported.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The resource model definition representing SKU"
+          "description": "The deployment SKU. Use VmManagedCompute for a deployment on a VM compute resource.\nThe SKU name cannot change after creation. Capacity is the number of deployment instances and must be positive on creation."
         },
         "etag": {
           "type": "string",
@@ -16994,7 +17023,7 @@
         },
         "acceleratorType": {
           "type": "string",
-          "description": "Accelerator type (e.g., H100_80GB). Optional on creation; immutable after creation.",
+          "description": "Accelerator type (e.g., H100_80GB). Optional on creation; immutable after creation.\nMust not be specified for VmManagedCompute deployments.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -17003,6 +17032,17 @@
         "versionUpgradeOption": {
           "$ref": "#/definitions/DeploymentModelVersionUpgradeOption",
           "description": "Template auto-upgrade policy. Defaults to OnceNewDefaultVersionAvailable.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "allowlistedObjectIds": {
+          "type": "array",
+          "description": "Microsoft Entra object IDs allowed to access the VmManagedCompute deployment's serving endpoint.\nSet on creation; the returned set can also include service-managed identities.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.uuid"
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -17018,7 +17058,7 @@
         },
         "computeId": {
           "type": "string",
-          "description": "Foundry compute ARM resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.",
+          "description": "Foundry compute Azure resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.\nMust not be specified for accelerator-managed compute deployments.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -18184,8 +18224,15 @@
     },
     "PatchResourceSku": {
       "type": "object",
-      "description": "The object being used to update sku of a resource, in general used for PATCH operations.",
+      "description": "The request used to update a managed compute deployment.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The resource model definition representing SKU"
