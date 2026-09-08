@@ -4,14 +4,16 @@
 // lived in each language repo. Every rename below is baked into an already-shipped public
 // API, so dropping one is a customer-visible break.
 //
-// VERIFICATION STATUS:
-//   Java   — compiled with @azure-tools/typespec-java 0.46.2 against merged spec a1c68a5,
-//            output inspected. Clean.
-//   .NET   — compiled with @azure-typespec/http-client-csharp against a1c68a5 (2026-09-08).
-//            Compiles clean; generated output byte-identical to the .NET working branch.
-//   Python — NOT compiled. Python needs no directive here beyond the unscoped rename in (1);
-//            its requirement is `generation-subdir` in tspconfig.yaml.
-//   JS     — NOT compiled. Verification requested.
+// VERIFICATION STATUS (as of PR head, all four emitters):
+//   Java   — compiled with @azure-tools/typespec-java 0.46.2. Clean; public models are the
+//            5 expected types. Re-verified after the csharp directive was added.
+//   .NET   — compiled with @azure-typespec/http-client-csharp. Clean; generated output
+//            byte-identical to the .NET working branch.
+//   JS     — compiled with @azure-tools/typespec-ts 0.56.0. Clean; public api.md diff empty.
+//            The csharp-scoped directive is correctly absent from JS output.
+//   Python — not separately compiled. Python requires no directive in this file; its only
+//            requirement is `generation-subdir` in tspconfig.yaml. Confirmed indirectly by
+//            CI: SDK Validation - Python succeeds on this PR.
 //
 // TESTING NOTE: when regenerating against a local spec clone, pass `--local-spec-repo`.
 //   `tsp-client update` without it re-syncs the spec directory from the remote and SILENTLY
@@ -41,6 +43,8 @@ namespace ClientCustomizations;
 // JavaScript is deliberately excluded: its shipped public name is `TokenScope`,
 // declared independently in src/models.ts, and the generated type is never
 // re-exported. Verified as a no-op there.
+//
+// Python needs this rename and is included in the scope above.
 // ---------------------------------------------------------------------------
 @@clientName(
   Azure.Communication.Identity.CommunicationIdentityTokenScope,
