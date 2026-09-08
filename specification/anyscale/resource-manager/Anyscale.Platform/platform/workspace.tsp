@@ -34,6 +34,7 @@ model WorkspaceProperties {
   imageUri: string;
 
   /** If set to a positive number, Anyscale will terminate the workspace this many minutes after the workspace is idle. Idle time is defined as the time during which a workspace is not running a user command. To disable, set this field to 0. */
+  @minValue(0)
   idleTerminationMinutes?: int32;
 
   /** The current status of the workspace. */
