@@ -3475,7 +3475,8 @@
         },
         "flags": {
           "type": "object",
-          "description": "A set of advanced cluster-level flags that can be used to configure a particular workload."
+          "description": "A set of advanced cluster-level flags that can be used to configure a particular workload.",
+          "additionalProperties": {}
         }
       },
       "required": [
@@ -3742,7 +3743,10 @@
         },
         "envVars": {
           "type": "object",
-          "description": "Environment variables to set."
+          "description": "Environment variables to set.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "maxRetries": {
           "type": "integer",
@@ -3896,7 +3900,11 @@
         },
         "customResources": {
           "type": "object",
-          "description": "Custom resources for this node to be used by Ray autoscaler."
+          "description": "Custom resources for this node to be used by Ray autoscaler.",
+          "additionalProperties": {
+            "format": "int64",
+            "type": "integer"
+          }
         }
       }
     },
@@ -3952,11 +3960,17 @@
         },
         "labels": {
           "type": "object",
-          "description": "Labels to associate the node with for Ray scheduling purposes."
+          "description": "Labels to associate the node with for Ray scheduling purposes.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "requiredLabels": {
           "type": "object",
-          "description": "Required labels that must be present on the node for node (pod) scheduling purposes."
+          "description": "Required labels that must be present on the node for node (pod) scheduling purposes.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "advancedInstanceConfig": {
           "type": "string",
