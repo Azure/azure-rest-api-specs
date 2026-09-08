@@ -7027,6 +7027,16 @@
     "AzureVmWorkloadSQLDatabaseProtectedItem": {
       "type": "object",
       "description": "Azure VM workload-specific protected item representing SQL Database.",
+      "properties": {
+        "parentProtectedItem": {
+          "type": "string",
+          "description": "Name of the parent protected item (e.g., SQL Instance name) when this database is protected as part of a parent."
+        },
+        "protectionLevel": {
+          "$ref": "#/definitions/ProtectionLevel",
+          "description": "Protection type in case protected as part of a parent."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
@@ -7053,6 +7063,29 @@
         }
       ],
       "x-ms-discriminator-value": "SQLInstance"
+    },
+    "AzureVmWorkloadSQLInstanceProtectedItem": {
+      "type": "object",
+      "description": "Azure VM workload-specific protected item representing SQL Instance.",
+      "properties": {
+        "childDBNames": {
+          "type": "array",
+          "description": "Name of Child Dbs protected under this parent.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "instanceProtectionReadiness": {
+          "$ref": "#/definitions/InstanceProtectionReadiness",
+          "description": "The state of instance protection."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureVmWorkloadSQLInstance"
     },
     "AzureVmWorkloadSQLInstanceWorkloadItem": {
       "type": "object",
@@ -7201,6 +7234,27 @@
         "additionalDetails": {
           "type": "string",
           "description": "Additional details for above error code."
+        }
+      }
+    },
+    "AzureWorkloadFilesystemClashValidationResult": {
+      "type": "object",
+      "description": "AzureWorkload-specific filesystem clash validation result. Carries aggregated\nmanaged disk IDs and the list of all detected clashes in a single error response.",
+      "properties": {
+        "disksToDetachOnClash": {
+          "type": "array",
+          "description": "Unique managed disk ARM IDs collated from all filesystem clashes.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filesystemClashes": {
+          "type": "array",
+          "description": "List of all detected filesystem clashes between source and target.",
+          "items": {
+            "$ref": "#/definitions/FilesystemClash"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7642,6 +7696,18 @@
             "$ref": "#/definitions/SQLDataDirectory"
           },
           "x-ms-identifiers": []
+        },
+        "includedDatabases": {
+          "type": "array",
+          "description": "List of databases included in recovery point.",
+          "items": {
+            "$ref": "#/definitions/DatabaseInRP"
+          },
+          "x-ms-identifiers": []
+        },
+        "snapshotRecoveryPointInfo": {
+          "$ref": "#/definitions/SnapshotRecoveryPointInfo",
+          "description": "Detailed info of snapshot restore point."
         }
       }
     },
@@ -7799,6 +7865,10 @@
         "backupManagementType": {
           "$ref": "#/definitions/BackupManagementType",
           "description": "Backup management type for this container."
+        },
+        "containerSubscriptionId": {
+          "type": "string",
+          "description": "Subscription containing the containers to discover."
         }
       }
     },
@@ -8694,6 +8764,18 @@
         "includeSoftDeletedRP": {
           "type": "boolean",
           "description": "Flag to indicate whether Soft Deleted RPs should be included/excluded from result."
+        },
+        "baseSnapshotRPId": {
+          "type": "string",
+          "description": "Id of the base snapshot recovery point."
+        },
+        "baseRPDatasourceId": {
+          "type": "string",
+          "description": "Id of the datasource of the base snapshot recovery point."
+        },
+        "getLatestRPOnly": {
+          "type": "boolean",
+          "description": "Flag to indicate whether to get only the latest recovery point."
         }
       }
     },
@@ -9384,6 +9466,20 @@
         ]
       }
     },
+    "DatabaseInRP": {
+      "type": "object",
+      "description": "Database included in RP.",
+      "properties": {
+        "datasourceId": {
+          "type": "string",
+          "description": "Datasource Id for the database."
+        },
+        "datasourceName": {
+          "type": "string",
+          "description": "Datasource name for the database."
+        }
+      }
+    },
     "Day": {
       "type": "object",
       "description": "Day of the week.",
@@ -9471,6 +9567,47 @@
         "isInclusionList": {
           "type": "boolean",
           "description": "Flag to indicate whether DiskLunList is to be included/ excluded from backup."
+        }
+      }
+    },
+    "DiskInfo": {
+      "type": "object",
+      "description": "Identifiers for a physical disk that backs a volume.",
+      "properties": {
+        "diskNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Disk number."
+        },
+        "diskUniqueId": {
+          "type": "string",
+          "description": "Unique ID of the disk."
+        },
+        "diskGuid": {
+          "type": "string",
+          "description": "GUID of the disk."
+        },
+        "diskLocation": {
+          "type": "string",
+          "description": "Location of the disk."
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Size of the disk in bytes."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name of the disk."
+        },
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "LUN of the disk."
+        },
+        "managedDiskId": {
+          "type": "string",
+          "description": "ARM ID of the managed disk."
         }
       }
     },
@@ -9998,6 +10135,122 @@
         }
       ],
       "x-ms-discriminator-value": "FetchTieringCostSavingsInfoForVaultRequest"
+    },
+    "FilesystemClash": {
+      "type": "object",
+      "description": "File system clash info object.",
+      "properties": {
+        "clashType": {
+          "$ref": "#/definitions/FilesystemClashType",
+          "description": "Which identifier kind clashed."
+        },
+        "clashedId": {
+          "type": "string",
+          "description": "The identifier value (GUID / unique id) present on both source and target."
+        },
+        "volumeGuid": {
+          "type": "string",
+          "description": "Source-side volume that owns the clashing identifier (when known)."
+        },
+        "managedDiskIds": {
+          "type": "array",
+          "description": "Target-side managed disk ARM IDs that own the clashing identifier (when known).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable description of the clash."
+        }
+      },
+      "required": [
+        "clashType",
+        "clashedId"
+      ]
+    },
+    "FilesystemClashType": {
+      "type": "string",
+      "description": "Type of filesystem identifier that clashed between source (snapshot RP) and target.",
+      "enum": [
+        "Invalid",
+        "StoragePoolUniqueId",
+        "VirtualDiskUniqueId",
+        "DiskGuid",
+        "VolumeGuid"
+      ],
+      "x-ms-enum": {
+        "name": "FilesystemClashType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Invalid clash type."
+          },
+          {
+            "name": "StoragePoolUniqueId",
+            "value": "StoragePoolUniqueId",
+            "description": "Storage pool unique ID clashed."
+          },
+          {
+            "name": "VirtualDiskUniqueId",
+            "value": "VirtualDiskUniqueId",
+            "description": "Virtual disk unique ID clashed."
+          },
+          {
+            "name": "DiskGuid",
+            "value": "DiskGuid",
+            "description": "Disk GUID clashed."
+          },
+          {
+            "name": "VolumeGuid",
+            "value": "VolumeGuid",
+            "description": "Volume GUID clashed."
+          }
+        ]
+      }
+    },
+    "FilesystemInfo": {
+      "type": "object",
+      "description": "Per volume filesystem metadata captured on the VM.",
+      "properties": {
+        "volumeGuid": {
+          "type": "string",
+          "description": "Volume GUID path."
+        },
+        "fileSystemType": {
+          "type": "string",
+          "description": "Filesystem type (NTFS / ReFS / etc.)."
+        },
+        "label": {
+          "type": "string",
+          "description": "Volume label."
+        },
+        "accessPaths": {
+          "type": "array",
+          "description": "Drive letters / mount points pointing at this volume.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isOnStorageSpace": {
+          "type": "boolean",
+          "description": "True when this volume sits on a Windows Storage Spaces virtual disk."
+        },
+        "storageSpaceInfo": {
+          "$ref": "#/definitions/StorageSpaceInfo",
+          "description": "Storage Spaces pool / virtual-disk identifiers."
+        },
+        "diskInfoList": {
+          "type": "array",
+          "description": "Physical disks that back this volume (or the storage pool).",
+          "items": {
+            "$ref": "#/definitions/DiskInfo"
+          },
+          "x-ms-identifiers": []
+        }
+      }
     },
     "GenericContainer": {
       "type": "object",
@@ -10825,6 +11078,48 @@
           "description": "Dictionary to store the count of ProtectableItems with key POType.",
           "readOnly": true
         }
+      }
+    },
+    "InstanceProtectionReadiness": {
+      "type": "string",
+      "description": "The state of instance protection.",
+      "enum": [
+        "Unknown",
+        "Ready",
+        "ScheduleDisabled",
+        "PartialProtection",
+        "ProtectionError"
+      ],
+      "x-ms-enum": {
+        "name": "InstanceProtectionReadiness",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Instance protection readiness is unknown"
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "Instance is ready for protection"
+          },
+          {
+            "name": "ScheduleDisabled",
+            "value": "ScheduleDisabled",
+            "description": "Backup schedule is disabled for this instance"
+          },
+          {
+            "name": "PartialProtection",
+            "value": "PartialProtection",
+            "description": "Instance is partially protected"
+          },
+          {
+            "name": "ProtectionError",
+            "value": "ProtectionError",
+            "description": "Instance protection encountered an error"
+          }
+        ]
       }
     },
     "InstantItemRecoveryOperationResultRequest": {
@@ -13115,6 +13410,30 @@
         }
       ]
     },
+    "ProtectionLevel": {
+      "type": "string",
+      "description": "Protection type in case protected as part of a parent.",
+      "enum": [
+        "Database",
+        "DatabaseUnderInstance"
+      ],
+      "x-ms-enum": {
+        "name": "ProtectionLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Database",
+            "value": "Database",
+            "description": "Protected at database level"
+          },
+          {
+            "name": "DatabaseUnderInstance",
+            "value": "DatabaseUnderInstance",
+            "description": "Database protected under an instance"
+          }
+        ]
+      }
+    },
     "ProtectionPolicy": {
       "type": "object",
       "description": "Base class for backup policy. Workload-specific backup policies are derived from this class.",
@@ -13871,7 +14190,9 @@
         "All",
         "Incremental",
         "SnapshotFull",
-        "SnapshotCopyOnlyFull"
+        "SnapshotCopyOnlyFull",
+        "Snapshot",
+        "FullDifferentialAndSnapshot"
       ],
       "x-ms-enum": {
         "name": "RestorePointQueryType",
@@ -13912,6 +14233,16 @@
           {
             "name": "SnapshotCopyOnlyFull",
             "value": "SnapshotCopyOnlyFull"
+          },
+          {
+            "name": "Snapshot",
+            "value": "Snapshot",
+            "description": "Snapshot restore point type"
+          },
+          {
+            "name": "FullDifferentialAndSnapshot",
+            "value": "FullDifferentialAndSnapshot",
+            "description": "Full, differential, and snapshot restore point types"
           }
         ]
       }
@@ -14393,6 +14724,24 @@
         }
       }
     },
+    "SnapshotRecoveryPointInfo": {
+      "type": "object",
+      "description": "Extended info class details for workload snapshot.",
+      "properties": {
+        "snapshotResourceGroup": {
+          "type": "string",
+          "description": "Resource Group of snapshot restore point."
+        },
+        "sourceFilesystemInfo": {
+          "type": "array",
+          "description": "Per volume filesystem metadata captured on the VM.",
+          "items": {
+            "$ref": "#/definitions/FilesystemInfo"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "SnapshotRestoreParameters": {
       "type": "object",
       "description": "Encapsulates information regarding snapshot recovery for SAP Hana",
@@ -14402,6 +14751,13 @@
         },
         "logPointInTimeForDBRecovery": {
           "type": "string"
+        },
+        "disksToDetachOnClash": {
+          "type": "array",
+          "description": "List of disk ARM IDs the customer should detach in case of filesystem clash.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -14551,6 +14907,28 @@
             "description": "No threats reported"
           }
         ]
+      }
+    },
+    "StorageSpaceInfo": {
+      "type": "object",
+      "description": "Identifiers for a Windows Storage Spaces pool and its virtual disk.",
+      "properties": {
+        "storagePoolUniqueId": {
+          "type": "string",
+          "description": "Unique ID of the storage pool."
+        },
+        "storagePoolFriendlyName": {
+          "type": "string",
+          "description": "Friendly name of the storage pool."
+        },
+        "virtualDiskUniqueId": {
+          "type": "string",
+          "description": "Unique ID of the virtual disk."
+        },
+        "virtualDiskFriendlyName": {
+          "type": "string",
+          "description": "Friendly name of the virtual disk."
+        }
       }
     },
     "StorageType": {
@@ -15220,6 +15598,22 @@
           "description": "User assigned managed identity properties"
         }
       }
+    },
+    "ValidateAzureWorkloadRestoreOperationRequest": {
+      "type": "object",
+      "description": "Validate restore request for AzureWorkload (SQL/HANA/SAP ASE/AnyDatabase).",
+      "properties": {
+        "restoreRequest": {
+          "$ref": "#/definitions/RestoreRequest",
+          "description": "Sets restore request to be validated"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidateOperationRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "ValidateAzureWorkloadRestoreOperationRequest"
     },
     "ValidateIaasVMRestoreOperationRequest": {
       "type": "object",

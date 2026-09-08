@@ -935,6 +935,7 @@ union ProtectedItemState {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_10_01)
 union ProtectionLevel {
   string,
 
@@ -954,6 +955,7 @@ union ProtectionLevel {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_10_01)
 union InstanceProtectionReadiness {
   string,
 
@@ -1102,6 +1104,7 @@ union RestorePointQueryType {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_10_01)
   Snapshot: "Snapshot",
 
   /** Full, differential, and snapshot restore point types */
@@ -1111,6 +1114,7 @@ union RestorePointQueryType {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_10_01)
   FullDifferentialAndSnapshot: "FullDifferentialAndSnapshot",
 }
 
@@ -4839,6 +4843,7 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_10_01)
   parentProtectedItem?: string;
 
   /**
@@ -4850,6 +4855,7 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_10_01)
   protectionLevel?: ProtectionLevel;
 }
 
@@ -4863,6 +4869,7 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_10_01)
 model AzureVmWorkloadSQLInstanceProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5202,6 +5209,84 @@ model SnapshotRestoreParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   logPointInTimeForDBRecovery?: string;
+
+  /**
+   * List of disk ARM IDs the customer should detach in case of filesystem clash.
+   */
+  @added(Versions.v2026_10_01)
+  disksToDetachOnClash?: string[];
+}
+
+/**
+ * Type of filesystem identifier that clashed between source (snapshot RP) and target.
+ */
+@added(Versions.v2026_10_01)
+union FilesystemClashType {
+  string,
+
+  /** Invalid clash type. */
+  Invalid: "Invalid",
+
+  /** Storage pool unique ID clashed. */
+  StoragePoolUniqueId: "StoragePoolUniqueId",
+
+  /** Virtual disk unique ID clashed. */
+  VirtualDiskUniqueId: "VirtualDiskUniqueId",
+
+  /** Disk GUID clashed. */
+  DiskGuid: "DiskGuid",
+
+  /** Volume GUID clashed. */
+  VolumeGuid: "VolumeGuid",
+}
+
+/**
+ * File system clash info object.
+ */
+@added(Versions.v2026_10_01)
+model FilesystemClash {
+  /**
+   * Which identifier kind clashed.
+   */
+  clashType: FilesystemClashType;
+
+  /**
+   * The identifier value (GUID / unique id) present on both source and target.
+   */
+  clashedId: string;
+
+  /**
+   * Source-side volume that owns the clashing identifier (when known).
+   */
+  volumeGuid?: string;
+
+  /**
+   * Target-side managed disk ARM IDs that own the clashing identifier (when known).
+   */
+  managedDiskIds?: string[];
+
+  /**
+   * Human-readable description of the clash.
+   */
+  message?: string;
+}
+
+/**
+ * AzureWorkload-specific filesystem clash validation result. Carries aggregated
+ * managed disk IDs and the list of all detected clashes in a single error response.
+ */
+@added(Versions.v2026_10_01)
+model AzureWorkloadFilesystemClashValidationResult {
+  /**
+   * Unique managed disk ARM IDs collated from all filesystem clashes.
+   */
+  disksToDetachOnClash?: string[];
+
+  /**
+   * List of all detected filesystem clashes between source and target.
+   */
+  @identifiers(#[])
+  filesystemClashes?: FilesystemClash[];
 }
 
 /**
@@ -5391,8 +5476,146 @@ model AzureWorkloadSQLRecoveryPointExtendedInfo {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_10_01)
   @identifiers(#[])
   includedDatabases?: DatabaseInRP[];
+
+  /**
+   * Detailed info of snapshot restore point.
+   */
+  @added(Versions.v2026_10_01)
+  snapshotRecoveryPointInfo?: SnapshotRecoveryPointInfo;
+}
+
+/**
+ * Extended info class details for workload snapshot.
+ */
+@added(Versions.v2026_10_01)
+model SnapshotRecoveryPointInfo {
+  /**
+   * Resource Group of snapshot restore point.
+   */
+  snapshotResourceGroup?: string;
+
+  /**
+   * Per volume filesystem metadata captured on the VM.
+   */
+  @identifiers(#[])
+  sourceFilesystemInfo?: FilesystemInfo[];
+}
+
+/**
+ * Per volume filesystem metadata captured on the VM.
+ */
+@added(Versions.v2026_10_01)
+model FilesystemInfo {
+  /**
+   * Volume GUID path.
+   */
+  volumeGuid?: string;
+
+  /**
+   * Filesystem type (NTFS / ReFS / etc.).
+   */
+  fileSystemType?: string;
+
+  /**
+   * Volume label.
+   */
+  label?: string;
+
+  /**
+   * Drive letters / mount points pointing at this volume.
+   */
+  accessPaths?: string[];
+
+  /**
+   * True when this volume sits on a Windows Storage Spaces virtual disk.
+   */
+  isOnStorageSpace?: boolean;
+
+  /**
+   * Storage Spaces pool / virtual-disk identifiers.
+   */
+  storageSpaceInfo?: StorageSpaceInfo;
+
+  /**
+   * Physical disks that back this volume (or the storage pool).
+   */
+  @identifiers(#[])
+  diskInfoList?: DiskInfo[];
+}
+
+/**
+ * Identifiers for a Windows Storage Spaces pool and its virtual disk.
+ */
+@added(Versions.v2026_10_01)
+model StorageSpaceInfo {
+  /**
+   * Unique ID of the storage pool.
+   */
+  storagePoolUniqueId?: string;
+
+  /**
+   * Friendly name of the storage pool.
+   */
+  storagePoolFriendlyName?: string;
+
+  /**
+   * Unique ID of the virtual disk.
+   */
+  virtualDiskUniqueId?: string;
+
+  /**
+   * Friendly name of the virtual disk.
+   */
+  virtualDiskFriendlyName?: string;
+}
+
+/**
+ * Identifiers for a physical disk that backs a volume.
+ */
+@added(Versions.v2026_10_01)
+model DiskInfo {
+  /**
+   * Disk number.
+   */
+  diskNumber?: int32;
+
+  /**
+   * Unique ID of the disk.
+   */
+  diskUniqueId?: string;
+
+  /**
+   * GUID of the disk.
+   */
+  diskGuid?: string;
+
+  /**
+   * Location of the disk.
+   */
+  diskLocation?: string;
+
+  /**
+   * Size of the disk in bytes.
+   */
+  sizeInBytes?: int64;
+
+  /**
+   * Friendly name of the disk.
+   */
+  friendlyName?: string;
+
+  /**
+   * LUN of the disk.
+   */
+  lun?: int32;
+
+  /**
+   * ARM ID of the managed disk.
+   */
+  managedDiskId?: string;
 }
 
 /**
@@ -5564,6 +5787,7 @@ model BmsrpQueryObject {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_10_01)
   baseSnapshotRPId?: string;
 
   /**
@@ -5576,6 +5800,7 @@ model BmsrpQueryObject {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_10_01)
   baseRPDatasourceId?: string;
 
   /**
@@ -5588,6 +5813,7 @@ model BmsrpQueryObject {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_10_01)
   getLatestRPOnly?: boolean;
 }
 
@@ -6013,6 +6239,7 @@ model DailySchedule {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_10_01)
 model DatabaseInRP {
   /**
    * Datasource Id for the database.
@@ -7215,6 +7442,21 @@ model ValidateRestoreOperationRequest extends ValidateOperationRequest {
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
   objectType: "ValidateRestoreOperationRequest";
+
+  ...ValidateRestoreOperationRequestProperties;
+}
+
+/**
+ * Validate restore request for AzureWorkload (SQL/HANA/SAP ASE/AnyDatabase).
+ */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@added(Versions.v2026_10_01)
+model ValidateAzureWorkloadRestoreOperationRequest
+  extends ValidateOperationRequest {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "ValidateAzureWorkloadRestoreOperationRequest";
 
   ...ValidateRestoreOperationRequestProperties;
 }
@@ -8447,6 +8689,12 @@ model BMSRefreshContainersQueryObject {
    * Backup management type for this container.
    */
   backupManagementType?: BackupManagementType;
+
+  /**
+   * Subscription containing the containers to discover.
+   */
+  @added(Versions.v2026_10_01)
+  containerSubscriptionId?: string;
 }
 
 /**
