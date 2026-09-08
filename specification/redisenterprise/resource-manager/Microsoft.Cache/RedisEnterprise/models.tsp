@@ -1796,12 +1796,12 @@ model AzureCacheForRedisMigrationProperties extends MigrationProperties {
   ]>;
 
   /**
-   * Sets whether the DNS is switched automatically after the data is transferred from the source cache to the target cache. This property must be true during the preview.
+   * Whether to switch the source cache DNS name to the target cache automatically after migration completes. When true, clients using the source cache DNS name are redirected to the target cache.
    */
   switchDns: boolean;
 
   /**
-   * Sets whether the data is migrated from source to target or not. This property must be true during the preview.
+   * Whether to skip copying data from the source cache to the target cache. Set to false to copy data during migration; set to true to migrate without copying data.
    */
   skipDataMigration: boolean;
 
