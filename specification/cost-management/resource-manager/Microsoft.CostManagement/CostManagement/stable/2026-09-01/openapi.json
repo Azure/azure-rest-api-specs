@@ -10849,6 +10849,15 @@
             "format": "decimal"
           },
           "readOnly": true
+        },
+        "postBenefitCharges": {
+          "type": "array",
+          "description": "Each entry represents the hourly on-demand usage charge after the benefit is applied. The array includes one value for every hour from firstConsumptionDate through lastConsumptionDate, and matches the charges array in length and chronological order.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "readOnly": true
         }
       }
     },
