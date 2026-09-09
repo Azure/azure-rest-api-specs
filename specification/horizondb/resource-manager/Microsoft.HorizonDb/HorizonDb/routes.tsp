@@ -115,21 +115,6 @@ interface Clusters {
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @added(Versions.v2026_09_01)
-  @doc("Triggers a failover operation for the HorizonDB cluster. The service selects the new read-write node using the same mechanics as automatic failover.")
-  @action("failover")
-  failover is ArmResourceActionAsyncBase<
-    Cluster,
-    void,
-    | ArmAcceptedLroResponse<
-        "Resource operation accepted.",
-        LroHeaders = ArmLroLocationHeader &
-          ArmAsyncOperationHeader &
-          Azure.Core.Foundations.RetryAfterHeader
-      >
-    | ArmResponse<Cluster>,
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
-  >;
 }
 
 @renamedFrom(Versions.v2026_09_01, "HorizonDbPools")
