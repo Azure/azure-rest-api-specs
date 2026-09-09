@@ -93,7 +93,7 @@ model CostControlPatch {
 @added(Versions.v2026_09_15_preview)
 model CostControlConnections {
   /**
-   * The full resource ID of the Application Insights connection used for cost control telemetry. This connection must be configured before a cost control can be attached and cannot be removed while any cost control remains attached.
+   * The full resource ID of the Application Insights connection used for cost control audit telemetry. This connection is optional for attachment, accounting, and enforcement, and can be configured later. Customer audit delivery requires this connection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted appInsightsConnectionId from an explicit null in PATCH so callers can clear the value."
   appInsightsConnectionId?:
@@ -166,12 +166,11 @@ model CostControlRule {
   match?: CostControlMatch;
 
   /**
-   * The actions evaluated as consumption approaches the configured amount.
+   * The optional actions evaluated as consumption approaches the configured amount. Omitted, null, or empty thresholds define an audit-only rule. Explicit audit thresholds must use a value of zero. Only an explicit block threshold enforces a limit.
    */
-  @minItems(1)
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The current preview accepts omitted, null, or empty thresholds as an audit-only rule."
   @maxItems(10)
-  @identifiers(#[])
-  thresholds: CostControlThreshold[];
+  thresholds?: CostControlThreshold[] | null;
 }
 
 /**
@@ -338,13 +337,13 @@ model CostControlThreshold {
   type: CostControlThresholdType;
 
   /**
-   * The threshold value. Percentage values range from 0 through 100, and absolute values cannot exceed the rule amount.
+   * The threshold value. Audit thresholds must use zero. Block and alert thresholds must be greater than zero. Percentage values cannot exceed 100, and absolute values cannot exceed the rule amount.
    */
   @minValue(0)
   value: float64;
 
   /**
-   * The action taken when the threshold is reached. The default is audit.
+   * The action taken when the threshold is reached. Omitted actions default to audit and therefore require a value of zero.
    */
   action?: CostControlThresholdAction = CostControlThresholdAction.Audit;
 }
@@ -375,7 +374,7 @@ union CostControlThresholdAction {
   string,
 
   /**
-   * Records the threshold crossing without notifying the customer or blocking requests.
+   * Audits every applied usage update. Authored audit thresholds must use zero. This action is retained in the current preview for compatibility; audit-only rules may omit thresholds.
    */
   Audit: "audit",
 
@@ -383,6 +382,11 @@ union CostControlThresholdAction {
    * Emits a customer-facing alert without blocking requests.
    */
   Alert: "alert",
+
+  /**
+   * Blocks the request without emitting a customer-facing alert.
+   */
+  Block: "block",
 }
 
 /**
