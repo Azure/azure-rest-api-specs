@@ -1,4 +1,3 @@
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Response identifies a JSON response body; Result is reserved for HTTP response envelopes."
 namespace ContainerAppsSandbox {
   /** Named egress policy list response body. */
   model NamedEgressPolicyListResponse {

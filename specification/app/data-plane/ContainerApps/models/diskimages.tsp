@@ -1,5 +1,3 @@
-#suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Wire property names are preserved from the source contract; C# names can be customized separately in client.tsp."
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Response identifies a JSON response body; Result is reserved for HTTP response envelopes."
 namespace ContainerAppsSandbox {
   /** A strongly-typed blob URI (with or without SAS token). */
   scalar BlobUri extends string;

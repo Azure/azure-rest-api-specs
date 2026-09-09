@@ -1,4 +1,5 @@
 using Http;
+using Rest;
 using Azure.Core;
 
 namespace ContainerAppsSandbox;
@@ -166,7 +167,6 @@ alias PutVolumeFileUploadErrors =
   | ErrorResult<500>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
 @tag("volumes")
 interface VolumesOperations {
   /** Deletes a volume by name. */
@@ -210,6 +210,7 @@ interface VolumesOperations {
   /** Lists volumes with pagination support. */
   @summary("Lists volumes with pagination support.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes")
+  @listsResource(Volume)
   @get
   listVolumes is Foundations.Operation<
     {
@@ -335,6 +336,7 @@ interface VolumesOperations {
   >;
 
   /** Creates a new volume. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
   @summary("Creates a new volume.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes/{volumeName}")
   @put
@@ -355,6 +357,7 @@ interface VolumesOperations {
 
   /** Upload a file to a volume. */
   #suppress "@azure-tools/typespec-azure-core/byos" "The content is a byte stream, not a BYOS model."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
   @summary("Upload a file to a volume.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes/{volumeName}/files/upload")
   @put

@@ -1,4 +1,5 @@
 using Http;
+using Rest;
 using Azure.Core;
 
 namespace ContainerAppsSandbox;
@@ -89,7 +90,6 @@ alias PutDiskImageErrors =
   | ErrorResult<500>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
 @tag("DiskImages")
 interface DiskImagesOperations {
   /** Deletes a disk image by ID. */
@@ -111,6 +111,7 @@ interface DiskImagesOperations {
   /** Returns disk images scoped to the specified sandbox group. */
   @summary("Lists disk images in a sandbox group, with pagination support.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages")
+  @listsResource(DiskImage)
   @get
   listDiskImages is Foundations.Operation<
     {
@@ -133,6 +134,7 @@ interface DiskImagesOperations {
   /** Public images are admin-curated and shared across all sandbox groups. */
   @summary("Lists all public disk images available to the caller.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/public")
+  @listsResource(PublicDiskImage)
   @get
   listDiskImagesPublic is Foundations.Operation<
     {
@@ -182,6 +184,7 @@ interface DiskImagesOperations {
   >;
 
   /** Creates a new disk image from an OCI image reference. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
   @summary("Creates a new disk image from an OCI image reference.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages")
   @put

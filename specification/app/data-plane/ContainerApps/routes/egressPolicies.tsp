@@ -1,4 +1,5 @@
 using Http;
+using Rest;
 using Azure.Core;
 
 namespace ContainerAppsSandbox;
@@ -72,7 +73,6 @@ alias PutEgressPolicyErrors =
   | ErrorResult<500>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
 @tag("egressPolicies")
 interface EgressPoliciesOperations {
   /** Deletes a named egress policy by ID. */
@@ -94,6 +94,7 @@ interface EgressPoliciesOperations {
   /** Lists all named egress policies in a sandbox group. */
   @summary("Lists all named egress policies in a sandbox group.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/egressPolicies")
+  @listsResource(NamedEgressPolicy)
   @get
   listEgressPolicies is Foundations.Operation<
     {
@@ -121,6 +122,7 @@ interface EgressPoliciesOperations {
   >;
 
   /** Creates or updates a named egress policy. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
   @summary("Creates or updates a named egress policy.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/egressPolicies/{policyId}")
   @put

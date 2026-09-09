@@ -22,7 +22,6 @@ model GetSandboxProcessesStreamResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
 @tag("sandboxes")
 interface SandboxStreamsOperations {
   /** Starts an interactive exec session via WebSocket in a running sandbox. */

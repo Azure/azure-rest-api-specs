@@ -1,4 +1,5 @@
 using Http;
+using Rest;
 using Azure.Core;
 
 namespace ContainerAppsSandbox;
@@ -156,9 +157,9 @@ interface ConnectionsOperations {
 
   /** Lists connections in a sandbox group. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core StandardResourceOperations.ResourceList cannot preserve the existing includeSandboxIds, Page, PageSize, and labels query parameter names or the bare-array response without changing the established wire contract."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This list operation uses a custom response model to preserve the existing bare-array wire contract, which the rule misclassifies as a single-object response."
   @summary("Lists connections in a sandbox group.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/connections")
+  @listsResource(Connection)
   @get
   listConnections is Foundations.Operation<
     {

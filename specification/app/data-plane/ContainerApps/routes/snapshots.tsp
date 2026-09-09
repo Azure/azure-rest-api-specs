@@ -1,4 +1,5 @@
 using Http;
+using Rest;
 using Azure.Core;
 
 namespace ContainerAppsSandbox;
@@ -55,7 +56,6 @@ alias GetSnapshotErrors =
   | ErrorResult<500>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
 @tag("snapshots")
 interface SnapshotsOperations {
   /** Deletes a snapshot by ID. */
@@ -77,6 +77,7 @@ interface SnapshotsOperations {
   /** Lists snapshots with pagination support. */
   @summary("Lists snapshots with pagination support.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/snapshots")
+  @listsResource(Snapshot)
   @get
   listSnapshots is Foundations.Operation<
     {
