@@ -458,6 +458,11 @@ using Microsoft.DataProtection;
   azureLocation,
   "csharp"
 );
+@@clientName(
+  GenericBackupDatasourceParameters,
+  "GenericBackupDataSourceSettings",
+  "csharp"
+);
 @@clientName(IdentityDetails, "DataProtectionIdentityDetails", "csharp");
 @@clientName(
   IdentityDetails.userAssignedIdentityArmUrl,
