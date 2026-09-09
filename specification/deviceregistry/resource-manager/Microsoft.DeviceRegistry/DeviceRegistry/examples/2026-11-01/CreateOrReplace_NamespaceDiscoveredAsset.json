@@ -23,8 +23,7 @@
           "endpointName": "opcuaendpointname"
         },
         "assetTypeRefs": [
-          "myAssetTypeRef1",
-          "myAssetTypeRef2"
+          "myAssetTypeRef1"
         ],
         "discoveryId": "11111111-1111-1111-1111-111111111111",
         "version": 73766,
@@ -92,13 +91,6 @@
                 "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
                 "typeRef": "dataset1DataPoint1TypeRef",
                 "lastUpdatedOn": "2024-04-09T14:20:00.52Z"
-              },
-              {
-                "name": "dataset1DataPoint2",
-                "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt4",
-                "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
-                "typeRef": "dataset1DataPoint2TypeRef",
-                "lastUpdatedOn": "2024-04-09T14:20:00.52Z"
               }
             ]
           }
@@ -124,21 +116,6 @@
                   }
                 ],
                 "typeRef": "event1Ref"
-              },
-              {
-                "name": "event2",
-                "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt4",
-                "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":8,\"queueSize\":4}",
-                "lastUpdatedOn": "2024-04-09T14:20:00.52Z",
-                "destinations": [
-                  {
-                    "target": "Storage",
-                    "configuration": {
-                      "path": "/tmp/event2"
-                    }
-                  }
-                ],
-                "typeRef": "event2Ref"
               }
             ]
           }
@@ -154,23 +131,6 @@
                 "target": "Storage",
                 "configuration": {
                   "path": "/tmp/stream1"
-                }
-              }
-            ]
-          },
-          {
-            "name": "stream2",
-            "streamConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
-            "lastUpdatedOn": "2024-04-09T14:20:00.52Z",
-            "typeRef": "stream2TypeRef",
-            "destinations": [
-              {
-                "target": "Mqtt",
-                "configuration": {
-                  "topic": "/contoso/testStream2",
-                  "retain": "Never",
-                  "qos": "Qos0",
-                  "ttl": 7200
                 }
               }
             ]
@@ -191,16 +151,6 @@
                 "targetUri": "/onvif/device_service?ONVIFProfile=Profile1",
                 "topic": "/contoso/managementGroup1/action1",
                 "typeRef": "action1TypeRef",
-                "actionType": "Call",
-                "timeoutInSeconds": 60,
-                "lastUpdatedOn": "2024-04-09T14:20:00.52Z"
-              },
-              {
-                "name": "action2",
-                "actionConfiguration": "{\"retryCount\":5,\"retryBackoffInterval\":5}",
-                "targetUri": "/onvif/device_service?ONVIFProfile=Profile2",
-                "topic": "/contoso/managementGroup1/action2",
-                "typeRef": "action2TypeRef",
                 "actionType": "Call",
                 "timeoutInSeconds": 60,
                 "lastUpdatedOn": "2024-04-09T14:20:00.52Z"
@@ -239,8 +189,7 @@
             "endpointName": "opcuaendpointname"
           },
           "assetTypeRefs": [
-            "myAssetTypeRef1",
-            "myAssetTypeRef2"
+            "myAssetTypeRef1"
           ],
           "discoveryId": "11111111-1111-1111-1111-111111111111",
           "version": 73766,
@@ -308,13 +257,6 @@
                   "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
                   "typeRef": "dataset1DataPoint1TypeRef",
                   "lastUpdatedOn": "2024-04-09T14:20:00.52Z"
-                },
-                {
-                  "name": "dataset1DataPoint2",
-                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt4",
-                  "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
-                  "typeRef": "dataset1DataPoint2TypeRef",
-                  "lastUpdatedOn": "2024-04-09T14:20:00.52Z"
                 }
               ]
             }
@@ -340,21 +282,6 @@
                     }
                   ],
                   "typeRef": "event1Ref"
-                },
-                {
-                  "name": "event2",
-                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt4",
-                  "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":8,\"queueSize\":4}",
-                  "lastUpdatedOn": "2024-04-09T14:20:00.52Z",
-                  "destinations": [
-                    {
-                      "target": "Storage",
-                      "configuration": {
-                        "path": "/tmp/event2"
-                      }
-                    }
-                  ],
-                  "typeRef": "event2Ref"
                 }
               ]
             }
@@ -370,23 +297,6 @@
                   "target": "Storage",
                   "configuration": {
                     "path": "/tmp/stream1"
-                  }
-                }
-              ]
-            },
-            {
-              "name": "stream2",
-              "streamConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
-              "lastUpdatedOn": "2024-04-09T14:20:00.52Z",
-              "typeRef": "stream2TypeRef",
-              "destinations": [
-                {
-                  "target": "Mqtt",
-                  "configuration": {
-                    "topic": "/contoso/testStream2",
-                    "retain": "Never",
-                    "qos": "Qos0",
-                    "ttl": 7200
                   }
                 }
               ]
@@ -407,16 +317,6 @@
                   "targetUri": "/onvif/device_service?ONVIFProfile=Profile1",
                   "topic": "/contoso/managementGroup1/action1",
                   "typeRef": "action1TypeRef",
-                  "actionType": "Call",
-                  "timeoutInSeconds": 60,
-                  "lastUpdatedOn": "2024-04-09T14:20:00.52Z"
-                },
-                {
-                  "name": "action2",
-                  "actionConfiguration": "{\"retryCount\":5,\"retryBackoffInterval\":5}",
-                  "targetUri": "/onvif/device_service?ONVIFProfile=Profile2",
-                  "topic": "/contoso/managementGroup1/action2",
-                  "typeRef": "action2TypeRef",
                   "actionType": "Call",
                   "timeoutInSeconds": 60,
                   "lastUpdatedOn": "2024-04-09T14:20:00.52Z"
@@ -455,8 +355,7 @@
             "endpointName": "opcuaendpointname"
           },
           "assetTypeRefs": [
-            "myAssetTypeRef1",
-            "myAssetTypeRef2"
+            "myAssetTypeRef1"
           ],
           "discoveryId": "11111111-1111-1111-1111-111111111111",
           "version": 73766,
@@ -524,13 +423,6 @@
                   "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
                   "typeRef": "dataset1DataPoint1TypeRef",
                   "lastUpdatedOn": "2024-04-09T14:20:00.52Z"
-                },
-                {
-                  "name": "dataset1DataPoint2",
-                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt4",
-                  "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
-                  "typeRef": "dataset1DataPoint2TypeRef",
-                  "lastUpdatedOn": "2024-04-09T14:20:00.52Z"
                 }
               ]
             }
@@ -556,21 +448,6 @@
                     }
                   ],
                   "typeRef": "event1Ref"
-                },
-                {
-                  "name": "event2",
-                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt4",
-                  "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":8,\"queueSize\":4}",
-                  "lastUpdatedOn": "2024-04-09T14:20:00.52Z",
-                  "destinations": [
-                    {
-                      "target": "Storage",
-                      "configuration": {
-                        "path": "/tmp/event2"
-                      }
-                    }
-                  ],
-                  "typeRef": "event2Ref"
                 }
               ]
             }
@@ -586,23 +463,6 @@
                   "target": "Storage",
                   "configuration": {
                     "path": "/tmp/stream1"
-                  }
-                }
-              ]
-            },
-            {
-              "name": "stream2",
-              "streamConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
-              "lastUpdatedOn": "2024-04-09T14:20:00.52Z",
-              "typeRef": "stream2TypeRef",
-              "destinations": [
-                {
-                  "target": "Mqtt",
-                  "configuration": {
-                    "topic": "/contoso/testStream2",
-                    "retain": "Never",
-                    "qos": "Qos0",
-                    "ttl": 7200
                   }
                 }
               ]
@@ -623,16 +483,6 @@
                   "targetUri": "/onvif/device_service?ONVIFProfile=Profile1",
                   "topic": "/contoso/managementGroup1/action1",
                   "typeRef": "action1TypeRef",
-                  "actionType": "Call",
-                  "timeoutInSeconds": 60,
-                  "lastUpdatedOn": "2024-04-09T14:20:00.52Z"
-                },
-                {
-                  "name": "action2",
-                  "actionConfiguration": "{\"retryCount\":5,\"retryBackoffInterval\":5}",
-                  "targetUri": "/onvif/device_service?ONVIFProfile=Profile2",
-                  "topic": "/contoso/managementGroup1/action2",
-                  "typeRef": "action2TypeRef",
                   "actionType": "Call",
                   "timeoutInSeconds": 60,
                   "lastUpdatedOn": "2024-04-09T14:20:00.52Z"
