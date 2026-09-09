@@ -43,12 +43,27 @@ namespace Customizations;
 @@clientName(RuntimeJavaJavaAgent, "ContainerAppRuntimeJavaAgent", "csharp");
 @@clientName(
   CheckMigrationEligibilityRequest,
-  "CheckMigrationEligibilityContent",
+  "ContainerAppManagedEnvironmentMigrationEligibilityContent",
   "csharp"
 );
 @@clientName(
   CheckMigrationEligibilityResponse,
-  "CheckMigrationEligibilityResult",
+  "ContainerAppManagedEnvironmentMigrationEligibilityResult",
+  "csharp"
+);
+@@clientName(
+  MigrationEligibilityFailureReason,
+  "ContainerAppManagedEnvironmentMigrationEligibilityFailureReason",
+  "csharp"
+);
+@@clientName(
+  AvailableEnvironmentMode,
+  "ContainerAppAvailableEnvironmentMode",
+  "csharp"
+);
+@@clientName(
+  AvailableEnvironmentModeProperties,
+  "ContainerAppAvailableEnvironmentModeProperties",
   "csharp"
 );
 @@clientName(
@@ -215,6 +230,38 @@ union OpenIdConnectClientCredentialMethod {
 @@clientName(BuildToken.expires, "ExpiresOn", "csharp");
 
 @@clientName(Header, "ContainerAppOtlpHeader", "csharp");
+
+@@clientName(
+  DestinationsConfiguration,
+  "ContainerAppOpenTelemetryDestinationsConfiguration",
+  "csharp"
+);
+
+@@clientName(
+  MetricsConfiguration,
+  "ContainerAppOpenTelemetryMetricsConfiguration",
+  "csharp"
+);
+
+@@clientName(
+  TracesConfiguration,
+  "ContainerAppOpenTelemetryTracesConfiguration",
+  "csharp"
+);
+
+@@clientName(JobRunningState, "ContainerAppJobRunningState", "csharp");
+
+@@clientName(
+  ReplicaExecutionStatus,
+  "ContainerAppJobExecutionReplicaStatus",
+  "csharp"
+);
+
+@@clientName(
+  ContainerExecutionStatus,
+  "ContainerAppJobExecutionContainerStatus",
+  "csharp"
+);
 
 @@clientName(
   ManagedEnvironments.list,
@@ -1041,6 +1088,28 @@ union OpenIdConnectClientCredentialMethod {
 @@clientName(LabelHistoryRecordItem.start, "StartedOn", "csharp");
 
 @@clientName(LabelHistoryRecordItem.stop, "StoppedOn", "csharp");
+
+@@clientName(
+  LabelHistoryRecordItem,
+  "ContainerAppLabelHistoryRecordItem",
+  "csharp"
+);
+
+@@clientName(Status, "ContainerAppLabelHistoryStatus", "csharp");
+
+@@clientName(VnetConnection, "SandboxGroupVnetConnection", "csharp");
+
+@@clientName(
+  VnetConnectionProperties,
+  "SandboxGroupVnetConnectionProperties",
+  "csharp"
+);
+
+@@clientName(
+  VnetConnectionProvisioningState,
+  "SandboxGroupVnetConnectionProvisioningState",
+  "csharp"
+);
 
 @@clientName(MetricsConfiguration.includeKeda, "IsKedaIncluded", "csharp");
 
