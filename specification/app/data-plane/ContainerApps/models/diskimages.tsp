@@ -1,30 +1,6 @@
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Wire property names are preserved from the source contract; C# names can be customized separately in client.tsp."
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Response identifies a JSON response body; Result is reserved for HTTP response envelopes."
 namespace ContainerAppsSandbox {
-  /** AsyncOperationId wire model. */
-  scalar AsyncOperationId extends string;
-
-  /** Status of an asynchronous operation. IMPORTANT: Always use explicit integer values. Never reorder or reassign existing values. */
-  @Azure.Core.lroStatus
-  union AsyncOperationStatus {
-    /** StringValue variant. */
-    StringValue: string,
-
-    /** Pending variant. */
-    Pending: "Pending",
-
-    /** InProgress variant. */
-    InProgress: "InProgress",
-
-    /** Succeeded variant. */
-    @Azure.Core.lroSucceeded
-    Succeeded: "Succeeded",
-
-    /** Failed variant. */
-    @Azure.Core.lroFailed
-    Failed: "Failed",
-  }
-
   /** A strongly-typed blob URI (with or without SAS token). */
   scalar BlobUri extends string;
 
@@ -79,30 +55,6 @@ namespace ContainerAppsSandbox {
 
     /** Managed identity authentication. */
     identity?: ManagedIdentityAuthentication;
-  }
-
-  /** Disk-image operation response body. */
-  model DiskImageOperationResponse {
-    /** operationId value. */
-    @Azure.Core.pollingOperationParameter("operationId")
-    operationId: AsyncOperationId;
-
-    /** status value. */
-    status: AsyncOperationStatus;
-
-    /** errorMessage value. */
-    @Azure.Core.lroErrorResult
-    errorMessage?: string;
-
-    /** diskImage value. */
-    @Azure.Core.lroResult
-    diskImage?: DiskImage;
-
-    /** createdAt value. */
-    createdAt: utcDateTime;
-
-    /** updatedAt value. */
-    updatedAt: utcDateTime;
   }
 
   /** PublicDiskImage wire model. */

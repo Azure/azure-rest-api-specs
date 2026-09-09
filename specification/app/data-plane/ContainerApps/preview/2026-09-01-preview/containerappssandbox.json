@@ -1451,153 +1451,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/async": {
-      "put": {
-        "operationId": "DiskImagesOperations_PutDiskImageAsync",
-        "tags": [
-          "DiskImages"
-        ],
-        "summary": "Creates a disk image asynchronously from an OCI image reference.",
-        "description": "Creates a disk image asynchronously from an OCI image reference.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request body.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CreateDiskImageContent"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/DiskImageOperationResponse"
-            },
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "400": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Create a disk image asynchronously from a blob": {
-            "$ref": "./examples/DiskImagesOperations_PutDiskImageAsync.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/operations/{operationId}": {
-      "get": {
-        "operationId": "DiskImagesOperations_Get",
-        "tags": [
-          "DiskImages"
-        ],
-        "summary": "Gets the status of an async disk image operation.",
-        "description": "Gets the status of an async disk image operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "operationId parameter.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/DiskImageOperationResponse"
-            }
-          },
-          "401": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Get the status of a disk image operation": {
-            "$ref": "./examples/DiskImagesOperations_Get.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/public": {
       "get": {
         "operationId": "DiskImagesOperations_ListDiskImagesPublic",
@@ -4597,78 +4450,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/stop/async": {
-      "post": {
-        "operationId": "SandboxLifecycleOperations_PostSandboxStopAsync",
-        "tags": [
-          "sandboxes"
-        ],
-        "summary": "Non-blocking stop: accepts the request, moves the sandbox to Stopping, and completes the\nsnapshot/suspend asynchronously.\nPoll GET on the sandbox for Stopping → Stopped | Failed.",
-        "description": "Non-blocking stop: accepts the request, moves the sandbox to Stopping, and completes the snapshot/suspend asynchronously. Poll GET on the sandbox for Stopping → Stopped | Failed.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id parameter.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted.",
-            "schema": {
-              "$ref": "#/definitions/Sandbox"
-            }
-          },
-          "401": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Post Sandbox Stop Async example": {
-            "$ref": "./examples/SandboxLifecycleOperations_PostSandboxStopAsync.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/volumes/add": {
       "post": {
         "operationId": "SandboxStorageOperations_PostSandboxVolumeAdd",
@@ -6372,46 +6153,6 @@
       "type": "string",
       "description": "ARM resource ID for an Azure user-assigned managed identity."
     },
-    "AsyncOperationId": {
-      "type": "string",
-      "description": "AsyncOperationId wire model."
-    },
-    "AsyncOperationStatus": {
-      "type": "string",
-      "description": "Status of an asynchronous operation. IMPORTANT: Always use explicit integer values. Never reorder or reassign existing values.",
-      "enum": [
-        "Pending",
-        "InProgress",
-        "Succeeded",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "AsyncOperationStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pending",
-            "value": "Pending",
-            "description": "Pending variant."
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "InProgress variant."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Succeeded variant."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Failed variant."
-          }
-        ]
-      }
-    },
     "AuthorizeConnectionContent": {
       "type": "object",
       "description": "AuthorizeConnectionContent wire model.",
@@ -8048,44 +7789,6 @@
         "base"
       ]
     },
-    "DiskImageOperationResponse": {
-      "type": "object",
-      "description": "Disk-image operation response body.",
-      "properties": {
-        "operationId": {
-          "$ref": "#/definitions/AsyncOperationId",
-          "description": "operationId value."
-        },
-        "status": {
-          "$ref": "#/definitions/AsyncOperationStatus",
-          "description": "status value."
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "errorMessage value."
-        },
-        "diskImage": {
-          "$ref": "#/definitions/DiskImage",
-          "description": "diskImage value."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "createdAt value."
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "updatedAt value."
-        }
-      },
-      "required": [
-        "operationId",
-        "status",
-        "createdAt",
-        "updatedAt"
-      ]
-    },
     "DiskImageStatus": {
       "type": "object",
       "description": "DiskImageStatus wire model.",
@@ -9218,44 +8921,6 @@
       },
       "required": [
         "body"
-      ]
-    },
-    "GetDiskImageOperationResult": {
-      "type": "object",
-      "description": "OK.",
-      "properties": {
-        "operationId": {
-          "$ref": "#/definitions/AsyncOperationId",
-          "description": "operationId value."
-        },
-        "status": {
-          "$ref": "#/definitions/AsyncOperationStatus",
-          "description": "status value."
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "errorMessage value."
-        },
-        "diskImage": {
-          "$ref": "#/definitions/DiskImage",
-          "description": "diskImage value."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "createdAt value."
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "updatedAt value."
-        }
-      },
-      "required": [
-        "operationId",
-        "status",
-        "createdAt",
-        "updatedAt"
       ]
     },
     "GetDiskImagePublicResult": {
@@ -10804,19 +10469,6 @@
         "body"
       ]
     },
-    "PostSandboxStopAsyncResult": {
-      "type": "object",
-      "description": "Accepted.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Sandbox",
-          "description": "Response body."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "PostSandboxStopResult": {
       "type": "object",
       "description": "OK.",
@@ -11054,19 +10706,6 @@
       "properties": {
         "body": {
           "$ref": "#/definitions/SandboxGroupCredential",
-          "description": "Response body."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "PutDiskImageAsyncResult": {
-      "type": "object",
-      "description": "Accepted.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/DiskImageOperationResponse",
           "description": "Response body."
         }
       },

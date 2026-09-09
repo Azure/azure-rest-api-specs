@@ -152,22 +152,6 @@ alias PostSandboxStopErrors =
   | ErrorResult<409>
   | ErrorResult<500>;
 
-/** Accepted. */
-model PostSandboxStopAsyncResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 202;
-
-  /** Response body. */
-  @body body: Sandbox;
-}
-
-/** Errors returned by postSandboxStopAsync. */
-alias PostSandboxStopAsyncErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
-
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
 @tag("sandboxes")
@@ -326,21 +310,5 @@ interface SandboxLifecycleOperations {
     PostSandboxStopResult,
     DataPlaneStandardTraits,
     PostSandboxStopErrors
-  >;
-
-  /** Non-blocking stop: accepts the request, moves the sandbox to Stopping, and completes the snapshot/suspend asynchronously. Poll GET on the sandbox for Stopping → Stopped | Failed. */
-  @summary("Non-blocking stop: accepts the request, moves the sandbox to Stopping, and completes the\nsnapshot/suspend asynchronously.\nPoll GET on the sandbox for Stopping → Stopped | Failed.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/stop/async")
-  @post
-  postSandboxStopAsync is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-    },
-    PostSandboxStopAsyncResult,
-    DataPlaneStandardTraits,
-    PostSandboxStopAsyncErrors
   >;
 }
