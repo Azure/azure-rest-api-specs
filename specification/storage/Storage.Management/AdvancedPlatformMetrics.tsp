@@ -98,7 +98,15 @@ model AdvancedPlatformMetricsRuleProperties {
   /**
    * The metrics emitted by the rule. Metrics are mapped according to the rule type from RuleTypeProperty. Rule type to metrics mapping: ContainerLevelCapacityMetrics => {ContainerUsedSize, ContainerBlobCount}.
    */
+  @removed(Versions.v2026_09_01)
   @visibility(Lifecycle.Read)
+  @renamedFrom(Versions.v2026_09_01, "metricsEmitted")
+  oldMetricsEmitted?: MetricsEmitted[];
+
+  /**
+   * The metrics emitted by the rule. If omitted in a create or update request, the service enables all metrics supported by the selected rule type.
+   */
+  @added(Versions.v2026_09_01)
   metricsEmitted?: MetricsEmitted[];
 
   /**
