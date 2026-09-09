@@ -865,6 +865,162 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/getRPExtendedInfo": {
+      "post": {
+        "operationId": "RecoveryPoints_GetRPExtendedInfo",
+        "tags": [
+          "RecoveryPoints"
+        ],
+        "description": "Triggers fetching the additional details of a recovery point, which are not returned by the recovery point GET\nAPI. This is an asynchronous operation. Returns tracking headers which can be tracked using the\nGetRPExtendedInfoOperationResult API.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the backed up items.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request payload containing the ARM id of the recovery point whose additional details are to be fetched.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetRPExtendedInfoRequestResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the shared fabric level operation status endpoint, which reports the status of this long\nrunning operation. The result itself is retrieved from the URL in the Location header."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Trigger Get RP Extended Info": {
+            "$ref": "./examples/AzureIaasVm/TriggerGetRPExtendedInfo.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/getRPExtendedInfoOperationResult/{operationId}": {
+      "get": {
+        "operationId": "RecoveryPoints_GetRPExtendedInfoOperationResult",
+        "tags": [
+          "RecoveryPoints"
+        ],
+        "description": "Returns the additional details of the recovery points fetched by a prior getRPExtendedInfo operation, keyed by\nrecovery point ARM id. Returns 202 Accepted while the operation is still running.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the backed up items.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "OperationID which represents the prior getRPExtendedInfo operation whose result needs to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RPExtendedInfoResourceDictionary"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the shared fabric level operation status endpoint, which reports the status of the long\nrunning operation whose result this endpoint returns."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get RP Extended Info Operation Result": {
+            "$ref": "./examples/AzureIaasVm/GetRPExtendedInfoOperationResult.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationResults/{operationId}": {
       "get": {
         "operationId": "ProtectionContainerRefreshOperationResults_Get",
@@ -9621,6 +9777,15 @@
         },
         "name": {
           "type": "string"
+        },
+        "diskSizeInGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of the disk in GB."
+        },
+        "storageType": {
+          "type": "string",
+          "description": "Storage type of the disk."
         }
       }
     },
@@ -10404,6 +10569,52 @@
         }
       }
     },
+    "GetRPExtendedInfoRequest": {
+      "type": "object",
+      "description": "Request for fetching the additional details of a recovery point.",
+      "properties": {
+        "recoveryPointIds": {
+          "type": "array",
+          "description": "ARM id of the recovery point whose additional details are to be fetched. Exactly one recovery point id can be\nspecified.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "recoveryPointIds"
+      ]
+    },
+    "GetRPExtendedInfoRequestResource": {
+      "type": "object",
+      "description": "Request for fetching the additional details of a recovery point, wrapped in a resource envelope.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Optional ETag."
+        },
+        "properties": {
+          "$ref": "#/definitions/GetRPExtendedInfoRequest",
+          "description": "GetRPExtendedInfoRequestResource properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "HealthState": {
       "type": "string",
       "description": "Health State for the backed up item.",
@@ -10707,6 +10918,30 @@
         }
       ],
       "x-ms-discriminator-value": "IaasVMILRRegistrationRequest"
+    },
+    "IaasVMRPExtendedInfo": {
+      "type": "object",
+      "description": "Additional details of an IaaS VM recovery point.",
+      "properties": {
+        "osDisk": {
+          "$ref": "#/definitions/DiskInformation",
+          "description": "OS disk of the backed up virtual machine. The lun of the OS disk is always -1, since a logical unit number is\nonly assigned to data disks."
+        },
+        "dataDisks": {
+          "type": "array",
+          "description": "Data disks of the backed up virtual machine.",
+          "items": {
+            "$ref": "#/definitions/DiskInformation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RPExtendedInfo"
+        }
+      ],
+      "x-ms-discriminator-value": "IaasVMRPExtendedInfo"
     },
     "IaasVMRecoveryPoint": {
       "type": "object",
@@ -13644,6 +13879,67 @@
             "value": "Pending"
           }
         ]
+      }
+    },
+    "RPExtendedInfo": {
+      "type": "object",
+      "description": "Base class for additional details of a recovery point. Workload-specific additional details are derived from\nthis class.",
+      "properties": {
+        "objectType": {
+          "type": "string",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types."
+        }
+      },
+      "discriminator": "objectType",
+      "required": [
+        "objectType"
+      ]
+    },
+    "RPExtendedInfoResource": {
+      "type": "object",
+      "description": "Additional details of a recovery point, wrapped in a resource envelope.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Optional ETag."
+        },
+        "properties": {
+          "$ref": "#/definitions/RPExtendedInfo",
+          "description": "RPExtendedInfoResource properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "RPExtendedInfoResourceDictionary": {
+      "type": "object",
+      "description": "Dictionary of the additional details of recovery points, keyed by recovery point ARM id.",
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "Additional details of the recovery points, keyed by recovery point ARM id.",
+          "additionalProperties": {
+            "$ref": "#/definitions/RPExtendedInfoResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of resources."
+        }
       }
     },
     "RecoveryMode": {

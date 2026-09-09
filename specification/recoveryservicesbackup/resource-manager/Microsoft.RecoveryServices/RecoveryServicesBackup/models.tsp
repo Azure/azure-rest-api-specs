@@ -5825,6 +5825,117 @@ model DiskInformation {
   lun?: int32;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
+
+  /**
+   * Size of the disk in GB.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Wire name is fixed by the existing BMS data contract, which spells the unit as GB."
+  @added(Versions.v2026_10_01)
+  diskSizeInGB?: int32;
+
+  /**
+   * Storage type of the disk.
+   */
+  @added(Versions.v2026_10_01)
+  storageType?: string;
+}
+
+/**
+ * Base class for additional details of a recovery point. Workload-specific additional details are derived from
+ * this class.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "RP is an established acronym in the BMS contract; the model name matches the service data contract."
+@added(Versions.v2026_10_01)
+@discriminator("objectType")
+model RPExtendedInfo {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Preserving the existing BMS polymorphic contract, which uses a string objectType discriminator."
+  objectType: string;
+}
+
+/**
+ * Additional details of an IaaS VM recovery point.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IaasVM and RP are established acronyms in the BMS contract; the model name matches the service data contract."
+@added(Versions.v2026_10_01)
+model IaasVMRPExtendedInfo extends RPExtendedInfo {
+  /**
+   * OS disk of the backed up virtual machine. The lun of the OS disk is always -1, since a logical unit number is
+   * only assigned to data disks.
+   */
+  osDisk?: DiskInformation;
+
+  /**
+   * Data disks of the backed up virtual machine.
+   */
+  @identifiers(#[])
+  dataDisks?: DiskInformation[];
+
+  objectType: "IaasVMRPExtendedInfo";
+}
+
+/**
+ * Additional details of a recovery point, wrapped in a resource envelope.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "RP is an established acronym in the BMS contract; the model name matches the service data contract."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Matches the existing BMS resource envelope pattern used by RestoreRequestResource, BackupRequestResource and ILRRequestResource."
+@added(Versions.v2026_10_01)
+model RPExtendedInfoResource extends Resource {
+  ...ResourceProperties;
+
+  /**
+   * RPExtendedInfoResource properties
+   */
+  properties?: RPExtendedInfo;
+}
+
+/**
+ * Dictionary of the additional details of recovery points, keyed by recovery point ARM id.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "RP is an established acronym in the BMS contract; the model name matches the service data contract."
+@added(Versions.v2026_10_01)
+model RPExtendedInfoResourceDictionary {
+  /**
+   * Additional details of the recovery points, keyed by recovery point ARM id.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The response is keyed by recovery point ARM id, which is caller supplied, so the key set cannot be modelled as explicit properties. This matches the ResourceDictionary contract returned by the service."
+  value?: Record<RPExtendedInfoResource>;
+
+  /**
+   * The URI to fetch the next page of resources.
+   */
+  nextLink?: string;
+}
+
+/**
+ * Request for fetching the additional details of a recovery point, wrapped in a resource envelope.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "RP is an established acronym in the BMS contract; the model name matches the service data contract."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Matches the existing BMS resource envelope pattern used by RestoreRequestResource, BackupRequestResource and ILRRequestResource."
+@added(Versions.v2026_10_01)
+model GetRPExtendedInfoRequestResource extends Resource {
+  ...ResourceProperties;
+
+  /**
+   * GetRPExtendedInfoRequestResource properties
+   */
+  properties?: GetRPExtendedInfoRequest;
+}
+
+/**
+ * Request for fetching the additional details of a recovery point.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "RP is an established acronym in the BMS contract; the model name matches the service data contract."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept in sync with the BMS service data contract."
+@added(Versions.v2026_10_01)
+model GetRPExtendedInfoRequest {
+  /**
+   * ARM id of the recovery point whose additional details are to be fetched. Exactly one recovery point id can be
+   * specified.
+   */
+  recoveryPointIds: string[];
 }
 
 /**
