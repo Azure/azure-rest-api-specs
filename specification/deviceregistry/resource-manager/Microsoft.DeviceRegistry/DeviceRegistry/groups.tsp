@@ -67,6 +67,7 @@ model GroupListMembersRequest {
 @doc("Response for the list members operation.")
 model GroupListMembersResult {
   @doc("The group members returned in this page.")
+  @identifiers(#["id"])
   members: GroupListMember[];
 
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is a paging cursor, not a credential or secret."
