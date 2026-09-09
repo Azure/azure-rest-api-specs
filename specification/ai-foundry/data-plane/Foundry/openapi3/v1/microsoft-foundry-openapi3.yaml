@@ -49063,6 +49063,12 @@ components:
         name:
           type: string
           description: Filename to assign to the generated fine-tuning file.
+        write_mode:
+          $ref: '#/components/schemas/DataGenerationJobOutputWriteMode'
+          description: Controls how file outputs are written. If omitted, defaults to `overwrite` and writes only the newly generated fine-tuning file content.
+        merge_file_id:
+          type: string
+          description: File ID to merge into when `write_mode` is `merge`.
       description: File output target for a fine-tuning data generation job.
       x-ms-foundry-meta:
         conditional_previews:

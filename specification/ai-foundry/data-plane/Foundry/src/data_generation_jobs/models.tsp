@@ -112,6 +112,12 @@ model EvaluationDataGenerationJobOutputTarget {
 model FineTuningDataGenerationJobOutputTarget {
   @doc("Filename to assign to the generated fine-tuning file.")
   name?: string;
+
+  @doc("Controls how file outputs are written. If omitted, defaults to `overwrite` and writes only the newly generated fine-tuning file content.")
+  write_mode?: DataGenerationJobOutputWriteMode;
+
+  @doc("File ID to merge into when `write_mode` is `merge`.")
+  merge_file_id?: string;
 }
 
 @doc("The supported write modes for data generation job outputs.")
@@ -119,10 +125,10 @@ model FineTuningDataGenerationJobOutputTarget {
 union DataGenerationJobOutputWriteMode {
   string,
 
-  @doc("Default behavior. Create the next dataset version using only newly generated rows, replacing the previous version's rows in the new version.")
+  @doc("Default behavior. Write newly generated output without merging it with an existing output. For dataset outputs, creates the next dataset version using only newly generated rows.")
   overwrite: "overwrite",
 
-  @doc("Applicable only for trace data generation jobs that output evaluation datasets. Create the next dataset version by merging newly generated rows with the latest existing dataset version and de-duping trace rows.")
+  @doc("Merge newly generated output into an existing output. For trace data generation jobs that output evaluation datasets, creates the next dataset version by merging newly generated rows with the latest existing dataset version and de-duping trace rows. For fine-tuning file outputs, merges into the file identified by `merge_file_id`.")
   merge: "merge",
 }
 
