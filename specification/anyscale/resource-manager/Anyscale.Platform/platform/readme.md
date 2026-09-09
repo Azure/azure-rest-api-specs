@@ -33,6 +33,18 @@ These settings apply only when `--tag=package-2026-09-01` is specified on the co
 ``` yaml $(tag) == 'package-2026-09-01'
 input-file:
 - stable/2026-09-01/anyscale.json
+directive:
+	- suppress: AvoidAdditionalProperties
+		from: anyscale.json
+		where:
+			- $.definitions.NodeType.properties.labels
+			- $.definitions.NodeType.properties.requiredLabels
+			- $.definitions.LogicalResources.properties.customResources
+			- $.definitions.JobConfig.properties.envVars
+			- $.definitions.ServiceDeploymentConfig.properties.envVars
+			- $.definitions.NodeType.properties.flags
+			- $.definitions.ComputeConfigSpecOption.properties.flags
+		reason: Intentional dynamic-key maps required by the Anyscale control-plane contract; value types are production-validated (labels/requiredLabels/envVars string, customResources int, flags heterogeneous).
 ```
 
 ## Az

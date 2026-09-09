@@ -118,8 +118,8 @@ model ServiceDeploymentConfig {
   maxUptimeTimeoutSec?: int32;
 
   /** Environment variables to set on the service cluster. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Intended to be key value pairs."
-  envVars?: {};
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The runtime environment contract is a dynamic map with string values."
+  envVars?: Record<string>;
 
   /** Tracing configuration for distributed tracing. */
   tracingConfig?: TracingConfig;
