@@ -2616,10 +2616,10 @@
             "create"
           ]
         },
-        "usedCapacityTiB": {
+        "usedCapacityGiB": {
           "type": "integer",
           "format": "int64",
-          "description": "Used capacity in TiB.",
+          "description": "Used capacity in GiB.",
           "readOnly": true
         },
         "totalReservedIops": {
@@ -3594,6 +3594,48 @@
         }
       ]
     },
+    "SnapshotAccessState": {
+      "type": "string",
+      "description": "The state of snapshot which determines the access availability of the snapshot.",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Available",
+        "InstantAccess",
+        "AvailableWithInstantAccess"
+      ],
+      "x-ms-enum": {
+        "name": "SnapshotAccessState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Default value."
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The snapshot cannot be used for restore, copy or download to offline."
+          },
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "The snapshot can be used for restore, copy to different region, and download to offline."
+          },
+          {
+            "name": "InstantAccess",
+            "value": "InstantAccess",
+            "description": "The snapshot can be used for restoring volumes with fast performance but cannot be copied or downloaded."
+          },
+          {
+            "name": "AvailableWithInstantAccess",
+            "value": "AvailableWithInstantAccess",
+            "description": "The snapshot can be used for restoring volumes with fast performance, copied and downloaded."
+          }
+        ]
+      }
+    },
     "SnapshotCreationData": {
       "type": "object",
       "description": "Data used when creating a volume snapshot.",
@@ -3650,6 +3692,17 @@
         "volumeName": {
           "type": "string",
           "description": "Source Volume Name of a snapshot",
+          "readOnly": true
+        },
+        "snapshotAccessState": {
+          "$ref": "#/definitions/SnapshotAccessState",
+          "description": "The state of snapshot which determines the access availability of the snapshot.",
+          "readOnly": true
+        },
+        "completionPercent": {
+          "type": "number",
+          "format": "float",
+          "description": "Percentage complete for the background copy of the snapshot when a snapshot is in InstantAccess state.",
           "readOnly": true
         }
       },
@@ -4059,12 +4112,6 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStates",
           "description": "State of the operation on the resource.",
-          "readOnly": true
-        },
-        "usedSizeGiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Used volume size in GiB.",
           "readOnly": true
         }
       },
