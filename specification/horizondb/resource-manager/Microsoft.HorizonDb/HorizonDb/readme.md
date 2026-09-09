@@ -41,12 +41,98 @@ input-file:
 suppressions:
   - code: PutRequestResponseSchemeArm
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/administrators/{objectId}"].put
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/microsoftEntraAdministrators/{objectId}"].put
     reason: >-
-      The administrator create (PUT) accepts a dedicated add model
-      (HorizonDbAdministratorAdd) whose properties are a subset of the resource
+      The Microsoft Entra administrator create (PUT) accepts a dedicated add model
+      (MicrosoftEntraAdministratorAdd) whose properties are a subset of the resource
       read model. objectId are read-only fields returned by GET but not accepted on PUT.
       The resource has no updatable fields beyond create, so no PATCH operation is provided.
+  - code: PathForNestedResource
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications/passwordMethod"]
+    reason: >-
+      passwordMethod is a service-created singleton authentication resource with a fixed
+      literal name. It cannot be created or deleted independently, and parameterizing the
+      final segment would incorrectly imply that callers can address arbitrary instances.
+  - code: PathForNestedResource
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications/microsoftEntra"]
+    reason: >-
+      microsoftEntra is a service-created singleton authentication resource with a fixed
+      literal name. It cannot be created or deleted independently, and parameterizing the
+      final segment would incorrectly imply that callers can address arbitrary instances.
+  - code: ConsistentPatchProperties
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications/passwordMethod"].patch.parameters[4].schema
+    reason: >-
+      administratorLogin and administratorLoginPassword are update-only secrets used to
+      create, rename, or reset the PostgreSQL administrator. The control plane does not
+      store or return these credentials, so exposing them on the read resource model would
+      violate the API's security boundary.
+  - code: ConsistentPatchProperties
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}"].patch.parameters[5].schema
+    reason: >-
+      vCores is defined on the ProvisionedHorizonDbPoolComputeModel resource subtype and
+      applies only when computeModel.type is Provisioned. The validator compares the PATCH
+      field only with the base PoolComputeModel and cannot resolve the discriminator
+      hierarchy, so it incorrectly reports the subtype property as missing.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.ChangeDataCaptureCapabilityProperties.properties.autoUpgradeExtension
+    reason: >-
+      autoUpgradeExtension is an intrinsically binary authorization indicating whether
+      HorizonDB may automatically upgrade the service-owned extension. Additional extension
+      lifecycle states are represented by the extension status model, not this permission.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.ChangeDataCaptureCapabilityPropertiesForPatchUpdate.properties.autoUpgradeExtension
+    reason: >-
+      autoUpgradeExtension is an intrinsically binary authorization indicating whether
+      HorizonDB may automatically upgrade the service-owned extension. Omission preserves
+      the current setting, so a third enum value is not needed for partial updates.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.MaintenanceEventActionResponse.properties.appliedNow
+    reason: >-
+      appliedNow records the binary outcome of whether the customer selected the apply-now
+      action rather than rescheduling the event. Other maintenance lifecycle conditions are
+      represented by the separate status property.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.MaintenanceEventProperties.properties.deferrable
+    reason: >-
+      deferrable indicates whether the maintenance event can be rescheduled at all. The
+      deferral deadline provides the associated scheduling detail when this capability is
+      available, so an enum would not add another meaningful state.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.ActivateChangeDataCaptureIdentityRequest.properties.drainExistingSessions
+    reason: >-
+      drainExistingSessions is an intrinsically binary instruction controlling whether
+      existing destination sessions drain before identity cutover. Omission selects the
+      documented false default, so an additional enum state is not required.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: openapi.json
+    where: $.definitions.PagedLocationCapability
+    reason: >-
+      PagedLocationCapability is a non-resource collection envelope for regional capability
+      metadata, not an ARM resource. Its items are identified by location, and the envelope
+      must not contain resource id, name, or type properties.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: openapi.json
+    where: $.definitions.PagedParameterGroupConnectionProperties
+    reason: >-
+      PagedParameterGroupConnectionProperties is a non-resource collection envelope for
+      pool connection metadata, not an ARM resource. Its items are identified by
+      poolResourceId, and the envelope must not contain resource id, name, or type properties.
+  - code: LocationMustHaveXmsMutability
+    from: openapi.json
+    where: $.definitions.LocationCapability.properties.location
+    reason: >-
+      LocationCapability is read-only capability metadata returned by the list operation,
+      not a resource create or update model. Its location identifies the region described by
+      the response and is therefore intentionally read-only.
 ```
 
 ### Tag: package-horizondb-2026-05-01-preview

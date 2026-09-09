@@ -1,49 +1,68 @@
 {
-  "operationId": "HorizonDbClusters_Update",
-  "title": "Update a HorizonDB cluster",
+  "operationId": "Clusters_Update",
+  "title": "Rename the PostgreSQL administrator role and reset its password while updating a HorizonDB cluster",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "resourceGroupName": "exampleresourcegroup",
-    "clusterName": "examplecluster",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
     "api-version": "2026-09-01",
     "properties": {
       "tags": {
-        "team": "updated-data-platform"
+        "environment": "production",
+        "team": "data-platform"
       },
       "properties": {
-        "vCores": 8,
-        "administratorLoginPassword": "examplenewpassword"
+        "network": {
+          "publicAccess": "Disabled"
+        },
+        "backup": {
+          "retentionDays": 21
+        }
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster",
-        "name": "examplecluster",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster",
+        "name": "example-cluster",
         "type": "Microsoft.HorizonDb/clusters",
-        "location": "westus2",
+        "location": "eastus2",
         "tags": {
-          "env": "dev",
-          "team": "updated-data-platform"
+          "environment": "production",
+          "team": "data-platform"
         },
         "properties": {
-          "administratorLogin": "exampleadministratorlogin",
-          "version": "17",
-          "createMode": "Update",
-          "vCores": 8,
-          "replicaCount": 2,
-          "zonePlacementPolicy": "BestEffort",
-          "state": "Succeeded",
-          "fullyQualifiedDomainName": "examplecluster.ffffffffffff.westus2.horizondb.azure.com",
-          "readonlyEndpoint": "examplecluster-ro.westus2.horizondb.azure.com",
-          "provisioningState": "Succeeded"
+          "postgreSqlVersion": "17",
+          "creationMode": "Create",
+          "network": {
+            "publicAccess": "Disabled"
+          },
+          "backup": {
+            "geoRedundancy": "Enabled",
+            "retentionDays": 21,
+            "earliestRestorePointUtc": "2026-07-27T02:00:00Z"
+          },
+          "state": "Ready",
+          "provisioningState": "Succeeded",
+          "readWritePool": {
+            "designatedPoolResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01",
+            "zoneRedundancy": {
+              "state": "NotProtected",
+              "unavailableReason": "All nodes in the designated read-write pool are deployed in a single availability zone."
+            },
+            "failover": {
+              "state": "NotReady",
+              "unavailableReason": "The designated read-write pool is stopped."
+            }
+          }
         }
       }
     },
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/westus2/operationResults/ffffffff-ffff-ffff-ffff-ffffffffffff"
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationResults/22222222-2222-2222-2222-222222222222?api-version=2026-09-01",
+        "Retry-After": "30"
       }
     }
   }

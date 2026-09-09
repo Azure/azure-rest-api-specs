@@ -1,36 +1,44 @@
 {
-  "operationId": "HorizonDbClusters_Get",
+  "operationId": "Clusters_Get",
   "title": "Get a HorizonDB cluster",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "resourceGroupName": "exampleresourcegroup",
-    "clusterName": "examplecluster",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
     "api-version": "2026-09-01"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster",
-        "name": "examplecluster",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster",
+        "name": "example-cluster",
         "type": "Microsoft.HorizonDb/clusters",
-        "location": "westus2",
+        "location": "eastus2",
         "tags": {
-          "env": "dev"
+          "environment": "production"
         },
         "properties": {
-          "administratorLogin": "exampleadministratorlogin",
-          "version": "17",
-          "vCores": 4,
-          "replicaCount": 2,
-          "zonePlacementPolicy": "BestEffort",
-          "authConfig": {
-            "entraIdAuth": "Disabled",
-            "passwordAuth": "Enabled"
+          "postgreSqlVersion": "17",
+          "creationMode": "Create",
+          "network": {
+            "publicAccess": "Enabled"
           },
-          "state": "Succeeded",
-          "fullyQualifiedDomainName": "examplecluster.ffffffffffff.westus2.horizondb.azure.com",
-          "readonlyEndpoint": "examplecluster.ffffffffffff-ro.horizondb.azure.com",
-          "provisioningState": "Succeeded"
+          "backup": {
+            "geoRedundancy": "Enabled",
+            "retentionDays": 14,
+            "earliestRestorePointUtc": "2026-07-27T02:00:00Z"
+          },
+          "state": "Ready",
+          "provisioningState": "Succeeded",
+          "readWritePool": {
+            "designatedPoolResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01",
+            "zoneRedundancy": {
+              "state": "Protected"
+            },
+            "failover": {
+              "state": "Ready"
+            }
+          }
         }
       }
     }
