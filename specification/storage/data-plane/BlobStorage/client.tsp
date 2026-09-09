@@ -1414,3 +1414,14 @@ scalar HttpRange extends string;
 @@usage(StorageErrorCode, Usage.output, "java");
 
 @@clientName(Storage.Blob, "AzureBlobStorage", "java");
+
+// java metadata as an x-ms-meta-* collection rather than a single header, mirroring the scopes the other
+// languages already carry on this property.
+@@alternateType(MetadataHeaders.metadata, Record<string>, "java");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  MetadataHeaders.metadata,
+  "collectionHeaderPrefix",
+  "x-ms-meta-",
+  "java"
+);
