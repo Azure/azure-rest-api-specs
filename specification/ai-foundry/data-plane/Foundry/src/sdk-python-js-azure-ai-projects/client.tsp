@@ -276,6 +276,8 @@ using Azure.AI.Projects;
 // Beta Agents sub-client
 // --------------------------------------------------------------------------------
 
+@@clientName(Agents.generateAgent, "generate");
+
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob");
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs");
@@ -300,7 +302,7 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMCPHttpError", "javascript");
 
 // --------------------------------------------------------------------------------
-// Beta Voice Agent sub-clients
+// Beta Agent Telephony sub-clients
 // --------------------------------------------------------------------------------
 
 @@clientName(AgentTelephony.createTelephonyCallJob, "createCallJob");
@@ -323,6 +325,9 @@ using Azure.AI.Projects;
 @@clientName(AgentTelephony.cancelTelephonyCampaign, "cancelCampaign");
 @@clientName(AgentTelephony.getTelephonyOperation, "getOperation");
 
+// --------------------------------------------------------------------------------
+// Agent Endpoint Conversations sub-client
+// --------------------------------------------------------------------------------
 @@clientName(AgentEndpointConversations.listAgentConversations, "list");
 @@clientName(AgentEndpointConversations.getAgentConversation, "get");
 @@clientName(AgentEndpointConversations.deleteAgentConversation, "delete");
@@ -537,9 +542,6 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Beta Agent Insights sub‐client
 // --------------------------------------------------------------------------------
-
-// Override default method name for generating an agent.
-@@clientName(Agents.generateAgent, "generate");
 
 // Override default JS emitter behavior that emits "delete<model>". ("delete" is a reserved word, but we want to use namespaced "delete" for JS).
 @@clientName(AgentInsightMonitors.delete, "delete", "javascript");
