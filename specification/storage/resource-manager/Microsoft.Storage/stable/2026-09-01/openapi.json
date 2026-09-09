@@ -6503,6 +6503,19 @@
             "required": true,
             "type": "string",
             "minLength": 1
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Optional. Set to policyStatus to include the object replication policy status in the response.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "policyStatus"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -6522,6 +6535,9 @@
         "x-ms-examples": {
           "StorageAccountGetObjectReplicationPolicies": {
             "$ref": "./examples/StorageAccountGetObjectReplicationPolicy.json"
+          },
+          "StorageAccountGetObjectReplicationPolicyWithPolicyStatus": {
+            "$ref": "./examples/StorageAccountGetObjectReplicationPolicyWithPolicyStatus.json"
           }
         }
       },
@@ -13888,6 +13904,16 @@
         "tagsReplication": {
           "$ref": "#/definitions/ObjectReplicationPolicyPropertiesTagsReplication",
           "description": "Optional. The object replication policy tags replication feature options."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the object replication policy.",
+          "readOnly": true
+        },
+        "replicationError": {
+          "type": "string",
+          "description": "The error that is blocking object replication for the policy.",
+          "readOnly": true
         }
       },
       "required": [
