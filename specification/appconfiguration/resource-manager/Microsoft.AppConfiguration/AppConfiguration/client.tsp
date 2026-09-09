@@ -113,7 +113,6 @@ using Azure.ClientGenerator.Core;
   "AppConfigurationPrivateEndpointConnectionReference",
   "csharp"
 );
-@@access(PrivateEndpointConnectionReference.type, Access.internal, "csharp");
 @@clientName(ProvisioningState, "AppConfigurationProvisioningState", "csharp");
 @@clientName(
   PrivateLinkDelegation,
