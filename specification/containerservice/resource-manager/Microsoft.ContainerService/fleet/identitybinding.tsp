@@ -59,7 +59,7 @@ model FleetIdentityBindingProperties {
   @maxItems(100)
   allowedSubjects?: FleetAllowedSubject[];
 
-  @doc("The OIDC issuer URL of the IdentityBinding.")
+  @doc("The OIDC issuer profile of the fleet identity binding.")
   @visibility(Lifecycle.Read)
   oidcIssuer?: FleetIdentityBindingOidcIssuerProfile;
 
@@ -121,11 +121,11 @@ model FleetIdentityBindingManagedIdentityProfile {
   tenantId?: string;
 }
 
-@doc("IdentityBinding OIDC issuer profile.")
+@doc("The OIDC issuer profile of the fleet identity binding.")
 @added(Versions.v2026_11_02_preview)
 model FleetIdentityBindingOidcIssuerProfile {
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  @doc("The OIDC issuer URL of the IdentityBinding.")
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name matches the managedClusters/identityBindings property for cross-API parity."
+  @doc("The OIDC issuer URL of the fleet identity binding.")
   @visibility(Lifecycle.Read)
   oidcIssuerUrl?: url;
 }
@@ -135,8 +135,8 @@ model FleetIdentityBindingOidcIssuerProfile {
   The namespace selector is required and must be non-empty. The service
   account selector is optional; when omitted, all service accounts in
   matching namespaces are authorized. Selectors within a single
-  AllowedSubject are AND'd; multiple AllowedSubjects on an
-  IdentityBinding are OR'd.
+  AllowedSubject are AND'd; multiple AllowedSubjects on a fleet
+  identity binding are OR'd.
   """)
 @added(Versions.v2026_11_02_preview)
 model FleetAllowedSubject {
@@ -176,14 +176,14 @@ model FleetIdentityBindingLabelSelectorRequirement {
   @doc("key is the label key that the selector applies to.")
   key?: string;
 
-  @doc("operator represents a key's relationship to a set of values. Valid operators are In and NotIn")
+  @doc("operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.")
   operator?: FleetIdentityBindingLabelSelectorOperator;
 
   @doc("values is an array of string values, the values array must be non-empty.")
   values?: string[];
 }
 
-@doc("operator represents a key's relationship to a set of values. Valid operators are In and NotIn")
+@doc("operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.")
 @added(Versions.v2026_11_02_preview)
 union FleetIdentityBindingLabelSelectorOperator {
   string,
