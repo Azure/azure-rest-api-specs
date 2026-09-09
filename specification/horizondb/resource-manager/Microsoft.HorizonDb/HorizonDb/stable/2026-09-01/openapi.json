@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft HorizonDB Management API",
     "version": "2026-09-01",
-    "description": "Azure Resource Provider API for managing HorizonDB clusters, pools, replicas, and firewall rules",
+    "description": "Azure Resource Provider API for managing HorizonDB clusters, pools, endpoints, nodes, and firewall rules",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -9663,7 +9663,7 @@
       "properties": {
         "designatedPoolResourceId": {
           "$ref": "#/definitions/PoolResourceId",
-          "description": "The Azure resource ID of the pool designated to host the cluster's read-write node. The pool is a child resource of this cluster. When a pool is created while the cluster currently has no pools, the service automatically sets this property to the new pool's resource ID, including when all pools that existed earlier in the cluster's lifetime were deleted. This property is absent when no pool is designated.",
+          "description": "The Azure resource ID of the pool designated to host the cluster's read-write node. The pool is a child resource of this cluster. When a pool is created while the cluster currently has no pools, the service automatically sets this property to the new pool's resource ID, including when all pools that existed earlier in the cluster's lifetime were deleted. This property is absent when no pool is designated, such as after clearReadWritePool succeeds.",
           "readOnly": true
         },
         "failover": {

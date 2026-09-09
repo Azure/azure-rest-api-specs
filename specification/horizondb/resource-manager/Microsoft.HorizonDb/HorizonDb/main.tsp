@@ -15,9 +15,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 
-/**
- * Azure Resource Provider API for managing HorizonDB clusters, pools, replicas, and firewall rules
- */
+@doc("Azure Resource Provider API for managing HorizonDB clusters, pools, endpoints, nodes, and firewall rules")
 @armProviderNamespace
 @service(#{ title: "Microsoft HorizonDB Management API" })
 @versioned(Versions)

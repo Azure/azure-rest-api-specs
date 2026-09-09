@@ -465,7 +465,7 @@ model ReadWritePoolZoneRedundancyProperties {
 @added(Versions.v2026_09_01)
 @doc("The current designated read-write pool and read-write status for a HorizonDB cluster. When a pool is created while the cluster currently has no pools, the service automatically designates the new pool as the read-write pool. This behavior also applies after all pools that existed earlier in the cluster's lifetime have been deleted.")
 model ReadWritePoolProperties {
-  @doc("The Azure resource ID of the pool designated to host the cluster's read-write node. The pool is a child resource of this cluster. When a pool is created while the cluster currently has no pools, the service automatically sets this property to the new pool's resource ID, including when all pools that existed earlier in the cluster's lifetime were deleted. This property is absent when no pool is designated.")
+  @doc("The Azure resource ID of the pool designated to host the cluster's read-write node. The pool is a child resource of this cluster. When a pool is created while the cluster currently has no pools, the service automatically sets this property to the new pool's resource ID, including when all pools that existed earlier in the cluster's lifetime were deleted. This property is absent when no pool is designated, such as after clearReadWritePool succeeds.")
   @visibility(Lifecycle.Read)
   designatedPoolResourceId?: PoolResourceId;
 
