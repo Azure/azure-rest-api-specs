@@ -752,16 +752,31 @@ interface ChangeDataCaptureCapabilities {
   get is ArmResourceRead<ChangeDataCaptureCapability>;
 
   @doc("Creates or replaces the singleton change data capture capability and reconciles shared engine prerequisites.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ChangeDataCaptureCapability>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ChangeDataCaptureCapability,
+    LroHeaders = HorizonDbResourceLroHeaders<ChangeDataCaptureCapability>,
+    Response =
+      | HorizonDbResourceUpdatedLroResponse<ChangeDataCaptureCapability>
+      | ArmResourceCreatedResponse<
+          ChangeDataCaptureCapability,
+          HorizonDbResourceLroHeaders<ChangeDataCaptureCapability>
+        >
+  >;
 
   @doc("Updates mutable change data capture capability properties. Omitted properties preserve their current values.")
   update is ArmCustomPatchAsync<
     ChangeDataCaptureCapability,
-    ChangeDataCaptureCapabilityForPatchUpdate
+    ChangeDataCaptureCapabilityForPatchUpdate,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ChangeDataCaptureCapability> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @doc("Deletes the change data capture capability after all change data capture destinations and configurations have been removed.")
-  delete is ArmResourceDeleteWithoutOkAsync<ChangeDataCaptureCapability>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ChangeDataCaptureCapability,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("Lists the optional singleton change data capture capability for a cluster. The result contains zero or one item.")
   list is ArmResourceListByParent<ChangeDataCaptureCapability>;
@@ -775,16 +790,31 @@ interface ChangeDataCaptureDestinations {
   get is ArmResourceRead<ChangeDataCaptureDestination>;
 
   @doc("Creates or replaces a Microsoft Fabric change data capture destination.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ChangeDataCaptureDestination>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ChangeDataCaptureDestination,
+    LroHeaders = HorizonDbResourceLroHeaders<ChangeDataCaptureDestination>,
+    Response =
+      | HorizonDbResourceUpdatedLroResponse<ChangeDataCaptureDestination>
+      | ArmResourceCreatedResponse<
+          ChangeDataCaptureDestination,
+          HorizonDbResourceLroHeaders<ChangeDataCaptureDestination>
+        >
+  >;
 
   @doc("Updates mutable change data capture destination properties. Omitted properties preserve their current values.")
   update is ArmCustomPatchAsync<
     ChangeDataCaptureDestination,
-    ChangeDataCaptureDestinationForPatchUpdate
+    ChangeDataCaptureDestinationForPatchUpdate,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ChangeDataCaptureDestination> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @doc("Deletes a change data capture destination after all referencing configurations and identity assignments have been removed.")
-  delete is ArmResourceDeleteWithoutOkAsync<ChangeDataCaptureDestination>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ChangeDataCaptureDestination,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("Lists change data capture destinations in a HorizonDB cluster.")
   list is ArmResourceListByParent<ChangeDataCaptureDestination>;
@@ -796,7 +826,9 @@ interface ChangeDataCaptureDestinations {
     ActivateChangeDataCaptureIdentityRequest,
     ActivateChangeDataCaptureIdentityResult,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ChangeDataCaptureDestination> &
-      ChangeDataCaptureDestinationIfMatchParameter
+      ChangeDataCaptureDestinationIfMatchParameter,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ActivateChangeDataCaptureIdentityResult> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
@@ -808,10 +840,23 @@ interface IdentityAssignments {
   get is ArmResourceRead<IdentityAssignment>;
 
   @doc("Creates or idempotently replaces a change data capture identity assignment. The identity resource ID is immutable.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<IdentityAssignment>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    IdentityAssignment,
+    LroHeaders = HorizonDbResourceLroHeaders<IdentityAssignment>,
+    Response =
+      | HorizonDbResourceUpdatedLroResponse<IdentityAssignment>
+      | ArmResourceCreatedResponse<
+          IdentityAssignment,
+          HorizonDbResourceLroHeaders<IdentityAssignment>
+        >
+  >;
 
   @doc("Deletes an inactive change data capture identity assignment.")
-  delete is ArmResourceDeleteWithoutOkAsync<IdentityAssignment>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    IdentityAssignment,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("Lists identity assignments for a change data capture destination.")
   list is ArmResourceListByParent<IdentityAssignment>;
@@ -825,16 +870,31 @@ interface ChangeDataCaptureConfigurations {
   get is ArmResourceRead<ChangeDataCaptureConfiguration>;
 
   @doc("Creates or replaces a change data capture configuration that enrolls a PostgreSQL database for Microsoft Fabric Mirroring.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ChangeDataCaptureConfiguration>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ChangeDataCaptureConfiguration,
+    LroHeaders = HorizonDbResourceLroHeaders<ChangeDataCaptureConfiguration>,
+    Response =
+      | HorizonDbResourceUpdatedLroResponse<ChangeDataCaptureConfiguration>
+      | ArmResourceCreatedResponse<
+          ChangeDataCaptureConfiguration,
+          HorizonDbResourceLroHeaders<ChangeDataCaptureConfiguration>
+        >
+  >;
 
   @doc("Updates mutable change data capture configuration properties. Omitted properties preserve their current values.")
   update is ArmCustomPatchAsync<
     ChangeDataCaptureConfiguration,
-    ChangeDataCaptureConfigurationForPatchUpdate
+    ChangeDataCaptureConfigurationForPatchUpdate,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ChangeDataCaptureConfiguration> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @doc("Deletes a change data capture configuration after destination-side replication has been stopped or detached. This operation never deletes the Microsoft Fabric mirrored-database item.")
-  delete is ArmResourceDeleteWithoutOkAsync<ChangeDataCaptureConfiguration>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ChangeDataCaptureConfiguration,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("Lists change data capture configurations in a HorizonDB cluster.")
   list is ArmResourceListByParent<ChangeDataCaptureConfiguration>;

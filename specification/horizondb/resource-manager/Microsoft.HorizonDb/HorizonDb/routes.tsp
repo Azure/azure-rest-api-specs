@@ -122,24 +122,27 @@ interface Pools {
   @doc("Gets information about a HorizonDB pool.")
   get is ArmResourceRead<Pool>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The AutoRest emitter infers final-state-via from polling metadata. Marking this standard ARM PUT as an LRO without polling decorators emits x-ms-long-running-operation while intentionally omitting x-ms-long-running-operation-options."
   @added(Versions.v2026_09_01)
   @doc("Creates a new HorizonDB pool or updates an existing pool, including its desired node allocation, compute model, or associated parameter group. A pool name can be the same as its parent cluster name. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically uses it to host the cluster's read-write node when an eligible node is available. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. Every pool must be associated with a parameter group, so parameterGroup, parameterGroupResourceId, and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated before the resource is changed. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
   @sharedRoute
-  @Azure.ClientGenerator.Core.Legacy.markAsLro
   @autoRoute
   @armResourceCreateOrUpdate(Pool)
   @put
   createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<Pool>,
     Pool,
-    ArmResourceUpdatedResponse<Pool> | PoolCreateAcceptedResponse,
+    HorizonDbResourceUpdatedLroResponse<Pool> | PoolCreateAcceptedResponse,
     ErrorResponse
   >;
 
   @added(Versions.v2026_09_01)
   @doc("Updates an existing HorizonDB pool, including its desired node allocation, selected compute model properties, the compute model type, or its associated parameter group. When parameterGroup is supplied, both parameterGroupResourceId and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated against the recursively merged configuration. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
-  update is ArmCustomPatchAsync<Pool, PoolForPatchUpdate>;
+  update is ArmCustomPatchAsync<
+    Pool,
+    PoolForPatchUpdate,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Pool> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @added(Versions.v2026_09_01)
   @doc("Deletes a HorizonDB pool together with the Pool-scoped Endpoint whose associatedResourceId identifies that Pool and all FirewallRule children of that Endpoint. The Endpoint cannot outlive or be deleted independently from its Pool.")
@@ -266,7 +269,16 @@ interface FirewallRules {
 
   @doc("Creates or replaces a HorizonDB endpoint firewall rule.")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<FirewallRule>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    FirewallRule,
+    LroHeaders = HorizonDbResourceLroHeaders<FirewallRule>,
+    Response =
+      | HorizonDbResourceUpdatedLroResponse<FirewallRule>
+      | ArmResourceCreatedResponse<
+          FirewallRule,
+          HorizonDbResourceLroHeaders<FirewallRule>
+        >
+  >;
 
   @doc("Updates selected properties of a HorizonDB endpoint firewall rule. Omitted properties preserve their current values.")
   update is ArmCustomPatchSync<FirewallRule, FirewallRuleForPatchUpdate>;
@@ -310,7 +322,9 @@ interface PrivateEndpointConnections {
   update is PrivateEndpointOperations.CustomPatchAsync<
     Cluster,
     PrivateEndpointConnectionResource,
-    PrivateEndpointConnectionForPatchUpdate
+    PrivateEndpointConnectionForPatchUpdate,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnectionResource> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @doc("Approves or rejects a private endpoint connection.")
@@ -473,7 +487,14 @@ interface MicrosoftEntraAdministrators {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     MicrosoftEntraAdministrator,
-    Request = MicrosoftEntraAdministratorAdd
+    Request = MicrosoftEntraAdministratorAdd,
+    LroHeaders = HorizonDbResourceLroHeaders<MicrosoftEntraAdministrator>,
+    Response =
+      | HorizonDbResourceUpdatedLroResponse<MicrosoftEntraAdministrator>
+      | ArmResourceCreatedResponse<
+          MicrosoftEntraAdministrator,
+          HorizonDbResourceLroHeaders<MicrosoftEntraAdministrator>
+        >
   >;
 
   @doc("Deletes a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
@@ -499,7 +520,7 @@ interface PasswordAuthentications {
   @doc("Gets the service-created PostgreSQL username-and-password authentication method.")
   get is ArmResourceRead<PasswordAuthentication>;
 
-  @doc("Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. A state-only request enables or disables the authentication mechanism; disabling cannot include credentials and does not remove or modify existing database users or roles. Login-only, password-only, and combined credential updates require this method to already be Enabled unless this request also sets state to Enabled. PostgreSQL is the sole source of truth; the control plane stores no administrator identity or credentials. The service bootstraps an AzureSU-owned special group, only AzureSU can grant or revoke its membership, and at most one user role can be a member. Login-only or password-only updates require exactly one current member. A combined administratorLogin and administratorLoginPassword request creates and adds a new user when no member exists, resets the password when the member name matches, or renames the member and resets its password when names differ. A requested name that already exists outside the special group is rejected to prevent privilege elevation. Both authentication methods may be Disabled.")
+  @doc("Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. A state-only request enables or disables the authentication mechanism; disabling cannot include credentials and does not remove or modify existing database users or roles. Login-only, password-only, and combined credential updates require this method to already be Enabled unless this request also sets state to Enabled. PostgreSQL is the sole source of truth; no administrator identity or credentials are stored. Both authentication methods may be Disabled.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     PasswordAuthentication,

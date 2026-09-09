@@ -70,12 +70,10 @@ model Pool is Azure.ResourceManager.ProxyResource<PoolProperties> {
   @typeChangedFrom(Versions.v2026_09_01, LegacyPoolName)
   name: PoolName;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Tags are valid in v2026-01-20-preview and removed in v2026-09-01"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> is acceptable for tags in this version"
-  @removed(Versions.v2026_09_01)
-  @doc("Resource tags.")
-  tags?: Record<string>;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
+
+@@removed(Pool.tags, Versions.v2026_09_01);
 
 @removed(Versions.v2026_09_01)
 @doc("Represents the HorizonDB replica.")
@@ -514,20 +512,28 @@ scalar PoolResourceId
   ]>;
 
 @added(Versions.v2026_09_01)
-@doc("Long-running operation headers returned when asynchronous HorizonDB pool creation is accepted.")
-model PoolCreateLroHeaders {
-  @doc("A link to the status monitor for the pool creation operation.")
-  @header("Azure-AsyncOperation")
-  azureAsyncOperation?: string;
-
+@doc("Long-running operation headers returned while creating or replacing a HorizonDB resource.")
+model HorizonDbResourceLroHeaders<
+  Resource extends Azure.ResourceManager.Foundations.SimpleResource
+> {
+  ...ArmAsyncOperationHeader<FinalResult = Resource>;
   ...Azure.Core.Foundations.RetryAfterHeader;
+}
+
+@added(Versions.v2026_09_01)
+@doc("The response returned when an asynchronous HorizonDB resource replacement is accepted.")
+model HorizonDbResourceUpdatedLroResponse<
+  Resource extends Azure.ResourceManager.Foundations.SimpleResource
+> {
+  ...ArmResourceUpdatedResponse<Resource>;
+  ...HorizonDbResourceLroHeaders<Resource>;
 }
 
 @added(Versions.v2026_09_01)
 @doc("The response returned when asynchronous HorizonDB pool creation is accepted.")
 model PoolCreateAcceptedResponse {
   ...CreatedResponse;
-  ...PoolCreateLroHeaders;
+  ...HorizonDbResourceLroHeaders<Pool>;
 
   @doc("The HorizonDB pool with a non-terminal provisioning state.")
   @bodyRoot
@@ -750,14 +756,13 @@ model PoolParameterGroupReferenceForPatchUpdate {
 @renamedFrom(Versions.v2026_09_01, "HorizonDbPoolForPatchUpdate")
 @doc("HorizonDB pool for update operations.")
 model PoolForPatchUpdate {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> is acceptable for tags in this version"
-  @removed(Versions.v2026_09_01)
-  @doc("Resource tags.")
-  tags?: Record<string>;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   @doc("The properties that can be updated for a HorizonDB pool.")
   properties?: PoolPropertiesForPatchUpdate;
 }
+
+@@removed(PoolForPatchUpdate.tags, Versions.v2026_09_01);
 
 @added(Versions.v2026_09_01)
 @doc("The compute model for a HorizonDB pool.")
