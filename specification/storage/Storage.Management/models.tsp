@@ -2943,6 +2943,36 @@ model CheckNameAvailabilityResult {
 }
 
 /**
+ * Indicates whether Turbo Tier is enabled or disabled.
+ */
+@added(Versions.v2026_09_01)
+union TurboTierStatus {
+  string,
+
+  /** Turbo Tier is enabled. */
+  Enabled: "Enabled",
+
+  /** Turbo Tier is disabled. */
+  Disabled: "Disabled",
+}
+
+/**
+ * Configures Turbo Tier for a storage account.
+ */
+@added(Versions.v2026_09_01)
+model TurboTier {
+  /** Indicates whether Turbo Tier is enabled or disabled. */
+  status?: TurboTierStatus;
+
+  /**
+   * The target fill percentage used for placement. The valid range is 10 to 100. When status is Enabled and this property is omitted, the default value is 20.
+   */
+  @minValue(10)
+  @maxValue(100)
+  targetPercent?: int32;
+}
+
+/**
  * The parameters used when creating a storage account.
  */
 model StorageAccountCreateParameters {
@@ -3107,6 +3137,12 @@ model StorageAccountPropertiesCreateParameters {
    * Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.
    */
   accessTier?: AccessTier;
+
+  /**
+   * Configures Turbo Tier for the storage account.
+   */
+  @added(Versions.v2026_09_01)
+  turboTier?: TurboTier;
 
   /**
    * Provides the identity based authentication settings for Azure Files.
@@ -3795,6 +3831,12 @@ model StorageAccountProperties {
   accessTier?: AccessTier;
 
   /**
+   * Configures Turbo Tier for the storage account.
+   */
+  @added(Versions.v2026_09_01)
+  turboTier?: TurboTier;
+
+  /**
    * Provides the identity based authentication settings for Azure Files.
    */
   azureFilesIdentityBasedAuthentication?: AzureFilesIdentityBasedAuthentication;
@@ -4404,6 +4446,12 @@ model StorageAccountPropertiesUpdateParameters {
    * Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.
    */
   accessTier?: AccessTier;
+
+  /**
+   * Configures Turbo Tier for the storage account.
+   */
+  @added(Versions.v2026_09_01)
+  turboTier?: TurboTier;
 
   /**
    * Provides the identity based authentication settings for Azure Files.
