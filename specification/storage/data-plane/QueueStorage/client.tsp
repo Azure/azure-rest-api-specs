@@ -250,7 +250,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientOption(Storage.Queues, "includeRootSlash", false, "python,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy sdks"
-@@Legacy.disablePageable(Service.getQueues, "python,javascript,csharp");
+@@Legacy.disablePageable(Service.getQueues, "python,javascript,csharp,java");
 
 @@alternateType(UserDelegationKey.signedExpiry, string, "python");
 @@alternateType(UserDelegationKey.signedStart, string, "python");
@@ -364,3 +364,70 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.Queues, "omitSlashFromEmptyRoute", true, "csharp");
+
+@@alternateType(MetadataHeaders.metadata, Record<string>, "java");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(MetadataHeaders.metadata, "collectionHeaderPrefix", "x-ms-meta-", "java");
+
+@@clientName(SentMessage, "SendMessageResult", "java");
+@@clientName(ReceivedMessage, "QueueMessageItemInternal", "java");
+@@clientName(PeekedMessage, "PeekedMessageItemInternal", "java");
+
+@@clientName(StorageErrorCode, "QueueErrorCode", "java");
+@@clientName(Logging, "QueueAnalyticsLogging", "java");
+@@clientName(Metrics, "QueueMetrics", "java");
+@@clientName(CorsRule, "QueueCorsRule", "java");
+@@clientName(RetentionPolicy, "QueueRetentionPolicy", "java");
+@@clientName(QueueServiceStats, "QueueServiceStatistics", "java");
+@@clientName(SignedIdentifier, "QueueSignedIdentifier", "java");
+@@clientName(AccessPolicy, "QueueAccessPolicy", "java");
+
+@@clientName(QueueServiceProperties.logging, "analyticsLogging", "java");
+@@clientName(AccessPolicy.start, "startsOn", "java");
+@@clientName(AccessPolicy.expiry, "expiresOn", "java");
+@@clientName(AccessPolicy.permission, "permissions", "java");
+@@alternateType(AccessPolicy.start, utcDateTime, "java");
+@@alternateType(AccessPolicy.expiry, utcDateTime, "java");
+@@clientName(UserDelegationKey.signedOid, "signedObjectId", "java");
+@@clientName(UserDelegationKey.signedTid, "signedTenantId", "java");
+@@clientName(
+  UserDelegationKey.signedDelegatedUserTid,
+  "signedDelegatedUserTenantId",
+  "java"
+);
+@@clientName(KeyInfo.delegatedUserTid, "delegatedUserTenantId", "java");
+
+@@clientName(Storage.Queues, "AzureQueueStorage", "java");
+
+@@clientLocation(Queue.receiveMessages, "Messages", "java");
+@@clientLocation(Queue.sendMessage, "Messages", "java");
+@@clientLocation(Queue.peekMessages, "Messages", "java");
+@@clientLocation(Queue.clear, "Messages", "java");
+@@clientLocation(Queue.updateMessage, "MessageIds", "java");
+@@clientLocation(Queue.deleteMessage, "MessageIds", "java");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
+@@clientName(Queue.receiveMessages, "dequeue", "java");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
+@@clientName(Queue.sendMessage, "enqueue", "java");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
+@@clientName(Queue.peekMessages, "peek", "java");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
+@@clientName(Queue.updateMessage, "update", "java");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
+@@clientName(Queue.deleteMessage, "Delete", "java");
+
+@@clientLocation(QueueClient.receiveMessages, QueueClient, "java");
+@@clientLocation(QueueClient.sendMessage, QueueClient, "java");
+@@clientLocation(QueueClient.peekMessages, QueueClient, "java");
+@@clientLocation(QueueClient.clear, QueueClient, "java");
+@@clientLocation(QueueClient.updateMessage, QueueClient, "java");
+@@clientLocation(QueueClient.deleteMessage, QueueClient, "java");
+
+@@clientOption(Queue.getProperties, "responseHeadersAsModel", true, "java");
+@@clientOption(Queue.updateMessage, "responseHeadersAsModel", true, "java");
+
+@@access(StorageErrorCode, Access.public, "java");
+@@usage(StorageErrorCode, Usage.output, "java");
+@@clientName(ListQueuesResponse, "ListQueuesSegmentResponse", "java");
+@@access(ListQueuesResponse, Access.public, "java");
+@@usage(ListQueuesResponse, Usage.output, "java");
