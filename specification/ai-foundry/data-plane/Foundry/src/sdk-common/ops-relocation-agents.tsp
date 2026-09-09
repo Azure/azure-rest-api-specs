@@ -26,18 +26,6 @@ namespace Azure.AI.Projects {
     Azure.AI.Projects.AgentSessionFiles.deleteSessionFile,
     Agents
   );
-  // Keep Voice Agent telephony management on the existing Agents sub-client.
-  @@clientLocation(AgentTelephony.createTelephonyBinding, Agents);
-  @@clientLocation(AgentTelephony.listTelephonyBindings, Agents);
-  @@clientLocation(AgentTelephony.getTelephonyBinding, Agents);
-  @@clientLocation(AgentTelephony.updateTelephonyBinding, Agents);
-  @@clientLocation(AgentTelephony.deleteTelephonyBinding, Agents);
-  @@clientLocation(AgentTelephony.listTelephonyCalls, Agents);
-  @@clientLocation(AgentTelephony.getTelephonyCall, Agents);
-  @@clientLocation(AgentTelephony.transferTelephonyCall, Agents);
-  @@clientLocation(AgentTelephony.endTelephonyCall, Agents);
-  @@clientLocation(AgentTelephony.getTelephonyTransferTargets, Agents);
-  @@clientLocation(AgentTelephony.replaceTelephonyTransferTargets, Agents);
   @@clientLocation(
     Azure.AI.Projects.Microsoft365Publishing.publishAgentToMicrosoft365,
     Agents
@@ -90,6 +78,43 @@ namespace Azure.AI.Projects.Beta {
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.cancel, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.delete, Agents);
+  // Keep Voice Agent telephony management on the existing Agents sub-client.
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.createTelephonyBinding,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.listTelephonyBindings,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.getTelephonyBinding,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.updateTelephonyBinding,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.deleteTelephonyBinding,
+    Agents
+  );
+  @@clientLocation(Azure.AI.Projects.AgentTelephony.listTelephonyCalls, Agents);
+  @@clientLocation(Azure.AI.Projects.AgentTelephony.getTelephonyCall, Agents);
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.transferTelephonyCall,
+    Agents
+  );
+  @@clientLocation(Azure.AI.Projects.AgentTelephony.endTelephonyCall, Agents);
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.getTelephonyTransferTargets,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.replaceTelephonyTransferTargets,
+    Agents
+  );
+  @@clientLocation(Azure.AI.Projects.Agents.generateAgent, Agents);
 
   interface AgentTelephony {}
   @@clientLocation(

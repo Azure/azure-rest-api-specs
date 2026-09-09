@@ -538,6 +538,9 @@ using Azure.AI.Projects;
 // Beta Agent Insights sub‐client
 // --------------------------------------------------------------------------------
 
+// Override default method name for generating an agent.
+@@clientName(Agents.generateAgent, "generate");
+
 // Override default JS emitter behavior that emits "delete<model>". ("delete" is a reserved word, but we want to use namespaced "delete" for JS).
 @@clientName(AgentInsightMonitors.delete, "delete", "javascript");
 
