@@ -67,6 +67,11 @@ namespace Customizations;
   "csharp"
 );
 @@clientName(
+  AvailableEnvironmentModesOperationGroup.list,
+  "GetAvailableEnvironmentModes",
+  "csharp"
+);
+@@clientName(
   RuntimeJavaJavaAgentLogging.loggerSettings,
   "LoggerSettings",
   "csharp"
