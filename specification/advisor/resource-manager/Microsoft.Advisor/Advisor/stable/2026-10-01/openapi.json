@@ -55,74 +55,10 @@
       "name": "AdvisorScoreEntities"
     },
     {
-      "name": "AssessmentResults"
-    },
-    {
       "name": "ResiliencyReviews"
     }
   ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.Advisor/recommendations": {
-      "get": {
-        "operationId": "Recommendations_ListByTenant",
-        "tags": [
-          "ResourceRecommendationBases"
-        ],
-        "description": "Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking generateRecommendations.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The number of recommendations per page if a paged version of this API is being used.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "The page-continuation token to use with a paged version of this API.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ResourceRecommendationBaseListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListRecommendationsServiceGroupResourceUri": {
-            "$ref": "./examples/ListRecommendationsServiceGroupResourceUri.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}": {
       "get": {
         "operationId": "Recommendations_Get",
@@ -349,7 +285,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendation metadata.<br>Filter can be applied to properties ['[recommendationCategory](#category)', '[recommendationSubCategory](#recommendationSubCategory)', 'RetirementDate'] with operators ['eq', 'and', 'le', 'ge']<br>The filter can also be applied to property ['[TrackingIds]']<br><br>⚠ **Note:** `recommendationControl` is a legacy filter property and will be deprecated in the future. Please use `recommendationSubCategory` for filtering recommendation subcategory.<br><br>Valid options for recommendationSubCategory: ['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br><br>Example:<br>- $filter=recommendationCategory eq 'HighAvailability' and recommendationSubCategory eq 'ServiceUpgradeAndRetirement' and retirementDate ge '2024-01-01' and retirementDate le '2028-01-01'. Filter can be applied on trackingIds as well.<br>- $filter=trackingIds/any(t: t eq 'some-guid')<br><br>⚠ **Note:** `trackingIDs` filter can be used for filtering one value at a time. The support to filter multiple values is not currently available. Also the support to add other filters along with `trackingIDs` is not available.",
+            "description": "The filter to apply to the recommendation metadata.<br>Filter can be applied to properties ['[recommendationCategory](#category)', '[recommendationSubCategory](#recommendationSubCategory)', 'RetirementDate'] with operators ['eq', 'and', 'le', 'ge']<br>The filter can also be applied to property ['[TrackingIds]']<br><br>⚠ **Note:** `recommendationControl` is a legacy filter property and will be deprecated in the future. Please use `recommendationSubCategory` for filtering recommendation subcategory.<br><br>Valid options for recommendationSubCategory: ['DataProtectionAndRecovery', 'GovernanceAndCompliance', 'ZoneResiliency', 'RegionalResiliency', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br><br>Example:<br>- $filter=recommendationCategory eq 'HighAvailability' and recommendationSubCategory eq 'ServiceUpgradeAndRetirement' and retirementDate ge '2024-01-01' and retirementDate le '2028-01-01'. Filter can be applied on trackingIds as well.<br>- $filter=trackingIds/any(t: t eq 'some-guid')<br><br>⚠ **Note:** `trackingIDs` filter can be used for filtering one value at a time. The support to filter multiple values is not currently available. Also the support to add other filters along with `trackingIDs` is not available.",
             "required": false,
             "type": "string"
           }
@@ -536,239 +472,6 @@
         "x-ms-examples": {
           "GetAdvisorScoreDetail": {
             "$ref": "./examples/GetAdvisorScoreDetail.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/assessmentTypes": {
-      "get": {
-        "operationId": "AssessmentTypes_List",
-        "summary": "Get assessment types list.",
-        "description": "Get list of Azure Advisor assessment types.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AssessmentTypeListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetAssessmentTypes": {
-            "$ref": "./examples/ListAssessmentTypes.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/assessments": {
-      "get": {
-        "operationId": "Assessments_List",
-        "tags": [
-          "AssessmentResults"
-        ],
-        "description": "Get list of Azure Advisor assessments.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "Limit the result to the specified number of rows.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$skiptoken",
-            "in": "query",
-            "description": "The page-continuation token to use with a paged version of this API.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AssessmentListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListAssessments": {
-            "$ref": "./examples/ListAssessments.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/assessments/{assessmentName}": {
-      "get": {
-        "operationId": "Assessments_Get",
-        "tags": [
-          "AssessmentResults"
-        ],
-        "description": "Get an existing Azure Advisor assessment.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "assessmentName",
-            "in": "path",
-            "description": "Advisor assessment name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-0-9a-zA-Z_]{1,63}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AssessmentResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetAssessment": {
-            "$ref": "./examples/GetAssessment.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Assessments_Put",
-        "tags": [
-          "AssessmentResults"
-        ],
-        "description": "Create or Overwrite Azure Advisor assessment.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "assessmentName",
-            "in": "path",
-            "description": "Advisor assessment name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-0-9a-zA-Z_]{1,63}$"
-          },
-          {
-            "name": "assessmentContract",
-            "in": "body",
-            "description": "The Azure Advisor assessment data structure.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AssessmentResult"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'AssessmentResult' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/AssessmentResult"
-            }
-          },
-          "201": {
-            "description": "Resource 'AssessmentResult' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/AssessmentResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PutAssessment": {
-            "$ref": "./examples/PutAssessment.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Assessments_Delete",
-        "tags": [
-          "AssessmentResults"
-        ],
-        "description": "Delete an existing Azure Advisor assessment.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "assessmentName",
-            "in": "path",
-            "description": "Advisor assessment name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-0-9a-zA-Z_]{1,63}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeleteAssessment": {
-            "$ref": "./examples/DeleteAssessment.json"
           }
         }
       }
@@ -1023,7 +726,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', 'SubCategory', 'RetirementDate', '[RecommendationStatus](#recommendationStatus)'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge']<br>.\n<br>**Note:** `Control` is a legacy filter property and will be deprecated in the future. Please use `SubCategory` for filtering recommendation subcategory.<br>\n<br>**Note:** `RecommendationStatus` filter is available from API Version 2026-02-01-preview and onwards.<br>\n<br>Valid options for SubCategory:<br>['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br>\n<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2024-01-01' and RetirementDate ge '2028-01-01'",
+            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', 'SubCategory', 'RetirementDate', '[RecommendationStatus](#recommendationStatus)'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge']<br>.\n<br>**Note:** `Control` is a legacy filter property and will be deprecated in the future. Please use `SubCategory` for filtering recommendation subcategory.<br>\n<br>**Note:** `RecommendationStatus` filter is available from API Version 2026-02-01-preview and onwards.<br>\n<br>Valid options for SubCategory:<br>['DataProtectionAndRecovery', 'GovernanceAndCompliance', 'ZoneResiliency', 'RegionalResiliency', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br>\n<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2024-01-01' and RetirementDate ge '2028-01-01'",
             "required": false,
             "type": "string"
           },
@@ -1277,43 +980,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/workloads": {
-      "get": {
-        "operationId": "Workloads_List",
-        "summary": "Get Workloads list.",
-        "description": "Get list of Workloads.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/WorkloadListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetWorkloads": {
-            "$ref": "./examples/ListWorkloads.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations": {
       "get": {
         "operationId": "Configurations_ListByResourceGroup",
@@ -1510,144 +1176,6 @@
         }
       }
     },
-    "AssessmentListResult": {
-      "type": "object",
-      "description": "Paged collection of AssessmentResult items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AssessmentResult items on this page",
-          "items": {
-            "$ref": "#/definitions/AssessmentResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "AssessmentResult": {
-      "type": "object",
-      "description": "The Advisor assessment result data structure.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AssessmentResultProperties",
-          "description": "The Advisor assessment result properties structure.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "AssessmentResultProperties": {
-      "type": "object",
-      "description": "Assessment result properties.",
-      "properties": {
-        "workloadId": {
-          "type": "string",
-          "description": "Workload Id."
-        },
-        "workloadName": {
-          "type": "string",
-          "description": "Workload Name.",
-          "readOnly": true
-        },
-        "assessmentId": {
-          "type": "string",
-          "description": "Assessment Id.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "Assessment Type Description.",
-          "readOnly": true
-        },
-        "typeId": {
-          "type": "string",
-          "description": "Assessment Type Id."
-        },
-        "type": {
-          "type": "string",
-          "description": "Assessment Type.",
-          "readOnly": true
-        },
-        "score": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Assessment Score.",
-          "readOnly": true
-        },
-        "state": {
-          "type": "string",
-          "description": "Assessment State.",
-          "readOnly": true
-        },
-        "typeVersion": {
-          "type": "string",
-          "description": "Assessment Type Version.",
-          "readOnly": true
-        },
-        "locale": {
-          "type": "string",
-          "description": "Assessment Type Locale."
-        }
-      }
-    },
-    "AssessmentTypeListResult": {
-      "type": "object",
-      "description": "The Advisor assessment type list result data structure.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AssessmentTypeResult items on this page",
-          "items": {
-            "$ref": "#/definitions/AssessmentTypeResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "AssessmentTypeResult": {
-      "type": "object",
-      "description": "The Advisor assessment type result data structure.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Assessment Type Id"
-        },
-        "title": {
-          "type": "string",
-          "description": "Assessment Type Title"
-        },
-        "description": {
-          "type": "string",
-          "description": "Assessment Type Description"
-        },
-        "locale": {
-          "type": "string",
-          "description": "Assessment Type Locale"
-        },
-        "version": {
-          "type": "string",
-          "description": "Assessment Type Version"
-        }
-      }
-    },
     "Category": {
       "type": "string",
       "description": "The category of the recommendation.",
@@ -1754,9 +1282,10 @@
       "type": "string",
       "description": "The sub-category of the recommendation.",
       "enum": [
-        "HighAvailability",
-        "BusinessContinuity",
-        "DisasterRecovery",
+        "DataProtectionAndRecovery",
+        "GovernanceAndCompliance",
+        "ZoneResiliency",
+        "RegionalResiliency",
         "Scalability",
         "MonitoringAndAlerting",
         "ServiceUpgradeAndRetirement",
@@ -1769,16 +1298,24 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "HighAvailability",
-            "value": "HighAvailability"
+            "name": "DataProtectionAndRecovery",
+            "value": "DataProtectionAndRecovery",
+            "description": "Data protection and recovery."
           },
           {
-            "name": "BusinessContinuity",
-            "value": "BusinessContinuity"
+            "name": "GovernanceAndCompliance",
+            "value": "GovernanceAndCompliance",
+            "description": "Governance and compliance."
           },
           {
-            "name": "DisasterRecovery",
-            "value": "DisasterRecovery"
+            "name": "ZoneResiliency",
+            "value": "ZoneResiliency",
+            "description": "Zone resiliency."
+          },
+          {
+            "name": "RegionalResiliency",
+            "value": "RegionalResiliency",
+            "description": "Regional resiliency."
           },
           {
             "name": "Scalability",
@@ -2817,49 +2354,6 @@
         "priority": {
           "$ref": "#/definitions/Priority",
           "description": "The Priority of the Recommendation."
-        }
-      }
-    },
-    "WorkloadListResult": {
-      "type": "object",
-      "description": "The Workload list result data structure.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of WorkloadListResult items on this page.",
-          "items": {
-            "$ref": "#/definitions/WorkloadResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "Url to get the next Page of WorkloadListResult items."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "WorkloadResult": {
-      "type": "object",
-      "description": "The Workload result data structure.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Workload Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Workload Name"
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "Subscription Id"
-        },
-        "subscriptionName": {
-          "type": "string",
-          "description": "Subscription Name"
         }
       }
     },

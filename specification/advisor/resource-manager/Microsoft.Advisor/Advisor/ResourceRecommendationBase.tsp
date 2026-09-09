@@ -75,6 +75,19 @@ interface ResourceRecommendationBases {
        * <br>Valid options for SubCategory:<br>['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br>
        * <br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2024-01-01' and RetirementDate ge '2028-01-01'
        */
+      @removed(Versions.v2026_10_01)
+      @renamedFrom(Versions.v2026_10_01, "$filter")
+      @query("$filter")
+      $filterLegacy?: string;
+
+      /**
+       * The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', 'SubCategory', 'RetirementDate', '[RecommendationStatus](#recommendationStatus)'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge']<br>.
+       * <br>**Note:** `Control` is a legacy filter property and will be deprecated in the future. Please use `SubCategory` for filtering recommendation subcategory.<br>
+       * <br>**Note:** `RecommendationStatus` filter is available from API Version 2026-02-01-preview and onwards.<br>
+       * <br>Valid options for SubCategory:<br>['DataProtectionAndRecovery', 'GovernanceAndCompliance', 'ZoneResiliency', 'RegionalResiliency', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br>
+       * <br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2024-01-01' and RetirementDate ge '2028-01-01'
+       */
+      @added(Versions.v2026_10_01)
       @query("$filter")
       $filter?: string;
 
@@ -97,6 +110,7 @@ interface ResourceRecommendationBases {
    * Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking generateRecommendations.
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_10_01)
   listByTenant is ArmResourceListByParent<
     ResourceRecommendationBase,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
