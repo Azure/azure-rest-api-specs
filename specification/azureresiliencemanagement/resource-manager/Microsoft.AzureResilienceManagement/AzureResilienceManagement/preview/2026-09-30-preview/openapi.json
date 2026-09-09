@@ -1095,7 +1095,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -1181,7 +1181,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -5776,6 +5776,7 @@
           "$ref": "#/definitions/DrillType",
           "description": "The discriminator for the Drill object hierarchy.",
           "x-ms-mutability": [
+            "read",
             "create"
           ]
         },

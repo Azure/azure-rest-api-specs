@@ -182,9 +182,9 @@ model ResourceAzureTemplateProtectionSetting
   deploymentLocation?: azureLocation;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DB preserves the established Azure Cosmos DB product casing."
 @added(Versions.v2026_09_30_preview)
 @doc("Definition of recovery orchestration resource protection using Azure Cosmos DB.")
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DB preserves the established Azure Cosmos DB product casing."
 model ResourceCosmosDBProtectionSetting
   extends ResourceBaseProtectionSolutionSetting {
   @added(Versions.v2026_09_30_preview)
