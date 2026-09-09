@@ -142,7 +142,6 @@ checkout: false
 # Azure/azure-rest-api-specs-pr.
 engine:
   id: copilot
-model: ${{ env.ARM_API_REVIEWER_MODEL }}
 tools:
   github:
     # Read-only toolsets only; `safe-outputs` below is the ONLY write channel.
@@ -202,14 +201,6 @@ safe-outputs:
     max: 3
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
   noop:
-  # Threat detection uses the canonical ARM reviewer model so both jobs use a
-  # model supported by the agentic-workflows integrator and cannot drift.
-  # `engine.model` is reported as deprecated, but it is the only supported way to
-  # set this: `model` is not a valid field under `threat-detection`.
-  threat-detection:
-    engine:
-      id: copilot
-      model: ${{ env.ARM_API_REVIEWER_MODEL }}
   messages:
     footer: "> 🔍 *ARM API review by [{workflow_name}]({run_url})*"
     run-started: "🔍 [{workflow_name}]({run_url}) is reviewing this PR for ARM API compliance…"

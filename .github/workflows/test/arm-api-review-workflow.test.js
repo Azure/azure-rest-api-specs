@@ -28,6 +28,16 @@ let resolverScript = "";
  */
 
 /**
+ * @typedef {{
+ *   env?: { ARM_API_REVIEWER_MODEL?: unknown };
+ *   engine?: { model?: unknown };
+ *   "safe-outputs"?: {
+ *     "threat-detection"?: { engine?: { id?: unknown; model?: unknown } };
+ *   };
+ * }} ModelConfigFrontmatter
+ */
+
+/**
  * @param {string} script
  * @param {{ value: string; eventName?: string; payload?: Record<string, unknown> }} options
  */
@@ -142,18 +152,23 @@ async function readWorkflowFiles() {
 }
 
 /**
- * @returns {Promise<string>}
+ * @returns {Promise<ModelConfigFrontmatter>}
  */
-async function readArmApiReviewerModel() {
+async function readArmApiReviewerModelConfig() {
   const component = await readFile(join(ROOT, MODEL_CONFIG_FILE), "utf8");
   const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?$/.exec(component);
   if (!match) {
     throw new Error("ARM API reviewer model component frontmatter was not found");
   }
 
-  const frontmatter = /** @type {{ env?: { ARM_API_REVIEWER_MODEL?: unknown } }} */ (
-    load(match[1])
-  );
+  return /** @type {ModelConfigFrontmatter} */ (load(match[1]));
+}
+
+/**
+ * @returns {Promise<string>}
+ */
+async function readArmApiReviewerModel() {
+  const frontmatter = await readArmApiReviewerModelConfig();
   const model = frontmatter.env?.ARM_API_REVIEWER_MODEL;
   if (typeof model !== "string" || model.length === 0) {
     throw new Error("ARM_API_REVIEWER_MODEL was not configured");
@@ -977,23 +992,32 @@ describe("ARM API review consistency and hardening", () => {
   });
   it("uses the shared model for the reviewer and threat detection", async () => {
     const [source, compiled] = await readWorkflowFiles();
+    const component = await readFile(join(ROOT, MODEL_CONFIG_FILE), "utf8");
+    const config = await readArmApiReviewerModelConfig();
     const model = await readArmApiReviewerModel();
-    const modelReference = "${{ env.ARM_API_REVIEWER_MODEL }}";
-    const runtimeReference = `COPILOT_MODEL: ${modelReference}`;
+    const detector = config["safe-outputs"]?.["threat-detection"]?.engine;
 
     // Left unpinned the model resolves to `... || 'auto'`, which can pick a
     // different model per run, so identical specs could get different feedback.
     // The value has to be one the AWF api-proxy prices: an unpriced model is
     // rejected with a 400 before the agent runs at all, which took down every
     // run when this was briefly pinned to claude-opus-5.
-    expect(source).toContain(`- shared-github-aw-imports/arm-api-review-model.md`);
-    expect(source.split(modelReference)).toHaveLength(3);
+    expect(source).toContain("- shared-github-aw-imports/arm-api-review-model.md");
     expect(source).not.toContain(model);
+    expect(component.split(model)).toHaveLength(2);
+    expect(component.split("*arm-api-reviewer-model")).toHaveLength(3);
+    expect(config.engine?.model).toBe(model);
+    expect(detector).toEqual({ id: "copilot", model });
 
-    expect(compiled).toContain(`ARM_API_REVIEWER_MODEL: ${model}`);
-    expect(compiled.split(model)).toHaveLength(2);
-    expect(compiled.split(runtimeReference)).toHaveLength(3);
+    expect(compiled.split(`  ARM_API_REVIEWER_MODEL: ${model}`)).toHaveLength(2);
+    expect(compiled.split(`COPILOT_MODEL: ${model}`)).toHaveLength(3);
+    expect(compiled).toContain(`"agent_model":"${model}"`);
+    expect(compiled).toContain(`"detection_agent_model":"${model}"`);
     expect(compiled).not.toContain("COPILOT_MODEL: ${{ vars.GH_AW_MODEL_AGENT_COPILOT");
+    expect(compiled).not.toContain("GH_AW_MODEL_FALLBACK");
+    // env.* cannot be evaluated in jobs.safe_outputs.env. Keep the shared alias
+    // compile-time only so GitHub accepts the generated workflow.
+    expect(compiled).not.toContain('GH_AW_ENGINE_MODEL: "${{ env.');
   });
 
   it("keeps the eval suite on the same model as production", async () => {
