@@ -105,6 +105,34 @@ suppressions:
       deferrable indicates whether the maintenance event can be rescheduled at all. The
       deferral deadline provides the associated scheduling detail when this capability is
       available, so an enum would not add another meaningful state.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.ActivateChangeDataCaptureIdentityRequest.properties.drainExistingSessions
+    reason: >-
+      drainExistingSessions is an intrinsically binary instruction controlling whether
+      existing destination sessions drain before identity cutover. Omission selects the
+      documented false default, so an additional enum state is not required.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: openapi.json
+    where: $.definitions.PagedLocationCapability
+    reason: >-
+      PagedLocationCapability is a non-resource collection envelope for regional capability
+      metadata, not an ARM resource. Its items are identified by location, and the envelope
+      must not contain resource id, name, or type properties.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: openapi.json
+    where: $.definitions.PagedParameterGroupConnectionProperties
+    reason: >-
+      PagedParameterGroupConnectionProperties is a non-resource collection envelope for
+      pool connection metadata, not an ARM resource. Its items are identified by
+      poolResourceId, and the envelope must not contain resource id, name, or type properties.
+  - code: LocationMustHaveXmsMutability
+    from: openapi.json
+    where: $.definitions.LocationCapability.properties.location
+    reason: >-
+      LocationCapability is read-only capability metadata returned by the list operation,
+      not a resource create or update model. Its location identifies the region described by
+      the response and is therefore intentionally read-only.
 ```
 
 ### Tag: package-horizondb-2026-05-01-preview

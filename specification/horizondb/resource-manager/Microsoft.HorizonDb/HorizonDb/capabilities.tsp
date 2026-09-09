@@ -231,10 +231,11 @@ interface Capabilities {
   @get
   @list
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This subscription-location discovery operation returns capability metadata rather than ARM resources."
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This subscription-location discovery operation returns capability metadata rather than ARM resources, so no ARM resource operation decorator applies."
   list(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-    ...LocationParameter,
+    ...LocationResourceParameter,
   ):
     | ArmResponse<PagedLocationCapability>
     | ErrorResponse;
