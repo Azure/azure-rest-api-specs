@@ -299,6 +299,72 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.RealtimeMcpErrorType, "RealtimeMCPErrorType", "javascript");
 @@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMCPHttpError", "javascript");
 
+// --------------------------------------------------------------------------------
+// Beta Voice Agent sub-clients
+// --------------------------------------------------------------------------------
+
+@@clientName(AgentTelephony.createTelephonyCallJob, "createCallJob");
+@@clientName(AgentTelephony.getTelephonyCallJob, "getCallJob");
+@@clientName(AgentTelephony.cancelTelephonyCallJob, "cancelCallJob");
+@@clientName(AgentTelephony.createTelephonyCampaign, "createCampaign");
+@@clientName(AgentTelephony.getTelephonyCampaign, "getCampaign");
+@@clientName(
+  AgentTelephony.importTelephonyCampaignRecipients,
+  "importCampaignRecipients"
+);
+@@clientName(
+  AgentTelephony.getTelephonyCampaignRecipientImport,
+  "getCampaignRecipientImport"
+);
+@@clientName(AgentTelephony.validateTelephonyCampaign, "validateCampaign");
+@@clientName(AgentTelephony.publishTelephonyCampaign, "publishCampaign");
+@@clientName(AgentTelephony.pauseTelephonyCampaign, "pauseCampaign");
+@@clientName(AgentTelephony.resumeTelephonyCampaign, "resumeCampaign");
+@@clientName(AgentTelephony.cancelTelephonyCampaign, "cancelCampaign");
+@@clientName(AgentTelephony.getTelephonyOperation, "getOperation");
+
+@@clientName(AgentEndpointConversations.listAgentConversations, "list");
+@@clientName(AgentEndpointConversations.getAgentConversation, "get");
+@@clientName(AgentEndpointConversations.deleteAgentConversation, "delete");
+@@clientName(
+  AgentEndpointConversations.listAgentConversationResponses,
+  "listResponses"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationResponse,
+  "getResponse"
+);
+@@clientName(
+  AgentEndpointConversations.listAgentConversationResponseItems,
+  "listResponseItems"
+);
+@@clientName(
+  AgentEndpointConversations.listAgentConversationItems,
+  "listItems"
+);
+@@clientName(AgentEndpointConversations.getAgentConversationItem, "getItem");
+@@clientName(
+  AgentEndpointConversations.getAgentConversationItemAudio,
+  "getItemAudio"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationItemAudioContent,
+  "downloadItemAudio"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationItemGeneratedAudio,
+  "getItemGeneratedAudio"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationItemGeneratedAudioContent,
+  "downloadItemGeneratedAudio"
+);
+@@clientName(AgentEndpointConversations.getAgentConversationAudio, "getAudio");
+@@clientName(
+  AgentEndpointConversations.getAgentConversationAudioContent,
+  "downloadAudio"
+);
+
 // Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
 @@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
 @@clientName(
