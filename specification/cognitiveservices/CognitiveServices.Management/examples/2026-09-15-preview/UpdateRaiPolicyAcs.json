@@ -14,6 +14,10 @@
             "input-guard": {
               "type": "rego",
               "query": "data.input_guard.verdict"
+            },
+            "tool-guard": {
+              "type": "rego",
+              "query": "data.tool_guard.verdict"
             }
           },
           "intervention_points": {
@@ -35,12 +39,48 @@
                   ]
                 }
               }
+            },
+            "pre_tool_call": {
+              "policy_target": "$snap.tool_call.args",
+              "policy_target_kind": "tool_args",
+              "tool_name_from": "$snap.tool_call.name",
+              "policy": {
+                "id": "tool-guard"
+              }
+            }
+          },
+          "tools": {
+            "web_search": {
+              "id": "web_search",
+              "type": "retrieval",
+              "description": "Search approved public documentation and approved partner sites",
+              "security_labels": [
+                "network_egress",
+                "untrusted_content"
+              ],
+              "clearance": "public",
+              "allowed_domains": [
+                "learn.microsoft.com",
+                "support.microsoft.com"
+              ]
+            },
+            "wire_transfer": {
+              "id": "wire_transfer",
+              "type": "financial_action",
+              "security_labels": "financial_write",
+              "clearance": [
+                "banking",
+                "payments"
+              ]
             }
           }
         },
         "acsRegos": [
           {
             "regoName": "input-guard"
+          },
+          {
+            "regoName": "tool-guard"
           }
         ],
         "customBlocklists": [],
@@ -70,6 +110,10 @@
               "input-guard": {
                 "type": "rego",
                 "query": "data.input_guard.verdict"
+              },
+              "tool-guard": {
+                "type": "rego",
+                "query": "data.tool_guard.verdict"
               }
             },
             "intervention_points": {
@@ -91,12 +135,48 @@
                     ]
                   }
                 }
+              },
+              "pre_tool_call": {
+                "policy_target": "$snap.tool_call.args",
+                "policy_target_kind": "tool_args",
+                "tool_name_from": "$snap.tool_call.name",
+                "policy": {
+                  "id": "tool-guard"
+                }
+              }
+            },
+            "tools": {
+              "web_search": {
+                "id": "web_search",
+                "type": "retrieval",
+                "description": "Search approved public documentation and approved partner sites",
+                "security_labels": [
+                  "network_egress",
+                  "untrusted_content"
+                ],
+                "clearance": "public",
+                "allowed_domains": [
+                  "learn.microsoft.com",
+                  "support.microsoft.com"
+                ]
+              },
+              "wire_transfer": {
+                "id": "wire_transfer",
+                "type": "financial_action",
+                "security_labels": "financial_write",
+                "clearance": [
+                  "banking",
+                  "payments"
+                ]
               }
             }
           },
           "acsRegos": [
             {
               "regoName": "input-guard"
+            },
+            {
+              "regoName": "tool-guard"
             }
           ],
           "customBlocklists": [],
@@ -122,6 +202,10 @@
               "input-guard": {
                 "type": "rego",
                 "query": "data.input_guard.verdict"
+              },
+              "tool-guard": {
+                "type": "rego",
+                "query": "data.tool_guard.verdict"
               }
             },
             "intervention_points": {
@@ -143,12 +227,48 @@
                     ]
                   }
                 }
+              },
+              "pre_tool_call": {
+                "policy_target": "$snap.tool_call.args",
+                "policy_target_kind": "tool_args",
+                "tool_name_from": "$snap.tool_call.name",
+                "policy": {
+                  "id": "tool-guard"
+                }
+              }
+            },
+            "tools": {
+              "web_search": {
+                "id": "web_search",
+                "type": "retrieval",
+                "description": "Search approved public documentation and approved partner sites",
+                "security_labels": [
+                  "network_egress",
+                  "untrusted_content"
+                ],
+                "clearance": "public",
+                "allowed_domains": [
+                  "learn.microsoft.com",
+                  "support.microsoft.com"
+                ]
+              },
+              "wire_transfer": {
+                "id": "wire_transfer",
+                "type": "financial_action",
+                "security_labels": "financial_write",
+                "clearance": [
+                  "banking",
+                  "payments"
+                ]
               }
             }
           },
           "acsRegos": [
             {
               "regoName": "input-guard"
+            },
+            {
+              "regoName": "tool-guard"
             }
           ],
           "customBlocklists": [],

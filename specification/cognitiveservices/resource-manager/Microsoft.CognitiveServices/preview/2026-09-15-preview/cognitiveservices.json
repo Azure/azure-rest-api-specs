@@ -19692,6 +19692,11 @@
           "description": "The semantic kind of the projected policy target.",
           "x-ms-client-name": "policyTargetKind"
         },
+        "tool_name_from": {
+          "type": "string",
+          "description": "Selects the concrete tool name from the raw Agent Hooks snapshot.",
+          "x-ms-client-name": "toolNameFrom"
+        },
         "policy": {
           "$ref": "#/definitions/RaiAcsPolicyBinding",
           "description": "The logical policy evaluated at this intervention point."
@@ -19758,8 +19763,11 @@
           "x-ms-client-name": "interventionPoints"
         },
         "tools": {
-          "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Tool catalogs are disabled; when present, this object must be empty."
+          "type": "object",
+          "description": "Static tool catalog keyed by canonical tool name.",
+          "additionalProperties": {
+            "$ref": "#/definitions/RaiAcsToolDefinition"
+          }
         },
         "annotators": {
           "$ref": "#/definitions/RaiAcsEmptyObject",
@@ -19954,6 +19962,32 @@
         "type",
         "query"
       ]
+    },
+    "RaiAcsToolDefinition": {
+      "type": "object",
+      "description": "Static policy metadata for one ACS tool catalog entry.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Optional host-defined tool identifier."
+        },
+        "type": {
+          "type": "string",
+          "description": "Optional host-defined tool type."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable policy metadata."
+        },
+        "security_labels": {
+          "description": "Labels describing the sink or capability, supplied as a string or an array of strings.",
+          "x-ms-client-name": "securityLabels"
+        },
+        "clearance": {
+          "description": "Maximum sensitivity or host-defined clearance metadata, supplied as a string or an array of strings."
+        }
+      },
+      "additionalProperties": {}
     },
     "RaiActionType": {
       "type": "string",

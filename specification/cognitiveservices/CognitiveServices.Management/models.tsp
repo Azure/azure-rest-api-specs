@@ -642,6 +642,31 @@ model RaiAcsModerationBindingExtension {
 @added(Versions.v2026_09_15_preview)
 model RaiAcsEmptyObject {}
 
+/** Static policy metadata for one ACS tool catalog entry. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS tool entries permit extensible policy metadata"
+@added(Versions.v2026_09_15_preview)
+model RaiAcsToolDefinition {
+  ...Record<unknown>;
+
+  /** Optional host-defined tool identifier. */
+  id?: string;
+
+  /** Optional host-defined tool type. */
+  type?: string;
+
+  /** Human-readable policy metadata. */
+  description?: string;
+
+  /** Labels describing the sink or capability, supplied as a string or an array of strings. */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "OpenAPI v2 cannot represent the ACS string-or-string-array wire shape"
+  @encodedName("application/json", "security_labels")
+  securityLabels?: unknown;
+
+  /** Maximum sensitivity or host-defined clearance metadata, supplied as a string or an array of strings. */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "OpenAPI v2 cannot represent the ACS string-or-string-array wire shape"
+  clearance?: unknown;
+}
+
 /**
  * Identifies the logical policy evaluated at an ACS intervention point.
  */
@@ -709,6 +734,10 @@ model RaiAcsInterventionPoint {
   @encodedName("application/json", "policy_target_kind")
   policyTargetKind: RaiAcsPolicyTargetKind;
 
+  /** Selects the concrete tool name from the raw Agent Hooks snapshot. */
+  @encodedName("application/json", "tool_name_from")
+  toolNameFrom?: string;
+
   /** The logical policy evaluated at this intervention point. */
   policy: RaiAcsPolicyBinding;
 
@@ -756,8 +785,9 @@ model RaiAcsManifest {
   @encodedName("application/json", "intervention_points")
   interventionPoints: RaiAcsInterventionPoints;
 
-  /** Tool catalogs are disabled; when present, this object must be empty. */
-  tools?: RaiAcsEmptyObject;
+  /** Static tool catalog keyed by canonical tool name. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS defines tools as a name-keyed extensible map"
+  tools?: Record<RaiAcsToolDefinition>;
 
   /** Standard ACS annotator dispatch is disabled; when present, this object must be empty. */
   annotators?: RaiAcsEmptyObject;

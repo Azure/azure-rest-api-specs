@@ -48,6 +48,7 @@ suppressions:
       - $.definitions.RaiAcsHarmConfiguration.properties.harm_config_id
       - $.definitions.RaiAcsInterventionPoint.properties.policy_target
       - $.definitions.RaiAcsInterventionPoint.properties.policy_target_kind
+      - $.definitions.RaiAcsInterventionPoint.properties.tool_name_from
       - $.definitions.RaiAcsInterventionPoints.properties.pre_tool_call
       - $.definitions.RaiAcsInterventionPoints.properties.post_tool_call
       - $.definitions.RaiAcsManifest.properties.agent_control_specification_version
@@ -55,12 +56,15 @@ suppressions:
       - $.definitions.RaiAcsModerationBindingExtension.properties.subject_format
       - $.definitions.RaiAcsModerationBindingExtension.properties.harm_configs
       - $.definitions.RaiAcsPolicyBinding.properties.aacs_moderation
+      - $.definitions.RaiAcsToolDefinition.properties.security_labels
   - code: AvoidAdditionalProperties
-    reason: The canonical ACS manifest defines metadata as an extensible JSON object and policies as a map keyed by logical policy identifier. Replacing these maps with fixed properties or arrays would break ACS manifest portability and round-tripping.
+    reason: The canonical ACS manifest defines metadata and tool entries as extensible JSON objects, and policies and tools as name-keyed maps. Replacing these objects with closed properties or arrays would break ACS manifest portability and round-tripping.
     from: cognitiveservices.json
     where:
       - $.definitions.RaiAcsManifest.properties.metadata
       - $.definitions.RaiAcsManifest.properties.policies
+      - $.definitions.RaiAcsManifest.properties.tools
+      - $.definitions.RaiAcsToolDefinition
   - code: PutResponseCodes
     reason: Compute create is a genuine long-running async operation - the service returns 202 Accepted on success (never 200/201) and 4xx on failure. Modeling 202-only reflects the real backend contract (live-validated). Preview-only bug fix correcting the contract before GA.
     where:
