@@ -6361,6 +6361,10 @@
           "$ref": "#/definitions/ExtendedProperties",
           "description": "Extended Properties for Azure IaasVM Backup."
         },
+        "existingBasicVMProtection": {
+          "$ref": "#/definitions/ExistingBasicVMProtection",
+          "description": "Specifies how existing Basic VM protection is handled when configuring protection."
+        },
         "policyType": {
           "type": "string",
           "description": "Type of the policy used for protection",
@@ -10096,6 +10100,24 @@
           },
           "readOnly": true
         }
+      }
+    },
+    "ExistingBasicVMProtection": {
+      "type": "string",
+      "description": "Specifies how existing Basic VM protection is handled when configuring protection.",
+      "enum": [
+        "DisableWithDeleteRPsNow"
+      ],
+      "x-ms-enum": {
+        "name": "ExistingBasicVMProtection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DisableWithDeleteRPsNow",
+            "value": "DisableWithDeleteRPsNow",
+            "description": "Disables existing Basic VM protection and immediately deletes its recovery points."
+          }
+        ]
       }
     },
     "ExportJobsOperationResultInfo": {

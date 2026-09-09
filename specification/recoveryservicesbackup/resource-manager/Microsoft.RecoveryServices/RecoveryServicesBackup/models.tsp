@@ -4022,6 +4022,19 @@ model AzureIaaSClassicComputeVMProtectedItem extends ProtectedItem {
   ...AzureIaaSVMProtectedItemProperties;
 }
 
+/**
+ * Specifies how existing Basic VM protection is handled when configuring protection.
+ */
+@added(Versions.v2026_10_01)
+union ExistingBasicVMProtection {
+  string,
+
+  /**
+   * Disables existing Basic VM protection and immediately deletes its recovery points.
+   */
+  DisableWithDeleteRPsNow: "DisableWithDeleteRPsNow",
+}
+
 alias AzureIaaSVMProtectedItemProperties = {
   /**
    * Friendly name of the VM represented by this backup item.
@@ -4089,6 +4102,13 @@ alias AzureIaaSVMProtectedItemProperties = {
    * Extended Properties for Azure IaasVM Backup.
    */
   extendedProperties?: ExtendedProperties;
+
+  /**
+   * Specifies how existing Basic VM protection is handled when configuring protection.
+   */
+  @added(Versions.v2026_10_01)
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The property name matches the existing BMS wire contract."
+  existingBasicVMProtection?: ExistingBasicVMProtection;
 
   /**
    * Type of the policy used for protection
