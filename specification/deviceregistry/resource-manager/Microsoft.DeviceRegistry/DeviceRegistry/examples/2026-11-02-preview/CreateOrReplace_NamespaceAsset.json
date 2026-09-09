@@ -22,8 +22,7 @@
           "endpointName": "opcuaendpointname"
         },
         "assetTypeRefs": [
-          "myAssetTypeRef1",
-          "myAssetTypeRef2"
+          "myAssetTypeRef1"
         ],
         "enabled": true,
         "externalAssetId": "8ZBA6LRHU0A458969",
@@ -94,12 +93,6 @@
                 "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt3",
                 "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
                 "typeRef": "dataset1DataPoint1TypeRef"
-              },
-              {
-                "name": "dataset1DataPoint2",
-                "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt4",
-                "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
-                "typeRef": "dataset1DataPoint2TypeRef"
               }
             ]
           }
@@ -124,20 +117,6 @@
                   }
                 ],
                 "typeRef": "event1Ref"
-              },
-              {
-                "name": "event2",
-                "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt8",
-                "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":1,\"queueSize\":8}",
-                "destinations": [
-                  {
-                    "target": "Storage",
-                    "configuration": {
-                      "path": "/tmp/event2"
-                    }
-                  }
-                ],
-                "typeRef": "event2Ref"
               }
             ]
           }
@@ -152,22 +131,6 @@
                 "target": "Storage",
                 "configuration": {
                   "path": "/tmp/stream1"
-                }
-              }
-            ]
-          },
-          {
-            "name": "stream2",
-            "streamConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
-            "typeRef": "stream2TypeRef",
-            "destinations": [
-              {
-                "target": "Mqtt",
-                "configuration": {
-                  "topic": "/contoso/testStream2",
-                  "retain": "Never",
-                  "qos": "Qos0",
-                  "ttl": 7200
                 }
               }
             ]
@@ -187,15 +150,6 @@
                 "targetUri": "/onvif/device_service?ONVIFProfile=Profile1",
                 "topic": "/contoso/managementGroup1/action1",
                 "typeRef": "action1TypeRef",
-                "actionType": "Call",
-                "timeoutInSeconds": 60
-              },
-              {
-                "name": "action2",
-                "actionConfiguration": "{\"retryCount\":5,\"retryBackoffInterval\":5}",
-                "targetUri": "/onvif/device_service?ONVIFProfile=Profile2",
-                "topic": "/contoso/managementGroup1/action2",
-                "typeRef": "action2TypeRef",
                 "actionType": "Call",
                 "timeoutInSeconds": 60
               }
@@ -233,8 +187,7 @@
             "endpointName": "8ZBA6LRHU0A458969"
           },
           "assetTypeRefs": [
-            "myAssetTypeRef1",
-            "myAssetTypeRef2"
+            "myAssetTypeRef1"
           ],
           "enabled": true,
           "externalAssetId": "8ZBA6LRHU0A458969",
@@ -307,12 +260,6 @@
                   "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt3",
                   "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
                   "typeRef": "dataset1DataPoint1TypeRef"
-                },
-                {
-                  "name": "dataset1DataPoint2",
-                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt4",
-                  "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
-                  "typeRef": "dataset1DataPoint2TypeRef"
                 }
               ]
             }
@@ -337,20 +284,6 @@
                     }
                   ],
                   "typeRef": "event1Ref"
-                },
-                {
-                  "name": "event2",
-                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt7",
-                  "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":1,\"queueSize\":8}",
-                  "destinations": [
-                    {
-                      "target": "Storage",
-                      "configuration": {
-                        "path": "/tmp/event2"
-                      }
-                    }
-                  ],
-                  "typeRef": "event2Ref"
                 }
               ]
             }
@@ -365,22 +298,6 @@
                   "target": "Storage",
                   "configuration": {
                     "path": "/tmp/stream1"
-                  }
-                }
-              ]
-            },
-            {
-              "name": "stream2",
-              "streamConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
-              "typeRef": "stream2TypeRef",
-              "destinations": [
-                {
-                  "target": "Mqtt",
-                  "configuration": {
-                    "topic": "/contoso/testStream2",
-                    "retain": "Never",
-                    "qos": "Qos0",
-                    "ttl": 7200
                   }
                 }
               ]
@@ -400,15 +317,6 @@
                   "targetUri": "/onvif/device_service?ONVIFProfile=Profile1",
                   "topic": "/contoso/managementGroup1/action1",
                   "typeRef": "action1TypeRef",
-                  "actionType": "Call",
-                  "timeoutInSeconds": 60
-                },
-                {
-                  "name": "action2",
-                  "actionConfiguration": "{\"retryCount\":5,\"retryBackoffInterval\":5}",
-                  "targetUri": "/onvif/device_service?ONVIFProfile=Profile2",
-                  "topic": "/contoso/managementGroup1/action2",
-                  "typeRef": "action2TypeRef",
                   "actionType": "Call",
                   "timeoutInSeconds": 60
                 }
@@ -459,112 +367,6 @@
                   ]
                 }
               }
-            ],
-            "eventGroups": [
-              {
-                "name": "default",
-                "events": [
-                  {
-                    "name": "event1",
-                    "messageSchemaReference": {
-                      "schemaRegistryNamespace": "liagdwhnvlhcptvmufws",
-                      "schemaName": "lytgdlsvivtcrtuvje",
-                      "schemaVersion": "1"
-                    },
-                    "error": {
-                      "code": "400",
-                      "message": "Error",
-                      "details": [
-                        {
-                          "code": "400.123.456.789",
-                          "message": "Validation error",
-                          "info": "Property is not valid.",
-                          "correlationId": "xqoettlcdlxchoscv"
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            ],
-            "streams": [
-              {
-                "name": "stream1",
-                "messageSchemaReference": {
-                  "schemaRegistryNamespace": "liagdwhnvlhcptvmufws",
-                  "schemaName": "lytgdlsvivtcrtuvje",
-                  "schemaVersion": "1"
-                },
-                "error": {
-                  "code": "400",
-                  "message": "Error",
-                  "details": [
-                    {
-                      "code": "400.123.456.789",
-                      "message": "Validation error",
-                      "info": "Property is not valid.",
-                      "correlationId": "xqoettlcdlxchoscv"
-                    }
-                  ]
-                }
-              }
-            ],
-            "managementGroups": [
-              {
-                "name": "managementGroup1",
-                "actions": [
-                  {
-                    "name": "action1",
-                    "requestMessageSchemaReference": {
-                      "schemaRegistryNamespace": "liagdwhnvlhcptvmufws",
-                      "schemaName": "lytgdlsvivtcrtuvje",
-                      "schemaVersion": "1"
-                    },
-                    "responseMessageSchemaReference": {
-                      "schemaRegistryNamespace": "liagdwhnvlhcptvmufws",
-                      "schemaName": "lytgdlsvivtcrtuvje",
-                      "schemaVersion": "1"
-                    },
-                    "error": {
-                      "code": "400",
-                      "message": "Error",
-                      "details": [
-                        {
-                          "code": "400.123.456.789",
-                          "message": "Validation error",
-                          "info": "Property is not valid.",
-                          "correlationId": "xqoettlcdlxchoscv"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "action2",
-                    "requestMessageSchemaReference": {
-                      "schemaRegistryNamespace": "liagdwhnvlhcptvmufws",
-                      "schemaName": "lytgdlsvivtcrtuvje",
-                      "schemaVersion": "1"
-                    },
-                    "responseMessageSchemaReference": {
-                      "schemaRegistryNamespace": "liagdwhnvlhcptvmufws",
-                      "schemaName": "lytgdlsvivtcrtuvje",
-                      "schemaVersion": "1"
-                    },
-                    "error": {
-                      "code": "400",
-                      "message": "Error",
-                      "details": [
-                        {
-                          "code": "400.123.456.789",
-                          "message": "Validation error",
-                          "info": "Property is not valid.",
-                          "correlationId": "xqoettlcdlxchoscv"
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
             ]
           },
           "provisioningState": "Succeeded"
@@ -601,8 +403,7 @@
             "endpointName": "8ZBA6LRHU0A458969"
           },
           "assetTypeRefs": [
-            "myAssetTypeRef1",
-            "myAssetTypeRef2"
+            "myAssetTypeRef1"
           ],
           "enabled": true,
           "externalAssetId": "8ZBA6LRHU0A458969",
@@ -675,12 +476,6 @@
                   "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt3",
                   "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
                   "typeRef": "dataset2DataPoint1TypeRef"
-                },
-                {
-                  "name": "dataset1DataPoint2",
-                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt4",
-                  "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
-                  "typeRef": "dataset1DataPoint2TypeRef"
                 }
               ]
             }
@@ -705,20 +500,6 @@
                     }
                   ],
                   "typeRef": "event1Ref"
-                },
-                {
-                  "name": "event2",
-                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt8",
-                  "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":1,\"queueSize\":8}",
-                  "destinations": [
-                    {
-                      "target": "Storage",
-                      "configuration": {
-                        "path": "/tmp/event2"
-                      }
-                    }
-                  ],
-                  "typeRef": "event2Ref"
                 }
               ]
             }
@@ -733,22 +514,6 @@
                   "target": "Storage",
                   "configuration": {
                     "path": "/tmp/stream1"
-                  }
-                }
-              ]
-            },
-            {
-              "name": "stream2",
-              "streamConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}",
-              "typeRef": "stream2TypeRef",
-              "destinations": [
-                {
-                  "target": "Mqtt",
-                  "configuration": {
-                    "topic": "/contoso/testStream2",
-                    "retain": "Never",
-                    "qos": "Qos0",
-                    "ttl": 7200
                   }
                 }
               ]
@@ -768,15 +533,6 @@
                   "targetUri": "/onvif/device_service?ONVIFProfile=Profile1",
                   "topic": "/contoso/managementGroup1/action1",
                   "typeRef": "action1TypeRef",
-                  "actionType": "Call",
-                  "timeoutInSeconds": 60
-                },
-                {
-                  "name": "action2",
-                  "actionConfiguration": "{\"retryCount\":5,\"retryBackoffInterval\":5}",
-                  "targetUri": "/onvif/device_service?ONVIFProfile=Profile2",
-                  "topic": "/contoso/managementGroup1/action2",
-                  "typeRef": "action2TypeRef",
                   "actionType": "Call",
                   "timeoutInSeconds": 60
                 }
@@ -826,112 +582,6 @@
                     }
                   ]
                 }
-              }
-            ],
-            "eventGroups": [
-              {
-                "name": "default",
-                "events": [
-                  {
-                    "name": "event1",
-                    "messageSchemaReference": {
-                      "schemaRegistryNamespace": "liagdwhnvlhcptvmufws",
-                      "schemaName": "lytgdlsvivtcrtuvje",
-                      "schemaVersion": "1"
-                    },
-                    "error": {
-                      "code": "400",
-                      "message": "Error",
-                      "details": [
-                        {
-                          "code": "400.123.456.789",
-                          "message": "Validation error",
-                          "info": "Property is not valid.",
-                          "correlationId": "xqoettlcdlxchoscv"
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            ],
-            "streams": [
-              {
-                "name": "stream1",
-                "messageSchemaReference": {
-                  "schemaRegistryNamespace": "liagdwhnvlhcptvmufws",
-                  "schemaName": "lytgdlsvivtcrtuvje",
-                  "schemaVersion": "1"
-                },
-                "error": {
-                  "code": "400",
-                  "message": "Error",
-                  "details": [
-                    {
-                      "code": "400.123.456.789",
-                      "message": "Validation error",
-                      "info": "Property is not valid.",
-                      "correlationId": "xqoettlcdlxchoscv"
-                    }
-                  ]
-                }
-              }
-            ],
-            "managementGroups": [
-              {
-                "name": "managementGroup1",
-                "actions": [
-                  {
-                    "name": "action1",
-                    "requestMessageSchemaReference": {
-                      "schemaRegistryNamespace": "liagdwhnvlhcptvmufws",
-                      "schemaName": "lytgdlsvivtcrtuvje",
-                      "schemaVersion": "1"
-                    },
-                    "responseMessageSchemaReference": {
-                      "schemaRegistryNamespace": "liagdwhnvlhcptvmufws",
-                      "schemaName": "lytgdlsvivtcrtuvje",
-                      "schemaVersion": "1"
-                    },
-                    "error": {
-                      "code": "400",
-                      "message": "Error",
-                      "details": [
-                        {
-                          "code": "400.123.456.789",
-                          "message": "Validation error",
-                          "info": "Property is not valid.",
-                          "correlationId": "xqoettlcdlxchoscv"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "action2",
-                    "requestMessageSchemaReference": {
-                      "schemaRegistryNamespace": "liagdwhnvlhcptvmufws",
-                      "schemaName": "lytgdlsvivtcrtuvje",
-                      "schemaVersion": "1"
-                    },
-                    "responseMessageSchemaReference": {
-                      "schemaRegistryNamespace": "liagdwhnvlhcptvmufws",
-                      "schemaName": "lytgdlsvivtcrtuvje",
-                      "schemaVersion": "1"
-                    },
-                    "error": {
-                      "code": "400",
-                      "message": "Error",
-                      "details": [
-                        {
-                          "code": "400.123.456.789",
-                          "message": "Validation error",
-                          "info": "Property is not valid.",
-                          "correlationId": "xqoettlcdlxchoscv"
-                        }
-                      ]
-                    }
-                  }
-                ]
               }
             ]
           },
