@@ -6308,10 +6308,13 @@ model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
 @added(Versions.v2026_09_15_preview)
 model GatedModelAccessProperties {
   /**
-   * The reference to the project-scoped connection used to authorize access to a gated model during deployment creation.
-   * The expected format is projects/{projectName}/connections/{connectionName}.
+   * The fully qualified Azure resource ID of the project connection used to authorize access to a gated model during deployment creation.
    */
-  connectionReference: string;
+  connectionId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.CognitiveServices/accounts/projects/connections";
+    },
+  ]>;
 }
 
 /**

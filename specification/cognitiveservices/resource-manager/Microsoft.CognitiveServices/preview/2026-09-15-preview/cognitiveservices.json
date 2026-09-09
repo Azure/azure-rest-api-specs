@@ -17058,13 +17058,21 @@
       "type": "object",
       "description": "Gated model access configuration for a managed compute deployment.",
       "properties": {
-        "connectionReference": {
+        "connectionId": {
           "type": "string",
-          "description": "The reference to the project-scoped connection used to authorize access to a gated model during deployment creation.\nThe expected format is projects/{projectName}/connections/{connectionName}."
+          "format": "arm-id",
+          "description": "The fully qualified Azure resource ID of the project connection used to authorize access to a gated model during deployment creation.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.CognitiveServices/accounts/projects/connections"
+              }
+            ]
+          }
         }
       },
       "required": [
-        "connectionReference"
+        "connectionId"
       ]
     },
     "HostedAgentDeployment": {
