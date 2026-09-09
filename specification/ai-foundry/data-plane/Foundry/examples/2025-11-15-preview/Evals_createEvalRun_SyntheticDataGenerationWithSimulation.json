@@ -1,0 +1,134 @@
+{
+  "title": "Evals_createEvalRun_SyntheticDataGenerationWithSimulation",
+  "operationId": "Evals_createEvalRun",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "eval_id": "eval_67e579652b548190aaa83ada4b125f47",
+    "body": {
+      "name": "synthetic-conversation-test-run",
+      "evaluation_level": "conversation",
+      "data_source": {
+        "type": "azure_ai_synthetic_data_generation_with_simulation",
+        "synthetic_data_generation_configuration": {
+          "test_case_count": 20,
+          "output_test_case_dataset_name": "synthetic-multi-turn-conversation-output",
+          "generation_sources": [
+            {
+              "type": "prompt",
+              "prompt": "Generate billing-support conversations..."
+            },
+            {
+              "type": "agent",
+              "agent_name": "my-support-agent",
+              "agent_version": "2"
+            },
+            {
+              "type": "file",
+              "id": "file-abc123"
+            }
+          ]
+        },
+        "model_configuration": {
+          "model": "connection-name/gpt-4o",
+          "sampling_params": {
+            "temperature": 0.7
+          }
+        },
+        "default_simulation_configuration": {
+          "max_num_turns": 5,
+          "conversation_repetitions": 3,
+          "desired_num_turns": 4
+        },
+        "target": {
+          "type": "azure_ai_agent",
+          "name": "multi-turn-conversation-simulation",
+          "version": "2",
+          "tool_descriptions": [
+            {
+              "name": "lookup_account",
+              "description": "Look up a customer billing account by ID."
+            },
+            {
+              "name": "issue_refund",
+              "description": "Issue a refund for a disputed charge."
+            }
+          ]
+        },
+        "enable_conversation_dataset_generation": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "eval.run",
+        "id": "evalrun_67e57965b480819094274e3a32235e4c",
+        "eval_id": "eval_67e579652b548190aaa83ada4b125f47",
+        "status": "queued",
+        "name": "synthetic-conversation-test-run",
+        "evaluation_level": "conversation",
+        "created_at": 1743092069,
+        "report_url": "https://ai.azure.com/evaluations/eval_67e579652b548190aaa83ada4b125f47?run_id=evalrun_67e57965b480819094274e3a32235e4c",
+        "result_counts": {
+          "total": 0,
+          "errored": 0,
+          "failed": 0,
+          "passed": 0
+        },
+        "per_model_usage": [],
+        "per_testing_criteria_results": [],
+        "data_source": {
+          "type": "azure_ai_synthetic_data_generation_with_simulation",
+          "synthetic_data_generation_configuration": {
+            "test_case_count": 20,
+            "output_test_case_dataset_name": "synthetic-multi-turn-conversation-output",
+            "generation_sources": [
+              {
+                "type": "prompt",
+                "prompt": "Generate billing-support conversations..."
+              },
+              {
+                "type": "agent",
+                "agent_name": "my-support-agent",
+                "agent_version": "2"
+              },
+              {
+                "type": "file",
+                "id": "file-abc123"
+              }
+            ]
+          },
+          "model_configuration": {
+            "model": "connection-name/gpt-4o",
+            "sampling_params": {
+              "temperature": 0.7
+            }
+          },
+          "default_simulation_configuration": {
+            "max_num_turns": 5,
+            "conversation_repetitions": 3,
+            "desired_num_turns": 4
+          },
+          "target": {
+            "type": "azure_ai_agent",
+            "name": "multi-turn-conversation-simulation",
+            "version": "2",
+            "tool_descriptions": [
+              {
+                "name": "lookup_account",
+                "description": "Look up a customer billing account by ID."
+              },
+              {
+                "name": "issue_refund",
+                "description": "Issue a refund for a disputed charge."
+              }
+            ]
+          },
+          "enable_conversation_dataset_generation": true
+        },
+        "error": null,
+        "metadata": {}
+      }
+    }
+  }
+}

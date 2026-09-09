@@ -50440,6 +50440,7 @@ components:
         mapping:
           azure_ai_traces: '#/components/schemas/TracesEvalRunDataSource'
           azure_ai_synthetic_data_gen: '#/components/schemas/SyntheticDataGenerationEvalRunDataSource'
+          azure_ai_synthetic_data_generation_with_simulation: '#/components/schemas/SyntheticDataGenerationWithSimulationEvalRunDataSource'
           azure_ai_responses: '#/components/schemas/AzureAIResponsesEvalRunDataSource'
           azure_ai_target_completions: '#/components/schemas/TargetCompletionEvalRunDataSource'
           csv: '#/components/schemas/EvalCsvRunDataSource'
@@ -84372,6 +84373,24 @@ components:
           description: The structured output captured during the response.
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
+    SyntheticDataGenerationConfiguration:
+      type: object
+      required:
+        - generation_sources
+      properties:
+        test_case_count:
+          type: integer
+          format: int32
+          description: Number of seed test cases to generate.
+        output_test_case_dataset_name:
+          type: string
+          description: Name of the dataset where the generated seed test cases are stored. When omitted, the service generates a name automatically.
+        generation_sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataGenerationJobSource'
+          description: Seed generation sources (prompt, agent, or file) forwarded to the data generation endpoint. Multiple sources may be provided.
+      description: Seed data-generation configuration for `SyntheticDataGenerationWithSimulationEvalRunDataSource`. The `generation_sources` are forwarded directly to the data generation endpoint to produce the seed test cases that are subsequently simulated.
     SyntheticDataGenerationEvalRunDataSource:
       type: object
       required:
@@ -84434,6 +84453,46 @@ components:
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
       description: Represents the parameters for synthetic data generation item generation.
+    SyntheticDataGenerationWithSimulationEvalRunDataSource:
+      type: object
+      required:
+        - type
+        - synthetic_data_generation_configuration
+        - model_configuration
+        - target
+      properties:
+        type:
+          type: string
+          enum:
+            - azure_ai_synthetic_data_generation_with_simulation
+          description: The type of data source, always `azure_ai_synthetic_data_generation_with_simulation`.
+        synthetic_data_generation_configuration:
+          $ref: '#/components/schemas/SyntheticDataGenerationConfiguration'
+          description: 'Seed data-generation configuration: how many test cases to generate, the optional output dataset name, and the generation sources forwarded to the data generation endpoint.'
+        model_configuration:
+          $ref: '#/components/schemas/EvaluationModelConfiguration'
+          description: Model used both to generate the seed test cases and to simulate the user side of each conversation against the evaluated `target`.
+        default_simulation_configuration:
+          $ref: '#/components/schemas/UserConversationSimulationConfiguration'
+          description: Default configuration for generating the simulated conversations produced from the seed test cases. When omitted, the service defaults apply.
+        target:
+          $ref: '#/components/schemas/FoundryEvaluationTarget'
+          description: Model or agent being evaluated. It receives turns from the simulated user during the conversation simulation.
+        enable_conversation_dataset_generation:
+          type: boolean
+          description: Whether to write all generated conversations to a file in a versioned Foundry dataset, providing visibility into the generated conversations. The dataset can be reused in future evaluation runs. When enabled, the completed run includes `output_dataset`. When omitted, the service defaults to `true`.
+          default: true
+      allOf:
+        - $ref: '#/components/schemas/EvalRunDataSource'
+      description: |-
+        Generates seed test-case scenarios via the data generation endpoint and then evaluates a `target`
+        by simulating multi-turn user conversations over those scenarios.
+
+        The `generation_sources` in `synthetic_data_generation_configuration` are forwarded to the data
+        generation backend to produce seed test cases. Each generated scenario is then simulated against
+        `target`: the model in `model_configuration` plays the simulated user and drives the conversation
+        according to `default_simulation_configuration` until it reaches the desired length or maximum turn
+        limit. The evaluation's testing criteria are then applied to the generated conversations.
     SystemMessage:
       type: object
       required:

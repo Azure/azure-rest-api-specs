@@ -494,6 +494,49 @@ model SyntheticDataGenerationItemGenerationParams extends ItemGenerationParams {
   sources: OpenAI.EvalJsonlFileIdSource[];
 }
 
+/**
+ * Generates seed test-case scenarios via the data generation endpoint and then evaluates a `target`
+ * by simulating multi-turn user conversations over those scenarios.
+ *
+ * The `generation_sources` in `synthetic_data_generation_configuration` are forwarded to the data
+ * generation backend to produce seed test cases. Each generated scenario is then simulated against
+ * `target`: the model in `model_configuration` plays the simulated user and drives the conversation
+ * according to `default_simulation_configuration` until it reaches the desired length or maximum turn
+ * limit. The evaluation's testing criteria are then applied to the generated conversations.
+ */
+model SyntheticDataGenerationWithSimulationEvalRunDataSource
+  extends EvalRunDataSource {
+  /** The type of data source, always `azure_ai_synthetic_data_generation_with_simulation`. */
+  type: "azure_ai_synthetic_data_generation_with_simulation";
+
+  /** Seed data-generation configuration: how many test cases to generate, the optional output dataset name, and the generation sources forwarded to the data generation endpoint. */
+  synthetic_data_generation_configuration: SyntheticDataGenerationConfiguration;
+
+  /** Model used both to generate the seed test cases and to simulate the user side of each conversation against the evaluated `target`. */
+  model_configuration: EvaluationModelConfiguration;
+
+  /** Default configuration for generating the simulated conversations produced from the seed test cases. When omitted, the service defaults apply. */
+  default_simulation_configuration?: UserConversationSimulationConfiguration;
+
+  /** Model or agent being evaluated. It receives turns from the simulated user during the conversation simulation. */
+  target: FoundryEvaluationTarget;
+
+  /** Whether to write all generated conversations to a file in a versioned Foundry dataset, providing visibility into the generated conversations. The dataset can be reused in future evaluation runs. When enabled, the completed run includes `output_dataset`. When omitted, the service defaults to `true`. */
+  enable_conversation_dataset_generation?: boolean = true;
+}
+
+/** Seed data-generation configuration for `SyntheticDataGenerationWithSimulationEvalRunDataSource`. The `generation_sources` are forwarded directly to the data generation endpoint to produce the seed test cases that are subsequently simulated. */
+model SyntheticDataGenerationConfiguration {
+  /** Number of seed test cases to generate. */
+  test_case_count?: int32;
+
+  /** Name of the dataset where the generated seed test cases are stored. When omitted, the service generates a name automatically. */
+  output_test_case_dataset_name?: string;
+
+  /** Seed generation sources (prompt, agent, or file) forwarded to the data generation endpoint. Multiple sources may be provided. */
+  generation_sources: DataGenerationJobSource[];
+}
+
 /** Represents a data source for evaluation runs that are specific to Continuous Evaluation scenarios. */
 model AzureAIResponsesEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source, always `azure_ai_responses`. */
@@ -687,7 +730,7 @@ model AzureAIBenchmarkPreviewEvalRunDataSource extends EvalRunDataSource {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionEvalRunDataSource | UserConversationSimulationEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourceEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionEvalRunDataSource | UserConversationSimulationEvalRunDataSource | SyntheticDataGenerationWithSimulationEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourceEvalRunDataSource */
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
@@ -752,7 +795,7 @@ model EvalRun is OpenAI.EvalRun {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionEvalRunDataSource | UserConversationSimulationEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourceEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionEvalRunDataSource | UserConversationSimulationEvalRunDataSource | SyntheticDataGenerationWithSimulationEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourceEvalRunDataSource */
 );
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
