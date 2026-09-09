@@ -50446,7 +50446,7 @@ components:
           azure_ai_red_team: '#/components/schemas/RedTeamEvalRunDataSource'
           azure_ai_trace_data_source: '#/components/schemas/AzureAITraceDataSourceEvalRunDataSource'
           azure_ai_benchmark_preview: '#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource'
-          azure_ai_user_conversation_simulation_preview: '#/components/schemas/UserConversationSimulationEvalRunDataSource'
+          azure_ai_user_conversation_simulation: '#/components/schemas/UserConversationSimulationEvalRunDataSource'
       description: Base class for run data sources with discriminator support.
     EvalRunOutputItem:
       type: object
@@ -87018,8 +87018,8 @@ components:
         type:
           type: string
           enum:
-            - azure_ai_user_conversation_simulation_preview
-          description: The type of data source, always `azure_ai_user_conversation_simulation_preview`.
+            - azure_ai_user_conversation_simulation
+          description: The type of data source, always `azure_ai_user_conversation_simulation`.
         source:
           $ref: '#/components/schemas/UserConversationSimulationSource'
           description: Test scenarios supplied as JSONL rows or strongly typed inline test cases.
