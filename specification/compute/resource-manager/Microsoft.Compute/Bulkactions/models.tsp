@@ -617,6 +617,9 @@ model VirtualMachineInfo {
 
   @doc("The zone identifier")
   zone?: string;
+
+  @doc("The resolved Azure virtual machine name.")
+  name?: string;
 }
 
 @doc("High level response from an operation on a resource")
