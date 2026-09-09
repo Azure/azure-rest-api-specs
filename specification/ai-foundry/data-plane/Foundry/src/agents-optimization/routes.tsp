@@ -72,7 +72,7 @@ interface AgentOptimizationJobs {
   cancel is cancelJob<AgentOptimizationJob>;
 
   /**
-   * Deletes the job and its candidate artifacts, canceling the job first if it is non-terminal.
+   * Deletes the job and its candidate artifacts. Non-terminal jobs return 409 unless `force=true`, in which case the service cancels the job first and then deletes it.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
   @summary("Delete an agent optimization job")

@@ -532,7 +532,7 @@
       "delete": {
         "operationId": "AgentOptimizationJobs_delete",
         "summary": "Delete an agent optimization job",
-        "description": "Deletes the job and its candidate artifacts, canceling the job first if it is non-terminal.",
+        "description": "Deletes the job and its candidate artifacts. Non-terminal jobs return 409 unless `force=true`, in which case the service cancels the job first and then deletes it.",
         "parameters": [
           {
             "name": "jobId",
@@ -30640,9 +30640,8 @@
             "description": "Modeled dollar estimate. Present only when pricing data is available for at least one contributing model."
           },
           "prices_as_of": {
-            "type": "string",
-            "format": "date",
-            "description": "The pricing snapshot date used for cost estimation."
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "Timestamp of the pricing snapshot used for cost estimation, represented in Unix time."
           }
         },
         "description": "Response body for :estimate."

@@ -338,8 +338,8 @@ model AgentOptimizationEstimateResponse {
   @doc("Modeled dollar estimate. Present only when pricing data is available for at least one contributing model.")
   dollars?: AgentOptimizationEstimateDollars;
 
-  @doc("The pricing snapshot date used for cost estimation.")
-  prices_as_of?: plainDate;
+  @doc("Timestamp of the pricing snapshot used for cost estimation, represented in Unix time.")
+  prices_as_of?: FoundryTimestamp;
 }
 
 // ---------------------------------------------------------------------------
