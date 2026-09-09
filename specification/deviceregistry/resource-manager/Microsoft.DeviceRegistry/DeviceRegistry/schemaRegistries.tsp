@@ -59,7 +59,8 @@ model SchemaRegistryProperties {
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The Storage Account's Container URL where schemas will be stored.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  storageAccountContainerUrl: string;
+  @typeChangedFrom(Versions.v2026_11_01, string)
+  storageAccountContainerUrl: url;
 
   @added(Versions.v2026_11_01)
   @doc("The identity used for outbound calls from the ADR schema registry. If not specified and the schema registry has a system-assigned identity enabled, the system-assigned identity is used by default.")
