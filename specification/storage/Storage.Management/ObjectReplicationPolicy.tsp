@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Storage;
 /**
@@ -30,7 +31,18 @@ interface ObjectReplicationPolicyOperationGroup {
   /**
    * Get the object replication policy of the storage account by policy ID.
    */
-  get is ArmResourceRead<ObjectReplicationPolicy, Error = ErrorResponse>;
+  get is ArmResourceRead<
+    ObjectReplicationPolicy,
+    Parameters = {
+      /**
+       * Optional. Set to policyStatus to include the object replication policy status in the response.
+       */
+      @added(Versions.v2026_09_01)
+      @query("$expand")
+      $expand?: "policyStatus";
+    },
+    Error = ErrorResponse
+  >;
 
   /**
    * Create or update the object replication policy of the storage account.
