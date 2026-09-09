@@ -55,7 +55,7 @@ model VolumeProperties {
   /**
    * A unique file path for the volume. Used when creating mount targets
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark with @secret if this value should be kept private"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "creationToken is the customer-visible volume path used to create mount targets; it is not a credential."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @maxLength(80)
   @minLength(1)
@@ -1752,7 +1752,8 @@ model ClusterPeerCommandResponseProperties {
   /**
    * Passphrase for use with cluster peer command
    */
-  @example("SecurePassphrase123")
+  @secret
+  @example("{passphrase}")
   passphrase?: string;
 }
 
@@ -2109,8 +2110,9 @@ union SmbNonBrowsable {
 }
 
 /**
- * Specifies whether SMB opportunistic locks (Oplocks) are enabled or disabled on the volume. Only applicable for SMB/DualProtocol volume. Can be omitted or set to null.
- */
+ /**
+  * SMB opportunistic-lock setting shared by volume and cache resources. Omit the property when unspecified.
+  */
 @added(Versions.v2026_07_15_preview)
 union SmbOplocks {
   string,

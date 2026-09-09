@@ -59,7 +59,7 @@ model ElasticRegionInfoResource
 @added(Versions.v2026_07_15_preview)
 model ElasticRegionInfo {
   /** Lists the logical availability zones in the specified region and indicates their current availability status for the subscription. This helps determine which zones can be used to deploy Elastic resources. */
-  @OpenAPI.extension("x-ms-identifiers", #["availabilityZone"])
+  @identifiers(#["availabilityZone"])
   availabilityZoneMappings?: AvailabilityZoneMapping[];
 }
 
