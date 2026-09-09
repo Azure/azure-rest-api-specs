@@ -113,6 +113,7 @@ using Azure.ClientGenerator.Core;
   "AppConfigurationPrivateEndpointConnectionReference",
   "csharp"
 );
+@@access(PrivateEndpointConnectionReference.type, Access.internal, "csharp");
 @@clientName(ProvisioningState, "AppConfigurationProvisioningState", "csharp");
 @@clientName(
   PrivateLinkDelegation,
@@ -181,6 +182,11 @@ using Azure.ClientGenerator.Core;
 );
 @@alternateType(Replica.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  PrivateEndpointConnectionReference.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(
   KeyValueProperties.eTag,
   Azure.Core.EtagProperty.etag,
