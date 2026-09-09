@@ -1791,6 +1791,8 @@ interface PageBlob {
       ...ContentMd5ResponseHeader;
       ...ContentCrc64ResponseHeader;
       ...BlobSequenceNumberResponseHeader;
+      ...RequestServerEncryptedResponseHeader;
+      ...EncryptionKeySha256ResponseHeader;
     }
   >;
 
