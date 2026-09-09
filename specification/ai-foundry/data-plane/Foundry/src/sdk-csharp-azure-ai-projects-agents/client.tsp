@@ -252,6 +252,11 @@ namespace Azure.AI.Projects {
     "csharp"
   );
   @@clientName(
+    BrowserAutomationTool.browser_automation,
+    "ToolParameters",
+    "csharp"
+  );
+  @@clientName(
     BrowserAutomationToolParameters.connection,
     "ToolConnectionParameters",
     "csharp"
@@ -400,5 +405,54 @@ namespace Azure.AI.Projects {
   @@clientName(
     AgentOptimizationDatasetItem.desired_num_turns,
     "DesiredTurnCount"
+  );
+
+  // --------------------------------------------------------------------------------
+  // Realtime classes replacements
+  // --------------------------------------------------------------------------------
+  @@alternateType(
+    OpenAI.RealtimeAudioFormats,
+    {
+      identity: "OpenAI.Realtime.RealtimeAudioFormat",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.RealtimeConversationItem,
+    {
+      identity: "OpenAI.Realtime.RealtimeItem",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.RealtimeResponseUsage,
+    {
+      identity: "OpenAI.Realtime.RealtimeResponseUsage",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.RealtimeMCPListTools,
+    {
+      identity: "OpenAI.Realtime.RealtimeMcpToolDefinitionListItem",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.RealtimeResponseStatusDetails,
+    {
+      identity: "OpenAI.Realtime.RealtimeResponseStatusDetails",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
   );
 }

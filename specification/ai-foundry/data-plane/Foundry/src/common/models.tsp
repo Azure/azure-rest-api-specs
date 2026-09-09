@@ -41,6 +41,24 @@ alias UserDelegationHeader = {
   @header("x-ms-user-identity") user_identity?: string;
 };
 
+/**
+ * Optional request header carrying an application-owned conversation identifier for Model Router session affinity.
+ * Used when the request body does not supply a valid session ID.
+ */
+alias SessionAffinityRequestHeader = {
+  /** An opaque, application-owned conversation identifier. The value is not returned in the response and must not contain secrets or personally identifiable information. */
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      conditional_previews: #[
+        FoundryFeaturesOptInKeys.model_router_controls_v1_preview
+      ],
+    }
+  )
+  @header("x-ms-session-id")
+  session_id?: string;
+};
+
 // NOTE: Platform-internal headers (x-agent-foundry-call-id, x-foundry-foundation-token)
 // are NOT part of the public API spec. They are injected by the platform and resolved
 // server-side. If needed for contracts, they should be added in the contracts entry point.

@@ -1,0 +1,28 @@
+{
+  "title": "DrillRuns_ListReportDownloadUrl_MaximumSet",
+  "operationId": "DrillRuns_ListReportDownloadUrl",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2026-08-31-preview",
+    "operation-id": "3f2b1c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+    "drillName": "drill1",
+    "drillRunName": "ca92602e-53bf-43d2-ae62-d3fc940474b3",
+    "body": {
+      "format": "Html"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    },
+    "200": {
+      "body": {
+        "format": "Html",
+        "downloadUrl": "https://contoso.blob.core.windows.net/drill-reports/drill1/ca92602e-53bf-43d2-ae62-d3fc940474b3/report.html?sv=2025-01-05&sr=b&sig=redacted&se=2026-08-31T10%3A45%3A00Z&sp=r",
+        "expiryTimestamp": "2026-08-31T10:45:00.000Z"
+      }
+    }
+  }
+}

@@ -6,12 +6,8 @@
     Single script to clone/update the vally framework, build it,
     run an eval suite, and report results.
 
-    This script is shared by every eval suite under `.github/skills/evals/`.
-    Select the suite with -SuiteDir. It was hoisted out of
-    `arm-api-reviewer/` when the data-plane suite was added, rather than
-    copied: a ~600-line duplicate would drift, and this repo already has
-    documented evidence of duplicated review content drifting (see
-    `references/reviewer-posted-parity.md`).
+    Select the eval project with -SuiteDir. Keeping one runner avoids duplicate
+    scripts drifting as suites are added or retired.
 
     Prerequisites:
       - Node.js >= 20 and npm (https://nodejs.org/)
@@ -32,7 +28,6 @@
     Which eval suite to run -- a directory name under `.github/skills/evals/`,
     or an absolute path to an eval project root (the directory containing
     `.vally.yaml`). Default: "arm-api-reviewer".
-    Example: "data-plane-api-reviewer".
 
 .PARAMETER Suite
     Which eval file(s) within the suite to run. Default: "all" (the full
@@ -42,12 +37,6 @@
 .PARAMETER Model
     Override the agent model. Default: use the model declared in each eval YAML.
     Example: "claude-sonnet-4.6" for faster iteration.
-
-    NOTE for the data-plane suite: the model in the eval YAML is intentionally
-    kept equal to `engine.model` in
-    `.github/workflows/data-plane-api-review.md`. Overriding it here produces a
-    number that does not transfer to production and must not be compared with
-    the production regression baseline.
 
 .PARAMETER JudgeModel
     Override the LLM judge model. Default: use the judge_model from eval YAML.
@@ -83,14 +72,6 @@
 .EXAMPLE
     # Run the ARM suite with defaults (safest)
     .\run-evals.ps1
-
-.EXAMPLE
-    # Run the data-plane suite
-    .\run-evals.ps1 -SuiteDir "data-plane-api-reviewer"
-
-.EXAMPLE
-    # The data-plane true-negative regression suite (`runs: 3` is configured)
-    .\run-evals.ps1 -SuiteDir "data-plane-api-reviewer" -Suite "true-negatives"
 
 .EXAMPLE
     # Fast iteration: sonnet model, 3 workers
@@ -154,12 +135,10 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
 
 .DESCRIPTION
     A true-negative stimulus is one where the correct output is silence, so any
-    finding is a false positive. Stimuli are identified as true negatives by a
-    `tn-` name prefix (the convention used by the data-plane suite) or by living
-    in an eval file whose name contains "true-negative".
+    finding is a false positive. Stimuli are identified by a `tn-` name prefix
+    or by living in an eval file whose name contains "true-negative".
 
-    Findings are counted from the report's own finding syntax, defined in
-    `references/data-plane-report-format.md`:
+    Findings are counted from the reviewer report's bracketed finding syntax:
 
         ### 🔴 Blocking            <- severity section heading
         **[DP-VIS-02] Title** ...  <- one finding
@@ -175,8 +154,7 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
 
     The finding pattern is family-agnostic on purpose. The agent really does
     raise `**[SEC-SECRET-DETECT] ...**` and other non-`DP-` IDs, and a counter
-    keyed to the `DP-XXX-NN` shape under-reports the false-positive rate. See
-    "Rule-ID vocabulary" in the report-format reference for the nine families.
+    keyed to one rule-ID family under-reports the false-positive rate.
 
     Severity policy:
       Blocking     -- FAILS THE REGRESSION RUN.
@@ -219,7 +197,7 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
     reconciliation against Get-TrueNegativeGraderFailures: if the graders
     failed trials while this function counted nothing, the two are measuring
     different things and the zeros here are blind, not clean. That is not
-    hypothetical -- the first real run of the data-plane suite produced a
+    hypothetical -- the first real run of a reviewer suite produced a
     genuine invented finding and 12 failed trials while this function
     reported 0 blocking / 0 non-blocking, because the report format lived only
     in the agent file, which the eval harness never loads.

@@ -1,0 +1,84 @@
+{
+  "title": "Evals_getEvalRun_UserConversationSimulation",
+  "operationId": "Evals_getEvalRun",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "eval_id": "eval_67e579652b548190aaa83ada4b125f47",
+    "run_id": "evalrun_67e57965b480819094274e3a32235e4c"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "eval.run",
+        "id": "evalrun_67e57965b480819094274e3a32235e4c",
+        "eval_id": "eval_67e579652b548190aaa83ada4b125f47",
+        "status": "completed",
+        "name": "agent target eval run - file scenarios",
+        "evaluation_level": "conversation",
+        "created_at": 1743092069,
+        "report_url": "https://ai.azure.com/evaluations/eval_67e579652b548190aaa83ada4b125f47?run_id=evalrun_67e57965b480819094274e3a32235e4c",
+        "result_counts": {
+          "total": 9,
+          "errored": 0,
+          "failed": 2,
+          "passed": 7,
+          "skipped": 0
+        },
+        "per_model_usage": [
+          {
+            "model_id": "connection-name/gpt-4o",
+            "invocation_count": 15,
+            "prompt_tokens": 4500,
+            "completion_tokens": 1200,
+            "total_tokens": 5700
+          }
+        ],
+        "per_testing_criteria_results": [
+          {
+            "testing_criteria": "customer_satisfaction",
+            "passed": 7,
+            "failed": 2,
+            "skipped": 0,
+            "errored": 0
+          }
+        ],
+        "data_source": {
+          "type": "azure_ai_user_conversation_simulation_preview",
+          "source": {
+            "type": "file_id",
+            "id": "azureai://accounts/my-account/projects/my-project/data/conversation-eval-test-scenarios"
+          },
+          "model_configuration": {
+            "model": "connection-name/gpt-4o",
+            "sampling_params": {
+              "temperature": 0.7
+            }
+          },
+          "default_simulation_configuration": {
+            "max_num_turns": 5,
+            "conversation_repetitions": 3,
+            "desired_num_turns": 4
+          },
+          "data_mapping": {
+            "test_case_description": "test_case_description",
+            "simulation_configuration": "simulation_configuration",
+            "id": "id"
+          },
+          "target": {
+            "type": "azure_ai_agent",
+            "name": "my-support-agent",
+            "version": "2"
+          },
+          "enable_conversation_dataset_generation": true
+        },
+        "output_dataset": {
+          "id": "dataset_123",
+          "name": "conversation-eval-output",
+          "version": "1"
+        },
+        "error": null,
+        "metadata": {}
+      }
+    }
+  }
+}

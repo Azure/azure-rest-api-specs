@@ -1,5 +1,6 @@
 import "../openai/responses/models.tsp";
 import "../common/servicepatterns.tsp";
+import "../skills/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -12,7 +13,10 @@ const AllConditionalAgentDefinitionPreviews = #{
     AgentDefinitionOptInKeys.workflow_agents_v1_preview,
     AgentDefinitionOptInKeys.external_agents_v1_preview,
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    AgentDefinitionOptInKeys.draft_agents_v1_preview
+    AgentDefinitionOptInKeys.draft_agents_v1_preview,
+    AgentDefinitionOptInKeys.digital_worker_v1_preview,
+    AgentDefinitionOptInKeys.github_copilot_v1_preview,
+    AgentDefinitionOptInKeys.skills_v1_preview
   ],
 };
 
@@ -30,6 +34,17 @@ model CreateAgentVersionRequest {
 
   @doc("The blueprint reference for the agent.")
   blueprint_reference?: AgentBlueprintReference;
+
+  @doc("(Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      conditional_previews: #[
+        AgentDefinitionOptInKeys.digital_worker_v1_preview
+      ],
+    }
+  )
+  digital_worker_type?: DigitalWorkerType;
 
   @doc("(Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.")
   @extension(
@@ -102,7 +117,7 @@ model CreateAgentRequest {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model UpdateAgentRequest {
-  ...OmitProperties<CreateAgentVersionRequest, "draft">;
+  ...OmitProperties<CreateAgentVersionRequest, "draft" | "digital_worker_type">;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
@@ -175,6 +190,17 @@ model AgentObject {
 
   @doc("The endpoint configuration for the agent")
   agent_endpoint?: AgentEndpointConfig;
+
+  @doc("(Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      conditional_previews: #[
+        AgentDefinitionOptInKeys.digital_worker_v1_preview
+      ],
+    }
+  )
+  digital_worker_type?: DigitalWorkerType;
 
   @doc("The instance identity of the agent")
   @visibility(Lifecycle.Read)
@@ -292,10 +318,81 @@ union AgentKind {
   container_app: "container_app",
 }
 
+@doc("The type of digital worker.")
+union DigitalWorkerType {
+  string,
+
+  @doc("A Microsoft 365 digital worker.")
+  m365: "m365",
+}
+
 @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
 model RaiConfig {
   @doc("The name of the RAI policy to apply.")
   rai_policy_name: string;
+
+  @doc("""
+    Author-declared configuration telling the platform where user/agent text lives in the
+    agent-defined invocations request/response bodies, so content-safety guardrails can extract
+    and moderate it. Optional; a rai_config without it leaves the invocations path without
+    content-safety moderation.
+    """)
+  invocations_moderation?: RaiInvocationModeration;
+}
+
+@doc("How an invocations request/response body is parsed to locate text for content-safety moderation.")
+union RaiInvocationContentType {
+  string,
+
+  @doc("Parse the body as JSON and evaluate the declared paths/selectors.")
+  json: "json",
+
+  @doc("Treat the whole (size-capped) body as text; paths/selectors are ignored.")
+  text: "text",
+}
+
+@doc("Author-declared response shape for the invocations protocol.")
+union RaiInvocationMode {
+  string,
+
+  @doc("Non-streaming response body.")
+  non_streaming: "non_streaming",
+
+  @doc("Streaming response body.")
+  streaming: "streaming",
+
+  @doc("Both non-streaming and streaming response bodies.")
+  both: "both",
+}
+
+@doc("An SSE event-type to text-field selector for streaming invocation output.")
+model RaiSseTextSelector {
+  @doc("The SSE event `type` value that carries text.")
+  event_type: string;
+
+  @doc("The field on a matched event holding the text delta. When omitted, the service defaults to `delta`.")
+  text_field?: string = "delta";
+}
+
+@doc("Declares where request/response text lives so content-safety guardrails can extract it.")
+model RaiInvocationModeration {
+  @doc("How the REQUEST body is parsed. When omitted, the service defaults to `json`.")
+  input_content_type?: RaiInvocationContentType = RaiInvocationContentType.json;
+
+  @doc("How the RESPONSE body is parsed. When omitted, the service defaults to `json`.")
+  output_content_type?: RaiInvocationContentType = RaiInvocationContentType.json;
+
+  @doc("Author-declared response shape; drives which output gate runs and which fields are required.")
+  response_mode: RaiInvocationMode;
+
+  @doc("Path(s) to user text in the REQUEST body. Required when input_content_type is `json`.")
+  input_paths?: string[];
+
+  @doc("Path(s) to agent text in a NON-STREAMING response body. Required when response_mode is non_streaming/both and output_content_type is `json`.")
+  output_paths?: string[];
+
+  @doc("One SSE event->field selector per event type carrying text. Required when response_mode is streaming/both and output_content_type is `json`.")
+  stream_selectors?: RaiSseTextSelector[];
 }
 
 @discriminator("kind")
@@ -310,11 +407,27 @@ model AgentDefinition {
 model PromptAgentDefinition extends AgentDefinition {
   kind: AgentKind.prompt;
 
+  @doc("The managed runtime and agent loop used to execute this prompt agent.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview],
+    }
+  )
+  harness?: AgentHarness;
+
   @doc("The model deployment to use for this agent.")
   `model`: string;
 
   @doc("A system (or developer) message inserted into the model's context.")
   instructions?: string | null;
+
+  @doc("The Foundry skills available to this prompt agent. An omitted skill version is resolved and pinned when the agent version is created.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.skills_v1_preview] }
+  )
+  skills?: SkillReference[];
 
   @doc("""
     What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -357,6 +470,33 @@ model PromptAgentDefinition extends AgentDefinition {
 
   @doc("Set of structured inputs that can participate in prompt template substitution or tool argument bindings.")
   structured_inputs?: Record<StructuredInputDefinition>;
+}
+
+@doc("A managed runtime and agent loop used to execute a prompt agent.")
+@discriminator("type")
+model AgentHarness {
+  @doc("The type of managed harness.")
+  type: string;
+}
+
+@doc("The GitHub Copilot managed harness for prompt agents.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
+)
+model GitHubCopilotHarness extends AgentHarness {
+  @doc("The type of managed harness. Always `github_copilot_preview`.")
+  type: "github_copilot_preview";
+}
+
+@doc("A reference to a versioned Foundry skill.")
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
+model SkillReference {
+  @doc("The name of the skill.")
+  name: SkillName;
+
+  @doc("The skill version. If omitted, the current default version is resolved and pinned when the agent version is created.")
+  version?: string;
 }
 
 /**
