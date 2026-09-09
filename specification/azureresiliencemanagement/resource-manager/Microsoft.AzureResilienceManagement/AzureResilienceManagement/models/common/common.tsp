@@ -311,6 +311,26 @@ union ResourceProtectionSolutionType {
   @doc("Resource is not protected with native solution and using custom runbook automation scripts for recovery verbs.")
   CustomRunbook: "CustomRunbook",
 
+  @added(Versions.v2026_09_30_preview)
+  @doc("Resource recovery is orchestrated by deploying an Azure Resource Manager template.")
+  AzureTemplate: "AzureTemplate",
+
+  @added(Versions.v2026_09_30_preview)
+  @doc("Resource is protected with Azure Storage account customer-managed failover.")
+  AzureStorageAccount: "AzureStorageAccount",
+
+  @added(Versions.v2026_09_30_preview)
+  @doc("Resource is protected with Azure Service Bus geo-replication, where a premium namespace replicates data to a secondary region and recovery promotes that secondary in place.")
+  AzureServiceBus: "AzureServiceBus",
+
+  @added(Versions.v2026_09_30_preview)
+  @doc("Resource is protected with Azure NetApp Files cross-region replication, where recovery fails over to the destination volume.")
+  AzureNetAppFiles: "AzureNetAppFiles",
+
+  @added(Versions.v2026_09_30_preview)
+  @doc("Resource is protected with Azure Cosmos DB multiregion replication using customer-managed failover, where recovery promotes a secondary region to the write region.")
+  AzureCosmosDB: "AzureCosmosDB",
+
   string,
 }
 

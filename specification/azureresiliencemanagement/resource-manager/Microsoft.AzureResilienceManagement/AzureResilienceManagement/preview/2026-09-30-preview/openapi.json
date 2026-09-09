@@ -5264,6 +5264,10 @@
         ]
       }
     },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "Azure.ResourceManager.ArmResponse<Azure.ResourceManager.CommonTypes.ErrorResponse>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -9827,6 +9831,13 @@
           "$ref": "#/definitions/ResourceInclusionState",
           "description": "A state that indicates the resource status with respect to the recovery orchestration plan."
         },
+        "inclusionDisabledReasons": {
+          "type": "array",
+          "description": "Reasons why inclusion of the resource in a recovery plan is disabled.",
+          "items": {
+            "$ref": "#/definitions/ResourceInclusionDisabledReason"
+          }
+        },
         "needsAttention": {
           "type": "boolean",
           "description": "Indicating if resource needs user attention and action, details will be found in attentionReasons",
@@ -10001,6 +10012,36 @@
         ]
       }
     },
+    "ReplicationMode": {
+      "type": "string",
+      "description": "Replication mode configured for a protected resource.",
+      "enum": [
+        "None",
+        "ActiveActive",
+        "ActivePassive"
+      ],
+      "x-ms-enum": {
+        "name": "ReplicationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No replication mode is configured for the protected resource."
+          },
+          {
+            "name": "ActiveActive",
+            "value": "ActiveActive",
+            "description": "The resource is active in multiple locations at the same time."
+          },
+          {
+            "name": "ActivePassive",
+            "value": "ActivePassive",
+            "description": "The resource has one active location and one or more passive recovery locations."
+          }
+        ]
+      }
+    },
     "ReportStageStatus": {
       "type": "object",
       "description": "Report generation status for a single Drill Run stage.",
@@ -10156,6 +10197,59 @@
         }
       }
     },
+    "ResourceAzureTemplateProtectionSetting": {
+      "type": "object",
+      "description": "Definition of recovery orchestration resource protection using an Azure Resource Manager template.",
+      "properties": {
+        "templateSpecVersionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the Template Spec version to deploy.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Resources/templateSpecs/versions"
+              }
+            ]
+          }
+        },
+        "deploymentScope": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource Manager scope at which the recovery template is deployed. Must be the\nsubscription containing the protected resource, or a resource group within it; deployments\nabove subscription scope are not supported.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Resources/subscriptions",
+                "scopes": [
+                  "Tenant"
+                ]
+              },
+              {
+                "type": "Microsoft.Resources/resourceGroups",
+                "scopes": [
+                  "Subscription"
+                ]
+              }
+            ]
+          }
+        },
+        "deploymentLocation": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The location used to store deployment metadata. Required when deploymentScope is a subscription."
+        }
+      },
+      "required": [
+        "templateSpecVersionId",
+        "deploymentScope"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBaseProtectionSolutionSetting"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureTemplate"
+    },
     "ResourceBaseProtectionSolutionSetting": {
       "type": "object",
       "description": "Definition of recovery orchestration resource protection solution setting with recovery orchestration plan.",
@@ -10169,6 +10263,16 @@
       "required": [
         "protectionSolutionType"
       ]
+    },
+    "ResourceCosmosDBProtectionSetting": {
+      "type": "object",
+      "description": "Definition of recovery orchestration resource protection using Azure Cosmos DB.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBaseProtectionSolutionSetting"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureCosmosDB"
     },
     "ResourceCrossZoneVmRecoveryProtectionSetting": {
       "type": "object",
@@ -10344,6 +10448,30 @@
         ]
       }
     },
+    "ResourceInclusionDisabledReason": {
+      "type": "string",
+      "description": "Reason why a recovery resource cannot be included in a recovery plan.",
+      "enum": [
+        "ResourceHighlyAvailable",
+        "ResourceActiveActiveProtection"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceInclusionDisabledReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ResourceHighlyAvailable",
+            "value": "ResourceHighlyAvailable",
+            "description": "The resource is highly available and does not require recovery-plan inclusion."
+          },
+          {
+            "name": "ResourceActiveActiveProtection",
+            "value": "ResourceActiveActiveProtection",
+            "description": "The resource uses active-active protection."
+          }
+        ]
+      }
+    },
     "ResourceInclusionState": {
       "type": "string",
       "description": "A state type that indicates inclusion of the resource with respect to the resiliency support.",
@@ -10412,6 +10540,16 @@
       ],
       "x-ms-discriminator-value": "AzureNative"
     },
+    "ResourceNetAppFilesProtectionSetting": {
+      "type": "object",
+      "description": "Definition of recovery orchestration resource protection using Azure NetApp Files.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBaseProtectionSolutionSetting"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureNetAppFiles"
+    },
     "ResourceProtectionSolutionSettings": {
       "type": "object",
       "description": "Definition of recovery resource resource protection solution settings.",
@@ -10420,6 +10558,10 @@
           "$ref": "#/definitions/ResourceProtectionSolutionType",
           "description": "A setting that indicates the resource protected with which recovery solution.",
           "readOnly": true
+        },
+        "replicationMode": {
+          "$ref": "#/definitions/ReplicationMode",
+          "description": "Replication mode configured for the protected resource."
         },
         "protectionStatus": {
           "$ref": "#/definitions/ResourceProtectionStatus",
@@ -10511,7 +10653,12 @@
         "AzureNative",
         "AzureSiteRecovery",
         "CrossZoneVMRecovery",
-        "CustomRunbook"
+        "CustomRunbook",
+        "AzureTemplate",
+        "AzureStorageAccount",
+        "AzureServiceBus",
+        "AzureNetAppFiles",
+        "AzureCosmosDB"
       ],
       "x-ms-enum": {
         "name": "ResourceProtectionSolutionType",
@@ -10541,6 +10688,31 @@
             "name": "CustomRunbook",
             "value": "CustomRunbook",
             "description": "Resource is not protected with native solution and using custom runbook automation scripts for recovery verbs."
+          },
+          {
+            "name": "AzureTemplate",
+            "value": "AzureTemplate",
+            "description": "Resource recovery is orchestrated by deploying an Azure Resource Manager template."
+          },
+          {
+            "name": "AzureStorageAccount",
+            "value": "AzureStorageAccount",
+            "description": "Resource is protected with Azure Storage account customer-managed failover."
+          },
+          {
+            "name": "AzureServiceBus",
+            "value": "AzureServiceBus",
+            "description": "Resource is protected with Azure Service Bus geo-replication, where a premium namespace replicates data to a secondary region and recovery promotes that secondary in place."
+          },
+          {
+            "name": "AzureNetAppFiles",
+            "value": "AzureNetAppFiles",
+            "description": "Resource is protected with Azure NetApp Files cross-region replication, where recovery fails over to the destination volume."
+          },
+          {
+            "name": "AzureCosmosDB",
+            "value": "AzureCosmosDB",
+            "description": "Resource is protected with Azure Cosmos DB multiregion replication using customer-managed failover, where recovery promotes a secondary region to the write region."
           }
         ]
       }
@@ -10647,6 +10819,16 @@
         ]
       }
     },
+    "ResourceServiceBusProtectionSetting": {
+      "type": "object",
+      "description": "Definition of recovery orchestration resource protection using Azure Service Bus.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBaseProtectionSolutionSetting"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureServiceBus"
+    },
     "ResourceSiteRecoveryProtectionSetting": {
       "type": "object",
       "description": "Definition of recovery orchestration resource protection with azure site recovery.",
@@ -10712,6 +10894,16 @@
           }
         }
       }
+    },
+    "ResourceStorageAccountProtectionSetting": {
+      "type": "object",
+      "description": "Definition of recovery orchestration resource protection using an Azure Storage account.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBaseProtectionSolutionSetting"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureStorageAccount"
     },
     "ResourceTypeCategories": {
       "type": "string",
