@@ -28060,6 +28060,8 @@ paths:
                     $ref: '#/components/schemas/OpenAI.ResponseUsage'
                   prompt_cache_options:
                     $ref: '#/components/schemas/OpenAI.PromptCacheOptions'
+                  prompt_cache_diagnostics:
+                    $ref: '#/components/schemas/OpenAI.PromptCacheDiagnostics'
                   moderation:
                     anyOf:
                       - $ref: '#/components/schemas/OpenAI.Moderation'
@@ -28179,8 +28181,6 @@ paths:
                         - 24h
                     - type: 'null'
                   deprecated: true
-                prompt_cache_options:
-                  $ref: '#/components/schemas/OpenAI.PromptCacheOptionsParam'
                 previous_response_id:
                   anyOf:
                     - type: string
@@ -28206,6 +28206,8 @@ paths:
                     - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
                 prompt:
                   $ref: '#/components/schemas/OpenAI.Prompt'
+                prompt_cache_options:
+                  $ref: '#/components/schemas/OpenAI.ResponsePromptCacheOptionsParam'
                 service_tier:
                   $ref: '#/components/schemas/OpenAI.ServiceTierResponses'
                 truncation:
@@ -48110,7 +48112,7 @@ components:
         Like:
         - Improve the quality of my chatbot
         - See how well my chatbot handles customer support
-        - Check if o4-mini is better at my usecase than gpt-4o
+        - Check if o4-mini is better at my usecase than gpt-6-astra
       title: Eval
       x-oaiMeta:
         name: The eval object
@@ -48324,8 +48326,8 @@ components:
             "eval_id": "eval_67e579652b548190aaa83ada4b125f47",
             "report_url": "https://platform.openai.com/evaluations/eval_67e579652b548190aaa83ada4b125f47?run_id=evalrun_67e57965b480819094274e3a32235e4c",
             "status": "queued",
-            "model": "gpt-4o-mini",
-            "name": "gpt-4o-mini",
+            "model": "gpt-6-astra",
+            "name": "gpt-6-astra",
             "created_at": 1743092069,
             "result_counts": {
               "total": 0,
@@ -48487,11 +48489,8 @@ components:
                   }
                 ]
               },
-              "model": "gpt-4o-mini",
+              "model": "gpt-6-astra",
               "sampling_params": {
-                "seed": 42,
-                "temperature": 1.0,
-                "top_p": 1.0,
                 "max_completions_tokens": 2048
               }
             },
@@ -48614,7 +48613,7 @@ components:
                 }
               ],
               "finish_reason": "stop",
-              "model": "gpt-4o-2024-08-06",
+              "model": "gpt-6-astra",
               "usage": {
                 "total_tokens": 521,
                 "completion_tokens": 2,
@@ -52996,7 +52995,7 @@ components:
             "created_at": 1698984975,
             "name": "Math Tutor",
             "description": null,
-            "model": "gpt-4o",
+            "model": "gpt-5",
             "instructions": "You are a personal math tutor. When asked a question, write and run Python code to answer the question.",
             "tools": [
               {
@@ -53374,7 +53373,7 @@ components:
         model:
           type: string
           description: |-
-            Model ID used to process the batch, like `gpt-5-2025-08-07`. OpenAI
+            Model ID used to process the batch, like `gpt-6-astra`. OpenAI
               offers a wide range of models with different capabilities, performance
               characteristics, and price points. Refer to the [model
               guide](/docs/models) to browse and compare available models.
@@ -53458,8 +53457,8 @@ components:
           {
             "id": "batch_abc123",
             "object": "batch",
-            "endpoint": "/v1/completions",
-            "model": "gpt-5-2025-08-07",
+            "endpoint": "/v1/chat/completions",
+            "model": "gpt-6-astra",
             "errors": null,
             "input_file_id": "file-abc123",
             "completion_window": "24h",
@@ -53592,6 +53591,18 @@ components:
       properties:
         reasoning_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+    OpenAI.CacheMissReasonTypeEnum:
+      type: string
+      enum:
+        - model_changed
+        - prompt_cache_key_changed
+        - tools_changed
+        - text_format_changed
+        - reasoning_effort_changed
+        - verbosity_changed
+        - context_compacted
+        - input_changed
+        - service_tier_changed
     OpenAI.CallableToolAllowedCaller:
       type: string
       enum:
@@ -53731,7 +53742,7 @@ components:
               {
                 "object": "chat.completion",
                 "id": "chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2",
-                "model": "gpt-4o-2024-08-06",
+                "model": "gpt-6-astra",
                 "created": 1738960610,
                 "request_id": "req_ded8ab984ec4bf840f37566c1011c417",
                 "tool_choice": null,
@@ -55613,6 +55624,7 @@ components:
           tool_search_call: '#/components/schemas/OpenAI.ConversationItemToolSearchCall'
           tool_search_output: '#/components/schemas/OpenAI.ConversationItemToolSearchOutput'
           additional_tools: '#/components/schemas/OpenAI.ConversationItemAdditionalTools'
+          configuration_update: '#/components/schemas/OpenAI.ConversationItemResponseConfigurationUpdate'
           reasoning: '#/components/schemas/OpenAI.ConversationItemReasoningItem'
           program: '#/components/schemas/OpenAI.ConversationItemProgram'
           program_output: '#/components/schemas/OpenAI.ConversationItemProgramOutput'
@@ -55981,6 +55993,9 @@ components:
         input:
           type: string
           description: The input for the custom tool call generated by the model.
+        async:
+          type: boolean
+          description: Whether the custom tool call runs asynchronously.
         status:
           $ref: '#/components/schemas/OpenAI.FunctionCallStatus'
           description: |-
@@ -56171,6 +56186,9 @@ components:
           description: |-
             The status of the item. One of `in_progress`, `completed`, or
               `incomplete`. Populated when items are returned via API.
+        async:
+          type: boolean
+          description: Whether the function tool call runs asynchronously.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
       description: |-
@@ -56649,6 +56667,30 @@ components:
         for subsequent turns of a conversation if you are manually
         [managing context](/docs/guides/conversation-state).
       title: Reasoning
+    OpenAI.ConversationItemResponseConfigurationUpdate:
+      type: object
+      required:
+        - id
+        - type
+      properties:
+        id:
+          type: string
+          description: The unique ID of the configuration update item.
+        type:
+          type: string
+          enum:
+            - configuration_update
+          description: The item type. Always `configuration_update`.
+          x-stainless-const: true
+          default: configuration_update
+        reasoning:
+          $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateReasoning'
+          description: The reasoning configuration applied by this update.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ConversationItem'
+      description: |-
+        A configuration update that applies to subsequent responses until it is
+        replaced by another configuration update.
     OpenAI.ConversationItemToolSearchCall:
       type: object
       required:
@@ -56742,6 +56784,7 @@ components:
             - tool_search_call
             - tool_search_output
             - additional_tools
+            - configuration_update
             - reasoning
             - program
             - program_output
@@ -56777,13 +56820,7 @@ components:
           description: The type of the web search tool call. Always `web_search_call`.
           x-stainless-const: true
         status:
-          type: string
-          enum:
-            - in_progress
-            - searching
-            - completed
-            - failed
-            - incomplete
+          $ref: '#/components/schemas/OpenAI.WebSearchCallStatus'
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -57457,7 +57494,7 @@ components:
             "id": "chatcmpl-B9MHDbslfkBeAs8l4bebGdFOJ6PeG",
             "object": "chat.completion",
             "created": 1741570283,
-            "model": "gpt-4o-2024-08-06",
+            "model": "gpt-6-astra",
             "choices": [
               {
                 "index": 0,
@@ -57736,7 +57773,7 @@ components:
             "id": "cmpl-uqkvlQyYK7bGYrRHQ0eXlWi7",
             "object": "text_completion",
             "created": 1589478378,
-            "model": "gpt-4-turbo",
+            "model": "gpt-3.5-turbo-instruct",
             "choices": [
               {
                 "text": "
@@ -57976,17 +58013,17 @@ components:
         group: eval runs
         example: |
           {
-            "name": "gpt-4o-mini-2024-07-18",
+            "name": "gpt-6-astra",
             "data_source": {
               "type": "completions",
               "input_messages": {
                 "type": "item_reference",
                 "item_reference": "item.input"
               },
-              "model": "gpt-4o-mini-2024-07-18",
+              "model": "gpt-6-astra",
               "source": {
                 "type": "stored_completions",
-                "model": "gpt-4o-mini-2024-07-18"
+                "model": "gpt-6-astra"
               }
             }
           }
@@ -58183,17 +58220,17 @@ components:
         group: eval runs
         example: |
           {
-            "name": "gpt-4o-mini-2024-07-18",
+            "name": "gpt-6-astra",
             "data_source": {
               "type": "responses",
               "input_messages": {
                 "type": "item_reference",
                 "item_reference": "item.input"
               },
-              "model": "gpt-4o-mini-2024-07-18",
+              "model": "gpt-6-astra",
               "source": {
                 "type": "responses",
-                "model": "gpt-4o-mini-2024-07-18"
+                "model": "gpt-6-astra"
               }
             }
           }
@@ -58466,7 +58503,7 @@ components:
                 contentEncoding: base64
           description: |-
             The image(s) to edit. Must be a supported image file or an array of images.
-              For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, and `gpt-image-1.5`), each image should be a `png`, `webp`, or `jpg`
+              For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, and `gpt-image-2-2026-04-21`), each image should be a `png`, `webp`, or `jpg`
               file less than 50MB. You can provide up to 16 images.
               `chatgpt-image-latest` follows the same input constraints as GPT image models.
               For `dall-e-2`, you can only provide one image, and it should be a square
@@ -58485,24 +58522,27 @@ components:
                 - auto
             - type: 'null'
           description: |-
-            Allows to set transparency for the background of the generated image(s).
-              This parameter is only supported for the GPT image models. Must be one of
-              `transparent`, `opaque` or `auto` (default value). When `auto` is used, the
-              model will automatically determine the best background for the image.
-              If `transparent`, the output format needs to support transparency, so it
-              should be set to either `png` (default value) or `webp`.
+            Set the background of the generated image(s). This parameter is only
+              supported for the GPT image models. Must be one of `transparent`, `opaque`,
+              or `auto` (default value). When `auto` is used, the model will automatically
+              determine the best background for the image.
+              Transparent backgrounds are available for supported GPT Image models. For
+              `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When
+              using `transparent`, set the output format to `png` or `webp`.
         model:
           anyOf:
             - type: string
             - type: string
               enum:
                 - gpt-image-1.5
+                - gpt-image-2
+                - gpt-image-2-2026-04-21
                 - dall-e-2
                 - gpt-image-1
                 - gpt-image-1-mini
                 - chatgpt-image-latest
             - type: 'null'
-          description: The model to use for image generation. Defaults to `gpt-image-1.5`.
+          description: The model to use for image generation. One of `dall-e-2` or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, or `chatgpt-image-latest`). Defaults to `gpt-image-1.5`.
           x-oaiTypeLabel: string
         'n':
           anyOf:
@@ -58594,12 +58634,14 @@ components:
             - type: string
               enum:
                 - gpt-image-1.5
+                - gpt-image-2
+                - gpt-image-2-2026-04-21
                 - dall-e-2
                 - dall-e-3
                 - gpt-image-1
                 - gpt-image-1-mini
             - type: 'null'
-          description: The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.
+          description: The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.
           x-oaiTypeLabel: string
           default: dall-e-2
         'n':
@@ -58697,12 +58739,13 @@ components:
                 - auto
             - type: 'null'
           description: |-
-            Allows to set transparency for the background of the generated image(s).
-              This parameter is only supported for the GPT image models. Must be one of
-              `transparent`, `opaque` or `auto` (default value). When `auto` is used, the
-              model will automatically determine the best background for the image.
-              If `transparent`, the output format needs to support transparency, so it
-              should be set to either `png` (default value) or `webp`.
+            Set the background of the generated image(s). This parameter is only
+              supported for the GPT image models. Must be one of `transparent`, `opaque`,
+              or `auto` (default value). When `auto` is used, the model will automatically
+              determine the best background for the image.
+              Transparent backgrounds are available for supported GPT Image models. For
+              `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When
+              using `transparent`, set the output format to `png` or `webp`.
           default: auto
         style:
           anyOf:
@@ -60261,6 +60304,9 @@ components:
         name:
           type: string
           description: The name of the custom tool, used to identify it in tool calls.
+        async:
+          type: boolean
+          description: Whether the tool response can be returned asynchronously versus immediately returned on next response creation.
         description:
           type: string
           description: Optional description of the custom tool, used to provide more context.
@@ -60627,11 +60673,13 @@ components:
             - type: string
               enum:
                 - gpt-image-1.5
+                - gpt-image-2
+                - gpt-image-2-2026-04-21
                 - gpt-image-1
                 - gpt-image-1-mini
                 - chatgpt-image-latest
             - type: 'null'
-          description: The model to use for image editing.
+          description: The GPT image model to use for image editing, including `gpt-image-2` and its dated snapshot `gpt-image-2-2026-04-21`.
           x-oaiTypeLabel: string
           default: gpt-image-1.5
         images:
@@ -60723,7 +60771,7 @@ components:
                 - opaque
                 - auto
             - type: 'null'
-          description: Background behavior for generated image output.
+          description: Set the background of the generated image output. Transparent backgrounds are available for supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When using `transparent`, set the output format to `png` or `webp`.
           default: auto
         stream:
           anyOf:
@@ -60793,6 +60841,8 @@ components:
             - type: 'null'
         type:
           type: string
+        misalignment:
+          $ref: '#/components/schemas/OpenAI.MisalignmentErrorDetailsResource'
         details:
           type: array
           items:
@@ -60815,6 +60865,8 @@ components:
         message:
           type: string
           description: A human-readable description of the error that was returned.
+        misalignment:
+          $ref: '#/components/schemas/OpenAI.MisalignmentErrorDetailsResource'
       description: An error that occurred while generating the response.
       title: Error
     OpenAI.EvalApiError:
@@ -61299,9 +61351,7 @@ components:
         example: |
           {
             "type": "responses",
-            "model": "gpt-4o-mini-2024-07-18",
-            "temperature": 0.7,
-            "top_p": 1.0,
+            "model": "gpt-6-astra",
             "users": ["user1", "user2"],
             "tools": ["tool1", "tool2"],
             "instructions_search": "You are a coding assistant"
@@ -61460,7 +61510,7 @@ components:
         example: |
           {
             "type": "stored_completions",
-            "model": "gpt-4o",
+            "model": "gpt-6-astra",
             "created_after": 1668124800,
             "created_before": 1668124900,
             "limit": 100,
@@ -62763,6 +62813,8 @@ components:
         name:
           type: string
           description: The name of the function to call.
+        async:
+          type: boolean
         description:
           anyOf:
             - type: string
@@ -62823,6 +62875,9 @@ components:
             - function
           x-stainless-const: true
           default: function
+        async:
+          type: boolean
+          description: Whether the tool response can be returned asynchronously versus immediately returned on next response creation.
         output_schema:
           anyOf:
             - type: object
@@ -63279,6 +63334,8 @@ components:
                 - gpt-image-1
                 - gpt-image-1-mini
                 - gpt-image-1.5
+                - gpt-image-2
+                - gpt-image-2-2026-04-21
           default: gpt-image-1
         quality:
           type: string
@@ -63332,8 +63389,11 @@ components:
             - opaque
             - auto
           description: |-
-            Background type for the generated image. One of `transparent`,
-              `opaque`, or `auto`. Default: `auto`.
+            Set the background of the generated image. One of `transparent`,
+              `opaque`, or `auto`. Transparent backgrounds are available for
+              supported GPT Image models. For `gpt-image-2` and
+              `gpt-image-2-2026-04-21`, this support is in preview. When using
+              `transparent`, set the output format to `png` or `webp`. Default: `auto`.
           default: auto
         input_fidelity:
           anyOf:
@@ -63865,6 +63925,7 @@ components:
           tool_search_call: '#/components/schemas/OpenAI.InputItemToolSearchCallItemParam'
           tool_search_output: '#/components/schemas/OpenAI.InputItemToolSearchOutputItemParam'
           additional_tools: '#/components/schemas/OpenAI.InputItemAdditionalToolsItemParam'
+          configuration_update: '#/components/schemas/OpenAI.InputItemResponseConfigurationUpdateItemParam'
           reasoning: '#/components/schemas/OpenAI.InputItemReasoningItem'
           compaction: '#/components/schemas/OpenAI.InputItemCompactionSummaryItemParam'
           image_generation_call: '#/components/schemas/OpenAI.InputItemImageGenToolCall'
@@ -64060,7 +64121,7 @@ components:
           default: compaction
         encrypted_content:
           type: string
-          maxLength: 10485760
+          maxLength: 20971520
           description: The encrypted content of the compaction summary.
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
@@ -64183,6 +64244,9 @@ components:
         input:
           type: string
           description: The input for the custom tool call generated by the model.
+        async:
+          type: boolean
+          description: Whether the custom tool call runs asynchronously.
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
       description: A call to a custom tool created by the model.
@@ -64449,6 +64513,9 @@ components:
           description: |-
             The status of the item. One of `in_progress`, `completed`, or
               `incomplete`. Populated when items are returned via API.
+        async:
+          type: boolean
+          description: Whether the function tool call runs asynchronously.
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
       description: |-
@@ -64785,6 +64852,31 @@ components:
         for subsequent turns of a conversation if you are manually
         [managing context](/docs/guides/conversation-state).
       title: Reasoning
+    OpenAI.InputItemResponseConfigurationUpdateItemParam:
+      type: object
+      required:
+        - type
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        type:
+          type: string
+          enum:
+            - configuration_update
+          description: The item type. Always `configuration_update`.
+          x-stainless-const: true
+          default: configuration_update
+        reasoning:
+          $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateItemParamReasoning'
+          description: Updates to reasoning configuration. Only effort is supported.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.InputItem'
+      description: |-
+        An update to the conversation's response configuration. The configuration
+        remains in effect for subsequent responses until it is replaced by another
+        configuration update.
     OpenAI.InputItemToolSearchCallItemParam:
       type: object
       required:
@@ -64869,6 +64961,7 @@ components:
             - tool_search_call
             - tool_search_output
             - additional_tools
+            - configuration_update
             - reasoning
             - compaction
             - image_generation_call
@@ -64904,13 +64997,7 @@ components:
           description: The type of the web search tool call. Always `web_search_call`.
           x-stainless-const: true
         status:
-          type: string
-          enum:
-            - in_progress
-            - searching
-            - completed
-            - failed
-            - incomplete
+          $ref: '#/components/schemas/OpenAI.WebSearchCallStatus'
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -65012,6 +65099,7 @@ components:
           tool_search_call: '#/components/schemas/OpenAI.ItemToolSearchCallItemParam'
           tool_search_output: '#/components/schemas/OpenAI.ItemToolSearchOutputItemParam'
           additional_tools: '#/components/schemas/OpenAI.ItemAdditionalToolsItemParam'
+          configuration_update: '#/components/schemas/OpenAI.ItemResponseConfigurationUpdateItemParam'
           reasoning: '#/components/schemas/OpenAI.ItemReasoningItem'
           compaction: '#/components/schemas/OpenAI.ItemCompactionSummaryItemParam'
           image_generation_call: '#/components/schemas/OpenAI.ItemImageGenToolCall'
@@ -65204,7 +65292,7 @@ components:
           default: compaction
         encrypted_content:
           type: string
-          maxLength: 10485760
+          maxLength: 20971520
           description: The encrypted content of the compaction summary.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
@@ -65327,6 +65415,9 @@ components:
         input:
           type: string
           description: The input for the custom tool call generated by the model.
+        async:
+          type: boolean
+          description: Whether the custom tool call runs asynchronously.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
       description: A call to a custom tool created by the model.
@@ -65710,6 +65801,9 @@ components:
         input:
           type: string
           description: The input for the custom tool call generated by the model.
+        async:
+          type: boolean
+          description: Whether the custom tool call runs asynchronously.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemField'
       description: A call to a custom tool created by the model.
@@ -65929,6 +66023,9 @@ components:
           description: |-
             The status of the item. One of `in_progress`, `completed`, or
               `incomplete`. Populated when items are returned via API.
+        async:
+          type: boolean
+          description: Whether the function tool call runs asynchronously.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemField'
       description: |-
@@ -66499,13 +66596,7 @@ components:
           description: The type of the web search tool call. Always `web_search_call`.
           x-stainless-const: true
         status:
-          type: string
-          enum:
-            - in_progress
-            - searching
-            - completed
-            - failed
-            - incomplete
+          $ref: '#/components/schemas/OpenAI.WebSearchCallStatus'
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -66747,6 +66838,9 @@ components:
           description: |-
             The status of the item. One of `in_progress`, `completed`, or
               `incomplete`. Populated when items are returned via API.
+        async:
+          type: boolean
+          description: Whether the function tool call runs asynchronously.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
       description: |-
@@ -67167,6 +67261,7 @@ components:
           tool_search_call: '#/components/schemas/OpenAI.ItemResourceToolSearchCall'
           tool_search_output: '#/components/schemas/OpenAI.ItemResourceToolSearchOutput'
           additional_tools: '#/components/schemas/OpenAI.ItemResourceAdditionalTools'
+          configuration_update: '#/components/schemas/OpenAI.ItemResourceResponseConfigurationUpdate'
           reasoning: '#/components/schemas/OpenAI.ItemResourceReasoningItem'
           program: '#/components/schemas/OpenAI.ItemResourceProgram'
           program_output: '#/components/schemas/OpenAI.ItemResourceProgramOutput'
@@ -67535,6 +67630,9 @@ components:
         input:
           type: string
           description: The input for the custom tool call generated by the model.
+        async:
+          type: boolean
+          description: Whether the custom tool call runs asynchronously.
         status:
           $ref: '#/components/schemas/OpenAI.FunctionCallStatus'
           description: |-
@@ -67725,6 +67823,9 @@ components:
           description: |-
             The status of the item. One of `in_progress`, `completed`, or
               `incomplete`. Populated when items are returned via API.
+        async:
+          type: boolean
+          description: Whether the function tool call runs asynchronously.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
       description: |-
@@ -68219,6 +68320,30 @@ components:
         for subsequent turns of a conversation if you are manually
         [managing context](/docs/guides/conversation-state).
       title: Reasoning
+    OpenAI.ItemResourceResponseConfigurationUpdate:
+      type: object
+      required:
+        - id
+        - type
+      properties:
+        id:
+          type: string
+          description: The unique ID of the configuration update item.
+        type:
+          type: string
+          enum:
+            - configuration_update
+          description: The item type. Always `configuration_update`.
+          x-stainless-const: true
+          default: configuration_update
+        reasoning:
+          $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateReasoning'
+          description: The reasoning configuration applied by this update.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemResource'
+      description: |-
+        A configuration update that applies to subsequent responses until it is
+        replaced by another configuration update.
     OpenAI.ItemResourceToolSearchCall:
       type: object
       required:
@@ -68312,6 +68437,7 @@ components:
             - tool_search_call
             - tool_search_output
             - additional_tools
+            - configuration_update
             - reasoning
             - program
             - program_output
@@ -68372,13 +68498,7 @@ components:
           description: The type of the web search tool call. Always `web_search_call`.
           x-stainless-const: true
         status:
-          type: string
-          enum:
-            - in_progress
-            - searching
-            - completed
-            - failed
-            - incomplete
+          $ref: '#/components/schemas/OpenAI.WebSearchCallStatus'
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -68394,6 +68514,31 @@ components:
         The results of a web search tool call. See the
         [web search guide](/docs/guides/tools-web-search) for more information.
       title: Web search tool call
+    OpenAI.ItemResponseConfigurationUpdateItemParam:
+      type: object
+      required:
+        - type
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        type:
+          type: string
+          enum:
+            - configuration_update
+          description: The item type. Always `configuration_update`.
+          x-stainless-const: true
+          default: configuration_update
+        reasoning:
+          $ref: '#/components/schemas/OpenAI.ResponseConfigurationUpdateItemParamReasoning'
+          description: Updates to reasoning configuration. Only effort is supported.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: |-
+        An update to the conversation's response configuration. The configuration
+        remains in effect for subsequent responses until it is replaced by another
+        configuration update.
     OpenAI.ItemToolSearchCallItemParam:
       type: object
       required:
@@ -68478,6 +68623,7 @@ components:
             - tool_search_call
             - tool_search_output
             - additional_tools
+            - configuration_update
             - reasoning
             - compaction
             - image_generation_call
@@ -68536,13 +68682,7 @@ components:
           description: The type of the web search tool call. Always `web_search_call`.
           x-stainless-const: true
         status:
-          type: string
-          enum:
-            - in_progress
-            - searching
-            - completed
-            - failed
-            - incomplete
+          $ref: '#/components/schemas/OpenAI.WebSearchCallStatus'
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -68627,7 +68767,7 @@ components:
                 "created_at": 1698982736,
                 "name": "Coding Tutor",
                 "description": null,
-                "model": "gpt-4o",
+                "model": "gpt-5",
                 "instructions": "You are a helpful assistant designed to make me better at coding!",
                 "tools": [],
                 "tool_resources": {},
@@ -68642,7 +68782,7 @@ components:
                 "created_at": 1698982718,
                 "name": "My Assistant",
                 "description": null,
-                "model": "gpt-4o",
+                "model": "gpt-5",
                 "instructions": "You are a helpful assistant designed to make me better at coding!",
                 "tools": [],
                 "tool_resources": {},
@@ -68657,7 +68797,7 @@ components:
                 "created_at": 1698982643,
                 "name": null,
                 "description": null,
-                "model": "gpt-4o",
+                "model": "gpt-5",
                 "instructions": null,
                 "tools": [],
                 "tool_resources": {},
@@ -69828,6 +69968,18 @@ components:
         Keys are strings with a maximum length of 64 characters. Values are strings
         with a maximum length of 512 characters.
       x-oaiTypeLabel: map
+    OpenAI.MisalignmentErrorDetailsResource:
+      type: object
+      properties:
+        error_type:
+          $ref: '#/components/schemas/OpenAI._MisalignmentErrorType'
+          description: An optional classification; clients must accept additional values.
+        detailed_explanation:
+          type: string
+          description: The public explanation for this block.
+        steer:
+          $ref: '#/components/schemas/OpenAI._MisalignmentSteer'
+          description: An optional public continuation instruction.
     OpenAI.Model:
       type: object
       required:
@@ -69864,7 +70016,7 @@ components:
         name: The model object
         example: |
           {
-            "id": "VAR_chat_model_id",
+            "id": "gpt-6-astra",
             "object": "model",
             "created": 1686935002,
             "owned_by": "openai",
@@ -70862,6 +71014,9 @@ components:
         input:
           type: string
           description: The input for the custom tool call generated by the model.
+        async:
+          type: boolean
+          description: Whether the custom tool call runs asynchronously.
         status:
           $ref: '#/components/schemas/OpenAI.FunctionCallStatus'
           description: |-
@@ -71052,6 +71207,9 @@ components:
           description: |-
             The status of the item. One of `in_progress`, `completed`, or
               `incomplete`. Populated when items are returned via API.
+        async:
+          type: boolean
+          description: Whether the function tool call runs asynchronously.
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: |-
@@ -71654,13 +71812,7 @@ components:
           description: The type of the web search tool call. Always `web_search_call`.
           x-stainless-const: true
         status:
-          type: string
-          enum:
-            - in_progress
-            - searching
-            - completed
-            - failed
-            - incomplete
+          $ref: '#/components/schemas/OpenAI.WebSearchCallStatus'
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -71884,6 +72036,77 @@ components:
           default: explicit
       description: Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
       title: Prompt cache breakpoint
+    OpenAI.PromptCacheComparisonResponseNotFoundDiagnosticsBody:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - comparison_response_not_found
+          x-stainless-const: true
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.PromptCacheDiagnostics'
+    OpenAI.PromptCacheDiagnostics:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.PromptCacheDiagnosticsType'
+      discriminator:
+        propertyName: type
+        mapping:
+          cache_miss: '#/components/schemas/OpenAI.PromptCacheMissDiagnosticsBody'
+          cache_hit: '#/components/schemas/OpenAI.PromptCacheHitDiagnosticsBody'
+          comparison_response_not_found: '#/components/schemas/OpenAI.PromptCacheComparisonResponseNotFoundDiagnosticsBody'
+          unavailable: '#/components/schemas/OpenAI.PromptCacheUnavailableDiagnosticsBody'
+      description: Prompt cache diagnostics requested for this response.
+    OpenAI.PromptCacheDiagnosticsType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - cache_miss
+            - cache_hit
+            - comparison_response_not_found
+            - unavailable
+    OpenAI.PromptCacheHitDiagnosticsBody:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - cache_hit
+          x-stainless-const: true
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.PromptCacheDiagnostics'
+    OpenAI.PromptCacheMissDiagnosticsBody:
+      type: object
+      required:
+        - type
+        - reason
+        - cache_missed_tokens
+      properties:
+        type:
+          type: string
+          enum:
+            - cache_miss
+          x-stainless-const: true
+        reason:
+          $ref: '#/components/schemas/OpenAI.CacheMissReasonTypeEnum'
+          description: The reason prompt cache reuse did not occur.
+        cache_missed_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+          description: The estimated number of input tokens affected after the first detected divergence.
+        comparison_reusable_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+          description: The raw token count of the reusable prefix in the compared response.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.PromptCacheDiagnostics'
     OpenAI.PromptCacheModeEnum:
       type: string
       enum:
@@ -71901,6 +72124,10 @@ components:
         mode:
           $ref: '#/components/schemas/OpenAI.PromptCacheModeEnum'
           description: Whether implicit prompt-cache breakpoints were enabled.
+        comparison_response_id:
+          anyOf:
+            - type: string
+            - type: 'null'
       description: The prompt-caching options that were applied to the response. Supported for `gpt-5.6` and later models.
       title: Prompt cache options
     OpenAI.PromptCacheOptionsParam:
@@ -71923,6 +72150,18 @@ components:
       type: string
       enum:
         - 30m
+    OpenAI.PromptCacheUnavailableDiagnosticsBody:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - unavailable
+          x-stainless-const: true
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.PromptCacheDiagnostics'
     OpenAI.RankerVersionType:
       type: string
       enum:
@@ -73934,7 +74173,6 @@ components:
                 - detailed
             - type: 'null'
       description: |-
-        **gpt-5 and o-series models only**
         Configuration options for
         [reasoning models](https://platform.openai.com/docs/guides/reasoning).
       title: Reasoning
@@ -74143,6 +74381,8 @@ components:
           $ref: '#/components/schemas/OpenAI.ResponseUsage'
         prompt_cache_options:
           $ref: '#/components/schemas/OpenAI.PromptCacheOptions'
+        prompt_cache_diagnostics:
+          $ref: '#/components/schemas/OpenAI.PromptCacheDiagnostics'
         moderation:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.Moderation'
@@ -74536,7 +74776,7 @@ components:
               "input": [],
               "instructions": null,
               "max_output_tokens": null,
-              "model": "gpt-4o-mini-2024-07-18",
+              "model": "gpt-6-astra",
               "output": [
                 {
                   "id": "msg_123",
@@ -74577,6 +74817,20 @@ components:
             },
             "sequence_number": 1
           }
+    OpenAI.ResponseConfigurationUpdateItemParamReasoning:
+      type: object
+      properties:
+        effort:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+            - type: 'null'
+    OpenAI.ResponseConfigurationUpdateReasoning:
+      type: object
+      properties:
+        effort:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+            - type: 'null'
     OpenAI.ResponseContentPartAddedEvent:
       type: object
       required:
@@ -74725,7 +74979,7 @@ components:
               "incomplete_details": null,
               "instructions": null,
               "max_output_tokens": null,
-              "model": "gpt-4o-2024-08-06",
+              "model": "gpt-6-astra",
               "output": [],
               "parallel_tool_calls": true,
               "previous_response_id": null,
@@ -74843,6 +75097,8 @@ components:
         message:
           type: string
           description: A human-readable description of the error.
+        misalignment:
+          $ref: '#/components/schemas/OpenAI.MisalignmentErrorDetailsResource'
       description: An error object returned when the model fails to generate a Response.
     OpenAI.ResponseErrorCode:
       type: string
@@ -74852,6 +75108,7 @@ components:
         - invalid_prompt
         - data_residency_mismatch
         - bio_policy
+        - misalignment_policy_violation
         - vector_store_timeout
         - invalid_image
         - invalid_image_format
@@ -74952,7 +75209,7 @@ components:
               "incomplete_details": null,
               "instructions": null,
               "max_output_tokens": null,
-              "model": "gpt-4o-mini-2024-07-18",
+              "model": "gpt-6-astra",
               "output": [],
               "previous_response_id": null,
               "reasoning_effort": null,
@@ -75200,7 +75457,6 @@ components:
       required:
         - type
         - item_id
-        - name
         - output_index
         - sequence_number
         - arguments
@@ -75213,9 +75469,6 @@ components:
         item_id:
           type: string
           description: The ID of the item.
-        name:
-          type: string
-          description: The name of the function that was called.
         output_index:
           $ref: '#/components/schemas/OpenAI.integer'
           description: The index of the output item.
@@ -75235,7 +75488,6 @@ components:
           {
             "type": "response.function_call_arguments.done",
             "item_id": "item-abc",
-            "name": "get_weather",
             "output_index": 1,
             "arguments": "{ "arg": 123 }",
             "sequence_number": 1
@@ -75448,7 +75700,7 @@ components:
               "incomplete_details": null,
               "instructions": null,
               "max_output_tokens": null,
-              "model": "gpt-4o-2024-08-06",
+              "model": "gpt-6-astra",
               "output": [],
               "parallel_tool_calls": true,
               "previous_response_id": null,
@@ -75480,7 +75732,9 @@ components:
           type: string
           enum:
             - max_output_tokens
+            - max_messages
             - content_filter
+            - steered
     OpenAI.ResponseIncompleteEvent:
       type: object
       required:
@@ -75502,7 +75756,11 @@ components:
           description: The sequence number of this event.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
-      description: An event that is emitted when a response finishes as incomplete.
+      description: |-
+        An event that is emitted when a response finishes as incomplete.
+        Over WebSocket, steering can finish a response with
+        `response.incomplete_details.reason` set to `steered`, followed automatically
+        by a successor `response.created` that commits the queued steering input.
       x-oaiMeta:
         name: response.incomplete
         group: responses
@@ -75521,7 +75779,7 @@ components:
               },
               "instructions": null,
               "max_output_tokens": null,
-              "model": "gpt-4o-mini-2024-07-18",
+              "model": "gpt-6-astra",
               "output": [],
               "previous_response_id": null,
               "reasoning_effort": null,
@@ -76044,6 +76302,21 @@ components:
             },
             "sequence_number": 1
           }
+    OpenAI.ResponsePromptCacheOptionsParam:
+      type: object
+      properties:
+        ttl:
+          $ref: '#/components/schemas/OpenAI.PromptCacheTTLEnum'
+          description: The minimum lifetime applied to every implicit and explicit cache breakpoint written by the request. Defaults to `30m`, which is currently the only supported value. The backend may retain cache entries for longer.
+        mode:
+          $ref: '#/components/schemas/OpenAI.PromptCacheModeEnum'
+          description: Controls whether OpenAI automatically creates an implicit cache breakpoint. Defaults to `implicit`. With `implicit`, OpenAI creates one implicit breakpoint and writes up to the latest three explicit breakpoints in the request. With `explicit`, OpenAI does not create an implicit breakpoint and writes up to the latest four explicit breakpoints. If there are no explicit breakpoints, the request does not use prompt caching.
+        comparison_response_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+      description: Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints. For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation, without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The `ttl` defaults to `30m`, which is currently the only supported value. See the [prompt caching guide](/docs/guides/prompt-caching) for current details.
+      title: Prompt cache options
     OpenAI.ResponsePromptVariables:
       type: object
       unevaluatedProperties:
@@ -77415,7 +77688,7 @@ components:
             "failed_at": null,
             "completed_at": 1699073498,
             "last_error": null,
-            "model": "gpt-4o",
+            "model": "gpt-5",
             "instructions": null,
             "tools": [{"type": "file_search"}, {"type": "code_interpreter"}],
             "metadata": {},
@@ -80161,6 +80434,14 @@ components:
             - type: 'null'
       description: The approximate location of the user.
       title: Web search approximate location
+    OpenAI.WebSearchCallStatus:
+      type: string
+      enum:
+        - in_progress
+        - searching
+        - completed
+        - failed
+        - incomplete
     OpenAI.WebSearchContextSize:
       type: string
       enum:
@@ -80282,6 +80563,23 @@ components:
               items:
                 type: string
             - type: 'null'
+    OpenAI._MisalignmentErrorType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - potentially_unintended_data_transfer
+            - potentially_unintended_data_access
+            - potentially_unintended_destructive_activity
+            - other
+    OpenAI._MisalignmentSteer:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: The public continuation instruction.
     OpenAI.integer:
       type: integer
       format: int64
