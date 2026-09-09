@@ -143,6 +143,23 @@ model PrivateLinkResource
   name: string;
 }
 
+@added(Versions.v2026_09_01)
+@doc("Parameters for updating a private endpoint connection.")
+model PrivateEndpointConnectionForPatchUpdate {
+  @doc("The private endpoint connection properties to update.")
+  properties?: PrivateEndpointConnectionPropertiesForPatchUpdate;
+}
+
+@added(Versions.v2026_09_01)
+@doc("Properties for updating a private endpoint connection.")
+model PrivateEndpointConnectionPropertiesForPatchUpdate {
+  @doc("The private endpoint resource.")
+  privateEndpoint?: Azure.ResourceManager.CommonTypes.PrivateEndpoint;
+
+  @doc("Information about the connection state between the service consumer and provider.")
+  privateLinkServiceConnectionState?: Azure.ResourceManager.CommonTypes.PrivateLinkServiceConnectionState;
+}
+
 @renamedFrom(Versions.v2026_09_01, "HorizonDbParameterGroup")
 @doc("Represents the HorizonDB parameter group.")
 model ParameterGroup
@@ -1740,6 +1757,18 @@ model ParameterGroupConnectionProperties {
   @doc("The Azure resource ID of the connected HorizonDB pool.")
   @visibility(Lifecycle.Read)
   poolResourceId: PoolResourceId;
+}
+
+@doc("A page of HorizonDB parameter group connections.")
+model PagedParameterGroupConnectionProperties {
+  @doc("The parameter group connection items on this page.")
+  @pageItems
+  @identifiers(#["poolResourceId"])
+  value: ParameterGroupConnectionProperties[];
+
+  @doc("The link to the next page of items.")
+  @nextLink
+  nextLink?: url;
 }
 
 @added(Versions.v2026_09_01)

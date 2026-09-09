@@ -341,7 +341,8 @@ interface PrivateEndpointConnections {
   @sharedRoute
   update is PrivateEndpointOperations.CustomPatchAsync<
     Cluster,
-    PrivateEndpointConnectionResource
+    PrivateEndpointConnectionResource,
+    PrivateEndpointConnectionForPatchUpdate
   >;
 
   @doc("Approves or rejects a private endpoint connection.")
@@ -435,7 +436,7 @@ interface ParameterGroups {
   listConnections is ArmResourceActionSync<
     ParameterGroup,
     void,
-    ArmResponse<Azure.Core.Page<ParameterGroupConnectionProperties>>
+    ArmResponse<PagedParameterGroupConnectionProperties>
   >;
 
   @removed(Versions.v2026_09_01)

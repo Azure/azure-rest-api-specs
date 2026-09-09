@@ -77,6 +77,34 @@ suppressions:
       applies only when computeModel.type is Provisioned. The validator compares the PATCH
       field only with the base PoolComputeModel and cannot resolve the discriminator
       hierarchy, so it incorrectly reports the subtype property as missing.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.ChangeDataCaptureCapabilityProperties.properties.autoUpgradeExtension
+    reason: >-
+      autoUpgradeExtension is an intrinsically binary authorization indicating whether
+      HorizonDB may automatically upgrade the service-owned extension. Additional extension
+      lifecycle states are represented by the extension status model, not this permission.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.ChangeDataCaptureCapabilityPropertiesForPatchUpdate.properties.autoUpgradeExtension
+    reason: >-
+      autoUpgradeExtension is an intrinsically binary authorization indicating whether
+      HorizonDB may automatically upgrade the service-owned extension. Omission preserves
+      the current setting, so a third enum value is not needed for partial updates.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.MaintenanceEventActionResponse.properties.appliedNow
+    reason: >-
+      appliedNow records the binary outcome of whether the customer selected the apply-now
+      action rather than rescheduling the event. Other maintenance lifecycle conditions are
+      represented by the separate status property.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.MaintenanceEventProperties.properties.deferrable
+    reason: >-
+      deferrable indicates whether the maintenance event can be rescheduled at all. The
+      deferral deadline provides the associated scheduling detail when this capability is
+      available, so an enum would not add another meaningful state.
 ```
 
 ### Tag: package-horizondb-2026-05-01-preview

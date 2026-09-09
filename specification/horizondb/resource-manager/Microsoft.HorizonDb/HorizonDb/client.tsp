@@ -252,6 +252,16 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
+  Microsoft.HorizonDb.PrivateEndpointConnectionForPatchUpdate,
+  "HorizonDBPrivateEndpointConnectionPatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PrivateEndpointConnectionPropertiesForPatchUpdate,
+  "HorizonDBPrivateEndpointConnectionPatchProperties",
+  "csharp"
+);
+@@clientName(
   Microsoft.HorizonDb.HorizonDbClusterParameterGroupConnectionProperties.applyImmediately,
   "ShouldApplyImmediately",
   "csharp"

@@ -185,11 +185,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "The Azure region for which to list HorizonDB capabilities.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -4742,7 +4738,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Azure.ResourceManager.PrivateEndpointConnectionUpdate"
+              "$ref": "#/definitions/PrivateEndpointConnectionForPatchUpdate"
             }
           }
         ],
@@ -5462,26 +5458,6 @@
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
-    },
-    "Azure.ResourceManager.PrivateEndpointConnectionUpdate": {
-      "type": "object",
-      "description": "PATCH model for private endpoint connections",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "description": "The private endpoint connection properties",
-          "properties": {
-            "privateEndpoint": {
-              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpoint",
-              "description": "The private endpoint resource."
-            },
-            "privateLinkServiceConnectionState": {
-              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkServiceConnectionState",
-              "description": "A collection of information about the state of the connection between service consumer and provider."
-            }
-          }
-        }
-      }
     },
     "Backup": {
       "type": "object",
@@ -8420,19 +8396,22 @@
     },
     "PagedLocationCapability": {
       "type": "object",
-      "description": "Paged collection of LocationCapability items",
+      "description": "A page of HorizonDB location capabilities.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The LocationCapability items on this page",
+          "description": "The location capability items on this page.",
           "items": {
             "$ref": "#/definitions/LocationCapability"
-          }
+          },
+          "x-ms-identifiers": [
+            "location"
+          ]
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items."
         }
       },
       "required": [
@@ -8441,19 +8420,22 @@
     },
     "PagedParameterGroupConnectionProperties": {
       "type": "object",
-      "description": "Paged collection of ParameterGroupConnectionProperties items",
+      "description": "A page of HorizonDB parameter group connections.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ParameterGroupConnectionProperties items on this page",
+          "description": "The parameter group connection items on this page.",
           "items": {
             "$ref": "#/definitions/ParameterGroupConnectionProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "poolResourceId"
+          ]
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items."
         }
       },
       "required": [
@@ -9395,6 +9377,30 @@
             "description": "A Microsoft Entra ID application or service principal used for automated workloads."
           }
         ]
+      }
+    },
+    "PrivateEndpointConnectionForPatchUpdate": {
+      "type": "object",
+      "description": "Parameters for updating a private endpoint connection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionPropertiesForPatchUpdate",
+          "description": "The private endpoint connection properties to update."
+        }
+      }
+    },
+    "PrivateEndpointConnectionPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Properties for updating a private endpoint connection.",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpoint",
+          "description": "The private endpoint resource."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkServiceConnectionState",
+          "description": "Information about the connection state between the service consumer and provider."
+        }
       }
     },
     "PrivateEndpointConnectionResourceListResult": {

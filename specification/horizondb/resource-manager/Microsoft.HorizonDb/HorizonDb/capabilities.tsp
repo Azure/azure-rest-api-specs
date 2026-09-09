@@ -209,6 +209,19 @@ model LocationCapability {
   poolCapabilities: PoolCapability;
 }
 
+@added(Versions.v2026_09_01)
+@doc("A page of HorizonDB location capabilities.")
+model PagedLocationCapability {
+  @doc("The location capability items on this page.")
+  @pageItems
+  @identifiers(#["location"])
+  value: LocationCapability[];
+
+  @doc("The link to the next page of items.")
+  @nextLink
+  nextLink?: url;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This is a custom non-resource subscription-level discovery operation with an explicit route and parameters."
 @added(Versions.v2026_09_01)
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/capabilities")
@@ -217,14 +230,12 @@ interface Capabilities {
   @doc("Lists HorizonDB capabilities available to a subscription in a specific region.")
   @get
   @list
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This subscription-location discovery operation returns capability metadata rather than ARM resources."
   list(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-
-    @doc("The Azure region for which to list HorizonDB capabilities.")
-    @path
-    location: azureLocation,
+    ...LocationParameter,
   ):
-    | ArmResponse<Azure.Core.Page<LocationCapability>>
+    | ArmResponse<PagedLocationCapability>
     | ErrorResponse;
 }
