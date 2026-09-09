@@ -139,6 +139,7 @@ using PaloAltoNetworks.Cloudngfw;
 );
 @@clientName(ListAppIdResponse, "RulestackAppIdListResult", "csharp");
 @@clientName(ListFirewallsResponse, "RulestackFirewallListResult", "csharp");
+@@clientName(LoadDistribution, "FirewallLoadDistribution", "csharp");
 @@clientName(
   LocalRulestackResourceUpdateProperties,
   "LocalRulestackUpdateProperties",
@@ -251,6 +252,7 @@ using PaloAltoNetworks.Cloudngfw;
 @@alternateType(StorageAccount.id, Azure.Core.armResourceIdentifier, "csharp");
 @@clientName(SupportInfo, "FirewallSupportInfo", "csharp");
 @@clientName(TagInfo, "RulestackTagInfo", "csharp");
+@@clientName(TcpReset, "FirewallTcpReset", "csharp");
 @@clientName(UsageType, "FirewallBillingPlanUsageType", "csharp");
 @@clientName(UsageType.PAYG, "Payg", "csharp");
 @@clientName(UsageType.COMMITTED, "Committed", "csharp");

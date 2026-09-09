@@ -67,6 +67,16 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(DRANETMode, "DranetMode", "csharp");
+@@clientName(
+  AgentPoolNICPublicIPAddressConfiguration,
+  "AgentPoolNicPublicIPAddressConfiguration",
+  "csharp"
+);
+@@clientName(
+  AgentPoolNICPublicIPAddressVersion,
+  "AgentPoolNicPublicIPAddressVersion",
+  "csharp"
+);
 
 // Java specific renaming for backward compatibility
 @@clientName(
