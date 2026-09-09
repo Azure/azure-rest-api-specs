@@ -1253,7 +1253,7 @@ union MessagePayloadFormat {
   /**
    * Formats the message as a com.do.telemetry.observation.v1 payload.
    */
-  DoObservationV1: "DOObservationV1",
+  DOObservationV1: "DOObservationV1",
 
   /**
    * Preserves the original message payload.
