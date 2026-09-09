@@ -1,5 +1,8 @@
 import "../../common/models.tsp";
+import "../../common/servicepatterns.tsp";
 import "../../red-teams/models.tsp";
+import "./common.tsp";
+import "./user_conversation_simulation.tsp";
 
 using Azure.Core.Experimental;
 using TypeSpec.Versioning;
@@ -254,7 +257,7 @@ model CreateEvalRequest is OpenAI.CreateEvalRequest {
   properties?: Record<string>;
 }
 
-/** The types of parameters for red team item generation. */
+/** Identifies how evaluation input items are prepared before evaluation. */
 union ItemGenerationParamsType {
   string,
 
@@ -273,9 +276,6 @@ union ItemGenerationParamsType {
   /** Parameters for synthetic data item generation. */
   syntheticDataGeneration: "synthetic_data_gen_preview",
 
-  /** Parameters for conversation simulation item generation. */
-  conversationGenPreview: "conversation_gen_preview",
-
   /** Parameters for target completion item generation. */
   targetCompletion: "target_completion",
 }
@@ -288,10 +288,14 @@ union SyntheticDataGenItemGenerationParamsType {
   syntheticDataGenerationPreview: "synthetic_data_gen_preview",
 }
 
-/** Represents the set of parameters used to control item generation operations. */
+/**
+ * Configures how the service prepares input items for an evaluation run before applying testing criteria.
+ *
+ * Depending on `type`, preparation can generate new inputs, retrieve existing responses, transform source data, or simulate conversations. Each `type` selects a workflow-specific model with the parameters required by that preparation workflow. These parameters do not define the evaluated target or the testing criteria.
+ */
 @discriminator("type")
 model ItemGenerationParams {
-  /** The type of item generation parameters to use. */
+  /** Preparation workflow to use. This discriminator determines which additional parameters are available. */
   type: ItemGenerationParamsType;
 }
 
@@ -354,15 +358,8 @@ model ResponseRetrievalItemGenerationParams extends ItemGenerationParams {
   source: OpenAI.EvalJsonlFileContentSource | OpenAI.EvalJsonlFileIdSource;
 }
 
-/** Base class for targets with discriminator support. */
-@discriminator("type")
-model Target {
-  /** The type of target. */
-  type: string;
-}
-
 /** Represents a target specifying an Azure AI model for operations requiring model selection. */
-model AzureAIModelTarget extends Target {
+model AzureAIModelTarget extends FoundryEvaluationTarget {
   /** The type of target, always `azure_ai_model`. */
   type: "azure_ai_model";
 
@@ -374,7 +371,7 @@ model AzureAIModelTarget extends Target {
 }
 
 /** Represents a target specifying an Azure AI agent. */
-model AzureAIAgentTarget extends Target {
+model AzureAIAgentTarget extends FoundryEvaluationTarget {
   /** The type of target, always `azure_ai_agent`. */
   type: "azure_ai_agent";
 
@@ -463,11 +460,11 @@ model SyntheticDataGenerationPreviewEvalRunDataSource
   /** The type of data source, always `azure_ai_synthetic_data_gen_preview`. */
   type: "azure_ai_synthetic_data_gen_preview";
 
-  /** The parameters for item generation. */
+  /** Configuration for generating the synthetic input items evaluated by this run. */
   item_generation_params: SyntheticDataGenerationPreviewItemGenerationParams;
 
   /** The target configuration for the evaluation. */
-  target: Target;
+  target: FoundryEvaluationTarget;
 
   /** Input messages template configuration applicable only if target is of type 'azure_ai_model' */
   input_messages?: OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate;
@@ -504,7 +501,7 @@ model AzureAIResponsesEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source, always `azure_ai_responses`. */
   type: "azure_ai_responses";
 
-  /** The parameters for item generation. */
+  /** Configuration for retrieving and preparing stored response history as evaluation input items. */
   item_generation_params: ResponseRetrievalItemGenerationParams;
 
   /** Maximum number of evaluation runs allowed per hour. */
@@ -528,12 +525,11 @@ model TargetCompletionEvalRunDataSource extends EvalRunDataSource {
   source: OpenAI.EvalJsonlFileContentSource | OpenAI.EvalJsonlFileIdSource;
 
   /** The target configuration for the evaluation. */
-  target: Target;
+  target: FoundryEvaluationTarget;
 
   /** The parameters for item generation. ConversationGenPreviewItemGenerationParams enables conversation simulation previews. */
   item_generation_params?: ItemGenerationParams;
 }
-
 /** Represents a reference to an uploaded CSV file used as a source for evaluation data. */
 model EvalCsvFileIdSource {
   /** The type of source, always `file_id`. */
@@ -559,32 +555,11 @@ model RedTeamEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source. Always `azure_ai_red_team`. */
   type: "azure_ai_red_team";
 
-  /** The parameters for item generation. */
+  /** Configuration for generating the adversarial input items evaluated by this run. */
   item_generation_params: ItemGenerationParams;
 
   /** The target configuration for the evaluation. */
-  target: Target;
-}
-
-/** Represents the parameters for conversation simulation item generation. */
-model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
-  /** The type of item generation parameters, always `conversation_gen_preview`. */
-  type: ItemGenerationParamsType.conversationGenPreview;
-
-  /** The model deployment used for simulation, in the format '{connectionName}/modelDeploymentName'. */
-  `model`: string;
-
-  /** Maximum number of turns per simulated conversation. Defaults to 20. */
-  max_turns?: int32 = 20;
-
-  /** Number of simulated conversations to generate per test scenario. Defaults to 5. */
-  num_conversations?: int32 = 5;
-
-  /** Mapping from source fields to response_id field, which is required for retrieving chat history. */
-  data_mapping?: Record<string>;
-
-  /** Sampling parameters for the conversation generation. */
-  sampling_params?: ModelSamplingParams;
+  target: FoundryEvaluationTarget;
 }
 
 /** Represents the parameters for target completion item generation. */
@@ -714,7 +689,7 @@ model AzureAIBenchmarkPreviewEvalRunDataSource extends EvalRunDataSource {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionEvalRunDataSource | UserConversationSimulationEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
@@ -744,6 +719,7 @@ model AzureAIBenchmarkPreviewEvalRunDataSource extends EvalRunDataSource {
   }
 );
 
+/** An evaluation run, including Foundry-specific metadata and optional output dataset information. */
 model EvalRun is OpenAI.EvalRun {
   /** Unix timestamp (in seconds) when the evaluation run was last modified. */
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
@@ -763,6 +739,10 @@ model EvalRun is OpenAI.EvalRun {
 
   /** The level at which evaluation is performed. Defaults to 'turn' if not specified. */
   evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
+
+  /** Dataset produced by the evaluation run. Present when the run creates a versioned Foundry dataset; otherwise omitted. */
+  @visibility(Lifecycle.Read)
+  output_dataset?: EvaluationDataset;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Imported from OpenAI spec."
@@ -774,7 +754,7 @@ model EvalRun is OpenAI.EvalRun {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionEvalRunDataSource | UserConversationSimulationEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
 );
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"

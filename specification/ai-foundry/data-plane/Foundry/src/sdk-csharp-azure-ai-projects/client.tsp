@@ -160,8 +160,8 @@ namespace Azure.AI.Projects;
 
 @@access(EvaluatorDefinitionType, Access.public);
 
-// Rename Target from openai-evaluations to EvaluationTarget.
-@@clientName(Target, "EvaluationTarget", "csharp");
+// Rename FoundryEvaluationTarget from openai-evaluations to EvaluationTarget.
+@@clientName(FoundryEvaluationTarget, "EvaluationTarget", "csharp");
 @@clientName(EvalResult.passed, "IsPassed", "csharp");
 @@clientName(EvalRunResultComparison.evaluator, "EvaluatorName", "csharp");
 @@clientName(EvalRunResultComparison.metric, "MetricName", "csharp");
