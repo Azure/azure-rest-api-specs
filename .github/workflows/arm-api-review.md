@@ -144,7 +144,7 @@ checkout: false
 # the copy of this file in Azure/azure-rest-api-specs-pr.
 engine:
   id: copilot
-model: gpt-5.6-sol?effort=high
+model: ${{ env.ARM_API_REVIEWER_MODEL }}
 tools:
   github:
     # Read-only toolsets only; `safe-outputs` below is the ONLY write channel.
@@ -159,11 +159,13 @@ tools:
     # on top of the write-role trigger gate.
     min-integrity: approved
 imports:
+  - shared-github-aw-imports/arm-api-review-model.md
   - ../instructions/arm-api-review.instructions.md
   - ../instructions/openapi-review.instructions.md
   - ../instructions/typespec-project.instructions.md
   - ../instructions/typespec-review.instructions.md
   - ../skills/azure-api-review/SKILL.md
+  - ../skills/azure-api-review/references/typespec-openapi-extensions.md
 safe-outputs:
   # Framework-owned status comments do not consume this budget. Reserve slots
   # for the review summary / "no issues found", overflow themes, an actionable
@@ -203,15 +205,14 @@ safe-outputs:
     max: 3
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
   noop:
-  # Threat detection is a bounded scan of already-completed agent output, not the
-  # review itself, so it is pinned to a smaller model. Pinning it still removes
-  # run-to-run variation; left unset it resolves through the `detection` alias.
-  # `engine.model` is reported as deprecated, but it is the only supported way to
-  # set this: `model` is not a valid field under `threat-detection`.
+  # Threat detection uses the same canonical model as the primary review so all
+  # ARM API Reviewer experiences move together when the anchor changes.
+  # `engine.model` is reported as deprecated, but it is the only supported way
+  # to set this: `model` is not a valid field under `threat-detection`.
   threat-detection:
     engine:
       id: copilot
-      model: claude-sonnet-4.6
+      model: ${{ env.ARM_API_REVIEWER_MODEL }}
   messages:
     footer: "> 🔍 *ARM API review by [{workflow_name}]({run_url})*"
     run-started: "🔍 [{workflow_name}]({run_url}) is reviewing this PR for ARM API compliance…"
@@ -493,6 +494,8 @@ Load instruction files lazily based on the file types found in Step 1:
 - Data-plane JSON → load `openapi-review.instructions.md`.
 - TypeSpec → load both `typespec-review.instructions.md` and
   `typespec-project.instructions.md`.
+- TypeSpec or generated OpenAPI changed with its owning TypeSpec source → load
+  `typespec-openapi-extensions.md`.
 - Examples only → apply section EX-\* from `openapi-review.instructions.md`.
 - `readme.md` only → apply suppression-continuity guidance.
 - All types → load the `azure-api-review` SKILL.md and its references as
@@ -508,6 +511,10 @@ Compare modified specs against the previous API version:
   `@added`, `@removed`, `@typeChangedFrom` annotations.
 - Flag: removed properties, removed operations, type changes, narrowed enums,
   optional-to-required transitions, renamed paths.
+- Before flagging a generated `x-ms-*` metadata diff, apply
+  `typespec-openapi-extensions.md` and require evidence of a REST wire, ARM
+  platform, or native semantic change. Never propose `@OpenAPI.extension(...)`
+  or a `no-openapi-client-extensions` suppression to restore legacy output.
 - Also check `TSP-REQUIRED-V1`: new API version directories with handwritten
   OpenAPI and no TypeSpec project require a Blocking finding.
 
@@ -561,6 +568,10 @@ and the applicable linter-rule coverage reference. Do not recommend a fix that
 would violate a required LintDiff, breaking-change, or SDK check. When a
 conflict exists, present the allowed options instead of a single directive and
 include `downstream-rule: <RULE-ID>` in the finding's telemetry marker.
+For TypeSpec-owned generated OpenAPI, first apply
+[`typespec-openapi-extensions.md`](../skills/azure-api-review/references/typespec-openapi-extensions.md):
+drop extension-only cleanup findings with no wire or ARM semantic change, and
+use the native TypeSpec construct for semantics-bearing metadata.
 
 ### Step 5: Cross-File Consistency (full review only)
 

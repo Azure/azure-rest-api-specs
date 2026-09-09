@@ -42,6 +42,7 @@ must not load the other plane's files** -- see "Anti-inheritance" below.
 | [downstream-ci-impact.md](references/downstream-ci-impact.md)                             | Do not recommend a fix that trips a required CI check                              | --                                                        |
 | [reviewer-posted-parity.md](references/reviewer-posted-parity.md)                         | Presented-vs-posted parity and cross-session reconciliation for ARM reviewers      | --                                                        |
 | [api-version-lifecycle-and-branches.md](references/api-version-lifecycle-and-branches.md) | Which repo, branch, and folder each API version lifecycle stage may live in        | APIVER-\*                                                 |
+| [typespec-openapi-extensions.md](references/typespec-openapi-extensions.md)               | Raw OpenAPI decorators, native TypeSpec alternatives, and generated-diff triage    | TSP-NO-RAW-CLIENT-EXTENSIONS                              |
 
 ### ARM control-plane only
 

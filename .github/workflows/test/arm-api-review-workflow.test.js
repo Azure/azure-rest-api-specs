@@ -11,6 +11,7 @@ const ROOT = join(import.meta.dirname, "..", "..", "..");
 const SOURCE_FILE = ".github/workflows/arm-api-review.md";
 const LOCK_FILE = ".github/workflows/arm-api-review.lock.yml";
 const AGENT_FILE = ".github/agents/arm-api-reviewer.agent.md";
+const MODEL_CONFIG_FILE = ".github/workflows/shared-github-aw-imports/arm-api-review-model.md";
 const TARGET_EXPRESSION =
   "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}";
 let resolverScript = "";
@@ -89,6 +90,18 @@ function parseJsonRecord(content) {
     throw new Error("Expected a JSON object");
   }
   return parsed;
+}
+
+/**
+ * @param {string} content
+ * @returns {string}
+ */
+function parseArmApiReviewerModel(content) {
+  const match = content.match(/^\s*ARM_API_REVIEWER_MODEL:\s*(\S+)\s*$/m);
+  if (!match) {
+    throw new Error(`Expected ARM_API_REVIEWER_MODEL in ${MODEL_CONFIG_FILE}`);
+  }
+  return match[1];
 }
 
 /**
@@ -954,22 +967,34 @@ describe("ARM API review consistency and hardening", () => {
       expect(source).toContain("Both are explicit, recorded human actions");
     }
   });
-  it("pins the model so every run reviews with the same one", async () => {
-    const [source, compiled] = await readWorkflowFiles();
+  it("uses one canonical model value for review and threat detection", async () => {
+    const [[source, compiled], modelConfig] = await Promise.all([
+      readWorkflowFiles(),
+      readFile(join(ROOT, MODEL_CONFIG_FILE), "utf8"),
+    ]);
+    const canonicalModel = parseArmApiReviewerModel(modelConfig);
 
     // Left unpinned the model resolves to `... || 'auto'`, which can pick a
     // different model per run, so identical specs could get different feedback.
     // The value has to be one the AWF api-proxy prices: an unpriced model is
     // rejected with a 400 before the agent runs at all, which took down every
     // run when this was briefly pinned to claude-opus-5.
-    expect(source).toMatch(/^model: gpt-5\.6-sol\?effort=high$/m);
+    expect(source).toContain("shared-github-aw-imports/arm-api-review-model.md");
+    expect(source.match(/model: \$\{\{ env\.ARM_API_REVIEWER_MODEL \}\}/g)).toHaveLength(2);
+    expect(source).not.toContain(canonicalModel);
 
-    // The compiled lock must carry literals, not a `vars.` fallback expression.
-    expect(compiled).toContain("COPILOT_MODEL: gpt-5.6-sol?effort=high");
+    // The imported environment value must be present in the compiled workflow,
+    // and both runtime jobs must reference it rather than separate literals.
+    expect(compiled).toContain(`ARM_API_REVIEWER_MODEL: ${canonicalModel}`);
+    expect(compiled.match(/COPILOT_MODEL: \$\{\{ env\.ARM_API_REVIEWER_MODEL \}\}/g)).toHaveLength(
+      2,
+    );
     expect(compiled).not.toContain("COPILOT_MODEL: ${{ vars.GH_AW_MODEL_AGENT_COPILOT");
   });
 
   it("keeps the eval suite on the same model as production", async () => {
+    const modelConfig = await readFile(join(ROOT, MODEL_CONFIG_FILE), "utf8");
+    const canonicalModel = parseArmApiReviewerModel(modelConfig);
     const dir = join(ROOT, ".github/skills/evals/arm-api-reviewer/vally");
     const files = (await readdir(dir)).filter((f) => f.endsWith(".yaml"));
     expect(files.length).toBeGreaterThan(0);
@@ -979,7 +1004,7 @@ describe("ARM API review consistency and hardening", () => {
       // The agent under test must match the production model, or eval results
       // describe a model that never reviews a real PR. Anchored to the line
       // start because plain `model:` also matches `judge_model:`.
-      expect(text, `${file} agent model`).toMatch(/^\s*model: gpt-5\.6-sol\?effort=high$/m);
+      expect(text, `${file} agent model`).toContain(`model: ${canonicalModel}`);
       // The judge is a separate role and deliberately stays cheaper.
       expect(text, `${file} judge model`).toContain("judge_model: claude-sonnet-4.6");
     }
@@ -1520,7 +1545,7 @@ describe("ARM paging and example enum calibration", () => {
     }
   });
 
-  it("keeps the eval catalog counts aligned with 88 scenarios and 57 fixtures", async () => {
+  it("keeps the eval catalog counts aligned with 89 scenarios and 57 fixtures", async () => {
     const evalDir = join(ROOT, ".github/skills/evals/arm-api-reviewer/vally");
     const evalFiles = (await readdir(evalDir)).filter((file) => file.endsWith(".yaml"));
     let stimulusCount = 0;
@@ -1541,11 +1566,11 @@ describe("ARM paging and example enum calibration", () => {
       { recursive: true, withFileTypes: true },
     );
     expect(evalFiles).toHaveLength(18);
-    expect(stimulusCount).toBe(88);
+    expect(stimulusCount).toBe(89);
     expect(
       fixtureEntries.filter((entry) => entry.isFile() && entry.name !== "README.md"),
     ).toHaveLength(57);
-    expect(readme).toContain("Total: 88 stimuli across 18 eval files.");
+    expect(readme).toContain("Total: 89 stimuli across 18 eval files.");
     expect(readme).toContain("All 57 fixture data files");
     expect(readme).toContain("`--timeout <duration>`");
     expect(readme).toContain("`defaults.timeout`");
@@ -1713,6 +1738,48 @@ describe("ARM Reviewer alignment and dependency consistency", () => {
     expect(critic).toContain("**OVERFLOW-NOT-POSTED**");
     expect(workflow).toContain("| `OVERFLOW-NOT-POSTED`");
     expect(workflow).toContain("Append every excluded candidate to the reconciliation plan as an");
+  });
+
+  it("rejects raw OpenAPI extension restoration for TypeSpec-owned output", async () => {
+    const [workflow, reviewer, critic, arm, typespec, skill, extensionGuidance] = await Promise.all(
+      [
+        readFile(join(ROOT, SOURCE_FILE), "utf8"),
+        readFile(join(ROOT, AGENT_FILE), "utf8"),
+        readFile(join(ROOT, ".github/agents/arm-api-review-critic.agent.md"), "utf8"),
+        readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
+        readFile(join(ROOT, ".github/instructions/typespec-review.instructions.md"), "utf8"),
+        readFile(join(ROOT, ".github/skills/azure-api-review/SKILL.md"), "utf8"),
+        readFile(
+          join(ROOT, ".github/skills/azure-api-review/references/typespec-openapi-extensions.md"),
+          "utf8",
+        ),
+      ],
+    );
+    const collapsedExtensionGuidance = collapseWhitespace(extensionGuidance);
+
+    expect(extensionGuidance).toContain("Upstream alignment: 2026-09-09");
+    expect(extensionGuidance).toContain(
+      "The upstream `@azure-tools/typespec-azure-core/no-openapi-client-extensions`",
+    );
+    expect(collapsedExtensionGuidance).toContain(
+      "Examples include removing `x-ms-parameter-grouping`",
+    );
+    expect(collapsedExtensionGuidance).toContain("removing `x-ms-client-request-id: true`");
+    expect(extensionGuidance).toMatch(/\| `x-ms-pageable`\s+\| `@list`/);
+    expect(collapsedExtensionGuidance).toContain("Never recommend `@OpenAPI.extension` as the fix");
+    expect(skill).toContain("[typespec-openapi-extensions.md]");
+    expect(typespec).toContain("TSP-NO-RAW-CLIENT-EXTENSIONS");
+    expect(typespec).toContain(
+      "do not suppress `@azure-tools/typespec-azure-core/no-openapi-client-extensions`",
+    );
+    expect(arm).toContain("Removing legacy `x-ms-parameter-grouping`");
+    expect(reviewer).toContain("Drop extension-only");
+    expect(workflow).toContain("drop extension-only cleanup findings");
+    expect(workflow).toContain(
+      "../skills/azure-api-review/references/typespec-openapi-extensions.md",
+    );
+    expect(critic).toContain("FAIL: rule-misapplied");
+    expect(critic).toContain("FAIL: downstream-ci-conflict");
   });
 
   it("keeps generic OpenAPI guidance subordinate to ARM-specific rules", async () => {
