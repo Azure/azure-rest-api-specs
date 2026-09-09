@@ -56,20 +56,16 @@ interface TriageRecommendationOps
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @removed(Versions.v2026_03_01_preview)
 interface TriageRecommendations {
-  /**
-   * Get an existing recommendation by id for an existing Azure Advisor Resiliency Review Id.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @extension("deprecated", true)
+  #deprecated "This operation is deprecated. Use API version 2026-03-01-preview or later."
+  @doc("Deprecated: Get an existing recommendation by id for an existing Azure Advisor Resiliency Review Id. Use API version 2026-03-01-preview or later.")
   @summary("Get an existing recommendation by id for an existing Resiliency Review Id.")
   @operationId("triageRecommendations_Get")
   get is TriageRecommendationOps.Read<TriageRecommendation>;
 
-  /**
-   * Get list of recommendations for an existing Azure Advisor Resiliency Review Id.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @extension("deprecated", true)
+  #deprecated "This operation is deprecated. Use API version 2026-03-01-preview or later."
+  @doc("Deprecated: Get list of recommendations for an existing Azure Advisor Resiliency Review Id. Use API version 2026-03-01-preview or later.")
   @summary("Get list of recommendations for an existing Resiliency Review Id.")
   @segment("providers/Microsoft.Advisor/triageRecommendations")
   @operationId("triageRecommendations_List")
@@ -91,11 +87,9 @@ interface TriageRecommendations {
     Response = ArmResponse<TriageRecommendationCollection>
   >;
 
-  /**
-   * Approve a triage recommendation for a given id.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @extension("deprecated", true)
+  #deprecated "This operation is deprecated. Use API version 2026-03-01-preview or later."
+  @doc("Deprecated: Approve a triage recommendation for a given id. Use API version 2026-03-01-preview or later.")
   @summary("Approve triage recommendation by id.")
   @operationId("triageRecommendations_ApproveTriageRecommendation")
   @action("approve")
@@ -105,11 +99,9 @@ interface TriageRecommendations {
     OkResponse
   >;
 
-  /**
-   * Reject an existing triage recommendation for a given id.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @extension("deprecated", true)
+  #deprecated "This operation is deprecated. Use API version 2026-03-01-preview or later."
+  @doc("Deprecated: Reject an existing triage recommendation for a given id. Use API version 2026-03-01-preview or later.")
   @summary("Reject existing triage recommendation by id.")
   @operationId("triageRecommendations_RejectTriageRecommendation")
   @action("reject")
@@ -119,11 +111,9 @@ interface TriageRecommendations {
     OkResponse
   >;
 
-  /**
-   * Reset an existing triage recommendation for a given id.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @extension("deprecated", true)
+  #deprecated "This operation is deprecated. Use API version 2026-03-01-preview or later."
+  @doc("Deprecated: Reset an existing triage recommendation for a given id. Use API version 2026-03-01-preview or later.")
   @summary("Reset existing triage recommendation by id.")
   @operationId("triageRecommendations_ResetTriageRecommendation")
   @action("reset")

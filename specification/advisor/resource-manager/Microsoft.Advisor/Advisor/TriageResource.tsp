@@ -48,11 +48,9 @@ interface TriageResourceOps
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @removed(Versions.v2026_03_01_preview)
 interface TriageResources {
-  /**
-   * Get a triage resource for a given review and recommendation.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @extension("deprecated", true)
+  #deprecated "This operation is deprecated. Use API version 2026-03-01-preview or later."
+  @doc("Deprecated: Get a triage resource for a given review and recommendation. Use API version 2026-03-01-preview or later.")
   @summary("Get existing triage resource.")
   @operationId("triageResources_Get")
   get is TriageResourceOps.Read<
@@ -75,11 +73,9 @@ interface TriageResources {
     }
   >;
 
-  /**
-   * List all triage resources that belong to a review and recommendation.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @extension("deprecated", true)
+  #deprecated "This operation is deprecated. Use API version 2026-03-01-preview or later."
+  @doc("Deprecated: List all triage resources that belong to a review and recommendation. Use API version 2026-03-01-preview or later.")
   @summary("List triage resources based on a review and recommendation.")
   @segment("providers/Microsoft.Advisor/triageResources")
   @operationId("triageResources_List")
