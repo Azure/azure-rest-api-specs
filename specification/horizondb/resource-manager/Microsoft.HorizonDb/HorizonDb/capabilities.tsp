@@ -226,17 +226,15 @@ model PagedLocationCapability {
 @added(Versions.v2026_09_01)
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/capabilities")
 interface Capabilities {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This subscription-location discovery operation returns capability metadata rather than ARM resources."
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This subscription-location discovery operation returns capability metadata rather than ARM resources, so no ARM resource operation decorator applies."
   @added(Versions.v2026_09_01)
   @doc("Lists HorizonDB capabilities available to a subscription in a specific region.")
   @get
   @list
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This subscription-location discovery operation returns capability metadata rather than ARM resources."
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This subscription-location discovery operation returns capability metadata rather than ARM resources, so no ARM resource operation decorator applies."
   list(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...LocationResourceParameter,
-  ):
-    | ArmResponse<PagedLocationCapability>
-    | ErrorResponse;
+  ): ArmResponse<PagedLocationCapability> | ErrorResponse;
 }

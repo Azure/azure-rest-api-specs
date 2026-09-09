@@ -114,7 +114,6 @@ interface Clusters {
     ArmResponse<Cluster>,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
-
 }
 
 @renamedFrom(Versions.v2026_09_01, "HorizonDbPools")
@@ -399,8 +398,9 @@ interface ParameterGroups {
   @action("connections")
   @returnTypeChangedFrom(
     Versions.v2026_09_01,
-    | ArmResponse<Azure.ResourceManager.ResourceListResult<ParameterGroupConnectionProperties>>
-    | ErrorResponse
+
+      | ArmResponse<Azure.ResourceManager.ResourceListResult<ParameterGroupConnectionProperties>>
+      | ErrorResponse
   )
   listConnections is ArmResourceActionSync<
     ParameterGroup,
