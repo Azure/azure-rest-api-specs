@@ -9121,12 +9121,20 @@
           "description": "Gets the last modification date and time of the advanced platform metrics rule in UTC.",
           "readOnly": true
         },
-        "metricsEmitted": {
+        "metricsToEmit": {
           "type": "array",
-          "description": "The metrics emitted by the rule. If omitted in a create or update request, the service enables all metrics supported by the selected rule type.",
+          "description": "The metrics requested by the caller. If omitted in a create or update request, the service enables all metrics supported by the selected rule type.",
           "items": {
             "$ref": "#/definitions/MetricsEmitted"
           }
+        },
+        "metricsEmitted": {
+          "type": "array",
+          "description": "The metrics emitted by the rule. Metrics are mapped according to the rule type from RuleTypeProperty. Rule type to metrics mapping: ContainerLevelCapacityMetrics => {ContainerUsedSize, ContainerBlobCount}.",
+          "items": {
+            "$ref": "#/definitions/MetricsEmitted"
+          },
+          "readOnly": true
         },
         "ruleConfig": {
           "$ref": "#/definitions/AdvancedPlatformMetricsRuleConfig",
