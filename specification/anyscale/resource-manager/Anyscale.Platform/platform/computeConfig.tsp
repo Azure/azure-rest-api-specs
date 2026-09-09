@@ -98,8 +98,8 @@ model LogicalResources {
   objectStoreMemory?: int64;
 
   /** Custom resources for this node to be used by Ray autoscaler. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Production custom resources are a dynamic map of numeric Ray resource quantities."
-  customResources?: Record<int64>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
+  customResources?: {};
 }
 
 /** CPU architecture type. */
@@ -151,12 +151,12 @@ model NodeType {
   requiredResources?: PhysicalResources;
 
   /** Labels to associate the node with for Ray scheduling purposes. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Production labels are a dynamic map with string values."
-  labels?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "A list of key value pairs"
+  labels?: {};
 
   /** Required labels that must be present on the node for node (pod) scheduling purposes. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Production required labels are a dynamic map with string values."
-  requiredLabels?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "A list of key value pairs"
+  requiredLabels?: {};
 
   /** Advanced configurations for this compute node type to pass to the cloud provider when launching this instance. */
   advancedInstanceConfig?: string;
