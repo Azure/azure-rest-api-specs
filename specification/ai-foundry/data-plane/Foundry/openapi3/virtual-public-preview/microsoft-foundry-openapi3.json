@@ -33714,7 +33714,7 @@
           },
           "total": {
             "$ref": "#/components/schemas/AgentOptimizationEstimateBand",
-            "description": "Total dollar estimate across all priced layers. Null when no layer could be priced."
+            "description": "Total dollar estimate across all priced layers. Omitted when no layer could be priced."
           },
           "per_layer": {
             "type": "object",
@@ -33831,7 +33831,7 @@
           },
           "strategy": {
             "$ref": "#/components/schemas/AgentOptimizationStrategy",
-            "description": "Optimization strategy identifier.",
+            "description": "Optimization strategy identifier. Defaults to gepa when omitted.",
             "default": "gepa"
           },
           "optimization_config": {
@@ -34059,7 +34059,7 @@
           "baseline_score": {
             "type": "number",
             "format": "double",
-            "description": "Score of the baseline (un-optimized) evaluation. Null until the baseline eval completes."
+            "description": "Score of the baseline (un-optimized) evaluation. Omitted until the baseline eval completes."
           },
           "best_score": {
             "type": "number",
@@ -34230,7 +34230,7 @@
           },
           "strategy": {
             "$ref": "#/components/schemas/AgentOptimizationStrategy",
-            "description": "Optimization strategy identifier.",
+            "description": "Optimization strategy identifier. Defaults to gepa when omitted.",
             "default": "gepa"
           },
           "optimization_config": {
@@ -34302,17 +34302,17 @@
           "input_tokens": {
             "type": "integer",
             "format": "int64",
-            "description": "Total input tokens. Null when unmeasured."
+            "description": "Total input tokens. Omitted when unmeasured."
           },
           "output_tokens": {
             "type": "integer",
             "format": "int64",
-            "description": "Total output tokens. Null when unmeasured."
+            "description": "Total output tokens. Omitted when unmeasured."
           },
           "total_tokens": {
             "type": "integer",
             "format": "int64",
-            "description": "Sum of input_tokens + output_tokens. Null when unmeasured."
+            "description": "Sum of input_tokens + output_tokens. Omitted when unmeasured."
           },
           "cached_tokens": {
             "type": "integer",
@@ -84191,7 +84191,7 @@
           },
           "agent_version": {
             "type": "string",
-            "description": "Version of the Foundry agent this candidate was promoted to. May be null when a caller omitted a target version and no server default resolved."
+            "description": "Version of the Foundry agent this candidate was promoted to. Omitted when a caller omitted a target version and no server default resolved."
           },
           "created_new_version": {
             "type": "boolean",

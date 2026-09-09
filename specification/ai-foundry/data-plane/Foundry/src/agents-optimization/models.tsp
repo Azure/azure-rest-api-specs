@@ -239,7 +239,7 @@ model AgentOptimizationOptions {
   @doc("Candidate model deployment names to evaluate. Used only when target_attributes contains 'model'. Ignored otherwise.")
   model_search_space?: string[];
 
-  @doc("Optimization strategy identifier.")
+  @doc("Optimization strategy identifier. Defaults to gepa when omitted.")
   strategy?: AgentOptimizationStrategy = AgentOptimizationStrategy.gepa;
 
   @doc("Structured baseline configuration for the agent being optimized. When omitted, the server resolves baseline from the agent identifier.")
@@ -317,7 +317,7 @@ model AgentOptimizationEstimateDollars {
   @doc("ISO 4217 currency code (e.g., 'USD'). Read as data — do not assume USD; the price source stamps the currency and this may change without a contract change.")
   currency: string;
 
-  @doc("Total dollar estimate across all priced layers. Null when no layer could be priced.")
+  @doc("Total dollar estimate across all priced layers. Omitted when no layer could be priced.")
   total?: AgentOptimizationEstimateBand;
 
   @doc("Per-layer dollar bands keyed by layer name (e.g. 'agent', 'judge', 'reflection'). Only priced layers are present.")
@@ -360,7 +360,7 @@ model AgentOptimizationJobProgress {
   @doc("Number of candidates whose evaluation has completed so far.")
   candidates_completed: int32;
 
-  @doc("Score of the baseline (un-optimized) evaluation. Null until the baseline eval completes.")
+  @doc("Score of the baseline (un-optimized) evaluation. Omitted until the baseline eval completes.")
   baseline_score?: float64;
 
   @doc("Best score observed so far across all candidates.")
@@ -448,13 +448,13 @@ model AgentOptimizationTokenUsageEntry {
   @doc("Model deployment name that served the calls. Empty string when the source sample didn't attribute a model.")
   `model`: string;
 
-  @doc("Total input tokens. Null when unmeasured.")
+  @doc("Total input tokens. Omitted when unmeasured.")
   input_tokens?: int64;
 
-  @doc("Total output tokens. Null when unmeasured.")
+  @doc("Total output tokens. Omitted when unmeasured.")
   output_tokens?: int64;
 
-  @doc("Sum of input_tokens + output_tokens. Null when unmeasured.")
+  @doc("Sum of input_tokens + output_tokens. Omitted when unmeasured.")
   total_tokens?: int64;
 
   @doc("Input tokens served from the model's cache. Included in input_tokens (not additive). Defaults to 0 when the model did not report this metric.")
@@ -567,7 +567,7 @@ model PromoteAgentOptimizationCandidateResponse {
   @doc("Name of the Foundry agent this candidate was promoted to.")
   agent_name: string;
 
-  @doc("Version of the Foundry agent this candidate was promoted to. May be null when a caller omitted a target version and no server default resolved.")
+  @doc("Version of the Foundry agent this candidate was promoted to. Omitted when a caller omitted a target version and no server default resolved.")
   agent_version?: string;
 
   @doc("Whether a new agent version was created during promotion.")

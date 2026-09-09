@@ -8,6 +8,7 @@ import "../agents/routes.tsp";
 import "../evaluation-rules/routes.tsp";
 
 // Stable operation (GA routes) without preview features
+import "../agents-optimization/routes.tsp";
 import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
 import "../deployments/routes.tsp";
@@ -27,7 +28,6 @@ import "../skills/routes.tsp";
 import "../agents-session-files/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
 //import "../evaluation-suites/routes.tsp";
-import "../agents-optimization/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "../sdk-common/ops-relocation-agents.tsp";
@@ -242,7 +242,7 @@ using Azure.AI.Projects;
 // ********************************************************************************
 
 // --------------------------------------------------------------------------------
-// Beta Agents sub-client
+// Agents sub-client
 // --------------------------------------------------------------------------------
 
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob");
