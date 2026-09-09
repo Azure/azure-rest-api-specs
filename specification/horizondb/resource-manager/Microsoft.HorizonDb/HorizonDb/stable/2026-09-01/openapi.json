@@ -196,7 +196,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/LocationCapabilityListResult"
+              "$ref": "#/definitions/PagedLocationCapability"
             }
           },
           "default": {
@@ -5310,7 +5310,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ParameterGroupConnectionPropertiesListResult"
+              "$ref": "#/definitions/PagedParameterGroupConnectionProperties"
             }
           },
           "default": {
@@ -7880,27 +7880,6 @@
         "poolCapabilities"
       ]
     },
-    "LocationCapabilityListResult": {
-      "type": "object",
-      "description": "The response of a LocationCapability list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The LocationCapability items on this page",
-          "items": {
-            "$ref": "#/definitions/LocationCapability"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "MaintenanceEvent": {
       "type": "object",
       "description": "Represents a maintenance event for a HorizonDB pool.",
@@ -8439,6 +8418,48 @@
         ]
       }
     },
+    "PagedLocationCapability": {
+      "type": "object",
+      "description": "Paged collection of LocationCapability items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LocationCapability items on this page",
+          "items": {
+            "$ref": "#/definitions/LocationCapability"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedParameterGroupConnectionProperties": {
+      "type": "object",
+      "description": "Paged collection of ParameterGroupConnectionProperties items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ParameterGroupConnectionProperties items on this page",
+          "items": {
+            "$ref": "#/definitions/ParameterGroupConnectionProperties"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ParameterApplyMethod": {
       "type": "string",
       "description": "Controls when dynamic parameter changes become effective. Static parameter changes always become effective only after a pool restart, whether initiated by the customer or performed during scheduled maintenance.",
@@ -8490,27 +8511,6 @@
       },
       "required": [
         "poolResourceId"
-      ]
-    },
-    "ParameterGroupConnectionPropertiesListResult": {
-      "type": "object",
-      "description": "The response of a ParameterGroupConnectionProperties list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ParameterGroupConnectionProperties items on this page",
-          "items": {
-            "$ref": "#/definitions/ParameterGroupConnectionProperties"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ParameterGroupForPatchUpdate": {

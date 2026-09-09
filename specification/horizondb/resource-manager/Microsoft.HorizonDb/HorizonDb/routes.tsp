@@ -427,10 +427,15 @@ interface ParameterGroups {
   @get
   @list
   @action("connections")
+  @returnTypeChangedFrom(
+    Versions.v2026_09_01,
+    | ArmResponse<Azure.ResourceManager.ResourceListResult<ParameterGroupConnectionProperties>>
+    | ErrorResponse
+  )
   listConnections is ArmResourceActionSync<
     ParameterGroup,
     void,
-    ArmResponse<Azure.ResourceManager.ResourceListResult<ParameterGroupConnectionProperties>>
+    ArmResponse<Azure.Core.Page<ParameterGroupConnectionProperties>>
   >;
 
   @removed(Versions.v2026_09_01)

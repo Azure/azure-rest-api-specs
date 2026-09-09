@@ -225,6 +225,6 @@ interface Capabilities {
     @path
     location: azureLocation,
   ):
-    | ArmResponse<Azure.ResourceManager.ResourceListResult<LocationCapability>>
+    | ArmResponse<Azure.Core.Page<LocationCapability>>
     | ErrorResponse;
 }
