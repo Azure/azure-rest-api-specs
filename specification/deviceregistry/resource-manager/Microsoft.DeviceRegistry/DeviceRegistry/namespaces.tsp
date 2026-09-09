@@ -685,13 +685,13 @@ interface Namespaces {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @doc("Generate a report for a namespace.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned. The generated report is retrieved separately via getLatestReport."
+  @doc("Generate a report for a namespace. The generated report is retrieved separately via the getLatestReport action.")
   @added(Versions.v2026_11_02_preview)
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  generateReport is ArmResourceActionAsync<
-    Namespace,
-    ReportSelector,
-    Report,
+  generateReport is ArmResourceActionNoContentAsync<
+    Resource = Namespace,
+    Request = ReportSelector,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader

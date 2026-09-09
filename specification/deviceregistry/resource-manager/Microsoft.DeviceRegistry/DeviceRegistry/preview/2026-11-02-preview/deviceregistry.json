@@ -3885,7 +3885,7 @@
         "tags": [
           "Namespaces"
         ],
-        "description": "Generate a report for a namespace.",
+        "description": "Generate a report for a namespace. The generated report is retrieved separately via the getLatestReport action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3917,12 +3917,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Report"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -3940,6 +3934,9 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          },
+          "204": {
+            "description": "Action completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -4315,19 +4312,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
+          "200": {
+            "description": "Resource deleted successfully."
           },
           "204": {
             "description": "Resource does not exist."
@@ -4343,11 +4329,7 @@
           "Delete a group": {
             "$ref": "./examples/Delete_Group.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/groups/{groupName}/countMembers": {
