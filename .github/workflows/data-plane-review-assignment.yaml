@@ -1,0 +1,66 @@
+# Data-Plane API Review - Assign Reviewers
+#
+# Requests review from the `azure-data-plane-api-reviewers` team on data-plane PRs that need
+# stewardship review. The team has GitHub code-review auto-assignment enabled, so GitHub
+# picks the individual member; this workflow only requests the team.
+#
+# Two triggers, because the `data-plane-review-requested` label can arrive two ways:
+#   - `pull_request_target: labeled` — the label applied manually.
+#   - `workflow_run` on "Summarize Checks" — the auto-applied label. It is applied with the
+#     default GITHUB_TOKEN, which does not re-trigger `labeled` workflows, so this path
+#     reconciles the request from the PR's live labels instead.
+#
+# Sign-off and `unlabeled` are not handled: the durable `data-plane-review-signoff` label
+# gates merge on its own, and native delegation owns the individual reviewer.
+name: "Data-Plane API Review - Assign Reviewers"
+
+on:
+  pull_request_target:
+    types:
+      - labeled
+    branches:
+      - main
+  workflow_run:
+    workflows:
+      - "Summarize Checks"
+    types:
+      - completed
+
+permissions:
+  actions: read # extractInputs reads issue-number/head-sha handoff artifacts on workflow_run
+  contents: read
+  pull-requests: write
+
+# No `concurrency` block: the job is idempotent, like the other workflow_run label-reaction
+# workflows here. A PR-scoped group isn't possible on the workflow_run path anyway
+# (workflow_run.head_sha is the base tip, shared across open PRs).
+
+jobs:
+  assign-reviewers:
+    name: Assign Data-Plane Review Team
+    # Skip Summarize Checks runs that did not succeed: nothing to reconcile.
+    if: >-
+      ${{ github.event_name == 'pull_request_target' ||
+          github.event.workflow_run.conclusion == 'success' }}
+    # ubuntu-slim: REST-only job (no build) that runs on every Summarize Checks completion,
+    # matching the other label-reaction workflows (arm-auto-signoff-status, update-labels).
+    runs-on: ubuntu-slim
+    steps:
+      # IMPORTANT: This workflow uses pull_request_target, which runs with repo write
+      # permissions. Only base-branch code is checked out below, and no PR-head code is
+      # ever executed - the job only calls the GitHub REST API via github-script.
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github/
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Assign data-plane review team
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: assignReviewers } =
+              await import('${{ github.workspace }}/.github/workflows/src/data-plane-review/assign-reviewers.js');
+            await assignReviewers({ github, context, core });

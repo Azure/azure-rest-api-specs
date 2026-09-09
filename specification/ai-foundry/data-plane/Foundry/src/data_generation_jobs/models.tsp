@@ -25,8 +25,8 @@ union DataGenerationJobType {
   @doc("Tool calling conversation between user and agent.")
   tool_use: "tool_use",
 
-  @doc("Task generation for evaluation scenarios.")
-  task_generation: "task_generation",
+  @doc("Simulation seed for evaluation scenarios.")
+  simulation_seed: "simulation_seed",
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
@@ -228,14 +228,17 @@ model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
 model TracesDataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is Traces for this model.")
   type: "traces";
+
+  @doc("Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.")
+  redact_private_content?: boolean = true;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-model TaskGenerationDataGenerationJobOptions extends DataGenerationJobOptions {
-  @doc("The data generation job type, which is TaskGeneration for this model.")
-  type: "task_generation";
+model SimulationSeedDataGenerationJobOptions extends DataGenerationJobOptions {
+  @doc("The data generation job type, which is SimulationSeed for this model.")
+  type: DataGenerationJobType.simulation_seed;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
