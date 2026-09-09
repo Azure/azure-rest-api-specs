@@ -191,6 +191,14 @@ union OpenIdConnectClientCredentialMethod {
 
 @@alternateType(AppLocationParameter.location, azureLocation, "csharp");
 
+@@alternateType(AvailableEnvironmentMode.location, azureLocation, "csharp");
+
+@@alternateType(
+  BlobStorageTokenStore.managedIdentityResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+
 @@alternateType(OpenIdConnectConfig.certificationUri, url, "csharp");
 
 @@alternateType(SecretKeyVaultProperties.keyVaultUrl, url, "csharp");
