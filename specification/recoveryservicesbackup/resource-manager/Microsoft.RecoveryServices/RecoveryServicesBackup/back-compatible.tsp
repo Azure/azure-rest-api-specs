@@ -143,10 +143,7 @@ using Microsoft.RecoveryServices;
   "!csharp"
 );
 
-@@clientLocation(
-  RecoveryPointsExtendedInfo.getRPExtendedInfo,
-  RecoveryPoints
-);
+@@clientLocation(RecoveryPointsExtendedInfo.getRPExtendedInfo, RecoveryPoints);
 @@clientLocation(
   RecoveryPointsExtendedInfo.getRPExtendedInfoOperationResult,
   RecoveryPoints
