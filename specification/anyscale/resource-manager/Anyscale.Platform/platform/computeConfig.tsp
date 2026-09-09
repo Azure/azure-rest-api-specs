@@ -14,6 +14,7 @@ namespace Anyscale.Platform;
 
 @parentResource(Cloud)
 @resource("computeConfigs")
+/** A compute configuration for launching Anyscale clusters. */
 model ComputeConfig is ProxyResource<ComputeConfigProperties> {
   /** The name of the compute config. */
   @pattern("^[a-zA-Z0-9_-]+$")
@@ -203,8 +204,11 @@ model WorkerNode extends NodeType {
 
 @armResourceOperations
 interface ComputeConfigs {
+  /** Gets a compute config. */
   get is ArmResourceRead<ComputeConfig>;
+  /** Creates or updates a compute config. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ComputeConfig>;
+  /** Updates a compute config. */
   update is ArmCustomPatchSync<
     ComputeConfig,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -212,9 +216,11 @@ interface ComputeConfigs {
       ComputeConfigProperties
     >
   >;
+  /** Deletes a compute config. */
   delete is ArmResourceDeleteWithoutOkAsync<
     ComputeConfig,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
+  /** Lists compute configs in a cloud. */
   listByResourceGroup is ArmResourceListByParent<ComputeConfig>;
 }

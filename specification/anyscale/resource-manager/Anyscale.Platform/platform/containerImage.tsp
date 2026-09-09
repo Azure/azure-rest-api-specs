@@ -14,6 +14,7 @@ namespace Anyscale.Platform;
 
 @parentResource(Cloud)
 @resource("containerImages")
+/** A container image used by Anyscale workloads. */
 model ContainerImage is ProxyResource<ContainerImageProperties> {
   /** The name of container image. */
   @pattern("^[a-zA-Z0-9_-]+$")
@@ -68,8 +69,11 @@ union ContainerImageBuildState {
 
 @armResourceOperations
 interface ContainerImages {
+  /** Gets a container image. */
   get is ArmResourceRead<ContainerImage>;
+  /** Creates or updates a container image. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ContainerImage>;
+  /** Updates a container image. */
   update is ArmCustomPatchSync<
     ContainerImage,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -77,9 +81,11 @@ interface ContainerImages {
       ContainerImageProperties
     >
   >;
+  /** Deletes a container image. */
   delete is ArmResourceDeleteWithoutOkAsync<
     ContainerImage,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
+  /** Lists container images in a cloud. */
   listByResourceGroup is ArmResourceListByParent<ContainerImage>;
 }

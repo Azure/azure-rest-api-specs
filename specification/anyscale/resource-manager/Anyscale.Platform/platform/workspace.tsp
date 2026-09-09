@@ -15,6 +15,7 @@ namespace Anyscale.Platform;
 
 @parentResource(Project)
 @resource("workspaces")
+/** A workspace for interactive development in an Anyscale project. */
 model Workspace is ProxyResource<WorkspaceProperties> {
   /** The name of the workspace. */
   @pattern("^[a-zA-Z0-9_-]+$")
@@ -71,8 +72,11 @@ union WorkspaceState {
 
 @armResourceOperations
 interface Workspaces {
+  /** Gets a workspace. */
   get is ArmResourceRead<Workspace>;
+  /** Creates or updates a workspace. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Workspace>;
+  /** Updates a workspace. */
   update is ArmCustomPatchSync<
     Workspace,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -80,9 +84,11 @@ interface Workspaces {
       WorkspaceProperties
     >
   >;
+  /** Deletes a workspace. */
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
+  /** Lists workspaces in a project. */
   listByResourceGroup is ArmResourceListByParent<Workspace>;
 }

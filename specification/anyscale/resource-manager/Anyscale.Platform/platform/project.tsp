@@ -15,6 +15,7 @@ namespace Anyscale.Platform;
 
 @parentResource(Cloud)
 @resource("projects")
+/** A project that organizes Anyscale workloads. */
 model Project is ProxyResource<ProjectProperties> {
   /** The name of the project. */
   @pattern("^[a-zA-Z0-9_-]+$")
@@ -38,11 +39,15 @@ model ProjectProperties {
 
 @armResourceOperations
 interface Projects {
+  /** Gets a project. */
   get is ArmResourceRead<Project>;
+  /** Creates or updates a project. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Project>;
+  /** Deletes a project. */
   delete is ArmResourceDeleteWithoutOkAsync<
     Project,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
+  /** Lists projects in a cloud. */
   listByResourceGroup is ArmResourceListByParent<Project>;
 }

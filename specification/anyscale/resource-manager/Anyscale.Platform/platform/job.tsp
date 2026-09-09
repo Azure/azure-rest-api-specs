@@ -15,6 +15,7 @@ namespace Anyscale.Platform;
 
 @parentResource(Project)
 @resource("jobs")
+/** A job that runs a workload in an Anyscale project. */
 model Job is ProxyResource<JobProperties> {
   /** The name of the job. */
   @pattern("^[a-zA-Z0-9_-]+$")
@@ -97,15 +98,20 @@ model JobConfig {
 
 @armResourceOperations
 interface Jobs {
+  /** Gets a job. */
   get is ArmResourceRead<Job>;
+  /** Creates or updates a job. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Job>;
+  /** Updates a job. */
   update is ArmCustomPatchSync<
     Job,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<Job, JobProperties>
   >;
+  /** Deletes a job. */
   delete is ArmResourceDeleteWithoutOkAsync<
     Job,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
+  /** Lists jobs in a project. */
   listByResourceGroup is ArmResourceListByParent<Job>;
 }

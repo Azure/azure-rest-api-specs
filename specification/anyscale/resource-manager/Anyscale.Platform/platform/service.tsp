@@ -16,6 +16,7 @@ namespace Anyscale.Platform;
 /** An Anyscale service that serves Ray Serve applications. */
 @parentResource(Project)
 @resource("services")
+/** A service that serves an application in an Anyscale project. */
 model Service is ProxyResource<ServiceProperties> {
   /** The name of the Anyscale service. */
   @pattern("^[a-zA-Z0-9_-]+$")
@@ -277,8 +278,11 @@ model RayGcsExternalStorageConfig {
 
 @armResourceOperations
 interface Services {
+  /** Gets a service. */
   get is ArmResourceRead<Service>;
+  /** Creates or updates a service. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Service>;
+  /** Updates a service. */
   update is ArmCustomPatchSync<
     Service,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -286,9 +290,11 @@ interface Services {
       ServiceProperties
     >
   >;
+  /** Deletes a service. */
   delete is ArmResourceDeleteWithoutOkAsync<
     Service,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
+  /** Lists services in a project. */
   listByResourceGroup is ArmResourceListByParent<Service>;
 }
