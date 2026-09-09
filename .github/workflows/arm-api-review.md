@@ -144,7 +144,7 @@ checkout: false
 # the copy of this file in Azure/azure-rest-api-specs-pr.
 engine:
   id: copilot
-model: gpt-5.6-sol?effort=high
+model: ${{ env.ARM_API_REVIEWER_MODEL }}
 tools:
   github:
     # Read-only toolsets only; `safe-outputs` below is the ONLY write channel.
@@ -159,6 +159,7 @@ tools:
     # on top of the write-role trigger gate.
     min-integrity: approved
 imports:
+  - shared-github-aw-imports/arm-api-review-model.md
   - ../instructions/arm-api-review.instructions.md
   - ../instructions/openapi-review.instructions.md
   - ../instructions/typespec-project.instructions.md
@@ -203,15 +204,14 @@ safe-outputs:
     max: 3
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
   noop:
-  # Threat detection is a bounded scan of already-completed agent output, not the
-  # review itself, so it is pinned to a smaller model. Pinning it still removes
-  # run-to-run variation; left unset it resolves through the `detection` alias.
-  # `engine.model` is reported as deprecated, but it is the only supported way to
-  # set this: `model` is not a valid field under `threat-detection`.
+  # Threat detection uses the same canonical model as the primary review so all
+  # ARM API Reviewer experiences move together when the shared value changes.
+  # `engine.model` is reported as deprecated, but it is the only supported way
+  # to set this: `model` is not a valid field under `threat-detection`.
   threat-detection:
     engine:
       id: copilot
-      model: claude-sonnet-4.6
+      model: ${{ env.ARM_API_REVIEWER_MODEL }}
   messages:
     footer: "> 🔍 *ARM API review by [{workflow_name}]({run_url})*"
     run-started: "🔍 [{workflow_name}]({run_url}) is reviewing this PR for ARM API compliance…"

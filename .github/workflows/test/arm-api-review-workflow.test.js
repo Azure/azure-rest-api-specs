@@ -11,6 +11,7 @@ const ROOT = join(import.meta.dirname, "..", "..", "..");
 const SOURCE_FILE = ".github/workflows/arm-api-review.md";
 const LOCK_FILE = ".github/workflows/arm-api-review.lock.yml";
 const AGENT_FILE = ".github/agents/arm-api-reviewer.agent.md";
+const MODEL_CONFIG_FILE = ".github/workflows/shared-github-aw-imports/arm-api-review-model.md";
 const TARGET_EXPRESSION =
   "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}";
 let resolverScript = "";
@@ -89,6 +90,18 @@ function parseJsonRecord(content) {
     throw new Error("Expected a JSON object");
   }
   return parsed;
+}
+
+/**
+ * @param {string} content
+ * @returns {string}
+ */
+function parseArmApiReviewerModel(content) {
+  const match = content.match(/^\s*ARM_API_REVIEWER_MODEL:\s*(\S+)\s*$/m);
+  if (!match) {
+    throw new Error(`Expected ARM_API_REVIEWER_MODEL in ${MODEL_CONFIG_FILE}`);
+  }
+  return match[1];
 }
 
 /**
@@ -954,22 +967,35 @@ describe("ARM API review consistency and hardening", () => {
       expect(source).toContain("Both are explicit, recorded human actions");
     }
   });
-  it("pins the model so every run reviews with the same one", async () => {
-    const [source, compiled] = await readWorkflowFiles();
+  it("uses one canonical model value for review and threat detection", async () => {
+    const [[source, compiled], modelConfig] = await Promise.all([
+      readWorkflowFiles(),
+      readFile(join(ROOT, MODEL_CONFIG_FILE), "utf8"),
+    ]);
+    const canonicalModel = parseArmApiReviewerModel(modelConfig);
 
+    expect(modelConfig).toMatch(/^---\n[\s\S]*\n---\s*$/);
     // Left unpinned the model resolves to `... || 'auto'`, which can pick a
     // different model per run, so identical specs could get different feedback.
     // The value has to be one the AWF api-proxy prices: an unpriced model is
     // rejected with a 400 before the agent runs at all, which took down every
     // run when this was briefly pinned to claude-opus-5.
-    expect(source).toMatch(/^model: gpt-5\.6-sol\?effort=high$/m);
+    expect(source).toContain("shared-github-aw-imports/arm-api-review-model.md");
+    expect(source.match(/model: \$\{\{ env\.ARM_API_REVIEWER_MODEL \}\}/g)).toHaveLength(2);
+    expect(source).not.toContain(canonicalModel);
 
-    // The compiled lock must carry literals, not a `vars.` fallback expression.
-    expect(compiled).toContain("COPILOT_MODEL: gpt-5.6-sol?effort=high");
+    // The imported environment value must be present in the compiled workflow,
+    // and both runtime jobs must reference it rather than separate literals.
+    expect(compiled).toContain(`ARM_API_REVIEWER_MODEL: ${canonicalModel}`);
+    expect(compiled.match(/COPILOT_MODEL: \$\{\{ env\.ARM_API_REVIEWER_MODEL \}\}/g)).toHaveLength(
+      2,
+    );
     expect(compiled).not.toContain("COPILOT_MODEL: ${{ vars.GH_AW_MODEL_AGENT_COPILOT");
   });
 
   it("keeps the eval suite on the same model as production", async () => {
+    const modelConfig = await readFile(join(ROOT, MODEL_CONFIG_FILE), "utf8");
+    const canonicalModel = parseArmApiReviewerModel(modelConfig);
     const dir = join(ROOT, ".github/skills/evals/arm-api-reviewer/vally");
     const files = (await readdir(dir)).filter((f) => f.endsWith(".yaml"));
     expect(files.length).toBeGreaterThan(0);
@@ -979,7 +1005,7 @@ describe("ARM API review consistency and hardening", () => {
       // The agent under test must match the production model, or eval results
       // describe a model that never reviews a real PR. Anchored to the line
       // start because plain `model:` also matches `judge_model:`.
-      expect(text, `${file} agent model`).toMatch(/^\s*model: gpt-5\.6-sol\?effort=high$/m);
+      expect(text, `${file} agent model`).toContain(`model: ${canonicalModel}`);
       // The judge is a separate role and deliberately stays cheaper.
       expect(text, `${file} judge model`).toContain("judge_model: claude-sonnet-4.6");
     }
