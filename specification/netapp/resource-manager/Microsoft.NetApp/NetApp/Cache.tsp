@@ -275,6 +275,7 @@ model PeeringPassphrases {
   /**
    * The cluster peering passphrase.
    */
+  @secret
   clusterPeeringPassphrase: string;
 
   /**

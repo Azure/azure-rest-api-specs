@@ -292,9 +292,8 @@ union ElasticKeySource {
 /**
  * Gets the status of the VolumeQuotaRule at the time the operation was called.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union NetAppProvisioningState {
-  string,
+  Azure.ResourceManager.ResourceProvisioningState,
 
   /**
    * Resource has been Accepted
@@ -326,16 +325,6 @@ union NetAppProvisioningState {
    * Resource is being Moved
    */
   Moving: "Moving",
-
-  /**
-   * Resource has Failed
-   */
-  Failed: "Failed",
-
-  /**
-   * Resource has Succeeded
-   */
-  Succeeded: "Succeeded",
 }
 
 /**
