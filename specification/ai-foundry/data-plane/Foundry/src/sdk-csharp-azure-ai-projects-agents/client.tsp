@@ -252,6 +252,11 @@ namespace Azure.AI.Projects {
     "csharp"
   );
   @@clientName(
+    BrowserAutomationTool.browser_automation,
+    "ToolParameters",
+    "csharp"
+  );
+  @@clientName(
     BrowserAutomationToolParameters.connection,
     "ToolConnectionParameters",
     "csharp"

@@ -79,6 +79,7 @@ alias ToolboxOpenApiToolType = "openapi";
 alias ToolboxA2AToolType = "a2a";
 alias ToolboxA2APreviewToolType = "a2a_preview";
 alias ToolboxBrowserAutomationPreviewToolType = "browser_automation_preview";
+alias ToolboxBrowserAutomationToolType = "browser_automation";
 alias ToolboxReminderPreviewToolType = "reminder_preview";
 alias ToolboxWorkIQPreviewToolType = "work_iq_preview";
 alias ToolboxFabricIQPreviewToolType = "fabric_iq_preview";
@@ -106,6 +107,7 @@ union ToolboxToolType {
   a2a: ToolboxA2AToolType,
   shell: ToolboxShellToolType,
   web_iq_preview: ToolboxWebIQPreviewToolType,
+  browser_automation: ToolboxBrowserAutomationToolType,
 }
 
 /**
@@ -276,6 +278,14 @@ model A2APreviewToolboxTool extends ToolboxTool {
 model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
   type: ToolboxBrowserAutomationPreviewToolType;
   ...ToolFields<BrowserAutomationPreviewTool>;
+}
+
+/**
+ * A browser automation tool stored in a toolbox.
+ */
+model BrowserAutomationToolboxTool extends ToolboxTool {
+  type: ToolboxBrowserAutomationToolType;
+  ...ToolFields<BrowserAutomationTool>;
 }
 
 /**

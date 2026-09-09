@@ -45097,6 +45097,23 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - preview_tool
+    BrowserAutomationTool:
+      type: object
+      required:
+        - type
+        - browser_automation
+      properties:
+        type:
+          type: string
+          enum:
+            - browser_automation
+          description: The object type, which is always 'browser_automation'.
+        browser_automation:
+          $ref: '#/components/schemas/BrowserAutomationToolParameters'
+          description: The Browser Automation Tool parameters.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: The input definition information for a Browser Automation Tool, as used to configure an Agent.
     BrowserAutomationToolCall:
       type: object
       required:
@@ -45159,9 +45176,6 @@ components:
           type: string
           description: The ID of the project connection to your Azure Playwright resource.
       description: Definition of input parameters for the connection used by the Browser Automation Tool.
-      x-ms-foundry-meta:
-        required_previews:
-          - preview_tool
     BrowserAutomationToolParameters:
       type: object
       required:
@@ -45171,9 +45185,22 @@ components:
           $ref: '#/components/schemas/BrowserAutomationToolConnectionParameters'
           description: The project connection parameters associated with the Browser Automation Tool.
       description: Definition of input parameters for the Browser Automation Tool.
-      x-ms-foundry-meta:
-        required_previews:
-          - preview_tool
+    BrowserAutomationToolboxTool:
+      type: object
+      required:
+        - type
+        - browser_automation
+      properties:
+        type:
+          type: string
+          enum:
+            - browser_automation
+        browser_automation:
+          $ref: '#/components/schemas/BrowserAutomationToolParameters'
+          description: The Browser Automation Tool parameters.
+      allOf:
+        - $ref: '#/components/schemas/ToolboxTool'
+      description: A browser automation tool stored in a toolbox.
     CaptureStructuredOutputsTool:
       type: object
       required:
@@ -56858,7 +56885,7 @@ components:
                 contentEncoding: base64
           description: |-
             The image(s) to edit. Must be a supported image file or an array of images.
-              For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, and `gpt-image-2-2026-04-21`), each image should be a `png`, `webp`, or `jpg`
+              For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, and `gpt-image-1.5`), each image should be a `png`, `webp`, or `jpg`
               file less than 50MB. You can provide up to 16 images.
               `chatgpt-image-latest` follows the same input constraints as GPT image models.
               For `dall-e-2`, you can only provide one image, and it should be a square
@@ -56877,27 +56904,24 @@ components:
                 - auto
             - type: 'null'
           description: |-
-            Set the background of the generated image(s). This parameter is only
-              supported for the GPT image models. Must be one of `transparent`, `opaque`,
-              or `auto` (default value). When `auto` is used, the model will automatically
-              determine the best background for the image.
-              Transparent backgrounds are available for supported GPT Image models. For
-              `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When
-              using `transparent`, set the output format to `png` or `webp`.
+            Allows to set transparency for the background of the generated image(s).
+              This parameter is only supported for the GPT image models. Must be one of
+              `transparent`, `opaque` or `auto` (default value). When `auto` is used, the
+              model will automatically determine the best background for the image.
+              If `transparent`, the output format needs to support transparency, so it
+              should be set to either `png` (default value) or `webp`.
         model:
           anyOf:
             - type: string
             - type: string
               enum:
                 - gpt-image-1.5
-                - gpt-image-2
-                - gpt-image-2-2026-04-21
                 - dall-e-2
                 - gpt-image-1
                 - gpt-image-1-mini
                 - chatgpt-image-latest
             - type: 'null'
-          description: The model to use for image generation. One of `dall-e-2` or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, or `chatgpt-image-latest`). Defaults to `gpt-image-1.5`.
+          description: The model to use for image generation. Defaults to `gpt-image-1.5`.
           x-oaiTypeLabel: string
         'n':
           anyOf:
@@ -56989,14 +57013,12 @@ components:
             - type: string
               enum:
                 - gpt-image-1.5
-                - gpt-image-2
-                - gpt-image-2-2026-04-21
                 - dall-e-2
                 - dall-e-3
                 - gpt-image-1
                 - gpt-image-1-mini
             - type: 'null'
-          description: The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.
+          description: The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.
           x-oaiTypeLabel: string
           default: dall-e-2
         'n':
@@ -57094,13 +57116,12 @@ components:
                 - auto
             - type: 'null'
           description: |-
-            Set the background of the generated image(s). This parameter is only
-              supported for the GPT image models. Must be one of `transparent`, `opaque`,
-              or `auto` (default value). When `auto` is used, the model will automatically
-              determine the best background for the image.
-              Transparent backgrounds are available for supported GPT Image models. For
-              `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When
-              using `transparent`, set the output format to `png` or `webp`.
+            Allows to set transparency for the background of the generated image(s).
+              This parameter is only supported for the GPT image models. Must be one of
+              `transparent`, `opaque` or `auto` (default value). When `auto` is used, the
+              model will automatically determine the best background for the image.
+              If `transparent`, the output format needs to support transparency, so it
+              should be set to either `png` (default value) or `webp`.
           default: auto
         style:
           anyOf:
@@ -59025,13 +59046,11 @@ components:
             - type: string
               enum:
                 - gpt-image-1.5
-                - gpt-image-2
-                - gpt-image-2-2026-04-21
                 - gpt-image-1
                 - gpt-image-1-mini
                 - chatgpt-image-latest
             - type: 'null'
-          description: The GPT image model to use for image editing, including `gpt-image-2` and its dated snapshot `gpt-image-2-2026-04-21`.
+          description: The model to use for image editing.
           x-oaiTypeLabel: string
           default: gpt-image-1.5
         images:
@@ -59123,7 +59142,7 @@ components:
                 - opaque
                 - auto
             - type: 'null'
-          description: Set the background of the generated image output. Transparent backgrounds are available for supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When using `transparent`, set the output format to `png` or `webp`.
+          description: Background behavior for generated image output.
           default: auto
         stream:
           anyOf:
@@ -61679,8 +61698,6 @@ components:
                 - gpt-image-1
                 - gpt-image-1-mini
                 - gpt-image-1.5
-                - gpt-image-2
-                - gpt-image-2-2026-04-21
           default: gpt-image-1
         quality:
           type: string
@@ -61734,11 +61751,8 @@ components:
             - opaque
             - auto
           description: |-
-            Set the background of the generated image. One of `transparent`,
-              `opaque`, or `auto`. Transparent backgrounds are available for
-              supported GPT Image models. For `gpt-image-2` and
-              `gpt-image-2-2026-04-21`, this support is in preview. When using
-              `transparent`, set the output format to `png` or `webp`. Default: `auto`.
+            Background type for the generated image. One of `transparent`,
+              `opaque`, or `auto`. Default: `auto`.
           default: auto
         input_fidelity:
           anyOf:
@@ -62465,7 +62479,7 @@ components:
           default: compaction
         encrypted_content:
           type: string
-          maxLength: 20971520
+          maxLength: 10485760
           description: The encrypted content of the compaction summary.
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
@@ -63609,7 +63623,7 @@ components:
           default: compaction
         encrypted_content:
           type: string
-          maxLength: 20971520
+          maxLength: 10485760
           description: The encrypted content of the compaction summary.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
@@ -76950,6 +76964,7 @@ components:
           openapi: '#/components/schemas/OpenApiTool'
           bing_custom_search_preview: '#/components/schemas/BingCustomSearchPreviewTool'
           browser_automation_preview: '#/components/schemas/BrowserAutomationPreviewTool'
+          browser_automation: '#/components/schemas/BrowserAutomationTool'
           azure_function: '#/components/schemas/AzureFunctionTool'
           capture_structured_outputs: '#/components/schemas/CaptureStructuredOutputsTool'
           a2a_preview: '#/components/schemas/A2APreviewTool'
@@ -77358,6 +77373,7 @@ components:
             - azure_ai_search
             - azure_function
             - bing_grounding
+            - browser_automation
             - capture_structured_outputs
             - openapi
     OpenAI.ToolsArray:
@@ -83116,6 +83132,7 @@ components:
           a2a: '#/components/schemas/A2AToolboxTool'
           a2a_preview: '#/components/schemas/A2APreviewToolboxTool'
           browser_automation_preview: '#/components/schemas/BrowserAutomationPreviewToolboxTool'
+          browser_automation: '#/components/schemas/BrowserAutomationToolboxTool'
           reminder_preview: '#/components/schemas/ReminderPreviewToolboxTool'
           work_iq_preview: '#/components/schemas/WorkIQPreviewToolboxTool'
           fabric_iq_preview: '#/components/schemas/FabricIQPreviewToolboxTool'
@@ -83142,6 +83159,7 @@ components:
         - a2a
         - shell
         - web_iq_preview
+        - browser_automation
       description: Supported tool types for tools stored in a toolbox.
     ToolboxVersionObject:
       type: object
