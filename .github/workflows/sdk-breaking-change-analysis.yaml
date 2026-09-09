@@ -415,24 +415,27 @@ jobs:
                       return `- [ ] ${text}`;
                     })
                   : ["- [x] No SDK breaking changes detected."];
-                return [
+                const projectReport = [
                   `**Typespec Project:** ${project.typespecProjectPath}`,
                   "",
                   `**SDK Package:** ${project.packageName}`,
                   "",
                   ...checkboxes,
                 ];
+                if (process.env.ARTIFACT_URL) {
+                  projectReport.push(
+                    "",
+                    `[SDK breaking change details (${project.resultsPath}/breaking-changes.json)](${process.env.ARTIFACT_URL})`,
+                  );
+                }
+                return projectReport;
               }),
             );
 
-            if (!process.env.ARTIFACT_URL) {
-              throw new Error("SDK breaking-change result artifact URL was not produced.");
-            }
             const report = [
               `## SDK Breaking changes for ${process.env.SDK_LANGUAGE}`,
               "",
               ...projectReports.flatMap((projectReport) => [...projectReport, ""]),
-              `[SDK breaking change details](${process.env.ARTIFACT_URL})`,
             ].join("\n");
 
             if (process.env.TRIGGER_NAME === "issue_comment") {
