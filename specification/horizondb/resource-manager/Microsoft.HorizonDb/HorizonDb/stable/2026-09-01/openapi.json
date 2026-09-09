@@ -517,18 +517,6 @@
           "Create or update a HorizonDB cluster": {
             "$ref": "./examples/Clusters_CreateOrUpdate.json"
           },
-          "Reject Create mode with restore properties": {
-            "$ref": "./examples/Clusters_CreateOrUpdateInvalidCreateWithRestoreProperties.json"
-          },
-          "Reject PostgreSQL 18 in the GA API version": {
-            "$ref": "./examples/Clusters_CreateOrUpdateChangePostgreSqlVersion.json"
-          },
-          "Reject cross-region point-in-time restore until it is supported": {
-            "$ref": "./examples/Clusters_CreateOrUpdateCrossRegionPointInTimeRestore.json"
-          },
-          "Reject point-in-time restore without a creation source": {
-            "$ref": "./examples/Clusters_CreateOrUpdateInvalidPointInTimeRestoreMissingSource.json"
-          },
           "Restore a HorizonDB cluster to a point in time": {
             "$ref": "./examples/Clusters_CreateOrUpdatePointInTimeRestore.json"
           }
@@ -961,33 +949,6 @@
           },
           "Enable password authentication, rename the administrator, and reset its password": {
             "$ref": "./examples/PasswordAuthentications_RenameAndResetPasswordAndEnable.json"
-          },
-          "Reject administrator creation when the requested role exists outside the special group": {
-            "$ref": "./examples/PasswordAuthentications_CreateAdministratorLoginConflict.json"
-          },
-          "Reject administrator rename while password authentication is disabled": {
-            "$ref": "./examples/PasswordAuthentications_RenameAdministratorWhileDisabled.json"
-          },
-          "Reject an administrator login that already exists outside the special role": {
-            "$ref": "./examples/PasswordAuthentications_AdministratorLoginConflict.json"
-          },
-          "Reject combined administrator update while password authentication is disabled": {
-            "$ref": "./examples/PasswordAuthentications_RenameAndResetWhileDisabled.json"
-          },
-          "Reject credentials while disabling password authentication": {
-            "$ref": "./examples/PasswordAuthentications_DisabledWithCredentials.json"
-          },
-          "Reject password reset when the AzureSU-owned special group has no member": {
-            "$ref": "./examples/PasswordAuthentications_ResetPasswordAdministratorNotFound.json"
-          },
-          "Reject password reset while password authentication is disabled": {
-            "$ref": "./examples/PasswordAuthentications_ResetPasswordWhileDisabled.json"
-          },
-          "Reject password update when the special role has multiple members": {
-            "$ref": "./examples/PasswordAuthentications_InvalidGroupMembership.json"
-          },
-          "Reject rename when the special administrator role has no member": {
-            "$ref": "./examples/PasswordAuthentications_AdministratorNotFound.json"
           },
           "Rename a differently named PostgreSQL administrator role and reset its password": {
             "$ref": "./examples/PasswordAuthentications_RenameAndResetPassword.json"
