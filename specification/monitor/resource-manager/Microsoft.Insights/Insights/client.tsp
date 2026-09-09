@@ -1014,9 +1014,21 @@ namespace Microsoft.InsightsCombinedClient;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ActionGroupsApi.AzureFunctionReceiver.httpTriggerUrl, url, "csharp");
-@@alternateType(ActionGroupsApi.EventHubReceiver.tenantId, Azure.Core.uuid, "csharp");
-@@alternateType(ActionGroupsApi.ItsmReceiver.region, Azure.Core.azureLocation, "csharp");
+@@alternateType(
+  ActionGroupsApi.AzureFunctionReceiver.httpTriggerUrl,
+  url,
+  "csharp"
+);
+@@alternateType(
+  ActionGroupsApi.EventHubReceiver.tenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  ActionGroupsApi.ItsmReceiver.region,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@alternateType(ActionGroupsApi.LogicAppReceiver.callbackUrl, url, "csharp");
 @@alternateType(
   ActionGroupsApi.LogicAppReceiver.resourceId,
@@ -1025,7 +1037,11 @@ namespace Microsoft.InsightsCombinedClient;
 );
 @@alternateType(ActionGroupsApi.WebhookReceiver.identifierUri, url, "csharp");
 @@alternateType(ActionGroupsApi.WebhookReceiver.serviceUri, url, "csharp");
-@@alternateType(ActionGroupsApi.WebhookReceiver.tenantId, Azure.Core.uuid, "csharp");
+@@alternateType(
+  ActionGroupsApi.WebhookReceiver.tenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
 
 // These models collide by name across TenantActionGroups and ActionGroupsApi,
 // but their shapes differ, so they must remain separate models. Rename the
