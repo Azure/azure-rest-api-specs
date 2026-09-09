@@ -126,7 +126,7 @@ interface Groups {
       GroupProperties
     >
   >;
-  delete is ArmResourceDeleteWithoutOkAsync<Group>;
+  delete is ArmResourceDeleteSync<Group>;
   listByNamespace is ArmResourceListByParent<Group>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
