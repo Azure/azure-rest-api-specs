@@ -7171,6 +7171,13 @@
             "description": "The name of the VM scale set.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation. Allowed value is 'properties/state eq 'Active''.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -7190,6 +7197,9 @@
         "x-ms-examples": {
           "Gets a list of all lifecycle hook events in a virtual machine scale set.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_List.json"
+          },
+          "Gets a list of the active lifecycle hook events in a virtual machine scale set.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_List_ActiveOnly.json"
           }
         },
         "x-ms-pageable": {
