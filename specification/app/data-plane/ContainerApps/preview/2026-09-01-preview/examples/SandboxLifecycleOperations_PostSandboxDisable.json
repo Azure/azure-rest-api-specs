@@ -1,0 +1,681 @@
+{
+  "title": "Post Sandbox Disable example",
+  "operationId": "SandboxLifecycleOperations_PostSandboxDisable",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "example-resource-01",
+        "labels": {
+          "exampleKey": "example-example-value"
+        },
+        "entrypoint": [
+          "example-entrypoint"
+        ],
+        "cmd": [
+          "example-cmd"
+        ],
+        "sourcesRef": {
+          "diskImage": {
+            "id": "example-resource-01",
+            "name": "example-resource",
+            "isPublic": true
+          },
+          "snapshot": {
+            "id": "example-resource-01"
+          },
+          "pod": {
+            "containers": [
+              {
+                "name": "example-resource",
+                "diskImage": {
+                  "id": "example-resource-01",
+                  "name": "example-resource",
+                  "isPublic": true
+                },
+                "artifactVersion": {
+                  "id": "example-resource-01",
+                  "auth": {
+                    "identity": "example-identity"
+                  }
+                },
+                "command": [
+                  "echo ready"
+                ],
+                "args": [
+                  "example-arg"
+                ],
+                "env": {
+                  "exampleKey": "example-example-value"
+                },
+                "resources": {
+                  "cpu": "example-cpu",
+                  "memory": "example-memory",
+                  "disk": "example-disk"
+                },
+                "volumeMounts": [
+                  {
+                    "name": "example-resource",
+                    "mountPath": "/workspace/example.txt",
+                    "readOnly": true
+                  }
+                ],
+                "contentPackageDownloads": [
+                  {
+                    "contentPackageId": "example-content-package-01",
+                    "targetPath": "/workspace/example.txt",
+                    "action": "Download"
+                  }
+                ],
+                "securityContext": {
+                  "runAsUser": 1,
+                  "runAsGroup": 1,
+                  "runAsNonRoot": true,
+                  "privileged": true,
+                  "capabilities": {
+                    "add": [
+                      "example-add"
+                    ],
+                    "drop": [
+                      "example-drop"
+                    ]
+                  },
+                  "allowPrivilegeEscalation": true,
+                  "readOnlyRootFilesystem": true,
+                  "seccompProfile": {
+                    "type": "RuntimeDefault"
+                  }
+                },
+                "startupProbe": {
+                  "httpGet": {
+                    "port": 1,
+                    "path": "/workspace/example.txt",
+                    "host": "example-host",
+                    "scheme": "example-scheme",
+                    "httpHeaders": [
+                      {
+                        "name": "example-resource",
+                        "value": "example-value"
+                      }
+                    ]
+                  },
+                  "exec": {
+                    "command": [
+                      "echo ready"
+                    ]
+                  },
+                  "tcpSocket": {
+                    "port": 1,
+                    "host": "example-host"
+                  },
+                  "initialDelaySeconds": 1,
+                  "periodSeconds": 1,
+                  "timeoutSeconds": 1,
+                  "failureThreshold": 1,
+                  "successThreshold": 1,
+                  "terminationGracePeriodSeconds": 1
+                },
+                "livenessProbe": {
+                  "httpGet": {
+                    "port": 1,
+                    "path": "/workspace/example.txt",
+                    "host": "example-host",
+                    "scheme": "example-scheme",
+                    "httpHeaders": [
+                      {
+                        "name": "example-resource",
+                        "value": "example-value"
+                      }
+                    ]
+                  },
+                  "exec": {
+                    "command": [
+                      "echo ready"
+                    ]
+                  },
+                  "tcpSocket": {
+                    "port": 1,
+                    "host": "example-host"
+                  },
+                  "initialDelaySeconds": 1,
+                  "periodSeconds": 1,
+                  "timeoutSeconds": 1,
+                  "failureThreshold": 1,
+                  "successThreshold": 1,
+                  "terminationGracePeriodSeconds": 1
+                },
+                "readinessProbe": {
+                  "httpGet": {
+                    "port": 1,
+                    "path": "/workspace/example.txt",
+                    "host": "example-host",
+                    "scheme": "example-scheme",
+                    "httpHeaders": [
+                      {
+                        "name": "example-resource",
+                        "value": "example-value"
+                      }
+                    ]
+                  },
+                  "exec": {
+                    "command": [
+                      "echo ready"
+                    ]
+                  },
+                  "tcpSocket": {
+                    "port": 1,
+                    "host": "example-host"
+                  },
+                  "initialDelaySeconds": 1,
+                  "periodSeconds": 1,
+                  "timeoutSeconds": 1,
+                  "failureThreshold": 1,
+                  "successThreshold": 1,
+                  "terminationGracePeriodSeconds": 1
+                }
+              }
+            ],
+            "volumes": [
+              "example-volume"
+            ],
+            "contentPackages": [
+              {
+                "contentPackageId": "example-content-package-01"
+              }
+            ],
+            "securityContext": {
+              "runAsUser": 1,
+              "runAsGroup": 1,
+              "runAsNonRoot": true,
+              "supplementalGroups": [
+                1
+              ],
+              "fsGroup": 1,
+              "fsGroupChangePolicy": "OnRootMismatch"
+            },
+            "restartPolicy": "Always"
+          },
+          "artifactVersion": {
+            "id": "example-resource-01",
+            "auth": {
+              "identity": "example-identity"
+            }
+          }
+        },
+        "resources": {
+          "cpu": "example-cpu",
+          "memory": "example-memory",
+          "disk": "example-disk"
+        },
+        "createdAt": "2026-08-15T10:00:00Z",
+        "state": "Running",
+        "stateDetails": {
+          "stoppedReason": "Idle",
+          "stoppedAt": "2026-08-15T10:00:00Z"
+        },
+        "snapshotId": "example-snapshot-01",
+        "coldStorageSizeInMB": "example-cold-storage-size-in-mb",
+        "ports": [
+          {
+            "name": "example-resource",
+            "port": 1,
+            "url": "https://example.com/resource",
+            "auth": {
+              "anonymous": true,
+              "github": {
+                "enabled": true,
+                "emails": [
+                  "user@example.com"
+                ],
+                "emailSuffixes": [
+                  "user@example.com"
+                ],
+                "usernames": [
+                  "example-user"
+                ],
+                "usernameSuffixes": [
+                  "example-username-suffixe"
+                ]
+              },
+              "entraId": {
+                "enabled": true,
+                "emails": [
+                  "user@example.com"
+                ],
+                "emailSuffixes": [
+                  "user@example.com"
+                ],
+                "objectIds": [
+                  "example-object-01"
+                ],
+                "tenantIds": [
+                  "example-tenant-01"
+                ]
+              }
+            },
+            "activationMode": "Manual",
+            "protocol": "Http",
+            "ipAccessControl": {
+              "defaultAction": "Allow",
+              "rules": [
+                {
+                  "name": "example-resource",
+                  "action": "Allow",
+                  "priority": 0,
+                  "sourceCidrs": [
+                    "example-source-cidr"
+                  ]
+                }
+              ]
+            },
+            "cors": {
+              "allowOrigins": [
+                "example-allow-origin"
+              ],
+              "allowMethods": [
+                "example-allow-method"
+              ],
+              "allowHeaders": [
+                "example-allow-header"
+              ],
+              "allowCredentials": true,
+              "maxAge": 1
+            }
+          }
+        ],
+        "connections": [
+          "example-connection"
+        ],
+        "gatewayConnections": [
+          {
+            "resourceId": "example-resource-01",
+            "name": "example-resource",
+            "mcpRuntimeUrl": "https://example.com/resource",
+            "connectionRuntimeUrl": "https://example.com/resource",
+            "authentication": {
+              "identity": {
+                "type": "SystemAssigned",
+                "identityResourceId": "example-identity-resource-01"
+              }
+            }
+          }
+        ],
+        "credentialRefs": [
+          "example-credential-ref"
+        ],
+        "egressPolicy": {
+          "http": {
+            "defaultAction": "Allow",
+            "hostRules": [
+              {
+                "pattern": "example-pattern",
+                "action": "Allow"
+              }
+            ],
+            "rules": [
+              {
+                "name": "example-resource",
+                "match": {
+                  "host": "example-host",
+                  "path": "/workspace/example.txt",
+                  "methods": [
+                    "example-method"
+                  ],
+                  "scheme": "http",
+                  "normalizePath": true
+                },
+                "action": {
+                  "type": "Allow",
+                  "headers": [
+                    {
+                      "operation": "Set",
+                      "name": "example-resource",
+                      "value": "example-value",
+                      "valueRef": {
+                        "secretRef": {
+                          "secretId": "example-secret-01",
+                          "secretKey": "<redacted>",
+                          "format": "example-format"
+                        },
+                        "managedIdentityRef": {
+                          "resource": "example-resource",
+                          "format": "example-format",
+                          "type": "SystemAssigned",
+                          "identityResourceId": "example-identity-resource-01"
+                        }
+                      }
+                    }
+                  ],
+                  "scheme": "example-scheme",
+                  "host": "example-host",
+                  "path": "/workspace/example.txt",
+                  "routingMode": "Default",
+                  "forward": "default",
+                  "forwardProxy": {
+                    "url": "https://example.com/resource",
+                    "ca": "example-ca"
+                  }
+                },
+                "proxyActions": [
+                  "example-proxy-action"
+                ],
+                "source": "example-source",
+                "hookRef": {
+                  "endpoint": "example-endpoint",
+                  "failBehavior": "Deny",
+                  "requestHeaders": [
+                    "example-request-header"
+                  ],
+                  "authHeaders": [
+                    {
+                      "operation": "Set",
+                      "name": "example-resource",
+                      "value": "example-value",
+                      "valueRef": {
+                        "secretRef": {
+                          "secretId": "example-secret-01",
+                          "secretKey": "<redacted>",
+                          "format": "example-format"
+                        },
+                        "managedIdentityRef": {
+                          "resource": "example-resource",
+                          "format": "example-format",
+                          "type": "SystemAssigned",
+                          "identityResourceId": "example-identity-resource-01"
+                        }
+                      }
+                    }
+                  ],
+                  "timeoutMs": 1,
+                  "routingMode": "Default"
+                }
+              }
+            ],
+            "trafficInspection": "Legacy",
+            "enforcementMode": "Enforced",
+            "defaultForward": {
+              "url": "https://example.com/resource",
+              "ca": "example-ca"
+            }
+          },
+          "defaultAction": "Allow",
+          "hostRules": [
+            {
+              "pattern": "example-pattern",
+              "action": "Allow"
+            }
+          ],
+          "rules": [
+            {
+              "name": "example-resource",
+              "match": {
+                "host": "example-host",
+                "path": "/workspace/example.txt",
+                "methods": [
+                  "example-method"
+                ],
+                "scheme": "http",
+                "normalizePath": true
+              },
+              "action": {
+                "type": "Allow",
+                "headers": [
+                  {
+                    "operation": "Set",
+                    "name": "example-resource",
+                    "value": "example-value",
+                    "valueRef": {
+                      "secretRef": {
+                        "secretId": "example-secret-01",
+                        "secretKey": "<redacted>",
+                        "format": "example-format"
+                      },
+                      "managedIdentityRef": {
+                        "resource": "example-resource",
+                        "format": "example-format",
+                        "type": "SystemAssigned",
+                        "identityResourceId": "example-identity-resource-01"
+                      }
+                    }
+                  }
+                ],
+                "scheme": "example-scheme",
+                "host": "example-host",
+                "path": "/workspace/example.txt",
+                "routingMode": "Default",
+                "forward": "default",
+                "forwardProxy": {
+                  "url": "https://example.com/resource",
+                  "ca": "example-ca"
+                }
+              },
+              "proxyActions": [
+                "example-proxy-action"
+              ],
+              "source": "example-source",
+              "hookRef": {
+                "endpoint": "example-endpoint",
+                "failBehavior": "Deny",
+                "requestHeaders": [
+                  "example-request-header"
+                ],
+                "authHeaders": [
+                  {
+                    "operation": "Set",
+                    "name": "example-resource",
+                    "value": "example-value",
+                    "valueRef": {
+                      "secretRef": {
+                        "secretId": "example-secret-01",
+                        "secretKey": "<redacted>",
+                        "format": "example-format"
+                      },
+                      "managedIdentityRef": {
+                        "resource": "example-resource",
+                        "format": "example-format",
+                        "type": "SystemAssigned",
+                        "identityResourceId": "example-identity-resource-01"
+                      }
+                    }
+                  }
+                ],
+                "timeoutMs": 1,
+                "routingMode": "Default"
+              }
+            }
+          ],
+          "tds": {
+            "defaultAction": "Allow",
+            "credentials": [
+              {
+                "name": "example-resource",
+                "kind": "SqlPassword",
+                "username": "example-user",
+                "secretRef": {
+                  "secretId": "example-secret-01",
+                  "secretKey": "<redacted>",
+                  "format": "example-format"
+                },
+                "secret": "<redacted>"
+              }
+            ],
+            "rules": [
+              {
+                "name": "example-resource",
+                "match": {
+                  "host": "example-host",
+                  "databases": [
+                    "example-database"
+                  ]
+                },
+                "action": {
+                  "type": "Allow",
+                  "credential": "example-credential"
+                },
+                "hookRef": {
+                  "endpoint": "example-endpoint",
+                  "failBehavior": "Deny",
+                  "requestHeaders": [
+                    "example-request-header"
+                  ],
+                  "authHeaders": [
+                    {
+                      "operation": "Set",
+                      "name": "example-resource",
+                      "value": "example-value",
+                      "valueRef": {
+                        "secretRef": {
+                          "secretId": "example-secret-01",
+                          "secretKey": "<redacted>",
+                          "format": "example-format"
+                        },
+                        "managedIdentityRef": {
+                          "resource": "example-resource",
+                          "format": "example-format",
+                          "type": "SystemAssigned",
+                          "identityResourceId": "example-identity-resource-01"
+                        }
+                      }
+                    }
+                  ],
+                  "timeoutMs": 1,
+                  "routingMode": "Default"
+                }
+              }
+            ]
+          },
+          "transportRules": {
+            "defaultAction": "Allow",
+            "rules": [
+              {
+                "action": "Allow",
+                "protocol": "Tcp",
+                "destination": "example-destination",
+                "port": 1
+              }
+            ]
+          },
+          "trafficInspection": "Legacy",
+          "enforcementMode": "Enforced",
+          "validationWarnings": [
+            {
+              "code": "example-code",
+              "message": "example-message"
+            }
+          ]
+        },
+        "sandboxGroupId": "example-sandbox-group-01",
+        "region": "example-region",
+        "lifecycle": {
+          "autoSuspendPolicy": {
+            "enabled": true,
+            "interval": 1,
+            "mode": "Memory"
+          },
+          "autoDeletePolicy": {
+            "enabled": true,
+            "deleteIntervalInDays": 1,
+            "deleteIntervalInSeconds": 1,
+            "trigger": "AfterSuspend"
+          }
+        },
+        "appUrl": "https://example.com/resource",
+        "managementUrl": "https://example.com/resource",
+        "agentIdentity": {
+          "tenantId": "example-tenant-01",
+          "agentId": "example-agent-01"
+        },
+        "volumes": [
+          {
+            "volumeName": "example-volume",
+            "mountpoint": "example-mountpoint",
+            "readOnly": true
+          }
+        ],
+        "contentPackageDownloads": [
+          {
+            "contentPackageId": "example-content-package-01",
+            "targetPath": "/workspace/example.txt",
+            "action": "Download"
+          }
+        ],
+        "vnetConnectionName": "example-vnet-connection",
+        "identitySettings": [
+          {
+            "identity": "example-identity",
+            "lifecycle": "None"
+          }
+        ],
+        "outboundIpAddresses": [
+          "example-outbound-ip-addresse"
+        ],
+        "containerStatuses": [
+          {
+            "name": "example-resource",
+            "state": "Unknown",
+            "ready": true,
+            "started": true,
+            "restartCount": 1,
+            "reason": "Completed",
+            "message": "example-message",
+            "lastExitCode": 1,
+            "lastStartedAt": "2026-08-15T10:00:00Z",
+            "lastFinishedAt": "2026-08-15T10:00:00Z",
+            "probes": {
+              "exampleKey": {
+                "lastResult": "Success",
+                "consecutiveFailures": 1,
+                "consecutiveSuccesses": 1,
+                "lastCheckedAt": "2026-08-15T10:00:00Z",
+                "lastTransitionAt": "2026-08-15T10:00:00Z",
+                "message": "example-message"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "500": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    }
+  }
+}

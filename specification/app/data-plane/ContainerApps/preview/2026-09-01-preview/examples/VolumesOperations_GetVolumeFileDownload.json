@@ -1,0 +1,69 @@
+{
+  "title": "Get Volume File Download example",
+  "operationId": "VolumesOperations_GetVolumeFileDownload",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "volumeName": "example-volume",
+    "path": "/workspace/example.txt"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "fileStream": "SGVsbG8=",
+        "contentType": "example",
+        "fileDownloadName": "example-file-download",
+        "lastModified": "2026-08-15T10:00:00Z",
+        "entityTag": {
+          "tag": {
+            "buffer": "example-buffer",
+            "offset": 1,
+            "length": 1,
+            "value": "example-value",
+            "hasValue": true
+          },
+          "isWeak": true
+        },
+        "enableRangeProcessing": true
+      }
+    },
+    "400": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "500": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    }
+  }
+}

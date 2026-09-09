@@ -1,0 +1,93 @@
+{
+  "title": "Get Sandbox Stats example",
+  "operationId": "SandboxLifecycleOperations_GetSandboxStats",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "tokenUsage": {
+          "totalInputTokens": 1,
+          "totalOutputTokens": 1,
+          "requestCount": 1
+        },
+        "cpu": {
+          "user": 1,
+          "nice": 1,
+          "system": 1,
+          "idle": 1,
+          "iowait": 1,
+          "irq": 1,
+          "softirq": 1,
+          "steal": 1,
+          "loadAvg1": 1,
+          "loadAvg5": 1,
+          "loadAvg15": 1
+        },
+        "memory": {
+          "totalBytes": 1,
+          "availableBytes": 1,
+          "usedBytes": 1
+        },
+        "network": {
+          "rxBytes": 1,
+          "txBytes": 1,
+          "rxPackets": 1,
+          "txPackets": 1
+        },
+        "disk": [
+          {
+            "mountPoint": "example-mount-point",
+            "filesystem": "example-filesystem",
+            "totalBytes": 1,
+            "usedBytes": 1,
+            "availableBytes": 1,
+            "label": "example-label"
+          }
+        ],
+        "uptimeSecs": 1
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "500": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    }
+  }
+}
