@@ -13,9 +13,9 @@ using TypeSpec.Versioning;
 
 namespace Anyscale.Platform;
 
+/** A workspace for interactive development in an Anyscale project. */
 @parentResource(Project)
 @resource("workspaces")
-/** A workspace for interactive development in an Anyscale project. */
 model Workspace is ProxyResource<WorkspaceProperties> {
   /** The name of the workspace. */
   @pattern("^[a-zA-Z0-9_-]+$")

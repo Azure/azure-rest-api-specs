@@ -12,9 +12,9 @@ using TypeSpec.Versioning;
 
 namespace Anyscale.Platform;
 
+/** A container image used by Anyscale workloads. */
 @parentResource(Cloud)
 @resource("containerImages")
-/** A container image used by Anyscale workloads. */
 model ContainerImage is ProxyResource<ContainerImageProperties> {
   /** The name of container image. */
   @pattern("^[a-zA-Z0-9_-]+$")

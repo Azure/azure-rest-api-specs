@@ -13,9 +13,9 @@ using TypeSpec.Versioning;
 
 namespace Anyscale.Platform;
 
+/** A job that runs a workload in an Anyscale project. */
 @parentResource(Project)
 @resource("jobs")
-/** A job that runs a workload in an Anyscale project. */
 model Job is ProxyResource<JobProperties> {
   /** The name of the job. */
   @pattern("^[a-zA-Z0-9_-]+$")

@@ -16,7 +16,6 @@ namespace Anyscale.Platform;
 /** An Anyscale service that serves Ray Serve applications. */
 @parentResource(Project)
 @resource("services")
-/** A service that serves an application in an Anyscale project. */
 model Service is ProxyResource<ServiceProperties> {
   /** The name of the Anyscale service. */
   @pattern("^[a-zA-Z0-9_-]+$")

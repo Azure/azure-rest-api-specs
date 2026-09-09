@@ -13,9 +13,9 @@ using TypeSpec.Versioning;
 
 namespace Anyscale.Platform;
 
+/** A project that organizes Anyscale workloads. */
 @parentResource(Cloud)
 @resource("projects")
-/** A project that organizes Anyscale workloads. */
 model Project is ProxyResource<ProjectProperties> {
   /** The name of the project. */
   @pattern("^[a-zA-Z0-9_-]+$")

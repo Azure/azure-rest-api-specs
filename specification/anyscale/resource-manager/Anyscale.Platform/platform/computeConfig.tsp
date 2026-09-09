@@ -12,9 +12,9 @@ using TypeSpec.Versioning;
 
 namespace Anyscale.Platform;
 
+/** A compute configuration for launching Anyscale clusters. */
 @parentResource(Cloud)
 @resource("computeConfigs")
-/** A compute configuration for launching Anyscale clusters. */
 model ComputeConfig is ProxyResource<ComputeConfigProperties> {
   /** The name of the compute config. */
   @pattern("^[a-zA-Z0-9_-]+$")
