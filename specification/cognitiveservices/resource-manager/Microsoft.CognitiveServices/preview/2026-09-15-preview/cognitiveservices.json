@@ -2166,7 +2166,84 @@
             "description": "The Arc deployment properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ArcDeployment"
+              "type": "object",
+              "properties": {
+                "properties": {
+                  "type": "object",
+                  "description": "Properties used to create or replace an Arc deployment.",
+                  "properties": {
+                    "model": {
+                      "type": "object",
+                      "description": "Model asset reference. Required on creation and immutable after creation.",
+                      "properties": {
+                        "assetId": {
+                          "type": "string",
+                          "description": "AzureML Registry model asset URI."
+                        }
+                      },
+                      "required": [
+                        "assetId"
+                      ]
+                    },
+                    "extensionId": {
+                      "type": "string",
+                      "format": "arm-id",
+                      "description": "Full Azure resource ID of the Foundry inference extension on the target Arc-enabled Kubernetes cluster. Required on creation and immutable after creation.",
+                      "x-ms-arm-id-details": {
+                        "allowedResources": [
+                          {
+                            "type": "Microsoft.KubernetesConfiguration/extensions"
+                          }
+                        ]
+                      }
+                    },
+                    "deploymentTemplate": {
+                      "type": "string",
+                      "description": "Optional deployment template identifier for advanced vLLM tuning. Allowed only when runtime is vllm.\nExample: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}"
+                    },
+                    "replicas": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Physical replica count on the Arc cluster.",
+                      "minimum": 1,
+                      "maximum": 100
+                    },
+                    "resources": {
+                      "$ref": "#/definitions/ArcDeploymentKubernetesResources",
+                      "description": "Per-replica Kubernetes resource requests and limits."
+                    },
+                    "nodeSelector": {
+                      "type": "object",
+                      "description": "Kubernetes node selector key-value map used to schedule pods onto nodes with matching labels.",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    },
+                    "deploymentState": {
+                      "$ref": "#/definitions/DeploymentState",
+                      "description": "The deployment state."
+                    },
+                    "raiPolicyName": {
+                      "type": "string",
+                      "description": "The name of RAI policy."
+                    }
+                  },
+                  "required": [
+                    "model",
+                    "extensionId",
+                    "replicas",
+                    "resources"
+                  ]
+                },
+                "sku": {
+                  "$ref": "#/definitions/ArcDeploymentSku",
+                  "description": "The Arc deployment SKU. Only the SKU name is required for Arc deployments."
+                }
+              },
+              "required": [
+                "properties",
+                "sku"
+              ]
             }
           }
         ],
@@ -13474,11 +13551,21 @@
         "name": {
           "type": "string",
           "description": "Deployment model name."
+        },
+        "version": {
+          "type": "string",
+          "description": "Deployment model version."
+        },
+        "assetId": {
+          "type": "string",
+          "description": "AzureML Registry model asset URI."
         }
       },
       "required": [
         "format",
-        "name"
+        "name",
+        "version",
+        "assetId"
       ]
     },
     "ArcDeploymentPatchCpuMemoryResourceRequirements": {
