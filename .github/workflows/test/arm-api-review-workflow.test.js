@@ -1520,7 +1520,7 @@ describe("ARM paging and example enum calibration", () => {
     }
   });
 
-  it("keeps the eval catalog counts aligned with 88 scenarios and 57 fixtures", async () => {
+  it("keeps the eval catalog counts aligned with 89 scenarios and 57 fixtures", async () => {
     const evalDir = join(ROOT, ".github/skills/evals/arm-api-reviewer/vally");
     const evalFiles = (await readdir(evalDir)).filter((file) => file.endsWith(".yaml"));
     let stimulusCount = 0;
@@ -1541,11 +1541,11 @@ describe("ARM paging and example enum calibration", () => {
       { recursive: true, withFileTypes: true },
     );
     expect(evalFiles).toHaveLength(18);
-    expect(stimulusCount).toBe(88);
+    expect(stimulusCount).toBe(89);
     expect(
       fixtureEntries.filter((entry) => entry.isFile() && entry.name !== "README.md"),
     ).toHaveLength(57);
-    expect(readme).toContain("Total: 88 stimuli across 18 eval files.");
+    expect(readme).toContain("Total: 89 stimuli across 18 eval files.");
     expect(readme).toContain("All 57 fixture data files");
     expect(readme).toContain("`--timeout <duration>`");
     expect(readme).toContain("`defaults.timeout`");
@@ -1713,6 +1713,48 @@ describe("ARM Reviewer alignment and dependency consistency", () => {
     expect(critic).toContain("**OVERFLOW-NOT-POSTED**");
     expect(workflow).toContain("| `OVERFLOW-NOT-POSTED`");
     expect(workflow).toContain("Append every excluded candidate to the reconciliation plan as an");
+  });
+
+  it("rejects raw OpenAPI extension restoration for TypeSpec-owned output", async () => {
+    const [workflow, reviewer, critic, arm, typespec, skill, extensionGuidance] = await Promise.all(
+      [
+        readFile(join(ROOT, SOURCE_FILE), "utf8"),
+        readFile(join(ROOT, AGENT_FILE), "utf8"),
+        readFile(join(ROOT, ".github/agents/arm-api-review-critic.agent.md"), "utf8"),
+        readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
+        readFile(join(ROOT, ".github/instructions/typespec-review.instructions.md"), "utf8"),
+        readFile(join(ROOT, ".github/skills/azure-api-review/SKILL.md"), "utf8"),
+        readFile(
+          join(ROOT, ".github/skills/azure-api-review/references/typespec-openapi-extensions.md"),
+          "utf8",
+        ),
+      ],
+    );
+    const collapsedExtensionGuidance = collapseWhitespace(extensionGuidance);
+
+    expect(extensionGuidance).toContain("Upstream alignment: 2026-09-09");
+    expect(extensionGuidance).toContain(
+      "The upstream `@azure-tools/typespec-azure-core/no-openapi-client-extensions`",
+    );
+    expect(collapsedExtensionGuidance).toContain(
+      "Examples include removing `x-ms-parameter-grouping`",
+    );
+    expect(collapsedExtensionGuidance).toContain("removing `x-ms-client-request-id: true`");
+    expect(extensionGuidance).toMatch(/\| `x-ms-pageable`\s+\| `@list`/);
+    expect(collapsedExtensionGuidance).toContain("Never recommend `@OpenAPI.extension` as the fix");
+    expect(skill).toContain("[typespec-openapi-extensions.md]");
+    expect(typespec).toContain("TSP-NO-RAW-CLIENT-EXTENSIONS");
+    expect(typespec).toContain(
+      "do not suppress `@azure-tools/typespec-azure-core/no-openapi-client-extensions`",
+    );
+    expect(arm).toContain("Removing legacy `x-ms-parameter-grouping`");
+    expect(reviewer).toContain("Drop extension-only");
+    expect(workflow).toContain("drop extension-only cleanup findings");
+    expect(workflow).toContain(
+      "../skills/azure-api-review/references/typespec-openapi-extensions.md",
+    );
+    expect(critic).toContain("FAIL: rule-misapplied");
+    expect(critic).toContain("FAIL: downstream-ci-conflict");
   });
 
   it("keeps generic OpenAPI guidance subordinate to ARM-specific rules", async () => {

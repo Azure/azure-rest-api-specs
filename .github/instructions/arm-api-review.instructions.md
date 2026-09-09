@@ -3,7 +3,7 @@ applyTo: "specification/**/resource-manager/**/*.json"
 ---
 
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-08-15
+    Upstream alignment: 2026-08-15
      All rules derived from or aligned with:
        - Azure Resource Provider Contract (RPC) v1.0
          https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10
@@ -1093,6 +1093,7 @@ When reviewing resources that support availability zones, verify: `zones` is a t
 - Once an API version is published (merged to `main` in either the public or private spec repo), its schema is **immutable**. No changes -- not even adding an optional property -- are allowed to that version.
 - Any modification to a published API version requires creating a **new api-version** (with a later date). This applies to both GA and preview versions.
 - If a PR modifies a swagger file under a version folder that was already merged to `main`, verify that the PR also introduces a new api-version folder. If it only modifies the existing version, flag it.
+- **TypeSpec-generated metadata guard:** when TypeSpec owns the modified Swagger, do not apply this rule solely because regeneration removes or changes raw `x-ms-*` metadata. First apply [`typespec-openapi-extensions.md`](../skills/azure-api-review/references/typespec-openapi-extensions.md) and compare the semantic TypeSpec model and wire/ARM contract. Removing legacy `x-ms-parameter-grouping` or `x-ms-client-request-id: true` while preserving the same wire parameter is not, by itself, a Section 26.0 violation. For paging, LRO, secret, resource, and other semantics-bearing metadata, require the native TypeSpec construct and verify its generated output. Never recommend restoring `@OpenAPI.extension(...)` or suppressing `no-openapi-client-extensions`.
 
 ### 26.1 Allowed Schema Changes
 
@@ -1306,7 +1307,7 @@ When reviewing ARM resource-manager swagger files, verify:
 
 ### Schema Evolution
 
-- ✅ Published API versions are immutable — no changes (even optional properties) without a new api-version
+- ✅ Published API versions are immutable — no REST or ARM contract changes (even optional properties) without a new api-version; TypeSpec-generated `x-ms-*` diffs are first classified under `typespec-openapi-extensions.md`
 - ✅ No type changes on existing properties between API versions (introduce new property name + deprecate old)
 - ✅ No required properties added to or removed from existing models between API versions
 - ✅ DELETE never fails due to API version mismatch with creation version
