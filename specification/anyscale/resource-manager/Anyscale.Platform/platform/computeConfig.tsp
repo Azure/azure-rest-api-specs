@@ -47,8 +47,12 @@ model ComputeConfigSpecOrReference {
   /** The inlined compute config spec. */
   spec?: ComputeConfigSpec;
 
-  /** The reference to the resource name of existing predefined compute config. */
-  computeConfigName?: string;
+  /** The resource ID of an existing predefined compute config. */
+  computeConfigName?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Anyscale.Platform/clouds/computeConfigs";
+    }
+  ]>;
 }
 
 /** Compute config specifications. */
@@ -60,8 +64,12 @@ model ComputeConfigSpec {
 
 /** One compute config option. */
 model ComputeConfigSpecOption {
-  /** The name of the corresponding cloud resource to use for this compute config under the Anyscale cloud to launch the cluster. If not specified, all cloud resources will be used. */
-  cloudResourceNames?: string[];
+  /** The resource IDs of the cloud resources to use for this compute config under the Anyscale cloud to launch the cluster. If not specified, all cloud resources will be used. */
+  cloudResourceNames?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Anyscale.Platform/clouds/cloudResources";
+    }
+  ]>[];
 
   /** The node type to use for the head node. */
   headNode: NodeType;

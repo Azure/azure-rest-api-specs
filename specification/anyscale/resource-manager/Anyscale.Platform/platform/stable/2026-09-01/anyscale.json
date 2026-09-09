@@ -3443,9 +3443,18 @@
       "properties": {
         "cloudResourceNames": {
           "type": "array",
-          "description": "The name of the corresponding cloud resource to use for this compute config under the Anyscale cloud to launch the cluster. If not specified, all cloud resources will be used.",
+          "description": "The resource IDs of the cloud resources to use for this compute config under the Anyscale cloud to launch the cluster. If not specified, all cloud resources will be used.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Anyscale.Platform/clouds/cloudResources"
+                }
+              ]
+            }
           }
         },
         "headNode": {
@@ -3492,7 +3501,15 @@
         },
         "computeConfigName": {
           "type": "string",
-          "description": "The reference to the resource name of existing predefined compute config."
+          "format": "arm-id",
+          "description": "The resource ID of an existing predefined compute config.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Anyscale.Platform/clouds/computeConfigs"
+              }
+            ]
+          }
         }
       }
     },
