@@ -184,3 +184,9 @@ using Microsoft.ConnectedCache;
   "ShouldVerifySignupCode",
   "csharp"
 );
+
+@@clientName(
+  CustomerEntity.resendSignupCode,
+  "ShouldResendSignupCode",
+  "csharp"
+);
