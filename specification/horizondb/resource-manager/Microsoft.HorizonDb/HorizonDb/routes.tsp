@@ -187,22 +187,6 @@ interface Pools {
   >;
 
   @added(Versions.v2026_09_01)
-  @doc("Stops a running HorizonDB pool without deallocating compute. Power operations are supported only at pool scope in this API version; there is no cluster-level stop action. The operation succeeds as an idempotent no-op when the pool is already Stopped. It is allowed when allocatedNodeCount is 0. The Pool-scoped ReadOnly Endpoint remains discoverable but has no routing destination while the Pool is Stopped. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.")
-  @action("stop")
-  stop is ArmResourceActionAsyncBase<
-    Pool,
-    void,
-    | ArmAcceptedLroResponse<
-        "Resource operation accepted.",
-        LroHeaders = ArmLroLocationHeader &
-          ArmAsyncOperationHeader &
-          Azure.Core.Foundations.RetryAfterHeader
-      >
-    | ArmResponse<Pool>,
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<Pool>
-  >;
-
-  @added(Versions.v2026_09_01)
   @doc("Shuts down a running or stopped HorizonDB pool and deallocates compute. Power operations are supported only at pool scope in this API version; there is no cluster-level shutdown action. The operation succeeds as an idempotent no-op when the pool is already Shutdown. It is allowed when allocatedNodeCount is 0. The Pool-scoped ReadOnly Endpoint remains discoverable but has no routing destination while the Pool is Shutdown. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.")
   @action("shutdown")
   shutdown is ArmResourceActionAsyncBase<
