@@ -58,6 +58,7 @@ model RecoveryResourceProperties {
   inclusionState?: ResourceInclusionState;
 
   @added(Versions.v2026_09_30_preview)
+  @visibility(Lifecycle.Read)
   @doc("Reasons why inclusion of the resource in a recovery plan is disabled.")
   inclusionDisabledReasons?: ResourceInclusionDisabledReason[];
 
