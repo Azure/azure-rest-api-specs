@@ -2660,7 +2660,7 @@ model HostPoolProperties {
    * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   managedPrivateUDP?: ManagedPrivateUDP;
 
   /**
@@ -2668,7 +2668,7 @@ model HostPoolProperties {
    * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   directUDP?: DirectUDP;
 
   /**
@@ -2676,7 +2676,7 @@ model HostPoolProperties {
    * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   publicUDP?: PublicUDP;
 
   /**
@@ -2684,7 +2684,7 @@ model HostPoolProperties {
    * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   relayUDP?: RelayUDP;
 
   /**
@@ -2713,7 +2713,7 @@ model HostPoolProperties {
    * @Introduced in 2025-09-01-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
 
   /**
