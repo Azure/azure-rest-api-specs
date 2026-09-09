@@ -131,20 +131,18 @@ checkout: false
 # under `models:`; the ordered-alias fallback list is a later draft of the Model
 # Alias Format and is not available at this compiler version. Even where it is
 # available it resolves against the engine catalog only, so it would not catch
-# the failure mode actually seen here: `claude-opus-5` was pinned and was
-# rejected at runtime with a 400 for having no AI-credits pricing, on every run.
+# a model rejected at runtime for having no AI-credits pricing.
 # A pricing rejection cannot fall back at all, by design, since gh-aw ADR-48107
 # rejected default-pricing fallback to keep credit accounting honest. The safety
 # net is therefore procedural: confirm a model completes a real run before
-# pinning it here. `gpt-5.6-sol` is already proven, as the data-plane reviewer
-# runs it in production.
+# changing the canonical model component imported below.
 #
-# Keep this in step with the ARM eval suite under
-# .github/skills/evals/arm-api-reviewer/, which pins the same model, and with
-# the copy of this file in Azure/azure-rest-api-specs-pr.
+# Tests keep the component in step with the ARM eval suite under
+# .github/skills/evals/arm-api-reviewer/. Mirror the workflow assets to
+# Azure/azure-rest-api-specs-pr.
 engine:
   id: copilot
-model: gpt-5.6-sol?effort=high
+model: ${{ env.ARM_API_REVIEWER_MODEL }}
 tools:
   github:
     # Read-only toolsets only; `safe-outputs` below is the ONLY write channel.
@@ -159,6 +157,7 @@ tools:
     # on top of the write-role trigger gate.
     min-integrity: approved
 imports:
+  - shared-github-aw-imports/arm-api-review-model.md
   - ../instructions/arm-api-review.instructions.md
   - ../instructions/openapi-review.instructions.md
   - ../instructions/typespec-project.instructions.md
@@ -203,15 +202,14 @@ safe-outputs:
     max: 3
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
   noop:
-  # Threat detection is a bounded scan of already-completed agent output, not the
-  # review itself, so it is pinned to a smaller model. Pinning it still removes
-  # run-to-run variation; left unset it resolves through the `detection` alias.
+  # Threat detection uses the canonical ARM reviewer model so both jobs use a
+  # model supported by the agentic-workflows integrator and cannot drift.
   # `engine.model` is reported as deprecated, but it is the only supported way to
   # set this: `model` is not a valid field under `threat-detection`.
   threat-detection:
     engine:
       id: copilot
-      model: claude-sonnet-4.6
+      model: ${{ env.ARM_API_REVIEWER_MODEL }}
   messages:
     footer: "> 🔍 *ARM API review by [{workflow_name}]({run_url})*"
     run-started: "🔍 [{workflow_name}]({run_url}) is reviewing this PR for ARM API compliance…"

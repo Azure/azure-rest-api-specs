@@ -10,6 +10,7 @@ import { runInNewContext } from "vm";
 const ROOT = join(import.meta.dirname, "..", "..", "..");
 const SOURCE_FILE = ".github/workflows/arm-api-review.md";
 const LOCK_FILE = ".github/workflows/arm-api-review.lock.yml";
+const MODEL_CONFIG_FILE = ".github/workflows/shared-github-aw-imports/arm-api-review-model.md";
 const AGENT_FILE = ".github/agents/arm-api-reviewer.agent.md";
 const TARGET_EXPRESSION =
   "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}";
@@ -138,6 +139,26 @@ async function readWorkflowFiles() {
     readFile(join(ROOT, SOURCE_FILE), "utf8"),
     readFile(join(ROOT, LOCK_FILE), "utf8"),
   ]);
+}
+
+/**
+ * @returns {Promise<string>}
+ */
+async function readArmApiReviewerModel() {
+  const component = await readFile(join(ROOT, MODEL_CONFIG_FILE), "utf8");
+  const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?$/.exec(component);
+  if (!match) {
+    throw new Error("ARM API reviewer model component frontmatter was not found");
+  }
+
+  const frontmatter = /** @type {{ env?: { ARM_API_REVIEWER_MODEL?: unknown } }} */ (
+    load(match[1])
+  );
+  const model = frontmatter.env?.ARM_API_REVIEWER_MODEL;
+  if (typeof model !== "string" || model.length === 0) {
+    throw new Error("ARM_API_REVIEWER_MODEL was not configured");
+  }
+  return model;
 }
 
 beforeAll(async () => {
@@ -954,34 +975,40 @@ describe("ARM API review consistency and hardening", () => {
       expect(source).toContain("Both are explicit, recorded human actions");
     }
   });
-  it("pins the model so every run reviews with the same one", async () => {
+  it("uses the shared model for the reviewer and threat detection", async () => {
     const [source, compiled] = await readWorkflowFiles();
+    const model = await readArmApiReviewerModel();
+    const modelReference = "${{ env.ARM_API_REVIEWER_MODEL }}";
+    const runtimeReference = `COPILOT_MODEL: ${modelReference}`;
 
     // Left unpinned the model resolves to `... || 'auto'`, which can pick a
     // different model per run, so identical specs could get different feedback.
     // The value has to be one the AWF api-proxy prices: an unpriced model is
     // rejected with a 400 before the agent runs at all, which took down every
     // run when this was briefly pinned to claude-opus-5.
-    expect(source).toMatch(/^model: gpt-5\.6-sol\?effort=high$/m);
+    expect(source).toContain(`- shared-github-aw-imports/arm-api-review-model.md`);
+    expect(source.split(modelReference)).toHaveLength(3);
+    expect(source).not.toContain(model);
 
-    // The compiled lock must carry literals, not a `vars.` fallback expression.
-    expect(compiled).toContain("COPILOT_MODEL: gpt-5.6-sol?effort=high");
+    expect(compiled).toContain(`ARM_API_REVIEWER_MODEL: ${model}`);
+    expect(compiled.split(model)).toHaveLength(2);
+    expect(compiled.split(runtimeReference)).toHaveLength(3);
     expect(compiled).not.toContain("COPILOT_MODEL: ${{ vars.GH_AW_MODEL_AGENT_COPILOT");
   });
 
   it("keeps the eval suite on the same model as production", async () => {
+    const model = await readArmApiReviewerModel();
     const dir = join(ROOT, ".github/skills/evals/arm-api-reviewer/vally");
     const files = (await readdir(dir)).filter((f) => f.endsWith(".yaml"));
     expect(files.length).toBeGreaterThan(0);
 
     for (const file of files) {
-      const text = await readFile(join(dir, file), "utf8");
+      const parsed = /** @type {{ defaults?: { model?: unknown } }} */ (
+        load(await readFile(join(dir, file), "utf8"))
+      );
       // The agent under test must match the production model, or eval results
-      // describe a model that never reviews a real PR. Anchored to the line
-      // start because plain `model:` also matches `judge_model:`.
-      expect(text, `${file} agent model`).toMatch(/^\s*model: gpt-5\.6-sol\?effort=high$/m);
-      // The judge is a separate role and deliberately stays cheaper.
-      expect(text, `${file} judge model`).toContain("judge_model: claude-sonnet-4.6");
+      // describe a model that never reviews a real PR. The judge is separate.
+      expect(parsed.defaults?.model, `${file} agent model`).toBe(model);
     }
   });
   it("routes findings to a drop group by recorded category, not by rule ID", async () => {
