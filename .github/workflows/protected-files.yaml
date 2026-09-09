@@ -45,7 +45,7 @@ jobs:
           . eng/scripts/ChangedFiles-Functions.ps1
 
           # powershell glob syntax
-          $protectedFiles = @(".gitignore", "cspell.json", "cspell.yaml", "package.json", "package-lock.json", ".github/*", ".github/azsdk-common-*", ".vscode/*", "eng/*")
+          $protectedFiles = @(".gitignore", "cspell.json", "cspell.yaml", "package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", ".github/*", ".github/azsdk-common-*", ".vscode/*", "eng/*")
           # regex syntax, for files synced from Azure/azure-sdk-tools
           $azureSdkToolsFiles = @('^\.github/skills/azsdk-common-[^/]+(/.*)?$', '^eng/common(/.*)?$')
           # regex syntax, to support protected paths within larger excluded paths

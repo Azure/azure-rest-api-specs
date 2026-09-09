@@ -92,7 +92,7 @@ jobs:
             echo "Skipping inline suppression annotations for a '${{ github.event.action }}' event that did not change the PR base branch (avoids duplicate annotations)."
           fi
 
-          npm exec --no -- typespec-suppressions \
+          pnpm exec typespec-suppressions \
             --base "${{ github.event.pull_request.base.sha }}" \
             --head HEAD \
             --json-output "typespec-suppressions-report.json" \

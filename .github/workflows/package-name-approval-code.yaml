@@ -34,7 +34,11 @@ jobs:
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Install dependencies in base checkout
-        run: npm install --ignore-scripts
+        # The base checkout is a pnpm workspace, so it must be installed with pnpm:
+        # npm cannot resolve the "catalog:"/"workspace:" protocols in package.json.
+        # pnpm is already on PATH from the setup step above, and the root install has
+        # warmed the shared store, so this reuses it rather than re-downloading.
+        run: pnpm install --frozen-lockfile --ignore-scripts --prefer-offline
         working-directory: base-ref
 
       - name: Detect package name changes
