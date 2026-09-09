@@ -5,7 +5,7 @@ import path, { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createDummySwagger } from "../src/command-helpers.ts";
-import { validateBreakingChange } from "../src/commands.ts";
+import { excludeSuppressedSwaggers, validateBreakingChange } from "../src/commands.ts";
 import { runOad } from "../src/run-oad.ts";
 
 const serviceParent = "specification/foo/data-plane/";
@@ -418,6 +418,53 @@ describe("validateBreakingChange", () => {
       }
     },
   );
+});
+
+describe("Swagger suppressions", () => {
+  it("filters every file in suppressed directories and keeps rule-scoped files", async () => {
+    const fixtureRoot = resolve(__dirname, "suppression-fixtures");
+    const testContext = {
+      ...context,
+      localSpecRepoPath: resolve(fixtureRoot, "head"),
+      runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
+      prInfo: {
+        ...context.prInfo,
+        tempRepoFolder: resolve(fixtureRoot, "base"),
+      },
+    };
+
+    const result = await excludeSuppressedSwaggers(testContext, [
+      "specification/contoso/stable/one.json",
+      "specification/contoso/stable/two.json",
+      "specification/contoso/preview/three.json",
+      "specification/contoso/rules/rule-scoped.json",
+      "specification/contoso/deleted/removed.json",
+    ]);
+
+    expect(result).toEqual(["specification/contoso/rules/rule-scoped.json"]);
+  });
+
+  it("uses the cross-version suppression name independently", async () => {
+    const fixtureRoot = resolve(__dirname, "suppression-fixtures");
+    const result = await excludeSuppressedSwaggers(
+      {
+        ...context,
+        localSpecRepoPath: resolve(fixtureRoot, "head"),
+        runType: BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
+        prInfo: {
+          ...context.prInfo,
+          tempRepoFolder: resolve(fixtureRoot, "base"),
+        },
+      },
+      [
+        "specification/contoso/stable/one.json",
+        "specification/contoso/preview/three.json",
+        "specification/contoso/cross/four.json",
+      ],
+    );
+
+    expect(result).toEqual(["specification/contoso/stable/one.json"]);
+  });
 });
 
 function prependParentFolder(

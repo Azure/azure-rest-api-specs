@@ -4,6 +4,7 @@ import deepEqual from "deep-eql";
 import { readFile } from "fs/promises";
 import { join, relative, resolve, sep } from "path";
 import { type ReadmeAffectedTags } from "./lintdiff-types.ts";
+import { getUnsuppressedSwaggers } from "./swagger-suppressions.ts";
 import { pathExists } from "./util.ts";
 
 import $RefParser from "@apidevtools/json-schema-ref-parser";
@@ -21,7 +22,7 @@ export async function getRunList(
   const ignoreFilesWith = ["/examples/", "/quickstart-templates/", "/scenarios/"];
 
   // Changed files should already be filtered to the top-level "specification" folder (see lintdiff-code.yaml)
-  const changedSpecFiles = (await readFileList(changedFilesPath)).filter((file) => {
+  const changedSpecFileCandidates = (await readFileList(changedFilesPath)).filter((file) => {
     // File is not ignored
     for (const ignore of ignoreFilesWith) {
       if (file.includes(ignore)) {
@@ -30,6 +31,16 @@ export async function getRunList(
     }
     return true;
   });
+  // Filter directly changed Swagger files before SpecModel processing. A second filter in
+  // runLintDiff() removes suppressed files discovered indirectly through references.
+  const unsuppressedChangedSwaggers = await getUnsuppressedSwaggers(
+    beforePath,
+    afterPath,
+    new Set(changedSpecFileCandidates.filter(swagger)),
+  );
+  const changedSpecFiles = changedSpecFileCandidates.filter(
+    (file) => !swagger(file) || unsuppressedChangedSwaggers.has(file),
+  );
 
   // In the future, the loop involving [beforePath, afterPath] can be eliminated
   // as well as beforeState
