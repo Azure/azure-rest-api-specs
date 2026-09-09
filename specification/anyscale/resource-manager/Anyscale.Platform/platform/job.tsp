@@ -84,8 +84,8 @@ model JobConfig {
   pipRequirements?: string[];
 
   /** Environment variables to set. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The runtime environment contract is a dynamic map with string values."
-  envVars?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Intended to be key value pairs."
+  envVars?: {};
 
   /** Maximum number of times the job will be retried before being marked failed. */
   maxRetries?: int32;
