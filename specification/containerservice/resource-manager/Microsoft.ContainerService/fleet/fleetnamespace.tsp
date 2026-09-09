@@ -259,7 +259,7 @@ interface FleetManagedNamespaces {
   listCredentials is ArmResourceActionSync<
     FleetManagedNamespace,
     void,
-    FleetCredentialResults
+    FleetManagedNamespaceCredentialResults
   >;
 
   @added(Versions.v2026_11_02_preview)
