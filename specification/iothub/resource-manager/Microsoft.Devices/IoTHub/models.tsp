@@ -1244,6 +1244,24 @@ model RoutingEndpoints {
 }
 
 /**
+ * The supported formats for message payloads delivered to routing endpoints.
+ */
+@added(Versions.v2026_10_01_preview)
+union MessagePayloadFormat {
+  string,
+
+  /**
+   * Formats the message as a com.do.telemetry.observation.v1 payload.
+   */
+  DoObservationV1: "DOObservationV1",
+
+  /**
+   * Preserves the original message payload.
+   */
+  None: "None",
+}
+
+/**
  * The properties related to an event stream endpoint.
  */
 @added(Versions.v2026_05_01_preview)
@@ -1294,6 +1312,12 @@ model RoutingEventStreamProperties {
    * The unique GUID of the custom source for the event stream.
    */
   sourceId?: string;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
@@ -1346,6 +1370,12 @@ model RoutingServiceBusQueueEndpointProperties {
    * The name of the resource group of the service bus queue endpoint.
    */
   resourceGroup?: string;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
@@ -1408,6 +1438,12 @@ model RoutingServiceBusTopicEndpointProperties {
    * The name of the resource group of the service bus topic endpoint.
    */
   resourceGroup?: string;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
@@ -1460,6 +1496,12 @@ model RoutingEventHubProperties {
    * The name of the resource group of the event hub endpoint.
    */
   resourceGroup?: string;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
@@ -1536,6 +1578,12 @@ model RoutingStorageContainerProperties {
    * Encoding that is used to serialize messages to blobs. Supported values are 'avro', 'avrodeflate', and 'JSON'. Default value is 'avro'.
    */
   encoding?: RoutingStorageContainerPropertiesEncoding;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
@@ -1611,6 +1659,12 @@ model RoutingCosmosDBSqlApiProperties {
    * The template for generating a synthetic partition key value for use with this cosmos DB sql container. The template must include at least one of the following placeholders: {iothub}, {deviceid}, {DD}, {MM}, and {YYYY}. Any one placeholder may be specified at most once, but order and non-placeholder components are arbitrary. This parameter is only required if PartitionKeyName is specified.
    */
   partitionKeyTemplate?: string;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
