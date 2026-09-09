@@ -6313,7 +6313,7 @@ model GatedModelAccessProperties {
   connectionId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.CognitiveServices/accounts/projects/connections";
-    },
+    }
   ]>;
 }
 
