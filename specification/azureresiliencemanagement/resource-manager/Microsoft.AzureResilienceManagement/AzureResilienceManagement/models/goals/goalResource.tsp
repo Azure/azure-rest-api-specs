@@ -54,7 +54,7 @@ model GoalResourceProperties {
   @added(Versions.v2026_06_01_preview)
   zonalResiliency?: ResiliencyProperties;
 
-  @doc("Regional resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Arm resource.")
+  @doc("Regional resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Azure resource.")
   @added(Versions.v2026_09_01_preview)
   regionalResiliency?: ResiliencyProperties;
 

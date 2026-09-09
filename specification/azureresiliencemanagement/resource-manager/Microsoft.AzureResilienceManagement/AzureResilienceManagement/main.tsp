@@ -47,6 +47,7 @@ enum Versions {
 
   @doc("Microsoft.AzureResilienceManagement Resource Provider management API version 2026-09-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @Azure.Core.previewVersion
   v2026_09_01_preview: "2026-09-01-preview",
 }
 
