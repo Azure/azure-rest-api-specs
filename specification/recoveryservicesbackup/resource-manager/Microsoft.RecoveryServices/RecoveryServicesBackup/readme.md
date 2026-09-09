@@ -36,6 +36,8 @@ go-sdk-folder: ./Generated/Golang
 license-header: MICROSOFT_MIT
 ```
 
+### Stamp Overrides
+
 ```yaml $(package-passivestamp)
 tag: package-passivestamp-2023-01-15
 ```

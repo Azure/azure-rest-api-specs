@@ -4460,6 +4460,8 @@ model AzureIaaSVMProtectionPolicy extends ProtectionPolicy {
    * Duration in minutes for which the Instant Access snapshot is retained.
    */
   @added(Versions.v2026_10_01)
+  @minValue(60)
+  @maxValue(300)
   instantAccessDurationMinutes?: int32;
 
   /**
