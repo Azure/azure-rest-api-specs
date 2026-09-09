@@ -73,19 +73,24 @@ model JobConfig {
   computeConfig?: ComputeConfigSpecOrReference;
 
   /** Command that will be run to execute the job, e.g. 'python main.py'. */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   entrypoint?: string;
 
   /** The remote archive location where your code will run, such as an abfss://, s3://, gs://, or https:// path. */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   workingDir?: string;
 
   /** Remote locations of Python modules to install along with the runtime environment. */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   pyModules?: string[];
 
   /** Pip package requirements to install on top of the image, such as package names, version specifiers, or requirements-file arguments. */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   pipRequirements?: string[];
 
   /** Environment variables to set. */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Intended to be key value pairs."
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   envVars?: {};
 
   /** Maximum number of times the job will be retried before being marked failed. */
