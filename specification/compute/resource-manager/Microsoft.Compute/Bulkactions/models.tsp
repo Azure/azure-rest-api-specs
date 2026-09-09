@@ -189,6 +189,7 @@ union DistributionStrategy {
   @doc("Platform attempts to evenly distribute VMs across all available zones with best effort")
   BestEffortBalanced: "BestEffortBalanced",
 
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @doc("Platform must evenly distribute VMs across zones, request is rejected if exact balance cannot be achieved")
   StrictBalanced: "StrictBalanced",
 
@@ -617,6 +618,9 @@ model VirtualMachineInfo {
 
   @doc("The zone identifier")
   zone?: string;
+
+  @doc("The resolved Azure virtual machine name.")
+  name?: string;
 }
 
 @doc("High level response from an operation on a resource")
