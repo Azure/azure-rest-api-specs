@@ -416,4 +416,70 @@ describe("post-results", () => {
       expect(labelsToAdd.has("package-name-review-required")).toBe(true);
     });
   });
+
+  describe("three-state Tier 1 rendering", () => {
+    it("should parse unchanged status from table rows", () => {
+      const body = [
+        "| Language | Package Name | Namespace | Format | Status | Approvers |",
+        "|----------|--------------|-----------|--------|--------|----------|",
+        "| dotnet | `Azure.Messaging.EventGrid` | `Azure.Messaging.EventGrid` | — | ⏳ Pending _(unchanged)_ | @approver1 |",
+        "| java | `azure-messaging-eventgrid` | `com.azure.messaging.eventgrid` | — | ⏳ Pending | @approver2 |",
+        "| python | _(not yet configured)_ | — | — | ⏳ Pending | @approver3 |",
+      ].join("\n");
+
+      const result = parseCommentTable(body);
+
+      // parseCommentTable only matches rows with backtick-wrapped package names
+      // "not yet configured" rows are not parseable (by design — they have no name to track)
+      expect(result.get("dotnet")?.status).toBe("⏳ Pending _(unchanged)_");
+      expect(result.get("java")?.status).toBe("⏳ Pending");
+      expect(result.has("python")).toBe(false);
+    });
+
+    it("structural table update should approve unchanged and pending status rows", () => {
+      const body = [
+        "| dotnet | `Azure.Messaging.EventGrid` | `Azure.Messaging.EventGrid` | — | ⏳ Pending _(unchanged)_ | @approver1 |",
+        "| java | `azure-messaging-eventgrid` | `com.azure.messaging.eventgrid` | — | ⏳ Pending | @approver2 |",
+      ].join("\n");
+
+      // Simulate structural table update (same logic as validate-approval.js)
+      const lines = body.split("\n");
+      const langsToUpdate = new Set(["dotnet", "java"]);
+      for (let i = 0; i < lines.length; i++) {
+        const cells = lines[i].split("|");
+        if (cells.length < 7) continue;
+        const langCell = cells[1].trim().toLowerCase();
+        const statusCell = cells[5];
+        if (!statusCell || statusCell.includes("Approved")) continue;
+        if (langsToUpdate.has(langCell)) {
+          cells[5] = " ✅ Approved by @architect ";
+          lines[i] = cells.join("|");
+        }
+      }
+      const result = lines.join("\n");
+
+      expect(result).toContain("✅ Approved by @architect");
+      expect(result).not.toContain("⏳ Pending");
+    });
+
+    it("structural table update should not modify already approved rows", () => {
+      const body =
+        "| dotnet | `Azure.Foo` | `Azure.Foo` | — | ✅ Approved by @someone | @approver1 |";
+
+      const lines = body.split("\n");
+      for (let i = 0; i < lines.length; i++) {
+        const cells = lines[i].split("|");
+        if (cells.length < 7) continue;
+        const statusCell = cells[5];
+        if (!statusCell || statusCell.includes("Approved")) continue;
+        cells[5] = " ✅ Approved by @other ";
+        lines[i] = cells.join("|");
+      }
+      const result = lines.join("\n");
+
+      // Should remain unchanged — already approved
+      expect(result).toContain("Approved by @someone");
+      expect(result).not.toContain("Approved by @other");
+    });
+  });
 });

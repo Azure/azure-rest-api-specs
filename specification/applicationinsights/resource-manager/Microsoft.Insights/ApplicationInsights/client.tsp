@@ -46,6 +46,32 @@ using Azure.ClientGenerator.Core;
 })
 namespace ApplicationInsightsManagementClient;
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
+@@clientOption(
+  Components.ApplicationInsightsComponent,
+  "resource-rbac-roles",
+  #{
+    ApplicationInsightsComponentContributor: "ae349356-3a1b-4a5e-921d-050484c6347e",
+    ApplicationInsightsSnapshotDebugger: "08954f03-6346-4c2e-81c0-ec3a5cfae23b",
+    MonitoringContributor: "749f88d5-cbae-40b8-bcfc-e573ddc772fa",
+    MonitoringMetricsPublisher: "3913510d-42f4-4e42-8a64-420c390055eb",
+    MonitoringReader: "43d0d8ad-25c7-4714-9337-8ba259a9fe05",
+    WorkbookContributor: "e8ddcd69-c73f-4f9f-9844-4100522f16ad",
+    WorkbookReader: "b279062a-9be3-42a0-92ae-8b3cf002ec4d",
+  },
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  Components.ApplicationInsightsComponent,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 260, pattern: "^[a-zA-Z0-9_.()-]+$" },
+  "csharp"
+);
+
 @@clientName(
   ComponentAPIs.ApplicationInsightsComponentAPIKey,
   "ApplicationInsightsComponentApiKey",
@@ -660,6 +686,27 @@ namespace ApplicationInsightsManagementClient;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(
+  Components.ComponentsResource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  WebTestsApi.WebtestsResource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Components.PrivateLinkScopedResource.ResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  WebTestsApi.WebTestGeolocation.Id,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(WebTestsApi.WebTestPropertiesRequest.RequestUrl, url, "csharp");
 @@alternateType(
   Components.ApplicationInsightsComponentProperties.TenantId,
   Azure.Core.uuid,

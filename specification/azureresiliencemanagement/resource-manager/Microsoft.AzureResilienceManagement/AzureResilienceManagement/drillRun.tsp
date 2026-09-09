@@ -1,4 +1,4 @@
-﻿import "@typespec/http";
+import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -166,6 +166,36 @@ interface DrillRuns {
     MarkAsCompleteResponse,
     ServiceGroupAndRequestHeadersParameters,
     LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @route(ServiceGroupRoute)
+  @added(Versions.v2026_08_31_preview)
+  @armResourceAction(DrillRun)
+  @post
+  @doc("This generates, or regenerates, the report for this Drill Run. The action is idempotent and is safe to call at any time: a call that arrives while a generation is already running joins it, and a call made after a failed attempt retries it. A report that has been finalized is never regenerated.")
+  generateReport is ArmResourceActionAsync<
+    DrillRun,
+    void,
+    DrillReportSummary,
+    ServiceGroupAndRequestHeadersParameters,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = DrillReportSummary> &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @route(ServiceGroupRoute)
+  @added(Versions.v2026_08_31_preview)
+  @armResourceAction(DrillRun)
+  @post
+  @doc("This returns a short-lived, read-only URL to download the report for this Drill Run. The URL expires at the returned expiryTimestamp and grants access to that single report only.")
+  listReportDownloadUrl is ArmResourceActionAsync<
+    DrillRun,
+    ListReportDownloadUrlRequest,
+    ListReportDownloadUrlResponse,
+    ServiceGroupAndRequestHeadersParameters,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ListReportDownloadUrlResponse> &
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
