@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./NetworkInterface.tsp";
 import "./NetworkInterfaceIPConfiguration.tsp";
@@ -101,10 +100,6 @@ enum Features {
   serviceGateway,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   virtualNetworkAppliance,
-
-  /** NeuroShield resource types. */
-  @added(Versions.v2026_01_01)
-  neuroShield,
 
   /** Interconnect group resource type for managing interconnect groups. */
   @added(Versions.v2025_07_01)
