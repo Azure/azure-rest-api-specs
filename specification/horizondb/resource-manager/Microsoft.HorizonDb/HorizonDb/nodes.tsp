@@ -19,7 +19,7 @@ model Node is Azure.ResourceManager.ProxyResource<NodeProperties> {
     Resource = Node,
     KeyName = "nodeName",
     SegmentName = "nodes",
-    NamePattern = ""
+    NamePattern = "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
   >;
 }
 

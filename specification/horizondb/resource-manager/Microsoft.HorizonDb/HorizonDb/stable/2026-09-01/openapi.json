@@ -179,11 +179,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "location",
@@ -199,6 +195,12 @@
             "schema": {
               "$ref": "#/definitions/LocationCapabilityListResult"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -213,18 +215,14 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/parameterGroups": {
       "get": {
-        "operationId": "DefaultParameterGroups_ListDefaultParameterGroupsBySubscriptionAndRegion",
+        "operationId": "DefaultParameterGroups_ListBySubscriptionAndRegion",
         "description": "Lists default parameter groups available for a subscription in a specific region. The response contains at most one default parameter group for each PostgreSQL version.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "location",
@@ -240,6 +238,12 @@
             "schema": {
               "$ref": "#/definitions/DefaultParameterGroupListResult"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -254,18 +258,14 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/parameterGroups/{name}": {
       "get": {
-        "operationId": "DefaultParameterGroups_GetDefaultParameterGroup",
+        "operationId": "DefaultParameterGroups_Get",
         "description": "Gets a default parameter group available for a subscription in a specific region. Each PostgreSQL version has at most one default parameter group in a location.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "location",
@@ -287,6 +287,12 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DefaultParameterGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4247,7 +4253,8 @@
             "in": "path",
             "description": "The name of the Node",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -7431,10 +7438,7 @@
           "$ref": "#/definitions/EndpointPropertiesForPatchUpdate",
           "description": "The endpoint properties to update."
         }
-      },
-      "required": [
-        "properties"
-      ]
+      }
     },
     "EndpointListResult": {
       "type": "object",
@@ -7526,10 +7530,7 @@
             "update"
           ]
         }
-      },
-      "required": [
-        "aliases"
-      ]
+      }
     },
     "EndpointRole": {
       "type": "string",
@@ -9138,11 +9139,7 @@
             "update"
           ]
         }
-      },
-      "required": [
-        "parameterGroupResourceId",
-        "applyMethod"
-      ]
+      }
     },
     "PoolProperties": {
       "type": "object",
@@ -9231,7 +9228,7 @@
           ]
         },
         "scheduledMaintenance": {
-          "$ref": "#/definitions/ScheduledMaintenanceProperties",
+          "$ref": "#/definitions/ScheduledMaintenancePropertiesForPatchUpdate",
           "description": "The scheduled maintenance configuration to update for the pool. When supplied, the complete configuration for the selected maintenance management type is required. Omission preserves the current configuration.",
           "x-ms-mutability": [
             "update"
@@ -9698,6 +9695,19 @@
       "required": [
         "maintenanceManagementType"
       ]
+    },
+    "ScheduledMaintenancePropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "The scheduled maintenance configuration for a pool update operation.",
+      "properties": {
+        "maintenanceManagementType": {
+          "$ref": "#/definitions/ScheduledMaintenanceManagementType",
+          "description": "Specifies whether scheduled maintenance is managed by the system or by the user. When scheduledMaintenance is supplied, this property is required by the service.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
     },
     "SystemScheduledMaintenanceProperties": {
       "type": "object",

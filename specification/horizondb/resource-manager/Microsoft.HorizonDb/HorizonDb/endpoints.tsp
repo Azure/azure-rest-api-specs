@@ -74,14 +74,14 @@ model EndpointPropertiesForPatchUpdate {
   @doc("The replacement DNS alias list. An empty list removes the aliased CNAME. Only one alias is currently supported.")
   @maxItems(1)
   @visibility(Lifecycle.Update)
-  aliases: EndpointAlias[];
+  aliases?: EndpointAlias[];
 }
 
 @added(Versions.v2026_09_01)
 @doc("A service-generated HorizonDB endpoint update request.")
 model EndpointForPatchUpdate {
   @doc("The endpoint properties to update.")
-  properties: EndpointPropertiesForPatchUpdate;
+  properties?: EndpointPropertiesForPatchUpdate;
 }
 
 @added(Versions.v2026_09_01)

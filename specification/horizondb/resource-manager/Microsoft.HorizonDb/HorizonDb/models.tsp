@@ -685,7 +685,7 @@ model PoolPropertiesForPatchUpdate {
   @added(Versions.v2026_09_01)
   @doc("The scheduled maintenance configuration to update for the pool. When supplied, the complete configuration for the selected maintenance management type is required. Omission preserves the current configuration.")
   @visibility(Lifecycle.Update)
-  scheduledMaintenance?: ScheduledMaintenanceProperties;
+  scheduledMaintenance?: ScheduledMaintenancePropertiesForPatchUpdate;
 }
 
 @added(Versions.v2026_09_01)
@@ -716,7 +716,7 @@ model PoolParameterGroupReference {
 model PoolParameterGroupReferenceForPatchUpdate {
   @doc("The Azure resource ID of the default or custom parameter group to associate with the pool.")
   @visibility(Lifecycle.Update)
-  parameterGroupResourceId: armResourceIdentifier<[
+  parameterGroupResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.HorizonDb/parameterGroups";
     },
@@ -727,7 +727,7 @@ model PoolParameterGroupReferenceForPatchUpdate {
 
   @doc("Determines when dynamic parameter changes from the associated parameter group become effective. Static parameter changes always require a pool restart, regardless of this value.")
   @visibility(Lifecycle.Update)
-  applyMethod: ParameterApplyMethod;
+  applyMethod?: ParameterApplyMethod;
 }
 
 @renamedFrom(Versions.v2026_09_01, "HorizonDbPoolForPatchUpdate")

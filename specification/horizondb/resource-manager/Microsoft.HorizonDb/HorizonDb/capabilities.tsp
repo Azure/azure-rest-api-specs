@@ -219,13 +219,12 @@ interface Capabilities {
   @list
   list(
     ...ApiVersionParameter,
-
-    @doc("The Azure subscription ID.")
-    @path
-    subscriptionId: string,
+    ...SubscriptionIdParameter,
 
     @doc("The Azure region for which to list HorizonDB capabilities.")
     @path
     location: azureLocation,
-  ): ArmResponse<Azure.ResourceManager.ResourceListResult<LocationCapability>>;
+  ):
+    | ArmResponse<Azure.ResourceManager.ResourceListResult<LocationCapability>>
+    | ErrorResponse;
 }

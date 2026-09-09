@@ -457,27 +457,23 @@ interface DefaultParameterGroups {
   @doc("Lists default parameter groups available for a subscription in a specific region. The response contains at most one default parameter group for each PostgreSQL version.")
   @get
   @list
-  listDefaultParameterGroupsBySubscriptionAndRegion(
+  listBySubscriptionAndRegion(
     ...ApiVersionParameter,
-
-    @doc("The Azure subscription ID.")
-    @path
-    subscriptionId: string,
+    ...SubscriptionIdParameter,
 
     @doc("The Azure region for which to list default parameter groups.")
     @path
     location: Azure.Core.azureLocation,
-  ): ArmResponse<Azure.ResourceManager.ResourceListResult<DefaultParameterGroup>>;
+  ):
+    | ArmResponse<Azure.ResourceManager.ResourceListResult<DefaultParameterGroup>>
+    | ErrorResponse;
 
   @doc("Gets a default parameter group available for a subscription in a specific region. Each PostgreSQL version has at most one default parameter group in a location.")
   @route("/{name}")
   @get
-  getDefaultParameterGroup(
+  get(
     ...ApiVersionParameter,
-
-    @doc("The Azure subscription ID.")
-    @path
-    subscriptionId: string,
+    ...SubscriptionIdParameter,
 
     @doc("The Azure region containing the default parameter group.")
     @path
@@ -486,7 +482,7 @@ interface DefaultParameterGroups {
     @doc("The name of the default parameter group.")
     @path
     name: string,
-  ): ArmResponse<DefaultParameterGroup>;
+  ): ArmResponse<DefaultParameterGroup> | ErrorResponse;
 }
 
 @added(Versions.v2026_05_01_preview)

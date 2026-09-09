@@ -44,6 +44,14 @@ model SystemScheduledMaintenanceProperties
   maintenanceManagementType: "System";
 }
 
+@added(Versions.v2026_09_01)
+@doc("The scheduled maintenance configuration for a pool update operation.")
+model ScheduledMaintenancePropertiesForPatchUpdate {
+  @doc("Specifies whether scheduled maintenance is managed by the system or by the user. When scheduledMaintenance is supplied, this property is required by the service.")
+  @visibility(Lifecycle.Update)
+  maintenanceManagementType?: ScheduledMaintenanceManagementType;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Maintenance events are read-only resources that do not have a provisioning lifecycle."
 @added(Versions.v2026_09_01)
 @doc("Properties of a maintenance event resource.")

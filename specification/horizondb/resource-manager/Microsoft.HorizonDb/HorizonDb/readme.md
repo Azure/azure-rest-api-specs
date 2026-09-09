@@ -47,6 +47,36 @@ suppressions:
       (MicrosoftEntraAdministratorAdd) whose properties are a subset of the resource
       read model. objectId are read-only fields returned by GET but not accepted on PUT.
       The resource has no updatable fields beyond create, so no PATCH operation is provided.
+  - code: PathForNestedResource
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications/passwordMethod"]
+    reason: >-
+      passwordMethod is a service-created singleton authentication resource with a fixed
+      literal name. It cannot be created or deleted independently, and parameterizing the
+      final segment would incorrectly imply that callers can address arbitrary instances.
+  - code: PathForNestedResource
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications/microsoftEntra"]
+    reason: >-
+      microsoftEntra is a service-created singleton authentication resource with a fixed
+      literal name. It cannot be created or deleted independently, and parameterizing the
+      final segment would incorrectly imply that callers can address arbitrary instances.
+  - code: ConsistentPatchProperties
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications/passwordMethod"].patch.parameters[4].schema
+    reason: >-
+      administratorLogin and administratorLoginPassword are update-only secrets used to
+      create, rename, or reset the PostgreSQL administrator. The control plane does not
+      store or return these credentials, so exposing them on the read resource model would
+      violate the API's security boundary.
+  - code: ConsistentPatchProperties
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}"].patch.parameters[5].schema
+    reason: >-
+      vCores is defined on the ProvisionedHorizonDbPoolComputeModel resource subtype and
+      applies only when computeModel.type is Provisioned. The validator compares the PATCH
+      field only with the base PoolComputeModel and cannot resolve the discriminator
+      hierarchy, so it incorrectly reports the subtype property as missing.
 ```
 
 ### Tag: package-horizondb-2026-05-01-preview
