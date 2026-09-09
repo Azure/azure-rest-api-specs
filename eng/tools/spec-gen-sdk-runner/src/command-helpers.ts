@@ -568,17 +568,12 @@ export function prepareAzsdkPackCommand(packagePath: string, outputPath?: string
  * Prepare the azsdk pkg detect-breaking-change command arguments.
  *
  * @param packagePath - Absolute path to the generated SDK package directory.
- * @param tspConfigFullPath - Optional absolute path to the tspconfig.yaml file.
  * @returns Array of arguments for the azsdk detect-breaking-change command.
  */
-export function prepareAzsdkDetectBreakingChangeCommand(
-  packagePath: string,
-  tspConfigFullPath?: string,
-): string[] {
+export function prepareAzsdkDetectBreakingChangeCommand(packagePath: string): string[] {
   const args = ["pkg", "detect-breaking-change", "--package-path", packagePath];
-  if (tspConfigFullPath) {
-    args.push("--tsp-config-path", tspConfigFullPath);
-  }
+
+  args.push("--changes-only");
   args.push("--output", "json");
   return args;
 }

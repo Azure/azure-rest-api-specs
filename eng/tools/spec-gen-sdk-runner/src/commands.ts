@@ -327,13 +327,8 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
  * execution report and fold the result into it. Non-fatal by contract: any
  * failure leaves the package's existing breaking-change label untouched.
  */
-async function detectSdkBreakingChange(
-  commandInput: SpecGenSdkCmdInput,
-  tspConfigRelativePath: string,
-  executionReport: ExecutionReport,
-): Promise<void> {
+async function detectSdkBreakingChange(executionReport: ExecutionReport): Promise<void> {
   const azsdkExe = process.env.AZSDK || "azsdk";
-  const tspConfigFullPath = path.join(commandInput.localSpecRepoPath, tspConfigRelativePath);
   for (const pkg of executionReport.packages) {
     if (!pkg.packageRootPath) {
       logMessage(
@@ -344,7 +339,7 @@ async function detectSdkBreakingChange(
     }
     let signal: boolean | undefined;
     try {
-      const args = prepareAzsdkDetectBreakingChangeCommand(pkg.packageRootPath, tspConfigFullPath);
+      const args = prepareAzsdkDetectBreakingChangeCommand(pkg.packageRootPath);
       logMessage(`Running: ${azsdkExe} ${args.join(" ")}`, LogLevel.Info);
       const output = await runCommandWithOutput(azsdkExe, args);
       const response = parseAzsdkResponse<AzsdkDetectBreakingChangeResponse>(output);
@@ -535,7 +530,7 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
       executionReport.packages.length > 0
     ) {
       try {
-        await detectSdkBreakingChange(commandInput, changedSpec.typespecProject, executionReport);
+        await detectSdkBreakingChange(executionReport);
       } catch (error) {
         logMessage(`Runner: error in breaking-change detection:${inspect(error)}`, LogLevel.Warn);
       }

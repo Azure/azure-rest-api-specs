@@ -814,25 +814,13 @@ describe("commands.ts", () => {
 });
 
 describe("prepareAzsdkDetectBreakingChangeCommand", () => {
-  test("includes package path, tsp config, and json output", () => {
-    expect(prepareAzsdkDetectBreakingChangeCommand("/pkg/path", "/spec/tspconfig.yaml")).toEqual([
-      "pkg",
-      "detect-breaking-change",
-      "--package-path",
-      "/pkg/path",
-      "--tsp-config-path",
-      "/spec/tspconfig.yaml",
-      "--output",
-      "json",
-    ]);
-  });
-
-  test("omits tsp config when not provided", () => {
+  test("includes package path, changes-only, and json output", () => {
     expect(prepareAzsdkDetectBreakingChangeCommand("/pkg/path")).toEqual([
       "pkg",
       "detect-breaking-change",
       "--package-path",
       "/pkg/path",
+      "--changes-only",
       "--output",
       "json",
     ]);
