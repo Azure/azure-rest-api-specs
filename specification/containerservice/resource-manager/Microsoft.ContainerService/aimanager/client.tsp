@@ -34,6 +34,34 @@ using TypeSpec.Http;
 // Property name customizations
 @@clientName(Azure.ResourceManager.EntityTagProperty.eTag, "etag", "java");
 
+// C# type customizations
+@@alternateType(
+  Azure.ResourceManager.EntityTagProperty.eTag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
+  "ContainerServiceAIManagerProvisioningState",
+  "csharp"
+);
+@@clientName(CalculateCostRequest, "CalculateCostContent", "csharp");
+@@clientName(CalculateCostResponse, "CalculateCostResult", "csharp");
+@@clientName(DeletePolicy, "AIManagerDeletePolicy", "csharp");
+@@clientName(ScalingProfile, "ModelDeploymentScalingProfile", "csharp");
+@@clientName(AutoscaleProfile, "ModelDeploymentAutoscaleProfile", "csharp");
+@@clientName(CredentialResult, "AIManagerCredentialResult", "csharp");
+@@clientName(CredentialResults, "AIManagerCredentialResults", "csharp");
+@@clientName(InfeasibilityReason, "AIModelInfeasibilityReason", "csharp");
+@@clientName(InfeasibleCode, "AIModelInfeasibleCode", "csharp");
+@@clientName(ModelSpec, "AIModelSpec", "csharp");
+@@clientName(NamespaceAccessInfo, "AIManagerNamespaceAccessInfo", "csharp");
+@@clientName(
+  ServingPerformanceEstimation,
+  "AIModelServingPerformanceEstimation",
+  "csharp"
+);
+
 // Legacy type handling
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @@clientName(
