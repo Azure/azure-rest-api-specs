@@ -50,12 +50,11 @@ model AutomationProjectProperties {
   description?: string;
 
   /**
-   * Customer networking configuration. Omitting networking or subnetResourceId in a PUT or PATCH
-   * preserves the current subnet. Network changes complete asynchronously through replacement
-   * backing applications, not an in-place network update. The operation succeeds only after
-   * replacement applications are ready, cutover is complete, and old network resources are released.
+   * Optional customer networking selected when the automation project is created.
+   * Networking cannot be added, changed, or removed after creation. Omitted networking
+   * preserves the existing configuration on update.
    */
-  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   networking?: AutomationProjectNetworking;
 }
 
@@ -65,30 +64,22 @@ model AutomationProjectProperties {
 model AutomationProjectNetworking {
   /**
    * Fully qualified resource ID of a subnet in the same region and customer tenant as the
-   * automation project. The subnet may be in a different subscription in that customer tenant.
+   * automation project. The subnet may be in another subscription in that customer tenant.
    * Service-owned backing resources may be in a different service tenant and subscription.
    * The subnet must be delegated to Microsoft.App/environments. The caller must have
-   * Microsoft.Network/virtualNetworks/subnets/join/action permission on every non-null requested
-   * subnet, in addition to Microsoft.Logic/automationProjects/write on the project.
-   * On create, a subnet provisions network-connected backing applications; omission or null
-   * provisions backing applications without a customer subnet. On PUT or PATCH of an existing
-   * project, omission preserves the current subnet, the same subnet leaves networking unchanged,
-   * and a different non-null subnet requests asynchronous migration to replacement backing
-   * applications. Explicit null requests asynchronous detach to replacement backing applications
-   * without a customer subnet. Detaching an already detached project leaves networking unchanged.
-   * During provisioning or migration, responses describe the requested configuration, not proof
-   * of effective connectivity. Responses omit subnetResourceId when no customer subnet is requested.
+   * Microsoft.Network/virtualNetworks/subnets/join/action on the supplied subnet in addition
+   * to permission to write the project. Omit the subnet to create a project without customer
+   * networking; it cannot be attached later. On update, omission preserves the subnet and
+   * resubmitting the same resource ID is idempotent. A different ID or null is rejected
+   * synchronously without starting a long-running operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null requests subnet detach on PUT/PATCH; omission preserves the current subnet. Null is an operation input, not a substitute for optionality."
-  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @minLength(1)
-  subnetResourceId?:
-    | Azure.Core.armResourceIdentifier<[
-        {
-          type: "Microsoft.Network/virtualNetworks/subnets";
-        }
-      ]>
-    | null;
+  subnetResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
 }
 
 /**
@@ -100,15 +91,6 @@ model AutomationProjectUpdateProperties {
    */
   @maxLength(1024)
   description?: string;
-
-  /**
-   * Customer networking configuration. Omitting networking or subnetResourceId preserves the
-   * current subnet. A changed subnet or explicit null subnetResourceId requests asynchronous
-   * migration. The operation succeeds only after replacement applications are ready, cutover
-   * is complete, and old network resources are released.
-   */
-  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
-  networking?: AutomationProjectNetworking;
 }
 
 /**

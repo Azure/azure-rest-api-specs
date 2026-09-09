@@ -85,101 +85,32 @@ Microsoft.Logic/automationProjects/myAutomationProject
 
 API version: `2026-04-01-preview`.
 
-Customer networking extends the existing preview with optional properties rather
-than introducing another API version. Existing operations and properties are
-unchanged, and omitted networking preserves the current subnet. Repository
-same-version validation still requires an explicit `Versioning-Approved-*`
-approval for this additive change; the original API approval does not cover it.
-
 ## Customer networking
 
-The public configuration is `properties.networking.subnetResourceId`. Both
-`networking` and `subnetResourceId` have create/read/update mutability. No backing
-application IDs, service tenant/subscription IDs, or raw `egressPolicy` are exposed.
-Platform egress policy is service-owned and generated internally.
+Set the optional `properties.networking.subnetResourceId` when creating the
+project. The subnet must be in the project's region and customer tenant and
+delegated to `Microsoft.App/environments`. Another subscription in that tenant is
+allowed; service-owned backing resources may be in a separate service tenant.
+The caller needs subnet `Microsoft.Network/virtualNetworks/subnets/join/action`
+in addition to project write permission. Egress policy remains service-owned.
 
-The automation project and subnet must belong to the same customer tenant and
-Azure region. The subnet may belong to another subscription in that tenant.
-Service-owned backing resources may live in a separate service tenant and
-subscription; this does not permit the project and subnet to span customer tenants.
-The customer must delegate the subnet to `Microsoft.App/environments`.
+Networking is create/read-only, matching ACA Express's create-time subnet
+selection. A project created without a subnet cannot attach one later. Omitted
+networking or an empty object preserves the current selection on update;
+resubmitting the same normalized resource ID is idempotent. A changed ID,
+explicit null, or late attachment must fail synchronously with an immutable-property
+client error, before starting an LRO. GET omits `networking` when no subnet is set.
+Subnet migration and detach are not supported in this version.
 
-In addition to `Microsoft.Logic/automationProjects/write`, the caller must have
-`Microsoft.Network/virtualNetworks/subnets/join/action` on every non-null submitted
-subnet, including when resubmitting the current subnet.
+Project PATCH still updates existing mutable fields, but its model does not expose
+networking. Project DELETE remains supported and asynchronous through backing-app
+and subnet association/IP cleanup. Backend enforcement and the Microsoft.Logic
+manifest linked access check are owned by AzureUX-BPM and must precede enablement;
+the application-level network authorization decision remains a release dependency.
 
-### Request semantics
-
-These rules apply to the networking fields only; they do not change the semantics
-of existing properties.
-
-| Request | Create | PUT/PATCH of an existing project |
-| --- | --- | --- |
-| Omit `networking` | No customer subnet | Preserve the current subnet |
-| `"networking": {}` | No customer subnet | Preserve the current subnet |
-| `"networking": {"subnetResourceId": "<subnet-id>"}` | Provision with that subnet | Same subnet: no network change. Different subnet (including initial attachment): asynchronous migration |
-| `"networking": {"subnetResourceId": null}` | No customer subnet | Asynchronously detach; already detached is a no-op |
-| `"networking": null` | Invalid | Invalid; send null on `subnetResourceId` instead |
-
-The nullable leaf uses the established TypeSpec optional-union pattern, which
-emits `x-nullable: true` separately from property optionality. There is no default
-value. Responses describe the requested configuration while an operation is in
-progress, not proof of effective connectivity. Responses omit `subnetResourceId`
-when no customer subnet is requested rather than returning null.
-An empty string is not detach. Clients must preserve the distinction between
-omitted properties and an explicitly serialized null.
-
-PUT and PATCH remain long-running operations with their existing polling headers.
-Changing or removing a subnet creates replacement backing applications; it does
-not mutate networking on an existing backing application in place. An accepted
-request is not completion. Success requires healthy replacement applications,
-completed cutover, and release of the old network resources. A failure must not
-be reported as success merely because the requested subnet was persisted.
-
-### Examples and regression coverage
-
-Source examples are in `examples/2026-04-01-preview`; `tsp compile .` copies them
-into the generated version's `examples` directory and links them from OpenAPI.
-The original seven operations remain covered. The create example supplies a
-subnet, GET returns the configured subnet, and the update example omits networking
-while retaining the subnet in its response. Additional PUT/PATCH examples cover
-subnet migration and explicit-null detach, and PUT examples cover preservation
-when networking is omitted or empty. These fixtures run through the repository's
-existing OpenAPI example validation.
-
-PUT update responses use `200`; migration and detach show `Updating` with polling
-headers. Separate GET examples show `Succeeded` after migration or detach completes.
-Each PUT fixture also includes the alternative `201`/`Provisioning` response when
-the project does not yet exist, as required by example validation. This is creation,
-not asynchronous update acceptance; omitted or null networking on that create path
-does not attach a subnet.
-
-### API review and implementation gates
-
-The explicit-null input deliberately distinguishes detach from omission; the
-`no-nullable` suppression is not a backward-compatibility claim. Approval of this
-new nullable input and its suppression is required before merge. PUT preservation
-is also an explicit exception to ordinary full-replacement semantics and requires
-ARM API review, including template What-If behavior. SDK serialization must be
-checked for omitted versus explicit-null input before release.
-
-The existing provisioning-state lint suppression and PUT polling contract are
-unchanged. SDK completion testing must establish that callers receive the project,
-not a status envelope.
-
-The following dependencies are owned outside this specification repository:
-
-| Dependency | Required behavior before enabling customer networking |
-| --- | --- |
-| AzureUX-BPM models | Support networking in `2026-04-01-preview`; persist and forward the exact authorized subnet ID; distinguish absence, empty networking, a non-null ID, and explicit-null detach |
-| Microsoft.Logic manifest (L1) | Deploy the `automationProjects/write` linked access check for `properties.networking.subnetResourceId` and subnet `join/action`; assert it in every cloud registering the resource, and prove unauthorized requests fail before feature enablement |
-| Project authorization decision (L2) | Approve a durable project-level network grant or the required original-caller authorization flow for application writers; this document does not resolve that decision |
-| Migration lifecycle | Validate tenant, region, delegation and subnet state; replace applications, health-gate cutover, handle retry/rollback, and await old subnet association/IP cleanup before LRO success |
-| Compatibility | Prove existing clients that omit networking during GET-to-PUT/PATCH updates cannot erase a configured subnet; prove repeated same-subnet and detach requests are idempotent |
-
-The linked access check is deployed from the Microsoft.Logic manifest in
-AzureUX-BPM, not from this repository. A permission description in OpenAPI is not
-authorization enforcement. No manifest configuration is introduced here.
+Examples reuse the existing CRUD coverage, plus one create-without-networking
+example. This extends `2026-04-01-preview`; same-version `Versioning-Approved-*`
+approval remains required before merge.
 
 ## Directory Structure
 
