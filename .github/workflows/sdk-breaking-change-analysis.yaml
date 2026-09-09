@@ -285,21 +285,21 @@ jobs:
           : > "$manifest_jsonl"
           echo '[]' > "$results_dir/projects.json"
           mapfile -t typespec_project_paths < <(jq -r '.[]' <<< "$TYPESPEC_PROJECT_PATHS")
+          declare -A package_names=()
+          project_number=0
 
           for index in "${!typespec_project_paths[@]}"; do
             typespec_project_path="${typespec_project_paths[$index]}"
             tsp_config_path="$SPEC_REPOSITORY_PATH/$typespec_project_path/tspconfig.yaml"
             project_number="$((index + 1))"
-            relative_results_path="project-$project_number"
-            project_results="$results_dir/$relative_results_path"
-            marker="$RUNNER_TEMP/azsdk-generation-started-$project_number"
-            mkdir -p "$project_results"
+            marker="$RUNNER_TEMP/azsdk-generation-started"
+            generation_result="$RUNNER_TEMP/sdk-generation-result.json"
             touch "$marker"
 
             azsdk package generate \
               --local-sdk-repo-path "$LOCAL_SDK_REPO_PATH" \
               --tsp-config-path "$tsp_config_path" \
-              --output json | tee "$project_results/generate.json"
+              --output json | tee "$generation_result"
 
             mapfile -d '' generated_configs < <(
               find "$LOCAL_SDK_REPO_PATH" -type f -name tsp-location.yaml -newer "$marker" -print0
@@ -316,6 +316,15 @@ jobs:
               exit 1
             fi
             package_name="$(basename "$package_path")"
+            if [[ -n "${package_names[$package_name]:-}" ]]; then
+              relative_results_path="$package_name-$project_number"
+            else
+              relative_results_path="$package_name"
+            fi
+            package_names["$package_name"]=1
+            project_results="$results_dir/$relative_results_path"
+            mkdir -p "$project_results"
+            mv "$generation_result" "$project_results/generate.json"
 
             azsdk package build \
               --package-path "$package_path" \
@@ -407,7 +416,7 @@ jobs:
                     })
                   : ["- [x] No SDK breaking changes detected."];
                 return [
-                  `### Typespec Project: ${project.typespecProjectPath}`,
+                  `**Typespec Project:** ${project.typespecProjectPath}`,
                   "",
                   `**SDK Package:** ${project.packageName}`,
                   "",
