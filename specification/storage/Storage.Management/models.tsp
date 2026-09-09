@@ -5467,7 +5467,7 @@ model ObjectReplicationPolicyProperties {
   status?: string;
 
   /**
-   * The error that is blocking object replication for the policy.
+   * The error message associated with the object replication policy status.
    */
   @added(Versions.v2026_09_01)
   @visibility(Lifecycle.Read)
