@@ -212,13 +212,13 @@ union VariableName {
   None: "None",
 
   /**
-   * Asn
+   * Autonomous System Number
    */
   @added(Versions.v2026_04_01)
   Asn: "Asn",
 
   /**
-   * Ja4
+   * JA4 TLS fingerprint
    */
   @added(Versions.v2026_04_01)
   Ja4: "Ja4",
