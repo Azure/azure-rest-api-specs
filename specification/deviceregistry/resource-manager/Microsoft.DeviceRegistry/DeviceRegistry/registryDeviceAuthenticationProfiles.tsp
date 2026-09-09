@@ -61,7 +61,7 @@ model RegistryDeviceAuthenticationProfile
 // ──────────────────────────────────────────────
 
 @added(Versions.v2026_11_02_preview)
-@doc("Response body for the listKeys action.")
+@doc("Response body for the getKeys action.")
 model GetDeviceAuthenticationProfileKeysResponse {
   @doc("Plaintext symmetric keys for the device authentication profile.")
   symmetricKey: SymmetricKeyCredentials;
@@ -78,7 +78,7 @@ interface RegistryDeviceAuthenticationProfiles {
     profile's authentication type is SymmetricKey; profiles of any other type return 400 with the
     InvalidAuthenticationType error code.
     """)
-  listKeys is ArmResourceActionSync<
+  getKeys is ArmResourceActionSync<
     RegistryDeviceAuthenticationProfile,
     void,
     GetDeviceAuthenticationProfileKeysResponse

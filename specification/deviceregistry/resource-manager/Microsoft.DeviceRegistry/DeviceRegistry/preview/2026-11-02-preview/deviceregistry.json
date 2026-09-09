@@ -6383,9 +6383,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/registryDevices/{registryDeviceName}/authenticationProfiles/{authenticationProfileName}/listKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/registryDevices/{registryDeviceName}/authenticationProfiles/{authenticationProfileName}/getKeys": {
       "post": {
-        "operationId": "RegistryDeviceAuthenticationProfiles_ListKeys",
+        "operationId": "RegistryDeviceAuthenticationProfiles_GetKeys",
         "tags": [
           "RegistryDeviceAuthenticationProfiles"
         ],
@@ -6446,8 +6446,8 @@
           }
         },
         "x-ms-examples": {
-          "ListKeys_RegistryDeviceAuthenticationProfile": {
-            "$ref": "./examples/ListKeys_RegistryDeviceAuthenticationProfile.json"
+          "GetKeys_RegistryDeviceAuthenticationProfile": {
+            "$ref": "./examples/GetKeys_RegistryDeviceAuthenticationProfile.json"
           }
         }
       }
@@ -9671,7 +9671,7 @@
     },
     "GetDeviceAuthenticationProfileKeysResponse": {
       "type": "object",
-      "description": "Response body for the listKeys action.",
+      "description": "Response body for the getKeys action.",
       "properties": {
         "symmetricKey": {
           "$ref": "#/definitions/SymmetricKeyCredentials",
