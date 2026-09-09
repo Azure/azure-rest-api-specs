@@ -5508,6 +5508,12 @@ model WebhookPartnerDestinationInfo extends PartnerDestinationInfo {
   properties?: WebhookPartnerDestinationProperties;
 
   /**
+   * Change history of the resource move.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  resourceMoveChangeHistory?: ResourceMoveChangeHistory[];
+
+  /**
    * Type of the endpoint for the partner destination
    */
   endpointType: "WebHook";
