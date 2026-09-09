@@ -74,7 +74,7 @@ model SupervisedFineTuningDataGenerationJobInputs
   scenario: DataGenerationJobScenario.supervised_finetuning;
 
   @doc("Optional file output target for the generated supervised fine-tuning data.")
-  output_target?: FineTuningDataGenerationJobOutputTarget;
+  output_target?: SupervisedFineTuningDataGenerationJobOutputTarget;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
@@ -86,7 +86,7 @@ model ReinforcementFineTuningDataGenerationJobInputs
   scenario: DataGenerationJobScenario.reinforcement_finetuning;
 
   @doc("Optional file output target for the generated reinforcement fine-tuning data.")
-  output_target?: FineTuningDataGenerationJobOutputTarget;
+  output_target?: ReinforcementFineTuningDataGenerationJobOutputTarget;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
@@ -107,9 +107,23 @@ model EvaluationDataGenerationJobOutputTarget {
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@doc("File output target for a fine-tuning data generation job.")
+@doc("File output target for a supervised fine-tuning data generation job.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-model FineTuningDataGenerationJobOutputTarget {
+model SupervisedFineTuningDataGenerationJobOutputTarget {
+  @doc("Filename to assign to the generated fine-tuning file.")
+  name?: string;
+
+  @doc("Controls how file outputs are written. If omitted, defaults to `overwrite` and writes only the newly generated fine-tuning file content.")
+  write_mode?: DataGenerationJobOutputWriteMode;
+
+  @doc("File ID to merge into when `write_mode` is `merge`.")
+  merge_file_id?: string;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("File output target for a reinforcement fine-tuning data generation job.")
+@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+model ReinforcementFineTuningDataGenerationJobOutputTarget {
   @doc("Filename to assign to the generated fine-tuning file.")
   name?: string;
 

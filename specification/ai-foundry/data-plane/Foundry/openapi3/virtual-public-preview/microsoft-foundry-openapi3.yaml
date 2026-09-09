@@ -52717,22 +52717,6 @@ components:
             - random_sampling
             - smart_filtering
       description: Specifies the type of filter strategy used to select traces for evaluation.
-    FineTuningDataGenerationJobOutputTarget:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Filename to assign to the generated fine-tuning file.
-        write_mode:
-          $ref: '#/components/schemas/DataGenerationJobOutputWriteMode'
-          description: Controls how file outputs are written. If omitted, defaults to `overwrite` and writes only the newly generated fine-tuning file content.
-        merge_file_id:
-          type: string
-          description: File ID to merge into when `write_mode` is `merge`.
-      description: File output target for a fine-tuning data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     FixedRatioVersionSelectionRule:
       type: object
       required:
@@ -83370,11 +83354,27 @@ components:
             - reinforcement_finetuning
           description: The scenario of the data generation job, which is Reinforcement Fine-tuning for this model.
         output_target:
-          $ref: '#/components/schemas/FineTuningDataGenerationJobOutputTarget'
+          $ref: '#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputTarget'
           description: Optional file output target for the generated reinforcement fine-tuning data.
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobInputs'
       description: Caller-supplied inputs for a reinforcement fine-tuning data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
+    ReinforcementFineTuningDataGenerationJobOutputTarget:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Filename to assign to the generated fine-tuning file.
+        write_mode:
+          $ref: '#/components/schemas/DataGenerationJobOutputWriteMode'
+          description: Controls how file outputs are written. If omitted, defaults to `overwrite` and writes only the newly generated fine-tuning file content.
+        merge_file_id:
+          type: string
+          description: File ID to merge into when `write_mode` is `merge`.
+      description: File output target for a reinforcement fine-tuning data generation job.
       x-ms-foundry-meta:
         conditional_previews:
           - DataGenerationJobs=V1Preview
@@ -84667,11 +84667,27 @@ components:
             - supervised_finetuning
           description: The scenario of the data generation job, which is Supervised Fine-tuning for this model.
         output_target:
-          $ref: '#/components/schemas/FineTuningDataGenerationJobOutputTarget'
+          $ref: '#/components/schemas/SupervisedFineTuningDataGenerationJobOutputTarget'
           description: Optional file output target for the generated supervised fine-tuning data.
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobInputs'
       description: Caller-supplied inputs for a supervised fine-tuning data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
+    SupervisedFineTuningDataGenerationJobOutputTarget:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Filename to assign to the generated fine-tuning file.
+        write_mode:
+          $ref: '#/components/schemas/DataGenerationJobOutputWriteMode'
+          description: Controls how file outputs are written. If omitted, defaults to `overwrite` and writes only the newly generated fine-tuning file content.
+        merge_file_id:
+          type: string
+          description: File ID to merge into when `write_mode` is `merge`.
+      description: File output target for a supervised fine-tuning data generation job.
       x-ms-foundry-meta:
         conditional_previews:
           - DataGenerationJobs=V1Preview
