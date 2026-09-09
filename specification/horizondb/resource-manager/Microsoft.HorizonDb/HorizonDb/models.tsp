@@ -1020,7 +1020,8 @@ model MicrosoftEntraAdministratorAdd {
 @added(Versions.v2026_09_01)
 @doc("A service-created authentication configuration returned by the authentications collection. The resource name is passwordMethod or microsoftEntra.")
 @parentResource(Cluster)
-model Authentication is Azure.ResourceManager.ProxyResource<AuthenticationProperties> {
+model Authentication
+  is Azure.ResourceManager.ProxyResource<AuthenticationProperties> {
   ...ResourceNameParameter<
     Resource = Authentication,
     KeyName = "authenticationName",
