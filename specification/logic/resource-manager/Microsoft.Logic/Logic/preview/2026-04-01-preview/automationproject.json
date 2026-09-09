@@ -209,6 +209,12 @@
         "x-ms-examples": {
           "Get Automation Project": {
             "$ref": "./examples/AutomationProjects_Get.json"
+          },
+          "Get Automation Project after subnet detach completes": {
+            "$ref": "./examples/AutomationProjects_Get_AfterSubnetDetach.json"
+          },
+          "Get Automation Project after subnet migration completes": {
+            "$ref": "./examples/AutomationProjects_Get_AfterSubnetMigration.json"
           }
         }
       },
@@ -282,6 +288,18 @@
         "x-ms-examples": {
           "Create or Update Automation Project": {
             "$ref": "./examples/AutomationProjects_CreateOrUpdate.json"
+          },
+          "Detach Automation Project from the customer subnet with PUT": {
+            "$ref": "./examples/AutomationProjects_CreateOrUpdate_DetachSubnet.json"
+          },
+          "Migrate Automation Project to a replacement subnet with PUT": {
+            "$ref": "./examples/AutomationProjects_CreateOrUpdate_MigrateSubnet.json"
+          },
+          "Update Automation Project with PUT preserving an omitted subnet": {
+            "$ref": "./examples/AutomationProjects_CreateOrUpdate_PreserveEmptyNetworking.json"
+          },
+          "Update Automation Project with PUT preserving omitted networking": {
+            "$ref": "./examples/AutomationProjects_CreateOrUpdate_PreserveNetworking.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -355,7 +373,13 @@
           }
         },
         "x-ms-examples": {
-          "Update Automation Project": {
+          "Detach Automation Project from the customer subnet with PATCH": {
+            "$ref": "./examples/AutomationProjects_Update_DetachSubnet.json"
+          },
+          "Migrate Automation Project to a replacement subnet with PATCH": {
+            "$ref": "./examples/AutomationProjects_Update_MigrateSubnet.json"
+          },
+          "Update Automation Project preserving the omitted subnet": {
             "$ref": "./examples/AutomationProjects_Update.json"
           }
         },
@@ -470,6 +494,31 @@
         "value"
       ]
     },
+    "AutomationProjectNetworking": {
+      "type": "object",
+      "description": "Customer-owned network used by the automation project's backing applications.",
+      "properties": {
+        "subnetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID of a subnet in the same region and customer tenant as the\nautomation project. The subnet may be in a different subscription in that customer tenant.\nService-owned backing resources may be in a different service tenant and subscription.\nThe subnet must be delegated to Microsoft.App/environments. The caller must have\nMicrosoft.Network/virtualNetworks/subnets/join/action permission on every non-null requested\nsubnet, in addition to Microsoft.Logic/automationProjects/write on the project.\nOn create, a subnet provisions network-connected backing applications; omission or null\nprovisions backing applications without a customer subnet. On PUT or PATCH of an existing\nproject, omission preserves the current subnet, the same subnet leaves networking unchanged,\nand a different non-null subnet requests asynchronous migration to replacement backing\napplications. Explicit null requests asynchronous detach to replacement backing applications\nwithout a customer subnet. Detaching an already detached project leaves networking unchanged.\nDuring provisioning or migration, responses describe the requested configuration, not proof\nof effective connectivity. Responses omit subnetResourceId when no customer subnet is requested.",
+          "minLength": 1,
+          "x-nullable": true,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        }
+      }
+    },
     "AutomationProjectProperties": {
       "type": "object",
       "description": "The properties of the automation project resource.",
@@ -483,6 +532,15 @@
           "type": "string",
           "description": "A description of the automation project.",
           "maxLength": 1024
+        },
+        "networking": {
+          "$ref": "#/definitions/AutomationProjectNetworking",
+          "description": "Customer networking configuration. Omitting networking or subnetResourceId in a PUT or PATCH\npreserves the current subnet. Network changes complete asynchronously through replacement\nbacking applications, not an in-place network update. The operation succeeds only after\nreplacement applications are ready, cutover is complete, and old network resources are released.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },
@@ -563,6 +621,15 @@
           "type": "string",
           "description": "A description of the automation project.",
           "maxLength": 1024
+        },
+        "networking": {
+          "$ref": "#/definitions/AutomationProjectNetworking",
+          "description": "Customer networking configuration. Omitting networking or subnetResourceId preserves the\ncurrent subnet. A changed subnet or explicit null subnetResourceId requests asynchronous\nmigration. The operation succeeds only after replacement applications are ready, cutover\nis complete, and old network resources are released.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     }

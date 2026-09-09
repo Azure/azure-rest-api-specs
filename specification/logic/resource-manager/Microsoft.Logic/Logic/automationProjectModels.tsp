@@ -48,6 +48,47 @@ model AutomationProjectProperties {
    */
   @maxLength(1024)
   description?: string;
+
+  /**
+   * Customer networking configuration. Omitting networking or subnetResourceId in a PUT or PATCH
+   * preserves the current subnet. Network changes complete asynchronously through replacement
+   * backing applications, not an in-place network update. The operation succeeds only after
+   * replacement applications are ready, cutover is complete, and old network resources are released.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  networking?: AutomationProjectNetworking;
+}
+
+/**
+ * Customer-owned network used by the automation project's backing applications.
+ */
+model AutomationProjectNetworking {
+  /**
+   * Fully qualified resource ID of a subnet in the same region and customer tenant as the
+   * automation project. The subnet may be in a different subscription in that customer tenant.
+   * Service-owned backing resources may be in a different service tenant and subscription.
+   * The subnet must be delegated to Microsoft.App/environments. The caller must have
+   * Microsoft.Network/virtualNetworks/subnets/join/action permission on every non-null requested
+   * subnet, in addition to Microsoft.Logic/automationProjects/write on the project.
+   * On create, a subnet provisions network-connected backing applications; omission or null
+   * provisions backing applications without a customer subnet. On PUT or PATCH of an existing
+   * project, omission preserves the current subnet, the same subnet leaves networking unchanged,
+   * and a different non-null subnet requests asynchronous migration to replacement backing
+   * applications. Explicit null requests asynchronous detach to replacement backing applications
+   * without a customer subnet. Detaching an already detached project leaves networking unchanged.
+   * During provisioning or migration, responses describe the requested configuration, not proof
+   * of effective connectivity. Responses omit subnetResourceId when no customer subnet is requested.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null requests subnet detach on PUT/PATCH; omission preserves the current subnet. Null is an operation input, not a substitute for optionality."
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @minLength(1)
+  subnetResourceId?:
+    | Azure.Core.armResourceIdentifier<[
+        {
+          type: "Microsoft.Network/virtualNetworks/subnets";
+        }
+      ]>
+    | null;
 }
 
 /**
@@ -59,6 +100,15 @@ model AutomationProjectUpdateProperties {
    */
   @maxLength(1024)
   description?: string;
+
+  /**
+   * Customer networking configuration. Omitting networking or subnetResourceId preserves the
+   * current subnet. A changed subnet or explicit null subnetResourceId requests asynchronous
+   * migration. The operation succeeds only after replacement applications are ready, cutover
+   * is complete, and old network resources are released.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  networking?: AutomationProjectNetworking;
 }
 
 /**

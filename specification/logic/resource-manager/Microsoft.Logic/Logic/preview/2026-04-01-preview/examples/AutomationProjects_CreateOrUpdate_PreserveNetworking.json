@@ -1,15 +1,13 @@
 {
-  "operationId": "AutomationProjects_Update",
-  "title": "Update Automation Project preserving the omitted subnet",
+  "operationId": "AutomationProjects_CreateOrUpdate",
+  "title": "Update Automation Project with PUT preserving omitted networking",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "automationProjectName": "myAutomationProject",
     "api-version": "2026-04-01-preview",
-    "properties": {
-      "tags": {
-        "environment": "staging"
-      },
+    "resource": {
+      "location": "eastus",
       "properties": {
         "description": "Updated automation project description"
       }
@@ -22,35 +20,29 @@
         "name": "myAutomationProject",
         "type": "Microsoft.Logic/automationProjects",
         "location": "eastus",
-        "tags": {
-          "environment": "staging"
-        },
-        "identity": {
-          "type": "SystemAssigned",
-          "principalId": "11111111-1111-1111-1111-111111111111",
-          "tenantId": "22222222-2222-2222-2222-222222222222"
-        },
         "properties": {
           "provisioningState": "Succeeded",
           "description": "Updated automation project description",
           "networking": {
             "subnetResourceId": "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/networkResourceGroup/providers/Microsoft.Network/virtualNetworks/customerVnet/subnets/automationSubnet"
           }
-        },
-        "systemData": {
-          "createdBy": "user@example.com",
-          "createdByType": "User",
-          "createdAt": "2026-03-01T00:00:00.000Z",
-          "lastModifiedBy": "user@example.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2026-03-01T00:00:00.000Z"
         }
       }
     },
-    "202": {
+    "201": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Logic/locations/eastus/operationStatuses/update-op-id?api-version=2026-04-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Logic/locations/eastus/operationStatuses/project-create?api-version=2026-04-01-preview",
         "Retry-After": "10"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Logic/automationProjects/myAutomationProject",
+        "name": "myAutomationProject",
+        "type": "Microsoft.Logic/automationProjects",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Provisioning",
+          "description": "Updated automation project description"
+        }
       }
     }
   }

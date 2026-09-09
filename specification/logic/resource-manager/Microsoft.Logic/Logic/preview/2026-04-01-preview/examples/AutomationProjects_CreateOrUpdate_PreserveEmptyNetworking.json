@@ -1,0 +1,47 @@
+{
+  "operationId": "AutomationProjects_CreateOrUpdate",
+  "title": "Update Automation Project with PUT preserving an omitted subnet",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "automationProjectName": "myAutomationProject",
+    "api-version": "2026-04-01-preview",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "networking": {}
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Logic/automationProjects/myAutomationProject",
+        "name": "myAutomationProject",
+        "type": "Microsoft.Logic/automationProjects",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "networking": {
+            "subnetResourceId": "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/networkResourceGroup/providers/Microsoft.Network/virtualNetworks/customerVnet/subnets/automationSubnet"
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Logic/locations/eastus/operationStatuses/project-create?api-version=2026-04-01-preview",
+        "Retry-After": "10"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Logic/automationProjects/myAutomationProject",
+        "name": "myAutomationProject",
+        "type": "Microsoft.Logic/automationProjects",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Provisioning"
+        }
+      }
+    }
+  }
+}

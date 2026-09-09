@@ -1,0 +1,36 @@
+{
+  "operationId": "AutomationProjects_Update",
+  "title": "Detach Automation Project from the customer subnet with PATCH",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "automationProjectName": "myAutomationProject",
+    "api-version": "2026-04-01-preview",
+    "properties": {
+      "properties": {
+        "networking": {
+          "subnetResourceId": null
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Logic/automationProjects/myAutomationProject",
+        "name": "myAutomationProject",
+        "type": "Microsoft.Logic/automationProjects",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Logic/locations/eastus/operationStatuses/subnet-detach?api-version=2026-04-01-preview",
+        "Retry-After": "10"
+      }
+    }
+  }
+}
