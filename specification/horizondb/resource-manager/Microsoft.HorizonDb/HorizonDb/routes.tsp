@@ -515,6 +515,7 @@ interface MicrosoftEntraAdministrators {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Authentication method instances are service-created with the cluster and cannot be deleted independently."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-list-operation" "The shared Authentication resource defines the authentications collection list operation and returns both service-created authentication method instances."
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-put-operation" "Authentication method instances are service-created with the cluster; customers update an existing instance through PATCH and cannot create additional instances."
 @added(Versions.v2026_09_01)
 @doc("Operations for the service-created PostgreSQL username-and-password authentication method of a HorizonDB cluster.")
@@ -531,10 +532,7 @@ interface PasswordAuthentications {
   >;
 
   @doc("Lists the two service-created authentication configurations for the cluster: passwordMethod and microsoftEntra.")
-  list is ArmResourceListByParent<
-    PasswordAuthentication,
-    Response = ArmResponse<Azure.ResourceManager.ResourceListCustomResult<Authentication>>
-  >;
+  list is ArmResourceListByParent<Authentication>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Authentication method instances are service-created with the cluster and cannot be deleted independently."

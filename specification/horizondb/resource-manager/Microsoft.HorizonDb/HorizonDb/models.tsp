@@ -1019,22 +1019,14 @@ model MicrosoftEntraAdministratorAdd {
 
 @added(Versions.v2026_09_01)
 @doc("A service-created authentication configuration returned by the authentications collection. The resource name is passwordMethod or microsoftEntra.")
-model Authentication {
-  @doc("The Azure resource ID of the service-created authentication configuration.")
-  @visibility(Lifecycle.Read)
-  id: armResourceIdentifier;
-
-  @doc("The fixed name of the service-created authentication configuration.")
-  @visibility(Lifecycle.Read)
-  name: AuthenticationName;
-
-  @doc("The Azure resource type.")
-  @visibility(Lifecycle.Read)
-  type: "Microsoft.HorizonDb/clusters/authentications";
-
-  @doc("The authentication configuration properties.")
-  @visibility(Lifecycle.Read)
-  properties: AuthenticationProperties;
+@parentResource(Cluster)
+model Authentication is Azure.ResourceManager.ProxyResource<AuthenticationProperties> {
+  ...ResourceNameParameter<
+    Resource = Authentication,
+    KeyName = "authenticationName",
+    SegmentName = "authentications",
+    Type = AuthenticationName
+  >;
 }
 
 @added(Versions.v2026_09_01)
