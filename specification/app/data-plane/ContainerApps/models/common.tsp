@@ -50,7 +50,6 @@ model AzureResourceScope {
   @path sandboxGroupName: string;
 }
 
-
 /** EntityTagHeaderValue wire model. */
 model EntityTagHeaderValue {
   /** tag value. */

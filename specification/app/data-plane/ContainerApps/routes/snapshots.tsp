@@ -3,20 +3,14 @@ using Azure.Core;
 
 namespace ContainerAppsSandbox;
 
-/** Accepted. */
-model DeleteSnapshotResult202 {
-  /** HTTP response status code. */
-  @statusCode statusCode: 202;
-}
-
 /** No Content. */
 model DeleteSnapshotResult204 {
   /** HTTP response status code. */
   @statusCode statusCode: 204;
 }
 
-/** Successful responses returned by deleteSnapshot. */
-alias DeleteSnapshotResult = DeleteSnapshotResult202 | DeleteSnapshotResult204;
+/** Successful response returned by deleteSnapshot. */
+alias DeleteSnapshotResult = DeleteSnapshotResult204;
 
 /** Errors returned by deleteSnapshot. */
 alias DeleteSnapshotErrors = ErrorResult<401> | ErrorResult<500>;

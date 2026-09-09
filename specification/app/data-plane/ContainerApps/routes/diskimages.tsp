@@ -3,22 +3,14 @@ using Azure.Core;
 
 namespace ContainerAppsSandbox;
 
-/** Accepted. */
-model DeleteDiskImageResult202 {
-  /** HTTP response status code. */
-  @statusCode statusCode: 202;
-}
-
 /** No Content. */
 model DeleteDiskImageResult204 {
   /** HTTP response status code. */
   @statusCode statusCode: 204;
 }
 
-/** Successful responses returned by deleteDiskImage. */
-alias DeleteDiskImageResult =
-  | DeleteDiskImageResult202
-  | DeleteDiskImageResult204;
+/** Successful response returned by deleteDiskImage. */
+alias DeleteDiskImageResult = DeleteDiskImageResult204;
 
 /** Errors returned by deleteDiskImage. */
 alias DeleteDiskImageErrors =
