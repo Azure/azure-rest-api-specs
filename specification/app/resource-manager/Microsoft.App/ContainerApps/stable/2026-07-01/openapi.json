@@ -10683,7 +10683,7 @@
       "description": "An environment mode available to the subscription.",
       "properties": {
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The Azure region in which the environment mode is available.",
           "x-ms-mutability": [
             "read",
@@ -10834,6 +10834,10 @@
       "required": [
         "value"
       ]
+    },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
     },
     "AzureActiveDirectory": {
       "type": "object",
@@ -11182,6 +11186,7 @@
         },
         "managedIdentityResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The Resource ID of a User-Assigned Managed Identity. Should not be used along with clientId."
         }
       }

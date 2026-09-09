@@ -1644,7 +1644,7 @@ model BlobStorageTokenStore {
    */
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_07_01)
-  managedIdentityResourceId?: string;
+  managedIdentityResourceId?: armResourceIdentifier;
 }
 
 /**
@@ -1818,7 +1818,7 @@ model AvailableEnvironmentMode
    * The Azure region in which the environment mode is available.
    */
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: string;
+  location?: azureLocation;
 
   /**
    * The environment mode details.
