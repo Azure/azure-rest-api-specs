@@ -5,6 +5,7 @@ import "./fleet.tsp";
 import "./fleetmember.tsp";
 import "./fleetnamespace.tsp";
 import "./gate.tsp";
+import "./identitybinding.tsp";
 import "./update/common.tsp";
 import "./update/run.tsp";
 import "./update/strategy.tsp";

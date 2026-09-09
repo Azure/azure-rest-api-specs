@@ -58,6 +58,9 @@
       "name": "Gates"
     },
     {
+      "name": "FleetIdentityBindings"
+    },
+    {
       "name": "UpdateRuns"
     },
     {
@@ -1460,6 +1463,381 @@
         "x-ms-examples": {
           "Updates a Gate resource.": {
             "$ref": "./examples/Gates_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/identityBindings": {
+      "get": {
+        "operationId": "FleetIdentityBindings_ListByFleet",
+        "tags": [
+          "FleetIdentityBindings"
+        ],
+        "description": "List FleetIdentityBinding resources by Fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetIdentityBindingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List fleet identity bindings by fleet.": {
+            "$ref": "./examples/FleetIdentityBindings_ListByFleet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/identityBindings/{identityBindingName}": {
+      "get": {
+        "operationId": "FleetIdentityBindings_Get",
+        "tags": [
+          "FleetIdentityBindings"
+        ],
+        "description": "Get a FleetIdentityBinding",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "identityBindingName",
+            "in": "path",
+            "description": "The name of the fleet identity binding resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetIdentityBinding"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a fleet identity binding.": {
+            "$ref": "./examples/FleetIdentityBindings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FleetIdentityBindings_CreateOrUpdate",
+        "tags": [
+          "FleetIdentityBindings"
+        ],
+        "description": "Create a FleetIdentityBinding",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if no entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "identityBindingName",
+            "in": "path",
+            "description": "The name of the fleet identity binding resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]{0,63}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FleetIdentityBinding"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FleetIdentityBinding' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FleetIdentityBinding"
+            }
+          },
+          "201": {
+            "description": "Resource 'FleetIdentityBinding' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FleetIdentityBinding"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a fleet identity binding.": {
+            "$ref": "./examples/FleetIdentityBindings_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "FleetIdentityBindings_Delete",
+        "tags": [
+          "FleetIdentityBindings"
+        ],
+        "description": "Delete a FleetIdentityBinding",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "identityBindingName",
+            "in": "path",
+            "description": "The name of the fleet identity binding resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]{0,63}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a fleet identity binding.": {
+            "$ref": "./examples/FleetIdentityBindings_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/identityBindings/{identityBindingName}/apply": {
+      "post": {
+        "operationId": "FleetIdentityBindings_Apply",
+        "tags": [
+          "FleetIdentityBindings"
+        ],
+        "description": "Applies the fleet identity binding to the selected fleet members, creating, updating or deleting the corresponding managedCluster/identityBinding resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "identityBindingName",
+            "in": "path",
+            "description": "The name of the fleet identity binding resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetIdentityBinding"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apply a fleet identity binding to the selected members.": {
+            "$ref": "./examples/FleetIdentityBindings_Apply.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4017,6 +4395,23 @@
         }
       ]
     },
+    "FleetAllowedSubject": {
+      "type": "object",
+      "description": "A subject authorized to use the identity binding for token exchange.\nThe namespace selector is required and must be non-empty. The service\naccount selector is optional; when omitted, all service accounts in\nmatching namespaces are authorized. Selectors within a single\nAllowedSubject are AND'd; multiple AllowedSubjects on an\nIdentityBinding are OR'd.",
+      "properties": {
+        "namespaceSelector": {
+          "$ref": "#/definitions/FleetIdentityBindingLabelSelector",
+          "description": "Label selector matching the namespaces in which this identity may be\nused. Must be non-empty: an empty selector would match every namespace\nand is rejected to prevent overly permissive bindings. Use the built-in\n`kubernetes.io/metadata.name` label to target specific namespaces by\nname."
+        },
+        "serviceAccountSelector": {
+          "$ref": "#/definitions/FleetIdentityBindingLabelSelector",
+          "description": "Optional label selector matching the service accounts (within the\nnamespaces matched by `namespaceSelector`) that may use this identity.\nWhen omitted, all service accounts in matching namespaces are\nauthorized. When provided, it must be non-empty."
+        }
+      },
+      "required": [
+        "namespaceSelector"
+      ]
+    },
     "FleetCredentialResult": {
       "type": "object",
       "description": "One credential result item.",
@@ -4095,6 +4490,282 @@
         "portalFqdn": {
           "type": "string",
           "description": "The Azure Portal FQDN of the Fleet hub.",
+          "readOnly": true
+        }
+      }
+    },
+    "FleetIdentityBinding": {
+      "type": "object",
+      "description": "A fleet identity binding binds a user-assigned managed identity across the fleet members selected by its member selector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FleetIdentityBindingProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FleetIdentityBindingLabelSelector": {
+      "type": "object",
+      "description": "A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.",
+      "properties": {
+        "matchLabels": {
+          "type": "array",
+          "description": "matchLabels is an array of {key=value} pairs. A single {key=value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is `key`, the operator is `In`, and the values array contains only `value`. The requirements are ANDed.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "matchExpressions": {
+          "type": "array",
+          "description": "matchExpressions is a list of label selector requirements. The requirements are ANDed.",
+          "items": {
+            "$ref": "#/definitions/FleetIdentityBindingLabelSelectorRequirement"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "FleetIdentityBindingLabelSelectorOperator": {
+      "type": "string",
+      "description": "operator represents a key's relationship to a set of values. Valid operators are In and NotIn",
+      "enum": [
+        "In",
+        "NotIn",
+        "Exists",
+        "DoesNotExist"
+      ],
+      "x-ms-enum": {
+        "name": "FleetIdentityBindingLabelSelectorOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "In",
+            "value": "In",
+            "description": "The value of the key should be in the given list."
+          },
+          {
+            "name": "NotIn",
+            "value": "NotIn",
+            "description": "The value of the key should not be in the given list."
+          },
+          {
+            "name": "Exists",
+            "value": "Exists",
+            "description": "The value of the key should exist."
+          },
+          {
+            "name": "DoesNotExist",
+            "value": "DoesNotExist",
+            "description": "The value of the key should not exist."
+          }
+        ]
+      }
+    },
+    "FleetIdentityBindingLabelSelectorRequirement": {
+      "type": "object",
+      "description": "A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "key is the label key that the selector applies to."
+        },
+        "operator": {
+          "$ref": "#/definitions/FleetIdentityBindingLabelSelectorOperator",
+          "description": "operator represents a key's relationship to a set of values. Valid operators are In and NotIn"
+        },
+        "values": {
+          "type": "array",
+          "description": "values is an array of string values, the values array must be non-empty.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FleetIdentityBindingListResult": {
+      "type": "object",
+      "description": "The response of a FleetIdentityBinding list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FleetIdentityBinding items on this page",
+          "items": {
+            "$ref": "#/definitions/FleetIdentityBinding"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FleetIdentityBindingManagedIdentityProfile": {
+      "type": "object",
+      "description": "Managed identity profile for the identity binding.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the managed identity.",
+          "pattern": "^/subscriptions/[a-zA-Z0-9-]+/resourceGroups/[a-zA-Z0-9-]+/providers/Microsoft.ManagedIdentity/userAssignedIdentities/[a-zA-Z0-9-]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "objectId": {
+          "type": "string",
+          "description": "The object ID of the managed identity.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of the managed identity.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of the managed identity.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
+    "FleetIdentityBindingOidcIssuerProfile": {
+      "type": "object",
+      "description": "IdentityBinding OIDC issuer profile.",
+      "properties": {
+        "oidcIssuerUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The OIDC issuer URL of the IdentityBinding.",
+          "readOnly": true
+        }
+      }
+    },
+    "FleetIdentityBindingProperties": {
+      "type": "object",
+      "description": "The properties of a fleet identity binding.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/FleetIdentityBindingProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "memberSelector": {
+          "$ref": "#/definitions/MemberSelector",
+          "description": "Select the fleet members that this identity binding is applied to.\n  * Only key/value pairs with the `=` operator are accepted in the label selector.\n  * If empty or not specified, no fleet members will be selected.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/FleetIdentityBindingManagedIdentityProfile",
+          "description": "Managed identity profile for the identity binding.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "allowedSubjects": {
+          "type": "array",
+          "description": "Optional list of subjects authorized to use this identity binding for\ntoken exchange. Each entry pairs a required namespace label selector\nwith an optional service account label selector; selectors within an\nentry are AND'd, and multiple entries are OR'd. When omitted or empty,\nauthorization falls back exclusively to ClusterRole/ClusterRoleBinding\nevaluation. Maximum 100 entries.",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/FleetAllowedSubject"
+          },
+          "x-ms-identifiers": []
+        },
+        "oidcIssuer": {
+          "$ref": "#/definitions/FleetIdentityBindingOidcIssuerProfile",
+          "description": "The OIDC issuer URL of the IdentityBinding.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/FleetIdentityBindingStatus",
+          "description": "The fleet identity binding status.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "managedIdentity"
+      ]
+    },
+    "FleetIdentityBindingProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the fleet identity binding resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Applying"
+      ],
+      "x-ms-enum": {
+        "name": "FleetIdentityBindingProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Applying",
+            "value": "Applying",
+            "description": "The identity binding is being applied to the selected fleet members."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "FleetIdentityBindingStatus": {
+      "type": "object",
+      "description": "Status of the fleet identity binding.",
+      "properties": {
+        "lastOperationId": {
+          "type": "string",
+          "description": "The last operation ID for the fleet identity binding.",
+          "readOnly": true
+        },
+        "lastOperationError": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "The last operation error of the fleet identity binding.",
           "readOnly": true
         }
       }
