@@ -38,6 +38,7 @@ model DataGenerationModelOptions {
 }
 
 @doc("Caller-supplied inputs for a data generation job.")
+@discriminator("scenario")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model DataGenerationJobInputs {
   @doc("The display name of the data generation job.")
@@ -46,31 +47,71 @@ model DataGenerationJobInputs {
   @doc("The sources used for the data generation job.")
   sources: DataGenerationJobSource[];
 
-  @doc("The options for the data generation job.")
-  options: DataGenerationJobOptions;
+  @doc("The generation settings for the data generation job.")
+  generation_settings: DataGenerationJobOptions;
 
   @doc("The scenario of the data generation job. Either for fine-tuning or evaluation.")
   scenario: DataGenerationJobScenario;
-
-  @doc("Optional caller-supplied metadata for the job's output. See individual fields for whether they apply to file outputs (fine-tuning scenarios), dataset outputs (evaluation scenario), or both.")
-  output_options?: DataGenerationJobOutputOptions;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@doc("Output options for data generation job.")
+@doc("Caller-supplied inputs for an evaluation data generation job.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-model DataGenerationJobOutputOptions {
-  @doc("Name to assign to the output. Used as the filename for Azure OpenAI file outputs (fine-tuning scenarios) and as the dataset name for dataset outputs (evaluation scenario).")
+model EvaluationDataGenerationJobInputs extends DataGenerationJobInputs {
+  @doc("The scenario of the data generation job, which is Evaluation for this model.")
+  scenario: DataGenerationJobScenario.evaluation;
+
+  @doc("Optional dataset output target for the generated evaluation data.")
+  output_target?: EvaluationDataGenerationJobOutputTarget;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("Caller-supplied inputs for a supervised fine-tuning data generation job.")
+@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+model SupervisedFineTuningDataGenerationJobInputs
+  extends DataGenerationJobInputs {
+  @doc("The scenario of the data generation job, which is Supervised Fine-tuning for this model.")
+  scenario: DataGenerationJobScenario.supervised_finetuning;
+
+  @doc("Optional file output target for the generated supervised fine-tuning data.")
+  output_target?: FineTuningDataGenerationJobOutputTarget;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("Caller-supplied inputs for a reinforcement fine-tuning data generation job.")
+@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+model ReinforcementFineTuningDataGenerationJobInputs
+  extends DataGenerationJobInputs {
+  @doc("The scenario of the data generation job, which is Reinforcement Fine-tuning for this model.")
+  scenario: DataGenerationJobScenario.reinforcement_finetuning;
+
+  @doc("Optional file output target for the generated reinforcement fine-tuning data.")
+  output_target?: FineTuningDataGenerationJobOutputTarget;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("Dataset output target for an evaluation data generation job.")
+@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+model EvaluationDataGenerationJobOutputTarget {
+  @doc("Dataset name to assign to the output.")
   name?: string;
 
-  @doc("Description to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs.")
+  @doc("Description to assign to the output dataset.")
   description?: string;
 
-  @doc("Tags to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs.")
+  @doc("Tags to assign to the output dataset.")
   tags?: Record<string>;
 
   @doc("Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows.")
   write_mode?: DataGenerationJobOutputWriteMode;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("File output target for a fine-tuning data generation job.")
+@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+model FineTuningDataGenerationJobOutputTarget {
+  @doc("Filename to assign to the generated fine-tuning file.")
+  name?: string;
 }
 
 @doc("The supported write modes for data generation job outputs.")

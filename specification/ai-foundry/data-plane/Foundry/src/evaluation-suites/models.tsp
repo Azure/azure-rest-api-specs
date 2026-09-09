@@ -134,11 +134,11 @@ model EvaluationSuiteVersion {
     | TestingCriterionAzureAIEvaluator)[];
 
   @doc("""
-    Target for this evaluation suite. Uses the existing Target discriminated type
+    Target for this evaluation suite. Uses the existing FoundryEvaluationTarget discriminated type
     from eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
     Optional — allows suites to exist without a target.
     """)
-  target?: Target;
+  target?: FoundryEvaluationTarget;
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @doc("""
@@ -313,7 +313,7 @@ model EvaluationSuiteGenerationJobInputs {
     immediately after generation completes.
     Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
     """)
-  target?: Target;
+  target?: FoundryEvaluationTarget;
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @doc("""
