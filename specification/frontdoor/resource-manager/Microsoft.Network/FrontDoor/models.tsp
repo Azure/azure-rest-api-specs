@@ -210,6 +210,18 @@ union VariableName {
    * None
    */
   None: "None",
+
+  /**
+   * Asn
+   */
+  @added(Versions.v2026_04_01)
+  Asn: "Asn",
+
+  /**
+   * Ja4
+   */
+  @added(Versions.v2026_04_01)
+  Ja4: "Ja4",
 }
 
 /**
