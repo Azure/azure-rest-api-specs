@@ -450,39 +450,14 @@ interface ParameterGroups {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom non-resource subscription-level operation with explicit route and parameters."
 @added(Versions.v2026_09_01)
-@route("/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/parameterGroups")
+@armResourceOperations
 interface DefaultParameterGroups {
   @doc("Lists default parameter groups available for a subscription in a specific region. The response contains at most one default parameter group for each PostgreSQL version.")
-  @get
-  @list
-  listBySubscriptionAndRegion(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-
-    @doc("The Azure region for which to list default parameter groups.")
-    @path
-    location: Azure.Core.azureLocation,
-  ):
-    | ArmResponse<Azure.ResourceManager.ResourceListResult<DefaultParameterGroup>>
-    | ErrorResponse;
+  listBySubscriptionAndRegion is ArmResourceListByParent<DefaultParameterGroup>;
 
   @doc("Gets a default parameter group available for a subscription in a specific region. Each PostgreSQL version has at most one default parameter group in a location.")
-  @route("/{name}")
-  @get
-  get(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-
-    @doc("The Azure region containing the default parameter group.")
-    @path
-    location: Azure.Core.azureLocation,
-
-    @doc("The name of the default parameter group.")
-    @path
-    name: string,
-  ): ArmResponse<DefaultParameterGroup> | ErrorResponse;
+  get is ArmResourceRead<DefaultParameterGroup>;
 }
 
 @added(Versions.v2026_05_01_preview)

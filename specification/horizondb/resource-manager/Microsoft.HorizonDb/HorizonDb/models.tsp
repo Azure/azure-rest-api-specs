@@ -1751,9 +1751,22 @@ model ParameterGroupConnectionProperties {
 
 @added(Versions.v2026_09_01)
 @doc("A default parameter group available in a specific region. It contains engine-defined parameters and excludes service and other non-engine entries. For each PostgreSQL version, the DefaultParameterGroups APIs return at most one default parameter group in a location.")
-model DefaultParameterGroup {
-  @doc("The unique name of the default parameter group.")
-  name: string;
+@parentResource(SubscriptionLocationResource)
+model DefaultParameterGroup is ProxyResource<DefaultParameterGroupProperties> {
+  ...ResourceNameParameter<
+    Resource = DefaultParameterGroup,
+    KeyName = "name",
+    SegmentName = "parameterGroups",
+    NamePattern = "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+  >;
+}
+
+@added(Versions.v2026_09_01)
+@doc("Properties of a default parameter group.")
+model DefaultParameterGroupProperties {
+  @doc("The provisioning state of the default parameter group.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 
   @doc("Engine-defined parameters in the default parameter group. Service and other non-engine entries are excluded.")
   @identifiers(#["name"])

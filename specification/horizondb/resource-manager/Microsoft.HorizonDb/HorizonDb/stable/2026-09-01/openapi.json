@@ -61,6 +61,9 @@
       "name": "ParameterGroups"
     },
     {
+      "name": "DefaultParameterGroups"
+    },
+    {
       "name": "MicrosoftEntraAdministrators"
     },
     {
@@ -216,6 +219,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/parameterGroups": {
       "get": {
         "operationId": "DefaultParameterGroups_ListBySubscriptionAndRegion",
+        "tags": [
+          "DefaultParameterGroups"
+        ],
         "description": "Lists default parameter groups available for a subscription in a specific region. The response contains at most one default parameter group for each PostgreSQL version.",
         "parameters": [
           {
@@ -225,11 +231,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "The Azure region for which to list default parameter groups.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -259,6 +261,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/parameterGroups/{name}": {
       "get": {
         "operationId": "DefaultParameterGroups_Get",
+        "tags": [
+          "DefaultParameterGroups"
+        ],
         "description": "Gets a default parameter group available for a subscription in a specific region. Each PostgreSQL version has at most one default parameter group in a location.",
         "parameters": [
           {
@@ -268,18 +273,15 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "The Azure region containing the default parameter group.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the default parameter group.",
+            "description": "The name of the DefaultParameterGroup",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -7338,33 +7340,15 @@
       "type": "object",
       "description": "A default parameter group available in a specific region. It contains engine-defined parameters and excludes service and other non-engine entries. For each PostgreSQL version, the DefaultParameterGroups APIs return at most one default parameter group in a location.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The unique name of the default parameter group."
-        },
-        "parameters": {
-          "type": "array",
-          "description": "Engine-defined parameters in the default parameter group. Service and other non-engine entries are excluded.",
-          "items": {
-            "$ref": "#/definitions/ParameterProperties"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the default parameter group."
-        },
-        "postgreSqlVersion": {
-          "$ref": "#/definitions/PostgreSqlVersion",
-          "description": "PostgreSQL version for which this default parameter group is valid."
+        "properties": {
+          "$ref": "#/definitions/DefaultParameterGroupProperties",
+          "description": "The resource-specific properties for this resource."
         }
       },
-      "required": [
-        "name",
-        "parameters",
-        "postgreSqlVersion"
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "DefaultParameterGroupListResult": {
@@ -7386,6 +7370,39 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "DefaultParameterGroupProperties": {
+      "type": "object",
+      "description": "Properties of a default parameter group.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the default parameter group.",
+          "readOnly": true
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Engine-defined parameters in the default parameter group. Service and other non-engine entries are excluded.",
+          "items": {
+            "$ref": "#/definitions/ParameterProperties"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the default parameter group."
+        },
+        "postgreSqlVersion": {
+          "$ref": "#/definitions/PostgreSqlVersion",
+          "description": "PostgreSQL version for which this default parameter group is valid."
+        }
+      },
+      "required": [
+        "parameters",
+        "postgreSqlVersion"
       ]
     },
     "DottedDecimalIpv4Address": {
