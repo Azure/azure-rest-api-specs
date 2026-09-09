@@ -1,10 +1,8 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-04-22
+     Upstream alignment: 2026-08-15
      Derived from:
        - Azure REST API Guidelines (vNext)
          https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
-       - Azure Resource Provider Contract (RPC) v1.0
-         https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0
      The upstream documents always take precedence if there is a conflict. -->
 
 # Example File Quality Rules
@@ -18,7 +16,40 @@ ensure example files are accurate, complete, and professional.
 **Authoritative references:**
 
 - [Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)
-- [Azure Resource Provider Contract](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0)
+
+---
+
+## EX-PAYLOAD: Example Payload Correctness
+
+- **Rule ID:** `EX-PAYLOAD`
+- **Severity:** Blocking or Warning according to the matrix below
+
+This severity matrix is repository review synthesis for published examples, not
+a claim that Azure REST API Guidelines prohibit services from returning unknown
+extensible-enum values. The Guidelines explicitly permit that wire behavior.
+The Warning below addresses a sample that advertises a value absent from the
+versioned documentation; it must never claim that the extensible response is
+schema-invalid.
+
+An example payload must match the operation contract. For an unknown enum
+literal, first determine where the value appears and whether the enum is
+extensible:
+
+| Example value location             | Enum shape             | Severity |
+| ---------------------------------- | ---------------------- | -------- |
+| Response body, ordinary property   | `modelAsString: true`  | Warning  |
+| Response body, ordinary property   | `modelAsString: false` | Blocking |
+| Required polymorphic discriminator | Either                 | Blocking |
+| Request path or query parameter    | Either                 | Blocking |
+
+An extensible response-body enum accepts arbitrary strings during validation,
+but an undeclared value still misleads customers in documentation and generated
+SDK samples. Do not raise that case above Warning. Discriminator and request-URL
+values remain Blocking because they affect subtype selection and request
+routing, respectively.
+
+The authoritative detection details and rationale are in
+[`openapi-review.instructions.md` section 22.7](../../../instructions/openapi-review.instructions.md#227-example-payload-correctness-ex-payload).
 
 ---
 

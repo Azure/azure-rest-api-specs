@@ -1,5 +1,6 @@
 import "../sdk-common/error.default.tsp";
 import "../agents/routes.tsp";
+import "../voice-agents/routes.tsp";
 import "../toolboxes/routes.tsp";
 import "../skills/routes.tsp";
 import "../agents-session-files/routes.tsp";
@@ -23,6 +24,12 @@ namespace Azure.AI.Projects {
 
   @@usage(ApiError, Usage.output);
   @@access(ApiError, Access.public);
+
+  // The Realtime message base now owns the `message` discriminator in the
+  // OpenAI hierarchy. Do not regenerate duplicate leaf properties in C#.
+  @@scope(OpenAI.RealtimeConversationItemMessageSystem.type, "!csharp");
+  @@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!csharp");
+  @@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!csharp");
 
   // --------------------------------------------------------------------------------
   // Fix the xref.
@@ -117,8 +124,6 @@ namespace Azure.AI.Projects {
   @@clientName(ToolArgumentBinding, "StructuredInputToolArgumentBinding");
   @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
   @@clientName(FabricIQPreviewToolboxTool.server_url, "ServerUri");
-  //@@clientName(WebIQPreviewTool.server_url, "ServerUri");
-  //@@clientName(WebIQPreviewToolboxTool.server_url, "ServerUri");
 
   // --------------------------------------------------------------------------------
   // Renames and visibility changes for targeted suppressions
@@ -326,6 +331,9 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   @@access(Agents.createAgentVersionFromCode, Access.internal);
   @@access(Agents.downloadAgentCode, Access.internal);
+
+  // WebSocket protocol upgrades are not representable by the C# HTTP client generator.
+  @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!csharp");
 
   // --------------------------------------------------------------------------------
   // Hide session operations, containing the foundry features
