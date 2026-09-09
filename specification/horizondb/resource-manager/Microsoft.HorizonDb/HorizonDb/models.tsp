@@ -513,18 +513,14 @@ scalar PoolResourceId
 
 @added(Versions.v2026_09_01)
 @doc("Long-running operation headers returned while creating or replacing a HorizonDB resource.")
-model HorizonDbResourceLroHeaders<
-  Resource extends Azure.ResourceManager.Foundations.SimpleResource
-> {
+model HorizonDbResourceLroHeaders<Resource extends Azure.ResourceManager.Foundations.SimpleResource> {
   ...ArmAsyncOperationHeader<FinalResult = Resource>;
   ...Azure.Core.Foundations.RetryAfterHeader;
 }
 
 @added(Versions.v2026_09_01)
 @doc("The response returned when an asynchronous HorizonDB resource replacement is accepted.")
-model HorizonDbResourceUpdatedLroResponse<
-  Resource extends Azure.ResourceManager.Foundations.SimpleResource
-> {
+model HorizonDbResourceUpdatedLroResponse<Resource extends Azure.ResourceManager.Foundations.SimpleResource> {
   ...ArmResourceUpdatedResponse<Resource>;
   ...HorizonDbResourceLroHeaders<Resource>;
 }
