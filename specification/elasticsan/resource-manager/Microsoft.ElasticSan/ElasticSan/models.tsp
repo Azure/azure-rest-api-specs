@@ -277,6 +277,39 @@ union DeleteType {
 }
 
 /**
+ * The state of snapshot which determines the access availability of the snapshot.
+ */
+@added(Versions.v2026_05_01_preview)
+union SnapshotAccessState {
+  string,
+
+  /**
+   * Default value.
+   */
+  Unknown: "Unknown",
+
+  /**
+   * The snapshot cannot be used for restore, copy or download to offline.
+   */
+  Pending: "Pending",
+
+  /**
+   * The snapshot can be used for restore, copy to different region, and download to offline.
+   */
+  Available: "Available",
+
+  /**
+   * The snapshot can be used for restoring volumes with fast performance but cannot be copied or downloaded.
+   */
+  InstantAccess: "InstantAccess",
+
+  /**
+   * The snapshot can be used for restoring volumes with fast performance, copied and downloaded.
+   */
+  AvailableWithInstantAccess: "AvailableWithInstantAccess",
+}
+
+/**
  * List of SKU Information objects
  */
 model SkuInformationList is Azure.Core.Page<SkuInformation>;
@@ -507,11 +540,11 @@ model ElasticSanProperties {
   version?: ElasticSanVersion;
 
   /**
-   * Used capacity in TiB.
+   * Used capacity in GiB.
    */
   @added(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read)
-  usedCapacityTiB?: int64;
+  usedCapacityGiB?: int64;
 
   /**
    * Total IOPS reserved by all the volume groups under an ElasticSan
@@ -1066,13 +1099,6 @@ model VolumeProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStates;
-
-  /**
-   * Used volume size in GiB.
-   */
-  @added(Versions.v2026_05_01_preview)
-  @visibility(Lifecycle.Read)
-  usedSizeGiB?: int64;
 }
 
 /**
@@ -1281,6 +1307,20 @@ model SnapshotProperties {
    */
   @visibility(Lifecycle.Read)
   volumeName?: string;
+
+  /**
+   * The state of snapshot which determines the access availability of the snapshot.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  snapshotAccessState?: SnapshotAccessState;
+
+  /**
+   * Percentage complete for the background copy of the snapshot when a snapshot is in InstantAccess state.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  completionPercent?: float32;
 }
 
 /**
