@@ -186,7 +186,7 @@ model FleetCredentialResults {
   kubeconfigs?: FleetCredentialResult[];
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_02_preview)
 @doc("The status of a Fleet member credential request.")
 union FleetMemberCredentialStatus {
   @doc("The credential request succeeded.")
@@ -198,7 +198,7 @@ union FleetMemberCredentialStatus {
   string,
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_02_preview)
 @doc("The credential request result for a Fleet member.")
 model FleetMemberCredentialResult {
   @visibility(Lifecycle.Read)
@@ -219,7 +219,7 @@ model FleetMemberCredentialResult {
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_02_preview)
 @doc("The request for Fleet member credentials. Specify memberNames to retrieve credentials for up to 100 explicitly selected members in one response. Omit memberNames to retrieve credentials for all applicable members with continuationToken used for subsequent pages.")
 model FleetMemberCredentialRequest {
   @minItems(1)
@@ -233,7 +233,7 @@ model FleetMemberCredentialRequest {
   continuationToken?: string;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_11_02_preview)
 @doc("The Fleet member credential results.")
 model FleetMemberCredentialResults {
   @identifiers(#["name"])
@@ -325,7 +325,7 @@ interface Fleets {
   @doc("Lists the user credentials of a Fleet.")
   listCredentials is ArmResourceActionSync<Fleet, void, FleetCredentialResults>;
 
-  @added(Versions.v2026_11_01_preview)
+  @added(Versions.v2026_11_02_preview)
   @action("listMemberCredentials")
   @doc("Lists the Kubernetes credentials of the Fleet members.")
   listMemberCredentials is ArmResourceActionSync<
