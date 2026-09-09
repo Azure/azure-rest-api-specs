@@ -113,7 +113,14 @@ model DrillProperties {
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
   @doc("The discriminator for the Drill object hierarchy.")
+  @removed(Versions.v2026_08_31_preview)
+  @renamedFrom(Versions.v2026_08_31_preview, "drillType")
   @visibility(Lifecycle.Create)
+  legacyDrillType: DrillType;
+
+  @doc("The discriminator for the Drill object hierarchy.")
+  @added(Versions.v2026_08_31_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   drillType: DrillType;
 
   @doc("Monitoring properties of the Drill.")
@@ -164,6 +171,13 @@ model LastRunProperties {
 @doc("Definition of Zonal Drill properties.")
 model ZonalDrillProperties extends DrillProperties {
   @doc("The discriminator for the Drill object hierarchy.")
+  @removed(Versions.v2026_08_31_preview)
+  @renamedFrom(Versions.v2026_08_31_preview, "drillType")
+  legacyDrillType: DrillType.Zonal;
+
+  @doc("The discriminator for the Drill object hierarchy.")
+  @added(Versions.v2026_08_31_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   drillType: DrillType.Zonal;
 
   @doc("An indication whether a VM is included in this Zonal Drill. If not, RO is not needed.")
@@ -190,6 +204,13 @@ model ZonalDrill is ProxyResource<ZonalDrillProperties> {
 @doc("Definition of Regional Drill properties.")
 model RegionalDrillProperties extends DrillProperties {
   @doc("The discriminator for the Drill object hierarchy.")
+  @removed(Versions.v2026_08_31_preview)
+  @renamedFrom(Versions.v2026_08_31_preview, "drillType")
+  legacyDrillType: DrillType.Regional;
+
+  @doc("The discriminator for the Drill object hierarchy.")
+  @added(Versions.v2026_08_31_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   drillType: DrillType.Regional;
 }
 
