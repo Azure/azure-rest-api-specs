@@ -352,6 +352,7 @@ union IsoDuration {
 }
 
 @doc("Model for service group membership.")
+@removed(Versions.v2026_09_30_preview)
 model ServiceGroupMembership {
   @doc("Arm Id of the service group.")
   serviceGroupId: armResourceIdentifier;
@@ -361,6 +362,7 @@ model ServiceGroupMembership {
 }
 
 @doc("Membership type of the service group to resource.")
+@removed(Versions.v2026_09_30_preview)
 union MembershipType {
   @doc("Resource is direct member of service group.")
   Direct: "Direct",

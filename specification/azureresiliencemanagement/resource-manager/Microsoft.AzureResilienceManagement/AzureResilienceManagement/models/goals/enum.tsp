@@ -47,6 +47,7 @@ union RequirementSelected {
 }
 
 @doc("Supported type of goal assignment.")
+@removed(Versions.v2026_09_30_preview)
 union GoalAssignmentType {
   string,
 
