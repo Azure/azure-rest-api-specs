@@ -59,19 +59,12 @@ model PostContentPackageUploadResult {
   @body body: ContentPackage;
 }
 
-/** Service Unavailable. */
-@error
-model PostContentPackageUploadError503 {
-  /** HTTP response status code. */
-  @statusCode statusCode: 503;
-}
-
 /** Errors returned by postContentPackageUpload. */
 alias PostContentPackageUploadErrors =
   | ErrorResult<400>
   | ErrorResult<401>
   | ErrorResult<500>
-  | PostContentPackageUploadError503;
+  | ErrorResult<503>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."

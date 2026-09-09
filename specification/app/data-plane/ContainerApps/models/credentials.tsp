@@ -116,6 +116,8 @@ namespace ContainerAppsSandbox {
     connectionRefDetails?: SandboxGroupCredentialConnectionRefDetails;
 
     /** parameterValues value. */
+    @secret
+    @visibility(Lifecycle.Create, Lifecycle.Update)
     parameterValues?: Record<string>;
 
     /** connectionId value. */

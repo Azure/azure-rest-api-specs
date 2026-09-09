@@ -939,21 +939,6 @@ model SandboxEgressPolicy {
   validationWarnings?: ValidationWarning[];
 }
 
-/** Sandbox execution token response wire model. */
-model SandboxExecutionToken {
-  /** token value. */
-  token: string;
-
-  /** expiresAt value. */
-  expiresAt: utcDateTime;
-}
-
-/** Sandbox execution tokens request wire model. */
-model SandboxExecutionTokensContent {
-  /** accounts value. */
-  accounts?: string[];
-}
-
 /** Represents a port exposed on a sandbox. */
 model SandboxPort {
   /** Optional name for the port (must be unique per sandbox if provided). */
