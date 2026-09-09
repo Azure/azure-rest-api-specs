@@ -15528,8 +15528,10 @@
         },
         "passphrase": {
           "type": "string",
+          "format": "password",
           "description": "Passphrase for use with cluster peer command",
-          "example": "SecurePassphrase123"
+          "example": "{passphrase}",
+          "x-ms-secret": true
         }
       }
     },
@@ -19101,19 +19103,35 @@
       "type": "string",
       "description": "Gets the status of the VolumeQuotaRule at the time the operation was called.",
       "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
         "Accepted",
         "Creating",
         "Patching",
         "Updating",
         "Deleting",
-        "Moving",
-        "Failed",
-        "Succeeded"
+        "Moving"
       ],
       "x-ms-enum": {
         "name": "NetAppProvisioningState",
         "modelAsString": true,
         "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
           {
             "name": "Accepted",
             "value": "Accepted",
@@ -19143,16 +19161,6 @@
             "name": "Moving",
             "value": "Moving",
             "description": "Resource is being Moved"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource has Failed"
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has Succeeded"
           }
         ]
       },
@@ -19476,7 +19484,9 @@
         },
         "clusterPeeringPassphrase": {
           "type": "string",
-          "description": "The cluster peering passphrase."
+          "format": "password",
+          "description": "The cluster peering passphrase.",
+          "x-ms-secret": true
         },
         "vserverPeeringCommand": {
           "type": "string",
