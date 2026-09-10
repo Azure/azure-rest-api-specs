@@ -1,5 +1,6 @@
 ﻿import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 import "../Common/main.tsp";
@@ -10,6 +11,7 @@ using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
 using Common;
+using TypeSpec.Versioning;
 
 namespace PricingsAPI;
 
@@ -121,6 +123,35 @@ union Code {
 }
 
 /**
+ * Indicates the origin of the most recent pricing configuration change.
+ */
+@added(Versions.v2026_07_01)
+union OriginatedFrom {
+  string,
+
+  /**
+   * Indicates that the configuration change originated from Microsoft 365.
+   */
+  M365: "M365",
+}
+
+/**
+ * A status describing the success or failure of an extension operation.
+ */
+@added(Versions.v2026_07_01)
+model OperationStatus {
+  /**
+   * The operation status code.
+   */
+  code?: Code;
+
+  /**
+   * Additional information regarding the operation result.
+   */
+  message?: string;
+}
+
+/**
  * Pricing properties for the relevant scope
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -188,6 +219,26 @@ model PricingProperties {
    */
   @visibility(Lifecycle.Read)
   replacedBy?: string[];
+
+  /**
+   * Resource ID of the security operator associated with the pricing configuration.
+   */
+  @added(Versions.v2026_07_01)
+  securityOperatorResourceId?: string;
+
+  /**
+   * Indicates the origin of the most recent configuration change.
+   */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read)
+  originatedFrom?: OriginatedFrom;
+
+  /**
+   * Indicates who exclusively manages the pricing configuration.
+   */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read)
+  managedBy?: string;
 }
 
 /**
@@ -214,7 +265,14 @@ model Extension {
    * Optional. A status describing the success/failure of the extension's enablement/disablement operation.
    */
   @visibility(Lifecycle.Read)
+  @typeChangedFrom(Versions.v2026_07_01, Common.OperationStatus)
   operationStatus?: OperationStatus;
+
+  /**
+   * Resource ID of the security operator associated with the extension.
+   */
+  @added(Versions.v2026_07_01)
+  securityOperatorResourceId?: string;
 }
 
 /**
