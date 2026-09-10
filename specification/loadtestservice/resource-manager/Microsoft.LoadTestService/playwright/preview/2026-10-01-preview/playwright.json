@@ -1142,7 +1142,7 @@
           "description": "Indicates whether recording is enabled for the workspace."
         },
         "recordingIdentity": {
-          "$ref": "#/definitions/RecordingIdentity",
+          "$ref": "#/definitions/RecordingIdentityUpdate",
           "description": "The managed identity used to upload recording artifacts to the storage account."
         }
       }
@@ -1243,6 +1243,28 @@
             "description": "Use a user-assigned managed identity."
           }
         ]
+      }
+    },
+    "RecordingIdentityUpdate": {
+      "type": "object",
+      "description": "The managed identity used to upload recording artifacts during an update operation.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/RecordingIdentityType",
+          "description": "The type of managed identity used to upload recording artifacts."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
       }
     }
   },
