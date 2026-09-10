@@ -42,7 +42,9 @@ interface ManagedClusterVersion {
   /**
    * Gets information about an available Service Fabric managed cluster code version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Necessary to avoid standard routing"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Necessary to avoid standard routing"
   @summary("Gets information about a Service Fabric managed cluster code version available in the specified location.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterVersions/{clusterVersion}")
   @get
@@ -55,6 +57,7 @@ interface ManagedClusterVersion {
      * The location for the cluster code versions. This is different from cluster location.
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
     @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     location: string,
@@ -63,6 +66,7 @@ interface ManagedClusterVersion {
      * The cluster code version.
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
     @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     clusterVersion: string,
@@ -71,7 +75,9 @@ interface ManagedClusterVersion {
   /**
    * Gets all available code versions for Service Fabric cluster resources by location.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Necessary to avoid standard routing"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Necessary to avoid standard routing"
   @summary("Gets the list of Service Fabric cluster code versions available for the specified location.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterVersions")
   @get
@@ -84,6 +90,7 @@ interface ManagedClusterVersion {
      * The location for the cluster code versions. This is different from cluster location.
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
     @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     location: string,
@@ -92,7 +99,9 @@ interface ManagedClusterVersion {
   /**
    * Gets information about an available Service Fabric cluster code version by environment.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Necessary to avoid standard routing"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Necessary to avoid standard routing"
   @summary("Gets information about a Service Fabric cluster code version available for the specified environment.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/managedClusterVersions/{clusterVersion}")
   @get
@@ -105,6 +114,7 @@ interface ManagedClusterVersion {
      * The location for the cluster code versions. This is different from cluster location.
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
     @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     location: string,
@@ -113,6 +123,7 @@ interface ManagedClusterVersion {
      * The operating system of the cluster.
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
     @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     environment: ManagedClusterVersionEnvironment,
@@ -121,6 +132,7 @@ interface ManagedClusterVersion {
      * The cluster code version.
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
     @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     clusterVersion: string,
@@ -129,7 +141,9 @@ interface ManagedClusterVersion {
   /**
    * Gets all available code versions for Service Fabric cluster resources by environment.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Necessary to avoid standard routing"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Necessary to avoid standard routing"
   @summary("Gets the list of Service Fabric cluster code versions available for the specified environment.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/managedClusterVersions")
   @get
@@ -142,6 +156,7 @@ interface ManagedClusterVersion {
      * The location for the cluster code versions. This is different from cluster location.
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
     @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     location: string,
@@ -150,6 +165,7 @@ interface ManagedClusterVersion {
      * The operating system of the cluster.
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
     @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     environment: ManagedClusterVersionEnvironment,

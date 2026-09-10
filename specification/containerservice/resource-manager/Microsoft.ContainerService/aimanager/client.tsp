@@ -15,7 +15,7 @@ using TypeSpec.Http;
 
 @@clientName(
   Microsoft.ContainerService,
-  "ContainerServiceAIManagerClient",
+  "ContainerServiceAIManagerMgmtClient",
   "python"
 );
 
@@ -24,6 +24,10 @@ using TypeSpec.Http;
   "ContainerServiceAIManagerClient",
   "csharp"
 );
+
+@@clientName(CalculateCostRequest, "CalculateCostContent", "csharp");
+
+@@clientName(CalculateCostResponse, "CalculateCostResult", "csharp");
 
 @@clientName(
   Microsoft.ContainerService,

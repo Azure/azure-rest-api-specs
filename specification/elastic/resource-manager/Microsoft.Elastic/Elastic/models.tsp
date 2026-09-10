@@ -263,6 +263,7 @@ model OperationResult {
 /**
  * RP default error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ResourceProviderDefaultErrorResponse {
   /**
@@ -301,6 +302,7 @@ model ErrorResponseBody {
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ElasticMonitorResourceListResponse
   is Azure.Core.Page<ElasticMonitorResource>;
 
@@ -619,6 +621,7 @@ model IdentityProperties {
 /**
  * List of elastic versions available in a region.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ElasticVersionsListResponse is Azure.Core.Page<ElasticVersionListFormat>;
 
 /**
@@ -772,6 +775,7 @@ model FilteringTag {
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MonitoredResourceListResponse is Azure.Core.Page<MonitoredResource>;
 
 /**
@@ -991,6 +995,7 @@ model PartnerBillingEntity {
 /**
  *  List of all active elastic deployments.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ConnectedPartnerResourcesListResponse
   is Azure.Core.Page<ConnectedPartnerResourcesListFormat>;
 
@@ -1038,6 +1043,7 @@ model ConnectedPartnerResourceProperties {
  * Response of a list operation.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model OpenAIIntegrationRPModelListResponse
   is Azure.Core.Page<OpenAIIntegrationRPModel>;
 
@@ -1100,12 +1106,14 @@ model OpenAIIntegrationStatusResponseProperties {
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MonitoringTagRulesListResponse is Azure.Core.Page<MonitoringTagRules>;
 
 /**
  * Response of a list operation.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VMHostListResponse is Azure.Core.Page<VMResources>;
 
 /**

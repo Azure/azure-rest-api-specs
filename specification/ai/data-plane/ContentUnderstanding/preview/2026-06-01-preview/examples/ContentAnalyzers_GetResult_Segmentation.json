@@ -1,0 +1,97 @@
+{
+  "title": "Get Analysis Result with Segmentation",
+  "operationId": "ContentAnalyzers_GetResult",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "operationId": "c3d4e5f6-a7b8-9012-cdef-123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+        "status": "Succeeded",
+        "result": {
+          "analyzerId": "segmentAnalyzer",
+          "apiVersion": "2026-06-01-preview",
+          "createdAt": "2026-07-01T12:05:00.000Z",
+          "contents": [
+            {
+              "kind": "document",
+              "mimeType": "application/pdf",
+              "markdown": "# Invoice #1042\n\nDate: 2026-06-01\nTotal: $1,250.00\n\n---\n\n# Receipt\n\nStore: Office Supply Co.\nAmount: $45.99\n\n---\n\nDear Customer,\n\nThank you for your business...",
+              "startPageNumber": 1,
+              "endPageNumber": 3,
+              "unit": "inch",
+              "metadata": {
+                "contentType": "application/pdf",
+                "pageCount": "3",
+                "title": "Combined Document Package",
+                "createdAt": "2026-06-01T12:00:00Z",
+                "language": "en-US"
+              },
+              "pages": [
+                {
+                  "pageNumber": 1,
+                  "width": 8.5,
+                  "height": 11
+                },
+                {
+                  "pageNumber": 2,
+                  "width": 8.5,
+                  "height": 11
+                },
+                {
+                  "pageNumber": 3,
+                  "width": 8.5,
+                  "height": 11
+                }
+              ],
+              "segments": [
+                {
+                  "segmentId": "segment-1",
+                  "category": "invoice",
+                  "span": {
+                    "offset": 0,
+                    "length": 50
+                  },
+                  "startPageNumber": 1,
+                  "endPageNumber": 1,
+                  "confidence": 0.96,
+                  "source": "D(1,0,0,8.5,0,8.5,11,0,11)"
+                },
+                {
+                  "segmentId": "segment-2",
+                  "category": "receipt",
+                  "span": {
+                    "offset": 57,
+                    "length": 50
+                  },
+                  "startPageNumber": 2,
+                  "endPageNumber": 2,
+                  "confidence": 0.93,
+                  "source": "D(2,0,0,8.5,0,8.5,5.5,0,5.5)"
+                },
+                {
+                  "segmentId": "segment-3",
+                  "category": "letter",
+                  "span": {
+                    "offset": 114,
+                    "length": 46
+                  },
+                  "startPageNumber": 2,
+                  "endPageNumber": 3,
+                  "confidence": 0.91,
+                  "source": "D(2,0,5.5,8.5,5.5,8.5,11,0,11)"
+                }
+              ]
+            }
+          ]
+        },
+        "usage": {
+          "documentPagesStandard": 3,
+          "contextualizationTokens": 1500
+        }
+      }
+    }
+  }
+}

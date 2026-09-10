@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2026-08-01",
+    "serviceGroupName": "ServiceGroup1",
+    "updateServiceGroupRequest": {
+      "properties": {
+        "attributes": {
+          "criticality": 2
+        },
+        "displayName": "ServiceGroup 1 Name"
+      },
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ServiceGroup1",
+        "type": "Microsoft.Management/serviceGroups",
+        "id": "/providers/Microsoft.Management/serviceGroups/ServiceGroup1",
+        "kind": "App",
+        "properties": {
+          "attributes": {
+            "criticality": 2
+          },
+          "displayName": "ServiceGroup 1 Name",
+          "parent": {
+            "resourceId": "/providers/Microsoft.Management/serviceGroups/RootGroup"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Management/operationStatuses/20000000-0000-0000-0000-000000000002?api-version=2026-08-01",
+        "Location": "https://management.azure.com/providers/Microsoft.Management/operationResults/update/serviceGroups/ServiceGroup1?api-version=2026-08-01",
+        "Retry-After": 30
+      }
+    }
+  },
+  "operationId": "UpdateServiceGroup",
+  "title": "PatchServiceGroup"
+}

@@ -47,6 +47,77 @@
                   "switchName": "vmanagement",
                   "switchType": "External"
                 }
+              ],
+              "hostNetwork": {
+                "intents": [
+                  {
+                    "scope": 1,
+                    "intentType": 3,
+                    "isComputeIntentSet": true,
+                    "isStorageIntentSet": true,
+                    "isOnlyStorage": false,
+                    "isManagementIntentSet": true,
+                    "isStretchIntentSet": false,
+                    "isOnlyStretch": false,
+                    "isNetworkIntentType": true,
+                    "intentName": "ManagementComputeStorage",
+                    "intentAdapters": [
+                      "port1",
+                      "port2"
+                    ],
+                    "overrideVirtualSwitchConfiguration": false,
+                    "virtualSwitchConfigurationOverrides": {
+                      "enableIov": "true",
+                      "loadBalancingAlgorithm": "Dynamic"
+                    },
+                    "overrideQosPolicy": false,
+                    "qosPolicyOverrides": {
+                      "priorityValue8021Action_Cluster": "7",
+                      "priorityValue8021Action_SMB": "3",
+                      "bandwidthPercentage_SMB": "50"
+                    },
+                    "overrideAdapterProperty": false,
+                    "adapterPropertyOverrides": {
+                      "jumboPacket": "9014",
+                      "networkDirect": "Enabled",
+                      "networkDirectTechnology": "RoCEv2"
+                    }
+                  }
+                ],
+                "storageNetworks": [
+                  {
+                    "name": "Storage1Network",
+                    "networkAdapterName": "port3",
+                    "storageVlanId": "711",
+                    "storageAdapterIPInfo": [
+                      {
+                        "physicalNode": "Node-1",
+                        "ipv4Address": "10.0.0.1",
+                        "subnetMask": "255.255.255.0"
+                      }
+                    ]
+                  }
+                ],
+                "storageConnectivitySwitchless": true,
+                "enableStorageAutoIp": true
+              },
+              "sdnProperties": {
+                "sdnStatus": "Enabled",
+                "sdnDomainName": "sdn-nc.contoso.com",
+                "sdnApiAddress": "10.0.0.10"
+              }
+            },
+            "storageProfile": {
+              "poolableDisksCount": 4,
+              "disks": [
+                {
+                  "id": "5000C500A1B2C3D4",
+                  "sizeInBytes": "1920383410176",
+                  "type": "SSD",
+                  "model": "MZ7LH1T9HMLT",
+                  "manufacturer": "Samsung",
+                  "isSupported": true
+                }
               ]
             },
             "osProfile": {
@@ -72,6 +143,15 @@
                   "extensionResourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1/Extensions/DeviceManagementExtension",
                   "typeHandlerVersion": "1.10.3",
                   "managedBy": "Azure"
+                }
+              ]
+            },
+            "confidentialVmProfile": {
+              "igvmStatus": "Enabled",
+              "statusDetails": [
+                {
+                  "code": "IgvmEnabled",
+                  "message": "Confidential VM capabilities are enabled on the device."
                 }
               ]
             }

@@ -20,7 +20,7 @@ model Agent is Azure.ResourceManager.ProxyResource<AgentProperties, false> {
     Resource = Agent,
     KeyName = "agentName",
     SegmentName = "agents",
-    NamePattern = ""
+    NamePattern = "^[A-Za-z0-9._-]{1,54}$"
   >;
 }
 

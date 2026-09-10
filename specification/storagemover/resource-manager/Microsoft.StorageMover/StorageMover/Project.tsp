@@ -20,7 +20,7 @@ model Project is Azure.ResourceManager.ProxyResource<ProjectProperties> {
     Resource = Project,
     KeyName = "projectName",
     SegmentName = "projects",
-    NamePattern = ""
+    NamePattern = "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
   >;
 }
 

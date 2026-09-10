@@ -60,10 +60,10 @@ union SelectorKind {
   policyDefinitionReferenceId: "policyDefinitionReferenceId",
 
   /**
-   * The selector kind to filter policies by the resource percentage.
+   * The selector kind to filter policies by the resource rollout percentage.
    */
   @added(Versions.v2026_06_01)
-  resourcePercentage: "resourcePercentage",
+  resourceRolloutPercentage: "resourceRolloutPercentage",
 
   /**
    * The selector kind to filter policies by the user principal ID.
@@ -546,8 +546,8 @@ model Selector {
    * The percent of total resources that will be governed by the policy.
    */
   @added(Versions.v2026_06_01)
-  @maxValue(99)
-  @minValue(1)
+  @maxValue(100)
+  @minValue(0)
   progress?: int32;
 }
 
@@ -1345,6 +1345,24 @@ union AssignmentScopeValidation {
 }
 
 /**
+ * The mode indicating how the policy exemption is managed. Possible values are Admin and UserSelfServe.
+ */
+@added(Versions.v2025_12_01_preview)
+union ExemptionManagementMode {
+  string,
+
+  /**
+   * This mode means the exemption is managed by an administrator and requires permission for the policy exemption action.
+   */
+  Admin: "Admin",
+
+  /**
+   * This mode means the exemption is managed by the user it applies to, through the self-serve exemption settings on the policy assignment.
+   */
+  UserSelfServe: "UserSelfServe",
+}
+
+/**
  * The policy exemption properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -1397,6 +1415,11 @@ model PolicyExemptionProperties {
    * The option whether validate the exemption is at or under the assignment scope.
    */
   assignmentScopeValidation?: AssignmentScopeValidation;
+
+  /**
+   * The mode indicating how the policy exemption is managed.
+   */
+  exemptionManagementMode?: ExemptionManagementMode = ExemptionManagementMode.Admin;
 }
 
 /**
@@ -1427,6 +1450,11 @@ model PolicyExemptionUpdateProperties {
    * The option whether validate the exemption is at or under the assignment scope.
    */
   assignmentScopeValidation?: AssignmentScopeValidation;
+
+  /**
+   * The mode indicating how the policy exemption is managed.
+   */
+  exemptionManagementMode?: ExemptionManagementMode;
 }
 
 /**

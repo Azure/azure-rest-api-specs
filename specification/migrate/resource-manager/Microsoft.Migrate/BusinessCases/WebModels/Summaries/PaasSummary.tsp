@@ -109,6 +109,7 @@ model EstimatedCostByTarget {
   @visibility(Lifecycle.Read)
   azureSqlMiCost?: float32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Azure SQL DB cost.")
   @visibility(Lifecycle.Read)
   azureSqlDbCost?: float32;
@@ -143,6 +144,7 @@ model AzureSqlSummary {
   @identifiers(#[])
   distributionByServiceTierForSqlMi?: SqlServiceTier[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Distribution by service tiers for SQL DB.")
   @visibility(Lifecycle.Read)
   @identifiers(#[])
@@ -289,6 +291,7 @@ model OnPremisesPaasSummary {
   @visibility(Lifecycle.Read)
   onPremisesWebAppSummary?: OnPremisesWebAppSummary;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("OS Support Status Distribution.")
   @visibility(Lifecycle.Read)
   osSupportStatusDistribution?: SupportStatusDistribution;
@@ -297,6 +300,7 @@ model OnPremisesPaasSummary {
   @visibility(Lifecycle.Read)
   sqlSupportStatusDistribution?: SupportStatusDistribution;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("OS Service Pack Insight.")
   @visibility(Lifecycle.Read)
   osServicePackInsight?: ServicePackInsight;
