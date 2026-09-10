@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
 
@@ -18,17 +17,21 @@ alias VoiceAgentClientEventUsage = Usage.input | Usage.json;
 alias VoiceAgentServerEventUsage = Usage.output | Usage.json;
 alias VoiceAgentWebSocketMessageUsage = Usage.input | Usage.output | Usage.json;
 
-@removed(Versions.v1)
 union VoiceAgentClientEventTypeExtension {
   session_avatar_connect: "session.avatar.connect",
+  rtc_call_sdp_create: "rtc.call.sdp.create",
 }
 
-@removed(Versions.v1)
 union VoiceAgentServerEventTypeExtension {
   warning: "warning",
+  session_subagent_started: "session.subagent.started",
+  session_subagent_completed: "session.subagent.completed",
+  session_subagent_aborted: "session.subagent.aborted",
   session_avatar_connecting: "session.avatar.connecting",
   session_avatar_switch_to_speaking: "session.avatar.switch_to_speaking",
   session_avatar_switch_to_idle: "session.avatar.switch_to_idle",
+  rtc_call_sdp_created: "rtc.call.sdp.created",
+  rtc_call_error: "rtc.call.error",
   response_audio_timestamp_delta: "response.audio_timestamp.delta",
   response_audio_timestamp_done: "response.audio_timestamp.done",
   response_animation_blendshapes_delta: "response.animation_blendshapes.delta",
@@ -52,6 +55,18 @@ union VoiceAgentServerEventTypeExtension {
 @doc("The WebSocket subprotocol supported by a voice-agent connection.")
 union VoiceAgentWebSocketSubprotocol {
   realtime: "realtime",
+}
+
+@doc("The transport used for a voice-agent connection.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentTransport {
+  string,
+
+  @doc("Signaling and audio are exchanged as JSON events over the WebSocket. This is the default.")
+  websocket: "websocket",
+
+  @doc("WebRTC: the WebSocket carries only SDP signaling; media and the data channel are peer-to-peer.")
+  webrtc: "webrtc",
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "A WebSocket message may be sent by either the client or the server."
@@ -80,6 +95,7 @@ union VoiceAgentClientEvent {
   response_create: OpenAI.RealtimeClientEventResponseCreate,
   session_update: VoiceAgentClientEventSessionUpdate,
   session_avatar_connect: VoiceAgentClientEventSessionAvatarConnect,
+  rtc_call_sdp_create: VoiceAgentClientEventRtcCallSdpCreate,
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Server WebSocket messages are selected by their `type` property."
@@ -129,10 +145,15 @@ union VoiceAgentServerEvent {
   response_output_text_delta: OpenAI.RealtimeServerEventResponseTextDelta,
   response_output_text_done: OpenAI.RealtimeServerEventResponseTextDone,
   session_created: OpenAI.RealtimeServerEventSessionCreated,
+  session_subagent_started: VoiceAgentServerEventSessionSubagentStarted,
+  session_subagent_completed: VoiceAgentServerEventSessionSubagentCompleted,
+  session_subagent_aborted: VoiceAgentServerEventSessionSubagentAborted,
   session_updated: OpenAI.RealtimeServerEventSessionUpdated,
   error: OpenAI.RealtimeServerEventError,
   warning: VoiceAgentServerEventWarning,
   session_avatar_connecting: VoiceAgentServerEventSessionAvatarConnecting,
+  rtc_call_sdp_created: VoiceAgentServerEventRtcCallSdpCreated,
+  rtc_call_error: VoiceAgentServerEventRtcCallError,
   session_avatar_switch_to_speaking: VoiceAgentServerEventSessionAvatarSwitchToSpeaking,
   session_avatar_switch_to_idle: VoiceAgentServerEventSessionAvatarSwitchToIdle,
   response_audio_timestamp_delta: VoiceAgentServerEventResponseAudioTimestampDelta,
@@ -395,7 +416,7 @@ model VoiceAgentClientEventSessionUpdate {
 @@copyProperties(
   OpenAI.RealtimeServerEventSessionCreated,
   {
-    @doc("The id of the persisted conversation. Only present when conversation persistence is enabled for the session.")
+    @doc("The session-scoped conversation id. When present, responses attached to the session conversation use the same value in `response.created` and `response.done`.")
     conversation_id?: string,
   }
 );
@@ -405,6 +426,81 @@ model VoiceAgentClientEventSessionUpdate {
   OpenAI.RealtimeServerEventSessionUpdated.session,
   VoiceAgentSessionResponse
 );
+
+@doc("Fields shared by server events that report the lifecycle of a subagent consultation.")
+model VoiceAgentServerEventSessionSubagentLifecycle {
+  @doc("The server-generated event identifier.")
+  event_id: string;
+
+  @doc("The identifier of the subagent consultation.")
+  consultation_id: string;
+
+  @doc("The identifier of the function call that initiated the consultation.")
+  call_id: string;
+
+  @doc("The name of the consulted subagent.")
+  subagent_name: string;
+}
+
+@doc("The reason a subagent consultation was aborted.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentSubagentAbortReason {
+  string,
+
+  @doc("The requested subagent was not configured for the voice agent.")
+  unknown_target: "unknown_target",
+
+  @doc("The subagent invocation exceeded its configured timeout.")
+  timeout: "timeout",
+
+  @doc("The consultation was cancelled because the voice session ended.")
+  cancelled: "cancelled",
+
+  @doc("The consultation was stopped at the user's request.")
+  stopped_by_user: "stopped_by_user",
+
+  @doc("The consultation was replaced by a newer request.")
+  superseded: "superseded",
+
+  @doc("The consultation failed.")
+  failed: "failed",
+}
+
+@doc("The `session.subagent.started` server event.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentServerEventSessionSubagentStarted
+  extends OpenAI.RealtimeServerEvent {
+  @doc("The event type. Always `session.subagent.started`.")
+  type: "session.subagent.started";
+
+  ...VoiceAgentServerEventSessionSubagentLifecycle;
+}
+
+@doc("The `session.subagent.completed` server event.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentServerEventSessionSubagentCompleted
+  extends OpenAI.RealtimeServerEvent {
+  @doc("The event type. Always `session.subagent.completed`.")
+  type: "session.subagent.completed";
+
+  ...VoiceAgentServerEventSessionSubagentLifecycle;
+}
+
+@doc("The `session.subagent.aborted` server event.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentServerEventSessionSubagentAborted
+  extends OpenAI.RealtimeServerEvent {
+  @doc("The event type. Always `session.subagent.aborted`.")
+  type: "session.subagent.aborted";
+
+  ...VoiceAgentServerEventSessionSubagentLifecycle;
+
+  @doc("The reason the consultation was aborted.")
+  reason: VoiceAgentSubagentAbortReason;
+}
 
 @doc("The `session.avatar.connect` client event.")
 @usage(VoiceAgentClientEventUsage)
@@ -418,6 +514,75 @@ model VoiceAgentClientEventSessionAvatarConnect
 
   @doc("The client's SDP offer for avatar media negotiation.")
   client_sdp: string;
+}
+
+@doc("The `rtc.call.sdp.create` client event: begins WebRTC signaling with an SDP offer.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@usage(VoiceAgentClientEventUsage)
+model VoiceAgentClientEventRtcCallSdpCreate extends OpenAI.RealtimeClientEvent {
+  @doc("The event type. Always `rtc.call.sdp.create`.")
+  type: "rtc.call.sdp.create";
+
+  @doc("An optional client-generated event identifier.")
+  event_id?: string;
+
+  @doc("The client's SDP offer for the WebRTC connection.")
+  sdp_offer: string;
+
+  @doc("Optional session configuration. For an `/agents` endpoint the service rebuilds it authoritatively from the persisted agent definition.")
+  session?: VoiceAgentSessionUpdateConfig;
+}
+
+@doc("The `rtc.call.sdp.created` server event: the SDP answer that completes WebRTC negotiation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@usage(VoiceAgentServerEventUsage)
+model VoiceAgentServerEventRtcCallSdpCreated
+  extends OpenAI.RealtimeServerEvent {
+  @doc("The event type. Always `rtc.call.sdp.created`.")
+  type: "rtc.call.sdp.created";
+
+  @doc("The server-generated event identifier.")
+  event_id: string;
+
+  @doc("The identifier of the established WebRTC call.")
+  rtc_call_id: string;
+
+  @doc("The server's SDP answer for the WebRTC connection.")
+  sdp_answer: string;
+}
+
+@doc("Details of a WebRTC signaling error.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@usage(VoiceAgentServerEventUsage)
+model VoiceAgentRtcCallErrorDetails {
+  @doc("The error category, following the VoiceLive wire contract: `invalid_request_error` for a client-side signaling fault (for example, a malformed SDP offer) or `server_error` for a service-side failure. Additional categories may be added over time.")
+  type: string;
+
+  @doc("A machine-readable error code, when available.")
+  code?: string;
+
+  @doc("A human-readable error message.")
+  message: string;
+}
+
+@doc("The `rtc.call.error` server event: a WebRTC signaling failure.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@usage(VoiceAgentServerEventUsage)
+model VoiceAgentServerEventRtcCallError extends OpenAI.RealtimeServerEvent {
+  @doc("The event type. Always `rtc.call.error`.")
+  type: "rtc.call.error";
+
+  @doc("An optional server-generated event identifier.")
+  event_id?: string;
+
+  @doc("The signaling operation that failed, when known.")
+  operation?: string;
+
+  @doc("The identifier of the WebRTC call, when known.")
+  rtc_call_id?: string;
+
+  @doc("The error detail.")
+  error: VoiceAgentRtcCallErrorDetails;
 }
 
 @doc("Details of a non-fatal warning.")
