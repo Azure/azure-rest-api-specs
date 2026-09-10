@@ -11,6 +11,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: typespec-suppressions-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
   typespec-suppressions:
     name: "TypeSpec Suppressions - Analyze Code"
@@ -30,7 +34,7 @@ jobs:
           $ignoreCoreFiles = -not (@('main', 'RPSaaSMaster') -contains $Env:GITHUB_BASE_REF)
           $typespecFolders, $checkedAll = & "./eng/scripts/Get-TypeSpec-Folders.ps1" `
             -BaseCommitish:"${{ github.event.pull_request.base.sha }}" `
-            -HeadCommitish:"HEAD" `
+            -HeadCommitish:"${{ github.event.pull_request.head.sha }}" `
             -IgnoreCoreFiles:$ignoreCoreFiles
 
           $typespecFolders | Set-Content -Path typespec-folders.txt
@@ -66,7 +70,7 @@ jobs:
               '{' \
               '  "repoRoot": "'"$GITHUB_WORKSPACE"'",' \
               '  "baseRevision": "'"${{ github.event.pull_request.base.sha }}"'",' \
-              '  "headRevision": "HEAD",' \
+              '  "headRevision": "'"${{ github.event.pull_request.head.sha }}"'",' \
               '  "specPaths": [],' \
               '  "requiresApproval": false,' \
               '  "counts": {' \
@@ -94,7 +98,7 @@ jobs:
 
           npm exec --no -- typespec-suppressions \
             --base "${{ github.event.pull_request.base.sha }}" \
-            --head HEAD \
+            --head "${{ github.event.pull_request.head.sha }}" \
             --json-output "typespec-suppressions-report.json" \
             --markdown-output "$GITHUB_STEP_SUMMARY" \
             --check-rules-file "eng/tools/typespec-suppressions/check-rules.json" \
