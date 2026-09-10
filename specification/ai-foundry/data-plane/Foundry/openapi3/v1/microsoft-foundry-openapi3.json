@@ -40502,6 +40502,45 @@
           }
         ]
       },
+      "DiagnosticJobEvaluatorGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "job_id"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "diagnostic_job"
+            ],
+            "description": "The source type for this source, which is Diagnostic Job."
+          },
+          "job_id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The non-empty identifier of a succeeded evaluator diagnostic job for the same evaluator and workspace.",
+            "examples": [
+              "evaldiagjob_0123456789abcdef0123456789abcdef"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
+          }
+        ],
+        "description": "Diagnostic job source for evaluator generation jobs. The referenced job must have succeeded for the same evaluator and workspace. The service resolves its immutable completed diagnostic and uses that bounded diagnostic payload as regeneration evidence. Missing, non-terminal, failed, cancelled, result-less, or cross-evaluator jobs are rejected. Private diagnostic request data and human-annotation content are not exposed through this source.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "DigitalWorkerType": {
         "anyOf": [
           {
@@ -43178,7 +43217,7 @@
             "items": {
               "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
             },
-            "description": "Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`."
+            "description": "Source materials for generation — agent descriptions, prompts, traces, datasets, or succeeded evaluator diagnostic jobs. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`."
           },
           "model": {
             "type": "string",
@@ -43287,7 +43326,8 @@
             "prompt": "#/components/schemas/PromptEvaluatorGenerationJobSource",
             "agent": "#/components/schemas/AgentEvaluatorGenerationJobSource",
             "traces": "#/components/schemas/TracesEvaluatorGenerationJobSource",
-            "dataset": "#/components/schemas/DatasetEvaluatorGenerationJobSource"
+            "dataset": "#/components/schemas/DatasetEvaluatorGenerationJobSource",
+            "diagnostic_job": "#/components/schemas/DiagnosticJobEvaluatorGenerationJobSource"
           }
         },
         "description": "The base source model for evaluator generation jobs. Polymorphic over `type`.",
@@ -43308,7 +43348,8 @@
               "prompt",
               "agent",
               "traces",
-              "dataset"
+              "dataset",
+              "diagnostic_job"
             ]
           }
         ],
