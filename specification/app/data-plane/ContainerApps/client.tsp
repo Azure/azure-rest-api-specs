@@ -73,8 +73,7 @@ namespace ContainerAppsSandbox {
         ...AzureResourceScope,
 
         /** Sandbox identifier. */
-        @paramAlias("id", "csharp")
-        sandboxId: string,
+        id: string,
       },
       initializedBy: InitializedBy.parent,
     },
@@ -430,19 +429,20 @@ namespace ContainerAppsSandbox {
   );
 
   // Client names
+  // The C# emitter prefixes nested clients with their parent names.
   @@clientName(Group, "SandboxGroup", "csharp");
-  @@clientName(Group.Resource, "SandboxResource", "csharp");
-  @@clientName(Group.Resource.Files, "SandboxFiles", "csharp");
-  @@clientName(Group.Resource.Networking, "SandboxNetworking", "csharp");
-  @@clientName(Group.Resource.Streams, "SandboxStreams", "csharp");
-  @@clientName(Group.Connections, "SandboxGroupConnections", "csharp");
-  @@clientName(Group.ContentPackages, "SandboxGroupContentPackages", "csharp");
-  @@clientName(Group.Credentials, "SandboxGroupCredentials", "csharp");
-  @@clientName(Group.DiskImages, "SandboxGroupDiskImages", "csharp");
-  @@clientName(Group.EgressPolicies, "SandboxGroupEgressPolicies", "csharp");
-  @@clientName(Group.Secrets, "SandboxGroupSecrets", "csharp");
-  @@clientName(Group.Snapshots, "SandboxGroupSnapshots", "csharp");
-  @@clientName(Group.Volumes, "SandboxGroupVolumes", "csharp");
+  @@clientName(Group.Resource, "Sandbox", "csharp");
+  @@clientName(Group.Resource.Files, "Files", "csharp");
+  @@clientName(Group.Resource.Networking, "Networking", "csharp");
+  @@clientName(Group.Resource.Streams, "Streams", "csharp");
+  @@clientName(Group.Connections, "Connections", "csharp");
+  @@clientName(Group.ContentPackages, "ContentPackages", "csharp");
+  @@clientName(Group.Credentials, "Credentials", "csharp");
+  @@clientName(Group.DiskImages, "DiskImages", "csharp");
+  @@clientName(Group.EgressPolicies, "EgressPolicies", "csharp");
+  @@clientName(Group.Secrets, "Secrets", "csharp");
+  @@clientName(Group.Snapshots, "Snapshots", "csharp");
+  @@clientName(Group.Volumes, "Volumes", "csharp");
 
   // Operation names
   @@clientName(AzureSandboxes.list, "getSandboxes", "csharp");
