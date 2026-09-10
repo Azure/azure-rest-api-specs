@@ -1996,6 +1996,13 @@ op listNodeFilesCustomization is Azure.Batch.ListOperation<
   "BatchNodeUserCreateParameters",
   "java"
 );
+@@clientName(Azure.Batch.BatchNodeUserCreateOptions.isAdmin, "admin", "java");
+@@clientName(
+  Azure.Batch.ContainerHostBatchBindMountEntry.isReadOnly,
+  "readOnly",
+  "java"
+);
+@@clientName(Azure.Batch.OSType, "BatchOSType", "java");
 @@clientName(
   Azure.Batch.BatchNodeUserUpdateOptions,
   "BatchNodeUserUpdateParameters",
