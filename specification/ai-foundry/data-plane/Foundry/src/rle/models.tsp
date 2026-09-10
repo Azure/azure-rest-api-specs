@@ -301,7 +301,10 @@ model RLEResetRequest {
   seed?: int32;
 
   @doc("Optional caller-provided episode identifier.")
+  @encodedName("application/json", "episode_id")
   episodeId?: string;
+
+  ...Record<unknown>;
 }
 
 @clientName("RLEStepContent", "csharp")
