@@ -1019,6 +1019,13 @@ model ServerProperties {
   @added(Versions.v2025_06_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   lowerCaseTableNames?: int32;
+
+  /**
+   * Resource ID of the customer subnet for private outbound connectivity.
+   */
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  privateOutboundSubnetResourceId?: string;
 }
 
 /**
@@ -1323,6 +1330,12 @@ model ServerPropertiesForUpdate {
    * Network related properties of a server
    */
   network?: Network;
+
+  /**
+   * Resource ID of the customer subnet for private outbound connectivity.
+   */
+  @added(Versions.v2026_03_01_preview)
+  privateOutboundSubnetResourceId?: string;
 }
 
 /**
