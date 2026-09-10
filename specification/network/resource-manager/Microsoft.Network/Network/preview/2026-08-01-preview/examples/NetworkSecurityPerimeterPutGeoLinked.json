@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "networkSecurityPerimeterName": "geoLinkedNsp",
+    "parameters": {
+      "location": "eastus2",
+      "properties": {
+        "createMode": "GeoLinkedPerimeter",
+        "remotePerimeterId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/source-rg/providers/Microsoft.Network/networkSecurityPerimeters/source-nsp"
+      }
+    },
+    "resourceGroupName": "geo-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Create a geo-linked Network Security Perimeter",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "geoLinkedNsp",
+        "type": "Microsoft.Network/networkSecurityPerimeters",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/geo-rg/providers/Microsoft.Network/networkSecurityPerimeters/geoLinkedNsp",
+        "location": "eastus2",
+        "properties": {
+          "createMode": "GeoLinkedPerimeter",
+          "remotePerimeterId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/source-rg/providers/Microsoft.Network/networkSecurityPerimeters/source-nsp",
+          "perimeterGuid": "00000000-0000-0000-0000-000000000001",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "geoLinkedNsp",
+        "type": "Microsoft.Network/networkSecurityPerimeters",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/geo-rg/providers/Microsoft.Network/networkSecurityPerimeters/geoLinkedNsp",
+        "location": "eastus2",
+        "properties": {
+          "createMode": "GeoLinkedPerimeter",
+          "remotePerimeterId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/source-rg/providers/Microsoft.Network/networkSecurityPerimeters/source-nsp",
+          "perimeterGuid": "00000000-0000-0000-0000-000000000001",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "NetworkSecurityPerimeters_CreateOrUpdate"
+}
