@@ -112,11 +112,11 @@ model LegacyHorizonDbFirewallRule
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("Represents a customer-managed firewall rule for a HorizonDB endpoint.")
-@parentResource(Endpoint)
+@doc("Represents a customer-managed firewall rule for a HorizonDB pool.")
+@parentResource(Pool)
 model FirewallRule
   is Azure.ResourceManager.ProxyResource<FirewallRuleProperties> {
-  @doc("The name of the HorizonDB endpoint firewall rule.")
+  @doc("The name of the HorizonDB pool firewall rule.")
   @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
   @minLength(1)
   @maxLength(128)
@@ -896,7 +896,7 @@ model FirewallRuleProperties {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("Properties of a HorizonDB endpoint firewall rule for update operations. Omitted properties preserve their current values. The service validates the effective IP range after merging the supplied values with the existing rule.")
+@doc("Properties of a HorizonDB pool firewall rule for update operations. Omitted properties preserve their current values. The service validates the effective IP range after merging the supplied values with the existing rule.")
 model FirewallRulePropertiesForPatchUpdate {
   @doc("The start IPv4 address to apply in dotted-decimal notation. The resulting effective start address must be numerically less than or equal to the effective end address.")
   @visibility(Lifecycle.Update)
@@ -912,7 +912,7 @@ model FirewallRulePropertiesForPatchUpdate {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("A HorizonDB endpoint firewall rule update request.")
+@doc("A HorizonDB pool firewall rule update request.")
 model FirewallRuleForPatchUpdate {
   @doc("The properties to update. Omission preserves all current firewall rule properties.")
   properties?: FirewallRulePropertiesForPatchUpdate;

@@ -145,7 +145,7 @@ interface Pools {
   >;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("Deletes a HorizonDB pool together with the Pool-scoped Endpoint whose associatedResourceId identifies that Pool and all FirewallRule children of that Endpoint. The Endpoint cannot outlive or be deleted independently from its Pool.")
+  @doc("Deletes a HorizonDB pool together with its FirewallRule children and the Pool-scoped Endpoint whose associatedResourceId identifies that Pool. Neither the FirewallRules nor the Endpoint can outlive the Pool or be deleted independently from it.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Pool,
     Response =
@@ -239,16 +239,20 @@ interface HorizonDbReplicas {
 @armResourceOperations
 interface HorizonDbFirewallRules {
   @doc("Gets information about a HorizonDB firewall rule.")
+  @sharedRoute
   get is ArmResourceRead<LegacyHorizonDbFirewallRule>;
 
   @doc("Lists all HorizonDB firewall rules in a pool.")
+  @sharedRoute
   list is ArmResourceListByParent<LegacyHorizonDbFirewallRule>;
 
   @doc("Creates a new HorizonDB firewall rule or updates an existing rule.")
+  @sharedRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<LegacyHorizonDbFirewallRule>;
 
   @doc("Deletes a HorizonDB firewall rule.")
+  @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     LegacyHorizonDbFirewallRule,
     Response =
@@ -261,13 +265,16 @@ interface HorizonDbFirewallRules {
 @added(Versions.v2026_10_01_preview)
 @armResourceOperations
 interface FirewallRules {
-  @doc("Gets information about a HorizonDB endpoint firewall rule.")
+  @doc("Gets information about a HorizonDB pool firewall rule.")
+  @sharedRoute
   get is ArmResourceRead<FirewallRule>;
 
-  @doc("Lists all HorizonDB firewall rules in an endpoint.")
+  @doc("Lists all HorizonDB firewall rules in a pool.")
+  @sharedRoute
   list is ArmResourceListByParent<FirewallRule>;
 
-  @doc("Creates or replaces a HorizonDB endpoint firewall rule.")
+  @doc("Creates or replaces a HorizonDB pool firewall rule.")
+  @sharedRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FirewallRule,
@@ -280,10 +287,11 @@ interface FirewallRules {
         >
   >;
 
-  @doc("Updates selected properties of a HorizonDB endpoint firewall rule. Omitted properties preserve their current values.")
+  @doc("Updates selected properties of a HorizonDB pool firewall rule. Omitted properties preserve their current values.")
   update is ArmCustomPatchSync<FirewallRule, FirewallRuleForPatchUpdate>;
 
-  @doc("Deletes a HorizonDB endpoint firewall rule.")
+  @doc("Deletes a HorizonDB pool firewall rule.")
+  @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     FirewallRule,
     Response =

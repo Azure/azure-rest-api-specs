@@ -45,7 +45,7 @@ model EndpointProperties {
   @visibility(Lifecycle.Read)
   scope: EndpointScope;
 
-  @doc("The Azure resource ID of the Endpoint's lifecycle owner. For Cluster scope, this identifies the parent Cluster with which the Endpoint is created and deleted. For Pool scope, this identifies the Pool with which the Endpoint and its FirewallRule children are created and deleted; the Pool must be a child of the Endpoint's parent Cluster.")
+  @doc("The Azure resource ID of the Endpoint's lifecycle owner. For Cluster scope, this identifies the parent Cluster with which the Endpoint is created and deleted. For Pool scope, this identifies the Pool with which the Endpoint is created and deleted; the Pool must be a child of the Endpoint's parent Cluster.")
   @visibility(Lifecycle.Read)
   associatedResourceId: EndpointAssociatedResourceId;
 

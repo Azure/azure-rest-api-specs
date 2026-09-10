@@ -1,11 +1,11 @@
 {
   "operationId": "FirewallRules_List",
-  "title": "List firewall rules on a HorizonDB endpoint",
+  "title": "List firewall rules in a HorizonDB pool",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "example-resource-group",
     "clusterName": "example-cluster",
-    "endpointName": "example-pool-01",
+    "poolName": "example-pool-01",
     "api-version": "2026-10-01-preview"
   },
   "responses": {
@@ -13,9 +13,9 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/endpoints/example-pool-01/firewallRules/example-firewall-rule-01",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01/firewallRules/example-firewall-rule-01",
             "name": "example-firewall-rule-01",
-            "type": "Microsoft.HorizonDb/clusters/endpoints/firewallRules",
+            "type": "Microsoft.HorizonDb/clusters/pools/firewallRules",
             "properties": {
               "startIpAddress": "10.0.0.1",
               "endIpAddress": "10.0.0.254",
