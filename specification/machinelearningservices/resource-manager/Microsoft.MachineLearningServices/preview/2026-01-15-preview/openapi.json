@@ -27177,9 +27177,11 @@
       "properties": {
         "keys": {
           "type": "object",
+          "format": "password",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         }
       }
     },
@@ -28255,7 +28257,9 @@
       "properties": {
         "databricksAccessToken": {
           "type": "string",
-          "description": "access token for databricks account."
+          "format": "password",
+          "description": "access token for databricks account.",
+          "x-ms-secret": true
         }
       },
       "allOf": [
@@ -28271,7 +28275,9 @@
       "properties": {
         "databricksAccessToken": {
           "type": "string",
-          "description": "Databricks access token"
+          "format": "password",
+          "description": "Databricks access token",
+          "x-ms-secret": true
         },
         "workspaceUrl": {
           "type": "string",
@@ -44055,7 +44061,9 @@
         },
         "password": {
           "type": "string",
-          "description": "Password of admin account"
+          "format": "password",
+          "description": "Password of admin account",
+          "x-ms-secret": true
         },
         "publicKeyData": {
           "type": "string",
@@ -44486,7 +44494,9 @@
           "type": "string"
         },
         "secretAccessKey": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -44495,7 +44505,9 @@
       "description": "Account key object for workspace connection credential.",
       "properties": {
         "key": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -44504,7 +44516,9 @@
       "description": "Api key object for workspace connection credential.",
       "properties": {
         "key": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -44568,7 +44582,9 @@
       "type": "object",
       "properties": {
         "pat": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -44693,7 +44709,9 @@
       "type": "object",
       "properties": {
         "sas": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },

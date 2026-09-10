@@ -147,6 +147,7 @@ interface Watchers {
   listBySubscription is ArmListBySubscription<Watcher>;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation-options' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @doc("The action to start monitoring all targets configured for a database watcher.")
   @action
   @post
@@ -161,6 +162,7 @@ interface Watchers {
     | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation', 'x-ms-long-running-operation-options' OpenAPI extension(s) predates the no-openapi-client-extensions rule; suppressed pending migration to first-class TypeSpec constructs."
   @doc("The action to stop monitoring all targets configured for a database watcher.")
   @action
   @post

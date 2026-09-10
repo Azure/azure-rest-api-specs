@@ -6,6 +6,8 @@ metadata:
 description: "Shared Azure REST API review rules for OpenAPI (Swagger) and TypeSpec specifications. Contains cross-cutting review guidelines plus plane-specific references used by the ARM and data-plane API reviewers, code review agents, and CI workflows. USE FOR: reviewing API specs for naming, security, property design, resource lifecycle, error design, and versioning compliance. DO NOT USE FOR: authoring TypeSpec files (use azure-typespec-author), SDK generation, or releasing packages."
 ---
 
+<!-- Upstream alignment: 2026-08-15 -->
+
 # Azure API Review -- Shared Rules
 
 This skill contains **cross-cutting API review rules** that apply regardless of whether the specification is authored in OpenAPI v2 (Swagger) JSON or TypeSpec. These rules are the single source of truth -- referenced by the format-specific instruction files and review agents.
@@ -30,15 +32,16 @@ must not load the other plane's files** -- see "Anti-inheritance" below.
 
 ### Cross-cutting (both planes)
 
-| Reference                                                         | Rule Area                                                                          | Key Rule IDs                                  |
-| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------- |
-| [secret-detection.md](references/secret-detection.md)             | Proactive secret detection in API properties                                       | SEC-SECRET-DETECT                             |
-| [pattern-validation.md](references/pattern-validation.md)         | Allowlist vs. denylist `pattern` constraints; Unicode bypass risk; severity matrix | OAPI-PATTERN-ALLOWLIST                        |
-| [think-in-graphs.md](references/think-in-graphs.md)               | Whole-graph review method: orphans, asymmetry, cross-model reachability            | --                                            |
-| [example-quality.md](references/example-quality.md)               | Example file quality: orphan detection, coverage, descriptive values               | EX-ORPHAN, EX-COVERAGE, EX-DESCRIPTIVE-VALUES |
-| [enum-best-practices.md](references/enum-best-practices.md)       | Enum extensibility and boolean alternatives                                        | --                                            |
-| [downstream-ci-impact.md](references/downstream-ci-impact.md)     | Do not recommend a fix that trips a required CI check                              | --                                            |
-| [reviewer-posted-parity.md](references/reviewer-posted-parity.md) | Presented-vs-posted parity (interactive chat reviewers only)                       | --                                            |
+| Reference                                                                                 | Rule Area                                                                          | Key Rule IDs                                              |
+| ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| [secret-detection.md](references/secret-detection.md)                                     | Proactive secret detection in API properties                                       | SEC-SECRET-DETECT                                         |
+| [pattern-validation.md](references/pattern-validation.md)                                 | Allowlist vs. denylist `pattern` constraints; Unicode bypass risk; severity matrix | OAPI-PATTERN-ALLOWLIST                                    |
+| [think-in-graphs.md](references/think-in-graphs.md)                                       | Whole-graph review method: orphans, asymmetry, cross-model reachability            | --                                                        |
+| [example-quality.md](references/example-quality.md)                                       | Example payload correctness, orphan detection, coverage, descriptive values        | EX-PAYLOAD, EX-ORPHAN, EX-COVERAGE, EX-DESCRIPTIVE-VALUES |
+| [enum-best-practices.md](references/enum-best-practices.md)                               | Enum extensibility and boolean alternatives                                        | --                                                        |
+| [downstream-ci-impact.md](references/downstream-ci-impact.md)                             | Do not recommend a fix that trips a required CI check                              | --                                                        |
+| [reviewer-posted-parity.md](references/reviewer-posted-parity.md)                         | Presented-vs-posted parity and cross-session reconciliation for ARM reviewers      | --                                                        |
+| [api-version-lifecycle-and-branches.md](references/api-version-lifecycle-and-branches.md) | Which repo, branch, and folder each API version lifecycle stage may live in        | APIVER-\*                                                 |
 
 ### ARM control-plane only
 
@@ -61,16 +64,12 @@ must not load the other plane's files** -- see "Anti-inheritance" below.
 
 ### Data-plane only
 
-| Reference                                                                               | Rule Area                                                                        | Key Rule IDs             |
-| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------ |
-| [data-plane-linter-rule-coverage.md](references/data-plane-linter-rule-coverage.md)     | `typespec-azure-core` rule → agent-behavior interlock (**read this first**)      | --                       |
-| [data-plane-report-format.md](references/data-plane-report-format.md)                   | Finding syntax, severity glyphs, document shape (**authoritative**)              | --                       |
-| [data-plane-resource-modeling.md](references/data-plane-resource-modeling.md)           | Addressability, actions-vs-CRUD, operation symmetry, versioning/breaking changes | DP-MODEL-_, DP-VERSION-_ |
-| [data-plane-lro-and-paging.md](references/data-plane-lro-and-paging.md)                 | Status-monitor contract, polling linkage, paging shape and consistency           | DP-LRO-_, DP-PAGE-_      |
-| [data-plane-error-design.md](references/data-plane-error-design.md)                     | Stable `code` values, `target`, actionable messages, `innererror`                | DP-ERR-\*                |
-| [data-plane-naming-and-docs.md](references/data-plane-naming-and-docs.md)               | Naming **clarity** (not casing) and documentation quality beyond presence        | DP-NAME-_, DP-DOC-_      |
-| [data-plane-visibility-and-secrets.md](references/data-plane-visibility-and-secrets.md) | `@visibility(Lifecycle.*)` consistency, write-only properties, secret exposure   | DP-VIS-\*                |
-| [data-plane-design-decisions.md](references/data-plane-design-decisions.md)             | Grey-area data-plane trade-off frameworks (6 decision matrices)                  | DDP-001–DDP-006          |
+| Reference                                                                               | Rule Area                                                                  | Key Rule IDs             |
+| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------ |
+| [data-plane-resource-modeling.md](references/data-plane-resource-modeling.md)           | Addressability, actions-vs-CRUD, and stable-version compatibility          | DP-MODEL-_, DP-VERSION-_ |
+| [data-plane-lro-and-paging.md](references/data-plane-lro-and-paging.md)                 | Status-monitor semantics, polling linkage, and paging consistency          | DP-LRO-_, DP-PAGE-_      |
+| [data-plane-error-design.md](references/data-plane-error-design.md)                     | Stable error codes, targets, actionable messages, and consistent envelopes | DP-ERR-\*                |
+| [data-plane-visibility-and-secrets.md](references/data-plane-visibility-and-secrets.md) | Lifecycle visibility, model reachability, and credential exposure          | DP-VIS-\*                |
 
 ### Anti-inheritance
 
@@ -88,15 +87,66 @@ Two ARM references give **actively wrong** advice if applied to the data plane:
 One cross-cutting reference is scoped by consumer rather than by plane:
 
 - [`reviewer-posted-parity.md`](references/reviewer-posted-parity.md) applies
-  only to reviewers that post their own comments from an interactive session.
-  Agents whose only write channel is gh-aw `safe-outputs` never own the post and
-  must not implement its parity machinery.
+  to ARM reviewers in both interactive and autonomous modes. Direct interactive
+  posting and deferred gh-aw `safe-outputs` have different post-post
+  verification mechanics, but they share the same canonical finding,
+  cross-session deduplication, and contradiction-clarification contract. The
+  data-plane reviewer is advisory and does not use ARM reconciliation.
+
+## ARM cross-session reconciliation
+
+Every ARM review entry point uses the same reconciliation actions: a human-run
+Copilot Chat review, the ready-for-ARM GitHub Actions workflow, and an authorized
+`/arm-review` request. Before an ARM reviewer posts, it inventories all
+paginated inline review threads, top-level PR conversation comments, and pull
+request review bodies. Human-authored and agent-authored feedback both count,
+including resolved, outdated, and marker-free items. Marker text is attribution,
+not authentication. Trusted ownership for autonomous resolution requires both a
+valid marker and author `github-actions[bot]`; all prior feedback counts as
+coverage regardless.
+
+Match by semantic finding identity: the same rule or review topic, affected API
+element, and corrective outcome. Exact wording, author, entry point, comment
+surface, line movement, severity wording, and marker presence do not make a
+finding new. In every structured reconciliation plan, the action cell MUST use
+one of the literal uppercase tokens below. Do not substitute synonyms such as
+"suppress duplicate", "defer to existing comment", or "add a clarification
+reply"; downstream Critic and execution steps parse these exact tokens. The
+rationale records material non-identity differences (for example, shifted line
+number, top-level versus inline surface, human origin, or missing marker) and
+states why they do not make the finding new. Line movement does not make a
+finding new, but it does select the action. Apply this precedence:
+`CLARIFY-CONFLICT` for incompatible guidance, the applicable line-shift action
+for a shifted inline anchor, `SKIP-COVERED` for other actionable coverage, then
+`POST-NEW`. Use these canonical actions:
+
+- `SKIP-COVERED`: actionable prior feedback already covers the same finding.
+  No matching inline anchor shifted. Do not post another standalone finding.
+  Use the literal `SKIP-COVERED` token even for human-authored top-level
+  comments, review bodies, resolved threads, or marker-free feedback.
+- `REPLY-LINE-SHIFT`: a human-origin inline finding still applies at a moved
+  line. Reply in that thread and leave it unresolved.
+- `RESOLVE-AND-REPOST`: a trusted workflow-owned inline finding still applies
+  at a moved line. Resolve the stale thread and post one replacement.
+- `CLARIFY-CONFLICT`: prior feedback for the same semantic finding gives
+  materially incompatible guidance. Do not post a competing finding. Reply in
+  the existing inline thread, or post one consolidated top-level clarification
+  for conflicts in top-level comments/review bodies. State the prior position,
+  current evidence, current guidance, and why it changed. Never auto-resolve a
+  human-origin thread. The plan action remains the literal
+  `CLARIFY-CONFLICT`, not a prose synonym.
+- `POST-NEW`: no actionable prior coverage or contradiction exists on any
+  discussion surface.
+
+If any discussion surface cannot be fetched completely, reconciliation is
+incomplete. Follow the Reviewer's explicit failure path; do not silently treat
+all candidates as `POST-NEW`.
 
 ## Authoritative External Sources
 
 These external documents are the upstream authorities. When they conflict with each other, the precedence order is:
 
-1. **[Azure Resource Provider Contract (RPC)](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0)** -- ARM control-plane contract (highest precedence for ARM resources)
+1. **[Azure Resource Provider Contract (RPC)](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10)** -- ARM control-plane contract (highest precedence for ARM resources)
 2. **[Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)** -- general Azure API design (highest precedence for data-plane)
 3. **[TypeSpec Azure library docs](https://azure.github.io/typespec-azure/docs/intro/)** -- TypeSpec-specific patterns for Azure
 4. **[ARM wiki / RP guidelines](https://armwiki.azurewebsites.net/api_contracts/guidelines/rpguidelines.html)** -- supplementary ARM guidance
@@ -276,28 +326,11 @@ the Guidelines, unless it explicitly says otherwise. So:
   saying `**MUST**` does not make the rule `DO`-level, and does not license
   Blocking. Read the field.
 - **Quote the upstream verb rather than inventing one.** Where a reference
-  restates a Guideline, it should cite the anchor and quote the tag, as
-  `DP-PAGE-01` and the extensible-enum guidance now do. Where a rule is our own
-  synthesis of vague upstream direction — `DO focus heavily on clear &
-consistent naming` cannot tell you whether `cfg` is too opaque — the rule
-  should say so, so its `**MUST**` is not mistaken for a sourced requirement.
+  restates a Guideline, it should cite the anchor and quote the tag. Where a rule
+  is reviewer synthesis, it should say so rather than presenting that synthesis
+  as sourced requirement text.
 - **Never escalate on the strength of a reference-body verb.** If the field says
   Warning and the body says `MUST`, the answer is Warning.
-
-Rules currently wording themselves `MUST` at Warning severity without citing an
-upstream anchor: `DP-ERR-05`, `DP-LRO-01`, `DP-PAGE-02`, `DP-NAME-02`,
-`DP-NAME-04`, `DP-DOC-02`, `DP-MODEL-01`, `DP-VERSION-03`. Most do have a
-genuine upstream `DO` behind them — `DP-MODEL-01` restates
-`DO NOT use an action operation when the operation behavior could reasonably be
-defined as one of the standard REST … operations`, and `DP-NAME-02` restates
-`DO … include the time unit` — but until each carries its citation, treat the
-field as authoritative and the verb as emphasis.
-
-`DP-ERR-01` was on that list and has been rewritten: its enumeration trigger is
-now narrow and capped at Question, and it carries the
-`rest-error-use-default-response` citation that pushes **against** the stronger
-reading. It is the worked example of why the list matters — an uncited `MUST`
-turned out to fire on `Azure.Core.Foundations.Error` itself.
 
 ## Maintenance & Upstream Alignment
 
@@ -322,11 +355,10 @@ consumption.
   instruction file **MUST** be updated to match. The upstream document
   always takes precedence.
 - Rules that overlap with existing linter checks are annotated with
-  `(Also enforced by: ...)`. The review agent should check CI results
-  before flagging these to avoid duplicating linter findings. For the
-  data plane this soft convention is replaced by a hard interlock --
-  [`data-plane-linter-rule-coverage.md`](references/data-plane-linter-rule-coverage.md),
-  whose header pin is enforced by the `data-plane-review-alignment` CI check.
+  `(Also enforced by: ...)`. Review agents should check CI results before
+  flagging these to avoid duplicate findings. The data-plane reviewer uses a
+  positive semantic scope: anything outside its retained references, already
+  reported by CI, or of uncertain mechanical ownership is dropped.
 - To avoid conflicts with the
   [azure-typespec-author](../../skills/azure-typespec-author/SKILL.md)
   skill (used for TypeSpec code generation), coordinate rule changes
