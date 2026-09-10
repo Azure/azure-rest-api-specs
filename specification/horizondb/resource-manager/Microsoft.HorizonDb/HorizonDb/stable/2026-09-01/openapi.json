@@ -7656,49 +7656,6 @@
       ],
       "x-ms-discriminator-value": "Fabric"
     },
-    "FailoverProperties": {
-      "type": "object",
-      "description": "The current automatic and requested failover eligibility for a cluster.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/FailoverState",
-          "description": "The current readiness state for both automatic failover and a caller-requested failover operation.",
-          "readOnly": true
-        },
-        "unavailableReason": {
-          "type": "string",
-          "description": "The reason failover is not ready. This property is present only when state is NotReady and absent when state is Ready. Valid reasons are that no read-write pool is designated, the designated read-write pool has fewer than two nodes, the designated read-write pool is stopped or shut down, or its read-only nodes are not functional.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "state"
-      ]
-    },
-    "FailoverState": {
-      "type": "string",
-      "description": "The readiness state for automatic and caller-requested failover.",
-      "enum": [
-        "Ready",
-        "NotReady"
-      ],
-      "x-ms-enum": {
-        "name": "FailoverState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Ready",
-            "value": "Ready",
-            "description": "Failover is ready."
-          },
-          {
-            "name": "NotReady",
-            "value": "NotReady",
-            "description": "Failover is not ready. Inspect unavailableReason for details."
-          }
-        ]
-      }
-    },
     "FirewallRule": {
       "type": "object",
       "description": "Represents a customer-managed firewall rule for a HorizonDB endpoint.",
@@ -9666,19 +9623,13 @@
           "description": "The Azure resource ID of the pool designated to host the cluster's read-write node. The pool is a child resource of this cluster. When a pool is created while the cluster currently has no pools, the service automatically sets this property to the new pool's resource ID, including when all pools that existed earlier in the cluster's lifetime were deleted. This property is absent when no pool is designated, such as after clearReadWritePool succeeds.",
           "readOnly": true
         },
-        "failover": {
-          "$ref": "#/definitions/FailoverProperties",
-          "description": "The current failover status for the read-write node. This object is always returned on reads. When failover is not ready, state is NotReady and unavailableReason explains why.",
-          "readOnly": true
-        },
         "zoneRedundancy": {
           "$ref": "#/definitions/ReadWritePoolZoneRedundancyProperties",
-          "description": "The current zone redundancy status for the read-write node. This object is always returned on reads. When zone redundancy is not ready, state is NotReady and unavailableReason explains why.",
+          "description": "The current zone redundancy status for the read-write node. This object is always returned on reads. When the read-write node is not protected by zone redundancy, state is NotProtected and unavailableReason explains why.",
           "readOnly": true
         }
       },
       "required": [
-        "failover",
         "zoneRedundancy"
       ]
     },
@@ -9688,12 +9639,12 @@
       "properties": {
         "state": {
           "$ref": "#/definitions/ZoneRedundancyState",
-          "description": "The current zone-redundancy readiness state for the read-write node. The state is NotReady when no read-write pool is designated.",
+          "description": "The current zone-redundancy protection state for the read-write node. The state is NotProtected when no read-write pool is designated.",
           "readOnly": true
         },
         "unavailableReason": {
           "type": "string",
-          "description": "The reason zone redundancy is not ready. This property is present only when state is NotReady and absent when state is Ready. Valid reasons are that no read-write pool is designated, the designated read-write pool has fewer than two nodes, all nodes in the designated read-write pool are deployed in a single availability zone, or the region does not support availability zones.",
+          "description": "The reason the read-write node is not protected by zone redundancy. This property is present only when state is NotProtected and absent when state is Protected. Valid reasons are that no read-write pool is designated, the designated read-write pool has fewer than two nodes, all nodes in the designated read-write pool are deployed in a single availability zone, or the region does not support availability zones.",
           "readOnly": true
         }
       },
@@ -9755,24 +9706,24 @@
     },
     "ZoneRedundancyState": {
       "type": "string",
-      "description": "The readiness state for zone redundancy of the read-write node.",
+      "description": "The zone-redundancy protection state of the read-write node.",
       "enum": [
-        "Ready",
-        "NotReady"
+        "Protected",
+        "NotProtected"
       ],
       "x-ms-enum": {
         "name": "ZoneRedundancyState",
         "modelAsString": true,
         "values": [
           {
-            "name": "Ready",
-            "value": "Ready",
-            "description": "Zone redundancy is ready."
+            "name": "Protected",
+            "value": "Protected",
+            "description": "The read-write node is protected by zone redundancy."
           },
           {
-            "name": "NotReady",
-            "value": "NotReady",
-            "description": "Zone redundancy is not ready. Inspect unavailableReason for details."
+            "name": "NotProtected",
+            "value": "NotProtected",
+            "description": "The read-write node is not protected by zone redundancy. Inspect unavailableReason for details."
           }
         ]
       }

@@ -281,11 +281,11 @@ model FailoverProperties {
 @added(Versions.v2026_09_01)
 @doc("The current zone redundancy status for the read-write node.")
 model ReadWritePoolZoneRedundancyProperties {
-  @doc("The current zone-redundancy readiness state for the read-write node. The state is NotReady when no read-write pool is designated.")
+  @doc("The current zone-redundancy protection state for the read-write node. The state is NotProtected when no read-write pool is designated.")
   @visibility(Lifecycle.Read)
   state: ZoneRedundancyState;
 
-  @doc("The reason zone redundancy is not ready. This property is present only when state is NotReady and absent when state is Ready. Valid reasons are that no read-write pool is designated, the designated read-write pool has fewer than two nodes, all nodes in the designated read-write pool are deployed in a single availability zone, or the region does not support availability zones.")
+  @doc("The reason the read-write node is not protected by zone redundancy. This property is present only when state is NotProtected and absent when state is Protected. Valid reasons are that no read-write pool is designated, the designated read-write pool has fewer than two nodes, all nodes in the designated read-write pool are deployed in a single availability zone, or the region does not support availability zones.")
   @visibility(Lifecycle.Read)
   unavailableReason?: string;
 }
@@ -297,13 +297,13 @@ model ReadWritePoolProperties {
   @visibility(Lifecycle.Read)
   designatedPoolResourceId?: PoolResourceId;
 
-  @added(Versions.v2026_09_01)
+  @added(Versions.v2027_03_01_preview)
   @doc("The current failover status for the read-write node. This object is always returned on reads. When failover is not ready, state is NotReady and unavailableReason explains why.")
   @visibility(Lifecycle.Read)
   failover: FailoverProperties;
 
   @added(Versions.v2026_09_01)
-  @doc("The current zone redundancy status for the read-write node. This object is always returned on reads. When zone redundancy is not ready, state is NotReady and unavailableReason explains why.")
+  @doc("The current zone redundancy status for the read-write node. This object is always returned on reads. When the read-write node is not protected by zone redundancy, state is NotProtected and unavailableReason explains why.")
   @visibility(Lifecycle.Read)
   zoneRedundancy: ReadWritePoolZoneRedundancyProperties;
 }
@@ -330,15 +330,15 @@ union FailoverState {
 }
 
 @added(Versions.v2026_09_01)
-@doc("The readiness state for zone redundancy of the read-write node.")
+@doc("The zone-redundancy protection state of the read-write node.")
 union ZoneRedundancyState {
   string,
 
-  @doc("Zone redundancy is ready.")
-  Ready: "Ready",
+  @doc("The read-write node is protected by zone redundancy.")
+  Protected: "Protected",
 
-  @doc("Zone redundancy is not ready. Inspect unavailableReason for details.")
-  NotReady: "NotReady",
+  @doc("The read-write node is not protected by zone redundancy. Inspect unavailableReason for details.")
+  NotProtected: "NotProtected",
 }
 
 @renamedFrom(Versions.v2026_09_01, "HorizonDbClusterPropertiesForPatchUpdate")
