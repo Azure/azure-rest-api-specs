@@ -148,7 +148,7 @@ alias PutVolumeErrors =
   | ErrorResult<500>;
 
 /** OK. */
-model PutVolumeFileUploadResult {
+model PostVolumeFileUploadResult {
   /** HTTP response status code. */
   @statusCode statusCode: 200;
 
@@ -156,8 +156,8 @@ model PutVolumeFileUploadResult {
   @body body: VolumePathItem;
 }
 
-/** Errors returned by putVolumeFileUpload. */
-alias PutVolumeFileUploadErrors =
+/** Errors returned by postVolumeFileUpload. */
+alias PostVolumeFileUploadErrors =
   | ErrorResult<400>
   | ErrorResult<401>
   | ErrorResult<404>
@@ -357,8 +357,8 @@ interface VolumesOperations {
   #suppress "@azure-tools/typespec-azure-core/byos" "The content is a byte stream, not a BYOS model."
   @summary("Upload a file to a volume.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes/{volumeName}/files/upload")
-  @put
-  putVolumeFileUpload is Foundations.Operation<
+  @post
+  postVolumeFileUpload is Foundations.Operation<
     {
       ...AzureResourceScope;
 
@@ -377,8 +377,8 @@ interface VolumesOperations {
       /** overwrite parameter. */
       @query overwrite?: boolean;
     },
-    PutVolumeFileUploadResult,
+    PostVolumeFileUploadResult,
     DataPlaneStandardTraits,
-    PutVolumeFileUploadErrors
+    PostVolumeFileUploadErrors
   >;
 }

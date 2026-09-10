@@ -73,7 +73,7 @@ alias GetDiskImageErrors =
   | ErrorResult<500>;
 
 /** OK. */
-model PutDiskImageResult {
+model PostDiskImageResult {
   /** HTTP response status code. */
   @statusCode statusCode: 200;
 
@@ -81,8 +81,8 @@ model PutDiskImageResult {
   @body body: DiskImage;
 }
 
-/** Errors returned by putDiskImage. */
-alias PutDiskImageErrors =
+/** Errors returned by postDiskImage. */
+alias PostDiskImageErrors =
   | ErrorResult<400>
   | ErrorResult<401>
   | ErrorResult<429>
@@ -183,17 +183,17 @@ interface DiskImagesOperations {
 
   /** Creates a new disk image from an OCI image reference. */
   @summary("Creates a new disk image from an OCI image reference.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages")
-  @put
-  putDiskImage is Foundations.Operation<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/createDiskimage")
+  @post
+  postDiskImage is Foundations.Operation<
     {
       ...AzureResourceScope;
 
       /** Request body. */
       @body body: CreateDiskImageContent;
     },
-    PutDiskImageResult,
+    PostDiskImageResult,
     DataPlaneStandardTraits,
-    PutDiskImageErrors
+    PostDiskImageErrors
   >;
 }
