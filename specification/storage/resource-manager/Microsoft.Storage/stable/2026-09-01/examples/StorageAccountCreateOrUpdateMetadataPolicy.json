@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "accountName": "examplestorageaccount",
+    "api-version": "2026-09-01",
+    "resource": {
+      "properties": {
+        "snapshotPolicy": {
+          "status": "Enabled"
+        }
+      }
+    },
+    "resourceGroupName": "exampleresourcegroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/exampleresourcegroup/providers/Microsoft.Storage/storageAccounts/examplestorageaccount/metadataPolicies/default",
+        "name": "default",
+        "type": "Microsoft.Storage/storageAccounts/metadataPolicies",
+        "properties": {
+          "lastModifiedTime": "2026-09-10T12:00:00Z",
+          "snapshotPolicy": {
+            "name": "Blob Metadata Snapshot",
+            "status": "Enabled",
+            "definition": {
+              "refreshFrequency": "6-Hourly"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/exampleresourcegroup/providers/Microsoft.Storage/storageAccounts/examplestorageaccount/metadataPolicies/default",
+        "name": "default",
+        "type": "Microsoft.Storage/storageAccounts/metadataPolicies",
+        "properties": {
+          "lastModifiedTime": "2026-09-10T12:00:00Z",
+          "snapshotPolicy": {
+            "name": "Blob Metadata Snapshot",
+            "status": "Enabled",
+            "definition": {
+              "refreshFrequency": "6-Hourly"
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "MetadataPolicies_CreateOrUpdate",
+  "title": "CreateOrUpdateMetadataPolicy"
+}
