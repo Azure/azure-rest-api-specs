@@ -105,6 +105,7 @@ using TypeSpec.Http;
 @@clientName(FleetMemberStatus, "ContainerServiceFleetMemberStatus", "csharp");
 @@clientName(FleetStatus, "ContainerServiceFleetStatus", "csharp");
 @@clientName(Timing, "ContainerServiceFleetGateTiming", "csharp");
+@@clientName(DayOfWeek, "ContainerServiceFleetDayOfWeek", "csharp");
 @@clientName(AgentProfile, "ContainerServiceFleetAgentProfile", "csharp");
 @@clientName(
   APIServerAccessProfile,
@@ -182,11 +183,31 @@ using TypeSpec.Http;
   "ContainerServiceFleetPropagationPolicy",
   "csharp"
 );
+@@clientName(
+  PropagationPolicyPatch,
+  "ContainerServiceFleetPropagationPolicyPatch",
+  "csharp"
+);
 @@clientName(PropagationType, "ContainerServiceFleetPropagationType", "csharp");
 @@clientName(ResourceQuota, "ContainerServiceFleetResourceQuota", "csharp");
 @@clientName(
   Placement.V1.PlacementPolicy,
   "ContainerServiceFleetPlacementPolicy",
+  "csharp"
+);
+@@clientName(
+  Placement.V1.PlacementPolicyPatch,
+  "ContainerServiceFleetPlacementPolicyPatch",
+  "csharp"
+);
+@@clientName(
+  Placement.V1.RolloutStrategy,
+  "ContainerServiceFleetRolloutStrategy",
+  "csharp"
+);
+@@clientName(
+  Placement.V1.RolloutStrategyType,
+  "ContainerServiceFleetRolloutStrategyType",
   "csharp"
 );
 @@clientName(
@@ -205,6 +226,11 @@ using TypeSpec.Http;
   "csharp"
 );
 @@clientName(
+  Placement.V1.ClusterSelectorTermPatch,
+  "ContainerServiceFleetClusterSelectorTermPatch",
+  "csharp"
+);
+@@clientName(
   Placement.V1.PropertySelectorOperator,
   "ContainerServiceFleetPropertySelectorOperator",
   "csharp"
@@ -212,6 +238,11 @@ using TypeSpec.Http;
 @@clientName(
   Placement.V1.PropertySelectorRequirement,
   "ContainerServiceFleetPropertySelectorRequirement",
+  "csharp"
+);
+@@clientName(
+  Placement.V1.PropertySelectorRequirementPatch,
+  "ContainerServiceFleetPropertySelectorRequirementPatch",
   "csharp"
 );
 @@clientName(
@@ -231,6 +262,11 @@ using TypeSpec.Http;
   "csharp"
 );
 @@clientName(
+  Meta.V1.LabelSelectorPatch,
+  "ContainerServiceFleetLabelSelectorPatch",
+  "csharp"
+);
+@@clientName(
   Meta.V1.LabelSelectorOperator,
   "ContainerServiceFleetLabelSelectorOperator",
   "csharp"
@@ -238,6 +274,21 @@ using TypeSpec.Http;
 @@clientName(
   Meta.V1.LabelSelectorRequirement,
   "ContainerServiceFleetLabelSelectorRequirement",
+  "csharp"
+);
+@@clientName(
+  Meta.V1.LabelSelectorRequirementPatch,
+  "ContainerServiceFleetLabelSelectorRequirementPatch",
+  "csharp"
+);
+@@clientName(
+  ScheduledStartConfiguration,
+  "ContainerServiceFleetScheduledStartConfiguration",
+  "csharp"
+);
+@@clientName(
+  ScheduledStartProperties,
+  "ContainerServiceFleetScheduledStartProperties",
   "csharp"
 );
 

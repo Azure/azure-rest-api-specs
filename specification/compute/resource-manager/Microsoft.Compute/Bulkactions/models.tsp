@@ -17,6 +17,7 @@ namespace Microsoft.Compute;
 // ------------------ Enums ---------------
 @doc("The types of deadlines supported by Bulkactions")
 union DeadlineType {
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @doc("Default value of Unknown.")
   Unknown: "Unknown",
 
@@ -31,6 +32,7 @@ union DeadlineType {
 
 @doc("The kind of bulk operation that can be performed on resources using Bulkactions API")
 union ResourceOperationType {
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @doc("The default value for this enum type")
   Unknown: "Unknown",
 
@@ -50,6 +52,7 @@ union ResourceOperationType {
   Delete: "Delete",
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @doc("Post-Start VM agent health-check sub-operation; surfaced when the customer opts into verifyVmAgentHealth on a Start request")
   GetInstanceView: "GetInstanceView",
 
@@ -58,15 +61,18 @@ union ResourceOperationType {
 
 @doc("Values that define the states of operations in Bulkactions")
 union OperationState {
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @doc("The default value for the operation state enum")
   Unknown: "Unknown",
 
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @doc("Operations that are pending scheduling")
   PendingScheduling: "PendingScheduling",
 
   @doc("Operations that have been scheduled")
   Scheduled: "Scheduled",
 
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @doc("Operations that are waiting to be executed")
   PendingExecution: "PendingExecution",
 
@@ -189,6 +195,48 @@ union DistributionStrategy {
   string,
 }
 
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("Whether the service may launch fewer instances than requested when the full capacity cannot be satisfied.")
+union PartialFulfillmentMode {
+  @doc("Partial fulfillment is allowed.")
+  Enabled: "Enabled",
+
+  @doc("Partial fulfillment is not allowed.")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The reason the requested capacity could only be partially fulfilled.")
+union PartialFulfillmentReason {
+  @doc("The requested capacity could not be fully satisfied due to insufficient capacity in the region.")
+  InsufficientCapacity: "InsufficientCapacity",
+
+  @doc("The requested capacity could not be fully satisfied due to insufficient quota in the subscription.")
+  InsufficientQuota: "InsufficientQuota",
+
+  @doc("The requested capacity was successfully satisfied without any partial fulfillment.")
+  None: "None",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("Controls how partial fulfillment is handled for a BulkCreateCustom request. When enabled, Azure creates only the VMs or vCPUs it has high confidence can be successfully allocated, instead of attempting the entire request and potentially returning allocation failures.")
+model PartialFulfillmentPolicy {
+  @visibility(Lifecycle.Read)
+  @doc("The amount of capacity that was actually attempted, expressed in the units specified by capacityType. When partial fulfillment is enabled, this value can be less than the requested capacity.")
+  fulfilledCapacity?: int32;
+
+  @doc("Specifies whether partial fulfillment is allowed. When Enabled, Azure creates as many VMs as it has high confidence can be successfully allocated. When Disabled, Azure attempts to create all requested VMs, which may result into allocation failures.")
+  mode?: PartialFulfillmentMode = PartialFulfillmentMode.Enabled;
+
+  @visibility(Lifecycle.Read)
+  @doc("Indicates why the fulfilled capacity is less than the requested capacity. Possible values include InsufficientCapacity and InsufficientQuota. Returned only in the create response when partial fulfillment is enabled and the request cannot be fully satisfied.")
+  reason?: PartialFulfillmentReason;
+}
+
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("A VM size profile with a name and rank for flex VM creation")
 model VmSizeProfile {
@@ -225,6 +273,11 @@ model ZonePreference {
 
   @doc("The rank of this zone in the priority order")
   rank: int32;
+
+  @added(Microsoft.Compute.Versions.`2026-09-06-preview`)
+  @minValue(1)
+  @doc("The maximum capacity to place in this zone. The sum across capped zones must not exceed the requested capacity, and when every zone preference is capped the sum must equal the requested capacity.")
+  targetMaxCapacity?: int32;
 }
 
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
@@ -348,6 +401,7 @@ model RetryPolicy {
 @doc("Extra details needed to run the user's request")
 model ExecutionParameters {
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @doc("Details that could optimize the user's request")
   optimizationPreference?: OptimizationPreference;
 
@@ -357,6 +411,23 @@ model ExecutionParameters {
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
   @doc("When true on an executeStart request, run a post-Start VM agent health check and engage the fallback chain if the guest agent does not report Ready. Ignored for non-Start operations.")
   verifyVmAgentHealth?: boolean;
+
+  @added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+  @doc("Capacity recommendation parameters for the request. When provided on an executeStart request, the service computes placement recommendations only if the VM fails to start due to an allocation failure; the recommendations for the desired sizes and locations are then surfaced in the operation's capacityRecommendation response.")
+  capacityRecommendationParameters?: CapacityRecommendationParameters;
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The parameters used to request capacity/placement recommendations for a start operation. Placement recommendations are only computed if the VM fails to start due to an allocation failure.")
+model CapacityRecommendationParameters {
+  @doc("The list of desired Azure regions to be considered for the capacity recommendation")
+  desiredLocations?: string[];
+
+  @doc("The list of desired VM sizes (SKUs) to be considered for the capacity recommendation")
+  desiredSizes?: string[];
+
+  @doc("Whether the capacity recommendation should be computed per availability zone")
+  availabilityZones?: boolean;
 }
 
 @doc("These describe errors that occur at the resource level")
@@ -398,8 +469,14 @@ model ResourceOperationDetails {
   @doc("Unique identifier for the resource involved in the operation, for example Azure resource ID")
   resourceId?: armResourceIdentifier;
 
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
+  @renamedFrom(Microsoft.Compute.Versions.`2026-09-06-preview`, "opType")
   @doc("Type of operation performed on the resources")
-  opType?: ResourceOperationType = ResourceOperationType.Unknown;
+  opTypeWithDefault?: ResourceOperationType = ResourceOperationType.Unknown;
+
+  @added(Microsoft.Compute.Versions.`2026-09-06-preview`)
+  @doc("Type of operation performed on the resources")
+  opType?: ResourceOperationType;
 
   @doc("Subscription id attached to the request")
   subscriptionId?: string;
@@ -408,11 +485,23 @@ model ResourceOperationDetails {
   @doc("Deadline for the operation")
   deadline?: offsetDateTime;
 
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
+  @renamedFrom(Microsoft.Compute.Versions.`2026-09-06-preview`, "deadlineType")
   @doc("Type of deadline of the operation")
-  deadlineType?: DeadlineType = DeadlineType.Unknown;
+  deadlineTypeWithDefault?: DeadlineType = DeadlineType.Unknown;
 
+  @added(Microsoft.Compute.Versions.`2026-09-06-preview`)
+  @doc("Type of deadline of the operation")
+  deadlineType?: DeadlineType;
+
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
+  @renamedFrom(Microsoft.Compute.Versions.`2026-09-06-preview`, "state")
   @doc("Current state of the operation")
-  state?: OperationState = OperationState.Unknown;
+  stateWithDefault?: OperationState = OperationState.Unknown;
+
+  @added(Microsoft.Compute.Versions.`2026-09-06-preview`)
+  @doc("Current state of the operation")
+  state?: OperationState;
 
   @doc("Timezone for the operation")
   timezone?: string;
@@ -433,6 +522,91 @@ model ResourceOperationDetails {
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
   @doc("Resource notification details.")
   resourceNotificationDetails?: ResourceNotificationDetails;
+
+  @added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+  @doc("The capacity/placement recommendation computed for the operation, if requested")
+  capacityRecommendation?: CapacityRecommendation;
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The lifecycle status of the capacity recommendation for an operation")
+union CapacityRecommendationStatus {
+  @doc("The capacity recommendation has not been initiated")
+  NotInitiated: "NotInitiated",
+
+  @doc("The capacity recommendation completed successfully")
+  Succeeded: "Succeeded",
+
+  @doc("The capacity recommendation failed")
+  Failed: "Failed",
+
+  @doc("The capacity recommendation was skipped")
+  Skipped: "Skipped",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("A desired VM size (SKU) considered for the capacity recommendation")
+model CapacityRecommendationSize {
+  @doc("The VM size (SKU) name")
+  sku?: string;
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The placement score for a given SKU, region and optionally availability zone")
+model CapacityRecommendationPlacementScore {
+  @doc("The VM size (SKU) name")
+  sku?: string;
+
+  @doc("The Azure region")
+  region?: string;
+
+  @doc("The availability zone identifier, present only when availabilityZones was requested")
+  availabilityZone?: string;
+
+  @doc("The placement score, eg High, Medium or Low")
+  score?: string;
+
+  @doc("Whether quota is available for the SKU, region and zone combination")
+  isQuotaAvailable?: boolean;
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The details of a capacity recommendation")
+model CapacityRecommendationDetails {
+  @doc("The list of desired Azure regions from the request")
+  desiredLocations?: string[];
+
+  @doc("The UTC timestamp of when the recommendation was requested")
+  recommendationRequestedAtUtc?: utcDateTime;
+
+  @doc("The list of desired VM sizes from the request")
+  @identifiers(#[])
+  desiredSizes?: CapacityRecommendationSize[];
+
+  @doc("Whether the response is split by availability zone")
+  availabilityZones?: boolean;
+
+  @doc("The array of placement scores per SKU, region and zone")
+  @identifiers(#[])
+  placementScores?: CapacityRecommendationPlacementScore[];
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The capacity/placement recommendation computed for a resource operation")
+model CapacityRecommendation {
+  @doc("The lifecycle status of the capacity recommendation")
+  status: CapacityRecommendationStatus;
+
+  @doc("The error message if the capacity recommendation failed")
+  error?: string;
+
+  @doc("The detailed error information if the capacity recommendation failed")
+  errorDetails?: string;
+
+  @doc("The details of the capacity recommendation")
+  details?: CapacityRecommendationDetails;
 }
 
 @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
@@ -746,6 +920,19 @@ model GetOperationStatusResponse {
   results: Array<ResourceOperation>;
 }
 
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The paged response for virtual machine operation statuses in a BulkCreateCustom operation.")
+model BulkCreateCustomOperationStatusListResult {
+  @pageItems
+  @identifiers(#["resourceId"])
+  @doc("The virtual machine operation statuses on this page.")
+  results: Array<ResourceOperation>;
+
+  @nextLink
+  @doc("The link to the next page of operation statuses.")
+  nextLink?: url;
+}
+
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Static read response for the singleton bulk VM operations proxy endpoint")
 model BulkVmOperationsReadResponse {
@@ -783,6 +970,7 @@ model CancelOperationsResponse {
 @doc("The response from listing bulk operation errors")
 model ListBulkOperationErrorsResponse is Azure.Core.Page<ResourceOperation>;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
 @doc("The response from acknowledging bulk operation errors")
 model AcknowledgeBulkOperationErrorsResponse {
@@ -796,6 +984,7 @@ model AcknowledgeBulkOperationErrorsResponse {
   skipped: Array<string>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
 @doc("The request to acknowledge bulk operation errors")
 model AcknowledgeBulkOperationErrorsRequest {

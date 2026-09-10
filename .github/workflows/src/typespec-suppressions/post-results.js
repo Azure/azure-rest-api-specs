@@ -38,7 +38,15 @@ export default async function postSuppressionsResults({ github, context, core })
   /** @type {string[]} */
   const labelNames = pr.labels.map((/** @type {{ name?: string }} */ label) => label.name ?? "");
 
-  const body = await buildSuppressionsComment(github, core, owner, repo, head_sha, labelNames);
+  const body = await buildSuppressionsComment(
+    github,
+    core,
+    owner,
+    repo,
+    head_sha,
+    issue_number,
+    labelNames,
+  );
 
   if (body) {
     core.info(`Posting TypeSpec suppressions review comment on ${owner}/${repo}#${issue_number}.`);

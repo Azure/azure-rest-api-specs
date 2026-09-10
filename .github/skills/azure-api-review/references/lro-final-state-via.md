@@ -1,4 +1,4 @@
-<!-- Upstream alignment: 2026-04-15
+<!-- Upstream alignment: 2026-08-15
      This date is for maintainers of this file only -- it records when
      rules were last verified against upstream docs. No action is needed
      by spec authors or PR reviewers. -->
@@ -12,7 +12,7 @@ them.
 **Authoritative references:**
 
 - [Azure REST API Guidelines -- Long-Running Operations](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#long-running-operations--jobs)
-- [Azure Resource Provider Contract -- Async Operations](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/async-api-reference.md)
+- [Azure Resource Provider Contract -- Async Operations](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/async-api-reference)
 - [AutoRest LRO Extension docs](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-long-running-operation)
 
 ---
@@ -108,5 +108,5 @@ When it is NOT needed (standard ARM resource operations):
 ```tsp
 // ARM operation templates handle LRO correctly by default
 createOrUpdate is ArmResourceCreateOrReplaceAsync<MyResource>;
-delete is ArmResourceDeleteAsync<MyResource>;
+delete is ArmResourceDeleteWithoutOkAsync<MyResource>;
 ```

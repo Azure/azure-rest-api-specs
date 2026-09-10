@@ -83,7 +83,7 @@ interface Computes {
     Compute,
     Response = ArmAcceptedLroResponse<
       "Resource creation accepted.",
-      ArmCombinedLroHeaders
+      ArmCombinedLroHeaders<FinalResult = Compute>
     >
   >;
 

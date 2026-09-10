@@ -148,3 +148,45 @@ using Microsoft.ConnectedCache;
 );
 @@alternateType(ProxyUrlConfiguration.proxyUrl, url, "csharp");
 @@clientName(ProvisioningState, "ConnectedCacheProvisioningState", "csharp");
+
+@@clientName(
+  CacheNodeEntity.openFirewallPort80,
+  "ShouldOpenFirewallPort80",
+  "csharp"
+);
+
+@@clientName(
+  CacheNodeEntity.openFirewallPort443,
+  "ShouldOpenFirewallPort443",
+  "csharp"
+);
+
+@@clientName(
+  CacheNodeEntity.openFirewallPort5000,
+  "ShouldOpenFirewallPort5000",
+  "csharp"
+);
+
+@@clientName(
+  CacheNodeEntity.openFirewallPort5001,
+  "ShouldOpenFirewallPort5001",
+  "csharp"
+);
+
+@@clientName(
+  AdditionalCustomerProperties.signupStatus,
+  "IsSignupComplete",
+  "csharp"
+);
+
+@@clientName(
+  CustomerEntity.verifySignupCode,
+  "ShouldVerifySignupCode",
+  "csharp"
+);
+
+@@clientName(
+  CustomerEntity.resendSignupCode,
+  "ShouldResendSignupCode",
+  "csharp"
+);
