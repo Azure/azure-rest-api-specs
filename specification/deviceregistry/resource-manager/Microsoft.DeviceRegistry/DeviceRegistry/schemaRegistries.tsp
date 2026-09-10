@@ -114,7 +114,7 @@ model SchemaProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Customer-defined schema tags: keys are arbitrary user-supplied strings that cannot be predefined, so a Record<string> map is required."
   @doc("Schema tags.")
   // Allowed scenario as per user-defined tags: https://github.com/Azure/azure-openapi-validator/blob/main/docs/avoid-additional-properties.md
   tags?: Record<string>;
