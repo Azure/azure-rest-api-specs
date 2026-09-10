@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Speech Transcription API",
-    "version": "2025-10-15",
+    "version": "2026-09-15-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -117,6 +117,9 @@
           },
           "Transcribe with enhanced mode": {
             "$ref": "./examples/transcribe_enhanced_mode.json"
+          },
+          "Transcribe with enhanced model options": {
+            "$ref": "./examples/transcribe_enhanced_model_options.json"
           }
         }
       }
@@ -201,6 +204,20 @@
         "text"
       ]
     },
+    "EnhancedModeModelOptions": {
+      "type": "object",
+      "description": "Model-specific options for enhanced transcription.",
+      "properties": {
+        "timestamps": {
+          "$ref": "#/definitions/EnhancedModeTimestampGranularity",
+          "description": "Timestamp granularity for the transcription output."
+        },
+        "transcribeStyle": {
+          "$ref": "#/definitions/EnhancedModeTranscriptionStyle",
+          "description": "Style to use for the transcription output."
+        }
+      }
+    },
     "EnhancedModeProperties": {
       "type": "object",
       "description": "Enhanced mode properties for transcription.",
@@ -224,7 +241,69 @@
           "items": {
             "type": "string"
           }
+        },
+        "model": {
+          "type": "string",
+          "description": "The enhanced transcription model to use."
+        },
+        "modelOptions": {
+          "$ref": "#/definitions/EnhancedModeModelOptions",
+          "description": "Model-specific options for enhanced transcription."
         }
+      }
+    },
+    "EnhancedModeTimestampGranularity": {
+      "type": "string",
+      "description": "Timestamp granularity for enhanced transcription output. New values may be added in future API versions.",
+      "enum": [
+        "word",
+        "segment",
+        "none"
+      ],
+      "x-ms-enum": {
+        "name": "EnhancedModeTimestampGranularity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Word",
+            "value": "word",
+            "description": "Include timestamps for each word."
+          },
+          {
+            "name": "Segment",
+            "value": "segment",
+            "description": "Include timestamps for each transcript segment."
+          },
+          {
+            "name": "None",
+            "value": "none",
+            "description": "Do not include timestamps."
+          }
+        ]
+      }
+    },
+    "EnhancedModeTranscriptionStyle": {
+      "type": "string",
+      "description": "Transcription styles supported by enhanced transcription models. New values may be added in future API versions.",
+      "enum": [
+        "verbatim",
+        "clean"
+      ],
+      "x-ms-enum": {
+        "name": "EnhancedModeTranscriptionStyle",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Verbatim",
+            "value": "verbatim",
+            "description": "Preserve the spoken wording in the transcript."
+          },
+          {
+            "name": "Clean",
+            "value": "clean",
+            "description": "Produce a cleaned-up transcript."
+          }
+        ]
       }
     },
     "PhraseListProperties": {

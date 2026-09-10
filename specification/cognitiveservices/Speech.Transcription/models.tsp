@@ -1,10 +1,12 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 
@@ -28,6 +30,7 @@ union ProfanityFilterMode {
 }
 
 /** Timestamp granularity for enhanced transcription output. New values may be added in future API versions. */
+@added(ServiceApiVersions.V20260915Preview)
 union EnhancedModeTimestampGranularity {
   /** Include timestamps for each word. */
   Word: "word",
@@ -42,6 +45,7 @@ union EnhancedModeTimestampGranularity {
 }
 
 /** Transcription styles supported by enhanced transcription models. New values may be added in future API versions. */
+@added(ServiceApiVersions.V20260915Preview)
 union EnhancedModeTranscriptionStyle {
   /** Preserve the spoken wording in the transcript. */
   Verbatim: "verbatim",
@@ -53,6 +57,7 @@ union EnhancedModeTranscriptionStyle {
 }
 
 /** Model-specific options for enhanced transcription. */
+@added(ServiceApiVersions.V20260915Preview)
 model EnhancedModeModelOptions {
   /** Timestamp granularity for the transcription output. */
   timestamps?: EnhancedModeTimestampGranularity;
@@ -63,7 +68,7 @@ model EnhancedModeModelOptions {
 
 @doc("Enhanced mode properties for transcription.")
 model EnhancedModeProperties {
-  @doc("Enable enhanced mode for transcription. SDKs automatically set this to true when task, targetLanguage, prompt, model, or modelOptions are specified.")
+  @doc("Enable enhanced mode for transcription. This is automatically set to true when task, targetLanguage, or prompt are specified.")
   @visibility(Lifecycle.Read)
   enabled?: boolean;
 
@@ -77,9 +82,11 @@ model EnhancedModeProperties {
   prompt?: string[];
 
   /** The enhanced transcription model to use. */
+  @added(ServiceApiVersions.V20260915Preview)
   `model`?: string;
 
   /** Model-specific options for enhanced transcription. */
+  @added(ServiceApiVersions.V20260915Preview)
   modelOptions?: EnhancedModeModelOptions;
 }
 

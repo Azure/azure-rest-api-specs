@@ -1,12 +1,12 @@
 {
   "operationId": "Transcribe",
-  "title": "Transcribe with enhanced model options",
+  "title": "Transcribe with enhanced mode",
   "parameters": {
     "Endpoint": "{endpoint}",
     "Ocp-Apim-Subscription-Key": "{API Key}",
-    "api-version": "2025-10-15",
+    "api-version": "2026-09-15-preview",
     "Content-Type": "multipart/form-data",
-    "definition": "{ \"locales\": [\"en\"], \"phraseList\": { \"phrases\": [\"Weather\", \"Speech service\"] }, \"enhancedMode\": { \"enabled\": true, \"model\": \"mai-transcribe-2\", \"modelOptions\": { \"timestamps\": \"word\", \"transcribeStyle\": \"clean\" } } }",
+    "definition": "{ \"locales\":  [\"en-US\"], \"enhancedMode\": { \"enabled\": true, \"task\": \"translate\", \"targetLanguage\": \"zh\" } }",
     "audio": "{binary}"
   },
   "responses": {
@@ -16,22 +16,27 @@
         "durationMilliseconds": 2000,
         "combinedPhrases": [
           {
-            "text": "Weather"
+            "text": "天气"
           }
         ],
         "phrases": [
           {
             "offsetMilliseconds": 40,
             "durationMilliseconds": 320,
-            "text": "Weather",
+            "text": "天气",
             "words": [
               {
-                "text": "weather",
-                "offsetMilliseconds": 40,
-                "durationMilliseconds": 320
+                "text": "天",
+                "offsetMilliseconds": 0,
+                "durationMilliseconds": 0
+              },
+              {
+                "text": "气",
+                "offsetMilliseconds": 0,
+                "durationMilliseconds": 0
               }
             ],
-            "locale": "en-US",
+            "locale": "zh-CN",
             "confidence": 0.78983736
           }
         ]
