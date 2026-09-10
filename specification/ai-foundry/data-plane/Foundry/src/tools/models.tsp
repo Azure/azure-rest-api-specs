@@ -187,6 +187,7 @@ namespace Azure.AI.Projects {
   /**
    * The parameters for a knowledge base tool.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model KnowledgeBaseToolParameters {
     /**
      * The name of the knowledge base.
@@ -197,6 +198,7 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for a knowledge base tool as used to configure an agent.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model KnowledgeBaseTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'knowledge_base_preview'.
