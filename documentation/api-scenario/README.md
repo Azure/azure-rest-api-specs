@@ -23,7 +23,6 @@ repository.
 - [Example: Generate a basic API scenario file](./how-to/GenerateABasicApiScenario.md)
 - [Example: Resolve external dependencies](./how-to/ResolveDependencies.md)
 - [Example: Make traffic recording with test-proxy](./how-to/MakeTestProxyRecording.md)
-- [API scenario file sample](../samplefiles/Microsoft.YourServiceName/stable/YYYY-MM-DD/scenarios/quickStart.yaml)
 
 ## References
 
