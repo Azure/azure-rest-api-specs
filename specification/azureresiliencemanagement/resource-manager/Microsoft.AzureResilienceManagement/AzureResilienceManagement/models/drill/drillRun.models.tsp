@@ -160,6 +160,17 @@ model ListReportDownloadUrlRequest {
   format?: DrillReportFormat;
 }
 
+@added(Version)
+@doc("Secret report download URL metadata.")
+model SecretReportDownloadUrl<Version extends TypeSpec.Reflection.EnumMember> {
+  @doc("Short-lived, read-only URL to download the report.")
+  @secret
+  value: url;
+}
+
+/** Report download URL metadata for the current API version. */
+alias CurrentReportDownloadUrl = SecretReportDownloadUrl<Versions.v2026_09_30_preview>;
+
 @added(Versions.v2026_08_31_preview)
 @doc("Response containing a short-lived, read-only download URL for a Drill Run report.")
 model ListReportDownloadUrlResponse {
@@ -171,7 +182,8 @@ model ListReportDownloadUrlResponse {
   @doc("Short-lived, read-only URL to download the report.")
   @added(Versions.v2026_08_31_preview)
   @visibility(Lifecycle.Read)
-  downloadUrl?: url;
+  @typeChangedFrom(Versions.v2026_09_30_preview, url)
+  downloadUrl?: CurrentReportDownloadUrl.value;
 
   @doc("Timestamp at which the download URL expires.")
   @added(Versions.v2026_08_31_preview)
