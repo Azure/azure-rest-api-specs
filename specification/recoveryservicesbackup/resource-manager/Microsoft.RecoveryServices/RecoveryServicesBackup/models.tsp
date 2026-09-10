@@ -7443,6 +7443,161 @@ model AzureFileShareProvisionILRRequest extends ILRRequest {
 }
 
 /**
+ * Parameters to provision a vaulted Azure Files recovery point for item-level browse.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "ILR is an established acronym in the existing public contract."
+@added(Versions.v2026_10_30_preview)
+model AzureFileShareProvisionVaultILRRequest extends ILRRequest {
+  /**
+   * Recovery point ID.
+   */
+  recoveryPointId: string;
+
+  /**
+   * This property identifies the vaulted Azure Files ILR request type.
+   */
+  objectType: "AzureFileShareProvisionVaultILRRequest";
+}
+
+/**
+ * Base request for browsing a recovery point hierarchy.
+ */
+@added(Versions.v2026_10_30_preview)
+@discriminator("objectType")
+model BrowseRecoveryPointRequest {
+  /**
+   * This property identifies the workload-specific browse request type.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "The service uses objectType string discriminators for its existing workload-specific contracts."
+  objectType: string;
+}
+
+/**
+ * Azure Files request for browsing a recovery point hierarchy.
+ */
+@added(Versions.v2026_10_30_preview)
+model AzureFileShareBrowseRecoveryPointRequest
+  extends BrowseRecoveryPointRequest {
+  /**
+   * Directory whose immediate children should be returned. Use an empty string or "/" for the root.
+   */
+  parentPath?: string;
+
+  /**
+   * Maximum number of items to return. The default is 1000 and the maximum is 5000.
+   */
+  @maxValue(5000)
+  maxResults?: int32 = 1000;
+
+  /**
+   * Opaque continuation token returned by a previous browse request.
+   */
+  continuationToken?: string;
+
+  /**
+   * This property identifies the Azure Files browse request type.
+   */
+  objectType: "AzureFileShareBrowseRecoveryPointRequest";
+}
+
+/**
+ * Request body for browsing a recovery point hierarchy.
+ */
+@added(Versions.v2026_10_30_preview)
+model BrowseRecoveryPointRequestResource {
+  /**
+   * Workload-specific browse request properties.
+   */
+  properties: BrowseRecoveryPointRequest;
+}
+
+/**
+ * Base response for browsing a recovery point hierarchy.
+ */
+@added(Versions.v2026_10_30_preview)
+@discriminator("objectType")
+model BrowseRecoveryPointResponse {
+  /**
+   * This property identifies the workload-specific browse response type.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "The service uses objectType string discriminators for its existing workload-specific contracts."
+  objectType: string;
+}
+
+/**
+ * Type of an item returned while browsing a recovery point hierarchy.
+ */
+@added(Versions.v2026_10_30_preview)
+union BrowseItemType {
+  string,
+
+  /**
+   * File item.
+   */
+  AzureFile: "AzureFile",
+
+  /**
+   * Directory item.
+   */
+  AzureFileDirectory: "AzureFileDirectory",
+}
+
+/**
+ * File or directory returned while browsing a recovery point hierarchy.
+ */
+@added(Versions.v2026_10_30_preview)
+model BrowseItem {
+  /**
+   * Base name of the file or directory.
+   */
+  name: string;
+
+  /**
+   * Type of the browse item.
+   */
+  itemType: BrowseItemType;
+
+  /**
+   * Size in bytes. Directories are returned with a size of zero.
+   */
+  size?: int64;
+}
+
+/**
+ * Azure Files response containing one page of recovery point hierarchy items.
+ */
+@added(Versions.v2026_10_30_preview)
+model AzureFileShareBrowseRecoveryPointResponse
+  extends BrowseRecoveryPointResponse {
+  /**
+   * Items immediately below the requested parent path.
+   */
+  items: BrowseItem[];
+
+  /**
+   * Opaque token used to retrieve the next page.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The continuation token is opaque pagination state, not authentication material."
+  continuationToken?: string;
+
+  /**
+   * This property identifies the Azure Files browse response type.
+   */
+  objectType: "AzureFileShareBrowseRecoveryPointResponse";
+}
+
+/**
+ * Response body for browsing a recovery point hierarchy.
+ */
+@added(Versions.v2026_10_30_preview)
+model BrowseRecoveryPointResponseResource {
+  /**
+   * Workload-specific browse response properties.
+   */
+  properties: BrowseRecoveryPointResponse;
+}
+
+/**
  * IaaS VM workload-specific backup item representing a classic virtual machine.
  */
 model AzureIaaSClassicComputeVMContainer extends ProtectionContainer {

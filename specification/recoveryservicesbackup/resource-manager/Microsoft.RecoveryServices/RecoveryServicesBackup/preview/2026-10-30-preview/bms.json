@@ -3842,6 +3842,89 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/browse": {
+      "post": {
+        "operationId": "RecoveryPoints_Browse",
+        "tags": [
+          "RecoveryPoints"
+        ],
+        "description": "Browses one page of files and directories in a vaulted recovery point.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the VaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "The name of the BackupFabricResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "Name of the container whose details need to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectedItemName",
+            "in": "path",
+            "description": "Backed up item name whose details are to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recoveryPointId",
+            "in": "path",
+            "description": "RecoveryPointID represents the backed up data to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BrowseRecoveryPointRequestResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BrowseRecoveryPointResponseResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Browse a vaulted Azure Files recovery point": {
+            "$ref": "./examples/AzureStorage/Browse_RecoveryPoint.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/listInstantItemRecoveryOperationResult": {
       "post": {
         "operationId": "ItemLevelRecoveryConnections_ListInstantItemRecoveryOperationResult",
@@ -4096,6 +4179,9 @@
         "x-ms-examples": {
           "Provision Instant Item Level Recovery for Azure Vm": {
             "$ref": "./examples/AzureIaasVm/Provision_Ilr.json"
+          },
+          "Provision item-level browse for a vaulted Azure Files recovery point": {
+            "$ref": "./examples/AzureStorage/Provision_Ilr_Vaulted.json"
           }
         }
       }
@@ -7322,6 +7408,59 @@
       ],
       "x-ms-discriminator-value": "AzureFileShareBackupRequest"
     },
+    "AzureFileShareBrowseRecoveryPointRequest": {
+      "type": "object",
+      "description": "Azure Files request for browsing a recovery point hierarchy.",
+      "properties": {
+        "parentPath": {
+          "type": "string",
+          "description": "Directory whose immediate children should be returned. Use an empty string or \"/\" for the root."
+        },
+        "maxResults": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of items to return. The default is 1000 and the maximum is 5000.",
+          "default": 1000,
+          "maximum": 5000
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "Opaque continuation token returned by a previous browse request."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BrowseRecoveryPointRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureFileShareBrowseRecoveryPointRequest"
+    },
+    "AzureFileShareBrowseRecoveryPointResponse": {
+      "type": "object",
+      "description": "Azure Files response containing one page of recovery point hierarchy items.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Items immediately below the requested parent path.",
+          "items": {
+            "$ref": "#/definitions/BrowseItem"
+          }
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "Opaque token used to retrieve the next page."
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BrowseRecoveryPointResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureFileShareBrowseRecoveryPointResponse"
+    },
     "AzureFileShareProtectableItem": {
       "type": "object",
       "description": "Protectable item for Azure Fileshare workloads.",
@@ -7397,6 +7536,25 @@
         }
       ],
       "x-ms-discriminator-value": "AzureFileShareProvisionILRRequest"
+    },
+    "AzureFileShareProvisionVaultILRRequest": {
+      "type": "object",
+      "description": "Parameters to provision a vaulted Azure Files recovery point for item-level browse.",
+      "properties": {
+        "recoveryPointId": {
+          "type": "string",
+          "description": "Recovery point ID."
+        }
+      },
+      "required": [
+        "recoveryPointId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ILRRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureFileShareProvisionVaultILRRequest"
     },
     "AzureFileShareRecoveryPoint": {
       "type": "object",
@@ -10482,6 +10640,107 @@
           "description": "Flag to indicate whether to get only the latest recovery point."
         }
       }
+    },
+    "BrowseItem": {
+      "type": "object",
+      "description": "File or directory returned while browsing a recovery point hierarchy.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Base name of the file or directory."
+        },
+        "itemType": {
+          "$ref": "#/definitions/BrowseItemType",
+          "description": "Type of the browse item."
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Size in bytes. Directories are returned with a size of zero."
+        }
+      },
+      "required": [
+        "name",
+        "itemType"
+      ]
+    },
+    "BrowseItemType": {
+      "type": "string",
+      "description": "Type of an item returned while browsing a recovery point hierarchy.",
+      "enum": [
+        "AzureFile",
+        "AzureFileDirectory"
+      ],
+      "x-ms-enum": {
+        "name": "BrowseItemType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureFile",
+            "value": "AzureFile",
+            "description": "File item."
+          },
+          {
+            "name": "AzureFileDirectory",
+            "value": "AzureFileDirectory",
+            "description": "Directory item."
+          }
+        ]
+      }
+    },
+    "BrowseRecoveryPointRequest": {
+      "type": "object",
+      "description": "Base request for browsing a recovery point hierarchy.",
+      "properties": {
+        "objectType": {
+          "type": "string",
+          "description": "This property identifies the workload-specific browse request type."
+        }
+      },
+      "discriminator": "objectType",
+      "required": [
+        "objectType"
+      ]
+    },
+    "BrowseRecoveryPointRequestResource": {
+      "type": "object",
+      "description": "Request body for browsing a recovery point hierarchy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BrowseRecoveryPointRequest",
+          "description": "Workload-specific browse request properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "BrowseRecoveryPointResponse": {
+      "type": "object",
+      "description": "Base response for browsing a recovery point hierarchy.",
+      "properties": {
+        "objectType": {
+          "type": "string",
+          "description": "This property identifies the workload-specific browse response type."
+        }
+      },
+      "discriminator": "objectType",
+      "required": [
+        "objectType"
+      ]
+    },
+    "BrowseRecoveryPointResponseResource": {
+      "type": "object",
+      "description": "Response body for browsing a recovery point hierarchy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BrowseRecoveryPointResponse",
+          "description": "Workload-specific browse response properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "ClientDiscoveryDisplay": {
       "type": "object",

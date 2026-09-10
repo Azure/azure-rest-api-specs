@@ -90,6 +90,17 @@ interface RecoveryPoints {
     PatchModel = UpdateRecoveryPointRequest,
     Response = ArmResponse<RecoveryPointResource>
   >;
+
+  /**
+   * Browses one page of files and directories in a vaulted recovery point.
+   */
+  @added(Versions.v2026_10_30_preview)
+  @action("browse")
+  browse is ArmResourceActionSync<
+    RecoveryPointResource,
+    BrowseRecoveryPointRequestResource,
+    BrowseRecoveryPointResponseResource
+  >;
 }
 
 @armResourceOperations
