@@ -11190,6 +11190,9 @@
           "Create a VM with VM Size Properties": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithVMSizeProperties.json"
           },
+          "Create a VM with a FlexProfile": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithFlexProfile.json"
+          },
           "Create a VM with automatic zone placement": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPlacement.json"
           },
@@ -11198,9 +11201,6 @@
           },
           "Create a VM with encryption identity": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithEncryptionIdentity.json"
-          },
-          "Create a VM with flexible sizing enabled": {
-            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithFlexProfile.json"
           },
           "Create a VM with network interface configuration": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithNetworkInterfaceConfiguration.json"
@@ -16090,7 +16090,7 @@
     },
     "FlexProfile": {
       "type": "object",
-      "description": "Specifies a flexibility profile for VM size. When specified, Azure may allocate a compatible alternative\nVM size if the preferred size is unavailable. The deployed size is returned in the hardwareProfile.vmSize\nproperty in the response.",
+      "description": "Specifies a FlexProfile for VM size. When specified, Azure may allocate a compatible alternative\nVM size if the preferred size is unavailable. The deployed size is returned in the hardwareProfile.vmSize\nproperty in the response.",
       "properties": {
         "preferredVMSize": {
           "$ref": "#/definitions/VirtualMachineSizeTypes",
@@ -22425,7 +22425,7 @@
         },
         "flexProfile": {
           "$ref": "#/definitions/FlexProfile",
-          "description": "Specifies a flexibility profile for VM size. When specified, Azure may deploy a compatible alternative\nVM size if the preferred size is unavailable. Either hardwareProfile.vmSize or flexProfile.preferredVMSize\nshould be specified, but not both. The deployed size is returned in hardwareProfile.vmSize on GET."
+          "description": "Specifies a FlexProfile for VM size. When specified, Azure may deploy a compatible alternative\nVM size if the preferred size is unavailable. Either hardwareProfile.vmSize or flexProfile.preferredVMSize\nshould be specified, but not both. The deployed size is returned in hardwareProfile.vmSize on GET."
         },
         "scheduledEventsPolicy": {
           "$ref": "#/definitions/ScheduledEventsPolicy",
