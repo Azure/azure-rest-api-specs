@@ -7,16 +7,30 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Search;
 
-@TypeSpec.Versioning.useDependency(
-  Search.Versions.v2025_11_01_preview,
-  Search.Versions.v2026_04_01,
-  Search.Versions.v2026_05_01_preview,
-  Search.Versions.v2026_10_01,
-  // Keep the latest preview last: it selects the superset used to resolve shared client customizations.
-  // SDK tspconfig current-version still controls the version emitted for each release track.
-  Search.Versions.v2026_08_01_preview
-)
+@versioned(CustomizationVersions)
 namespace Customizations;
+
+/** The service API versions supported by client customizations. */
+enum CustomizationVersions {
+  /** Client customizations for the 2025-11-01-preview API version. */
+  @useDependency(Search.Versions.v2025_11_01_preview)
+  v2025_11_01_preview: "2025-11-01-preview",
+
+  /** Client customizations for the 2026-04-01 API version. */
+  @useDependency(Search.Versions.v2026_04_01)
+  v2026_04_01: "2026-04-01",
+
+  /** Client customizations for the 2026-05-01-preview API version. */
+  @useDependency(Search.Versions.v2026_05_01_preview)
+  v2026_05_01_preview: "2026-05-01-preview",
+
+  /** Client customizations for the 2026-08-01-preview API version. */
+  @useDependency(Search.Versions.v2026_08_01_preview)
+  v2026_08_01_preview: "2026-08-01-preview",
+
+  @useDependency(Search.Versions.v2026_10_01)
+  v2026_10_01: "2026-10-01",
+}
 
 @client({
   name: "SearchClient",
