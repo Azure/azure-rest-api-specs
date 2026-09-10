@@ -491,7 +491,7 @@
           "description": "The Application (client) ID for the related application registered in Microsoft Entra ID, formatted as a GUID.",
           "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
         },
-        "clientSecretUri": {
+        "clientSecret": {
           "type": "string",
           "format": "uri",
           "description": "The absolute HTTPS Key Vault secret URL identifying the client secret used for authentication. This property is required for user sign-in policies. It holds only the Key Vault reference; the secret value itself is never accepted or returned by this API and is read from Key Vault at runtime using the resource's user-assigned identity. The secret value stored in Key Vault can contain up to 4096 characters. Example: https://myvault.vault.azure.net/secrets/mysecret",

@@ -311,6 +311,19 @@ suppressions:
     where:
       - $.definitions.AuthenticationPolicy
       - $.definitions.AuthenticationPolicyListResult
+  - code: XMSSecretInResponse
+    from: authenticationPolicy.json
+    reason: >-
+      clientSecret does not hold secret material. It carries only an absolute HTTPS Key Vault secret
+      URL (an https-only url in TypeSpec); the secret value itself is never accepted or returned by
+      this API and is read from Key Vault at runtime using the resource's user-assigned identity.
+      The linter flags the property purely because its name ends in a sensitive keyword. Annotating
+      it with x-ms-secret would be incorrect, because that would stop the service returning the Key
+      Vault reference on GET, which callers need in order to see how a policy is configured. The
+      property name matches the contract implemented by the Network resource provider and so cannot
+      be renamed.
+    where:
+      - $.definitions.AuthenticationProviderProperties.properties.clientSecret
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: authenticationPolicy.json
     reason: >-
