@@ -23,81 +23,6 @@ using TypeSpec.Http;
 
 using Azure.AI.Projects;
 
-namespace Azure.AI.Projects.Beta {
-  interface AgentEndpointConversations {}
-
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.listAgentConversations,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversation,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.deleteAgentConversation,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationResponses,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationResponse,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationResponseItems,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationItems,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItem,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemAudio,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemAudioContent,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemGeneratedAudio,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemGeneratedAudioContent,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationAudio,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationAudioContent,
-    AgentEndpointConversations,
-    "java"
-  );
-}
-
 // Azure Core's HTTP pipeline cannot expose the upgraded WebSocket channel.
 // Java uses a handwritten Reactor Netty transport while TypeSpec generates the event models.
 @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!java");
@@ -269,6 +194,14 @@ namespace Azure.AI.Projects.Beta {
 @@clientName(AgentOptimizationCandidate.avg_tokens, "averageTokens");
 @@clientName(AgentOptimizationCandidate.eval_id, "evaluationId");
 @@clientName(AgentOptimizationCandidate.eval_run_id, "evaluationRunId");
+@@clientName(
+  AgentOptimizationDatasetItem.desired_num_turns,
+  "desiredNumberTurns"
+);
+@@clientName(
+  AgentOptimizationEvaluatorRef,
+  "AgentOptimizationEvaluatorReference"
+);
 @@clientName(AgentOptimizationJobProgress.elapsed_seconds, "elapsed");
 
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
@@ -405,6 +338,7 @@ namespace Azure.AI.Projects.Beta {
 @@convenientAPI(MemoryStores.deleteMemoryStore, false, "java");
 @@convenientAPI(MemoryStores.deleteScope, false, "java");
 @@convenientAPI(MemoryStores.deleteMemory, false, "java");
+@@convenientAPI(Toolboxes.invokeLatestToolboxMcp, false, "java");
 
 //making delete methods internal to add public shims that return void
 @@access(Agents.deleteAgentVersion, Access.internal);
