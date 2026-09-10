@@ -447,7 +447,7 @@ model CostControlEtagHeader {
    * The current entity tag for the cost control.
    */
   @header("ETag")
-  eTag: string;
+  etag: string;
 }
 
 /**
