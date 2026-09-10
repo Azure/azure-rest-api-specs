@@ -40,6 +40,11 @@ export const typeSpecRequirementArmTsg =
 
 export const typeSpecRequirementDataPlaneTsg = typeSpecRequirementArmTsg;
 
+export const typeSpecSuppressionsTsg =
+  `This PR introduced TypeSpec suppressions that require review. Inspect the suppression details in the ` +
+  `<b>TypeSpec suppressions requiring review</b> comment on this PR and ask the appropriate reviewer to apply the ` +
+  `<code>Approved-TypeSpecSuppression</code> label. ${diagramTsg(1, true)}.`;
+
 export const brchHref = href("aka.ms/brch", "https://aka.ms/brch");
 
 export const brchTsg = `To unblock this PR, follow the process at ${brchHref}.`;
