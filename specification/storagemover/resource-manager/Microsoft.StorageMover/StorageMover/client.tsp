@@ -111,6 +111,16 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(
+  JobDefinitionProperties.moverSyncedUntil,
+  "MoverSyncedOn",
+  "csharp"
+);
+@@clientName(
+  JobDefinitionUpdateProperties.moverSyncedUntil,
+  "MoverSyncedOn",
+  "csharp"
+);
+@@clientName(
   AzureKeyVaultSmbCredentials.passwordUri,
   "PasswordUriString",
   "csharp"
