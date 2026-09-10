@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "firewallPolicyName": "firewallPolicy",
+    "resource": {
+      "properties": {
+        "kind": "DataLossPrevention",
+        "mode": "Audit",
+        "vendor": {
+          "purview": {
+            "tenantId": "58198472-26f4-434e-93bc-9197ed1f436b",
+            "userObjectIds": [
+              "d0fc5f01-8f3f-402c-b26e-c5b6450269d2"
+            ]
+          }
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "securityProfileName": "dlp",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "dlp",
+        "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/securityProfiles/dlp",
+        "properties": {
+          "kind": "DataLossPrevention",
+          "mode": "Audit",
+          "provisioningState": "Succeeded",
+          "vendor": {
+            "purview": {
+              "tenantId": "58198472-26f4-434e-93bc-9197ed1f436b",
+              "userObjectIds": [
+                "d0fc5f01-8f3f-402c-b26e-c5b6450269d2"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "dlp",
+        "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/securityProfiles/dlp",
+        "properties": {
+          "kind": "DataLossPrevention",
+          "mode": "Audit",
+          "provisioningState": "Updating",
+          "vendor": {
+            "purview": {
+              "tenantId": "58198472-26f4-434e-93bc-9197ed1f436b",
+              "userObjectIds": [
+                "d0fc5f01-8f3f-402c-b26e-c5b6450269d2"
+              ]
+            }
+          }
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-01-01",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "FirewallPolicySecurityProfiles_CreateOrUpdate",
+  "title": "Create FirewallPolicySecurityProfile of kind DataLossPrevention"
+}

@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "firewallPolicyName": "firewallPolicy",
+    "resource": {
+      "properties": {
+        "kind": "AdvancedMalwareThreatProtection",
+        "confidenceLevelByAction": {
+          "alert": 30,
+          "deny": 60
+        },
+        "mode": "AlertAndDeny"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "securityProfileName": "antiMalware",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "antiMalware",
+        "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/securityProfiles/antiMalware",
+        "properties": {
+          "kind": "AdvancedMalwareThreatProtection",
+          "confidenceLevelByAction": {
+            "alert": 30,
+            "deny": 60
+          },
+          "mode": "AlertAndDeny",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "antiMalware",
+        "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/securityProfiles/antiMalware",
+        "properties": {
+          "kind": "AdvancedMalwareThreatProtection",
+          "confidenceLevelByAction": {
+            "alert": 30,
+            "deny": 60
+          },
+          "mode": "AlertAndDeny",
+          "provisioningState": "Updating"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-01-01",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "FirewallPolicySecurityProfiles_CreateOrUpdate",
+  "title": "Create FirewallPolicySecurityProfile"
+}
