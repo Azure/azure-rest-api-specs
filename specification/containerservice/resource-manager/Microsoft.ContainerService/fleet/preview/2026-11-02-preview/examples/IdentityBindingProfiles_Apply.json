@@ -1,12 +1,12 @@
 {
-  "title": "Get a fleet identity binding.",
-  "operationId": "FleetIdentityBindings_Get",
+  "title": "Apply an identity binding profile to the selected members.",
+  "operationId": "IdentityBindingProfiles_Apply",
   "parameters": {
     "api-version": "2026-11-02-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rgfleets",
+    "resourceGroupName": "rg1",
     "fleetName": "fleet1",
-    "identityBindingName": "identitybinding1"
+    "identityBindingProfileName": "identitybinding1"
   },
   "responses": {
     "200": {
@@ -44,9 +44,9 @@
           }
         },
         "eTag": "\"EtagValue\"",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgfleets/providers/Microsoft.ContainerService/fleets/fleet1/identityBindings/identitybinding1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/fleets/fleet1/identityBindingProfiles/identitybinding1",
         "name": "identitybinding1",
-        "type": "Microsoft.ContainerService/fleets/identityBindings",
+        "type": "Microsoft.ContainerService/fleets/identityBindingProfiles",
         "systemData": {
           "createdBy": "someUser",
           "createdByType": "User",
@@ -55,6 +55,12 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2022-03-23T05:40:40.657Z"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2026-11-02-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-11-02-preview"
       }
     }
   }

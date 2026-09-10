@@ -9,34 +9,34 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ContainerService;
 
-@doc("A fleet identity binding binds a user-assigned managed identity across the fleet members selected by its member selector.")
+@doc("An identity binding profile binds a user-assigned managed identity across the fleet members selected by its member selector.")
 @added(Versions.v2026_11_02_preview)
-@resource("identityBindings")
+@resource("identityBindingProfiles")
 @parentResource(Fleet)
-model FleetIdentityBinding
-  is Azure.ResourceManager.ProxyResource<FleetIdentityBindingProperties> {
-  @doc("The name of the fleet identity binding resource.")
+model IdentityBindingProfile
+  is Azure.ResourceManager.ProxyResource<IdentityBindingProfileProperties> {
+  @doc("The name of the IdentityBindingProfile resource.")
   @pattern("^[a-z][a-z0-9]{0,63}$")
   @minLength(1)
   @maxLength(63)
   @path
-  @segment("identityBindings")
-  @key("identityBindingName")
+  @segment("identityBindingProfiles")
+  @key("identityBindingProfileName")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 
   ...EntityTagProperty;
 }
 
-@doc("The properties of a fleet identity binding.")
+@doc("The properties of an identity binding profile.")
 @added(Versions.v2026_11_02_preview)
-model FleetIdentityBindingProperties {
+model IdentityBindingProfileProperties {
   @doc("The status of the last operation.")
   @visibility(Lifecycle.Read)
-  provisioningState?: FleetIdentityBindingProvisioningState;
+  provisioningState?: IdentityBindingProfileProvisioningState;
 
   @doc("""
-    Select the fleet members that this identity binding is applied to.
+    Select the fleet members that this identity binding profile is applied to.
       * Only key/value pairs with the `=` operator are accepted in the label selector.
       * If empty or not specified, no fleet members will be selected.
     """)
@@ -45,7 +45,7 @@ model FleetIdentityBindingProperties {
 
   @doc("Managed identity profile for the identity binding.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  managedIdentity: FleetIdentityBindingManagedIdentityProfile;
+  managedIdentity: IdentityBindingManagedIdentityProfile;
 
   @doc("""
     Optional list of subjects authorized to use this identity binding for
@@ -57,43 +57,43 @@ model FleetIdentityBindingProperties {
     """)
   @identifiers(#[])
   @maxItems(100)
-  allowedSubjects?: FleetAllowedSubject[];
+  allowedSubjects?: AllowedSubject[];
 
-  @doc("The OIDC issuer profile of the fleet identity binding.")
+  @doc("The OIDC issuer profile of the identity binding profile.")
   @visibility(Lifecycle.Read)
-  oidcIssuer?: FleetIdentityBindingOidcIssuerProfile;
+  oidcIssuer?: IdentityBindingOidcIssuerProfile;
 
-  @doc("The fleet identity binding status.")
+  @doc("The identity binding profile status.")
   @visibility(Lifecycle.Read)
-  status?: FleetIdentityBindingStatus;
+  status?: IdentityBindingProfileStatus;
 }
 
-@doc("The provisioning state of the fleet identity binding resource.")
+@doc("The provisioning state of the identity binding profile resource.")
 @added(Versions.v2026_11_02_preview)
 @Azure.Core.lroStatus
-union FleetIdentityBindingProvisioningState {
+union IdentityBindingProfileProvisioningState {
   string,
   ResourceProvisioningState,
 
-  @doc("The identity binding is being applied to the selected fleet members.")
+  @doc("The identity binding profile is being applied to the selected fleet members.")
   Applying: "Applying",
 }
 
-@doc("Status of the fleet identity binding.")
+@doc("Status of the identity binding profile.")
 @added(Versions.v2026_11_02_preview)
-model FleetIdentityBindingStatus {
-  @doc("The last operation ID for the fleet identity binding.")
+model IdentityBindingProfileStatus {
+  @doc("The last operation ID for the identity binding profile.")
   @visibility(Lifecycle.Read)
   lastOperationId?: string;
 
-  @doc("The last operation error of the fleet identity binding.")
+  @doc("The last operation error of the identity binding profile.")
   @visibility(Lifecycle.Read)
   lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 @doc("Managed identity profile for the identity binding.")
 @added(Versions.v2026_11_02_preview)
-model FleetIdentityBindingManagedIdentityProfile {
+model IdentityBindingManagedIdentityProfile {
   @doc("The resource ID of the managed identity.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^/subscriptions/[a-zA-Z0-9-]+/resourceGroups/[a-zA-Z0-9-]+/providers/Microsoft.ManagedIdentity/userAssignedIdentities/[a-zA-Z0-9-]+$")
@@ -121,11 +121,11 @@ model FleetIdentityBindingManagedIdentityProfile {
   tenantId?: string;
 }
 
-@doc("The OIDC issuer profile of the fleet identity binding.")
+@doc("The OIDC issuer profile of the identity binding profile.")
 @added(Versions.v2026_11_02_preview)
-model FleetIdentityBindingOidcIssuerProfile {
+model IdentityBindingOidcIssuerProfile {
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name matches the managedClusters/identityBindings property for cross-API parity."
-  @doc("The OIDC issuer URL of the fleet identity binding.")
+  @doc("The OIDC issuer URL of the identity binding profile.")
   @visibility(Lifecycle.Read)
   oidcIssuerUrl?: url;
 }
@@ -135,11 +135,11 @@ model FleetIdentityBindingOidcIssuerProfile {
   The namespace selector is required and must be non-empty. The service
   account selector is optional; when omitted, all service accounts in
   matching namespaces are authorized. Selectors within a single
-  AllowedSubject are AND'd; multiple AllowedSubjects on a fleet
-  identity binding are OR'd.
+  AllowedSubject are AND'd; multiple AllowedSubjects on an identity
+  binding profile are OR'd.
   """)
 @added(Versions.v2026_11_02_preview)
-model FleetAllowedSubject {
+model AllowedSubject {
   @doc("""
     Label selector matching the namespaces in which this identity may be
     used. Must be non-empty: an empty selector would match every namespace
@@ -147,7 +147,7 @@ model FleetAllowedSubject {
     `kubernetes.io/metadata.name` label to target specific namespaces by
     name.
     """)
-  namespaceSelector: FleetIdentityBindingLabelSelector;
+  namespaceSelector: LabelSelector;
 
   @doc("""
     Optional label selector matching the service accounts (within the
@@ -155,29 +155,29 @@ model FleetAllowedSubject {
     When omitted, all service accounts in matching namespaces are
     authorized. When provided, it must be non-empty.
     """)
-  serviceAccountSelector?: FleetIdentityBindingLabelSelector;
+  serviceAccountSelector?: LabelSelector;
 }
 
 @doc("A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.")
 @added(Versions.v2026_11_02_preview)
-model FleetIdentityBindingLabelSelector {
+model LabelSelector {
   @doc("matchLabels is an array of {key=value} pairs. A single {key=value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is `key`, the operator is `In`, and the values array contains only `value`. The requirements are ANDed.")
   matchLabels?: string[];
 
   @doc("matchExpressions is a list of label selector requirements. The requirements are ANDed.")
   @identifiers(#[])
-  matchExpressions?: FleetIdentityBindingLabelSelectorRequirement[];
+  matchExpressions?: LabelSelectorRequirement[];
 }
 
 @doc("A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.")
 @added(Versions.v2026_11_02_preview)
-model FleetIdentityBindingLabelSelectorRequirement {
+model LabelSelectorRequirement {
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The 'key' property refers to a Kubernetes label selector key, not a secret or credential."
   @doc("key is the label key that the selector applies to.")
   key?: string;
 
   @doc("operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.")
-  operator?: FleetIdentityBindingLabelSelectorOperator;
+  operator?: Operator;
 
   @doc("values is an array of string values, the values array must be non-empty.")
   values?: string[];
@@ -185,7 +185,7 @@ model FleetIdentityBindingLabelSelectorRequirement {
 
 @doc("operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.")
 @added(Versions.v2026_11_02_preview)
-union FleetIdentityBindingLabelSelectorOperator {
+union Operator {
   string,
 
   @doc("The value of the key should be in the given list.")
@@ -203,31 +203,31 @@ union FleetIdentityBindingLabelSelectorOperator {
 
 @added(Versions.v2026_11_02_preview)
 @armResourceOperations
-interface FleetIdentityBindings {
-  get is ArmResourceRead<FleetIdentityBinding>;
+interface IdentityBindingProfiles {
+  get is ArmResourceRead<IdentityBindingProfile>;
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    FleetIdentityBinding,
-    Azure.ResourceManager.Foundations.BaseParameters<FleetIdentityBinding> &
-      IfMatchParameters<FleetIdentityBinding> &
-      IfNoneMatchParameters<FleetIdentityBinding>,
+    IdentityBindingProfile,
+    Azure.ResourceManager.Foundations.BaseParameters<IdentityBindingProfile> &
+      IfMatchParameters<IdentityBindingProfile> &
+      IfNoneMatchParameters<IdentityBindingProfile>,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
   delete is ArmResourceDeleteWithoutOkAsync<
-    FleetIdentityBinding,
-    Azure.ResourceManager.Foundations.BaseParameters<FleetIdentityBinding> &
-      IfMatchParameters<FleetIdentityBinding>
+    IdentityBindingProfile,
+    Azure.ResourceManager.Foundations.BaseParameters<IdentityBindingProfile> &
+      IfMatchParameters<IdentityBindingProfile>
   >;
 
-  listByFleet is ArmResourceListByParent<FleetIdentityBinding>;
+  listByFleet is ArmResourceListByParent<IdentityBindingProfile>;
 
-  @doc("Applies the fleet identity binding to the selected fleet members, creating, updating or deleting the corresponding managedCluster/identityBinding resources.")
+  @doc("Applies the identity binding profile to the selected fleet members, creating, updating or deleting the corresponding managedClusters/identityBindings resources.")
   apply is Azure.ResourceManager.ArmResourceActionAsync<
-    FleetIdentityBinding,
+    IdentityBindingProfile,
     void,
-    FleetIdentityBinding,
-    BaseParameters<FleetIdentityBinding> &
-      IfMatchParameters<FleetIdentityBinding>
+    IdentityBindingProfile,
+    BaseParameters<IdentityBindingProfile> &
+      IfMatchParameters<IdentityBindingProfile>
   >;
 }
