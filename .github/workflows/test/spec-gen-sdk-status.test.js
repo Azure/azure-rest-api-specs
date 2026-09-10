@@ -3,8 +3,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SdkName } from "../../shared/src/sdk-types.js";
 import { createMockSpecGenSdkArtifactInfo } from "../../shared/test/sdk-types.js";
 import * as artifacts from "../src/artifacts.js";
+import setSpecGenSdkStatus from "../src/spec-gen-sdk-status.js";
 import { setSpecGenSdkStatusImpl } from "../src/spec-gen-sdk-status.js";
-import { createMockCore, createMockGithub } from "./mocks.js";
+import { createMockContext, createMockCore, createMockGithub } from "./mocks.js";
 
 describe("spec-gen-sdk-status", () => {
   /** @type {ReturnType<typeof createMockGithub>} */
@@ -377,5 +378,30 @@ describe("spec-gen-sdk-status", () => {
     // Outputs should still be set for downstream artifact upload steps.
     expect(mockCore.setOutput).toBeCalledWith("head_sha", "testSha");
     expect(mockCore.setOutput).toBeCalledWith("issue_number", 123);
+  });
+
+  it("should not require details_url for pull_request_target reopened events", async () => {
+    const context = createMockContext();
+    context.eventName = "pull_request_target";
+    context.runId = 1;
+    context.payload = {
+      action: "reopened",
+      repository: {
+        name: "testRepo",
+        owner: { login: "testOwner" },
+      },
+      pull_request: {
+        head: { sha: "testSha" },
+        number: 123,
+      },
+    };
+    context.repo = {
+      owner: "testOwner",
+      repo: "testRepo",
+    };
+
+    await expect(
+      setSpecGenSdkStatus(/** @type {any} */ ({ github: mockGithub, context, core: mockCore })),
+    ).resolves.toBe(undefined);
   });
 });
