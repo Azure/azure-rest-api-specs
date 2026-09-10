@@ -5,6 +5,13 @@ import "@azure-tools/typespec-client-generator-core";
 namespace AttestationService;
 
 /**
+ * A Unix timestamp: the number of seconds since 1970-01-01T00:00:00Z UTC,
+ * surfaced in client SDKs as a date/time value.
+ */
+@encode(DateTimeKnownEncoding.unixTimestamp, int64)
+scalar UnixTimestamp extends utcDateTime;
+
+/**
  * Content type for upload
  */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Intentionally closed for HTTP Content-Type header compliance"
@@ -748,19 +755,19 @@ model AttestationResult {
    * The time at which the token was issued, in the number of seconds since
    * 1970-01-0T00:00:00Z UTC
    */
-  iat?: float32;
+  iat?: UnixTimestamp;
 
   /**
    * The expiration time after which the token is no longer valid, in the number of
    * seconds since 1970-01-0T00:00:00Z UTC
    */
-  exp?: float32;
+  exp?: UnixTimestamp;
 
   /**
    * The not before time before which the token cannot be considered valid, in the
    * number of seconds since 1970-01-0T00:00:00Z UTC
    */
-  nbf?: float32;
+  nbf?: UnixTimestamp;
 
   /**
    * An RFC 7800 Proof of Possession Key
