@@ -66,3 +66,8 @@ using Microsoft.App;
   "csharp"
 );
 @@clientName(UpgradeChannel, "AgentUpgradeChannel", "csharp");
+@@clientName(
+  AgentSpaceProperties.lastPolicyPropagation,
+  "LastPolicyPropagationOn",
+  "csharp"
+);
