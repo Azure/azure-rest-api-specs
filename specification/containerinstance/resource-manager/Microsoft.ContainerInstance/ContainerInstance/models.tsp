@@ -1349,13 +1349,13 @@ model Volume {
   emptyDir?: unknown;
 
   /**
-   * The secret volume.
+   * Defines files for a secret volume. Dictionary keys are file names and values are Base64-encoded secret data used as file contents. The values are sensitive, and the service does not return the contents of this property in GET responses.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   secret?: Record<string>;
 
   /**
-   * The secret reference volume.
+   * Defines files for a secret reference volume. Dictionary keys are file names and values identify entries in the container group's secretReferences collection. This property contains reference names rather than secret values.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   secretReference?: Record<string>;

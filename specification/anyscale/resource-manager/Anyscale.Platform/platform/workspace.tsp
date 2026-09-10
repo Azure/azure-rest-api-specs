@@ -1,0 +1,94 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "./computeConfig.tsp";
+import "./project.tsp";
+import "./versions.tsp";
+
+using Rest;
+using Http;
+using Azure.ResourceManager;
+using TypeSpec.Versioning;
+
+namespace Anyscale.Platform;
+
+/** A workspace for interactive development in an Anyscale project. */
+@parentResource(Project)
+@resource("workspaces")
+model Workspace is ProxyResource<WorkspaceProperties> {
+  /** The name of the workspace. */
+  @pattern("^[a-zA-Z0-9_-]+$")
+  @maxLength(256)
+  @key("workspaceName")
+  @path
+  @segment("workspaces")
+  name: string;
+}
+
+/** The properties of the workspace. */
+model WorkspaceProperties {
+  /** The compute config to use for the workspace. */
+  computeConfig: ComputeConfigSpecOrReference;
+
+  /** The Ray container image reference to use for the workspace, such as registry/repository:tag or registry/repository\@sha256:digest. */
+  imageUri: string;
+
+  /** The number of minutes of inactivity before Anyscale terminates the workspace. Idle time is defined as the time during which a workspace is not running a user command. Set to 0 to disable automatic termination. */
+  @minValue(0)
+  idleTerminationMinutes?: int32;
+
+  /** The current status of the workspace. */
+  @visibility(Lifecycle.Read)
+  currentStatus?: WorkspaceState;
+
+  /** The provisioning state of the workspace. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/** The current state of workspace. */
+union WorkspaceState {
+  /** The workspace is starting up. */
+  Starting: "Starting",
+
+  /** The workspace is updating. */
+  Updating: "Updating",
+
+  /** The workspace is running. */
+  Running: "Running",
+
+  /** The workspace is terminating. */
+  Terminating: "Terminating",
+
+  /** The workspace is terminated. */
+  Terminated: "Terminated",
+
+  /** The workspace is in an error state. */
+  Errored: "Errored",
+
+  string,
+}
+
+@armResourceOperations
+interface Workspaces {
+  /** Gets a workspace. */
+  get is ArmResourceRead<Workspace>;
+  /** Creates or updates a workspace. */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Workspace>;
+  /** Updates a workspace. */
+  update is ArmCustomPatchSync<
+    Workspace,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Workspace,
+      WorkspaceProperties
+    >
+  >;
+  /** Deletes a workspace. */
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Workspace,
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  >;
+  /** Lists workspaces in a project. */
+  listByResourceGroup is ArmResourceListByParent<Workspace>;
+}
