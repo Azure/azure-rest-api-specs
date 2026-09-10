@@ -11,6 +11,9 @@ using Search;
   Search.Versions.v2025_11_01_preview,
   Search.Versions.v2026_04_01,
   Search.Versions.v2026_05_01_preview,
+  Search.Versions.v2026_10_01,
+  // Keep the latest preview last: it selects the superset used to resolve shared client customizations.
+  // SDK tspconfig current-version still controls the version emitted for each release track.
   Search.Versions.v2026_08_01_preview
 )
 namespace Customizations;
@@ -110,7 +113,7 @@ namespace SearchIndexClient {
   // method in every SDK version and avoids a customer breaking change.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  op listIndexesOffsetPaged is Search.Indexes.listOffsetPaged;
+  op listIndexesOffsetPaged is Search.LegacyIndexes.list;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -120,7 +123,7 @@ namespace SearchIndexClient {
   // version-disjoint unification as `listIndexesOffsetPaged` above.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  op listIndexesWithSelectedPropertiesOffsetPaged is Search.Indexes.listWithSelectedPropertiesOffsetPaged;
+  op listIndexesWithSelectedPropertiesOffsetPaged is Search.LegacyIndexes.listWithSelectedProperties;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -356,11 +359,6 @@ namespace KnowledgeBaseRetrievalClient {
   KnowledgeBaseModelWebSummarizationActivityRecord.outputTokens,
   "outputTokensCount",
   "!autorest"
-);
-@@clientName(
-  KnowledgeBaseActivityRecord.elapsedMs,
-  "elapsedInMs",
-  "javascript"
 );
 
 @@access(ListingSearchType, Access.public);

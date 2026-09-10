@@ -49,6 +49,7 @@ interface KnowledgeRetrieval {
    * complete response body as a single JSON document.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   @sharedRoute
   @post

@@ -8,6 +8,36 @@ It is maintained for internal engineering reference and API Stewardship Board re
 
 ---
 
+## 2026-10-01
+
+**Summary**: Built on top of the 2026-04-01 GA. Promotes Content Understanding semantic chunking and image verbalization to stable.
+
+### GA-to-GA Changes (2026-04-01 -> 2026-10-01)
+
+#### Breaking Changes
+
+No wire-level breaking changes relative to the previous GA.
+
+#### Non-Breaking Changes
+
+**Content Understanding skill**:
+
+- `ContentUnderstandingSkill.modelName` and `modelDeployment` configure the chat-completion model used for image descriptions.
+- `ContentUnderstandingSkillChunkingProperties.method` supports `fixedSize` and `semantic`.
+- `ContentUnderstandingSkillChunkingUnit` adds `tokens` for semantic chunking.
+
+### Preview-to-GA Changes (2026-08-01-preview -> 2026-10-01)
+
+#### Breaking Changes
+
+None.
+
+#### Non-Breaking Changes
+
+- Promotes the existing semantic chunking and image verbalization contract without changing its preview wire names or behavior.
+
+---
+
 
 ## 2026-08-01-preview
 
