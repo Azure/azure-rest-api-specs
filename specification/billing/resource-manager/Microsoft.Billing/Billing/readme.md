@@ -29,9 +29,361 @@ openapi-type: arm
 tag: package-2024-04
 ```
 
-### Tag: package-2024-04
+### Tag: package-2024-08-preview
 
-These settings apply only when `--tag=package-2024-04` is specified on the command line.
+These settings apply only when `--tag=package-2024-08-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08-preview'
+title: BillingManagementClient
+description: Billing Client
+input-file:
+- preview/2024-08-01-preview/openapi.json
+suppressions:
+- code: TenantLevelAPIsNotAllowed
+  from: openapi.json
+  reason: Applies to every operation in this RP because this entire RP is a tenant level resource provider.
+- code: ProvisioningStateSpecifiedForLROPut
+  from: openapi.json
+  reason: Applies to every operation in this RP because Billing Resources are tenant resources that are not provisioned under a subscription.
+- code: SubscriptionIdParameterInOperations
+  from: openapi.json
+  reason: Applies to every operation in this RP because subscription Id in Billing's case means Billing Subscription, not Azure Subscription.
+- code: ProvisioningStateSpecifiedForLROPatch
+  from: openapi.json
+  where: $.paths.["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}"].patch.responses.200
+  reason: Billing Resources are tenant resources that are not provisioned under a subscription.
+- code: ProvisioningStateSpecifiedForLROPatch
+  from: openapi.json
+  where: $.paths.["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}"].patch.responses.200
+  reason: Billing Resources are tenant resources that are not provisioned under a subscription.
+- code: ParametersInPointGet
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingSubscriptions/{billingSubscriptionName}"].get.parameters
+  reason: Previously ARM approved before TypeSpec. Expand on get billing subscription is by design.
+- code: ParametersInPointGet
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}"].get.parameters
+  reason: Previously ARM approved before TypeSpec. Expand on get billing subscription is by design.
+- code: ParametersInPointGet
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}"].get.parameters
+  reason: Previously ARM approved before TypeSpec. Expand on get reservation order is by design.
+- code: ParametersInPointGet
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}/reservations/{reservationId}"].get.parameters
+  reason: Previously ARM approved before TypeSpec. Expand on get reservation order is by design.
+- code: ParametersInPointGet
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders/{savingsPlanOrderId}"].get.parameters
+  reason: Previously ARM approved before TypeSpec. Expand on get savings plan order is by design.
+- code: ParametersInPointGet
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}"].get.parameters
+  reason: Previously ARM approved before TypeSpec. Expand on get savings plan is by design.
+- code: ParametersInPointGet
+  from: openapi.json
+  where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingProperty/default"].get.parameters
+  reason: Previously ARM approved before TypeSpec. Billing Property details aren't always needed and add cost to retreive.
+- code: TopLevelResourcesListBySubscription
+  from: openapi.json
+  where: $.definitions.BillingProperty
+  reason: BillingProperty is singleton with resource id default.
+- code: TopLevelResourcesListBySubscription
+  from: openapi.json
+  where: $.definitions.SubscriptionPolicy
+  reason: SubscriptionPolicy is singleton with resource id default.
+- code: PatchBodyParametersSchema
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}"].patch.parameters.2.schema.properties.properties
+  reason: Previously ARM approved before TypeSpec. When updating an address, the full address object, not just a few properties of it, are expected to be present.
+- code: PatchBodyParametersSchema
+  from: openapi.json
+  where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingProperty/default"].patch.parameters.2.schema.properties.properties
+  reason: Previously ARM approved before TypeSpec. When updating an address, the full address object, not just a few properties of it, are expected to be present.
+- code: ParametersSchemaAsTypeObject
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/addPaymentTerms"].post.parameters[2].schema.type
+  reason: Previously ARM approved before TypeSpec. The request body is an array of payment terms.
+- code: ParametersSchemaAsTypeObject
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/cancelPaymentTerms"].post.parameters[2].schema.type
+  reason: Previously ARM approved before TypeSpec. The request body is a date-time value.
+- code: ParametersSchemaAsTypeObject
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/downloadDocuments"].post.parameters[2].schema.type
+  reason: Previously ARM approved before TypeSpec. The request body is an array of document download requests.
+- code: ParametersSchemaAsTypeObject
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/validatePaymentTerms"].post.parameters[2].schema.type
+  reason: Previously ARM approved before TypeSpec. The request body is an array of payment terms.
+- code: ParametersSchemaAsTypeObject
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/downloadDocuments"].post.parameters[2].schema.type
+  reason: Previously ARM approved before TypeSpec. The request body is an array of document download requests.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingSubscriptions"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. TotalCount property also being present is desired.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/billingSubscriptions"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. TotalCount property also being present is desired.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/billingSubscriptions"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. TotalCount property also being present is desired.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/reservations"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. ReservationSummary provides the total counts of various types in the list.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. TotalCount property also being present is desired.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/billingSubscriptions"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. TotalCount property also being present is desired.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}/billingSubscriptions"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. TotalCount property also being present is desired.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactionSummary"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. Not a list API, gets a single resource.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/partnerChangeRequests/{partnerChangeRequestGuid}/download"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. This is not a list API.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservations"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. ReservationSummary provides the total counts of various types in the list.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlans"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. SavingsPlanSummaryCount provides the total counts of various types in the list.
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}"].put
+  reason: Previously ARM approved before TypeSpec. Is returning 200, 201, and 202 for LRO.
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}"].put
+  reason: Previously ARM approved before TypeSpec. Is returning 200, 201, and 202 for LRO.
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptionAliases/{aliasName}"].put
+  reason: Previously ARM approved before TypeSpec. Is returning 200, 201, and 202 for LRO.
+- code: ParametersInPost
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/download"].post.parameters
+  reason: Previously ARM approved before TypeSpec. The documentName parameter is the document under the invoice to download.
+- code: ParametersInPost
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices/{invoiceName}/download"].post.parameters
+  reason: Previously ARM approved before TypeSpec. The documentName parameter is the document under the invoice to download.
+- code: ParametersInPost
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/resolveBillingRoleAssignments"].post.parameters
+  reason: Previously ARM approved before TypeSpec. Filtering parameters are needed for this post action which returns a list.
+- code: ParametersInPost
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/resolveBillingRoleAssignments"].post.parameters
+  reason: Previously ARM approved before TypeSpec. Filtering parameters are needed for this post action which returns a list.
+- code: ParametersInPost
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/resolveBillingRoleAssignments"].post.parameters
+  reason: Previously ARM approved before TypeSpec. Filtering parameters are needed for this post action which returns a list.
+- code: ParametersInPost
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}/fetchHistory"].post.parameters
+  reason: Previously ARM approved before TypeSpec. Filtering parameters are needed for this post action which returns a list.
+- code: OperationIdNounVerb
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}/fetchHistory"].post.operationId
+  reason: Previously ARM approved before TypeSpec. Preserving existing operation Id.
+- code: ParametersInPost
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/listInvoiceSectionsWithCreateSubscriptionPermission"].post.parameters
+  reason: Previously ARM approved before TypeSpec. Filtering parameters are needed for this post action which returns a list.
+- code: ParametersInPost
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/resolveBillingRoleAssignments"].post.parameters
+  reason: Previously ARM approved before TypeSpec. Filtering parameters are needed for this post action which returns a list.
+- code: PutRequestResponseSchemeArm
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transfers/{transferName}"].put
+  reason: Previously ARM approved before TypeSpec. From what I can tell, the Get and the Put are both using the same model, PartnerTransferDetails.
+- code: PutRequestResponseSchemeArm
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/transfers/{transferName}"].put
+  reason: Previously ARM approved before TypeSpec. From what I can tell, the Get and the Put are both using the same model, TransferDetails.
+- code: PostResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}/cancel"].post
+  reason: Previously ARM approved before TypeSpec. This is using a 202 response code.
+- code: PostResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/amend"].post
+  reason: Previously ARM approved before TypeSpec. This is using a 202 response code.
+- code: PostResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/licenseReservations/{licenseReservationName}/cancel"].post
+  reason: Previously ARM approved before TypeSpec. This is using a 202 response code.
+- code: PostResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/partnerChangeRequests/{partnerChangeRequestGuid}/cancel"].post
+  reason: Previously ARM approved before TypeSpec. This doesn't appear to be an operation that can be polled and just gives you the cancellation response details.
+- code: PostResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/transferEnrollmentToMCA"].post
+  reason: Previously ARM approved before TypeSpec. Synchronous operation returning 200.
+- code: XmsPageableForListCalls
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactionSummary"].get
+  reason: Previously ARM approved before TypeSpec. This isn't a list response.
+- code: OperationIdNounVerb
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactionSummary"].get.operationId
+  reason: Previously ARM approved before TypeSpec. Operation name Transactions_GetTransactionSummaryByInvoice makes sense for a Get.
+- code: OperationIdNounVerb
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactionsDownload"].post.operationId
+  reason: Previously ARM approved before TypeSpec. Operation Transactions_TransactionsDownloadByInvoice name makes sense for an action.
+- code: OperationIdNounVerb
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}/reservations"].get.operationId
+  reason: Previously ARM approved before TypeSpec. Operation Reservations_ListByReservationOrder name makes sense for a list get.
+- code: OperationIdNounVerb
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}/reservations/{reservationId}"].get.operationId
+  reason: Previously ARM approved before TypeSpec. Operation Reservations_GetByReservationOrder name makes sense for a list get.
+- code: OperationIdNounVerb
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans"].get.operationId
+  reason: Previously ARM approved before TypeSpec. Operation SavingsPlans_ListBySavingsPlanOrder name makes sense for a list get.
+- code: PathForTrackedResourceTypes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}/reservations/{reservationId}"]
+  reason: Previously ARM approved before TypeSpec. Not a tracked resource.
+- code: TrackedResourcesMustHavePut
+  from: openapi.json
+  where: $.definitions.Reservation
+  reason: Previously ARM approved before TypeSpec. Not a tracked resource.
+- code: AllTrackedResourcesMustHaveDelete
+  from: openapi.json
+  where: $.definitions.Reservation
+  reason: Previously ARM approved before TypeSpec. Not a tracked resource.
+- code: ArmResourcePropertiesBag
+  from: openapi.json
+  where: $.definitions.Department
+  reason: Previously ARM approved before TypeSpec. Do not want to take a breaking change.
+- code: ArmResourcePropertiesBag
+  from: openapi.json
+  where: $.definitions.PaymentMethod
+  reason: Previously ARM approved before TypeSpec. Do not want to take a breaking change.
+- code: ArmResourcePropertiesBag
+  from: openapi.json
+  where: $.definitions.BillingRequest
+  reason: Previously ARM approved before TypeSpec. Do not want to take a breaking change.
+- code: AvoidAdditionalProperties
+  from: openapi.json
+  where: $.definitions.BillingSubscriptionAliasProperties.properties.billingPolicies
+  reason: Previously ARM approved before TypeSpec. billingPolicies property is already in production as a dictionary by design.
+- code: AvoidAdditionalProperties
+  from: openapi.json
+  where: $.definitions.BillingSubscriptionProperties.properties.billingPolicies
+  reason: Previously ARM approved before TypeSpec. billingPolicies property is already in production as a dictionary by design.
+- code: AvoidAdditionalProperties
+  from: openapi.json
+  where: $.definitions.BillingRequestProperties.properties.additionalInformation
+  reason: Previously ARM approved before TypeSpec. Billing Request additionalInformation property is already in production as a dictionary by design.
+- code: RequiredPropertiesMissingInResourceModel
+  from: openapi.json
+  where: $.definitions.BillingPermissionListResult
+  reason: Previously ARM approved before TypeSpec. Response isn't an ARM resource.
+- code: RequiredPropertiesMissingInResourceModel
+  from: openapi.json
+  where: $.definitions.TransactionSummary
+  reason: Previously ARM approved before TypeSpec. Response isn't an ARM resource.
+# New to 2024-08-01-preview
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoicingPreferences/default"].put
+  reason: Previously ARM approved before TypeSpec. Existing design is to only return 200, not LRO.
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/purchaseOrderMappings/{purchaseOrderMappingName}"].put
+  reason: Previously ARM approved before TypeSpec. Existing design is to only return 200, not LRO.
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/purchaseOrders/{poNumber}"].put
+  reason: Previously ARM approved before TypeSpec. Existing design is to only return 200, not LRO.
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingRoleAssignments/{billingRoleAssignmentName}"].put
+  reason: Previously ARM approved before TypeSpec. Is returning 200, 201, and 202 for LRO.
+- code: DeleteResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingRoleAssignments/{billingRoleAssignmentName}"].delete
+  reason: Previously ARM approved before TypeSpec. Is returning 200, 201, and 202 for LRO.
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoicingPreferences/default"].put
+  reason: Previously ARM approved before TypeSpec. Existing design is to only return 200, not LRO.
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/migrations/default"].put
+  reason: Previously ARM approved before TypeSpec. Existing design is to only return 200, not LRO.
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/partnerChangeRequests/{partnerChangeRequestGuid}"].put
+  reason: Previously ARM approved before TypeSpec. Isn't actually LRO, but returns 202 and a response body for the operation.
+- code: LroExtension
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/partnerChangeRequests/{partnerChangeRequestGuid}"].put
+  reason: Previously ARM approved before TypeSpec. Isn't actually LRO, but returns 202 and a response body for the operation.
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/purchaseOrderMappings/{purchaseOrderMappingName}"].put
+  reason: Previously ARM approved before TypeSpec. Existing design is to only return 200, not LRO.
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/purchaseOrders/{poNumber}"].put
+  reason: Previously ARM approved before TypeSpec. Existing design is to only return 200, not LRO.
+- code: PutGetPatchResponseSchema
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/partnerChangeRequests/{partnerChangeRequestGuid}"]
+  reason: Previously ARM approved before TypeSpec. The two response bodies are different by design.
+- code: LroLocationHeader
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/partnerChangeRequests/{partnerChangeRequestGuid}"].put.responses.202
+  reason: Previously ARM approved before TypeSpec. Returns a body instead of a location header by design.
+- code: LroLocationHeader
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/partnerChangeRequests/{partnerChangeRequestGuid}/cancel"].post.responses.202
+  reason: Previously ARM approved before TypeSpec. Returns a body instead of a location header by design.
+- code: LroExtension
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/partnerChangeRequests/{partnerChangeRequestGuid}/cancel"].post
+  reason: Previously ARM approved before TypeSpec. Returns synchronously instead of a location header by design.
+- code: XmsPageableForListCalls
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/partnerChangeRequests/{partnerChangeRequestGuid}/download"].get
+  reason: Previously ARM approved before TypeSpec. Not a list call, should be a post action if we can break in next GA.
+- code: AvoidAdditionalProperties
+  from: openapi.json
+  where: $.definitions.AlertProperties.properties.egressConfig
+  reason: Previously ARM approved before TypeSpec. Free form by design to support different kinds of alerts to display to the customer. Entirely system generated values, the service guarantees no secret material is ever placed in this map.
+- code: PutRequestResponseSchemeArm
+  from: openapi.json
+  where: $.paths.["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/addresses/{addressId}"].put
+  reason: Previously ARM approved before TypeSpec. Addresses API became fully fleshed out in 2026-03-01-preview.
+```
+
+### Tag: package-2024-04
 
 These settings apply only when `--tag=package-2024-04` is specified on the command line.
 
@@ -41,189 +393,267 @@ description: Billing Client
 input-file:
 - stable/2024-04-01/openapi.json
 suppressions:
-- code: AllProxyResourcesShouldHaveDelete
-  from: billingRequest.json
-  reason: Service design forces behavior
-- code: AllProxyResourcesShouldHaveDelete
-  from: billingSubscription.json
-  reason: Service design forces behavior
-- code: AllProxyResourcesShouldHaveDelete
-  from: policy.json
-  reason: Service design forces behavior
-- code: AllProxyResourcesShouldHaveDelete
-  from: transfers.json
-  reason: Service design forces behavior
-- code: AllTrackedResourcesMustHaveDelete
-  from: reservation.json
-  reason: Breaking change
-- code: AvoidAdditionalProperties
-  from: billingRequest.json
-  reason: Service design forces behavior
-- code: AvoidAdditionalProperties
-  from: billingSavingsPlan.json
-  reason: False positive. Used for "tags"
-- code: AvoidAdditionalProperties
-  from: billingSubscription.json
-  reason: Breaking change
-- code: AvoidAdditionalProperties
-  from: reservation.json
-  reason: False positive. Used for "tags"
-- code: AvoidAnonymousTypes
-  from: policy.json
-  reason: Service design forces behavior
-- code: EnumInsteadOfBoolean
-  from: associatedTenant.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: billingAccount.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: billingProfile.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: billingProperty.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: billingRoleAssignment.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: billingSavingsPlan.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: billingSubscription.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: enrollmentAccount.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: invoice.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: invoiceSection.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: operation.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: product.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: reservation.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: transaction.json
-  reason: Breaking Change
-- code: EnumInsteadOfBoolean
-  from: types.json
-  reason: Breaking Change
-- code: EvenSegmentedPathForPutOperation
-  from: policy.json
-  reason: False positive
-- code: GetCollectionOnlyHasValueAndNextLink
-  from: billingSavingsPlan.json
-  reason: Blocked on resolving this issue by wide adoption of partner services
-- code: GetCollectionOnlyHasValueAndNextLink
-  from: billingSubscription.json
-  reason: Breaking change
-- code: GetCollectionOnlyHasValueAndNextLink
-  from: reservation.json
-  reason: Breaking change
-- code: GetCollectionOnlyHasValueAndNextLink
-  from: transaction.json
-  reason: Breaking change
-- code: ListInOperationName
-  from: billingRoleAssignment.json
-  reason: Breaking Change
-- code: ListInOperationName
-  from: transfers.json
-  reason: Breaking Change
-- code: LroErrorContent
-  reason: Service design that generates API definition. Type defined in local types.json
-- code: OperationIdNounConflictingModelNames
-  from: billingProperty.json
-  reason: Breaking Change
-- code: OperationIdNounConflictingModelNames
-  from: billingRoleDefinition.json
-  reason: Breaking Change
-- code: OperationIdNounVerb
-  from: billingSavingsPlan.json
-  reason: False positive. SavingsPlan is a child resource of SavingsPlanOrder
-- code: OperationIdNounVerb
-  from: reservation.json
-  reason: False positive. Reservations can be a child resource of ReservationOrder.
-- code: OperationIdNounVerb
-  from: transaction.json
-  reason: False positive. TransactionSummary is an aggregation of transactions.
-- code: OperationsApiSchemaUsesCommonTypes
-  from: operation.json
-  reason: Service design that generates API definition. Type defined in local types.json
-- code: ParametersInPointGet
-  reason: Service design forces this behavior
-- code: ParametersInPost
-  from: billingAccount.json
-  reason: Breaking change
-- code: ParametersInPost
-  from: billingRoleAssignment.json
-  reason: Service design forces this behavior
-- code: ParametersInPost
-  from: invoice.json
-  reason: Breaking Change
-- code: ParameterNotDefinedInGlobalParameters
-  reason: Referenced in common types.json file
-- code: ParameterNotUsingCommonTypes
-  reason: Service design forces this behavior
-- code: PathForTrackedResourceTypes
-  from: reservation.json
-  reason: Breaking change
-- code: PostOperationIdContainsUrlVerb
-  from: billingAccount.json
-  reason: Breaking Change
-- code: PostOperationIdContainsUrlVerb
-  from: billingRoleAssignment.json
-  reason: Breaking Change
-- code: PutInOperationName
-  from: transfers.json
-  reason: Breaking Change
-- code: PutRequestResponseSchemeArm
-  from: transfers.json
-  reason: Design ensures only recipients choose products, not initiators, for security and access reasons. 
-- code: PutResponseCodes
-  from: billingProfile.json
-  reason: Breaking change
-- code: PutResponseCodes
-  from: billingSubscription.json
-  reason: Breaking change
-- code: PutResponseCodes
-  from: invoiceSection.json
-  reason: Breaking change
-- code: ResourceNameRestriction
-  from: billingSubscription.json
-  reason: Breaking change
-- code: ResourceNameRestriction
-  from: payment.json
-  reason: Breaking change
 - code: TenantLevelAPIsNotAllowed
-  reason: Specific validation rules do not apply to this service. Microsoft.Billing is a tenant level RP
+  from: openapi.json
+  reason: Applies to every operation in this RP because this entire RP is a tenant level resource provider.
+- code: ProvisioningStateSpecifiedForLROPut
+  from: openapi.json
+  reason: Applies to every operation in this RP because Billing Resources are tenant resources that are not provisioned under a subscription.
+- code: SubscriptionIdParameterInOperations
+  from: openapi.json
+  reason: Applies to every operation in this RP because subscription Id in Billing's case means Billing Subscription, not Azure Subscription.
+- code: ProvisioningStateSpecifiedForLROPatch
+  from: openapi.json
+  where: $.paths.["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}"].patch.responses.200
+  reason: Billing Resources are tenant resources that are not provisioned under a subscription.
+- code: ProvisioningStateSpecifiedForLROPatch
+  from: openapi.json
+  where: $.paths.["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}"].patch.responses.200
+  reason: Billing Resources are tenant resources that are not provisioned under a subscription.
+- code: ParametersInPointGet
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingSubscriptions/{billingSubscriptionName}"].get.parameters
+  reason: Previously ARM approved before TypeSpec. Expand on get billing subscription is by design.
+- code: ParametersInPointGet
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}"].get.parameters
+  reason: Previously ARM approved before TypeSpec. Expand on get billing subscription is by design.
+- code: ParametersInPointGet
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}"].get.parameters
+  reason: Previously ARM approved before TypeSpec. Expand on get reservation order is by design.
+- code: ParametersInPointGet
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}/reservations/{reservationId}"].get.parameters
+  reason: Previously ARM approved before TypeSpec. Expand on get reservation order is by design.
+- code: ParametersInPointGet
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders/{savingsPlanOrderId}"].get.parameters
+  reason: Previously ARM approved before TypeSpec. Expand on get savings plan order is by design.
+- code: ParametersInPointGet
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}"].get.parameters
+  reason: Previously ARM approved before TypeSpec. Expand on get savings plan is by design.
+- code: ParametersInPointGet
+  from: openapi.json
+  where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingProperty/default"].get.parameters
+  reason: Previously ARM approved before TypeSpec. Billing Property details aren't always needed and add cost to retreive.
 - code: TopLevelResourcesListBySubscription
-  reason: Specific validation rules do not apply to this service. Microsoft.Billing is a tenant level RP
+  from: openapi.json
+  where: $.definitions.BillingProperty
+  reason: BillingProperty is singleton with resource id default.
+- code: TopLevelResourcesListBySubscription
+  from: openapi.json
+  where: $.definitions.SubscriptionPolicy
+  reason: SubscriptionPolicy is singleton with resource id default.
+- code: PatchBodyParametersSchema
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}"].patch.parameters.2.schema.properties.properties
+  reason: Previously ARM approved before TypeSpec. When updating an address, the full address object, not just a few properties of it, are expected to be present.
+- code: PatchBodyParametersSchema
+  from: openapi.json
+  where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingProperty/default"].patch.parameters.2.schema.properties.properties
+  reason: Previously ARM approved before TypeSpec. When updating an address, the full address object, not just a few properties of it, are expected to be present.
+- code: ParametersSchemaAsTypeObject
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/addPaymentTerms"].post.parameters[2].schema.type
+  reason: Previously ARM approved before TypeSpec. The request body is an array of payment terms.
+- code: ParametersSchemaAsTypeObject
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/cancelPaymentTerms"].post.parameters[2].schema.type
+  reason: Previously ARM approved before TypeSpec. The request body is a date-time value.
+- code: ParametersSchemaAsTypeObject
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/downloadDocuments"].post.parameters[2].schema.type
+  reason: Previously ARM approved before TypeSpec. The request body is an array of document download requests.
+- code: ParametersSchemaAsTypeObject
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/validatePaymentTerms"].post.parameters[2].schema.type
+  reason: Previously ARM approved before TypeSpec. The request body is an array of payment terms.
+- code: ParametersSchemaAsTypeObject
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/downloadDocuments"].post.parameters[2].schema.type
+  reason: Previously ARM approved before TypeSpec. The request body is an array of document download requests.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingSubscriptions"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. TotalCount property also being present is desired.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/billingSubscriptions"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. TotalCount property also being present is desired.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/billingSubscriptions"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. TotalCount property also being present is desired.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/reservations"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. ReservationSummary provides the total counts of various types in the list.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. TotalCount property also being present is desired.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/billingSubscriptions"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. TotalCount property also being present is desired.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}/billingSubscriptions"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. TotalCount property also being present is desired.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactionSummary"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. Not a list API, gets a single resource.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/partnerChangeRequests/{partnerChangeRequestGuid}/download"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. This is not a list API.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservations"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. ReservationSummary provides the total counts of various types in the list.
+- code: GetCollectionOnlyHasValueAndNextLink
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlans"].get.responses.200.schema.properties
+  reason: Previously ARM approved before TypeSpec. SavingsPlanSummaryCount provides the total counts of various types in the list.
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}"].put
+  reason: Previously ARM approved before TypeSpec. Is returning 200, 201, and 202 for LRO.
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}"].put
+  reason: Previously ARM approved before TypeSpec. Is returning 200, 201, and 202 for LRO.
+- code: PutResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptionAliases/{aliasName}"].put
+  reason: Previously ARM approved before TypeSpec. Is returning 200, 201, and 202 for LRO.
+- code: ParametersInPost
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/download"].post.parameters
+  reason: Previously ARM approved before TypeSpec. The documentName parameter is the document under the invoice to download.
+- code: ParametersInPost
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices/{invoiceName}/download"].post.parameters
+  reason: Previously ARM approved before TypeSpec. The documentName parameter is the document under the invoice to download.
+- code: ParametersInPost
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/resolveBillingRoleAssignments"].post.parameters
+  reason: Previously ARM approved before TypeSpec. Filtering parameters are needed for this post action which returns a list.
+- code: ParametersInPost
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/resolveBillingRoleAssignments"].post.parameters
+  reason: Previously ARM approved before TypeSpec. Filtering parameters are needed for this post action which returns a list.
+- code: ParametersInPost
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/resolveBillingRoleAssignments"].post.parameters
+  reason: Previously ARM approved before TypeSpec. Filtering parameters are needed for this post action which returns a list.
+- code: ParametersInPost
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/listInvoiceSectionsWithCreateSubscriptionPermission"].post.parameters
+  reason: Previously ARM approved before TypeSpec. Filtering parameters are needed for this post action which returns a list.
+- code: ParametersInPost
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/resolveBillingRoleAssignments"].post.parameters
+  reason: Previously ARM approved before TypeSpec. Filtering parameters are needed for this post action which returns a list.
+- code: PutRequestResponseSchemeArm
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transfers/{transferName}"].put
+  reason: Previously ARM approved before TypeSpec. From what I can tell, the Get and the Put are both using the same model, PartnerTransferDetails.
+- code: PutRequestResponseSchemeArm
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/transfers/{transferName}"].put
+  reason: Previously ARM approved before TypeSpec. From what I can tell, the Get and the Put are both using the same model, TransferDetails.
+- code: PostResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}/cancel"].post
+  reason: Previously ARM approved before TypeSpec. This is using a 202 response code.
+- code: PostResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/amend"].post
+  reason: Previously ARM approved before TypeSpec. This is using a 202 response code.
+- code: PostResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/licenseReservations/{licenseReservationName}/cancel"].post
+  reason: Previously ARM approved before TypeSpec. This is using a 202 response code.
+- code: PostResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/partnerChangeRequests/{partnerChangeRequestGuid}/cancel"].post
+  reason: Previously ARM approved before TypeSpec. This doesn't appear to be an operation that can be polled and just gives you the cancellation response details.
+- code: PostResponseCodes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/transferEnrollmentToMCA"].post
+  reason: Previously ARM approved before TypeSpec. Synchronous operation returning 200.
+- code: XmsPageableForListCalls
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactionSummary"].get
+  reason: Previously ARM approved before TypeSpec. This isn't a list response.
+- code: OperationIdNounVerb
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactionSummary"].get.operationId
+  reason: Previously ARM approved before TypeSpec. Operation name Transactions_GetTransactionSummaryByInvoice makes sense for a Get.
+- code: OperationIdNounVerb
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactionsDownload"].post.operationId
+  reason: Previously ARM approved before TypeSpec. Operation Transactions_TransactionsDownloadByInvoice name makes sense for an action.
+- code: OperationIdNounVerb
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}/reservations"].get.operationId
+  reason: Previously ARM approved before TypeSpec. Operation Reservations_ListByReservationOrder name makes sense for a list get.
+- code: OperationIdNounVerb
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}/reservations/{reservationId}"].get.operationId
+  reason: Previously ARM approved before TypeSpec. Operation Reservations_GetByReservationOrder name makes sense for a list get.
+- code: OperationIdNounVerb
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans"].get.operationId
+  reason: Previously ARM approved before TypeSpec. Operation SavingsPlans_ListBySavingsPlanOrder name makes sense for a list get.
+- code: PathForTrackedResourceTypes
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}/reservations/{reservationId}"]
+  reason: Previously ARM approved before TypeSpec. Not a tracked resource.
 - code: TrackedResourcesMustHavePut
-  from: reservation.json
-  reason: Breaking change
-- code: XmsPageableForListCalls
-  from: availableBalance.json
-  reason: Breaking change
-- code: XmsPageableForListCalls
-  from: billingProperty.json
-  reason: Breaking change
-- code: XmsPageableForListCalls
-  from: policy.json
-  reason: Breaking change
-- code: XmsPageableForListCalls
-  from: transaction.json
-  reason: Breaking change
-- code: XmsResourceInPutResponse
-  from: transfers.json
-  reason: Service design forces this behavior
+  from: openapi.json
+  where: $.definitions.Reservation
+  reason: Previously ARM approved before TypeSpec. Not a tracked resource.
+- code: AllTrackedResourcesMustHaveDelete
+  from: openapi.json
+  where: $.definitions.Reservation
+  reason: Previously ARM approved before TypeSpec. Not a tracked resource.
+- code: ArmResourcePropertiesBag
+  from: openapi.json
+  where: $.definitions.Department
+  reason: Previously ARM approved before TypeSpec. Do not want to take a breaking change.
+- code: ArmResourcePropertiesBag
+  from: openapi.json
+  where: $.definitions.PaymentMethod
+  reason: Previously ARM approved before TypeSpec. Do not want to take a breaking change.
+- code: ArmResourcePropertiesBag
+  from: openapi.json
+  where: $.definitions.BillingRequest
+  reason: Previously ARM approved before TypeSpec. Do not want to take a breaking change.
+- code: AvoidAdditionalProperties
+  from: openapi.json
+  where: $.definitions.BillingSubscriptionAliasProperties.properties.billingPolicies
+  reason: Previously ARM approved before TypeSpec. billingPolicies property is already in production as a dictionary by design.
+- code: AvoidAdditionalProperties
+  from: openapi.json
+  where: $.definitions.BillingSubscriptionProperties.properties.billingPolicies
+  reason: Previously ARM approved before TypeSpec. billingPolicies property is already in production as a dictionary by design.
+- code: AvoidAdditionalProperties
+  from: openapi.json
+  where: $.definitions.BillingRequestProperties.properties.additionalInformation
+  reason: Previously ARM approved before TypeSpec. Billing Request additionalInformation property is already in production as a dictionary by design.
+- code: RequiredPropertiesMissingInResourceModel
+  from: openapi.json
+  where: $.definitions.BillingPermissionListResult
+  reason: Previously ARM approved before TypeSpec. Response isn't an ARM resource.
+- code: RequiredPropertiesMissingInResourceModel
+  from: openapi.json
+  where: $.definitions.TransactionSummary
+  reason: Previously ARM approved before TypeSpec. Response isn't an ARM resource.
 ```
 
 ### Tag: package-2021-10
@@ -265,29 +695,6 @@ input-file:
   - stable/2020-05-01/billing.json
   - preview/2020-09-01-preview/billingPromotions.json
   - preview/2020-09-01-preview/billingOperations.json
-```
-
-### Tag: package-2024-08-preview
-
-These settings apply only when `--tag=package-2024-08-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-08-preview'
-input-file:
-  - preview/2024-08-01-preview/migration.json
-  - preview/2024-08-01-preview/operation.json
-  - preview/2024-08-01-preview/types.json
-suppressions:
-  - code: PutResponseCodes
-    from: migration.json
-    reason: 201 is returned as a part of response
-  - code: PutRequestResponseSchemeArm
-    from: migration.json
-    reason: PATCH operation is not needed
-  - code: OperationsApiSchemaUsesCommonTypes
-    from: operation.json
-    reason: Service design that generates API definition. Type defined in local types.json
-  - code: TenantLevelAPIsNotAllowed
-    reason: Specific validation rules do not apply to this service. Microsoft.Billing is a tenant level RP
 ```
 
 ### Tag: package-2020-11-preview
@@ -344,155 +751,4 @@ These settings apply only when `--tag=package-2017-02-preview` is specified on t
 ```yaml $(tag) == 'package-2017-02-preview'
 input-file:
   - preview/2017-02-27-preview/billing.json
-```
-
----
-
-# Code Generation
-
-## Swagger to SDK
-
-This section describes what SDK should be generated by the automatic system.
-This is not used by Autorest itself.
-
-```yaml $(swagger-to-sdk)
-swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_billing']
-  - repo: azure-cli-extensions
-  - repo: azure-resource-manager-schemas
-  - repo: azure-powershell
-```
-
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
-## Java
-
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-```yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.billing
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-billing
-```
-
-### Java multi-api
-
-```yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2021-10
-  - tag: package-2020-05
-  - tag: package-2019-10-preview
-  - tag: package-2018-11-preview
-  - tag: package-2018-03-preview
-  - tag: package-2017-04-preview
-  - tag: package-2017-02-preview
-```
-
-### Tag: package-2021-10 and java
-
-These settings apply only when `--tag=package-2021-10 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-```yaml $(tag) == 'package-2021-10' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.billing.v2021_10_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2021_10_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2020-05 and java
-
-These settings apply only when `--tag=package-2020-05 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-```yaml $(tag) == 'package-2020-05' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.billing.v2020_05_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2020_05_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2019-10-preview and java
-
-These settings apply only when `--tag=package-2019-10-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-```yaml $(tag) == 'package-2019-10-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.billing.v2019_10_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2019_10_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2018-11-preview and java
-
-These settings apply only when `--tag=package-2018-11-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-```yaml $(tag) == 'package-2018-11-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.billing.v2018_11_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2018_11_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2018-03-preview and java
-
-These settings apply only when `--tag=package-2018-03-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-```yaml $(tag) == 'package-2018-03-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.billing.v2018_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2018_03_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2017-04-preview and java
-
-These settings apply only when `--tag=package-2017-04-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-```yaml $(tag) == 'package-2017-04-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.billing.v2017_04_24_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2017_04_24_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2017-02-preview and java
-
-These settings apply only when `--tag=package-2017-02-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-```yaml $(tag) == 'package-2017-02-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.billing.v2017_02_27_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2017_02_27_preview
-regenerate-manager: true
-generate-interface: true
 ```
