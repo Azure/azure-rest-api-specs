@@ -53,7 +53,7 @@ model EndpointProperties {
   @visibility(Lifecycle.Read)
   fullyQualifiedDomainName: string;
 
-  @doc("The routing role of the endpoint. A Cluster-scoped Endpoint normally has the ReadWrite role. Pool-scoped Endpoints have the ReadOnly role and route only to allocated nodes in the associated Pool that are not currently playing the read-write role. A Pool-scoped ReadOnly Endpoint has no routing destination unless at least one such node exists, including when the Pool is Shutdown, has zero allocated nodes, or has only one allocated node and that node is playing the read-write role.")
+  @doc("The routing role of the endpoint. A Cluster-scoped Endpoint normally has the ReadWrite role. Pool-scoped Endpoints have the ReadOnly role and route only to allocated nodes in the associated Pool that are not currently playing the read-write role. A Pool-scoped ReadOnly Endpoint has no routing destination unless at least one such node exists, including when the Pool is Stopped, has zero allocated nodes, or has only one allocated node and that node is playing the read-write role.")
   @visibility(Lifecycle.Read)
   role: EndpointRole;
 }

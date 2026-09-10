@@ -1328,11 +1328,11 @@ union PoolState {
   /** Is restarting */
   Restarting: "Restarting",
 
-  /** Is shutting down */
-  ShuttingDown: "ShuttingDown",
+  /** Is stopping */
+  Stopping: "Stopping",
 
-  /** Is shut down */
-  Shutdown: "Shutdown",
+  /** Is stopped */
+  Stopped: "Stopped",
 }
 
 @renamedFrom(Versions.v2026_10_01_preview, "ZonePlacementPolicy")
