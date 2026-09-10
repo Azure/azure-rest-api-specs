@@ -5506,6 +5506,20 @@ model ObjectReplicationPolicyProperties {
    */
   @added(Versions.v2025_08_01)
   tagsReplication?: ObjectReplicationPolicyPropertiesTagsReplication;
+
+  /**
+   * The status of the object replication policy.
+   */
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /**
+   * The error message associated with the object replication policy status.
+   */
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
+  replicationError?: string;
 }
 
 /**
