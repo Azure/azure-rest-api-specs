@@ -17,7 +17,7 @@ namespace Microsoft.DocumentDB;
  * An Azure Cosmos DB Graph resource.
  */
 @parentResource(DatabaseAccountGetResults)
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 model GraphResourceGetResults
   is Azure.ResourceManager.ProxyResource<GraphResourceGetProperties> {
   ...ResourceNameParameter<
@@ -43,7 +43,7 @@ model GraphResourceGetResults
   identity?: ManagedServiceIdentity;
 }
 
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 @armResourceOperations(#{ omitTags: true })
 interface GraphResources {
   /**

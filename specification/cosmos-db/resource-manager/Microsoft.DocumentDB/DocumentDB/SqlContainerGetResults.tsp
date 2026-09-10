@@ -83,7 +83,7 @@ interface SqlContainerGetResultsOperationGroup {
   /**
    * Merges the partitions of a SQL Container
    */
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_07_15)
   @action("partitionMerge")
   listSqlContainerPartitionMerge is ArmResourceActionAsyncBase<
     SqlContainerGetResults,
