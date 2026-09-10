@@ -3980,7 +3980,6 @@ model ResourceProviderManifest {
    * The token auth configuration.
    */
   @added(Versions.v2025_10_01)
-  @removed(Versions.v2026_09_01_preview)
   tokenAuthConfiguration?: TokenAuthConfiguration;
 }
 
