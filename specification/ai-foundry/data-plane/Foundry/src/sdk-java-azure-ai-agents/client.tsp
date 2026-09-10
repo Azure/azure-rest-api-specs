@@ -24,8 +24,6 @@ using TypeSpec.Http;
 using Azure.AI.Projects;
 
 namespace Azure.AI.Projects.Beta {
-  interface AgentEndpointConversations {}
-
   @@clientLocation(
     Azure.AI.Projects.AgentEndpointConversations.listAgentConversations,
     AgentEndpointConversations,
