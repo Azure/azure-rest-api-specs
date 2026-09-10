@@ -795,6 +795,7 @@ interface RecoveryPointsExtendedInfo {
     @bodyRoot
     parameters: GetRPExtendedInfoRequestResource,
   ):
+    | ArmResponse<RPExtendedInfoResourceList>
     | ArmAcceptedResponse<
         "Accepted",
         ArmLroLocationHeader &
