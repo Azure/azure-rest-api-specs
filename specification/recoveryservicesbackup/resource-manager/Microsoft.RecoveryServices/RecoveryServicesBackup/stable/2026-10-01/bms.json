@@ -949,7 +949,7 @@
         "tags": [
           "RecoveryPoints"
         ],
-        "description": "Returns the additional details of the recovery points fetched by a prior getRPExtendedInfo operation, keyed by\nrecovery point ARM id. Returns 202 Accepted while the operation is still running.",
+        "description": "Returns the additional details of the recovery points fetched by a prior getRPExtendedInfo operation. Returns\n202 Accepted while the operation is still running.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -986,7 +986,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/RPExtendedInfoResourceDictionary"
+              "$ref": "#/definitions/RPExtendedInfoResourceList"
             }
           },
           "202": {
@@ -13949,22 +13949,23 @@
         }
       ]
     },
-    "RPExtendedInfoResourceDictionary": {
+    "RPExtendedInfoResourceList": {
       "type": "object",
-      "description": "Dictionary of the additional details of recovery points, keyed by recovery point ARM id.",
+      "description": "List of the additional details of recovery points.",
       "properties": {
         "value": {
-          "type": "object",
-          "description": "Additional details of the recovery points, keyed by recovery point ARM id.",
-          "additionalProperties": {
+          "type": "array",
+          "description": "List of resources.",
+          "items": {
             "$ref": "#/definitions/RPExtendedInfoResource"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of resources."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ]
     },
     "RecoveryMode": {
       "type": "string",

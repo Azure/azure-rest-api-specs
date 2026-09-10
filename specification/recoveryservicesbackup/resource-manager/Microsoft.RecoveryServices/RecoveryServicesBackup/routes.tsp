@@ -810,8 +810,8 @@ interface RecoveryPointsExtendedInfo {
     | ErrorResponse;
 
   /**
-   * Returns the additional details of the recovery points fetched by a prior getRPExtendedInfo operation, keyed by
-   * recovery point ARM id. Returns 202 Accepted while the operation is still running.
+   * Returns the additional details of the recovery points fetched by a prior getRPExtendedInfo operation. Returns
+   * 202 Accepted while the operation is still running.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "This is the result endpoint of the getRPExtendedInfo long running operation rather than an operation that starts one. It echoes the tracking headers only so that a caller polling it while the operation is still running keeps the same polling targets."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "RP is an established acronym in the BMS contract; the operation name matches the service operation id."
@@ -841,7 +841,7 @@ interface RecoveryPointsExtendedInfo {
     @path
     operationId: string,
   ):
-    | ArmResponse<RPExtendedInfoResourceDictionary>
+    | ArmResponse<RPExtendedInfoResourceList>
     | ArmAcceptedResponse<
         "Accepted",
         ArmLroLocationHeader &
