@@ -450,6 +450,7 @@ model TargetBranchConfiguration {
 /**
  * List of RP resources which supports pagination.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AzureDevOpsProjectListResponse {
   /**
    * The AzureDevOpsProject items on this page.
@@ -525,6 +526,7 @@ model AzureDevOpsProjectProperties {
 /**
  * List of RP resources which supports pagination.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AzureDevOpsRepositoryListResponse {
   /**
    * The AzureDevOpsRepository items on this page.
@@ -618,6 +620,7 @@ model AzureDevOpsRepositoryProperties {
 /**
  * List of RP resources which supports pagination.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DevOpsConfigurationListResponse {
   /**
    * The DevOpsConfiguration items on this page.
@@ -844,6 +847,7 @@ model GitHubOwnerProperties {
 /**
  * List of RP resources which supports pagination.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GitHubRepositoryListResponse {
   /**
    * The GitHubRepository items on this page.
@@ -1030,6 +1034,7 @@ model GitLabGroupProperties {
 /**
  * List of RP resources which supports pagination.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GitLabProjectListResponse {
   /**
    * The GitLabProject items on this page.

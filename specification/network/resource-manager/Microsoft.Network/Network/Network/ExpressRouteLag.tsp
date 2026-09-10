@@ -295,6 +295,7 @@ interface ExpressRouteLags {
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable extension is required for this manually-routed list operation; ArmResourceListByParent is not used here"
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "x-ms-pageable extension is required for this manually-routed list operation; ArmResourceListByParent is not used here"
 @@extension(
   ExpressRouteLags.membersList,
   "x-ms-pageable",

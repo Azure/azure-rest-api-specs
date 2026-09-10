@@ -91,6 +91,8 @@ union AgentDefinitionOptInKeys {
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
   external_agents_v1_preview: "ExternalAgents=V1Preview",
   draft_agents_v1_preview: "DraftAgents=V1Preview",
+  voice_agents_v1_preview: "VoiceAgents=V1Preview",
+  digital_worker_v1_preview: "DigitalWorker=V1Preview",
 
   @removed(Versions.v1)
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
@@ -104,12 +106,14 @@ union FoundryFeaturesOptInKeys {
   schedules_v1_preview: "Schedules=V1Preview",
   red_teams_v1_preview: "RedTeams=V1Preview",
   insights_v1_preview: "Insights=V1Preview",
+  agent_insights_v1_preview: "AgentInsights=V1Preview",
   memory_stores_v1_preview: "MemoryStores=V1Preview",
-  routines_v1_preview: "Routines=V1Preview",
+  routines_v2_preview: "Routines=V2Preview",
   skills_v1_preview: "Skills=V1Preview",
   data_generation_jobs_v1_preview: "DataGenerationJobs=V1Preview",
   models_v1_preview: "Models=V1Preview",
   agents_optimization_v2_preview: "AgentsOptimization=V2Preview",
+  model_router_controls_v1_preview: "ModelRouterControls=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends
@@ -184,6 +188,17 @@ model AgentsPagedResult<T> {
 
   /** A value indicating whether there are additional values available not captured in this list. */
   has_more: boolean;
+}
+
+@doc("A page of items with a URL cursor to the next page.")
+model PagedResultWithNextLink<T> {
+  /** The requested list of items. */
+  @pageItems
+  data: T[];
+
+  /** The URL to fetch the next page of results, or absent if there are no additional pages. */
+  @nextLink
+  next_link?: url;
 }
 
 alias PageLimitQueryParameter = {
@@ -560,3 +575,8 @@ op deleteJobPreview<AreaPreviewLabel extends
 
 @encode(DateTimeKnownEncoding.unixTimestamp, int32)
 scalar FoundryTimestamp extends utcDateTime;
+
+#suppress "@azure-tools/typespec-azure-core/known-encoding" "Foundry wire contracts encode duration values as integer milliseconds."
+@doc("A duration encoded as an integer number of milliseconds.")
+@encode(DurationKnownEncoding.milliseconds, int32)
+scalar FoundryDurationMilliseconds extends duration;

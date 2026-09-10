@@ -47,7 +47,7 @@ model OnlineExperimentationWorkspacePatch {
   /**
    * Updatable properties of the online experimentation workspace resource.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backcompatibility with existing clients"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backcompatibility with existing clients"
   properties?: {
     /**
      * The resource identifier of the Log Analytics workspace which online experimentation workspace uses for generating experiment analysis results.

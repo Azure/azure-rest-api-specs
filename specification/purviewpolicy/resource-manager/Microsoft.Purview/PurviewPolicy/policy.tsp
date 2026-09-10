@@ -24,6 +24,7 @@ interface PurviewPolicies {
 
       /** Supported filters : $filter=policyType eq SelfService, $filter=policyType eq SqlDevops. Returns only the policies of the specified type. If not specified, all policies are returned. */
       #suppress "@azure-tools/typespec-azure-core/no-openapi" "LEGACY - THIS shouldn't even be needed"
+      #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-skip-url-encoding' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @path/@query with allowReserved."
       @extension("x-ms-skip-url-encoding", true)
       @query("$filter")
       filter?: string;

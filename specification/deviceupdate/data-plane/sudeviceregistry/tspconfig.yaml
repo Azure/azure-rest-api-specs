@@ -1,0 +1,44 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+
+parameters:
+  "service-dir":
+    default: "sdk/deviceregistry"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  # This TypeSpec was assembled from an existing swagger-derived spec. The rules
+  # below are disabled because the existing swagger is the source of truth:
+  # turning them on would force changes that alter the generated swagger and
+  # break already-shipped SDKs.
+  disable:
+    "@azure-tools/typespec-azure-core/use-standard-operations": "Existing operations don't use Azure.Core templates. Rewriting them would change the swagger and break shipped SDKs."
+    "@azure-tools/typespec-azure-core/use-standard-names": "Operation names come from the original swagger. Renaming them would change the SDK method names."
+
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    examples-dir: "{project-root}/examples"
+    output-file: "{version-status}/{version}/softwareupdatedeviceregistry.json"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-iot-deviceregistrysoftwareupdate"
+    package-dir: "azure-iot-deviceregistrysoftwareupdate"
+    namespace: "azure.iot.deviceregistrysoftwareupdate"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-iot-deviceregistry-softwareupdate"
+    namespace: com.azure.iot.deviceregistry.softwareupdate
+    flavor: azure
+    generate-samples: false
+    generate-tests: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/iot-device-registry-software-update"
+    package-details:
+      name: "@azure/iot-device-registry-software-update"
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: "Azure.IoT.DeviceRegistry.SoftwareUpdate"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
