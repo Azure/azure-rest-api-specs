@@ -33070,7 +33070,12 @@
             "github_copilot_preview": "#/components/schemas/GitHubCopilotHarness"
           }
         },
-        "description": "A managed runtime and agent loop used to execute a prompt agent."
+        "description": "A managed runtime and agent loop used to execute a prompt agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "GitHubCopilot=V1Preview"
+          ]
+        }
       },
       "AgentIdentity": {
         "type": "object",
@@ -93214,10 +93219,6 @@
       "VoiceResponseBase": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the response, will look like `resp_1234`."
-          },
           "object": {
             "type": "string",
             "enum": [
@@ -93244,10 +93245,6 @@
           "usage": {
             "$ref": "#/components/schemas/OpenAI.RealtimeResponseUsage",
             "description": "Usage statistics for the Response, this will correspond to billing. A\n  Realtime API session will maintain a conversation context and append new\n  Items to the Conversation, thus output from previous turns (text and\n  audio tokens) will become the input for later turns."
-          },
-          "conversation_id": {
-            "type": "string",
-            "description": "Which conversation the response is added to, determined by the `conversation`\n  field in the `response.create` event. If `auto`, the response will be added to\n  the default conversation and the value of `conversation_id` will be an id like\n  `conv_1234`. If `none`, the response will not be added to any conversation and\n  the value of `conversation_id` will be `null`. If responses are being triggered\n  automatically by VAD the response will be added to the default conversation"
           },
           "output_modalities": {
             "type": "array",
