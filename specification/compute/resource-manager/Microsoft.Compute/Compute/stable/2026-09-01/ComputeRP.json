@@ -16090,11 +16090,11 @@
     },
     "FlexProfile": {
       "type": "object",
-      "description": "Specifies flexible virtual machine sizing options. When specified, Azure may allocate a compatible\nalternative VM size from the same family if the preferred size is unavailable. The deployed size is\nreturned in the hardwareProfile.vmSize property in the response.",
+      "description": "Specifies a flexibility profile for VM size. When specified, Azure may allocate a compatible alternative\nVM size if the preferred size is unavailable. The deployed size is returned in the hardwareProfile.vmSize\nproperty in the response.",
       "properties": {
         "preferredVMSize": {
           "$ref": "#/definitions/VirtualMachineSizeTypes",
-          "description": "Specifies the preferred (reference) VM size. Azure may allocate a compatible alternative size from the\nsame family if the preferred size is unavailable. Either hardwareProfile.vmSize or flexProfile.preferredVMSize\nshould be specified in the request, but not both."
+          "description": "Specifies the preferred (reference) VM size. Azure may allocate a compatible alternative size if the\npreferred size is unavailable. Either hardwareProfile.vmSize or flexProfile.preferredVMSize should be\nspecified in the request, but not both."
         }
       }
     },
@@ -22425,7 +22425,7 @@
         },
         "flexProfile": {
           "$ref": "#/definitions/FlexProfile",
-          "description": "Specifies the flexible VM sizing options. When specified, Azure may deploy a compatible alternative VM\nsize if the preferred size is unavailable. Either hardwareProfile.vmSize or flexProfile.preferredVMSize\nshould be specified, but not both. The deployed size is returned in hardwareProfile.vmSize on GET."
+          "description": "Specifies a flexibility profile for VM size. When specified, Azure may deploy a compatible alternative\nVM size if the preferred size is unavailable. Either hardwareProfile.vmSize or flexProfile.preferredVMSize\nshould be specified, but not both. The deployed size is returned in hardwareProfile.vmSize on GET."
         },
         "scheduledEventsPolicy": {
           "$ref": "#/definitions/ScheduledEventsPolicy",

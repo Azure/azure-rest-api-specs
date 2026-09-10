@@ -5610,16 +5610,16 @@ model BootDiagnosticsInstanceView {
 }
 
 /**
- * Specifies flexible virtual machine sizing options. When specified, Azure may allocate a compatible
- * alternative VM size from the same family if the preferred size is unavailable. The deployed size is
- * returned in the hardwareProfile.vmSize property in the response.
+ * Specifies a flexibility profile for VM size. When specified, Azure may allocate a compatible alternative
+ * VM size if the preferred size is unavailable. The deployed size is returned in the hardwareProfile.vmSize
+ * property in the response.
  */
 @added(Versions.v2026_09_01)
 model FlexProfile {
   /**
-   * Specifies the preferred (reference) VM size. Azure may allocate a compatible alternative size from the
-   * same family if the preferred size is unavailable. Either hardwareProfile.vmSize or flexProfile.preferredVMSize
-   * should be specified in the request, but not both.
+   * Specifies the preferred (reference) VM size. Azure may allocate a compatible alternative size if the
+   * preferred size is unavailable. Either hardwareProfile.vmSize or flexProfile.preferredVMSize should be
+   * specified in the request, but not both.
    */
   preferredVMSize?: VirtualMachineSizeTypes;
 }
@@ -6747,8 +6747,8 @@ model VirtualMachineProperties {
   hardwareProfile?: HardwareProfile;
 
   /**
-   * Specifies the flexible VM sizing options. When specified, Azure may deploy a compatible alternative VM
-   * size if the preferred size is unavailable. Either hardwareProfile.vmSize or flexProfile.preferredVMSize
+   * Specifies a flexibility profile for VM size. When specified, Azure may deploy a compatible alternative
+   * VM size if the preferred size is unavailable. Either hardwareProfile.vmSize or flexProfile.preferredVMSize
    * should be specified, but not both. The deployed size is returned in hardwareProfile.vmSize on GET.
    */
   @added(Versions.v2026_09_01)
