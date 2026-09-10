@@ -253,3 +253,17 @@ using Microsoft.SignalRService;
 @@clientName(PersistentStorages.delete, "Delete");
 @@clientLocation(PersistentStorages.list, "WebPubSubPersistentStorages");
 @@clientName(PersistentStorages.list, "List");
+
+@@clientName(AiServices.createOrUpdate::parameters.resource, "parameters");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AiService.properties);
+
+// AiServices interface operations with WebPubSubAiServices_ prefix
+@@clientLocation(AiServices.get, "WebPubSubAiServices");
+@@clientName(AiServices.get, "Get");
+@@clientLocation(AiServices.createOrUpdate, "WebPubSubAiServices");
+@@clientName(AiServices.createOrUpdate, "CreateOrUpdate");
+@@clientLocation(AiServices.delete, "WebPubSubAiServices");
+@@clientName(AiServices.delete, "Delete");
+@@clientLocation(AiServices.list, "WebPubSubAiServices");
+@@clientName(AiServices.list, "List");
