@@ -900,9 +900,31 @@ op regenerateKeyCustom(
   "csharp"
 );
 @@clientName(RoutingMode, "CognitiveServicesRoutingMode", "csharp");
-@@clientName(RuleAction, "ServiceTagOutboundRuleAction", "csharp");
-@@clientName(RuleCategory, "ServiceTagOutboundRuleCategory", "csharp");
-@@clientName(RuleStatus, "ServiceTagOutboundRuleStatus", "csharp");
+@@clientName(
+  ServiceTagOutboundRule,
+  "CognitiveServicesServiceTagOutboundRule",
+  "csharp"
+);
+@@clientName(
+  ServiceTagOutboundRuleDestination,
+  "CognitiveServicesServiceTagOutboundRuleDestination",
+  "csharp"
+);
+@@clientName(
+  RuleAction,
+  "CognitiveServicesServiceTagOutboundRuleAction",
+  "csharp"
+);
+@@clientName(
+  RuleCategory,
+  "CognitiveServicesServiceTagOutboundRuleCategory",
+  "csharp"
+);
+@@clientName(
+  RuleStatus,
+  "CognitiveServicesServiceTagOutboundRuleStatus",
+  "csharp"
+);
 @@clientName(RaiSafetyProviderConfig.blocking, "IsBlocking", "csharp");
 @@clientName(RaiTopicConfig.blocking, "IsBlocking", "csharp");
 @@clientName(RaiBlocklistConfig.blocking, "IsBlocking", "csharp");
