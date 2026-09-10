@@ -432,7 +432,7 @@ namespace ContainerAppsSandbox {
   // The C# emitter prefixes nested clients with their parent names.
   @@clientName(Group, "SandboxGroup", "csharp");
   @@clientName(Group.Resource, "Sandbox", "csharp");
-  @@clientName(Group.Resource.Files, "Files", "csharp");
+  @@clientName(Group.Resource.Files, "SandboxFiles", "csharp");
   @@clientName(Group.Resource.Networking, "Networking", "csharp");
   @@clientName(Group.Resource.Streams, "Streams", "csharp");
   @@clientName(Group.Connections, "Connections", "csharp");
