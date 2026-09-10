@@ -29,7 +29,8 @@ namespace Microsoft.Network;
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 @parentResource(VirtualNetworkAppliance)
 @discriminator("kind")
-model VirtualNetworkApplianceCapability extends Azure.ResourceManager.ProxyResource<VirtualNetworkApplianceCapabilityProperties> {
+model VirtualNetworkApplianceCapability
+  extends Azure.ResourceManager.ProxyResource<VirtualNetworkApplianceCapabilityProperties> {
   @visibility(Lifecycle.Read)
   @path
   @key("capabilityName")
