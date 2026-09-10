@@ -77,7 +77,7 @@ interface KnowledgeSources {
     PatchModel = KnowledgeSourceUpdateParameters,
     Response =
       | ArmResponse<KnowledgeSource>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> &
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = KnowledgeSource>> &
           KnowledgeSourceAcceptedBody)
   >;
 
