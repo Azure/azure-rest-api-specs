@@ -17,6 +17,7 @@ import { execFile } from "../../../shared/src/exec.js";
 import { PER_PAGE_MAX } from "../../../shared/src/github.js";
 import { byDate, invert } from "../../../shared/src/sort.js";
 
+import { createHash } from "crypto";
 import fs from "fs/promises";
 import os from "os";
 import path from "path";
@@ -200,14 +201,15 @@ function getFileName(filePath) {
 /**
  * @param {string} owner
  * @param {string} repo
- * @param {string} sha
+ * @param {number} pullNumber
  * @param {string} filePath
  * @param {number} line
  * @returns {string}
  */
-function getBlobLineLink(owner, repo, sha, filePath, line) {
-  const normalizedPath = filePath.startsWith("/") ? filePath.slice(1) : filePath;
-  return `https://github.com/${owner}/${repo}/blob/${sha}/${normalizedPath}#L${line}`;
+function getPullRequestDiffLineLink(owner, repo, pullNumber, filePath, line) {
+  const normalizedPath = filePath.replaceAll("\\", "/").replace(/^\.?\//, "");
+  const fileHash = createHash("sha256").update(normalizedPath).digest("hex");
+  return `https://github.com/${owner}/${repo}/pull/${pullNumber}/files#diff-${fileHash}R${line}`;
 }
 
 /**
@@ -233,16 +235,16 @@ function renderRuleLabel(suppression) {
 /**
  * @param {string} owner
  * @param {string} repo
- * @param {string} head_sha
+ * @param {number} pullNumber
  * @param {TypeSpecSuppressionRecord} suppression
  * @returns {string}
  */
-function renderSourceLink(owner, repo, head_sha, suppression) {
+function renderSourceLink(owner, repo, pullNumber, suppression) {
   const sourceLabel = `${getFileName(suppression.sourceFile)}#L${suppression.location.line}`;
-  const sourceUrl = getBlobLineLink(
+  const sourceUrl = getPullRequestDiffLineLink(
     owner,
     repo,
-    head_sha,
+    pullNumber,
     suppression.sourceFile,
     suppression.location.line,
   );
@@ -280,16 +282,16 @@ function renderJustificationValue(justification) {
 /**
  * @param {string} owner
  * @param {string} repo
- * @param {string} head_sha
+ * @param {number} pullNumber
  * @param {TypeSpecSuppressionRecord} suppression
  * @param {string} statusCell
  * @returns {string}
  */
-function renderNewSuppressionRow(owner, repo, head_sha, suppression, statusCell) {
+function renderNewSuppressionRow(owner, repo, pullNumber, suppression, statusCell) {
   return (
     `<tr><td align="center">${statusCell}</td>` +
     `<td>${renderRuleCell(suppression)}</td>` +
-    `<td>${renderSourceLink(owner, repo, head_sha, suppression)}</td>` +
+    `<td>${renderSourceLink(owner, repo, pullNumber, suppression)}</td>` +
     `<td>${renderJustificationValue(suppression.justification)}</td></tr>`
   );
 }
@@ -297,16 +299,16 @@ function renderNewSuppressionRow(owner, repo, head_sha, suppression, statusCell)
 /**
  * @param {string} owner
  * @param {string} repo
- * @param {string} head_sha
+ * @param {number} pullNumber
  * @param {TypeSpecSuppressionChange} change
  * @param {string} statusCell
  * @returns {string}
  */
-function renderChangedSuppressionRow(owner, repo, head_sha, change, statusCell) {
+function renderChangedSuppressionRow(owner, repo, pullNumber, change, statusCell) {
   return (
     `<tr><td align="center">${statusCell}</td>` +
     `<td>${renderRuleCell(change.after)}</td>` +
-    `<td>${renderSourceLink(owner, repo, head_sha, change.after)}</td>` +
+    `<td>${renderSourceLink(owner, repo, pullNumber, change.after)}</td>` +
     `<td>${renderJustificationValue(change.before.justification)}</td>` +
     `<td>${renderJustificationValue(change.after.justification)}</td></tr>`
   );
@@ -322,14 +324,14 @@ function renderChangedSuppressionRow(owner, repo, head_sha, change, statusCell) 
  * @param {Object} options
  * @param {string} options.owner
  * @param {string} options.repo
- * @param {string} options.head_sha
+ * @param {number} options.pullNumber
  * @param {boolean} options.isApproved - Whether the Approved-TypeSpecSuppression label is applied.
  * @param {string} [options.runUrl] - URL of the Analyze Code run, used for the "full list" link.
  * @returns {string | undefined}
  */
 export function renderSuppressionsCommentBody(
   report,
-  { owner, repo, head_sha, isApproved, runUrl },
+  { owner, repo, pullNumber, isApproved, runUrl },
 ) {
   // In checked-only mode (a check-rules file was used), render only the checked
   // subset; otherwise fall back to the full diff (legacy behavior). An empty
@@ -374,7 +376,7 @@ export function renderSuppressionsCommentBody(
       "<thead><tr><th>Status</th><th>Rule</th><th>Source</th><th>Justification</th></tr></thead>",
       "<tbody>",
       ...shownNew.map((suppression) =>
-        renderNewSuppressionRow(owner, repo, head_sha, suppression, statusCell),
+        renderNewSuppressionRow(owner, repo, pullNumber, suppression, statusCell),
       ),
       "</tbody>",
       "</table>",
@@ -390,7 +392,7 @@ export function renderSuppressionsCommentBody(
       "<thead><tr><th>Status</th><th>Rule</th><th>Source</th><th>Previous justification</th><th>New justification</th></tr></thead>",
       "<tbody>",
       ...shownChanged.map((change) =>
-        renderChangedSuppressionRow(owner, repo, head_sha, change, statusCell),
+        renderChangedSuppressionRow(owner, repo, pullNumber, change, statusCell),
       ),
       "</tbody>",
       "</table>",
@@ -425,6 +427,7 @@ export function renderSuppressionsCommentBody(
  * @param {string} owner
  * @param {string} repo
  * @param {string} head_sha
+ * @param {number} pullNumber
  * @param {string[]} [labelNames] - Current PR labels, used to reflect approval status.
  * @returns {Promise<string | undefined>}
  */
@@ -434,6 +437,7 @@ export async function buildSuppressionsComment(
   owner,
   repo,
   head_sha,
+  pullNumber,
   labelNames = [],
 ) {
   const run = await getLatestTypeSpecSuppressionsWorkflowRun(github, core, owner, repo, head_sha);
@@ -464,7 +468,7 @@ export async function buildSuppressionsComment(
   return renderSuppressionsCommentBody(report, {
     owner,
     repo,
-    head_sha,
+    pullNumber,
     isApproved: labelNames.includes(APPROVED_SUPPRESSION_LABEL),
     runUrl,
   });

@@ -635,15 +635,6 @@ model RaiAcsModerationBindingExtension {
   @encodedName("application/json", "harm_configs")
   @identifiers(#["category"])
   harmConfigs: RaiAcsHarmConfiguration[];
-
-  /** Reserved for future blocklist tasks. Current service validation permits only an empty optional array. */
-  @identifiers(#[])
-  blocklists?: RaiAcsEmptyObject[];
-
-  /** Reserved for future external-provider tasks. Current service validation permits only an empty optional array. */
-  @encodedName("application/json", "external_safety_providers")
-  @identifiers(#[])
-  externalSafetyProviders?: RaiAcsEmptyObject[];
 }
 
 /** An object that must contain no properties. */
