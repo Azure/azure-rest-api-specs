@@ -1,0 +1,171 @@
+{
+  "title": "Evaluators_CreateOrUpdate_MaximumSet",
+  "operationId": "Evaluators_createOrUpdate",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "support_quality",
+    "If-Match": "\"current-7f3a\"",
+    "evaluator": {
+      "display_name": "Support quality",
+      "metadata": {
+        "owner": "support-evaluations"
+      },
+      "evaluator_type": "custom",
+      "categories": [
+        "quality"
+      ],
+      "supported_evaluation_levels": [
+        "turn"
+      ],
+      "definition": {
+        "type": "prompt",
+        "prompt_text": "Rate the response on a scale from 1 to 10.",
+        "data_schema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string"
+            },
+            "response": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "query",
+            "response"
+          ]
+        },
+        "metrics": {
+          "score": {
+            "type": "ordinal",
+            "desirable_direction": "increase",
+            "min_value": 1,
+            "max_value": 10,
+            "is_primary": true
+          }
+        }
+      },
+      "description": "Scores support response quality.",
+      "tags": {
+        "environment": "development"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"current-8c21\""
+      },
+      "body": {
+        "display_name": "Support quality",
+        "metadata": {
+          "owner": "support-evaluations"
+        },
+        "evaluator_type": "custom",
+        "categories": [
+          "quality"
+        ],
+        "supported_evaluation_levels": [
+          "turn"
+        ],
+        "definition": {
+          "type": "prompt",
+          "prompt_text": "Rate the response on a scale from 1 to 10.",
+          "data_schema": {
+            "type": "object",
+            "properties": {
+              "query": {
+                "type": "string"
+              },
+              "response": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "query",
+              "response"
+            ]
+          },
+          "metrics": {
+            "score": {
+              "type": "ordinal",
+              "desirable_direction": "increase",
+              "min_value": 1,
+              "max_value": 10,
+              "is_primary": true
+            }
+          }
+        },
+        "content_hash": "94a30f4d25c941069218fed64083cad00d1fe071d2550e619e8228e4007f6382",
+        "created_by": "00000000-0000-0000-0000-000000000001",
+        "created_at": "2026-09-09T15:00:00Z",
+        "modified_at": "2026-09-09T15:05:00Z",
+        "description": "Scores support response quality.",
+        "tags": {
+          "environment": "development"
+        },
+        "id": "azureai://accounts/account_1/projects/project_1/evaluators/support_quality",
+        "name": "support_quality",
+        "etag": "\"current-8c21\""
+      }
+    },
+    "201": {
+      "headers": {
+        "ETag": "\"current-8c21\""
+      },
+      "body": {
+        "display_name": "Support quality",
+        "metadata": {
+          "owner": "support-evaluations"
+        },
+        "evaluator_type": "custom",
+        "categories": [
+          "quality"
+        ],
+        "supported_evaluation_levels": [
+          "turn"
+        ],
+        "definition": {
+          "type": "prompt",
+          "prompt_text": "Rate the response on a scale from 1 to 10.",
+          "data_schema": {
+            "type": "object",
+            "properties": {
+              "query": {
+                "type": "string"
+              },
+              "response": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "query",
+              "response"
+            ]
+          },
+          "metrics": {
+            "score": {
+              "type": "ordinal",
+              "desirable_direction": "increase",
+              "min_value": 1,
+              "max_value": 10,
+              "is_primary": true
+            }
+          }
+        },
+        "content_hash": "94a30f4d25c941069218fed64083cad00d1fe071d2550e619e8228e4007f6382",
+        "created_by": "00000000-0000-0000-0000-000000000001",
+        "created_at": "2026-09-09T15:00:00Z",
+        "modified_at": "2026-09-09T15:05:00Z",
+        "description": "Scores support response quality.",
+        "tags": {
+          "environment": "development"
+        },
+        "id": "azureai://accounts/account_1/projects/project_1/evaluators/support_quality",
+        "name": "support_quality",
+        "etag": "\"current-8c21\""
+      }
+    }
+  }
+}

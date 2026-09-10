@@ -51,31 +51,25 @@ union EvaluationLevel {
   string,
 }
 
-/** Grader Azure AI Evaluator definition for foundry evaluators. */
-model GraderAzureAIEvaluator {
+/** A registered evaluator used as a testing criterion in evaluations. */
+model TestingCriterionEvaluator {
   /** The object type, which is always `azure_ai_evaluator`. */
   type: "azure_ai_evaluator";
 
-  /** The name of the grader. */
+  /** The registered evaluator resource name. */
   name: string;
 
-  /** The name of the evaluator. */
-  evaluator_name: string;
+  /** The exact immutable published evaluator version. Omitted when the accepted criterion snapshots current evaluator state. */
+  version?: EvaluatorVersionNumber;
 
-  /** The version of the evaluator. Latest version if not specified. */
-  evaluator_version?: string;
+  /** The exact lowercase SHA-256 functional content hash returned by the evaluator API. The service verifies this hash when accepting the evaluation and never late-binds the criterion to later current state. */
+  content_hash: Sha256Hash;
 
   /** The initialization parameters for the evaluation. Must support structured outputs. */
   initialization_parameters?: Record<unknown>;
 
   /** The model to use for the evaluation. Must support structured outputs. */
   data_mapping?: Record<string>;
-}
-
-/** An Azure AI Evaluator grader used as testing criterion in evaluations. */
-@summary("AzureAIEvaluatorGrader")
-model TestingCriterionAzureAIEvaluator {
-  ...GraderAzureAIEvaluator;
 }
 
 /** Grader inspect_ai definition for inspect_ai benchmark evaluators. */
@@ -196,7 +190,7 @@ model AzureAIBenchmarkDataSourceConfig extends AzureAIDataSourceConfig {
     | OpenAI.EvalGraderTextSimilarity
     | OpenAI.EvalGraderPython
     | OpenAI.EvalGraderScoreModel
-    | TestingCriterionAzureAIEvaluator
+    | TestingCriterionEvaluator
     | EvalGraderInspectAI)[]
 );
 
@@ -245,7 +239,7 @@ model Eval is OpenAI.Eval {
     | OpenAI.EvalGraderTextSimilarity
     | OpenAI.EvalGraderPython
     | OpenAI.EvalGraderScoreModel
-    | TestingCriterionAzureAIEvaluator
+    | TestingCriterionEvaluator
     | EvalGraderInspectAI)[]
 );
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"

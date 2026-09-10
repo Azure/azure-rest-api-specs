@@ -147,6 +147,76 @@ model Dimension {
   always_applicable?: boolean = false;
 }
 
+@doc("The completeness of the evidence used to compute rubric health.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union RubricHealthConfidence {
+  string,
+
+  @doc("The health signals contain structural evidence only or are otherwise insufficiently supported.")
+  low: "low",
+
+  @doc("The health signals contain structural evidence and sufficient evaluation evidence.")
+  med: "med",
+
+  @doc("The health signals contain structural evidence, sufficient evaluation evidence, and sufficient human annotation evidence.")
+  high: "high",
+}
+
+@doc("Similarity metrics used to compute rubric health.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union RubricHealthSimilarityMetric {
+  string,
+
+  @doc("Cosine similarity.")
+  cosine: "cosine",
+}
+
+@doc("Service-generated information about how rubric health was computed.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model RubricHealthComputationMetadata {
+  @doc("The version of the rubric-health component definitions, normalization, and aggregate coefficients.")
+  algorithm_version: string;
+
+  @doc("A stable identifier for the embedding or vectorization provider used to compute diversity and coverage.")
+  embedding_provider: string;
+
+  @doc("The model snapshot or implementation revision of the embedding provider, when available independently from the provider identifier.")
+  embedding_provider_version?: string;
+
+  @doc("The similarity metric used with the generated vectors.")
+  similarity_metric: RubricHealthSimilarityMetric;
+}
+
+@doc("Service-generated health signals for a rubric evaluator.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model RubricHealth {
+  @doc("Normalized non-redundancy among rubric dimensions. The value must be between 0.0 and 1.0, inclusive. Higher values indicate greater diversity.")
+  @minValue(0.0)
+  @maxValue(1.0)
+  diversity?: float32;
+
+  @doc("Normalized coverage of concepts found in the evaluator-generation sources. The value must be between 0.0 and 1.0, inclusive.")
+  @minValue(0.0)
+  @maxValue(1.0)
+  coverage?: float32;
+
+  @doc("Failure-path coverage normalized against the service's configured target fraction. The value must be between 0.0 and 1.0, inclusive. A value of 1.0 means the target was met or exceeded.")
+  @minValue(0.0)
+  @maxValue(1.0)
+  negative_vs_positive?: float32;
+
+  @doc("Normalized aggregate health score. The value must be between 0.0 and 1.0, inclusive. Omitted when required component signals are unavailable.")
+  @minValue(0.0)
+  @maxValue(1.0)
+  overall?: float32;
+
+  @doc("The completeness of the evidence used to compute the health signals.")
+  confidence?: RubricHealthConfidence;
+
+  @doc("Information identifying the algorithm and embedding provider used to compute the health signals.")
+  computation?: RubricHealthComputationMetadata;
+}
+
 @doc("Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
@@ -159,6 +229,425 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   @minValue(0.0)
   @maxValue(1.0)
   pass_threshold?: float32 = 0.5;
+}
+
+// ============================================================================
+// Evaluator diagnostics
+// ============================================================================
+
+@doc("The type of actor responsible for an evaluator lineage diagnostic.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union EvaluatorDiagnosticActorType {
+  string,
+
+  @doc("An authenticated user initiated the change.")
+  user: "user",
+
+  @doc("A Foundry service component initiated the change or computation.")
+  service: "service",
+}
+
+@doc("The actor responsible for an evaluator lineage diagnostic.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorDiagnosticActor {
+  @doc("The type of actor.")
+  type: EvaluatorDiagnosticActorType;
+
+  @doc("A stable opaque principal or service identifier, when available.")
+  id?: string;
+}
+
+@doc("The severity of an evaluator diagnostic message.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union EvaluatorDiagnosticMessageSeverity {
+  string,
+
+  @doc("Informational diagnostic detail.")
+  info: "info",
+
+  @doc("A diagnostic condition that may require attention.")
+  warning: "warning",
+}
+
+@doc("Stable searchable codes for evaluator diagnostic messages.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union EvaluatorDiagnosticMessageCode {
+  string,
+
+  @doc("Rubric dimensions have low measured diversity.")
+  low_diversity: "low_diversity",
+
+  @doc("The rubric has low measured source coverage.")
+  low_coverage: "low_coverage",
+
+  @doc("The rubric has low measured failure-path coverage.")
+  low_failure_path_coverage: "low_failure_path_coverage",
+
+  @doc("Health confidence is low because evaluation evidence is unavailable.")
+  low_confidence_no_evaluation_evidence: "low_confidence_no_evaluation_evidence",
+
+  @doc("Health confidence is low because human evidence is unavailable.")
+  low_confidence_no_human_evidence: "low_confidence_no_human_evidence",
+
+  @doc("Rubric health improved compared with the previous comparable computation.")
+  health_improved: "health_improved",
+
+  @doc("Rubric health decreased compared with the previous comparable computation.")
+  health_decreased: "health_decreased",
+}
+
+@doc("A deterministic detail associated with an evaluator diagnostic change.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorDiagnosticMessage {
+  @doc("A stable searchable message code.")
+  code: EvaluatorDiagnosticMessageCode;
+
+  @doc("The message severity.")
+  severity: EvaluatorDiagnosticMessageSeverity;
+
+  @doc("The health component associated with the message, when applicable.")
+  component?: string;
+
+  @doc("Bounded deterministic display text that does not contain raw evaluator evidence.")
+  message: string;
+}
+
+@doc("Known machine-readable classifications for evaluator diagnostic changes.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union EvaluatorDiagnosticChangeType {
+  string,
+
+  @doc("A user created an evaluator version.")
+  human_created: "human_created",
+
+  @doc("A user added a rubric dimension.")
+  human_added: "human_added",
+
+  @doc("A user changed evaluator functional content.")
+  human_edited: "human_edited",
+
+  @doc("A user removed a rubric dimension.")
+  human_removed: "human_removed",
+
+  @doc("Evaluator generation created the resulting content.")
+  generated: "generated",
+
+  @doc("Evaluator generation changed an existing dimension.")
+  regenerated: "regenerated",
+
+  @doc("The generated rubric no longer contained an existing dimension.")
+  not_present_in_generated_rubric: "not_present_in_generated_rubric",
+
+  @doc("Rubric health was computed after evaluator generation completed.")
+  generation_completed: "generation_completed",
+
+  @doc("The diagnostic change is a baseline imported from legacy evaluator history.")
+  history_imported: "history_imported",
+
+  @doc("A human-evaluator agreement diagnostic completed successfully.")
+  human_evaluator_agreement_completed: "human_evaluator_agreement_completed",
+
+  @doc("A rubric version comparison diagnostic completed successfully.")
+  version_comparison_completed: "version_comparison_completed",
+}
+
+@doc("The supported evaluator diagnostic change shapes.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union EvaluatorDiagnosticType {
+  string,
+
+  @doc("An evaluator version was created.")
+  version_created: "version_created",
+
+  @doc("A rubric dimension was added.")
+  dimension_added: "dimension_added",
+
+  @doc("A rubric dimension was updated.")
+  dimension_updated: "dimension_updated",
+
+  @doc("A rubric dimension was removed.")
+  dimension_removed: "dimension_removed",
+
+  @doc("Functional evaluator fields outside individual dimensions were updated.")
+  definition_updated: "definition_updated",
+
+  @doc("Rubric health was computed.")
+  health_computed: "health_computed",
+
+  @doc("A prior rubric health snapshot was invalidated.")
+  health_invalidated: "health_invalidated",
+
+  @doc("Human-evaluator agreement was computed.")
+  human_evaluator_agreement: "human_evaluator_agreement",
+
+  @doc("Two evaluator versions were compared on shared evidence.")
+  rubric_comparison: "rubric_comparison",
+}
+
+@doc("The shared fields for every completed evaluator diagnostic.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorDiagnostic {
+  @doc("The stable server-assigned diagnostic identifier.")
+  id: string;
+
+  @doc("The primary or target published evaluator version to which the diagnostic applies. A rubric comparison additionally identifies its baseline version.")
+  evaluator_version: EvaluatorVersionNumber;
+
+  @doc("The server-recorded time when the change occurred.")
+  occurred_at: utcDateTime;
+
+  @doc("A stable machine-readable classification describing why the change occurred.")
+  change_type: EvaluatorDiagnosticChangeType;
+
+  @doc("A bounded deterministic summary of the change.")
+  explanation?: string;
+
+  @doc("The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies.")
+  content_hash: Sha256Hash;
+
+  @doc("The diagnostic job that published this diagnostic. Omitted for service-produced lineage and health diagnostics.")
+  source_job_id?: string;
+
+  @doc("The diagnostic change shape.")
+  type: EvaluatorDiagnosticType;
+}
+
+@doc("The shared fields for completed evaluator lineage diagnostics.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorLineageDiagnosticBase extends EvaluatorDiagnostic {
+  @doc("The authenticated user or service responsible for the lineage event.")
+  actor: EvaluatorDiagnosticActor;
+}
+
+@doc("A change to one functional evaluator field.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorFieldChange {
+  @doc("A stable path identifying the changed field.")
+  field: string;
+
+  @doc("The field's prior JSON value.")
+  before: unknown;
+
+  @doc("The field's resulting JSON value.")
+  after: unknown;
+}
+
+@doc("Numeric rubric health changes computed as current minus previous.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model RubricHealthDelta {
+  @doc("The change in dimension diversity.")
+  diversity?: float32;
+
+  @doc("The change in source coverage.")
+  coverage?: float32;
+
+  @doc("The change in normalized failure-path coverage.")
+  negative_vs_positive?: float32;
+
+  @doc("The change in aggregate rubric health.")
+  overall?: float32;
+}
+
+@doc("How an evaluator generation source was used.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union EvaluatorGenerationSourceUseStatus {
+  string,
+
+  @doc("The source was accepted and used.")
+  accepted: "accepted",
+
+  @doc("Only part of the source was used.")
+  partially_used: "partially_used",
+
+  @doc("The source was rejected.")
+  rejected: "rejected",
+}
+
+@doc("A bounded evaluator generation source snapshot.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorGenerationSourceSnapshot {
+  @doc("The stable source identifier within the generation operation.")
+  source_id: string;
+
+  @doc("The source type.")
+  source_type: string;
+
+  @doc("The lowercase 64-character SHA-256 source content hash.")
+  content_hash: Sha256Hash;
+
+  @doc("How the source was used.")
+  status: EvaluatorGenerationSourceUseStatus;
+}
+
+@doc("Whether one rubric dimension is covered by recorded generation sources.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union EvaluatorDimensionSourceCoverageStatus {
+  string,
+
+  @doc("The dimension has recorded source coverage.")
+  covered: "covered",
+
+  @doc("The dimension has partial recorded source coverage.")
+  partial: "partial",
+
+  @doc("The service could not resolve the dimension's source coverage.")
+  unresolved: "unresolved",
+
+  @doc("The dimension has no recorded source coverage.")
+  uncovered: "uncovered",
+}
+
+@doc("Recorded source coverage for one rubric dimension.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorDimensionSourceCoverage {
+  @doc("The stable rubric dimension identifier.")
+  dimension_id: string;
+
+  @doc("Stable source identifiers recorded for the dimension.")
+  source_ids: string[];
+
+  @doc("The recorded source-coverage status.")
+  coverage_status: EvaluatorDimensionSourceCoverageStatus;
+
+  @doc("A bounded explanation of the coverage status.")
+  explanation?: string;
+}
+
+@doc("A bounded gap in evaluator source coverage.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorSourceCoverageGap {
+  @doc("The stable gap code.")
+  code: string;
+
+  @doc("The gap severity.")
+  severity: EvaluatorDiagnosticMessageSeverity;
+
+  @doc("The related source identifier, when applicable.")
+  source_id?: string;
+
+  @doc("The related dimension identifier, when applicable.")
+  dimension_id?: string;
+
+  @doc("A bounded explanation.")
+  explanation: string;
+}
+
+@doc("Bounded source lineage and coverage recorded by evaluator generation.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorSourceLineageSummary {
+  @doc("Recorded generation source snapshots.")
+  sources: EvaluatorGenerationSourceSnapshot[];
+
+  @doc("Recorded source coverage by rubric dimension.")
+  dimension_coverage: EvaluatorDimensionSourceCoverage[];
+
+  @doc("Recorded source-coverage gaps.")
+  coverage_gaps: EvaluatorSourceCoverageGap[];
+
+  @doc("Bounded limitations of the recorded lineage.")
+  limitations: string[];
+}
+
+@doc("A diagnostic change recording the creation of an evaluator version.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model VersionCreatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
+  type: EvaluatorDiagnosticType.version_created;
+
+  @doc("The preceding published evaluator version, when one exists.")
+  prior_version?: EvaluatorVersionNumber;
+
+  @doc("The evaluator generation job that created the version, when applicable.")
+  generation_job_id?: string;
+
+  @doc("Bounded source lineage recorded by evaluator generation, when available.")
+  source_lineage?: EvaluatorSourceLineageSummary;
+}
+
+@doc("A diagnostic change recording the addition of a rubric dimension.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model DimensionAddedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
+  type: EvaluatorDiagnosticType.dimension_added;
+
+  @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
+  dimension_id: string;
+
+  @doc("The resulting complete dimension snapshot.")
+  after: Dimension;
+
+  @doc("The public dimension fields changed, when reported.")
+  changed_fields?: string[];
+}
+
+@doc("A diagnostic change recording an update to a rubric dimension.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model DimensionUpdatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
+  type: EvaluatorDiagnosticType.dimension_updated;
+
+  @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
+  dimension_id: string;
+
+  @doc("The complete dimension snapshot before the update.")
+  before: Dimension;
+
+  @doc("The complete dimension snapshot after the update.")
+  after: Dimension;
+
+  @doc("The public dimension fields changed, when reported.")
+  changed_fields?: string[];
+}
+
+@doc("A diagnostic change recording the removal of a rubric dimension.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model DimensionRemovedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
+  type: EvaluatorDiagnosticType.dimension_removed;
+
+  @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
+  dimension_id: string;
+
+  @doc("The complete dimension snapshot before removal.")
+  before: Dimension;
+
+  @doc("The public dimension fields changed, when reported.")
+  changed_fields?: string[];
+}
+
+@doc("A diagnostic change recording functional evaluator changes outside individual dimensions.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model DefinitionUpdatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
+  type: EvaluatorDiagnosticType.definition_updated;
+
+  @doc("The functional field changes applied.")
+  @minItems(1)
+  field_changes: EvaluatorFieldChange[];
+}
+
+@doc("A diagnostic change recording a rubric health computation.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model HealthComputedDiagnosticChange extends EvaluatorDiagnostic {
+  type: EvaluatorDiagnosticType.health_computed;
+
+  @doc("The computed rubric health snapshot.")
+  health: RubricHealth;
+
+  @doc("The preceding comparable rubric health snapshot, when available.")
+  previous_health?: RubricHealth;
+
+  @doc("Numeric changes from the previous comparable health snapshot.")
+  delta?: RubricHealthDelta;
+
+  @doc("Component-level diagnostic details associated with the computation.")
+  messages?: EvaluatorDiagnosticMessage[];
+}
+
+@doc("A diagnostic change recording that a prior rubric health snapshot no longer applies.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model HealthInvalidatedDiagnosticChange extends EvaluatorDiagnostic {
+  type: EvaluatorDiagnosticType.health_invalidated;
+
+  @doc("Component-level diagnostic details associated with the invalidation.")
+  messages?: EvaluatorDiagnosticMessage[];
 }
 
 @doc("Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.")
@@ -184,10 +673,10 @@ model DatasetReference {
   version: string;
 }
 
-@doc("Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.")
+@doc("Service-managed provenance artifacts produced by an evaluator generation job. Present on generated current evaluator state and copied into a published version when that state is published. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationArtifacts {
-  @doc("Reference to the single Foundry Dataset (one combined JSONL file, version-aligned to `EvaluatorVersion.version`) holding all artifacts produced by the generation pipeline. Each row in the JSONL carries a `kind` field discriminating its content (e.g. `spec`, `tools`, `context`).")
+  @doc("Reference to the single Foundry Dataset holding all artifacts produced by the generation pipeline. Each row in the JSONL carries a `kind` field discriminating its content (e.g. `spec`, `tools`, `context`).")
   dataset: DatasetReference;
 
   @doc("The kinds of rows present in `dataset`. Always contains `\"spec\"` (the generated evaluation specification, a Markdown document describing what the evaluator measures). May additionally contain `\"tools\"` (when the generation pipeline produced or inferred OpenAI tool schemas) and/or `\"context\"` (when supplementary materials such as file uploads or trace samples were used during generation).")
@@ -268,16 +757,16 @@ model EvaluatorGenerationInputs {
   @doc("The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity.")
   `model`: string;
 
-  @doc("The evaluator name (immutable identifier). 1-256 characters; allowed characters are ASCII letters, digits, underscore (`_`), period (`.`), tilde (`~`), and hyphen (`-`). The prefix `builtin.` is reserved for system-managed evaluators and is rejected by the service. If an evaluator with this name already exists in the project (and is rubric-subtype), the service creates a new version under the same name and uses the prior version's `dimensions` as context for incremental improvement (foundation of the post-//build adaptive loop). Old versions remain queryable via `get_version(name, version)`. If the existing evaluator is not a rubric-subtype evaluator (built-in, prompt-based, code-based), the request is rejected with `400 Bad Request`.")
+  @doc("The evaluator name (immutable identifier). 1-256 characters; allowed characters are ASCII letters, digits, underscore (`_`), period (`.`), tilde (`~`), and hyphen (`-`). The prefix `builtin.` is reserved for system-managed evaluators and is rejected by the service. If a current rubric evaluator with this name exists, generation replaces that mutable current state and uses its dimensions as context for incremental improvement. Published versions remain immutable and queryable through `get_version(name, version)`. If the existing current evaluator is not rubric-based, the request is rejected with `400 Bad Request`.")
   @minLength(1)
   @maxLength(256)
   @pattern("^[A-Za-z0-9_.~-]+$")
   evaluator_name: string;
 
-  @doc("Optional human-friendly display name for the resulting evaluator. Surfaced as `EvaluatorVersion.display_name` on the persisted evaluator. When omitted, the service uses `evaluator_name` as the display name. The `evaluator_` prefix disambiguates this from the immutable `evaluator_name` identifier.")
+  @doc("Optional human-friendly display name for the resulting current evaluator. Surfaced as `Evaluator.display_name`. When omitted, the service uses `evaluator_name` as the display name. The `evaluator_` prefix disambiguates this from the immutable `evaluator_name` identifier.")
   evaluator_display_name?: string;
 
-  @doc("Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.")
+  @doc("Optional human-friendly description for the resulting current evaluator. Surfaced as `Evaluator.description`. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.")
   evaluator_description?: string;
 }
 
@@ -385,12 +874,9 @@ union GenerationWarningType {
   input_quality: "input_quality",
 }
 
-@doc("Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.")
+@doc("Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted unnumbered current Evaluator. Publishing that state is a separate operation.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model EvaluatorGenerationJob is JobLike<
-  EvaluatorVersion,
-  EvaluatorGenerationInputs
-> {
+model EvaluatorGenerationJob is JobLike<Evaluator, EvaluatorGenerationInputs> {
   @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
@@ -403,15 +889,12 @@ model EvaluatorGenerationJob is JobLike<
   @visibility(Lifecycle.Read)
   usage?: EvaluatorGenerationTokenUsage;
 
-  @doc("Non-fatal input-quality advisories produced by the generation pipeline. Read-only; service-generated; populated only on terminal jobs when advisories fired. Omitted when generation was clean. Cleared when a subsequent `PATCH` to the paired `EvaluatorVersion.definition` invalidates the advisories.")
+  @doc("Non-fatal input-quality advisories produced by the generation pipeline. Read-only; service-generated; populated only on terminal jobs when advisories fired and omitted when generation was clean.")
   @visibility(Lifecycle.Read)
   input_quality_warnings?: RubricGenerationInputQualityWarning[];
 }
 
-@doc("Evaluator Definition")
-@resource("evaluators")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model EvaluatorVersion {
+alias EvaluatorProperties = {
   @doc("Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique.")
   display_name?: string;
 
@@ -425,24 +908,29 @@ model EvaluatorVersion {
   @doc("The categories of the evaluator")
   categories: EvaluatorCategory[];
 
-  @doc("Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `[\"turn\"]`. On update, omitting this field leaves it unchanged; an empty list is rejected. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).")
+  @doc("Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `[\"turn\"]`. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   supported_evaluation_levels?: EvaluationLevel[] = #[EvaluationLevel.turn];
 
-  @doc("Definition of the evaluator")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The evaluator's functional definition. Current evaluator state is mutable under ETag concurrency; the definition is immutable after publication in an EvaluatorVersion.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   definition: EvaluatorDefinition;
 
-  @doc("Provenance artifacts from the generation pipeline. Read-only; present only on evaluator versions created via an EvaluatorGenerationJob. Each artifact resolves to a versioned Foundry Dataset.")
+  @doc("Provenance artifacts from the generation pipeline. Read-only; present on generated current state and copied into published versions. Each artifact resolves to a versioned Foundry Dataset.")
   @visibility(Lifecycle.Read)
   generation_artifacts?: EvaluatorGenerationArtifacts;
 
-  @doc("Read-only provenance link back to the EvaluatorGenerationJob that produced this version. Present only on evaluator versions created via the generation pipeline; absent for manually-created versions and unaffected by subsequent `PATCH` calls.")
+  @doc("Read-only provenance link back to the EvaluatorGenerationJob that produced this content. Absent for manually-authored content.")
   @visibility(Lifecycle.Read)
   generation_job_id?: string;
 
-  @doc("Categories of warnings surfaced on this generated evaluator version. Present only on versions created via an EvaluatorGenerationJob when the paired job produced non-empty warnings. Absent (treat as no warnings) when the version is not from generation, when the paired job was clean, or when a subsequent `PATCH` to `definition` cleared the paired job's advisories. Follow `generation_job_id` to fetch the detailed warning payloads.")
+  @doc("Categories of warnings surfaced on generated evaluator content. Present when the paired generation job produced non-empty warnings. Follow `generation_job_id` to fetch detailed warning payloads.")
   @visibility(Lifecycle.Read)
   warnings?: GenerationWarningType[];
+
+  @doc("The stable lowercase 64-character SHA-256 digest of the canonical functional evaluator content. Equal values indicate canonical functional-content equality, not semantic equivalence. Catalog metadata is excluded. This value is not an HTTP ETag or authenticity proof.")
+  @visibility(Lifecycle.Read)
+  content_hash: Sha256Hash;
 
   @visibility(Lifecycle.Read)
   @doc("Creator of the evaluator")
@@ -456,7 +944,47 @@ model EvaluatorVersion {
   @doc("Last modified date/time of the evaluator")
   modified_at: string;
 
-  ...AssetBase;
+  @doc("The evaluator catalog description.")
+  description?: string;
+
+  @doc("Evaluator catalog tags.")
+  tags?: Record<string>;
+};
+
+@doc("The mutable unnumbered current evaluator state.")
+@resource("evaluators")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model Evaluator {
+  ...EvaluatorProperties;
+
+  @doc("The evaluator resource identifier.")
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  @doc("The evaluator name.")
+  @visibility(Lifecycle.Read)
+  @key
+  name: string;
+
+  ...Azure.Core.EtagProperty;
+}
+
+@doc("An immutable published evaluator version.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorVersion {
+  ...EvaluatorProperties;
+
+  @doc("The published evaluator version resource identifier.")
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  @doc("The evaluator name.")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("The immutable published version number.")
+  @visibility(Lifecycle.Read)
+  version: EvaluatorVersionNumber;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
