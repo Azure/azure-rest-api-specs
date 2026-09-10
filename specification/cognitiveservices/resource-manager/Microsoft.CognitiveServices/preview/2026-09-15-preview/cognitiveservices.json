@@ -962,6 +962,9 @@
           },
           "Get Usages Global Scope": {
             "$ref": "./examples/ListUsagesGlobalScope.json"
+          },
+          "Get Usages With Resource Metadata": {
+            "$ref": "./examples/ListUsagesWithResourceMetadata.json"
           }
         },
         "x-ms-pageable": {
@@ -22395,6 +22398,16 @@
       "type": "object",
       "description": "The usage data for a usage request.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the usage. Ex - /subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/usages/{usageName}",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the usage resource. E.g. \"Microsoft.CognitiveServices/locations/usages\"",
+          "readOnly": true
+        },
         "unit": {
           "$ref": "#/definitions/UnitType",
           "description": "The unit of the metric."
