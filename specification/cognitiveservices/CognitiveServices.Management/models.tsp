@@ -6306,6 +6306,7 @@ model AdapterDeploymentProperties {
    * The service validates LoRA weight type, protected status, provenance,
    * compatibility metadata, and registration state.
    */
+  @pattern("^azureai://accounts/[^/]+/projects/[^/]+/models/[^/]+/versions/[^/]+$")
   sourceModelId: string;
 
   /**
@@ -6375,121 +6376,6 @@ union AdapterDeploymentOperationState {
 }
 
 /**
- * Rollback outcomes for a failed re-target operation.
- */
-@added(Versions.v2026_09_15_preview)
-union AdapterDeploymentRollbackResult {
-  string,
-
-  /** No rollback was required. */
-  NotRequired: "NotRequired",
-
-  /** Rollback completed successfully. */
-  Succeeded: "Succeeded",
-
-  /** Rollback failed. */
-  Failed: "Failed",
-}
-
-/**
- * Domain error codes returned by adapter deployment operations.
- */
-@added(Versions.v2026_09_15_preview)
-union AdapterDeploymentErrorCode {
-  string,
-
-  /** The adapter source is invalid. */
-  InvalidAdapterSource: "InvalidAdapterSource",
-
-  /** The adapter format is unsupported. */
-  AdapterFormatNotSupported: "AdapterFormatNotSupported",
-
-  /** The base-model provenance is missing. */
-  BaseModelProvenanceMissing: "BaseModelProvenanceMissing",
-
-  /** The source and target base models do not match. */
-  BaseModelMismatch: "BaseModelMismatch",
-
-  /** The target deployment is invalid. */
-  InvalidTargetDeployment: "InvalidTargetDeployment",
-
-  /** The adapter deployment name is invalid. */
-  InvalidAdapterDeploymentName: "InvalidAdapterDeploymentName",
-
-  /** The source model was not found. */
-  ModelNotFound: "ModelNotFound",
-
-  /** The adapter deployment was not found. */
-  AdapterDeploymentNotFound: "AdapterDeploymentNotFound",
-
-  /** The target deployment is not ready. */
-  TargetDeploymentNotReady: "TargetDeploymentNotReady",
-
-  /** The adapter deployment already exists. */
-  AdapterDeploymentAlreadyExists: "AdapterDeploymentAlreadyExists",
-
-  /** Adapter deployments prevent the requested parent operation. */
-  AdapterDeploymentsExist: "AdapterDeploymentsExist",
-
-  /** The adapter source is already in use. */
-  AdapterDeploymentSourceInUse: "AdapterDeploymentSourceInUse",
-
-  /** The target deployment's adapter limit was exceeded. */
-  AdapterLimitExceeded: "AdapterLimitExceeded",
-
-  /** A conditional request precondition failed. */
-  PreconditionFailed: "PreconditionFailed",
-
-  /** Loading the adapter failed. */
-  AdapterLoadFailed: "AdapterLoadFailed",
-
-  /** Rolling back the adapter failed. */
-  AdapterRollbackFailed: "AdapterRollbackFailed",
-
-  /** Replica convergence timed out. */
-  ConvergenceTimedOut: "ConvergenceTimedOut",
-
-  /** Request draining timed out. */
-  DrainTimedOut: "DrainTimedOut",
-
-  /** Security policy revoked the adapter. */
-  AdapterRevoked: "AdapterRevoked",
-
-  /** The request rate is too high. */
-  TooManyRequests: "TooManyRequests",
-
-  /** The service is temporarily unavailable. */
-  ServiceUnavailable: "ServiceUnavailable",
-}
-
-/**
- * Safe domain error details returned for adapter deployment failures.
- */
-@added(Versions.v2026_09_15_preview)
-model AdapterDeploymentErrorDetail {
-  /**
-   * Stable machine-readable error code.
-   */
-  code: AdapterDeploymentErrorCode;
-
-  /**
-   * Safe customer-facing error message.
-   */
-  message: string;
-
-  /**
-   * Request property or resource targeted by the error.
-   */
-  target?: string;
-
-  /**
-   * Nested safe error details.
-   */
-  @identifiers(#["code", "target"])
-  details?: AdapterDeploymentErrorDetail[];
-}
-
-/**
  * The most recently requested adapter lifecycle operation.
  */
 @added(Versions.v2026_09_15_preview)
@@ -6510,11 +6396,6 @@ model AdapterDeploymentLastOperation {
   requestedTargetDeploymentName?: string;
 
   /**
-   * A safe identifier used to correlate logs and support requests.
-   */
-  correlationId: string;
-
-  /**
    * The time at which the operation started.
    */
   startedAt: utcDateTime;
@@ -6523,16 +6404,6 @@ model AdapterDeploymentLastOperation {
    * The time at which the operation reached a terminal state.
    */
   completedAt?: utcDateTime;
-
-  /**
-   * The rollback result when a re-target operation does not complete.
-   */
-  rollbackResult?: AdapterDeploymentRollbackResult;
-
-  /**
-   * Safe error details when the operation failed.
-   */
-  error?: AdapterDeploymentErrorDetail;
 }
 
 /**

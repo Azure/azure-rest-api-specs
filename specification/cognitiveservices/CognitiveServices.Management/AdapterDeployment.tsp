@@ -30,31 +30,11 @@ model AdapterDeployment
   >;
 
   /**
-   * Resource tags used for organization and governance.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The account child supports independent tags."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags are extensible key-value pairs."
-  tags?: Record<string>;
-
-  /**
    * The concurrency token for this adapter deployment.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Cognitive Services uses the lowercase etag envelope property."
   @visibility(Lifecycle.Read)
   etag?: string;
-}
-
-/**
- * Parameters used to filter adapter deployments.
- */
-@added(Versions.v2026_09_15_preview)
-model AdapterDeploymentListParameters {
-  /**
-   * Filters by target deployment, source model version, provisioning state,
-   * or a supported conjunction of those predicates.
-   */
-  @query("$filter")
-  filter?: string;
 }
 
 /**
@@ -142,7 +122,6 @@ interface AdapterDeployments {
    */
   list is ArmResourceListByParent<
     AdapterDeployment,
-    Parameters = AdapterDeploymentListParameters,
     Response = ArmResponse<AdapterDeploymentListResult>
   >;
 
