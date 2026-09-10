@@ -28,7 +28,7 @@ model TriageRecommendation
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Compatibility: preserves the legacy triage recommendation parameter and provider path shape in API versions 2025-05-01-preview and 2026-02-01-preview; changing it would alter the TriageRecommendationOps interface."
 @removed(Versions.v2026_03_01_preview)
 interface TriageRecommendationOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -53,17 +53,17 @@ interface TriageRecommendationOps
       }
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Compatibility: preserves the legacy triage recommendation operation and action route shapes in API versions 2025-05-01-preview and 2026-02-01-preview; changing it would alter the TriageRecommendations interface."
 @removed(Versions.v2026_03_01_preview)
 interface TriageRecommendations {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Compatibility: preserves the legacy GET triage recommendation wire shape in API versions 2025-05-01-preview and 2026-02-01-preview; changing it would alter the triageRecommendations_Get operation."
   #deprecated "This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation."
   @doc("Deprecated: This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation.")
   @summary("Get an existing recommendation by id for an existing Resiliency Review Id.")
   @operationId("triageRecommendations_Get")
   get is TriageRecommendationOps.Read<TriageRecommendation>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Compatibility: preserves the legacy list triage recommendations wire shape in API versions 2025-05-01-preview and 2026-02-01-preview; changing it would alter the triageRecommendations_List operation."
   #deprecated "This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation."
   @doc("Deprecated: This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation.")
   @summary("Get list of recommendations for an existing Resiliency Review Id.")
@@ -87,7 +87,7 @@ interface TriageRecommendations {
     Response = ArmResponse<TriageRecommendationCollection>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Compatibility: preserves the legacy approve action wire shape in API versions 2025-05-01-preview and 2026-02-01-preview; changing it would alter the triageRecommendations_ApproveTriageRecommendation operation."
   #deprecated "This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation."
   @doc("Deprecated: This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation.")
   @summary("Approve triage recommendation by id.")
@@ -99,7 +99,7 @@ interface TriageRecommendations {
     OkResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Compatibility: preserves the legacy reject action wire shape in API versions 2025-05-01-preview and 2026-02-01-preview; changing it would alter the triageRecommendations_RejectTriageRecommendation operation."
   #deprecated "This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation."
   @doc("Deprecated: This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation.")
   @summary("Reject existing triage recommendation by id.")
@@ -111,7 +111,7 @@ interface TriageRecommendations {
     OkResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Compatibility: preserves the legacy reset action wire shape in API versions 2025-05-01-preview and 2026-02-01-preview; changing it would alter the triageRecommendations_ResetTriageRecommendation operation."
   #deprecated "This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation."
   @doc("Deprecated: This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation.")
   @summary("Reset existing triage recommendation by id.")
