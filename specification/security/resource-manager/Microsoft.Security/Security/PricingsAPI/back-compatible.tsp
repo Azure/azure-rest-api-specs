@@ -9,5 +9,7 @@ using Common;
 @@Legacy.flattenProperty(CloudError.error);
 
 @@clientName(Pricings.update::parameters.resource, "pricing");
+@@clientName(Code, "code");
+@@clientName(OriginatedFrom, "originatedFrom");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Pricing.properties);
