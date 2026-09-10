@@ -26,18 +26,6 @@ namespace Azure.AI.Projects {
     Azure.AI.Projects.AgentSessionFiles.deleteSessionFile,
     Agents
   );
-  // Keep Voice Agent telephony management on the existing Agents sub-client.
-  @@clientLocation(AgentTelephony.createTelephonyBinding, Agents);
-  @@clientLocation(AgentTelephony.listTelephonyBindings, Agents);
-  @@clientLocation(AgentTelephony.getTelephonyBinding, Agents);
-  @@clientLocation(AgentTelephony.updateTelephonyBinding, Agents);
-  @@clientLocation(AgentTelephony.deleteTelephonyBinding, Agents);
-  @@clientLocation(AgentTelephony.listTelephonyCalls, Agents);
-  @@clientLocation(AgentTelephony.getTelephonyCall, Agents);
-  @@clientLocation(AgentTelephony.transferTelephonyCall, Agents);
-  @@clientLocation(AgentTelephony.endTelephonyCall, Agents);
-  @@clientLocation(AgentTelephony.getTelephonyTransferTargets, Agents);
-  @@clientLocation(AgentTelephony.replaceTelephonyTransferTargets, Agents);
   @@clientLocation(
     Azure.AI.Projects.Microsoft365Publishing.publishAgentToMicrosoft365,
     Agents
@@ -90,60 +78,159 @@ namespace Azure.AI.Projects.Beta {
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.cancel, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.delete, Agents);
+  // Keep Voice Agent telephony management on the existing Agents sub-client.
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.createTelephonyBinding,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.listTelephonyBindings,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.getTelephonyBinding,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.updateTelephonyBinding,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.deleteTelephonyBinding,
+    Agents
+  );
+  @@clientLocation(Azure.AI.Projects.AgentTelephony.listTelephonyCalls, Agents);
+  @@clientLocation(Azure.AI.Projects.AgentTelephony.getTelephonyCall, Agents);
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.transferTelephonyCall,
+    Agents
+  );
+  @@clientLocation(Azure.AI.Projects.AgentTelephony.endTelephonyCall, Agents);
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.getTelephonyTransferTargets,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.replaceTelephonyTransferTargets,
+    Agents
+  );
+  @@clientLocation(Azure.AI.Projects.Agents.generateAgent, Agents);
 
-  // interface VoiceAgentWebSocket {}
-  // @@clientLocation(
-  //   Azure.AI.Projects.VoiceAgentWebSocket.connectVoiceAgent,
-  //   VoiceAgentWebSocket
-  // );
+  interface AgentTelephony {}
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.createTelephonyCallJob,
+    AgentTelephony
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.getTelephonyCallJob,
+    AgentTelephony
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.cancelTelephonyCallJob,
+    AgentTelephony
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.createTelephonyCampaign,
+    AgentTelephony
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.getTelephonyCampaign,
+    AgentTelephony
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.importTelephonyCampaignRecipients,
+    AgentTelephony
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.getTelephonyCampaignRecipientImport,
+    AgentTelephony
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.validateTelephonyCampaign,
+    AgentTelephony
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.publishTelephonyCampaign,
+    AgentTelephony
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.pauseTelephonyCampaign,
+    AgentTelephony
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.resumeTelephonyCampaign,
+    AgentTelephony
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.cancelTelephonyCampaign,
+    AgentTelephony
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.getTelephonyOperation,
+    AgentTelephony
+  );
 
-  // interface AgentEndpointConversations {}
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.listAgentConversations,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.getAgentConversation,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.deleteAgentConversation,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.listAgentConversationResponses,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.getAgentConversationResponse,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.listAgentConversationResponseItems,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.listAgentConversationItems,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItem,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemAudio,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemAudioContent,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.getAgentConversationAudio,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.getAgentConversationAudioContent,
-  //   AgentEndpointConversations
-  // );
+  interface VoiceAgentWebSocket {}
+  @@clientLocation(
+    Azure.AI.Projects.VoiceAgentWebSocket.connectVoiceAgent,
+    VoiceAgentWebSocket
+  );
+
+  interface AgentEndpointConversations {}
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.listAgentConversations,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversation,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.deleteAgentConversation,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationResponses,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationResponse,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationResponseItems,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationItems,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItem,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemAudio,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemAudioContent,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationAudio,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationAudioContent,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemGeneratedAudioContent,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemGeneratedAudio,
+    AgentEndpointConversations
+  );
 }
