@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.AzureFleet",
-    "version": "2026-06-01-preview",
+    "version": "2026-08-01",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -1394,10 +1394,6 @@
         "capacityType": {
           "$ref": "#/definitions/CapacityType",
           "description": "Specifies capacity type for Fleet Regular and Spot priority profiles.\ncapacityType is an immutable property. Once set during Fleet creation, it cannot be updated.\nSpecifying different capacity type for Fleet Regular and Spot priority profiles is not allowed."
-        },
-        "zoneAllocationPolicy": {
-          "$ref": "#/definitions/ZoneAllocationPolicy",
-          "description": "Zone Allocation Policy for Fleet."
         }
       },
       "required": [
@@ -3814,27 +3810,6 @@
           }
         ]
       }
-    },
-    "ZoneAllocationPolicy": {
-      "type": "object",
-      "description": "ZoneAllocationPolicy for Compute Fleet.",
-      "properties": {
-        "distributionStrategy": {
-          "$ref": "#/definitions/ZoneDistributionStrategy",
-          "description": "Distribution strategy used for zone allocation policy."
-        },
-        "zonePreferences": {
-          "type": "array",
-          "description": "Zone preferences, required when zone distribution strategy is Prioritized.",
-          "items": {
-            "$ref": "#/definitions/ZonePreference"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "distributionStrategy"
-      ]
     },
     "ZoneDistributionStrategy": {
       "type": "string",
