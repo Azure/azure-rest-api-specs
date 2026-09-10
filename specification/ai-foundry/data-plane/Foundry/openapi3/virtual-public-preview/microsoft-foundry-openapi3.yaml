@@ -45843,6 +45843,7 @@ components:
         - id
         - name
         - state
+        - configuration_state
         - versions
       properties:
         object:
@@ -45860,6 +45861,10 @@ components:
         state:
           $ref: '#/components/schemas/AgentState'
           description: The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.
+          readOnly: true
+        configuration_state:
+          $ref: '#/components/schemas/AgentState'
+          description: The administrative configuration state of the agent. This reflects whether the agent was explicitly enabled or disabled, independently of identity-derived operational state.
           readOnly: true
         state_source:
           $ref: '#/components/schemas/AgentStateSource'
