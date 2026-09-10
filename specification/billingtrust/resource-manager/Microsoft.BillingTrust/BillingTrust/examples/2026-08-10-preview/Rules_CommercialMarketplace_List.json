@@ -1,0 +1,150 @@
+{
+  "operationId": "Rules_List",
+  "title": "List all rules for a CommercialMarketplace assessment with expanded customer data ($expandCustomerData)",
+  "parameters": {
+    "resourceUri": "providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31",
+    "assessmentName": "CommercialMarketplace",
+    "api-version": "2026-08-10-preview",
+    "$expandCustomerData": true
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31/providers/Microsoft.BillingTrust/assessments/CommercialMarketplace/rules/Verify_LegalContact",
+            "name": "Verify_LegalContact",
+            "type": "Microsoft.BillingTrust/assessments/rules",
+            "properties": {
+              "kind": "legalContactVerification",
+              "evaluationState": "succeeded",
+              "provisioningState": "Succeeded",
+              "legalContact": {
+                "firstName": "Adele",
+                "middleName": "V",
+                "lastName": "Vance",
+                "email": "adele.vance@contoso.com",
+                "phoneNumber": "+1 425 555 0100",
+                "emailVerificationStatus": "verified"
+              }
+            },
+            "systemData": {
+              "createdBy": "payee-admin@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-03-17T10:00:00.000Z",
+              "lastModifiedBy": "payee-admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-03-17T10:20:00.000Z"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31/providers/Microsoft.BillingTrust/assessments/CommercialMarketplace/rules/Verify_Business",
+            "name": "Verify_Business",
+            "type": "Microsoft.BillingTrust/assessments/rules",
+            "properties": {
+              "kind": "businessVerification",
+              "evaluationState": "succeeded",
+              "provisioningState": "Succeeded",
+              "soldTo": {
+                "companyName": "Contoso Ltd.",
+                "addressLine1": "1 Microsoft Way",
+                "city": "Redmond",
+                "region": "WA",
+                "postalCode": "98052",
+                "country": "US",
+                "email": "ap@contoso.com",
+                "phoneNumber": "+1 425 555 0100",
+                "isValidAddress": true,
+                "emailVerificationDetails": {
+                  "verificationStatus": "verified",
+                  "verificationDate": "2026-03-10T14:22:05.000Z"
+                }
+              },
+              "legalContact": {
+                "firstName": "Adele",
+                "middleName": "V",
+                "lastName": "Vance",
+                "email": "adele.vance@contoso.com",
+                "phoneNumber": "+1 425 555 0100",
+                "emailVerificationStatus": "verified"
+              },
+              "registrationNumber": {
+                "type": [
+                  "EIN"
+                ],
+                "id": "12-3456789",
+                "required": true
+              },
+              "taxIds": [
+                {
+                  "id": "12-3456789",
+                  "type": "EIN",
+                  "country": "US",
+                  "scope": "Federal",
+                  "status": "valid"
+                },
+                {
+                  "id": "DE811234567",
+                  "type": "VatId",
+                  "country": "DE",
+                  "scope": "Billing",
+                  "status": "valid"
+                }
+              ],
+              "externalId": {
+                "type": "DUNS",
+                "id": "150483782"
+              }
+            },
+            "systemData": {
+              "createdBy": "payee-admin@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-03-17T10:00:00.000Z",
+              "lastModifiedBy": "payee-admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-03-17T10:20:00.000Z"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31/providers/Microsoft.BillingTrust/assessments/CommercialMarketplace/rules/Verify_Credential",
+            "name": "Verify_Credential",
+            "type": "Microsoft.BillingTrust/assessments/rules",
+            "properties": {
+              "kind": "verifiedCredential",
+              "evaluationState": "actionRequired",
+              "provisioningState": "Succeeded",
+              "verificationLink": "https://verification.microsoft.com/present?requestId=70000000-0000-0000-0000-000000000000"
+            },
+            "systemData": {
+              "createdBy": "payee-admin@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-03-17T10:00:00.000Z",
+              "lastModifiedBy": "payee-admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-03-17T10:20:00.000Z"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31/providers/Microsoft.BillingTrust/assessments/CommercialMarketplace/rules/Verify_Domain",
+            "name": "Verify_Domain",
+            "type": "Microsoft.BillingTrust/assessments/rules",
+            "properties": {
+              "kind": "domainVerification",
+              "evaluationState": "succeeded",
+              "provisioningState": "Succeeded",
+              "domain": "contoso.com"
+            },
+            "systemData": {
+              "createdBy": "payee-admin@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-03-17T10:00:00.000Z",
+              "lastModifiedBy": "payee-admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-03-17T10:20:00.000Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

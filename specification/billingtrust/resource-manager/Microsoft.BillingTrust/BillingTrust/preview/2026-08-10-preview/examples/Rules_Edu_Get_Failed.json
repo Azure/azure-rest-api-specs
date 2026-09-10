@@ -1,0 +1,45 @@
+{
+  "operationId": "Rules_Get",
+  "title": "Get an eduQualification rule in the failed state (TenantIneligible; error code only, customer data redacted)",
+  "parameters": {
+    "resourceUri": "providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31",
+    "assessmentName": "Edu",
+    "ruleName": "Qualify_Edu",
+    "api-version": "2026-08-10-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31/providers/Microsoft.BillingTrust/assessments/Edu/rules/Qualify_Edu",
+        "name": "Qualify_Edu",
+        "type": "Microsoft.BillingTrust/assessments/rules",
+        "properties": {
+          "kind": "eduQualification",
+          "evaluationState": "failed",
+          "provisioningState": "Succeeded",
+          "error": {
+            "code": "TenantIneligible"
+          },
+          "domains": [
+            {
+              "domainNames": [],
+              "tenantId": "20000000-0000-0000-0000-000000000000",
+              "state": "failed",
+              "error": {
+                "code": "TenantIneligible"
+              }
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "edu-admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-17T10:00:00.000Z",
+          "lastModifiedBy": "edu-admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-17T10:20:00.000Z"
+        }
+      }
+    }
+  }
+}
