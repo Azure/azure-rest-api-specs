@@ -16,6 +16,7 @@ namespace Azure.AI.Projects {
     bing_custom_search_preview: "bing_custom_search_preview",
     browser_automation_preview: "browser_automation_preview",
     fabric_dataagent_preview: "fabric_dataagent_preview",
+    knowledge_base_preview: "knowledge_base_preview",
     sharepoint_grounding_preview: "sharepoint_grounding_preview",
     memory_search_preview: "memory_search_preview",
     work_iq_preview: "work_iq_preview",
@@ -31,7 +32,6 @@ namespace Azure.AI.Projects {
     azure_function: "azure_function",
     bing_grounding: "bing_grounding",
     capture_structured_outputs: "capture_structured_outputs",
-    knowledge_base: "knowledge_base",
     openapi: "openapi",
 
     @removed(Versions.v1)
@@ -199,9 +199,9 @@ namespace Azure.AI.Projects {
    */
   model KnowledgeBaseTool extends OpenAI.Tool {
     /**
-     * The object type, which is always 'knowledge_base'.
+     * The object type, which is always 'knowledge_base_preview'.
      */
-    type: "knowledge_base";
+    type: "knowledge_base_preview";
 
     /**
      * The knowledge base tool parameters.
