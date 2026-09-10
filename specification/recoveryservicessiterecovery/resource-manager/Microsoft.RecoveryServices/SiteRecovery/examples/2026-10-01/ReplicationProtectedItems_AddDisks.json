@@ -11,7 +11,11 @@
               "recoveryResourceGroupId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/recoveryResource",
               "recoveryNetworkAccessPolicy": "AllowPrivate",
               "recoveryDiskAccessId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/recoveryResource/providers/Microsoft.Compute/diskAccesses/recoveryDiskAccess",
-              "recoveryPublicNetworkAccess": "Disabled"
+              "recoveryPublicNetworkAccess": "Disabled",
+              "confidentialDiskEncryptionInfo": {
+                "recoveryReplicaConfidentialDiskEncryptionSetId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/recoveryResource/providers/Microsoft.Compute/diskEncryptionSets/cvm-replica-des",
+                "recoveryTargetConfidentialDiskEncryptionSetId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/recoveryResource/providers/Microsoft.Compute/diskEncryptionSets/cvm-target-des"
+              }
             }
           ]
         }
@@ -58,7 +62,20 @@
           "protectionState": "Protected",
           "protectionStateDescription": "Protected",
           "providerSpecificDetails": {
-            "instanceType": "A2A"
+            "instanceType": "A2A",
+            "recoveryConfidentialDataDiskEncryptionIdentity": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/recoveryResource/providers/Microsoft.ManagedIdentity/userAssignedIdentities/cvm-cdde-uami",
+            "protectedManagedDisks": [
+              {
+                "diskId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/primaryResource/providers/Microsoft.Compute/disks/datadisk2",
+                "recoveryResourceGroupId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/recoveryResource",
+                "recoveryReplicaDiskAccountType": "Premium_LRS",
+                "recoveryTargetDiskAccountType": "Premium_LRS",
+                "confidentialDiskEncryptionInfo": {
+                  "recoveryReplicaConfidentialDiskEncryptionSetId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/recoveryResource/providers/Microsoft.Compute/diskEncryptionSets/cvm-replica-des",
+                  "recoveryTargetConfidentialDiskEncryptionSetId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/recoveryResource/providers/Microsoft.Compute/diskEncryptionSets/cvm-target-des"
+                }
+              }
+            ]
           },
           "recoveryContainerId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud2/replicationProtectionContainers/cloud_81224fc6-f326-5d35-96de-fbf51efb3188",
           "recoveryFabricFriendlyName": "cloud2",
@@ -82,5 +99,5 @@
     }
   },
   "operationId": "ReplicationProtectedItems_AddDisks",
-  "title": "Add disk(s) for protection."
+  "title": "Adds a confidential data disk to an A2A protected confidential VM."
 }
