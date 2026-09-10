@@ -78,7 +78,7 @@ model DeploymentStacksWhatIfResultProperties {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Conflict with @azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Raised because of [] vs #[], but [] is invalid"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   diagnostics?: DeploymentStacksDiagnostic[];
 }
 
@@ -91,7 +91,7 @@ model DeploymentStacksWhatIfChange {
    * List of resource changes predicted by What-If operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Conflict with @azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
-  @OpenAPI.extension("x-ms-identifiers", #["identifiers", "resourceId"])
+  @identifiers(#["identifiers", "resourceId"])
   resourceChanges: DeploymentStacksWhatIfResourceChange[];
 
   /**
@@ -99,7 +99,6 @@ model DeploymentStacksWhatIfChange {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Conflict with @azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Raised because of [] vs #[], but [] is invalid"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   denySettingsChange: DeploymentStacksChangeDelta<DenySettings>;
 
   /**
@@ -155,7 +154,6 @@ model DeploymentStacksWhatIfResourceChange {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Conflict with @azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Raised because of [] vs #[], but [] is invalid"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   resourceConfigurationChanges?: DeploymentStacksChangeDelta<Record<unknown>>;
 }
 
@@ -209,7 +207,7 @@ model DeploymentStacksChangeDelta<T> {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Conflict with @azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Raised because of [] vs #[], but [] is invalid"
-  @OpenAPI.extension("x-ms-identifiers", #["path"])
+  @identifiers(#["path"])
   delta?: DeploymentStacksWhatIfPropertyChange[];
 }
 
@@ -235,7 +233,7 @@ model DeploymentStacksWhatIfPropertyChange {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Conflict with @azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Raised because of [] vs #[], but [] is invalid"
-  @OpenAPI.extension("x-ms-identifiers", #["path"])
+  @identifiers(#["path"])
   children?: DeploymentStacksWhatIfPropertyChange[];
 }
 
@@ -268,7 +266,7 @@ model DeploymentStacksDiagnostic {
    * Additional error information.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Conflict with @azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   additionalInfo?: ErrorAdditionalInfo[];
 }
 

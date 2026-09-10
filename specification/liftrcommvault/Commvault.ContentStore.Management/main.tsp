@@ -879,14 +879,17 @@ interface ProtectionGroups {
   @doc("Stop Backup for a Protection Group")
   @armResourceAction(ProtectionGroup)
   @post
-  @OpenAPI.extension("x-ms-long-running-operation", true)
   stopBackup(
     ...ResourceInstanceParameters<ProtectionGroup>,
 
     @bodyRoot
     @doc("The body type of the operation request.")
     request: StopBackupProtectionGroupRequest,
-  ): ArmAcceptedLroResponse | ArmNoContentResponse | ErrorResponse;
+  ):
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionGroup> &
+        Azure.Core.Foundations.RetryAfterHeader>
+    | ArmNoContentResponse
+    | ErrorResponse;
 
   @doc("Restore resource for a protected items in given protection group.")
   @armResourceAction(ProtectionGroup)

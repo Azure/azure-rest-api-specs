@@ -1447,7 +1447,7 @@ model VirtualMachineScaleSetExtensionProperties {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Needed to mark as secret without changing format"
   #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-secret' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to the @secret decorator."
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  @OpenAPI.extension("x-ms-secret", true)
+  @secret
   protectedSettings?: Record<unknown>;
 
   /**

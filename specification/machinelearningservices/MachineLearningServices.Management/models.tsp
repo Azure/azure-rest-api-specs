@@ -4001,7 +4001,7 @@ model EstimatedVMPrices {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @summary("List of estimated VM prices.")
   values: EstimatedVMPrice[];
 }
@@ -4256,7 +4256,6 @@ model Compute {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
   provisioningErrors?: ErrorResponse[] | null;
 
   /**
@@ -6515,7 +6514,6 @@ model FeaturestoreEntityVersionProperties extends AssetBase {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   indexColumns?: IndexColumn[] | null;
 
   /**
@@ -7839,7 +7837,6 @@ model RegistryProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   regionDetails?: RegistryRegionArmDetails[] | null;
 }
 
@@ -7864,7 +7861,6 @@ model ManagedResourceGroupSettings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   assignedIdentities?: ManagedResourceGroupAssignedIdentities[] | null;
 }
 
@@ -7979,7 +7975,6 @@ model RegistryRegionArmDetails {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   acrDetails?: AcrDetails[] | null;
 
   /**
@@ -7993,7 +7988,6 @@ model RegistryRegionArmDetails {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   storageAccountDetails?: StorageAccountDetails[] | null;
 }
 
@@ -9310,7 +9304,7 @@ model RaiBlocklistProperties {
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model used as placeholder in API"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@OpenAPI.extension("x-ms-identifiers", #["name"])
+@identifiers(#["name"])
 model RaiBlocklistItemsBulkAddRequest is RaiBlocklistItemBulkRequest[];
 
 /**
@@ -9997,7 +9991,6 @@ model AKSSchemaProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["publicIpAddress"])
   systemServices?: SystemService[] | null;
 
   /**
@@ -10319,7 +10312,6 @@ model AmlComputeProperties {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   @summary("Errors.")
-  @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
   errors?: ErrorResponse[] | null;
 
   /**
@@ -10511,7 +10503,6 @@ model ComputeInstanceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
   customServices?: CustomService[] | null;
 
   /**
@@ -10660,7 +10651,6 @@ model ComputeInstanceProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
   containers?: ComputeInstanceContainer[] | null;
 
   /**
@@ -10669,7 +10659,6 @@ model ComputeInstanceProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dataDisks?: ComputeInstanceDataDisk[] | null;
 
   /**
@@ -10678,7 +10667,6 @@ model ComputeInstanceProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dataMounts?: ComputeInstanceDataMount[] | null;
 
   /**
@@ -10793,7 +10781,6 @@ model OsPatchingStatus {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
   osPatchingErrors?: ErrorResponse[] | null;
 }
 
@@ -12805,7 +12792,6 @@ model TableVerticalFeaturizationSettings extends FeaturizationSettings {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   transformerParams?: Record<ColumnTransformer[] | null> | null;
 }
 
@@ -13110,7 +13096,6 @@ model MonitorEmailNotificationSettings {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   emails?: string[] | null;
 }
 
@@ -13160,7 +13145,6 @@ model MonitoringSignalBase {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   notificationTypes?: MonitoringNotificationType[] | null;
 
   /**
@@ -14040,7 +14024,6 @@ model ImageClassificationBase extends ImageVertical {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   searchSpace?: ImageModelDistributionSettingsClassification[] | null;
 }
 

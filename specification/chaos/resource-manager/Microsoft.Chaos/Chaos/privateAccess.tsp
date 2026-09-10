@@ -74,7 +74,7 @@ interface PrivateAccesses {
   #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-pageable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core paging operations."
   @get
   @action("privateLinkResources")
-  @OpenAPI.extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
+  @list
   privateLinkResources is ArmResourceActionSync<
     PrivateAccess,
     void,

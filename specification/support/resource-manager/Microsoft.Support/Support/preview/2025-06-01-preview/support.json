@@ -611,13 +611,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "problemServiceName",
-            "in": "path",
-            "description": "Name of the Azure service for which the problem classifications need to be retrieved.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z_\\-. ]+$",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/ProblemServiceNameParameter"
           },
           {
             "name": "problemClassificationsClassificationInput",
@@ -1704,13 +1698,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "problemServiceName",
-            "in": "path",
-            "description": "Name of the Azure service for which the problem classifications need to be retrieved.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z_\\-. ]+$",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/ProblemServiceNameParameter"
           },
           {
             "name": "problemClassificationsClassificationInput",
@@ -3645,5 +3633,15 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "ProblemServiceNameParameter": {
+      "name": "problemServiceName",
+      "in": "path",
+      "description": "Name of the Azure service for which the problem classifications need to be retrieved.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9a-zA-Z_\\-. ]+$",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
