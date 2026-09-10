@@ -79,9 +79,15 @@ union ProvisioningStates {
 @added(Versions.v2026_05_01_preview)
 union ElasticSanVersion {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * Version 1 of the Elastic San appliance.
+   */
   V1: "V1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * Version 2 of the Elastic San appliance.
+   */
   V2: "V2",
 }
 
@@ -130,9 +136,15 @@ union AutoScalePolicyEnforcement {
 @added(Versions.v2026_05_01_preview)
 union QualityOfService {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * General purpose tier.
+   */
   GeneralPurpose: "GeneralPurpose",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * Performance critical tier.
+   */
   PerformanceCritical: "PerformanceCritical",
 }
 
@@ -167,7 +179,9 @@ union StorageTargetType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Iscsi: "Iscsi",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /**
+   * Direct attach storage target type.
+   */
   @added(Versions.v2026_05_01_preview)
   DirectAttach: "DirectAttach",
 
