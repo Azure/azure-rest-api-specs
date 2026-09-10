@@ -79,6 +79,9 @@
       "name": "ManagementPolicies"
     },
     {
+      "name": "MetadataPolicies"
+    },
+    {
       "name": "BlobInventoryPolicies"
     },
     {
@@ -6241,6 +6244,164 @@
         "x-ms-examples": {
           "StorageAccountDeleteManagementPolicies": {
             "$ref": "./examples/StorageAccountDeleteManagementPolicy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/metadataPolicies/default": {
+      "get": {
+        "operationId": "MetadataPolicies_Get",
+        "tags": [
+          "MetadataPolicies"
+        ],
+        "description": "Gets the metadata policy associated with the specified storage account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetadataPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetMetadataPolicy": {
+            "$ref": "./examples/StorageAccountGetMetadataPolicy.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MetadataPolicies_CreateOrUpdate",
+        "tags": [
+          "MetadataPolicies"
+        ],
+        "description": "Creates or replaces the metadata policy associated with the specified storage account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetadataPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MetadataPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MetadataPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'MetadataPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MetadataPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateMetadataPolicy": {
+            "$ref": "./examples/StorageAccountCreateOrUpdateMetadataPolicy.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "MetadataPolicies_Delete",
+        "tags": [
+          "MetadataPolicies"
+        ],
+        "description": "Deletes the metadata policy associated with the specified storage account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteMetadataPolicy": {
+            "$ref": "./examples/StorageAccountDeleteMetadataPolicy.json"
           }
         }
       }
@@ -13232,6 +13393,133 @@
           "$ref": "#/definitions/DateAfterCreation",
           "description": "The function to delete the blob version"
         }
+      }
+    },
+    "MetadataPolicy": {
+      "type": "object",
+      "description": "The metadata policy for a storage account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MetadataPolicyProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MetadataPolicyProperties": {
+      "type": "object",
+      "description": "The properties of a storage account metadata policy.",
+      "properties": {
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the metadata policy was last modified.",
+          "readOnly": true
+        },
+        "snapshotPolicy": {
+          "$ref": "#/definitions/MetadataSnapshotPolicy",
+          "description": "The metadata snapshot policy for the storage account."
+        }
+      },
+      "required": [
+        "snapshotPolicy"
+      ]
+    },
+    "MetadataSnapshotPolicy": {
+      "type": "object",
+      "description": "A policy that controls metadata snapshots for a storage account.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The server-assigned metadata snapshot policy name.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/MetadataSnapshotPolicyStatus",
+          "description": "The status of the metadata snapshot policy."
+        },
+        "definition": {
+          "$ref": "#/definitions/MetadataSnapshotPolicyDefinition",
+          "description": "The server-managed metadata snapshot policy definition."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "MetadataSnapshotPolicyDefinition": {
+      "type": "object",
+      "description": "The server-managed definition of a metadata snapshot policy.",
+      "properties": {
+        "refreshFrequency": {
+          "$ref": "#/definitions/MetadataSnapshotRefreshFrequency",
+          "description": "The frequency at which metadata snapshots are refreshed.",
+          "readOnly": true
+        }
+      }
+    },
+    "MetadataSnapshotPolicyStatus": {
+      "type": "string",
+      "description": "The status of a metadata snapshot policy.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "MetadataSnapshotPolicyStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The metadata snapshot policy is disabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The metadata snapshot policy is enabled."
+          }
+        ]
+      }
+    },
+    "MetadataSnapshotRefreshFrequency": {
+      "type": "string",
+      "description": "The frequency at which metadata snapshots are refreshed.",
+      "enum": [
+        "Hourly",
+        "6-Hourly",
+        "Daily",
+        "Weekly"
+      ],
+      "x-ms-enum": {
+        "name": "MetadataSnapshotRefreshFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hourly",
+            "value": "Hourly",
+            "description": "Metadata snapshots are refreshed hourly."
+          },
+          {
+            "name": "SixHourly",
+            "value": "6-Hourly",
+            "description": "Metadata snapshots are refreshed every six hours."
+          },
+          {
+            "name": "Daily",
+            "value": "Daily",
+            "description": "Metadata snapshots are refreshed daily."
+          },
+          {
+            "name": "Weekly",
+            "value": "Weekly",
+            "description": "Metadata snapshots are refreshed weekly."
+          }
+        ]
       }
     },
     "MetricSpecification": {
