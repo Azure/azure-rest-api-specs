@@ -1,0 +1,177 @@
+{
+  "operationId": "PricingBatch_CreateOrUpdate",
+  "title": "Update pricing batch - partial success",
+  "parameters": {
+    "api-version": "2026-07-01",
+    "scopeId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "pricingBatchName": "global",
+    "pricingBatch": {
+      "properties": {
+        "plansConfigurations": [
+          {
+            "planName": "VirtualMachines",
+            "properties": {
+              "pricingTier": "Standard",
+              "subPlan": "P2",
+              "extensions": [
+                {
+                  "name": "AgentlessVmScanning",
+                  "isEnabled": "True"
+                }
+              ]
+            }
+          },
+          {
+            "planName": "SqlServers",
+            "properties": {
+              "pricingTier": "Standard",
+              "extensions": [
+                {
+                  "name": "InvalidExtension",
+                  "isEnabled": "True"
+                }
+              ]
+            }
+          },
+          {
+            "planName": "CloudPosture",
+            "properties": {
+              "pricingTier": "Standard",
+              "extensions": [
+                {
+                  "name": "AgentlessDiscoveryForKubernetes",
+                  "isEnabled": "True"
+                }
+              ],
+              "securityOperatorResourceId": "/providers/Microsoft.Management/managementGroups/ContosoGroup/providers/Microsoft.Security/securityOperators/ContosoOperator"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/batchPricings/global",
+        "name": "global",
+        "type": "Microsoft.Security/batchPricings",
+        "properties": {
+          "plansConfigurations": [
+            {
+              "planName": "VirtualMachines",
+              "properties": {
+                "pricingTier": "Standard",
+                "subPlan": "P2",
+                "extensions": [
+                  {
+                    "name": "AgentlessVmScanning",
+                    "isEnabled": "True"
+                  }
+                ]
+              },
+              "operationStatus": {
+                "code": "Succeeded",
+                "message": "Pricing configuration updated successfully."
+              }
+            },
+            {
+              "planName": "SqlServers",
+              "properties": {
+                "pricingTier": "Standard",
+                "extensions": [
+                  {
+                    "name": "InvalidExtension",
+                    "isEnabled": "True"
+                  }
+                ]
+              },
+              "operationStatus": {
+                "code": "Failed",
+                "message": "Extension 'InvalidExtension' is not supported for plan 'SqlServers'. Supported extensions: [AgentlessVmScanning, FileIntegrityMonitoring]"
+              }
+            },
+            {
+              "planName": "CloudPosture",
+              "properties": {
+                "pricingTier": "Standard",
+                "extensions": [
+                  {
+                    "name": "AgentlessDiscoveryForKubernetes",
+                    "isEnabled": "True"
+                  }
+                ],
+                "securityOperatorResourceId": "/providers/Microsoft.Management/managementGroups/ContosoGroup/providers/Microsoft.Security/securityOperators/ContosoOperator"
+              },
+              "operationStatus": {
+                "code": "Succeeded",
+                "message": "Pricing configuration updated successfully."
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/batchPricings/global",
+        "name": "global",
+        "type": "Microsoft.Security/batchPricings",
+        "properties": {
+          "plansConfigurations": [
+            {
+              "planName": "VirtualMachines",
+              "properties": {
+                "pricingTier": "Standard",
+                "subPlan": "P2",
+                "extensions": [
+                  {
+                    "name": "AgentlessVmScanning",
+                    "isEnabled": "True"
+                  }
+                ]
+              },
+              "operationStatus": {
+                "code": "Succeeded",
+                "message": "Pricing configuration updated successfully."
+              }
+            },
+            {
+              "planName": "SqlServers",
+              "properties": {
+                "pricingTier": "Standard",
+                "extensions": [
+                  {
+                    "name": "InvalidExtension",
+                    "isEnabled": "True"
+                  }
+                ]
+              },
+              "operationStatus": {
+                "code": "Failed",
+                "message": "Extension 'InvalidExtension' is not supported for plan 'SqlServers'. Supported extensions: [AgentlessVmScanning, FileIntegrityMonitoring]"
+              }
+            },
+            {
+              "planName": "CloudPosture",
+              "properties": {
+                "pricingTier": "Standard",
+                "extensions": [
+                  {
+                    "name": "AgentlessDiscoveryForKubernetes",
+                    "isEnabled": "True"
+                  }
+                ],
+                "securityOperatorResourceId": "/providers/Microsoft.Management/managementGroups/ContosoGroup/providers/Microsoft.Security/securityOperators/ContosoOperator"
+              },
+              "operationStatus": {
+                "code": "Succeeded",
+                "message": "Pricing configuration updated successfully."
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
