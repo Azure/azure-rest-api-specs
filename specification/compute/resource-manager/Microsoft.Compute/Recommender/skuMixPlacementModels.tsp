@@ -139,7 +139,7 @@ model SkuMixPlacementCapacityProfile {
   /** The priority of the VMs to allocate. */
   priority: SkuMixPlacementPriority;
 
-  /** Required when priority is Spot. Contains spot-specific configuration. */
+  /** Contains spot-specific configuration. */
   spotPriorityProfile?: SkuMixPlacementSpotPriorityProfile;
 
   /** The allocation strategy for determining the optimal SKU split. */
@@ -153,7 +153,7 @@ model SkuMixPlacementCapacityProfile {
   zoneAllocationPolicy?: SkuMixPlacementZoneAllocationPolicy;
 }
 
-/** Spot priority configuration. Required when priority is Spot. */
+/** Spot priority configuration. */
 @added(Versions.v2026_05_05_preview)
 model SkuMixPlacementSpotPriorityProfile {
   /** Maximum price per VM the customer is willing to pay. Default: -1 (no price restriction). */

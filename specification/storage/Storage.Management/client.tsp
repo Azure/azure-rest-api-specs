@@ -8,6 +8,36 @@ using Azure.Core;
 using TypeSpec.Http;
 using Microsoft.Storage;
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
+@@clientOption(
+  StorageAccount,
+  "resource-rbac-roles",
+  #{
+    StorageAccountBackupContributor: "e5e2a7ff-d759-4cd2-bb51-3152d37e2eb1",
+    StorageAccountContributor: "17d1049b-9a84-46fb-8f53-869881c3d3ab",
+    StorageAccountKeyOperatorServiceRole: "81a9662b-bebf-436f-a333-f67b29880f12",
+    StorageBlobDataContributor: "ba92f5b4-2d11-453d-a403-e96b0029c9fe",
+    StorageBlobDataOwner: "b7e6dc6d-f1e8-4753-8033-0f276bb0955b",
+    StorageBlobDataReader: "2a2b9908-6ea1-4ae2-8e65-a410df84e7d1",
+    StorageBlobDelegator: "db58b8e5-c6ad-4a2a-8342-4190687cbf4a",
+    StorageFileDataPrivilegedContributor: "69566ab7-960f-475b-8e7c-b3118f30c6bd",
+    StorageFileDataPrivilegedReader: "b8eda974-7b85-4f76-af95-65846b26df6d",
+    StorageFileDataSmbShareContributor: "0c867c2a-1d8c-454a-a3db-ab2ea1bdc8bb",
+    StorageFileDataSmbShareElevatedContributor: "a7264617-510b-434b-a828-9731dc254ea7",
+    StorageFileDataSmbShareReader: "aba4ae5f-2193-4029-9191-0cb91df5e314",
+    StorageQueueDataContributor: "974c5e8b-45b9-4653-ba55-5f855dd0fb88",
+    StorageQueueDataMessageProcessor: "8a0f0c08-91a1-4084-bc3d-661d67233fed",
+    StorageQueueDataMessageSender: "c6a89b2d-59bc-44d0-9896-0f6e12d7b80a",
+    StorageQueueDataReader: "19e7f393-937e-4f77-808e-94535e297925",
+    StorageTableDataContributor: "0a9a7e1f-b9d0-4cc4-a60d-0319b160aaa3",
+    StorageTableDataReader: "76199698-9eea-4c19-bc75-cec21354c6b6",
+    ClassicStorageAccountContributor: "86e8f5dc-a6e9-4c67-9d15-de283e8eac25",
+    ClassicStorageAccountKeyOperatorServiceRole: "985d6b00-f706-48f5-a6fe-d0ca12fb668d",
+  },
+  "csharp"
+);
+
 @@clientName(ProvisioningState, "StorageAccountProvisioningState", "csharp");
 @@clientName(
   Azure.ResourceManager.CommonTypes.Resource,
@@ -959,6 +989,7 @@ namespace Azure.ResourceManager.Models {
 // @@alternateType decorators for C# backward compat types
 @@alternateType(ResourceAccessRule.resourceId, armResourceIdentifier, "csharp");
 @@alternateType(VirtualNetworkRule.id, armResourceIdentifier, "csharp");
+@@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
 @@alternateType(ResourceAccessRule.tenantId, uuid, "csharp");
 @@alternateType(ActiveDirectoryProperties.domainGuid, uuid, "csharp");
 @@alternateType(EncryptionScopeKeyVaultProperties.keyUri, url, "csharp");
