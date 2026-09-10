@@ -124,7 +124,7 @@ model AuthenticationProviderProperties {
 
   /** The absolute HTTPS Key Vault secret URL identifying the client secret used for authentication. This property is required for user sign-in policies. It holds only the Key Vault reference; the secret value itself is never accepted or returned by this API and is read from Key Vault at runtime using the resource's user-assigned identity. The secret value stored in Key Vault can contain up to 4096 characters. Example: https://myvault.vault.azure.net/secrets/mysecret */
   @pattern("^[Hh][Tt][Tt][Pp][Ss]://")
-  clientSecretUrl?: url;
+  clientSecretUri?: url;
 
   /** The scopes used by an application during authentication to authorize access to a user's details. A maximum of 10 scopes is supported, each scope can contain up to 128 characters, and all scopes can contain up to 256 characters combined. */
   @maxItems(10)
