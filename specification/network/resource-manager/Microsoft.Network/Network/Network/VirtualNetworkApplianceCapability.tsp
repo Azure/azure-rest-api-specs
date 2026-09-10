@@ -48,7 +48,7 @@ model VirtualNetworkApplianceCapability extends Azure.ResourceManager.ProxyResou
  * supported on a dual-stack appliance.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This repo's tspconfig.yaml routes emitted schemas to per-feature output files (output-splitting: legacy-feature-files) keyed on Azure.ResourceManager.Legacy.feature; without this decorator on the subtype itself, its schema is emitted into the shared common.json file instead of virtualNetworkAppliance.json, which was verified empirically by removing the decorator and recompiling."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The model name intentionally mirrors the wire-level x-ms-discriminator-value 'PLGatewayFastpath', which is the deployed Network Resource Provider's `kind` string; renaming the TypeSpec model to a differently-cased name would desynchronize the model name from the discriminator value it represents and confuse code generation for consumers that map model name to kind."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The model name intentionally mirrors the wire-level x-ms-discriminator-value 'PLGatewayFastpath', which is the deployed Network Resource Provider's `kind` string; renaming the TypeSpec model to a differently-cased name would decouple the model name from the discriminator value it represents and confuse code generation for consumers that map model name to kind."
 @added(Versions.v2026_03_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 model PLGatewayFastpathCapability extends VirtualNetworkApplianceCapability {
@@ -63,7 +63,7 @@ model PLGatewayFastpathCapability extends VirtualNetworkApplianceCapability {
  * IPv6 on a dual-stack appliance.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This repo's tspconfig.yaml routes emitted schemas to per-feature output files (output-splitting: legacy-feature-files) keyed on Azure.ResourceManager.Legacy.feature; without this decorator on the subtype itself, its schema would be emitted into the shared common.json file instead of virtualNetworkAppliance.json."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The model name intentionally mirrors the wire-level x-ms-discriminator-value 'PLGateway', which is the deployed Network Resource Provider's `kind` string; renaming the TypeSpec model to a differently-cased name would desynchronize the model name from the discriminator value it represents and confuse code generation for consumers that map model name to kind."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The model name intentionally mirrors the wire-level x-ms-discriminator-value 'PLGateway', which is the deployed Network Resource Provider's `kind` string; renaming the TypeSpec model to a differently-cased name would decouple the model name from the discriminator value it represents and confuse code generation for consumers that map model name to kind."
 @added(Versions.v2026_03_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 model PLGatewayCapability extends VirtualNetworkApplianceCapability {
@@ -78,7 +78,7 @@ model PLGatewayCapability extends VirtualNetworkApplianceCapability {
  * IPv6 on a dual-stack appliance.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This repo's tspconfig.yaml routes emitted schemas to per-feature output files (output-splitting: legacy-feature-files) keyed on Azure.ResourceManager.Legacy.feature; without this decorator on the subtype itself, its schema would be emitted into the shared common.json file instead of virtualNetworkAppliance.json."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The model name intentionally mirrors the wire-level x-ms-discriminator-value 'PLIPForwarders', which is the deployed Network Resource Provider's `kind` string; renaming the TypeSpec model to a differently-cased name would desynchronize the model name from the discriminator value it represents and confuse code generation for consumers that map model name to kind."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The model name intentionally mirrors the wire-level x-ms-discriminator-value 'PLIPForwarders', which is the deployed Network Resource Provider's `kind` string; renaming the TypeSpec model to a differently-cased name would decouple the model name from the discriminator value it represents and confuse code generation for consumers that map model name to kind."
 @added(Versions.v2026_03_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 model PLIPForwardersCapability extends VirtualNetworkApplianceCapability {
@@ -155,7 +155,7 @@ union VirtualNetworkApplianceCapabilityIpVersion {
   string,
 
   /**
-   * IPv6.
+   * Single stack IPv6 only.
    */
   IPv6: "IPv6",
 
