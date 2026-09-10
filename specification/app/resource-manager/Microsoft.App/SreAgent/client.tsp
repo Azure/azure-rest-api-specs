@@ -71,3 +71,9 @@ using Microsoft.App;
   "LastPolicyPropagationOn",
   "csharp"
 );
+@@alternateType(AgentSpaceProperties.serviceTreeId, Azure.Core.uuid, "csharp");
+@@alternateType(
+  AgentSpacePatchProperties.serviceTreeId,
+  Azure.Core.uuid,
+  "csharp"
+);
