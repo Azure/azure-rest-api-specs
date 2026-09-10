@@ -57,15 +57,15 @@ interface TriageRecommendationOps
 @removed(Versions.v2026_03_01_preview)
 interface TriageRecommendations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #deprecated "This operation is deprecated. Use API version 2026-03-01-preview or later."
-  @doc("Deprecated: Get an existing recommendation by id for an existing Azure Advisor Resiliency Review Id. Use API version 2026-03-01-preview or later.")
+  #deprecated "This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation."
+  @doc("Deprecated: This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation.")
   @summary("Get an existing recommendation by id for an existing Resiliency Review Id.")
   @operationId("triageRecommendations_Get")
   get is TriageRecommendationOps.Read<TriageRecommendation>;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #deprecated "This operation is deprecated. Use API version 2026-03-01-preview or later."
-  @doc("Deprecated: Get list of recommendations for an existing Azure Advisor Resiliency Review Id. Use API version 2026-03-01-preview or later.")
+  #deprecated "This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation."
+  @doc("Deprecated: This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation.")
   @summary("Get list of recommendations for an existing Resiliency Review Id.")
   @segment("providers/Microsoft.Advisor/triageRecommendations")
   @operationId("triageRecommendations_List")
@@ -88,8 +88,8 @@ interface TriageRecommendations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #deprecated "This operation is deprecated. Use API version 2026-03-01-preview or later."
-  @doc("Deprecated: Approve a triage recommendation for a given id. Use API version 2026-03-01-preview or later.")
+  #deprecated "This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation."
+  @doc("Deprecated: This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation.")
   @summary("Approve triage recommendation by id.")
   @operationId("triageRecommendations_ApproveTriageRecommendation")
   @action("approve")
@@ -100,8 +100,8 @@ interface TriageRecommendations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #deprecated "This operation is deprecated. Use API version 2026-03-01-preview or later."
-  @doc("Deprecated: Reject an existing triage recommendation for a given id. Use API version 2026-03-01-preview or later.")
+  #deprecated "This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation."
+  @doc("Deprecated: This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation.")
   @summary("Reject existing triage recommendation by id.")
   @operationId("triageRecommendations_RejectTriageRecommendation")
   @action("reject")
@@ -112,8 +112,8 @@ interface TriageRecommendations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #deprecated "This operation is deprecated. Use API version 2026-03-01-preview or later."
-  @doc("Deprecated: Reset an existing triage recommendation for a given id. Use API version 2026-03-01-preview or later.")
+  #deprecated "This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation."
+  @doc("Deprecated: This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation.")
   @summary("Reset existing triage recommendation by id.")
   @operationId("triageRecommendations_ResetTriageRecommendation")
   @action("reset")
