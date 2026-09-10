@@ -75,7 +75,7 @@ interface DataConnectors {
    * Connects a data connector.
    */
   @tag("Data Connectors Connect")
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   connect is Extension.ActionSync<
     OperationalInsights,
     DataConnector,
@@ -88,7 +88,7 @@ interface DataConnectors {
    * Disconnect a data connector.
    */
   @tag("Data Connectors Disconnect")
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   disconnect is Extension.ActionSync<
     OperationalInsights,
     DataConnector,

@@ -88,5 +88,5 @@ interface Recommendations {
   "Recommendation Fields to Update."
 );
 
-@@added(Recommendation, Versions.v2025_10_01_preview);
-@@added(Recommendations, Versions.v2025_10_01_preview);
+@@added(Recommendation, Versions.v2026_08_01_preview);
+@@added(Recommendations, Versions.v2026_08_01_preview);
