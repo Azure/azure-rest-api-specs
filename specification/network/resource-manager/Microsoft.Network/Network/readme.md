@@ -113,6 +113,13 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].get.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].put.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].put.responses["201"].schema
+  - code: ProvisioningStateMustBeReadOnly
+    from: virtualNetworkAppliance.json
+    reason: provisioningState is correctly marked readOnly (@visibility(Lifecycle.Read)) on Common.ProvisioningState in TypeSpec. azure-openapi-validator and oav ignore keywords placed as siblings of a $ref per JSON Schema/OpenAPI semantics, so the emitted "readOnly:true" sibling next to the $ref is dropped before this lint check runs against the referenced enum - it is a limitation of the linter's $ref resolution, not a spec defect.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkAppliances/{virtualNetworkApplianceName}/capabilities/{capabilityName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkAppliances/{virtualNetworkApplianceName}/capabilities/{capabilityName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkAppliances/{virtualNetworkApplianceName}/capabilities/{capabilityName}"].put.responses["201"].schema
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
     where:

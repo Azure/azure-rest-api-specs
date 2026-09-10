@@ -507,7 +507,7 @@
             "description": "Parameters supplied to the create or update virtual network appliance capability operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkApplianceCapability"
+              "$ref": "#/definitions/VirtualNetworkApplianceCapabilityCreateOrUpdate"
             }
           }
         ],
@@ -633,12 +633,6 @@
     "PLGatewayCapability": {
       "type": "object",
       "description": "The Private Link Gateway (slow-path) capability. Private Link programming offloaded to the appliance's gateway;\nIPv6 on a dual-stack appliance.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PLGatewayCapabilityProperties",
-          "description": "The Private Link Gateway (slow-path) capability properties."
-        }
-      },
       "allOf": [
         {
           "$ref": "#/definitions/VirtualNetworkApplianceCapability"
@@ -646,46 +640,19 @@
       ],
       "x-ms-discriminator-value": "PLGateway"
     },
-    "PLGatewayCapabilityProperties": {
+    "PLGatewayCapabilityCreateOrUpdate": {
       "type": "object",
-      "description": "Properties of the Private Link Gateway (slow-path) capability.",
-      "properties": {
-        "linkedResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The ARM resource id of the owning virtual network. System-derived and read-only.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/virtualNetworks"
-              }
-            ]
-          }
-        },
-        "provisioningState": {
-          "$ref": "./common.json#/definitions/Common.ProvisioningState",
-          "description": "The provisioning state of the capability resource.",
-          "readOnly": true
-        },
-        "ipVersion": {
-          "$ref": "./common.json#/definitions/PLGatewayCapabilityIpVersion",
-          "description": "The IP version the capability applies to. Private Link Gateway (slow-path) supports `IPv6` only."
+      "description": "The Private Link Gateway (slow-path) capability. Private Link programming offloaded to the appliance's gateway;\nIPv6 on a dual-stack appliance.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualNetworkApplianceCapabilityCreateOrUpdate"
         }
-      },
-      "required": [
-        "ipVersion"
-      ]
+      ],
+      "x-ms-discriminator-value": "PLGateway"
     },
     "PLGatewayFastpathCapability": {
       "type": "object",
       "description": "The Private Link Gateway FastPath capability. Private Link fast-path programming on the appliance's gateway;\nsupported on a dual-stack appliance.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PLGatewayFastpathCapabilityProperties",
-          "description": "The Private Link Gateway FastPath capability properties."
-        }
-      },
       "allOf": [
         {
           "$ref": "#/definitions/VirtualNetworkApplianceCapability"
@@ -693,46 +660,19 @@
       ],
       "x-ms-discriminator-value": "PLGatewayFastpath"
     },
-    "PLGatewayFastpathCapabilityProperties": {
+    "PLGatewayFastpathCapabilityCreateOrUpdate": {
       "type": "object",
-      "description": "Properties of the Private Link Gateway FastPath capability.",
-      "properties": {
-        "linkedResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The ARM resource id of the owning virtual network. System-derived and read-only.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/virtualNetworks"
-              }
-            ]
-          }
-        },
-        "provisioningState": {
-          "$ref": "./common.json#/definitions/Common.ProvisioningState",
-          "description": "The provisioning state of the capability resource.",
-          "readOnly": true
-        },
-        "ipVersion": {
-          "$ref": "./common.json#/definitions/PLGatewayFastpathCapabilityIpVersion",
-          "description": "The IP version the capability applies to. Private Link Gateway FastPath supports `DualStack` only:\nsingle-stack applies to the Private Endpoint configuration only, while the gateway itself stays dual-stack."
+      "description": "The Private Link Gateway FastPath capability. Private Link fast-path programming on the appliance's gateway;\nsupported on a dual-stack appliance.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualNetworkApplianceCapabilityCreateOrUpdate"
         }
-      },
-      "required": [
-        "ipVersion"
-      ]
+      ],
+      "x-ms-discriminator-value": "PLGatewayFastpath"
     },
     "PLIPForwardersCapability": {
       "type": "object",
       "description": "The Private Link IP-forwarders (NVA) capability. Private Link programming offloaded to the appliance NVA;\nIPv6 on a dual-stack appliance.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PLIPForwardersCapabilityProperties",
-          "description": "The Private Link IP-forwarders (NVA) capability properties."
-        }
-      },
       "allOf": [
         {
           "$ref": "#/definitions/VirtualNetworkApplianceCapability"
@@ -740,36 +680,15 @@
       ],
       "x-ms-discriminator-value": "PLIPForwarders"
     },
-    "PLIPForwardersCapabilityProperties": {
+    "PLIPForwardersCapabilityCreateOrUpdate": {
       "type": "object",
-      "description": "Properties of the Private Link IP-forwarders (NVA) capability.",
-      "properties": {
-        "linkedResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The ARM resource id of the owning virtual network. System-derived and read-only.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/virtualNetworks"
-              }
-            ]
-          }
-        },
-        "provisioningState": {
-          "$ref": "./common.json#/definitions/Common.ProvisioningState",
-          "description": "The provisioning state of the capability resource.",
-          "readOnly": true
-        },
-        "ipVersion": {
-          "$ref": "./common.json#/definitions/PLIPForwardersCapabilityIpVersion",
-          "description": "The IP version the capability applies to. Private Link IP-forwarders (NVA) supports `IPv6` only."
+      "description": "The Private Link IP-forwarders (NVA) capability. Private Link programming offloaded to the appliance NVA;\nIPv6 on a dual-stack appliance.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualNetworkApplianceCapabilityCreateOrUpdate"
         }
-      },
-      "required": [
-        "ipVersion"
-      ]
+      ],
+      "x-ms-discriminator-value": "PLIPForwarders"
     },
     "VirtualNetworkAppliance": {
       "type": "object",
@@ -794,17 +713,46 @@
     },
     "VirtualNetworkApplianceCapability": {
       "type": "object",
-      "description": "A capability enabled on a virtual network appliance. The top-level `kind` discriminator selects the\ncapability family and its `properties` schema. One capability of a given kind may exist per appliance.",
+      "description": "A capability enabled on a virtual network appliance. The top-level `kind` discriminator selects the\ncapability family; every kind shares the same `properties` schema (see\nVirtualNetworkApplianceCapabilityProperties). One capability of a given kind may exist per appliance.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/VirtualNetworkApplianceCapabilityProperties",
-          "description": "The kind-agnostic capability properties. Each `kind` narrows this to its own properties schema."
-        },
-        "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata related to this resource.",
+        "name": {
+          "type": "string",
+          "description": "The name of the virtual network appliance capability.",
+          "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$",
           "readOnly": true
         },
+        "kind": {
+          "$ref": "./common.json#/definitions/VirtualNetworkApplianceCapabilityKind",
+          "description": "The kind of capability (the top-level discriminator)."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "name",
+        "kind"
+      ],
+      "allOf": [
+        {
+          "type": "object",
+          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/VirtualNetworkApplianceCapabilityProperties",
+              "description": "The resource-specific properties for this resource."
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          ]
+        }
+      ]
+    },
+    "VirtualNetworkApplianceCapabilityCreateOrUpdate": {
+      "type": "object",
+      "description": "A capability enabled on a virtual network appliance. The top-level `kind` discriminator selects the\ncapability family; every kind shares the same `properties` schema (see\nVirtualNetworkApplianceCapabilityProperties). One capability of a given kind may exist per appliance.",
+      "properties": {
         "kind": {
           "$ref": "./common.json#/definitions/VirtualNetworkApplianceCapabilityKind",
           "description": "The kind of capability (the top-level discriminator)."
@@ -816,7 +764,19 @@
       ],
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/ChildResource"
+          "type": "object",
+          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/VirtualNetworkApplianceCapabilityProperties",
+              "description": "The resource-specific properties for this resource."
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          ]
         }
       ]
     },
@@ -848,7 +808,7 @@
         "linkedResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM resource id of the owning virtual network. System-derived and read-only.",
+          "description": "The Azure resource ID of the owning virtual network. System-derived and read-only.",
           "readOnly": true,
           "x-ms-arm-id-details": {
             "allowedResources": [
@@ -865,7 +825,7 @@
         },
         "ipVersion": {
           "$ref": "./common.json#/definitions/VirtualNetworkApplianceCapabilityIpVersion",
-          "description": "The IP version the capability applies to. The kind-agnostic base admits the full supported set;\neach capability `kind` narrows this to its own allowed value(s) and marks it required (see each\nkind's properties schema). It is optional here so a future property-less kind is not forced to carry it."
+          "description": "The IP version the capability applies to. Private Link Gateway FastPath (`PLGatewayFastpath`)\nonly accepts `DualStack`; Private Link Gateway (`PLGateway`) and Private Link IP-forwarders\n(`PLIPForwarders`) only accept `IPv6`. The service validates the value against the resource's\n`kind` when the capability is created or updated."
         }
       }
     },
