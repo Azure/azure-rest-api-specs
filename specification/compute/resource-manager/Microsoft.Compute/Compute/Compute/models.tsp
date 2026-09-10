@@ -5617,7 +5617,7 @@ model BootDiagnosticsInstanceView {
 @added(Versions.v2026_09_01)
 model FlexProfile {
   /**
-   * Specifies the preferred (reference) VM size. Azure may allocate a compatible alternative size if the
+   * Specifies the preferred VM size. Azure may allocate a compatible alternative size if the
    * preferred size is unavailable. Either hardwareProfile.vmSize or flexProfile.preferredVMSize should be
    * specified in the request, but not both.
    */
