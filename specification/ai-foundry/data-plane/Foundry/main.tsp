@@ -1,4 +1,5 @@
 import "./src/agents/routes.tsp";
+import "./src/agent-insights/routes.tsp";
 import "./src/agents-containers/routes.tsp";
 import "./src/voice-agents/routes.tsp";
 import "./src/agents-session-files/routes.tsp";

@@ -50,6 +50,20 @@ union authorizationScopeFilter {
   AtScopeExact: "AtScopeExact",
 }
 
+@doc("The Azure extension resource type")
+union azureExtensionResourceType {
+  string,
+
+  @doc("The Azure role assignment extension resource type")
+  roleAssignments: "role-assignments",
+
+  @doc("The Azure lock extension resource type")
+  locks: "locks",
+
+  @doc("The Azure diagnostic settings extension resource type")
+  diagnosticSettings: "diagnostic-settings",
+}
+
 @doc("The base export parameter")
 @discriminator("type")
 model BaseExportModel {
@@ -66,8 +80,12 @@ model BaseExportModel {
   maskSensitive?: boolean = true;
 
   @added(Versions.v2025_09_01_preview)
-  @doc("Whether to include RBAC role assignments assigned to the resources exported. Only resource-scoped role assignments are supported. Defaults to `false`.")
+  @doc("Whether to include role assignments assigned to the resources exported. Defaults to `false`. This is deprecated in favor of `includeExtensions` (with `role-assignments` specified).")
   includeRoleAssignment?: boolean = false;
+
+  @added(Versions.v2026_09_01_preview)
+  @doc("Include extension resource types directly associated to the resources exported")
+  includeExtensions?: azureExtensionResourceType[];
 
   @added(Versions.v2025_09_01_preview)
   @doc("Whether to include internal resources managed by Azure in the exported configuration. Defaults to `false`.")
