@@ -2,21 +2,20 @@
   "operationId": "Indexers_CreateOrUpdate",
   "title": "SearchServiceCreateOrUpdateIndexer",
   "parameters": {
-    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
-    "indexerName": "myaclindexer",
-    "api-version": "2026-08-01-preview",
-    "ignoreResetRequirements": null,
-    "disableCacheReprocessingChangeDetection": null,
+    "endpoint": "https://typespecstableexampleservice.search.windows.net",
+    "indexerName": "myindexer",
+    "api-version": "2026-10-01",
     "Accept": "application/json;odata.metadata=minimal",
     "If-Match": null,
     "If-None-Match": null,
     "Prefer": "return=representation",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "indexer": {
-      "name": "myaclindexer",
+      "name": "myindexer",
       "description": "Description of the indexer",
-      "dataSourceName": "indexertestacldatasource",
-      "targetIndexName": "indexer-test-index-create-or-update",
+      "dataSourceName": "indexertestdatasource",
+      "skillsetName": "myskillset",
+      "targetIndexName": "stable-test",
       "schedule": {
         "interval": "P1D",
         "startTime": "2025-01-07T19:30:00Z"
@@ -28,15 +27,11 @@
       },
       "fieldMappings": [
         {
-          "sourceFieldName": "metadata_storage_title",
+          "sourceFieldName": "/document",
           "targetFieldName": "name",
           "mappingFunction": {
             "name": "base64Encode"
           }
-        },
-        {
-          "sourceFieldName": "metadata_user_ids",
-          "targetFieldName": "permissionFilters"
         }
       ],
       "outputFieldMappings": [
@@ -56,10 +51,11 @@
     "200": {
       "body": {
         "@odata.etag": "0x1234568AE7E58A1",
-        "name": "myaclindexer",
+        "name": "myindexer",
         "description": "Description of the indexer",
-        "dataSourceName": "indexertestacldatasource",
-        "targetIndexName": "indexer-test-index-create-or-update",
+        "dataSourceName": "indexertestdatasource",
+        "skillsetName": "myskillset",
+        "targetIndexName": "stable-test",
         "disabled": false,
         "schedule": {
           "interval": "P1D",
@@ -73,15 +69,11 @@
         },
         "fieldMappings": [
           {
-            "sourceFieldName": "metadata_storage_title",
+            "sourceFieldName": "/document",
             "targetFieldName": "name",
             "mappingFunction": {
               "name": "base64Encode"
             }
-          },
-          {
-            "sourceFieldName": "metadata_user_ids",
-            "targetFieldName": "permissionFilters"
           }
         ],
         "outputFieldMappings": [
@@ -98,10 +90,11 @@
     "201": {
       "body": {
         "@odata.etag": "0x1234568AE7E58A1",
-        "name": "myaclindexer",
+        "name": "myindexer",
         "description": "Description of the indexer",
-        "dataSourceName": "indexertestacldatasource",
-        "targetIndexName": "indexer-test-index-create-or-update",
+        "dataSourceName": "indexertestdatasource",
+        "skillsetName": "myskillset",
+        "targetIndexName": "stable-test",
         "disabled": false,
         "schedule": {
           "interval": "P1D",
@@ -115,15 +108,11 @@
         },
         "fieldMappings": [
           {
-            "sourceFieldName": "metadata_storage_title",
+            "sourceFieldName": "/document",
             "targetFieldName": "name",
             "mappingFunction": {
               "name": "base64Encode"
             }
-          },
-          {
-            "sourceFieldName": "metadata_user_ids",
-            "targetFieldName": "permissionFilters"
           }
         ],
         "outputFieldMappings": [
