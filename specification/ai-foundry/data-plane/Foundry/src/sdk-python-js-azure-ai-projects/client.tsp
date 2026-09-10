@@ -23,6 +23,7 @@ import "../insights/routes.tsp";
 import "../memory-stores/routes.tsp";
 import "../models/routes.tsp";
 import "../red-teams/routes.tsp";
+import "../rle/routes.tsp";
 import "../routines/routes.tsp";
 import "../schedules/routes.tsp";
 import "../toolboxes/routes.tsp";
