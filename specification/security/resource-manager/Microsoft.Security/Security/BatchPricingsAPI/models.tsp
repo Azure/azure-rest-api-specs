@@ -31,7 +31,6 @@ model PricingBatchProperties {
   @maxItems(30)
   @identifiers(#["planName"])
   plansConfigurations: PricingBatchPlanItem[];
-
 }
 
 /**
