@@ -2,17 +2,22 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Defender for Cloud",
-    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider — batchPricings resource type",
-    "version": "2026-07-01"
+    "version": "2026-07-01",
+    "description": "API spec for Microsoft.Security batch pricing operations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,113 +30,199 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "BatchPricings"
+    },
+    {
+      "name": "PricingBatch"
+    }
+  ],
   "paths": {
     "/{scopeId}/providers/Microsoft.Security/batchPricings/{pricingBatchName}": {
       "get": {
-        "x-ms-examples": {
-          "Get pricing batch": {
-            "$ref": "./examples/PricingBatch/GetPricingBatch_example.json"
-          }
-        },
+        "operationId": "PricingBatch_Get",
         "tags": [
+          "BatchPricings",
           "PricingBatch"
         ],
         "description": "Gets the current pricing batch configuration for the specified scope.",
-        "operationId": "PricingBatch_Get",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/ScopeIdSubscriptionOnly"
+            "name": "scopeId",
+            "in": "path",
+            "description": "The subscription scope for the batch pricing resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/PricingBatchName"
+            "name": "pricingBatchName",
+            "in": "path",
+            "description": "Name of the pricing batch resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^global$"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PricingBatch"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get pricing batch": {
+            "$ref": "./examples/BatchPricings/GetBatchPricings_example.json"
           }
         }
       },
       "put": {
-        "x-ms-examples": {
-          "Update pricing batch - success": {
-            "$ref": "./examples/PricingBatch/PutPricingBatch_Success_example.json"
-          },
-          "Update pricing batch - partial success": {
-            "$ref": "./examples/PricingBatch/PutPricingBatch_PartialSuccess_example.json"
-          }
-        },
+        "operationId": "PricingBatch_CreateOrUpdate",
         "tags": [
+          "BatchPricings",
           "PricingBatch"
         ],
-        "description": "Updates multiple Microsoft Defender for Cloud pricing configurations for the specified subscription scope. This operation uses a best-effort approach where valid plans are saved atomically, while invalid plans return detailed error information. Only subscription-level scopes are supported. Maximum of 30 pricing plans can be updated in a single request.",
-        "operationId": "PricingBatch_CreateOrUpdate",
+        "description": "Updates multiple pricing plan configurations in a single operation.",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/ScopeIdSubscriptionOnly"
+            "name": "scopeId",
+            "in": "path",
+            "description": "The subscription scope for the batch pricing resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/PricingBatchName"
+            "name": "pricingBatchName",
+            "in": "path",
+            "description": "Name of the pricing batch resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^global$"
           },
           {
-            "$ref": "#/parameters/PricingBatchBody"
+            "name": "pricingBatch",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PricingBatch"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Resource 'PricingBatch' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/PricingBatch"
             }
           },
           "201": {
-            "description": "Created",
+            "description": "Resource 'PricingBatch' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/PricingBatch"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update pricing batch - partial success": {
+            "$ref": "./examples/BatchPricings/PutBatchPricings_PartialSuccess_example.json"
+          },
+          "Update pricing batch - success": {
+            "$ref": "./examples/BatchPricings/PutBatchPricings_Success_example.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "Common.CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Common.CloudErrorBody",
+          "description": "The error object."
+        }
+      },
+      "x-ms-external": true
+    },
+    "Common.CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/Common.CloudErrorBody"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "x-ms-external": true
+    },
     "PricingBatch": {
       "type": "object",
-      "description": "Pricing batch resource for updating multiple pricing plan configurations in a single operation.",
+      "description": "Pricing batch resource for updating multiple pricing configurations.",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Pricing batch properties",
-          "$ref": "#/definitions/PricingBatchProperties"
+          "$ref": "#/definitions/PricingBatchProperties",
+          "description": "Pricing batch properties."
         }
       },
       "allOf": [
@@ -140,13 +231,38 @@
         }
       ]
     },
+    "PricingBatchPlanItem": {
+      "type": "object",
+      "description": "An individual pricing plan configuration.",
+      "properties": {
+        "planName": {
+          "type": "string",
+          "description": "Name of the pricing plan."
+        },
+        "properties": {
+          "$ref": "./pricings.json#/definitions/PricingProperties",
+          "description": "Pricing configuration properties for the plan."
+        },
+        "operationStatus": {
+          "$ref": "#/definitions/PricingPlanOperationStatus",
+          "description": "Status of this plan's update operation. This property is returned only after a PUT operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "planName",
+        "properties"
+      ]
+    },
     "PricingBatchProperties": {
       "type": "object",
-      "description": "Properties for a pricing batch operation",
+      "description": "Properties for a pricing batch resource.",
       "properties": {
         "plansConfigurations": {
           "type": "array",
-          "description": "Array of pricing plan configurations to update. Maximum of 30 plans allowed per request.",
+          "description": "Pricing plan configurations represented by this resource.",
+          "minItems": 1,
+          "maxItems": 30,
           "items": {
             "$ref": "#/definitions/PricingBatchPlanItem"
           },
@@ -154,120 +270,54 @@
             "planName"
           ],
           "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "minItems": 1,
-          "maxItems": 30
-        },
-        "results": {
-          "type": "array",
-          "readOnly": true,
-          "description": "Results for each individual pricing plan update within the batch operation",
-          "items": {
-            "$ref": "#/definitions/PricingBatchResult"
-          },
-          "x-ms-identifiers": [
-            "planName"
+            "read",
+            "update",
+            "create"
           ]
+        }
+      },
+      "required": [
+        "plansConfigurations"
+      ]
+    },
+    "PricingPlanOperationStatus": {
+      "type": "object",
+      "description": "Status of a pricing plan update operation.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/PricingPlanOperationStatusCode",
+          "description": "The operation status code."
         },
-        "summary": {
-          "$ref": "#/definitions/PricingBatchSummary",
-          "readOnly": true,
-          "description": "Summary statistics for the batch operation including total, successful, and failed update counts"
+        "message": {
+          "type": "string",
+          "description": "Additional information about the operation result."
         }
       }
     },
-    "PricingBatchPlanItem": {
-      "type": "object",
-      "description": "Individual pricing plan configuration for batch update operation",
-      "required": [
-        "planName",
-        "properties"
+    "PricingPlanOperationStatusCode": {
+      "type": "string",
+      "description": "Status code for a pricing plan update operation.",
+      "enum": [
+        "Succeeded",
+        "Failed"
       ],
-      "properties": {
-        "planName": {
-          "type": "string",
-          "description": "Name of the pricing plan (e.g., VirtualMachines, StorageAccounts, CloudPosture, Containers, etc.)"
-        },
-        "properties": {
-          "$ref": "./pricings.json#/definitions/PricingProperties",
-          "description": "Pricing configuration properties for this plan"
-        }
-      }
-    },
-    "PricingBatchResult": {
-      "type": "object",
-      "description": "Result of updating a single pricing plan within a batch operation",
-      "required": [
-        "planName",
-        "success"
-      ],
-      "properties": {
-        "planName": {
-          "type": "string",
-          "description": "Name of the pricing plan that was processed"
-        },
-        "success": {
-          "type": "boolean",
-          "description": "Whether the update for this pricing plan was successful"
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Detailed error message if the update failed (only present when success=false)"
-        },
-        "result": {
-          "$ref": "./pricings.json#/definitions/Pricing",
-          "description": "Updated pricing configuration resource (only present when success=true)"
-        }
-      }
-    },
-    "PricingBatchSummary": {
-      "type": "object",
-      "description": "Summary statistics for batch operation results",
-      "required": [
-        "totalRequested",
-        "successfulUpdates",
-        "failedUpdates"
-      ],
-      "properties": {
-        "totalRequested": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of pricing configurations requested for update"
-        },
-        "successfulUpdates": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of pricing configurations successfully updated"
-        },
-        "failedUpdates": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of pricing configurations that failed to update"
-        }
+      "x-ms-enum": {
+        "name": "PricingPlanOperationStatusCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The pricing plan was updated successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The pricing plan was not updated successfully."
+          }
+        ]
       }
     }
   },
-  "parameters": {
-    "PricingBatchName": {
-      "name": "pricingBatchName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^global$",
-      "description": "Name of the pricing batch configuration. Only 'global' is supported.",
-      "x-ms-parameter-location": "method"
-    },
-    "PricingBatchBody": {
-      "name": "pricingBatch",
-      "in": "body",
-      "required": true,
-      "description": "Pricing batch resource containing multiple plan configurations (maximum 30 plans per request)",
-      "schema": {
-        "$ref": "#/definitions/PricingBatch"
-      },
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
