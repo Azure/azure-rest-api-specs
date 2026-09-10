@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2025-03-30",
+    "artifactStoreName": "TestArtifactStore",
+    "publisherName": "TestPublisher",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "TestManifest",
+            "type": "microsoft.hybridnetwork/publishers/artifactStores/artifactManifests",
+            "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore/artifactManifests/TestManifest",
+            "location": "eastus",
+            "properties": {
+              "artifactManifestState": "Uploaded",
+              "artifacts": [
+                {
+                  "artifactName": "fed-rbac",
+                  "artifactType": "OCIArtifact",
+                  "artifactVersion": "1.0.0"
+                },
+                {
+                  "artifactName": "nginx",
+                  "artifactType": "OCIArtifact",
+                  "artifactVersion": "v1"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ArtifactManifests_ListByArtifactStore",
+  "title": "Get artifact manifest list resource"
+}

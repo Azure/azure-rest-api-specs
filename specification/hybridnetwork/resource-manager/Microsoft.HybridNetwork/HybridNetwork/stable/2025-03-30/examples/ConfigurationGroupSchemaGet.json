@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2025-03-30",
+    "configurationGroupSchemaName": "testConfigurationGroupSchema",
+    "publisherName": "testPublisher",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testConfigurationGroupSchema",
+        "type": "Microsoft.HybridNetwork/publishers/configurationGroupSchemas",
+        "id": "/subscriptions/subid/resourcegroups/testRG/providers/microsoft.hybridnetwork/publishers/testPublisher/configurationGroupSchemas/interconnectgroupsSchema",
+        "location": "westUs2",
+        "properties": {
+          "description": "Schema with no secrets",
+          "provisioningState": "Accepted",
+          "schemaDefinition": "{\"type\":\"object\",\"properties\":{\"interconnect-groups\":{\"type\":\"object\",\"properties\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"international-interconnects\":{\"type\":\"array\",\"item\":{\"type\":\"string\"}},\"domestic-interconnects\":{\"type\":\"array\",\"item\":{\"type\":\"string\"}}}}},\"interconnect-group-assignments\":{\"type\":\"object\",\"properties\":{\"type\":\"object\",\"properties\":{\"ssc\":{\"type\":\"string\"},\"interconnects-interconnects\":{\"type\":\"string\"}}}}},\"required\":[\"interconnect-groups\",\"interconnect-group-assignments\"]}"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "ConfigurationGroupSchemas_Get",
+  "title": "Get a networkFunctionDefinition group resource"
+}
