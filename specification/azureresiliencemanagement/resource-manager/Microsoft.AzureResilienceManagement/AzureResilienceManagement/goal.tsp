@@ -27,7 +27,7 @@ interface GoalAssignments {
     GoalAssignment,
     ServiceGroupParameters,
     LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = GoalAssignment> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -37,7 +37,7 @@ interface GoalAssignments {
     GoalAssignmentProperties,
     ServiceGroupParameters,
     LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = GoalAssignment> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -51,7 +51,7 @@ interface GoalAssignments {
     UpdateGoalResourceResponse,
     ServiceGroupParameters,
     LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = UpdateGoalResourceResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -65,7 +65,7 @@ interface GoalAssignments {
     RefreshGoalResourcesResponse,
     ServiceGroupParameters,
     LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = RefreshGoalResourcesResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -89,7 +89,7 @@ interface GoalAssignments {
     RecommendCapacityResult,
     ServiceGroupParameters,
     LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = RecommendCapacityResult> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -114,7 +114,7 @@ interface GoalTemplates {
     GoalTemplateProperties,
     ServiceGroupParameters,
     LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = GoalTemplate> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
