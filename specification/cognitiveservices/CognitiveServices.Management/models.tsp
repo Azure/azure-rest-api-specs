@@ -6306,7 +6306,7 @@ model AdapterDeploymentProperties {
    * The service validates LoRA weight type, protected status, provenance,
    * compatibility metadata, and registration state.
    */
-  @pattern("^azureai://accounts/[^/]+/projects/[^/]+/models/[^/]+/versions/[^/]+$")
+  @pattern("^azure(?:ai)://accounts/[^/]+/projects/[^/]+/models/[^/]+/versions/[^/]+$")
   sourceModelId: string;
 
   /**
