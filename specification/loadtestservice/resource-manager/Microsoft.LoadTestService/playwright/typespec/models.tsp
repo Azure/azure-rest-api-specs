@@ -57,6 +57,38 @@ model PlaywrightWorkspaceProperties {
       type: "Microsoft.Network/virtualNetworks/subnets";
     }
   ]>;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Indicates whether recording is enabled for the workspace.")
+  recording?: EnablementStatus = EnablementStatus.Disabled;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The managed identity used to upload recording artifacts to the storage account.")
+  recordingIdentity?: RecordingIdentity;
+}
+
+@doc("The managed identity used to upload recording artifacts.")
+model RecordingIdentity {
+  @doc("The type of managed identity used to upload recording artifacts.")
+  type: RecordingIdentityType;
+
+  @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+@doc("The type of managed identity used to upload recording artifacts.")
+union RecordingIdentityType {
+  string,
+
+  @doc("Use the workspace system-assigned managed identity.")
+  SystemAssigned: "SystemAssigned",
+
+  @doc("Use a user-assigned managed identity.")
+  UserAssigned: "UserAssigned",
 }
 
 @doc("The status of the last resource operation.")
