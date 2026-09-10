@@ -1,4 +1,4 @@
-﻿import "@typespec/http";
+import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -180,7 +180,7 @@ interface DrillRuns {
     void,
     DrillReportSummary,
     ServiceGroupAndRequestHeadersParameters,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = DrillReportSummary> &
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -190,12 +190,14 @@ interface DrillRuns {
   @armResourceAction(DrillRun)
   @post
   @doc("This returns a short-lived, read-only URL to download the report for this Drill Run. The URL expires at the returned expiryTimestamp and grants access to that single report only.")
-  listReportDownloadUrl is ArmResourceActionSync<
+  listReportDownloadUrl is ArmResourceActionAsync<
     DrillRun,
     ListReportDownloadUrlRequest,
     ListReportDownloadUrlResponse,
-    ServiceGroupParameters,
-    OptionalRequestBody = true
+    ServiceGroupAndRequestHeadersParameters,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ListReportDownloadUrlResponse> &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
