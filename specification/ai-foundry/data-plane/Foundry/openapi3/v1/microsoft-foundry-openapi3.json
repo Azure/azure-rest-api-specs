@@ -231,6 +231,104 @@
     }
   ],
   "paths": {
+    "/": {
+      "post": {
+        "operationId": "postDataGenerationJobPreview",
+        "description": "Create a data generation job. Returns 201 Created and accepts unwrapped caller-supplied inputs.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "description": "URL to poll for the job status.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "required": true,
+                "description": "URL of the created job resource.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataGenerationJob"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataGenerationJobInputs"
+              }
+            }
+          },
+          "description": "The data generation job inputs to create."
+        }
+      }
+    },
     "/agent_insight_monitors": {
       "get": {
         "operationId": "AgentInsightMonitors_list",
@@ -9868,11 +9966,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DataGenerationJob"
+                "$ref": "#/components/schemas/DataGenerationJobInputs"
               }
             }
           },
-          "description": "The job to create."
+          "description": "The data generation job inputs to create."
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [

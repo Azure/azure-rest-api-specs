@@ -6,6 +6,20 @@ using Azure.Core;
 
 namespace Azure.AI.Projects;
 
+/** Create a data generation job. Returns 201 Created and accepts unwrapped caller-supplied inputs. */
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Data generation creates use an unwrapped job input body instead of the shared JobLike envelope"
+@post op postDataGenerationJobPreview is FoundryDataPlanePreviewOperation<
+  FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
+  {
+    ...WithOperationId;
+
+    /** The data generation job inputs to create. */
+    @body job: DataGenerationJobInputs;
+  },
+  JobCreatedResponse<DataGenerationJob>
+>;
+
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @tag("DataGenerationJobs")
@@ -39,10 +53,7 @@ interface DataGenerationJobs {
   @route("data_generation_jobs")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   @pollingOperation(DataGenerationJobs.get)
-  create is postJobPreview<
-    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
-    DataGenerationJob
-  >;
+  create is postDataGenerationJobPreview;
 
   /**
    * Cancels the specified data generation job if it is still in progress.
