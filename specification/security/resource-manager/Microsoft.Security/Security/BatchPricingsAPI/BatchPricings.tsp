@@ -79,7 +79,8 @@ interface BatchPricings {
   >;
 }
 
-@@doc(PricingBatch.name,
+@@doc(
+  PricingBatch.name,
   "Name of the pricing batch configuration. Only 'global' is supported."
 );
 @@doc(PricingBatch.properties, "Pricing batch properties.");
