@@ -334,6 +334,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
           "204": {
             "description": "Resource does not exist."
           },
@@ -369,6 +372,11 @@
         "identity": {
           "$ref": "./common.json#/definitions/ManagedServiceIdentity",
           "description": "The user-assigned identity used by a user sign-in policy to access its Key Vault client secret."
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -486,7 +494,7 @@
         "clientSecret": {
           "type": "string",
           "format": "uri",
-          "description": "The absolute HTTPS Key Vault secret URL containing the client secret for authentication. This property is required for user sign-in policies. The secret value retrieved from Key Vault can contain up to 4096 characters. Example: https://myvault.vault.azure.net/secrets/mysecret",
+          "description": "The absolute HTTPS Key Vault secret URL identifying the client secret used for authentication. This property is required for user sign-in policies. It holds only the Key Vault reference; the secret value itself is never accepted or returned by this API and is read from Key Vault at runtime using the resource's user-assigned identity. The secret value stored in Key Vault can contain up to 4096 characters. Example: https://myvault.vault.azure.net/secrets/mysecret",
           "pattern": "^[Hh][Tt][Tt][Pp][Ss]://"
         },
         "scope": {
