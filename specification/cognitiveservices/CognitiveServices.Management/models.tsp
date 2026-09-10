@@ -6345,13 +6345,13 @@ union AdapterDeploymentOperationType {
   string,
 
   /** Creates the adapter deployment. */
-  Create: "create",
+  Create: "Create",
 
   /** Re-targets the adapter deployment. */
-  Update: "update",
+  Update: "Update",
 
   /** Deletes the adapter deployment. */
-  Delete: "delete",
+  Delete: "Delete",
 }
 
 /**
@@ -6362,16 +6362,16 @@ union AdapterDeploymentOperationState {
   string,
 
   /** The operation was accepted. */
-  Accepted: "accepted",
+  Accepted: "Accepted",
 
   /** The operation is running. */
-  Running: "running",
+  Running: "Running",
 
   /** The operation completed successfully. */
-  Succeeded: "succeeded",
+  Succeeded: "Succeeded",
 
   /** The operation failed. */
-  Failed: "failed",
+  Failed: "Failed",
 }
 
 /**
@@ -6382,13 +6382,13 @@ union AdapterDeploymentRollbackResult {
   string,
 
   /** No rollback was required. */
-  NotRequired: "not_required",
+  NotRequired: "NotRequired",
 
   /** Rollback completed successfully. */
-  Succeeded: "succeeded",
+  Succeeded: "Succeeded",
 
   /** Rollback failed. */
-  Failed: "failed",
+  Failed: "Failed",
 }
 
 /**
@@ -6399,67 +6399,67 @@ union AdapterDeploymentErrorCode {
   string,
 
   /** The adapter source is invalid. */
-  InvalidAdapterSource: "invalid_adapter_source",
+  InvalidAdapterSource: "InvalidAdapterSource",
 
   /** The adapter format is unsupported. */
-  AdapterFormatNotSupported: "adapter_format_not_supported",
+  AdapterFormatNotSupported: "AdapterFormatNotSupported",
 
   /** The base-model provenance is missing. */
-  BaseModelProvenanceMissing: "base_model_provenance_missing",
+  BaseModelProvenanceMissing: "BaseModelProvenanceMissing",
 
   /** The source and target base models do not match. */
-  BaseModelMismatch: "base_model_mismatch",
+  BaseModelMismatch: "BaseModelMismatch",
 
   /** The target deployment is invalid. */
-  InvalidTargetDeployment: "invalid_target_deployment",
+  InvalidTargetDeployment: "InvalidTargetDeployment",
 
   /** The adapter deployment name is invalid. */
-  InvalidAdapterDeploymentName: "invalid_adapter_deployment_name",
+  InvalidAdapterDeploymentName: "InvalidAdapterDeploymentName",
 
   /** The source model was not found. */
-  ModelNotFound: "model_not_found",
+  ModelNotFound: "ModelNotFound",
 
   /** The adapter deployment was not found. */
-  AdapterDeploymentNotFound: "adapter_deployment_not_found",
+  AdapterDeploymentNotFound: "AdapterDeploymentNotFound",
 
   /** The target deployment is not ready. */
-  TargetDeploymentNotReady: "target_deployment_not_ready",
+  TargetDeploymentNotReady: "TargetDeploymentNotReady",
 
   /** The adapter deployment already exists. */
-  AdapterDeploymentAlreadyExists: "adapter_deployment_already_exists",
+  AdapterDeploymentAlreadyExists: "AdapterDeploymentAlreadyExists",
 
   /** Adapter deployments prevent the requested parent operation. */
-  AdapterDeploymentsExist: "adapter_deployments_exist",
+  AdapterDeploymentsExist: "AdapterDeploymentsExist",
 
   /** The adapter source is already in use. */
-  AdapterDeploymentSourceInUse: "adapter_deployment_source_in_use",
+  AdapterDeploymentSourceInUse: "AdapterDeploymentSourceInUse",
 
   /** The target deployment's adapter limit was exceeded. */
-  AdapterLimitExceeded: "adapter_limit_exceeded",
+  AdapterLimitExceeded: "AdapterLimitExceeded",
 
   /** A conditional request precondition failed. */
-  PreconditionFailed: "precondition_failed",
+  PreconditionFailed: "PreconditionFailed",
 
   /** Loading the adapter failed. */
-  AdapterLoadFailed: "adapter_load_failed",
+  AdapterLoadFailed: "AdapterLoadFailed",
 
   /** Rolling back the adapter failed. */
-  AdapterRollbackFailed: "adapter_rollback_failed",
+  AdapterRollbackFailed: "AdapterRollbackFailed",
 
   /** Replica convergence timed out. */
-  ConvergenceTimedOut: "convergence_timed_out",
+  ConvergenceTimedOut: "ConvergenceTimedOut",
 
   /** Request draining timed out. */
-  DrainTimedOut: "drain_timed_out",
+  DrainTimedOut: "DrainTimedOut",
 
   /** Security policy revoked the adapter. */
-  AdapterRevoked: "adapter_revoked",
+  AdapterRevoked: "AdapterRevoked",
 
   /** The request rate is too high. */
-  TooManyRequests: "too_many_requests",
+  TooManyRequests: "TooManyRequests",
 
   /** The service is temporarily unavailable. */
-  ServiceUnavailable: "service_unavailable",
+  ServiceUnavailable: "ServiceUnavailable",
 }
 
 /**

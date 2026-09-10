@@ -2285,8 +2285,8 @@
           {
             "name": "If-Match",
             "in": "header",
-            "description": "Applies deletion only when the current resource ETag matches.",
-            "required": true,
+            "description": "When supplied, applies deletion only if the current resource ETag matches.\nOmitting the header deletes unconditionally so that ARM cascade deletes\n(resource group or parent account) and clients that did not read the ETag\nare not blocked.",
+            "required": false,
             "type": "string",
             "x-ms-client-name": "ifMatch"
           }
@@ -13015,27 +13015,27 @@
       "type": "string",
       "description": "Domain error codes returned by adapter deployment operations.",
       "enum": [
-        "invalid_adapter_source",
-        "adapter_format_not_supported",
-        "base_model_provenance_missing",
-        "base_model_mismatch",
-        "invalid_target_deployment",
-        "invalid_adapter_deployment_name",
-        "model_not_found",
-        "adapter_deployment_not_found",
-        "target_deployment_not_ready",
-        "adapter_deployment_already_exists",
-        "adapter_deployments_exist",
-        "adapter_deployment_source_in_use",
-        "adapter_limit_exceeded",
-        "precondition_failed",
-        "adapter_load_failed",
-        "adapter_rollback_failed",
-        "convergence_timed_out",
-        "drain_timed_out",
-        "adapter_revoked",
-        "too_many_requests",
-        "service_unavailable"
+        "InvalidAdapterSource",
+        "AdapterFormatNotSupported",
+        "BaseModelProvenanceMissing",
+        "BaseModelMismatch",
+        "InvalidTargetDeployment",
+        "InvalidAdapterDeploymentName",
+        "ModelNotFound",
+        "AdapterDeploymentNotFound",
+        "TargetDeploymentNotReady",
+        "AdapterDeploymentAlreadyExists",
+        "AdapterDeploymentsExist",
+        "AdapterDeploymentSourceInUse",
+        "AdapterLimitExceeded",
+        "PreconditionFailed",
+        "AdapterLoadFailed",
+        "AdapterRollbackFailed",
+        "ConvergenceTimedOut",
+        "DrainTimedOut",
+        "AdapterRevoked",
+        "TooManyRequests",
+        "ServiceUnavailable"
       ],
       "x-ms-enum": {
         "name": "AdapterDeploymentErrorCode",
@@ -13043,107 +13043,107 @@
         "values": [
           {
             "name": "InvalidAdapterSource",
-            "value": "invalid_adapter_source",
+            "value": "InvalidAdapterSource",
             "description": "The adapter source is invalid."
           },
           {
             "name": "AdapterFormatNotSupported",
-            "value": "adapter_format_not_supported",
+            "value": "AdapterFormatNotSupported",
             "description": "The adapter format is unsupported."
           },
           {
             "name": "BaseModelProvenanceMissing",
-            "value": "base_model_provenance_missing",
+            "value": "BaseModelProvenanceMissing",
             "description": "The base-model provenance is missing."
           },
           {
             "name": "BaseModelMismatch",
-            "value": "base_model_mismatch",
+            "value": "BaseModelMismatch",
             "description": "The source and target base models do not match."
           },
           {
             "name": "InvalidTargetDeployment",
-            "value": "invalid_target_deployment",
+            "value": "InvalidTargetDeployment",
             "description": "The target deployment is invalid."
           },
           {
             "name": "InvalidAdapterDeploymentName",
-            "value": "invalid_adapter_deployment_name",
+            "value": "InvalidAdapterDeploymentName",
             "description": "The adapter deployment name is invalid."
           },
           {
             "name": "ModelNotFound",
-            "value": "model_not_found",
+            "value": "ModelNotFound",
             "description": "The source model was not found."
           },
           {
             "name": "AdapterDeploymentNotFound",
-            "value": "adapter_deployment_not_found",
+            "value": "AdapterDeploymentNotFound",
             "description": "The adapter deployment was not found."
           },
           {
             "name": "TargetDeploymentNotReady",
-            "value": "target_deployment_not_ready",
+            "value": "TargetDeploymentNotReady",
             "description": "The target deployment is not ready."
           },
           {
             "name": "AdapterDeploymentAlreadyExists",
-            "value": "adapter_deployment_already_exists",
+            "value": "AdapterDeploymentAlreadyExists",
             "description": "The adapter deployment already exists."
           },
           {
             "name": "AdapterDeploymentsExist",
-            "value": "adapter_deployments_exist",
+            "value": "AdapterDeploymentsExist",
             "description": "Adapter deployments prevent the requested parent operation."
           },
           {
             "name": "AdapterDeploymentSourceInUse",
-            "value": "adapter_deployment_source_in_use",
+            "value": "AdapterDeploymentSourceInUse",
             "description": "The adapter source is already in use."
           },
           {
             "name": "AdapterLimitExceeded",
-            "value": "adapter_limit_exceeded",
+            "value": "AdapterLimitExceeded",
             "description": "The target deployment's adapter limit was exceeded."
           },
           {
             "name": "PreconditionFailed",
-            "value": "precondition_failed",
+            "value": "PreconditionFailed",
             "description": "A conditional request precondition failed."
           },
           {
             "name": "AdapterLoadFailed",
-            "value": "adapter_load_failed",
+            "value": "AdapterLoadFailed",
             "description": "Loading the adapter failed."
           },
           {
             "name": "AdapterRollbackFailed",
-            "value": "adapter_rollback_failed",
+            "value": "AdapterRollbackFailed",
             "description": "Rolling back the adapter failed."
           },
           {
             "name": "ConvergenceTimedOut",
-            "value": "convergence_timed_out",
+            "value": "ConvergenceTimedOut",
             "description": "Replica convergence timed out."
           },
           {
             "name": "DrainTimedOut",
-            "value": "drain_timed_out",
+            "value": "DrainTimedOut",
             "description": "Request draining timed out."
           },
           {
             "name": "AdapterRevoked",
-            "value": "adapter_revoked",
+            "value": "AdapterRevoked",
             "description": "Security policy revoked the adapter."
           },
           {
             "name": "TooManyRequests",
-            "value": "too_many_requests",
+            "value": "TooManyRequests",
             "description": "The request rate is too high."
           },
           {
             "name": "ServiceUnavailable",
-            "value": "service_unavailable",
+            "value": "ServiceUnavailable",
             "description": "The service is temporarily unavailable."
           }
         ]
@@ -13253,10 +13253,10 @@
       "type": "string",
       "description": "Lifecycle operation states reported by an adapter deployment.",
       "enum": [
-        "accepted",
-        "running",
-        "succeeded",
-        "failed"
+        "Accepted",
+        "Running",
+        "Succeeded",
+        "Failed"
       ],
       "x-ms-enum": {
         "name": "AdapterDeploymentOperationState",
@@ -13264,22 +13264,22 @@
         "values": [
           {
             "name": "Accepted",
-            "value": "accepted",
+            "value": "Accepted",
             "description": "The operation was accepted."
           },
           {
             "name": "Running",
-            "value": "running",
+            "value": "Running",
             "description": "The operation is running."
           },
           {
             "name": "Succeeded",
-            "value": "succeeded",
+            "value": "Succeeded",
             "description": "The operation completed successfully."
           },
           {
             "name": "Failed",
-            "value": "failed",
+            "value": "Failed",
             "description": "The operation failed."
           }
         ]
@@ -13290,9 +13290,9 @@
       "type": "string",
       "description": "Lifecycle operation types reported by an adapter deployment.",
       "enum": [
-        "create",
-        "update",
-        "delete"
+        "Create",
+        "Update",
+        "Delete"
       ],
       "x-ms-enum": {
         "name": "AdapterDeploymentOperationType",
@@ -13300,17 +13300,17 @@
         "values": [
           {
             "name": "Create",
-            "value": "create",
+            "value": "Create",
             "description": "Creates the adapter deployment."
           },
           {
             "name": "Update",
-            "value": "update",
+            "value": "Update",
             "description": "Re-targets the adapter deployment."
           },
           {
             "name": "Delete",
-            "value": "delete",
+            "value": "Delete",
             "description": "Deletes the adapter deployment."
           }
         ]
@@ -13353,9 +13353,9 @@
       "type": "string",
       "description": "Rollback outcomes for a failed re-target operation.",
       "enum": [
-        "not_required",
-        "succeeded",
-        "failed"
+        "NotRequired",
+        "Succeeded",
+        "Failed"
       ],
       "x-ms-enum": {
         "name": "AdapterDeploymentRollbackResult",
@@ -13363,17 +13363,17 @@
         "values": [
           {
             "name": "NotRequired",
-            "value": "not_required",
+            "value": "NotRequired",
             "description": "No rollback was required."
           },
           {
             "name": "Succeeded",
-            "value": "succeeded",
+            "value": "Succeeded",
             "description": "Rollback completed successfully."
           },
           {
             "name": "Failed",
-            "value": "failed",
+            "value": "Failed",
             "description": "Rollback failed."
           }
         ]

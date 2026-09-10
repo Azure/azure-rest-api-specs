@@ -95,14 +95,17 @@ alias AdapterDeploymentPutConditions = {
 };
 
 /**
- * Conditional header required when deleting an existing adapter deployment.
+ * Optional conditional header accepted when deleting an adapter deployment.
  */
 alias AdapterDeploymentDeleteConditions = {
   /**
-   * Applies deletion only when the current resource ETag matches.
+   * When supplied, applies deletion only if the current resource ETag matches.
+   * Omitting the header deletes unconditionally so that ARM cascade deletes
+   * (resource group or parent account) and clients that did not read the ETag
+   * are not blocked.
    */
   @header("If-Match")
-  ifMatch: string;
+  ifMatch?: string;
 };
 
 alias AdapterDeploymentLroHeaders = ArmAsyncOperationHeader<FinalResult = AdapterDeployment> &
