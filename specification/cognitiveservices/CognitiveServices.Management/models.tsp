@@ -2031,6 +2031,25 @@ model AccountProperties {
   @maxItems(1)
   @identifiers(#["name"])
   agentHostingConfigurations?: AgentHostingConfiguration[];
+
+  /**
+   * The full resource IDs of cost controls directly attached to this account.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @maxItems(20)
+  costControlIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.CognitiveServices/accounts/costControls";
+    }
+  ]>[];
+
+  /**
+   * The account-level connections used to publish cost control telemetry and events. Application Insights is optional for attachment, accounting, and enforcement and can be configured later. Event Grid must be configured before attaching a cost control with an alert threshold.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted costControlConnections object from an explicit null in PATCH so callers can clear the value."
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Update)
+  costControlConnections?: CostControlConnections | null;
 }
 
 /**
@@ -3671,6 +3690,17 @@ model DeploymentProperties {
    * Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset.
    */
   routing?: DeploymentRouting;
+
+  /**
+   * The full resource IDs of cost controls directly attached to this deployment.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @maxItems(20)
+  costControlIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.CognitiveServices/accounts/costControls";
+    }
+  ]>[];
 }
 
 /**

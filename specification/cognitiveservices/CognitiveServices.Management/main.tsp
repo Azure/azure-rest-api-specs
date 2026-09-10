@@ -46,6 +46,7 @@ import "./ManagedComputeUsages.tsp";
 import "./Compute.tsp";
 import "./Workbench.tsp";
 import "./ManagedComputeCapacity.tsp";
+import "./CostControl.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 
