@@ -51,6 +51,21 @@ model AgentPatchProperties {
 
   /** Default AI model configuration for the agent */
   defaultModel?: DefaultModel;
+
+  /**
+   * Virtual network configuration to update. Omission or an empty object preserves the subnet; null clears it.
+   * To detach, clear the subnet and set an explicit non-AzureVNet egress mode in the same request.
+   * The resulting subnet and AzureVNet egress mode must be configured together.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API distinguishes null, which clears the subnet, from omission, which preserves it."
+  vnetConfiguration?: VnetConfiguration | null;
+
+  /**
+   * Sandbox configuration to update. Omission or null preserves the stored configuration.
+   * A supplied object merges its members with the stored configuration.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts a null sandboxConfiguration in PATCH and preserves the stored configuration."
+  sandboxConfiguration?: SandboxConfiguration | null;
 }
 
 /** Properties of the Agent */
@@ -98,6 +113,72 @@ model AgentProperties {
 
   /** Default AI model configuration for the agent */
   defaultModel?: DefaultModel;
+
+  /**
+   * Desired virtual network configuration. A subnet and AzureVNet egress mode must be configured together.
+   * GET returns the desired subnet, or an object with a null subnetResourceId when detached.
+   * Use PATCH for selective updates. Omitting networking settings from PUT can clear them or fail validation.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts a null vnetConfiguration in create or replace requests."
+  vnetConfiguration?: VnetConfiguration | null;
+
+  /** Desired sandbox configuration. GET can return null when no configuration is stored. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null sandboxConfiguration."
+  sandboxConfiguration?: SandboxConfiguration | null;
+}
+
+/** Desired subnet configuration for the agent's sandbox. */
+model VnetConfiguration {
+  /**
+   * Azure resource ID of the subnet used with AzureVNet egress mode, or null when detached.
+   * In PATCH, omission preserves the subnet and null clears it.
+   * Setting or replacing a subnet requires the resulting egress mode to be AzureVNet.
+   * Clearing the subnet requires an explicit non-AzureVNet mode in the same PATCH request.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API returns null when detached and distinguishes null from omission in PATCH."
+  subnetResourceId?:
+    | armResourceIdentifier<[
+        {
+          type: "Microsoft.Network/virtualNetworks/subnets";
+        }
+      ]>
+    | null;
+}
+
+/** Desired configuration for the agent's sandbox. */
+model SandboxConfiguration {
+  /**
+   * Sandbox egress configuration. In PATCH, omission preserves egress and null clears it.
+   * Clearing egress is invalid while a subnet remains configured.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns null egress and distinguishes null from omission in PATCH."
+  egress?: SandboxEgressConfiguration | null;
+}
+
+/** Desired outbound network configuration for the agent's sandbox. */
+model SandboxEgressConfiguration {
+  /**
+   * Sandbox egress mode. AzureVNet requires a subnet, and a configured subnet requires AzureVNet.
+   * In PATCH, omission preserves the mode and null clears it.
+   * Clearing the mode is invalid while a subnet remains configured.
+   * No unconditional default applies.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null mode and distinguishes null from omission in PATCH."
+  mode?: SandboxEgressMode | null;
+}
+
+/** Supported modes for outbound network access from the agent's sandbox. */
+union SandboxEgressMode {
+  string,
+
+  /** Allows sandbox egress without destination restrictions from this mode. */
+  Unrestricted: "Unrestricted",
+
+  /** Restricts sandbox egress to allowed destinations. */
+  Limited: "Limited",
+
+  /** Uses the configured virtual network subnet for sandbox egress. */
+  AzureVNet: "AzureVNet",
 }
 
 /** Provisioning state of the Agent */
