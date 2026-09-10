@@ -1,0 +1,32 @@
+{
+  "title": "ProbingGateways_ListBySubscription",
+  "operationId": "ProbingGateways_ListBySubscription",
+  "parameters": {
+    "api-version": "2026-02-09-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "pg1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/probingGateways/pg1",
+            "type": "Microsoft.Network/probingGateways",
+            "location": "eastus",
+            "properties": {
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+              "ipConfigurations": [
+                {
+                  "privateIpV4Address": "10.0.0.4",
+                  "privateIpAllocationMethod": "Static"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
