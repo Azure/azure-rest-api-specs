@@ -1287,6 +1287,34 @@ model LocalDNSOverride {
    * Policy for serving stale data. See [cache plugin](https://coredns.io/plugins/cache) for more information.
    */
   serveStale?: LocalDNSServeStale = LocalDNSServeStale.Immediate;
+
+  /**
+   * Determines the handling of requests when all upstream DNS servers are unhealthy. When true, localDNS immediately returns SERVFAIL instead of forwarding the query and waiting for a timeout. See [forward plugin](https://coredns.io/plugins/forward) for more information.
+   */
+  @added(Versions.v2026_09_01)
+  failfastAllUnhealthyUpstreams?: boolean;
+
+  /**
+   * Configures active health checking of upstream DNS servers by localDNS. See [forward plugin](https://coredns.io/plugins/forward) for more information.
+   */
+  @added(Versions.v2026_09_01)
+  healthCheck?: LocalDNSHealthCheck;
+}
+
+/**
+ * Active upstream health check settings for localDNS. See [forward plugin](https://coredns.io/plugins/forward) for more information.
+ */
+@added(Versions.v2026_09_01)
+model LocalDNSHealthCheck {
+  /**
+   * The health check interval as a duration string, for example "500ms" or "1s". See [forward plugin](https://coredns.io/plugins/forward) for more information.
+   */
+  duration?: string;
+
+  /**
+   * When true, sets the RecursionDesired bit to false on health check queries. See [forward plugin](https://coredns.io/plugins/forward) for more information.
+   */
+  noRec?: boolean;
 }
 
 /**
