@@ -774,15 +774,14 @@ interface RecoveryPointsExtendedInfo {
   @tag("RecoveryPoints")
   getRPExtendedInfo(
     ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
     /**
      * The name of the recovery services vault.
      */
     @path
     vaultName: string,
-
-    ...ResourceGroupParameter,
-    ...SubscriptionIdParameter,
 
     /**
      * Fabric name associated with the backed up items.
@@ -821,15 +820,14 @@ interface RecoveryPointsExtendedInfo {
   @tag("RecoveryPoints")
   getRPExtendedInfoOperationResult(
     ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
     /**
      * The name of the recovery services vault.
      */
     @path
     vaultName: string,
-
-    ...ResourceGroupParameter,
-    ...SubscriptionIdParameter,
 
     /**
      * Fabric name associated with the backed up items.
