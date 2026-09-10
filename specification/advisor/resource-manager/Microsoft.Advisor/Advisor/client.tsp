@@ -125,8 +125,6 @@ using Microsoft.Advisor;
   "TriageResourceType",
   "csharp"
 );
-@@clientName(ResiliencyReviewProperties.publishedAt, "PublishedOn", "csharp");
-@@clientName(ResiliencyReviewProperties.updatedAt, "UpdatedOn", "csharp");
 @@alternateType(ResiliencyReviewProperties.publishedAt, utcDateTime, "csharp");
 @@alternateType(ResiliencyReviewProperties.updatedAt, utcDateTime, "csharp");
 @@clientName(ConfigurationsOperationGroup, "Configurations", "csharp");
@@ -177,7 +175,6 @@ using Microsoft.Advisor;
   "AdvisorTriageRecommendationProperties",
   "csharp"
 );
-@@clientName(TriageRecommendationProperties.updatedAt, "UpdatedOn", "csharp");
 @@alternateType(
   TriageRecommendationProperties.updatedAt,
   utcDateTime,

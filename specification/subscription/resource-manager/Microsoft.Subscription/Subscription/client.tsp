@@ -41,19 +41,9 @@ namespace Microsoft.Subscription;
 );
 @@clientName(ServiceTenantResponse, "ServiceTenant", "csharp");
 @@clientName(Workload, "SubscriptionWorkload", "csharp");
-@@clientName(
-  SubscriptionAliasResponseProperties.acceptOwnershipUrl,
-  "acceptOwnershipUri",
-  "csharp"
-);
 @@alternateType(
   SubscriptionAliasResponseProperties.acceptOwnershipUrl,
   url,
-  "csharp"
-);
-@@clientName(
-  SubscriptionAliasResponseProperties.createdTime,
-  "createdOn",
   "csharp"
 );
 @@alternateType(
