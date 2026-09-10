@@ -96,6 +96,14 @@ using Azure.ClientGenerator.Core;
   Access.public
 );
 @@usage(
+  Microsoft.EventGrid.SystemEvents.StorageDeltaSnapSnapshotGenerationSucceededEventData,
+  Usage.output | Usage.json
+);
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageDeltaSnapSnapshotGenerationSucceededEventData,
+  Access.public
+);
+@@usage(
   Microsoft.EventGrid.SystemEvents.StorageTaskCompletedEventData,
   Usage.output | Usage.json
 );
@@ -129,6 +137,22 @@ using Azure.ClientGenerator.Core;
 );
 //Enums
 @@usage(
+  Microsoft.EventGrid.SystemEvents.StorageDeltaSnapSnapshotGenerationStatus,
+  Usage.output | Usage.json
+);
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageDeltaSnapSnapshotGenerationStatus,
+  Access.public
+);
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageDeltaSnapSnapshotOperationType,
+  Usage.output | Usage.json
+);
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageDeltaSnapSnapshotOperationType,
+  Access.public
+);
+@@usage(
   Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedStatus,
   Usage.output | Usage.json
 );
@@ -160,6 +184,10 @@ using Azure.ClientGenerator.Core;
 );
 @@useSystemTextJsonConverter(
   Microsoft.EventGrid.SystemEvents.StorageBlobInventoryPolicyCompletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.StorageDeltaSnapSnapshotGenerationSucceededEventData,
   "csharp"
 );
 @@useSystemTextJsonConverter(
