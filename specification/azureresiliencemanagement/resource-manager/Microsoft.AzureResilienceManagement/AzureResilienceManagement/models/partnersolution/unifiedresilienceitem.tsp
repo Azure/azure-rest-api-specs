@@ -12,29 +12,6 @@ using Azure.ResourceManager;
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
 
-@doc("ISO 8601 duration formats.")
-union IsoDuration {
-  @doc("15 minutes.")
-  PT15M: "PT15M",
-
-  string,
-
-  @doc("1 hour.")
-  PT1H: "PT1H",
-
-  string,
-
-  @doc("4 hours.")
-  PT4H: "PT4H",
-
-  string,
-
-  @doc("24 hours.")
-  PT24H: "PT24H",
-
-  string,
-}
-
 @doc("enum for Resilience health status.")
 union ResilienceHealthStatus {
   @doc("Resource is not evaluated.")
