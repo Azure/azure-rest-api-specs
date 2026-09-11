@@ -37,7 +37,7 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(
   Microsoft.CodeTransparency.createEntry,
-  "createEntryPreview",
+  "createEntryLegacy",
   "csharp"
 );
 @@clientName(
@@ -45,11 +45,11 @@ using Azure.ClientGenerator.Core;
   "createEntry",
   "csharp"
 );
-@@clientName(Microsoft.CodeTransparency.getEntry, "getEntryPreview", "csharp");
+@@clientName(Microsoft.CodeTransparency.getEntry, "getEntryLegacy", "csharp");
 @@clientName(Microsoft.CodeTransparency.getEntryV09, "getEntry", "csharp");
 @@clientName(
   Microsoft.CodeTransparency.getEntryStatement,
-  "getEntryStatementPreview",
+  "getEntryStatementLegacy",
   "csharp"
 );
 @@clientName(
