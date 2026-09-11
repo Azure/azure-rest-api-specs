@@ -154,7 +154,21 @@ op createLedgerEntryAsync is ConfidentialLedgerCommon.LedgerOperation<
 >;
 
 /**
- * A collection id may optionally be specified.
+ * A collection id may optionally be specified. By default, the operation
+ * returns after local commit with an `x-ms-ccf-transaction-id` that callers can
+ * use with the `/app/transactions/{transactionId}/status` and
+ * `/app/transactions/{transactionId}/receipt` endpoints, including after
+ * reconnecting.
+ *
+ * When `waitForCommit` is true, the response is held until the transaction is
+ * globally committed. If the connection is lost before the response is
+ * received, the caller might not receive the transaction ID and cannot
+ * uniquely recover the specific write. Clients that require unambiguous
+ * per-request recovery should use the default behavior and poll using the
+ * returned transaction ID.
+ *
+ * For more information, see [Azure Confidential Ledger write transaction
+ * receipts](https://learn.microsoft.com/azure/confidential-ledger/write-transaction-receipts).
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The versioned ledger write route requires both the service default error and a 503 TransactionRolledBack response."
 @added(Versions.v2026_07_31_preview)
@@ -185,7 +199,10 @@ op createLedgerEntry is ConfidentialLedgerCommon.LedgerOperation<
 
     /**
      * Whether to wait for the transaction to be globally committed before
-     * returning. When true, the response includes the transaction receipt.
+     * returning. When true, the response includes the transaction receipt, but
+     * a disconnect before the response is received can prevent recovery of the
+     * specific write. Use the default behavior and poll the transaction status
+     * or receipt endpoints when unambiguous per-request recovery is required.
      */
     @query("waitForCommit")
     waitForCommit?: boolean = false;
