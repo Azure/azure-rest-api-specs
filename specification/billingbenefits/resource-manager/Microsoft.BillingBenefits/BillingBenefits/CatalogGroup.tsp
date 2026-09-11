@@ -82,14 +82,32 @@ alias BillingProfileScope = Extension.ExternalChildResource<
   Description = "The name of the billing profile."
 >;
 
+/**
+ * Subscription-scoped CatalogGroups operations.
+ */
 @armResourceOperations
 interface SubscriptionCatalogGroupsOps
   extends CatalogGroupsExtensionOps<SubscriptionScope> {}
 
+/**
+ * Billing account-scoped CatalogGroups operations.
+ */
 @armResourceOperations
 interface BillingAccountCatalogGroupsOps
   extends CatalogGroupsExtensionOps<BillingAccountScope> {}
 
+/**
+ * Billing profile-scoped CatalogGroups operations.
+ */
 @armResourceOperations
 interface BillingProfileCatalogGroupsOps
   extends CatalogGroupsExtensionOps<BillingProfileScope> {}
+
+/**
+ * Tenant-scoped CatalogGroups operations (added in 2026-07-01-preview).
+ * Path: /providers/Microsoft.BillingBenefits/catalogGroups[/{catalogGroupName}]
+ */
+@added(Versions.v2026_07_01_preview)
+@armResourceOperations
+interface TenantCatalogGroupsOps
+  extends CatalogGroupsExtensionOps<Extension.Tenant> {}
