@@ -34,7 +34,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
     autorest_options:
-      package-version: "1.0.0b6114"
+      package-version: "1.0.0b6700"
       package-name: "azure-mgmt-hasskoo"
     after_scripts:
       - >-
