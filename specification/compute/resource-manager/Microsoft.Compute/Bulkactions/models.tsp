@@ -617,6 +617,9 @@ model VirtualMachineInfo {
 
   @doc("The availability zone identifier.")
   zone?: string;
+
+  @doc("The resolved Azure virtual machine name.")
+  name: string;
 }
 
 @doc("The result of a bulk action for one virtual machine.")
