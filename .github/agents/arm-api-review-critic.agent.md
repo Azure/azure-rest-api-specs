@@ -499,7 +499,13 @@ normative text does not support the finding, mark `FAIL: rule-misapplied`
 or `FAIL: rule-not-found`.
 
 For a finding about an `x-ms-*` change in TypeSpec-generated OpenAPI, also read
-`azure-api-review/references/typespec-openapi-extensions.md`. Mark
+`azure-api-review/references/typespec-openapi-extensions.md`. For an ARM
+`x-ms-long-running-operation*` finding, also read
+`azure-api-review/references/lro-final-state-via.md` and verify the async
+template, `LroHeaders`, logical `FinalResult`, initial response headers, and
+generated behavior. Generic `@pollingOperation` or `@finalOperation` advice is
+not sufficient for an Azure.ResourceManager template whose header contract is
+controlled by `LroHeaders`. Mark
 `FAIL: rule-misapplied` when the finding treats legacy extension-only cleanup
 as a Section 26.0 violation without demonstrating a REST wire or ARM semantic
 change. Mark `FAIL: downstream-ci-conflict` when its suggested fix adds or
@@ -1005,7 +1011,8 @@ auto-invalidates if the underlying rule moves.
   suggested fix that restores a raw client-altering extension or suppresses
   `no-openapi-client-extensions`. Anchor:
   `typespec-openapi-extensions.md`, TSP-NO-RAW-CLIENT-EXTENSIONS and Reviewing
-  Generated OpenAPI Diffs.
+  Generated OpenAPI Diffs. For ARM LRO metadata, also anchor to
+  `lro-final-state-via.md` and verify the template, headers, and logical result.
 
 ### Watch for (commonly-missed violations)
 
