@@ -167,6 +167,23 @@ model SandboxEgressConfiguration {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null mode and distinguishes null from omission in PATCH."
   mode?: SandboxEgressMode | null;
+
+  /**
+   * DNS configuration for AzureVNet egress mode.
+   * In PATCH, omission preserves the configuration, null clears it, and a supplied object merges its members.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null sandbox VNet configuration and distinguishes null from omission in PATCH."
+  vnetConfiguration?: SandboxVnetConfiguration | null;
+}
+
+/** DNS settings for the sandbox's virtual network integration. */
+model SandboxVnetConfiguration {
+  /**
+   * Whether the sandbox uses the virtual network's private DNS resolution.
+   * In PATCH, omission preserves the setting and null clears it.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null private-DNS setting and distinguishes null from omission in PATCH."
+  usePrivateDnsResolution?: boolean | null;
 }
 
 /** Supported modes for outbound network access from the agent's sandbox. */

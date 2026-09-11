@@ -2797,6 +2797,11 @@
           "$ref": "#/definitions/SandboxEgressMode",
           "description": "Sandbox egress mode. AzureVNet requires a subnet, and a configured subnet requires AzureVNet.\nIn PATCH, omission preserves the mode and null clears it.\nClearing the mode is invalid while a subnet remains configured.\nNo unconditional default applies.",
           "x-nullable": true
+        },
+        "vnetConfiguration": {
+          "$ref": "#/definitions/SandboxVnetConfiguration",
+          "description": "DNS configuration for AzureVNet egress mode.\nIn PATCH, omission preserves the configuration, null clears it, and a supplied object merges its members.",
+          "x-nullable": true
         }
       }
     },
@@ -2828,6 +2833,17 @@
             "description": "Uses the configured virtual network subnet for sandbox egress."
           }
         ]
+      }
+    },
+    "SandboxVnetConfiguration": {
+      "type": "object",
+      "description": "DNS settings for the sandbox's virtual network integration.",
+      "properties": {
+        "usePrivateDnsResolution": {
+          "type": "boolean",
+          "description": "Whether the sandbox uses the virtual network's private DNS resolution.\nIn PATCH, omission preserves the setting and null clears it.",
+          "x-nullable": true
+        }
       }
     },
     "SupportedAgentModel": {
