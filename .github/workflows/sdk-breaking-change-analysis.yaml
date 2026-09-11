@@ -390,7 +390,7 @@ jobs:
         if: success()
         uses: actions/github-script@v9
         env:
-          ARTIFACT_URL: ${{ steps.upload-results.outputs.artifact-url }}
+          WORKFLOW_SUMMARY_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           MANIFEST_PATH: ${{ runner.temp }}/sdk-breaking-change-results/projects.json
           RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-results
           PR_NUMBER: ${{ github.event.issue.number || inputs.pr_number }}
@@ -422,10 +422,10 @@ jobs:
                   "",
                   ...checkboxes,
                 ];
-                if (process.env.ARTIFACT_URL) {
+                if (process.env.WORKFLOW_SUMMARY_URL) {
                   projectReport.push(
                     "",
-                    `[SDK breaking change details (${project.resultsPath}/breaking-changes.json)](${process.env.ARTIFACT_URL})`,
+                    `[SDK breaking change details (${project.resultsPath}/breaking-changes.json)](${process.env.WORKFLOW_SUMMARY_URL})`,
                   );
                 }
                 return projectReport;
