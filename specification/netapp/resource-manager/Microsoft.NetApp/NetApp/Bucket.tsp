@@ -54,6 +54,7 @@ model BucketProperties {
    * Provisioning state of the resource
    */
   @visibility(Lifecycle.Read)
+  @typeChangedFrom(Versions.v2026_07_01, NetAppProvisioningStateOld)
   provisioningState?: NetAppProvisioningState;
 
   /**
@@ -324,6 +325,7 @@ model BucketPatchProperties {
    * Provisioning state of the resource
    */
   @visibility(Lifecycle.Read)
+  @typeChangedFrom(Versions.v2026_07_01, NetAppProvisioningStateOld)
   provisioningState?: NetAppProvisioningState;
 
   /**

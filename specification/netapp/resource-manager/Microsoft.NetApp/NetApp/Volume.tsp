@@ -1752,6 +1752,15 @@ model ClusterPeerCommandResponseProperties {
   /**
    * Passphrase for use with cluster peer command
    */
+  @removed(Versions.v2026_07_01)
+  @renamedFrom(Versions.v2026_07_01, "passphrase")
+  @example("SecurePassphrase123")
+  passphraseOld?: string;
+
+  /**
+   * Passphrase for use with cluster peer command
+   */
+  @added(Versions.v2026_07_01)
   @secret
   @example("{passphrase}")
   passphrase?: string;
