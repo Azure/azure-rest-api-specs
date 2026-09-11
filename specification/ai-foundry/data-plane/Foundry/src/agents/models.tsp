@@ -473,6 +473,10 @@ model PromptAgentDefinition extends AgentDefinition {
 }
 
 @doc("A managed runtime and agent loop used to execute a prompt agent.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
+)
 @discriminator("type")
 model AgentHarness {
   @doc("The type of managed harness.")
