@@ -819,7 +819,7 @@ using Microsoft.DataProtection;
   "csharp"
 );
 @@clientName(
-  BackupInstanceResources.resumeProtection::parameters.body,
+  BackupInstanceResources.resumeProtectionPreview::parameters.body,
   "content",
   "csharp"
 );
