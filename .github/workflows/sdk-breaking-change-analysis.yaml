@@ -414,25 +414,27 @@ jobs:
                     ? text.replaceAll("\r", "").replaceAll("|", "\\|").replaceAll("\n", "<br>")
                     : fallback;
                 };
-                const tableRows = changes.length
-                  ? changes.map((change) => {
-                      const details = typeof change === "object" && change !== null ? change : {};
-                      const text = escapeTableCell(details.breakingChange ?? change);
-                      const category = escapeTableCell(
-                        details.category ?? details.category,
-                      );
-                      const suggestedFix = escapeTableCell(
-                        details.resolution ?? details.resolution,
-                      );
-                      return `| - [ ] | ${text} | ${category} | ${suggestedFix} |`;
-                    })
-                  : ["| - [x] | No SDK breaking changes detected. | - | - |"];
+                const changeDetails = changes.map((change) => {
+                  const details = typeof change === "object" && change !== null ? change : {};
+                  const text = escapeTableCell(details.breakingChange ?? change);
+                  const category = escapeTableCell(details.category);
+                  const suggestedFix = escapeTableCell(details.resolution);
+                  return { text, category, suggestedFix };
+                });
+                const tableRows = changeDetails.length
+                  ? changeDetails.map(
+                      ({ text, category, suggestedFix }) =>
+                        `| ☐ | ${text} | ${category} | ${suggestedFix} |`,
+                    )
+                  : [
+                      "| ☐ | No SDK breaking changes detected. | - | - |",
+                    ];
                 const projectReport = [
                   `**Typespec Project:** ${project.typespecProjectPath}`,
                   "",
                   `**SDK Package:** ${project.packageName}`,
                   "",
-                  "| Checkbox | Breaking change | Category | Suggested fix |",
+                  "|  | Breaking change | Category | Suggested fix |",
                   "| --- | --- | --- | --- |",
                   ...tableRows,
                 ];
