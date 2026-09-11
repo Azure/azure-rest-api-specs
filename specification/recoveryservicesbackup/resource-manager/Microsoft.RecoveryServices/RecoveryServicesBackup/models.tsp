@@ -5914,21 +5914,17 @@ model RPExtendedInfoResource extends Resource {
 }
 
 /**
- * Dictionary of the additional details of recovery points, keyed by recovery point ARM id.
+ * List of the additional details of recovery points.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "RP is an established acronym in the BMS contract; the model name matches the service data contract."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Matches the existing BMS list envelope pattern used by RecoveryPointResourceList and ProtectedItemResourceList."
 @added(Versions.v2026_10_01)
-model RPExtendedInfoResourceDictionary {
+model RPExtendedInfoResourceList extends ResourceList {
   /**
-   * Additional details of the recovery points, keyed by recovery point ARM id.
+   * List of resources.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The response is keyed by recovery point ARM id, which is caller supplied, so the key set cannot be modelled as explicit properties. This matches the ResourceDictionary contract returned by the service."
-  value?: Record<RPExtendedInfoResource>;
-
-  /**
-   * The URI to fetch the next page of resources.
-   */
-  nextLink?: string;
+  @pageItems
+  value?: RPExtendedInfoResource[];
 }
 
 /**
