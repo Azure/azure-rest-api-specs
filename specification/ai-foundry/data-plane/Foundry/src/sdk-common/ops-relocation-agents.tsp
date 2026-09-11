@@ -175,7 +175,7 @@ namespace Azure.AI.Projects.Beta {
     Azure.AI.Projects.VoiceAgentWebSocket.connectVoiceAgent,
     VoiceAgentWebSocket
   );
-  
+
   interface AgentEndpointConversations {}
   @@clientLocation(
     Azure.AI.Projects.AgentEndpointConversations.listAgentConversations,
