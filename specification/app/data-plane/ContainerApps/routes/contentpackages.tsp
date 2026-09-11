@@ -1,4 +1,5 @@
 using Http;
+using Rest;
 using Azure.Core;
 
 namespace ContainerAppsSandbox;
@@ -59,7 +60,6 @@ alias PostContentPackageUploadErrors =
   | ErrorResult<503>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
 @tag("ContentPackages")
 interface ContentPackagesOperations {
   /** Deletes a content package by ID. */
@@ -81,6 +81,7 @@ interface ContentPackagesOperations {
   /** Lists content packages for the sandbox group. */
   @summary("Lists content packages for the sandbox group.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/contentpackages")
+  @listsResource(ContentPackage)
   @get
   listContentPackages is Foundations.Operation<
     {

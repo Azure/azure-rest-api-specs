@@ -1,4 +1,5 @@
 using Http;
+using Rest;
 using Azure.Core;
 
 namespace ContainerAppsSandbox;
@@ -46,7 +47,6 @@ model PutCredentialResult {
 alias PutCredentialErrors = ErrorResult<400>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
 @tag("credentials")
 interface CredentialsOperations {
   /** Deletes a credential in a sandbox group. */
@@ -68,6 +68,7 @@ interface CredentialsOperations {
   /** Lists all credentials in a sandbox group. */
   @summary("Lists all credentials in a sandbox group.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/credentials")
+  @listsResource(SandboxGroupCredential)
   @get
   listCredentials is Foundations.Operation<
     {
@@ -95,6 +96,7 @@ interface CredentialsOperations {
   >;
 
   /** Creates or updates a credential in a sandbox group. If the credential already exists, it will be updated; otherwise, a new credential will be created. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
   @summary("Creates or updates a credential in a sandbox group.\nIf the credential already exists, it will be updated; otherwise, a new credential will be created.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/credentials/{credentialName}")
   @put

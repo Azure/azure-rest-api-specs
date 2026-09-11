@@ -1,4 +1,5 @@
 using Http;
+using Rest;
 using Azure.Core;
 
 namespace ContainerAppsSandbox {
@@ -62,12 +63,12 @@ namespace ContainerAppsSandbox {
 namespace ContainerAppsSandbox {
   /** Azure-scoped Sandbox CRUD operations. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core StandardResourceOperations.ResourceList cannot preserve the existing Page, PageSize, and labels query parameter names or the array response without changing the established wire contract."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This list operation uses a custom response model to preserve the existing bare-array wire contract, which the rule misclassifies as a single-object response."
   @doc("Lists sandboxes in a scope.")
   @tag("Sandboxes")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes")
   interface AzureSandboxes {
     @doc("Lists sandboxes in a scope.")
+    @listsResource(Sandbox)
     @get
     list is Foundations.Operation<
       {

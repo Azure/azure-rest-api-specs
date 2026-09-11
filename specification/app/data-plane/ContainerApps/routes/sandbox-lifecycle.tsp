@@ -153,7 +153,6 @@ alias PostSandboxStopErrors =
   | ErrorResult<500>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
 @tag("sandboxes")
 interface SandboxLifecycleOperations {
   /** Gets the total count of sandboxes. */
