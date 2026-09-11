@@ -7,12 +7,23 @@
       "properties": {
         "actions": [
           {
-            "name": "ModifyResponseHeader",
+            "name": "AfdUrlSigning",
             "parameters": {
-              "headerAction": "Overwrite",
-              "headerName": "X-CDN",
-              "typeName": "DeliveryRuleHeaderActionParameters",
-              "value": "MSFT"
+              "algorithm": "SHA256",
+              "keyGroupReference": {
+                "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/keygroups/kg1"
+              },
+              "parameterNameOverride": [
+                {
+                  "paramIndicator": "Expires",
+                  "paramName": "Expiration-Date"
+                },
+                {
+                  "paramIndicator": "Signature",
+                  "paramName": "Sig-Hash"
+                }
+              ],
+              "typeName": "DeliveryRuleAfdUrlSigningActionParameters"
             }
           }
         ],
@@ -45,12 +56,23 @@
         "properties": {
           "actions": [
             {
-              "name": "ModifyResponseHeader",
+              "name": "AfdUrlSigning",
               "parameters": {
-                "headerAction": "Overwrite",
-                "headerName": "X-CDN",
-                "typeName": "DeliveryRuleHeaderActionParameters",
-                "value": "MSFT"
+                "algorithm": "SHA256",
+                "keyGroupReference": {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/keygroups/kg1"
+                },
+                "parameterNameOverride": [
+                  {
+                    "paramIndicator": "Expires",
+                    "paramName": "Expiration-Date"
+                  },
+                  {
+                    "paramIndicator": "Signature",
+                    "paramName": "Sig-Hash"
+                  }
+                ],
+                "typeName": "DeliveryRuleAfdUrlSigningActionParameters"
               }
             }
           ],
@@ -63,7 +85,6 @@
                 ],
                 "negateCondition": false,
                 "operator": "Equal",
-                "transforms": [],
                 "typeName": "DeliveryRuleRequestMethodConditionParameters"
               }
             }
@@ -83,12 +104,23 @@
         "properties": {
           "actions": [
             {
-              "name": "ModifyResponseHeader",
+              "name": "AfdUrlSigning",
               "parameters": {
-                "headerAction": "Overwrite",
-                "headerName": "X-CDN",
-                "typeName": "DeliveryRuleHeaderActionParameters",
-                "value": "MSFT"
+                "algorithm": "SHA256",
+                "keyGroupReference": {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/keygroups/kg1"
+                },
+                "parameterNameOverride": [
+                  {
+                    "paramIndicator": "Expires",
+                    "paramName": "Expiration-Date"
+                  },
+                  {
+                    "paramIndicator": "Signature",
+                    "paramName": "Sig-Hash"
+                  }
+                ],
+                "typeName": "DeliveryRuleAfdUrlSigningActionParameters"
               }
             }
           ],
@@ -101,7 +133,6 @@
                 ],
                 "negateCondition": false,
                 "operator": "Equal",
-                "transforms": [],
                 "typeName": "DeliveryRuleRequestMethodConditionParameters"
               }
             }
@@ -121,12 +152,23 @@
         "properties": {
           "actions": [
             {
-              "name": "ModifyResponseHeader",
+              "name": "AfdUrlSigning",
               "parameters": {
-                "headerAction": "Overwrite",
-                "headerName": "X-CDN",
-                "typeName": "DeliveryRuleHeaderActionParameters",
-                "value": "MSFT"
+                "algorithm": "SHA256",
+                "keyGroupReference": {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/keygroups/kg1"
+                },
+                "parameterNameOverride": [
+                  {
+                    "paramIndicator": "Expires",
+                    "paramName": "Expiration-Date"
+                  },
+                  {
+                    "paramIndicator": "Signature",
+                    "paramName": "Sig-Hash"
+                  }
+                ],
+                "typeName": "DeliveryRuleAfdUrlSigningActionParameters"
               }
             }
           ],
@@ -139,7 +181,6 @@
                 ],
                 "negateCondition": false,
                 "operator": "Equal",
-                "transforms": [],
                 "typeName": "DeliveryRuleRequestMethodConditionParameters"
               }
             }
@@ -149,12 +190,9 @@
           "order": 1,
           "provisioningState": "Creating"
         }
-      },
-      "headers": {
-        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-06-01"
       }
     }
   },
   "operationId": "Rules_Create",
-  "title": "Rules_Create"
+  "title": "Rules_Create_AfdUrlSigningAction"
 }

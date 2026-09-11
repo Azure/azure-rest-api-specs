@@ -2,66 +2,11 @@
   "parameters": {
     "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
     "providerNamespace": "Microsoft.Contoso",
-    "releaseName": "2020week10",
-    "api-version": "2026-02-01-preview",
-    "properties": {
-      "properties": {
-        "operationType": "Rollout",
-        "providerNamespace": "Microsoft.Contoso",
-        "frontloadLocation": "Israel Central",
-        "copyFromLocation": "eastus",
-        "environmentType": "Prod",
-        "serviceFeatureFlag": "DoNotCreate",
-        "includeResourceTypes": [
-          "servers"
-        ],
-        "excludeResourceTypes": [
-          "monitors"
-        ],
-        "overrideManifestLevelFields": {
-          "resourceHydrationAccounts": [
-            {
-              "subscriptionId": "e4eae963-2d15-43e6-a097-98bd75b33edd",
-              "accountName": "classichydrationprodsn01"
-            }
-          ]
-        },
-        "overrideEndpointLevelFields": {
-          "enabled": true,
-          "apiVersions": [
-            "2024-04-01-preview"
-          ],
-          "endpointUri": "https://resource-endpoint.com/",
-          "locations": [
-            "East US"
-          ],
-          "requiredFeatures": [
-            "<feature flag>"
-          ],
-          "featuresRule": {
-            "requiredFeaturesPolicy": "Any"
-          },
-          "timeout": "PT20S",
-          "endpointType": "Production",
-          "dstsConfiguration": {
-            "serviceName": "resourceprovider",
-            "serviceDnsName": "messaging.azure-ppe.net"
-          },
-          "skuLink": "http://endpointuri/westus/skus",
-          "apiVersion": "2024-04-01-preview",
-          "zones": [
-            "zone1"
-          ]
-        },
-        "ignoreFields": [
-          "apiversion"
-        ]
-      }
-    }
+    "api-version": "2026-02-01-preview"
   },
   "responses": {
     "200": {
-      "description": "New region frontload release resource.",
+      "description": "Generates the manifest for the given provider.",
       "body": {
         "providerAuthorizations": [
           {
@@ -95,6 +40,15 @@
             "allowedUnauthorizedActions": [
               "microsoft.contoso/operations/read"
             ],
+            "resourceDeletionPolicies": [
+              {
+                "policyName": "SoftDelete",
+                "properties": {
+                  "minimumRetentionTime": "P0DT1H0M",
+                  "maximumRetentionTime": "P1DT0H0M"
+                }
+              }
+            ],
             "allowedUnauthorizedActionsExtensions": [
               {
                 "action": "Microsoft.BizTalkServices/bizTalk/read",
@@ -113,7 +67,13 @@
                 "timeout": "PT20S"
               }
             ],
-            "linkedOperationRules": []
+            "linkedOperationRules": [],
+            "notifications": [
+              {
+                "notificationType": "SubscriptionNotification",
+                "skipNotifications": "Disabled"
+              }
+            ]
           },
           {
             "name": "Locations",
@@ -191,6 +151,6 @@
       }
     }
   },
-  "operationId": "NewRegionFrontloadRelease_GenerateManifest",
-  "title": "NewRegionFrontloadRelease_GenerateManifest"
+  "operationId": "GenerateManifest",
+  "title": "GenerateManifest"
 }
