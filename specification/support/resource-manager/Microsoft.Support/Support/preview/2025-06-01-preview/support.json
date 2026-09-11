@@ -2866,15 +2866,8 @@
           "description": "The System generated Id that is unique. Use supportTicketId property for Microsoft.Support/supportTickets resource type."
         },
         "type": {
-          "type": "string",
-          "description": "The type of resource.",
-          "enum": [
-            "Microsoft.Support/supportTickets"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceType",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ResourceType",
+          "description": "The type of resource."
         }
       }
     },
@@ -3095,6 +3088,24 @@
             "region"
           ]
         }
+      }
+    },
+    "ResourceType": {
+      "type": "string",
+      "description": "The type of support resource for resource Id lookup.",
+      "enum": [
+        "Microsoft.Support/supportTickets"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Microsoft.Support/supportTickets",
+            "value": "Microsoft.Support/supportTickets",
+            "description": "Microsoft Support ticket resource type."
+          }
+        ]
       }
     },
     "SecondaryConsent": {
