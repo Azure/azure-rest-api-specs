@@ -34,7 +34,7 @@ These are the global settings for the AppService API.
 title: AppServiceManagementClient
 description: AppService Management Client
 openapi-type: arm
-tag: package-2026-07
+tag: package-2026-09
 ```
 
 ### Suppression
@@ -100,6 +100,48 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy/log"]
     reason: MSDeploy is the intentional name matching the existing service API.
+  - suppress: EvenSegmentedPathForPutOperation
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/virtualConnections"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/virtualConnections"]
+    reason: >-
+      virtualConnections is the fixed name of a Microsoft.Web singleton config resource, so the path intentionally ends
+      with the literal resource name rather than a resource-name parameter.
+  - suppress: PathForNestedResource
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/virtualConnections"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/virtualConnections"]
+    reason: >-
+      virtualConnections follows the established Microsoft.Web sites/config singleton path shape and intentionally uses
+      a fixed nested-resource name.
+  - suppress: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions.VirtualConnectionsProperties.properties.connections
+      - $.definitions.VirtualConnection.properties.settings
+    reason: >-
+      Connection names and setting names are arbitrary customer-chosen keys and cannot be represented as a fixed set of
+      model properties. These dictionaries retain typed values for each customer-defined key.
+  - suppress: PathForResourceAction
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/virtualConnections:validate"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/virtualConnections:validate"]
+    reason: >-
+      virtualConnections is a Microsoft.Web sites/config singleton, so validate is a POST action on the singleton itself
+      rather than on a resource collection with a resource-name parameter. The path intentionally ends with the fixed
+      singleton name plus the :validate action.
+```
+
+### Tag: package-2026-09
+
+These settings apply only when `--tag=package-2026-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-09'
+input-file:
+    - stable/2026-09-01/openapi.json
 ```
 
 ### Tag: package-2026-07
