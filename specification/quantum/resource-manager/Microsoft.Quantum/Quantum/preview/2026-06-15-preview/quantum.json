@@ -662,8 +662,10 @@
         },
         "key": {
           "type": "string",
+          "format": "password",
           "description": "The Api key.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
@@ -722,13 +724,17 @@
         },
         "primaryConnectionString": {
           "type": "string",
+          "format": "password",
           "description": "The connection string of the primary api key.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "secondaryConnectionString": {
           "type": "string",
+          "format": "password",
           "description": "The connection string of the secondary api key.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
