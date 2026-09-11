@@ -194,6 +194,14 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationCandidate.avg_tokens, "averageTokens");
 @@clientName(AgentOptimizationCandidate.eval_id, "evaluationId");
 @@clientName(AgentOptimizationCandidate.eval_run_id, "evaluationRunId");
+@@clientName(
+  AgentOptimizationDatasetItem.desired_num_turns,
+  "desiredNumberTurns"
+);
+@@clientName(
+  AgentOptimizationEvaluatorRef,
+  "AgentOptimizationEvaluatorReference"
+);
 @@clientName(AgentOptimizationJobProgress.elapsed_seconds, "elapsed");
 
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
