@@ -37,6 +37,17 @@ union TargetAttribute {
   tool: "tool",
 }
 
+/** Goal for an agent-optimization job. */
+union AgentOptimizationGoal {
+  string,
+
+  @doc("Search for agent configurations that improve measured evaluation quality.")
+  improve_quality: "improve_quality",
+
+  @doc("Search for lower-cost model configurations while measuring acceptable quality.")
+  reduce_cost: "reduce_cost",
+}
+
 /** Outcome of an optimization job that evaluated candidates against a baseline. */
 union AgentOptimizationEvaluationOutcome {
   string,
@@ -211,18 +222,8 @@ model AgentOptimizationDatasetCriterion {
 // Evaluator reference
 // ---------------------------------------------------------------------------
 
-/** Base model for evaluator inputs. */
-@discriminator("type")
-model AgentOptimizationEvaluatorInputBase {
-  @doc("Evaluator input type discriminator.")
-  type: string;
-}
-
 /** Reference to a named evaluator, optionally pinned to a version. */
-model AgentOptimizationNamedEvaluatorInput extends AgentOptimizationEvaluatorInputBase {
-  @doc("Evaluator input type discriminator.")
-  type: "named";
-
+model AgentOptimizationEvaluator {
   @doc("Evaluator name.")
   name: string;
 
@@ -233,25 +234,22 @@ model AgentOptimizationNamedEvaluatorInput extends AgentOptimizationEvaluatorInp
   initialization_parameters?: Record<unknown>;
 }
 
-/** Reference to an evaluator-generation job whose output is added to the evaluator set. */
-model AgentOptimizationGenerationJobReferenceEvaluatorInput
-  extends AgentOptimizationEvaluatorInputBase {
-  @doc("Evaluator input type discriminator.")
-  type: "generation_job_reference";
-
-  @doc("Identifier of the evaluator-generation job to await and resolve.")
-  evaluator_generation_job_id: string;
-}
-
-/** Supported evaluator inputs. */
-union AgentOptimizationEvaluator {
-  AgentOptimizationNamedEvaluatorInput,
-  AgentOptimizationGenerationJobReferenceEvaluatorInput,
-}
-
 // ---------------------------------------------------------------------------
 // Input models
 // ---------------------------------------------------------------------------
+
+@doc("Identifies the Foundry agent that owns the configuration being optimized.")
+model AgentOptimizationTargetConfiguration {
+  @doc("Target type discriminator.")
+  type: "foundry_agent";
+
+  @doc("Registered Foundry agent name.")
+  @maxLength(256)
+  name: string;
+
+  @doc("Pinned agent version. Omitted to resolve and pin the latest version.")
+  version?: string;
+}
 
 @doc("Identifies a model deployment used by an optimization or evaluation step.")
 model AgentOptimizationModelConfiguration {
@@ -276,11 +274,8 @@ model AgentOptimizationSkill {
   body?: string;
 }
 
-@doc("Fields shared by quality and cost agent optimization spaces.")
-model AgentOptimizationSpaceBase {
-  @doc("Agent attributes the optimizer may change. When omitted, the service infers supported attributes from the baseline.")
-  target_attributes?: TargetAttribute[];
-
+@doc("Caller-supplied baseline values for attributes that cannot be resolved from the target agent.")
+model AgentOptimizationBaselineConfiguration {
   @doc("Caller-supplied baseline system prompt. Omitted to resolve the baseline from the target; a prompt agent's stored definition is authoritative.")
   system_prompt?: string;
 
@@ -294,21 +289,14 @@ model AgentOptimizationSpaceBase {
   tools?: OpenAI.ChatCompletionTool[];
 }
 
-@doc("The agent attributes and alternative values available to a quality-optimization search.")
+@doc("The agent attributes and alternative values available to an agent-optimization search.")
 model AgentOptimizationSpace {
-  ...AgentOptimizationSpaceBase;
-
-  @doc("Alternative model deployments available when model is an optimization target. Omitted when model is not an optimization target.")
-  model_search_space?: string[];
-}
-
-@doc("Agent optimization space for cost optimization. Model selection is always enabled and requires at least one alternative deployment.")
-model CostAgentOptimizationSpace {
-  ...AgentOptimizationSpaceBase;
-
-  @doc("Alternative model deployments evaluated for lower serving cost. Model is an implicit optimization target for every cost-optimization job.")
+  @doc("Agent attributes the optimizer may change.")
   @minItems(1)
-  model_search_space: string[];
+  target_attributes: TargetAttribute[];
+
+  @doc("Alternative model deployments available when model is an optimization target. Required when goal is reduce_cost or target_attributes includes model; otherwise omitted.")
+  model_search_space?: string[];
 }
 
 /**
@@ -334,10 +322,10 @@ model GepaSearchConfiguration extends AgentOptimizationSearchConfigurationBase {
   @maxValue(20)
   max_candidates?: int32 = 2;
 
-  @doc("Number of training rows used to screen each proposed candidate before full validation. Defaults to 3 when omitted.")
+  @doc("Number of training-dataset rows sampled to screen each proposed candidate before full validation. Defaults to 3 when omitted.")
   @minValue(1)
   @maxValue(100)
-  candidate_screening_size?: int32 = 3;
+  candidate_screening_sample_size?: int32 = 3;
 
   @doc("Maximum number of consecutive proposed candidates that may fail screening before the search stops early. Defaults to 5 when omitted.")
   @minValue(1)
@@ -350,13 +338,7 @@ union AgentOptimizationSearchConfiguration {
   GepaSearchConfiguration,
 }
 
-/**
- * Reusable quality-measurement configuration.
- *
- * Review consideration: if evaluation gains more execution controls, move
- * max_concurrency into a dedicated execution configuration. It remains flat while
- * concurrency is the only execution setting.
- */
+/** Reusable quality-measurement configuration. */
 model AgentOptimizationEvaluationConfiguration {
   @doc("Dataset used to guide the optimization search.")
   training_dataset: AgentOptimizationDataset;
@@ -364,7 +346,7 @@ model AgentOptimizationEvaluationConfiguration {
   @doc("Held-out dataset used for full candidate evaluation. The training dataset is reused when omitted.")
   validation_dataset?: AgentOptimizationValidationDataset;
 
-  @doc("Evaluators used to score candidate quality. Named and generated evaluators may be combined.")
+  @doc("Evaluator references used to score candidate quality.")
   @minItems(1)
   evaluators: AgentOptimizationEvaluator[];
 
@@ -373,20 +355,6 @@ model AgentOptimizationEvaluationConfiguration {
 
   @doc("Level at which each dataset item is evaluated. Defaults to turn when omitted; use conversation for multi-turn simulation.")
   evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
-
-  @doc("Maximum number of target-agent runs executed concurrently during evaluation. Defaults to 1 when omitted.")
-  @minValue(1)
-  @maxValue(10)
-  max_concurrency?: int32 = 1;
-}
-
-@doc("Evaluation configuration accepted by the estimate operation.")
-model AgentOptimizationEstimateEvaluationConfiguration {
-  ...AgentOptimizationEvaluationConfiguration;
-
-  @doc("Validation dataset row-count hint used when a referenced dataset cannot be sized without a service lookup. Omitted to let the service resolve the row count.")
-  @minValue(1)
-  validation_dataset_row_count?: int32;
 }
 
 /** Base model for type-specific optimization configuration. */
@@ -396,10 +364,13 @@ model AgentOptimizationConfigurationBase {
   type: string;
 }
 
-@doc("Configuration for improving measured agent quality.")
-model QualityOptimizationConfiguration extends AgentOptimizationConfigurationBase {
+@doc("Configuration for optimizing an agent for measured quality or serving cost.")
+model AgentOptimizationConfiguration extends AgentOptimizationConfigurationBase {
   @doc("Optimization type discriminator.")
-  type: "quality_optimization";
+  type: "agent_optimization";
+
+  @doc("Optimization goal. Defaults to improve_quality when omitted.")
+  goal?: AgentOptimizationGoal = AgentOptimizationGoal.improve_quality;
 
   @doc("Quality measurement configuration.")
   evaluation_configuration: AgentOptimizationEvaluationConfiguration;
@@ -407,29 +378,40 @@ model QualityOptimizationConfiguration extends AgentOptimizationConfigurationBas
   @doc("Candidate search configuration.")
   search_configuration: AgentOptimizationSearchConfiguration;
 
-  @doc("Agent attributes and alternatives available to the search. Omitted to derive the optimization surface from the target agent.")
-  agent_optimization_space?: AgentOptimizationSpace;
+  @doc("Caller-supplied baseline configuration. Omitted when all baseline values can be resolved from the target agent.")
+  baseline_configuration?: AgentOptimizationBaselineConfiguration;
+
+  @doc("Agent attributes and alternatives available to the search.")
+  agent_optimization_space: AgentOptimizationSpace;
 }
 
-@doc("Configuration for reducing agent serving cost while preserving acceptable quality.")
-model CostOptimizationConfiguration extends AgentOptimizationConfigurationBase {
-  @doc("Optimization type discriminator.")
-  type: "cost_optimization";
+/** Type of context supplied to an optimization workflow. */
+union OptimizationContextType {
+  string,
 
-  @doc("Quality measurement configuration used to compare model and configuration alternatives.")
-  evaluation_configuration: AgentOptimizationEvaluationConfiguration;
-
-  @doc("Candidate search configuration.")
-  search_configuration: AgentOptimizationSearchConfiguration;
-
-  @doc("Agent attributes and alternatives available to the search. Model selection is always enabled for cost optimization.")
-  agent_optimization_space: CostAgentOptimizationSpace;
+  @doc("Natural-language guidance that steers the desired optimization.")
+  steering_prompt: "steering_prompt",
 }
 
-@doc("Developer-supplied context for prompt optimization.")
-model PromptOptimizationContext {
-  @doc("Developer guidance describing the desired prompt changes. Omitted when no developer steering is needed.")
-  steering_prompt?: string;
+/** Base model for typed optimization context. */
+@discriminator("type")
+model OptimizationContext {
+  @doc("Optimization context type discriminator.")
+  type: OptimizationContextType;
+}
+
+/** Natural-language guidance for the desired optimization. */
+model SteeringPromptOptimizationContext extends OptimizationContext {
+  @doc("Optimization context type discriminator.")
+  type: OptimizationContextType.steering_prompt;
+
+  @doc("Developer guidance describing the desired changes.")
+  prompt: string;
+}
+
+/** Supported optimization context items. */
+union OptimizationContextItem {
+  SteeringPromptOptimizationContext,
 }
 
 @doc("Configuration for a one-shot prompt transformation without comparative evaluation.")
@@ -438,16 +420,16 @@ model PromptOptimizationConfiguration extends AgentOptimizationConfigurationBase
   type: "prompt_optimization";
 
   @doc("Context used to steer prompt optimization. Omitted when no context is supplied.")
-  optimization_context?: PromptOptimizationContext;
+  @minItems(1)
+  optimization_context?: OptimizationContextItem[];
 }
 
 /**
  * Supported optimization types. New workflows should add independent variants
  * rather than adding nullable fields to existing variants.
  */
-union AgentOptimizationConfiguration {
-  QualityOptimizationConfiguration,
-  CostOptimizationConfiguration,
+union OptimizationConfiguration {
+  AgentOptimizationConfiguration,
   PromptOptimizationConfiguration,
 }
 
@@ -457,76 +439,25 @@ model AgentOptimizationJobInputs {
   display_name?: string;
 
   @doc("Foundry agent whose configuration is optimized.")
-  target_configuration: AgentReference;
+  target_configuration: AgentOptimizationTargetConfiguration;
 
   @doc("Model deployment used to generate candidate changes.")
   optimization_model_configuration: AgentOptimizationModelConfiguration;
 
   @doc("Type-specific optimization configuration.")
-  optimization_configuration: AgentOptimizationConfiguration;
+  optimization_configuration: OptimizationConfiguration;
 }
 
-@doc("Request body for creating an agent optimization job.")
-model CreateAgentOptimizationJobRequest {
-  @doc("Caller-supplied optimization inputs.")
-  inputs: AgentOptimizationJobInputs;
-}
-
-/** Base model for type-specific estimate configuration. */
-@discriminator("type")
-model AgentOptimizationEstimateConfigurationBase {
-  @doc("Optimization type discriminator.")
-  type: string;
-}
-
-@doc("Estimate configuration for a quality-optimization job.")
-model QualityOptimizationEstimateConfiguration
-  extends AgentOptimizationEstimateConfigurationBase {
-  @doc("Optimization type discriminator.")
-  type: "quality_optimization";
-
-  @doc("Quality measurement configuration, including the optional estimate-only row-count hint.")
-  evaluation_configuration: AgentOptimizationEstimateEvaluationConfiguration;
-
-  @doc("Candidate search configuration.")
-  search_configuration: AgentOptimizationSearchConfiguration;
-
-  @doc("Agent attributes and alternatives available to the search. Omitted to derive the optimization surface from the target agent.")
-  agent_optimization_space?: AgentOptimizationSpace;
-}
-
-@doc("Estimate configuration for a cost-optimization job.")
-model CostOptimizationEstimateConfiguration
-  extends AgentOptimizationEstimateConfigurationBase {
-  @doc("Optimization type discriminator.")
-  type: "cost_optimization";
-
-  @doc("Quality measurement configuration, including the optional estimate-only row-count hint.")
-  evaluation_configuration: AgentOptimizationEstimateEvaluationConfiguration;
-
-  @doc("Candidate search configuration.")
-  search_configuration: AgentOptimizationSearchConfiguration;
-
-  @doc("Agent attributes and alternatives available to the search. Model selection is always enabled for cost optimization.")
-  agent_optimization_space: CostAgentOptimizationSpace;
-}
-
-/** Optimization types supported by the estimate operation. */
-union AgentOptimizationEstimateConfiguration {
-  QualityOptimizationEstimateConfiguration,
-  CostOptimizationEstimateConfiguration,
-}
-
-@doc("Inputs for estimating a quality- or cost-optimization job.")
+@doc("Inputs for estimating an agent-optimization job.")
 model AgentOptimizationEstimateInputs {
   @doc("Foundry agent whose configuration would be optimized.")
-  target_configuration: AgentReference;
+  target_configuration: AgentOptimizationTargetConfiguration;
 
   @doc("Model deployment that would generate candidate changes.")
   optimization_model_configuration: AgentOptimizationModelConfiguration;
 
-  @doc("Type-specific estimate configuration.")
-  optimization_configuration: AgentOptimizationEstimateConfiguration;
+  @doc("Agent-optimization configuration to estimate.")
+  optimization_configuration: AgentOptimizationConfiguration;
 }
 
 @doc("A low/typical/ceiling range for an estimated quantity.")

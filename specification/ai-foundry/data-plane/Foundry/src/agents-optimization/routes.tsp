@@ -31,7 +31,7 @@ interface AgentOptimizationJobs {
       ...WithOperationId;
 
       /** The optimization job inputs. */
-      @body body: CreateAgentOptimizationJobRequest;
+      @body body: AgentOptimizationJobInputs;
     },
     JobCreatedResponse<AgentOptimizationJob>
   >;
