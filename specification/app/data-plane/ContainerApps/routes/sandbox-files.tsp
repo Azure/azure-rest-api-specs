@@ -81,7 +81,7 @@ alias PostSandboxFileMkdirErrors =
 /** OK. */
 model PostSandboxFileUploadResult {
   /** HTTP response status code. */
-  @statusCode statusCode: 200;
+  @statusCode statusCode: 201;
 
   /** Response body. */
   @body body: WriteFileResponse;
@@ -214,7 +214,7 @@ interface SandboxFilesOperations {
   /** Writes a file to a running sandbox. The file is streamed directly from the request body. */
   #suppress "@azure-tools/typespec-azure-core/byos" "The content is a byte stream, not a BYOS model."
   @summary("Writes a file to a running sandbox. The file is streamed directly from the request body.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/files/upload")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/files")
   @post
   postSandboxFileUpload is Foundations.Operation<
     {
