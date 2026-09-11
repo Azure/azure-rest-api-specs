@@ -271,6 +271,7 @@ jobs:
             --yes
 
       - name: Analyze SDK projects
+        id: analyze-sdk-projects
         shell: bash
         env:
           AZSDK_COPILOT_CLI_PATH: ${{ steps.setup-copilot-cli.outputs.path }}
@@ -279,9 +280,12 @@ jobs:
           SPEC_REPOSITORY_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs
           TYPESPEC_PROJECT_PATHS: ${{ steps.resolve-tsp-config.outputs.project-paths }}
         run: |
-          set -euo pipefail
+          set -Eeuo pipefail
           results_dir="$RUNNER_TEMP/sdk-breaking-change-results"
           mkdir -p "$results_dir"
+          analysis_log="$results_dir/analysis.log"
+          exec > >(tee "$analysis_log") 2>&1
+          trap 'status=$?; printf "Analysis failed with exit code %s.\n" "$status" > "$results_dir/error.log"; exit "$status"' ERR
           manifest_jsonl="$results_dir/projects.jsonl"
           : > "$manifest_jsonl"
           echo '[]' > "$results_dir/projects.json"
@@ -350,12 +354,31 @@ jobs:
       - name: Publish result summary
         if: always()
         shell: bash
+        env:
+          JOB_STATUS: ${{ job.status }}
+          ANALYSIS_OUTCOME: ${{ steps.analyze-sdk-projects.outcome }}
+          JOB_LOG_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ job.check_run_id }}
         run: |
           {
             echo "## SDK breaking-change analysis"
             echo
-            manifest="$RUNNER_TEMP/sdk-breaking-change-results/projects.json"
-            if [[ -f "$manifest" ]]; then
+            if [[ "$JOB_STATUS" == "failure" ]]; then
+              echo "Breaking change analysis failed."
+              echo
+              analysis_log="$RUNNER_TEMP/sdk-breaking-change-results/analysis.log"
+              if [[ "$ANALYSIS_OUTCOME" == "failure" && -f "$analysis_log" ]]; then
+                echo "### Error"
+                echo
+                tail -n 30 "$analysis_log" | sed 's/^/    /'
+                echo
+              else
+                echo "Error output is available in the failed step log."
+                echo
+              fi
+              echo "[See failed step]($JOB_LOG_URL)"
+            else
+              manifest="$RUNNER_TEMP/sdk-breaking-change-results/projects.json"
+              if [[ -f "$manifest" ]]; then
               while IFS= read -r project; do
                 typespec_project_path="$(jq -r '.typespecProjectPath' <<< "$project")"
                 package_name="$(jq -r '.packageName' <<< "$project")"
@@ -374,6 +397,7 @@ jobs:
                   fi
                 done
               done < <(jq -c '.[]' "$manifest")
+              fi
             fi
           } >> "$GITHUB_STEP_SUMMARY"
 
@@ -479,4 +503,68 @@ jobs:
               ...context.repo,
               issue_number: pullNumber,
               body: report,
+            });
+
+      - name: Report breaking-change analysis failure
+        if: failure()
+        uses: actions/github-script@v9
+        env:
+          PR_NUMBER: ${{ github.event.issue.number || inputs.pr_number }}
+          TRIGGER_NAME: ${{ github.event_name }}
+          ANALYSIS_OUTCOME: ${{ steps.analyze-sdk-projects.outcome }}
+          RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-results
+          JOB_LOG_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ job.check_run_id }}
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const fs = await import("node:fs/promises");
+            let errorDetails = "";
+            if (process.env.ANALYSIS_OUTCOME === "failure") {
+              try {
+                const analysisLog = await fs.readFile(
+                  `${process.env.RESULTS_PATH}/analysis.log`,
+                  "utf8",
+                );
+                errorDetails = analysisLog
+                  .trim()
+                  .split(/\r?\n/)
+                  .slice(-30)
+                  .map((line) => `    ${line}`)
+                  .join("\n");
+              } catch (error) {
+                core.warning(`Unable to read the analysis error log: ${error.message}`);
+              }
+            }
+            const failureReport = [
+              "> [!CAUTION]\n> Breaking change analysis failed",
+              errorDetails && `\n${errorDetails}`,
+              `\n[See failed step](${process.env.JOB_LOG_URL})`,
+            ]
+              .filter(Boolean)
+              .join("\n");
+            if (process.env.TRIGGER_NAME === "issue_comment") {
+              const { data: comment } = await github.rest.issues.getComment({
+                ...context.repo,
+                comment_id: context.payload.comment.id,
+              });
+              const command = comment.body.split(/\r?\n/, 1)[0].trim();
+              try {
+                await github.rest.issues.updateComment({
+                  ...context.repo,
+                  comment_id: context.payload.comment.id,
+                  body: `${command}\n\n${failureReport}`,
+                });
+                return;
+              } catch (error) {
+                if (error.status !== 403) throw error;
+                core.warning(
+                  "The workflow token cannot edit the trigger comment; posting the failure as a new PR comment instead.",
+                );
+              }
+            }
+
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: Number(process.env.PR_NUMBER),
+              body: failureReport,
             });
