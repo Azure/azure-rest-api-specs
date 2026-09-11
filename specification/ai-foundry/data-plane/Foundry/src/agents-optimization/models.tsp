@@ -90,17 +90,6 @@ union AgentOptimizationLayer {
   reflection: "reflection",
 }
 
-/** Evaluation mode for an optimization job. */
-union AgentOptimizationEvaluationMode {
-  string,
-
-  @doc("Evaluate each dataset item as a single-turn interaction.")
-  single_turn: "single_turn",
-
-  @doc("Evaluate each dataset item as a multi-turn simulated conversation.")
-  conversation: "conversation",
-}
-
 // ---------------------------------------------------------------------------
 // Dataset input — discriminated union (inline items or registered reference)
 // ---------------------------------------------------------------------------
@@ -264,18 +253,6 @@ union AgentOptimizationEvaluator {
 // Input models
 // ---------------------------------------------------------------------------
 
-@doc("Identifies the Foundry agent that owns the configuration being optimized.")
-model AgentOptimizationTargetConfiguration {
-  @doc("Target type discriminator.")
-  type: "foundry_agent";
-
-  @doc("Registered Foundry agent name.")
-  name: string;
-
-  @doc("Pinned agent version. The latest version is resolved and pinned when omitted.")
-  version?: string;
-}
-
 @doc("Identifies a model deployment used by an optimization or evaluation step.")
 model AgentOptimizationModelConfiguration {
   @doc("Model deployment name in the Foundry project.")
@@ -394,8 +371,8 @@ model AgentOptimizationEvaluationConfiguration {
   @doc("Model deployment used by model-based evaluators.")
   evaluation_model: AgentOptimizationModelConfiguration;
 
-  @doc("Whether each dataset row is evaluated as a single turn or a simulated conversation. Defaults to single_turn when omitted.")
-  evaluation_mode?: AgentOptimizationEvaluationMode = AgentOptimizationEvaluationMode.single_turn;
+  @doc("Level at which each dataset item is evaluated. Defaults to turn when omitted; use conversation for multi-turn simulation.")
+  evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
 
   @doc("Maximum number of target-agent runs executed concurrently during evaluation. Defaults to 1 when omitted.")
   @minValue(1)
@@ -449,13 +426,19 @@ model CostOptimizationConfiguration extends AgentOptimizationConfigurationBase {
   agent_optimization_space: CostAgentOptimizationSpace;
 }
 
+@doc("Developer-supplied context for prompt optimization.")
+model PromptOptimizationContext {
+  @doc("Developer guidance describing the desired prompt changes. Omitted when no developer steering is needed.")
+  steering_prompt?: string;
+}
+
 @doc("Configuration for a one-shot prompt transformation without comparative evaluation.")
 model PromptOptimizationConfiguration extends AgentOptimizationConfigurationBase {
   @doc("Optimization type discriminator.")
   type: "prompt_optimization";
 
-  @doc("Developer guidance describing the desired prompt changes. Omitted when no additional steering is needed.")
-  steering_prompt?: string;
+  @doc("Context used to steer prompt optimization. Omitted when no context is supplied.")
+  optimization_context?: PromptOptimizationContext;
 }
 
 /**
@@ -474,7 +457,7 @@ model AgentOptimizationJobInputs {
   display_name?: string;
 
   @doc("Foundry agent whose configuration is optimized.")
-  target_configuration: AgentOptimizationTargetConfiguration;
+  target_configuration: AgentReference;
 
   @doc("Model deployment used to generate candidate changes.")
   optimization_model_configuration: AgentOptimizationModelConfiguration;
@@ -537,7 +520,7 @@ union AgentOptimizationEstimateConfiguration {
 @doc("Inputs for estimating a quality- or cost-optimization job.")
 model AgentOptimizationEstimateInputs {
   @doc("Foundry agent whose configuration would be optimized.")
-  target_configuration: AgentOptimizationTargetConfiguration;
+  target_configuration: AgentReference;
 
   @doc("Model deployment that would generate candidate changes.")
   optimization_model_configuration: AgentOptimizationModelConfiguration;

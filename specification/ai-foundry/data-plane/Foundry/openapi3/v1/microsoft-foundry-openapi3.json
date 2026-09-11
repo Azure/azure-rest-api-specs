@@ -30577,10 +30577,10 @@
             "$ref": "#/components/schemas/AgentOptimizationModelConfiguration",
             "description": "Model deployment used by model-based evaluators."
           },
-          "evaluation_mode": {
-            "$ref": "#/components/schemas/AgentOptimizationEvaluationMode",
-            "description": "Whether each dataset row is evaluated as a single turn or a simulated conversation. Defaults to single_turn when omitted.",
-            "default": "single_turn"
+          "evaluation_level": {
+            "$ref": "#/components/schemas/EvaluationLevel",
+            "description": "Level at which each dataset item is evaluated. Defaults to turn when omitted; use conversation for multi-turn simulation.",
+            "default": "turn"
           },
           "max_concurrency": {
             "type": "integer",
@@ -30608,7 +30608,7 @@
         ],
         "properties": {
           "target_configuration": {
-            "$ref": "#/components/schemas/AgentOptimizationTargetConfiguration",
+            "$ref": "#/components/schemas/AgentReference",
             "description": "Foundry agent whose configuration would be optimized."
           },
           "optimization_model_configuration": {
@@ -30679,10 +30679,10 @@
             "$ref": "#/components/schemas/AgentOptimizationModelConfiguration",
             "description": "Model deployment used by model-based evaluators."
           },
-          "evaluation_mode": {
-            "$ref": "#/components/schemas/AgentOptimizationEvaluationMode",
-            "description": "Whether each dataset row is evaluated as a single turn or a simulated conversation. Defaults to single_turn when omitted.",
-            "default": "single_turn"
+          "evaluation_level": {
+            "$ref": "#/components/schemas/EvaluationLevel",
+            "description": "Level at which each dataset item is evaluated. Defaults to turn when omitted; use conversation for multi-turn simulation.",
+            "default": "turn"
           },
           "max_concurrency": {
             "type": "integer",
@@ -30694,21 +30694,6 @@
           }
         },
         "description": "Reusable quality-measurement configuration.\n\nReview consideration: if evaluation gains more execution controls, move\nmax_concurrency into a dedicated execution configuration. It remains flat while\nconcurrency is the only execution setting."
-      },
-      "AgentOptimizationEvaluationMode": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "single_turn",
-              "conversation"
-            ]
-          }
-        ],
-        "description": "Evaluation mode for an optimization job."
       },
       "AgentOptimizationEvaluationOutcome": {
         "anyOf": [
@@ -30937,7 +30922,7 @@
             "description": "Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics."
           },
           "target_configuration": {
-            "$ref": "#/components/schemas/AgentOptimizationTargetConfiguration",
+            "$ref": "#/components/schemas/AgentReference",
             "description": "Foundry agent whose configuration is optimized."
           },
           "optimization_model_configuration": {
@@ -31262,31 +31247,6 @@
           }
         },
         "description": "The agent attributes and alternative values available to a quality-optimization search."
-      },
-      "AgentOptimizationTargetConfiguration": {
-        "type": "object",
-        "required": [
-          "type",
-          "name"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "foundry_agent"
-            ],
-            "description": "Target type discriminator."
-          },
-          "name": {
-            "type": "string",
-            "description": "Registered Foundry agent name."
-          },
-          "version": {
-            "type": "string",
-            "description": "Pinned agent version. The latest version is resolved and pinned when omitted."
-          }
-        },
-        "description": "Identifies the Foundry agent that owns the configuration being optimized."
       },
       "AgentOptimizationTokenUsageEntry": {
         "type": "object",
@@ -80402,9 +80362,9 @@
             ],
             "description": "Optimization type discriminator."
           },
-          "steering_prompt": {
-            "type": "string",
-            "description": "Developer guidance describing the desired prompt changes. Omitted when no additional steering is needed."
+          "optimization_context": {
+            "$ref": "#/components/schemas/PromptOptimizationContext",
+            "description": "Context used to steer prompt optimization. Omitted when no context is supplied."
           }
         },
         "allOf": [
@@ -80413,6 +80373,16 @@
           }
         ],
         "description": "Configuration for a one-shot prompt transformation without comparative evaluation."
+      },
+      "PromptOptimizationContext": {
+        "type": "object",
+        "properties": {
+          "steering_prompt": {
+            "type": "string",
+            "description": "Developer guidance describing the desired prompt changes. Omitted when no developer steering is needed."
+          }
+        },
+        "description": "Developer-supplied context for prompt optimization."
       },
       "ProtocolConfiguration": {
         "type": "object",
