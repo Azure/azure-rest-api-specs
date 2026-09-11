@@ -571,12 +571,14 @@ model ListKeysResult {
   /**
    * The connection string of the primary api key.
    */
+  @secret
   @visibility(Lifecycle.Read)
   primaryConnectionString?: string;
 
   /**
    * The connection string of the secondary api key.
    */
+  @secret
   @visibility(Lifecycle.Read)
   secondaryConnectionString?: string;
 }
@@ -593,7 +595,7 @@ model ApiKey {
   /**
    * The Api key.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   @visibility(Lifecycle.Read)
   key?: string;
 }
