@@ -456,6 +456,13 @@ model SubscriptionAliasResponseProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
+
+  /**
+   * Whether subscription-owner assignment was skipped during creation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  skipSettingSubscriptionOwner?: boolean;
 }
 
 /**
