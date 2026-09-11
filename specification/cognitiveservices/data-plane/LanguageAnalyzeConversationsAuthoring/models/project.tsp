@@ -509,6 +509,7 @@ model AnalyzeConversationAuthoringProjectAzureResourceIds {
 /**
  * Represents the options for deleting a project deployment.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeConversationAuthoringDeleteDeploymentOptions {
   /**
    * Represents the resource IDs to delete the deployment from. If not provided, the deployment will be rolled out from all the resources it is deployed to. If provided, it will delete the deployment only from the specified assigned resources, and leave it for the rest.

@@ -1,5 +1,5 @@
 import { exit } from "process";
-import { getSuppressions, type Suppression } from "./suppressions.ts";
+import { getSuppressions, getSuppressionsForTools, type Suppression } from "./suppressions.ts";
 
 function getUsage(): string {
   return (
@@ -29,4 +29,4 @@ export async function main() {
   }
 }
 
-export { getSuppressions, type Suppression };
+export { getSuppressions, getSuppressionsForTools, type Suppression };

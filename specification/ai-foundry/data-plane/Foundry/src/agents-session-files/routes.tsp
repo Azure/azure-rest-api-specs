@@ -1,0 +1,80 @@
+import "../common/models.tsp";
+import "../common/servicepatterns.tsp";
+import "./models.tsp";
+
+using TypeSpec.Http;
+
+namespace Azure.AI.Projects;
+
+/**
+ * Session-scoped file operations for hosted agent sandboxes.
+ *
+ * These endpoints enable uploading, downloading, listing, and deleting
+ * files within a live ADC sandbox session. All file content is streamed
+ * end-to-end (no buffering in Agents service memory).
+ *
+ * Sessions are scoped to agent endpoints (not individual versions), allowing
+ * the endpoint to evolve the backing agent version independently of the session lifecycle.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+@tag("Agent Session Files")
+interface AgentSessionFiles {
+  /**
+   * Uploads binary file content to the specified path in the session sandbox.
+   * The service stores the file relative to the session home directory and rejects payloads larger than 50 MB.
+   */
+  #suppress "@azure-tools/typespec-azure-core/byos" "The file is targeting the per-session files mounted to a foundry agent"
+  @summary("Upload a session file")
+  @put
+  @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
+  uploadSessionFile is FoundryDataPlaneOperation<
+    {
+      ...UploadSessionFileParams;
+    },
+    ResourceCreatedResponse<SessionFileWriteResponse>
+  >;
+
+  /**
+   * Downloads the file at the specified sandbox path as a binary stream.
+   * The path is resolved relative to the session home directory.
+   */
+  @summary("Download a session file")
+  @get
+  @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
+  downloadSessionFile is FoundryDataPlaneOperation<
+    {
+      ...DownloadSessionFileParams;
+    },
+    bytes
+  >;
+
+  /**
+   * Returns files and directories at the specified path in the session sandbox.
+   * The response includes only the immediate children of the target directory and defaults to the session home directory when no path is supplied.
+   */
+  @summary("List session files")
+  @get
+  @list
+  @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
+  listSessionFiles is FoundryDataPlaneOperation<
+    {
+      ...ListSessionFilesParams;
+      ...CommonPageQueryParameters;
+    },
+    SessionDirectoryListResponse
+  >;
+
+  /**
+   * Deletes the specified file or directory from the session sandbox.
+   * When `recursive` is false, deleting a non-empty directory returns 409 Conflict.
+   */
+  @summary("Delete a session file")
+  @delete
+  @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
+  deleteSessionFile is FoundryDataPlaneOperation<
+    {
+      ...DeleteSessionFileParams;
+    },
+    void
+  >;
+}

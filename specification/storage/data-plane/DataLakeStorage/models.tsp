@@ -293,6 +293,7 @@ model AclFailedEntry {
 }
 
 /** The response for set access control recursive operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SetAccessControlRecursiveResponse {
   /** The number of directories successfully processed. */
   directoriesSuccessful?: int32;
@@ -310,6 +311,7 @@ model SetAccessControlRecursiveResponse {
 // List Blobs Hierarchy models (XML)
 
 /** An enumeration of blobs. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
 model ListBlobsHierarchySegmentResponse {
   /** The service endpoint. */
@@ -1230,6 +1232,19 @@ alias ContentTypeResponseHeader = {
 
 /** The Content-MD5 response header. */
 alias ContentMD5ResponseHeader = {
+  /** The MD5 hash of the content. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
+  @header("Content-MD5")
+  contentMD5?: bytes;
+};
+
+// ContentMD5ResponseHeaderBytes is to keep compat with Go.
+// see client.tsp @@alternateType(ContentMD5ResponseHeader.contentMD5, string, "go");
+// NOTE: replace with an override once it supports response types
+// TODO: https://github.com/Azure/azure-sdk-for-go/issues/27521
+
+/** The Content-MD5 response header. */
+alias ContentMD5ResponseHeaderBytes = {
   /** The MD5 hash of the content. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
   @header("Content-MD5")

@@ -1,0 +1,49 @@
+{
+  "title": "Analyze URL Inline with Requested Range (Partial)",
+  "operationId": "ContentAnalyzers_AnalyzeInline",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "analyzerId": "prebuilt-layout",
+    "body": {
+      "inputs": [
+        {
+          "url": "https://host.com/doc.pdf",
+          "range": "3-"
+        }
+      ]
+    },
+    "allowInputTruncation": true
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Succeeded",
+        "result": {
+          "analyzerId": "prebuilt-layout",
+          "apiVersion": "2026-06-01-preview",
+          "createdAt": "2026-07-01T18:46:36.244Z",
+          "warnings": [
+            {
+              "code": "InputExceededLimit",
+              "message": "The requested range exceeded the inline page limit; only pages 3-7 were analyzed. See https://aka.ms/cu-doc-limits.",
+              "target": "inputs/0"
+            }
+          ],
+          "contents": [
+            {
+              "kind": "document",
+              "mimeType": "application/pdf",
+              "markdown": "# CONTOSO\n\n...",
+              "startPageNumber": 3,
+              "endPageNumber": 7,
+              "unit": "inch"
+            }
+          ]
+        },
+        "usage": {
+          "documentPagesStandardInline": 5
+        }
+      }
+    }
+  }
+}
