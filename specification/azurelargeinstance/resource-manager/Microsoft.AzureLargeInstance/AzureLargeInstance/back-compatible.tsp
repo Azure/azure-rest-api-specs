@@ -48,7 +48,7 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(AzureLargeInstances.restart::parameters.body, "forceParameter");
 
-// "LEGACY - DO NOT COPY - FIX"
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(
   AzureLargeInstances.update::parameters.properties,
   "application/json",
