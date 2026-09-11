@@ -1195,6 +1195,11 @@ model AgentSessionResource {
   @encode("unixTimestamp", int64)
   @visibility(Lifecycle.Read)
   expires_at: utcDateTime;
+
+  /** The Unix timestamp (in seconds) when the session sandbox was last observed to stop or go idle. Present only after the session has gone idle at least once, used for accurate idle-billing reconciliation. */
+  @encode("unixTimestamp", int64)
+  @visibility(Lifecycle.Read)
+  stopped_at?: utcDateTime;
 }
 
 // ── Session Request Models ──────────────────────────────
