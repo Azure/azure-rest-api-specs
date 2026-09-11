@@ -752,16 +752,8 @@ interface ChangeDataCaptureCapabilities {
   get is ArmResourceRead<ChangeDataCaptureCapability>;
 
   @doc("Creates or replaces the singleton change data capture capability and reconciles shared engine prerequisites.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    ChangeDataCaptureCapability,
-    LroHeaders = HorizonDbResourceLroHeaders<ChangeDataCaptureCapability>,
-    Response =
-      | HorizonDbResourceUpdatedLroResponse<ChangeDataCaptureCapability>
-      | ArmResourceCreatedResponse<
-          ChangeDataCaptureCapability,
-          HorizonDbResourceLroHeaders<ChangeDataCaptureCapability>
-        >
-  >;
+  @Azure.Core.useFinalStateVia("original-uri")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ChangeDataCaptureCapability>;
 
   @doc("Updates mutable change data capture capability properties. Omitted properties preserve their current values.")
   update is ArmCustomPatchAsync<
