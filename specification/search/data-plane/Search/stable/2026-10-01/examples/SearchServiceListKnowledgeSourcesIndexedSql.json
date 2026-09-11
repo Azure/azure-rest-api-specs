@@ -1,6 +1,6 @@
 {
   "operationId": "KnowledgeSources_List",
-  "title": "SearchServiceListKnowledgeSourcesAzureBlob",
+  "title": "SearchServiceListKnowledgeSourcesIndexedSql",
   "parameters": {
     "endpoint": "https://typespecstableexampleservice.search.windows.net",
     "api-version": "2026-10-01",
@@ -17,8 +17,8 @@
           {
             "@odata.etag": "0x1234568AE7E58A1",
             "name": "ks-stable-test",
-            "kind": "azureBlob",
-            "description": "Description of the knowledge source.",
+            "kind": "indexedSql",
+            "description": "Description of the SQL knowledge source.",
             "encryptionKey": {
               "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
               "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
@@ -28,15 +28,35 @@
                 "applicationSecret": "<applicationSecret>"
               }
             },
-            "azureBlobParameters": {
+            "indexedSqlParameters": {
               "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
-              "containerName": "test-container",
-              "folderPath": "test-path",
-              "isADLSGen2": false,
+              "tableOrView": "dbo.Products",
+              "contentColumns": [
+                {
+                  "name": "title",
+                  "sourceField": "Title",
+                  "searchFieldType": "Edm.String"
+                },
+                {
+                  "name": "description",
+                  "sourceField": "Description",
+                  "searchFieldType": "Edm.String"
+                },
+                {
+                  "name": "price",
+                  "sourceField": "Price",
+                  "searchFieldType": "Edm.Double"
+                }
+              ],
+              "embeddingColumns": [
+                {
+                  "name": "descriptionEmbedding",
+                  "sourceField": "Description"
+                }
+              ],
               "ingestionParameters": {
-                "disableImageVerbalization": false,
                 "ingestionPermissionOptions": [],
-                "contentExtractionMode": "standard",
+                "contentExtractionMode": "minimal",
                 "networkAccessMode": "public",
                 "identity": {
                   "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
@@ -51,22 +71,9 @@
                     "modelName": "text-embedding-3-large"
                   }
                 },
-                "chatCompletionModel": {
-                  "kind": "azureOpenAI",
-                  "azureOpenAIParameters": {
-                    "resourceUri": "https://test-sample.openai.azure.com",
-                    "deploymentId": "myDeployment",
-                    "apiKey": "<redacted>",
-                    "modelName": "gpt-5-mini"
-                  }
-                },
                 "ingestionSchedule": {
                   "interval": "P1D",
                   "startTime": "2024-06-06T00:01:50.265Z"
-                },
-                "aiServices": {
-                  "uri": "https://my-ai-service.azure.com/",
-                  "apiKey": "<redacted>"
                 }
               },
               "createdResources": {

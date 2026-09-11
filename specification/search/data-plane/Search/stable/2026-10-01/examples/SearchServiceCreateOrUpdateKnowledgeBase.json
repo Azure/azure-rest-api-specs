@@ -44,7 +44,13 @@
       },
       "description": "Description of the knowledge base.",
       "retrievalInstructions": "Instructions for retrieval for the knowledge base.",
-      "answerInstructions": "Instructions for answer synthesis."
+      "answerInstructions": "Instructions for answer synthesis.",
+      "corsOptions": {
+        "allowedOrigins": [
+          "https://myapp.example.com"
+        ],
+        "maxAgeInSeconds": 300
+      }
     }
   },
   "responses": {
@@ -83,6 +89,12 @@
         },
         "retrievalReasoningEffort": {
           "kind": "low"
+        },
+        "corsOptions": {
+          "allowedOrigins": [
+            "https://myapp.example.com"
+          ],
+          "maxAgeInSeconds": 300
         }
       }
     },
@@ -121,6 +133,12 @@
         },
         "retrievalReasoningEffort": {
           "kind": "low"
+        },
+        "corsOptions": {
+          "allowedOrigins": [
+            "https://myapp.example.com"
+          ],
+          "maxAgeInSeconds": 300
         }
       }
     }

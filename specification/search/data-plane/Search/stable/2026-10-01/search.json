@@ -1844,9 +1844,6 @@
             "$ref": "#/parameters/SearchOptions.minimumCoverage"
           },
           {
-            "$ref": "#/parameters/SearchOptions.moreLikeThis"
-          },
-          {
             "$ref": "#/parameters/SearchOptions.orderBy"
           },
           {
@@ -3371,8 +3368,17 @@
           "SearchServiceListKnowledgeSourcesAzureBlob": {
             "$ref": "./examples/SearchServiceListKnowledgeSourcesAzureBlob.json"
           },
+          "SearchServiceListKnowledgeSourcesFile": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesFile.json"
+          },
           "SearchServiceListKnowledgeSourcesIndexedOneLake": {
             "$ref": "./examples/SearchServiceListKnowledgeSourcesIndexedOneLake.json"
+          },
+          "SearchServiceListKnowledgeSourcesIndexedSharePoint": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesIndexedSharePoint.json"
+          },
+          "SearchServiceListKnowledgeSourcesIndexedSql": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesIndexedSql.json"
           },
           "SearchServiceListKnowledgeSourcesWeb": {
             "$ref": "./examples/SearchServiceListKnowledgeSourcesWeb.json"
@@ -3437,8 +3443,17 @@
           "SearchServiceCreateKnowledgeSourceAzureBlob": {
             "$ref": "./examples/SearchServiceCreateKnowledgeSourceAzureBlob.json"
           },
+          "SearchServiceCreateKnowledgeSourceFile": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceFile.json"
+          },
           "SearchServiceCreateKnowledgeSourceIndexedOneLake": {
             "$ref": "./examples/SearchServiceCreateKnowledgeSourceIndexedOneLake.json"
+          },
+          "SearchServiceCreateKnowledgeSourceIndexedSharePoint": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceIndexedSharePoint.json"
+          },
+          "SearchServiceCreateKnowledgeSourceIndexedSql": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceIndexedSql.json"
           },
           "SearchServiceCreateKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceCreateKnowledgeSourceWeb.json"
@@ -3501,8 +3516,17 @@
           "SearchServiceGetKnowledgeSourceAzureBlob": {
             "$ref": "./examples/SearchServiceGetKnowledgeSourceAzureBlob.json"
           },
+          "SearchServiceGetKnowledgeSourceFile": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceFile.json"
+          },
           "SearchServiceGetKnowledgeSourceIndexedOneLake": {
             "$ref": "./examples/SearchServiceGetKnowledgeSourceIndexedOneLake.json"
+          },
+          "SearchServiceGetKnowledgeSourceIndexedSharePoint": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceIndexedSharePoint.json"
+          },
+          "SearchServiceGetKnowledgeSourceIndexedSql": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceIndexedSql.json"
           },
           "SearchServiceGetKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceGetKnowledgeSourceWeb.json"
@@ -3608,8 +3632,17 @@
           "SearchServiceCreateOrUpdateKnowledgeSourceAzureBlob": {
             "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceAzureBlob.json"
           },
+          "SearchServiceCreateOrUpdateKnowledgeSourceFile": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceFile.json"
+          },
           "SearchServiceCreateOrUpdateKnowledgeSourceIndexedOneLake": {
             "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceIndexedOneLake.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceIndexedSharePoint": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceIndexedSharePoint.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceIndexedSql": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceIndexedSql.json"
           },
           "SearchServiceCreateOrUpdateKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceWeb.json"
@@ -3686,11 +3719,305 @@
           "SearchServiceDeleteKnowledgeSourceAzureBlob": {
             "$ref": "./examples/SearchServiceDeleteKnowledgeSourceAzureBlob.json"
           },
+          "SearchServiceDeleteKnowledgeSourceFile": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceFile.json"
+          },
           "SearchServiceDeleteKnowledgeSourceIndexedOneLake": {
             "$ref": "./examples/SearchServiceDeleteKnowledgeSourceIndexedOneLake.json"
           },
+          "SearchServiceDeleteKnowledgeSourceIndexedSharePoint": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceIndexedSharePoint.json"
+          },
+          "SearchServiceDeleteKnowledgeSourceIndexedSql": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceIndexedSql.json"
+          },
           "SearchServiceDeleteKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceDeleteKnowledgeSourceWeb.json"
+          }
+        }
+      }
+    },
+    "/knowledgesources('{sourceName}')/files": {
+      "get": {
+        "operationId": "KnowledgeSources_ListFiles",
+        "description": "Lists all files in a File knowledge source.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
+            "name": "prefix",
+            "in": "query",
+            "description": "Optional prefix to filter files by their directory-like path.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "A string used to narrow down the listing so that fewer results need to be paged through. If omitted or an empty string is passed, no narrowing is applied.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The maximum number of items to return in a single page. The server enforces a maximum; if omitted, the server determines a suitable default.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 3000
+          },
+          {
+            "name": "searchType",
+            "in": "query",
+            "description": "Specifies how the search parameter is interpreted. Currently only 'prefix' is supported.",
+            "required": false,
+            "type": "string",
+            "default": "prefix",
+            "enum": [
+              "prefix"
+            ],
+            "x-ms-enum": {
+              "name": "ListingSearchType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Prefix",
+                  "value": "prefix",
+                  "description": "Matches items whose name starts with the value of the search parameter."
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "The name of the knowledge source.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ListKnowledgeSourceFilesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SearchServiceListKnowledgeSourceFiles": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourceFiles.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        }
+      },
+      "post": {
+        "operationId": "KnowledgeSources_UploadFileMultipart",
+        "description": "Uploads a file to a File knowledge source using multipart/form-data: a JSON 'metadata' part (file name and custom metadata) and a 'content' part with the raw file bytes.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "The name of the knowledge source.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "name"
+          },
+          {
+            "name": "metadata",
+            "in": "formData",
+            "description": "The JSON metadata describing the file.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content",
+            "in": "formData",
+            "description": "The raw file content.",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSourceFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SearchServiceUploadKnowledgeSourceFileMultipart": {
+            "$ref": "./examples/SearchServiceUploadKnowledgeSourceFileMultipart.json"
+          }
+        }
+      }
+    },
+    "/knowledgesources('{sourceName}')/files('{fileId}')": {
+      "put": {
+        "operationId": "KnowledgeSources_UpdateFile",
+        "description": "Updates an existing file in a File knowledge source in place, replacing its indexed content. Uses multipart/form-data: a JSON 'metadata' part (file name and custom metadata) and a 'content' part with the raw file bytes.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The unique identifier of the file to update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "The name of the knowledge source.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "name"
+          },
+          {
+            "name": "metadata",
+            "in": "formData",
+            "description": "The JSON metadata describing the file.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content",
+            "in": "formData",
+            "description": "The raw file content.",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSourceFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SearchServiceUpdateKnowledgeSourceFile": {
+            "$ref": "./examples/SearchServiceUpdateKnowledgeSourceFile.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "KnowledgeSources_DeleteFile",
+        "description": "Deletes a file from a File knowledge source and removes all indexed content derived from it.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The unique identifier of the file to delete.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "The name of the knowledge source.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SearchServiceDeleteFileFromKnowledgeSource": {
+            "$ref": "./examples/SearchServiceDeleteFileFromKnowledgeSource.json"
           }
         }
       }
@@ -3746,6 +4073,9 @@
         "x-ms-examples": {
           "SearchServiceGetKnowledgeSourceStatus": {
             "$ref": "./examples/SearchServiceGetKnowledgeSourceStatus.json"
+          },
+          "SearchServiceGetKnowledgeSourceStatusFile": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceStatusFile.json"
           }
         }
       }
@@ -4651,6 +4981,81 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "@odata.nextLink"
+        }
+      }
+    },
+    "/knowledgebases('{knowledgeBaseName}')/retrieve?_overload=retrieveStream": {
+      "post": {
+        "operationId": "KnowledgeRetrieval_RetrieveStream",
+        "description": "Retrieves relevant data from backing stores and streams progress and results as server-sent\nevents.\n\nProcess the response incrementally using server-sent event framing. Each event contains an\nevent name and a JSON-encoded data payload. The stream ends with either a `response.completed`\nevent or an `error` event. OpenAPI 2.0 represents the response body as a string, so generated\nclients may expose the raw response without typed event parsing. Do not deserialize the\ncomplete response body as a single JSON document.",
+        "produces": [
+          "text/event-stream",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "text/event-stream"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
+            "name": "knowledgeBaseName",
+            "in": "path",
+            "description": "The name of the knowledge base.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-query-source-authorization",
+            "in": "header",
+            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "querySourceAuthorization"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "retrievalRequest",
+            "in": "body",
+            "description": "The retrieval request to process.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KnowledgeBaseRetrievalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KnowledgeBaseRetrieveStream": {
+            "$ref": "./examples/KnowledgeBaseRetrieveStream.json"
+          }
         }
       }
     }
@@ -6061,6 +6466,29 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Skills.Util.ConditionalSkill"
     },
+    "ContentColumnMapping": {
+      "type": "object",
+      "description": "Maps a SQL column to a search index field.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Target index field name."
+        },
+        "sourceField": {
+          "type": "string",
+          "description": "SQL column name."
+        },
+        "searchFieldType": {
+          "type": "string",
+          "description": "Azure AI Search field type (e.g., Edm.String, Edm.Int32)."
+        }
+      },
+      "required": [
+        "name",
+        "sourceField",
+        "searchFieldType"
+      ]
+    },
     "ContentUnderstandingSkill": {
       "type": "object",
       "description": "A skill that leverages Azure AI Content Understanding to process and extract structured insights from documents, enabling enriched, searchable content for enhanced document indexing and retrieval.",
@@ -7192,6 +7620,24 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.ElisionTokenFilter"
     },
+    "EmbeddingColumnMapping": {
+      "type": "object",
+      "description": "Maps a SQL column to a vector field for embedding.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Target vector field name in the search index."
+        },
+        "sourceField": {
+          "type": "string",
+          "description": "SQL column used as input for embedding generation."
+        }
+      },
+      "required": [
+        "name",
+        "sourceField"
+      ]
+    },
     "EntityCategory": {
       "type": "string",
       "description": "A string indicating what entity categories to return.",
@@ -7605,6 +8051,95 @@
       "required": [
         "name"
       ]
+    },
+    "FileKnowledgeSource": {
+      "type": "object",
+      "description": "Configuration for File knowledge source that supports direct file upload and indexing.",
+      "properties": {
+        "fileParameters": {
+          "$ref": "#/definitions/FileKnowledgeSourceParameters",
+          "description": "The parameters for the File knowledge source."
+        },
+        "corsOptions": {
+          "$ref": "#/definitions/CorsOptions",
+          "description": "Options to control Cross-Origin Resource Sharing (CORS) for the File knowledge source's file endpoints (upload, list, update, delete)."
+        }
+      },
+      "required": [
+        "fileParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "file"
+    },
+    "FileKnowledgeSourceExtractionMode": {
+      "type": "string",
+      "description": "The extraction effort applied to an individual file. 'minimal' (the default) uses built-in extraction; 'standard' uses Content Understanding.",
+      "enum": [
+        "minimal",
+        "standard"
+      ],
+      "x-ms-enum": {
+        "name": "FileKnowledgeSourceExtractionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Minimal",
+            "value": "minimal",
+            "description": "Built-in extraction was performed."
+          },
+          {
+            "name": "Standard",
+            "value": "standard",
+            "description": "Content Understanding extraction was performed."
+          }
+        ]
+      }
+    },
+    "FileKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for File knowledge source.",
+      "properties": {
+        "ingestionParameters": {
+          "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
+          "description": "Consolidates all general ingestion settings for the File knowledge source, including the content extraction mode and an optional embeddingModel."
+        },
+        "createdResources": {
+          "$ref": "#/definitions/CreatedResources",
+          "description": "Resources created by the file knowledge source.",
+          "readOnly": true
+        }
+      }
+    },
+    "FileKnowledgeSourceParams": {
+      "type": "object",
+      "description": "Specifies runtime parameters for a File knowledge source",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceParams"
+        }
+      ],
+      "x-ms-discriminator-value": "file"
+    },
+    "FileUploadMetadata": {
+      "type": "object",
+      "description": "The JSON 'metadata' part of a multipart/form-data file upload: the full file name/path and custom key/value metadata. The parsing mode and extraction mode are both chosen by the service and are not supplied by the caller.",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "The full relative file name/path to store the file under (prefixes are derived from it)."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Custom key/value metadata to store with the file.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "FreshnessScoringFunction": {
       "type": "object",
@@ -8346,7 +8881,10 @@
       "enum": [
         "defaultSiteLibrary",
         "allSiteLibraries",
-        "useQuery"
+        "useQuery",
+        "allSiteLists",
+        "allSitePages",
+        "allSiteContent"
       ],
       "x-ms-enum": {
         "name": "IndexedSharePointContainerName",
@@ -8366,9 +8904,160 @@
             "name": "UseQuery",
             "value": "useQuery",
             "description": "Use a query to filter SharePoint content."
+          },
+          {
+            "name": "AllSiteLists",
+            "value": "allSiteLists",
+            "description": "Index content from every list in the site."
+          },
+          {
+            "name": "AllSitePages",
+            "value": "allSitePages",
+            "description": "Index content from every page in the site."
+          },
+          {
+            "name": "AllSiteContent",
+            "value": "allSiteContent",
+            "description": "Index content from all supported libraries, lists, and pages in the site."
           }
         ]
       }
+    },
+    "IndexedSharePointKnowledgeSource": {
+      "type": "object",
+      "description": "Configuration for SharePoint knowledge source.",
+      "properties": {
+        "indexedSharePointParameters": {
+          "$ref": "#/definitions/IndexedSharePointKnowledgeSourceParameters",
+          "description": "The parameters for the knowledge source."
+        }
+      },
+      "required": [
+        "indexedSharePointParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "indexedSharePoint"
+    },
+    "IndexedSharePointKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for SharePoint knowledge source.",
+      "properties": {
+        "connectionString": {
+          "type": "string",
+          "description": "SharePoint connection string with format: SharePointOnlineEndpoint=[SharePoint site url];ApplicationId=[Azure AD App ID];ApplicationSecret=[Azure AD App client secret];TenantId=[SharePoint site tenant id]"
+        },
+        "containerName": {
+          "$ref": "#/definitions/IndexedSharePointContainerName",
+          "description": "Specifies which SharePoint libraries to access."
+        },
+        "query": {
+          "type": "string",
+          "description": "Optional query to filter SharePoint content.",
+          "x-nullable": true
+        },
+        "ingestionParameters": {
+          "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
+          "description": "Consolidates all general ingestion settings.",
+          "x-nullable": true
+        },
+        "createdResources": {
+          "$ref": "#/definitions/CreatedResources",
+          "description": "Resources created by the knowledge source.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "connectionString",
+        "containerName"
+      ]
+    },
+    "IndexedSharePointKnowledgeSourceParams": {
+      "type": "object",
+      "description": "Specifies runtime parameters for a indexed SharePoint knowledge source",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceParams"
+        }
+      ],
+      "x-ms-discriminator-value": "indexedSharePoint"
+    },
+    "IndexedSqlKnowledgeSource": {
+      "type": "object",
+      "description": "Configuration for indexed SQL knowledge source.",
+      "properties": {
+        "indexedSqlParameters": {
+          "$ref": "#/definitions/IndexedSqlKnowledgeSourceParameters",
+          "description": "The parameters for the SQL knowledge source."
+        }
+      },
+      "required": [
+        "indexedSqlParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "indexedSql"
+    },
+    "IndexedSqlKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for indexed SQL knowledge source.",
+      "properties": {
+        "connectionString": {
+          "type": "string",
+          "description": "The connection string for the Azure SQL Database or SQL Managed Instance."
+        },
+        "tableOrView": {
+          "type": "string",
+          "description": "The name of the table or view to index. Can be schema-qualified (e.g., 'dbo.MyTable')."
+        },
+        "highWaterMarkColumnName": {
+          "type": "string",
+          "description": "Optional column name for high water mark change detection. If provided, uses HighWaterMarkChangeDetectionPolicy."
+        },
+        "contentColumns": {
+          "type": "array",
+          "description": "Optional column mappings for content fields. If omitted, all columns are auto-discovered.",
+          "items": {
+            "$ref": "#/definitions/ContentColumnMapping"
+          }
+        },
+        "embeddingColumns": {
+          "type": "array",
+          "description": "Optional column mappings for embedding vector fields. If omitted, no vector fields are created.",
+          "items": {
+            "$ref": "#/definitions/EmbeddingColumnMapping"
+          }
+        },
+        "ingestionParameters": {
+          "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
+          "description": "Consolidates all general ingestion settings including embedding model, schedule, and identity."
+        },
+        "createdResources": {
+          "$ref": "#/definitions/CreatedResources",
+          "description": "Resources created by the knowledge source.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "connectionString",
+        "tableOrView"
+      ]
+    },
+    "IndexedSqlKnowledgeSourceParams": {
+      "type": "object",
+      "description": "Specifies runtime parameters for an indexed SQL knowledge source",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceParams"
+        }
+      ],
+      "x-ms-discriminator-value": "indexedSql"
     },
     "IndexerCurrentState": {
       "type": "object",
@@ -9430,6 +10119,10 @@
         "answerInstructions": {
           "type": "string",
           "description": "Instructions considered by the knowledge base when generating answers."
+        },
+        "corsOptions": {
+          "$ref": "#/definitions/CorsOptions",
+          "description": "Options to control Cross-Origin Resource Sharing (CORS) for the knowledge base."
         }
       },
       "required": [
@@ -9449,6 +10142,16 @@
         "type": {
           "$ref": "#/definitions/KnowledgeBaseActivityRecordType",
           "description": "The type of the activity record."
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the activity started."
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the activity completed."
         },
         "elapsedMs": {
           "type": "integer",
@@ -9493,8 +10196,11 @@
       "enum": [
         "searchIndex",
         "azureBlob",
+        "indexedSharePoint",
         "indexedOneLake",
         "web",
+        "file",
+        "indexedSql",
         "modelQueryPlanning",
         "modelAnswerSynthesis",
         "modelWebSummarization",
@@ -9515,6 +10221,11 @@
             "description": "Azure Blob retrieval activity."
           },
           {
+            "name": "indexedSharePoint",
+            "value": "indexedSharePoint",
+            "description": "Indexed SharePoint retrieval activity."
+          },
+          {
             "name": "indexedOneLake",
             "value": "indexedOneLake",
             "description": "Indexed OneLake retrieval activity."
@@ -9523,6 +10234,16 @@
             "name": "web",
             "value": "web",
             "description": "Web retrieval activity."
+          },
+          {
+            "name": "file",
+            "value": "file",
+            "description": "File retrieval activity."
+          },
+          {
+            "name": "indexedSql",
+            "value": "indexedSql",
+            "description": "Indexed SQL retrieval activity."
           },
           {
             "name": "modelQueryPlanning",
@@ -9547,6 +10268,35 @@
         ]
       }
     },
+    "KnowledgeBaseActivityStartedEvent": {
+      "type": "object",
+      "description": "Emitted immediately before an individual retrieval activity begins executing.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ID of the activity record, matching the `id` on the corresponding `activity.completed` event."
+        },
+        "type": {
+          "$ref": "#/definitions/KnowledgeBaseActivityRecordType",
+          "description": "The type of the activity that has started."
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the activity started."
+        },
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source used by the activity, when the activity targets a knowledge source."
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "startedAt"
+      ]
+    },
     "KnowledgeBaseAgenticReasoningActivityRecord": {
       "type": "object",
       "description": "Represents an agentic reasoning activity record.",
@@ -9567,6 +10317,25 @@
         }
       ],
       "x-ms-discriminator-value": "agenticReasoning"
+    },
+    "KnowledgeBaseAnswerCompletedEvent": {
+      "type": "object",
+      "description": "Emitted when a fully validated and post-processed synthesized answer is available.",
+      "properties": {
+        "messageIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The zero-based index of the completed message in the final response array."
+        },
+        "message": {
+          "$ref": "#/definitions/KnowledgeBaseMessage",
+          "description": "The completed answer message."
+        }
+      },
+      "required": [
+        "messageIndex",
+        "message"
+      ]
     },
     "KnowledgeBaseAzureBlobActivityArguments": {
       "type": "object",
@@ -9615,6 +10384,11 @@
         "blobUrl": {
           "type": "string",
           "description": "The blob URL for the reference."
+        },
+        "citationUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A Search-owned URL that points at the backing document for this reference, usable as a citation target."
         }
       },
       "allOf": [
@@ -9699,6 +10473,67 @@
         }
       }
     },
+    "KnowledgeBaseFileActivityArguments": {
+      "type": "object",
+      "description": "Represents the arguments the File retrieval activity was run with.",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "The search string used to query file contents."
+        }
+      }
+    },
+    "KnowledgeBaseFileActivityRecord": {
+      "type": "object",
+      "description": "Represents a File retrieval activity record.",
+      "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "fileArguments": {
+          "$ref": "#/definitions/KnowledgeBaseFileActivityArguments",
+          "description": "The File arguments for the retrieval activity."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
+        }
+      ],
+      "x-ms-discriminator-value": "file"
+    },
+    "KnowledgeBaseFileReference": {
+      "type": "object",
+      "description": "Represents a file document reference.",
+      "properties": {
+        "docName": {
+          "type": "string",
+          "description": "The document name for the reference."
+        },
+        "citationUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A Search-owned URL that points at the backing document for this reference, usable as a citation target."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseReference"
+        }
+      ],
+      "x-ms-discriminator-value": "file"
+    },
     "KnowledgeBaseImageContent": {
       "type": "object",
       "description": "Image content.",
@@ -9760,6 +10595,11 @@
         "docUrl": {
           "type": "string",
           "description": "The document URL for the reference."
+        },
+        "citationUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A Search-owned URL that points at the backing document for this reference, usable as a citation target."
         }
       },
       "allOf": [
@@ -9768,6 +10608,128 @@
         }
       ],
       "x-ms-discriminator-value": "indexedOneLake"
+    },
+    "KnowledgeBaseIndexedSharePointActivityArguments": {
+      "type": "object",
+      "description": "Represents the arguments the indexed SharePoint retrieval activity was run with.",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "The search string used to query indexed SharePoint contents."
+        }
+      }
+    },
+    "KnowledgeBaseIndexedSharePointActivityRecord": {
+      "type": "object",
+      "description": "Represents a indexed SharePoint retrieval activity record.",
+      "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "indexedSharePointArguments": {
+          "$ref": "#/definitions/KnowledgeBaseIndexedSharePointActivityArguments",
+          "description": "The indexed SharePoint arguments for the retrieval activity."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
+        }
+      ],
+      "x-ms-discriminator-value": "indexedSharePoint"
+    },
+    "KnowledgeBaseIndexedSharePointReference": {
+      "type": "object",
+      "description": "Represents an indexed SharePoint document reference.",
+      "properties": {
+        "docUrl": {
+          "type": "string",
+          "description": "The document URL for the reference."
+        },
+        "citationUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A Search-owned URL that points at the backing document for this reference, usable as a citation target."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseReference"
+        }
+      ],
+      "x-ms-discriminator-value": "indexedSharePoint"
+    },
+    "KnowledgeBaseIndexedSqlActivityArguments": {
+      "type": "object",
+      "description": "Represents the arguments the indexed SQL retrieval activity was run with.",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "The search string used to query indexed SQL contents."
+        }
+      }
+    },
+    "KnowledgeBaseIndexedSqlActivityRecord": {
+      "type": "object",
+      "description": "Represents an indexed SQL retrieval activity record.",
+      "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "indexedSqlArguments": {
+          "$ref": "#/definitions/KnowledgeBaseIndexedSqlActivityArguments",
+          "description": "The indexed SQL arguments for the retrieval activity."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
+        }
+      ],
+      "x-ms-discriminator-value": "indexedSql"
+    },
+    "KnowledgeBaseIndexedSqlReference": {
+      "type": "object",
+      "description": "Represents an Azure SQL document reference.",
+      "properties": {
+        "docUrl": {
+          "type": "string",
+          "description": "The document URL for the reference."
+        },
+        "citationUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A Search-owned URL that points at the backing document for this reference, usable as a citation target."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseReference"
+        }
+      ],
+      "x-ms-discriminator-value": "indexedSql"
     },
     "KnowledgeBaseMessage": {
       "type": "object",
@@ -10016,8 +10978,11 @@
       "enum": [
         "searchIndex",
         "azureBlob",
+        "indexedSharePoint",
         "indexedOneLake",
-        "web"
+        "web",
+        "file",
+        "indexedSql"
       ],
       "x-ms-enum": {
         "name": "KnowledgeBaseReferenceType",
@@ -10034,6 +10999,11 @@
             "description": "Azure Blob document reference."
           },
           {
+            "name": "indexedSharePoint",
+            "value": "indexedSharePoint",
+            "description": "Indexed SharePoint document reference."
+          },
+          {
             "name": "indexedOneLake",
             "value": "indexedOneLake",
             "description": "Indexed OneLake document reference."
@@ -10042,9 +11012,37 @@
             "name": "web",
             "value": "web",
             "description": "Web document reference."
+          },
+          {
+            "name": "file",
+            "value": "file",
+            "description": "File document reference."
+          },
+          {
+            "name": "indexedSql",
+            "value": "indexedSql",
+            "description": "Indexed SQL document reference."
           }
         ]
       }
+    },
+    "KnowledgeBaseResponseCompletedEvent": {
+      "type": "object",
+      "description": "Emitted after retrieval completes successfully.",
+      "properties": {
+        "statusCode": {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalStatusCode",
+          "description": "The semantic HTTP status of the completed retrieval."
+        },
+        "response": {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalResponse",
+          "description": "The authoritative completed retrieval response."
+        }
+      },
+      "required": [
+        "statusCode",
+        "response"
+      ]
     },
     "KnowledgeBaseRetrievalActivityRecord": {
       "type": "object",
@@ -10155,6 +11153,59 @@
         }
       }
     },
+    "KnowledgeBaseRetrievalStartedEvent": {
+      "type": "object",
+      "description": "Emitted once retrieval preflight validation completes, before any activity begins.",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "description": "A service-generated identifier that correlates all events in this retrieval stream."
+        },
+        "knowledgeBaseName": {
+          "type": "string",
+          "description": "The name of the knowledge base being queried."
+        },
+        "outputMode": {
+          "$ref": "#/definitions/KnowledgeRetrievalOutputMode",
+          "description": "The effective output mode for this retrieval."
+        },
+        "reasoningEffort": {
+          "$ref": "#/definitions/KnowledgeRetrievalReasoningEffort",
+          "description": "The effective reasoning effort for this retrieval."
+        }
+      },
+      "required": [
+        "requestId",
+        "knowledgeBaseName",
+        "outputMode",
+        "reasoningEffort"
+      ]
+    },
+    "KnowledgeBaseRetrievalStatusCode": {
+      "type": "number",
+      "description": "The semantic HTTP status of a completed streaming retrieval.",
+      "enum": [
+        200,
+        206
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeBaseRetrievalStatusCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OK",
+            "value": 200,
+            "description": "The retrieval completed successfully."
+          },
+          {
+            "name": "PartialContent",
+            "value": 206,
+            "description": "The retrieval completed with partial results."
+          }
+        ]
+      }
+    },
+    "KnowledgeBaseRetrievalStreamEvents": {},
     "KnowledgeBaseRetrievalSuccessResponse": {
       "type": "object",
       "description": "Successful retrieval response.",
@@ -10237,6 +11288,11 @@
         "docKey": {
           "type": "string",
           "description": "The document key for the reference."
+        },
+        "citationUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A Search-owned URL that points at the backing document for this reference, usable as a citation target."
         }
       },
       "allOf": [
@@ -10245,6 +11301,26 @@
         }
       ],
       "x-ms-discriminator-value": "searchIndex"
+    },
+    "KnowledgeBaseStreamErrorEvent": {
+      "type": "object",
+      "description": "Emitted in place of `response.completed` if retrieval fails after the stream starts.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/KnowledgeBaseErrorDetail",
+          "description": "The error detail explaining why the retrieval stream failed."
+        },
+        "activity": {
+          "type": "array",
+          "description": "Activity records that completed before the retrieval failed.",
+          "items": {
+            "$ref": "#/definitions/KnowledgeBaseActivityRecord"
+          }
+        }
+      },
+      "required": [
+        "error"
+      ]
     },
     "KnowledgeBaseWebActivityArguments": {
       "type": "object",
@@ -10546,6 +11622,98 @@
         ]
       }
     },
+    "KnowledgeSourceFile": {
+      "type": "object",
+      "description": "Metadata for a file uploaded to a File knowledge source.",
+      "properties": {
+        "fileId": {
+          "type": "string",
+          "description": "The unique identifier for the file.",
+          "readOnly": true
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The original file name.",
+          "readOnly": true
+        },
+        "fileSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The file size in bytes.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the file was created.",
+          "readOnly": true
+        },
+        "lastUpdatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the file was last updated.",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "The error message if file processing failed, null otherwise.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "prefix": {
+          "type": "string",
+          "description": "The prefix (directory-like path) derived from the full file name.",
+          "readOnly": true
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Custom key/value metadata stored with the file. Returned but not searchable or filterable.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "parsingMode": {
+          "$ref": "#/definitions/BlobIndexerParsingMode",
+          "description": "The parsing mode applied to the file (auto-detected from the file).",
+          "readOnly": true
+        },
+        "extractionMode": {
+          "$ref": "#/definitions/FileKnowledgeSourceExtractionMode",
+          "description": "The extraction mode applied to the file.",
+          "readOnly": true
+        }
+      }
+    },
+    "KnowledgeSourceFileCapacity": {
+      "type": "object",
+      "description": "File upload capacity for a File knowledge source.",
+      "properties": {
+        "maxFileCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of files allowed in the knowledge source.",
+          "readOnly": true
+        },
+        "remainingFileCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of additional files that can be uploaded at the time of the request.",
+          "readOnly": true
+        },
+        "maxFileSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum size in bytes of an individual uploaded file.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "maxFileCount",
+        "remainingFileCount",
+        "maxFileSizeBytes"
+      ]
+    },
     "KnowledgeSourceIngestionParameters": {
       "type": "object",
       "description": "Consolidates all general ingestion settings for knowledge sources.",
@@ -10574,6 +11742,14 @@
           "$ref": "#/definitions/IndexingSchedule",
           "description": "Optional schedule for data ingestion.",
           "x-nullable": true
+        },
+        "ingestionPermissionOptions": {
+          "type": "array",
+          "description": "Optional list of permission types to ingest together with document content. If specified, it will set the indexer permission options for the data source.",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/KnowledgeSourceIngestionPermissionOption"
+          }
         },
         "contentExtractionMode": {
           "type": "string",
@@ -10604,7 +11780,62 @@
           "$ref": "#/definitions/AIServices",
           "description": "Optional AI Services configuration for content processing.",
           "x-nullable": true
+        },
+        "networkAccessMode": {
+          "type": "string",
+          "description": "Optional network access mode for ingestion. Set to 'private' to run ingestion in a private execution environment that can reach data sources and dependencies over a private network. Default is 'public'. This is a create-time setting and cannot be changed after the knowledge source is created.",
+          "default": "public",
+          "enum": [
+            "public",
+            "private"
+          ],
+          "x-ms-enum": {
+            "name": "KnowledgeSourceNetworkAccessMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Public",
+                "value": "public",
+                "description": "Ingestion runs in the standard, publicly reachable execution environment. This is the default."
+              },
+              {
+                "name": "Private",
+                "value": "private",
+                "description": "Ingestion runs in a private execution environment so it can reach data sources and dependencies over a private network (private endpoint / shared private link)."
+              }
+            ]
+          }
         }
+      }
+    },
+    "KnowledgeSourceIngestionPermissionOption": {
+      "type": "string",
+      "description": "Permission types to ingest together with document content.",
+      "enum": [
+        "userIds",
+        "groupIds",
+        "rbacScope"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceIngestionPermissionOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UserIds",
+            "value": "userIds",
+            "description": "Ingest explicit user identifiers alongside document content."
+          },
+          {
+            "name": "GroupIds",
+            "value": "groupIds",
+            "description": "Ingest group identifiers alongside document content."
+          },
+          {
+            "name": "RbacScope",
+            "value": "rbacScope",
+            "description": "Ingest RBAC scope information alongside document content."
+          }
+        ]
       }
     },
     "KnowledgeSourceKind": {
@@ -10613,8 +11844,11 @@
       "enum": [
         "searchIndex",
         "azureBlob",
+        "indexedSharePoint",
         "indexedOneLake",
-        "web"
+        "indexedSql",
+        "web",
+        "file"
       ],
       "x-ms-enum": {
         "name": "KnowledgeSourceKind",
@@ -10631,14 +11865,53 @@
             "description": "A knowledge source that read and ingest data from Azure Blob Storage to a Search Index."
           },
           {
+            "name": "IndexedSharePoint",
+            "value": "indexedSharePoint",
+            "description": "A knowledge source that reads data from indexed SharePoint."
+          },
+          {
             "name": "IndexedOneLake",
             "value": "indexedOneLake",
             "description": "A knowledge source that reads data from indexed OneLake."
           },
           {
+            "name": "IndexedSql",
+            "value": "indexedSql",
+            "description": "A knowledge source that retrieves and ingests data from Azure SQL Database or SQL Managed Instance to a Search Index."
+          },
+          {
             "name": "Web",
             "value": "web",
             "description": "A knowledge source that reads data from the web."
+          },
+          {
+            "name": "File",
+            "value": "file",
+            "description": "A knowledge source that supports direct file upload and indexing."
+          }
+        ]
+      }
+    },
+    "KnowledgeSourceNetworkAccessMode": {
+      "type": "string",
+      "description": "Specifies the network access mode for knowledge source ingestion. Default is 'public'.",
+      "enum": [
+        "public",
+        "private"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceNetworkAccessMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Public",
+            "value": "public",
+            "description": "Ingestion runs in the standard, publicly reachable execution environment. This is the default."
+          },
+          {
+            "name": "Private",
+            "value": "private",
+            "description": "Ingestion runs in a private execution environment so it can reach data sources and dependencies over a private network (private endpoint / shared private link)."
           }
         ]
       }
@@ -10748,6 +12021,11 @@
           "$ref": "#/definitions/KnowledgeSourceStatistics",
           "description": "Statistical information about the knowledge source synchronization history. Null on first sync.",
           "x-nullable": true
+        },
+        "fileCapacity": {
+          "$ref": "#/definitions/KnowledgeSourceFileCapacity",
+          "description": "File upload capacity for a File knowledge source. Omitted for other knowledge source kinds.",
+          "readOnly": true
         }
       },
       "required": [
@@ -11803,6 +13081,27 @@
           "description": "The knowledge bases in the service.",
           "items": {
             "$ref": "#/definitions/KnowledgeBase"
+          }
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "The URL that can be used to fetch the next set of results.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListKnowledgeSourceFilesResult": {
+      "type": "object",
+      "description": "Response from a List Files request.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of files.",
+          "items": {
+            "$ref": "#/definitions/KnowledgeSourceFile"
           }
         },
         "@odata.nextLink": {
@@ -16400,10 +17699,6 @@
           "format": "double",
           "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by a search query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 100."
         },
-        "moreLikeThis": {
-          "type": "string",
-          "description": "The key of the document to use as the basis for finding similar documents. This parameter cannot be used together with search text."
-        },
         "orderby": {
           "type": "string",
           "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses."
@@ -20738,14 +22033,6 @@
       "required": false,
       "type": "number",
       "format": "double",
-      "x-ms-parameter-location": "method"
-    },
-    "SearchOptions.moreLikeThis": {
-      "name": "moreLikeThis",
-      "in": "query",
-      "description": "The key of the document to use as the basis for finding similar documents. This parameter cannot be used together with search text.",
-      "required": false,
-      "type": "string",
       "x-ms-parameter-location": "method"
     },
     "SearchOptions.orderBy": {

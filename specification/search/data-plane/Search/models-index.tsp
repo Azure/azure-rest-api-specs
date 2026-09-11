@@ -515,11 +515,6 @@ model SearchOptions {
   @query
   minimumCoverage?: float64;
 
-  /** The key of the document to use as the basis for finding similar documents. This parameter cannot be used together with search text. */
-  @added(Versions.v2026_10_01)
-  @query
-  moreLikeThis?: string;
-
   /** The list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. */
   @query("$orderby")
   orderBy?: string[];
@@ -867,10 +862,6 @@ model SearchRequest {
 
   /** A number between 0 and 100 indicating the percentage of the index that must be covered by a search query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 100. */
   minimumCoverage?: float64;
-
-  /** The key of the document to use as the basis for finding similar documents. This parameter cannot be used together with search text. */
-  @added(Versions.v2026_10_01)
-  moreLikeThis?: string;
 
   /** The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"

@@ -1013,7 +1013,6 @@ interface KnowledgeSources {
   /** Uploads a file to a File knowledge source using multipart/form-data: a JSON 'metadata' part (file name and custom metadata) and a 'content' part with the raw file bytes. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   @sharedRoute
   @route("/knowledgesources('{sourceName}')/files")
@@ -1033,7 +1032,6 @@ interface KnowledgeSources {
   /** Lists all files in a File knowledge source. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @route("/knowledgesources('{sourceName}')/files")
   @list
@@ -1043,7 +1041,6 @@ interface KnowledgeSources {
       ...acceptHeaderMinimal;
 
       /** Optional prefix to filter files by their directory-like path. */
-      @removed(Versions.v2026_10_01)
       @added(Versions.v2026_08_01_preview)
       @query
       prefix?: string;
@@ -1055,7 +1052,6 @@ interface KnowledgeSources {
 
   /** Deletes a file from a File knowledge source and removes all indexed content derived from it. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @route("/knowledgesources('{sourceName}')/files('{fileId}')")
   @delete
@@ -1077,7 +1073,6 @@ interface KnowledgeSources {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   @route("/knowledgesources('{sourceName}')/files('{fileId}')")
   @put

@@ -4707,7 +4707,6 @@ model KnowledgeBase {
   answerInstructions?: string;
 
   /** Options to control Cross-Origin Resource Sharing (CORS) for the knowledge base. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   corsOptions?: CorsOptions;
 
@@ -4858,7 +4857,6 @@ union KnowledgeSourceKind {
   AzureBlob: "azureBlob",
 
   /** A knowledge source that reads data from indexed SharePoint. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   IndexedSharePoint: "indexedSharePoint",
@@ -4867,7 +4865,6 @@ union KnowledgeSourceKind {
   IndexedOneLake: "indexedOneLake",
 
   /** A knowledge source that retrieves and ingests data from Azure SQL Database or SQL Managed Instance to a Search Index. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   IndexedSql: "indexedSql",
 
@@ -4886,7 +4883,6 @@ union KnowledgeSourceKind {
   WorkIQ: "workIQ",
 
   /** A knowledge source that supports direct file upload and indexing. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   File: "file",
 
@@ -5070,7 +5066,6 @@ model AzureBlobKnowledgeSourceParameters {
 }
 
 /** Configuration for SharePoint knowledge source. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model IndexedSharePointKnowledgeSource extends KnowledgeSource {
@@ -5081,7 +5076,6 @@ model IndexedSharePointKnowledgeSource extends KnowledgeSource {
 }
 
 /** Parameters for SharePoint knowledge source. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model IndexedSharePointKnowledgeSourceParameters {
@@ -5143,7 +5137,6 @@ model IndexedOneLakeKnowledgeSourceParameters {
 }
 
 /** Configuration for indexed SQL knowledge source. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model IndexedSqlKnowledgeSource extends KnowledgeSource {
   /** The discriminator value. */
@@ -5154,7 +5147,6 @@ model IndexedSqlKnowledgeSource extends KnowledgeSource {
 }
 
 /** Parameters for indexed SQL knowledge source. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model IndexedSqlKnowledgeSourceParameters {
   /** The connection string for the Azure SQL Database or SQL Managed Instance. */
@@ -5186,7 +5178,6 @@ model IndexedSqlKnowledgeSourceParameters {
 }
 
 /** Maps a SQL column to a search index field. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model ContentColumnMapping {
   /** Target index field name. */
@@ -5200,7 +5191,6 @@ model ContentColumnMapping {
 }
 
 /** Maps a SQL column to a vector field for embedding. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model EmbeddingColumnMapping {
   /** Target vector field name in the search index. */
@@ -5211,7 +5201,6 @@ model EmbeddingColumnMapping {
 }
 
 /** Configuration for File knowledge source that supports direct file upload and indexing. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model FileKnowledgeSource extends KnowledgeSource {
   /** The discriminator value. */
@@ -5221,13 +5210,11 @@ model FileKnowledgeSource extends KnowledgeSource {
   fileParameters: FileKnowledgeSourceParameters;
 
   /** Options to control Cross-Origin Resource Sharing (CORS) for the File knowledge source's file endpoints (upload, list, update, delete). */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   corsOptions?: CorsOptions;
 }
 
 /** Parameters for File knowledge source. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model FileKnowledgeSourceParameters {
   /** Consolidates all general ingestion settings for the File knowledge source, including the content extraction mode and an optional embeddingModel. */
@@ -5244,7 +5231,6 @@ model FileKnowledgeSourceParameters {
 }
 
 /** The extraction effort applied to an individual file. 'minimal' (the default) uses built-in extraction; 'standard' uses Content Understanding. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 union FileKnowledgeSourceExtractionMode {
   string,
@@ -5258,7 +5244,6 @@ union FileKnowledgeSourceExtractionMode {
 
 /** The JSON 'metadata' part of a multipart/form-data file upload: the full file name/path and custom key/value metadata. The parsing mode and extraction mode are both chosen by the service and are not supplied by the caller. */
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "The 'metadata' part is intentionally a structured JSON object; Swagger 2.0 cannot represent it as a primitive multipart part."
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 model FileUploadMetadata {
   /** The full relative file name/path to store the file under (prefixes are derived from it). */
@@ -5270,7 +5255,6 @@ model FileUploadMetadata {
 
 /** Multipart request for uploading a file to a File knowledge source. */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 model UploadKnowledgeSourceFileMultipartRequest {
   /** The JSON metadata describing the file. */
@@ -5282,7 +5266,6 @@ model UploadKnowledgeSourceFileMultipartRequest {
 
 /** Multipart request for updating a file in a File knowledge source. */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 model UpdateKnowledgeSourceFileRequest {
   /** The JSON metadata describing the file. */
@@ -5293,7 +5276,6 @@ model UpdateKnowledgeSourceFileRequest {
 }
 
 /** Metadata for a file uploaded to a File knowledge source. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model KnowledgeSourceFile {
   /** The unique identifier for the file. */
@@ -5322,32 +5304,27 @@ model KnowledgeSourceFile {
   errorMessage?: string | null;
 
   /** The prefix (directory-like path) derived from the full file name. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   prefix?: string;
 
   /** Custom key/value metadata stored with the file. Returned but not searchable or filterable. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   metadata?: Record<string>;
 
   /** The parsing mode applied to the file (auto-detected from the file). */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   parsingMode?: BlobIndexerParsingMode;
 
   /** The extraction mode applied to the file. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   extractionMode?: FileKnowledgeSourceExtractionMode;
 }
 
 /** Response from a List Files request. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model ListKnowledgeSourceFilesResult {
   /** The list of files. */
@@ -5358,7 +5335,6 @@ model ListKnowledgeSourceFilesResult {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @visibility(Lifecycle.Read)
   @nextLink
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   `@odata.nextLink`?: string;
 }

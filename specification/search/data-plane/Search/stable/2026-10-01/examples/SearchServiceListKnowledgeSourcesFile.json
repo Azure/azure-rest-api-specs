@@ -1,6 +1,6 @@
 {
   "operationId": "KnowledgeSources_List",
-  "title": "SearchServiceListKnowledgeSourcesAzureBlob",
+  "title": "SearchServiceListKnowledgeSourcesFile",
   "parameters": {
     "endpoint": "https://typespecstableexampleservice.search.windows.net",
     "api-version": "2026-10-01",
@@ -17,31 +17,12 @@
           {
             "@odata.etag": "0x1234568AE7E58A1",
             "name": "ks-stable-test",
-            "kind": "azureBlob",
-            "description": "Description of the knowledge source.",
-            "encryptionKey": {
-              "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
-              "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
-              "keyVaultUri": "https://myKeyVault.vault.azure.net",
-              "accessCredentials": {
-                "applicationId": "00000000-0000-0000-0000-000000000000",
-                "applicationSecret": "<applicationSecret>"
-              }
-            },
-            "azureBlobParameters": {
-              "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
-              "containerName": "test-container",
-              "folderPath": "test-path",
-              "isADLSGen2": false,
+            "kind": "file",
+            "description": "Description of the File knowledge source.",
+            "fileParameters": {
               "ingestionParameters": {
-                "disableImageVerbalization": false,
                 "ingestionPermissionOptions": [],
                 "contentExtractionMode": "standard",
-                "networkAccessMode": "public",
-                "identity": {
-                  "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
-                  "userAssignedIdentity": "/my/userassigned/id"
-                },
                 "embeddingModel": {
                   "kind": "azureOpenAI",
                   "azureOpenAIParameters": {
@@ -60,21 +41,20 @@
                     "modelName": "gpt-5-mini"
                   }
                 },
-                "ingestionSchedule": {
-                  "interval": "P1D",
-                  "startTime": "2024-06-06T00:01:50.265Z"
-                },
                 "aiServices": {
                   "uri": "https://my-ai-service.azure.com/",
                   "apiKey": "<redacted>"
                 }
               },
               "createdResources": {
-                "datasource": "ks-stable-test-datasource",
-                "indexer": "ks-stable-test-indexer",
-                "skillset": "ks-stable-test-skillset",
                 "index": "ks-stable-test-index"
               }
+            },
+            "corsOptions": {
+              "allowedOrigins": [
+                "https://myapp.example.com"
+              ],
+              "maxAgeInSeconds": 300
             }
           }
         ]

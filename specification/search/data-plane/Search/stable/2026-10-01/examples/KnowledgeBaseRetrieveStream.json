@@ -1,0 +1,47 @@
+{
+  "operationId": "KnowledgeRetrieval_RetrieveStream",
+  "title": "KnowledgeBaseRetrieveStream",
+  "parameters": {
+    "endpoint": "https://typespecstableexampleservice.search.windows.net",
+    "knowledgeBaseName": "base-preview-test",
+    "api-version": "2026-10-01",
+    "Accept": "text/event-stream",
+    "x-ms-query-source-authorization": null,
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "retrievalRequest": {
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "hello world"
+            }
+          ]
+        }
+      ],
+      "maxRuntimeInSeconds": 60,
+      "maxOutputSizeInTokens": 100000,
+      "retrievalReasoningEffort": {
+        "kind": "low"
+      },
+      "includeActivity": true,
+      "outputMode": "answerSynthesis",
+      "knowledgeSourceParams": [
+        {
+          "knowledgeSourceName": "ks-stable-test",
+          "includeReferences": true,
+          "includeReferenceSourceData": true,
+          "rerankerThreshold": 2.1,
+          "kind": "searchIndex",
+          "filterAddOn": "foo eq bar"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": "event: retrieval.started\ndata: {\"requestId\":\"00000000-0000-0000-0000-000000000000\",\"knowledgeBaseName\":\"base-preview-test\",\"outputMode\":\"answerSynthesis\",\"reasoningEffort\":{\"kind\":\"low\"}}\n\nevent: activity.started\ndata: {\"id\":0,\"type\":\"modelQueryPlanning\",\"startedAt\":\"2025-01-01T00:08:45.045Z\"}\n\nevent: activity.completed\ndata: {\"type\":\"modelQueryPlanning\",\"id\":0,\"startedAt\":\"2025-01-01T00:08:45.045Z\",\"completedAt\":\"2025-01-01T00:08:46.279Z\",\"inputTokens\":11,\"outputTokens\":22,\"elapsedMs\":1234}\n\nevent: activity.started\ndata: {\"id\":1,\"type\":\"searchIndex\",\"startedAt\":\"2025-01-01T00:08:45.045Z\",\"knowledgeSourceName\":\"ks-stable-test\"}\n\nevent: activity.completed\ndata: {\"type\":\"searchIndex\",\"id\":1,\"startedAt\":\"2025-01-01T00:08:45.045Z\",\"completedAt\":\"2025-01-01T00:08:46.279Z\",\"knowledgeSourceName\":\"ks-stable-test\",\"queryTime\":\"2025-01-01T00:08:45.045Z\",\"count\":2,\"elapsedMs\":1234,\"searchIndexArguments\":{\"search\":\"hello world\",\"filter\":\"(category eq 'news') and (foo eq bar)\",\"semanticConfigurationName\":\"testconfig\",\"sourceDataFields\":[{\"name\":\"category\"},{\"name\":\"description\"},{\"name\":\"ownerId\"},{\"name\":\"id\"}],\"searchFields\":[]}}\n\nevent: activity.started\ndata: {\"id\":2,\"type\":\"searchIndex\",\"startedAt\":\"2025-01-01T00:08:45.045Z\",\"knowledgeSourceName\":\"ks-stable-test\"}\n\nevent: activity.completed\ndata: {\"type\":\"searchIndex\",\"id\":2,\"startedAt\":\"2025-01-01T00:08:45.045Z\",\"completedAt\":\"2025-01-01T00:08:46.279Z\",\"knowledgeSourceName\":\"ks-stable-test\",\"queryTime\":\"2025-01-01T00:08:45.045Z\",\"count\":2,\"elapsedMs\":1234,\"searchIndexArguments\":{\"search\":\"hello world two\",\"filter\":\"(category eq 'news') and (foo eq bar)\",\"semanticConfigurationName\":\"testconfig\",\"sourceDataFields\":[{\"name\":\"category\"},{\"name\":\"description\"},{\"name\":\"ownerId\"},{\"name\":\"id\"}],\"searchFields\":[]}}\n\nevent: activity.started\ndata: {\"id\":3,\"type\":\"agenticReasoning\",\"startedAt\":\"2025-01-01T00:08:45.045Z\"}\n\nevent: activity.completed\ndata: {\"type\":\"agenticReasoning\",\"id\":3,\"startedAt\":\"2025-01-01T00:08:45.045Z\",\"completedAt\":\"2025-01-01T00:08:46.279Z\",\"reasoningTokens\":74}\n\nevent: activity.started\ndata: {\"id\":4,\"type\":\"modelAnswerSynthesis\",\"startedAt\":\"2025-01-01T00:08:45.045Z\"}\n\nevent: activity.completed\ndata: {\"type\":\"modelAnswerSynthesis\",\"id\":4,\"startedAt\":\"2025-01-01T00:08:45.045Z\",\"completedAt\":\"2025-01-01T00:08:46.279Z\",\"inputTokens\":11,\"outputTokens\":22,\"elapsedMs\":1234}\n\nevent: answer.completed\ndata: {\"messageIndex\":0,\"message\":{\"content\":[{\"type\":\"text\",\"text\":\"[{...}]\"}]}}\n\nevent: references.completed\ndata: [{\"type\":\"searchIndex\",\"id\":\"83dd7d40\",\"activitySource\":1,\"rerankerScore\":3.5,\"docKey\":\"myDocKey1\",\"citationUrl\":\"https://typespecstableexampleservice.search.windows.net/indexes/stable-test/docs/myDocKey1?$select=category%2Cdescription%2CownerId%2Cid&api-version=2026-10-01&allowUnsafeKeys=true\",\"sourceData\":{\"id\":\"myDocKey1\",\"title\":\"high_doc\",\"content\":\"hello world\"}},{\"type\":\"searchIndex\",\"id\":\"83dd7d41\",\"activitySource\":1,\"rerankerScore\":2.7,\"docKey\":\"myDocKey2\",\"citationUrl\":\"https://typespecstableexampleservice.search.windows.net/indexes/stable-test/docs/myDocKey2?$select=category%2Cdescription%2CownerId%2Cid&api-version=2026-10-01&allowUnsafeKeys=true\",\"sourceData\":{\"id\":\"myDocKey2\",\"title\":\"low_doc\",\"content\":\"goodbye world\"}}]\n\nevent: response.completed\ndata: {\"statusCode\":200,\"response\":{\"response\":[{\"content\":[{\"type\":\"text\",\"text\":\"[{...}]\"}]}],\"activity\":[{\"type\":\"modelQueryPlanning\",\"id\":0,\"startedAt\":\"2025-01-01T00:08:45.045Z\",\"completedAt\":\"2025-01-01T00:08:46.279Z\",\"inputTokens\":11,\"outputTokens\":22,\"elapsedMs\":1234},{\"type\":\"searchIndex\",\"id\":1,\"startedAt\":\"2025-01-01T00:08:45.045Z\",\"completedAt\":\"2025-01-01T00:08:46.279Z\",\"knowledgeSourceName\":\"ks-stable-test\",\"queryTime\":\"2025-01-01T00:08:45.045Z\",\"count\":2,\"elapsedMs\":1234,\"searchIndexArguments\":{\"search\":\"hello world\",\"filter\":\"(category eq 'news') and (foo eq bar)\",\"semanticConfigurationName\":\"testconfig\",\"sourceDataFields\":[{\"name\":\"category\"},{\"name\":\"description\"},{\"name\":\"ownerId\"},{\"name\":\"id\"}],\"searchFields\":[]}},{\"type\":\"searchIndex\",\"id\":2,\"startedAt\":\"2025-01-01T00:08:45.045Z\",\"completedAt\":\"2025-01-01T00:08:46.279Z\",\"knowledgeSourceName\":\"ks-stable-test\",\"queryTime\":\"2025-01-01T00:08:45.045Z\",\"count\":2,\"elapsedMs\":1234,\"searchIndexArguments\":{\"search\":\"hello world two\",\"filter\":\"(category eq 'news') and (foo eq bar)\",\"semanticConfigurationName\":\"testconfig\",\"sourceDataFields\":[{\"name\":\"category\"},{\"name\":\"description\"},{\"name\":\"ownerId\"},{\"name\":\"id\"}],\"searchFields\":[]}},{\"type\":\"agenticReasoning\",\"id\":3,\"startedAt\":\"2025-01-01T00:08:45.045Z\",\"completedAt\":\"2025-01-01T00:08:46.279Z\",\"reasoningTokens\":74},{\"type\":\"modelAnswerSynthesis\",\"id\":4,\"startedAt\":\"2025-01-01T00:08:45.045Z\",\"completedAt\":\"2025-01-01T00:08:46.279Z\",\"inputTokens\":11,\"outputTokens\":22,\"elapsedMs\":1234}],\"references\":[{\"type\":\"searchIndex\",\"id\":\"83dd7d40\",\"activitySource\":1,\"rerankerScore\":3.5,\"docKey\":\"myDocKey1\",\"citationUrl\":\"https://typespecstableexampleservice.search.windows.net/indexes/stable-test/docs/myDocKey1?$select=category%2Cdescription%2CownerId%2Cid&api-version=2026-10-01&allowUnsafeKeys=true\",\"sourceData\":{\"id\":\"myDocKey1\",\"title\":\"high_doc\",\"content\":\"hello world\"}},{\"type\":\"searchIndex\",\"id\":\"83dd7d41\",\"activitySource\":1,\"rerankerScore\":2.7,\"docKey\":\"myDocKey2\",\"citationUrl\":\"https://typespecstableexampleservice.search.windows.net/indexes/stable-test/docs/myDocKey2?$select=category%2Cdescription%2CownerId%2Cid&api-version=2026-10-01&allowUnsafeKeys=true\",\"sourceData\":{\"id\":\"myDocKey2\",\"title\":\"low_doc\",\"content\":\"goodbye world\"}}]}}\n\n"
+    }
+  }
+}

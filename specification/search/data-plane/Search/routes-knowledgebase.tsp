@@ -49,7 +49,6 @@ interface KnowledgeRetrieval {
    * complete response body as a single JSON document.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   @sharedRoute
   @post
@@ -77,8 +76,8 @@ interface KnowledgeRetrieval {
     // result the OpenAPI 2.0 output for this 200 response is currently just `{"type": "string"}` --
     // no $ref to KnowledgeBaseRetrievalStreamEvents or its variants, and no Content-Type header -- and
     // the generated C# protocol method is a plain buffered Task<Response> with no typed per-event
-    // parsing. Revisit before GA once upstream codegen support lands (or use a documented response
-    // alias if a supported representation is agreed upon).
+    // parsing. This raw-response representation is also used for GA; revisit typed event parsing
+    // once upstream codegen support lands.
     SSEStream<KnowledgeBaseRetrievalStreamEvents>,
     {},
     ErrorResponse

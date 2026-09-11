@@ -1,6 +1,6 @@
 {
   "operationId": "KnowledgeSources_List",
-  "title": "SearchServiceListKnowledgeSourcesAzureBlob",
+  "title": "SearchServiceListKnowledgeSourcesIndexedSharePoint",
   "parameters": {
     "endpoint": "https://typespecstableexampleservice.search.windows.net",
     "api-version": "2026-10-01",
@@ -17,8 +17,8 @@
           {
             "@odata.etag": "0x1234568AE7E58A1",
             "name": "ks-stable-test",
-            "kind": "azureBlob",
-            "description": "Description of the knowledge source.",
+            "kind": "indexedSharePoint",
+            "description": "Description of the SharePoint knowledge source.",
             "encryptionKey": {
               "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
               "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
@@ -28,14 +28,16 @@
                 "applicationSecret": "<applicationSecret>"
               }
             },
-            "azureBlobParameters": {
+            "indexedSharePointParameters": {
               "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
-              "containerName": "test-container",
-              "folderPath": "test-path",
-              "isADLSGen2": false,
+              "containerName": "defaultSiteLibrary",
+              "query": "*.docx OR *.pdf",
               "ingestionParameters": {
                 "disableImageVerbalization": false,
-                "ingestionPermissionOptions": [],
+                "ingestionPermissionOptions": [
+                  "userIds",
+                  "groupIds"
+                ],
                 "contentExtractionMode": "standard",
                 "networkAccessMode": "public",
                 "identity": {

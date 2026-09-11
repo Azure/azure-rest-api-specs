@@ -242,10 +242,21 @@ union IndexedSharePointContainerName {
 
   /** Use a query to filter SharePoint content. */
   UseQuery: "useQuery",
+
+  /** Index content from every list in the site. */
+  @added(Versions.v2026_10_01)
+  AllSiteLists: "allSiteLists",
+
+  /** Index content from every page in the site. */
+  @added(Versions.v2026_10_01)
+  AllSitePages: "allSitePages",
+
+  /** Index content from all supported libraries, lists, and pages in the site. */
+  @added(Versions.v2026_10_01)
+  AllSiteContent: "allSiteContent",
 }
 
 /** Specifies runtime parameters for a indexed SharePoint knowledge source */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model IndexedSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
@@ -333,7 +344,6 @@ model McpServerKnowledgeSourceParams extends KnowledgeSourceParams {
 }
 
 /** Specifies runtime parameters for a File knowledge source */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model FileKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
@@ -346,7 +356,6 @@ model FileKnowledgeSourceParams extends KnowledgeSourceParams {
 }
 
 /** Specifies runtime parameters for an indexed SQL knowledge source */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model IndexedSqlKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
@@ -444,7 +453,6 @@ union KnowledgeBaseActivityRecordType {
   azureBlob: "azureBlob",
 
   /** Indexed SharePoint retrieval activity. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   indexedSharePoint: "indexedSharePoint",
@@ -482,12 +490,10 @@ union KnowledgeBaseActivityRecordType {
   mcpServer: "mcpServer",
 
   /** File retrieval activity. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   file: "file",
 
   /** Indexed SQL retrieval activity. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   indexedSql: "indexedSql",
 
@@ -519,12 +525,10 @@ model KnowledgeBaseActivityRecord {
   type: KnowledgeBaseActivityRecordType;
 
   /** The time at which the activity started. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   startedAt?: utcDateTime;
 
   /** The time at which the activity completed. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   completedAt?: utcDateTime;
 
@@ -630,7 +634,6 @@ model KnowledgeBaseAzureBlobActivityArguments {
 }
 
 /** Represents a indexed SharePoint retrieval activity record. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointActivityRecord
@@ -650,7 +653,6 @@ model KnowledgeBaseIndexedSharePointActivityRecord
 }
 
 /** Represents the arguments the indexed SharePoint retrieval activity was run with. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointActivityArguments {
@@ -831,7 +833,6 @@ model KnowledgeBaseMcpServerActivityArguments {
 }
 
 /** Represents a File retrieval activity record. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model KnowledgeBaseFileActivityRecord extends KnowledgeBaseActivityRecord {
   ...KnowledgeBaseRetrievalActivityRecord;
@@ -849,7 +850,6 @@ model KnowledgeBaseFileActivityRecord extends KnowledgeBaseActivityRecord {
 }
 
 /** Represents the arguments the File retrieval activity was run with. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model KnowledgeBaseFileActivityArguments {
   /** The search string used to query file contents. */
@@ -857,7 +857,6 @@ model KnowledgeBaseFileActivityArguments {
 }
 
 /** Represents an indexed SQL retrieval activity record. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model KnowledgeBaseIndexedSqlActivityRecord
   extends KnowledgeBaseActivityRecord {
@@ -876,7 +875,6 @@ model KnowledgeBaseIndexedSqlActivityRecord
 }
 
 /** Represents the arguments the indexed SQL retrieval activity was run with. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model KnowledgeBaseIndexedSqlActivityArguments {
   /** The search string used to query indexed SQL contents. */
@@ -997,7 +995,6 @@ union KnowledgeBaseReferenceType {
   azureBlob: "azureBlob",
 
   /** Indexed SharePoint document reference. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   indexedSharePoint: "indexedSharePoint",
@@ -1035,12 +1032,10 @@ union KnowledgeBaseReferenceType {
   mcpServer: "mcpServer",
 
   /** File document reference. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   file: "file",
 
   /** Indexed SQL document reference. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   indexedSql: "indexedSql",
 }
@@ -1081,7 +1076,6 @@ model KnowledgeBaseSearchIndexReference extends KnowledgeBaseReference {
 
   /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   citationUrl?: url;
 }
@@ -1103,14 +1097,12 @@ model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
 
   /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API naming pattern with url"
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   citationUrl?: url;
 }
 
 /** Represents an indexed SharePoint document reference. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
@@ -1128,7 +1120,6 @@ model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
 
   /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   citationUrl?: url;
 }
@@ -1150,7 +1141,6 @@ model KnowledgeBaseIndexedOneLakeReference extends KnowledgeBaseReference {
 
   /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   citationUrl?: url;
 }
@@ -1269,7 +1259,6 @@ model KnowledgeBaseMcpServerReference extends KnowledgeBaseReference {
 
 /** Represents a file document reference. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model KnowledgeBaseFileReference extends KnowledgeBaseReference {
   /** The discriminator value. */
@@ -1280,14 +1269,12 @@ model KnowledgeBaseFileReference extends KnowledgeBaseReference {
 
   /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   citationUrl?: url;
 }
 
 /** Represents an Azure SQL document reference. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model KnowledgeBaseIndexedSqlReference extends KnowledgeBaseReference {
   /** The discriminator value. */
@@ -1299,7 +1286,6 @@ model KnowledgeBaseIndexedSqlReference extends KnowledgeBaseReference {
 
   /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   citationUrl?: url;
 }
@@ -1453,7 +1439,6 @@ model KnowledgeBaseRetrievalPartialResponse {
  * event (or an `error` event, if the retrieval fails before completing).
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "@events SSE union is delivered as a server-sent event stream and cannot be represented as an OpenAPI v2 union."
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 @events
 union KnowledgeBaseRetrievalStreamEvents {
@@ -1482,7 +1467,6 @@ union KnowledgeBaseRetrievalStreamEvents {
 }
 
 /** Emitted once retrieval preflight validation completes, before any activity begins. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseRetrievalStartedEvent {
   /** A service-generated identifier that correlates all events in this retrieval stream. */
@@ -1499,7 +1483,6 @@ model KnowledgeBaseRetrievalStartedEvent {
 }
 
 /** Emitted immediately before an individual retrieval activity begins executing. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseActivityStartedEvent {
   /** The ID of the activity record, matching the `id` on the corresponding `activity.completed` event. */
@@ -1516,7 +1499,6 @@ model KnowledgeBaseActivityStartedEvent {
 }
 
 /** Emitted when a fully validated and post-processed synthesized answer is available. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseAnswerCompletedEvent {
   /** The zero-based index of the completed message in the final response array. */
@@ -1527,7 +1509,6 @@ model KnowledgeBaseAnswerCompletedEvent {
 }
 
 /** Emitted in place of `response.completed` if retrieval fails after the stream starts. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseStreamErrorEvent {
   /** The error detail explaining why the retrieval stream failed. */
@@ -1538,7 +1519,6 @@ model KnowledgeBaseStreamErrorEvent {
 }
 
 /** The semantic HTTP status of a completed streaming retrieval. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 union KnowledgeBaseRetrievalStatusCode {
   int32,
@@ -1551,7 +1531,6 @@ union KnowledgeBaseRetrievalStatusCode {
 }
 
 /** Emitted after retrieval completes successfully. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseResponseCompletedEvent {
   /** The semantic HTTP status of the completed retrieval. */
@@ -1601,7 +1580,6 @@ union KnowledgeSourceContentExtractionMode {
 }
 
 /** Permission types to ingest together with document content. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 union KnowledgeSourceIngestionPermissionOption {
@@ -1623,7 +1601,6 @@ union KnowledgeSourceIngestionPermissionOption {
 }
 
 /** Specifies the network access mode for knowledge source ingestion. Default is 'public'. */
-@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 union KnowledgeSourceNetworkAccessMode {
   string,
@@ -1658,7 +1635,6 @@ model KnowledgeSourceIngestionParameters {
 
   /** Optional list of permission types to ingest together with document content. If specified, it will set the indexer permission options for the data source. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   ingestionPermissionOptions?:
@@ -1686,7 +1662,6 @@ model KnowledgeSourceIngestionParameters {
   freshnessPolicy?: FreshnessPolicy;
 
   /** Optional network access mode for ingestion. Set to 'private' to run ingestion in a private execution environment that can reach data sources and dependencies over a private network. Default is 'public'. This is a create-time setting and cannot be changed after the knowledge source is created. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   networkAccessMode?: KnowledgeSourceNetworkAccessMode = KnowledgeSourceNetworkAccessMode.Public;
 }
@@ -1746,6 +1721,27 @@ model KnowledgeSourceStatus {
   /** Statistical information about the knowledge source synchronization history. Null on first sync. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   statistics?: KnowledgeSourceStatistics | null;
+
+  /** File upload capacity for a File knowledge source. Omitted for other knowledge source kinds. */
+  @added(Versions.v2026_10_01)
+  @visibility(Lifecycle.Read)
+  fileCapacity?: KnowledgeSourceFileCapacity;
+}
+
+/** File upload capacity for a File knowledge source. */
+@added(Versions.v2026_10_01)
+model KnowledgeSourceFileCapacity {
+  /** The maximum number of files allowed in the knowledge source. */
+  @visibility(Lifecycle.Read)
+  maxFileCount: int32;
+
+  /** The number of additional files that can be uploaded at the time of the request. */
+  @visibility(Lifecycle.Read)
+  remainingFileCount: int32;
+
+  /** The maximum size in bytes of an individual uploaded file. */
+  @visibility(Lifecycle.Read)
+  maxFileSizeBytes: int64;
 }
 
 /** Statistical information about knowledge source synchronization history. */
