@@ -10,39 +10,103 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.HorizonDb;
 
+@doc("A HorizonDB cluster name used before enforcing lowercase names.")
+@pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
+@minLength(1)
+@maxLength(63)
+scalar LegacyClusterName extends string;
+
+@doc("A lowercase enforced name as a HorizonDB cluster name.")
+@pattern("^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$")
+@minLength(1)
+@maxLength(63)
+scalar ClusterName extends string;
+
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The Cluster identity contract intentionally permits only None and UserAssigned so unsupported system-assigned identity values are rejected by the API schema."
+@doc("The managed identity types supported by a HorizonDB cluster.")
+union HorizonDbClusterIdentityType {
+  @doc("No managed identity is assigned.")
+  None: "None",
+
+  @doc("User-assigned managed identities are assigned.")
+  UserAssigned: "UserAssigned",
+}
+
+@doc("The user-assigned managed identities assigned to a HorizonDB cluster. PUT and PATCH can assign or remove identities. Omitting the top-level identity property from PATCH preserves all current assignments. Removing an identity referenced by a change data capture identity assignment is rejected until the referencing assignment is deleted.")
+model HorizonDbClusterManagedServiceIdentity {
+  @doc("The managed identity type assigned to the cluster.")
+  type: HorizonDbClusterIdentityType;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The standard Azure Resource Manager identity envelope represents user-assigned identities as a resource-ID-keyed dictionary."
+  @doc("The user-assigned managed identities associated with the cluster. Each dictionary key must be the full Azure resource ID of a Microsoft.ManagedIdentity/userAssignedIdentities resource. Request values can be empty objects; response values contain the service-populated clientId and principalId. Assigning an identity does not grant it access to destination resources; required role assignments must be configured separately.")
+  userAssignedIdentities?: Record<
+    | Azure.ResourceManager.CommonTypes.UserAssignedIdentity
+    | null>;
+}
+
+@doc("The user-assigned managed identity envelope for a HorizonDB cluster.")
+model HorizonDbClusterManagedServiceIdentityProperty {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The standard managed identity envelope also permits system-assigned identity values, which HorizonDB clusters do not support."
+  @doc("The managed service identities assigned to this resource.")
+  identity?: HorizonDbClusterManagedServiceIdentity;
+}
+
+@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbCluster")
 @doc("Represents the HorizonDB cluster.")
-model HorizonDbCluster
-  is Azure.ResourceManager.TrackedResource<HorizonDbClusterProperties> {
+model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
   @doc("The name of the HorizonDB cluster.")
-  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
-  @minLength(1)
-  @maxLength(63)
   @key("clusterName")
   @path
   @segment("clusters")
-  name: string;
+  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyClusterName)
+  name: ClusterName;
 
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...HorizonDbClusterManagedServiceIdentityProperty;
 }
 
-@doc("Represents the HorizonDB pool.")
-@parentResource(HorizonDbCluster)
-model HorizonDbPool
-  is Azure.ResourceManager.ProxyResource<HorizonDbPoolProperties> {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+@doc("A HorizonDB pool name used before allowing one-character names.")
+@pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
+@minLength(1)
+@maxLength(63)
+scalar LegacyPoolName extends string;
 
+@doc("A lowercase enforced name as a HorizonDB pool name.")
+@pattern("^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$")
+@minLength(1)
+@maxLength(63)
+scalar PoolName extends string;
+
+@added(Versions.v2026_10_01_preview)
+@doc("A provisioned HorizonDB pool compute capacity in vCores, from 1 through 192.")
+@minValue(1)
+@maxValue(192)
+scalar ProvisionedPoolVCores extends int32;
+
+@added(Versions.v2026_10_01_preview)
+@doc("A HorizonDB pool node count, from 0 through 16.")
+@minValue(0)
+@maxValue(16)
+scalar PoolNodeCount extends int32;
+
+@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbPool")
+@doc("Represents the HorizonDB pool.")
+@parentResource(Cluster)
+model Pool is Azure.ResourceManager.ProxyResource<PoolProperties> {
   @doc("The name of the HorizonDB pool.")
-  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
-  @minLength(1)
-  @maxLength(63)
   @key("poolName")
   @path
   @segment("pools")
-  name: string;
+  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyPoolName)
+  name: PoolName;
+
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
+@@removed(Pool.tags, Versions.v2026_10_01_preview);
+
+@removed(Versions.v2026_10_01_preview)
 @doc("Represents the HorizonDB replica.")
-@parentResource(HorizonDbPool)
+@parentResource(Pool)
 model HorizonDbReplica
   is Azure.ResourceManager.ProxyResource<HorizonDbReplicaProperties> {
   @doc("The name of the HorizonDB replica.")
@@ -55,10 +119,17 @@ model HorizonDbReplica
   name: string;
 }
 
+@added(Versions.v2026_10_01_preview)
+@doc("An IPv4 address in dotted-decimal notation.")
+@pattern("^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])[.]){3}(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])$")
+scalar DottedDecimalIpv4Address extends string;
+
+@removed(Versions.v2026_10_01_preview)
+@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbFirewallRule")
 @doc("Represents the HorizonDB firewall rule.")
-@parentResource(HorizonDbPool)
-model HorizonDbFirewallRule
-  is Azure.ResourceManager.ProxyResource<HorizonDbFirewallRuleProperties> {
+@parentResource(Pool)
+model LegacyHorizonDbFirewallRule
+  is Azure.ResourceManager.ProxyResource<FirewallRuleProperties> {
   @doc("The name of the HorizonDB firewall rule.")
   @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
   @minLength(1)
@@ -69,9 +140,25 @@ model HorizonDbFirewallRule
   name: string;
 }
 
+@added(Versions.v2026_10_01_preview)
+@doc("Represents a customer-managed firewall rule for a HorizonDB pool.")
+@parentResource(Pool)
+model FirewallRule
+  is Azure.ResourceManager.ProxyResource<FirewallRuleProperties> {
+  @doc("The name of the HorizonDB pool firewall rule.")
+  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
+  @minLength(1)
+  @maxLength(128)
+  @key("firewallRuleName")
+  @path
+  @segment("firewallRules")
+  name: string;
+}
+
+@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbPrivateLinkResource")
 @doc("Represents the HorizonDB private link resource.")
-@parentResource(HorizonDbCluster)
-model HorizonDbPrivateLinkResource
+@parentResource(Cluster)
+model PrivateLinkResource
   is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
   @doc("The name of the private link resource.")
   @pattern("^.*$")
@@ -83,9 +170,27 @@ model HorizonDbPrivateLinkResource
   name: string;
 }
 
+@added(Versions.v2026_10_01_preview)
+@doc("Parameters for updating a private endpoint connection.")
+model PrivateEndpointConnectionForPatchUpdate {
+  @doc("The private endpoint connection properties to update.")
+  properties?: PrivateEndpointConnectionPropertiesForPatchUpdate;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Properties for updating a private endpoint connection.")
+model PrivateEndpointConnectionPropertiesForPatchUpdate {
+  @doc("The private endpoint resource.")
+  privateEndpoint?: Azure.ResourceManager.CommonTypes.PrivateEndpoint;
+
+  @doc("Information about the connection state between the service consumer and provider.")
+  privateLinkServiceConnectionState?: Azure.ResourceManager.CommonTypes.PrivateLinkServiceConnectionState;
+}
+
+@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbParameterGroup")
 @doc("Represents the HorizonDB parameter group.")
-model HorizonDbParameterGroup
-  is Azure.ResourceManager.TrackedResource<HorizonDbParameterGroupProperties> {
+model ParameterGroup
+  is Azure.ResourceManager.TrackedResource<ParameterGroupProperties> {
   @doc("The name of the HorizonDB parameter group.")
   @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
   @minLength(1)
@@ -97,8 +202,9 @@ model HorizonDbParameterGroup
 }
 
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_10_01_preview)
 @doc("Represents an Entra ID administrator configured on a HorizonDB cluster.")
-@parentResource(HorizonDbCluster)
+@parentResource(Cluster)
 model HorizonDbAdministrator
   is Azure.ResourceManager.ProxyResource<HorizonDbAdministratorProperties> {
   @doc("The Entra ID object identifier of the principal (an RFC 4122 GUID).")
@@ -109,14 +215,70 @@ model HorizonDbAdministrator
   name: string;
 }
 
+@added(Versions.v2026_10_01_preview)
+@doc("Represents a PostgreSQL role that is a member of the azure_pg_admin role and is mapped to a Microsoft Entra principal.")
+@parentResource(Cluster)
+model MicrosoftEntraAdministrator
+  is Azure.ResourceManager.ProxyResource<MicrosoftEntraAdministratorProperties> {
+  @doc("The Microsoft Entra object identifier of the principal mapped to the PostgreSQL role, represented as an RFC 4122 GUID.")
+  @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
+  @key("objectId")
+  @path
+  @segment("microsoftEntraAdministrators")
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The resource has the fixed literal name passwordMethod, which is more restrictive than a pattern."
+@added(Versions.v2026_10_01_preview)
+@doc("The service-created PostgreSQL username-and-password authentication method for a HorizonDB cluster. This resource configures the authentication mechanism, including its enabled state and administrator login credentials; it is not a password-only resource.")
+@parentResource(Cluster)
+model PasswordAuthentication
+  is Azure.ResourceManager.ProxyResource<PasswordAuthenticationProperties> {
+  @doc("The fixed name of the PostgreSQL username-and-password authentication method.")
+  @key("authenticationName")
+  @path
+  @segment("authentications")
+  name: "passwordMethod";
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The resource has the fixed literal name microsoftEntra, which is more restrictive than a pattern."
+@added(Versions.v2026_10_01_preview)
+@doc("The service-created Microsoft Entra authentication method for a HorizonDB cluster.")
+@parentResource(Cluster)
+model MicrosoftEntraAuthentication
+  is Azure.ResourceManager.ProxyResource<MicrosoftEntraAuthenticationProperties> {
+  @doc("The fixed name of the Microsoft Entra authentication method.")
+  @key("authenticationName")
+  @path
+  @segment("authentications")
+  name: "microsoftEntra";
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Represents an available backup for a HorizonDB cluster.")
+@parentResource(Cluster)
+model Backup is Azure.ResourceManager.ProxyResource<BackupResourceProperties> {
+  @doc("The name of the HorizonDB backup.")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,62}$")
+  @minLength(1)
+  @maxLength(63)
+  @key("backupName")
+  @path
+  @segment("backups")
+  name: string;
+}
+
+@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbClusterProperties")
 @doc("Properties of a HorizonDB cluster.")
-model HorizonDbClusterProperties {
+model ClusterProperties {
+  @removed(Versions.v2026_10_01_preview)
   @doc("The administrator login name.")
   @minLength(1)
   @maxLength(63)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   administratorLogin: string;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("The administrator login password.")
   @secret
   @minLength(8)
@@ -124,80 +286,145 @@ model HorizonDbClusterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update)
   administratorLoginPassword?: string;
 
+  @removed(Versions.v2026_10_01_preview)
+  @renamedFrom(Versions.v2026_10_01_preview, "version")
   @doc("The version of the HorizonDB cluster.")
-  version?: string;
+  legacyPgVersion?: string;
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("The PostgreSQL major version used by the HorizonDB cluster. API version 2026-10-01-preview accepts 17 and 18 when creating a cluster. This property is required on every PUT and is immutable after creation. On replacement, resubmitting the cluster's current major version is accepted, but changing it, including from 17 to 18 or from 18 to 17, is rejected. This API version does not support in-place PostgreSQL major-version upgrades. For point-in-time restore, PostgreSQL version is the only new-cluster property inherited from the source backup metadata, and the value in the request must match that version. All other new-cluster configuration comes from the request or service defaults.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  postgreSqlVersion: PostgreSqlVersion;
+
+  @removed(Versions.v2026_10_01_preview)
+  @renamedFrom(Versions.v2026_10_01_preview, "createMode")
   @doc("The mode to create a new HorizonDB cluster.")
-  createMode?: CreateModeCluster;
+  legacyCreateMode?: CreateModeCluster;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "UTC is a well-established acronym for Coordinated Universal Time and should remain uppercase for clarity and consistency with Azure service conventions"
+  @added(Versions.v2026_10_01_preview)
+  @doc("The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must match the source backup's major version, and the target cluster location must match the source cluster location until cross-region point-in-time restore is supported. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  creationMode?: ClusterCreateMode;
+
+  @removed(Versions.v2026_10_01_preview)
+  @renamedFrom(Versions.v2026_10_01_preview, "pointInTimeUTC")
   @doc("Restore point creation time specifying the time to restore from.")
-  pointInTimeUTC?: utcDateTime;
+  legacyPointInTime?: utcDateTime;
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("The requested point in time, in UTC, to restore from. This property is required when creationMode is PointInTimeRestore and must be absent for other creation modes or when creationMode is omitted. The service honors this value for same-region restore. Until cross-region point-in-time restore is supported, the target cluster location must match the source cluster location; a cross-region request is rejected synchronously with 400 CrossRegionPointInTimeRestoreNotSupported and does not create or modify a resource. This property can only be specified during resource creation.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  pointInTimeUtc?: utcDateTime;
+
+  @removed(Versions.v2026_10_01_preview)
+  @renamedFrom(Versions.v2026_10_01_preview, "sourceClusterResourceId")
   @doc("The source cluster resource ID for restore or replica creation.")
-  sourceClusterResourceId?: armResourceIdentifier;
+  legacySourceClusterResourceId?: armResourceIdentifier;
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure resource ID of the source HorizonDB cluster used by the selected creation mode. This property is required for PointInTimeRestore and other source-based creation modes, and must be absent when creationMode is Create or omitted. Until cross-region point-in-time restore is supported, PointInTimeRestore requires the target and source clusters to be in the same Azure region. A source cluster does not need to have a pool to be restored, provided an available backup exists. This immutable creation-provenance value does not change after creation.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  creationSourceClusterResourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.HorizonDb/clusters";
+    }
+  ]>;
+
+  @removed(Versions.v2026_10_01_preview)
   @doc("The pool name for restore or replica operations.")
   poolName?: string;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("Number of replicas.")
   @minValue(1)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   replicaCount?: int32;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("Number of vCores.")
   @minValue(1)
   @maxValue(96)
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   vCores?: int32;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("The processor type for the HorizonDB cluster.")
   processorType?: string;
 
+  @removed(Versions.v2026_10_01_preview)
+  @renamedFrom(Versions.v2026_10_01_preview, "network")
   @doc("The network related info.")
-  network?: Network;
+  legacyNetwork?: Network;
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("The network configuration for the cluster. When this object is omitted, the service defaults it to publicAccess Disabled.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  network?: Network = #{ publicAccess: "Disabled" };
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The backup configuration for the cluster.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  backup?: BackupProperties;
+
+  @typeChangedFrom(Versions.v2026_10_01_preview, State)
+  @madeRequired(Versions.v2026_10_01_preview)
   @doc("Current state of the cluster.")
   @visibility(Lifecycle.Read)
-  state?: State;
+  state: ClusterState;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("The fully qualified domain name of the cluster.")
   @visibility(Lifecycle.Read)
   fullyQualifiedDomainName?: string;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("The fully qualified domain name used for readonly endpoint for the cluster.")
   @visibility(Lifecycle.Read)
   readonlyEndpoint?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "API version 2026-10-01-preview guarantees provisioningState in every Cluster response; the 2026-01-20-preview projection remains optional."
+  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyProvisioningState)
+  @madeRequired(Versions.v2026_10_01_preview)
   @doc("The provisioning state of the cluster.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState: ProvisioningState;
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("The current designated read-write pool and read-write status for the cluster.")
+  @visibility(Lifecycle.Read)
+  readWritePool: ReadWritePoolProperties;
+
+  @removed(Versions.v2026_10_01_preview)
   @doc("Defines how replicas are placed across availability zones.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  zonePlacementPolicy?: ZonePlacementPolicy;
+  zonePlacementPolicy?: ZonePlacementEnforcement;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("Defines connection to a parameter group.")
   @visibility(Lifecycle.Update, Lifecycle.Read)
   parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
 
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_10_01_preview)
   @doc("Authentication configuration for the HorizonDB cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   authConfig?: HorizonDbClusterAuthConfig;
 
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_10_01_preview)
   @doc("The compute model for the cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   computeModel?: HorizonDbComputeModel;
 
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_10_01_preview)
   @doc("Mirroring configuration for the HorizonDB cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   mirroring?: HorizonDbClusterMirroring;
 }
 
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_10_01_preview)
 @doc("Mirroring configuration for a HorizonDB cluster.")
 model HorizonDbClusterMirroring {
   @doc("The names of the databases to mirror.")
@@ -212,6 +439,7 @@ model HorizonDbClusterMirroring {
 }
 
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_10_01_preview)
 @doc("Authentication configuration for a HorizonDB cluster.")
 model HorizonDbClusterAuthConfig {
   @doc("Indicates whether Microsoft Entra ID authentication is enabled or disabled.")
@@ -225,6 +453,7 @@ model HorizonDbClusterAuthConfig {
 }
 
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_10_01_preview)
 @doc("The compute model for a HorizonDB cluster.")
 model HorizonDbComputeModel {
   @doc("The compute model type. Supported values: 'Provisioned', 'Serverless'.")
@@ -240,6 +469,8 @@ model HorizonDbComputeModel {
   maxvCores?: float64;
 }
 
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_10_01_preview)
 @doc("The compute model type.")
 union HorizonDbComputeModelType {
   string,
@@ -251,8 +482,92 @@ union HorizonDbComputeModelType {
   Serverless: "Serverless",
 }
 
+@added(Versions.v2026_10_01_preview)
+@doc("The current zone redundancy status for the read-write node.")
+model ReadWritePoolZoneRedundancyProperties {
+  @doc("The current zone-redundancy protection state for the read-write node. The state is NotProtected when no read-write pool is designated.")
+  @visibility(Lifecycle.Read)
+  state: ZoneRedundancyState;
+
+  @doc("The reason the read-write node is not protected by zone redundancy. This property is present only when state is NotProtected and absent when state is Protected. Valid reasons are that no read-write pool is designated, the designated read-write pool has fewer than two nodes, all nodes in the designated read-write pool are deployed in a single availability zone, or the region does not support availability zones.")
+  @visibility(Lifecycle.Read)
+  unavailableReason?: string;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The current designated read-write pool and read-write status for a HorizonDB cluster. When a pool is created while the cluster currently has no pools, the service automatically designates the new pool as the read-write pool. This behavior also applies after all pools that existed earlier in the cluster's lifetime have been deleted.")
+model ReadWritePoolProperties {
+  @doc("The Azure resource ID of the pool designated to host the cluster's read-write node. The pool is a child resource of this cluster. When a pool is created while the cluster currently has no pools, the service automatically sets this property to the new pool's resource ID, including when all pools that existed earlier in the cluster's lifetime were deleted. This property is absent when no pool is designated, such as after clearReadWritePool succeeds.")
+  @visibility(Lifecycle.Read)
+  designatedPoolResourceId?: PoolResourceId;
+
+  @doc("The current zone redundancy status for the read-write node. This object is always returned on reads. When the read-write node is not protected by zone redundancy, state is NotProtected and unavailableReason explains why.")
+  @visibility(Lifecycle.Read)
+  zoneRedundancy: ReadWritePoolZoneRedundancyProperties;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("An Azure resource ID that identifies a HorizonDB cluster.")
+scalar HorizonDbClusterResourceId
+  extends armResourceIdentifier<[
+    {
+      type: "Microsoft.HorizonDb/clusters",
+    }
+  ]>;
+
+@added(Versions.v2026_10_01_preview)
+@doc("The Azure resource ID of a HorizonDB pool.")
+scalar PoolResourceId
+  extends armResourceIdentifier<[
+    {
+      type: "Microsoft.HorizonDb/clusters/pools",
+    }
+  ]>;
+
+@added(Versions.v2026_10_01_preview)
+@doc("Long-running operation headers returned while creating or replacing a HorizonDB resource.")
+model HorizonDbResourceLroHeaders<Resource extends Azure.ResourceManager.Foundations.SimpleResource> {
+  ...ArmAsyncOperationHeader<FinalResult = Resource>;
+  ...Azure.Core.Foundations.RetryAfterHeader;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The response returned when an asynchronous HorizonDB resource replacement is accepted.")
+model HorizonDbResourceUpdatedLroResponse<Resource extends Azure.ResourceManager.Foundations.SimpleResource> {
+  ...ArmResourceUpdatedResponse<Resource>;
+  ...HorizonDbResourceLroHeaders<Resource>;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The response returned when asynchronous HorizonDB pool creation is accepted.")
+model PoolCreateAcceptedResponse {
+  ...CreatedResponse;
+  ...HorizonDbResourceLroHeaders<Pool>;
+
+  @doc("The HorizonDB pool with a non-terminal provisioning state.")
+  @bodyRoot
+  body: Pool;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The zone-redundancy protection state of the read-write node.")
+union ZoneRedundancyState {
+  string,
+
+  @doc("The read-write node is protected by zone redundancy.")
+  Protected: "Protected",
+
+  @doc("The read-write node is not protected by zone redundancy. Inspect unavailableReason for details.")
+  NotProtected: "NotProtected",
+}
+
+@renamedFrom(
+  Versions.v2026_10_01_preview,
+  "HorizonDbClusterPropertiesForPatchUpdate"
+)
 @doc("Properties of a HorizonDB cluster for update operations.")
-model HorizonDbClusterPropertiesForPatchUpdate {
+model ClusterPropertiesForPatchUpdate {
+  @removed(Versions.v2026_10_01_preview)
   @secret
   @minLength(8)
   @maxLength(128)
@@ -260,84 +575,291 @@ model HorizonDbClusterPropertiesForPatchUpdate {
   @visibility(Lifecycle.Update)
   administratorLoginPassword?: string;
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("The network configuration to update for the cluster.")
+  @visibility(Lifecycle.Update)
+  network?: NetworkForPatchUpdate;
+
+  @removed(Versions.v2026_10_01_preview)
   @doc("Number of vCores.")
   @minValue(1)
   @maxValue(96)
   @visibility(Lifecycle.Update)
   vCores?: int32;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("Defines connection to a parameter group.")
   parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
 
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_10_01_preview)
   @doc("Authentication configuration for the HorizonDB cluster.")
   @visibility(Lifecycle.Update)
   authConfig?: HorizonDbClusterAuthConfig;
 
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_10_01_preview)
   @doc("The compute model for the cluster.")
   @visibility(Lifecycle.Update)
   computeModel?: HorizonDbComputeModel;
 
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_10_01_preview)
   @doc("Mirroring configuration for the HorizonDB cluster.")
   @visibility(Lifecycle.Update)
   mirroring?: HorizonDbClusterMirroring;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The backup configuration for the cluster.")
+  @visibility(Lifecycle.Update)
+  backup?: BackupPropertiesForPatchUpdate;
 }
 
+@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbClusterForPatchUpdate")
 @doc("HorizonDB cluster for update operations.")
-model HorizonDbClusterForPatchUpdate {
+model ClusterForPatchUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...HorizonDbClusterManagedServiceIdentityProperty;
 
   @doc("The properties that can be updated for a HorizonDB cluster.")
-  properties?: HorizonDbClusterPropertiesForPatchUpdate;
+  properties?: ClusterPropertiesForPatchUpdate;
 }
 
-@@added(HorizonDbCluster.identity, Versions.v2026_05_01_preview);
-@@added(HorizonDbClusterForPatchUpdate.identity, Versions.v2026_05_01_preview);
+@@added(Cluster.identity, Versions.v2026_05_01_preview);
+@@added(ClusterForPatchUpdate.identity, Versions.v2026_05_01_preview);
+@@typeChangedFrom(
+  Cluster.identity,
+  Versions.v2026_10_01_preview,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity
+);
+@@typeChangedFrom(
+  ClusterForPatchUpdate.identity,
+  Versions.v2026_10_01_preview,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity
+);
 
+@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbPoolProperties")
 @doc("Properties of a HorizonDB pool.")
-model HorizonDbPoolProperties {
+model PoolProperties {
   @doc("The location of the HorizonDB pool.")
+  @removed(Versions.v2026_10_01_preview)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: azureLocation;
 
+  @typeChangedFrom(Versions.v2026_10_01_preview, State)
   @doc("Current state of the pool.")
   @visibility(Lifecycle.Read)
-  state?: State;
+  state?: PoolState;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("Number of replicas in the pool.")
   @visibility(Lifecycle.Read)
   replicaCount?: int32;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("The version of the HorizonDB pool.")
   @visibility(Lifecycle.Read)
   version?: string;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("The create mode for the pool.")
   @visibility(Lifecycle.Read)
   createMode?: CreateModePool;
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("The compute model for the HorizonDB pool.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  computeModel?: PoolComputeModel;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource and its name, compute configuration, maintenance configuration, and parameter-group association, but allocates no nodes; it does not delete the pool. A request that would leave a pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  desiredNodeCount?: PoolNodeCount;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The number of nodes currently allocated and assigned to the pool, regardless of their operational state or the operational state of the pool.")
+  @visibility(Lifecycle.Read)
+  allocatedNodeCount: PoolNodeCount;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The required default or custom parameter group associated with the pool.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  parameterGroup: PoolParameterGroupReference;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The scheduled maintenance configuration for the pool. The properties available depend on the selected maintenance management type.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  scheduledMaintenance?: ScheduledMaintenanceProperties;
+
   @doc("The provisioning state of the pool.")
+  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyProvisioningState)
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+@renamedFrom(
+  Versions.v2026_10_01_preview,
+  "HorizonDbPoolPropertiesForPatchUpdate"
+)
+@doc("Properties of a HorizonDB pool for update operations.")
+model PoolPropertiesForPatchUpdate {
+  @added(Versions.v2026_10_01_preview)
+  @doc("The compute model properties to update. Omitted properties preserve their current values. To change the compute model type, supply the complete target compute model, including type, computeProcessor, computeGeneration, and all properties required by the target type.")
+  @visibility(Lifecycle.Update)
+  computeModel?: PoolComputeModelForPatchUpdate;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource and its configuration but allocates no nodes; it does not delete the pool. Omission preserves the current target. A request that would leave a pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
+  @visibility(Lifecycle.Update)
+  desiredNodeCount?: PoolNodeCount;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The default or custom parameter group to associate with the pool. Omission preserves the current association.")
+  @visibility(Lifecycle.Update)
+  parameterGroup?: PoolParameterGroupReferenceForPatchUpdate;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The scheduled maintenance configuration to update for the pool. When supplied, the complete configuration for the selected maintenance management type is required. Omission preserves the current configuration.")
+  @visibility(Lifecycle.Update)
+  scheduledMaintenance?: ScheduledMaintenancePropertiesForPatchUpdate;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("A reference to the default or custom parameter group associated with a HorizonDB pool.")
+model PoolParameterGroupReference {
+  @doc("The Azure resource ID of the default or custom parameter group.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  parameterGroupResourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.HorizonDb/parameterGroups";
+    },
+    {
+      type: "Microsoft.HorizonDb/locations/parameterGroups";
+    }
+  ]>;
+
+  @doc("Determines when dynamic parameter changes from the associated parameter group become effective. Static parameter changes always require a pool restart, regardless of this value.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  applyMethod: ParameterApplyMethod;
+
+  @doc("The synchronization status between the pool and its parameter group.")
+  @visibility(Lifecycle.Read)
+  syncStatus?: ParameterGroupSyncStatus;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("A parameter group reference for updating a HorizonDB pool.")
+model PoolParameterGroupReferenceForPatchUpdate {
+  @doc("The Azure resource ID of the default or custom parameter group to associate with the pool.")
+  @visibility(Lifecycle.Update)
+  parameterGroupResourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.HorizonDb/parameterGroups";
+    },
+    {
+      type: "Microsoft.HorizonDb/locations/parameterGroups";
+    }
+  ]>;
+
+  @doc("Determines when dynamic parameter changes from the associated parameter group become effective. Static parameter changes always require a pool restart, regardless of this value.")
+  @visibility(Lifecycle.Update)
+  applyMethod?: ParameterApplyMethod;
+}
+
+@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbPoolForPatchUpdate")
+@doc("HorizonDB pool for update operations.")
+model PoolForPatchUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  @doc("The properties that can be updated for a HorizonDB pool.")
+  properties?: PoolPropertiesForPatchUpdate;
+}
+
+@@removed(PoolForPatchUpdate.tags, Versions.v2026_10_01_preview);
+
+@added(Versions.v2026_10_01_preview)
+@doc("The compute model for a HorizonDB pool.")
+@discriminator("type")
+model PoolComputeModel {
+  @doc("The type of compute model.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  type: PoolComputeModelType;
+
+  @doc("The processor type for the compute model.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  computeProcessor?: ComputeProcessorType;
+
+  @doc("The compute generation for the compute model.")
+  @minValue(1)
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  computeGeneration?: int32;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("A provisioned compute model for a HorizonDB pool.")
+model ProvisionedHorizonDbPoolComputeModel extends PoolComputeModel {
+  @doc("The type of compute model.")
+  type: "Provisioned";
+
+  @doc("The number of provisioned vCores. Allowed values are 1 through 192.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  vCores: ProvisionedPoolVCores;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The compute model properties of a HorizonDB pool that can be updated. The object is recursively mergeable: omitted properties preserve their current values. Properties that do not apply to the current or target compute model type are rejected. When type changes, the request must include the complete target compute model. Subtype-specific constraints are validated against the effective merged configuration; invalid requests are rejected without changing the resource.")
+model PoolComputeModelForPatchUpdate {
+  @doc("The compute model type. Omit this property to retain the current type. Resubmitting the current type succeeds as an idempotent no-op. To change the type, supply all common properties and all properties required by the target type.")
+  @visibility(Lifecycle.Update)
+  type?: PoolComputeModelType;
+
+  @doc("The processor type for the compute model. Omission preserves the current processor type.")
+  @visibility(Lifecycle.Update)
+  computeProcessor?: ComputeProcessorType;
+
+  @doc("The compute generation for the compute model. Omission preserves the current compute generation.")
+  @minValue(1)
+  @visibility(Lifecycle.Update)
+  computeGeneration?: int32;
+
+  @doc("The number of provisioned vCores. Allowed values are 1 through 192. This property applies only to a Provisioned compute model. Omission preserves the current value.")
+  @visibility(Lifecycle.Update)
+  vCores?: ProvisionedPoolVCores;
 }
 
 @doc("Network properties.")
 model Network {
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "publicNetworkAccess is a configuration flag, not sensitive data"
+  @removed(Versions.v2026_10_01_preview)
+  @renamedFrom(Versions.v2026_10_01_preview, "publicNetworkAccess")
   @doc("The flag indicating whether public ip is requested.")
   @visibility(Lifecycle.Read)
-  publicNetworkAccess?: PublicNetworkAccessState;
+  legacyPublicNetworkAccess?: PublicNetworkAccessState;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "publicAccess is a configuration flag, not sensitive data"
+  @added(Versions.v2026_10_01_preview)
+  @doc("Specifies whether public access is enabled for the cluster. The service defaults to Disabled when this property is omitted.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  publicAccess?: PublicNetworkAccessState = PublicNetworkAccessState.Disabled;
 }
 
+@added(Versions.v2026_10_01_preview)
+@doc("Network properties for updating a HorizonDB cluster.")
+model NetworkForPatchUpdate {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "publicAccess is a configuration flag, not sensitive data"
+  @doc("Specifies whether public access is enabled for the cluster. Omission preserves the current value.")
+  @visibility(Lifecycle.Update)
+  publicAccess?: PublicNetworkAccessState;
+}
+
+@removed(Versions.v2026_10_01_preview)
 @doc("Properties of a HorizonDB replica.")
 model HorizonDbReplicaProperties {
   @doc("Role of the replica.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   role?: ReplicaRole;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("Current status of the replica.")
   @visibility(Lifecycle.Read)
   status?: State;
@@ -350,10 +872,12 @@ model HorizonDbReplicaProperties {
   availabilityZone?: string;
 
   @doc("The provisioning state of the replica.")
+  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyProvisioningState)
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
+@removed(Versions.v2026_10_01_preview)
 @doc("Properties of a HorizonDB replica for update operations.")
 model HorizonDbReplicaPropertiesForPatchUpdate {
   @visibility(Lifecycle.Update)
@@ -361,34 +885,80 @@ model HorizonDbReplicaPropertiesForPatchUpdate {
   role?: ReplicaRole;
 }
 
+@removed(Versions.v2026_10_01_preview)
 @doc("HorizonDB replica for update operations.")
 model HorizonDbReplicaForPatchUpdate {
   @doc("Properties of a HorizonDB replica for update operations.")
   properties?: HorizonDbReplicaPropertiesForPatchUpdate;
 }
 
+@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbFirewallRuleProperties")
 @doc("Properties of a HorizonDB firewall rule.")
-model HorizonDbFirewallRuleProperties {
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+model FirewallRuleProperties {
+  @removed(Versions.v2026_10_01_preview)
   @doc("The start IP address of the firewall rule (IPv4).")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  startIpAddress: string;
+  @renamedFrom(Versions.v2026_10_01_preview, "startIpAddress")
+  legacyStartIpAddress: string;
 
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  @added(Versions.v2026_10_01_preview)
+  @doc("The start IPv4 address of the firewall rule in dotted-decimal notation.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  startIpAddress: DottedDecimalIpv4Address;
+
+  @removed(Versions.v2026_10_01_preview)
   @doc("The end IP address of the firewall rule (IPv4).")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  endIpAddress: string;
+  @renamedFrom(Versions.v2026_10_01_preview, "endIpAddress")
+  legacyEndIpAddress: string;
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("The end IPv4 address of the firewall rule in dotted-decimal notation. This address must be numerically greater than or equal to startIpAddress.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  endIpAddress: DottedDecimalIpv4Address;
+
+  @removed(Versions.v2026_10_01_preview)
   @doc("The description of the HorizonDB firewall rule.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  description?: string;
+  @renamedFrom(Versions.v2026_10_01_preview, "description")
+  legacyDescription?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The description of the HorizonDB firewall rule. The maximum length is 1024 characters.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  description?: WritableDescription;
 
   @doc("The provisioning state of the firewall rule.")
+  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyProvisioningState)
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
+@added(Versions.v2026_10_01_preview)
+@doc("Properties of a HorizonDB pool firewall rule for update operations. Omitted properties preserve their current values. The service validates the effective IP range after merging the supplied values with the existing rule.")
+model FirewallRulePropertiesForPatchUpdate {
+  @doc("The start IPv4 address to apply in dotted-decimal notation. The resulting effective start address must be numerically less than or equal to the effective end address.")
+  @visibility(Lifecycle.Update)
+  startIpAddress?: DottedDecimalIpv4Address;
+
+  @doc("The end IPv4 address to apply in dotted-decimal notation. The resulting effective end address must be numerically greater than or equal to the effective start address.")
+  @visibility(Lifecycle.Update)
+  endIpAddress?: DottedDecimalIpv4Address;
+
+  @doc("The description to apply to the HorizonDB firewall rule. The maximum length is 1024 characters.")
+  @visibility(Lifecycle.Update)
+  description?: WritableDescription;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("A HorizonDB pool firewall rule update request.")
+model FirewallRuleForPatchUpdate {
+  @doc("The properties to update. Omission preserves all current firewall rule properties.")
+  properties?: FirewallRulePropertiesForPatchUpdate;
+}
+
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_10_01_preview)
 @doc("Properties of a HorizonDB administrator.")
 model HorizonDbAdministratorProperties {
   @doc("The display name or UPN of the Entra ID principal. For users, typically the User Principal Name (e.g., admin@contoso.com). For groups, the group display name. For service principals, the application display name.")
@@ -398,7 +968,7 @@ model HorizonDbAdministratorProperties {
 
   @doc("The type of the Entra ID principal.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  principalType: PrincipalTypes;
+  principalType: LegacyPrincipalTypes;
 
   @doc("The Entra ID object identifier of the principal (an RFC 4122 GUID). On PUT requests, this value comes from the URI path parameter.")
   @visibility(Lifecycle.Read)
@@ -410,10 +980,36 @@ model HorizonDbAdministratorProperties {
 
   @doc("The provisioning state of the administrator.")
   @visibility(Lifecycle.Read)
+  provisioningState?: LegacyProvisioningState;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Properties of a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
+model MicrosoftEntraAdministratorProperties {
+  @doc("The display name or user principal name of the Microsoft Entra principal mapped to the PostgreSQL role. For users, this is typically the user principal name, such as admin@contoso.com. For groups, this is the group display name. For service principals, this is the application display name.")
+  @maxLength(256)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  principalName: string;
+
+  @doc("The type of Microsoft Entra principal mapped to the PostgreSQL role.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  principalType: PrincipalTypes;
+
+  @doc("The Microsoft Entra object identifier of the principal mapped to the PostgreSQL role, represented as an RFC 4122 GUID. On PUT requests, this value comes from the URI path parameter.")
+  @visibility(Lifecycle.Read)
+  objectId?: string;
+
+  @doc("The identifier of the Microsoft Entra tenant containing the mapped principal, represented as an RFC 4122 GUID. If omitted, this value defaults to the tenant of the subscription.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  tenantId?: string;
+
+  @doc("The provisioning state of the PostgreSQL role and Microsoft Entra principal mapping.")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_10_01_preview)
 @doc("The properties for adding a HorizonDB administrator.")
 model HorizonDbAdministratorPropertiesForAdd {
   @doc("The display name or UPN of the Entra ID principal. For users, typically the User Principal Name (e.g., admin@contoso.com). For groups, the group display name. For service principals, the application display name.")
@@ -421,22 +1017,259 @@ model HorizonDbAdministratorPropertiesForAdd {
   principalName: string;
 
   @doc("The type of the Entra ID principal.")
-  principalType: PrincipalTypes;
+  principalType: LegacyPrincipalTypes;
 
   @doc("The Entra ID tenant identifier (an RFC 4122 GUID). If omitted, defaults to the tenant of the subscription.")
   tenantId?: string;
 }
 
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_10_01_preview)
 @doc("The request body for adding a HorizonDB administrator.")
 model HorizonDbAdministratorAdd {
   @doc("The properties for adding a HorizonDB administrator.")
   properties: HorizonDbAdministratorPropertiesForAdd;
 }
 
+@added(Versions.v2026_10_01_preview)
+@doc("Properties for creating or updating a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
+model MicrosoftEntraAdministratorPropertiesForAdd {
+  @doc("The display name or user principal name of the Microsoft Entra principal to map to the PostgreSQL role. For users, this is typically the user principal name, such as admin@contoso.com. For groups, this is the group display name. For service principals, this is the application display name.")
+  @maxLength(256)
+  principalName: string;
+
+  @doc("The type of Microsoft Entra principal to map to the PostgreSQL role.")
+  principalType: PrincipalTypes;
+
+  @doc("The identifier of the Microsoft Entra tenant containing the principal to map, represented as an RFC 4122 GUID. If omitted, this value defaults to the tenant of the subscription.")
+  tenantId?: string;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The request body for creating or updating a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
+model MicrosoftEntraAdministratorAdd {
+  @doc("The PostgreSQL role and Microsoft Entra principal mapping properties.")
+  properties: MicrosoftEntraAdministratorPropertiesForAdd;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("A service-created authentication configuration returned by the authentications collection. The resource name is passwordMethod or microsoftEntra.")
+@parentResource(Cluster)
+model Authentication
+  is Azure.ResourceManager.ProxyResource<AuthenticationProperties> {
+  ...ResourceNameParameter<
+    Resource = Authentication,
+    KeyName = "authenticationName",
+    SegmentName = "authentications",
+    Type = AuthenticationName
+  >;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The name of a service-created authentication configuration.")
+union AuthenticationName {
+  string,
+
+  @doc("PostgreSQL username-and-password authentication.")
+  PasswordMethod: "passwordMethod",
+
+  @doc("Microsoft Entra authentication.")
+  MicrosoftEntra: "microsoftEntra",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Common read-only properties of a service-created authentication configuration.")
+model AuthenticationProperties {
+  @doc("The state of the authentication configuration.")
+  @visibility(Lifecycle.Read)
+  state: AuthenticationState;
+
+  @doc("The provisioning state of the authentication configuration.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Properties of the service-created PostgreSQL username-and-password authentication method. The control plane stores no administrator identity; PostgreSQL is the source of truth for the sole member of the service-owned administrator role.")
+model PasswordAuthenticationProperties {
+  @doc("The state of PostgreSQL username-and-password authentication.")
+  @visibility(Lifecycle.Read)
+  state: AuthenticationState;
+
+  @doc("The provisioning state of the PostgreSQL username-and-password authentication method.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Properties of the service-created Microsoft Entra authentication method.")
+model MicrosoftEntraAuthenticationProperties {
+  @doc("The state of Microsoft Entra authentication.")
+  @visibility(Lifecycle.Read)
+  state: AuthenticationState;
+
+  @doc("The provisioning state of the Microsoft Entra authentication method.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Properties for updating PostgreSQL username-and-password authentication. Omitted properties preserve their current values. State-only requests enable or disable the authentication mechanism. Credentials are secrets and are never returned or stored by the control plane. Login-only, password-only, and combined credential updates require this authentication method to already be Enabled unless the request also sets state to Enabled.")
+model PasswordAuthenticationPropertiesForPatchUpdate {
+  @doc("The target password-authentication state. Enabled or Disabled can be supplied without credentials to toggle the feature. Disabled cannot be combined with administratorLogin or administratorLoginPassword. Disabling password authentication does not remove or modify existing database users or roles.")
+  @visibility(Lifecycle.Update)
+  state?: AuthenticationState;
+
+  @doc("The PostgreSQL administrator role name. A login-only update requires password authentication to already be Enabled unless state is set to Enabled in this request, and requires exactly one member in the AzureSU-owned special group. The current name is an idempotent no-op; a different name renames the current member only when that target role does not already exist. When supplied together with administratorLoginPassword, this value can create the administrator if the special group has no member, reset the matching member's password, or rename a differently named member and reset its password.")
+  @secret
+  @minLength(1)
+  @maxLength(63)
+  @visibility(Lifecycle.Update)
+  administratorLogin?: string;
+
+  @doc("The PostgreSQL administrator password. A password-only update requires password authentication to already be Enabled unless state is set to Enabled in this request, and requires exactly one member in the AzureSU-owned special group. When supplied together with administratorLogin, it can create the administrator if the special group has no member, reset the matching member's password, or rename a differently named member and reset its password.")
+  @secret
+  @minLength(8)
+  @maxLength(128)
+  @visibility(Lifecycle.Update)
+  administratorLoginPassword?: string;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Properties for updating Microsoft Entra authentication. State Enabled enables the feature and State Disabled disables it. Disabling Microsoft Entra authentication does not remove or modify database roles or users previously created through the MicrosoftEntraAdministrators control-plane API or directly through pgaadauth extension functions.")
+model MicrosoftEntraAuthenticationPropertiesForPatchUpdate {
+  @doc("The target Microsoft Entra authentication state. Omission preserves the current state.")
+  @visibility(Lifecycle.Update)
+  state?: AuthenticationState;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("A sparse update request for PostgreSQL username-and-password authentication.")
+model PasswordAuthenticationForPatchUpdate {
+  @doc("The PostgreSQL username-and-password authentication properties to update.")
+  properties?: PasswordAuthenticationPropertiesForPatchUpdate;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("A sparse update request for Microsoft Entra authentication.")
+model MicrosoftEntraAuthenticationForPatchUpdate {
+  @doc("The Microsoft Entra authentication properties to update.")
+  properties?: MicrosoftEntraAuthenticationPropertiesForPatchUpdate;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Backup configuration properties for a HorizonDB cluster.")
+model BackupProperties {
+  @doc("The geo-redundancy state.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  geoRedundancy: GeoRedundancyState;
+
+  @doc("The number of days that automatic backups are retained. The service defaults to 7 days when this property is omitted.")
+  @minValue(1)
+  @maxValue(35)
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  retentionDays?: int32 = 7;
+
+  @doc("The earliest point in time, in UTC, to which the cluster can currently be restored.")
+  @visibility(Lifecycle.Read)
+  earliestRestorePointUtc?: utcDateTime;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Backup configuration properties for updating a HorizonDB cluster.")
+model BackupPropertiesForPatchUpdate {
+  @doc("The number of days that automatic backups are retained.")
+  @minValue(1)
+  @maxValue(35)
+  @visibility(Lifecycle.Update)
+  retentionDays?: int32;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backups are immutable point-in-time records and do not have a resource provisioning state."
+@added(Versions.v2026_10_01_preview)
+@doc("Properties of an available HorizonDB backup.")
+model BackupResourceProperties {
+  @doc("The date and time when the backup was taken, in UTC.")
+  @visibility(Lifecycle.Read)
+  takenAtUtc: utcDateTime;
+
+  @doc("The PostgreSQL version of the backed-up cluster.")
+  @visibility(Lifecycle.Read)
+  postgreSqlVersion: PostgreSqlVersion;
+
+  @doc("The type of the backup.")
+  @visibility(Lifecycle.Read)
+  backupType: BackupType;
+
+  @doc("The date and time when an automatic backup expires, in UTC. This property can be absent for backup types that do not expire automatically.")
+  @visibility(Lifecycle.Read)
+  expiredAtUtc?: utcDateTime;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Indicates the geo-redundancy state.")
+union GeoRedundancyState {
+  string,
+
+  @doc("Geo-redundancy is enabled")
+  Enabled: "Enabled",
+
+  @doc("Geo-redundancy is disabled")
+  Disabled: "Disabled",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The type of a HorizonDB backup. New values may be added over time.")
+union BackupType {
+  string,
+
+  /** A backup created automatically by the HorizonDB service. */
+  System: "System",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("A user-supplied description with a maximum length of 1024 characters.")
+@maxLength(1024)
+scalar WritableDescription extends string;
+
+@added(Versions.v2026_10_01_preview)
+@doc("A PostgreSQL major version supported by HorizonDB. API version 2026-10-01-preview accepts 17 and 18. Future API versions may add named values, and clients must tolerate unknown values returned by the service.")
+union PostgreSqlVersion {
+  string,
+
+  /** PostgreSQL major version 17. */
+  V17: "17",
+
+  /** PostgreSQL major version 18. */
+  V18: "18",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The compute model type.")
+union PoolComputeModelType {
+  string,
+
+  /** Provisioned compute model */
+  Provisioned: "Provisioned",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The compute processor type.")
+union ComputeProcessorType {
+  string,
+
+  /** Intel processor */
+  Intel: "Intel",
+
+  /** AMD processor */
+  AMD: "AMD",
+}
+
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_10_01_preview)
+@renamedFrom(Versions.v2026_10_01_preview, "PrincipalTypes")
 @doc("The type of the Entra ID principal.")
-union PrincipalTypes {
+union LegacyPrincipalTypes {
   string,
 
   @doc("Unknown or unrecognized type (internal only, not accepted in requests).")
@@ -452,6 +1285,24 @@ union PrincipalTypes {
   ServicePrincipal: "ServicePrincipal",
 }
 
+@added(Versions.v2026_10_01_preview)
+@doc("The type of Microsoft Entra principal mapped to a PostgreSQL role.")
+union PrincipalTypes {
+  string,
+
+  @doc("An unknown or unrecognized type. This value is for internal use and is not accepted in requests.")
+  Unknown: "Unknown",
+
+  @doc("A Microsoft Entra ID user account.")
+  User: "User",
+
+  @doc("A Microsoft Entra ID security group. All members of the group inherit administrator privileges.")
+  Group: "Group",
+
+  @doc("A Microsoft Entra ID application or service principal used for automated workloads.")
+  ServicePrincipal: "ServicePrincipal",
+}
+
 @doc("The mode to create a new HorizonDB cluster.")
 union CreateModeCluster {
   string,
@@ -460,9 +1311,22 @@ union CreateModeCluster {
   Create: "Create",
 
   /** Update an existing cluster */
+  @removed(Versions.v2026_10_01_preview)
   Update: "Update",
 
   /** Create cluster from point-in-time restore */
+  PointInTimeRestore: "PointInTimeRestore",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Controls how a HorizonDB cluster PUT request is processed.")
+union ClusterCreateMode {
+  string,
+
+  /** Process the request as a normal cluster creation. */
+  Create: "Create",
+
+  /** Create the cluster from a point-in-time restore. */
   PointInTimeRestore: "PointInTimeRestore",
 }
 
@@ -477,8 +1341,42 @@ union CreateModePool {
   Update: "Update",
 }
 
+@added(Versions.v2026_10_01_preview)
+@doc("Current state of a HorizonDB pool.")
+union PoolState {
+  string,
+
+  /** Is ready and operational */
+  Ready: "Ready",
+
+  /** Is provisioning */
+  Provisioning: "Provisioning",
+
+  /** Is being deleted */
+  Deleting: "Deleting",
+
+  /** Is inaccessible */
+  Inaccessible: "Inaccessible",
+
+  /** Is being updated */
+  Updating: "Updating",
+
+  /** Is starting up */
+  Starting: "Starting",
+
+  /** Is restarting */
+  Restarting: "Restarting",
+
+  /** Is stopping */
+  Stopping: "Stopping",
+
+  /** Is stopped */
+  Stopped: "Stopped",
+}
+
+@renamedFrom(Versions.v2026_10_01_preview, "ZonePlacementPolicy")
 @doc("The zone redundancy option for the cluster.")
-union ZonePlacementPolicy {
+union ZonePlacementEnforcement {
   string,
 
   /** Enforce zonal redundancy */
@@ -488,6 +1386,7 @@ union ZonePlacementPolicy {
   BestEffort: "BestEffort",
 }
 
+@removed(Versions.v2026_10_01_preview)
 @doc("Current states.")
 union State {
   string,
@@ -525,6 +1424,75 @@ union State {
   Upgrading: "Upgrading",
 }
 
+@added(Versions.v2026_10_01_preview)
+@doc("Current state of a HorizonDB cluster.")
+union ClusterState {
+  string,
+
+  /** Is ready and operational */
+  Ready: "Ready",
+
+  /** Is provisioning */
+  Provisioning: "Provisioning",
+
+  /** Is being deleted */
+  Deleting: "Deleting",
+
+  /** Is inaccessible */
+  Inaccessible: "Inaccessible",
+
+  /** Is being updated */
+  Updating: "Updating",
+}
+
+@doc("Long-running operation headers returned when a HorizonDB cluster update is accepted.")
+model ClusterUpdateAcceptedHeaders is ArmLroLocationHeader<
+  Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+  Cluster,
+  string
+> {
+  @added(Versions.v2026_10_01_preview)
+  @doc("A link to the status monitor for the cluster update operation.")
+  @Azure.Core.pollingLocation(
+    Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>
+  )
+  @header("Azure-AsyncOperation")
+  azureAsyncOperation?: string;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Long-running operation headers returned when an asynchronous HorizonDB cluster create or replacement is accepted.")
+model ClusterCreateOrReplaceLroHeaders {
+  @doc("A link to the status monitor for the cluster create or replacement operation.")
+  @header("Azure-AsyncOperation")
+  azureAsyncOperation?: string;
+
+  ...Azure.Core.Foundations.RetryAfterHeader;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The response returned when an asynchronous HorizonDB cluster replacement is accepted.")
+model ClusterReplaceAcceptedResponse {
+  ...OkResponse;
+  ...ClusterCreateOrReplaceLroHeaders;
+
+  @doc("The HorizonDB cluster with a non-terminal provisioning state.")
+  @bodyRoot
+  body: Cluster;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The response returned when asynchronous HorizonDB cluster creation is accepted.")
+model ClusterCreateAcceptedResponse {
+  ...CreatedResponse;
+  ...ClusterCreateOrReplaceLroHeaders;
+
+  @doc("The HorizonDB cluster with a non-terminal provisioning state.")
+  @bodyRoot
+  body: Cluster;
+}
+
+@added(Versions.v2026_05_01_preview)
 @doc("Indicates if authentication state is enabled or not.")
 union AuthenticationState {
   string,
@@ -547,6 +1515,7 @@ union PublicNetworkAccessState {
   Disabled: "Disabled",
 }
 
+@removed(Versions.v2026_10_01_preview)
 @doc("Role of the replica.")
 union ReplicaRole {
   string,
@@ -558,8 +1527,10 @@ union ReplicaRole {
   ReadWrite: "ReadWrite",
 }
 
+@removed(Versions.v2026_10_01_preview)
+@renamedFrom(Versions.v2026_10_01_preview, "ProvisioningState")
 @doc("The provisioning state.")
-union ProvisioningState {
+union LegacyProvisioningState {
   string,
 
   /** Provisioning completed successfully */
@@ -578,36 +1549,71 @@ union ProvisioningState {
   Provisioning: "Provisioning",
 }
 
+@added(Versions.v2026_10_01_preview)
+@doc("The provisioning state.")
+@lroStatus
+union ProvisioningState {
+  Azure.ResourceManager.ResourceProvisioningState,
+
+  /** The HorizonDB resource operation is actively running. */
+  InProgress: "InProgress",
+
+  /** The HorizonDB resource is still provisioning. */
+  Provisioning: "Provisioning",
+}
+
+@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbParameterGroupProperties")
 @doc("Properties of a HorizonDB parameter group.")
-model HorizonDbParameterGroupProperties {
+model ParameterGroupProperties {
   @doc("Parameters in the parameter group.")
   @identifiers(#["name"])
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyParameterProperties[])
   parameters?: ParameterProperties[];
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("Description of the parameter group.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  description?: string;
+  @renamedFrom(Versions.v2026_10_01_preview, "description")
+  legacyDescription?: string;
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("Description of the parameter group. The maximum length is 1024 characters.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  description?: WritableDescription;
+
+  @removed(Versions.v2026_10_01_preview)
+  @renamedFrom(Versions.v2026_10_01_preview, "pgVersion")
   @doc("PostgreSQL version for the parameter group.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  pgVersion?: int32;
+  legacyPgVersion?: int32;
 
+  @removed(Versions.v2026_10_01_preview)
+  @renamedFrom(Versions.v2026_10_01_preview, "version")
   @doc("Current version of the parameter group.")
   @visibility(Lifecycle.Read)
-  version?: int32;
+  currentVersion?: int32;
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("The PostgreSQL major version for the parameter group. This property is required during creation and is immutable thereafter. The service selects the unique location-scoped default parameter group for this version in the resource location. The DefaultParameterGroups APIs return at most one default parameter group for each PostgreSQL version in a location, so this selection is unambiguous.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  postgreSqlVersion: PostgreSqlVersion;
+
+  @removed(Versions.v2026_10_01_preview)
   @doc("Indicates whether the parameters should be applied immediately.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   applyImmediately?: boolean;
 
   @doc("The provisioning state of the parameter group.")
+  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyProvisioningState)
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
+@removed(Versions.v2026_10_01_preview)
+@renamedFrom(Versions.v2026_10_01_preview, "ParameterProperties")
 @doc("Properties of a HorizonDB parameters.")
-model ParameterProperties {
+model LegacyParameterProperties {
   @doc("The name of the parameter.")
   name?: string;
 
@@ -643,43 +1649,174 @@ model ParameterProperties {
   unit?: string;
 }
 
+@added(Versions.v2026_10_01_preview)
+@doc("The source of the effective value assigned to a HorizonDB parameter.")
+union ParameterValueSource {
+  string,
+
+  /** The effective value is the system-defined default. */
+  SystemDefault: "SystemDefault",
+
+  /** The effective value was explicitly supplied by the user, even when it equals the system-defined default value. */
+  UserOverride: "UserOverride",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Properties of a HorizonDB parameter.")
+model ParameterProperties {
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  @doc("The name of the parameter.")
+  name?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The description of the parameter.")
+  description?: string;
+
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  @doc("The value of the configuration.")
+  value?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The system-defined default value of the parameter, independent of the effective value.")
+  defaultValue?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The source of the effective parameter value. UserOverride means that the value was explicitly supplied by the user, even when it equals defaultValue.")
+  valueSource?: ParameterValueSource;
+
+  @visibility(Lifecycle.Read)
+  @doc("The data type of the parameter.")
+  dataType?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The allowed values for the parameter.")
+  allowedValues?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Whether the parameter can be changed dynamically.")
+  isDynamic?: boolean;
+
+  @visibility(Lifecycle.Read)
+  @doc("Whether the parameter is read-only. Read-only parameters cannot be overridden.")
+  isReadOnly?: boolean;
+
+  @visibility(Lifecycle.Read)
+  @doc("Link to parameter documentation.")
+  documentationLink?: url;
+
+  @visibility(Lifecycle.Read)
+  @doc("The unit of measurement for the parameter.")
+  unit?: string;
+}
+
+@renamedFrom(
+  Versions.v2026_10_01_preview,
+  "HorizonDbParameterGroupPropertiesForPatchUpdate"
+)
 @doc("Properties of a HorizonDB parameter group for update operations.")
-model HorizonDbParameterGroupPropertiesForPatchUpdate {
+model ParameterGroupPropertiesForPatchUpdate {
   @doc("Parameters in the parameter group.")
   @identifiers(#["name"])
   @visibility(Lifecycle.Update)
+  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyParameterProperties[])
   parameters?: ParameterProperties[];
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("Description of the parameter group.")
   @visibility(Lifecycle.Update)
-  description?: string;
+  @renamedFrom(Versions.v2026_10_01_preview, "description")
+  legacyDescription?: string;
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("Description of the parameter group. The maximum length is 1024 characters.")
+  @visibility(Lifecycle.Update)
+  description?: WritableDescription;
+
+  @removed(Versions.v2026_10_01_preview)
   @doc("Indicates whether the parameters should be applied immediately.")
   @visibility(Lifecycle.Update)
   applyImmediately?: boolean;
 }
 
+@renamedFrom(
+  Versions.v2026_10_01_preview,
+  "HorizonDbParameterGroupForPatchUpdate"
+)
 @doc("HorizonDB parameter group for update operations.")
-model HorizonDbParameterGroupForPatchUpdate {
+model ParameterGroupForPatchUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   @doc("The properties that can be updated for a HorizonDB parameter group.")
-  properties?: HorizonDbParameterGroupPropertiesForPatchUpdate;
+  properties?: ParameterGroupPropertiesForPatchUpdate;
 }
 
+@renamedFrom(
+  Versions.v2026_10_01_preview,
+  "HorizonDbParameterGroupConnectionProperties"
+)
 @doc("Connection information for HorizonDB parameter group.")
-model HorizonDbParameterGroupConnectionProperties {
+model ParameterGroupConnectionProperties {
+  @removed(Versions.v2026_10_01_preview)
   @doc("The name of the connected resource.")
   @visibility(Lifecycle.Read)
   name?: string;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("The resource ID of the connected resource.")
   @visibility(Lifecycle.Read)
   id?: armResourceIdentifier;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("The type of the resource.")
   @visibility(Lifecycle.Read)
   type?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure resource ID of the connected HorizonDB pool.")
+  @visibility(Lifecycle.Read)
+  poolResourceId: PoolResourceId;
+}
+
+@doc("A page of HorizonDB parameter group connections.")
+model PagedParameterGroupConnectionProperties {
+  @doc("The parameter group connection items on this page.")
+  @pageItems
+  @identifiers(#["poolResourceId"])
+  value: ParameterGroupConnectionProperties[];
+
+  @doc("The link to the next page of items.")
+  @nextLink
+  nextLink?: url;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("A default parameter group available in a specific region. It contains engine-defined parameters and excludes service and other non-engine entries. For each PostgreSQL version, the DefaultParameterGroups APIs return at most one default parameter group in a location.")
+@parentResource(SubscriptionLocationResource)
+model DefaultParameterGroup is ProxyResource<DefaultParameterGroupProperties> {
+  ...ResourceNameParameter<
+    Resource = DefaultParameterGroup,
+    KeyName = "name",
+    SegmentName = "parameterGroups",
+    NamePattern = "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+  >;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Properties of a default parameter group.")
+model DefaultParameterGroupProperties {
+  @doc("The provisioning state of the default parameter group.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  @doc("Engine-defined parameters in the default parameter group. Service and other non-engine entries are excluded.")
+  @identifiers(#["name"])
+  parameters: ParameterProperties[];
+
+  @doc("Description of the default parameter group.")
+  description?: string;
+
+  @doc("PostgreSQL version for which this default parameter group is valid.")
+  postgreSqlVersion: PostgreSqlVersion;
 }
 
 @doc("Connection information for HorizonDB parameter group.")
@@ -690,9 +1827,41 @@ model HorizonDbClusterParameterGroupConnectionProperties {
 
   @doc("Indication of if parameter group is applied on HorizonDB resource.")
   @visibility(Lifecycle.Read)
-  syncStatus?: string;
+  @typeChangedFrom(Versions.v2026_10_01_preview, string)
+  syncStatus?: ParameterGroupSyncStatus;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("Indicates whether the parameters should be applied immediately.")
   @visibility(Lifecycle.Update, Lifecycle.Read)
   applyImmediately?: boolean;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Controls when dynamic parameter changes become effective. Static parameter changes always become effective only after a pool restart, whether initiated by the customer or performed during scheduled maintenance.")
+union ParameterApplyMethod {
+  string,
+
+  /** Apply dynamic parameter changes immediately. Static parameter changes remain pending until the pool restarts. */
+  Immediate: "Immediate",
+
+  /** Apply dynamic and static parameter changes when the pool next restarts, whether initiated by the customer or performed during scheduled maintenance. */
+  PendingReboot: "PendingReboot",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Indicates synchronization status between a HorizonDB resource and its parameter group.")
+union ParameterGroupSyncStatus {
+  string,
+
+  /** Parameter updates are currently being applied. */
+  Applying: "Applying",
+
+  /** Parameter values are synchronized and up to date. */
+  InSync: "InSync",
+
+  /** Applying parameter updates failed. */
+  FailedToApply: "FailedToApply",
+
+  /** Parameter updates are pending and require a reboot to take effect. */
+  PendingReboot: "PendingReboot",
 }
