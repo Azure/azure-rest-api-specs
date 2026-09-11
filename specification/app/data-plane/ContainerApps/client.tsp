@@ -183,7 +183,7 @@ namespace ContainerAppsSandbox {
     "csharp"
   );
   @@clientLocation(
-    SandboxFilesOperations.putSandboxFile,
+    SandboxFilesOperations.postSandboxFile,
     Group.Resource.Files,
     "csharp"
   );
@@ -355,7 +355,7 @@ namespace ContainerAppsSandbox {
     "csharp"
   );
   @@clientLocation(
-    DiskImagesOperations.putDiskImage,
+    DiskImagesOperations.postDiskImage,
     Group.DiskImages,
     "csharp"
   );
@@ -423,7 +423,7 @@ namespace ContainerAppsSandbox {
   @@clientLocation(VolumesOperations.postVolumeFork, Group.Volumes, "csharp");
   @@clientLocation(VolumesOperations.putVolume, Group.Volumes, "csharp");
   @@clientLocation(
-    VolumesOperations.putVolumeFileUpload,
+    VolumesOperations.postVolumeFile,
     Group.Volumes,
     "csharp"
   );
