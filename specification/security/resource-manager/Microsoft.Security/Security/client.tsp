@@ -796,6 +796,11 @@ op privateLinkResourcesGetCustomization(
 @@clientName(AutomationsAPI.EventSource, "SecurityEventSource", "csharp");
 @@clientName(LocationsAPI.AscLocation, "SecurityCenterLocation", "csharp");
 @@clientName(PricingsAPI.Pricing, "SecurityCenterPricing", "csharp");
+@@clientName(
+  PrivateLinksAPI.PrivateLinkResource,
+  "SecurityCenterPrivateLinkResource",
+  "csharp"
+);
 @@clientName(LegacySettingsAPI.Compliance, "SecurityCompliance", "csharp");
 @@clientName(LegacySettingsAPI.Rank, "SensitivityLabelRank", "csharp");
 @@clientName(ApplicationsAPI.Application, "SecurityApplication", "csharp");
