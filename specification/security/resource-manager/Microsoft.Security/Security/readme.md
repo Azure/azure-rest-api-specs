@@ -758,6 +758,7 @@ input-file:
 - stable/2026-01-01/privateLinks.json
 - stable/2026-08-01/datascanners.json
 - preview/2026-09-01-preview/serviceEntitlements.json
+- preview/2026-09-01-preview/serviceEntitlementSettings.json
 
 # Autorest suppressions
 suppressions:

@@ -1,0 +1,578 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Defender for Cloud",
+    "version": "2026-09-01-preview",
+    "description": "API specification for Microsoft Defender for Cloud service entitlement settings.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ServiceEntitlementSettings"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/serviceEntitlementSettings": {
+      "get": {
+        "operationId": "ServiceEntitlementSettings_ListBySubscription",
+        "tags": [
+          "ServiceEntitlementSettings"
+        ],
+        "description": "Lists service entitlement settings in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceEntitlementSettingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists service entitlement settings in a subscription": {
+            "$ref": "./examples/ServiceEntitlementSettings/ListServiceEntitlementSettingsBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlementSettings": {
+      "get": {
+        "operationId": "ServiceEntitlementSettings_ListByResourceGroup",
+        "tags": [
+          "ServiceEntitlementSettings"
+        ],
+        "description": "Lists service entitlement settings in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceEntitlementSettingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists service entitlement settings in a resource group": {
+            "$ref": "./examples/ServiceEntitlementSettings/ListServiceEntitlementSettingsByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlementSettings/{serviceEntitlementSettingName}": {
+      "get": {
+        "operationId": "ServiceEntitlementSettings_Get",
+        "tags": [
+          "ServiceEntitlementSettings"
+        ],
+        "description": "Gets a service entitlement setting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceEntitlementSettingName",
+            "in": "path",
+            "description": "The name of the ServiceEntitlementSetting",
+            "required": true,
+            "type": "string",
+            "pattern": "^default$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceEntitlementSetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a service entitlement setting": {
+            "$ref": "./examples/ServiceEntitlementSettings/GetServiceEntitlementSetting.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ServiceEntitlementSettings_CreateOrUpdate",
+        "tags": [
+          "ServiceEntitlementSettings"
+        ],
+        "description": "Creates or replaces a service entitlement setting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceEntitlementSettingName",
+            "in": "path",
+            "description": "The name of the ServiceEntitlementSetting",
+            "required": true,
+            "type": "string",
+            "pattern": "^default$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceEntitlementSetting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ServiceEntitlementSetting' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServiceEntitlementSetting"
+            }
+          },
+          "201": {
+            "description": "Resource 'ServiceEntitlementSetting' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServiceEntitlementSetting"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a service entitlement setting": {
+            "$ref": "./examples/ServiceEntitlementSettings/CreateOrUpdateServiceEntitlementSetting.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ServiceEntitlementSettings_Update",
+        "tags": [
+          "ServiceEntitlementSettings"
+        ],
+        "description": "Updates a service entitlement setting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceEntitlementSettingName",
+            "in": "path",
+            "description": "The name of the ServiceEntitlementSetting",
+            "required": true,
+            "type": "string",
+            "pattern": "^default$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceEntitlementSettingUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceEntitlementSetting"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a service entitlement setting": {
+            "$ref": "./examples/ServiceEntitlementSettings/UpdateServiceEntitlementSetting.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ServiceEntitlementSettings_Delete",
+        "tags": [
+          "ServiceEntitlementSettings"
+        ],
+        "description": "Deletes a service entitlement setting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceEntitlementSettingName",
+            "in": "path",
+            "description": "The name of the ServiceEntitlementSetting",
+            "required": true,
+            "type": "string",
+            "pattern": "^default$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a service entitlement setting": {
+            "$ref": "./examples/ServiceEntitlementSettings/DeleteServiceEntitlementSetting.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlementSettings/{serviceEntitlementSettingName}/operationResults/{operationId}": {
+      "get": {
+        "operationId": "ServiceEntitlementSettings_GetOperationResult",
+        "tags": [
+          "ServiceEntitlementSettings"
+        ],
+        "description": "Gets the result of a long-running operation performed on a service entitlement setting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceEntitlementSettingName",
+            "in": "path",
+            "description": "The name of the service entitlement setting.",
+            "required": true,
+            "type": "string",
+            "pattern": "^default$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the result of a long-running operation on a service entitlement setting": {
+            "$ref": "./examples/ServiceEntitlementSettings/GetServiceEntitlementSettingOperationResult.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServiceEntitlementSetting": {
+      "type": "object",
+      "description": "A Microsoft Defender for Cloud service entitlement setting.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceEntitlementSettingProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ServiceEntitlementSettingListResult": {
+      "type": "object",
+      "description": "The response of a ServiceEntitlementSetting list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServiceEntitlementSetting items on this page",
+          "items": {
+            "$ref": "#/definitions/ServiceEntitlementSetting"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServiceEntitlementSettingProperties": {
+      "type": "object",
+      "description": "Properties of a service entitlement setting.",
+      "properties": {
+        "isDefault": {
+          "type": "boolean",
+          "description": "Indicates whether the containing subscription is the default subscription for service entitlements in the tenant. Only one subscription in a tenant can be marked as the default.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ServiceEntitlementSettingProvisioningState",
+          "description": "The status of the most recent resource operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "isDefault"
+      ]
+    },
+    "ServiceEntitlementSettingProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a service entitlement setting.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceEntitlementSettingProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource creation request has been accepted."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ServiceEntitlementSettingUpdate": {
+      "type": "object",
+      "description": "The request body for updating a service entitlement setting.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ServiceEntitlementSettingUpdateProperties",
+          "description": "Properties to update on the service entitlement setting."
+        }
+      }
+    },
+    "ServiceEntitlementSettingUpdateProperties": {
+      "type": "object",
+      "description": "Properties that can be updated on a service entitlement setting.",
+      "properties": {
+        "isDefault": {
+          "type": "boolean",
+          "description": "Indicates whether the containing subscription is the default subscription for service entitlements in the tenant."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
