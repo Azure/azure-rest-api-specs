@@ -64,8 +64,8 @@ using Microsoft.Cache;
 @@clientName(EvictionPolicy, "RedisEnterpriseEvictionPolicy", "csharp");
 @@clientName(EvictionPolicy.AllKeysLFU, "AllKeysLfu", "csharp");
 @@clientName(EvictionPolicy.AllKeysLRU, "AllKeysLru", "csharp");
-@@clientName(EvictionPolicy.VolatileLRU, "VolatileLfu", "csharp");
-@@clientName(EvictionPolicy.VolatileLFU, "VolatileLru", "csharp");
+@@clientName(EvictionPolicy.VolatileLRU, "VolatileLru", "csharp");
+@@clientName(EvictionPolicy.VolatileLFU, "VolatileLfu", "csharp");
 @@clientName(EvictionPolicy.VolatileTTL, "VolatileTtl", "csharp");
 @@clientName(
   ExportClusterParameters,
