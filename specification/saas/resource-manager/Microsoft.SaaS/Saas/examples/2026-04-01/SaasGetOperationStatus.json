@@ -1,0 +1,45 @@
+{
+  "operationId": "SaasSubscriptionLevelOperationResults_GetOperationStatus",
+  "title": "Get SaaS operation status at subscription scope",
+  "parameters": {
+    "subscriptionId": "1a950b42-75c2-44a6-ab02-fc0f840997aa",
+    "operationId": "e24b5b6b-2dfc-41ea-c457-46d0c42494af",
+    "api-version": "2026-04-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/1a950b42-75c2-44a6-ab02-fc0f840997aa/resourceGroups/myResourceGroup/providers/Microsoft.SaaS/resources/mySaasResource",
+        "name": "mySaasResource",
+        "type": "Microsoft.SaaS/resources",
+        "location": "global",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "assetId": "e24b5b6b-2dfc-41ea-c457-46d0c42494af",
+          "description": "My SaaS subscription",
+          "status": "Subscribed",
+          "statusReason": "None",
+          "quantity": 1,
+          "publisherName": "ISVUKLegacy",
+          "planName": "SaaS Plan",
+          "offerName": "SaaS Offer",
+          "termUnit": "P1M",
+          "billingPeriod": "P1M",
+          "termStartDate": "2025-06-15T00:00:00Z",
+          "termEndDate": "2025-07-15T00:00:00Z",
+          "autoRenew": true,
+          "isFreeTrial": false,
+          "storefront": "AzurePortal",
+          "productCode": "0007150b-0000-0160-2654-64a36bcef7ba"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": "10",
+        "Location": "https://management.azure.com/subscriptions/1a950b42-75c2-44a6-ab02-fc0f840997aa/providers/Microsoft.SaaS/operationResults/e24b5b6b-2dfc-41ea-c457-46d0c42494af?api-version=2026-04-01"
+      }
+    }
+  }
+}
