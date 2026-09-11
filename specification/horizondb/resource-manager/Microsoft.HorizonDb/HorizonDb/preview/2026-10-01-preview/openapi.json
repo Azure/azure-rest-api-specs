@@ -5508,30 +5508,6 @@
         ]
       }
     },
-    "CapabilityStatus": {
-      "type": "string",
-      "description": "The availability status of a HorizonDB capability.",
-      "enum": [
-        "Available",
-        "Default"
-      ],
-      "x-ms-enum": {
-        "name": "CapabilityStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Available",
-            "value": "Available",
-            "description": "The capability is available."
-          },
-          {
-            "name": "Default",
-            "value": "Default",
-            "description": "The capability is available and selected by default."
-          }
-        ]
-      }
-    },
     "ChangeDataCaptureCapability": {
       "type": "object",
       "description": "The singleton change data capture capability for a HorizonDB cluster.",
@@ -6769,9 +6745,9 @@
       "type": "object",
       "description": "The HorizonDB Cluster capabilities available in a location.",
       "properties": {
-        "status": {
-          "$ref": "#/definitions/CapabilityStatus",
-          "description": "The availability status of HorizonDB Clusters in the region.",
+        "recommendedPostgreSqlVersion": {
+          "$ref": "#/definitions/PostgreSqlCapabilityVersion",
+          "description": "The PostgreSQL major version recommended for clients to select for HorizonDB Clusters in the region. This recommendation does not describe backend behavior when the PostgreSQL version is omitted from a request.",
           "readOnly": true
         },
         "supportedPostgreSqlVersions": {
@@ -6798,7 +6774,7 @@
         }
       },
       "required": [
-        "status",
+        "recommendedPostgreSqlVersion",
         "supportedPostgreSqlVersions",
         "supportedFeatures"
       ]
@@ -6835,16 +6811,10 @@
           "type": "string",
           "description": "The name of the Cluster feature.",
           "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/CapabilityStatus",
-          "description": "The availability status of the Cluster feature.",
-          "readOnly": true
         }
       },
       "required": [
-        "name",
-        "status"
+        "name"
       ]
     },
     "ClusterForPatchUpdate": {
@@ -7047,9 +7017,9 @@
           "description": "The numeric compute generation used when configuring a HorizonDB pool.",
           "readOnly": true
         },
-        "status": {
-          "$ref": "#/definitions/CapabilityStatus",
-          "description": "The availability status of the compute generation.",
+        "recommendedComputeModelType": {
+          "$ref": "#/definitions/PoolComputeModelType",
+          "description": "The compute model type recommended for clients to select for this compute generation. This recommendation does not describe backend behavior when the compute model type is omitted from a request.",
           "readOnly": true
         },
         "supportedComputeModels": {
@@ -7066,7 +7036,7 @@
       },
       "required": [
         "computeGeneration",
-        "status",
+        "recommendedComputeModelType",
         "supportedComputeModels"
       ]
     },
@@ -7078,17 +7048,11 @@
           "$ref": "#/definitions/PoolComputeModelType",
           "description": "The compute model represented by these capabilities.",
           "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/CapabilityStatus",
-          "description": "The availability status of the compute model.",
-          "readOnly": true
         }
       },
       "discriminator": "type",
       "required": [
-        "type",
-        "status"
+        "type"
       ]
     },
     "ComputeProcessorCapability": {
@@ -7098,11 +7062,6 @@
         "name": {
           "$ref": "#/definitions/ComputeProcessorType",
           "description": "The name of the processor family.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/CapabilityStatus",
-          "description": "The availability status of the processor family.",
           "readOnly": true
         },
         "supportedGenerations": {
@@ -7119,7 +7078,6 @@
       },
       "required": [
         "name",
-        "status",
         "supportedGenerations"
       ]
     },
@@ -7151,11 +7109,6 @@
       "type": "object",
       "description": "A vCore configuration supported by a HorizonDB processor generation.",
       "properties": {
-        "status": {
-          "$ref": "#/definitions/CapabilityStatus",
-          "description": "The availability status of the vCore configuration.",
-          "readOnly": true
-        },
         "vCores": {
           "type": "integer",
           "format": "int32",
@@ -7170,7 +7123,6 @@
         }
       },
       "required": [
-        "status",
         "vCores",
         "memoryPerVCoreInMb"
       ]
@@ -7644,11 +7596,6 @@
           "description": "The Azure region represented by this capability entry.",
           "readOnly": true
         },
-        "status": {
-          "$ref": "#/definitions/CapabilityStatus",
-          "description": "The availability status of HorizonDB in the region.",
-          "readOnly": true
-        },
         "clusterCapabilities": {
           "$ref": "#/definitions/ClusterCapability",
           "description": "The Cluster capabilities available in the region.",
@@ -7662,7 +7609,6 @@
       },
       "required": [
         "location",
-        "status",
         "clusterCapabilities",
         "poolCapabilities"
       ]
@@ -8644,9 +8590,9 @@
       "type": "object",
       "description": "The HorizonDB Pool capabilities available in a location.",
       "properties": {
-        "status": {
-          "$ref": "#/definitions/CapabilityStatus",
-          "description": "The availability status of HorizonDB Pools in the region.",
+        "recommendedComputeProcessor": {
+          "$ref": "#/definitions/ComputeProcessorType",
+          "description": "The compute processor recommended for clients to select for HorizonDB Pools in the region. This recommendation does not describe backend behavior when the compute processor is omitted from a request.",
           "readOnly": true
         },
         "supportedProcessors": {
@@ -8673,7 +8619,7 @@
         }
       },
       "required": [
-        "status",
+        "recommendedComputeProcessor",
         "supportedProcessors",
         "supportedFeatures"
       ]
@@ -8779,16 +8725,10 @@
           "type": "string",
           "description": "The name of the Pool feature.",
           "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/CapabilityStatus",
-          "description": "The availability status of the Pool feature.",
-          "readOnly": true
         }
       },
       "required": [
-        "name",
-        "status"
+        "name"
       ]
     },
     "PoolForPatchUpdate": {
@@ -9134,11 +9074,6 @@
           "description": "The PostgreSQL major version.",
           "readOnly": true
         },
-        "status": {
-          "$ref": "#/definitions/CapabilityStatus",
-          "description": "The availability status of the PostgreSQL major version.",
-          "readOnly": true
-        },
         "supportedVersionsToUpgrade": {
           "type": "array",
           "description": "The PostgreSQL major versions to which this version can be upgraded in place. API version 2026-10-01-preview does not support in-place PostgreSQL major-version upgrades, so this array is always empty.",
@@ -9150,7 +9085,6 @@
       },
       "required": [
         "name",
-        "status",
         "supportedVersionsToUpgrade"
       ]
     },
@@ -9275,10 +9209,10 @@
       "type": "object",
       "description": "The capabilities of the Provisioned compute model.",
       "properties": {
-        "defaultVCoreCount": {
+        "recommendedVCoreCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The default number of provisioned vCores.",
+          "description": "The provisioned vCore count recommended for clients to select. This recommendation does not describe backend behavior when vCores is omitted from a request.",
           "readOnly": true
         },
         "supportedComputeSizes": {
@@ -9294,7 +9228,7 @@
         }
       },
       "required": [
-        "defaultVCoreCount",
+        "recommendedVCoreCount",
         "supportedComputeSizes"
       ],
       "allOf": [

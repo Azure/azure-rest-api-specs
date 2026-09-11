@@ -12,18 +12,6 @@ using Azure.ResourceManager;
 namespace Microsoft.HorizonDb;
 
 @added(Versions.v2026_10_01_preview)
-@doc("The availability status of a HorizonDB capability.")
-union CapabilityStatus {
-  string,
-
-  /** The capability is available. */
-  Available: "Available",
-
-  /** The capability is available and selected by default. */
-  Default: "Default",
-}
-
-@added(Versions.v2026_10_01_preview)
 @doc("A PostgreSQL major version advertised by the HorizonDB capabilities API.")
 union PostgreSqlCapabilityVersion {
   string,
@@ -38,10 +26,6 @@ union PostgreSqlCapabilityVersion {
 @added(Versions.v2026_10_01_preview)
 @doc("A vCore configuration supported by a HorizonDB processor generation.")
 model ComputeSizeCapability {
-  @doc("The availability status of the vCore configuration.")
-  @visibility(Lifecycle.Read)
-  status: CapabilityStatus;
-
   @doc("The number of vCores in the configuration.")
   @visibility(Lifecycle.Read)
   vCores: int32;
@@ -59,10 +43,6 @@ model ComputeModelCapability {
   @doc("The compute model represented by these capabilities.")
   @visibility(Lifecycle.Read)
   type: PoolComputeModelType;
-
-  @doc("The availability status of the compute model.")
-  @visibility(Lifecycle.Read)
-  status: CapabilityStatus;
 }
 
 @added(Versions.v2026_10_01_preview)
@@ -71,10 +51,10 @@ model ProvisionedComputeModelCapability extends ComputeModelCapability {
   @doc("The compute model represented by these capabilities.")
   type: "Provisioned";
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "defaultVCoreCount preserves the HorizonDB VCore terminology in the public wire contract."
-  @doc("The default number of provisioned vCores.")
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "recommendedVCoreCount preserves the HorizonDB VCore terminology in the public wire contract."
+  @doc("The provisioned vCore count recommended for clients to select. This recommendation does not describe backend behavior when vCores is omitted from a request.")
   @visibility(Lifecycle.Read)
-  defaultVCoreCount: int32;
+  recommendedVCoreCount: int32;
 
   @doc("The supported provisioned compute sizes.")
   @visibility(Lifecycle.Read)
@@ -89,9 +69,9 @@ model ComputeGenerationCapability {
   @visibility(Lifecycle.Read)
   computeGeneration: int32;
 
-  @doc("The availability status of the compute generation.")
+  @doc("The compute model type recommended for clients to select for this compute generation. This recommendation does not describe backend behavior when the compute model type is omitted from a request.")
   @visibility(Lifecycle.Read)
-  status: CapabilityStatus;
+  recommendedComputeModelType: PoolComputeModelType;
 
   @doc("The compute models supported by the compute generation.")
   @visibility(Lifecycle.Read)
@@ -106,10 +86,6 @@ model ComputeProcessorCapability {
   @visibility(Lifecycle.Read)
   name: ComputeProcessorType;
 
-  @doc("The availability status of the processor family.")
-  @visibility(Lifecycle.Read)
-  status: CapabilityStatus;
-
   @doc("The compute generations supported by the processor family.")
   @visibility(Lifecycle.Read)
   @identifiers(#["computeGeneration"])
@@ -123,10 +99,6 @@ model PostgreSqlVersionCapability {
   @visibility(Lifecycle.Read)
   name: PostgreSqlCapabilityVersion;
 
-  @doc("The availability status of the PostgreSQL major version.")
-  @visibility(Lifecycle.Read)
-  status: CapabilityStatus;
-
   @doc("The PostgreSQL major versions to which this version can be upgraded in place. API version 2026-10-01-preview does not support in-place PostgreSQL major-version upgrades, so this array is always empty.")
   @visibility(Lifecycle.Read)
   supportedVersionsToUpgrade: PostgreSqlCapabilityVersion[];
@@ -138,18 +110,14 @@ model ClusterFeatureCapability {
   @doc("The name of the Cluster feature.")
   @visibility(Lifecycle.Read)
   name: string;
-
-  @doc("The availability status of the Cluster feature.")
-  @visibility(Lifecycle.Read)
-  status: CapabilityStatus;
 }
 
 @added(Versions.v2026_10_01_preview)
 @doc("The HorizonDB Cluster capabilities available in a location.")
 model ClusterCapability {
-  @doc("The availability status of HorizonDB Clusters in the region.")
+  @doc("The PostgreSQL major version recommended for clients to select for HorizonDB Clusters in the region. This recommendation does not describe backend behavior when the PostgreSQL version is omitted from a request.")
   @visibility(Lifecycle.Read)
-  status: CapabilityStatus;
+  recommendedPostgreSqlVersion: PostgreSqlCapabilityVersion;
 
   @doc("The PostgreSQL major versions supported by Clusters in the region.")
   @visibility(Lifecycle.Read)
@@ -168,18 +136,14 @@ model PoolFeatureCapability {
   @doc("The name of the Pool feature.")
   @visibility(Lifecycle.Read)
   name: string;
-
-  @doc("The availability status of the Pool feature.")
-  @visibility(Lifecycle.Read)
-  status: CapabilityStatus;
 }
 
 @added(Versions.v2026_10_01_preview)
 @doc("The HorizonDB Pool capabilities available in a location.")
 model PoolCapability {
-  @doc("The availability status of HorizonDB Pools in the region.")
+  @doc("The compute processor recommended for clients to select for HorizonDB Pools in the region. This recommendation does not describe backend behavior when the compute processor is omitted from a request.")
   @visibility(Lifecycle.Read)
-  status: CapabilityStatus;
+  recommendedComputeProcessor: ComputeProcessorType;
 
   @doc("The processor families and their compute capabilities supported by Pools in the region.")
   @visibility(Lifecycle.Read)
@@ -198,10 +162,6 @@ model LocationCapability {
   @doc("The Azure region represented by this capability entry.")
   @visibility(Lifecycle.Read)
   location: azureLocation;
-
-  @doc("The availability status of HorizonDB in the region.")
-  @visibility(Lifecycle.Read)
-  status: CapabilityStatus;
 
   @doc("The Cluster capabilities available in the region.")
   @visibility(Lifecycle.Read)
