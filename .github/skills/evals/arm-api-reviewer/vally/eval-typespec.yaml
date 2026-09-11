@@ -257,3 +257,49 @@ stimuli:
       - "Explains that SDK compatibility concerns need concrete downstream evidence and must be handled with semantic TypeSpec modeling or client customization"
       - "Recognizes @list and the nextLink response property as the native source of paging semantics rather than recommending a raw x-ms-pageable extension"
       - "Preserves the immutability rule for any actual REST wire or ARM semantic change"
+
+  # 070007 -- ARM LRO header customization in TypeSpec-owned output
+  - name: preserve-published-arm-lro-header-contract
+    prompt: |
+      Read the ARM LRO and raw OpenAPI extension guidance in the
+      azure-api-review skill, then assess converting an already-published ARM
+      DELETE operation to TypeSpec.
+
+      The published 202 response contains `Location`, `Azure-AsyncOperation`,
+      and `Retry-After`, and has no final response body. The proposed TypeSpec
+      source is:
+
+      ```tsp
+      delete is ArmResourceDeleteWithoutOkAsync<MyResource>;
+      ```
+
+      Generated OpenAPI retains `Location` but loses `Azure-AsyncOperation`.
+      The author proposes restoring the old output with
+      `@OpenAPI.extension(...)`, or alternatively adding only
+      `@pollingOperation`.
+
+      Should the ARM API Reviewer file a published-version finding? Give the
+      native TypeSpec correction and explain the required logical final result.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "ArmResourceDeleteWithoutOkAsync"
+      - type: output-matches
+        config:
+          pattern: "ArmCombinedLroHeaders"
+      - type: output-matches
+        config:
+          pattern: "(?i)FinalResult\\s*=\\s*void"
+      - type: output-matches
+        config:
+          pattern: "RetryAfterHeader"
+      - type: prompt
+    rubric:
+      - "Files a published-version finding because removing Azure-AsyncOperation changes the actual initial response header contract"
+      - "Uses ArmResourceDeleteWithoutOkAsync with an LroHeaders override containing ArmCombinedLroHeaders and RetryAfterHeader"
+      - "Sets FinalResult to void because DELETE has no final response body"
+      - "Rejects restoring @OpenAPI.extension or a no-openapi-client-extensions suppression"
+      - "Explains that @pollingOperation alone does not customize an Azure.ResourceManager template's initial response headers"

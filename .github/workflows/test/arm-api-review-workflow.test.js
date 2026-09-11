@@ -1520,7 +1520,7 @@ describe("ARM paging and example enum calibration", () => {
     }
   });
 
-  it("keeps the eval catalog counts aligned with 89 scenarios and 57 fixtures", async () => {
+  it("keeps the eval catalog counts aligned with 90 scenarios and 57 fixtures", async () => {
     const evalDir = join(ROOT, ".github/skills/evals/arm-api-reviewer/vally");
     const evalFiles = (await readdir(evalDir)).filter((file) => file.endsWith(".yaml"));
     let stimulusCount = 0;
@@ -1541,11 +1541,11 @@ describe("ARM paging and example enum calibration", () => {
       { recursive: true, withFileTypes: true },
     );
     expect(evalFiles).toHaveLength(18);
-    expect(stimulusCount).toBe(89);
+    expect(stimulusCount).toBe(90);
     expect(
       fixtureEntries.filter((entry) => entry.isFile() && entry.name !== "README.md"),
     ).toHaveLength(57);
-    expect(readme).toContain("Total: 89 stimuli across 18 eval files.");
+    expect(readme).toContain("Total: 90 stimuli across 18 eval files.");
     expect(readme).toContain("All 57 fixture data files");
     expect(readme).toContain("`--timeout <duration>`");
     expect(readme).toContain("`defaults.timeout`");
@@ -1559,6 +1559,36 @@ describe("ARM paging and example enum calibration", () => {
       /if \(\$failed -gt 0 -and \$overallExitCode -eq 0\)[\s\S]{0,200}\$overallExitCode = 1/,
     );
   }, 15_000);
+
+  it("covers ARM LRO header customization in the TypeSpec eval", async () => {
+    const evalSpec =
+      /** @type {{ stimuli?: Array<{ name?: string; prompt?: string; graders?: Array<{ config?: { pattern?: string } }>; rubric?: string[] }> }} */ (
+        load(
+          await readFile(
+            join(ROOT, ".github/skills/evals/arm-api-reviewer/vally/eval-typespec.yaml"),
+            "utf8",
+          ),
+        )
+      );
+    const stimulus = evalSpec.stimuli?.find(
+      ({ name }) => name === "preserve-published-arm-lro-header-contract",
+    );
+    const content = collapseWhitespace(
+      [
+        stimulus?.prompt,
+        ...(stimulus?.graders?.map((grader) => grader.config?.pattern) ?? []),
+        ...(stimulus?.rubric ?? []),
+      ].join("\n"),
+    );
+
+    expect(stimulus).toBeDefined();
+    expect(content).toContain("`Location`, `Azure-AsyncOperation`, and `Retry-After`");
+    expect(content).toContain("ArmResourceDeleteWithoutOkAsync");
+    expect(content).toContain("ArmCombinedLroHeaders");
+    expect(content).toContain("FinalResult\\s*=\\s*void");
+    expect(content).toContain("RetryAfterHeader");
+    expect(content).toContain("removing Azure-AsyncOperation changes");
+  });
 
   it("maps every EX-PAYLOAD example reference into each enum eval workspace", async () => {
     const evalSpec =
@@ -1606,7 +1636,6 @@ describe("ARM Reviewer alignment and dependency consistency", () => {
     ".github/skills/azure-api-review/references/field-ownership.md",
     ".github/skills/azure-api-review/references/guid-and-uuid-on-arm.md",
     ".github/skills/azure-api-review/references/linter-rule-coverage.md",
-    ".github/skills/azure-api-review/references/lro-final-state-via.md",
     ".github/skills/azure-api-review/references/naming-conventions.md",
     ".github/skills/azure-api-review/references/pattern-validation.md",
     ".github/skills/azure-api-review/references/policy-compatibility.md",
@@ -1716,23 +1745,36 @@ describe("ARM Reviewer alignment and dependency consistency", () => {
   });
 
   it("rejects raw OpenAPI extension restoration for TypeSpec-owned output", async () => {
-    const [workflow, reviewer, critic, arm, typespec, skill, extensionGuidance] = await Promise.all(
-      [
-        readFile(join(ROOT, SOURCE_FILE), "utf8"),
-        readFile(join(ROOT, AGENT_FILE), "utf8"),
-        readFile(join(ROOT, ".github/agents/arm-api-review-critic.agent.md"), "utf8"),
-        readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
-        readFile(join(ROOT, ".github/instructions/typespec-review.instructions.md"), "utf8"),
-        readFile(join(ROOT, ".github/skills/azure-api-review/SKILL.md"), "utf8"),
-        readFile(
-          join(ROOT, ".github/skills/azure-api-review/references/typespec-openapi-extensions.md"),
-          "utf8",
-        ),
-      ],
-    );
+    const [
+      workflow,
+      reviewer,
+      critic,
+      arm,
+      typespec,
+      skill,
+      extensionGuidance,
+      lroGuidance,
+      authoringIntake,
+    ] = await Promise.all([
+      readFile(join(ROOT, SOURCE_FILE), "utf8"),
+      readFile(join(ROOT, AGENT_FILE), "utf8"),
+      readFile(join(ROOT, ".github/agents/arm-api-review-critic.agent.md"), "utf8"),
+      readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
+      readFile(join(ROOT, ".github/instructions/typespec-review.instructions.md"), "utf8"),
+      readFile(join(ROOT, ".github/skills/azure-api-review/SKILL.md"), "utf8"),
+      readFile(
+        join(ROOT, ".github/skills/azure-api-review/references/typespec-openapi-extensions.md"),
+        "utf8",
+      ),
+      readFile(
+        join(ROOT, ".github/skills/azure-api-review/references/lro-final-state-via.md"),
+        "utf8",
+      ),
+      readFile(join(ROOT, ".github/skills/azure-typespec-author/references/intake.md"), "utf8"),
+    ]);
     const collapsedExtensionGuidance = collapseWhitespace(extensionGuidance);
 
-    expect(extensionGuidance).toContain("Upstream alignment: 2026-09-09");
+    expect(extensionGuidance).toContain("Upstream alignment: 2026-09-10");
     expect(extensionGuidance).toContain(
       "The upstream `@azure-tools/typespec-azure-core/no-openapi-client-extensions`",
     );
@@ -1741,8 +1783,14 @@ describe("ARM Reviewer alignment and dependency consistency", () => {
     );
     expect(collapsedExtensionGuidance).toContain("removing `x-ms-client-request-id: true`");
     expect(extensionGuidance).toMatch(/\| `x-ms-pageable`\s+\| `@list`/);
+    expect(extensionGuidance).toContain("[ARM LRO guidance](lro-final-state-via.md)");
+    expect(extensionGuidance).toContain("[data-plane LRO guidance](data-plane-lro-and-paging.md)");
+    expect(collapsedExtensionGuidance).not.toContain(
+      "LRO templates with `@pollingOperation` or `@finalOperation` as applicable",
+    );
     expect(collapsedExtensionGuidance).toContain("Never recommend `@OpenAPI.extension` as the fix");
     expect(skill).toContain("[typespec-openapi-extensions.md]");
+    expect(skill).toContain("ARM LRO template defaults, header customization");
     expect(typespec).toContain("TSP-NO-RAW-CLIENT-EXTENSIONS");
     expect(typespec).toContain(
       "do not suppress `@azure-tools/typespec-azure-core/no-openapi-client-extensions`",
@@ -1753,8 +1801,27 @@ describe("ARM Reviewer alignment and dependency consistency", () => {
     expect(workflow).toContain(
       "../skills/azure-api-review/references/typespec-openapi-extensions.md",
     );
+    expect(workflow).toContain("../skills/azure-api-review/references/lro-final-state-via.md");
+    expect(reviewer).toContain("logical `FinalResult`");
+    expect(critic).toContain("controlled by `LroHeaders`");
     expect(critic).toContain("FAIL: rule-misapplied");
     expect(critic).toContain("FAIL: downstream-ci-conflict");
+    expect(lroGuidance).toContain("Upstream alignment: 2026-09-10");
+    expect(lroGuidance).toContain(
+      "https://azure.github.io/typespec-azure/docs/howtos/arm/long-running-operations/",
+    );
+    for (const headerModel of [
+      "ArmAsyncOperationHeader",
+      "ArmLroLocationHeader",
+      "ArmCombinedLroHeaders",
+    ]) {
+      expect(lroGuidance).toContain(headerModel);
+    }
+    expect(lroGuidance).toContain("LroHeaders = ArmCombinedLroHeaders");
+    expect(lroGuidance).toContain("FinalResult = MigrationResponse");
+    expect(lroGuidance).toContain("FinalResult = void");
+    expect(authoringIntake).not.toContain("For async POST, use ARM combined headers");
+    expect(authoringIntake).toContain("standard template's LRO header");
   });
 
   it("keeps generic OpenAPI guidance subordinate to ARM-specific rules", async () => {

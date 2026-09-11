@@ -1,4 +1,4 @@
-<!-- Upstream alignment: 2026-09-09
+<!-- Upstream alignment: 2026-09-10
      Sources:
        - Azure Core no-openapi-client-extensions rule
          https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-openapi-client-extensions/
@@ -6,6 +6,8 @@
          https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-openapi/
        - TypeSpec OpenAPI decorator reference
          https://typespec.io/docs/libraries/openapi/reference/decorators/
+       - TypeSpec Azure ARM long-running operation guidance
+         https://azure.github.io/typespec-azure/docs/howtos/arm/long-running-operations/
 -->
 
 # TypeSpec and Raw OpenAPI Extensions
@@ -30,17 +32,17 @@ an already-published API version.
 
 Use the TypeSpec-native construct instead. High-frequency mappings include:
 
-| OpenAPI metadata                                                        | TypeSpec source of truth                                                                                    |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `x-ms-parameter-grouping`                                               | Group parameters in a model and spread the model into the operation.                                        |
-| `x-ms-client-name`                                                      | `@clientName` from `@azure-tools/typespec-client-generator-core`.                                           |
-| `x-ms-client-flatten`                                                   | `@flattenProperty` when compatibility requires it; do not add flattening to a new API.                      |
-| `x-ms-pageable`                                                         | `@list` or an Azure.Core/Azure.ResourceManager paging operation template.                                   |
-| `x-ms-long-running-operation` and `x-ms-long-running-operation-options` | Azure.Core/Azure.ResourceManager LRO templates with `@pollingOperation` or `@finalOperation` as applicable. |
-| `x-ms-secret`                                                           | `@secret`.                                                                                                  |
-| `x-ms-azure-resource`                                                   | Azure.ResourceManager resource templates.                                                                   |
-| `x-ms-arm-id-details`                                                   | `armResourceIdentifier`.                                                                                    |
-| `x-ms-identifiers`                                                      | `@key` on the item identity property or `@identifiers` on the array property.                               |
+| OpenAPI metadata                                                        | TypeSpec source of truth                                                                                                                                                                                                                                                                                                       |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `x-ms-parameter-grouping`                                               | Group parameters in a model and spread the model into the operation.                                                                                                                                                                                                                                                           |
+| `x-ms-client-name`                                                      | `@clientName` from `@azure-tools/typespec-client-generator-core`.                                                                                                                                                                                                                                                              |
+| `x-ms-client-flatten`                                                   | `@flattenProperty` when compatibility requires it; do not add flattening to a new API.                                                                                                                                                                                                                                         |
+| `x-ms-pageable`                                                         | `@list` or an Azure.Core/Azure.ResourceManager paging operation template.                                                                                                                                                                                                                                                      |
+| `x-ms-long-running-operation` and `x-ms-long-running-operation-options` | For ARM, use an async Azure.ResourceManager template and customize `LroHeaders` with the matching `FinalResult`; see [ARM LRO guidance](lro-final-state-via.md). For Azure.Core or custom status monitors, use the native polling and final-operation constructs; see [data-plane LRO guidance](data-plane-lro-and-paging.md). |
+| `x-ms-secret`                                                           | `@secret`.                                                                                                                                                                                                                                                                                                                     |
+| `x-ms-azure-resource`                                                   | Azure.ResourceManager resource templates.                                                                                                                                                                                                                                                                                      |
+| `x-ms-arm-id-details`                                                   | `armResourceIdentifier`.                                                                                                                                                                                                                                                                                                       |
+| `x-ms-identifiers`                                                      | `@key` on the item identity property or `@identifiers` on the array property.                                                                                                                                                                                                                                                  |
 
 When an extension is genuinely emitter-only, does not alter client, service,
 wire, or ARM behavior, and has no TypeSpec-native representation, a raw custom
