@@ -41,6 +41,7 @@ import "./ManagedNetworkSettingsPropertiesBasicResource.tsp";
 import "./AgentApplication.tsp";
 import "./AgentDeploymentResource.tsp";
 import "./ManagedComputeDeployment.tsp";
+import "./AdapterDeployment.tsp";
 import "./ComputeOperation.tsp";
 import "./ManagedComputeUsages.tsp";
 import "./Compute.tsp";
