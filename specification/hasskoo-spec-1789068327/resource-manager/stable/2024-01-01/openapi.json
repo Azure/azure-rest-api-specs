@@ -1,0 +1,82 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Test Resource Provider",
+    "description": "Test resource provider.",
+    "version": "2024-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [{"azure_auth": ["user_impersonation"]}],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {"user_impersonation": "impersonate your user account"}
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.TestRP/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Lists all operations.",
+        "parameters": [
+          {"$ref": "#/parameters/ApiVersionParameter"},
+          {"$ref": "#/parameters/SubscriptionIdParameter"}
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {"$ref": "#/definitions/OperationListResult"}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {"type": "array", "items": {"$ref": "#/definitions/Operation"}},
+        "nextLink": {"type": "string"}
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "properties": {
+        "name": {"type": "string"},
+        "display": {"$ref": "#/definitions/OperationDisplay"}
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {"type": "string"},
+        "resource": {"type": "string"},
+        "operation": {"type": "string"},
+        "description": {"type": "string"}
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription ID."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version."
+    }
+  }
+}
+  
