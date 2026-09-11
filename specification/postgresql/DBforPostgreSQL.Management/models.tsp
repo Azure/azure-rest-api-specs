@@ -662,6 +662,10 @@ union IdentityType {
 union PostgresMajorVersion {
   string,
 
+  /** PostgreSQL 19. */
+  @added(Versions.v2026_07_01)
+  `19`: "19",
+
   /** PostgreSQL 18. */
   `18`: "18",
 
@@ -864,6 +868,34 @@ union GeographicallyRedundantBackup {
   Enabled: "Enabled",
 
   /** Server is not configured to create geographically redundant backups. */
+  Disabled: "Disabled",
+}
+
+/**
+ * Indicates if the server is configured to create immutable backups.
+ */
+@added(Versions.v2026_07_01)
+union ImmutableBackup {
+  string,
+
+  /** Server is configured to create immutable backups. */
+  Enabled: "Enabled",
+
+  /** Server is not configured to create immutable backups. */
+  Disabled: "Disabled",
+}
+
+/**
+ * Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server.
+ */
+@added(Versions.v2026_07_01)
+union FipsMode {
+  string,
+
+  /** FIPS mode is enabled on the server. */
+  Enabled: "Enabled",
+
+  /** FIPS mode is disabled on the server. */
   Disabled: "Disabled",
 }
 
@@ -3075,6 +3107,10 @@ model ServerProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   cluster?: Cluster;
+
+  @doc("Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server. If not specified on create, it defaults to Disabled.")
+  @added(Versions.v2026_07_01)
+  fipsMode?: FipsMode = FipsMode.Disabled;
 }
 
 /**
@@ -3201,6 +3237,12 @@ model Backup {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   geoRedundantBackup?: GeographicallyRedundantBackup = GeographicallyRedundantBackup.Disabled;
+
+  /**
+   * Indicates if the server is configured to create immutable backups.
+   */
+  @added(Versions.v2026_07_01)
+  immutableBackup?: ImmutableBackup;
 
   /**
    * Earliest restore point time (ISO8601 format) for a server.
@@ -3471,6 +3513,10 @@ model ServerPropertiesForPatch {
    */
   @visibility(Lifecycle.Read, Lifecycle.Update)
   cluster?: Cluster;
+
+  @doc("Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server. If not specified, the current value is preserved.")
+  @added(Versions.v2026_07_01)
+  fipsMode?: FipsMode;
 }
 
 /**
@@ -3487,6 +3533,12 @@ model BackupForPatch {
    */
   @visibility(Lifecycle.Read)
   geoRedundantBackup?: GeographicallyRedundantBackup;
+
+  /**
+   * Indicates if the server is configured to create immutable backups.
+   */
+  @added(Versions.v2026_07_01)
+  immutableBackup?: ImmutableBackup;
 
   /**
    * Earliest restore point time (ISO8601 format) for a server.
@@ -4218,6 +4270,103 @@ model MajorVersionUpgradePrecheckResource
     SegmentName = "majorVersionUpgradePrecheck",
     NamePattern = "^[a-zA-Z0-9-]{3,36}$"
   >;
+}
+
+@doc("The database agent configuration for a PostgreSQL flexible server.")
+@added(Versions.v2026_07_01)
+@singleton("Default")
+@parentResource(Server)
+model DbAgent is Azure.ResourceManager.ProxyResource<DbAgentProperties> {
+  ...ResourceNameParameter<
+    Resource = DbAgent,
+    KeyName = "dbAgentName",
+    SegmentName = "dbAgents",
+    NamePattern = "^Default$"
+  >;
+}
+
+@doc("Properties of the database agent configuration.")
+@added(Versions.v2026_07_01)
+model DbAgentProperties {
+  @doc("The state of the database agent.")
+  @visibility(Lifecycle.Read)
+  state: DbAgentState;
+
+  @doc("The provisioning state of the database agent resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: DbAgentProvisioningState;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service returns null while an enable or disable operation is in progress."
+  @doc("The time when the database agent configuration was last modified.")
+  @visibility(Lifecycle.Read)
+  lastModifiedTime?: utcDateTime | null;
+}
+
+@doc("A request to enable or disable the database agent.")
+@added(Versions.v2026_07_01)
+model DbAgentForUpdate {
+  @doc("The requested database agent properties.")
+  properties: DbAgentForUpdateProperties;
+}
+
+@doc("Writable properties of the database agent configuration.")
+@added(Versions.v2026_07_01)
+model DbAgentForUpdateProperties {
+  @doc("The requested state of the database agent.")
+  state: DbAgentForUpdateState;
+}
+
+@doc("The state of the database agent.")
+@added(Versions.v2026_07_01)
+union DbAgentState {
+  string,
+
+  @doc("The database agent is being enabled.")
+  Enabling: "Enabling",
+
+  @doc("The database agent is enabled.")
+  Enabled: "Enabled",
+
+  @doc("The database agent is being disabled.")
+  Disabling: "Disabling",
+
+  @doc("The database agent is disabled.")
+  Disabled: "Disabled",
+
+  @doc("The database agent lifecycle operation failed.")
+  Failed: "Failed",
+}
+
+@doc("The provisioning state of the database agent resource.")
+@added(Versions.v2026_07_01)
+union DbAgentProvisioningState {
+  ResourceProvisioningState,
+
+  @doc("The database agent lifecycle operation is in progress.")
+  InProgress: "InProgress",
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "PUT requests accept only Enabled or Disabled; additional values must be rejected."
+@doc("The database agent states accepted in a write request.")
+@added(Versions.v2026_07_01)
+union DbAgentForUpdateState {
+  @doc("Enable the database agent.")
+  Enabled: "Enabled",
+
+  @doc("Disable the database agent.")
+  Disabled: "Disabled",
+}
+
+@doc("The response returned when a database agent write is accepted.")
+@added(Versions.v2026_07_01)
+model DbAgentAcceptedResponse {
+  ...AcceptedResponse;
+  ...ArmCombinedLroHeaders<FinalResult = DbAgent>;
+  ...Azure.Core.Foundations.RetryAfterHeader;
+
+  @doc("The database agent resource while the lifecycle operation is in progress.")
+  @bodyRoot
+  resource: DbAgent;
 }
 
 @@visibility(AdvancedThreatProtectionSettingsList.value, Lifecycle.Read);
