@@ -72,102 +72,111 @@ namespace Azure.AI.Projects.Beta {
   @@clientLocation(Azure.AI.Projects.MemoryStores.listMemories, MemoryStores);
   @@clientLocation(Azure.AI.Projects.MemoryStores.deleteMemory, MemoryStores);
 
-  interface Agents {}
+  namespace Agents {
+    interface Foo {}
+  }
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.create, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.get, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.cancel, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.delete, Agents);
-  // Keep Voice Agent telephony management on the existing Agents sub-client.
+  @@clientLocation(Azure.AI.Projects.Agents.generateAgent, Agents);
+
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.createTelephonyBinding,
-    Agents
+    Agents.Foo
   );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.listTelephonyBindings,
-    Agents
+    Agents.Foo
   );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.getTelephonyBinding,
-    Agents
+    Agents.Foo
   );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.updateTelephonyBinding,
-    Agents
+    Agents.Foo
   );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.deleteTelephonyBinding,
-    Agents
+    Agents.Foo
   );
-  @@clientLocation(Azure.AI.Projects.AgentTelephony.listTelephonyCalls, Agents);
-  @@clientLocation(Azure.AI.Projects.AgentTelephony.getTelephonyCall, Agents);
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.listTelephonyCalls,
+    Agents.Foo
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.getTelephonyCall,
+    Agents.Foo
+  );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.transferTelephonyCall,
-    Agents
+    Agents.Foo
   );
-  @@clientLocation(Azure.AI.Projects.AgentTelephony.endTelephonyCall, Agents);
+  @@clientLocation(
+    Azure.AI.Projects.AgentTelephony.endTelephonyCall,
+    Agents.Foo
+  );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.getTelephonyTransferTargets,
-    Agents
+    Agents.Foo
   );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.replaceTelephonyTransferTargets,
-    Agents
+    Agents.Foo
   );
-  @@clientLocation(Azure.AI.Projects.Agents.generateAgent, Agents);
-
-  interface AgentTelephony {}
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.createTelephonyCallJob,
-    AgentTelephony
+    Agents.Foo
   );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.getTelephonyCallJob,
-    AgentTelephony
+    Agents.Foo
   );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.cancelTelephonyCallJob,
-    AgentTelephony
+    Agents.Foo
   );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.createTelephonyCampaign,
-    AgentTelephony
+    Agents.Foo
   );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.getTelephonyCampaign,
-    AgentTelephony
+    Agents.Foo
   );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.importTelephonyCampaignRecipients,
-    AgentTelephony
+    Agents.Foo
   );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.getTelephonyCampaignRecipientImport,
-    AgentTelephony
+    Agents.Foo
   );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.validateTelephonyCampaign,
-    AgentTelephony
+    Agents.Foo
   );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.publishTelephonyCampaign,
-    AgentTelephony
+    Agents.Foo
   );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.pauseTelephonyCampaign,
-    AgentTelephony
+    Agents.Foo
   );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.resumeTelephonyCampaign,
-    AgentTelephony
+    Agents.Foo
   );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.cancelTelephonyCampaign,
-    AgentTelephony
+    Agents.Foo
   );
   @@clientLocation(
     Azure.AI.Projects.AgentTelephony.getTelephonyOperation,
-    AgentTelephony
+    Agents.Foo
   );
 
   interface VoiceAgentWebSocket {}
