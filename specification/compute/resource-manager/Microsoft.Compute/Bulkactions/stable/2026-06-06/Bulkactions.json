@@ -141,7 +141,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkDeallocate": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkDeallocate",
-        "description": "Deallocates one or more virtual machines. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status.",
+        "description": "Deallocate one or more virtual machines. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -197,7 +197,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkDelete": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkDelete",
-        "description": "Deletes one or more virtual machines. This operation is destructive. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status.",
+        "description": "Delete one or more virtual machines. This operation is destructive. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -253,7 +253,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkGetOperationStatus": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkGetOperationsStatus",
-        "description": "Gets the current status of operations identified by their Bulk Action Operation Ids.",
+        "description": "Get the current status of one or more operations identified by their Bulk Action Operation Ids.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -309,7 +309,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkHibernate": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkHibernate",
-        "description": "Hibernates one or more virtual machines that support hibernation. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status.",
+        "description": "Hibernate one or more virtual machines that support hibernation. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -365,7 +365,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkStart": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkStart",
-        "description": "Starts one or more virtual machines. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status.",
+        "description": "Start one or more virtual machines. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -543,7 +543,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Do not specify this property together with `resourcesWithContext`."
+          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
         }
       },
       "required": [
@@ -561,7 +561,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Do not specify this property together with `resourcesWithContext`."
+          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
         },
         "forceDeletion": {
           "type": "boolean",
@@ -583,7 +583,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Do not specify this property together with `resourcesWithContext`."
+          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
         }
       },
       "required": [
@@ -601,7 +601,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Do not specify this property together with `resourcesWithContext`."
+          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
         }
       },
       "required": [
@@ -621,7 +621,7 @@
     },
     "FallbackOperationInfo": {
       "type": "object",
-      "description": "Information about an additional operation attempted after the requested operation did not succeed.",
+      "description": "Information about the fallback operation attempted after the requested operation did not succeed.",
       "properties": {
         "lastOpType": {
           "$ref": "#/definitions/ResourceOperationType",
@@ -720,19 +720,19 @@
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The Azure resource ID of the virtual machine."
+          "description": "The virtual machine Azure resource ID."
         },
         "errorCode": {
           "type": "string",
-          "description": "A code that identifies the error for the virtual machine."
+          "description": "A code that identifies the error for the virtual machine operation."
         },
         "errorDetails": {
           "type": "string",
-          "description": "A message that describes the error for the virtual machine."
+          "description": "A message that describes the error for the virtual machine operation."
         },
         "operation": {
           "$ref": "#/definitions/ResourceOperationDetails",
-          "description": "The status and settings for the operation on the virtual machine."
+          "description": "The virtual machine operation details."
         }
       }
     },
@@ -747,7 +747,7 @@
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The Azure resource ID of the virtual machine."
+          "description": "The virtual machine's Azure resource ID."
         },
         "opType": {
           "type": "string",
@@ -809,7 +809,7 @@
         },
         "deadlineType": {
           "type": "string",
-          "description": "The behavior associated with the operation deadline.",
+          "description": "Specifies whether the deadline time indicates the time at which the operation should start or should be complete.",
           "default": "Unknown",
           "enum": [
             "Unknown",
@@ -895,7 +895,7 @@
               {
                 "name": "Cancelled",
                 "value": "Cancelled",
-                "description": "The operation was canceled by the customer."
+                "description": "The operation was canceled by the caller."
               },
               {
                 "name": "Blocked",
@@ -912,11 +912,11 @@
         },
         "resourceOperationError": {
           "$ref": "#/definitions/ResourceOperationError",
-          "description": "The error returned for the virtual machine, if the operation did not succeed."
+          "description": "Contains error details if the operation does not succeed."
         },
         "fallbackOperationInfo": {
           "$ref": "#/definitions/FallbackOperationInfo",
-          "description": "Information about an additional operation attempted after the requested operation did not succeed."
+          "description": "Information about the fallback operation attempted after the requested operation did not succeed."
         },
         "completedAt": {
           "type": "string",

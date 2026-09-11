@@ -85,7 +85,7 @@ union OperationState {
   @doc("The operation failed.")
   Failed: "Failed",
 
-  @doc("The operation was canceled by the customer.")
+  @doc("The operation was canceled by the caller.")
   Cancelled: "Cancelled",
 
   @doc("The operation cannot currently make progress.")
@@ -106,7 +106,7 @@ model Resources {
 }
 
 @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-@doc("A virtual machine and optional customer-provided context for tracking its result.")
+@doc("A virtual machine and optional caller-provided context string to include with the operation result notification.")
 model ResourceWithContext {
   @doc("The Azure resource ID of the target virtual machine.")
   resourceId: armResourceIdentifier<[
@@ -115,22 +115,22 @@ model ResourceWithContext {
     }
   ]>;
 
-  @doc("Opaque customer-provided context returned with the result for this virtual machine. Do not include secrets or personal data.")
+  @doc("Caller-provided context string returned with the virtual machine operation result notification. Do not include secrets or personal data.")
   resourceContext: string;
 }
 
-@doc("The virtual machines targeted by a bulk action, with customer-provided tracking context.")
+@doc("The virtual machines targeted by a bulk action, with caller-provided context strings to include with the operation result notifications.")
 @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
 model ResourcesWithContext {
   @identifiers(#["resourceId"])
-  @doc("The target virtual machines and their customer-provided tracking context.")
+  @doc("The target virtual machines and their caller-provided context strings.")
   resources: Array<ResourceWithContext>;
 }
 
 @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-@doc("Customer-provided context associated with a virtual machine result.")
+@doc("Caller-provided context associated with a virtual machine operation.")
 model ResourceNotificationDetails {
-  @doc("Opaque customer-provided context returned with the virtual machine result.")
+  @doc("Caller-provided context string returned with the virtual machine operation result notification. Do not include secrets or personal data.")
   resourceContext?: string;
 }
 
@@ -449,7 +449,7 @@ model VmAllocationInfo {
   zone?: string;
 }
 
-@doc("Information about an additional operation attempted after the requested operation did not succeed.")
+@doc("Information about the fallback operation attempted after the requested operation did not succeed.")
 model FallbackOperationInfo {
   @doc("The type of the additional operation.")
   lastOpType: ResourceOperationType;
@@ -466,7 +466,7 @@ model ResourceOperationDetails {
   @doc("The operation ID used to track the action for this virtual machine.")
   operationId: string;
 
-  @doc("The Azure resource ID of the virtual machine.")
+  @doc("The virtual machine's Azure resource ID.")
   resourceId?: armResourceIdentifier;
 
   @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
@@ -487,11 +487,11 @@ model ResourceOperationDetails {
 
   @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @renamedFrom(Microsoft.Compute.Versions.`2026-09-06-preview`, "deadlineType")
-  @doc("The behavior associated with the operation deadline.")
+  @doc("Specifies whether the deadline time indicates the time at which the operation should start or should be complete.")
   deadlineTypeWithDefault?: DeadlineType = DeadlineType.Unknown;
 
   @added(Microsoft.Compute.Versions.`2026-09-06-preview`)
-  @doc("The behavior associated with the operation deadline.")
+  @doc("Specifies whether the deadline time indicates the time at which the operation should start or should be complete.")
   deadlineType?: DeadlineType;
 
   @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
@@ -506,10 +506,10 @@ model ResourceOperationDetails {
   @doc("The time zone used to interpret the operation deadline.")
   timezone?: string;
 
-  @doc("The error returned for the virtual machine, if the operation did not succeed.")
+  @doc("Contains error details if the operation does not succeed.")
   resourceOperationError?: ResourceOperationError;
 
-  @doc("Information about an additional operation attempted after the requested operation did not succeed.")
+  @doc("Information about the fallback operation attempted after the requested operation did not succeed.")
   fallbackOperationInfo?: FallbackOperationInfo;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
@@ -520,7 +520,7 @@ model ResourceOperationDetails {
   retryPolicy?: RetryPolicy;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The customer-provided context associated with the virtual machine result.")
+  @doc("Caller-provided context associated with the virtual machine operation.")
   resourceNotificationDetails?: ResourceNotificationDetails;
 
   @added(Microsoft.Compute.Versions.`2026-08-06-preview`)
@@ -621,20 +621,20 @@ model VirtualMachineInfo {
 
 @doc("The result of a bulk action for one virtual machine.")
 model ResourceOperation {
-  @doc("The Azure resource ID of the virtual machine.")
+  @doc("The virtual machine Azure resource ID.")
   resourceId?: armResourceIdentifier;
 
-  @doc("A code that identifies the error for the virtual machine.")
+  @doc("A code that identifies the error for the virtual machine operation.")
   errorCode?: string;
 
-  @doc("A message that describes the error for the virtual machine.")
+  @doc("A message that describes the error for the virtual machine operation.")
   errorDetails?: string;
 
-  @doc("The status and settings for the operation on the virtual machine.")
+  @doc("The virtual machine operation details.")
   operation?: ResourceOperationDetails;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("Information about the virtual machine selected for the operation.")
+  @doc("Details of the virtual machine on which the operation is performed.")
   virtualMachineInfo?: VirtualMachineInfo;
 }
 
@@ -743,12 +743,12 @@ model ExecuteDeallocateRequest {
   @doc("The execution settings for the bulk action.")
   executionParameters: ExecutionParameters;
 
-  @doc("The target virtual machines. Do not specify this property together with `resourcesWithContext`.")
+  @doc("The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The target virtual machines with customer-provided tracking context. Do not specify this property together with `resources`.")
+  @doc("The target virtual machines with caller-provided context strings to include with the operation result notifications.")
   resourcesWithContext?: ResourcesWithContext;
 }
 
@@ -757,12 +757,12 @@ model ExecuteHibernateRequest {
   @doc("The execution settings for the bulk action.")
   executionParameters: ExecutionParameters;
 
-  @doc("The target virtual machines. Do not specify this property together with `resourcesWithContext`.")
+  @doc("The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The target virtual machines with customer-provided tracking context. Do not specify this property together with `resources`.")
+  @doc("The target virtual machines with caller-provided context strings to include with the operation result notifications.")
   resourcesWithContext?: ResourcesWithContext;
 }
 
@@ -771,12 +771,12 @@ model ExecuteStartRequest {
   @doc("The execution settings for the bulk action.")
   executionParameters: ExecutionParameters;
 
-  @doc("The target virtual machines. Do not specify this property together with `resourcesWithContext`.")
+  @doc("The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The target virtual machines with customer-provided tracking context. Do not specify this property together with `resources`.")
+  @doc("The target virtual machines with caller-provided context strings to include with the operation result notifications.")
   resourcesWithContext?: ResourcesWithContext;
 }
 
@@ -826,12 +826,12 @@ model ExecuteReimageRequest {
   @doc("The execution settings for the bulk action.")
   executionParameters: ExecutionParameters;
 
-  @doc("The target virtual machines. Do not specify this property together with `resourcesWithContext`.")
+  @doc("The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The target virtual machines with customer-provided tracking context. Do not specify this property together with `resources`.")
+  @doc("The target virtual machines with caller-provided context strings to include with the operation result notifications.")
   resourcesWithContext?: ResourcesWithContext;
 
   @doc("The shared and per-virtual-machine reimage configuration.")
@@ -894,12 +894,12 @@ model ExecuteDeleteRequest {
   @doc("The execution settings for the bulk action.")
   executionParameters: ExecutionParameters;
 
-  @doc("The target virtual machines. Do not specify this property together with `resourcesWithContext`.")
+  @doc("The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The target virtual machines with customer-provided tracking context. Do not specify this property together with `resources`.")
+  @doc("The target virtual machines with caller-provided tracking context. Do not specify this property together with `resources`.")
   resourcesWithContext?: ResourcesWithContext;
 
   @doc("Indicates whether Bulk Actions uses forced deletion for the target virtual machines.")

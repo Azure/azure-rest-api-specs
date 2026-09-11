@@ -103,7 +103,7 @@ alias LocationParameter = {
 @armResourceOperations(#{ omitTags: true })
 interface VirtualMachineBulkOperations {
   // -------------- Routes -------------
-  /** Deallocates one or more virtual machines. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status. */
+  /** Deallocate one or more virtual machines. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates. */
   @post
   @autoRoute
   @armResourceCollectionAction
@@ -118,7 +118,7 @@ interface VirtualMachineBulkOperations {
     @body
     body: ExecuteDeallocateRequest,
   ): ArmResponse<DeallocateResourceOperationResponse> | ErrorResponse;
-  /** Hibernates one or more virtual machines that support hibernation. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status. */
+  /** Hibernate one or more virtual machines that support hibernation. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates. */
   @post
   @autoRoute
   @armResourceCollectionAction
@@ -134,7 +134,7 @@ interface VirtualMachineBulkOperations {
     body: ExecuteHibernateRequest,
   ): ArmResponse<HibernateResourceOperationResponse> | ErrorResponse;
 
-  /** Starts one or more virtual machines. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status. */
+  /** Start one or more virtual machines. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates. */
   @post
   @autoRoute
   @armResourceCollectionAction
@@ -150,7 +150,7 @@ interface VirtualMachineBulkOperations {
     body: ExecuteStartRequest,
   ): ArmResponse<StartResourceOperationResponse> | ErrorResponse;
 
-  /** Creates one or more virtual machines from a common configuration and optional per-virtual-machine overrides. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status. */
+  /** Create one or more virtual machines from a common configuration and optional per-virtual-machine overrides. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates. */
   @removed(Versions.`2026-06-06`)
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
   @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
@@ -169,7 +169,7 @@ interface VirtualMachineBulkOperations {
     body: ExecuteCreateRequest,
   ): ArmResponse<CreateResourceOperationResponse> | ErrorResponse;
 
-  /** Creates one or more virtual machines for a virtual desktop infrastructure workload by using flexible SKU and availability zone preferences. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status. */
+  /** Create one or more virtual machines for a virtual desktop infrastructure workload by using flexible SKU and availability zone preferences. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates. */
   @removed(Versions.`2026-06-06`)
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
   @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
@@ -188,7 +188,7 @@ interface VirtualMachineBulkOperations {
     body: ExecuteVdiCreateRequest,
   ): ArmResponse<CreateResourceOperationResponse> | ErrorResponse;
 
-  /** Deletes one or more virtual machines. This operation is destructive. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status. */
+  /** Delete one or more virtual machines. This operation is destructive. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates. */
   @post
   @autoRoute
   @armResourceCollectionAction
@@ -204,7 +204,7 @@ interface VirtualMachineBulkOperations {
     body: ExecuteDeleteRequest,
   ): ArmResponse<DeleteResourceOperationResponse> | ErrorResponse;
 
-  /** Gets the current status of operations identified by their Bulk Action Operation Ids. */
+  /** Get the current status of one or more operations identified by their Bulk Action Operation Ids. */
   @post
   @autoRoute
   @armResourceCollectionAction
@@ -236,7 +236,7 @@ interface VirtualMachineBulkOperations {
     body: CancelOperationsRequest,
   ): ArmResponse<CancelOperationsResponse> | ErrorResponse;
 
-  /** Reimages one or more virtual machines. Reimaging is destructive and can replace operating system disk contents. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status. */
+  /** Reimage one or more virtual machines. Reimaging is destructive and can replace operating system disk contents. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates. */
   @removed(Versions.`2026-06-06`)
   @added(Versions.`2026-07-06-preview`)
   @post
@@ -254,7 +254,7 @@ interface VirtualMachineBulkOperations {
     body: ExecuteReimageRequest,
   ): ArmResponse<ReimageResourceOperationResponse> | ErrorResponse;
 
-  /** Lists recent errors for operations in a resource group. */
+  /** List recent errors for operations in a resource group. */
   @added(Versions.`2026-07-06-preview`)
   @removed(Versions.`2026-09-06-preview`)
   @get
@@ -272,7 +272,7 @@ interface VirtualMachineBulkOperations {
     lookbackInMinutes?: int32,
   ): ArmResponse<ListBulkOperationErrorsResponse> | ErrorResponse;
 
-  /** Acknowledges errors for specified operations in a resource group. */
+  /** Acknowledge errors for specified operations in a resource group. */
   @added(Versions.`2026-07-06-preview`)
   @removed(Versions.`2026-09-06-preview`)
   @post

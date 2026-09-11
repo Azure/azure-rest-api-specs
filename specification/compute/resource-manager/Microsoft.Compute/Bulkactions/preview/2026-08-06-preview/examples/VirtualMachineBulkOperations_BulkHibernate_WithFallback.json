@@ -1,5 +1,5 @@
 {
-  "title": "Hibernate virtual machines with a deallocation fallback",
+  "title": "Hibernate virtual machines and fallback to deallocation if hibernate is not successful",
   "operationId": "VirtualMachineBulkOperations_BulkHibernate",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -14,16 +14,10 @@
           "onFailureAction": "Deallocate"
         }
       },
-      "resourcesWithContext": {
-        "resources": [
-          {
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
-            "resourceContext": "maintenance-window-01"
-          },
-          {
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
-            "resourceContext": "maintenance-window-01"
-          }
+      "resources": {
+        "ids": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02"
         ]
       }
     }
@@ -50,9 +44,6 @@
                 "retryCount": 2,
                 "retryWindowInMinutes": 30,
                 "onFailureAction": "Deallocate"
-              },
-              "resourceNotificationDetails": {
-                "resourceContext": "maintenance-window-01"
               }
             }
           },
@@ -71,9 +62,6 @@
                 "retryCount": 2,
                 "retryWindowInMinutes": 30,
                 "onFailureAction": "Deallocate"
-              },
-              "resourceNotificationDetails": {
-                "resourceContext": "maintenance-window-01"
               }
             }
           }

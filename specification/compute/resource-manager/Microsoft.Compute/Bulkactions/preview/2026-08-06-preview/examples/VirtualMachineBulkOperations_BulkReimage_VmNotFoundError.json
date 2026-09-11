@@ -1,8 +1,8 @@
 {
-  "title": "Response with a resource group mismatch error during reimage",
+  "title": "Response when a virtual machine does not exist",
   "operationId": "VirtualMachineBulkOperations_BulkReimage",
   "parameters": {
-    "api-version": "2026-09-06-preview",
+    "api-version": "2026-08-06-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "example-rg",
     "location": "eastus",
@@ -11,7 +11,7 @@
       "resources": {
         "ids": [
           "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
-          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/other-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02"
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/missing-vm"
         ]
       }
     }
@@ -33,9 +33,8 @@
             }
           },
           {
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/other-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
-            "errorCode": "InvalidResourceGroupInResource",
-            "errorDetails": "Resource with armId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/other-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02 does not belong to the request resource group example-rg"
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/missing-vm",
+            "errorCode": "VmNotFound"
           }
         ]
       }
