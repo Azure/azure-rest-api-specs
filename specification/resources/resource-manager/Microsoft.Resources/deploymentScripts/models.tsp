@@ -14,6 +14,7 @@ namespace DeploymentScriptsClient;
  */
 union ManagedServiceIdentityType {
   string,
+
   /**
    * User assigned identity.
    */
@@ -25,6 +26,7 @@ union ManagedServiceIdentityType {
  */
 union ScriptType {
   string,
+
   /**
    * Azure PowerShell script.
    */
