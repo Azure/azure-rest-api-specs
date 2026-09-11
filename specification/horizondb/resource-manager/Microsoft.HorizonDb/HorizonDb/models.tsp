@@ -22,6 +22,35 @@ scalar LegacyClusterName extends string;
 @maxLength(63)
 scalar ClusterName extends string;
 
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The Cluster identity contract intentionally permits only None and UserAssigned so unsupported system-assigned identity values are rejected by the API schema."
+@doc("The managed identity types supported by a HorizonDB cluster.")
+union HorizonDbClusterIdentityType {
+  @doc("No managed identity is assigned.")
+  None: "None",
+
+  @doc("User-assigned managed identities are assigned.")
+  UserAssigned: "UserAssigned",
+}
+
+@doc("The user-assigned managed identities assigned to a HorizonDB cluster. PUT and PATCH can assign or remove identities. Omitting the top-level identity property from PATCH preserves all current assignments. Removing an identity referenced by a change data capture identity assignment is rejected until the referencing assignment is deleted.")
+model HorizonDbClusterManagedServiceIdentity {
+  @doc("The managed identity type assigned to the cluster.")
+  type: HorizonDbClusterIdentityType;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The standard Azure Resource Manager identity envelope represents user-assigned identities as a resource-ID-keyed dictionary."
+  @doc("The user-assigned managed identities associated with the cluster. Each dictionary key must be the full Azure resource ID of a Microsoft.ManagedIdentity/userAssignedIdentities resource. Request values can be empty objects; response values contain the service-populated clientId and principalId. Assigning an identity does not grant it access to destination resources; required role assignments must be configured separately.")
+  userAssignedIdentities?: Record<
+    | Azure.ResourceManager.CommonTypes.UserAssignedIdentity
+    | null>;
+}
+
+@doc("The user-assigned managed identity envelope for a HorizonDB cluster.")
+model HorizonDbClusterManagedServiceIdentityProperty {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The standard managed identity envelope also permits system-assigned identity values, which HorizonDB clusters do not support."
+  @doc("The managed service identities assigned to this resource.")
+  identity?: HorizonDbClusterManagedServiceIdentity;
+}
+
 @renamedFrom(Versions.v2026_10_01_preview, "HorizonDbCluster")
 @doc("Represents the HorizonDB cluster.")
 model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
@@ -32,7 +61,7 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
   @typeChangedFrom(Versions.v2026_10_01_preview, LegacyClusterName)
   name: ClusterName;
 
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...HorizonDbClusterManagedServiceIdentityProperty;
 }
 
 @doc("A HorizonDB pool name used before allowing one-character names.")
@@ -590,7 +619,7 @@ model ClusterPropertiesForPatchUpdate {
 @doc("HorizonDB cluster for update operations.")
 model ClusterForPatchUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...HorizonDbClusterManagedServiceIdentityProperty;
 
   @doc("The properties that can be updated for a HorizonDB cluster.")
   properties?: ClusterPropertiesForPatchUpdate;
@@ -598,6 +627,16 @@ model ClusterForPatchUpdate {
 
 @@added(Cluster.identity, Versions.v2026_05_01_preview);
 @@added(ClusterForPatchUpdate.identity, Versions.v2026_05_01_preview);
+@@typeChangedFrom(
+  Cluster.identity,
+  Versions.v2026_10_01_preview,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity
+);
+@@typeChangedFrom(
+  ClusterForPatchUpdate.identity,
+  Versions.v2026_10_01_preview,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity
+);
 
 @renamedFrom(Versions.v2026_10_01_preview, "HorizonDbPoolProperties")
 @doc("Properties of a HorizonDB pool.")

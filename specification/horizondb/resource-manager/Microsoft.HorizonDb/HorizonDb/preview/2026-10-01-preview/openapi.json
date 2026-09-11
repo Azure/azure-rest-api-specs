@@ -2407,7 +2407,7 @@
         "tags": [
           "IdentityAssignments"
         ],
-        "description": "Creates or idempotently replaces a change data capture identity assignment. The identity resource ID is immutable.",
+        "description": "Creates or idempotently replaces a change data capture identity assignment. The identity resource ID is immutable and must reference a user-assigned managed identity already attached to the parent cluster. The service also validates destination permissions, which are not granted by attaching the identity to the cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2501,7 +2501,7 @@
           }
         },
         "x-ms-examples": {
-          "Create a change data capture identity assignment": {
+          "Create a change data capture identity assignment for a UAMI attached to the parent cluster": {
             "$ref": "./examples/IdentityAssignments_CreateOrUpdate.json"
           }
         },
@@ -6744,7 +6744,7 @@
       "properties": {
         "identityResourceId": {
           "$ref": "#/definitions/ChangeDataCaptureUserAssignedIdentityResourceId",
-          "description": "The immutable resource ID of the user-assigned managed identity. Resubmitting the same value is accepted; changing it requires deleting and recreating the assignment.",
+          "description": "The immutable resource ID of the user-assigned managed identity selected for this destination. The ID must exactly match a key in the parent cluster's top-level identity.userAssignedIdentities dictionary; otherwise creation is rejected. Attaching the identity to the cluster does not grant destination access, so required role assignments must be configured separately. Resubmitting the same value is accepted; changing it requires deleting and recreating the assignment.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -7179,7 +7179,7 @@
     "ChangeDataCaptureUserAssignedIdentityResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "An Azure resource ID that identifies a user-assigned managed identity.",
+      "description": "An Azure resource ID that identifies a user-assigned managed identity. The ID must exactly match a key in the parent cluster's top-level identity.userAssignedIdentities dictionary before it can be used by a change data capture identity assignment.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -7197,7 +7197,7 @@
           "description": "The resource-specific properties for this resource."
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/HorizonDbClusterManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -7295,7 +7295,7 @@
           }
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/HorizonDbClusterManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "properties": {
@@ -7974,6 +7974,51 @@
           }
         ]
       }
+    },
+    "HorizonDbClusterIdentityType": {
+      "type": "string",
+      "description": "The managed identity types supported by a HorizonDB cluster.",
+      "enum": [
+        "None",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "HorizonDbClusterIdentityType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity is assigned."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User-assigned managed identities are assigned."
+          }
+        ]
+      }
+    },
+    "HorizonDbClusterManagedServiceIdentity": {
+      "type": "object",
+      "description": "The user-assigned managed identities assigned to a HorizonDB cluster. PUT and PATCH can assign or remove identities. Omitting the top-level identity property from PATCH preserves all current assignments. Removing an identity referenced by a change data capture identity assignment is rejected until the referencing assignment is deleted.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/HorizonDbClusterIdentityType",
+          "description": "The managed identity type assigned to the cluster."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The user-assigned managed identities associated with the cluster. Each dictionary key must be the full Azure resource ID of a Microsoft.ManagedIdentity/userAssignedIdentities resource. Request values can be empty objects; response values contain the service-populated clientId and principalId. Assigning an identity does not grant it access to destination resources; required role assignments must be configured separately.",
+          "additionalProperties": {
+            "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
     },
     "HorizonDbClusterResourceId": {
       "type": "string",

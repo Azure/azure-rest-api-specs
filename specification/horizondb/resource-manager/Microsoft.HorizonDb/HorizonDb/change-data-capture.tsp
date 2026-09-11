@@ -45,7 +45,7 @@ scalar ChangeDataCaptureConfigurationResourceId
   ]>;
 
 @added(Versions.v2026_10_01_preview)
-@doc("An Azure resource ID that identifies a user-assigned managed identity.")
+@doc("An Azure resource ID that identifies a user-assigned managed identity. The ID must exactly match a key in the parent cluster's top-level identity.userAssignedIdentities dictionary before it can be used by a change data capture identity assignment.")
 scalar ChangeDataCaptureUserAssignedIdentityResourceId
   extends armResourceIdentifier<[
     {
@@ -614,7 +614,7 @@ model ChangeDataCaptureDestinationForPatchUpdate {
 @added(Versions.v2026_10_01_preview)
 @doc("The properties of a change data capture identity assignment.")
 model ChangeDataCaptureIdentityAssignmentProperties {
-  @doc("The immutable resource ID of the user-assigned managed identity. Resubmitting the same value is accepted; changing it requires deleting and recreating the assignment.")
+  @doc("The immutable resource ID of the user-assigned managed identity selected for this destination. The ID must exactly match a key in the parent cluster's top-level identity.userAssignedIdentities dictionary; otherwise creation is rejected. Attaching the identity to the cluster does not grant destination access, so required role assignments must be configured separately. Resubmitting the same value is accepted; changing it requires deleting and recreating the assignment.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   identityResourceId: ChangeDataCaptureUserAssignedIdentityResourceId;
 
@@ -839,7 +839,7 @@ interface IdentityAssignments {
   @doc("Gets a change data capture identity assignment.")
   get is ArmResourceRead<IdentityAssignment>;
 
-  @doc("Creates or idempotently replaces a change data capture identity assignment. The identity resource ID is immutable.")
+  @doc("Creates or idempotently replaces a change data capture identity assignment. The identity resource ID is immutable and must reference a user-assigned managed identity already attached to the parent cluster. The service also validates destination permissions, which are not granted by attaching the identity to the cluster.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     IdentityAssignment,
     LroHeaders = HorizonDbResourceLroHeaders<IdentityAssignment>,
