@@ -40502,11 +40502,11 @@
           }
         ]
       },
-      "DiagnosticJobEvaluatorGenerationJobSource": {
+      "DiagnosticEvaluatorGenerationJobSource": {
         "type": "object",
         "required": [
           "type",
-          "job_id"
+          "diagnostic_id"
         ],
         "properties": {
           "description": {
@@ -40516,16 +40516,16 @@
           "type": {
             "type": "string",
             "enum": [
-              "diagnostic_job"
+              "diagnostic"
             ],
-            "description": "The source type for this source, which is Diagnostic Job."
+            "description": "The source type for this source, which is Diagnostic."
           },
-          "job_id": {
+          "diagnostic_id": {
             "type": "string",
             "minLength": 1,
-            "description": "The non-empty identifier of a succeeded evaluator diagnostic job for the same evaluator and workspace.",
+            "description": "The non-empty identifier of an immutable completed evaluator diagnostic for the same evaluator and workspace.",
             "examples": [
-              "evaldiagjob_0123456789abcdef0123456789abcdef"
+              "evaldiag_0123456789abcdef0123456789abcdef"
             ]
           }
         },
@@ -40534,7 +40534,7 @@
             "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
           }
         ],
-        "description": "Diagnostic job source for evaluator generation jobs. The referenced job must have succeeded for the same evaluator and workspace. The service resolves its immutable completed diagnostic and uses that bounded diagnostic payload as regeneration evidence. Missing, non-terminal, failed, cancelled, result-less, or cross-evaluator jobs are rejected. Private diagnostic request data and human-annotation content are not exposed through this source.",
+        "description": "Diagnostic source for evaluator generation jobs. The referenced immutable completed diagnostic must belong to the same evaluator and workspace and must be a human-evaluator agreement or rubric-comparison diagnostic produced by a diagnostic job. Private diagnostic request data and human-annotation content are not exposed through this source.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Evaluations=V1Preview"
@@ -43217,7 +43217,7 @@
             "items": {
               "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
             },
-            "description": "Source materials for generation — agent descriptions, prompts, traces, datasets, or succeeded evaluator diagnostic jobs. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`."
+            "description": "Source materials for generation — agent descriptions, prompts, traces, datasets, or immutable completed evaluator diagnostics. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`."
           },
           "model": {
             "type": "string",
@@ -43327,7 +43327,7 @@
             "agent": "#/components/schemas/AgentEvaluatorGenerationJobSource",
             "traces": "#/components/schemas/TracesEvaluatorGenerationJobSource",
             "dataset": "#/components/schemas/DatasetEvaluatorGenerationJobSource",
-            "diagnostic_job": "#/components/schemas/DiagnosticJobEvaluatorGenerationJobSource"
+            "diagnostic": "#/components/schemas/DiagnosticEvaluatorGenerationJobSource"
           }
         },
         "description": "The base source model for evaluator generation jobs. Polymorphic over `type`.",
@@ -43349,7 +43349,7 @@
               "agent",
               "traces",
               "dataset",
-              "diagnostic_job"
+              "diagnostic"
             ]
           }
         ],

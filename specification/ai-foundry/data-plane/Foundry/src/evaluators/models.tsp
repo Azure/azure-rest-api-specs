@@ -707,8 +707,8 @@ union EvaluatorGenerationJobSourceType {
   @doc("Dataset source — reference to a dataset.")
   dataset: "dataset",
 
-  @doc("Diagnostic job source — references a succeeded evaluator diagnostic job whose immutable completed diagnostic is used as regeneration evidence.")
-  diagnostic_job: "diagnostic_job",
+  @doc("Diagnostic source — references an immutable completed evaluator diagnostic used as regeneration evidence.")
+  diagnostic: "diagnostic",
 }
 
 @doc("The base source model for evaluator generation jobs. Polymorphic over `type`.")
@@ -747,19 +747,19 @@ model DatasetEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...DatasetJobSource;
 }
 
-@doc("Diagnostic job source for evaluator generation jobs. The referenced job must have succeeded for the same evaluator and workspace. The service resolves its immutable completed diagnostic and uses that bounded diagnostic payload as regeneration evidence. Missing, non-terminal, failed, cancelled, result-less, or cross-evaluator jobs are rejected. Private diagnostic request data and human-annotation content are not exposed through this source.")
+@doc("Diagnostic source for evaluator generation jobs. The referenced immutable completed diagnostic must belong to the same evaluator and workspace and must be a human-evaluator agreement or rubric-comparison diagnostic produced by a diagnostic job. Private diagnostic request data and human-annotation content are not exposed through this source.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model DiagnosticJobEvaluatorGenerationJobSource
+model DiagnosticEvaluatorGenerationJobSource
   extends EvaluatorGenerationJobSource {
   ...JobSourceDescription;
 
-  @doc("The source type for this source, which is Diagnostic Job.")
-  type: EvaluatorGenerationJobSourceType.diagnostic_job;
+  @doc("The source type for this source, which is Diagnostic.")
+  type: EvaluatorGenerationJobSourceType.diagnostic;
 
-  @doc("The non-empty identifier of a succeeded evaluator diagnostic job for the same evaluator and workspace.")
+  @doc("The non-empty identifier of an immutable completed evaluator diagnostic for the same evaluator and workspace.")
   @minLength(1)
-  @example("evaldiagjob_0123456789abcdef0123456789abcdef")
-  job_id: string;
+  @example("evaldiag_0123456789abcdef0123456789abcdef")
+  diagnostic_id: string;
 }
 
 // ============================================================================
@@ -769,7 +769,7 @@ model DiagnosticJobEvaluatorGenerationJobSource
 @doc("Caller-supplied inputs for an evaluator generation job.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationInputs {
-  @doc("Source materials for generation — agent descriptions, prompts, traces, datasets, or succeeded evaluator diagnostic jobs. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.")
+  @doc("Source materials for generation — agent descriptions, prompts, traces, datasets, or immutable completed evaluator diagnostics. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.")
   sources: EvaluatorGenerationJobSource[];
 
   @doc("The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity.")
