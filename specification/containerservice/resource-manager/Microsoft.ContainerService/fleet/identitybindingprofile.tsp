@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ContainerService;
 
-@doc("An identity binding profile binds a user-assigned managed identity across the fleet members selected by its member selector.")
+@doc("A fleet identity binding profile.")
 @added(Versions.v2026_11_02_preview)
 @resource("identityBindingProfiles")
 @parentResource(Fleet)
