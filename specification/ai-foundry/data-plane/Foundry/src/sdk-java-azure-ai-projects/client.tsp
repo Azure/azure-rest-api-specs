@@ -1,6 +1,7 @@
 import "../common/service.tsp";
 import "../sdk-common/error.default.tsp";
 
+import "../agent-insights/routes.tsp";
 import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
 import "../indexes/routes.tsp";
@@ -17,6 +18,7 @@ import "../routines/routes.tsp";
 import "../skills/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
 
+import "../sdk-common/ops-relocation-agent-insights.tsp";
 import "../sdk-common/ops-relocation-projects.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -128,6 +130,21 @@ namespace Azure.AI.Projects;
 //Routines
 @@clientName(Routines.dispatchRoutineAsync, "dispatchRoutine");
 
+//Agent insights
+@@clientName(AgentInsightMonitors.list, "listAgentInsightMonitors");
+@@clientName(AgentInsightMonitors.create, "createAgentInsightMonitor");
+@@clientName(AgentInsightMonitors.update, "updateAgentInsightMonitor");
+@@clientName(AgentInsightMonitors.delete, "deleteAgentInsightMonitor");
+@@clientName(AgentInsightMonitors.get, "getAgentInsightMonitor");
+@@clientName(AgentInsightMonitors.reset, "resetAgentInsightMonitor");
+@@clientName(AgentInsightMonitors.createRun, "createAgentInsightRun");
+@@clientName(AgentInsightMonitors.listRuns, "listAgentInsightRuns");
+@@clientName(AgentInsightMonitors.getRun, "getAgentInsightRun");
+@@clientName(AgentInsightMonitors.cancelRun, "cancelAgentInsightRun");
+@@clientName(AgentInsightMonitors.listInsights, "listAgentInsights");
+@@clientName(AgentInsightMonitors.getInsight, "getAgentInsight");
+@@clientName(AgentInsightMonitors.updateInsight, "updateAgentInsight");
+
 // --------------------------------------------------------------------------------
 // Renames - models
 // --------------------------------------------------------------------------------
@@ -188,6 +205,8 @@ namespace Azure.AI.Projects;
 
 @@clientName(AttackStrategy.Base64, "Base_64");
 @@clientName(AttackStrategy.ROT13, "ROT_13");
+
+@@clientName(AgentInsightHighlightedTrace.duration_ms, "Duration");
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
@@ -334,6 +353,8 @@ model TimeZoneType {}
 @@alternateType(RecurrenceTrigger.timeZone, TimeZoneType, "java");
 
 @@alternateType(RoutineRunStatus, string, "java");
+
+@@alternateType(AgentInsightHighlightedTrace.total_tokens, int64, "java");
 
 // --------------------------------------------------------------------------------
 // Relocate EvaluatorGenerationJobs, EvaluationSuites, and
