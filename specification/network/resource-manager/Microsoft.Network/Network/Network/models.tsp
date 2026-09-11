@@ -26300,7 +26300,7 @@ model ListConnectionPoliciesResult is Azure.Core.Page<ConnectionPolicy>;
 /**
  * Tier of a web application firewall policy.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating so this type is emitted into the applicationGateway output file, consistent with other Application Gateway enums in this project"
 @Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 @added(Versions.v2026_01_01)
 union WebApplicationFirewallPolicyTier {

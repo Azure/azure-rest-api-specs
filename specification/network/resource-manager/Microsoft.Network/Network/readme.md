@@ -284,9 +284,10 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/moveIpConfigurations"].post
   # --- stable/2026-01-01/authenticationPolicy.json ---
-  # New TypeSpec-generated resource that follows the established Network RP legacy Resource
-  # pattern (the same shared base type used by every existing Network resource). The findings
-  # below are inherent to that shared pattern and are handled consistently with sibling resources.
+  # AuthenticationPolicy is generated from TypeSpec and uses the shared Network RP legacy Resource
+  # envelope (common.json#/definitions/Resource), the same base type used by every other resource
+  # in this package. The findings below are inherent to that shared base or to package-wide
+  # configuration, and are scoped with where: wherever the finding applies to specific nodes.
   - code: ProvisioningStateMustBeReadOnly
     from: authenticationPolicy.json
     reason: >-
@@ -301,22 +302,38 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/authenticationPolicies/{authenticationPolicyName}"].patch.responses["200"].schema
   - code: RequiredPropertiesMissingInResourceModel
     from: authenticationPolicy.json
-    reason: AuthenticationPolicy extends the local Network RP Resource base type (common.json#/definitions/Resource), the established envelope for all Network RP resources. Its id/name/type read-only properties are defined on the shared base and referenced via allOf, consistent with every other Network RP resource.
-  - code: DeleteResponseCodes
-    from: authenticationPolicy.json
-    reason: AuthenticationPolicy DELETE is synchronous and the service returns only 204 with no response body; advertising a 200 response would not match the implemented service contract.
-  - code: DeleteOperationResponses
-    from: authenticationPolicy.json
-    reason: AuthenticationPolicy DELETE is synchronous and the service returns only 204 with no response body; the generic rule's required 200 response is not implemented by the service.
-  - code: LatestVersionOfCommonTypesMustBeUsed
-    from: authenticationPolicy.json
-    reason: AuthenticationPolicy uses the Network RP shared Resource and SubResource definitions from common.json, consistent with all resources in this API package.
-  - code: RequiredReadOnlySystemData
-    from: authenticationPolicy.json
-    reason: Network RP resources in this package intentionally use the legacy shared Resource envelope, which does not expose systemData.
+    reason: >-
+      AuthenticationPolicy extends the local Network RP Resource base type
+      (common.json#/definitions/Resource), the established envelope for all Network RP resources. Its
+      id/name/type read-only properties are defined on the shared base and referenced via allOf,
+      consistent with every other Network RP resource. AuthenticationPolicyListResult is the paged
+      list envelope for that resource, not a resource itself, so id/name/type do not apply to it.
+    where:
+      - $.definitions.AuthenticationPolicy
+      - $.definitions.AuthenticationPolicyListResult
   - code: XMSSecretInResponse
     from: authenticationPolicy.json
-    reason: clientSecret holds a Key Vault secret URL reference (e.g. https://myvault.vault.azure.net/secrets/mysecret), not the secret value itself, so it is safe to return in responses and is not marked x-ms-secret.
+    reason: >-
+      clientSecret does not hold secret material. It carries only an absolute HTTPS Key Vault secret
+      URL (an https-only url in TypeSpec); the secret value itself is never accepted or returned by
+      this API and is read from Key Vault at runtime using the resource's user-assigned identity.
+      The linter flags the property purely because its name ends in a sensitive keyword. Annotating
+      it with x-ms-secret would be incorrect, because that would stop the service returning the Key
+      Vault reference on GET, which callers need in order to see how a policy is configured. The
+      property name matches the contract implemented by the Network resource provider and so cannot
+      be renamed.
+    where:
+      - $.definitions.AuthenticationProviderProperties.properties.clientSecret
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    from: authenticationPolicy.json
+    reason: >-
+      The common-types version is a package-wide setting: arm-types-dir in the Network tspconfig.yaml
+      pins the entire Microsoft.Network TypeSpec project to common-types v5, so every generated file
+      in this package references v5. This suppression is intentionally not scoped with where: because
+      the finding applies to every common-types reference in the file (ApiVersionParameter,
+      SubscriptionIdParameter, ResourceGroupNameParameter and systemData) rather than to any single
+      definition. Moving to v6 has to be done for the whole package and all of its already-published
+      API versions at once, which is out of scope for this resource.
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"

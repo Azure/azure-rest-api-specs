@@ -19,7 +19,7 @@ namespace Microsoft.Network;
 /**
  * Authentication policy resource for identity integration.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for includeInapplicableMetadataInPayload which suppresses systemData in the response payload, consistent with other Network RP resources"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for includeInapplicableMetadataInPayload, which the Network RP legacy Resource envelope relies on; systemData is declared explicitly on this model so it is still emitted, consistent with other Network RP resources such as AdminRuleCollection"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending the local Network RP Resource is the established pattern for tracked resources in this RP"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP resource definitions"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "AuthenticationPolicy uses the local Network RP Resource base type consistent with other Network RP tracked resources (e.g. IpGroup)"
@@ -47,6 +47,10 @@ model AuthenticationPolicy extends Common.Resource {
   /** The user-assigned identity used by a user sign-in policy to access its Key Vault client secret. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "AuthenticationPolicy requires this user-assigned identity in the resource envelope so a user sign-in policy can read its client secret from Key Vault; the property uses the standard ManagedServiceIdentity shape and is an envelope-level credential of the resource rather than a routing/authentication setting, so it cannot move under properties."
   identity?: Common.ManagedServiceIdentity;
+
+  /** The system metadata related to this resource. */
+  @visibility(Lifecycle.Read)
+  systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
 /**
@@ -118,8 +122,7 @@ model AuthenticationProviderProperties {
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   clientId: string;
 
-  /** The absolute HTTPS Key Vault secret URL containing the client secret for authentication. This property is required for user sign-in policies. The secret value retrieved from Key Vault can contain up to 4096 characters. Example: https://myvault.vault.azure.net/secrets/mysecret */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This property holds a Key Vault secret URL reference (not the secret value itself), so it is not sensitive data."
+  /** The absolute HTTPS Key Vault secret URL identifying the client secret used for authentication. This property is required for user sign-in policies. It holds only the Key Vault reference; the secret value itself is never accepted or returned by this API and is read from Key Vault at runtime using the resource's user-assigned identity. The secret value stored in Key Vault can contain up to 4096 characters. Example: https://myvault.vault.azure.net/secrets/mysecret */
   @pattern("^[Hh][Tt][Tt][Pp][Ss]://")
   clientSecret?: url;
 
@@ -209,11 +212,7 @@ interface AuthenticationPolicies {
    * Deletes the specified authentication policy.
    */
   @tag("AuthenticationPolicies")
-  delete is ArmResourceDeleteSync<
-    AuthenticationPolicy,
-    Response = ArmDeletedNoContentResponse,
-    Error = CloudError
-  >;
+  delete is ArmResourceDeleteSync<AuthenticationPolicy, Error = CloudError>;
 
   /**
    * Lists all of the authentication policies within a resource group.

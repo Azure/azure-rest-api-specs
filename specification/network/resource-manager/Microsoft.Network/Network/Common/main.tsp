@@ -109,7 +109,7 @@ enum Features {
   @added(Versions.v2025_09_01)
   firstPartyServiceTag,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  /** Authentication policy resource type for managing identity integration policies. */
   @added(Versions.v2026_01_01)
   authenticationPolicy,
 }
