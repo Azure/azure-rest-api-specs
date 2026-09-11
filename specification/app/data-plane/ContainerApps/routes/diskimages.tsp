@@ -72,7 +72,7 @@ alias GetDiskImageErrors =
   | ErrorResult<404>
   | ErrorResult<500>;
 
-/** OK. */
+/** Created. */
 model PostDiskImageResult {
   /** HTTP response status code. */
   @statusCode statusCode: 201;
