@@ -1267,8 +1267,14 @@ model TelephonyCallJobConfiguration {
   @doc("The phone destination to call.")
   destination: TelephonyOutboundDestination;
 
-  @doc("The active agent telephony binding used to originate the call.")
-  telephony_binding_id: TelephonyBindingId;
+  @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required.")
+  @minLength(1)
+  @maxLength(128)
+  connection: string;
+
+  @doc("The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.")
+  @minLength(1)
+  source: string;
 
   @doc("An optional customer-declared purpose for placing the call.")
   @minLength(1)
@@ -1284,6 +1290,16 @@ model TelephonyCallJobConfiguration {
 @doc("A request to create one durable direct outbound call job.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("CreateTelephonyCallJobContent", "csharp")
+@example(#{
+  connection: "telephony-twilio",
+  source: "+14255550100",
+  destination: #{ type: "phone_number", value: "+14255550123" },
+})
+@example(#{
+  connection: "telephony-acs",
+  source: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+  destination: #{ type: "phone_number", value: "+14255550123" },
+})
 model CreateTelephonyCallJobRequest {
   ...TelephonyCallJobConfiguration;
 
@@ -1409,8 +1425,14 @@ model TelephonyCampaignConfiguration {
   @minLength(1)
   display_name: string;
 
-  @doc("The active agent telephony binding used to originate campaign calls.")
-  telephony_binding_id: TelephonyBindingId;
+  @doc("The Foundry connection name in the current project used to originate campaign calls. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required.")
+  @minLength(1)
+  @maxLength(128)
+  connection: string;
+
+  @doc("The caller identity used to originate campaign calls. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.")
+  @minLength(1)
+  source: string;
 
   @doc("An optional customer-declared purpose for campaign calls.")
   @minLength(1)
@@ -1423,6 +1445,16 @@ model TelephonyCampaignConfiguration {
 @doc("A request to create a draft outbound campaign.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("CreateTelephonyCampaignContent", "csharp")
+@example(#{
+  display_name: "Twilio renewal reminders",
+  connection: "telephony-twilio",
+  source: "+14255550100",
+})
+@example(#{
+  display_name: "Teams Phone renewal reminders",
+  connection: "telephony-acs",
+  source: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+})
 model CreateTelephonyCampaignRequest {
   ...TelephonyCampaignConfiguration;
 
