@@ -191,6 +191,10 @@ model AssessedDiskDataV3 {
 
   @doc("Gets the number of write operations per second.")
   numberOfWriteOperationsPerSecond?: float32;
+
+  @doc("Gets a value indicating whether the disk is the OS disk.")
+  @visibility(Lifecycle.Read)
+  isOsDisk?: boolean;
 }
 
 @doc("Assessed network adapter data for normalized contract.")
