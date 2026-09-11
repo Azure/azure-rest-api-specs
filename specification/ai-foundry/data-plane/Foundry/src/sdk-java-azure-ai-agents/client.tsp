@@ -23,79 +23,6 @@ using TypeSpec.Http;
 
 using Azure.AI.Projects;
 
-namespace Azure.AI.Projects.Beta {
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.listAgentConversations,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversation,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.deleteAgentConversation,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationResponses,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationResponse,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationResponseItems,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationItems,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItem,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemAudio,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemAudioContent,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemGeneratedAudio,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemGeneratedAudioContent,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationAudio,
-    AgentEndpointConversations,
-    "java"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationAudioContent,
-    AgentEndpointConversations,
-    "java"
-  );
-}
-
 // Azure Core's HTTP pipeline cannot expose the upgraded WebSocket channel.
 // Java uses a handwritten Reactor Netty transport while TypeSpec generates the event models.
 @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!java");
@@ -267,6 +194,14 @@ namespace Azure.AI.Projects.Beta {
 @@clientName(AgentOptimizationCandidate.avg_tokens, "averageTokens");
 @@clientName(AgentOptimizationCandidate.eval_id, "evaluationId");
 @@clientName(AgentOptimizationCandidate.eval_run_id, "evaluationRunId");
+@@clientName(
+  AgentOptimizationDatasetItem.desired_num_turns,
+  "desiredNumberTurns"
+);
+@@clientName(
+  AgentOptimizationEvaluatorRef,
+  "AgentOptimizationEvaluatorReference"
+);
 @@clientName(AgentOptimizationJobProgress.elapsed_seconds, "elapsed");
 
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
@@ -495,7 +430,7 @@ namespace Azure.AI.Projects.Beta {
 @@access(OpenAI.ApproximateLocation, Access.public, "java");
 @@usage(OpenAI.WebSearchApproximateLocation, Usage.input, "java");
 @@access(OpenAI.WebSearchApproximateLocation, Access.public, "java");
-@@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMCPHttpError", "java");
+@@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMcpHttpError", "java");
 
 @@usage(OpenAI.IncludeEnum, Usage.input);
 @@access(OpenAI.IncludeEnum, Access.public);
@@ -580,6 +515,80 @@ namespace Azure.AI.Projects.Beta {
   OpenAI.Reasoning,
   {
     identity: "com.openai.models.Reasoning",
+  },
+  "java"
+);
+
+// Reuse standalone Responses and Realtime models from openai-java. Models that participate in the
+// RealtimeClientEvent, RealtimeServerEvent, RealtimeConversationItem, or other discriminator hierarchies remain
+// generated so Java's polymorphic deserialization can dispatch to their concrete subtypes.
+@@alternateType(
+  OpenAI.InputFileContent,
+  {
+    identity: "com.openai.models.responses.ResponseInputFileContent",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.InputImageContent,
+  {
+    identity: "com.openai.models.responses.ResponseInputImageContent",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.InputTextContent,
+  {
+    identity: "com.openai.models.responses.ResponseInputTextContent",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.LogProbProperties,
+  {
+    identity: "com.openai.models.realtime.LogProbProperties",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.NoiseReductionType,
+  {
+    identity: "com.openai.models.realtime.NoiseReductionType",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.Prompt,
+  {
+    identity: "com.openai.models.responses.ResponsePrompt",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeFunctionTool,
+  {
+    identity: "com.openai.models.realtime.RealtimeFunctionTool",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeReasoning,
+  {
+    identity: "com.openai.models.realtime.RealtimeReasoning",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseStatusDetails,
+  {
+    identity: "com.openai.models.realtime.RealtimeResponseStatus",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseUsage,
+  {
+    identity: "com.openai.models.realtime.RealtimeResponseUsage",
   },
   "java"
 );
