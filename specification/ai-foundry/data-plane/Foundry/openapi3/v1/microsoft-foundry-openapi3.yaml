@@ -8963,13 +8963,6 @@ paths:
           schema:
             type: string
           explode: false
-        - name: content_hash
-          in: query
-          required: false
-          description: Filter diagnostics associated with one lowercase 64-character SHA-256 functional evaluator content hash. A rubric comparison matches either baseline or target.
-          schema:
-            $ref: '#/components/schemas/Sha256Hash'
-          explode: false
         - name: type
           in: query
           required: false
@@ -49228,7 +49221,6 @@ components:
         - evaluator_type
         - categories
         - definition
-        - content_hash
         - created_by
         - created_at
         - modified_at
@@ -49274,10 +49266,6 @@ components:
           items:
             $ref: '#/components/schemas/GenerationWarningType'
           description: Categories of warnings surfaced on generated evaluator content. Present when the paired generation job produced non-empty warnings. Follow `generation_job_id` to fetch detailed warning payloads.
-          readOnly: true
-        content_hash:
-          $ref: '#/components/schemas/Sha256Hash'
-          description: The stable lowercase 64-character SHA-256 digest of the canonical functional evaluator content. Equal values indicate canonical functional-content equality, not semantic equivalence. Catalog metadata is excluded. This value is not an HTTP ETag or authenticity proof.
           readOnly: true
         created_by:
           type: string
@@ -49423,7 +49411,6 @@ components:
         - evaluator_version
         - occurred_at
         - change_type
-        - content_hash
         - type
       properties:
         id:
@@ -49442,9 +49429,6 @@ components:
         explanation:
           type: string
           description: A bounded deterministic summary of the change.
-        content_hash:
-          $ref: '#/components/schemas/Sha256Hash'
-          description: The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies.
         source_job_id:
           type: string
           description: The diagnostic job that published this diagnostic. Omitted for service-produced lineage and health diagnostics.
@@ -49550,7 +49534,6 @@ components:
         - eval_id
         - run_id
         - evaluator_version
-        - evaluator_content_hash
       properties:
         eval_id:
           type: string
@@ -49561,9 +49544,6 @@ components:
         evaluator_version:
           $ref: '#/components/schemas/EvaluatorVersionNumber'
           description: The exact published evaluator version executed by the run.
-        evaluator_content_hash:
-          $ref: '#/components/schemas/Sha256Hash'
-          description: The lowercase 64-character SHA-256 evaluator content hash executed by the run.
       description: A bounded reference to an evaluation run used by an evaluator diagnostic.
       x-ms-foundry-meta:
         required_previews:
@@ -49784,14 +49764,10 @@ components:
       type: object
       required:
         - version
-        - content_hash
       properties:
         version:
           $ref: '#/components/schemas/EvaluatorVersionNumber'
           description: The exact immutable published evaluator version.
-        content_hash:
-          $ref: '#/components/schemas/Sha256Hash'
-          description: The verified lowercase 64-character SHA-256 functional content hash.
       description: The exact evaluator version snapshot used by a completed diagnostic.
       x-ms-foundry-meta:
         required_previews:
@@ -50232,7 +50208,6 @@ components:
         - evaluator_type
         - categories
         - definition
-        - content_hash
         - created_by
         - created_at
         - modified_at
@@ -50278,10 +50253,6 @@ components:
           items:
             $ref: '#/components/schemas/GenerationWarningType'
           description: Categories of warnings surfaced on generated evaluator content. Present when the paired generation job produced non-empty warnings. Follow `generation_job_id` to fetch detailed warning payloads.
-          readOnly: true
-        content_hash:
-          $ref: '#/components/schemas/Sha256Hash'
-          description: The stable lowercase 64-character SHA-256 digest of the canonical functional evaluator content. Equal values indicate canonical functional-content equality, not semantic equivalence. Catalog metadata is excluded. This value is not an HTTP ETag or authenticity proof.
           readOnly: true
         created_by:
           type: string
@@ -85537,7 +85508,6 @@ components:
       required:
         - type
         - name
-        - content_hash
       properties:
         type:
           type: string
@@ -85550,9 +85520,9 @@ components:
         version:
           $ref: '#/components/schemas/EvaluatorVersionNumber'
           description: The exact immutable published evaluator version. Omitted when the accepted criterion snapshots current evaluator state.
-        content_hash:
-          $ref: '#/components/schemas/Sha256Hash'
-          description: The exact lowercase SHA-256 functional content hash returned by the evaluator API. The service verifies this hash when accepting the evaluation and never late-binds the criterion to later current state.
+        etag:
+          type: string
+          description: The ETag returned with mutable current evaluator state. Required when `version` is omitted and omitted for immutable published versions. The service verifies the ETag when accepting the evaluation and snapshots that current representation instead of late-binding to later state.
         initialization_parameters:
           type: object
           unevaluatedProperties: {}

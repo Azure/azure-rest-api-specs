@@ -403,9 +403,6 @@ model EvaluatorDiagnostic {
   @doc("A bounded deterministic summary of the change.")
   explanation?: string;
 
-  @doc("The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies.")
-  content_hash: Sha256Hash;
-
   @doc("The diagnostic job that published this diagnostic. Omitted for service-produced lineage and health diagnostics.")
   source_job_id?: string;
 
@@ -945,10 +942,6 @@ alias EvaluatorProperties = {
   @doc("Categories of warnings surfaced on generated evaluator content. Present when the paired generation job produced non-empty warnings. Follow `generation_job_id` to fetch detailed warning payloads.")
   @visibility(Lifecycle.Read)
   warnings?: GenerationWarningType[];
-
-  @doc("The stable lowercase 64-character SHA-256 digest of the canonical functional evaluator content. Equal values indicate canonical functional-content equality, not semantic equivalence. Catalog metadata is excluded. This value is not an HTTP ETag or authenticity proof.")
-  @visibility(Lifecycle.Read)
-  content_hash: Sha256Hash;
 
   @visibility(Lifecycle.Read)
   @doc("Creator of the evaluator")

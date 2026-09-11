@@ -50,10 +50,6 @@ alias ListEvaluatorDiagnosticsParameters = {
   @query
   dimension_id?: string;
 
-  @doc("Filter diagnostics associated with one lowercase 64-character SHA-256 functional evaluator content hash. A rubric comparison matches either baseline or target.")
-  @query
-  content_hash?: Sha256Hash;
-
   @doc("Filter by one or more completed diagnostic types by repeating the query parameter.")
   @query(#{ explode: true })
   type?: EvaluatorDiagnosticType[];

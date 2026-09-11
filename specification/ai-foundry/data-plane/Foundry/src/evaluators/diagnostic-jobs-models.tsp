@@ -72,9 +72,6 @@ model EvaluatorDiagnosticMetric {
 model EvaluatorDiagnosticVersionSnapshot {
   @doc("The exact immutable published evaluator version.")
   version: EvaluatorVersionNumber;
-
-  @doc("The verified lowercase 64-character SHA-256 functional content hash.")
-  content_hash: Sha256Hash;
 }
 
 @doc("An immutable registered dataset used by an evaluator diagnostic job.")
@@ -235,9 +232,6 @@ model EvaluatorDiagnosticEvaluationRunReference {
 
   @doc("The exact published evaluator version executed by the run.")
   evaluator_version: EvaluatorVersionNumber;
-
-  @doc("The lowercase 64-character SHA-256 evaluator content hash executed by the run.")
-  evaluator_content_hash: Sha256Hash;
 }
 
 @doc("The evidence sufficiency and compatibility outcome of a human-evaluator agreement diagnostic.")

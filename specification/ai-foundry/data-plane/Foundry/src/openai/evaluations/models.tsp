@@ -62,8 +62,8 @@ model TestingCriterionEvaluator {
   /** The exact immutable published evaluator version. Omitted when the accepted criterion snapshots current evaluator state. */
   version?: EvaluatorVersionNumber;
 
-  /** The exact lowercase SHA-256 functional content hash returned by the evaluator API. The service verifies this hash when accepting the evaluation and never late-binds the criterion to later current state. */
-  content_hash: Sha256Hash;
+  /** The ETag returned with mutable current evaluator state. Required when `version` is omitted and omitted for immutable published versions. The service verifies the ETag when accepting the evaluation and snapshots that current representation instead of late-binding to later state. */
+  etag?: string;
 
   /** The initialization parameters for the evaluation. Must support structured outputs. */
   initialization_parameters?: Record<unknown>;
