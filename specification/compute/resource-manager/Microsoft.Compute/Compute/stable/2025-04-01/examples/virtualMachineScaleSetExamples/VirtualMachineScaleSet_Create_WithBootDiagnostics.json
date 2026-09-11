@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "vmScaleSetName": "{vmss-name}",
+    "vmScaleSetName": "myVirtualMachineScaleSet",
     "api-version": "2025-04-01",
     "parameters": {
       "sku": {
@@ -36,20 +36,20 @@
             }
           },
           "osProfile": {
-            "computerNamePrefix": "{vmss-name}",
+            "computerNamePrefix": "myVirtualMachineScaleSet",
             "adminUsername": "{your-username}",
             "adminPassword": "{your-password}"
           },
           "networkProfile": {
             "networkInterfaceConfigurations": [
               {
-                "name": "{vmss-name}",
+                "name": "myVirtualMachineScaleSet",
                 "properties": {
                   "primary": true,
                   "enableIPForwarding": true,
                   "ipConfigurations": [
                     {
-                      "name": "{vmss-name}",
+                      "name": "myVirtualMachineScaleSet",
                       "properties": {
                         "subnet": {
                           "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
@@ -76,7 +76,7 @@
           "capacity": 3,
           "name": "Standard_D1_v2"
         },
-        "name": "{vmss-name}",
+        "name": "myVirtualMachineScaleSet",
         "properties": {
           "singlePlacementGroup": true,
           "overprovision": true,
@@ -104,7 +104,7 @@
               }
             },
             "osProfile": {
-              "computerNamePrefix": "{vmss-name}",
+              "computerNamePrefix": "myVirtualMachineScaleSet",
               "adminUsername": "{your-username}",
               "secrets": [],
               "windowsConfiguration": {
@@ -115,7 +115,7 @@
             "networkProfile": {
               "networkInterfaceConfigurations": [
                 {
-                  "name": "{vmss-name}",
+                  "name": "myVirtualMachineScaleSet",
                   "properties": {
                     "dnsSettings": {
                       "dnsServers": []
@@ -124,7 +124,7 @@
                     "enableIPForwarding": true,
                     "ipConfigurations": [
                       {
-                        "name": "{vmss-name}",
+                        "name": "myVirtualMachineScaleSet",
                         "properties": {
                           "subnet": {
                             "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
@@ -146,7 +146,7 @@
         },
         "location": "westus",
         "type": "Microsoft.Compute/virtualMachineScaleSets",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVirtualMachineScaleSet"
       }
     },
     "201": {
@@ -156,7 +156,7 @@
           "capacity": 3,
           "name": "Standard_D1_v2"
         },
-        "name": "{vmss-name}",
+        "name": "myVirtualMachineScaleSet",
         "properties": {
           "singlePlacementGroup": true,
           "overprovision": true,
@@ -184,7 +184,7 @@
               }
             },
             "osProfile": {
-              "computerNamePrefix": "{vmss-name}",
+              "computerNamePrefix": "myVirtualMachineScaleSet",
               "adminUsername": "{your-username}",
               "secrets": [],
               "windowsConfiguration": {
@@ -195,7 +195,7 @@
             "networkProfile": {
               "networkInterfaceConfigurations": [
                 {
-                  "name": "{vmss-name}",
+                  "name": "myVirtualMachineScaleSet",
                   "properties": {
                     "dnsSettings": {
                       "dnsServers": []
@@ -204,7 +204,7 @@
                     "enableIPForwarding": true,
                     "ipConfigurations": [
                       {
-                        "name": "{vmss-name}",
+                        "name": "myVirtualMachineScaleSet",
                         "properties": {
                           "subnet": {
                             "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
@@ -226,7 +226,7 @@
         },
         "location": "westus",
         "type": "Microsoft.Compute/virtualMachineScaleSets",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVirtualMachineScaleSet"
       }
     }
   },
