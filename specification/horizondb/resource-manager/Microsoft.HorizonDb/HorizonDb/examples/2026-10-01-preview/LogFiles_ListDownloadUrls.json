@@ -1,0 +1,19 @@
+{
+  "operationId": "LogFiles_ListDownloadUrls",
+  "title": "List a signed URL for downloading a captured log file",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "logFileName": "postgresql-20260911T100000Z.log",
+    "api-version": "2026-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "downloadUri": "https://example.blob.core.windows.net/logs/postgresql-20260911T100000Z.log?se=2026-09-11T13%3A00%3A00Z&sig=redacted",
+        "expiresAtUtc": "2026-09-11T13:00:00Z"
+      }
+    }
+  }
+}

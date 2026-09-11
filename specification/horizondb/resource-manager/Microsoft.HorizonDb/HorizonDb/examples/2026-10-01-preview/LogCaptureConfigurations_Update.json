@@ -1,0 +1,30 @@
+{
+  "operationId": "LogCaptureConfigurations_Update",
+  "title": "Disable PostgreSQL server log capture",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "logCaptureConfigurationName": "PostgreSqlServer",
+    "api-version": "2026-10-01-preview",
+    "properties": {
+      "properties": {
+        "state": "Disabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/logCaptureConfigurations/PostgreSqlServer",
+        "name": "PostgreSqlServer",
+        "type": "Microsoft.HorizonDb/clusters/logCaptureConfigurations",
+        "properties": {
+          "state": "Disabled",
+          "retentionDays": 14,
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

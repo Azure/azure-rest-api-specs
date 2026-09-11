@@ -95,6 +95,12 @@
     },
     {
       "name": "Nodes"
+    },
+    {
+      "name": "LogCaptureConfigurations"
+    },
+    {
+      "name": "LogFiles"
     }
   ],
   "paths": {
@@ -2703,6 +2709,466 @@
           },
           "Get a read-only HorizonDB pool endpoint": {
             "$ref": "./examples/Endpoints_GetReadOnly.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/logCaptureConfigurations": {
+      "get": {
+        "operationId": "LogCaptureConfigurations_List",
+        "tags": [
+          "LogCaptureConfigurations"
+        ],
+        "description": "Lists the log capture configurations for a HorizonDB cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogCaptureConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List log capture configurations": {
+            "$ref": "./examples/LogCaptureConfigurations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/logCaptureConfigurations/{logCaptureConfigurationName}": {
+      "get": {
+        "operationId": "LogCaptureConfigurations_Get",
+        "tags": [
+          "LogCaptureConfigurations"
+        ],
+        "description": "Gets a log capture configuration for a HorizonDB cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "logCaptureConfigurationName",
+            "in": "path",
+            "description": "The name of the LogCaptureConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^PostgreSqlServer$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogCaptureConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the PostgreSQL server log capture configuration": {
+            "$ref": "./examples/LogCaptureConfigurations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LogCaptureConfigurations_CreateOrUpdate",
+        "tags": [
+          "LogCaptureConfigurations"
+        ],
+        "description": "Creates or replaces a log capture configuration for a HorizonDB cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "logCaptureConfigurationName",
+            "in": "path",
+            "description": "The name of the LogCaptureConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^PostgreSqlServer$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogCaptureConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response returned when an asynchronous HorizonDB resource replacement is accepted.",
+            "schema": {
+              "$ref": "#/definitions/LogCaptureConfiguration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "201": {
+            "description": "Resource 'LogCaptureConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LogCaptureConfiguration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Enable PostgreSQL server log capture": {
+            "$ref": "./examples/LogCaptureConfigurations_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/LogCaptureConfiguration"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LogCaptureConfigurations_Update",
+        "tags": [
+          "LogCaptureConfigurations"
+        ],
+        "description": "Updates a log capture configuration. Omitted properties preserve their current values.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "logCaptureConfigurationName",
+            "in": "path",
+            "description": "The name of the LogCaptureConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^PostgreSqlServer$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogCaptureConfigurationForPatchUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogCaptureConfiguration"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Disable PostgreSQL server log capture": {
+            "$ref": "./examples/LogCaptureConfigurations_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/LogCaptureConfiguration"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/logFiles": {
+      "get": {
+        "operationId": "LogFiles_List",
+        "tags": [
+          "LogFiles"
+        ],
+        "description": "Lists captured log files for a HorizonDB cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogFileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List captured log files": {
+            "$ref": "./examples/LogFiles_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/logFiles/{logFileName}": {
+      "get": {
+        "operationId": "LogFiles_Get",
+        "tags": [
+          "LogFiles"
+        ],
+        "description": "Gets metadata for a captured HorizonDB log file.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "logFileName",
+            "in": "path",
+            "description": "The name of the LogFile",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-._a-zA-Z0-9]{0,253}[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get captured log file metadata": {
+            "$ref": "./examples/LogFiles_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/logFiles/{logFileName}/listDownloadUrls": {
+      "post": {
+        "operationId": "LogFiles_ListDownloadUrls",
+        "tags": [
+          "LogFiles"
+        ],
+        "description": "Gets a short-lived signed URL for downloading a captured log file. The signed URL is returned only by this action so routine resource GET and LIST responses do not expose bearer credentials.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "logFileName",
+            "in": "path",
+            "description": "The name of the LogFile",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-._a-zA-Z0-9]{0,253}[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogFileDownloadUrl"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List a signed URL for downloading a captured log file": {
+            "$ref": "./examples/LogFiles_ListDownloadUrls.json"
           }
         }
       }
@@ -7613,6 +8079,271 @@
         "poolCapabilities"
       ]
     },
+    "LogCaptureConfiguration": {
+      "type": "object",
+      "description": "The configuration for capturing one type of HorizonDB log.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LogCaptureConfigurationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LogCaptureConfigurationForPatchUpdate": {
+      "type": "object",
+      "description": "A sparse update request for a log capture configuration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LogCaptureConfigurationPropertiesForPatchUpdate",
+          "description": "The log capture properties to update."
+        }
+      }
+    },
+    "LogCaptureConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a LogCaptureConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LogCaptureConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/LogCaptureConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LogCaptureConfigurationProperties": {
+      "type": "object",
+      "description": "The settings for capturing a specific type of HorizonDB log.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/LogCaptureState",
+          "description": "Specifies whether HorizonDB captures this type of log. Disabling capture stops the production of new log files; existing files remain available until their retention period expires.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "retentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of days captured log files are retained.",
+          "minimum": 1,
+          "maximum": 35,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the log capture configuration.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state",
+        "retentionDays"
+      ]
+    },
+    "LogCaptureConfigurationPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Properties for updating the log capture configuration. Omitted properties preserve their current values.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/LogCaptureState",
+          "description": "Specifies whether HorizonDB captures this type of log. Disabling capture stops the production of new log files; existing files remain available until their retention period expires.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "retentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of days captured log files are retained.",
+          "minimum": 1,
+          "maximum": 35,
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
+    "LogCaptureState": {
+      "type": "string",
+      "description": "Specifies whether HorizonDB captures log files.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "LogCaptureState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Log capture is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Log capture is disabled."
+          }
+        ]
+      }
+    },
+    "LogFile": {
+      "type": "object",
+      "description": "A service-generated log file captured for a HorizonDB cluster.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LogFileProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LogFileDownloadUrl": {
+      "type": "object",
+      "description": "A short-lived signed URL for downloading a captured log file.",
+      "properties": {
+        "downloadUri": {
+          "type": "string",
+          "format": "password",
+          "description": "A short-lived signed URL from which the original log file can be downloaded.",
+          "x-ms-secret": true
+        },
+        "expiresAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the signed download URL expires, in UTC."
+        }
+      },
+      "required": [
+        "downloadUri",
+        "expiresAtUtc"
+      ]
+    },
+    "LogFileListResult": {
+      "type": "object",
+      "description": "The response of a LogFile list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LogFile items on this page",
+          "items": {
+            "$ref": "#/definitions/LogFile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LogFileProperties": {
+      "type": "object",
+      "description": "Metadata for a service-generated HorizonDB log file.",
+      "properties": {
+        "logType": {
+          "$ref": "#/definitions/LogFileType",
+          "description": "The type of the captured log file.",
+          "readOnly": true
+        },
+        "createdAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the log file was created, in UTC.",
+          "readOnly": true
+        },
+        "lastModifiedAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the log file was last modified, in UTC.",
+          "readOnly": true
+        },
+        "retentionExpiresAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the log file expires according to its retention period, in UTC.",
+          "readOnly": true
+        },
+        "isMutable": {
+          "type": "boolean",
+          "description": "Whether the platform can still append to or otherwise modify the log file.",
+          "readOnly": true
+        },
+        "sizeInKilobytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The size of the log file in kilobytes, where one kilobyte is 1024 bytes.",
+          "minimum": 0,
+          "readOnly": true
+        },
+        "poolName": {
+          "$ref": "#/definitions/PoolName",
+          "description": "The name of the HorizonDB pool that generated the log file.",
+          "readOnly": true
+        },
+        "nodeName": {
+          "type": "string",
+          "description": "The name of the HorizonDB node that generated the log file.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "logType",
+        "createdAtUtc",
+        "lastModifiedAtUtc",
+        "retentionExpiresAtUtc",
+        "isMutable",
+        "sizeInKilobytes",
+        "poolName",
+        "nodeName"
+      ]
+    },
+    "LogFileType": {
+      "type": "string",
+      "description": "The type of a captured HorizonDB log file.",
+      "enum": [
+        "PostgreSqlServer"
+      ],
+      "x-ms-enum": {
+        "name": "LogFileType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PostgreSqlServer",
+            "value": "PostgreSqlServer",
+            "description": "A PostgreSQL server log file."
+          }
+        ]
+      }
+    },
     "MaintenanceEvent": {
       "type": "object",
       "description": "Represents a maintenance event for a HorizonDB pool.",
@@ -8761,6 +9492,13 @@
       "required": [
         "value"
       ]
+    },
+    "PoolName": {
+      "type": "string",
+      "description": "A lowercase enforced name as a HorizonDB pool name.",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
     },
     "PoolNodeCount": {
       "type": "integer",
