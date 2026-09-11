@@ -408,21 +408,33 @@ jobs:
                 const resultPath = `${process.env.RESULTS_PATH}/${project.resultsPath}/breaking-changes.json`;
                 const response = JSON.parse(await fs.readFile(resultPath, "utf8"));
                 const changes = response?.result?.breakingChanges ?? [];
-                const checkboxes = changes.length
+                const escapeTableCell = (value, fallback = "-") => {
+                  const text = String(value ?? "").trim();
+                  return text
+                    ? text.replaceAll("\r", "").replaceAll("|", "\\|").replaceAll("\n", "<br>")
+                    : fallback;
+                };
+                const tableRows = changes.length
                   ? changes.map((change) => {
-                      const text = String(change.breakingChange ?? change)
-                        .trim()
-                        .replaceAll("\r", "")
-                        .replaceAll("\n", "\n  ");
-                      return `- [ ] ${text}`;
+                      const details = typeof change === "object" && change !== null ? change : {};
+                      const text = escapeTableCell(details.breakingChange ?? change);
+                      const category = escapeTableCell(
+                        details.category ?? details.category,
+                      );
+                      const suggestedFix = escapeTableCell(
+                        details.resolution ?? details.resolution,
+                      );
+                      return `| - [ ] | ${text} | ${category} | ${suggestedFix} |`;
                     })
-                  : ["- [x] No SDK breaking changes detected."];
+                  : ["| - [x] | No SDK breaking changes detected. | - | - |"];
                 const projectReport = [
                   `**Typespec Project:** ${project.typespecProjectPath}`,
                   "",
                   `**SDK Package:** ${project.packageName}`,
                   "",
-                  ...checkboxes,
+                  "| Checkbox | Breaking change | Category | Suggested fix |",
+                  "| --- | --- | --- | --- |",
+                  ...tableRows,
                 ];
                 if (process.env.WORKFLOW_SUMMARY_URL) {
                   projectReport.push(
@@ -445,12 +457,12 @@ jobs:
                 ...context.repo,
                 comment_id: context.payload.comment.id,
               });
-              const originalBody = comment.body.trimEnd();
+              const command = comment.body.split(/\r?\n/, 1)[0].trim();
               try {
                 await github.rest.issues.updateComment({
                   ...context.repo,
                   comment_id: context.payload.comment.id,
-                  body: `${originalBody}\n\n${report}`,
+                  body: `${command}\n\n${report}`,
                 });
                 return;
               } catch (error) {
