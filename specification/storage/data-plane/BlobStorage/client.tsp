@@ -1313,6 +1313,10 @@ scalar HttpRange extends string;
 @@clientName(SignedIdentifiers, "BlobSignedIdentifiers", "java");
 @@clientName(LeaseDuration, "LeaseDurationType", "java");
 @@clientName(Blob.setProperties, "SetHttpHeaders", "java");
+
+// Blob Query is defined on the BlockBlob interface, but the shipped java SDK exposes query() on
+// BlobClientBase/BlobAsyncClientBase and calls it through BlobsImpl. Keep the op group java saw under AutoRest.
+@@clientLocation(BlockBlob.query, Blob, "java");
 @@clientName(ListBlobsResponse, "ListBlobsFlatSegmentResponse", "java");
 @@clientName(Container.findBlobsByTags, "FilterBlobs", "java");
 @@clientName(Service.findBlobsByTags, "FilterBlobs", "java");
@@ -1339,9 +1343,13 @@ scalar HttpRange extends string;
 // String (the caller supplies an already-base64-encoded block id). go and python carry the same overrides.
 @@alternateType(UserDelegationKey.value, string, "java");
 @@alternateType(Block.name, string, "java");
-@@alternateType(BlockLookupList.committed, string, "java");
-@@alternateType(BlockLookupList.uncommitted, string, "java");
-@@alternateType(BlockLookupList.latest, string, "java");
+// The block id lists are arrays: the override has to replace the ELEMENT type, so it must stay an array.
+// `string` on its own collapses the property to a single scalar, which generates `private String latest` and a
+// `toXml` that writes an unnamed text node instead of a repeated <Latest> element, breaking Put Block List and
+// the shipped `List<String>` public API.
+@@alternateType(BlockLookupList.committed, string[], "java");
+@@alternateType(BlockLookupList.uncommitted, string[], "java");
+@@alternateType(BlockLookupList.latest, string[], "java");
 @@alternateType(BlockIdParameter.blockid, string, "java");
 
 // The shipped java accessors spell these out; the spec's abbreviated property names would rename the public API.
