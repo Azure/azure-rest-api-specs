@@ -430,7 +430,7 @@ using Azure.AI.Projects;
 @@access(OpenAI.ApproximateLocation, Access.public, "java");
 @@usage(OpenAI.WebSearchApproximateLocation, Usage.input, "java");
 @@access(OpenAI.WebSearchApproximateLocation, Access.public, "java");
-@@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMCPHttpError", "java");
+@@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMcpHttpError", "java");
 
 @@usage(OpenAI.IncludeEnum, Usage.input);
 @@access(OpenAI.IncludeEnum, Access.public);
