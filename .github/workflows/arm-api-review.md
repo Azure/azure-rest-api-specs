@@ -142,6 +142,11 @@ checkout: false
 # Keep this in step with the ARM eval suite under
 # .github/skills/evals/arm-api-reviewer/, which pins the same model, and with
 # the copy of this file in Azure/azure-rest-api-specs-pr.
+#
+# Keep the literal here and in `safe-outputs.threat-detection.engine.model`
+# identical. gh-aw v0.86.2 carries a `${{ env.* }}` model expression into the
+# generated `jobs.safe_outputs.env` map, where GitHub Actions does not allow the
+# `env` context and rejects the entire workflow before any trigger can run.
 engine:
   id: copilot
 model: gpt-5.6-sol?effort=high
@@ -203,15 +208,15 @@ safe-outputs:
     max: 3
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
   noop:
-  # Threat detection is a bounded scan of already-completed agent output, not the
-  # review itself, so it is pinned to a smaller model. Pinning it still removes
-  # run-to-run variation; left unset it resolves through the `detection` alias.
-  # `engine.model` is reported as deprecated, but it is the only supported way to
-  # set this: `model` is not a valid field under `threat-detection`.
+  # Threat detection uses the same pinned model as the primary review so all ARM
+  # API Reviewer experiences move together. Keep both literals identical; see
+  # the compatibility note above the primary `model` field.
+  # `engine.model` is reported as deprecated, but it is the only supported way
+  # to set this: `model` is not a valid field under `threat-detection`.
   threat-detection:
     engine:
       id: copilot
-      model: claude-sonnet-4.6
+      model: gpt-5.6-sol?effort=high
   messages:
     footer: "> 🔍 *ARM API review by [{workflow_name}]({run_url})*"
     run-started: "🔍 [{workflow_name}]({run_url}) is reviewing this PR for ARM API compliance…"

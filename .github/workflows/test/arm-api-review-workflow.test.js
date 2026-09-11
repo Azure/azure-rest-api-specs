@@ -92,6 +92,32 @@ function parseJsonRecord(content) {
 }
 
 /**
+ * @param {string} content
+ * @returns {{ primary: string; threatDetection: string }}
+ */
+function parseArmApiReviewerModels(content) {
+  const match = /^---\r?\n([\s\S]*?)\r?\n---/.exec(content);
+  if (!match) {
+    throw new Error(`Expected workflow frontmatter in ${SOURCE_FILE}`);
+  }
+
+  const frontmatter = /** @type {unknown} */ (load(match[1]));
+  if (!isRecord(frontmatter)) {
+    throw new Error(`Expected workflow frontmatter object in ${SOURCE_FILE}`);
+  }
+  const safeOutputs = frontmatter["safe-outputs"];
+  const threatDetection = isRecord(safeOutputs) ? safeOutputs["threat-detection"] : undefined;
+  const engine = isRecord(threatDetection) ? threatDetection.engine : undefined;
+  const primary = frontmatter.model;
+  const detection = isRecord(engine) ? engine.model : undefined;
+  if (typeof primary !== "string" || typeof detection !== "string") {
+    throw new Error(`Expected primary and threat-detection models in ${SOURCE_FILE}`);
+  }
+
+  return { primary, threatDetection: detection };
+}
+
+/**
  * Remove XML/HTML comments the same way gh-aw does, so the stripping tests
  * model the real behavior rather than an approximation of it.
  *
@@ -954,22 +980,33 @@ describe("ARM API review consistency and hardening", () => {
       expect(source).toContain("Both are explicit, recorded human actions");
     }
   });
-  it("pins the model so every run reviews with the same one", async () => {
+  it("pins one GitHub-valid model for review and threat detection", async () => {
     const [source, compiled] = await readWorkflowFiles();
+    const models = parseArmApiReviewerModels(source);
 
     // Left unpinned the model resolves to `... || 'auto'`, which can pick a
     // different model per run, so identical specs could get different feedback.
     // The value has to be one the AWF api-proxy prices: an unpriced model is
     // rejected with a 400 before the agent runs at all, which took down every
     // run when this was briefly pinned to claude-opus-5.
-    expect(source).toMatch(/^model: gpt-5\.6-sol\?effort=high$/m);
+    expect(models.primary).toBe("gpt-5.6-sol?effort=high");
+    expect(models.threatDetection).toBe(models.primary);
+    expect(models.primary).not.toContain("${{");
 
-    // The compiled lock must carry literals, not a `vars.` fallback expression.
-    expect(compiled).toContain("COPILOT_MODEL: gpt-5.6-sol?effort=high");
+    // gh-aw v0.86.2 copies the primary model into a job-level env map. The
+    // GitHub Actions expression evaluator does not expose the `env` context
+    // there, so dynamic env indirection invalidates the entire workflow before
+    // any pull-request or comment trigger can run.
+    expect(source).not.toContain("env.ARM_API_REVIEWER_MODEL");
+    expect(compiled).not.toContain("env.ARM_API_REVIEWER_MODEL");
+    expect(compiled.match(/COPILOT_MODEL: gpt-5\.6-sol\?effort=high/g)).toHaveLength(2);
+    expect(compiled).toContain(`GH_AW_ENGINE_MODEL: "${models.primary}"`);
     expect(compiled).not.toContain("COPILOT_MODEL: ${{ vars.GH_AW_MODEL_AGENT_COPILOT");
   });
 
   it("keeps the eval suite on the same model as production", async () => {
+    const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
+    const canonicalModel = parseArmApiReviewerModels(source).primary;
     const dir = join(ROOT, ".github/skills/evals/arm-api-reviewer/vally");
     const files = (await readdir(dir)).filter((f) => f.endsWith(".yaml"));
     expect(files.length).toBeGreaterThan(0);
@@ -979,7 +1016,7 @@ describe("ARM API review consistency and hardening", () => {
       // The agent under test must match the production model, or eval results
       // describe a model that never reviews a real PR. Anchored to the line
       // start because plain `model:` also matches `judge_model:`.
-      expect(text, `${file} agent model`).toMatch(/^\s*model: gpt-5\.6-sol\?effort=high$/m);
+      expect(text, `${file} agent model`).toContain(`model: ${canonicalModel}`);
       // The judge is a separate role and deliberately stays cheaper.
       expect(text, `${file} judge model`).toContain("judge_model: claude-sonnet-4.6");
     }
