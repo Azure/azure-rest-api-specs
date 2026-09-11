@@ -82,7 +82,7 @@ model MaintenanceEventProperties {
 
   @doc("The estimated downtime as an ISO 8601 duration string, for example, 'PT60S' for 60 seconds.")
   @visibility(Lifecycle.Read)
-  estimatedDowntime?: string;
+  estimatedDowntime?: duration;
 
   @doc("Indicates whether the customer can reschedule this maintenance event.")
   @visibility(Lifecycle.Read)
