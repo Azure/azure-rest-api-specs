@@ -555,9 +555,34 @@ model IotHubDefinitionDescription {
   connectionString?: string;
 
   /**
+   * The system-derived connection profile that the linked IoT hub uses for device connections. This property is not user-settable and is not present until the capability has been resolved.
+   */
+  @added(Versions.v2026_11_02_preview)
+  @visibility(Lifecycle.Read)
+  connectionProfile?: ConnectionProfile;
+
+  /**
    * ARM region of the IoT hub.
    */
   location: string;
+}
+
+/**
+ * The connection profile that an IoT hub uses for device connections.
+ */
+@added(Versions.v2026_11_02_preview)
+union ConnectionProfile {
+  string,
+
+  /**
+   * Classic connection profile.
+   */
+  Classic: "Classic",
+
+  /**
+   * MQTT v5 connection profile.
+   */
+  MqttV5: "MqttV5",
 }
 
 /**
