@@ -1,0 +1,2656 @@
+[
+  {
+    "path": "/.well-known/scitt-keys",
+    "verb": "get",
+    "parameters": [
+      {
+        "name": "api-version",
+        "location": "query",
+        "optional": false,
+        "type": "string"
+      },
+      {
+        "name": "accept",
+        "location": "header",
+        "optional": false,
+        "type": "application/cbor"
+      }
+    ],
+    "responses": [
+      {
+        "status": 200,
+        "type": {
+          "name": "ScittKeysResponse",
+          "properties": [
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/cbor"
+            },
+            {
+              "name": "body",
+              "wire": "body",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 400,
+        "type": {
+          "name": "Response400Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 400
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 401,
+        "type": {
+          "name": "Response401Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 401
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 404,
+        "type": {
+          "name": "Response404Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 404
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 429,
+        "type": {
+          "name": "Response429Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 429
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "retryAfter",
+              "wire": "retryAfter",
+              "optional": true,
+              "type": "int32"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Retry-After",
+                "optional": true,
+                "type": "int32"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 500,
+        "type": {
+          "name": "Response500Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 500
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 503,
+        "type": {
+          "name": "Response503Cbor",
+          "properties": [
+            {
+              "name": "retryAfter",
+              "wire": "retryAfter",
+              "optional": true,
+              "type": "int32"
+            },
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 503
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "transactionId",
+              "wire": "transactionId",
+              "optional": true,
+              "type": "string"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Retry-After",
+                "optional": true,
+                "type": "int32"
+              },
+              {
+                "name": "x-ms-ccf-transaction-id",
+                "optional": true,
+                "type": "string"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      }
+    ],
+    "name": "listScittKeys"
+  },
+  {
+    "path": "/.well-known/scitt-keys/{kid}",
+    "verb": "get",
+    "parameters": [
+      {
+        "name": "api-version",
+        "location": "query",
+        "optional": false,
+        "type": "string"
+      },
+      {
+        "name": "kid",
+        "location": "path",
+        "optional": false,
+        "type": "string"
+      },
+      {
+        "name": "accept",
+        "location": "header",
+        "optional": false,
+        "type": "application/cbor"
+      }
+    ],
+    "responses": [
+      {
+        "status": 200,
+        "type": {
+          "name": "ScittKeyResponse",
+          "properties": [
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/cbor"
+            },
+            {
+              "name": "body",
+              "wire": "body",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 400,
+        "type": {
+          "name": "Response400Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 400
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 401,
+        "type": {
+          "name": "Response401Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 401
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 404,
+        "type": {
+          "name": "Response404Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 404
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 429,
+        "type": {
+          "name": "Response429Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 429
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "retryAfter",
+              "wire": "retryAfter",
+              "optional": true,
+              "type": "int32"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Retry-After",
+                "optional": true,
+                "type": "int32"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 500,
+        "type": {
+          "name": "Response500Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 500
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 503,
+        "type": {
+          "name": "Response503Cbor",
+          "properties": [
+            {
+              "name": "retryAfter",
+              "wire": "retryAfter",
+              "optional": true,
+              "type": "int32"
+            },
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 503
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "transactionId",
+              "wire": "transactionId",
+              "optional": true,
+              "type": "string"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Retry-After",
+                "optional": true,
+                "type": "int32"
+              },
+              {
+                "name": "x-ms-ccf-transaction-id",
+                "optional": true,
+                "type": "string"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      }
+    ],
+    "name": "getScittKey"
+  },
+  {
+    "path": "/.well-known/transparency-configuration",
+    "verb": "get",
+    "parameters": [
+      {
+        "name": "api-version",
+        "location": "query",
+        "optional": false,
+        "type": "string"
+      },
+      {
+        "name": "accept",
+        "location": "header",
+        "optional": false,
+        "type": "application/cbor"
+      }
+    ],
+    "responses": [
+      {
+        "status": 200,
+        "type": {
+          "name": "TransparencyConfigurationCbor",
+          "properties": [
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/cbor"
+            },
+            {
+              "name": "body",
+              "wire": "body",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 500,
+        "type": {
+          "name": "Response500Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 500
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 503,
+        "type": {
+          "name": "Response503Cbor",
+          "properties": [
+            {
+              "name": "retryAfter",
+              "wire": "retryAfter",
+              "optional": true,
+              "type": "int32"
+            },
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 503
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "transactionId",
+              "wire": "transactionId",
+              "optional": true,
+              "type": "string"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Retry-After",
+                "optional": true,
+                "type": "int32"
+              },
+              {
+                "name": "x-ms-ccf-transaction-id",
+                "optional": true,
+                "type": "string"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      }
+    ],
+    "name": "getTransparencyConfigCbor"
+  },
+  {
+    "path": "/entries",
+    "verb": "post",
+    "parameters": [
+      {
+        "name": "api-version",
+        "location": "query",
+        "optional": false,
+        "type": "string"
+      },
+      {
+        "name": "Content-Type",
+        "location": "header",
+        "optional": false,
+        "type": "application/cose"
+      },
+      {
+        "name": "accept",
+        "location": "header",
+        "optional": false,
+        "type": "application/cose; application/cbor"
+      },
+      {
+        "name": "waitForCommit",
+        "location": "query",
+        "optional": true,
+        "type": "boolean"
+      }
+    ],
+    "body": {
+      "contentTypes": [
+        "application/cose"
+      ],
+      "type": "bytes"
+    },
+    "responses": [
+      {
+        "status": 201,
+        "type": {
+          "name": "CreateEntryCreated",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 201
+            },
+            {
+              "name": "contentTypeV09",
+              "wire": "contentTypeV09",
+              "optional": false,
+              "type": "application/scitt-receipt+cose"
+            },
+            {
+              "name": "location",
+              "wire": "location",
+              "optional": true,
+              "type": "string"
+            },
+            {
+              "name": "transactionId",
+              "wire": "transactionId",
+              "optional": true,
+              "type": "string"
+            },
+            {
+              "name": "body",
+              "wire": "body",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Location",
+                "optional": true,
+                "type": "string"
+              },
+              {
+                "name": "x-ms-ccf-transaction-id",
+                "optional": true,
+                "type": "string"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/scitt-receipt+cose"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 303,
+        "type": {
+          "name": "CreateEntrySeeOther",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 303
+            },
+            {
+              "name": "location",
+              "wire": "location",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "transactionId",
+              "wire": "transactionId",
+              "optional": false,
+              "type": "string"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Location",
+                "optional": false,
+                "type": "string"
+              },
+              {
+                "name": "x-ms-ccf-transaction-id",
+                "optional": false,
+                "type": "string"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "status": 400,
+        "type": {
+          "name": "Response400Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 400
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 401,
+        "type": {
+          "name": "Response401Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 401
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 404,
+        "type": {
+          "name": "Response404Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 404
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 429,
+        "type": {
+          "name": "Response429Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 429
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "retryAfter",
+              "wire": "retryAfter",
+              "optional": true,
+              "type": "int32"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Retry-After",
+                "optional": true,
+                "type": "int32"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 500,
+        "type": {
+          "name": "Response500Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 500
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 503,
+        "type": {
+          "name": "Response503Cbor",
+          "properties": [
+            {
+              "name": "retryAfter",
+              "wire": "retryAfter",
+              "optional": true,
+              "type": "int32"
+            },
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 503
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "transactionId",
+              "wire": "transactionId",
+              "optional": true,
+              "type": "string"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Retry-After",
+                "optional": true,
+                "type": "int32"
+              },
+              {
+                "name": "x-ms-ccf-transaction-id",
+                "optional": true,
+                "type": "string"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      }
+    ],
+    "name": "createEntry"
+  },
+  {
+    "path": "/entries/{entryId}",
+    "verb": "get",
+    "parameters": [
+      {
+        "name": "api-version",
+        "location": "query",
+        "optional": false,
+        "type": "string"
+      },
+      {
+        "name": "entryId",
+        "location": "path",
+        "optional": false,
+        "type": "string"
+      },
+      {
+        "name": "accept",
+        "location": "header",
+        "optional": false,
+        "type": "application/scitt-receipt+cose"
+      }
+    ],
+    "responses": [
+      {
+        "status": 200,
+        "type": {
+          "name": "ReceiptEntry",
+          "properties": [
+            {
+              "name": "contentTypeV09",
+              "wire": "contentTypeV09",
+              "optional": false,
+              "type": "application/scitt-receipt+cose"
+            },
+            {
+              "name": "location",
+              "wire": "location",
+              "optional": true,
+              "type": "string"
+            },
+            {
+              "name": "body",
+              "wire": "body",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Location",
+                "optional": true,
+                "type": "string"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/scitt-receipt+cose"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 302,
+        "type": {
+          "name": "ReceiptEntryPending",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 302
+            },
+            {
+              "name": "location",
+              "wire": "location",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "retryAfter",
+              "wire": "retryAfter",
+              "optional": true,
+              "type": "int32"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Location",
+                "optional": false,
+                "type": "string"
+              },
+              {
+                "name": "Retry-After",
+                "optional": true,
+                "type": "int32"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "status": 400,
+        "type": {
+          "name": "Response400Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 400
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 401,
+        "type": {
+          "name": "Response401Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 401
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 404,
+        "type": {
+          "name": "Response404Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 404
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 429,
+        "type": {
+          "name": "Response429Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 429
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "retryAfter",
+              "wire": "retryAfter",
+              "optional": true,
+              "type": "int32"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Retry-After",
+                "optional": true,
+                "type": "int32"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 500,
+        "type": {
+          "name": "Response500Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 500
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 503,
+        "type": {
+          "name": "Response503Cbor",
+          "properties": [
+            {
+              "name": "retryAfter",
+              "wire": "retryAfter",
+              "optional": true,
+              "type": "int32"
+            },
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 503
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "transactionId",
+              "wire": "transactionId",
+              "optional": true,
+              "type": "string"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Retry-After",
+                "optional": true,
+                "type": "int32"
+              },
+              {
+                "name": "x-ms-ccf-transaction-id",
+                "optional": true,
+                "type": "string"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      }
+    ],
+    "name": "getEntry"
+  },
+  {
+    "path": "/entries/{entryId}/statement",
+    "verb": "get",
+    "parameters": [
+      {
+        "name": "api-version",
+        "location": "query",
+        "optional": false,
+        "type": "string"
+      },
+      {
+        "name": "entryId",
+        "location": "path",
+        "optional": false,
+        "type": "string"
+      },
+      {
+        "name": "accept",
+        "location": "header",
+        "optional": false,
+        "type": "application/scitt-statement+cose"
+      }
+    ],
+    "responses": [
+      {
+        "status": 200,
+        "type": {
+          "name": "TransparentStatement",
+          "properties": [
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/scitt-statement+cose"
+            },
+            {
+              "name": "body",
+              "wire": "body",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/scitt-statement+cose"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 400,
+        "type": {
+          "name": "Response400Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 400
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 401,
+        "type": {
+          "name": "Response401Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 401
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 404,
+        "type": {
+          "name": "Response404Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 404
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 429,
+        "type": {
+          "name": "Response429Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 429
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "retryAfter",
+              "wire": "retryAfter",
+              "optional": true,
+              "type": "int32"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Retry-After",
+                "optional": true,
+                "type": "int32"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 500,
+        "type": {
+          "name": "Response500Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 500
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 503,
+        "type": {
+          "name": "Response503Cbor",
+          "properties": [
+            {
+              "name": "retryAfter",
+              "wire": "retryAfter",
+              "optional": true,
+              "type": "int32"
+            },
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 503
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "transactionId",
+              "wire": "transactionId",
+              "optional": true,
+              "type": "string"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Retry-After",
+                "optional": true,
+                "type": "int32"
+              },
+              {
+                "name": "x-ms-ccf-transaction-id",
+                "optional": true,
+                "type": "string"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      }
+    ],
+    "name": "getEntryStatement"
+  },
+  {
+    "path": "/jwks",
+    "verb": "get",
+    "parameters": [
+      {
+        "name": "api-version",
+        "location": "query",
+        "optional": false,
+        "type": "string"
+      }
+    ],
+    "responses": [
+      {
+        "status": 200,
+        "type": {
+          "name": "GetPublicKeysResponse",
+          "properties": [
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/json"
+            },
+            {
+              "name": "body",
+              "wire": "body",
+              "optional": false,
+              "type": {
+                "name": "JsonWebKeySet",
+                "properties": [
+                  {
+                    "name": "keys",
+                    "wire": "keys",
+                    "optional": false,
+                    "type": {
+                      "name": "Array",
+                      "indexer": {
+                        "name": "PublicJsonWebKey",
+                        "properties": [
+                          {
+                            "name": "keyType",
+                            "wire": "kty",
+                            "optional": false,
+                            "type": "string"
+                          },
+                          {
+                            "name": "keyId",
+                            "wire": "kid",
+                            "optional": false,
+                            "type": "string"
+                          },
+                          {
+                            "name": "algorithm",
+                            "wire": "alg",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "name": "publicKeyUse",
+                            "wire": "use",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "name": "curveName",
+                            "wire": "crv",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "name": "xCoordinate",
+                            "wire": "x",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "name": "yCoordinate",
+                            "wire": "y",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "name": "modulus",
+                            "wire": "n",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "name": "exponent",
+                            "wire": "e",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "name": "certificateChain",
+                            "wire": "x5c",
+                            "optional": true,
+                            "type": {
+                              "name": "Array",
+                              "indexer": "string",
+                              "properties": []
+                            }
+                          }
+                        ]
+                      },
+                      "properties": []
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/json"
+              ],
+              "type": {
+                "name": "JsonWebKeySet",
+                "properties": [
+                  {
+                    "name": "keys",
+                    "wire": "keys",
+                    "optional": false,
+                    "type": {
+                      "name": "Array",
+                      "indexer": {
+                        "name": "PublicJsonWebKey",
+                        "properties": [
+                          {
+                            "name": "keyType",
+                            "wire": "kty",
+                            "optional": false,
+                            "type": "string"
+                          },
+                          {
+                            "name": "keyId",
+                            "wire": "kid",
+                            "optional": false,
+                            "type": "string"
+                          },
+                          {
+                            "name": "algorithm",
+                            "wire": "alg",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "name": "publicKeyUse",
+                            "wire": "use",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "name": "curveName",
+                            "wire": "crv",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "name": "xCoordinate",
+                            "wire": "x",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "name": "yCoordinate",
+                            "wire": "y",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "name": "modulus",
+                            "wire": "n",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "name": "exponent",
+                            "wire": "e",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "name": "certificateChain",
+                            "wire": "x5c",
+                            "optional": true,
+                            "type": {
+                              "name": "Array",
+                              "indexer": "string",
+                              "properties": []
+                            }
+                          }
+                        ]
+                      },
+                      "properties": []
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "status": 400,
+        "type": {
+          "name": "Response400Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 400
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 404,
+        "type": {
+          "name": "Response404Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 404
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 429,
+        "type": {
+          "name": "Response429Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 429
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "retryAfter",
+              "wire": "retryAfter",
+              "optional": true,
+              "type": "int32"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Retry-After",
+                "optional": true,
+                "type": "int32"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 500,
+        "type": {
+          "name": "Response500Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 500
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 503,
+        "type": {
+          "name": "Response503Cbor",
+          "properties": [
+            {
+              "name": "retryAfter",
+              "wire": "retryAfter",
+              "optional": true,
+              "type": "int32"
+            },
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 503
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "transactionId",
+              "wire": "transactionId",
+              "optional": true,
+              "type": "string"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Retry-After",
+                "optional": true,
+                "type": "int32"
+              },
+              {
+                "name": "x-ms-ccf-transaction-id",
+                "optional": true,
+                "type": "string"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      }
+    ],
+    "name": "getPublicKeys"
+  },
+  {
+    "path": "/operations/{operationId}",
+    "verb": "get",
+    "parameters": [
+      {
+        "name": "api-version",
+        "location": "query",
+        "optional": false,
+        "type": "string"
+      },
+      {
+        "name": "operationId",
+        "location": "path",
+        "optional": false,
+        "type": "string"
+      },
+      {
+        "name": "accept",
+        "location": "header",
+        "optional": false,
+        "type": "application/cbor"
+      }
+    ],
+    "responses": [
+      {
+        "status": 200,
+        "type": {
+          "name": "OperationStatusComplete",
+          "properties": [
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/cbor"
+            },
+            {
+              "name": "location",
+              "wire": "location",
+              "optional": true,
+              "type": "string"
+            },
+            {
+              "name": "body",
+              "wire": "body",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Location",
+                "optional": true,
+                "type": "string"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 202,
+        "type": {
+          "name": "OperationStatusPending",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 202
+            },
+            {
+              "name": "location",
+              "wire": "location",
+              "optional": true,
+              "type": "string"
+            },
+            {
+              "name": "retryAfter",
+              "wire": "retryAfter",
+              "optional": true,
+              "type": "int32"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Location",
+                "optional": true,
+                "type": "string"
+              },
+              {
+                "name": "Retry-After",
+                "optional": true,
+                "type": "int32"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "status": 400,
+        "type": {
+          "name": "Response400Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 400
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 401,
+        "type": {
+          "name": "Response401Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 401
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 404,
+        "type": {
+          "name": "Response404Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 404
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 429,
+        "type": {
+          "name": "Response429Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 429
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "retryAfter",
+              "wire": "retryAfter",
+              "optional": true,
+              "type": "int32"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Retry-After",
+                "optional": true,
+                "type": "int32"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 500,
+        "type": {
+          "name": "Response500Cbor",
+          "properties": [
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 500
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      },
+      {
+        "status": 503,
+        "type": {
+          "name": "Response503Cbor",
+          "properties": [
+            {
+              "name": "retryAfter",
+              "wire": "retryAfter",
+              "optional": true,
+              "type": "int32"
+            },
+            {
+              "name": "statusCode",
+              "wire": "statusCode",
+              "optional": false,
+              "type": 503
+            },
+            {
+              "name": "contentType",
+              "wire": "contentType",
+              "optional": false,
+              "type": "application/concise-problem-details+cbor"
+            },
+            {
+              "name": "transactionId",
+              "wire": "transactionId",
+              "optional": true,
+              "type": "string"
+            },
+            {
+              "name": "error",
+              "wire": "error",
+              "optional": false,
+              "type": "bytes"
+            }
+          ]
+        },
+        "content": [
+          {
+            "headers": [
+              {
+                "name": "Retry-After",
+                "optional": true,
+                "type": "int32"
+              },
+              {
+                "name": "x-ms-ccf-transaction-id",
+                "optional": true,
+                "type": "string"
+              }
+            ],
+            "body": {
+              "contentTypes": [
+                "application/concise-problem-details+cbor"
+              ],
+              "type": "bytes"
+            }
+          }
+        ]
+      }
+    ],
+    "name": "getOperation"
+  }
+]

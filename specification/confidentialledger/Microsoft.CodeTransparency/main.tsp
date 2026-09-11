@@ -1,14 +1,12 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.Core.Foundations;
 using Azure.Core.Traits;
@@ -54,28 +52,11 @@ op getTransparencyConfigCbor is Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "cannot assign error to directive to cbor binary responses"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 @added(Versions.`2025-01-31-preview`)
-@removed(Versions.`2026-03-26`)
-@sharedRoute
 @doc("Get the public keys used by the service to sign receipts, mentioned in IETF SCITT draft as part of jwks_uri implementation")
 @route("/jwks")
 op getPublicKeys is Foundations.Operation<
   {},
-  JwksDocument,
-  ServiceTraits,
-  AnyCborError
->;
-
-#suppress "@azure-tools/typespec-azure-core/response-schema-problem" "cannot assign error to directive to cbor binary responses"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving canonical GetPublicKeys operationId across versions"
-@added(Versions.`2026-03-26`)
-@operationId("GetPublicKeys")
-@sharedRoute
-@doc("Get the public keys used by the service to sign receipts, mentioned in IETF SCITT draft as part of jwks_uri implementation")
-@route("/jwks")
-op getPublicKeysV09 is Foundations.Operation<
-  {},
-  GetPublicKeysResponse,
+  PublicKeysResult,
   ServiceTraits,
   AnyCborError
 >;
@@ -107,114 +88,90 @@ op getScittKey is Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 @added(Versions.`2025-01-31-preview`)
-@removed(Versions.`2026-03-26`)
-@sharedRoute
 @doc("Post an entry to be registered on the CodeTransparency instance, mandatory in IETF SCITT draft")
 @post
 @route("/entries")
 op createEntry is Foundations.Operation<
-  SignedStatement & AcceptCoseOrCborHeader,
-  CreateEntryCreated | CreateEntryPending,
-  ServiceTraits,
-  AnyCborError
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving canonical CreateEntry operationId across versions"
-@added(Versions.`2026-03-26`)
-@operationId("CreateEntry")
-@sharedRoute
-@doc("Post an entry to be registered on the CodeTransparency instance, mandatory in IETF SCITT draft")
-@post
-@route("/entries")
-op createEntryV09 is Foundations.Operation<
   SignedStatement & AcceptCoseOrCborHeader & WaitForCommitParameter,
-  CreateEntryCreated | CreateEntrySeeOther,
+  CreateEntryResult,
   ServiceTraits,
-  AnyCborErrorV09
+  VersionedCborError
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
+#deprecated "The /operations/{operationId} endpoint is deprecated in SCRAPI v09 (api-version=2026-03-26). Clients should poll /entries/{entryId} directly. Behavior is unchanged for backward compatibility."
 @added(Versions.`2025-01-31-preview`)
-@removed(Versions.`2026-03-26`)
-@sharedRoute
-@doc("Get status of the long running registration operation, mandatory in IETF SCITT draft")
+@doc("Get status of the long running registration operation. Deprecated starting with api-version=2026-03-26 (SCRAPI v09) but retained unchanged for backward compatibility; clients using that version should poll /entries/{entryId} directly.")
 @route("/operations/{operationId}")
 op getOperation is Foundations.Operation<
   OperationIdParameter & AcceptCborHeader,
   OperationStatusComplete | OperationStatusPending,
   ServiceTraits,
-  AnyCborError
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving canonical GetOperation operationId across versions"
-#deprecated "The /operations/{operationId} endpoint is deprecated in SCRAPI v09 (api-version=2026-03-26). Clients should poll /entries/{entryId} directly. Behavior is unchanged for backward compatibility."
-@added(Versions.`2026-03-26`)
-@operationId("GetOperation")
-@sharedRoute
-@doc("Get status of the long running registration operation. Deprecated in SCRAPI v09 but retained unchanged for backward compatibility; clients should poll /entries/{entryId} directly.")
-@route("/operations/{operationId}")
-op getOperationV09 is Foundations.Operation<
-  OperationIdParameter & AcceptCborHeader,
-  OperationStatusComplete | OperationStatusPending,
-  ServiceTraits,
-  AnyCborErrorV09
+  VersionedCborError
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 @added(Versions.`2025-01-31-preview`)
-@removed(Versions.`2026-03-26`)
-@sharedRoute
 @doc("Get receipt")
 @route("/entries/{entryId}")
 op getEntry is Foundations.Operation<
-  EntryIdParameter & AcceptCoseHeader,
-  ReceiptEntry,
-  ServiceTraits,
-  AnyCborError
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving canonical GetEntry operationId across versions"
-@added(Versions.`2026-03-26`)
-@operationId("GetEntry")
-@sharedRoute
-@doc("Get receipt")
-@route("/entries/{entryId}")
-op getEntryV09 is Foundations.Operation<
   EntryIdParameter & AcceptScittReceiptHeader,
-  ReceiptEntry | ReceiptEntryPending,
+  ReceiptEntryResult,
   ServiceTraits,
-  AnyCborErrorV09
+  VersionedCborError
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 @added(Versions.`2025-01-31-preview`)
-@removed(Versions.`2026-03-26`)
-@sharedRoute
 @doc("Get the transparent statement consisting of the signed statement and the receipt embedded in the header")
 @route("/entries/{entryId}/statement")
 op getEntryStatement is Foundations.Operation<
-  EntryIdParameter & AcceptCoseHeader,
-  TransparentStatement,
-  ServiceTraits,
-  AnyCborError
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving canonical GetEntryStatement operationId across versions"
-@added(Versions.`2026-03-26`)
-@operationId("GetEntryStatement")
-@sharedRoute
-@doc("Get the transparent statement consisting of the signed statement and the receipt embedded in the header")
-@route("/entries/{entryId}/statement")
-op getEntryStatementV09 is Foundations.Operation<
   EntryIdParameter & AcceptScittStatementHeader,
   TransparentStatement,
   ServiceTraits,
-  AnyCborErrorV09
+  VersionedCborError
 >;
+
+@doc("The public key response for each supported API version.")
+union PublicKeysResult {
+  @removed(Versions.`2026-03-26`)
+  JwksDocument,
+
+  @added(Versions.`2026-03-26`)
+  GetPublicKeysResponse,
+}
+
+@doc("The immediate or pending result of registering an entry.")
+union CreateEntryResult {
+  CreateEntryCreated,
+
+  @removed(Versions.`2026-03-26`)
+  CreateEntryPending,
+
+  @added(Versions.`2026-03-26`)
+  CreateEntrySeeOther,
+}
+
+@doc("The receipt or, starting with SCRAPI v09, a redirect while it is pending.")
+union ReceiptEntryResult {
+  ReceiptEntry,
+
+  @added(Versions.`2026-03-26`)
+  ReceiptEntryPending,
+}
+
+@doc("CBOR errors, including authentication failures starting with SCRAPI v09.")
+union VersionedCborError {
+  Response400Cbor,
+
+  @added(Versions.`2026-03-26`)
+  Response401Cbor,
+
+  Response404Cbor,
+  Response429Cbor,
+  Response500Cbor,
+  Response503Cbor,
+}
 
 @added(Versions.`2025-01-31-preview`)
 @doc("Response of entry submission if the response can be served immediately, mandatory in IETF SCITT draft")
@@ -439,9 +396,9 @@ model KidParameter {
 }
 
 @doc("WaitForCommit query parameter for synchronous registration")
-@added(Versions.`2026-03-26`)
 model WaitForCommitParameter {
   @doc("If true, waits for the entry to be committed before returning. Returns 201 with receipt or 503 on rollback.")
+  @added(Versions.`2026-03-26`)
   @query
   waitForCommit?: boolean;
 }
@@ -453,25 +410,18 @@ model AcceptCoseOrCborHeader {
   accept: "application/cose; application/cbor";
 }
 
-@doc("Accept application/cose header")
-model AcceptCoseHeader {
-  @doc("Accept header")
-  @header
-  accept: "application/cose";
-}
-
 @doc("Accept application/scitt-statement+cose header")
-@added(Versions.`2026-03-26`)
 model AcceptScittStatementHeader {
   @doc("Accept header")
+  @typeChangedFrom(Versions.`2026-03-26`, "application/cose")
   @header
   accept: "application/scitt-statement+cose";
 }
 
 @doc("Accept application/scitt-receipt+cose header")
-@added(Versions.`2026-03-26`)
 model AcceptScittReceiptHeader {
   @doc("Accept header")
+  @typeChangedFrom(Versions.`2026-03-26`, "application/cose")
   @header
   accept: "application/scitt-receipt+cose";
 }

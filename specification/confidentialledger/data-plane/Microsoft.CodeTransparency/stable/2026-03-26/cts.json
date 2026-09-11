@@ -288,7 +288,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Response of entry submission if the response can be served immediately, mandatory in IETF SCITT draft",
+            "description": "The immediate or pending result of registering an entry.",
             "schema": {
               "type": "file"
             },
@@ -304,7 +304,7 @@
             }
           },
           "303": {
-            "description": "Response for async entry submission in SCRAPI v09, returns 303 See Other with empty body",
+            "description": "The immediate or pending result of registering an entry.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -317,25 +317,25 @@
             }
           },
           "400": {
-            "description": "Validation error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "401": {
-            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "404": {
-            "description": "Not found error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "429": {
-            "description": "Not found error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             },
@@ -348,13 +348,13 @@
             }
           },
           "500": {
-            "description": "Server error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "503": {
-            "description": "Service unavailable error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             },
@@ -399,7 +399,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A ledger receipt, see IETF SCITT draft",
+            "description": "The receipt or, starting with SCRAPI v09, a redirect while it is pending.",
             "schema": {
               "type": "file"
             },
@@ -411,7 +411,7 @@
             }
           },
           "302": {
-            "description": "Pending response for entry query in SCRAPI v09, returns 302 Found",
+            "description": "The receipt or, starting with SCRAPI v09, a redirect while it is pending.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -425,25 +425,25 @@
             }
           },
           "400": {
-            "description": "Validation error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "401": {
-            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "404": {
-            "description": "Not found error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "429": {
-            "description": "Not found error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             },
@@ -456,13 +456,13 @@
             }
           },
           "500": {
-            "description": "Server error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "503": {
-            "description": "Service unavailable error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             },
@@ -513,25 +513,25 @@
             }
           },
           "400": {
-            "description": "Validation error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "401": {
-            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "404": {
-            "description": "Not found error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "429": {
-            "description": "Not found error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             },
@@ -544,13 +544,13 @@
             }
           },
           "500": {
-            "description": "Server error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "503": {
-            "description": "Service unavailable error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             },
@@ -589,7 +589,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Response containing the service public keys used to verify receipts.",
+            "description": "The public key response for each supported API version.",
             "schema": {
               "$ref": "#/definitions/JsonWebKeySet"
             }
@@ -653,7 +653,7 @@
     "/operations/{operationId}": {
       "get": {
         "operationId": "GetOperation",
-        "description": "Get status of the long running registration operation. Deprecated in SCRAPI v09 but retained unchanged for backward compatibility; clients should poll /entries/{entryId} directly.",
+        "description": "Get status of the long running registration operation. Deprecated starting with api-version=2026-03-26 (SCRAPI v09) but retained unchanged for backward compatibility; clients using that version should poll /entries/{entryId} directly.",
         "produces": [
           "application/cbor",
           "application/concise-problem-details+cbor"
@@ -697,25 +697,25 @@
             }
           },
           "400": {
-            "description": "Validation error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "401": {
-            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "404": {
-            "description": "Not found error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "429": {
-            "description": "Not found error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             },
@@ -728,13 +728,13 @@
             }
           },
           "500": {
-            "description": "Server error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "503": {
-            "description": "Service unavailable error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             },
@@ -761,41 +761,6 @@
     }
   },
   "definitions": {
-    "AcceptCoseHeader": {
-      "type": "object",
-      "description": "Accept application/cose header"
-    },
-    "CreateEntryCreated": {
-      "type": "object",
-      "description": "Response of entry submission if the response can be served immediately, mandatory in IETF SCITT draft",
-      "properties": {
-        "body": {
-          "type": "string",
-          "format": "byte",
-          "description": "Receipt body in COSE format"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "CreateEntrySeeOther": {
-      "type": "object",
-      "description": "Response for async entry submission in SCRAPI v09, returns 303 See Other with empty body"
-    },
-    "GetPublicKeysResponse": {
-      "type": "object",
-      "description": "Response containing the service public keys used to verify receipts.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/JsonWebKeySet",
-          "description": "The JSON Web Key Set response body."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "JsonWebKeySet": {
       "type": "object",
       "description": "A JSON Web Key Set containing service receipt-verification keys.",
@@ -811,24 +776,6 @@
       "required": [
         "keys"
       ]
-    },
-    "OperationStatusComplete": {
-      "type": "object",
-      "description": "Provides status details for long running operation, mandatory in IETF SCITT draft",
-      "properties": {
-        "body": {
-          "type": "string",
-          "format": "byte",
-          "description": "Operation status response"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "OperationStatusPending": {
-      "type": "object",
-      "description": "Pending response if the operation was not complete, mandatory in IETF SCITT draft"
     },
     "PublicJsonWebKey": {
       "type": "object",
@@ -891,164 +838,6 @@
       "required": [
         "kty",
         "kid"
-      ]
-    },
-    "ReceiptEntry": {
-      "type": "object",
-      "description": "A ledger receipt, see IETF SCITT draft",
-      "properties": {
-        "body": {
-          "type": "string",
-          "format": "byte",
-          "description": "A receipt structure in COSE format"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "ReceiptEntryPending": {
-      "type": "object",
-      "description": "Pending response for entry query in SCRAPI v09, returns 302 Found"
-    },
-    "Response400Cbor": {
-      "type": "object",
-      "description": "Validation error response",
-      "properties": {
-        "error": {
-          "type": "string",
-          "format": "byte",
-          "description": "CBOR content of the error object"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Response401Cbor": {
-      "type": "object",
-      "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
-      "properties": {
-        "error": {
-          "type": "string",
-          "format": "byte",
-          "description": "CBOR content of the error object"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Response404Cbor": {
-      "type": "object",
-      "description": "Not found error response",
-      "properties": {
-        "error": {
-          "type": "string",
-          "format": "byte",
-          "description": "CBOR content of the error object"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Response429Cbor": {
-      "type": "object",
-      "description": "Not found error response",
-      "properties": {
-        "error": {
-          "type": "string",
-          "format": "byte",
-          "description": "CBOR content of the error object"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Response500Cbor": {
-      "type": "object",
-      "description": "Server error response",
-      "properties": {
-        "error": {
-          "type": "string",
-          "format": "byte",
-          "description": "CBOR content of the error object"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Response503Cbor": {
-      "type": "object",
-      "description": "Service unavailable error response",
-      "properties": {
-        "error": {
-          "type": "string",
-          "format": "byte",
-          "description": "CBOR content of the error object"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "ScittKeyResponse": {
-      "type": "object",
-      "description": "Response containing a single COSE_Key (map, not array) in CBOR format",
-      "properties": {
-        "body": {
-          "type": "string",
-          "format": "byte",
-          "description": "Single COSE_Key as CBOR map"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "ScittKeysResponse": {
-      "type": "object",
-      "description": "Response containing COSE_Key_Set (array of COSE_Key maps) in CBOR format",
-      "properties": {
-        "body": {
-          "type": "string",
-          "format": "byte",
-          "description": "COSE_Key_Set as CBOR array of COSE_Key maps"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "TransparencyConfigurationCbor": {
-      "type": "object",
-      "description": "Transparency configuration, see IETF SCITT draft.",
-      "properties": {
-        "body": {
-          "type": "string",
-          "format": "byte",
-          "description": "CBOR content of the configuration object"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "TransparentStatement": {
-      "type": "object",
-      "description": "Transparent statement",
-      "properties": {
-        "body": {
-          "type": "string",
-          "format": "byte",
-          "description": "CoseSign1 signature envelope with the receipt embedded in the unprotected header"
-        }
-      },
-      "required": [
-        "body"
       ]
     }
   },

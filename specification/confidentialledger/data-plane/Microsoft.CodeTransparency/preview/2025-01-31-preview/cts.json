@@ -109,7 +109,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Response of entry submission if the response can be served immediately, mandatory in IETF SCITT draft",
+            "description": "The immediate or pending result of registering an entry.",
             "schema": {
               "type": "file"
             },
@@ -121,7 +121,7 @@
             }
           },
           "202": {
-            "description": "Response of entry submission containing the operation id, mandatory in IETF SCITT draft",
+            "description": "The immediate or pending result of registering an entry.",
             "schema": {
               "type": "file"
             },
@@ -138,19 +138,19 @@
             }
           },
           "400": {
-            "description": "Validation error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "404": {
-            "description": "Not found error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "429": {
-            "description": "Not found error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             },
@@ -163,13 +163,13 @@
             }
           },
           "500": {
-            "description": "Server error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "503": {
-            "description": "Service unavailable error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             },
@@ -205,12 +205,12 @@
             "$ref": "#/parameters/EntryIdParameter"
           },
           {
-            "$ref": "#/parameters/AcceptCoseHeader"
+            "$ref": "#/parameters/AcceptScittReceiptHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "A ledger receipt, see IETF SCITT draft",
+            "description": "The receipt or, starting with SCRAPI v09, a redirect while it is pending.",
             "schema": {
               "type": "file"
             },
@@ -222,19 +222,19 @@
             }
           },
           "400": {
-            "description": "Validation error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "404": {
-            "description": "Not found error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "429": {
-            "description": "Not found error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             },
@@ -247,13 +247,13 @@
             }
           },
           "500": {
-            "description": "Server error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "503": {
-            "description": "Service unavailable error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             },
@@ -289,7 +289,7 @@
             "$ref": "#/parameters/EntryIdParameter"
           },
           {
-            "$ref": "#/parameters/AcceptCoseHeader"
+            "$ref": "#/parameters/AcceptScittStatementHeader"
           }
         ],
         "responses": {
@@ -300,19 +300,19 @@
             }
           },
           "400": {
-            "description": "Validation error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "404": {
-            "description": "Not found error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "429": {
-            "description": "Not found error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             },
@@ -325,13 +325,13 @@
             }
           },
           "500": {
-            "description": "Server error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "503": {
-            "description": "Service unavailable error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             },
@@ -366,7 +366,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "The public key response for each supported API version.",
             "schema": {
               "$ref": "#/definitions/JwksDocument"
             }
@@ -426,7 +426,7 @@
     "/operations/{operationId}": {
       "get": {
         "operationId": "GetOperation",
-        "description": "Get status of the long running registration operation, mandatory in IETF SCITT draft",
+        "description": "Get status of the long running registration operation. Deprecated starting with api-version=2026-03-26 (SCRAPI v09) but retained unchanged for backward compatibility; clients using that version should poll /entries/{entryId} directly.",
         "produces": [
           "application/cbor",
           "application/concise-problem-details+cbor"
@@ -470,19 +470,19 @@
             }
           },
           "400": {
-            "description": "Validation error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "404": {
-            "description": "Not found error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "429": {
-            "description": "Not found error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             },
@@ -495,13 +495,13 @@
             }
           },
           "500": {
-            "description": "Server error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             }
           },
           "503": {
-            "description": "Service unavailable error response",
+            "description": "CBOR errors, including authentication failures starting with SCRAPI v09.",
             "schema": {
               "type": "file"
             },
@@ -514,6 +514,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "GetOperation": {
             "$ref": "./examples/GetOperation.json"
@@ -523,34 +524,6 @@
     }
   },
   "definitions": {
-    "CreateEntryCreated": {
-      "type": "object",
-      "description": "Response of entry submission if the response can be served immediately, mandatory in IETF SCITT draft",
-      "properties": {
-        "body": {
-          "type": "string",
-          "format": "byte",
-          "description": "Receipt body in COSE format"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "CreateEntryPending": {
-      "type": "object",
-      "description": "Response of entry submission containing the operation id, mandatory in IETF SCITT draft",
-      "properties": {
-        "body": {
-          "type": "string",
-          "format": "byte",
-          "description": "Operation status response"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "JsonWebKey": {
       "type": "object",
       "description": "rfc7517 JSON Web Key representation adapted from a shared swagger definition in the common types",
@@ -646,136 +619,6 @@
       "required": [
         "keys"
       ]
-    },
-    "OperationStatusComplete": {
-      "type": "object",
-      "description": "Provides status details for long running operation, mandatory in IETF SCITT draft",
-      "properties": {
-        "body": {
-          "type": "string",
-          "format": "byte",
-          "description": "Operation status response"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "OperationStatusPending": {
-      "type": "object",
-      "description": "Pending response if the operation was not complete, mandatory in IETF SCITT draft"
-    },
-    "ReceiptEntry": {
-      "type": "object",
-      "description": "A ledger receipt, see IETF SCITT draft",
-      "properties": {
-        "body": {
-          "type": "string",
-          "format": "byte",
-          "description": "A receipt structure in COSE format"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Response400Cbor": {
-      "type": "object",
-      "description": "Validation error response",
-      "properties": {
-        "error": {
-          "type": "string",
-          "format": "byte",
-          "description": "CBOR content of the error object"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Response404Cbor": {
-      "type": "object",
-      "description": "Not found error response",
-      "properties": {
-        "error": {
-          "type": "string",
-          "format": "byte",
-          "description": "CBOR content of the error object"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Response429Cbor": {
-      "type": "object",
-      "description": "Not found error response",
-      "properties": {
-        "error": {
-          "type": "string",
-          "format": "byte",
-          "description": "CBOR content of the error object"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Response500Cbor": {
-      "type": "object",
-      "description": "Server error response",
-      "properties": {
-        "error": {
-          "type": "string",
-          "format": "byte",
-          "description": "CBOR content of the error object"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Response503Cbor": {
-      "type": "object",
-      "description": "Service unavailable error response",
-      "properties": {
-        "error": {
-          "type": "string",
-          "format": "byte",
-          "description": "CBOR content of the error object"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "TransparencyConfigurationCbor": {
-      "type": "object",
-      "description": "Transparency configuration, see IETF SCITT draft.",
-      "properties": {
-        "body": {
-          "type": "string",
-          "format": "byte",
-          "description": "CBOR content of the configuration object"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "TransparentStatement": {
-      "type": "object",
-      "description": "Transparent statement",
-      "properties": {
-        "body": {
-          "type": "string",
-          "format": "byte",
-          "description": "CoseSign1 signature envelope with the receipt embedded in the unprotected header"
-        }
-      },
-      "required": [
-        "body"
-      ]
     }
   },
   "parameters": {
@@ -793,7 +636,21 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "AcceptCoseHeader": {
+    "AcceptCoseOrCborHeader": {
+      "name": "accept",
+      "in": "header",
+      "description": "Accept header",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "application/cose; application/cbor"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AcceptScittReceiptHeader": {
       "name": "accept",
       "in": "header",
       "description": "Accept header",
@@ -807,14 +664,14 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "AcceptCoseOrCborHeader": {
+    "AcceptScittStatementHeader": {
       "name": "accept",
       "in": "header",
       "description": "Accept header",
       "required": true,
       "type": "string",
       "enum": [
-        "application/cose; application/cbor"
+        "application/cose"
       ],
       "x-ms-enum": {
         "modelAsString": false
