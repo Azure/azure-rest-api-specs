@@ -4283,7 +4283,7 @@
         "tags": [
           "MaintenanceEvents"
         ],
-        "description": "Lists maintenance events for a HorizonDB pool.",
+        "description": "Lists maintenance events for a HorizonDB pool. Use the OData $filter query parameter to filter by properties/status with the eq and or operators. For example, properties/status eq 'Planned' or properties/status eq 'InProgress' returns upcoming events.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -4315,31 +4315,7 @@
             "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
-            "name": "maintenanceStatus",
-            "in": "query",
-            "description": "Filters maintenance events by status.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "Upcoming",
-              "Past"
-            ],
-            "x-ms-enum": {
-              "name": "MaintenanceEventStatusFilter",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Upcoming",
-                  "value": "Upcoming",
-                  "description": "Return events that have a scheduled or in-progress status."
-                },
-                {
-                  "name": "Past",
-                  "value": "Past",
-                  "description": "Return events that have a completed status."
-                }
-              ]
-            }
+            "$ref": "#/parameters/Azure.ResourceManager.ArmFilterParameter"
           }
         ],
         "responses": {
@@ -10222,6 +10198,15 @@
     }
   },
   "parameters": {
+    "Azure.ResourceManager.ArmFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "The OData filter expression to apply to the list operation.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "filter"
+    },
     "ChangeDataCaptureDestinationIfMatchParameter": {
       "name": "If-Match",
       "in": "header",

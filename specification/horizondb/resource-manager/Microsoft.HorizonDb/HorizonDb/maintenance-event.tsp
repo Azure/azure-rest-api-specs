@@ -181,32 +181,16 @@ union MaintenanceType {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("A filter for maintenance event status.")
-union MaintenanceEventStatusFilter {
-  string,
-
-  /** Return events that have a scheduled or in-progress status. */
-  Upcoming: "Upcoming",
-
-  /** Return events that have a completed status. */
-  Past: "Past",
-}
-
-@added(Versions.v2026_10_01_preview)
 @doc("Maintenance event operations for HorizonDB pools.")
 @armResourceOperations
 interface MaintenanceEvents {
   @doc("Gets information about a maintenance event for a HorizonDB pool.")
   get is ArmResourceRead<MaintenanceEvent>;
 
-  @doc("Lists maintenance events for a HorizonDB pool.")
+  @doc("Lists maintenance events for a HorizonDB pool. Use the OData $filter query parameter to filter by properties/status with the eq and or operators. For example, properties/status eq 'Planned' or properties/status eq 'InProgress' returns upcoming events.")
   list is ArmResourceListByParent<
     MaintenanceEvent,
-    Parameters = {
-      @doc("Filters maintenance events by status.")
-      @query("maintenanceStatus")
-      maintenanceStatus?: MaintenanceEventStatusFilter;
-    }
+    Parameters = ArmFilterParameter
   >;
 
   @doc("Reschedules a maintenance event to a new date and time.")
