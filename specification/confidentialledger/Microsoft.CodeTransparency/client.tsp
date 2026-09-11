@@ -33,12 +33,28 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
-@@access(Microsoft.CodeTransparency.createEntryV09, Access.internal, "csharp");
 @@access(Microsoft.CodeTransparency.getOperationV09, Access.internal, "csharp");
-@@access(Microsoft.CodeTransparency.getEntryV09, Access.internal, "csharp");
-@@access(
+
+@@clientName(
+  Microsoft.CodeTransparency.createEntry,
+  "createEntryPreview",
+  "csharp"
+);
+@@clientName(
+  Microsoft.CodeTransparency.createEntryV09,
+  "createEntry",
+  "csharp"
+);
+@@clientName(Microsoft.CodeTransparency.getEntry, "getEntryPreview", "csharp");
+@@clientName(Microsoft.CodeTransparency.getEntryV09, "getEntry", "csharp");
+@@clientName(
+  Microsoft.CodeTransparency.getEntryStatement,
+  "getEntryStatementPreview",
+  "csharp"
+);
+@@clientName(
   Microsoft.CodeTransparency.getEntryStatementV09,
-  Access.internal,
+  "getEntryStatement",
   "csharp"
 );
 @@clientName(
