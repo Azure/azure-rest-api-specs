@@ -42566,11 +42566,11 @@
           "connection": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 128,
+            "maxLength": 256,
             "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required."
           },
           "source": {
-            "type": "string",
+            "$ref": "#/components/schemas/TelephonyOutboundSource",
             "minLength": 1,
             "description": "The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing."
           },
@@ -42634,11 +42634,11 @@
           "connection": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 128,
+            "maxLength": 256,
             "description": "The Foundry connection name in the current project used to originate campaign calls. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required."
           },
           "source": {
-            "type": "string",
+            "$ref": "#/components/schemas/TelephonyOutboundSource",
             "minLength": 1,
             "description": "The caller identity used to originate campaign calls. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing."
           },
@@ -93077,11 +93077,11 @@
           "connection": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 128,
+            "maxLength": 256,
             "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required."
           },
           "source": {
-            "type": "string",
+            "$ref": "#/components/schemas/TelephonyOutboundSource",
             "minLength": 1,
             "description": "The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing."
           },
@@ -93878,11 +93878,11 @@
           "connection": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 128,
+            "maxLength": 256,
             "description": "The Foundry connection name in the current project used to originate campaign calls. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required."
           },
           "source": {
-            "type": "string",
+            "$ref": "#/components/schemas/TelephonyOutboundSource",
             "minLength": 1,
             "description": "The caller identity used to originate campaign calls. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing."
           },
@@ -94695,6 +94695,18 @@
           }
         ],
         "description": "The retry strategy for an outbound call.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyOutboundSource": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 36,
+        "pattern": "^(?:\\+[1-9][0-9]{1,14}|(?!00000000-0000-0000-0000-000000000000$)[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$",
+        "description": "An outbound caller identity: an E.164 phone number or a non-empty Teams Resource Account UUID. The connection category determines which form is accepted.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
