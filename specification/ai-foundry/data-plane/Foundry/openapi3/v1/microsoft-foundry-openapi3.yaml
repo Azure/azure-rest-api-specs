@@ -43717,6 +43717,11 @@ components:
           format: unixtime
           description: The Unix timestamp (in seconds) when the session expires (rolling, 30 days from last activity).
           readOnly: true
+        stopped_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) when the session sandbox was last observed to stop or go idle. Present only after the session has gone idle at least once, used for accurate idle-billing reconciliation.
+          readOnly: true
       description: An agent session providing a long-lived compute sandbox for hosted agent invocations.
     AgentSessionStatus:
       anyOf:
@@ -47321,9 +47326,11 @@ components:
           $ref: '#/components/schemas/EvaluationLevel'
           description: The level at which evaluation is performed. Defaults to 'turn' if not specified.
           default: turn
-        output_dataset:
-          $ref: '#/components/schemas/EvaluationDataset'
-          description: Dataset produced by the evaluation run. Present when the run creates a versioned Foundry dataset; otherwise omitted.
+        output_datasets:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationOutputDataset'
+          description: Preview-only. Datasets produced by the evaluation run. Omitted when no datasets were generated. This field may change in a future API version.
           readOnly: true
         latency:
           $ref: '#/components/schemas/EvalRunLatency'
@@ -47839,41 +47846,6 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Insights=V1Preview
-    EvaluationAudioTranscriptionModel:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - mai-transcribe-1
-            - azure-speech
-      description: Supported speech-to-text transcription models. The union is extensible for additional models.
-    EvaluationAudioTranscriptionModelConfiguration:
-      type: object
-      required:
-        - model
-      properties:
-        model:
-          $ref: '#/components/schemas/EvaluationAudioTranscriptionModel'
-          description: The transcription model.
-      description: Configuration for speech-to-text transcription used during evaluation.
-    EvaluationAzureRealtimeNativeVoiceModelConfiguration:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - azure-realtime-native
-          description: The voice kind. Always `azure-realtime-native`.
-        name:
-          type: string
-          minLength: 1
-          description: The Azure realtime-native voice name. When omitted, the service defaults to `ava`.
-          default: ava
-      allOf:
-        - $ref: '#/components/schemas/EvaluationVoiceModelConfiguration'
-      description: Configures an Azure realtime-native voice for evaluation.
     EvaluationAzureStandardVoiceModelConfiguration:
       type: object
       required:
@@ -47897,7 +47869,7 @@ components:
           description: The synthesis temperature, from 0 to 1. When omitted, the service defaults to the underlying voice model's default temperature.
       allOf:
         - $ref: '#/components/schemas/EvaluationVoiceModelConfiguration'
-      description: Configures an Azure standard neural voice for evaluation.
+      description: Configures an Azure standard neural voice used to convert text to speech for evaluation through the Voice Live endpoint.
     EvaluationComparisonInsightRequest:
       type: object
       required:
@@ -47990,31 +47962,30 @@ components:
         sampling_params:
           $ref: '#/components/schemas/ModelSamplingParams'
           description: Sampling parameters applied when the simulation model produces user turns.
-        transcription_model:
-          $ref: '#/components/schemas/EvaluationAudioTranscriptionModelConfiguration'
-          description: Transcription model configuration used to convert simulated user speech to text. Omit for text-only simulation.
         voice_model:
           $ref: '#/components/schemas/EvaluationVoiceModelConfiguration'
-          description: Voice model configuration used to convert simulated user text to speech. Omit for text-only simulation.
+          description: Voice configuration used to convert simulated user text to speech. Currently, only Azure standard voices are supported. Omit for text-only simulation.
       description: Configures the model that plays the simulated user. This model is separate from the evaluated `target`.
-    EvaluationOpenAIVoiceModelConfiguration:
+    EvaluationOutputDataset:
       type: object
       required:
         - type
-        - name
+        - dataset
       properties:
         type:
-          type: string
+          $ref: '#/components/schemas/EvaluationOutputDatasetType'
+          description: Purpose of the generated dataset.
+        dataset:
+          $ref: '#/components/schemas/EvaluationDataset'
+          description: Generated dataset reference.
+      description: A typed reference to a dataset produced by an evaluation run.
+    EvaluationOutputDatasetType:
+      anyOf:
+        - type: string
+        - type: string
           enum:
-            - openai
-          description: The voice kind. Always `openai`.
-        name:
-          type: string
-          minLength: 1
-          description: The OpenAI built-in voice name.
-      allOf:
-        - $ref: '#/components/schemas/EvaluationVoiceModelConfiguration'
-      description: Configures an OpenAI built-in voice for evaluation.
+            - simulated_user_conversations
+      description: Purpose of a dataset produced by an evaluation run. The union is extensible for additional output types.
     EvaluationResultSample:
       type: object
       required:
@@ -48335,10 +48306,8 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          openai: '#/components/schemas/EvaluationOpenAIVoiceModelConfiguration'
           azure-standard: '#/components/schemas/EvaluationAzureStandardVoiceModelConfiguration'
-          azure-realtime-native: '#/components/schemas/EvaluationAzureRealtimeNativeVoiceModelConfiguration'
-      description: Voice configuration used to convert text to speech for evaluation. All supported voice types use the Voice Live endpoint under the hood.
+      description: Voice configuration used to convert text to speech for evaluation through the Voice Live endpoint.
     EvaluatorCategory:
       anyOf:
         - type: string
@@ -84027,6 +83996,41 @@ components:
           $ref: '#/components/schemas/UserConversationSimulationUserBehaviorConfiguration'
           description: Conversation behavior of the simulated user.
       description: Configures the number, length, audio effects, and simulated user behavior of conversations.
+    UserConversationSimulationDefaultConfiguration:
+      type: object
+      properties:
+        max_num_turns:
+          type: integer
+          format: int32
+          minimum: 1
+          description: Hard limit on turns in each conversation. When omitted, the service defaults to 20.
+          default: 20
+        conversation_repetitions:
+          type: integer
+          format: int32
+          minimum: 1
+          description: Number of independent conversation repetitions for each test case. Defaults to 1 when not specified at either the data-source or test-case level.
+          default: 1
+        desired_num_turns:
+          type: integer
+          format: int32
+          minimum: 1
+          description: Target number of turns in each conversation. The effective value cannot exceed the effective `max_num_turns`. When omitted, no target is set and the simulation model determines the conversation length dynamically from the scenario.
+        audio_effects:
+          $ref: '#/components/schemas/UserConversationSimulationAudioEffectsConfiguration'
+          description: Audio effects applied to voice conversation simulations. This property is ignored for text-only simulations.
+        user_behavior:
+          $ref: '#/components/schemas/UserConversationSimulationUserBehaviorConfiguration'
+          description: Conversation behavior of the simulated user.
+        enable_conversation_dataset_generation:
+          type: boolean
+          description: Whether to write all generated conversations to a versioned Foundry dataset. When enabled, the completed run includes a `simulated_user_conversations` entry in `output_datasets`. When omitted, the service defaults to `false`.
+          default: false
+        output_conversation_dataset_name:
+          type: string
+          minLength: 1
+          description: Name of the dataset to which generated conversations are written. This property is used only when `enable_conversation_dataset_generation` is `true`. When omitted, the service generates a dataset name.
+      description: Configures default conversation behavior and optional run-wide persistence of generated conversations.
     UserConversationSimulationDefaultInterruptionConfiguration:
       type: object
       required:
@@ -84063,17 +84067,13 @@ components:
           $ref: '#/components/schemas/EvaluationModelConfiguration'
           description: Model used to simulate the user side of each conversation by generating turns sent to the evaluated `target`.
         default_simulation_configuration:
-          $ref: '#/components/schemas/UserConversationSimulationConfiguration'
-          description: Default configuration for generating simulated user conversations. Properties in a test case's `simulation_configuration` override the corresponding defaults.
+          $ref: '#/components/schemas/UserConversationSimulationDefaultConfiguration'
+          description: Default configuration for generating simulated user conversations and persisting their output. Conversation properties in a test case's `simulation_configuration` override the corresponding defaults.
         data_mapping:
           type: object
           unevaluatedProperties:
             type: string
           description: Maps JSONL dataset attributes to user conversation simulation inputs when their names differ from the defaults. The default attribute names are `test_case_id`, `test_case_category`, `test_case_description`, and `simulation_configuration`, matching `UserConversationSimulationTestCase`. Omit when the dataset uses these names or when using `inline_user_conversation_simulation`.
-        enable_conversation_dataset_generation:
-          type: boolean
-          description: Whether to write all generated conversations to a file in a versioned Foundry dataset, providing visibility into the generated conversations. The dataset can be reused in future evaluation runs. When enabled, the completed run includes `output_dataset`. When omitted, the service defaults to `false`.
-          default: false
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: |-

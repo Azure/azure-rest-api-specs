@@ -21,38 +21,29 @@ model EvaluationDataset {
   version: string;
 }
 
-/** Configuration for speech-to-text transcription used during evaluation. */
-model EvaluationAudioTranscriptionModelConfiguration {
-  /** The transcription model. */
-  `model`: EvaluationAudioTranscriptionModel;
-}
-
-/** Supported speech-to-text transcription models. The union is extensible for additional models. */
-union EvaluationAudioTranscriptionModel {
+/** Purpose of a dataset produced by an evaluation run. The union is extensible for additional output types. */
+union EvaluationOutputDatasetType {
   string,
-  mai_transcribe_1: "mai-transcribe-1",
-  azure_speech: "azure-speech",
+  simulatedUserConversations: "simulated_user_conversations",
 }
 
-/** Voice configuration used to convert text to speech for evaluation. All supported voice types use the Voice Live endpoint under the hood. */
+/** A typed reference to a dataset produced by an evaluation run. */
+model EvaluationOutputDataset {
+  /** Purpose of the generated dataset. */
+  type: EvaluationOutputDatasetType;
+
+  /** Generated dataset reference. */
+  dataset: EvaluationDataset;
+}
+
+/** Voice configuration used to convert text to speech for evaluation through the Voice Live endpoint. */
 @discriminator("type")
 model EvaluationVoiceModelConfiguration {
   /** The voice kind. */
   type: string;
 }
 
-/** Configures an OpenAI built-in voice for evaluation. */
-model EvaluationOpenAIVoiceModelConfiguration
-  extends EvaluationVoiceModelConfiguration {
-  /** The voice kind. Always `openai`. */
-  type: "openai";
-
-  /** The OpenAI built-in voice name. */
-  @minLength(1)
-  name: string;
-}
-
-/** Configures an Azure standard neural voice for evaluation. */
+/** Configures an Azure standard neural voice used to convert text to speech for evaluation through the Voice Live endpoint. */
 model EvaluationAzureStandardVoiceModelConfiguration
   extends EvaluationVoiceModelConfiguration {
   /** The voice kind. Always `azure-standard`. */
@@ -68,17 +59,6 @@ model EvaluationAzureStandardVoiceModelConfiguration
   temperature?: float32;
 }
 
-/** Configures an Azure realtime-native voice for evaluation. */
-model EvaluationAzureRealtimeNativeVoiceModelConfiguration
-  extends EvaluationVoiceModelConfiguration {
-  /** The voice kind. Always `azure-realtime-native`. */
-  type: "azure-realtime-native";
-
-  /** The Azure realtime-native voice name. When omitted, the service defaults to `ava`. */
-  @minLength(1)
-  name?: string = "ava";
-}
-
 /** Configures the model that plays the simulated user. This model is separate from the evaluated `target`. */
 model EvaluationModelConfiguration {
   /** Model deployment that generates simulated user turns, in the format `{connectionName}/modelDeploymentName`. */
@@ -87,9 +67,6 @@ model EvaluationModelConfiguration {
   /** Sampling parameters applied when the simulation model produces user turns. */
   sampling_params?: ModelSamplingParams;
 
-  /** Transcription model configuration used to convert simulated user speech to text. Omit for text-only simulation. */
-  transcription_model?: EvaluationAudioTranscriptionModelConfiguration;
-
-  /** Voice model configuration used to convert simulated user text to speech. Omit for text-only simulation. */
+  /** Voice configuration used to convert simulated user text to speech. Currently, only Azure standard voices are supported. Omit for text-only simulation. */
   voice_model?: EvaluationVoiceModelConfiguration;
 }

@@ -830,9 +830,9 @@ model EvalRun is OpenAI.EvalRun {
   /** The level at which evaluation is performed. Defaults to 'turn' if not specified. */
   evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
 
-  /** Dataset produced by the evaluation run. Present when the run creates a versioned Foundry dataset; otherwise omitted. */
+  /** Preview-only. Datasets produced by the evaluation run. Omitted when no datasets were generated. This field may change in a future API version. */
   @visibility(Lifecycle.Read)
-  output_dataset?: EvaluationDataset;
+  output_datasets?: EvaluationOutputDataset[];
 
   /** Latency measurements observed during the evaluation run. */
   latency?: EvalRunLatency;
