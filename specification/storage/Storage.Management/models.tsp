@@ -3724,6 +3724,12 @@ model StorageDataCollaborationPolicyProperties {
   allowStorageConnectors?: boolean;
 
   /**
+   * Indicates whether Blob Access Point configurations are allowed to be created or managed on the storage account.
+   */
+  @added(Versions.v2026_09_01)
+  allowStorageBlobAccessPointConfigurations?: boolean;
+
+  /**
    * Indicates whether data shares are allowed to be created or managed on the storage account.
    */
   allowStorageDataShares?: boolean;
