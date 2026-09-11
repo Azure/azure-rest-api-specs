@@ -15955,7 +15955,7 @@
         "vaultUri": {
           "type": "string",
           "format": "uri",
-          "description": "The URI for the key vault used as the secret archive."
+          "description": "The URI of the secret archive endpoint. The URI must use the `https://` scheme."
         }
       }
     },
@@ -16435,6 +16435,14 @@
       "type": "object",
       "description": "StorageApplianceProperties represents the properties of the storage appliance.",
       "properties": {
+        "administratorCredentials": {
+          "$ref": "#/definitions/AdministrativeCredentials",
+          "description": "The credentials of the administrative interface on this storage appliance.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "rackId": {
           "type": "string",
           "format": "arm-id",
@@ -16466,14 +16474,6 @@
         "serialNumber": {
           "type": "string",
           "description": "The serial number for the storage appliance."
-        },
-        "administratorCredentials": {
-          "$ref": "#/definitions/AdministrativeCredentials",
-          "description": "The credentials of the administrative interface on this storage appliance.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         },
         "caCertificate": {
           "$ref": "#/definitions/CertificateInfo",
@@ -16556,11 +16556,11 @@
         }
       },
       "required": [
+        "administratorCredentials",
         "rackId",
         "storageApplianceSkuId",
         "rackSlot",
-        "serialNumber",
-        "administratorCredentials"
+        "serialNumber"
       ]
     },
     "StorageApplianceProvisioningState": {

@@ -593,6 +593,13 @@ model ClusterStatus {
   detailedStatusMessage?: string;
 
   /**
+   * The CA certificate of the edge management service.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  edgeManagementServiceCaCertificate?: CertificateInfo;
+
+  /**
    * Field Deprecated. This field will not be populated in an upcoming version. The extended location (custom location) that represents the Hybrid AKS control plane location. This extended location is used when creating provisioned clusters (Hybrid AKS clusters).
    */
   @visibility(Lifecycle.Read)
@@ -1029,9 +1036,219 @@ model SecretArchiveSettings {
   associatedIdentity?: IdentitySelector;
 
   /**
-   * The URI for the key vault used as the secret archive.
+   * The public key used to encrypt secrets before they are written to the secret archive. Expected encoding is a PEM-encoded RSA public key with a minimum key size of 3072 bits. Additional key formats or sizes may be supported in future versions.
+   */
+  @added(Versions.v2026_08_01_preview)
+  encryptionPublicKey?: string;
+
+  /**
+   * The configuration indicating the use of self-supplied secret archive software. Specification of a provider configuration indicates that the provided configuration will be used. Exclusion of any providerConfiguration indicates the use of Azure Key Vault. If providerConfiguration is included in a PATCH, the body must be a complete, valid configuration for the chosen provider, including all fields required for that provider; omit providerConfiguration from PATCH bodies that do not change it.
+   */
+  @added(Versions.v2026_08_01_preview)
+  providerConfiguration?: SecretArchiveProviderConfiguration;
+
+  /**
+   * The URI of the secret archive endpoint. The URI must use the `https://` scheme.
    */
   vaultUri?: url;
+}
+
+/**
+ * The provider of the secret archive. Absence of `providerConfiguration` on `SecretArchiveSettings` implies Azure Key Vault as the default provider; this enum enumerates only the self-supplied (non-Azure Key Vault) providers.
+ */
+@added(Versions.v2026_08_01_preview)
+union SecretArchiveProviderType {
+  string,
+
+  /**
+   * CyberArk secret archive provider.
+   */
+  CyberArk: "CyberArk",
+
+  /**
+   * HashiCorp Vault secret archive provider.
+   */
+  HashiCorpVault: "HashiCorpVault",
+
+  /**
+   * OpenBao secret archive provider.
+   */
+  OpenBao: "OpenBao",
+}
+
+/**
+ * The version of the key value secrets engine. Supports values V1 and V2,
+ * which map to engine versions 1 and 2 respectively.
+ */
+@added(Versions.v2026_08_01_preview)
+union KeyValueVersion {
+  string,
+
+  /**
+   * Key/value engine version 1.
+   */
+  V1: "V1",
+
+  /**
+   * Key/value engine version 2.
+   */
+  V2: "V2",
+}
+
+/**
+ * The authentication method used to authenticate to a HashiCorp Vault or OpenBao secret archive.
+ */
+@added(Versions.v2026_08_01_preview)
+union VaultAuthenticationMethod {
+  string,
+
+  /**
+   * AppRole authentication method.
+   */
+  AppRole: "AppRole",
+
+  /**
+   * Client certificate authentication method.
+   */
+  ClientCertificate: "ClientCertificate",
+}
+
+/**
+ * SecretArchiveProviderConfiguration represents the base configuration for a self-supplied secret archive provider.
+ */
+@added(Versions.v2026_08_01_preview)
+@discriminator("provider")
+model SecretArchiveProviderConfiguration {
+  /**
+   * The provider of the secret archive.
+   */
+  provider: SecretArchiveProviderType;
+}
+
+/**
+ * The configuration for a CyberArk secret archive provider.
+ */
+@added(Versions.v2026_08_01_preview)
+model CyberArkSecretArchiveProviderConfiguration
+  extends SecretArchiveProviderConfiguration {
+  /**
+   * The provider of the secret archive. Literal value CyberArk.
+   */
+  provider: SecretArchiveProviderType.CyberArk;
+
+  /**
+   * The CyberArk application ID.
+   */
+  applicationId: string;
+
+  /**
+   * The safe name for credential storage.
+   */
+  safeName: string;
+
+  /**
+   * The folder name within the safe. When not specified, the service uses `Root`.
+   */
+  folderName?: string;
+
+  /**
+   * The object naming pattern within the safe. The tokens `{namespace}` and `{name}` may appear in the template and are substituted at archive time.
+   */
+  objectNameTemplate?: string;
+}
+
+/**
+ * The configuration for a HashiCorp Vault secret archive provider. Authentication credentials required by the selected authenticationMethod (for example, the AppRole secret, or client certificate and private key) are supplied out of band.
+ */
+@added(Versions.v2026_08_01_preview)
+model HashiCorpVaultSecretArchiveProviderConfiguration
+  extends SecretArchiveProviderConfiguration {
+  /**
+   * The provider of the secret archive. Literal value HashiCorpVault.
+   */
+  provider: SecretArchiveProviderType.HashiCorpVault;
+
+  /**
+   * The key value secrets engine mount path. When not specified, the service uses `secret`.
+   */
+  mountPath?: string;
+
+  /**
+   * The key value engine version. Supports values `V1` and `V2`. When not specified, the service uses `V2`.
+   */
+  keyValueVersion?: KeyValueVersion;
+
+  /**
+   * The vault namespace.
+   */
+  `namespace`?: string;
+
+  /**
+   * The secret path pattern. The tokens `{namespace}` and `{name}` may appear in the template and are substituted at archive time. When not specified, the service uses `edge-credentials/{namespace}/{name}`.
+   */
+  pathTemplate?: string;
+
+  /**
+   * The authentication method used for the archive. When set to `AppRole`, `applicationRoleId` is required; when set to `ClientCertificate`, `applicationRoleId` is ignored.
+   */
+  authenticationMethod: VaultAuthenticationMethod;
+
+  /**
+   * The Role ID, required when `authenticationMethod` is `AppRole`; ignored for other authentication methods.
+   */
+  applicationRoleId?: string;
+
+  /**
+   * The authentication method mount path in the archive.
+   */
+  authenticationMountPath?: string;
+}
+
+/**
+ * The configuration for an OpenBao secret archive provider. Authentication credentials required by the selected authenticationMethod (for example, the AppRole secret, or client certificate and private key) are supplied out of band.
+ */
+@added(Versions.v2026_08_01_preview)
+model OpenBaoSecretArchiveProviderConfiguration
+  extends SecretArchiveProviderConfiguration {
+  /**
+   * The provider of the secret archive. Literal value OpenBao.
+   */
+  provider: SecretArchiveProviderType.OpenBao;
+
+  /**
+   * The key value secrets engine mount path. When not specified, the service uses `secret`.
+   */
+  mountPath?: string;
+
+  /**
+   * The key value engine version. Supports values `V1` and `V2`. When not specified, the service uses `V2`.
+   */
+  keyValueVersion?: KeyValueVersion;
+
+  /**
+   * The vault namespace.
+   */
+  `namespace`?: string;
+
+  /**
+   * The secret path pattern. The tokens `{namespace}` and `{name}` may appear in the template and are substituted at archive time. When not specified, the service uses `edge-credentials/{namespace}/{name}`.
+   */
+  pathTemplate?: string;
+
+  /**
+   * The authentication method used for the archive. When set to `AppRole`, `applicationRoleId` is required; when set to `ClientCertificate`, `applicationRoleId` is ignored.
+   */
+  authenticationMethod: VaultAuthenticationMethod;
+
+  /**
+   * The Role ID, required when `authenticationMethod` is `AppRole`; ignored for other authentication methods.
+   */
+  applicationRoleId?: string;
+
+  /**
+   * The authentication method mount path in the archive.
+   */
+  authenticationMountPath?: string;
 }
 
 /**
@@ -1349,7 +1566,7 @@ model ClusterPatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  ...Foundations.ArmTagsProperty;
+  ...TagsParameter;
 }
 
 /**
