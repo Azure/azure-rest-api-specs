@@ -59,7 +59,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.CodeTransparency.getPublicKeys,
-  "getPublicKeysPreview",
+  "getPublicKeysLegacy",
   "csharp"
 );
 @@clientName(
