@@ -75,7 +75,7 @@ alias GetDiskImageErrors =
 /** OK. */
 model PostDiskImageResult {
   /** HTTP response status code. */
-  @statusCode statusCode: 200;
+  @statusCode statusCode: 201;
 
   /** Response body. */
   @body body: DiskImage;
@@ -183,7 +183,7 @@ interface DiskImagesOperations {
 
   /** Creates a new disk image from an OCI image reference. */
   @summary("Creates a new disk image from an OCI image reference.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/createDiskimage")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages")
   @post
   postDiskImage is Foundations.Operation<
     {

@@ -974,153 +974,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/createDiskimage": {
-      "post": {
-        "operationId": "DiskImagesOperations_PostDiskImage",
-        "tags": [
-          "DiskImages"
-        ],
-        "summary": "Creates a new disk image from an OCI image reference.",
-        "description": "Creates a new disk image from an OCI image reference.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request body.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CreateDiskImageContent"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/DiskImage"
-            }
-          },
-          "400": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Create a disk image from a container registry": {
-            "$ref": "./examples/DiskImagesOperations_PostDiskImage.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/createSandbox": {
-      "post": {
-        "operationId": "AzureSandboxes_Create",
-        "tags": [
-          "Sandboxes"
-        ],
-        "description": "Creates a sandbox in a scope.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
-          },
-          {
-            "name": "content",
-            "in": "body",
-            "description": "Sandbox create request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CreateSandboxContent"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Successful Sandbox create response.",
-            "schema": {
-              "$ref": "#/definitions/Sandbox"
-            }
-          },
-          "400": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "An error response with an HTTP status code and error body.",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Create example": {
-            "$ref": "./examples/AzureSandboxes_Create.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/credentials": {
       "get": {
         "operationId": "CredentialsOperations_ListCredentials",
@@ -1391,6 +1244,78 @@
         "x-ms-examples": {
           "List disk images in a sandbox group": {
             "$ref": "./examples/DiskImagesOperations_ListDiskImages.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "DiskImagesOperations_PostDiskImage",
+        "tags": [
+          "DiskImages"
+        ],
+        "summary": "Creates a new disk image from an OCI image reference.",
+        "description": "Creates a new disk image from an OCI image reference.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateDiskImageContent"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DiskImage"
+            }
+          },
+          "400": {
+            "description": "An error response with an HTTP status code and error body.",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "An error response with an HTTP status code and error body.",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "An error response with an HTTP status code and error body.",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "An error response with an HTTP status code and error body.",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Create a disk image from a container registry": {
+            "$ref": "./examples/DiskImagesOperations_PostDiskImage.json"
           }
         }
       }
@@ -1988,6 +1913,77 @@
         "x-ms-examples": {
           "List example": {
             "$ref": "./examples/AzureSandboxes_List.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "AzureSandboxes_Create",
+        "tags": [
+          "Sandboxes"
+        ],
+        "description": "Creates a sandbox in a scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+          },
+          {
+            "name": "content",
+            "in": "body",
+            "description": "Sandbox create request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateSandboxContent"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful Sandbox create response.",
+            "schema": {
+              "$ref": "#/definitions/Sandbox"
+            }
+          },
+          "400": {
+            "description": "An error response with an HTTP status code and error body.",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "An error response with an HTTP status code and error body.",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "An error response with an HTTP status code and error body.",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "An error response with an HTTP status code and error body.",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Create example": {
+            "$ref": "./examples/AzureSandboxes_Create.json"
           }
         }
       }
