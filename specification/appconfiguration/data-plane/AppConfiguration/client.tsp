@@ -23,14 +23,14 @@ namespace SdkCustomizations;
 @@clientName(Azure.Core.Foundations.Error, "CommonError", "python");
 
 // Hide feature-flag operations from the config-only package.
-@@scope(getFeatureFlags, "!(csharp, python, java, javascript, go, rust)");
-@@scope(checkFeatureFlags, "!(csharp, python, java, javascript, go, rust)");
-@@scope(getFeatureFlag, "!(csharp, python, java, javascript, go, rust)");
-@@scope(checkFeatureFlag, "!(csharp, python, java, javascript, go, rust)");
-@@scope(putFeatureFlag, "!(csharp, python, java, javascript, go, rust)");
-@@scope(deleteFeatureFlag, "!(csharp, python, java, javascript, go, rust)");
-@@scope(getFeatureFlagRevisions, "!(csharp, python, java, javascript, go, rust)");
-@@scope(checkFeatureFlagRevisions, "!(csharp, python, java, javascript, go, rust)");
+@@scope(getFeatureFlags, "!(csharp, python, java, javascript, go)");
+@@scope(checkFeatureFlags, "!(csharp, python, java, javascript, go)");
+@@scope(getFeatureFlag, "!(csharp, python, java, javascript, go)");
+@@scope(checkFeatureFlag, "!(csharp, python, java, javascript, go)");
+@@scope(putFeatureFlag, "!(csharp, python, java, javascript, go)");
+@@scope(deleteFeatureFlag, "!(csharp, python, java, javascript, go)");
+@@scope(getFeatureFlagRevisions, "!(csharp, python, java, javascript, go)");
+@@scope(checkFeatureFlagRevisions, "!(csharp, python, java, javascript, go)");
 
 // .NET specific customizations
 

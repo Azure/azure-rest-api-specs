@@ -11,26 +11,26 @@ namespace SdkCustomizations;
 @@clientName(Azure.Core.Foundations.Error, "CommonError");
 
 // Hide configuration operations from the feature-flag-only package.
-@@scope(getKeys, "!(csharp, python, java, javascript, go, rust)");
-@@scope(checkKeys, "!(csharp, python, java, javascript, go, rust)");
-@@scope(getKeyValues, "!(csharp, python, java, javascript, go, rust)");
-@@scope(checkKeyValues, "!(csharp, python, java, javascript, go, rust)");
-@@scope(getKeyValue, "!(csharp, python, java, javascript, go, rust)");
-@@scope(putKeyValue, "!(csharp, python, java, javascript, go, rust)");
-@@scope(deleteKeyValue, "!(csharp, python, java, javascript, go, rust)");
-@@scope(checkKeyValue, "!(csharp, python, java, javascript, go, rust)");
-@@scope(getSnapshots, "!(csharp, python, java, javascript, go, rust)");
-@@scope(checkSnapshots, "!(csharp, python, java, javascript, go, rust)");
-@@scope(getSnapshot, "!(csharp, python, java, javascript, go, rust)");
-@@scope(createSnapshot, "!(csharp, python, java, javascript, go, rust)");
-@@scope(updateSnapshot, "!(csharp, python, java, javascript, go, rust)");
-@@scope(checkSnapshot, "!(csharp, python, java, javascript, go, rust)");
-@@scope(checkLabels, "!(csharp, python, java, javascript, go, rust)");
-@@scope(putLock, "!(csharp, python, java, javascript, go, rust)");
-@@scope(deleteLock, "!(csharp, python, java, javascript, go, rust)");
-@@scope(getRevisions, "!(csharp, python, java, javascript, go, rust)");
-@@scope(checkRevisions, "!(csharp, python, java, javascript, go, rust)");
-@@scope(getOperationDetails, "!(csharp, python, java, javascript, go, rust)");
+@@scope(getKeys, "!(csharp, python, java, javascript, go)");
+@@scope(checkKeys, "!(csharp, python, java, javascript, go)");
+@@scope(getKeyValues, "!(csharp, python, java, javascript, go)");
+@@scope(checkKeyValues, "!(csharp, python, java, javascript, go)");
+@@scope(getKeyValue, "!(csharp, python, java, javascript, go)");
+@@scope(putKeyValue, "!(csharp, python, java, javascript, go)");
+@@scope(deleteKeyValue, "!(csharp, python, java, javascript, go)");
+@@scope(checkKeyValue, "!(csharp, python, java, javascript, go)");
+@@scope(getSnapshots, "!(csharp, python, java, javascript, go)");
+@@scope(checkSnapshots, "!(csharp, python, java, javascript, go)");
+@@scope(getSnapshot, "!(csharp, python, java, javascript, go)");
+@@scope(createSnapshot, "!(csharp, python, java, javascript, go)");
+@@scope(updateSnapshot, "!(csharp, python, java, javascript, go)");
+@@scope(checkSnapshot, "!(csharp, python, java, javascript, go)");
+@@scope(checkLabels, "!(csharp, python, java, javascript, go)");
+@@scope(putLock, "!(csharp, python, java, javascript, go)");
+@@scope(deleteLock, "!(csharp, python, java, javascript, go)");
+@@scope(getRevisions, "!(csharp, python, java, javascript, go)");
+@@scope(checkRevisions, "!(csharp, python, java, javascript, go)");
+@@scope(getOperationDetails, "!(csharp, python, java, javascript, go)");
 
 // .NET specific customizations
 @@access(getFeatureFlag, Access.internal, "csharp");
