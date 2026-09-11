@@ -391,7 +391,7 @@ jobs:
         if: success()
         uses: actions/github-script@v9
         env:
-          WORKFLOW_SUMMARY_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          WORKFLOW_SUMMARY_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}#summary-${{ job.check_run_id }}
           MANIFEST_PATH: ${{ runner.temp }}/sdk-breaking-change-results/projects.json
           RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-results
           PR_NUMBER: ${{ github.event.issue.number || inputs.pr_number }}
