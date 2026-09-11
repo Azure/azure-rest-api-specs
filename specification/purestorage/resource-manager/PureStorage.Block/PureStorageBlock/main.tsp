@@ -384,89 +384,57 @@ interface StoragePools {
     | ArmResponse<AvsStatus>
     | ErrorResponse;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation', 'x-ms-long-running-operation-options' OpenAPI extension(s) predates the no-openapi-client-extensions rule; suppressed pending migration to first-class TypeSpec constructs."
   @doc("Initiate a connection between the storage pool and a specified AVS SDDC resource")
-  @armResourceAction(StoragePool)
-  @action("enableAvsConnection")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
-  @post
-  enableAvsConnection(
-    ...ResourceInstanceParameters<StoragePool>,
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  enableAvsConnection is ArmResourceActionAsyncBase<
+    StoragePool,
+    StoragePoolEnableAvsConnectionPost,
+    ArmAcceptedLroResponse<
+      "Resource Operation accepted",
+      ArmCombinedLroHeaders<FinalResult = StoragePool> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<StoragePool>
+  >;
 
-    @doc("Storage pool EnableAvsConnection properties")
-    @body
-    properties: StoragePoolEnableAvsConnectionPost,
-  ):
-    | ArmAcceptedLroResponse<
-        "Resource Operation accepted",
-        ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-      >
-    | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation', 'x-ms-long-running-operation-options' OpenAPI extension(s) predates the no-openapi-client-extensions rule; suppressed pending migration to first-class TypeSpec constructs."
   @doc("Disable the existing AVS connection")
-  @armResourceAction(StoragePool)
-  @action("disableAvsConnection")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
-  @post
-  disableAvsConnection(...ResourceInstanceParameters<StoragePool>):
-    | ArmAcceptedLroResponse<
-        "Resource Operation accepted",
-        ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-      >
-    | ErrorResponse;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  disableAvsConnection is ArmResourceActionAsyncBase<
+    StoragePool,
+    void,
+    ArmAcceptedLroResponse<
+      "Resource Operation accepted",
+      ArmCombinedLroHeaders<FinalResult = StoragePool> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<StoragePool>
+  >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation', 'x-ms-long-running-operation-options' OpenAPI extension(s) predates the no-openapi-client-extensions rule; suppressed pending migration to first-class TypeSpec constructs."
   @doc("Finalize an already started AVS connection to a specific AVS SDDC")
-  @armResourceAction(StoragePool)
-  @action("finalizeAvsConnection")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
-  @post
-  finalizeAvsConnection(
-    ...ResourceInstanceParameters<StoragePool>,
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  finalizeAvsConnection is ArmResourceActionAsyncBase<
+    StoragePool,
+    StoragePoolFinalizeAvsConnectionPost,
+    ArmAcceptedLroResponse<
+      "Resource Operation accepted",
+      ArmCombinedLroHeaders<FinalResult = StoragePool> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<StoragePool>
+  >;
 
-    @doc("Storage pool FinalizeAvsConnection properties")
-    @body
-    properties: StoragePoolFinalizeAvsConnectionPost,
-  ):
-    | ArmAcceptedLroResponse<
-        "Resource Operation accepted",
-        ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-      >
-    | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation', 'x-ms-long-running-operation-options' OpenAPI extension(s) predates the no-openapi-client-extensions rule; suppressed pending migration to first-class TypeSpec constructs."
   @doc("Test and repair, if needed, all configuration elements of the storage pool connection to the AVS instance")
-  @armResourceAction(StoragePool)
-  @action("repairAvsConnection")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
-  @post
-  repairAvsConnection(...ResourceInstanceParameters<StoragePool>):
-    | ArmAcceptedLroResponse<
-        "Resource Operation accepted",
-        ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-      >
-    | ErrorResponse;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  repairAvsConnection is ArmResourceActionAsyncBase<
+    StoragePool,
+    void,
+    ArmAcceptedLroResponse<
+      "Resource Operation accepted",
+      ArmCombinedLroHeaders<FinalResult = StoragePool> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<StoragePool>
+  >;
 
   @added(Versions.v2026_05_01_preview)
   @doc("Returns a one-time activation code for platform console access to the storage pool")
