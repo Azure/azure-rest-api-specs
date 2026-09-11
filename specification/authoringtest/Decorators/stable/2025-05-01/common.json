@@ -1,0 +1,595 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagement",
+    "version": "2025-05-01",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [],
+  "paths": {},
+  "definitions": {
+    "Azure.ResourceManager.ManagedServiceIdentityProperty": {
+      "type": "object",
+      "description": "The managed service identities envelope.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      }
+    },
+    "BastionActiveSession": {
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "type": "string"
+        }
+      }
+    },
+    "BastionActiveSessionListResult": {
+      "type": "object",
+      "description": "Paged collection of BastionActiveSession items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BastionActiveSession items on this page",
+          "items": {
+            "$ref": "#/definitions/BastionActiveSession"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BastionHostPropertiesFormat": {
+      "type": "object"
+    },
+    "BastionSessionDeleteResult": {
+      "type": "object",
+      "description": "Paged collection of BastionSessionState items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BastionSessionState items on this page",
+          "items": {
+            "$ref": "#/definitions/BastionSessionState"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BastionSessionState": {
+      "type": "object"
+    },
+    "BastionShareableLink": {
+      "type": "object",
+      "properties": {
+        "vm": {
+          "$ref": "#/definitions/SubResource"
+        }
+      },
+      "required": [
+        "vm"
+      ]
+    },
+    "BastionShareableLinkListRequest": {
+      "type": "object",
+      "properties": {
+        "vms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BastionShareableLink"
+          }
+        }
+      }
+    },
+    "BastionShareableLinkListResult": {
+      "type": "object",
+      "description": "Paged collection of BastionShareableLink items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BastionShareableLink items on this page",
+          "items": {
+            "$ref": "#/definitions/BastionShareableLink"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BastionShareableLinkTokenListRequest": {
+      "type": "object",
+      "properties": {
+        "tokens": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BgpConnectionProperties": {
+      "type": "object"
+    },
+    "CloudError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "EffectiveNetworkSecurityGroupListResult": {
+      "type": "object"
+    },
+    "EffectiveRouteListResult": {
+      "type": "object"
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ExpressRouteConnection": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ]
+    },
+    "ExpressRouteConnectionList": {
+      "type": "object",
+      "description": "Paged collection of ExpressRouteConnection items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExpressRouteConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRouteGatewayList": {
+      "type": "object",
+      "description": "Paged collection of ExpressRouteGateway items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExpressRouteGateway items on this page",
+          "items": {
+            "$ref": "./virtualWan.json#/definitions/ExpressRouteGateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRouteGatewayProperties": {
+      "type": "object"
+    },
+    "ExpressRouteLink": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ]
+    },
+    "ExpressRouteLinkListResult": {
+      "type": "object",
+      "description": "Paged collection of ExpressRouteLink items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExpressRouteLink items on this page",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLink"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRoutePortListResult": {
+      "type": "object",
+      "description": "Paged collection of ExpressRoutePort items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExpressRoutePort items on this page",
+          "items": {
+            "$ref": "./expressRoute.json#/definitions/ExpressRoutePort"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRoutePortPropertiesFormat": {
+      "type": "object"
+    },
+    "ExpressRouteProviderPortProperties": {
+      "type": "object"
+    },
+    "ExtendedLocation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "GenerateExpressRoutePortsLOARequest": {
+      "type": "object"
+    },
+    "GenerateExpressRoutePortsLOAResult": {
+      "type": "object",
+      "properties": {
+        "encodedContent": {
+          "type": "string"
+        }
+      }
+    },
+    "ListP2SVpnGatewaysResult": {
+      "type": "object",
+      "description": "Paged collection of P2SVpnGateway items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The P2SVpnGateway items on this page",
+          "items": {
+            "$ref": "./virtualWan.json#/definitions/P2SVpnGateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVirtualHubBgpConnectionResults": {
+      "type": "object",
+      "description": "Paged collection of BgpConnection items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BgpConnection items on this page",
+          "items": {
+            "$ref": "./virtualWan.json#/definitions/BgpConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVpnServerConfigurationPolicyGroupsResult": {
+      "type": "object",
+      "description": "Paged collection of VpnServerConfigurationPolicyGroup items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VpnServerConfigurationPolicyGroup items on this page",
+          "items": {
+            "$ref": "./virtualWan.json#/definitions/VpnServerConfigurationPolicyGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVpnSiteLinkConnectionsResult": {
+      "type": "object",
+      "description": "Paged collection of VpnSiteLinkConnection items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VpnSiteLinkConnection items on this page",
+          "items": {
+            "$ref": "./virtualWan.json#/definitions/VpnSiteLinkConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LoadBalancer": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "NetworkInterfaceLoadBalancerListResult": {
+      "type": "object",
+      "description": "Paged collection of LoadBalancer items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LoadBalancer items on this page",
+          "items": {
+            "$ref": "#/definitions/LoadBalancer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkInterfacePropertiesFormat": {
+      "type": "object"
+    },
+    "P2SVpnConnectionHealth": {
+      "type": "object"
+    },
+    "P2SVpnConnectionHealthRequest": {
+      "type": "object"
+    },
+    "P2SVpnConnectionRequest": {
+      "type": "object"
+    },
+    "P2SVpnGatewayProperties": {
+      "type": "object"
+    },
+    "P2SVpnProfileParameters": {
+      "type": "object"
+    },
+    "PeerRoute": {
+      "type": "object"
+    },
+    "PeerRouteArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PeerRoute"
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ResourceWithReadOnlyNameAndID": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ResourceWithRequiredLocation": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "RoutePropertiesFormat": {
+      "type": "object"
+    },
+    "RouteTablePropertiesFormat": {
+      "type": "object"
+    },
+    "SessionIds": {
+      "type": "object",
+      "properties": {
+        "sessionIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "SubResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "SubResourceModel": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "TagsObject": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VirtualHubProperties": {
+      "type": "object"
+    },
+    "VpnGatewayProperties": {
+      "type": "object"
+    },
+    "VpnProfileResponse": {
+      "type": "object"
+    },
+    "VpnServerConfigurationPolicyGroupProperties": {
+      "type": "object"
+    },
+    "VpnServerConfigurationProperties": {
+      "type": "object"
+    },
+    "VpnSiteLinkConnectionProperties": {
+      "type": "object"
+    }
+  },
+  "parameters": {}
+}
