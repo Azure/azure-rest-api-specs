@@ -1,0 +1,48 @@
+{
+  "title": "Delete multiple virtual machines",
+  "operationId": "VirtualMachineBulkOperations_BulkDelete",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
+    "requestBody": {
+      "executionParameters": {},
+      "resources": {
+        "ids": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "VirtualMachines",
+        "location": "eastus",
+        "description": "Delete Resource request",
+        "results": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+            "operation": {
+              "operationId": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+              "opType": "Delete",
+              "state": "PendingScheduling"
+            }
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+            "operation": {
+              "operationId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+              "opType": "Delete",
+              "state": "PendingScheduling"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

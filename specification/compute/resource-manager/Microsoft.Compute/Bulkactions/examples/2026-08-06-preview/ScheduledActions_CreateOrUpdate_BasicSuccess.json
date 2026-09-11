@@ -1,0 +1,96 @@
+{
+  "title": "Create a new recurring scheduled action",
+  "description": "Creates a new recurring scheduled action that starts virtual machines on weekday mornings.",
+  "operationId": "ScheduledActions_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "scheduledActionName": "weekday-start",
+    "resource": {
+      "properties": {
+        "resourceType": "VirtualMachine",
+        "actionType": "Start",
+        "startTime": "2026-09-15T07:00:00-07:00",
+        "schedule": {
+          "scheduledTime": "07:00:00",
+          "timeZone": "America/Los_Angeles",
+          "requestedWeekDays": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ]
+        },
+        "notificationSettings": []
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "resourceType": "VirtualMachine",
+          "actionType": "Start",
+          "startTime": "2026-09-15T07:00:00-07:00",
+          "schedule": {
+            "scheduledTime": "07:00:00",
+            "timeZone": "America/Los_Angeles",
+            "requestedWeekDays": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "requestedMonths": [
+              "All"
+            ],
+            "requestedDaysOfTheMonth": []
+          },
+          "notificationSettings": [],
+          "provisioningState": "Succeeded"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start",
+        "name": "weekday-start",
+        "type": "Microsoft.Compute/scheduledActions"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/33333333-3333-3333-3333-333333333333?api-version=2026-08-06-preview"
+      },
+      "body": {
+        "properties": {
+          "resourceType": "VirtualMachine",
+          "actionType": "Start",
+          "startTime": "2026-09-15T07:00:00-07:00",
+          "schedule": {
+            "scheduledTime": "07:00:00",
+            "timeZone": "America/Los_Angeles",
+            "requestedWeekDays": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "requestedMonths": [
+              "All"
+            ],
+            "requestedDaysOfTheMonth": []
+          },
+          "notificationSettings": [],
+          "provisioningState": "Creating"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start",
+        "name": "weekday-start",
+        "type": "Microsoft.Compute/scheduledActions"
+      }
+    }
+  }
+}

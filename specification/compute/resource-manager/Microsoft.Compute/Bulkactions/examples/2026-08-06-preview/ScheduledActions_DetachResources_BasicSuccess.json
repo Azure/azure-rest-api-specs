@@ -1,0 +1,41 @@
+{
+  "title": "Detach resources from a recurring scheduled action",
+  "description": "Removes two virtual machines from a recurring scheduled action.",
+  "operationId": "ScheduledActions_DetachResources",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "scheduledActionName": "weekday-start",
+    "body": {
+      "resources": [
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01",
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-02"
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/11111111-1111-1111-1111-111111111111?api-version=2026-08-06-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/11111111-1111-1111-1111-111111111111?api-version=2026-08-06-preview&monitor=true",
+        "Retry-After": 10
+      }
+    },
+    "200": {
+      "body": {
+        "totalResources": 2,
+        "resourcesStatuses": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01",
+            "status": "Succeeded"
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-02",
+            "status": "Succeeded"
+          }
+        ]
+      }
+    }
+  }
+}
