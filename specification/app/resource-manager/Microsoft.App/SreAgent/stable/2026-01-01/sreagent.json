@@ -1961,7 +1961,7 @@
         },
         "vnetConfiguration": {
           "$ref": "#/definitions/VnetConfiguration",
-          "description": "Virtual network configuration to update. Omission or an empty object preserves the subnet; null clears it.\nTo detach, clear the subnet and set an explicit non-AzureVNet egress mode in the same request.\nThe resulting subnet and AzureVNet egress mode must be configured together.",
+          "description": "Virtual network configuration to update. Omission or an empty object preserves the subnet; null clears it.\nTo detach, clear the subnet and update sandbox egress in the same request so the resulting mode is not AzureVNet.\nThe detach example explicitly selects Limited.\nThe resulting subnet and AzureVNet egress mode must be configured together.",
           "x-nullable": true
         },
         "sandboxConfiguration": {
@@ -2932,7 +2932,7 @@
         "subnetResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Azure resource ID of the subnet used with AzureVNet egress mode, or null when detached.\nIn PATCH, omission preserves the subnet and null clears it.\nSetting or replacing a subnet requires the resulting egress mode to be AzureVNet.\nClearing the subnet requires an explicit non-AzureVNet mode in the same PATCH request.",
+          "description": "Azure resource ID of the subnet used with AzureVNet egress mode, or null when detached.\nIn PATCH, omission preserves the subnet and null clears it.\nSetting or replacing a subnet requires the resulting egress mode to be AzureVNet.\nWhen clearing the subnet, also update sandbox egress in the same PATCH request so the resulting mode is not AzureVNet.\nThe detach example explicitly selects Limited.",
           "x-nullable": true,
           "x-ms-arm-id-details": {
             "allowedResources": [

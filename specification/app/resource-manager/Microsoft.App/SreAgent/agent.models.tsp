@@ -54,7 +54,8 @@ model AgentPatchProperties {
 
   /**
    * Virtual network configuration to update. Omission or an empty object preserves the subnet; null clears it.
-   * To detach, clear the subnet and set an explicit non-AzureVNet egress mode in the same request.
+   * To detach, clear the subnet and update sandbox egress in the same request so the resulting mode is not AzureVNet.
+   * The detach example explicitly selects Limited.
    * The resulting subnet and AzureVNet egress mode must be configured together.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API distinguishes null, which clears the subnet, from omission, which preserves it."
@@ -133,7 +134,8 @@ model VnetConfiguration {
    * Azure resource ID of the subnet used with AzureVNet egress mode, or null when detached.
    * In PATCH, omission preserves the subnet and null clears it.
    * Setting or replacing a subnet requires the resulting egress mode to be AzureVNet.
-   * Clearing the subnet requires an explicit non-AzureVNet mode in the same PATCH request.
+   * When clearing the subnet, also update sandbox egress in the same PATCH request so the resulting mode is not AzureVNet.
+   * The detach example explicitly selects Limited.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API returns null when detached and distinguishes null from omission in PATCH."
   subnetResourceId?:
