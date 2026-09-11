@@ -1,0 +1,70 @@
+{
+  "operationId": "AzureSandboxes_Create",
+  "title": "AzureSandboxes_create - artifact version",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "api-version": "2026-08-01-preview",
+    "request": {
+      "labels": {
+        "environment": "example"
+      },
+      "resources": {
+        "cpu": "1",
+        "memory": "1Gi"
+      },
+      "sourcesRef": {
+        "artifactVersion": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resource-group/providers/Microsoft.DevCenter/projects/example-project/catalogs/example-catalog/artifactDefinitions/example-artifact/versions/1.0.0",
+          "auth": {
+            "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/example-identity"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "example-sandbox",
+        "vmmType": "cloudhypervisor",
+        "sourcesRef": {
+          "artifactVersion": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resource-group/providers/Microsoft.DevCenter/projects/example-project/catalogs/example-catalog/artifactDefinitions/example-artifact/versions/1.0.0",
+            "auth": {
+              "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/example-identity"
+            }
+          }
+        },
+        "resources": {
+          "cpu": "example-cpu",
+          "memory": "example-memory"
+        }
+      }
+    },
+    "400": {
+      "body": {
+        "title": "Invalid request",
+        "status": 400,
+        "detail": "The sandbox creation request is invalid."
+      }
+    },
+    "401": {
+      "body": {
+        "title": "Unauthorized",
+        "status": 401,
+        "detail": "Authentication is required to access this resource."
+      }
+    },
+    "429": {
+      "body": {
+        "title": "Too many requests",
+        "status": 429,
+        "detail": "The sandbox creation rate limit has been exceeded. Retry the request later."
+      }
+    },
+    "500": {}
+  }
+}
