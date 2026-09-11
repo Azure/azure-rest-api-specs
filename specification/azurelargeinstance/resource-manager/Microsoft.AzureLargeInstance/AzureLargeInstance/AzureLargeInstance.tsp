@@ -87,3 +87,8 @@ interface AzureLargeInstances {
     Foundations.OperationStatusResult
   >;
 }
+
+@@doc(
+  AzureLargeInstances.restart::parameters.body,
+  "When set to 'active', this parameter empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server"
+);
