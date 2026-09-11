@@ -764,7 +764,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MicrosoftEntraAuthentication"
+              "$ref": "#/definitions/Authentication"
             }
           },
           "default": {
@@ -820,7 +820,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MicrosoftEntraAuthentication"
+              "$ref": "#/definitions/Authentication"
             }
           },
           "default": {
@@ -872,7 +872,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PasswordAuthentication"
+              "$ref": "#/definitions/Authentication"
             }
           },
           "default": {
@@ -928,7 +928,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PasswordAuthentication"
+              "$ref": "#/definitions/Authentication"
             }
           },
           "default": {
@@ -8731,21 +8731,6 @@
         "principalType"
       ]
     },
-    "MicrosoftEntraAuthentication": {
-      "type": "object",
-      "description": "The service-created Microsoft Entra authentication method for a HorizonDB cluster.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MicrosoftEntraAuthenticationProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "MicrosoftEntraAuthenticationForPatchUpdate": {
       "type": "object",
       "description": "A sparse update request for Microsoft Entra authentication.",
@@ -8755,25 +8740,6 @@
           "description": "The Microsoft Entra authentication properties to update."
         }
       }
-    },
-    "MicrosoftEntraAuthenticationProperties": {
-      "type": "object",
-      "description": "Properties of the service-created Microsoft Entra authentication method.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/AuthenticationState",
-          "description": "The state of Microsoft Entra authentication.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the Microsoft Entra authentication method.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "state"
-      ]
     },
     "MicrosoftEntraAuthenticationPropertiesForPatchUpdate": {
       "type": "object",
@@ -9258,21 +9224,6 @@
         ]
       }
     },
-    "PasswordAuthentication": {
-      "type": "object",
-      "description": "The service-created PostgreSQL username-and-password authentication method for a HorizonDB cluster. This resource configures the authentication mechanism, including its enabled state and administrator login credentials; it is not a password-only resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PasswordAuthenticationProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "PasswordAuthenticationForPatchUpdate": {
       "type": "object",
       "description": "A sparse update request for PostgreSQL username-and-password authentication.",
@@ -9282,25 +9233,6 @@
           "description": "The PostgreSQL username-and-password authentication properties to update."
         }
       }
-    },
-    "PasswordAuthenticationProperties": {
-      "type": "object",
-      "description": "Properties of the service-created PostgreSQL username-and-password authentication method. The control plane stores no administrator identity; PostgreSQL is the source of truth for the sole member of the service-owned administrator role.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/AuthenticationState",
-          "description": "The state of PostgreSQL username-and-password authentication.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the PostgreSQL username-and-password authentication method.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "state"
-      ]
     },
     "PasswordAuthenticationPropertiesForPatchUpdate": {
       "type": "object",
