@@ -2134,7 +2134,7 @@
         "tags": [
           "AdapterDeployments"
         ],
-        "description": "Creates an adapter deployment or re-targets it to another compatible\nmanaged compute deployment. The source model ID is immutable. Create\nrequests use `If-None-Match: *`; re-target requests use `If-Match`.",
+        "description": "Creates an adapter deployment or re-targets it to another compatible\nmanaged compute deployment. The source model ID is immutable.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2164,22 +2164,6 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "Applies the re-target operation only when the current resource ETag\nmatches.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "Use `*` for create-only behavior.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
-          },
-          {
             "name": "resource",
             "in": "body",
             "description": "The complete adapter deployment resource to create or re-target.",
@@ -2191,20 +2175,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Resource 'AdapterDeployment' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/AdapterDeployment"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "201": {
@@ -2234,9 +2207,6 @@
         "x-ms-examples": {
           "CreateOrUpdateAdapterDeployment": {
             "$ref": "./examples/CreateOrUpdateAdapterDeployment.json"
-          },
-          "UpdateAdapterDeployment": {
-            "$ref": "./examples/UpdateAdapterDeployment.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2278,14 +2248,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "When supplied, applies deletion only if the current resource ETag matches.\nOmitting the header deletes unconditionally so that ARM cascade deletes\n(resource group or parent account) and clients that did not read the ETag\nare not blocked.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
           }
         ],
         "responses": {

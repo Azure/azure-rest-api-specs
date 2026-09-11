@@ -56,41 +56,6 @@ model AdapterDeploymentListResult {
   nextLink?: string;
 }
 
-/**
- * Standard conditional headers accepted by adapter PUT operations.
- */
-alias AdapterDeploymentPutConditions = {
-  /**
-   * Applies the re-target operation only when the current resource ETag
-   * matches.
-   */
-  @header("If-Match")
-  ifMatch?: string;
-
-  /**
-   * Use `*` for create-only behavior.
-   */
-  @header("If-None-Match")
-  ifNoneMatch?: string;
-};
-
-/**
- * Optional conditional header accepted when deleting an adapter deployment.
- */
-alias AdapterDeploymentDeleteConditions = {
-  /**
-   * When supplied, applies deletion only if the current resource ETag matches.
-   * Omitting the header deletes unconditionally so that ARM cascade deletes
-   * (resource group or parent account) and clients that did not read the ETag
-   * are not blocked.
-   */
-  @header("If-Match")
-  ifMatch?: string;
-};
-
-alias AdapterDeploymentLroHeaders = ArmAsyncOperationHeader<FinalResult = AdapterDeployment> &
-  Azure.Core.Foundations.RetryAfterHeader;
-
 @added(Versions.v2026_09_15_preview)
 @armResourceOperations
 interface AdapterDeployments {
@@ -101,21 +66,9 @@ interface AdapterDeployments {
 
   /**
    * Creates an adapter deployment or re-targets it to another compatible
-   * managed compute deployment. The source model ID is immutable. Create
-   * requests use `If-None-Match: *`; re-target requests use `If-Match`.
+   * managed compute deployment. The source model ID is immutable.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    AdapterDeployment,
-    LroHeaders = AdapterDeploymentLroHeaders,
-    Parameters = AdapterDeploymentPutConditions,
-    Response =
-      | (ArmResourceUpdatedResponse<AdapterDeployment> &
-          AdapterDeploymentLroHeaders)
-      | ArmResourceCreatedResponse<
-          AdapterDeployment,
-          AdapterDeploymentLroHeaders
-        >
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<AdapterDeployment>;
 
   /**
    * Lists adapter deployments associated with the Cognitive Services account.
@@ -130,7 +83,6 @@ interface AdapterDeployments {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     AdapterDeployment,
-    Parameters = AdapterDeploymentDeleteConditions,
     LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
