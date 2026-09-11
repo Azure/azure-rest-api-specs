@@ -473,6 +473,10 @@ model PromptAgentDefinition extends AgentDefinition {
 }
 
 @doc("A managed runtime and agent loop used to execute a prompt agent.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
+)
 @discriminator("type")
 model AgentHarness {
   @doc("The type of managed harness.")
@@ -1191,6 +1195,11 @@ model AgentSessionResource {
   @encode("unixTimestamp", int64)
   @visibility(Lifecycle.Read)
   expires_at: utcDateTime;
+
+  /** The Unix timestamp (in seconds) when the session sandbox was last observed to stop or go idle. Present only after the session has gone idle at least once, used for accurate idle-billing reconciliation. */
+  @encode("unixTimestamp", int64)
+  @visibility(Lifecycle.Read)
+  stopped_at?: utcDateTime;
 }
 
 // ── Session Request Models ──────────────────────────────
