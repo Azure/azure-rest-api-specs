@@ -83,11 +83,23 @@ interface RecoveryPoints {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_10_30_preview)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     RecoveryPointResource,
     PatchModel = UpdateRecoveryPointRequest,
     Response = ArmResponse<RecoveryPointResource>
+  >;
+
+  /**
+   * Browses one page of files and directories in a vaulted recovery point.
+   */
+  @added(Versions.v2026_10_30_preview)
+  @action("browse")
+  browse is ArmResourceActionSync<
+    RecoveryPointResource,
+    BrowseRecoveryPointRequestResource,
+    BrowseRecoveryPointResponseResource
   >;
 }
 
