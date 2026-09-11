@@ -2,7 +2,7 @@ name: SDK Breaking Change Analysis
 
 on:
   issue_comment:
-    types: [created]
+    types: [created, edited]
   workflow_dispatch:
     inputs:
       pr_number:
@@ -72,7 +72,8 @@ jobs:
               sdkLanguageInput = process.env.SDK_LANGUAGE_INPUT;
               tspConfigPath = process.env.TSP_CONFIG_PATH_INPUT;
             } else {
-              const parts = process.env.TRIGGER_COMMENT.trim().split(/\s+/);
+              const command = process.env.TRIGGER_COMMENT.split(/\r?\n/, 1)[0].trim();
+              const parts = command.split(/\s+/);
               if (
                 parts.length !== 3 ||
                 parts[0] !== "/azsdk" ||
@@ -397,6 +398,7 @@ jobs:
           SDK_LANGUAGE: ${{ steps.resolve-source.outputs.sdk-language }}
           TRIGGER_NAME: ${{ github.event_name }}
         with:
+          github-token: ${{ github.token }}
           script: |
             const fs = await import("node:fs/promises");
             const pullNumber = Number(process.env.PR_NUMBER);
