@@ -5,6 +5,7 @@ import "./fleet.tsp";
 import "./fleetmember.tsp";
 import "./fleetnamespace.tsp";
 import "./gate.tsp";
+import "./identitybindingprofile.tsp";
 import "./update/common.tsp";
 import "./update/run.tsp";
 import "./update/strategy.tsp";
@@ -78,4 +79,9 @@ enum Versions {
   @doc("Azure Kubernetes Fleet Manager api version 2026-06-02-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2026_06_02_preview: "2026-06-02-preview",
+
+  @doc("Azure Kubernetes Fleet Manager api version 2026-11-02-preview.")
+  @Azure.Core.previewVersion
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2026_11_02_preview: "2026-11-02-preview",
 }
