@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-06-05
+     Upstream alignment: 2026-08-15
      Derived from:
        - Azure REST API Guidelines (vNext) — URLs
        - ARM Wiki: api_contracts/guidelines/api_best_practices_and_design_choices.md (RPC-BestPractice-03)
@@ -20,7 +20,6 @@ character-matching construct.
 **Authoritative references:**
 
 - [Azure REST API Guidelines — URLs](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#uniform-resource-locators-urls)
-- [Azure Resource Provider Contract — Resource API Reference](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)
 
 ---
 
