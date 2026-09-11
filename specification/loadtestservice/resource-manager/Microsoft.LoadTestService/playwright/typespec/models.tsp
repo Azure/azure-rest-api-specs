@@ -57,6 +57,79 @@ model PlaywrightWorkspaceProperties {
       type: "Microsoft.Network/virtualNetworks/subnets";
     }
   ]>;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Indicates whether recording is enabled for the workspace.")
+  recording?: EnablementStatus = EnablementStatus.Disabled;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The managed identity used to upload recording artifacts to the storage account.")
+  recordingIdentity?: RecordingIdentity;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The managed identity used to upload recording artifacts.")
+model RecordingIdentity {
+  @doc("The type of managed identity used to upload recording artifacts.")
+  type: RecordingIdentityType;
+
+  @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The type of managed identity used to upload recording artifacts.")
+union RecordingIdentityType {
+  string,
+
+  @doc("Use the workspace system-assigned managed identity.")
+  SystemAssigned: "SystemAssigned",
+
+  @doc("Use a user-assigned managed identity.")
+  UserAssigned: "UserAssigned",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The managed identity used to upload recording artifacts during an update operation.")
+model RecordingIdentityUpdate {
+  @doc("The type of managed identity used to upload recording artifacts.")
+  type?: RecordingIdentityType;
+
+  @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+@doc("The updatable properties of the Playwright workspace.")
+model PlaywrightWorkspaceUpdateProperties {
+  @doc("Controls the connection region for client workers to cloud-hosted browsers. When enabled, workers connect to browsers in the closest Azure region for lower latency. When disabled, workers connect to browsers in the Azure region where the workspace was created.")
+  regionalAffinity?: EnablementStatus;
+
+  @doc("Enables the workspace to use local authentication through service access tokens for operations.")
+  localAuth?: EnablementStatus;
+
+  @added(Versions.v2026_02_01_preview)
+  @doc("Indicates whether reporting is enabled for the workspace. When set to true, reports will be generated and available for the workspace.")
+  reporting?: EnablementStatus;
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("The URI of the Azure storage account used to store workspace artifacts, test results, and reports.")
+  storageUri?: url;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Indicates whether recording is enabled for the workspace.")
+  recording?: EnablementStatus;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The managed identity used to upload recording artifacts to the storage account.")
+  recordingIdentity?: RecordingIdentityUpdate;
 }
 
 @doc("The status of the last resource operation.")
