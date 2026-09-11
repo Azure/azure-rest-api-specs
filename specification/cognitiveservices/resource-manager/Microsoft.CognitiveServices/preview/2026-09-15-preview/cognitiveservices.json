@@ -10493,6 +10493,9 @@
           "Create an ACS policy with optional policy dependencies": {
             "$ref": "./examples/PutRaiPolicyAcs.json"
           },
+          "Create an ACS policy without a tool catalog": {
+            "$ref": "./examples/PutRaiPolicyAcsWithoutTools.json"
+          },
           "PutRaiPolicy": {
             "$ref": "./examples/PutRaiPolicy.json"
           },
@@ -19692,11 +19695,6 @@
           "description": "The semantic kind of the projected policy target.",
           "x-ms-client-name": "policyTargetKind"
         },
-        "tool_name_from": {
-          "type": "string",
-          "description": "Selects the concrete tool name from the raw Agent Hooks snapshot.",
-          "x-ms-client-name": "toolNameFrom"
-        },
         "policy": {
           "$ref": "#/definitions/RaiAcsPolicyBinding",
           "description": "The logical policy evaluated at this intervention point."
@@ -19721,12 +19719,12 @@
           "description": "The policy evaluated for user input."
         },
         "pre_tool_call": {
-          "$ref": "#/definitions/RaiAcsInterventionPoint",
+          "$ref": "#/definitions/RaiAcsToolInterventionPoint",
           "description": "The policy evaluated before a tool call.",
           "x-ms-client-name": "preToolCall"
         },
         "post_tool_call": {
-          "$ref": "#/definitions/RaiAcsInterventionPoint",
+          "$ref": "#/definitions/RaiAcsToolInterventionPoint",
           "description": "The policy evaluated after a tool call.",
           "x-ms-client-name": "postToolCall"
         },
@@ -19764,7 +19762,7 @@
         },
         "tools": {
           "type": "object",
-          "description": "Static tool catalog keyed by canonical tool name.",
+          "description": "Static tool catalog keyed by canonical tool name. The catalog may be omitted or empty when no\ntool selector is configured. A tool selector requires a non-empty catalog, and an unknown\nselected key fails closed.",
           "additionalProperties": {
             "$ref": "#/definitions/RaiAcsToolDefinition"
           }
@@ -19969,25 +19967,92 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Optional host-defined tool identifier."
+          "description": "Optional host-defined tool identifier. The catalog map key, not this value, controls tool lookup.",
+          "minLength": 1
         },
         "type": {
           "type": "string",
-          "description": "Optional host-defined tool type."
+          "description": "Optional host-defined tool type.",
+          "minLength": 1
         },
         "description": {
           "type": "string",
           "description": "Human-readable policy metadata."
         },
         "security_labels": {
-          "description": "Labels describing the sink or capability, supplied as a string or an array of strings.",
+          "type": "array",
+          "description": "Labels describing the sink or capability.",
+          "items": {
+            "type": "string"
+          },
           "x-ms-client-name": "securityLabels"
         },
         "clearance": {
-          "description": "Maximum sensitivity or host-defined clearance metadata, supplied as a string or an array of strings."
+          "type": "string",
+          "description": "Maximum sensitivity or host-defined clearance metadata.",
+          "minLength": 1
         }
       },
       "additionalProperties": {}
+    },
+    "RaiAcsToolInterventionPoint": {
+      "type": "object",
+      "description": "Binds one logical policy to a tool-call intervention point.",
+      "properties": {
+        "policy_target": {
+          "$ref": "#/definitions/RaiAcsPolicyTarget",
+          "description": "The canonical Agent Hooks snapshot path projected as the policy target.",
+          "x-ms-client-name": "policyTarget"
+        },
+        "policy_target_kind": {
+          "$ref": "#/definitions/RaiAcsPolicyTargetKind",
+          "description": "The semantic kind of the projected policy target.",
+          "x-ms-client-name": "policyTargetKind"
+        },
+        "policy": {
+          "$ref": "#/definitions/RaiAcsPolicyBinding",
+          "description": "The logical policy evaluated at this intervention point."
+        },
+        "annotations": {
+          "$ref": "#/definitions/RaiAcsEmptyObject",
+          "description": "Standard ACS annotation bindings are disabled; when present, this object must be empty."
+        },
+        "tool_name_from": {
+          "$ref": "#/definitions/RaiAcsToolNameSelector",
+          "description": "Selects the canonical tool catalog key from the raw Agent Hooks snapshot.",
+          "minLength": 1,
+          "x-ms-client-name": "toolNameFrom"
+        }
+      },
+      "required": [
+        "policy_target",
+        "policy_target_kind",
+        "policy"
+      ]
+    },
+    "RaiAcsToolNameSelector": {
+      "type": "string",
+      "description": "Supported snapshot paths for selecting a tool catalog entry.",
+      "enum": [
+        "$snap.tool_call.name",
+        "$.tool_call.name"
+      ],
+      "x-ms-enum": {
+        "name": "RaiAcsToolNameSelector",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ToolCallName",
+            "value": "$snap.tool_call.name",
+            "description": "Selects the tool-call name from the canonical snapshot root."
+          },
+          {
+            "name": "ToolCallNameAlias",
+            "value": "$.tool_call.name",
+            "description": "Selects the tool-call name through the snapshot-root alias."
+          }
+        ]
+      }
     },
     "RaiActionType": {
       "type": "string",

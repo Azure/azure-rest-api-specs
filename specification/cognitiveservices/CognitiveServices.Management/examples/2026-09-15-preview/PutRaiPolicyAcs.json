@@ -46,6 +46,14 @@
               "policy": {
                 "id": "tool-guard"
               }
+            },
+            "post_tool_call": {
+              "policy_target": "$snap.tool_result.value",
+              "policy_target_kind": "tool_result",
+              "tool_name_from": "$snap.tool_call.name",
+              "policy": {
+                "id": "tool-guard"
+              }
             }
           },
           "tools": {
@@ -65,11 +73,10 @@
             "wire_transfer": {
               "id": "wire_transfer",
               "type": "financial_action",
-              "security_labels": "financial_write",
-              "clearance": [
-                "banking",
-                "payments"
-              ]
+              "security_labels": [
+                "financial_write"
+              ],
+              "clearance": "confidential"
             }
           },
           "annotators": {}
@@ -154,6 +161,14 @@
                 "policy": {
                   "id": "tool-guard"
                 }
+              },
+              "post_tool_call": {
+                "policy_target": "$snap.tool_result.value",
+                "policy_target_kind": "tool_result",
+                "tool_name_from": "$snap.tool_call.name",
+                "policy": {
+                  "id": "tool-guard"
+                }
               }
             },
             "tools": {
@@ -173,11 +188,10 @@
               "wire_transfer": {
                 "id": "wire_transfer",
                 "type": "financial_action",
-                "security_labels": "financial_write",
-                "clearance": [
-                  "banking",
-                  "payments"
-                ]
+                "security_labels": [
+                  "financial_write"
+                ],
+                "clearance": "confidential"
               }
             },
             "annotators": {}
@@ -258,6 +272,14 @@
                 "policy": {
                   "id": "tool-guard"
                 }
+              },
+              "post_tool_call": {
+                "policy_target": "$snap.tool_result.value",
+                "policy_target_kind": "tool_result",
+                "tool_name_from": "$snap.tool_call.name",
+                "policy": {
+                  "id": "tool-guard"
+                }
               }
             },
             "tools": {
@@ -277,11 +299,10 @@
               "wire_transfer": {
                 "id": "wire_transfer",
                 "type": "financial_action",
-                "security_labels": "financial_write",
-                "clearance": [
-                  "banking",
-                  "payments"
-                ]
+                "security_labels": [
+                  "financial_write"
+                ],
+                "clearance": "confidential"
               }
             },
             "annotators": {}

@@ -648,23 +648,24 @@ model RaiAcsEmptyObject {}
 model RaiAcsToolDefinition {
   ...Record<unknown>;
 
-  /** Optional host-defined tool identifier. */
+  /** Optional host-defined tool identifier. The catalog map key, not this value, controls tool lookup. */
+  @minLength(1)
   id?: string;
 
   /** Optional host-defined tool type. */
+  @minLength(1)
   type?: string;
 
   /** Human-readable policy metadata. */
   description?: string;
 
-  /** Labels describing the sink or capability, supplied as a string or an array of strings. */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "OpenAPI v2 cannot represent the ACS string-or-string-array wire shape"
+  /** Labels describing the sink or capability. */
   @encodedName("application/json", "security_labels")
-  securityLabels?: unknown;
+  securityLabels?: string[];
 
-  /** Maximum sensitivity or host-defined clearance metadata, supplied as a string or an array of strings. */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "OpenAPI v2 cannot represent the ACS string-or-string-array wire shape"
-  clearance?: unknown;
+  /** Maximum sensitivity or host-defined clearance metadata. */
+  @minLength(1)
+  clearance?: string;
 }
 
 /**
@@ -721,6 +722,18 @@ union RaiAcsPolicyTargetKind {
   ToolResult: "tool_result",
 }
 
+/** Supported snapshot paths for selecting a tool catalog entry. */
+@added(Versions.v2026_09_15_preview)
+union RaiAcsToolNameSelector {
+  string,
+
+  /** Selects the tool-call name from the canonical snapshot root. */
+  ToolCallName: "$snap.tool_call.name",
+
+  /** Selects the tool-call name through the snapshot-root alias. */
+  ToolCallNameAlias: "$.tool_call.name",
+}
+
 /**
  * Binds one logical policy to an ACS intervention point.
  */
@@ -734,15 +747,22 @@ model RaiAcsInterventionPoint {
   @encodedName("application/json", "policy_target_kind")
   policyTargetKind: RaiAcsPolicyTargetKind;
 
-  /** Selects the concrete tool name from the raw Agent Hooks snapshot. */
-  @encodedName("application/json", "tool_name_from")
-  toolNameFrom?: string;
-
   /** The logical policy evaluated at this intervention point. */
   policy: RaiAcsPolicyBinding;
 
   /** Standard ACS annotation bindings are disabled; when present, this object must be empty. */
   annotations?: RaiAcsEmptyObject;
+}
+
+/** Binds one logical policy to a tool-call intervention point. */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsToolInterventionPoint {
+  ...RaiAcsInterventionPoint;
+
+  /** Selects the canonical tool catalog key from the raw Agent Hooks snapshot. */
+  @encodedName("application/json", "tool_name_from")
+  @minLength(1)
+  toolNameFrom?: RaiAcsToolNameSelector;
 }
 
 /** Intervention points supported by the Unified Moderate AACS host profile. */
@@ -753,11 +773,11 @@ model RaiAcsInterventionPoints {
 
   /** The policy evaluated before a tool call. */
   @encodedName("application/json", "pre_tool_call")
-  preToolCall?: RaiAcsInterventionPoint;
+  preToolCall?: RaiAcsToolInterventionPoint;
 
   /** The policy evaluated after a tool call. */
   @encodedName("application/json", "post_tool_call")
-  postToolCall?: RaiAcsInterventionPoint;
+  postToolCall?: RaiAcsToolInterventionPoint;
 
   /** The policy evaluated for final output. */
   output?: RaiAcsInterventionPoint;
@@ -785,7 +805,11 @@ model RaiAcsManifest {
   @encodedName("application/json", "intervention_points")
   interventionPoints: RaiAcsInterventionPoints;
 
-  /** Static tool catalog keyed by canonical tool name. */
+  /**
+   * Static tool catalog keyed by canonical tool name. The catalog may be omitted or empty when no
+   * tool selector is configured. A tool selector requires a non-empty catalog, and an unknown
+   * selected key fails closed.
+   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS defines tools as a name-keyed extensible map"
   tools?: Record<RaiAcsToolDefinition>;
 
