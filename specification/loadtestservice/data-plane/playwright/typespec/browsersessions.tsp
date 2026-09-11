@@ -56,6 +56,43 @@ model BrowserSession {
   @doc("The browser session operating system.")
   @visibility(Lifecycle.Read)
   operatingSystem: OS;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The recording configuration and artifacts for the browser session.")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
+  recording?: BrowserSessionRecording;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The recording configuration and artifacts for a browser session.")
+model BrowserSessionRecording {
+  @doc("Indicates whether recording is enabled for the browser session. When specified in an update request, this value overrides the workspace-level recording setting for the session.")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
+  enabled: boolean;
+
+  @doc("The finalized recording artifacts uploaded for the browser session.")
+  @visibility(Lifecycle.Read)
+  artifacts?: BrowserSessionRecordingArtifacts;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The finalized recording artifacts uploaded for a browser session.")
+model BrowserSessionRecordingArtifacts {
+  @doc("The URL of the blob container that stores the recording artifacts for the browser session.")
+  @visibility(Lifecycle.Read)
+  containerUrl: url;
+
+  @doc("The trace artifacts uploaded for the browser session.")
+  @visibility(Lifecycle.Read)
+  traceArtifacts?: BrowserSessionTraceArtifact[];
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("A trace artifact uploaded for a browser session.")
+model BrowserSessionTraceArtifact {
+  @doc("The URL of the uploaded trace artifact.")
+  @visibility(Lifecycle.Read)
+  url: url;
 }
 
 @doc("The browser session source details.")
@@ -107,6 +144,10 @@ interface BrowserSessions {
   @added(Versions.v2026_04_01_preview)
   @doc("Get a browser session for the specified session and workspace ID. Requires Bearer JWT access token provided by Entra ID.")
   get is Operations.ResourceRead<BrowserSession>;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Updates the per-session recording setting for the specified browser session. Requires Bearer JWT access token provided by Entra ID.")
+  update is Operations.ResourceUpdate<BrowserSession>;
 
   @added(Versions.v2026_04_01_preview)
   @doc("Lists browser sessions for the specified workspace ID. Supports OData query parameters such as $filter and $top. Default page size is 10. Use nextLink in response to fetch additional results. Requires Bearer JWT access token provided by Entra ID.")
