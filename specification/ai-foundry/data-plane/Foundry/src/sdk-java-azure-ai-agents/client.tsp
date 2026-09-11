@@ -518,6 +518,80 @@ using Azure.AI.Projects;
   },
   "java"
 );
+
+// Reuse standalone Responses and Realtime models from openai-java. Models that participate in the
+// RealtimeClientEvent, RealtimeServerEvent, RealtimeConversationItem, or other discriminator hierarchies remain
+// generated so Java's polymorphic deserialization can dispatch to their concrete subtypes.
+@@alternateType(
+  OpenAI.InputFileContent,
+  {
+    identity: "com.openai.models.responses.ResponseInputFileContent",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.InputImageContent,
+  {
+    identity: "com.openai.models.responses.ResponseInputImageContent",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.InputTextContent,
+  {
+    identity: "com.openai.models.responses.ResponseInputTextContent",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.LogProbProperties,
+  {
+    identity: "com.openai.models.realtime.LogProbProperties",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.NoiseReductionType,
+  {
+    identity: "com.openai.models.realtime.NoiseReductionType",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.Prompt,
+  {
+    identity: "com.openai.models.responses.ResponsePrompt",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeFunctionTool,
+  {
+    identity: "com.openai.models.realtime.RealtimeFunctionTool",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeReasoning,
+  {
+    identity: "com.openai.models.realtime.RealtimeReasoning",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseStatusDetails,
+  {
+    identity: "com.openai.models.realtime.RealtimeResponseStatus",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseUsage,
+  {
+    identity: "com.openai.models.realtime.RealtimeResponseUsage",
+  },
+  "java"
+);
 // Do NOT map OpenAI.ToolChoiceFunction / OpenAI.ToolChoiceMCP to their openai-java equivalents
 // (com.openai.models.responses.ToolChoiceFunction / ToolChoiceMcp). Although both are field-for-field
 // duplicates, they are discriminated subtypes of `ToolChoiceParam` (@discriminator("type")). Substituting a
