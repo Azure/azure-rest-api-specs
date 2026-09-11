@@ -43311,6 +43311,55 @@
         ],
         "description": "Extensible status values shared by Foundry jobs."
       },
+      "KnowledgeBaseTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "knowledge_base"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "knowledge_base_preview"
+            ],
+            "description": "The object type, which is always 'knowledge_base_preview'."
+          },
+          "knowledge_base": {
+            "$ref": "#/components/schemas/KnowledgeBaseToolParameters",
+            "description": "The knowledge base tool parameters."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "The input definition information for a knowledge base tool as used to configure an agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "preview_tool"
+          ]
+        }
+      },
+      "KnowledgeBaseToolParameters": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the knowledge base."
+          }
+        },
+        "description": "The parameters for a knowledge base tool.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "preview_tool"
+          ]
+        }
+      },
       "LoraConfig": {
         "type": "object",
         "properties": {
@@ -80737,6 +80786,7 @@
           "mapping": {
             "github_copilot_toolset_preview": "#/components/schemas/GitHubCopilotToolsetPreview",
             "bing_grounding": "#/components/schemas/BingGroundingTool",
+            "knowledge_base_preview": "#/components/schemas/KnowledgeBaseTool",
             "fabric_dataagent_preview": "#/components/schemas/MicrosoftFabricPreviewTool",
             "sharepoint_grounding_preview": "#/components/schemas/SharepointPreviewTool",
             "azure_ai_search": "#/components/schemas/AzureAISearchTool",
@@ -81284,6 +81334,7 @@
               "bing_custom_search_preview",
               "browser_automation_preview",
               "fabric_dataagent_preview",
+              "knowledge_base_preview",
               "sharepoint_grounding_preview",
               "memory_search_preview",
               "work_iq_preview",

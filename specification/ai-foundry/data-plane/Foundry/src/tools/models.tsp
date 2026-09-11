@@ -16,6 +16,7 @@ namespace Azure.AI.Projects {
     bing_custom_search_preview: "bing_custom_search_preview",
     browser_automation_preview: "browser_automation_preview",
     fabric_dataagent_preview: "fabric_dataagent_preview",
+    knowledge_base_preview: "knowledge_base_preview",
     sharepoint_grounding_preview: "sharepoint_grounding_preview",
     memory_search_preview: "memory_search_preview",
     work_iq_preview: "work_iq_preview",
@@ -234,6 +235,33 @@ namespace Azure.AI.Projects {
      * The bing grounding search tool parameters.
      */
     bing_grounding: BingGroundingSearchToolParameters;
+  }
+
+  /**
+   * The parameters for a knowledge base tool.
+   */
+  @extension("x-ms-foundry-meta", PreviewTool)
+  model KnowledgeBaseToolParameters {
+    /**
+     * The name of the knowledge base.
+     */
+    name: string;
+  }
+
+  /**
+   * The input definition information for a knowledge base tool as used to configure an agent.
+   */
+  @extension("x-ms-foundry-meta", PreviewTool)
+  model KnowledgeBaseTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'knowledge_base_preview'.
+     */
+    type: "knowledge_base_preview";
+
+    /**
+     * The knowledge base tool parameters.
+     */
+    knowledge_base: KnowledgeBaseToolParameters;
   }
 
   /**
