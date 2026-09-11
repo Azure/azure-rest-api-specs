@@ -78,8 +78,8 @@ alias PostSandboxFileMkdirErrors =
   | ErrorResult<404>
   | ErrorResult<409>;
 
-/** OK. */
-model PostSandboxFileUploadResult {
+/** Created. */
+model PostSandboxFileResult {
   /** HTTP response status code. */
   @statusCode statusCode: 201;
 
@@ -87,8 +87,8 @@ model PostSandboxFileUploadResult {
   @body body: WriteFileResponse;
 }
 
-/** Errors returned by postSandboxFileUpload. */
-alias PostSandboxFileUploadErrors =
+/** Errors returned by postSandboxFile. */
+alias PostSandboxFileErrors =
   | ErrorResult<401>
   | ErrorResult<404>
   | ErrorResult<409>
@@ -216,7 +216,7 @@ interface SandboxFilesOperations {
   @summary("Writes a file to a running sandbox. The file is streamed directly from the request body.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/files")
   @post
-  postSandboxFileUpload is Foundations.Operation<
+  postSandboxFile is Foundations.Operation<
     {
       ...AzureResourceScope;
 
@@ -241,8 +241,8 @@ interface SandboxFilesOperations {
       /** containerName parameter. */
       @query containerName?: string;
     },
-    PostSandboxFileUploadResult,
+    PostSandboxFileResult,
     DataPlaneStandardTraits,
-    PostSandboxFileUploadErrors
+    PostSandboxFileErrors
   >;
 }
