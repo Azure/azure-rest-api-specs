@@ -1519,6 +1519,12 @@ model DatabaseAccountGetProperties {
    * Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account.
    */
   enforceHierarchicalPartitionKeyIdLastLevel?: boolean;
+
+  /**
+   * Flag to indicate enabling/disabling of Per-Partition Automatic Failover (PPAF) on the account, which automatically fails over individual partitions to available regions during a regional outage. Opt-in; defaults to false.
+   */
+  @added(Versions.v2026_07_15)
+  perPartitionAutomaticFailoverEnabled?: boolean;
 }
 
 /**
@@ -2258,6 +2264,12 @@ model DatabaseAccountUpdateProperties {
    * Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account.
    */
   enforceHierarchicalPartitionKeyIdLastLevel?: boolean;
+
+  /**
+   * Flag to indicate enabling/disabling of Per-Partition Automatic Failover (PPAF) on the account, which automatically fails over individual partitions to available regions during a regional outage. Opt-in; defaults to false.
+   */
+  @added(Versions.v2026_07_15)
+  perPartitionAutomaticFailoverEnabled?: boolean;
 }
 
 /**
@@ -2465,6 +2477,12 @@ model DatabaseAccountCreateUpdateProperties {
    * Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account.
    */
   enforceHierarchicalPartitionKeyIdLastLevel?: boolean;
+
+  /**
+   * Flag to indicate enabling/disabling of Per-Partition Automatic Failover (PPAF) on the account, which automatically fails over individual partitions to available regions during a regional outage. Opt-in; defaults to false.
+   */
+  @added(Versions.v2026_07_15)
+  perPartitionAutomaticFailoverEnabled?: boolean;
 }
 
 /**
