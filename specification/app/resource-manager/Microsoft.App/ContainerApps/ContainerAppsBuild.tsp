@@ -16,6 +16,8 @@ namespace Microsoft.App;
  * Information pertaining to an individual build.
  */
 @removed(Versions.v2026_01_01)
+@added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_07_01)
 @parentResource(ContainerApp)
 model ContainerAppsBuildResource
   is Azure.ResourceManager.ProxyResource<ContainerAppsBuildProperties> {
@@ -54,6 +56,8 @@ alias ContainerAppsBuildResourceOps = Azure.ResourceManager.Legacy.LegacyOperati
 >;
 
 @removed(Versions.v2026_01_01)
+@added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_07_01)
 @armResourceOperations
 interface ContainerAppsBuilds {
   /**

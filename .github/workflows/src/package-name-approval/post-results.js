@@ -19,6 +19,8 @@ const FormatValidationResultSchema = z.object({
 const NamespaceResultsSchema = z.object({
   namespacesFound: z.record(z.string(), z.string()),
   namespaces: z.record(z.string(), z.string()).optional().default({}),
+  allConfiguredPackageNames: z.record(z.string(), z.string()).optional().default({}),
+  allConfiguredNamespaces: z.record(z.string(), z.string()).optional().default({}),
   formatResults: z.array(FormatValidationResultSchema).optional().default([]),
   isMgmt: z.boolean(),
   isDataPlane: z.boolean(),
@@ -136,21 +138,27 @@ export function parseCommentTable(body) {
  * @param {import("./approvers.js").ApproversConfig} params.approversConfig
  * @param {Record<string, string>} params.namespacesFound
  * @param {Record<string, string>} [params.namespaces] - Language namespaces (distinct from package names).
+ * @param {Record<string, string>} [params.allConfiguredPackageNames] - All package names from PR head (pre-filter), for showing configured-but-unchanged languages.
+ * @param {Record<string, string>} [params.allConfiguredNamespaces] - All namespaces from PR head (pre-filter).
  * @param {z.infer<typeof FormatValidationResultSchema>[]} params.formatResults
  * @param {boolean} params.isMgmt
  * @param {string} params.baseRef
  * @param {string[]} [params.resetLanguages] - Languages whose approvals were reset on this push.
  * @param {Map<string, { namespace: string, status: string }>} [params.preservedApprovals] - Approval statuses preserved from the previous comment for unchanged package names.
+ * @param {string[]} params.allLanguages - All Tier 1 languages that require approval.
  */
 function buildCommentBody({
   approversConfig,
   namespacesFound,
   namespaces,
+  allConfiguredPackageNames,
+  allConfiguredNamespaces,
   formatResults,
   isMgmt,
   baseRef,
   resetLanguages,
   preservedApprovals,
+  allLanguages,
 }) {
   const planeType = isMgmt ? "Management Plane" : "Data Plane";
   let body = `## Package Name Review Required\n\n**Plane:** ${planeType}\n\n`;
@@ -163,13 +171,44 @@ function buildCommentBody({
     formatMap.set(r.language, r);
   }
 
-  for (const [language, packageName] of Object.entries(namespacesFound)) {
-    const ns = namespaces?.[language] ?? "—";
+  for (const language of allLanguages) {
+    const changedName = namespacesFound[language];
+    const configuredName = allConfiguredPackageNames?.[language];
+    const isChanged = changedName !== undefined;
+    const isConfigured = configuredName !== undefined;
+
+    // Three states:
+    // 1. Changed: show new name, pending approval
+    // 2. Configured but unchanged: show existing name, no approval needed
+    // 3. Not configured: show "(not yet configured)", pending approval
+    let displayName;
+    let displayNs;
+    let status;
+
+    if (isChanged) {
+      displayName = `\`${changedName}\``;
+      displayNs = `\`${namespaces?.[language] ?? "—"}\``;
+      const preserved = preservedApprovals?.get(language);
+      status = preserved?.status ?? "⏳ Pending";
+    } else if (isConfigured) {
+      displayName = `\`${configuredName}\``;
+      displayNs = `\`${allConfiguredNamespaces?.[language] ?? "—"}\``;
+      status = "⏳ Pending _(unchanged)_";
+    } else {
+      displayName = "_(not yet configured)_";
+      displayNs = "—";
+      status = "⏳ Pending";
+    }
+
     const formatResult = formatMap.get(language);
-    const formatStatus = !formatResult ? "—" : formatResult.valid ? "✅" : "⚠️ Invalid";
-    const preserved = preservedApprovals?.get(language);
-    const status = preserved?.status ?? "⏳ Pending";
-    body += `| ${language} | \`${packageName}\` | \`${ns}\` | ${formatStatus} | ${status} | ${getApprovers(
+    const formatStatus = !isChanged
+      ? "—"
+      : !formatResult
+        ? "—"
+        : formatResult.valid
+          ? "✅"
+          : "⚠️ Invalid";
+    body += `| ${language} | ${displayName} | ${displayNs} | ${formatStatus} | ${status} | ${getApprovers(
       approversConfig,
       isMgmt,
       language,
@@ -209,7 +248,67 @@ export default async function postResults({ github, context, core }) {
   const results = await downloadNamespaceResults(github, core, owner, repo, run_id);
 
   if (!results) {
-    core.info("No package name results to process, exiting gracefully");
+    core.info("No package name results to process");
+
+    // Only clean up labels if the code workflow completed successfully (meaning no package
+    // name changes were found). A missing artifact from a failed workflow run does NOT mean
+    // config was reverted — it could be a compilation or detection failure.
+    // The conclusion is available directly from the workflow_run event payload.
+    const workflowConclusion = /** @type {{ workflow_run?: { conclusion?: string } }} */ (
+      context.payload
+    ).workflow_run?.conclusion;
+    if (workflowConclusion !== "success") {
+      core.info(
+        `Code workflow run ${run_id} concluded with "${workflowConclusion}", skipping cleanup`,
+      );
+      return;
+    }
+
+    // Clean up if package-name labels were previously applied but config was reverted.
+    // Without this, removing package name entries from tspconfig leaves stale pending
+    // labels and a blocking status check.
+    const { data: pr } = await github.rest.pulls.get({
+      owner,
+      repo,
+      pull_number: issue_number,
+    });
+    const existingLabels = pr.labels.map(
+      (/** @type {{ name?: string }} */ label) => label.name ?? "",
+    );
+
+    if (existingLabels.includes("package-name-review-required")) {
+      core.info("Cleaning up stale package-name labels (config was reverted)");
+      const packageNameLabels = existingLabels.filter((l) => l.startsWith("package-name-"));
+      for (const label of packageNameLabels) {
+        await removeLabelIfPresent(github, owner, repo, issue_number, label);
+      }
+
+      // Update status check to success
+      await github.rest.repos.createCommitStatus({
+        owner,
+        repo,
+        sha: pr.head.sha,
+        state: "success",
+        context: "Package Name Approval",
+        description: "No package name review required (config reverted)",
+      });
+
+      // Delete the bot comment — configuration was reverted, table is no longer relevant
+      const comments = await github.paginate(github.rest.issues.listComments, {
+        owner,
+        repo,
+        issue_number,
+        per_page: PER_PAGE_MAX,
+      });
+      const botComment = comments.find(
+        (/** @type {{ user?: { type?: string } | null, body?: string }} */ comment) =>
+          comment.user?.type === "Bot" &&
+          (comment.body?.includes("<!-- package-name-review-bot -->") ?? false),
+      );
+      if (botComment) {
+        await github.rest.issues.deleteComment({ owner, repo, comment_id: botComment.id });
+      }
+    }
     return;
   }
 
@@ -261,11 +360,34 @@ export default async function postResults({ github, context, core }) {
         core.info(`Package name unchanged for ${language}: "${newNs}", preserving approval`);
         preservedApprovals.set(language, prev);
       }
-      // No previous entry (!prev) means first detection — treat as new pending (no reset)
+      // No previous entry (!prev) means first detection — treat as new pending (no reset).
+      // This covers the "not yet configured" → "configured" transition: parseCommentTable
+      // cannot parse rows without backtick-wrapped names, so prev will be undefined.
+      // By design, adding a NEW language config does not cascade-reset other approvals —
+      // only CHANGING an existing name triggers cross-language re-review.
     }
 
-    // Only remove global approval labels if any language was actually reset
+    // If any Tier 1 language name changed, reset ALL Tier 1 approvals for cross-language
+    // re-review. This ensures architects re-confirm naming alignment across the board.
+    // Note: resetLanguages.push(lang) below is safe — we iterate `tier1`, not `resetLanguages`.
+    // After this loop, resetLanguages contains both originally-changed AND cascade-reset languages,
+    // which buildCommentBody uses to display the reset warning.
     if (resetLanguages.length > 0) {
+      const tier1 = results.isMgmt
+        ? (approversConfig.tier1?.["management-plane"] ?? [])
+        : (approversConfig.tier1?.["data-plane"] ?? []);
+      for (const lang of tier1) {
+        if (resetLanguages.includes(lang)) continue; // already reset above
+        const approvedLabel = `package-name-${lang}-approved`;
+        if (existingLabels.includes(approvedLabel)) {
+          core.info(
+            `Resetting ${lang} approval for cross-language re-review (${resetLanguages.join(", ")} changed)`,
+          );
+          await removeLabelIfPresent(github, owner, repo, issue_number, approvedLabel);
+          existingLabels.splice(existingLabels.indexOf(approvedLabel), 1);
+          resetLanguages.push(lang);
+        }
+      }
       for (const label of ["package-name-approved-all", "package-name-approved"]) {
         if (existingLabels.includes(label)) {
           await removeLabelIfPresent(github, owner, repo, issue_number, label);
@@ -280,6 +402,13 @@ export default async function postResults({ github, context, core }) {
     return;
   }
 
+  // Use Tier 1 order first for consistent table rendering, then any extra detected languages
+  const tier1 = results.isMgmt
+    ? (approversConfig.tier1?.["management-plane"] ?? [])
+    : (approversConfig.tier1?.["data-plane"] ?? []);
+  const extraLanguages = languages.filter((l) => !tier1.includes(l));
+  const allLanguages = [...tier1, ...extraLanguages];
+
   const labelsToAdd = new Set(["package-name-review-required"]);
   if (results.isMgmt) {
     labelsToAdd.add("Mgmt");
@@ -287,19 +416,21 @@ export default async function postResults({ github, context, core }) {
   if (results.isDataPlane) {
     labelsToAdd.add("data-plane");
   }
-  for (const language of languages) {
+  for (const language of allLanguages) {
     // Skip adding pending label if language is already approved
     const approvedLabel = `package-name-${language}-approved`;
-    if (!existingLabels.includes(approvedLabel)) {
-      labelsToAdd.add(`package-name-${language}-pending`);
-    }
+    if (existingLabels.includes(approvedLabel)) continue;
+
+    // All Tier 1 languages get pending — even configured-unchanged ones need to
+    // re-confirm alignment when any other language's name changes.
+    labelsToAdd.add(`package-name-${language}-pending`);
   }
 
-  // Don't re-add package-name-review-required if everything is already approved
-  const allApproved = languages.every((lang) =>
-    existingLabels.includes(`package-name-${lang}-approved`),
-  );
-  if (allApproved && languages.length > 0) {
+  // Don't re-add package-name-review-required if all Tier 1 languages are already approved
+  const allApproved =
+    allLanguages.length > 0 &&
+    allLanguages.every((lang) => existingLabels.includes(`package-name-${lang}-approved`));
+  if (allApproved) {
     labelsToAdd.delete("package-name-review-required");
   }
 
@@ -318,11 +449,14 @@ export default async function postResults({ github, context, core }) {
     approversConfig,
     namespacesFound: results.namespacesFound,
     namespaces: results.namespaces,
+    allConfiguredPackageNames: results.allConfiguredPackageNames,
+    allConfiguredNamespaces: results.allConfiguredNamespaces,
     formatResults: results.formatResults,
     isMgmt: results.isMgmt,
     baseRef: pr.base.ref,
     resetLanguages,
     preservedApprovals,
+    allLanguages,
   });
 
   await commentOrUpdate(github, core, owner, repo, issue_number, body, "package-name-review-bot");
