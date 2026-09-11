@@ -14,7 +14,6 @@ namespace DeploymentScriptsClient;
  */
 union ManagedServiceIdentityType {
   string,
-
   /**
    * User assigned identity.
    */
@@ -26,7 +25,6 @@ union ManagedServiceIdentityType {
  */
 union ScriptType {
   string,
-
   /**
    * Azure PowerShell script.
    */
@@ -322,7 +320,6 @@ model ContainerConfiguration {
   /**
    * The subnet resource IDs for a container group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy - x-ms-identifiers required for array item identification"
   @added(Versions.v2023_08_01)
   @identifiers(#["id"])
   subnetIds?: ContainerGroupSubnetId[];
@@ -434,7 +431,6 @@ model ScriptConfigurationBase {
   /**
    * The environment variables to pass over to the script.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy - x-ms-identifiers required for array item identification"
   @identifiers(#["name"])
   environmentVariables?: EnvironmentVariable[];
 

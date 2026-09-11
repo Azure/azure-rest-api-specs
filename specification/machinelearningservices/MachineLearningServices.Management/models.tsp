@@ -3999,8 +3999,6 @@ model EstimatedVMPrices {
   /**
    * The list of estimated prices for using a VM of a particular OS type, tier, etc.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
   @identifiers(#[])
   @summary("List of estimated VM prices.")
   values: EstimatedVMPrice[];
@@ -4254,7 +4252,6 @@ model Compute {
    * Errors during provisioning
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   provisioningErrors?: ErrorResponse[] | null;
 
@@ -6513,7 +6510,6 @@ model FeaturestoreEntityVersionProperties extends AssetBase {
    * Specifies index columns
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   indexColumns?: IndexColumn[] | null;
 
   /**
@@ -7836,7 +7832,6 @@ model RegistryProperties {
    * Details of each region the registry is in
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   regionDetails?: RegistryRegionArmDetails[] | null;
 }
 
@@ -7860,7 +7855,6 @@ model ManagedResourceGroupSettings {
    * List of assigned identities for the managed resource group
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   assignedIdentities?: ManagedResourceGroupAssignedIdentities[] | null;
 }
 
@@ -7974,7 +7968,6 @@ model RegistryRegionArmDetails {
    * List of ACR accounts
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   acrDetails?: AcrDetails[] | null;
 
   /**
@@ -7987,7 +7980,6 @@ model RegistryRegionArmDetails {
    * List of storage accounts
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   storageAccountDetails?: StorageAccountDetails[] | null;
 }
 
@@ -9302,7 +9294,6 @@ model RaiBlocklistProperties {
  * The list of Cognitive Services RaiBlocklist Items for batch add.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model used as placeholder in API"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @identifiers(#["name"])
 model RaiBlocklistItemsBulkAddRequest is RaiBlocklistItemBulkRequest[];
@@ -9989,7 +9980,6 @@ model AKSSchemaProperties {
    * System services
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   systemServices?: SystemService[] | null;
 
@@ -10309,7 +10299,6 @@ model AmlComputeProperties {
    * Collection of errors encountered by various compute nodes during node setup.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   @summary("Errors.")
   errors?: ErrorResponse[] | null;
@@ -10502,7 +10491,6 @@ model ComputeInstanceProperties {
    * List of Custom Services added to the compute.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   customServices?: CustomService[] | null;
 
   /**
@@ -10649,7 +10637,6 @@ model ComputeInstanceProperties {
    * Describes informations of containers on this ComputeInstance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   containers?: ComputeInstanceContainer[] | null;
 
@@ -10657,7 +10644,6 @@ model ComputeInstanceProperties {
    * Describes informations of dataDisks on this ComputeInstance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   dataDisks?: ComputeInstanceDataDisk[] | null;
 
@@ -10665,7 +10651,6 @@ model ComputeInstanceProperties {
    * Describes informations of dataMounts on this ComputeInstance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   dataMounts?: ComputeInstanceDataMount[] | null;
 
@@ -10779,7 +10764,6 @@ model OsPatchingStatus {
    * Collection of errors encountered when doing os patching.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osPatchingErrors?: ErrorResponse[] | null;
 }
@@ -12791,7 +12775,6 @@ model TableVerticalFeaturizationSettings extends FeaturizationSettings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   transformerParams?: Record<ColumnTransformer[] | null> | null;
 }
 
@@ -13094,7 +13077,6 @@ model MonitorEmailNotificationSettings {
    * The email recipient list which has a limitation of 499 characters in total.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   emails?: string[] | null;
 }
@@ -13143,7 +13125,6 @@ model MonitoringSignalBase {
    * The current notification mode for this signal.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   notificationTypes?: MonitoringNotificationType[] | null;
 
@@ -14023,7 +14004,6 @@ model ImageClassificationBase extends ImageVertical {
    * Search space for sampling different combinations of models and their hyperparameters.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   searchSpace?: ImageModelDistributionSettingsClassification[] | null;
 }
 
