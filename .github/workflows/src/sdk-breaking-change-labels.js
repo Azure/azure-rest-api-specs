@@ -3,6 +3,8 @@ import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.js
 import { extractInputs } from "./context.js";
 import { LabelAction } from "./label.js";
 
+const SUPPORTED_TARGET_BRANCHES = new Set(["main", "RPSaaSMaster"]);
+
 /**
  * @typedef {import("../../shared/src/sdk-types.js").SdkName} SdkName
  */
@@ -27,10 +29,27 @@ export async function getLabelAndAction({ github, context, core }) {
   if (!details_url) {
     throw new Error(`Required inputs are not valid: details_url:${details_url}`);
   }
-  return await getLabelAndActionImpl({
+  const result = await getLabelAndActionImpl({
     details_url,
     core,
   });
+
+  // This requirement only scopes label additions; target-branch handling for removals will be added later.
+  if (result.issueNumber > 0 && result.labelAction === LabelAction.Add) {
+    const { data: pullRequest } = await github.rest.pulls.get({
+      ...context.repo,
+      pull_number: result.issueNumber,
+    });
+    const targetBranch = pullRequest.base.ref;
+    core.info(`PR target branch: ${targetBranch}`);
+
+    if (!SUPPORTED_TARGET_BRANCHES.has(targetBranch)) {
+      core.info(`Skipping SDK breaking change label addition for unsupported target branch.`);
+      result.labelAction = LabelAction.None;
+    }
+  }
+
+  return result;
 }
 
 /**
