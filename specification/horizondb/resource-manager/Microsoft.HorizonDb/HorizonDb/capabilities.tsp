@@ -157,11 +157,11 @@ model PoolCapability {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The HorizonDB capabilities available to a subscription in a location.")
-model LocationCapability {
-  @doc("The Azure region represented by this capability entry.")
+@doc("Properties of the HorizonDB capabilities available to a subscription in a location.")
+model CapabilityProperties {
+  @doc("The provisioning state of the capability catalog entry.")
   @visibility(Lifecycle.Read)
-  location: azureLocation;
+  provisioningState?: ProvisioningState;
 
   @doc("The Cluster capabilities available in the region.")
   @visibility(Lifecycle.Read)
@@ -173,31 +173,25 @@ model LocationCapability {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("A page of HorizonDB location capabilities.")
-model PagedLocationCapability {
-  @doc("The location capability items on this page.")
-  @pageItems
-  @identifiers(#["location"])
-  value: LocationCapability[];
-
-  @doc("The link to the next page of items.")
-  @nextLink
-  nextLink?: url;
+@doc("The singleton HorizonDB capability catalog entry available to a subscription in a location.")
+@singleton("default")
+@parentResource(SubscriptionLocationResource)
+model Capability is ProxyResource<CapabilityProperties> {
+  ...ResourceNameParameter<
+    Resource = Capability,
+    KeyName = "capabilityName",
+    SegmentName = "capabilities",
+    NamePattern = ""
+  >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This is a custom non-resource subscription-level discovery operation with an explicit route and parameters."
 @added(Versions.v2026_10_01_preview)
-@route("/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/capabilities")
+@doc("Operations for the singleton HorizonDB capability catalog entry available in a location.")
+@armResourceOperations
 interface Capabilities {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This subscription-location discovery operation returns capability metadata rather than ARM resources."
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This subscription-location discovery operation returns capability metadata rather than ARM resources, so no ARM resource operation decorator applies."
-  @added(Versions.v2026_10_01_preview)
-  @doc("Lists HorizonDB capabilities available to a subscription in a specific region.")
-  @get
-  @list
-  list(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...LocationResourceParameter,
-  ): ArmResponse<PagedLocationCapability> | ErrorResponse;
+  @doc("Gets the singleton HorizonDB capability catalog entry available to a subscription in a specific region.")
+  get is ArmResourceRead<Capability>;
+
+  @doc("Lists the singleton HorizonDB capability catalog entry available to a subscription in a specific region. The result contains one item.")
+  list is ArmResourceListByParent<Capability>;
 }

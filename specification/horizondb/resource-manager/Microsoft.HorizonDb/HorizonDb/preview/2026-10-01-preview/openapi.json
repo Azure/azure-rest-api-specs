@@ -43,6 +43,9 @@
       "name": "Operations"
     },
     {
+      "name": "Capabilities"
+    },
+    {
       "name": "Clusters"
     },
     {
@@ -182,7 +185,10 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/capabilities": {
       "get": {
         "operationId": "Capabilities_List",
-        "description": "Lists HorizonDB capabilities available to a subscription in a specific region.",
+        "tags": [
+          "Capabilities"
+        ],
+        "description": "Lists the singleton HorizonDB capability catalog entry available to a subscription in a specific region. The result contains one item.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -198,7 +204,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PagedLocationCapability"
+              "$ref": "#/definitions/CapabilityListResult"
             }
           },
           "default": {
@@ -215,6 +221,45 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/locations/{location}/capabilities/default": {
+      "get": {
+        "operationId": "Capabilities_Get",
+        "tags": [
+          "Capabilities"
+        ],
+        "description": "Gets the singleton HorizonDB capability catalog entry available to a subscription in a specific region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Capability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get HorizonDB capabilities by subscription and region": {
+            "$ref": "./examples/Capabilities_Get.json"
+          }
         }
       }
     },
@@ -5820,10 +5865,6 @@
         ]
       }
     },
-    "Azure.Core.azureLocation": {
-      "type": "string",
-      "description": "Represents an Azure geography region where supported resource providers live."
-    },
     "Backup": {
       "type": "object",
       "description": "Represents an available backup for a HorizonDB cluster.",
@@ -5962,6 +6003,67 @@
           }
         ]
       }
+    },
+    "Capability": {
+      "type": "object",
+      "description": "The singleton HorizonDB capability catalog entry available to a subscription in a location.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapabilityProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CapabilityListResult": {
+      "type": "object",
+      "description": "The response of a Capability list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Capability items on this page",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CapabilityProperties": {
+      "type": "object",
+      "description": "Properties of the HorizonDB capabilities available to a subscription in a location.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the capability catalog entry.",
+          "readOnly": true
+        },
+        "clusterCapabilities": {
+          "$ref": "#/definitions/ClusterCapability",
+          "description": "The Cluster capabilities available in the region.",
+          "readOnly": true
+        },
+        "poolCapabilities": {
+          "$ref": "#/definitions/PoolCapability",
+          "description": "The Pool capabilities available in the region, including processor, generation, and compute-model details.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "clusterCapabilities",
+        "poolCapabilities"
+      ]
     },
     "ChangeDataCaptureCapability": {
       "type": "object",
@@ -8087,32 +8189,6 @@
         "state"
       ]
     },
-    "LocationCapability": {
-      "type": "object",
-      "description": "The HorizonDB capabilities available to a subscription in a location.",
-      "properties": {
-        "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The Azure region represented by this capability entry.",
-          "readOnly": true
-        },
-        "clusterCapabilities": {
-          "$ref": "#/definitions/ClusterCapability",
-          "description": "The Cluster capabilities available in the region.",
-          "readOnly": true
-        },
-        "poolCapabilities": {
-          "$ref": "#/definitions/PoolCapability",
-          "description": "The Pool capabilities available in the region, including processor, generation, and compute-model details.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "location",
-        "clusterCapabilities",
-        "poolCapabilities"
-      ]
-    },
     "LogCaptureConfiguration": {
       "type": "object",
       "description": "The configuration for capturing one type of HorizonDB log.",
@@ -8882,30 +8958,6 @@
           }
         ]
       }
-    },
-    "PagedLocationCapability": {
-      "type": "object",
-      "description": "A page of HorizonDB location capabilities.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The location capability items on this page.",
-          "items": {
-            "$ref": "#/definitions/LocationCapability"
-          },
-          "x-ms-identifiers": [
-            "location"
-          ]
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items."
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "PagedParameterGroupConnectionProperties": {
       "type": "object",
