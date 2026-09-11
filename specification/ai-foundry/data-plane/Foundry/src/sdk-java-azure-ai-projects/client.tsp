@@ -78,12 +78,22 @@ namespace Azure.AI.Projects;
 @@clientName(EvaluationTaxonomies.update, "updateEvaluationTaxonomy");
 
 // Evaluators
+@@clientName(Evaluators.createOrUpdate, "createOrUpdateEvaluator");
+@@clientName(Evaluators.get, "getEvaluator");
+@@clientName(Evaluators.list, "listEvaluators");
+@@clientName(Evaluators.delete, "deleteEvaluator");
+@@clientName(Evaluators.publishVersion, "publishEvaluatorVersion");
 @@clientName(Evaluators.listVersions, "listEvaluatorVersions");
 @@clientName(Evaluators.getVersion, "getEvaluatorVersion");
 @@clientName(Evaluators.createVersion, "createEvaluatorVersion");
 @@clientName(Evaluators.deleteVersion, "deleteEvaluatorVersion");
-@@clientName(Evaluators.listLatestVersions, "listLatestEvaluatorVersions");
-@@clientName(Evaluators.updateVersion, "updateEvaluatorVersion");
+@@clientName(Evaluators.listDiagnostics, "listEvaluatorDiagnostics");
+@@clientName(Evaluators.getDiagnostic, "getEvaluatorDiagnostic");
+@@clientName(EvaluatorDiagnosticJobs.create, "createEvaluatorDiagnosticJob");
+@@clientName(EvaluatorDiagnosticJobs.get, "getEvaluatorDiagnosticJob");
+@@clientName(EvaluatorDiagnosticJobs.list, "listEvaluatorDiagnosticJobs");
+@@clientName(EvaluatorDiagnosticJobs.cancel, "cancelEvaluatorDiagnosticJob");
+@@clientName(EvaluatorDiagnosticJobs.delete, "deleteEvaluatorDiagnosticJob");
 
 // Indexes
 @@clientName(Indexes.createOrUpdateVersion, "createOrUpdateIndexVersion");
@@ -216,17 +226,11 @@ namespace Azure.AI.Projects;
 
 // Azure-specific OpenAI eval extensions used with the Stainless OpenAI SDK.
 @@usage(
-  GraderAzureAIEvaluator,
+  TestingCriterionEvaluator,
   Usage.input | Usage.output | Usage.json,
   "java"
 );
-@@access(GraderAzureAIEvaluator, Access.public, "java");
-@@usage(
-  TestingCriterionAzureAIEvaluator,
-  Usage.input | Usage.output | Usage.json,
-  "java"
-);
-@@access(TestingCriterionAzureAIEvaluator, Access.public, "java");
+@@access(TestingCriterionEvaluator, Access.public, "java");
 
 // Default name produces a style violation
 @@clientName(SASCredentials, "SasCredential", "java");
@@ -327,7 +331,9 @@ union GrammarSyntaxExpandable {
 // SasCredential (BlobReferenceSasCredential) type field should use the shared CredentialType enum
 @@alternateType(SasCredential.type, CredentialType, "java");
 
-// EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
+// Evaluator datetime fields are typed as string in the spec but carry ISO-8601 timestamps
+@@alternateType(Evaluator.created_at, utcDateTime, "java");
+@@alternateType(Evaluator.modified_at, utcDateTime, "java");
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "java");
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "java");
 
