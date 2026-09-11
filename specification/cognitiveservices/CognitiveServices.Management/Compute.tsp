@@ -23,6 +23,7 @@ namespace Microsoft.CognitiveServices;
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 @parentResource(Account)
 model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
   ...ResourceNameParameter<
@@ -64,6 +65,7 @@ model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 @armResourceOperations
 interface Computes {
   /**
