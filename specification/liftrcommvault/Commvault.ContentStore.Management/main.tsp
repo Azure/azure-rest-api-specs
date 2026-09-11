@@ -873,20 +873,21 @@ interface ProtectionGroups {
   createOrupdate is ArmResourceCreateOrUpdateAsync<ProtectionGroup>;
   delete is ArmResourceDeleteWithoutOkAsync<ProtectionGroup>;
   listByCloudAccount is ArmResourceListByParent<ProtectionGroup>;
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "stopBackup is a long-running operation that returns 204 with no content on completion"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @doc("Stop Backup for a Protection Group")
   @armResourceAction(ProtectionGroup)
   @post
-  @OpenAPI.extension("x-ms-long-running-operation", true)
   stopBackup(
     ...ResourceInstanceParameters<ProtectionGroup>,
 
     @bodyRoot
     @doc("The body type of the operation request.")
     request: StopBackupProtectionGroupRequest,
-  ): ArmAcceptedLroResponse | ArmNoContentResponse | ErrorResponse;
+  ):
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionGroup> &
+        Azure.Core.Foundations.RetryAfterHeader>
+    | ArmNoContentResponse
+    | ErrorResponse;
 
   @doc("Restore resource for a protected items in given protection group.")
   @armResourceAction(ProtectionGroup)

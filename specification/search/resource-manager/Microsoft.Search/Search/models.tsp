@@ -1531,9 +1531,7 @@ model OfferingsResult {
   /**
    * The list of Azure AI Search offerings by region.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Offerings by region don't have a unique identifier"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @visibility(Lifecycle.Read)
   regions?: OfferingsByRegion[];
 }
@@ -1551,9 +1549,7 @@ model OfferingsByRegion {
   /**
    * The list of features offered in this region.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Features don't have a unique identifier property"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   features?: FeatureOffering[];
 
   /**
