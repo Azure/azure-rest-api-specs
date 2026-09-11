@@ -172,8 +172,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AgentOptimizationJob'
-        description: The job to create.
+              $ref: '#/components/schemas/CreateAgentOptimizationJobRequest'
+        description: The optimization job inputs.
     get:
       operationId: AgentOptimizationJobs_list
       summary: List agent optimization jobs
@@ -533,7 +533,7 @@ paths:
     post:
       operationId: AgentOptimizationJobCandidates_promoteCandidate
       summary: Promote a candidate for an agent optimization job
-      description: Promotes a candidate onto a Foundry agent version, applying the candidate's mutations to the agent's registered configuration. For prompt agents the target agent is derived from the job's stored baseline configuration and the request body fields are ignored.
+      description: Promotes a candidate to the Foundry agent stored in the parent job's target configuration. Prompt-agent promotion creates a new agent version. Hosted-agent promotion currently records promotion metadata without deploying a new hosted-agent version.
       parameters:
         - name: jobId
           in: path
@@ -575,13 +575,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - AgentOptimizationJobs
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PromoteAgentOptimizationCandidateRequest'
-        description: Target agent information for the promotion.
   /agent_optimization_jobs/{jobId}:cancel:
     post:
       operationId: AgentOptimizationJobs_cancel
@@ -661,7 +654,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AgentOptimizationEstimateJobInputs'
+              $ref: '#/components/schemas/AgentOptimizationEstimateInputs'
         description: The inputs to estimate against.
   /agents:
     post:
@@ -40639,11 +40632,17 @@ components:
         agent_card:
           $ref: '#/components/schemas/AgentCard'
     AgentOptimizationCandidate:
+      anyOf:
+        - $ref: '#/components/schemas/EvaluatedAgentOptimizationCandidate'
+        - $ref: '#/components/schemas/UnevaluatedAgentOptimizationCandidate'
+      description: Candidates returned by candidate list and detail operations.
+    AgentOptimizationCandidateBase:
       type: object
       required:
         - candidate_id
         - job_id
         - name
+        - evaluation_status
       properties:
         candidate_id:
           type: string
@@ -40654,6 +40653,9 @@ components:
         name:
           type: string
           description: Display name of the candidate (e.g., 'baseline', 'instruction-v2').
+        evaluation_status:
+          $ref: '#/components/schemas/AgentOptimizationCandidateEvaluationStatus'
+          description: Whether this candidate was comparatively evaluated.
         mutations:
           type: object
           unevaluatedProperties:
@@ -40663,37 +40665,32 @@ components:
           description: The mutation payload applied to the baseline to produce this candidate. The dictionary keys identify which agent attributes were mutated (for example `system_prompt`, `model`) and serve as the source of truth for which target attributes changed — no separate `optimizations` field is emitted. On LIST (and any GET without `expand=mutations`), keys are populated and values are `null`; the customer-supplied mutation values are only returned when the caller passes `expand=mutations` or on GET candidate detail. Omitted entirely for the baseline candidate, which has no mutations to describe.
         agent_version:
           type: string
-          description: Foundry agent version evaluated for this candidate. This is the draft version created during the optimization run and scored by the evaluator, before any promotion.
+          description: Foundry agent version associated with this candidate. Omitted when no temporary or evaluated agent version was created.
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
-          description: Timestamp when the candidate was created, represented in Unix time.
-        avg_score:
-          type: number
-          format: double
-          description: Average composite score across all evaluated tasks.
-        avg_tokens:
-          type: number
-          format: double
-          description: Average total tokens consumed per task.
-        avg_latency_ms:
-          type: number
-          format: double
-          description: 'Average end-to-end latency per task. Wire representation: milliseconds as a float.'
-        eval_id:
-          type: string
-          description: Foundry evaluation identifier used to score this candidate.
-        eval_run_id:
-          type: string
-          description: Foundry evaluation run identifier for this candidate's scoring run.
+          description: Timestamp when the candidate was created, represented in Unix time. Omitted when unavailable for legacy candidate records.
         promotion:
           $ref: '#/components/schemas/PromotionInfo'
-          description: Promotion metadata. Null if this candidate has not been promoted.
+          description: Promotion metadata. Omitted if this candidate has not been promoted.
         files:
           type: array
           items:
             $ref: '#/components/schemas/AgentOptimizationCandidateFileInfo'
-          description: Manifest of artifact files stored for this candidate (config, results, diagnostics).
-      description: 'A single candidate produced by an optimization job. Represents both LIST and detail views: the LIST context populates aggregate scoring fields and the mutation keys (with values null), and a client can request the full mutation payload via the `expand=mutations` query parameter or a `GET /candidates/{id}` call.'
+          description: Manifest of artifact files stored for this candidate. Omitted when the manifest is not loaded or unavailable.
+      discriminator:
+        propertyName: evaluation_status
+        mapping:
+          not_evaluated: '#/components/schemas/UnevaluatedAgentOptimizationCandidate'
+          evaluated: '#/components/schemas/EvaluatedAgentOptimizationCandidate'
+      description: Fields shared by evaluated and unevaluated optimization candidates.
+    AgentOptimizationCandidateEvaluationStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - evaluated
+            - not_evaluated
+      description: Whether a candidate was evaluated against the job's evaluation configuration.
     AgentOptimizationCandidateFileInfo:
       type: object
       required:
@@ -40712,37 +40709,35 @@ components:
           format: int64
           description: File size in bytes.
       description: A single candidate file artifact stored in the job's output blob.
-    AgentOptimizationCompletionStatus:
+    AgentOptimizationConfiguration:
       anyOf:
-        - type: string
-        - type: string
-          enum:
-            - improved
-            - no_improvement
-            - stopped_early
-      description: Terminal completion classification for a successful optimization job.
-    AgentOptimizationConfig:
+        - $ref: '#/components/schemas/QualityOptimizationConfiguration'
+        - $ref: '#/components/schemas/CostOptimizationConfiguration'
+        - $ref: '#/components/schemas/PromptOptimizationConfiguration'
+      description: |-
+        Supported optimization types. New workflows should add independent variants
+        rather than adding nullable fields to existing variants.
+    AgentOptimizationConfigurationBase:
       type: object
+      required:
+        - type
       properties:
-        system_prompt:
+        type:
           type: string
-          description: System prompt / instructions.
-        model:
-          type: string
-          description: Model deployment name.
-        skills:
-          type: array
-          items:
-            type: object
-            unevaluatedProperties: {}
-          description: Agent skills.
-        tools:
-          type: array
-          items:
-            type: object
-            unevaluatedProperties: {}
-          description: Agent tools.
-      description: Structured baseline configuration for the agent being optimized.
+          description: Optimization type discriminator.
+      discriminator:
+        propertyName: type
+        mapping:
+          cost_optimization: '#/components/schemas/CostOptimizationConfiguration'
+          prompt_optimization: '#/components/schemas/PromptOptimizationConfiguration'
+          quality_optimization: '#/components/schemas/QualityOptimizationConfiguration'
+      description: Base model for type-specific optimization configuration.
+    AgentOptimizationDataset:
+      anyOf:
+        - $ref: '#/components/schemas/AgentOptimizationInlineDatasetInput'
+        - $ref: '#/components/schemas/AgentOptimizationReferenceDatasetInput'
+        - $ref: '#/components/schemas/AgentOptimizationGenerationJobReferenceDatasetInput'
+      description: Supported dataset inputs for evaluation.
     AgentOptimizationDatasetCriterion:
       type: object
       required:
@@ -40767,8 +40762,9 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          inline: '#/components/schemas/AgentOptimizationInlineDatasetInput'
           reference: '#/components/schemas/AgentOptimizationReferenceDatasetInput'
+          generation_job_reference: '#/components/schemas/AgentOptimizationGenerationJobReferenceDatasetInput'
+          inline: '#/components/schemas/AgentOptimizationInlineDatasetInput'
       description: Base discriminated model for dataset input. Either inline items or a registered reference.
     AgentOptimizationDatasetInputType:
       anyOf:
@@ -40777,27 +40773,31 @@ components:
           enum:
             - inline
             - reference
+            - generation_job_reference
       description: Discriminator values for the dataset input union.
     AgentOptimizationDatasetItem:
       type: object
+      required:
+        - query
       properties:
         query:
           type: string
           description: The user query / prompt.
         ground_truth:
           type: string
-          description: Expected ground truth answer.
+          description: Expected ground truth answer. Omitted when no ground truth is supplied.
         desired_num_turns:
           type: integer
           format: int32
           minimum: 1
           maximum: 20
-          description: Desired number of conversation turns for simulation mode (1-20).
+          description: Desired number of conversation turns for conversation evaluation. Defaults to 10 when omitted and is ignored for single-turn evaluation.
+          default: 10
         criteria:
           type: array
           items:
             $ref: '#/components/schemas/AgentOptimizationDatasetCriterion'
-          description: Per-item evaluation criteria.
+          description: Per-item evaluation criteria. Omitted when the item has no custom criteria.
       description: A single item in an inline dataset.
     AgentOptimizationEstimateBand:
       type: object
@@ -40819,6 +40819,25 @@ components:
           format: double
           description: Upper bound.
       description: A low/typical/ceiling range for an estimated quantity.
+    AgentOptimizationEstimateConfiguration:
+      anyOf:
+        - $ref: '#/components/schemas/QualityOptimizationEstimateConfiguration'
+        - $ref: '#/components/schemas/CostOptimizationEstimateConfiguration'
+      description: Optimization types supported by the estimate operation.
+    AgentOptimizationEstimateConfigurationBase:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: Optimization type discriminator.
+      discriminator:
+        propertyName: type
+        mapping:
+          cost_optimization: '#/components/schemas/CostOptimizationEstimateConfiguration'
+          quality_optimization: '#/components/schemas/QualityOptimizationEstimateConfiguration'
+      description: Base model for type-specific estimate configuration.
     AgentOptimizationEstimateDollars:
       type: object
       required:
@@ -40827,10 +40846,12 @@ components:
       properties:
         modeled:
           type: boolean
-          description: Whether the dollar figures are modeled (projected from call counts + per-model prices) vs. measured. Currently always true; may become false when measured billing data is available. Do not branch exhaustively on this value.
+          description: Whether the dollar figures are modeled rather than measured. Defaults to true; clients should read this value rather than assume it remains true.
+          default: true
         currency:
           type: string
-          description: ISO 4217 currency code (e.g., 'USD'). Read as data — do not assume USD; the price source stamps the currency and this may change without a contract change.
+          description: ISO 4217 currency code. Defaults to USD when the pricing source provides no currency; an emitted source currency overrides this fallback.
+          default: USD
         total:
           $ref: '#/components/schemas/AgentOptimizationEstimateBand'
           description: Total dollar estimate across all priced layers. Omitted when no layer could be priced.
@@ -40838,102 +40859,69 @@ components:
           type: object
           unevaluatedProperties:
             $ref: '#/components/schemas/AgentOptimizationEstimateBand'
-          description: Per-layer dollar bands keyed by layer name (e.g. 'agent', 'judge', 'reflection'). Only priced layers are present.
+          description: Per-layer dollar bands keyed by layer name (e.g. 'agent', 'judge', 'reflection'). Omitted when no layer could be priced.
         unpriced_layers:
           type: array
           items:
             type: string
-          description: Cost layers excluded from total because no pricing data was available for their model.
+          description: Cost layers excluded from total because no pricing data was available for their model. Omitted when every contributing layer was priced.
       description: Estimated cost breakdown. Present only when at least one contributing model has pricing data available.
-    AgentOptimizationEstimateJobInputs:
+    AgentOptimizationEstimateEvaluationConfiguration:
       type: object
       required:
-        - agent
-        - train_dataset
+        - training_dataset
         - evaluators
+        - evaluation_model
       properties:
-        agent:
-          $ref: '#/components/schemas/OptimizedAgentIdentifier'
-          description: The agent (and pinned version) being optimized.
-        train_dataset:
-          $ref: '#/components/schemas/AgentOptimizationDatasetInput'
-          description: Training dataset.
+        training_dataset:
+          $ref: '#/components/schemas/AgentOptimizationDataset'
+          description: Dataset used to guide the optimization search.
         validation_dataset:
-          $ref: '#/components/schemas/AgentOptimizationDatasetInput'
-          description: Optional held-out validation dataset.
+          $ref: '#/components/schemas/AgentOptimizationValidationDataset'
+          description: Held-out dataset used for full candidate evaluation. The training dataset is reused when omitted.
         evaluators:
           type: array
           items:
-            $ref: '#/components/schemas/AgentOptimizationEvaluatorRef'
+            $ref: '#/components/schemas/AgentOptimizationEvaluator'
           minItems: 1
-          description: Evaluators.
-        options:
-          $ref: '#/components/schemas/AgentOptimizationEstimateOptions'
-          description: Estimate-specific tuning knobs.
-      description: Inputs for :estimate. Same shape as AgentOptimizationJobInputs but the options field is AgentOptimizationEstimateOptions.
-    AgentOptimizationEstimateOptions:
-      type: object
-      properties:
-        max_candidates:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 20
-          description: Maximum number of improved (non-baseline) candidates to generate. The baseline evaluation is run in addition to these. Must be >= 1. If omitted, the service defaults to 2.
-          default: 2
-        eval_model:
-          type: string
-          description: Model deployment used for evaluation. Defaults to server config (typically 'gpt-4o').
-        optimization_model:
-          type: string
-          description: Model deployment for optimization reasoning (must be gpt-5 family). Falls back to the default eval model when not set.
-        evaluation_level:
-          $ref: '#/components/schemas/EvaluationLevel'
-          description: Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.
-        max_stalls:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 50
-          description: Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a change, evaluates it on a small subset, and the score does not improve. The counter resets when a minibatch passes and its full-validation score beats the current best. If omitted, the service defaults to 5.
-          default: 5
-        reflection_minibatch_size:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 100
-          description: Number of items sampled per reflective minibatch. If omitted, the service defaults to 3.
-          default: 3
-        max_concurrent_agent_runs:
+          description: Evaluators used to score candidate quality. Named and generated evaluators may be combined.
+        evaluation_model:
+          $ref: '#/components/schemas/AgentOptimizationModelConfiguration'
+          description: Model deployment used by model-based evaluators.
+        evaluation_mode:
+          $ref: '#/components/schemas/AgentOptimizationEvaluationMode'
+          description: Whether each dataset row is evaluated as a single turn or a simulated conversation. Defaults to single_turn when omitted.
+          default: single_turn
+        max_concurrency:
           type: integer
           format: int32
           minimum: 1
           maximum: 10
-          description: Maximum number of concurrent agent runs during evaluation. Range 1-10 (server caps to match the eval service's concurrency limit). If omitted, the service defaults to 1 (sequential).
+          description: Maximum number of target-agent runs executed concurrently during evaluation. Defaults to 1 when omitted.
           default: 1
-        target_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/TargetAttribute'
-          description: Which agent attributes to optimize. Omit or leave empty to auto-select based on baseline configuration.
-        model_search_space:
-          type: array
-          items:
-            type: string
-          description: Candidate model deployment names to evaluate. Used only when target_attributes contains 'model'. Ignored otherwise.
-        strategy:
-          $ref: '#/components/schemas/AgentOptimizationStrategy'
-          description: Optimization strategy identifier. Defaults to gepa when omitted.
-          default: gepa
-        optimization_config:
-          $ref: '#/components/schemas/AgentOptimizationConfig'
-          description: Structured baseline configuration for the agent being optimized. When omitted, the server resolves baseline from the agent identifier.
         validation_dataset_row_count:
           type: integer
           format: int32
           minimum: 1
-          description: Validation dataset size hint. Used to project call counts when validation_dataset is a registered reference (row count is unknown at estimate time). If not provided, server infers from an inline validation_dataset when present.
-      description: Options for :estimate. Extends AgentOptimizationOptions with estimate-only fields.
+          description: Validation dataset row-count hint used when a referenced dataset cannot be sized without a service lookup. Omitted to let the service resolve the row count.
+      description: Evaluation configuration accepted by the estimate operation.
+    AgentOptimizationEstimateInputs:
+      type: object
+      required:
+        - target_configuration
+        - optimization_model_configuration
+        - optimization_configuration
+      properties:
+        target_configuration:
+          $ref: '#/components/schemas/AgentOptimizationTargetConfiguration'
+          description: Foundry agent whose configuration would be optimized.
+        optimization_model_configuration:
+          $ref: '#/components/schemas/AgentOptimizationModelConfiguration'
+          description: Model deployment that would generate candidate changes.
+        optimization_configuration:
+          $ref: '#/components/schemas/AgentOptimizationEstimateConfiguration'
+          description: Type-specific estimate configuration.
+      description: Inputs for estimating a quality- or cost-optimization job.
     AgentOptimizationEstimateResponse:
       type: object
       required:
@@ -40947,30 +40935,131 @@ components:
           type: object
           unevaluatedProperties:
             $ref: '#/components/schemas/AgentOptimizationEstimateBand'
-          description: Exact per-layer model call bands, keyed by layer name (e.g. 'agent', 'judge', 'reflection'). Only layers that will run are present.
+          description: Exact per-layer model call bands, keyed by layer name (e.g. 'agent', 'judge', 'reflection'). Omitted when the selected search strategy cannot produce call-count estimates.
         dollars:
           $ref: '#/components/schemas/AgentOptimizationEstimateDollars'
-          description: Modeled dollar estimate. Present only when pricing data is available for at least one contributing model.
+          description: Modeled dollar estimate. Omitted when no contributing model has pricing data.
         prices_as_of:
           $ref: '#/components/schemas/FoundryTimestamp'
-          description: Timestamp of the pricing snapshot used for cost estimation, represented in Unix time.
+          description: Timestamp of the pricing snapshot used for cost estimation, represented in Unix time. Omitted when no valid pricing snapshot is available.
       description: Response body for :estimate.
-    AgentOptimizationEvaluatorRef:
+    AgentOptimizationEvaluationConfiguration:
       type: object
       required:
-        - name
+        - training_dataset
+        - evaluators
+        - evaluation_model
       properties:
-        name:
+        training_dataset:
+          $ref: '#/components/schemas/AgentOptimizationDataset'
+          description: Dataset used to guide the optimization search.
+        validation_dataset:
+          $ref: '#/components/schemas/AgentOptimizationValidationDataset'
+          description: Held-out dataset used for full candidate evaluation. The training dataset is reused when omitted.
+        evaluators:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationEvaluator'
+          minItems: 1
+          description: Evaluators used to score candidate quality. Named and generated evaluators may be combined.
+        evaluation_model:
+          $ref: '#/components/schemas/AgentOptimizationModelConfiguration'
+          description: Model deployment used by model-based evaluators.
+        evaluation_mode:
+          $ref: '#/components/schemas/AgentOptimizationEvaluationMode'
+          description: Whether each dataset row is evaluated as a single turn or a simulated conversation. Defaults to single_turn when omitted.
+          default: single_turn
+        max_concurrency:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 10
+          description: Maximum number of target-agent runs executed concurrently during evaluation. Defaults to 1 when omitted.
+          default: 1
+      description: |-
+        Reusable quality-measurement configuration.
+
+        Review consideration: if evaluation gains more execution controls, move
+        max_concurrency into a dedicated execution configuration. It remains flat while
+        concurrency is the only execution setting.
+    AgentOptimizationEvaluationMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - single_turn
+            - conversation
+      description: Evaluation mode for an optimization job.
+    AgentOptimizationEvaluationOutcome:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - improved
+            - no_improvement
+            - stopped_early
+      description: Outcome of an optimization job that evaluated candidates against a baseline.
+    AgentOptimizationEvaluator:
+      anyOf:
+        - $ref: '#/components/schemas/AgentOptimizationNamedEvaluatorInput'
+        - $ref: '#/components/schemas/AgentOptimizationGenerationJobReferenceEvaluatorInput'
+      description: Supported evaluator inputs.
+    AgentOptimizationEvaluatorInputBase:
+      type: object
+      required:
+        - type
+      properties:
+        type:
           type: string
-          description: Evaluator name.
-        version:
+          description: Evaluator input type discriminator.
+      discriminator:
+        propertyName: type
+        mapping:
+          generation_job_reference: '#/components/schemas/AgentOptimizationGenerationJobReferenceEvaluatorInput'
+          named: '#/components/schemas/AgentOptimizationNamedEvaluatorInput'
+      description: Base model for evaluator inputs.
+    AgentOptimizationGenerationJobReferenceDatasetInput:
+      type: object
+      required:
+        - type
+        - data_generation_job_id
+      properties:
+        type:
           type: string
-          description: Evaluator version. If not specified, the latest version is used.
-        initialization_parameters:
-          type: object
-          unevaluatedProperties: {}
-          description: Optional parameters passed to the evaluator at initialization. Shape is evaluator-specific.
-      description: Reference to a named evaluator, optionally pinned to a version.
+          enum:
+            - generation_job_reference
+          description: Dataset input type discriminator.
+        data_generation_job_id:
+          type: string
+          description: Identifier of the data-generation job to await and resolve.
+        data_generation_job_status:
+          type: string
+          description: Current status of the referenced data-generation job. Omitted before status is available.
+          readOnly: true
+        error:
+          $ref: '#/components/schemas/OpenAI.Error'
+          description: Failure from the referenced data-generation job. Omitted unless generation failed.
+          readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationDatasetInput'
+      description: Reference to a data-generation job whose output is used as the training dataset.
+    AgentOptimizationGenerationJobReferenceEvaluatorInput:
+      type: object
+      required:
+        - type
+        - evaluator_generation_job_id
+      properties:
+        type:
+          type: string
+          enum:
+            - generation_job_reference
+          description: Evaluator input type discriminator.
+        evaluator_generation_job_id:
+          type: string
+          description: Identifier of the evaluator-generation job to await and resolve.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationEvaluatorInputBase'
+      description: Reference to an evaluator-generation job whose output is added to the evaluator set.
     AgentOptimizationInProgressCandidateInfo:
       type: object
       required:
@@ -40978,11 +41067,11 @@ components:
       properties:
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
-          description: Timestamp when the current candidate began evaluation, represented in Unix time.
+          description: Timestamp when the current candidate began evaluation, represented in Unix time. Omitted when the start time is unavailable.
         candidate_generated:
           type: boolean
           description: Whether the candidate configuration has been fully generated (vs. still being reflected on).
-      description: Metadata for the candidate currently under evaluation. Present only during in_progress with progressive-update visibility.
+      description: Metadata for the candidate currently under evaluation. Omitted unless a job is in progress with an active candidate.
     AgentOptimizationInlineDatasetInput:
       type: object
       required:
@@ -41039,44 +41128,34 @@ components:
           readOnly: true
         progress:
           $ref: '#/components/schemas/AgentOptimizationJobProgress'
-          description: Progress snapshot. Preserved on terminal states (with in_progress_candidate omitted).
-          readOnly: true
-        completion_status:
-          $ref: '#/components/schemas/AgentOptimizationCompletionStatus'
-          description: Terminal completion classification. Present only on succeeded.
+          description: Progress snapshot. Omitted before progress is available; preserved on terminal states with in_progress_candidate omitted.
           readOnly: true
         warnings:
           type: array
           items:
             type: string
-          description: Non-fatal warnings emitted at any point during optimization.
+          description: Non-fatal warnings emitted during optimization. Omitted when no warnings were produced.
           readOnly: true
-      description: Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.
+      description: Agent optimization job resource — a long-running job that produces candidate changes to a Foundry agent configuration.
     AgentOptimizationJobInputs:
       type: object
       required:
-        - agent
-        - train_dataset
-        - evaluators
+        - target_configuration
+        - optimization_model_configuration
+        - optimization_configuration
       properties:
-        agent:
-          $ref: '#/components/schemas/OptimizedAgentIdentifier'
-          description: The agent (and pinned version) being optimized.
-        train_dataset:
-          $ref: '#/components/schemas/AgentOptimizationDatasetInput'
-          description: Training dataset — either inline items or a reference to a registered dataset. Required.
-        validation_dataset:
-          $ref: '#/components/schemas/AgentOptimizationDatasetInput'
-          description: Optional held-out validation dataset for measuring generalization of the final candidate.
-        evaluators:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentOptimizationEvaluatorRef'
-          minItems: 1
-          description: Job-level evaluators referenced by name and optional version. Required; at least one must be provided.
-        options:
-          $ref: '#/components/schemas/AgentOptimizationOptions'
-          description: Tuning knobs.
+        display_name:
+          type: string
+          description: Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics.
+        target_configuration:
+          $ref: '#/components/schemas/AgentOptimizationTargetConfiguration'
+          description: Foundry agent whose configuration is optimized.
+        optimization_model_configuration:
+          $ref: '#/components/schemas/AgentOptimizationModelConfiguration'
+          description: Model deployment used to generate candidate changes.
+        optimization_configuration:
+          $ref: '#/components/schemas/AgentOptimizationConfiguration'
+          description: Type-specific optimization configuration.
       description: Caller-supplied inputs for an optimization job.
     AgentOptimizationJobProgress:
       type: object
@@ -41095,35 +41174,36 @@ components:
         best_score:
           type: number
           format: double
-          description: Best score observed so far across all candidates.
+          description: Best score observed so far across all candidates. Omitted until at least one score is available.
         elapsed_seconds:
           type: number
           format: double
           description: 'Wall-clock time elapsed since the job began executing. Wire representation: seconds as a float.'
         in_progress_candidate:
           $ref: '#/components/schemas/AgentOptimizationInProgressCandidateInfo'
-          description: Metadata for the candidate currently under evaluation. Dropped on terminal states.
+          description: Metadata for the candidate currently under evaluation. Omitted when no candidate is active and on terminal states.
         promotion:
           $ref: '#/components/schemas/PromotionInfo'
-          description: Populated once any candidate from this job has been promoted to an agent version.
+          description: Promotion metadata. Omitted until a candidate from this job has been promoted.
       description: In-flight progress. Preserved on terminal states (with in_progress_candidate omitted).
     AgentOptimizationJobResult:
       type: object
       required:
+        - evaluation_status
         - token_usage
         - latency_usage
       properties:
-        baseline:
+        evaluation_status:
+          $ref: '#/components/schemas/AgentOptimizationCandidateEvaluationStatus'
+          description: Whether this job comparatively evaluates its candidates.
+        baseline_candidate_id:
           type: string
-          description: Candidate ID of the original (un-optimized) baseline evaluation.
-        best:
-          type: string
-          description: Candidate ID of the highest-scoring candidate found during optimization.
+          description: Candidate ID of the original baseline. Omitted until the baseline candidate is available.
         candidate_ids:
           type: array
           items:
             type: string
-          description: All candidate IDs produced by this job, in evaluation order. Use GET /candidates/{id} for the mutation payload and file manifest, or GET /candidates for a paginated summary listing.
+          description: All candidate IDs produced by this job, in evaluation order. Omitted until at least one candidate is available. Use GET /candidates/{id} for the mutation payload and file manifest, or GET /candidates for a paginated summary listing.
         token_usage:
           type: array
           items:
@@ -41134,7 +41214,12 @@ components:
           items:
             $ref: '#/components/schemas/AgentOptimizationLatencyUsageEntry'
           description: Aggregate latency per layer × model, from server-measured sources only. Always present; empty array when no server-measured latency signals were surfaced (e.g. an early-failure run or an all-hosted judge run whose evaluators do not report latency_ms).
-      description: Terminal-state or partial in-flight result body. On success/failure it holds the final scored candidate set; while in_progress it may hold a partial snapshot (baseline + any candidates whose evaluation has completed).
+      discriminator:
+        propertyName: evaluation_status
+        mapping:
+          evaluated: '#/components/schemas/EvaluatedAgentOptimizationJobResult'
+          not_evaluated: '#/components/schemas/UnevaluatedAgentOptimizationJobResult'
+      description: Fields shared by evaluated and unevaluated optimization results.
     AgentOptimizationLatencyUsageEntry:
       type: object
       required:
@@ -41180,64 +41265,39 @@ components:
         for it today without a breaking change when the signal ships.
 
         `token_usage` populates all three layers.
-    AgentOptimizationOptions:
+    AgentOptimizationModelConfiguration:
       type: object
+      required:
+        - deployment_name
       properties:
-        max_candidates:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 20
-          description: Maximum number of improved (non-baseline) candidates to generate. The baseline evaluation is run in addition to these. Must be >= 1. If omitted, the service defaults to 2.
-          default: 2
-        eval_model:
+        deployment_name:
           type: string
-          description: Model deployment used for evaluation. Defaults to server config (typically 'gpt-4o').
-        optimization_model:
+          description: Model deployment name in the Foundry project.
+      description: Identifies a model deployment used by an optimization or evaluation step.
+    AgentOptimizationNamedEvaluatorInput:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
           type: string
-          description: Model deployment for optimization reasoning (must be gpt-5 family). Falls back to the default eval model when not set.
-        evaluation_level:
-          $ref: '#/components/schemas/EvaluationLevel'
-          description: Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.
-        max_stalls:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 50
-          description: Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a change, evaluates it on a small subset, and the score does not improve. The counter resets when a minibatch passes and its full-validation score beats the current best. If omitted, the service defaults to 5.
-          default: 5
-        reflection_minibatch_size:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 100
-          description: Number of items sampled per reflective minibatch. If omitted, the service defaults to 3.
-          default: 3
-        max_concurrent_agent_runs:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 10
-          description: Maximum number of concurrent agent runs during evaluation. Range 1-10 (server caps to match the eval service's concurrency limit). If omitted, the service defaults to 1 (sequential).
-          default: 1
-        target_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/TargetAttribute'
-          description: Which agent attributes to optimize. Omit or leave empty to auto-select based on baseline configuration.
-        model_search_space:
-          type: array
-          items:
-            type: string
-          description: Candidate model deployment names to evaluate. Used only when target_attributes contains 'model'. Ignored otherwise.
-        strategy:
-          $ref: '#/components/schemas/AgentOptimizationStrategy'
-          description: Optimization strategy identifier. Defaults to gepa when omitted.
-          default: gepa
-        optimization_config:
-          $ref: '#/components/schemas/AgentOptimizationConfig'
-          description: Structured baseline configuration for the agent being optimized. When omitted, the server resolves baseline from the agent identifier.
-      description: Tuning knobs for an optimization job.
+          enum:
+            - named
+          description: Evaluator input type discriminator.
+        name:
+          type: string
+          description: Evaluator name.
+        version:
+          type: string
+          description: Evaluator version. Omitted to use the latest version.
+        initialization_parameters:
+          type: object
+          unevaluatedProperties: {}
+          description: Parameters passed to the evaluator at initialization. Omitted when the evaluator requires no initialization parameters.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationEvaluatorInputBase'
+      description: Reference to a named evaluator, optionally pinned to a version.
     AgentOptimizationReferenceDatasetInput:
       type: object
       required:
@@ -41254,17 +41314,108 @@ components:
           description: Registered dataset name.
         version:
           type: string
-          description: Dataset version. If not specified, the latest version is used.
+          description: Dataset version. Omitted to use the latest version.
+        data_generation_job_id:
+          type: string
+          description: Originating data-generation job identifier. Omitted when the dataset was not resolved from a generation job.
+          readOnly: true
+        data_generation_job_status:
+          type: string
+          description: Current status of the originating data-generation job. Omitted when the dataset was not resolved from a generation job.
+          readOnly: true
+        error:
+          $ref: '#/components/schemas/OpenAI.Error'
+          description: Failure from the originating data-generation job. Omitted unless generation failed.
+          readOnly: true
       allOf:
         - $ref: '#/components/schemas/AgentOptimizationDatasetInput'
       description: Reference to a registered Foundry dataset.
-    AgentOptimizationStrategy:
-      anyOf:
-        - type: string
-        - type: string
+    AgentOptimizationSearchConfiguration:
+      $ref: '#/components/schemas/GepaSearchConfiguration'
+      description: Supported search configurations. Additional strategies can define independent settings.
+    AgentOptimizationSearchConfigurationBase:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: Search strategy discriminator.
+      discriminator:
+        propertyName: type
+        mapping:
+          gepa: '#/components/schemas/GepaSearchConfiguration'
+      description: |-
+        GEPA search settings.
+
+        Review consideration: if search later gains multiple wall-clock, token, cost, or
+        evaluation-call budgets, or multiple stopping rules, split those concerns into
+        dedicated budget and stopping objects. The current flat shape avoids empty nesting.
+    AgentOptimizationSkill:
+      type: object
+      required:
+        - name
+        - description
+      properties:
+        name:
+          type: string
+          description: Stable skill name.
+        description:
+          type: string
+          minLength: 1
+          description: Short description used for skill discovery and progressive disclosure.
+        body:
+          type: string
+          description: Skill instructions or content that may be optimized. Omitted when the skill has no body.
+      description: A skill in the manually supplied agent optimization surface.
+    AgentOptimizationSpace:
+      type: object
+      properties:
+        target_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetAttribute'
+          description: Agent attributes the optimizer may change. When omitted, the service infers supported attributes from the baseline.
+        system_prompt:
+          type: string
+          description: Caller-supplied baseline system prompt. Omitted to resolve the baseline from the target; a prompt agent's stored definition is authoritative.
+        current_model_deployment_name:
+          type: string
+          description: Caller-supplied baseline model deployment. Omitted to resolve the baseline from the target; a prompt agent's stored definition is authoritative.
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationSkill'
+          description: Skills available for optimization. Omitted when no manual skill surface is supplied.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ChatCompletionTool'
+          description: Function tools available for optimization. Omitted when no manual tool surface is supplied. The optimizer may change function and argument descriptions while preserving names and parameter JSON Schema.
+        model_search_space:
+          type: array
+          items:
+            type: string
+          description: Alternative model deployments available when model is an optimization target. Omitted when model is not an optimization target.
+      description: The agent attributes and alternative values available to a quality-optimization search.
+    AgentOptimizationTargetConfiguration:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
+          type: string
           enum:
-            - gepa
-      description: Optimization strategy identifier. Open string so the SDK stays usable when new strategies ship server-side; known values are enumerated as members.
+            - foundry_agent
+          description: Target type discriminator.
+        name:
+          type: string
+          description: Registered Foundry agent name.
+        version:
+          type: string
+          description: Pinned agent version. The latest version is resolved and pinned when omitted.
+      description: Identifies the Foundry agent that owns the configuration being optimized.
     AgentOptimizationTokenUsageEntry:
       type: object
       required:
@@ -41292,12 +41443,19 @@ components:
         cached_tokens:
           type: integer
           format: int64
-          description: Input tokens served from the model's cache. Included in input_tokens (not additive). Defaults to 0 when the model did not report this metric.
+          description: Input tokens served from the model's cache. Included in input_tokens and not additive. Defaults to 0 when omitted.
+          default: 0
         reasoning_tokens:
           type: integer
           format: int64
-          description: Reasoning tokens counted separately by reasoning models. Included in output_tokens (not additive). Defaults to 0 when the model did not report this metric.
+          description: Reasoning tokens counted separately by reasoning models. Included in output_tokens and not additive. Defaults to 0 when omitted.
+          default: 0
       description: Aggregated token usage attributable to a single layer of the optimization loop.
+    AgentOptimizationValidationDataset:
+      anyOf:
+        - $ref: '#/components/schemas/AgentOptimizationInlineDatasetInput'
+        - $ref: '#/components/schemas/AgentOptimizationReferenceDatasetInput'
+      description: Dataset inputs supported for held-out validation.
     AgentReference:
       type: object
       required:
@@ -43815,6 +43973,89 @@ components:
       allOf:
         - $ref: '#/components/schemas/IndexUpdate'
       description: CosmosDB Vector Store Index Definition
+    CostAgentOptimizationSpace:
+      type: object
+      required:
+        - model_search_space
+      properties:
+        target_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetAttribute'
+          description: Agent attributes the optimizer may change. When omitted, the service infers supported attributes from the baseline.
+        system_prompt:
+          type: string
+          description: Caller-supplied baseline system prompt. Omitted to resolve the baseline from the target; a prompt agent's stored definition is authoritative.
+        current_model_deployment_name:
+          type: string
+          description: Caller-supplied baseline model deployment. Omitted to resolve the baseline from the target; a prompt agent's stored definition is authoritative.
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationSkill'
+          description: Skills available for optimization. Omitted when no manual skill surface is supplied.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ChatCompletionTool'
+          description: Function tools available for optimization. Omitted when no manual tool surface is supplied. The optimizer may change function and argument descriptions while preserving names and parameter JSON Schema.
+        model_search_space:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: Alternative model deployments evaluated for lower serving cost. Model is an implicit optimization target for every cost-optimization job.
+      description: Agent optimization space for cost optimization. Model selection is always enabled and requires at least one alternative deployment.
+    CostOptimizationConfiguration:
+      type: object
+      required:
+        - type
+        - evaluation_configuration
+        - search_configuration
+        - agent_optimization_space
+      properties:
+        type:
+          type: string
+          enum:
+            - cost_optimization
+          description: Optimization type discriminator.
+        evaluation_configuration:
+          $ref: '#/components/schemas/AgentOptimizationEvaluationConfiguration'
+          description: Quality measurement configuration used to compare model and configuration alternatives.
+        search_configuration:
+          $ref: '#/components/schemas/AgentOptimizationSearchConfiguration'
+          description: Candidate search configuration.
+        agent_optimization_space:
+          $ref: '#/components/schemas/CostAgentOptimizationSpace'
+          description: Agent attributes and alternatives available to the search. Model selection is always enabled for cost optimization.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationConfigurationBase'
+      description: Configuration for reducing agent serving cost while preserving acceptable quality.
+    CostOptimizationEstimateConfiguration:
+      type: object
+      required:
+        - type
+        - evaluation_configuration
+        - search_configuration
+        - agent_optimization_space
+      properties:
+        type:
+          type: string
+          enum:
+            - cost_optimization
+          description: Optimization type discriminator.
+        evaluation_configuration:
+          $ref: '#/components/schemas/AgentOptimizationEstimateEvaluationConfiguration'
+          description: Quality measurement configuration, including the optional estimate-only row-count hint.
+        search_configuration:
+          $ref: '#/components/schemas/AgentOptimizationSearchConfiguration'
+          description: Candidate search configuration.
+        agent_optimization_space:
+          $ref: '#/components/schemas/CostAgentOptimizationSpace'
+          description: Agent attributes and alternatives available to the search. Model selection is always enabled for cost optimization.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationEstimateConfigurationBase'
+      description: Estimate configuration for a cost-optimization job.
     CreateAgentFromCodeContent:
       type: object
       properties:
@@ -43865,6 +44106,15 @@ components:
           type: object
           unevaluatedProperties: {}
           description: The inputs to the manifest that will result in a fully materialized Agent.
+    CreateAgentOptimizationJobRequest:
+      type: object
+      required:
+        - inputs
+      properties:
+        inputs:
+          $ref: '#/components/schemas/AgentOptimizationJobInputs'
+          description: Caller-supplied optimization inputs.
+      description: Request body for creating an agent optimization job.
     CreateAgentRequest:
       type: object
       required:
@@ -45857,6 +46107,56 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Insights=V1Preview
+    EvaluatedAgentOptimizationCandidate:
+      type: object
+      required:
+        - evaluation_status
+      properties:
+        evaluation_status:
+          type: string
+          enum:
+            - evaluated
+          description: Candidate evaluation status.
+        score:
+          type: number
+          format: double
+          description: Average composite score across all evaluated tasks. Omitted until scoring produces an aggregate score.
+        avg_tokens:
+          type: number
+          format: double
+          description: Average total tokens consumed per task. Omitted when token usage was not measured.
+        avg_latency_ms:
+          type: number
+          format: double
+          description: 'Average end-to-end latency per task. Omitted when latency was not measured. Wire representation: milliseconds as a float.'
+        eval_id:
+          type: string
+          description: Foundry evaluation identifier used to score this candidate. Omitted when no evaluation identifier is available.
+        eval_run_id:
+          type: string
+          description: Foundry evaluation run identifier for this candidate's scoring run. Omitted when no evaluation run identifier is available.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationCandidateBase'
+      description: A candidate that was comparatively evaluated against the job's evaluation configuration.
+    EvaluatedAgentOptimizationJobResult:
+      type: object
+      required:
+        - evaluation_status
+      properties:
+        evaluation_status:
+          type: string
+          enum:
+            - evaluated
+          description: Result evaluation status.
+        best_candidate_id:
+          type: string
+          description: Candidate ID of the highest-scoring candidate. Omitted until a candidate has been selected.
+        evaluation_outcome:
+          $ref: '#/components/schemas/AgentOptimizationEvaluationOutcome'
+          description: Outcome of comparative evaluation. Omitted until the evaluated job reaches a terminal state.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationJobResult'
+      description: Partial or terminal result for quality or cost optimization.
     EvaluationComparisonInsightRequest:
       type: object
       required:
@@ -47151,6 +47451,40 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
+    GepaSearchConfiguration:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - gepa
+          description: Search strategy discriminator.
+        max_candidates:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 20
+          description: Maximum number of non-baseline candidates to fully evaluate. Defaults to 2 when omitted.
+          default: 2
+        candidate_screening_size:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+          description: Number of training rows used to screen each proposed candidate before full validation. Defaults to 3 when omitted.
+          default: 3
+        max_consecutive_failed_candidate_screens:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 50
+          description: Maximum number of consecutive proposed candidates that may fail screening before the search stops early. Defaults to 5 when omitted.
+          default: 5
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationSearchConfigurationBase'
+      description: Genetic Evolutionary Prompt Architecture search configuration.
     GitHubIssueEvent:
       anyOf:
         - type: string
@@ -76219,18 +76553,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An OpenAPI tool stored in a toolbox.
-    OptimizedAgentIdentifier:
-      type: object
-      required:
-        - agent_name
-      properties:
-        agent_name:
-          type: string
-          description: Registered Foundry agent name (required).
-        agent_version:
-          type: string
-          description: Pinned agent version. Defaults to latest if omitted.
-      description: Identifies the registered Foundry agent to optimize. Baseline configuration is resolved automatically, or overridden with skills, tools, or system prompt specified in options.optimization_config.
     OtlpTelemetryEndpoint:
       type: object
       required:
@@ -76514,22 +76836,13 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - MemoryStores=V1Preview
-    PromoteAgentOptimizationCandidateRequest:
-      type: object
-      properties:
-        agent_name:
-          type: string
-          description: Target Foundry agent name to promote onto. For prompt agents this is ignored.
-        agent_version:
-          type: string
-          description: Target agent version. When omitted, a new version is created.
-      description: Request body for POST /candidates/{id}:promote. For prompt agents these fields are ignored; the target agent is resolved from the job's stored baseline configuration.
     PromoteAgentOptimizationCandidateResponse:
       type: object
       required:
         - candidate_id
         - promoted_at
         - agent_name
+        - agent_version
         - created_new_version
       properties:
         candidate_id:
@@ -76540,10 +76853,10 @@ components:
           description: Timestamp when promotion occurred, represented in Unix time.
         agent_name:
           type: string
-          description: Name of the Foundry agent this candidate was promoted to.
+          description: Name of the Foundry agent associated with the recorded promotion.
         agent_version:
           type: string
-          description: Version of the Foundry agent this candidate was promoted to. Omitted when a caller omitted a target version and no server default resolved.
+          description: Version of the Foundry agent associated with the promotion.
         created_new_version:
           type: boolean
           description: Whether a new agent version was created during promotion.
@@ -76564,11 +76877,11 @@ components:
           description: Timestamp when promotion occurred, represented in Unix time.
         agent_name:
           type: string
-          description: Name of the Foundry agent this candidate was promoted to.
+          description: Name of the Foundry agent associated with the recorded promotion.
         agent_version:
           type: string
-          description: Version of the Foundry agent this candidate was promoted to.
-      description: Promotion metadata recorded when a candidate is deployed to a Foundry agent version.
+          description: Version of the Foundry agent associated with the recorded promotion.
+      description: Promotion metadata recorded for a candidate. Prompt-agent promotion creates a new version; hosted-agent promotion currently records metadata without deploying a new version.
     PromptAgentDefinition:
       type: object
       required:
@@ -76712,6 +77025,22 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
+    PromptOptimizationConfiguration:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - prompt_optimization
+          description: Optimization type discriminator.
+        steering_prompt:
+          type: string
+          description: Developer guidance describing the desired prompt changes. Omitted when no additional steering is needed.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationConfigurationBase'
+      description: Configuration for a one-shot prompt transformation without comparative evaluation.
     ProtocolConfiguration:
       type: object
       properties:
@@ -76747,6 +77076,54 @@ components:
           type: string
           description: The version string for the protocol, e.g. 'v0.1.1'.
       description: A record mapping for a single protocol and its version.
+    QualityOptimizationConfiguration:
+      type: object
+      required:
+        - type
+        - evaluation_configuration
+        - search_configuration
+      properties:
+        type:
+          type: string
+          enum:
+            - quality_optimization
+          description: Optimization type discriminator.
+        evaluation_configuration:
+          $ref: '#/components/schemas/AgentOptimizationEvaluationConfiguration'
+          description: Quality measurement configuration.
+        search_configuration:
+          $ref: '#/components/schemas/AgentOptimizationSearchConfiguration'
+          description: Candidate search configuration.
+        agent_optimization_space:
+          $ref: '#/components/schemas/AgentOptimizationSpace'
+          description: Agent attributes and alternatives available to the search. Omitted to derive the optimization surface from the target agent.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationConfigurationBase'
+      description: Configuration for improving measured agent quality.
+    QualityOptimizationEstimateConfiguration:
+      type: object
+      required:
+        - type
+        - evaluation_configuration
+        - search_configuration
+      properties:
+        type:
+          type: string
+          enum:
+            - quality_optimization
+          description: Optimization type discriminator.
+        evaluation_configuration:
+          $ref: '#/components/schemas/AgentOptimizationEstimateEvaluationConfiguration'
+          description: Quality measurement configuration, including the optional estimate-only row-count hint.
+        search_configuration:
+          $ref: '#/components/schemas/AgentOptimizationSearchConfiguration'
+          description: Candidate search configuration.
+        agent_optimization_space:
+          $ref: '#/components/schemas/AgentOptimizationSpace'
+          description: Agent attributes and alternatives available to the search. Omitted to derive the optimization surface from the target agent.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationEstimateConfigurationBase'
+      description: Estimate configuration for a quality-optimization job.
     RaiConfig:
       type: object
       required:
@@ -78935,6 +79312,35 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Schedules=V1Preview
+    UnevaluatedAgentOptimizationCandidate:
+      type: object
+      required:
+        - evaluation_status
+      properties:
+        evaluation_status:
+          type: string
+          enum:
+            - not_evaluated
+          description: Candidate evaluation status.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationCandidateBase'
+      description: A candidate generated without comparative evaluation.
+    UnevaluatedAgentOptimizationJobResult:
+      type: object
+      required:
+        - evaluation_status
+      properties:
+        evaluation_status:
+          type: string
+          enum:
+            - not_evaluated
+          description: Result evaluation status.
+        output_candidate_id:
+          type: string
+          description: Candidate ID produced by the transformation. Omitted until the output candidate is available.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationJobResult'
+      description: Partial or terminal result for a transformation job that does not comparatively evaluate candidates.
     UpdateAgentFromManifestRequest:
       type: object
       required:

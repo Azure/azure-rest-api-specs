@@ -9,6 +9,7 @@
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
 import "../openai/evaluations/models.tsp";
+import "@azure-tools/openai-typespec/models/chat";
 
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
@@ -26,7 +27,7 @@ union TargetAttribute {
   @doc("Instruction-tuning — rewrites agent system prompts.")
   instruction: "instruction",
 
-  @doc("Model-selection — evaluates alternative LLM deployments (uses options.model_search_space).")
+  @doc("Model-selection — evaluates deployments from optimization_configuration.agent_optimization_space.model_search_space.")
   `model`: "model",
 
   @doc("Skill-tuning — generates or modifies agent skill descriptions.")
@@ -36,8 +37,8 @@ union TargetAttribute {
   tool: "tool",
 }
 
-/** Terminal completion classification for a successful optimization job. */
-union AgentOptimizationCompletionStatus {
+/** Outcome of an optimization job that evaluated candidates against a baseline. */
+union AgentOptimizationEvaluationOutcome {
   string,
 
   @doc("Best candidate exceeded the baseline score.")
@@ -46,8 +47,19 @@ union AgentOptimizationCompletionStatus {
   @doc("Optimization completed but no candidate outperformed the baseline.")
   no_improvement: "no_improvement",
 
-  @doc("Optimization halted early because max_stalls was reached.")
+  @doc("Optimization halted early because the maximum consecutive failed candidate screens was reached.")
   stopped_early: "stopped_early",
+}
+
+/** Whether a candidate was evaluated against the job's evaluation configuration. */
+union AgentOptimizationCandidateEvaluationStatus {
+  string,
+
+  @doc("The candidate was evaluated and its evaluation-derived fields may be populated.")
+  evaluated: "evaluated",
+
+  @doc("The candidate was generated without comparative evaluation.")
+  not_evaluated: "not_evaluated",
 }
 
 /**
@@ -78,12 +90,15 @@ union AgentOptimizationLayer {
   reflection: "reflection",
 }
 
-/** Optimization strategy identifier. Open string so the SDK stays usable when new strategies ship server-side; known values are enumerated as members. */
-union AgentOptimizationStrategy {
+/** Evaluation mode for an optimization job. */
+union AgentOptimizationEvaluationMode {
   string,
 
-  @doc("Genetic Evolutionary Prompt Architecture — reflective mutation with Pareto-optimal candidate selection.")
-  gepa: "gepa",
+  @doc("Evaluate each dataset item as a single-turn interaction.")
+  single_turn: "single_turn",
+
+  @doc("Evaluate each dataset item as a multi-turn simulated conversation.")
+  conversation: "conversation",
 }
 
 // ---------------------------------------------------------------------------
@@ -99,6 +114,9 @@ union AgentOptimizationDatasetInputType {
 
   @doc("Reference to a registered Foundry dataset by name and version.")
   reference: "reference",
+
+  @doc("Reference to a data-generation job whose output becomes the training dataset.")
+  generation_job_reference: "generation_job_reference",
 }
 
 /** Base discriminated model for dataset input. Either inline items or a registered reference. */
@@ -127,24 +145,67 @@ model AgentOptimizationReferenceDatasetInput
   @doc("Registered dataset name.")
   name: string;
 
-  @doc("Dataset version. If not specified, the latest version is used.")
+  @doc("Dataset version. Omitted to use the latest version.")
   version?: string;
+
+  @doc("Originating data-generation job identifier. Omitted when the dataset was not resolved from a generation job.")
+  @visibility(Lifecycle.Read)
+  data_generation_job_id?: string;
+
+  @doc("Current status of the originating data-generation job. Omitted when the dataset was not resolved from a generation job.")
+  @visibility(Lifecycle.Read)
+  data_generation_job_status?: string;
+
+  @doc("Failure from the originating data-generation job. Omitted unless generation failed.")
+  @visibility(Lifecycle.Read)
+  error?: ApiError;
+}
+
+/** Reference to a data-generation job whose output is used as the training dataset. */
+model AgentOptimizationGenerationJobReferenceDatasetInput
+  extends AgentOptimizationDatasetInput {
+  @doc("Dataset input type discriminator.")
+  type: AgentOptimizationDatasetInputType.generation_job_reference;
+
+  @doc("Identifier of the data-generation job to await and resolve.")
+  data_generation_job_id: string;
+
+  @doc("Current status of the referenced data-generation job. Omitted before status is available.")
+  @visibility(Lifecycle.Read)
+  data_generation_job_status?: string;
+
+  @doc("Failure from the referenced data-generation job. Omitted unless generation failed.")
+  @visibility(Lifecycle.Read)
+  error?: ApiError;
+}
+
+/** Supported dataset inputs for evaluation. */
+union AgentOptimizationDataset {
+  AgentOptimizationInlineDatasetInput,
+  AgentOptimizationReferenceDatasetInput,
+  AgentOptimizationGenerationJobReferenceDatasetInput,
+}
+
+/** Dataset inputs supported for held-out validation. */
+union AgentOptimizationValidationDataset {
+  AgentOptimizationInlineDatasetInput,
+  AgentOptimizationReferenceDatasetInput,
 }
 
 /** A single item in an inline dataset. */
 model AgentOptimizationDatasetItem {
   @doc("The user query / prompt.")
-  query?: string;
+  query: string;
 
-  @doc("Expected ground truth answer.")
+  @doc("Expected ground truth answer. Omitted when no ground truth is supplied.")
   ground_truth?: string;
 
-  @doc("Desired number of conversation turns for simulation mode (1-20).")
+  @doc("Desired number of conversation turns for conversation evaluation. Defaults to 10 when omitted and is ignored for single-turn evaluation.")
   @minValue(1)
   @maxValue(20)
-  desired_num_turns?: int32;
+  desired_num_turns?: int32 = 10;
 
-  @doc("Per-item evaluation criteria.")
+  @doc("Per-item evaluation criteria. Omitted when the item has no custom criteria.")
   criteria?: AgentOptimizationDatasetCriterion[];
 }
 
@@ -161,140 +222,328 @@ model AgentOptimizationDatasetCriterion {
 // Evaluator reference
 // ---------------------------------------------------------------------------
 
+/** Base model for evaluator inputs. */
+@discriminator("type")
+model AgentOptimizationEvaluatorInputBase {
+  @doc("Evaluator input type discriminator.")
+  type: string;
+}
+
 /** Reference to a named evaluator, optionally pinned to a version. */
-model AgentOptimizationEvaluatorRef {
+model AgentOptimizationNamedEvaluatorInput extends AgentOptimizationEvaluatorInputBase {
+  @doc("Evaluator input type discriminator.")
+  type: "named";
+
   @doc("Evaluator name.")
   name: string;
 
-  @doc("Evaluator version. If not specified, the latest version is used.")
+  @doc("Evaluator version. Omitted to use the latest version.")
   version?: string;
 
-  @doc("Optional parameters passed to the evaluator at initialization. Shape is evaluator-specific.")
+  @doc("Parameters passed to the evaluator at initialization. Omitted when the evaluator requires no initialization parameters.")
   initialization_parameters?: Record<unknown>;
+}
+
+/** Reference to an evaluator-generation job whose output is added to the evaluator set. */
+model AgentOptimizationGenerationJobReferenceEvaluatorInput
+  extends AgentOptimizationEvaluatorInputBase {
+  @doc("Evaluator input type discriminator.")
+  type: "generation_job_reference";
+
+  @doc("Identifier of the evaluator-generation job to await and resolve.")
+  evaluator_generation_job_id: string;
+}
+
+/** Supported evaluator inputs. */
+union AgentOptimizationEvaluator {
+  AgentOptimizationNamedEvaluatorInput,
+  AgentOptimizationGenerationJobReferenceEvaluatorInput,
 }
 
 // ---------------------------------------------------------------------------
 // Input models
 // ---------------------------------------------------------------------------
 
-@doc("Identifies the registered Foundry agent to optimize. Baseline configuration is resolved automatically, or overridden with skills, tools, or system prompt specified in options.optimization_config.")
-model OptimizedAgentIdentifier {
-  @doc("Registered Foundry agent name (required).")
-  agent_name: string;
+@doc("Identifies the Foundry agent that owns the configuration being optimized.")
+model AgentOptimizationTargetConfiguration {
+  @doc("Target type discriminator.")
+  type: "foundry_agent";
 
-  @doc("Pinned agent version. Defaults to latest if omitted.")
-  agent_version?: string;
+  @doc("Registered Foundry agent name.")
+  name: string;
+
+  @doc("Pinned agent version. The latest version is resolved and pinned when omitted.")
+  version?: string;
 }
 
-@doc("Structured baseline configuration for the agent being optimized.")
-model AgentOptimizationConfig {
-  @doc("System prompt / instructions.")
+@doc("Identifies a model deployment used by an optimization or evaluation step.")
+model AgentOptimizationModelConfiguration {
+  @doc("Model deployment name in the Foundry project.")
+  deployment_name: string;
+
+  // Review consideration: sampling_parameters may belong here once the service
+  // supports caller-controlled inference settings. It is intentionally not a wire
+  // property in this contract.
+}
+
+@doc("A skill in the manually supplied agent optimization surface.")
+model AgentOptimizationSkill {
+  @doc("Stable skill name.")
+  name: string;
+
+  @doc("Short description used for skill discovery and progressive disclosure.")
+  @minLength(1)
+  description: string;
+
+  @doc("Skill instructions or content that may be optimized. Omitted when the skill has no body.")
+  body?: string;
+}
+
+@doc("Fields shared by quality and cost agent optimization spaces.")
+model AgentOptimizationSpaceBase {
+  @doc("Agent attributes the optimizer may change. When omitted, the service infers supported attributes from the baseline.")
+  target_attributes?: TargetAttribute[];
+
+  @doc("Caller-supplied baseline system prompt. Omitted to resolve the baseline from the target; a prompt agent's stored definition is authoritative.")
   system_prompt?: string;
 
-  @doc("Model deployment name.")
-  `model`?: string;
+  @doc("Caller-supplied baseline model deployment. Omitted to resolve the baseline from the target; a prompt agent's stored definition is authoritative.")
+  current_model_deployment_name?: string;
 
-  @doc("Agent skills.")
-  skills?: Record<unknown>[];
+  @doc("Skills available for optimization. Omitted when no manual skill surface is supplied.")
+  skills?: AgentOptimizationSkill[];
 
-  @doc("Agent tools.")
-  tools?: Record<unknown>[];
+  @doc("Function tools available for optimization. Omitted when no manual tool surface is supplied. The optimizer may change function and argument descriptions while preserving names and parameter JSON Schema.")
+  tools?: OpenAI.ChatCompletionTool[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@doc("Tuning knobs for an optimization job.")
-model AgentOptimizationOptions {
-  @doc("Maximum number of improved (non-baseline) candidates to generate. The baseline evaluation is run in addition to these. Must be >= 1. If omitted, the service defaults to 2.")
+@doc("The agent attributes and alternative values available to a quality-optimization search.")
+model AgentOptimizationSpace {
+  ...AgentOptimizationSpaceBase;
+
+  @doc("Alternative model deployments available when model is an optimization target. Omitted when model is not an optimization target.")
+  model_search_space?: string[];
+}
+
+@doc("Agent optimization space for cost optimization. Model selection is always enabled and requires at least one alternative deployment.")
+model CostAgentOptimizationSpace {
+  ...AgentOptimizationSpaceBase;
+
+  @doc("Alternative model deployments evaluated for lower serving cost. Model is an implicit optimization target for every cost-optimization job.")
+  @minItems(1)
+  model_search_space: string[];
+}
+
+/**
+ * GEPA search settings.
+ *
+ * Review consideration: if search later gains multiple wall-clock, token, cost, or
+ * evaluation-call budgets, or multiple stopping rules, split those concerns into
+ * dedicated budget and stopping objects. The current flat shape avoids empty nesting.
+ */
+@discriminator("type")
+model AgentOptimizationSearchConfigurationBase {
+  @doc("Search strategy discriminator.")
+  type: string;
+}
+
+@doc("Genetic Evolutionary Prompt Architecture search configuration.")
+model GepaSearchConfiguration extends AgentOptimizationSearchConfigurationBase {
+  @doc("Search strategy discriminator.")
+  type: "gepa";
+
+  @doc("Maximum number of non-baseline candidates to fully evaluate. Defaults to 2 when omitted.")
   @minValue(1)
   @maxValue(20)
   max_candidates?: int32 = 2;
 
-  @doc("Model deployment used for evaluation. Defaults to server config (typically 'gpt-4o').")
-  eval_model?: string;
-
-  @doc("Model deployment for optimization reasoning (must be gpt-5 family). Falls back to the default eval model when not set.")
-  optimization_model?: string;
-
-  @doc("Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.")
-  evaluation_level?: EvaluationLevel;
-
-  @doc("Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a change, evaluates it on a small subset, and the score does not improve. The counter resets when a minibatch passes and its full-validation score beats the current best. If omitted, the service defaults to 5.")
-  @minValue(1)
-  @maxValue(50)
-  max_stalls?: int32 = 5;
-
-  @doc("Number of items sampled per reflective minibatch. If omitted, the service defaults to 3.")
+  @doc("Number of training rows used to screen each proposed candidate before full validation. Defaults to 3 when omitted.")
   @minValue(1)
   @maxValue(100)
-  reflection_minibatch_size?: int32 = 3;
+  candidate_screening_size?: int32 = 3;
 
-  @doc("Maximum number of concurrent agent runs during evaluation. Range 1-10 (server caps to match the eval service's concurrency limit). If omitted, the service defaults to 1 (sequential).")
+  @doc("Maximum number of consecutive proposed candidates that may fail screening before the search stops early. Defaults to 5 when omitted.")
+  @minValue(1)
+  @maxValue(50)
+  max_consecutive_failed_candidate_screens?: int32 = 5;
+}
+
+/** Supported search configurations. Additional strategies can define independent settings. */
+union AgentOptimizationSearchConfiguration {
+  GepaSearchConfiguration,
+}
+
+/**
+ * Reusable quality-measurement configuration.
+ *
+ * Review consideration: if evaluation gains more execution controls, move
+ * max_concurrency into a dedicated execution configuration. It remains flat while
+ * concurrency is the only execution setting.
+ */
+model AgentOptimizationEvaluationConfiguration {
+  @doc("Dataset used to guide the optimization search.")
+  training_dataset: AgentOptimizationDataset;
+
+  @doc("Held-out dataset used for full candidate evaluation. The training dataset is reused when omitted.")
+  validation_dataset?: AgentOptimizationValidationDataset;
+
+  @doc("Evaluators used to score candidate quality. Named and generated evaluators may be combined.")
+  @minItems(1)
+  evaluators: AgentOptimizationEvaluator[];
+
+  @doc("Model deployment used by model-based evaluators.")
+  evaluation_model: AgentOptimizationModelConfiguration;
+
+  @doc("Whether each dataset row is evaluated as a single turn or a simulated conversation. Defaults to single_turn when omitted.")
+  evaluation_mode?: AgentOptimizationEvaluationMode = AgentOptimizationEvaluationMode.single_turn;
+
+  @doc("Maximum number of target-agent runs executed concurrently during evaluation. Defaults to 1 when omitted.")
   @minValue(1)
   @maxValue(10)
-  max_concurrent_agent_runs?: int32 = 1;
-
-  @doc("Which agent attributes to optimize. Omit or leave empty to auto-select based on baseline configuration.")
-  target_attributes?: TargetAttribute[];
-
-  @doc("Candidate model deployment names to evaluate. Used only when target_attributes contains 'model'. Ignored otherwise.")
-  model_search_space?: string[];
-
-  @doc("Optimization strategy identifier. Defaults to gepa when omitted.")
-  strategy?: AgentOptimizationStrategy = AgentOptimizationStrategy.gepa;
-
-  @doc("Structured baseline configuration for the agent being optimized. When omitted, the server resolves baseline from the agent identifier.")
-  optimization_config?: AgentOptimizationConfig;
+  max_concurrency?: int32 = 1;
 }
 
-@doc("Caller-supplied inputs for an optimization job.")
-model AgentOptimizationJobInputs {
-  @doc("The agent (and pinned version) being optimized.")
-  agent: OptimizedAgentIdentifier;
+@doc("Evaluation configuration accepted by the estimate operation.")
+model AgentOptimizationEstimateEvaluationConfiguration {
+  ...AgentOptimizationEvaluationConfiguration;
 
-  @doc("Training dataset — either inline items or a reference to a registered dataset. Required.")
-  train_dataset: AgentOptimizationDatasetInput;
-
-  @doc("Optional held-out validation dataset for measuring generalization of the final candidate.")
-  validation_dataset?: AgentOptimizationDatasetInput;
-
-  @doc("Job-level evaluators referenced by name and optional version. Required; at least one must be provided.")
-  @minItems(1)
-  evaluators: AgentOptimizationEvaluatorRef[];
-
-  @doc("Tuning knobs.")
-  options?: AgentOptimizationOptions;
-}
-
-// ---------------------------------------------------------------------------
-// Estimate models
-// ---------------------------------------------------------------------------
-
-@doc("Options for :estimate. Extends AgentOptimizationOptions with estimate-only fields.")
-model AgentOptimizationEstimateOptions {
-  ...AgentOptimizationOptions;
-
-  @doc("Validation dataset size hint. Used to project call counts when validation_dataset is a registered reference (row count is unknown at estimate time). If not provided, server infers from an inline validation_dataset when present.")
+  @doc("Validation dataset row-count hint used when a referenced dataset cannot be sized without a service lookup. Omitted to let the service resolve the row count.")
   @minValue(1)
   validation_dataset_row_count?: int32;
 }
 
-@doc("Inputs for :estimate. Same shape as AgentOptimizationJobInputs but the options field is AgentOptimizationEstimateOptions.")
-model AgentOptimizationEstimateJobInputs {
-  @doc("The agent (and pinned version) being optimized.")
-  agent: OptimizedAgentIdentifier;
+/** Base model for type-specific optimization configuration. */
+@discriminator("type")
+model AgentOptimizationConfigurationBase {
+  @doc("Optimization type discriminator.")
+  type: string;
+}
 
-  @doc("Training dataset.")
-  train_dataset: AgentOptimizationDatasetInput;
+@doc("Configuration for improving measured agent quality.")
+model QualityOptimizationConfiguration extends AgentOptimizationConfigurationBase {
+  @doc("Optimization type discriminator.")
+  type: "quality_optimization";
 
-  @doc("Optional held-out validation dataset.")
-  validation_dataset?: AgentOptimizationDatasetInput;
+  @doc("Quality measurement configuration.")
+  evaluation_configuration: AgentOptimizationEvaluationConfiguration;
 
-  @doc("Evaluators.")
-  @minItems(1)
-  evaluators: AgentOptimizationEvaluatorRef[];
+  @doc("Candidate search configuration.")
+  search_configuration: AgentOptimizationSearchConfiguration;
 
-  @doc("Estimate-specific tuning knobs.")
-  options?: AgentOptimizationEstimateOptions;
+  @doc("Agent attributes and alternatives available to the search. Omitted to derive the optimization surface from the target agent.")
+  agent_optimization_space?: AgentOptimizationSpace;
+}
+
+@doc("Configuration for reducing agent serving cost while preserving acceptable quality.")
+model CostOptimizationConfiguration extends AgentOptimizationConfigurationBase {
+  @doc("Optimization type discriminator.")
+  type: "cost_optimization";
+
+  @doc("Quality measurement configuration used to compare model and configuration alternatives.")
+  evaluation_configuration: AgentOptimizationEvaluationConfiguration;
+
+  @doc("Candidate search configuration.")
+  search_configuration: AgentOptimizationSearchConfiguration;
+
+  @doc("Agent attributes and alternatives available to the search. Model selection is always enabled for cost optimization.")
+  agent_optimization_space: CostAgentOptimizationSpace;
+}
+
+@doc("Configuration for a one-shot prompt transformation without comparative evaluation.")
+model PromptOptimizationConfiguration extends AgentOptimizationConfigurationBase {
+  @doc("Optimization type discriminator.")
+  type: "prompt_optimization";
+
+  @doc("Developer guidance describing the desired prompt changes. Omitted when no additional steering is needed.")
+  steering_prompt?: string;
+}
+
+/**
+ * Supported optimization types. New workflows should add independent variants
+ * rather than adding nullable fields to existing variants.
+ */
+union AgentOptimizationConfiguration {
+  QualityOptimizationConfiguration,
+  CostOptimizationConfiguration,
+  PromptOptimizationConfiguration,
+}
+
+@doc("Caller-supplied inputs for an optimization job.")
+model AgentOptimizationJobInputs {
+  @doc("Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics.")
+  display_name?: string;
+
+  @doc("Foundry agent whose configuration is optimized.")
+  target_configuration: AgentOptimizationTargetConfiguration;
+
+  @doc("Model deployment used to generate candidate changes.")
+  optimization_model_configuration: AgentOptimizationModelConfiguration;
+
+  @doc("Type-specific optimization configuration.")
+  optimization_configuration: AgentOptimizationConfiguration;
+}
+
+@doc("Request body for creating an agent optimization job.")
+model CreateAgentOptimizationJobRequest {
+  @doc("Caller-supplied optimization inputs.")
+  inputs: AgentOptimizationJobInputs;
+}
+
+/** Base model for type-specific estimate configuration. */
+@discriminator("type")
+model AgentOptimizationEstimateConfigurationBase {
+  @doc("Optimization type discriminator.")
+  type: string;
+}
+
+@doc("Estimate configuration for a quality-optimization job.")
+model QualityOptimizationEstimateConfiguration
+  extends AgentOptimizationEstimateConfigurationBase {
+  @doc("Optimization type discriminator.")
+  type: "quality_optimization";
+
+  @doc("Quality measurement configuration, including the optional estimate-only row-count hint.")
+  evaluation_configuration: AgentOptimizationEstimateEvaluationConfiguration;
+
+  @doc("Candidate search configuration.")
+  search_configuration: AgentOptimizationSearchConfiguration;
+
+  @doc("Agent attributes and alternatives available to the search. Omitted to derive the optimization surface from the target agent.")
+  agent_optimization_space?: AgentOptimizationSpace;
+}
+
+@doc("Estimate configuration for a cost-optimization job.")
+model CostOptimizationEstimateConfiguration
+  extends AgentOptimizationEstimateConfigurationBase {
+  @doc("Optimization type discriminator.")
+  type: "cost_optimization";
+
+  @doc("Quality measurement configuration, including the optional estimate-only row-count hint.")
+  evaluation_configuration: AgentOptimizationEstimateEvaluationConfiguration;
+
+  @doc("Candidate search configuration.")
+  search_configuration: AgentOptimizationSearchConfiguration;
+
+  @doc("Agent attributes and alternatives available to the search. Model selection is always enabled for cost optimization.")
+  agent_optimization_space: CostAgentOptimizationSpace;
+}
+
+/** Optimization types supported by the estimate operation. */
+union AgentOptimizationEstimateConfiguration {
+  QualityOptimizationEstimateConfiguration,
+  CostOptimizationEstimateConfiguration,
+}
+
+@doc("Inputs for estimating a quality- or cost-optimization job.")
+model AgentOptimizationEstimateInputs {
+  @doc("Foundry agent whose configuration would be optimized.")
+  target_configuration: AgentOptimizationTargetConfiguration;
+
+  @doc("Model deployment that would generate candidate changes.")
+  optimization_model_configuration: AgentOptimizationModelConfiguration;
+
+  @doc("Type-specific estimate configuration.")
+  optimization_configuration: AgentOptimizationEstimateConfiguration;
 }
 
 @doc("A low/typical/ceiling range for an estimated quantity.")
@@ -311,19 +560,19 @@ model AgentOptimizationEstimateBand {
 
 @doc("Estimated cost breakdown. Present only when at least one contributing model has pricing data available.")
 model AgentOptimizationEstimateDollars {
-  @doc("Whether the dollar figures are modeled (projected from call counts + per-model prices) vs. measured. Currently always true; may become false when measured billing data is available. Do not branch exhaustively on this value.")
-  modeled: boolean;
+  @doc("Whether the dollar figures are modeled rather than measured. Defaults to true; clients should read this value rather than assume it remains true.")
+  modeled: boolean = true;
 
-  @doc("ISO 4217 currency code (e.g., 'USD'). Read as data — do not assume USD; the price source stamps the currency and this may change without a contract change.")
-  currency: string;
+  @doc("ISO 4217 currency code. Defaults to USD when the pricing source provides no currency; an emitted source currency overrides this fallback.")
+  currency: string = "USD";
 
   @doc("Total dollar estimate across all priced layers. Omitted when no layer could be priced.")
   total?: AgentOptimizationEstimateBand;
 
-  @doc("Per-layer dollar bands keyed by layer name (e.g. 'agent', 'judge', 'reflection'). Only priced layers are present.")
+  @doc("Per-layer dollar bands keyed by layer name (e.g. 'agent', 'judge', 'reflection'). Omitted when no layer could be priced.")
   per_layer?: Record<AgentOptimizationEstimateBand>;
 
-  @doc("Cost layers excluded from total because no pricing data was available for their model.")
+  @doc("Cost layers excluded from total because no pricing data was available for their model. Omitted when every contributing layer was priced.")
   unpriced_layers?: string[];
 }
 
@@ -332,13 +581,13 @@ model AgentOptimizationEstimateResponse {
   @doc("Validation-set size (in rows) the estimate was computed against. This is the server-resolved input used by the estimator; useful for clients that did not supply or know the row count when validation_dataset was passed as a registered reference.")
   dataset_rows: int32;
 
-  @doc("Exact per-layer model call bands, keyed by layer name (e.g. 'agent', 'judge', 'reflection'). Only layers that will run are present.")
+  @doc("Exact per-layer model call bands, keyed by layer name (e.g. 'agent', 'judge', 'reflection'). Omitted when the selected search strategy cannot produce call-count estimates.")
   call_counts?: Record<AgentOptimizationEstimateBand>;
 
-  @doc("Modeled dollar estimate. Present only when pricing data is available for at least one contributing model.")
+  @doc("Modeled dollar estimate. Omitted when no contributing model has pricing data.")
   dollars?: AgentOptimizationEstimateDollars;
 
-  @doc("Timestamp of the pricing snapshot used for cost estimation, represented in Unix time.")
+  @doc("Timestamp of the pricing snapshot used for cost estimation, represented in Unix time. Omitted when no valid pricing snapshot is available.")
   prices_as_of?: FoundryTimestamp;
 }
 
@@ -346,9 +595,9 @@ model AgentOptimizationEstimateResponse {
 // Progress / result models
 // ---------------------------------------------------------------------------
 
-@doc("Metadata for the candidate currently under evaluation. Present only during in_progress with progressive-update visibility.")
+@doc("Metadata for the candidate currently under evaluation. Omitted unless a job is in progress with an active candidate.")
 model AgentOptimizationInProgressCandidateInfo {
-  @doc("Timestamp when the current candidate began evaluation, represented in Unix time.")
+  @doc("Timestamp when the current candidate began evaluation, represented in Unix time. Omitted when the start time is unavailable.")
   created_at?: FoundryTimestamp;
 
   @doc("Whether the candidate configuration has been fully generated (vs. still being reflected on).")
@@ -363,22 +612,23 @@ model AgentOptimizationJobProgress {
   @doc("Score of the baseline (un-optimized) evaluation. Omitted until the baseline eval completes.")
   baseline_score?: float64;
 
-  @doc("Best score observed so far across all candidates.")
+  @doc("Best score observed so far across all candidates. Omitted until at least one score is available.")
   best_score?: float64;
 
   @doc("Wall-clock time elapsed since the job began executing. Wire representation: seconds as a float.")
   @encode(DurationKnownEncoding.seconds, float64)
   elapsed_seconds: duration;
 
-  @doc("Metadata for the candidate currently under evaluation. Dropped on terminal states.")
+  @doc("Metadata for the candidate currently under evaluation. Omitted when no candidate is active and on terminal states.")
   in_progress_candidate?: AgentOptimizationInProgressCandidateInfo;
 
-  @doc("Populated once any candidate from this job has been promoted to an agent version.")
+  @doc("Promotion metadata. Omitted until a candidate from this job has been promoted.")
   promotion?: PromotionInfo;
 }
 
-@doc("A single candidate produced by an optimization job. Represents both LIST and detail views: the LIST context populates aggregate scoring fields and the mutation keys (with values null), and a client can request the full mutation payload via the `expand=mutations` query parameter or a `GET /candidates/{id}` call.")
-model AgentOptimizationCandidate {
+@doc("Fields shared by evaluated and unevaluated optimization candidates.")
+@discriminator("evaluation_status")
+model AgentOptimizationCandidateBase {
   @doc("Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.")
   candidate_id: string;
 
@@ -388,36 +638,57 @@ model AgentOptimizationCandidate {
   @doc("Display name of the candidate (e.g., 'baseline', 'instruction-v2').")
   name: string;
 
+  @doc("Whether this candidate was comparatively evaluated.")
+  evaluation_status: AgentOptimizationCandidateEvaluationStatus;
+
   @doc("The mutation payload applied to the baseline to produce this candidate. The dictionary keys identify which agent attributes were mutated (for example `system_prompt`, `model`) and serve as the source of truth for which target attributes changed — no separate `optimizations` field is emitted. On LIST (and any GET without `expand=mutations`), keys are populated and values are `null`; the customer-supplied mutation values are only returned when the caller passes `expand=mutations` or on GET candidate detail. Omitted entirely for the baseline candidate, which has no mutations to describe.")
   mutations?: Record<unknown | null>;
 
-  @doc("Foundry agent version evaluated for this candidate. This is the draft version created during the optimization run and scored by the evaluator, before any promotion.")
+  @doc("Foundry agent version associated with this candidate. Omitted when no temporary or evaluated agent version was created.")
   agent_version?: string;
 
-  @doc("Timestamp when the candidate was created, represented in Unix time.")
+  @doc("Timestamp when the candidate was created, represented in Unix time. Omitted when unavailable for legacy candidate records.")
   created_at?: FoundryTimestamp;
 
-  @doc("Average composite score across all evaluated tasks.")
-  avg_score?: float64;
+  @doc("Promotion metadata. Omitted if this candidate has not been promoted.")
+  promotion?: PromotionInfo;
 
-  @doc("Average total tokens consumed per task.")
+  @doc("Manifest of artifact files stored for this candidate. Omitted when the manifest is not loaded or unavailable.")
+  files?: AgentOptimizationCandidateFileInfo[];
+}
+
+@doc("A candidate that was comparatively evaluated against the job's evaluation configuration.")
+model EvaluatedAgentOptimizationCandidate extends AgentOptimizationCandidateBase {
+  @doc("Candidate evaluation status.")
+  evaluation_status: "evaluated";
+
+  @doc("Average composite score across all evaluated tasks. Omitted until scoring produces an aggregate score.")
+  score?: float64;
+
+  @doc("Average total tokens consumed per task. Omitted when token usage was not measured.")
   avg_tokens?: float64;
 
-  @doc("Average end-to-end latency per task. Wire representation: milliseconds as a float.")
+  @doc("Average end-to-end latency per task. Omitted when latency was not measured. Wire representation: milliseconds as a float.")
   @encode(DurationKnownEncoding.milliseconds, float64)
   avg_latency_ms?: duration;
 
-  @doc("Foundry evaluation identifier used to score this candidate.")
+  @doc("Foundry evaluation identifier used to score this candidate. Omitted when no evaluation identifier is available.")
   eval_id?: string;
 
-  @doc("Foundry evaluation run identifier for this candidate's scoring run.")
+  @doc("Foundry evaluation run identifier for this candidate's scoring run. Omitted when no evaluation run identifier is available.")
   eval_run_id?: string;
+}
 
-  @doc("Promotion metadata. Null if this candidate has not been promoted.")
-  promotion?: PromotionInfo;
+@doc("A candidate generated without comparative evaluation.")
+model UnevaluatedAgentOptimizationCandidate extends AgentOptimizationCandidateBase {
+  @doc("Candidate evaluation status.")
+  evaluation_status: "not_evaluated";
+}
 
-  @doc("Manifest of artifact files stored for this candidate (config, results, diagnostics).")
-  files?: AgentOptimizationCandidateFileInfo[];
+/** Candidates returned by candidate list and detail operations. */
+union AgentOptimizationCandidate {
+  EvaluatedAgentOptimizationCandidate,
+  UnevaluatedAgentOptimizationCandidate,
 }
 
 @doc("A single candidate file artifact stored in the job's output blob.")
@@ -457,11 +728,11 @@ model AgentOptimizationTokenUsageEntry {
   @doc("Sum of input_tokens + output_tokens. Omitted when unmeasured.")
   total_tokens?: int64;
 
-  @doc("Input tokens served from the model's cache. Included in input_tokens (not additive). Defaults to 0 when the model did not report this metric.")
-  cached_tokens?: int64;
+  @doc("Input tokens served from the model's cache. Included in input_tokens and not additive. Defaults to 0 when omitted.")
+  cached_tokens?: int64 = 0;
 
-  @doc("Reasoning tokens counted separately by reasoning models. Included in output_tokens (not additive). Defaults to 0 when the model did not report this metric.")
-  reasoning_tokens?: int64;
+  @doc("Reasoning tokens counted separately by reasoning models. Included in output_tokens and not additive. Defaults to 0 when omitted.")
+  reasoning_tokens?: int64 = 0;
 }
 
 @doc("Aggregated wall-clock latency attributable to a single layer of the optimization loop. Sourced from server-measured signals (Foundry's `sample.latency_ms` on the target rollout and evaluator responses). Layers without a server-measured source are omitted from the array rather than populated with client-observed timings that would conflate real model latency with local retry/network overhead.")
@@ -480,15 +751,16 @@ model AgentOptimizationLatencyUsageEntry {
   call_count: int64;
 }
 
-@doc("Terminal-state or partial in-flight result body. On success/failure it holds the final scored candidate set; while in_progress it may hold a partial snapshot (baseline + any candidates whose evaluation has completed).")
+@doc("Fields shared by evaluated and unevaluated optimization results.")
+@discriminator("evaluation_status")
 model AgentOptimizationJobResult {
-  @doc("Candidate ID of the original (un-optimized) baseline evaluation.")
-  baseline?: string;
+  @doc("Whether this job comparatively evaluates its candidates.")
+  evaluation_status: AgentOptimizationCandidateEvaluationStatus;
 
-  @doc("Candidate ID of the highest-scoring candidate found during optimization.")
-  best?: string;
+  @doc("Candidate ID of the original baseline. Omitted until the baseline candidate is available.")
+  baseline_candidate_id?: string;
 
-  @doc("All candidate IDs produced by this job, in evaluation order. Use GET /candidates/{id} for the mutation payload and file manifest, or GET /candidates for a paginated summary listing.")
+  @doc("All candidate IDs produced by this job, in evaluation order. Omitted until at least one candidate is available. Use GET /candidates/{id} for the mutation payload and file manifest, or GET /candidates for a paginated summary listing.")
   candidate_ids?: string[];
 
   @doc("Aggregate token usage per layer × model. Always present; empty array when no calls were measured.")
@@ -498,11 +770,32 @@ model AgentOptimizationJobResult {
   latency_usage: AgentOptimizationLatencyUsageEntry[];
 }
 
+@doc("Partial or terminal result for quality or cost optimization.")
+model EvaluatedAgentOptimizationJobResult extends AgentOptimizationJobResult {
+  @doc("Result evaluation status.")
+  evaluation_status: "evaluated";
+
+  @doc("Candidate ID of the highest-scoring candidate. Omitted until a candidate has been selected.")
+  best_candidate_id?: string;
+
+  @doc("Outcome of comparative evaluation. Omitted until the evaluated job reaches a terminal state.")
+  evaluation_outcome?: AgentOptimizationEvaluationOutcome;
+}
+
+@doc("Partial or terminal result for a transformation job that does not comparatively evaluate candidates.")
+model UnevaluatedAgentOptimizationJobResult extends AgentOptimizationJobResult {
+  @doc("Result evaluation status.")
+  evaluation_status: "not_evaluated";
+
+  @doc("Candidate ID produced by the transformation. Omitted until the output candidate is available.")
+  output_candidate_id?: string;
+}
+
 // ---------------------------------------------------------------------------
 // Job resource — extends JobLike per Foundry job guidelines
 // ---------------------------------------------------------------------------
 
-@doc("Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.")
+@doc("Agent optimization job resource — a long-running job that produces candidate changes to a Foundry agent configuration.")
 model AgentOptimizationJob is JobLike<
   AgentOptimizationJobResult,
   AgentOptimizationJobInputs
@@ -515,15 +808,11 @@ model AgentOptimizationJob is JobLike<
   @visibility(Lifecycle.Read)
   updated_at: FoundryTimestamp;
 
-  @doc("Progress snapshot. Preserved on terminal states (with in_progress_candidate omitted).")
+  @doc("Progress snapshot. Omitted before progress is available; preserved on terminal states with in_progress_candidate omitted.")
   @visibility(Lifecycle.Read)
   progress?: AgentOptimizationJobProgress;
 
-  @doc("Terminal completion classification. Present only on succeeded.")
-  @visibility(Lifecycle.Read)
-  completion_status?: AgentOptimizationCompletionStatus;
-
-  @doc("Non-fatal warnings emitted at any point during optimization.")
+  @doc("Non-fatal warnings emitted during optimization. Omitted when no warnings were produced.")
   @visibility(Lifecycle.Read)
   warnings?: string[];
 }
@@ -532,7 +821,7 @@ model AgentOptimizationJob is JobLike<
 // Promotion models
 // ---------------------------------------------------------------------------
 
-@doc("Promotion metadata recorded when a candidate is deployed to a Foundry agent version.")
+@doc("Promotion metadata recorded for a candidate. Prompt-agent promotion creates a new version; hosted-agent promotion currently records metadata without deploying a new version.")
 model PromotionInfo {
   @doc("Server-assigned candidate identifier that was promoted.")
   candidate_id: string;
@@ -540,20 +829,11 @@ model PromotionInfo {
   @doc("Timestamp when promotion occurred, represented in Unix time.")
   promoted_at: FoundryTimestamp;
 
-  @doc("Name of the Foundry agent this candidate was promoted to.")
+  @doc("Name of the Foundry agent associated with the recorded promotion.")
   agent_name: string;
 
-  @doc("Version of the Foundry agent this candidate was promoted to.")
+  @doc("Version of the Foundry agent associated with the recorded promotion.")
   agent_version: string;
-}
-
-@doc("Request body for POST /candidates/{id}:promote. For prompt agents these fields are ignored; the target agent is resolved from the job's stored baseline configuration.")
-model PromoteAgentOptimizationCandidateRequest {
-  @doc("Target Foundry agent name to promote onto. For prompt agents this is ignored.")
-  agent_name?: string;
-
-  @doc("Target agent version. When omitted, a new version is created.")
-  agent_version?: string;
 }
 
 @doc("Response body for POST /candidates/{id}:promote.")
@@ -564,11 +844,11 @@ model PromoteAgentOptimizationCandidateResponse {
   @doc("Timestamp when promotion occurred, represented in Unix time.")
   promoted_at: FoundryTimestamp;
 
-  @doc("Name of the Foundry agent this candidate was promoted to.")
+  @doc("Name of the Foundry agent associated with the recorded promotion.")
   agent_name: string;
 
-  @doc("Version of the Foundry agent this candidate was promoted to. Omitted when a caller omitted a target version and no server default resolved.")
-  agent_version?: string;
+  @doc("Version of the Foundry agent associated with the promotion.")
+  agent_version: string;
 
   @doc("Whether a new agent version was created during promotion.")
   created_new_version: boolean;

@@ -24,7 +24,17 @@ interface AgentOptimizationJobs {
   @summary("Create an agent optimization job")
   @route("agent_optimization_jobs")
   @pollingOperation(AgentOptimizationJobs.get)
-  create is postJob<AgentOptimizationJob>;
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
+  @post
+  create is FoundryDataPlaneOperation<
+    {
+      ...WithOperationId;
+
+      /** The optimization job inputs. */
+      @body body: CreateAgentOptimizationJobRequest;
+    },
+    JobCreatedResponse<AgentOptimizationJob>
+  >;
 
   /**
    * Estimates dataset row count, per-layer model call volumes, and (when pricing is available) cost bands for an optimization job with the given inputs, without submitting the job.
@@ -34,7 +44,7 @@ interface AgentOptimizationJobs {
   estimate is FoundryDataPlaneOperation<
     {
       /** The inputs to estimate against. */
-      @body inputs: AgentOptimizationEstimateJobInputs;
+      @body inputs: AgentOptimizationEstimateInputs;
     },
     AgentOptimizationEstimateResponse
   >;
@@ -136,10 +146,11 @@ interface AgentOptimizationJobCandidates {
   >;
 
   /**
-   * Promotes a candidate onto a Foundry agent version, applying the candidate's mutations to the agent's registered configuration. For prompt agents the target agent is derived from the job's stored baseline configuration and the request body fields are ignored.
+   * Promotes a candidate to the Foundry agent stored in the parent job's target configuration. Prompt-agent promotion creates a new agent version. Hosted-agent promotion currently records promotion metadata without deploying a new hosted-agent version.
    */
   @summary("Promote a candidate for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}:promote")
+  @post
   promoteCandidate is FoundryDataPlaneOperation<
     {
       /** The ID of the parent optimization job. */
@@ -148,8 +159,6 @@ interface AgentOptimizationJobCandidates {
       /** The candidate identifier. */
       @path candidateId: string;
 
-      /** Target agent information for the promotion. */
-      @body promotion: PromoteAgentOptimizationCandidateRequest;
     },
     PromoteAgentOptimizationCandidateResponse
   >;
