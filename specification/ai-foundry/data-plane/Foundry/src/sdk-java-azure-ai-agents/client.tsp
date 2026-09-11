@@ -387,6 +387,10 @@ namespace Azure.AI.Projects.Beta {
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
 
+// Java's HTTP pipeline cannot expose the upgraded WebSocket connection or exchange frames.
+// Exclude this operation until the Java SDK has a supported WebSocket transport implementation.
+@@scope(Azure.AI.Projects.VoiceAgentWebSocket.connectVoiceAgent, "!java");
+
 @@access(Agents.createAgent, Access.internal);
 @@access(Agents.updateAgent, Access.internal);
 @@access(Agents.createAgentFromManifest, Access.internal);

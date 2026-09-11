@@ -55,4 +55,20 @@ namespace Azure.AI.Projects {
       model_selection_details?: ModelSelectionDetails,
     }
   );
+
+  @@copyProperties(
+    OpenAI.CreateChatCompletionResponse,
+    {
+      /** Model selection metadata providing visibility into routing decisions. Present when the request was handled by Model Router. */
+      @extension(
+        "x-ms-foundry-meta",
+        #{
+          conditional_previews: #[
+            FoundryFeaturesOptInKeys.model_router_controls_v1_preview
+          ],
+        }
+      )
+      model_selection_details?: ModelSelectionDetails,
+    }
+  );
 }

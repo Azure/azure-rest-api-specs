@@ -67,7 +67,34 @@ alias LabelHistoryPreviewOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @pattern("^[-\\w\\._\\(\\)]+$")
     labelName: string;
   },
-  ErrorType = DefaultErrorResponse
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppLabelHistory"
+>;
+
+alias LabelHistoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the Container App. */
+    @path
+    @segment("containerApps")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    containerAppName: string;
+  },
+  {
+    /** Name of the label. */
+    @path
+    @segment("labelHistories")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    labelName: string;
+  },
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppLabelHistory"
 >;
 
 alias LabelHistoryOps = Azure.ResourceManager.Legacy.LegacyOperations<

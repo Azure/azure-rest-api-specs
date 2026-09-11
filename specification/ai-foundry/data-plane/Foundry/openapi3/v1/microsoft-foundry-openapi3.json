@@ -3265,17 +3265,7 @@
             "name": "structured_input",
             "in": "query",
             "required": false,
-            "description": "Per-session values for the voice agent's declared `structured_inputs`, serialized as a JSON object and\nURL-encoded as this query parameter. Supplied values override definition defaults when rendering the\nagent's instructions and session-start greeting for this session only. The decoded value must be a JSON\nobject no larger than 32 KiB with a maximum nesting depth of 16.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "x-agent-version-override",
-            "in": "query",
-            "required": false,
-            "description": "Selects a specific version of the voice agent for this session.",
+            "description": "Per-session values for the voice agent's declared `structured_inputs`, serialized as a JSON object and\nagent's instructions and session-start greeting for this session only. The decoded value must be a JSON\nobject no larger than 32 KiB with a maximum nesting depth of 16.",
             "schema": {
               "type": "string"
             },
@@ -3285,7 +3275,7 @@
             "name": "Sec-WebSocket-Protocol",
             "in": "header",
             "required": false,
-            "description": "The requested WebSocket subprotocol. Omit this header or request exactly `realtime`.",
+            "description": "Selects a specific version of the voice agent for this session.The requested WebSocket subprotocol. Omit this header or request exactly `realtime`.",
             "schema": {
               "$ref": "#/components/schemas/VoiceAgentWebSocketSubprotocol"
             }
@@ -91830,7 +91820,7 @@
             "type": "integer",
             "format": "int32",
             "description": "The latency threshold in milliseconds.",
-            "default": "PT2S"
+            "default": 2000
           }
         },
         "discriminator": {
