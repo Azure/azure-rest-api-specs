@@ -47,7 +47,7 @@ jobs:
           # powershell glob syntax
           $protectedFiles = @(".gitignore", "cspell.json", "cspell.yaml", "package.json", "package-lock.json", ".github/*", ".github/azsdk-common-*", ".vscode/*", "eng/*")
           # regex syntax, for files synced from Azure/azure-sdk-tools
-          $azureSdkToolsFiles = @('^\.github/skills/azsdk-common-[^/]+(/.*)?$', '^eng/common(/.*)?$')
+          $azureSdkToolsFiles = @('^\.github/skills/azsdk-common-[^/]+(/.*)?$', '^\.github/skills/azure-typespec-author/(SKILL\.md|references(/.*)?)$', '^eng/common(/.*)?$')
           # regex syntax, to support protected paths within larger excluded paths
           $excludedFiles = @('.github/CODEOWNERS', '.github/skills/(?!azsdk-common-).+')
           $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -headCommitish HEAD -diffFilter "")
@@ -55,8 +55,10 @@ jobs:
           $matchedFiles = @(
             $changedFiles | Where-Object {
               $changedFile = $_;
-              ($protectedFiles | Where-Object { $changedFile -like $_ }) -and
-              -not ($excludedFiles | Where-Object { $changedFile -match $_ })
+              $isProtected = $protectedFiles | Where-Object { $changedFile -like $_ }
+              $isSyncedFromAzureSdkTools = $azureSdkToolsFiles | Where-Object { $changedFile -match $_ }
+              $isExcluded = $excludedFiles | Where-Object { $changedFile -match $_ }
+              $isProtected -and ($isSyncedFromAzureSdkTools -or -not $isExcluded)
             }
           )
 
