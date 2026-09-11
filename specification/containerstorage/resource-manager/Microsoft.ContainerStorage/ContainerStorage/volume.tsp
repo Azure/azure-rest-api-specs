@@ -15,7 +15,6 @@ interface Volumes {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Volume,
     LroHeaders = ArmLroLocationHeader<FinalResult = Volume> &
-      ArmAsyncOperationHeader<FinalResult = Volume> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<Volume>;

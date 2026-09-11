@@ -15,7 +15,6 @@ interface Snapshots {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Snapshot,
     LroHeaders = ArmLroLocationHeader<FinalResult = Snapshot> &
-      ArmAsyncOperationHeader<FinalResult = Snapshot> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<Snapshot>;

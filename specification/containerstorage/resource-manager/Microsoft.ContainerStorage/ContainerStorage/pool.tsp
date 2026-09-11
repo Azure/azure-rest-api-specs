@@ -15,7 +15,6 @@ interface Pools {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Pool,
     LroHeaders = ArmLroLocationHeader<FinalResult = Pool> &
-      ArmAsyncOperationHeader<FinalResult = Pool> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<Pool>;
