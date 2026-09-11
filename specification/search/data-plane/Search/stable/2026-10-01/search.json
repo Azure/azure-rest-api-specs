@@ -11103,6 +11103,11 @@
           "format": "int32",
           "description": "The maximum runtime in seconds."
         },
+        "maxOutputDocuments": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Limits the maximum number of documents in the output."
+        },
         "maxOutputSizeInTokens": {
           "type": "integer",
           "format": "int32",
@@ -11939,10 +11944,19 @@
           "type": "boolean",
           "description": "Indicates that this knowledge source should bypass source selection and always be queried at retrieval time."
         },
+        "failOnError": {
+          "type": "boolean",
+          "description": "Indicates that the entire retrieval request should fail if retrieval from this knowledge source encounters an error. Defaults to false."
+        },
         "rerankerThreshold": {
           "type": "number",
           "format": "float",
           "description": "The reranker threshold all retrieved documents must meet to be included in the response."
+        },
+        "maxOutputDocuments": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Limits the maximum number of documents returned from this knowledge source."
         },
         "kind": {
           "$ref": "#/definitions/KnowledgeSourceKind",

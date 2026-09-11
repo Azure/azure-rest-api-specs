@@ -36,7 +36,6 @@ model KnowledgeBaseRetrievalRequest {
   maxOutputSize?: int32;
 
   /** Limits the maximum number of documents in the output. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   maxOutputDocuments?: int32;
 
@@ -179,7 +178,6 @@ model KnowledgeSourceParams {
   neverQuerySource?: boolean;
 
   /** Indicates that the entire retrieval request should fail if retrieval from this knowledge source encounters an error. Defaults to false. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   failOnError?: boolean;
 
@@ -192,7 +190,6 @@ model KnowledgeSourceParams {
   resultsProcessing?: KnowledgeSourceResultsProcessing;
 
   /** Limits the maximum number of documents returned from this knowledge source. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   maxOutputDocuments?: int32;
 
