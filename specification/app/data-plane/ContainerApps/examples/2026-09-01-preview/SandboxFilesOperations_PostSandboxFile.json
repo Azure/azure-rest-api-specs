@@ -1,35 +1,24 @@
 {
-  "title": "Put Volume File Upload example",
-  "operationId": "VolumesOperations_PutVolumeFileUpload",
+  "title": "Post Sandbox File example",
+  "operationId": "SandboxFilesOperations_PostSandboxFile",
   "parameters": {
     "api-version": "2026-09-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "example-resource-group",
     "sandboxGroupName": "example-sandbox-group",
-    "volumeName": "example-volume",
+    "id": "example-resource-01",
     "path": "/workspace/example.txt",
-    "overwrite": true,
+    "createDirs": true,
+    "mode": 1,
+    "containerName": "example-container",
     "content": "SGVsbG8="
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
-        "itemName": "example-item",
-        "path": "/workspace/example.txt",
-        "isDirectory": true,
-        "sizeBytes": "SGVsbG8=",
-        "lastModifiedUtc": "2026-08-15T10:00:00Z",
-        "contentType": "example",
-        "eTag": "example-e-tag"
-      }
-    },
-    "400": {
-      "body": {
-        "type": "example",
-        "title": "example-title",
-        "status": 1,
-        "detail": "example-detail",
-        "instance": "example-instance"
+        "success": true,
+        "error": "example-error",
+        "bytesWritten": 1
       }
     },
     "401": {
@@ -59,16 +48,7 @@
         "instance": "example-instance"
       }
     },
-    "412": {
-      "body": {
-        "type": "example",
-        "title": "example-title",
-        "status": 1,
-        "detail": "example-detail",
-        "instance": "example-instance"
-      }
-    },
-    "500": {
+    "413": {
       "body": {
         "type": "example",
         "title": "example-title",

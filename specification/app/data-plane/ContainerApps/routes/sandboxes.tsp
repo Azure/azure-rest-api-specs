@@ -87,9 +87,9 @@ namespace ContainerAppsSandbox {
       ListErrors
     >;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core StandardResourceOperations.ResourceCreateOrReplace cannot preserve the existing SandboxContent body, 201 response, and custom error status shapes without changing the established wire contract."
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core ResourceOperations.ResourceCreateWithServiceProvidedName requires a standard resource hierarchy, Sandbox request body, and 201 Location response, which cannot preserve the established scoped route, CreateSandboxContent request, and Sandbox response body."
     @doc("Creates a sandbox in a scope.")
-    @put
+    @post
     create is Foundations.Operation<
       {
         ...AzureResourceScope;

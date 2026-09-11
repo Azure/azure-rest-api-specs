@@ -78,17 +78,17 @@ alias PostSandboxFileMkdirErrors =
   | ErrorResult<404>
   | ErrorResult<409>;
 
-/** OK. */
-model PutSandboxFileResult {
+/** Created. */
+model PostSandboxFileResult {
   /** HTTP response status code. */
-  @statusCode statusCode: 200;
+  @statusCode statusCode: 201;
 
   /** Response body. */
   @body body: WriteFileResponse;
 }
 
-/** Errors returned by putSandboxFile. */
-alias PutSandboxFileErrors =
+/** Errors returned by postSandboxFile. */
+alias PostSandboxFileErrors =
   | ErrorResult<401>
   | ErrorResult<404>
   | ErrorResult<409>
@@ -215,8 +215,8 @@ interface SandboxFilesOperations {
   #suppress "@azure-tools/typespec-azure-core/byos" "The content is a byte stream, not a BYOS model."
   @summary("Writes a file to a running sandbox. The file is streamed directly from the request body.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/files")
-  @put
-  putSandboxFile is Foundations.Operation<
+  @post
+  postSandboxFile is Foundations.Operation<
     {
       ...AzureResourceScope;
 
@@ -241,8 +241,8 @@ interface SandboxFilesOperations {
       /** containerName parameter. */
       @query containerName?: string;
     },
-    PutSandboxFileResult,
+    PostSandboxFileResult,
     DataPlaneStandardTraits,
-    PutSandboxFileErrors
+    PostSandboxFileErrors
   >;
 }
