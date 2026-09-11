@@ -1,0 +1,570 @@
+name: SDK Breaking Change Analysis
+
+on:
+  issue_comment:
+    types: [created, edited]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "Pull request number to analyze"
+        required: true
+        type: string
+      sdk_language:
+        description: "SDK language: Cpp, DotNet, Go, Java, JavaScript, Python, or Rust"
+        required: true
+        type: string
+      tsp_config_path:
+        description: "Repository-relative path to tspconfig.yaml under specification/"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  copilot-requests: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  analyze:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issue_comment' &&
+      github.event.issue.pull_request != null &&
+      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association) &&
+      startsWith(github.event.comment.body, '/azsdk sdk-breaking-analysis '))
+    runs-on: ubuntu-latest
+    env:
+      AZSDK_CLI_PATH: /tmp/bin
+
+    steps:
+      - name: Checkout workflow repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Install Azure SDK CLI
+        shell: pwsh
+        run: ./eng/common/mcp/azure-sdk-mcp.ps1 -InstallDirectory $env:AZSDK_CLI_PATH
+
+      - name: Resolve inputs and repositories
+        id: resolve-source
+        uses: actions/github-script@v9
+        env:
+          PR_NUMBER: ${{ github.event.issue.number || inputs.pr_number }}
+          SDK_LANGUAGE_INPUT: ${{ inputs.sdk_language }}
+          TSP_CONFIG_PATH_INPUT: ${{ inputs.tsp_config_path }}
+          TRIGGER_NAME: ${{ github.event_name }}
+          TRIGGER_COMMENT: ${{ github.event.comment.body }}
+        with:
+          script: |
+            const pullNumber = Number(process.env.PR_NUMBER);
+            if (!Number.isSafeInteger(pullNumber) || pullNumber <= 0) {
+              throw new Error(`Invalid pull request number: ${process.env.PR_NUMBER}`);
+            }
+            const { data: pull } = await github.rest.pulls.get({
+              ...context.repo,
+              pull_number: pullNumber,
+            });
+
+            let sdkLanguageInput;
+            let tspConfigPath;
+            if (process.env.TRIGGER_NAME === "workflow_dispatch") {
+              sdkLanguageInput = process.env.SDK_LANGUAGE_INPUT;
+              tspConfigPath = process.env.TSP_CONFIG_PATH_INPUT;
+            } else {
+              const command = process.env.TRIGGER_COMMENT.split(/\r?\n/, 1)[0].trim();
+              const parts = command.split(/\s+/);
+              if (
+                parts.length !== 3 ||
+                parts[0] !== "/azsdk" ||
+                parts[1] !== "sdk-breaking-analysis"
+              ) {
+                throw new Error(
+                  "Expected comment: /azsdk sdk-breaking-analysis <sdk-language>",
+                );
+              }
+              [, , sdkLanguageInput] = parts;
+            }
+
+            const languages = {
+              cpp: { language: "Cpp", repository: "azure-sdk-for-cpp" },
+              csharp: { language: "DotNet", repository: "azure-sdk-for-net" },
+              ".net": { language: "DotNet", repository: "azure-sdk-for-net" },
+              dotnet: { language: "DotNet", repository: "azure-sdk-for-net" },
+              go: { language: "Go", repository: "azure-sdk-for-go" },
+              java: { language: "Java", repository: "azure-sdk-for-java" },
+              javascript: { language: "JavaScript", repository: "azure-sdk-for-js" },
+              js: { language: "JavaScript", repository: "azure-sdk-for-js" },
+              python: { language: "Python", repository: "azure-sdk-for-python" },
+              rust: { language: "Rust", repository: "azure-sdk-for-rust" },
+              typescript: { language: "JavaScript", repository: "azure-sdk-for-js" },
+              ts: { language: "JavaScript", repository: "azure-sdk-for-js" },
+            };
+            const languageConfig = languages[sdkLanguageInput?.trim().toLowerCase()];
+            if (!languageConfig) {
+              throw new Error(`Unsupported SDK language: ${sdkLanguageInput}`);
+            }
+
+            let changedTypespecFiles = [];
+            if (process.env.TRIGGER_NAME === "workflow_dispatch") {
+              tspConfigPath = tspConfigPath?.trim().replaceAll("\\", "/");
+              if (
+                !tspConfigPath?.startsWith("specification/") ||
+                !tspConfigPath.endsWith("/tspconfig.yaml") ||
+                tspConfigPath.split("/").includes("..")
+              ) {
+                throw new Error(`Invalid TypeSpec config path: ${tspConfigPath}`);
+              }
+            } else {
+              const files = await github.paginate(github.rest.pulls.listFiles, {
+                ...context.repo,
+                pull_number: pullNumber,
+                per_page: 100,
+              });
+              changedTypespecFiles = [
+                ...new Set(
+                  files.flatMap((file) =>
+                    [file.filename, file.previous_filename].filter(
+                      (filename) =>
+                        filename?.endsWith(".tsp") || filename?.endsWith("/tspconfig.yaml"),
+                    ),
+                  ),
+                ),
+              ];
+            }
+
+            core.setOutput("repository", pull.head.repo.full_name);
+            core.setOutput("ref", pull.head.sha);
+            core.setOutput("sdk-repository", languageConfig.repository);
+            core.setOutput("sdk-language", languageConfig.language);
+            core.setOutput("tsp-config-path", tspConfigPath ?? "");
+            core.setOutput("changed-typespec-files", JSON.stringify(changedTypespecFiles));
+
+      - name: Checkout specification PR source
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ steps.resolve-source.outputs.repository }}
+          ref: ${{ steps.resolve-source.outputs.ref }}
+          path: repositories/azure-rest-api-specs
+          persist-credentials: false
+
+      - name: Resolve TypeSpec config path
+        id: resolve-tsp-config
+        shell: bash
+        env:
+          SPEC_REPOSITORY_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs
+          TSP_CONFIG_RELATIVE_PATH: ${{ steps.resolve-source.outputs.tsp-config-path }}
+          CHANGED_TYPESPEC_FILES: ${{ steps.resolve-source.outputs.changed-typespec-files }}
+          TRIGGER_NAME: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          if [[ "$TRIGGER_NAME" == "workflow_dispatch" ]]; then
+            tsp_config_paths=("$(realpath "$SPEC_REPOSITORY_PATH/$TSP_CONFIG_RELATIVE_PATH")")
+          else
+            declare -A type_spec_configs=()
+            mapfile -t changed_files < <(jq -r '.[]' <<< "$CHANGED_TYPESPEC_FILES")
+
+            for changed_file in "${changed_files[@]}"; do
+              if [[ ( "$changed_file" != specification/*.tsp && "$changed_file" != specification/*/tspconfig.yaml ) || "/$changed_file/" == *"/../"* ]]; then
+                echo "Invalid changed TypeSpec file path: $changed_file" >&2
+                exit 1
+              fi
+
+              directory="$SPEC_REPOSITORY_PATH/$(dirname "$changed_file")"
+              while [[ "$directory" == "$SPEC_REPOSITORY_PATH"/specification/* ]]; do
+                candidate="$directory/tspconfig.yaml"
+                if [[ -f "$candidate" ]]; then
+                  type_spec_configs["$(realpath "$candidate")"]=1
+                  break
+                fi
+                directory="$(dirname "$directory")"
+              done
+            done
+
+            if [[ ${#type_spec_configs[@]} -eq 0 ]]; then
+              echo "No tspconfig.yaml could be resolved from the changed TypeSpec files." >&2
+              exit 1
+            fi
+            mapfile -t tsp_config_paths < <(printf '%s\n' "${!type_spec_configs[@]}" | sort)
+          fi
+
+          for tsp_config_path in "${tsp_config_paths[@]}"; do
+            if [[ ! -f "$tsp_config_path" || "$tsp_config_path" != "$SPEC_REPOSITORY_PATH"/specification/*/tspconfig.yaml ]]; then
+              echo "Invalid or missing TypeSpec config: $tsp_config_path" >&2
+              exit 1
+            fi
+          done
+
+          typespec_project_paths=()
+          for tsp_config_path in "${tsp_config_paths[@]}"; do
+            typespec_project_paths+=("${tsp_config_path%/tspconfig.yaml}")
+          done
+          typespec_project_paths_json="$(jq -cn --args '$ARGS.positional' -- "${typespec_project_paths[@]}")"
+          relative_project_paths_json="$(jq -cn --argjson paths "$typespec_project_paths_json" --arg prefix "$SPEC_REPOSITORY_PATH/" '$paths | map(ltrimstr($prefix))')"
+          echo "project-paths=$relative_project_paths_json" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout target SDK repository
+        uses: actions/checkout@v7
+        with:
+          repository: Azure/${{ steps.resolve-source.outputs.sdk-repository }}
+          ref: main
+          path: repositories/${{ steps.resolve-source.outputs.sdk-repository }}
+          persist-credentials: false
+
+      - name: Set up Go
+        if: steps.resolve-source.outputs.sdk-language == 'Go'
+        uses: actions/setup-go@v7
+        with:
+          go-version: "1.26.x"
+          cache: false
+
+      - name: Set up .NET
+        if: steps.resolve-source.outputs.sdk-language == 'DotNet'
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Install golangci-lint
+        if: steps.resolve-source.outputs.sdk-language == 'Go'
+        shell: bash
+        run: |
+          set -euo pipefail
+          GO_BIN="$(go env GOPATH)/bin"
+          echo "$GO_BIN" >> "$GITHUB_PATH"
+          export PATH="$GO_BIN:$PATH"
+          go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.11.2
+          golangci-lint --version
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24.x"
+
+      - name: Set up GitHub Copilot CLI
+        id: setup-copilot-cli
+        shell: bash
+        run: |
+          set -euo pipefail
+          install_dir="$RUNNER_TEMP/copilot-cli"
+          npm_config_ignore_scripts=false npm install \
+            --global \
+            --prefix "$install_dir" \
+            @github/copilot
+          echo "$install_dir/bin" >> "$GITHUB_PATH"
+          copilot_path="$install_dir/bin/copilot"
+          test -x "$copilot_path"
+          "$copilot_path" --version
+          echo "path=$copilot_path" >> "$GITHUB_OUTPUT"
+
+      - name: Set up SDK development environment
+        shell: bash
+        env:
+          SDK_REPOSITORY_PATH: ${{ github.workspace }}/repositories/${{ steps.resolve-source.outputs.sdk-repository }}
+          SDK_LANGUAGE: ${{ steps.resolve-source.outputs.sdk-language }}
+        run: |
+          set -euo pipefail
+          echo "$AZSDK_CLI_PATH" >> "$GITHUB_PATH"
+          export PATH="$AZSDK_CLI_PATH:$PATH"
+          azsdk verify setup install \
+            --languages "$SDK_LANGUAGE" \
+            --package-path "$SDK_REPOSITORY_PATH" \
+            --yes
+
+      - name: Analyze SDK projects
+        id: analyze-sdk-projects
+        shell: bash
+        env:
+          AZSDK_COPILOT_CLI_PATH: ${{ steps.setup-copilot-cli.outputs.path }}
+          AZSDK_COPILOT_GITHUB_TOKEN: ${{ github.token }}
+          LOCAL_SDK_REPO_PATH: ${{ github.workspace }}/repositories/${{ steps.resolve-source.outputs.sdk-repository }}
+          SPEC_REPOSITORY_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs
+          TYPESPEC_PROJECT_PATHS: ${{ steps.resolve-tsp-config.outputs.project-paths }}
+        run: |
+          set -Eeuo pipefail
+          results_dir="$RUNNER_TEMP/sdk-breaking-change-results"
+          mkdir -p "$results_dir"
+          analysis_log="$results_dir/analysis.log"
+          exec > >(tee "$analysis_log") 2>&1
+          trap 'status=$?; printf "Analysis failed with exit code %s.\n" "$status" > "$results_dir/error.log"; exit "$status"' ERR
+          manifest_jsonl="$results_dir/projects.jsonl"
+          : > "$manifest_jsonl"
+          echo '[]' > "$results_dir/projects.json"
+          mapfile -t typespec_project_paths < <(jq -r '.[]' <<< "$TYPESPEC_PROJECT_PATHS")
+          declare -A package_names=()
+          project_number=0
+
+          for index in "${!typespec_project_paths[@]}"; do
+            typespec_project_path="${typespec_project_paths[$index]}"
+            tsp_config_path="$SPEC_REPOSITORY_PATH/$typespec_project_path/tspconfig.yaml"
+            project_number="$((index + 1))"
+            marker="$RUNNER_TEMP/azsdk-generation-started"
+            generation_result="$RUNNER_TEMP/sdk-generation-result.json"
+            touch "$marker"
+
+            azsdk package generate \
+              --local-sdk-repo-path "$LOCAL_SDK_REPO_PATH" \
+              --tsp-config-path "$tsp_config_path" \
+              --output json | tee "$generation_result"
+
+            mapfile -d '' generated_configs < <(
+              find "$LOCAL_SDK_REPO_PATH" -type f -name tsp-location.yaml -newer "$marker" -print0
+            )
+            if [[ ${#generated_configs[@]} -ne 1 ]]; then
+              echo "Expected exactly one generated tsp-location.yaml for $typespec_project_path, found ${#generated_configs[@]}." >&2
+              printf '  %s\n' "${generated_configs[@]}" >&2
+              exit 1
+            fi
+
+            package_path="$(realpath "$(dirname "${generated_configs[0]}")")"
+            if [[ ! -d "$package_path" || "$package_path" != "$LOCAL_SDK_REPO_PATH"/* ]]; then
+              echo "Invalid generated package path: $package_path" >&2
+              exit 1
+            fi
+            package_name="$(basename "$package_path")"
+            if [[ -n "${package_names[$package_name]:-}" ]]; then
+              relative_results_path="$package_name-$project_number"
+            else
+              relative_results_path="$package_name"
+            fi
+            package_names["$package_name"]=1
+            project_results="$results_dir/$relative_results_path"
+            mkdir -p "$project_results"
+            mv "$generation_result" "$project_results/generate.json"
+
+            azsdk package build \
+              --package-path "$package_path" \
+              --output json | tee "$project_results/build.json"
+
+            azsdk package detect-breaking-change \
+              --package-path "$package_path" \
+              --tsp-config-path "$tsp_config_path" \
+              --output json | tee "$project_results/breaking-changes.json"
+
+            jq -cn \
+              --arg typespecProjectPath "$typespec_project_path" \
+              --arg packageName "$package_name" \
+              --arg resultsPath "$relative_results_path" \
+              '{typespecProjectPath: $typespecProjectPath, packageName: $packageName, resultsPath: $resultsPath}' \
+              >> "$manifest_jsonl"
+            jq -s '.' "$manifest_jsonl" > "$results_dir/projects.json"
+          done
+
+          rm "$manifest_jsonl"
+
+      - name: Publish result summary
+        if: always()
+        shell: bash
+        env:
+          JOB_STATUS: ${{ job.status }}
+          ANALYSIS_OUTCOME: ${{ steps.analyze-sdk-projects.outcome }}
+          JOB_LOG_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ job.check_run_id }}
+        run: |
+          {
+            echo "## SDK breaking-change analysis"
+            echo
+            if [[ "$JOB_STATUS" == "failure" ]]; then
+              echo "Breaking change analysis failed."
+              echo
+              analysis_log="$RUNNER_TEMP/sdk-breaking-change-results/analysis.log"
+              if [[ "$ANALYSIS_OUTCOME" == "failure" && -f "$analysis_log" ]]; then
+                echo "### Error"
+                echo
+                tail -n 30 "$analysis_log" | sed 's/^/    /'
+                echo
+              else
+                echo "Error output is available in the failed step log."
+                echo
+              fi
+              echo "[See failed step]($JOB_LOG_URL)"
+            else
+              manifest="$RUNNER_TEMP/sdk-breaking-change-results/projects.json"
+              if [[ -f "$manifest" ]]; then
+              while IFS= read -r project; do
+                typespec_project_path="$(jq -r '.typespecProjectPath' <<< "$project")"
+                package_name="$(jq -r '.packageName' <<< "$project")"
+                results_path="$RUNNER_TEMP/sdk-breaking-change-results/$(jq -r '.resultsPath' <<< "$project")"
+                echo "### $typespec_project_path"
+                echo
+                echo "**SDK Package:** $package_name"
+                echo
+                for result in generate.json build.json breaking-changes.json; do
+                  path="$results_path/$result"
+                  if [[ -f "$path" ]]; then
+                    echo "#### $result"
+                    echo '```json'
+                    cat "$path"
+                    echo '```'
+                  fi
+                done
+              done < <(jq -c '.[]' "$manifest")
+              fi
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload SDK analysis results
+        id: upload-results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: sdk-breaking-change-results
+          path: ${{ runner.temp }}/sdk-breaking-change-results
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Surface SDK breaking changes on pull request
+        if: success()
+        uses: actions/github-script@v9
+        env:
+          WORKFLOW_SUMMARY_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}#summary-${{ job.check_run_id }}
+          MANIFEST_PATH: ${{ runner.temp }}/sdk-breaking-change-results/projects.json
+          RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-results
+          PR_NUMBER: ${{ github.event.issue.number || inputs.pr_number }}
+          SDK_LANGUAGE: ${{ steps.resolve-source.outputs.sdk-language }}
+          TRIGGER_NAME: ${{ github.event_name }}
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const fs = await import("node:fs/promises");
+            const pullNumber = Number(process.env.PR_NUMBER);
+            const projects = JSON.parse(await fs.readFile(process.env.MANIFEST_PATH, "utf8"));
+            const projectReports = await Promise.all(
+              projects.map(async (project) => {
+                const resultPath = `${process.env.RESULTS_PATH}/${project.resultsPath}/breaking-changes.json`;
+                const response = JSON.parse(await fs.readFile(resultPath, "utf8"));
+                const changes = response?.result?.breakingChanges ?? [];
+                const escapeTableCell = (value, fallback = "-") => {
+                  const text = String(value ?? "").trim();
+                  return text
+                    ? text.replaceAll("\r", "").replaceAll("|", "\\|").replaceAll("\n", "<br>")
+                    : fallback;
+                };
+                const changeDetails = changes.map((change) => {
+                  const details = typeof change === "object" && change !== null ? change : {};
+                  const text = escapeTableCell(details.breakingChange ?? change);
+                  const category = escapeTableCell(details.category);
+                  const suggestedFix = escapeTableCell(details.resolution);
+                  return { text, category, suggestedFix };
+                });
+                const tableRows = changeDetails.length
+                  ? changeDetails.map(
+                      ({ text, category, suggestedFix }) =>
+                        `| ☐ | ${text} | ${category} | ${suggestedFix} |`,
+                    )
+                  : [
+                      "| ☐ | No SDK breaking changes detected. | - | - |",
+                    ];
+                const projectReport = [
+                  `**Typespec Project:** ${project.typespecProjectPath}`,
+                  "",
+                  `**SDK Package:** ${project.packageName}`,
+                  "",
+                  "|  | Breaking change | Category | Suggested fix |",
+                  "| --- | --- | --- | --- |",
+                  ...tableRows,
+                ];
+                if (process.env.WORKFLOW_SUMMARY_URL) {
+                  projectReport.push(
+                    "",
+                    `[SDK breaking change details (${project.resultsPath}/breaking-changes.json)](${process.env.WORKFLOW_SUMMARY_URL})`,
+                  );
+                }
+                return projectReport;
+              }),
+            );
+
+            const report = [
+              `## SDK Breaking changes for ${process.env.SDK_LANGUAGE}`,
+              "",
+              ...projectReports.flatMap((projectReport) => [...projectReport, ""]),
+            ].join("\n");
+
+            if (process.env.TRIGGER_NAME === "issue_comment") {
+              const { data: comment } = await github.rest.issues.getComment({
+                ...context.repo,
+                comment_id: context.payload.comment.id,
+              });
+              const command = comment.body.split(/\r?\n/, 1)[0].trim();
+              try {
+                await github.rest.issues.updateComment({
+                  ...context.repo,
+                  comment_id: context.payload.comment.id,
+                  body: `${command}\n\n${report}`,
+                });
+                return;
+              } catch (error) {
+                if (error.status !== 403) throw error;
+                core.warning(
+                  "The workflow token cannot edit a comment authored by another user; posting the result as a new PR comment instead.",
+                );
+              }
+            }
+
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: pullNumber,
+              body: report,
+            });
+
+      - name: Report breaking-change analysis failure
+        if: failure()
+        uses: actions/github-script@v9
+        env:
+          PR_NUMBER: ${{ github.event.issue.number || inputs.pr_number }}
+          TRIGGER_NAME: ${{ github.event_name }}
+          ANALYSIS_OUTCOME: ${{ steps.analyze-sdk-projects.outcome }}
+          RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-results
+          JOB_LOG_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ job.check_run_id }}
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const fs = await import("node:fs/promises");
+            let errorDetails = "";
+            if (process.env.ANALYSIS_OUTCOME === "failure") {
+              try {
+                const analysisLog = await fs.readFile(
+                  `${process.env.RESULTS_PATH}/analysis.log`,
+                  "utf8",
+                );
+                errorDetails = analysisLog
+                  .trim()
+                  .split(/\r?\n/)
+                  .slice(-30)
+                  .map((line) => `    ${line}`)
+                  .join("\n");
+              } catch (error) {
+                core.warning(`Unable to read the analysis error log: ${error.message}`);
+              }
+            }
+            const failureReport = [
+              "> [!CAUTION]\n> Breaking change analysis failed",
+              errorDetails && `\n${errorDetails}`,
+              `\n[See failed step](${process.env.JOB_LOG_URL})`,
+            ]
+              .filter(Boolean)
+              .join("\n");
+            if (process.env.TRIGGER_NAME === "issue_comment") {
+              const { data: comment } = await github.rest.issues.getComment({
+                ...context.repo,
+                comment_id: context.payload.comment.id,
+              });
+              const command = comment.body.split(/\r?\n/, 1)[0].trim();
+              try {
+                await github.rest.issues.updateComment({
+                  ...context.repo,
+                  comment_id: context.payload.comment.id,
+                  body: `${command}\n\n${failureReport}`,
+                });
+                return;
+              } catch (error) {
+                if (error.status !== 403) throw error;
+                core.warning(
+                  "The workflow token cannot edit the trigger comment; posting the failure as a new PR comment instead.",
+                );
+              }
+            }
+
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: Number(process.env.PR_NUMBER),
+              body: failureReport,
+            });
