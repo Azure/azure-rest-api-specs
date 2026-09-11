@@ -32,6 +32,49 @@ namespace SdkCustomizations;
 @@scope(getFeatureFlagRevisions, "!(csharp, python, java, javascript, go)");
 @@scope(checkFeatureFlagRevisions, "!(csharp, python, java, javascript, go)");
 
+// Preserve the existing AutoRest operation grouping without including feature
+// flag operations in any supported configuration SDK package.
+@@clientLocation(
+  getFeatureFlag,
+  "FeatureFlagClient",
+  "!(csharp, python, java, javascript, go)"
+);
+@@clientLocation(
+  checkFeatureFlag,
+  "FeatureFlagClient",
+  "!(csharp, python, java, javascript, go)"
+);
+@@clientLocation(
+  getFeatureFlags,
+  "FeatureFlagClient",
+  "!(csharp, python, java, javascript, go)"
+);
+@@clientLocation(
+  checkFeatureFlags,
+  "FeatureFlagClient",
+  "!(csharp, python, java, javascript, go)"
+);
+@@clientLocation(
+  putFeatureFlag,
+  "FeatureFlagClient",
+  "!(csharp, python, java, javascript, go)"
+);
+@@clientLocation(
+  deleteFeatureFlag,
+  "FeatureFlagClient",
+  "!(csharp, python, java, javascript, go)"
+);
+@@clientLocation(
+  getFeatureFlagRevisions,
+  "FeatureFlagClient",
+  "!(csharp, python, java, javascript, go)"
+);
+@@clientLocation(
+  checkFeatureFlagRevisions,
+  "FeatureFlagClient",
+  "!(csharp, python, java, javascript, go)"
+);
+
 // .NET specific customizations
 
 // Method renames
