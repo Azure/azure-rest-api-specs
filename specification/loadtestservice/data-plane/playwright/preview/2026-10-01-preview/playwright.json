@@ -1245,9 +1245,9 @@
           "description": "The URL to view the live browser session.",
           "readOnly": true
         },
-        "recording": {
-          "$ref": "#/definitions/BrowserSessionRecording",
-          "description": "The recording configuration and artifacts for the browser session.",
+        "sessionArtifacts": {
+          "$ref": "#/definitions/BrowserSessionArtifacts",
+          "description": "The artifact configuration and finalized artifacts for the browser session.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1267,22 +1267,70 @@
         "operatingSystem"
       ]
     },
-    "BrowserSessionRecording": {
+    "BrowserSessionArtifact": {
       "type": "object",
-      "description": "The recording configuration and artifacts for a browser session.",
+      "description": "An artifact uploaded for a browser session.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the uploaded artifact.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/BrowserSessionArtifactType",
+          "description": "The type of the uploaded artifact.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "url",
+        "type"
+      ]
+    },
+    "BrowserSessionArtifactType": {
+      "type": "string",
+      "description": "The type of an artifact uploaded for a browser session.",
+      "enum": [
+        "Trace"
+      ],
+      "x-ms-enum": {
+        "name": "BrowserSessionArtifactType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Trace",
+            "value": "Trace",
+            "description": "A Playwright trace artifact."
+          }
+        ]
+      }
+    },
+    "BrowserSessionArtifacts": {
+      "type": "object",
+      "description": "The artifact configuration and finalized artifacts for a browser session.",
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Indicates whether recording is enabled for the browser session. When specified in a create or update request, this value overrides the workspace-level recording setting for the session.",
+          "description": "Indicates whether artifact collection is enabled for the browser session. When specified in a create or update request, this value overrides the workspace-level recording setting for the session.",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
         },
+        "containerUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the blob container that stores the artifacts for the browser session.",
+          "readOnly": true
+        },
         "artifacts": {
-          "$ref": "#/definitions/BrowserSessionRecordingArtifacts",
-          "description": "The finalized recording artifacts uploaded for the browser session.",
+          "type": "array",
+          "description": "The finalized artifacts uploaded for the browser session.",
+          "items": {
+            "$ref": "#/definitions/BrowserSessionArtifact"
+          },
           "readOnly": true
         }
       },
@@ -1290,36 +1338,13 @@
         "enabled"
       ]
     },
-    "BrowserSessionRecordingArtifacts": {
+    "BrowserSessionArtifactsCreateOrUpdate": {
       "type": "object",
-      "description": "The finalized recording artifacts uploaded for a browser session.",
-      "properties": {
-        "containerUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "The URL of the blob container that stores the recording artifacts for the browser session.",
-          "readOnly": true
-        },
-        "traceArtifacts": {
-          "type": "array",
-          "description": "The trace artifacts uploaded for the browser session.",
-          "items": {
-            "$ref": "#/definitions/BrowserSessionTraceArtifact"
-          },
-          "readOnly": true
-        }
-      },
-      "required": [
-        "containerUrl"
-      ]
-    },
-    "BrowserSessionRecordingCreateOrUpdate": {
-      "type": "object",
-      "description": "The recording configuration and artifacts for a browser session.",
+      "description": "The artifact configuration and finalized artifacts for a browser session.",
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Indicates whether recording is enabled for the browser session. When specified in a create or update request, this value overrides the workspace-level recording setting for the session.",
+          "description": "Indicates whether artifact collection is enabled for the browser session. When specified in a create or update request, this value overrides the workspace-level recording setting for the session.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1416,21 +1441,6 @@
           }
         ]
       }
-    },
-    "BrowserSessionTraceArtifact": {
-      "type": "object",
-      "description": "A trace artifact uploaded for a browser session.",
-      "properties": {
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "The URL of the uploaded trace artifact.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "url"
-      ]
     },
     "BrowserType": {
       "type": "string",
@@ -1699,9 +1709,9 @@
           "description": "The URL to view the live browser session.",
           "readOnly": true
         },
-        "recording": {
-          "$ref": "#/definitions/BrowserSessionRecording",
-          "description": "The recording configuration and artifacts for the browser session.",
+        "sessionArtifacts": {
+          "$ref": "#/definitions/BrowserSessionArtifacts",
+          "description": "The artifact configuration and finalized artifacts for the browser session.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1757,9 +1767,9 @@
           "$ref": "#/definitions/OS",
           "description": "The browser session operating system."
         },
-        "recording": {
-          "$ref": "#/definitions/BrowserSessionRecordingCreateOrUpdate",
-          "description": "The recording configuration and artifacts for the browser session.",
+        "sessionArtifacts": {
+          "$ref": "#/definitions/BrowserSessionArtifactsCreateOrUpdate",
+          "description": "The artifact configuration and finalized artifacts for the browser session.",
           "x-ms-mutability": [
             "read",
             "update",
