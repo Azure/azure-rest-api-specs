@@ -93111,6 +93111,54 @@
           ]
         }
       },
+      "TelephonyCallEndReason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "invalid_webhook_payload",
+              "webhook_validation_failed",
+              "binding_not_found",
+              "binding_suspended",
+              "admission_rejected",
+              "admission_check_failed",
+              "route_agent_mismatch",
+              "invalid_binding_configuration",
+              "credential_resolution_failed",
+              "provider_resource_mismatch",
+              "endpoint_resolution_failed",
+              "ingress_setup_failed",
+              "live_call_conflict",
+              "live_call_persistence_failed",
+              "answer_failed",
+              "provider_disconnected",
+              "provider_busy",
+              "provider_no_answer",
+              "provider_cancelled",
+              "provider_failed",
+              "provider_stream_error",
+              "provider_stream_stopped",
+              "agent_session_connect_failed",
+              "media_stream_ended",
+              "bridge_cancelled",
+              "bridge_failed",
+              "managed_hangup",
+              "managed_transfer",
+              "manage_hangup_failed",
+              "manage_transfer_failed"
+            ]
+          }
+        ],
+        "description": "Known service-generated reasons that one telephony call ended, rather than reasons for an overall outbound call job. Additional string codes may be returned.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "TelephonyCallId": {
         "type": "string",
         "minLength": 1,
@@ -93193,8 +93241,8 @@
             "description": "The Unix timestamp in seconds at which the next retry becomes eligible."
           },
           "terminal_reason": {
-            "type": "string",
-            "description": "The stable reason for the terminal status, when available."
+            "$ref": "#/components/schemas/TelephonyCallJobTerminalReason",
+            "description": "The stable service-generated reason for the overall outbound call job, which can span multiple provider attempts, when available. Interpret this with `status`: a queued job can retain a temporary dispatch-deferral reason. Additional string codes may be returned."
           },
           "revision": {
             "type": "integer",
@@ -93311,6 +93359,45 @@
           ]
         }
       },
+      "TelephonyCallJobTerminalReason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "no_answer",
+              "no_answer_timeout",
+              "answer_failed",
+              "bridge_cancelled",
+              "bridge_failed",
+              "voice_session_configuration_invalid",
+              "connection_project_mismatch",
+              "outbound_connection_changed",
+              "outbound_connection_unavailable",
+              "telephony_binding_invalid",
+              "telephony_binding_not_found",
+              "telephony_binding_inactive",
+              "telephony_binding_changed",
+              "campaign_not_found",
+              "campaign_cancelled",
+              "campaign_completed",
+              "campaign_failed",
+              "origination_fence_not_recorded",
+              "origination_reconciliation_timeout",
+              "cancellation_reconciliation_timeout",
+              "provider_callback_timeout_cancellation_reconciliation_timeout"
+            ]
+          }
+        ],
+        "description": "Known terminal reasons for an overall outbound call job, which can span multiple provider attempts. These are distinct from individual call lifecycle reasons. Additional string codes may be returned.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "TelephonyCallLifecycleEvent": {
         "type": "object",
         "required": [
@@ -93354,9 +93441,9 @@
             "description": "The source of the event timestamp."
           },
           "reason": {
-            "type": "string",
+            "$ref": "#/components/schemas/TelephonyCallLifecycleEventReason",
             "maxLength": 128,
-            "description": "A stable service-generated reason associated with the event."
+            "description": "A stable service-generated reason associated with this lifecycle event, not necessarily the final outcome of the call. Additional string codes may be returned."
           },
           "provider_event_id": {
             "type": "string",
@@ -93436,6 +93523,54 @@
           }
         ],
         "description": "The outcome of one telephony lifecycle observation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallLifecycleEventReason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "invalid_webhook_payload",
+              "webhook_validation_failed",
+              "binding_not_found",
+              "binding_suspended",
+              "admission_rejected",
+              "admission_check_failed",
+              "route_agent_mismatch",
+              "invalid_binding_configuration",
+              "credential_resolution_failed",
+              "provider_resource_mismatch",
+              "endpoint_resolution_failed",
+              "ingress_setup_failed",
+              "live_call_conflict",
+              "live_call_persistence_failed",
+              "answer_failed",
+              "provider_disconnected",
+              "provider_busy",
+              "provider_no_answer",
+              "provider_cancelled",
+              "provider_failed",
+              "provider_stream_error",
+              "provider_stream_stopped",
+              "agent_session_connect_failed",
+              "media_stream_ended",
+              "bridge_cancelled",
+              "bridge_failed",
+              "managed_hangup",
+              "managed_transfer",
+              "manage_hangup_failed",
+              "manage_transfer_failed"
+            ]
+          }
+        ],
+        "description": "Known service-generated reasons for a telephony lifecycle event. An event reason does not necessarily describe the final outcome of the call. Additional string codes may be returned.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -93563,9 +93698,9 @@
             "description": "The call duration."
           },
           "end_reason": {
-            "type": "string",
+            "$ref": "#/components/schemas/TelephonyCallEndReason",
             "maxLength": 128,
-            "description": "The service-generated reason that the call ended."
+            "description": "The service-generated reason that this single call ended, rather than the outcome of an overall outbound call job. Additional string codes may be returned."
           },
           "provider_status_code": {
             "type": "integer",
@@ -93698,9 +93833,9 @@
             "description": "The call duration."
           },
           "end_reason": {
-            "type": "string",
+            "$ref": "#/components/schemas/TelephonyCallEndReason",
             "maxLength": 128,
-            "description": "The service-generated reason that the call ended."
+            "description": "The service-generated reason that this single call ended, rather than the outcome of an overall outbound call job. Additional string codes may be returned."
           },
           "provider_status_code": {
             "type": "integer",
