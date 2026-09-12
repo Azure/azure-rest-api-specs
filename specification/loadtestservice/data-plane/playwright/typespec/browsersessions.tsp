@@ -78,11 +78,11 @@ alias BrowserSessionOptionalProperties = {
   liveViewUrl?: string;
 };
 
-alias BrowserSessionRecordingProperties = {
+alias BrowserSessionArtifactProperties = {
   @added(Versions.v2026_10_01_preview)
-  @doc("The recording configuration and artifacts for the browser session.")
+  @doc("The artifact configuration and finalized artifacts for the browser session.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  recording?: BrowserSessionRecording;
+  sessionArtifacts?: BrowserSessionArtifacts;
 };
 
 @doc("Model of a browser session used for tracking purposes.")
@@ -92,7 +92,7 @@ model BrowserSession {
   ...BrowserSessionRequiredProperties;
   ...BrowserSessionReadRequiredProperties;
   ...BrowserSessionOptionalProperties;
-  ...BrowserSessionRecordingProperties;
+  ...BrowserSessionArtifactProperties;
 }
 
 @doc("Model of a browser session used for tracking purposes.")
@@ -102,39 +102,44 @@ model PatchRequestBrowserSession {
   ...BrowserSessionRequiredProperties;
   ...OptionalProperties<BrowserSessionReadRequiredProperties>;
   ...BrowserSessionOptionalProperties;
-  ...BrowserSessionRecordingProperties;
+  ...BrowserSessionArtifactProperties;
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The recording configuration and artifacts for a browser session.")
-model BrowserSessionRecording {
-  @doc("Indicates whether recording is enabled for the browser session. When specified in a create or update request, this value overrides the workspace-level recording setting for the session.")
+@doc("The artifact configuration and finalized artifacts for a browser session.")
+model BrowserSessionArtifacts {
+  @doc("Indicates whether artifact collection is enabled for the browser session. When specified in a create or update request, this value overrides the workspace-level recording setting for the session.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   enabled: boolean;
 
-  @doc("The finalized recording artifacts uploaded for the browser session.")
+  @doc("The URL of the blob container that stores the artifacts for the browser session.")
   @visibility(Lifecycle.Read)
-  artifacts?: BrowserSessionRecordingArtifacts;
+  containerUrl?: url;
+
+  @doc("The finalized artifacts uploaded for the browser session.")
+  @visibility(Lifecycle.Read)
+  artifacts?: BrowserSessionArtifact[];
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The finalized recording artifacts uploaded for a browser session.")
-model BrowserSessionRecordingArtifacts {
-  @doc("The URL of the blob container that stores the recording artifacts for the browser session.")
-  @visibility(Lifecycle.Read)
-  containerUrl: url;
-
-  @doc("The trace artifacts uploaded for the browser session.")
-  @visibility(Lifecycle.Read)
-  traceArtifacts?: BrowserSessionTraceArtifact[];
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("A trace artifact uploaded for a browser session.")
-model BrowserSessionTraceArtifact {
-  @doc("The URL of the uploaded trace artifact.")
+@doc("An artifact uploaded for a browser session.")
+model BrowserSessionArtifact {
+  @doc("The URL of the uploaded artifact.")
   @visibility(Lifecycle.Read)
   url: url;
+
+  @doc("The type of the uploaded artifact.")
+  @visibility(Lifecycle.Read)
+  type: BrowserSessionArtifactType;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The type of an artifact uploaded for a browser session.")
+union BrowserSessionArtifactType {
+  string,
+
+  @doc("A Playwright trace artifact.")
+  Trace: "Trace",
 }
 
 @doc("The browser session source details.")
