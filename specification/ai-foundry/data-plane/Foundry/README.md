@@ -2,6 +2,13 @@
 
 This folder contains the TypeSpec for all data-plane REST APIs of the Foundry service.
 
+## Telephony connection names
+
+Telephony bindings, outbound call jobs, and outbound campaigns use `connection_name` to reference
+a Foundry connection by its `name`, not its service-generated `id`. These are distinct fields in
+the [Connection model](src/connections/models.tsp). Use the [Connections list and get APIs](src/connections/routes.tsp)
+(`GET /connections` and `GET /connections/{name}`) to discover the connection name.
+
 ## Contributing
 
 ### Adding preview features
@@ -76,4 +83,3 @@ If you want to emit Python SDK from latest TypeSpec in this folder do the follow
   - `tsp-client update` to use the TypeSpec commit mentioned in the local tsp-location.yaml file
 - After the code was emitted, run the script `post-emitter-fixes.cmd`
 - To review your changes, send a PR for merging your topic branch into branch `feature/azure-ai-projects/2.0.0b1`
-

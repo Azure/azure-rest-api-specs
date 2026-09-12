@@ -49091,12 +49091,12 @@ components:
       type: object
       required:
         - provider
-        - connection
+        - connection_name
       properties:
         provider:
           $ref: '#/components/schemas/TelephonyProvider'
           description: The telephony provider.
-        connection:
+        connection_name:
           type: string
           minLength: 1
           maxLength: 256
@@ -49118,13 +49118,13 @@ components:
       type: object
       required:
         - destination
-        - connection
+        - connection_name
         - source
       properties:
         destination:
           $ref: '#/components/schemas/TelephonyOutboundDestination'
           description: The phone destination to call.
-        connection:
+        connection_name:
           type: string
           minLength: 1
           maxLength: 256
@@ -49149,12 +49149,12 @@ components:
           description: The provider-attempt retry policy. Omit it for one attempt with no retry delay.
       description: A request to create one durable direct outbound call job.
       examples:
-        - connection: telephony-acs
+        - connection_name: telephony-acs
           source: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
           destination:
             type: phone_number
             value: '+14255550123'
-        - connection: telephony-twilio
+        - connection_name: telephony-twilio
           source: '+14255550100'
           destination:
             type: phone_number
@@ -49166,14 +49166,14 @@ components:
       type: object
       required:
         - display_name
-        - connection
+        - connection_name
         - source
       properties:
         display_name:
           type: string
           minLength: 1
           description: A customer-visible name for the campaign.
-        connection:
+        connection_name:
           type: string
           minLength: 1
           maxLength: 256
@@ -49195,10 +49195,10 @@ components:
       description: A request to create a draft outbound campaign.
       examples:
         - display_name: Teams Phone renewal reminders
-          connection: telephony-acs
+          connection_name: telephony-acs
           source: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
         - display_name: Twilio renewal reminders
-          connection: telephony-twilio
+          connection_name: telephony-twilio
           source: '+14255550100'
       x-ms-foundry-meta:
         required_previews:
@@ -85565,7 +85565,7 @@ components:
       required:
         - id
         - provider
-        - connection
+        - connection_name
         - status
         - incoming_call_url
       properties:
@@ -85575,7 +85575,7 @@ components:
         provider:
           $ref: '#/components/schemas/TelephonyProvider'
           description: The telephony provider.
-        connection:
+        connection_name:
           type: string
           minLength: 1
           maxLength: 256
@@ -85610,7 +85610,7 @@ components:
       required:
         - id
         - provider
-        - connection
+        - connection_name
         - status
         - incoming_call_url
         - etag
@@ -85621,7 +85621,7 @@ components:
         provider:
           $ref: '#/components/schemas/TelephonyProvider'
           description: The telephony provider.
-        connection:
+        connection_name:
           type: string
           minLength: 1
           maxLength: 256
@@ -85681,7 +85681,7 @@ components:
       type: object
       required:
         - destination
-        - connection
+        - connection_name
         - source
         - id
         - object
@@ -85696,7 +85696,7 @@ components:
         destination:
           $ref: '#/components/schemas/TelephonyOutboundDestination'
           description: The phone destination to call.
-        connection:
+        connection_name:
           type: string
           minLength: 1
           maxLength: 256
@@ -86259,7 +86259,7 @@ components:
       type: object
       required:
         - display_name
-        - connection
+        - connection_name
         - source
         - id
         - object
@@ -86275,7 +86275,7 @@ components:
           type: string
           minLength: 1
           description: A customer-visible name for the campaign.
-        connection:
+        connection_name:
           type: string
           minLength: 1
           maxLength: 256
@@ -87789,7 +87789,7 @@ components:
             - type: 'null'
           maxLength: 128
           description: The replacement display label. Omit it to preserve the current value; use null to clear it.
-        connection:
+        connection_name:
           type: string
           minLength: 1
           maxLength: 256
