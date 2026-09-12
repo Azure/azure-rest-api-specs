@@ -182,13 +182,6 @@ model SandboxEgressConfiguration {
   mode?: SandboxEgressMode | null;
 
   /**
-   * DNS configuration for AzureVNet egress mode.
-   * In PATCH, omission preserves the configuration, null clears it, and a supplied object merges its members.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null sandbox VNet configuration and distinguishes null from omission in PATCH."
-  vnetConfiguration?: SandboxVnetConfiguration | null;
-
-  /**
    * Whether remote HTTP MCP servers can use the managed network path.
    * In PATCH, omission preserves the setting and null clears it.
    */
@@ -238,16 +231,6 @@ model SandboxEgressConfiguration {
 @maxLength(253)
 @pattern("^(\\*\\.(?=[^.]+\\.))?[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$")
 scalar SandboxAllowedHost extends string;
-
-/** DNS settings for the sandbox's virtual network integration. */
-model SandboxVnetConfiguration {
-  /**
-   * Whether the sandbox uses the virtual network's private DNS resolution.
-   * In PATCH, omission preserves the setting and null clears it.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null private-DNS setting and distinguishes null from omission in PATCH."
-  usePrivateDnsResolution?: boolean | null;
-}
 
 /** Forward-proxy endpoints and additional destinations that bypass the proxy. */
 model SandboxHttpProxyConfiguration {

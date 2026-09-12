@@ -8,9 +8,12 @@ This is the AutoRest configuration file for Microsoft.App SRE Agent service.
 
 `main.tsp` imports the resource operations and models. `agent.models.tsp` defines
 the Agent's `vnetConfiguration` and `sandboxConfiguration`, including egress,
-private DNS, managed-network access lists, forward-proxy settings, and packages.
+managed-network access lists, forward-proxy settings, and packages.
 The same nested models are used by create/read and PATCH. Responses also expose
 read-only `outboundIpAddresses` when the service reports them.
+
+This proposal defers the configurable private DNS selector pending validation
+of its operational contract.
 
 Forward-proxy configuration takes effect only when forward-proxy support is
 enabled for the Agent and the egress mode is `AzureVNet`. Supplying proxy settings
