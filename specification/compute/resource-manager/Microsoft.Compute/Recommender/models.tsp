@@ -27,7 +27,7 @@ model PlacementScoresProperties {
  */
 model SpotPlacementScoresInput {
   /**
-   * The desired regions
+   * The desired regions. If not set, the location from the request URI is used as the desired location. Each location in this list must be a valid Azure region.
    */
   desiredLocations?: string[];
 
@@ -35,10 +35,11 @@ model SpotPlacementScoresInput {
    * The desired virtual machine SKU sizes.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "ResourceSize is a non-resource data structure representing SKU metadata; it is not individually addressable and does not require identifiers."
-  desiredSizes?: ResourceSize[];
+  @madeRequired(Versions.v2026_10_05_preview)
+  desiredSizes: ResourceSize[];
 
   /**
-   * Desired instance count per region/zone based on the scope.
+   * Desired instance count per region/zone based on the scope. If not set, defaults to 1.
    */
   desiredCount?: int32;
 
@@ -93,14 +94,40 @@ model SpotPlacementScoresResponse {
 /**
  * ComputePlacementScores API Input.
  */
-@added(Versions.v2026_09_05_preview)
+@added(Versions.v2026_10_05_preview)
 model ComputePlacementScoresInput is SpotPlacementScoresInput {}
 
 /**
  * ComputePlacementScores API response.
  */
-@added(Versions.v2026_09_05_preview)
+@added(Versions.v2026_10_05_preview)
 model ComputePlacementScoresResponse is SpotPlacementScoresResponse {}
+
+/**
+ * Placement score value indicating the likelihood of successfully allocating the requested VM(s).
+ */
+@added(Versions.v2026_10_05_preview)
+union PlacementScoreValue {
+  string,
+
+  /** High likelihood of successful allocation. */
+  High: "High",
+
+  /** Medium likelihood of successful allocation. */
+  Medium: "Medium",
+
+  /** Low likelihood of successful allocation. */
+  Low: "Low",
+
+  /** The requested SKU is restricted and not available. */
+  RestrictedSkuNotAvailable: "RestrictedSkuNotAvailable",
+
+  /** Insufficient quota is available to fulfill the request. */
+  InsufficientQuota: "InsufficientQuota",
+
+  /** Data was not found or is stale. */
+  DataNotFoundOrStale: "DataNotFoundOrStale",
+}
 
 /**
  * The spot placement score for sku/region/zone combination.
@@ -124,10 +151,18 @@ model PlacementScore {
   /**
    * A placement score indicating the likelihood of successfully allocating the specified Spot VM(s), as well as the expected lifetimes of the Spot VM(s) after allocation.
    */
-  score?: string;
+  @typeChangedFrom(Versions.v2026_10_05_preview, string)
+  score?: PlacementScoreValue;
+
+  /**
+   * Placement preference from 0 to 10 (inclusive). Higher is better.
+   */
+  @added(Versions.v2026_10_05_preview)
+  placementPreference?: int32;
 
   /**
    * Whether the desired quota is available.
    */
+  @removed(Versions.v2026_10_05_preview)
   isQuotaAvailable?: boolean;
 }

@@ -245,7 +245,7 @@
       "properties": {
         "desiredLocations": {
           "type": "array",
-          "description": "The desired regions",
+          "description": "The desired regions. If not set, the location from the request URI is used as the desired location. Each location in this list must be a valid Azure region.",
           "items": {
             "type": "string"
           }
@@ -260,7 +260,7 @@
         "desiredCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Desired instance count per region/zone based on the scope."
+          "description": "Desired instance count per region/zone based on the scope. If not set, defaults to 1."
         },
         "availabilityZones": {
           "type": "boolean",

@@ -34,7 +34,7 @@ model SpotPlacementScoresBase is PlacementScoresBase {
 /**
  * Contains metadata of the compute placement scoring resource.
  */
-@added(Versions.v2026_09_05_preview)
+@added(Versions.v2026_10_05_preview)
 @singleton("regular")
 @parentResource(SubscriptionLocationResource)
 model ComputePlacementScoresBase is PlacementScoresBase {
@@ -64,7 +64,7 @@ interface SpotPlacementScores {
   >;
 }
 
-@added(Versions.v2026_09_05_preview)
+@added(Versions.v2026_10_05_preview)
 @armResourceOperations
 interface ComputePlacementScores {
   /**

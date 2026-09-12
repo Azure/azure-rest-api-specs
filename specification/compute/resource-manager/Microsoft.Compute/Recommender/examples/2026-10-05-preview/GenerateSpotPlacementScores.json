@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "api-version": "2026-09-05-preview",
+    "api-version": "2026-10-05-preview",
     "location": "eastus",
-    "computePlacementScoresInput": {
+    "spotPlacementScoresInput": {
       "availabilityZones": true,
       "desiredCount": 1,
       "desiredLocations": [
@@ -34,42 +34,42 @@
         "placementScores": [
           {
             "availabilityZone": "1",
-            "isQuotaAvailable": true,
+            "placementPreference": 10,
             "region": "eastus",
             "score": "High",
             "sku": "Standard_D2_v2"
           },
           {
             "availabilityZone": "2",
-            "isQuotaAvailable": true,
+            "placementPreference": 10,
             "region": "eastus",
             "score": "High",
             "sku": "Standard_D2_v2"
           },
           {
             "availabilityZone": "3",
-            "isQuotaAvailable": true,
+            "placementPreference": 10,
             "region": "eastus",
             "score": "High",
             "sku": "Standard_D2_v2"
           },
           {
             "availabilityZone": "1",
-            "isQuotaAvailable": true,
+            "placementPreference": 0,
             "region": "eastus2",
             "score": "DataNotFoundOrStale",
             "sku": "Standard_D2_v2"
           },
           {
             "availabilityZone": "2",
-            "isQuotaAvailable": true,
+            "placementPreference": 10,
             "region": "eastus2",
             "score": "High",
             "sku": "Standard_D2_v2"
           },
           {
             "availabilityZone": "3",
-            "isQuotaAvailable": true,
+            "placementPreference": 10,
             "region": "eastus2",
             "score": "High",
             "sku": "Standard_D2_v2"
@@ -77,11 +77,11 @@
         ]
       },
       "headers": {
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/placementScores/regular/generate?api-version=2026-09-05-preview",
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/placementScores/spot/generate?api-version=2026-10-05-preview",
         "x-ms-request-id": "57b891ab-1fb7-4f5a-b002-71eb6854961f"
       }
     }
   },
-  "operationId": "ComputePlacementScores_Post",
-  "title": "Returns compute VM placement scores for given configurations."
+  "operationId": "SpotPlacementScores_Post",
+  "title": "Returns spot VM placement scores for given configurations."
 }
