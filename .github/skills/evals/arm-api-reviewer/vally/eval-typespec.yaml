@@ -209,3 +209,97 @@ stimuli:
       - "Kept ArmCustomPatchSync as the recommended custom PATCH template"
       - "Kept ArmResourceDeleteSync as valid because the operation completes synchronously"
       - "Distinguished the createOrUpdate client operation name from the ArmResourceCreateOrReplaceSync template name"
+
+  # 070006 -- raw OpenAPI extension cleanup in TypeSpec-owned output
+  - name: do-not-restore-legacy-openapi-client-extensions
+    prompt: |
+      Read the TypeSpec raw OpenAPI extension guidance in the azure-api-review
+      skill, then assess this change to an already-published ARM API version.
+
+      The TypeSpec source keeps this wire parameter unchanged:
+
+      ```tsp
+      @format("uuid")
+      @header("x-ms-client-request-id")
+      clientRequestId?: string;
+      ```
+
+      The PR removes raw `@OpenAPI.extension("x-ms-parameter-grouping", ...)`
+      and `@OpenAPI.extension("x-ms-client-request-id", true)` decorators plus
+      their `no-openapi-client-extensions` suppression. Generated OpenAPI only
+      loses `x-ms-parameter-grouping` and `x-ms-client-request-id: true`; the
+      header name, location, optionality, format, paths, methods, bodies,
+      responses, and status codes are unchanged.
+
+      Separately, the PR replaces a legacy language-specific pageable override
+      with `@list`. The response has a `nextLink` continuation property, and
+      generated `x-ms-pageable.nextLinkName` changes from `null` to `nextLink`.
+
+      Should the ARM API Reviewer file a published-version immutability finding?
+      State what it must and must not recommend as a fix.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)wire|REST|ARM semantic"
+      - type: output-matches
+        config:
+          pattern: "(?i)@list|paging"
+      - type: output-matches
+        config:
+          pattern: "(?i)do not|must not|never"
+      - type: prompt
+    rubric:
+      - "Does not classify removal of x-ms-parameter-grouping or x-ms-client-request-id: true as a Section 26.0 violation when the wire parameter and ARM semantics are unchanged"
+      - "Does not recommend restoring @OpenAPI.extension or adding a no-openapi-client-extensions suppression"
+      - "Explains that SDK compatibility concerns need concrete downstream evidence and must be handled with semantic TypeSpec modeling or client customization"
+      - "Recognizes @list and the nextLink response property as the native source of paging semantics rather than recommending a raw x-ms-pageable extension"
+      - "Preserves the immutability rule for any actual REST wire or ARM semantic change"
+
+  # 070007 -- ARM LRO header customization in TypeSpec-owned output
+  - name: preserve-published-arm-lro-header-contract
+    prompt: |
+      Read the ARM LRO and raw OpenAPI extension guidance in the
+      azure-api-review skill, then assess converting an already-published ARM
+      DELETE operation to TypeSpec.
+
+      The published 202 response contains `Location`, `Azure-AsyncOperation`,
+      and `Retry-After`, and has no final response body. The proposed TypeSpec
+      source is:
+
+      ```tsp
+      delete is ArmResourceDeleteWithoutOkAsync<MyResource>;
+      ```
+
+      Generated OpenAPI retains `Location` but loses `Azure-AsyncOperation`.
+      The author proposes restoring the old output with
+      `@OpenAPI.extension(...)`, or alternatively adding only
+      `@pollingOperation`.
+
+      Should the ARM API Reviewer file a published-version finding? Give the
+      native TypeSpec correction and explain the required logical final result.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "ArmResourceDeleteWithoutOkAsync"
+      - type: output-matches
+        config:
+          pattern: "ArmCombinedLroHeaders"
+      - type: output-matches
+        config:
+          pattern: "(?i)FinalResult\\s*=\\s*void"
+      - type: output-matches
+        config:
+          pattern: "RetryAfterHeader"
+      - type: prompt
+    rubric:
+      - "Files a published-version finding because removing Azure-AsyncOperation changes the actual initial response header contract"
+      - "Uses ArmResourceDeleteWithoutOkAsync with an LroHeaders override containing ArmCombinedLroHeaders and RetryAfterHeader"
+      - "Sets FinalResult to void because DELETE has no final response body"
+      - "Rejects restoring @OpenAPI.extension or a no-openapi-client-extensions suppression"
+      - "Explains that @pollingOperation alone does not customize an Azure.ResourceManager template's initial response headers"

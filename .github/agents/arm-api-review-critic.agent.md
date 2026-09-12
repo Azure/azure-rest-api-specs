@@ -498,6 +498,21 @@ finding's claim. If the rule ID does not exist, has been renumbered, or the
 normative text does not support the finding, mark `FAIL: rule-misapplied`
 or `FAIL: rule-not-found`.
 
+For a finding about an `x-ms-*` change in TypeSpec-generated OpenAPI, also read
+`azure-api-review/references/typespec-openapi-extensions.md`. For an ARM
+`x-ms-long-running-operation*` finding, also read
+`azure-api-review/references/lro-final-state-via.md` and verify the async
+template, `LroHeaders`, logical `FinalResult`, initial response headers, and
+generated behavior. Generic `@pollingOperation` or `@finalOperation` advice is
+not sufficient for an Azure.ResourceManager template whose header contract is
+controlled by `LroHeaders`. Mark
+`FAIL: rule-misapplied` when the finding treats legacy extension-only cleanup
+as a Section 26.0 violation without demonstrating a REST wire or ARM semantic
+change. Mark `FAIL: downstream-ci-conflict` when its suggested fix adds or
+restores `@OpenAPI.extension(...)`, `@extension(...)`, or a
+`no-openapi-client-extensions` suppression instead of a native TypeSpec
+construct.
+
 ### Step 4: Re-verify [NEW] vs [EXISTING] classification
 
 Read the corresponding file from the previous-version source the reviewer
@@ -988,6 +1003,16 @@ auto-invalidates if the underlying rule moves.
   references.** Confirm the referenced version matches the API version's
   era before flagging. Anchor: `openapi-review.instructions.md`,
   common-types section.
+- **Legacy raw-extension cleanup in TypeSpec-generated OpenAPI.** Do not accept
+  a published-version finding whose only evidence is removal of
+  `x-ms-parameter-grouping` or `x-ms-client-request-id: true` while the wire
+  parameter is unchanged. For semantics-bearing metadata such as paging or
+  LROs, verify the native TypeSpec construct and generated behavior. Reject any
+  suggested fix that restores a raw client-altering extension or suppresses
+  `no-openapi-client-extensions`. Anchor:
+  `typespec-openapi-extensions.md`, TSP-NO-RAW-CLIENT-EXTENSIONS and Reviewing
+  Generated OpenAPI Diffs. For ARM LRO metadata, also anchor to
+  `lro-final-state-via.md` and verify the template, headers, and logical result.
 
 ### Watch for (commonly-missed violations)
 

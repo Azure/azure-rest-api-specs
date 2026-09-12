@@ -42,6 +42,7 @@ must not load the other plane's files** -- see "Anti-inheritance" below.
 | [downstream-ci-impact.md](references/downstream-ci-impact.md)                             | Do not recommend a fix that trips a required CI check                              | --                                                        |
 | [reviewer-posted-parity.md](references/reviewer-posted-parity.md)                         | Presented-vs-posted parity and cross-session reconciliation for ARM reviewers      | --                                                        |
 | [api-version-lifecycle-and-branches.md](references/api-version-lifecycle-and-branches.md) | Which repo, branch, and folder each API version lifecycle stage may live in        | APIVER-\*                                                 |
+| [typespec-openapi-extensions.md](references/typespec-openapi-extensions.md)               | Raw OpenAPI decorators, native TypeSpec alternatives, and generated-diff triage    | TSP-NO-RAW-CLIENT-EXTENSIONS                              |
 
 ### ARM control-plane only
 
@@ -56,7 +57,7 @@ must not load the other plane's files** -- see "Anti-inheritance" below.
 | [availability-zones.md](references/availability-zones.md)                     | Availability zone property contract and zone immutability                                    | --                                                   |
 | [field-ownership.md](references/field-ownership.md)                           | Value preservation (array ordering, data types, casing)                                      | OAPI024, OAPI025, OAPI026                            |
 | [what-if-preflight-compliance.md](references/what-if-preflight-compliance.md) | What-If noise prevention and preflight validation contract                                   | WHATIF-001–005, PREFLIGHT-001–005                    |
-| [lro-final-state-via.md](references/lro-final-state-via.md)                   | LRO polling and `final-state-via` decision table                                             | --                                                   |
+| [lro-final-state-via.md](references/lro-final-state-via.md)                   | ARM LRO template defaults, header customization, logical results, and `final-state-via`      | --                                                   |
 | [suppression-review-criteria.md](references/suppression-review-criteria.md)   | Suppression approval/rejection decision framework (readme.md directives)                     | RPC-SUPPRESS-GA, RPC-SUPPRESS-SCOPE                  |
 | [linter-rule-coverage.md](references/linter-rule-coverage.md)                 | LintDiff rule ID → instruction file mapping (130+ rules)                                     | --                                                   |
 | [design-decisions.md](references/design-decisions.md)                         | Grey-area design trade-off frameworks (10 decision matrices)                                 | DD-001–DD-010                                        |

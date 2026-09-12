@@ -704,6 +704,8 @@ For each file type present in the PR, read the corresponding instruction file(s)
 - OpenAPI JSON (data-plane or unknown) -> `openapi-review.instructions.md`
 - ARM resource-manager JSON -> `openapi-review.instructions.md` + `arm-api-review.instructions.md`
 - TypeSpec `.tsp` files -> `typespec-review.instructions.md` **and** `typespec-project.instructions.md` (both files; the review file explicitly directs reviewers to apply the foundational project file too)
+- TypeSpec `.tsp` files or generated OpenAPI changed alongside its owning TypeSpec source -> also load `azure-api-review/references/typespec-openapi-extensions.md`; it controls raw-extension fixes and generated `x-ms-*` diff classification
+- An ARM `x-ms-long-running-operation*` diff in TypeSpec-owned OpenAPI -> also load `azure-api-review/references/lro-final-state-via.md`; verify the async template, `LroHeaders`, logical `FinalResult`, initial response headers, and generated behavior
 - `tspconfig.yaml` -> TypeSpec config rules from `typespec-review.instructions.md` section 7 (all subsections) **and** the `tspconfig.yaml` / emitter rules in `typespec-project.instructions.md`
 - Examples only (fast path) -> section 22 (EX-\*) of `openapi-review.instructions.md` only
 - `readme.md` only -> the suppression-continuity guidance in Step 4 of this file; do not load the full OpenAPI rule set
@@ -725,6 +727,8 @@ Load the shared `azure-api-review` skill references only when a cross-cutting ru
 - For OpenAPI JSON: Locate the prior version folder (e.g., `stable/2024-01-01/` vs. `stable/2024-07-01/`) and diff the schemas.
 - For TypeSpec: Check the `Versions` enum for prior versions and review uses of `@added`, `@removed`, `@typeChangedFrom`.
 - Flag: removed properties, removed operations, type changes, narrowed enums, optional-to-required transitions, renamed paths.
+- Before treating a generated `x-ms-*` metadata diff as a published-version or breaking-change finding, apply `typespec-openapi-extensions.md`. Require evidence of a REST wire, ARM platform, or native semantic change. Never propose `@OpenAPI.extension(...)` or a `no-openapi-client-extensions` suppression to restore legacy output.
+- For an ARM LRO metadata diff, apply `lro-final-state-via.md`. Generic advice to add `@pollingOperation` or `@finalOperation` is insufficient when an Azure.ResourceManager async template and its `LroHeaders` parameter control the generated contract.
 - If no previous version exists (new service), note this and skip the comparison.
 - **Record the previous version path and full base commit SHA** - both will be needed in Step 4a and by the Critic to classify issues as new vs. existing.
 
@@ -965,6 +969,15 @@ Edit there only; do not duplicate the procedure in this file.
 **Reviewer obligations.** Before producing any in-scope finding
 (scope criteria in the reference) the Reviewer **MUST**:
 
+0. For TypeSpec-owned generated OpenAPI, apply
+   [`typespec-openapi-extensions.md`](../skills/azure-api-review/references/typespec-openapi-extensions.md)
+   before retaining an `x-ms-*` compatibility finding. Drop extension-only
+   cleanup findings that show no wire or ARM semantic change, and replace any
+   raw-extension suggested fix with the native TypeSpec construct.
+   For an ARM LRO, also apply
+   [`lro-final-state-via.md`](../skills/azure-api-review/references/lro-final-state-via.md)
+   and verify the async template, `LroHeaders`, logical `FinalResult`, initial
+   response headers, and generated behavior.
 1. Author the finding as a multi-option recommendation matching the
    dedicated reference file's option set (not a directive), default
    severity Suggestion unless the property unambiguously meets the

@@ -164,6 +164,8 @@ imports:
   - ../instructions/typespec-project.instructions.md
   - ../instructions/typespec-review.instructions.md
   - ../skills/azure-api-review/SKILL.md
+  - ../skills/azure-api-review/references/lro-final-state-via.md
+  - ../skills/azure-api-review/references/typespec-openapi-extensions.md
 safe-outputs:
   # Framework-owned status comments do not consume this budget. Reserve slots
   # for the review summary / "no issues found", overflow themes, an actionable
@@ -493,6 +495,10 @@ Load instruction files lazily based on the file types found in Step 1:
 - Data-plane JSON → load `openapi-review.instructions.md`.
 - TypeSpec → load both `typespec-review.instructions.md` and
   `typespec-project.instructions.md`.
+- TypeSpec or generated OpenAPI changed with its owning TypeSpec source → load
+  `typespec-openapi-extensions.md`.
+- ARM `x-ms-long-running-operation*` metadata changed in TypeSpec-owned output
+  → also load `lro-final-state-via.md`.
 - Examples only → apply section EX-\* from `openapi-review.instructions.md`.
 - `readme.md` only → apply suppression-continuity guidance.
 - All types → load the `azure-api-review` SKILL.md and its references as
@@ -508,6 +514,14 @@ Compare modified specs against the previous API version:
   `@added`, `@removed`, `@typeChangedFrom` annotations.
 - Flag: removed properties, removed operations, type changes, narrowed enums,
   optional-to-required transitions, renamed paths.
+- Before flagging a generated `x-ms-*` metadata diff, apply
+  `typespec-openapi-extensions.md` and require evidence of a REST wire, ARM
+  platform, or native semantic change. Never propose `@OpenAPI.extension(...)`
+  or a `no-openapi-client-extensions` suppression to restore legacy output.
+- For an ARM LRO diff, verify the Azure.ResourceManager async template,
+  `LroHeaders`, logical `FinalResult`, initial response headers, and generated
+  behavior. Do not substitute generic `@pollingOperation` advice for the
+  template's header contract.
 - Also check `TSP-REQUIRED-V1`: new API version directories with handwritten
   OpenAPI and no TypeSpec project require a Blocking finding.
 
@@ -561,6 +575,14 @@ and the applicable linter-rule coverage reference. Do not recommend a fix that
 would violate a required LintDiff, breaking-change, or SDK check. When a
 conflict exists, present the allowed options instead of a single directive and
 include `downstream-rule: <RULE-ID>` in the finding's telemetry marker.
+For TypeSpec-owned generated OpenAPI, first apply
+[`typespec-openapi-extensions.md`](../skills/azure-api-review/references/typespec-openapi-extensions.md):
+drop extension-only cleanup findings with no wire or ARM semantic change, and
+use the native TypeSpec construct for semantics-bearing metadata.
+For an ARM LRO, also apply
+[`lro-final-state-via.md`](../skills/azure-api-review/references/lro-final-state-via.md)
+and verify the template, `LroHeaders`, logical `FinalResult`, initial response
+headers, and generated behavior.
 
 ### Step 5: Cross-File Consistency (full review only)
 
