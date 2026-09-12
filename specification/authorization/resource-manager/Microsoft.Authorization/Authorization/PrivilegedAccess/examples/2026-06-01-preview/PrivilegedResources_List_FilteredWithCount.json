@@ -1,0 +1,67 @@
+{
+  "operationId": "PrivilegedResources_List",
+  "title": "List privileged resources filtered by subscription and tag, with total count",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "$filter": "subscriptionId in ('11111111-2222-3333-4444-555555555555') and tags.environment eq 'production'",
+    "$count": true
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "projectionId": "L3N1YnNjcmlwdGlvbnMvMTExMTExMTEtMjIyMi0zMzMzLTQ0NDQtNTU1NTU1NTU1NTU1L3Jlc291cmNlR3JvdXBzL215LXJnL3Byb3ZpZGVycy9taWNyb3NvZnQuY29tcHV0ZS92aXJ0dWFsbWFjaGluZXMvbXktdm0",
+            "scope": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/my-rg/providers/Microsoft.Compute/virtualMachines/my-vm",
+            "displayName": "my-vm",
+            "type": "microsoft.compute/virtualmachines",
+            "location": "eastus",
+            "tags": {
+              "environment": "production",
+              "team": "ops"
+            },
+            "parentResource": {
+              "type": "resourceGroup",
+              "scope": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/my-rg",
+              "displayName": "my-rg",
+              "properties": {},
+              "parentResource": {
+                "type": "subscription",
+                "scope": "/subscriptions/11111111-2222-3333-4444-555555555555",
+                "displayName": "My Subscription",
+                "properties": {
+                  "managementGroupPath": [
+                    "Tenant Root Group",
+                    "Engineering"
+                  ]
+                }
+              }
+            },
+            "roles": [
+              {
+                "roleId": "9c6dc8fa-3f0a-4f4d-86d8-71b3e4b8b5e0",
+                "roleDefinitionId": "/subscriptions/11111111-2222-3333-4444-555555555555/providers/Microsoft.Authorization/roleDefinitions/1c0163c0-47e6-4577-8991-ea5c82e286e4",
+                "roleDisplayName": "Virtual Machine Administrator Login",
+                "scope": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/my-rg/providers/Microsoft.Compute/virtualMachines/my-vm",
+                "assignmentStatus": "eligible",
+                "scheduleInfo": {
+                  "startDateTime": "2026-01-15T00:00:00Z",
+                  "expiration": {
+                    "type": "AfterDateTime",
+                    "endDateTime": "2026-12-31T23:59:59Z"
+                  }
+                },
+                "source": {
+                  "memberType": "direct"
+                },
+                "isLeastPrivilege": true
+              }
+            ],
+            "isFavorite": false
+          }
+        ],
+        "count": 1
+      }
+    }
+  }
+}

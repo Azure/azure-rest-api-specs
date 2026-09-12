@@ -1,0 +1,141 @@
+{
+  "operationId": "PrivilegedResources_List",
+  "title": "List privileged resources for the caller (first page)",
+  "parameters": {
+    "api-version": "2026-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "projectionId": "L3N1YnNjcmlwdGlvbnMvMTExMTExMTEtMjIyMi0zMzMzLTQ0NDQtNTU1NTU1NTU1NTU1L3Jlc291cmNlR3JvdXBzL215LXJnL3Byb3ZpZGVycy9taWNyb3NvZnQuY29tcHV0ZS92aXJ0dWFsbWFjaGluZXMvbXktdm0",
+            "scope": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/my-rg/providers/Microsoft.Compute/virtualMachines/my-vm",
+            "displayName": "my-vm",
+            "type": "microsoft.compute/virtualmachines",
+            "location": "eastus",
+            "tags": {
+              "environment": "production",
+              "team": "ops"
+            },
+            "parentResource": {
+              "type": "resourceGroup",
+              "scope": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/my-rg",
+              "displayName": "my-rg",
+              "properties": {},
+              "parentResource": {
+                "type": "subscription",
+                "scope": "/subscriptions/11111111-2222-3333-4444-555555555555",
+                "displayName": "My Subscription",
+                "properties": {
+                  "managementGroupPath": [
+                    "Tenant Root Group",
+                    "Engineering"
+                  ]
+                }
+              }
+            },
+            "roles": [
+              {
+                "roleId": "9c6dc8fa-3f0a-4f4d-86d8-71b3e4b8b5e0",
+                "roleDefinitionId": "/subscriptions/11111111-2222-3333-4444-555555555555/providers/Microsoft.Authorization/roleDefinitions/1c0163c0-47e6-4577-8991-ea5c82e286e4",
+                "roleDisplayName": "Virtual Machine Administrator Login",
+                "scope": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/my-rg/providers/Microsoft.Compute/virtualMachines/my-vm",
+                "assignmentStatus": "eligible",
+                "scheduleInfo": {
+                  "startDateTime": "2026-01-15T00:00:00Z",
+                  "expiration": {
+                    "type": "AfterDateTime",
+                    "endDateTime": "2026-12-31T23:59:59Z"
+                  }
+                },
+                "source": {
+                  "memberType": "direct"
+                },
+                "isLeastPrivilege": true
+              },
+              {
+                "roleId": "f5d8b1c9-0a3e-4c8d-89b6-3a8d2c1b0a7e",
+                "roleDefinitionId": "/subscriptions/11111111-2222-3333-4444-555555555555/providers/Microsoft.Authorization/roleDefinitions/fb879df8-f326-4884-b1cf-06f3ad86be52",
+                "roleDisplayName": "Virtual Machine User Login",
+                "scope": "/subscriptions/11111111-2222-3333-4444-555555555555",
+                "assignmentStatus": "active",
+                "scheduleInfo": {
+                  "startDateTime": "2026-05-22T14:00:00Z",
+                  "expiration": {
+                    "type": "AfterDateTime",
+                    "endDateTime": "2026-05-22T22:00:00Z"
+                  }
+                },
+                "source": {
+                  "memberType": "group",
+                  "group": {
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                    "displayName": "Privileged Operators"
+                  },
+                  "membershipState": "active"
+                },
+                "isLeastPrivilege": false
+              }
+            ],
+            "isFavorite": false
+          },
+          {
+            "projectionId": "L3N1YnNjcmlwdGlvbnMvMTExMTExMTEtMjIyMi0zMzMzLTQ0NDQtNTU1NTU1NTU1NTU1L3Jlc291cmNlR3JvdXBzL2FyYy1yZy9wcm92aWRlcnMvbWljcm9zb2Z0Lmh5YnJpZGNvbXB1dGUvbWFjaGluZXMvbXktYXJjLXZt",
+            "scope": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/arc-rg/providers/Microsoft.HybridCompute/machines/my-arc-vm",
+            "displayName": "my-arc-vm",
+            "type": "microsoft.hybridcompute/machines",
+            "location": "eastus",
+            "tags": {
+              "environment": "production"
+            },
+            "parentResource": {
+              "type": "resourceGroup",
+              "scope": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/arc-rg",
+              "displayName": "arc-rg",
+              "properties": {},
+              "parentResource": {
+                "type": "subscription",
+                "scope": "/subscriptions/11111111-2222-3333-4444-555555555555",
+                "displayName": "My Subscription",
+                "properties": {
+                  "managementGroupPath": [
+                    "Tenant Root Group",
+                    "Engineering"
+                  ]
+                }
+              }
+            },
+            "roles": [
+              {
+                "roleId": "4b9d3c2a-1e0f-4a7b-8c5e-9d2f3a1b0c4d",
+                "roleDefinitionId": "/subscriptions/11111111-2222-3333-4444-555555555555/providers/Microsoft.Authorization/roleDefinitions/c7e9f2a1-4b3d-4e6a-9c8f-2d1b5a3e7c9d",
+                "roleDisplayName": "VM Privileged Session Manager",
+                "scope": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/arc-rg",
+                "assignmentStatus": "eligible",
+                "scheduleInfo": {
+                  "startDateTime": "2026-02-01T00:00:00Z",
+                  "expiration": {
+                    "type": "AfterDuration",
+                    "duration": "PT8H"
+                  }
+                },
+                "source": {
+                  "memberType": "group",
+                  "group": {
+                    "id": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff",
+                    "displayName": "Quarterly Audit Reviewers"
+                  },
+                  "membershipState": "eligible"
+                },
+                "isLeastPrivilege": true
+              }
+            ],
+            "isFavorite": true
+          }
+        ],
+        "nextLink": "https://management.azure.com/providers/Microsoft.Authorization/privilegedResources?api-version=2026-06-01-preview&%24skipToken=eyJwYWdlIjoyfQ%3D%3D"
+      }
+    }
+  }
+}
