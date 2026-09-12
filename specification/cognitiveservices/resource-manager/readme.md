@@ -48,7 +48,9 @@ suppressions:
       - $.definitions.RaiAcsHarmConfiguration.properties.harm_config_id
       - $.definitions.RaiAcsInterventionPoint.properties.policy_target
       - $.definitions.RaiAcsInterventionPoint.properties.policy_target_kind
-      - $.definitions.RaiAcsInterventionPoint.properties.tool_name_from
+      - $.definitions.RaiAcsToolInterventionPoint.properties.policy_target
+      - $.definitions.RaiAcsToolInterventionPoint.properties.policy_target_kind
+      - $.definitions.RaiAcsToolInterventionPoint.properties.tool_name_from
       - $.definitions.RaiAcsInterventionPoints.properties.pre_tool_call
       - $.definitions.RaiAcsInterventionPoints.properties.post_tool_call
       - $.definitions.RaiAcsManifest.properties.agent_control_specification_version
