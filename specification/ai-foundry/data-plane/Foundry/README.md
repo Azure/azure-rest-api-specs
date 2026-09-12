@@ -2,13 +2,6 @@
 
 This folder contains the TypeSpec for all data-plane REST APIs of the Foundry service.
 
-## Telephony connection names
-
-Telephony bindings, outbound call jobs, and outbound campaigns use `connection_name` to reference
-a Foundry connection by its `name`, not its service-generated `id`. These are distinct fields in
-the [Connection model](src/connections/models.tsp). Use the [Connections list and get APIs](src/connections/routes.tsp)
-(`GET /connections` and `GET /connections/{name}`) to discover the connection name.
-
 ## Contributing
 
 ### Adding preview features
