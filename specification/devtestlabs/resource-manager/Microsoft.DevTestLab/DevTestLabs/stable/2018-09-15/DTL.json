@@ -10514,6 +10514,36 @@
         }
       ]
     },
+    "FormulaCredentialState": {
+      "type": "string",
+      "description": "The configured credential state of a formula.",
+      "enum": [
+        "NotConfigured",
+        "PasswordConfigured",
+        "SshKeyConfigured"
+      ],
+      "x-ms-enum": {
+        "name": "FormulaCredentialState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotConfigured",
+            "value": "NotConfigured",
+            "description": "No credential is configured."
+          },
+          {
+            "name": "PasswordConfigured",
+            "value": "PasswordConfigured",
+            "description": "A password credential is configured."
+          },
+          {
+            "name": "SshKeyConfigured",
+            "value": "SshKeyConfigured",
+            "description": "An SSH key credential is configured."
+          }
+        ]
+      }
+    },
     "FormulaFragment": {
       "type": "object",
       "description": "A formula for creating a VM, specifying an image base and other parameters",
@@ -10570,6 +10600,11 @@
         "formulaContent": {
           "$ref": "#/definitions/LabVirtualMachineCreationParameter",
           "description": "The content of the formula."
+        },
+        "credentialState": {
+          "$ref": "#/definitions/FormulaCredentialState",
+          "description": "The configured credential state of the formula. This property does not expose the credential value or storage mechanism.",
+          "readOnly": true
         },
         "vm": {
           "$ref": "#/definitions/FormulaPropertiesFromVm",
@@ -11652,11 +11687,23 @@
         },
         "password": {
           "type": "string",
-          "description": "The password of the virtual machine administrator."
+          "format": "password",
+          "description": "The password of the virtual machine administrator.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         },
         "sshKey": {
           "type": "string",
-          "description": "The SSH key of the virtual machine administrator."
+          "format": "password",
+          "description": "The SSH key of the virtual machine administrator.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         },
         "isAuthenticationWithSshKey": {
           "type": "boolean",
