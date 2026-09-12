@@ -255,7 +255,7 @@ model SandboxHttpProxyConfiguration {
    * Proxy endpoint for HTTP destinations. Nonempty values must be an absolute http:// origin with a host.
    * Credentials, paths other than '/', query strings, fragments, and ports 0, 80, and 443 are not supported.
    * This endpoint applies only to HTTP destinations; there is no fallback to httpsUrl.
-   * An empty value leaves this endpoint unconfigured when httpsUrl is configured.
+   * An empty value is allowed when httpsUrl is configured.
    * In PATCH, omission preserves the endpoint and null clears it.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null HTTP proxy endpoint and distinguishes null from omission in PATCH."
@@ -266,7 +266,7 @@ model SandboxHttpProxyConfiguration {
    * Proxy endpoint for HTTPS destinations. The proxy URL itself must use http:// for CONNECT tunneling.
    * Nonempty values must be an origin with a host and no credentials, path other than '/', query, or fragment.
    * Ports 0, 80, and 443 are not supported. There is no fallback to httpUrl.
-   * An empty value leaves this endpoint unconfigured when httpUrl is configured.
+   * An empty value is allowed when httpUrl is configured.
    * In PATCH, omission preserves the endpoint and null clears it.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null HTTPS proxy endpoint and distinguishes null from omission in PATCH."

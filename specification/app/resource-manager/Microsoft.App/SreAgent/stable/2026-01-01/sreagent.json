@@ -2912,12 +2912,12 @@
       "properties": {
         "httpUrl": {
           "type": "string",
-          "description": "Proxy endpoint for HTTP destinations. Nonempty values must be an absolute http:// origin with a host.\nCredentials, paths other than '/', query strings, fragments, and ports 0, 80, and 443 are not supported.\nThis endpoint applies only to HTTP destinations; there is no fallback to httpsUrl.\nAn empty value leaves this endpoint unconfigured when httpsUrl is configured.\nIn PATCH, omission preserves the endpoint and null clears it.",
+          "description": "Proxy endpoint for HTTP destinations. Nonempty values must be an absolute http:// origin with a host.\nCredentials, paths other than '/', query strings, fragments, and ports 0, 80, and 443 are not supported.\nThis endpoint applies only to HTTP destinations; there is no fallback to httpsUrl.\nAn empty value is allowed when httpsUrl is configured.\nIn PATCH, omission preserves the endpoint and null clears it.",
           "x-nullable": true
         },
         "httpsUrl": {
           "type": "string",
-          "description": "Proxy endpoint for HTTPS destinations. The proxy URL itself must use http:// for CONNECT tunneling.\nNonempty values must be an origin with a host and no credentials, path other than '/', query, or fragment.\nPorts 0, 80, and 443 are not supported. There is no fallback to httpUrl.\nAn empty value leaves this endpoint unconfigured when httpUrl is configured.\nIn PATCH, omission preserves the endpoint and null clears it.",
+          "description": "Proxy endpoint for HTTPS destinations. The proxy URL itself must use http:// for CONNECT tunneling.\nNonempty values must be an origin with a host and no credentials, path other than '/', query, or fragment.\nPorts 0, 80, and 443 are not supported. There is no fallback to httpUrl.\nAn empty value is allowed when httpUrl is configured.\nIn PATCH, omission preserves the endpoint and null clears it.",
           "x-nullable": true
         },
         "noProxy": {
