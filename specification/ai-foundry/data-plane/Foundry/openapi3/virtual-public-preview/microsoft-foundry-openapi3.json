@@ -36894,7 +36894,12 @@
             "github_copilot_preview": "#/components/schemas/GitHubCopilotHarness"
           }
         },
-        "description": "A managed runtime and agent loop used to execute a prompt agent."
+        "description": "A managed runtime and agent loop used to execute a prompt agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "GitHubCopilot=V1Preview"
+          ]
+        }
       },
       "AgentId": {
         "type": "object",
@@ -39016,6 +39021,12 @@
             "type": "integer",
             "format": "unixtime",
             "description": "The Unix timestamp (in seconds) when the session expires (rolling, 30 days from last activity).",
+            "readOnly": true
+          },
+          "stopped_at": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The Unix timestamp (in seconds) when the session sandbox was last observed to stop or go idle. Present only after the session has gone idle at least once, used for accurate idle-billing reconciliation.",
             "readOnly": true
           }
         },
@@ -42513,14 +42524,14 @@
         "type": "object",
         "required": [
           "provider",
-          "connection"
+          "connection_name"
         ],
         "properties": {
           "provider": {
             "$ref": "#/components/schemas/TelephonyProvider",
             "description": "The telephony provider."
           },
-          "connection": {
+          "connection_name": {
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
@@ -42550,16 +42561,24 @@
         "type": "object",
         "required": [
           "destination",
-          "telephony_binding_id"
+          "connection_name",
+          "source"
         ],
         "properties": {
           "destination": {
             "$ref": "#/components/schemas/TelephonyOutboundDestination",
             "description": "The phone destination to call."
           },
-          "telephony_binding_id": {
-            "$ref": "#/components/schemas/TelephonyBindingId",
-            "description": "The active agent telephony binding used to originate the call."
+          "connection_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required."
+          },
+          "source": {
+            "$ref": "#/components/schemas/TelephonyOutboundSource",
+            "minLength": 1,
+            "description": "The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing."
           },
           "purpose": {
             "type": "string",
@@ -42581,6 +42600,24 @@
           }
         },
         "description": "A request to create one durable direct outbound call job.",
+        "examples": [
+          {
+            "connection_name": "telephony-acs",
+            "source": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+            "destination": {
+              "type": "phone_number",
+              "value": "+14255550123"
+            }
+          },
+          {
+            "connection_name": "telephony-twilio",
+            "source": "+14255550100",
+            "destination": {
+              "type": "phone_number",
+              "value": "+14255550123"
+            }
+          }
+        ],
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -42591,7 +42628,8 @@
         "type": "object",
         "required": [
           "display_name",
-          "telephony_binding_id"
+          "connection_name",
+          "source"
         ],
         "properties": {
           "display_name": {
@@ -42599,9 +42637,16 @@
             "minLength": 1,
             "description": "A customer-visible name for the campaign."
           },
-          "telephony_binding_id": {
-            "$ref": "#/components/schemas/TelephonyBindingId",
-            "description": "The active agent telephony binding used to originate campaign calls."
+          "connection_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "The Foundry connection name in the current project used to originate campaign calls. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required."
+          },
+          "source": {
+            "$ref": "#/components/schemas/TelephonyOutboundSource",
+            "minLength": 1,
+            "description": "The caller identity used to originate campaign calls. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing."
           },
           "purpose": {
             "type": "string",
@@ -42618,6 +42663,18 @@
           }
         },
         "description": "A request to create a draft outbound campaign.",
+        "examples": [
+          {
+            "display_name": "Teams Phone renewal reminders",
+            "connection_name": "telephony-acs",
+            "source": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+          },
+          {
+            "display_name": "Twilio renewal reminders",
+            "connection_name": "telephony-twilio",
+            "source": "+14255550100"
+          }
+        ],
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -44363,10 +44420,21 @@
             "description": "The level at which evaluation is performed. Defaults to 'turn' if not specified.",
             "default": "turn"
           },
-          "output_dataset": {
-            "$ref": "#/components/schemas/EvaluationDataset",
-            "description": "Dataset produced by the evaluation run. Present when the run creates a versioned Foundry dataset; otherwise omitted.",
+          "output_datasets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluationOutputDataset"
+            },
+            "description": "Preview-only. Datasets produced by the evaluation run. Omitted when no datasets were generated. This field may change in a future API version.",
             "readOnly": true
+          },
+          "latency": {
+            "$ref": "#/components/schemas/EvalRunLatency",
+            "description": "Latency measurements observed during the evaluation run."
+          },
+          "estimated_cost": {
+            "$ref": "#/components/schemas/EvalRunCost",
+            "description": "Estimated costs observed during the evaluation run."
           }
         },
         "description": "An evaluation run, including Foundry-specific metadata and optional output dataset information.",
@@ -44376,6 +44444,16 @@
           "group": "evals",
           "example": "{\n  \"object\": \"eval.run\",\n  \"id\": \"evalrun_67e57965b480819094274e3a32235e4c\",\n  \"eval_id\": \"eval_67e579652b548190aaa83ada4b125f47\",\n  \"report_url\": \"https://platform.openai.com/evaluations/eval_67e579652b548190aaa83ada4b125f47?run_id=evalrun_67e57965b480819094274e3a32235e4c\",\n  \"status\": \"queued\",\n  \"model\": \"gpt-4o-mini\",\n  \"name\": \"gpt-4o-mini\",\n  \"created_at\": 1743092069,\n  \"result_counts\": {\n    \"total\": 0,\n    \"errored\": 0,\n    \"failed\": 0,\n    \"passed\": 0\n  },\n  \"per_model_usage\": null,\n  \"per_testing_criteria_results\": null,\n  \"data_source\": {\n    \"type\": \"completions\",\n    \"source\": {\n      \"type\": \"file_content\",\n      \"content\": [\n        {\n          \"item\": {\n            \"input\": \"Tech Company Launches Advanced Artificial Intelligence Platform\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Central Bank Increases Interest Rates Amid Inflation Concerns\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"International Summit Addresses Climate Change Strategies\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Major Retailer Reports Record-Breaking Holiday Sales\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"National Team Qualifies for World Championship Finals\",\n            \"ground_truth\": \"Sports\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Stock Markets Rally After Positive Economic Data Released\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Global Manufacturer Announces Merger with Competitor\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Breakthrough in Renewable Energy Technology Unveiled\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"World Leaders Sign Historic Climate Agreement\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Professional Athlete Sets New Record in Championship Event\",\n            \"ground_truth\": \"Sports\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Financial Institutions Adapt to New Regulatory Requirements\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Tech Conference Showcases Advances in Artificial Intelligence\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Global Markets Respond to Oil Price Fluctuations\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"International Cooperation Strengthened Through New Treaty\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Sports League Announces Revised Schedule for Upcoming Season\",\n            \"ground_truth\": \"Sports\"\n          }\n        }\n      ]\n    },\n    \"input_messages\": {\n      \"type\": \"template\",\n      \"template\": [\n        {\n          \"type\": \"message\",\n          \"role\": \"developer\",\n          \"content\": {\n            \"type\": \"input_text\",\n            \"text\": \"Categorize a given news headline into one of the following topics: Technology, Markets, World, Business, or Sports.\n\n# Steps\n\n1. Analyze the content of the news headline to understand its primary focus.\n2. Extract the subject matter, identifying any key indicators or keywords.\n3. Use the identified indicators to determine the most suitable category out of the five options: Technology, Markets, World, Business, or Sports.\n4. Ensure only one category is selected per headline.\n\n# Output Format\n\nRespond with the chosen category as a single word. For instance: \"Technology\", \"Markets\", \"World\", \"Business\", or \"Sports\".\n\n# Examples\n\n**Input**: \"Apple Unveils New iPhone Model, Featuring Advanced AI Features\"\n**Output**: \"Technology\"\n\n**Input**: \"Global Stocks Mixed as Investors Await Central Bank Decisions\"\n**Output**: \"Markets\"\n\n**Input**: \"War in Ukraine: Latest Updates on Negotiation Status\"\n**Output**: \"World\"\n\n**Input**: \"Microsoft in Talks to Acquire Gaming Company for $2 Billion\"\n**Output**: \"Business\"\n\n**Input**: \"Manchester United Secures Win in Premier League Football Match\"\n**Output**: \"Sports\"\n\n# Notes\n\n- If the headline appears to fit into more than one category, choose the most dominant theme.\n- Keywords or phrases such as \"stocks\", \"company acquisition\", \"match\", or technological brands can be good indicators for classification.\n\"\n          }\n        },\n        {\n          \"type\": \"message\",\n          \"role\": \"user\",\n          \"content\": {\n            \"type\": \"input_text\",\n            \"text\": \"{{item.input}}\"\n          }\n        }\n      ]\n    },\n    \"model\": \"gpt-4o-mini\",\n    \"sampling_params\": {\n      \"seed\": 42,\n      \"temperature\": 1.0,\n      \"top_p\": 1.0,\n      \"max_completions_tokens\": 2048\n    }\n  },\n  \"error\": null,\n  \"metadata\": {}\n}\n"
         }
+      },
+      "EvalRunCost": {
+        "type": "object",
+        "properties": {
+          "target": {
+            "$ref": "#/components/schemas/InferenceCostSummary",
+            "description": "Estimated inference cost for the evaluation target."
+          }
+        },
+        "description": "Estimated costs reported for an evaluation run."
       },
       "EvalRunDataSource": {
         "type": "object",
@@ -44403,6 +44481,16 @@
           }
         },
         "description": "Base class for run data sources with discriminator support."
+      },
+      "EvalRunLatency": {
+        "type": "object",
+        "properties": {
+          "target": {
+            "$ref": "#/components/schemas/LatencySummary",
+            "description": "End-to-end latency percentiles for the evaluation target."
+          }
+        },
+        "description": "Latency measurements reported for an evaluation run."
       },
       "EvalRunOutputItem": {
         "type": "object",
@@ -44784,61 +44872,6 @@
         },
         "description": "Evaluation Definition"
       },
-      "EvaluationAudioTranscriptionModel": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "mai-transcribe-1",
-              "azure-speech"
-            ]
-          }
-        ],
-        "description": "Supported speech-to-text transcription models. The union is extensible for additional models."
-      },
-      "EvaluationAudioTranscriptionModelConfiguration": {
-        "type": "object",
-        "required": [
-          "model"
-        ],
-        "properties": {
-          "model": {
-            "$ref": "#/components/schemas/EvaluationAudioTranscriptionModel",
-            "description": "The transcription model."
-          }
-        },
-        "description": "Configuration for speech-to-text transcription used during evaluation."
-      },
-      "EvaluationAzureRealtimeNativeVoiceModelConfiguration": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "azure-realtime-native"
-            ],
-            "description": "The voice kind. Always `azure-realtime-native`."
-          },
-          "name": {
-            "type": "string",
-            "minLength": 1,
-            "description": "The Azure realtime-native voice name. When omitted, the service defaults to `ava`.",
-            "default": "ava"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/EvaluationVoiceModelConfiguration"
-          }
-        ],
-        "description": "Configures an Azure realtime-native voice for evaluation."
-      },
       "EvaluationAzureStandardVoiceModelConfiguration": {
         "type": "object",
         "required": [
@@ -44871,7 +44904,7 @@
             "$ref": "#/components/schemas/EvaluationVoiceModelConfiguration"
           }
         ],
-        "description": "Configures an Azure standard neural voice for evaluation."
+        "description": "Configures an Azure standard neural voice used to convert text to speech for evaluation through the Voice Live endpoint."
       },
       "EvaluationComparisonInsightRequest": {
         "type": "object",
@@ -45056,43 +45089,44 @@
             "$ref": "#/components/schemas/ModelSamplingParams",
             "description": "Sampling parameters applied when the simulation model produces user turns."
           },
-          "transcription_model": {
-            "$ref": "#/components/schemas/EvaluationAudioTranscriptionModelConfiguration",
-            "description": "Transcription model configuration used to convert simulated user speech to text. Omit for text-only simulation."
-          },
           "voice_model": {
             "$ref": "#/components/schemas/EvaluationVoiceModelConfiguration",
-            "description": "Voice model configuration used to convert simulated user text to speech. Omit for text-only simulation."
+            "description": "Voice configuration used to convert simulated user text to speech. Currently, only Azure standard voices are supported. Omit for text-only simulation."
           }
         },
         "description": "Configures the model that plays the simulated user. This model is separate from the evaluated `target`."
       },
-      "EvaluationOpenAIVoiceModelConfiguration": {
+      "EvaluationOutputDataset": {
         "type": "object",
         "required": [
           "type",
-          "name"
+          "dataset"
         ],
         "properties": {
           "type": {
-            "type": "string",
-            "enum": [
-              "openai"
-            ],
-            "description": "The voice kind. Always `openai`."
+            "$ref": "#/components/schemas/EvaluationOutputDatasetType",
+            "description": "Purpose of the generated dataset."
           },
-          "name": {
-            "type": "string",
-            "minLength": 1,
-            "description": "The OpenAI built-in voice name."
+          "dataset": {
+            "$ref": "#/components/schemas/EvaluationDataset",
+            "description": "Generated dataset reference."
           }
         },
-        "allOf": [
+        "description": "A typed reference to a dataset produced by an evaluation run."
+      },
+      "EvaluationOutputDatasetType": {
+        "anyOf": [
           {
-            "$ref": "#/components/schemas/EvaluationVoiceModelConfiguration"
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "simulated_user_conversations"
+            ]
           }
         ],
-        "description": "Configures an OpenAI built-in voice for evaluation."
+        "description": "Purpose of a dataset produced by an evaluation run. The union is extensible for additional output types."
       },
       "EvaluationResultSample": {
         "type": "object",
@@ -46213,12 +46247,10 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "openai": "#/components/schemas/EvaluationOpenAIVoiceModelConfiguration",
-            "azure-standard": "#/components/schemas/EvaluationAzureStandardVoiceModelConfiguration",
-            "azure-realtime-native": "#/components/schemas/EvaluationAzureRealtimeNativeVoiceModelConfiguration"
+            "azure-standard": "#/components/schemas/EvaluationAzureStandardVoiceModelConfiguration"
           }
         },
-        "description": "Voice configuration used to convert text to speech for evaluation. All supported voice types use the Voice Live endpoint under the hood."
+        "description": "Voice configuration used to convert text to speech for evaluation through the Voice Live endpoint."
       },
       "EvaluatorCategory": {
         "anyOf": [
@@ -48158,6 +48190,65 @@
         },
         "description": "Index resource Definition"
       },
+      "InferenceCostCompleteness": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "complete",
+              "partial"
+            ]
+          }
+        ],
+        "description": "Indicates whether all target models attributed to the evaluation run were priced."
+      },
+      "InferenceCostSummary": {
+        "type": "object",
+        "required": [
+          "estimated_cost",
+          "currency",
+          "completeness",
+          "model_costs"
+        ],
+        "properties": {
+          "estimated_cost": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "description": "Estimated target inference cost in the specified currency."
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 currency code for the estimate."
+          },
+          "completeness": {
+            "$ref": "#/components/schemas/InferenceCostCompleteness",
+            "description": "Whether all attributed target models were priced."
+          },
+          "pricing_version": {
+            "type": "string",
+            "description": "Identifier of the price-list snapshot used for the estimate."
+          },
+          "model_costs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelCost"
+            },
+            "description": "Estimated cost and token usage for each priced target model."
+          },
+          "unpriced_models": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Target models for which no reliable price was available."
+          }
+        },
+        "description": "Run-wide estimated inference cost for the evaluation target.\n\nThe estimate is derived from reported token counts and list prices. It excludes evaluator\nand runtime usage and does not account for negotiated pricing, commitments, or discounts."
+      },
       "InputData": {
         "type": "object",
         "required": [
@@ -48749,6 +48840,35 @@
           }
         ],
         "description": "Extensible status values shared by Foundry jobs."
+      },
+      "LatencySummary": {
+        "type": "object",
+        "required": [
+          "p50_ms",
+          "p95_ms",
+          "sample_count"
+        ],
+        "properties": {
+          "p50_ms": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "description": "Median target latency in milliseconds."
+          },
+          "p95_ms": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "description": "95th percentile target latency in milliseconds."
+          },
+          "sample_count": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "Number of evaluation rows that contributed a usable latency measurement."
+          }
+        },
+        "description": "Run-wide end-to-end latency percentiles for the evaluation target."
       },
       "LoraConfig": {
         "type": "object",
@@ -49985,6 +50105,47 @@
             "preview_tool"
           ]
         }
+      },
+      "ModelCost": {
+        "type": "object",
+        "required": [
+          "model_name",
+          "estimated_cost",
+          "prompt_tokens",
+          "cached_tokens",
+          "completion_tokens"
+        ],
+        "properties": {
+          "model_name": {
+            "type": "string",
+            "description": "Backing model name used for pricing. For a model-router target, this is the model\nattributed by the runtime. For a direct deployment, this is resolved from deployment metadata."
+          },
+          "estimated_cost": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "description": "Estimated inference cost for this model."
+          },
+          "prompt_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "description": "Number of non-cached input tokens."
+          },
+          "cached_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "description": "Number of cached input tokens."
+          },
+          "completion_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "description": "Number of output tokens."
+          }
+        },
+        "description": "Estimated inference cost and token usage for one target model."
       },
       "ModelCredentialRequest": {
         "type": "object",
@@ -92843,7 +93004,7 @@
         "required": [
           "id",
           "provider",
-          "connection",
+          "connection_name",
           "status",
           "incoming_call_url"
         ],
@@ -92856,7 +93017,7 @@
             "$ref": "#/components/schemas/TelephonyProvider",
             "description": "The telephony provider."
           },
-          "connection": {
+          "connection_name": {
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
@@ -92902,7 +93063,7 @@
         "required": [
           "id",
           "provider",
-          "connection",
+          "connection_name",
           "status",
           "incoming_call_url",
           "etag"
@@ -92916,7 +93077,7 @@
             "$ref": "#/components/schemas/TelephonyProvider",
             "description": "The telephony provider."
           },
-          "connection": {
+          "connection_name": {
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
@@ -92996,6 +93157,54 @@
           ]
         }
       },
+      "TelephonyCallEndReason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "invalid_webhook_payload",
+              "webhook_validation_failed",
+              "binding_not_found",
+              "binding_suspended",
+              "admission_rejected",
+              "admission_check_failed",
+              "route_agent_mismatch",
+              "invalid_binding_configuration",
+              "credential_resolution_failed",
+              "provider_resource_mismatch",
+              "endpoint_resolution_failed",
+              "ingress_setup_failed",
+              "live_call_conflict",
+              "live_call_persistence_failed",
+              "answer_failed",
+              "provider_disconnected",
+              "provider_busy",
+              "provider_no_answer",
+              "provider_cancelled",
+              "provider_failed",
+              "provider_stream_error",
+              "provider_stream_stopped",
+              "agent_session_connect_failed",
+              "media_stream_ended",
+              "bridge_cancelled",
+              "bridge_failed",
+              "managed_hangup",
+              "managed_transfer",
+              "manage_hangup_failed",
+              "manage_transfer_failed"
+            ]
+          }
+        ],
+        "description": "Known service-generated reasons that one telephony call ended, rather than reasons for an overall outbound call job. Additional string codes may be returned.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "TelephonyCallId": {
         "type": "string",
         "minLength": 1,
@@ -93006,7 +93215,8 @@
         "type": "object",
         "required": [
           "destination",
-          "telephony_binding_id",
+          "connection_name",
+          "source",
           "id",
           "object",
           "agent_name",
@@ -93022,9 +93232,16 @@
             "$ref": "#/components/schemas/TelephonyOutboundDestination",
             "description": "The phone destination to call."
           },
-          "telephony_binding_id": {
-            "$ref": "#/components/schemas/TelephonyBindingId",
-            "description": "The active agent telephony binding used to originate the call."
+          "connection_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required."
+          },
+          "source": {
+            "$ref": "#/components/schemas/TelephonyOutboundSource",
+            "minLength": 1,
+            "description": "The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing."
           },
           "purpose": {
             "type": "string",
@@ -93078,8 +93295,8 @@
             "description": "The Unix timestamp in seconds at which the next retry becomes eligible."
           },
           "terminal_reason": {
-            "type": "string",
-            "description": "The stable reason for the terminal status, when available."
+            "$ref": "#/components/schemas/TelephonyCallJobTerminalReason",
+            "description": "The stable service-generated reason for the overall outbound call job, which can span multiple provider attempts, when available. Interpret this with `status`: a queued job can retain a temporary dispatch-deferral reason. Additional string codes may be returned."
           },
           "revision": {
             "type": "integer",
@@ -93196,6 +93413,45 @@
           ]
         }
       },
+      "TelephonyCallJobTerminalReason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "no_answer",
+              "no_answer_timeout",
+              "answer_failed",
+              "bridge_cancelled",
+              "bridge_failed",
+              "voice_session_configuration_invalid",
+              "connection_project_mismatch",
+              "outbound_connection_changed",
+              "outbound_connection_unavailable",
+              "telephony_binding_invalid",
+              "telephony_binding_not_found",
+              "telephony_binding_inactive",
+              "telephony_binding_changed",
+              "campaign_not_found",
+              "campaign_cancelled",
+              "campaign_completed",
+              "campaign_failed",
+              "origination_fence_not_recorded",
+              "origination_reconciliation_timeout",
+              "cancellation_reconciliation_timeout",
+              "provider_callback_timeout_cancellation_reconciliation_timeout"
+            ]
+          }
+        ],
+        "description": "Known terminal reasons for an overall outbound call job, which can span multiple provider attempts. These are distinct from individual call lifecycle reasons. Additional string codes may be returned.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "TelephonyCallLifecycleEvent": {
         "type": "object",
         "required": [
@@ -93239,9 +93495,9 @@
             "description": "The source of the event timestamp."
           },
           "reason": {
-            "type": "string",
+            "$ref": "#/components/schemas/TelephonyCallLifecycleEventReason",
             "maxLength": 128,
-            "description": "A stable service-generated reason associated with the event."
+            "description": "A stable service-generated reason associated with this lifecycle event, not necessarily the final outcome of the call. Additional string codes may be returned."
           },
           "provider_event_id": {
             "type": "string",
@@ -93321,6 +93577,54 @@
           }
         ],
         "description": "The outcome of one telephony lifecycle observation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCallLifecycleEventReason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "invalid_webhook_payload",
+              "webhook_validation_failed",
+              "binding_not_found",
+              "binding_suspended",
+              "admission_rejected",
+              "admission_check_failed",
+              "route_agent_mismatch",
+              "invalid_binding_configuration",
+              "credential_resolution_failed",
+              "provider_resource_mismatch",
+              "endpoint_resolution_failed",
+              "ingress_setup_failed",
+              "live_call_conflict",
+              "live_call_persistence_failed",
+              "answer_failed",
+              "provider_disconnected",
+              "provider_busy",
+              "provider_no_answer",
+              "provider_cancelled",
+              "provider_failed",
+              "provider_stream_error",
+              "provider_stream_stopped",
+              "agent_session_connect_failed",
+              "media_stream_ended",
+              "bridge_cancelled",
+              "bridge_failed",
+              "managed_hangup",
+              "managed_transfer",
+              "manage_hangup_failed",
+              "manage_transfer_failed"
+            ]
+          }
+        ],
+        "description": "Known service-generated reasons for a telephony lifecycle event. An event reason does not necessarily describe the final outcome of the call. Additional string codes may be returned.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -93448,9 +93752,9 @@
             "description": "The call duration."
           },
           "end_reason": {
-            "type": "string",
+            "$ref": "#/components/schemas/TelephonyCallEndReason",
             "maxLength": 128,
-            "description": "The service-generated reason that the call ended."
+            "description": "The service-generated reason that this single call ended, rather than the outcome of an overall outbound call job. Additional string codes may be returned."
           },
           "provider_status_code": {
             "type": "integer",
@@ -93583,9 +93887,9 @@
             "description": "The call duration."
           },
           "end_reason": {
-            "type": "string",
+            "$ref": "#/components/schemas/TelephonyCallEndReason",
             "maxLength": 128,
-            "description": "The service-generated reason that the call ended."
+            "description": "The service-generated reason that this single call ended, rather than the outcome of an overall outbound call job. Additional string codes may be returned."
           },
           "provider_status_code": {
             "type": "integer",
@@ -93798,7 +94102,8 @@
         "type": "object",
         "required": [
           "display_name",
-          "telephony_binding_id",
+          "connection_name",
+          "source",
           "id",
           "object",
           "agent_name",
@@ -93815,9 +94120,16 @@
             "minLength": 1,
             "description": "A customer-visible name for the campaign."
           },
-          "telephony_binding_id": {
-            "$ref": "#/components/schemas/TelephonyBindingId",
-            "description": "The active agent telephony binding used to originate campaign calls."
+          "connection_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "The Foundry connection name in the current project used to originate campaign calls. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required."
+          },
+          "source": {
+            "$ref": "#/components/schemas/TelephonyOutboundSource",
+            "minLength": 1,
+            "description": "The caller identity used to originate campaign calls. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing."
           },
           "purpose": {
             "type": "string",
@@ -94628,6 +94940,18 @@
           }
         ],
         "description": "The retry strategy for an outbound call.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyOutboundSource": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 36,
+        "pattern": "^(?:\\+[1-9][0-9]{1,14}|(?!00000000-0000-0000-0000-000000000000$)[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$",
+        "description": "An outbound caller identity: an E.164 phone number or a non-empty Teams Resource Account UUID. The connection category determines which form is accepted.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -95974,7 +96298,7 @@
             "maxLength": 128,
             "description": "The replacement display label. Omit it to preserve the current value; use null to clear it."
           },
-          "connection": {
+          "connection_name": {
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
@@ -96085,6 +96409,50 @@
         },
         "description": "Configures the number, length, audio effects, and simulated user behavior of conversations."
       },
+      "UserConversationSimulationDefaultConfiguration": {
+        "type": "object",
+        "properties": {
+          "max_num_turns": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Hard limit on turns in each conversation. When omitted, the service defaults to 20.",
+            "default": 20
+          },
+          "conversation_repetitions": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Number of independent conversation repetitions for each test case. Defaults to 1 when not specified at either the data-source or test-case level.",
+            "default": 1
+          },
+          "desired_num_turns": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Target number of turns in each conversation. The effective value cannot exceed the effective `max_num_turns`. When omitted, no target is set and the simulation model determines the conversation length dynamically from the scenario."
+          },
+          "audio_effects": {
+            "$ref": "#/components/schemas/UserConversationSimulationAudioEffectsConfiguration",
+            "description": "Audio effects applied to voice conversation simulations. This property is ignored for text-only simulations."
+          },
+          "user_behavior": {
+            "$ref": "#/components/schemas/UserConversationSimulationUserBehaviorConfiguration",
+            "description": "Conversation behavior of the simulated user."
+          },
+          "enable_conversation_dataset_generation": {
+            "type": "boolean",
+            "description": "Whether to write all generated conversations to a versioned Foundry dataset. When enabled, the completed run includes a `simulated_user_conversations` entry in `output_datasets`. When omitted, the service defaults to `false`.",
+            "default": false
+          },
+          "output_conversation_dataset_name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Name of the dataset to which generated conversations are written. This property is used only when `enable_conversation_dataset_generation` is `true`. When omitted, the service generates a dataset name."
+          }
+        },
+        "description": "Configures default conversation behavior and optional run-wide persistence of generated conversations."
+      },
       "UserConversationSimulationDefaultInterruptionConfiguration": {
         "type": "object",
         "required": [
@@ -96135,8 +96503,8 @@
             "description": "Model used to simulate the user side of each conversation by generating turns sent to the evaluated `target`."
           },
           "default_simulation_configuration": {
-            "$ref": "#/components/schemas/UserConversationSimulationConfiguration",
-            "description": "Default configuration for generating simulated user conversations. Properties in a test case's `simulation_configuration` override the corresponding defaults."
+            "$ref": "#/components/schemas/UserConversationSimulationDefaultConfiguration",
+            "description": "Default configuration for generating simulated user conversations and persisting their output. Conversation properties in a test case's `simulation_configuration` override the corresponding defaults."
           },
           "data_mapping": {
             "type": "object",
@@ -96144,11 +96512,6 @@
               "type": "string"
             },
             "description": "Maps JSONL dataset attributes to user conversation simulation inputs when their names differ from the defaults. The default attribute names are `test_case_id`, `test_case_category`, `test_case_description`, and `simulation_configuration`, matching `UserConversationSimulationTestCase`. Omit when the dataset uses these names or when using `inline_user_conversation_simulation`."
-          },
-          "enable_conversation_dataset_generation": {
-            "type": "boolean",
-            "description": "Whether to write all generated conversations to a file in a versioned Foundry dataset, providing visibility into the generated conversations. The dataset can be reused in future evaluation runs. When enabled, the completed run includes `output_dataset`. When omitted, the service defaults to `false`.",
-            "default": false
           }
         },
         "allOf": [
@@ -98915,10 +99278,6 @@
       "VoiceResponseBase": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the response, will look like `resp_1234`."
-          },
           "object": {
             "type": "string",
             "enum": [
@@ -98945,10 +99304,6 @@
           "usage": {
             "$ref": "#/components/schemas/OpenAI.RealtimeResponseUsage",
             "description": "Usage statistics for the Response, this will correspond to billing. A\n  Realtime API session will maintain a conversation context and append new\n  Items to the Conversation, thus output from previous turns (text and\n  audio tokens) will become the input for later turns."
-          },
-          "conversation_id": {
-            "type": "string",
-            "description": "Which conversation the response is added to, determined by the `conversation`\n  field in the `response.create` event. If `auto`, the response will be added to\n  the default conversation and the value of `conversation_id` will be an id like\n  `conv_1234`. If `none`, the response will not be added to any conversation and\n  the value of `conversation_id` will be `null`. If responses are being triggered\n  automatically by VAD the response will be added to the default conversation"
           },
           "output_modalities": {
             "type": "array",

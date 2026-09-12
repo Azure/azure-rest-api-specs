@@ -428,7 +428,7 @@ using Azure.AI.Projects;
 @@access(OpenAI.ApproximateLocation, Access.public, "java");
 @@usage(OpenAI.WebSearchApproximateLocation, Usage.input, "java");
 @@access(OpenAI.WebSearchApproximateLocation, Access.public, "java");
-@@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMCPHttpError", "java");
+@@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMcpHttpError", "java");
 
 @@usage(OpenAI.IncludeEnum, Usage.input);
 @@access(OpenAI.IncludeEnum, Access.public);
@@ -513,6 +513,80 @@ using Azure.AI.Projects;
   OpenAI.Reasoning,
   {
     identity: "com.openai.models.Reasoning",
+  },
+  "java"
+);
+
+// Reuse standalone Responses and Realtime models from openai-java. Models that participate in the
+// RealtimeClientEvent, RealtimeServerEvent, RealtimeConversationItem, or other discriminator hierarchies remain
+// generated so Java's polymorphic deserialization can dispatch to their concrete subtypes.
+@@alternateType(
+  OpenAI.InputFileContent,
+  {
+    identity: "com.openai.models.responses.ResponseInputFileContent",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.InputImageContent,
+  {
+    identity: "com.openai.models.responses.ResponseInputImageContent",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.InputTextContent,
+  {
+    identity: "com.openai.models.responses.ResponseInputTextContent",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.LogProbProperties,
+  {
+    identity: "com.openai.models.realtime.LogProbProperties",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.NoiseReductionType,
+  {
+    identity: "com.openai.models.realtime.NoiseReductionType",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.Prompt,
+  {
+    identity: "com.openai.models.responses.ResponsePrompt",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeFunctionTool,
+  {
+    identity: "com.openai.models.realtime.RealtimeFunctionTool",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeReasoning,
+  {
+    identity: "com.openai.models.realtime.RealtimeReasoning",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseStatusDetails,
+  {
+    identity: "com.openai.models.realtime.RealtimeResponseStatus",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseUsage,
+  {
+    identity: "com.openai.models.realtime.RealtimeResponseUsage",
   },
   "java"
 );

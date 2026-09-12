@@ -553,7 +553,7 @@ model CreateTelephonyBindingRequest {
   @doc("The Foundry connection name for the telephony provider.")
   @minLength(1)
   @maxLength(256)
-  connection: string;
+  connection_name: string;
 
   @doc("An optional display label for the binding.")
   @maxLength(128)
@@ -603,7 +603,7 @@ model UpdateTelephonyBindingRequest {
   @doc("The replacement Foundry connection name. This property is valid only for a Teams Phone Extension binding; a Twilio binding's connection is immutable.")
   @minLength(1)
   @maxLength(256)
-  connection?: string;
+  connection_name?: string;
 
   @doc("The replacement Teams Phone Extension display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone Extension binding.")
   @maxLength(64)
@@ -623,7 +623,7 @@ model TelephonyBinding {
   @doc("The Foundry connection name for the telephony provider.")
   @minLength(1)
   @maxLength(256)
-  connection: string;
+  connection_name: string;
 
   @doc("The optional display label for the binding.")
   @maxLength(128)
@@ -674,7 +674,7 @@ model TelephonyBindingListItem {
   @doc("The Foundry connection name for the telephony provider.")
   @minLength(1)
   @maxLength(256)
-  connection: string;
+  connection_name: string;
 
   @doc("The optional display label for the binding.")
   @maxLength(128)
@@ -1002,6 +1002,102 @@ union TelephonyCallLifecycleEventName {
   call_disconnect: "telephony.call.disconnect",
 }
 
+@doc("Known service-generated reasons for a telephony lifecycle event. An event reason does not necessarily describe the final outcome of the call. Additional string codes may be returned.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCallLifecycleEventReason {
+  string,
+
+  @doc("The provider webhook payload was invalid.")
+  invalid_webhook_payload: "invalid_webhook_payload",
+
+  @doc("Validation of the provider webhook failed.")
+  webhook_validation_failed: "webhook_validation_failed",
+
+  @doc("No matching telephony binding was found.")
+  binding_not_found: "binding_not_found",
+
+  @doc("The telephony binding was suspended.")
+  binding_suspended: "binding_suspended",
+
+  @doc("The call was rejected by admission policy.")
+  admission_rejected: "admission_rejected",
+
+  @doc("The service could not complete the call admission check.")
+  admission_check_failed: "admission_check_failed",
+
+  @doc("The webhook route did not match the resolved voice agent.")
+  route_agent_mismatch: "route_agent_mismatch",
+
+  @doc("The telephony binding configuration was invalid.")
+  invalid_binding_configuration: "invalid_binding_configuration",
+
+  @doc("The service could not resolve the telephony provider credentials.")
+  credential_resolution_failed: "credential_resolution_failed",
+
+  @doc("The provider resource did not match the configured telephony resource.")
+  provider_resource_mismatch: "provider_resource_mismatch",
+
+  @doc("The service could not resolve the endpoint needed to handle the call.")
+  endpoint_resolution_failed: "endpoint_resolution_failed",
+
+  @doc("The service could not set up the incoming call.")
+  ingress_setup_failed: "ingress_setup_failed",
+
+  @doc("The call conflicted with an existing live call.")
+  live_call_conflict: "live_call_conflict",
+
+  @doc("The service could not persist the live call state.")
+  live_call_persistence_failed: "live_call_persistence_failed",
+
+  @doc("The attempt to answer the provider call failed.")
+  answer_failed: "answer_failed",
+
+  @doc("The provider reported that the call disconnected.")
+  provider_disconnected: "provider_disconnected",
+
+  @doc("The provider reported that the destination was busy.")
+  provider_busy: "provider_busy",
+
+  @doc("The provider reported that the call was not answered.")
+  provider_no_answer: "provider_no_answer",
+
+  @doc("The provider reported that the call was cancelled.")
+  provider_cancelled: "provider_cancelled",
+
+  @doc("The provider reported that the call failed.")
+  provider_failed: "provider_failed",
+
+  @doc("The provider reported a media-stream error.")
+  provider_stream_error: "provider_stream_error",
+
+  @doc("The provider reported that the media stream stopped.")
+  provider_stream_stopped: "provider_stream_stopped",
+
+  @doc("The call could not connect to the voice-agent session.")
+  agent_session_connect_failed: "agent_session_connect_failed",
+
+  @doc("The call's media stream ended.")
+  media_stream_ended: "media_stream_ended",
+
+  @doc("The telephony media bridge was cancelled.")
+  bridge_cancelled: "bridge_cancelled",
+
+  @doc("The telephony media bridge failed.")
+  bridge_failed: "bridge_failed",
+
+  @doc("A managed call hang-up command succeeded.")
+  managed_hangup: "managed_hangup",
+
+  @doc("A managed call-transfer command succeeded.")
+  managed_transfer: "managed_transfer",
+
+  @doc("A managed call hang-up command failed.")
+  manage_hangup_failed: "manage_hangup_failed",
+
+  @doc("A managed call-transfer command failed.")
+  manage_transfer_failed: "manage_transfer_failed",
+}
+
 @doc("A bounded durable observation in the lifecycle of one telephony call.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallLifecycleEvent {
@@ -1029,9 +1125,9 @@ model TelephonyCallLifecycleEvent {
   @doc("The source of the event timestamp.")
   timestamp_source: TelephonyCallTimestampSource;
 
-  @doc("A stable service-generated reason associated with the event.")
+  @doc("A stable service-generated reason associated with this lifecycle event, not necessarily the final outcome of the call. Additional string codes may be returned.")
   @maxLength(128)
-  reason?: string;
+  reason?: TelephonyCallLifecycleEventReason;
 
   @doc("The provider event identifier used for idempotency, when supplied.")
   @maxLength(256)
@@ -1048,6 +1144,102 @@ model TelephonyCallLifecycleEvent {
   @doc("The provider subcode associated with the event.")
   @minValue(0)
   provider_sub_code?: int32;
+}
+
+@doc("Known service-generated reasons that one telephony call ended, rather than reasons for an overall outbound call job. Additional string codes may be returned.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCallEndReason {
+  string,
+
+  @doc("The provider webhook payload was invalid.")
+  invalid_webhook_payload: "invalid_webhook_payload",
+
+  @doc("Validation of the provider webhook failed.")
+  webhook_validation_failed: "webhook_validation_failed",
+
+  @doc("No matching telephony binding was found.")
+  binding_not_found: "binding_not_found",
+
+  @doc("The telephony binding was suspended.")
+  binding_suspended: "binding_suspended",
+
+  @doc("The call was rejected by admission policy.")
+  admission_rejected: "admission_rejected",
+
+  @doc("The service could not complete the call admission check.")
+  admission_check_failed: "admission_check_failed",
+
+  @doc("The webhook route did not match the resolved voice agent.")
+  route_agent_mismatch: "route_agent_mismatch",
+
+  @doc("The telephony binding configuration was invalid.")
+  invalid_binding_configuration: "invalid_binding_configuration",
+
+  @doc("The service could not resolve the telephony provider credentials.")
+  credential_resolution_failed: "credential_resolution_failed",
+
+  @doc("The provider resource did not match the configured telephony resource.")
+  provider_resource_mismatch: "provider_resource_mismatch",
+
+  @doc("The service could not resolve the endpoint needed to handle the call.")
+  endpoint_resolution_failed: "endpoint_resolution_failed",
+
+  @doc("The service could not set up the incoming call.")
+  ingress_setup_failed: "ingress_setup_failed",
+
+  @doc("The call conflicted with an existing live call.")
+  live_call_conflict: "live_call_conflict",
+
+  @doc("The service could not persist the live call state.")
+  live_call_persistence_failed: "live_call_persistence_failed",
+
+  @doc("The attempt to answer the provider call failed.")
+  answer_failed: "answer_failed",
+
+  @doc("The provider reported that the call disconnected.")
+  provider_disconnected: "provider_disconnected",
+
+  @doc("The provider reported that the destination was busy.")
+  provider_busy: "provider_busy",
+
+  @doc("The provider reported that the call was not answered.")
+  provider_no_answer: "provider_no_answer",
+
+  @doc("The provider reported that the call was cancelled.")
+  provider_cancelled: "provider_cancelled",
+
+  @doc("The provider reported that the call failed.")
+  provider_failed: "provider_failed",
+
+  @doc("The provider reported a media-stream error.")
+  provider_stream_error: "provider_stream_error",
+
+  @doc("The provider reported that the media stream stopped.")
+  provider_stream_stopped: "provider_stream_stopped",
+
+  @doc("The call could not connect to the voice-agent session.")
+  agent_session_connect_failed: "agent_session_connect_failed",
+
+  @doc("The call's media stream ended.")
+  media_stream_ended: "media_stream_ended",
+
+  @doc("The telephony media bridge was cancelled.")
+  bridge_cancelled: "bridge_cancelled",
+
+  @doc("The telephony media bridge failed.")
+  bridge_failed: "bridge_failed",
+
+  @doc("A managed call hang-up command succeeded.")
+  managed_hangup: "managed_hangup",
+
+  @doc("A managed call-transfer command succeeded.")
+  managed_transfer: "managed_transfer",
+
+  @doc("A managed call hang-up command failed.")
+  manage_hangup_failed: "manage_hangup_failed",
+
+  @doc("A managed call-transfer command failed.")
+  manage_transfer_failed: "manage_transfer_failed",
 }
 
 @doc("A summary of a durable inbound call to a voice agent.")
@@ -1095,9 +1287,9 @@ model TelephonyCallSummary {
   @doc("The call duration.")
   duration_ms?: FoundryDurationMilliseconds;
 
-  @doc("The service-generated reason that the call ended.")
+  @doc("The service-generated reason that this single call ended, rather than the outcome of an overall outbound call job. Additional string codes may be returned.")
   @maxLength(128)
-  end_reason?: string;
+  end_reason?: TelephonyCallEndReason;
 
   @doc("The provider status code associated with the terminal result.")
   @minValue(0)
@@ -1261,14 +1453,27 @@ model TelephonyCallJobSchedule {
   expires_at?: FoundryTimestamp;
 }
 
+@doc("An outbound caller identity: an E.164 phone number or a non-empty Teams Resource Account UUID. The connection category determines which form is accepted.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@minLength(1)
+@maxLength(36)
+@pattern("^(?:\\+[1-9][0-9]{1,14}|(?!00000000-0000-0000-0000-000000000000$)[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$")
+scalar TelephonyOutboundSource extends string;
+
 @doc("Customer-controlled configuration shared by direct and campaign-created call jobs.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallJobConfiguration {
   @doc("The phone destination to call.")
   destination: TelephonyOutboundDestination;
 
-  @doc("The active agent telephony binding used to originate the call.")
-  telephony_binding_id: TelephonyBindingId;
+  @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required.")
+  @minLength(1)
+  @maxLength(256)
+  connection_name: string;
+
+  @doc("The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.")
+  @minLength(1)
+  source: TelephonyOutboundSource;
 
   @doc("An optional customer-declared purpose for placing the call.")
   @minLength(1)
@@ -1284,6 +1489,16 @@ model TelephonyCallJobConfiguration {
 @doc("A request to create one durable direct outbound call job.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("CreateTelephonyCallJobContent", "csharp")
+@example(#{
+  connection_name: "telephony-twilio",
+  source: "+14255550100",
+  destination: #{ type: "phone_number", value: "+14255550123" },
+})
+@example(#{
+  connection_name: "telephony-acs",
+  source: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+  destination: #{ type: "phone_number", value: "+14255550123" },
+})
 model CreateTelephonyCallJobRequest {
   ...TelephonyCallJobConfiguration;
 
@@ -1307,6 +1522,75 @@ union TelephonyCallJobStatus {
   expired: "expired",
   failed: "failed",
   cancelled: "cancelled",
+}
+
+@doc("Known terminal reasons for an overall outbound call job, which can span multiple provider attempts. These are distinct from individual call lifecycle reasons. Additional string codes may be returned.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCallJobTerminalReason {
+  string,
+
+  @doc("The provider call ended before the service observed it as connected.")
+  no_answer: "no_answer",
+
+  @doc("The provider accepted the call, but no connection was observed before the timeout and cancellation was reconciled. This does not prove that the recipient never answered.")
+  no_answer_timeout: "no_answer_timeout",
+
+  @doc("The attempt to answer the provider call failed.")
+  answer_failed: "answer_failed",
+
+  @doc("The telephony media bridge was cancelled.")
+  bridge_cancelled: "bridge_cancelled",
+
+  @doc("The telephony media bridge failed.")
+  bridge_failed: "bridge_failed",
+
+  @doc("The voice-agent session configuration was invalid for outbound calling.")
+  voice_session_configuration_invalid: "voice_session_configuration_invalid",
+
+  @doc("The outbound call job's project context did not match its expected project.")
+  connection_project_mismatch: "connection_project_mismatch",
+
+  @doc("The resolved outbound connection or caller identity no longer matched the call job configuration.")
+  outbound_connection_changed: "outbound_connection_changed",
+
+  @doc("The configured outbound connection could not be resolved or used.")
+  outbound_connection_unavailable: "outbound_connection_unavailable",
+
+  @doc("The telephony binding was invalid for outbound calling.")
+  telephony_binding_invalid: "telephony_binding_invalid",
+
+  @doc("The telephony binding could not be found.")
+  telephony_binding_not_found: "telephony_binding_not_found",
+
+  @doc("The telephony binding was not active.")
+  telephony_binding_inactive: "telephony_binding_inactive",
+
+  @doc("The telephony binding changed after the call job was configured.")
+  telephony_binding_changed: "telephony_binding_changed",
+
+  @doc("The campaign associated with the call job could not be found.")
+  campaign_not_found: "campaign_not_found",
+
+  @doc("The campaign associated with the call job was cancelled.")
+  campaign_cancelled: "campaign_cancelled",
+
+  @doc("The campaign associated with the call job had already completed.")
+  campaign_completed: "campaign_completed",
+
+  @doc("The campaign associated with the call job had failed.")
+  campaign_failed: "campaign_failed",
+
+  @doc("The service could not record the guard against duplicate call origination.")
+  origination_fence_not_recorded: "origination_fence_not_recorded",
+
+  @doc("The service could not reconcile the outcome of call origination before the timeout.")
+  origination_reconciliation_timeout: "origination_reconciliation_timeout",
+
+  @doc("The service could not confirm the outcome of call cancellation before the timeout.")
+  cancellation_reconciliation_timeout: "cancellation_reconciliation_timeout",
+
+  @doc("Provider callbacks timed out, and the service could not confirm the subsequent cancellation before its reconciliation timeout.")
+  provider_callback_timeout_cancellation_reconciliation_timeout: "provider_callback_timeout_cancellation_reconciliation_timeout",
 }
 
 @doc("A cancellation request recorded for an outbound call job.")
@@ -1356,8 +1640,8 @@ model TelephonyCallJob {
   @doc("The Unix timestamp in seconds at which the next retry becomes eligible.")
   next_attempt_at?: FoundryTimestamp;
 
-  @doc("The stable reason for the terminal status, when available.")
-  terminal_reason?: string;
+  @doc("The stable service-generated reason for the overall outbound call job, which can span multiple provider attempts, when available. Interpret this with `status`: a queued job can retain a temporary dispatch-deferral reason. Additional string codes may be returned.")
+  terminal_reason?: TelephonyCallJobTerminalReason;
 
   @doc("The monotonically increasing optimistic-concurrency revision.")
   @minValue(0)
@@ -1409,8 +1693,14 @@ model TelephonyCampaignConfiguration {
   @minLength(1)
   display_name: string;
 
-  @doc("The active agent telephony binding used to originate campaign calls.")
-  telephony_binding_id: TelephonyBindingId;
+  @doc("The Foundry connection name in the current project used to originate campaign calls. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required.")
+  @minLength(1)
+  @maxLength(256)
+  connection_name: string;
+
+  @doc("The caller identity used to originate campaign calls. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.")
+  @minLength(1)
+  source: TelephonyOutboundSource;
 
   @doc("An optional customer-declared purpose for campaign calls.")
   @minLength(1)
@@ -1423,6 +1713,16 @@ model TelephonyCampaignConfiguration {
 @doc("A request to create a draft outbound campaign.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("CreateTelephonyCampaignContent", "csharp")
+@example(#{
+  display_name: "Twilio renewal reminders",
+  connection_name: "telephony-twilio",
+  source: "+14255550100",
+})
+@example(#{
+  display_name: "Teams Phone renewal reminders",
+  connection_name: "telephony-acs",
+  source: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+})
 model CreateTelephonyCampaignRequest {
   ...TelephonyCampaignConfiguration;
 
