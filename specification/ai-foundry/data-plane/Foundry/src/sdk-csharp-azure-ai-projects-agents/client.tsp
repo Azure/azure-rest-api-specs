@@ -252,6 +252,11 @@ namespace Azure.AI.Projects {
     "csharp"
   );
   @@clientName(
+    BrowserAutomationTool.browser_automation,
+    "ToolParameters",
+    "csharp"
+  );
+  @@clientName(
     BrowserAutomationToolParameters.connection,
     "ToolConnectionParameters",
     "csharp"
@@ -400,5 +405,81 @@ namespace Azure.AI.Projects {
   @@clientName(
     AgentOptimizationDatasetItem.desired_num_turns,
     "DesiredTurnCount"
+  );
+
+  // --------------------------------------------------------------------------------
+  // AgentTelephony sub‐client
+  // --------------------------------------------------------------------------------
+  @@access(AgentTelephony.createTelephonyBinding, Access.internal);
+  @@access(AgentTelephony.getTelephonyBinding, Access.internal);
+  @@access(AgentTelephony.updateTelephonyBinding, Access.internal);
+  @@access(AgentTelephony.deleteTelephonyBinding, Access.internal);
+  @@access(AgentTelephony.listTelephonyCalls, Access.internal);
+  @@access(AgentTelephony.getTelephonyCall, Access.internal);
+  @@access(AgentTelephony.transferTelephonyCall, Access.internal);
+  @@access(AgentTelephony.endTelephonyCall, Access.internal);
+  @@access(AgentTelephony.getTelephonyTransferTargets, Access.internal);
+  @@access(AgentTelephony.replaceTelephonyTransferTargets, Access.internal);
+  @@access(AgentTelephony.createTelephonyCallJob, Access.internal);
+  @@access(AgentTelephony.getTelephonyCallJob, Access.internal);
+  @@access(AgentTelephony.cancelTelephonyCallJob, Access.internal);
+  @@access(AgentTelephony.createTelephonyCampaign, Access.internal);
+  @@access(AgentTelephony.getTelephonyCampaign, Access.internal);
+  @@access(AgentTelephony.importTelephonyCampaignRecipients, Access.internal);
+  @@access(AgentTelephony.getTelephonyCampaignRecipientImport, Access.internal);
+  @@access(AgentTelephony.validateTelephonyCampaign, Access.internal);
+  @@access(AgentTelephony.publishTelephonyCampaign, Access.internal);
+  @@access(AgentTelephony.pauseTelephonyCampaign, Access.internal);
+  @@access(AgentTelephony.resumeTelephonyCampaign, Access.internal);
+  @@access(AgentTelephony.cancelTelephonyCampaign, Access.internal);
+  @@access(AgentTelephony.getTelephonyOperation, Access.internal);
+
+  // --------------------------------------------------------------------------------
+  // Realtime classes replacements
+  // --------------------------------------------------------------------------------
+  @@alternateType(
+    OpenAI.RealtimeAudioFormats,
+    {
+      identity: "OpenAI.Realtime.RealtimeAudioFormat",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.RealtimeConversationItem,
+    {
+      identity: "OpenAI.Realtime.RealtimeItem",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.RealtimeResponseUsage,
+    {
+      identity: "OpenAI.Realtime.RealtimeResponseUsage",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.RealtimeMCPListTools,
+    {
+      identity: "OpenAI.Realtime.RealtimeMcpToolDefinitionListItem",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.RealtimeResponseStatusDetails,
+    {
+      identity: "OpenAI.Realtime.RealtimeResponseStatusDetails",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
   );
 }

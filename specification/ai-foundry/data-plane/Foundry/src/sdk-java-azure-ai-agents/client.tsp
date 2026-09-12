@@ -3,6 +3,8 @@ import "../common/custom-types.tsp";
 import "../sdk-common/error.default.tsp";
 import "../sdk-common/ops-relocation-agents.tsp";
 
+import "@typespec/http";
+
 import "../agents/routes.tsp";
 import "../voice-agents/routes.tsp";
 import "../memory-stores/routes.tsp";
@@ -17,9 +19,92 @@ import "../openai/conversations/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
-using TypeSpec.OpenAPI;
+using TypeSpec.Http;
 
 using Azure.AI.Projects;
+
+// Azure Core's HTTP pipeline cannot expose the upgraded WebSocket channel.
+// Java uses a handwritten Reactor Netty transport while TypeSpec generates the event models.
+@@scope(VoiceAgentWebSocket.connectVoiceAgent, "!java");
+
+// Keep the OpenAI realtime discriminator roots reachable even though the WebSocket operation is excluded.
+@@usage(OpenAI.RealtimeClientEvent, Usage.input | Usage.json);
+@@access(OpenAI.RealtimeClientEvent, Access.public, "java");
+@@usage(OpenAI.RealtimeServerEvent, Usage.output | Usage.json);
+@@access(OpenAI.RealtimeServerEvent, Access.public, "java");
+@@usage(VoiceAgentTransport, Usage.input | Usage.json);
+@@access(VoiceAgentTransport, Access.public, "java");
+
+// OpenAI realtime metadata is a string map. Project it directly instead of generating a misplaced root model.
+@@alternateType(OpenAI.Metadata, Record<string>, "java");
+@@clientName(
+  OpenAI.RealtimeServerEventError,
+  "RealtimeServerEventError",
+  "java"
+);
+
+// The imported realtime item hierarchy has a second role discriminator below `type: message`.
+// Mark each message leaf and content shape explicitly so Java emits constructors usable by session clients.
+@@usage(
+  OpenAI.RealtimeConversationItem,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(OpenAI.RealtimeConversationItem, Access.public, "java");
+@@usage(
+  OpenAI.RealtimeConversationItemMessage,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(OpenAI.RealtimeConversationItemMessage, Access.public, "java");
+@@usage(
+  OpenAI.RealtimeConversationItemMessageSystem,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(OpenAI.RealtimeConversationItemMessageSystem, Access.public, "java");
+@@usage(
+  OpenAI.RealtimeConversationItemMessageSystemContent,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(
+  OpenAI.RealtimeConversationItemMessageSystemContent,
+  Access.public,
+  "java"
+);
+@@usage(
+  OpenAI.RealtimeConversationItemMessageUser,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(OpenAI.RealtimeConversationItemMessageUser, Access.public, "java");
+@@usage(
+  OpenAI.RealtimeConversationItemMessageUserContent,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(
+  OpenAI.RealtimeConversationItemMessageUserContent,
+  Access.public,
+  "java"
+);
+@@usage(
+  OpenAI.RealtimeConversationItemMessageAssistant,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(
+  OpenAI.RealtimeConversationItemMessageAssistant,
+  Access.public,
+  "java"
+);
+@@usage(
+  OpenAI.RealtimeConversationItemMessageAssistantContent,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(
+  OpenAI.RealtimeConversationItemMessageAssistantContent,
+  Access.public,
+  "java"
+);
+
+@@scope(OpenAI.RealtimeConversationItemMessageSystem.type, "!java");
+@@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!java");
+@@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!java");
 
 // Java promotes the shared Foundry-Features header with @@clientLocation, not @@scope/@@clientInitialization.
 // @@scope(..., "!java") removes the header from Java entirely, including REST-interface @HeaderParam wiring.
@@ -342,9 +427,13 @@ using Azure.AI.Projects;
 
 @@usage(FoundryFeaturesOptInKeys, Usage.input);
 @@access(FoundryFeaturesOptInKeys, Access.internal, "java");
-@@usage(AgentDefinitionOptInKeys, Usage.input);
+@@usage(AgentDefinitionOptInKeys, Usage.input, "java");
 @@access(AgentDefinitionOptInKeys, Access.internal, "java");
 
+@@usage(OpenAI.ApproximateLocation, Usage.input, "java");
+@@access(OpenAI.ApproximateLocation, Access.public, "java");
+@@usage(OpenAI.WebSearchApproximateLocation, Usage.input, "java");
+@@access(OpenAI.WebSearchApproximateLocation, Access.public, "java");
 @@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMcpHttpError", "java");
 
 @@usage(OpenAI.IncludeEnum, Usage.input);
@@ -395,6 +484,11 @@ using Azure.AI.Projects;
 // Type overrides
 // --------------------------------------------------------------------------------
 
+// Keep persisted voice-item Unix timestamps as Java longs. Treating the encoded
+// utcDateTime as OffsetDateTime conflicts with the generated integer JSON reader
+// across the polymorphic item hierarchy.
+@@alternateType(VoiceConversationItemPersistence.created_at, int64, "java");
+
 // The original type is string | OpenAI.ToolChoiceParam . Making this just string
 // Prevents the emission of the full ToolChoiceParam class tree in Java, which
 // is already exposed by the Stainless library. Currently there aren't any azure-isms.
@@ -425,6 +519,80 @@ using Azure.AI.Projects;
   OpenAI.Reasoning,
   {
     identity: "com.openai.models.Reasoning",
+  },
+  "java"
+);
+
+// Reuse standalone Responses and Realtime models from openai-java. Models that participate in the
+// RealtimeClientEvent, RealtimeServerEvent, RealtimeConversationItem, or other discriminator hierarchies remain
+// generated so Java's polymorphic deserialization can dispatch to their concrete subtypes.
+@@alternateType(
+  OpenAI.InputFileContent,
+  {
+    identity: "com.openai.models.responses.ResponseInputFileContent",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.InputImageContent,
+  {
+    identity: "com.openai.models.responses.ResponseInputImageContent",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.InputTextContent,
+  {
+    identity: "com.openai.models.responses.ResponseInputTextContent",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.LogProbProperties,
+  {
+    identity: "com.openai.models.realtime.LogProbProperties",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.NoiseReductionType,
+  {
+    identity: "com.openai.models.realtime.NoiseReductionType",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.Prompt,
+  {
+    identity: "com.openai.models.responses.ResponsePrompt",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeFunctionTool,
+  {
+    identity: "com.openai.models.realtime.RealtimeFunctionTool",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeReasoning,
+  {
+    identity: "com.openai.models.realtime.RealtimeReasoning",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseStatusDetails,
+  {
+    identity: "com.openai.models.realtime.RealtimeResponseStatus",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseUsage,
+  {
+    identity: "com.openai.models.realtime.RealtimeResponseUsage",
   },
   "java"
 );
