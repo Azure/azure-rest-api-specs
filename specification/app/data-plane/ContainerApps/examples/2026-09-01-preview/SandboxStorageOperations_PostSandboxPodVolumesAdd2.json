@@ -1,0 +1,76 @@
+{
+  "title": "Post Sandbox Pod Volumes Add2 example",
+  "operationId": "SandboxStorageOperations_PostSandboxPodVolumesAdd2",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource-01",
+    "body": {
+      "volumes": [
+        "example-volume"
+      ],
+      "containerMounts": [
+        {
+          "containerName": "example-container",
+          "volumeMounts": [
+            {
+              "name": "example-resource",
+              "mountPath": "/workspace/example.txt",
+              "readOnly": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "204": {},
+    "400": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "500": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    }
+  }
+}

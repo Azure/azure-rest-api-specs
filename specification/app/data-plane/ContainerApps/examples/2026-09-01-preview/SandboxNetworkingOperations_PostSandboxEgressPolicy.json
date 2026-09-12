@@ -1,0 +1,582 @@
+{
+  "title": "Post Sandbox Egress Policy example",
+  "operationId": "SandboxNetworkingOperations_PostSandboxEgressPolicy",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource-01",
+    "body": {
+      "http": {
+        "defaultAction": "Allow",
+        "hostRules": [
+          {
+            "pattern": "example-pattern",
+            "action": "Allow"
+          }
+        ],
+        "rules": [
+          {
+            "name": "example-resource",
+            "match": {
+              "host": "example-host",
+              "path": "/workspace/example.txt",
+              "methods": [
+                "example-method"
+              ],
+              "scheme": "http",
+              "normalizePath": true
+            },
+            "action": {
+              "type": "Allow",
+              "headers": [
+                {
+                  "operation": "Set",
+                  "name": "example-resource",
+                  "value": "example-value",
+                  "valueRef": {
+                    "secretRef": {
+                      "secretId": "example-secret-01",
+                      "secretKey": "<redacted>",
+                      "format": "example-format"
+                    },
+                    "managedIdentityRef": {
+                      "resource": "example-resource",
+                      "format": "example-format",
+                      "type": "SystemAssigned",
+                      "identityResourceId": "example-identity-resource-01"
+                    }
+                  }
+                }
+              ],
+              "scheme": "example-scheme",
+              "host": "example-host",
+              "path": "/workspace/example.txt",
+              "routingMode": "Default",
+              "forward": "default",
+              "forwardProxy": {
+                "url": "https://example.com/resource",
+                "ca": "example-ca"
+              }
+            },
+            "proxyActions": [
+              "example-proxy-action"
+            ],
+            "source": "example-source",
+            "hookRef": {
+              "endpoint": "example-endpoint",
+              "failBehavior": "Deny",
+              "requestHeaders": [
+                "example-request-header"
+              ],
+              "authHeaders": [
+                {
+                  "operation": "Set",
+                  "name": "example-resource",
+                  "value": "example-value",
+                  "valueRef": {
+                    "secretRef": {
+                      "secretId": "example-secret-01",
+                      "secretKey": "<redacted>",
+                      "format": "example-format"
+                    },
+                    "managedIdentityRef": {
+                      "resource": "example-resource",
+                      "format": "example-format",
+                      "type": "SystemAssigned",
+                      "identityResourceId": "example-identity-resource-01"
+                    }
+                  }
+                }
+              ],
+              "timeoutMs": 1,
+              "routingMode": "Default"
+            }
+          }
+        ],
+        "trafficInspection": "Legacy",
+        "enforcementMode": "Enforced",
+        "defaultForward": {
+          "url": "https://example.com/resource",
+          "ca": "example-ca"
+        }
+      },
+      "defaultAction": "Allow",
+      "hostRules": [
+        {
+          "pattern": "example-pattern",
+          "action": "Allow"
+        }
+      ],
+      "rules": [
+        {
+          "name": "example-resource",
+          "match": {
+            "host": "example-host",
+            "path": "/workspace/example.txt",
+            "methods": [
+              "example-method"
+            ],
+            "scheme": "http",
+            "normalizePath": true
+          },
+          "action": {
+            "type": "Allow",
+            "headers": [
+              {
+                "operation": "Set",
+                "name": "example-resource",
+                "value": "example-value",
+                "valueRef": {
+                  "secretRef": {
+                    "secretId": "example-secret-01",
+                    "secretKey": "<redacted>",
+                    "format": "example-format"
+                  },
+                  "managedIdentityRef": {
+                    "resource": "example-resource",
+                    "format": "example-format",
+                    "type": "SystemAssigned",
+                    "identityResourceId": "example-identity-resource-01"
+                  }
+                }
+              }
+            ],
+            "scheme": "example-scheme",
+            "host": "example-host",
+            "path": "/workspace/example.txt",
+            "routingMode": "Default",
+            "forward": "default",
+            "forwardProxy": {
+              "url": "https://example.com/resource",
+              "ca": "example-ca"
+            }
+          },
+          "proxyActions": [
+            "example-proxy-action"
+          ],
+          "source": "example-source",
+          "hookRef": {
+            "endpoint": "example-endpoint",
+            "failBehavior": "Deny",
+            "requestHeaders": [
+              "example-request-header"
+            ],
+            "authHeaders": [
+              {
+                "operation": "Set",
+                "name": "example-resource",
+                "value": "example-value",
+                "valueRef": {
+                  "secretRef": {
+                    "secretId": "example-secret-01",
+                    "secretKey": "<redacted>",
+                    "format": "example-format"
+                  },
+                  "managedIdentityRef": {
+                    "resource": "example-resource",
+                    "format": "example-format",
+                    "type": "SystemAssigned",
+                    "identityResourceId": "example-identity-resource-01"
+                  }
+                }
+              }
+            ],
+            "timeoutMs": 1,
+            "routingMode": "Default"
+          }
+        }
+      ],
+      "tds": {
+        "defaultAction": "Allow",
+        "credentials": [
+          {
+            "name": "example-resource",
+            "kind": "SqlPassword",
+            "username": "example-user",
+            "secretRef": {
+              "secretId": "example-secret-01",
+              "secretKey": "<redacted>",
+              "format": "example-format"
+            },
+            "secret": "<redacted>"
+          }
+        ],
+        "rules": [
+          {
+            "name": "example-resource",
+            "match": {
+              "host": "example-host",
+              "databases": [
+                "example-database"
+              ]
+            },
+            "action": {
+              "type": "Allow",
+              "credential": "example-credential"
+            },
+            "hookRef": {
+              "endpoint": "example-endpoint",
+              "failBehavior": "Deny",
+              "requestHeaders": [
+                "example-request-header"
+              ],
+              "authHeaders": [
+                {
+                  "operation": "Set",
+                  "name": "example-resource",
+                  "value": "example-value",
+                  "valueRef": {
+                    "secretRef": {
+                      "secretId": "example-secret-01",
+                      "secretKey": "<redacted>",
+                      "format": "example-format"
+                    },
+                    "managedIdentityRef": {
+                      "resource": "example-resource",
+                      "format": "example-format",
+                      "type": "SystemAssigned",
+                      "identityResourceId": "example-identity-resource-01"
+                    }
+                  }
+                }
+              ],
+              "timeoutMs": 1,
+              "routingMode": "Default"
+            }
+          }
+        ]
+      },
+      "transportRules": {
+        "defaultAction": "Allow",
+        "rules": [
+          {
+            "action": "Allow",
+            "protocol": "Tcp",
+            "destination": "example-destination",
+            "port": 1
+          }
+        ]
+      },
+      "trafficInspection": "Legacy",
+      "enforcementMode": "Enforced",
+      "validationWarnings": [
+        {
+          "code": "example-code",
+          "message": "example-message"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "http": {
+          "defaultAction": "Allow",
+          "hostRules": [
+            {
+              "pattern": "example-pattern",
+              "action": "Allow"
+            }
+          ],
+          "rules": [
+            {
+              "name": "example-resource",
+              "match": {
+                "host": "example-host",
+                "path": "/workspace/example.txt",
+                "methods": [
+                  "example-method"
+                ],
+                "scheme": "http",
+                "normalizePath": true
+              },
+              "action": {
+                "type": "Allow",
+                "headers": [
+                  {
+                    "operation": "Set",
+                    "name": "example-resource",
+                    "value": "example-value",
+                    "valueRef": {
+                      "secretRef": {
+                        "secretId": "example-secret-01",
+                        "secretKey": "<redacted>",
+                        "format": "example-format"
+                      },
+                      "managedIdentityRef": {
+                        "resource": "example-resource",
+                        "format": "example-format",
+                        "type": "SystemAssigned",
+                        "identityResourceId": "example-identity-resource-01"
+                      }
+                    }
+                  }
+                ],
+                "scheme": "example-scheme",
+                "host": "example-host",
+                "path": "/workspace/example.txt",
+                "routingMode": "Default",
+                "forward": "default",
+                "forwardProxy": {
+                  "url": "https://example.com/resource",
+                  "ca": "example-ca"
+                }
+              },
+              "proxyActions": [
+                "example-proxy-action"
+              ],
+              "source": "example-source",
+              "hookRef": {
+                "endpoint": "example-endpoint",
+                "failBehavior": "Deny",
+                "requestHeaders": [
+                  "example-request-header"
+                ],
+                "authHeaders": [
+                  {
+                    "operation": "Set",
+                    "name": "example-resource",
+                    "value": "example-value",
+                    "valueRef": {
+                      "secretRef": {
+                        "secretId": "example-secret-01",
+                        "secretKey": "<redacted>",
+                        "format": "example-format"
+                      },
+                      "managedIdentityRef": {
+                        "resource": "example-resource",
+                        "format": "example-format",
+                        "type": "SystemAssigned",
+                        "identityResourceId": "example-identity-resource-01"
+                      }
+                    }
+                  }
+                ],
+                "timeoutMs": 1,
+                "routingMode": "Default"
+              }
+            }
+          ],
+          "trafficInspection": "Legacy",
+          "enforcementMode": "Enforced",
+          "defaultForward": {
+            "url": "https://example.com/resource",
+            "ca": "example-ca"
+          }
+        },
+        "defaultAction": "Allow",
+        "hostRules": [
+          {
+            "pattern": "example-pattern",
+            "action": "Allow"
+          }
+        ],
+        "rules": [
+          {
+            "name": "example-resource",
+            "match": {
+              "host": "example-host",
+              "path": "/workspace/example.txt",
+              "methods": [
+                "example-method"
+              ],
+              "scheme": "http",
+              "normalizePath": true
+            },
+            "action": {
+              "type": "Allow",
+              "headers": [
+                {
+                  "operation": "Set",
+                  "name": "example-resource",
+                  "value": "example-value",
+                  "valueRef": {
+                    "secretRef": {
+                      "secretId": "example-secret-01",
+                      "secretKey": "<redacted>",
+                      "format": "example-format"
+                    },
+                    "managedIdentityRef": {
+                      "resource": "example-resource",
+                      "format": "example-format",
+                      "type": "SystemAssigned",
+                      "identityResourceId": "example-identity-resource-01"
+                    }
+                  }
+                }
+              ],
+              "scheme": "example-scheme",
+              "host": "example-host",
+              "path": "/workspace/example.txt",
+              "routingMode": "Default",
+              "forward": "default",
+              "forwardProxy": {
+                "url": "https://example.com/resource",
+                "ca": "example-ca"
+              }
+            },
+            "proxyActions": [
+              "example-proxy-action"
+            ],
+            "source": "example-source",
+            "hookRef": {
+              "endpoint": "example-endpoint",
+              "failBehavior": "Deny",
+              "requestHeaders": [
+                "example-request-header"
+              ],
+              "authHeaders": [
+                {
+                  "operation": "Set",
+                  "name": "example-resource",
+                  "value": "example-value",
+                  "valueRef": {
+                    "secretRef": {
+                      "secretId": "example-secret-01",
+                      "secretKey": "<redacted>",
+                      "format": "example-format"
+                    },
+                    "managedIdentityRef": {
+                      "resource": "example-resource",
+                      "format": "example-format",
+                      "type": "SystemAssigned",
+                      "identityResourceId": "example-identity-resource-01"
+                    }
+                  }
+                }
+              ],
+              "timeoutMs": 1,
+              "routingMode": "Default"
+            }
+          }
+        ],
+        "tds": {
+          "defaultAction": "Allow",
+          "credentials": [
+            {
+              "name": "example-resource",
+              "kind": "SqlPassword",
+              "username": "example-user",
+              "secretRef": {
+                "secretId": "example-secret-01",
+                "secretKey": "<redacted>",
+                "format": "example-format"
+              },
+              "secret": "<redacted>"
+            }
+          ],
+          "rules": [
+            {
+              "name": "example-resource",
+              "match": {
+                "host": "example-host",
+                "databases": [
+                  "example-database"
+                ]
+              },
+              "action": {
+                "type": "Allow",
+                "credential": "example-credential"
+              },
+              "hookRef": {
+                "endpoint": "example-endpoint",
+                "failBehavior": "Deny",
+                "requestHeaders": [
+                  "example-request-header"
+                ],
+                "authHeaders": [
+                  {
+                    "operation": "Set",
+                    "name": "example-resource",
+                    "value": "example-value",
+                    "valueRef": {
+                      "secretRef": {
+                        "secretId": "example-secret-01",
+                        "secretKey": "<redacted>",
+                        "format": "example-format"
+                      },
+                      "managedIdentityRef": {
+                        "resource": "example-resource",
+                        "format": "example-format",
+                        "type": "SystemAssigned",
+                        "identityResourceId": "example-identity-resource-01"
+                      }
+                    }
+                  }
+                ],
+                "timeoutMs": 1,
+                "routingMode": "Default"
+              }
+            }
+          ]
+        },
+        "transportRules": {
+          "defaultAction": "Allow",
+          "rules": [
+            {
+              "action": "Allow",
+              "protocol": "Tcp",
+              "destination": "example-destination",
+              "port": 1
+            }
+          ]
+        },
+        "trafficInspection": "Legacy",
+        "enforcementMode": "Enforced",
+        "validationWarnings": [
+          {
+            "code": "example-code",
+            "message": "example-message"
+          }
+        ]
+      }
+    },
+    "400": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "500": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    }
+  }
+}

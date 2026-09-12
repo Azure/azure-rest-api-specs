@@ -1,0 +1,8 @@
+- tool: TypeSpecValidation
+  reason: Python and JavaScript SDK generation are intentionally excluded until their package namespaces are approved and reserved.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+  paths:
+    - tspconfig.yaml

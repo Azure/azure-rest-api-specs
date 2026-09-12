@@ -1,0 +1,61 @@
+{
+  "title": "Post Sandbox File example",
+  "operationId": "SandboxFilesOperations_PostSandboxFile",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource-01",
+    "path": "/workspace/example.txt",
+    "createDirs": true,
+    "mode": 1,
+    "containerName": "example-container",
+    "content": "SGVsbG8="
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "success": true,
+        "error": "example-error",
+        "bytesWritten": 1
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "413": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    }
+  }
+}

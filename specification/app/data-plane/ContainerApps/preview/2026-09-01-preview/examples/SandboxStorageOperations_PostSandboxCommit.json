@@ -1,0 +1,90 @@
+{
+  "title": "Post Sandbox Commit example",
+  "operationId": "SandboxStorageOperations_PostSandboxCommit",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource-01",
+    "body": {
+      "labels": {
+        "exampleKey": "example-example-value"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "diskImage": {
+          "id": "example-resource-01",
+          "name": "example-resource",
+          "labels": {
+            "exampleKey": "example-example-value"
+          },
+          "image": {
+            "base": "example-base",
+            "entrypoint": [
+              "example-entrypoint"
+            ],
+            "cmd": [
+              "example-cmd"
+            ]
+          },
+          "status": {
+            "state": "Succeeded",
+            "errorMessage": "example-error-message",
+            "createdAt": "2026-08-15T10:00:00Z",
+            "updatedAt": "2026-08-15T10:00:00Z"
+          },
+          "sizeInMB": "example-size-in-mb"
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "429": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "500": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Get a public disk image",
+  "operationId": "DiskImagesOperations_GetDiskImagePublic",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "name": "azurelinux-3.0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "azurelinux-3.0",
+        "status": {
+          "state": "Available",
+          "createdAt": "2026-07-01T08:00:00Z",
+          "updatedAt": "2026-08-01T08:00:00Z"
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "title": "Unauthorized",
+        "status": 401,
+        "detail": "The request does not contain valid authentication credentials."
+      }
+    },
+    "404": {
+      "body": {
+        "title": "Not Found",
+        "status": 404,
+        "detail": "The requested public disk image was not found."
+      }
+    },
+    "500": {
+      "body": {
+        "title": "Internal Server Error",
+        "status": 500,
+        "detail": "An unexpected error occurred while retrieving the public disk image."
+      }
+    }
+  }
+}

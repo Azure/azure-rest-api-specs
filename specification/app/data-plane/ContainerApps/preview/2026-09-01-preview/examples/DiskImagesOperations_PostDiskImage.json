@@ -1,0 +1,74 @@
+{
+  "title": "Create a disk image from a container registry",
+  "operationId": "DiskImagesOperations_PostDiskImage",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "body": {
+      "source": {
+        "kind": "registry",
+        "imageUrl": "mcr.microsoft.com/azurelinux/base/core:3.0"
+      },
+      "name": "development-image",
+      "labels": {
+        "environment": "development",
+        "team": "platform"
+      },
+      "vnetConnectionName": "example-vnet-connection"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "disk-image-01",
+        "name": "development-image",
+        "labels": {
+          "environment": "development",
+          "team": "platform"
+        },
+        "image": {
+          "base": "mcr.microsoft.com/azurelinux/base/core:3.0",
+          "entrypoint": [
+            "/bin/sh"
+          ]
+        },
+        "status": {
+          "state": "Succeeded",
+          "createdAt": "2026-08-15T10:00:00Z",
+          "updatedAt": "2026-08-15T10:05:00Z"
+        },
+        "sizeInMB": "512"
+      }
+    },
+    "400": {
+      "body": {
+        "title": "Bad Request",
+        "status": 400,
+        "detail": "The disk image request is invalid."
+      }
+    },
+    "401": {
+      "body": {
+        "title": "Unauthorized",
+        "status": 401,
+        "detail": "The request does not contain valid authentication credentials."
+      }
+    },
+    "429": {
+      "body": {
+        "title": "Too Many Requests",
+        "status": 429,
+        "detail": "The disk image creation rate limit has been exceeded."
+      }
+    },
+    "500": {
+      "body": {
+        "title": "Internal Server Error",
+        "status": 500,
+        "detail": "An unexpected error occurred while creating the disk image."
+      }
+    }
+  }
+}

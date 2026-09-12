@@ -1,0 +1,57 @@
+{
+  "title": "List disk images in a sandbox group",
+  "operationId": "DiskImagesOperations_ListDiskImages",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "Page": 1,
+    "PageSize": 20,
+    "labels": "environment=development,team=platform"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "id": "disk-image-01",
+          "name": "development-image",
+          "labels": {
+            "environment": "development",
+            "team": "platform"
+          },
+          "image": {
+            "base": "mcr.microsoft.com/azurelinux/base/core:3.0",
+            "entrypoint": [
+              "/bin/sh"
+            ],
+            "cmd": [
+              "-c",
+              "echo ready"
+            ]
+          },
+          "status": {
+            "state": "Succeeded",
+            "createdAt": "2026-08-15T10:00:00Z",
+            "updatedAt": "2026-08-15T10:05:00Z"
+          },
+          "sizeInMB": "512"
+        }
+      ]
+    },
+    "401": {
+      "body": {
+        "title": "Unauthorized",
+        "status": 401,
+        "detail": "The request does not contain valid authentication credentials."
+      }
+    },
+    "500": {
+      "body": {
+        "title": "Internal Server Error",
+        "status": 500,
+        "detail": "An unexpected error occurred while listing disk images."
+      }
+    }
+  }
+}

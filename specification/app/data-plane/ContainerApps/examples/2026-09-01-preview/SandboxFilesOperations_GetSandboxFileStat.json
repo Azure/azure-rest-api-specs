@@ -1,0 +1,54 @@
+{
+  "title": "Get Sandbox File Stat example",
+  "operationId": "SandboxFilesOperations_GetSandboxFileStat",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource-01",
+    "path": "/workspace/example.txt",
+    "containerName": "example-container"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "example-resource",
+        "path": "/workspace/example.txt",
+        "size": 1,
+        "mode": 1,
+        "isDir": true,
+        "isSymlink": true,
+        "symlinkTarget": "example-symlink-target",
+        "modifiedTime": 1
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    }
+  }
+}
