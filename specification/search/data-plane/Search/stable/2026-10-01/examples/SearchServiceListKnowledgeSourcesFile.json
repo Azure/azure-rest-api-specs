@@ -1,0 +1,64 @@
+{
+  "operationId": "KnowledgeSources_List",
+  "title": "SearchServiceListKnowledgeSourcesFile",
+  "parameters": {
+    "endpoint": "https://typespecstableexampleservice.search.windows.net",
+    "api-version": "2026-10-01",
+    "search": null,
+    "pageSize": null,
+    "searchType": null,
+    "Accept": "application/json;odata.metadata=minimal",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "@odata.etag": "0x1234568AE7E58A1",
+            "name": "ks-stable-test",
+            "kind": "file",
+            "description": "Description of the File knowledge source.",
+            "fileParameters": {
+              "ingestionParameters": {
+                "ingestionPermissionOptions": [],
+                "contentExtractionMode": "standard",
+                "embeddingModel": {
+                  "kind": "azureOpenAI",
+                  "azureOpenAIParameters": {
+                    "resourceUri": "https://test-sample.openai.azure.com",
+                    "deploymentId": "model",
+                    "apiKey": "<redacted>",
+                    "modelName": "text-embedding-3-large"
+                  }
+                },
+                "chatCompletionModel": {
+                  "kind": "azureOpenAI",
+                  "azureOpenAIParameters": {
+                    "resourceUri": "https://test-sample.openai.azure.com",
+                    "deploymentId": "myDeployment",
+                    "apiKey": "<redacted>",
+                    "modelName": "gpt-5-mini"
+                  }
+                },
+                "aiServices": {
+                  "uri": "https://my-ai-service.azure.com/",
+                  "apiKey": "<redacted>"
+                }
+              },
+              "createdResources": {
+                "index": "ks-stable-test-index"
+              }
+            },
+            "corsOptions": {
+              "allowedOrigins": [
+                "https://myapp.example.com"
+              ],
+              "maxAgeInSeconds": 300
+            }
+          }
+        ]
+      }
+    }
+  }
+}
