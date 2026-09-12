@@ -916,6 +916,9 @@
           "Agents_Get": {
             "$ref": "./examples/Agents_Get.json"
           },
+          "Agents_Get_FullNetworkConfiguration": {
+            "$ref": "./examples/Agents_Get_FullNetworkConfiguration.json"
+          },
           "Agents_Get_Vnet": {
             "$ref": "./examples/Agents_Get_Vnet.json"
           },
@@ -992,6 +995,9 @@
         "x-ms-examples": {
           "Agents_CreateOrUpdate": {
             "$ref": "./examples/Agents_CreateOrUpdate.json"
+          },
+          "Agents_CreateOrUpdate_FullNetworkConfiguration": {
+            "$ref": "./examples/Agents_CreateOrUpdate_FullNetworkConfiguration.json"
           },
           "Agents_CreateOrUpdate_Minimum": {
             "$ref": "./examples/Agents_CreateOrUpdate_Minimum.json"
@@ -1074,8 +1080,14 @@
           "Agents_Update_AttachSubnet": {
             "$ref": "./examples/Agents_Update_AttachSubnet.json"
           },
+          "Agents_Update_ClearNetworkOverrides": {
+            "$ref": "./examples/Agents_Update_ClearNetworkOverrides.json"
+          },
           "Agents_Update_DetachSubnet": {
             "$ref": "./examples/Agents_Update_DetachSubnet.json"
+          },
+          "Agents_Update_NetworkSettings": {
+            "$ref": "./examples/Agents_Update_NetworkSettings.json"
           },
           "Agents_Update_PreserveNetworkConfiguration": {
             "$ref": "./examples/Agents_Update_PreserveNetworkConfiguration.json"
@@ -2009,6 +2021,14 @@
           "description": "The endpoint of the Agent",
           "readOnly": true
         },
+        "outboundIpAddresses": {
+          "type": "array",
+          "description": "Outbound IP addresses reported for the Agent's provisioned networking resources.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "runningState": {
           "type": "string",
           "description": "The running state of the Agent",
@@ -2778,6 +2798,13 @@
         }
       }
     },
+    "SandboxAllowedHost": {
+      "type": "string",
+      "description": "A DNS hostname or a leading wildcard hostname pattern allowed on the managed network path.",
+      "minLength": 1,
+      "maxLength": 253,
+      "pattern": "^(\\*\\.(?=[^.]+\\.))?[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$"
+    },
     "SandboxConfiguration": {
       "type": "object",
       "description": "Desired configuration for the agent's sandbox.",
@@ -2786,6 +2813,15 @@
           "$ref": "#/definitions/SandboxEgressConfiguration",
           "description": "Sandbox egress configuration. In PATCH, omission preserves egress and null clears it.\nClearing egress is invalid while a subnet remains configured.",
           "x-nullable": true
+        },
+        "packages": {
+          "type": "array",
+          "description": "Packages to preinstall in the sandbox. In PATCH, omission preserves the package list.\nA supplied array replaces the entire list; null clears it. An empty array selects no packages.\nEach supplied package must include its name and package manager.",
+          "maxItems": 200,
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/SandboxPackageSpec"
+          }
         }
       }
     },
@@ -2801,6 +2837,41 @@
         "vnetConfiguration": {
           "$ref": "#/definitions/SandboxVnetConfiguration",
           "description": "DNS configuration for AzureVNet egress mode.\nIn PATCH, omission preserves the configuration, null clears it, and a supplied object merges its members.",
+          "x-nullable": true
+        },
+        "allowHttpMcpServerNetworkAccess": {
+          "type": "boolean",
+          "description": "Whether remote HTTP MCP servers can use the managed network path.\nIn PATCH, omission preserves the setting and null clears it.",
+          "x-nullable": true
+        },
+        "allowedHosts": {
+          "type": "array",
+          "description": "Additional hostnames allowed on the managed network path.\nEntries are DNS hostnames or leading wildcard patterns such as '*.example.com'; a bare '*' is invalid.\nEach entry has at most 253 characters and each DNS label at most 63 characters.\nWildcard patterns must contain at least two labels after '*.'.\nIn PATCH, omission preserves the list, a supplied array replaces it, and null clears it.",
+          "maxItems": 100,
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/SandboxAllowedHost"
+          }
+        },
+        "allowedRegistries": {
+          "type": "array",
+          "description": "Package registry identifiers allowed on the managed network path.\nSupported identifiers are 'pypi', 'npmjs', 'nuget-org', and 'ubuntu', matched without regard to case.\nIn PATCH, omission preserves the list, a supplied array replaces it, and null clears it.",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedCodeRepositories": {
+          "type": "array",
+          "description": "Code repository provider identifiers allowed on the managed network path.\nSupported identifiers are 'Github', 'GithubEnterprise', 'AzureDevOps', and 'GitLab', matched case-sensitively.\nIn PATCH, omission preserves the list, a supplied array replaces it, and null clears it.",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "httpProxy": {
+          "$ref": "#/definitions/SandboxHttpProxyConfiguration",
+          "description": "Forward-proxy configuration for sandbox outbound requests.\nUsed only when forward-proxy support is enabled for the Agent and the egress mode is AzureVNet.\nSupplying this configuration does not enable forward-proxy support.\nIn PATCH, omission preserves the configuration, null clears it, and a supplied object merges its members.\nThe resulting proxy configuration must have at least one nonempty endpoint.",
           "x-nullable": true
         }
       }
@@ -2834,6 +2905,89 @@
           }
         ]
       }
+    },
+    "SandboxHttpProxyConfiguration": {
+      "type": "object",
+      "description": "Forward-proxy endpoints and additional destinations that bypass the proxy.",
+      "properties": {
+        "httpUrl": {
+          "type": "string",
+          "description": "Proxy endpoint for HTTP destinations. Nonempty values must be an absolute http:// origin with a host.\nCredentials, paths other than '/', query strings, fragments, and ports 0, 80, and 443 are not supported.\nThis endpoint applies only to HTTP destinations; there is no fallback to httpsUrl.\nAn empty value leaves this endpoint unconfigured when httpsUrl is configured.\nIn PATCH, omission preserves the endpoint and null clears it.",
+          "x-nullable": true
+        },
+        "httpsUrl": {
+          "type": "string",
+          "description": "Proxy endpoint for HTTPS destinations. The proxy URL itself must use http:// for CONNECT tunneling.\nNonempty values must be an origin with a host and no credentials, path other than '/', query, or fragment.\nPorts 0, 80, and 443 are not supported. There is no fallback to httpUrl.\nAn empty value leaves this endpoint unconfigured when httpUrl is configured.\nIn PATCH, omission preserves the endpoint and null clears it.",
+          "x-nullable": true
+        },
+        "noProxy": {
+          "type": "array",
+          "description": "Additional destinations that bypass the forward proxy.\nEntries can be hostnames, leading-dot or '*.' suffix patterns, IP addresses, or CIDR blocks.\nHostnames and IP addresses can include a port from 1 through 65535; CIDR entries cannot include a port.\nEmpty entries and a bare '*' are invalid.\nIn PATCH, omission preserves the list, a supplied array replaces it, and null clears it.",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SandboxPackageManager": {
+      "type": "string",
+      "description": "Supported package managers for sandbox packages.",
+      "enum": [
+        "pip",
+        "npm",
+        "nuget"
+      ],
+      "x-ms-enum": {
+        "name": "SandboxPackageManager",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pip",
+            "value": "pip",
+            "description": "Python packages installed with pip."
+          },
+          {
+            "name": "Npm",
+            "value": "npm",
+            "description": "JavaScript packages installed with npm."
+          },
+          {
+            "name": "Nuget",
+            "value": "nuget",
+            "description": ".NET tools installed from NuGet."
+          }
+        ]
+      }
+    },
+    "SandboxPackageSpec": {
+      "type": "object",
+      "description": "A package to preinstall in the sandbox. Package arrays are replaced as a whole.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Package name, optionally including a scope or namespace prefix.",
+          "minLength": 1,
+          "maxLength": 214,
+          "pattern": "^@?[A-Za-z0-9][A-Za-z0-9._-]*(/[A-Za-z0-9][A-Za-z0-9._-]*)?$"
+        },
+        "version": {
+          "type": "string",
+          "description": "Optional package version or version constraint. Null leaves the version unspecified.",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9._+\\-~^<>=,*\\[\\]()]+$",
+          "x-nullable": true
+        },
+        "packageManager": {
+          "$ref": "#/definitions/SandboxPackageManager",
+          "description": "Package manager used to install the package. Values are case-sensitive."
+        }
+      },
+      "required": [
+        "name",
+        "packageManager"
+      ]
     },
     "SandboxVnetConfiguration": {
       "type": "object",

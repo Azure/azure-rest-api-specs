@@ -79,6 +79,10 @@ model AgentProperties {
   @visibility(Lifecycle.Read)
   agentEndpoint?: string;
 
+  /** Outbound IP addresses reported for the Agent's provisioned networking resources. */
+  @visibility(Lifecycle.Read)
+  outboundIpAddresses?: string[];
+
   /** The running state of the Agent */
   @visibility(Lifecycle.Read)
   runningState?: string;
@@ -155,6 +159,15 @@ model SandboxConfiguration {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns null egress and distinguishes null from omission in PATCH."
   egress?: SandboxEgressConfiguration | null;
+
+  /**
+   * Packages to preinstall in the sandbox. In PATCH, omission preserves the package list.
+   * A supplied array replaces the entire list; null clears it. An empty array selects no packages.
+   * Each supplied package must include its name and package manager.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null package list and distinguishes null from omission in PATCH."
+  @maxItems(200)
+  packages?: SandboxPackageSpec[] | null;
 }
 
 /** Desired outbound network configuration for the agent's sandbox. */
@@ -174,7 +187,57 @@ model SandboxEgressConfiguration {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null sandbox VNet configuration and distinguishes null from omission in PATCH."
   vnetConfiguration?: SandboxVnetConfiguration | null;
+
+  /**
+   * Whether remote HTTP MCP servers can use the managed network path.
+   * In PATCH, omission preserves the setting and null clears it.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null HTTP MCP access setting and distinguishes null from omission in PATCH."
+  allowHttpMcpServerNetworkAccess?: boolean | null;
+
+  /**
+   * Additional hostnames allowed on the managed network path.
+   * Entries are DNS hostnames or leading wildcard patterns such as '*.example.com'; a bare '*' is invalid.
+   * Each entry has at most 253 characters and each DNS label at most 63 characters.
+   * Wildcard patterns must contain at least two labels after '*.'.
+   * In PATCH, omission preserves the list, a supplied array replaces it, and null clears it.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null allowed-host list and distinguishes null from omission in PATCH."
+  @maxItems(100)
+  allowedHosts?: SandboxAllowedHost[] | null;
+
+  /**
+   * Package registry identifiers allowed on the managed network path.
+   * Supported identifiers are 'pypi', 'npmjs', 'nuget-org', and 'ubuntu', matched without regard to case.
+   * In PATCH, omission preserves the list, a supplied array replaces it, and null clears it.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null registry list and distinguishes null from omission in PATCH."
+  allowedRegistries?: string[] | null;
+
+  /**
+   * Code repository provider identifiers allowed on the managed network path.
+   * Supported identifiers are 'Github', 'GithubEnterprise', 'AzureDevOps', and 'GitLab', matched case-sensitively.
+   * In PATCH, omission preserves the list, a supplied array replaces it, and null clears it.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null code-repository list and distinguishes null from omission in PATCH."
+  allowedCodeRepositories?: string[] | null;
+
+  /**
+   * Forward-proxy configuration for sandbox outbound requests.
+   * Used only when forward-proxy support is enabled for the Agent and the egress mode is AzureVNet.
+   * Supplying this configuration does not enable forward-proxy support.
+   * In PATCH, omission preserves the configuration, null clears it, and a supplied object merges its members.
+   * The resulting proxy configuration must have at least one nonempty endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null proxy configuration and distinguishes null from omission in PATCH."
+  httpProxy?: SandboxHttpProxyConfiguration | null;
 }
+
+/** A DNS hostname or a leading wildcard hostname pattern allowed on the managed network path. */
+@minLength(1)
+@maxLength(253)
+@pattern("^(\\*\\.(?=[^.]+\\.))?[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$")
+scalar SandboxAllowedHost extends string;
 
 /** DNS settings for the sandbox's virtual network integration. */
 model SandboxVnetConfiguration {
@@ -184,6 +247,74 @@ model SandboxVnetConfiguration {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null private-DNS setting and distinguishes null from omission in PATCH."
   usePrivateDnsResolution?: boolean | null;
+}
+
+/** Forward-proxy endpoints and additional destinations that bypass the proxy. */
+model SandboxHttpProxyConfiguration {
+  /**
+   * Proxy endpoint for HTTP destinations. Nonempty values must be an absolute http:// origin with a host.
+   * Credentials, paths other than '/', query strings, fragments, and ports 0, 80, and 443 are not supported.
+   * This endpoint applies only to HTTP destinations; there is no fallback to httpsUrl.
+   * An empty value leaves this endpoint unconfigured when httpsUrl is configured.
+   * In PATCH, omission preserves the endpoint and null clears it.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null HTTP proxy endpoint and distinguishes null from omission in PATCH."
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "The existing wire contract uses httpUrl."
+  httpUrl?: string | null;
+
+  /**
+   * Proxy endpoint for HTTPS destinations. The proxy URL itself must use http:// for CONNECT tunneling.
+   * Nonempty values must be an origin with a host and no credentials, path other than '/', query, or fragment.
+   * Ports 0, 80, and 443 are not supported. There is no fallback to httpUrl.
+   * An empty value leaves this endpoint unconfigured when httpUrl is configured.
+   * In PATCH, omission preserves the endpoint and null clears it.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null HTTPS proxy endpoint and distinguishes null from omission in PATCH."
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "The existing wire contract uses httpsUrl."
+  httpsUrl?: string | null;
+
+  /**
+   * Additional destinations that bypass the forward proxy.
+   * Entries can be hostnames, leading-dot or '*.' suffix patterns, IP addresses, or CIDR blocks.
+   * Hostnames and IP addresses can include a port from 1 through 65535; CIDR entries cannot include a port.
+   * Empty entries and a bare '*' are invalid.
+   * In PATCH, omission preserves the list, a supplied array replaces it, and null clears it.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null proxy-bypass list and distinguishes null from omission in PATCH."
+  noProxy?: string[] | null;
+}
+
+/** A package to preinstall in the sandbox. Package arrays are replaced as a whole. */
+model SandboxPackageSpec {
+  /** Package name, optionally including a scope or namespace prefix. */
+  @minLength(1)
+  @maxLength(214)
+  @pattern("^@?[A-Za-z0-9][A-Za-z0-9._-]*(/[A-Za-z0-9][A-Za-z0-9._-]*)?$")
+  name: string;
+
+  /** Optional package version or version constraint. Null leaves the version unspecified. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null package version."
+  @minLength(1)
+  @maxLength(64)
+  @pattern("^[A-Za-z0-9._+\\-~^<>=,*\\[\\]()]+$")
+  version?: string | null;
+
+  /** Package manager used to install the package. Values are case-sensitive. */
+  packageManager: SandboxPackageManager;
+}
+
+/** Supported package managers for sandbox packages. */
+union SandboxPackageManager {
+  string,
+
+  /** Python packages installed with pip. */
+  Pip: "pip",
+
+  /** JavaScript packages installed with npm. */
+  Npm: "npm",
+
+  /** .NET tools installed from NuGet. */
+  Nuget: "nuget",
 }
 
 /** Supported modes for outbound network access from the agent's sandbox. */

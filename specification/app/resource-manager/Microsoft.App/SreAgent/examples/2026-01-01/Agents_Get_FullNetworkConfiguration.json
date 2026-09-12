@@ -1,0 +1,82 @@
+{
+  "title": "Agents_Get_FullNetworkConfiguration",
+  "operationId": "Agents_Get",
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "agentName": "testAgent",
+    "api-version": "2026-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/testAgent",
+        "name": "testAgent",
+        "type": "Microsoft.App/agents",
+        "location": "eastus",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "outboundIpAddresses": [
+            "192.0.2.10"
+          ],
+          "vnetConfiguration": {
+            "subnetResourceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.Network/virtualNetworks/agentVnet/subnets/agentSubnet"
+          },
+          "sandboxConfiguration": {
+            "egress": {
+              "mode": "AzureVNet",
+              "vnetConfiguration": {
+                "usePrivateDnsResolution": true
+              },
+              "allowHttpMcpServerNetworkAccess": false,
+              "allowedHosts": [
+                "api.contoso.com",
+                "*.example.com"
+              ],
+              "allowedRegistries": [
+                "pypi",
+                "npmjs",
+                "nuget-org",
+                "ubuntu"
+              ],
+              "allowedCodeRepositories": [
+                "Github",
+                "GithubEnterprise",
+                "AzureDevOps",
+                "GitLab"
+              ],
+              "httpProxy": {
+                "httpUrl": "http://proxy.contoso.internal:3128",
+                "httpsUrl": "http://proxy.contoso.internal:3128",
+                "noProxy": [
+                  ".contoso.internal",
+                  "10.0.0.0/8"
+                ]
+              }
+            },
+            "packages": [
+              {
+                "name": "numpy",
+                "version": "1.26.0",
+                "packageManager": "pip"
+              },
+              {
+                "name": "lodash",
+                "version": null,
+                "packageManager": "npm"
+              },
+              {
+                "name": "dotnet-ef",
+                "version": "9.0.0",
+                "packageManager": "nuget"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
