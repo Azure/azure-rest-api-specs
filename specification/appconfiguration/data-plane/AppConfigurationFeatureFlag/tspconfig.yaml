@@ -1,0 +1,49 @@
+parameters:
+  "service-dir":
+    default: "sdk/appconfiguration"
+  "dependencies":
+    default: ""
+options:
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-appconfiguration-featureflag"
+    generation-subdir: "_generated"
+    namespace: "azure.appconfiguration.featureflag"
+    package-name: "azure-appconfiguration-featureflag"
+    package-pprint-name: "App Configuration Feature Flag"
+    package-mode: dataplane
+    flavor: azure
+    generate-test: true
+    generate-sample: true
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Data.AppConfiguration.FeatureFlag
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/app-configuration-feature-flag"
+    generate-metadata: false
+    is-modular-library: true
+    package-details:
+      name: "@azure/app-configuration-feature-flag"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-data-appconfiguration-featureflag"
+    namespace: com.azure.data.appconfiguration.featureflag
+    models-subpackage: "implementation.models"
+    flavor: azure
+    generate-tests: false
+    generate-samples: false
+  "@azure-tools/typespec-go":
+    containing-module: "github.com/Azure/azure-sdk-for-go/sdk/data/azappconfigfeatureflag"
+    service-dir: "sdk/data"
+    emitter-output-dir: "{output-dir}/{service-dir}/azappconfigfeatureflag/internal/generated"
+    slice-elements-byval: true
+    generate-fakes: false
+    inject-spans: false
+    file-prefix: "zz_"
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - specification/appconfiguration/data-plane/AppConfiguration
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

@@ -22,7 +22,59 @@ namespace SdkCustomizations;
 @@access(SnapshotUpdateParameters, Access.public, "python");
 @@clientName(Azure.Core.Foundations.Error, "CommonError", "python");
 
-//
+// Hide feature-flag operations from the config-only package.
+@@scope(getFeatureFlags, "!(csharp, python, java, javascript, go)");
+@@scope(checkFeatureFlags, "!(csharp, python, java, javascript, go)");
+@@scope(getFeatureFlag, "!(csharp, python, java, javascript, go)");
+@@scope(checkFeatureFlag, "!(csharp, python, java, javascript, go)");
+@@scope(putFeatureFlag, "!(csharp, python, java, javascript, go)");
+@@scope(deleteFeatureFlag, "!(csharp, python, java, javascript, go)");
+@@scope(getFeatureFlagRevisions, "!(csharp, python, java, javascript, go)");
+@@scope(checkFeatureFlagRevisions, "!(csharp, python, java, javascript, go)");
+
+// Preserve the existing AutoRest operation grouping without including feature
+// flag operations in any supported configuration SDK package.
+@@clientLocation(
+  getFeatureFlag,
+  "FeatureFlagClient",
+  "!(csharp, python, java, javascript, go)"
+);
+@@clientLocation(
+  checkFeatureFlag,
+  "FeatureFlagClient",
+  "!(csharp, python, java, javascript, go)"
+);
+@@clientLocation(
+  getFeatureFlags,
+  "FeatureFlagClient",
+  "!(csharp, python, java, javascript, go)"
+);
+@@clientLocation(
+  checkFeatureFlags,
+  "FeatureFlagClient",
+  "!(csharp, python, java, javascript, go)"
+);
+@@clientLocation(
+  putFeatureFlag,
+  "FeatureFlagClient",
+  "!(csharp, python, java, javascript, go)"
+);
+@@clientLocation(
+  deleteFeatureFlag,
+  "FeatureFlagClient",
+  "!(csharp, python, java, javascript, go)"
+);
+@@clientLocation(
+  getFeatureFlagRevisions,
+  "FeatureFlagClient",
+  "!(csharp, python, java, javascript, go)"
+);
+@@clientLocation(
+  checkFeatureFlagRevisions,
+  "FeatureFlagClient",
+  "!(csharp, python, java, javascript, go)"
+);
+
 // .NET specific customizations
 
 // Method renames
@@ -45,35 +97,9 @@ namespace SdkCustomizations;
 @@access(getSnapshot, Access.internal, "csharp");
 @@access(updateSnapshot, Access.internal, "csharp");
 
-// Access changes feature flags
-@@access(getFeatureFlag, Access.internal, "csharp");
-@@access(checkFeatureFlag, Access.internal, "csharp");
-@@access(getFeatureFlags, Access.internal, "csharp");
-@@access(checkFeatureFlags, Access.internal, "csharp");
-@@access(putFeatureFlag, Access.internal, "csharp");
-@@access(deleteFeatureFlag, Access.internal, "csharp");
-@@access(getFeatureFlagRevisions, Access.internal, "csharp");
-@@access(checkFeatureFlagRevisions, Access.internal, "csharp");
-
-// Move feature flag operations into a dedicated FeatureFlagClient (all languages)
-@@clientLocation(getFeatureFlag, "FeatureFlagClient");
-@@clientLocation(checkFeatureFlag, "FeatureFlagClient");
-@@clientLocation(getFeatureFlags, "FeatureFlagClient");
-@@clientLocation(checkFeatureFlags, "FeatureFlagClient");
-@@clientLocation(putFeatureFlag, "FeatureFlagClient");
-@@clientLocation(deleteFeatureFlag, "FeatureFlagClient");
-@@clientLocation(getFeatureFlagRevisions, "FeatureFlagClient");
-@@clientLocation(checkFeatureFlagRevisions, "FeatureFlagClient");
-
 // Alternate types for select parameters
-@@alternateType(FeatureFlagRevisionsRequestParams.select, string[], "csharp");
-@@alternateType(FeatureFlagsRequestParams.select, string[], "csharp");
 @@alternateType(KeyValuesRequestParams.select, string[], "csharp");
 @@alternateType(RevisionsRequestParams.select, string[], "csharp");
-@@alternateType(FeatureFlagFilter.parameters, Record<string>, "csharp");
-
-// Surface the feature flag etag as Azure.ETag to match ConfigurationSetting.ETag
-@@alternateType(FeatureFlag.etag, Azure.Core.eTag, "csharp");
 
 // TypeScript specific customizations
 @@clientName(Snapshot.expires, "expiresOn", "javascript");
