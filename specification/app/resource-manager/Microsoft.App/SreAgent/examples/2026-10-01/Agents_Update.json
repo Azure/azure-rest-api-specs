@@ -5,7 +5,7 @@
     "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
     "resourceGroupName": "examplerg",
     "agentName": "testAgent",
-    "api-version": "2026-01-01",
+    "api-version": "2026-10-01",
     "properties": {
       "tags": {
         "environment": "production",
@@ -38,7 +38,15 @@
           "runningState": "Running",
           "powerState": "Running",
           "agentSpaceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace",
-          "upgradeChannel": "Stable"
+          "upgradeChannel": "Stable",
+          "vnetConfiguration": {
+            "subnetResourceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.Network/virtualNetworks/agentVnet/subnets/agentSubnet"
+          },
+          "sandboxConfiguration": {
+            "egress": {
+              "mode": "AzureVNet"
+            }
+          }
         }
       }
     },

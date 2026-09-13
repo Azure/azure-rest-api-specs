@@ -22,4 +22,8 @@ enum Versions {
   /** 2026-01-01 version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_01_01: "2026-01-01",
+
+  /** 2026-10-01 version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_10_01: "2026-10-01",
 }

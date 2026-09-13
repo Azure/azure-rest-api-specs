@@ -1,9 +1,11 @@
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./commontypes.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 
@@ -59,6 +61,7 @@ model AgentPatchProperties {
    * The resulting subnet and AzureVNet egress mode must be configured together.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API distinguishes null, which clears the subnet, from omission, which preserves it."
+  @added(Versions.v2026_10_01)
   vnetConfiguration?: VnetConfiguration | null;
 
   /**
@@ -66,6 +69,7 @@ model AgentPatchProperties {
    * A supplied object merges its members with the stored configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts a null sandboxConfiguration in PATCH and preserves the stored configuration."
+  @added(Versions.v2026_10_01)
   sandboxConfiguration?: SandboxConfiguration | null;
 }
 
@@ -80,6 +84,7 @@ model AgentProperties {
   agentEndpoint?: string;
 
   /** Outbound IP addresses reported for the Agent's provisioned networking resources. */
+  @added(Versions.v2026_10_01)
   @visibility(Lifecycle.Read)
   outboundIpAddresses?: string[];
 
@@ -125,14 +130,17 @@ model AgentProperties {
    * Use PATCH for selective updates. Omitting networking settings from PUT can clear them or fail validation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts a null vnetConfiguration in create or replace requests."
+  @added(Versions.v2026_10_01)
   vnetConfiguration?: VnetConfiguration | null;
 
   /** Desired sandbox configuration. GET can return null when no configuration is stored. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The existing API accepts and returns a null sandboxConfiguration."
+  @added(Versions.v2026_10_01)
   sandboxConfiguration?: SandboxConfiguration | null;
 }
 
 /** Desired subnet configuration for the agent's sandbox. */
+@added(Versions.v2026_10_01)
 model VnetConfiguration {
   /**
    * Azure resource ID of the subnet used with AzureVNet egress mode, or null when detached.
@@ -152,6 +160,7 @@ model VnetConfiguration {
 }
 
 /** Desired configuration for the agent's sandbox. */
+@added(Versions.v2026_10_01)
 model SandboxConfiguration {
   /**
    * Sandbox egress configuration. In PATCH, omission preserves egress and null clears it.
@@ -171,6 +180,7 @@ model SandboxConfiguration {
 }
 
 /** Desired outbound network configuration for the agent's sandbox. */
+@added(Versions.v2026_10_01)
 model SandboxEgressConfiguration {
   /**
    * Sandbox egress mode. AzureVNet requires a subnet, and a configured subnet requires AzureVNet.
@@ -227,12 +237,14 @@ model SandboxEgressConfiguration {
 }
 
 /** A DNS hostname or a leading wildcard hostname pattern allowed on the managed network path. */
+@added(Versions.v2026_10_01)
 @minLength(1)
 @maxLength(253)
 @pattern("^(\\*\\.(?=[^.]+\\.))?[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$")
 scalar SandboxAllowedHost extends string;
 
 /** Forward-proxy endpoints and additional destinations that bypass the proxy. */
+@added(Versions.v2026_10_01)
 model SandboxHttpProxyConfiguration {
   /**
    * Proxy endpoint for HTTP destinations. Nonempty values must be an absolute http:// origin with a host.
@@ -268,6 +280,7 @@ model SandboxHttpProxyConfiguration {
 }
 
 /** A package to preinstall in the sandbox. Package arrays are replaced as a whole. */
+@added(Versions.v2026_10_01)
 model SandboxPackageSpec {
   /** Package name, optionally including a scope or namespace prefix. */
   @minLength(1)
@@ -287,6 +300,7 @@ model SandboxPackageSpec {
 }
 
 /** Supported package managers for sandbox packages. */
+@added(Versions.v2026_10_01)
 union SandboxPackageManager {
   string,
 
@@ -301,6 +315,7 @@ union SandboxPackageManager {
 }
 
 /** Supported modes for outbound network access from the agent's sandbox. */
+@added(Versions.v2026_10_01)
 union SandboxEgressMode {
   string,
 
