@@ -36841,32 +36841,6 @@
           ]
         }
       },
-      "BrowserAutomationTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "browser_automation"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "browser_automation"
-            ],
-            "description": "The object type, which is always 'browser_automation'."
-          },
-          "browser_automation": {
-            "$ref": "#/components/schemas/BrowserAutomationToolParameters",
-            "description": "The Browser Automation Tool parameters."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "The input definition information for a Browser Automation Tool, as used to configure an Agent."
-      },
       "BrowserAutomationToolCall": {
         "type": "object",
         "required": [
@@ -36971,31 +36945,6 @@
           }
         },
         "description": "Definition of input parameters for the Browser Automation Tool."
-      },
-      "BrowserAutomationToolboxTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "browser_automation"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "browser_automation"
-            ]
-          },
-          "browser_automation": {
-            "$ref": "#/components/schemas/BrowserAutomationToolParameters",
-            "description": "The Browser Automation Tool parameters."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ToolboxTool"
-          }
-        ],
-        "description": "A browser automation tool stored in a toolbox."
       },
       "CaptureStructuredOutputsTool": {
         "type": "object",
@@ -80952,7 +80901,6 @@
             "openapi": "#/components/schemas/OpenApiTool",
             "bing_custom_search_preview": "#/components/schemas/BingCustomSearchPreviewTool",
             "browser_automation_preview": "#/components/schemas/BrowserAutomationPreviewTool",
-            "browser_automation": "#/components/schemas/BrowserAutomationTool",
             "azure_function": "#/components/schemas/AzureFunctionTool",
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
             "a2a_preview": "#/components/schemas/A2APreviewTool",
@@ -89948,7 +89896,6 @@
             "a2a": "#/components/schemas/A2AToolboxTool",
             "a2a_preview": "#/components/schemas/A2APreviewToolboxTool",
             "browser_automation_preview": "#/components/schemas/BrowserAutomationPreviewToolboxTool",
-            "browser_automation": "#/components/schemas/BrowserAutomationToolboxTool",
             "reminder_preview": "#/components/schemas/ReminderPreviewToolboxTool",
             "work_iq_preview": "#/components/schemas/WorkIQPreviewToolboxTool",
             "fabric_iq_preview": "#/components/schemas/FabricIQPreviewToolboxTool",
@@ -89977,8 +89924,7 @@
           "toolbox_search_preview",
           "a2a",
           "shell",
-          "web_iq_preview",
-          "browser_automation"
+          "web_iq_preview"
         ],
         "description": "Supported tool types for tools stored in a toolbox."
       },
