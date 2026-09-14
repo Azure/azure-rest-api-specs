@@ -25,11 +25,6 @@ interface Weather {
    * ultraviolet (UV) index. For more information, see [Request hourly weather
    * forecast
    * data](/azure/azure-maps/how-to-request-weather-data#request-hourly-weather-forecast-data).
-   *
-   * If you are using the Gen1 S0 pricing tier, you can request hourly forecast for
-   * the next 1, 12, 24 hours (1 day), and 72 hours (3 days). If you are using Gen1
-   * S1 or Gen2 pricing tier, you can also request hourly forecast for the next 120
-   * (5 days) and 240 hours (10 days).
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("""
@@ -76,10 +71,8 @@ interface Weather {
        *   * `12` - Return hourly forecast for next 12 hours.
        *   * `24` - Return hourly forecast for next 24 hours.
        *   * `72` - Return hourly forecast for next 72 hours (3 days).
-       *   * `120` - Return hourly forecast for next 120 hours (5 days). Only available
-       * in S1 SKU.
-       *   * `240` - Return hourly forecast for next 240 hours (10 days). Only available
-       * in S1 SKU.
+       *   * `120` - Return hourly forecast for next 120 hours (5 days).
+       *   * `240` - Return hourly forecast for next 240 hours (10 days).
        */
       @query("duration")
       duration?: int32;
@@ -337,10 +330,6 @@ interface Weather {
    * such as temperature, wind, precipitation, air quality, and UV index. For more
    * information, see [Request daily weather forecast
    * data](/azure/azure-maps/how-to-request-weather-data#request-daily-weather-forecast-data).
-   *
-   *  If you are using the Gen1 S0 pricing tier, you can request daily forecast for
-   * the next 1, 5, 10, and 15 days. If you are using Gen1 S1 or Gen2 pricing tier,
-   * you can also request daily forecast for the next 25 days, and 45 days.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("""
@@ -386,8 +375,8 @@ interface Weather {
        *   * `1` - Return forecast data for the next day. Returned by default.
        *   * `5` - Return forecast data for the next 5 days.
        *   * `10` - Return forecast data for the next 10 days.
-       *   * `25` - Return forecast data for the next 25 days. Only available in S1 SKU.
-       *   * `45` - Return forecast data for the next 45 days. Only available in S1 SKU.
+       *   * `25` - Return forecast data for the next 25 days.
+       *   * `45` - Return forecast data for the next 45 days.
        */
       @query("duration")
       duration?: int32;
