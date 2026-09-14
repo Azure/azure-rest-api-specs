@@ -282,7 +282,7 @@
         "tags": [
           "ServiceGroups"
         ],
-        "description": "Get the details of the serviceGroup's ancestors.\n\nThis is a paginated POST action. When the response contains a skipToken,\nmore results are available; callers must re-POST to the same listAncestors\nURL with that skipToken value in the request body to fetch the next page.\nWhen skipToken is absent, the current page is the last page. SDKs do not\nnatively support POST-based pagination, so callers must loop manually.",
+        "description": "Get the details of the serviceGroup's ancestors.\n\nThis is a paginated POST action. When the response contains a skipToken,\nmore results are available; callers must re-POST to the same listAncestors\nURL with that skipToken value in the request body to fetch the next page.\nWhen skipToken is absent, the current page is the last page. SDKs do not\nnatively support POST-based pagination, so callers must loop manually. An\ninvalid, expired, modified, or incorrectly scoped token may return the\nInvalidSkipToken error code.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -382,7 +382,7 @@
         "tags": [
           "ServiceGroups"
         ],
-        "description": "List the members of the serviceGroup. Members are entities linked to the\nservice group via a Microsoft.Relationships resource\n(Microsoft.Relationships/serviceGroupMember for direct members, or\nMicrosoft.Relationships/contains for members included transitively via a\ncontainer). Descendant service groups are not returned by this action;\nuse listDescendants to enumerate nested service groups.\n\nThis is a paginated POST action. When the response contains a skipToken,\nmore results are available; callers must re-POST to the same listMembers\nURL with that skipToken value in the request body to fetch the next page.\nWhen skipToken is absent, the current page is the last page. SDKs do not\nnatively support POST-based pagination, so callers must loop manually.",
+        "description": "Lists all members associated with the service group, including members\ndiscovered through its service group hierarchy at any depth. The response\nincludes direct resource members, subscription and resource-group container\nmembers, and resources found by expanding those containers. Service groups\nin the hierarchy are not returned.\n\nThis is a paginated POST action. When the response contains a skipToken,\nmore results are available; callers must re-POST to the same listMembers\nURL with that skipToken value in the request body to fetch the next page.\nWhen skipToken is absent, the current page is the last page. SDKs do not\nnatively support POST-based pagination, so callers must loop manually.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -399,7 +399,7 @@
             "name": "body",
             "in": "body",
             "description": "The content of the action request",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ListMembersRequest"
             }
@@ -434,7 +434,7 @@
       "properties": {
         "skipToken": {
           "type": "string",
-          "description": "An opaque pagination token returned in the previous response's skipToken field.\nInclude this value in the request body to fetch the next page of results."
+          "description": "An opaque continuation token returned in the previous response. Pass this\nvalue unchanged to fetch the next page. Do not decode or modify it."
         }
       }
     },
@@ -512,11 +512,7 @@
       "properties": {
         "expand": {
           "$ref": "#/definitions/ListMembersExpand",
-          "description": "Controls which members are returned. Only \"allMembers\" is supported today;\nif omitted, the service defaults to \"allMembers\"."
-        },
-        "filter": {
-          "type": "string",
-          "description": "A filter expression to narrow the returned members. Reserved for a future\nAPI version; not implemented in this version. Any value provided today is\naccepted but ignored."
+          "description": "Controls which members are returned. Only \"allMembers\" is supported;\nif omitted, the service defaults to \"allMembers\"."
         },
         "skipToken": {
           "type": "string",
@@ -530,19 +526,71 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The page of service group members.",
+          "description": "Resource members found for the requested service group.",
           "items": {
             "$ref": "#/definitions/ServiceGroupMember"
           }
         },
         "skipToken": {
           "type": "string",
-          "description": "Opaque pagination token. When present, more results are available; callers\nmust re-POST to the same listMembers URL with this value in the request\nbody to fetch the next page. When absent, the current page is the last page."
+          "description": "An opaque continuation token. When present, more results are available.\nPass this value unchanged in the next listMembers request. Do not decode or\nmodify it. This property is omitted when there are no more results."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings for subscriptions that were skipped while producing partial results.",
+          "items": {
+            "$ref": "#/definitions/ListMembersWarning"
+          },
+          "x-ms-identifiers": [
+            "subscriptionId",
+            "code"
+          ]
         }
       },
       "required": [
         "value"
       ]
+    },
+    "ListMembersWarning": {
+      "type": "object",
+      "description": "A warning produced when listMembers returns partial results.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription that was skipped."
+        },
+        "code": {
+          "$ref": "#/definitions/ListMembersWarningCode",
+          "description": "The warning code. SubscriptionInaccessible indicates that the subscription\ncould not be read and was skipped while other accessible members were returned."
+        },
+        "message": {
+          "type": "string",
+          "description": "A caller-facing description of the warning."
+        }
+      },
+      "required": [
+        "subscriptionId",
+        "code",
+        "message"
+      ]
+    },
+    "ListMembersWarningCode": {
+      "type": "string",
+      "description": "The code for a listMembers partial-result warning.",
+      "enum": [
+        "SubscriptionInaccessible"
+      ],
+      "x-ms-enum": {
+        "name": "ListMembersWarningCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SubscriptionInaccessible",
+            "value": "SubscriptionInaccessible",
+            "description": "The subscription could not be read and was skipped while other accessible\nmembers were returned."
+          }
+        ]
+      }
     },
     "ParentServiceGroupProperties": {
       "type": "object",
@@ -636,15 +684,18 @@
     },
     "ServiceGroupMember": {
       "type": "object",
-      "description": "A member of a service group. Members are entities linked to the service\ngroup via a Microsoft.Relationships resource (serviceGroupMember or\ncontains). Descendant service groups are not returned as members; use\nlistDescendants for those.",
+      "description": "A resource member returned by the listMembers action.",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The fully qualified ARM ID of the member. For example,\n/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.KeyVault/vaults/{vaultName}.",
+          "description": "The fully qualified Azure Resource Manager ID of the member. For example,\n/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.KeyVault/vaults/{vaultName}.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "id"
+      ]
     },
     "ServiceGroupProperties": {
       "type": "object",

@@ -95,7 +95,9 @@ interface ServiceGroups {
    * more results are available; callers must re-POST to the same listAncestors
    * URL with that skipToken value in the request body to fetch the next page.
    * When skipToken is absent, the current page is the last page. SDKs do not
-   * natively support POST-based pagination, so callers must loop manually.
+  * natively support POST-based pagination, so callers must loop manually. An
+  * invalid, expired, modified, or incorrectly scoped token may return the
+  * InvalidSkipToken error code.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "operationId must be pinned so SDK method name stays 'ListAncestors' across the versioned reshape."
   @added(Versions.v2026_09_01_preview)
@@ -127,12 +129,11 @@ interface ServiceGroups {
   >;
 
   /**
-   * List the members of the serviceGroup. Members are entities linked to the
-   * service group via a Microsoft.Relationships resource
-   * (Microsoft.Relationships/serviceGroupMember for direct members, or
-   * Microsoft.Relationships/contains for members included transitively via a
-   * container). Descendant service groups are not returned by this action;
-   * use listDescendants to enumerate nested service groups.
+   * Lists all members associated with the service group, including members
+   * discovered through its service group hierarchy at any depth. The response
+   * includes direct resource members, subscription and resource-group container
+   * members, and resources found by expanding those containers. Service groups
+   * in the hierarchy are not returned.
    *
    * This is a paginated POST action. When the response contains a skipToken,
    * more results are available; callers must re-POST to the same listMembers
@@ -145,7 +146,8 @@ interface ServiceGroups {
     ServiceGroup,
     ListMembersRequest,
     ArmResponse<ListMembersResponse>,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    OptionalRequestBody = true
   >;
 }
 

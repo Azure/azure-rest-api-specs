@@ -124,8 +124,8 @@ model ServiceGroupCollectionResponse is Azure.Core.Page<ServiceGroup>;
 @added(Versions.v2026_09_01_preview)
 model ListAncestorsRequest {
   /**
-   * An opaque pagination token returned in the previous response's skipToken field.
-   * Include this value in the request body to fetch the next page of results.
+    * An opaque continuation token returned in the previous response. Pass this
+    * value unchanged to fetch the next page. Do not decode or modify it.
    */
   skipToken?: string;
 }
@@ -203,17 +203,10 @@ union ListMembersExpand {
 @added(Versions.v2026_09_01_preview)
 model ListMembersRequest {
   /**
-   * Controls which members are returned. Only "allMembers" is supported today;
+   * Controls which members are returned. Only "allMembers" is supported;
    * if omitted, the service defaults to "allMembers".
    */
   expand?: ListMembersExpand;
-
-  /**
-   * A filter expression to narrow the returned members. Reserved for a future
-   * API version; not implemented in this version. Any value provided today is
-   * accepted but ignored.
-   */
-  filter?: string;
 
   /**
    * An opaque pagination token returned in the previous response's skipToken field.
@@ -229,31 +222,70 @@ model ListMembersRequest {
 @added(Versions.v2026_09_01_preview)
 model ListMembersResponse {
   /**
-   * The page of service group members.
+   * Resource members found for the requested service group.
    */
   value: ServiceGroupMember[];
 
   /**
-   * Opaque pagination token. When present, more results are available; callers
-   * must re-POST to the same listMembers URL with this value in the request
-   * body to fetch the next page. When absent, the current page is the last page.
+    * An opaque continuation token. When present, more results are available.
+    * Pass this value unchanged in the next listMembers request. Do not decode or
+    * modify it. This property is omitted when there are no more results.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "skipToken is the standard Azure OData paging continuation token, not a secret. The linter flags it due to the 'Token' substring in the name; the property carries opaque pagination state and is not sensitive."
   skipToken?: string;
+
+  /**
+   * Warnings for subscriptions that were skipped while producing partial results.
+   */
+  @identifiers(#["subscriptionId", "code"])
+  warnings?: ListMembersWarning[];
 }
 
 /**
- * A member of a service group. Members are entities linked to the service
- * group via a Microsoft.Relationships resource (serviceGroupMember or
- * contains). Descendant service groups are not returned as members; use
- * listDescendants for those.
+ * A resource member returned by the listMembers action.
  */
 @added(Versions.v2026_09_01_preview)
 model ServiceGroupMember {
   /**
-   * The fully qualified ARM ID of the member. For example,
+   * The fully qualified Azure Resource Manager ID of the member. For example,
    * /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.KeyVault/vaults/{vaultName}.
    */
   @visibility(Lifecycle.Read)
-  id?: Azure.Core.armResourceIdentifier;
+  id: Azure.Core.armResourceIdentifier;
+}
+
+/**
+ * A warning produced when listMembers returns partial results.
+ */
+@added(Versions.v2026_09_01_preview)
+model ListMembersWarning {
+  /**
+   * The subscription that was skipped.
+   */
+  subscriptionId: string;
+
+  /**
+   * The warning code. SubscriptionInaccessible indicates that the subscription
+   * could not be read and was skipped while other accessible members were returned.
+   */
+  code: ListMembersWarningCode;
+
+  /**
+   * A caller-facing description of the warning.
+   */
+  message: string;
+}
+
+/**
+ * The code for a listMembers partial-result warning.
+ */
+@added(Versions.v2026_09_01_preview)
+union ListMembersWarningCode {
+  string,
+
+  /**
+   * The subscription could not be read and was skipped while other accessible
+   * members were returned.
+   */
+  SubscriptionInaccessible: "SubscriptionInaccessible",
 }
