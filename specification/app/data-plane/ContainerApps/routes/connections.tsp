@@ -12,6 +12,17 @@ alias DeleteConnectionErrors =
   | ErrorResult<409>
   | ErrorResult<500>;
 
+/** A page of connections. */
+model ConnectionList {
+  /** Connections returned by the request. */
+  @pageItems
+  value: Connection[];
+
+  /** Link to the next page of connections, if one is available. */
+  @nextLink
+  nextLink?: string;
+}
+
 /** Query parameters for deleting a connection. */
 alias DeleteConnectionTraits = QueryParametersTrait<
   {
@@ -33,7 +44,7 @@ model ListConnectionResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: Connection[];
+  @body body: ConnectionList;
 }
 
 /** Errors returned by listConnections. */
@@ -177,10 +188,11 @@ interface ConnectionsOperations {
   >;
 
   /** Lists connections in a sandbox group. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core StandardResourceOperations.ResourceList cannot preserve the existing includeSandboxIds, Page, PageSize, and labels query parameter names or the bare-array response without changing the established wire contract."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core StandardResourceOperations.ResourceList cannot preserve the continuationToken, includeSandboxIds, and labels query parameters alongside this custom scoped route and response contract."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This list operation uses a custom next-link response model, which the rule misclassifies as a single-object response."
   @summary("Lists connections in a sandbox group.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/connections")
-  @listsResource(Connection)
+  @list
   @get
   listConnections is Foundations.Operation<
     {
@@ -189,11 +201,8 @@ interface ConnectionsOperations {
       /** includeSandboxIds parameter. */
       @query includeSandboxIds?: boolean;
 
-      /** Page number to retrieve. */
-      @query("Page") page?: int32;
-
-      /** Number of items to return per page. */
-      @query("PageSize") pageSize?: int32;
+      /** Continuation token for paginated results. */
+      @query continuationToken?: string;
 
       /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
       @query labels?: string;

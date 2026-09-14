@@ -113,22 +113,11 @@
             "type": "boolean"
           },
           {
-            "name": "Page",
+            "name": "continuationToken",
             "in": "query",
-            "description": "Page number to retrieve.",
+            "description": "Continuation token for paginated results.",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "page"
-          },
-          {
-            "name": "PageSize",
-            "in": "query",
-            "description": "Number of items to return per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "pageSize"
+            "type": "string"
           },
           {
             "name": "labels",
@@ -142,10 +131,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Connection"
-              }
+              "$ref": "#/definitions/ConnectionList"
             }
           },
           "401": {
@@ -167,6 +153,9 @@
           "List Connections example": {
             "$ref": "./examples/ConnectionsOperations_ListConnections.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -777,22 +766,11 @@
             "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
           },
           {
-            "name": "Page",
+            "name": "continuationToken",
             "in": "query",
-            "description": "Page number to retrieve.",
+            "description": "Continuation token for paginated results.",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "page"
-          },
-          {
-            "name": "PageSize",
-            "in": "query",
-            "description": "Number of items to return per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "pageSize"
+            "type": "string"
           },
           {
             "name": "labels",
@@ -828,6 +806,9 @@
           "List Content Packages example": {
             "$ref": "./examples/ContentPackagesOperations_ListContentPackages.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1090,16 +1071,20 @@
           },
           {
             "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Continuation token for paginated results.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SandboxGroupCredential"
-              }
+              "$ref": "#/definitions/CredentialList"
             }
           }
         },
@@ -1107,6 +1092,9 @@
           "List Credentials example": {
             "$ref": "./examples/CredentialsOperations_ListCredentials.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1311,22 +1299,11 @@
             "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
           },
           {
-            "name": "Page",
+            "name": "continuationToken",
             "in": "query",
-            "description": "Page number to retrieve.",
+            "description": "Continuation token for paginated results.",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "page"
-          },
-          {
-            "name": "PageSize",
-            "in": "query",
-            "description": "Number of items to return per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "pageSize"
+            "type": "string"
           },
           {
             "name": "labels",
@@ -1340,10 +1317,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DiskImage"
-              }
+              "$ref": "#/definitions/DiskImageList"
             }
           },
           "401": {
@@ -1365,6 +1339,9 @@
           "List disk images in a sandbox group": {
             "$ref": "./examples/DiskImagesOperations_ListDiskImages.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -1611,30 +1588,18 @@
             "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
           },
           {
-            "name": "page",
+            "name": "continuationToken",
             "in": "query",
-            "description": "page parameter.",
+            "description": "Continuation token for paginated results.",
             "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "pageSize parameter.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/PublicDiskImage"
-              }
+              "$ref": "#/definitions/PublicDiskImageList"
             }
           },
           "401": {
@@ -1656,6 +1621,9 @@
           "List public disk images": {
             "$ref": "./examples/DiskImagesOperations_ListDiskImagesPublic.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1756,6 +1724,13 @@
           },
           {
             "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Continuation token for paginated results.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1784,6 +1759,9 @@
           "List Egress Policies example": {
             "$ref": "./examples/EgressPoliciesOperations_ListEgressPolicies.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2035,20 +2013,11 @@
             "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
           },
           {
-            "name": "page",
+            "name": "continuationToken",
             "in": "query",
-            "description": "One-based page number.",
+            "description": "Continuation token for paginated results.",
             "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "Maximum number of sandboxes returned per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           },
           {
             "name": "labels",
@@ -2062,10 +2031,7 @@
           "200": {
             "description": "Successful Sandbox list response.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Sandbox"
-              }
+              "$ref": "#/definitions/SandboxList"
             }
           },
           "400": {
@@ -2094,6 +2060,9 @@
           "List example": {
             "$ref": "./examples/AzureSandboxes_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -5362,22 +5331,11 @@
             "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
           },
           {
-            "name": "Page",
+            "name": "continuationToken",
             "in": "query",
-            "description": "Page number to retrieve.",
+            "description": "Continuation token for paginated results.",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "page"
-          },
-          {
-            "name": "PageSize",
-            "in": "query",
-            "description": "Number of items to return per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "pageSize"
+            "type": "string"
           },
           {
             "name": "labels",
@@ -5391,10 +5349,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Snapshot"
-              }
+              "$ref": "#/definitions/SnapshotList"
             }
           },
           "401": {
@@ -5416,6 +5371,9 @@
           "List Snapshots example": {
             "$ref": "./examples/SnapshotsOperations_ListSnapshots.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5634,22 +5592,11 @@
             "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
           },
           {
-            "name": "Page",
+            "name": "continuationToken",
             "in": "query",
-            "description": "Page number to retrieve.",
+            "description": "Continuation token for paginated results.",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "page"
-          },
-          {
-            "name": "PageSize",
-            "in": "query",
-            "description": "Number of items to return per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "pageSize"
+            "type": "string"
           },
           {
             "name": "labels",
@@ -5663,10 +5610,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Volume"
-              }
+              "$ref": "#/definitions/VolumeList"
             }
           },
           "401": {
@@ -5688,6 +5632,9 @@
           "List Volumes example": {
             "$ref": "./examples/VolumesOperations_ListVolumes.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6969,6 +6916,26 @@
       "type": "string",
       "description": "Strongly-typed connection identifier. ConnectionId is intentionally string-based rather than Guid-based because existing Cosmos DB documents contain connection IDs in mixed formats — some with hyphens (Guid \"D\" format: a1b2c3d4-e5f6-...) and some without (Guid \"N\" format: a1b2c3d4e5f6...). Converting to a Guid-backed typed ID would normalize all lookups to the \"D\" format via Guid.ToString(), breaking reads/deletes of documents stored with the \"N\" format since Cosmos DB performs exact string matching on document IDs."
     },
+    "ConnectionList": {
+      "type": "object",
+      "description": "A page of connections.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Connections returned by the request.",
+          "items": {
+            "$ref": "#/definitions/Connection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of connections, if one is available."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ConnectionState": {
       "type": "string",
       "description": "Represents the state of a connection.",
@@ -7561,10 +7528,14 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "value value.",
+          "description": "Content packages returned by the request.",
           "items": {
             "$ref": "#/definitions/ContentPackage"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of content packages, if one is available."
         }
       },
       "required": [
@@ -8052,6 +8023,26 @@
         }
       }
     },
+    "CredentialList": {
+      "type": "object",
+      "description": "A page of credentials.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Credentials returned by the request.",
+          "items": {
+            "$ref": "#/definitions/SandboxGroupCredential"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of credentials, if one is available."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "DataDiskPodVolume": {
       "type": "object",
       "description": "Data disk volume source backed by a persistent ext4 block device in cluster storage.",
@@ -8253,6 +8244,26 @@
       },
       "required": [
         "base"
+      ]
+    },
+    "DiskImageList": {
+      "type": "object",
+      "description": "A page of disk images.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Disk images returned by the request.",
+          "items": {
+            "$ref": "#/definitions/DiskImage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of disk images, if one is available."
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "DiskImageStatus": {
@@ -9720,11 +9731,8 @@
       "description": "OK.",
       "properties": {
         "body": {
-          "type": "array",
-          "description": "Response body.",
-          "items": {
-            "$ref": "#/definitions/Connection"
-          }
+          "$ref": "#/definitions/ConnectionList",
+          "description": "Response body."
         }
       },
       "required": [
@@ -9749,11 +9757,8 @@
       "description": "OK.",
       "properties": {
         "body": {
-          "type": "array",
-          "description": "Response body.",
-          "items": {
-            "$ref": "#/definitions/SandboxGroupCredential"
-          }
+          "$ref": "#/definitions/CredentialList",
+          "description": "Response body."
         }
       },
       "required": [
@@ -9765,11 +9770,8 @@
       "description": "OK.",
       "properties": {
         "body": {
-          "type": "array",
-          "description": "Response body.",
-          "items": {
-            "$ref": "#/definitions/DiskImage"
-          }
+          "$ref": "#/definitions/DiskImageList",
+          "description": "Response body."
         }
       },
       "required": [
@@ -9794,11 +9796,8 @@
       "description": "OK.",
       "properties": {
         "body": {
-          "type": "array",
-          "description": "Response body.",
-          "items": {
-            "$ref": "#/definitions/PublicDiskImage"
-          }
+          "$ref": "#/definitions/PublicDiskImageList",
+          "description": "Response body."
         }
       },
       "required": [
@@ -9810,11 +9809,8 @@
       "description": "OK.",
       "properties": {
         "body": {
-          "type": "array",
-          "description": "Response body.",
-          "items": {
-            "$ref": "#/definitions/Snapshot"
-          }
+          "$ref": "#/definitions/SnapshotList",
+          "description": "Response body."
         }
       },
       "required": [
@@ -9826,11 +9822,8 @@
       "description": "OK.",
       "properties": {
         "body": {
-          "type": "array",
-          "description": "Response body.",
-          "items": {
-            "$ref": "#/definitions/Volume"
-          }
+          "$ref": "#/definitions/VolumeList",
+          "description": "Response body."
         }
       },
       "required": [
@@ -10189,16 +10182,20 @@
       "type": "object",
       "description": "Named egress policy list response body.",
       "properties": {
-        "egressPolicies": {
+        "value": {
           "type": "array",
-          "description": "egressPolicies value.",
+          "description": "Egress policies returned by the request.",
           "items": {
             "$ref": "#/definitions/NamedEgressPolicy"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of egress policies, if one is available."
         }
       },
       "required": [
-        "egressPolicies"
+        "value"
       ]
     },
     "NetworkEgressDecisions": {
@@ -11087,6 +11084,26 @@
         "status"
       ]
     },
+    "PublicDiskImageList": {
+      "type": "object",
+      "description": "A page of public disk images.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Public disk images returned by the request.",
+          "items": {
+            "$ref": "#/definitions/PublicDiskImage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of public disk images, if one is available."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PutConnectionPolicyRulesResult": {
       "type": "object",
       "description": "OK.",
@@ -11970,16 +11987,33 @@
         "autoDeletePolicy"
       ]
     },
-    "SandboxListResult": {
+    "SandboxList": {
       "type": "object",
-      "description": "Successful Sandbox list response.",
+      "description": "A page of sandboxes.",
       "properties": {
-        "body": {
+        "value": {
           "type": "array",
           "description": "Sandboxes returned by the request.",
           "items": {
             "$ref": "#/definitions/Sandbox"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of sandboxes, if one is available."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SandboxListResult": {
+      "type": "object",
+      "description": "Successful Sandbox list response.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/SandboxList",
+          "description": "A page of sandboxes."
         }
       },
       "required": [
@@ -12573,6 +12607,26 @@
     "SnapshotId": {
       "type": "string",
       "description": "SnapshotId wire model."
+    },
+    "SnapshotList": {
+      "type": "object",
+      "description": "A page of snapshots.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Snapshots returned by the request.",
+          "items": {
+            "$ref": "#/definitions/Snapshot"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of snapshots, if one is available."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "SnapshotPodContainer": {
       "type": "object",
@@ -13444,6 +13498,26 @@
     "VolumeItemName": {
       "type": "string",
       "description": "VolumeItemName wire model."
+    },
+    "VolumeList": {
+      "type": "object",
+      "description": "A page of volumes.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Volumes returned by the request.",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of volumes, if one is available."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "VolumeListDirectoryResponse": {
       "type": "object",

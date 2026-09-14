@@ -3,8 +3,13 @@ using Rest;
 namespace ContainerAppsSandbox {
   /** Content-package list response body. */
   model ContentPackageListResponse {
-    /** value value. */
+    /** Content packages returned by the request. */
+    @pageItems
     value: ContentPackage[];
+
+    /** Link to the next page of content packages, if one is available. */
+    @nextLink
+    nextLink?: string;
   }
 
   /** ContentPackage wire model. */

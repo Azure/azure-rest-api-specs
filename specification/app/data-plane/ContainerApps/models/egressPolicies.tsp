@@ -3,8 +3,13 @@ using Rest;
 namespace ContainerAppsSandbox {
   /** Named egress policy list response body. */
   model NamedEgressPolicyListResponse {
-    /** egressPolicies value. */
-    egressPolicies: NamedEgressPolicy[];
+    /** Egress policies returned by the request. */
+    @pageItems
+    value: NamedEgressPolicy[];
+
+    /** Link to the next page of egress policies, if one is available. */
+    @nextLink
+    nextLink?: string;
   }
 
   /** Customer-facing named egress policy resource. */

@@ -13,13 +13,24 @@ alias SnapshotDeleteOperations = ResourceOperations<
   DeleteSnapshotErrors
 >;
 
+/** A page of snapshots. */
+model SnapshotList {
+  /** Snapshots returned by the request. */
+  @pageItems
+  value: Snapshot[];
+
+  /** Link to the next page of snapshots, if one is available. */
+  @nextLink
+  nextLink?: string;
+}
+
 /** OK. */
 model ListSnapshotResult {
   /** HTTP response status code. */
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: Snapshot[];
+  @body body: SnapshotList;
 }
 
 /** Errors returned by listSnapshots. */
@@ -59,17 +70,14 @@ interface SnapshotsOperations {
   /** Lists snapshots with pagination support. */
   @summary("Lists snapshots with pagination support.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/snapshots")
-  @listsResource(Snapshot)
+  @list
   @get
   listSnapshots is Foundations.Operation<
     {
       ...AzureResourceScope;
 
-      /** Page number to retrieve. */
-      @query("Page") page?: int32;
-
-      /** Number of items to return per page. */
-      @query("PageSize") pageSize?: int32;
+      /** Continuation token for paginated results. */
+      @query continuationToken?: string;
 
       /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
       @query labels?: string;

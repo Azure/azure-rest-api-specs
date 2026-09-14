@@ -6,13 +6,13 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "example-resource-group",
     "sandboxGroupName": "example-sandbox-group",
-    "page": 1,
-    "pageSize": 1,
+    "continuationToken": "example-continuation-token",
     "labels": "example-labels"
   },
   "responses": {
     "200": {
-      "body": [
+      "body": {
+        "value": [
         {
           "id": "example-resource-01",
           "labels": {
@@ -643,7 +643,9 @@
             }
           ]
         }
-      ]
+        ],
+        "nextLink": "https://example.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resource-group/sandboxGroups/example-sandbox-group/sandboxes?api-version=2026-09-01-preview&continuationToken=example-next-continuation-token"
+      }
     },
     "400": {
       "body": {
