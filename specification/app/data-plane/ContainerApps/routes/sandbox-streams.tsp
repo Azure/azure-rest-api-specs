@@ -33,7 +33,7 @@ interface SandboxStreamsOperations {
       ...AzureResourceScope;
 
       /** id parameter. */
-      @path id: string;
+      @path id: SandboxId;
 
       /** containerName parameter. */
       @query containerName?: string;
@@ -55,7 +55,7 @@ interface SandboxStreamsOperations {
       ...AzureResourceScope;
 
       /** id parameter. */
-      @path id: string;
+      @path id: SandboxId;
 
       /** tailLines parameter. */
       @query tailLines?: int32;
@@ -83,7 +83,7 @@ interface SandboxStreamsOperations {
       ...AzureResourceScope;
 
       /** id parameter. */
-      @path id: string;
+      @path id: SandboxId;
 
       /** containerName parameter. */
       @query containerName?: string;

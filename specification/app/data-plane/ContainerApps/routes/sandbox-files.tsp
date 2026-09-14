@@ -120,7 +120,7 @@ interface SandboxFilesOperations {
       ...AzureResourceScope;
 
       /** id parameter. */
-      @path id: string;
+      @path id: SandboxId;
 
       /** path parameter. */
       @query path?: string;
@@ -145,7 +145,7 @@ interface SandboxFilesOperations {
       ...AzureResourceScope;
 
       /** id parameter. */
-      @path id: string;
+      @path id: SandboxId;
 
       /** path parameter. */
       @query path: string;
@@ -167,7 +167,7 @@ interface SandboxFilesOperations {
       ...AzureResourceScope;
 
       /** id parameter. */
-      @path id: string;
+      @path id: SandboxId;
 
       /** path parameter. */
       @query path: string;
@@ -189,7 +189,7 @@ interface SandboxFilesOperations {
       ...AzureResourceScope;
 
       /** id parameter. */
-      @path id: string;
+      @path id: SandboxId;
 
       /** path parameter. */
       @query path: string;
