@@ -21,10 +21,9 @@ interface AgentOptimizationJobs {
   /**
    * Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry.
    */
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "The response creates an asynchronously processed job resource; callers poll the returned job with GET rather than polling the create request."
   @summary("Create an agent optimization job")
   @route("agent_optimization_jobs")
-  @pollingOperation(AgentOptimizationJobs.get)
   @post
   create is FoundryDataPlaneOperation<
     {
@@ -108,7 +107,7 @@ interface AgentOptimizationJobs {
 @tag("AgentOptimizationJobs")
 interface AgentOptimizationJobCandidates {
   /**
-   * Lists candidates for the given optimization job with cursor pagination. Each item is an `AgentOptimizationCandidate` — `output.mutations` keys identify which agent attributes changed, but the customer-supplied mutation values are returned as `null` unless the client passes `expand=mutations`.
+   * Lists candidates for the given optimization job with cursor pagination. Each `output.mutations` item identifies a changed attribute by `type`; mutation `value` fields are omitted unless the client passes `expand=mutations`.
    */
   @summary("List candidates for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates")
@@ -118,7 +117,7 @@ interface AgentOptimizationJobCandidates {
       /** The ID of the parent optimization job. */
       @path jobId: string;
 
-      /** Comma-separated list of expand keys. Pass `mutations` to populate the values of `AgentOptimizationCandidate.output.mutations`; omit to receive only the mutation keys with null values. Additional expand keys may be added in future previews. */
+      /** Comma-separated list of expand keys. Pass `mutations` to populate mutation `value` fields; omit to receive mutation items containing only `type`. Additional expand keys may be added in future previews. */
       @query expand?: string;
 
       ...CommonPageQueryParameters;

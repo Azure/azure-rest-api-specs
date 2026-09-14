@@ -137,9 +137,14 @@ model AgentOptimizationDatasetInput {
   type: AgentOptimizationDatasetInputType;
 }
 
+/** Base model for dataset inputs that are valid for held-out validation. */
+@discriminator("type")
+model AgentOptimizationValidationDatasetInput
+  extends AgentOptimizationDatasetInput {}
+
 /** Inline dataset — items supplied directly in the request body. */
 model AgentOptimizationInlineDatasetInput
-  extends AgentOptimizationDatasetInput {
+  extends AgentOptimizationValidationDatasetInput {
   @doc("Dataset input type discriminator.")
   type: AgentOptimizationDatasetInputType.inline;
 
@@ -150,7 +155,7 @@ model AgentOptimizationInlineDatasetInput
 
 /** Reference to a registered Foundry dataset. */
 model AgentOptimizationReferenceDatasetInput
-  extends AgentOptimizationDatasetInput {
+  extends AgentOptimizationValidationDatasetInput {
   @doc("Dataset input type discriminator.")
   type: AgentOptimizationDatasetInputType.reference;
 
@@ -192,19 +197,6 @@ model AgentOptimizationGenerationJobReferenceDatasetInput
   @doc("Failure from the referenced data-generation job. Omitted unless generation failed.")
   @visibility(Lifecycle.Read)
   error?: ApiError;
-}
-
-/** Supported dataset inputs for evaluation. */
-union AgentOptimizationDataset {
-  AgentOptimizationInlineDatasetInput,
-  AgentOptimizationReferenceDatasetInput,
-  AgentOptimizationGenerationJobReferenceDatasetInput,
-}
-
-/** Dataset inputs supported for held-out validation. */
-union AgentOptimizationValidationDataset {
-  AgentOptimizationInlineDatasetInput,
-  AgentOptimizationReferenceDatasetInput,
 }
 
 /** A single item in an inline dataset. */
@@ -354,10 +346,10 @@ model AgentOptimizationCandidateSearchConfiguration {
 /** Reusable quality-measurement configuration. */
 model AgentOptimizationEvaluationConfiguration {
   @doc("Dataset used to guide the optimization search.")
-  training_dataset: AgentOptimizationDataset;
+  training_dataset: AgentOptimizationDatasetInput;
 
   @doc("Held-out dataset used for full candidate evaluation. The training dataset is reused when omitted.")
-  validation_dataset?: AgentOptimizationValidationDataset;
+  validation_dataset?: AgentOptimizationValidationDatasetInput;
 
   @doc("Evaluator references used to score candidate quality.")
   @minItems(1)
@@ -425,11 +417,6 @@ model SteeringPromptOptimizationContext extends OptimizationContext {
   prompt: string;
 }
 
-/** Supported optimization context items. */
-union OptimizationContextItem {
-  SteeringPromptOptimizationContext,
-}
-
 @doc("Configuration for a one-shot prompt transformation without comparative evaluation.")
 model PromptOptimizationConfiguration
   extends AgentOptimizationConfigurationBase {
@@ -438,16 +425,7 @@ model PromptOptimizationConfiguration
 
   @doc("Context used to steer prompt optimization. Omitted when no context is supplied.")
   @minItems(1)
-  context?: OptimizationContextItem[];
-}
-
-/**
- * Supported optimization types. New workflows should add independent variants
- * rather than adding nullable fields to existing variants.
- */
-union OptimizationConfiguration {
-  AgentOptimizationConfiguration,
-  PromptOptimizationConfiguration,
+  context?: OptimizationContext[];
 }
 
 @doc("Caller-supplied inputs for an optimization job.")
@@ -462,7 +440,7 @@ model AgentOptimizationJobInputs {
   optimization_model_configuration: AgentOptimizationModelConfiguration;
 
   @doc("Type-specific optimization configuration.")
-  optimization_configuration: OptimizationConfiguration;
+  optimization_configuration: AgentOptimizationConfigurationBase;
 }
 
 @doc("Inputs for estimating an agent-optimization job.")
@@ -562,8 +540,56 @@ model AgentOptimizationCandidateOutput {
   @doc("Output type discriminator.")
   type: "agent_configuration";
 
-  @doc("The mutation payload applied to the baseline to produce this candidate. Keys identify changed agent attributes, such as `instruction`, `model`, `skills`, or `tools`. On LIST without `expand=mutations`, keys are populated and values are null. Expanded LIST and candidate GET return complete values. Omitted for the baseline candidate.")
-  mutations?: Record<unknown | null>;
+  @doc("Typed configuration mutations applied to the baseline. Omitted for the baseline candidate. LIST without `expand=mutations` returns mutation items with only `type`; expanded LIST and candidate GET populate each mutation's `value`.")
+  mutations?: AgentOptimizationMutation[];
+}
+
+@doc("Candidate mutation type. Additional mutation types may be added in future API versions.")
+union AgentOptimizationMutationType {
+  string,
+  instruction: "instruction",
+  `model`: "model",
+  skills: "skills",
+  tools: "tools",
+}
+
+@doc("Base candidate mutation.")
+@discriminator("type")
+model AgentOptimizationMutation {
+  @doc("Attribute changed by this mutation.")
+  type: AgentOptimizationMutationType;
+}
+
+@doc("Instruction mutation.")
+model AgentOptimizationInstructionMutation extends AgentOptimizationMutation {
+  type: AgentOptimizationMutationType.instruction;
+
+  @doc("Optimized agent instructions. Omitted on LIST unless `expand=mutations` is specified.")
+  value?: string;
+}
+
+@doc("Model-deployment mutation.")
+model AgentOptimizationModelMutation extends AgentOptimizationMutation {
+  type: AgentOptimizationMutationType.`model`;
+
+  @doc("Selected model deployment. Omitted on LIST unless `expand=mutations` is specified.")
+  value?: AgentOptimizationDeploymentName;
+}
+
+@doc("Skill mutations.")
+model AgentOptimizationSkillsMutation extends AgentOptimizationMutation {
+  type: AgentOptimizationMutationType.skills;
+
+  @doc("Added or changed skills. Omitted on LIST unless `expand=mutations` is specified.")
+  value?: AgentOptimizationSkill[];
+}
+
+@doc("Tool mutations.")
+model AgentOptimizationToolsMutation extends AgentOptimizationMutation {
+  type: AgentOptimizationMutationType.tools;
+
+  @doc("Added or changed function tools. Omitted on LIST unless `expand=mutations` is specified.")
+  value?: OpenAI.ChatCompletionTool[];
 }
 
 @doc("Aggregate billable token counts for one routed model in a candidate evaluation.")
@@ -684,7 +710,7 @@ model AgentOptimizationCandidate {
 union AgentOptimizationCandidateExpand {
   string,
 
-  @doc("Include the customer-supplied mutation payload values in `AgentOptimizationCandidate.output.mutations`. Without this key the mutation keys are populated but the values are null.")
+  @doc("Include mutation `value` fields in `AgentOptimizationCandidate.output.mutations`. Without this key each mutation item contains only its `type`.")
   mutations: "mutations",
 }
 

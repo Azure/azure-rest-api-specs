@@ -1997,7 +1997,7 @@
       "get": {
         "operationId": "AgentOptimizationJobCandidates_listCandidates",
         "summary": "List candidates for an agent optimization job",
-        "description": "Lists candidates for the given optimization job with cursor pagination. Each item is an `AgentOptimizationCandidate` — `output.mutations` keys identify which agent attributes changed, but the customer-supplied mutation values are returned as `null` unless the client passes `expand=mutations`.",
+        "description": "Lists candidates for the given optimization job with cursor pagination. Each `output.mutations` item identifies a changed attribute by `type`; mutation `value` fields are omitted unless the client passes `expand=mutations`.",
         "parameters": [
           {
             "name": "jobId",
@@ -2012,7 +2012,7 @@
             "name": "expand",
             "in": "query",
             "required": false,
-            "description": "Comma-separated list of expand keys. Pass `mutations` to populate the values of `AgentOptimizationCandidate.output.mutations`; omit to receive only the mutation keys with null values. Additional expand keys may be added in future previews.",
+            "description": "Comma-separated list of expand keys. Pass `mutations` to populate mutation `value` fields; omit to receive mutation items containing only `type`. Additional expand keys may be added in future previews.",
             "schema": {
               "type": "string"
             },
@@ -34651,16 +34651,11 @@
             "description": "Output type discriminator."
           },
           "mutations": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "anyOf": [
-                {},
-                {
-                  "type": "null"
-                }
-              ]
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentOptimizationMutationValue"
             },
-            "description": "The mutation payload applied to the baseline to produce this candidate. Keys identify changed agent attributes, such as `instruction`, `model`, `skills`, or `tools`. On LIST without `expand=mutations`, keys are populated and values are null. Expanded LIST and candidate GET return complete values. Omitted for the baseline candidate."
+            "description": "Typed configuration mutations applied to the baseline. Omitted for the baseline candidate. LIST without `expand=mutations` returns mutation items with only `type`; expanded LIST and candidate GET populate each mutation's `value`."
           }
         },
         "description": "Agent configuration changes generated for a candidate."
@@ -35201,6 +35196,30 @@
         ],
         "description": "Inline dataset — items supplied directly in the request body."
       },
+      "AgentOptimizationInstructionMutation": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "instruction"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "description": "Optimized agent instructions. Omitted on LIST unless `expand=mutations` is specified."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationMutation"
+          }
+        ],
+        "description": "Instruction mutation."
+      },
       "AgentOptimizationJob": {
         "type": "object",
         "required": [
@@ -35430,6 +35449,89 @@
         },
         "description": "Identifies a model deployment used by an optimization or evaluation step."
       },
+      "AgentOptimizationModelMutation": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "model"
+            ]
+          },
+          "value": {
+            "$ref": "#/components/schemas/AgentOptimizationDeploymentName",
+            "description": "Selected model deployment. Omitted on LIST unless `expand=mutations` is specified."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationMutation"
+          }
+        ],
+        "description": "Model-deployment mutation."
+      },
+      "AgentOptimizationMutation": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/AgentOptimizationMutationType",
+            "description": "Attribute changed by this mutation."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "model": "#/components/schemas/AgentOptimizationModelMutation",
+            "skills": "#/components/schemas/AgentOptimizationSkillsMutation",
+            "tools": "#/components/schemas/AgentOptimizationToolsMutation",
+            "instruction": "#/components/schemas/AgentOptimizationInstructionMutation"
+          }
+        },
+        "description": "Base candidate mutation."
+      },
+      "AgentOptimizationMutationType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "instruction",
+              "model",
+              "skills",
+              "tools"
+            ]
+          }
+        ],
+        "description": "Candidate mutation type. Additional mutation types may be added in future API versions."
+      },
+      "AgentOptimizationMutationValue": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationInstructionMutation"
+          },
+          {
+            "$ref": "#/components/schemas/AgentOptimizationModelMutation"
+          },
+          {
+            "$ref": "#/components/schemas/AgentOptimizationSkillsMutation"
+          },
+          {
+            "$ref": "#/components/schemas/AgentOptimizationToolsMutation"
+          },
+          {
+            "$ref": "#/components/schemas/AgentOptimizationMutation"
+          }
+        ],
+        "description": "Supported typed candidate mutations."
+      },
       "AgentOptimizationReferenceDatasetInput": {
         "type": "object",
         "required": [
@@ -35500,6 +35602,33 @@
           }
         },
         "description": "A skill in the manually supplied agent optimization surface."
+      },
+      "AgentOptimizationSkillsMutation": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "skills"
+            ]
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentOptimizationSkill"
+            },
+            "description": "Added or changed skills. Omitted on LIST unless `expand=mutations` is specified."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationMutation"
+          }
+        ],
+        "description": "Skill mutations."
       },
       "AgentOptimizationSpace": {
         "type": "object",
@@ -35614,6 +35743,33 @@
           }
         },
         "description": "Aggregated token usage attributable to a single layer of the optimization loop."
+      },
+      "AgentOptimizationToolsMutation": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "tools"
+            ]
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.ChatCompletionTool"
+            },
+            "description": "Added or changed function tools. Omitted on LIST unless `expand=mutations` is specified."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationMutation"
+          }
+        ],
+        "description": "Tool mutations."
       },
       "AgentOptimizationValidationDataset": {
         "anyOf": [
