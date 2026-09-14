@@ -93,6 +93,9 @@
       "name": "FunctionAppVersions"
     },
     {
+      "name": "FunctionAppVersionOperations"
+    },
+    {
       "name": "DeploymentLabels"
     },
     {
@@ -1534,6 +1537,52 @@
         "x-ms-examples": {
           "Get Deleted Web App by Location": {
             "$ref": "./examples/GetDeletedWebAppByLocation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/functionAppVersionOperations/{operationId}": {
+      "get": {
+        "operationId": "FunctionAppVersionOperations_Get",
+        "tags": [
+          "FunctionAppVersionOperations"
+        ],
+        "description": "Gets the status of an asynchronous Function App version operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FunctionAppVersionOperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Function App version operation status": {
+            "$ref": "./examples/GetFunctionAppVersionOperationStatus.json"
           }
         }
       }
@@ -13015,10 +13064,7 @@
             "description": "Resource 'FunctionAppVersion' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/FunctionAppVersion"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
+            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -46616,6 +46662,88 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "FunctionAppVersionOperationStatus": {
+      "type": "string",
+      "description": "The status of a Function App version operation.",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "FunctionAppVersionOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is running."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation was canceled."
+          }
+        ]
+      }
+    },
+    "FunctionAppVersionOperationStatusResult": {
+      "type": "object",
+      "description": "The status of an asynchronous Function App version operation.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/FunctionAppVersionOperationStatus",
+          "description": "The operation status"
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the operationStatus resource"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the operationStatus resource",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation start time",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation complete time",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "double",
+          "description": "The progress made toward completing the operation",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "Errors that occurred if the operation ended with Canceled or Failed status",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "id"
       ]
     },
     "FunctionAppVersionProperties": {

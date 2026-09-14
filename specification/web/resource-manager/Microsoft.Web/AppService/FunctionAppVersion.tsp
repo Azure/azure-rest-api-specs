@@ -57,6 +57,24 @@ union FunctionAppVersionValidationStatus {
 }
 
 @added(Versions.v2026_10_01_preview)
+@doc("The status of a Function App version operation.")
+union FunctionAppVersionOperationStatus {
+  /** The operation is running. */
+  InProgress: "InProgress",
+
+  /** The operation succeeded. */
+  Succeeded: "Succeeded",
+
+  /** The operation failed. */
+  Failed: "Failed",
+
+  /** The operation was canceled. */
+  Canceled: "Canceled",
+
+  string,
+}
+
+@added(Versions.v2026_10_01_preview)
 @doc("The runtime configuration of a Function App version.")
 model FunctionAppVersionRuntime {
   /** The runtime name. */
@@ -204,6 +222,11 @@ model FunctionAppVersion
 }
 
 @added(Versions.v2026_10_01_preview)
+@doc("The status of an asynchronous Function App version operation.")
+model FunctionAppVersionOperationStatusResult
+  is ArmOperationStatus<StatusValues = FunctionAppVersionOperationStatus>;
+
+@added(Versions.v2026_10_01_preview)
 @doc("Version-scoped application settings.")
 model FunctionAppVersionAppSettings {
   /** The version-scoped application settings. */
@@ -235,17 +258,10 @@ interface FunctionAppVersions {
   get is ArmResourceRead<FunctionAppVersion, Error = DefaultErrorResponse>;
 
   /** Creates an immutable Function App version or returns an equivalent version. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The immutable create contract intentionally returns 200 for an idempotent retry, 201 for a ZIP placeholder, and 202 for materialization and validation."
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "The create LRO uses Azure-AsyncOperation as the authoritative ARM status monitor."
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FunctionAppVersion,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = FunctionAppVersion> &
       Azure.Core.Foundations.RetryAfterHeader,
-    Response =
-      | ArmResourceUpdatedResponse<FunctionAppVersion>
-      | ArmResourceCreatedSyncResponse<FunctionAppVersion>
-      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = FunctionAppVersion> &
-          Azure.Core.Foundations.RetryAfterHeader>,
     Error = DefaultErrorResponse
   >;
 
@@ -287,3 +303,21 @@ interface FunctionAppVersions {
     OptionalRequestBody = true
   >;
 }
+
+@added(Versions.v2026_10_01_preview)
+@tag("FunctionAppVersionOperations")
+@armResourceOperations
+@doc("Operations for tracking asynchronous Function App version work.")
+interface FunctionAppVersionOperations {
+  /** Gets the status of an asynchronous Function App version operation. */
+  get is GetResourceOperationStatus<
+    Response = FunctionAppVersionOperationStatusResult,
+    Scope = SubscriptionLocationActionScope,
+    Error = DefaultErrorResponse
+  >;
+}
+
+@@segment(
+  FunctionAppVersionOperations.get::parameters.operationId,
+  "functionAppVersionOperations"
+);

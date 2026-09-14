@@ -50,13 +50,17 @@
       }
     },
     "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Web/locations/westus/functionAppVersionOperations/22222222-2222-2222-2222-222222222222?api-version=2026-10-01-preview",
+        "Retry-After": 10
+      },
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-2026-10-03",
         "name": "release-2026-10-03",
         "type": "Microsoft.Web/sites/functionAppVersions",
         "properties": {
-          "provisioningState": "Succeeded",
-          "versionState": "Ready",
+          "provisioningState": "Creating",
+          "versionState": "ResolvingArtifact",
           "functionAppVersionConfig": {
             "runtime": {
               "name": "custom",
@@ -70,12 +74,6 @@
             }
           }
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Web/locations/westus/operationResults/22222222-2222-2222-2222-222222222222?api-version=2026-10-01-preview",
-        "Retry-After": 10
       }
     }
   },
