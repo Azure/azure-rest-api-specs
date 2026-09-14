@@ -1,4 +1,5 @@
 using Http;
+using Rest;
 using Azure.Core;
 
 namespace ContainerAppsSandbox;
@@ -78,6 +79,12 @@ alias PostSandboxFileMkdirErrors =
   | ErrorResult<404>
   | ErrorResult<409>;
 
+/** Standard resource operations for creating sandbox directories. */
+alias SandboxFileMkdirOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostSandboxFileMkdirErrors
+>;
+
 /** Created. */
 model PostSandboxFileResult {
   /** HTTP response status code. */
@@ -93,6 +100,12 @@ alias PostSandboxFileErrors =
   | ErrorResult<404>
   | ErrorResult<409>
   | ErrorResult<413>;
+
+/** Standard resource operations for writing sandbox files. */
+alias SandboxFileWriteOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostSandboxFileErrors
+>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
@@ -191,43 +204,33 @@ interface SandboxFilesOperations {
 
   /** Creates a directory in a running sandbox. If the `createParents` property is set to true, any missing parent directories will also be created. */
   @summary("Creates a directory in a running sandbox. If the `createParents` property is set to true,\nany missing parent directories will also be created.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/files/mkdir")
-  @post
-  postSandboxFileMkdir is Foundations.Operation<
+  @action("files/mkdir")
+  @actionSeparator("/")
+  postSandboxFileMkdir is SandboxFileMkdirOperations.ResourceAction<
+    Sandbox,
     {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-
       /** containerName parameter. */
       @query containerName?: string;
 
       /** Request body. */
       @body body: MkDirContent;
     },
-    PostSandboxFileMkdirResult,
-    DataPlaneStandardTraits,
-    PostSandboxFileMkdirErrors
+    PostSandboxFileMkdirResult
   >;
 
   /** Writes a file to a running sandbox. The file is streamed directly from the request body. */
   #suppress "@azure-tools/typespec-azure-core/byos" "The content is a byte stream, not a BYOS model."
   @summary("Writes a file to a running sandbox. The file is streamed directly from the request body.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/files")
-  @post
-  postSandboxFile is Foundations.Operation<
+  @action("files")
+  @actionSeparator("/")
+  postSandboxFile is SandboxFileWriteOperations.ResourceAction<
+    Sandbox,
     {
-      ...AzureResourceScope;
-
       /** contentType header. */
       @header contentType: "application/octet-stream";
 
       /** Request body. */
       @body content: bytes;
-
-      /** id parameter. */
-      @path id: string;
 
       /** path parameter. */
       @query path: string;
@@ -241,8 +244,6 @@ interface SandboxFilesOperations {
       /** containerName parameter. */
       @query containerName?: string;
     },
-    PostSandboxFileResult,
-    DataPlaneStandardTraits,
-    PostSandboxFileErrors
+    PostSandboxFileResult
   >;
 }

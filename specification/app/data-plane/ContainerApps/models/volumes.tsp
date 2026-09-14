@@ -1,3 +1,5 @@
+using Rest;
+
 namespace ContainerAppsSandbox {
   /** ARM resource ID for an Azure Storage blob container. */
   scalar ArmStorageContainerId extends string;
@@ -157,11 +159,14 @@ namespace ContainerAppsSandbox {
 
   /** Customer-facing volume resource. */
   @discriminator("type")
+  @resource("volumes")
+  @parentResource(SandboxGroupScope)
   model Volume {
     /** Represents the type of volume. */
     type: VolumeType;
 
     /** Volume name assigned from the route by the service. */
+    @key("volumeName")
     @visibility(Lifecycle.Read)
     volumeName: VolumeName;
 

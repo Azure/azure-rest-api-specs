@@ -254,32 +254,44 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Connection identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
           {
             "name": "includeSandboxIds",
             "in": "query",
-            "description": "includeSandboxIds parameter.",
+            "description": "Whether to include sandbox identifiers using the connection.",
             "required": false,
             "type": "boolean"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Connection"
             }
@@ -324,32 +336,44 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Connection identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
           {
             "name": "force",
             "in": "query",
-            "description": "force parameter.",
+            "description": "Whether to force deletion of the connection.",
             "required": false,
             "type": "boolean"
           }
         ],
         "responses": {
           "204": {
-            "description": "No Content."
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "401": {
             "description": "An error response with an HTTP status code and error body.",
@@ -400,18 +424,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Connection identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
@@ -427,7 +463,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Connection"
             }
@@ -481,18 +517,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Connection identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
@@ -508,7 +556,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/GenerateConsentLinkResponse"
             }
@@ -636,18 +684,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Connection identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
@@ -661,7 +721,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Connection"
             }
@@ -784,25 +844,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "id value.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ContentPackage"
             }
@@ -847,25 +919,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "id value.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "No Content."
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "401": {
             "description": "An error response with an HTTP status code and error body.",
@@ -905,13 +989,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "labels",
@@ -933,7 +1029,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/ContentPackage"
             }
@@ -1027,25 +1123,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "credentialName",
             "in": "path",
-            "description": "credentialName parameter.",
+            "description": "Credential name assigned by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SandboxGroupCredential"
             }
@@ -1134,25 +1242,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "credentialName",
             "in": "path",
-            "description": "credentialName parameter.",
+            "description": "Credential name assigned by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "No Content."
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "404": {
             "description": "An error response with an HTTP status code and error body.",
@@ -1333,25 +1453,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Disk image identifier assigned by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DiskImage"
             }
@@ -1396,25 +1528,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Disk image identifier assigned by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "No Content."
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "401": {
             "description": "An error response with an HTTP status code and error body.",
@@ -1528,25 +1672,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "name",
             "in": "path",
-            "description": "name parameter.",
+            "description": "name value.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PublicDiskImage"
             }
@@ -1644,25 +1800,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "policyId",
             "in": "path",
-            "description": "policyId parameter.",
+            "description": "Policy identifier assigned by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/NamedEgressPolicy"
             }
@@ -1785,25 +1953,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "policyId",
             "in": "path",
-            "description": "policyId parameter.",
+            "description": "Policy identifier assigned by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "No Content."
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "401": {
             "description": "An error response with an HTTP status code and error body.",
@@ -2000,25 +2180,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "Sandbox identifier.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful Sandbox get response.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Sandbox"
             }
@@ -2120,18 +2312,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
@@ -2147,7 +2351,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CommitSandboxResponse"
             }
@@ -2208,18 +2412,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
@@ -2235,7 +2451,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ConnectionsListResponse"
             }
@@ -2296,25 +2512,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Sandbox"
             }
@@ -2368,18 +2596,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
@@ -2395,7 +2635,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK."
+            "description": "The request has succeeded."
           },
           "400": {
             "description": "An error response with an HTTP status code and error body.",
@@ -2525,18 +2765,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
@@ -2552,7 +2804,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SandboxEgressPolicy"
             }
@@ -2613,25 +2865,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Sandbox"
             }
@@ -2733,18 +2997,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
@@ -2767,7 +3043,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SandboxExecuteCommandResponse"
             }
@@ -2821,18 +3097,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
@@ -2855,7 +3143,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SandboxExecuteShellCommandResponse"
             }
@@ -2989,18 +3277,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
@@ -3046,7 +3346,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/WriteFileResponse"
             }
@@ -3263,18 +3563,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
@@ -3297,7 +3609,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/FileOpStatusResponse"
             }
@@ -3423,18 +3735,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
@@ -3450,7 +3774,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Sandbox"
             }
@@ -3575,18 +3899,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
@@ -3602,7 +3938,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content."
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "400": {
             "description": "An error response with an HTTP status code and error body.",
@@ -3904,18 +4240,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
@@ -3931,7 +4279,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PortsListResponse"
             }
@@ -3992,18 +4340,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
@@ -4019,7 +4379,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PortsListResponse"
             }
@@ -4128,25 +4488,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Sandbox"
             }
@@ -4211,18 +4583,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
@@ -4238,7 +4622,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Snapshot"
             }
@@ -4378,25 +4762,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Snapshot"
             }
@@ -4457,18 +4853,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           },
@@ -4491,7 +4899,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content."
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "400": {
             "description": "An error response with an HTTP status code and error body.",
@@ -4734,25 +5142,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "secretId",
             "in": "path",
-            "description": "secretId parameter.",
+            "description": "Secret identifier assigned by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "No Content."
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "401": {
             "description": "An error response with an HTTP status code and error body.",
@@ -4861,25 +5281,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "secretId",
             "in": "path",
-            "description": "secretId parameter.",
+            "description": "Secret identifier assigned by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SecretPeekResponse"
             }
@@ -5005,25 +5437,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Snapshot identifier assigned by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Snapshot"
             }
@@ -5068,25 +5512,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "id parameter.",
+            "description": "Snapshot identifier assigned by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "No Content."
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "401": {
             "description": "An error response with an HTTP status code and error body.",
@@ -5258,25 +5714,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "volumeName",
             "in": "path",
-            "description": "volumeName parameter.",
+            "description": "Volume name assigned from the route by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Volume"
             }
@@ -5400,25 +5868,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "volumeName",
             "in": "path",
-            "description": "volumeName parameter.",
+            "description": "Volume name assigned from the route by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "No Content."
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "401": {
             "description": "An error response with an HTTP status code and error body.",
@@ -5549,18 +6029,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "volumeName",
             "in": "path",
-            "description": "volumeName parameter.",
+            "description": "Volume name assigned from the route by the service.",
             "required": true,
             "type": "string"
           },
@@ -5591,7 +6083,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/VolumePathItem"
             }
@@ -5826,18 +6318,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "volumeName",
             "in": "path",
-            "description": "volumeName parameter.",
+            "description": "Volume name assigned from the route by the service.",
             "required": true,
             "type": "string"
           },
@@ -5851,7 +6355,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/VolumePathItem"
             }
@@ -5905,18 +6409,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "volumeName",
             "in": "path",
-            "description": "volumeName parameter.",
+            "description": "Volume name assigned from the route by the service.",
             "required": true,
             "type": "string"
           },
@@ -5932,7 +6448,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Volume"
             }
@@ -6994,7 +7510,12 @@
       "properties": {
         "id": {
           "$ref": "#/definitions/ContentPackageId",
-          "description": "id value."
+          "description": "id value.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "size": {
           "$ref": "#/definitions/Bytes",
@@ -10691,7 +11212,12 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "name value."
+          "description": "name value.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "status": {
           "$ref": "#/definitions/DiskImageStatus",
@@ -10878,6 +11404,20 @@
           "description": "port value."
         }
       }
+    },
+    "ResourceGroupScope": {
+      "type": "object",
+      "description": "Resource group scope for resource routes.",
+      "properties": {
+        "resourceGroupName": {
+          "type": "string",
+          "description": "Azure resource group name.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceGroupName"
+      ]
     },
     "Sandbox": {
       "type": "object",
@@ -11520,6 +12060,20 @@
         }
       ],
       "x-ms-discriminator-value": "UserAssigned"
+    },
+    "SandboxGroupScope": {
+      "type": "object",
+      "description": "Sandbox group scope for resource routes.",
+      "properties": {
+        "sandboxGroupName": {
+          "type": "string",
+          "description": "Sandbox group name.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "sandboxGroupName"
+      ]
     },
     "SandboxId": {
       "type": "string",
@@ -12335,6 +12889,20 @@
           "description": "hasValue value."
         }
       }
+    },
+    "SubscriptionScope": {
+      "type": "object",
+      "description": "Subscription scope for resource routes.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Azure subscription identifier.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "subscriptionId"
+      ]
     },
     "TdsAuthKind": {
       "type": "string",

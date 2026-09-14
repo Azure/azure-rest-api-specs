@@ -19,6 +19,12 @@ alias DeleteDiskImageErrors =
   | ErrorResult<409>
   | ErrorResult<500>;
 
+/** Standard resource operations for deleting disk images. */
+alias DiskImageDeleteOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  DeleteDiskImageErrors
+>;
+
 /** OK. */
 model ListDiskImageResult {
   /** HTTP response status code. */
@@ -58,6 +64,12 @@ alias GetDiskImagePublicErrors =
   | ErrorResult<404>
   | ErrorResult<500>;
 
+/** Standard resource operations for reading public disk images. */
+alias PublicDiskImageGetOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  GetDiskImagePublicErrors
+>;
+
 /** OK. */
 model GetDiskImageResult {
   /** HTTP response status code. */
@@ -72,6 +84,12 @@ alias GetDiskImageErrors =
   | ErrorResult<401>
   | ErrorResult<404>
   | ErrorResult<500>;
+
+/** Standard resource operations for reading disk images. */
+alias DiskImageGetOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  GetDiskImageErrors
+>;
 
 /** Created. */
 model PostDiskImageResult {
@@ -94,19 +112,7 @@ alias PostDiskImageErrors =
 interface DiskImagesOperations {
   /** Deletes a disk image by ID. */
   @summary("Deletes a disk image by ID.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/{id}")
-  @delete
-  deleteDiskImage is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-    },
-    DeleteDiskImageResult,
-    DataPlaneStandardTraits,
-    DeleteDiskImageErrors
-  >;
+  deleteDiskImage is DiskImageDeleteOperations.ResourceDelete<DiskImage>;
 
   /** Returns disk images scoped to the specified sandbox group. */
   @summary("Lists disk images in a sandbox group, with pagination support.")
@@ -153,35 +159,11 @@ interface DiskImagesOperations {
 
   /** Public images are global and shared across all sandbox groups. */
   @summary("Gets a specific public disk image by name.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/public/{name}")
-  @get
-  getDiskImagePublic is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** name parameter. */
-      @path name: string;
-    },
-    GetDiskImagePublicResult,
-    DataPlaneStandardTraits,
-    GetDiskImagePublicErrors
-  >;
+  getDiskImagePublic is PublicDiskImageGetOperations.ResourceRead<PublicDiskImage>;
 
   /** Gets a specific disk image by ID. */
   @summary("Gets a specific disk image by ID.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/{id}")
-  @get
-  getDiskImage is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-    },
-    GetDiskImageResult,
-    DataPlaneStandardTraits,
-    GetDiskImageErrors
-  >;
+  getDiskImage is DiskImageGetOperations.ResourceRead<DiskImage>;
 
   /** Creates a new disk image from an OCI image reference. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."

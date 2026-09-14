@@ -1,3 +1,5 @@
+using Rest;
+
 namespace ContainerAppsSandbox;
 
 /** SnapshotPodContainer wire model. */
@@ -28,8 +30,11 @@ model CreateSnapshotContent {
 }
 
 /** Customer-facing snapshot resource returned by the service. */
+@resource("snapshots")
+@parentResource(SandboxGroupScope)
 model Snapshot {
   /** Snapshot identifier assigned by the service. */
+  @key("id")
   @visibility(Lifecycle.Read)
   id: string;
 

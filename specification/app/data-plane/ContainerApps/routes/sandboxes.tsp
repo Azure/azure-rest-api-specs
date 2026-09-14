@@ -58,6 +58,12 @@ namespace ContainerAppsSandbox {
 
   /** Errors returned when deleting a sandbox. */
   alias DeleteErrors = ErrorResult<401> | ErrorResult<500>;
+
+  /** Standard resource operations for reading sandboxes. */
+  alias SandboxGetOperations = ResourceOperations<
+    DataPlaneStandardTraits,
+    GetErrors
+  >;
 }
 
 namespace ContainerAppsSandbox {
@@ -65,9 +71,9 @@ namespace ContainerAppsSandbox {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core StandardResourceOperations.ResourceList cannot preserve the existing Page, PageSize, and labels query parameter names or the array response without changing the established wire contract."
   @doc("Lists sandboxes in a scope.")
   @tag("Sandboxes")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes")
   interface AzureSandboxes {
     @doc("Lists sandboxes in a scope.")
+    @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes")
     @listsResource(Sandbox)
     @get
     list is Foundations.Operation<
@@ -90,6 +96,7 @@ namespace ContainerAppsSandbox {
 
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core ResourceOperations.ResourceCreateWithServiceProvidedName requires a standard resource hierarchy, Sandbox request body, and 201 Location response, which cannot preserve the established scoped route, CreateSandboxContent request, and Sandbox response body."
     @doc("Creates a sandbox in a scope.")
+    @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes")
     @post
     create is Foundations.Operation<
       {
@@ -103,25 +110,12 @@ namespace ContainerAppsSandbox {
       CreateErrors
     >;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core StandardResourceOperations.ResourceRead cannot preserve the existing scoped id parameters and custom success/error response shapes without changing the established wire contract."
     @doc("Gets a sandbox by identifier.")
-    @route("/{id}")
-    @get
-    get is Foundations.Operation<
-      {
-        ...AzureResourceScope;
-
-        /** Sandbox identifier. */
-        @path id: string;
-      },
-      SandboxResult,
-      DataPlaneStandardTraits,
-      GetErrors
-    >;
+    get is SandboxGetOperations.ResourceRead<Sandbox>;
 
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core StandardResourceOperations.ResourceDelete cannot preserve the existing empty 200 and 204 success responses or custom error status shapes without changing the established wire contract."
     @doc("Deletes a sandbox by identifier.")
-    @route("/{id}")
+    @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}")
     @delete
     delete is Foundations.Operation<
       {

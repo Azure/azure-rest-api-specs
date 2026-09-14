@@ -1,3 +1,5 @@
+using Rest;
+
 namespace ContainerAppsSandbox {
   /** A strongly-typed blob URI (with or without SAS token). */
   scalar BlobUri extends string;
@@ -56,8 +58,12 @@ namespace ContainerAppsSandbox {
   }
 
   /** PublicDiskImage wire model. */
+  @resource("diskimages/public")
+  @parentResource(SandboxGroupScope)
   model PublicDiskImage {
     /** name value. */
+    @key("name")
+    @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
     name: string;
 
     /** status value. */
@@ -89,8 +95,11 @@ namespace ContainerAppsSandbox {
   }
 
   /** Customer-facing disk image resource returned by the service. */
+  @resource("diskimages")
+  @parentResource(SandboxGroupScope)
   model DiskImage {
     /** Disk image identifier assigned by the service. */
+    @key("id")
     @visibility(Lifecycle.Read)
     id: DiskImageId;
 

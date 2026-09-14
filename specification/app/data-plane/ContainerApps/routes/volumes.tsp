@@ -17,6 +17,12 @@ alias DeleteVolumeErrors =
   | ErrorResult<409>
   | ErrorResult<500>;
 
+/** Standard resource operations for deleting volumes. */
+alias VolumeDeleteOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  DeleteVolumeErrors
+>;
+
 /** No Content. */
 model DeleteVolumeFileResult {
   /** HTTP response status code. */
@@ -67,6 +73,12 @@ model GetVolumeResult {
 /** Errors returned by getVolume. */
 alias GetVolumeErrors = ErrorResult<401> | ErrorResult<404> | ErrorResult<500>;
 
+/** Standard resource operations for reading volumes. */
+alias VolumeGetOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  GetVolumeErrors
+>;
+
 /** OK. */
 model GetVolumeFilesResult {
   /** HTTP response status code. */
@@ -115,6 +127,12 @@ alias PostVolumeFileMkdirErrors =
   | ErrorResult<404>
   | ErrorResult<500>;
 
+/** Standard resource operations for creating volume directories. */
+alias VolumeFileMkdirOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostVolumeFileMkdirErrors
+>;
+
 /** Created. */
 model PostVolumeForkResult {
   /** HTTP response status code. */
@@ -131,6 +149,12 @@ alias PostVolumeForkErrors =
   | ErrorResult<404>
   | ErrorResult<409>
   | ErrorResult<500>;
+
+/** Standard resource operations for forking volumes. */
+alias VolumeForkOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostVolumeForkErrors
+>;
 
 /** Created. */
 model PutVolumeResult {
@@ -166,24 +190,18 @@ alias PostVolumeFileErrors =
   | ErrorResult<412>
   | ErrorResult<500>;
 
+/** Standard resource operations for uploading volume files. */
+alias VolumeFileUploadOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostVolumeFileErrors
+>;
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
 @tag("volumes")
 interface VolumesOperations {
   /** Deletes a volume by name. */
   @summary("Deletes a volume by name.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes/{volumeName}")
-  @delete
-  deleteVolume is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** volumeName parameter. */
-      @path volumeName: string;
-    },
-    DeleteVolumeResult,
-    DataPlaneStandardTraits,
-    DeleteVolumeErrors
-  >;
+  deleteVolume is VolumeDeleteOperations.ResourceDelete<Volume>;
 
   /** Delete a file or directory from a volume. */
   @summary("Delete a file or directory from a volume.")
@@ -245,19 +263,7 @@ interface VolumesOperations {
 
   /** Gets a specific volume by name. */
   @summary("Gets a specific volume by name.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes/{volumeName}")
-  @get
-  getVolume is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** volumeName parameter. */
-      @path volumeName: string;
-    },
-    GetVolumeResult,
-    DataPlaneStandardTraits,
-    GetVolumeErrors
-  >;
+  getVolume is VolumeGetOperations.ResourceRead<Volume>;
 
   /** List directory contents within a volume. */
   @summary("List directory contents within a volume.")
@@ -299,40 +305,28 @@ interface VolumesOperations {
 
   /** Create a directory within a volume. */
   @summary("Create a directory within a volume.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes/{volumeName}/files/mkdir")
-  @post
-  postVolumeFileMkdir is Foundations.Operation<
+  @action("files/mkdir")
+  @actionSeparator("/")
+  postVolumeFileMkdir is VolumeFileMkdirOperations.ResourceAction<
+    Volume,
     {
-      ...AzureResourceScope;
-
-      /** volumeName parameter. */
-      @path volumeName: string;
-
       /** path parameter. */
       @query path?: string;
     },
-    PostVolumeFileMkdirResult,
-    DataPlaneStandardTraits,
-    PostVolumeFileMkdirErrors
+    PostVolumeFileMkdirResult
   >;
 
   /** Forks a data disk volume. */
   @summary("Forks a data disk volume.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes/{volumeName}/fork")
-  @post
-  postVolumeFork is Foundations.Operation<
+  @action("fork")
+  @actionSeparator("/")
+  postVolumeFork is VolumeForkOperations.ResourceAction<
+    Volume,
     {
-      ...AzureResourceScope;
-
-      /** volumeName parameter. */
-      @path volumeName: string;
-
       /** Request body. */
       @body body: ForkDataDiskVolumeContent;
     },
-    PostVolumeForkResult,
-    DataPlaneStandardTraits,
-    PostVolumeForkErrors
+    PostVolumeForkResult
   >;
 
   /** Creates a new volume. */
@@ -359,20 +353,16 @@ interface VolumesOperations {
   #suppress "@azure-tools/typespec-azure-core/byos" "The content is a byte stream, not a BYOS model."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
   @summary("Upload a file to a volume.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes/{volumeName}/files")
-  @post
-  postVolumeFile is Foundations.Operation<
+  @action("files")
+  @actionSeparator("/")
+  postVolumeFile is VolumeFileUploadOperations.ResourceAction<
+    Volume,
     {
-      ...AzureResourceScope;
-
       /** contentType parameter. */
       @header contentType: "application/octet-stream";
 
       /** content parameter. */
       @body content: bytes;
-
-      /** volumeName parameter. */
-      @path volumeName: string;
 
       /** path parameter. */
       @query path?: string;
@@ -380,8 +370,6 @@ interface VolumesOperations {
       /** overwrite parameter. */
       @query overwrite?: boolean;
     },
-    PostVolumeFileResult,
-    DataPlaneStandardTraits,
-    PostVolumeFileErrors
+    PostVolumeFileResult
   >;
 }

@@ -1,3 +1,5 @@
+using Rest;
+
 namespace ContainerAppsSandbox {
   /** AuthorizeConnectionContent wire model. */
   model AuthorizeConnectionContent {
@@ -31,8 +33,11 @@ namespace ContainerAppsSandbox {
   }
 
   /** Customer-facing connection resource returned by the service. */
+  @resource("connections")
+  @parentResource(SandboxGroupScope)
   model Connection {
     /** Connection identifier assigned by the service. */
+    @key("id")
     @visibility(Lifecycle.Read)
     id: ConnectionId;
 

@@ -1,4 +1,5 @@
 using Http;
+using Rest;
 using Azure.Core;
 using Azure.Core.Traits;
 
@@ -48,6 +49,35 @@ model AzureResourceScope {
 
   /** Sandbox group name. */
   @path sandboxGroupName: string;
+}
+
+/** Subscription scope for resource routes. */
+@resource("subscriptions")
+model SubscriptionScope {
+  /** Azure subscription identifier. */
+  @key
+  @visibility(Lifecycle.Read)
+  subscriptionId: string;
+}
+
+/** Resource group scope for resource routes. */
+@resource("resourceGroups")
+@parentResource(SubscriptionScope)
+model ResourceGroupScope {
+  /** Azure resource group name. */
+  @key
+  @visibility(Lifecycle.Read)
+  resourceGroupName: string;
+}
+
+/** Sandbox group scope for resource routes. */
+@resource("sandboxGroups")
+@parentResource(ResourceGroupScope)
+model SandboxGroupScope {
+  /** Sandbox group name. */
+  @key
+  @visibility(Lifecycle.Read)
+  sandboxGroupName: string;
 }
 
 /** EntityTagHeaderValue wire model. */
