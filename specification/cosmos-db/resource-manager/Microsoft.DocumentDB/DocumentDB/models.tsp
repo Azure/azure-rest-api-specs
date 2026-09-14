@@ -3311,6 +3311,12 @@ model ThroughputSettingsResource {
    */
   @visibility(Lifecycle.Read)
   softAllowedMaximumThroughput?: string;
+
+  /**
+   * Array of throughput bucket limits to be applied to the Cosmos DB container
+   */
+  @added(Versions.v2026_07_15)
+  throughputBuckets?: ThroughputBucketResource[];
 }
 
 /**
