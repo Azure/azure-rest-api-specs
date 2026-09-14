@@ -46,4 +46,31 @@ enum Versions {
 
   @doc("2025-09-01")
   v20250901: "2025-09-01",
+
+  @doc("2025-11-01-preview")
+  v20251101_preview: "2025-11-01-preview",
+
+  @doc("2025-11-15-preview")
+  v20251115_preview: "2025-11-15-preview",
+
+  @doc("2025-12-01-preview")
+  v20251201_preview: "2025-12-01-preview",
+
+  @doc("2026-01-01-preview")
+  v20260101_preview: "2026-01-01-preview",
+
+  @doc("2026-02-01-preview")
+  v20260201_preview: "2026-02-01-preview",
+
+  @doc("2026-03-01-preview")
+  v20260301_preview: "2026-03-01-preview",
+
+  @doc("2026-04-01-preview")
+  v20260401_preview: "2026-04-01-preview",
+
+  @doc("2026-05-01-preview")
+  v20260501_preview: "2026-05-01-preview",
+
+  @doc("2026-06-01")
+  v20260601: "2026-06-01",
 }
