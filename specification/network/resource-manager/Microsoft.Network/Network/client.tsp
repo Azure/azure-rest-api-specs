@@ -83,14 +83,6 @@ namespace Common {
   Microsoft.Network.PublicIPAddressesOperationGroup.listCloudServicePublicIPAddresses,
   "!csharp"
 );
-@@scope(
-  Microsoft.Network.PublicIPAddressOperationGroup.reserveCloudServicePublicIpAddress,
-  "!csharp"
-);
-@@scope(
-  Microsoft.Network.PublicIPAddressOperationGroup.disassociateCloudServiceReservedPublicIp,
-  "!csharp"
-);
 
 @@clientLocation(
   Microsoft.Compute.NetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
