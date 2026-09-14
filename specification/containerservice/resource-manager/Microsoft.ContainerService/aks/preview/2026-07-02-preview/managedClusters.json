@@ -3540,6 +3540,9 @@
           "Create or update Identity Binding": {
             "$ref": "./examples/IdentityBindings_Create_Or_Update.json"
           },
+          "Create or update Identity Binding managed by a fleet identity binding profile": {
+            "$ref": "./examples/IdentityBindings_Create_Or_UpdateWithManagedBy.json"
+          },
           "Create or update Identity Binding with allowed subjects": {
             "$ref": "./examples/IdentityBindings_Create_Or_UpdateWithAllowedSubjects.json"
           }
@@ -9749,6 +9752,14 @@
         "properties": {
           "$ref": "#/definitions/IdentityBindingProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "managedBy": {
+          "type": "string",
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "eTag": {
           "type": "string",

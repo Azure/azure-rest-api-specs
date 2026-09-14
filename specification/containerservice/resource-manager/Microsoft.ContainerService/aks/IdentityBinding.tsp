@@ -28,12 +28,15 @@ model IdentityBinding
     SegmentName = "identityBindings",
     NamePattern = "^[a-z][a-z0-9]{0,63}$"
   >;
+  ...Azure.ResourceManager.ManagedByProperty;
   ...Azure.ResourceManager.EntityTagProperty;
 }
 
 @@maxLength(IdentityBinding.name, 63);
 @@minLength(IdentityBinding.name, 1);
 @@doc(IdentityBinding.name, "The name of the identity binding.");
+@@added(IdentityBinding.managedBy, Versions.v2026_07_02_preview);
+@@visibility(IdentityBinding.managedBy, Lifecycle.Read, Lifecycle.Create);
 @@doc(
   IdentityBinding.properties,
   "The resource-specific properties for this resource."
