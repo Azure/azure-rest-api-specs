@@ -23,7 +23,7 @@ model VmApplication
     Resource = VmApplication,
     KeyName = "applicationName",
     SegmentName = "applications",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9-_\\.]+"
   >;
 }
 
