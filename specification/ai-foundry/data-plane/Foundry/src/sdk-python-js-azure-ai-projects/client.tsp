@@ -276,6 +276,7 @@ using Azure.AI.Projects;
 // Beta Agents sub-client
 // --------------------------------------------------------------------------------
 
+@@clientName(Azure.AI.Projects.Agents.generateAgent, "createFromPrompt");
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob");
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs");
@@ -288,6 +289,90 @@ using Azure.AI.Projects;
   "dataset_items",
   "python"
 );
+
+// --------------------------------------------------------------------------------
+// Beta Voice Agent Conversations sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(AgentEndpointConversations.listAgentConversations, "list");
+@@clientName(AgentEndpointConversations.getAgentConversation, "get");
+@@clientName(AgentEndpointConversations.deleteAgentConversation, "delete");
+@@clientName(
+  AgentEndpointConversations.listAgentConversationResponses,
+  "listResponses"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationResponse,
+  "getResponse"
+);
+@@clientName(
+  AgentEndpointConversations.listAgentConversationResponseItems,
+  "listResponseItems"
+);
+@@clientName(
+  AgentEndpointConversations.listAgentConversationItems,
+  "listItems"
+);
+@@clientName(AgentEndpointConversations.getAgentConversationItem, "getItem");
+@@clientName(
+  AgentEndpointConversations.getAgentConversationAudioItem,
+  "getAudioItem"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationAudioItemContent,
+  "downloadAudioItem"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationGeneratedAudioItem,
+  "getGeneratedAudioItem"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationGeneratedAudioItemContent,
+  "downloadGeneratedAudioItem"
+);
+@@clientName(AgentEndpointConversations.getAgentConversationAudio, "getAudio");
+@@clientName(
+  AgentEndpointConversations.getAgentConversationAudioContent,
+  "downloadAudio"
+);
+
+// --------------------------------------------------------------------------------
+// Beta Voice Agent Telephony sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(AgentTelephony.createTelephonyBinding, "createBinding");
+@@clientName(AgentTelephony.listTelephonyBindings, "listBindings");
+@@clientName(AgentTelephony.getTelephonyBinding, "getBinding");
+@@clientName(AgentTelephony.updateTelephonyBinding, "updateBinding");
+@@clientName(AgentTelephony.deleteTelephonyBinding, "deleteBinding");
+@@clientName(AgentTelephony.listTelephonyCalls, "listCalls");
+@@clientName(AgentTelephony.getTelephonyCall, "getCall");
+@@clientName(AgentTelephony.transferTelephonyCall, "transferCall");
+@@clientName(AgentTelephony.endTelephonyCall, "endCall");
+@@clientName(AgentTelephony.getTelephonyTransferTargets, "getTransferTargets");
+@@clientName(
+  AgentTelephony.replaceTelephonyTransferTargets,
+  "replaceTransferTargets"
+);
+@@clientName(AgentTelephony.createTelephonyCallJob, "createCallJob");
+@@clientName(AgentTelephony.getTelephonyCallJob, "getCallJob");
+@@clientName(AgentTelephony.cancelTelephonyCallJob, "cancelCallJob");
+@@clientName(AgentTelephony.createTelephonyCampaign, "createCampaign");
+@@clientName(AgentTelephony.getTelephonyCampaign, "getCampaign");
+@@clientName(
+  AgentTelephony.importTelephonyCampaignRecipients,
+  "importCampaignRecipients"
+);
+@@clientName(
+  AgentTelephony.getTelephonyCampaignRecipientImport,
+  "getCampaignRecipientImport"
+);
+@@clientName(AgentTelephony.validateTelephonyCampaign, "validateCampaign");
+@@clientName(AgentTelephony.publishTelephonyCampaign, "publishCampaign");
+@@clientName(AgentTelephony.pauseTelephonyCampaign, "pauseCampaign");
+@@clientName(AgentTelephony.resumeTelephonyCampaign, "resumeCampaign");
+@@clientName(AgentTelephony.cancelTelephonyCampaign, "cancelCampaign");
+@@clientName(AgentTelephony.getTelephonyOperation, "getOperation");
 
 // --------------------------------------------------------------------------------
 // Class renames related to Responses
