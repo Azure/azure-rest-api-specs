@@ -4,15 +4,6 @@ using Azure.Core;
 
 namespace ContainerAppsSandbox;
 
-/** No Content. */
-model DeleteDiskImageResult204 {
-  /** HTTP response status code. */
-  @statusCode statusCode: 204;
-}
-
-/** Successful response returned by deleteDiskImage. */
-alias DeleteDiskImageResult = DeleteDiskImageResult204;
-
 /** Errors returned by deleteDiskImage. */
 alias DeleteDiskImageErrors =
   | ErrorResult<401>
@@ -49,15 +40,6 @@ model ListPublicDiskImageResult {
 /** Errors returned by listDiskImagesPublic. */
 alias ListPublicDiskImageErrors = ErrorResult<401> | ErrorResult<500>;
 
-/** OK. */
-model GetDiskImagePublicResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: PublicDiskImage;
-}
-
 /** Errors returned by getDiskImagePublic. */
 alias GetDiskImagePublicErrors =
   | ErrorResult<401>
@@ -69,15 +51,6 @@ alias PublicDiskImageGetOperations = ResourceOperations<
   DataPlaneStandardTraits,
   GetDiskImagePublicErrors
 >;
-
-/** OK. */
-model GetDiskImageResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: DiskImage;
-}
 
 /** Errors returned by getDiskImage. */
 alias GetDiskImageErrors =

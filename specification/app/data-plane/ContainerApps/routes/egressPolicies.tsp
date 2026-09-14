@@ -4,12 +4,6 @@ using Azure.Core;
 
 namespace ContainerAppsSandbox;
 
-/** No Content. */
-model DeleteEgressPolicyResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 204;
-}
-
 /** Errors returned by deleteEgressPolicy. */
 alias DeleteEgressPolicyErrors =
   | ErrorResult<401>
@@ -33,15 +27,6 @@ model ListEgressPolicyResult {
 
 /** Errors returned by listEgressPolicies. */
 alias ListEgressPolicyErrors = ErrorResult<401> | ErrorResult<500>;
-
-/** OK. */
-model GetEgressPolicyResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: NamedEgressPolicy;
-}
 
 /** Errors returned by getEgressPolicy. */
 alias GetEgressPolicyErrors =

@@ -4,12 +4,6 @@ using Azure.Core;
 
 namespace ContainerAppsSandbox;
 
-/** No Content. */
-model DeleteCredentialResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 204;
-}
-
 /** Errors returned by deleteCredential. */
 alias DeleteCredentialErrors = ErrorResult<404>;
 
@@ -26,15 +20,6 @@ model ListCredentialResult {
 
   /** Response body. */
   @body body: SandboxGroupCredential[];
-}
-
-/** OK. */
-model GetCredentialResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: SandboxGroupCredential;
 }
 
 /** Errors returned by getCredential. */

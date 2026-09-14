@@ -4,15 +4,6 @@ using Azure.Core;
 
 namespace ContainerAppsSandbox;
 
-/** No Content. */
-model DeleteContentPackageResult204 {
-  /** HTTP response status code. */
-  @statusCode statusCode: 204;
-}
-
-/** Successful response returned by deleteContentPackage. */
-alias DeleteContentPackageResult = DeleteContentPackageResult204;
-
 /** Errors returned by deleteContentPackage. */
 alias DeleteContentPackageErrors = ErrorResult<401> | ErrorResult<500>;
 
@@ -33,15 +24,6 @@ model ListContentPackageResult {
 
 /** Errors returned by listContentPackages. */
 alias ListContentPackageErrors = ErrorResult<401> | ErrorResult<500>;
-
-/** OK. */
-model GetContentPackageResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: ContentPackage;
-}
 
 /** Errors returned by getContentPackage. */
 alias GetContentPackageErrors =

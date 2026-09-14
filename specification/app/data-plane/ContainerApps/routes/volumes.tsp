@@ -4,12 +4,6 @@ using Azure.Core;
 
 namespace ContainerAppsSandbox;
 
-/** No Content. */
-model DeleteVolumeResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 204;
-}
-
 /** Errors returned by deleteVolume. */
 alias DeleteVolumeErrors =
   | ErrorResult<401>
@@ -60,15 +54,6 @@ model GetVolumesCountResult {
 
 /** Errors returned by getVolumesCount. */
 alias GetVolumesCountErrors = ErrorResult<401> | ErrorResult<500>;
-
-/** OK. */
-model GetVolumeResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: Volume;
-}
 
 /** Errors returned by getVolume. */
 alias GetVolumeErrors = ErrorResult<401> | ErrorResult<404> | ErrorResult<500>;

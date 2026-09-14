@@ -5,12 +5,6 @@ using Azure.Core.Traits;
 
 namespace ContainerAppsSandbox;
 
-/** No Content. */
-model DeleteConnectionResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 204;
-}
-
 /** Errors returned by deleteConnection. */
 alias DeleteConnectionErrors =
   | ErrorResult<401>
@@ -44,15 +38,6 @@ model ListConnectionResult {
 
 /** Errors returned by listConnections. */
 alias ListConnectionErrors = ErrorResult<401> | ErrorResult<500>;
-
-/** OK. */
-model GetConnectionResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: Connection;
-}
 
 /** Errors returned by getConnection. */
 alias GetConnectionErrors =

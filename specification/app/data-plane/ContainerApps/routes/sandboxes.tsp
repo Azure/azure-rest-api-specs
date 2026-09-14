@@ -22,15 +22,6 @@ namespace ContainerAppsSandbox {
     @body body: Sandbox;
   }
 
-  /** Successful Sandbox get response. */
-  model SandboxResult {
-    /** HTTP response status code. */
-    @statusCode statusCode: 200;
-
-    /** Sandbox resource. */
-    @body body: Sandbox;
-  }
-
   /** Successful Sandbox delete response with an empty 200 body. */
   model SandboxDeletedResult {
     /** HTTP response status code. */

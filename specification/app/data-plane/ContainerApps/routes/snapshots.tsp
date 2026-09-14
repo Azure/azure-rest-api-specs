@@ -4,15 +4,6 @@ using Azure.Core;
 
 namespace ContainerAppsSandbox;
 
-/** No Content. */
-model DeleteSnapshotResult204 {
-  /** HTTP response status code. */
-  @statusCode statusCode: 204;
-}
-
-/** Successful response returned by deleteSnapshot. */
-alias DeleteSnapshotResult = DeleteSnapshotResult204;
-
 /** Errors returned by deleteSnapshot. */
 alias DeleteSnapshotErrors = ErrorResult<401> | ErrorResult<500>;
 
@@ -45,15 +36,6 @@ model GetSnapshotsCountResult {
 
 /** Errors returned by getSnapshotsCount. */
 alias GetSnapshotsCountErrors = ErrorResult<401> | ErrorResult<500>;
-
-/** OK. */
-model GetSnapshotResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: Snapshot;
-}
 
 /** Errors returned by getSnapshot. */
 alias GetSnapshotErrors =
