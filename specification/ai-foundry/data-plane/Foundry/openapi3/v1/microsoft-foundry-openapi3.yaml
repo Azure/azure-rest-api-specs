@@ -2787,7 +2787,7 @@ paths:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio:
     get:
-      operationId: AgentEndpointConversations_getAgentConversationItemAudio
+      operationId: AgentEndpointConversations_getAgentConversationAudioItem
       summary: Get a voice agent conversation item's audio metadata
       description: |-
         Returns metadata for a single conversation item's audio segment, including the common playback facts
@@ -2836,7 +2836,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VoiceItemAudioResponse'
+                $ref: '#/components/schemas/VoiceAudioItemResponse'
         4XX:
           description: Client error
           content:
@@ -2856,7 +2856,7 @@ paths:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content:
     get:
-      operationId: AgentEndpointConversations_getAgentConversationItemAudioContent
+      operationId: AgentEndpointConversations_getAgentConversationAudioItemContent
       summary: Stream a voice agent conversation item's audio
       description: |-
         Streams a single conversation item's audio as a WAV (`audio/wav`) byte stream through the service (no SAS
@@ -2924,7 +2924,7 @@ paths:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated:
     get:
-      operationId: AgentEndpointConversations_getAgentConversationItemGeneratedAudio
+      operationId: AgentEndpointConversations_getAgentConversationGeneratedAudioItem
       summary: Get a voice agent conversation item's generated audio metadata
       description: |-
         Returns metadata for a conversation item's generated audio. This subordinate artifact is separate from the
@@ -2971,7 +2971,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VoiceGeneratedItemAudioResponse'
+                $ref: '#/components/schemas/VoiceGeneratedAudioItemResponse'
         4XX:
           description: Client error
           content:
@@ -2991,7 +2991,7 @@ paths:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated/content:
     get:
-      operationId: AgentEndpointConversations_getAgentConversationItemGeneratedAudioContent
+      operationId: AgentEndpointConversations_getAgentConversationGeneratedAudioItemContent
       summary: Stream a voice agent conversation item's generated audio
       description: |-
         Streams a conversation item's generated audio as a WAV (`audio/wav`) byte stream through the service. This
@@ -85784,6 +85784,53 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    VoiceAudioItemResponse:
+      type: object
+      required:
+        - conversation_id
+        - item_id
+      properties:
+        conversation_id:
+          type: string
+          description: The id of the conversation the item belongs to.
+        item_id:
+          type: string
+          description: The id of the item this audio belongs to.
+        role:
+          $ref: '#/components/schemas/VoiceAudioRole'
+          description: The role the audio belongs to.
+        format:
+          $ref: '#/components/schemas/VoiceAudioContainerFormat'
+          description: The container format of the audio.
+        codec:
+          $ref: '#/components/schemas/VoiceAudioCodec'
+          description: The audio codec.
+        sample_rate:
+          type: integer
+          format: int32
+          description: The sample rate in Hz.
+        channels:
+          type: integer
+          format: int32
+          description: The number of audio channels.
+        start_offset_ms:
+          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          description: The offset from the session start at which this segment begins.
+        duration_ms:
+          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          description: The duration of the audio segment.
+        blob_uri:
+          type: string
+          format: uri
+          description: "For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead."
+      description: |-
+        Metadata for a single conversation item's audio segment. For bring-your-own-storage (BYOS), the response includes
+        `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
+        credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
+        `/audio/content` route.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAudioRole:
       anyOf:
         - type: string
@@ -85872,7 +85919,7 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceGeneratedItemAudioResponse:
+    VoiceGeneratedAudioItemResponse:
       type: object
       required:
         - conversation_id
@@ -85946,53 +85993,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceConversationEngine'
       description: A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must support the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceItemAudioResponse:
-      type: object
-      required:
-        - conversation_id
-        - item_id
-      properties:
-        conversation_id:
-          type: string
-          description: The id of the conversation the item belongs to.
-        item_id:
-          type: string
-          description: The id of the item this audio belongs to.
-        role:
-          $ref: '#/components/schemas/VoiceAudioRole'
-          description: The role the audio belongs to.
-        format:
-          $ref: '#/components/schemas/VoiceAudioContainerFormat'
-          description: The container format of the audio.
-        codec:
-          $ref: '#/components/schemas/VoiceAudioCodec'
-          description: The audio codec.
-        sample_rate:
-          type: integer
-          format: int32
-          description: The sample rate in Hz.
-        channels:
-          type: integer
-          format: int32
-          description: The number of audio channels.
-        start_offset_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: The offset from the session start at which this segment begins.
-        duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: The duration of the audio segment.
-        blob_uri:
-          type: string
-          format: uri
-          description: "For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead."
-      description: |-
-        Metadata for a single conversation item's audio segment. For bring-your-own-storage (BYOS), the response includes
-        `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
-        credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
-        `/audio/content` route.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
