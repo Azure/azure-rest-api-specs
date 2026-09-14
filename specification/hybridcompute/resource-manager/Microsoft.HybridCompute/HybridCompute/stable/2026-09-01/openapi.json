@@ -2017,7 +2017,7 @@
           {
             "name": "applicationName",
             "in": "path",
-            "description": "The name of the VM application.",
+            "description": "The name of the VM application. When creating the resource, this name must match the application name in the selected gallery reference.",
             "required": true,
             "type": "string"
           },
@@ -2078,7 +2078,7 @@
           {
             "name": "applicationName",
             "in": "path",
-            "description": "The name of the VM application.",
+            "description": "The name of the VM application. When creating the resource, this name must match the application name in the selected gallery reference.",
             "required": true,
             "type": "string"
           },
@@ -2168,7 +2168,7 @@
           {
             "name": "applicationName",
             "in": "path",
-            "description": "The name of the VM application.",
+            "description": "The name of the VM application. When creating the resource, this name must match the application name in the selected gallery reference.",
             "required": true,
             "type": "string"
           },
@@ -2255,7 +2255,7 @@
           {
             "name": "applicationName",
             "in": "path",
-            "description": "The name of the VM application.",
+            "description": "The name of the VM application. When creating the resource, this name must match the application name in the selected gallery reference.",
             "required": true,
             "type": "string"
           }
@@ -8944,7 +8944,7 @@
     },
     "VmApplicationProperties": {
       "type": "object",
-      "description": "The properties of a VM application.",
+      "description": "The properties of a VM application. Exactly one gallery application reference must be specified when creating or replacing the resource.",
       "properties": {
         "order": {
           "type": "integer",
@@ -8953,15 +8953,23 @@
         },
         "packageReferenceId": {
           "type": "string",
-          "description": "The resource ID of the gallery application version."
+          "format": "arm-id",
+          "description": "The resource ID of the gallery application version. The version name can be `latest` or a specific version. This property is mutually exclusive with sharedGalleryApplicationId and communityGalleryApplicationId.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/galleries/applications/versions"
+              }
+            ]
+          }
         },
         "sharedGalleryApplicationId": {
           "type": "string",
-          "description": "The resource ID of the shared gallery application version."
+          "description": "The identifier of a direct shared gallery application version. Use `/sharedGalleries/{sharedGalleryUniqueName}/applications/{applicationName}/versions/{versionName}`, where the version name can be `latest` or a specific version. This property is mutually exclusive with packageReferenceId and communityGalleryApplicationId."
         },
         "communityGalleryApplicationId": {
           "type": "string",
-          "description": "The resource ID of the community gallery application version."
+          "description": "The identifier of a community gallery application version. Use `/communityGalleries/{communityGalleryPublicName}/applications/{applicationName}/versions/{versionName}`, where the version name can be `latest` or a specific version. This property is mutually exclusive with packageReferenceId and sharedGalleryApplicationId."
         },
         "configurationReference": {
           "type": "string",
@@ -9012,15 +9020,23 @@
         },
         "packageReferenceId": {
           "type": "string",
-          "description": "The resource ID of the gallery application version."
+          "format": "arm-id",
+          "description": "The resource ID of the gallery application version. The version name can be `latest` or a specific version. This property is mutually exclusive with sharedGalleryApplicationId and communityGalleryApplicationId.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/galleries/applications/versions"
+              }
+            ]
+          }
         },
         "sharedGalleryApplicationId": {
           "type": "string",
-          "description": "The resource ID of the shared gallery application version."
+          "description": "The identifier of a direct shared gallery application version. Use `/sharedGalleries/{sharedGalleryUniqueName}/applications/{applicationName}/versions/{versionName}`, where the version name can be `latest` or a specific version. This property is mutually exclusive with packageReferenceId and communityGalleryApplicationId."
         },
         "communityGalleryApplicationId": {
           "type": "string",
-          "description": "The resource ID of the community gallery application version."
+          "description": "The identifier of a community gallery application version. Use `/communityGalleries/{communityGalleryPublicName}/applications/{applicationName}/versions/{versionName}`, where the version name can be `latest` or a specific version. This property is mutually exclusive with packageReferenceId and sharedGalleryApplicationId."
         },
         "configurationReference": {
           "type": "string",

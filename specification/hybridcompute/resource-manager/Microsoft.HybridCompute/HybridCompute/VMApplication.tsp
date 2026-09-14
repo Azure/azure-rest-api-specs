@@ -103,7 +103,10 @@ interface VmApplications {
   >;
 }
 
-@@doc(VmApplication.name, "The name of the VM application.");
+@@doc(
+  VmApplication.name,
+  "The name of the VM application. When creating the resource, this name must match the application name in the selected gallery reference."
+);
 @@doc(VmApplication.properties, "The VM application properties.");
 @@doc(
   VmApplications.createOrUpdate::parameters.resource,

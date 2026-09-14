@@ -3932,7 +3932,7 @@ model MachineExtensionsListResult is Azure.Core.Page<MachineExtension>;
 model MachineRunCommandsListResult is Azure.Core.Page<MachineRunCommand>;
 
 /**
- * The properties of a VM application.
+ * The properties of a VM application. Exactly one gallery application reference must be specified when creating or replacing the resource.
  */
 @added(Versions.v2026_09_01)
 model VmApplicationProperties {
@@ -3942,17 +3942,21 @@ model VmApplicationProperties {
   order?: int32;
 
   /**
-   * The resource ID of the gallery application version.
+   * The resource ID of the gallery application version. The version name can be `latest` or a specific version. This property is mutually exclusive with sharedGalleryApplicationId and communityGalleryApplicationId.
    */
-  packageReferenceId?: string;
+  packageReferenceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/galleries/applications/versions";
+    }
+  ]>;
 
   /**
-   * The resource ID of the shared gallery application version.
+   * The identifier of a direct shared gallery application version. Use `/sharedGalleries/{sharedGalleryUniqueName}/applications/{applicationName}/versions/{versionName}`, where the version name can be `latest` or a specific version. This property is mutually exclusive with packageReferenceId and communityGalleryApplicationId.
    */
   sharedGalleryApplicationId?: string;
 
   /**
-   * The resource ID of the community gallery application version.
+   * The identifier of a community gallery application version. Use `/communityGalleries/{communityGalleryPublicName}/applications/{applicationName}/versions/{versionName}`, where the version name can be `latest` or a specific version. This property is mutually exclusive with packageReferenceId and sharedGalleryApplicationId.
    */
   communityGalleryApplicationId?: string;
 
