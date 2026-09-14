@@ -166,6 +166,7 @@ model ListReportDownloadUrlResponse {
   @doc("Short-lived, read-only URL to download the report.")
   @added(Versions.v2026_08_31_preview)
   @visibility(Lifecycle.Read)
+  @secret
   downloadUrl?: url;
 
   @doc("Timestamp at which the download URL expires.")
