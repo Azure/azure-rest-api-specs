@@ -1099,13 +1099,38 @@ namespace Azure.AI.Projects {
   @@alternateType(
     OpenAI.ToolChoiceParam,
     {
-      identity: "OpenAI.Responses.ToolChoice",
+      identity: "OpenAI.Realtime.RealtimeCustomToolChoice",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.ToolChoiceMCP,
+    {
+      identity: "OpenAI.Realtime.RealtimeCustomMcpToolChoice",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.ToolChoiceFunction,
+    {
+      identity: "OpenAI.Realtime.RealtimeCustomFunctionToolChoice",
       package: "OpenAI",
       minVersion: "2.12.0",
     },
     "csharp"
   );
   // And now drop classes that aren't referenced, and aren't pruned.
+  @@alternateType(
+    OpenAI.ToolChoiceParamType,
+    {
+      identity: "System.Object",
+    },
+    "csharp"
+  );
   @@alternateType(
     OpenAI.InputTextContent,
     {
