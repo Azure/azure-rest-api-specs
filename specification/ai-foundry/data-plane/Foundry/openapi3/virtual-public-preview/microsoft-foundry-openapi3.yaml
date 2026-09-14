@@ -52898,6 +52898,9 @@ components:
     GenerateAgentRequest:
       $ref: '#/components/schemas/GenerateVoiceAgentRequest'
       description: The kind-specific inputs for generating and creating an agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     GenerateVoiceAgentRequest:
       type: object
       required:
@@ -85697,6 +85700,9 @@ components:
       minLength: 1
       maxLength: 128
       description: A service-generated telephony binding identifier.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     TelephonyBindingListItem:
       type: object
       required:
@@ -85808,6 +85814,9 @@ components:
       minLength: 1
       maxLength: 128
       description: A service-generated telephony call identifier.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     TelephonyCallJob:
       type: object
       required:
@@ -86851,6 +86860,9 @@ components:
             - immediate
             - scheduled
       description: When a published outbound campaign becomes eligible to dispatch calls.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     TelephonyOperation:
       type: object
       required:
@@ -87111,6 +87123,9 @@ components:
       maxLength: 64
       pattern: ^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$
       description: The unique name of a telephony transfer target.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     TelephonyTransferTargets:
       type: object
       required:
@@ -88504,6 +88519,9 @@ components:
             - type: 'null'
           format: password
       description: An ICE server used for avatar WebRTC negotiation.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentAvatarOutputProtocol:
       anyOf:
         - type: string
@@ -88560,6 +88578,9 @@ components:
           exclusiveMinimum: 0
           default: 1
       description: Avatar placement and motion settings.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentAvatarType:
       anyOf:
         - type: string
@@ -88580,6 +88601,9 @@ components:
         color:
           type: string
       description: The avatar video background.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentAvatarVideoCrop:
       type: object
       required:
@@ -88601,6 +88625,9 @@ components:
           minItems: 2
           maxItems: 2
       description: The rectangular crop applied to avatar video.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentAvatarVideoParams:
       type: object
       properties:
@@ -88622,6 +88649,9 @@ components:
           maximum: 2000
           default: 10
       description: Avatar video encoder and presentation settings.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentAvatarVideoResolution:
       type: object
       required:
@@ -88637,6 +88667,9 @@ components:
           format: int32
           minimum: 1
       description: The avatar video resolution.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentAzureSemanticVadEnTurnDetection:
       type: object
       required:
@@ -88917,12 +88950,18 @@ components:
           description: The number of input channels. Use two interleaved channels when `reference_source` is `client`.
           default: 1
       description: Server-side echo cancellation settings for input audio.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentEchoCancellationReferenceSource:
       type: string
       enum:
         - server
         - client
       description: The source of reference audio used for echo cancellation.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentEndConversationSystemTool:
       type: object
       required:
@@ -89009,6 +89048,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTool'
       description: A native function tool executed by the client.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentGreetingConfig:
       type: object
       required:
@@ -89134,6 +89176,9 @@ components:
           static_interim_response: '#/components/schemas/VoiceAgentStaticInterimResponseConfig'
           llm_interim_response: '#/components/schemas/VoiceAgentLlmInterimResponseConfig'
       description: Fields shared by interim-response configurations.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentInterimResponseTrigger:
       anyOf:
         - type: string
@@ -89142,6 +89187,9 @@ components:
             - latency
             - tool
       description: A condition that may trigger an interim response.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentLlmGeneratedGreetingConfig:
       type: object
       required:
@@ -89190,6 +89238,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentInterimResponseConfig'
       description: An interim response generated by a language model.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentMaxOutputTokens:
       anyOf:
         - type: integer
@@ -89327,6 +89378,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
       description: OpenAI semantic VAD turn-detection settings.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentServerVadTurnDetection:
       type: object
       required:
@@ -89378,6 +89432,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentAvatarConfig'
       description: Avatar settings accepted by the stable voice-agent WebSocket contract.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentSessionIncludeOption:
       type: string
       enum:
@@ -89405,6 +89462,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentInterimResponseConfig'
       description: A static interim response selected from configured text.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentSubagent:
       type: object
       required:
@@ -89667,6 +89727,9 @@ components:
       enum:
         - realtime
       description: The WebSocket subprotocol supported by a voice-agent connection.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAudioCodec:
       anyOf:
         - type: string
@@ -90118,6 +90181,9 @@ components:
             Maximum number of output tokens for a single assistant response,
               inclusive of tool calls, that was used in this response.
       description: Properties shared by persisted voice responses.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceType:
       anyOf:
         - type: string
