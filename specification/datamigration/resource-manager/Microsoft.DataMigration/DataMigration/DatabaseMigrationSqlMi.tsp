@@ -46,6 +46,7 @@ alias DatabaseMigrationSqlMiOps = Azure.ResourceManager.Legacy.ExtensionOperatio
     ...Extension.ExtensionProviderNamespace<DatabaseMigrationSqlMi>;
 
     /** The name of the target database. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @path
     @segment("databaseMigrations")
     @key

@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "./models.flowprofile.tsp";
+import "./main.tsp";
 
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -571,6 +572,7 @@ union TargetType {
 /**
  * The request used to list approved schemas within the resource provider. ListApprovedSchemaRequest has reached end of life support starting version 2025-05-30-preview. Please manage schemas with a FlowProfile resource instead.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model ListApprovedSchemasRequest {
   /**
    * The name of the pipeline to filter approved schemas.
@@ -846,49 +848,6 @@ model PipelineProperties {
    * Status of the current pipeline
    */
   status?: PipelineStatus;
-}
-
-/**
- * Connection body inside a pipeline
- */
-model PipelineConnection {
-  ...Record<unknown>;
-
-  /**
-   * Connection id inside pipeline
-   */
-  @visibility(Lifecycle.Read)
-  id: string;
-
-  /**
-   * Connection name inside pipeline
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Connection type inside pipeline
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Connection location inside pipeline
-   */
-  @visibility(Lifecycle.Read)
-  location?: string;
-
-  /**
-   * Connection etag inside pipeline
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * Metadata pertaining to creation and last modification of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
 }
 
 /**
@@ -1174,6 +1133,7 @@ model SelectedResource {
 /**
  * The option associated with messaging flows.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model MessagingOptions {
   /**
    * Billing tier for this messaging flow
@@ -1190,6 +1150,7 @@ model MessagingOptions {
 /**
  * Properties specific to API Flow Type
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model ApiFlowOptions {
   /**
    * Remote host to which communication needs to be made. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the remoteEndpointSettings.endpoint property instead.
@@ -1704,6 +1665,7 @@ model PipelineConnectionProperties {
 /**
  * Defines the required request body for retrieving Pipeline metadata for a provided pipeline.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_02_06_preview)
 model ListPipelineMetadataRequest {
   /**

@@ -28,7 +28,7 @@ interface AgentOptimizationJobs {
   @pollingOperation(AgentOptimizationJobs.get)
   create is postJobPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    OptimizationJob
+    AgentOptimizationJob
   >;
 
   /**
@@ -39,7 +39,7 @@ interface AgentOptimizationJobs {
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   get is queryJobStatusPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    OptimizationJob
+    AgentOptimizationJob
   >;
 
   /**
@@ -50,7 +50,7 @@ interface AgentOptimizationJobs {
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   list is listJobsPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    OptimizationJobListItem,
+    AgentOptimizationJobListItem,
     {
       @doc("Filter to jobs in this lifecycle state.")
       @query
@@ -70,7 +70,7 @@ interface AgentOptimizationJobs {
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   cancel is cancelJobPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    OptimizationJob
+    AgentOptimizationJob
   >;
 
   /**

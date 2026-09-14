@@ -52,6 +52,7 @@ model EnclaveConnectionProperties {
   @doc("Source CIDR.")
   sourceCidr?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Source IP group Resource Id.")
   @visibility(Lifecycle.Read, Lifecycle.Create)

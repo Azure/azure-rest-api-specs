@@ -1,22 +1,25 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { join } from "path";
-import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
+import { resolve } from "path";
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
-/** @type {{ show: import("vitest").MockedFunction<() => Promise<string>>, fetch: import("vitest").MockedFunction<() => Promise<void>> }} */
-const mockGitInstance = vi.hoisted(() => ({ show: vi.fn(), fetch: vi.fn() }));
+/** @type {import("vitest").MockedFunction<(path: string, encoding: string) => Promise<string>>} */
+const mockReadFile = vi.hoisted(() => vi.fn());
 
-vi.mock("simple-git", () => ({
-  simpleGit: vi.fn(() => mockGitInstance),
-}));
-
-/** @type {import("vitest").MockedFunction<typeof import("../../../shared/src/simple-git.js").getRootFolder>} */
-const mockGetRootFolder = vi.hoisted(() => vi.fn().mockResolvedValue("/fake/repo"));
-
-vi.mock("../../../shared/src/simple-git.js", () => ({
-  getRootFolder: mockGetRootFolder,
+vi.mock("fs/promises", () => ({
+  readFile: mockReadFile,
 }));
 
 import { checkLease, parseLease } from "../../src/arm-modeling-review/detect-arm-leases.js";
+
+const WORKSPACE = "/fake/workspace";
+const LEASES_DIR = resolve(WORKSPACE, "arm-leases");
+
+/** Build the expected path of a lease file in the public-main checkout
+ * @param {...string} parts
+ */
+function leasePath(...parts) {
+  return resolve(LEASES_DIR, ".github", "arm-leases", ...parts, "lease.yaml");
+}
 
 // Use a fixed date for deterministic tests (avoids flakiness around midnight)
 const FIXED_TEST_DATE = new Date("2025-06-15T12:00:00Z");
@@ -52,6 +55,11 @@ describe("detect-arm-leases", () => {
 
   afterAll(() => {
     vi.useRealTimers();
+  });
+
+  beforeEach(() => {
+    vi.stubEnv("GITHUB_WORKSPACE", WORKSPACE);
+    vi.stubEnv("ARM_LEASES_DIR", LEASES_DIR);
   });
 
   afterEach(() => {
@@ -123,122 +131,127 @@ describe("detect-arm-leases", () => {
 
   describe("checkLease", () => {
     it("returns false when lease file does not exist", async () => {
-      mockGitInstance.show.mockRejectedValue(new Error("does not exist in HEAD^"));
+      mockReadFile.mockRejectedValue(new Error("ENOENT"));
 
       const result = await checkLease("testservice", "Microsoft.Test");
       expect(result).toBe(false);
     });
 
     it("returns true when lease is valid and not expired", async () => {
-      mockGitInstance.show.mockResolvedValue(leaseYaml(daysAgo(30), "P90D"));
+      mockReadFile.mockResolvedValue(leaseYaml(daysAgo(30), "P90D"));
 
       const result = await checkLease("testservice", "Microsoft.Test");
       expect(result).toBe(true);
     });
 
     it("returns false when lease has expired", async () => {
-      mockGitInstance.show.mockResolvedValue(leaseYaml(daysAgo(100), "P90D"));
+      mockReadFile.mockResolvedValue(leaseYaml(daysAgo(100), "P90D"));
 
       const result = await checkLease("testservice", "Microsoft.Test");
       expect(result).toBe(false);
     });
 
     it("returns false for invalid lease file format", async () => {
-      mockGitInstance.show.mockResolvedValue("invalid: yaml: content");
+      mockReadFile.mockResolvedValue("invalid: yaml: content");
 
       const result = await checkLease("testservice", "Microsoft.Test");
       expect(result).toBe(false);
     });
 
     it("handles multiple services and namespaces", async () => {
-      mockGitInstance.show.mockResolvedValue(leaseYaml(daysAgo(30), "P90D"));
+      mockReadFile.mockResolvedValue(leaseYaml(daysAgo(30), "P90D"));
 
       expect(await checkLease("app", "Microsoft.App")).toBe(true);
       expect(await checkLease("compute", "Microsoft.Compute")).toBe(true);
     });
 
     it("returns false for missing namespace", async () => {
-      mockGitInstance.show.mockRejectedValue(new Error("does not exist in HEAD^"));
+      mockReadFile.mockRejectedValue(new Error("ENOENT"));
 
       expect(await checkLease("storage", "Microsoft.Storage")).toBe(false);
     });
 
-    it("reads lease from HEAD^ with correct path (with serviceName)", async () => {
-      mockGitInstance.show.mockResolvedValue(leaseYaml(daysAgo(30), "P90D"));
+    it("reads lease from the public main checkout (with serviceName)", async () => {
+      mockReadFile.mockResolvedValue(leaseYaml(daysAgo(30), "P90D"));
 
       const result = await checkLease("xyz", "Microsoft.XYZ", "XYZ");
 
       expect(result).toBe(true);
-      expect(mockGitInstance.show).toHaveBeenCalledWith([
-        `HEAD^:${join(".github", "arm-leases", "xyz", "Microsoft.XYZ", "XYZ", "lease.yaml")}`,
-      ]);
+      expect(mockReadFile).toHaveBeenCalledWith(leasePath("xyz", "Microsoft.XYZ", "XYZ"), "utf-8");
     });
 
-    it("reads lease from HEAD^ with correct path (without serviceName)", async () => {
-      mockGitInstance.show.mockResolvedValue(leaseYaml(daysAgo(30), "P90D"));
+    it("reads lease from the public main checkout (without serviceName)", async () => {
+      mockReadFile.mockResolvedValue(leaseYaml(daysAgo(30), "P90D"));
 
       const result = await checkLease("xyz", "Microsoft.XYZ");
 
       expect(result).toBe(true);
-      expect(mockGitInstance.show).toHaveBeenCalledWith([
-        `HEAD^:${join(".github", "arm-leases", "xyz", "Microsoft.XYZ", "lease.yaml")}`,
-      ]);
+      expect(mockReadFile).toHaveBeenCalledWith(leasePath("xyz", "Microsoft.XYZ"), "utf-8");
     });
 
-    it("falls back to origin/<baseBranch> when HEAD^ does not have the lease", async () => {
-      vi.stubEnv("GITHUB_BASE_REF", "main");
+    it("falls back to <workspace>/arm-leases when ARM_LEASES_DIR is not set", async () => {
+      vi.stubEnv("ARM_LEASES_DIR", undefined);
+      vi.stubEnv("GITHUB_WORKSPACE", "/other/workspace");
+      mockReadFile.mockResolvedValue(leaseYaml(daysAgo(30), "P90D"));
 
-      // First call (HEAD^) fails, second call (origin/main) succeeds
-      mockGitInstance.show
-        .mockRejectedValueOnce(new Error("does not exist in HEAD^"))
-        .mockResolvedValueOnce(leaseYaml(daysAgo(30), "P90D"));
-      mockGitInstance.fetch.mockResolvedValue();
+      const result = await checkLease("xyz", "Microsoft.XYZ");
 
-      const result = await checkLease("xyz", "Microsoft.XYZ", "XYZInsights");
       expect(result).toBe(true);
-      expect(mockGitInstance.fetch).toHaveBeenCalledWith([
-        "origin",
-        "main:refs/remotes/origin/main",
-        "--depth=1",
-      ]);
-      expect(mockGitInstance.show).toHaveBeenCalledTimes(2);
-      expect(mockGitInstance.show).toHaveBeenNthCalledWith(1, [
-        `HEAD^:${join(".github", "arm-leases", "xyz", "Microsoft.XYZ", "XYZInsights", "lease.yaml")}`,
-      ]);
-      expect(mockGitInstance.show).toHaveBeenNthCalledWith(2, [
-        `origin/main:${join(".github", "arm-leases", "xyz", "Microsoft.XYZ", "XYZInsights", "lease.yaml")}`,
-      ]);
+      expect(mockReadFile).toHaveBeenCalledWith(
+        resolve(
+          "/other/workspace",
+          "arm-leases",
+          ".github",
+          "arm-leases",
+          "xyz",
+          "Microsoft.XYZ",
+          "lease.yaml",
+        ),
+        "utf-8",
+      );
     });
 
-    it("returns false when both HEAD^ and origin/<baseBranch> do not have the lease", async () => {
-      vi.stubEnv("GITHUB_BASE_REF", "main");
-      mockGitInstance.fetch.mockResolvedValue();
-      mockGitInstance.show.mockRejectedValue(new Error("does not exist"));
+    it("falls back to cwd when neither ARM_LEASES_DIR nor GITHUB_WORKSPACE is set", async () => {
+      vi.stubEnv("ARM_LEASES_DIR", undefined);
+      vi.stubEnv("GITHUB_WORKSPACE", undefined);
+      mockReadFile.mockResolvedValue(leaseYaml(daysAgo(30), "P90D"));
 
-      const result = await checkLease("testservice", "Microsoft.Test");
-      expect(result).toBe(false);
+      const result = await checkLease("xyz", "Microsoft.XYZ");
+
+      expect(result).toBe(true);
+      expect(mockReadFile).toHaveBeenCalledWith(
+        resolve(
+          process.cwd(),
+          "arm-leases",
+          ".github",
+          "arm-leases",
+          "xyz",
+          "Microsoft.XYZ",
+          "lease.yaml",
+        ),
+        "utf-8",
+      );
     });
 
-    it("returns false when HEAD^ fails and GITHUB_BASE_REF is not set", async () => {
-      vi.stubEnv("GITHUB_BASE_REF", ""); // Explicitly unset to avoid CI env leakage
-      mockGitInstance.show.mockRejectedValue(new Error("does not exist in HEAD^"));
+    it("reads from ARM_LEASES_DIR when it differs from the workspace default", async () => {
+      vi.stubEnv("ARM_LEASES_DIR", resolve("/custom", "leases-checkout"));
+      mockReadFile.mockResolvedValue(leaseYaml(daysAgo(30), "P90D"));
 
-      const result = await checkLease("testservice", "Microsoft.Test");
-      expect(result).toBe(false);
-      // Only one call (HEAD^), no fallback attempted
-      expect(mockGitInstance.show).toHaveBeenCalledTimes(1);
-      expect(mockGitInstance.fetch).not.toHaveBeenCalled();
-    });
+      const result = await checkLease("xyz", "Microsoft.XYZ");
 
-    it("returns false when origin/<baseBranch> has an expired lease", async () => {
-      vi.stubEnv("GITHUB_BASE_REF", "main");
-      mockGitInstance.fetch.mockResolvedValue();
-      mockGitInstance.show
-        .mockRejectedValueOnce(new Error("does not exist in HEAD^"))
-        .mockResolvedValueOnce(leaseYaml(daysAgo(100), "P90D"));
-
-      const result = await checkLease("testservice", "Microsoft.Test");
-      expect(result).toBe(false);
+      expect(result).toBe(true);
+      expect(mockReadFile).toHaveBeenCalledWith(
+        resolve(
+          "/custom",
+          "leases-checkout",
+          ".github",
+          "arm-leases",
+          "xyz",
+          "Microsoft.XYZ",
+          "lease.yaml",
+        ),
+        "utf-8",
+      );
     });
   });
 });

@@ -31,22 +31,34 @@ using Microsoft.ContainerRegistry;
   "ContainerRegistryTaskBaseImageTriggerUpdateContent",
   "csharp"
 );
-@@clientName(DockerBuildRequest, "DockerBuildContent", "csharp");
+@@clientName(
+  DockerBuildRequest,
+  "ContainerRegistryDockerBuildContent",
+  "csharp"
+);
 @@clientName(
   DockerBuildStepUpdateParameters,
-  "DockerBuildStepUpdateContent",
+  "ContainerRegistryDockerBuildStepUpdateContent",
   "csharp"
 );
-@@clientName(EncodedTaskRunRequest, "EncodedTaskRunContent", "csharp");
+@@clientName(
+  EncodedTaskRunRequest,
+  "ContainerRegistryEncodedTaskRunContent",
+  "csharp"
+);
 @@clientName(
   EncodedTaskStepUpdateParameters,
-  "EncodedTaskStepUpdateContent",
+  "ContainerRegistryEncodedTaskStepUpdateContent",
   "csharp"
 );
-@@clientName(FileTaskRunRequest, "FileTaskRunContent", "csharp");
+@@clientName(
+  FileTaskRunRequest,
+  "ContainerRegistryFileTaskRunContent",
+  "csharp"
+);
 @@clientName(
   FileTaskStepUpdateParameters,
-  "FileTaskStepUpdateContent",
+  "ContainerRegistryFileTaskStepUpdateContent",
   "csharp"
 );
 @@clientName(
@@ -54,7 +66,7 @@ using Microsoft.ContainerRegistry;
   "ContainerRegistryTaskPlatformUpdateContent",
   "csharp"
 );
-@@clientName(RunRequest, "RunContent", "csharp");
+@@clientName(RunRequest, "ContainerRegistryRunContent", "csharp");
 @@clientName(
   SourceTriggerUpdateParameters,
   "ContainerRegistryTaskSourceTriggerUpdateContent",
@@ -70,8 +82,12 @@ using Microsoft.ContainerRegistry;
   "ContainerRegistryTaskSourceUploadResult",
   "csharp"
 );
-@@clientName(TaskRunRequest, "TaskRunContent", "csharp");
-@@clientName(TaskStepUpdateParameters, "TaskStepUpdateContent", "csharp");
+@@clientName(TaskRunRequest, "ContainerRegistryTaskRunContent", "csharp");
+@@clientName(
+  TaskStepUpdateParameters,
+  "ContainerRegistryTaskStepUpdateContent",
+  "csharp"
+);
 @@clientName(
   TimerTriggerUpdateParameters,
   "ContainerRegistryTaskTimerTriggerUpdateContent",
@@ -264,6 +280,21 @@ using Microsoft.ContainerRegistry;
 @@clientName(
   ResourceIdentityType,
   "ContainerRegistryTaskResourceIdentityType",
+  "csharp"
+);
+
+// C# client naming: prefix step, status and request models with service context
+@@clientName(
+  TaskStepProperties,
+  "ContainerRegistryTaskStepProperties",
+  "csharp"
+);
+@@clientName(DockerBuildStep, "ContainerRegistryDockerBuildStep", "csharp");
+@@clientName(EncodedTaskStep, "ContainerRegistryEncodedTaskStep", "csharp");
+@@clientName(FileTaskStep, "ContainerRegistryFileTaskStep", "csharp");
+@@clientName(
+  AgentPoolQueueStatus,
+  "ContainerRegistryAgentPoolQueueStatus",
   "csharp"
 );
 

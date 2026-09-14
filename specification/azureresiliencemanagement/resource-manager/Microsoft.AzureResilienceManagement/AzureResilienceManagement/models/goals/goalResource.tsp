@@ -17,16 +17,40 @@ using Azure.ResourceManager;
 namespace Microsoft.AzureResilienceManagement;
 
 // Define the main model
+@added(Versions.v2026_06_01_preview)
+@doc("Resiliency posture for a goal resource.")
+model ResiliencyProperties {
+  @doc("Flag which depicts whether the Arm resource is excluded for resiliency recommendation.")
+  goalParticipation?: ExclusionState;
+
+  @doc("Flag which depicts whether the Arm resource is manually attested for resiliency recommendation.")
+  attestationStatus?: AttestationState;
+
+  @doc("Reason for exclusion from resiliency goals.")
+  @visibility(Lifecycle.Read)
+  exclusionReason?: ExclusionReason;
+
+  @doc("List of user confirmations for resiliency solutions.")
+  @identifiers(#["solutionDisplayName"])
+  userConfirmation?: UserConfirmationItem[];
+}
+
 @doc("Definition of goal assignment property.")
 model GoalResourceProperties {
   @doc("Arm Id of resource under the SG for which the extension resource is maintained.")
   resourceArmId: armResourceIdentifier;
 
   @doc("Flag which depicts whether the Arm resource is excluded for high availability recommendation.")
-  highAvailabilityGoalParticipation: ExclusionState;
+  @madeOptional(Versions.v2026_06_01_preview)
+  highAvailabilityGoalParticipation?: ExclusionState;
 
   @doc("Flag which depicts whether the Arm resource is manually attested for high availability recommendation.")
-  highAvailabilityAttestationStatus: AttestationState;
+  @madeOptional(Versions.v2026_06_01_preview)
+  highAvailabilityAttestationStatus?: AttestationState;
+
+  @doc("Zonal resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Arm resource.")
+  @added(Versions.v2026_06_01_preview)
+  zonalResiliency?: ResiliencyProperties;
 
   @doc("Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation.")
   disasterRecoveryGoalParticipation?: ExclusionState;
@@ -45,7 +69,7 @@ model GoalResourceProperties {
   @added(Versions.v2026_03_01_preview)
   @doc("List of user confirmations for high availability solutions.")
   @identifiers(#["solutionDisplayName"])
-  userConfirmationForHighAvailability?: UserConfirmationForHighAvailabilityItem[];
+  userConfirmationForHighAvailability?: UserConfirmationItem[];
 
   @doc("List of service groups of which this resource is memberof.")
   @visibility(Lifecycle.Read)
@@ -64,6 +88,7 @@ model UpdateGoalResourceRequest {
   resources: GoalResource[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response model for update goal resource.")
 model UpdateGoalResourceResponse {
   @doc("List of update goal resource.")
@@ -81,6 +106,7 @@ model GoalResource is ProxyResource<GoalResourceProperties> {
   name: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response model for refresh goal resources.")
 model RefreshGoalResourcesResponse {
   @doc("Total count of resources under the goal assignment after refresh.")

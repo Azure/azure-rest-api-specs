@@ -99,12 +99,15 @@ union CustomerTransitState {
 union autoUpdateRingType {
   string,
 
+  /** Legacy update ring retained for backward compatibility. This value was used prior to 2026-06-01. */
   /** customer selection of preview update install mcc on their physical vm */
   Preview: "Preview",
 
+  /** Legacy update ring retained for backward compatibility. This value was used prior to 2026-06-01. */
   /** customer selection of slow update to install mcc on their physical vm */
   Slow: "Slow",
 
+  /** Legacy update ring retained for backward compatibility. This value was used prior to 2026-06-01. */
   /** customer selection of fast / auto update to install mcc on their physical vm */
   Fast: "Fast",
 
@@ -155,6 +158,7 @@ union MccIssueType {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @removed(Versions.v2024_11_30_preview)
 @doc("Model representing Cache Node for ConnectedCache resource")
 model CacheNodeOldResponse {
@@ -287,6 +291,7 @@ model CustomerEntity {
 
 @doc("Model representing customer for connected cache resource")
 model AdditionalCustomerProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Customer resource last PeeringDB update timestamp.")
   @visibility(Lifecycle.Read)
   @removed(Versions.v2024_11_30_preview)

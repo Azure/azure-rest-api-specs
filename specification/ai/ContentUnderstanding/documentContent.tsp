@@ -51,6 +51,10 @@ model DocumentContent extends AnalysisContent {
   @doc("List of annotations in the document.  Only if enableAnnotations and returnDetails are true.")
   annotations?: DocumentAnnotation[];
 
+  @added(Versions.v2026_06_01_preview)
+  @doc("List of signatures in the document.  Only if enableLayout and returnDetails are true.")
+  signatures?: DocumentSignature[];
+
   @added(Versions.v2025_11_01)
   @doc("List of hyperlinks in the document.  Only if returnDetails are true.")
   hyperlinks?: DocumentHyperlink[];
@@ -58,6 +62,10 @@ model DocumentContent extends AnalysisContent {
   @added(Versions.v2025_11_01)
   @doc("List of detected content segments.  Only if enableSegment is true.")
   segments?: DocumentContentSegment[];
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("List of document chunks.  Only if chunkingStrategy is configured on the analyzer.")
+  chunks?: DocumentChunk[];
 }
 
 @doc("Length unit used by the width, height, and source properties.")
@@ -595,6 +603,25 @@ model DocumentHyperlink {
   source?: SourceExpression;
 }
 
+@added(Versions.v2026_06_01_preview)
+@doc("Signature detected in a document.")
+model DocumentSignature {
+  @doc("Signature identifier.")
+  id: string;
+
+  @doc("Encoded source that identifies the position of the signature in the content.")
+  source?: SourceExpression;
+
+  @doc("Span of the signature in the markdown content.")
+  span?: ContentSpan;
+
+  @doc("Child elements of the signature, such as paragraphs containing text within the signature region.")
+  elements?: DocumentElement[];
+
+  @doc("Semantic role of the signature.")
+  role?: SemanticRole;
+}
+
 @added(Versions.v2025_11_01)
 @doc("Detected document content segment.")
 model DocumentContentSegment {
@@ -612,4 +639,24 @@ model DocumentContentSegment {
 
   @doc("End page number (1-indexed) of the segment.")
   endPageNumber: int32;
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("Confidence of the segmentation and category classification.")
+  @minValue(0)
+  @maxValue(1)
+  confidence?: float32;
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("Encoded source that identifies the position of the segment in the content. Can be used as the 'range' input to route this segment to a sub-analyzer.")
+  source?: SourceExpression;
+}
+
+@added(Versions.v2026_06_01_preview)
+@doc("A chunk of document content, defined by one or more spans in the markdown.")
+model DocumentChunk {
+  @doc("List of spans defining the chunk's position(s) in the markdown content.")
+  spans: ContentSpan[];
+
+  @doc("Encoded source expression describing the visual bounding polygons of the chunk's content on the page. Derived from the union of layout objects (paragraphs, tables, figures) that compose the chunk.")
+  source?: SourceExpression;
 }
