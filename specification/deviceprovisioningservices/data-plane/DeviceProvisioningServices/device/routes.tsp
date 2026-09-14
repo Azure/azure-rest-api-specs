@@ -224,6 +224,7 @@ interface RuntimeRegistration {
       /**
        * Device registration request.
        */
+      @renamedFrom(Versions.v2026_11_01, "deviceRegistration")
       @bodyRoot
       body: DeviceRegistration;
     },
