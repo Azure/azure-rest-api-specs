@@ -17,6 +17,7 @@ namespace Microsoft.AzureDataTransfer;
 /**
  * Defines the required request body for retrieving FlowProfile information for a provided pipeline.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2025_05_30_preview)
 model ListFlowProfilesRequest {
   /**

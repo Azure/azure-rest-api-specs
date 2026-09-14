@@ -1271,6 +1271,10 @@
         "ddosSettings": {
           "$ref": "#/definitions/DdosFrontendIpConfigurationSettings",
           "description": "The DDoS protection settings associated with the frontend IP configuration."
+        },
+        "enableConnectionTracking": {
+          "type": "boolean",
+          "description": "Enables UDP flow tracking for traffic associated with the frontend IP configuration. When enabled, packets belonging to the same UDP flow are consistently directed to the same backend instance. This setting applies to all associated load balancing rules and takes precedence over rule-level enableConnectionTracking settings."
         }
       }
     },
@@ -1677,6 +1681,18 @@
         "tag": {
           "type": "string",
           "description": "The value of the IP tag associated with the public IP. Example: SQL."
+        },
+        "firstPartyServiceTagId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the first party service tag associated with the IP tag.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/firstPartyServiceTags"
+              }
+            ]
+          }
         }
       }
     },
@@ -1824,6 +1840,24 @@
         }
       }
     },
+    "LoadBalancerMode": {
+      "type": "string",
+      "description": "The load balancer mode. Set to `Advanced` to enable additional capabilities on a Standard SKU load balancer. Advanced mode must be specified at creation and cannot be changed afterward.",
+      "enum": [
+        "Advanced"
+      ],
+      "x-ms-enum": {
+        "name": "LoadBalancerMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Advanced",
+            "value": "Advanced",
+            "description": "Advanced mode, which enables additional capabilities on a Standard SKU load balancer."
+          }
+        ]
+      }
+    },
     "LoadBalancerOutboundRuleProtocol": {
       "type": "string",
       "description": "The protocol for the outbound rule in load balancer.",
@@ -1920,6 +1954,14 @@
         "scope": {
           "$ref": "#/definitions/LoadBalancerScope",
           "description": "Indicates the scope of the load balancer: external (Public) or internal (Private)."
+        },
+        "mode": {
+          "$ref": "#/definitions/LoadBalancerMode",
+          "description": "The load balancer mode. Set to `Advanced` to enable additional capabilities on a Standard SKU load balancer. Advanced mode must be specified at creation and cannot be changed afterward.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
@@ -1967,7 +2009,8 @@
       "enum": [
         "Basic",
         "Standard",
-        "Gateway"
+        "Gateway",
+        "Service"
       ],
       "x-ms-enum": {
         "name": "LoadBalancerSkuName",
@@ -1987,6 +2030,11 @@
             "name": "Gateway",
             "value": "Gateway",
             "description": "Gateway"
+          },
+          {
+            "name": "Service",
+            "value": "Service",
+            "description": "Service load balancer SKU."
           }
         ]
       }
@@ -2094,7 +2142,7 @@
         },
         "enableConnectionTracking": {
           "type": "boolean",
-          "description": "Defines whether connections between 2 communicating endpoints can be tracked and associated to the same backend VM over its lifetime when using UDP protocol."
+          "description": "Enables UDP flow tracking for the load balancing rule. This property is retained for rule-level configuration compatibility. When enableConnectionTracking is specified on the associated frontend IP configuration, the frontend setting takes precedence."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3960,6 +4008,11 @@
         "deleteOption": {
           "$ref": "#/definitions/DeleteOptions",
           "description": "Specify what happens to the public IP address when the VM using it is deleted"
+        },
+        "upgradedToV2": {
+          "type": "boolean",
+          "description": "Whether the public IP address SKU has been upgraded from Standard to StandardV2.",
+          "readOnly": true
         }
       }
     },

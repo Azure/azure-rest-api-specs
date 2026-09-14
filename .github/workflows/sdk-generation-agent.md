@@ -26,6 +26,7 @@ if: >
 permissions:
   contents: read
   actions: read
+  copilot-requests: write
   issues: read
   pull-requests: read
   # Required by shared-github-aw-imports/global_networks_auth_import.md to mint an

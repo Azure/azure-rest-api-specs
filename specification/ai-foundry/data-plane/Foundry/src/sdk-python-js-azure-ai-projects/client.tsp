@@ -9,12 +9,15 @@ import "../evaluation-rules/routes.tsp";
 
 // Stable operation (GA routes) without preview features
 import "../agents-optimization/routes.tsp";
+import "../agents-microsoft365/routes.tsp";
 import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
 import "../deployments/routes.tsp";
 import "../indexes/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
+import "../voice-agents/routes.tsp";
+import "../agent-insights/routes.tsp";
 import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
@@ -31,6 +34,7 @@ import "../data_generation_jobs/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "../sdk-common/ops-relocation-agents.tsp";
+import "../sdk-common/ops-relocation-agent-insights.tsp";
 import "../sdk-common/ops-relocation-projects.tsp";
 import "../sdk-common/error.default.tsp";
 
@@ -79,6 +83,29 @@ using Azure.AI.Projects;
   "python"
 );
 
+@@clientName(
+  Microsoft365Publishing.publishAgentToMicrosoft365,
+  "publish_to_microsoft365"
+);
+@@clientName(
+  Microsoft365Publishing.getMicrosoft365AppPackage,
+  "get_microsoft365_package"
+);
+@@clientName(
+  Microsoft365Publishing.getMicrosoft365PublishDefaults,
+  "get_microsoft365_publish_defaults"
+);
+@@clientName(
+  Microsoft365PublishResponse,
+  "Microsoft365PublishResult",
+  "python"
+);
+@@clientName(
+  Microsoft365AppPackageResponse,
+  "Microsoft365AppPackageResult",
+  "python"
+);
+
 // Exclude these operations entirely from the Python SDK.
 // Note that JavaScript SDK already shipped 2.0.0 with these, so they can't be removed.
 @@scope(Agents.createAgent, "!(python)");
@@ -93,6 +120,9 @@ using Azure.AI.Projects;
 
 @@clientName(AgentObject, "Agent", "javascript");
 @@clientName(AgentVersionObject, "AgentVersion", "javascript");
+
+// Preserve the existing JavaScript operation name.
+@@clientName(EvaluationRules.delete, "delete", "javascript");
 
 // Python emitter creates enum values ENUM_1_G = "1g", ENUM_4_G = "4g" etc. Override it here as below.
 @@clientName(OpenAI.ContainerMemoryLimit.`1g`, exact("MEMORY_1GB"), "python");
@@ -114,6 +144,7 @@ using Azure.AI.Projects;
 @@clientName(ToolboxToolType.a2a_preview, exact("A2A_PREVIEW"), "python");
 @@clientName(ProtocolConfiguration.a2a, exact("a2a"), "python");
 @@clientName(AgentEndpointProtocol.a2a, exact("A2A"), "python");
+@@clientName(A2ATool.a2a_version, exact("a2a_version"), "python");
 
 @@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
 
@@ -245,6 +276,8 @@ using Azure.AI.Projects;
 // Agents sub-client
 // --------------------------------------------------------------------------------
 
+@@clientName(Agents.generateAgent, "generate");
+
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob");
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs");
@@ -277,6 +310,78 @@ using Azure.AI.Projects;
 
 // Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
 @@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
+
+@@clientName(OpenAI.RealtimeMcpErrorType, "RealtimeMCPErrorType", "javascript");
+@@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMCPHttpError", "javascript");
+
+// --------------------------------------------------------------------------------
+// Beta Agent Telephony sub-clients
+// --------------------------------------------------------------------------------
+
+@@clientName(AgentTelephony.createTelephonyCallJob, "createCallJob");
+@@clientName(AgentTelephony.getTelephonyCallJob, "getCallJob");
+@@clientName(AgentTelephony.cancelTelephonyCallJob, "cancelCallJob");
+@@clientName(AgentTelephony.createTelephonyCampaign, "createCampaign");
+@@clientName(AgentTelephony.getTelephonyCampaign, "getCampaign");
+@@clientName(
+  AgentTelephony.importTelephonyCampaignRecipients,
+  "importCampaignRecipients"
+);
+@@clientName(
+  AgentTelephony.getTelephonyCampaignRecipientImport,
+  "getCampaignRecipientImport"
+);
+@@clientName(AgentTelephony.validateTelephonyCampaign, "validateCampaign");
+@@clientName(AgentTelephony.publishTelephonyCampaign, "publishCampaign");
+@@clientName(AgentTelephony.pauseTelephonyCampaign, "pauseCampaign");
+@@clientName(AgentTelephony.resumeTelephonyCampaign, "resumeCampaign");
+@@clientName(AgentTelephony.cancelTelephonyCampaign, "cancelCampaign");
+@@clientName(AgentTelephony.getTelephonyOperation, "getOperation");
+
+// --------------------------------------------------------------------------------
+// Agent Endpoint Conversations sub-client
+// --------------------------------------------------------------------------------
+@@clientName(AgentEndpointConversations.listAgentConversations, "list");
+@@clientName(AgentEndpointConversations.getAgentConversation, "get");
+@@clientName(AgentEndpointConversations.deleteAgentConversation, "delete");
+@@clientName(
+  AgentEndpointConversations.listAgentConversationResponses,
+  "listResponses"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationResponse,
+  "getResponse"
+);
+@@clientName(
+  AgentEndpointConversations.listAgentConversationResponseItems,
+  "listResponseItems"
+);
+@@clientName(
+  AgentEndpointConversations.listAgentConversationItems,
+  "listItems"
+);
+@@clientName(AgentEndpointConversations.getAgentConversationItem, "getItem");
+@@clientName(
+  AgentEndpointConversations.getAgentConversationItemAudio,
+  "getItemAudio"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationItemAudioContent,
+  "downloadItemAudio"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationItemGeneratedAudio,
+  "getItemGeneratedAudio"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationItemGeneratedAudioContent,
+  "downloadItemGeneratedAudio"
+);
+@@clientName(AgentEndpointConversations.getAgentConversationAudio, "getAudio");
+@@clientName(
+  AgentEndpointConversations.getAgentConversationAudioContent,
+  "downloadAudio"
+);
 
 // Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
 @@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
@@ -448,8 +553,18 @@ using Azure.AI.Projects;
 );
 
 // --------------------------------------------------------------------------------
+// Beta Agent Insights sub‐client
+// --------------------------------------------------------------------------------
+
+// Override default JS emitter behavior that emits "delete<model>". ("delete" is a reserved word, but we want to use namespaced "delete" for JS).
+@@clientName(AgentInsightMonitors.delete, "delete", "javascript");
+
+// --------------------------------------------------------------------------------
 // Beta Schedules sub‐client
 // --------------------------------------------------------------------------------
+
+// Override default JS emitter behavior that emits "delete<model>". ("delete" is a reserved word, but we want to use namespaced "delete" for JS).
+@@clientName(Schedules.delete, "delete", "javascript");
 
 @@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
 @@clientName(Schedule.id, "schedule_id");
@@ -487,11 +602,13 @@ using Azure.AI.Projects;
 // Beta Evaluation Taxonomies sub-client
 // --------------------------------------------------------------------------------
 
-// Note that we can't rename it in src\openai-evaluations\models.tsp, since in
-// src\evaluations\models.tsp we already define EvaluationTarget (not for v1).
-// If/when src\evaluations will be removed, consider doing the rename in
-// src\openai-evaluations\models.tsp instead.
-@@clientName(Target, "EvaluationTarget");
+// Override default JS emitter behavior that emits "delete<model>". ("delete" is a reserved word, but we want to use namespaced "delete" for JS).
+@@clientName(EvaluationTaxonomies.delete, "delete", "javascript");
+
+// The openai-evaluations model is named FoundryEvaluationTarget in TypeSpec (to avoid
+// conflicting with the unrelated EvaluationTarget defined in src\evaluations\models.tsp),
+// but exposed to python/js clients as EvaluationTarget.
+@@clientName(FoundryEvaluationTarget, "EvaluationTarget");
 
 // --------------------------------------------------------------------------------
 // To support custom client-side handling of "opt-in" to preview features.

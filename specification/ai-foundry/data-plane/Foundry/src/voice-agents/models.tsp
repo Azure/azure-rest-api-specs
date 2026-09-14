@@ -1,10 +1,14 @@
 import "@typespec/http";
 import "@typespec/openapi";
+import "@azure-tools/typespec-azure-core";
 import "../agents/models.tsp";
 import "./agents.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core.Experimental;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects;
 
@@ -16,24 +20,34 @@ namespace Azure.AI.Projects;
 // audio bytes are streamed through the dedicated item and recording routes.
 // ============================================================================
 
-@doc("The lifecycle status of a persisted voice conversation.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@doc("""
+  The lifecycle status of a persisted voice conversation:
+  - `in_progress`: the live session is active, or post-session persistence finalization is pending.
+  - `completed`: finalization succeeded after normal or client close, `end_conversation`, a max-duration `1001`
+    close, or a client or network disconnect that the service can still finalize.
+  - `failed`: a terminal service, bridge, storage, or unrecoverable transport failure prevented finalization.
+  """)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceConversationStatus {
   string,
 
-  @doc("The conversation's live session is still in progress.")
+  @doc("The live session is active, or post-session persistence finalization is still pending.")
   in_progress: "in_progress",
 
-  @doc("The conversation's live session has ended.")
+  @doc("Persistence finalization succeeded. This includes normal or client-initiated close, the `end_conversation` system tool, a max-duration `1001` close, and client or network disconnects that the service can still finalize.")
   completed: "completed",
+
+  @doc("A terminal service, bridge, storage, or unrecoverable transport failure prevented persistence finalization.")
+  failed: "failed",
 }
 
 @doc("""
   A persisted voice conversation. The Foundry envelope that owns a voice agent's stored
   transcript, responses, per-turn metrics, and audio. It is the parent, retention, and delete boundary:
-  deleting it cascades to its responses, items, metrics, and audio.
+  deleting it cascades to its responses, items, metrics, and audio. When finalization fails, any partial persisted
+  responses, items, and item audio remain readable.
   """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceConversation {
   @doc("The unique id of the conversation.")
   id: string;
@@ -47,80 +61,59 @@ model VoiceConversation {
   @doc("The Unix timestamp (in seconds) for when the conversation was created.")
   created_at: FoundryTimestamp;
 
-  @doc("The Unix timestamp (in seconds) for when the conversation's session ended. Absent while in progress.")
+  @doc("The Unix timestamp (in seconds) for when session and persistence finalization reached the terminal `completed` or `failed` status. Absent while `status` is `in_progress`.")
   completed_at?: FoundryTimestamp;
 
   @doc("A set of key-value pairs attached to the conversation.")
   metadata?: Record<string>;
 
-  @doc("Aggregate token usage totals across all responses in this conversation.")
+  @doc("Final aggregate token usage across all responses in this conversation. Absent while `status` is `in_progress` and populated after successful `completed` finalization; it may be absent when `status` is `failed`, and values are not guaranteed to be reported incrementally.")
   usage?: OpenAI.RealtimeResponseUsage;
-}
 
-@doc("The response returned when a voice conversation is deleted.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceDeletedConversation {
-  @doc("The id of the deleted conversation.")
-  id: string;
-
-  @doc("The object type. Always `voice.conversation.deleted`.")
-  object: "voice.conversation.deleted";
-
-  @doc("Always `true` for a successful delete.")
-  deleted: true;
+  @doc("The terminal error that prevented persistence finalization. Present only when `status` is `failed`.")
+  last_error?: ApiError;
 }
 
 // ---------------------------------------------------------------------------
-// Voice response
+// Shared voice response audio
 // ---------------------------------------------------------------------------
 //
-// VoiceResponse cannot `extends OpenAI.RealtimeResponse`: overriding `audio` to the Foundry
-// `{type, name}` voice shape fails TypeSpec's override-property-mismatch check (the override type must
-// be a subtype of the inherited `OpenAI.RealtimeResponseAudio`, whose `voice` is the flat `VoiceIdsShared`
-// string enum). So VoiceResponse remains a standalone model, but its other fields still match OpenAI's
-// wire names/shapes 1:1 (output_modalities, max_output_tokens, status_details reusing
-// OpenAI.RealtimeResponseStatusDetails) wherever no such conflict exists.
+// Live WebSocket events and persisted responses use the same flat output projection so provider and
+// locale extensions stay aligned with the OpenAI-compatible voice and format fields.
 
-// Token usage statistics reuse OpenAI.RealtimeResponseUsage (total/input/output tokens plus
-// input/output token detail breakdowns, including image_tokens and cached_tokens_details), already
-// available in this program via ./src/openai/responses/main.tsp -> @azure-tools/openai-typespec's
-// realtime models.tsp. See VoiceResponse.usage below.
-
-@doc("The status of a voice response.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-union VoiceResponseStatus {
-  string,
-  in_progress: "in_progress",
-  completed: "completed",
-  cancelled: "cancelled",
-  incomplete: "incomplete",
-  failed: "failed",
-}
-
-@doc("The complete typed voice configuration used for a response.")
-union VoiceResponseVoice {
-  OpenAIVoice,
-  AzureVoice,
-  AzureRealtimeNativeVoice,
-}
-
-@doc("The output audio format used for a response. Follows the OpenAI Realtime GA audio format discriminated union.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@doc("The flat response audio-output projection, with optional `voice`, `voice_type`, `voice_locale`, and `format` fields.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceResponseAudioOutput {
-  @doc("The voice used for the response's audio output.")
-  voice?: VoiceResponseVoice;
+  @doc("The voice name used for the response's audio output.")
+  voice?: string;
+
+  @doc("The extensible provider/type of the voice used for the response's audio output.")
+  voice_type?: VoiceType;
+
+  @doc("The BCP-47 locale of the voice used for the response's audio output.")
+  voice_locale?: string;
 
   @doc("The audio format used for the response's audio output.")
   format?: OpenAI.RealtimeAudioFormats;
 }
 
 @doc("Audio configuration for a response. Follows the OpenAI Realtime GA `audio` object shape.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceResponseAudio {
   @doc("The audio output configuration used for the response.")
   output?: VoiceResponseAudioOutput;
 }
 
+@doc("Properties shared by persisted voice responses.")
+model VoiceResponseBase {
+  ...OmitProperties<
+    OpenAI.RealtimeResponse,
+    "audio" | "output" | "metadata" | "conversation_id" | "id"
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the shared OpenAI response contract while the persisted projection replaces audio, output, and metadata."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("""
   A persisted voice response representing one model inference turn within a conversation. In list results the
   `output` projection may be omitted; retrieve the
@@ -128,25 +121,13 @@ model VoiceResponseAudio {
   (`GET .../responses/{response_id}/items`) for its output items. `created_at`/`completed_at` are Foundry
   durable ordering extensions.
   """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceResponse {
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceResponse extends VoiceResponseBase {
   @doc("The unique id of the response.")
   id: string;
 
-  @doc("The object type. Always `realtime.response`.")
-  object: "realtime.response";
-
-  @doc("The status of the response.")
-  status: VoiceResponseStatus;
-
-  @doc("Additional detail about a terminal status.")
-  status_details?: OpenAI.RealtimeResponseStatusDetails;
-
   @doc("The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list.")
-  output?: VoiceConversationItem[];
-
-  @doc("Token usage statistics for the response.")
-  usage?: OpenAI.RealtimeResponseUsage;
+  output?: OpenAI.RealtimeConversationItem[];
 
   @doc("The id of the conversation this response belongs to.")
   conversation_id: string;
@@ -154,16 +135,11 @@ model VoiceResponse {
   @doc("The audio configuration used for the response, including the voice and audio format used for output.")
   audio?: VoiceResponseAudio;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matches OpenAI.RealtimeResponse.output_modalities: an inline literal array, not exported as a named union upstream."
-  @doc("The output modalities used for the response, e.g. `[\"text\", \"audio\"]`. Audio output always includes a text transcript.")
-  output_modalities?: ("text" | "audio")[];
+  @doc("A set of key-value pairs attached to the response.")
+  metadata?: Record<string>;
 
   @doc("The sampling temperature used for the response.")
   temperature?: float32;
-
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "The contract represents this as an integer token count or the literal string 'inf'."
-  @doc("The maximum number of output tokens allowed for the response; an integer or the literal `inf`.")
-  max_output_tokens?: int32 | "inf";
 
   @doc("The Unix timestamp (in seconds) for when the response was created.")
   created_at?: FoundryTimestamp;
@@ -172,172 +148,194 @@ model VoiceResponse {
   completed_at?: FoundryTimestamp;
 }
 
-// Message content parts reuse OpenAI's Realtime message content models directly (per-role, inline
-// `text`/`audio`/`image_url`/`transcript`/`detail` fields, matching the OpenAI GA wire format exactly,
-// including base64 inline audio), already available in this program via
-// ./src/openai/responses/main.tsp -> @azure-tools/openai-typespec's realtime models.tsp:
-//   - OpenAI.RealtimeConversationItemMessageSystemContent (system: input_text only)
-//   - OpenAI.RealtimeConversationItemMessageUserContent (user: input_text | input_audio | input_image)
-//   - OpenAI.RealtimeConversationItemMessageAssistantContent (assistant: output_text | output_audio)
-// See the three role variants (VoiceSystemMessageItem, VoiceUserMessageItem, VoiceAssistantMessageItem)
-// below, each of which extends its OpenAI role-specific message model directly.
-
 // ---------------------------------------------------------------------------
-// Conversation items — reused directly from OpenAI Realtime GA item models
+// Conversation items — OpenAI Realtime hierarchy with Foundry persistence data
 // ---------------------------------------------------------------------------
-//
-// Each Voice item extends its OpenAI Realtime counterpart directly, adding only the two Foundry
-// persistence extensions (`created_at`, `response_id`). `id`/`object`/`type`/`role`/`status` and all
-// content/error/tool fields are inherited as-is from OpenAI, already available in this program via
-// ./src/openai/responses/main.tsp -> @azure-tools/openai-typespec's realtime models.tsp.
-//
-// NOTE: OpenAI's vendor package splits items across two disconnected discriminator roots —
-// `RealtimeConversationItem` (@discriminator("type"): function_call | function_call_output | mcp_*)
-// and `RealtimeConversationItemMessage` (@discriminator("role"): system | user | assistant), which does
-// NOT extend `RealtimeConversationItem` and isn't part of its `type` union. Because TypeSpec only
-// supports single inheritance, one polymorphic base spanning all 9 item kinds (including `message`)
-// isn't available upstream, so `VoiceConversationItem` below is a plain (non-discriminated) union of
-// the 9 leaves rather than a single `@discriminator`-based type. This is a known upstream gap worth
-// raising with @azure-tools/openai-typespec (unify message items under the shared item discriminator).
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeConversationItemMessageSystem via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
-@doc("A system message item. Only `input_text` content is valid for system messages.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceSystemMessageItem
-  extends OpenAI.RealtimeConversationItemMessageSystem {
+alias VoiceConversationItemPersistence = {
   @doc("The Unix timestamp (in seconds) for when the item was persisted.")
+  @visibility(Lifecycle.Read)
   created_at?: FoundryTimestamp;
 
   @doc("The id of the response that produced this item, when applicable.")
+  @visibility(Lifecycle.Read)
   response_id?: string;
-}
+};
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeConversationItemMessageUser via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
-@doc("A user message item. `input_text`, `input_audio`, and `input_image` content are valid for user messages.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceUserMessageItem extends OpenAI.RealtimeConversationItemMessageUser {
-  @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-  created_at?: FoundryTimestamp;
+@@extension(
+  OpenAI.RealtimeConversationItem,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
 
-  @doc("The id of the response that produced this item, when applicable.")
-  response_id?: string;
-}
+@@extension(
+  OpenAI.RealtimeConversationItemMessageSystem,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
+@@copyProperties(
+  OpenAI.RealtimeConversationItemMessageSystem,
+  {
+    ...VoiceConversationItemPersistence,
+  }
+);
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeConversationItemMessageAssistant via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
-@doc("An assistant message item. Only `output_text` and `output_audio` content are valid for assistant messages.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceAssistantMessageItem
-  extends OpenAI.RealtimeConversationItemMessageAssistant {
-  @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-  created_at?: FoundryTimestamp;
+@@extension(
+  OpenAI.RealtimeConversationItemMessageUser,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
+@@copyProperties(
+  OpenAI.RealtimeConversationItemMessageUser,
+  {
+    ...VoiceConversationItemPersistence,
+  }
+);
 
-  @doc("The id of the response that produced this item, when applicable.")
-  response_id?: string;
-}
+@@extension(
+  OpenAI.RealtimeConversationItemMessageAssistant,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
+@@copyProperties(
+  OpenAI.RealtimeConversationItemMessageAssistant,
+  {
+    ...VoiceConversationItemPersistence,
+  }
+);
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeConversationItemFunctionCall via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
-@doc("A function call request item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceFunctionCallItem
-  extends OpenAI.RealtimeConversationItemFunctionCall {
-  @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-  created_at?: FoundryTimestamp;
+@@extension(
+  OpenAI.RealtimeConversationItemFunctionCall,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
+@@copyProperties(
+  OpenAI.RealtimeConversationItemFunctionCall,
+  {
+    ...VoiceConversationItemPersistence,
+  }
+);
 
-  @doc("The id of the response that produced this item, when applicable.")
-  response_id?: string;
-}
+@@extension(
+  OpenAI.RealtimeConversationItemFunctionCallOutput,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
+@@copyProperties(
+  OpenAI.RealtimeConversationItemFunctionCallOutput,
+  {
+    ...VoiceConversationItemPersistence,
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeConversationItemFunctionCallOutput via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
-@doc("A function call output item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceFunctionCallOutputItem
-  extends OpenAI.RealtimeConversationItemFunctionCallOutput {
-  @doc("The name of the function that was called. A Foundry extension: OpenAI's function_call_output does not carry the function name, only `call_id`.")
-  name?: string;
+    @doc("The name of the function that was called. A Foundry extension: OpenAI's function_call_output does not carry the function name, only `call_id`.")
+    name?: string,
+  }
+);
 
-  @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-  created_at?: FoundryTimestamp;
+@@extension(
+  OpenAI.RealtimeMCPListTools,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
+@@copyProperties(
+  OpenAI.RealtimeMCPListTools,
+  {
+    ...VoiceConversationItemPersistence,
+  }
+);
 
-  @doc("The id of the response that produced this item, when applicable.")
-  response_id?: string;
-}
+@@extension(
+  OpenAI.RealtimeMCPToolCall,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
+@@copyProperties(
+  OpenAI.RealtimeMCPToolCall,
+  {
+    ...VoiceConversationItemPersistence,
+  }
+);
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeMCPListTools via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
-@doc("An MCP list-tools item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceMcpListToolsItem extends OpenAI.RealtimeMCPListTools {
-  @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-  created_at?: FoundryTimestamp;
+@@extension(
+  OpenAI.RealtimeMCPApprovalRequest,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
+@@copyProperties(
+  OpenAI.RealtimeMCPApprovalRequest,
+  {
+    ...VoiceConversationItemPersistence,
+  }
+);
 
-  @doc("The id of the response that produced this item, when applicable.")
-  response_id?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeMCPToolCall via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
-@doc("An MCP call item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceMcpCallItem extends OpenAI.RealtimeMCPToolCall {
-  @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-  created_at?: FoundryTimestamp;
-
-  @doc("The id of the response that produced this item, when applicable.")
-  response_id?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeMCPApprovalRequest via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
-@doc("An MCP approval request item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceMcpApprovalRequestItem extends OpenAI.RealtimeMCPApprovalRequest {
-  @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-  created_at?: FoundryTimestamp;
-
-  @doc("The id of the response that produced this item, when applicable.")
-  response_id?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeMCPApprovalResponse via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
-@doc("An MCP approval response item (client-created).")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceMcpApprovalResponseItem extends OpenAI.RealtimeMCPApprovalResponse {
-  @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-  created_at?: FoundryTimestamp;
-
-  @doc("The id of the response that produced this item, when applicable.")
-  response_id?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Spans two disconnected OpenAI discriminator roots (type vs role); see note above."
-@doc("""
-  A persisted item in a voice conversation. A plain union of the 9 OpenAI Realtime item kinds
-  (message x3 roles, function_call, function_call_output, mcp_list_tools, mcp_call,
-  mcp_approval_request, mcp_approval_response), each extended with the Foundry persistence extensions
-  `created_at`/`response_id`. See the note above for why this is a plain union rather than a single
-  `@discriminator`-based type.
-  """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-union VoiceConversationItem {
-  VoiceSystemMessageItem,
-  VoiceUserMessageItem,
-  VoiceAssistantMessageItem,
-  VoiceFunctionCallItem,
-  VoiceFunctionCallOutputItem,
-  VoiceMcpListToolsItem,
-  VoiceMcpCallItem,
-  VoiceMcpApprovalRequestItem,
-  VoiceMcpApprovalResponseItem,
-}
+@@extension(
+  OpenAI.RealtimeMCPApprovalResponse,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
+@@copyProperties(
+  OpenAI.RealtimeMCPApprovalResponse,
+  {
+    ...VoiceConversationItemPersistence,
+  }
+);
 
 // ---------------------------------------------------------------------------
 // Audio streaming
 // ---------------------------------------------------------------------------
 
+@doc("A voice-audio participant role. Additional values may be added over time.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAudioRole {
+  string,
+
+  @doc("Audio produced by the user.")
+  user: "user",
+
+  @doc("Audio produced by the agent.")
+  agent: "agent",
+}
+
+@doc("An audio container format. Additional values may be added over time.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAudioContainerFormat {
+  string,
+
+  @doc("Waveform Audio File Format.")
+  wav: "wav",
+}
+
+@doc("An audio codec. Additional values may be added over time.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAudioCodec {
+  string,
+
+  @doc("16-bit pulse-code modulation.")
+  pcm16: "pcm16",
+
+  @doc("G.711 mu-law.")
+  pcmu: "pcmu",
+
+  @doc("G.711 A-law.")
+  pcma: "pcma",
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("""
   Metadata for a single conversation item's audio segment. For bring-your-own-storage (BYOS), the response includes
   `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
   credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
   `/audio/content` route.
   """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceItemAudioResponse {
   @doc("The id of the conversation the item belongs to.")
   conversation_id: string;
@@ -345,14 +343,14 @@ model VoiceItemAudioResponse {
   @doc("The id of the item this audio belongs to.")
   item_id: string;
 
-  @doc("The role the audio belongs to, e.g. `user` or `agent`.")
-  role?: string;
+  @doc("The role the audio belongs to.")
+  role?: VoiceAudioRole;
 
-  @doc("The container format of the audio, e.g. `wav`.")
-  format?: string;
+  @doc("The container format of the audio.")
+  format?: VoiceAudioContainerFormat;
 
-  @doc("The audio codec, e.g. `pcm16`.")
-  codec?: string;
+  @doc("The audio codec.")
+  codec?: VoiceAudioCodec;
 
   @doc("The sample rate in Hz.")
   sample_rate?: int32;
@@ -360,18 +358,19 @@ model VoiceItemAudioResponse {
   @doc("The number of audio channels.")
   channels?: int32;
 
-  @doc("The offset from the session start at which this segment begins, in milliseconds.")
-  start_offset_ms?: int32;
+  @doc("The offset from the session start at which this segment begins.")
+  start_offset_ms?: FoundryDurationMilliseconds;
 
-  @doc("The duration of the audio segment, in milliseconds.")
-  duration_ms?: int32;
+  @doc("The duration of the audio segment.")
+  duration_ms?: FoundryDurationMilliseconds;
 
   @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead.")
   blob_uri?: url;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAudioStreamResponse {
   @doc("The content type of the streamed audio.")
   @header("Content-Type")
@@ -383,15 +382,16 @@ model VoiceAudioStreamResponse {
 }
 
 @doc("The role assigned to each channel of a merged stereo voice recording.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceRecordingChannelLayout {
-  @doc("The role carried on the left channel, e.g. `user`.")
-  left: string;
+  @doc("The role carried on the left channel. Always `user`.")
+  left: "user";
 
-  @doc("The role carried on the right channel, e.g. `agent`.")
-  right: string;
+  @doc("The role carried on the right channel. Always `agent`.")
+  right: "agent";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("""
   Metadata for the merged, whole-call stereo recording of a voice conversation (user audio on the left channel,
   agent audio on the right). Built once from the per-turn segments after the session ends and durably cached.
@@ -401,13 +401,13 @@ model VoiceRecordingChannelLayout {
   own storage credentials. For Foundry-managed storage `blob_uri` is absent and the bytes are streamed via the
   `/audio/content` route instead.
   """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceRecordingResponse {
   @doc("The id of the conversation this recording belongs to.")
   conversation_id: string;
 
-  @doc("The container format of the recording, e.g. `wav`.")
-  format: string;
+  @doc("The container format of the recording.")
+  format: VoiceAudioContainerFormat;
 
   @doc("The sample rate of the recording in Hz, e.g. 24000.")
   sample_rate: int32;
@@ -418,9 +418,1566 @@ model VoiceRecordingResponse {
   @doc("The role assigned to each stereo channel.")
   channel_layout: VoiceRecordingChannelLayout;
 
-  @doc("The total duration of the recording in milliseconds.")
-  duration_ms: int32;
+  @doc("The total duration of the recording.")
+  duration_ms: FoundryDurationMilliseconds;
 
   @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio/content` route instead.")
   blob_uri?: url;
+}
+
+// ---------------------------------------------------------------------------
+// Agent telephony bindings
+// ---------------------------------------------------------------------------
+
+@doc("A service-generated telephony binding identifier.")
+@minLength(1)
+@maxLength(128)
+scalar TelephonyBindingId extends string;
+
+@doc("A service-generated telephony call identifier.")
+@minLength(1)
+@maxLength(128)
+scalar TelephonyCallId extends string;
+
+@doc("The unique name of a telephony transfer target.")
+@minLength(1)
+@maxLength(64)
+@pattern("^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$")
+scalar TelephonyTransferTargetName extends string;
+
+@doc("A telephony provider supported by an agent binding. Known values are stable; additional values may be added over time.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyProvider {
+  string,
+
+  @doc("Microsoft Teams Phone Extension.")
+  teams_phone_extension: "teams_phone_extension",
+
+  @doc("Twilio Programmable Voice.")
+  twilio: "twilio",
+}
+
+@doc("The lifecycle status of a telephony binding.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyBindingStatus {
+  string,
+
+  @doc("The binding accepts new inbound calls.")
+  active: "active",
+
+  @doc("The binding remains configured but rejects new inbound calls.")
+  suspended: "suspended",
+}
+
+@doc("The kind of telephony transfer destination. Known values are stable; additional values may be added over time.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyTransferDestinationKind {
+  string,
+
+  @doc("A public switched telephone network destination.")
+  pstn: "pstn",
+
+  @doc("A Microsoft Teams user or resource-account destination.")
+  teams: "teams",
+
+  @doc("A Session Initiation Protocol destination.")
+  sip: "sip",
+}
+
+@doc("A destination for a telephony transfer target.")
+@discriminator("kind")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyTransferDestination {
+  @doc("The telephony transfer destination type.")
+  kind: TelephonyTransferDestinationKind;
+}
+
+@doc("A PSTN destination for a telephony transfer target.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model PSTNTelephonyTransferDestination extends TelephonyTransferDestination {
+  @doc("The PSTN destination type.")
+  kind: TelephonyTransferDestinationKind.pstn;
+
+  @doc("The E.164 phone number to call.")
+  @pattern("^\\+[1-9]\\d{6,14}$")
+  value: string;
+}
+
+@doc("A Microsoft Teams destination for a telephony transfer target.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TeamsTelephonyTransferDestination extends TelephonyTransferDestination {
+  @doc("The Microsoft Teams destination type.")
+  kind: TelephonyTransferDestinationKind.teams;
+
+  @doc("The Microsoft Teams user or resource-account identifier.")
+  @minLength(1)
+  @maxLength(256)
+  value: string;
+}
+
+@doc("A SIP destination for a telephony transfer target.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model SipTelephonyTransferDestination extends TelephonyTransferDestination {
+  @doc("The SIP destination type.")
+  kind: TelephonyTransferDestinationKind.sip;
+
+  @doc("The SIP or SIPS URI to call.")
+  value: url;
+}
+
+@doc("A named destination to which the voice agent may transfer a call.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyTransferTarget {
+  @doc("The unique name exposed to the voice agent for this transfer target.")
+  @key
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  name: TelephonyTransferTargetName;
+
+  @doc("A description that helps the voice agent decide when to use this target.")
+  @minLength(1)
+  @maxLength(1024)
+  description: string;
+
+  @doc("The provider-specific transfer destination.")
+  destination: TelephonyTransferDestination;
+}
+
+@doc("The request to create a telephony binding.")
+@discriminator("provider")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("CreateTelephonyBindingContent", "csharp")
+model CreateTelephonyBindingRequest {
+  @doc("The telephony provider.")
+  provider: TelephonyProvider;
+
+  @doc("The Foundry connection name for the telephony provider.")
+  @minLength(1)
+  @maxLength(256)
+  connection_name: string;
+
+  @doc("An optional display label for the binding.")
+  @maxLength(128)
+  label?: string;
+}
+
+@doc("The request to create a Microsoft Teams Phone Extension binding.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("CreateTeamsPhoneExtensionTelephonyBindingContent", "csharp")
+model CreateTeamsPhoneExtensionTelephonyBindingRequest
+  extends CreateTelephonyBindingRequest {
+  @doc("The Microsoft Teams Phone Extension provider.")
+  provider: TelephonyProvider.teams_phone_extension;
+
+  @doc("The optional display phone number for the Teams resource account.")
+  @maxLength(64)
+  phone_number?: string;
+
+  @doc("The Microsoft Teams resource-account object identifier as a GUID.")
+  resource_account_object_id: Azure.Core.uuid;
+}
+
+@doc("The request to create a Twilio binding.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("CreateTwilioTelephonyBindingContent", "csharp")
+model CreateTwilioTelephonyBindingRequest
+  extends CreateTelephonyBindingRequest {
+  @doc("The Twilio provider.")
+  provider: TelephonyProvider.twilio;
+
+  @doc("The Twilio E.164 phone number.")
+  @pattern("^\\+[1-9]\\d{6,14}$")
+  phone_number: string;
+}
+
+@doc("The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("UpdateTelephonyBindingContent", "csharp")
+model UpdateTelephonyBindingRequest {
+  @doc("The new lifecycle status.")
+  status?: TelephonyBindingStatus;
+
+  @doc("The replacement display label. Omit it to preserve the current value; use null to clear it.")
+  @maxLength(128)
+  label?: string | null;
+
+  @doc("The replacement Foundry connection name. This property is valid only for a Teams Phone Extension binding; a Twilio binding's connection is immutable.")
+  @minLength(1)
+  @maxLength(256)
+  connection_name?: string;
+
+  @doc("The replacement Teams Phone Extension display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone Extension binding.")
+  @maxLength(64)
+  phone_number?: string | null;
+}
+
+@doc("A telephony binding owned by a voice agent.")
+@discriminator("provider")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyBinding {
+  @doc("The service-generated binding identifier.")
+  id: TelephonyBindingId;
+
+  @doc("The telephony provider.")
+  provider: TelephonyProvider;
+
+  @doc("The Foundry connection name for the telephony provider.")
+  @minLength(1)
+  @maxLength(256)
+  connection_name: string;
+
+  @doc("The optional display label for the binding.")
+  @maxLength(128)
+  label?: string;
+
+  @doc("The lifecycle status.")
+  status: TelephonyBindingStatus;
+
+  @doc("The service-generated webhook URL to configure with the telephony provider.")
+  incoming_call_url: url;
+}
+
+@doc("A Microsoft Teams Phone Extension binding owned by a voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TeamsPhoneExtensionTelephonyBinding extends TelephonyBinding {
+  @doc("The Microsoft Teams Phone Extension provider.")
+  provider: TelephonyProvider.teams_phone_extension;
+
+  @doc("The optional display phone number for the Teams resource account.")
+  @maxLength(64)
+  phone_number?: string;
+
+  @doc("The Microsoft Teams resource-account object identifier as a GUID.")
+  resource_account_object_id: Azure.Core.uuid;
+}
+
+@doc("A Twilio binding owned by a voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TwilioTelephonyBinding extends TelephonyBinding {
+  @doc("The Twilio provider.")
+  provider: TelephonyProvider.twilio;
+
+  @doc("The Twilio E.164 phone number.")
+  @pattern("^\\+[1-9]\\d{6,14}$")
+  phone_number: string;
+}
+
+@doc("A telephony binding returned in a list, including its entity tag.")
+@discriminator("provider")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyBindingListItem {
+  @doc("The service-generated binding identifier.")
+  id: TelephonyBindingId;
+
+  @doc("The telephony provider.")
+  provider: TelephonyProvider;
+
+  @doc("The Foundry connection name for the telephony provider.")
+  @minLength(1)
+  @maxLength(256)
+  connection_name: string;
+
+  @doc("The optional display label for the binding.")
+  @maxLength(128)
+  label?: string;
+
+  @doc("The lifecycle status.")
+  status: TelephonyBindingStatus;
+
+  @doc("The service-generated webhook URL to configure with the telephony provider.")
+  incoming_call_url: url;
+
+  @doc("The entity tag to send in the `If-Match` header when updating or deleting this binding.")
+  @visibility(Lifecycle.Read)
+  etag: Azure.Core.eTag;
+}
+
+@doc("A Microsoft Teams Phone Extension binding returned in a list, including its entity tag.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TeamsPhoneExtensionTelephonyBindingListItem
+  extends TelephonyBindingListItem {
+  @doc("The Microsoft Teams Phone Extension provider.")
+  provider: TelephonyProvider.teams_phone_extension;
+
+  @doc("The optional display phone number for the Teams resource account.")
+  @maxLength(64)
+  phone_number?: string;
+
+  @doc("The Microsoft Teams resource-account object identifier as a GUID.")
+  resource_account_object_id: Azure.Core.uuid;
+}
+
+@doc("A Twilio binding returned in a list, including its entity tag.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TwilioTelephonyBindingListItem extends TelephonyBindingListItem {
+  @doc("The Twilio provider.")
+  provider: TelephonyProvider.twilio;
+
+  @doc("The Twilio E.164 phone number.")
+  @pattern("^\\+[1-9]\\d{6,14}$")
+  phone_number: string;
+}
+
+/** A telephony binding response with its entity tag. */
+alias TelephonyBindingResponse = {
+  @doc("The telephony binding.")
+  @bodyRoot
+  body: TelephonyBinding;
+
+  @doc("The entity tag to send in the `If-Match` header when updating or deleting the binding.")
+  @header("ETag")
+  etag: Azure.Core.eTag;
+};
+
+/** A newly created telephony binding response. */
+alias TelephonyBindingCreatedResponse = TypeSpec.Http.Response<201> &
+  TelephonyBindingResponse;
+
+/** The optimistic-concurrency precondition for mutating a telephony resource. */
+alias TelephonyIfMatchHeader = {
+  @doc("The entity tag returned by the latest read. The request fails if the resource changed since that read.")
+  @header("If-Match")
+  ifMatch: Azure.Core.eTag;
+};
+
+@doc("The lifecycle status of an inbound telephony call.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCallStatus {
+  string,
+
+  @doc("The call has started and has not reached a terminal state.")
+  in_progress: "in_progress",
+
+  @doc("The call ended successfully.")
+  success: "success",
+
+  @doc("The call ended because of a provider or management failure.")
+  failed: "failed",
+}
+
+@doc("The provider-neutral phase reached by an inbound telephony call.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCallPhase {
+  string,
+
+  @doc("The provider webhook was received.")
+  received: "received",
+
+  @doc("The provider webhook was validated.")
+  validated: "validated",
+
+  @doc("The call was admitted to a configured agent binding.")
+  admitted: "admitted",
+
+  @doc("The provider was asked to answer the call.")
+  answering: "answering",
+
+  @doc("The provider reported that the call was answered.")
+  answered: "answered",
+
+  @doc("The provider media channel was connected.")
+  media_connected: "media_connected",
+
+  @doc("The voice-agent session was ready.")
+  agent_session_ready: "agent_session_ready",
+
+  @doc("Media was actively bridged between the caller and the voice agent.")
+  bridging: "bridging",
+
+  @doc("A mid-call management command was in progress.")
+  managing: "managing",
+
+  @doc("The call completed.")
+  completed: "completed",
+
+  @doc("The call was rejected before admission or answer.")
+  rejected: "rejected",
+
+  @doc("The call failed.")
+  failed: "failed",
+}
+
+@doc("The source of a telephony lifecycle timestamp.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCallTimestampSource {
+  string,
+
+  @doc("The telephony provider supplied the timestamp.")
+  provider: "provider",
+
+  @doc("The Foundry telephony gateway observed the event.")
+  gateway: "gateway",
+
+  @doc("The service derived the timestamp from another observation.")
+  derived: "derived",
+}
+
+@doc("The timestamp used as the basis for call duration.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCallDurationBasis {
+  string,
+
+  @doc("Duration starts when the provider reports the call as answered.")
+  answered: "answered",
+
+  @doc("Duration starts when the inbound webhook is received because no answered timestamp is available.")
+  received: "received",
+}
+
+@doc("Detailed provider-neutral timing for an inbound telephony call.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCallTiming {
+  @doc("The Unix timestamp (in seconds) for when the provider webhook was received.")
+  received_at?: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when webhook validation completed.")
+  validated_at?: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when the call was admitted to an agent binding.")
+  admitted_at?: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when the service requested that the provider answer the call.")
+  answer_requested_at?: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when the provider reported that the call was answered.")
+  answered_at?: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when the provider media channel connected.")
+  media_connected_at?: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when the voice-agent session became ready.")
+  agent_session_ready_at?: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when caller audio was first observed.")
+  first_caller_audio_at?: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when agent audio was first observed.")
+  first_agent_audio_at?: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when the call reached a terminal state.")
+  ended_at?: FoundryTimestamp;
+
+  @doc("The timestamp used as the basis for duration.")
+  duration_basis?: TelephonyCallDurationBasis;
+
+  @doc("The primary source of the timing milestones. Individual lifecycle events identify their own timestamp source separately.")
+  timestamp_source: TelephonyCallTimestampSource;
+}
+
+@doc("The mode used to expose a telephony call as a customer-facing Foundry trace.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCallTraceMode {
+  string,
+
+  @doc("The trace was created while the voice-agent conversation was live.")
+  live: "live",
+
+  @doc("The trace summarizes a validated, customer-owned call that ended before a live voice-agent conversation was created.")
+  post_call: "post_call",
+}
+
+@doc("The availability status of a customer-facing telephony call trace.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCallTraceStatus {
+  string,
+
+  @doc("Trace creation has not completed.")
+  pending: "pending",
+
+  @doc("Trace creation is in progress.")
+  emitting: "emitting",
+
+  @doc("The trace is available.")
+  available: "available",
+
+  @doc("Tracing was disabled or no trace listener recorded the call.")
+  not_recorded: "not_recorded",
+
+  @doc("The call was not eligible for a customer-facing trace.")
+  not_applicable: "not_applicable",
+
+  @doc("Trace creation failed.")
+  failed: "failed",
+}
+
+@doc("Correlation from a durable telephony call record to its customer-facing Foundry trace.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCallTrace {
+  @doc("The trace availability status.")
+  status: TelephonyCallTraceStatus;
+
+  @doc("The W3C trace identifier, when a trace was recorded.")
+  @pattern("^[0-9a-f]{32}$")
+  trace_id?: string;
+
+  @doc("The root span identifier, when a trace was recorded.")
+  @pattern("^[0-9a-f]{16}$")
+  root_span_id?: string;
+
+  @doc("The voice-agent conversation identifier, when a conversation was created.")
+  @maxLength(256)
+  conversation_id?: string;
+
+  @doc("Whether the trace was emitted live or after the call ended.")
+  mode?: TelephonyCallTraceMode;
+}
+
+@doc("The outcome of one telephony lifecycle observation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCallLifecycleEventOutcome {
+  string,
+
+  @doc("The event was observed without a success or failure result.")
+  observed: "observed",
+
+  @doc("The operation started.")
+  started: "started",
+
+  @doc("The operation succeeded.")
+  succeeded: "succeeded",
+
+  @doc("The operation failed.")
+  failed: "failed",
+
+  @doc("The operation or call was rejected.")
+  rejected: "rejected",
+
+  @doc("The operation was cancelled.")
+  cancelled: "cancelled",
+}
+
+@doc("The component that supplied a telephony lifecycle observation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCallLifecycleEventSource {
+  string,
+
+  @doc("The Foundry telephony gateway supplied the observation.")
+  gateway: "gateway",
+
+  @doc("Microsoft Teams Phone Extension supplied the observation.")
+  teams_phone_extension: "teams_phone_extension",
+
+  @doc("Twilio supplied the observation.")
+  twilio: "twilio",
+
+  @doc("The voice-agent runtime supplied the observation.")
+  voice_agent: "voice_agent",
+}
+
+@doc("A provider-neutral lifecycle event name. Known values are stable; additional values may be added over time.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCallLifecycleEventName {
+  string,
+
+  @doc("The provider webhook was received.")
+  webhook_received: "telephony.webhook.received",
+
+  @doc("The provider webhook was validated.")
+  webhook_validation: "telephony.webhook.validation",
+
+  @doc("The service attempted to resolve the agent binding.")
+  binding_resolve: "telephony.binding.resolve",
+
+  @doc("The service requested or observed provider answer state.")
+  provider_answer: "telephony.provider.answer",
+
+  @doc("The provider media channel changed connection state.")
+  media_connect: "telephony.media.connect",
+
+  @doc("The voice-agent session changed connection state.")
+  agent_session_connect: "telephony.agent_session.connect",
+
+  @doc("The first caller audio was observed.")
+  first_caller_audio: "telephony.media.first_caller_audio",
+
+  @doc("The first agent audio was observed.")
+  first_agent_audio: "telephony.media.first_agent_audio",
+
+  @doc("A call transfer changed state.")
+  call_transfer: "telephony.call.transfer",
+
+  @doc("A call hang-up changed state.")
+  call_hangup: "telephony.call.hangup",
+
+  @doc("The call disconnected.")
+  call_disconnect: "telephony.call.disconnect",
+}
+
+@doc("Known service-generated reasons for a telephony lifecycle event. An event reason does not necessarily describe the final outcome of the call. Additional string codes may be returned.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCallLifecycleEventReason {
+  string,
+
+  @doc("The provider webhook payload was invalid.")
+  invalid_webhook_payload: "invalid_webhook_payload",
+
+  @doc("Validation of the provider webhook failed.")
+  webhook_validation_failed: "webhook_validation_failed",
+
+  @doc("No matching telephony binding was found.")
+  binding_not_found: "binding_not_found",
+
+  @doc("The telephony binding was suspended.")
+  binding_suspended: "binding_suspended",
+
+  @doc("The call was rejected by admission policy.")
+  admission_rejected: "admission_rejected",
+
+  @doc("The service could not complete the call admission check.")
+  admission_check_failed: "admission_check_failed",
+
+  @doc("The webhook route did not match the resolved voice agent.")
+  route_agent_mismatch: "route_agent_mismatch",
+
+  @doc("The telephony binding configuration was invalid.")
+  invalid_binding_configuration: "invalid_binding_configuration",
+
+  @doc("The service could not resolve the telephony provider credentials.")
+  credential_resolution_failed: "credential_resolution_failed",
+
+  @doc("The provider resource did not match the configured telephony resource.")
+  provider_resource_mismatch: "provider_resource_mismatch",
+
+  @doc("The service could not resolve the endpoint needed to handle the call.")
+  endpoint_resolution_failed: "endpoint_resolution_failed",
+
+  @doc("The service could not set up the incoming call.")
+  ingress_setup_failed: "ingress_setup_failed",
+
+  @doc("The call conflicted with an existing live call.")
+  live_call_conflict: "live_call_conflict",
+
+  @doc("The service could not persist the live call state.")
+  live_call_persistence_failed: "live_call_persistence_failed",
+
+  @doc("The attempt to answer the provider call failed.")
+  answer_failed: "answer_failed",
+
+  @doc("The provider reported that the call disconnected.")
+  provider_disconnected: "provider_disconnected",
+
+  @doc("The provider reported that the destination was busy.")
+  provider_busy: "provider_busy",
+
+  @doc("The provider reported that the call was not answered.")
+  provider_no_answer: "provider_no_answer",
+
+  @doc("The provider reported that the call was cancelled.")
+  provider_cancelled: "provider_cancelled",
+
+  @doc("The provider reported that the call failed.")
+  provider_failed: "provider_failed",
+
+  @doc("The provider reported a media-stream error.")
+  provider_stream_error: "provider_stream_error",
+
+  @doc("The provider reported that the media stream stopped.")
+  provider_stream_stopped: "provider_stream_stopped",
+
+  @doc("The call could not connect to the voice-agent session.")
+  agent_session_connect_failed: "agent_session_connect_failed",
+
+  @doc("The call's media stream ended.")
+  media_stream_ended: "media_stream_ended",
+
+  @doc("The telephony media bridge was cancelled.")
+  bridge_cancelled: "bridge_cancelled",
+
+  @doc("The telephony media bridge failed.")
+  bridge_failed: "bridge_failed",
+
+  @doc("A managed call hang-up command succeeded.")
+  managed_hangup: "managed_hangup",
+
+  @doc("A managed call-transfer command succeeded.")
+  managed_transfer: "managed_transfer",
+
+  @doc("A managed call hang-up command failed.")
+  manage_hangup_failed: "manage_hangup_failed",
+
+  @doc("A managed call-transfer command failed.")
+  manage_transfer_failed: "manage_transfer_failed",
+}
+
+@doc("A bounded durable observation in the lifecycle of one telephony call.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCallLifecycleEvent {
+  @doc("The service-assigned order of the event within the call record.")
+  @key
+  @visibility(Lifecycle.Read)
+  @minValue(1)
+  sequence: int64;
+
+  @doc("The stable provider-neutral event name.")
+  name: TelephonyCallLifecycleEventName;
+
+  @doc("The component that supplied the observation.")
+  source: TelephonyCallLifecycleEventSource;
+
+  @doc("The outcome of the observed lifecycle operation.")
+  outcome: TelephonyCallLifecycleEventOutcome;
+
+  @doc("The Unix timestamp (in seconds) for when the service observed the event.")
+  observed_at: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when the event occurred according to the provider.")
+  occurred_at?: FoundryTimestamp;
+
+  @doc("The source of the event timestamp.")
+  timestamp_source: TelephonyCallTimestampSource;
+
+  @doc("A stable service-generated reason associated with this lifecycle event, not necessarily the final outcome of the call. Additional string codes may be returned.")
+  @maxLength(128)
+  reason?: TelephonyCallLifecycleEventReason;
+
+  @doc("The provider event identifier used for idempotency, when supplied.")
+  @maxLength(256)
+  provider_event_id?: string;
+
+  @doc("The provider event sequence, when supplied.")
+  @minValue(0)
+  provider_sequence?: int64;
+
+  @doc("The provider status code associated with the event.")
+  @minValue(0)
+  provider_status_code?: int32;
+
+  @doc("The provider subcode associated with the event.")
+  @minValue(0)
+  provider_sub_code?: int32;
+}
+
+@doc("Known service-generated reasons that one telephony call ended, rather than reasons for an overall outbound call job. Additional string codes may be returned.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCallEndReason {
+  string,
+
+  @doc("The provider webhook payload was invalid.")
+  invalid_webhook_payload: "invalid_webhook_payload",
+
+  @doc("Validation of the provider webhook failed.")
+  webhook_validation_failed: "webhook_validation_failed",
+
+  @doc("No matching telephony binding was found.")
+  binding_not_found: "binding_not_found",
+
+  @doc("The telephony binding was suspended.")
+  binding_suspended: "binding_suspended",
+
+  @doc("The call was rejected by admission policy.")
+  admission_rejected: "admission_rejected",
+
+  @doc("The service could not complete the call admission check.")
+  admission_check_failed: "admission_check_failed",
+
+  @doc("The webhook route did not match the resolved voice agent.")
+  route_agent_mismatch: "route_agent_mismatch",
+
+  @doc("The telephony binding configuration was invalid.")
+  invalid_binding_configuration: "invalid_binding_configuration",
+
+  @doc("The service could not resolve the telephony provider credentials.")
+  credential_resolution_failed: "credential_resolution_failed",
+
+  @doc("The provider resource did not match the configured telephony resource.")
+  provider_resource_mismatch: "provider_resource_mismatch",
+
+  @doc("The service could not resolve the endpoint needed to handle the call.")
+  endpoint_resolution_failed: "endpoint_resolution_failed",
+
+  @doc("The service could not set up the incoming call.")
+  ingress_setup_failed: "ingress_setup_failed",
+
+  @doc("The call conflicted with an existing live call.")
+  live_call_conflict: "live_call_conflict",
+
+  @doc("The service could not persist the live call state.")
+  live_call_persistence_failed: "live_call_persistence_failed",
+
+  @doc("The attempt to answer the provider call failed.")
+  answer_failed: "answer_failed",
+
+  @doc("The provider reported that the call disconnected.")
+  provider_disconnected: "provider_disconnected",
+
+  @doc("The provider reported that the destination was busy.")
+  provider_busy: "provider_busy",
+
+  @doc("The provider reported that the call was not answered.")
+  provider_no_answer: "provider_no_answer",
+
+  @doc("The provider reported that the call was cancelled.")
+  provider_cancelled: "provider_cancelled",
+
+  @doc("The provider reported that the call failed.")
+  provider_failed: "provider_failed",
+
+  @doc("The provider reported a media-stream error.")
+  provider_stream_error: "provider_stream_error",
+
+  @doc("The provider reported that the media stream stopped.")
+  provider_stream_stopped: "provider_stream_stopped",
+
+  @doc("The call could not connect to the voice-agent session.")
+  agent_session_connect_failed: "agent_session_connect_failed",
+
+  @doc("The call's media stream ended.")
+  media_stream_ended: "media_stream_ended",
+
+  @doc("The telephony media bridge was cancelled.")
+  bridge_cancelled: "bridge_cancelled",
+
+  @doc("The telephony media bridge failed.")
+  bridge_failed: "bridge_failed",
+
+  @doc("A managed call hang-up command succeeded.")
+  managed_hangup: "managed_hangup",
+
+  @doc("A managed call-transfer command succeeded.")
+  managed_transfer: "managed_transfer",
+
+  @doc("A managed call hang-up command failed.")
+  manage_hangup_failed: "manage_hangup_failed",
+
+  @doc("A managed call-transfer command failed.")
+  manage_transfer_failed: "manage_transfer_failed",
+}
+
+@doc("A summary of a durable inbound call to a voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCallSummary {
+  @doc("The service-generated call identifier.")
+  id: TelephonyCallId;
+
+  @doc("The telephony provider.")
+  provider: TelephonyProvider;
+
+  @doc("The provider-assigned call identifier, when available.")
+  @maxLength(256)
+  provider_call_id?: string;
+
+  @doc("The caller's phone number, when supplied by the provider.")
+  @maxLength(64)
+  caller_number?: string;
+
+  @doc("The Teams Phone Extension or Twilio number that received the call.")
+  @maxLength(64)
+  provider_number?: string;
+
+  @doc("The lifecycle status of the call.")
+  status: TelephonyCallStatus;
+
+  @doc("The provider-neutral lifecycle phase reached by the call.")
+  phase: TelephonyCallPhase;
+
+  @doc("The Unix timestamp (in seconds) for when the inbound webhook was received.")
+  started_at: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when the provider reported the call as answered.")
+  answered_at?: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when the provider media channel connected.")
+  media_connected_at?: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when the voice-agent session became ready.")
+  agent_session_ready_at?: FoundryTimestamp;
+
+  @doc("The Unix timestamp (in seconds) for when the call ended.")
+  ended_at?: FoundryTimestamp;
+
+  @doc("The call duration.")
+  duration_ms?: FoundryDurationMilliseconds;
+
+  @doc("The service-generated reason that this single call ended, rather than the outcome of an overall outbound call job. Additional string codes may be returned.")
+  @maxLength(128)
+  end_reason?: TelephonyCallEndReason;
+
+  @doc("The provider status code associated with the terminal result.")
+  @minValue(0)
+  provider_status_code?: int32;
+
+  @doc("The provider subcode associated with the terminal result.")
+  @minValue(0)
+  provider_sub_code?: int32;
+
+  @doc("The provider message associated with the terminal result.")
+  @maxLength(2048)
+  provider_message?: string;
+}
+
+@doc("Detailed diagnostics for a durable inbound call to a voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCallRecord {
+  ...TelephonyCallSummary;
+
+  @doc("Detailed provider-neutral call timing.")
+  timing: TelephonyCallTiming;
+
+  @doc("Correlation to the customer-facing Foundry trace.")
+  trace?: TelephonyCallTrace;
+
+  @doc("The lifecycle timeline.")
+  events: TelephonyCallLifecycleEvent[];
+
+  @doc("Whether older lifecycle events were omitted from the timeline.")
+  events_truncated: boolean;
+}
+
+@doc("A request to transfer an active telephony call to a configured target.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("TelephonyCallTransferContent", "csharp")
+model TelephonyCallTransferRequest {
+  @doc("The name of a transfer target configured for the voice agent.")
+  target: TelephonyTransferTargetName;
+}
+
+@doc("The telephony transfer targets configured for one voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyTransferTargets {
+  @doc("The complete set of destinations to which the voice agent may transfer calls. An empty array clears all targets when replacing the configuration.")
+  transfer_targets: TelephonyTransferTarget[];
+}
+
+/** The entity tag and transfer targets configured for one voice agent. */
+alias TelephonyTransferTargetsResponse = TelephonyTransferTargets & {
+  @doc("The entity tag to send in the `If-Match` header when replacing the transfer targets.")
+  @header("ETag")
+  etag: Azure.Core.eTag;
+};
+
+// ============================================================================
+// Outbound telephony
+// ============================================================================
+
+@doc("A service-generated durable outbound call-job identifier.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+scalar TelephonyCallJobId extends string;
+
+@doc("A service-generated outbound campaign identifier.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+scalar TelephonyCampaignId extends string;
+
+@doc("A service-generated outbound campaign recipient-import identifier.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+scalar TelephonyCampaignRecipientImportId extends string;
+
+@doc("A service-generated outbound telephony operation identifier.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+scalar TelephonyOperationId extends string;
+
+@doc("The type of destination for an outbound call.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyOutboundDestinationType {
+  string,
+
+  @doc("An E.164 phone number.")
+  phone_number: "phone_number",
+}
+
+@doc("The destination of an outbound call.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyOutboundDestination {
+  @doc("The destination type. Only E.164 phone numbers are currently supported.")
+  type: TelephonyOutboundDestinationType;
+
+  @doc("The destination E.164 phone number.")
+  @pattern("^\\+[1-9]\\d{1,14}$")
+  value: string;
+}
+
+@doc("The retry strategy for an outbound call.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyOutboundRetryPolicyType {
+  string,
+
+  @doc("Retry after a fixed interval between attempts.")
+  fixed_interval: "fixed_interval",
+}
+
+@doc("The retry policy for one durable outbound call intent. `max_attempts` includes the first attempt. Strategy-specific settings are defined by the derived policy.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyOutboundRetryPolicy {
+  @doc("The retry strategy. Only fixed-interval retries are currently supported.")
+  type: TelephonyOutboundRetryPolicyType;
+
+  @doc("The maximum number of provider attempts, including the first attempt. Defaults to 1.")
+  @minValue(1)
+  @maxValue(5)
+  max_attempts?: int32 = 1;
+}
+
+@doc("A retry policy with a fixed interval between outbound call attempts.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyOutboundFixedIntervalRetryPolicy
+  extends TelephonyOutboundRetryPolicy {
+  @doc("The fixed-interval retry strategy.")
+  type: TelephonyOutboundRetryPolicyType.fixed_interval;
+
+  @doc("The fixed delay in seconds between attempts. It must be 0 when `max_attempts` is 1, and from 60 through 86400 when retries are enabled.")
+  interval?: FoundryDurationSeconds;
+}
+
+@doc("The frozen retry policy returned for an outbound call or campaign.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("TelephonyOutboundRetryPolicyResult", "csharp")
+model TelephonyOutboundRetryPolicyResponse {
+  @doc("The retry strategy.")
+  type: TelephonyOutboundRetryPolicyType;
+
+  @doc("The maximum number of provider attempts, including the first attempt.")
+  @minValue(1)
+  @maxValue(5)
+  max_attempts: int32;
+}
+
+@doc("The frozen fixed-interval retry policy returned for an outbound call or campaign.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("TelephonyOutboundFixedIntervalRetryPolicyResult", "csharp")
+model TelephonyOutboundFixedIntervalRetryPolicyResponse
+  extends TelephonyOutboundRetryPolicyResponse {
+  @doc("The fixed-interval retry strategy.")
+  type: TelephonyOutboundRetryPolicyType.fixed_interval;
+
+  @doc("The fixed delay in seconds between attempts.")
+  interval: FoundryDurationSeconds;
+}
+
+@doc("The optional execution window for a direct outbound call.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCallJobSchedule {
+  @doc("The earliest instant at which dispatch may begin.")
+  not_before?: FoundryTimestamp;
+
+  @doc("The instant after which the call job expires without dispatch.")
+  expires_at?: FoundryTimestamp;
+}
+
+@doc("An outbound caller identity: an E.164 phone number or a non-empty Teams Resource Account UUID. The connection category determines which form is accepted.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@minLength(1)
+@maxLength(36)
+@pattern("^(?:\\+[1-9][0-9]{1,14}|(?!00000000-0000-0000-0000-000000000000$)[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$")
+scalar TelephonyOutboundSource extends string;
+
+@doc("Customer-controlled configuration shared by direct and campaign-created call jobs.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCallJobConfiguration {
+  @doc("The phone destination to call.")
+  destination: TelephonyOutboundDestination;
+
+  @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required.")
+  @minLength(1)
+  @maxLength(256)
+  connection_name: string;
+
+  @doc("The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.")
+  @minLength(1)
+  source: TelephonyOutboundSource;
+
+  @doc("An optional customer-declared purpose for placing the call.")
+  @minLength(1)
+  purpose?: string;
+
+  @doc("Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.")
+  structured_inputs?: Record<unknown>;
+
+  @doc("The optional execution window.")
+  schedule?: TelephonyCallJobSchedule;
+}
+
+@doc("A request to create one durable direct outbound call job.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("CreateTelephonyCallJobContent", "csharp")
+@example(#{
+  connection_name: "telephony-twilio",
+  source: "+14255550100",
+  destination: #{ type: "phone_number", value: "+14255550123" },
+})
+@example(#{
+  connection_name: "telephony-acs",
+  source: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+  destination: #{ type: "phone_number", value: "+14255550123" },
+})
+model CreateTelephonyCallJobRequest {
+  ...TelephonyCallJobConfiguration;
+
+  @doc("The provider-attempt retry policy. Omit it for one attempt with no retry delay.")
+  retry_policy?: TelephonyOutboundRetryPolicy;
+}
+
+@doc("The lifecycle status of a durable outbound call job.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCallJobStatus {
+  string,
+  accepted: "accepted",
+  waiting_for_schedule: "waiting_for_schedule",
+  queued: "queued",
+  dispatching: "dispatching",
+  in_progress: "in_progress",
+  waiting_for_retry: "waiting_for_retry",
+  cancellation_requested: "cancellation_requested",
+  completed: "completed",
+  blocked: "blocked",
+  expired: "expired",
+  failed: "failed",
+  cancelled: "cancelled",
+}
+
+@doc("Known terminal reasons for an overall outbound call job, which can span multiple provider attempts. These are distinct from individual call lifecycle reasons. Additional string codes may be returned.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCallJobTerminalReason {
+  string,
+
+  @doc("The provider call ended before the service observed it as connected.")
+  no_answer: "no_answer",
+
+  @doc("The provider accepted the call, but no connection was observed before the timeout and cancellation was reconciled. This does not prove that the recipient never answered.")
+  no_answer_timeout: "no_answer_timeout",
+
+  @doc("The attempt to answer the provider call failed.")
+  answer_failed: "answer_failed",
+
+  @doc("The telephony media bridge was cancelled.")
+  bridge_cancelled: "bridge_cancelled",
+
+  @doc("The telephony media bridge failed.")
+  bridge_failed: "bridge_failed",
+
+  @doc("The voice-agent session configuration was invalid for outbound calling.")
+  voice_session_configuration_invalid: "voice_session_configuration_invalid",
+
+  @doc("The outbound call job's project context did not match its expected project.")
+  connection_project_mismatch: "connection_project_mismatch",
+
+  @doc("The resolved outbound connection or caller identity no longer matched the call job configuration.")
+  outbound_connection_changed: "outbound_connection_changed",
+
+  @doc("The configured outbound connection could not be resolved or used.")
+  outbound_connection_unavailable: "outbound_connection_unavailable",
+
+  @doc("The telephony binding was invalid for outbound calling.")
+  telephony_binding_invalid: "telephony_binding_invalid",
+
+  @doc("The telephony binding could not be found.")
+  telephony_binding_not_found: "telephony_binding_not_found",
+
+  @doc("The telephony binding was not active.")
+  telephony_binding_inactive: "telephony_binding_inactive",
+
+  @doc("The telephony binding changed after the call job was configured.")
+  telephony_binding_changed: "telephony_binding_changed",
+
+  @doc("The campaign associated with the call job could not be found.")
+  campaign_not_found: "campaign_not_found",
+
+  @doc("The campaign associated with the call job was cancelled.")
+  campaign_cancelled: "campaign_cancelled",
+
+  @doc("The campaign associated with the call job had already completed.")
+  campaign_completed: "campaign_completed",
+
+  @doc("The campaign associated with the call job had failed.")
+  campaign_failed: "campaign_failed",
+
+  @doc("The service could not record the guard against duplicate call origination.")
+  origination_fence_not_recorded: "origination_fence_not_recorded",
+
+  @doc("The service could not reconcile the outcome of call origination before the timeout.")
+  origination_reconciliation_timeout: "origination_reconciliation_timeout",
+
+  @doc("The service could not confirm the outcome of call cancellation before the timeout.")
+  cancellation_reconciliation_timeout: "cancellation_reconciliation_timeout",
+
+  @doc("Provider callbacks timed out, and the service could not confirm the subsequent cancellation before its reconciliation timeout.")
+  provider_callback_timeout_cancellation_reconciliation_timeout: "provider_callback_timeout_cancellation_reconciliation_timeout",
+}
+
+@doc("A cancellation request recorded for an outbound call job.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCallJobCancellation {
+  @doc("The authenticated principal that requested cancellation.")
+  requested_by: string;
+
+  @doc("The cancellation mode applied to the call job.")
+  mode: string;
+
+  @doc("The Unix timestamp in seconds when cancellation was requested.")
+  requested_at: FoundryTimestamp;
+
+  @doc("The call-job revision at which cancellation was recorded.")
+  @minValue(0)
+  revision: int64;
+}
+
+@doc("A durable direct or campaign-created outbound call intent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCallJob {
+  ...TelephonyCallJobConfiguration;
+
+  @doc("The service-generated call-job identifier.")
+  id: TelephonyCallJobId;
+
+  @doc("The object type. Always `telephony.call_job`.")
+  object: "telephony.call_job";
+
+  @doc("The name of the voice agent used at execution time.")
+  agent_name: string;
+
+  @doc("The current call-job lifecycle status.")
+  status: TelephonyCallJobStatus;
+
+  @doc("The recorded cancellation request, when cancellation was requested.")
+  cancellation?: TelephonyCallJobCancellation;
+
+  @doc("The frozen provider-attempt retry policy.")
+  retry_policy: TelephonyOutboundRetryPolicyResponse;
+
+  @doc("The number of provider attempts created so far.")
+  @minValue(0)
+  attempt_count: int32;
+
+  @doc("The Unix timestamp in seconds at which the next retry becomes eligible.")
+  next_attempt_at?: FoundryTimestamp;
+
+  @doc("The stable service-generated reason for the overall outbound call job, which can span multiple provider attempts, when available. Interpret this with `status`: a queued job can retain a temporary dispatch-deferral reason. Additional string codes may be returned.")
+  terminal_reason?: TelephonyCallJobTerminalReason;
+
+  @doc("The monotonically increasing optimistic-concurrency revision.")
+  @minValue(0)
+  revision: int64;
+
+  @doc("The Unix timestamp in seconds when the call job was created.")
+  created_at: FoundryTimestamp;
+
+  @doc("The Unix timestamp in seconds when the call job was last updated.")
+  updated_at: FoundryTimestamp;
+}
+
+alias TelephonyCallJobResponse = {
+  @bodyRoot body: TelephonyCallJob;
+  @header("ETag") etag: Azure.Core.eTag;
+};
+
+alias TelephonyCallJobAcceptedResponse = TypeSpec.Http.Response<202> &
+  TelephonyCallJobResponse & {
+    @header("Location") location: string;
+    @header("Retry-After") retry_after: FoundryDurationSeconds;
+  };
+
+@doc("When a published outbound campaign becomes eligible to dispatch calls.")
+union TelephonyCampaignScheduleType {
+  string,
+
+  @doc("Calls are eligible immediately after publication.")
+  immediate: "immediate",
+
+  @doc("Calls are eligible at the scheduled start instant.")
+  scheduled: "scheduled",
+}
+
+@doc("The schedule for an outbound campaign.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCampaignSchedule {
+  @doc("Whether calls are eligible immediately after publication or at a future instant.")
+  type: TelephonyCampaignScheduleType;
+
+  @doc("The scheduled start instant. Required only when `type` is `scheduled`.")
+  start_at?: FoundryTimestamp;
+}
+
+@doc("Customer-controlled configuration for an outbound campaign.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCampaignConfiguration {
+  @doc("A customer-visible name for the campaign.")
+  @minLength(1)
+  display_name: string;
+
+  @doc("The Foundry connection name in the current project used to originate campaign calls. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required.")
+  @minLength(1)
+  @maxLength(256)
+  connection_name: string;
+
+  @doc("The caller identity used to originate campaign calls. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.")
+  @minLength(1)
+  source: TelephonyOutboundSource;
+
+  @doc("An optional customer-declared purpose for campaign calls.")
+  @minLength(1)
+  purpose?: string;
+
+  @doc("When the published campaign becomes eligible to dispatch calls.")
+  schedule?: TelephonyCampaignSchedule;
+}
+
+@doc("A request to create a draft outbound campaign.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("CreateTelephonyCampaignContent", "csharp")
+@example(#{
+  display_name: "Twilio renewal reminders",
+  connection_name: "telephony-twilio",
+  source: "+14255550100",
+})
+@example(#{
+  display_name: "Teams Phone renewal reminders",
+  connection_name: "telephony-acs",
+  source: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+})
+model CreateTelephonyCampaignRequest {
+  ...TelephonyCampaignConfiguration;
+
+  @doc("The provider-attempt retry policy inherited by every materialized call job.")
+  retry_policy?: TelephonyOutboundRetryPolicy;
+}
+
+@doc("The immutable-configuration lifecycle status of an outbound campaign.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCampaignConfigurationStatus {
+  string,
+  draft: "draft",
+  importing: "importing",
+  validating: "validating",
+  publishing: "publishing",
+  published: "published",
+  publish_failed: "publish_failed",
+}
+
+@doc("The execution lifecycle status of a published outbound campaign.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCampaignExecutionStatus {
+  string,
+  none: "none",
+  scheduled: "scheduled",
+  running: "running",
+  paused: "paused",
+  completed: "completed",
+  failed: "failed",
+  cancelled: "cancelled",
+}
+
+@doc("Aggregate call-job counts for an outbound campaign.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCampaignCallJobCounts {
+  total: int64;
+  pending: int64;
+  in_progress: int64;
+  completed: int64;
+  failed: int64;
+  blocked: int64;
+  cancelled: int64;
+  expired: int64;
+}
+
+@doc("A durable outbound campaign owned by a voice agent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCampaign {
+  ...TelephonyCampaignConfiguration;
+  id: TelephonyCampaignId;
+  object: "telephony.campaign";
+  agent_name: string;
+  configuration_status: TelephonyCampaignConfigurationStatus;
+  execution_status: TelephonyCampaignExecutionStatus;
+  retry_policy: TelephonyOutboundRetryPolicyResponse;
+  latest_successful_validation_id?: string;
+  active_validation_id?: string;
+  active_recipient_import_id?: TelephonyCampaignRecipientImportId;
+  published_at?: FoundryTimestamp;
+  call_job_counts: TelephonyCampaignCallJobCounts;
+  created_at: FoundryTimestamp;
+  updated_at: FoundryTimestamp;
+}
+
+alias TelephonyCampaignCreatedResponse = TypeSpec.Http.Response<201> &
+  TelephonyCampaign & {
+    @header("Location") location: string;
+  };
+
+@doc("A Dataset source for campaign recipient import.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCampaignRecipientImportSource {
+  type: "dataset";
+  @minLength(1) dataset_name: string;
+  @minLength(1) dataset_version: string;
+
+  @doc("A relative path to a CSV, JSON array, or JSONL file in the Dataset version.")
+  @minLength(1)
+  file_name: string;
+
+  format: TelephonyCampaignRecipientImportFormat;
+}
+
+@doc("A supported Dataset recipient file format.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCampaignRecipientImportFormat {
+  string,
+
+  @doc("A comma-separated values file.")
+  csv: "csv",
+
+  @doc("A JSON file containing an array of recipient objects.")
+  json: "json",
+
+  @doc("A JSON Lines file containing one recipient object per line.")
+  jsonl: "jsonl",
+}
+
+@doc("Source fields or CSV columns mapped into each campaign recipient. Every unmapped CSV column or JSON/JSONL top-level property becomes a same-named structured input. CSV cells are preserved as strings until Agent-declared inputs are parsed according to their schemas; additional inputs remain strings.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCampaignRecipientMapping {
+  @doc("The source field containing the destination E.164 phone number. Defaults to `destination`. The source field is required for each recipient.")
+  @minLength(1)
+  destination: string = "destination";
+
+  @doc("The source field containing the recipient key. Defaults to `recipient_key`. The source field is required for each recipient.")
+  @minLength(1)
+  recipient_key: string = "recipient_key";
+
+  @doc("The source field containing the recipient item key. Defaults to `recipient_item_key`. The source field is required when `duplicate_handling` is `keep_each`; otherwise it may be absent.")
+  recipient_item_key?: string = "recipient_item_key";
+
+  @doc("The source field containing the earliest dispatch time as a Unix timestamp in seconds. Defaults to `not_before`. If the source field is absent, no per-recipient start bound is applied.")
+  not_before?: string = "not_before";
+
+  @doc("The source field containing the expiry time as a Unix timestamp in seconds. Defaults to `expires_at`. If the source field is absent, no per-recipient expiry bound is applied.")
+  expires_at?: string = "expires_at";
+}
+
+@doc("Optional source-field mappings for a recipient import. Each omitted entry uses its same-named source field.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("TelephonyCampaignRecipientMappingContent", "csharp")
+model TelephonyCampaignRecipientMappingRequest
+  is OptionalProperties<TelephonyCampaignRecipientMapping>;
+
+@doc("How duplicate recipient keys in an import are handled.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCampaignDuplicateHandling {
+  string,
+
+  @doc("Reject duplicate recipient keys.")
+  reject: "reject",
+
+  @doc("Keep each recipient entry, distinguishing duplicates by recipient item key.")
+  keep_each: "keep_each",
+
+  @doc("Merge entries with the same recipient key.")
+  merge: "merge",
+}
+
+@doc("A request to import campaign recipients from a Dataset CSV, JSON array, or JSONL file. Imported Agent-declared structured inputs follow the Agent definition's schema, required, and default-value semantics.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("ImportTelephonyCampaignRecipientsContent", "csharp")
+model ImportTelephonyCampaignRecipientsRequest {
+  source: TelephonyCampaignRecipientImportSource;
+
+  @doc("Mappings from recipient properties to source fields or columns. Omit this property or an individual entry to use same-named source fields. Destination and recipient-key source fields are required. Optional source fields may be absent, except the recipient item key when `duplicate_handling` is `keep_each`.")
+  mapping?: TelephonyCampaignRecipientMappingRequest = #{};
+
+  duplicate_handling?: TelephonyCampaignDuplicateHandling = TelephonyCampaignDuplicateHandling.reject;
+}
+
+@doc("The lifecycle status of a campaign recipient import.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCampaignRecipientImportStatus {
+  string,
+  running: "running",
+  succeeded: "succeeded",
+  failed: "failed",
+}
+
+@doc("A durable campaign recipient-import record.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCampaignRecipientImport {
+  id: TelephonyCampaignRecipientImportId;
+  object: "telephony.campaign.recipient_import";
+  campaign_id: TelephonyCampaignId;
+  status: TelephonyCampaignRecipientImportStatus;
+  source: TelephonyCampaignRecipientImportSource;
+  mapping?: TelephonyCampaignRecipientMapping;
+  duplicate_handling: TelephonyCampaignDuplicateHandling;
+  @minValue(0) rows_processed: int64;
+  @minValue(0) eligible_recipient_count: int64;
+  @minValue(0) invalid_recipient_count: int64;
+  error_code?: string;
+  error_message?: string;
+  created_at: FoundryTimestamp;
+  updated_at: FoundryTimestamp;
+}
+
+@doc("A request to publish a validated outbound campaign draft.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("PublishTelephonyCampaignContent", "csharp")
+model PublishTelephonyCampaignRequest {
+  @minLength(1)
+  validation_id: string;
+}
+
+@doc("The kind of asynchronous outbound campaign operation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyCampaignOperationKind {
+  string,
+  recipient_import: "recipient_import",
+  validation: "validation",
+  publish: "publish",
+}
+
+@doc("The lifecycle status of an outbound telephony operation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyOperationStatus {
+  string,
+  not_started: "not_started",
+  running: "running",
+
+  @lroSucceeded
+  succeeded: "succeeded",
+
+  @lroFailed
+  failed: "failed",
+
+  @lroCanceled
+  cancelled: "cancelled",
+
+  unknown_status: "unknown",
+}
+
+@doc("An accepted outbound campaign operation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCampaignOperation {
+  id: TelephonyOperationId;
+  object: "telephony.campaign.operation";
+  kind: TelephonyCampaignOperationKind;
+  status: TelephonyOperationStatus;
+  campaign_id: TelephonyCampaignId;
+  recipient_import_id?: TelephonyCampaignRecipientImportId;
+  created_at?: FoundryTimestamp;
+}
+
+alias TelephonyCampaignOperationAcceptedResponse = TypeSpec.Http.Response<202> & {
+  @bodyRoot body: TelephonyCampaignOperation;
+  @header("Operation-Location") operation_location: string;
+  @header("Retry-After") retry_after: FoundryDurationSeconds;
+};
+
+@doc("A resource produced by a successful outbound telephony operation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyOperationResource {
+  id: string;
+  type: string;
+}
+
+@doc("An asynchronous outbound telephony operation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyOperation {
+  id: TelephonyOperationId;
+  object: "telephony.operation";
+
+  @lroStatus
+  status: TelephonyOperationStatus;
+
+  created_at?: FoundryTimestamp;
+
+  @lroErrorResult
+  error?: ApiError;
+
+  @lroResult
+  resource?: TelephonyOperationResource;
 }

@@ -104,6 +104,11 @@ using Microsoft.CloudHealth;
 );
 @@clientName(AzureResourceHealthSignal, "ResourceHealthSignal", "csharp");
 @@clientName(
+  SignalAggregationGroup.ignoreUnknown,
+  "shouldIgnoreUnknown",
+  "csharp"
+);
+@@clientName(
   DependenciesSignalGroupV2.ignoreUnknown,
   "shouldIgnoreUnknown",
   "csharp"

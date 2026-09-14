@@ -43,6 +43,7 @@ model Operation {
   /**
    * The display information for the operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   display?: {
     /**
      * Service provider: Microsoft Devices.
@@ -376,6 +377,7 @@ model IotDpsPropertiesDescription {
   /**
    * The Device Registry namespace that is linked to the provisioning service.
    */
+  @removed(Versions.v2026_08_31)
   deviceRegistryNamespace?: DeviceRegistryNamespaceDescription;
 
   /**
@@ -417,6 +419,12 @@ model IotDpsPropertiesDescription {
    * Portal endpoint to enable CORS for this provisioning service.
    */
   portalOperationsHostName?: string;
+
+  /**
+   * Disables all authentication methods other than Azure RBAC.
+   */
+  @added(Versions.v2026_08_31)
+  disableLocalAuth?: boolean = false;
 }
 
 /**

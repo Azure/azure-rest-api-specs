@@ -10,9 +10,9 @@
 
 Azure APIs should use extensible enums to allow new values to be added
 without breaking existing clients. **On ARM**, booleans should generally be
-avoided in favor of enums for better versioning; **on the data plane** that
-preference is narrower — see the scope note on "Prefer Enums Over Booleans"
-below, and `DP-NAME-03` for the data-plane rule.
+avoided in favor of enums for better versioning; the unattended data-plane
+reviewer does not review boolean-vs-union design. See the scope note on "Prefer
+Enums Over Booleans" below.
 
 **Authoritative references:**
 
@@ -119,21 +119,15 @@ union ServiceStatus {
 > booleans is materially more aggressive than on the data plane. **ARM reviewers
 > apply it as written.**
 >
-> **Data-plane reviewers must not apply it as a blanket rule.** The data-plane
-> position is
-> [`data-plane-naming-and-docs.md`](data-plane-naming-and-docs.md) `DP-NAME-03`,
-> which flags a boolean only when the property name suggests a **mode** rather
-> than a genuine yes/no, and which explicitly blesses `enabled` and `isDeleted`.
-> Where this section and `DP-NAME-03` disagree on a data-plane spec,
-> **`DP-NAME-03` wins.**
+> **Data-plane reviewers must not apply it.** Boolean-vs-union design questions
+> are outside the unattended data-plane reviewer's narrow scope. Genuine
+> booleans such as `enabled` and `isDeleted` must not be flagged merely for being
+> boolean.
 >
 > This is the same anti-inheritance trap as `guid-and-uuid-on-arm.md`: guidance
 > that is correct for ARM and wrong when inherited unscoped. It was found the
-> expensive way — this file used `enabled` as its worked example of a boolean to
-> replace, while `DP-NAME-03` named `enabled` as the archetype of a boolean to
-> leave alone. A data-plane reviewer reading both raised a false positive on
-> `enabled` in 2 of 3 trials on identical input: not a misreading, but a genuine
-> split between two of our own instructions.
+> expensive way: a data-plane reviewer inherited the ARM rule and raised a false
+> positive on `enabled`.
 
 Booleans do not version well -- what starts as a two-state switch often needs additional states, leading to breaking changes.
 

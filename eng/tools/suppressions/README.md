@@ -71,7 +71,7 @@ npx get-suppressions TypeSpecRequirement specification/foo/data-plane/Foo/stable
 
 ### Library
 
-The package also exposes `getSuppressions` for programmatic use:
+The package exposes `getSuppressions` and `getSuppressionsForTools` for programmatic use:
 
 ```ts
 import { getSuppressions, Suppression } from "@azure-tools/suppressions";
@@ -84,6 +84,37 @@ const suppressions: Suppression[] = await getSuppressions(
 
 `getSuppressions(tool, path)` resolves `path`, throws if it does not exist, walks up the directory
 tree collecting `suppressions.yaml` files, and returns the matching `Suppression[]`.
+
+Use `getSuppressionsForTools(tools, path)` when a check recognizes multiple tool names:
+
+```ts
+import { getSuppressionsForTools } from "@azure-tools/suppressions";
+
+const suppressions = await getSuppressionsForTools(
+  ["SwaggerLintDiff", "SwaggerAll"],
+  "specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json",
+);
+```
+
+The function checks unique tool names in the order provided and returns all matching entries.
+Callers remain responsible for interpreting rule-scoped suppressions.
+
+A directory glob can suppress every Swagger file below an API-version folder:
+
+```yaml
+- tool: SwaggerLintDiff
+  path: data-plane/Foo/stable/2023-01-01/**
+  reason: Temporarily skip LintDiff for this API version.
+```
+
+Swagger wrappers recognize these tool names:
+
+- `SwaggerLintDiff`
+- `SwaggerModelValidation`
+- `SwaggerSemanticValidation`
+- `SwaggerBreakingChange`
+- `SwaggerBreakingChangeCrossVersion`
+- `SwaggerAll` for all of the wrappers above
 
 ## Folder structure & contributing
 
@@ -101,9 +132,9 @@ eng/tools/suppressions
 ### `src`
 
 - [`src/suppressions.ts`](./src/suppressions.ts) — the core implementation: `getSuppressions`,
-  `getSuppressionsFromYaml`, the `Suppression` type, and the zod schema that validates
-  `suppressions.yaml`.
-- [`src/index.ts`](./src/index.ts) — the package entry point. Exports `getSuppressions` and
+  `getSuppressionsForTools`, `getSuppressionsFromYaml`, the `Suppression` type, and the zod schema
+  that validates `suppressions.yaml`.
+- [`src/index.ts`](./src/index.ts) — the package entry point. Exports the suppression APIs and
   `Suppression`, and provides `main` for the CLI.
 
 ### `cmd`
