@@ -311,6 +311,28 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "java");
 
+// Voice Agent Renames
+@@clientName(
+  Azure.AI.Projects.Agents.generateAgent,
+  "createAgentFromPrompt",
+  "java"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationAudioItemContent,
+  "downloadAgentConversationAudioItem",
+  "java"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationGeneratedAudioItemContent,
+  "downloadAgentConversationGeneratedAudioItem",
+  "java"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationAudioContent,
+  "downloadAgentConversationAudio",
+  "java"
+);
+
 @@clientName(UploadSessionFileParams.agent_session_id, "sessionId", "java");
 @@clientName(DownloadSessionFileParams.agent_session_id, "sessionId", "java");
 @@clientName(ListSessionFilesParams.agent_session_id, "sessionId", "java");
