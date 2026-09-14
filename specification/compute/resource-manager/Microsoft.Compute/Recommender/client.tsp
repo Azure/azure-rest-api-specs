@@ -45,7 +45,11 @@ using Microsoft.Compute;
   "ComputeRecommenderGenerateResult",
   "csharp"
 );
-@@clientName(SpotPlacementScoresBase, "ComputeRecommenderPlacementScores", "csharp");
+@@clientName(
+  SpotPlacementScoresBase,
+  "ComputeRecommenderPlacementScores",
+  "csharp"
+);
 @@clientName(SpotPlacementScores.post, "generate", "csharp");
 
 // Regular compute placement score SDK names use the explicit operation group name.
@@ -59,11 +63,7 @@ using Microsoft.Compute;
   "ComputePlacementScoresGenerateResult",
   "csharp"
 );
-@@clientName(
-  ComputePlacementScoresBase,
-  "ComputePlacementScores",
-  "csharp"
-);
+@@clientName(ComputePlacementScoresBase, "ComputePlacementScores", "csharp");
 @@clientName(ComputePlacementScores.post, "generate", "csharp");
 
 // SKU mix placement score SDK names.

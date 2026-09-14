@@ -95,13 +95,13 @@ model SpotPlacementScoresResponse {
  * ComputePlacementScores API Input.
  */
 @added(Versions.v2026_10_05_preview)
-model ComputePlacementScoresInput is SpotPlacementScoresInput {}
+model ComputePlacementScoresInput is SpotPlacementScoresInput;
 
 /**
  * ComputePlacementScores API response.
  */
 @added(Versions.v2026_10_05_preview)
-model ComputePlacementScoresResponse is SpotPlacementScoresResponse {}
+model ComputePlacementScoresResponse is SpotPlacementScoresResponse;
 
 /**
  * Placement score value indicating the likelihood of successfully allocating the requested VM(s).
