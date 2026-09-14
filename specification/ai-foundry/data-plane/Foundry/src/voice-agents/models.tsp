@@ -336,7 +336,7 @@ union VoiceAudioCodec {
   `/audio/content` route.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceItemAudioResponse {
+model VoiceAudioItemResponse {
   @doc("The id of the conversation the item belongs to.")
   conversation_id: string;
 

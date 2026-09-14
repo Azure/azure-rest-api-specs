@@ -66,35 +66,35 @@ namespace Azure.AI.Projects.Beta.VoiceAgents {
   );
   @@clientName(AgentEndpointConversations.getAgentConversationItem, "getItem");
   @@clientLocation(
-    AgentEndpointConversations.getAgentConversationItemAudio,
+    AgentEndpointConversations.getAgentConversationAudioItem,
     Conversations
   );
   @@clientName(
-    AgentEndpointConversations.getAgentConversationItemAudio,
+    AgentEndpointConversations.getAgentConversationAudioItem,
     "getAudioItem"
   );
   @@clientLocation(
-    AgentEndpointConversations.getAgentConversationItemAudioContent,
+    AgentEndpointConversations.getAgentConversationAudioItemContent,
     Conversations
   );
   @@clientName(
-    AgentEndpointConversations.getAgentConversationItemAudioContent,
+    AgentEndpointConversations.getAgentConversationAudioItemContent,
     "downloadAudioItem"
   );
   @@clientLocation(
-    AgentEndpointConversations.getAgentConversationItemGeneratedAudio,
+    AgentEndpointConversations.getAgentConversationGeneratedAudioItem,
     Conversations
   );
   @@clientName(
-    AgentEndpointConversations.getAgentConversationItemGeneratedAudio,
+    AgentEndpointConversations.getAgentConversationGeneratedAudioItem,
     "getGeneratedAudioItem"
   );
   @@clientLocation(
-    AgentEndpointConversations.getAgentConversationItemGeneratedAudioContent,
+    AgentEndpointConversations.getAgentConversationGeneratedAudioItemContent,
     Conversations
   );
   @@clientName(
-    AgentEndpointConversations.getAgentConversationItemGeneratedAudioContent,
+    AgentEndpointConversations.getAgentConversationGeneratedAudioItemContent,
     "downloadGeneratedAudioItem"
   );
   @@clientLocation(
