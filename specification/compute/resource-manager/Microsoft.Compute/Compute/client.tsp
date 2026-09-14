@@ -957,9 +957,10 @@ model VMSizePropertiesWithAdditionalProperties {
 // Distinguish the new VM instance-view union from the existing group reservation type.
 @@clientName(
   CapacityReservationType,
-  "VirtualMachineCapacityReservationType",
+  "ComputeCapacityReservationType",
   "csharp"
 );
+@@clientName(ListVersionsExpandOptions, "ListVersionsExpand", "csharp");
 @@clientName(ApiErrorBase, "ComputeApiErrorBase", "csharp");
 @@clientName(
   VMGalleryApplication,
@@ -2200,6 +2201,16 @@ union ComputeUsageUnit {
 );
 @@clientName(
   DiskUpdateProperties.optimizedForFrequentAttach,
+  "IsOptimizedForFrequentAttach",
+  "csharp"
+);
+@@clientName(
+  Compute.ManagedDiskProperties.performancePlus,
+  "IsPerformancePlusEnabled",
+  "csharp"
+);
+@@clientName(
+  Compute.ManagedDiskProperties.optimizedForFrequentAttach,
   "IsOptimizedForFrequentAttach",
   "csharp"
 );
