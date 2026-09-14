@@ -27,7 +27,7 @@ model VirtualMachineScaleSet extends Foundations.TrackedResource {
     Resource = VirtualMachineScaleSet,
     KeyName = "vmScaleSetName",
     SegmentName = "virtualMachineScaleSets",
-    NamePattern = ""
+    NamePattern = "^[a-zA-Z0-9.\\-]{1,64}(?<![.\\-])$"
   >;
 
   /**

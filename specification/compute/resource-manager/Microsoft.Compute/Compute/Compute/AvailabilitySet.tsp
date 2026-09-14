@@ -20,7 +20,7 @@ model AvailabilitySet
     Resource = AvailabilitySet,
     KeyName = "availabilitySetName",
     SegmentName = "availabilitySets",
-    NamePattern = ""
+    NamePattern = "^[a-zA-Z0-9](?:[a-zA-Z0-9_.\\-]{0,78}[a-zA-Z0-9_])?$"
   >;
 
   /**
