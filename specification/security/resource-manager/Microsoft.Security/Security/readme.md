@@ -123,19 +123,22 @@ suppressions:
     where: $.definitions.PricingList
     reason: The collection is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
   - code: XmsPageableForListCalls
-    from: Microsoft.Security\stable\2026-07-01\pricings.json
+    from: pricings.json
     where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings"].get
     reason: The operation intentionally preserves the 2024-01-01 single-page contract and returns at most 13 pricing plans.
   - code: PageableOperation
-    from: Microsoft.Security\stable\2026-07-01\pricings.json
+    from: pricings.json
     where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings"].get
     reason: The operation intentionally preserves the 2024-01-01 single-page contract and returns at most 13 pricing plans.
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    from: pricings.json
+    reason: The 2024-01-01 and 2026-07-01 Swagger files are generated from one TypeSpec project. Upgrading the shared project to common-types v6 would modify the shipped 2024-01-01 contract.
   - code: ParameterNotDefinedInGlobalParameters
     from: Microsoft.Security\stable\2026-07-01\pricings.json
     where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings/{pricingName}"].get.parameters[0]
     reason: api-version parameter is referenced from common types v1, which is the recommended pattern.
   - code: AllProxyResourcesShouldHaveDelete
-    from: Microsoft.Security\stable\2026-07-01\batchPricings.json
+    from: batchPricings.json
     where: $.definitions.PricingBatch
     reason: The batchPricings resource represents a batch update operation on pricing plans. There is no meaningful delete semantics — you cannot delete a batch configuration, only update it.
   - code: ResourceNameRestriction

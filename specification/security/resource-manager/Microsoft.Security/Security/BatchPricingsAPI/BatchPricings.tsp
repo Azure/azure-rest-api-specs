@@ -62,17 +62,17 @@ interface BatchPricings {
   /**
    * Gets the current pricing batch configuration for the specified scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserves the reviewed operation ID and generated SDK surface."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Uses a plural operation group to avoid conflicting with the PricingBatch model name."
   @tag("PricingBatch")
-  @operationId("PricingBatch_Get")
+  @operationId("BatchPricings_Get")
   get is BatchPricingsOps.Read<PricingBatch, ErrorType = CloudError>;
 
   /**
    * Updates multiple pricing plan configurations in a single operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserves the reviewed operation ID and generated SDK surface."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Uses a plural operation group to avoid conflicting with the PricingBatch model name."
   @tag("PricingBatch")
-  @operationId("PricingBatch_CreateOrUpdate")
+  @operationId("BatchPricings_CreateOrUpdate")
   createOrUpdate is BatchPricingsOps.CreateOrUpdateSync<
     PricingBatch,
     ErrorType = CloudError
