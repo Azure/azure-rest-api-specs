@@ -9,15 +9,15 @@ using Microsoft.Workloads;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   SAPDiscoverySite.properties,
-  "autorest"
+  "autorest, csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   SAPInstance.properties,
-  "autorest"
+  "autorest, csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ServerInstance.properties,
-  "autorest"
+  "autorest, csharp"
 );

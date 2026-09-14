@@ -323,6 +323,7 @@ union SourceScanAction {
 /**
  * Request to configure source scan for a protected item
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_07_01)
 model ProtectedItemConfigureSourceScanRequest {
   /**
@@ -3158,6 +3159,17 @@ model ILRRequest {
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
+}
+
+/**
+ * Parameters for the listInstantItemRecoveryOperationResult action.
+ */
+@added(Versions.v2026_08_01)
+model InstantItemRecoveryOperationResultRequest {
+  /**
+   * Operation ID returned by the prior provisionInstantItemRecovery action whose iSCSI mount scripts are to be retrieved.
+   */
+  provisionInstantItemRecoveryOperationId: string;
 }
 
 /**
@@ -8458,6 +8470,7 @@ model ClientScriptForConnect {
   /**
    * File content of the client script for file / folder restore.
    */
+  @secret
   scriptContent?: string;
 
   /**

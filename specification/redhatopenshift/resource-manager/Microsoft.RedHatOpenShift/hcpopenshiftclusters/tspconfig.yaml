@@ -1,0 +1,49 @@
+parameters:
+  service-dir:
+    default: "sdk/redhatopenshifthcp"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "resource-manager"
+    omit-unreachable-types: true
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/openapi.json"
+    examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.ResourceManager.RedHatOpenShiftHcp"
+  "@azure-tools/typespec-go":
+    emitter-output-dir: "{output-dir}/{service-dir}/armredhatopenshifthcp"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-fakes: true
+    generate-samples: true
+    head-as-boolean: true
+    inject-spans: true
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armredhatopenshifthcp"
+    service-dir: "sdk/resourcemanager/redhatopenshifthcp"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-redhatopenshifthcp"
+    flavor: azure
+    namespace: "com.azure.resourcemanager.redhatopenshifthcp"
+    service-name: "Red Hat OpenShift Hosted Control Planes"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-redhatopenshifthcp"
+    flavor: azure
+    generate-sample: true
+    generate-test: true
+    namespace: "azure.mgmt.redhatopenshifthcp"
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-redhatopenshifthcp"
+    flavor: azure
+    package-details:
+      name: "@azure/arm-redhatopenshifthcp"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  disable:
+    "@azure-tools/typespec-azure-resource-manager/arm-common-types-version": "New rule"

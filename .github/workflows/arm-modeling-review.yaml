@@ -37,11 +37,24 @@ jobs:
         with:
           fetch-depth: 2
 
+      # Public main is the single source of truth for leases, so a lease merged there is
+      # honored without syncing it into each private branch.
+      - name: Checkout ARM leases from public main
+        uses: actions/checkout@v7
+        with:
+          repository: Azure/azure-rest-api-specs
+          ref: main
+          path: arm-leases
+          sparse-checkout: |
+            .github/arm-leases/
+
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
 
       - name: ARM Modeling Review
         id: detect
+        env:
+          ARM_LEASES_DIR: ${{ github.workspace }}/arm-leases
         uses: actions/github-script@v8
         with:
           script: |

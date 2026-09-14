@@ -4875,6 +4875,7 @@ model MarkupRuleProperties {
 /**
  * Markup rule list result. It contains a list of Markup rules.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_06_01)
 model MarkupRulePagedResponse {
   /**
