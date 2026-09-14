@@ -55,6 +55,14 @@ suppressions:
       - $.definitions.RaiAcsModerationBindingExtension.properties.subject_format
       - $.definitions.RaiAcsModerationBindingExtension.properties.harm_configs
       - $.definitions.RaiAcsPolicyBinding.properties.aacs_moderation
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: Cost control match keys are trusted request attribute names defined by the service contract. Their dotted wire names must be preserved so the service can evaluate matches; generated SDKs expose idiomatic camelCase names through x-ms-client-name.
+    from: cognitiveservices.json
+    where:
+      - $.definitions.CostControlMatch.properties["foundry.caller.agent.id"]
+      - $.definitions.CostControlMatch.properties["foundry.caller.identity.oid"]
+      - $.definitions.CostControlMatch.properties["foundry.caller.session.id"]
+      - $.definitions.CostControlMatch.properties["foundry.project.id"]
   - code: AvoidAdditionalProperties
     reason: The canonical ACS manifest defines metadata as an extensible JSON object and policies as a map keyed by logical policy identifier. Replacing these maps with fixed properties or arrays would break ACS manifest portability and round-tripping.
     from: cognitiveservices.json
@@ -113,6 +121,10 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.parameters[3].schema.properties.sku
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].patch.parameters[6].schema.properties.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedComputeDeployments/{deploymentName}"].patch.parameters[5].schema.properties.sku
+  - code: PatchBodyParametersSchema
+    reason: The service requires the top-level properties envelope in a cost control PATCH request while every field inside the patch properties model remains optional.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/costControls/{costControlName}"].patch.parameters[6].schema
   - code: PatchBodyParametersSchema
     reason: Workbench uses PatchModel = Workbench (full resource as PATCH body). Required properties (targetClusterId, imageLink) are within the optional properties bag.
     where:
