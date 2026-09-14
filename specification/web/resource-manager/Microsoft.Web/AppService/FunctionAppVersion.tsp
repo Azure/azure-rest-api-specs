@@ -176,7 +176,7 @@ model FunctionAppVersionProperties {
 
   /** The release lifecycle state of the version. */
   @visibility(Lifecycle.Read)
-  versionState: FunctionAppVersionState;
+  versionState?: FunctionAppVersionState;
 
   /** The immutable customer-authored version configuration. */
   functionAppVersionConfig: FunctionAppVersionConfig;

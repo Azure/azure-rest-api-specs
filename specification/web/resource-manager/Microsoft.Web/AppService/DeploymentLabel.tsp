@@ -23,11 +23,11 @@ model DeploymentLabelProperties {
 
   /** Whether the deployment label is managed by the system. */
   @visibility(Lifecycle.Read)
-  systemManaged: true;
+  systemManaged?: true;
 
   /** The resource ID of the Function App version currently assigned to production. */
   @visibility(Lifecycle.Read)
-  activeVersionResourceId: string;
+  activeVersionResourceId?: string;
 
   /** The status of the resource provisioning operation. */
   @visibility(Lifecycle.Read)
