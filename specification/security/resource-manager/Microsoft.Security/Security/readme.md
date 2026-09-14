@@ -122,6 +122,14 @@ suppressions:
     from: Microsoft.Security\stable\2026-07-01\pricings.json
     where: $.definitions.PricingList
     reason: The collection is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
+  - code: XmsPageableForListCalls
+    from: Microsoft.Security\stable\2026-07-01\pricings.json
+    where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings"].get
+    reason: The operation intentionally preserves the 2024-01-01 single-page contract and returns at most 13 pricing plans.
+  - code: PageableOperation
+    from: Microsoft.Security\stable\2026-07-01\pricings.json
+    where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings"].get
+    reason: The operation intentionally preserves the 2024-01-01 single-page contract and returns at most 13 pricing plans.
   - code: ParameterNotDefinedInGlobalParameters
     from: Microsoft.Security\stable\2026-07-01\pricings.json
     where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings/{pricingName}"].get.parameters[0]
