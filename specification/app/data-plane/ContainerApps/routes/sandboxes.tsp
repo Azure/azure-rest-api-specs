@@ -3,14 +3,24 @@ using Rest;
 using Azure.Core;
 
 namespace ContainerAppsSandbox {
+  /** A page of sandboxes. */
+  model SandboxList {
+    /** Sandboxes returned by the request. */
+    @pageItems
+    value: Sandbox[];
+
+    /** Link to the next page of sandboxes, if one is available. */
+    @nextLink
+    nextLink?: string;
+  }
+
   /** Successful Sandbox list response. */
   model SandboxListResult {
     /** HTTP response status code. */
     @statusCode statusCode: 200;
 
-    /** Sandboxes returned by the request. */
-    @body
-    body: Sandbox[];
+    /** A page of sandboxes. */
+    @body body: SandboxList;
   }
 
   /** Successful Sandbox create response. */
@@ -62,23 +72,22 @@ namespace ContainerAppsSandbox {
 
 namespace ContainerAppsSandbox {
   /** Azure-scoped Sandbox CRUD operations. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core StandardResourceOperations.ResourceList cannot preserve the existing Page, PageSize, and labels query parameter names or the array response without changing the established wire contract."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core StandardResourceOperations.ResourceList cannot preserve the continuationToken query parameter alongside this custom scoped route and response contract."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This list operation uses a custom next-link response model, which the rule misclassifies as a single-object response."
   @doc("Lists sandboxes in a scope.")
   @tag("Sandboxes")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes")
   interface AzureSandboxes {
     @doc("Lists sandboxes in a scope.")
-    @listsResource(Sandbox)
+    @list
     @get
     list is Foundations.Operation<
       {
         ...AzureResourceScope;
 
-        /** One-based page number. */
-        @query page?: int32;
-
-        /** Maximum number of sandboxes returned per page. */
-        @query pageSize?: int32;
+        /** Continuation token for paginated results. */
+        @query
+        continuationToken?: string;
 
         /** Comma-separated label selector. */
         @query labels?: string;

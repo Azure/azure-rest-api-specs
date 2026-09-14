@@ -6,12 +6,12 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "example-resource-group",
     "sandboxGroupName": "example-sandbox-group",
-    "page": 1,
-    "pageSize": 20
+    "continuationToken": "example-continuation-token"
   },
   "responses": {
     "200": {
-      "body": [
+      "body": {
+        "value": [
         {
           "name": "azurelinux-3.0",
           "status": {
@@ -20,7 +20,9 @@
             "updatedAt": "2026-08-01T08:00:00Z"
           }
         }
-      ]
+      ],
+        "nextLink": "https://example.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resource-group/sandboxGroups/example-sandbox-group/diskimages/public?api-version=2026-09-01-preview&continuationToken=example-next-continuation-token"
+      }
     },
     "401": {
       "body": {

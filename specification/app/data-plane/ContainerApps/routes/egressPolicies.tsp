@@ -72,7 +72,8 @@ alias PutEgressPolicyErrors =
   | ErrorResult<401>
   | ErrorResult<500>;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, pagination models, query parameters, and route shapes."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
 @tag("egressPolicies")
 interface EgressPoliciesOperations {
   /** Deletes a named egress policy by ID. */
@@ -94,11 +95,14 @@ interface EgressPoliciesOperations {
   /** Lists all named egress policies in a sandbox group. */
   @summary("Lists all named egress policies in a sandbox group.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/egressPolicies")
-  @listsResource(NamedEgressPolicy)
+  @list
   @get
   listEgressPolicies is Foundations.Operation<
     {
       ...AzureResourceScope;
+
+      /** Continuation token for paginated results. */
+      @query continuationToken?: string;
     },
     ListEgressPolicyResult,
     DataPlaneStandardTraits,
