@@ -227,7 +227,6 @@ union ActiveDirectoryStatus {
  * Indicates the secure LDAP mode for encrypting communication between ANF storage and customer LDAP servers.
  */
 @added(Versions.v2026_06_15_preview)
-@added(Versions.v2026_07_01)
 union SecureLdapType {
   string,
 
@@ -343,7 +342,6 @@ union NetAppProvisioningStateOld {
 /**
  * Gets the status of the VolumeQuotaRule at the time the operation was called.
  */
-@added(Versions.v2026_07_01)
 union NetAppProvisioningState {
   Azure.ResourceManager.ResourceProvisioningState,
 

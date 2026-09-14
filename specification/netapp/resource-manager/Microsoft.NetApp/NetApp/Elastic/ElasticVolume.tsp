@@ -81,6 +81,7 @@ model ElasticVolumeProperties {
    * Azure lifecycle management.
    */
   @visibility(Lifecycle.Read)
+  @typeChangedFrom(Versions.v2026_07_01, NetAppProvisioningStateOld)
   provisioningState?: NetAppProvisioningState;
 
   /** Current availability status of the resource. */
