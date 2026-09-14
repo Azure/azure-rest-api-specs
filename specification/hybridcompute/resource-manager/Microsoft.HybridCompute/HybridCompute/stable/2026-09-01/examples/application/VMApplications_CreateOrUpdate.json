@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2026-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "machineName": "myMachine",
+    "applicationName": "myApplication",
+    "resource": {
+      "location": "eastus2euap",
+      "tags": {
+        "environment": "production"
+      },
+      "properties": {
+        "order": 1,
+        "packageReferenceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/galleryResourceGroup/providers/Microsoft.Compute/galleries/myGallery/applications/myApplication/versions/1.0.0",
+        "treatFailureAsDeploymentFailure": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/machines/myMachine/applications/myApplication",
+        "name": "myApplication",
+        "type": "Microsoft.HybridCompute/machines/applications",
+        "location": "eastus2euap",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "order": 1,
+          "packageReferenceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/galleryResourceGroup/providers/Microsoft.Compute/galleries/myGallery/applications/myApplication/versions/1.0.0",
+          "treatFailureAsDeploymentFailure": true,
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/machines/myMachine/applications/myApplication",
+        "name": "myApplication",
+        "type": "Microsoft.HybridCompute/machines/applications",
+        "location": "eastus2euap",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "order": 1,
+          "packageReferenceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/galleryResourceGroup/providers/Microsoft.Compute/galleries/myGallery/applications/myApplication/versions/1.0.0",
+          "treatFailureAsDeploymentFailure": true,
+          "provisioningState": "Creating"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "{callbackUri}",
+        "Location": "{callbackUrl}",
+        "Retry-After": 200
+      }
+    }
+  },
+  "operationId": "VmApplications_CreateOrUpdate",
+  "title": "Create a VM application"
+}

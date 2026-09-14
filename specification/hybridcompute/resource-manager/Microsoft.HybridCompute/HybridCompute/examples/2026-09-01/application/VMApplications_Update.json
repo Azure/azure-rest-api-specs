@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2026-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "machineName": "myMachine",
+    "applicationName": "myApplication",
+    "properties": {
+      "tags": {
+        "environment": "staging"
+      },
+      "properties": {
+        "order": 2,
+        "treatFailureAsDeploymentFailure": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/machines/myMachine/applications/myApplication",
+        "name": "myApplication",
+        "type": "Microsoft.HybridCompute/machines/applications",
+        "location": "eastus2euap",
+        "tags": {
+          "environment": "staging"
+        },
+        "properties": {
+          "order": 2,
+          "packageReferenceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/galleryResourceGroup/providers/Microsoft.Compute/galleries/myGallery/applications/myApplication/versions/1.0.0",
+          "treatFailureAsDeploymentFailure": false,
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "{callbackUri}",
+        "Location": "{callbackUrl}",
+        "Retry-After": 200
+      }
+    }
+  },
+  "operationId": "VmApplications_Update",
+  "title": "Update a VM application"
+}
