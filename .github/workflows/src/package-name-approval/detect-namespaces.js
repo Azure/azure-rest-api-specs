@@ -254,6 +254,10 @@ export default async function detectNamespaces({ context, core }) {
   const packageNamesFound = {};
   /** @type {Record<string, string>} */
   const namespacesFound = {};
+  /** @type {Record<string, string>} */
+  const allConfiguredPackageNames = {};
+  /** @type {Record<string, string>} */
+  const allConfiguredNamespaces = {};
   let isMgmt = false;
   let isDataPlane = false;
 
@@ -272,6 +276,12 @@ export default async function detectNamespaces({ context, core }) {
     const prResult = await runMetadataEmitter(tspConfigDir, entrypoint, core);
     if (prResult.isMgmt) isMgmt = true;
     if (prResult.isDataPlane) isDataPlane = true;
+
+    // Track ALL configured package names from PR head (before filtering).
+    // Used by post-results.js to distinguish "configured but unchanged" from
+    // "not configured at all" when showing Tier 1 language approval table.
+    Object.assign(allConfiguredPackageNames, prResult.packageNames);
+    Object.assign(allConfiguredNamespaces, prResult.namespaces);
 
     // Compile base branch version for comparison (uses same emitter mechanism)
     const baseResult = basePath ? await compileBaseVersion(basePath, baseRefDir, core) : null;
@@ -311,6 +321,8 @@ export default async function detectNamespaces({ context, core }) {
   const results = {
     namespacesFound: packageNamesFound,
     namespaces: namespacesFound,
+    allConfiguredPackageNames,
+    allConfiguredNamespaces,
     formatResults,
     isMgmt,
     isDataPlane,

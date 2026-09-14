@@ -17,7 +17,7 @@ import { extractInputs } from "../context.js";
 // github-actions[bot] applies labels from workflows running on the base branch.
 // azure-sdk applies labels from the Azure SDK automation pipeline.
 // These cannot be influenced by PR authors since they run trusted base-branch code.
-const ALLOWED_BOT_LOGINS = ["github-actions[bot]", "azure-sdk"];
+export const ALLOWED_BOT_LOGINS = ["github-actions[bot]", "azure-sdk"];
 
 // Labels that indicate PR plane context
 const MGMT_LABELS = ["Mgmt", "resource-manager"];
