@@ -1292,7 +1292,7 @@ paths:
     get:
       operationId: AgentOptimizationJobCandidates_listCandidates
       summary: List candidates for an agent optimization job
-      description: Lists candidates for the given optimization job with cursor pagination. Each item is an `AgentOptimizationCandidate` — mutation *keys* identify which agent attributes changed, but the customer-supplied mutation *values* are returned as `null` unless the client passes `expand=mutations`. Per-task result files are always fetched via GET /candidates/{candidateId}.
+      description: Lists candidates for the given optimization job with cursor pagination. Each item is an `AgentOptimizationCandidate` — `output.mutations` keys identify which agent attributes changed, but the customer-supplied mutation values are returned as `null` unless the client passes `expand=mutations`.
       parameters:
         - name: jobId
           in: path
@@ -1303,7 +1303,7 @@ paths:
         - name: expand
           in: query
           required: false
-          description: Comma-separated list of expand keys. Pass `mutations` to populate the values of `AgentOptimizationCandidate.mutations`; omit to receive only the mutation keys with null values. Additional expand keys may be added in future previews.
+          description: Comma-separated list of expand keys. Pass `mutations` to populate the values of `AgentOptimizationCandidate.output.mutations`; omit to receive only the mutation keys with null values. Additional expand keys may be added in future previews.
           schema:
             type: string
           explode: false
@@ -46124,57 +46124,103 @@ components:
           description: Function tools available for optimization. Omitted when no manual tool surface is supplied. The optimizer may change function and argument descriptions while preserving names and parameter JSON Schema.
       description: Caller-supplied baseline agent values that cannot be resolved from the target agent.
     AgentOptimizationCandidate:
-      anyOf:
-        - $ref: '#/components/schemas/EvaluatedAgentOptimizationCandidate'
-        - $ref: '#/components/schemas/UnevaluatedAgentOptimizationCandidate'
-      description: Candidates returned by candidate list and detail operations.
-    AgentOptimizationCandidateBase:
       type: object
       required:
         - candidate_id
         - job_id
         - name
-        - evaluation_status
+        - output
       properties:
         candidate_id:
           type: string
-          description: Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.
+          description: Server-assigned candidate identifier.
         job_id:
           type: string
           description: Identifier of the parent optimization job.
         name:
           type: string
           description: Display name of the candidate (e.g., 'baseline', 'instruction-v2').
-        evaluation_status:
-          $ref: '#/components/schemas/AgentOptimizationCandidateEvaluationStatus'
-          description: Whether this candidate was comparatively evaluated.
-        mutations:
-          type: object
-          unevaluatedProperties:
-            anyOf:
-              - {}
-              - type: 'null'
-          description: The mutation payload applied to the baseline to produce this candidate. The dictionary keys identify which agent attributes were mutated (for example `system_prompt`, `model`) and serve as the source of truth for which target attributes changed — no separate `optimizations` field is emitted. On LIST (and any GET without `expand=mutations`), keys are populated and values are `null`; the customer-supplied mutation values are only returned when the caller passes `expand=mutations` or on GET candidate detail. Omitted entirely for the baseline candidate, which has no mutations to describe.
+        output:
+          $ref: '#/components/schemas/AgentOptimizationCandidateOutput'
+          description: Generated agent configuration changes.
+        rationale:
+          type: string
+          description: Human-readable explanation of why the optimizer produced this candidate. Populated on candidate GET when available and omitted from LIST.
         agent_version:
           type: string
           description: Foundry agent version associated with this candidate. Omitted when no temporary or evaluated agent version was created.
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: Timestamp when the candidate was created, represented in Unix time. Omitted when unavailable for legacy candidate records.
+        evaluation:
+          $ref: '#/components/schemas/AgentOptimizationCandidateEvaluation'
+          description: Comparative evaluation summary. Omitted when this candidate was not comparatively evaluated.
         promotion:
           $ref: '#/components/schemas/PromotionInfo'
           description: Promotion metadata. Omitted if this candidate has not been promoted.
-        files:
+      description: An agent configuration candidate generated by an optimization job.
+    AgentOptimizationCandidateCost:
+      type: object
+      required:
+        - model_costs
+        - measurement_coverage
+        - currency
+      properties:
+        model_costs:
           type: array
           items:
-            $ref: '#/components/schemas/AgentOptimizationCandidateFileInfo'
-          description: Manifest of artifact files stored for this candidate. Omitted when the manifest is not loaded or unavailable.
-      discriminator:
-        propertyName: evaluation_status
-        mapping:
-          not_evaluated: '#/components/schemas/UnevaluatedAgentOptimizationCandidate'
-          evaluated: '#/components/schemas/EvaluatedAgentOptimizationCandidate'
-      description: Fields shared by evaluated and unevaluated optimization candidates.
+            $ref: '#/components/schemas/AgentOptimizationCandidateModelCost'
+          description: Usage and pricing grouped by the actual routed model.
+        estimated_cost:
+          type: number
+          format: double
+          minimum: 0
+          description: Estimated serving cost across priced validation tasks. Omitted when coverage is insufficient.
+        estimated_cost_per_task:
+          type: number
+          format: double
+          minimum: 0
+          description: Estimated serving cost per priced validation task. Omitted when coverage is insufficient.
+        measurement_coverage:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 1
+          description: Fraction of validation tasks with complete usage and a known model price.
+        currency:
+          type: string
+          description: ISO 4217 currency code. Defaults to USD.
+          default: USD
+      description: Validation serving-cost summary for one candidate.
+    AgentOptimizationCandidateEvaluation:
+      type: object
+      properties:
+        score:
+          type: number
+          format: double
+          description: Average composite score across evaluated tasks. Omitted until scoring produces an aggregate score.
+        avg_tokens:
+          type: number
+          format: double
+          description: Average total tokens consumed per task. Omitted when token usage was not measured.
+        avg_latency_ms:
+          type: number
+          format: double
+          minimum: 0
+          description: Average end-to-end latency per task in milliseconds. Omitted when latency was not measured.
+        candidate_cost:
+          $ref: '#/components/schemas/AgentOptimizationCandidateCost'
+          description: Per-routed-model serving-cost summary. Omitted when candidate cost was not measured.
+        eval_id:
+          type: string
+          description: Foundry evaluation identifier used to score this candidate. Omitted when unavailable.
+        eval_run_id:
+          type: string
+          description: Foundry evaluation run identifier used to score this candidate. Omitted when unavailable.
+        completed_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp when full candidate evaluation completed, represented in Unix time. Omitted when unavailable.
+      description: Comparative evaluation summary for a candidate.
     AgentOptimizationCandidateEvaluationStatus:
       anyOf:
         - type: string
@@ -46183,24 +46229,42 @@ components:
             - evaluated
             - not_evaluated
       description: Whether a candidate was evaluated against the job's evaluation configuration.
-    AgentOptimizationCandidateFileInfo:
+    AgentOptimizationCandidateModelCost:
       type: object
       required:
-        - path
-        - type
-        - size_in_bytes
+        - model
+        - token_usage
       properties:
-        path:
+        model:
           type: string
-          description: Relative path of the file within the candidate's output folder.
+          description: Actual model that served the measured validation tasks.
+        token_usage:
+          $ref: '#/components/schemas/AgentOptimizationCandidateTokenUsage'
+          description: Aggregate token usage attributed to this model.
+        estimated_cost:
+          type: number
+          format: double
+          minimum: 0
+          description: Estimated serving cost for this model. Omitted when the model could not be priced.
+      description: Measured usage and estimated serving cost for one routed model.
+    AgentOptimizationCandidateOutput:
+      type: object
+      required:
+        - type
+      properties:
         type:
           type: string
-          description: File type / role (e.g., 'config', 'results', 'diagnostics').
-        size_in_bytes:
-          type: integer
-          format: int64
-          description: File size in bytes.
-      description: A single candidate file artifact stored in the job's output blob.
+          enum:
+            - agent_configuration
+          description: Output type discriminator.
+        mutations:
+          type: object
+          unevaluatedProperties:
+            anyOf:
+              - {}
+              - type: 'null'
+          description: The mutation payload applied to the baseline to produce this candidate. Keys identify changed agent attributes, such as `instruction`, `model`, `skills`, or `tools`. On LIST without `expand=mutations`, keys are populated and values are null. Expanded LIST and candidate GET return complete values. Omitted for the baseline candidate.
+      description: Agent configuration changes generated for a candidate.
     AgentOptimizationCandidateSearchConfiguration:
       type: object
       properties:
@@ -46231,6 +46295,40 @@ components:
         Review consideration: if candidate search later gains multiple wall-clock, token, cost, or
         evaluation-call budgets, or multiple stopping rules, split those concerns into
         dedicated budget and stopping objects. The current flat shape avoids empty nesting.
+    AgentOptimizationCandidateTokenUsage:
+      type: object
+      required:
+        - cached_tokens
+        - reasoning_tokens
+      properties:
+        prompt_tokens:
+          type: integer
+          format: int64
+          minimum: 0
+          description: Input tokens that were not served from cache. Omitted when unmeasured.
+        cached_tokens:
+          type: integer
+          format: int64
+          minimum: 0
+          description: Input tokens served from cache. Defaults to zero when omitted.
+          default: 0
+        completion_tokens:
+          type: integer
+          format: int64
+          minimum: 0
+          description: Output tokens. Omitted when unmeasured.
+        reasoning_tokens:
+          type: integer
+          format: int64
+          minimum: 0
+          description: Reasoning tokens included in completion_tokens. Defaults to zero when omitted.
+          default: 0
+        total_tokens:
+          type: integer
+          format: int64
+          minimum: 0
+          description: Total input and output tokens. Omitted when unmeasured.
+      description: Aggregate billable token counts for one routed model in a candidate evaluation.
     AgentOptimizationConfiguration:
       type: object
       required:
@@ -51569,37 +51667,6 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Insights=V1Preview
-    EvaluatedAgentOptimizationCandidate:
-      type: object
-      required:
-        - evaluation_status
-      properties:
-        evaluation_status:
-          type: string
-          enum:
-            - evaluated
-          description: Candidate evaluation status.
-        score:
-          type: number
-          format: double
-          description: Average composite score across all evaluated tasks. Omitted until scoring produces an aggregate score.
-        avg_tokens:
-          type: number
-          format: double
-          description: Average total tokens consumed per task. Omitted when token usage was not measured.
-        avg_latency_ms:
-          type: number
-          format: double
-          description: 'Average end-to-end latency per task. Omitted when latency was not measured. Wire representation: milliseconds as a float.'
-        eval_id:
-          type: string
-          description: Foundry evaluation identifier used to score this candidate. Omitted when no evaluation identifier is available.
-        eval_run_id:
-          type: string
-          description: Foundry evaluation run identifier for this candidate's scoring run. Omitted when no evaluation run identifier is available.
-      allOf:
-        - $ref: '#/components/schemas/AgentOptimizationCandidateBase'
-      description: A candidate that was comparatively evaluated against the job's evaluation configuration.
     EvaluatedAgentOptimizationJobResult:
       type: object
       required:
@@ -88054,19 +88121,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    UnevaluatedAgentOptimizationCandidate:
-      type: object
-      required:
-        - evaluation_status
-      properties:
-        evaluation_status:
-          type: string
-          enum:
-            - not_evaluated
-          description: Candidate evaluation status.
-      allOf:
-        - $ref: '#/components/schemas/AgentOptimizationCandidateBase'
-      description: A candidate generated without comparative evaluation.
     UnevaluatedAgentOptimizationJobResult:
       type: object
       required:

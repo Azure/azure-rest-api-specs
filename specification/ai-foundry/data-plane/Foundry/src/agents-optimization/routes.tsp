@@ -21,10 +21,10 @@ interface AgentOptimizationJobs {
   /**
    * Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry.
    */
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
   @summary("Create an agent optimization job")
   @route("agent_optimization_jobs")
   @pollingOperation(AgentOptimizationJobs.get)
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
   @post
   create is FoundryDataPlaneOperation<
     {
@@ -108,7 +108,7 @@ interface AgentOptimizationJobs {
 @tag("AgentOptimizationJobs")
 interface AgentOptimizationJobCandidates {
   /**
-   * Lists candidates for the given optimization job with cursor pagination. Each item is an `AgentOptimizationCandidate` — mutation *keys* identify which agent attributes changed, but the customer-supplied mutation *values* are returned as `null` unless the client passes `expand=mutations`. Per-task result files are always fetched via GET /candidates/{candidateId}.
+   * Lists candidates for the given optimization job with cursor pagination. Each item is an `AgentOptimizationCandidate` — `output.mutations` keys identify which agent attributes changed, but the customer-supplied mutation values are returned as `null` unless the client passes `expand=mutations`.
    */
   @summary("List candidates for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates")
@@ -118,7 +118,7 @@ interface AgentOptimizationJobCandidates {
       /** The ID of the parent optimization job. */
       @path jobId: string;
 
-      /** Comma-separated list of expand keys. Pass `mutations` to populate the values of `AgentOptimizationCandidate.mutations`; omit to receive only the mutation keys with null values. Additional expand keys may be added in future previews. */
+      /** Comma-separated list of expand keys. Pass `mutations` to populate the values of `AgentOptimizationCandidate.output.mutations`; omit to receive only the mutation keys with null values. Additional expand keys may be added in future previews. */
       @query expand?: string;
 
       ...CommonPageQueryParameters;
@@ -158,7 +158,6 @@ interface AgentOptimizationJobCandidates {
 
       /** The candidate identifier. */
       @path candidateId: string;
-
     },
     PromoteAgentOptimizationCandidateResponse
   >;
