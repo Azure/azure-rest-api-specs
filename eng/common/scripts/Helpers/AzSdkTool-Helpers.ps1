@@ -139,7 +139,11 @@ function Install-Standalone-Tool (
     if (!$Version -or $Version -eq "*") {
         Write-Host "Attempting to find latest version for package '$Package'"
         $releasesUrl = "https://api.github.com/repos/$Repository/releases"
-        $releases = Invoke-RestMethod -Uri $releasesUrl
+        $requestHeaders = @{ "Accept" = "application/vnd.github+json" }
+        if ($env:GITHUB_TOKEN) {
+            $requestHeaders['Authorization'] = "Bearer $env:GITHUB_TOKEN"
+        }
+        $releases = Invoke-RestMethod -Uri $releasesUrl -Headers $requestHeaders
         $found = $false
         foreach ($release in $releases) {
             if ($release.tag_name -like "$Package*") {
