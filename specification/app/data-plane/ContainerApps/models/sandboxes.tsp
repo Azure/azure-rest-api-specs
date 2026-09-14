@@ -4,6 +4,7 @@ namespace ContainerAppsSandbox;
 
 /** Customer-facing sandbox resource returned by the service. */
 @resource("sandboxes")
+@parentResource(SandboxGroupScope)
 model Sandbox {
   /** Sandbox identifier assigned by the service. */
   @key("id")

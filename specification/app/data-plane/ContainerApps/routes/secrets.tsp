@@ -1,19 +1,20 @@
 using Http;
+using Rest;
 using Azure.Core;
 
 namespace ContainerAppsSandbox;
-
-/** No Content. */
-model DeleteSecretResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 204;
-}
 
 /** Errors returned by deleteSecret. */
 alias DeleteSecretErrors =
   | ErrorResult<401>
   | ErrorResult<404>
   | ErrorResult<500>;
+
+/** Standard resource operations for deleting secrets. */
+alias SecretDeleteOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  DeleteSecretErrors
+>;
 
 /** OK. */
 model GetSecretsResult {
@@ -57,6 +58,12 @@ alias PostSecretPeekErrors =
   | ErrorResult<404>
   | ErrorResult<500>;
 
+/** Standard resource operations for peeking secrets. */
+alias SecretPeekOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostSecretPeekErrors
+>;
+
 /** OK. */
 model PutSecretResult200 {
   /** HTTP response status code. */
@@ -87,19 +94,7 @@ alias PutSecretErrors = ErrorResult<400> | ErrorResult<401> | ErrorResult<500>;
 interface SecretsOperations {
   /** Deletes an entire secret. */
   @summary("Deletes an entire secret.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/secrets/{secretId}")
-  @delete
-  deleteSecret is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** secretId parameter. */
-      @path secretId: string;
-    },
-    DeleteSecretResult,
-    DataPlaneStandardTraits,
-    DeleteSecretErrors
-  >;
+  deleteSecret is SecretDeleteOperations.ResourceDelete<Secret>;
 
   /** Lists all secrets in the sandbox group. */
   @summary("Lists all secrets in the sandbox group.")
@@ -132,18 +127,12 @@ interface SecretsOperations {
 
   /** Peeks (retrieves) all secret values. */
   @summary("Peeks (retrieves) all secret values.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/secrets/{secretId}/peek")
-  @post
-  postSecretPeek is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** secretId parameter. */
-      @path secretId: string;
-    },
-    PostSecretPeekResult,
-    DataPlaneStandardTraits,
-    PostSecretPeekErrors
+  @action("peek")
+  @actionSeparator("/")
+  postSecretPeek is SecretPeekOperations.ResourceAction<
+    Secret,
+    {},
+    PostSecretPeekResult
   >;
 
   /** Upserts key-value pairs in a secret. */

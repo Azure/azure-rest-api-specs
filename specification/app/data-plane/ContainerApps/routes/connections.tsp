@@ -1,14 +1,9 @@
 using Http;
 using Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 
 namespace ContainerAppsSandbox;
-
-/** No Content. */
-model DeleteConnectionResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 204;
-}
 
 /** Errors returned by deleteConnection. */
 alias DeleteConnectionErrors =
@@ -16,6 +11,21 @@ alias DeleteConnectionErrors =
   | ErrorResult<404>
   | ErrorResult<409>
   | ErrorResult<500>;
+
+/** Query parameters for deleting a connection. */
+alias DeleteConnectionTraits = QueryParametersTrait<
+  {
+    /** Whether to force deletion of the connection. */
+    @query force?: boolean;
+  },
+  TraitContext.Delete
+>;
+
+/** Standard resource operations for deleting connections. */
+alias ConnectionDeleteOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  DeleteConnectionErrors
+>;
 
 /** OK. */
 model ListConnectionResult {
@@ -29,20 +39,26 @@ model ListConnectionResult {
 /** Errors returned by listConnections. */
 alias ListConnectionErrors = ErrorResult<401> | ErrorResult<500>;
 
-/** OK. */
-model GetConnectionResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: Connection;
-}
-
 /** Errors returned by getConnection. */
 alias GetConnectionErrors =
   | ErrorResult<401>
   | ErrorResult<404>
   | ErrorResult<500>;
+
+/** Query parameters for reading a connection. */
+alias GetConnectionTraits = QueryParametersTrait<
+  {
+    /** Whether to include sandbox identifiers using the connection. */
+    @query includeSandboxIds?: boolean;
+  },
+  TraitContext.Read
+>;
+
+/** Standard resource operations for reading connections. */
+alias ConnectionGetOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  GetConnectionErrors
+>;
 
 /** OK. */
 model PostConnectionResult200 {
@@ -87,6 +103,12 @@ alias PostConnectionAuthorizeErrors =
   | ErrorResult<404>
   | ErrorResult<500>;
 
+/** Standard resource operations for authorizing connections. */
+alias ConnectionAuthorizeOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostConnectionAuthorizeErrors
+>;
+
 /** OK. */
 model PostConnectionConsentLinkResult {
   /** HTTP response status code. */
@@ -102,6 +124,12 @@ alias PostConnectionConsentLinkErrors =
   | ErrorResult<404>
   | ErrorResult<500>;
 
+/** Standard resource operations for generating connection consent links. */
+alias ConnectionConsentLinkOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostConnectionConsentLinkErrors
+>;
+
 /** OK. */
 model PostConnectionRefreshResult {
   /** HTTP response status code. */
@@ -116,6 +144,12 @@ alias PostConnectionRefreshErrors =
   | ErrorResult<401>
   | ErrorResult<404>
   | ErrorResult<500>;
+
+/** Standard resource operations for refreshing connections. */
+alias ConnectionRefreshOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostConnectionRefreshErrors
+>;
 
 /** OK. */
 model PutConnectionPolicyRulesResult {
@@ -136,23 +170,10 @@ alias PutConnectionPolicyRulesErrors =
 @tag("connections")
 interface ConnectionsOperations {
   /** Deletes a connection by ID. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core StandardResourceOperations.ResourceDelete cannot preserve the existing force query parameter, 204 response, and custom error status shapes without changing the established wire contract."
   @summary("Deletes a connection by ID.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/connections/{id}")
-  @delete
-  deleteConnection is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-
-      /** force parameter. */
-      @query force?: boolean;
-    },
-    DeleteConnectionResult,
-    DataPlaneStandardTraits,
-    DeleteConnectionErrors
+  deleteConnection is ConnectionDeleteOperations.ResourceDelete<
+    Connection,
+    DeleteConnectionTraits
   >;
 
   /** Lists connections in a sandbox group. */
@@ -183,23 +204,10 @@ interface ConnectionsOperations {
   >;
 
   /** Gets a specific connection by ID. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core StandardResourceOperations.ResourceRead cannot preserve the existing includeSandboxIds query parameter and custom success/error response shapes without changing the established wire contract."
   @summary("Gets a specific connection by ID.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/connections/{id}")
-  @get
-  getConnection is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-
-      /** includeSandboxIds parameter. */
-      @query includeSandboxIds?: boolean;
-    },
-    GetConnectionResult,
-    DataPlaneStandardTraits,
-    GetConnectionErrors
+  getConnection is ConnectionGetOperations.ResourceRead<
+    Connection,
+    GetConnectionTraits
   >;
 
   /** Creates a new connection. */
@@ -220,63 +228,42 @@ interface ConnectionsOperations {
   >;
 
   /** Authorizes a connection with parameter values. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core standard operations cannot preserve this existing connection authorization action and its custom success/error response shapes without changing the established wire contract."
   @summary("Authorizes a connection with parameter values.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/connections/{id}/authorize")
-  @post
-  postConnectionAuthorize is Foundations.Operation<
+  @action("authorize")
+  @actionSeparator("/")
+  postConnectionAuthorize is ConnectionAuthorizeOperations.ResourceAction<
+    Connection,
     {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-
       /** Request body. */
       @body body: AuthorizeConnectionContent;
     },
-    PostConnectionAuthorizeResult,
-    DataPlaneStandardTraits,
-    PostConnectionAuthorizeErrors
+    PostConnectionAuthorizeResult
   >;
 
   /** Generates a consent link for a connection. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core standard operations cannot preserve this existing consent-link action and its custom success/error response shapes without changing the established wire contract."
   @summary("Generates a consent link for a connection.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/connections/{id}/consentLink")
-  @post
-  postConnectionConsentLink is Foundations.Operation<
+  @action("consentLink")
+  @actionSeparator("/")
+  postConnectionConsentLink is ConnectionConsentLinkOperations.ResourceAction<
+    Connection,
     {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-
       /** Request body. */
       @body body?: GenerateConsentLinkContent;
     },
-    PostConnectionConsentLinkResult,
-    DataPlaneStandardTraits,
-    PostConnectionConsentLinkErrors
+    PostConnectionConsentLinkResult
   >;
 
   /** Refreshes a connection's state from the upstream provider. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core standard operations cannot preserve this existing connection refresh action and its custom success/error response shapes without changing the established wire contract."
   @summary("Refreshes a connection's state from the upstream provider.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/connections/{id}/refresh")
-  @post
-  postConnectionRefresh is Foundations.Operation<
+  @action("refresh")
+  @actionSeparator("/")
+  postConnectionRefresh is ConnectionRefreshOperations.ResourceAction<
+    Connection,
     {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-
       /** includeSandboxIds parameter. */
       @query includeSandboxIds?: boolean;
     },
-    PostConnectionRefreshResult,
-    DataPlaneStandardTraits,
-    PostConnectionRefreshErrors
+    PostConnectionRefreshResult
   >;
 
   /** Updates the policy rules and tool settings on a connection. */

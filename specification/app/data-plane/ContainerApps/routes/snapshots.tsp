@@ -4,17 +4,14 @@ using Azure.Core;
 
 namespace ContainerAppsSandbox;
 
-/** No Content. */
-model DeleteSnapshotResult204 {
-  /** HTTP response status code. */
-  @statusCode statusCode: 204;
-}
-
-/** Successful response returned by deleteSnapshot. */
-alias DeleteSnapshotResult = DeleteSnapshotResult204;
-
 /** Errors returned by deleteSnapshot. */
 alias DeleteSnapshotErrors = ErrorResult<401> | ErrorResult<500>;
+
+/** Standard resource operations for deleting snapshots. */
+alias SnapshotDeleteOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  DeleteSnapshotErrors
+>;
 
 /** OK. */
 model ListSnapshotResult {
@@ -40,39 +37,24 @@ model GetSnapshotsCountResult {
 /** Errors returned by getSnapshotsCount. */
 alias GetSnapshotsCountErrors = ErrorResult<401> | ErrorResult<500>;
 
-/** OK. */
-model GetSnapshotResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: Snapshot;
-}
-
 /** Errors returned by getSnapshot. */
 alias GetSnapshotErrors =
   | ErrorResult<401>
   | ErrorResult<404>
   | ErrorResult<500>;
 
+/** Standard resource operations for reading snapshots. */
+alias SnapshotGetOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  GetSnapshotErrors
+>;
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
 @tag("snapshots")
 interface SnapshotsOperations {
   /** Deletes a snapshot by ID. */
   @summary("Deletes a snapshot by ID.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/snapshots/{id}")
-  @delete
-  deleteSnapshot is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-    },
-    DeleteSnapshotResult,
-    DataPlaneStandardTraits,
-    DeleteSnapshotErrors
-  >;
+  deleteSnapshot is SnapshotDeleteOperations.ResourceDelete<Snapshot>;
 
   /** Lists snapshots with pagination support. */
   @summary("Lists snapshots with pagination support.")
@@ -112,17 +94,5 @@ interface SnapshotsOperations {
 
   /** Gets a specific snapshot by ID. */
   @summary("Gets a specific snapshot by ID.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/snapshots/{id}")
-  @get
-  getSnapshot is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-    },
-    GetSnapshotResult,
-    DataPlaneStandardTraits,
-    GetSnapshotErrors
-  >;
+  getSnapshot is SnapshotGetOperations.ResourceRead<Snapshot>;
 }

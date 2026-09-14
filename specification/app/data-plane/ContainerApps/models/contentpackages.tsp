@@ -1,3 +1,5 @@
+using Rest;
+
 namespace ContainerAppsSandbox {
   /** Content-package list response body. */
   model ContentPackageListResponse {
@@ -6,8 +8,12 @@ namespace ContainerAppsSandbox {
   }
 
   /** ContentPackage wire model. */
+  @resource("contentpackages")
+  @parentResource(SandboxGroupScope)
   model ContentPackage {
     /** id value. */
+    @key("id")
+    @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
     id: ContentPackageId;
 
     /** size value. */

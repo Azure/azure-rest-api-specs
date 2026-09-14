@@ -1,4 +1,5 @@
 using Http;
+using Rest;
 using Azure.Core;
 
 namespace ContainerAppsSandbox;
@@ -47,6 +48,12 @@ alias PostSandboxDisableErrors =
   | ErrorResult<409>
   | ErrorResult<500>;
 
+/** Standard resource operations for disabling sandboxes. */
+alias SandboxDisableOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostSandboxDisableErrors
+>;
+
 /** OK. */
 model PostSandboxEnableResult {
   /** HTTP response status code. */
@@ -61,6 +68,12 @@ alias PostSandboxEnableErrors =
   | ErrorResult<401>
   | ErrorResult<404>
   | ErrorResult<500>;
+
+/** Standard resource operations for enabling sandboxes. */
+alias SandboxEnableOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostSandboxEnableErrors
+>;
 
 /** OK. */
 model PostSandboxExecuteCommandResult {
@@ -78,6 +91,12 @@ alias PostSandboxExecuteCommandErrors =
   | ErrorResult<404>
   | ErrorResult<500>;
 
+/** Standard resource operations for executing sandbox commands. */
+alias SandboxExecuteCommandOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostSandboxExecuteCommandErrors
+>;
+
 /** OK. */
 model PostSandboxExecuteShellCommandResult {
   /** HTTP response status code. */
@@ -94,6 +113,12 @@ alias PostSandboxExecuteShellCommandErrors =
   | ErrorResult<409>
   | ErrorResult<500>;
 
+/** Standard resource operations for executing sandbox shell commands. */
+alias SandboxExecuteShellCommandOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostSandboxExecuteShellCommandErrors
+>;
+
 /** OK. */
 model PostSandboxLifecycleResult {
   /** HTTP response status code. */
@@ -109,6 +134,12 @@ alias PostSandboxLifecycleErrors =
   | ErrorResult<401>
   | ErrorResult<404>
   | ErrorResult<500>;
+
+/** Standard resource operations for setting sandbox lifecycle policies. */
+alias SandboxLifecyclePolicyOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostSandboxLifecycleErrors
+>;
 
 /** OK. */
 model PostSandboxResumeResult {
@@ -135,6 +166,12 @@ alias PostSandboxResumeErrors =
   | ErrorResult<500>
   | PostSandboxResumeError503;
 
+/** Standard resource operations for resuming sandboxes. */
+alias SandboxResumeOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostSandboxResumeErrors
+>;
+
 /** OK. */
 model PostSandboxStopResult {
   /** HTTP response status code. */
@@ -151,6 +188,12 @@ alias PostSandboxStopErrors =
   | ErrorResult<404>
   | ErrorResult<409>
   | ErrorResult<500>;
+
+/** Standard resource operations for stopping sandboxes. */
+alias SandboxStopOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostSandboxStopErrors
+>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
 @tag("sandboxes")
@@ -186,128 +229,86 @@ interface SandboxLifecycleOperations {
 
   /** Disables a sandbox, stopping it first if it is running. */
   @summary("Disables a sandbox, stopping it first if it is running.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/disable")
-  @post
-  postSandboxDisable is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-    },
-    PostSandboxDisableResult,
-    DataPlaneStandardTraits,
-    PostSandboxDisableErrors
+  @action("disable")
+  @actionSeparator("/")
+  postSandboxDisable is SandboxDisableOperations.ResourceAction<
+    Sandbox,
+    {},
+    PostSandboxDisableResult
   >;
 
   /** Enables a disabled sandbox. */
   @summary("Enables a disabled sandbox.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/enable")
-  @post
-  postSandboxEnable is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-    },
-    PostSandboxEnableResult,
-    DataPlaneStandardTraits,
-    PostSandboxEnableErrors
+  @action("enable")
+  @actionSeparator("/")
+  postSandboxEnable is SandboxEnableOperations.ResourceAction<
+    Sandbox,
+    {},
+    PostSandboxEnableResult
   >;
 
   /** Executes a command in a sandbox. */
   @summary("Executes a command in a sandbox.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/executeCommand")
-  @post
-  postSandboxExecuteCommand is Foundations.Operation<
+  @action("executeCommand")
+  @actionSeparator("/")
+  postSandboxExecuteCommand is SandboxExecuteCommandOperations.ResourceAction<
+    Sandbox,
     {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-
       /** containerName parameter. */
       @query containerName?: string;
 
       /** Request body. */
       @body body: ExecuteSandboxCommandContent;
     },
-    PostSandboxExecuteCommandResult,
-    DataPlaneStandardTraits,
-    PostSandboxExecuteCommandErrors
+    PostSandboxExecuteCommandResult
   >;
 
   /** Executes a shell command in a sandbox. */
   @summary("Executes a shell command in a sandbox.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/executeShellCommand")
-  @post
-  postSandboxExecuteShellCommand is Foundations.Operation<
+  @action("executeShellCommand")
+  @actionSeparator("/")
+  postSandboxExecuteShellCommand is SandboxExecuteShellCommandOperations.ResourceAction<
+    Sandbox,
     {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-
       /** containerName parameter. */
       @query containerName?: string;
 
       /** Request body. */
       @body body: ExecuteSandboxShellCommandContent;
     },
-    PostSandboxExecuteShellCommandResult,
-    DataPlaneStandardTraits,
-    PostSandboxExecuteShellCommandErrors
+    PostSandboxExecuteShellCommandResult
   >;
 
   /** Sets the lifecycle policy for a sandbox. */
   @summary("Sets the lifecycle policy for a sandbox.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/lifecycle")
-  @post
-  postSandboxLifecycle is Foundations.Operation<
+  @action("lifecycle")
+  @actionSeparator("/")
+  postSandboxLifecycle is SandboxLifecyclePolicyOperations.ResourceAction<
+    Sandbox,
     {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-
       /** Request body. */
       @body body: SandboxLifecyclePolicy;
     },
-    PostSandboxLifecycleResult,
-    DataPlaneStandardTraits,
-    PostSandboxLifecycleErrors
+    PostSandboxLifecycleResult
   >;
 
   /** Resumes a stopped sandbox from a snapshot. */
   @summary("Resumes a stopped sandbox from a snapshot.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/resume")
-  @post
-  postSandboxResume is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-    },
-    PostSandboxResumeResult,
-    DataPlaneStandardTraits,
-    PostSandboxResumeErrors
+  @action("resume")
+  @actionSeparator("/")
+  postSandboxResume is SandboxResumeOperations.ResourceAction<
+    Sandbox,
+    {},
+    PostSandboxResumeResult
   >;
 
   /** Stops a running sandbox and saves its state as a snapshot. */
   @summary("Stops a running sandbox and saves its state as a snapshot.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/stop")
-  @post
-  postSandboxStop is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-    },
-    PostSandboxStopResult,
-    DataPlaneStandardTraits,
-    PostSandboxStopErrors
+  @action("stop")
+  @actionSeparator("/")
+  postSandboxStop is SandboxStopOperations.ResourceAction<
+    Sandbox,
+    {},
+    PostSandboxStopResult
   >;
 }

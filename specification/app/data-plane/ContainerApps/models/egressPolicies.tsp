@@ -1,3 +1,5 @@
+using Rest;
+
 namespace ContainerAppsSandbox {
   /** Named egress policy list response body. */
   model NamedEgressPolicyListResponse {
@@ -6,8 +8,11 @@ namespace ContainerAppsSandbox {
   }
 
   /** Customer-facing named egress policy resource. */
+  @resource("egressPolicies")
+  @parentResource(SandboxGroupScope)
   model NamedEgressPolicy {
     /** Policy identifier assigned by the service. */
+    @key("policyId")
     @visibility(Lifecycle.Read)
     id: string;
 

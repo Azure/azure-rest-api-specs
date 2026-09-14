@@ -4,17 +4,17 @@ using Azure.Core;
 
 namespace ContainerAppsSandbox;
 
-/** No Content. */
-model DeleteEgressPolicyResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 204;
-}
-
 /** Errors returned by deleteEgressPolicy. */
 alias DeleteEgressPolicyErrors =
   | ErrorResult<401>
   | ErrorResult<404>
   | ErrorResult<500>;
+
+/** Standard resource operations for deleting named egress policies. */
+alias EgressPolicyDeleteOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  DeleteEgressPolicyErrors
+>;
 
 /** OK. */
 model ListEgressPolicyResult {
@@ -28,20 +28,17 @@ model ListEgressPolicyResult {
 /** Errors returned by listEgressPolicies. */
 alias ListEgressPolicyErrors = ErrorResult<401> | ErrorResult<500>;
 
-/** OK. */
-model GetEgressPolicyResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: NamedEgressPolicy;
-}
-
 /** Errors returned by getEgressPolicy. */
 alias GetEgressPolicyErrors =
   | ErrorResult<401>
   | ErrorResult<404>
   | ErrorResult<500>;
+
+/** Standard resource operations for reading named egress policies. */
+alias EgressPolicyGetOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  GetEgressPolicyErrors
+>;
 
 /** OK. */
 model PutEgressPolicyResult200 {
@@ -77,19 +74,7 @@ alias PutEgressPolicyErrors =
 interface EgressPoliciesOperations {
   /** Deletes a named egress policy by ID. */
   @summary("Deletes a named egress policy by ID.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/egressPolicies/{policyId}")
-  @delete
-  deleteEgressPolicy is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** policyId parameter. */
-      @path policyId: string;
-    },
-    DeleteEgressPolicyResult,
-    DataPlaneStandardTraits,
-    DeleteEgressPolicyErrors
-  >;
+  deleteEgressPolicy is EgressPolicyDeleteOperations.ResourceDelete<NamedEgressPolicy>;
 
   /** Lists all named egress policies in a sandbox group. */
   @summary("Lists all named egress policies in a sandbox group.")
@@ -107,19 +92,7 @@ interface EgressPoliciesOperations {
 
   /** Gets a specific named egress policy by ID. */
   @summary("Gets a specific named egress policy by ID.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/egressPolicies/{policyId}")
-  @get
-  getEgressPolicy is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** policyId parameter. */
-      @path policyId: string;
-    },
-    GetEgressPolicyResult,
-    DataPlaneStandardTraits,
-    GetEgressPolicyErrors
-  >;
+  getEgressPolicy is EgressPolicyGetOperations.ResourceRead<NamedEgressPolicy>;
 
   /** Creates or updates a named egress policy. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."

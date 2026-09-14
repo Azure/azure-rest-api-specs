@@ -1,4 +1,5 @@
 using Http;
+using Rest;
 using Azure.Core;
 
 namespace ContainerAppsSandbox;
@@ -69,6 +70,12 @@ alias PostSandboxConnectionAddErrors =
   | ErrorResult<409>
   | ErrorResult<500>;
 
+/** Standard resource operations for adding sandbox connections. */
+alias SandboxConnectionAddOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostSandboxConnectionAddErrors
+>;
+
 /** OK. */
 model PostSandboxEgressPolicyResult {
   /** HTTP response status code. */
@@ -85,6 +92,12 @@ alias PostSandboxEgressPolicyErrors =
   | ErrorResult<404>
   | ErrorResult<409>
   | ErrorResult<500>;
+
+/** Standard resource operations for setting sandbox egress policies. */
+alias SandboxEgressPolicyOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostSandboxEgressPolicyErrors
+>;
 
 /** OK. */
 model PostSandboxPortAddResult {
@@ -103,6 +116,12 @@ alias PostSandboxPortAddErrors =
   | ErrorResult<409>
   | ErrorResult<500>;
 
+/** Standard resource operations for adding sandbox ports. */
+alias SandboxPortAddOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostSandboxPortAddErrors
+>;
+
 /** OK. */
 model PostSandboxPortRemoveResult {
   /** HTTP response status code. */
@@ -119,6 +138,12 @@ alias PostSandboxPortRemoveErrors =
   | ErrorResult<404>
   | ErrorResult<409>
   | ErrorResult<500>;
+
+/** Standard resource operations for removing sandbox ports. */
+alias SandboxPortRemoveOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostSandboxPortRemoveErrors
+>;
 
 /** OK. */
 model PutSandboxPortsResult {
@@ -194,78 +219,54 @@ interface SandboxNetworkingOperations {
 
   /** Adds a connection to a sandbox. */
   @summary("Adds a connection to a sandbox.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/connections/add")
-  @post
-  postSandboxConnectionAdd is Foundations.Operation<
+  @action("connections/add")
+  @actionSeparator("/")
+  postSandboxConnectionAdd is SandboxConnectionAddOperations.ResourceAction<
+    Sandbox,
     {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-
       /** Request body. */
       @body body: AddConnectionContent;
     },
-    PostSandboxConnectionAddResult,
-    DataPlaneStandardTraits,
-    PostSandboxConnectionAddErrors
+    PostSandboxConnectionAddResult
   >;
 
   /** Sets the egress policy for a sandbox. */
   @summary("Sets the egress policy for a sandbox.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/egresspolicy")
-  @post
-  postSandboxEgressPolicy is Foundations.Operation<
+  @action("egresspolicy")
+  @actionSeparator("/")
+  postSandboxEgressPolicy is SandboxEgressPolicyOperations.ResourceAction<
+    Sandbox,
     {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-
       /** Request body. */
       @body body: SandboxEgressPolicy;
     },
-    PostSandboxEgressPolicyResult,
-    DataPlaneStandardTraits,
-    PostSandboxEgressPolicyErrors
+    PostSandboxEgressPolicyResult
   >;
 
   /** Adds a port to a sandbox. */
   @summary("Adds a port to a sandbox.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/ports/add")
-  @post
-  postSandboxPortAdd is Foundations.Operation<
+  @action("ports/add")
+  @actionSeparator("/")
+  postSandboxPortAdd is SandboxPortAddOperations.ResourceAction<
+    Sandbox,
     {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-
       /** Request body. */
       @body body: CreateSandboxPortContent;
     },
-    PostSandboxPortAddResult,
-    DataPlaneStandardTraits,
-    PostSandboxPortAddErrors
+    PostSandboxPortAddResult
   >;
 
   /** Removes a port from a sandbox. */
   @summary("Removes a port from a sandbox.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/ports/remove")
-  @post
-  postSandboxPortRemove is Foundations.Operation<
+  @action("ports/remove")
+  @actionSeparator("/")
+  postSandboxPortRemove is SandboxPortRemoveOperations.ResourceAction<
+    Sandbox,
     {
-      ...AzureResourceScope;
-
-      /** id parameter. */
-      @path id: string;
-
       /** Request body. */
       @body body: RemovePortContent;
     },
-    PostSandboxPortRemoveResult,
-    DataPlaneStandardTraits,
-    PostSandboxPortRemoveErrors
+    PostSandboxPortRemoveResult
   >;
 
   /** Updates all ports for a sandbox. */

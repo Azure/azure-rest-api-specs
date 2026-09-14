@@ -1,3 +1,5 @@
+using Rest;
+
 namespace ContainerAppsSandbox {
   /** Managed identity type stored for a gateway-connection credential. */
   union GatewayConnectionAuthType {
@@ -80,8 +82,11 @@ namespace ContainerAppsSandbox {
   }
 
   /** Customer-facing sandbox-group credential resource returned by the service. */
+  @resource("credentials")
+  @parentResource(SandboxGroupScope)
   model SandboxGroupCredential {
     /** Credential name assigned by the service. */
+    @key("credentialName")
     @visibility(Lifecycle.Read)
     name: string;
 

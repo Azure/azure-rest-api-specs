@@ -1,3 +1,5 @@
+using Rest;
+
 namespace ContainerAppsSandbox {
   /** Represents a validated secret identifier. Must be 3-64 characters, containing only ASCII letters (upper/lower), digits, and hyphens. */
   scalar SecretId extends string;
@@ -28,8 +30,11 @@ namespace ContainerAppsSandbox {
   }
 
   /** Customer-facing secret resource returned by the service. */
+  @resource("secrets")
+  @parentResource(SandboxGroupScope)
   model Secret {
     /** Secret identifier assigned by the service. */
+    @key("secretId")
     @visibility(Lifecycle.Read)
     id: SecretId;
 
