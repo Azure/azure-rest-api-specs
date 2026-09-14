@@ -92,6 +92,7 @@ union AgentDefinitionOptInKeys {
   external_agents_v1_preview: "ExternalAgents=V1Preview",
   draft_agents_v1_preview: "DraftAgents=V1Preview",
   voice_agents_v1_preview: "VoiceAgents=V1Preview",
+  digital_worker_v1_preview: "DigitalWorker=V1Preview",
 
   @removed(Versions.v1)
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
@@ -105,17 +106,21 @@ union FoundryFeaturesOptInKeys {
   schedules_v1_preview: "Schedules=V1Preview",
   red_teams_v1_preview: "RedTeams=V1Preview",
   insights_v1_preview: "Insights=V1Preview",
+  agent_insights_v1_preview: "AgentInsights=V1Preview",
   memory_stores_v1_preview: "MemoryStores=V1Preview",
   routines_v2_preview: "Routines=V2Preview",
   skills_v1_preview: "Skills=V1Preview",
   data_generation_jobs_v1_preview: "DataGenerationJobs=V1Preview",
   models_v1_preview: "Models=V1Preview",
   agents_optimization_v2_preview: "AgentsOptimization=V2Preview",
+  model_router_controls_v1_preview: "ModelRouterControls=V1Preview",
 }
 
-alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends
-  | FoundryFeaturesOptInKeys
-  | AgentDefinitionOptInKeys> = {
+alias WithRequiredFoundryPreviewHeader<
+  RequiredPreviewOptInHeader extends
+    | FoundryFeaturesOptInKeys
+    | AgentDefinitionOptInKeys
+> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
@@ -123,9 +128,11 @@ alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends
   foundry_features: RequiredPreviewOptInHeader;
 };
 
-alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends
-  | FoundryFeaturesOptInKeys
-  | AgentDefinitionOptInKeys> = {
+alias WithConditionalFoundryPreviewHeader<
+  OptionalPreviewOptInHeader extends
+    | FoundryFeaturesOptInKeys
+    | AgentDefinitionOptInKeys
+> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
@@ -555,9 +562,9 @@ op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperatio
 /** Delete a job (preview). Returns 204 No Content. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
 @delete
-op deleteJobPreview<AreaPreviewLabel extends
-  | FoundryFeaturesOptInKeys
-  | AgentDefinitionOptInKeys> is FoundryDataPlanePreviewOperation<
+op deleteJobPreview<
+  AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys
+> is FoundryDataPlanePreviewOperation<
   AreaPreviewLabel,
   {
     /** The ID of the job to delete. */
@@ -572,3 +579,8 @@ op deleteJobPreview<AreaPreviewLabel extends
 
 @encode(DateTimeKnownEncoding.unixTimestamp, int32)
 scalar FoundryTimestamp extends utcDateTime;
+
+#suppress "@azure-tools/typespec-azure-core/known-encoding" "Foundry wire contracts encode duration values as integer milliseconds."
+@doc("A duration encoded as an integer number of milliseconds.")
+@encode(DurationKnownEncoding.milliseconds, int32)
+scalar FoundryDurationMilliseconds extends duration;

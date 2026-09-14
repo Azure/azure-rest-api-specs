@@ -1,0 +1,37 @@
+{
+  "title": "Get a Self-Signed X509 Certificate Device Authentication Profile",
+  "operationId": "RegistryDeviceAuthenticationProfiles_Get",
+  "description": "Get a self-signed X509 certificate device authentication profile.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace-1",
+    "registryDeviceName": "adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
+    "authenticationProfileName": "selfsigned-default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/registryDevices/adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab/authenticationProfiles/selfsigned-default",
+        "name": "selfsigned-default",
+        "type": "Microsoft.DeviceRegistry/namespaces/registryDevices/authenticationProfiles",
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2026-01-15T10:30:00Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-05-10T08:20:00Z"
+        },
+        "properties": {
+          "authenticationType": "SelfSignedX509Certificate",
+          "selfSignedThumbprints": {
+            "primaryThumbprint": "A1B2C3D4E5F60718293A4B5C6D7E8F9012345678",
+            "secondaryThumbprint": "8765432109FEDCBA0987654321ABCDEF01234567"
+          }
+        }
+      }
+    }
+  }
+}

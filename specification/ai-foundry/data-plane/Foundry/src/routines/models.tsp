@@ -109,6 +109,18 @@ union RoutineRunStatus {
   string,
 }
 
+@doc("The supported identities for routine dispatch authorization.")
+@extension("x-ms-foundry-meta", RoutineRequiredPreviews)
+union RoutineDispatchIdentity {
+  string,
+
+  @doc("Dispatches with the target agent identity and a foundation token.")
+  agent: "agent",
+
+  @doc("An explicit customer opt-in to dispatch as the principal that created the routine.")
+  creator: "creator",
+}
+
 alias RoutineTriggers = Record<RoutineTrigger>;
 
 @doc("Base model for a routine trigger.")
@@ -256,6 +268,13 @@ model Routine {
   updated_at?: FoundryTimestamp;
 }
 
+@doc("Optional authorization configuration for a routine dispatch.")
+@extension("x-ms-foundry-meta", RoutineRequiredPreviews)
+model RoutineAuthorization {
+  @doc("The identity used when dispatching the routine. Defaults to agent when omitted; set to creator only when the customer opts in to creator identity dispatch.")
+  identity?: RoutineDispatchIdentity = RoutineDispatchIdentity.agent;
+}
+
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The request body used to create or update a routine.")
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
@@ -272,6 +291,9 @@ model RoutineCreateOrUpdateRequest {
 
   @doc("The action executed when the routine fires.")
   action?: RoutineAction;
+
+  @doc("Optional authorization configuration for dispatching a newly created routine. Ignored when updating an existing routine.")
+  authorization?: RoutineAuthorization;
 }
 
 @doc("Base model for a manual dispatch payload.")
