@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sample-rg",
+    "name": "sample-func",
+    "versionName": "release-invalid",
+    "api-version": "2026-10-01-preview"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-invalid/operationResults/f4d2a6b1-9c3e-4a11-8b2d-7e5c1a9f3d02?api-version=2026-10-01-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-invalid",
+        "name": "release-invalid",
+        "type": "Microsoft.Web/sites/functionAppVersions",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "versionState": "Validating",
+          "functionAppVersionConfig": {
+            "runtime": {
+              "name": "node",
+              "version": "24"
+            },
+            "deployment": {
+              "appArtifact": {
+                "type": "zipPackage"
+              }
+            }
+          },
+          "validationAttempt": {
+            "status": "Running",
+            "startedAt": "2026-10-01T21:05:00Z"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "FunctionAppVersions_Validate",
+  "title": "Validate an inactive failed Function App version"
+}

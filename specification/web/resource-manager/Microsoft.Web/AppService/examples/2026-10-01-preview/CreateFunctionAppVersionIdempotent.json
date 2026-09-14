@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sample-rg",
+    "name": "sample-func",
+    "versionName": "release-2026-10-01",
+    "api-version": "2026-10-01-preview",
+    "resource": {
+      "properties": {
+        "functionAppVersionConfig": {
+          "runtime": {
+            "name": "python",
+            "version": "3.12"
+          },
+          "deployment": {
+            "appArtifact": {
+              "type": "zipPackage"
+            }
+          },
+          "appSettings": {
+            "FUNCTIONS_WORKER_RUNTIME": "python"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-2026-10-01",
+        "name": "release-2026-10-01",
+        "type": "Microsoft.Web/sites/functionAppVersions",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "versionState": "Ready",
+          "functionAppVersionConfig": {
+            "runtime": {
+              "name": "python",
+              "version": "3.12"
+            },
+            "deployment": {
+              "appArtifact": {
+                "type": "zipPackage"
+              }
+            }
+          },
+          "validationAttempt": {
+            "status": "Succeeded",
+            "startedAt": "2026-10-01T18:00:00Z",
+            "completedAt": "2026-10-01T18:01:00Z"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-2026-10-01",
+        "name": "release-2026-10-01",
+        "type": "Microsoft.Web/sites/functionAppVersions",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "versionState": "AwaitingPackage",
+          "functionAppVersionConfig": {
+            "runtime": {
+              "name": "python",
+              "version": "3.12"
+            },
+            "deployment": {
+              "appArtifact": {
+                "type": "zipPackage"
+              }
+            }
+          }
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "FunctionAppVersions_CreateOrUpdate",
+  "title": "Return an equivalent existing Function App version"
+}

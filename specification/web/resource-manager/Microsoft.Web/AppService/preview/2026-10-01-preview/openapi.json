@@ -90,6 +90,12 @@
       "name": "AiGateways"
     },
     {
+      "name": "FunctionAppVersions"
+    },
+    {
+      "name": "DeploymentLabels"
+    },
+    {
       "name": "WorkflowRuns"
     },
     {
@@ -11114,6 +11120,149 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deploymentLabels/production": {
+      "get": {
+        "operationId": "DeploymentLabels_Get",
+        "tags": [
+          "DeploymentLabels"
+        ],
+        "description": "Gets the production deployment label.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentLabel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the production deployment label": {
+            "$ref": "./examples/GetProductionDeploymentLabel.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeploymentLabels_CreateOrUpdate",
+        "tags": [
+          "DeploymentLabels"
+        ],
+        "description": "Assigns a retained Function App version to production.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentLabel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentLabel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create the production deployment label assignment": {
+            "$ref": "./examples/CreateProductionDeploymentLabel.json"
+          },
+          "Update the production deployment label assignment": {
+            "$ref": "./examples/UpdateProductionDeploymentLabel.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeploymentLabels_Delete",
+        "tags": [
+          "DeploymentLabels"
+        ],
+        "description": "Clears the production assignment and safely restores legacy serving authority.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete the production deployment label": {
+            "$ref": "./examples/DeleteProductionDeploymentLabel.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deploymentStatus": {
       "get": {
         "operationId": "WebApps_ListProductionSiteDeploymentStatuses",
@@ -12683,6 +12832,380 @@
             }
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functionAppVersions": {
+      "get": {
+        "operationId": "FunctionAppVersions_ListBySite",
+        "tags": [
+          "FunctionAppVersions"
+        ],
+        "description": "Lists Function App versions for a site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FunctionAppVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Function App versions": {
+            "$ref": "./examples/ListFunctionAppVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functionAppVersions/{versionName}": {
+      "get": {
+        "operationId": "FunctionAppVersions_Get",
+        "tags": [
+          "FunctionAppVersions"
+        ],
+        "description": "Gets a Function App version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the FunctionAppVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9](?:[a-z0-9._-]{0,62}[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FunctionAppVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a failed Function App version with safe validation details": {
+            "$ref": "./examples/GetFunctionAppVersionFailed.json"
+          },
+          "Get a ready Function App version": {
+            "$ref": "./examples/GetFunctionAppVersionReady.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FunctionAppVersions_CreateOrUpdate",
+        "tags": [
+          "FunctionAppVersions"
+        ],
+        "description": "Creates an immutable Function App version or returns an equivalent version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the FunctionAppVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9](?:[a-z0-9._-]{0,62}[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FunctionAppVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FunctionAppVersion' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FunctionAppVersion"
+            }
+          },
+          "201": {
+            "description": "Resource 'FunctionAppVersion' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FunctionAppVersion"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a Function App version from a ZIP package URI": {
+            "$ref": "./examples/CreateFunctionAppVersionZipPackageUri.json"
+          },
+          "Create a ZIP placeholder Function App version": {
+            "$ref": "./examples/CreateFunctionAppVersionZipPlaceholder.json"
+          },
+          "Create a container Function App version": {
+            "$ref": "./examples/CreateFunctionAppVersionContainer.json"
+          },
+          "Return an equivalent existing Function App version": {
+            "$ref": "./examples/CreateFunctionAppVersionIdempotent.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/FunctionAppVersion"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "FunctionAppVersions_Delete",
+        "tags": [
+          "FunctionAppVersions"
+        ],
+        "description": "Deletes an eligible inactive Function App version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the FunctionAppVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9](?:[a-z0-9._-]{0,62}[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an inactive Function App version": {
+            "$ref": "./examples/DeleteFunctionAppVersion.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functionAppVersions/{versionName}/config/appsettings/list": {
+      "post": {
+        "operationId": "FunctionAppVersions_ListAppSettings",
+        "tags": [
+          "FunctionAppVersions"
+        ],
+        "description": "Lists the application settings of a Function App version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the FunctionAppVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9](?:[a-z0-9._-]{0,62}[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FunctionAppVersionAppSettings"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Function App version application settings": {
+            "$ref": "./examples/ListFunctionAppVersionAppSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functionAppVersions/{versionName}/validate": {
+      "post": {
+        "operationId": "FunctionAppVersions_Validate",
+        "tags": [
+          "FunctionAppVersions"
+        ],
+        "description": "Retries validation of an inactive failed Function App version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the FunctionAppVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9](?:[a-z0-9._-]{0,62}[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The accepted response for a Function App version validation operation.",
+            "schema": {
+              "$ref": "#/definitions/FunctionAppVersion"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate an inactive failed Function App version": {
+            "$ref": "./examples/ValidateFunctionAppVersion.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/FunctionAppVersion"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions": {
@@ -41324,6 +41847,36 @@
         }
       }
     },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
     "AzureActiveDirectory": {
       "type": "object",
       "description": "The configuration settings of the Azure Active directory provider.",
@@ -42705,6 +43258,25 @@
           "format": "int64"
         }
       }
+    },
+    "ContainerImageAppArtifact": {
+      "type": "object",
+      "description": "A container image artifact.",
+      "properties": {
+        "reference": {
+          "type": "string",
+          "description": "The container image reference."
+        }
+      },
+      "required": [
+        "reference"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FunctionAppVersionArtifact"
+        }
+      ],
+      "x-ms-discriminator-value": "containerImage"
     },
     "ContainerInfo": {
       "type": "object",
@@ -44346,6 +44918,58 @@
         "value"
       ]
     },
+    "DeploymentLabel": {
+      "type": "object",
+      "description": "The system-managed production deployment label.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentLabelProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeploymentLabelProperties": {
+      "type": "object",
+      "description": "The properties of a production deployment label.",
+      "properties": {
+        "targetVersionResourceId": {
+          "type": "string",
+          "description": "The resource ID of the Function App version to assign to production.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "systemManaged": {
+          "type": "boolean",
+          "description": "Whether the deployment label is managed by the system.",
+          "enum": [
+            true
+          ],
+          "readOnly": true
+        },
+        "activeVersionResourceId": {
+          "type": "string",
+          "description": "The resource ID of the Function App version currently assigned to production.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the resource provisioning operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "targetVersionResourceId",
+        "systemManaged",
+        "activeVersionResourceId"
+      ]
+    },
     "DeploymentLocations": {
       "type": "object",
       "description": "List of available locations (regions or App Service Environments) for\ndeployment of App Service resources.",
@@ -45818,6 +46442,342 @@
           "description": "Function App stack preferred OS.",
           "readOnly": true
         }
+      }
+    },
+    "FunctionAppVersion": {
+      "type": "object",
+      "description": "An immutable Function App version resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FunctionAppVersionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FunctionAppVersionAppSettings": {
+      "type": "object",
+      "description": "Version-scoped application settings.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "format": "password",
+          "description": "The version-scoped application settings.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "FunctionAppVersionArtifact": {
+      "type": "object",
+      "description": "The artifact used by a Function App version.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FunctionAppVersionArtifactType",
+          "description": "The artifact type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "FunctionAppVersionArtifactType": {
+      "type": "string",
+      "description": "The Function App version artifact type.",
+      "enum": [
+        "zipPackage",
+        "containerImage"
+      ],
+      "x-ms-enum": {
+        "name": "FunctionAppVersionArtifactType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ZipPackage",
+            "value": "zipPackage",
+            "description": "A ZIP package artifact."
+          },
+          {
+            "name": "ContainerImage",
+            "value": "containerImage",
+            "description": "A container image artifact."
+          }
+        ]
+      }
+    },
+    "FunctionAppVersionConfig": {
+      "type": "object",
+      "description": "The immutable customer-authored configuration of a Function App version.",
+      "properties": {
+        "runtime": {
+          "$ref": "#/definitions/FunctionAppVersionRuntime",
+          "description": "The runtime configuration."
+        },
+        "deployment": {
+          "$ref": "#/definitions/FunctionAppVersionDeployment",
+          "description": "The deployment configuration."
+        },
+        "appSettings": {
+          "type": "object",
+          "format": "password",
+          "description": "The complete version-scoped application settings. Values are omitted from\nnormal read and list operations.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "runtime",
+        "deployment",
+        "appSettings"
+      ]
+    },
+    "FunctionAppVersionDeployment": {
+      "type": "object",
+      "description": "The deployment configuration of a Function App version.",
+      "properties": {
+        "appArtifact": {
+          "$ref": "#/definitions/FunctionAppVersionArtifact",
+          "description": "The application artifact."
+        },
+        "packageUri": {
+          "type": "string",
+          "format": "password",
+          "description": "The URI from which to materialize a ZIP package. This value is treated as a\nsecret and is never returned by read or list operations.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "remoteBuild": {
+          "type": "boolean",
+          "description": "Whether to perform a remote build while materializing the ZIP package.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "appArtifact"
+      ]
+    },
+    "FunctionAppVersionListResult": {
+      "type": "object",
+      "description": "The response of a FunctionAppVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FunctionAppVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/FunctionAppVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FunctionAppVersionProperties": {
+      "type": "object",
+      "description": "The properties of a Function App version.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the resource provisioning operation.",
+          "readOnly": true
+        },
+        "versionState": {
+          "$ref": "#/definitions/FunctionAppVersionState",
+          "description": "The release lifecycle state of the version.",
+          "readOnly": true
+        },
+        "functionAppVersionConfig": {
+          "$ref": "#/definitions/FunctionAppVersionConfig",
+          "description": "The immutable customer-authored version configuration."
+        },
+        "validationDetail": {
+          "$ref": "#/definitions/FunctionAppVersionValidationDetail",
+          "description": "Safe details for the latest failed validation attempt.",
+          "readOnly": true
+        },
+        "validationAttempt": {
+          "$ref": "#/definitions/FunctionAppVersionValidationAttempt",
+          "description": "Metadata for the latest validation attempt.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "versionState",
+        "functionAppVersionConfig"
+      ]
+    },
+    "FunctionAppVersionRuntime": {
+      "type": "object",
+      "description": "The runtime configuration of a Function App version.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The runtime name."
+        },
+        "version": {
+          "type": "string",
+          "description": "The runtime version."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "FunctionAppVersionState": {
+      "type": "string",
+      "description": "The release lifecycle state of a Function App version.",
+      "enum": [
+        "AwaitingPackage",
+        "Uploading",
+        "Building",
+        "ResolvingArtifact",
+        "Validating",
+        "Ready",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "FunctionAppVersionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AwaitingPackage",
+            "value": "AwaitingPackage",
+            "description": "The ZIP version has been created and is awaiting a package."
+          },
+          {
+            "name": "Uploading",
+            "value": "Uploading",
+            "description": "A package is being uploaded for the ZIP version."
+          },
+          {
+            "name": "Building",
+            "value": "Building",
+            "description": "A package is being built for the ZIP version."
+          },
+          {
+            "name": "ResolvingArtifact",
+            "value": "ResolvingArtifact",
+            "description": "The container image reference is being resolved."
+          },
+          {
+            "name": "Validating",
+            "value": "Validating",
+            "description": "The version is being validated."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "The version is ready to receive traffic."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Materialization or validation failed."
+          }
+        ]
+      }
+    },
+    "FunctionAppVersionValidationAttempt": {
+      "type": "object",
+      "description": "Metadata for the latest Function App version validation attempt.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/FunctionAppVersionValidationStatus",
+          "description": "The validation attempt status."
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which validation started."
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which terminal validation completed."
+        }
+      },
+      "required": [
+        "status",
+        "startedAt"
+      ]
+    },
+    "FunctionAppVersionValidationDetail": {
+      "type": "object",
+      "description": "Safe details about a Function App version validation failure.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A stable validation failure code."
+        },
+        "message": {
+          "type": "string",
+          "description": "A safe validation failure message that does not contain secrets."
+        },
+        "target": {
+          "type": "string",
+          "description": "The function or configuration field associated with the failure."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "FunctionAppVersionValidationStatus": {
+      "type": "string",
+      "description": "The status of a Function App version validation attempt.",
+      "enum": [
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "FunctionAppVersionValidationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Validation is running."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Validation succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Validation failed."
+          }
+        ]
       }
     },
     "FunctionEnvelope": {
@@ -59179,6 +60139,16 @@
           }
         }
       }
+    },
+    "ZipPackageAppArtifact": {
+      "type": "object",
+      "description": "A ZIP package artifact.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FunctionAppVersionArtifact"
+        }
+      ],
+      "x-ms-discriminator-value": "zipPackage"
     },
     "stringApplicationJson": {
       "type": "string"

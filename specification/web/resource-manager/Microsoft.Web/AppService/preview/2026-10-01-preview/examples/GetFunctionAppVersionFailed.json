@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sample-rg",
+    "name": "sample-func",
+    "versionName": "release-invalid",
+    "api-version": "2026-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-invalid",
+        "name": "release-invalid",
+        "type": "Microsoft.Web/sites/functionAppVersions",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "versionState": "Failed",
+          "functionAppVersionConfig": {
+            "runtime": {
+              "name": "python",
+              "version": "3.12"
+            },
+            "deployment": {
+              "appArtifact": {
+                "type": "zipPackage"
+              }
+            }
+          },
+          "validationDetail": {
+            "code": "TriggerConfigurationInvalid",
+            "message": "A trigger configuration is invalid.",
+            "target": "SampleFunction"
+          },
+          "validationAttempt": {
+            "status": "Failed",
+            "startedAt": "2026-10-01T19:00:00Z",
+            "completedAt": "2026-10-01T19:00:30Z"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "FunctionAppVersions_Get",
+  "title": "Get a failed Function App version with safe validation details"
+}
