@@ -2119,9 +2119,8 @@ union SmbNonBrowsable {
 }
 
 /**
- /**
-  * SMB opportunistic-lock setting shared by volume and cache resources. Omit the property when unspecified.
-  */
+ * SMB opportunistic-lock setting shared by volume and cache resources. Omit the property when unspecified.
+ */
 @added(Versions.v2026_07_15_preview)
 union SmbOplocks {
   string,

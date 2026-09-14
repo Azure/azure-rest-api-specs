@@ -60,6 +60,7 @@ model ElasticBackupPolicy is TrackedResource<ElasticBackupPolicyProperties> {
 model ElasticBackupPolicyProperties {
   /** Azure lifecycle management. */
   @visibility(Lifecycle.Read)
+  @typeChangedFrom(Versions.v2026_07_01, NetAppProvisioningStateOld)
   provisioningState?: NetAppProvisioningState;
 
   /** Daily backups count to keep */
