@@ -13,13 +13,24 @@ model DeleteCredentialResult {
 /** Errors returned by deleteCredential. */
 alias DeleteCredentialErrors = ErrorResult<404>;
 
+/** A page of credentials. */
+model CredentialList {
+  /** Credentials returned by the request. */
+  @pageItems
+  value: SandboxGroupCredential[];
+
+  /** Link to the next page of credentials, if one is available. */
+  @nextLink
+  nextLink?: string;
+}
+
 /** OK. */
 model ListCredentialResult {
   /** HTTP response status code. */
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: SandboxGroupCredential[];
+  @body body: CredentialList;
 }
 
 /** OK. */
@@ -46,7 +57,8 @@ model PutCredentialResult {
 /** Errors returned by putCredential. */
 alias PutCredentialErrors = ErrorResult<400>;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, pagination models, query parameters, and route shapes."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
 @tag("credentials")
 interface CredentialsOperations {
   /** Deletes a credential in a sandbox group. */
@@ -68,11 +80,14 @@ interface CredentialsOperations {
   /** Lists all credentials in a sandbox group. */
   @summary("Lists all credentials in a sandbox group.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/credentials")
-  @listsResource(SandboxGroupCredential)
+  @list
   @get
   listCredentials is Foundations.Operation<
     {
       ...AzureResourceScope;
+
+      /** Continuation token for paginated results. */
+      @query continuationToken?: string;
     },
     ListCredentialResult,
     DataPlaneStandardTraits,
