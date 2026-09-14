@@ -543,6 +543,9 @@
           }
         },
         "x-ms-examples": {
+          "Create virtual network appliance NAT64 capability": {
+            "$ref": "./examples/VirtualNetworkApplianceCapabilities_CreateOrUpdate_NAT64.json"
+          },
           "Create virtual network appliance PLGateway capability": {
             "$ref": "./examples/VirtualNetworkApplianceCapabilities_CreateOrUpdate_PLGateway.json"
           },
@@ -630,6 +633,26 @@
     }
   },
   "definitions": {
+    "Nat64Capability": {
+      "type": "object",
+      "description": "The NAT64 capability. Enables stateful NAT64 translation (IPv6-only workloads reaching IPv4\ndestinations) on the appliance's floating NIC; supported on a dual-stack appliance. This kind is\nproperty-less: it carries no `ipVersion` (the parent appliance's dual-stack configuration is the\nprecondition, service-validated) beyond the properties common to every capability.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualNetworkApplianceCapability"
+        }
+      ],
+      "x-ms-discriminator-value": "NAT64"
+    },
+    "Nat64CapabilityCreateOrUpdate": {
+      "type": "object",
+      "description": "The NAT64 capability. Enables stateful NAT64 translation (IPv6-only workloads reaching IPv4\ndestinations) on the appliance's floating NIC; supported on a dual-stack appliance. This kind is\nproperty-less: it carries no `ipVersion` (the parent appliance's dual-stack configuration is the\nprecondition, service-validated) beyond the properties common to every capability.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualNetworkApplianceCapabilityCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "NAT64"
+    },
     "PLGatewayCapability": {
       "type": "object",
       "description": "The Private Link Gateway (slow-path) capability. Private Link programming offloaded to the appliance's gateway;\nIPv6 on a dual-stack appliance.",
@@ -825,7 +848,7 @@
         },
         "ipVersion": {
           "$ref": "./common.json#/definitions/VirtualNetworkApplianceCapabilityIpVersion",
-          "description": "The IP version the capability applies to. Private Link Gateway FastPath (`PLGatewayFastpath`)\nonly accepts `DualStack`; Private Link Gateway (`PLGateway`) and Private Link IP-forwarders\n(`PLIPForwarders`) only accept `IPv6`. The service validates the value against the resource's\n`kind` when the capability is created or updated."
+          "description": "The IP version the capability applies to. Private Link Gateway FastPath (`PLGatewayFastpath`)\nonly accepts `DualStack`; Private Link Gateway (`PLGateway`) and Private Link IP-forwarders\n(`PLIPForwarders`) only accept `IPv6`. Not applicable to `NAT64`, which is property-less and must\nomit this value. The service validates the value against the resource's `kind` when the\ncapability is created or updated."
         }
       }
     },

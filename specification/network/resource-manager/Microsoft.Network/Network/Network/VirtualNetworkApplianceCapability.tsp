@@ -90,6 +90,22 @@ model PLIPForwardersCapability extends VirtualNetworkApplianceCapability {
 }
 
 /**
+ * The NAT64 capability. Enables stateful NAT64 translation (IPv6-only workloads reaching IPv4
+ * destinations) on the appliance's floating NIC; supported on a dual-stack appliance. This kind is
+ * property-less: it carries no `ipVersion` (the parent appliance's dual-stack configuration is the
+ * precondition, service-validated) beyond the properties common to every capability.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This repo's tspconfig.yaml routes emitted schemas to per-feature output files (output-splitting: legacy-feature-files) keyed on Azure.ResourceManager.Legacy.feature; without this decorator on the subtype itself, its schema would be emitted into the shared common.json file instead of virtualNetworkAppliance.json."
+@added(Versions.v2026_03_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
+model Nat64Capability extends VirtualNetworkApplianceCapability {
+  /**
+   * The NAT64 capability kind.
+   */
+  kind: "NAT64";
+}
+
+/**
  * The kinds of virtual network appliance capability. The value is the top-level `kind` discriminator.
  */
 @added(Versions.v2026_03_01)
@@ -110,6 +126,11 @@ union VirtualNetworkApplianceCapabilityKind {
    * Private Link IP-forwarders (NVA).
    */
   PLIPForwarders: "PLIPForwarders",
+
+  /**
+   * NAT64 (stateful IPv6-to-IPv4 translation).
+   */
+  NAT64: "NAT64",
 }
 
 /**
@@ -138,8 +159,9 @@ model VirtualNetworkApplianceCapabilityProperties {
   /**
    * The IP version the capability applies to. Private Link Gateway FastPath (`PLGatewayFastpath`)
    * only accepts `DualStack`; Private Link Gateway (`PLGateway`) and Private Link IP-forwarders
-   * (`PLIPForwarders`) only accept `IPv6`. The service validates the value against the resource's
-   * `kind` when the capability is created or updated.
+   * (`PLIPForwarders`) only accept `IPv6`. Not applicable to `NAT64`, which is property-less and must
+   * omit this value. The service validates the value against the resource's `kind` when the
+   * capability is created or updated.
    */
   // Not modeled as separate per-kind properties schemas: OpenAPI 2.0 (no oneOf) cannot express a
   // narrowed properties type per discriminated subtype without overriding the inherited model-valued
