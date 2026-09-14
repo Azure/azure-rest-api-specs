@@ -105,6 +105,7 @@ model VoiceResponseAudio {
 }
 
 @doc("Properties shared by persisted voice responses.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceResponseBase {
   ...OmitProperties<
     OpenAI.RealtimeResponse,
@@ -432,17 +433,20 @@ model VoiceRecordingResponse {
 @doc("A service-generated telephony binding identifier.")
 @minLength(1)
 @maxLength(128)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyBindingId extends string;
 
 @doc("A service-generated telephony call identifier.")
 @minLength(1)
 @maxLength(128)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyCallId extends string;
 
 @doc("The unique name of a telephony transfer target.")
 @minLength(1)
 @maxLength(64)
 @pattern("^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyTransferTargetName extends string;
 
 @doc("A telephony provider supported by an agent binding. Known values are stable; additional values may be added over time.")
@@ -1666,6 +1670,7 @@ alias TelephonyCallJobAcceptedResponse = TypeSpec.Http.Response<202> &
   };
 
 @doc("When a published outbound campaign becomes eligible to dispatch calls.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCampaignScheduleType {
   string,
 
