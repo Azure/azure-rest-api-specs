@@ -463,6 +463,11 @@ using Microsoft.DataProtection;
   "GenericBackupDataSourceSettings",
   "csharp"
 );
+@@clientName(
+  GenericRestoreDatasourceCriteria,
+  "GenericRestoreDataSourceCriteria",
+  "csharp"
+);
 @@clientName(IdentityDetails, "DataProtectionIdentityDetails", "csharp");
 @@clientName(
   IdentityDetails.userAssignedIdentityArmUrl,
