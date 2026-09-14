@@ -722,7 +722,10 @@ union RaiAcsPolicyTargetKind {
   ToolResult: "tool_result",
 }
 
-/** Supported snapshot paths for selecting a tool catalog entry. */
+/**
+ * Snapshot paths for selecting a tool catalog entry.
+ * The listed values are recognized by the Unified Moderate AACS host profile; other values are allowed for forward compatibility.
+ */
 @added(Versions.v2026_09_15_preview)
 union RaiAcsToolNameSelector {
   string,
@@ -759,9 +762,8 @@ model RaiAcsInterventionPoint {
 model RaiAcsToolInterventionPoint {
   ...RaiAcsInterventionPoint;
 
-  /** Selects the canonical tool catalog key from the raw Agent Hooks snapshot. */
+  /** Selects the tool catalog key from the raw Agent Hooks snapshot using an extensible snapshot path. */
   @encodedName("application/json", "tool_name_from")
-  @minLength(1)
   toolNameFrom?: RaiAcsToolNameSelector;
 }
 

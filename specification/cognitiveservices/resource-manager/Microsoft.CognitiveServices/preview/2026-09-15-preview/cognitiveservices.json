@@ -20019,8 +20019,7 @@
         },
         "tool_name_from": {
           "$ref": "#/definitions/RaiAcsToolNameSelector",
-          "description": "Selects the canonical tool catalog key from the raw Agent Hooks snapshot.",
-          "minLength": 1,
+          "description": "Selects the tool catalog key from the raw Agent Hooks snapshot using an extensible snapshot path.",
           "x-ms-client-name": "toolNameFrom"
         }
       },
@@ -20032,7 +20031,7 @@
     },
     "RaiAcsToolNameSelector": {
       "type": "string",
-      "description": "Supported snapshot paths for selecting a tool catalog entry.",
+      "description": "Snapshot paths for selecting a tool catalog entry.\nThe listed values are recognized by the Unified Moderate AACS host profile; other values are allowed for forward compatibility.",
       "enum": [
         "$snap.tool_call.name",
         "$.tool_call.name"
