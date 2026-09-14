@@ -23,7 +23,7 @@ const VoiceAgentConversationRequiredPreviews = #{
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceGeneratedItemAudioResponse {
-  ...OmitProperties<VoiceItemAudioResponse, "blob_uri">;
+  ...OmitProperties<VoiceItemAudio, "blob_uri">;
 
   @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the generated audio in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/generated/content` route instead.")
   blob_uri?: url;
@@ -331,7 +331,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation item whose audio metadata is retrieved. */
       @path item_id: string;
     },
-    VoiceItemAudioResponse
+    VoiceItemAudio
   >;
 
   /**
@@ -357,7 +357,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation item whose audio is streamed. */
       @path item_id: string;
     },
-    VoiceAudioStreamResponse
+    VoiceAudioStream
   >;
 
   /**
@@ -409,7 +409,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation item whose generated audio is streamed. */
       @path item_id: string;
     },
-    VoiceAudioStreamResponse
+    VoiceAudioStream
   >;
 
   /**
@@ -437,7 +437,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation whose merged recording metadata is retrieved. */
       @path conversation_id: string;
     },
-    VoiceRecordingResponse
+    VoiceRecording
   >;
 
   /**
@@ -464,7 +464,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation whose merged recording is streamed. */
       @path conversation_id: string;
     },
-    VoiceAudioStreamResponse
+    VoiceAudioStream
   >;
 }
 
