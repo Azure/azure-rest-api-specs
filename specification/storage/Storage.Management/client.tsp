@@ -500,7 +500,7 @@ op getDeletedAccountCustomizedForJs(
 @@clientName(
   Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
   "ArmUserAssignedIdentity",
-  "python,java"
+  "python"
 );
 
 // Rename NspAccessRulePropertiesSubscriptionsItem to prevent the generator from mapping
@@ -1504,4 +1504,10 @@ enum ProvisioningStateEnum {
   Azure.ResourceManager.CommonTypes.Encryption,
   "ArmEncryption",
   "go,javascript"
+);
+
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
+  Microsoft.Storage.UserAssignedIdentity,
+  "java"
 );
