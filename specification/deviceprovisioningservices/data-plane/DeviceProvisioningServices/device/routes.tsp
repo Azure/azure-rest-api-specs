@@ -225,7 +225,7 @@ interface RuntimeRegistration {
        * Device registration request.
        */
       @bodyRoot
-      deviceRegistration: DeviceRegistration;
+      body: DeviceRegistration;
     },
     | {
         @statusCode _: 200;
