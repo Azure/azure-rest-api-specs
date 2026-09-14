@@ -632,9 +632,10 @@ model AgentOptimizationCandidateEvaluation {
   @doc("Average total tokens consumed per task. Omitted when token usage was not measured.")
   avg_tokens?: float64;
 
-  @doc("Average end-to-end latency per task in milliseconds. Omitted when latency was not measured.")
-  @minValue(0)
-  avg_latency_ms?: float64;
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "AgentsOptimization wire uses floating-point milliseconds; preserve the existing wire contract while exposing a semantic duration type."
+  @doc("Average end-to-end latency per task. Omitted when latency was not measured. Wire representation: milliseconds as a float.")
+  @encode(DurationKnownEncoding.milliseconds, float64)
+  avg_latency_ms?: duration;
 
   @doc("Per-routed-model serving-cost summary. Omitted when candidate cost was not measured.")
   candidate_cost?: AgentOptimizationCandidateCost;
@@ -719,9 +720,10 @@ model AgentOptimizationLatencyUsageEntry {
   @doc("Model deployment name that served the calls.")
   `model`: string;
 
-  @doc("Average per-call latency in milliseconds.")
-  @minValue(0)
-  avg_latency_ms: float64;
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "AgentsOptimization wire uses floating-point milliseconds; preserve the existing wire contract while exposing a semantic duration type."
+  @doc("Average per-call latency. Wire representation: milliseconds as a float.")
+  @encode(DurationKnownEncoding.milliseconds, float64)
+  avg_latency_ms: duration;
 
   @doc("Total number of calls contributing to this entry.")
   call_count: int64;

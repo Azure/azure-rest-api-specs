@@ -43610,8 +43610,7 @@ components:
         avg_latency_ms:
           type: number
           format: double
-          minimum: 0
-          description: Average end-to-end latency per task in milliseconds. Omitted when latency was not measured.
+          description: 'Average end-to-end latency per task. Omitted when latency was not measured. Wire representation: milliseconds as a float.'
         candidate_cost:
           $ref: '#/components/schemas/AgentOptimizationCandidateCost'
           description: Per-routed-model serving-cost summary. Omitted when candidate cost was not measured.
@@ -44203,8 +44202,7 @@ components:
         avg_latency_ms:
           type: number
           format: double
-          minimum: 0
-          description: Average per-call latency in milliseconds.
+          description: 'Average per-call latency. Wire representation: milliseconds as a float.'
         call_count:
           type: integer
           format: int64
