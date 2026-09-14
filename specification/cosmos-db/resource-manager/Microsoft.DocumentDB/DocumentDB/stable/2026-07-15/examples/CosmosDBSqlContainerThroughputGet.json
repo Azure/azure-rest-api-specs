@@ -18,6 +18,22 @@
         "properties": {
           "resource": {
             "throughput": 400,
+            "throughputBuckets": [
+              {
+                "id": 1,
+                "maxThroughputPercentage": 10,
+                "isDefaultBucket": true
+              },
+              {
+                "id": 2,
+                "maxThroughputPercentage": 20,
+                "isDefaultBucket": false
+              },
+              {
+                "id": 3,
+                "maxThroughputPercentage": 15
+              }
+            ],
             "minimumThroughput": "400",
             "offerReplacePending": "true",
             "instantMaximumThroughput": "10000",
