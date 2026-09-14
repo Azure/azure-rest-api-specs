@@ -47604,7 +47604,12 @@
       },
       "GenerateAgentRequest": {
         "$ref": "#/components/schemas/GenerateVoiceAgentRequest",
-        "description": "The kind-specific inputs for generating and creating an agent."
+        "description": "The kind-specific inputs for generating and creating an agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "GenerateVoiceAgentRequest": {
         "type": "object",
@@ -93056,7 +93061,12 @@
         "type": "string",
         "minLength": 1,
         "maxLength": 128,
-        "description": "A service-generated telephony binding identifier."
+        "description": "A service-generated telephony binding identifier.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "TelephonyBindingListItem": {
         "type": "object",
@@ -93209,7 +93219,12 @@
         "type": "string",
         "minLength": 1,
         "maxLength": 128,
-        "description": "A service-generated telephony call identifier."
+        "description": "A service-generated telephony call identifier.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "TelephonyCallJob": {
         "type": "object",
@@ -94666,7 +94681,12 @@
             ]
           }
         ],
-        "description": "When a published outbound campaign becomes eligible to dispatch calls."
+        "description": "When a published outbound campaign becomes eligible to dispatch calls.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "TelephonyOperation": {
         "type": "object",
@@ -95060,7 +95080,12 @@
         "minLength": 1,
         "maxLength": 64,
         "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
-        "description": "The unique name of a telephony transfer target."
+        "description": "The unique name of a telephony transfer target.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "TelephonyTransferTargets": {
         "type": "object",
@@ -97048,7 +97073,12 @@
             "format": "password"
           }
         },
-        "description": "An ICE server used for avatar WebRTC negotiation."
+        "description": "An ICE server used for avatar WebRTC negotiation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentAvatarOutputProtocol": {
         "anyOf": [
@@ -97122,7 +97152,12 @@
             "default": 1
           }
         },
-        "description": "Avatar placement and motion settings."
+        "description": "Avatar placement and motion settings.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentAvatarType": {
         "anyOf": [
@@ -97155,7 +97190,12 @@
             "type": "string"
           }
         },
-        "description": "The avatar video background."
+        "description": "The avatar video background.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentAvatarVideoCrop": {
         "type": "object",
@@ -97183,7 +97223,12 @@
             "maxItems": 2
           }
         },
-        "description": "The rectangular crop applied to avatar video."
+        "description": "The rectangular crop applied to avatar video.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentAvatarVideoParams": {
         "type": "object",
@@ -97211,7 +97256,12 @@
             "default": 10
           }
         },
-        "description": "Avatar video encoder and presentation settings."
+        "description": "Avatar video encoder and presentation settings.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentAvatarVideoResolution": {
         "type": "object",
@@ -97231,7 +97281,12 @@
             "minimum": 1
           }
         },
-        "description": "The avatar video resolution."
+        "description": "The avatar video resolution.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentAzureSemanticVadEnTurnDetection": {
         "type": "object",
@@ -97607,7 +97662,12 @@
             "default": 1
           }
         },
-        "description": "Server-side echo cancellation settings for input audio."
+        "description": "Server-side echo cancellation settings for input audio.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentEchoCancellationReferenceSource": {
         "type": "string",
@@ -97615,7 +97675,12 @@
           "server",
           "client"
         ],
-        "description": "The source of reference audio used for echo cancellation."
+        "description": "The source of reference audio used for echo cancellation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentEndConversationSystemTool": {
         "type": "object",
@@ -97745,7 +97810,12 @@
             "$ref": "#/components/schemas/VoiceAgentTool"
           }
         ],
-        "description": "A native function tool executed by the client."
+        "description": "A native function tool executed by the client.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentGreetingConfig": {
         "type": "object",
@@ -97899,7 +97969,12 @@
             "llm_interim_response": "#/components/schemas/VoiceAgentLlmInterimResponseConfig"
           }
         },
-        "description": "Fields shared by interim-response configurations."
+        "description": "Fields shared by interim-response configurations.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentInterimResponseTrigger": {
         "anyOf": [
@@ -97914,7 +97989,12 @@
             ]
           }
         ],
-        "description": "A condition that may trigger an interim response."
+        "description": "A condition that may trigger an interim response.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentLlmGeneratedGreetingConfig": {
         "type": "object",
@@ -97985,7 +98065,12 @@
             "$ref": "#/components/schemas/VoiceAgentInterimResponseConfig"
           }
         ],
-        "description": "An interim response generated by a language model."
+        "description": "An interim response generated by a language model.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentMaxOutputTokens": {
         "anyOf": [
@@ -98206,7 +98291,12 @@
             "$ref": "#/components/schemas/VoiceAgentTurnDetectionConfig"
           }
         ],
-        "description": "OpenAI semantic VAD turn-detection settings."
+        "description": "OpenAI semantic VAD turn-detection settings.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentServerVadTurnDetection": {
         "type": "object",
@@ -98297,7 +98387,12 @@
             "$ref": "#/components/schemas/VoiceAgentAvatarConfig"
           }
         ],
-        "description": "Avatar settings accepted by the stable voice-agent WebSocket contract."
+        "description": "Avatar settings accepted by the stable voice-agent WebSocket contract.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentSessionIncludeOption": {
         "type": "string",
@@ -98338,7 +98433,12 @@
             "$ref": "#/components/schemas/VoiceAgentInterimResponseConfig"
           }
         ],
-        "description": "A static interim response selected from configured text."
+        "description": "A static interim response selected from configured text.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentSubagent": {
         "type": "object",
@@ -98732,7 +98832,12 @@
         "enum": [
           "realtime"
         ],
-        "description": "The WebSocket subprotocol supported by a voice-agent connection."
+        "description": "The WebSocket subprotocol supported by a voice-agent connection.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAudioCodec": {
         "anyOf": [
@@ -99331,7 +99436,12 @@
             "description": "Maximum number of output tokens for a single assistant response,\n  inclusive of tool calls, that was used in this response."
           }
         },
-        "description": "Properties shared by persisted voice responses."
+        "description": "Properties shared by persisted voice responses.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceType": {
         "anyOf": [
