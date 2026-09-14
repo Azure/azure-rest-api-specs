@@ -7,6 +7,8 @@ import "./WebModels/WavePlans/CreateWavesFromPlan.tsp";
 import "./WebModels/WavePlans/GetWavePlans.tsp";
 import "./WebModels/WavePlans/FetchSasUri.tsp";
 import "./WebModels/WavePlans/ImportWavePlan.tsp";
+import "./WebModels/WavePlans/ImportWavePlanConfig.tsp";
+import "./WebModels/WavePlans/ValidateWavePlan.tsp";
 import "./WebModels/Waves/MigrationWaves.tsp";
 import "./WebModels/RefreshEntities/RefreshEntities.tsp";
 import "./WebModels/MigrationEntity/MigrationEntity.tsp";
@@ -76,6 +78,24 @@ interface MigrateProjects {
     MigrateProject,
     ImportWavePlanRequest,
     ImportWavePlanResponse
+  >;
+
+  @added(ApiVersions.v2026_09_01_preview)
+  @doc("Ingest a staged wave-plan configuration document and produce the refreshed wave-plan artifacts. Long-running operation.")
+  @action("importWavePlanConfig")
+  importWavePlanConfig is ArmResourceActionAsync<
+    MigrateProject,
+    ImportWavePlanConfigRequest,
+    ImportWavePlanConfigResponse
+  >;
+
+  @added(ApiVersions.v2026_09_01_preview)
+  @doc("Validate a customer-uploaded wave-plan CSV without applying it, and report the row and wave counts together with any findings. Long-running operation.")
+  @action("validateWavePlan")
+  validateWavePlan is ArmResourceActionAsync<
+    MigrateProject,
+    ValidateWavePlanRequest,
+    ValidateWavePlanResponse
   >;
 }
 
