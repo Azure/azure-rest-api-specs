@@ -1639,30 +1639,6 @@
         "value"
       ]
     },
-    "CloudValidationOverallState": {
-      "type": "string",
-      "description": "The Overall states of the validation resource.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "CloudValidationOverallState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "The resource is in enabled state."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "The resource is in disabled state."
-          }
-        ]
-      }
-    },
     "CloudValidationProperties": {
       "type": "object",
       "description": "Cloud Validation properties",
@@ -1680,10 +1656,6 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
           "description": "Error details. Populated when provisioningState is Failed or Canceled.",
           "readOnly": true
-        },
-        "overallState": {
-          "$ref": "#/definitions/CloudValidationOverallState",
-          "description": "The overall state of the resource."
         },
         "managedOnBehalfOfConfiguration": {
           "$ref": "../../../../../../common-types/resource-management/v6/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
@@ -1716,10 +1688,6 @@
         "description": {
           "type": "string",
           "description": "The description of the resource."
-        },
-        "overallState": {
-          "$ref": "#/definitions/CloudValidationOverallState",
-          "description": "The overall state of the resource."
         }
       }
     },
@@ -2100,30 +2068,6 @@
         "value"
       ]
     },
-    "ValidationExecutionPlanOverallState": {
-      "type": "string",
-      "description": "The Overall states of the validation execution plan.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "ValidationExecutionPlanOverallState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "The resource is in enabled state."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "The resource is in disabled state."
-          }
-        ]
-      }
-    },
     "ValidationExecutionPlanProperties": {
       "type": "object",
       "description": "Validation Test Execution Plan properties",
@@ -2134,7 +2078,7 @@
         },
         "planConfigurationUri": {
           "type": "string",
-          "description": "URI where the configuration of the execution plan is defined.\nEither this property or `planConfigurationJson` is mandatory while creating; they are mutually exclusive.\nThis value is returned as-is in get responses, so it must not contain credentials or other secrets."
+          "description": "URI where the configuration of the execution plan is defined.\nEither this property or `planConfigurationJson` is mandatory while creating; they are mutually exclusive.\nThis must be a plain, non-SAS reference (no embedded credentials, tokens, or query-string secrets);\nthe service reads the referenced content using its managed identity.\nThis value is returned as-is in get responses, so it must not contain credentials or other secrets."
         },
         "planConfigurationJson": {
           "type": "string",
@@ -2149,10 +2093,6 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
           "description": "Error details. Populated when provisioningState is Failed or Canceled.",
           "readOnly": true
-        },
-        "overallState": {
-          "$ref": "#/definitions/ValidationExecutionPlanOverallState",
-          "description": "The overall state of the resource."
         }
       }
     },
@@ -2226,15 +2166,11 @@
         },
         "planConfigurationUri": {
           "type": "string",
-          "description": "URI where the configuration of the execution plan is defined.\nEither this property or `planConfigurationJson` is mandatory while creating; they are mutually exclusive.\nThis value is returned as-is in get responses, so it must not contain credentials or other secrets."
+          "description": "URI where the configuration of the execution plan is defined.\nEither this property or `planConfigurationJson` is mandatory while creating; they are mutually exclusive.\nThis must be a plain, non-SAS reference (no embedded credentials, tokens, or query-string secrets);\nthe service reads the referenced content using its managed identity.\nThis value is returned as-is in get responses, so it must not contain credentials or other secrets."
         },
         "planConfigurationJson": {
           "type": "string",
           "description": "Entire execution plan configuration/manifest json.\nEither this property or `planConfigurationUri` is mandatory while creating; they are mutually exclusive.\nIn get, always return the entire json configuration.\nThis value is returned as-is in get responses, so it must not contain credentials or other secrets."
-        },
-        "overallState": {
-          "$ref": "#/definitions/ValidationExecutionPlanOverallState",
-          "description": "The overall state of the resource."
         }
       }
     },
@@ -2295,15 +2231,18 @@
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "Display name of the validation test category."
+          "description": "Display name of the validation test category.",
+          "readOnly": true
         },
         "description": {
           "type": "string",
-          "description": "Validation test category description."
+          "description": "Validation test category description.",
+          "readOnly": true
         },
         "audience": {
           "$ref": "#/definitions/CatalogAudience",
-          "description": "Audience visibility of this validation test category."
+          "description": "Audience visibility of this validation test category.",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -2312,14 +2251,16 @@
         },
         "parentCategoryId": {
           "type": "string",
-          "description": "Parent validation test category id. Categories form a two-level hierarchy only:\na top-level category leaves this unset, and a sub-category sets this to its\ntop-level parent's category id. Sub-categories cannot themselves have sub-categories,\nand a category must not reference itself as its own parent."
+          "description": "Parent validation test category id. Categories form a two-level hierarchy only:\na top-level category leaves this unset, and a sub-category sets this to its\ntop-level parent's category id. Sub-categories cannot themselves have sub-categories,\nand a category must not reference itself as its own parent.",
+          "readOnly": true
         },
         "owners": {
           "type": "array",
-          "description": "Owners of the validation test category, expressed as email aliases or Microsoft Entra object IDs.\nOnly catalog publishers set this value through an internal publishing process; end users of the validation\nservice consume catalog entries read-only through Get/List and cannot modify it.",
+          "description": "Owners of the validation test category, expressed as team or distribution list aliases.\nIndividual user aliases and directory object identifiers are not published in this field.\nOnly catalog publishers set this value through an internal publishing process; end users of the validation\nservice consume catalog entries read-only through Get/List and cannot modify it.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -2473,42 +2414,6 @@
         "value"
       ]
     },
-    "ValidationTestOverallState": {
-      "type": "string",
-      "description": "The overall state of a validation test or test version.",
-      "enum": [
-        "Draft",
-        "Active",
-        "Published",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "ValidationTestOverallState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Draft",
-            "value": "Draft",
-            "description": "The validation test definition is in draft state."
-          },
-          {
-            "name": "Active",
-            "value": "Active",
-            "description": "The validation test definition is active."
-          },
-          {
-            "name": "Published",
-            "value": "Published",
-            "description": "The validation test definition is published."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "The validation test definition is disabled."
-          }
-        ]
-      }
-    },
     "ValidationTestPassDetails": {
       "type": "object",
       "description": "Detailed information about test pass.",
@@ -2534,13 +2439,20 @@
       "type": "object",
       "description": "Validation test catalog properties.",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the validation test.",
+          "readOnly": true
+        },
         "description": {
           "type": "string",
-          "description": "Validation test description."
+          "description": "Validation test description.",
+          "readOnly": true
         },
         "audience": {
           "$ref": "#/definitions/CatalogAudience",
-          "description": "Audience visibility of this validation test."
+          "description": "Audience visibility of this validation test.",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -2552,42 +2464,62 @@
           "description": "The names of the validation test categories (ValidationTestCategory resource names, not ARM resource IDs) associated with this test.",
           "items": {
             "type": "string"
-          }
-        },
-        "overallState": {
-          "$ref": "#/definitions/ValidationTestOverallState",
-          "description": "Overall state of the validation test."
+          },
+          "readOnly": true
         },
         "owners": {
           "type": "array",
-          "description": "Owners of the validation test definition, expressed as aliases.\nOnly catalog publishers(limited to microsoft internal only) set this value through an internal publishing process; end users of the validation\nservice consume catalog entries read-only through Get/List and cannot modify it.",
+          "description": "Owners of the validation test definition, expressed as team or distribution list aliases.\nIndividual user aliases and directory object identifiers are not published in this field.\nOnly catalog publishers(limited to microsoft internal only) set this value through an internal publishing process; end users of the validation\nservice consume catalog entries read-only through Get/List and cannot modify it.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "inputs": {
           "type": "array",
           "description": "Declared input contract for this validation test.",
           "items": {
             "$ref": "#/definitions/ValidationTestInput"
-          }
+          },
+          "readOnly": true
         },
         "testStoreUri": {
           "type": "string",
-          "description": "URI of the location where the test artifact is stored."
+          "format": "uri",
+          "description": "URI of the location where the test artifact is stored.",
+          "readOnly": true
         },
         "currentVersion": {
           "type": "string",
-          "description": "The resource ID of the current immutable version snapshot."
+          "format": "arm-id",
+          "description": "The resource ID of the current immutable version snapshot.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.PlatformValidation/validationTests/versions"
+              }
+            ]
+          }
         },
         "latestPublishedVersion": {
           "type": "string",
-          "description": "The resource ID of the latest published version snapshot."
+          "format": "arm-id",
+          "description": "The resource ID of the latest published version snapshot.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.PlatformValidation/validationTests/versions"
+              }
+            ]
+          }
         },
         "lastPublishedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp of the last version publication."
+          "description": "Timestamp of the last version publication.",
+          "readOnly": true
         }
       }
     },
@@ -2666,11 +2598,21 @@
         },
         "testId": {
           "type": "string",
-          "description": "The name of the validation test (ValidationTest resource name, not an ARM resource ID) in the validation test catalog."
+          "format": "arm-id",
+          "description": "The resource ID of the validation test in the validation test catalog.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.PlatformValidation/validationTests"
+              }
+            ]
+          }
         },
         "inputsJson": {
           "type": "string",
-          "description": "Validation test run inputs json, conforming to the input contract declared by `ValidationTestInput` on the corresponding validation test.\nThis value is returned as-is in get responses, so it must not contain credentials or other secrets."
+          "description": "Validation test run inputs json, conforming to the input contract declared by `ValidationTestInput` on the corresponding validation test.\nThis value is returned as-is in get responses, so it must not contain credentials or other secrets.",
+          "readOnly": true
         },
         "passDetails": {
           "type": "array",
@@ -2825,13 +2767,20 @@
       "type": "object",
       "description": "Validation test version catalog properties.",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the validation test version.",
+          "readOnly": true
+        },
         "description": {
           "type": "string",
-          "description": "Validation test description."
+          "description": "Validation test description.",
+          "readOnly": true
         },
         "audience": {
           "$ref": "#/definitions/CatalogAudience",
-          "description": "Audience visibility of this validation test version."
+          "description": "Audience visibility of this validation test version.",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -2843,34 +2792,36 @@
           "description": "The names of the validation test categories (ValidationTestCategory resource names, not ARM resource IDs) associated with this test version.",
           "items": {
             "type": "string"
-          }
-        },
-        "overallState": {
-          "$ref": "#/definitions/ValidationTestOverallState",
-          "description": "Overall state of the validation test."
+          },
+          "readOnly": true
         },
         "owners": {
           "type": "array",
-          "description": "Owners of the validation test version definition, expressed as email aliases or Microsoft Entra object IDs.\nOnly catalog publishers set this value through an internal publishing process; end users of the validation\nservice consume catalog entries read-only through Get/List and cannot modify it.",
+          "description": "Owners of the validation test version definition, expressed as team or distribution list aliases.\nIndividual user aliases and directory object identifiers are not published in this field.\nOnly catalog publishers set this value through an internal publishing process; end users of the validation\nservice consume catalog entries read-only through Get/List and cannot modify it.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "inputs": {
           "type": "array",
           "description": "Declared input contract for this validation test version.",
           "items": {
             "$ref": "#/definitions/ValidationTestInput"
-          }
+          },
+          "readOnly": true
         },
         "contentHash": {
           "type": "string",
           "description": "SHA-256 hash of the version content used for integrity and deduplication.",
-          "pattern": "^[A-Fa-f0-9]{64}$"
+          "pattern": "^[A-Fa-f0-9]{64}$",
+          "readOnly": true
         },
         "testStoreUri": {
           "type": "string",
-          "description": "URI of the location where the test artifact is stored."
+          "format": "uri",
+          "description": "URI of the location where the test artifact is stored.",
+          "readOnly": true
         }
       }
     }

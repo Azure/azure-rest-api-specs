@@ -28,9 +28,6 @@ model CloudValidationProperties {
   @visibility(Lifecycle.Read)
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 
-  @doc("The overall state of the resource.")
-  overallState?: CloudValidationOverallState;
-
   @visibility(Lifecycle.Read)
   @doc("Managed On Behalf Of Configuration.")
   managedOnBehalfOfConfiguration?: CommonTypes.ManagedOnBehalfOfConfiguration;
@@ -55,17 +52,6 @@ union ProvisioningState {
 
   @doc("The resource create request has been accepted")
   Accepted: "Accepted",
-
-  string,
-}
-
-@doc("The Overall states of the validation resource.")
-union CloudValidationOverallState {
-  @doc("The resource is in enabled state.")
-  Enabled: "Enabled",
-
-  @doc("The resource is in disabled state.")
-  Disabled: "Disabled",
 
   string,
 }

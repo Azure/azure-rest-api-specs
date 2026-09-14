@@ -40,13 +40,19 @@ model ValidationTestRunProperties {
   @visibility(Lifecycle.Read)
   reportedAt?: utcDateTime;
 
-  @doc("The name of the validation test (ValidationTest resource name, not an ARM resource ID) in the validation test catalog.")
-  testId?: string;
+  @doc("The resource ID of the validation test in the validation test catalog.")
+  @visibility(Lifecycle.Read)
+  testId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.PlatformValidation/validationTests";
+    }
+  ]>;
 
   @doc("""
     Validation test run inputs json, conforming to the input contract declared by `ValidationTestInput` on the corresponding validation test.
     This value is returned as-is in get responses, so it must not contain credentials or other secrets.
     """)
+  @visibility(Lifecycle.Read)
   inputsJson?: string;
 
   @doc("Detailed pass information when the test passes.")

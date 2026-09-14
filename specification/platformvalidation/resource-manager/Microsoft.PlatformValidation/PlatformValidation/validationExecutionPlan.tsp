@@ -24,6 +24,8 @@ model ValidationExecutionPlanProperties {
   @doc("""
     URI where the configuration of the execution plan is defined.
     Either this property or `planConfigurationJson` is mandatory while creating; they are mutually exclusive.
+    This must be a plain, non-SAS reference (no embedded credentials, tokens, or query-string secrets);
+    the service reads the referenced content using its managed identity.
     This value is returned as-is in get responses, so it must not contain credentials or other secrets.
     """)
   planConfigurationUri?: string;
@@ -43,9 +45,6 @@ model ValidationExecutionPlanProperties {
   @doc("Error details. Populated when provisioningState is Failed or Canceled.")
   @visibility(Lifecycle.Read)
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
-
-  @doc("The overall state of the resource.")
-  overallState?: ValidationExecutionPlanOverallState;
 }
 
 @doc("The execution plan resource provisioning state.")
@@ -58,17 +57,6 @@ union ValidationExecutionPlanProvisioningState {
 
   @doc("The resource is updating.")
   Updating: "Updating",
-
-  string,
-}
-
-@doc("The Overall states of the validation execution plan.")
-union ValidationExecutionPlanOverallState {
-  @doc("The resource is in enabled state.")
-  Enabled: "Enabled",
-
-  @doc("The resource is in disabled state.")
-  Disabled: "Disabled",
 
   string,
 }

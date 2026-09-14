@@ -3,19 +3,17 @@
   "operationId": "ValidationExecutionPlans_Update",
   "parameters": {
     "api-version": "2026-08-01-preview",
-    "subscriptionId": "7BB14EC4-B6DC-4C0C-807F-C3562C790F07",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rgvalidate",
     "cloudValidationName": "cvtest01",
     "validationExecutionPlanName": "veptest01",
     "properties": {
       "properties": {
-        "description": "ortzzlmaoxmwtcjkjkvuxx",
-        "planConfigurationUri": "xsouolufo",
-        "planConfigurationJson": "vmqqmcdpvhgu",
-        "overallState": "Enabled"
+        "description": "Validation execution plan that runs the network connectivity checks against the target image.",
+        "planConfigurationJson": "{\"apiVersion\":\"microsoft.PlatformValidation/validationExecutionPlan.v0\",\"kind\":\"ValidationExecutionPlan\",\"metadata\":{\"name\":\"contoso-linux-cert\"},\"parameters\":{\"certificationPackageReference\":{\"osType\":\"Linux\",\"vmGenerationType\":\"V1\",\"architectureType\":\"X64\",\"recommendedVMSizes\":[\"Standard_D4s_v3\"],\"storageProfile\":{\"osDiskImage\":{\"sourceVhdUri\":\"https://contoso.blob.core.windows.net/vhds/img.vhd?<sas>\"},\"dataDiskImages\":[]},\"additionalProperties\":{}}},\"authoring\":{\"steps\":[{\"name\":\"os-disk-size\",\"type\":\"test\",\"testRef\":\"/providers/Microsoft.PlatformValidation/validationTests/os-disk-size/versions/1.0.0\"},{\"name\":\"data-disk-size\",\"type\":\"test\",\"testRef\":\"/providers/Microsoft.PlatformValidation/validationTests/data-disk-size/versions/1.0.0\"},{\"name\":\"malware-defender\",\"type\":\"test\",\"testRef\":\"/providers/Microsoft.PlatformValidation/validationTests/malware-defender/versions/1.0.0\"},{\"name\":\"malware-esrp\",\"type\":\"test\",\"testRef\":\"/providers/Microsoft.PlatformValidation/validationTests/malware-esrp/versions/1.0.0\"},{\"name\":\"linux-quality-validation\",\"type\":\"test\",\"testRef\":\"/providers/Microsoft.PlatformValidation/validationTests/linux-quality-validation/versions/1.0.0\",\"inputs\":{\"concurrency\":1,\"testSuite\":[{\"testNames\":[\"smoke_test\",\"validate_netvsc_reload\"]}]}}]}}"
       },
       "tags": {
-        "key145": "grepfloxy"
+        "environment": "production"
       }
     }
   },
@@ -23,24 +21,22 @@
     "200": {
       "body": {
         "properties": {
-          "description": "ortzzlmaoxmwtcjkjkvuxx",
-          "planConfigurationUri": "xsouolufo",
-          "planConfigurationJson": "vmqqmcdpvhgu",
-          "provisioningState": "Succeeded",
-          "overallState": "Enabled"
+          "description": "Validation execution plan that runs the network connectivity checks against the target image.",
+          "planConfigurationJson": "{\"apiVersion\":\"microsoft.PlatformValidation/validationExecutionPlan.v0\",\"kind\":\"ValidationExecutionPlan\",\"metadata\":{\"name\":\"contoso-linux-cert\"},\"parameters\":{\"certificationPackageReference\":{\"osType\":\"Linux\",\"vmGenerationType\":\"V1\",\"architectureType\":\"X64\",\"recommendedVMSizes\":[\"Standard_D4s_v3\"],\"storageProfile\":{\"osDiskImage\":{\"sourceVhdUri\":\"https://contoso.blob.core.windows.net/vhds/img.vhd?<sas>\"},\"dataDiskImages\":[]},\"additionalProperties\":{}}},\"authoring\":{\"steps\":[{\"name\":\"os-disk-size\",\"type\":\"test\",\"testRef\":\"/providers/Microsoft.PlatformValidation/validationTests/os-disk-size/versions/1.0.0\"},{\"name\":\"data-disk-size\",\"type\":\"test\",\"testRef\":\"/providers/Microsoft.PlatformValidation/validationTests/data-disk-size/versions/1.0.0\"},{\"name\":\"malware-defender\",\"type\":\"test\",\"testRef\":\"/providers/Microsoft.PlatformValidation/validationTests/malware-defender/versions/1.0.0\"},{\"name\":\"malware-esrp\",\"type\":\"test\",\"testRef\":\"/providers/Microsoft.PlatformValidation/validationTests/malware-esrp/versions/1.0.0\"},{\"name\":\"linux-quality-validation\",\"type\":\"test\",\"testRef\":\"/providers/Microsoft.PlatformValidation/validationTests/linux-quality-validation/versions/1.0.0\",\"inputs\":{\"concurrency\":1,\"testSuite\":[{\"testNames\":[\"smoke_test\",\"validate_netvsc_reload\"]}]}}]}}",
+          "provisioningState": "Succeeded"
         },
         "tags": {
-          "key3482": "px"
+          "owner-team": "azure-platform-validation"
         },
-        "location": "cqqovjagjsndikbdlpltbtxisptjh",
+        "location": "southcentralus",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgvalidate/providers/Microsoft.PlatformValidation/cloudValidations/cvtest01/validationExecutionPlans/veptest01",
-        "name": "k",
-        "type": "anefdxmekxnnslgoljq",
+        "name": "veptest01",
+        "type": "Microsoft.PlatformValidation/cloudValidations/validationExecutionPlans",
         "systemData": {
-          "createdBy": "btefmdbwflkxmnojvapnl",
+          "createdBy": "user@example.com",
           "createdByType": "User",
           "createdAt": "2026-06-01T11:52:22.926Z",
-          "lastModifiedBy": "ppdavpxjfyg",
+          "lastModifiedBy": "user@example.com",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2026-06-01T11:52:22.926Z"
         }

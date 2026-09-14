@@ -1,6 +1,7 @@
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.PlatformValidation;
@@ -12,23 +13,6 @@ union CatalogAudience {
 
   @doc("Visible only to authorized Microsoft-internal callers.")
   Internal: "Internal",
-
-  string,
-}
-
-@doc("The overall state of a validation test or test version.")
-union ValidationTestOverallState {
-  @doc("The validation test definition is in draft state.")
-  Draft: "Draft",
-
-  @doc("The validation test definition is active.")
-  Active: "Active",
-
-  @doc("The validation test definition is published.")
-  Published: "Published",
-
-  @doc("The validation test definition is disabled.")
-  Disabled: "Disabled",
 
   string,
 }
@@ -107,10 +91,16 @@ model ValidationTest is ProxyResource<ValidationTestProperties> {
 
 @doc("Validation test catalog properties.")
 model ValidationTestProperties {
+  @doc("Display name of the validation test.")
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
   @doc("Validation test description.")
+  @visibility(Lifecycle.Read)
   description?: string;
 
   @doc("Audience visibility of this validation test.")
+  @visibility(Lifecycle.Read)
   audience?: CatalogAudience;
 
   @doc("Provisioning state of the validation test catalog resource.")
@@ -118,40 +108,59 @@ model ValidationTestProperties {
   provisioningState?: ResourceProvisioningState;
 
   @doc("The names of the validation test categories (ValidationTestCategory resource names, not ARM resource IDs) associated with this test.")
+  @visibility(Lifecycle.Read)
   categoryIds?: string[];
 
-  @doc("Overall state of the validation test.")
-  overallState?: ValidationTestOverallState;
-
   @doc("""
-    Owners of the validation test definition, expressed as aliases.
+    Owners of the validation test definition, expressed as team or distribution list aliases.
+    Individual user aliases and directory object identifiers are not published in this field.
     Only catalog publishers(limited to microsoft internal only) set this value through an internal publishing process; end users of the validation
     service consume catalog entries read-only through Get/List and cannot modify it.
     """)
+  @visibility(Lifecycle.Read)
   owners?: string[];
 
   @doc("Declared input contract for this validation test.")
+  @visibility(Lifecycle.Read)
   inputs?: ValidationTestInput[];
 
   @doc("URI of the location where the test artifact is stored.")
-  testStoreUri?: string;
+  @visibility(Lifecycle.Read)
+  testStoreUri?: url;
 
   @doc("The resource ID of the current immutable version snapshot.")
-  currentVersion?: string;
+  @visibility(Lifecycle.Read)
+  currentVersion?: armResourceIdentifier<[
+    {
+      type: "Microsoft.PlatformValidation/validationTests/versions";
+    }
+  ]>;
 
   @doc("The resource ID of the latest published version snapshot.")
-  latestPublishedVersion?: string;
+  @visibility(Lifecycle.Read)
+  latestPublishedVersion?: armResourceIdentifier<[
+    {
+      type: "Microsoft.PlatformValidation/validationTests/versions";
+    }
+  ]>;
 
   @doc("Timestamp of the last version publication.")
+  @visibility(Lifecycle.Read)
   lastPublishedAt?: utcDateTime;
 }
 
 @doc("Validation test version catalog properties.")
 model ValidationTestVersionProperties {
+  @doc("Display name of the validation test version.")
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
   @doc("Validation test description.")
+  @visibility(Lifecycle.Read)
   description?: string;
 
   @doc("Audience visibility of this validation test version.")
+  @visibility(Lifecycle.Read)
   audience?: CatalogAudience;
 
   @doc("Provisioning state of the validation test version catalog resource.")
@@ -159,27 +168,30 @@ model ValidationTestVersionProperties {
   provisioningState?: ResourceProvisioningState;
 
   @doc("The names of the validation test categories (ValidationTestCategory resource names, not ARM resource IDs) associated with this test version.")
+  @visibility(Lifecycle.Read)
   categoryIds?: string[];
 
-  @doc("Overall state of the validation test.")
-  overallState?: ValidationTestOverallState;
-
   @doc("""
-    Owners of the validation test version definition, expressed as email aliases or Microsoft Entra object IDs.
+    Owners of the validation test version definition, expressed as team or distribution list aliases.
+    Individual user aliases and directory object identifiers are not published in this field.
     Only catalog publishers set this value through an internal publishing process; end users of the validation
     service consume catalog entries read-only through Get/List and cannot modify it.
     """)
+  @visibility(Lifecycle.Read)
   owners?: string[];
 
   @doc("Declared input contract for this validation test version.")
+  @visibility(Lifecycle.Read)
   inputs?: ValidationTestInput[];
 
   @doc("SHA-256 hash of the version content used for integrity and deduplication.")
   @pattern("^[A-Fa-f0-9]{64}$")
+  @visibility(Lifecycle.Read)
   contentHash?: string;
 
   @doc("URI of the location where the test artifact is stored.")
-  testStoreUri?: string;
+  @visibility(Lifecycle.Read)
+  testStoreUri?: url;
 }
 
 @doc("Validation test version catalog entry.")
@@ -208,12 +220,15 @@ model ValidationTestCategory
 @doc("Validation test category properties.")
 model ValidationTestCategoryProperties {
   @doc("Display name of the validation test category.")
+  @visibility(Lifecycle.Read)
   displayName?: string;
 
   @doc("Validation test category description.")
+  @visibility(Lifecycle.Read)
   description?: string;
 
   @doc("Audience visibility of this validation test category.")
+  @visibility(Lifecycle.Read)
   audience?: CatalogAudience;
 
   @doc("Provisioning state of the validation test category catalog resource.")
@@ -226,13 +241,16 @@ model ValidationTestCategoryProperties {
     top-level parent's category id. Sub-categories cannot themselves have sub-categories,
     and a category must not reference itself as its own parent.
     """)
+  @visibility(Lifecycle.Read)
   parentCategoryId?: string;
 
   @doc("""
-    Owners of the validation test category, expressed as email aliases or Microsoft Entra object IDs.
+    Owners of the validation test category, expressed as team or distribution list aliases.
+    Individual user aliases and directory object identifiers are not published in this field.
     Only catalog publishers set this value through an internal publishing process; end users of the validation
     service consume catalog entries read-only through Get/List and cannot modify it.
     """)
+  @visibility(Lifecycle.Read)
   owners?: string[];
 }
 
