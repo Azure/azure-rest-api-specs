@@ -2034,9 +2034,10 @@ model AccountProperties {
 
   /**
    * The full resource IDs of cost controls directly attached to this account.
+   * At the moment the service only supports a single cost control. This will be expanded in future API versions.
    */
   @added(Versions.v2026_09_15_preview)
-  @maxItems(20)
+  @maxItems(1)
   costControlIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.CognitiveServices/accounts/costControls";
@@ -3693,9 +3694,10 @@ model DeploymentProperties {
 
   /**
    * The full resource IDs of cost controls directly attached to this deployment.
+   * At the moment the service only supports a single cost control. This will be expanded in future API versions.
    */
   @added(Versions.v2026_09_15_preview)
-  @maxItems(20)
+  @maxItems(1)
   costControlIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.CognitiveServices/accounts/costControls";

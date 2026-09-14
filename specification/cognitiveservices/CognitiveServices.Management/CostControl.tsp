@@ -234,6 +234,7 @@ model CostControlDimension {
    * The request attribute used by a custom dimension. This property is required for custom dimensions and must be omitted for built-in dimensions.
    */
   @maxLength(128)
+  @pattern("^[a-zA-Z][a-zA-Z0-9_.-]{0,127}$")
   attribute?: string;
 }
 

@@ -12960,8 +12960,8 @@
         },
         "costControlIds": {
           "type": "array",
-          "description": "The full resource IDs of cost controls directly attached to this account.",
-          "maxItems": 20,
+          "description": "The full resource IDs of cost controls directly attached to this account.\nAt the moment the service only supports a single cost control. This will be expanded in future API versions.",
+          "maxItems": 1,
           "items": {
             "type": "string",
             "format": "arm-id",
@@ -16463,7 +16463,8 @@
         "attribute": {
           "type": "string",
           "description": "The request attribute used by a custom dimension. This property is required for custom dimensions and must be omitted for built-in dimensions.",
-          "maxLength": 128
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_.-]{0,127}$"
         }
       },
       "required": [
@@ -17312,8 +17313,8 @@
         },
         "costControlIds": {
           "type": "array",
-          "description": "The full resource IDs of cost controls directly attached to this deployment.",
-          "maxItems": 20,
+          "description": "The full resource IDs of cost controls directly attached to this deployment.\nAt the moment the service only supports a single cost control. This will be expanded in future API versions.",
+          "maxItems": 1,
           "items": {
             "type": "string",
             "format": "arm-id",
