@@ -38503,7 +38503,7 @@
           "mutations": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/AgentOptimizationMutationValue"
+              "$ref": "#/components/schemas/AgentOptimizationMutation"
             },
             "description": "Typed configuration mutations applied to the baseline. Omitted for the baseline candidate. LIST without `expand=mutations` returns mutation items with only `type`; expanded LIST and candidate GET populate each mutation's `value`."
           }
@@ -38641,25 +38641,11 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "prompt_optimization": "#/components/schemas/PromptOptimizationConfiguration",
-            "agent_optimization": "#/components/schemas/AgentOptimizationConfiguration"
+            "agent_optimization": "#/components/schemas/AgentOptimizationConfiguration",
+            "prompt_optimization": "#/components/schemas/PromptOptimizationConfiguration"
           }
         },
         "description": "Base model for type-specific optimization configuration."
-      },
-      "AgentOptimizationDataset": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/AgentOptimizationInlineDatasetInput"
-          },
-          {
-            "$ref": "#/components/schemas/AgentOptimizationReferenceDatasetInput"
-          },
-          {
-            "$ref": "#/components/schemas/AgentOptimizationGenerationJobReferenceDatasetInput"
-          }
-        ],
-        "description": "Supported dataset inputs for evaluation."
       },
       "AgentOptimizationDatasetCriterion": {
         "type": "object",
@@ -38695,9 +38681,9 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "inline": "#/components/schemas/AgentOptimizationInlineDatasetInput",
             "reference": "#/components/schemas/AgentOptimizationReferenceDatasetInput",
-            "generation_job_reference": "#/components/schemas/AgentOptimizationGenerationJobReferenceDatasetInput",
-            "inline": "#/components/schemas/AgentOptimizationInlineDatasetInput"
+            "generation_job_reference": "#/components/schemas/AgentOptimizationGenerationJobReferenceDatasetInput"
           }
         },
         "description": "Base discriminated model for dataset input. Either inline items or a registered reference."
@@ -38880,11 +38866,11 @@
         ],
         "properties": {
           "training_dataset": {
-            "$ref": "#/components/schemas/AgentOptimizationDataset",
+            "$ref": "#/components/schemas/AgentOptimizationDatasetInput",
             "description": "Dataset used to guide the optimization search."
           },
           "validation_dataset": {
-            "$ref": "#/components/schemas/AgentOptimizationValidationDataset",
+            "$ref": "#/components/schemas/AgentOptimizationValidationDatasetInput",
             "description": "Held-out dataset used for full candidate evaluation. The training dataset is reused when omitted."
           },
           "evaluators": {
@@ -39041,7 +39027,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/AgentOptimizationDatasetInput"
+            "$ref": "#/components/schemas/AgentOptimizationValidationDatasetInput"
           }
         ],
         "description": "Inline dataset — items supplied directly in the request body."
@@ -39149,7 +39135,7 @@
             "description": "Model deployment used to generate candidate changes."
           },
           "optimization_configuration": {
-            "$ref": "#/components/schemas/OptimizationConfiguration",
+            "$ref": "#/components/schemas/AgentOptimizationConfigurationBase",
             "description": "Type-specific optimization configuration."
           }
         },
@@ -39337,10 +39323,10 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "instruction": "#/components/schemas/AgentOptimizationInstructionMutation",
             "model": "#/components/schemas/AgentOptimizationModelMutation",
             "skills": "#/components/schemas/AgentOptimizationSkillsMutation",
-            "tools": "#/components/schemas/AgentOptimizationToolsMutation",
-            "instruction": "#/components/schemas/AgentOptimizationInstructionMutation"
+            "tools": "#/components/schemas/AgentOptimizationToolsMutation"
           }
         },
         "description": "Base candidate mutation."
@@ -39361,26 +39347,6 @@
           }
         ],
         "description": "Candidate mutation type. Additional mutation types may be added in future API versions."
-      },
-      "AgentOptimizationMutationValue": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/AgentOptimizationInstructionMutation"
-          },
-          {
-            "$ref": "#/components/schemas/AgentOptimizationModelMutation"
-          },
-          {
-            "$ref": "#/components/schemas/AgentOptimizationSkillsMutation"
-          },
-          {
-            "$ref": "#/components/schemas/AgentOptimizationToolsMutation"
-          },
-          {
-            "$ref": "#/components/schemas/AgentOptimizationMutation"
-          }
-        ],
-        "description": "Supported typed candidate mutations."
       },
       "AgentOptimizationReferenceDatasetInput": {
         "type": "object",
@@ -39424,7 +39390,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/AgentOptimizationDatasetInput"
+            "$ref": "#/components/schemas/AgentOptimizationValidationDatasetInput"
           }
         ],
         "description": "Reference to a registered Foundry dataset."
@@ -39621,16 +39587,30 @@
         ],
         "description": "Tool mutations."
       },
-      "AgentOptimizationValidationDataset": {
-        "anyOf": [
+      "AgentOptimizationValidationDatasetInput": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Discriminator property for AgentOptimizationValidationDatasetInput."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "inline": "#/components/schemas/AgentOptimizationInlineDatasetInput",
+            "reference": "#/components/schemas/AgentOptimizationReferenceDatasetInput"
+          }
+        },
+        "allOf": [
           {
-            "$ref": "#/components/schemas/AgentOptimizationInlineDatasetInput"
-          },
-          {
-            "$ref": "#/components/schemas/AgentOptimizationReferenceDatasetInput"
+            "$ref": "#/components/schemas/AgentOptimizationDatasetInput"
           }
         ],
-        "description": "Dataset inputs supported for held-out validation."
+        "description": "Base model for dataset inputs that are valid for held-out validation."
       },
       "AgentReference": {
         "type": "object",
@@ -89591,17 +89571,6 @@
         ],
         "description": "An OpenAPI tool stored in a toolbox."
       },
-      "OptimizationConfiguration": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/AgentOptimizationConfiguration"
-          },
-          {
-            "$ref": "#/components/schemas/PromptOptimizationConfiguration"
-          }
-        ],
-        "description": "Supported optimization types. New workflows should add independent variants\nrather than adding nullable fields to existing variants."
-      },
       "OptimizationContext": {
         "type": "object",
         "required": [
@@ -89620,10 +89589,6 @@
           }
         },
         "description": "Base model for typed optimization context."
-      },
-      "OptimizationContextItem": {
-        "$ref": "#/components/schemas/SteeringPromptOptimizationContext",
-        "description": "Supported optimization context items."
       },
       "OptimizationContextType": {
         "anyOf": [
@@ -90473,7 +90438,7 @@
           "context": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/OptimizationContextItem"
+              "$ref": "#/components/schemas/OptimizationContext"
             },
             "minItems": 1,
             "description": "Context used to steer prompt optimization. Omitted when no context is supplied."
