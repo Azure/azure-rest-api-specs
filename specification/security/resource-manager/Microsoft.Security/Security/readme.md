@@ -131,8 +131,10 @@ suppressions:
     where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings"].get
     reason: The operation intentionally preserves the 2024-01-01 single-page contract and returns at most 13 pricing plans.
   - code: LatestVersionOfCommonTypesMustBeUsed
-    from: pricings.json
-    reason: The 2024-01-01 and 2026-07-01 Swagger files are generated from one TypeSpec project. Upgrading the shared project to common-types v6 would modify the shipped 2024-01-01 contract.
+    from:
+      - pricings.json
+      - batchPricings.json
+    reason: Microsoft.Security services are merged into one SecurityManagementClient and must use the same common-types version. The existing services use v5, while upgrading the shared PricingsAPI project would also modify the shipped 2024-01-01 contract.
   - code: ParameterNotDefinedInGlobalParameters
     from: Microsoft.Security\stable\2026-07-01\pricings.json
     where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings/{pricingName}"].get.parameters[0]
