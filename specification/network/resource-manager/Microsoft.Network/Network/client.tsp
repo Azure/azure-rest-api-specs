@@ -58,6 +58,40 @@ namespace Common {
   }
 }
 
+// Cloud Services is deprecated and no longer represented by the current C# Compute SDK.
+@@scope(
+  Microsoft.Network.NetworkInterfaces.getCloudServiceNetworkInterface,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Network.NetworkInterfaces.listCloudServiceRoleInstanceNetworkInterfaces,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Network.NetworkInterfacesOperationGroup.listCloudServiceNetworkInterfaces,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Network.PublicIPAddresses.getCloudServicePublicIPAddress,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Network.PublicIPAddresses.listCloudServiceRoleInstancePublicIPAddresses,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Network.PublicIPAddressesOperationGroup.listCloudServicePublicIPAddresses,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Network.PublicIPAddressOperationGroup.reserveCloudServicePublicIpAddress,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Network.PublicIPAddressOperationGroup.disassociateCloudServiceReservedPublicIp,
+  "!csharp"
+);
+
 @@clientLocation(
   Microsoft.Compute.NetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
   Microsoft.Network.NetworkInterfaces,
