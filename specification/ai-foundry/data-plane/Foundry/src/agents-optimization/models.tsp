@@ -719,9 +719,9 @@ model AgentOptimizationLatencyUsageEntry {
   @doc("Model deployment name that served the calls.")
   `model`: string;
 
-  @doc("Average per-call latency. Wire representation: milliseconds as a float.")
-  @encode(DurationKnownEncoding.milliseconds, float64)
-  avg_latency_ms: duration;
+  @doc("Average per-call latency in milliseconds.")
+  @minValue(0)
+  avg_latency_ms: float64;
 
   @doc("Total number of calls contributing to this entry.")
   call_count: int64;
