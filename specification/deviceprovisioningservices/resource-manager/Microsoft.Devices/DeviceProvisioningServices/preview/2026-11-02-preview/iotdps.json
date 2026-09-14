@@ -1829,30 +1829,6 @@
         }
       ]
     },
-    "ConnectionProfile": {
-      "type": "string",
-      "description": "The connection profile that an IoT hub uses for device connections.",
-      "enum": [
-        "Classic",
-        "MqttV5"
-      ],
-      "x-ms-enum": {
-        "name": "ConnectionProfile",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Classic",
-            "value": "Classic",
-            "description": "Classic connection profile."
-          },
-          {
-            "name": "MqttV5",
-            "value": "MqttV5",
-            "description": "MQTT v5 connection profile."
-          }
-        ]
-      }
-    },
     "ErrorDetails": {
       "type": "object",
       "description": "Error details.",
@@ -2159,8 +2135,29 @@
           "description": "Connection string of the IoT hub. This is required when authenticationType is KeyBased."
         },
         "connectionProfile": {
-          "$ref": "#/definitions/ConnectionProfile",
-          "description": "The system-derived connection profile that the linked IoT hub uses for device connections. This property is not user-settable and is not present until the capability has been resolved.",
+          "type": "string",
+          "description": "The system-derived connection profile that the linked IoT hub uses for device connections. This property is not user-settable and is not present until the capability has been resolved. Defaults to 'Classic'.",
+          "default": "Classic",
+          "enum": [
+            "Classic",
+            "MqttV5"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionProfile",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Classic",
+                "value": "Classic",
+                "description": "Classic connection profile."
+              },
+              {
+                "name": "MqttV5",
+                "value": "MqttV5",
+                "description": "MQTT v5 connection profile."
+              }
+            ]
+          },
           "readOnly": true
         },
         "location": {
