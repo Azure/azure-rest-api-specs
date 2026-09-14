@@ -163,6 +163,9 @@ union InfeasibleCode {
   @doc("The VM SKU is not available in the target region.")
   RegionUnavailable: "RegionUnavailable",
 
+  @doc("The VM SKU is not supported for serving this model.")
+  UnsupportedSKU: "UnsupportedSKU",
+
   @doc("The deployment can start successfully on this SKU, but its estimated runtime performance falls below the acceptable threshold for serving this model.")
   InefficientDeployment: "InefficientDeployment",
 }
