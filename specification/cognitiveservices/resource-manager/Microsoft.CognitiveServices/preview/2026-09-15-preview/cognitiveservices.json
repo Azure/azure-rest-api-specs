@@ -3758,7 +3758,9 @@
             "description": "Friendly name of the connection",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
           }
         ],
         "responses": {
@@ -3814,7 +3816,9 @@
             "description": "Friendly name of the connection",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
           },
           {
             "name": "connection",
@@ -3879,7 +3883,9 @@
             "description": "Friendly name of the connection",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
           },
           {
             "name": "connection",
@@ -3944,7 +3950,9 @@
             "description": "Friendly name of the connection",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
           }
         ],
         "responses": {
@@ -8734,7 +8742,9 @@
             "description": "Friendly name of the connection",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
           }
         ],
         "responses": {
@@ -8800,7 +8810,9 @@
             "description": "Friendly name of the connection",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
           },
           {
             "name": "connection",
@@ -8875,7 +8887,9 @@
             "description": "Friendly name of the connection",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
           },
           {
             "name": "connection",
@@ -8950,7 +8964,9 @@
             "description": "Friendly name of the connection",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
           }
         ],
         "responses": {
@@ -15598,6 +15614,7 @@
         "Odbc",
         "GenericRest",
         "RemoteTool",
+        "OpenAPI",
         "AmazonMws",
         "Concur",
         "Dynamics",
@@ -15947,6 +15964,11 @@
           {
             "name": "RemoteTool",
             "value": "RemoteTool"
+          },
+          {
+            "name": "OpenAPI",
+            "value": "OpenAPI",
+            "description": "Connection to an endpoint described by an OpenAPI specification."
           },
           {
             "name": "AmazonMws",

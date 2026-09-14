@@ -1103,6 +1103,11 @@ union ConnectionCategory {
   GenericRest: "GenericRest",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Remote tool connection"
   RemoteTool: "RemoteTool",
+
+  /** Connection to an endpoint described by an OpenAPI specification. */
+  @added(Versions.v2026_09_15_preview)
+  OpenAPI: "OpenAPI",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Amazon Marketplace Web Service connection"
   AmazonMws: "AmazonMws",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Concur service connection"
