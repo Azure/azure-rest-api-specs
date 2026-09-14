@@ -84605,15 +84605,11 @@ components:
           $ref: '#/components/schemas/EvaluationModelConfiguration'
           description: Model used both to generate the seed test cases and to simulate the user side of each conversation against the evaluated `target`.
         default_simulation_configuration:
-          $ref: '#/components/schemas/UserConversationSimulationConfiguration'
-          description: Default configuration for generating the simulated conversations produced from the seed test cases. When omitted, the service defaults apply.
+          $ref: '#/components/schemas/UserConversationSimulationDefaultConfiguration'
+          description: Default configuration for the simulated conversations produced from the seed test cases, reusing the user conversation simulation contract. Includes the conversation dataset persistence controls (`enable_conversation_dataset_generation` and `output_conversation_dataset_name`). When omitted, the service defaults apply.
         target:
           $ref: '#/components/schemas/FoundryEvaluationTarget'
           description: Model or agent being evaluated. It receives turns from the simulated user during the conversation simulation.
-        enable_conversation_dataset_generation:
-          type: boolean
-          description: Whether to write all generated conversations to a file in a versioned Foundry dataset, providing visibility into the generated conversations. The dataset can be reused in future evaluation runs. When enabled, the completed run includes `output_dataset`. When omitted, the service defaults to `true`.
-          default: true
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: |-

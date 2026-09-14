@@ -515,14 +515,11 @@ model SyntheticDataGenerationWithSimulationEvalRunDataSource
   /** Model used both to generate the seed test cases and to simulate the user side of each conversation against the evaluated `target`. */
   model_configuration: EvaluationModelConfiguration;
 
-  /** Default configuration for generating the simulated conversations produced from the seed test cases. When omitted, the service defaults apply. */
-  default_simulation_configuration?: UserConversationSimulationConfiguration;
+  /** Default configuration for the simulated conversations produced from the seed test cases, reusing the user conversation simulation contract. Includes the conversation dataset persistence controls (`enable_conversation_dataset_generation` and `output_conversation_dataset_name`). When omitted, the service defaults apply. */
+  default_simulation_configuration?: UserConversationSimulationDefaultConfiguration;
 
   /** Model or agent being evaluated. It receives turns from the simulated user during the conversation simulation. */
   target: FoundryEvaluationTarget;
-
-  /** Whether to write all generated conversations to a file in a versioned Foundry dataset, providing visibility into the generated conversations. The dataset can be reused in future evaluation runs. When enabled, the completed run includes `output_dataset`. When omitted, the service defaults to `true`. */
-  enable_conversation_dataset_generation?: boolean = true;
 }
 
 /** Seed data-generation configuration for `SyntheticDataGenerationWithSimulationEvalRunDataSource`. The `generation_sources` are forwarded directly to the data generation endpoint to produce the seed test cases that are subsequently simulated. */
