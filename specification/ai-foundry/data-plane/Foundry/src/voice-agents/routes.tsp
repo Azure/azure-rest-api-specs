@@ -482,7 +482,7 @@ interface AgentTelephony {
       ...Azure.Core.RepeatabilityRequestHeaders;
 
       /** The provider-specific binding to create. */
-      @body body: CreateTelephonyBindingRequest;
+      @body telephony_binding: CreateTelephonyBindingRequest;
     },
     TelephonyBindingCreatedResponse
   >;
