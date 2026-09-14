@@ -6405,6 +6405,21 @@ model AdapterDeploymentLastOperation {
 model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
 
 /**
+ * Gated model access configuration for a managed compute deployment.
+ */
+@added(Versions.v2026_09_15_preview)
+model GatedModelAccessProperties {
+  /**
+   * The fully qualified Azure resource ID of the project connection used to authorize access to a gated model during deployment creation.
+   */
+  connectionId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.CognitiveServices/accounts/projects/connections";
+    }
+  ]>;
+}
+
+/**
  * Properties of a Cognitive Services managed compute deployment.
  */
 @added(Versions.v2026_03_15_preview)
@@ -6441,6 +6456,13 @@ model ManagedComputeDeploymentProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
+
+  /**
+   * Configuration used to authorize access to a gated model during deployment creation.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  gatedModelAccess?: GatedModelAccessProperties;
 
   /**
    * Deployment capabilities represented as key-value pairs.
