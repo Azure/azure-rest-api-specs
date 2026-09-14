@@ -533,7 +533,7 @@ paths:
     post:
       operationId: AgentOptimizationJobCandidates_promoteCandidate
       summary: Promote a candidate for an agent optimization job
-      description: Promotes a candidate to the Foundry agent stored in the parent job's target configuration. Prompt-agent promotion creates a new agent version. Hosted-agent promotion currently records promotion metadata without deploying a new hosted-agent version.
+      description: Promotes a candidate to the Foundry agent stored in the parent job's target configuration. Promotion is unavailable when the job omitted target_configuration. Prompt-agent promotion creates a new agent version. Hosted-agent promotion currently records promotion metadata without deploying a new hosted-agent version.
       parameters:
         - name: jobId
           in: path
@@ -40631,14 +40631,14 @@ components:
           readOnly: true
         agent_card:
           $ref: '#/components/schemas/AgentCard'
-    AgentOptimizationBaselineConfiguration:
+    AgentOptimizationBaselineAgentConfiguration:
       type: object
       properties:
         system_prompt:
           type: string
           description: Caller-supplied baseline system prompt. Omitted to resolve the baseline from the target; a prompt agent's stored definition is authoritative.
         current_model_deployment_name:
-          type: string
+          $ref: '#/components/schemas/AgentOptimizationDeploymentName'
           description: Caller-supplied baseline model deployment. Omitted to resolve the baseline from the target; a prompt agent's stored definition is authoritative.
         skills:
           type: array
@@ -40650,7 +40650,7 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.ChatCompletionTool'
           description: Function tools available for optimization. Omitted when no manual tool surface is supplied. The optimizer may change function and argument descriptions while preserving names and parameter JSON Schema.
-      description: Caller-supplied baseline values for attributes that cannot be resolved from the target agent.
+      description: Caller-supplied baseline agent values that cannot be resolved from the target agent.
     AgentOptimizationCandidate:
       anyOf:
         - $ref: '#/components/schemas/EvaluatedAgentOptimizationCandidate'
@@ -40729,12 +40729,42 @@ components:
           format: int64
           description: File size in bytes.
       description: A single candidate file artifact stored in the job's output blob.
+    AgentOptimizationCandidateSearchConfiguration:
+      type: object
+      properties:
+        max_candidates:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 20
+          description: Maximum number of non-baseline candidates to fully evaluate. Defaults to 2 when omitted.
+          default: 2
+        candidate_screening_sample_size:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+          description: Number of training-dataset rows sampled to screen each proposed candidate before full validation. Defaults to 3 when omitted.
+          default: 3
+        max_consecutive_failed_candidate_screens:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 50
+          description: Maximum number of consecutive proposed candidates that may fail screening before the search stops early. Defaults to 5 when omitted.
+          default: 5
+      description: |-
+        Candidate search settings.
+
+        Review consideration: if candidate search later gains multiple wall-clock, token, cost, or
+        evaluation-call budgets, or multiple stopping rules, split those concerns into
+        dedicated budget and stopping objects. The current flat shape avoids empty nesting.
     AgentOptimizationConfiguration:
       type: object
       required:
         - type
         - evaluation_configuration
-        - search_configuration
+        - candidate_search_configuration
         - agent_optimization_space
       properties:
         type:
@@ -40749,12 +40779,12 @@ components:
         evaluation_configuration:
           $ref: '#/components/schemas/AgentOptimizationEvaluationConfiguration'
           description: Quality measurement configuration.
-        search_configuration:
-          $ref: '#/components/schemas/AgentOptimizationSearchConfiguration'
-          description: Candidate search configuration.
-        baseline_configuration:
-          $ref: '#/components/schemas/AgentOptimizationBaselineConfiguration'
-          description: Caller-supplied baseline configuration. Omitted when all baseline values can be resolved from the target agent.
+        candidate_search_configuration:
+          $ref: '#/components/schemas/AgentOptimizationCandidateSearchConfiguration'
+          description: Configuration for candidate search and screening.
+        baseline_agent_configuration:
+          $ref: '#/components/schemas/AgentOptimizationBaselineAgentConfiguration'
+          description: Caller-supplied baseline agent configuration. Omitted when all baseline values can be resolved from the target agent.
         agent_optimization_space:
           $ref: '#/components/schemas/AgentOptimizationSpace'
           description: Agent attributes and alternatives available to the search.
@@ -40789,9 +40819,11 @@ components:
       properties:
         name:
           type: string
+          minLength: 1
           description: Criterion name.
         instruction:
           type: string
+          minLength: 1
           description: Criterion instruction / description.
       description: 'Evaluation criterion: a name + instruction pair used for per-item scoring.'
     AgentOptimizationDatasetInput:
@@ -40825,6 +40857,7 @@ components:
       properties:
         query:
           type: string
+          minLength: 1
           description: The user query / prompt.
         ground_truth:
           type: string
@@ -40842,6 +40875,10 @@ components:
             $ref: '#/components/schemas/AgentOptimizationDatasetCriterion'
           description: Per-item evaluation criteria. Omitted when the item has no custom criteria.
       description: A single item in an inline dataset.
+    AgentOptimizationDeploymentName:
+      type: string
+      minLength: 1
+      description: A non-empty model deployment name in the Foundry project.
     AgentOptimizationEstimateBand:
       type: object
       required:
@@ -40861,7 +40898,7 @@ components:
           type: number
           format: double
           description: Upper bound.
-      description: A low/typical/ceiling range for an estimated quantity.
+      description: A low/typical/ceiling range for an estimated quantity. Expected values may be fractional, including estimated model-call counts.
     AgentOptimizationEstimateDollars:
       type: object
       required:
@@ -40893,13 +40930,12 @@ components:
     AgentOptimizationEstimateInputs:
       type: object
       required:
-        - target_configuration
         - optimization_model_configuration
         - optimization_configuration
       properties:
         target_configuration:
           $ref: '#/components/schemas/AgentOptimizationTargetConfiguration'
-          description: Foundry agent whose configuration would be optimized.
+          description: Foundry agent whose configuration would be optimized. Omitted when the workflow does not target a registered Foundry agent.
         optimization_model_configuration:
           $ref: '#/components/schemas/AgentOptimizationModelConfiguration'
           description: Model deployment that would generate candidate changes.
@@ -40910,9 +40946,9 @@ components:
     AgentOptimizationEstimateResponse:
       type: object
       required:
-        - dataset_rows
+        - validation_dataset_rows
       properties:
-        dataset_rows:
+        validation_dataset_rows:
           type: integer
           format: int32
           description: Validation-set size (in rows) the estimate was computed against. This is the server-resolved input used by the estimator; useful for clients that did not supply or know the row count when validation_dataset was passed as a registered reference.
@@ -40920,7 +40956,7 @@ components:
           type: object
           unevaluatedProperties:
             $ref: '#/components/schemas/AgentOptimizationEstimateBand'
-          description: Exact per-layer model call bands, keyed by layer name (e.g. 'agent', 'judge', 'reflection'). Omitted when the selected search strategy cannot produce call-count estimates.
+          description: Estimated per-layer model-call bands, keyed by layer name (e.g. 'agent', 'judge', 'reflection'). Typical values are calibrated expectations and may be fractional. Omitted when the selected search strategy cannot produce call-count estimates.
         dollars:
           $ref: '#/components/schemas/AgentOptimizationEstimateDollars'
           description: Modeled dollar estimate. Omitted when no contributing model has pricing data.
@@ -40946,6 +40982,7 @@ components:
           items:
             $ref: '#/components/schemas/AgentOptimizationEvaluator'
           minItems: 1
+          maxItems: 20
           description: Evaluator references used to score candidate quality.
         evaluation_model:
           $ref: '#/components/schemas/AgentOptimizationModelConfiguration'
@@ -40962,7 +40999,6 @@ components:
           enum:
             - improved
             - no_improvement
-            - stopped_early
       description: Outcome of an optimization job that evaluated candidates against a baseline.
     AgentOptimizationEvaluator:
       type: object
@@ -40971,9 +41007,11 @@ components:
       properties:
         name:
           type: string
+          minLength: 1
           description: Evaluator name.
         version:
           type: string
+          minLength: 1
           description: Evaluator version. Omitted to use the latest version.
         initialization_parameters:
           type: object
@@ -40993,9 +41031,10 @@ components:
           description: Dataset input type discriminator.
         data_generation_job_id:
           type: string
+          minLength: 1
           description: Identifier of the data-generation job to await and resolve.
         data_generation_job_status:
-          type: string
+          $ref: '#/components/schemas/JobStatus'
           description: Current status of the referenced data-generation job. Omitted before status is available.
           readOnly: true
         error:
@@ -41004,7 +41043,7 @@ components:
           readOnly: true
       allOf:
         - $ref: '#/components/schemas/AgentOptimizationDatasetInput'
-      description: Reference to a data-generation job whose output is used as the training dataset.
+      description: Reference to a data-generation job whose output is used as the training dataset. Once resolved, responses use the reference dataset variant and retain the generation job ID, status, and error as provenance.
     AgentOptimizationGoal:
       anyOf:
         - type: string
@@ -41040,6 +41079,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AgentOptimizationDatasetItem'
+          minItems: 1
           description: Dataset items.
       allOf:
         - $ref: '#/components/schemas/AgentOptimizationDatasetInput'
@@ -41093,7 +41133,6 @@ components:
     AgentOptimizationJobInputs:
       type: object
       required:
-        - target_configuration
         - optimization_model_configuration
         - optimization_configuration
       properties:
@@ -41102,7 +41141,7 @@ components:
           description: Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics.
         target_configuration:
           $ref: '#/components/schemas/AgentOptimizationTargetConfiguration'
-          description: Foundry agent whose configuration is optimized.
+          description: Foundry agent whose configuration is optimized. Omitted when the workflow does not target a registered Foundry agent.
         optimization_model_configuration:
           $ref: '#/components/schemas/AgentOptimizationModelConfiguration'
           description: Model deployment used to generate candidate changes.
@@ -41224,7 +41263,7 @@ components:
         - deployment_name
       properties:
         deployment_name:
-          type: string
+          $ref: '#/components/schemas/AgentOptimizationDeploymentName'
           description: Model deployment name in the Foundry project.
       description: Identifies a model deployment used by an optimization or evaluation step.
     AgentOptimizationReferenceDatasetInput:
@@ -41240,16 +41279,18 @@ components:
           description: Dataset input type discriminator.
         name:
           type: string
+          minLength: 1
           description: Registered dataset name.
         version:
           type: string
+          minLength: 1
           description: Dataset version. Omitted to use the latest version.
         data_generation_job_id:
           type: string
           description: Originating data-generation job identifier. Omitted when the dataset was not resolved from a generation job.
           readOnly: true
         data_generation_job_status:
-          type: string
+          $ref: '#/components/schemas/JobStatus'
           description: Current status of the originating data-generation job. Omitted when the dataset was not resolved from a generation job.
           readOnly: true
         error:
@@ -41259,27 +41300,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentOptimizationDatasetInput'
       description: Reference to a registered Foundry dataset.
-    AgentOptimizationSearchConfiguration:
-      $ref: '#/components/schemas/GepaSearchConfiguration'
-      description: Supported search configurations. Additional strategies can define independent settings.
-    AgentOptimizationSearchConfigurationBase:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          description: Search strategy discriminator.
-      discriminator:
-        propertyName: type
-        mapping:
-          gepa: '#/components/schemas/GepaSearchConfiguration'
-      description: |-
-        GEPA search settings.
-
-        Review consideration: if search later gains multiple wall-clock, token, cost, or
-        evaluation-call budgets, or multiple stopping rules, split those concerns into
-        dedicated budget and stopping objects. The current flat shape avoids empty nesting.
     AgentOptimizationSkill:
       type: object
       required:
@@ -41288,6 +41308,7 @@ components:
       properties:
         name:
           type: string
+          minLength: 1
           description: Stable skill name.
         description:
           type: string
@@ -41299,19 +41320,20 @@ components:
       description: A skill in the manually supplied agent optimization surface.
     AgentOptimizationSpace:
       type: object
-      required:
-        - target_attributes
       properties:
         target_attributes:
           type: array
           items:
             $ref: '#/components/schemas/TargetAttribute'
           minItems: 1
-          description: Agent attributes the optimizer may change.
+          description: Agent attributes the optimizer may change. Defaults to instruction when omitted. For reduce_cost, model selection is additionally implied.
+          default:
+            - instruction
         model_search_space:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/AgentOptimizationDeploymentName'
+          minItems: 1
           description: Alternative model deployments available when model is an optimization target. Required when goal is reduce_cost or target_attributes includes model; otherwise omitted.
       description: The agent attributes and alternative values available to an agent-optimization search.
     AgentOptimizationTargetConfiguration:
@@ -41327,12 +41349,23 @@ components:
           description: Target type discriminator.
         name:
           type: string
+          minLength: 1
           maxLength: 256
           description: Registered Foundry agent name.
         version:
           type: string
+          minLength: 1
           description: Pinned agent version. Omitted to resolve and pin the latest version.
       description: Identifies the Foundry agent that owns the configuration being optimized.
+    AgentOptimizationTerminationReason:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - completed
+            - budget_exhausted
+            - candidate_screening_stalled
+      description: Reason an evaluated candidate search terminated.
     AgentOptimizationTokenUsageEntry:
       type: object
       required:
@@ -45979,6 +46012,9 @@ components:
         evaluation_outcome:
           $ref: '#/components/schemas/AgentOptimizationEvaluationOutcome'
           description: Outcome of comparative evaluation. Omitted until the evaluated job reaches a terminal state.
+        termination_reason:
+          $ref: '#/components/schemas/AgentOptimizationTerminationReason'
+          description: Reason the candidate search terminated. Omitted until the evaluated job reaches a terminal state.
       allOf:
         - $ref: '#/components/schemas/AgentOptimizationJobResult'
       description: Partial or terminal result for quality or cost optimization.
@@ -47276,40 +47312,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    GepaSearchConfiguration:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - gepa
-          description: Search strategy discriminator.
-        max_candidates:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 20
-          description: Maximum number of non-baseline candidates to fully evaluate. Defaults to 2 when omitted.
-          default: 2
-        candidate_screening_sample_size:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 100
-          description: Number of training-dataset rows sampled to screen each proposed candidate before full validation. Defaults to 3 when omitted.
-          default: 3
-        max_consecutive_failed_candidate_screens:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 50
-          description: Maximum number of consecutive proposed candidates that may fail screening before the search stops early. Defaults to 5 when omitted.
-          default: 5
-      allOf:
-        - $ref: '#/components/schemas/AgentOptimizationSearchConfigurationBase'
-      description: Genetic Evolutionary Prompt Architecture search configuration.
     GitHubIssueEvent:
       anyOf:
         - type: string
@@ -76697,7 +76699,6 @@ components:
         - candidate_id
         - promoted_at
         - agent_name
-        - agent_version
         - created_new_version
       properties:
         candidate_id:
@@ -76711,7 +76712,7 @@ components:
           description: Name of the Foundry agent associated with the recorded promotion.
         agent_version:
           type: string
-          description: Version of the Foundry agent associated with the promotion.
+          description: Version of the Foundry agent created or associated with the promotion. Omitted when no version was created or recorded.
         created_new_version:
           type: boolean
           description: Whether a new agent version was created during promotion.
@@ -76722,7 +76723,7 @@ components:
         - candidate_id
         - promoted_at
         - agent_name
-        - agent_version
+        - created_new_version
       properties:
         candidate_id:
           type: string
@@ -76735,7 +76736,10 @@ components:
           description: Name of the Foundry agent associated with the recorded promotion.
         agent_version:
           type: string
-          description: Version of the Foundry agent associated with the recorded promotion.
+          description: Version of the Foundry agent created or associated with the recorded promotion. Omitted when no version was created or recorded.
+        created_new_version:
+          type: boolean
+          description: Whether promotion created a new Foundry agent version.
       description: Promotion metadata recorded for a candidate. Prompt-agent promotion creates a new version; hosted-agent promotion currently records metadata without deploying a new version.
     PromptAgentDefinition:
       type: object
@@ -76890,7 +76894,7 @@ components:
           enum:
             - prompt_optimization
           description: Optimization type discriminator.
-        optimization_context:
+        context:
           type: array
           items:
             $ref: '#/components/schemas/OptimizationContextItem'
@@ -78233,6 +78237,7 @@ components:
           description: Optimization context type discriminator.
         prompt:
           type: string
+          minLength: 1
           description: Developer guidance describing the desired changes.
       allOf:
         - $ref: '#/components/schemas/OptimizationContext'
