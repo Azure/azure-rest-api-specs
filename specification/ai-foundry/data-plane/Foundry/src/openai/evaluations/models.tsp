@@ -868,7 +868,7 @@ model EvalRun is OpenAI.EvalRun {
   /** The level at which evaluation is performed. Defaults to 'turn' if not specified. */
   evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
 
-  /** Preview-only. Datasets produced by the evaluation run. Omitted when no datasets were generated. This field may change in a future API version. */
+  /** Datasets produced by the evaluation run. Omitted when no datasets were generated. */
   @visibility(Lifecycle.Read)
   output_datasets?: EvaluationOutputDataset[];
 
