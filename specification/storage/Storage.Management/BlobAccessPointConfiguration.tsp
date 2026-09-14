@@ -140,8 +140,12 @@ model BlobAccessPointPrivateLinkConnectionProperties
   privateLinkIdType: BlobAccessPointPrivateLinkIdType;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("The Azure resource ID of the backing Private Link resource.")
-  privateLinkId: string;
+  @doc("The Azure resource ID of the backing Private Link service.")
+  privateLinkId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/privateLinkServices";
+    }
+  ]>;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The Private Link group ID, when required by the backing resource.")

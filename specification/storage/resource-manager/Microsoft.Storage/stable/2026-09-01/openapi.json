@@ -10657,11 +10657,19 @@
         },
         "privateLinkId": {
           "type": "string",
-          "description": "The Azure resource ID of the backing Private Link resource.",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the backing Private Link service.",
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateLinkServices"
+              }
+            ]
+          }
         },
         "privateLinkGroupId": {
           "type": "string",
