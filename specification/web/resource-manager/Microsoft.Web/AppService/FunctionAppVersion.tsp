@@ -265,7 +265,7 @@ interface FunctionAppVersions {
   >;
 
   /** Lists the application settings of a Function App version. */
-  @action("config/appsettings/list")
+  @action("listAppSettings")
   listAppSettings is ArmResourceActionSync<
     FunctionAppVersion,
     void,

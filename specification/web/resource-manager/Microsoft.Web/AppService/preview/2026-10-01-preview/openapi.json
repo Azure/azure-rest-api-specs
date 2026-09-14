@@ -11120,13 +11120,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deploymentLabels/production": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deploymentLabels/{labelName}": {
       "get": {
         "operationId": "DeploymentLabels_Get",
         "tags": [
           "DeploymentLabels"
         ],
-        "description": "Gets the production deployment label.",
+        "description": "Gets a deployment label. The preview supports only the production label.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -11143,6 +11143,14 @@
             "description": "Name of the app.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "labelName",
+            "in": "path",
+            "description": "The name of the DeploymentLabel",
+            "required": true,
+            "type": "string",
+            "pattern": "^production$"
           }
         ],
         "responses": {
@@ -11170,7 +11178,7 @@
         "tags": [
           "DeploymentLabels"
         ],
-        "description": "Assigns a retained Function App version to production.",
+        "description": "Assigns a retained Function App version to a deployment label. The preview supports only the production label.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -11187,6 +11195,14 @@
             "description": "Name of the app.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "labelName",
+            "in": "path",
+            "description": "The name of the DeploymentLabel",
+            "required": true,
+            "type": "string",
+            "pattern": "^production$"
           },
           {
             "name": "resource",
@@ -11226,7 +11242,7 @@
         "tags": [
           "DeploymentLabels"
         ],
-        "description": "Clears the production assignment and safely restores legacy serving authority.",
+        "description": "Clears a deployment label assignment. Deleting production safely restores legacy serving authority.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -11243,6 +11259,14 @@
             "description": "Name of the app.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "labelName",
+            "in": "path",
+            "description": "The name of the DeploymentLabel",
+            "required": true,
+            "type": "string",
+            "pattern": "^production$"
           }
         ],
         "responses": {
@@ -13084,7 +13108,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functionAppVersions/{versionName}/config/appsettings/list": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functionAppVersions/{versionName}/listAppSettings": {
       "post": {
         "operationId": "FunctionAppVersions_ListAppSettings",
         "tags": [
@@ -44920,7 +44944,7 @@
     },
     "DeploymentLabel": {
       "type": "object",
-      "description": "The system-managed production deployment label.",
+      "description": "A deployment label. The preview supports only the system-managed production label.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DeploymentLabelProperties",
@@ -44935,11 +44959,11 @@
     },
     "DeploymentLabelProperties": {
       "type": "object",
-      "description": "The properties of a production deployment label.",
+      "description": "The properties of a deployment label.",
       "properties": {
         "targetVersionResourceId": {
           "type": "string",
-          "description": "The resource ID of the Function App version to assign to production.",
+          "description": "The resource ID of the Function App version to assign to this label.",
           "x-ms-mutability": [
             "update",
             "create"
@@ -44948,14 +44972,11 @@
         "systemManaged": {
           "type": "boolean",
           "description": "Whether the deployment label is managed by the system.",
-          "enum": [
-            true
-          ],
           "readOnly": true
         },
         "activeVersionResourceId": {
           "type": "string",
-          "description": "The resource ID of the Function App version currently assigned to production.",
+          "description": "The resource ID of the Function App version currently assigned to this label.",
           "readOnly": true
         },
         "provisioningState": {

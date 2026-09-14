@@ -15,17 +15,17 @@ using TypeSpec.Versioning;
 namespace Microsoft.Web;
 
 @added(Versions.v2026_10_01_preview)
-@doc("The properties of a production deployment label.")
+@doc("The properties of a deployment label.")
 model DeploymentLabelProperties {
-  /** The resource ID of the Function App version to assign to production. */
+  /** The resource ID of the Function App version to assign to this label. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   targetVersionResourceId: string;
 
   /** Whether the deployment label is managed by the system. */
   @visibility(Lifecycle.Read)
-  systemManaged?: true;
+  systemManaged?: boolean;
 
-  /** The resource ID of the Function App version currently assigned to production. */
+  /** The resource ID of the Function App version currently assigned to this label. */
   @visibility(Lifecycle.Read)
   activeVersionResourceId?: string;
 
@@ -35,9 +35,8 @@ model DeploymentLabelProperties {
 }
 
 @added(Versions.v2026_10_01_preview)
-@singleton("production")
 @parentResource(Site)
-@doc("The system-managed production deployment label.")
+@doc("A deployment label. The preview supports only the system-managed production label.")
 model DeploymentLabel
   is Azure.ResourceManager.ProxyResource<DeploymentLabelProperties> {
   ...ResourceNameParameter<
@@ -53,18 +52,18 @@ model DeploymentLabel
 @armResourceOperations
 @doc("Operations for deployment labels.")
 interface DeploymentLabels {
-  /** Gets the production deployment label. */
+  /** Gets a deployment label. The preview supports only the production label. */
   get is ArmResourceRead<DeploymentLabel, Error = DefaultErrorResponse>;
 
-  /** Assigns a retained Function App version to production. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The production deployment label is a system-managed singleton assignment and a successful assignment returns 200."
+  /** Assigns a retained Function App version to a deployment label. The preview supports only the production label. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The Phase 1 production deployment label assignment returns 200."
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DeploymentLabel,
     Response = ArmResponse<DeploymentLabel>,
     Error = DefaultErrorResponse
   >;
 
-  /** Clears the production assignment and safely restores legacy serving authority. */
+  /** Clears a deployment label assignment. Deleting production safely restores legacy serving authority. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Clearing the production assignment completes synchronously with 204 while pod drain continues in the background."
   delete is ArmResourceDeleteSync<
     DeploymentLabel,
