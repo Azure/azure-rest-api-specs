@@ -6287,6 +6287,117 @@ model RaiBindingListResult {
 @@identifiers(ResourceSkuListResult.value, #["resourceType", "name", "kind"]);
 
 /**
+ * Properties of an adapter deployment.
+ */
+@added(Versions.v2026_09_15_preview)
+model AdapterDeploymentProperties {
+  /**
+   * The immutable Project Models version produced by Foundry fine-tuning.
+   * The identifier uses the Azure AI project model URI format.
+   * The service validates LoRA weight type, protected status, provenance,
+   * compatibility metadata, and registration state.
+   */
+  @pattern("^azure(?:ai)://accounts/[^/]+/projects/[^/]+/models/[^/]+/versions/[^/]+$")
+  sourceModelId: string;
+
+  /**
+   * The name of the compatible managed compute parent deployment.
+   * The service resolves this name within the adapter's owning account; full
+   * ARM resource IDs and cross-account references are not accepted. It cannot
+   * equal the adapter deployment's resource name. Updating this value
+   * re-targets the adapter while its source model remains unchanged.
+   */
+  targetDeploymentName: string;
+
+  /**
+   * The managed compute deployment currently serving the adapter.
+   * During re-targeting this remains the prior deployment until atomic cutover.
+   */
+  @visibility(Lifecycle.Read)
+  activeTargetDeploymentName?: string;
+
+  /**
+   * The provisioning state of the adapter deployment.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * Information about the most recently requested lifecycle operation.
+   */
+  @visibility(Lifecycle.Read)
+  lastOperation?: AdapterDeploymentLastOperation;
+}
+
+/**
+ * Lifecycle operation types reported by an adapter deployment.
+ */
+@added(Versions.v2026_09_15_preview)
+union AdapterDeploymentOperationType {
+  string,
+
+  /** Creates the adapter deployment. */
+  Create: "Create",
+
+  /** Re-targets the adapter deployment. */
+  Update: "Update",
+
+  /** Deletes the adapter deployment. */
+  Delete: "Delete",
+}
+
+/**
+ * Lifecycle operation states reported by an adapter deployment.
+ */
+@added(Versions.v2026_09_15_preview)
+union AdapterDeploymentOperationState {
+  string,
+
+  /** The operation was accepted. */
+  Accepted: "Accepted",
+
+  /** The operation is running. */
+  Running: "Running",
+
+  /** The operation completed successfully. */
+  Succeeded: "Succeeded",
+
+  /** The operation failed. */
+  Failed: "Failed",
+}
+
+/**
+ * The most recently requested adapter lifecycle operation.
+ */
+@added(Versions.v2026_09_15_preview)
+model AdapterDeploymentLastOperation {
+  /**
+   * The type of lifecycle operation.
+   */
+  type: AdapterDeploymentOperationType;
+
+  /**
+   * The current or terminal operation state.
+   */
+  status: AdapterDeploymentOperationState;
+
+  /**
+   * The target deployment requested by a create or re-target operation.
+   */
+  requestedTargetDeploymentName?: string;
+
+  /**
+   * The time at which the operation started.
+   */
+  startedAt: utcDateTime;
+
+  /**
+   * The time at which the operation reached a terminal state.
+   */
+  completedAt?: utcDateTime;
+}
+
+/**
  * The list of Cognitive Services RaiBlocklist Items Names.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'RaiBlocklistItemsBulkDeleteRequest' preserved for backward compatibility with existing API surface"
