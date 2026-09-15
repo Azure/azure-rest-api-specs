@@ -502,7 +502,7 @@ union DrillReportFinalizationState {
 }
 
 /** Normal fault eligibility of a regional drill resource, independent of inclusion and readiness. */
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_30_preview)
 union FaultEligibility {
   string,
 
@@ -517,7 +517,7 @@ union FaultEligibility {
 }
 
 /** Reason requiring attention in a regional resource's normal fault eligibility evaluation. */
-@added(Versions.v2026_08_31_preview)
+@added(Versions.v2026_09_30_preview)
 union FaultEligibilityAttentionReason {
   string,
 
