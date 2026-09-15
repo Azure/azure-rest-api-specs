@@ -259,11 +259,46 @@ jobs:
           path: repositories/azure-rest-api-specs
           persist-credentials: false
 
+      - name: Resolve target SDK repository
+        if: steps.resolve-trigger.outputs.should-run == 'true'
+        id: resolve-sdk-repository
+        uses: actions/github-script@v9
+        env:
+          SDK_LANGUAGE: ${{ steps.resolve-trigger.outputs.sdk-language || steps.read-trigger.outputs.sdk-language }}
+        with:
+          script: |
+            const repositories = {
+              android: "azure-sdk-for-android",
+              cpp: "azure-sdk-for-cpp",
+              dotnet: "azure-sdk-for-net",
+              go: "azure-sdk-for-go",
+              java: "azure-sdk-for-java",
+              javascript: "azure-sdk-for-js",
+              python: "azure-sdk-for-python",
+              rust: "azure-sdk-for-rust",
+            };
+            const sdkLanguage = process.env.SDK_LANGUAGE.trim().toLowerCase();
+            const repository = repositories[sdkLanguage];
+            if (!repository) {
+              throw new Error(`Unsupported SDK language: ${process.env.SDK_LANGUAGE}`);
+            }
+            core.setOutput("repository", repository);
+
+      - name: Checkout target SDK repository
+        if: steps.resolve-trigger.outputs.should-run == 'true'
+        uses: actions/checkout@v7
+        with:
+          repository: Azure/${{ steps.resolve-sdk-repository.outputs.repository }}
+          ref: main
+          path: repositories/${{ steps.resolve-sdk-repository.outputs.repository }}
+          persist-credentials: false
+
       - name: Mitigate SDK breaking changes
         if: steps.resolve-trigger.outputs.should-run == 'true'
         shell: bash
         env:
           ANALYSIS_RESULTS_PATH: ${{ runner.temp }}/analysis-results
+          SDK_REPOSITORY_PATH: ${{ github.workspace }}/repositories/${{ steps.resolve-sdk-repository.outputs.repository }}
           SPEC_REPOSITORY_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs
         run: |
           set -euo pipefail
@@ -274,6 +309,7 @@ jobs:
           test -f "$manifest"
           while IFS= read -r project; do
             typespec_project_path="$(jq -r '.typespecProjectPath' <<< "$project")"
+            package_name="$(jq -r '.packageName' <<< "$project")"
             results_path="$(jq -r '.resultsPath' <<< "$project")"
             breaking_changes_path="$ANALYSIS_RESULTS_PATH/$results_path/breaking-changes.json"
             test -f "$breaking_changes_path"
@@ -294,8 +330,23 @@ jobs:
               exit 1
             fi
 
+            package_paths=()
+            while IFS= read -r -d '' tsp_location_path; do
+              candidate_package_path="$(dirname "$tsp_location_path")"
+              if [[ "$(basename "$candidate_package_path")" == "$package_name" ]]; then
+                package_paths+=("$(realpath "$candidate_package_path")")
+              fi
+            done < <(find "$SDK_REPOSITORY_PATH" -type f -name tsp-location.yaml -print0)
+            if [[ ${#package_paths[@]} -ne 1 ]]; then
+              echo "Expected exactly one SDK package named $package_name, found ${#package_paths[@]}." >&2
+              printf '  %s\n' "${package_paths[@]}" >&2
+              exit 1
+            fi
+            package_path="${package_paths[0]}"
+
             azsdk typespec client customized-update \
               --tsp-project-path "$tsp_project_path" \
+              --package-path "$package_path" \
               --customization-request "$customization_request" \
               --edit-scope 2
           done < <(jq -c '.[]' "$manifest")
