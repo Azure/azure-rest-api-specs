@@ -2020,7 +2020,7 @@
             "description": "The name of the VM application. When creating the resource, this name must match the application name in the selected gallery reference.",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]+"
+            "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,78}[A-Za-z0-9_-])?$"
           },
           {
             "name": "$expand",
@@ -2082,7 +2082,7 @@
             "description": "The name of the VM application. When creating the resource, this name must match the application name in the selected gallery reference.",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]+"
+            "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,78}[A-Za-z0-9_-])?$"
           },
           {
             "name": "resource",
@@ -2109,12 +2109,7 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
-                "format": "uri",
                 "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -2131,12 +2126,12 @@
           }
         },
         "x-ms-examples": {
-          "Create a VM application": {
+          "Create or update a VM application": {
             "$ref": "./examples/application/VMApplications_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/VmApplication"
         },
         "x-ms-long-running-operation": true
@@ -2173,7 +2168,7 @@
             "description": "The name of the VM application. When creating the resource, this name must match the application name in the selected gallery reference.",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]+"
+            "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,78}[A-Za-z0-9_-])?$"
           },
           {
             "name": "properties",
@@ -2195,11 +2190,6 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -2261,18 +2251,13 @@
             "description": "The name of the VM application. When creating the resource, this name must match the application name in the selected gallery reference.",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]+"
+            "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,78}[A-Za-z0-9_-])?$"
           }
         ],
         "responses": {
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -8988,7 +8973,7 @@
           "description": "Indicates whether an application operation failure causes the deployment to fail."
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/VmApplicationProvisioningState",
           "description": "The provisioning state of the VM application.",
           "readOnly": true
         },
@@ -8998,6 +8983,55 @@
           "readOnly": true
         }
       }
+    },
+    "VmApplicationProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a VM application.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "VmApplicationProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The VM application is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The VM application is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The VM application is being deleted."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "VmApplicationUpdate": {
       "type": "object",

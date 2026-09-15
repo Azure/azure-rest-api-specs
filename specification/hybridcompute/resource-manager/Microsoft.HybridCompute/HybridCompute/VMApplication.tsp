@@ -23,7 +23,7 @@ model VmApplication
     Resource = VmApplication,
     KeyName = "applicationName",
     SegmentName = "applications",
-    NamePattern = "[a-zA-Z0-9-_\\.]+"
+    NamePattern = "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,78}[A-Za-z0-9_-])?$"
   >;
 }
 
@@ -50,11 +50,7 @@ interface VmApplications {
   /**
    * Creates or updates a VM application.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    VmApplication,
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = VmApplication> &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VmApplication>;
 
   /**
    * Updates a VM application.
@@ -62,18 +58,13 @@ interface VmApplications {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     VmApplication,
-    PatchModel = VmApplicationUpdate,
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = VmApplication> &
-      Azure.Core.Foundations.RetryAfterHeader
+    PatchModel = VmApplicationUpdate
   >;
 
   /**
    * Deletes a VM application.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<
-    VmApplication,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<VmApplication>;
 
   /**
    * Lists the VM applications installed on a hybrid machine.
