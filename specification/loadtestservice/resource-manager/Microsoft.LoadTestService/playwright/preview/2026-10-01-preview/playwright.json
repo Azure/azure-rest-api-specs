@@ -1035,9 +1035,9 @@
             ]
           }
         },
-        "recordingIdentity": {
-          "$ref": "#/definitions/RecordingIdentity",
-          "description": "The managed identity used to upload recording artifacts to the storage account."
+        "sessionArtifactIdentity": {
+          "$ref": "#/definitions/SessionArtifactIdentity",
+          "description": "The managed identity used to upload session artifacts to the storage account."
         }
       }
     },
@@ -1141,9 +1141,9 @@
           "$ref": "#/definitions/EnablementStatus",
           "description": "Indicates whether session artifact collection is enabled for the workspace."
         },
-        "recordingIdentity": {
-          "$ref": "#/definitions/RecordingIdentityUpdate",
-          "description": "The managed identity used to upload recording artifacts to the storage account."
+        "sessionArtifactIdentity": {
+          "$ref": "#/definitions/SessionArtifactIdentityUpdate",
+          "description": "The managed identity used to upload session artifacts to the storage account."
         }
       }
     },
@@ -1196,13 +1196,13 @@
       },
       "readOnly": true
     },
-    "RecordingIdentity": {
+    "SessionArtifactIdentity": {
       "type": "object",
-      "description": "The managed identity used to upload recording artifacts.",
+      "description": "The managed identity used to upload session artifacts.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/RecordingIdentityType",
-          "description": "The type of managed identity used to upload recording artifacts."
+          "$ref": "#/definitions/SessionArtifactIdentityType",
+          "description": "The type of managed identity used to upload session artifacts."
         },
         "resourceId": {
           "type": "string",
@@ -1221,15 +1221,15 @@
         "type"
       ]
     },
-    "RecordingIdentityType": {
+    "SessionArtifactIdentityType": {
       "type": "string",
-      "description": "The type of managed identity used to upload recording artifacts.",
+      "description": "The type of managed identity used to upload session artifacts.",
       "enum": [
         "SystemAssigned",
         "UserAssigned"
       ],
       "x-ms-enum": {
-        "name": "RecordingIdentityType",
+        "name": "SessionArtifactIdentityType",
         "modelAsString": true,
         "values": [
           {
@@ -1245,13 +1245,13 @@
         ]
       }
     },
-    "RecordingIdentityUpdate": {
+    "SessionArtifactIdentityUpdate": {
       "type": "object",
-      "description": "The managed identity used to upload recording artifacts during an update operation.",
+      "description": "The managed identity used to upload session artifacts during an update operation.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/RecordingIdentityType",
-          "description": "The type of managed identity used to upload recording artifacts."
+          "$ref": "#/definitions/SessionArtifactIdentityType",
+          "description": "The type of managed identity used to upload session artifacts."
         },
         "resourceId": {
           "type": "string",

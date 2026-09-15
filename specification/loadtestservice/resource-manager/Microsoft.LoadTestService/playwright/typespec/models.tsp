@@ -63,15 +63,15 @@ model PlaywrightWorkspaceProperties {
   sessionArtifacts?: EnablementStatus = EnablementStatus.Disabled;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The managed identity used to upload recording artifacts to the storage account.")
-  recordingIdentity?: RecordingIdentity;
+  @doc("The managed identity used to upload session artifacts to the storage account.")
+  sessionArtifactIdentity?: SessionArtifactIdentity;
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The managed identity used to upload recording artifacts.")
-model RecordingIdentity {
-  @doc("The type of managed identity used to upload recording artifacts.")
-  type: RecordingIdentityType;
+@doc("The managed identity used to upload session artifacts.")
+model SessionArtifactIdentity {
+  @doc("The type of managed identity used to upload session artifacts.")
+  type: SessionArtifactIdentityType;
 
   @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
   resourceId?: Azure.Core.armResourceIdentifier<[
@@ -82,8 +82,8 @@ model RecordingIdentity {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The type of managed identity used to upload recording artifacts.")
-union RecordingIdentityType {
+@doc("The type of managed identity used to upload session artifacts.")
+union SessionArtifactIdentityType {
   string,
 
   @doc("Use the workspace system-assigned managed identity.")
@@ -94,10 +94,10 @@ union RecordingIdentityType {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The managed identity used to upload recording artifacts during an update operation.")
-model RecordingIdentityUpdate {
-  @doc("The type of managed identity used to upload recording artifacts.")
-  type?: RecordingIdentityType;
+@doc("The managed identity used to upload session artifacts during an update operation.")
+model SessionArtifactIdentityUpdate {
+  @doc("The type of managed identity used to upload session artifacts.")
+  type?: SessionArtifactIdentityType;
 
   @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
   resourceId?: Azure.Core.armResourceIdentifier<[
@@ -128,8 +128,8 @@ model PlaywrightWorkspaceUpdateProperties {
   sessionArtifacts?: EnablementStatus;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The managed identity used to upload recording artifacts to the storage account.")
-  recordingIdentity?: RecordingIdentityUpdate;
+  @doc("The managed identity used to upload session artifacts to the storage account.")
+  sessionArtifactIdentity?: SessionArtifactIdentityUpdate;
 }
 
 @doc("The status of the last resource operation.")
