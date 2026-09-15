@@ -20,6 +20,7 @@ on:
 permissions:
   actions: read
   contents: write
+  copilot-requests: write
   issues: write
   pull-requests: write
 
@@ -307,12 +308,14 @@ jobs:
           test -x "$copilot_path"
           "$copilot_path" --version
           echo "path=$copilot_path" >> "$GITHUB_OUTPUT"
-      
+
       - name: Mitigate SDK breaking changes
         if: steps.resolve-trigger.outputs.should-run == 'true'
         shell: bash
         env:
           ANALYSIS_RESULTS_PATH: ${{ runner.temp }}/analysis-results
+          AZSDK_COPILOT_CLI_PATH: ${{ steps.setup-copilot-cli.outputs.path }}
+          AZSDK_COPILOT_GITHUB_TOKEN: ${{ github.token }}
           SDK_REPOSITORY_PATH: ${{ github.workspace }}/repositories/${{ steps.resolve-sdk-repository.outputs.repository }}
           SPEC_REPOSITORY_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs
         run: |
