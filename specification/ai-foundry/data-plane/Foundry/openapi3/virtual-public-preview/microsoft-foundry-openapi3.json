@@ -3716,7 +3716,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/VoiceRecordingResponse"
+                  "$ref": "#/components/schemas/VoiceRecording"
                 }
               }
             }
@@ -4158,7 +4158,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/VoiceAudioItemResponse"
+                  "$ref": "#/components/schemas/VoiceAudioItem"
                 }
               }
             }
@@ -4354,7 +4354,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/VoiceGeneratedAudioItemResponse"
+                  "$ref": "#/components/schemas/VoiceGeneratedAudioItem"
                 }
               }
             }
@@ -58903,7 +58903,7 @@
                 }
               }
             ],
-            "description": "The image(s) to edit. Must be a supported image file or an array of images.\n  For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, and `gpt-image-1.5`), each image should be a `png`, `webp`, or `jpg`\n  file less than 50MB. You can provide up to 16 images.\n  `chatgpt-image-latest` follows the same input constraints as GPT image models.\n  For `dall-e-2`, you can only provide one image, and it should be a square\n  `png` file less than 4MB."
+            "description": "The image(s) to edit. Must be a supported image file or an array of images.\n  For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, and `gpt-image-2-2026-04-21`), each image should be a `png`, `webp`, or `jpg`\n  file less than 50MB. You can provide up to 16 images.\n  `chatgpt-image-latest` follows the same input constraints as GPT image models.\n  For `dall-e-2`, you can only provide one image, and it should be a square\n  `png` file less than 4MB."
           },
           "prompt": {
             "type": "string",
@@ -58926,7 +58926,7 @@
                 "type": "null"
               }
             ],
-            "description": "Allows to set transparency for the background of the generated image(s).\n  This parameter is only supported for the GPT image models. Must be one of\n  `transparent`, `opaque` or `auto` (default value). When `auto` is used, the\n  model will automatically determine the best background for the image.\n  If `transparent`, the output format needs to support transparency, so it\n  should be set to either `png` (default value) or `webp`."
+            "description": "Set the background of the generated image(s). This parameter is only\n  supported for the GPT image models. Must be one of `transparent`, `opaque`,\n  or `auto` (default value). When `auto` is used, the model will automatically\n  determine the best background for the image.\n  Transparent backgrounds are available for supported GPT Image models. For\n  `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When\n  using `transparent`, set the output format to `png` or `webp`."
           },
           "model": {
             "anyOf": [
@@ -58937,6 +58937,8 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
+                  "gpt-image-2",
+                  "gpt-image-2-2026-04-21",
                   "dall-e-2",
                   "gpt-image-1",
                   "gpt-image-1-mini",
@@ -58947,7 +58949,7 @@
                 "type": "null"
               }
             ],
-            "description": "The model to use for image generation. Defaults to `gpt-image-1.5`.",
+            "description": "The model to use for image generation. One of `dall-e-2` or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, or `chatgpt-image-latest`). Defaults to `gpt-image-1.5`.",
             "x-oaiTypeLabel": "string"
           },
           "n": {
@@ -59096,6 +59098,8 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
+                  "gpt-image-2",
+                  "gpt-image-2-2026-04-21",
                   "dall-e-2",
                   "dall-e-3",
                   "gpt-image-1",
@@ -59106,7 +59110,7 @@
                 "type": "null"
               }
             ],
-            "description": "The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.",
+            "description": "The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.",
             "x-oaiTypeLabel": "string",
             "default": "dall-e-2"
           },
@@ -59258,7 +59262,7 @@
                 "type": "null"
               }
             ],
-            "description": "Allows to set transparency for the background of the generated image(s).\n  This parameter is only supported for the GPT image models. Must be one of\n  `transparent`, `opaque` or `auto` (default value). When `auto` is used, the\n  model will automatically determine the best background for the image.\n  If `transparent`, the output format needs to support transparency, so it\n  should be set to either `png` (default value) or `webp`.",
+            "description": "Set the background of the generated image(s). This parameter is only\n  supported for the GPT image models. Must be one of `transparent`, `opaque`,\n  or `auto` (default value). When `auto` is used, the model will automatically\n  determine the best background for the image.\n  Transparent backgrounds are available for supported GPT Image models. For\n  `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When\n  using `transparent`, set the output format to `png` or `webp`.",
             "default": "auto"
           },
           "style": {
@@ -62014,6 +62018,8 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
+                  "gpt-image-2",
+                  "gpt-image-2-2026-04-21",
                   "gpt-image-1",
                   "gpt-image-1-mini",
                   "chatgpt-image-latest"
@@ -62023,7 +62029,7 @@
                 "type": "null"
               }
             ],
-            "description": "The model to use for image editing.",
+            "description": "The GPT image model to use for image editing, including `gpt-image-2` and its dated snapshot `gpt-image-2-2026-04-21`.",
             "x-oaiTypeLabel": "string",
             "default": "gpt-image-1.5"
           },
@@ -62170,7 +62176,7 @@
                 "type": "null"
               }
             ],
-            "description": "Background behavior for generated image output.",
+            "description": "Set the background of the generated image output. Transparent backgrounds are available for supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When using `transparent`, set the output format to `png` or `webp`.",
             "default": "auto"
           },
           "stream": {
@@ -65712,7 +65718,9 @@
                 "enum": [
                   "gpt-image-1",
                   "gpt-image-1-mini",
-                  "gpt-image-1.5"
+                  "gpt-image-1.5",
+                  "gpt-image-2",
+                  "gpt-image-2-2026-04-21"
                 ]
               }
             ],
@@ -65780,7 +65788,7 @@
               "opaque",
               "auto"
             ],
-            "description": "Background type for the generated image. One of `transparent`,\n  `opaque`, or `auto`. Default: `auto`.",
+            "description": "Set the background of the generated image. One of `transparent`,\n  `opaque`, or `auto`. Transparent backgrounds are available for\n  supported GPT Image models. For `gpt-image-2` and\n  `gpt-image-2-2026-04-21`, this support is in preview. When using\n  `transparent`, set the output format to `png` or `webp`. Default: `auto`.",
             "default": "auto"
           },
           "input_fidelity": {
@@ -66850,7 +66858,7 @@
           },
           "encrypted_content": {
             "type": "string",
-            "maxLength": 10485760,
+            "maxLength": 20971520,
             "description": "The encrypted content of the compaction summary."
           }
         },
@@ -68607,7 +68615,7 @@
           },
           "encrypted_content": {
             "type": "string",
-            "maxLength": 10485760,
+            "maxLength": 20971520,
             "description": "The encrypted content of the compaction summary."
           }
         },
@@ -93296,7 +93304,7 @@
             "description": "The recorded cancellation request, when cancellation was requested."
           },
           "retry_policy": {
-            "$ref": "#/components/schemas/TelephonyOutboundRetryPolicyResponse",
+            "$ref": "#/components/schemas/TelephonyOutboundRetryPolicy",
             "description": "The frozen provider-attempt retry policy."
           },
           "attempt_count": {
@@ -94174,7 +94182,7 @@
             "$ref": "#/components/schemas/TelephonyCampaignExecutionStatus"
           },
           "retry_policy": {
-            "$ref": "#/components/schemas/TelephonyOutboundRetryPolicyResponse"
+            "$ref": "#/components/schemas/TelephonyOutboundRetryPolicy"
           },
           "latest_successful_validation_id": {
             "type": "string"
@@ -94825,36 +94833,6 @@
       "TelephonyOutboundFixedIntervalRetryPolicy": {
         "type": "object",
         "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "fixed_interval"
-            ],
-            "description": "The fixed-interval retry strategy."
-          },
-          "interval": {
-            "$ref": "#/components/schemas/FoundryDurationSeconds",
-            "description": "The fixed delay in seconds between attempts. It must be 0 when `max_attempts` is 1, and from 60 through 86400 when retries are enabled."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/TelephonyOutboundRetryPolicy"
-          }
-        ],
-        "description": "A retry policy with a fixed interval between outbound call attempts.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "TelephonyOutboundFixedIntervalRetryPolicyResponse": {
-        "type": "object",
-        "required": [
           "type",
           "interval"
         ],
@@ -94873,7 +94851,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/TelephonyOutboundRetryPolicyResponse"
+            "$ref": "#/components/schemas/TelephonyOutboundRetryPolicy"
           }
         ],
         "description": "The frozen fixed-interval retry policy returned for an outbound call or campaign.",
@@ -94909,38 +94887,6 @@
           }
         },
         "description": "The retry policy for one durable outbound call intent. `max_attempts` includes the first attempt. Strategy-specific settings are defined by the derived policy.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "TelephonyOutboundRetryPolicyResponse": {
-        "type": "object",
-        "required": [
-          "type",
-          "max_attempts"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/TelephonyOutboundRetryPolicyType",
-            "description": "The retry strategy."
-          },
-          "max_attempts": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 5,
-            "description": "The maximum number of provider attempts, including the first attempt."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "fixed_interval": "#/components/schemas/TelephonyOutboundFixedIntervalRetryPolicyResponse"
-          }
-        },
-        "description": "The frozen retry policy returned for an outbound call or campaign.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -98879,7 +98825,7 @@
           ]
         }
       },
-      "VoiceAudioItemResponse": {
+      "VoiceAudioItem": {
         "type": "object",
         "required": [
           "conversation_id",
@@ -99057,7 +99003,7 @@
           ]
         }
       },
-      "VoiceGeneratedAudioItemResponse": {
+      "VoiceGeneratedAudioItem": {
         "type": "object",
         "required": [
           "conversation_id",
@@ -99200,36 +99146,7 @@
           ]
         }
       },
-      "VoiceRecordingChannelLayout": {
-        "type": "object",
-        "required": [
-          "left",
-          "right"
-        ],
-        "properties": {
-          "left": {
-            "type": "string",
-            "enum": [
-              "user"
-            ],
-            "description": "The role carried on the left channel. Always `user`."
-          },
-          "right": {
-            "type": "string",
-            "enum": [
-              "agent"
-            ],
-            "description": "The role carried on the right channel. Always `agent`."
-          }
-        },
-        "description": "The role assigned to each channel of a merged stereo voice recording.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceRecordingResponse": {
+      "VoiceRecording": {
         "type": "object",
         "required": [
           "conversation_id",
@@ -99273,6 +99190,35 @@
           }
         },
         "description": "Metadata for the merged, whole-call stereo recording of a voice conversation (user audio on the left channel,\nagent audio on the right). Built once from the per-turn segments after the session ends and durably cached.\nThe common metadata (format, sample rate, channels, channel layout, duration) is returned for both\nFoundry-managed and bring-your-own-storage (BYOS) recordings. For BYOS the response also includes `blob_uri`,\nthe URI of the recording in the customer's own storage (no SAS token), which the customer downloads using their\nown storage credentials. For Foundry-managed storage `blob_uri` is absent and the bytes are streamed via the\n`/audio/content` route instead.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceRecordingChannelLayout": {
+        "type": "object",
+        "required": [
+          "left",
+          "right"
+        ],
+        "properties": {
+          "left": {
+            "type": "string",
+            "enum": [
+              "user"
+            ],
+            "description": "The role carried on the left channel. Always `user`."
+          },
+          "right": {
+            "type": "string",
+            "enum": [
+              "agent"
+            ],
+            "description": "The role carried on the right channel. Always `agent`."
+          }
+        },
+        "description": "The role assigned to each channel of a merged stereo voice recording.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
