@@ -642,6 +642,32 @@ model RaiAcsModerationBindingExtension {
 @added(Versions.v2026_09_15_preview)
 model RaiAcsEmptyObject {}
 
+/** Static policy metadata for one ACS tool catalog entry. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS tool entries permit extensible policy metadata"
+@added(Versions.v2026_09_15_preview)
+model RaiAcsToolDefinition {
+  ...Record<unknown>;
+
+  /** Optional host-defined tool identifier. The catalog map key, not this value, controls tool lookup. */
+  @minLength(1)
+  id?: string;
+
+  /** Optional host-defined tool type. */
+  @minLength(1)
+  type?: string;
+
+  /** Human-readable policy metadata. */
+  description?: string;
+
+  /** Labels describing the sink or capability. */
+  @encodedName("application/json", "security_labels")
+  securityLabels?: string[];
+
+  /** Maximum sensitivity or host-defined clearance metadata. */
+  @minLength(1)
+  clearance?: string;
+}
+
 /**
  * Identifies the logical policy evaluated at an ACS intervention point.
  */
@@ -697,6 +723,21 @@ union RaiAcsPolicyTargetKind {
 }
 
 /**
+ * Snapshot paths for selecting a tool catalog entry.
+ * The listed values are recognized by the Unified Moderate AACS host profile; other values are allowed for forward compatibility.
+ */
+@added(Versions.v2026_09_15_preview)
+union RaiAcsToolNameSelector {
+  string,
+
+  /** Selects the tool-call name from the canonical snapshot root. */
+  ToolCallName: "$snap.tool_call.name",
+
+  /** Selects the tool-call name through the snapshot-root alias. */
+  ToolCallNameAlias: "$.tool_call.name",
+}
+
+/**
  * Binds one logical policy to an ACS intervention point.
  */
 @added(Versions.v2026_09_15_preview)
@@ -716,6 +757,16 @@ model RaiAcsInterventionPoint {
   annotations?: RaiAcsEmptyObject;
 }
 
+/** Binds one logical policy to a tool-call intervention point. */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsToolInterventionPoint {
+  ...RaiAcsInterventionPoint;
+
+  /** Selects the tool catalog key from the raw Agent Hooks snapshot using an extensible snapshot path. */
+  @encodedName("application/json", "tool_name_from")
+  toolNameFrom?: RaiAcsToolNameSelector;
+}
+
 /** Intervention points supported by the Unified Moderate AACS host profile. */
 @added(Versions.v2026_09_15_preview)
 model RaiAcsInterventionPoints {
@@ -724,11 +775,11 @@ model RaiAcsInterventionPoints {
 
   /** The policy evaluated before a tool call. */
   @encodedName("application/json", "pre_tool_call")
-  preToolCall?: RaiAcsInterventionPoint;
+  preToolCall?: RaiAcsToolInterventionPoint;
 
   /** The policy evaluated after a tool call. */
   @encodedName("application/json", "post_tool_call")
-  postToolCall?: RaiAcsInterventionPoint;
+  postToolCall?: RaiAcsToolInterventionPoint;
 
   /** The policy evaluated for final output. */
   output?: RaiAcsInterventionPoint;
@@ -756,8 +807,13 @@ model RaiAcsManifest {
   @encodedName("application/json", "intervention_points")
   interventionPoints: RaiAcsInterventionPoints;
 
-  /** Tool catalogs are disabled; when present, this object must be empty. */
-  tools?: RaiAcsEmptyObject;
+  /**
+   * Static tool catalog keyed by canonical tool name. The catalog may be omitted or empty when no
+   * tool selector is configured. A tool selector requires a non-empty catalog, and an unknown
+   * selected key fails closed.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS defines tools as a name-keyed extensible map"
+  tools?: Record<RaiAcsToolDefinition>;
 
   /** Standard ACS annotator dispatch is disabled; when present, this object must be empty. */
   annotators?: RaiAcsEmptyObject;
