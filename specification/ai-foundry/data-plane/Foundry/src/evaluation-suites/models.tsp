@@ -131,7 +131,7 @@ model EvaluationSuiteVersion {
     | OpenAI.EvalGraderTextSimilarity
     | OpenAI.EvalGraderPython
     | OpenAI.EvalGraderScoreModel
-    | TestingCriterionAzureAIEvaluator)[];
+    | TestingCriterionEvaluator)[];
 
   @doc("""
     Target for this evaluation suite. Uses the existing FoundryEvaluationTarget discriminated type
