@@ -3625,7 +3625,6 @@ model RaiPolicyProperties {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
-  @removed(Versions.v2026_09_01)
   egressPolicy?: RaiEgressPolicyConfig;
 }
 
@@ -6866,7 +6865,6 @@ model ManagedComputeCapacityListResult {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_09_01)
 union RaiEgressMode {
   string,
 
@@ -6887,7 +6885,6 @@ union RaiEgressMode {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_09_01)
 union RaiEgressDefaultAction {
   string,
 
@@ -6904,7 +6901,6 @@ union RaiEgressDefaultAction {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_09_01)
 union RaiEgressScheme {
   string,
 
@@ -6921,7 +6917,6 @@ union RaiEgressScheme {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_09_01)
 union RaiEgressRuleActionType {
   string,
 
@@ -6944,7 +6939,6 @@ union RaiEgressRuleActionType {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_09_01)
 union RaiEgressHeaderOperation {
   string,
 
@@ -6964,7 +6958,6 @@ union RaiEgressHeaderOperation {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_09_01)
 model RaiEgressSecretRef {
   /** Identifier of the secret to inject. */
   secretId: string;
@@ -6983,7 +6976,6 @@ model RaiEgressSecretRef {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_09_01)
 model RaiEgressManagedIdentityRef {
   /** The resource/audience the token is requested for. */
   resource: string;
@@ -6998,7 +6990,6 @@ model RaiEgressManagedIdentityRef {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_09_01)
 model RaiEgressHeaderValueRef {
   /** Resolve the value from a stored secret. */
   secretRef?: RaiEgressSecretRef;
@@ -7015,7 +7006,6 @@ model RaiEgressHeaderValueRef {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_09_01)
 model RaiEgressHeaderTransform {
   /** The operation to perform on this header. */
   operation: RaiEgressHeaderOperation;
@@ -7044,7 +7034,6 @@ model RaiEgressHeaderTransform {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_09_01)
 model RaiEgressRewriteTarget {
   /** Target scheme. Original scheme is kept if omitted. */
   scheme?: RaiEgressScheme;
@@ -7066,7 +7055,6 @@ model RaiEgressRewriteTarget {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_09_01)
 model RaiEgressRuleAction {
   /** The kind of action. */
   actionType: RaiEgressRuleActionType;
@@ -7088,7 +7076,6 @@ model RaiEgressRuleAction {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_09_01)
 union RaiEgressRuleType {
   string,
 
@@ -7106,7 +7093,6 @@ union RaiEgressRuleType {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_09_01)
 model RaiEgressRuleMatch {
   /**
    * Host pattern to match using DNS wildcard syntax (e.g., "\*.openai.com").
@@ -7128,7 +7114,6 @@ model RaiEgressRuleMatch {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_09_01)
 model RaiEgressRule {
   /**
    * Name of the rule. Must be unique within the policy.
@@ -7165,7 +7150,6 @@ model RaiEgressRule {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_09_01)
 model RaiEgressPolicyConfig {
   /**
    * The enforcement mode for egress rules.
