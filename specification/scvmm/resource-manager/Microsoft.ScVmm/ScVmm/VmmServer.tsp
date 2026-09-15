@@ -39,28 +39,24 @@ interface VmmServers {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   /** Updates the VmmServers resource. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation-options' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @summary("Implements VmmServers PATCH method.")
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
-  update is ArmTagsPatchAsync<VmmServer>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  update is ArmTagsPatchAsync<
+    VmmServer,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = VmmServer> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
   /** Removes the SCVmm fabric from Azure. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation-options' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @summary("Implements VmmServers DELETE method.")
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     VmmServer,
     {
       ...Foundations.BaseParameters<VmmServer>;
       ...QueryForceDelete;
-    }
+    },
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = VmmServer> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
   /** List of VmmServers in a resource group. */
   @summary("Implements GET VmmServers in a resource group.")
