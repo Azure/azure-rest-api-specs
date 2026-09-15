@@ -118,6 +118,19 @@ describe("Helper functions for version analysis", () => {
         expect(result.preview).toBeUndefined();
       }
     });
+
+    it("should find preceding versions with case-insensitive filename matching", async () => {
+      // Test case-insensitive matching: a.json vs A.json
+      const mockSwaggers: MockSwagger[] = [
+        createMockSwagger("/test/stable/2020-07-02/a.json", ApiVersionLifecycleStage.STABLE),
+        createMockSwagger("/test/stable/2020-08-04/A.json", ApiVersionLifecycleStage.STABLE),
+      ];
+
+      const result = await getPrecedingSwaggers("/test/stable/2020-08-04/A.json", mockSwaggers);
+
+      expectResultStructure(result, "/test/stable/2020-08-04/A.json");
+      expect(result.preview).toBeUndefined();
+    });
   });
 
   describe("getExistedVersionOperations", () => {
@@ -240,6 +253,49 @@ describe("Helper functions for version analysis", () => {
         const result = await getExistedVersionOperations(TEST_PATHS.stable2020_08_04, swaggers, []);
         expect(result).toBeInstanceOf(Map);
         expect(result.size).toBe(0);
+      }
+    });
+
+    it("should find operations with case-insensitive filename filtering", async () => {
+      // Test case-insensitive matching: files with same name but different case should be excluded
+      const mockOperations1 = createOperationsMap([OPERATIONS.test1]);
+      const mockOperations2 = createOperationsMap([OPERATIONS.test1]);
+      const mockOperations3 = createOperationsMap([OPERATIONS.test2]);
+
+      const mockSwaggers: MockSwagger[] = [
+        // Same file name with different case: a.json vs A.json - should be EXCLUDED
+        createMockSwagger("/test/stable/2020-07-02/a.json", undefined, mockOperations1),
+        // Different file name: b.json - should be INCLUDED
+        createMockSwagger("/test/stable/2020-07-02/b.json", undefined, mockOperations3),
+        createMockSwagger("/test/stable/2020-08-04/A.json", undefined, mockOperations2),
+      ];
+
+      const targetOperations = [
+        createMockOperation(OPERATIONS.test1.id, OPERATIONS.test1.path),
+        createMockOperation(
+          OPERATIONS.test2.id,
+          OPERATIONS.test2.path,
+          OPERATIONS.test2.httpMethod,
+        ),
+      ];
+
+      const result = await getExistedVersionOperations(
+        "/test/stable/2020-08-04/A.json",
+        mockSwaggers,
+        targetOperations,
+      );
+
+      expect(result).toBeInstanceOf(Map);
+      // a.json should be excluded (same name as A.json, just different case)
+      expect(result.has("/test/stable/2020-07-02/a.json")).toBe(false);
+      // b.json should be included (different name)
+      expect(result.has("/test/stable/2020-07-02/b.json")).toBe(true);
+
+      const operations = result.get("/test/stable/2020-07-02/b.json");
+      expect(operations).toBeDefined();
+      if (operations) {
+        expect(operations).toHaveLength(1);
+        expect(operations[0]).toHaveProperty("id", OPERATIONS.test2.id);
       }
     });
   });
