@@ -8,6 +8,23 @@ where:
 configuration:
   resourceManagementConfiguration:
     scheduledSearches:
+      - description: Close PRs with no activity for 365 days without requiring a stale label
+        frequencies:
+          # Run before stale labeling at 13:00, which resets the inactivity timer.
+          - daily:
+              time: 12:00
+        filters:
+          - isPullRequest
+          - isOpen
+          - noActivitySince:
+              days: 365
+        actions:
+          - closeIssue
+          - addReply:
+              reply: >-
+                Hi @${issueAuthor}.
+                This PR has been closed since it had no activity for 365 days. If you still need this change, please reopen the PR and @mention the assignee for review.
+
       - description: Mark PRs with no activity for 14 days as stale
         frequencies:
           - daily:
