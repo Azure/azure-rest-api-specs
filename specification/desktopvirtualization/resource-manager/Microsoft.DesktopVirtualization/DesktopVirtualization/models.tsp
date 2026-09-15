@@ -2938,7 +2938,7 @@ model ScalingSchedule {
    * @Introduced in 2024-11-01-preview
    */
   @added(Versions.vLatestPreview)
-  createDelete?: CreateDeleteProperties | null;
+  createDelete?: CreateDeleteProperties;
 
   /**
    * Starting time for ramp up period.
@@ -3033,37 +3033,44 @@ model ScalingSchedule {
  * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
  * @Introduced in 2024-11-01-preview
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi"
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
 @added(Versions.vLatestPreview)
+@OpenAPI.extension("x-nullable", true)
 model CreateDeleteProperties {
   /**
    * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "This is a valid nullable property"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @minValue(0)
-  rampUpMaximumHostPoolSize?: int32 | null;
+  @OpenAPI.extension("x-nullable", true)
+  rampUpMaximumHostPoolSize?: int32;
 
   /**
    * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "This is a valid nullable property"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @minValue(0)
   @maxValue(59)
-  rampUpMinimumHostPoolSize?: int32 | null;
+  @OpenAPI.extension("x-nullable", true)
+  rampUpMinimumHostPoolSize?: int32;
 
   /**
    * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "This is a valid nullable property"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @minValue(0)
-  rampDownMaximumHostPoolSize?: int32 | null;
+  @OpenAPI.extension("x-nullable", true)
+  rampDownMaximumHostPoolSize?: int32;
 
   /**
    * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "This is a valid nullable property"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @minValue(0)
   @maxValue(59)
-  rampDownMinimumHostPoolSize?: int32 | null;
+  @OpenAPI.extension("x-nullable", true)
+  rampDownMinimumHostPoolSize?: int32;
 }
 
 /**
@@ -3658,6 +3665,11 @@ model HostPoolProvisioningControlParameter {
   cancelMessage?: string;
 }
 
+@@added(HostPoolPatch.identity, Versions.vLatestPreview);
+#suppress "@azure-tools/typespec-azure-core/no-openapi"
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
+@@OpenAPI.extension(HostPoolPatch.identity, "x-nullable", true);
+
 /**
  * HostPool properties that can be patched.
  */
@@ -3676,11 +3688,9 @@ model HostPoolPatch extends Azure.ResourceManager.CommonTypes.Resource {
   properties?: HostPoolPatchProperties;
 
   /**
-   * The managed service identities assigned to this resource.
+   * Managed service identity (system assigned and/or user assigned identities)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-nullable rule; suppressed pending migration to a nullable type (| null)."
-  @added(Versions.vLatestPreview)
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity | null;
+  ...ManagedServiceIdentityProperty;
 }
 
 /**
@@ -4776,7 +4786,7 @@ model ScalingPlanPooledScheduleProperties {
    * @Introduced in 2024-11-01-preview
    */
   @added(Versions.vLatestPreview)
-  createDelete?: CreateDeleteProperties | null;
+  createDelete?: CreateDeleteProperties;
 
   /**
    * Starting time for ramp up period.
@@ -4897,7 +4907,7 @@ model ScalingPlanPooledSchedulePatchProperties {
    * @Introduced in 2024-11-01-preview
    */
   @added(Versions.vLatestPreview)
-  createDelete?: CreateDeleteProperties | null;
+  createDelete?: CreateDeleteProperties;
 
   /**
    * Starting time for ramp up period.
