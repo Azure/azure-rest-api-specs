@@ -206,6 +206,8 @@ namespace Azure.AI.Projects;
 @@clientName(AttackStrategy.Base64, "Base_64");
 @@clientName(AttackStrategy.ROT13, "ROT_13");
 
+@@clientName(AgentInsightHighlightedTrace.duration_ms, "Duration");
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
@@ -351,6 +353,8 @@ model TimeZoneType {}
 @@alternateType(RecurrenceTrigger.timeZone, TimeZoneType, "java");
 
 @@alternateType(RoutineRunStatus, string, "java");
+
+@@alternateType(AgentInsightHighlightedTrace.total_tokens, int64, "java");
 
 // --------------------------------------------------------------------------------
 // Relocate EvaluatorGenerationJobs, EvaluationSuites, and
