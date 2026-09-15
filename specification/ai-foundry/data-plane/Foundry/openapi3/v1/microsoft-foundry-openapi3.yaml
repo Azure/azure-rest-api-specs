@@ -46293,6 +46293,22 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Insights=V1Preview
+    InstanceVersionSelectionRule:
+      type: object
+      required:
+        - type
+        - instance_id
+      properties:
+        type:
+          type: string
+          enum:
+            - Instance
+        instance_id:
+          type: string
+          description: The agent instance identifier matched by this rule.
+      allOf:
+        - $ref: '#/components/schemas/VersionSelectionRule'
+      description: A routing rule that selects an agent version for a specific agent instance.
     InvocationsProtocolConfiguration:
       type: object
       description: Configuration specific to the invocations protocol.
@@ -77997,6 +78013,7 @@ components:
         propertyName: type
         mapping:
           FixedRatio: '#/components/schemas/FixedRatioVersionSelectionRule'
+          Instance: '#/components/schemas/InstanceVersionSelectionRule'
     VersionSelector:
       type: object
       required:
@@ -78012,6 +78029,7 @@ components:
         - type: string
           enum:
             - FixedRatio
+            - Instance
     VersionSelectorUpdate:
       type: object
       properties:
