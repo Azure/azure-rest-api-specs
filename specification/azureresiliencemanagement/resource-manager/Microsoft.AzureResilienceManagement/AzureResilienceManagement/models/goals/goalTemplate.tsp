@@ -17,10 +17,6 @@ namespace Microsoft.AzureResilienceManagement;
 @doc("Definition of goal template property.")
 @removed(Versions.v2026_09_30_preview)
 model GoalTemplateProperties {
-  @removed(Versions.v2026_03_01_preview)
-  @doc("Description string provided by customer.")
-  description?: string;
-
   @doc("Option specified by customer under high availability section of goal template")
   requireHighAvailability?: RequirementSelected;
 

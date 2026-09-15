@@ -11,7 +11,6 @@ using Azure.Core;
 
 namespace Microsoft.AzureResilienceManagement;
 
-@added(Versions.v2026_03_01_preview)
 @doc("Request body for the recommend capacity action. Provide specific resource IDs to evaluate, or pass an empty array to let the service automatically select non-resilient resources from the goal assignment.")
 model RecommendCapacityRequest {
   @doc("Azure resource IDs to evaluate for resiliency. Pass an empty array to automatically discover and evaluate non-resilient resources in the service group. Maximum 50 resources per request.")
@@ -19,7 +18,6 @@ model RecommendCapacityRequest {
   resourceIds: armResourceIdentifier[];
 }
 
-@added(Versions.v2026_03_01_preview)
 @doc("Resiliency assessment for a single Azure resource, including eligibility category, actionable guidance, and alternate configurations.")
 model RecommendCapacityResourceResult {
   @doc("Fully qualified ARM resource ID of the evaluated resource.")
@@ -56,7 +54,6 @@ model RecommendCapacityResourceResult {
   links?: string[];
 }
 
-@added(Versions.v2026_03_01_preview)
 @doc("Result of a completed recommend capacity operation, containing per-resource assessments and cross-cutting recommendations.")
 model RecommendCapacityResult {
   @doc("Individual resiliency assessment for each evaluated resource.")

@@ -20,7 +20,6 @@ model ServiceLevelResource {
   serviceLevelIndicatorResourceId: armResourceIdentifier;
 
   @doc("The arm id of the service level object resource")
-  @madeOptional(Versions.v2026_06_01_preview)
   @removed(Versions.v2026_09_30_preview)
   serviceLevelObjectiveResourceId?: armResourceIdentifier;
 }
@@ -39,17 +38,14 @@ model RegionalObjectives {
 @doc("Definition of goal assignment property.")
 model GoalAssignmentProperties {
   @doc("Arm id of the goal template.")
-  @madeOptional(Versions.v2026_06_01_preview)
   @removed(Versions.v2026_09_30_preview)
   goalTemplateId?: armResourceIdentifier;
 
   @doc("The type of goal assignment.")
-  @madeOptional(Versions.v2026_06_01_preview)
   @removed(Versions.v2026_09_30_preview)
   goalAssignmentType?: GoalAssignmentType;
 
   @doc("Whether zonal resiliency is required for this goal assignment.")
-  @added(Versions.v2026_06_01_preview)
   @madeRequired(Versions.v2026_09_30_preview)
   requireZonalResiliency: boolean;
 
@@ -85,9 +81,4 @@ model GoalAssignment is ProxyResource<GoalAssignmentProperties> {
   name: string;
 
   // Adding suppressions because in-build ManagedServiceIdentityProperty has used Record which need suppression.
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-determined keys"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Removing identity in v2026, keeping for backward compat in v2025"
-  @doc("The managed service identities assigned to this resource.")
-  @removed(Versions.v2026_03_01_preview)
-  identity?: CommonTypes.ManagedServiceIdentity;
 }

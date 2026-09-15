@@ -78,7 +78,6 @@ interface GoalAssignments {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @added(Versions.v2026_03_01_preview)
   @doc("Recommends capacity improvements for resources under the goal assignments scope. Returns AI-powered capacity assessments and recommendations.")
   @route(ServiceGroupRoute)
   @TypeSpec.Rest.action("recommendCapacity")

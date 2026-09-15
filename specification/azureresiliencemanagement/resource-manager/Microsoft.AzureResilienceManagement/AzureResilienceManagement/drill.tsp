@@ -50,7 +50,6 @@ interface Drills {
   POST Actions
   */
   @route(ServiceGroupRoute)
-  @added(Versions.v2026_03_01_preview)
   @armResourceAction(Drill)
   @post
   @doc("This returns eligible resource to be faulted or failed over.")
@@ -95,26 +94,8 @@ interface Drills {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @route(ServiceGroupRoute)
-  @removed(Versions.v2026_04_01_preview)
-  @renamedFrom(Versions.v2026_04_01_preview, "addOrUpdateResources")
-  @sharedRoute
-  @armResourceAction(Drill)
-  @post
-  @doc("This enables the user to include, exclude or update resources from their Drill.")
-  addOrUpdateResourcesOld is ArmResourceActionAsync<
-    Drill,
-    AddOrUpdateResourcesRequest,
-    AddOrUpdateResourcesResponse,
-    ServiceGroupAndRequestHeadersParameters,
-    LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
-
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Per Azure REST API guidelines and the Spectral PostResponseCodes rule, LRO POST operations with no final body must return 202 + 204 + default. This TSP ARM library rule conflicts with that requirement; we follow the official guideline."
   @route(ServiceGroupRoute)
-  @added(Versions.v2026_04_01_preview)
   @sharedRoute
   @armResourceAction(Drill)
   @post
@@ -131,23 +112,6 @@ interface Drills {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Per Azure REST API guidelines and the Spectral PostResponseCodes rule, LRO POST operations with no final body must return 202 + 204 + default. This TSP ARM library rule conflicts with that requirement; we follow the official guideline."
   @route(ServiceGroupRoute)
-  @removed(Versions.v2026_04_01_preview)
-  @armResourceAction(Drill)
-  @post
-  @doc("This triggers detection of any drifts from the desired state of Resources and RBAC.")
-  refreshReadinessState is ArmResourceActionAsync<
-    Drill,
-    void,
-    ArmNoContentResponse,
-    ServiceGroupAndRequestHeadersParameters,
-    LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Per Azure REST API guidelines and the Spectral PostResponseCodes rule, LRO POST operations with no final body must return 202 + 204 + default. This TSP ARM library rule conflicts with that requirement; we follow the official guideline."
-  @route(ServiceGroupRoute)
-  @added(Versions.v2026_03_01_preview)
   @armResourceAction(Drill)
   @post
   @doc("This triggers detection of any drifts from the desired state of Resources and RBAC.")

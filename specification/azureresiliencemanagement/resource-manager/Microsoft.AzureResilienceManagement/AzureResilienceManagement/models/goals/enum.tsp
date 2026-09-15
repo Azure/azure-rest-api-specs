@@ -78,7 +78,6 @@ union ExclusionReason {
   UnsupportedResource: "UnsupportedResource",
 }
 
-@added(Versions.v2026_03_01_preview)
 @doc("Enum for the confirmation status of a high availability solution.")
 union ConfirmationStatus {
   string,
@@ -96,7 +95,6 @@ union ConfirmationStatus {
   RejectedByUser: "RejectedByUser",
 }
 
-@added(Versions.v2026_03_01_preview)
 @doc("Identifies a high-availability solution that can be applied to a resource (for example, zone-pinned VM with ZRS disk).")
 union SolutionDisplayName {
   string,
@@ -108,7 +106,6 @@ union SolutionDisplayName {
   VmInMultiZoneVmss: "VmInMultiZoneVmss",
 }
 
-@added(Versions.v2026_03_01_preview)
 @doc("Enum for the reason for requesting user confirmation for a high availability solution.")
 union ReasonForRequestingConfirmation {
   string,
@@ -120,11 +117,6 @@ union ReasonForRequestingConfirmation {
   VmInMultiZoneScaleSetStatelessOnly: "VmInMultiZoneScaleSetStatelessOnly",
 }
 
-@added(Versions.v2026_03_01_preview)
-@renamedFrom(
-  Versions.v2026_06_01_preview,
-  "UserConfirmationForHighAvailabilityItem"
-)
 @doc("Represents a user confirmation for a high availability solution.")
 model UserConfirmationItem {
   @doc("The solution display name of the high availability solution.")
@@ -137,7 +129,6 @@ model UserConfirmationItem {
   reasonForRequestingConfirmation?: ReasonForRequestingConfirmation;
 }
 
-@added(Versions.v2026_03_01_preview)
 @doc("Classification of a resource's resiliency eligibility. Determines what guidance and alternate configurations are returned.")
 union ResiliencyEligibilityCategory {
   string,

@@ -82,6 +82,5 @@ model ErrorDetails {
   message: string;
 
   @doc("A list of recommendations to resolve the error.")
-  @added(Versions.v2026_03_01_preview)
   recommendations?: string[];
 }

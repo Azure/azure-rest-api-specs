@@ -39,22 +39,18 @@ model DrillResourceProperties {
   resourceType: string;
 
   @doc("Active location and zones of the Azure resource.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   activeLocations?: string[];
 
   @doc("List of recovery locations and zones of the Azure resource.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   recoveryLocations?: string[];
 
   @doc("Active Resource location and physical zones of Azure Resource.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   activePhysicalZones?: string[];
 
   @doc("Recovery Resource location and physical zones of HA Azure Resource.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   recoveryPhysicalZones?: string[];
 
@@ -109,24 +105,12 @@ model DrillResourceProperties {
     }
   ]>;
 
-  @doc("Last Target and Capability assignment error, if any.")
-  @removed(Versions.v2026_04_01_preview)
-  @visibility(Lifecycle.Read)
-  targetAndCapabilityAssignmentError?: ErrorDetails;
-
-  @doc("Last Target Resource RBAC assignment error, if any.")
-  @added(Versions.v2026_03_01_preview)
-  @removed(Versions.v2026_04_01_preview)
-  @visibility(Lifecycle.Read)
-  targetResourceAssignmentError?: ErrorDetails;
-
   @doc("Last RBAC assignment error, if any.")
   @visibility(Lifecycle.Read)
   rbacAssignmentError?: ErrorDetails;
 
   @doc("Monitoring RBAC assignment error, if any.")
   @visibility(Lifecycle.Read)
-  @added(Versions.v2026_03_01_preview)
   monitoringRbacAssignmentError?: ErrorDetails;
 
   @doc("Provisioning state")
@@ -136,24 +120,14 @@ model DrillResourceProperties {
 
 @doc("Reason why the Drill resource is in NeedsAttention state.")
 model DrillResourceAttentionReason {
-  @doc("Experiment MSI does not have the desired RBAC on the resource.")
-  @removed(Versions.v2026_04_01_preview)
-  faultRbacOnTarget?: RBACState;
-
   @doc("Chaos Resource MSI does not have the desired RBAC on the resource.")
-  @added(Versions.v2026_03_01_preview)
   faultRbacOnTargetResource?: RBACState;
 
   @doc("RBAC required by AutomationAccount for runbook MSI not setup on the target resources.")
   runbookFaultRbacOnTargets?: RBACState;
 
   @doc("RBAC required by Drill MSI on the target resource for monitoring.")
-  @added(Versions.v2026_03_01_preview)
   monitoringRbacOnTargets?: RBACState;
-
-  @doc("Target extension resource is missing on the resource.")
-  @removed(Versions.v2026_04_01_preview)
-  target?: ExtensionObjectState;
 
   @doc("Drill Resource State (wrt SG and RO).")
   resourceState?: DrillResourceState[];
