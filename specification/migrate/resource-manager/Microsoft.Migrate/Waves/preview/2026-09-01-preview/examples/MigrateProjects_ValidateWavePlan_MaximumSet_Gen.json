@@ -1,0 +1,44 @@
+{
+  "title": "MigrateProjects_ValidateWavePlan_MaximumSet",
+  "operationId": "MigrateProjects_ValidateWavePlan",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "F4566D7C-05F8-41DC-A6B4-AFC0600F0AC0",
+    "resourceGroupName": "rgwaves",
+    "projectName": "myProjectName",
+    "body": {
+      "assessmentArmId": "/subscriptions/F4566D7C-05F8-41DC-A6B4-AFC0600F0AC0/resourceGroups/rgwaves/providers/Microsoft.Migrate/assessmentProjects/myProjectName/groups/group1/assessments/assessment1",
+      "migrationPath": "AzureVM",
+      "sasVersionId": "pcjubmrrvrhahgyuztztftzwfjbg"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "assessmentArmId": "/subscriptions/F4566D7C-05F8-41DC-A6B4-AFC0600F0AC0/resourceGroups/rgwaves/providers/Microsoft.Migrate/assessmentProjects/myProjectName/groups/group1/assessments/assessment1",
+        "migrationPath": "AzureVM",
+        "wavePlanName": "WavePlan_assessment1_AzureVM",
+        "provisioningState": "Succeeded",
+        "validationSummary": {
+          "validatedRowCount": 100,
+          "validRowCount": 92,
+          "invalidRowCount": 8,
+          "numberOfWaves": 5
+        },
+        "issues": [
+          {
+            "code": "InvalidRows",
+            "message": "8 rows contain validation errors.",
+            "target": "WaveName",
+            "details": []
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
