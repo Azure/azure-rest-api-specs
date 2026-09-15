@@ -25,7 +25,7 @@ These are the global settings.
 title: DeploymentScriptsClient
 description: DeploymentScripts Client
 openapi-type: arm
-tag: package-2023-08
+tag: package-2026-04
 ```
 
 ### Tag: package-2019-10
@@ -53,6 +53,15 @@ These settings apply only when `--tag=package-2023-08` is specified on the comma
 ``` yaml $(tag) == 'package-2023-08'
 input-file:
   - stable/2023-08-01/deploymentScripts.json
+```
+
+### Tag: package-2026-04
+
+These settings apply only when `--tag=package-2026-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-04'
+input-file:
+  - stable/2026-04-01/deploymentScripts.json
 ```
 
 ## Suppression
