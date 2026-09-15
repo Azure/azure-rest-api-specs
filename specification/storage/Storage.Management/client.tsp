@@ -1482,3 +1482,21 @@ enum ProvisioningStateEnum {
   "ArmEncryption",
   "go,javascript"
 );
+
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
+  Microsoft.Storage.UserAssignedIdentity,
+  "java,python"
+);
+
+@@alternateType(
+  ContextCache.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp,java,python,typescript,go"
+);
+
+@@alternateType(
+  ContextCacheUpdate.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp,java,python,typescript,go"
+);
