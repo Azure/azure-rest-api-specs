@@ -11041,6 +11041,9 @@
           }
         },
         "x-ms-examples": {
+          "Get a VM with flexible sizing": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithFlexProfile.json"
+          },
           "Get a Virtual Machine.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get.json"
           },
@@ -11186,6 +11189,9 @@
           },
           "Create a VM with VM Size Properties": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithVMSizeProperties.json"
+          },
+          "Create a VM with a FlexProfile": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithFlexProfile.json"
           },
           "Create a VM with automatic zone placement": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPlacement.json"
@@ -11397,6 +11403,9 @@
           },
           "Update a VM by force-detaching data disk": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_ForceDetachDataDisk.json"
+          },
+          "Update a VM's flexible sizing configuration": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_WithFlexProfile.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -16078,6 +16087,19 @@
           "description": "Grace period for newly created VMs or when the External Health policy is first applied on VMSS. Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 4 hours (PT4H)."
         }
       }
+    },
+    "FlexProfile": {
+      "type": "object",
+      "description": "Specifies a FlexProfile for VM size. Azure may deploy a compatible alternative VM size based on\ncapacity and placement considerations. The deployed size is returned in hardwareProfile.vmSize.",
+      "properties": {
+        "preferredVMSize": {
+          "$ref": "#/definitions/VirtualMachineSizeTypes",
+          "description": "Specifies the preferred VM size. Azure may deploy a compatible alternative size based on capacity\nand placement considerations. Supported VM families for FlexProfile may vary by region."
+        }
+      },
+      "required": [
+        "preferredVMSize"
+      ]
     },
     "HardwareProfile": {
       "type": "object",
@@ -22403,6 +22425,10 @@
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the virtual machine."
+        },
+        "flexProfile": {
+          "$ref": "#/definitions/FlexProfile",
+          "description": "Specifies a FlexProfile for VM size. Create and update requests that include flexProfile must omit\nhardwareProfile.vmSize, even when it matches the currently deployed size. Azure may deploy a\ncompatible alternative VM size based on capacity and placement considerations. Responses for a VM\nwith FlexProfile include both flexProfile.preferredVMSize, which records the requested preferred size,\nand hardwareProfile.vmSize, which reports the deployed size. When using a GET response to construct\na PUT or PATCH request, remove hardwareProfile.vmSize if the request includes flexProfile.\nFlexProfile may not be supported with VM properties that constrain placement."
         },
         "scheduledEventsPolicy": {
           "$ref": "#/definitions/ScheduledEventsPolicy",
