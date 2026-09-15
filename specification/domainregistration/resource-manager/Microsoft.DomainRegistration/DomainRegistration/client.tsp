@@ -18,7 +18,6 @@ using Microsoft.DomainRegistration;
 
 @@clientName(Domain, "AppServiceDomain", "csharp");
 @@clientName(DomainProperties.autoRenew, "IsAutoRenew", "csharp");
-@@clientName(DomainProperties.expirationTime, "ExpireOn", "csharp");
 @@clientName(DomainProperties.privacy, "IsDomainPrivacyEnabled", "csharp");
 @@clientName(
   DomainProperties.readyForDnsRecordManagement,

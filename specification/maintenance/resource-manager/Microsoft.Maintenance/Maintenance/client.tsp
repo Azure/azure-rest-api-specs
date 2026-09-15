@@ -33,8 +33,6 @@ using Microsoft.Maintenance;
 );
 @@clientName(TagOperators, "MaintenanceVmTagOperator", "csharp");
 @@clientName(TagSettingsProperties, "MaintenanceVmTagSettings", "csharp");
-@@clientName(MaintenanceWindow.expirationDateTime, "ExpireOn", "csharp");
-@@clientName(MaintenanceWindow.startDateTime, "StartOn", "csharp");
 @@clientName(ListApplyUpdate, "MaintenanceApplyUpdateListResult", "csharp");
 @@clientName(ListUpdatesResult, "MaintenanceUpdateListResult", "csharp");
 @@clientName(

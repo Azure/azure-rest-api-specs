@@ -4503,7 +4503,6 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@clientName(BackupItemProperties.name, "BackupName", "csharp");
 @@clientName(BackupItemProperties.scheduled, "IsScheduled", "csharp");
 @@clientName(BackupRequestProperties.enabled, "IsEnabled", "csharp");
-@@clientName(CertificateProperties.expirationDate, "ExpireOn", "csharp");
 @@clientName(CertificateProperties.thumbprint, "ThumbprintString", "csharp");
 @@clientName(CertificateProperties.valid, "IsValid", "csharp");
 @@clientName(

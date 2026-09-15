@@ -333,8 +333,6 @@ using Microsoft.AzureStackHCI;
   "ExpireOn",
   "csharp"
 );
-@@clientName(RemoteSupportJobNodeSettings.createdAt, "CreatedOn", "csharp");
-@@clientName(RemoteSupportJobNodeSettings.updatedAt, "UpdatedOn", "csharp");
 @@clientName(ReportedProperties.lastSyncTimestamp, "LastSyncedOn", "csharp");
 @@clientName(EdgeMachineProperties.lastSyncTimestamp, "LastSyncedOn", "csharp");
 @@clientName(
@@ -347,16 +345,6 @@ using Microsoft.AzureStackHCI;
 @@clientName(
   EdgeMachineRemoteSupportJobProperties.expirationTimestamp,
   "ExpireOn",
-  "csharp"
-);
-@@clientName(
-  EdgeMachineRemoteSupportNodeSettings.createdAt,
-  "CreatedOn",
-  "csharp"
-);
-@@clientName(
-  EdgeMachineRemoteSupportNodeSettings.updatedAt,
-  "UpdatedOn",
   "csharp"
 );
 @@clientName(

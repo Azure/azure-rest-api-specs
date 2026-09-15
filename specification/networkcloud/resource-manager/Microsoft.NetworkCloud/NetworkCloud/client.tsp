@@ -501,12 +501,9 @@ using Microsoft.NetworkCloud;
 @@usage(StorageAppliance, Usage.input, "csharp");
 
 @@clientName(ActionState, "NetworkCloudActionState", "csharp");
-@@clientName(ActionState.endTime, "EndOn", "csharp");
 @@clientName(ActionStateStatus, "NetworkCloudActionStateStatus", "csharp");
 @@clientName(CertificateInfo, "NetworkCloudCertificateInfo", "csharp");
 @@clientName(StepState, "NetworkCloudStepState", "csharp");
-@@clientName(StepState.endTime, "EndOn", "csharp");
-@@clientName(StepState.startTime, "StartOn", "csharp");
 @@clientName(StepStateStatus, "NetworkCloudStepStateStatus", "csharp");
 @@alternateType(ActionState.endTime, utcDateTime, "csharp");
 @@alternateType(StepState.endTime, utcDateTime, "csharp");
