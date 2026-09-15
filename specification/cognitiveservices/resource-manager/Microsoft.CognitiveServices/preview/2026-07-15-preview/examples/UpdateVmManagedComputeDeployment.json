@@ -8,6 +8,9 @@
     "deploymentName": "gpt-oss-120b-byoc",
     "api-version": "2026-07-15-preview",
     "properties": {
+      "tags": {
+        "environment": "development"
+      },
       "sku": {
         "name": "VmManagedCompute",
         "capacity": 2
@@ -21,11 +24,13 @@
         "name": "gpt-oss-120b-byoc",
         "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
         "etag": "\"0x8D...\"",
+        "tags": {
+          "environment": "development"
+        },
         "properties": {
           "model": "azureml://registries/azureml-openai-oss/models/gpt-oss-120b/versions/4",
           "deploymentTemplate": "projects/my-project/deploymentTemplates/gpt-oss-120b-vllm-tuned/versions/2",
           "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
-          "priority": "High",
           "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
           "capabilities": {
             "assetsV2": "true"
@@ -47,8 +52,8 @@
     },
     "202": {
       "headers": {
-        "location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?operationResultResponseType=Location&api-version=2026-03-15-preview",
-        "azure-asyncoperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?api-version=2026-03-15-preview",
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?operationResultResponseType=Location&api-version=2026-07-15-preview",
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?api-version=2026-07-15-preview",
         "retry-after": "30"
       }
     }

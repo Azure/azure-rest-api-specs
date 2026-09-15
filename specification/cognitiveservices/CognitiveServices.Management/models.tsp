@@ -3441,7 +3441,7 @@ model SkuResource {
 }
 
 /**
- * The object being used to update sku of a resource, in general used for PATCH operations.
+ * The request used to update a managed compute deployment.
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
@@ -3449,11 +3449,15 @@ model SkuResource {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model PatchResourceSku {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
   /**
    * The resource model definition representing SKU
    */
   sku?: Sku;
 }
+
+@@added(PatchResourceSku.tags, Versions.v2026_07_15_preview);
 
 /**
  * Properties of Cognitive Services account commitment plan.
@@ -5905,6 +5909,7 @@ model ManagedComputeDeploymentProperties {
 
   /**
    * Accelerator type (e.g., H100_80GB). Optional on creation; immutable after creation.
+   * Must not be specified for VmManagedCompute deployments.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   acceleratorType?: string;
@@ -5914,6 +5919,14 @@ model ManagedComputeDeploymentProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
+
+  /**
+   * Microsoft Entra object IDs allowed to access the VmManagedCompute deployment's serving endpoint.
+   * Set on creation; the returned set can also include service-managed identities.
+   */
+  @added(Versions.v2026_07_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  allowlistedObjectIds?: Azure.Core.uuid[];
 
   /**
    * Deployment capabilities represented as key-value pairs.
@@ -5927,7 +5940,8 @@ model ManagedComputeDeploymentProperties {
   capabilities?: Record<string>;
 
   /**
-   * Foundry compute ARM resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.
+   * Foundry compute Azure resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.
+   * Must not be specified for accelerator-managed compute deployments.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   computeId?: string;
