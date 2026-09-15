@@ -7,10 +7,6 @@ namespace Azure.AI.Projects.Beta {
 }
 
 namespace Azure.AI.Projects.Beta.VoiceAgents {
-  interface Realtime {}
-  @@clientLocation(VoiceAgentWebSocket.connectVoiceAgent, Realtime);
-  @@access(VoiceAgentWebSocket.connectVoiceAgent, Access.internal);
-
   interface Conversations {}
   @@clientLocation(
     AgentEndpointConversations.listAgentConversations,
