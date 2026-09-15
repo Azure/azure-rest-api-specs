@@ -308,22 +308,7 @@ namespace Microsoft.HealthcareApis;
   "csharp"
 );
 @@alternateType(
-  DicomServiceProperties.privateEndpointConnections,
-  PrivateEndpointConnectionDescription[],
-  "csharp"
-);
-@@alternateType(
-  FhirServiceProperties.privateEndpointConnections,
-  PrivateEndpointConnectionDescription[],
-  "csharp"
-);
-@@alternateType(
   ServicesProperties.privateEndpointConnections,
-  PrivateEndpointConnectionDescription[],
-  "csharp"
-);
-@@alternateType(
-  WorkspaceProperties.privateEndpointConnections,
   PrivateEndpointConnectionDescription[],
   "csharp"
 );
