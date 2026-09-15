@@ -55,8 +55,7 @@ interface Clouds {
       ...Foundations.BaseParameters<Cloud>;
       ...QueryForceDelete;
     },
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = Cloud> &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
   /** List of Clouds in a resource group. */
   @summary("Implements GET Clouds in a resource group.")

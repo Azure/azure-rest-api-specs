@@ -89,8 +89,7 @@ interface VirtualMachineInstances {
       @query("deleteFromHost")
       deleteFromHost?: DeleteFromHost;
     },
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = VirtualMachineInstance> &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
   /** Lists all of the virtual machine instances within the specified parent resource. */
   @summary("Implements List virtual machine instances.")

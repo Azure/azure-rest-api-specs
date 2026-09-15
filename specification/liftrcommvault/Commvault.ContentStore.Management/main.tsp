@@ -880,8 +880,7 @@ interface ProtectionGroups {
     ProtectionGroup,
     StopBackupProtectionGroupRequest,
     ArmNoContentResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionGroup> &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @doc("Restore resource for a protected items in given protection group.")

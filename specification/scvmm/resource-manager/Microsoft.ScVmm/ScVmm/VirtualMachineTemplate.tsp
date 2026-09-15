@@ -56,8 +56,7 @@ interface VirtualMachineTemplates {
       ...Foundations.BaseParameters<VirtualMachineTemplate>;
       ...QueryForceDelete;
     },
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = VirtualMachineTemplate> &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
   /** List of VirtualMachineTemplates in a resource group. */
   @summary("Implements GET VirtualMachineTemplates in a resource group.")

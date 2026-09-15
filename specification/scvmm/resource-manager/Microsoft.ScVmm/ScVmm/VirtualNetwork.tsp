@@ -55,8 +55,7 @@ interface VirtualNetworks {
       ...Foundations.BaseParameters<VirtualNetwork>;
       ...QueryForceDelete;
     },
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = VirtualNetwork> &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
   /** List of VirtualNetworks in a resource group. */
   @summary("Implements GET VirtualNetworks in a resource group.")
