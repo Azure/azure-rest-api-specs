@@ -292,7 +292,22 @@ jobs:
           ref: main
           path: repositories/${{ steps.resolve-sdk-repository.outputs.repository }}
           persist-credentials: false
-
+      - name: Set up GitHub Copilot CLI
+        id: setup-copilot-cli
+        shell: bash
+        run: |
+          set -euo pipefail
+          install_dir="$RUNNER_TEMP/copilot-cli"
+          npm_config_ignore_scripts=false npm install \
+            --global \
+            --prefix "$install_dir" \
+            @github/copilot
+          echo "$install_dir/bin" >> "$GITHUB_PATH"
+          copilot_path="$install_dir/bin/copilot"
+          test -x "$copilot_path"
+          "$copilot_path" --version
+          echo "path=$copilot_path" >> "$GITHUB_OUTPUT"
+      
       - name: Mitigate SDK breaking changes
         if: steps.resolve-trigger.outputs.should-run == 'true'
         shell: bash
