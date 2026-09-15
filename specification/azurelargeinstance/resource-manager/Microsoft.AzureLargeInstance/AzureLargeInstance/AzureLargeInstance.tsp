@@ -100,7 +100,14 @@ interface AzureLargeInstances {
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Template for optional body"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - migrate to LRO apis"
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation', 'x-ms-long-running-operation-options' OpenAPI extension(s) predates the no-openapi-client-extensions rule; suppressed pending migration to first-class TypeSpec constructs."
 @autoRoute
+@OpenAPI.extension("x-ms-long-running-operation", true)
+@OpenAPI.extension(
+  "x-ms-long-running-operation-options",
+  #{ `final-state-via`: "location" }
+)
 @armResourceAction(TResource)
 @post
 op ArmResourceActionNoBody<
@@ -109,8 +116,7 @@ op ArmResourceActionNoBody<
   TResponse extends TypeSpec.Reflection.Model | void,
   TBaseParameters extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.BaseParameters<AzureLargeInstance>
 >(...ResourceInstanceParameters<TResource, TBaseParameters>, ...TRequest):
-  | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AzureLargeInstance> &
-      Azure.Core.Foundations.RetryAfterHeader>
+  | ArmAcceptedLroResponse
   | TResponse
   | ErrorResponse;
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
