@@ -14,7 +14,7 @@ const VoiceAgentConversationRequiredPreviews = #{
   required_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview],
 };
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for consistency with VoiceItemAudioResponse."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for consistency with VoiceAudioItemResponse."
 @doc("""
   Metadata for a conversation item's generated audio. For bring-your-own-storage (BYOS), the response includes
   `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
@@ -22,8 +22,8 @@ const VoiceAgentConversationRequiredPreviews = #{
   `/audio/generated/content` route.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceGeneratedItemAudioResponse {
-  ...OmitProperties<VoiceItemAudioResponse, "blob_uri">;
+model VoiceGeneratedAudioItem {
+  ...OmitProperties<VoiceAudioItem, "blob_uri">;
 
   @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the generated audio in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/generated/content` route instead.")
   blob_uri?: url;
@@ -319,7 +319,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio")
   @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  getAgentConversationItemAudio is FoundryDataPlaneRequiredPreviewOperation<
+  getAgentConversationAudioItem is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -331,7 +331,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation item whose audio metadata is retrieved. */
       @path item_id: string;
     },
-    VoiceItemAudioResponse
+    VoiceAudioItem
   >;
 
   /**
@@ -345,7 +345,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content")
   @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  getAgentConversationItemAudioContent is FoundryDataPlaneRequiredPreviewOperation<
+  getAgentConversationAudioItemContent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -357,7 +357,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation item whose audio is streamed. */
       @path item_id: string;
     },
-    VoiceAudioStreamResponse
+    VoiceAudioStream
   >;
 
   /**
@@ -370,7 +370,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated")
   @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  getAgentConversationItemGeneratedAudio is FoundryDataPlaneRequiredPreviewOperation<
+  getAgentConversationGeneratedAudioItem is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -382,7 +382,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation item whose generated audio metadata is retrieved. */
       @path item_id: string;
     },
-    VoiceGeneratedItemAudioResponse
+    VoiceGeneratedAudioItem
   >;
 
   /**
@@ -397,7 +397,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated/content")
   @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  getAgentConversationItemGeneratedAudioContent is FoundryDataPlaneRequiredPreviewOperation<
+  getAgentConversationGeneratedAudioItemContent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -409,7 +409,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation item whose generated audio is streamed. */
       @path item_id: string;
     },
-    VoiceAudioStreamResponse
+    VoiceAudioStream
   >;
 
   /**
@@ -437,7 +437,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation whose merged recording metadata is retrieved. */
       @path conversation_id: string;
     },
-    VoiceRecordingResponse
+    VoiceRecording
   >;
 
   /**
@@ -464,7 +464,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation whose merged recording is streamed. */
       @path conversation_id: string;
     },
-    VoiceAudioStreamResponse
+    VoiceAudioStream
   >;
 }
 
@@ -485,7 +485,7 @@ interface AgentTelephony {
       ...Azure.Core.RepeatabilityRequestHeaders;
 
       /** The provider-specific binding to create. */
-      @body body: CreateTelephonyBindingRequest;
+      @body telephony_binding: CreateTelephonyBindingRequest;
     },
     TelephonyBindingCreatedResponse
   >;

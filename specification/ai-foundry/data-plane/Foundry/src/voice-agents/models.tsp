@@ -337,7 +337,7 @@ union VoiceAudioCodec {
   `/audio/content` route.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceItemAudioResponse {
+model VoiceAudioItem {
   @doc("The id of the conversation the item belongs to.")
   conversation_id: string;
 
@@ -372,7 +372,7 @@ model VoiceItemAudioResponse {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAudioStreamResponse {
+model VoiceAudioStream {
   @doc("The content type of the streamed audio.")
   @header("Content-Type")
   contentType: "audio/wav";
@@ -403,7 +403,7 @@ model VoiceRecordingChannelLayout {
   `/audio/content` route instead.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceRecordingResponse {
+model VoiceRecording {
   @doc("The id of the conversation this recording belongs to.")
   conversation_id: string;
 
@@ -1410,36 +1410,11 @@ model TelephonyOutboundRetryPolicy {
   max_attempts?: int32 = 1;
 }
 
-@doc("A retry policy with a fixed interval between outbound call attempts.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyOutboundFixedIntervalRetryPolicy
-  extends TelephonyOutboundRetryPolicy {
-  @doc("The fixed-interval retry strategy.")
-  type: TelephonyOutboundRetryPolicyType.fixed_interval;
-
-  @doc("The fixed delay in seconds between attempts. It must be 0 when `max_attempts` is 1, and from 60 through 86400 when retries are enabled.")
-  interval?: FoundryDurationSeconds;
-}
-
-@doc("The frozen retry policy returned for an outbound call or campaign.")
-@discriminator("type")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("TelephonyOutboundRetryPolicyResult", "csharp")
-model TelephonyOutboundRetryPolicyResponse {
-  @doc("The retry strategy.")
-  type: TelephonyOutboundRetryPolicyType;
-
-  @doc("The maximum number of provider attempts, including the first attempt.")
-  @minValue(1)
-  @maxValue(5)
-  max_attempts: int32;
-}
-
 @doc("The frozen fixed-interval retry policy returned for an outbound call or campaign.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("TelephonyOutboundFixedIntervalRetryPolicyResult", "csharp")
-model TelephonyOutboundFixedIntervalRetryPolicyResponse
-  extends TelephonyOutboundRetryPolicyResponse {
+model TelephonyOutboundFixedIntervalRetryPolicy
+  extends TelephonyOutboundRetryPolicy {
   @doc("The fixed-interval retry strategy.")
   type: TelephonyOutboundRetryPolicyType.fixed_interval;
 
@@ -1635,7 +1610,7 @@ model TelephonyCallJob {
   cancellation?: TelephonyCallJobCancellation;
 
   @doc("The frozen provider-attempt retry policy.")
-  retry_policy: TelephonyOutboundRetryPolicyResponse;
+  retry_policy: TelephonyOutboundRetryPolicy;
 
   @doc("The number of provider attempts created so far.")
   @minValue(0)
@@ -1782,7 +1757,7 @@ model TelephonyCampaign {
   agent_name: string;
   configuration_status: TelephonyCampaignConfigurationStatus;
   execution_status: TelephonyCampaignExecutionStatus;
-  retry_policy: TelephonyOutboundRetryPolicyResponse;
+  retry_policy: TelephonyOutboundRetryPolicy;
   latest_successful_validation_id?: string;
   active_validation_id?: string;
   active_recipient_import_id?: TelephonyCampaignRecipientImportId;
