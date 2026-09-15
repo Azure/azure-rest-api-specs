@@ -8973,7 +8973,7 @@
           "description": "Indicates whether an application operation failure causes the deployment to fail."
         },
         "provisioningState": {
-          "$ref": "#/definitions/VmApplicationProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the VM application.",
           "readOnly": true
         },
@@ -8983,55 +8983,6 @@
           "readOnly": true
         }
       }
-    },
-    "VmApplicationProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a VM application.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Creating",
-        "Updating",
-        "Deleting"
-      ],
-      "x-ms-enum": {
-        "name": "VmApplicationProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "The VM application is being created."
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The VM application is being updated."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The VM application is being deleted."
-          }
-        ]
-      },
-      "readOnly": true
     },
     "VmApplicationUpdate": {
       "type": "object",

@@ -3932,29 +3932,6 @@ model MachineExtensionsListResult is Azure.Core.Page<MachineExtension>;
 model MachineRunCommandsListResult is Azure.Core.Page<MachineRunCommand>;
 
 /**
- * The provisioning state of a VM application.
- */
-@added(Versions.v2026_09_01)
-union VmApplicationProvisioningState {
-  ResourceProvisioningState,
-
-  /**
-   * The VM application is being created.
-   */
-  Creating: "Creating",
-
-  /**
-   * The VM application is being updated.
-   */
-  Updating: "Updating",
-
-  /**
-   * The VM application is being deleted.
-   */
-  Deleting: "Deleting",
-}
-
-/**
  * The properties of a VM application. Exactly one gallery application reference must be specified when creating or replacing the resource.
  */
 @added(Versions.v2026_09_01)
@@ -3997,7 +3974,7 @@ model VmApplicationProperties {
    * The provisioning state of the VM application.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: VmApplicationProvisioningState;
+  provisioningState?: ProvisioningState;
 
   /**
    * The instance view of the VM application.
