@@ -1,0 +1,80 @@
+{
+  "operationId": "Assessments_CreateOrUpdate",
+  "title": "Create or update the CommercialMarketplace assessment for a billing account",
+  "parameters": {
+    "resourceUri": "providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31",
+    "assessmentName": "CommercialMarketplace",
+    "api-version": "2026-08-10-preview",
+    "resource": {
+      "properties": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.BillingTrust/locations/westus2/operationStatuses/60000000-3000-0000-0000-000000000000?api-version=2026-08-10-preview",
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31/providers/Microsoft.BillingTrust/assessments/CommercialMarketplace?api-version=2026-08-10-preview",
+        "Retry-After": 30
+      },
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31/providers/Microsoft.BillingTrust/assessments/CommercialMarketplace",
+        "name": "CommercialMarketplace",
+        "type": "Microsoft.BillingTrust/assessments",
+        "properties": {
+          "evaluationState": "pending",
+          "provisioningState": "Accepted",
+          "actions": [
+            {
+              "name": "Interactive Vetting Experience",
+              "actionType": "redirect",
+              "target": "https://verification.microsoft.com?id=%2Fproviders%2FMicrosoft.Billing%2FbillingAccounts%2F30000000-0000-0000-0000-000000000000%3A30000000-0000-3000-0000-000000000000_2019-05-31%2Fproviders%2FMicrosoft.BillingTrust%2Fassessments%2FCommercialMarketplace",
+              "enabled": true,
+              "reason": "Continue verification in the interactive experience."
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "billing-admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-17T10:00:00.000Z",
+          "lastModifiedBy": "billing-admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-17T10:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.BillingTrust/locations/westus2/operationStatuses/60000000-3000-0000-0000-000000000000?api-version=2026-08-10-preview",
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31/providers/Microsoft.BillingTrust/assessments/CommercialMarketplace?api-version=2026-08-10-preview",
+        "Retry-After": 30
+      },
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31/providers/Microsoft.BillingTrust/assessments/CommercialMarketplace",
+        "name": "CommercialMarketplace",
+        "type": "Microsoft.BillingTrust/assessments",
+        "properties": {
+          "evaluationState": "pending",
+          "provisioningState": "Accepted",
+          "actions": [
+            {
+              "name": "Interactive Vetting Experience",
+              "actionType": "redirect",
+              "target": "https://verification.microsoft.com?id=%2Fproviders%2FMicrosoft.Billing%2FbillingAccounts%2F30000000-0000-0000-0000-000000000000%3A30000000-0000-3000-0000-000000000000_2019-05-31%2Fproviders%2FMicrosoft.BillingTrust%2Fassessments%2FCommercialMarketplace",
+              "enabled": true,
+              "reason": "Continue verification in the interactive experience."
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "billing-admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-17T10:00:00.000Z",
+          "lastModifiedBy": "billing-admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-17T10:00:00.000Z"
+        }
+      }
+    }
+  }
+}
