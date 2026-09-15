@@ -20,14 +20,11 @@ model UserConversationSimulationEvalRunDataSource extends EvalRunDataSource {
   /** Model used to simulate the user side of each conversation by generating turns sent to the evaluated `target`. */
   model_configuration: EvaluationModelConfiguration;
 
-  /** Default configuration for generating simulated user conversations. Properties in a test case's `simulation_configuration` override the corresponding defaults. */
-  default_simulation_configuration?: UserConversationSimulationConfiguration;
+  /** Default configuration for generating simulated user conversations and persisting their output. Conversation properties in a test case's `simulation_configuration` override the corresponding defaults. */
+  default_simulation_configuration?: UserConversationSimulationDefaultConfiguration;
 
   /** Maps JSONL dataset attributes to user conversation simulation inputs when their names differ from the defaults. The default attribute names are `test_case_id`, `test_case_category`, `test_case_description`, and `simulation_configuration`, matching `UserConversationSimulationTestCase`. Omit when the dataset uses these names or when using `inline_user_conversation_simulation`. */
   data_mapping?: Record<string>;
-
-  /** Whether to write all generated conversations to a file in a versioned Foundry dataset, providing visibility into the generated conversations. The dataset can be reused in future evaluation runs. When enabled, the completed run includes `output_dataset`. When omitted, the service defaults to `false`. */
-  enable_conversation_dataset_generation?: boolean = false;
 }
 
 /** Sources supported by user conversation simulation. */
@@ -57,6 +54,18 @@ model UserConversationSimulationConfiguration {
 
   /** Conversation behavior of the simulated user. */
   user_behavior?: UserConversationSimulationUserBehaviorConfiguration;
+}
+
+/** Configures default conversation behavior and optional run-wide persistence of generated conversations. */
+model UserConversationSimulationDefaultConfiguration {
+  ...UserConversationSimulationConfiguration;
+
+  /** Whether to write all generated conversations to a versioned Foundry dataset. When enabled, the completed run includes a `simulated_user_conversations` entry in `output_datasets`. When omitted, the service defaults to `false`. */
+  enable_conversation_dataset_generation?: boolean = false;
+
+  /** Name of the dataset to which generated conversations are written. This property is used only when `enable_conversation_dataset_generation` is `true`. When omitted, the service generates a dataset name. */
+  @minLength(1)
+  output_conversation_dataset_name?: string;
 }
 
 /** Effect that can be applied to simulated conversation audio. The union is extensible for additional effects. */
