@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -22,6 +24,14 @@ model EmployeeProperties {
 
   /** City of employee */
   city?: string;
+
+  /** Department of employee */
+  @added(Versions.v2026_07_01)
+  department?: string;
+
+  /** Whether the employee is a contractor */
+  @added(Versions.v2026_08_01_preview)
+  isContractor?: boolean;
 
   /** Profile of employee */
   @encode("base64url")
