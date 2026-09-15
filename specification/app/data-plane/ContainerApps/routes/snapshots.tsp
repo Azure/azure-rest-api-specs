@@ -31,7 +31,7 @@ model GetSnapshotsCountResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: int32;
+  @body body: SnapshotCountResponse;
 }
 
 /** Errors returned by getSnapshotsCount. */

@@ -10,7 +10,7 @@ model GetSandboxesCountResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: int32;
+  @body body: SandboxCountResponse;
 }
 
 /** Errors returned by getSandboxesCount. */

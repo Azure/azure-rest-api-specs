@@ -4952,10 +4952,6 @@
         ],
         "summary": "Gets the total count of sandboxes.",
         "description": "Gets the total count of sandboxes.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4974,8 +4970,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "$ref": "#/definitions/SandboxCountResponse"
             }
           },
           "401": {
@@ -5574,10 +5569,6 @@
         ],
         "summary": "Gets the total count of snapshots.",
         "description": "Gets the total count of snapshots.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -5596,8 +5587,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "$ref": "#/definitions/SnapshotCountResponse"
             }
           },
           "401": {
@@ -7588,6 +7578,20 @@
         "value"
       ]
     },
+    "CountResponse": {
+      "type": "object",
+      "description": "Response containing the total number of resources in a scope.",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of resources."
+        }
+      },
+      "required": [
+        "count"
+      ]
+    },
     "CpuQuantity": {
       "type": "string",
       "description": "Kubernetes-style CPU resource quantity string (e.g. \"500m\", \"2\", \"0.5\")."
@@ -9445,8 +9449,7 @@
       "description": "OK.",
       "properties": {
         "body": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/SandboxCountResponse",
           "description": "Response body."
         }
       },
@@ -9485,8 +9488,7 @@
       "description": "OK.",
       "properties": {
         "body": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/SnapshotCountResponse",
           "description": "Response body."
         }
       },
@@ -11534,6 +11536,20 @@
         "targetPath"
       ]
     },
+    "SandboxCountResponse": {
+      "type": "object",
+      "description": "Response containing the total number of sandboxes in a scope.",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of resources."
+        }
+      },
+      "required": [
+        "count"
+      ]
+    },
     "SandboxCreatedResult": {
       "type": "object",
       "description": "Successful Sandbox create response.",
@@ -12544,6 +12560,20 @@
       "required": [
         "id",
         "createdAtUtc"
+      ]
+    },
+    "SnapshotCountResponse": {
+      "type": "object",
+      "description": "Response containing the total number of snapshots in a scope.",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of resources."
+        }
+      },
+      "required": [
+        "count"
       ]
     },
     "SnapshotId": {

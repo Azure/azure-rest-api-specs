@@ -10,6 +10,12 @@ alias DataPlaneStandardTraits = NoConditionalRequests &
   NoRepeatableRequests &
   NoClientRequestId;
 
+/** Response containing the total number of resources in a scope. */
+model CountResponse {
+  /** Total number of resources. */
+  count: int32;
+}
+
 /** Azure Dev Compute error object. */
 @error
 model ProblemDetails {

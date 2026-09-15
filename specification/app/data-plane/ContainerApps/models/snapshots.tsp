@@ -2,6 +2,9 @@ using Rest;
 
 namespace ContainerAppsSandbox;
 
+/** Response containing the total number of snapshots in a scope. */
+model SnapshotCountResponse is CountResponse;
+
 /** SnapshotPodContainer wire model. */
 model SnapshotPodContainer {
   /** name value. */

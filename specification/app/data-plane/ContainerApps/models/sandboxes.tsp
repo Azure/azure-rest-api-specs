@@ -2,6 +2,9 @@ using TypeSpec.Rest;
 
 namespace ContainerAppsSandbox;
 
+/** Response containing the total number of sandboxes in a scope. */
+model SandboxCountResponse is CountResponse;
+
 /** Customer-facing sandbox resource returned by the service. */
 @resource("sandboxes")
 @parentResource(SandboxGroupScope)
