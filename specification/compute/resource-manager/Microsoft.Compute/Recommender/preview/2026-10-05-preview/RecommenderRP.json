@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ComputeRecommenderResourceProviderClient",
-    "version": "2026-05-05-preview",
+    "version": "2026-10-05-preview",
     "description": "The Compute Recommender Resource Provider Client",
     "x-typespec-generated": [
       {
@@ -46,6 +46,9 @@
       "name": "SpotPlacementScores"
     },
     {
+      "name": "ComputePlacementScores"
+    },
+    {
       "name": "SkuMixPlacementScores"
     }
   ],
@@ -86,6 +89,96 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/regular": {
+      "get": {
+        "operationId": "ComputePlacementScores_Get",
+        "tags": [
+          "ComputePlacementScores"
+        ],
+        "description": "Gets Compute Placement Scores metadata.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ComputePlacementScoresBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the metadata of Compute Placement Scores.": {
+            "$ref": "./examples/GetComputePlacementScores.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/regular/generate": {
+      "post": {
+        "operationId": "ComputePlacementScores_Post",
+        "tags": [
+          "ComputePlacementScores"
+        ],
+        "description": "Generates placement scores for Compute VM skus.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "computePlacementScoresInput",
+            "in": "body",
+            "description": "ComputePlacementScores object supplied in the body of the Post compute placement scores operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ComputePlacementScoresInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ComputePlacementScoresResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns compute VM placement scores for given configurations.": {
+            "$ref": "./examples/GenerateComputePlacementScores.json"
+          },
+          "Returns compute VM placement scores using the request URI location as the desired location when desiredLocations is not specified.": {
+            "$ref": "./examples/GenerateComputePlacementScoresWithoutDesiredLocation.json"
+          }
         }
       }
     },
@@ -172,6 +265,9 @@
         "x-ms-examples": {
           "Returns spot VM placement scores for given configurations.": {
             "$ref": "./examples/GenerateSpotPlacementScores.json"
+          },
+          "Returns spot VM placement scores using the request URI location as the desired location when desiredLocations is not specified.": {
+            "$ref": "./examples/GenerateSpotPlacementScoresWithoutDesiredLocation.json"
           }
         }
       }
@@ -265,6 +361,89 @@
     }
   },
   "definitions": {
+    "ComputePlacementScoresBase": {
+      "type": "object",
+      "description": "Contains metadata of the compute placement scoring resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlacementScoresProperties",
+          "description": "Contains additional properties of a placement scores resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ComputePlacementScoresInput": {
+      "type": "object",
+      "description": "ComputePlacementScores API Input.",
+      "properties": {
+        "desiredLocations": {
+          "type": "array",
+          "description": "The desired regions. If not set, the location from the request URI is used as the desired location. Each location in this list must be a valid Azure region.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "desiredSizes": {
+          "type": "array",
+          "description": "The desired virtual machine SKU sizes.",
+          "items": {
+            "$ref": "#/definitions/ResourceSize"
+          }
+        },
+        "desiredCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired instance count per region/zone based on the scope. If not set, defaults to 1."
+        },
+        "availabilityZones": {
+          "type": "boolean",
+          "description": "Defines if the scope is zonal or regional."
+        }
+      },
+      "required": [
+        "desiredSizes"
+      ]
+    },
+    "ComputePlacementScoresResponse": {
+      "type": "object",
+      "description": "ComputePlacementScores API response.",
+      "properties": {
+        "desiredLocations": {
+          "type": "array",
+          "description": "The desired regions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "desiredSizes": {
+          "type": "array",
+          "description": "The desired virtual machine SKU sizes.",
+          "items": {
+            "$ref": "#/definitions/ResourceSize"
+          }
+        },
+        "desiredCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired instance count per region/zone based on the scope."
+        },
+        "availabilityZones": {
+          "type": "boolean",
+          "description": "Defines if the scope is zonal or regional."
+        },
+        "placementScores": {
+          "type": "array",
+          "description": "A placement score indicating the likelihood of successfully allocating the specified Spot VM(s), as well as the expected lifetimes of the Spot VM(s) after allocation.",
+          "items": {
+            "$ref": "#/definitions/PlacementScore"
+          }
+        }
+      }
+    },
     "PlacementScore": {
       "type": "object",
       "description": "The spot placement score for sku/region/zone combination.",
@@ -282,13 +461,62 @@
           "description": "The availability zone."
         },
         "score": {
-          "type": "string",
+          "$ref": "#/definitions/PlacementScoreValue",
           "description": "A placement score indicating the likelihood of successfully allocating the specified Spot VM(s), as well as the expected lifetimes of the Spot VM(s) after allocation."
         },
-        "isQuotaAvailable": {
-          "type": "boolean",
-          "description": "Whether the desired quota is available."
+        "placementPreference": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Placement preference from 0 to 10 (inclusive). Higher is better."
         }
+      }
+    },
+    "PlacementScoreValue": {
+      "type": "string",
+      "description": "Placement score value indicating the likelihood of successfully allocating the requested VM(s).",
+      "enum": [
+        "High",
+        "Medium",
+        "Low",
+        "RestrictedSkuNotAvailable",
+        "InsufficientQuota",
+        "DataNotFoundOrStale"
+      ],
+      "x-ms-enum": {
+        "name": "PlacementScoreValue",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High likelihood of successful allocation."
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium likelihood of successful allocation."
+          },
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low likelihood of successful allocation."
+          },
+          {
+            "name": "RestrictedSkuNotAvailable",
+            "value": "RestrictedSkuNotAvailable",
+            "description": "The requested SKU is restricted and not available."
+          },
+          {
+            "name": "InsufficientQuota",
+            "value": "InsufficientQuota",
+            "description": "Insufficient quota is available to fulfill the request."
+          },
+          {
+            "name": "DataNotFoundOrStale",
+            "value": "DataNotFoundOrStale",
+            "description": "Data was not found or is stale."
+          }
+        ]
       }
     },
     "PlacementScoresProperties": {
@@ -359,6 +587,76 @@
         }
       ]
     },
+    "SkuMixPlacementCapacityLimit": {
+      "type": "object",
+      "description": "Capacity availability for a single requested (VM size, zone) combination, independent of the\nrecommended placement.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "VM size name (e.g. Standard_D2s_v3)."
+        },
+        "priority": {
+          "$ref": "#/definitions/SkuMixPlacementPriority",
+          "description": "Priority of this entry (Regular or Spot)."
+        },
+        "zone": {
+          "type": "string",
+          "description": "Logical zone (e.g. \"1\", \"2\", \"3\"). Omitted or empty for regional requests."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Upper bound, in VMs, on how much capacity can be allocated for this (VM size, zone): the smallest of\nthe requested capacity, the available capacity, and the available quota, but never below the capacity\nalready recommended for the slot. 0 when nothing is available.",
+          "minimum": 0
+        },
+        "reason": {
+          "$ref": "#/definitions/SkuMixPlacementCapacityLimitReason",
+          "description": "Why the limit is below the requested capacity, or None when the request is fully available."
+        }
+      },
+      "required": [
+        "name",
+        "priority",
+        "limit",
+        "reason"
+      ]
+    },
+    "SkuMixPlacementCapacityLimitReason": {
+      "type": "string",
+      "description": "Reason the capacity limit for a (VM size, zone) is below the requested capacity.",
+      "enum": [
+        "None",
+        "InsufficientCapacity",
+        "InsufficientQuota",
+        "SkuNotAvailable"
+      ],
+      "x-ms-enum": {
+        "name": "SkuMixPlacementCapacityLimitReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The full requested capacity is available for this (VM size, zone)."
+          },
+          {
+            "name": "InsufficientCapacity",
+            "value": "InsufficientCapacity",
+            "description": "Allocable capacity bounded the limit below the requested capacity."
+          },
+          {
+            "name": "InsufficientQuota",
+            "value": "InsufficientQuota",
+            "description": "Quota bounded the limit below the requested capacity. Takes precedence when both capacity and quota are insufficient."
+          },
+          {
+            "name": "SkuNotAvailable",
+            "value": "SkuNotAvailable",
+            "description": "This VM size is not available in this zone for the subscription."
+          }
+        ]
+      }
+    },
     "SkuMixPlacementCapacityProfile": {
       "type": "object",
       "description": "Capacity-related properties for the placement request.",
@@ -427,10 +725,6 @@
       "type": "object",
       "description": "A single deployment choice recommendation.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for this deployment choice."
-        },
         "score": {
           "type": "integer",
           "format": "int32",
@@ -451,7 +745,6 @@
         }
       },
       "required": [
-        "id",
         "score",
         "skuSplit"
       ]
@@ -491,11 +784,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Lower range of recommended allocation capacity."
-        },
-        "capacityMax": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Upper range of recommended allocation capacity."
         },
         "zone": {
           "type": "string",
@@ -628,6 +916,10 @@
       "type": "object",
       "description": "Sku Mix Placement API response.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this placement response, including responses that contain no placement choices.\nReplaces the per-choice id that was present on placementChoices in earlier API versions."
+        },
         "placementChoices": {
           "type": "array",
           "description": "List of placement choice recommendations.",
@@ -644,9 +936,21 @@
         "partialFulfillmentReason": {
           "$ref": "#/definitions/SkuMixPlacementPartialFulfillmentReason",
           "description": "Indicates whether the response is a complete or partial fulfillment."
+        },
+        "capacityLimits": {
+          "type": "array",
+          "description": "Capacity availability for each requested (VM size, zone) combination, independent of the recommended\nplacement. An entry is present for every requested combination, including those excluded by capacity\nor quota. Only returned for requests that describe instances by VM sizes.",
+          "items": {
+            "$ref": "#/definitions/SkuMixPlacementCapacityLimit"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "zone"
+          ]
         }
       },
       "required": [
+        "id",
         "placementChoices",
         "partialFulfillmentReason"
       ]
@@ -795,7 +1099,10 @@
           "type": "boolean",
           "description": "Defines if the scope is zonal or regional."
         }
-      }
+      },
+      "required": [
+        "desiredSizes"
+      ]
     },
     "SpotPlacementScoresResponse": {
       "type": "object",
