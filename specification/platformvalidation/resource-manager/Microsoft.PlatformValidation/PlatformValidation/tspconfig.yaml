@@ -1,0 +1,46 @@
+parameters:
+  "service-dir":
+    default: "sdk/platformvalidation"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/platformvalidation.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-platformvalidation"
+    namespace: "azure.mgmt.platformvalidation"
+    flavor: azure
+    generate-test: true
+    generate-sample: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.PlatformValidation"
+    namespace: "Azure.ResourceManager.PlatformValidation"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-platformvalidation"
+    namespace: "com.azure.resourcemanager.platformvalidation"
+    service-name: "Platform Validation"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-platformvalidation"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-platformvalidation"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/platformvalidation"
+    emitter-output-dir: "{output-dir}/{service-dir}/armplatformvalidation"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armplatformvalidation"
+    fix-const-stuttering: true
+    flavor: azure
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
