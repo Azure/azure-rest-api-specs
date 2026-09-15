@@ -1952,7 +1952,8 @@ model GallerySoftDeletedResourceProperties {
   /**
    * The timestamp for when the resource is soft-deleted. In dateTime offset format.
    */
-  softDeletedTime?: string;
+  @typeChangedFrom(Versions.v2026_03_03, string)
+  softDeletedTime?: utcDateTime;
 
   /**
    * The timestamp after which a soft-deleted gallery image version is no longer consumable for VM/VMSS creation or VMSS scale out. It is calculated from the soft-deleted time plus the retention period. In dateTime offset format.
