@@ -190,18 +190,18 @@ using Azure.AI.Projects;
 
 @@clientName(CodeConfiguration.content_hash, "contentSha256");
 
-@@clientName(AgentOptimizationCandidate.avg_score, "averageScore");
-@@clientName(AgentOptimizationCandidate.avg_tokens, "averageTokens");
-@@clientName(AgentOptimizationCandidate.eval_id, "evaluationId");
-@@clientName(AgentOptimizationCandidate.eval_run_id, "evaluationRunId");
+@@clientName(AgentOptimizationCandidateEvaluation.score, "averageScore");
+@@clientName(AgentOptimizationCandidateEvaluation.avg_tokens, "averageTokens");
+@@clientName(AgentOptimizationCandidateEvaluation.eval_id, "evaluationId");
+@@clientName(
+  AgentOptimizationCandidateEvaluation.eval_run_id,
+  "evaluationRunId"
+);
 @@clientName(
   AgentOptimizationDatasetItem.desired_num_turns,
   "desiredNumberTurns"
 );
-@@clientName(
-  AgentOptimizationEvaluatorRef,
-  "AgentOptimizationEvaluatorReference"
-);
+@@clientName(AgentOptimizationEvaluator, "AgentOptimizationEvaluatorReference");
 @@clientName(AgentOptimizationJobProgress.elapsed_seconds, "elapsed");
 
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
