@@ -21,6 +21,7 @@ import "./PrivateEndpointConnection.tsp";
 import "./Replica.tsp";
 import "./SharedPrivateLinkResource.tsp";
 import "./PersistentStorage.tsp";
+import "./AiService.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 
@@ -57,6 +58,11 @@ enum Versions {
    * The 2025-12-01-preview API version.
    */
   v2025_12_01_preview: "2025-12-01-preview",
+
+  /**
+   * The 2026-03-01-preview API version.
+   */
+  v2026_03_01_preview: "2026-03-01-preview",
 }
 
 /**
