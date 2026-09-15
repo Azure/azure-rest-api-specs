@@ -1,0 +1,35 @@
+{
+  "title": "Runbooks_Execute_MaximumSet",
+  "operationId": "Runbooks_Execute",
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD",
+    "resourceGroupName": "rgwaves",
+    "projectName": "project1",
+    "runbookName": "runbook1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "runbookArtifactVersionId": "runbook-version-3",
+          "executionArtifactId": "execution-artifact-1",
+          "status": "Running",
+          "startTime": "2026-08-01T12:00:00Z",
+          "endTime": "2026-08-01T13:00:00Z"
+        },
+        "eTag": "W/\"execution-version-1\"",
+        "id": "/subscriptions/F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD/resourceGroups/rgwaves/providers/Microsoft.Migrate/migrateProjects/project1/runbooks/runbook1/executions/execution1",
+        "name": "execution1",
+        "type": "Microsoft.Migrate/migrateProjects/runbooks/executions"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/Microsoft.Migrate/locations/eastus/operationStatuses/execute-runbook1",
+        "Retry-After": 30
+      }
+    }
+  }
+}
