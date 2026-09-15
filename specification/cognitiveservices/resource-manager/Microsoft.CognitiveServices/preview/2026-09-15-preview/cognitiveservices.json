@@ -17383,7 +17383,7 @@
         "workloadIdentityResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Azure resource ID of the separate user-assigned managed identity federated to service accounts on the AKS cluster. Hosted agents use this identity to access the Azure Storage blob data plane.",
+          "description": "Azure resource ID of the separate user-assigned managed identity federated to service accounts on the AKS cluster. Hosted agents use this identity to access the Azure Storage blob data plane. This property is optional when the AKS Foundry extension is used.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -17419,7 +17419,6 @@
       },
       "required": [
         "hostingManagementIdentityResourceId",
-        "workloadIdentityResourceId",
         "clusterResourceId",
         "storageAccountResourceId"
       ],
