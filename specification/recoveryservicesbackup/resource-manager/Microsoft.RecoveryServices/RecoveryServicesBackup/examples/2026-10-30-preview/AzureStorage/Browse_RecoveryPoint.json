@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2026-10-30-preview",
+    "body": {
+      "properties": {
+        "continuationToken": null,
+        "maxResults": 200,
+        "objectType": "AzureFileShareBrowseRecoveryPointRequest",
+        "parentPath": "folder1/subfolder2"
+      }
+    },
+    "containerName": "StorageContainer;Storage;vaultilrrg;vaultilrsa",
+    "fabricName": "Azure",
+    "protectedItemName": "AzureFileShare;vaultilrshare",
+    "recoveryPointId": "932874923749237",
+    "resourceGroupName": "vaultilrrg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "vaultilrvault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "continuationToken": "eyJpbmRleCI6MjAwfQ==",
+          "items": [
+            {
+              "itemType": "AzureFileDirectory",
+              "name": "Documents",
+              "size": 0
+            },
+            {
+              "itemType": "AzureFile",
+              "name": "readme.txt",
+              "size": 2048
+            }
+          ],
+          "objectType": "AzureFileShareBrowseRecoveryPointResponse"
+        }
+      }
+    }
+  },
+  "operationId": "RecoveryPoints_Browse",
+  "title": "Browse a vaulted Azure Files recovery point"
+}
