@@ -106,23 +106,6 @@ union IsEnabled {
 }
 
 /**
- * The operation status code.
- */
-union Code {
-  string,
-
-  /**
-   * Extension was created/updated successfully.
-   */
-  Succeeded: "Succeeded",
-
-  /**
-   * Extension was not created/updated successfully. See operation status message for more details.
-   */
-  Failed: "Failed",
-}
-
-/**
  * Indicates the origin of the most recent pricing configuration change.
  */
 @added(Versions.v2026_07_01)
@@ -133,22 +116,6 @@ union OriginatedFrom {
    * Indicates that the configuration change originated from Microsoft 365.
    */
   M365: "M365",
-}
-
-/**
- * A status describing the success or failure of an extension operation.
- */
-@added(Versions.v2026_07_01)
-model OperationStatus {
-  /**
-   * The operation status code.
-   */
-  code?: Code;
-
-  /**
-   * Additional information regarding the operation result.
-   */
-  message?: string;
 }
 
 /**
@@ -265,8 +232,7 @@ model Extension {
    * Optional. A status describing the success/failure of the extension's enablement/disablement operation.
    */
   @visibility(Lifecycle.Read)
-  @typeChangedFrom(Versions.v2026_07_01, Common.OperationStatus)
-  operationStatus?: OperationStatus;
+  operationStatus?: Common.OperationStatus;
 
   /**
    * Resource ID of the security operator associated with the extension.
