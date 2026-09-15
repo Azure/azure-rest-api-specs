@@ -1201,6 +1201,60 @@ model AutonomousDatabaseBaseProperties {
   @doc("The client IP access control list (ACL). This is an array of CIDR notations and/or IP addresses. Values should be separate strings, separated by commas. Example: ['1.1.1.1','1.1.1.0/24','1.1.2.25']")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   whitelistedIps?: aclString[];
+
+  @added(Versions.v20260401_preview)
+  @doc("Update AZ at the earliest available opportunity")
+  @visibility(Lifecycle.Update)
+  isScheduleAzUpdateToEarliest?: boolean;
+
+  @added(Versions.v20260401_preview)
+  @doc("The date and time when the Autonomous Database availability zone is to be updated.")
+  @visibility(Lifecycle.Update)
+  timeScheduledAzUpdate?: string;
+
+  @added(Versions.v20260401_preview)
+  @doc("The logical zone where the Autonomous Database is provisioned.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  zone?: string;
+
+  @added(Versions.v20260401_preview)
+  @removed(Versions.v20260501_preview)
+  @doc("The external location where the Autonomous Database is provisioned.")
+  @visibility(Lifecycle.Read)
+  externalLocation?: string;
+
+  @added(Versions.v20260401_preview)
+  @removed(Versions.v20260501_preview)
+  @doc("The external location zone context for the Autonomous Database.")
+  @visibility(Lifecycle.Read)
+  externalLocationZoneContext?: string;
+
+  @added(Versions.v20260401_preview)
+  @removed(Versions.v20260501_preview)
+  @doc("The availability domain associated with the Autonomous Database.")
+  @visibility(Lifecycle.Read)
+  availabilityDomain?: string;
+
+  @added(Versions.v20260401_preview)
+  @removed(Versions.v20260501_preview)
+  @doc("The OCID of the cluster placement group associated with the Autonomous Database.")
+  @visibility(Lifecycle.Read)
+  clusterPlacementGroupId?: Ocid;
+
+  @added(Versions.v20260401_preview)
+  @doc("Backup destination for auto and long-term backups. Existing backups stay in their original destination when this value changes.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  backupDestination?: BackupDestinationType;
+
+  @added(Versions.v20260401_preview)
+  @doc("Azure Resource Anchor ID")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  resourceAnchorId?: ResourceAnchorResourceId;
+
+  @added(Versions.v20260401_preview)
+  @doc("Azure Network Anchor ID")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  networkAnchorId?: NetworkAnchorResourceId;
 }
 
 @doc("Autonomous Database Generate Wallet resource model.")

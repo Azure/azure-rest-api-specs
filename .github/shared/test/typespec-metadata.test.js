@@ -1,5 +1,6 @@
-import { access, writeFile } from "node:fs/promises";
-import { dirname } from "node:path";
+import { access, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { dirname, join } from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { execNpmExec } from "../src/exec.js";
 import { debugLogger } from "../src/logger.js";
@@ -84,6 +85,25 @@ describe("generateTypeSpecMetadata", () => {
     });
 
     await generateTypeSpecMetadata("contoso", { logger: debugLogger });
+  });
+
+  it("uses client.tsp as the compile target when main.tsp is absent", async () => {
+    const projectDirectory = await mkdtemp(join(tmpdir(), "typespec-client-project-"));
+    const clientTspPath = join(projectDirectory, "client.tsp");
+    await writeFile(clientTspPath, "namespace Contoso;");
+
+    try {
+      vi.mocked(execNpmExec).mockImplementation(async (args) => {
+        metadataFile = getMetadataFile(args);
+        await writeFile(metadataFile, JSON.stringify(validMetadata));
+        expect(args[2]).toBe(clientTspPath);
+        return { stdout: "", stderr: "" };
+      });
+
+      await expect(generateTypeSpecMetadata(projectDirectory)).resolves.toEqual(validMetadata);
+    } finally {
+      await rm(projectDirectory, { recursive: true, force: true });
+    }
   });
 
   it("rejects invalid metadata and cleans up", async () => {

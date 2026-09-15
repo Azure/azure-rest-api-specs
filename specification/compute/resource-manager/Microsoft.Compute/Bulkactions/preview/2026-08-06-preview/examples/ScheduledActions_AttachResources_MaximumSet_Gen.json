@@ -1,5 +1,5 @@
 {
-  "title": "ScheduledActions_AttachResources_MaximumSet",
+  "title": "Add resources to a scheduled action",
   "operationId": "ScheduledActions_AttachResources",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -9,7 +9,18 @@
     "body": {
       "resources": [
         {
-          "resourceId": "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm",
+          "resourceId": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm",
+          "notificationSettings": [
+            {
+              "destination": "admin@contoso.com",
+              "type": "Email",
+              "language": "en-us",
+              "disabled": true
+            }
+          ]
+        },
+        {
+          "resourceId": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm2",
           "notificationSettings": [
             {
               "destination": "admin@contoso.com",
@@ -32,11 +43,15 @@
     },
     "200": {
       "body": {
-        "totalResources": 11,
+        "totalResources": 2,
         "resourcesStatuses": [
           {
-            "resourceId": "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm",
-            "status": "Succeeded",
+            "resourceId": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm",
+            "status": "Succeeded"
+          },
+          {
+            "resourceId": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm2",
+            "status": "Failed",
             "error": {
               "code": "InternalServerError",
               "message": "An internal error occurred.",

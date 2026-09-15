@@ -1621,14 +1621,14 @@ model ContainerProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2026_09_01)
-  blobAccessPointConfiguration?: BlobAccessPointConfiguration;
+  blobAccessPointConfiguration?: BlobAccessPointConfigurationConnection;
 }
 
 /**
  * Blob Access Point configuration associated with a blob container.
  */
 @added(Versions.v2026_09_01)
-model BlobAccessPointConfiguration {
+model BlobAccessPointConfigurationConnection {
   /**
    * Name of the Blob Access Point Configuration to connect to.
    */
@@ -2966,6 +2966,36 @@ model CheckNameAvailabilityResult {
 }
 
 /**
+ * Indicates whether Turbo Tier is enabled or disabled.
+ */
+@added(Versions.v2026_09_01)
+union TurboTierStatus {
+  string,
+
+  /** Turbo Tier is enabled. */
+  Enabled: "Enabled",
+
+  /** Turbo Tier is disabled. */
+  Disabled: "Disabled",
+}
+
+/**
+ * Configures Turbo Tier for a storage account.
+ */
+@added(Versions.v2026_09_01)
+model TurboTier {
+  /** Indicates whether Turbo Tier is enabled or disabled. */
+  status?: TurboTierStatus;
+
+  /**
+   * The target fill percentage used for placement. The valid range is 10 to 100. When status is Enabled and this property is omitted, the default value is 20.
+   */
+  @minValue(10)
+  @maxValue(100)
+  targetPercent?: int32;
+}
+
+/**
  * The parameters used when creating a storage account.
  */
 model StorageAccountCreateParameters {
@@ -3130,6 +3160,12 @@ model StorageAccountPropertiesCreateParameters {
    * Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.
    */
   accessTier?: AccessTier;
+
+  /**
+   * Configures Turbo Tier for the storage account.
+   */
+  @added(Versions.v2026_09_01)
+  turboTier?: TurboTier;
 
   /**
    * Provides the identity based authentication settings for Azure Files.
@@ -3711,6 +3747,12 @@ model StorageDataCollaborationPolicyProperties {
   allowStorageConnectors?: boolean;
 
   /**
+   * Indicates whether Blob Access Point configurations are allowed to be created or managed on the storage account.
+   */
+  @added(Versions.v2026_09_01)
+  allowStorageBlobAccessPointConfigurations?: boolean;
+
+  /**
    * Indicates whether data shares are allowed to be created or managed on the storage account.
    */
   allowStorageDataShares?: boolean;
@@ -3816,6 +3858,12 @@ model StorageAccountProperties {
    */
   @visibility(Lifecycle.Read)
   accessTier?: AccessTier;
+
+  /**
+   * Configures Turbo Tier for the storage account.
+   */
+  @added(Versions.v2026_09_01)
+  turboTier?: TurboTier;
 
   /**
    * Provides the identity based authentication settings for Azure Files.
@@ -4427,6 +4475,12 @@ model StorageAccountPropertiesUpdateParameters {
    * Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.
    */
   accessTier?: AccessTier;
+
+  /**
+   * Configures Turbo Tier for the storage account.
+   */
+  @added(Versions.v2026_09_01)
+  turboTier?: TurboTier;
 
   /**
    * Provides the identity based authentication settings for Azure Files.
@@ -6024,6 +6078,12 @@ model NspAccessRuleProperties {
    */
   @visibility(Lifecycle.Read)
   fullyQualifiedDomainNames?: string[];
+
+  /**
+   * Service Tags for inbound rules
+   */
+  @added(Versions.v2026_09_01)
+  serviceTags?: string[];
 }
 
 /**
@@ -6928,7 +6988,11 @@ model ContextCacheUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   /** The managed service identity. */
-  identity?: Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity;
+  @typeChangedFrom(
+    Versions.v2026_09_01,
+    Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity
+  )
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /** The updatable properties of the Context Cache. */
   properties?: ContextCachePropertiesUpdate;
@@ -6983,4 +7047,49 @@ model ContextCacheContainerPropertiesUpdate {
 model ContextCacheContainerUpdate {
   /** The updatable properties of the Context Cache Container. */
   properties?: ContextCacheContainerPropertiesUpdate;
+}
+
+/**
+ * The parameters used to check the availability of the context cache resource name.
+ */
+@added(Versions.v2026_09_01)
+model ContextCacheCheckNameAvailabilityParameters {
+  /** The name of the context cache resource to check for availability. */
+  @pattern("^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$")
+  name: string;
+
+  /** The type of the context cache resource to check for availability. */
+  type: "Microsoft.Storage/contextCaches";
+}
+
+/**
+ * The result of the context cache name availability check.
+ */
+@added(Versions.v2026_09_01)
+model ContextCacheCheckNameAvailabilityResult {
+  /** A boolean value that indicates whether the context cache name is available to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used. */
+  @visibility(Lifecycle.Read)
+  nameAvailable: boolean;
+
+  /** The reason why the context cache name is not available. The Reason element is only returned if NameAvailable is false */
+  @visibility(Lifecycle.Read)
+  reason?: ContextCacheCheckNameAvailabilityFailureReason;
+
+  /** The error message providing additional information about the context cache name availability check failure. */
+  @visibility(Lifecycle.Read)
+  message?: string;
+}
+
+/**
+ * The reason why the context cache name is not available. The Reason element is only returned if NameAvailable is false.
+ */
+@added(Versions.v2026_09_01)
+union ContextCacheCheckNameAvailabilityFailureReason {
+  /** The context cache name is already in use. */
+  AlreadyExists: "AlreadyExists",
+
+  /** The context cache name is invalid. */
+  ContextCacheNameInvalid: "ContextCacheNameInvalid",
+
+  string,
 }

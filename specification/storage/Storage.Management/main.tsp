@@ -38,6 +38,7 @@ import "./StorageConnector.tsp";
 import "./StorageDataShare.tsp";
 import "./StorageContextCache.tsp";
 import "./StorageContextCacheContainer.tsp";
+import "./BlobAccessPointConfiguration.tsp";
 import "./AdvancedPlatformMetrics.tsp";
 import "./routes.tsp";
 import "./client.tsp";
