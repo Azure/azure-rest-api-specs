@@ -34,7 +34,6 @@ using OpenAPI;
   #{ name: "Models", parent: "Platform APIs" },
   #{ name: "Memory Stores", parent: "Platform APIs" },
   #{ name: "Chat", parent: "Platform APIs" },
-  #{ name: "Assistants", parent: "Platform APIs" },
   #{ name: "Audio", parent: "Platform APIs" },
   #{ name: "Batch", parent: "Platform APIs" },
   #{ name: "Completions", parent: "Platform APIs" },
@@ -44,7 +43,6 @@ using OpenAPI;
   #{ name: "Images", parent: "Platform APIs" },
   #{ name: "Moderations", parent: "Platform APIs" },
   #{ name: "Realtime", parent: "Platform APIs" },
-  #{ name: "Threads", parent: "Platform APIs" },
   #{ name: "Uploads", parent: "Platform APIs" },
   #{
     name: "Vector stores",
