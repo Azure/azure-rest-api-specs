@@ -1,0 +1,34 @@
+{
+  "operationId": "ServiceEntitlementSettings_GetOperationResult",
+  "title": "Gets the result of a service entitlement setting operation",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "location": "eastus",
+    "operationId": "22222222-2222-2222-2222-222222222222"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myResourceGroup/providers/Microsoft.Security/serviceEntitlementSettings/default",
+        "name": "default",
+        "type": "Microsoft.Security/serviceEntitlementSettings",
+        "location": "eastus",
+        "tags": {
+          "environment": "test"
+        },
+        "properties": {
+          "isDefault": false,
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/locations/eastus/operationResults/22222222-2222-2222-2222-222222222222?api-version=2026-09-01-preview",
+        "Retry-After": 10
+      }
+    },
+    "204": {}
+  }
+}
