@@ -579,6 +579,38 @@ model NodeTypeProperties {
    */
   @added(Versions.v2026_05_01_preview)
   proxyAgentSettings?: ProxyAgentSettings;
+
+  /**
+   * Specifies the sku profile for the node type when vmSize is set to Mix. This allows specifying multiple VM sizes and an allocation strategy for Instance Mix scenarios.
+   */
+  @added(Versions.v2026_09_01_preview)
+  skuProfile?: SkuProfile;
+
+  /**
+   * Specifies the caching requirements for the primary Service Fabric data disk. Possible values include: None, ReadOnly, ReadWrite.
+   */
+  @added(Versions.v2026_09_01_preview)
+  dataDiskCaching?: DiskCachingType;
+
+  /**
+   * Specifies whether write accelerator should be enabled or disabled on the primary Service Fabric data disk.
+   */
+  @added(Versions.v2026_09_01_preview)
+  dataDiskWriteAcceleratorEnabled?: boolean;
+
+  /**
+   * Specifies the Read-Write IOPS for the primary Service Fabric data disk.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IOPS is a well known abbreviation"
+  @added(Versions.v2026_09_01_preview)
+  dataDiskIOPSReadWrite?: int32;
+
+  /**
+   * Specifies the bandwidth in MB per second for the primary Service Fabric data disk.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MBps is a well known abbreviation"
+  @added(Versions.v2026_09_01_preview)
+  dataDiskMBpsReadWrite?: int32;
 }
 
 /**
@@ -1049,6 +1081,32 @@ model VmssDataDisk {
    */
   @pattern("^[a-zA-Z]{1}$")
   diskLetter: string;
+
+  /**
+   * Specifies the caching requirements for the managed data disk. Possible values include: None, ReadOnly, ReadWrite.
+   */
+  @added(Versions.v2026_09_01_preview)
+  caching?: DiskCachingType;
+
+  /**
+   * Specifies whether write accelerator should be enabled or disabled on the managed data disk.
+   */
+  @added(Versions.v2026_09_01_preview)
+  writeAcceleratorEnabled?: boolean;
+
+  /**
+   * Specifies the Read-Write IOPS for the managed data disk.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IOPS is a well known abbreviation"
+  @added(Versions.v2026_09_01_preview)
+  diskIOPSReadWrite?: int32;
+
+  /**
+   * Specifies the bandwidth in MB per second for the managed data disk.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MBps is a well known abbreviation"
+  @added(Versions.v2026_09_01_preview)
+  diskMBpsReadWrite?: int32;
 }
 
 /**
@@ -1396,4 +1454,83 @@ model HostEndpointSettings {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is an abbreviation for virtual machine"
   inVMAccessControlProfileReferenceId?: string;
+}
+
+/**
+ * Specifies the sku profile for Instance Mix scenarios on a node type.
+ */
+@added(Versions.v2026_09_01_preview)
+model SkuProfile {
+  /**
+   * Specifies the VM sizes for the node type.
+   */
+  @minItems(1)
+  vmSizes: SkuProfileVmSize[];
+
+  /**
+   * Specifies the allocation strategy for the VM sizes in the sku profile.
+   */
+  allocationStrategy?: AllocationStrategy;
+}
+
+/**
+ * Specifies a VM size in the sku profile.
+ */
+@added(Versions.v2026_09_01_preview)
+model SkuProfileVmSize {
+  /**
+   * The name of the VM size. For example, Standard_D2s_v3.
+   */
+  name: string;
+
+  /**
+   * Specifies the rank or priority of the VM size when allocationStrategy is Prioritized. Lower values indicate higher priority.
+   */
+  rank?: int32;
+}
+
+/**
+ * Specifies the allocation strategy for VM sizes in a sku profile.
+ */
+@added(Versions.v2026_09_01_preview)
+union AllocationStrategy {
+  string,
+
+  /**
+   * VMs are allocated using the lowest-priced available size.
+   */
+  LowestPrice: "LowestPrice",
+
+  /**
+   * VMs are allocated to optimize capacity availability across the specified sizes.
+   */
+  CapacityOptimized: "CapacityOptimized",
+
+  /**
+   * VMs are allocated according to the rank assigned to each VM size.
+   */
+  Prioritized: "Prioritized",
+}
+
+/**
+ * Specifies the caching requirements for a managed disk. Consistent with Azure VM disk caching conventions.
+ */
+@added(Versions.v2026_09_01_preview)
+union DiskCachingType {
+  string,
+
+  /**
+   * No caching.
+   */
+  None: "None",
+
+  /**
+   * Read-only caching.
+   */
+  ReadOnly: "ReadOnly",
+
+  /**
+   * Read-write caching.
+   */
+  ReadWrite: "ReadWrite",
 }

@@ -32,6 +32,48 @@ namespace Azure.ResourceManager.Models {
   "javascript"
 );
 
+@@clientName(HostEndpointSettings, "ProxyAgentHostEndpointSettings", "csharp");
+@@clientName(
+  SfmcOperationStatus,
+  "ServiceFabricManagedClusterOperationStatus",
+  "csharp"
+);
+@@clientName(
+  FaultSimulationContentWrapper,
+  "StartFaultSimulationContent",
+  "csharp"
+);
+@@clientName(SkuProfile, "ServiceFabricManagedNodeTypeSkuProfile", "csharp");
+@@clientName(SkuProfileVmSize, "ServiceFabricManagedNodeTypeVmSize", "csharp");
+@@clientName(
+  AllocationStrategy,
+  "ServiceFabricManagedNodeTypeAllocationStrategy",
+  "csharp"
+);
+@@clientName(DiskCachingType, "ServiceFabricManagedDiskCachingType", "csharp");
+@@clientName(
+  NodeTypeProperties.dataDiskIOPSReadWrite,
+  "DataDiskIopsReadWrite",
+  "csharp"
+);
+@@clientName(
+  NodeTypeProperties.dataDiskMBpsReadWrite,
+  "DataDiskMbpsReadWrite",
+  "csharp"
+);
+@@clientName(
+  NodeTypeProperties.dataDiskWriteAcceleratorEnabled,
+  "IsDataDiskWriteAcceleratorEnabled",
+  "csharp"
+);
+@@clientName(VmssDataDisk.diskIOPSReadWrite, "DiskIopsReadWrite", "csharp");
+@@clientName(VmssDataDisk.diskMBpsReadWrite, "DiskMbpsReadWrite", "csharp");
+@@clientName(
+  VmssDataDisk.writeAcceleratorEnabled,
+  "IsWriteAcceleratorEnabled",
+  "csharp"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(VMSSExtension.properties);
 
