@@ -42959,7 +42959,7 @@
         "required": [
           "name",
           "sources",
-          "generation_settings",
+          "generation_configuration",
           "scenario"
         ],
         "properties": {
@@ -42974,9 +42974,9 @@
             },
             "description": "The sources used for the data generation job."
           },
-          "generation_settings": {
+          "generation_configuration": {
             "$ref": "#/components/schemas/DataGenerationJobOptions",
-            "description": "The generation settings for the data generation job."
+            "description": "The generation configuration for the data generation job."
           },
           "scenario": {
             "$ref": "#/components/schemas/DataGenerationJobScenario",
@@ -45013,9 +45013,9 @@
             ],
             "description": "The scenario of the data generation job, which is Evaluation for this model."
           },
-          "output_target": {
+          "output_configuration": {
             "$ref": "#/components/schemas/EvaluationDataGenerationJobOutputTarget",
-            "description": "Optional dataset output target for the generated evaluation data."
+            "description": "Optional dataset output configuration for the generated evaluation data."
           }
         },
         "allOf": [
@@ -89759,9 +89759,9 @@
             ],
             "description": "The scenario of the data generation job, which is Reinforcement Fine-tuning for this model."
           },
-          "output_target": {
+          "output_configuration": {
             "$ref": "#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputTarget",
-            "description": "Optional file output target for the generated reinforcement fine-tuning data."
+            "description": "Optional file output configuration for the generated reinforcement fine-tuning data."
           }
         },
         "allOf": [
@@ -91653,9 +91653,9 @@
             ],
             "description": "The scenario of the data generation job, which is Supervised Fine-tuning for this model."
           },
-          "output_target": {
+          "output_configuration": {
             "$ref": "#/components/schemas/SupervisedFineTuningDataGenerationJobOutputTarget",
-            "description": "Optional file output target for the generated supervised fine-tuning data."
+            "description": "Optional file output configuration for the generated supervised fine-tuning data."
           }
         },
         "allOf": [

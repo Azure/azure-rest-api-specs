@@ -47,8 +47,8 @@ model DataGenerationJobInputs {
   @doc("The sources used for the data generation job.")
   sources: DataGenerationJobSource[];
 
-  @doc("The generation settings for the data generation job.")
-  generation_settings: DataGenerationJobOptions;
+  @doc("The generation configuration for the data generation job.")
+  generation_configuration: DataGenerationJobOptions;
 
   @doc("The scenario of the data generation job. Either for fine-tuning or evaluation.")
   scenario: DataGenerationJobScenario;
@@ -61,8 +61,8 @@ model EvaluationDataGenerationJobInputs extends DataGenerationJobInputs {
   @doc("The scenario of the data generation job, which is Evaluation for this model.")
   scenario: DataGenerationJobScenario.evaluation;
 
-  @doc("Optional dataset output target for the generated evaluation data.")
-  output_target?: EvaluationDataGenerationJobOutputTarget;
+  @doc("Optional dataset output configuration for the generated evaluation data.")
+  output_configuration?: EvaluationDataGenerationJobOutputTarget;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
@@ -73,8 +73,8 @@ model SupervisedFineTuningDataGenerationJobInputs
   @doc("The scenario of the data generation job, which is Supervised Fine-tuning for this model.")
   scenario: DataGenerationJobScenario.supervised_finetuning;
 
-  @doc("Optional file output target for the generated supervised fine-tuning data.")
-  output_target?: SupervisedFineTuningDataGenerationJobOutputTarget;
+  @doc("Optional file output configuration for the generated supervised fine-tuning data.")
+  output_configuration?: SupervisedFineTuningDataGenerationJobOutputTarget;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
@@ -85,8 +85,8 @@ model ReinforcementFineTuningDataGenerationJobInputs
   @doc("The scenario of the data generation job, which is Reinforcement Fine-tuning for this model.")
   scenario: DataGenerationJobScenario.reinforcement_finetuning;
 
-  @doc("Optional file output target for the generated reinforcement fine-tuning data.")
-  output_target?: ReinforcementFineTuningDataGenerationJobOutputTarget;
+  @doc("Optional file output configuration for the generated reinforcement fine-tuning data.")
+  output_configuration?: ReinforcementFineTuningDataGenerationJobOutputTarget;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
