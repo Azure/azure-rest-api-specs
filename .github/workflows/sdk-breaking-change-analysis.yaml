@@ -224,6 +224,20 @@ jobs:
         with:
           dotnet-version: "10.0.x"
 
+      - name: Set up Python
+        if: steps.resolve-source.outputs.sdk-language == 'Python'
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Set up Python SDK environment
+        if: steps.resolve-source.outputs.sdk-language == 'Python'
+        shell: bash
+        working-directory: repositories/${{ steps.resolve-source.outputs.sdk-repository }}
+        run: |
+          python -m pip install -U pip > /dev/null
+          python -m pip install eng/tools/azure-sdk-tools[ghtools] > /dev/null
+
       - name: Install golangci-lint
         if: steps.resolve-source.outputs.sdk-language == 'Go'
         shell: bash
@@ -286,6 +300,12 @@ jobs:
           analysis_log="$results_dir/analysis.log"
           exec > >(tee "$analysis_log") 2>&1
           trap 'status=$?; printf "Analysis failed with exit code %s.\n" "$status" > "$results_dir/error.log"; exit "$status"' ERR
+          jq -cn \
+            --argjson pullNumber '${{ github.event.issue.number || inputs.pr_number }}' \
+            --arg sdkLanguage '${{ steps.resolve-source.outputs.sdk-language }}' \
+            --arg triggerCommentId '${{ github.event.comment.id }}' \
+            '{pullNumber: $pullNumber, sdkLanguage: $sdkLanguage, triggerCommentId: $triggerCommentId}' \
+            > "$results_dir/trigger.json"
           manifest_jsonl="$results_dir/projects.jsonl"
           : > "$manifest_jsonl"
           echo '[]' > "$results_dir/projects.json"
