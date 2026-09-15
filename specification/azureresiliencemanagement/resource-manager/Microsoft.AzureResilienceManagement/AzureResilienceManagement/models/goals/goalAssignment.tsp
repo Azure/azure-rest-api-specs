@@ -20,17 +20,46 @@ model ServiceLevelResource {
   serviceLevelIndicatorResourceId: armResourceIdentifier;
 
   @doc("The arm id of the service level object resource")
-  serviceLevelObjectiveResourceId: armResourceIdentifier;
+  @madeOptional(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_09_30_preview)
+  serviceLevelObjectiveResourceId?: armResourceIdentifier;
+}
+
+@added(Versions.v2026_09_30_preview)
+@doc("Recovery objectives targeted by a goal assignment for regional resiliency.")
+model RegionalObjectives {
+  @doc("Target regional recovery point objective. eg, PT15M for 15 minutes.")
+  targetRecoveryPointObjective: IsoDuration;
+
+  @doc("Target regional recovery time objective. eg, PT1H for 1 hour.")
+  targetRecoveryTimeObjective: IsoDuration;
 }
 
 // Define the main model
 @doc("Definition of goal assignment property.")
 model GoalAssignmentProperties {
   @doc("Arm id of the goal template.")
-  goalTemplateId: armResourceIdentifier;
+  @madeOptional(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_09_30_preview)
+  goalTemplateId?: armResourceIdentifier;
 
   @doc("The type of goal assignment.")
-  goalAssignmentType: GoalAssignmentType;
+  @madeOptional(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_09_30_preview)
+  goalAssignmentType?: GoalAssignmentType;
+
+  @doc("Whether zonal resiliency is required for this goal assignment.")
+  @added(Versions.v2026_06_01_preview)
+  @madeRequired(Versions.v2026_09_30_preview)
+  requireZonalResiliency: boolean;
+
+  @doc("Whether regional resiliency is required for this goal assignment.")
+  @added(Versions.v2026_09_30_preview)
+  requireRegionalResiliency?: boolean;
+
+  @doc("Recovery objectives targeted for regional resiliency.")
+  @added(Versions.v2026_09_30_preview)
+  regionalObjectives?: RegionalObjectives;
 
   @doc("List of service level resources.")
   @identifiers(#[])

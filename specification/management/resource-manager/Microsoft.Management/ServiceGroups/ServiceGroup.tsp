@@ -53,6 +53,20 @@ interface ServiceGroups {
   /**
    * Create or Update a serviceGroup
    */
+  @removed(Versions.v2026_08_01)
+  @renamedFrom(Versions.v2026_08_01, "createOrUpdateServiceGroup")
+  @sharedRoute
+  createOrUpdateServiceGroupV1 is ArmResourceCreateOrReplaceAsync<
+    ServiceGroup,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  >;
+
+  /**
+   * Create or Update a serviceGroup
+   */
+  @added(Versions.v2026_08_01)
+  @sharedRoute
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdateServiceGroup is ArmResourceCreateOrReplaceAsync<
     ServiceGroup,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
@@ -61,25 +75,57 @@ interface ServiceGroups {
   /**
    * Update a serviceGroup
    */
+  @removed(Versions.v2026_08_01)
+  @renamedFrom(Versions.v2026_08_01, "updateServiceGroup")
+  @sharedRoute
   @patch(#{ implicitOptionality: false })
-  updateServiceGroup is ArmCustomPatchAsync<
+  updateServiceGroupV1 is ArmCustomPatchAsync<
     ServiceGroup,
     PatchModel = ServiceGroup,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
 
   /**
+   * Update a serviceGroup
+   */
+  @added(Versions.v2026_08_01)
+  @sharedRoute
+  @patch(#{ implicitOptionality: false })
+  updateServiceGroup is ArmCustomPatchAsync<
+    ServiceGroup,
+    PatchModel = ServiceGroup,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ServiceGroup> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
    * Delete a ServiceGroup
    */
-  deleteServiceGroup is ArmResourceDeleteWithoutOkAsync<
+  @removed(Versions.v2026_08_01)
+  @renamedFrom(Versions.v2026_08_01, "deleteServiceGroup")
+  @sharedRoute
+  deleteServiceGroupV1 is ArmResourceDeleteWithoutOkAsync<
     ServiceGroup,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
 
   /**
+   * Delete a ServiceGroup
+   */
+  @added(Versions.v2026_08_01)
+  @sharedRoute
+  deleteServiceGroup is ArmResourceDeleteWithoutOkAsync<
+    ServiceGroup,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
    * Get the details of the serviceGroup's ancestors
    */
-  @removed(Versions.v2026_09_01_preview)
+  @removed(Versions.v2026_08_01)
   @sharedRoute
   listAncestors is ArmResourceActionSync<
     ServiceGroup,
@@ -95,9 +141,7 @@ interface ServiceGroups {
    * more results are available; callers must re-POST to the same listAncestors
    * URL with that skipToken value in the request body to fetch the next page.
    * When skipToken is absent, the current page is the last page. SDKs do not
-  * natively support POST-based pagination, so callers must loop manually. An
-  * invalid, expired, modified, or incorrectly scoped token may return the
-  * InvalidSkipToken error code.
+   * natively support POST-based pagination, so callers must loop manually.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "operationId must be pinned so SDK method name stays 'ListAncestors' across the versioned reshape."
   @added(Versions.v2026_09_01_preview)
@@ -118,7 +162,9 @@ interface ServiceGroups {
    * more results are available; callers must re-POST to the same listDescendants
    * URL with that skipToken value in the request body to fetch the next page.
    * When skipToken is absent, the current page is the last page. SDKs do not
-   * natively support POST-based pagination, so callers must loop manually.
+   * natively support POST-based pagination, so callers must loop manually. An
+   * invalid, expired, modified, or incorrectly scoped token may return the
+   * InvalidSkipToken error code.
    */
   @added(Versions.v2026_09_01_preview)
   listDescendants is ArmResourceActionSync<
@@ -151,6 +197,14 @@ interface ServiceGroups {
   >;
 }
 
+@added(Versions.v2026_08_01)
+interface Operations extends Azure.ResourceManager.Operations {}
+
+@@doc(
+  Operations.list,
+  "Lists all available REST API operations for the Microsoft.Management resource provider."
+);
+
 @@doc(ServiceGroup.name, "ServiceGroup Name.");
 @@doc(
   ServiceGroup.properties,
@@ -161,6 +215,14 @@ interface ServiceGroups {
   "ServiceGroup creation parameters"
 );
 @@doc(
+  ServiceGroups.createOrUpdateServiceGroupV1::parameters.resource,
+  "ServiceGroup creation parameters"
+);
+@@doc(
   ServiceGroups.updateServiceGroup::parameters.properties,
+  "ServiceGroup update parameters"
+);
+@@doc(
+  ServiceGroups.updateServiceGroupV1::parameters.properties,
   "ServiceGroup update parameters"
 );

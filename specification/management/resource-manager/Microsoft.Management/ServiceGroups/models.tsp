@@ -87,10 +87,10 @@ model ServiceGroupProperties {
   displayName?: string;
 
   /**
-   * The criticality designation of the service group.
+   * The attributes of the serviceGroup.
    */
-  @added(Versions.v2026_09_01_preview)
-  criticality?: float64;
+  @added(Versions.v2026_08_01)
+  attributes?: ServiceGroupAttributes;
 
   /**
    * The details of the parent serviceGroup.
@@ -113,6 +113,17 @@ model ParentServiceGroupProperties {
 }
 
 /**
+ * The attributes of the serviceGroup.
+ */
+@added(Versions.v2026_08_01)
+model ServiceGroupAttributes {
+  /** The criticality designation of the service group. Valid values range from 0 through 4. */
+  @minValue(0)
+  @maxValue(4)
+  criticality?: int32;
+}
+
+/**
  * Response holding an array of service groups and a nextLink that supports pagination
  */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
@@ -124,8 +135,8 @@ model ServiceGroupCollectionResponse is Azure.Core.Page<ServiceGroup>;
 @added(Versions.v2026_09_01_preview)
 model ListAncestorsRequest {
   /**
-    * An opaque continuation token returned in the previous response. Pass this
-    * value unchanged to fetch the next page. Do not decode or modify it.
+   * An opaque pagination token returned in the previous response's skipToken field.
+   * Include this value in the request body to fetch the next page of results.
    */
   skipToken?: string;
 }
@@ -156,8 +167,8 @@ model ListAncestorsResponse {
 @added(Versions.v2026_09_01_preview)
 model ListDescendantsRequest {
   /**
-   * An opaque pagination token returned in the previous response's skipToken field.
-   * Include this value in the request body to fetch the next page of results.
+   * An opaque continuation token returned in the previous response. Pass this
+   * value unchanged to fetch the next page. Do not decode or modify it.
    */
   skipToken?: string;
 }
@@ -227,9 +238,9 @@ model ListMembersResponse {
   value: ServiceGroupMember[];
 
   /**
-    * An opaque continuation token. When present, more results are available.
-    * Pass this value unchanged in the next listMembers request. Do not decode or
-    * modify it. This property is omitted when there are no more results.
+   * An opaque continuation token. When present, more results are available.
+   * Pass this value unchanged in the next listMembers request. Do not decode or
+   * modify it. This property is omitted when there are no more results.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "skipToken is the standard Azure OData paging continuation token, not a secret. The linter flags it due to the 'Token' substring in the name; the property carries opaque pagination state and is not sensitive."
   skipToken?: string;

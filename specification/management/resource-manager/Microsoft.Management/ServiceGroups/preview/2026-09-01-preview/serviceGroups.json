@@ -41,9 +41,48 @@
   "tags": [
     {
       "name": "ServiceGroups"
+    },
+    {
+      "name": "Operations"
     }
   ],
   "paths": {
+    "/providers/Microsoft.Management/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all available REST API operations for the Microsoft.Management resource provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}": {
       "get": {
         "operationId": "ServiceGroups_Get",
@@ -149,7 +188,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/ServiceGroup"
         },
         "x-ms-long-running-operation": true
@@ -192,6 +231,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -244,6 +288,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -282,7 +331,7 @@
         "tags": [
           "ServiceGroups"
         ],
-        "description": "Get the details of the serviceGroup's ancestors.\n\nThis is a paginated POST action. When the response contains a skipToken,\nmore results are available; callers must re-POST to the same listAncestors\nURL with that skipToken value in the request body to fetch the next page.\nWhen skipToken is absent, the current page is the last page. SDKs do not\nnatively support POST-based pagination, so callers must loop manually. An\ninvalid, expired, modified, or incorrectly scoped token may return the\nInvalidSkipToken error code.",
+        "description": "Get the details of the serviceGroup's ancestors.\n\nThis is a paginated POST action. When the response contains a skipToken,\nmore results are available; callers must re-POST to the same listAncestors\nURL with that skipToken value in the request body to fetch the next page.\nWhen skipToken is absent, the current page is the last page. SDKs do not\nnatively support POST-based pagination, so callers must loop manually.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -332,7 +381,7 @@
         "tags": [
           "ServiceGroups"
         ],
-        "description": "List the descendant serviceGroups of the serviceGroup, ordered by hierarchy.\n\nThis is a paginated POST action. When the response contains a skipToken,\nmore results are available; callers must re-POST to the same listDescendants\nURL with that skipToken value in the request body to fetch the next page.\nWhen skipToken is absent, the current page is the last page. SDKs do not\nnatively support POST-based pagination, so callers must loop manually.",
+        "description": "List the descendant serviceGroups of the serviceGroup, ordered by hierarchy.\n\nThis is a paginated POST action. When the response contains a skipToken,\nmore results are available; callers must re-POST to the same listDescendants\nURL with that skipToken value in the request body to fetch the next page.\nWhen skipToken is absent, the current page is the last page. SDKs do not\nnatively support POST-based pagination, so callers must loop manually. An\ninvalid, expired, modified, or incorrectly scoped token may return the\nInvalidSkipToken error code.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -434,7 +483,7 @@
       "properties": {
         "skipToken": {
           "type": "string",
-          "description": "An opaque continuation token returned in the previous response. Pass this\nvalue unchanged to fetch the next page. Do not decode or modify it."
+          "description": "An opaque pagination token returned in the previous response's skipToken field.\nInclude this value in the request body to fetch the next page of results."
         }
       }
     },
@@ -464,7 +513,7 @@
       "properties": {
         "skipToken": {
           "type": "string",
-          "description": "An opaque pagination token returned in the previous response's skipToken field.\nInclude this value in the request body to fetch the next page of results."
+          "description": "An opaque continuation token returned in the previous response. Pass this\nvalue unchanged to fetch the next page. Do not decode or modify it."
         }
       }
     },
@@ -682,6 +731,19 @@
         }
       ]
     },
+    "ServiceGroupAttributes": {
+      "type": "object",
+      "description": "The attributes of the serviceGroup.",
+      "properties": {
+        "criticality": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The criticality designation of the service group. Valid values range from 0 through 4.",
+          "minimum": 0,
+          "maximum": 4
+        }
+      }
+    },
     "ServiceGroupMember": {
       "type": "object",
       "description": "A resource member returned by the listMembers action.",
@@ -710,10 +772,9 @@
           "type": "string",
           "description": "The display name of the serviceGroup. For example, ServiceGroupTest1"
         },
-        "criticality": {
-          "type": "number",
-          "format": "double",
-          "description": "The criticality designation of the service group."
+        "attributes": {
+          "$ref": "#/definitions/ServiceGroupAttributes",
+          "description": "The attributes of the serviceGroup."
         },
         "parent": {
           "$ref": "#/definitions/ParentServiceGroupProperties",

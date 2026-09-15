@@ -83,7 +83,7 @@ describe("armModelingReview", () => {
     expect(result.labelActions.ARMModelingAutoSignedOff).toBe("remove");
     expect(core.setFailed).toHaveBeenCalledTimes(1);
     expect(core.setFailed).toHaveBeenCalledWith(
-      expect.stringContaining("ARM API Modeling Office Hours"),
+      expect.stringContaining("ARM API Modeling Review Office Hours"),
     );
     expect(core.error).toHaveBeenCalledWith(expect.stringContaining("Microsoft.BadService"));
   });

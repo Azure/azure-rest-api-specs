@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-05-31
+     Upstream alignment: 2026-08-15
      Source of truth for the Reviewer-Posted Parity contract referenced by
      `arm-api-review.instructions.md`, `openapi-review.instructions.md`, and
      `typespec-review.instructions.md`. Prior to consolidation the same
@@ -39,15 +39,103 @@ mode**. Mode is determined by execution context, not inferred ad hoc:
   (under the gh-aw workflow; an Actions context is present). There is
   **no human gate** and the review **MUST NOT** wait for human
   confirmation. The agreed finding set is acted on directly:
-  net-new findings are **posted**, previously agent-posted findings
-  whose violation is now addressed are **resolved**, and duplicates are
-  **skipped**. Parity applies across both the posted set (net-new
+  net-new findings are **posted**, trusted workflow-owned findings whose
+  violation is now addressed are **resolved**, and duplicates are **skipped**.
+  Parity applies across both the posted set (net-new
   findings) and the resolved set (addressed findings). The one-to-one,
   verbatim-reproduction, and post-post verification rules below apply to
   whatever is posted.
 
 **Default when unsure:** if an Actions/gh-aw context is present, treat
 the run as autonomous; otherwise treat it as interactive.
+
+## Cross-session reconciliation
+
+The reconciliation contract is identical for every review entry point:
+
+1. A human invokes the ARM API Reviewer in chat and later approves posting.
+2. The automated workflow runs when a PR is ready for ARM review.
+3. An authorized author or maintainer posts `/arm-review`.
+
+The entry point changes who approves mutations, but it MUST NOT change how
+prior feedback is discovered, matched, or reconciled. Before forming the
+agreed finding set, every session MUST inventory all paginated PR discussion
+surfaces:
+
+- inline review threads and every comment in each thread, including resolved,
+  outdated, and collapsed threads;
+- top-level PR conversation comments (the issue-comment API surface);
+- pull request review bodies, including COMMENT, APPROVE, and REQUEST_CHANGES
+  reviews.
+
+The inventory includes comments from humans, interactive agent sessions,
+automated runs, and `/arm-review` runs. A valid marker plus author
+`github-actions[bot]` identifies trusted workflow ownership for autonomous
+resolution. Marker text alone is only attribution and MUST NOT determine
+ownership or prior coverage.
+
+### Finding identity and duplicate suppression
+
+Match findings by semantic identity, not by author, entry point, comment type,
+or exact line number. Two comments describe the same finding when they identify
+the same rule or review topic, the same affected API element (JSON path,
+TypeSpec model/property/operation, or equivalent file construct), and the same
+underlying corrective outcome. Line movement, wording differences, severity
+wording, or a missing telemetry marker do not make the finding new.
+
+A prior comment counts as coverage only when it is actionable enough to
+identify the affected element and the claimed issue or guidance. A generic
+summary theme such as "naming issues were found" does not suppress a concrete
+inline finding.
+
+When actionable prior coverage exists, the new session MUST NOT post another
+standalone finding. Line movement does not make the finding new, but it does
+select the reconciliation action. Choose exactly one action in this order:
+
+1. Materially incompatible guidance uses `CLARIFY-CONFLICT`.
+2. A matching inline anchor that shifted uses `RESOLVE-AND-REPOST` when trusted
+   workflow ownership is proven; otherwise it uses `REPLY-LINE-SHIFT`.
+3. Other actionable coverage uses `SKIP-COVERED`.
+4. Only a finding with no actionable coverage or contradiction uses `POST-NEW`.
+
+Therefore `SKIP-COVERED` applies only when no matching inline anchor shifted.
+Top-level comments and review bodies have no inline anchor and can use
+`SKIP-COVERED`. Resolved, outdated, or marker-free items still count as
+coverage and follow the same precedence.
+
+### Contradiction handling
+
+A contradiction exists when the new session would give materially incompatible
+guidance for the same semantic finding, including when it:
+
+- says a construct is required while an earlier comment says it is forbidden;
+- says a violation remains while an earlier comment says it was fixed or
+  compliant;
+- changes the applicable rule, severity, classification, or required fix in a
+  way that changes what the author should do.
+
+Contradictions MUST use `CLARIFY-CONFLICT`, never `POST-NEW`:
+
+- For an inline thread, reply in that thread with the prior position, current
+  evidence at the pinned session SHA, the current guidance, and why the
+  conclusion changed. Do not create a second finding elsewhere.
+- If the contradicted inline thread is trusted workflow-owned and the old
+  guidance is no longer valid, the plan may resolve it after clarification.
+  Never resolve any other thread without explicit human consent.
+- For top-level comments or review bodies, post one consolidated top-level
+  clarification that links every contradicted comment/review and gives the same
+  evidence and supersession statement. Do not repeat the findings as separate
+  new comments.
+
+If evidence is insufficient to determine which position is correct, say so in
+the clarification and leave the existing thread unresolved. Silence is not
+acceptable because it leaves mutually incompatible instructions on the PR.
+
+The Critic MUST independently verify duplicate and contradiction decisions
+against the complete discussion inventory. If any discussion surface could not
+be fetched, reconciliation is incomplete and follows the existing
+`reconciliation skipped` failure path rather than silently defaulting to
+`POST-NEW`.
 
 ## Hard rules
 
@@ -111,18 +199,21 @@ the run as autonomous; otherwise treat it as interactive.
    autonomous mode) rather than silently posting a shortened or altered
    variant.
 7. **Resolving addressed findings (autonomous mode).** When a
-   previously **agent-posted** finding's violation has been fixed in the
+   previously **trusted workflow-owned** finding's violation has been fixed in the
    current head SHA, the agent **MUST** reply to the thread noting the
    fix **and** resolve that review thread, so the PR's unresolved-thread
    count reflects only live issues. Constraints:
-   - Only threads whose comments carry the
-     `posted-by: arm-api-reviewer-agent` marker may be resolved. The
-     agent **MUST NOT** resolve human-authored threads, nor
-     `[EXISTING]` findings it did not originate.
+   - Only threads with a structurally valid marker authored by
+     `github-actions[bot]` may be resolved. The agent **MUST NOT** resolve
+     marker-only or other human-authored threads, nor `[EXISTING]` findings it
+     did not originate.
    - Partial fixes (violation reduced but not eliminated) **MUST** stay
      open -- do not resolve.
-   - Resolution is idempotent: if a later push reintroduces the
-     violation, the agent re-posts the finding as net-new.
+   - Resolution is idempotent: if a later push reintroduces the violation, the
+     next session treats the resolved thread as prior coverage. Reply there or
+     use the applicable line-shift/conflict action when possible; post a
+     replacement only when the old thread cannot accurately carry the current
+     location or guidance.
    - Resolution and the accompanying reply are attributed to the
      workflow's `github-token` identity (see the workflow's Required
      Secrets); they do **not** count against the inline-comment budget.
