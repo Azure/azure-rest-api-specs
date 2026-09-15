@@ -32,17 +32,16 @@
             }
           },
           {
-            "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/connections/csfiConnection",
-            "name": "csfiConnection",
+            "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/connections/agentConnection",
+            "name": "agentConnection",
             "type": "Microsoft.Chaos/workspaces/connections",
             "properties": {
-              "kind": "Csfi",
+              "kind": "ChaosAgent",
               "targetResourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVm",
               "principalId": "9f8e7d6c-5b4a-3c2d-1e0f-9a8b7c6d5e4f",
               "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
-              "certificateSubjectName": "CN=chaos-csfi.dsts.core.windows.net",
-              "certificateIssuer": "CN=Microsoft Azure TLS Issuing CA",
-              "dstsPrincipal": "chaos-csfi.dsts.core.windows.net",
+              "certificateSubjectName": "CN=exampleVm.agent.chaos.azure.com",
+              "certificateIssuer": "CN=CACert",
               "status": "Pending",
               "provisioningState": "Creating"
             },
