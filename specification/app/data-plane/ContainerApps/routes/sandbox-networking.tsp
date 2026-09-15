@@ -175,7 +175,7 @@ interface SandboxNetworkingOperations {
       ...AzureResourceScope;
 
       /** id parameter. */
-      @path id: string;
+      @path id: SandboxId;
     },
     GetSandboxEgressDecisions2Result,
     DataPlaneStandardTraits,
@@ -191,7 +191,7 @@ interface SandboxNetworkingOperations {
       ...AzureResourceScope;
 
       /** id parameter. */
-      @path id: string;
+      @path id: SandboxId;
     },
     GetSandboxPortsResult,
     DataPlaneStandardTraits,
@@ -207,7 +207,7 @@ interface SandboxNetworkingOperations {
       ...AzureResourceScope;
 
       /** id parameter. */
-      @path id: string;
+      @path id: SandboxId;
 
       /** Request body. */
       @body body: UpdateSandboxPortContent;
@@ -278,7 +278,7 @@ interface SandboxNetworkingOperations {
       ...AzureResourceScope;
 
       /** id parameter. */
-      @path id: string;
+      @path id: SandboxId;
 
       /** Request body. */
       @body body: UpdatePortsContent;

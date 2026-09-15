@@ -220,7 +220,7 @@ interface SandboxLifecycleOperations {
       ...AzureResourceScope;
 
       /** id parameter. */
-      @path id: string;
+      @path id: SandboxId;
     },
     GetSandboxStatsResult,
     DataPlaneStandardTraits,

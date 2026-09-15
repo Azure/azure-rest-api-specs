@@ -113,7 +113,7 @@ namespace ContainerAppsSandbox {
         ...AzureResourceScope;
 
         /** Sandbox identifier. */
-        @path id: string;
+        @path id: SandboxId;
       },
       SandboxDeletedResult | SandboxDeletedNoContentResult,
       DataPlaneStandardTraits,

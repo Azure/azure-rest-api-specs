@@ -73,7 +73,7 @@ namespace ContainerAppsSandbox {
         ...AzureResourceScope,
 
         /** Sandbox identifier. */
-        id: string,
+        id: SandboxId,
       },
       initializedBy: InitializedBy.parent,
     },
@@ -445,6 +445,11 @@ namespace ContainerAppsSandbox {
   @@clientName(AzureSandboxes.create, "createSandbox", "csharp");
   @@clientName(AzureSandboxes.get, "getProperties", "csharp");
   @@clientName(
+    SandboxLifecycleOperations.getSandboxesCount,
+    "getSandboxCount",
+    "csharp"
+  );
+  @@clientName(
     SandboxLifecycleOperations.getSandboxStats,
     "getStats",
     "csharp"
@@ -501,6 +506,151 @@ namespace ContainerAppsSandbox {
     "addVolumeMount",
     "csharp"
   );
+  @@clientName(
+    SandboxFilesOperations.getSandboxFile,
+    "downloadSandboxFile",
+    "csharp"
+  );
+  @@clientName(
+    SandboxFilesOperations.getSandboxFilesList,
+    "getSandboxFilesMetadata",
+    "csharp"
+  );
+  @@clientName(
+    SandboxFilesOperations.getSandboxFileStat,
+    "getSandboxFileMetadata",
+    "csharp"
+  );
+  @@clientName(
+    SandboxFilesOperations.postSandboxFileMkdir,
+    "createSandboxDirectory",
+    "csharp"
+  );
+  @@clientName(
+    SandboxFilesOperations.postSandboxFile,
+    "uploadSandboxFile",
+    "csharp"
+  );
+  @@clientName(
+    SandboxNetworkingOperations.getSandboxEgressDecisions2,
+    "getEgressDecisions",
+    "csharp"
+  );
+  @@clientName(
+    SandboxNetworkingOperations.getSandboxPorts,
+    "getPorts",
+    "csharp"
+  );
+  @@clientName(
+    SandboxNetworkingOperations.patchSandboxPort,
+    "updatePort",
+    "csharp"
+  );
+  @@clientName(
+    SandboxNetworkingOperations.postSandboxConnectionAdd,
+    "addConnection",
+    "csharp"
+  );
+  @@clientName(
+    SandboxNetworkingOperations.postSandboxEgressPolicy,
+    "setEgressPolicy",
+    "csharp"
+  );
+  @@clientName(
+    SandboxNetworkingOperations.postSandboxPortAdd,
+    "addPort",
+    "csharp"
+  );
+  @@clientName(
+    SandboxNetworkingOperations.postSandboxPortRemove,
+    "removePort",
+    "csharp"
+  );
+  @@clientName(
+    SandboxNetworkingOperations.putSandboxPorts,
+    "setPorts",
+    "csharp"
+  );
+  @@clientName(
+    ConnectionsOperations.postConnection,
+    "createConnection",
+    "csharp"
+  );
+  @@clientName(
+    ConnectionsOperations.postConnectionAuthorize,
+    "authorizeConnection",
+    "csharp"
+  );
+  @@clientName(
+    ConnectionsOperations.postConnectionConsentLink,
+    "generateConnectionConsentLink",
+    "csharp"
+  );
+  @@clientName(
+    ConnectionsOperations.postConnectionRefresh,
+    "refreshConnection",
+    "csharp"
+  );
+  @@clientName(
+    ConnectionsOperations.putConnectionPolicyRules,
+    "updateConnectionPolicyRules",
+    "csharp"
+  );
+  @@clientName(
+    ContentPackagesOperations.postContentPackageUpload,
+    "uploadContentPackage",
+    "csharp"
+  );
+  @@clientName(CredentialsOperations.putCredential, "setCredential", "csharp");
+  @@clientName(
+    DiskImagesOperations.listDiskImagesPublic,
+    "getPublicDiskImages",
+    "csharp"
+  );
+  @@clientName(
+    DiskImagesOperations.getDiskImagePublic,
+    "getPublicDiskImage",
+    "csharp"
+  );
+  @@clientName(DiskImagesOperations.postDiskImage, "createDiskImage", "csharp");
+  @@clientName(
+    EgressPoliciesOperations.putEgressPolicy,
+    "setEgressPolicy",
+    "csharp"
+  );
+  @@clientName(SecretsOperations.postSecretPeek, "peekSecret", "csharp");
+  @@clientName(SecretsOperations.putSecret, "setSecret", "csharp");
+  @@clientName(
+    SnapshotsOperations.getSnapshotsCount,
+    "getSnapshotCount",
+    "csharp"
+  );
+  @@clientName(VolumesOperations.getVolumesCount, "getVolumeCounts", "csharp");
+  @@clientName(
+    VolumesOperations.getVolumeFiles,
+    "getVolumeFilesMetadata",
+    "csharp"
+  );
+  @@clientName(
+    VolumesOperations.getVolumeFileDownload,
+    "downloadVolumeFile",
+    "csharp"
+  );
+  @@clientName(
+    VolumesOperations.postVolumeFileMkdir,
+    "createVolumeDirectory",
+    "csharp"
+  );
+  @@clientName(VolumesOperations.postVolumeFork, "forkVolume", "csharp");
+  @@clientName(VolumesOperations.putVolume, "createVolume", "csharp");
+  @@clientName(VolumesOperations.postVolumeFile, "uploadVolumeFile", "csharp");
+
+  // Model customizations
+  @@alternateType(
+    AzureBlobByoVolumeAuth,
+    ContainerAppsSandboxClientModels.BlobVolumeAuthentication,
+    "csharp"
+  );
 
   // Model names
   // Qualify generic model names to avoid collisions with other libraries.
@@ -511,6 +661,11 @@ namespace ContainerAppsSandbox {
 
   // SandboxVolume already describes a volume mount; this model is the group-scoped resource.
   @@clientName(Volume, "SandboxGroupVolume", "csharp");
+
+  @@clientName(AzureBlobByoPodVolume, "UserProvidedBlobPodVolume", "csharp");
+  @@clientName(AzureBlobByoVolume, "UserProvidedBlobVolume", "csharp");
+  @@clientName(AzureBlobPodVolume, "ServiceManagedBlobPodVolume", "csharp");
+  @@clientName(AzureBlobVolume, "ServiceManagedBlobVolume", "csharp");
 
   // Name response bodies independently of their HTTP envelopes.
   @@clientName(
@@ -557,6 +712,19 @@ namespace ContainerAppsSandbox {
   );
 
   // Property names
+  @@clientName(Sandbox.cmd, "command", "csharp");
+  @@clientName(CreateSandboxContent.cmd, "command", "csharp");
+  @@clientName(DiskImageImage.cmd, "command", "csharp");
+  @@clientName(ContainerSpec.args, "arguments", "csharp");
+  @@clientName(ExecuteSandboxCommandContent.args, "arguments", "csharp");
+  @@clientName(ContainerSpec.env, "environment", "csharp");
+  @@clientName(EgressForwardProxy.ca, "certificateAuthority", "csharp");
+  @@clientName(
+    IpAccessControlRule.sourceCidrs,
+    "sourceAddressPrefixes",
+    "csharp"
+  );
+
   // Url -> Uri, matching .NET naming conventions.
   @@clientName(Sandbox.appUrl, "appUri", "csharp");
   @@clientName(Sandbox.managementUrl, "managementUri", "csharp");
@@ -574,4 +742,28 @@ namespace ContainerAppsSandbox {
     "imageReference",
     "csharp"
   );
+}
+
+@clientNamespace("Azure.Containers.ContainerApps.Sandbox", "csharp")
+namespace ContainerAppsSandboxClientModels {
+  /** Authentication mechanisms for accessing a user-provided blob container. */
+  union BlobVolumeAuthenticationKind {
+    string,
+
+    /** Uses a managed identity already assigned to the sandbox group. */
+    ManagedIdentity: "ManagedIdentity",
+  }
+
+  /** Authentication configuration for accessing a user-provided blob container. */
+  @discriminator("kind")
+  model BlobVolumeAuthentication {
+    /** The authentication mechanism. */
+    kind: BlobVolumeAuthenticationKind;
+  }
+
+  /** Authenticates with a managed identity already assigned to the sandbox group. */
+  model BlobVolumeManagedIdentityAuthentication
+    extends BlobVolumeAuthentication {
+    ...ContainerAppsSandbox.AzureBlobByoVolumeAuthAzureBlobByoIdentityAuth;
+  }
 }
