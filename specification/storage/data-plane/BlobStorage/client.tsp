@@ -1304,7 +1304,10 @@ scalar HttpRange extends string;
 
 // ---- Java customizations (translated from the csharp scope; java shipped names track csharp) ----
 @@clientName(BlobServicePropertiesCsharp, "BlobServiceProperties", "java");
-@@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "java");
+// The shipped java type is the public com.azure.storage.blob.models.GeoReplicationStatus, which is what
+// GeoReplication.getStatus() returns; the csharp/go name would both rename it and hide it in implementation.
+@@clientName(GeoReplicationStatusType, "GeoReplicationStatus", "java");
+@@access(GeoReplicationStatusType, Access.public, "java");
 @@clientName(StorageErrorCode, "BlobErrorCode", "java");
 @@clientName(Container.listBlobs, "ListBlobFlatSegment", "java");
 @@clientName(BlobProperties, "BlobItemPropertiesInternal", "java");
@@ -1368,9 +1371,12 @@ scalar HttpRange extends string;
 @@alternateType(KeyInfo.expiry, string, "java");
 @@clientName(KeyInfo.delegatedUserTid, "delegatedUserTenantId", "java");
 @@clientName(Metrics.includeApis, "IncludeApis", "java");
-@@clientName(BlobType.BlockBlob, "Block", "java");
-@@clientName(BlobType.PageBlob, "Page", "java");
-@@clientName(BlobType.AppendBlob, "Append", "java");
+// The csharp scope shortens these to Block/Page/Append, but the shipped java constants are BLOCK_BLOB,
+// PAGE_BLOB and APPEND_BLOB, which the spec member names already produce -- renaming them here would be a
+// breaking public API change.
+
+// The shipped java accessor spells the container property the other way round.
+@@clientName(ContainerProperties.preventEncryptionScopeOverride, "encryptionScopeOverridePrevented", "java");
 @@clientName(SkuName.StandardLRS, "StandardLrs", "java");
 @@clientName(SkuName.StandardGRS, "StandardGrs", "java");
 @@clientName(SkuName.StandardRAGRS, "StandardRagrs", "java");
