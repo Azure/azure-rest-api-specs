@@ -1,3 +1,4 @@
+import "./DeltaSnapExample.tsp";
 import "@typespec/versioning";
 using TypeSpec.Versioning;
 /** Describes the schema of the Azure Storage events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
@@ -311,6 +312,46 @@ namespace Microsoft.EventGrid.SystemEvents {
     manifestBlobUrl?: string;
   }
 
+  /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DeltaSnapSnapshotGenerationSucceeded event. */
+  @example(MicrosoftStorageDeltaSnapSnapshotGenerationSucceededExample)
+  model StorageDeltaSnapSnapshotGenerationSucceededEventData {
+    /** The identifier of the DeltaSnap job. The value is an empty string when no job identifier is assigned. */
+    jobId: string;
+
+    /** The name of the storage account for which the snapshot was generated. */
+    accountName: string;
+
+    /** The status of the snapshot generation operation. */
+    status: StorageDeltaSnapSnapshotGenerationStatus;
+
+    /** The number of records in data files added by the snapshot operation, encoded as a decimal string. */
+    dataRecordCount: string;
+
+    /** The total size, in bytes, of data files added by the snapshot operation, encoded as a decimal string. */
+    totalSizeBytes: string;
+
+    /** The elapsed time, in milliseconds, between the logical snapshot creation time and finalization time, encoded as a decimal string. */
+    snapshotCommitDurationMs: string;
+
+    /** The logical creation time of the snapshot. */
+    snapshotCreateTime: utcDateTime;
+
+    /** The time at which the snapshot was finalized and published. */
+    snapshotFinalizeTime: utcDateTime;
+
+    /** The decimal identifier of the generated snapshot. */
+    snapshotId: string;
+
+    /** The Iceberg operation used to generate the snapshot. */
+    operationType: StorageDeltaSnapSnapshotOperationType;
+
+    /** The number of data files added by the snapshot operation, encoded as a decimal string. */
+    dataFileCount: string;
+
+    /** The number of manifests attributed to data files added by the snapshot operation, encoded as a decimal string. */
+    manifestCount: string;
+  }
+
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskCompleted event. */
   model StorageTaskCompletedEventData {
     /** The status for a storage task. */
@@ -383,6 +424,31 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** Incomplete */
     "Incomplete",
+
+    string,
+  }
+
+  /** The status of a DeltaSnap snapshot generation operation. */
+  union StorageDeltaSnapSnapshotGenerationStatus {
+    /** The snapshot was generated successfully. */
+    "Succeeded",
+
+    string,
+  }
+
+  /** The Iceberg operation used to generate a DeltaSnap snapshot. */
+  union StorageDeltaSnapSnapshotOperationType {
+    /** Appends data files to create the initial snapshot. */
+    "APPEND",
+
+    /** Replaces selected data files in an existing snapshot. */
+    "OVERWRITE",
+
+    /** Replaces all data files in an existing snapshot. */
+    "FULL_OVERWRITE",
+
+    /** The snapshot operation is not recognized. */
+    "UNKNOWN",
 
     string,
   }
