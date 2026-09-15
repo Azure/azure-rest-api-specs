@@ -58,18 +58,18 @@ union TestFailoverState {
   string,
 }
 
-@added(Versions.v2026_09_30_preview)
+@added(Versions.v2026_08_31_preview)
 @doc("Replication mode configured for a protected resource.")
 union ReplicationMode {
   @added(Versions.v2026_09_30_preview)
   @doc("No replication mode is configured for the protected resource.")
   None: "None",
 
-  @added(Versions.v2026_09_30_preview)
+  @added(Versions.v2026_08_31_preview)
   @doc("The resource is active in multiple locations at the same time.")
   ActiveActive: "ActiveActive",
 
-  @added(Versions.v2026_09_30_preview)
+  @added(Versions.v2026_08_31_preview)
   @doc("The resource has one active location and one or more passive recovery locations.")
   ActivePassive: "ActivePassive",
 
