@@ -321,9 +321,7 @@ model ContainerConfiguration {
   /**
    * The subnet resource IDs for a container group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy - x-ms-identifiers required for array item identification"
   @added(Versions.v2023_08_01)
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
   subnetIds?: ContainerGroupSubnetId[];
 }
 
@@ -433,8 +431,6 @@ model ScriptConfigurationBase {
   /**
    * The environment variables to pass over to the script.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy - x-ms-identifiers required for array item identification"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
   environmentVariables?: EnvironmentVariable[];
 
   /**
