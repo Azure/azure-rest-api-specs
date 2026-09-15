@@ -190,20 +190,44 @@ jobs:
         env:
           ARTIFACT_PATH: ${{ steps.resolve-trigger.outputs.artifact-path || steps.find-analysis-results.outputs.artifact-path }}
           RESULT_PATHS: ${{ steps.find-analysis-results.outputs.result-paths }}
+          PR_NUMBER: ${{ steps.resolve-trigger.outputs.pull-number }}
+          SDK_LANGUAGE: ${{ steps.resolve-trigger.outputs.sdk-language }}
+          TRIGGER_COMMENT_ID: ${{ steps.resolve-trigger.outputs.trigger-comment-id }}
+          TRIGGER_NAME: ${{ github.event_name }}
         run: |
           set -euo pipefail
           results_dir="$RUNNER_TEMP/analysis-results"
+          rm -rf "$results_dir"
+          mkdir -p "$results_dir"
           unzip -q "$ARTIFACT_PATH" -d "$results_dir"
           trigger_path="$results_dir/trigger.json"
-          test -f "$trigger_path"
-          echo "pull-number=$(jq -r '.pullNumber' "$trigger_path")" >> "$GITHUB_OUTPUT"
-          echo "sdk-language=$(jq -r '.sdkLanguage' "$trigger_path")" >> "$GITHUB_OUTPUT"
-          echo "trigger-comment-id=$(jq -r '.triggerCommentId' "$trigger_path")" >> "$GITHUB_OUTPUT"
+          manifest_path="$results_dir/projects.json"
+          if [[ ! -f "$manifest_path" ]]; then
+            echo "Analysis artifact does not contain projects.json." >&2
+            find "$results_dir" -maxdepth 2 -type f -print >&2
+            exit 1
+          fi
+          if [[ -f "$trigger_path" ]]; then
+            echo "pull-number=$(jq -r '.pullNumber' "$trigger_path")" >> "$GITHUB_OUTPUT"
+            echo "sdk-language=$(jq -r '.sdkLanguage' "$trigger_path")" >> "$GITHUB_OUTPUT"
+            echo "trigger-comment-id=$(jq -r '.triggerCommentId' "$trigger_path")" >> "$GITHUB_OUTPUT"
+          elif [[ "$TRIGGER_NAME" == "workflow_run" ]]; then
+            echo "Analysis artifact does not contain trigger.json." >&2
+            exit 1
+          else
+            echo "pull-number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
+            echo "sdk-language=$SDK_LANGUAGE" >> "$GITHUB_OUTPUT"
+            echo "trigger-comment-id=$TRIGGER_COMMENT_ID" >> "$GITHUB_OUTPUT"
+          fi
           if [[ -n "$RESULT_PATHS" ]]; then
             jq --argjson resultPaths "$RESULT_PATHS" \
-              '[.[] | select((.resultsPath + "/breaking-changes.json") as $path | $resultPaths | index($path))]' \
-              "$results_dir/projects.json" > "$results_dir/projects.filtered.json"
-            mv "$results_dir/projects.filtered.json" "$results_dir/projects.json"
+              'map(. as $project | select($resultPaths | index($project.resultsPath + "/breaking-changes.json")))' \
+              "$manifest_path" > "$results_dir/projects.filtered.json"
+            mv "$results_dir/projects.filtered.json" "$manifest_path"
+            if [[ "$(jq 'length' "$manifest_path")" -eq 0 ]]; then
+              echo "No manifest projects matched the result paths from the analysis comment: $RESULT_PATHS" >&2
+              exit 1
+            fi
           fi
 
       - name: Resolve specification PR source
