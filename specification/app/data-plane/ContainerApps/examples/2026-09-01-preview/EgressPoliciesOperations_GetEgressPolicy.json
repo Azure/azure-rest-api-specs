@@ -1,0 +1,130 @@
+{
+  "title": "Get Egress Policy example",
+  "operationId": "EgressPoliciesOperations_GetEgressPolicy",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "policyId": "example-policy-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "example-resource-01",
+        "name": "example-resource",
+        "description": "example-description",
+        "defaultAction": "Allow",
+        "enforcementMode": "Enforced",
+        "rules": [
+          {
+            "name": "example-resource",
+            "match": {
+              "host": "example-host",
+              "path": "/workspace/example.txt",
+              "methods": [
+                "example-method"
+              ],
+              "scheme": "http",
+              "normalizePath": true
+            },
+            "action": {
+              "type": "Allow",
+              "headers": [
+                {
+                  "operation": "Set",
+                  "name": "example-resource",
+                  "value": "example-value",
+                  "valueRef": {
+                    "secretRef": {
+                      "secretId": "example-secret-01",
+                      "secretKey": "<redacted>",
+                      "format": "example-format"
+                    },
+                    "managedIdentityRef": {
+                      "resource": "example-resource",
+                      "format": "example-format",
+                      "type": "SystemAssigned",
+                      "identityResourceId": "example-identity-resource-01"
+                    }
+                  }
+                }
+              ],
+              "scheme": "example-scheme",
+              "host": "example-host",
+              "path": "/workspace/example.txt",
+              "routingMode": "Default",
+              "forward": "default",
+              "forwardProxy": {
+                "url": "https://example.com/resource",
+                "ca": "example-ca"
+              }
+            },
+            "proxyActions": [
+              "example-proxy-action"
+            ],
+            "source": "example-source",
+            "hookRef": {
+              "endpoint": "example-endpoint",
+              "failBehavior": "Deny",
+              "requestHeaders": [
+                "example-request-header"
+              ],
+              "authHeaders": [
+                {
+                  "operation": "Set",
+                  "name": "example-resource",
+                  "value": "example-value",
+                  "valueRef": {
+                    "secretRef": {
+                      "secretId": "example-secret-01",
+                      "secretKey": "<redacted>",
+                      "format": "example-format"
+                    },
+                    "managedIdentityRef": {
+                      "resource": "example-resource",
+                      "format": "example-format",
+                      "type": "SystemAssigned",
+                      "identityResourceId": "example-identity-resource-01"
+                    }
+                  }
+                }
+              ],
+              "timeoutMs": 1,
+              "routingMode": "Default"
+            }
+          }
+        ],
+        "createdAt": "2026-08-15T10:00:00Z",
+        "updatedAt": "2026-08-15T10:00:00Z"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "500": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    }
+  }
+}

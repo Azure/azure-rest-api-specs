@@ -1,0 +1,40 @@
+{
+  "title": "List public disk images",
+  "operationId": "DiskImagesOperations_ListDiskImagesPublic",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "page": 1,
+    "pageSize": 20
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "name": "azurelinux-3.0",
+          "status": {
+            "state": "Available",
+            "createdAt": "2026-07-01T08:00:00Z",
+            "updatedAt": "2026-08-01T08:00:00Z"
+          }
+        }
+      ]
+    },
+    "401": {
+      "body": {
+        "title": "Unauthorized",
+        "status": 401,
+        "detail": "The request does not contain valid authentication credentials."
+      }
+    },
+    "500": {
+      "body": {
+        "title": "Internal Server Error",
+        "status": 500,
+        "detail": "An unexpected error occurred while listing public disk images."
+      }
+    }
+  }
+}

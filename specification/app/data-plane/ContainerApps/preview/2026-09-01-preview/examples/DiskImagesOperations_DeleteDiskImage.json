@@ -1,0 +1,35 @@
+{
+  "title": "Delete a disk image",
+  "operationId": "DiskImagesOperations_DeleteDiskImage",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "disk-image-01"
+  },
+  "responses": {
+    "204": {},
+    "401": {
+      "body": {
+        "title": "Unauthorized",
+        "status": 401,
+        "detail": "The request does not contain valid authentication credentials."
+      }
+    },
+    "409": {
+      "body": {
+        "title": "Conflict",
+        "status": 409,
+        "detail": "The disk image cannot be deleted while it is in use."
+      }
+    },
+    "500": {
+      "body": {
+        "title": "Internal Server Error",
+        "status": 500,
+        "detail": "An unexpected error occurred while deleting the disk image."
+      }
+    }
+  }
+}

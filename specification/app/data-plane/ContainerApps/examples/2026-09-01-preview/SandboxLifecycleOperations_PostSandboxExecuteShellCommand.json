@@ -1,0 +1,68 @@
+{
+  "title": "Post Sandbox Execute Shell Command example",
+  "operationId": "SandboxLifecycleOperations_PostSandboxExecuteShellCommand",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource-01",
+    "containerName": "example-container",
+    "body": {
+      "command": "echo ready",
+      "shell": "example-shell",
+      "environment": {
+        "exampleKey": "example-example-value"
+      },
+      "workingDirectory": "example-working-directory",
+      "user": "example-user",
+      "activationMode": "Manual"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "exitCode": 1,
+        "stdout": "example-stdout",
+        "stderr": "example-stderr",
+        "executionTimeMs": 1
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "500": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "title": "Post Content Package Upload example",
+  "operationId": "ContentPackagesOperations_PostContentPackageUpload",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "labels": "example-labels",
+    "content": "SGVsbG8="
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "example-resource-01",
+        "size": "SGVsbG8=",
+        "labels": {
+          "exampleKey": "example-example-value"
+        },
+        "contentType": "example",
+        "createdOn": "2026-08-15T10:00:00Z"
+      }
+    },
+    "400": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "500": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "503": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    }
+  }
+}

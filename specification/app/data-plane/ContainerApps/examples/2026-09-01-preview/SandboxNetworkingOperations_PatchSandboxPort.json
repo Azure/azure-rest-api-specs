@@ -1,0 +1,195 @@
+{
+  "title": "Patch Sandbox Port example",
+  "operationId": "SandboxNetworkingOperations_PatchSandboxPort",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource-01",
+    "body": {
+      "port": 1,
+      "name": "example-resource",
+      "auth": {
+        "anonymous": true,
+        "github": {
+          "enabled": true,
+          "emails": [
+            "user@example.com"
+          ],
+          "emailSuffixes": [
+            "user@example.com"
+          ],
+          "usernames": [
+            "example-user"
+          ],
+          "usernameSuffixes": [
+            "example-username-suffixe"
+          ]
+        },
+        "entraId": {
+          "enabled": true,
+          "emails": [
+            "user@example.com"
+          ],
+          "emailSuffixes": [
+            "user@example.com"
+          ],
+          "objectIds": [
+            "example-object-01"
+          ],
+          "tenantIds": [
+            "example-tenant-01"
+          ]
+        }
+      },
+      "activationMode": "Manual",
+      "protocol": "Http",
+      "ipAccessControl": {
+        "defaultAction": "Allow",
+        "rules": [
+          {
+            "name": "example-resource",
+            "action": "Allow",
+            "priority": 0,
+            "sourceCidrs": [
+              "example-source-cidr"
+            ]
+          }
+        ]
+      },
+      "cors": {
+        "allowOrigins": [
+          "example-allow-origin"
+        ],
+        "allowMethods": [
+          "example-allow-method"
+        ],
+        "allowHeaders": [
+          "example-allow-header"
+        ],
+        "allowCredentials": true,
+        "maxAge": 1
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "ports": [
+          {
+            "name": "example-resource",
+            "port": 1,
+            "url": "https://example.com/resource",
+            "auth": {
+              "anonymous": true,
+              "github": {
+                "enabled": true,
+                "emails": [
+                  "user@example.com"
+                ],
+                "emailSuffixes": [
+                  "user@example.com"
+                ],
+                "usernames": [
+                  "example-user"
+                ],
+                "usernameSuffixes": [
+                  "example-username-suffixe"
+                ]
+              },
+              "entraId": {
+                "enabled": true,
+                "emails": [
+                  "user@example.com"
+                ],
+                "emailSuffixes": [
+                  "user@example.com"
+                ],
+                "objectIds": [
+                  "example-object-01"
+                ],
+                "tenantIds": [
+                  "example-tenant-01"
+                ]
+              }
+            },
+            "activationMode": "Manual",
+            "protocol": "Http",
+            "ipAccessControl": {
+              "defaultAction": "Allow",
+              "rules": [
+                {
+                  "name": "example-resource",
+                  "action": "Allow",
+                  "priority": 0,
+                  "sourceCidrs": [
+                    "example-source-cidr"
+                  ]
+                }
+              ]
+            },
+            "cors": {
+              "allowOrigins": [
+                "example-allow-origin"
+              ],
+              "allowMethods": [
+                "example-allow-method"
+              ],
+              "allowHeaders": [
+                "example-allow-header"
+              ],
+              "allowCredentials": true,
+              "maxAge": 1
+            }
+          }
+        ]
+      }
+    },
+    "400": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    },
+    "500": {
+      "body": {
+        "type": "example",
+        "title": "example-title",
+        "status": 1,
+        "detail": "example-detail",
+        "instance": "example-instance"
+      }
+    }
+  }
+}
