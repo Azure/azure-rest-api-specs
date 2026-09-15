@@ -1,17 +1,16 @@
 {
-  "title": "Create a production workload space",
-  "operationId": "WorkloadSpaces_CreateOrUpdate",
+  "title": "Update workload space tags",
+  "operationId": "WorkloadSpaces_Update",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg-workload",
     "spaceName": "managed-agents-prod",
     "api-version": "2026-11-01-preview",
-    "resource": {
-      "location": "eastus2",
+    "properties": {
       "tags": {
-        "environment": "Production"
-      },
-      "properties": {}
+        "environment": "Production",
+        "costCenter": "AI-Platform"
+      }
     }
   },
   "responses": {
@@ -21,6 +20,10 @@
         "name": "managed-agents-prod",
         "type": "Microsoft.Compute/workloadSpaces",
         "location": "eastus2",
+        "tags": {
+          "environment": "Production",
+          "costCenter": "AI-Platform"
+        },
         "properties": {
           "provisioningState": "Succeeded"
         }

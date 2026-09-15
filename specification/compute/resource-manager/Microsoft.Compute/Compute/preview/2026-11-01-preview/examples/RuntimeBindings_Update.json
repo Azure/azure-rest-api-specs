@@ -1,25 +1,17 @@
 {
-  "title": "Create a managed serverless container runtime binding",
-  "operationId": "RuntimeBindings_CreateOrUpdate",
+  "title": "Update mutable runtime binding network configuration",
+  "operationId": "RuntimeBindings_Update",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg-workload",
     "spaceName": "managed-agents-prod",
     "bindingName": "serverless-default",
     "api-version": "2026-11-01-preview",
-    "resource": {
-      "location": "eastus2",
+    "properties": {
       "properties": {
-        "kind": "ServerlessContainers",
-        "provisioningMode": "Managed",
-        "managedProfile": {
-          "provider": "ACI"
-        },
-        "identityProfile": {
-          "executionIdentity": {
-            "provisioningMode": "ServiceManaged",
-            "scope": "SandboxGroup"
-          }
+        "networkProfile": {
+          "subnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-network/providers/Microsoft.Network/virtualNetworks/workload-vnet/subnets/execution",
+          "egressMode": "CustomerManaged"
         }
       }
     }
@@ -36,6 +28,10 @@
           "provisioningMode": "Managed",
           "managedProfile": {
             "provider": "ACI"
+          },
+          "networkProfile": {
+            "subnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-network/providers/Microsoft.Network/virtualNetworks/workload-vnet/subnets/execution",
+            "egressMode": "CustomerManaged"
           },
           "provisioningState": "Succeeded"
         }

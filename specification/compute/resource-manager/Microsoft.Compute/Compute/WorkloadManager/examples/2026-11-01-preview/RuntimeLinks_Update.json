@@ -1,20 +1,17 @@
 {
-  "title": "Create a runtime link between Kubernetes and serverless containers",
-  "operationId": "RuntimeLinks_CreateOrUpdate",
+  "title": "Update runtime link capacity",
+  "operationId": "RuntimeLinks_Update",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg-workload",
     "spaceName": "managed-agents-prod",
     "linkName": "default",
     "api-version": "2026-11-01-preview",
-    "resource": {
-      "location": "eastus2",
+    "properties": {
       "properties": {
-        "orchestratorBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/kubernetes-default",
-        "executionBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default",
         "capacityProfile": {
-          "minimumNodes": 1,
-          "maximumNodes": 100
+          "minimumNodes": 2,
+          "maximumNodes": 150
         }
       }
     }
@@ -30,8 +27,8 @@
           "orchestratorBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/kubernetes-default",
           "executionBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default",
           "capacityProfile": {
-            "minimumNodes": 1,
-            "maximumNodes": 100
+            "minimumNodes": 2,
+            "maximumNodes": 150
           },
           "provisioningState": "Succeeded"
         }
