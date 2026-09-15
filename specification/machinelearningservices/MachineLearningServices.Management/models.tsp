@@ -4254,6 +4254,7 @@ model Compute {
    * Errors during provisioning
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
   provisioningErrors?: ErrorResponse[] | null;
@@ -9307,6 +9308,7 @@ model RaiBlocklistProperties {
  * The list of Cognitive Services RaiBlocklist Items for batch add.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model used as placeholder in API"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @OpenAPI.extension("x-ms-identifiers", #["name"])
 model RaiBlocklistItemsBulkAddRequest is RaiBlocklistItemBulkRequest[];
@@ -9993,6 +9995,7 @@ model AKSSchemaProperties {
    * System services
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["publicIpAddress"])
   systemServices?: SystemService[] | null;
@@ -10313,6 +10316,7 @@ model AmlComputeProperties {
    * Collection of errors encountered by various compute nodes during node setup.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   @summary("Errors.")
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
@@ -10654,6 +10658,7 @@ model ComputeInstanceProperties {
    * Describes informations of containers on this ComputeInstance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   containers?: ComputeInstanceContainer[] | null;
@@ -10662,6 +10667,7 @@ model ComputeInstanceProperties {
    * Describes informations of dataDisks on this ComputeInstance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
   dataDisks?: ComputeInstanceDataDisk[] | null;
@@ -10670,6 +10676,7 @@ model ComputeInstanceProperties {
    * Describes informations of dataMounts on this ComputeInstance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
   dataMounts?: ComputeInstanceDataMount[] | null;
@@ -10784,6 +10791,7 @@ model OsPatchingStatus {
    * Collection of errors encountered when doing os patching.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
   osPatchingErrors?: ErrorResponse[] | null;
@@ -13100,6 +13108,7 @@ model MonitorEmailNotificationSettings {
    * The email recipient list which has a limitation of 499 characters in total.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @OpenAPI.extension("x-ms-identifiers", #[])
   emails?: string[] | null;
@@ -13149,6 +13158,7 @@ model MonitoringSignalBase {
    * The current notification mode for this signal.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @OpenAPI.extension("x-ms-identifiers", #[])
   notificationTypes?: MonitoringNotificationType[] | null;
