@@ -80,9 +80,12 @@ import path from "path";
 export const TYPESPEC_SUPPRESSIONS_WORKFLOW_NAME = "TypeSpec Suppressions - Analyze Code";
 export const TYPESPEC_SUPPRESSIONS_REPORT_ARTIFACT_NAME = "typespec-suppressions-report";
 export const TYPESPEC_SUPPRESSIONS_COMMENT_IDENTIFIER = "TypeSpecSuppressionsReview";
-export const TYPESPEC_SUPPRESSIONS_SECTION_TITLE =
-  "TypeSpec suppressions requiring review (testing, non-blocking)";
+export const TYPESPEC_SUPPRESSIONS_SECTION_TITLE = "TypeSpec suppressions requiring review";
 export const APPROVED_SUPPRESSION_LABEL = "Approved-TypeSpecSuppression";
+// Prerequisite label (mirrors package-name-review-required) applied while checked
+// suppressions require review, and required to be cleared by APPROVED_SUPPRESSION_LABEL
+// via the rulesPri1TypeSpecSuppressions required-label rule in labelling.js.
+export const SUPPRESSION_REVIEW_REQUIRED_LABEL = "TypeSpecSuppressionReviewRequired";
 // GitHub caps comment bodies at ~65k characters, so only render a handful of suppressions
 // inline per table (new and changed) and link to the analysis log for the full list.
 const MAX_SUPPRESSIONS_SHOWN = 5;
@@ -315,6 +318,19 @@ function renderChangedSuppressionRow(owner, repo, pullNumber, change, statusCell
 }
 
 /**
+ * Resolves the checked-only subset of a report when present, falling back to
+ * the full report otherwise (legacy behavior for runs without a check-rules
+ * file). An empty ruleset yields an empty checked subset, so nothing is
+ * reported — the same as a PR that added no suppressions.
+ *
+ * @param {TypeSpecSuppressionsReport} report
+ * @returns {TypeSpecCheckedSuppressions | TypeSpecSuppressionsReport}
+ */
+function getReportedSuppressions(report) {
+  return report.checkedSuppressions ?? report;
+}
+
+/**
  * Renders the dedicated comment body from an already-parsed analyzer report.
  *
  * Returns `undefined` when no checked suppressions require review, in which case
@@ -333,11 +349,7 @@ export function renderSuppressionsCommentBody(
   report,
   { owner, repo, pullNumber, isApproved, runUrl },
 ) {
-  // In checked-only mode (a check-rules file was used), render only the checked
-  // subset; otherwise fall back to the full diff (legacy behavior). An empty
-  // ruleset yields an empty checked subset, so nothing is reported — the same as
-  // a PR that added no suppressions.
-  const reported = report.checkedSuppressions ?? report;
+  const reported = getReportedSuppressions(report);
   if (!reported.requiresApproval) {
     return undefined;
   }
@@ -346,9 +358,7 @@ export function renderSuppressionsCommentBody(
   const changedSuppressions = reported.changedSuppressions ?? [];
 
   const statusCell = isApproved ? "✅" : "❌";
-  const approvalState = isApproved
-    ? "✅ Approved"
-    : "❌ Approval required (currently under testing, review NOT enforced)";
+  const approvalState = isApproved ? "✅ Approved" : "❌ Approval required";
 
   const totalCount = newSuppressions.length + changedSuppressions.length;
 
@@ -359,7 +369,7 @@ export function renderSuppressionsCommentBody(
     "",
     `**Status:** ${summaryParts.join(" — ")}`,
     "",
-    "⚠️ <strong>This check is currently in testing mode and is non-blocking</strong> — it will not prevent this PR from merging. This PR adds or updates the TypeSpec suppressions listed below. <strong>Suppressions are strongly discouraged</strong> — they bypass linter rules that protect API quality and consistency. Authors should avoid adding new suppressions and prefer fixing the underlying issue; reviewers should approve only when there is a clear, compelling justification and no reasonable alternative. Review each linked rule and source location, then apply <code>Approved-TypeSpecSuppression</code> only if every justification is acceptable. The <strong>Status</strong> column shows ✅ once the label is applied and ❌ while approval is pending.",
+    "This PR adds or updates the TypeSpec suppressions listed below. <strong>Suppressions are strongly discouraged</strong> — they bypass linter rules that protect API quality and consistency. Authors should avoid adding new suppressions and prefer fixing the underlying issue; reviewers should approve only when there is a clear, compelling justification and no reasonable alternative. Review each linked rule and source location, then apply <code>Approved-TypeSpecSuppression</code> only if every justification is acceptable. The check blocks merging until the suppressions are resolved or approved. The <strong>Status</strong> column shows ✅ once the label is applied and ❌ while approval is pending.",
     "",
   ];
 
@@ -419,8 +429,14 @@ export function renderSuppressionsCommentBody(
 /**
  * Locates the latest "TypeSpec Suppressions - Analyze Code" run for the given
  * head_sha, downloads and parses its report artifact, and renders the dedicated
- * comment body. Returns `undefined` when there is no completed run, no artifact,
- * or no suppressions requiring review.
+ * comment body.
+ *
+ * Returns `undefined` when the analysis result is not yet known (no completed
+ * run, or no artifact to parse) — callers must not infer approval state or
+ * touch labels in that case. Once a report has been successfully parsed,
+ * returns an object carrying both the rendered `body` (`undefined` when no
+ * suppressions require review) and the definitive `requiresApproval` boolean,
+ * so callers can gate label state without re-deriving it from the body.
  *
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
  * @param {typeof import("@actions/core")} core
@@ -429,7 +445,7 @@ export function renderSuppressionsCommentBody(
  * @param {string} head_sha
  * @param {number} pullNumber
  * @param {string[]} [labelNames] - Current PR labels, used to reflect approval status.
- * @returns {Promise<string | undefined>}
+ * @returns {Promise<{ body: string | undefined, requiresApproval: boolean } | undefined>}
  */
 export async function buildSuppressionsComment(
   github,
@@ -465,11 +481,15 @@ export async function buildSuppressionsComment(
 
   const runUrl = run.html_url ?? `https://github.com/${owner}/${repo}/actions/runs/${run.id}`;
 
-  return renderSuppressionsCommentBody(report, {
+  const body = renderSuppressionsCommentBody(report, {
     owner,
     repo,
     pullNumber,
     isApproved: labelNames.includes(APPROVED_SUPPRESSION_LABEL),
     runUrl,
   });
+
+  const requiresApproval = Boolean(getReportedSuppressions(report).requiresApproval);
+
+  return { body, requiresApproval };
 }
