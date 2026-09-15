@@ -28,6 +28,18 @@ union SkuName {
    * Premium zone redundant storage
    */
   Premium_ZRS: "Premium_ZRS",
+
+  /**
+   * Locally redundant storage. Supported only for ElasticSanVersion V2.
+   */
+  @added(Versions.v2026_05_01_preview)
+  ElasticSAN_LRS: "ElasticSAN_LRS",
+
+  /**
+   * Zone redundant storage. Supported only for ElasticSanVersion V2.
+   */
+  @added(Versions.v2026_05_01_preview)
+  ElasticSAN_ZRS: "ElasticSAN_ZRS",
 }
 
 /**
@@ -57,8 +69,26 @@ union ProvisioningStates {
   Restoring: "Restoring",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_05_01_preview)
   SoftDeleting: "SoftDeleting",
+}
+
+/**
+ * Elastic San appliance version.
+ */
+@added(Versions.v2026_05_01_preview)
+union ElasticSanVersion {
+  string,
+
+  /**
+   * Version 1 of the Elastic San appliance.
+   */
+  V1: "V1",
+
+  /**
+   * Version 2 of the Elastic San appliance.
+   */
+  V2: "V2",
 }
 
 /**
@@ -100,8 +130,26 @@ union AutoScalePolicyEnforcement {
   Disabled: "Disabled",
 }
 
+/**
+ * Quality of Service tier for the volume group, applicable for ElasticSanVersion V2 only.
+ */
+@added(Versions.v2026_05_01_preview)
+union QualityOfService {
+  string,
+
+  /**
+   * General purpose tier.
+   */
+  GeneralPurpose: "GeneralPurpose",
+
+  /**
+   * Performance critical tier.
+   */
+  PerformanceCritical: "PerformanceCritical",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_05_01_preview)
 union `x-ms-access-soft-deleted-resources` {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -130,6 +178,13 @@ union StorageTargetType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Iscsi: "Iscsi",
+
+  /**
+   * Direct attach storage target type.
+   */
+  @added(Versions.v2026_05_01_preview)
+  DirectAttach: "DirectAttach",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
 }
@@ -228,11 +283,44 @@ union `x-ms-force-delete` {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_05_01_preview)
 union DeleteType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   permanent: "permanent",
+}
+
+/**
+ * The state of snapshot which determines the access availability of the snapshot.
+ */
+@added(Versions.v2026_05_01_preview)
+union SnapshotAccessState {
+  string,
+
+  /**
+   * Default value.
+   */
+  Unknown: "Unknown",
+
+  /**
+   * The snapshot cannot be used for restore, copy or download to offline.
+   */
+  Pending: "Pending",
+
+  /**
+   * The snapshot can be used for restore, copy to different region, and download to offline.
+   */
+  Available: "Available",
+
+  /**
+   * The snapshot can be used for restoring volumes with fast performance but cannot be copied or downloaded.
+   */
+  InstantAccess: "InstantAccess",
+
+  /**
+   * The snapshot can be used for restoring volumes with fast performance, copied and downloaded.
+   */
+  AvailableWithInstantAccess: "AvailableWithInstantAccess",
 }
 
 /**
@@ -297,6 +385,33 @@ model SkuLocationInfo {
    */
   @visibility(Lifecycle.Read)
   zones?: string[];
+
+  /**
+   * Details of capabilities available in each zone.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  zoneDetails?: SkuZoneDetails[];
+}
+
+/**
+ * Details of capabilities available in each zone.
+ */
+@added(Versions.v2026_05_01_preview)
+model SkuZoneDetails {
+  /**
+   * The zone(s).
+   */
+  @visibility(Lifecycle.Read)
+  name?: string[];
+
+  /**
+   * The capabilities supported in the zone(s).
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  capabilities?: SKUCapability[];
 }
 
 /**
@@ -345,14 +460,16 @@ model ElasticSanProperties {
   /**
    * Base size of the Elastic San appliance in TiB.
    */
+  @madeOptional(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  baseSizeTiB: int64;
+  baseSizeTiB?: int64;
 
   /**
    * Extended size of the Elastic San appliance in TiB.
    */
+  @madeOptional(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  extendedCapacitySizeTiB: int64;
+  extendedCapacitySizeTiB?: int64;
 
   /**
    * Total size of the provisioned Volumes in GiB.
@@ -369,20 +486,48 @@ model ElasticSanProperties {
   /**
    * Total Provisioned IOPS of the Elastic San appliance.
    */
+  @removed(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read)
+  @renamedFrom(Versions.v2026_05_01_preview, "totalIops")
+  oldTotalIops?: int64;
+
+  /**
+   * Total Provisioned IOPS of the Elastic San appliance. Settable only for ElasticSanVersion V2, where it is required; read-only for V1.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   totalIops?: int64;
 
   /**
    * Total Provisioned MBps Elastic San appliance.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read)
+  @renamedFrom(Versions.v2026_05_01_preview, "totalMBps")
+  oldTotalMBps?: int64;
+
+  /**
+   * Total Provisioned MBps Elastic San appliance. Settable only for ElasticSanVersion V2, where it is required; read-only for V1.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   totalMBps?: int64;
 
   /**
    * Total size of the Elastic San appliance in TB.
    */
+  @removed(Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read)
+  @renamedFrom(Versions.v2026_05_01_preview, "totalSizeTiB")
+  oldTotalSizeTiB?: int64;
+
+  /**
+   * Total size of the Elastic San appliance in TB. Settable only for ElasticSanVersion V2, where it is required; read-only for V1.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   totalSizeTiB?: int64;
 
   /**
@@ -400,6 +545,37 @@ model ElasticSanProperties {
    * Auto Scale Properties for Elastic San Appliance.
    */
   autoScaleProperties?: AutoScaleProperties;
+
+  /**
+   * Elastic San appliance version. Defaults to V1 if not specified.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  version?: ElasticSanVersion;
+
+  /**
+   * Used capacity in GiB.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  usedCapacityGiB?: int64;
+
+  /**
+   * Total IOPS reserved by all the volume groups under an ElasticSan
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  totalReservedIops?: int32;
+
+  /**
+   * Total MBps reserved by all the volume groups under an ElasticSan
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  totalReservedMBps?: int32;
 }
 
 /**
@@ -551,6 +727,28 @@ model ElasticSanUpdateProperties {
    * Auto Scale Properties for Elastic San Appliance.
    */
   autoScaleProperties?: AutoScaleProperties;
+
+  /**
+   * Total Provisioned IOPS of the Elastic San appliance. Supported only for ElasticSanVersion V2.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Update)
+  totalIops?: int64;
+
+  /**
+   * Total Provisioned MBps Elastic San appliance. Supported only for ElasticSanVersion V2.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Update)
+  totalMBps?: int64;
+
+  /**
+   * Total size of the Elastic San appliance in TB. Supported only for ElasticSanVersion V2.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Update)
+  totalSizeTiB?: int64;
 }
 
 /**
@@ -660,13 +858,37 @@ model VolumeGroupProperties {
   /**
    * A boolean indicating whether or not Encryption in Transit is enabled, supported only for ISCSI protocol.
    */
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_05_01_preview)
   encryptionInTransit?: boolean;
+
+  /**
+   * Reserved IOPS allocated for this volume group, applicable for QualityOfService PerformanceCritical only.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @minValue(0)
+  reservedIops?: int32;
+
+  /**
+   * Reserved MBps allocated for this volume group, applicable for QualityOfService PerformanceCritical only.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @minValue(0)
+  reservedMBps?: int32;
+
+  /**
+   * Quality of Service tier for the volume group, applicable for ElasticSanVersion V2 only.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  qualityOfService?: QualityOfService;
 
   /**
    * The retention policy for the soft deleted volume group and its associated resources.
    */
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_05_01_preview)
   deleteRetentionPolicy?: DeleteRetentionPolicy;
 }
 
@@ -763,7 +985,7 @@ model VirtualNetworkRule {
 /**
  * Response for Delete Retention Policy object
  */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_05_01_preview)
 model DeleteRetentionPolicy {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   policyState?: PolicyState;
@@ -822,9 +1044,26 @@ model VolumeGroupUpdateProperties {
   enforceDataIntegrityCheckForIscsi?: boolean;
 
   /**
+   * Reserved IOPS allocated for this volume group, applicable for QualityOfService PerformanceCritical only.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Update)
+  @minValue(0)
+  reservedIops?: int32;
+
+  /**
+   * Reserved MBps allocated for this volume group, applicable for QualityOfService PerformanceCritical only.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Update)
+  @minValue(0)
+  reservedMBps?: int32;
+
+  /**
    * The retention policy for the soft deleted volume group and its associated resources
    */
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_05_01_preview)
   deleteRetentionPolicy?: DeleteRetentionPolicy;
 }
 
@@ -857,7 +1096,17 @@ model VolumeProperties {
   /**
    * Parent resource information.
    */
-  managedBy?: ManagedByInfo;
+  @removed(Versions.v2026_05_01_preview)
+  @renamedFrom(Versions.v2026_05_01_preview, "managedBy")
+  oldManagedBy?: ManagedByInfo;
+
+  /**
+   * Information about Azure services owning the ElasticSan volume resource.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @renamedFrom(Versions.v2026_05_01_preview, "managedBy")
+  @identifiers(#[])
+  managedBy?: ManagedByResources[];
 
   /**
    * State of the operation on the resource.
@@ -918,11 +1167,34 @@ model IscsiTargetInfo {
 /**
  * Parent resource information.
  */
+@removed(Versions.v2026_05_01_preview)
 model ManagedByInfo {
   /**
    * Resource ID of the resource managing the volume, this is a restricted field and can only be set for internal use.
    */
   resourceId?: string;
+}
+
+/**
+ * Information about Azure services owning the ElasticSan volume resource.
+ */
+@added(Versions.v2026_05_01_preview)
+model ManagedByResources {
+  /**
+   * ClientId of the application managing the resource
+   */
+  clientId?: string;
+
+  /**
+   * Version number to keep track of resources using the Volume
+   */
+  @minValue(0)
+  version?: int32;
+
+  /**
+   * ARM Resource IDs of the resources managing the volume
+   */
+  resourceIds?: Azure.Core.armResourceIdentifier[];
 }
 
 /**
@@ -948,7 +1220,17 @@ model VolumeUpdateProperties {
   /**
    * Parent resource information.
    */
-  managedBy?: ManagedByInfo;
+  @removed(Versions.v2026_05_01_preview)
+  @renamedFrom(Versions.v2026_05_01_preview, "managedBy")
+  oldManagedBy?: ManagedByInfo;
+
+  /**
+   * Information about Azure services owning the ElasticSan volume resource.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @renamedFrom(Versions.v2026_05_01_preview, "managedBy")
+  @identifiers(#[])
+  managedBy?: ManagedByResources[];
 }
 
 /**
@@ -1039,6 +1321,20 @@ model SnapshotProperties {
    */
   @visibility(Lifecycle.Read)
   volumeName?: string;
+
+  /**
+   * The state of snapshot which determines the access availability of the snapshot.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  snapshotAccessState?: SnapshotAccessState;
+
+  /**
+   * Percentage complete for the background copy of the snapshot when a snapshot is in InstantAccess state.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  completionPercent?: float32;
 }
 
 /**
