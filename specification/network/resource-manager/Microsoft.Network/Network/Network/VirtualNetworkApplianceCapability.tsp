@@ -24,7 +24,7 @@ namespace Microsoft.Network;
  * VirtualNetworkApplianceCapabilityProperties). One capability of a given kind may exist per appliance.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This resource must nest under VirtualNetworkAppliance via @parentResource; VirtualNetworkAppliance extends Common.Resource, which is declared with Azure.ResourceManager.Legacy.customAzureResource (see Common/main.tsp), so this resource must carry the same Legacy resource-manager feature tag as its parent for @parentResource to resolve correctly."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The 3 capability kinds share a fixed envelope (id, name, type, kind) and differ only in the kind literal value; TypeSpec's @discriminator polymorphism for OpenAPI 2.0 allOf/discriminator generation requires the kind subtypes to extend the discriminated base type. Composition with spread (`...`) cannot produce the allOf-based discriminated schema this wire format requires."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The 4 capability kinds share a fixed envelope (id, name, type, kind) and differ only in the kind literal value; TypeSpec's @discriminator polymorphism for OpenAPI 2.0 allOf/discriminator generation requires the kind subtypes to extend the discriminated base type. Composition with spread (`...`) cannot produce the allOf-based discriminated schema this wire format requires."
 @added(Versions.v2026_03_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 @parentResource(VirtualNetworkAppliance)
