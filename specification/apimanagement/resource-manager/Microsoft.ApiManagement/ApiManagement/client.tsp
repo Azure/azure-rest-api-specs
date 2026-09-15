@@ -1621,7 +1621,11 @@ enum GatewayRegenerateKeyType {
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(AdditionalLocation.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(
+  AdditionalLocation.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@alternateType(AdditionalLocation.gatewayRegionalUrl, url, "csharp");
 @@alternateType(
   AdditionalLocation.publicIPAddresses,
