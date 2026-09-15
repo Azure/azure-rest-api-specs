@@ -59,8 +59,8 @@ model PlaywrightWorkspaceProperties {
   ]>;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("Indicates whether recording is enabled for the workspace.")
-  recording?: EnablementStatus = EnablementStatus.Disabled;
+  @doc("Indicates whether session artifact collection is enabled for the workspace.")
+  sessionArtifacts?: EnablementStatus = EnablementStatus.Disabled;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The managed identity used to upload recording artifacts to the storage account.")
@@ -124,8 +124,8 @@ model PlaywrightWorkspaceUpdateProperties {
   storageUri?: url;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("Indicates whether recording is enabled for the workspace.")
-  recording?: EnablementStatus;
+  @doc("Indicates whether session artifact collection is enabled for the workspace.")
+  sessionArtifacts?: EnablementStatus;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The managed identity used to upload recording artifacts to the storage account.")
