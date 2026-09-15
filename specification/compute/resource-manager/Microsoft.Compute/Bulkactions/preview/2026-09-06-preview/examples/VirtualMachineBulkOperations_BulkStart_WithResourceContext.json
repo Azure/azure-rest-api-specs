@@ -1,0 +1,44 @@
+{
+  "title": "Start a virtual machine with caller-provided context to include in the operation result notifications.",
+  "operationId": "VirtualMachineBulkOperations_BulkStart",
+  "parameters": {
+    "api-version": "2026-09-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
+    "requestBody": {
+      "executionParameters": {},
+      "resourcesWithContext": {
+        "resources": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+            "resourceContext": "maintenance-window-01"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "VirtualMachines",
+        "location": "eastus",
+        "description": "Start Resource request",
+        "results": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+            "operation": {
+              "operationId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+              "opType": "Start",
+              "state": "PendingScheduling",
+              "resourceNotificationDetails": {
+                "resourceContext": "maintenance-window-01"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

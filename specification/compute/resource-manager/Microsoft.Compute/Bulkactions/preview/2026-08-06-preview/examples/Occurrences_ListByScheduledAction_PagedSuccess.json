@@ -1,0 +1,65 @@
+{
+  "title": "List a page of recurring scheduled action occurrences",
+  "description": "Lists recurring scheduled action occurrences with mixed results and returns a link to the next page.",
+  "operationId": "Occurrences_ListByScheduledAction",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "scheduledActionName": "weekday-start"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "scheduledTime": "2026-09-16T14:00:00Z",
+              "resultSummary": {
+                "total": 2,
+                "statuses": [
+                  {
+                    "code": "Success",
+                    "count": 1
+                  },
+                  {
+                    "code": "OperationNotAllowed",
+                    "count": 1,
+                    "errorDetails": {
+                      "code": "OperationNotAllowed",
+                      "message": "The virtual machine cannot be started while it is being deallocated.",
+                      "target": "virtualMachines"
+                    }
+                  }
+                ]
+              },
+              "provisioningState": "Failed"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start/occurrences/88888888-8888-8888-8888-888888888888",
+            "name": "88888888-8888-8888-8888-888888888888",
+            "type": "Microsoft.Compute/scheduledActions/occurrences"
+          },
+          {
+            "properties": {
+              "scheduledTime": "2026-09-17T14:00:00Z",
+              "resultSummary": {
+                "total": 2,
+                "statuses": [
+                  {
+                    "code": "Success",
+                    "count": 2
+                  }
+                ]
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start/occurrences/99999999-9999-9999-9999-999999999999",
+            "name": "99999999-9999-9999-9999-999999999999",
+            "type": "Microsoft.Compute/scheduledActions/occurrences"
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start/occurrences?api-version=2026-08-06-preview&$skiptoken=page2"
+      }
+    }
+  }
+}

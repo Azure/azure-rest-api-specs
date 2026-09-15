@@ -1,0 +1,50 @@
+{
+  "title": "List a page of resources in a recurring scheduled action occurrence",
+  "description": "Lists two virtual machines with mixed results and returns a link to the next page.",
+  "operationId": "Occurrences_ListResources",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "scheduledActionName": "weekday-start",
+    "occurrenceId": "88888888-8888-8888-8888-888888888888"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01",
+            "notificationSettings": [
+              {
+                "destination": "admin@contoso.com",
+                "type": "Email",
+                "language": "en-us",
+                "disabled": false
+              }
+            ],
+            "scheduledTime": "2026-09-16T14:00:00Z",
+            "provisioningState": "Succeeded",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01",
+            "name": "web-vm-01",
+            "type": "Microsoft.Compute/virtualMachines"
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-02",
+            "scheduledTime": "2026-09-16T14:00:00Z",
+            "provisioningState": "Failed",
+            "errorDetails": {
+              "code": "OperationNotAllowed",
+              "message": "The virtual machine cannot be started while it is being deallocated.",
+              "target": "virtualMachines"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-02",
+            "name": "web-vm-02",
+            "type": "Microsoft.Compute/virtualMachines"
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start/occurrences/88888888-8888-8888-8888-888888888888/resources?api-version=2026-08-06-preview&$skiptoken=page2"
+      }
+    }
+  }
+}

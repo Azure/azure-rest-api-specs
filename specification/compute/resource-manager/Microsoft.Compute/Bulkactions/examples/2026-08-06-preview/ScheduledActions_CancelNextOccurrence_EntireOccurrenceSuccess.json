@@ -1,0 +1,29 @@
+{
+  "title": "Cancel all operations in the next recurring scheduled action occurrence",
+  "description": "Cancels the operations for all resources in the next occurrence. The empty resourceIds array targets every resource in the occurrence; this occurrence contains two virtual machines.",
+  "operationId": "ScheduledActions_CancelNextOccurrence",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "scheduledActionName": "weekday-start",
+    "body": {
+      "resourceIds": []
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/33333333-3333-3333-3333-333333333333?api-version=2026-08-06-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/33333333-3333-3333-3333-333333333333?api-version=2026-08-06-preview&monitor=true",
+        "Retry-After": 10
+      }
+    },
+    "200": {
+      "body": {
+        "totalResources": 2,
+        "resourcesStatuses": []
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "title": "Cancel multiple operations",
+  "operationId": "VirtualMachineBulkOperations_BulkCancel",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
+    "requestBody": {
+      "operationIds": [
+        "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+            "operation": {
+              "operationId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+              "opType": "Start",
+              "state": "Cancelled",
+              "completedAt": "2026-08-31T18:05:00Z",
+              "resourceOperationError": {
+                "errorCode": "OperationCancelledByUser",
+                "errorDetails": "Operation: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa was cancelled by the user."
+              }
+            }
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+            "operation": {
+              "operationId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+              "opType": "Start",
+              "state": "Cancelled",
+              "completedAt": "2026-08-31T18:05:00Z",
+              "resourceOperationError": {
+                "errorCode": "OperationCancelledByUser",
+                "errorDetails": "Operation: bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb was cancelled by the user."
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

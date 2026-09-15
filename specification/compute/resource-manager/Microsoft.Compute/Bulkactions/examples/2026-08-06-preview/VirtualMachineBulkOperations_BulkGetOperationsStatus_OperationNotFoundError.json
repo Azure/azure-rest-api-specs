@@ -1,0 +1,40 @@
+{
+  "title": "Response with an operation not found error",
+  "operationId": "VirtualMachineBulkOperations_BulkGetOperationsStatus",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
+    "requestBody": {
+      "operationIds": [
+        "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        "dddddddd-dddd-dddd-dddd-dddddddddddd"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+            "operation": {
+              "operationId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+              "opType": "Start",
+              "state": "Executing"
+            }
+          },
+          {
+            "errorCode": "OperationNotFound",
+            "operation": {
+              "operationId": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+              "state": "Unknown"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
