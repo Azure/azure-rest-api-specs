@@ -1,0 +1,52 @@
+{
+  "title": "Update only the customer key URI of an encrypted Workspace",
+  "operationId": "Workspaces_Update",
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resourceGroupName": "exampleRG",
+    "workspaceName": "exampleWorkspace",
+    "properties": {
+      "properties": {
+        "encryption": {
+          "keyVaultProperties": {
+            "keyUri": "https://contoso-vault.vault.azure.net/keys/replacement-key"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/providers/Microsoft.Chaos/locations/westus2/operationResults/4bdadd97-207c-4de8-9bba-08339ae099c7?api-version=2026-11-01"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace",
+        "name": "exampleWorkspace",
+        "type": "Microsoft.Chaos/workspaces",
+        "location": "westus2",
+        "properties": {
+          "scopes": [
+            "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG"
+          ],
+          "provisioningState": "Succeeded",
+          "encryption": {
+            "keySource": "Microsoft.Keyvault",
+            "keyVaultProperties": {
+              "keyUri": "https://contoso-vault.vault.azure.net/keys/replacement-key"
+            },
+            "status": {
+              "state": "Applied",
+              "observedKeySource": "Microsoft.Keyvault",
+              "observedKeyUri": "https://contoso-vault.vault.azure.net/keys/replacement-key/0123456789abcdef0123456789abcdef",
+              "lastCheckedAt": "2026-11-01T12:00:00Z"
+            }
+          }
+        }
+      }
+    }
+  }
+}
