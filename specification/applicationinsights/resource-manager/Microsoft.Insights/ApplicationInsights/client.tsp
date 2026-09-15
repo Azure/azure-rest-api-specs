@@ -112,7 +112,7 @@ namespace ApplicationInsightsManagementClient;
 );
 @@clientName(
   AnalyticsItems.AnalyticsItemsOperationGroup.list::parameters.type,
-  "$DO_NOT_NORMALIZE$type",
+  exact("type"),
   "javascript"
 );
 @@clientName(Workbooks.revisionsList, "listRevisionsList", "javascript");

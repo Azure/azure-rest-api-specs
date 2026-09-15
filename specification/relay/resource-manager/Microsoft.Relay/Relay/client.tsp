@@ -157,4 +157,4 @@ model RelayUpdateParametersReplacement
   PrivateLinkResources.list,
   "csharp"
 );
-@@clientName(WCFRelays, "$DO_NOT_NORMALIZE$wCFRelays", "javascript");
+@@clientName(WCFRelays, exact("wCFRelays"), "javascript");
