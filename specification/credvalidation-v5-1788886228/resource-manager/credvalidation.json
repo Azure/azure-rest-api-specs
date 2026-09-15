@@ -1,0 +1,36 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CredValidationClient",
+    "description": "Credential validation service.",
+    "version": "2026-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [{"azure_auth": ["user_impersonation"]}],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {"user_impersonation": "impersonate your user account"}
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CredValidation/operations": {
+      "get": {
+        "tags": ["Operations"],
+        "description": "Lists operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {"name": "subscriptionId", "in": "path", "required": true, "type": "string"},
+          {"name": "api-version", "in": "query", "required": true, "type": "string"}
+        ],
+        "responses": {"200": {"description": "OK"}}
+      }
+    }
+  }
+}
