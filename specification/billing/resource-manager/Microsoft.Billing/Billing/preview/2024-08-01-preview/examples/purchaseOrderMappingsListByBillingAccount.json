@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "billingAccountName": "456598",
+    "allowOnlyActive": "false"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/456598/purchaseOrderMappings/mapping1",
+            "name": "mapping1",
+            "properties": {
+              "creationDate": "2023-12-01T00:00:00Z",
+              "updatedDate": "2023-12-01T00:00:00Z",
+              "isMapUtilized": true,
+              "purchaseOrderId": "/providers/Microsoft.Billing/billingAccounts/456598/purchaseOrders/MockPO-001",
+              "description": "VM mapping",
+              "productTitle": "Azure Virtual Machines",
+              "offerId": "MS-AZR-0003P",
+              "publisherId": "Microsoft",
+              "productId": "DZH318Z0BPS6",
+              "effectiveDate": "2023-12-15T00:00:00Z",
+              "expirationDate": "2024-12-15T00:00:00Z",
+              "status": "active"
+            },
+            "type": "Microsoft.Billing/billingAccounts/purchaseOrderMappings"
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/456598/purchaseOrderMappings/mapping2",
+            "name": "mapping2",
+            "properties": {
+              "creationDate": "2023-12-01T00:00:00Z",
+              "updatedDate": "2023-12-01T00:00:00Z",
+              "purchaseOrderId": "/providers/Microsoft.Billing/billingAccounts/456598/purchaseOrders/MockPO-001",
+              "description": "Storage mapping",
+              "productTitle": "Azure Storage",
+              "offerId": "MS-AZR-0003P",
+              "publisherId": "Microsoft",
+              "productId": "DZH318Z0BPST",
+              "effectiveDate": "2023-12-15T00:00:00Z",
+              "expirationDate": "2024-12-15T00:00:00Z",
+              "status": "inactive"
+            },
+            "type": "Microsoft.Billing/billingAccounts/purchaseOrderMappings"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PurchaseOrderMappings_ListByBillingAccount",
+  "title": "PurchaseOrderMappingsListByBillingAccount"
+}

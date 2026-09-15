@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "billingProfileName": "xxxx-xxxx-xxx-xxx",
+    "poNumber": "MockPO-001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx/purchaseOrders/MockPO-001",
+        "name": "MockPO-001",
+        "properties": {
+          "status": "active",
+          "description": "Mock Description",
+          "creationDate": "2023-12-01T00:00:00Z",
+          "effectiveDate": "2023-12-15T00:00:00Z",
+          "expirationDate": "2024-12-15T00:00:00Z",
+          "allocatedBudget": 250000,
+          "isPoUtilized": true
+        },
+        "type": "Microsoft.Billing/billingAccounts/billingProfiles/purchaseOrders"
+      }
+    }
+  },
+  "operationId": "PurchaseOrders_GetByBillingProfile",
+  "title": "PurchaseOrdersGetByBillingProfile"
+}
