@@ -53,21 +53,11 @@ model DeploymentLabel
 @doc("Operations for deployment labels.")
 interface DeploymentLabels {
   /** Gets a deployment label. The preview supports only the production label. */
-  get is ArmResourceRead<DeploymentLabel, Error = DefaultErrorResponse>;
+  get is ArmResourceRead<DeploymentLabel>;
 
   /** Assigns a retained Function App version to a deployment label. The preview supports only the production label. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The Phase 1 production deployment label assignment returns 200."
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
-    DeploymentLabel,
-    Response = ArmResponse<DeploymentLabel>,
-    Error = DefaultErrorResponse
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<DeploymentLabel>;
 
   /** Clears a deployment label assignment. Deleting production safely restores legacy serving authority. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Clearing the production assignment completes synchronously with 204 while pod drain continues in the background."
-  delete is ArmResourceDeleteSync<
-    DeploymentLabel,
-    Response = ArmDeletedNoContentResponse,
-    Error = DefaultErrorResponse
-  >;
+  delete is ArmResourceDeleteSync<DeploymentLabel>;
 }

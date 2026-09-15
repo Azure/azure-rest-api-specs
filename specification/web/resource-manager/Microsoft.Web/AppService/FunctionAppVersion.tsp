@@ -227,79 +227,49 @@ model FunctionAppVersionOperationStatusResult
   is ArmOperationStatus<StatusValues = FunctionAppVersionOperationStatus>;
 
 @added(Versions.v2026_10_01_preview)
-@doc("Version-scoped application settings.")
-model FunctionAppVersionAppSettings {
-  /** The version-scoped application settings. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Application settings are an open name-value dictionary by design."
-  @secret
-  properties: Record<string>;
-}
-
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "This protocol-only model represents the accepted HTTP response and is not emitted as a body model."
-@added(Versions.v2026_10_01_preview)
-@doc("The accepted response for a Function App version validation operation.")
-model FunctionAppVersionValidateAcceptedResponse {
-  /** The HTTP status code. */
-  @statusCode statusCode: 202;
-
-  ...ArmAsyncOperationHeader<FinalResult = FunctionAppVersion>;
-  ...Azure.Core.Foundations.RetryAfterHeader;
-
-  /** The Function App version while validation is running. */
-  @body body: FunctionAppVersion;
-}
-
-@added(Versions.v2026_10_01_preview)
 @tag("FunctionAppVersions")
 @armResourceOperations
 @doc("Operations for Function App versions.")
 interface FunctionAppVersions {
   /** Gets a Function App version. */
-  get is ArmResourceRead<FunctionAppVersion, Error = DefaultErrorResponse>;
+  get is ArmResourceRead<FunctionAppVersion>;
 
   /** Creates an immutable Function App version or returns an equivalent version. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FunctionAppVersion,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = FunctionAppVersion> &
-      Azure.Core.Foundations.RetryAfterHeader,
-    Error = DefaultErrorResponse
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /** Lists Function App versions for a site. */
   listBySite is ArmResourceListByParent<
     FunctionAppVersion,
-    Response = ArmResponse<ResourceListResult<FunctionAppVersion>>,
-    Error = DefaultErrorResponse
+    Response = ArmResponse<ResourceListResult<FunctionAppVersion>>
   >;
 
   /** Deletes an eligible inactive Function App version. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Deleting an eligible Function App version completes with 204 and has no success response body."
-  delete is ArmResourceDeleteSync<
-    FunctionAppVersion,
-    Response = ArmDeletedNoContentResponse,
-    Error = DefaultErrorResponse
-  >;
+  delete is ArmResourceDeleteSync<FunctionAppVersion>;
 
   /** Lists the application settings of a Function App version. */
   @action("listAppSettings")
   listAppSettings is ArmResourceActionSync<
     FunctionAppVersion,
     void,
-    ArmResponse<FunctionAppVersionAppSettings>,
-    Error = DefaultErrorResponse,
+    ArmResponse<StringDictionary>,
     OptionalRequestBody = true
   >;
 
   /** Retries validation of an inactive failed Function App version. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "The design explicitly requires Azure-AsyncOperation and Retry-After without Location."
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The design explicitly requires the accepted Function App version in the 202 response body."
   @action("validate")
-  validate is ArmResourceActionAsyncBase<
+  validate is ArmResourceActionAsync<
     FunctionAppVersion,
     void,
-    FunctionAppVersionValidateAcceptedResponse,
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<FunctionAppVersion>,
-    Error = DefaultErrorResponse,
+    FunctionAppVersion,
+    LroHeaders = ArmCombinedLroHeaders<
+      FunctionAppVersionOperationStatusResult,
+      FunctionAppVersion
+    > &
+      Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 }
@@ -312,8 +282,7 @@ interface FunctionAppVersionOperations {
   /** Gets the status of an asynchronous Function App version operation. */
   get is GetResourceOperationStatus<
     Response = FunctionAppVersionOperationStatusResult,
-    Scope = SubscriptionLocationActionScope,
-    Error = DefaultErrorResponse
+    Scope = SubscriptionLocationActionScope
   >;
 }
 
