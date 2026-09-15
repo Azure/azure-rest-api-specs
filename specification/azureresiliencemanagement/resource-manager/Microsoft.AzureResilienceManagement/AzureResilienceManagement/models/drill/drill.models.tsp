@@ -164,6 +164,7 @@ model ZonalDrill is ProxyResource<ZonalDrillProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
+@removed(Versions.v2026_10_01)
 @doc("Definition of Regional Drill properties.")
 model RegionalDrillProperties extends DrillProperties {
   @doc("The discriminator for the Drill object hierarchy.")
@@ -174,6 +175,7 @@ model RegionalDrillProperties extends DrillProperties {
 /**
  * Resource definition for the RegionalDrill Object.
  */
+@removed(Versions.v2026_10_01)
 @tenantResource
 @doc("Regional Drill resource")
 model RegionalDrill is ProxyResource<RegionalDrillProperties> {

@@ -6662,8 +6662,7 @@
       "type": "string",
       "description": "Enum for Drill type object hierarchy.",
       "enum": [
-        "Zonal",
-        "Regional"
+        "Zonal"
       ],
       "x-ms-enum": {
         "name": "DrillType",
@@ -6673,11 +6672,6 @@
             "name": "Zonal",
             "value": "Zonal",
             "description": "Zonal Drill."
-          },
-          {
-            "name": "Regional",
-            "value": "Regional",
-            "description": "Regional Drill."
           }
         ]
       }
@@ -7333,14 +7327,6 @@
           "type": "boolean",
           "description": "Whether zonal resiliency is required for this goal assignment."
         },
-        "requireRegionalResiliency": {
-          "type": "boolean",
-          "description": "Whether regional resiliency is required for this goal assignment."
-        },
-        "regionalObjectives": {
-          "$ref": "#/definitions/RegionalObjectives",
-          "description": "Recovery objectives targeted for regional resiliency."
-        },
         "serviceLevelResources": {
           "type": "array",
           "description": "List of service level resources.",
@@ -7407,14 +7393,6 @@
         "requireZonalResiliency": {
           "type": "boolean",
           "description": "Whether zonal resiliency is required for this goal assignment."
-        },
-        "requireRegionalResiliency": {
-          "type": "boolean",
-          "description": "Whether regional resiliency is required for this goal assignment."
-        },
-        "regionalObjectives": {
-          "$ref": "#/definitions/RegionalObjectivesUpdate",
-          "description": "Recovery objectives targeted for regional resiliency."
         },
         "serviceLevelResources": {
           "type": "array",
@@ -7489,10 +7467,6 @@
         "zonalResiliency": {
           "$ref": "#/definitions/ResiliencyProperties",
           "description": "Zonal resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Arm resource."
-        },
-        "regionalResiliency": {
-          "$ref": "#/definitions/ResiliencyProperties",
-          "description": "Regional resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Azure resource."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -9879,67 +9853,6 @@
           "type": "string",
           "format": "date-time",
           "description": "Time when the refresh operation was last performed."
-        }
-      }
-    },
-    "RegionalDrill": {
-      "type": "object",
-      "description": "Regional Drill resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RegionalDrillProperties",
-          "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "RegionalDrillProperties": {
-      "type": "object",
-      "description": "Definition of Regional Drill properties.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DrillProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "Regional"
-    },
-    "RegionalObjectives": {
-      "type": "object",
-      "description": "Recovery objectives targeted by a goal assignment for regional resiliency.",
-      "properties": {
-        "targetRecoveryPointObjective": {
-          "$ref": "#/definitions/IsoDuration",
-          "description": "Target regional recovery point objective. eg, PT15M for 15 minutes."
-        },
-        "targetRecoveryTimeObjective": {
-          "$ref": "#/definitions/IsoDuration",
-          "description": "Target regional recovery time objective. eg, PT1H for 1 hour."
-        }
-      },
-      "required": [
-        "targetRecoveryPointObjective",
-        "targetRecoveryTimeObjective"
-      ]
-    },
-    "RegionalObjectivesUpdate": {
-      "type": "object",
-      "description": "Recovery objectives targeted by a goal assignment for regional resiliency.",
-      "properties": {
-        "targetRecoveryPointObjective": {
-          "$ref": "#/definitions/IsoDuration",
-          "description": "Target regional recovery point objective. eg, PT15M for 15 minutes."
-        },
-        "targetRecoveryTimeObjective": {
-          "$ref": "#/definitions/IsoDuration",
-          "description": "Target regional recovery time objective. eg, PT1H for 1 hour."
         }
       }
     },

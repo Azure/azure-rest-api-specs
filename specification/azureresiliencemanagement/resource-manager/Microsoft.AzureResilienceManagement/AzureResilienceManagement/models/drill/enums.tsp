@@ -232,6 +232,7 @@ union DrillType {
   Zonal: "Zonal",
 
   @doc("Regional Drill.")
+  @removed(Versions.v2026_10_01)
   Regional: "Regional",
 }
 
