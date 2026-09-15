@@ -39,6 +39,8 @@ interface TopologyResources {
   /**
    * Gets a specific topology component.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve existing stable swagger operationId."
+  @operationId("Topology_Get")
   get is ArmResourceRead<
     TopologyResource,
     BaseParameters = {
