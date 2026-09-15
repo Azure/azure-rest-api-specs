@@ -10,6 +10,14 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
+/** The Accept header the shipped SDKs send on every operation, including those with no response body. */
+alias AcceptHeader = {
+  /** Accept header */
+  #suppress "@typespec/http/content-type-ignored" "Existing API"
+  @header("Accept")
+  accept: "application/xml";
+};
+
 alias ApiVersionHeader = {
   /** Specifies the version of the operation to use for this request. */
   @apiVersion
@@ -51,7 +59,7 @@ op StorageOperation<
 
 /** Azure Storage Blob basic operation template */
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-op StorageOperationNoBody<
+op StorageOperationBase<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
   TError = Error
@@ -64,6 +72,18 @@ op StorageOperationNoBody<
     })
   | TError;
 
+/**
+ * Azure Storage Blob operation with no response body. The shipped SDKs send Accept: application/xml on these
+ * even though there is nothing to deserialize, so the header is declared explicitly: without a response body there
+ * is no media type for an emitter to derive it from, and the request would otherwise go out as Accept: *\/*.
+ */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+op StorageOperationNoBody<
+  TParams extends TypeSpec.Reflection.Model | void,
+  TResponse extends TypeSpec.Reflection.Model | void,
+  TError = Error
+> is StorageOperationBase<{ ...AcceptHeader; ...TParams }, TResponse, TError>;
+
 /** Azure Storage Blob basic operation template */
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperationResponseBody<
@@ -71,7 +91,7 @@ op StorageOperationResponseBody<
   TResponse extends TypeSpec.Reflection.Model | void,
   ResponseMediaType extends string = "application/xml",
   TError = Error
-> is StorageOperationNoBody<
+> is StorageOperationBase<
   TParams,
   {
     /** Content-Type header */

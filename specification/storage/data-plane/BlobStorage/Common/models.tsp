@@ -782,11 +782,11 @@ enum CopyStatus {
   /** The copy operation succeeded. */
   Success: "success",
 
-  /** The copy operation failed. */
-  Failed: "failed",
-
   /** The copy operation was aborted. */
   Aborted: "aborted",
+
+  /** The copy operation failed. */
+  Failed: "failed",
 }
 
 /** The lease duration. */
@@ -821,11 +821,11 @@ enum LeaseState {
 /** The lease status. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum LeaseStatus {
-  /** The lease is unlocked. */
-  Unlocked: "unlocked",
-
   /** The lease is locked. */
   Locked: "locked",
+
+  /** The lease is unlocked. */
+  Unlocked: "unlocked",
 }
 
 /** Represents an access policy. */
@@ -1122,11 +1122,11 @@ enum ImmutabilityPolicyMode {
   /** Response only. The immutability policy is mutable. */
   Mutable: "mutable",
 
-  /** The immutability policy is locked. */
-  Locked: "locked",
-
   /** The immutability policy is unlocked. */
   Unlocked: "unlocked",
+
+  /** The immutability policy is locked. */
+  Locked: "locked",
 }
 
 /** The blob type. */
@@ -1521,14 +1521,14 @@ alias SequenceNumberActionParameter = {
 /** The sequence number actions. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum SequenceNumberActionType {
-  /** Increment the sequence number. */
-  Increment: "increment",
-
   /** Set the maximum for the sequence number. */
   Max: "max",
 
   /** Update the sequence number. */
   Update: "update",
+
+  /** Increment the sequence number. */
+  Increment: "increment",
 }
 
 /** The sequence number parameter. */
@@ -2425,11 +2425,11 @@ enum BlobDeleteType {
 /** Specifies the delete behavior of blob snapshots. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum DeleteSnapshotsOptionType {
-  /** Only delete the snapshots. */
-  Only: "only",
-
   /** Delete the blob and snapshots. */
   Include: "include",
+
+  /** Only delete the snapshots. */
+  Only: "only",
 }
 
 /** The encryption algorithm parameter. */
