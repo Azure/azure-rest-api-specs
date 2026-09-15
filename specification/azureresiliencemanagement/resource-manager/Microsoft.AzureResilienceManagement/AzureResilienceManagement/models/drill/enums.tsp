@@ -53,10 +53,6 @@ union DrillMode {
 
   @doc("Failover mode.")
   Failover: "Failover",
-
-  @doc("TestFailover mode.")
-  @removed(Versions.v2026_04_01_preview)
-  TestFailover: "TestFailover",
 }
 
 /**
@@ -236,6 +232,7 @@ union DrillType {
   Zonal: "Zonal",
 
   @doc("Regional Drill.")
+  @removed(Versions.v2026_10_01)
   Regional: "Regional",
 }
 
@@ -265,14 +262,6 @@ union DrillRunSubtasks {
 
   @doc("Failover Subtasks.")
   Failover: "Failover",
-
-  @doc("TestFailover Subtasks.")
-  @removed(Versions.v2026_04_01_preview)
-  TestFailover: "TestFailover",
-
-  @doc("TestFailoverCleanup Subtasks.")
-  @removed(Versions.v2026_04_01_preview)
-  TestFailoverCleanup: "TestFailoverCleanup",
 
   @doc("Reprotect Subtasks.")
   Reprotect: "Reprotect",
@@ -327,14 +316,6 @@ union DrillRunTasks {
 
   @doc("Failover task.")
   Failover: "Failover",
-
-  @doc("TestFailover tasks.")
-  @removed(Versions.v2026_04_01_preview)
-  TestFailover: "TestFailover",
-
-  @doc("TestFailoverCleanup tasks.")
-  @removed(Versions.v2026_04_01_preview)
-  TestFailoverCleanup: "TestFailoverCleanup",
 
   @doc("Reprotect task.")
   Reprotect: "Reprotect",
@@ -392,34 +373,27 @@ union AutoFailover {
 }
 
 @doc("A state type that indicates qualification of a resource for an operation.")
-@added(Versions.v2026_03_01_preview)
 union DrillResourceNonQualificationReasons {
   string,
 
   @doc("Resource is not included in the recovery plan.")
-  @added(Versions.v2026_03_01_preview)
   ResourceNotIncludedInRecoveryPlan: "ResourceNotIncludedInRecoveryPlan",
 
   @doc("Resource is not included in the drill.")
-  @added(Versions.v2026_03_01_preview)
   ResourceNotIncludedInDrill: "ResourceNotIncludedInDrill",
 
   @doc("Resource location does not match the source location.")
-  @added(Versions.v2026_03_01_preview)
   ResourceLocationNotMatchingWithSourceLocation: "ResourceLocationNotMatchingWithSourceLocation",
 
   @doc("Resource zone does not match the source zone.")
-  @added(Versions.v2026_03_01_preview)
   ResourceZoneNotMatchingWithSourceZone: "ResourceZoneNotMatchingWithSourceZone",
 }
 
 @doc("A state type that indicates qualification of a resource for an operation.")
-@added(Versions.v2026_03_01_preview)
 union ResourceTypeCategories {
   string,
 
   @doc("Indicates that alteast one Azure Site Recovery VMs are present.")
-  @added(Versions.v2026_03_01_preview)
   AzureSiteRecoveryVMsPresent: "AzureSiteRecoveryVMsPresent",
 }
 
@@ -427,7 +401,6 @@ union ResourceTypeCategories {
  * Enum for the category of an SLI selected for Drill monitoring.
  */
 @doc("Category of an SLI selected for Drill monitoring.")
-@added(Versions.v2026_08_31_preview)
 union SliType {
   string,
 
@@ -442,7 +415,6 @@ union SliType {
  * Enum for AttentionReason - whether the user-declared SLI type matches the SLI's actual category.
  */
 @doc("Whether the user-declared SLI type matches the SLI's actual category.")
-@added(Versions.v2026_08_31_preview)
 union SliTypeMatchState {
   string,
 
@@ -457,7 +429,6 @@ union SliTypeMatchState {
  * Enum for the report generation status of a Drill Run report.
  */
 @doc("Report generation status.")
-@added(Versions.v2026_08_31_preview)
 union DrillReportGenerationStatus {
   string,
 
@@ -478,7 +449,6 @@ union DrillReportGenerationStatus {
  * Enum for the formats a Drill Run report can be downloaded in.
  */
 @doc("Format of a Drill Run report.")
-@added(Versions.v2026_08_31_preview)
 union DrillReportFormat {
   string,
 
@@ -490,7 +460,6 @@ union DrillReportFormat {
  * Enum for the finalization state of a Drill Run report.
  */
 @doc("Finalization state of a Drill Run report.")
-@added(Versions.v2026_08_31_preview)
 union DrillReportFinalizationState {
   string,
 

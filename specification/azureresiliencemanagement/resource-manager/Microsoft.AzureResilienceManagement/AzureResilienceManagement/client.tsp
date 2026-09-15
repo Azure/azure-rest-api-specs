@@ -15,7 +15,6 @@ using Azure.ResourceManager;
 @@clientName(DrillResource, "DrillTarget", "csharp");
 @@clientName(DrillRunResource, "DrillRunTarget", "csharp");
 @@clientName(RecoveryJobResource, "RecoveryJobTarget", "csharp");
-@@clientName(ChaosJobResource, "ChaosJobTarget", "csharp");
 
 // CSharp: AZC0030 — *Request -> *Content
 @@clientName(DrillRunFailoverRequest, "DrillRunFailoverContent", "csharp");
@@ -52,16 +51,6 @@ using Azure.ResourceManager;
 @@clientName(
   ValidateForExecutionRequest,
   "ValidateForExecutionContent",
-  "csharp"
-);
-@@clientName(
-  DrillRunTestFailoverCleanupRequest,
-  "DrillRunTestFailoverCleanupContent",
-  "csharp"
-);
-@@clientName(
-  DrillRunTestFailoverRequest,
-  "DrillRunTestFailoverContent",
   "csharp"
 );
 @@clientName(
@@ -107,9 +96,8 @@ using Azure.ResourceManager;
   "csharp"
 );
 
-// These three are reference/content models and must not use the *Resource suffix.
+// These reference/content models must not use the *Resource suffix.
 @@clientName(IncludeOrUpdateResource, "IncludeOrUpdateContent", "csharp");
-@@clientName(MoboBrokerResource, "ManagedBrokerTarget", "csharp");
 @@clientName(ServiceLevelResource, "ServiceLevelTarget", "csharp");
 
 @@clientName(RBACState, "ResilienceManagementRbacState", "csharp");
@@ -130,7 +118,6 @@ using Azure.ResourceManager;
   "ResilienceManagementSolutionDisplayName",
   "csharp"
 );
-@@alternateType(MoboBrokerResource.id, armResourceIdentifier, "csharp");
 @@clientName(
   RecoveryResourceProperties.needsAttention,
   "IsAttentionRequired",

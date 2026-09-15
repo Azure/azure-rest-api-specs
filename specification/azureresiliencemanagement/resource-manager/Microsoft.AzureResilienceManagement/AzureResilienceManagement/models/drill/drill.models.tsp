@@ -48,14 +48,6 @@ model DrillProperties {
     }
   ]>;
 
-  @doc("Metric properties.")
-  @removed(Versions.v2026_04_01_preview)
-  metricsProperties?: MetricsPropertiesOfDrill;
-
-  @doc("HealthModel properties.")
-  @removed(Versions.v2026_04_01_preview)
-  healthModelProperties?: HealthModelPropertiesOfDrill;
-
   @doc("ROPlan properties.")
   recoveryPlanProperties?: RecoveryPlanPropertiesOfDrill;
 
@@ -64,16 +56,10 @@ model DrillProperties {
   goalAssignmentProperties?: GoalAssignmentPropertiesOfDrill;
 
   @doc("Properties for internal resources that are created for the Drill.")
-  @added(Versions.v2026_03_01_preview)
   drillAssetProperties?: AssetPropertiesOfDrill;
 
   @doc("Chaos Resource properties.")
-  @added(Versions.v2026_03_01_preview)
   chaosResourceProperties?: ChaosResourcePropertiesOfDrill;
-
-  @doc("Chaos Experiment properties.")
-  @removed(Versions.v2026_04_01_preview)
-  chaosExperimentProperties?: ChaosExperimentPropertiesOfDrill;
 
   @doc("Execution state of the Drill. Whether it is currently running or not.")
   @visibility(Lifecycle.Read)
@@ -103,39 +89,22 @@ model DrillProperties {
   lastSyncTime?: utcDateTime;
 
   @doc("Last resync and readiness check time.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   lastResyncReadinessCheckTime?: utcDateTime;
 
-  @doc("Managed RG v2 properties.")
-  @removed(Versions.v2026_06_01_preview)
-  @visibility(Lifecycle.Read)
-  managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
-
   @doc("The discriminator for the Drill object hierarchy.")
-  @removed(Versions.v2026_08_31_preview)
-  @renamedFrom(Versions.v2026_08_31_preview, "drillType")
-  @visibility(Lifecycle.Create)
-  legacyDrillType: DrillType;
-
-  @doc("The discriminator for the Drill object hierarchy.")
-  @added(Versions.v2026_08_31_preview)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   drillType: DrillType;
 
   @doc("Monitoring properties of the Drill.")
-  @added(Versions.v2026_03_01_preview)
   monitoringProperties?: MonitoringPropertiesOfDrill;
 
   @doc("Azure Health Model monitoring properties of the Drill.")
-  @added(Versions.v2026_08_31_preview)
   healthModelMonitoringProperties?: HealthModelMonitoringProperties;
 
   @doc("SLI monitoring properties of the Drill.")
-  @added(Versions.v2026_08_31_preview)
   sliMonitoringProperties?: SliMonitoringProperties;
 
-  @added(Versions.v2026_03_01_preview)
   @doc("Error details associated with the resource.")
   @visibility(Lifecycle.Read)
   errorDetails?: CommonTypes.ErrorDetail;
@@ -171,12 +140,6 @@ model LastRunProperties {
 @doc("Definition of Zonal Drill properties.")
 model ZonalDrillProperties extends DrillProperties {
   @doc("The discriminator for the Drill object hierarchy.")
-  @removed(Versions.v2026_08_31_preview)
-  @renamedFrom(Versions.v2026_08_31_preview, "drillType")
-  legacyDrillType: DrillType.Zonal;
-
-  @doc("The discriminator for the Drill object hierarchy.")
-  @added(Versions.v2026_08_31_preview)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   drillType: DrillType.Zonal;
 
@@ -201,15 +164,10 @@ model ZonalDrill is ProxyResource<ZonalDrillProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
+@removed(Versions.v2026_10_01)
 @doc("Definition of Regional Drill properties.")
 model RegionalDrillProperties extends DrillProperties {
   @doc("The discriminator for the Drill object hierarchy.")
-  @removed(Versions.v2026_08_31_preview)
-  @renamedFrom(Versions.v2026_08_31_preview, "drillType")
-  legacyDrillType: DrillType.Regional;
-
-  @doc("The discriminator for the Drill object hierarchy.")
-  @added(Versions.v2026_08_31_preview)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   drillType: DrillType.Regional;
 }
@@ -217,6 +175,7 @@ model RegionalDrillProperties extends DrillProperties {
 /**
  * Resource definition for the RegionalDrill Object.
  */
+@removed(Versions.v2026_10_01)
 @tenantResource
 @doc("Regional Drill resource")
 model RegionalDrill is ProxyResource<RegionalDrillProperties> {
@@ -233,47 +192,19 @@ model RegionalDrill is ProxyResource<RegionalDrillProperties> {
 /**
  * Model that represents the metric properties
  */
-@doc("Metrics properties.")
-@removed(Versions.v2026_04_01_preview)
-model MetricsPropertiesOfDrill {
-  @doc("Identity to use for metrics operations.")
-  identity: AssociatedIdentity;
-
-  @doc("Metrics associated with this Drill. These will be tracked through the Drill Run.")
-  @identifiers(#[])
-  metricsToTrack: MetricsToTrack[];
-}
-
 /**
  * Model that represents the Health Model properties
  */
-@doc("Health Model properties.")
-@removed(Versions.v2026_04_01_preview)
-model HealthModelPropertiesOfDrill {
-  @doc("Identity to use for Health Model operations.")
-  identity: AssociatedIdentity;
-
-  @doc("Full ARM Id of the Health Model.")
-  healthModelId: armResourceIdentifier<[
-    {
-      type: "Microsoft.CloudHealth/healthmodels";
-    }
-  ]>;
-}
-
 /**
  * Model that represents the Monitoring properties of Drill
  */
 @doc("Drill monitoring properties.")
-@added(Versions.v2026_03_01_preview)
 model MonitoringPropertiesOfDrill {
   @doc("Identity to use for Drill monitoring operations.")
-  @added(Versions.v2026_03_01_preview)
   identity?: AssociatedIdentity;
 
   @doc("Full ARM Id of the Log analytics workspace created by Resiliency service where health data is collected.")
   @visibility(Lifecycle.Read)
-  @added(Versions.v2026_03_01_preview)
   logAnalyticsWorkspaceId?: armResourceIdentifier<[
     {
       type: "Microsoft.OperationalInsights/workspaces";
@@ -282,7 +213,6 @@ model MonitoringPropertiesOfDrill {
 
   @doc("Full ARM Id of the Data collection rule created by Resiliency service which will route data for RAW health data for service group resources.")
   @visibility(Lifecycle.Read)
-  @added(Versions.v2026_03_01_preview)
   rawMetricsDataCollectionRuleId?: armResourceIdentifier<[
     {
       type: "Microsoft.Insights/datacollectionrules";
@@ -291,7 +221,6 @@ model MonitoringPropertiesOfDrill {
 
   @doc("Full ARM Id of the Data collection rule created by Resiliency service which will route data for Aggregate health data of service group.")
   @visibility(Lifecycle.Read)
-  @added(Versions.v2026_03_01_preview)
   serviceGroupMetricsDataCollectionRuleId?: armResourceIdentifier<[
     {
       type: "Microsoft.Insights/datacollectionrules";
@@ -300,7 +229,6 @@ model MonitoringPropertiesOfDrill {
 
   @doc("Full ARM Id of the Data collection endpoint created by Resiliency service which will route data for service group and its resources.")
   @visibility(Lifecycle.Read)
-  @added(Versions.v2026_03_01_preview)
   dataCollectionEndpointId?: armResourceIdentifier<[
     {
       type: "Microsoft.Insights/dataCollectionEndpoints";
@@ -312,7 +240,6 @@ model MonitoringPropertiesOfDrill {
  * Model that represents the Azure Health Model monitoring properties of a Drill.
  */
 @doc("Azure Health Model monitoring properties of a Drill. Exactly one Health Model may be selected per Drill.")
-@added(Versions.v2026_08_31_preview)
 model HealthModelMonitoringProperties {
   @doc("Identity that the Drill uses to read the Azure Health Model. The Drill is granted Reader on the Health Model for this identity.")
   identity: AssociatedIdentity;
@@ -329,7 +256,6 @@ model HealthModelMonitoringProperties {
  * Model that represents the SLI monitoring properties of a Drill.
  */
 @doc("SLI monitoring properties of a Drill. At most two SLIs may be selected: at most one Availability and one Latency.")
-@added(Versions.v2026_08_31_preview)
 model SliMonitoringProperties {
   @doc("Identity that the Drill uses to read evaluated SLI results from each SLI's destination Azure Monitor Workspace. The Drill is granted Monitoring Reader on every destination AMW of every selected SLI for this identity.")
   identity: AssociatedIdentity;
@@ -345,7 +271,6 @@ model SliMonitoringProperties {
  * Model that represents a single SLI selected for Drill monitoring.
  */
 @doc("A single SLI selected for Drill monitoring.")
-@added(Versions.v2026_08_31_preview)
 model SliSelection {
   @doc("Full ARM Id of the SLI.")
   sliId: armResourceIdentifier<[
@@ -362,7 +287,6 @@ model SliSelection {
  * Model that represents the per-SLI attention status of a Drill.
  */
 @doc("Per-SLI attention status of a Drill.")
-@added(Versions.v2026_08_31_preview)
 model SliAttentionStatus {
   @doc("Full ARM Id of the SLI this status refers to.")
   sliId: armResourceIdentifier<[
@@ -394,29 +318,6 @@ model SliAttentionStatus {
 /**
  * Model that represents the metric to use
  */
-@doc("Metrics object")
-@removed(Versions.v2026_04_01_preview)
-model MetricsToTrack {
-  @doc("Name of the metric.")
-  @minLength(1)
-  metricName: string;
-
-  @doc("Full url of the metric.")
-  metricId: armResourceIdentifier<[
-    {
-      type: "Microsoft.Monitor/slos";
-    }
-  ]>;
-
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  @doc("Destination AMW account where the time-series data of the metric lives.")
-  destinationAmwAccountUrl: armResourceIdentifier<[
-    {
-      type: "Microsoft.Automation/automationAccounts";
-    }
-  ]>;
-}
-
 /**
  * Model that represents the RecoveryPlan properties
  */
@@ -459,51 +360,18 @@ model GoalAssignmentPropertiesOfDrill {
 /**
  * Model that represents the Chaos Experiment properties
  */
-@doc("Chaos Experiment properties.")
-@removed(Versions.v2026_04_01_preview)
-model ChaosExperimentPropertiesOfDrill {
-  @doc("Subscription for chaosExperiment resource.")
-  subscription?: string;
-
-  @doc("Region for chaosExperiment resource.")
-  region?: string;
-
-  @doc("Identity to use for Chaos Experiment operations.")
-  identity?: AssociatedIdentity;
-
-  @doc("Identity to be used by the Chaos Experiment for invoking faults on resources.")
-  chaosExperimentIdentityForFaults?: AssociatedIdentity;
-
-  @doc("Chaos Experiment resource created for this Drill")
-  @visibility(Lifecycle.Read)
-  chaosExperimentId?: armResourceIdentifier<[
-    {
-      type: "Microsoft.Chaos/experiments";
-    }
-  ]>;
-
-  @doc("Duration of faults.")
-  @visibility(Lifecycle.Read)
-  @minValue(0)
-  faultDurationInMin?: int32;
-}
-
 /**
  * Model that represents the Chaos Resource properties
  */
 @doc("Chaos Resource properties.")
-@added(Versions.v2026_03_01_preview)
 model ChaosResourcePropertiesOfDrill {
   @doc("Identity to use for Chaos Resource operations.")
-  @added(Versions.v2026_03_01_preview)
   identity: AssociatedIdentity;
 
   @doc("Identity to be used by the Chaos Resource for invoking faults on resources.")
-  @added(Versions.v2026_03_01_preview)
   chaosResourceIdentityForFaults: AssociatedIdentity;
 
   @doc("Chaos Resource created for this Drill")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   chaosResourceId?: armResourceIdentifier<[
     {
@@ -512,25 +380,20 @@ model ChaosResourcePropertiesOfDrill {
   ]>;
 
   @doc("Duration of faults.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   @minValue(0)
   faultDurationInMin?: int32;
 }
 
 @doc("Drill asset properties.")
-@added(Versions.v2026_03_01_preview)
 model AssetPropertiesOfDrill {
   @doc("Subscription where Drill's internal resources will be created.")
-  @added(Versions.v2026_03_01_preview)
   subscription: string;
 
   @doc("Region where Drill's internal resources will be created.")
-  @added(Versions.v2026_03_01_preview)
   region: string;
 
   @doc("Resource group where Drill's internal resources will be created. If not specified, defaults to 'AzureResilienceManagementDrills'. This value is immutable after drill creation.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @pattern("^[-\\w\\._\\(\\)]+$")
   @minLength(1)
@@ -540,20 +403,10 @@ model AssetPropertiesOfDrill {
 
 @doc("Reason why the Drill is in NeedsAttention state, and not ready to run.")
 model AttentionReason {
-  @doc("Drill object does not have the necessary RBAC to run the chaos experiment.")
-  @removed(Versions.v2026_04_01_preview)
-  drillRbacOnExperiment?: RBACState;
-
-  @doc("Permissions needed by the Drill MSI to run the chaos experiment.")
-  @removed(Versions.v2026_04_01_preview)
-  rbacNeededForDrillOnExperiment?: string[];
-
   @doc("Drill object does not have the necessary RBAC to run the chaos resource.")
-  @added(Versions.v2026_03_01_preview)
   drillRbacOnChaosResource?: RBACState;
 
   @doc("Permissions needed by the Drill MSI to run the chaos resource.")
-  @added(Versions.v2026_03_01_preview)
   rbacNeededForDrillOnChaosResource?: string[];
 
   @doc("Drill object does not have the necessary RBAC to run the Recovery Plan.")
@@ -562,54 +415,19 @@ model AttentionReason {
   @doc("Permissions needed by the Drill MSI to run the Recovery Plan.")
   rbacNeededForDrillOnRecoveryPlan?: string[];
 
-  @doc("Drill object does not have the necessary RBAC to read the Azure Monitoring Workspace account.")
-  @removed(Versions.v2026_04_01_preview)
-  drillRbacOnAzureMonitoringWorkspace?: RBACState;
-
-  @doc("Permissions needed by the Drill MSI to read Azure Monitoring Workspace account.")
-  @removed(Versions.v2026_04_01_preview)
-  rbacNeededForDrillOnAzureMonitoringWorkspace?: string[];
-
-  @doc("Drill object does not have the necessary RBAC to read the SLO object.")
-  @removed(Versions.v2026_04_01_preview)
-  drillRbacOnSlo?: RBACState;
-
-  @doc("Permissions needed by the Drill MSI to read SLO object.")
-  @removed(Versions.v2026_04_01_preview)
-  rbacNeededForDrillOnSlo?: string[];
-
-  @doc("Drill object does not have the necessary RBAC to read the Azure Health Model.")
-  @removed(Versions.v2026_04_01_preview)
-  drillRbacOnAzureHealthModel?: RBACState;
-
-  @doc("Permissions needed by the Drill MSI to read Azure Health Model.")
-  @removed(Versions.v2026_04_01_preview)
-  rbacNeededForDrillOnAzureHealthModel?: string[];
-
   @doc("Associated RO ready or not.")
   roReadiness?: RecoveryPlanState;
 
-  @doc("RBAC required by Experiment MSI not setup on the target resources.")
-  @removed(Versions.v2026_04_01_preview)
-  faultRbacOnTargets?: RBACState;
-
   @doc("RBAC required by Chaos Resource MSI not setup on the target resources.")
-  @added(Versions.v2026_03_01_preview)
   rbacOnTargetResources?: RBACState;
 
   @doc("RBAC required by AutomationAccount for runbook MSI not setup on the target resources.")
   runbookFaultRbacOnTargets?: RBACState;
 
-  @doc("One or more Target or Capability object is deleted.")
-  @removed(Versions.v2026_04_01_preview)
-  targets?: ExtensionObjectState;
-
   @doc("Chaos resource for faulting exists or not.")
-  @added(Versions.v2026_03_01_preview)
   chaosResource?: ExtensionObjectState;
 
   @doc("Reason for Chaos Resource Creation failure")
-  @added(Versions.v2026_03_01_preview)
   chaosResourceCreationFailureReasons?: string[];
 
   @doc("Resources associated in Recovery Plan and Drill are out of sync.")
@@ -621,74 +439,55 @@ model AttentionReason {
   @doc("User MSI associated with Drill object is deleted.")
   drillUserMsi?: ExtensionObjectState;
 
-  @doc("User MSI associated with chaos experiment object is deleted.")
-  @removed(Versions.v2026_04_01_preview)
-  chaosExperimentUserMsi?: ExtensionObjectState;
-
   @doc("User MSI associated with chaos resource object is deleted.")
-  @added(Versions.v2026_03_01_preview)
   chaosResourceUserMsi?: ExtensionObjectState;
 
   @doc("Included resource in Drill.")
   includedResourceInDrill?: ExtensionObjectState;
 
   @doc("Drill MSI does not have the necessary RBAC to read the Drill Monitoring resources.")
-  @added(Versions.v2026_03_01_preview)
   drillRbacOnMonitoringResources?: RBACState;
 
   @doc("Errors related to Drill Monitoring resources.")
   @identifiers(#[])
-  @added(Versions.v2026_03_01_preview)
   drillMonitoringErrors?: ErrorDetails[];
 
   @doc("Monitoring Resources created for Drill")
   @visibility(Lifecycle.Read)
-  @added(Versions.v2026_03_01_preview)
   drillMonitoringResources?: ExtensionObjectState;
 
   @doc("Monitoring RBAC required by Drill MSI not setup on the target resources.")
-  @added(Versions.v2026_03_01_preview)
   monitoringRbacOnDrillResources?: RBACState;
 
   @doc("Permissions needed by the Drill MSI to Upload service group health data for monitoring.")
-  @added(Versions.v2026_03_01_preview)
   rbacNeededForDrillOnDrillMonitoringResources?: string[];
 
   @doc("Permissions needed by the Drill MSI to read health metrics data for resources in service group.")
-  @added(Versions.v2026_03_01_preview)
   rbacNeededForDrillOnDrillResources?: string[];
 
   @doc("List of required required Azure resource providers that are not registered in the subscription specified for chaos resource.")
-  @added(Versions.v2026_03_01_preview)
   missingRequiredResourceProviders?: string[];
 
   @doc("Neither an Azure Health Model nor an SLI is configured for the Drill. Execution is blocked until a monitoring source is configured.")
-  @added(Versions.v2026_08_31_preview)
   monitoringSourceNotConfigured?: boolean;
 
   @doc("Whether the selected Azure Health Model still exists.")
-  @added(Versions.v2026_08_31_preview)
   healthModelExists?: ExtensionObjectState;
 
   @doc("Whether the selected discovery rule still exists.")
-  @added(Versions.v2026_08_31_preview)
   discoveryRuleExists?: ExtensionObjectState;
 
   @doc("Whether the Drill identity has the necessary RBAC (Reader) to read the selected Azure Health Model.")
-  @added(Versions.v2026_08_31_preview)
   drillRbacOnHealthModel?: RBACState;
 
   @doc("Permissions needed by the Drill identity to read the selected Azure Health Model.")
-  @added(Versions.v2026_08_31_preview)
   rbacNeededForDrillOnHealthModel?: string[];
 
   @doc("Rolled-up RBAC state: NotSet if the Drill identity is missing the necessary RBAC to read any selected SLI.")
-  @added(Versions.v2026_08_31_preview)
   drillRbacOnSli?: RBACState;
 
   @doc("Per-SLI attention status for each SLI selected for Drill monitoring.")
   @identifiers(#[])
-  @added(Versions.v2026_08_31_preview)
   sliAttentionStatuses?: SliAttentionStatus[];
 
   @doc("Drill object does not have the necessary RBAC on Goal Assignment.")
@@ -714,7 +513,6 @@ model SystemMetadata {
   initialConfig: InitialConfig;
 
   @doc("An indication whether a intrested resource type is present in drill resource.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   resourceTypeCategories?: ResourceTypeCategories[];
 }
@@ -723,14 +521,6 @@ model SystemMetadata {
 model DrillStartRequest {
   @doc("Mode of starting the Drill")
   mode: DrillMode;
-
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  @doc("Inputs needed for the Recovery Orchestration Plan")
-  @removed(Versions.v2026_04_01_preview)
-  recoveryPlanInputs: {
-    @doc("Direction of the failover")
-    failoverDirection: string;
-  };
 }
 
 @doc("Request body of the End Action of Drill.")
@@ -794,26 +584,6 @@ model IncludeOrUpdateResource {
   faultProperties?: FaultProperties;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@doc("Response body of the AddOrUpdateResources API.")
-@removed(Versions.v2026_04_01_preview)
-model AddOrUpdateResourcesResponse {
-  @doc("Failed Include resources.")
-  @visibility(Lifecycle.Read)
-  @identifiers(#[])
-  failedIncludeResourceList?: FailedDrillResource[];
-
-  @doc("Failed Exclude resources.")
-  @visibility(Lifecycle.Read)
-  @identifiers(#[])
-  failedExcludeResourceList?: FailedDrillResource[];
-
-  @doc("Failed Update resources.")
-  @visibility(Lifecycle.Read)
-  @identifiers(#[])
-  failedUpdateResourceList?: FailedDrillResource[];
-}
-
 @doc("Failed Include, Exclude or Update resource.")
 model FailedDrillResource {
   @doc("Id of the failed drill resource.")
@@ -826,17 +596,6 @@ model FailedDrillResource {
   @doc("Resource Id of the underlying resource of the failed Drill resource.")
   resourceId: armResourceIdentifier<[]>;
 
-  @doc("Target and Capability assignment error.")
-  @removed(Versions.v2026_04_01_preview)
-  @visibility(Lifecycle.Read)
-  targetAndCapabilityAssignmentError?: ErrorDetails;
-
-  @doc("Target resource RBAC assignment error.")
-  @removed(Versions.v2026_04_01_preview)
-  @added(Versions.v2026_03_01_preview)
-  @visibility(Lifecycle.Read)
-  targetResourceAssignmentError?: ErrorDetails;
-
   @doc("RBAC assignment error.")
   @visibility(Lifecycle.Read)
   rbacAssignmentError?: ErrorDetails;
@@ -844,10 +603,6 @@ model FailedDrillResource {
 
 @doc("PATCH properties for Drill.")
 model DrillPatchProperties {
-  @doc("Metric properties.")
-  @removed(Versions.v2026_04_01_preview)
-  metricsProperties?: MetricsPropertiesOfDrill;
-
   @doc("Recovery Plan properties.")
   recoveryPlanProperties?: RecoveryPlanPropertiesOfDrill;
 
@@ -856,206 +611,140 @@ model DrillPatchProperties {
   goalAssignmentProperties?: GoalAssignmentPropertiesOfDrill;
 
   @doc("Properties for internal resources that are created for the Drill.")
-  @added(Versions.v2026_03_01_preview)
   drillAssetProperties?: AssetPropertiesOfDrill;
 
-  @doc("Chaos Experiment properties.")
-  @removed(Versions.v2026_04_01_preview)
-  chaosExperimentProperties?: ChaosExperimentPropertiesOfDrill;
-
   @doc("Chaos Resource properties.")
-  @added(Versions.v2026_03_01_preview)
   chaosResourceProperties?: ChaosResourcePropertiesOfDrill;
-
-  @doc("HealthModel properties.")
-  @removed(Versions.v2026_04_01_preview)
-  healthModelProperties?: HealthModelPropertiesOfDrill;
 
   @doc("RBAC setup mode.")
   rbacSetupMode?: RBACSetupMode;
 
   @doc("Monitoring properties of the Drill.")
-  @added(Versions.v2026_03_01_preview)
   monitoringProperties?: MonitoringPropertiesOfDrill;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null is required so a PATCH can clear the Health Model monitoring selection."
   @doc("Azure Health Model monitoring properties of the Drill. Send null to clear the selection.")
-  @added(Versions.v2026_08_31_preview)
   healthModelMonitoringProperties?: HealthModelMonitoringProperties | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null is required so a PATCH can clear the SLI monitoring selection."
   @doc("SLI monitoring properties of the Drill. Send null to clear the selection; the submitted slis array is the new desired state.")
-  @added(Versions.v2026_08_31_preview)
   sliMonitoringProperties?: SliMonitoringProperties | null;
 }
 
 @doc("Additional properties for Failover.")
-@added(Versions.v2026_03_01_preview)
 model ValidateForExecutionProperties {
   @doc("Operation name for which the validation is being done. This is needed to determine the set of validations to be done for the operation.")
-  @added(Versions.v2026_06_01_preview)
   operationName?: DrillRunTasks;
 
   @doc("Physiscal Source locations from where resources to be failed-over or faulted.")
-  @added(Versions.v2026_03_01_preview)
-  @madeOptional(Versions.v2026_06_01_preview)
   sourceLocations?: string[];
 }
 
 @doc("Request body of the Validate For Execute Action of Drill.")
-@added(Versions.v2026_03_01_preview)
 model ValidateForExecutionRequest {
   @doc("Additional properties for Validate for execute.")
-  @added(Versions.v2026_03_01_preview)
   validateForExecutionProperties?: ValidateForExecutionProperties;
 }
 
 @doc("Qualified resource.")
-@added(Versions.v2026_03_01_preview)
 model DrillsQualifiedResource {
   @doc("ARM Resource ID of the Azure resource.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   resourceId: armResourceIdentifier;
 
   @doc("Drill Resource ID of the Azure resource.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   drillResourceId?: armResourceIdentifier;
 
   @doc("Active Resource location and zones of Azure Resource.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   activeLocations?: string[];
 
   @doc("Recovery Resource location and zones of HA Azure Resource.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   recoveryLocations?: string[];
 
   @doc("Active Resource location and physical zones of Azure Resource.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   activePhysicalZones?: string[];
 
   @doc("Recovery Resource location and physical zones of HA Azure Resource.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   recoveryPhysicalZones?: string[];
 
   @doc("Inclusion State of the Drill resource in Drill")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   drillInclusionState?: DrillResourceInclusionState;
 
   @doc("A state that indicates the resource status with respect to the recovery orchestration plan.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   recoveryInclusionState?: ResourceInclusionState;
 
   @doc("A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   protectionStatus?: ResourceProtectionStatus;
 
   @doc("A setting that indicates the protection solution selected.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   selectedProtectionSolutionType?: ResourceProtectionSolutionType;
 
   @doc("A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   resourceProtectionSolutions?: ResourceProtectionSolutionSettings[];
 
   @doc("Resource protection solution settings of the protection solutions recovery orchestration resource is protected with.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   selectedProtectionSolutionSetting?: ResourceBaseProtectionSolutionSetting;
 
   @doc("Fault State of the Drill resource")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   faultState?: DrillResourceFaultState;
 
   @doc("Fault Properties")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   faultProperties?: FaultProperties;
 
   @doc("Resource Protection Solution Display Name")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   resourceProtectionSolutionDisplayName?: string;
 }
 
 @doc("Details of qualification for an operation.")
-@added(Versions.v2026_03_01_preview)
 model ResourceQualificationDetails {
   @doc("Resource qualification state for the operation.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   drillQualificationState: QualificationState;
 
   @doc("Resource qualification state for the operation.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   recoveryQualificationState: QualificationState;
 
   @doc("Reasons for resource not qualified for the recovery operation.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   recoveryNotQualifiedReasons?: string[];
 
   @doc("Reasons for resource not qualified for the drills operation.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   drillsNotQualifiedReasons?: DrillResourceNonQualificationReasons[];
 }
 
 @doc("Details of qualified resources for validateForExecution operation.")
-@added(Versions.v2026_03_01_preview)
 model DrillResourceQualification {
   @doc("Drill resource.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   drillsQualifiedResource: DrillsQualifiedResource;
 
   @doc("Details of qualification for the operation.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   resourceQualificationDetails: ResourceQualificationDetails;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("ValidateForExecution post action response.")
-@added(Versions.v2026_03_01_preview)
 model ValidateForExecutionResponse {
   @doc("Qualification details of resources for the operation.")
-  @added(Versions.v2026_03_01_preview)
   @identifiers(#[])
   @visibility(Lifecycle.Read)
   drillResourceQualifications: DrillResourceQualification[];
-}
-
-@doc("Configuration of the managed on behalf of resource.")
-@removed(Versions.v2026_06_01_preview)
-model ManagedOnBehalfOfConfiguration {
-  @removed(Versions.v2026_06_01_preview)
-  @visibility(Lifecycle.Read)
-  @doc("Associated MoboBrokerResources.")
-  moboBrokerResources?: MoboBrokerResource[];
-}
-
-@doc("MoboBroker resource.")
-@removed(Versions.v2026_06_01_preview)
-model MoboBrokerResource {
-  /**
-   * The fully qualified resource ID of the MoboBroker resource.
-   * Example: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`
-   */
-  @removed(Versions.v2026_06_01_preview)
-  @visibility(Lifecycle.Read)
-  id?: string;
 }

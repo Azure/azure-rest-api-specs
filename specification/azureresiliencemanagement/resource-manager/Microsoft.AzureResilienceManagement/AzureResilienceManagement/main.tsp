@@ -25,30 +25,13 @@ namespace Microsoft.AzureResilienceManagement;
 
 @doc("Microsoft.AzureResilienceManagement Resource Provider supported API versions.")
 enum Versions {
-  @doc("Microsoft.AzureResilienceManagement Resource Provider management API version 2025-02-01-preview.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  v2025_02_01_preview: "2025-02-01-preview",
-
-  @doc("Microsoft.AzureResilienceManagement Resource Provider management API version 2026-03-01-preview.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  v2026_03_01_preview: "2026-03-01-preview",
-
-  @doc("Microsoft.AzureResilienceManagement Resource Provider management API version 2026-04-01-preview.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  v2026_04_01_preview: "2026-04-01-preview",
-
-  @doc("Microsoft.AzureResilienceManagement Resource Provider management API version 2026-06-01-preview.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  v2026_06_01_preview: "2026-06-01-preview",
-
-  @doc("Microsoft.AzureResilienceManagement Resource Provider management API version 2026-08-31-preview.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  v2026_08_31_preview: "2026-08-31-preview",
-
   @doc("Microsoft.AzureResilienceManagement Resource Provider management API version 2026-09-30-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  @Azure.Core.previewVersion
   v2026_09_30_preview: "2026-09-30-preview",
+
+  @doc("Microsoft.AzureResilienceManagement Resource Provider management API version 2026-10-01.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_10_01: "2026-10-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
