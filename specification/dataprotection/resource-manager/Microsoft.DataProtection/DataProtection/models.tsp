@@ -422,6 +422,7 @@ union AKSVolumeTypes {
  */
 @added(Versions.v2026_04_01_preview)
 @removed(Versions.v2026_06_01)
+@added(Versions.v2026_07_01)
 union BackupSolutionType {
   string,
 
@@ -780,6 +781,60 @@ model ImmutabilitySettings {
    * Immutability state
    */
   state?: ImmutabilityState;
+
+  /**
+   * Immutability configuration containing type and duration.
+   */
+  @added(Versions.v2026_07_01)
+  configuration?: ImmutabilityConfiguration;
+}
+
+/**
+ * Type of immutability configuration.
+ */
+@added(Versions.v2026_07_01)
+union ImmutabilityType {
+  string,
+
+  /** Immutability is enforced as per the backup policy retention. */
+  AsPerPolicy: "AsPerPolicy",
+
+  /** Time-based immutability with a configurable duration window. */
+  TimeBased: "TimeBased",
+}
+
+/**
+ * Immutability configuration containing type and duration.
+ */
+@added(Versions.v2026_07_01)
+model ImmutabilityConfiguration {
+  /**
+   * Type of immutability. Supported values: AsPerPolicy or TimeBased.
+   */
+  type?: ImmutabilityType;
+
+  /**
+   * Duration in days for time-based immutability.
+   * Required when type is TimeBased. Must be null when type is AsPerPolicy.
+   */
+  durationInDays?: int32;
+}
+
+/**
+ * Immutability properties of a recovery point.
+ */
+@added(Versions.v2026_07_01)
+model RecoveryPointImmutabilityProperties {
+  /**
+   * Whether the recovery point is currently within its immutability window.
+   */
+  isImmutable: boolean;
+
+  /**
+   * UTC time when the recovery point's immutability window expires.
+   * Null for AsPerPolicy vaults.
+   */
+  expiryTime?: utcDateTime;
 }
 
 /**
@@ -2834,6 +2889,13 @@ model AzureBackupDiscreteRecoveryPoint extends AzureBackupRecoveryPoint {
    */
   recoveryPointState?: RecoveryPointCompletionState;
 
+  /**
+   * Immutability properties of the recovery point.
+   */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read)
+  immutabilityProperties?: RecoveryPointImmutabilityProperties;
+
   objectType: "AzureBackupDiscreteRecoveryPoint";
 }
 
@@ -3285,6 +3347,7 @@ model AdlsBlobBackupDatasourceParametersForAutoProtection
  */
 @added(Versions.v2026_04_01_preview)
 @removed(Versions.v2026_06_01)
+@added(Versions.v2026_07_01)
 model PostgreSqlFlexibleServerBackupDatasourceParameters
   extends BackupDatasourceParameters {
   /**
