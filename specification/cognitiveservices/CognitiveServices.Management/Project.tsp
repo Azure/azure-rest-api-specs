@@ -2,10 +2,12 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Account.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -59,12 +61,24 @@ interface Projects {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "PUT response codes for 'get' match existing service endpoint behavior"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "'get' returns no response body, matching existing service endpoint behavior"
   @tag("CognitiveServicesProjects")
+  @returnTypeChangedFrom(
+    Versions.v2026_09_15_preview,
+
+      | ArmResourceUpdatedResponse<Project>
+      | ArmResourceCreatedResponse<Project>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Project> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Project,
+        })
+      | ErrorResponse
+  )
   create is ArmResourceCreateOrReplaceAsync<
     Project,
     Response =
       | ArmResourceUpdatedResponse<Project>
       | ArmResourceCreatedResponse<Project>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Project> &
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Project> &
           Azure.Core.Foundations.RetryAfterHeader> & {
           @bodyRoot
           _: Project;
@@ -91,13 +105,25 @@ interface Projects {
   /**
    * Deletes a Cognitive Services project from the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes match existing service endpoint behavior — Projects_Delete always completes synchronously (HTTP 200)"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Project deletion can complete synchronously with 200 or 204, or asynchronously with 202 and long-running operation headers."
   @tag("CognitiveServicesProjects")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    Project,
-    Response =
+  @returnTypeChangedFrom(
+    Versions.v2026_09_15_preview,
+
       | ArmDeletedResponse
       | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
+      | ErrorResponse
+  )
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Project,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void>,
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void>> & {
+          @bodyRoot
+          _: Project;
+        })
       | ArmDeletedNoContentResponse
   >;
 
