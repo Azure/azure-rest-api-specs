@@ -10,6 +10,14 @@ using Azure.ResourceManager;
 
 namespace ServiceEntitlementSettingsApi;
 
+/** The supported name of a service entitlement setting. */
+union ServiceEntitlementSettingName {
+  /** The singleton service entitlement setting. */
+  Default: "default",
+
+  string,
+}
+
 /** The provisioning state of a service entitlement setting. */
 @lroStatus
 union ServiceEntitlementSettingProvisioningState {

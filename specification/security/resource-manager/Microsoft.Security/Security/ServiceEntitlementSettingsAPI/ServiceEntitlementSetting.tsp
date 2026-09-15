@@ -18,7 +18,8 @@ model ServiceEntitlementSetting
     Resource = ServiceEntitlementSetting,
     KeyName = "serviceEntitlementSettingName",
     SegmentName = "serviceEntitlementSettings",
-    NamePattern = "^default$"
+    NamePattern = "^default$",
+    Type = ServiceEntitlementSettingName
   >;
 }
 
@@ -45,7 +46,8 @@ interface ServiceEntitlementSettings {
   /** Deletes a service entitlement setting. */
   delete is ArmResourceDeleteWithoutOkAsync<
     ServiceEntitlementSetting,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /** Lists service entitlement settings in a resource group. */
@@ -54,21 +56,30 @@ interface ServiceEntitlementSettings {
   /** Lists service entitlement settings in a subscription. */
   listBySubscription is ArmListBySubscription<ServiceEntitlementSetting>;
 
-  /** Gets the result of a long-running operation performed on a service entitlement setting. */
+  /** Gets the status of a long-running operation, including after the service entitlement setting has been deleted. */
+  getOperationStatus is Azure.ResourceManager.GetResourceOperationStatus<
+    ArmOperationStatus,
+    SubscriptionLocationActionScope
+  >;
+
+  /** Gets the result of a long-running operation. Returns no content while pending, the updated resource after PATCH completes, or no content after DELETE completes. */
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlementSettings/{serviceEntitlementSettingName}/operationResults/{operationId}")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/operationResults/{operationId}")
   getOperationResult(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /** The name of the service entitlement setting. */
-    @path
-    @pattern("^default$")
-    serviceEntitlementSettingName: string,
-
+    ...LocationResourceParameter,
     ...Azure.ResourceManager.CommonTypes.OperationIdParameter,
   ):
-    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
+    | ArmResponse<ServiceEntitlementSetting>
+    | ArmAcceptedResponse<
+        "The operation is in progress.",
+        ExtraHeaders = Azure.Core.Foundations.RetryAfterHeader & {
+          /** The URL to poll for the operation result. */
+          @header("Location")
+          location: string;
+        }
+      >
+    | ArmNoContentResponse<"The delete operation completed successfully.">
     | ErrorResponse;
 }
