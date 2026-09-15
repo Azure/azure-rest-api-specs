@@ -291,6 +291,15 @@ using Azure.AI.Projects;
 );
 
 // --------------------------------------------------------------------------------
+// Beta Voice Agent Realtime sub-client
+// --------------------------------------------------------------------------------
+
+// WebSocket protocol upgrades are not representable by a generated HTTP client.
+// Python and JS/TS each use their own WebSocket library to establish the voice-agent
+// realtime connection, so this operation is excluded from the emitted SDK surface.
+@@scope(VoiceAgentWebSocket.connectVoiceAgent, "!(python, javascript)");
+
+// --------------------------------------------------------------------------------
 // Beta Voice Agent Conversations sub-client
 // --------------------------------------------------------------------------------
 
