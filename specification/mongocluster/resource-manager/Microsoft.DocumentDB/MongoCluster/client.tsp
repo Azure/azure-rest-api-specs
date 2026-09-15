@@ -161,11 +161,11 @@ namespace Azure.ResourceManager.Models {
 
 @@clientName(
   FirewallRuleProperties.startIpAddress,
-  "$DO_NOT_NORMALIZE$startIpAddress",
+  exact("startIpAddress"),
   "javascript"
 );
 @@clientName(
   FirewallRuleProperties.endIpAddress,
-  "$DO_NOT_NORMALIZE$endIpAddress",
+  exact("endIpAddress"),
   "javascript"
 );
