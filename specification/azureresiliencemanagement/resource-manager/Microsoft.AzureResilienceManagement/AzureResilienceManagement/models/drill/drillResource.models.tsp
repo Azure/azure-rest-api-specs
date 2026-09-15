@@ -109,6 +109,54 @@ model DrillResourceProperties {
     }
   ]>;
 
+  /**
+   * Normal fault eligibility for a regional drill resource. Omitted until evaluated.
+   * Eligibility does not indicate inclusion or readiness, and force inclusion does not change this value.
+   * Not applicable to zonal drills.
+   */
+  @added(Versions.v2026_09_30_preview)
+  @visibility(Lifecycle.Read)
+  faultEligibility?: FaultEligibility;
+
+  /**
+   * Whether the selected regional protection solution reports the resource as regionally resilient.
+   * Omitted when the posture is unknown or unavailable; an unavailable posture is not reported as false.
+   * Not applicable to zonal drills.
+   */
+  @added(Versions.v2026_09_30_preview)
+  @visibility(Lifecycle.Read)
+  isRegionallyResilient?: boolean;
+
+  /**
+   * Replication mode of the selected regional protection solution.
+   * Omitted when no applicable mode is available. Not applicable to zonal drills.
+   */
+  @added(Versions.v2026_09_30_preview)
+  @visibility(Lifecycle.Read)
+  replicationMode?: ReplicationMode;
+
+  /**
+   * Azure resource ID of the matching regional Advisor recommendation instance.
+   * The recommendation type is identified separately by advisorRecommendationTypeId.
+   * Omitted when no matching recommendation exists. Not applicable to zonal drills.
+   */
+  @added(Versions.v2026_09_30_preview)
+  @visibility(Lifecycle.Read)
+  advisorRegionalRecommendationId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Advisor/recommendations";
+    }
+  ]>;
+
+  /**
+   * Reasons for the regional resource's normal fault eligibility result.
+   * Published together with faultEligibility: empty when Eligible and nonempty when Ineligible.
+   * Omitted until evaluated and for zonal drills. Binding and permission errors are reported separately.
+   */
+  @added(Versions.v2026_09_30_preview)
+  @visibility(Lifecycle.Read)
+  faultEligibilityAttentionReason?: FaultEligibilityAttentionReason[];
+
   @doc("Last Target and Capability assignment error, if any.")
   @removed(Versions.v2026_04_01_preview)
   @visibility(Lifecycle.Read)

@@ -578,6 +578,9 @@
         "x-ms-examples": {
           "DrillResources_List_MaximumSet": {
             "$ref": "./examples/DrillResources_List_MaximumSet_Gen.json"
+          },
+          "DrillResources_List_Regional": {
+            "$ref": "./examples/DrillResources_List_Regional.json"
           }
         },
         "x-ms-pageable": {
@@ -633,6 +636,9 @@
         "x-ms-examples": {
           "DrillResources_Get_MaximumSet": {
             "$ref": "./examples/DrillResources_Get_MaximumSet_Gen.json"
+          },
+          "DrillResources_Get_Regional": {
+            "$ref": "./examples/DrillResources_Get_Regional.json"
           }
         }
       }
@@ -6197,6 +6203,42 @@
             ]
           }
         },
+        "faultEligibility": {
+          "$ref": "#/definitions/FaultEligibility",
+          "description": "Normal fault eligibility for a regional drill resource. Omitted until evaluated.\nEligibility does not indicate inclusion or readiness, and force inclusion does not change this value.\nNot applicable to zonal drills.",
+          "readOnly": true
+        },
+        "isRegionallyResilient": {
+          "type": "boolean",
+          "description": "Whether the selected regional protection solution reports the resource as regionally resilient.\nOmitted when the posture is unknown or unavailable; an unavailable posture is not reported as false.\nNot applicable to zonal drills.",
+          "readOnly": true
+        },
+        "replicationMode": {
+          "$ref": "#/definitions/ReplicationMode",
+          "description": "Replication mode of the selected regional protection solution.\nOmitted when no applicable mode is available. Not applicable to zonal drills.",
+          "readOnly": true
+        },
+        "advisorRegionalRecommendationId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource ID of the matching regional Advisor recommendation instance.\nThe recommendation type is identified separately by advisorRecommendationTypeId.\nOmitted when no matching recommendation exists. Not applicable to zonal drills.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Advisor/recommendations"
+              }
+            ]
+          }
+        },
+        "faultEligibilityAttentionReason": {
+          "type": "array",
+          "description": "Reasons for the regional resource's normal fault eligibility result.\nPublished together with faultEligibility: empty when Eligible and nonempty when Ineligible.\nOmitted until evaluated and for zonal drills. Binding and permission errors are reported separately.",
+          "items": {
+            "$ref": "#/definitions/FaultEligibilityAttentionReason"
+          },
+          "readOnly": true
+        },
         "rbacAssignmentError": {
           "$ref": "#/definitions/ErrorDetails",
           "description": "Last RBAC assignment error, if any.",
@@ -7236,6 +7278,54 @@
         "faultName",
         "targetResourceId"
       ]
+    },
+    "FaultEligibility": {
+      "type": "string",
+      "description": "Normal fault eligibility of a regional drill resource, independent of inclusion and readiness.",
+      "enum": [
+        "Unknown",
+        "Eligible",
+        "Ineligible"
+      ],
+      "x-ms-enum": {
+        "name": "FaultEligibility",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The available information is insufficient to determine normal fault eligibility."
+          },
+          {
+            "name": "Eligible",
+            "value": "Eligible",
+            "description": "The resource satisfies the normal fault inclusion policy."
+          },
+          {
+            "name": "Ineligible",
+            "value": "Ineligible",
+            "description": "The resource does not satisfy the normal fault inclusion policy."
+          }
+        ]
+      }
+    },
+    "FaultEligibilityAttentionReason": {
+      "type": "string",
+      "description": "Reason requiring attention in a regional resource's normal fault eligibility evaluation.",
+      "enum": [
+        "ResourceNotIncludedInRecoveryPlan"
+      ],
+      "x-ms-enum": {
+        "name": "FaultEligibilityAttentionReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ResourceNotIncludedInRecoveryPlan",
+            "value": "ResourceNotIncludedInRecoveryPlan",
+            "description": "The resource is not included in the recovery plan required by its normal fault inclusion policy."
+          }
+        ]
+      }
     },
     "FaultProperties": {
       "type": "object",

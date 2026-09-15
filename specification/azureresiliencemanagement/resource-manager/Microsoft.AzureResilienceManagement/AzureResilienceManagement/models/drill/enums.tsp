@@ -500,3 +500,27 @@ union DrillReportFinalizationState {
   @doc("The report is finalized and immutable.")
   Finalized: "Finalized",
 }
+
+/** Normal fault eligibility of a regional drill resource, independent of inclusion and readiness. */
+@added(Versions.v2026_09_30_preview)
+union FaultEligibility {
+  string,
+
+  /** The available information is insufficient to determine normal fault eligibility. */
+  Unknown: "Unknown",
+
+  /** The resource satisfies the normal fault inclusion policy. */
+  Eligible: "Eligible",
+
+  /** The resource does not satisfy the normal fault inclusion policy. */
+  Ineligible: "Ineligible",
+}
+
+/** Reason requiring attention in a regional resource's normal fault eligibility evaluation. */
+@added(Versions.v2026_09_30_preview)
+union FaultEligibilityAttentionReason {
+  string,
+
+  /** The resource is not included in the recovery plan required by its normal fault inclusion policy. */
+  ResourceNotIncludedInRecoveryPlan: "ResourceNotIncludedInRecoveryPlan",
+}
