@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "amlFilesystemName": "fs1",
+    "api-version": "2026-08-01",
+    "expansionJobName": "expansionjob1",
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "expansionjob1",
+        "type": "Microsoft.StorageCache/amlFilesystems/expansionJobs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlFilesystems/fs1/expansionJobs/expansionjob1",
+        "location": "eastus",
+        "properties": {
+          "newStorageCapacityTiB": 16,
+          "provisioningState": "Succeeded",
+          "runRebalanceJob": true,
+          "rebalanceJobId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlFilesystems/fs1/rebalanceJobs/expansionjob1-rebalance",
+          "status": {
+            "completionTimeUTC": "2024-03-21T19:15:43.511Z",
+            "percentComplete": 100,
+            "startTimeUTC": "2024-03-21T17:25:43.511Z",
+            "state": "Completed",
+            "statusMessage": "Expansion completed successfully"
+          }
+        },
+        "tags": {
+          "Dept": "ContosoAds"
+        }
+      }
+    }
+  },
+  "operationId": "expansionJobs_Get",
+  "title": "expansionJobs_Get"
+}

@@ -1,0 +1,1601 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DeviceRegistrySoftwareUpdateClient",
+    "version": "2026-11-02-preview",
+    "description": "Software Update for Device Registry is an Azure service that enables customers to publish updates for their IoT devices to the cloud, and then deploy that update to their devices (approve updates to groups of devices managed and provisioned in Device Registry). It leverages the proven security and reliability of the Windows Update platform, optimized for IoT devices. It works globally and knows when and how to update devices, enabling customers to focus on their business goals and let Software Update for Device Registry handle the updates.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "https://{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The Software Update for Device Registry account endpoint (hostname only, no protocol).",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://api.adu.microsoft.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://api.adu.microsoft.com/.default": ""
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Update management"
+    },
+    {
+      "name": "DeviceClasses"
+    }
+  ],
+  "paths": {
+    "/management/deviceClasses": {
+      "get": {
+        "operationId": "DeviceClasses_List",
+        "tags": [
+          "DeviceClasses"
+        ],
+        "description": "Gets a list of device classes.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceClassesList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceClasses_List": {
+            "$ref": "./examples/DeviceClasses_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/management/deviceClasses/{deviceClassId}": {
+      "get": {
+        "operationId": "DeviceClasses_GetDeviceClass",
+        "tags": [
+          "DeviceClasses"
+        ],
+        "description": "Gets the properties of a device class.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceClassIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceClass"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceClasses_GetDeviceClass": {
+            "$ref": "./examples/DeviceClasses_GetDeviceClass.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeviceClasses_Delete",
+        "tags": [
+          "DeviceClasses"
+        ],
+        "description": "Deletes a device class.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceClassIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceClasses_Delete": {
+            "$ref": "./examples/DeviceClasses_Delete.json"
+          }
+        }
+      }
+    },
+    "/updates": {
+      "get": {
+        "operationId": "SoftwareUpdate_ListUpdates",
+        "tags": [
+          "Update management"
+        ],
+        "description": "Get a list of all updates that have been imported to Software Update for Device\nRegistry.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Request updates matching a free-text search expression.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Optional to filter updates by isDeployable property.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UpdateList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareUpdate_ListUpdates": {
+            "$ref": "./examples/SoftwareUpdate_ListUpdates.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/updates/operations": {
+      "get": {
+        "operationId": "SoftwareUpdate_ListOperationStatuses",
+        "tags": [
+          "Update management"
+        ],
+        "description": "Get a list of all import update operations. Completed operations are kept for 7\ndays before auto-deleted. Delete operations are not returned by this API\nversion.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Optional to filter operations by status property. Only one specific filter is\nsupported: \"status eq 'NotStarted' or status eq 'Running'\"",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "Specifies a non-negative integer n that limits the number of items returned\nfrom a collection. The service returns the number of available items up to but\nnot greater than the specified value n.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "maxPageSize"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UpdateOperationsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareUpdate_ListOperationStatuses": {
+            "$ref": "./examples/SoftwareUpdate_ListOperationStatuses.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/updates/operations/{operationId}": {
+      "get": {
+        "operationId": "SoftwareUpdate_GetOperationStatus",
+        "tags": [
+          "Update management"
+        ],
+        "description": "Retrieve operation status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UpdateOperation"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Number of seconds to wait before checking the operation status again."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareUpdate_GetOperationStatus": {
+            "$ref": "./examples/SoftwareUpdate_GetOperationStatus.json"
+          }
+        }
+      }
+    },
+    "/updates/providers": {
+      "get": {
+        "operationId": "SoftwareUpdate_ListProviders",
+        "tags": [
+          "Update management"
+        ],
+        "description": "Get a list of all update providers that have been imported to Software Update for\nDevice Registry.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StringsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareUpdate_ListProviders": {
+            "$ref": "./examples/SoftwareUpdate_ListProviders.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/updates/providers/{provider}/names": {
+      "get": {
+        "operationId": "SoftwareUpdate_ListNames",
+        "tags": [
+          "Update management"
+        ],
+        "description": "Get a list of all update names that match the specified provider.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateProviderParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StringsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareUpdate_ListNames": {
+            "$ref": "./examples/SoftwareUpdate_ListNames.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/updates/providers/{provider}/names/{name}/versions": {
+      "get": {
+        "operationId": "SoftwareUpdate_ListVersions",
+        "tags": [
+          "Update management"
+        ],
+        "description": "Get a list of all update versions that match the specified provider and name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateProviderParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateNameParameter"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Optional to filter updates by isDeployable property.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StringsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareUpdate_ListVersions": {
+            "$ref": "./examples/SoftwareUpdate_ListVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/updates/providers/{provider}/names/{name}/versions/{version}": {
+      "get": {
+        "operationId": "SoftwareUpdate_GetUpdate",
+        "tags": [
+          "Update management"
+        ],
+        "description": "Get a specific update version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateProviderParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareUpdate_GetUpdate": {
+            "$ref": "./examples/SoftwareUpdate_GetUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SoftwareUpdate_DeleteUpdate",
+        "tags": [
+          "Update management"
+        ],
+        "description": "Delete a specific update version. This is a long-running-operation; use\nOperation-Location response header value to check for operation status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateProviderParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareUpdate_DeleteUpdate": {
+            "$ref": "./examples/SoftwareUpdate_DeleteUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/updates/providers/{provider}/names/{name}/versions/{version}/files": {
+      "get": {
+        "operationId": "SoftwareUpdate_ListFiles",
+        "tags": [
+          "Update management"
+        ],
+        "description": "Get a list of all update file identifiers for the specified version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateProviderParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StringsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareUpdate_ListFiles": {
+            "$ref": "./examples/SoftwareUpdate_ListFiles.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/updates/providers/{provider}/names/{name}/versions/{version}/files/{fileId}": {
+      "get": {
+        "operationId": "SoftwareUpdate_GetFile",
+        "tags": [
+          "Update management"
+        ],
+        "description": "Get a specific update file from the version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateProviderParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UpdateFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareUpdate_GetFile": {
+            "$ref": "./examples/SoftwareUpdate_GetFile.json"
+          }
+        }
+      }
+    },
+    "/updates:import": {
+      "post": {
+        "operationId": "SoftwareUpdate_ImportUpdate",
+        "tags": [
+          "Update management"
+        ],
+        "description": "Import new update version. This is a long-running-operation; use\nOperation-Location response header value to check for operation status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "importUpdateRequest",
+            "in": "body",
+            "description": "The update to be imported (see schema\nhttps://json.schemastore.org/azure-deviceupdate-import-manifest-5.0.json for\ndetails).",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareUpdate_ImportUpdate": {
+            "$ref": "./examples/SoftwareUpdate_ImportUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+    },
+    "BestCompatibleUpdate": {
+      "type": "object",
+      "description": "The best compatible update for a device class.",
+      "properties": {
+        "updateId": {
+          "$ref": "#/definitions/UpdateId",
+          "description": "The identifier of the best-available compatible update."
+        }
+      },
+      "required": [
+        "updateId"
+      ]
+    },
+    "Compatibility": {
+      "type": "object",
+      "description": "Key-value pairs representing update compatibility information.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "DeviceClass": {
+      "type": "object",
+      "description": "A device class groups devices that share compatibility properties and agent\nprofile, allowing the service to determine the best compatible update for them.",
+      "properties": {
+        "deviceClassId": {
+          "type": "string",
+          "description": "Identifier derived from deviceClassProperties encoded as a 16-character\nlowercase hexadecimal string.",
+          "minLength": 16,
+          "maxLength": 16,
+          "pattern": "^[0-9a-f]{16}$",
+          "readOnly": true
+        },
+        "deviceClassProperties": {
+          "$ref": "#/definitions/DeviceClassProperties",
+          "description": "The properties that identify this device class.",
+          "readOnly": true
+        },
+        "bestCompatibleUpdate": {
+          "$ref": "#/definitions/BestCompatibleUpdate",
+          "description": "The best compatible update for the devices in this class, if any.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "deviceClassId",
+        "deviceClassProperties"
+      ]
+    },
+    "DeviceClassProperties": {
+      "type": "object",
+      "description": "Properties that identify a device class.",
+      "properties": {
+        "compatProperties": {
+          "type": "object",
+          "description": "Free-form compatibility properties (e.g. manufacturer, model) used to match\ndevices. This object can be thought of as a set of key-value pairs where the key\nis the name of the compatibility property and the value is the value of the\ncompatibility property. There will always be at least 1 compat property. At most\n5 entries are allowed.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "agentProfile": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The agent profile that devices in this class implement.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "compatProperties",
+        "agentProfile"
+      ]
+    },
+    "DeviceClassesList": {
+      "type": "object",
+      "description": "The list of device classes.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceClass items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceClass"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FileImportMetadata": {
+      "type": "object",
+      "description": "Metadata describing an update file.",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "Update file name as specified inside import manifest."
+        },
+        "url": {
+          "type": "string",
+          "description": "Azure Blob location from which the update file can be downloaded by Device\nUpdate for Device Registry. This is typically a read-only SAS-protected blob URL\nwith an expiration set to at least 4 hours."
+        }
+      },
+      "required": [
+        "fileName",
+        "url"
+      ]
+    },
+    "ImportManifestMetadata": {
+      "type": "object",
+      "description": "Metadata describing the import manifest, a document which describes the files\nand other metadata about an update version.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Azure Blob location from which the import manifest can be downloaded by Device\nUpdate for Device Registry. This is typically a read-only SAS-protected blob URL\nwith an expiration set to at least 4 hours."
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "File size in number of bytes."
+        },
+        "hashes": {
+          "type": "object",
+          "description": "A JSON object containing the hash(es) of the file. At least SHA256 hash is\nrequired. This object can be thought of as a set of key-value pairs where the\nkey is the hash algorithm, and the value is the hash of the file calculated\nusing that algorithm.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "url",
+        "sizeInBytes",
+        "hashes"
+      ]
+    },
+    "ImportUpdateInputItem": {
+      "type": "object",
+      "description": "Import update input item metadata.",
+      "properties": {
+        "importManifest": {
+          "$ref": "#/definitions/ImportManifestMetadata",
+          "description": "Import manifest metadata like source URL, file size/hashes, etc."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly update name.",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "files": {
+          "type": "array",
+          "description": "One or more update file properties like file name and source URL.",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "$ref": "#/definitions/FileImportMetadata"
+          }
+        }
+      },
+      "required": [
+        "importManifest"
+      ]
+    },
+    "ImportUpdateRequest": {
+      "type": "object",
+      "description": "Import update input metadata.",
+      "properties": {
+        "importUpdateInput": {
+          "type": "array",
+          "description": "Import update input metadata.",
+          "minItems": 1,
+          "maxItems": 11,
+          "items": {
+            "$ref": "#/definitions/ImportUpdateInputItem"
+          }
+        },
+        "enableScan": {
+          "type": "boolean",
+          "description": "Whether to enable anti-malware scan of the imported update payload files.",
+          "default": false
+        }
+      },
+      "required": [
+        "importUpdateInput"
+      ]
+    },
+    "Instructions": {
+      "type": "object",
+      "description": "Update install instructions container.",
+      "properties": {
+        "steps": {
+          "type": "array",
+          "description": "Collection of installation steps.",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/Step"
+          }
+        }
+      },
+      "required": [
+        "steps"
+      ]
+    },
+    "OperationFilterStatus": {
+      "type": "string",
+      "description": "Operation status filter.",
+      "enum": [
+        "Running",
+        "NotStarted"
+      ],
+      "x-ms-enum": {
+        "name": "OperationFilterStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Running"
+          },
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "NotStarted"
+          }
+        ]
+      }
+    },
+    "Step": {
+      "type": "object",
+      "description": "Update install instruction step.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Step type.",
+          "default": "inline",
+          "enum": [
+            "inline",
+            "reference"
+          ],
+          "x-ms-enum": {
+            "name": "StepType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Inline",
+                "value": "inline",
+                "description": "Step type that performs code execution."
+              },
+              {
+                "name": "Reference",
+                "value": "reference",
+                "description": "Step type that installs another update."
+              }
+            ]
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Step description.",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "handler": {
+          "type": "string",
+          "description": "Identity of handler that will execute this step. Required if step type is\ninline.",
+          "minLength": 1,
+          "maxLength": 32
+        },
+        "handlerProperties": {
+          "type": "object",
+          "description": "Parameters to be passed to handler during execution.",
+          "additionalProperties": {}
+        },
+        "fileNames": {
+          "type": "array",
+          "description": "Collection of file names to be passed to handler during execution. Required if\nstep type is inline.",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "type": "string"
+          }
+        },
+        "updateId": {
+          "$ref": "#/definitions/UpdateId",
+          "description": "Referenced child update identity.  Required if step type is reference."
+        }
+      }
+    },
+    "StepType": {
+      "type": "string",
+      "description": "Step type.",
+      "enum": [
+        "inline",
+        "reference"
+      ],
+      "x-ms-enum": {
+        "name": "StepType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inline",
+            "value": "inline",
+            "description": "Step type that performs code execution."
+          },
+          {
+            "name": "Reference",
+            "value": "reference",
+            "description": "Step type that installs another update."
+          }
+        ]
+      }
+    },
+    "StringsList": {
+      "type": "object",
+      "description": "The list of strings with server paging support.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The collection of pageable items.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Update": {
+      "type": "object",
+      "description": "Update metadata.",
+      "properties": {
+        "updateId": {
+          "$ref": "#/definitions/UpdateId",
+          "description": "Update identity."
+        },
+        "description": {
+          "type": "string",
+          "description": "Update description specified by creator.",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly update name specified by importer.",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "isDeployable": {
+          "type": "boolean",
+          "description": "Whether the update can be deployed to a device on its own.",
+          "default": true
+        },
+        "updateType": {
+          "type": "string",
+          "description": "Update type. Deprecated in latest import manifest schema."
+        },
+        "installedCriteria": {
+          "type": "string",
+          "description": "String interpreted by Device Update client to determine if the update is\ninstalled on the device. Deprecated in latest import manifest schema."
+        },
+        "compatibility": {
+          "type": "array",
+          "description": "List of update compatibility information.",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/Compatibility"
+          }
+        },
+        "instructions": {
+          "$ref": "#/definitions/Instructions",
+          "description": "Update install instructions."
+        },
+        "referencedBy": {
+          "type": "array",
+          "description": "List of update identities that reference this update.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/UpdateId"
+          }
+        },
+        "scanResult": {
+          "type": "string",
+          "description": "Update aggregate scan result (calculated from payload file scan results)."
+        },
+        "manifestVersion": {
+          "type": "string",
+          "description": "Schema version of manifest used to import the update."
+        },
+        "importedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC when the update was imported."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC when the update was created."
+        },
+        "etag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "Update ETag."
+        }
+      },
+      "required": [
+        "updateId",
+        "compatibility",
+        "manifestVersion",
+        "importedDateTime",
+        "createdDateTime"
+      ]
+    },
+    "UpdateFile": {
+      "type": "object",
+      "description": "Update file metadata.",
+      "properties": {
+        "fileId": {
+          "type": "string",
+          "description": "File identity, generated by server at import time."
+        },
+        "relatedFiles": {
+          "type": "array",
+          "description": "Optional related files metadata used together DownloadHandler metadata to\ndownload payload file.",
+          "items": {
+            "$ref": "#/definitions/UpdateFileBase"
+          }
+        },
+        "downloadHandler": {
+          "$ref": "#/definitions/UpdateFileDownloadHandler",
+          "description": "Optional download handler for utilizing related files to download payload file."
+        },
+        "etag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "File ETag."
+        }
+      },
+      "required": [
+        "fileId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateFileBase"
+        }
+      ]
+    },
+    "UpdateFileBase": {
+      "type": "object",
+      "description": "Update file basic metadata.",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "File name."
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "File size in number of bytes."
+        },
+        "hashes": {
+          "type": "object",
+          "description": "Mapping of hashing algorithm to base64 encoded hash values.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "File MIME type."
+        },
+        "scanResult": {
+          "type": "string",
+          "description": "Anti-malware scan result."
+        },
+        "scanDetails": {
+          "type": "string",
+          "description": "Anti-malware scan details."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Optional file properties (not consumed by service but pass-through to device).",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "fileName",
+        "sizeInBytes",
+        "hashes"
+      ]
+    },
+    "UpdateFileDownloadHandler": {
+      "type": "object",
+      "description": "Download handler for utilizing related files to download payload file.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Download handler identifier."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "UpdateId": {
+      "type": "object",
+      "description": "Update identifier.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Update provider. Must be between 1 and 64 characters and contain only letters, digits, periods, and hyphens.",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9.-]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Update name. Must be between 1 and 64 characters and contain only letters, digits, periods, and hyphens.",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9.-]+$"
+        },
+        "version": {
+          "type": "string",
+          "description": "Update version as a two- to four-part dot-separated numeric string.",
+          "minLength": 3,
+          "pattern": "^\\d+(\\.\\d+){1,3}$"
+        }
+      },
+      "required": [
+        "provider",
+        "name",
+        "version"
+      ]
+    },
+    "UpdateInfo": {
+      "type": "object",
+      "description": "Update information.",
+      "properties": {
+        "updateId": {
+          "$ref": "#/definitions/UpdateId",
+          "description": "Update identifier."
+        },
+        "description": {
+          "type": "string",
+          "description": "Update description.",
+          "readOnly": true
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly update name.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "updateId"
+      ]
+    },
+    "UpdateList": {
+      "type": "object",
+      "description": "The list of updates.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Update items on this page",
+          "items": {
+            "$ref": "#/definitions/Update"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UpdateOperation": {
+      "type": "object",
+      "description": "Operation metadata.",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "Operation Id."
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "Operation status."
+        },
+        "update": {
+          "$ref": "#/definitions/UpdateInfo",
+          "description": "The update being imported or deleted. For import, this property will only be\npopulated after import manifest is processed successfully."
+        },
+        "resourceLocation": {
+          "type": "string",
+          "description": "Location of the imported update when operation is successful."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Operation error encountered, if any."
+        },
+        "traceId": {
+          "type": "string",
+          "description": "Operation correlation identity that can used by Microsoft Support for\ntroubleshooting."
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC when the operation status was last updated."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC when the operation was created."
+        },
+        "etag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "Operation ETag."
+        }
+      },
+      "required": [
+        "operationId",
+        "status",
+        "lastActionDateTime",
+        "createdDateTime"
+      ]
+    },
+    "UpdateOperationsList": {
+      "type": "object",
+      "description": "The list of operations with server paging support.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UpdateOperation items on this page",
+          "items": {
+            "$ref": "#/definitions/UpdateOperation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "DeviceClassIdParameter": {
+      "name": "deviceClassId",
+      "in": "path",
+      "description": "Device class identifier.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "FileIdParameter": {
+      "name": "fileId",
+      "in": "path",
+      "description": "File identifier.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "IfNoneMatchParameter": {
+      "name": "If-None-Match",
+      "in": "header",
+      "description": "Defines the If-None-Match condition. The operation will be performed only if\nthe ETag on the server does not match this value.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifNoneMatch"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "description": "Operation identifier.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "x-ms-parameter-location": "method"
+    },
+    "UpdateNameParameter": {
+      "name": "name",
+      "in": "path",
+      "description": "Update name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "UpdateProviderParameter": {
+      "name": "provider",
+      "in": "path",
+      "description": "Update provider.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "UpdateVersionParameter": {
+      "name": "version",
+      "in": "path",
+      "description": "Update version.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

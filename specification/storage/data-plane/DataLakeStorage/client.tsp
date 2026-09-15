@@ -181,8 +181,8 @@ enum ListBlobsShowOnlyGo {
 @@alternateType(ListBlobsShowOnly, ListBlobsShowOnlyGo, "go");
 @@alternateType(ContentMD5ResponseHeader.contentMD5, string, "go");
 @@alternateType(PathItem.eTag, string, "go");
-@@alternateType(BlobPropertiesInternal.etag, string, "go");
 @@clientName(PathItem, "Path", "go");
+@@clientName(BlobPropertiesInternal.etag, "ETag", "go");
 @@clientName(BlobItem, "PathItemInternal", "go");
 @@clientName(BlobHierarchyListSegment.blobItems, "PathItems", "go");
 @@clientName(BlobPropertiesInternal, "PathPropertiesInternal", "go");
@@ -215,5 +215,12 @@ enum ListBlobsShowOnlyGo {
   FileSystem.listBlobHierarchySegment,
   "preserveContentTypeHeader",
   true,
+  "go"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  Path.delete,
+  "responseEnvelopeName",
+  "PathClientDeleteResponseInternal",
   "go"
 );
