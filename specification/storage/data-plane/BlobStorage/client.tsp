@@ -1355,6 +1355,10 @@ scalar HttpRange extends string;
 @@alternateType(BlockLookupList.latest, string[], "java");
 @@alternateType(BlockIdParameter.blockid, string, "java");
 
+// The shipped java BlobPrefix exposes the name as a plain String; BlobName is an implementation model, and a
+// public accessor may not return one.
+@@alternateType(BlobPrefix.name, string, "java");
+
 // The shipped java accessors spell these out; the spec's abbreviated property names would rename the public API.
 @@clientName(UserDelegationKey.signedOid, "signedObjectId", "java");
 @@clientName(UserDelegationKey.signedTid, "signedTenantId", "java");
