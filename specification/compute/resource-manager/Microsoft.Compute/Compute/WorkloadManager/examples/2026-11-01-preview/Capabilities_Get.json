@@ -1,0 +1,27 @@
+{
+  "title": "Get the Agent Sandbox capability",
+  "operationId": "Capabilities_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-workload",
+    "spaceName": "managed-agents-prod",
+    "capabilityName": "agentSandbox",
+    "api-version": "2026-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/capabilities/agentSandbox",
+        "name": "agentSandbox",
+        "type": "Microsoft.Compute/workloadSpaces/capabilities",
+        "location": "eastus2",
+        "properties": {
+          "kind": "AgentSandbox",
+          "versionPolicy": "ServiceManaged",
+          "effectiveVersion": "service-selected",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

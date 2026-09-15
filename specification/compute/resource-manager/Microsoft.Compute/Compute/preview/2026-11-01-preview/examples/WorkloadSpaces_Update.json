@@ -1,0 +1,39 @@
+{
+  "title": "Update workload space tags",
+  "operationId": "WorkloadSpaces_Update",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-workload",
+    "spaceName": "managed-agents-prod",
+    "api-version": "2026-11-01-preview",
+    "properties": {
+      "tags": {
+        "environment": "Production",
+        "costCenter": "AI-Platform"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod",
+        "name": "managed-agents-prod",
+        "type": "Microsoft.Compute/workloadSpaces",
+        "location": "eastus2",
+        "tags": {
+          "environment": "Production",
+          "costCenter": "AI-Platform"
+        },
+        "properties": {
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Compute/locations/eastus2/operations/00000000-0000-0000-0000-000000000001?api-version=2026-11-01-preview",
+        "Retry-After": 10
+      }
+    }
+  }
+}

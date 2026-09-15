@@ -1,0 +1,2175 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Workload Manager resource management API",
+    "version": "2026-11-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "WorkloadSpaces"
+    },
+    {
+      "name": "RuntimeBindings"
+    },
+    {
+      "name": "RuntimeLinks"
+    },
+    {
+      "name": "Capabilities"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/workloadSpaces": {
+      "get": {
+        "operationId": "WorkloadSpaces_ListBySubscription",
+        "tags": [
+          "WorkloadSpaces"
+        ],
+        "description": "Lists workload spaces in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadSpaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List workload spaces in a subscription": {
+            "$ref": "./examples/WorkloadSpaces_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/workloadSpaces": {
+      "get": {
+        "operationId": "WorkloadSpaces_ListByResourceGroup",
+        "tags": [
+          "WorkloadSpaces"
+        ],
+        "description": "Lists workload spaces in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadSpaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List workload spaces in a resource group": {
+            "$ref": "./examples/WorkloadSpaces_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/workloadSpaces/{spaceName}": {
+      "get": {
+        "operationId": "WorkloadSpaces_Get",
+        "tags": [
+          "WorkloadSpaces"
+        ],
+        "description": "Gets a workload space.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadSpace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a workload space": {
+            "$ref": "./examples/WorkloadSpaces_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WorkloadSpaces_CreateOrUpdate",
+        "tags": [
+          "WorkloadSpaces"
+        ],
+        "description": "Creates or replaces a workload space.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkloadSpace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'WorkloadSpace' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WorkloadSpace"
+            }
+          },
+          "201": {
+            "description": "Resource 'WorkloadSpace' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WorkloadSpace"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a production workload space": {
+            "$ref": "./examples/WorkloadSpaces_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/WorkloadSpace"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "WorkloadSpaces_Update",
+        "tags": [
+          "WorkloadSpaces"
+        ],
+        "description": "Updates mutable workload space properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkloadSpaceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadSpace"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update workload space tags": {
+            "$ref": "./examples/WorkloadSpaces_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/WorkloadSpace"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "WorkloadSpaces_Delete",
+        "tags": [
+          "WorkloadSpaces"
+        ],
+        "description": "Deletes a workload space and its owned resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a workload space": {
+            "$ref": "./examples/WorkloadSpaces_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/workloadSpaces/{spaceName}/capabilities": {
+      "get": {
+        "operationId": "Capabilities_ListByWorkloadSpace",
+        "tags": [
+          "Capabilities"
+        ],
+        "description": "Lists capabilities in a workload space.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapabilityListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List capabilities in a workload space": {
+            "$ref": "./examples/Capabilities_ListByWorkloadSpace.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/workloadSpaces/{spaceName}/capabilities/{capabilityName}": {
+      "get": {
+        "operationId": "Capabilities_Get",
+        "tags": [
+          "Capabilities"
+        ],
+        "description": "Gets a capability.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "capabilityName",
+            "in": "path",
+            "description": "The name of the Capability",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Capability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the Agent Sandbox capability": {
+            "$ref": "./examples/Capabilities_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Capabilities_CreateOrUpdate",
+        "tags": [
+          "Capabilities"
+        ],
+        "description": "Creates or replaces a capability.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "capabilityName",
+            "in": "path",
+            "description": "The name of the Capability",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Capability"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Capability' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Capability"
+            }
+          },
+          "201": {
+            "description": "Resource 'Capability' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Capability"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Enable the Agent Sandbox capability": {
+            "$ref": "./examples/Capabilities_CreateOrUpdate_AgentSandbox.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Capability"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Capabilities_Update",
+        "tags": [
+          "Capabilities"
+        ],
+        "description": "Updates mutable capability properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "capabilityName",
+            "in": "path",
+            "description": "The name of the Capability",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CapabilityUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Capability"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update the Agent Sandbox version policy": {
+            "$ref": "./examples/Capabilities_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Capability"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Capabilities_Delete",
+        "tags": [
+          "Capabilities"
+        ],
+        "description": "Disables and deletes a capability.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "capabilityName",
+            "in": "path",
+            "description": "The name of the Capability",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete the Agent Sandbox capability": {
+            "$ref": "./examples/Capabilities_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/workloadSpaces/{spaceName}/runtimeBindings": {
+      "get": {
+        "operationId": "RuntimeBindings_ListByWorkloadSpace",
+        "tags": [
+          "RuntimeBindings"
+        ],
+        "description": "Lists runtime bindings in a workload space.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RuntimeBindingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List runtime bindings in a workload space": {
+            "$ref": "./examples/RuntimeBindings_ListByWorkloadSpace.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/workloadSpaces/{spaceName}/runtimeBindings/{bindingName}": {
+      "get": {
+        "operationId": "RuntimeBindings_Get",
+        "tags": [
+          "RuntimeBindings"
+        ],
+        "description": "Gets a runtime binding.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "bindingName",
+            "in": "path",
+            "description": "The name of the RuntimeBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RuntimeBinding"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a runtime binding": {
+            "$ref": "./examples/RuntimeBindings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RuntimeBindings_CreateOrUpdate",
+        "tags": [
+          "RuntimeBindings"
+        ],
+        "description": "Creates or replaces a runtime binding.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "bindingName",
+            "in": "path",
+            "description": "The name of the RuntimeBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuntimeBinding"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'RuntimeBinding' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RuntimeBinding"
+            }
+          },
+          "201": {
+            "description": "Resource 'RuntimeBinding' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RuntimeBinding"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Attach a referenced Kubernetes runtime binding": {
+            "$ref": "./examples/RuntimeBindings_CreateOrUpdate_ReferencedKubernetes.json"
+          },
+          "Create a managed Kubernetes runtime binding": {
+            "$ref": "./examples/RuntimeBindings_CreateOrUpdate_ManagedKubernetes.json"
+          },
+          "Create a managed serverless container runtime binding": {
+            "$ref": "./examples/RuntimeBindings_CreateOrUpdate_ManagedServerless.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/RuntimeBinding"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "RuntimeBindings_Update",
+        "tags": [
+          "RuntimeBindings"
+        ],
+        "description": "Updates mutable runtime binding properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "bindingName",
+            "in": "path",
+            "description": "The name of the RuntimeBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuntimeBindingUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RuntimeBinding"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update mutable runtime binding network configuration": {
+            "$ref": "./examples/RuntimeBindings_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/RuntimeBinding"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "RuntimeBindings_Delete",
+        "tags": [
+          "RuntimeBindings"
+        ],
+        "description": "Deletes a runtime binding without deleting customer-owned referenced resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "bindingName",
+            "in": "path",
+            "description": "The name of the RuntimeBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a runtime binding": {
+            "$ref": "./examples/RuntimeBindings_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/workloadSpaces/{spaceName}/runtimeLinks": {
+      "get": {
+        "operationId": "RuntimeLinks_ListByWorkloadSpace",
+        "tags": [
+          "RuntimeLinks"
+        ],
+        "description": "Lists runtime links in a workload space.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RuntimeLinkListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List runtime links in a workload space": {
+            "$ref": "./examples/RuntimeLinks_ListByWorkloadSpace.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/workloadSpaces/{spaceName}/runtimeLinks/{linkName}": {
+      "get": {
+        "operationId": "RuntimeLinks_Get",
+        "tags": [
+          "RuntimeLinks"
+        ],
+        "description": "Gets a runtime link.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "linkName",
+            "in": "path",
+            "description": "The name of the RuntimeLink",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RuntimeLink"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a runtime link": {
+            "$ref": "./examples/RuntimeLinks_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RuntimeLinks_CreateOrUpdate",
+        "tags": [
+          "RuntimeLinks"
+        ],
+        "description": "Creates or replaces a runtime link.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "linkName",
+            "in": "path",
+            "description": "The name of the RuntimeLink",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuntimeLink"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'RuntimeLink' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RuntimeLink"
+            }
+          },
+          "201": {
+            "description": "Resource 'RuntimeLink' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RuntimeLink"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a Kubernetes-only runtime link": {
+            "$ref": "./examples/RuntimeLinks_CreateOrUpdate_AksOnly.json"
+          },
+          "Create a runtime link between Kubernetes and serverless containers": {
+            "$ref": "./examples/RuntimeLinks_CreateOrUpdate_AksAci.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/RuntimeLink"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "RuntimeLinks_Update",
+        "tags": [
+          "RuntimeLinks"
+        ],
+        "description": "Updates mutable runtime link properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "linkName",
+            "in": "path",
+            "description": "The name of the RuntimeLink",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuntimeLinkUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RuntimeLink"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update runtime link capacity": {
+            "$ref": "./examples/RuntimeLinks_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/RuntimeLink"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "RuntimeLinks_Delete",
+        "tags": [
+          "RuntimeLinks"
+        ],
+        "description": "Deletes a runtime link without deleting its runtime bindings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the WorkloadSpace",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "linkName",
+            "in": "path",
+            "description": "The name of the RuntimeLink",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a runtime link": {
+            "$ref": "./examples/RuntimeLinks_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Capability": {
+      "type": "object",
+      "description": "A capability enabled for a workload space.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapabilityProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CapabilityKind": {
+      "type": "string",
+      "description": "The capability enabled for a workload space.",
+      "enum": [
+        "AgentSandbox"
+      ],
+      "x-ms-enum": {
+        "name": "CapabilityKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AgentSandbox",
+            "value": "AgentSandbox",
+            "description": "Enables isolated agent sandbox execution."
+          }
+        ]
+      }
+    },
+    "CapabilityListResult": {
+      "type": "object",
+      "description": "The response of a Capability list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Capability items on this page",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CapabilityProperties": {
+      "type": "object",
+      "description": "Properties of a capability enabled for a workload space.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/CapabilityKind",
+          "description": "The capability to enable.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "versionPolicy": {
+          "$ref": "#/definitions/VersionPolicy",
+          "description": "The version selection policy for the capability."
+        },
+        "effectiveVersion": {
+          "type": "string",
+          "description": "The effective capability version selected by the service.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the capability.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "kind",
+        "versionPolicy"
+      ]
+    },
+    "CapabilityUpdate": {
+      "type": "object",
+      "description": "Mutable properties of a capability.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/CapabilityUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "CapabilityUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Capability.",
+      "properties": {
+        "versionPolicy": {
+          "$ref": "#/definitions/VersionPolicy",
+          "description": "The version selection policy for the capability."
+        }
+      }
+    },
+    "CapacityProfile": {
+      "type": "object",
+      "description": "Capacity policy for the runtime composition.",
+      "properties": {
+        "minimumNodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of execution nodes.",
+          "minimum": 0
+        },
+        "maximumNodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of execution nodes.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "minimumNodes",
+        "maximumNodes"
+      ]
+    },
+    "EgressMode": {
+      "type": "string",
+      "description": "The egress ownership mode for a managed runtime.",
+      "enum": [
+        "CustomerManaged"
+      ],
+      "x-ms-enum": {
+        "name": "EgressMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CustomerManaged",
+            "value": "CustomerManaged",
+            "description": "The customer supplies and manages the egress configuration."
+          }
+        ]
+      }
+    },
+    "ExecutionIdentity": {
+      "type": "object",
+      "description": "Configuration for an identity used by an execution runtime.",
+      "properties": {
+        "provisioningMode": {
+          "$ref": "#/definitions/ExecutionIdentityProvisioningMode",
+          "description": "Indicates whether the identity is managed by the service or supplied by the customer."
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The customer-provided user-assigned identity, when provisioningMode is Referenced.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "scope": {
+          "$ref": "#/definitions/ExecutionIdentityScope",
+          "description": "The execution boundary across which the identity is shared."
+        }
+      },
+      "required": [
+        "provisioningMode",
+        "scope"
+      ]
+    },
+    "ExecutionIdentityProvisioningMode": {
+      "type": "string",
+      "description": "The provisioning mode for an execution identity.",
+      "enum": [
+        "Referenced",
+        "ServiceManaged"
+      ],
+      "x-ms-enum": {
+        "name": "ExecutionIdentityProvisioningMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Referenced",
+            "value": "Referenced",
+            "description": "Uses a customer-provided identity."
+          },
+          {
+            "name": "ServiceManaged",
+            "value": "ServiceManaged",
+            "description": "Workload Manager creates and owns the identity."
+          }
+        ]
+      }
+    },
+    "ExecutionIdentityScope": {
+      "type": "string",
+      "description": "The scope at which an execution identity is shared.",
+      "enum": [
+        "SandboxGroup"
+      ],
+      "x-ms-enum": {
+        "name": "ExecutionIdentityScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SandboxGroup",
+            "value": "SandboxGroup",
+            "description": "The identity is shared by sandboxes in the execution group."
+          }
+        ]
+      }
+    },
+    "ManagedRuntimeBindingProperties": {
+      "type": "object",
+      "description": "Properties of a runtime provisioned and owned by Workload Manager.",
+      "properties": {
+        "managedProfile": {
+          "$ref": "#/definitions/ManagedRuntimeProfile",
+          "description": "The limited service-managed runtime configuration."
+        },
+        "identityProfile": {
+          "$ref": "#/definitions/RuntimeIdentityProfile",
+          "description": "The runtime identity configuration."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/RuntimeNetworkProfile",
+          "description": "The runtime network configuration."
+        }
+      },
+      "required": [
+        "managedProfile"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuntimeBindingProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Managed"
+    },
+    "ManagedRuntimeProfile": {
+      "type": "object",
+      "description": "Customer-selected configuration for a service-managed runtime.",
+      "properties": {
+        "offering": {
+          "type": "string",
+          "description": "The product offering selected for a managed Kubernetes runtime."
+        },
+        "provider": {
+          "type": "string",
+          "description": "The provider selected for a managed serverless container runtime."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a Workload Manager resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Provisioning",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The request has been accepted for processing."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          }
+        ]
+      }
+    },
+    "ReferencedRuntimeBindingProperties": {
+      "type": "object",
+      "description": "Properties of a customer-owned runtime attached to a workload space.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The existing customer-owned runtime resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "resourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuntimeBindingProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Referenced"
+    },
+    "RuntimeBinding": {
+      "type": "object",
+      "description": "A runtime participant in a workload space.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RuntimeBindingProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "RuntimeBindingKind": {
+      "type": "string",
+      "description": "The runtime technology represented by a binding.",
+      "enum": [
+        "Kubernetes",
+        "ServerlessContainers"
+      ],
+      "x-ms-enum": {
+        "name": "RuntimeBindingKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Kubernetes",
+            "value": "Kubernetes",
+            "description": "A Kubernetes orchestration runtime."
+          },
+          {
+            "name": "ServerlessContainers",
+            "value": "ServerlessContainers",
+            "description": "A serverless container execution runtime."
+          }
+        ]
+      }
+    },
+    "RuntimeBindingListResult": {
+      "type": "object",
+      "description": "The response of a RuntimeBinding list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RuntimeBinding items on this page",
+          "items": {
+            "$ref": "#/definitions/RuntimeBinding"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RuntimeBindingProperties": {
+      "type": "object",
+      "description": "Common properties of managed and referenced runtime bindings.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the runtime binding.",
+          "readOnly": true
+        },
+        "providerResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The provider resource created or referenced by the binding.",
+          "readOnly": true
+        },
+        "kind": {
+          "$ref": "#/definitions/RuntimeBindingKind",
+          "description": "The runtime technology represented by the binding.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningMode": {
+          "$ref": "#/definitions/RuntimeBindingProvisioningMode",
+          "description": "Indicates whether Workload Manager owns or references the runtime.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "provisioningMode",
+      "required": [
+        "kind",
+        "provisioningMode"
+      ]
+    },
+    "RuntimeBindingProvisioningMode": {
+      "type": "string",
+      "description": "The ownership mode for a runtime binding.",
+      "enum": [
+        "Managed",
+        "Referenced"
+      ],
+      "x-ms-enum": {
+        "name": "RuntimeBindingProvisioningMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Managed",
+            "value": "Managed",
+            "description": "Workload Manager creates and owns the provider resource."
+          },
+          {
+            "name": "Referenced",
+            "value": "Referenced",
+            "description": "Workload Manager attaches an existing customer-owned resource."
+          }
+        ]
+      }
+    },
+    "RuntimeBindingUpdate": {
+      "type": "object",
+      "description": "Mutable properties of a runtime binding.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/RuntimeBindingUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "RuntimeBindingUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the RuntimeBinding.",
+      "properties": {
+        "identityProfile": {
+          "$ref": "#/definitions/RuntimeIdentityProfile",
+          "description": "The runtime identity configuration."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/RuntimeNetworkProfile",
+          "description": "The runtime network configuration."
+        }
+      }
+    },
+    "RuntimeIdentityProfile": {
+      "type": "object",
+      "description": "Identity configuration for a managed runtime.",
+      "properties": {
+        "executionIdentity": {
+          "$ref": "#/definitions/ExecutionIdentity",
+          "description": "The identity made available to the execution runtime."
+        }
+      }
+    },
+    "RuntimeLink": {
+      "type": "object",
+      "description": "A relationship between an orchestrator runtime and an optional execution runtime.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RuntimeLinkProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "RuntimeLinkIntegrationProfile": {
+      "type": "object",
+      "description": "Identity configuration used to integrate runtime bindings.",
+      "properties": {
+        "managedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The user-assigned identity used by the provider integration.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "RuntimeLinkListResult": {
+      "type": "object",
+      "description": "The response of a RuntimeLink list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RuntimeLink items on this page",
+          "items": {
+            "$ref": "#/definitions/RuntimeLink"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RuntimeLinkProperties": {
+      "type": "object",
+      "description": "Properties of a relationship between runtime bindings.",
+      "properties": {
+        "orchestratorBindingResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The sibling runtime binding that provides orchestration.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/workloadSpaces/runtimeBindings"
+              }
+            ]
+          }
+        },
+        "executionBindingResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The optional sibling runtime binding that provides execution.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/workloadSpaces/runtimeBindings"
+              }
+            ]
+          }
+        },
+        "integrationProfile": {
+          "$ref": "#/definitions/RuntimeLinkIntegrationProfile",
+          "description": "The provider integration identity configuration.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "capacityProfile": {
+          "$ref": "#/definitions/CapacityProfile",
+          "description": "The mutable capacity policy for the runtime composition."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the runtime link.",
+          "readOnly": true
+        },
+        "providerResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The provider resource that realizes the runtime composition.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "orchestratorBindingResourceId"
+      ]
+    },
+    "RuntimeLinkUpdate": {
+      "type": "object",
+      "description": "Mutable properties of a runtime link.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/RuntimeLinkUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "RuntimeLinkUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the RuntimeLink.",
+      "properties": {
+        "capacityProfile": {
+          "$ref": "#/definitions/CapacityProfile",
+          "description": "The mutable capacity policy for the runtime composition."
+        }
+      }
+    },
+    "RuntimeNetworkProfile": {
+      "type": "object",
+      "description": "Network configuration for a managed runtime.",
+      "properties": {
+        "subnetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The customer-provided subnet used by the runtime.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        },
+        "egressMode": {
+          "$ref": "#/definitions/EgressMode",
+          "description": "Indicates who manages runtime egress."
+        }
+      }
+    },
+    "VersionPolicy": {
+      "type": "string",
+      "description": "The version selection policy for a capability.",
+      "enum": [
+        "ServiceManaged"
+      ],
+      "x-ms-enum": {
+        "name": "VersionPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServiceManaged",
+            "value": "ServiceManaged",
+            "description": "Workload Manager selects and upgrades the capability version."
+          }
+        ]
+      }
+    },
+    "WorkloadSpace": {
+      "type": "object",
+      "description": "A regional governance and lifecycle boundary for composed runtimes.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkloadSpaceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "WorkloadSpaceListResult": {
+      "type": "object",
+      "description": "The response of a WorkloadSpace list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WorkloadSpace items on this page",
+          "items": {
+            "$ref": "#/definitions/WorkloadSpace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WorkloadSpaceProperties": {
+      "type": "object",
+      "description": "Properties of a workload space.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the workload space.",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkloadSpaceUpdate": {
+      "type": "object",
+      "description": "Mutable properties of a workload space.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
