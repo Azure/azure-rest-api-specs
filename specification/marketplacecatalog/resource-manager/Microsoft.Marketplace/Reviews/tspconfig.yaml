@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/rnr"
+    default: "sdk/marketplace"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -10,26 +10,24 @@ options:
     output-file: "{version-status}/{version}/reviews.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-marketplace"
-    namespace: "com.azure.resourcemanager.marketplace"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-marketplace-reviews"
+    namespace: "com.azure.resourcemanager.marketplace.reviews"
     service-name: "reviews"
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-reviews"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-marketplacereviews"
     flavor: "azure"
     experimentalExtensibleEnums: true
     experimental-extensible-enums: true
     generateMetadata: true
     hierarchyClient: false
     enableOperationGroup: true
-    packageDetails:
-      name: "@azure/arm-reviews"
     package-details:
-      name: "@azure/arm-reviews"
+      name: "@azure/arm-marketplacereviews"
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/reviews"
-    emitter-output-dir: "{output-dir}/{service-dir}/armreviews"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armreviews"
+    service-dir: "sdk/resourcemanager/marketplace"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmarketplacereviews"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmarketplacereviews"
     fix-const-stuttering: true
     flavor: "azure"
     generate-fakes: true
@@ -38,12 +36,15 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-reviews"
-    package-name: "azure-mgmt-reviews"
-    namespace: "azure.mgmt.reviews"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-marketplacereviews"
+    package-name: "azure-mgmt-marketplacereviews"
+    namespace: "azure.mgmt.marketplacereviews"
     generate-test: true
     generate-sample: true
     flavor: "azure"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Marketplace.Reviews"
+    emitter-output-dir: "{output-dir}/sdk/marketplace/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

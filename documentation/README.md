@@ -31,6 +31,7 @@ This directory contains documentation specific to the Azure REST API specificati
 
 | Document | Purpose | Audience | Applies to |
 | --- | --- | --- | --- |
+| [Official SDK release guide](https://aka.ms/azsdk/releases/partnerinfo) | Process for requesting and releasing an official Azure SDK. | Service teams | TypeSpec and OpenAPI |
 | [Release plan auto-generation](./release-plan-auto-generation.md) | Implementation details for automatic release plan discovery and creation. | Tooling maintainers | TypeSpec |
 | [SDK automation customization](./sdkautomation/README.md) | Configuration and protocol reference for SDK automation. | Tooling maintainers | TypeSpec and OpenAPI |
 
