@@ -291,6 +291,15 @@ using Azure.AI.Projects;
 );
 
 // --------------------------------------------------------------------------------
+// Beta Voice Agent Realtime sub-client
+// --------------------------------------------------------------------------------
+
+// A generated HTTP client cannot keep the socket alive past the 101 response, and each language
+// needs its own WebSocket transport to speak the realtime protocol afterward. Exclude this
+// operation entirely from the emitted SDK; it remains in the spec for raw REST documentation only.
+@@scope(VoiceAgentWebSocket.connectVoiceAgent, "!(python, javascript)");
+
+// --------------------------------------------------------------------------------
 // Beta Voice Agent Conversations sub-client
 // --------------------------------------------------------------------------------
 
