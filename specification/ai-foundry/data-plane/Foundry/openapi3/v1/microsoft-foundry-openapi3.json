@@ -11696,18 +11696,6 @@
         "description": "Creates an evaluator generation job. The service generates rubric-based evaluator\ndefinitions from the provided source materials asynchronously.",
         "parameters": [
           {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
             "name": "Operation-Id",
             "in": "header",
             "required": false,
@@ -11788,11 +11776,6 @@
             }
           },
           "description": "The job to create."
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
         }
       },
       "get": {
@@ -11800,18 +11783,6 @@
         "summary": "List evaluator generation jobs",
         "description": "Returns a list of evaluator generation jobs. The List API has up to a few\nseconds of propagation delay, so a recently created job may not appear\nimmediately; use the Get evaluator generation job API with the job ID to\nretrieve a specific job without delay.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
           {
             "name": "limit",
             "in": "query",
@@ -11925,12 +11896,7 @@
         },
         "tags": [
           "EvaluatorGenerationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/evaluator_generation_jobs/{jobId}": {
@@ -11939,18 +11905,6 @@
         "summary": "Get an evaluator generation job",
         "description": "Gets the details of an evaluator generation job by its ID.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
           {
             "name": "jobId",
             "in": "path",
@@ -12015,30 +11969,13 @@
         },
         "tags": [
           "EvaluatorGenerationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        ]
       },
       "delete": {
         "operationId": "EvaluatorGenerationJobs_delete",
         "summary": "Delete an evaluator generation job",
         "description": "Deletes an evaluator generation job by its ID. Deletes the job record only;\nthe generated evaluator (if any) is preserved.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
           {
             "name": "jobId",
             "in": "path",
@@ -12086,12 +12023,7 @@
         },
         "tags": [
           "EvaluatorGenerationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/evaluator_generation_jobs/{jobId}:cancel": {
@@ -12100,18 +12032,6 @@
         "summary": "Cancel an evaluator generation job",
         "description": "Cancels an evaluator generation job by its ID.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
           {
             "name": "jobId",
             "in": "path",
@@ -12166,12 +12086,7 @@
         },
         "tags": [
           "EvaluatorGenerationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/evaluators": {
@@ -12214,18 +12129,6 @@
               "default": 20
             },
             "explode": false
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
           }
         ],
         "responses": {
@@ -12332,18 +12235,6 @@
               "default": 20
             },
             "explode": false
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
           }
         ],
         "responses": {
@@ -12415,18 +12306,6 @@
             "description": "The name of the resource",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
             }
           }
         ],
@@ -12514,18 +12393,6 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
             "name": "version",
             "in": "path",
             "required": true,
@@ -12607,18 +12474,6 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
             "name": "version",
             "in": "path",
             "required": true,
@@ -12690,18 +12545,6 @@
             "description": "The name of the resource",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
             }
           },
           {
@@ -12787,18 +12630,6 @@
         "description": "Retrieves SAS credentials for accessing the storage account associated with the specified evaluator version.",
         "parameters": [
           {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
             "name": "name",
             "in": "path",
             "required": true,
@@ -12872,11 +12703,6 @@
             }
           },
           "description": "The credential request parameters"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
         }
       }
     },
@@ -12886,18 +12712,6 @@
         "summary": "Start a pending upload",
         "description": "Initiates a new pending upload or retrieves an existing one for the specified evaluator version.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
           {
             "name": "name",
             "in": "path",
@@ -12972,11 +12786,6 @@
             }
           },
           "description": "The pending upload request parameters"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
         }
       }
     },
@@ -32996,12 +32805,7 @@
             "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
           }
         ],
-        "description": "Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from."
       },
       "AgentFilterTraceSource": {
         "type": "object",
@@ -35395,8 +35199,8 @@
             "enum": [
               "red_team",
               "responses",
-              "traces_preview",
-              "synthetic_data_gen_preview",
+              "traces",
+              "synthetic_data_gen",
               "benchmark_preview"
             ],
             "description": "Data schema scenario."
@@ -35722,7 +35526,7 @@
         ],
         "description": "An Azure AI Search tool stored in a toolbox."
       },
-      "AzureAITraceDataSourcePreviewEvalRunDataSource": {
+      "AzureAITraceDataSourceEvalRunDataSource": {
         "type": "object",
         "required": [
           "type"
@@ -35731,9 +35535,9 @@
           "type": {
             "type": "string",
             "enum": [
-              "azure_ai_trace_data_source_preview"
+              "azure_ai_trace_data_source"
             ],
-            "description": "The type of data source, always `azure_ai_trace_data_source_preview`."
+            "description": "The type of data source, always `azure_ai_trace_data_source`."
           },
           "trace_source": {
             "$ref": "#/components/schemas/TraceSource",
@@ -37129,31 +36933,16 @@
           },
           "entry_point": {
             "type": "string",
-            "description": "The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "Evaluations=V1Preview"
-              ]
-            }
+            "description": "The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')"
           },
           "image_tag": {
             "type": "string",
-            "description": "The container image tag to use for evaluator code execution",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "Evaluations=V1Preview"
-              ]
-            }
+            "description": "The container image tag to use for evaluator code execution"
           },
           "blob_uri": {
             "type": "string",
             "format": "uri",
-            "description": "The blob URI for the evaluator storage",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "Evaluations=V1Preview"
-              ]
-            }
+            "description": "The blob URI for the evaluator storage"
           }
         },
         "allOf": [
@@ -37161,12 +36950,7 @@
             "$ref": "#/components/schemas/EvaluatorDefinition"
           }
         ],
-        "description": "Code-based evaluator definition using python code",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Code-based evaluator definition using python code"
       },
       "CodeConfiguration": {
         "type": "object",
@@ -38873,12 +38657,7 @@
             "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
           }
         ],
-        "description": "Dataset source for evaluator generation jobs — reference to a dataset.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Dataset source for evaluator generation jobs — reference to a dataset."
       },
       "DatasetReference": {
         "type": "object",
@@ -38896,12 +38675,7 @@
             "description": "Dataset version."
           }
         },
-        "description": "Reference to a versioned Foundry Dataset.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Reference to a versioned Foundry Dataset."
       },
       "DatasetType": {
         "anyOf": [
@@ -39363,12 +39137,7 @@
             "default": false
           }
         },
-        "description": "A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint."
       },
       "DispatchRoutineRequest": {
         "type": "object",
@@ -39830,7 +39599,7 @@
             "items": {
               "$ref": "#/components/schemas/EvaluationOutputDataset"
             },
-            "description": "Preview-only. Datasets produced by the evaluation run. Omitted when no datasets were generated. This field may change in a future API version.",
+            "description": "Datasets produced by the evaluation run. Omitted when no datasets were generated.",
             "readOnly": true
           },
           "latency": {
@@ -39874,15 +39643,16 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "azure_ai_traces_preview": "#/components/schemas/TracesPreviewEvalRunDataSource",
-            "azure_ai_synthetic_data_gen_preview": "#/components/schemas/SyntheticDataGenerationPreviewEvalRunDataSource",
+            "azure_ai_traces": "#/components/schemas/TracesEvalRunDataSource",
+            "azure_ai_synthetic_data_gen": "#/components/schemas/SyntheticDataGenerationEvalRunDataSource",
+            "azure_ai_synthetic_data_generation_with_simulation": "#/components/schemas/SyntheticDataGenerationWithSimulationEvalRunDataSource",
             "azure_ai_responses": "#/components/schemas/AzureAIResponsesEvalRunDataSource",
             "azure_ai_target_completions": "#/components/schemas/TargetCompletionEvalRunDataSource",
             "csv": "#/components/schemas/EvalCsvRunDataSource",
             "azure_ai_red_team": "#/components/schemas/RedTeamEvalRunDataSource",
-            "azure_ai_trace_data_source_preview": "#/components/schemas/AzureAITraceDataSourcePreviewEvalRunDataSource",
+            "azure_ai_trace_data_source": "#/components/schemas/AzureAITraceDataSourceEvalRunDataSource",
             "azure_ai_benchmark_preview": "#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource",
-            "azure_ai_user_conversation_simulation_preview": "#/components/schemas/UserConversationSimulationEvalRunDataSource"
+            "azure_ai_user_conversation_simulation": "#/components/schemas/UserConversationSimulationEvalRunDataSource"
           }
         },
         "description": "Base class for run data sources with discriminator support."
@@ -40918,12 +40688,7 @@
             ]
           }
         ],
-        "description": "The category of the evaluator",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The category of the evaluator"
       },
       "EvaluatorCredentialRequest": {
         "type": "object",
@@ -40937,12 +40702,7 @@
             "description": "The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`"
           }
         },
-        "description": "Request body for getting evaluator credentials",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Request body for getting evaluator credentials"
       },
       "EvaluatorDefinition": {
         "type": "object",
@@ -40981,12 +40741,7 @@
             "endpoint": "#/components/schemas/EndpointBasedEvaluatorDefinition"
           }
         },
-        "description": "Base evaluator configuration with discriminator",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Base evaluator configuration with discriminator"
       },
       "EvaluatorDefinitionType": {
         "anyOf": [
@@ -41006,12 +40761,7 @@
             ]
           }
         ],
-        "description": "The type of evaluator definition",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The type of evaluator definition"
       },
       "EvaluatorGenerationArtifacts": {
         "type": "object",
@@ -41032,12 +40782,7 @@
             "description": "The kinds of rows present in `dataset`. Always contains `\"spec\"` (the generated evaluation specification, a Markdown document describing what the evaluator measures). May additionally contain `\"tools\"` (when the generation pipeline produced or inferred OpenAI tool schemas) and/or `\"context\"` (when supplementary materials such as file uploads or trace samples were used during generation)."
           }
         },
-        "description": "Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace."
       },
       "EvaluatorGenerationInputs": {
         "type": "object",
@@ -41074,12 +40819,7 @@
             "description": "Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models."
           }
         },
-        "description": "Caller-supplied inputs for an evaluator generation job.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Caller-supplied inputs for an evaluator generation job."
       },
       "EvaluatorGenerationJob": {
         "type": "object",
@@ -41137,12 +40877,7 @@
             "readOnly": true
           }
         },
-        "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion."
       },
       "EvaluatorGenerationJobCreate": {
         "type": "object",
@@ -41152,12 +40887,7 @@
             "description": "Caller-supplied inputs."
           }
         },
-        "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion."
       },
       "EvaluatorGenerationJobSource": {
         "type": "object",
@@ -41179,12 +40909,7 @@
             "dataset": "#/components/schemas/DatasetEvaluatorGenerationJobSource"
           }
         },
-        "description": "The base source model for evaluator generation jobs. Polymorphic over `type`.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The base source model for evaluator generation jobs. Polymorphic over `type`."
       },
       "EvaluatorGenerationJobSourceType": {
         "anyOf": [
@@ -41201,12 +40926,7 @@
             ]
           }
         ],
-        "description": "The supported source types for evaluator generation jobs.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The supported source types for evaluator generation jobs."
       },
       "EvaluatorGenerationTokenUsage": {
         "type": "object",
@@ -41232,12 +40952,7 @@
             "description": "Total tokens consumed (input + output)."
           }
         },
-        "description": "Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state."
       },
       "EvaluatorMetric": {
         "type": "object",
@@ -41270,12 +40985,7 @@
             "description": "Indicates if this metric is primary when there are multiple metrics."
           }
         },
-        "description": "Evaluator Metric",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Evaluator Metric"
       },
       "EvaluatorMetricDirection": {
         "anyOf": [
@@ -41291,12 +41001,7 @@
             ]
           }
         ],
-        "description": "The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral"
       },
       "EvaluatorMetricType": {
         "anyOf": [
@@ -41312,12 +41017,7 @@
             ]
           }
         ],
-        "description": "The type of the evaluator",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The type of the evaluator"
       },
       "EvaluatorType": {
         "anyOf": [
@@ -41332,12 +41032,7 @@
             ]
           }
         ],
-        "description": "The type of the evaluator",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The type of the evaluator"
       },
       "EvaluatorVersion": {
         "type": "object",
@@ -41437,12 +41132,7 @@
             "readOnly": true
           }
         },
-        "description": "Evaluator Definition",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Evaluator Definition"
       },
       "EvaluatorVersionCreate": {
         "type": "object",
@@ -41500,12 +41190,7 @@
             "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
-        "description": "Evaluator Definition",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Evaluator Definition"
       },
       "EvaluatorVersionUpdate": {
         "type": "object",
@@ -41550,12 +41235,7 @@
             "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
-        "description": "Evaluator Definition",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Evaluator Definition"
       },
       "ExternalAgentDefinition": {
         "type": "object",
@@ -42319,12 +41999,7 @@
             ]
           }
         ],
-        "description": "Category of a warning surfaced on a generated evaluator version. Extensible so new warning categories (e.g., safety, output quality) can be introduced without a breaking change.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Category of a warning surfaced on a generated evaluator version. Extensible so new warning categories (e.g., safety, output quality) can be introduced without a breaking change."
       },
       "GitHubCopilotBuiltInTool": {
         "type": "string",
@@ -43362,7 +43037,7 @@
             "red_team_taxonomy": "#/components/schemas/RedTeamTaxonomyItemGenerationParams",
             "response_retrieval": "#/components/schemas/ResponseRetrievalItemGenerationParams",
             "target_completion": "#/components/schemas/TargetCompletionItemGenerationParams",
-            "synthetic_data_gen_preview": "#/components/schemas/SyntheticDataGenerationPreviewItemGenerationParams"
+            "synthetic_data_gen": "#/components/schemas/SyntheticDataGenerationItemGenerationParams"
           }
         },
         "description": "Configures how the service prepares input items for an evaluation run before applying testing criteria.\n\nDepending on `type`, preparation can generate new inputs, retrieve existing responses, transform source data, or simulate conversations. Each `type` selects a workflow-specific model with the parameters required by that preparation workflow. These parameters do not define the evaluated target or the testing criteria."
@@ -43379,7 +43054,7 @@
               "response_retrieval",
               "red_team_seed_prompts",
               "red_team_taxonomy",
-              "synthetic_data_gen_preview",
+              "synthetic_data_gen",
               "target_completion"
             ]
           }
@@ -84390,12 +84065,7 @@
             "$ref": "#/components/schemas/EvaluatorDefinition"
           }
         ],
-        "description": "Prompt-based evaluator",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Prompt-based evaluator"
       },
       "PromptDataGenerationJobSource": {
         "type": "object",
@@ -84460,12 +84130,7 @@
             "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
           }
         ],
-        "description": "Prompt source for evaluator generation jobs — inline text provided by the user.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Prompt source for evaluator generation jobs — inline text provided by the user."
       },
       "ProtocolConfiguration": {
         "type": "object",
@@ -85613,12 +85278,7 @@
             "$ref": "#/components/schemas/EvaluatorDefinition"
           }
         ],
-        "description": "Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators."
       },
       "RubricGenerationInputQualityWarning": {
         "type": "object",
@@ -85652,12 +85312,7 @@
             "description": "Zero-based index into `EvaluatorGenerationJob.inputs.sources` when the warning applies to a specific source. Omitted for aggregate warnings and for warnings not tied to one source."
           }
         },
-        "description": "A non-fatal advisory produced during rubric evaluator generation when resolved inputs are technically valid but likely too weak to produce a high-quality rubric. Read-only; service-generated. Persisted with the terminal EvaluatorGenerationJob.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A non-fatal advisory produced during rubric evaluator generation when resolved inputs are technically valid but likely too weak to produce a high-quality rubric. Read-only; service-generated. Persisted with the terminal EvaluatorGenerationJob."
       },
       "RubricGenerationInputQualityWarningCode": {
         "anyOf": [
@@ -85678,12 +85333,7 @@
             ]
           }
         ],
-        "description": "Stable searchable machine-readable warning code for a rubric-generation input-quality warning. Values are `snake_case`; clients must tolerate additional service-defined identifiers.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Stable searchable machine-readable warning code for a rubric-generation input-quality warning. Values are `snake_case`; clients must tolerate additional service-defined identifiers."
       },
       "RubricGenerationInputQualityWarningSeverity": {
         "anyOf": [
@@ -85697,12 +85347,7 @@
             ]
           }
         ],
-        "description": "Advisory severity for a rubric-generation input-quality warning. Initial value set: `warning`.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Advisory severity for a rubric-generation input-quality warning. Initial value set: `warning`."
       },
       "RubricGenerationInputQualityWarningSource": {
         "anyOf": [
@@ -85719,12 +85364,7 @@
             ]
           }
         ],
-        "description": "Warning source attribution for a rubric-generation input-quality warning. Per-source values (`prompt`, `agent`, `dataset`) match the source category visible to the generation runtime. `aggregate` is a synthetic value used only for warnings computed across successfully resolved sources. `traces` is not exposed because trace sources resolve into dataset content upstream.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Warning source attribution for a rubric-generation input-quality warning. Per-source values (`prompt`, `agent`, `dataset`) match the source category visible to the generation runtime. `aggregate` is a synthetic value used only for warnings computed across successfully resolved sources. `traces` is not exposed because trace sources resolve into dataset content upstream."
       },
       "SASCredentials": {
         "type": "object",
@@ -86849,7 +86489,32 @@
           }
         ]
       },
-      "SyntheticDataGenerationPreviewEvalRunDataSource": {
+      "SyntheticDataGenerationConfiguration": {
+        "type": "object",
+        "required": [
+          "generation_sources"
+        ],
+        "properties": {
+          "test_case_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of seed test cases to generate."
+          },
+          "output_test_case_dataset_name": {
+            "type": "string",
+            "description": "Name of the dataset where the generated seed test cases are stored. When omitted, the service generates a name automatically."
+          },
+          "generation_sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataGenerationJobSource"
+            },
+            "description": "Seed generation sources (prompt, agent, or file) forwarded to the data generation endpoint. Multiple sources may be provided."
+          }
+        },
+        "description": "Seed data-generation configuration for `SyntheticDataGenerationWithSimulationEvalRunDataSource`. The `generation_sources` are forwarded directly to the data generation endpoint to produce the seed test cases that are subsequently simulated."
+      },
+      "SyntheticDataGenerationEvalRunDataSource": {
         "type": "object",
         "required": [
           "type",
@@ -86860,12 +86525,12 @@
           "type": {
             "type": "string",
             "enum": [
-              "azure_ai_synthetic_data_gen_preview"
+              "azure_ai_synthetic_data_gen"
             ],
-            "description": "The type of data source, always `azure_ai_synthetic_data_gen_preview`."
+            "description": "The type of data source, always `azure_ai_synthetic_data_gen`."
           },
           "item_generation_params": {
-            "$ref": "#/components/schemas/SyntheticDataGenerationPreviewItemGenerationParams",
+            "$ref": "#/components/schemas/SyntheticDataGenerationItemGenerationParams",
             "description": "Configuration for generating the synthetic input items evaluated by this run."
           },
           "target": {
@@ -86884,7 +86549,7 @@
         ],
         "description": "Represents a data source for evaluation runs that evaluates based on generated synthetic data for testing purposes."
       },
-      "SyntheticDataGenerationPreviewItemGenerationParams": {
+      "SyntheticDataGenerationItemGenerationParams": {
         "type": "object",
         "required": [
           "type",
@@ -86896,7 +86561,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "synthetic_data_gen_preview"
+              "synthetic_data_gen"
             ],
             "description": "The type of item generation parameters."
           },
@@ -86937,6 +86602,46 @@
         ],
         "description": "Represents the parameters for synthetic data generation item generation."
       },
+      "SyntheticDataGenerationWithSimulationEvalRunDataSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "synthetic_data_generation_configuration",
+          "model_configuration",
+          "target"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_ai_synthetic_data_generation_with_simulation"
+            ],
+            "description": "The type of data source, always `azure_ai_synthetic_data_generation_with_simulation`."
+          },
+          "synthetic_data_generation_configuration": {
+            "$ref": "#/components/schemas/SyntheticDataGenerationConfiguration",
+            "description": "Seed data-generation configuration: how many test cases to generate, the optional output dataset name, and the generation sources forwarded to the data generation endpoint."
+          },
+          "model_configuration": {
+            "$ref": "#/components/schemas/EvaluationModelConfiguration",
+            "description": "Model used both to generate the seed test cases and to simulate the user side of each conversation against the evaluated `target`."
+          },
+          "default_simulation_configuration": {
+            "$ref": "#/components/schemas/UserConversationSimulationDefaultConfiguration",
+            "description": "Default configuration for the simulated conversations produced from the seed test cases, reusing the user conversation simulation contract. Includes the conversation dataset persistence controls (`enable_conversation_dataset_generation` and `output_conversation_dataset_name`). When omitted, the service defaults apply."
+          },
+          "target": {
+            "$ref": "#/components/schemas/FoundryEvaluationTarget",
+            "description": "Model or agent being evaluated. It receives turns from the simulated user during the conversation simulation."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalRunDataSource"
+          }
+        ],
+        "description": "Generates seed test-case scenarios via the data generation endpoint and then evaluates a `target`\nby simulating multi-turn user conversations over those scenarios.\n\nThe `generation_sources` in `synthetic_data_generation_configuration` are forwarded to the data\ngeneration backend to produce seed test cases. Each generated scenario is then simulated against\n`target`: the model in `model_configuration` plays the simulated user and drives the conversation\naccording to `default_simulation_configuration` until it reaches the desired length or maximum turn\nlimit. The evaluation's testing criteria are then applied to the generated conversations."
+      },
       "TargetCompletionEvalRunDataSource": {
         "type": "object",
         "required": [
@@ -86973,7 +86678,7 @@
           },
           "item_generation_params": {
             "$ref": "#/components/schemas/ItemGenerationParams",
-            "description": "The parameters for item generation. ConversationGenPreviewItemGenerationParams enables conversation simulation previews."
+            "description": "The parameters for item generation."
           }
         },
         "allOf": [
@@ -90030,7 +89735,7 @@
             "agent_filter": "#/components/schemas/AgentFilterTraceSource"
           }
         },
-        "description": "Base class for polymorphic trace sources nested within an AzureAITraceDataSourcePreviewEvalRunDataSource."
+        "description": "Base class for polymorphic trace sources nested within an AzureAITraceDataSourceEvalRunDataSource."
       },
       "TraceSourceType": {
         "anyOf": [
@@ -90142,58 +89847,7 @@
           ]
         }
       },
-      "TracesEvaluatorGenerationJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "start_time"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "traces"
-            ],
-            "description": "The source type for this source, which is Traces."
-          },
-          "agent_id": {
-            "type": "string",
-            "description": "The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required."
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required."
-          },
-          "agent_version": {
-            "type": "string",
-            "description": "The agent version. If not specified, traces for ALL versions of the agent are included within the time window."
-          },
-          "start_time": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "Start of the time window (Unix timestamp in seconds) for fetching traces."
-          },
-          "end_time": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "End of the time window (Unix timestamp in seconds). Defaults to current time."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
-          }
-        ],
-        "description": "Traces source for evaluator generation jobs — conversation traces from Application Insights.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "TracesPreviewEvalRunDataSource": {
+      "TracesEvalRunDataSource": {
         "type": "object",
         "required": [
           "type"
@@ -90202,9 +89856,9 @@
           "type": {
             "type": "string",
             "enum": [
-              "azure_ai_traces_preview"
+              "azure_ai_traces"
             ],
-            "description": "The type of data source, always `azure_ai_traces_preview`."
+            "description": "The type of data source, always `azure_ai_traces`."
           },
           "trace_ids": {
             "type": "array",
@@ -90257,6 +89911,52 @@
           }
         ],
         "description": "Represents a data source for evaluation runs that operate over Agent traces stored in Application Insights."
+      },
+      "TracesEvaluatorGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "start_time"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "traces"
+            ],
+            "description": "The source type for this source, which is Traces."
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version. If not specified, traces for ALL versions of the agent are included within the time window."
+          },
+          "start_time": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "Start of the time window (Unix timestamp in seconds) for fetching traces."
+          },
+          "end_time": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "End of the time window (Unix timestamp in seconds). Defaults to current time."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
+          }
+        ],
+        "description": "Traces source for evaluator generation jobs — conversation traces from Application Insights."
       },
       "TreatmentEffectType": {
         "anyOf": [
@@ -90728,9 +90428,9 @@
           "type": {
             "type": "string",
             "enum": [
-              "azure_ai_user_conversation_simulation_preview"
+              "azure_ai_user_conversation_simulation"
             ],
-            "description": "The type of data source, always `azure_ai_user_conversation_simulation_preview`."
+            "description": "The type of data source, always `azure_ai_user_conversation_simulation`."
           },
           "source": {
             "$ref": "#/components/schemas/UserConversationSimulationSource",
