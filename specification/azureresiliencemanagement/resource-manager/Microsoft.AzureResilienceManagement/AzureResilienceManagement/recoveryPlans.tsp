@@ -330,9 +330,13 @@ interface RecoveryJobs {
 @doc("Operations for managing recovery child jobs.")
 @removed(Versions.v2026_04_01_preview)
 interface RecoveryChildJobs {
+  #deprecated "RecoveryChildJob is deprecated and removed in 2026-04-01-preview."
+  @doc("Gets a recovery child job. Deprecated: the RecoveryChildJob resource type is deprecated and is removed in 2026-04-01-preview. Use the recoveryJobResources child of the recovery job (RecoveryJobResources) instead.")
   @route(ServiceGroupRoute)
   get is ArmResourceRead<RecoveryChildJob, ServiceGroupParameters>;
 
+  #deprecated "RecoveryChildJob is deprecated and removed in 2026-04-01-preview."
+  @doc("Lists the recovery child jobs of a recovery job. Deprecated: the RecoveryChildJob resource type is deprecated and is removed in 2026-04-01-preview. Use the recoveryJobResources child of the recovery job (RecoveryJobResources) instead.")
   @route(ServiceGroupRoute)
   list is ArmResourceListByParent<RecoveryChildJob, ServiceGroupParameters>;
 }
