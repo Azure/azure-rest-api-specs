@@ -33,6 +33,8 @@ using TypeSpec.Http;
 
 // Property name customizations
 @@clientName(Azure.ResourceManager.EntityTagProperty.eTag, "etag", "java");
+@@clientName(CalculateCostPlan.feasible, "IsFeasible", "csharp");
+@@clientName(CalculateCostPlan.priceAsOf, "PriceAsOfOn", "csharp");
 
 // C# type customizations
 @@alternateType(
