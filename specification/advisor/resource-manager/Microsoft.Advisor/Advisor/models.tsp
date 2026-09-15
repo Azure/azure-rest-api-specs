@@ -77,12 +77,43 @@ union Category {
  */
 union Control {
   string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_10_01)
   HighAvailability: "HighAvailability",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_10_01)
   BusinessContinuity: "BusinessContinuity",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_10_01)
   DisasterRecovery: "DisasterRecovery",
+
+  /**
+   * Data protection and recovery.
+   */
+  @added(Versions.v2026_10_01)
+  DataProtectionAndRecovery: "DataProtectionAndRecovery",
+
+  /**
+   * Governance and compliance.
+   */
+  @added(Versions.v2026_10_01)
+  GovernanceAndCompliance: "GovernanceAndCompliance",
+
+  /**
+   * Zone resiliency.
+   */
+  @added(Versions.v2026_10_01)
+  ZoneResiliency: "ZoneResiliency",
+
+  /**
+   * Regional resiliency.
+   */
+  @added(Versions.v2026_10_01)
+  RegionalResiliency: "RegionalResiliency",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Scalability: "Scalability",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
