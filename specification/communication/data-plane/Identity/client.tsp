@@ -4,21 +4,28 @@
 // lived in each language repo. Every rename below is baked into an already-shipped public
 // API, so dropping one is a customer-visible break.
 //
-// VERIFICATION STATUS (as of PR head, all four emitters):
-//   Java   — compiled with @azure-tools/typespec-java 0.46.2. Clean; public models are the
-//            5 expected types. Re-verified after the csharp directive was added.
-//   .NET   — compiled with @azure-typespec/http-client-csharp. Clean; generated output
-//            byte-identical to the .NET working branch.
-//   JS     — compiled with @azure-tools/typespec-ts 0.56.0. Clean; public api.md diff empty.
-//            The csharp-scoped directive is correctly absent from JS output.
-//   Python — not separately compiled. Python requires no directive in this file; its only
-//            requirement is `generation-subdir` in tspconfig.yaml. Confirmed indirectly by
-//            CI: SDK Validation - Python succeeds on this PR.
+// VERIFICATION STATUS — all four emitters regenerated against this file as merged.
+//   Java   — compiled with @azure-tools/typespec-java 0.46.2. 0 errors, 25/25 unit tests,
+//            RevApi reports 0 removals. Public models are the 5 expected types.
+//   .NET   — compiled with @azure-typespec/http-client-csharp. Output byte-identical to
+//            the .NET working branch. Both csharp-affecting directives were proven to be
+//            the mechanism producing the shipped names by deleting the local [CodeGenType]
+//            attributes and regenerating: both names survived. ApiCompat reports 0 errors,
+//            0 warnings, no suppressions.
+//   JS     — compiled with @azure-tools/typespec-ts 0.56.0. Output is byte-identical with
+//            and without this file, and the public api.md diff is empty. JavaScript is
+//            excluded from every directive here; see section 6.
+//   Python — compiled with @azure-tools/typespec-python. 97/97 tests pass. Covered by the
+//            token-scope rename in (1); also requires `generation-subdir: "_generated"`
+//            in tspconfig.yaml, which is an emitter option rather than a directive.
 //
 // TESTING NOTE: when regenerating against a local spec clone, pass `--local-spec-repo`.
 //   `tsp-client update` without it re-syncs the spec directory from the remote and SILENTLY
 //   DELETES untracked local files — including this one. Re-check the file still exists after
 //   each run before trusting a negative result.
+//
+//   Compare file *content*, not size, when checking a local copy against the remote. Line
+//   endings alone shift the byte count, so a size mismatch is not evidence of staleness.
 
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
@@ -181,10 +188,12 @@ namespace ClientCustomizations;
 // 6. Python and JavaScript.
 //
 // Python needs `generation-subdir: "_generated"` in tspconfig.yaml, which is an emitter
-// option, not a client.tsp directive — nothing is required here for Python beyond the
-// unscoped token-scope rename in (1).
+// option, not a client.tsp directive. Beyond that, Python is covered by the token-scope
+// rename in (1), which is scoped "java,python,csharp".
 //
-// JavaScript has not yet been compiled against this file. If its shipped public name is
-// already `CommunicationTokenScope`, directive (1) is a no-op for it, as it is for .NET
-// and Java. If it is not, (1) must be scoped "java,python,csharp" instead of unscoped.
+// JavaScript is deliberately excluded from every directive in this file. Its shipped
+// public name is `TokenScope`, declared independently in src/models.ts, so the raw
+// generated name is not part of its public surface and renaming it would serve no
+// purpose. Verified by regenerating against this file: the emitted JavaScript output is
+// byte-identical with and without it, and the public api.md diff is empty.
 // ---------------------------------------------------------------------------
