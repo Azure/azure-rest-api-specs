@@ -23,7 +23,9 @@ namespace Microsoft.HealthcareApis;
   "python,javascript,go,java"
 );
 @@alternateType(DicomService.etag, Azure.Core.eTag, "csharp");
+@@alternateType(FhirService.etag, Azure.Core.eTag, "csharp");
 @@alternateType(IotConnector.etag, Azure.Core.eTag, "csharp");
+@@alternateType(IotFhirDestination.etag, Azure.Core.eTag, "csharp");
 @@alternateType(Workspace.etag, Azure.Core.eTag, "csharp");
 @@alternateType(ServicesDescription.etag, Azure.Core.eTag, "csharp");
 @@alternateType(
@@ -298,6 +300,7 @@ namespace Microsoft.HealthcareApis;
   url,
   "csharp"
 );
+@@alternateType(ServiceCosmosDbConfigurationInfo.keyVaultKeyUri, url, "csharp");
 @@alternateType(DicomServiceProperties.serviceUrl, url, "csharp");
 @@alternateType(
   Azure.ResourceManager.CommonTypes.PrivateEndpoint.id,
@@ -326,6 +329,11 @@ namespace Microsoft.HealthcareApis;
 );
 @@alternateType(
   IotFhirDestinationProperties.fhirServiceResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  StorageConfiguration.storageResourceId,
   armResourceIdentifier,
   "csharp"
 );
