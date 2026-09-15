@@ -57,7 +57,7 @@ function Get-ChangedCoreFiles($changedFiles = (Get-ChangedFiles)) {
   )
 
   $coreFiles = $changedFiles.Where({ 
-    $_.StartsWith(".github/") -or
+    ($_.StartsWith(".github/") -and !$_.StartsWith(".github/arm-leases/")) -or
     ($_.StartsWith("eng/") -and !$_.StartsWith("eng/common/")) -or
     $_.StartsWith("specification/common-types/") -or
     $_ -in $rootFiles
