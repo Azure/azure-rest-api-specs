@@ -8,6 +8,7 @@ import "./Site.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
@@ -26,10 +27,7 @@ union FunctionAppVersionState {
   /** A package is being built for the ZIP version. */
   Building: "Building",
 
-  /** The container image reference is being resolved. */
-  ResolvingArtifact: "ResolvingArtifact",
-
-  /** The version is being validated. */
+  /** The version is being validated, including resolving a container image reference. */
   Validating: "Validating",
 
   /** The version is ready to receive traffic. */
@@ -222,11 +220,6 @@ model FunctionAppVersion
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The status of an asynchronous Function App version operation.")
-model FunctionAppVersionOperationStatusResult
-  is ArmOperationStatus<StatusValues = FunctionAppVersionOperationStatus>;
-
-@added(Versions.v2026_10_01_preview)
 @tag("FunctionAppVersions")
 @armResourceOperations
 @doc("Operations for Function App versions.")
@@ -266,7 +259,7 @@ interface FunctionAppVersions {
     void,
     FunctionAppVersion,
     LroHeaders = ArmCombinedLroHeaders<
-      FunctionAppVersionOperationStatusResult,
+      ArmOperationStatus<StatusValues = FunctionAppVersionOperationStatus>,
       FunctionAppVersion
     > &
       Azure.Core.Foundations.RetryAfterHeader,
@@ -280,10 +273,24 @@ interface FunctionAppVersions {
 @doc("Operations for tracking asynchronous Function App version work.")
 interface FunctionAppVersionOperations {
   /** Gets the status of an asynchronous Function App version operation. */
-  get is GetResourceOperationStatus<
-    Response = FunctionAppVersionOperationStatusResult,
-    Scope = SubscriptionLocationActionScope
-  >;
+  @autoRoute
+  @get
+  @armResourceCollectionAction
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Matches the provider namespace behavior of GetResourceOperationStatus while using the ARM common operationId parameter."
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "Operation status is a provider collection action, not a resource lifecycle operation."
+  @Azure.ResourceManager.Private.armUpdateProviderNamespace
+  op get(
+    ...DefaultBaseParameters<SubscriptionLocationActionScope>,
+    ...ProviderNamespace<SubscriptionLocationActionScope>,
+    ...SubscriptionLocationActionScope,
+    ...Azure.ResourceManager.CommonTypes.OperationIdParameter,
+  ):
+    | ArmResponse<
+        ArmOperationStatus<
+          StatusValues = FunctionAppVersionOperationStatus
+        >
+      >
+    | ErrorResponse;
 }
 
 @@segment(

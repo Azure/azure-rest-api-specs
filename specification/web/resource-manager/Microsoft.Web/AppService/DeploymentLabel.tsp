@@ -58,6 +58,9 @@ interface DeploymentLabels {
   /** Assigns a retained Function App version to a deployment label. The preview supports only the production label. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<DeploymentLabel>;
 
+  /** Lists deployment labels for a site. */
+  listBySite is ArmResourceListByParent<DeploymentLabel>;
+
   /** Clears a deployment label assignment. Deleting production safely restores legacy serving authority. */
   delete is ArmResourceDeleteSync<DeploymentLabel>;
 }
