@@ -1426,6 +1426,10 @@ scalar HttpRange extends string;
 // java metadata as an x-ms-meta-* collection rather than a single header, mirroring the scopes the other
 // languages already carry on this property.
 @@alternateType(MetadataHeaders.metadata, Record<string>, "java");
+
+// Same for the object replication rules: the shipped BlobDownloadHeaders exposes them as an x-ms-or-* collection
+// that ModelHelper.getObjectReplicationSourcePolicies parses. rust, javascript, python and go already carry this.
+@@alternateType(ObjectReplicationHeaders.objectReplicationRules, Record<string>, "java");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
   MetadataHeaders.metadata,
