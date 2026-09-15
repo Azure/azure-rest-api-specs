@@ -48750,6 +48750,36 @@
         ],
         "description": "Extensible status values shared by Foundry jobs."
       },
+      "KnowledgeBasePreviewToolboxTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "knowledge_base"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "knowledge_base_preview"
+            ]
+          },
+          "knowledge_base": {
+            "$ref": "#/components/schemas/KnowledgeBaseToolParameters",
+            "description": "The knowledge base tool parameters."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ToolboxTool"
+          }
+        ],
+        "description": "A knowledge base tool stored in a toolbox.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "preview_tool"
+          ]
+        }
+      },
       "KnowledgeBaseTool": {
         "type": "object",
         "required": [
@@ -95304,6 +95334,7 @@
             "work_iq_preview": "#/components/schemas/WorkIQPreviewToolboxTool",
             "fabric_iq_preview": "#/components/schemas/FabricIQPreviewToolboxTool",
             "web_iq_preview": "#/components/schemas/WebIQPreviewToolboxTool",
+            "knowledge_base_preview": "#/components/schemas/KnowledgeBasePreviewToolboxTool",
             "toolbox_search_preview": "#/components/schemas/ToolboxSearchPreviewToolboxTool",
             "toolbox_search": "#/components/schemas/ToolSearchToolboxTool"
           }
@@ -95324,6 +95355,7 @@
           "reminder_preview",
           "work_iq_preview",
           "fabric_iq_preview",
+          "knowledge_base_preview",
           "toolbox_search",
           "toolbox_search_preview",
           "a2a",
