@@ -391,8 +391,7 @@ interface StoragePools {
     StoragePoolEnableAvsConnectionPost,
     ArmAcceptedLroResponse<
       "Resource Operation accepted",
-      ArmCombinedLroHeaders<FinalResult = StoragePool> &
-        Azure.Core.Foundations.RetryAfterHeader
+      ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
     >,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<StoragePool>
   >;
@@ -404,8 +403,7 @@ interface StoragePools {
     void,
     ArmAcceptedLroResponse<
       "Resource Operation accepted",
-      ArmCombinedLroHeaders<FinalResult = StoragePool> &
-        Azure.Core.Foundations.RetryAfterHeader
+      ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
     >,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<StoragePool>
   >;
@@ -417,8 +415,7 @@ interface StoragePools {
     StoragePoolFinalizeAvsConnectionPost,
     ArmAcceptedLroResponse<
       "Resource Operation accepted",
-      ArmCombinedLroHeaders<FinalResult = StoragePool> &
-        Azure.Core.Foundations.RetryAfterHeader
+      ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
     >,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<StoragePool>
   >;
@@ -430,8 +427,7 @@ interface StoragePools {
     void,
     ArmAcceptedLroResponse<
       "Resource Operation accepted",
-      ArmCombinedLroHeaders<FinalResult = StoragePool> &
-        Azure.Core.Foundations.RetryAfterHeader
+      ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
     >,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<StoragePool>
   >;
