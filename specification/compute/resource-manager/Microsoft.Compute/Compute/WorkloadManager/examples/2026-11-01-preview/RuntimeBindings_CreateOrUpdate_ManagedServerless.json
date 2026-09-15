@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "resource": {
+      "location": "eastus2",
+      "properties": {
+        "kind": "ServerlessContainers",
+        "provisioningMode": "Managed",
+        "managedProfile": {
+          "provider": "ACI"
+        },
+        "identityProfile": {
+          "executionIdentity": {
+            "provisioningMode": "ServiceManaged",
+            "scope": "SandboxGroup"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "kind": "ServerlessContainers",
+          "provisioningMode": "Managed",
+          "managedProfile": {
+            "provider": "ACI"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
