@@ -69,7 +69,7 @@ model GcpBucketProperties {
   /**
    * The bucket's Autoclass configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   autoclass?: {
     /** Whether or not Autoclass is enabled on this bucket */
     enabled?: boolean;
@@ -87,7 +87,7 @@ model GcpBucketProperties {
   /**
    * The bucket's billing configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   billing?: {
     /** When set to true, Requester Pays is enabled for this bucket. */
     requesterPays?: boolean;
@@ -114,7 +114,7 @@ model GcpBucketProperties {
   /**
    * The bucket's custom placement configuration for Custom Dual Regions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   customPlacementConfig?: {
     /** The list of regional locations in which data is placed. */
     dataLocations?: string[];
@@ -133,7 +133,7 @@ model GcpBucketProperties {
   /**
    * Encryption configuration for a bucket.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   encryption?: {
     /** A Cloud KMS key that will be used to encrypt objects inserted into this bucket, if no encryption method is specified. */
     defaultKmsKeyName?: string;
@@ -147,7 +147,7 @@ model GcpBucketProperties {
   /**
    * The bucket's hierarchical namespace configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   hierarchicalNamespace?: {
     /** When set to true, hierarchical namespace is enabled for this bucket. */
     enabled?: boolean;
@@ -156,10 +156,10 @@ model GcpBucketProperties {
   /**
    * The bucket's IAM configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   iamConfiguration?: {
     /** The bucket's uniform bucket-level access configuration. The feature was formerly known as Bucket Policy Only. For backward compatibility, this field will be populated with identical information as the uniformBucketLevelAccess field. We recommend using the uniformBucketLevelAccess field to enable and disable the feature. */
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
     bucketPolicyOnly?: {
       /** If set, access is controlled only by bucket-level or above IAM policies. */
       enabled?: boolean;
@@ -172,7 +172,7 @@ model GcpBucketProperties {
     publicAccessPrevention?: string;
 
     /** The bucket's uniform bucket-level access configuration. */
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
     uniformBucketLevelAccess?: {
       /** If set, access is controlled only by bucket-level or above IAM policies. */
       enabled?: boolean;
@@ -206,13 +206,13 @@ model GcpBucketProperties {
   /**
    * The bucket's lifecycle configuration. See lifecycle management for more information.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   lifecycle?: {
     /** A lifecycle management rule, which is made of an action to take and the condition(s) under which the action will be taken. */
     @identifiers(#[])
     rule?: {
       /** The action to take. */
-      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
       action?: {
         /** Target storage class. Required iff the type of the action is SetStorageClass. */
         storageClass?: string;
@@ -222,7 +222,7 @@ model GcpBucketProperties {
       };
 
       /** The condition(s) under which the action will be taken. */
-      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
       condition?: {
         /** Age of an object (in days). This condition is satisfied when an object reaches the specified age. */
         age?: int32;
@@ -276,7 +276,7 @@ model GcpBucketProperties {
   /**
    * The bucket's logging configuration, which defines the destination bucket and optional name prefix for the current bucket's logs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   logging?: {
     /** The destination bucket where the current bucket's logs should be placed. */
     logBucket?: string;
@@ -298,7 +298,7 @@ model GcpBucketProperties {
   /**
    * The bucket's object retention config.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   objectRetention?: {
     /** The bucket's object retention mode. Can be Enabled. */
     mode?: string;
@@ -307,7 +307,7 @@ model GcpBucketProperties {
   /**
    * The owner of the bucket. This is always the project team's owner group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   owner?: {
     /** The entity, in the form project-owner-projectId. */
     entity?: string;
@@ -324,7 +324,7 @@ model GcpBucketProperties {
   /**
    * The bucket's retention policy. The retention policy enforces a minimum retention time for all objects contained in the bucket, based on their creation time. Any attempt to overwrite or delete objects younger than the retention period will result in a PERMISSION_DENIED error. An unlocked retention policy can be modified or removed from the bucket via a storage.buckets.update operation. A locked retention policy cannot be removed or shortened in duration for the lifetime of the bucket. Attempting to remove or decrease period of a locked retention policy will result in a PERMISSION_DENIED error.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   retentionPolicy?: {
     /** Server-determined value that indicates the time from which policy was enforced and effective. This value is in RFC 3339 format. */
     effectiveTime?: utcDateTime;
@@ -354,7 +354,7 @@ model GcpBucketProperties {
   /**
    * The bucket's soft delete policy, which defines the period of time that soft-deleted objects will be retained, and cannot be permanently deleted.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   softDeletePolicy?: {
     /** Server-determined value that indicates the time from which the policy, or one with a greater retention, was effective. This value is in RFC 3339 format. */
     effectiveTime?: utcDateTime;
@@ -381,7 +381,7 @@ model GcpBucketProperties {
   /**
    * The bucket's versioning configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   versioning?: {
     /** While set to true, versioning is fully enabled for this bucket. */
     enabled?: boolean;
@@ -390,7 +390,7 @@ model GcpBucketProperties {
   /**
    * The bucket's website configuration, controlling how the service behaves when accessing bucket contents as a web site. See the Static Website Examples for more information.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   website?: {
     /** If the requested object path is missing, the service will ensure the path has a trailing '/', append this suffix, and attempt to retrieve the resulting object. This allows the creation of index.html objects to represent directory pages. */
     mainPageSuffix?: string;
@@ -458,7 +458,7 @@ model BucketAccessControl {
   /**
    * The project team associated with the entity, if any.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   projectTeam?: {
     /** The project number. */
     projectNumber?: string;
@@ -546,7 +546,7 @@ model ObjectAccessControl {
   /**
    * The project team associated with the entity, if any.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   projectTeam?: {
     /** The project number. */
     projectNumber?: string;

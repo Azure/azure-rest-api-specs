@@ -25,8 +25,8 @@ alias GcpCommonProperties = {
   @doc("GCP Region")
   gcpRegion?: string;
 
-  @doc("GCP Tags")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Arbitrary user-defined key/value pairs assigned in GCP. Keys are chosen by the customer and cannot be enumerated in the specification."
+  @doc("GCP Tags")
   gcpTags?: Record<string>;
 
   @visibility(Lifecycle.Read)

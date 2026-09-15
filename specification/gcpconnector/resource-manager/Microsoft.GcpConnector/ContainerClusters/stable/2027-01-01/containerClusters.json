@@ -2161,29 +2161,34 @@
         ]
       }
     },
+    "LoggingComponentConfig": {
+      "type": "object",
+      "description": "LoggingComponentConfig is cluster logging component configuration",
+      "properties": {
+        "enableComponents": {
+          "type": "array",
+          "description": "Select components to collect logs. An empty set would disable all logging.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "COMPONENT_UNSPECIFIED",
+              "SYSTEM_COMPONENTS",
+              "WORKLOADS"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true
+            }
+          }
+        }
+      }
+    },
     "LoggingConfig": {
       "type": "object",
       "description": "Logging configuration for the cluster",
       "properties": {
         "componentConfig": {
-          "type": "object",
-          "description": "Configuration of cluster logging components",
-          "properties": {
-            "enableComponents": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "COMPONENT_UNSPECIFIED",
-                  "SYSTEM_COMPONENTS",
-                  "WORKLOADS"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": true
-                }
-              }
-            }
-          }
+          "$ref": "#/definitions/LoggingComponentConfig",
+          "description": "Logging components configuration"
         }
       }
     },
@@ -2384,29 +2389,34 @@
         }
       }
     },
+    "MonitoringComponentConfig": {
+      "type": "object",
+      "description": "MonitoringComponentConfig is cluster monitoring component configuration",
+      "properties": {
+        "enableComponents": {
+          "type": "array",
+          "description": "Select components to collect metrics. An empty set would disable all monitoring.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "COMPONENT_UNSPECIFIED",
+              "SYSTEM_COMPONENTS",
+              "WORKLOADS"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true
+            }
+          }
+        }
+      }
+    },
     "MonitoringConfig": {
       "type": "object",
       "description": "Monitoring configuration for the cluster",
       "properties": {
         "componentConfig": {
-          "type": "object",
-          "description": "Configuration of cluster monitoring components",
-          "properties": {
-            "enableComponents": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "COMPONENT_UNSPECIFIED",
-                  "SYSTEM_COMPONENTS",
-                  "WORKLOADS"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": true
-                }
-              }
-            }
-          }
+          "$ref": "#/definitions/MonitoringComponentConfig",
+          "description": "Monitoring components configuration"
         }
       }
     },
@@ -2733,6 +2743,16 @@
         }
       }
     },
+    "NodeConfigDefaults": {
+      "type": "object",
+      "description": "Subset of NodeConfig message that has defaults.",
+      "properties": {
+        "gcfsConfig": {
+          "$ref": "#/definitions/GcfsConfig",
+          "description": "GCFS (Google Container File System, also known as Riptide) options."
+        }
+      }
+    },
     "NodeKubeletConfig": {
       "type": "object",
       "description": "Node kubelet configs",
@@ -2974,18 +2994,8 @@
       "description": "Default configurations for node pools",
       "properties": {
         "nodeConfigDefaults": {
-          "type": "object",
-          "description": "Default node configuration for node pools",
-          "properties": {
-            "gcfsConfig": {
-              "type": "object",
-              "properties": {
-                "enabled": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
+          "$ref": "#/definitions/NodeConfigDefaults",
+          "description": "Subset of NodeConfig message that has defaults."
         }
       }
     },

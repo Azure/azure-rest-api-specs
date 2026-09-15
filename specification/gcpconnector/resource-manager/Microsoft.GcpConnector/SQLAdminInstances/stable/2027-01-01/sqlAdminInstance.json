@@ -992,17 +992,8 @@
           "description": "The status of the operation."
         },
         "error": {
-          "type": "object",
-          "description": "If errors occurred during processing of this operation, this field will be populated.",
-          "properties": {
-            "errors": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/OperationError"
-              },
-              "x-ms-identifiers": []
-            }
-          }
+          "$ref": "#/definitions/OperationErrors",
+          "description": "If errors occurred during processing of this operation, this field will be populated."
         }
       }
     },
@@ -1021,6 +1012,20 @@
         "message": {
           "type": "string",
           "description": "Additional information about the error encountered."
+        }
+      }
+    },
+    "OperationErrors": {
+      "type": "object",
+      "description": "Database instance operation errors list wrapper.",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "The list of errors encountered while processing this operation.",
+          "items": {
+            "$ref": "#/definitions/OperationError"
+          },
+          "x-ms-identifiers": []
         }
       }
     },

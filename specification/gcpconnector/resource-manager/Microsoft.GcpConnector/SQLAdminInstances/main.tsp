@@ -99,7 +99,7 @@ model GcpSqlAdminInstanceProperties {
   /**
    * The name and status of the failover replica.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   failoverReplica?: {
     /**
      * The availability status of the failover replica. A false status indicates that the failover replica is out of sync. The primary instance can only failover to the failover replica when the status is true.
@@ -898,11 +898,18 @@ model Operation {
   /**
    * If errors occurred during processing of this operation, this field will be populated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
-  error?: {
-    @identifiers(#[])
-    errors?: OperationError[];
-  };
+  error?: OperationErrors;
+}
+
+/**
+ * Database instance operation errors list wrapper.
+ */
+model OperationErrors {
+  /**
+   * The list of errors encountered while processing this operation.
+   */
+  @identifiers(#[])
+  errors?: OperationError[];
 }
 
 /**

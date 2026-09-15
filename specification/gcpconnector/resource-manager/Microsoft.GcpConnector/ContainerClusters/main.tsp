@@ -2545,17 +2545,24 @@ model ParentProductConfig {
  */
 model LoggingConfig {
   /**
-   * Configuration of cluster logging components
+   * Logging components configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
-  componentConfig?: {
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-    enableComponents?: (
-      | "COMPONENT_UNSPECIFIED"
-      | "SYSTEM_COMPONENTS"
-      | "WORKLOADS"
-      | string)[];
-  };
+  componentConfig?: LoggingComponentConfig;
+}
+
+/**
+ * LoggingComponentConfig is cluster logging component configuration
+ */
+model LoggingComponentConfig {
+  /**
+   * Select components to collect logs. An empty set would disable all logging.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
+  enableComponents?: (
+    | "COMPONENT_UNSPECIFIED"
+    | "SYSTEM_COMPONENTS"
+    | "WORKLOADS"
+    | string)[];
 }
 
 /**
@@ -2563,17 +2570,24 @@ model LoggingConfig {
  */
 model MonitoringConfig {
   /**
-   * Configuration of cluster monitoring components
+   * Monitoring components configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
-  componentConfig?: {
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-    enableComponents?: (
-      | "COMPONENT_UNSPECIFIED"
-      | "SYSTEM_COMPONENTS"
-      | "WORKLOADS"
-      | string)[];
-  };
+  componentConfig?: MonitoringComponentConfig;
+}
+
+/**
+ * MonitoringComponentConfig is cluster monitoring component configuration
+ */
+model MonitoringComponentConfig {
+  /**
+   * Select components to collect metrics. An empty set would disable all monitoring.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
+  enableComponents?: (
+    | "COMPONENT_UNSPECIFIED"
+    | "SYSTEM_COMPONENTS"
+    | "WORKLOADS"
+    | string)[];
 }
 
 /**
@@ -2629,7 +2643,7 @@ model ControlPlaneEndpointsConfig {
   /**
    * Network access configuration for the control plane endpoints
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   networkAccess?: {
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
     accessTypes?: (
@@ -2732,15 +2746,19 @@ model AnonymousAuthenticationConfig {
  */
 model NodePoolDefaults {
   /**
-   * Default node configuration for node pools
+   * Subset of NodeConfig message that has defaults.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
-  nodeConfigDefaults?: {
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
-    gcfsConfig?: {
-      enabled?: boolean;
-    };
-  };
+  nodeConfigDefaults?: NodeConfigDefaults;
+}
+
+/**
+ * Subset of NodeConfig message that has defaults.
+ */
+model NodeConfigDefaults {
+  /**
+   * GCFS (Google Container File System, also known as Riptide) options.
+   */
+  gcfsConfig?: GcfsConfig;
 }
 
 /**
