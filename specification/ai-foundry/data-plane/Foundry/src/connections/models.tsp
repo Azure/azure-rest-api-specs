@@ -135,6 +135,9 @@ union ConnectionType {
 
   @doc("Remote tool")
   RemoteTool: "RemoteTool_Preview",
+
+  @doc("OpenAPI connection")
+  OpenAPI: "OpenAPI",
 }
 
 @doc("The credential type used by the connection")
