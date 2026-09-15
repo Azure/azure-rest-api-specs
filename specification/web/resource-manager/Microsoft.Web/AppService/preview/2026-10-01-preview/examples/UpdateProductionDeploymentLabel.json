@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sample-rg",
+    "name": "sample-func",
+    "labelName": "production",
+    "api-version": "2026-10-01-preview",
+    "resource": {
+      "properties": {
+        "targetVersionResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-2026-10-02"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/deploymentLabels/production",
+        "name": "production",
+        "type": "Microsoft.Web/sites/deploymentLabels",
+        "properties": {
+          "systemManaged": true,
+          "activeVersionResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-2026-10-02",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/deploymentLabels/production",
+        "name": "production",
+        "type": "Microsoft.Web/sites/deploymentLabels",
+        "properties": {
+          "systemManaged": true,
+          "activeVersionResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-2026-10-02",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "DeploymentLabels_CreateOrUpdate",
+  "title": "Update the production deployment label assignment"
+}
