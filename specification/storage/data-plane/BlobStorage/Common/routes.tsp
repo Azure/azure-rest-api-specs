@@ -833,6 +833,10 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   download(
+    // The shipped SDK sends Accept: application/xml here even though the body is the blob content; the emitter
+    // would otherwise derive application/octet-stream from the response media type and change the request.
+    ...AcceptHeader,
+
     ...ApiVersionHeader,
     ...ClientRequestIdHeader,
     ...SnapshotParameter,
@@ -2483,6 +2487,9 @@ interface BlockBlob {
   @route("?comp=query")
   query is StorageOperation<
     {
+      // As for download: the shipped SDK sends Accept: application/xml for the query response too.
+      ...AcceptHeader;
+
       /** The query request. */
       @body
       queryRequest: QueryRequest;
