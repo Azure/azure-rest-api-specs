@@ -1549,6 +1549,10 @@ enum RecoveryPointTierType {
   InstantRP,
   HardenedRP,
   ArchivedRP,
+
+  /** Instant Access snapshot tier, retained for the policy's instantAccessDurationMinutes. */
+  @added(Versions.v2026_10_01)
+  IASnapshotRP,
 }
 
 /**
