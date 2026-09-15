@@ -49,6 +49,49 @@ semantic-validator: true
 message-format: json
 ```
 
+### Tag: package-2026-08-31-preview
+
+These settings apply only when `--tag=package-2026-08-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-08-31-preview'
+input-file:
+  - preview/2026-08-31-preview/dataprotection.json
+suppressions:
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: dataprotection.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings"].get.responses["200"].schema.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances"].get.responses["200"].schema.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupInstances/{backupInstanceName}/recoveryPoints"].get.responses["200"].schema.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/crossTenantVaultMappings/{mappingName}/backupJobs"].get.responses["200"].schema.properties
+    reason: >-
+      The cross-tenant list responses reuse the shared DPP list models (CrossTenantVaultMappingList,
+      BackupInstanceResourceList, AzureBackupRecoveryPointResourceList, AzureBackupJobResourceList).
+      Each exposes value inline and inherits nextLink from the shared DppResourceList base via allOf,
+      so the models satisfy the value + nextLink contract; LintDiff does not resolve the allOf
+      composition and reports a false positive. The identical shared list models already ship on the
+      non-cross-tenant list paths and were suppressed on prior DPP tags.
+  - code: AvoidAdditionalProperties
+    from: dataprotection.json
+    where:
+      - $.definitions.InnerError.properties.additionalInfo
+      - $.definitions.UserFacingError.properties.properties
+    reason: Pre-existing DPP error contract, unchanged by cross-tenant restore. These are open key/value maps that surface arbitrary provider error detail; re-emitted only because this is a new preview version.
+  - code: AvoidAdditionalProperties
+    from: dataprotection.json
+    where:
+      - $.definitions.JobExtendedInfo.properties.additionalDetails
+      - $.definitions.JobSubTask.properties.additionalDetails
+    reason: Pre-existing DPP job model, unchanged by cross-tenant restore. additionalDetails is an open key/value map carrying free-form job diagnostic details; re-emitted only because this is a new preview version.
+  - code: AvoidAdditionalProperties
+    from: dataprotection.json
+    where:
+      - $.definitions.KubernetesClusterRestoreCriteria.properties.namespaceMappings
+      - $.definitions.KubernetesClusterVaultTierRestoreCriteria.properties.namespaceMappings
+      - $.definitions.ResourceListSelectionCriteria.properties.resourceNameOverrides
+    reason: Pre-existing DPP restore-criteria models, unchanged by cross-tenant restore. These are user-supplied source-to-target maps whose keys are caller-defined and cannot be enumerated in the contract; re-emitted only because this is a new preview version.
+```
+
 ### Tag: package-2026-06-01
 
 These settings apply only when `--tag=package-2026-06-01` is specified on the command line.
