@@ -15,7 +15,7 @@ namespace Azure.AI.Projects;
 // ---------------------------------------------------------------------------
 
 /** Outcome of an optimization job that evaluated candidates against a baseline. */
-union AgentOptimizationEvaluationOutcome {
+union AgentOptimizationJobOutcome {
   string,
 
   @doc("Best candidate exceeded the baseline score.")
@@ -26,7 +26,7 @@ union AgentOptimizationEvaluationOutcome {
 }
 
 /** Reason an evaluated candidate search terminated. */
-union AgentOptimizationTerminationReason {
+union AgentOptimizationJobTerminationReason {
   string,
 
   @doc("The candidate search completed normally.")
@@ -50,32 +50,24 @@ union AgentOptimizationCandidateEvaluationStatus {
   not_evaluated: "not_evaluated",
 }
 
-/**
- * Which layer of the optimization loop generated a token/latency usage entry.
- *
- * Population status for `latency_usage` (as of the initial GA of this contract):
- * - `agent`     — populated when Foundry's agent runtime surfaces `sample.latency_ms`
- *                 (server-measured on the target rollout).
- * - `judge`     — populated when a Foundry evaluator surfaces `sample.latency_ms`
- *                 (server-measured on the evaluator call).
- * - `reflection`— **not currently populated**. The optimizer's reflection/mutation
- *                 model calls are not yet reported with a server-measured latency
- *                 source; this member is reserved so consumers can begin filtering
- *                 for it today without a breaking change when the signal ships.
- *
- * `token_usage` populates all three layers.
- */
-union AgentOptimizationLayer {
+/** Stage of optimization that consumed model resources. */
+union AgentOptimizationStage {
   string,
 
-  @doc("Agent inference calls (the agent being optimized). Populated on latency_usage from Foundry-reported sample.latency_ms.")
+  @doc("Calls made by the agent being optimized.")
   agent: "agent",
 
-  @doc("Judge / evaluator model calls. Populated on latency_usage when the evaluator surfaces sample.latency_ms.")
-  judge: "judge",
+  @doc("Calls that evaluate candidate quality.")
+  evaluation: "evaluation",
 
-  @doc("Reflection / optimization strategy model calls. Populated on token_usage; NOT yet populated on latency_usage — reserved until a server-measured latency source is wired.")
-  reflection: "reflection",
+  @doc("Calls that generate candidate changes.")
+  optimization: "optimization",
+}
+
+/** Current activity for a candidate under construction or evaluation. */
+union AgentOptimizationCandidateProgressStage {
+  generating: "generating",
+  evaluating: "evaluating",
 }
 
 // ---------------------------------------------------------------------------
@@ -87,8 +79,8 @@ model AgentOptimizationInProgressCandidateInfo {
   @doc("Timestamp when the current candidate began evaluation, represented in Unix time. Omitted when the start time is unavailable.")
   created_at?: FoundryTimestamp;
 
-  @doc("Whether the candidate configuration has been fully generated (vs. still being reflected on).")
-  candidate_generated: boolean;
+  @doc("Current candidate activity.")
+  stage: AgentOptimizationCandidateProgressStage;
 }
 
 @doc("In-flight progress. Preserved on terminal states (with in_progress_candidate omitted).")
@@ -113,13 +105,13 @@ model AgentOptimizationJobProgress {
   promotion?: PromotionInfo;
 }
 
-@doc("Aggregated token usage attributable to a single layer of the optimization loop.")
-model AgentOptimizationTokenUsageEntry {
-  @doc("Which layer of the optimization loop generated these calls.")
-  layer: AgentOptimizationLayer;
+@doc("Aggregated token usage for one optimization stage and model.")
+model AgentOptimizationJobTokenUsage {
+  @doc("Optimization stage that generated these calls.")
+  stage: AgentOptimizationStage;
 
-  @doc("Model deployment name that served the calls. Empty string when the source sample didn't attribute a model.")
-  `model`: string;
+  @doc("Model name or deployment name that served the calls.")
+  `model`?: string;
 
   @doc("Total input tokens. Omitted when unmeasured.")
   input_tokens?: int64;
@@ -137,18 +129,16 @@ model AgentOptimizationTokenUsageEntry {
   reasoning_tokens?: int64 = 0;
 }
 
-@doc("Aggregated wall-clock latency attributable to a single layer of the optimization loop. Sourced from server-measured signals (Foundry's `sample.latency_ms` on the target rollout and evaluator responses). Layers without a server-measured source are omitted from the array rather than populated with client-observed timings that would conflate real model latency with local retry/network overhead.")
-model AgentOptimizationLatencyUsageEntry {
-  @doc("Which layer of the optimization loop generated these calls. See `AgentOptimizationLayer` for per-layer population status.")
-  layer: AgentOptimizationLayer;
+@doc("Average latency for one optimization stage and model.")
+model AgentOptimizationJobLatency {
+  @doc("Optimization stage measured by this entry.")
+  stage: AgentOptimizationStage;
 
-  @doc("Model deployment name that served the calls.")
-  `model`: string;
+  @doc("Model name or deployment name measured by this entry.")
+  `model`?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "AgentsOptimization wire uses floating-point milliseconds; preserve the existing wire contract while exposing a semantic duration type."
-  @doc("Average per-call latency. Wire representation: milliseconds as a float.")
-  @encode(DurationKnownEncoding.milliseconds, float64)
-  avg_latency_ms: duration;
+  @doc("Average per-call latency, rounded to milliseconds.")
+  avg_latency_ms: int64;
 
   @doc("Total number of calls contributing to this entry.")
   call_count: int64;
@@ -166,14 +156,14 @@ model AgentOptimizationJobResult {
   @doc("All candidate IDs produced by this job, in evaluation order. Omitted until at least one candidate is available. Use GET /candidates/{id} for the mutation payload and file manifest, or GET /candidates for a paginated summary listing.")
   candidate_ids?: string[];
 
-  @doc("Aggregate token usage per layer × model. Always present; empty array when no calls were measured.")
-  token_usage: AgentOptimizationTokenUsageEntry[];
+  @doc("Aggregate token usage per stage and model. Always present; empty array when no calls were measured.")
+  token_usage: AgentOptimizationJobTokenUsage[];
 
-  @doc("Aggregate latency per layer × model, from server-measured sources only. Always present; empty array when no server-measured latency signals were surfaced (e.g. an early-failure run or an all-hosted judge run whose evaluators do not report latency_ms).")
-  latency_usage: AgentOptimizationLatencyUsageEntry[];
+  @doc("Aggregate latency per stage and model. Always present; empty when no server-measured latency is available.")
+  latency_usage: AgentOptimizationJobLatency[];
 }
 
-@doc("Partial or terminal result for quality or cost optimization.")
+@doc("Partial or terminal result for quality optimization.")
 model EvaluatedAgentOptimizationJobResult extends AgentOptimizationJobResult {
   @doc("Result evaluation status.")
   evaluation_status: "evaluated";
@@ -182,10 +172,10 @@ model EvaluatedAgentOptimizationJobResult extends AgentOptimizationJobResult {
   best_candidate_id?: string;
 
   @doc("Outcome of comparative evaluation. Omitted until the evaluated job reaches a terminal state.")
-  evaluation_outcome?: AgentOptimizationEvaluationOutcome;
+  outcome?: AgentOptimizationJobOutcome;
 
   @doc("Reason the candidate search terminated. Omitted until the evaluated job reaches a terminal state.")
-  termination_reason?: AgentOptimizationTerminationReason;
+  termination_reason?: AgentOptimizationJobTerminationReason;
 }
 
 @doc("Partial or terminal result for a transformation job that does not comparatively evaluate candidates.")

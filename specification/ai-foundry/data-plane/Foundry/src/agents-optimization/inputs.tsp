@@ -21,7 +21,7 @@ union TargetAttribute {
   @doc("Instruction-tuning — rewrites agent system prompts.")
   instruction: "instruction",
 
-  @doc("Model-selection — evaluates deployments from optimization_configuration.agent_optimization_space.model_search_space.")
+  @doc("Model selection from optimization_configuration.agent_optimization_space.model_search_space.")
   `model`: "model",
 
   @doc("Skill-tuning — generates or modifies agent skill descriptions.")
@@ -33,13 +33,8 @@ union TargetAttribute {
 
 /** Goal for an agent-optimization job. */
 union AgentOptimizationGoal {
-  string,
-
   @doc("Search for agent configurations that improve measured evaluation quality.")
   improve_quality: "improve_quality",
-
-  @doc("Search for lower-cost model configurations. A lower-cost candidate is selected only when it satisfies service-managed measurement and savings thresholds and does not regress aggregate quality, overall pass rate, or any evaluator pass rate; otherwise the baseline remains selected.")
-  reduce_cost: "reduce_cost",
 }
 
 // ---------------------------------------------------------------------------
@@ -48,16 +43,11 @@ union AgentOptimizationGoal {
 
 /** Discriminator values for the dataset input union. */
 union AgentOptimizationDatasetInputType {
-  string,
-
   @doc("Inline dataset — items are provided directly in the request body.")
   inline: "inline",
 
   @doc("Reference to a registered Foundry dataset by name and version.")
   reference: "reference",
-
-  @doc("Reference to a data-generation job whose output becomes the training dataset.")
-  generation_job_reference: "generation_job_reference",
 }
 
 /** Base discriminated model for dataset input. Either inline items or a registered reference. */
@@ -67,14 +57,9 @@ model AgentOptimizationDatasetInput {
   type: AgentOptimizationDatasetInputType;
 }
 
-/** Base model for dataset inputs that are valid for held-out validation. */
-@discriminator("type")
-model AgentOptimizationValidationDatasetInput
-  extends AgentOptimizationDatasetInput {}
-
 /** Inline dataset — items supplied directly in the request body. */
 model AgentOptimizationInlineDatasetInput
-  extends AgentOptimizationValidationDatasetInput {
+  extends AgentOptimizationDatasetInput {
   @doc("Dataset input type discriminator.")
   type: AgentOptimizationDatasetInputType.inline;
 
@@ -85,7 +70,7 @@ model AgentOptimizationInlineDatasetInput
 
 /** Reference to a registered Foundry dataset. */
 model AgentOptimizationReferenceDatasetInput
-  extends AgentOptimizationValidationDatasetInput {
+  extends AgentOptimizationDatasetInput {
   @doc("Dataset input type discriminator.")
   type: AgentOptimizationDatasetInputType.reference;
 
@@ -97,36 +82,6 @@ model AgentOptimizationReferenceDatasetInput
   @minLength(1)
   version?: string;
 
-  @doc("Originating data-generation job identifier. Omitted when the dataset was not resolved from a generation job.")
-  @visibility(Lifecycle.Read)
-  data_generation_job_id?: string;
-
-  @doc("Current status of the originating data-generation job. Omitted when the dataset was not resolved from a generation job.")
-  @visibility(Lifecycle.Read)
-  data_generation_job_status?: JobStatus;
-
-  @doc("Failure from the originating data-generation job. Omitted unless generation failed.")
-  @visibility(Lifecycle.Read)
-  error?: ApiError;
-}
-
-/** Reference to a data-generation job whose output is used as the training dataset. Once resolved, responses use the reference dataset variant and retain the generation job ID, status, and error as provenance. */
-model AgentOptimizationGenerationJobReferenceDatasetInput
-  extends AgentOptimizationDatasetInput {
-  @doc("Dataset input type discriminator.")
-  type: AgentOptimizationDatasetInputType.generation_job_reference;
-
-  @doc("Identifier of the data-generation job to await and resolve.")
-  @minLength(1)
-  data_generation_job_id: string;
-
-  @doc("Current status of the referenced data-generation job. Omitted before status is available.")
-  @visibility(Lifecycle.Read)
-  data_generation_job_status?: JobStatus;
-
-  @doc("Failure from the referenced data-generation job. Omitted unless generation failed.")
-  @visibility(Lifecycle.Read)
-  error?: ApiError;
 }
 
 /** A single item in an inline dataset. */
@@ -180,7 +135,7 @@ model AgentOptimizationEvaluator {
 // Input models
 // ---------------------------------------------------------------------------
 
-@doc("A non-empty model deployment name in the Foundry project.")
+@doc("A non-empty Foundry model name or existing deployment name.")
 @minLength(1)
 scalar AgentOptimizationDeploymentName extends string;
 
@@ -199,14 +154,10 @@ model AgentOptimizationTargetConfiguration {
   version?: string;
 }
 
-@doc("Identifies a model deployment used by an optimization or evaluation step.")
+@doc("Identifies a model used by an optimization or evaluation step.")
 model AgentOptimizationModelConfiguration {
-  @doc("Model deployment name in the Foundry project.")
-  deployment_name: AgentOptimizationDeploymentName;
-
-  // Review consideration: sampling_parameters may belong here once the service
-  // supports caller-controlled inference settings. It is intentionally not a wire
-  // property in this contract.
+  @doc("Model name or existing deployment name in the Foundry project.")
+  `model`: AgentOptimizationDeploymentName;
 }
 
 @doc("A skill in the manually supplied agent optimization surface.")
@@ -228,8 +179,8 @@ model AgentOptimizationBaselineAgentConfiguration {
   @doc("Caller-supplied baseline system prompt. Omitted to resolve the baseline from the target; a prompt agent's stored definition is authoritative.")
   system_prompt?: string;
 
-  @doc("Caller-supplied baseline model deployment. Omitted to resolve the baseline from the target; a prompt agent's stored definition is authoritative.")
-  current_model_deployment_name?: AgentOptimizationDeploymentName;
+  @doc("Current model name. An existing deployment name is also accepted. Omitted to resolve the model from the target.")
+  current_model?: AgentOptimizationDeploymentName;
 
   @doc("Skills available for optimization. Omitted when no manual skill surface is supplied.")
   skills?: AgentOptimizationSkill[];
@@ -240,26 +191,20 @@ model AgentOptimizationBaselineAgentConfiguration {
 
 @doc("The agent attributes and alternative values available to an agent-optimization search.")
 model AgentOptimizationSpace {
-  @doc("Agent attributes the optimizer may change. Defaults to instruction when omitted. For reduce_cost, model selection is additionally implied.")
+  @doc("Agent attributes the optimizer may change. Defaults to instruction when omitted.")
   @minItems(1)
   target_attributes?: TargetAttribute[] = #[TargetAttribute.instruction];
 
-  @doc("Alternative model deployments available when model is an optimization target. Required when goal is reduce_cost or target_attributes includes model; otherwise omitted.")
+  @doc("Alternative model names or existing deployment names available when model is an optimization target.")
   @minItems(1)
   model_search_space?: AgentOptimizationDeploymentName[];
 }
 
-/**
- * Candidate search settings.
- *
- * Review consideration: if candidate search later gains multiple wall-clock, token, cost, or
- * evaluation-call budgets, or multiple stopping rules, split those concerns into
- * dedicated budget and stopping objects. The current flat shape avoids empty nesting.
- */
+/** Candidate search settings. */
 model AgentOptimizationCandidateSearchConfiguration {
   @doc("Maximum number of non-baseline candidates to fully evaluate. Defaults to 2 when omitted.")
   @minValue(1)
-  @maxValue(20)
+  @maxValue(200)
   max_candidates?: int32 = 2;
 
   @doc("Number of training-dataset rows sampled to screen each proposed candidate before full validation. Defaults to 3 when omitted.")
@@ -279,14 +224,14 @@ model AgentOptimizationEvaluationConfiguration {
   training_dataset: AgentOptimizationDatasetInput;
 
   @doc("Held-out dataset used for full candidate evaluation. The training dataset is reused when omitted.")
-  validation_dataset?: AgentOptimizationValidationDatasetInput;
+  validation_dataset?: AgentOptimizationDatasetInput;
 
   @doc("Evaluator references used to score candidate quality.")
   @minItems(1)
   @maxItems(20)
   evaluators: AgentOptimizationEvaluator[];
 
-  @doc("Model deployment used by model-based evaluators.")
+  @doc("Model used by model-based evaluators. An existing deployment name is also accepted.")
   evaluation_model: AgentOptimizationModelConfiguration;
 
   @doc("Level at which each dataset item is evaluated. Defaults to turn when omitted; use conversation for multi-turn simulation.")
@@ -300,7 +245,7 @@ model AgentOptimizationConfigurationBase {
   type: string;
 }
 
-@doc("Configuration for optimizing an agent for measured quality or serving cost.")
+@doc("Configuration for optimizing an agent for measured quality.")
 model AgentOptimizationConfiguration
   extends AgentOptimizationConfigurationBase {
   @doc("Optimization type discriminator.")
@@ -366,7 +311,7 @@ model AgentOptimizationJobInputs {
   @doc("Foundry agent whose configuration is optimized. Omitted when the workflow does not target a registered Foundry agent.")
   target_configuration?: AgentOptimizationTargetConfiguration;
 
-  @doc("Model deployment used to generate candidate changes.")
+  @doc("Model used to generate candidate changes. An existing deployment name is also accepted.")
   optimization_model_configuration: AgentOptimizationModelConfiguration;
 
   @doc("Type-specific optimization configuration.")
@@ -378,7 +323,7 @@ model AgentOptimizationEstimateInputs {
   @doc("Foundry agent whose configuration would be optimized. Omitted when the workflow does not target a registered Foundry agent.")
   target_configuration?: AgentOptimizationTargetConfiguration;
 
-  @doc("Model deployment that would generate candidate changes.")
+  @doc("Model that would generate candidate changes. An existing deployment name is also accepted.")
   optimization_model_configuration: AgentOptimizationModelConfiguration;
 
   @doc("Agent-optimization configuration to estimate.")
@@ -397,22 +342,31 @@ model AgentOptimizationEstimateBand {
   ceiling: float64;
 }
 
-@doc("Estimated cost breakdown. Present only when at least one contributing model has pricing data available.")
-model AgentOptimizationEstimateDollars {
-  @doc("Whether the dollar figures are modeled rather than measured. Defaults to true; clients should read this value rather than assume it remains true.")
-  modeled: boolean = true;
+@doc("Estimated values grouped by optimization stage.")
+model AgentOptimizationStageEstimate {
+  @doc("Estimated values for calls made by the agent being optimized.")
+  agent?: AgentOptimizationEstimateBand;
 
-  @doc("ISO 4217 currency code. Defaults to USD when the pricing source provides no currency; an emitted source currency overrides this fallback.")
+  @doc("Estimated values for calls that evaluate candidate quality.")
+  evaluation?: AgentOptimizationEstimateBand;
+
+  @doc("Estimated values for calls that generate candidate changes.")
+  optimization?: AgentOptimizationEstimateBand;
+}
+
+@doc("Estimated monetary cost. Present only when at least one contributing model has pricing data.")
+model AgentOptimizationCostEstimate {
+  @doc("ISO 4217 currency code for all monetary values in this estimate.")
   currency: string = "USD";
 
-  @doc("Total dollar estimate across all priced layers. Omitted when no layer could be priced.")
+  @doc("Total estimated cost across all priced stages.")
   total?: AgentOptimizationEstimateBand;
 
-  @doc("Per-layer dollar bands keyed by layer name (e.g. 'agent', 'judge', 'reflection'). Omitted when no layer could be priced.")
-  per_layer?: Record<AgentOptimizationEstimateBand>;
+  @doc("Estimated cost grouped by optimization stage.")
+  by_stage?: AgentOptimizationStageEstimate;
 
-  @doc("Cost layers excluded from total because no pricing data was available for their model. Omitted when every contributing layer was priced.")
-  unpriced_layers?: string[];
+  @doc("Stages excluded from the total because pricing was unavailable.")
+  unpriced_stages?: AgentOptimizationStage[];
 }
 
 @doc("Response body for :estimate.")
@@ -420,11 +374,11 @@ model AgentOptimizationEstimateResponse {
   @doc("Validation-set size (in rows) the estimate was computed against. This is the server-resolved input used by the estimator; useful for clients that did not supply or know the row count when validation_dataset was passed as a registered reference.")
   validation_dataset_rows: int32;
 
-  @doc("Estimated per-layer model-call bands, keyed by layer name (e.g. 'agent', 'judge', 'reflection'). Typical values are calibrated expectations and may be fractional. Omitted when the selected search strategy cannot produce call-count estimates.")
-  call_counts?: Record<AgentOptimizationEstimateBand>;
+  @doc("Estimated model-call counts grouped by optimization stage. Typical values are calibrated expectations and may be fractional.")
+  call_counts?: AgentOptimizationStageEstimate;
 
-  @doc("Modeled dollar estimate. Omitted when no contributing model has pricing data.")
-  dollars?: AgentOptimizationEstimateDollars;
+  @doc("Estimated monetary cost. Omitted when no contributing model has pricing data.")
+  cost?: AgentOptimizationCostEstimate;
 
   @doc("Timestamp of the pricing snapshot used for cost estimation, represented in Unix time. Omitted when no valid pricing snapshot is available.")
   prices_as_of?: FoundryTimestamp;

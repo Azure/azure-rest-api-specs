@@ -46,11 +46,11 @@ model AgentOptimizationInstructionMutation extends AgentOptimizationMutation {
   value?: string;
 }
 
-@doc("Model-deployment mutation.")
+@doc("Model mutation.")
 model AgentOptimizationModelMutation extends AgentOptimizationMutation {
   type: AgentOptimizationMutationType.`model`;
 
-  @doc("Selected model deployment. Omitted on LIST unless `expand=mutations` is specified.")
+  @doc("Selected model name or deployment name. Omitted on LIST unless `expand=mutations` is specified.")
   value?: AgentOptimizationDeploymentName;
 }
 
@@ -70,64 +70,6 @@ model AgentOptimizationToolsMutation extends AgentOptimizationMutation {
   value?: OpenAI.ChatCompletionTool[];
 }
 
-@doc("Aggregate billable token counts for one routed model in a candidate evaluation.")
-model AgentOptimizationCandidateTokenUsage {
-  @doc("Input tokens that were not served from cache. Omitted when unmeasured.")
-  @minValue(0)
-  prompt_tokens?: int64;
-
-  @doc("Input tokens served from cache. Defaults to zero when omitted.")
-  @minValue(0)
-  cached_tokens: int64 = 0;
-
-  @doc("Output tokens. Omitted when unmeasured.")
-  @minValue(0)
-  completion_tokens?: int64;
-
-  @doc("Reasoning tokens included in completion_tokens. Defaults to zero when omitted.")
-  @minValue(0)
-  reasoning_tokens: int64 = 0;
-
-  @doc("Total input and output tokens. Omitted when unmeasured.")
-  @minValue(0)
-  total_tokens?: int64;
-}
-
-@doc("Measured usage and estimated serving cost for one routed model.")
-model AgentOptimizationCandidateModelCost {
-  @doc("Actual model that served the measured validation tasks.")
-  `model`: string;
-
-  @doc("Aggregate token usage attributed to this model.")
-  token_usage: AgentOptimizationCandidateTokenUsage;
-
-  @doc("Estimated serving cost for this model. Omitted when the model could not be priced.")
-  @minValue(0)
-  estimated_cost?: float64;
-}
-
-@doc("Validation serving-cost summary for one candidate.")
-model AgentOptimizationCandidateCost {
-  @doc("Usage and pricing grouped by the actual routed model.")
-  model_costs: AgentOptimizationCandidateModelCost[];
-
-  @doc("Estimated serving cost across priced validation tasks. Omitted when coverage is insufficient.")
-  @minValue(0)
-  estimated_cost?: float64;
-
-  @doc("Estimated serving cost per priced validation task. Omitted when coverage is insufficient.")
-  @minValue(0)
-  estimated_cost_per_task?: float64;
-
-  @doc("Fraction of validation tasks with complete usage and a known model price.")
-  @minValue(0)
-  @maxValue(1)
-  measurement_coverage: float64;
-
-  @doc("ISO 4217 currency code. Defaults to USD.")
-  currency: string = "USD";
-}
-
 @doc("Comparative evaluation summary for a candidate.")
 model AgentOptimizationCandidateEvaluation {
   @doc("Average composite score across evaluated tasks. Omitted until scoring produces an aggregate score.")
@@ -136,13 +78,8 @@ model AgentOptimizationCandidateEvaluation {
   @doc("Average total tokens consumed per task. Omitted when token usage was not measured.")
   avg_tokens?: float64;
 
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "AgentsOptimization wire uses floating-point milliseconds; preserve the existing wire contract while exposing a semantic duration type."
-  @doc("Average end-to-end latency per task. Omitted when latency was not measured. Wire representation: milliseconds as a float.")
-  @encode(DurationKnownEncoding.milliseconds, float64)
-  avg_latency_ms?: duration;
-
-  @doc("Per-routed-model serving-cost summary. Omitted when candidate cost was not measured.")
-  candidate_cost?: AgentOptimizationCandidateCost;
+  @doc("Average end-to-end latency per task, rounded to milliseconds.")
+  avg_latency_ms?: int64;
 
   @doc("Foundry evaluation identifier used to score this candidate. Omitted when unavailable.")
   eval_id?: string;
@@ -174,7 +111,7 @@ model AgentOptimizationCandidate {
   @doc("Foundry agent version associated with this candidate. Omitted when no temporary or evaluated agent version was created.")
   agent_version?: string;
 
-  @doc("Timestamp when the candidate was created, represented in Unix time. Omitted when unavailable for legacy candidate records.")
+  @doc("Timestamp when the candidate was created, represented in Unix time.")
   created_at?: FoundryTimestamp;
 
   @doc("Comparative evaluation summary. Omitted when this candidate was not comparatively evaluated.")
@@ -211,23 +148,5 @@ model PromotionInfo {
   agent_version?: string;
 
   @doc("Whether promotion created a new Foundry agent version.")
-  created_new_version: boolean;
-}
-
-@doc("Response body for POST /candidates/{id}:promote.")
-model PromoteAgentOptimizationCandidateResponse {
-  @doc("Server-assigned candidate identifier that was promoted.")
-  candidate_id: string;
-
-  @doc("Timestamp when promotion occurred, represented in Unix time.")
-  promoted_at: FoundryTimestamp;
-
-  @doc("Name of the Foundry agent associated with the recorded promotion.")
-  agent_name: string;
-
-  @doc("Version of the Foundry agent created or associated with the promotion. Omitted when no version was created or recorded.")
-  agent_version?: string;
-
-  @doc("Whether a new agent version was created during promotion.")
   created_new_version: boolean;
 }

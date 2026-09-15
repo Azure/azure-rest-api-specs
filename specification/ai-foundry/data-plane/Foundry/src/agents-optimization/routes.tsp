@@ -1,7 +1,3 @@
-// Routes for the AgentsOptimization data-plane surface (v1 GA).
-// Follows the Foundry job-lifecycle pattern from servicepatterns.tsp
-// (same pattern as data_generation_jobs, evaluation suites).
-
 import "./models.tsp";
 
 using TypeSpec.Http;
@@ -10,10 +6,6 @@ using TypeSpec.OpenAPI;
 using Azure.Core;
 
 namespace Azure.AI.Projects;
-
-// ---------------------------------------------------------------------------
-// Job CRUD operations (shared job templates from servicepatterns.tsp)
-// ---------------------------------------------------------------------------
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @tag("AgentOptimizationJobs")
@@ -36,7 +28,7 @@ interface AgentOptimizationJobs {
   >;
 
   /**
-   * Estimates dataset row count, per-layer model call volumes, and (when pricing is available) cost bands for an optimization job with the given inputs, without submitting the job.
+   * Estimates validation dataset rows, per-stage model call volumes, and cost bands without submitting the job.
    */
   @summary("Estimate an agent optimization job")
   @route("agent_optimization_jobs:estimate")
@@ -81,22 +73,11 @@ interface AgentOptimizationJobs {
   cancel is cancelJob<AgentOptimizationJob>;
 
   /**
-   * Deletes the job and its candidate artifacts. Non-terminal jobs return 409 unless `force=true`, in which case the service cancels the job first and then deletes it.
+   * Cancels active work, then deletes the job and its candidate artifacts.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
   @summary("Delete an agent optimization job")
   @route("agent_optimization_jobs/{jobId}")
-  @delete
-  delete is FoundryDataPlaneOperation<
-    {
-      /** The ID of the job to delete. */
-      @path jobId: string;
-
-      /** When true, force-deletes even if the job is in a non-terminal state (cancels first). Defaults to false, in which case a 409 Conflict is returned for non-terminal jobs. */
-      @query force?: boolean = false;
-    },
-    NoContentResponse
-  >;
+  delete is deleteJob<AgentOptimizationJob>;
 }
 
 // ---------------------------------------------------------------------------
@@ -158,6 +139,6 @@ interface AgentOptimizationJobCandidates {
       /** The candidate identifier. */
       @path candidateId: string;
     },
-    PromoteAgentOptimizationCandidateResponse
+    AgentOptimizationCandidate
   >;
 }
