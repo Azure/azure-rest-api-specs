@@ -39,7 +39,22 @@ using Azure.AI.Projects;
 @@alternateType(OpenAI.Metadata, Record<string>, "java");
 @@clientName(
   OpenAI.RealtimeServerEventError,
+  "RealtimeServerEventErrorPayload",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventRealtimeServerEventError,
   "RealtimeServerEventError",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventErrorError,
+  "RealtimeServerErrorDetails",
+  "java"
+);
+@@clientName(
+  PSTNTelephonyTransferDestination,
+  "PstnTelephonyTransferDestination",
   "java"
 );
 
@@ -183,6 +198,49 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.MCPToolFilter, "McpToolFilter");
 @@clientName(OpenAI.MCPToolRequireApproval, "McpToolRequireApproval");
 @@clientName(MCPToolboxTool, "McpToolboxTool");
+@@clientName(OpenAI.RealtimeMCPApprovalRequest, "RealtimeMcpApprovalRequest");
+@@clientName(OpenAI.RealtimeMCPApprovalResponse, "RealtimeMcpApprovalResponse");
+@@clientName(OpenAI.RealtimeMCPError, "RealtimeMcpError");
+@@clientName(OpenAI.RealtimeMCPListTools, "RealtimeMcpListTools");
+@@clientName(OpenAI.RealtimeMCPProtocolError, "RealtimeMcpProtocolError");
+@@clientName(OpenAI.RealtimeMCPToolCall, "RealtimeMcpToolCall");
+@@clientName(
+  OpenAI.RealtimeMCPToolExecutionError,
+  "RealtimeMcpToolExecutionError"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventMCPListToolsCompleted,
+  "RealtimeServerEventMcpListToolsCompleted"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventMCPListToolsFailed,
+  "RealtimeServerEventMcpListToolsFailed"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventMCPListToolsInProgress,
+  "RealtimeServerEventMcpListToolsInProgress"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseMCPCallArgumentsDelta,
+  "RealtimeServerEventResponseMcpCallArgumentsDelta"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseMCPCallArgumentsDone,
+  "RealtimeServerEventResponseMcpCallArgumentsDone"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseMCPCallCompleted,
+  "RealtimeServerEventResponseMcpCallCompleted"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseMCPCallFailed,
+  "RealtimeServerEventResponseMcpCallFailed"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseMCPCallInProgress,
+  "RealtimeServerEventResponseMcpCallInProgress"
+);
+@@clientName(OpenAI.ToolChoiceMCP, "ToolChoiceMcp");
 
 @@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds");
 
