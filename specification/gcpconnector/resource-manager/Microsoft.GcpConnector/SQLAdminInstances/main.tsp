@@ -15,7 +15,7 @@ using OpenAPI;
 using Azure.ResourceManager;
 using Azure.Portal;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Suppress missing operations endpoint as the same is defined ../operations/main.tsp."
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "The Operations interface is defined once for the resource provider in ../GcpConnector/main.tsp (interface Operations extends Azure.ResourceManager.Operations); per-service projects intentionally do not redeclare it."
 @armProviderNamespace
 @service(#{ title: "Microsoft.GcpConnector" })
 @doc("Microsoft.GcpConnector Resource Provider management API.")
@@ -48,8 +48,6 @@ model SQLAdminInstance is TrackedResource<SQLAdminInstanceProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Suppress casing style as the property name is defined in GCP."
-#suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in GCP"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "GCPConnector will not generate SDK. So, Suppressing this error"
 @doc("Definition of SQLAdminInstanceProperties")
 model SQLAdminInstanceProperties {
@@ -542,7 +540,7 @@ model Settings {
   /**
    * User-provided labels, represented as a dictionary.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Arbitrary user-defined key/value pairs assigned in GCP. Keys are chosen by the customer and cannot be enumerated in the specification."
   userLabels?: Record<string>;
 
   /**

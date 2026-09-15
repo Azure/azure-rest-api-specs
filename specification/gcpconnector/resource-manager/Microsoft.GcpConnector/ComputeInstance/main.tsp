@@ -13,7 +13,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Suppress missing operations endpoint as the same is defined ../operations/main.tsp."
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "The Operations interface is defined once for the resource provider in ../GcpConnector/main.tsp (interface Operations extends Azure.ResourceManager.Operations); per-service projects intentionally do not redeclare it."
 @armProviderNamespace
 @service(#{ title: "Microsoft.GcpConnector" })
 @doc("Microsoft.GcpConnector Resource Provider management API.")
@@ -40,8 +40,6 @@ model ComputeInstance is ExtensionResource<InstanceProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Suppress casing style as the property name is defined in GCP."
-#suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in GCP"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "GCPConnector will not generate SDK. So, Suppressing this error"
 @doc("Definition of ComputeInstance")
 model InstanceProperties {
@@ -306,7 +304,6 @@ model AttachedDisk {
 /**
  * [Input Only] Specifies the parameters for a new disk that will be created alongside the new instance. Use initialization parameters to create boot disks or local SSDs attached to the new instance. This field is persisted and returned for instanceTemplate and not returned in the context of instance. This property is mutually exclusive with the source property; you can only define one or the other, but not both.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
 model AttachedDiskInitializeParams {
   /**
    * The architecture of the attached disk. Valid values are arm64 or x86_64.
@@ -342,6 +339,7 @@ model AttachedDiskInitializeParams {
   /**
    * Labels to apply to this disk. These can be later modified by the disks.setLabels method. This field is only applicable for persistent disks.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Arbitrary user-defined key/value pairs assigned in GCP. Keys are chosen by the customer and cannot be enumerated in the specification."
   labels?: Record<string>;
 
   /**
@@ -377,6 +375,7 @@ model AttachedDiskInitializeParams {
   /**
    * Resource manager tags to be bound to the disk. Tag keys and values have the same definition as resource manager tags. Keys must be in the format `tagKeys/{tag_key_id}`, and values are in the format `tagValues/456`. The field is ignored (both PUT & PATCH) when empty.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Arbitrary user-defined key/value pairs assigned in GCP. Keys are chosen by the customer and cannot be enumerated in the specification."
   resourceManagerTags?: Record<string>;
 
   /**
@@ -679,11 +678,11 @@ model UpcomingMaintenance {
 /**
  * Additional instance params.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
 model InstanceParams {
   /**
    * Resource manager tags to be bound to the instance. Tag keys and values have the same definition as resource manager tags. Keys must be in the format `tagKeys/{tag_key_id}`, and values are in the format `tagValues/456`. The field is ignored (both PUT & PATCH) when empty.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Arbitrary user-defined key/value pairs assigned in GCP. Keys are chosen by the customer and cannot be enumerated in the specification."
   resourceManagerTags?: Record<string>;
 }
 
@@ -826,7 +825,6 @@ model InitialStateConfig {
 /**
  * Represents an Instance resource. An instance is a virtual machine that is hosted on Google Cloud Platform. For more information, read Virtual Machine Instances.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
 model GcpComputeInstanceProperties {
   /**
    * Controls for advanced machine-related behavior features.
@@ -923,6 +921,7 @@ model GcpComputeInstanceProperties {
   /**
    * Labels to apply to this instance. These can be later modified by the setLabels method.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Arbitrary user-defined key/value pairs assigned in GCP. Keys are chosen by the customer and cannot be enumerated in the specification."
   labels?: Record<string>;
 
   /**
@@ -1215,7 +1214,6 @@ model NetworkInterface {
 /**
  * Describes the cause of the error with structured details. Example of an error when contacting the "pubsub.googleapis.com" API when it is not enabled: { "reason": "API_DISABLED" "domain": "googleapis.com" "metadata": { "resource": "projects/123", "service": "pubsub.googleapis.com" } } This response indicates that the pubsub.googleapis.com API is not enabled. Example of an error that is returned when attempting to create a Spanner instance in a region that is out of stock: { "reason": "STOCKOUT" "domain": "spanner.googleapis.com", "metadata": { "availableRegions": "us-central1,us-east2" } }
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
 model ErrorInfo {
   /**
    * The logical grouping to which the "reason" belongs. The error domain is typically the registered service name of the tool or product that generates the error. Example: "pubsub.googleapis.com". If the error is generated by some common infrastructure, the error domain must be a globally unique value that identifies the infrastructure. For Google API infrastructure, the error domain is "googleapis.com".
@@ -1225,6 +1223,7 @@ model ErrorInfo {
   /**
    * Additional structured details about this error. Keys should match /[a-zA-Z0-9-_]/ and be limited to 64 characters in length. When identifying the current value of an exceeded limit, the units should be contained in the key, not the value. For example, rather than {"instanceLimit": "100/request"}, should be returned as, {"instanceLimitPerRequest": "100"}, if the client exceeds the number of instances that can be created in a single (batch) request.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Arbitrary user-defined key/value pairs assigned in GCP. Keys are chosen by the customer and cannot be enumerated in the specification."
   metadatas?: Record<string>;
 
   /**
@@ -1313,7 +1312,6 @@ model NetworkPerformanceConfig {
 /**
  * Set Common Instance Metadata Operation Metadata.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
 model SetCommonInstanceMetadataOperationMetadata {
   /**
    * [Output Only] The client operation id.
@@ -1323,6 +1321,7 @@ model SetCommonInstanceMetadataOperationMetadata {
   /**
    * [Output Only] Status information per location (location name is key). Example key: zones/us-central1-a
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Map keyed by a GCP-assigned identifier with a fully defined value type. The key set is determined by GCP at runtime."
   perLocationOperations?: Record<SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo>;
 }
 

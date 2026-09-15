@@ -17,7 +17,7 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Suppress missing operations endpoint as the same is defined ../operations/main.tsp."
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "The Operations interface is defined once for the resource provider in ../GcpConnector/main.tsp (interface Operations extends Azure.ResourceManager.Operations); per-service projects intentionally do not redeclare it."
 @armProviderNamespace
 @service(#{ title: "Microsoft.GcpConnector" })
 @doc("Microsoft.GcpConnector Resource Provider management API.")
@@ -44,8 +44,6 @@ model ContainerCluster is ExtensionResource<ClusterProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Suppress casing style as the property name is defined in GCP."
-#suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in GCP"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "GCPConnector will not generate SDK. So, Suppressing this error"
 @doc("Definition of ContainerCluster")
 model ClusterProperties {
@@ -58,7 +56,6 @@ model ClusterProperties {
 /**
  * A Google Kubernetes Engine cluster.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
 model GcpContainerClusterProperties {
   /**
    * Configurations for the various addons available to run in the cluster.
@@ -344,6 +341,7 @@ model GcpContainerClusterProperties {
   /**
    * The resource labels for the cluster to use to annotate any related Google Compute Engine resources.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Arbitrary user-defined key/value pairs assigned in GCP. Keys are chosen by the customer and cannot be enumerated in the specification."
   resourceLabels?: Record<string>;
 
   /**
@@ -511,7 +509,7 @@ model NodeConfig {
   /**
    * The map of Kubernetes labels (key/value pairs) to be applied to each node. These will added in addition to any default label(s) that Kubernetes may apply to the node. In case of conflict in label keys, the applied set may differ depending on the Kubernetes version -- it's best to assume the behavior is undefined and conflicts should be avoided. For more information, including usage and the valid values, see: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Arbitrary user-defined key/value pairs assigned in GCP. Keys are chosen by the customer and cannot be enumerated in the specification."
   labels?: Record<string>;
 
   /**
@@ -542,7 +540,7 @@ model NodeConfig {
   /**
    * The metadata key/value pairs assigned to instances in the cluster. Keys must conform to the regexp `[a-zA-Z0-9-_]+` and be less than 128 bytes in length. These are reflected as part of a URL in the metadata server. Additionally, to avoid ambiguity, keys must not conflict with any other metadata keys for the project or be one of the reserved keys: - \"cluster-location\" - \"cluster-name\" - \"cluster-uid\" - \"configure-sh\" - \"containerd-configure-sh\" - \"enable-os-login\" - \"gci-ensure-gke-docker\" - \"gci-metrics-enabled\" - \"gci-update-strategy\" - \"instance-template\" - \"kube-env\" - \"startup-script\" - \"user-data\" - \"disable-address-manager\" - \"windows-startup-script-ps1\" - \"common-psm1\" - \"k8s-node-setup-psm1\" - \"install-ssh-psm1\" - \"user-profile-psm1\" Values are free-form strings, and only have meaning as interpreted by the image running in the instance. The only restriction placed on them is that each value's size must be less than or equal to 32 KB. The total size of all keys and values must be less than 512 KB.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Arbitrary user-defined key/value pairs assigned in GCP. Keys are chosen by the customer and cannot be enumerated in the specification."
   metadata?: Record<string>;
 
   /**
@@ -573,7 +571,7 @@ model NodeConfig {
   /**
    * The resource labels for the node pool to use to annotate any related Google Compute Engine resources.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Arbitrary user-defined key/value pairs assigned in GCP. Keys are chosen by the customer and cannot be enumerated in the specification."
   resourceLabels?: Record<string>;
 
   /**
@@ -1804,7 +1802,7 @@ model MaintenanceWindow {
   /**
    * Exceptions to maintenance window
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Map keyed by a GCP-assigned identifier with a fully defined value type. The key set is determined by GCP at runtime."
   maintenanceExclusions?: Record<MaintenanceExclusion>;
 }
 
@@ -2049,7 +2047,7 @@ model AutoprovisioningNodePoolDefaults {
   /**
    * Resource labels for NAP created node pools
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Arbitrary user-defined key/value pairs assigned in GCP. Keys are chosen by the customer and cannot be enumerated in the specification."
   resourceLabels?: Record<string>;
 
   /**
@@ -2942,7 +2940,7 @@ model OperationError {
   /**
    * Additional details about the error
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form diagnostic detail returned verbatim by the Google Cloud API; the shape is defined by GCP and varies by error type."
   details?: Record<string>;
 }
 
@@ -3110,7 +3108,7 @@ model LinuxNodeConfig {
   /**
    * The Linux kernel parameters to be applied to the nodes and all pods running on the nodes
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Arbitrary user-defined key/value pairs assigned in GCP. Keys are chosen by the customer and cannot be enumerated in the specification."
   sysctls?: Record<string>;
 
   /**
@@ -3346,7 +3344,7 @@ model ResourceManagerTags {
   /**
    * TagKeyId is the namespaced and unique ID of the tag key
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Arbitrary user-defined key/value pairs assigned in GCP. Keys are chosen by the customer and cannot be enumerated in the specification."
   tags?: Record<string>;
 }
 

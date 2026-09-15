@@ -3,7 +3,6 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.GcpConnector;
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in GCP"
 alias GcpCommonProperties = {
   @doc("Public Cloud Connectors Resource ID")
   publicCloudConnectorsResourceId?: string;
@@ -27,6 +26,7 @@ alias GcpCommonProperties = {
   gcpRegion?: string;
 
   @doc("GCP Tags")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Arbitrary user-defined key/value pairs assigned in GCP. Keys are chosen by the customer and cannot be enumerated in the specification."
   gcpTags?: Record<string>;
 
   @visibility(Lifecycle.Read)
