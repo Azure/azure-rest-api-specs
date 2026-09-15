@@ -16,8 +16,7 @@ Currently, we only support `OpenAPI Specification 2.0` or `Swagger V2.0`.
 * **[`Resource Provider Guidelines`](https://aka.ms/rpguidelines)**
 * **[`Directory structure`](https://github.com/Azure/azure-rest-api-specs/blob/main/README.md#directory-structure)**
 * **[`Structure of a Swagger specification`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/creating-swagger.md)**
-* **[`Sample Swagger specification`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/Microsoft.YourServiceName/stable/YYYY-MM-DD/YourServiceName.json)**
-* **[`Sample Readme.md`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/samplereadme.md)**
+* **[`Getting started with TypeSpec specifications`](./Getting-started-with-TypeSpec-specifications.md)**
 * **[`Authoring good Swagger descriptions`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-authoring-descriptions.md)**
 * **[`Validation tools`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/SwaggerValidationTools.md)**
    * [`Validation checks through automated tools`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md)
