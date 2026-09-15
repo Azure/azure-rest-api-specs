@@ -106,7 +106,7 @@ model WorkloadSpace is TrackedResource<WorkloadSpaceProperties> {
   >;
 }
 
-/** Service-selected configuration for a managed runtime. */
+/** Customer-selected configuration for a service-managed runtime. */
 model ManagedRuntimeProfile {
   /** The product offering selected for a managed Kubernetes runtime. */
   offering?: string;
@@ -121,7 +121,11 @@ model ExecutionIdentity {
   provisioningMode: ExecutionIdentityProvisioningMode;
 
   /** The customer-provided user-assigned identity, when provisioningMode is Referenced. */
-  userAssignedIdentityResourceId?: armResourceIdentifier<[{ type: "Microsoft.ManagedIdentity/userAssignedIdentities" }]>;
+  userAssignedIdentityResourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 
   /** The execution boundary across which the identity is shared. */
   scope: ExecutionIdentityScope;
@@ -136,7 +140,11 @@ model RuntimeIdentityProfile {
 /** Network configuration for a managed runtime. */
 model RuntimeNetworkProfile {
   /** The customer-provided subnet used by the runtime. */
-  subnetResourceId?: armResourceIdentifier<[{ type: "Microsoft.Network/virtualNetworks/subnets" }]>;
+  subnetResourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
 
   /** Indicates who manages runtime egress. */
   egressMode?: EgressMode;
@@ -169,9 +177,6 @@ model RuntimeBindingProperties {
 
 /** Properties of a runtime provisioned and owned by Workload Manager. */
 model ManagedRuntimeBindingProperties extends RuntimeBindingProperties {
-  /** The runtime technology represented by the binding. */
-  kind: RuntimeBindingKind;
-
   /** Indicates that Workload Manager owns the runtime. */
   provisioningMode: "Managed";
 
@@ -187,9 +192,6 @@ model ManagedRuntimeBindingProperties extends RuntimeBindingProperties {
 
 /** Properties of a customer-owned runtime attached to a workload space. */
 model ReferencedRuntimeBindingProperties extends RuntimeBindingProperties {
-  /** The runtime technology represented by the binding. */
-  kind: RuntimeBindingKind;
-
   /** Indicates that the runtime is customer-owned. */
   provisioningMode: "Referenced";
 
@@ -213,7 +215,11 @@ model RuntimeBinding is TrackedResource<RuntimeBindingProperties> {
 model RuntimeLinkIntegrationProfile {
   /** The user-assigned identity used by the provider integration. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  managedIdentityResourceId?: armResourceIdentifier<[{ type: "Microsoft.ManagedIdentity/userAssignedIdentities" }]>;
+  managedIdentityResourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 /** Capacity policy for the runtime composition. */
@@ -231,11 +237,19 @@ model CapacityProfile {
 model RuntimeLinkProperties {
   /** The sibling runtime binding that provides orchestration. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  orchestratorBindingResourceId: armResourceIdentifier<[{ type: "Microsoft.Compute/workloadSpaces/runtimeBindings" }]>;
+  orchestratorBindingResourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/workloadSpaces/runtimeBindings";
+    }
+  ]>;
 
   /** The optional sibling runtime binding that provides execution. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  executionBindingResourceId?: armResourceIdentifier<[{ type: "Microsoft.Compute/workloadSpaces/runtimeBindings" }]>;
+  executionBindingResourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/workloadSpaces/runtimeBindings";
+    }
+  ]>;
 
   /** The provider integration identity configuration. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -294,12 +308,16 @@ model Capability is TrackedResource<CapabilityProperties> {
 }
 
 /** Mutable properties of a workload space. */
-model WorkloadSpaceUpdate
-  is Azure.ResourceManager.Foundations.ResourceUpdateModel<WorkloadSpace, WorkloadSpaceProperties>;
+model WorkloadSpaceUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel<
+  WorkloadSpace,
+  WorkloadSpaceProperties
+>;
 
 /** Mutable properties of a runtime binding. */
-model RuntimeBindingUpdate
-  is Azure.ResourceManager.Foundations.ResourceUpdateModel<RuntimeBinding, RuntimeBindingMutableProperties>;
+model RuntimeBindingUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel<
+  RuntimeBinding,
+  RuntimeBindingMutableProperties
+>;
 
 /** Binding-level configuration that may be updated without changing ownership. */
 model RuntimeBindingMutableProperties {
@@ -311,8 +329,10 @@ model RuntimeBindingMutableProperties {
 }
 
 /** Mutable properties of a runtime link. */
-model RuntimeLinkUpdate
-  is Azure.ResourceManager.Foundations.ResourceUpdateModel<RuntimeLink, RuntimeLinkMutableProperties>;
+model RuntimeLinkUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel<
+  RuntimeLink,
+  RuntimeLinkMutableProperties
+>;
 
 /** Runtime link configuration that may be updated in place. */
 model RuntimeLinkMutableProperties {
@@ -321,8 +341,10 @@ model RuntimeLinkMutableProperties {
 }
 
 /** Mutable properties of a capability. */
-model CapabilityUpdate
-  is Azure.ResourceManager.Foundations.ResourceUpdateModel<Capability, CapabilityMutableProperties>;
+model CapabilityUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel<
+  Capability,
+  CapabilityMutableProperties
+>;
 
 /** Capability configuration that may be updated in place. */
 model CapabilityMutableProperties {

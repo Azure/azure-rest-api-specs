@@ -1643,10 +1643,6 @@
       "type": "object",
       "description": "Properties of a runtime provisioned and owned by Workload Manager.",
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/RuntimeBindingKind",
-          "description": "The runtime technology represented by the binding."
-        },
         "managedProfile": {
           "$ref": "#/definitions/ManagedRuntimeProfile",
           "description": "The limited service-managed runtime configuration."
@@ -1661,7 +1657,6 @@
         }
       },
       "required": [
-        "kind",
         "managedProfile"
       ],
       "allOf": [
@@ -1673,7 +1668,7 @@
     },
     "ManagedRuntimeProfile": {
       "type": "object",
-      "description": "Service-selected configuration for a managed runtime.",
+      "description": "Customer-selected configuration for a service-managed runtime.",
       "properties": {
         "offering": {
           "type": "string",
@@ -1743,10 +1738,6 @@
       "type": "object",
       "description": "Properties of a customer-owned runtime attached to a workload space.",
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/RuntimeBindingKind",
-          "description": "The runtime technology represented by the binding."
-        },
         "resourceId": {
           "type": "string",
           "format": "arm-id",
@@ -1758,7 +1749,6 @@
         }
       },
       "required": [
-        "kind",
         "resourceId"
       ],
       "allOf": [
