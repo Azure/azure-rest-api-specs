@@ -14,7 +14,7 @@ on:
         type: string
       sdk_language:
         description: "SDK language"
-        required: false
+        required: true
         type: string
 
 permissions:
@@ -67,15 +67,14 @@ jobs:
               const command = context.payload.comment.body.split(/\r?\n/, 1)[0].trim();
               const parts = command.split(/\s+/);
               if (
-                parts.length < 2 ||
-                parts.length > 3 ||
+                parts.length !== 3 ||
                 parts[0] !== "/azsdk" ||
                 parts[1] !== "sdk-breaking-mitigate"
               ) {
-                throw new Error("Expected comment: /azsdk sdk-breaking-mitigate [sdk-language]");
+                throw new Error("Expected comment: /azsdk sdk-breaking-mitigate <sdk-language>");
               }
               pullNumber = context.payload.issue.number;
-              sdkLanguage = parts[2] ?? "";
+              sdkLanguage = parts[2];
               triggerCommentId = String(context.payload.comment.id);
               core.setOutput("should-run", "true");
             } else {
@@ -113,12 +112,84 @@ jobs:
             core.setOutput("sdk-language", sdkLanguage);
             core.setOutput("trigger-comment-id", triggerCommentId);
 
+      - name: Find analysis results from pull request comment
+        if: github.event_name != 'workflow_run' && steps.resolve-trigger.outputs.should-run == 'true'
+        id: find-analysis-results
+        uses: actions/github-script@v9
+        env:
+          PR_NUMBER: ${{ steps.resolve-trigger.outputs.pull-number }}
+          SDK_LANGUAGE: ${{ steps.resolve-trigger.outputs.sdk-language }}
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const pullNumber = Number(process.env.PR_NUMBER);
+            const sdkLanguage = process.env.SDK_LANGUAGE.trim();
+            if (!sdkLanguage) {
+              throw new Error("An SDK language is required to find matching analysis results.");
+            }
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              ...context.repo,
+              issue_number: pullNumber,
+              per_page: 100,
+            });
+            const expectedCommand = `/azsdk sdk-breaking-analysis ${sdkLanguage}`;
+            const analysisComment = comments
+              .filter(({ body }) => body?.split(/\r?\n/, 1)[0].trim() === expectedCommand)
+              .sort((left, right) => right.id - left.id)[0];
+            if (!analysisComment) {
+              throw new Error(`No pull request comment starts with: ${expectedCommand}`);
+            }
+
+            const resultLinks = [
+              ...analysisComment.body.matchAll(
+                /\[SDK breaking change details \(([^)]+\/breaking-changes\.json)\)\]\(([^)]+)\)/g,
+              ),
+            ];
+            if (!resultLinks.length) {
+              throw new Error(`The matching analysis comment does not contain breaking-change result links.`);
+            }
+            const runIds = new Set(
+              resultLinks.map(([, , url]) => url.match(/\/actions\/runs\/(\d+)/)?.[1]),
+            );
+            if (runIds.has(undefined) || runIds.size !== 1) {
+              throw new Error("Could not resolve one analysis workflow run from the result links.");
+            }
+            const runId = Number([...runIds][0]);
+            const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+              ...context.repo,
+              run_id: runId,
+              per_page: 100,
+            });
+            const artifact = artifacts.find(
+              ({ name, expired }) => name === "sdk-breaking-change-results" && !expired,
+            );
+            if (!artifact) {
+              throw new Error(`Analysis artifact for workflow run ${runId} was not found or has expired.`);
+            }
+
+            const download = await github.rest.actions.downloadArtifact({
+              ...context.repo,
+              artifact_id: artifact.id,
+              archive_format: "zip",
+            });
+            const fs = await import("node:fs/promises");
+            const path = await import("node:path");
+            const artifactPath = path.join(process.env.RUNNER_TEMP, "analysis-results.zip");
+            await fs.writeFile(artifactPath, Buffer.from(download.data));
+            core.setOutput("artifact-path", artifactPath);
+            core.setOutput(
+              "result-paths",
+              JSON.stringify(resultLinks.map(([, resultPath]) => resultPath)),
+            );
+
       - name: Read analysis trigger metadata
-        if: github.event_name == 'workflow_run' && steps.resolve-trigger.outputs.should-run == 'true'
+        if: steps.resolve-trigger.outputs.should-run == 'true'
         id: read-trigger
         shell: bash
         env:
-          ARTIFACT_PATH: ${{ steps.resolve-trigger.outputs.artifact-path }}
+          ARTIFACT_PATH: ${{ steps.resolve-trigger.outputs.artifact-path || steps.find-analysis-results.outputs.artifact-path }}
+          RESULT_PATHS: ${{ steps.find-analysis-results.outputs.result-paths }}
         run: |
           set -euo pipefail
           results_dir="$RUNNER_TEMP/analysis-results"
@@ -128,6 +199,12 @@ jobs:
           echo "pull-number=$(jq -r '.pullNumber' "$trigger_path")" >> "$GITHUB_OUTPUT"
           echo "sdk-language=$(jq -r '.sdkLanguage' "$trigger_path")" >> "$GITHUB_OUTPUT"
           echo "trigger-comment-id=$(jq -r '.triggerCommentId' "$trigger_path")" >> "$GITHUB_OUTPUT"
+          if [[ -n "$RESULT_PATHS" ]]; then
+            jq --argjson resultPaths "$RESULT_PATHS" \
+              '[.[] | select((.resultsPath + "/breaking-changes.json") as $path | $resultPaths | index($path))]' \
+              "$results_dir/projects.json" > "$results_dir/projects.filtered.json"
+            mv "$results_dir/projects.filtered.json" "$results_dir/projects.json"
+          fi
 
       - name: Resolve specification PR source
         if: steps.resolve-trigger.outputs.should-run == 'true'
@@ -159,7 +236,7 @@ jobs:
           persist-credentials: false
 
       - name: Mitigate SDK breaking changes
-        if: github.event_name == 'workflow_run' && steps.resolve-trigger.outputs.should-run == 'true'
+        if: steps.resolve-trigger.outputs.should-run == 'true'
         shell: bash
         env:
           ANALYSIS_RESULTS_PATH: ${{ runner.temp }}/analysis-results
@@ -200,7 +277,7 @@ jobs:
           done < <(jq -c '.[]' "$manifest")
 
       - name: Commit mitigation changes
-        if: github.event_name == 'workflow_run' && steps.resolve-trigger.outputs.should-run == 'true'
+        if: steps.resolve-trigger.outputs.should-run == 'true'
         id: commit-changes
         shell: bash
         working-directory: repositories/azure-rest-api-specs
@@ -236,7 +313,7 @@ jobs:
           SOURCE_REPOSITORY: ${{ steps.resolve-pr-source.outputs.repository }}
           SOURCE_BRANCH: ${{ steps.resolve-pr-source.outputs.branch }}
           MITIGATION_BRANCH: ${{ steps.commit-changes.outputs.branch }}
-          ISSUED_PR_NUMBER: ${{ steps.read-trigger.outputs.pull-number }}
+          ISSUED_PR_NUMBER: ${{ steps.resolve-trigger.outputs.pull-number || steps.read-trigger.outputs.pull-number }}
         with:
           github-token: ${{ github.token }}
           script: |
@@ -253,13 +330,13 @@ jobs:
             core.setOutput("pull-request-url", pull.html_url);
 
       - name: Surface mitigation result on pull request
-        if: github.event_name == 'workflow_run' && steps.resolve-trigger.outputs.should-run == 'true'
+        if: steps.resolve-trigger.outputs.should-run == 'true'
         uses: actions/github-script@v9
         env:
           RESULTS_PATH: ${{ runner.temp }}/analysis-results
           MANIFEST_PATH: ${{ runner.temp }}/analysis-results/projects.json
-          PR_NUMBER: ${{ steps.read-trigger.outputs.pull-number }}
-          TRIGGER_COMMENT_ID: ${{ steps.read-trigger.outputs.trigger-comment-id }}
+          PR_NUMBER: ${{ steps.resolve-trigger.outputs.pull-number || steps.read-trigger.outputs.pull-number }}
+          TRIGGER_COMMENT_ID: ${{ steps.resolve-trigger.outputs.trigger-comment-id || steps.read-trigger.outputs.trigger-comment-id }}
           MITIGATION_PR_URL: ${{ steps.create-mitigation-pull-request.outputs.pull-request-url }}
         with:
           github-token: ${{ github.token }}
