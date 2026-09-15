@@ -346,6 +346,7 @@ model LocationBasedLaunchBulkInstancesOperation
 model LaunchBulkInstancesOperationListResult {
   @pageItems
   @doc("The list of LaunchBulkInstancesOperation resources.")
+  // @OpenAPI.extension("x-ms-identifiers", #[])
   value: LocationBasedLaunchBulkInstancesOperation[];
 
   @doc("The URL to get the next set of results.")

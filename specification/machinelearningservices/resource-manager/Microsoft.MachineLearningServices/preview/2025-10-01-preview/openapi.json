@@ -21848,7 +21848,10 @@
           "items": {
             "$ref": "#/definitions/SystemService"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "publicIpAddress"
+          ]
         },
         "agentCount": {
           "type": "integer",
@@ -22374,7 +22377,10 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "/error/code"
+          ]
         },
         "currentNodeCount": {
           "type": "integer",
@@ -25150,7 +25156,10 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "/error/code"
+          ]
         },
         "isAttachedCompute": {
           "type": "boolean",
@@ -25468,7 +25477,10 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/CustomService"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "osImageMetadata": {
           "$ref": "#/definitions/ImageMetadata",
@@ -25599,7 +25611,10 @@
           "items": {
             "$ref": "#/definitions/ComputeInstanceContainer"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "dataDisks": {
           "type": "array",
@@ -25608,7 +25623,8 @@
           "items": {
             "$ref": "#/definitions/ComputeInstanceDataDisk"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "dataMounts": {
           "type": "array",
@@ -25617,7 +25633,8 @@
           "items": {
             "$ref": "#/definitions/ComputeInstanceDataMount"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "versions": {
           "$ref": "#/definitions/ComputeInstanceVersion",
@@ -31065,7 +31082,8 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/IndexColumn"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "$ref": "#/definitions/AssetProvisioningState",
@@ -32172,7 +32190,8 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ImageModelDistributionSettingsClassification"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "limitSettings": {
           "$ref": "#/definitions/ImageLimitSettings",
@@ -32263,7 +32282,8 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ImageModelDistributionSettingsClassification"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "limitSettings": {
           "$ref": "#/definitions/ImageLimitSettings",
@@ -35383,7 +35403,8 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ManagedResourceGroupAssignedIdentities"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -36018,6 +36039,7 @@
           "items": {
             "type": "string"
           },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "create"
@@ -36270,6 +36292,7 @@
           "items": {
             "$ref": "#/definitions/MonitoringNotificationType"
           },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "create"
@@ -37683,7 +37706,10 @@
           "x-nullable": true,
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
+          },
+          "x-ms-identifiers": [
+            "/error/code"
+          ]
         }
       }
     },
@@ -39015,7 +39041,10 @@
       "description": "The list of Cognitive Services RaiBlocklist Items for batch add.",
       "items": {
         "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
-      }
+      },
+      "x-ms-identifiers": [
+        "name"
+      ]
     },
     "RaiBlocklistProperties": {
       "type": "object",
@@ -39660,7 +39689,8 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/RegistryRegionArmDetails"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -39674,7 +39704,8 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/AcrDetails"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "location": {
           "type": "string",
@@ -39687,7 +39718,8 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/StorageAccountDetails"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -42485,7 +42517,8 @@
             },
             "type": "array",
             "x-nullable": true
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "allOf": [

@@ -5,7 +5,6 @@ import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
-using Azure.ResourceManager;
 
 namespace DeploymentScriptsClient;
 
@@ -323,7 +322,7 @@ model ContainerConfiguration {
    * The subnet resource IDs for a container group.
    */
   @added(Versions.v2023_08_01)
-  @identifiers(#["id"])
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   subnetIds?: ContainerGroupSubnetId[];
 }
 
@@ -433,7 +432,8 @@ model ScriptConfigurationBase {
   /**
    * The environment variables to pass over to the script.
    */
-  @identifiers(#["name"])
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy - x-ms-identifiers required for array item identification"
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   environmentVariables?: EnvironmentVariable[];
 
   /**

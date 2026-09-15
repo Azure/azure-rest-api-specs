@@ -1302,6 +1302,7 @@ model BatchAccountProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatibility"
   @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   dedicatedCoreQuotaPerVMFamily?: VirtualMachineFamilyCoreQuota[] | null;
 
   /**
