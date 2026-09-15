@@ -626,6 +626,14 @@ model AzureFileStorageClientParameters {
 // @@access(CopyStatus, Access.public, "java");
 // @@usage(CopyStatus, Usage.output, "java");
 
+// java: richer client doc for the token-intent enum than the terse spec description (SDK-only; does not change OpenAPI).
+@@clientDoc(
+  ShareTokenIntent,
+  "The request intent specifies requests that are intended for backup/admin type operations, meaning that all file/directory ACLs are bypassed and full permissions are granted. User must also have required RBAC permission.",
+  DocumentationMode.replace,
+  "java"
+);
+
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Emitter option for response header model synthesis"
 namespace JavaResponseHeaderModels {
   @@clientOption(
