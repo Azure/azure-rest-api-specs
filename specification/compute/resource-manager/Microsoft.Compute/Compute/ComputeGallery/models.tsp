@@ -30,12 +30,6 @@ union GalleryProvisioningState {
   Deleting: "Deleting",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Migrating: "Migrating",
-
-  /**
-   * The operation was canceled.
-   */
-  @added(Versions.v2026_03_03)
-  Canceled: "Canceled",
 }
 
 /**
