@@ -1,6 +1,7 @@
 using Http;
 using Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 
 namespace ContainerAppsSandbox;
 
@@ -13,17 +14,26 @@ alias ContentPackageDeleteOperations = ResourceOperations<
   DeleteContentPackageErrors
 >;
 
-/** OK. */
-model ListContentPackageResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: ContentPackageListResponse;
-}
-
 /** Errors returned by listContentPackages. */
 alias ListContentPackageErrors = ErrorResult<401> | ErrorResult<500>;
+
+/** Query parameters for listing content packages. */
+alias ListContentPackageTraits = QueryParametersTrait<
+  {
+    /** Continuation token for paginated results. */
+    @query @continuationToken continuationToken?: string;
+
+    /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
+    @query labels?: string;
+  },
+  TraitContext.List
+>;
+
+/** Standard resource operations for listing content packages. */
+alias ContentPackageListOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  ListContentPackageErrors
+>;
 
 /** Errors returned by getContentPackage. */
 alias GetContentPackageErrors =
@@ -68,22 +78,9 @@ interface ContentPackagesOperations {
 
   /** Lists content packages for the sandbox group. */
   @summary("Lists content packages for the sandbox group.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/contentpackages")
-  @list
-  @get
-  listContentPackages is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** Continuation token for paginated results. */
-      @query continuationToken?: string;
-
-      /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
-      @query labels?: string;
-    },
-    ListContentPackageResult,
-    DataPlaneStandardTraits,
-    ListContentPackageErrors
+  listContentPackages is ContentPackageListOperations.ResourceList<
+    ContentPackage,
+    ListContentPackageTraits
   >;
 
   /** Gets a specific content package by ID. */

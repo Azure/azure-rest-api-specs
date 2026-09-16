@@ -97,27 +97,32 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "includeSandboxIds",
             "in": "query",
-            "description": "includeSandboxIds parameter.",
+            "description": "Whether to include sandbox identifiers using each connection.",
             "required": false,
             "type": "boolean"
-          },
-          {
-            "name": "continuationToken",
-            "in": "query",
-            "description": "Continuation token for paginated results.",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "labels",
@@ -125,13 +130,20 @@
             "description": "Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., \"env=prod,team=backend\"). Returns only resources that have all specified labels with matching values.",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Continuation token for paginated results.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConnectionList"
+              "$ref": "#/definitions/PagedConnection"
             }
           },
           "401": {
@@ -757,13 +769,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "continuationToken",
@@ -782,9 +806,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ContentPackageListResponse"
+              "$ref": "#/definitions/PagedContentPackage"
             }
           },
           "401": {
@@ -1064,13 +1088,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "continuationToken",
@@ -1082,9 +1118,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CredentialList"
+              "$ref": "#/definitions/PagedSandboxGroupCredential"
             }
           }
         },
@@ -1290,13 +1326,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "continuationToken",
@@ -1315,9 +1363,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DiskImageList"
+              "$ref": "#/definitions/PagedDiskImage"
             }
           },
           "401": {
@@ -1579,13 +1627,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "continuationToken",
@@ -1597,9 +1657,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PublicDiskImageList"
+              "$ref": "#/definitions/PagedPublicDiskImage"
             }
           },
           "401": {
@@ -1717,13 +1777,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "continuationToken",
@@ -1735,9 +1807,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/NamedEgressPolicyListResponse"
+              "$ref": "#/definitions/PagedNamedEgressPolicy"
             }
           },
           "401": {
@@ -2004,13 +2076,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "continuationToken",
@@ -2029,9 +2113,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful Sandbox list response.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SandboxList"
+              "$ref": "#/definitions/PagedSandbox"
             }
           },
           "400": {
@@ -5322,13 +5406,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "continuationToken",
@@ -5347,9 +5443,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SnapshotList"
+              "$ref": "#/definitions/PagedSnapshot"
             }
           },
           "401": {
@@ -5583,13 +5679,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "continuationToken",
@@ -5608,9 +5716,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/VolumeList"
+              "$ref": "#/definitions/PagedVolume"
             }
           },
           "401": {
@@ -6916,26 +7024,6 @@
       "type": "string",
       "description": "Strongly-typed connection identifier. ConnectionId is intentionally string-based rather than Guid-based because existing Cosmos DB documents contain connection IDs in mixed formats — some with hyphens (Guid \"D\" format: a1b2c3d4-e5f6-...) and some without (Guid \"N\" format: a1b2c3d4e5f6...). Converting to a Guid-backed typed ID would normalize all lookups to the \"D\" format via Guid.ToString(), breaking reads/deletes of documents stored with the \"N\" format since Cosmos DB performs exact string matching on document IDs."
     },
-    "ConnectionList": {
-      "type": "object",
-      "description": "A page of connections.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Connections returned by the request.",
-          "items": {
-            "$ref": "#/definitions/Connection"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next page of connections, if one is available."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "ConnectionState": {
       "type": "string",
       "description": "Represents the state of a connection.",
@@ -7522,26 +7610,6 @@
       "type": "string",
       "description": "ContentPackageId wire value."
     },
-    "ContentPackageListResponse": {
-      "type": "object",
-      "description": "Content-package list response body.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Content packages returned by the request.",
-          "items": {
-            "$ref": "#/definitions/ContentPackage"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next page of content packages, if one is available."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "CountResponse": {
       "type": "object",
       "description": "Response containing the total number of resources in a scope.",
@@ -8023,26 +8091,6 @@
         }
       }
     },
-    "CredentialList": {
-      "type": "object",
-      "description": "A page of credentials.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Credentials returned by the request.",
-          "items": {
-            "$ref": "#/definitions/SandboxGroupCredential"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next page of credentials, if one is available."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "DataDiskPodVolume": {
       "type": "object",
       "description": "Data disk volume source backed by a persistent ext4 block device in cluster storage.",
@@ -8244,26 +8292,6 @@
       },
       "required": [
         "base"
-      ]
-    },
-    "DiskImageList": {
-      "type": "object",
-      "description": "A page of disk images.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Disk images returned by the request.",
-          "items": {
-            "$ref": "#/definitions/DiskImage"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next page of disk images, if one is available."
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "DiskImageStatus": {
@@ -9726,110 +9754,6 @@
         }
       }
     },
-    "ListConnectionResult": {
-      "type": "object",
-      "description": "OK.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ConnectionList",
-          "description": "Response body."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "ListContentPackageResult": {
-      "type": "object",
-      "description": "OK.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ContentPackageListResponse",
-          "description": "Response body."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "ListCredentialResult": {
-      "type": "object",
-      "description": "OK.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/CredentialList",
-          "description": "Response body."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "ListDiskImageResult": {
-      "type": "object",
-      "description": "OK.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/DiskImageList",
-          "description": "Response body."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "ListEgressPolicyResult": {
-      "type": "object",
-      "description": "OK.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NamedEgressPolicyListResponse",
-          "description": "Response body."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "ListPublicDiskImageResult": {
-      "type": "object",
-      "description": "OK.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/PublicDiskImageList",
-          "description": "Response body."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "ListSnapshotResult": {
-      "type": "object",
-      "description": "OK.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/SnapshotList",
-          "description": "Response body."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "ListVolumeResult": {
-      "type": "object",
-      "description": "OK.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/VolumeList",
-          "description": "Response body."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "LocalPodVolume": {
       "type": "object",
       "description": "Local volume source backed by rootfs space.",
@@ -10178,26 +10102,6 @@
         "defaultAction"
       ]
     },
-    "NamedEgressPolicyListResponse": {
-      "type": "object",
-      "description": "Named egress policy list response body.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Egress policies returned by the request.",
-          "items": {
-            "$ref": "#/definitions/NamedEgressPolicy"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next page of egress policies, if one is available."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "NetworkEgressDecisions": {
       "type": "object",
       "description": "Network egress decisions (allowed and denied).",
@@ -10299,6 +10203,195 @@
         "endpoint",
         "protocol",
         "data"
+      ]
+    },
+    "PagedConnection": {
+      "type": "object",
+      "description": "Paged collection of Connection items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Connection items on this page",
+          "items": {
+            "$ref": "#/definitions/Connection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedContentPackage": {
+      "type": "object",
+      "description": "Paged collection of ContentPackage items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ContentPackage items on this page",
+          "items": {
+            "$ref": "#/definitions/ContentPackage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDiskImage": {
+      "type": "object",
+      "description": "Paged collection of DiskImage items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DiskImage items on this page",
+          "items": {
+            "$ref": "#/definitions/DiskImage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedNamedEgressPolicy": {
+      "type": "object",
+      "description": "Paged collection of NamedEgressPolicy items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NamedEgressPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/NamedEgressPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedPublicDiskImage": {
+      "type": "object",
+      "description": "Paged collection of PublicDiskImage items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PublicDiskImage items on this page",
+          "items": {
+            "$ref": "#/definitions/PublicDiskImage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedSandbox": {
+      "type": "object",
+      "description": "Paged collection of Sandbox items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Sandbox items on this page",
+          "items": {
+            "$ref": "#/definitions/Sandbox"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedSandboxGroupCredential": {
+      "type": "object",
+      "description": "Paged collection of SandboxGroupCredential items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SandboxGroupCredential items on this page",
+          "items": {
+            "$ref": "#/definitions/SandboxGroupCredential"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedSnapshot": {
+      "type": "object",
+      "description": "Paged collection of Snapshot items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Snapshot items on this page",
+          "items": {
+            "$ref": "#/definitions/Snapshot"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedVolume": {
+      "type": "object",
+      "description": "Paged collection of Volume items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Volume items on this page",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "PatchSandboxPortResult": {
@@ -11082,26 +11175,6 @@
       "required": [
         "name",
         "status"
-      ]
-    },
-    "PublicDiskImageList": {
-      "type": "object",
-      "description": "A page of public disk images.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Public disk images returned by the request.",
-          "items": {
-            "$ref": "#/definitions/PublicDiskImage"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next page of public disk images, if one is available."
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "PutConnectionPolicyRulesResult": {
@@ -11987,39 +12060,6 @@
         "autoDeletePolicy"
       ]
     },
-    "SandboxList": {
-      "type": "object",
-      "description": "A page of sandboxes.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Sandboxes returned by the request.",
-          "items": {
-            "$ref": "#/definitions/Sandbox"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next page of sandboxes, if one is available."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "SandboxListResult": {
-      "type": "object",
-      "description": "Successful Sandbox list response.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/SandboxList",
-          "description": "A page of sandboxes."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "SandboxPort": {
       "type": "object",
       "description": "Represents a port exposed on a sandbox.",
@@ -12607,26 +12647,6 @@
     "SnapshotId": {
       "type": "string",
       "description": "SnapshotId wire model."
-    },
-    "SnapshotList": {
-      "type": "object",
-      "description": "A page of snapshots.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Snapshots returned by the request.",
-          "items": {
-            "$ref": "#/definitions/Snapshot"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next page of snapshots, if one is available."
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "SnapshotPodContainer": {
       "type": "object",
@@ -13498,26 +13518,6 @@
     "VolumeItemName": {
       "type": "string",
       "description": "VolumeItemName wire model."
-    },
-    "VolumeList": {
-      "type": "object",
-      "description": "A page of volumes.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Volumes returned by the request.",
-          "items": {
-            "$ref": "#/definitions/Volume"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next page of volumes, if one is available."
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "VolumeListDirectoryResponse": {
       "type": "object",

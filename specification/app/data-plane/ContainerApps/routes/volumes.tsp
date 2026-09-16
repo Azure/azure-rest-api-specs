@@ -1,6 +1,7 @@
 using Http;
 using Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 
 namespace ContainerAppsSandbox;
 
@@ -31,28 +32,26 @@ alias DeleteVolumeFileErrors =
   | ErrorResult<409>
   | ErrorResult<500>;
 
-/** A page of volumes. */
-model VolumeList {
-  /** Volumes returned by the request. */
-  @pageItems
-  value: Volume[];
-
-  /** Link to the next page of volumes, if one is available. */
-  @nextLink
-  nextLink?: string;
-}
-
-/** OK. */
-model ListVolumeResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: VolumeList;
-}
-
 /** Errors returned by listVolumes. */
 alias ListVolumeErrors = ErrorResult<401> | ErrorResult<500>;
+
+/** Query parameters for listing volumes. */
+alias ListVolumeTraits = QueryParametersTrait<
+  {
+    /** Continuation token for paginated results. */
+    @query @continuationToken continuationToken?: string;
+
+    /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
+    @query labels?: string;
+  },
+  TraitContext.List
+>;
+
+/** Standard resource operations for listing volumes. */
+alias VolumeListOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  ListVolumeErrors
+>;
 
 /** OK. */
 model GetVolumesCountResult {
@@ -223,23 +222,7 @@ interface VolumesOperations {
 
   /** Lists volumes with pagination support. */
   @summary("Lists volumes with pagination support.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes")
-  @list
-  @get
-  listVolumes is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** Continuation token for paginated results. */
-      @query continuationToken?: string;
-
-      /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
-      @query labels?: string;
-    },
-    ListVolumeResult,
-    DataPlaneStandardTraits,
-    ListVolumeErrors
-  >;
+  listVolumes is VolumeListOperations.ResourceList<Volume, ListVolumeTraits>;
 
   /** Gets the count of volumes, grouped by volume type. */
   @summary("Gets the count of volumes, grouped by volume type.")

@@ -12,17 +12,6 @@ alias DeleteConnectionErrors =
   | ErrorResult<409>
   | ErrorResult<500>;
 
-/** A page of connections. */
-model ConnectionList {
-  /** Connections returned by the request. */
-  @pageItems
-  value: Connection[];
-
-  /** Link to the next page of connections, if one is available. */
-  @nextLink
-  nextLink?: string;
-}
-
 /** Query parameters for deleting a connection. */
 alias DeleteConnectionTraits = QueryParametersTrait<
   {
@@ -38,17 +27,29 @@ alias ConnectionDeleteOperations = ResourceOperations<
   DeleteConnectionErrors
 >;
 
-/** OK. */
-model ListConnectionResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: ConnectionList;
-}
-
 /** Errors returned by listConnections. */
 alias ListConnectionErrors = ErrorResult<401> | ErrorResult<500>;
+
+/** Query parameters for listing connections. */
+alias ListConnectionTraits = QueryParametersTrait<
+  {
+    /** Whether to include sandbox identifiers using each connection. */
+    @query includeSandboxIds?: boolean;
+
+    /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
+    @query labels?: string;
+
+    /** Continuation token for paginated results. */
+    @query @continuationToken continuationToken?: string;
+  },
+  TraitContext.List
+>;
+
+/** Standard resource operations for listing connections. */
+alias ConnectionListOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  ListConnectionErrors
+>;
 
 /** Errors returned by getConnection. */
 alias GetConnectionErrors =
@@ -188,28 +189,10 @@ interface ConnectionsOperations {
   >;
 
   /** Lists connections in a sandbox group. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core StandardResourceOperations.ResourceList cannot preserve the continuationToken, includeSandboxIds, and labels query parameters alongside this custom scoped route and response contract."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This list operation uses a custom next-link response model, which the rule misclassifies as a single-object response."
   @summary("Lists connections in a sandbox group.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/connections")
-  @list
-  @get
-  listConnections is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** includeSandboxIds parameter. */
-      @query includeSandboxIds?: boolean;
-
-      /** Continuation token for paginated results. */
-      @query continuationToken?: string;
-
-      /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
-      @query labels?: string;
-    },
-    ListConnectionResult,
-    DataPlaneStandardTraits,
-    ListConnectionErrors
+  listConnections is ConnectionListOperations.ResourceList<
+    Connection,
+    ListConnectionTraits
   >;
 
   /** Gets a specific connection by ID. */
