@@ -1,18 +1,9 @@
 using Http;
 using Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 
 namespace ContainerAppsSandbox {
-  /** Successful Sandbox list response. */
-  model SandboxListResult {
-    /** HTTP response status code. */
-    @statusCode statusCode: 200;
-
-    /** Sandboxes returned by the request. */
-    @body
-    body: Sandbox[];
-  }
-
   /** Successful Sandbox create response. */
   model SandboxCreatedResult {
     /** HTTP response status code. */
@@ -55,37 +46,35 @@ namespace ContainerAppsSandbox {
     DataPlaneStandardTraits,
     GetErrors
   >;
+
+  /** Query parameters for listing sandboxes. */
+  alias SandboxListTraits = QueryParametersTrait<
+    {
+      /** Continuation token for paginated results. */
+      @query @continuationToken skipToken?: string;
+
+      /** Comma-separated label selector. */
+      @query labels?: string;
+    },
+    TraitContext.List
+  >;
+
+  /** Standard resource operations for listing sandboxes. */
+  alias SandboxListOperations = ResourceOperations<
+    DataPlaneStandardTraits,
+    ListErrors
+  >;
 }
 
 namespace ContainerAppsSandbox {
   /** Azure-scoped Sandbox CRUD operations. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core StandardResourceOperations.ResourceList cannot preserve the existing Page, PageSize, and labels query parameter names or the array response without changing the established wire contract."
   @doc("Lists sandboxes in a scope.")
   @tag("Sandboxes")
   interface AzureSandboxes {
     @doc("Lists sandboxes in a scope.")
-    @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes")
-    @listsResource(Sandbox)
-    @get
-    list is Foundations.Operation<
-      {
-        ...AzureResourceScope;
+    list is SandboxListOperations.ResourceList<Sandbox, SandboxListTraits>;
 
-        /** One-based page number. */
-        @query page?: int32;
-
-        /** Maximum number of sandboxes returned per page. */
-        @query pageSize?: int32;
-
-        /** Comma-separated label selector. */
-        @query labels?: string;
-      },
-      SandboxListResult,
-      DataPlaneStandardTraits,
-      ListErrors
-    >;
-
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core ResourceOperations.ResourceCreateWithServiceProvidedName requires a standard resource hierarchy, Sandbox request body, and 201 Location response, which cannot preserve the established scoped route, CreateSandboxContent request, and Sandbox response body."
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The established wire contract uses POST with CreateSandboxContent and returns the created Sandbox in a 201 response body."
     @doc("Creates a sandbox in a scope.")
     @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes")
     @post
@@ -104,7 +93,7 @@ namespace ContainerAppsSandbox {
     @doc("Gets a sandbox by identifier.")
     get is SandboxGetOperations.ResourceRead<Sandbox>;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core StandardResourceOperations.ResourceDelete cannot preserve the existing empty 200 and 204 success responses or custom error status shapes without changing the established wire contract."
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The established wire contract allows both empty 200 and 204 success responses."
     @doc("Deletes a sandbox by identifier.")
     @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}")
     @delete

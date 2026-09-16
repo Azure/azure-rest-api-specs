@@ -5,12 +5,13 @@
     "api-version": "2026-09-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "example-resource-group",
-    "sandboxGroupName": "example-sandbox-group"
+    "sandboxGroupName": "example-sandbox-group",
+    "skipToken": "example-skip-token"
   },
   "responses": {
     "200": {
       "body": {
-        "egressPolicies": [
+        "value": [
           {
             "id": "example-resource-01",
             "name": "example-resource",
@@ -99,7 +100,8 @@
             "createdAt": "2026-08-15T10:00:00Z",
             "updatedAt": "2026-08-15T10:00:00Z"
           }
-        ]
+        ],
+        "nextLink": "https://example.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resource-group/sandboxGroups/example-sandbox-group/egressPolicies?api-version=2026-09-01-preview&skipToken=example-next-skip-token"
       }
     },
     "401": {

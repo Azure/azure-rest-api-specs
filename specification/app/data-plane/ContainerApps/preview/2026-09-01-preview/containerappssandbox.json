@@ -97,38 +97,32 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "includeSandboxIds",
             "in": "query",
-            "description": "includeSandboxIds parameter.",
+            "description": "Whether to include sandbox identifiers using each connection.",
             "required": false,
             "type": "boolean"
-          },
-          {
-            "name": "Page",
-            "in": "query",
-            "description": "Page number to retrieve.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "page"
-          },
-          {
-            "name": "PageSize",
-            "in": "query",
-            "description": "Number of items to return per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "pageSize"
           },
           {
             "name": "labels",
@@ -136,16 +130,20 @@
             "description": "Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., \"env=prod,team=backend\"). Returns only resources that have all specified labels with matching values.",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "description": "Continuation token for paginated results.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Connection"
-              }
+              "$ref": "#/definitions/PagedConnection"
             }
           },
           "401": {
@@ -167,6 +165,9 @@
           "List Connections example": {
             "$ref": "./examples/ConnectionsOperations_ListConnections.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -768,31 +769,32 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "name": "Page",
+            "name": "skipToken",
             "in": "query",
-            "description": "Page number to retrieve.",
+            "description": "Continuation token for paginated results.",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "page"
-          },
-          {
-            "name": "PageSize",
-            "in": "query",
-            "description": "Number of items to return per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "pageSize"
+            "type": "string"
           },
           {
             "name": "labels",
@@ -804,9 +806,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ContentPackageListResponse"
+              "$ref": "#/definitions/PagedContentPackage"
             }
           },
           "401": {
@@ -828,6 +830,9 @@
           "List Content Packages example": {
             "$ref": "./examples/ContentPackagesOperations_ListContentPackages.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1083,23 +1088,39 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "description": "Continuation token for paginated results.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SandboxGroupCredential"
-              }
+              "$ref": "#/definitions/PagedSandboxGroupCredential"
             }
           }
         },
@@ -1107,6 +1128,9 @@
           "List Credentials example": {
             "$ref": "./examples/CredentialsOperations_ListCredentials.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1302,31 +1326,32 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "name": "Page",
+            "name": "skipToken",
             "in": "query",
-            "description": "Page number to retrieve.",
+            "description": "Continuation token for paginated results.",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "page"
-          },
-          {
-            "name": "PageSize",
-            "in": "query",
-            "description": "Number of items to return per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "pageSize"
+            "type": "string"
           },
           {
             "name": "labels",
@@ -1338,12 +1363,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DiskImage"
-              }
+              "$ref": "#/definitions/PagedDiskImage"
             }
           },
           "401": {
@@ -1365,6 +1387,9 @@
           "List disk images in a sandbox group": {
             "$ref": "./examples/DiskImagesOperations_ListDiskImages.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -1602,39 +1627,39 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "name": "page",
+            "name": "skipToken",
             "in": "query",
-            "description": "page parameter.",
+            "description": "Continuation token for paginated results.",
             "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "pageSize parameter.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/PublicDiskImage"
-              }
+              "$ref": "#/definitions/PagedPublicDiskImage"
             }
           },
           "401": {
@@ -1656,6 +1681,9 @@
           "List public disk images": {
             "$ref": "./examples/DiskImagesOperations_ListDiskImagesPublic.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1749,20 +1777,39 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "description": "Continuation token for paginated results.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/NamedEgressPolicyListResponse"
+              "$ref": "#/definitions/PagedNamedEgressPolicy"
             }
           },
           "401": {
@@ -1784,6 +1831,9 @@
           "List Egress Policies example": {
             "$ref": "./examples/EgressPoliciesOperations_ListEgressPolicies.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2026,29 +2076,32 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "name": "page",
+            "name": "skipToken",
             "in": "query",
-            "description": "One-based page number.",
+            "description": "Continuation token for paginated results.",
             "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "Maximum number of sandboxes returned per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           },
           {
             "name": "labels",
@@ -2060,12 +2113,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful Sandbox list response.",
+            "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Sandbox"
-              }
+              "$ref": "#/definitions/PagedSandbox"
             }
           },
           "400": {
@@ -2094,6 +2144,9 @@
           "List example": {
             "$ref": "./examples/AzureSandboxes_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -5353,31 +5406,32 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "name": "Page",
+            "name": "skipToken",
             "in": "query",
-            "description": "Page number to retrieve.",
+            "description": "Continuation token for paginated results.",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "page"
-          },
-          {
-            "name": "PageSize",
-            "in": "query",
-            "description": "Number of items to return per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "pageSize"
+            "type": "string"
           },
           {
             "name": "labels",
@@ -5389,12 +5443,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Snapshot"
-              }
+              "$ref": "#/definitions/PagedSnapshot"
             }
           },
           "401": {
@@ -5416,6 +5467,9 @@
           "List Snapshots example": {
             "$ref": "./examples/SnapshotsOperations_ListSnapshots.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5625,31 +5679,32 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "name": "Page",
+            "name": "skipToken",
             "in": "query",
-            "description": "Page number to retrieve.",
+            "description": "Continuation token for paginated results.",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "page"
-          },
-          {
-            "name": "PageSize",
-            "in": "query",
-            "description": "Number of items to return per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "pageSize"
+            "type": "string"
           },
           {
             "name": "labels",
@@ -5661,12 +5716,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Volume"
-              }
+              "$ref": "#/definitions/PagedVolume"
             }
           },
           "401": {
@@ -5688,6 +5740,9 @@
           "List Volumes example": {
             "$ref": "./examples/VolumesOperations_ListVolumes.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -7554,22 +7609,6 @@
     "ContentPackageId": {
       "type": "string",
       "description": "ContentPackageId wire value."
-    },
-    "ContentPackageListResponse": {
-      "type": "object",
-      "description": "Content-package list response body.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "value value.",
-          "items": {
-            "$ref": "#/definitions/ContentPackage"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "CountResponse": {
       "type": "object",
@@ -9715,128 +9754,6 @@
         }
       }
     },
-    "ListConnectionResult": {
-      "type": "object",
-      "description": "OK.",
-      "properties": {
-        "body": {
-          "type": "array",
-          "description": "Response body.",
-          "items": {
-            "$ref": "#/definitions/Connection"
-          }
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "ListContentPackageResult": {
-      "type": "object",
-      "description": "OK.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ContentPackageListResponse",
-          "description": "Response body."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "ListCredentialResult": {
-      "type": "object",
-      "description": "OK.",
-      "properties": {
-        "body": {
-          "type": "array",
-          "description": "Response body.",
-          "items": {
-            "$ref": "#/definitions/SandboxGroupCredential"
-          }
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "ListDiskImageResult": {
-      "type": "object",
-      "description": "OK.",
-      "properties": {
-        "body": {
-          "type": "array",
-          "description": "Response body.",
-          "items": {
-            "$ref": "#/definitions/DiskImage"
-          }
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "ListEgressPolicyResult": {
-      "type": "object",
-      "description": "OK.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NamedEgressPolicyListResponse",
-          "description": "Response body."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "ListPublicDiskImageResult": {
-      "type": "object",
-      "description": "OK.",
-      "properties": {
-        "body": {
-          "type": "array",
-          "description": "Response body.",
-          "items": {
-            "$ref": "#/definitions/PublicDiskImage"
-          }
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "ListSnapshotResult": {
-      "type": "object",
-      "description": "OK.",
-      "properties": {
-        "body": {
-          "type": "array",
-          "description": "Response body.",
-          "items": {
-            "$ref": "#/definitions/Snapshot"
-          }
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "ListVolumeResult": {
-      "type": "object",
-      "description": "OK.",
-      "properties": {
-        "body": {
-          "type": "array",
-          "description": "Response body.",
-          "items": {
-            "$ref": "#/definitions/Volume"
-          }
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "LocalPodVolume": {
       "type": "object",
       "description": "Local volume source backed by rootfs space.",
@@ -10185,22 +10102,6 @@
         "defaultAction"
       ]
     },
-    "NamedEgressPolicyListResponse": {
-      "type": "object",
-      "description": "Named egress policy list response body.",
-      "properties": {
-        "egressPolicies": {
-          "type": "array",
-          "description": "egressPolicies value.",
-          "items": {
-            "$ref": "#/definitions/NamedEgressPolicy"
-          }
-        }
-      },
-      "required": [
-        "egressPolicies"
-      ]
-    },
     "NetworkEgressDecisions": {
       "type": "object",
       "description": "Network egress decisions (allowed and denied).",
@@ -10302,6 +10203,195 @@
         "endpoint",
         "protocol",
         "data"
+      ]
+    },
+    "PagedConnection": {
+      "type": "object",
+      "description": "Paged collection of Connection items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Connection items on this page",
+          "items": {
+            "$ref": "#/definitions/Connection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedContentPackage": {
+      "type": "object",
+      "description": "Paged collection of ContentPackage items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ContentPackage items on this page",
+          "items": {
+            "$ref": "#/definitions/ContentPackage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDiskImage": {
+      "type": "object",
+      "description": "Paged collection of DiskImage items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DiskImage items on this page",
+          "items": {
+            "$ref": "#/definitions/DiskImage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedNamedEgressPolicy": {
+      "type": "object",
+      "description": "Paged collection of NamedEgressPolicy items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NamedEgressPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/NamedEgressPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedPublicDiskImage": {
+      "type": "object",
+      "description": "Paged collection of PublicDiskImage items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PublicDiskImage items on this page",
+          "items": {
+            "$ref": "#/definitions/PublicDiskImage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedSandbox": {
+      "type": "object",
+      "description": "Paged collection of Sandbox items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Sandbox items on this page",
+          "items": {
+            "$ref": "#/definitions/Sandbox"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedSandboxGroupCredential": {
+      "type": "object",
+      "description": "Paged collection of SandboxGroupCredential items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SandboxGroupCredential items on this page",
+          "items": {
+            "$ref": "#/definitions/SandboxGroupCredential"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedSnapshot": {
+      "type": "object",
+      "description": "Paged collection of Snapshot items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Snapshot items on this page",
+          "items": {
+            "$ref": "#/definitions/Snapshot"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedVolume": {
+      "type": "object",
+      "description": "Paged collection of Volume items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Volume items on this page",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "PatchSandboxPortResult": {
@@ -11968,22 +12058,6 @@
       "required": [
         "autoSuspendPolicy",
         "autoDeletePolicy"
-      ]
-    },
-    "SandboxListResult": {
-      "type": "object",
-      "description": "Successful Sandbox list response.",
-      "properties": {
-        "body": {
-          "type": "array",
-          "description": "Sandboxes returned by the request.",
-          "items": {
-            "$ref": "#/definitions/Sandbox"
-          }
-        }
-      },
-      "required": [
-        "body"
       ]
     },
     "SandboxPort": {

@@ -27,17 +27,29 @@ alias ConnectionDeleteOperations = ResourceOperations<
   DeleteConnectionErrors
 >;
 
-/** OK. */
-model ListConnectionResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: Connection[];
-}
-
 /** Errors returned by listConnections. */
 alias ListConnectionErrors = ErrorResult<401> | ErrorResult<500>;
+
+/** Query parameters for listing connections. */
+alias ListConnectionTraits = QueryParametersTrait<
+  {
+    /** Whether to include sandbox identifiers using each connection. */
+    @query includeSandboxIds?: boolean;
+
+    /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
+    @query labels?: string;
+
+    /** Continuation token for paginated results. */
+    @query @continuationToken skipToken?: string;
+  },
+  TraitContext.List
+>;
+
+/** Standard resource operations for listing connections. */
+alias ConnectionListOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  ListConnectionErrors
+>;
 
 /** Errors returned by getConnection. */
 alias GetConnectionErrors =
@@ -177,30 +189,10 @@ interface ConnectionsOperations {
   >;
 
   /** Lists connections in a sandbox group. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core StandardResourceOperations.ResourceList cannot preserve the existing includeSandboxIds, Page, PageSize, and labels query parameter names or the bare-array response without changing the established wire contract."
   @summary("Lists connections in a sandbox group.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/connections")
-  @listsResource(Connection)
-  @get
-  listConnections is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** includeSandboxIds parameter. */
-      @query includeSandboxIds?: boolean;
-
-      /** Page number to retrieve. */
-      @query("Page") page?: int32;
-
-      /** Number of items to return per page. */
-      @query("PageSize") pageSize?: int32;
-
-      /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
-      @query labels?: string;
-    },
-    ListConnectionResult,
-    DataPlaneStandardTraits,
-    ListConnectionErrors
+  listConnections is ConnectionListOperations.ResourceList<
+    Connection,
+    ListConnectionTraits
   >;
 
   /** Gets a specific connection by ID. */

@@ -1,6 +1,7 @@
 using Http;
 using Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 
 namespace ContainerAppsSandbox;
 
@@ -13,14 +14,20 @@ alias CredentialDeleteOperations = ResourceOperations<
   DeleteCredentialErrors
 >;
 
-/** OK. */
-model ListCredentialResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
+/** Query parameters for listing credentials. */
+alias ListCredentialTraits = QueryParametersTrait<
+  {
+    /** Continuation token for paginated results. */
+    @query @continuationToken skipToken?: string;
+  },
+  TraitContext.List
+>;
 
-  /** Response body. */
-  @body body: SandboxGroupCredential[];
-}
+/** Standard resource operations for listing credentials. */
+alias CredentialListOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  never
+>;
 
 /** Errors returned by getCredential. */
 alias GetCredentialErrors = ErrorResult<404>;
@@ -43,7 +50,8 @@ model PutCredentialResult {
 /** Errors returned by putCredential. */
 alias PutCredentialErrors = ErrorResult<400>;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, query parameters, and route shapes."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
 @tag("credentials")
 interface CredentialsOperations {
   /** Deletes a credential in a sandbox group. */
@@ -52,16 +60,9 @@ interface CredentialsOperations {
 
   /** Lists all credentials in a sandbox group. */
   @summary("Lists all credentials in a sandbox group.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/credentials")
-  @listsResource(SandboxGroupCredential)
-  @get
-  listCredentials is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-    },
-    ListCredentialResult,
-    DataPlaneStandardTraits,
-    never
+  listCredentials is CredentialListOperations.ResourceList<
+    SandboxGroupCredential,
+    ListCredentialTraits
   >;
 
   /** Gets a specific credential by name in a sandbox group. */

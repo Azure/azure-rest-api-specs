@@ -673,16 +673,6 @@ namespace ContainerAppsSandbox {
     "GenerateConsentLinkResult",
     "csharp"
   );
-  @@clientName(
-    ContentPackageListResponse,
-    "ContentPackageListResult",
-    "csharp"
-  );
-  @@clientName(
-    NamedEgressPolicyListResponse,
-    "NamedEgressPolicyListResult",
-    "csharp"
-  );
   @@clientName(DirListingResponse, "DirListingResult", "csharp");
   @@clientName(FileOpStatusResponse, "FileOpStatusResult", "csharp");
   @@clientName(WriteFileResponse, "WriteFileResult", "csharp");

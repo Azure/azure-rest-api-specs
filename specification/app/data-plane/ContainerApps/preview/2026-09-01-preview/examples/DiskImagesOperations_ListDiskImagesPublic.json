@@ -6,21 +6,23 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "example-resource-group",
     "sandboxGroupName": "example-sandbox-group",
-    "page": 1,
-    "pageSize": 20
+    "skipToken": "example-skip-token"
   },
   "responses": {
     "200": {
-      "body": [
-        {
-          "name": "azurelinux-3.0",
-          "status": {
-            "state": "Available",
-            "createdAt": "2026-07-01T08:00:00Z",
-            "updatedAt": "2026-08-01T08:00:00Z"
+      "body": {
+        "value": [
+          {
+            "name": "azurelinux-3.0",
+            "status": {
+              "state": "Available",
+              "createdAt": "2026-07-01T08:00:00Z",
+              "updatedAt": "2026-08-01T08:00:00Z"
+            }
           }
-        }
-      ]
+        ],
+        "nextLink": "https://example.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resource-group/sandboxGroups/example-sandbox-group/diskimages/public?api-version=2026-09-01-preview&skipToken=example-next-skip-token"
+      }
     },
     "401": {
       "body": {

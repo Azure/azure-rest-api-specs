@@ -1,12 +1,6 @@
 using Rest;
 
 namespace ContainerAppsSandbox {
-  /** Content-package list response body. */
-  model ContentPackageListResponse {
-    /** value value. */
-    value: ContentPackage[];
-  }
-
   /** ContentPackage wire model. */
   @resource("contentpackages")
   @parentResource(SandboxGroupScope)

@@ -1,6 +1,7 @@
 using Http;
 using Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 
 namespace ContainerAppsSandbox;
 
@@ -16,17 +17,23 @@ alias EgressPolicyDeleteOperations = ResourceOperations<
   DeleteEgressPolicyErrors
 >;
 
-/** OK. */
-model ListEgressPolicyResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: NamedEgressPolicyListResponse;
-}
-
 /** Errors returned by listEgressPolicies. */
 alias ListEgressPolicyErrors = ErrorResult<401> | ErrorResult<500>;
+
+/** Query parameters for listing egress policies. */
+alias ListEgressPolicyTraits = QueryParametersTrait<
+  {
+    /** Continuation token for paginated results. */
+    @query @continuationToken skipToken?: string;
+  },
+  TraitContext.List
+>;
+
+/** Standard resource operations for listing egress policies. */
+alias EgressPolicyListOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  ListEgressPolicyErrors
+>;
 
 /** Errors returned by getEgressPolicy. */
 alias GetEgressPolicyErrors =
@@ -69,7 +76,6 @@ alias PutEgressPolicyErrors =
   | ErrorResult<401>
   | ErrorResult<500>;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
 @tag("egressPolicies")
 interface EgressPoliciesOperations {
   /** Deletes a named egress policy by ID. */
@@ -78,16 +84,9 @@ interface EgressPoliciesOperations {
 
   /** Lists all named egress policies in a sandbox group. */
   @summary("Lists all named egress policies in a sandbox group.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/egressPolicies")
-  @listsResource(NamedEgressPolicy)
-  @get
-  listEgressPolicies is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-    },
-    ListEgressPolicyResult,
-    DataPlaneStandardTraits,
-    ListEgressPolicyErrors
+  listEgressPolicies is EgressPolicyListOperations.ResourceList<
+    NamedEgressPolicy,
+    ListEgressPolicyTraits
   >;
 
   /** Gets a specific named egress policy by ID. */
@@ -95,7 +94,8 @@ interface EgressPoliciesOperations {
   getEgressPolicy is EgressPolicyGetOperations.ResourceRead<NamedEgressPolicy>;
 
   /** Creates or updates a named egress policy. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The custom PUT operation preserves the established 200 response and error status shapes, which Azure.Core ResourceOperations.ResourceCreateOrReplace cannot represent without changing the wire contract."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The established operation name is retained to keep generated client names deterministic."
   @summary("Creates or updates a named egress policy.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/egressPolicies/{policyId}")
   @put

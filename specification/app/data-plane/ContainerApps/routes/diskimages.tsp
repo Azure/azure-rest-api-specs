@@ -1,6 +1,7 @@
 using Http;
 using Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 
 namespace ContainerAppsSandbox;
 
@@ -16,29 +17,44 @@ alias DiskImageDeleteOperations = ResourceOperations<
   DeleteDiskImageErrors
 >;
 
-/** OK. */
-model ListDiskImageResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: DiskImage[];
-}
-
 /** Errors returned by listDiskImages. */
 alias ListDiskImageErrors = ErrorResult<401> | ErrorResult<500>;
 
-/** OK. */
-model ListPublicDiskImageResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
+/** Query parameters for listing disk images. */
+alias ListDiskImageTraits = QueryParametersTrait<
+  {
+    /** Continuation token for paginated results. */
+    @query @continuationToken skipToken?: string;
 
-  /** Response body. */
-  @body body: PublicDiskImage[];
-}
+    /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
+    @query labels?: string;
+  },
+  TraitContext.List
+>;
+
+/** Standard resource operations for listing disk images. */
+alias DiskImageListOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  ListDiskImageErrors
+>;
 
 /** Errors returned by listDiskImagesPublic. */
 alias ListPublicDiskImageErrors = ErrorResult<401> | ErrorResult<500>;
+
+/** Query parameters for listing public disk images. */
+alias ListPublicDiskImageTraits = QueryParametersTrait<
+  {
+    /** Continuation token for paginated results. */
+    @query skipToken?: string;
+  },
+  TraitContext.List
+>;
+
+/** Standard resource operations for listing public disk images. */
+alias PublicDiskImageListOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  ListPublicDiskImageErrors
+>;
 
 /** Errors returned by getDiskImagePublic. */
 alias GetDiskImagePublicErrors =
@@ -80,7 +96,8 @@ alias PostDiskImageErrors =
   | ErrorResult<429>
   | ErrorResult<500>;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, query parameters, and route shapes."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
 @tag("DiskImages")
 interface DiskImagesOperations {
   /** Deletes a disk image by ID. */
@@ -89,45 +106,16 @@ interface DiskImagesOperations {
 
   /** Returns disk images scoped to the specified sandbox group. */
   @summary("Lists disk images in a sandbox group, with pagination support.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages")
-  @listsResource(DiskImage)
-  @get
-  listDiskImages is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** Page number to retrieve. */
-      @query("Page") page?: int32;
-
-      /** Number of items to return per page. */
-      @query("PageSize") pageSize?: int32;
-
-      /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
-      @query labels?: string;
-    },
-    ListDiskImageResult,
-    DataPlaneStandardTraits,
-    ListDiskImageErrors
+  listDiskImages is DiskImageListOperations.ResourceList<
+    DiskImage,
+    ListDiskImageTraits
   >;
 
   /** Public images are admin-curated and shared across all sandbox groups. */
   @summary("Lists all public disk images available to the caller.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/public")
-  @listsResource(PublicDiskImage)
-  @get
-  listDiskImagesPublic is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** page parameter. */
-      @query page?: int32;
-
-      /** pageSize parameter. */
-      @query pageSize?: int32;
-    },
-    ListPublicDiskImageResult,
-    DataPlaneStandardTraits,
-    ListPublicDiskImageErrors
+  listDiskImagesPublic is PublicDiskImageListOperations.ResourceList<
+    PublicDiskImage,
+    ListPublicDiskImageTraits
   >;
 
   /** Public images are global and shared across all sandbox groups. */

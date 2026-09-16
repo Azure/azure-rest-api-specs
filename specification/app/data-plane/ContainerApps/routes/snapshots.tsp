@@ -1,6 +1,7 @@
 using Http;
 using Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 
 namespace ContainerAppsSandbox;
 
@@ -13,17 +14,26 @@ alias SnapshotDeleteOperations = ResourceOperations<
   DeleteSnapshotErrors
 >;
 
-/** OK. */
-model ListSnapshotResult {
-  /** HTTP response status code. */
-  @statusCode statusCode: 200;
-
-  /** Response body. */
-  @body body: Snapshot[];
-}
-
 /** Errors returned by listSnapshots. */
 alias ListSnapshotErrors = ErrorResult<401> | ErrorResult<500>;
+
+/** Query parameters for listing snapshots. */
+alias ListSnapshotTraits = QueryParametersTrait<
+  {
+    /** Continuation token for paginated results. */
+    @query @continuationToken skipToken?: string;
+
+    /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
+    @query labels?: string;
+  },
+  TraitContext.List
+>;
+
+/** Standard resource operations for listing snapshots. */
+alias SnapshotListOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  ListSnapshotErrors
+>;
 
 /** OK. */
 model GetSnapshotsCountResult {
@@ -58,25 +68,9 @@ interface SnapshotsOperations {
 
   /** Lists snapshots with pagination support. */
   @summary("Lists snapshots with pagination support.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/snapshots")
-  @listsResource(Snapshot)
-  @get
-  listSnapshots is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** Page number to retrieve. */
-      @query("Page") page?: int32;
-
-      /** Number of items to return per page. */
-      @query("PageSize") pageSize?: int32;
-
-      /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
-      @query labels?: string;
-    },
-    ListSnapshotResult,
-    DataPlaneStandardTraits,
-    ListSnapshotErrors
+  listSnapshots is SnapshotListOperations.ResourceList<
+    Snapshot,
+    ListSnapshotTraits
   >;
 
   /** Gets the total count of snapshots. */

@@ -6,29 +6,31 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "example-resource-group",
     "sandboxGroupName": "example-sandbox-group",
-    "Page": 1,
-    "PageSize": 1,
+    "skipToken": "example-skip-token",
     "labels": "example-labels"
   },
   "responses": {
     "200": {
-      "body": [
-        {
-          "storageContainerResourceId": "example-storage-container-resource-01",
-          "auth": {
-            "kind": "ManagedIdentity",
-            "identity": {
-              "kind": "SystemAssigned"
-            }
-          },
-          "type": "AzureBlobByo",
-          "volumeName": "example-volume",
-          "labels": {
-            "environment": "development"
-          },
-          "provisioningState": "Succeeded"
-        }
-      ]
+      "body": {
+        "value": [
+          {
+            "storageContainerResourceId": "example-storage-container-resource-01",
+            "auth": {
+              "kind": "ManagedIdentity",
+              "identity": {
+                "kind": "SystemAssigned"
+              }
+            },
+            "type": "AzureBlobByo",
+            "volumeName": "example-volume",
+            "labels": {
+              "environment": "development"
+            },
+            "provisioningState": "Succeeded"
+          }
+        ],
+        "nextLink": "https://example.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resource-group/sandboxGroups/example-sandbox-group/volumes?api-version=2026-09-01-preview&skipToken=example-next-skip-token"
+      }
     },
     "401": {
       "body": {

@@ -1,12 +1,6 @@
 using Rest;
 
 namespace ContainerAppsSandbox {
-  /** Named egress policy list response body. */
-  model NamedEgressPolicyListResponse {
-    /** egressPolicies value. */
-    egressPolicies: NamedEgressPolicy[];
-  }
-
   /** Customer-facing named egress policy resource. */
   @resource("egressPolicies")
   @parentResource(SandboxGroupScope)
