@@ -1035,8 +1035,8 @@
             ]
           }
         },
-        "sessionArtifactIdentity": {
-          "$ref": "#/definitions/SessionArtifactIdentity",
+        "sessionArtifactsIdentity": {
+          "$ref": "#/definitions/SessionArtifactsIdentity",
           "description": "The managed identity used to upload session artifacts to the storage account."
         }
       }
@@ -1141,8 +1141,8 @@
           "$ref": "#/definitions/EnablementStatus",
           "description": "Indicates whether session artifact collection is enabled for the workspace."
         },
-        "sessionArtifactIdentity": {
-          "$ref": "#/definitions/SessionArtifactIdentityUpdate",
+        "sessionArtifactsIdentity": {
+          "$ref": "#/definitions/SessionArtifactsIdentityUpdate",
           "description": "The managed identity used to upload session artifacts to the storage account."
         }
       }
@@ -1196,12 +1196,12 @@
       },
       "readOnly": true
     },
-    "SessionArtifactIdentity": {
+    "SessionArtifactsIdentity": {
       "type": "object",
       "description": "The managed identity used to upload session artifacts.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/SessionArtifactIdentityType",
+          "$ref": "#/definitions/SessionArtifactsIdentityType",
           "description": "The type of managed identity used to upload session artifacts."
         },
         "resourceId": {
@@ -1221,7 +1221,7 @@
         "type"
       ]
     },
-    "SessionArtifactIdentityType": {
+    "SessionArtifactsIdentityType": {
       "type": "string",
       "description": "The type of managed identity used to upload session artifacts.",
       "enum": [
@@ -1229,7 +1229,7 @@
         "UserAssigned"
       ],
       "x-ms-enum": {
-        "name": "SessionArtifactIdentityType",
+        "name": "SessionArtifactsIdentityType",
         "modelAsString": true,
         "values": [
           {
@@ -1245,12 +1245,12 @@
         ]
       }
     },
-    "SessionArtifactIdentityUpdate": {
+    "SessionArtifactsIdentityUpdate": {
       "type": "object",
       "description": "The managed identity used to upload session artifacts during an update operation.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/SessionArtifactIdentityType",
+          "$ref": "#/definitions/SessionArtifactsIdentityType",
           "description": "The type of managed identity used to upload session artifacts."
         },
         "resourceId": {

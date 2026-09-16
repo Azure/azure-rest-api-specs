@@ -64,14 +64,14 @@ model PlaywrightWorkspaceProperties {
 
   @added(Versions.v2026_10_01_preview)
   @doc("The managed identity used to upload session artifacts to the storage account.")
-  sessionArtifactIdentity?: SessionArtifactIdentity;
+  sessionArtifactsIdentity?: SessionArtifactsIdentity;
 }
 
 @added(Versions.v2026_10_01_preview)
 @doc("The managed identity used to upload session artifacts.")
-model SessionArtifactIdentity {
+model SessionArtifactsIdentity {
   @doc("The type of managed identity used to upload session artifacts.")
-  type: SessionArtifactIdentityType;
+  type: SessionArtifactsIdentityType;
 
   @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
   resourceId?: Azure.Core.armResourceIdentifier<[
@@ -83,7 +83,7 @@ model SessionArtifactIdentity {
 
 @added(Versions.v2026_10_01_preview)
 @doc("The type of managed identity used to upload session artifacts.")
-union SessionArtifactIdentityType {
+union SessionArtifactsIdentityType {
   string,
 
   @doc("Use the workspace system-assigned managed identity.")
@@ -95,9 +95,9 @@ union SessionArtifactIdentityType {
 
 @added(Versions.v2026_10_01_preview)
 @doc("The managed identity used to upload session artifacts during an update operation.")
-model SessionArtifactIdentityUpdate {
+model SessionArtifactsIdentityUpdate {
   @doc("The type of managed identity used to upload session artifacts.")
-  type?: SessionArtifactIdentityType;
+  type?: SessionArtifactsIdentityType;
 
   @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
   resourceId?: Azure.Core.armResourceIdentifier<[
@@ -129,7 +129,7 @@ model PlaywrightWorkspaceUpdateProperties {
 
   @added(Versions.v2026_10_01_preview)
   @doc("The managed identity used to upload session artifacts to the storage account.")
-  sessionArtifactIdentity?: SessionArtifactIdentityUpdate;
+  sessionArtifactsIdentity?: SessionArtifactsIdentityUpdate;
 }
 
 @doc("The status of the last resource operation.")
