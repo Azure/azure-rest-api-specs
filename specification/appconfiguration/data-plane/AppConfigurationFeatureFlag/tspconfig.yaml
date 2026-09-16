@@ -1,3 +1,5 @@
+# cspell:ignore azappconfigfeatureflag
+
 parameters:
   "service-dir":
     default: "sdk/appconfiguration"
@@ -13,7 +15,7 @@ options:
     package-mode: dataplane
     flavor: azure
     generate-test: true
-    generate-sample: true
+    generate-sample: false
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Data.AppConfiguration.FeatureFlag
@@ -30,7 +32,7 @@ options:
     namespace: com.azure.data.appconfiguration.featureflag
     models-subpackage: "implementation.models"
     flavor: azure
-    generate-tests: false
+    generate-tests: true
     generate-samples: false
   "@azure-tools/typespec-go":
     containing-module: "github.com/Azure/azure-sdk-for-go/sdk/data/azappconfigfeatureflag"
