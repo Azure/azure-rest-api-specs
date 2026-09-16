@@ -77,22 +77,22 @@ A configuration is disabled by setting `state` to `Disabled`; it is not deleted.
 
 ### Properties
 
-| Property | Type | Required on PUT | Description |
-|---|---|---:|---|
-| `state` | `Enabled` or `Disabled` | Yes | Enables or disables capture for the log type identified by the resource name. |
-| `retentionDays` | Integer from 1 through 35 | Yes | Number of days files of this log type are retained. |
-| `provisioningState` | Provisioning state | No | Read-only provisioning state of the configuration resource. |
+| Property            | Type                      | Required on PUT | Description                                                                   |
+| ------------------- | ------------------------- | --------------: | ----------------------------------------------------------------------------- |
+| `state`             | `Enabled` or `Disabled`   |             Yes | Enables or disables capture for the log type identified by the resource name. |
+| `retentionDays`     | Integer from 1 through 35 |             Yes | Number of days files of this log type are retained.                           |
+| `provisioningState` | Provisioning state        |              No | Read-only provisioning state of the configuration resource.                   |
 
 `state` and `retentionDays` are optional on PATCH. An omitted PATCH property preserves its current value.
 
 ### Operations
 
-| Method | Path | Operation | Behavior |
-|---|---|---|---|
-| GET | `.../logCaptureConfigurations` | `LogCaptureConfigurations_List` | Lists configured log types for a cluster. |
-| GET | `.../logCaptureConfigurations/{logCaptureConfigurationName}` | `LogCaptureConfigurations_Get` | Gets one log-type configuration. |
-| PUT | `.../logCaptureConfigurations/{logCaptureConfigurationName}` | `LogCaptureConfigurations_CreateOrUpdate` | Creates or replaces one log-type configuration. |
-| PATCH | `.../logCaptureConfigurations/{logCaptureConfigurationName}` | `LogCaptureConfigurations_Update` | Updates selected settings for one log type. |
+| Method | Path                                                         | Operation                                 | Behavior                                        |
+| ------ | ------------------------------------------------------------ | ----------------------------------------- | ----------------------------------------------- |
+| GET    | `.../logCaptureConfigurations`                               | `LogCaptureConfigurations_List`           | Lists configured log types for a cluster.       |
+| GET    | `.../logCaptureConfigurations/{logCaptureConfigurationName}` | `LogCaptureConfigurations_Get`            | Gets one log-type configuration.                |
+| PUT    | `.../logCaptureConfigurations/{logCaptureConfigurationName}` | `LogCaptureConfigurations_CreateOrUpdate` | Creates or replaces one log-type configuration. |
+| PATCH  | `.../logCaptureConfigurations/{logCaptureConfigurationName}` | `LogCaptureConfigurations_Update`         | Updates selected settings for one log type.     |
 
 ## Captured log files
 
@@ -104,33 +104,33 @@ Log files are read-only, service-generated child resources. Customers cannot cre
 
 ### Properties
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| `logType` | `PostgreSqlServer` | Yes | Identifies the source category. Future API versions can add more values. |
-| `createdAtUtc` | UTC date and time | Yes | Time at which the file was created. |
-| `lastModifiedAtUtc` | UTC date and time | Yes | Most recent time at which the file was modified. |
-| `retentionExpiresAtUtc` | UTC date and time | Yes | Retention deadline at which the captured file expires and becomes eligible for deletion. |
-| `isMutable` | Boolean | Yes | Indicates whether the platform can still append to or modify the file. |
-| `sizeInKilobytes` | Non-negative 64-bit integer | Yes | File size in KiB, where one kilobyte is 1024 bytes. |
-| `poolName` | Pool name | Yes | Name of the pool that generated the file. |
-| `nodeName` | String | Yes | Name of the node that generated the file. |
+| Property                | Type                        | Required | Description                                                                              |
+| ----------------------- | --------------------------- | -------: | ---------------------------------------------------------------------------------------- |
+| `logType`               | `PostgreSqlServer`          |      Yes | Identifies the source category. Future API versions can add more values.                 |
+| `createdAtUtc`          | UTC date and time           |      Yes | Time at which the file was created.                                                      |
+| `lastModifiedAtUtc`     | UTC date and time           |      Yes | Most recent time at which the file was modified.                                         |
+| `retentionExpiresAtUtc` | UTC date and time           |      Yes | Retention deadline at which the captured file expires and becomes eligible for deletion. |
+| `isMutable`             | Boolean                     |      Yes | Indicates whether the platform can still append to or modify the file.                   |
+| `sizeInKilobytes`       | Non-negative 64-bit integer |      Yes | File size in KiB, where one kilobyte is 1024 bytes.                                      |
+| `poolName`              | Pool name                   |      Yes | Name of the pool that generated the file.                                                |
+| `nodeName`              | String                      |      Yes | Name of the node that generated the file.                                                |
 
 ### Operations
 
-| Method | Path | Operation | Behavior |
-|---|---|---|---|
-| GET | `.../logFiles` | `LogFiles_List` | Lists captured files and their metadata. |
-| GET | `.../logFiles/{logFileName}` | `LogFiles_Get` | Gets metadata for one captured file. |
-| POST | `.../logFiles/{logFileName}/listDownloadUrls` | `LogFiles_ListDownloadUrls` | Returns a short-lived signed download URL. |
+| Method | Path                                          | Operation                   | Behavior                                   |
+| ------ | --------------------------------------------- | --------------------------- | ------------------------------------------ |
+| GET    | `.../logFiles`                                | `LogFiles_List`             | Lists captured files and their metadata.   |
+| GET    | `.../logFiles/{logFileName}`                  | `LogFiles_Get`              | Gets metadata for one captured file.       |
+| POST   | `.../logFiles/{logFileName}/listDownloadUrls` | `LogFiles_ListDownloadUrls` | Returns a short-lived signed download URL. |
 
 ## Download URL
 
 The signed download URL is a bearer credential. It is excluded from routine GET and LIST responses and returned only by the `listDownloadUrls` POST action.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| `downloadUri` | Secret URL | Yes | Short-lived signed URL for the captured log file. |
-| `expiresAtUtc` | UTC date and time | Yes | Time at which the signed URL expires. |
+| Property       | Type              | Required | Description                                       |
+| -------------- | ----------------- | -------: | ------------------------------------------------- |
+| `downloadUri`  | Secret URL        |      Yes | Short-lived signed URL for the captured log file. |
+| `expiresAtUtc` | UTC date and time |      Yes | Time at which the signed URL expires.             |
 
 `retentionExpiresAtUtc` on the log file is the file's retention deadline. `expiresAtUtc` in the action response applies only to the current signed URL. A client can request another signed URL while the file remains retained.
 
