@@ -38,45 +38,6 @@ union ProvisioningState {
 }
 
 /**
- * Linked Account properties.
- *
- * All properties are read-only because resource state is managed exclusively
- * through the internal link* action endpoints (linkNamespace, linkModuleGateway,
- * linkDevice, linkDeviceGroup).
- */
-model LinkedAccountProperties {
-  /**
-   * Provisioning state.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
-  /**
-   * Service-facing address for ADR→ADU communication.
-   */
-  @visibility(Lifecycle.Read)
-  serviceAddress?: string;
-
-  /**
-   * Modern device-facing address.
-   */
-  @visibility(Lifecycle.Read)
-  deviceAddress?: string;
-
-  /**
-   * Legacy SDK-facing device address.
-   */
-  @visibility(Lifecycle.Read)
-  legacyDeviceAddress?: string;
-
-  /**
-   * Account linking state. Absent until first /link/initiate.
-   */
-  @visibility(Lifecycle.Read)
-  linking?: AccountLinking;
-}
-
-/**
  * Update Instance properties.
  *
  * All properties are read-only because resource state is managed exclusively
@@ -100,22 +61,6 @@ model UpdateInstanceProperties {
    */
   @visibility(Lifecycle.Read)
   linking?: AccountLinking;
-}
-
-/**
- * Request payload used to update an existing Linked Account.
- */
-model LinkedAccountUpdate {
-  /**
-   * List of key value pairs that describe the resource. This will overwrite the existing tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Updating dictionary of tags"
-  tags?: Record<string>;
-
-  /**
-   * The type of identity used for the resource.
-   */
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 /**
@@ -153,12 +98,6 @@ union AccountLinkingState {
    * Successfully linked to a namespace.
    */
   Succeeded: "Succeeded",
-
-  /**
-   * Link was attempted but failed.
-   */
-  @removed(Versions.v2026_06_01_preview)
-  Failed: "Failed",
 
   /**
    * Was linked; namespace was deleted. ADR sent namespaceDeleted. Terminal state — no
@@ -223,7 +162,6 @@ model InboundCallerIdentity {
   /**
    * ARM resource ID of the user-assigned managed identity. Required when type is "UserAssigned".
    */
-  @typeChangedFrom(Versions.v2026_07_02_preview, string)
   userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
@@ -332,16 +270,9 @@ model LinkInitiateRequest {
   dataAddress: string;
 
   /**
-   * Managed Identity the resource should use for ADR communcation.
-   */
-  @renamedFrom(Versions.v2026_07_02_preview, "inboundCallerIdentity")
-  @removed(Versions.v2026_07_02_preview)
-  inboundCallerIdentityOld: InboundCallerIdentity;
-
-  /**
    * Managed Identity the resource should use for ADR communication.
    */
-  @added(Versions.v2026_07_02_preview)
+  @added(Versions.v2026_11_02_preview)
   inboundCallerIdentity: InboundCallerIdentity;
 }
 
@@ -399,13 +330,6 @@ model LinkUpdateRequest {
    */
   inboundCallerIdentity?: InboundCallerIdentity;
 }
-
-/**
- * Response body for /link/update. Empty on success.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Empty response object to satisfy R4008 AvoidEmptyResponseSchema, preserves forward extensibility"
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-model LinkUpdateResponse is Record<unknown>;
 
 /**
  * Response body for /link/update.

@@ -44,7 +44,7 @@ model UpdateInstance
  * These actions are publicly documented per ARM modeling guidance: external requests
  * are blocked via RP business logic rather than hiding behind an RPaaS-internal endpoint.
  */
-@added(Versions.v2026_07_02_preview)
+@added(Versions.v2026_11_02_preview)
 @armResourceOperations
 interface UpdateInstances {
   /**
