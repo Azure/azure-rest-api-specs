@@ -15,7 +15,7 @@ model WorkspaceEncryption {
    */
   customerManagedKeyEncryption?: WorkspaceCustomerManagedKeyEncryption;
 
-  /** The service application used for customer consent, available before enrollment. */
+  /** The service application used for customer consent, returned for existing Workspaces before enrollment. */
   @visibility(Lifecycle.Read)
   customerManagedKeyOnboarding?: WorkspaceCustomerManagedKeyOnboarding;
 
@@ -41,7 +41,11 @@ union WorkspaceEncryptionProtection {
 model WorkspaceCustomerManagedKeyEncryption {
   /**
    * The versionless HTTPS Key Vault key URI in the supported cloud and Workspace
-   * tenant. A key version, query string, or fragment is not permitted.
+   * tenant. The key vault must belong to the same Microsoft Entra tenant as
+   * the Workspace. The service verifies the tenant as the first remote stage
+   * of the configuration operation, before persisting requested encryption
+   * state or changing Azure Storage or customer data.
+   * A key version, query string, or fragment is not permitted.
    * Azure Storage follows key versions automatically. Keep the previous version
    * available for at least 24 hours after rotation.
    */
@@ -57,9 +61,13 @@ scalar WorkspaceKeyEncryptionKeyUrl extends url;
 @added(Versions.v2026_11_01)
 model WorkspaceCustomerManagedKeyOnboarding {
   /**
-   * The Microsoft Entra application ID used for customer consent, available
-   * before enrollment. This is not a service principal object ID or an identity
-   * selector. The Workspace's top-level identity does not select this application.
+   * The Microsoft Entra application ID used for customer consent, returned for
+   * existing Workspaces, including before customer-key enrollment. Before
+   * creating a Workspace with a customer key, obtain the application name and
+   * ID for the target cloud from the service onboarding documentation or Portal,
+   * then consent and grant key access. GET returns the same application ID.
+   * This is not a service principal object ID or an identity selector.
+   * The Workspace's top-level identity does not select this application.
    */
   @visibility(Lifecycle.Read)
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
