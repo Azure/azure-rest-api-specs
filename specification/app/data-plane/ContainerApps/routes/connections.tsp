@@ -40,7 +40,7 @@ alias ListConnectionTraits = QueryParametersTrait<
     @query labels?: string;
 
     /** Continuation token for paginated results. */
-    @query @continuationToken continuationToken?: string;
+    @query @continuationToken skipToken?: string;
   },
   TraitContext.List
 >;

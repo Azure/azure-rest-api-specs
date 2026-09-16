@@ -18,7 +18,7 @@ alias CredentialDeleteOperations = ResourceOperations<
 alias ListCredentialTraits = QueryParametersTrait<
   {
     /** Continuation token for paginated results. */
-    @query @continuationToken continuationToken?: string;
+    @query @continuationToken skipToken?: string;
   },
   TraitContext.List
 >;

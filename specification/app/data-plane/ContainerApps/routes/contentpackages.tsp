@@ -21,7 +21,7 @@ alias ListContentPackageErrors = ErrorResult<401> | ErrorResult<500>;
 alias ListContentPackageTraits = QueryParametersTrait<
   {
     /** Continuation token for paginated results. */
-    @query @continuationToken continuationToken?: string;
+    @query @continuationToken skipToken?: string;
 
     /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
     @query labels?: string;

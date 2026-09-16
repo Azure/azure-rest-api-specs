@@ -24,7 +24,7 @@ alias ListEgressPolicyErrors = ErrorResult<401> | ErrorResult<500>;
 alias ListEgressPolicyTraits = QueryParametersTrait<
   {
     /** Continuation token for paginated results. */
-    @query @continuationToken continuationToken?: string;
+    @query @continuationToken skipToken?: string;
   },
   TraitContext.List
 >;

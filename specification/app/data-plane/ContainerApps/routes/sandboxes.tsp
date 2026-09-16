@@ -51,7 +51,7 @@ namespace ContainerAppsSandbox {
   alias SandboxListTraits = QueryParametersTrait<
     {
       /** Continuation token for paginated results. */
-      @query @continuationToken continuationToken?: string;
+      @query @continuationToken skipToken?: string;
 
       /** Comma-separated label selector. */
       @query labels?: string;

@@ -24,7 +24,7 @@ alias ListDiskImageErrors = ErrorResult<401> | ErrorResult<500>;
 alias ListDiskImageTraits = QueryParametersTrait<
   {
     /** Continuation token for paginated results. */
-    @query @continuationToken continuationToken?: string;
+    @query @continuationToken skipToken?: string;
 
     /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
     @query labels?: string;
@@ -45,7 +45,7 @@ alias ListPublicDiskImageErrors = ErrorResult<401> | ErrorResult<500>;
 alias ListPublicDiskImageTraits = QueryParametersTrait<
   {
     /** Continuation token for paginated results. */
-    @query continuationToken?: string;
+    @query skipToken?: string;
   },
   TraitContext.List
 >;
