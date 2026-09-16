@@ -25,7 +25,7 @@ model GetSandboxFileResult {
   @statusCode statusCode: 200;
 
   /** Response body. */
-  @body body: FileStreamResult;
+  @body body: bytes;
 }
 
 /** Errors returned by getSandboxFile. */

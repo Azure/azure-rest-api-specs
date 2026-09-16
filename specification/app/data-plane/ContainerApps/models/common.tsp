@@ -95,27 +95,6 @@ model EntityTagHeaderValue {
   isWeak?: boolean;
 }
 
-/** FileStreamResult wire model. */
-model FileStreamResult {
-  /** fileStream value. */
-  fileStream?: Stream;
-
-  /** contentType value. */
-  contentType?: string;
-
-  /** fileDownloadName value. */
-  fileDownloadName?: string;
-
-  /** lastModified value. */
-  lastModified?: utcDateTime;
-
-  /** entityTag value. */
-  entityTag?: EntityTagHeaderValue;
-
-  /** enableRangeProcessing value. */
-  enableRangeProcessing?: boolean;
-}
-
 /** AbsoluteDirectoryPath wire model. */
 scalar AbsoluteDirectoryPath extends string;
 
@@ -127,9 +106,6 @@ scalar ConnectionId extends string;
 
 /** SandboxId wire model. */
 scalar SandboxId extends string;
-
-/** Stream wire model. */
-scalar Stream extends bytes;
 
 /** StringSegment wire model. */
 model StringSegment {

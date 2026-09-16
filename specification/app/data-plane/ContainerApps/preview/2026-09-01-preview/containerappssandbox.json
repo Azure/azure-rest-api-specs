@@ -3245,6 +3245,10 @@
         ],
         "summary": "Reads a file from a running sandbox. The file is streamed directly to the response body.",
         "description": "Reads a file from a running sandbox. The file is streamed directly to the response body.",
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3284,7 +3288,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/FileStreamResult"
+              "type": "file"
             }
           },
           "401": {
@@ -6279,6 +6283,10 @@
         ],
         "summary": "Download a file from a volume.",
         "description": "Download a file from a volume.",
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -6311,7 +6319,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/FileStreamResult"
+              "type": "file"
             }
           },
           "400": {
@@ -8337,17 +8345,17 @@
         },
         "totalBytes": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "totalBytes value."
         },
         "usedBytes": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "usedBytes value."
         },
         "availableBytes": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "availableBytes value."
         },
         "label": {
@@ -9201,37 +9209,6 @@
         "success"
       ]
     },
-    "FileStreamResult": {
-      "type": "object",
-      "description": "FileStreamResult wire model.",
-      "properties": {
-        "fileStream": {
-          "$ref": "#/definitions/Stream",
-          "description": "fileStream value."
-        },
-        "contentType": {
-          "type": "string",
-          "description": "contentType value."
-        },
-        "fileDownloadName": {
-          "type": "string",
-          "description": "fileDownloadName value."
-        },
-        "lastModified": {
-          "type": "string",
-          "format": "date-time",
-          "description": "lastModified value."
-        },
-        "entityTag": {
-          "$ref": "#/definitions/EntityTagHeaderValue",
-          "description": "entityTag value."
-        },
-        "enableRangeProcessing": {
-          "type": "boolean",
-          "description": "enableRangeProcessing value."
-        }
-      }
-    },
     "ForkDataDiskVolumeContent": {
       "type": "object",
       "description": "ForkDataDiskVolumeContent wire model.",
@@ -9411,7 +9388,8 @@
       "description": "OK.",
       "properties": {
         "body": {
-          "$ref": "#/definitions/FileStreamResult",
+          "type": "string",
+          "format": "byte",
           "description": "Response body."
         }
       },
@@ -9536,7 +9514,8 @@
       "description": "OK.",
       "properties": {
         "body": {
-          "$ref": "#/definitions/FileStreamResult",
+          "type": "string",
+          "format": "byte",
           "description": "Response body."
         }
       },
@@ -10014,17 +9993,17 @@
       "properties": {
         "totalBytes": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "totalBytes value."
         },
         "availableBytes": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "availableBytes value."
         },
         "usedBytes": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "usedBytes value."
         }
       }
@@ -10132,22 +10111,22 @@
       "properties": {
         "rxBytes": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "rxBytes value."
         },
         "txBytes": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "txBytes value."
         },
         "rxPackets": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "rxPackets value."
         },
         "txPackets": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "txPackets value."
         }
       }
@@ -12805,11 +12784,6 @@
     "StorageQuantity": {
       "type": "string",
       "description": "Kubernetes-style storage/disk resource quantity string (e.g. \"256Mi\", \"1Gi\", \"2048\")."
-    },
-    "Stream": {
-      "type": "string",
-      "format": "byte",
-      "description": "Stream wire model."
     },
     "StringSegment": {
       "type": "object",

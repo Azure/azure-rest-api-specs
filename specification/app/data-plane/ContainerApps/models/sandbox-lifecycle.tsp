@@ -44,13 +44,13 @@ namespace ContainerAppsSandbox {
     filesystem?: string;
 
     /** totalBytes value. */
-    totalBytes?: int32;
+    totalBytes?: int64;
 
     /** usedBytes value. */
-    usedBytes?: int32;
+    usedBytes?: int64;
 
     /** availableBytes value. */
-    availableBytes?: int32;
+    availableBytes?: int64;
 
     /** Human-friendly display label (e.g., "container-0"). If set, UI should prefer this over MountPoint. */
     label?: string;
@@ -59,28 +59,28 @@ namespace ContainerAppsSandbox {
   /** Memory statistics in bytes. */
   model MemoryStats {
     /** totalBytes value. */
-    totalBytes?: int32;
+    totalBytes?: int64;
 
     /** availableBytes value. */
-    availableBytes?: int32;
+    availableBytes?: int64;
 
     /** usedBytes value. */
-    usedBytes?: int32;
+    usedBytes?: int64;
   }
 
   /** Network I/O counters. */
   model NetworkStats {
     /** rxBytes value. */
-    rxBytes?: int32;
+    rxBytes?: int64;
 
     /** txBytes value. */
-    txBytes?: int32;
+    txBytes?: int64;
 
     /** rxPackets value. */
-    rxPackets?: int32;
+    rxPackets?: int64;
 
     /** txPackets value. */
-    txPackets?: int32;
+    txPackets?: int64;
   }
 
   /** ExecuteSandboxCommandContent wire model. */
