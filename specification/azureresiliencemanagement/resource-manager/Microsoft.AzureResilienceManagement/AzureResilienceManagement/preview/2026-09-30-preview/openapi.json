@@ -7516,6 +7516,10 @@
         "zonalResiliency": {
           "$ref": "#/definitions/UnifiedResilienceItemGoalRequirement",
           "description": "Zonal resiliency goal copied from the goal assignment."
+        },
+        "regionalResiliency": {
+          "$ref": "#/definitions/UnifiedResilienceItemGoalRequirement",
+          "description": "Regional resiliency goal copied from the goal assignment."
         }
       },
       "required": [
@@ -11184,10 +11188,15 @@
         "zonalResiliency": {
           "$ref": "#/definitions/UnifiedResilienceItemZonalAssessment",
           "description": "The zonal resiliency section of the resilience assessment."
+        },
+        "regionalResiliency": {
+          "$ref": "#/definitions/UnifiedResilienceItemRegionalAssessment",
+          "description": "The regional resiliency section of the resilience assessment."
         }
       },
       "required": [
-        "zonalResiliency"
+        "zonalResiliency",
+        "regionalResiliency"
       ]
     },
     "UnifiedResilienceItemBillingInfo": {
@@ -11287,6 +11296,41 @@
         "assessments",
         "lastModifiedTime"
       ]
+    },
+    "UnifiedResilienceItemRegionalAssessment": {
+      "type": "object",
+      "description": "Definition of the regional resiliency assessment computed for the unified resilience item.",
+      "properties": {
+        "enabledResourceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of resources that have regional resiliency enabled."
+        },
+        "notEnabledResourceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of resources that do not have regional resiliency enabled."
+        },
+        "notEvaluatedResourceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of resources that have not been evaluated for regional resiliency."
+        },
+        "userConfirmationNeededCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of resources that require user confirmation for regional resiliency."
+        },
+        "evaluationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the regional resiliency assessment was last evaluated."
+        },
+        "estimatedRecoveryPointObjective": {
+          "$ref": "#/definitions/IsoDuration",
+          "description": "The estimated recovery point objective computed for the service group, expressed as an ISO 8601 duration."
+        }
+      }
     },
     "UnifiedResilienceItemZonalAssessment": {
       "type": "object",

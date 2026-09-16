@@ -68,6 +68,10 @@ model GoalsData {
   @added(Versions.v2026_09_30_preview)
   zonalResiliency?: UnifiedResilienceItemGoalRequirement;
 
+  @doc("Regional resiliency goal copied from the goal assignment.")
+  @added(Versions.v2026_09_30_preview)
+  regionalResiliency?: UnifiedResilienceItemGoalRequirement;
+
   @doc("Regional RPO set in resilience goal in minutes.")
   @removed(Versions.v2026_09_30_preview)
   regionalRecoveryPointObjectiveInMinutes?: IsoDuration;
@@ -144,10 +148,35 @@ model UnifiedResilienceItemZonalAssessment {
 }
 
 @added(Versions.v2026_09_30_preview)
+@doc("Definition of the regional resiliency assessment computed for the unified resilience item.")
+model UnifiedResilienceItemRegionalAssessment {
+  @doc("Count of resources that have regional resiliency enabled.")
+  enabledResourceCount?: int64;
+
+  @doc("Count of resources that do not have regional resiliency enabled.")
+  notEnabledResourceCount?: int64;
+
+  @doc("Count of resources that have not been evaluated for regional resiliency.")
+  notEvaluatedResourceCount?: int64;
+
+  @doc("Count of resources that require user confirmation for regional resiliency.")
+  userConfirmationNeededCount?: int64;
+
+  @doc("The date and time when the regional resiliency assessment was last evaluated.")
+  evaluationDateTime?: utcDateTime;
+
+  @doc("The estimated recovery point objective computed for the service group, expressed as an ISO 8601 duration.")
+  estimatedRecoveryPointObjective?: IsoDuration;
+}
+
+@added(Versions.v2026_09_30_preview)
 @doc("Definition of the resilience assessments computed for the unified resilience item.")
 model UnifiedResilienceItemAssessments {
   @doc("The zonal resiliency section of the resilience assessment.")
   zonalResiliency: UnifiedResilienceItemZonalAssessment;
+
+  @doc("The regional resiliency section of the resilience assessment.")
+  regionalResiliency: UnifiedResilienceItemRegionalAssessment;
 }
 
 @added(Versions.v2026_09_30_preview)
