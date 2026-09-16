@@ -26264,6 +26264,35 @@
         "language": {
           "type": "string",
           "description": "The language of the full text field in the document."
+        },
+        "tokenizer": {
+          "type": "string",
+          "description": "The tokenizer method for this path."
+        },
+        "filters": {
+          "type": "array",
+          "description": "The filter pipeline applied to this path.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "stopWordListKind": {
+          "type": "string",
+          "description": "The stop word list kind for this path."
+        },
+        "addStopWords": {
+          "type": "array",
+          "description": "Custom words to add to the stop word list for this path.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "removeStopWords": {
+          "type": "array",
+          "description": "Words to remove from the built-in stop word list for this path.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -26278,6 +26307,14 @@
           "type": "string",
           "description": "The default language for a full text paths."
         },
+        "package": {
+          "type": "string",
+          "description": "The full text package type."
+        },
+        "defaultSpec": {
+          "$ref": "#/definitions/FullTextSpec",
+          "description": "The default full text analysis specification inherited by full text paths that omit these settings."
+        },
         "fullTextPaths": {
           "type": "array",
           "description": "List of FullText Paths",
@@ -26285,6 +26322,45 @@
             "$ref": "#/definitions/FullTextPath"
           },
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "FullTextSpec": {
+      "type": "object",
+      "description": "The default full text analysis specification for a full text policy.",
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "The language of the full text analysis."
+        },
+        "tokenizer": {
+          "type": "string",
+          "description": "The tokenizer method of the full text analysis."
+        },
+        "filters": {
+          "type": "array",
+          "description": "The filter pipeline of the full text analysis.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "stopWordListKind": {
+          "type": "string",
+          "description": "The stop word list kind of the full text analysis."
+        },
+        "addStopWords": {
+          "type": "array",
+          "description": "Custom words to add to the stop word list.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "removeStopWords": {
+          "type": "array",
+          "description": "Words to remove from the built-in stop word list.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
