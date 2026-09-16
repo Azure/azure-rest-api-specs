@@ -105,7 +105,6 @@ model Resources {
   ]>>;
 }
 
-
 @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
 @doc("Caller-provided context associated with a virtual machine operation.")
 model ResourceNotificationDetails {
@@ -749,7 +748,6 @@ model ExecuteStartRequest {
   @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
-
 }
 
 @doc("The virtual machine configuration and execution settings for a bulk create action.")
@@ -801,7 +799,6 @@ model ExecuteReimageRequest {
   @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
-
 
   @doc("The shared and per-virtual-machine reimage configuration.")
   reimageParameters?: ReimagePayload;
@@ -866,7 +863,6 @@ model ExecuteDeleteRequest {
   @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
-
 
   @doc("Indicates whether Bulk Actions uses forced deletion for the target virtual machines.")
   forceDeletion?: boolean;
