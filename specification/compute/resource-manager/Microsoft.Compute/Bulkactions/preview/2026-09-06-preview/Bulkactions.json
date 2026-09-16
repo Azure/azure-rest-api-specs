@@ -2894,36 +2894,6 @@
         }
       }
     },
-    "AllocationStrategy": {
-      "type": "string",
-      "description": "The allocation strategy for VM size selection",
-      "enum": [
-        "LowestPrice",
-        "Prioritized",
-        "CapacityOptimized"
-      ],
-      "x-ms-enum": {
-        "name": "AllocationStrategy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LowestPrice",
-            "value": "LowestPrice",
-            "description": "Platform prioritizes VM sizes with the lowest hourly cost"
-          },
-          {
-            "name": "Prioritized",
-            "value": "Prioritized",
-            "description": "Customer specifies a rank for each VM size, platform uses VM sizes in rank order"
-          },
-          {
-            "name": "CapacityOptimized",
-            "value": "CapacityOptimized",
-            "description": "Platform prioritizes VM sizes with the highest available capacity first"
-          }
-        ]
-      }
-    },
     "ApiEntityReference": {
       "type": "object",
       "description": "The API entity reference.",
@@ -3081,28 +3051,19 @@
         }
       }
     },
-    "BulkCreateCustomAllocationStrategy": {
-      "type": "string",
-      "description": "The allocation strategy for VM size selection in BulkCreateCustom.",
-      "enum": [
-        "LowestPrice",
-        "Prioritized"
-      ],
-      "x-ms-enum": {
-        "name": "BulkCreateCustomAllocationStrategy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LowestPrice",
-            "value": "LowestPrice",
-            "description": "Platform prioritizes VM sizes with the lowest hourly cost"
-          },
-          {
-            "name": "Prioritized",
-            "value": "Prioritized",
-            "description": "Customer specifies a rank for each VM size, platform uses VM sizes in rank order"
-          }
-        ]
+    "BulkCreateCustomExecutionParameters": {
+      "type": "object",
+      "description": "Extra parameters that control how a BulkCreateCustom request is executed.",
+      "properties": {
+        "retryPolicy": {
+          "$ref": "#/definitions/RetryPolicy",
+          "description": "Retry policy the user can pass"
+        },
+        "additionalParameters": {
+          "type": "object",
+          "description": "Additional parameters for the request.",
+          "additionalProperties": {}
+        }
       }
     },
     "BulkCreateCustomListResult": {
@@ -3192,41 +3153,6 @@
         }
       }
     },
-    "BulkCreateCustomOverrideBase": {
-      "type": "object",
-      "description": "Override fields shared by per-VM and per-VM-size overrides. Each set field takes precedence over the operation-level value. VM size, zone, priority, eviction policy, and billing are owned by the service and cannot be set here.",
-      "properties": {
-        "virtualMachineProfile": {
-          "$ref": "#/definitions/BulkactionVMProperties",
-          "description": "VM profile, the same shape as operation-level ComputeProfile.virtualMachineProfile. Overrides the operation-level VM profile."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags overriding the operation-level tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "identity": {
-          "$ref": "#/definitions/VirtualMachineIdentity",
-          "description": "Identity overriding the operation-level identity."
-        },
-        "plan": {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Plan",
-          "description": "Plan overriding the operation-level plan."
-        },
-        "extensions": {
-          "type": "array",
-          "description": "Extensions. When non-empty they replace the operation-level extensions; when omitted the operation-level extensions are inherited.",
-          "items": {
-            "$ref": "#/definitions/BulkactionVMExtension"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
     "BulkCreateCustomOverridesProfile": {
       "type": "object",
       "description": "Groups the per-VM overrides with the name prefix that names any override that does not supply its own VM name.",
@@ -3261,10 +3187,6 @@
         "evictionPolicy": {
           "$ref": "#/definitions/EvictionPolicy",
           "description": "Eviction Policy to follow when evicting Spot VMs."
-        },
-        "allocationStrategy": {
-          "$ref": "#/definitions/BulkCreateCustomAllocationStrategy",
-          "description": "The allocation strategy for VM size selection"
         }
       }
     },
@@ -3316,21 +3238,13 @@
           "$ref": "#/definitions/BulkCreateCustomPriorityProfile",
           "description": "Configuration Options for Regular or Spot instances in BulkCreateCustom."
         },
-        "vmSizesProfile": {
-          "type": "array",
-          "description": "List of VM sizes supported for BulkCreateCustom",
-          "items": {
-            "$ref": "#/definitions/BulkCreateCustomVmSizeProfile"
-          },
-          "x-ms-identifiers": []
+        "vmSize": {
+          "type": "string",
+          "description": "The VM size to use for every virtual machine created by the operation."
         },
         "computeProfile": {
           "$ref": "#/definitions/ComputeProfile",
           "description": "Compute Profile to configure the Virtual Machines."
-        },
-        "zoneAllocationPolicy": {
-          "$ref": "#/definitions/BulkCreateCustomZoneAllocationPolicy",
-          "description": "Zone Allocation Policy for launching instances."
         },
         "overridesProfile": {
           "$ref": "#/definitions/BulkCreateCustomOverridesProfile",
@@ -3341,7 +3255,7 @@
           ]
         },
         "executionParameters": {
-          "$ref": "#/definitions/ExecutionParameters",
+          "$ref": "#/definitions/BulkCreateCustomExecutionParameters",
           "description": "Extra parameters that control how the request is executed, including the retry policy."
         }
       },
@@ -3379,72 +3293,18 @@
         }
       }
     },
-    "BulkCreateCustomVmSizeProfile": {
+    "BulkCreateExecutionParameters": {
       "type": "object",
-      "description": "A VM size profile entry that may additionally carry an optional per-VM-size profile override. Every VM that the service assigns to this size inherits the override, layered on top of the operation-level base profile and beneath any per-VM override. Present only on the bulkCreateCustom endpoint; the uniform endpoint rejects a non-null override.",
+      "description": "Extra parameters that control how a BulkCreate request is executed.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the VM size, eg Standard_D2ads_v5",
-          "minLength": 1
+        "retryPolicy": {
+          "$ref": "#/definitions/RetryPolicy",
+          "description": "Retry policy the user can pass"
         },
-        "rank": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The rank of this VM size in the priority order"
-        },
-        "override": {
-          "$ref": "#/definitions/BulkCreateCustomOverrideBase",
-          "description": "Optional per-VM-size profile override applied to every VM the service assigns to this size. A size maps to many VMs, so virtualMachineName is not part of this shape. virtualMachineProfile is layered beneath any per-VM override; tags, identity, and plan are merged with the per-VM override, with the per-VM value winning."
-        }
-      },
-      "required": [
-        "name",
-        "rank"
-      ]
-    },
-    "BulkCreateCustomZoneAllocationPolicy": {
-      "type": "object",
-      "description": "The zone allocation policy for distributing VMs across availability zones in BulkCreateCustom.",
-      "properties": {
-        "distributionStrategy": {
-          "type": "string",
-          "description": "The distribution strategy for zone allocation. Defaults to BestEffortBalanced.",
-          "default": "BestEffortBalanced",
-          "enum": [
-            "BestEffortSingleZone",
-            "Prioritized",
-            "BestEffortBalanced"
-          ],
-          "x-ms-enum": {
-            "name": "BulkCreateCustomDistributionStrategy",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "BestEffortSingleZone",
-                "value": "BestEffortSingleZone",
-                "description": "Platform attempts to place as many VMs as possible in a single zone, falls back to multiple zones if needed"
-              },
-              {
-                "name": "Prioritized",
-                "value": "Prioritized",
-                "description": "Platform uses customer-provided zone rankings to allocate VMs"
-              },
-              {
-                "name": "BestEffortBalanced",
-                "value": "BestEffortBalanced",
-                "description": "Platform attempts to evenly distribute VMs across all available zones with best effort"
-              }
-            ]
-          }
-        },
-        "zonePreferences": {
-          "type": "array",
-          "description": "The zone preferences for allocation priority",
-          "items": {
-            "$ref": "#/definitions/ZonePreference"
-          },
-          "x-ms-identifiers": []
+        "additionalParameters": {
+          "type": "object",
+          "description": "Additional parameters for the request.",
+          "additionalProperties": {}
         }
       }
     },
@@ -3496,6 +3356,25 @@
         "results"
       ]
     },
+    "BulkCreatePriorityProfile": {
+      "type": "object",
+      "description": "Configuration options for Regular or Spot instances in BulkCreate.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PriorityType",
+          "description": "The priority type for VM allocation"
+        },
+        "maxPricePerVM": {
+          "type": "number",
+          "format": "float",
+          "description": "Price per hour of each Spot VM will never exceed this."
+        },
+        "evictionPolicy": {
+          "$ref": "#/definitions/EvictionPolicy",
+          "description": "Eviction Policy to follow when evicting Spot VMs."
+        }
+      }
+    },
     "BulkCreateProperties": {
       "type": "object",
       "description": "Details of the BulkCreate.",
@@ -3532,27 +3411,19 @@
           "description": "Controls how partial fulfillment is handled for a BulkCreate request. When enabled, Azure creates only the VMs or vCPUs it has high confidence can be successfully allocated, instead of attempting the entire request and potentially returning allocation failures."
         },
         "priorityProfile": {
-          "$ref": "#/definitions/PriorityProfile",
+          "$ref": "#/definitions/BulkCreatePriorityProfile",
           "description": "Configuration Options for Regular or Spot instances in BulkCreate."
         },
-        "vmSizesProfile": {
-          "type": "array",
-          "description": "List of VM sizes supported for BulkCreate. Every virtual machine is created from the operation-level computeProfile regardless of the size selected, so no per-VM-size override can be supplied here.",
-          "items": {
-            "$ref": "#/definitions/BulkCreateVmSizeProfile"
-          },
-          "x-ms-identifiers": []
+        "vmSize": {
+          "type": "string",
+          "description": "The VM size to use for every virtual machine created by the operation."
         },
         "computeProfile": {
           "$ref": "#/definitions/ComputeProfile",
           "description": "Compute Profile to configure the Virtual Machines. Applied uniformly to every virtual machine created by the operation."
         },
-        "zoneAllocationPolicy": {
-          "$ref": "#/definitions/ZoneAllocationPolicy",
-          "description": "Zone Allocation Policy for launching instances."
-        },
         "executionParameters": {
-          "$ref": "#/definitions/ExecutionParameters",
+          "$ref": "#/definitions/BulkCreateExecutionParameters",
           "description": "Extra parameters that control how the request is executed, including the retry policy."
         }
       },
@@ -3560,25 +3431,6 @@
         "capacity",
         "priorityProfile",
         "computeProfile"
-      ]
-    },
-    "BulkCreateVmSizeProfile": {
-      "type": "object",
-      "description": "A VM size that the service may select for a BulkCreate operation.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the VM size, eg Standard_D2ads_v5",
-          "minLength": 1
-        },
-        "rank": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The rank of this VM size in the priority order, starting at 0, where a lower value is preferred. Used when priorityProfile.allocationStrategy is Prioritized."
-        }
-      },
-      "required": [
-        "name"
       ]
     },
     "BulkactionVMExtension": {
@@ -4390,42 +4242,6 @@
           "type": "boolean",
           "description": "Specifies whether disk encryption should be enabled on the virtual machine."
         }
-      }
-    },
-    "DistributionStrategy": {
-      "type": "string",
-      "description": "The distribution strategy for zone allocation",
-      "enum": [
-        "BestEffortSingleZone",
-        "Prioritized",
-        "BestEffortBalanced",
-        "StrictBalanced"
-      ],
-      "x-ms-enum": {
-        "name": "DistributionStrategy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "BestEffortSingleZone",
-            "value": "BestEffortSingleZone",
-            "description": "Platform attempts to place as many VMs as possible in a single zone, falls back to multiple zones if needed"
-          },
-          {
-            "name": "Prioritized",
-            "value": "Prioritized",
-            "description": "Platform uses customer-provided zone rankings to allocate VMs"
-          },
-          {
-            "name": "BestEffortBalanced",
-            "value": "BestEffortBalanced",
-            "description": "Platform attempts to evenly distribute VMs across all available zones with best effort"
-          },
-          {
-            "name": "StrictBalanced",
-            "value": "StrictBalanced",
-            "description": "Platform must evenly distribute VMs across zones, request is rejected if exact balance cannot be achieved"
-          }
-        ]
       }
     },
     "DomainNameLabelScopeTypes": {
@@ -6135,29 +5951,6 @@
         "automaticByPlatformSettings": {
           "$ref": "#/definitions/WindowsVMGuestPatchAutomaticByPlatformSettings",
           "description": "Specifies additional settings for patch mode AutomaticByPlatform in VM Guest Patching on Windows."
-        }
-      }
-    },
-    "PriorityProfile": {
-      "type": "object",
-      "description": "The priority profile for flex VM creation",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/PriorityType",
-          "description": "The priority type for VM allocation"
-        },
-        "maxPricePerVM": {
-          "type": "number",
-          "format": "float",
-          "description": "Price per hour of each Spot VM will never exceed this. Available from 2026-04-06-preview."
-        },
-        "evictionPolicy": {
-          "$ref": "#/definitions/EvictionPolicy",
-          "description": "Eviction Policy to follow when evicting Spot VMs. Available from 2026-04-06-preview."
-        },
-        "allocationStrategy": {
-          "$ref": "#/definitions/AllocationStrategy",
-          "description": "The allocation strategy for VM size selection"
         }
       }
     },
@@ -8545,49 +8338,6 @@
           }
         ]
       }
-    },
-    "ZoneAllocationPolicy": {
-      "type": "object",
-      "description": "The zone allocation policy for distributing VMs across availability zones",
-      "properties": {
-        "distributionStrategy": {
-          "$ref": "#/definitions/DistributionStrategy",
-          "description": "The distribution strategy for zone allocation"
-        },
-        "zonePreferences": {
-          "type": "array",
-          "description": "The zone preferences for allocation priority",
-          "items": {
-            "$ref": "#/definitions/ZonePreference"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "ZonePreference": {
-      "type": "object",
-      "description": "A zone preference with a zone identifier and rank",
-      "properties": {
-        "zone": {
-          "type": "string",
-          "description": "The zone identifier"
-        },
-        "rank": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The rank of this zone in the priority order"
-        },
-        "targetMaxCapacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum capacity to place in this zone. The sum across capped zones must not exceed the requested capacity, and when every zone preference is capped the sum must equal the requested capacity.",
-          "minimum": 1
-        }
-      },
-      "required": [
-        "zone",
-        "rank"
-      ]
     }
   },
   "parameters": {

@@ -18,31 +18,9 @@
         "priorityProfile": {
           "type": "Spot",
           "maxPricePerVM": 0.2,
-          "evictionPolicy": "Delete",
-          "allocationStrategy": "LowestPrice"
+          "evictionPolicy": "Delete"
         },
-        "vmSizesProfile": [
-          {
-            "name": "Standard_D2s_v5",
-            "rank": 1
-          },
-          {
-            "name": "Standard_D4s_v5",
-            "rank": 2,
-            "override": {
-              "virtualMachineProfile": {
-                "storageProfile": {
-                  "imageReference": {
-                    "publisher": "Canonical",
-                    "offer": "0001-com-ubuntu-server-jammy",
-                    "sku": "22_04-lts-arm64",
-                    "version": "latest"
-                  }
-                }
-              }
-            }
-          }
-        ],
+        "vmSize": "Standard_D2s_v5",
         "computeProfile": {
           "virtualMachineProfile": {
             "storageProfile": {
@@ -103,19 +81,6 @@
           },
           "computeApiVersion": "2024-11-01"
         },
-        "zoneAllocationPolicy": {
-          "distributionStrategy": "BestEffortBalanced",
-          "zonePreferences": [
-            {
-              "zone": "1",
-              "rank": 1
-            },
-            {
-              "zone": "2",
-              "rank": 2
-            }
-          ]
-        },
         "overridesProfile": {
           "virtualMachineNamePrefix": "bulkvm",
           "overrides": [
@@ -137,6 +102,9 @@
           "retryPolicy": {
             "retryWindowInMinutes": 30,
             "onFailureAction": "Delete"
+          },
+          "additionalParameters": {
+            "key1": "value1"
           }
         }
       },
@@ -170,31 +138,9 @@
           "priorityProfile": {
             "type": "Spot",
             "maxPricePerVM": 0.2,
-            "evictionPolicy": "Delete",
-            "allocationStrategy": "LowestPrice"
+            "evictionPolicy": "Delete"
           },
-          "vmSizesProfile": [
-            {
-              "name": "Standard_D2s_v5",
-              "rank": 1
-            },
-            {
-              "name": "Standard_D4s_v5",
-              "rank": 2,
-              "override": {
-                "virtualMachineProfile": {
-                  "storageProfile": {
-                    "imageReference": {
-                      "publisher": "Canonical",
-                      "offer": "0001-com-ubuntu-server-jammy",
-                      "sku": "22_04-lts-arm64",
-                      "version": "latest"
-                    }
-                  }
-                }
-              }
-            }
-          ],
+          "vmSize": "Standard_D2s_v5",
           "computeProfile": {
             "virtualMachineProfile": {
               "storageProfile": {
@@ -255,23 +201,13 @@
             },
             "computeApiVersion": "2024-11-01"
           },
-          "zoneAllocationPolicy": {
-            "distributionStrategy": "BestEffortBalanced",
-            "zonePreferences": [
-              {
-                "zone": "1",
-                "rank": 1
-              },
-              {
-                "zone": "2",
-                "rank": 2
-              }
-            ]
-          },
           "executionParameters": {
             "retryPolicy": {
               "retryWindowInMinutes": 30,
               "onFailureAction": "Delete"
+            },
+            "additionalParameters": {
+              "key1": "value1"
             }
           },
           "resources": [
@@ -324,31 +260,9 @@
           "priorityProfile": {
             "type": "Spot",
             "maxPricePerVM": 0.2,
-            "evictionPolicy": "Delete",
-            "allocationStrategy": "LowestPrice"
+            "evictionPolicy": "Delete"
           },
-          "vmSizesProfile": [
-            {
-              "name": "Standard_D2s_v5",
-              "rank": 1
-            },
-            {
-              "name": "Standard_D4s_v5",
-              "rank": 2,
-              "override": {
-                "virtualMachineProfile": {
-                  "storageProfile": {
-                    "imageReference": {
-                      "publisher": "Canonical",
-                      "offer": "0001-com-ubuntu-server-jammy",
-                      "sku": "22_04-lts-arm64",
-                      "version": "latest"
-                    }
-                  }
-                }
-              }
-            }
-          ],
+          "vmSize": "Standard_D2s_v5",
           "computeProfile": {
             "virtualMachineProfile": {
               "storageProfile": {
@@ -409,23 +323,13 @@
             },
             "computeApiVersion": "2024-11-01"
           },
-          "zoneAllocationPolicy": {
-            "distributionStrategy": "BestEffortBalanced",
-            "zonePreferences": [
-              {
-                "zone": "1",
-                "rank": 1
-              },
-              {
-                "zone": "2",
-                "rank": 2
-              }
-            ]
-          },
           "executionParameters": {
             "retryPolicy": {
               "retryWindowInMinutes": 30,
               "onFailureAction": "Delete"
+            },
+            "additionalParameters": {
+              "key1": "value1"
             }
           },
           "resources": [

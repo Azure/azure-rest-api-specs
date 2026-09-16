@@ -203,6 +203,7 @@ model BulkCreateCustomPriorityProfile {
   @doc("Eviction Policy to follow when evicting Spot VMs.")
   evictionPolicy?: EvictionPolicy;
 
+  @removed(Versions.`2026-09-06-preview`)
   @doc("The allocation strategy for VM size selection")
   allocationStrategy?: BulkCreateCustomAllocationStrategy;
 }
@@ -215,6 +216,17 @@ model BulkCreateCustomZoneAllocationPolicy {
   @identifiers(#[])
   @doc("The zone preferences for allocation priority")
   zonePreferences?: Array<ZonePreference>;
+}
+
+@added(Versions.`2026-09-06-preview`)
+@doc("Extra parameters that control how a BulkCreateCustom request is executed.")
+model BulkCreateCustomExecutionParameters {
+  @doc("Retry policy the user can pass")
+  retryPolicy?: RetryPolicy;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form object used to pass additional parameters."
+  @doc("Additional parameters for the request.")
+  additionalParameters?: Record<unknown>;
 }
 
 @doc("Details of the BulkCreateCustom.")
@@ -252,6 +264,11 @@ model BulkCreateCustomProperties {
   @doc("Configuration Options for Regular or Spot instances in BulkCreateCustom.")
   priorityProfile: BulkCreateCustomPriorityProfile;
 
+  @added(Versions.`2026-09-06-preview`)
+  @doc("The VM size to use for every virtual machine created by the operation.")
+  vmSize?: string;
+
+  @removed(Versions.`2026-09-06-preview`)
   @identifiers(#[])
   @doc("List of VM sizes supported for BulkCreateCustom")
   vmSizesProfile?: Array<BulkCreateCustomVmSizeProfile>;
@@ -259,6 +276,7 @@ model BulkCreateCustomProperties {
   @doc("Compute Profile to configure the Virtual Machines.")
   computeProfile: ComputeProfile;
 
+  @removed(Versions.`2026-09-06-preview`)
   @doc("Zone Allocation Policy for launching instances.")
   zoneAllocationPolicy?: BulkCreateCustomZoneAllocationPolicy;
 
@@ -266,8 +284,9 @@ model BulkCreateCustomProperties {
   @doc("Per-VM overrides and the shared name prefix, specified when the operation is created.")
   overridesProfile?: BulkCreateCustomOverridesProfile;
 
+  @typeChangedFrom(Versions.`2026-09-06-preview`, ExecutionParameters)
   @doc("Extra parameters that control how the request is executed, including the retry policy.")
-  executionParameters?: ExecutionParameters;
+  executionParameters?: BulkCreateCustomExecutionParameters;
 }
 
 @doc("List of BulkCreateCustom resources.")
