@@ -19,9 +19,19 @@
               "priorityProfile": {
                 "type": "Spot",
                 "maxPricePerVM": 0.2,
-                "evictionPolicy": "Delete"
+                "evictionPolicy": "Delete",
+                "allocationStrategy": "LowestPrice"
               },
-              "vmSize": "Standard_D2s_v5",
+              "vmSizesProfile": [
+                {
+                  "name": "Standard_D2s_v5",
+                  "rank": 1
+                },
+                {
+                  "name": "Standard_D4s_v5",
+                  "rank": 2
+                }
+              ],
               "computeProfile": {
                 "virtualMachineProfile": {
                   "storageProfile": {
@@ -82,14 +92,24 @@
                 },
                 "computeApiVersion": "2024-11-01"
               },
+              "zoneAllocationPolicy": {
+                "distributionStrategy": "BestEffortBalanced",
+                "zonePreferences": [
+                  {
+                    "zone": "1",
+                    "rank": 1
+                  },
+                  {
+                    "zone": "2",
+                    "rank": 2
+                  }
+                ]
+              },
               "executionParameters": {
                 "retryPolicy": {
                   "retryWindowInMinutes": 30,
                   "onFailureAction": "Delete"
                 }
-              },
-              "additionalParameters": {
-                "key1": "value1"
               }
             },
             "zones": [
@@ -126,9 +146,19 @@
               "priorityProfile": {
                 "type": "Spot",
                 "maxPricePerVM": 0.2,
-                "evictionPolicy": "Delete"
+                "evictionPolicy": "Delete",
+                "allocationStrategy": "LowestPrice"
               },
-              "vmSize": "Standard_D2s_v5",
+              "vmSizesProfile": [
+                {
+                  "name": "Standard_D2s_v5",
+                  "rank": 1
+                },
+                {
+                  "name": "Standard_D4s_v5",
+                  "rank": 2
+                }
+              ],
               "computeProfile": {
                 "virtualMachineProfile": {
                   "storageProfile": {
@@ -189,14 +219,24 @@
                 },
                 "computeApiVersion": "2024-11-01"
               },
+              "zoneAllocationPolicy": {
+                "distributionStrategy": "BestEffortBalanced",
+                "zonePreferences": [
+                  {
+                    "zone": "1",
+                    "rank": 1
+                  },
+                  {
+                    "zone": "2",
+                    "rank": 2
+                  }
+                ]
+              },
               "executionParameters": {
                 "retryPolicy": {
                   "retryWindowInMinutes": 30,
                   "onFailureAction": "Delete"
                 }
-              },
-              "additionalParameters": {
-                "key1": "value1"
               }
             },
             "zones": [

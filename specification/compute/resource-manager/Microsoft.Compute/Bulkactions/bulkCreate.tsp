@@ -145,10 +145,11 @@ model BulkCreateProperties {
   @doc("Configuration Options for Regular or Spot instances in BulkCreate.")
   priorityProfile: PriorityProfile;
 
+  @added(Versions.`2026-10-06-preview`)
   @doc("The VM size to use for every virtual machine created by the operation.")
   vmSize?: string;
 
-  @removed(Versions.`2026-09-06-preview`)
+  @removed(Versions.`2026-10-06-preview`)
   @identifiers(#[])
   @doc("List of VM sizes supported for BulkCreate. Every virtual machine is created from the operation-level computeProfile regardless of the size selected, so no per-VM-size override can be supplied here.")
   vmSizesProfile?: Array<BulkCreateVmSizeProfile>;
@@ -156,7 +157,7 @@ model BulkCreateProperties {
   @doc("Compute Profile to configure the Virtual Machines. Applied uniformly to every virtual machine created by the operation.")
   computeProfile: ComputeProfile;
 
-  @removed(Versions.`2026-09-06-preview`)
+  @removed(Versions.`2026-10-06-preview`)
   @doc("Zone Allocation Policy for launching instances.")
   zoneAllocationPolicy?: ZoneAllocationPolicy;
 
@@ -164,6 +165,7 @@ model BulkCreateProperties {
   executionParameters?: ExecutionParameters;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form object used to pass additional parameters."
+  @added(Versions.`2026-10-06-preview`)
   @doc("Additional parameters for the request.")
   additionalParameters?: Record<unknown>;
 }

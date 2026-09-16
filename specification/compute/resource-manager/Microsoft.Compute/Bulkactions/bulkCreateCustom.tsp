@@ -203,7 +203,7 @@ model BulkCreateCustomPriorityProfile {
   @doc("Eviction Policy to follow when evicting Spot VMs.")
   evictionPolicy?: EvictionPolicy;
 
-  @removed(Versions.`2026-09-06-preview`)
+  @removed(Versions.`2026-10-06-preview`)
   @doc("The allocation strategy for VM size selection")
   allocationStrategy?: BulkCreateCustomAllocationStrategy;
 }
@@ -253,11 +253,11 @@ model BulkCreateCustomProperties {
   @doc("Configuration Options for Regular or Spot instances in BulkCreateCustom.")
   priorityProfile: BulkCreateCustomPriorityProfile;
 
-  @added(Versions.`2026-09-06-preview`)
+  @added(Versions.`2026-10-06-preview`)
   @doc("The VM size to use for every virtual machine created by the operation.")
   vmSize?: string;
 
-  @removed(Versions.`2026-09-06-preview`)
+  @removed(Versions.`2026-10-06-preview`)
   @identifiers(#[])
   @doc("List of VM sizes supported for BulkCreateCustom")
   vmSizesProfile?: Array<BulkCreateCustomVmSizeProfile>;
@@ -265,7 +265,7 @@ model BulkCreateCustomProperties {
   @doc("Compute Profile to configure the Virtual Machines.")
   computeProfile: ComputeProfile;
 
-  @removed(Versions.`2026-09-06-preview`)
+  @removed(Versions.`2026-10-06-preview`)
   @doc("Zone Allocation Policy for launching instances.")
   zoneAllocationPolicy?: BulkCreateCustomZoneAllocationPolicy;
 
@@ -277,7 +277,7 @@ model BulkCreateCustomProperties {
   executionParameters?: ExecutionParameters;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form object used to pass additional parameters."
-  @added(Versions.`2026-09-06-preview`)
+  @added(Versions.`2026-10-06-preview`)
   @doc("Additional parameters for the request.")
   additionalParameters?: Record<unknown>;
 }
