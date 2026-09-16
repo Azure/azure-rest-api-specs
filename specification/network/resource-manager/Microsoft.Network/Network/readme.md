@@ -93,14 +93,6 @@ suppressions:
     reason: virtualNetworkGatewayName is an existing parent resource path parameter, used consistently across all 36 VirtualNetworkGateways operations in this spec - none of which define a pattern (established in 2025-07-01 and earlier). Adding a pattern only on the new VirtualNetworkGateways_GetEffectiveRoutes operation would be inconsistent with the rest of the resource, and adding it across all operations would be a breaking change to prior API versions.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getEffectiveRoutes"]
-  - code: ResourceNameRestriction
-    from: virtualNetwork.json
-    reason: networkVirtualApplianceName is an existing parent resource path parameter established in prior API versions (2025-07-01 and earlier). Adding a pattern constraint would be a breaking change to those versions.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/prepareMigration"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/executeMigration"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/commitMigration"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/abortMigration"]
   - code: ParametersInPointGet
     from: loadBalancer.json
     where:
