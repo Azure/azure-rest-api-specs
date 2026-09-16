@@ -416,11 +416,6 @@ model ExecutionParameters {
   @added(Microsoft.Compute.Versions.`2026-08-06-preview`)
   @doc("Capacity recommendation parameters for the request. When provided on an executeStart request, the service computes placement recommendations only if the VM fails to start due to an allocation failure; the recommendations for the desired sizes and locations are then surfaced in the operation's capacityRecommendation response.")
   capacityRecommendationParameters?: CapacityRecommendationParameters;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form object used to pass additional parameters."
-  @added(Microsoft.Compute.Versions.`2026-09-06-preview`)
-  @doc("Additional parameters for the request.")
-  additionalParameters?: Record<unknown>;
 }
 
 @added(Microsoft.Compute.Versions.`2026-08-06-preview`)

@@ -55,7 +55,9 @@ suppressions:
       additionalParameters is a free-form bag of request parameters that bulkactions
       delivers as is to compute, so its members cannot be modelled ahead of time.
     from: Bulkactions.json
-    where: $.definitions.ExecutionParameters.properties.additionalParameters
+    where:
+      - $.definitions.BulkCreateProperties.properties.additionalParameters
+      - $.definitions.BulkCreateCustomProperties.properties.additionalParameters
 ```
 
 ### Tag: package-2026-09-06-preview

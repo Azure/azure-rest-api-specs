@@ -162,6 +162,10 @@ model BulkCreateProperties {
 
   @doc("Extra parameters that control how the request is executed, including the retry policy.")
   executionParameters?: ExecutionParameters;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form object used to pass additional parameters."
+  @doc("Additional parameters for the request.")
+  additionalParameters?: Record<unknown>;
 }
 
 @added(Versions.`2026-09-06-preview`)
