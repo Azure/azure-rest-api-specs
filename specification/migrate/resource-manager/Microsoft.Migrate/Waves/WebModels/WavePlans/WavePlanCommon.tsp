@@ -21,6 +21,45 @@ union PlanSource {
   string,
 }
 
+@doc("The reason a materialized wave plan is considered outdated.")
+@added(ApiVersions.v2026_09_01_preview)
+union WavePlanOutdatedReason {
+  @doc("A proposed workload was committed to an already-created wave.")
+  ProposedWorkloadCommited: "ProposedWorkloadCommited",
+
+  @doc("A workload was removed from an already-created wave or from the assessment.")
+  CommittedWorkloadRemoved: "CommittedWorkloadRemoved",
+
+  @doc("A workload in an already-created wave changed.")
+  CommittedWorkloadUpdated: "CommittedWorkloadUpdated",
+
+  string,
+}
+
+@doc("The outdated-status fields shared by the getWavePlans list item and the refreshWavePlanStatus response.")
+@added(ApiVersions.v2026_09_01_preview)
+model WavePlanOutdatedStatus {
+  @doc("Whether the current materialized plan is outdated.")
+  @added(ApiVersions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read)
+  isOutdated: boolean;
+
+  @doc("The reasons the current materialized plan is outdated. Always present; empty when the plan is not outdated.")
+  @added(ApiVersions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read)
+  outdatedReasons: WavePlanOutdatedReason[];
+
+  @doc("The UTC time when the plan status was last established.")
+  @added(ApiVersions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read)
+  lastCheckedTime?: utcDateTime;
+
+  @doc("The first UTC time when the current materialized plan was found outdated. Absent while the plan is up to date.")
+  @added(ApiVersions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read)
+  outdatedTime?: utcDateTime;
+}
+
 @doc("Artifact Store identity for a wave plan run. Consumers use the artifact ARM id and version id to reference or share the committed artifact and resolve time-bound download access.")
 @added(ApiVersions.v2026_06_01_preview)
 model ArtifactProperties {
@@ -85,4 +124,6 @@ model WavePlanListItem {
   @doc("The plan-level summary (number of waves, risk, confidence).")
   @visibility(Lifecycle.Read)
   summary?: WavePlanSummary;
+
+  ...WavePlanOutdatedStatus;
 }

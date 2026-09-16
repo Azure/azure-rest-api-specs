@@ -1093,6 +1093,80 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/refreshWavePlanStatus": {
+      "post": {
+        "operationId": "MigrateProjects_RefreshWavePlanStatus",
+        "tags": [
+          "MigrateProjects"
+        ],
+        "description": "Re-evaluate whether the materialized wave plan for an assessment and migration path is still current, and persist the refreshed outdated status. Long-running operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RefreshWavePlanStatusRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RefreshWavePlanStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrateProjects_RefreshWavePlanStatus_MaximumSet": {
+            "$ref": "./examples/MigrateProjects_RefreshWavePlanStatus_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/taskSummary": {
       "post": {
         "operationId": "Tasks_GetSummary",
@@ -1735,6 +1809,146 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/waves/{waveName}/exportWorkloadConfiguration": {
+      "post": {
+        "operationId": "Waves_ExportWorkloadConfiguration",
+        "tags": [
+          "Waves"
+        ],
+        "description": "Export the workload configuration of a wave as a CSV and return a read-only download SAS URI. Long-running operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "waveName",
+            "in": "path",
+            "description": "Migration Wave Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExportWorkloadConfigurationResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Waves_ExportWorkloadConfiguration_MaximumSet": {
+            "$ref": "./examples/Waves_ExportWorkloadConfiguration_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/waves/{waveName}/importWorkloadConfiguration": {
+      "post": {
+        "operationId": "Waves_ImportWorkloadConfiguration",
+        "tags": [
+          "Waves"
+        ],
+        "description": "Apply the validated workload configuration staged for a wave. Long-running operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "waveName",
+            "in": "path",
+            "description": "Migration Wave Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Waves_ImportWorkloadConfiguration_MaximumSet": {
+            "$ref": "./examples/Waves_ImportWorkloadConfiguration_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/waves/{waveName}/refresh": {
       "post": {
         "operationId": "Waves_Refresh",
@@ -1788,6 +2002,79 @@
             "$ref": "./examples/Waves_Refresh_MaximumSet_Gen.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/waves/{waveName}/validateWorkloadConfiguration": {
+      "post": {
+        "operationId": "Waves_ValidateWorkloadConfiguration",
+        "tags": [
+          "Waves"
+        ],
+        "description": "Validate the workload configuration CSV staged for a wave without applying it. Long-running operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "waveName",
+            "in": "path",
+            "description": "Migration Wave Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidateWorkloadConfigurationResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Waves_ValidateWorkloadConfiguration_MaximumSet": {
+            "$ref": "./examples/Waves_ValidateWorkloadConfiguration_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1900,10 +2187,56 @@
         "skippedWaves"
       ]
     },
+    "ExportWorkloadConfigurationResponse": {
+      "type": "object",
+      "description": "Response payload for the exportWorkloadConfiguration action.",
+      "properties": {
+        "downloadSasUri": {
+          "type": "string",
+          "description": "The read-only SAS URI from which the exported workload configuration CSV can be downloaded.",
+          "readOnly": true
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC expiration timestamp of the returned download SAS URI.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "downloadSasUri",
+        "expirationTime"
+      ]
+    },
     "FetchSasUriRequest": {
       "type": "object",
       "description": "Request body for the fetchSASUri action.",
       "properties": {
+        "uploadType": {
+          "type": "string",
+          "description": "The upload workflow the SAS URI is minted for. Defaults to WavePlan when omitted. WavePlan requires assessmentArmId and migrationPath; WorkloadConfiguration requires waveArmId.",
+          "default": "WavePlan",
+          "enum": [
+            "WavePlan",
+            "WorkloadConfiguration"
+          ],
+          "x-ms-enum": {
+            "name": "UploadType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "WavePlan",
+                "value": "WavePlan",
+                "description": "Upload a wave-plan CSV. Requires assessmentArmId and migrationPath."
+              },
+              {
+                "name": "WorkloadConfiguration",
+                "value": "WorkloadConfiguration",
+                "description": "Upload a workload configuration CSV. Requires waveArmId."
+              }
+            ]
+          }
+        },
         "assessmentArmId": {
           "type": "string",
           "description": "The assessment ARM ID identifying the wave plan to amend."
@@ -1912,15 +2245,15 @@
           "type": "string",
           "description": "The migration path identifying the wave plan to amend."
         },
+        "waveArmId": {
+          "type": "string",
+          "description": "The ARM ID of the wave whose workload configuration is being uploaded. Required when uploadType is WorkloadConfiguration."
+        },
         "sasVersionId": {
           "type": "string",
           "description": "An optional caller-supplied SAS version ID folded into the deterministic staging blob name so concurrent upload sessions stage to distinct blobs."
         }
-      },
-      "required": [
-        "assessmentArmId",
-        "migrationPath"
-      ]
+      }
     },
     "FetchSasUriResponse": {
       "type": "object",
@@ -2628,6 +2961,77 @@
         }
       }
     },
+    "RefreshWavePlanStatusRequest": {
+      "type": "object",
+      "description": "Request body for the refreshWavePlanStatus action.",
+      "properties": {
+        "assessmentArmId": {
+          "type": "string",
+          "description": "The assessment ARM ID identifying the wave plan whose status is refreshed."
+        },
+        "migrationPath": {
+          "type": "string",
+          "description": "The migration path identifying the wave plan whose status is refreshed."
+        }
+      },
+      "required": [
+        "assessmentArmId",
+        "migrationPath"
+      ]
+    },
+    "RefreshWavePlanStatusResponse": {
+      "type": "object",
+      "description": "Response payload for the refreshWavePlanStatus action.",
+      "properties": {
+        "wavePlanName": {
+          "type": "string",
+          "description": "The wave-plan name whose status was refreshed.",
+          "readOnly": true
+        },
+        "assessmentArmId": {
+          "type": "string",
+          "description": "The assessment ARM ID the plan belongs to.",
+          "readOnly": true
+        },
+        "migrationPath": {
+          "type": "string",
+          "description": "The migration path the plan was generated for.",
+          "readOnly": true
+        },
+        "isOutdated": {
+          "type": "boolean",
+          "description": "Whether the current materialized plan is outdated.",
+          "readOnly": true
+        },
+        "outdatedReasons": {
+          "type": "array",
+          "description": "The reasons the current materialized plan is outdated. Always present; empty when the plan is not outdated.",
+          "items": {
+            "$ref": "#/definitions/WavePlanOutdatedReason"
+          },
+          "readOnly": true
+        },
+        "lastCheckedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time when the plan status was last established.",
+          "readOnly": true
+        },
+        "outdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The first UTC time when the current materialized plan was found outdated. Absent while the plan is up to date.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "wavePlanName",
+        "assessmentArmId",
+        "migrationPath",
+        "isOutdated",
+        "outdatedReasons"
+      ]
+    },
     "ServerMigrationSpecificProperties": {
       "type": "object",
       "description": "Represents a Server Migration Specific properties base model.",
@@ -3065,61 +3469,76 @@
           "description": "The provisioning state of the validated wave-plan row.",
           "readOnly": true
         },
-        "validationSummary": {
-          "$ref": "#/definitions/ValidationSummary",
-          "description": "The terminal validation counts.",
+        "status": {
+          "$ref": "#/definitions/ValidationStatus",
+          "description": "The terminal validation status.",
           "readOnly": true
         },
-        "issues": {
-          "type": "array",
-          "description": "The validation findings. Always present; empty when the staged wave plan has no findings. Findings do not fail the operation.",
-          "items": {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
+        "sasUri": {
+          "type": "string",
+          "description": "The read-only SAS URI of the error CSV describing the validation findings. Present only when findings were produced.",
+          "readOnly": true
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC expiration timestamp of the error CSV SAS URI. Present only when sasUri is present.",
+          "readOnly": true
         }
       },
       "required": [
-        "validationSummary",
-        "issues"
+        "status"
       ]
     },
-    "ValidationSummary": {
+    "ValidateWorkloadConfigurationResponse": {
       "type": "object",
-      "description": "Summarizes the rows and waves represented by a completed wave-plan validation.",
+      "description": "Response payload for the validateWorkloadConfiguration action.",
       "properties": {
-        "validatedRowCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The total number of rows processed. Always equal to validRowCount plus invalidRowCount.",
+        "status": {
+          "$ref": "#/definitions/ValidationStatus",
+          "description": "The terminal validation status.",
           "readOnly": true
         },
-        "validRowCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of rows without validation errors.",
+        "sasUri": {
+          "type": "string",
+          "description": "The read-only SAS URI of the error CSV describing the validation findings. Present only when findings were produced.",
           "readOnly": true
         },
-        "invalidRowCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of rows with one or more validation errors. A single row can produce multiple issues, so this is independent of the length of issues.",
-          "readOnly": true
-        },
-        "numberOfWaves": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of distinct valid waves represented by the validated rows.",
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC expiration timestamp of the error CSV SAS URI. Present only when sasUri is present.",
           "readOnly": true
         }
       },
       "required": [
-        "validatedRowCount",
-        "validRowCount",
-        "invalidRowCount",
-        "numberOfWaves"
+        "status"
       ]
+    },
+    "ValidationStatus": {
+      "type": "string",
+      "description": "The terminal status of a CSV validation run.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The staged CSV passed validation."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The staged CSV failed validation. An error CSV is available through sasUri."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "Wave": {
       "type": "object",
@@ -3200,6 +3619,31 @@
           "$ref": "#/definitions/WavePlanSummary",
           "description": "The plan-level summary (number of waves, risk, confidence).",
           "readOnly": true
+        },
+        "isOutdated": {
+          "type": "boolean",
+          "description": "Whether the current materialized plan is outdated.",
+          "readOnly": true
+        },
+        "outdatedReasons": {
+          "type": "array",
+          "description": "The reasons the current materialized plan is outdated. Always present; empty when the plan is not outdated.",
+          "items": {
+            "$ref": "#/definitions/WavePlanOutdatedReason"
+          },
+          "readOnly": true
+        },
+        "lastCheckedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time when the plan status was last established.",
+          "readOnly": true
+        },
+        "outdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The first UTC time when the current materialized plan was found outdated. Absent while the plan is up to date.",
+          "readOnly": true
         }
       },
       "required": [
@@ -3208,8 +3652,40 @@
         "migrationPath",
         "provisioningState",
         "planSource",
-        "artifactProperties"
+        "artifactProperties",
+        "isOutdated",
+        "outdatedReasons"
       ]
+    },
+    "WavePlanOutdatedReason": {
+      "type": "string",
+      "description": "The reason a materialized wave plan is considered outdated.",
+      "enum": [
+        "ProposedWorkloadCommited",
+        "CommittedWorkloadRemoved",
+        "CommittedWorkloadUpdated"
+      ],
+      "x-ms-enum": {
+        "name": "WavePlanOutdatedReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ProposedWorkloadCommited",
+            "value": "ProposedWorkloadCommited",
+            "description": "A proposed workload was committed to an already-created wave."
+          },
+          {
+            "name": "CommittedWorkloadRemoved",
+            "value": "CommittedWorkloadRemoved",
+            "description": "A workload was removed from an already-created wave or from the assessment."
+          },
+          {
+            "name": "CommittedWorkloadUpdated",
+            "value": "CommittedWorkloadUpdated",
+            "description": "A workload in an already-created wave changed."
+          }
+        ]
+      }
     },
     "WavePlanSummary": {
       "type": "object",

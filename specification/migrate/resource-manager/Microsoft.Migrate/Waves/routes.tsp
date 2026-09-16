@@ -9,6 +9,8 @@ import "./WebModels/WavePlans/FetchSasUri.tsp";
 import "./WebModels/WavePlans/ImportWavePlan.tsp";
 import "./WebModels/WavePlans/ImportWavePlanConfig.tsp";
 import "./WebModels/WavePlans/ValidateWavePlan.tsp";
+import "./WebModels/WavePlans/RefreshWavePlanStatus.tsp";
+import "./WebModels/WorkloadConfiguration/WorkloadConfiguration.tsp";
 import "./WebModels/Waves/MigrationWaves.tsp";
 import "./WebModels/RefreshEntities/RefreshEntities.tsp";
 import "./WebModels/MigrationEntity/MigrationEntity.tsp";
@@ -97,6 +99,15 @@ interface MigrateProjects {
     ValidateWavePlanRequest,
     ValidateWavePlanResponse
   >;
+
+  @added(ApiVersions.v2026_09_01_preview)
+  @doc("Re-evaluate whether the materialized wave plan for an assessment and migration path is still current, and persist the refreshed outdated status. Long-running operation.")
+  @action("refreshWavePlanStatus")
+  refreshWavePlanStatus is ArmResourceActionAsync<
+    MigrateProject,
+    RefreshWavePlanStatusRequest,
+    RefreshWavePlanStatusResponse
+  >;
 }
 
 @armResourceOperations
@@ -118,6 +129,32 @@ interface Waves {
   @Azure.ClientGenerator.Core.clientName("triggerRefresh", "java")
   @Azure.ClientGenerator.Core.clientName("triggerRefresh", "csharp")
   refresh is ArmResourceActionSync<Wave, void, WaveProperties>;
+
+  @added(ApiVersions.v2026_09_01_preview)
+  @doc("Export the workload configuration of a wave as a CSV and return a read-only download SAS URI. Long-running operation.")
+  @action("exportWorkloadConfiguration")
+  exportWorkloadConfiguration is ArmResourceActionAsync<
+    Wave,
+    void,
+    ExportWorkloadConfigurationResponse
+  >;
+
+  @added(ApiVersions.v2026_09_01_preview)
+  @doc("Validate the workload configuration CSV staged for a wave without applying it. Long-running operation.")
+  @action("validateWorkloadConfiguration")
+  validateWorkloadConfiguration is ArmResourceActionAsync<
+    Wave,
+    void,
+    ValidateWorkloadConfigurationResponse
+  >;
+
+  @added(ApiVersions.v2026_09_01_preview)
+  @doc("Apply the validated workload configuration staged for a wave. Long-running operation.")
+  @action("importWorkloadConfiguration")
+  importWorkloadConfiguration is ArmResourceActionNoResponseContentAsync<
+    Wave,
+    void
+  >;
 }
 
 @armResourceOperations

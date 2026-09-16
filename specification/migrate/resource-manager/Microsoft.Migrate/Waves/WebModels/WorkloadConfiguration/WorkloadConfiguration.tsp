@@ -10,39 +10,22 @@ using Azure.ResourceManager;
 namespace Microsoft.Migrate;
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name consistent with existing wave plan action models in this API"
-@doc("Request body for the validateWavePlan action.")
+@doc("Response payload for the exportWorkloadConfiguration action.")
 @added(ApiVersions.v2026_09_01_preview)
-model ValidateWavePlanRequest {
-  @doc("The assessment ARM ID identifying the staged wave plan.")
-  assessmentArmId: string;
+model ExportWorkloadConfigurationResponse {
+  @doc("The read-only SAS URI from which the exported workload configuration CSV can be downloaded.")
+  @visibility(Lifecycle.Read)
+  downloadSasUri: string;
 
-  @doc("The migration path identifying the staged wave plan.")
-  migrationPath: string;
-
-  @doc("The SAS version ID used to locate the uploaded CSV. Must match the value passed to fetchSASUri when the CSV was staged.")
-  sasVersionId: string;
+  @doc("The UTC expiration timestamp of the returned download SAS URI.")
+  @visibility(Lifecycle.Read)
+  expirationTime: utcDateTime;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name consistent with existing wave plan action models in this API"
-@doc("Response payload for the validateWavePlan action.")
+@doc("Response payload for the validateWorkloadConfiguration action.")
 @added(ApiVersions.v2026_09_01_preview)
-model ValidateWavePlanResponse {
-  @doc("The assessment ARM ID that was validated.")
-  @visibility(Lifecycle.Read)
-  assessmentArmId?: string;
-
-  @doc("The migration path that was validated.")
-  @visibility(Lifecycle.Read)
-  migrationPath?: string;
-
-  @doc("The wave-plan name resolved during validation.")
-  @visibility(Lifecycle.Read)
-  wavePlanName?: string;
-
-  @doc("The provisioning state of the validated wave-plan row.")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
+model ValidateWorkloadConfigurationResponse {
   @doc("The terminal validation status.")
   @visibility(Lifecycle.Read)
   status: ValidationStatus;

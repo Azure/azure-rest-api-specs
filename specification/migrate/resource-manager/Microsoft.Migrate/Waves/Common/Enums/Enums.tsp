@@ -3,6 +3,18 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Migrate;
 
+@doc("The terminal status of a CSV validation run.")
+@added(ApiVersions.v2026_09_01_preview)
+union ValidationStatus {
+  @doc("The staged CSV passed validation.")
+  Succeeded: "Succeeded",
+
+  @doc("The staged CSV failed validation. An error CSV is available through sasUri.")
+  Failed: "Failed",
+
+  string,
+}
+
 @doc("The status of the current operation.")
 union ProvisioningState {
   @doc("Resource provisioning Successful.")

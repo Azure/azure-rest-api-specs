@@ -1,6 +1,6 @@
 {
-  "title": "MigrateProjects_ValidateWavePlan_MaximumSet",
-  "operationId": "MigrateProjects_ValidateWavePlan",
+  "title": "MigrateProjects_RefreshWavePlanStatus_MaximumSet",
+  "operationId": "MigrateProjects_RefreshWavePlanStatus",
   "parameters": {
     "api-version": "2026-09-01-preview",
     "subscriptionId": "F4566D7C-05F8-41DC-A6B4-AFC0600F0AC0",
@@ -8,20 +8,22 @@
     "projectName": "myProjectName",
     "body": {
       "assessmentArmId": "/subscriptions/F4566D7C-05F8-41DC-A6B4-AFC0600F0AC0/resourceGroups/rgwaves/providers/Microsoft.Migrate/assessmentProjects/myProjectName/groups/group1/assessments/assessment1",
-      "migrationPath": "AzureVM",
-      "sasVersionId": "pcjubmrrvrhahgyuztztftzwfjbg"
+      "migrationPath": "AzureVM"
     }
   },
   "responses": {
     "200": {
       "body": {
+        "wavePlanName": "WavePlan_assessment1_AzureVM",
         "assessmentArmId": "/subscriptions/F4566D7C-05F8-41DC-A6B4-AFC0600F0AC0/resourceGroups/rgwaves/providers/Microsoft.Migrate/assessmentProjects/myProjectName/groups/group1/assessments/assessment1",
         "migrationPath": "AzureVM",
-        "wavePlanName": "WavePlan_assessment1_AzureVM",
-        "provisioningState": "Succeeded",
-        "status": "Failed",
-        "sasUri": "https://contosostorage.blob.core.windows.net/waveplans/assessment1-AzureVM-errors.csv?sv=2026-01-01&se=2026-09-15T12%3A00%3A00Z&sr=b&sp=r&sig=redacted",
-        "expirationTime": "2026-09-15T12:00:00.000Z"
+        "isOutdated": true,
+        "outdatedReasons": [
+          "ProposedWorkloadCommited",
+          "CommittedWorkloadUpdated"
+        ],
+        "lastCheckedTime": "2026-09-15T14:30:00.000Z",
+        "outdatedTime": "2026-09-14T09:12:33.000Z"
       }
     },
     "202": {
