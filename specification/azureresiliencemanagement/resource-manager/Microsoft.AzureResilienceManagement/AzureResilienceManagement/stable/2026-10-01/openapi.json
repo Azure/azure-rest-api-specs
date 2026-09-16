@@ -6662,7 +6662,8 @@
       "type": "string",
       "description": "Enum for Drill type object hierarchy.",
       "enum": [
-        "Zonal"
+        "Zonal",
+        "Regional"
       ],
       "x-ms-enum": {
         "name": "DrillType",
@@ -6672,6 +6673,11 @@
             "name": "Zonal",
             "value": "Zonal",
             "description": "Zonal Drill."
+          },
+          {
+            "name": "Regional",
+            "value": "Regional",
+            "description": "Regional Drill."
           }
         ]
       }
@@ -9855,6 +9861,35 @@
           "description": "Time when the refresh operation was last performed."
         }
       }
+    },
+    "RegionalDrill": {
+      "type": "object",
+      "description": "Regional Drill resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegionalDrillProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RegionalDrillProperties": {
+      "type": "object",
+      "description": "Definition of Regional Drill properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DrillProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Regional"
     },
     "RelativeResourceCompositionState": {
       "type": "string",
