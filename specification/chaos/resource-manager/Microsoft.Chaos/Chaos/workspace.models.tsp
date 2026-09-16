@@ -69,14 +69,13 @@ model WorkspaceProperties {
   scopes: Azure.Core.armResourceIdentifier[];
 
   /**
-   * The requested encryption setting and service observations. On PUT, omission
+   * The requested customer key and service observations. On PUT, omission of
+   * encryption or customerManagedKeyEncryption, or an empty encryption object,
    * selects Microsoft-managed protection, including when replacing a Workspace
-   * that uses a customer-managed key. Null is not a valid PUT value.
+   * that uses a customer key. Null is not a valid PUT value.
    */
   @added(Versions.v2026_11_01)
-  encryption?: WorkspaceEncryption<WorkspaceEncryptionKeySource> = #{
-    keySource: "Microsoft.Storage",
-  };
+  encryption?: WorkspaceEncryption;
 }
 
 /**

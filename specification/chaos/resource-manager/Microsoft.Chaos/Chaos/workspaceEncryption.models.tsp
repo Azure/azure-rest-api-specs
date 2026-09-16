@@ -6,65 +6,61 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
-/**
- * The requested key setting and the service-owned encryption observations.
- * A template instance keeps the object's PUT default in the generated schema.
- * @template KeySource The supported key-source type.
- */
+/** The requested customer key, onboarding information, and service observations. */
 @added(Versions.v2026_11_01)
-model WorkspaceEncryption<KeySource extends string> {
+model WorkspaceEncryption {
   /**
-   * The requested key source. Microsoft.Keyvault requires keyVaultProperties.
-   * Microsoft.Storage requires keyVaultProperties to be absent.
-   * Unsupported key sources are rejected.
+   * The requested customer-managed key. Absence means Microsoft-managed
+   * protection. A present object must contain a valid keyEncryptionKeyUrl.
    */
-  keySource: KeySource;
-
-  /** The customer key reference. Omit this object for Microsoft-managed protection. */
-  keyVaultProperties?: WorkspaceEncryptionKeyVaultProperties;
+  customerManagedKeyEncryption?: WorkspaceCustomerManagedKeyEncryption;
 
   /** The service application used for customer consent, available before enrollment. */
   @visibility(Lifecycle.Read)
-  identity?: WorkspaceEncryptionIdentity;
+  customerManagedKeyOnboarding?: WorkspaceCustomerManagedKeyOnboarding;
 
   /** The observed result, separate from the requested setting. */
   @visibility(Lifecycle.Read)
   status?: WorkspaceEncryptionStatus;
 }
 
-/** The key sources supported for Workspace encryption. */
+/** The last directly observed protection of active Workspace customer data. */
 @added(Versions.v2026_11_01)
-union WorkspaceEncryptionKeySource {
+union WorkspaceEncryptionProtection {
   string,
 
-  /** Use a customer-managed key in Azure Key Vault. */
-  MicrosoftKeyvault: "Microsoft.Keyvault",
+  /** Active customer data uses customer-managed key protection. */
+  CustomerManaged: "CustomerManaged",
 
-  /** Use a Microsoft-managed key. */
-  MicrosoftStorage: "Microsoft.Storage",
+  /** Active customer data uses Microsoft-managed key protection. */
+  MicrosoftManaged: "MicrosoftManaged",
 }
 
 /** A customer-managed key reference, not key material. */
 @added(Versions.v2026_11_01)
-model WorkspaceEncryptionKeyVaultProperties {
+model WorkspaceCustomerManagedKeyEncryption {
   /**
    * The versionless HTTPS Key Vault key URI in the supported cloud and Workspace
    * tenant. A key version, query string, or fragment is not permitted.
    * Azure Storage follows key versions automatically. Keep the previous version
    * available for at least 24 hours after rotation.
    */
-  keyUri: WorkspaceEncryptionKeyUri;
+  keyEncryptionKeyUrl: WorkspaceKeyEncryptionKeyUrl;
 }
 
 /** A versionless HTTPS Key Vault key URI; the service also validates cloud and tenant. */
 @added(Versions.v2026_11_01)
 @pattern("^https://[a-zA-Z0-9-]+\\.vault\\.[a-zA-Z0-9.-]+/keys/[a-zA-Z0-9-]+$")
-scalar WorkspaceEncryptionKeyUri extends url;
+scalar WorkspaceKeyEncryptionKeyUrl extends url;
 
 /** The service application that the customer authorizes to use the key. */
 @added(Versions.v2026_11_01)
-model WorkspaceEncryptionIdentity {
-  /** The Microsoft Entra application ID of the service application for customer consent. */
+model WorkspaceCustomerManagedKeyOnboarding {
+  /**
+   * The Microsoft Entra application ID used for customer consent, available
+   * before enrollment. This is not a service principal object ID or an identity
+   * selector. The Workspace's top-level identity does not select this application.
+   */
   @visibility(Lifecycle.Read)
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   applicationId: string;
@@ -77,9 +73,9 @@ model WorkspaceEncryptionStatus {
   @visibility(Lifecycle.Read)
   state: WorkspaceEncryptionState;
 
-  /** The last directly observed active key source. Omitted when unknown. */
+  /** The last directly observed active protection. Omitted when unknown. */
   @visibility(Lifecycle.Read)
-  observedKeySource?: WorkspaceEncryptionKeySource;
+  observedProtection?: WorkspaceEncryptionProtection;
 
   /**
    * The active key URI reported by Azure Storage, including its version when
@@ -87,7 +83,7 @@ model WorkspaceEncryptionStatus {
    * This value is not inferred from the requested key.
    */
   @visibility(Lifecycle.Read)
-  observedKeyUri?: url;
+  observedKeyEncryptionKeyUrl?: url;
 
   /** The UTC time of the observation, including a failed check. */
   @visibility(Lifecycle.Read)
@@ -126,31 +122,27 @@ union WorkspaceEncryptionState {
 
 /**
  * A partial encryption setting. Omitted fields are unchanged and null deletes a
- * writable field. The complete merged setting must have a supported keySource
- * and matching key properties. Read-only identity and status inputs are ignored.
+ * writable field. A remaining customerManagedKeyEncryption object must have a
+ * valid key URL. Read-only onboarding and status inputs are ignored.
  */
 @added(Versions.v2026_11_01)
 model WorkspaceEncryptionUpdate {
   /**
-   * The requested key source. Null deletes the source; a remaining encryption
-   * object without a source is invalid. Switching to Microsoft.Storage also
-   * requires deletion of any existing keyVaultProperties.
+   * The customer key configuration to merge. Null deletes the object and
+   * requests Microsoft-managed protection. An empty object retains an existing
+   * key URL but is invalid when no key URL exists after merging.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null is required so JSON Merge Patch can delete keySource. The merged configuration is validated before mutation."
-  keySource?: WorkspaceEncryptionKeySource;
-
-  /** The key properties to merge. Null deletes the key properties. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null is required so JSON Merge Patch can delete customer-key properties when switching to Microsoft-managed protection."
-  keyVaultProperties?: WorkspaceEncryptionKeyVaultPropertiesUpdate;
+  customerManagedKeyEncryption?: WorkspaceCustomerManagedKeyEncryptionUpdate;
 }
 
 /** A partial customer key reference, validated after merging with the stored setting. */
 @added(Versions.v2026_11_01)
-model WorkspaceEncryptionKeyVaultPropertiesUpdate {
+model WorkspaceCustomerManagedKeyEncryptionUpdate {
   /**
    * The replacement versionless key URI. Omission retains the URI; null deletes
    * it. A remaining customer-key configuration without a valid URI is rejected.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null is required so JSON Merge Patch can delete keyUri. An invalid merged configuration is rejected before mutation."
-  keyUri?: WorkspaceEncryptionKeyUri;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null is required so JSON Merge Patch can delete keyEncryptionKeyUrl. A remaining CMK object without a URL is rejected before mutation."
+  keyEncryptionKeyUrl?: WorkspaceKeyEncryptionKeyUrl;
 }

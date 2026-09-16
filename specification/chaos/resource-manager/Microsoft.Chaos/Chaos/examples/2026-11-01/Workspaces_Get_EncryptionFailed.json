@@ -20,22 +20,21 @@
           ],
           "provisioningState": "Failed",
           "encryption": {
-            "keySource": "Microsoft.Keyvault",
-            "keyVaultProperties": {
-              "keyUri": "https://contoso-vault.vault.azure.net/keys/replacement-key"
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyUrl": "https://contoso-vault.vault.azure.net/keys/replacement-key"
             },
-            "identity": {
+            "customerManagedKeyOnboarding": {
               "applicationId": "00000000-0000-0000-0000-000000000001"
             },
             "status": {
               "state": "Failed",
-              "observedKeySource": "Microsoft.Keyvault",
-              "observedKeyUri": "https://contoso-vault.vault.azure.net/keys/workspace-key/0123456789abcdef0123456789abcdef",
+              "observedProtection": "CustomerManaged",
+              "observedKeyEncryptionKeyUrl": "https://contoso-vault.vault.azure.net/keys/workspace-key/0123456789abcdef0123456789abcdef",
               "lastCheckedAt": "2026-11-01T12:00:00Z",
               "error": {
                 "code": "CustomerKeyAccessFailed",
                 "message": "Azure Storage could not use the requested key. Check key availability, service application access, and Key Vault network rules. Restore access, then retry the Workspace update.",
-                "target": "properties.encryption.keyVaultProperties.keyUri"
+                "target": "properties.encryption.customerManagedKeyEncryption.keyEncryptionKeyUrl"
               }
             }
           }
