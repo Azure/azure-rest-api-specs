@@ -19,10 +19,12 @@ namespace Microsoft.ProviderHub;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Endpoint registration operations complete synchronously and do not expose provisioning state."
 @added(Versions.v2026_09_01_preview)
-model EndpointRegistrationProperties is OmitProperties<
-  ResourceTypeEndpoint,
-  "kind"
->;
+model EndpointRegistrationProperties {
+  ...OmitProperties<ResourceTypeEndpoint, "kind" | "endpointUri">;
+
+  /** The URI of the endpoint. */
+  endpointUri?: url;
+}
 
 /**
  * An independently managed endpoint definition for a Resource Type Registration.
