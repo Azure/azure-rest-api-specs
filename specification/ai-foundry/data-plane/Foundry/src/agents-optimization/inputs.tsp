@@ -78,9 +78,9 @@ model AgentOptimizationReferenceDatasetInput
   @minLength(1)
   name: string;
 
-  @doc("Dataset version. Omitted to use the latest version.")
+  @doc("Registered dataset version.")
   @minLength(1)
-  version?: string;
+  version: string;
 
 }
 
@@ -236,6 +236,11 @@ model AgentOptimizationEvaluationConfiguration {
 
   @doc("Level at which each dataset item is evaluated. Defaults to turn when omitted; use conversation for multi-turn simulation.")
   evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
+
+  @doc("Maximum number of target-agent runs executed concurrently during each single-turn evaluation. Defaults to 1 when omitted. Conversation evaluation supports only 1.")
+  @minValue(1)
+  @maxValue(10)
+  max_concurrent_agent_runs?: int32;
 }
 
 /** Base model for type-specific optimization configuration. */
