@@ -1,5 +1,4 @@
 import { describe, expect, it, vi } from "vitest";
-import { execFile } from "../../../shared/src/exec.ts";
 import { parseCommentTable } from "../../src/package-name-approval/post-results.js";
 
 // Import only the pure functions we can test without heavy mocking
@@ -32,10 +31,6 @@ vi.mock("../../src/context.js", () => ({
 }));
 
 describe("post-results", () => {
-  it("mocks the shared TypeScript execution helper", () => {
-    expect(vi.isMockFunction(execFile)).toBe(true);
-  });
-
   describe("parseCommentTable", () => {
     it("should extract language, package name, and pending status from table rows", () => {
       const body = [

@@ -210,12 +210,12 @@ Conventions:
 ### `perf`
 
 [`perf/perf.ts`](./perf/perf.ts) contains [tinybench](https://github.com/tinylibs/tinybench)
-micro-benchmarks (for example comparing `resolve()` vs `resolveCached()`). Run with `pnpm run perf`.
+micro-benchmarks (for example comparing `resolve()` vs `resolveCached()`). Run with `npm run perf`.
 
 ### `cmd`
 
 CLI entry points exposed via `package.json` `"bin"`. [`cmd/spec-model.ts`](./cmd/spec-model.ts)
-backs `pnpm exec spec-model` for dumping a `SpecModel` to JSON.
+backs `npx spec-model` for dumping a `SpecModel` to JSON.
 After pulling the TypeScript migration into an existing checkout, run
 `pnpm install --no-optimistic-repeat-install` from the repository root to refresh any CLI shims
 that still point at the old `.js` entry point.
@@ -234,12 +234,12 @@ When adding or changing shared code:
 
 Useful scripts (run from `.github/shared`):
 
-| Command                 | Description                                        |
-| ----------------------- | -------------------------------------------------- |
-| `pnpm test`             | Run tests in watch mode (vitest).                  |
-| `pnpm run test:ci`      | Run tests once with coverage.                      |
-| `pnpm run lint`         | Run ESLint and `tsc` type-checking.                |
-| `pnpm run format`       | Auto-format with prettier.                         |
-| `pnpm run format:check` | Check formatting without writing.                  |
-| `pnpm run perf`         | Run performance benchmarks.                        |
-| `pnpm run check`        | Run tests, lint, and format check (the full gate). |
+| Command                | Description                                        |
+| ---------------------- | -------------------------------------------------- |
+| `npm test`             | Run tests in watch mode (vitest).                  |
+| `npm run test:ci`      | Run tests once with coverage.                      |
+| `npm run lint`         | Run ESLint and `tsc` type-checking.                |
+| `npm run format`       | Auto-format with prettier.                         |
+| `npm run format:check` | Check formatting without writing.                  |
+| `npm run perf`         | Run performance benchmarks.                        |
+| `npm run check`        | Run tests, lint, and format check (the full gate). |
