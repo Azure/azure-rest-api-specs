@@ -58,7 +58,7 @@ interface ServiceEntitlementSettings {
 
   /** Gets the status of a long-running operation, including after the service entitlement setting has been deleted. */
   getOperationStatus is Azure.ResourceManager.GetResourceOperationStatus<
-    ArmOperationStatus,
+    ServiceEntitlementSettingOperationStatus,
     SubscriptionLocationActionScope
   >;
 

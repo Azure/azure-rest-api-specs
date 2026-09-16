@@ -77,6 +77,33 @@ directive:
 
 ``` yaml
 suppressions:
+  - code: OperationsAPIImplementation
+    from: serviceEntitlementSettings.json
+    reason: The provider-wide Microsoft.Security operations endpoint is defined by the separate OperationsAPI project and included in package-composite-v3.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: serviceEntitlementSettings.json
+    where: $.definitions.ServiceEntitlementSettingOperationStatus
+    reason: This is the standard ArmOperationStatus LRO status monitor, not an ARM resource. Its status, timing, progress, and error fields follow the polling contract.
+  - code: BodyTopLevelProperties
+    from: serviceEntitlementSettings.json
+    where: $.definitions.ServiceEntitlementSettingOperationStatus
+    reason: This is the standard ArmOperationStatus LRO status monitor, not an ARM resource. Its status, timing, progress, and error fields follow the polling contract.
+  - code: AllTrackedResourcesMustHaveDelete
+    from: serviceEntitlementSettings.json
+    where: $.definitions.ServiceEntitlementSetting
+    reason: The resource-group-scoped resource has DELETE. The location-scoped operationResults GET returns the same resource as an LRO final result, not as a second tracked resource.
+  - code: TrackedResourcePatchOperation
+    from: serviceEntitlementSettings.json
+    where: $.definitions.ServiceEntitlementSetting
+    reason: The resource-group-scoped resource has PATCH with tags support. The location-scoped operationResults GET returns the same resource as an LRO final result, not as a second tracked resource.
+  - code: PathForTrackedResourceTypes
+    from: serviceEntitlementSettings.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/operationResults/{operationId}"]
+    reason: This is the Location polling endpoint, not a resource GET. It must remain available independently of the resource after DELETE and returns the tracked resource only when PATCH completes.
+  - code: GetResponseCodes
+    from: serviceEntitlementSettings.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/operationResults/{operationId}"].get
+    reason: The Location polling endpoint returns 202 while pending, 200 with the resource after PATCH, and 204 after DELETE. The 204 response is intentional for an operation with no final response body.
   - code: ResourceNameRestriction
     from: Microsoft.Security\stable\2024-01-01\pricings.json
     reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
@@ -774,9 +801,23 @@ override-info:
   title: SecurityCenter
 ```
 
+### Tag: package-preview-2026-09-16
+
+These settings select the service entitlement settings API without the other Security API versions.
+
+``` yaml $(tag) == 'package-preview-2026-09-16'
+input-file:
+- preview/2026-09-16-preview/serviceEntitlementSettings.json
+```
+
 ### Tag: package-composite-v3
 
 These settings apply only when `--tag=package-composite-v3` is specified on the command line.
+
+The service entitlement settings polling operations share URLs with the older provider-wide
+operations. For this composite only, `x-ms-paths` distinguishes the new operations by their
+API version, preserving both operation groups and the typed service entitlement setting result.
+The standalone Swagger retains its original paths.
 
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
@@ -815,7 +856,28 @@ input-file:
 - stable/2026-01-01/privateLinks.json
 - stable/2026-08-01/datascanners.json
 - preview/2026-09-01-preview/serviceEntitlements.json
-- preview/2026-09-01-preview/serviceEntitlementSettings.json
+- preview/2026-09-16-preview/serviceEntitlementSettings.json
+
+directive:
+  - from: serviceEntitlementSettings.json
+    where: $
+    transform: |
+      const pollingPaths = [
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/operationResults/{operationId}",
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/operationStatuses/{operationId}"
+      ];
+      if ($.swagger === "2.0" && $.info.version === "2026-09-16-preview") {
+        $["x-ms-paths"] = $["x-ms-paths"] || {};
+        for (const path of pollingPaths) {
+          const versionedPath = path + "?api-version=" + $.info.version;
+          if ($.paths[path]) {
+            $["x-ms-paths"][versionedPath] = $.paths[path];
+            delete $.paths[path];
+          } else if (!$["x-ms-paths"][versionedPath]) {
+            throw new Error("Missing service entitlement settings polling path: " + path);
+          }
+        }
+      }
 
 # Autorest suppressions
 suppressions:
