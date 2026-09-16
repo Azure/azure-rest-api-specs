@@ -41,6 +41,14 @@ tag: package-2026-07
 
 ```yaml
 directive:
+  - suppress: AvoidAdditionalProperties
+    from: openapi.json
+    where: $.definitions.FunctionAppVersionConfig.properties.appSettings
+    reason: FunctionAppVersionConfig.appSettings intentionally uses a direct object map because application-setting names are customer-defined and the complete immutable version configuration is supplied atomically.
+  - suppress: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.FunctionAppVersionDeployment.properties.remoteBuild
+    reason: remoteBuild is an intentional binary request option that enables or disables remote build.
   - suppress: XmsResourceInPutResponse
     from: WebApps.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}"].put

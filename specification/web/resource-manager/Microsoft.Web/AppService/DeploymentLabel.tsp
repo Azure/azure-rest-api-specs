@@ -21,10 +21,6 @@ model DeploymentLabelProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update)
   targetVersionResourceId: string;
 
-  /** Whether the deployment label is managed by the system. */
-  @visibility(Lifecycle.Read)
-  systemManaged?: boolean;
-
   /** The resource ID of the Function App version currently assigned to this label. */
   @visibility(Lifecycle.Read)
   activeVersionResourceId?: string;

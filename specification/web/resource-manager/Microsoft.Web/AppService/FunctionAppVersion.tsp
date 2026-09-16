@@ -220,6 +220,11 @@ model FunctionAppVersion
 }
 
 @added(Versions.v2026_10_01_preview)
+@doc("The status of an asynchronous Function App version operation.")
+model FunctionAppVersionOperationStatusResult
+  is ArmOperationStatus<StatusValues = FunctionAppVersionOperationStatus>;
+
+@added(Versions.v2026_10_01_preview)
 @tag("FunctionAppVersions")
 @armResourceOperations
 @doc("Operations for Function App versions.")
@@ -259,7 +264,7 @@ interface FunctionAppVersions {
     void,
     FunctionAppVersion,
     LroHeaders = ArmCombinedLroHeaders<
-      ArmOperationStatus<StatusValues = FunctionAppVersionOperationStatus>,
+      FunctionAppVersionOperationStatusResult,
       FunctionAppVersion
     > &
       Azure.Core.Foundations.RetryAfterHeader,
@@ -273,24 +278,18 @@ interface FunctionAppVersions {
 @doc("Operations for tracking asynchronous Function App version work.")
 interface FunctionAppVersionOperations {
   /** Gets the status of an asynchronous Function App version operation. */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Matches the provider namespace behavior of GetResourceOperationStatus while using the ARM common operationId parameter."
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "Operation status is a provider collection action, not a resource lifecycle operation."
   @autoRoute
   @get
   @armResourceCollectionAction
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Matches the provider namespace behavior of GetResourceOperationStatus while using the ARM common operationId parameter."
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "Operation status is a provider collection action, not a resource lifecycle operation."
   @Azure.ResourceManager.Private.armUpdateProviderNamespace
-  op get(
+  get(
     ...DefaultBaseParameters<SubscriptionLocationActionScope>,
     ...ProviderNamespace<SubscriptionLocationActionScope>,
     ...SubscriptionLocationActionScope,
     ...Azure.ResourceManager.CommonTypes.OperationIdParameter,
-  ):
-    | ArmResponse<
-        ArmOperationStatus<
-          StatusValues = FunctionAppVersionOperationStatus
-        >
-      >
-    | ErrorResponse;
+  ): ArmResponse<FunctionAppVersionOperationStatusResult> | ErrorResponse;
 }
 
 @@segment(
