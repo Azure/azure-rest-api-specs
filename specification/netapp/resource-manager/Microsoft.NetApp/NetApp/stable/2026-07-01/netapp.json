@@ -9570,6 +9570,24 @@
         }
       }
     },
+    "AccountEncryptionPatch": {
+      "type": "object",
+      "description": "Encryption settings for PATCH operations (no default values)",
+      "properties": {
+        "keySource": {
+          "$ref": "#/definitions/KeySource",
+          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.NetApp, Microsoft.KeyVault"
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultPropertiesPatch",
+          "description": "Properties provided by KeVault. Applicable if keySource is 'Microsoft.KeyVault'."
+        },
+        "identity": {
+          "$ref": "#/definitions/EncryptionIdentityPatch",
+          "description": "Identity used to authenticate to KeyVault. Applicable if keySource is 'Microsoft.KeyVault'."
+        }
+      }
+    },
     "AccountProperties": {
       "type": "object",
       "description": "NetApp account properties",
@@ -9623,14 +9641,14 @@
           "type": "array",
           "description": "Active Directories",
           "items": {
-            "$ref": "#/definitions/ActiveDirectory"
+            "$ref": "#/definitions/ActiveDirectoryPatch"
           },
           "x-ms-identifiers": [
             "activeDirectoryId"
           ]
         },
         "encryption": {
-          "$ref": "#/definitions/AccountEncryption",
+          "$ref": "#/definitions/AccountEncryptionPatch",
           "description": "Encryption settings"
         },
         "nfsV4IDDomain": {
@@ -9691,6 +9709,119 @@
           "type": "string",
           "description": "The Organizational Unit (OU) within the Windows Active Directory",
           "default": "CN=Computers"
+        },
+        "site": {
+          "type": "string",
+          "description": "The Active Directory site the service will limit Domain Controller discovery to"
+        },
+        "backupOperators": {
+          "type": "array",
+          "description": "Users to be added to the Built-in Backup Operator active directory group. A list of unique usernames without domain specifier",
+          "items": {
+            "$ref": "#/definitions/UserName"
+          }
+        },
+        "administrators": {
+          "type": "array",
+          "description": "Users to be added to the Built-in Administrators active directory group. A list of unique usernames without domain specifier",
+          "items": {
+            "$ref": "#/definitions/UserName"
+          }
+        },
+        "kdcIP": {
+          "type": "string",
+          "description": "kdc server IP address for the active directory machine. This optional parameter is used only while creating kerberos volume.",
+          "pattern": "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+        },
+        "adName": {
+          "type": "string",
+          "description": "Name of the active directory machine. This optional parameter is used only while creating kerberos volume",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "serverRootCACertificate": {
+          "type": "string",
+          "format": "password",
+          "description": "When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded Active Directory Certificate Service's self-signed root CA certificate, this optional parameter is used only for dual protocol with LDAP user-mapping volumes.",
+          "minLength": 1,
+          "maxLength": 10240,
+          "x-ms-secret": true
+        },
+        "aesEncryption": {
+          "type": "boolean",
+          "description": "If enabled, AES encryption will be enabled for SMB communication."
+        },
+        "ldapSigning": {
+          "type": "boolean",
+          "description": "Specifies whether or not the LDAP traffic needs to be signed."
+        },
+        "securityOperators": {
+          "type": "array",
+          "description": "Domain Users in the Active directory to be given SeSecurityPrivilege privilege (Needed for SMB Continuously available shares for SQL). A list of unique usernames without domain specifier",
+          "items": {
+            "$ref": "#/definitions/UserName"
+          }
+        },
+        "ldapOverTLS": {
+          "type": "boolean",
+          "description": "Specifies whether or not the LDAP traffic needs to be secured via TLS."
+        },
+        "allowLocalNfsUsersWithLdap": {
+          "type": "boolean",
+          "description": "If enabled, NFS client local users can also (in addition to LDAP users) access the NFS volumes."
+        },
+        "encryptDCConnections": {
+          "type": "boolean",
+          "description": "If enabled, Traffic between the SMB server to Domain Controller (DC) will be encrypted."
+        },
+        "ldapSearchScope": {
+          "$ref": "#/definitions/LdapSearchScopeOpt",
+          "description": "LDAP Search scope options"
+        },
+        "preferredServersForLdapClient": {
+          "type": "string",
+          "description": "Comma separated list of IPv4 addresses of preferred servers for LDAP client. At most two comma separated IPv4 addresses can be passed.",
+          "maxLength": 32,
+          "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)((, ?)(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))?)?$"
+        }
+      }
+    },
+    "ActiveDirectoryPatch": {
+      "type": "object",
+      "description": "Active Directory settings for PATCH operations (no default values)",
+      "properties": {
+        "activeDirectoryId": {
+          "type": "string",
+          "description": "Id of the Active Directory",
+          "x-nullable": true
+        },
+        "username": {
+          "type": "string",
+          "description": "A domain user account with permission to create machine accounts"
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "Plain text password of Active Directory domain administrator, value is masked in the response",
+          "maxLength": 64,
+          "x-ms-secret": true
+        },
+        "domain": {
+          "type": "string",
+          "description": "Name of the Active Directory domain"
+        },
+        "dns": {
+          "type": "string",
+          "description": "Comma separated list of DNS server IP addresses (IPv4 only) for the Active Directory domain",
+          "pattern": "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)((, ?)(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*$"
+        },
+        "smbServerName": {
+          "type": "string",
+          "description": "NetBIOS name of the SMB server. This name will be registered as a computer account in the AD and used to mount volumes"
+        },
+        "organizationalUnit": {
+          "type": "string",
+          "description": "The Organizational Unit (OU) within the Windows Active Directory"
         },
         "site": {
           "type": "string",
@@ -11835,6 +11966,20 @@
         }
       }
     },
+    "EncryptionIdentityPatch": {
+      "type": "object",
+      "description": "Identity used to authenticate with key vault for PATCH operations",
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The ARM resource identifier of the user assigned identity used to authenticate with key vault. Applicable if identity.type has 'UserAssigned'. It should match key of identity.userAssignedIdentities."
+        },
+        "federatedClientId": {
+          "type": "string",
+          "description": "ClientId of the multi-tenant Entra ID Application. Used to access cross-tenant keyvaults."
+        }
+      }
+    },
     "EncryptionKeySource": {
       "type": "string",
       "description": "Source of key used to encrypt data in volume. Applicable if NetApp account has encryption.keySource = 'Microsoft.KeyVault'. Possible values (case-insensitive) are: 'Microsoft.NetApp, Microsoft.KeyVault'",
@@ -12293,6 +12438,30 @@
         ]
       }
     },
+    "KeySource": {
+      "type": "string",
+      "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.NetApp, Microsoft.KeyVault",
+      "enum": [
+        "Microsoft.NetApp",
+        "Microsoft.KeyVault"
+      ],
+      "x-ms-enum": {
+        "name": "KeySource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Microsoft.NetApp",
+            "value": "Microsoft.NetApp",
+            "description": "Microsoft-managed key encryption"
+          },
+          {
+            "name": "Microsoft.KeyVault",
+            "value": "Microsoft.KeyVault",
+            "description": "Customer-managed key encryption"
+          }
+        ]
+      }
+    },
     "KeyVaultPrivateEndpoint": {
       "type": "object",
       "description": "Pairs of virtual network ID and private endpoint ID. Every virtual network that has volumes encrypted with customer-managed keys needs its own key vault private endpoint.",
@@ -12366,6 +12535,33 @@
         "keyVaultUri",
         "keyName"
       ]
+    },
+    "KeyVaultPropertiesPatch": {
+      "type": "object",
+      "description": "Properties of key vault for PATCH operations (no required properties)",
+      "properties": {
+        "keyVaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Uri of KeyVault."
+        },
+        "keyName": {
+          "type": "string",
+          "description": "The name of KeyVault key."
+        },
+        "keyVaultResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of KeyVault.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
+        }
+      }
     },
     "KeyVaultStatus": {
       "type": "string",
