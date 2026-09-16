@@ -74,6 +74,7 @@ namespace ContainerAppsSandbox {
     @doc("Lists sandboxes in a scope.")
     list is SandboxListOperations.ResourceList<Sandbox, SandboxListTraits>;
 
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The established wire contract uses POST with CreateSandboxContent and returns the created Sandbox in a 201 response body."
     @doc("Creates a sandbox in a scope.")
     @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes")
     @post
@@ -92,6 +93,7 @@ namespace ContainerAppsSandbox {
     @doc("Gets a sandbox by identifier.")
     get is SandboxGetOperations.ResourceRead<Sandbox>;
 
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The established wire contract allows both empty 200 and 204 success responses."
     @doc("Deletes a sandbox by identifier.")
     @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}")
     @delete
