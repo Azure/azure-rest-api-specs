@@ -15,8 +15,8 @@ using TypeSpec.Versioning;
 namespace Microsoft.Web;
 
 @added(Versions.v2026_10_01_preview)
-@doc("The properties of a deployment label.")
-model DeploymentLabelProperties {
+@doc("The properties of a Function App label.")
+model FunctionAppLabelProperties {
   /** The resource ID of the Function App version to assign to this label. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   targetVersionResourceId: string;
@@ -32,31 +32,31 @@ model DeploymentLabelProperties {
 
 @added(Versions.v2026_10_01_preview)
 @parentResource(Site)
-@doc("A deployment label. The preview supports only the system-managed production label.")
-model DeploymentLabel
-  is Azure.ResourceManager.ProxyResource<DeploymentLabelProperties> {
+@doc("A Function App label. The preview supports only the platform-reserved production Function App label.")
+model FunctionAppLabel
+  is Azure.ResourceManager.ProxyResource<FunctionAppLabelProperties> {
   ...ResourceNameParameter<
-    Resource = DeploymentLabel,
+    Resource = FunctionAppLabel,
     KeyName = "labelName",
-    SegmentName = "deploymentLabels",
+    SegmentName = "functionAppLabels",
     NamePattern = "^production$"
   >;
 }
 
 @added(Versions.v2026_10_01_preview)
-@tag("DeploymentLabels")
+@tag("FunctionAppLabels")
 @armResourceOperations
-@doc("Operations for deployment labels.")
-interface DeploymentLabels {
-  /** Gets a deployment label. The preview supports only the production label. */
-  get is ArmResourceRead<DeploymentLabel>;
+@doc("Operations for Function App labels.")
+interface FunctionAppLabels {
+  /** Gets a Function App label. The preview supports only the production label. */
+  get is ArmResourceRead<FunctionAppLabel>;
 
-  /** Assigns a retained Function App version to a deployment label. The preview supports only the production label. */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<DeploymentLabel>;
+  /** Assigns a retained Function App version to a Function App label. The preview supports only the production label. */
+  createOrUpdate is ArmResourceCreateOrReplaceSync<FunctionAppLabel>;
 
-  /** Lists deployment labels for a site. */
-  listBySite is ArmResourceListByParent<DeploymentLabel>;
+  /** Lists Function App labels for a site. */
+  listBySite is ArmResourceListByParent<FunctionAppLabel>;
 
-  /** Clears a deployment label assignment. Deleting production safely restores legacy serving authority. */
-  delete is ArmResourceDeleteSync<DeploymentLabel>;
+  /** Clears a Function App label assignment. Deleting production safely restores legacy serving authority. */
+  delete is ArmResourceDeleteSync<FunctionAppLabel>;
 }

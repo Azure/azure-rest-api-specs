@@ -96,7 +96,7 @@
       "name": "FunctionAppVersionOperations"
     },
     {
-      "name": "DeploymentLabels"
+      "name": "FunctionAppLabels"
     },
     {
       "name": "WorkflowRuns"
@@ -11165,231 +11165,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deploymentLabels": {
-      "get": {
-        "operationId": "DeploymentLabels_ListBySite",
-        "tags": [
-          "DeploymentLabels"
-        ],
-        "description": "Lists deployment labels for a site.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentLabelListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List deployment labels for a site": {
-            "$ref": "./examples/ListDeploymentLabels.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deploymentLabels/{labelName}": {
-      "get": {
-        "operationId": "DeploymentLabels_Get",
-        "tags": [
-          "DeploymentLabels"
-        ],
-        "description": "Gets a deployment label. The preview supports only the production label.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "labelName",
-            "in": "path",
-            "description": "The name of the DeploymentLabel",
-            "required": true,
-            "type": "string",
-            "pattern": "^production$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentLabel"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get the production deployment label": {
-            "$ref": "./examples/GetProductionDeploymentLabel.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "DeploymentLabels_CreateOrUpdate",
-        "tags": [
-          "DeploymentLabels"
-        ],
-        "description": "Assigns a retained Function App version to a deployment label. The preview supports only the production label.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "labelName",
-            "in": "path",
-            "description": "The name of the DeploymentLabel",
-            "required": true,
-            "type": "string",
-            "pattern": "^production$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeploymentLabel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'DeploymentLabel' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/DeploymentLabel"
-            }
-          },
-          "201": {
-            "description": "Resource 'DeploymentLabel' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/DeploymentLabel"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create the production deployment label assignment": {
-            "$ref": "./examples/CreateProductionDeploymentLabel.json"
-          },
-          "Update the production deployment label assignment": {
-            "$ref": "./examples/UpdateProductionDeploymentLabel.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DeploymentLabels_Delete",
-        "tags": [
-          "DeploymentLabels"
-        ],
-        "description": "Clears a deployment label assignment. Deleting production safely restores legacy serving authority.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "labelName",
-            "in": "path",
-            "description": "The name of the DeploymentLabel",
-            "required": true,
-            "type": "string",
-            "pattern": "^production$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete the production deployment label": {
-            "$ref": "./examples/DeleteProductionDeploymentLabel.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deploymentStatus": {
       "get": {
         "operationId": "WebApps_ListProductionSiteDeploymentStatuses",
@@ -12957,6 +12732,231 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functionAppLabels": {
+      "get": {
+        "operationId": "FunctionAppLabels_ListBySite",
+        "tags": [
+          "FunctionAppLabels"
+        ],
+        "description": "Lists Function App labels for a site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FunctionAppLabelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Function App labels for a site": {
+            "$ref": "./examples/ListFunctionAppLabels.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functionAppLabels/{labelName}": {
+      "get": {
+        "operationId": "FunctionAppLabels_Get",
+        "tags": [
+          "FunctionAppLabels"
+        ],
+        "description": "Gets a Function App label. The preview supports only the production label.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "labelName",
+            "in": "path",
+            "description": "The name of the FunctionAppLabel",
+            "required": true,
+            "type": "string",
+            "pattern": "^production$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FunctionAppLabel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the production Function App label": {
+            "$ref": "./examples/GetProductionFunctionAppLabel.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FunctionAppLabels_CreateOrUpdate",
+        "tags": [
+          "FunctionAppLabels"
+        ],
+        "description": "Assigns a retained Function App version to a Function App label. The preview supports only the production label.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "labelName",
+            "in": "path",
+            "description": "The name of the FunctionAppLabel",
+            "required": true,
+            "type": "string",
+            "pattern": "^production$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FunctionAppLabel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FunctionAppLabel' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FunctionAppLabel"
+            }
+          },
+          "201": {
+            "description": "Resource 'FunctionAppLabel' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FunctionAppLabel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create the production Function App label assignment": {
+            "$ref": "./examples/CreateProductionFunctionAppLabel.json"
+          },
+          "Update the production Function App label assignment": {
+            "$ref": "./examples/UpdateProductionFunctionAppLabel.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FunctionAppLabels_Delete",
+        "tags": [
+          "FunctionAppLabels"
+        ],
+        "description": "Clears a Function App label assignment. Deleting production safely restores legacy serving authority.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "labelName",
+            "in": "path",
+            "description": "The name of the FunctionAppLabel",
+            "required": true,
+            "type": "string",
+            "pattern": "^production$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete the production Function App label": {
+            "$ref": "./examples/DeleteProductionFunctionAppLabel.json"
           }
         }
       }
@@ -45053,69 +45053,6 @@
         "value"
       ]
     },
-    "DeploymentLabel": {
-      "type": "object",
-      "description": "A deployment label. The preview supports only the system-managed production label.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DeploymentLabelProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "DeploymentLabelListResult": {
-      "type": "object",
-      "description": "The response of a DeploymentLabel list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The DeploymentLabel items on this page",
-          "items": {
-            "$ref": "#/definitions/DeploymentLabel"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "DeploymentLabelProperties": {
-      "type": "object",
-      "description": "The properties of a deployment label.",
-      "properties": {
-        "targetVersionResourceId": {
-          "type": "string",
-          "description": "The resource ID of the Function App version to assign to this label.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        },
-        "activeVersionResourceId": {
-          "type": "string",
-          "description": "The resource ID of the Function App version currently assigned to this label.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "The status of the resource provisioning operation.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "targetVersionResourceId"
-      ]
-    },
     "DeploymentLocations": {
       "type": "object",
       "description": "List of available locations (regions or App Service Environments) for\ndeployment of App Service resources.",
@@ -46368,6 +46305,69 @@
           "description": "Function app site update strategy configuration."
         }
       }
+    },
+    "FunctionAppLabel": {
+      "type": "object",
+      "description": "A Function App label. The preview supports only the platform-reserved production Function App label.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FunctionAppLabelProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FunctionAppLabelListResult": {
+      "type": "object",
+      "description": "The response of a FunctionAppLabel list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FunctionAppLabel items on this page",
+          "items": {
+            "$ref": "#/definitions/FunctionAppLabel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FunctionAppLabelProperties": {
+      "type": "object",
+      "description": "The properties of a Function App label.",
+      "properties": {
+        "targetVersionResourceId": {
+          "type": "string",
+          "description": "The resource ID of the Function App version to assign to this label.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "activeVersionResourceId": {
+          "type": "string",
+          "description": "The resource ID of the Function App version currently assigned to this label.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the resource provisioning operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "targetVersionResourceId"
+      ]
     },
     "FunctionAppMajorVersion": {
       "type": "object",

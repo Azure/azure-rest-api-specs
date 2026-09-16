@@ -47,7 +47,7 @@ import "./StaticSitesAsyncOperations.tsp";
 import "./Site.tsp";
 import "./AIGateway.tsp";
 import "./FunctionAppVersion.tsp";
-import "./DeploymentLabel.tsp";
+import "./FunctionAppLabel.tsp";
 import "./BackupItem.tsp";
 import "./CsmPublishingCredentialsPoliciesEntity.tsp";
 import "./SiteAuthSettingsV2.tsp";
