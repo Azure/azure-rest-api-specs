@@ -11,6 +11,10 @@
   rules: [ExampleRule]
   reason: Rule-scoped entries do not skip a file
 
+- tool: SwaggerBreakingChange
+  path: head-deleted/**
+  reason: Suppress a file deleted from the PR head
+
 - tool: SwaggerBreakingChangeCrossVersion
   path: cross/**
   reason: Skip cross-version checks for this directory
