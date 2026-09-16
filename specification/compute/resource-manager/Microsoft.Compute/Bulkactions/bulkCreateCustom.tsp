@@ -253,10 +253,6 @@ model BulkCreateCustomProperties {
   @doc("Configuration Options for Regular or Spot instances in BulkCreateCustom.")
   priorityProfile: BulkCreateCustomPriorityProfile;
 
-  @added(Versions.`2026-10-06-preview`)
-  @doc("The VM size to use for every virtual machine created by the operation.")
-  vmSize?: string;
-
   @removed(Versions.`2026-10-06-preview`)
   @identifiers(#[])
   @doc("List of VM sizes supported for BulkCreateCustom")
@@ -275,11 +271,6 @@ model BulkCreateCustomProperties {
 
   @doc("Extra parameters that control how the request is executed, including the retry policy.")
   executionParameters?: ExecutionParameters;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form object used to pass additional parameters."
-  @added(Versions.`2026-10-06-preview`)
-  @doc("Additional parameters for the request.")
-  additionalParameters?: Record<unknown>;
 }
 
 @doc("List of BulkCreateCustom resources.")

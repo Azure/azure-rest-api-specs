@@ -3223,10 +3223,6 @@
           "$ref": "#/definitions/BulkCreateCustomPriorityProfile",
           "description": "Configuration Options for Regular or Spot instances in BulkCreateCustom."
         },
-        "vmSize": {
-          "type": "string",
-          "description": "The VM size to use for every virtual machine created by the operation."
-        },
         "computeProfile": {
           "$ref": "#/definitions/ComputeProfile",
           "description": "Compute Profile to configure the Virtual Machines."
@@ -3242,11 +3238,6 @@
         "executionParameters": {
           "$ref": "#/definitions/ExecutionParameters",
           "description": "Extra parameters that control how the request is executed, including the retry policy."
-        },
-        "additionalParameters": {
-          "type": "object",
-          "description": "Additional parameters for the request.",
-          "additionalProperties": {}
         }
       },
       "required": [
@@ -3370,10 +3361,6 @@
           "$ref": "#/definitions/PriorityProfile",
           "description": "Configuration Options for Regular or Spot instances in BulkCreate."
         },
-        "vmSize": {
-          "type": "string",
-          "description": "The VM size to use for every virtual machine created by the operation."
-        },
         "computeProfile": {
           "$ref": "#/definitions/ComputeProfile",
           "description": "Compute Profile to configure the Virtual Machines. Applied uniformly to every virtual machine created by the operation."
@@ -3381,11 +3368,6 @@
         "executionParameters": {
           "$ref": "#/definitions/ExecutionParameters",
           "description": "Extra parameters that control how the request is executed, including the retry policy."
-        },
-        "additionalParameters": {
-          "type": "object",
-          "description": "Additional parameters for the request.",
-          "additionalProperties": {}
         }
       },
       "required": [
@@ -4417,6 +4399,10 @@
         "capacityRecommendationParameters": {
           "$ref": "#/definitions/CapacityRecommendationParameters",
           "description": "Capacity recommendation parameters for the request. When provided on an executeStart request, the service computes placement recommendations only if the VM fails to start due to an allocation failure; the recommendations for the desired sizes and locations are then surfaced in the operation's capacityRecommendation response."
+        },
+        "additionalCreateParameters": {
+          "type": "string",
+          "description": "Additional parameters for the request."
         }
       }
     },

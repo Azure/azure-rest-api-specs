@@ -145,10 +145,6 @@ model BulkCreateProperties {
   @doc("Configuration Options for Regular or Spot instances in BulkCreate.")
   priorityProfile: PriorityProfile;
 
-  @added(Versions.`2026-10-06-preview`)
-  @doc("The VM size to use for every virtual machine created by the operation.")
-  vmSize?: string;
-
   @removed(Versions.`2026-10-06-preview`)
   @identifiers(#[])
   @doc("List of VM sizes supported for BulkCreate. Every virtual machine is created from the operation-level computeProfile regardless of the size selected, so no per-VM-size override can be supplied here.")
@@ -163,11 +159,6 @@ model BulkCreateProperties {
 
   @doc("Extra parameters that control how the request is executed, including the retry policy.")
   executionParameters?: ExecutionParameters;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form object used to pass additional parameters."
-  @added(Versions.`2026-10-06-preview`)
-  @doc("Additional parameters for the request.")
-  additionalParameters?: Record<unknown>;
 }
 
 @added(Versions.`2026-09-06-preview`)
