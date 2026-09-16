@@ -128,16 +128,6 @@ interface SiteSiloVirtualNetworkConnections {
   >;
 
   /**
-   * Updates the properties of a virtual network connection on a silo.
-   */
-  @patch(#{ implicitOptionality: false })
-  updateSiteSiloVnetConnection is SiteSiloVirtualNetworkConnectionOps.CustomPatchSync<
-    SwiftVirtualNetwork,
-    PatchModel = SwiftVirtualNetwork,
-    OverrideErrorType = DefaultErrorResponse
-  >;
-
-  /**
    * Deletes the virtual network connection from a silo.
    */
   deleteSiteSiloVnetConnection is SiteSiloVirtualNetworkConnectionOps.DeleteSync<

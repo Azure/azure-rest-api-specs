@@ -19841,67 +19841,6 @@
           }
         }
       },
-      "patch": {
-        "operationId": "SiteSiloVirtualNetworkConnections_UpdateSiteSiloVnetConnection",
-        "tags": [
-          "WebApps"
-        ],
-        "description": "Updates the properties of a virtual network connection on a silo.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siloName",
-            "in": "path",
-            "description": "Name of the silo.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9-]{1,24}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update the virtual network connection of a web app silo": {
-            "$ref": "./examples/SiteSiloVirtualNetworkConnections_UpdateSiteSiloVnetConnection.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "SiteSiloVirtualNetworkConnections_DeleteSiteSiloVnetConnection",
         "tags": [
