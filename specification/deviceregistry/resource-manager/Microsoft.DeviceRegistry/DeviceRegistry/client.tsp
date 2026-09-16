@@ -186,6 +186,38 @@ using Microsoft.DeviceRegistry;
 @@clientName(BillingContainer.etag, "ETag", "csharp");
 @@clientName(MqttDestinationQos, "MqttDestinationQo", "csharp");
 
+// Rename models with reserved C# suffixes (Request -> Content, Response -> Result)
+// to satisfy @azure-tools/typespec-client-generator-core/csharp-model-suffix.
+@@clientName(
+  ActivateCertificateAuthorityRequest,
+  "ActivateCertificateAuthorityContent",
+  "csharp"
+);
+@@clientName(
+  NamespaceUpdateComplianceReportRequest,
+  "NamespaceUpdateComplianceReportContent",
+  "csharp"
+);
+@@clientName(
+  GroupBestUpdatesComplianceReportRequest,
+  "GroupBestUpdatesComplianceReportContent",
+  "csharp"
+);
+@@clientName(
+  GroupInstallableUpdatesReportRequest,
+  "GroupInstallableUpdatesReportContent",
+  "csharp"
+);
+@@clientName(GroupMemberCountResponse, "GroupMemberCountResult", "csharp");
+@@clientName(GroupListMembersRequest, "GroupListMembersContent", "csharp");
+@@clientName(JobRunResultsRequest, "JobRunResultsContent", "csharp");
+@@clientName(JobRunResultListResponse, "JobRunResultListResult", "csharp");
+@@clientName(
+  GetDeviceAuthenticationProfileKeysResponse,
+  "GetDeviceAuthenticationProfileKeysResult",
+  "csharp"
+);
+
 // JavaScript Client configuration
 @@clientName(
   Microsoft.DeviceRegistry,
@@ -246,7 +278,7 @@ model PolicyUpdateProperties {
 @removed(Versions.v2026_04_01)
 @doc("A Credential Policy")
 model PolicyUpdate {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Standard ARM resource tags bag with customer-supplied string keys/values, so a Record<string> map is the required shape. PolicyUpdate is @removed as of 2026-04-01 and is not present in the versions shipped by this PR."
   @doc("Resource tags.")
   tags?: Record<string>;
 
