@@ -6120,22 +6120,6 @@
           },
           "readOnly": true
         },
-        "activePhysicalZones": {
-          "type": "array",
-          "description": "Active Resource location and physical zones of Azure Resource.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "recoveryPhysicalZones": {
-          "type": "array",
-          "description": "Recovery Resource location and physical zones of HA Azure Resource.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
         "inclusionState": {
           "$ref": "#/definitions/DrillResourceInclusionState",
           "description": "Inclusion State of the Drill resource in Drill"
@@ -6175,11 +6159,6 @@
           "description": "ForceInclusion status for this resource. Has the customer forceIncluded it?",
           "readOnly": true
         },
-        "haStatus": {
-          "$ref": "#/definitions/HAStatus",
-          "description": "HA status of the Drill resource",
-          "readOnly": true
-        },
         "attentionReason": {
           "$ref": "#/definitions/DrillResourceAttentionReason",
           "description": "Attention reason if the Status is 'NeedsAttention'.",
@@ -6188,55 +6167,6 @@
         "advisorRecommendationTypeId": {
           "type": "string",
           "description": "Recommendation Type Id for the recommendation.",
-          "readOnly": true
-        },
-        "advisorHaRecommendationId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Associated Advisor Recommendation link, if HA is not enabled on this resource.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Advisor/recommendations"
-              }
-            ]
-          }
-        },
-        "faultEligibility": {
-          "$ref": "#/definitions/FaultEligibility",
-          "description": "Normal fault eligibility for a regional drill resource. Omitted until evaluated.\nEligibility does not indicate inclusion or readiness, and force inclusion does not change this value.\nNot applicable to zonal drills.",
-          "readOnly": true
-        },
-        "isRegionallyResilient": {
-          "type": "boolean",
-          "description": "Whether the selected regional protection solution reports the resource as regionally resilient.\nOmitted when the posture is unknown or unavailable; an unavailable posture is not reported as false.\nNot applicable to zonal drills.",
-          "readOnly": true
-        },
-        "replicationMode": {
-          "$ref": "#/definitions/ReplicationMode",
-          "description": "Replication mode of the selected regional protection solution.\nOmitted when no applicable mode is available. Not applicable to zonal drills.",
-          "readOnly": true
-        },
-        "advisorRegionalRecommendationId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Azure resource ID of the matching regional Advisor recommendation instance.\nThe recommendation type is identified separately by advisorRecommendationTypeId.\nOmitted when no matching recommendation exists. Not applicable to zonal drills.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Advisor/recommendations"
-              }
-            ]
-          }
-        },
-        "faultEligibilityAttentionReason": {
-          "type": "array",
-          "description": "Reasons for the regional resource's normal fault eligibility result.\nPublished together with faultEligibility: empty when Eligible and nonempty when Ineligible.\nOmitted until evaluated and for zonal drills. Binding and permission errors are reported separately.",
-          "items": {
-            "$ref": "#/definitions/FaultEligibilityAttentionReason"
-          },
           "readOnly": true
         },
         "rbacAssignmentError": {
@@ -6253,11 +6183,18 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state",
           "readOnly": true
+        },
+        "drillType": {
+          "$ref": "#/definitions/DrillType",
+          "description": "The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.",
+          "readOnly": true
         }
       },
+      "discriminator": "drillType",
       "required": [
         "resourceId",
-        "resourceType"
+        "resourceType",
+        "drillType"
       ]
     },
     "DrillResourceQualification": {
@@ -10001,6 +9938,54 @@
       ],
       "x-ms-discriminator-value": "Regional"
     },
+    "RegionalDrillResourceProperties": {
+      "type": "object",
+      "description": "Properties of a resource in a regional Resiliency Drill.",
+      "properties": {
+        "faultEligibility": {
+          "$ref": "#/definitions/FaultEligibility",
+          "description": "Normal fault eligibility for a regional drill resource. Omitted until evaluated.\nEligibility does not indicate inclusion or readiness, and force inclusion does not change this value.",
+          "readOnly": true
+        },
+        "isRegionallyResilient": {
+          "type": "boolean",
+          "description": "Whether the selected regional protection solution reports the resource as regionally resilient.\nOmitted when the posture is unknown or unavailable; an unavailable posture is not reported as false.",
+          "readOnly": true
+        },
+        "replicationMode": {
+          "$ref": "#/definitions/ReplicationMode",
+          "description": "Replication mode of the selected regional protection solution.\nOmitted when no applicable mode is available.",
+          "readOnly": true
+        },
+        "advisorRegionalRecommendationId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource ID of the matching regional Advisor recommendation instance.\nThe recommendation type is identified separately by advisorRecommendationTypeId.\nOmitted when no matching recommendation exists.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Advisor/recommendations"
+              }
+            ]
+          }
+        },
+        "faultEligibilityAttentionReason": {
+          "type": "array",
+          "description": "Reasons for the regional resource's normal fault eligibility result.\nPublished together with faultEligibility: empty when Eligible and nonempty when Ineligible.\nOmitted until evaluated. Binding and permission errors are reported separately.",
+          "items": {
+            "$ref": "#/definitions/FaultEligibilityAttentionReason"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DrillResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Regional"
+    },
     "RegionalObjectives": {
       "type": "object",
       "description": "Recovery objectives targeted by a goal assignment for regional resiliency.",
@@ -11792,6 +11777,52 @@
       "allOf": [
         {
           "$ref": "#/definitions/DrillProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Zonal"
+    },
+    "ZonalDrillResourceProperties": {
+      "type": "object",
+      "description": "Properties of a resource in a zonal Resiliency Drill.",
+      "properties": {
+        "activePhysicalZones": {
+          "type": "array",
+          "description": "Active Resource location and physical zones of Azure Resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "recoveryPhysicalZones": {
+          "type": "array",
+          "description": "Recovery Resource location and physical zones of HA Azure Resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "haStatus": {
+          "$ref": "#/definitions/HAStatus",
+          "description": "HA status of the Drill resource",
+          "readOnly": true
+        },
+        "advisorHaRecommendationId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Associated Advisor Recommendation link, if HA is not enabled on this resource.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Advisor/recommendations"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DrillResourceProperties"
         }
       ],
       "x-ms-discriminator-value": "Zonal"

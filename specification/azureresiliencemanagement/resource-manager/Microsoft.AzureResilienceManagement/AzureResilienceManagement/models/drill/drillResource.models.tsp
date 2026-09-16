@@ -30,8 +30,16 @@ model DrillResource is ProxyResource<DrillResourceProperties> {
   name: string;
 }
 
+@@typeChangedFrom(
+  DrillResource.properties,
+  Versions.v2026_09_30_preview,
+  LegacyDrillResourceProperties
+);
+
 @doc("Properties of the Resiliency Drill Resource")
-model DrillResourceProperties {
+@removed(Versions.v2026_09_30_preview)
+@renamedFrom(Versions.v2026_09_30_preview, "DrillResourceProperties")
+model LegacyDrillResourceProperties {
   @doc("ARM Id of the underlying resource.")
   resourceId: armResourceIdentifier<[]>;
 
@@ -109,54 +117,6 @@ model DrillResourceProperties {
     }
   ]>;
 
-  /**
-   * Normal fault eligibility for a regional drill resource. Omitted until evaluated.
-   * Eligibility does not indicate inclusion or readiness, and force inclusion does not change this value.
-   * Not applicable to zonal drills.
-   */
-  @added(Versions.v2026_09_30_preview)
-  @visibility(Lifecycle.Read)
-  faultEligibility?: FaultEligibility;
-
-  /**
-   * Whether the selected regional protection solution reports the resource as regionally resilient.
-   * Omitted when the posture is unknown or unavailable; an unavailable posture is not reported as false.
-   * Not applicable to zonal drills.
-   */
-  @added(Versions.v2026_09_30_preview)
-  @visibility(Lifecycle.Read)
-  isRegionallyResilient?: boolean;
-
-  /**
-   * Replication mode of the selected regional protection solution.
-   * Omitted when no applicable mode is available. Not applicable to zonal drills.
-   */
-  @added(Versions.v2026_09_30_preview)
-  @visibility(Lifecycle.Read)
-  replicationMode?: ReplicationMode;
-
-  /**
-   * Azure resource ID of the matching regional Advisor recommendation instance.
-   * The recommendation type is identified separately by advisorRecommendationTypeId.
-   * Omitted when no matching recommendation exists. Not applicable to zonal drills.
-   */
-  @added(Versions.v2026_09_30_preview)
-  @visibility(Lifecycle.Read)
-  advisorRegionalRecommendationId?: armResourceIdentifier<[
-    {
-      type: "Microsoft.Advisor/recommendations";
-    }
-  ]>;
-
-  /**
-   * Reasons for the regional resource's normal fault eligibility result.
-   * Published together with faultEligibility: empty when Eligible and nonempty when Ineligible.
-   * Omitted until evaluated and for zonal drills. Binding and permission errors are reported separately.
-   */
-  @added(Versions.v2026_09_30_preview)
-  @visibility(Lifecycle.Read)
-  faultEligibilityAttentionReason?: FaultEligibilityAttentionReason[];
-
   @doc("Last Target and Capability assignment error, if any.")
   @removed(Versions.v2026_04_01_preview)
   @visibility(Lifecycle.Read)
@@ -180,6 +140,91 @@ model DrillResourceProperties {
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+@doc("Properties of the Resiliency Drill Resource")
+@added(Versions.v2026_09_30_preview)
+@discriminator("drillType")
+model DrillResourceProperties {
+  // Retired fields remain in the legacy model but must not reappear in the new base.
+  ...OmitProperties<
+    LegacyDrillResourceProperties,
+    | "activePhysicalZones"
+    | "recoveryPhysicalZones"
+    | "haStatus"
+    | "advisorHaRecommendationId"
+    | "targetAndCapabilityAssignmentError"
+    | "targetResourceAssignmentError"
+  >;
+
+  @doc("The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.")
+  @visibility(Lifecycle.Read)
+  drillType: DrillType;
+}
+
+@doc("Properties of a resource in a zonal Resiliency Drill.")
+@added(Versions.v2026_09_30_preview)
+model ZonalDrillResourceProperties extends DrillResourceProperties {
+  @doc("The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.")
+  @visibility(Lifecycle.Read)
+  drillType: DrillType.Zonal;
+
+  ...PickProperties<
+    LegacyDrillResourceProperties,
+    | "activePhysicalZones"
+    | "recoveryPhysicalZones"
+    | "haStatus"
+    | "advisorHaRecommendationId"
+  >;
+}
+
+@doc("Properties of a resource in a regional Resiliency Drill.")
+@added(Versions.v2026_09_30_preview)
+model RegionalDrillResourceProperties extends DrillResourceProperties {
+  @doc("The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.")
+  @visibility(Lifecycle.Read)
+  drillType: DrillType.Regional;
+
+  /**
+   * Normal fault eligibility for a regional drill resource. Omitted until evaluated.
+   * Eligibility does not indicate inclusion or readiness, and force inclusion does not change this value.
+   */
+  @visibility(Lifecycle.Read)
+  faultEligibility?: FaultEligibility;
+
+  /**
+   * Whether the selected regional protection solution reports the resource as regionally resilient.
+   * Omitted when the posture is unknown or unavailable; an unavailable posture is not reported as false.
+   */
+  @visibility(Lifecycle.Read)
+  isRegionallyResilient?: boolean;
+
+  /**
+   * Replication mode of the selected regional protection solution.
+   * Omitted when no applicable mode is available.
+   */
+  @visibility(Lifecycle.Read)
+  replicationMode?: ReplicationMode;
+
+  /**
+   * Azure resource ID of the matching regional Advisor recommendation instance.
+   * The recommendation type is identified separately by advisorRecommendationTypeId.
+   * Omitted when no matching recommendation exists.
+   */
+  @visibility(Lifecycle.Read)
+  advisorRegionalRecommendationId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Advisor/recommendations";
+    }
+  ]>;
+
+  /**
+   * Reasons for the regional resource's normal fault eligibility result.
+   * Published together with faultEligibility: empty when Eligible and nonempty when Ineligible.
+   * Omitted until evaluated. Binding and permission errors are reported separately.
+   */
+  @visibility(Lifecycle.Read)
+  faultEligibilityAttentionReason?: FaultEligibilityAttentionReason[];
 }
 
 @doc("Reason why the Drill resource is in NeedsAttention state.")
