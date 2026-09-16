@@ -1547,25 +1547,18 @@
       "properties": {
         "provisioningMode": {
           "$ref": "#/definitions/ExecutionIdentityProvisioningMode",
-          "description": "Indicates whether the identity is managed by the service or supplied by the customer."
-        },
-        "userAssignedIdentityResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The customer-provided user-assigned identity, when provisioningMode is Referenced.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
+          "description": "Indicates whether the identity is managed by the service or supplied by the customer.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "scope": {
           "$ref": "#/definitions/ExecutionIdentityScope",
           "description": "The execution boundary across which the identity is shared."
         }
       },
+      "discriminator": "provisioningMode",
       "required": [
         "provisioningMode",
         "scope"
@@ -1617,22 +1610,6 @@
       "type": "object",
       "description": "Execution identity configuration that may be updated.",
       "properties": {
-        "provisioningMode": {
-          "$ref": "#/definitions/ExecutionIdentityProvisioningMode",
-          "description": "Indicates whether the identity is managed by the service or supplied by the customer."
-        },
-        "userAssignedIdentityResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The customer-provided user-assigned identity, when provisioningMode is Referenced.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
-        },
         "scope": {
           "$ref": "#/definitions/ExecutionIdentityScope",
           "description": "The execution boundary across which the identity is shared."
@@ -1664,11 +1641,11 @@
       "properties": {
         "offering": {
           "type": "string",
-          "description": "The product offering selected for a managed Kubernetes runtime."
+          "description": "The required product offering when the runtime binding kind is Kubernetes."
         },
         "provider": {
           "type": "string",
-          "description": "The provider selected for a managed serverless container runtime."
+          "description": "The required provider when the runtime binding kind is ServerlessContainers."
         }
       }
     },
@@ -1726,6 +1703,37 @@
         ]
       },
       "readOnly": true
+    },
+    "ReferencedExecutionIdentity": {
+      "type": "object",
+      "description": "A customer-provided identity used by an execution runtime.",
+      "properties": {
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The customer-provided user-assigned identity.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "userAssignedIdentityResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionIdentity"
+        }
+      ],
+      "x-ms-discriminator-value": "Referenced"
     },
     "ReferencedRuntimeBindingProperties": {
       "type": "object",
@@ -2102,6 +2110,31 @@
           "description": "Indicates who manages runtime egress."
         }
       }
+    },
+    "ServiceManagedExecutionIdentity": {
+      "type": "object",
+      "description": "An identity created and owned by Workload Manager.",
+      "properties": {
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The service-created user-assigned identity.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionIdentity"
+        }
+      ],
+      "x-ms-discriminator-value": "ServiceManaged"
     },
     "VersionPolicy": {
       "type": "string",

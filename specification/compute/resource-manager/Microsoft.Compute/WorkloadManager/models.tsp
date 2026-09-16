@@ -108,27 +108,50 @@ model WorkloadSpace is TrackedResource<WorkloadSpaceProperties> {
 
 /** Customer-selected configuration for a service-managed runtime. */
 model ManagedRuntimeProfile {
-  /** The product offering selected for a managed Kubernetes runtime. */
+  /** The required product offering when the runtime binding kind is Kubernetes. */
   offering?: string;
 
-  /** The provider selected for a managed serverless container runtime. */
+  /** The required provider when the runtime binding kind is ServerlessContainers. */
   provider?: string;
 }
 
 /** Configuration for an identity used by an execution runtime. */
+@discriminator("provisioningMode")
 model ExecutionIdentity {
   /** Indicates whether the identity is managed by the service or supplied by the customer. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   provisioningMode: ExecutionIdentityProvisioningMode;
 
-  /** The customer-provided user-assigned identity, when provisioningMode is Referenced. */
+  /** The execution boundary across which the identity is shared. */
+  scope: ExecutionIdentityScope;
+}
+
+/** A customer-provided identity used by an execution runtime. */
+model ReferencedExecutionIdentity extends ExecutionIdentity {
+  /** Indicates that the customer supplies the identity. */
+  provisioningMode: "Referenced";
+
+  /** The customer-provided user-assigned identity. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  userAssignedIdentityResourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+/** An identity created and owned by Workload Manager. */
+model ServiceManagedExecutionIdentity extends ExecutionIdentity {
+  /** Indicates that Workload Manager creates and owns the identity. */
+  provisioningMode: "ServiceManaged";
+
+  /** The service-created user-assigned identity. */
+  @visibility(Lifecycle.Read)
   userAssignedIdentityResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
     }
   ]>;
-
-  /** The execution boundary across which the identity is shared. */
-  scope: ExecutionIdentityScope;
 }
 
 /** Identity configuration for a managed runtime. */
@@ -330,16 +353,6 @@ model RuntimeIdentityProfileUpdate {
 
 /** Execution identity configuration that may be updated. */
 model ExecutionIdentityUpdate {
-  /** Indicates whether the identity is managed by the service or supplied by the customer. */
-  provisioningMode?: ExecutionIdentityProvisioningMode;
-
-  /** The customer-provided user-assigned identity, when provisioningMode is Referenced. */
-  userAssignedIdentityResourceId?: armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
-
   /** The execution boundary across which the identity is shared. */
   scope?: ExecutionIdentityScope;
 }
