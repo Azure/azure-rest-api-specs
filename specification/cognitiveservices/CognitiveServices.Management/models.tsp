@@ -2114,18 +2114,7 @@ model ManagedClusterAgentHostingConfiguration
   /**
    * Azure resource ID of the separate user-assigned managed identity federated to service accounts on the AKS cluster. Hosted agents use this identity to access the Azure Storage blob data plane.
    */
-  @removed(Versions.v2026_09_01)
-  @renamedFrom(Versions.v2026_09_15_preview, "workloadIdentityResourceId")
-  workloadIdentityResourceIdLegacy: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
-
-  /**
-   * Azure resource ID of the separate user-assigned managed identity federated to service accounts on the AKS cluster. Hosted agents use this identity to access the Azure Storage blob data plane. This property is optional when the AKS Foundry extension is used.
-   */
-  @added(Versions.v2026_09_15_preview)
+  @madeOptional(Versions.v2026_09_15_preview)
   workloadIdentityResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
