@@ -19153,6 +19153,9 @@
                     "prompt_cache_options": {
                       "$ref": "#/components/schemas/OpenAI.PromptCacheOptions"
                     },
+                    "prompt_cache_diagnostics": {
+                      "$ref": "#/components/schemas/OpenAI.PromptCacheDiagnostics"
+                    },
                     "moderation": {
                       "anyOf": [
                         {
@@ -19349,9 +19352,6 @@
                     ],
                     "deprecated": true
                   },
-                  "prompt_cache_options": {
-                    "$ref": "#/components/schemas/OpenAI.PromptCacheOptionsParam"
-                  },
                   "previous_response_id": {
                     "anyOf": [
                       {
@@ -19404,6 +19404,9 @@
                   },
                   "prompt": {
                     "$ref": "#/components/schemas/OpenAI.Prompt"
+                  },
+                  "prompt_cache_options": {
+                    "$ref": "#/components/schemas/OpenAI.ResponsePromptCacheOptionsParam"
                   },
                   "service_tier": {
                     "$ref": "#/components/schemas/OpenAI.ServiceTierResponses"
@@ -34871,7 +34874,7 @@
             "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters."
           }
         },
-        "description": "An Eval object with a data source config and testing criteria.\nAn Eval represents a task to be done for your LLM integration.\nLike:\n- Improve the quality of my chatbot\n- See how well my chatbot handles customer support\n- Check if o4-mini is better at my usecase than gpt-4o",
+        "description": "An Eval object with a data source config and testing criteria.\nAn Eval represents a task to be done for your LLM integration.\nLike:\n- Improve the quality of my chatbot\n- See how well my chatbot handles customer support\n- Check if o4-mini is better at my usecase than gpt-6-astra",
         "title": "Eval",
         "x-oaiMeta": {
           "name": "The eval object",
@@ -35118,7 +35121,7 @@
         "x-oaiMeta": {
           "name": "The eval run object",
           "group": "evals",
-          "example": "{\n  \"object\": \"eval.run\",\n  \"id\": \"evalrun_67e57965b480819094274e3a32235e4c\",\n  \"eval_id\": \"eval_67e579652b548190aaa83ada4b125f47\",\n  \"report_url\": \"https://platform.openai.com/evaluations/eval_67e579652b548190aaa83ada4b125f47?run_id=evalrun_67e57965b480819094274e3a32235e4c\",\n  \"status\": \"queued\",\n  \"model\": \"gpt-4o-mini\",\n  \"name\": \"gpt-4o-mini\",\n  \"created_at\": 1743092069,\n  \"result_counts\": {\n    \"total\": 0,\n    \"errored\": 0,\n    \"failed\": 0,\n    \"passed\": 0\n  },\n  \"per_model_usage\": null,\n  \"per_testing_criteria_results\": null,\n  \"data_source\": {\n    \"type\": \"completions\",\n    \"source\": {\n      \"type\": \"file_content\",\n      \"content\": [\n        {\n          \"item\": {\n            \"input\": \"Tech Company Launches Advanced Artificial Intelligence Platform\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Central Bank Increases Interest Rates Amid Inflation Concerns\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"International Summit Addresses Climate Change Strategies\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Major Retailer Reports Record-Breaking Holiday Sales\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"National Team Qualifies for World Championship Finals\",\n            \"ground_truth\": \"Sports\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Stock Markets Rally After Positive Economic Data Released\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Global Manufacturer Announces Merger with Competitor\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Breakthrough in Renewable Energy Technology Unveiled\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"World Leaders Sign Historic Climate Agreement\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Professional Athlete Sets New Record in Championship Event\",\n            \"ground_truth\": \"Sports\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Financial Institutions Adapt to New Regulatory Requirements\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Tech Conference Showcases Advances in Artificial Intelligence\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Global Markets Respond to Oil Price Fluctuations\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"International Cooperation Strengthened Through New Treaty\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Sports League Announces Revised Schedule for Upcoming Season\",\n            \"ground_truth\": \"Sports\"\n          }\n        }\n      ]\n    },\n    \"input_messages\": {\n      \"type\": \"template\",\n      \"template\": [\n        {\n          \"type\": \"message\",\n          \"role\": \"developer\",\n          \"content\": {\n            \"type\": \"input_text\",\n            \"text\": \"Categorize a given news headline into one of the following topics: Technology, Markets, World, Business, or Sports.\n\n# Steps\n\n1. Analyze the content of the news headline to understand its primary focus.\n2. Extract the subject matter, identifying any key indicators or keywords.\n3. Use the identified indicators to determine the most suitable category out of the five options: Technology, Markets, World, Business, or Sports.\n4. Ensure only one category is selected per headline.\n\n# Output Format\n\nRespond with the chosen category as a single word. For instance: \"Technology\", \"Markets\", \"World\", \"Business\", or \"Sports\".\n\n# Examples\n\n**Input**: \"Apple Unveils New iPhone Model, Featuring Advanced AI Features\"\n**Output**: \"Technology\"\n\n**Input**: \"Global Stocks Mixed as Investors Await Central Bank Decisions\"\n**Output**: \"Markets\"\n\n**Input**: \"War in Ukraine: Latest Updates on Negotiation Status\"\n**Output**: \"World\"\n\n**Input**: \"Microsoft in Talks to Acquire Gaming Company for $2 Billion\"\n**Output**: \"Business\"\n\n**Input**: \"Manchester United Secures Win in Premier League Football Match\"\n**Output**: \"Sports\"\n\n# Notes\n\n- If the headline appears to fit into more than one category, choose the most dominant theme.\n- Keywords or phrases such as \"stocks\", \"company acquisition\", \"match\", or technological brands can be good indicators for classification.\n\"\n          }\n        },\n        {\n          \"type\": \"message\",\n          \"role\": \"user\",\n          \"content\": {\n            \"type\": \"input_text\",\n            \"text\": \"{{item.input}}\"\n          }\n        }\n      ]\n    },\n    \"model\": \"gpt-4o-mini\",\n    \"sampling_params\": {\n      \"seed\": 42,\n      \"temperature\": 1.0,\n      \"top_p\": 1.0,\n      \"max_completions_tokens\": 2048\n    }\n  },\n  \"error\": null,\n  \"metadata\": {}\n}\n"
+          "example": "{\n  \"object\": \"eval.run\",\n  \"id\": \"evalrun_67e57965b480819094274e3a32235e4c\",\n  \"eval_id\": \"eval_67e579652b548190aaa83ada4b125f47\",\n  \"report_url\": \"https://platform.openai.com/evaluations/eval_67e579652b548190aaa83ada4b125f47?run_id=evalrun_67e57965b480819094274e3a32235e4c\",\n  \"status\": \"queued\",\n  \"model\": \"gpt-6-astra\",\n  \"name\": \"gpt-6-astra\",\n  \"created_at\": 1743092069,\n  \"result_counts\": {\n    \"total\": 0,\n    \"errored\": 0,\n    \"failed\": 0,\n    \"passed\": 0\n  },\n  \"per_model_usage\": null,\n  \"per_testing_criteria_results\": null,\n  \"data_source\": {\n    \"type\": \"completions\",\n    \"source\": {\n      \"type\": \"file_content\",\n      \"content\": [\n        {\n          \"item\": {\n            \"input\": \"Tech Company Launches Advanced Artificial Intelligence Platform\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Central Bank Increases Interest Rates Amid Inflation Concerns\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"International Summit Addresses Climate Change Strategies\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Major Retailer Reports Record-Breaking Holiday Sales\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"National Team Qualifies for World Championship Finals\",\n            \"ground_truth\": \"Sports\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Stock Markets Rally After Positive Economic Data Released\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Global Manufacturer Announces Merger with Competitor\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Breakthrough in Renewable Energy Technology Unveiled\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"World Leaders Sign Historic Climate Agreement\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Professional Athlete Sets New Record in Championship Event\",\n            \"ground_truth\": \"Sports\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Financial Institutions Adapt to New Regulatory Requirements\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Tech Conference Showcases Advances in Artificial Intelligence\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Global Markets Respond to Oil Price Fluctuations\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"International Cooperation Strengthened Through New Treaty\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Sports League Announces Revised Schedule for Upcoming Season\",\n            \"ground_truth\": \"Sports\"\n          }\n        }\n      ]\n    },\n    \"input_messages\": {\n      \"type\": \"template\",\n      \"template\": [\n        {\n          \"type\": \"message\",\n          \"role\": \"developer\",\n          \"content\": {\n            \"type\": \"input_text\",\n            \"text\": \"Categorize a given news headline into one of the following topics: Technology, Markets, World, Business, or Sports.\n\n# Steps\n\n1. Analyze the content of the news headline to understand its primary focus.\n2. Extract the subject matter, identifying any key indicators or keywords.\n3. Use the identified indicators to determine the most suitable category out of the five options: Technology, Markets, World, Business, or Sports.\n4. Ensure only one category is selected per headline.\n\n# Output Format\n\nRespond with the chosen category as a single word. For instance: \"Technology\", \"Markets\", \"World\", \"Business\", or \"Sports\".\n\n# Examples\n\n**Input**: \"Apple Unveils New iPhone Model, Featuring Advanced AI Features\"\n**Output**: \"Technology\"\n\n**Input**: \"Global Stocks Mixed as Investors Await Central Bank Decisions\"\n**Output**: \"Markets\"\n\n**Input**: \"War in Ukraine: Latest Updates on Negotiation Status\"\n**Output**: \"World\"\n\n**Input**: \"Microsoft in Talks to Acquire Gaming Company for $2 Billion\"\n**Output**: \"Business\"\n\n**Input**: \"Manchester United Secures Win in Premier League Football Match\"\n**Output**: \"Sports\"\n\n# Notes\n\n- If the headline appears to fit into more than one category, choose the most dominant theme.\n- Keywords or phrases such as \"stocks\", \"company acquisition\", \"match\", or technological brands can be good indicators for classification.\n\"\n          }\n        },\n        {\n          \"type\": \"message\",\n          \"role\": \"user\",\n          \"content\": {\n            \"type\": \"input_text\",\n            \"text\": \"{{item.input}}\"\n          }\n        }\n      ]\n    },\n    \"model\": \"gpt-6-astra\",\n    \"sampling_params\": {\n      \"max_completions_tokens\": 2048\n    }\n  },\n  \"error\": null,\n  \"metadata\": {}\n}\n"
         }
       },
       "EvalRunDataSource": {
@@ -35218,7 +35221,7 @@
         "x-oaiMeta": {
           "name": "The eval run output item object",
           "group": "evals",
-          "example": "{\n  \"object\": \"eval.run.output_item\",\n  \"id\": \"outputitem_67abd55eb6548190bb580745d5644a33\",\n  \"run_id\": \"evalrun_67abd54d60ec8190832b46859da808f7\",\n  \"eval_id\": \"eval_67abd54d9b0081909a86353f6fb9317a\",\n  \"created_at\": 1739314509,\n  \"status\": \"pass\",\n  \"datasource_item_id\": 137,\n  \"datasource_item\": {\n      \"teacher\": \"To grade essays, I only check for style, content, and grammar.\",\n      \"student\": \"I am a student who is trying to write the best essay.\"\n  },\n  \"results\": [\n    {\n      \"name\": \"String Check Grader\",\n      \"type\": \"string-check-grader\",\n      \"score\": 1.0,\n      \"passed\": true,\n    }\n  ],\n  \"sample\": {\n    \"input\": [\n      {\n        \"role\": \"system\",\n        \"content\": \"You are an evaluator bot...\"\n      },\n      {\n        \"role\": \"user\",\n        \"content\": \"You are assessing...\"\n      }\n    ],\n    \"output\": [\n      {\n        \"role\": \"assistant\",\n        \"content\": \"The rubric is not clear nor concise.\"\n      }\n    ],\n    \"finish_reason\": \"stop\",\n    \"model\": \"gpt-4o-2024-08-06\",\n    \"usage\": {\n      \"total_tokens\": 521,\n      \"completion_tokens\": 2,\n      \"prompt_tokens\": 519,\n      \"cached_tokens\": 0\n    },\n    \"error\": null,\n    \"temperature\": 1.0,\n    \"max_completion_tokens\": 2048,\n    \"top_p\": 1.0,\n    \"seed\": 42\n  }\n}\n"
+          "example": "{\n  \"object\": \"eval.run.output_item\",\n  \"id\": \"outputitem_67abd55eb6548190bb580745d5644a33\",\n  \"run_id\": \"evalrun_67abd54d60ec8190832b46859da808f7\",\n  \"eval_id\": \"eval_67abd54d9b0081909a86353f6fb9317a\",\n  \"created_at\": 1739314509,\n  \"status\": \"pass\",\n  \"datasource_item_id\": 137,\n  \"datasource_item\": {\n      \"teacher\": \"To grade essays, I only check for style, content, and grammar.\",\n      \"student\": \"I am a student who is trying to write the best essay.\"\n  },\n  \"results\": [\n    {\n      \"name\": \"String Check Grader\",\n      \"type\": \"string-check-grader\",\n      \"score\": 1.0,\n      \"passed\": true,\n    }\n  ],\n  \"sample\": {\n    \"input\": [\n      {\n        \"role\": \"system\",\n        \"content\": \"You are an evaluator bot...\"\n      },\n      {\n        \"role\": \"user\",\n        \"content\": \"You are assessing...\"\n      }\n    ],\n    \"output\": [\n      {\n        \"role\": \"assistant\",\n        \"content\": \"The rubric is not clear nor concise.\"\n      }\n    ],\n    \"finish_reason\": \"stop\",\n    \"model\": \"gpt-6-astra\",\n    \"usage\": {\n      \"total_tokens\": 521,\n      \"completion_tokens\": 2,\n      \"prompt_tokens\": 519,\n      \"cached_tokens\": 0\n    },\n    \"error\": null,\n    \"temperature\": 1.0,\n    \"max_completion_tokens\": 2048,\n    \"top_p\": 1.0,\n    \"seed\": 42\n  }\n}\n"
         }
       },
       "EvalRunOutputItemResult": {
@@ -40486,7 +40489,7 @@
         "deprecated": true,
         "x-oaiMeta": {
           "name": "The assistant object",
-          "example": "{\n  \"id\": \"asst_abc123\",\n  \"object\": \"assistant\",\n  \"created_at\": 1698984975,\n  \"name\": \"Math Tutor\",\n  \"description\": null,\n  \"model\": \"gpt-4o\",\n  \"instructions\": \"You are a personal math tutor. When asked a question, write and run Python code to answer the question.\",\n  \"tools\": [\n    {\n      \"type\": \"code_interpreter\"\n    }\n  ],\n  \"metadata\": {},\n  \"top_p\": 1.0,\n  \"temperature\": 1.0,\n  \"response_format\": \"auto\"\n}\n"
+          "example": "{\n  \"id\": \"asst_abc123\",\n  \"object\": \"assistant\",\n  \"created_at\": 1698984975,\n  \"name\": \"Math Tutor\",\n  \"description\": null,\n  \"model\": \"gpt-5\",\n  \"instructions\": \"You are a personal math tutor. When asked a question, write and run Python code to answer the question.\",\n  \"tools\": [\n    {\n      \"type\": \"code_interpreter\"\n    }\n  ],\n  \"metadata\": {},\n  \"top_p\": 1.0,\n  \"temperature\": 1.0,\n  \"response_format\": \"auto\"\n}\n"
         }
       },
       "OpenAI.AssistantObjectToolResources": {
@@ -40983,7 +40986,7 @@
           },
           "model": {
             "type": "string",
-            "description": "Model ID used to process the batch, like `gpt-5-2025-08-07`. OpenAI\n  offers a wide range of models with different capabilities, performance\n  characteristics, and price points. Refer to the [model\n  guide](/docs/models) to browse and compare available models."
+            "description": "Model ID used to process the batch, like `gpt-6-astra`. OpenAI\n  offers a wide range of models with different capabilities, performance\n  characteristics, and price points. Refer to the [model\n  guide](/docs/models) to browse and compare available models."
           },
           "errors": {
             "$ref": "#/components/schemas/OpenAI.BatchErrors"
@@ -41083,7 +41086,7 @@
         },
         "x-oaiMeta": {
           "name": "The batch object",
-          "example": "{\n  \"id\": \"batch_abc123\",\n  \"object\": \"batch\",\n  \"endpoint\": \"/v1/completions\",\n  \"model\": \"gpt-5-2025-08-07\",\n  \"errors\": null,\n  \"input_file_id\": \"file-abc123\",\n  \"completion_window\": \"24h\",\n  \"status\": \"completed\",\n  \"output_file_id\": \"file-cvaTdG\",\n  \"error_file_id\": \"file-HOWS94\",\n  \"created_at\": 1711471533,\n  \"in_progress_at\": 1711471538,\n  \"expires_at\": 1711557933,\n  \"finalizing_at\": 1711493133,\n  \"completed_at\": 1711493163,\n  \"failed_at\": null,\n  \"expired_at\": null,\n  \"cancelling_at\": null,\n  \"cancelled_at\": null,\n  \"request_counts\": {\n    \"total\": 100,\n    \"completed\": 95,\n    \"failed\": 5\n  },\n  \"usage\": {\n    \"input_tokens\": 1500,\n    \"input_tokens_details\": {\n      \"cached_tokens\": 1024\n    },\n    \"output_tokens\": 500,\n    \"output_tokens_details\": {\n      \"reasoning_tokens\": 300\n    },\n    \"total_tokens\": 2000\n  },\n  \"metadata\": {\n    \"customer_id\": \"user_123456789\",\n    \"batch_description\": \"Nightly eval job\",\n  }\n}\n"
+          "example": "{\n  \"id\": \"batch_abc123\",\n  \"object\": \"batch\",\n  \"endpoint\": \"/v1/chat/completions\",\n  \"model\": \"gpt-6-astra\",\n  \"errors\": null,\n  \"input_file_id\": \"file-abc123\",\n  \"completion_window\": \"24h\",\n  \"status\": \"completed\",\n  \"output_file_id\": \"file-cvaTdG\",\n  \"error_file_id\": \"file-HOWS94\",\n  \"created_at\": 1711471533,\n  \"in_progress_at\": 1711471538,\n  \"expires_at\": 1711557933,\n  \"finalizing_at\": 1711493133,\n  \"completed_at\": 1711493163,\n  \"failed_at\": null,\n  \"expired_at\": null,\n  \"cancelling_at\": null,\n  \"cancelled_at\": null,\n  \"request_counts\": {\n    \"total\": 100,\n    \"completed\": 95,\n    \"failed\": 5\n  },\n  \"usage\": {\n    \"input_tokens\": 1500,\n    \"input_tokens_details\": {\n      \"cached_tokens\": 1024\n    },\n    \"output_tokens\": 500,\n    \"output_tokens_details\": {\n      \"reasoning_tokens\": 300\n    },\n    \"total_tokens\": 2000\n  },\n  \"metadata\": {\n    \"customer_id\": \"user_123456789\",\n    \"batch_description\": \"Nightly eval job\",\n  }\n}\n"
         }
       },
       "OpenAI.BatchError": {
@@ -41230,6 +41233,20 @@
             "$ref": "#/components/schemas/OpenAI.integer"
           }
         }
+      },
+      "OpenAI.CacheMissReasonTypeEnum": {
+        "type": "string",
+        "enum": [
+          "model_changed",
+          "prompt_cache_key_changed",
+          "tools_changed",
+          "text_format_changed",
+          "reasoning_effort_changed",
+          "verbosity_changed",
+          "context_compacted",
+          "input_changed",
+          "service_tier_changed"
+        ]
       },
       "OpenAI.CallableToolAllowedCaller": {
         "type": "string",
@@ -41392,7 +41409,7 @@
         "x-oaiMeta": {
           "name": "The chat completion list object",
           "group": "chat",
-          "example": "{\n  \"object\": \"list\",\n  \"data\": [\n    {\n      \"object\": \"chat.completion\",\n      \"id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n      \"model\": \"gpt-4o-2024-08-06\",\n      \"created\": 1738960610,\n      \"request_id\": \"req_ded8ab984ec4bf840f37566c1011c417\",\n      \"tool_choice\": null,\n      \"usage\": {\n        \"total_tokens\": 31,\n        \"completion_tokens\": 18,\n        \"prompt_tokens\": 13\n      },\n      \"seed\": 4944116822809979520,\n      \"top_p\": 1.0,\n      \"temperature\": 1.0,\n      \"presence_penalty\": 0.0,\n      \"frequency_penalty\": 0.0,\n      \"system_fingerprint\": \"fp_50cad350e4\",\n      \"input_user\": null,\n      \"service_tier\": \"default\",\n      \"tools\": null,\n      \"metadata\": {},\n      \"choices\": [\n        {\n          \"index\": 0,\n          \"message\": {\n            \"content\": \"Mind of circuits hum,\nLearning patterns in silence—\nFuture's quiet spark.\",\n            \"role\": \"assistant\",\n            \"tool_calls\": null,\n            \"function_call\": null\n          },\n          \"finish_reason\": \"stop\",\n          \"logprobs\": null\n        }\n      ],\n      \"response_format\": null\n    }\n  ],\n  \"first_id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n  \"last_id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n  \"has_more\": false\n}\n"
+          "example": "{\n  \"object\": \"list\",\n  \"data\": [\n    {\n      \"object\": \"chat.completion\",\n      \"id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n      \"model\": \"gpt-6-astra\",\n      \"created\": 1738960610,\n      \"request_id\": \"req_ded8ab984ec4bf840f37566c1011c417\",\n      \"tool_choice\": null,\n      \"usage\": {\n        \"total_tokens\": 31,\n        \"completion_tokens\": 18,\n        \"prompt_tokens\": 13\n      },\n      \"seed\": 4944116822809979520,\n      \"top_p\": 1.0,\n      \"temperature\": 1.0,\n      \"presence_penalty\": 0.0,\n      \"frequency_penalty\": 0.0,\n      \"system_fingerprint\": \"fp_50cad350e4\",\n      \"input_user\": null,\n      \"service_tier\": \"default\",\n      \"tools\": null,\n      \"metadata\": {},\n      \"choices\": [\n        {\n          \"index\": 0,\n          \"message\": {\n            \"content\": \"Mind of circuits hum,\nLearning patterns in silence—\nFuture's quiet spark.\",\n            \"role\": \"assistant\",\n            \"tool_calls\": null,\n            \"function_call\": null\n          },\n          \"finish_reason\": \"stop\",\n          \"logprobs\": null\n        }\n      ],\n      \"response_format\": null\n    }\n  ],\n  \"first_id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n  \"last_id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n  \"has_more\": false\n}\n"
         }
       },
       "OpenAI.ChatCompletionMessageCustomToolCall": {
@@ -44079,6 +44096,7 @@
             "tool_search_call": "#/components/schemas/OpenAI.ConversationItemToolSearchCall",
             "tool_search_output": "#/components/schemas/OpenAI.ConversationItemToolSearchOutput",
             "additional_tools": "#/components/schemas/OpenAI.ConversationItemAdditionalTools",
+            "configuration_update": "#/components/schemas/OpenAI.ConversationItemResponseConfigurationUpdate",
             "reasoning": "#/components/schemas/OpenAI.ConversationItemReasoningItem",
             "program": "#/components/schemas/OpenAI.ConversationItemProgram",
             "program_output": "#/components/schemas/OpenAI.ConversationItemProgramOutput",
@@ -44604,6 +44622,10 @@
             "type": "string",
             "description": "The input for the custom tool call generated by the model."
           },
+          "async": {
+            "type": "boolean",
+            "description": "Whether the custom tool call runs asynchronously."
+          },
           "status": {
             "$ref": "#/components/schemas/OpenAI.FunctionCallStatus",
             "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
@@ -44879,6 +44901,10 @@
               "incomplete"
             ],
             "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
+          },
+          "async": {
+            "type": "boolean",
+            "description": "Whether the function tool call runs asynchronously."
           }
         },
         "allOf": [
@@ -45566,6 +45592,38 @@
         "description": "A description of the chain of thought used by a reasoning model while generating\na response. Be sure to include these items in your `input` to the Responses API\nfor subsequent turns of a conversation if you are manually\n[managing context](/docs/guides/conversation-state).",
         "title": "Reasoning"
       },
+      "OpenAI.ConversationItemResponseConfigurationUpdate": {
+        "type": "object",
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the configuration update item."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "configuration_update"
+            ],
+            "description": "The item type. Always `configuration_update`.",
+            "x-stainless-const": true,
+            "default": "configuration_update"
+          },
+          "reasoning": {
+            "$ref": "#/components/schemas/OpenAI.ResponseConfigurationUpdateReasoning",
+            "description": "The reasoning configuration applied by this update."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ConversationItem"
+          }
+        ],
+        "description": "A configuration update that applies to subsequent responses until it is\nreplaced by another configuration update."
+      },
       "OpenAI.ConversationItemToolSearchCall": {
         "type": "object",
         "required": [
@@ -45701,6 +45759,7 @@
               "tool_search_call",
               "tool_search_output",
               "additional_tools",
+              "configuration_update",
               "reasoning",
               "program",
               "program_output",
@@ -45744,14 +45803,7 @@
             "x-stainless-const": true
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "searching",
-              "completed",
-              "failed",
-              "incomplete"
-            ],
+            "$ref": "#/components/schemas/OpenAI.WebSearchCallStatus",
             "description": "The status of the web search tool call."
           },
           "action": {
@@ -46737,7 +46789,7 @@
         "x-oaiMeta": {
           "name": "The chat completion object",
           "group": "chat",
-          "example": "{\n  \"id\": \"chatcmpl-B9MHDbslfkBeAs8l4bebGdFOJ6PeG\",\n  \"object\": \"chat.completion\",\n  \"created\": 1741570283,\n  \"model\": \"gpt-4o-2024-08-06\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"The image shows a wooden boardwalk path running through a lush green field or meadow. The sky is bright blue with some scattered clouds, giving the scene a serene and peaceful atmosphere. Trees and shrubs are visible in the background.\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 1117,\n    \"completion_tokens\": 46,\n    \"total_tokens\": 1163,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_fc9f1d7035\"\n}\n"
+          "example": "{\n  \"id\": \"chatcmpl-B9MHDbslfkBeAs8l4bebGdFOJ6PeG\",\n  \"object\": \"chat.completion\",\n  \"created\": 1741570283,\n  \"model\": \"gpt-6-astra\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"The image shows a wooden boardwalk path running through a lush green field or meadow. The sky is bright blue with some scattered clouds, giving the scene a serene and peaceful atmosphere. Trees and shrubs are visible in the background.\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 1117,\n    \"completion_tokens\": 46,\n    \"total_tokens\": 1163,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_fc9f1d7035\"\n}\n"
         }
       },
       "OpenAI.CreateChatCompletionResponseChoices": {
@@ -47113,7 +47165,7 @@
         "x-oaiMeta": {
           "name": "The completion object",
           "legacy": true,
-          "example": "{\n  \"id\": \"cmpl-uqkvlQyYK7bGYrRHQ0eXlWi7\",\n  \"object\": \"text_completion\",\n  \"created\": 1589478378,\n  \"model\": \"gpt-4-turbo\",\n  \"choices\": [\n    {\n      \"text\": \"\n\nThis is indeed a test\",\n      \"index\": 0,\n      \"logprobs\": null,\n      \"finish_reason\": \"length\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 5,\n    \"completion_tokens\": 7,\n    \"total_tokens\": 12\n  }\n}\n"
+          "example": "{\n  \"id\": \"cmpl-uqkvlQyYK7bGYrRHQ0eXlWi7\",\n  \"object\": \"text_completion\",\n  \"created\": 1589478378,\n  \"model\": \"gpt-3.5-turbo-instruct\",\n  \"choices\": [\n    {\n      \"text\": \"\n\nThis is indeed a test\",\n      \"index\": 0,\n      \"logprobs\": null,\n      \"finish_reason\": \"length\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 5,\n    \"completion_tokens\": 7,\n    \"total_tokens\": 12\n  }\n}\n"
         }
       },
       "OpenAI.CreateCompletionResponseChoices": {
@@ -47460,7 +47512,7 @@
         "x-oaiMeta": {
           "name": "The completions data source object used to configure an individual run",
           "group": "eval runs",
-          "example": "{\n  \"name\": \"gpt-4o-mini-2024-07-18\",\n  \"data_source\": {\n    \"type\": \"completions\",\n    \"input_messages\": {\n      \"type\": \"item_reference\",\n      \"item_reference\": \"item.input\"\n    },\n    \"model\": \"gpt-4o-mini-2024-07-18\",\n    \"source\": {\n      \"type\": \"stored_completions\",\n      \"model\": \"gpt-4o-mini-2024-07-18\"\n    }\n  }\n}\n"
+          "example": "{\n  \"name\": \"gpt-6-astra\",\n  \"data_source\": {\n    \"type\": \"completions\",\n    \"input_messages\": {\n      \"type\": \"item_reference\",\n      \"item_reference\": \"item.input\"\n    },\n    \"model\": \"gpt-6-astra\",\n    \"source\": {\n      \"type\": \"stored_completions\",\n      \"model\": \"gpt-6-astra\"\n    }\n  }\n}\n"
         }
       },
       "OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference": {
@@ -47710,7 +47762,7 @@
         "x-oaiMeta": {
           "name": "The completions data source object used to configure an individual run",
           "group": "eval runs",
-          "example": "{\n  \"name\": \"gpt-4o-mini-2024-07-18\",\n  \"data_source\": {\n    \"type\": \"responses\",\n    \"input_messages\": {\n      \"type\": \"item_reference\",\n      \"item_reference\": \"item.input\"\n    },\n    \"model\": \"gpt-4o-mini-2024-07-18\",\n    \"source\": {\n      \"type\": \"responses\",\n      \"model\": \"gpt-4o-mini-2024-07-18\"\n    }\n  }\n}\n"
+          "example": "{\n  \"name\": \"gpt-6-astra\",\n  \"data_source\": {\n    \"type\": \"responses\",\n    \"input_messages\": {\n      \"type\": \"item_reference\",\n      \"item_reference\": \"item.input\"\n    },\n    \"model\": \"gpt-6-astra\",\n    \"source\": {\n      \"type\": \"responses\",\n      \"model\": \"gpt-6-astra\"\n    }\n  }\n}\n"
         }
       },
       "OpenAI.CreateEvalResponsesRunDataSourceInputMessagesItemReference": {
@@ -48103,7 +48155,7 @@
                 }
               }
             ],
-            "description": "The image(s) to edit. Must be a supported image file or an array of images.\n  For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, and `gpt-image-1.5`), each image should be a `png`, `webp`, or `jpg`\n  file less than 50MB. You can provide up to 16 images.\n  `chatgpt-image-latest` follows the same input constraints as GPT image models.\n  For `dall-e-2`, you can only provide one image, and it should be a square\n  `png` file less than 4MB."
+            "description": "The image(s) to edit. Must be a supported image file or an array of images.\n  For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, and `gpt-image-2-2026-04-21`), each image should be a `png`, `webp`, or `jpg`\n  file less than 50MB. You can provide up to 16 images.\n  `chatgpt-image-latest` follows the same input constraints as GPT image models.\n  For `dall-e-2`, you can only provide one image, and it should be a square\n  `png` file less than 4MB."
           },
           "prompt": {
             "type": "string",
@@ -48126,7 +48178,7 @@
                 "type": "null"
               }
             ],
-            "description": "Allows to set transparency for the background of the generated image(s).\n  This parameter is only supported for the GPT image models. Must be one of\n  `transparent`, `opaque` or `auto` (default value). When `auto` is used, the\n  model will automatically determine the best background for the image.\n  If `transparent`, the output format needs to support transparency, so it\n  should be set to either `png` (default value) or `webp`."
+            "description": "Set the background of the generated image(s). This parameter is only\n  supported for the GPT image models. Must be one of `transparent`, `opaque`,\n  or `auto` (default value). When `auto` is used, the model will automatically\n  determine the best background for the image.\n  Transparent backgrounds are available for supported GPT Image models. For\n  `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When\n  using `transparent`, set the output format to `png` or `webp`."
           },
           "model": {
             "anyOf": [
@@ -48137,6 +48189,8 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
+                  "gpt-image-2",
+                  "gpt-image-2-2026-04-21",
                   "dall-e-2",
                   "gpt-image-1",
                   "gpt-image-1-mini",
@@ -48147,7 +48201,7 @@
                 "type": "null"
               }
             ],
-            "description": "The model to use for image generation. Defaults to `gpt-image-1.5`.",
+            "description": "The model to use for image generation. One of `dall-e-2` or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, or `chatgpt-image-latest`). Defaults to `gpt-image-1.5`.",
             "x-oaiTypeLabel": "string"
           },
           "n": {
@@ -48296,6 +48350,8 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
+                  "gpt-image-2",
+                  "gpt-image-2-2026-04-21",
                   "dall-e-2",
                   "dall-e-3",
                   "gpt-image-1",
@@ -48306,7 +48362,7 @@
                 "type": "null"
               }
             ],
-            "description": "The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.",
+            "description": "The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.",
             "x-oaiTypeLabel": "string",
             "default": "dall-e-2"
           },
@@ -48458,7 +48514,7 @@
                 "type": "null"
               }
             ],
-            "description": "Allows to set transparency for the background of the generated image(s).\n  This parameter is only supported for the GPT image models. Must be one of\n  `transparent`, `opaque` or `auto` (default value). When `auto` is used, the\n  model will automatically determine the best background for the image.\n  If `transparent`, the output format needs to support transparency, so it\n  should be set to either `png` (default value) or `webp`.",
+            "description": "Set the background of the generated image(s). This parameter is only\n  supported for the GPT image models. Must be one of `transparent`, `opaque`,\n  or `auto` (default value). When `auto` is used, the model will automatically\n  determine the best background for the image.\n  Transparent backgrounds are available for supported GPT Image models. For\n  `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When\n  using `transparent`, set the output format to `png` or `webp`.",
             "default": "auto"
           },
           "style": {
@@ -50689,6 +50745,10 @@
             "type": "string",
             "description": "The name of the custom tool, used to identify it in tool calls."
           },
+          "async": {
+            "type": "boolean",
+            "description": "Whether the tool response can be returned asynchronously versus immediately returned on next response creation."
+          },
           "description": {
             "type": "string",
             "description": "Optional description of the custom tool, used to provide more context."
@@ -51214,6 +51274,8 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
+                  "gpt-image-2",
+                  "gpt-image-2-2026-04-21",
                   "gpt-image-1",
                   "gpt-image-1-mini",
                   "chatgpt-image-latest"
@@ -51223,7 +51285,7 @@
                 "type": "null"
               }
             ],
-            "description": "The model to use for image editing.",
+            "description": "The GPT image model to use for image editing, including `gpt-image-2` and its dated snapshot `gpt-image-2-2026-04-21`.",
             "x-oaiTypeLabel": "string",
             "default": "gpt-image-1.5"
           },
@@ -51370,7 +51432,7 @@
                 "type": "null"
               }
             ],
-            "description": "Background behavior for generated image output.",
+            "description": "Set the background of the generated image output. Transparent backgrounds are available for supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When using `transparent`, set the output format to `png` or `webp`.",
             "default": "auto"
           },
           "stream": {
@@ -51461,6 +51523,9 @@
           "type": {
             "type": "string"
           },
+          "misalignment": {
+            "$ref": "#/components/schemas/OpenAI.MisalignmentErrorDetailsResource"
+          },
           "details": {
             "type": "array",
             "items": {
@@ -51491,6 +51556,9 @@
           "message": {
             "type": "string",
             "description": "A human-readable description of the error that was returned."
+          },
+          "misalignment": {
+            "$ref": "#/components/schemas/OpenAI.MisalignmentErrorDetailsResource"
           }
         },
         "description": "An error that occurred while generating the response.",
@@ -52202,7 +52270,7 @@
         "x-oaiMeta": {
           "name": "The run data source object used to configure an individual run",
           "group": "eval runs",
-          "example": "{\n  \"type\": \"responses\",\n  \"model\": \"gpt-4o-mini-2024-07-18\",\n  \"temperature\": 0.7,\n  \"top_p\": 1.0,\n  \"users\": [\"user1\", \"user2\"],\n  \"tools\": [\"tool1\", \"tool2\"],\n  \"instructions_search\": \"You are a coding assistant\"\n}\n"
+          "example": "{\n  \"type\": \"responses\",\n  \"model\": \"gpt-6-astra\",\n  \"users\": [\"user1\", \"user2\"],\n  \"tools\": [\"tool1\", \"tool2\"],\n  \"instructions_search\": \"You are a coding assistant\"\n}\n"
         }
       },
       "OpenAI.EvalRunOutputItemSample": {
@@ -52437,7 +52505,7 @@
         "x-oaiMeta": {
           "name": "The stored completions data source object used to configure an individual run",
           "group": "eval runs",
-          "example": "{\n  \"type\": \"stored_completions\",\n  \"model\": \"gpt-4o\",\n  \"created_after\": 1668124800,\n  \"created_before\": 1668124900,\n  \"limit\": 100,\n  \"metadata\": {}\n}\n"
+          "example": "{\n  \"type\": \"stored_completions\",\n  \"model\": \"gpt-6-astra\",\n  \"created_after\": 1668124800,\n  \"created_before\": 1668124900,\n  \"limit\": 100,\n  \"metadata\": {}\n}\n"
         }
       },
       "OpenAI.FileCitationBody": {
@@ -54335,6 +54403,9 @@
             "type": "string",
             "description": "The name of the function to call."
           },
+          "async": {
+            "type": "boolean"
+          },
           "description": {
             "anyOf": [
               {
@@ -54453,6 +54524,10 @@
             ],
             "x-stainless-const": true,
             "default": "function"
+          },
+          "async": {
+            "type": "boolean",
+            "description": "Whether the tool response can be returned asynchronously versus immediately returned on next response creation."
           },
           "output_schema": {
             "anyOf": [
@@ -54912,7 +54987,9 @@
                 "enum": [
                   "gpt-image-1",
                   "gpt-image-1-mini",
-                  "gpt-image-1.5"
+                  "gpt-image-1.5",
+                  "gpt-image-2",
+                  "gpt-image-2-2026-04-21"
                 ]
               }
             ],
@@ -54980,7 +55057,7 @@
               "opaque",
               "auto"
             ],
-            "description": "Background type for the generated image. One of `transparent`,\n  `opaque`, or `auto`. Default: `auto`.",
+            "description": "Set the background of the generated image. One of `transparent`,\n  `opaque`, or `auto`. Transparent backgrounds are available for\n  supported GPT Image models. For `gpt-image-2` and\n  `gpt-image-2-2026-04-21`, this support is in preview. When using\n  `transparent`, set the output format to `png` or `webp`. Default: `auto`.",
             "default": "auto"
           },
           "input_fidelity": {
@@ -55747,6 +55824,7 @@
             "tool_search_call": "#/components/schemas/OpenAI.InputItemToolSearchCallItemParam",
             "tool_search_output": "#/components/schemas/OpenAI.InputItemToolSearchOutputItemParam",
             "additional_tools": "#/components/schemas/OpenAI.InputItemAdditionalToolsItemParam",
+            "configuration_update": "#/components/schemas/OpenAI.InputItemResponseConfigurationUpdateItemParam",
             "reasoning": "#/components/schemas/OpenAI.InputItemReasoningItem",
             "compaction": "#/components/schemas/OpenAI.InputItemCompactionSummaryItemParam",
             "image_generation_call": "#/components/schemas/OpenAI.InputItemImageGenToolCall",
@@ -56050,7 +56128,7 @@
           },
           "encrypted_content": {
             "type": "string",
-            "maxLength": 10485760,
+            "maxLength": 20971520,
             "description": "The encrypted content of the compaction summary."
           }
         },
@@ -56233,6 +56311,10 @@
           "input": {
             "type": "string",
             "description": "The input for the custom tool call generated by the model."
+          },
+          "async": {
+            "type": "boolean",
+            "description": "Whether the custom tool call runs asynchronously."
           }
         },
         "allOf": [
@@ -56682,6 +56764,10 @@
               "incomplete"
             ],
             "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
+          },
+          "async": {
+            "type": "boolean",
+            "description": "Whether the function tool call runs asynchronously."
           }
         },
         "allOf": [
@@ -57176,6 +57262,43 @@
         "description": "A description of the chain of thought used by a reasoning model while generating\na response. Be sure to include these items in your `input` to the Responses API\nfor subsequent turns of a conversation if you are manually\n[managing context](/docs/guides/conversation-state).",
         "title": "Reasoning"
       },
+      "OpenAI.InputItemResponseConfigurationUpdateItemParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "configuration_update"
+            ],
+            "description": "The item type. Always `configuration_update`.",
+            "x-stainless-const": true,
+            "default": "configuration_update"
+          },
+          "reasoning": {
+            "$ref": "#/components/schemas/OpenAI.ResponseConfigurationUpdateItemParamReasoning",
+            "description": "Updates to reasoning configuration. Only effort is supported."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.InputItem"
+          }
+        ],
+        "description": "An update to the conversation's response configuration. The configuration\nremains in effect for subsequent responses until it is replaced by another\nconfiguration update."
+      },
       "OpenAI.InputItemToolSearchCallItemParam": {
         "type": "object",
         "required": [
@@ -57320,6 +57443,7 @@
               "tool_search_call",
               "tool_search_output",
               "additional_tools",
+              "configuration_update",
               "reasoning",
               "compaction",
               "image_generation_call",
@@ -57363,14 +57487,7 @@
             "x-stainless-const": true
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "searching",
-              "completed",
-              "failed",
-              "incomplete"
-            ],
+            "$ref": "#/components/schemas/OpenAI.WebSearchCallStatus",
             "description": "The status of the web search tool call."
           },
           "action": {
@@ -57504,6 +57621,7 @@
             "tool_search_call": "#/components/schemas/OpenAI.ItemToolSearchCallItemParam",
             "tool_search_output": "#/components/schemas/OpenAI.ItemToolSearchOutputItemParam",
             "additional_tools": "#/components/schemas/OpenAI.ItemAdditionalToolsItemParam",
+            "configuration_update": "#/components/schemas/OpenAI.ItemResponseConfigurationUpdateItemParam",
             "reasoning": "#/components/schemas/OpenAI.ItemReasoningItem",
             "compaction": "#/components/schemas/OpenAI.ItemCompactionSummaryItemParam",
             "image_generation_call": "#/components/schemas/OpenAI.ItemImageGenToolCall",
@@ -57807,7 +57925,7 @@
           },
           "encrypted_content": {
             "type": "string",
-            "maxLength": 10485760,
+            "maxLength": 20971520,
             "description": "The encrypted content of the compaction summary."
           }
         },
@@ -57990,6 +58108,10 @@
           "input": {
             "type": "string",
             "description": "The input for the custom tool call generated by the model."
+          },
+          "async": {
+            "type": "boolean",
+            "description": "Whether the custom tool call runs asynchronously."
           }
         },
         "allOf": [
@@ -58538,6 +58660,10 @@
           "input": {
             "type": "string",
             "description": "The input for the custom tool call generated by the model."
+          },
+          "async": {
+            "type": "boolean",
+            "description": "Whether the custom tool call runs asynchronously."
           }
         },
         "allOf": [
@@ -58864,6 +58990,10 @@
               "incomplete"
             ],
             "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
+          },
+          "async": {
+            "type": "boolean",
+            "description": "Whether the function tool call runs asynchronously."
           }
         },
         "allOf": [
@@ -59682,14 +59812,7 @@
             "x-stainless-const": true
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "searching",
-              "completed",
-              "failed",
-              "incomplete"
-            ],
+            "$ref": "#/components/schemas/OpenAI.WebSearchCallStatus",
             "description": "The status of the web search tool call."
           },
           "action": {
@@ -60097,6 +60220,10 @@
               "incomplete"
             ],
             "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
+          },
+          "async": {
+            "type": "boolean",
+            "description": "Whether the function tool call runs asynchronously."
           }
         },
         "allOf": [
@@ -60696,6 +60823,7 @@
             "tool_search_call": "#/components/schemas/OpenAI.ItemResourceToolSearchCall",
             "tool_search_output": "#/components/schemas/OpenAI.ItemResourceToolSearchOutput",
             "additional_tools": "#/components/schemas/OpenAI.ItemResourceAdditionalTools",
+            "configuration_update": "#/components/schemas/OpenAI.ItemResourceResponseConfigurationUpdate",
             "reasoning": "#/components/schemas/OpenAI.ItemResourceReasoningItem",
             "program": "#/components/schemas/OpenAI.ItemResourceProgram",
             "program_output": "#/components/schemas/OpenAI.ItemResourceProgramOutput",
@@ -61221,6 +61349,10 @@
             "type": "string",
             "description": "The input for the custom tool call generated by the model."
           },
+          "async": {
+            "type": "boolean",
+            "description": "Whether the custom tool call runs asynchronously."
+          },
           "status": {
             "$ref": "#/components/schemas/OpenAI.FunctionCallStatus",
             "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
@@ -61496,6 +61628,10 @@
               "incomplete"
             ],
             "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
+          },
+          "async": {
+            "type": "boolean",
+            "description": "Whether the function tool call runs asynchronously."
           }
         },
         "allOf": [
@@ -62197,6 +62333,38 @@
         "description": "A description of the chain of thought used by a reasoning model while generating\na response. Be sure to include these items in your `input` to the Responses API\nfor subsequent turns of a conversation if you are manually\n[managing context](/docs/guides/conversation-state).",
         "title": "Reasoning"
       },
+      "OpenAI.ItemResourceResponseConfigurationUpdate": {
+        "type": "object",
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the configuration update item."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "configuration_update"
+            ],
+            "description": "The item type. Always `configuration_update`.",
+            "x-stainless-const": true,
+            "default": "configuration_update"
+          },
+          "reasoning": {
+            "$ref": "#/components/schemas/OpenAI.ResponseConfigurationUpdateReasoning",
+            "description": "The reasoning configuration applied by this update."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ItemResource"
+          }
+        ],
+        "description": "A configuration update that applies to subsequent responses until it is\nreplaced by another configuration update."
+      },
       "OpenAI.ItemResourceToolSearchCall": {
         "type": "object",
         "required": [
@@ -62332,6 +62500,7 @@
               "tool_search_call",
               "tool_search_output",
               "additional_tools",
+              "configuration_update",
               "reasoning",
               "program",
               "program_output",
@@ -62400,14 +62569,7 @@
             "x-stainless-const": true
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "searching",
-              "completed",
-              "failed",
-              "incomplete"
-            ],
+            "$ref": "#/components/schemas/OpenAI.WebSearchCallStatus",
             "description": "The status of the web search tool call."
           },
           "action": {
@@ -62432,6 +62594,43 @@
         ],
         "description": "The results of a web search tool call. See the\n[web search guide](/docs/guides/tools-web-search) for more information.",
         "title": "Web search tool call"
+      },
+      "OpenAI.ItemResponseConfigurationUpdateItemParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "configuration_update"
+            ],
+            "description": "The item type. Always `configuration_update`.",
+            "x-stainless-const": true,
+            "default": "configuration_update"
+          },
+          "reasoning": {
+            "$ref": "#/components/schemas/OpenAI.ResponseConfigurationUpdateItemParamReasoning",
+            "description": "Updates to reasoning configuration. Only effort is supported."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Item"
+          }
+        ],
+        "description": "An update to the conversation's response configuration. The configuration\nremains in effect for subsequent responses until it is replaced by another\nconfiguration update."
       },
       "OpenAI.ItemToolSearchCallItemParam": {
         "type": "object",
@@ -62577,6 +62776,7 @@
               "tool_search_call",
               "tool_search_output",
               "additional_tools",
+              "configuration_update",
               "reasoning",
               "compaction",
               "image_generation_call",
@@ -62643,14 +62843,7 @@
             "x-stainless-const": true
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "searching",
-              "completed",
-              "failed",
-              "incomplete"
-            ],
+            "$ref": "#/components/schemas/OpenAI.WebSearchCallStatus",
             "description": "The status of the web search tool call."
           },
           "action": {
@@ -62757,7 +62950,7 @@
         "x-oaiMeta": {
           "name": "List assistants response object",
           "group": "chat",
-          "example": "{\n  \"object\": \"list\",\n  \"data\": [\n    {\n      \"id\": \"asst_abc123\",\n      \"object\": \"assistant\",\n      \"created_at\": 1698982736,\n      \"name\": \"Coding Tutor\",\n      \"description\": null,\n      \"model\": \"gpt-4o\",\n      \"instructions\": \"You are a helpful assistant designed to make me better at coding!\",\n      \"tools\": [],\n      \"tool_resources\": {},\n      \"metadata\": {},\n      \"top_p\": 1.0,\n      \"temperature\": 1.0,\n      \"response_format\": \"auto\"\n    },\n    {\n      \"id\": \"asst_abc456\",\n      \"object\": \"assistant\",\n      \"created_at\": 1698982718,\n      \"name\": \"My Assistant\",\n      \"description\": null,\n      \"model\": \"gpt-4o\",\n      \"instructions\": \"You are a helpful assistant designed to make me better at coding!\",\n      \"tools\": [],\n      \"tool_resources\": {},\n      \"metadata\": {},\n      \"top_p\": 1.0,\n      \"temperature\": 1.0,\n      \"response_format\": \"auto\"\n    },\n    {\n      \"id\": \"asst_abc789\",\n      \"object\": \"assistant\",\n      \"created_at\": 1698982643,\n      \"name\": null,\n      \"description\": null,\n      \"model\": \"gpt-4o\",\n      \"instructions\": null,\n      \"tools\": [],\n      \"tool_resources\": {},\n      \"metadata\": {},\n      \"top_p\": 1.0,\n      \"temperature\": 1.0,\n      \"response_format\": \"auto\"\n    }\n  ],\n  \"first_id\": \"asst_abc123\",\n  \"last_id\": \"asst_abc789\",\n  \"has_more\": false\n}\n"
+          "example": "{\n  \"object\": \"list\",\n  \"data\": [\n    {\n      \"id\": \"asst_abc123\",\n      \"object\": \"assistant\",\n      \"created_at\": 1698982736,\n      \"name\": \"Coding Tutor\",\n      \"description\": null,\n      \"model\": \"gpt-5\",\n      \"instructions\": \"You are a helpful assistant designed to make me better at coding!\",\n      \"tools\": [],\n      \"tool_resources\": {},\n      \"metadata\": {},\n      \"top_p\": 1.0,\n      \"temperature\": 1.0,\n      \"response_format\": \"auto\"\n    },\n    {\n      \"id\": \"asst_abc456\",\n      \"object\": \"assistant\",\n      \"created_at\": 1698982718,\n      \"name\": \"My Assistant\",\n      \"description\": null,\n      \"model\": \"gpt-5\",\n      \"instructions\": \"You are a helpful assistant designed to make me better at coding!\",\n      \"tools\": [],\n      \"tool_resources\": {},\n      \"metadata\": {},\n      \"top_p\": 1.0,\n      \"temperature\": 1.0,\n      \"response_format\": \"auto\"\n    },\n    {\n      \"id\": \"asst_abc789\",\n      \"object\": \"assistant\",\n      \"created_at\": 1698982643,\n      \"name\": null,\n      \"description\": null,\n      \"model\": \"gpt-5\",\n      \"instructions\": null,\n      \"tools\": [],\n      \"tool_resources\": {},\n      \"metadata\": {},\n      \"top_p\": 1.0,\n      \"temperature\": 1.0,\n      \"response_format\": \"auto\"\n    }\n  ],\n  \"first_id\": \"asst_abc123\",\n  \"last_id\": \"asst_abc789\",\n  \"has_more\": false\n}\n"
         }
       },
       "OpenAI.ListBatchesResponse": {
@@ -64418,6 +64611,23 @@
         "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
         "x-oaiTypeLabel": "map"
       },
+      "OpenAI.MisalignmentErrorDetailsResource": {
+        "type": "object",
+        "properties": {
+          "error_type": {
+            "$ref": "#/components/schemas/OpenAI._MisalignmentErrorType",
+            "description": "An optional classification; clients must accept additional values."
+          },
+          "detailed_explanation": {
+            "type": "string",
+            "description": "The public explanation for this block."
+          },
+          "steer": {
+            "$ref": "#/components/schemas/OpenAI._MisalignmentSteer",
+            "description": "An optional public continuation instruction."
+          }
+        }
+      },
       "OpenAI.Model": {
         "type": "object",
         "required": [
@@ -64465,7 +64675,7 @@
         "title": "Model",
         "x-oaiMeta": {
           "name": "The model object",
-          "example": "{\n  \"id\": \"VAR_chat_model_id\",\n  \"object\": \"model\",\n  \"created\": 1686935002,\n  \"owned_by\": \"openai\",\n  \"shutdown_date\": \"2026-10-23\"\n}\n"
+          "example": "{\n  \"id\": \"gpt-6-astra\",\n  \"object\": \"model\",\n  \"created\": 1686935002,\n  \"owned_by\": \"openai\",\n  \"shutdown_date\": \"2026-10-23\"\n}\n"
         }
       },
       "OpenAI.Moderation": {
@@ -65933,6 +66143,10 @@
             "type": "string",
             "description": "The input for the custom tool call generated by the model."
           },
+          "async": {
+            "type": "boolean",
+            "description": "Whether the custom tool call runs asynchronously."
+          },
           "status": {
             "$ref": "#/components/schemas/OpenAI.FunctionCallStatus",
             "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
@@ -66208,6 +66422,10 @@
               "incomplete"
             ],
             "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
+          },
+          "async": {
+            "type": "boolean",
+            "description": "Whether the function tool call runs asynchronously."
           }
         },
         "allOf": [
@@ -67058,14 +67276,7 @@
             "x-stainless-const": true
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "searching",
-              "completed",
-              "failed",
-              "incomplete"
-            ],
+            "$ref": "#/components/schemas/OpenAI.WebSearchCallStatus",
             "description": "The status of the web search tool call."
           },
           "action": {
@@ -67392,6 +67603,117 @@
         "description": "Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.",
         "title": "Prompt cache breakpoint"
       },
+      "OpenAI.PromptCacheComparisonResponseNotFoundDiagnosticsBody": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "comparison_response_not_found"
+            ],
+            "x-stainless-const": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.PromptCacheDiagnostics"
+          }
+        ]
+      },
+      "OpenAI.PromptCacheDiagnostics": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.PromptCacheDiagnosticsType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "cache_miss": "#/components/schemas/OpenAI.PromptCacheMissDiagnosticsBody",
+            "cache_hit": "#/components/schemas/OpenAI.PromptCacheHitDiagnosticsBody",
+            "comparison_response_not_found": "#/components/schemas/OpenAI.PromptCacheComparisonResponseNotFoundDiagnosticsBody",
+            "unavailable": "#/components/schemas/OpenAI.PromptCacheUnavailableDiagnosticsBody"
+          }
+        },
+        "description": "Prompt cache diagnostics requested for this response."
+      },
+      "OpenAI.PromptCacheDiagnosticsType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "cache_miss",
+              "cache_hit",
+              "comparison_response_not_found",
+              "unavailable"
+            ]
+          }
+        ]
+      },
+      "OpenAI.PromptCacheHitDiagnosticsBody": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "cache_hit"
+            ],
+            "x-stainless-const": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.PromptCacheDiagnostics"
+          }
+        ]
+      },
+      "OpenAI.PromptCacheMissDiagnosticsBody": {
+        "type": "object",
+        "required": [
+          "type",
+          "reason",
+          "cache_missed_tokens"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "cache_miss"
+            ],
+            "x-stainless-const": true
+          },
+          "reason": {
+            "$ref": "#/components/schemas/OpenAI.CacheMissReasonTypeEnum",
+            "description": "The reason prompt cache reuse did not occur."
+          },
+          "cache_missed_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The estimated number of input tokens affected after the first detected divergence."
+          },
+          "comparison_reusable_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The raw token count of the reusable prefix in the compared response."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.PromptCacheDiagnostics"
+          }
+        ]
+      },
       "OpenAI.PromptCacheModeEnum": {
         "type": "string",
         "enum": [
@@ -67413,6 +67735,16 @@
           "mode": {
             "$ref": "#/components/schemas/OpenAI.PromptCacheModeEnum",
             "description": "Whether implicit prompt-cache breakpoints were enabled."
+          },
+          "comparison_response_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "description": "The prompt-caching options that were applied to the response. Supported for `gpt-5.6` and later models.",
@@ -67444,6 +67776,26 @@
         "type": "string",
         "enum": [
           "30m"
+        ]
+      },
+      "OpenAI.PromptCacheUnavailableDiagnosticsBody": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "unavailable"
+            ],
+            "x-stainless-const": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.PromptCacheDiagnostics"
+          }
         ]
       },
       "OpenAI.RankerVersionType": {
@@ -69249,7 +69601,7 @@
             ]
           }
         },
-        "description": "**gpt-5 and o-series models only**\nConfiguration options for\n[reasoning models](https://platform.openai.com/docs/guides/reasoning).",
+        "description": "Configuration options for\n[reasoning models](https://platform.openai.com/docs/guides/reasoning).",
         "title": "Reasoning"
       },
       "OpenAI.ReasoningEffort": {
@@ -69587,6 +69939,9 @@
           },
           "prompt_cache_options": {
             "$ref": "#/components/schemas/OpenAI.PromptCacheOptions"
+          },
+          "prompt_cache_diagnostics": {
+            "$ref": "#/components/schemas/OpenAI.PromptCacheDiagnostics"
           },
           "moderation": {
             "anyOf": [
@@ -70046,7 +70401,37 @@
         "x-oaiMeta": {
           "name": "response.completed",
           "group": "responses",
-          "example": "{\n  \"type\": \"response.completed\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"completed\",\n    \"completed_at\": 1740855870,\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"input\": [],\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-mini-2024-07-18\",\n    \"output\": [\n      {\n        \"id\": \"msg_123\",\n        \"type\": \"message\",\n        \"role\": \"assistant\",\n        \"content\": [\n          {\n            \"type\": \"output_text\",\n            \"text\": \"In a shimmering forest under a sky full of stars, a lonely unicorn named Lila discovered a hidden pond that glowed with moonlight. Every night, she would leave sparkling, magical flowers by the water's edge, hoping to share her beauty with others. One enchanting evening, she woke to find a group of friendly animals gathered around, eager to be friends and share in her magic.\",\n            \"annotations\": []\n          }\n        ]\n      }\n    ],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": {\n      \"input_tokens\": 0,\n      \"output_tokens\": 0,\n      \"output_tokens_details\": {\n        \"reasoning_tokens\": 0\n      },\n      \"total_tokens\": 0\n    },\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
+          "example": "{\n  \"type\": \"response.completed\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"completed\",\n    \"completed_at\": 1740855870,\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"input\": [],\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-6-astra\",\n    \"output\": [\n      {\n        \"id\": \"msg_123\",\n        \"type\": \"message\",\n        \"role\": \"assistant\",\n        \"content\": [\n          {\n            \"type\": \"output_text\",\n            \"text\": \"In a shimmering forest under a sky full of stars, a lonely unicorn named Lila discovered a hidden pond that glowed with moonlight. Every night, she would leave sparkling, magical flowers by the water's edge, hoping to share her beauty with others. One enchanting evening, she woke to find a group of friendly animals gathered around, eager to be friends and share in her magic.\",\n            \"annotations\": []\n          }\n        ]\n      }\n    ],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": {\n      \"input_tokens\": 0,\n      \"output_tokens\": 0,\n      \"output_tokens_details\": {\n        \"reasoning_tokens\": 0\n      },\n      \"total_tokens\": 0\n    },\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
+        }
+      },
+      "OpenAI.ResponseConfigurationUpdateItemParamReasoning": {
+        "type": "object",
+        "properties": {
+          "effort": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "OpenAI.ResponseConfigurationUpdateReasoning": {
+        "type": "object",
+        "properties": {
+          "effort": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
         }
       },
       "OpenAI.ResponseContentPartAddedEvent": {
@@ -70201,7 +70586,7 @@
         "x-oaiMeta": {
           "name": "response.created",
           "group": "responses",
-          "example": "{\n  \"type\": \"response.created\",\n  \"response\": {\n    \"id\": \"resp_67ccfcdd16748190a91872c75d38539e09e4d4aac714747c\",\n    \"object\": \"response\",\n    \"created_at\": 1741487325,\n    \"status\": \"in_progress\",\n    \"completed_at\": null,\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-2024-08-06\",\n    \"output\": [],\n    \"parallel_tool_calls\": true,\n    \"previous_response_id\": null,\n    \"reasoning\": {\n      \"effort\": null,\n      \"summary\": null\n    },\n    \"store\": true,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
+          "example": "{\n  \"type\": \"response.created\",\n  \"response\": {\n    \"id\": \"resp_67ccfcdd16748190a91872c75d38539e09e4d4aac714747c\",\n    \"object\": \"response\",\n    \"created_at\": 1741487325,\n    \"status\": \"in_progress\",\n    \"completed_at\": null,\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-6-astra\",\n    \"output\": [],\n    \"parallel_tool_calls\": true,\n    \"previous_response_id\": null,\n    \"reasoning\": {\n      \"effort\": null,\n      \"summary\": null\n    },\n    \"store\": true,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
         }
       },
       "OpenAI.ResponseCustomToolCallInputDeltaEvent": {
@@ -70313,6 +70698,9 @@
           "message": {
             "type": "string",
             "description": "A human-readable description of the error."
+          },
+          "misalignment": {
+            "$ref": "#/components/schemas/OpenAI.MisalignmentErrorDetailsResource"
           }
         },
         "description": "An error object returned when the model fails to generate a Response."
@@ -70325,6 +70713,7 @@
           "invalid_prompt",
           "data_residency_mismatch",
           "bio_policy",
+          "misalignment_policy_violation",
           "vector_store_timeout",
           "invalid_image",
           "invalid_image_format",
@@ -70436,7 +70825,7 @@
         "x-oaiMeta": {
           "name": "response.failed",
           "group": "responses",
-          "example": "{\n  \"type\": \"response.failed\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"failed\",\n    \"completed_at\": null,\n    \"error\": {\n      \"code\": \"server_error\",\n      \"message\": \"The model failed to generate a response.\"\n    },\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-mini-2024-07-18\",\n    \"output\": [],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  }\n}\n"
+          "example": "{\n  \"type\": \"response.failed\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"failed\",\n    \"completed_at\": null,\n    \"error\": {\n      \"code\": \"server_error\",\n      \"message\": \"The model failed to generate a response.\"\n    },\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-6-astra\",\n    \"output\": [],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  }\n}\n"
         }
       },
       "OpenAI.ResponseFileSearchCallCompletedEvent": {
@@ -70715,7 +71104,6 @@
         "required": [
           "type",
           "item_id",
-          "name",
           "output_index",
           "sequence_number",
           "arguments"
@@ -70731,10 +71119,6 @@
           "item_id": {
             "type": "string",
             "description": "The ID of the item."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the function that was called."
           },
           "output_index": {
             "$ref": "#/components/schemas/OpenAI.integer",
@@ -70758,7 +71142,7 @@
         "x-oaiMeta": {
           "name": "response.function_call_arguments.done",
           "group": "responses",
-          "example": "{\n  \"type\": \"response.function_call_arguments.done\",\n  \"item_id\": \"item-abc\",\n  \"name\": \"get_weather\",\n  \"output_index\": 1,\n  \"arguments\": \"{ \"arg\": 123 }\",\n  \"sequence_number\": 1\n}\n"
+          "example": "{\n  \"type\": \"response.function_call_arguments.done\",\n  \"item_id\": \"item-abc\",\n  \"output_index\": 1,\n  \"arguments\": \"{ \"arg\": 123 }\",\n  \"sequence_number\": 1\n}\n"
         }
       },
       "OpenAI.ResponseImageGenCallCompletedEvent": {
@@ -70993,7 +71377,7 @@
         "x-oaiMeta": {
           "name": "response.in_progress",
           "group": "responses",
-          "example": "{\n  \"type\": \"response.in_progress\",\n  \"response\": {\n    \"id\": \"resp_67ccfcdd16748190a91872c75d38539e09e4d4aac714747c\",\n    \"object\": \"response\",\n    \"created_at\": 1741487325,\n    \"status\": \"in_progress\",\n    \"completed_at\": null,\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-2024-08-06\",\n    \"output\": [],\n    \"parallel_tool_calls\": true,\n    \"previous_response_id\": null,\n    \"reasoning\": {\n      \"effort\": null,\n      \"summary\": null\n    },\n    \"store\": true,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
+          "example": "{\n  \"type\": \"response.in_progress\",\n  \"response\": {\n    \"id\": \"resp_67ccfcdd16748190a91872c75d38539e09e4d4aac714747c\",\n    \"object\": \"response\",\n    \"created_at\": 1741487325,\n    \"status\": \"in_progress\",\n    \"completed_at\": null,\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-6-astra\",\n    \"output\": [],\n    \"parallel_tool_calls\": true,\n    \"previous_response_id\": null,\n    \"reasoning\": {\n      \"effort\": null,\n      \"summary\": null\n    },\n    \"store\": true,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
         }
       },
       "OpenAI.ResponseIncompleteDetails": {
@@ -71003,7 +71387,9 @@
             "type": "string",
             "enum": [
               "max_output_tokens",
-              "content_filter"
+              "max_messages",
+              "content_filter",
+              "steered"
             ]
           }
         }
@@ -71038,11 +71424,11 @@
             "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
           }
         ],
-        "description": "An event that is emitted when a response finishes as incomplete.",
+        "description": "An event that is emitted when a response finishes as incomplete.\nOver WebSocket, steering can finish a response with\n`response.incomplete_details.reason` set to `steered`, followed automatically\nby a successor `response.created` that commits the queued steering input.",
         "x-oaiMeta": {
           "name": "response.incomplete",
           "group": "responses",
-          "example": "{\n  \"type\": \"response.incomplete\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"incomplete\",\n    \"completed_at\": null,\n    \"error\": null,\n    \"incomplete_details\": {\n      \"reason\": \"max_tokens\"\n    },\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-mini-2024-07-18\",\n    \"output\": [],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
+          "example": "{\n  \"type\": \"response.incomplete\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"incomplete\",\n    \"completed_at\": null,\n    \"error\": null,\n    \"incomplete_details\": {\n      \"reason\": \"max_tokens\"\n    },\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-6-astra\",\n    \"output\": [],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
         }
       },
       "OpenAI.ResponseLogProb": {
@@ -71594,6 +71980,31 @@
           "group": "responses",
           "example": "{\n  \"type\": \"response.output_text.annotation.added\",\n  \"item_id\": \"item-abc\",\n  \"output_index\": 0,\n  \"content_index\": 0,\n  \"annotation_index\": 0,\n  \"annotation\": {\n    \"type\": \"file_citation\",\n    \"file_id\": \"file-abc\",\n    \"index\": 0,\n    \"filename\": \"example.txt\"\n  },\n  \"sequence_number\": 1\n}\n"
         }
+      },
+      "OpenAI.ResponsePromptCacheOptionsParam": {
+        "type": "object",
+        "properties": {
+          "ttl": {
+            "$ref": "#/components/schemas/OpenAI.PromptCacheTTLEnum",
+            "description": "The minimum lifetime applied to every implicit and explicit cache breakpoint written by the request. Defaults to `30m`, which is currently the only supported value. The backend may retain cache entries for longer."
+          },
+          "mode": {
+            "$ref": "#/components/schemas/OpenAI.PromptCacheModeEnum",
+            "description": "Controls whether OpenAI automatically creates an implicit cache breakpoint. Defaults to `implicit`. With `implicit`, OpenAI creates one implicit breakpoint and writes up to the latest three explicit breakpoints in the request. With `explicit`, OpenAI does not create an implicit breakpoint and writes up to the latest four explicit breakpoints. If there are no explicit breakpoints, the request does not use prompt caching."
+          },
+          "comparison_response_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "description": "Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints. For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation, without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The `ttl` defaults to `30m`, which is currently the only supported value. See the [prompt caching guide](/docs/guides/prompt-caching) for current details.",
+        "title": "Prompt cache options"
       },
       "OpenAI.ResponsePromptVariables": {
         "type": "object",
@@ -73309,7 +73720,7 @@
         "x-oaiMeta": {
           "name": "The run object",
           "beta": true,
-          "example": "{\n  \"id\": \"run_abc123\",\n  \"object\": \"thread.run\",\n  \"created_at\": 1698107661,\n  \"assistant_id\": \"asst_abc123\",\n  \"thread_id\": \"thread_abc123\",\n  \"status\": \"completed\",\n  \"started_at\": 1699073476,\n  \"expires_at\": null,\n  \"cancelled_at\": null,\n  \"failed_at\": null,\n  \"completed_at\": 1699073498,\n  \"last_error\": null,\n  \"model\": \"gpt-4o\",\n  \"instructions\": null,\n  \"tools\": [{\"type\": \"file_search\"}, {\"type\": \"code_interpreter\"}],\n  \"metadata\": {},\n  \"incomplete_details\": null,\n  \"usage\": {\n    \"prompt_tokens\": 123,\n    \"completion_tokens\": 456,\n    \"total_tokens\": 579\n  },\n  \"temperature\": 1.0,\n  \"top_p\": 1.0,\n  \"max_prompt_tokens\": 1000,\n  \"max_completion_tokens\": 1000,\n  \"truncation_strategy\": {\n    \"type\": \"auto\",\n    \"last_messages\": null\n  },\n  \"response_format\": \"auto\",\n  \"tool_choice\": \"auto\",\n  \"parallel_tool_calls\": true\n}\n"
+          "example": "{\n  \"id\": \"run_abc123\",\n  \"object\": \"thread.run\",\n  \"created_at\": 1698107661,\n  \"assistant_id\": \"asst_abc123\",\n  \"thread_id\": \"thread_abc123\",\n  \"status\": \"completed\",\n  \"started_at\": 1699073476,\n  \"expires_at\": null,\n  \"cancelled_at\": null,\n  \"failed_at\": null,\n  \"completed_at\": 1699073498,\n  \"last_error\": null,\n  \"model\": \"gpt-5\",\n  \"instructions\": null,\n  \"tools\": [{\"type\": \"file_search\"}, {\"type\": \"code_interpreter\"}],\n  \"metadata\": {},\n  \"incomplete_details\": null,\n  \"usage\": {\n    \"prompt_tokens\": 123,\n    \"completion_tokens\": 456,\n    \"total_tokens\": 579\n  },\n  \"temperature\": 1.0,\n  \"top_p\": 1.0,\n  \"max_prompt_tokens\": 1000,\n  \"max_completion_tokens\": 1000,\n  \"truncation_strategy\": {\n    \"type\": \"auto\",\n    \"last_messages\": null\n  },\n  \"response_format\": \"auto\",\n  \"tool_choice\": \"auto\",\n  \"parallel_tool_calls\": true\n}\n"
         }
       },
       "OpenAI.RunObjectIncompleteDetails": {
@@ -77061,6 +77472,16 @@
         "description": "The approximate location of the user.",
         "title": "Web search approximate location"
       },
+      "OpenAI.WebSearchCallStatus": {
+        "type": "string",
+        "enum": [
+          "in_progress",
+          "searching",
+          "completed",
+          "failed",
+          "incomplete"
+        ]
+      },
       "OpenAI.WebSearchContextSize": {
         "type": "string",
         "enum": [
@@ -77230,6 +77651,34 @@
                 "type": "null"
               }
             ]
+          }
+        }
+      },
+      "OpenAI._MisalignmentErrorType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "potentially_unintended_data_transfer",
+              "potentially_unintended_data_access",
+              "potentially_unintended_destructive_activity",
+              "other"
+            ]
+          }
+        ]
+      },
+      "OpenAI._MisalignmentSteer": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "The public continuation instruction."
           }
         }
       },
