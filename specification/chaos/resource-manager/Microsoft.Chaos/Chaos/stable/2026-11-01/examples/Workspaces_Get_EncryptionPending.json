@@ -20,14 +20,16 @@
           ],
           "provisioningState": "Updating",
           "encryption": {
-            "keySource": "Microsoft.Keyvault",
-            "keyVaultProperties": {
-              "keyUri": "https://contoso-vault.vault.azure.net/keys/workspace-key"
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyUrl": "https://contoso-vault.vault.azure.net/keys/workspace-key"
             },
             "status": {
               "state": "Pending",
-              "observedKeySource": "Microsoft.Storage",
+              "observedProtection": "MicrosoftManaged",
               "lastCheckedAt": "2026-11-01T11:00:00Z"
+            },
+            "customerManagedKeyOnboarding": {
+              "applicationId": "00000000-0000-0000-0000-000000000001"
             }
           }
         }

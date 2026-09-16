@@ -11,65 +11,84 @@ Changes use `Microsoft.Chaos/workspaces/write`. Reads use
 `Microsoft.Chaos/workspaces/read`. There are no separate encryption actions or
 permissions.
 
-Set `keySource` to `Microsoft.Keyvault` and supply
-`keyVaultProperties.keyUri` to request a customer-managed key. The URI must be a
-versionless HTTPS Key Vault key URI in the supported cloud and Workspace tenant.
-Do not supply a key version, query string, or fragment. `Microsoft.Keyvault` is
-the exact public wire value; `Microsoft.KeyVault` is not an alternate spelling.
-Set `keySource` to `Microsoft.Storage`, with no key properties, to request
-Microsoft-managed protection.
+Set `encryption.customerManagedKeyEncryption.keyEncryptionKeyUrl` to request a
+customer-managed key. The URL must be a versionless HTTPS Key Vault key URL in
+the supported cloud and Workspace tenant. Do not supply a key version, query
+string, or fragment. Absence of `customerManagedKeyEncryption` means
+Microsoft-managed protection. There is no writable protection-mode enum or
+alternate key-setting shape.
+
+This uses the preferred key names from the
+[ARM common CMK contract](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/b32b6e22b3a151049fdfd5275eb0c748185a94bc/v1.0/common-api-contracts.md#customer-managed-key-encryption).
+The identity-selection object is omitted because Chaos owns the shared Storage
+identity, application, and federated credential. Customers select a key, not
+that identity. [Health Data Services](https://github.com/Azure/azure-rest-api-specs/blob/84fc656cd2945daa4a7b1ef306c02e2b157e9f60/specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/HealthcareApis/models.tsp#L978-L994)
+provides a direct GA precedent for these preferred names without selectable
+encryption identity. Redis Enterprise and Mongo Cluster are additional adapted
+precedents, not sources for Chaos removal, rotation, or identity semantics.
+These precedents do not replace ARM review of Chaos lifecycle behavior.
 
 ### Replacement and partial updates
 
 | Request | Result |
 | --- | --- |
-| PUT with complete encryption | Apply the requested setting. `keySource` is required. A key-properties object requires `keyUri`. |
-| PUT without encryption | Apply the static default `{"keySource":"Microsoft.Storage"}`. This removes existing customer-key protection. |
-| PUT with null or incomplete encryption | Return `400 InvalidEncryptionConfiguration` before any change. |
+| PUT with a CMK object | Apply the requested key. A present `customerManagedKeyEncryption` requires a valid non-null `keyEncryptionKeyUrl`. |
+| PUT without encryption or its CMK object, or with `encryption: {}` | Request Microsoft-managed protection. This removes existing customer-key protection. |
+| PUT with null encryption, null CMK, or an incomplete CMK object | Return `400 InvalidEncryptionConfiguration` before any change. Empty encryption is valid; empty CMK is not. |
 | PATCH with encryption omitted or an empty object | Keep the existing encryption setting. No PUT default is applied to the patch. |
-| PATCH with `"encryption": null` | Delete the setting and apply Microsoft-managed protection through the normal removal operation. |
-| PATCH with only `keyVaultProperties.keyUri` | Retain the existing key source and replace the URI after merge validation. |
-| PATCH with `keySource: "Microsoft.Storage"` | Also delete any stored key properties with `"keyVaultProperties": null`. |
-| PATCH with a null nested field | Delete that field. Reject the request if the merged setting is invalid. |
+| PATCH with CMK omitted | Keep the existing customer key. |
+| PATCH with `"customerManagedKeyEncryption": null` or `"encryption": null` | Remove the writable key configuration through the normal removal operation. Keep onboarding and observations. |
+| PATCH with `customerManagedKeyEncryption.keyEncryptionKeyUrl` | Merge the URL, validate, and enable or replace the customer key. |
+| PATCH with an empty CMK object | Retain an existing URL. Reject the request if no valid URL exists after merging. |
+| PATCH with only a null key URL | Reject the resulting CMK object without a URL. This is not removal of CMK. |
 
 The service merges PATCH with stored writable fields, then validates the complete
 result before it changes any resource or starts encryption work. In particular,
-deleting `keySource`, or deleting the URI while the source remains
-`Microsoft.Keyvault`, is invalid. An empty patch is not a request to reset
-encryption. Read-only `identity` and `status` inputs are ignored.
+deleting the key URL while its CMK object remains is invalid. An empty patch is
+not a request to reset encryption. Read-only `customerManagedKeyOnboarding` and
+`status` inputs are ignored.
 
 The PATCH model uses `TypeSpec.Http.MergePatchUpdate<T>` on separate optional,
-default-free fields. Four property-scoped `no-nullable` suppressions permit
+default-free fields. Three property-scoped `no-nullable` suppressions permit
 request-only JSON Merge Patch deletion. The rule also reports nulls produced by
 the public transform. The accepted PATCH-clear pattern in #45663 is prior art;
 it does not constitute approval of this change. PUT and response fields are not
 nullable.
 
-The full encryption model is a named template instance so that the AutoRest
-emitter includes the static object default. A plain named-model reference loses
-that default in emitter version 0.71.0. The schema tests assert the emitted
-default, not only the TypeSpec source.
+Full encryption is a named model with no synthetic default object. The absent
+CMK object is the Microsoft-managed default. GET keeps service-owned onboarding
+and observations available without adding a desired CMK object.
+C# client names use a `Uri` suffix through `client.tsp`; the public JSON names
+retain the ARM-preferred `Url` suffix without a wire alias.
 
-The v3 lint comparison reports two additional warnings. The status error uses
+The status error uses
 common-types v5 because the existing service selects v5 in `main.tsp`; mixing
 versions conflicts with `SCHEMA-COMMON-TYPES-VERSION`. A service-wide upgrade is
 not part of this change. The nested encryption object preserves the public
 Workspace contract. It is not flattened: the current TypeSpec review guidance
-prohibits new `@flattenProperty` decorators. Neither warning is suppressed.
+prohibits new `@flattenProperty` decorators. No common-types or nesting warning
+is suppressed.
 
 ### Requested setting and observed result
 
-`keySource` and `keyVaultProperties` are the last accepted request, not proof that
-the key protects active data. The read-only `identity.applicationId` identifies
-the service application for customer consent. It is available before enrollment.
-It does not identify a customer-supplied managed identity.
+`customerManagedKeyEncryption.keyEncryptionKeyUrl` is the last accepted
+customer key, not proof that it protects active data. The read-only
+`customerManagedKeyOnboarding.applicationId` identifies the service application
+for customer consent. It is available before enrollment, including on a
+Microsoft-managed Workspace. It is not a service principal object ID or a
+customer-supplied identity selector. The Workspace's top-level identity serves
+other features and does not select Storage CMK identity.
+No internal identity, storage account, scope, or anchor identifiers are exposed.
+There is no public `infrastructureEncryption` switch.
 
-The read-only `status` object contains `state`, optional `observedKeySource`,
-optional `observedKeyUri`, optional `lastCheckedAt`, and optional `error`.
-Unknown optional values are omitted, not returned as null. The observed URI is
-the active URI reported by Azure Storage, including its version when available.
-It is absent for Microsoft-managed protection. A failed check must not copy
-requested values into observed fields.
+The read-only `status` object contains `state`, optional `observedProtection`,
+optional `observedKeyEncryptionKeyUrl`, optional `lastCheckedAt`, and optional
+`error`. `observedProtection` is `CustomerManaged` or `MicrosoftManaged`, and
+is omitted when unknown. The observed URL is the active URL reported by Azure
+Storage, including its version when available. It is omitted for unknown or
+Microsoft-managed protection. A failed check must not copy requested values
+into observed fields. During removal, desired CMK is absent while observed
+protection can remain `CustomerManaged` until the change is verified.
 
 | State | Meaning |
 | --- | --- |
@@ -110,7 +129,7 @@ Accepted-operation failures also appear in the operation result and
 
 | HTTP status or result | Code | Corrective action |
 | --- | --- | --- |
-| 400 | `InvalidEncryptionConfiguration` | Supply a supported source and a valid versionless key URI, or correct the merged PATCH setting. No mutation occurs. |
+| 400 | `InvalidEncryptionConfiguration` | Supply a valid versionless key URL in a present CMK object, or correct the merged PATCH setting. No mutation occurs. |
 | 400 | `EncryptionNotSupportedForWorkspace` | Use a Workspace that supports customer-managed encryption. |
 | 409 | Existing Workspace conflict code | Wait for the current operation to finish before another configuration request. |
 | 409 | `CmkEnrollmentDisabled` | New enrollment is unavailable. Retry when enrollment is available; existing key management remains supported. |
@@ -125,7 +144,7 @@ For an existing customer-key configuration, this PATCH deletes a required value:
 {
   "properties": {
     "encryption": {
-      "keyVaultProperties": { "keyUri": null }
+      "customerManagedKeyEncryption": { "keyEncryptionKeyUrl": null }
     }
   }
 }
@@ -137,8 +156,8 @@ It returns HTTP 400 without changing the Workspace:
 {
   "error": {
     "code": "InvalidEncryptionConfiguration",
-    "message": "The merged encryption setting uses Microsoft.Keyvault but has no key URI. Supply a versionless HTTPS Key Vault key URI, or remove encryption to select Microsoft-managed protection.",
-    "target": "properties.encryption.keyVaultProperties.keyUri"
+    "message": "The merged customerManagedKeyEncryption object has no valid key URL. Supply a versionless HTTPS Key Vault key URL, or delete the CMK object to select Microsoft-managed protection.",
+    "target": "properties.encryption.customerManagedKeyEncryption.keyEncryptionKeyUrl"
   }
 }
 ```
@@ -149,8 +168,10 @@ specific error status to the existing default-only error response.
 
 `ApiVersionNotSupportedForEncryption` is a service-specific compatibility
 restriction, not the standard error for an unknown API version. Before any side
-effect, a pre-CMK PUT is rejected if the desired or observed source is
-customer-managed, or if active protection is unknown for an enrolled Workspace.
+effect, a pre-CMK PUT is rejected if a desired CMK object exists, observed
+protection is customer-managed, or active protection is unknown for an enrolled
+Workspace. Deleting desired CMK does not bypass the check while observed
+protection remains customer-managed or unknown.
 The check and write use the existing Workspace concurrency boundary. No
 customer-vault lookup is required.
 
@@ -185,7 +206,7 @@ Before customer activation, service and SDK tests must establish these results:
 | --- | --- |
 | GET-to-PUT round trip | Preserve the complete requested key setting; ignore read-only inputs. |
 | SDK PATCH omission versus null | Serialization preserves the difference between no change and deletion. |
-| What-If with a GA template that omits encryption | Show the change to the static Microsoft-managed default. |
+| What-If with a GA template that omits the CMK object | Show the change to Microsoft-managed protection. |
 | What-If with an unchanged complete customer-key setting | No false encryption change from service-owned observations. |
 | Old-version template before and after enrollment | Succeed before enrollment; return the documented 409 after enrollment without changing any field. |
 | Concurrent enrollment and old-version PUT | No stale-state bypass of the compatibility check. |

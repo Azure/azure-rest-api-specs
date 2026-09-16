@@ -10,16 +10,21 @@ const readJson = (name) =>
   JSON.parse(readFileSync(path.join(root, name), "utf8"));
 const spec = readJson("stable/2026-11-01/openapi.json");
 const definitions = spec.definitions;
-const fullEncryption = definitions.WorkspaceProperties.properties.encryption;
 const resolve = (schema) =>
   schema.$ref?.startsWith("#/definitions/")
     ? definitions[schema.$ref.split("/").at(-1)]
     : schema;
+const fullEncryption = resolve(
+  definitions.WorkspaceProperties.properties.encryption,
+);
+const fullCustomerKey = resolve(
+  fullEncryption.properties.customerManagedKeyEncryption,
+);
 const patchEncryption = resolve(
   definitions.WorkspaceUpdateProperties.properties.encryption,
 );
 const patchKeyProperties = resolve(
-  patchEncryption.properties.keyVaultProperties,
+  patchEncryption.properties.customerManagedKeyEncryption,
 );
 const workspacePath =
   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}";
@@ -43,25 +48,21 @@ function visitLocalSchemas(schema, visitor, seen = new Set()) {
   if (schema.items) visitLocalSchemas(schema.items, visitor, seen);
 }
 
-test("full encryption has a static PUT default, required input, and no nullable fields", () => {
-  assert.deepEqual(
+test("full encryption defaults to absent CMK, requires a URL only in present CMK, and is non-nullable", () => {
+  assert.equal(
     definitions.WorkspaceProperties.properties.encryption.default,
-    {
-      keySource: "Microsoft.Storage",
-    },
+    undefined,
   );
   assert.ok(!definitions.WorkspaceProperties.required.includes("encryption"));
-  assert.deepEqual(fullEncryption.required, ["keySource"]);
-  assert.deepEqual(definitions.WorkspaceEncryptionKeyVaultProperties.required, [
-    "keyUri",
-  ]);
+  assert.equal(fullEncryption.required, undefined);
+  assert.deepEqual(fullCustomerKey.required, ["keyEncryptionKeyUrl"]);
   visitLocalSchemas(fullEncryption, (schema) => {
     assert.notEqual(schema["x-nullable"], true);
     assert.notEqual(schema["x-ms-nullable"], true);
+    assert.equal(schema.default, undefined);
   });
-  assert.deepEqual(definitions.WorkspaceEncryptionKeySource.enum, [
-    "Microsoft.Keyvault",
-    "Microsoft.Storage",
+  assert.deepEqual(Object.keys(fullCustomerKey.properties), [
+    "keyEncryptionKeyUrl",
   ]);
 });
 
@@ -77,9 +78,8 @@ test("PATCH deletion is request-only, optional, and default-free at every new le
   });
   for (const [model, field] of [
     [definitions.WorkspaceUpdateProperties, "encryption"],
-    [patchEncryption, "keySource"],
-    [patchEncryption, "keyVaultProperties"],
-    [patchKeyProperties, "keyUri"],
+    [patchEncryption, "customerManagedKeyEncryption"],
+    [patchKeyProperties, "keyEncryptionKeyUrl"],
   ]) {
     assert.equal(
       model.properties[field]["x-nullable"],
@@ -88,17 +88,16 @@ test("PATCH deletion is request-only, optional, and default-free at every new le
     );
   }
   assert.deepEqual(Object.keys(patchEncryption.properties), [
-    "keySource",
-    "keyVaultProperties",
+    "customerManagedKeyEncryption",
   ]);
 });
 
 test("service observations and consent identity are read-only without a second provisioning state", () => {
-  for (const field of ["identity", "status"]) {
+  for (const field of ["customerManagedKeyOnboarding", "status"]) {
     assert.equal(fullEncryption.properties[field].readOnly, true);
   }
   for (const model of [
-    "WorkspaceEncryptionIdentity",
+    "WorkspaceCustomerManagedKeyOnboarding",
     "WorkspaceEncryptionStatus",
   ]) {
     for (const field of Object.values(definitions[model].properties)) {
@@ -106,14 +105,19 @@ test("service observations and consent identity are read-only without a second p
     }
   }
   assert.deepEqual(Object.keys(fullEncryption.properties), [
-    "keySource",
-    "keyVaultProperties",
-    "identity",
+    "customerManagedKeyEncryption",
+    "customerManagedKeyOnboarding",
     "status",
   ]);
   assert.deepEqual(
     Object.keys(definitions.WorkspaceEncryptionStatus.properties),
-    ["state", "observedKeySource", "observedKeyUri", "lastCheckedAt", "error"],
+    [
+      "state",
+      "observedProtection",
+      "observedKeyEncryptionKeyUrl",
+      "lastCheckedAt",
+      "error",
+    ],
   );
   assert.deepEqual(definitions.WorkspaceEncryptionState.enum, [
     "NotConfigured",
@@ -126,10 +130,21 @@ test("service observations and consent identity are read-only without a second p
     definitions.WorkspaceEncryptionStatus.properties.error.$ref,
     /\/v5\/types.json#\/definitions\/ErrorDetail$/,
   );
+  assert.deepEqual(definitions.WorkspaceEncryptionProtection.enum, [
+    "CustomerManaged",
+    "MicrosoftManaged",
+  ]);
+  const onboarding = example("Workspaces_Get_EncryptionNotConfigured")
+    .responses["200"].body.properties.encryption;
+  assert.equal(onboarding.customerManagedKeyEncryption, undefined);
+  assert.equal(
+    onboarding.customerManagedKeyOnboarding.applicationId,
+    "00000000-0000-0000-0000-000000000001",
+  );
 });
 
 test("key URI schema rejects a version, query, fragment, and non-HTTPS URI", () => {
-  const schema = definitions.WorkspaceEncryptionKeyUri;
+  const schema = definitions.WorkspaceKeyEncryptionKeyUrl;
   assert.equal(schema.format, "uri");
   const pattern = new RegExp(schema.pattern);
   const uri = "https://contoso-vault.vault.azure.net/keys/workspace-key";
@@ -145,36 +160,106 @@ test("key URI schema rejects a version, query, fragment, and non-HTTPS URI", () 
   }
 });
 
-test("examples distinguish replacement, omission, null deletion, and URI-only PATCH", () => {
+test("examples distinguish replacement, omission, null deletion, and URL-only PATCH", () => {
   const put = example("Workspaces_CreateOrUpdate_OmitEncryption");
   assert.equal(put.parameters.resource.properties.encryption, undefined);
   assert.equal(
-    put.responses["200"].body.properties.encryption.keySource,
-    "Microsoft.Storage",
+    put.responses["200"].body.properties.encryption
+      .customerManagedKeyEncryption,
+    undefined,
+  );
+  assert.equal(
+    put.responses["200"].body.properties.encryption.status.observedProtection,
+    "CustomerManaged",
   );
   const patch = example("Workspaces_Update_OmitEncryption");
   assert.equal(patch.parameters.properties.properties, undefined);
   assert.equal(
-    patch.responses["200"].body.properties.encryption.keySource,
-    "Microsoft.Keyvault",
+    patch.responses["200"].body.properties.encryption
+      .customerManagedKeyEncryption.keyEncryptionKeyUrl,
+    "https://contoso-vault.vault.azure.net/keys/workspace-key",
   );
   assert.equal(
     example("Workspaces_Update_RemoveCustomerKey").parameters.properties
-      .properties.encryption,
+      .properties.encryption.customerManagedKeyEncryption,
     null,
   );
   const replacement = example("Workspaces_Update_ReplaceCustomerKey");
   assert.deepEqual(
     Object.keys(replacement.parameters.properties.properties.encryption),
-    ["keyVaultProperties"],
+    ["customerManagedKeyEncryption"],
   );
   const failed = example("Workspaces_Get_EncryptionFailed").responses["200"]
     .body.properties.encryption;
   assert.notEqual(
-    failed.status.observedKeyUri.split("/").at(-2),
-    failed.keyVaultProperties.keyUri.split("/").at(-1),
+    failed.status.observedKeyEncryptionKeyUrl.split("/").at(-2),
+    failed.customerManagedKeyEncryption.keyEncryptionKeyUrl.split("/").at(-1),
   );
   assert.equal(failed.status.error.code, "CustomerKeyAccessFailed");
+  const removed = example("Workspaces_Update_RemoveCustomerKey").responses[
+    "200"
+  ].body.properties.encryption;
+  assert.equal(removed.customerManagedKeyEncryption, undefined);
+  assert.equal(removed.status.observedProtection, "MicrosoftManaged");
+  assert.equal(removed.status.observedKeyEncryptionKeyUrl, undefined);
+  assert.ok(removed.customerManagedKeyOnboarding.applicationId);
+});
+
+test("no retired wire aliases or customer-selectable identity configuration remain", () => {
+  const forbidden = [
+    "keySource",
+    "keyVaultProperties",
+    "keyUri",
+    "identity",
+    "keyEncryptionKeyIdentity",
+    "infrastructureEncryption",
+    "observedKeySource",
+    "observedKeyUri",
+  ];
+  for (const rootSchema of [fullEncryption, patchEncryption]) {
+    visitLocalSchemas(rootSchema, (schema) => {
+      for (const name of Object.keys(schema.properties ?? {}))
+        assert.ok(!forbidden.includes(name), name);
+    });
+  }
+});
+
+test("empty PUT and nested deletion remove CMK while empty PATCH preserves an existing URL", () => {
+  const emptyPut = example("Workspaces_CreateOrUpdate_EmptyEncryption");
+  assert.deepEqual(emptyPut.parameters.resource.properties.encryption, {});
+  assert.equal(
+    emptyPut.responses["200"].body.properties.encryption
+      .customerManagedKeyEncryption,
+    undefined,
+  );
+  const wholeDelete = example("Workspaces_Update_RemoveEncryption");
+  assert.equal(wholeDelete.parameters.properties.properties.encryption, null);
+  assert.ok(
+    wholeDelete.responses["200"].body.properties.encryption
+      .customerManagedKeyOnboarding.applicationId,
+  );
+  const emptyPatch = example("Workspaces_Update_EmptyCustomerKeyPatch");
+  assert.deepEqual(
+    emptyPatch.parameters.properties.properties.encryption
+      .customerManagedKeyEncryption,
+    {},
+  );
+  assert.ok(
+    emptyPatch.responses["200"].body.properties.encryption
+      .customerManagedKeyEncryption.keyEncryptionKeyUrl,
+  );
+  assert.deepEqual(fullCustomerKey.required, ["keyEncryptionKeyUrl"]);
+  assert.equal(patchKeyProperties.required, undefined);
+});
+
+test("unknown observations omit protection and key URL instead of inferring the desired value", () => {
+  const encryption = example("Workspaces_Get_EncryptionUnknown").responses[
+    "200"
+  ].body.properties.encryption;
+  assert.ok(encryption.customerManagedKeyEncryption.keyEncryptionKeyUrl);
+  assert.equal(encryption.status.state, "Unknown");
+  assert.equal(encryption.status.observedProtection, undefined);
+  assert.equal(encryption.status.observedKeyEncryptionKeyUrl, undefined);
 });
 
 test("Workspace LROs retain their existing routes and response shapes", () => {
@@ -221,7 +306,9 @@ test("new encryption types and properties are absent from all earlier generated 
     const previous = readJson(file);
     assert.ok(
       !Object.keys(previous.definitions).some((name) =>
-        name.startsWith("WorkspaceEncryption"),
+        /^(WorkspaceEncryption|WorkspaceCustomerManagedKey|WorkspaceKeyEncryptionKeyUrl)/.test(
+          name,
+        ),
       ),
     );
     assert.equal(
