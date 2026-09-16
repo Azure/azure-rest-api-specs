@@ -108,7 +108,7 @@ model BuildConfig {
   runtime?: string;
 
   /**
-   * [Preview] Service account to be used for building the container
+   * Service account to be used for building the container. The format of this field is `projects/{projectId}/serviceAccounts/{serviceAccountEmail}`.
    */
   serviceAccount?: string;
 
@@ -231,7 +231,7 @@ model GcpFunctionProperties {
   eventTrigger?: EventTrigger;
 
   /**
-   * [Preview] Resource name of a KMS crypto key (managed by the user) used to encrypt/decrypt function resources. It must match the pattern `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
+   * Resource name of a KMS crypto key (managed by the user) used to encrypt/decrypt function resources. It must match the pattern `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
    */
   kmsKeyName?: string;
 
