@@ -2,11 +2,14 @@
 
 > see https://aka.ms/autorest
 
-This TypeSpec client project generates dedicated App Configuration Feature Flag
-SDK packages from the App Configuration service specification.
+This self-contained TypeSpec client project generates dedicated App Configuration
+Feature Flag SDK packages. The canonical App Configuration project remains
+responsible for emitting the service OpenAPI document.
 
-The client customizations are defined in `client.tsp`, and language emitter
-settings are defined in `tspconfig.yaml`.
+The Feature Flag API contract is duplicated locally to keep this SDK package
+independent without cross-project TypeSpec imports. Client customizations are
+defined in `client.tsp`, and language emitter settings are defined in
+`tspconfig.yaml`.
 
 ---
 

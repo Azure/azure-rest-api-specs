@@ -1,36 +1,23 @@
-import "../AppConfiguration/main.tsp";
+import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using Azure.ClientGenerator.Core;
-using AzureAppConfiguration;
+using AppConfigurationFeatureFlag;
 
 namespace SdkCustomizations;
 
-@@clientName(AzureAppConfiguration, "FeatureFlagClient");
+@@clientName(AppConfigurationFeatureFlag, "FeatureFlagClient");
 @@clientName(Azure.Core.Foundations.Error, "CommonError");
 
-// Hide configuration operations from the feature-flag-only package.
-@@scope(getKeys, "!(csharp, python, java, javascript, go)");
-@@scope(checkKeys, "!(csharp, python, java, javascript, go)");
-@@scope(getKeyValues, "!(csharp, python, java, javascript, go)");
-@@scope(checkKeyValues, "!(csharp, python, java, javascript, go)");
-@@scope(getKeyValue, "!(csharp, python, java, javascript, go)");
-@@scope(putKeyValue, "!(csharp, python, java, javascript, go)");
-@@scope(deleteKeyValue, "!(csharp, python, java, javascript, go)");
-@@scope(checkKeyValue, "!(csharp, python, java, javascript, go)");
-@@scope(getSnapshots, "!(csharp, python, java, javascript, go)");
-@@scope(checkSnapshots, "!(csharp, python, java, javascript, go)");
-@@scope(getSnapshot, "!(csharp, python, java, javascript, go)");
-@@scope(createSnapshot, "!(csharp, python, java, javascript, go)");
-@@scope(updateSnapshot, "!(csharp, python, java, javascript, go)");
-@@scope(checkSnapshot, "!(csharp, python, java, javascript, go)");
-@@scope(checkLabels, "!(csharp, python, java, javascript, go)");
-@@scope(putLock, "!(csharp, python, java, javascript, go)");
-@@scope(deleteLock, "!(csharp, python, java, javascript, go)");
-@@scope(getRevisions, "!(csharp, python, java, javascript, go)");
-@@scope(checkRevisions, "!(csharp, python, java, javascript, go)");
-@@scope(getOperationDetails, "!(csharp, python, java, javascript, go)");
+@@clientLocation(getFeatureFlag, "FeatureFlagClient");
+@@clientLocation(checkFeatureFlag, "FeatureFlagClient");
+@@clientLocation(getFeatureFlags, "FeatureFlagClient");
+@@clientLocation(checkFeatureFlags, "FeatureFlagClient");
+@@clientLocation(putFeatureFlag, "FeatureFlagClient");
+@@clientLocation(deleteFeatureFlag, "FeatureFlagClient");
+@@clientLocation(getFeatureFlagRevisions, "FeatureFlagClient");
+@@clientLocation(checkFeatureFlagRevisions, "FeatureFlagClient");
 
 // .NET specific customizations
 @@access(getFeatureFlag, Access.internal, "csharp");
