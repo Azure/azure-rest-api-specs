@@ -404,6 +404,72 @@
         }
       }
     },
+    "ActivationPolicy": {
+      "type": "string",
+      "description": "Settings.activationPolicy values, as defined by the Google Cloud API.",
+      "enum": [
+        "SQL_ACTIVATION_POLICY_UNSPECIFIED",
+        "ALWAYS",
+        "NEVER",
+        "ON_DEMAND"
+      ],
+      "x-ms-enum": {
+        "name": "ActivationPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SQL_ACTIVATION_POLICY_UNSPECIFIED",
+            "value": "SQL_ACTIVATION_POLICY_UNSPECIFIED",
+            "description": "Unknown activation plan."
+          },
+          {
+            "name": "ALWAYS",
+            "value": "ALWAYS",
+            "description": "The instance is always up and running."
+          },
+          {
+            "name": "NEVER",
+            "value": "NEVER",
+            "description": "The instance never starts."
+          },
+          {
+            "name": "ON_DEMAND",
+            "value": "ON_DEMAND",
+            "description": "The instance starts upon receiving requests."
+          }
+        ]
+      }
+    },
+    "AvailabilityType": {
+      "type": "string",
+      "description": "Settings.availabilityType values, as defined by the Google Cloud API.",
+      "enum": [
+        "SQL_AVAILABILITY_TYPE_UNSPECIFIED",
+        "ZONAL",
+        "REGIONAL"
+      ],
+      "x-ms-enum": {
+        "name": "AvailabilityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SQL_AVAILABILITY_TYPE_UNSPECIFIED",
+            "value": "SQL_AVAILABILITY_TYPE_UNSPECIFIED",
+            "description": "This is an unknown Availability type."
+          },
+          {
+            "name": "ZONAL",
+            "value": "ZONAL",
+            "description": "Zonal available instance."
+          },
+          {
+            "name": "REGIONAL",
+            "value": "REGIONAL",
+            "description": "Regional available instance."
+          }
+        ]
+      }
+    },
     "AvailableDatabaseVersion": {
       "type": "object",
       "description": "Database version that can be used for the instance.",
@@ -470,9 +536,51 @@
           "description": "Number of backup runs to retain."
         },
         "retentionUnit": {
-          "type": "string",
+          "$ref": "#/definitions/RetentionUnit",
           "description": "The unit that 'retainedBackups' represents."
         }
+      }
+    },
+    "DataDiskType": {
+      "type": "string",
+      "description": "Settings.dataDiskType values, as defined by the Google Cloud API.",
+      "enum": [
+        "SQL_DATA_DISK_TYPE_UNSPECIFIED",
+        "PD_SSD",
+        "PD_HDD",
+        "OBSOLETE_LOCAL_SSD",
+        "HYPERDISK_BALANCED"
+      ],
+      "x-ms-enum": {
+        "name": "DataDiskType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SQL_DATA_DISK_TYPE_UNSPECIFIED",
+            "value": "SQL_DATA_DISK_TYPE_UNSPECIFIED",
+            "description": "This is an unknown data disk type."
+          },
+          {
+            "name": "PD_SSD",
+            "value": "PD_SSD",
+            "description": "An SSD data disk."
+          },
+          {
+            "name": "PD_HDD",
+            "value": "PD_HDD",
+            "description": "An HDD data disk."
+          },
+          {
+            "name": "OBSOLETE_LOCAL_SSD",
+            "value": "OBSOLETE_LOCAL_SSD",
+            "description": "This field is deprecated and will be removed from a future version of the API."
+          },
+          {
+            "name": "HYPERDISK_BALANCED",
+            "value": "HYPERDISK_BALANCED",
+            "description": "A Hyperdisk Balanced data disk."
+          }
+        ]
       }
     },
     "DatabaseFlags": {
@@ -827,9 +935,51 @@
           "description": "The due time for this IP to be retired in RFC 3339 format."
         },
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/IpMappingType",
           "description": "The type of this IP address."
         }
+      }
+    },
+    "IpMappingType": {
+      "type": "string",
+      "description": "IpMapping.type values, as defined by the Google Cloud API.",
+      "enum": [
+        "SQL_IP_ADDRESS_TYPE_UNSPECIFIED",
+        "PRIMARY",
+        "OUTGOING",
+        "PRIVATE",
+        "MIGRATED_1ST_GEN"
+      ],
+      "x-ms-enum": {
+        "name": "IpMappingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SQL_IP_ADDRESS_TYPE_UNSPECIFIED",
+            "value": "SQL_IP_ADDRESS_TYPE_UNSPECIFIED",
+            "description": "This is an unknown IP address type."
+          },
+          {
+            "name": "PRIMARY",
+            "value": "PRIMARY",
+            "description": "IP address the customer is supposed to connect to. Usually this is the load balancer's IP address"
+          },
+          {
+            "name": "OUTGOING",
+            "value": "OUTGOING",
+            "description": "Source IP address of the connection a read replica establishes to its external primary instance. This IP address can be allowlisted by the customer in case it has a firewall that filters incoming connection to its on premises primary instance."
+          },
+          {
+            "name": "PRIVATE",
+            "value": "PRIVATE",
+            "description": "Private IP used when using private IPs and network peering."
+          },
+          {
+            "name": "MIGRATED_1ST_GEN",
+            "value": "MIGRATED_1ST_GEN",
+            "description": "V1 IP of a migrated instance. We want the user to decommission this IP as soon as the migration is complete. Note: V1 instances with V1 ip addresses will be counted as PRIMARY."
+          }
+        ]
       }
     },
     "LocationPreference": {
@@ -873,7 +1023,7 @@
           "description": "This is always sql#maintenanceWindow."
         },
         "updateTrack": {
-          "type": "string",
+          "$ref": "#/definitions/UpdateTrack",
           "description": "Maintenance timing setting."
         }
       }
@@ -984,11 +1134,11 @@
           "description": "The name of this operation."
         },
         "operationType": {
-          "type": "string",
+          "$ref": "#/definitions/OperationType",
           "description": "The type of the operation."
         },
         "status": {
-          "type": "string",
+          "$ref": "#/definitions/OperationStatus",
           "description": "The status of the operation."
         },
         "error": {
@@ -1029,6 +1179,396 @@
         }
       }
     },
+    "OperationStatus": {
+      "type": "string",
+      "description": "Operation.status values, as defined by the Google Cloud API.",
+      "enum": [
+        "SQL_OPERATION_STATUS_UNSPECIFIED",
+        "PENDING",
+        "RUNNING",
+        "DONE"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SQL_OPERATION_STATUS_UNSPECIFIED",
+            "value": "SQL_OPERATION_STATUS_UNSPECIFIED",
+            "description": "The state of the operation is unknown."
+          },
+          {
+            "name": "PENDING",
+            "value": "PENDING",
+            "description": "The operation has been queued, but has not started yet."
+          },
+          {
+            "name": "RUNNING",
+            "value": "RUNNING",
+            "description": "The operation is running."
+          },
+          {
+            "name": "DONE",
+            "value": "DONE",
+            "description": "The operation completed."
+          }
+        ]
+      }
+    },
+    "OperationType": {
+      "type": "string",
+      "description": "Operation.operationType values, as defined by the Google Cloud API.",
+      "enum": [
+        "SQL_OPERATION_TYPE_UNSPECIFIED",
+        "IMPORT",
+        "EXPORT",
+        "CREATE",
+        "UPDATE",
+        "DELETE",
+        "RESTART",
+        "BACKUP",
+        "SNAPSHOT",
+        "BACKUP_VOLUME",
+        "DELETE_VOLUME",
+        "RESTORE_VOLUME",
+        "INJECT_USER",
+        "CLONE",
+        "STOP_REPLICA",
+        "START_REPLICA",
+        "PROMOTE_REPLICA",
+        "CREATE_REPLICA",
+        "CREATE_USER",
+        "DELETE_USER",
+        "UPDATE_USER",
+        "CREATE_DATABASE",
+        "DELETE_DATABASE",
+        "UPDATE_DATABASE",
+        "FAILOVER",
+        "DELETE_BACKUP",
+        "RECREATE_REPLICA",
+        "TRUNCATE_LOG",
+        "DEMOTE_MASTER",
+        "MAINTENANCE",
+        "ENABLE_PRIVATE_IP",
+        "DEFER_MAINTENANCE",
+        "CREATE_CLONE",
+        "RESCHEDULE_MAINTENANCE",
+        "START_EXTERNAL_SYNC",
+        "LOG_CLEANUP",
+        "AUTO_RESTART",
+        "REENCRYPT",
+        "SWITCHOVER",
+        "UPDATE_BACKUP",
+        "ACQUIRE_SSRS_LEASE",
+        "RELEASE_SSRS_LEASE",
+        "RECONFIGURE_OLD_PRIMARY",
+        "CLUSTER_MAINTENANCE",
+        "SELF_SERVICE_MAINTENANCE",
+        "SWITCHOVER_TO_REPLICA",
+        "MAJOR_VERSION_UPGRADE",
+        "ADVANCED_BACKUP",
+        "MANAGE_BACKUP",
+        "ENHANCED_BACKUP",
+        "REPAIR_READ_POOL",
+        "CREATE_READ_POOL",
+        "PRE_CHECK_MAJOR_VERSION_UPGRADE",
+        "SETUP_MIGRATION",
+        "CREATE_BLUE_GREEN_DEPLOYMENT",
+        "SWITCHOVER_BLUE_GREEN_DEPLOYMENT",
+        "DELETE_BLUE_GREEN_DEPLOYMENT"
+      ],
+      "x-ms-enum": {
+        "name": "OperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SQL_OPERATION_TYPE_UNSPECIFIED",
+            "value": "SQL_OPERATION_TYPE_UNSPECIFIED",
+            "description": "Unknown operation type."
+          },
+          {
+            "name": "IMPORT",
+            "value": "IMPORT",
+            "description": "Imports data into a Cloud SQL instance."
+          },
+          {
+            "name": "EXPORT",
+            "value": "EXPORT",
+            "description": "Exports data from a Cloud SQL instance to a Cloud Storage bucket."
+          },
+          {
+            "name": "CREATE",
+            "value": "CREATE",
+            "description": "Creates a new Cloud SQL instance."
+          },
+          {
+            "name": "UPDATE",
+            "value": "UPDATE",
+            "description": "Updates the settings of a Cloud SQL instance."
+          },
+          {
+            "name": "DELETE",
+            "value": "DELETE",
+            "description": "Deletes a Cloud SQL instance."
+          },
+          {
+            "name": "RESTART",
+            "value": "RESTART",
+            "description": "Restarts the Cloud SQL instance."
+          },
+          {
+            "name": "BACKUP",
+            "value": "BACKUP",
+            "description": "backup"
+          },
+          {
+            "name": "SNAPSHOT",
+            "value": "SNAPSHOT",
+            "description": "snapshot"
+          },
+          {
+            "name": "BACKUP_VOLUME",
+            "value": "BACKUP_VOLUME",
+            "description": "Performs instance backup."
+          },
+          {
+            "name": "DELETE_VOLUME",
+            "value": "DELETE_VOLUME",
+            "description": "Deletes an instance backup."
+          },
+          {
+            "name": "RESTORE_VOLUME",
+            "value": "RESTORE_VOLUME",
+            "description": "Restores an instance backup."
+          },
+          {
+            "name": "INJECT_USER",
+            "value": "INJECT_USER",
+            "description": "Injects a privileged user in mysql for MOB instances."
+          },
+          {
+            "name": "CLONE",
+            "value": "CLONE",
+            "description": "Clones a Cloud SQL instance."
+          },
+          {
+            "name": "STOP_REPLICA",
+            "value": "STOP_REPLICA",
+            "description": "Stops replication on a Cloud SQL read replica instance."
+          },
+          {
+            "name": "START_REPLICA",
+            "value": "START_REPLICA",
+            "description": "Starts replication on a Cloud SQL read replica instance."
+          },
+          {
+            "name": "PROMOTE_REPLICA",
+            "value": "PROMOTE_REPLICA",
+            "description": "Promotes a Cloud SQL replica instance."
+          },
+          {
+            "name": "CREATE_REPLICA",
+            "value": "CREATE_REPLICA",
+            "description": "Creates a Cloud SQL replica instance."
+          },
+          {
+            "name": "CREATE_USER",
+            "value": "CREATE_USER",
+            "description": "Creates a new user in a Cloud SQL instance."
+          },
+          {
+            "name": "DELETE_USER",
+            "value": "DELETE_USER",
+            "description": "Deletes a user from a Cloud SQL instance."
+          },
+          {
+            "name": "UPDATE_USER",
+            "value": "UPDATE_USER",
+            "description": "Updates an existing user in a Cloud SQL instance. If a user with the specified username doesn't exist, a new user is created."
+          },
+          {
+            "name": "CREATE_DATABASE",
+            "value": "CREATE_DATABASE",
+            "description": "Creates a database in the Cloud SQL instance."
+          },
+          {
+            "name": "DELETE_DATABASE",
+            "value": "DELETE_DATABASE",
+            "description": "Deletes a database in the Cloud SQL instance."
+          },
+          {
+            "name": "UPDATE_DATABASE",
+            "value": "UPDATE_DATABASE",
+            "description": "Updates a database in the Cloud SQL instance."
+          },
+          {
+            "name": "FAILOVER",
+            "value": "FAILOVER",
+            "description": "Performs failover of an HA-enabled Cloud SQL failover replica."
+          },
+          {
+            "name": "DELETE_BACKUP",
+            "value": "DELETE_BACKUP",
+            "description": "Deletes the backup taken by a backup run."
+          },
+          {
+            "name": "RECREATE_REPLICA",
+            "value": "RECREATE_REPLICA",
+            "description": "recreate replica"
+          },
+          {
+            "name": "TRUNCATE_LOG",
+            "value": "TRUNCATE_LOG",
+            "description": "Truncates a general or slow log table in MySQL."
+          },
+          {
+            "name": "DEMOTE_MASTER",
+            "value": "DEMOTE_MASTER",
+            "description": "Demotes the stand-alone instance to be a Cloud SQL read replica for an external database server."
+          },
+          {
+            "name": "MAINTENANCE",
+            "value": "MAINTENANCE",
+            "description": "Indicates that the instance is currently in maintenance. Maintenance typically causes the instance to be unavailable for 1-3 minutes."
+          },
+          {
+            "name": "ENABLE_PRIVATE_IP",
+            "value": "ENABLE_PRIVATE_IP",
+            "description": "This field is deprecated, and will be removed in future version of API."
+          },
+          {
+            "name": "DEFER_MAINTENANCE",
+            "value": "DEFER_MAINTENANCE",
+            "description": "defer maintenance"
+          },
+          {
+            "name": "CREATE_CLONE",
+            "value": "CREATE_CLONE",
+            "description": "Creates clone instance."
+          },
+          {
+            "name": "RESCHEDULE_MAINTENANCE",
+            "value": "RESCHEDULE_MAINTENANCE",
+            "description": "Reschedule maintenance to another time."
+          },
+          {
+            "name": "START_EXTERNAL_SYNC",
+            "value": "START_EXTERNAL_SYNC",
+            "description": "Starts external sync of a Cloud SQL EM replica to an external primary instance."
+          },
+          {
+            "name": "LOG_CLEANUP",
+            "value": "LOG_CLEANUP",
+            "description": "Recovers logs from an instance's old data disk."
+          },
+          {
+            "name": "AUTO_RESTART",
+            "value": "AUTO_RESTART",
+            "description": "Performs auto-restart of an HA-enabled Cloud SQL database for auto recovery."
+          },
+          {
+            "name": "REENCRYPT",
+            "value": "REENCRYPT",
+            "description": "Re-encrypts CMEK instances with latest key version."
+          },
+          {
+            "name": "SWITCHOVER",
+            "value": "SWITCHOVER",
+            "description": "Switches the roles of the primary and replica pair. The target instance should be the replica."
+          },
+          {
+            "name": "UPDATE_BACKUP",
+            "value": "UPDATE_BACKUP",
+            "description": "Update a backup."
+          },
+          {
+            "name": "ACQUIRE_SSRS_LEASE",
+            "value": "ACQUIRE_SSRS_LEASE",
+            "description": "Acquire a lease for the setup of SQL Server Reporting Services (SSRS)."
+          },
+          {
+            "name": "RELEASE_SSRS_LEASE",
+            "value": "RELEASE_SSRS_LEASE",
+            "description": "Release a lease for the setup of SQL Server Reporting Services (SSRS)."
+          },
+          {
+            "name": "RECONFIGURE_OLD_PRIMARY",
+            "value": "RECONFIGURE_OLD_PRIMARY",
+            "description": "Reconfigures old primary after a promote replica operation. Effect of a promote operation to the old primary is executed in this operation, asynchronously from the promote replica operation executed to the replica."
+          },
+          {
+            "name": "CLUSTER_MAINTENANCE",
+            "value": "CLUSTER_MAINTENANCE",
+            "description": "Indicates that the instance, its read replicas, and its cascading replicas are in maintenance. Maintenance typically gets initiated on groups of replicas first, followed by the primary instance. For each instance, maintenance typically causes the instance to be unavailable for 1-3 minutes."
+          },
+          {
+            "name": "SELF_SERVICE_MAINTENANCE",
+            "value": "SELF_SERVICE_MAINTENANCE",
+            "description": "Indicates that the instance (and any of its replicas) are currently in maintenance. This is initiated as a self-service request by using SSM. Maintenance typically causes the instance to be unavailable for 1-3 minutes."
+          },
+          {
+            "name": "SWITCHOVER_TO_REPLICA",
+            "value": "SWITCHOVER_TO_REPLICA",
+            "description": "Switches a primary instance to a replica. This operation runs as part of a switchover operation to the original primary instance."
+          },
+          {
+            "name": "MAJOR_VERSION_UPGRADE",
+            "value": "MAJOR_VERSION_UPGRADE",
+            "description": "Updates the major version of a Cloud SQL instance."
+          },
+          {
+            "name": "ADVANCED_BACKUP",
+            "value": "ADVANCED_BACKUP",
+            "description": "Deprecated: ADVANCED_BACKUP is deprecated. Use ENHANCED_BACKUP instead."
+          },
+          {
+            "name": "MANAGE_BACKUP",
+            "value": "MANAGE_BACKUP",
+            "description": "Changes the BackupTier of a Cloud SQL instance."
+          },
+          {
+            "name": "ENHANCED_BACKUP",
+            "value": "ENHANCED_BACKUP",
+            "description": "Creates a backup for an Enhanced BackupTier Cloud SQL instance."
+          },
+          {
+            "name": "REPAIR_READ_POOL",
+            "value": "REPAIR_READ_POOL",
+            "description": "Repairs entire read pool or specified read pool nodes in the read pool."
+          },
+          {
+            "name": "CREATE_READ_POOL",
+            "value": "CREATE_READ_POOL",
+            "description": "Creates a Cloud SQL read pool instance."
+          },
+          {
+            "name": "PRE_CHECK_MAJOR_VERSION_UPGRADE",
+            "value": "PRE_CHECK_MAJOR_VERSION_UPGRADE",
+            "description": "Pre-checks the major version upgrade operation."
+          },
+          {
+            "name": "SETUP_MIGRATION",
+            "value": "SETUP_MIGRATION",
+            "description": "This operation type represents individual steps in a multi-step setup migration workflow: including configuration, replication, switchover/back, and data reseeding, as defined by operation's intent."
+          },
+          {
+            "name": "CREATE_BLUE_GREEN_DEPLOYMENT",
+            "value": "CREATE_BLUE_GREEN_DEPLOYMENT",
+            "description": "Creates a new Blue-Green deployment."
+          },
+          {
+            "name": "SWITCHOVER_BLUE_GREEN_DEPLOYMENT",
+            "value": "SWITCHOVER_BLUE_GREEN_DEPLOYMENT",
+            "description": "Switches over a Blue-Green deployment."
+          },
+          {
+            "name": "DELETE_BLUE_GREEN_DEPLOYMENT",
+            "value": "DELETE_BLUE_GREEN_DEPLOYMENT",
+            "description": "Deletes a Blue-Green deployment."
+          }
+        ]
+      }
+    },
     "PoolNodeConfig": {
       "type": "object",
       "description": "Configuration for a node in the instance pool.",
@@ -1046,13 +1586,109 @@
           "description": "The zone where the node is located."
         },
         "state": {
-          "type": "string",
+          "$ref": "#/definitions/PoolNodeState",
           "description": "Current state of the node."
         },
         "ipAddress": {
           "type": "string",
           "description": "IP address of the node."
         }
+      }
+    },
+    "PoolNodeState": {
+      "type": "string",
+      "description": "PoolNodeConfig.state values, as defined by the Google Cloud API.",
+      "enum": [
+        "SQL_INSTANCE_STATE_UNSPECIFIED",
+        "RUNNABLE",
+        "SUSPENDED",
+        "PENDING_DELETE",
+        "PENDING_CREATE",
+        "MAINTENANCE",
+        "FAILED",
+        "ONLINE_MAINTENANCE",
+        "REPAIRING"
+      ],
+      "x-ms-enum": {
+        "name": "PoolNodeState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SQL_INSTANCE_STATE_UNSPECIFIED",
+            "value": "SQL_INSTANCE_STATE_UNSPECIFIED",
+            "description": "The state of the instance is unknown."
+          },
+          {
+            "name": "RUNNABLE",
+            "value": "RUNNABLE",
+            "description": "The instance is running, or has been stopped by owner."
+          },
+          {
+            "name": "SUSPENDED",
+            "value": "SUSPENDED",
+            "description": "The instance is not available, for example due to problems with billing."
+          },
+          {
+            "name": "PENDING_DELETE",
+            "value": "PENDING_DELETE",
+            "description": "The instance is being deleted."
+          },
+          {
+            "name": "PENDING_CREATE",
+            "value": "PENDING_CREATE",
+            "description": "The instance is being created."
+          },
+          {
+            "name": "MAINTENANCE",
+            "value": "MAINTENANCE",
+            "description": "The instance is down for maintenance."
+          },
+          {
+            "name": "FAILED",
+            "value": "FAILED",
+            "description": "The creation of the instance failed or a fatal error occurred during maintenance."
+          },
+          {
+            "name": "ONLINE_MAINTENANCE",
+            "value": "ONLINE_MAINTENANCE",
+            "description": "Deprecated"
+          },
+          {
+            "name": "REPAIRING",
+            "value": "REPAIRING",
+            "description": "(Applicable to read pool nodes only.) The read pool node needs to be repaired. The database might be unavailable."
+          }
+        ]
+      }
+    },
+    "PricingPlan": {
+      "type": "string",
+      "description": "Settings.pricingPlan values, as defined by the Google Cloud API.",
+      "enum": [
+        "SQL_PRICING_PLAN_UNSPECIFIED",
+        "PACKAGE",
+        "PER_USE"
+      ],
+      "x-ms-enum": {
+        "name": "PricingPlan",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SQL_PRICING_PLAN_UNSPECIFIED",
+            "value": "SQL_PRICING_PLAN_UNSPECIFIED",
+            "description": "This is an unknown pricing plan for this instance."
+          },
+          {
+            "name": "PACKAGE",
+            "value": "PACKAGE",
+            "description": "The instance is billed at a monthly flat rate."
+          },
+          {
+            "name": "PER_USE",
+            "value": "PER_USE",
+            "description": "The instance is billed per usage."
+          }
+        ]
       }
     },
     "ProvisioningState": {
@@ -1144,6 +1780,60 @@
           "type": "string",
           "description": "Name of the leader instance."
         }
+      }
+    },
+    "ReplicationType": {
+      "type": "string",
+      "description": "Settings.replicationType values, as defined by the Google Cloud API.",
+      "enum": [
+        "SQL_REPLICATION_TYPE_UNSPECIFIED",
+        "SYNCHRONOUS",
+        "ASYNCHRONOUS"
+      ],
+      "x-ms-enum": {
+        "name": "ReplicationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SQL_REPLICATION_TYPE_UNSPECIFIED",
+            "value": "SQL_REPLICATION_TYPE_UNSPECIFIED",
+            "description": "This is an unknown replication type for a Cloud SQL instance."
+          },
+          {
+            "name": "SYNCHRONOUS",
+            "value": "SYNCHRONOUS",
+            "description": "The synchronous replication mode for First Generation instances. It is the default value."
+          },
+          {
+            "name": "ASYNCHRONOUS",
+            "value": "ASYNCHRONOUS",
+            "description": "The asynchronous replication mode for First Generation instances. It provides a slight performance gain, but if an outage occurs while this option is set to asynchronous, you can lose up to a few seconds of updates to your data."
+          }
+        ]
+      }
+    },
+    "RetentionUnit": {
+      "type": "string",
+      "description": "BackupRetentionSettings.retentionUnit values, as defined by the Google Cloud API.",
+      "enum": [
+        "RETENTION_UNIT_UNSPECIFIED",
+        "COUNT"
+      ],
+      "x-ms-enum": {
+        "name": "RetentionUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RETENTION_UNIT_UNSPECIFIED",
+            "value": "RETENTION_UNIT_UNSPECIFIED",
+            "description": "Backup retention unit is unspecified, will be treated as COUNT."
+          },
+          {
+            "name": "COUNT",
+            "value": "COUNT",
+            "description": "Retention will be by count, eg. \"retain the most recent 7 backups\"."
+          }
+        ]
       }
     },
     "SQLAdminInstance": {
@@ -1250,7 +1940,7 @@
       "description": "Database instance settings.",
       "properties": {
         "activationPolicy": {
-          "type": "string",
+          "$ref": "#/definitions/ActivationPolicy",
           "description": "The activation policy specifies when the instance is activated."
         },
         "activeDirectoryConfig": {
@@ -1265,7 +1955,7 @@
           }
         },
         "availabilityType": {
-          "type": "string",
+          "$ref": "#/definitions/AvailabilityType",
           "description": "Availability type."
         },
         "backupConfiguration": {
@@ -1285,7 +1975,7 @@
           "description": "The size of data disk, in GB."
         },
         "dataDiskType": {
-          "type": "string",
+          "$ref": "#/definitions/DataDiskType",
           "description": "The type of data disk."
         },
         "databaseFlags": {
@@ -1312,11 +2002,11 @@
           "description": "Maintenance window for the instance."
         },
         "pricingPlan": {
-          "type": "string",
+          "$ref": "#/definitions/PricingPlan",
           "description": "The pricing plan for this instance."
         },
         "replicationType": {
-          "type": "string",
+          "$ref": "#/definitions/ReplicationType",
           "description": "The type of replication this instance uses."
         },
         "settingsVersion": {
@@ -1373,9 +2063,39 @@
           "description": "Minimum recommended increase size in GB."
         },
         "sqlOutOfDiskState": {
-          "type": "string",
+          "$ref": "#/definitions/SqlOutOfDiskState",
           "description": "Current out of disk state."
         }
+      }
+    },
+    "SqlOutOfDiskState": {
+      "type": "string",
+      "description": "SqlOutOfDiskReport.sqlOutOfDiskState values, as defined by the Google Cloud API.",
+      "enum": [
+        "SQL_OUT_OF_DISK_STATE_UNSPECIFIED",
+        "NORMAL",
+        "SOFT_SHUTDOWN"
+      ],
+      "x-ms-enum": {
+        "name": "SqlOutOfDiskState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SQL_OUT_OF_DISK_STATE_UNSPECIFIED",
+            "value": "SQL_OUT_OF_DISK_STATE_UNSPECIFIED",
+            "description": "Unspecified state"
+          },
+          {
+            "name": "NORMAL",
+            "value": "NORMAL",
+            "description": "The instance has plenty space on data disk"
+          },
+          {
+            "name": "SOFT_SHUTDOWN",
+            "value": "SOFT_SHUTDOWN",
+            "description": "Data disk is almost used up. It is shutdown to prevent data corruption."
+          }
+        ]
       }
     },
     "SqlScheduledMaintenance": {
@@ -1439,6 +2159,42 @@
           "type": "string",
           "description": "SHA-1 fingerprint of the certificate."
         }
+      }
+    },
+    "UpdateTrack": {
+      "type": "string",
+      "description": "MaintenanceWindow.updateTrack values, as defined by the Google Cloud API.",
+      "enum": [
+        "SQL_UPDATE_TRACK_UNSPECIFIED",
+        "canary",
+        "stable",
+        "week5"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateTrack",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SQL_UPDATE_TRACK_UNSPECIFIED",
+            "value": "SQL_UPDATE_TRACK_UNSPECIFIED",
+            "description": "This is an unknown maintenance timing preference."
+          },
+          {
+            "name": "canary",
+            "value": "canary",
+            "description": "For an instance with a scheduled maintenance window, this maintenance timing indicates that the maintenance update is scheduled 7 to 14 days after the notification is sent out. Also referred to as `Week 1` (Console) and `preview` (gcloud CLI)."
+          },
+          {
+            "name": "stable",
+            "value": "stable",
+            "description": "For an instance with a scheduled maintenance window, this maintenance timing indicates that the maintenance update is scheduled 15 to 21 days after the notification is sent out. Also referred to as `Week 2` (Console) and `production` (gcloud CLI)."
+          },
+          {
+            "name": "week5",
+            "value": "week5",
+            "description": "For instance with a scheduled maintenance window, this maintenance timing indicates that the maintenance update is scheduled 35 to 42 days after the notification is sent out."
+          }
+        ]
       }
     }
   },

@@ -538,7 +538,7 @@
           "type": "array",
           "description": "Which resources in the dataset this entry applies to. Currently, only views are supported, but additional target types may be added in the future.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/TargetTypes"
           }
         }
       }
@@ -895,6 +895,36 @@
         "datasetId",
         "tableId"
       ]
+    },
+    "TargetTypes": {
+      "type": "string",
+      "description": "DatasetAccessEntry.targetTypes values, as defined by the Google Cloud API.",
+      "enum": [
+        "TARGET_TYPE_UNSPECIFIED",
+        "VIEWS",
+        "ROUTINES"
+      ],
+      "x-ms-enum": {
+        "name": "TargetTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TARGET_TYPE_UNSPECIFIED",
+            "value": "TARGET_TYPE_UNSPECIFIED",
+            "description": "Do not use. You must set a target type explicitly."
+          },
+          {
+            "name": "VIEWS",
+            "value": "VIEWS",
+            "description": "This entry applies to views in the dataset."
+          },
+          {
+            "name": "ROUTINES",
+            "value": "ROUTINES",
+            "description": "This entry applies to routines in the dataset."
+          }
+        ]
+      }
     }
   },
   "parameters": {}

@@ -260,6 +260,42 @@
         }
       }
     },
+    "AccessTypes": {
+      "type": "string",
+      "description": "ControlPlaneEndpointsConfig.accessTypes values, as defined by the Google Cloud API.",
+      "enum": [
+        "ACCESS_TYPE_UNSPECIFIED",
+        "PUBLIC",
+        "PRIVATE",
+        "SERVERLESS"
+      ],
+      "x-ms-enum": {
+        "name": "AccessTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ACCESS_TYPE_UNSPECIFIED",
+            "value": "ACCESS_TYPE_UNSPECIFIED",
+            "description": "access type unspecified"
+          },
+          {
+            "name": "PUBLIC",
+            "value": "PUBLIC",
+            "description": "public"
+          },
+          {
+            "name": "PRIVATE",
+            "value": "PRIVATE",
+            "description": "private"
+          },
+          {
+            "name": "SERVERLESS",
+            "value": "SERVERLESS",
+            "description": "serverless"
+          }
+        ]
+      }
+    },
     "AdditionalNodeNetworkConfig": {
       "type": "object",
       "description": "Configuration for additional node network interfaces.",
@@ -563,7 +599,7 @@
           "description": "Whether Binary Authorization is enabled for this cluster"
         },
         "evaluationMode": {
-          "type": "string",
+          "$ref": "#/definitions/EvaluationMode",
           "description": "Mode of operation for Binary Authorization policy evaluation"
         }
       }
@@ -674,6 +710,120 @@
         }
       }
     },
+    "CanonicalCode": {
+      "type": "string",
+      "description": "StatusCondition.canonicalCode values, as defined by the Google Cloud API.",
+      "enum": [
+        "OK",
+        "CANCELLED",
+        "UNKNOWN",
+        "INVALID_ARGUMENT",
+        "DEADLINE_EXCEEDED",
+        "NOT_FOUND",
+        "ALREADY_EXISTS",
+        "PERMISSION_DENIED",
+        "UNAUTHENTICATED",
+        "RESOURCE_EXHAUSTED",
+        "FAILED_PRECONDITION",
+        "ABORTED",
+        "OUT_OF_RANGE",
+        "UNIMPLEMENTED",
+        "INTERNAL",
+        "UNAVAILABLE",
+        "DATA_LOSS"
+      ],
+      "x-ms-enum": {
+        "name": "CanonicalCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OK",
+            "value": "OK",
+            "description": "Not an error; returned on success. HTTP Mapping: 200 OK"
+          },
+          {
+            "name": "CANCELLED",
+            "value": "CANCELLED",
+            "description": "The operation was cancelled, typically by the caller. HTTP Mapping: 499 Client Closed Request"
+          },
+          {
+            "name": "UNKNOWN",
+            "value": "UNKNOWN",
+            "description": "Unknown error. For example, this error may be returned when a `Status` value received from another address space belongs to an error space that is not known in this address space. Also errors raised by APIs that do not return enough error information may be converted to this error. HTTP Mapping: 500 Internal Server Error"
+          },
+          {
+            "name": "INVALID_ARGUMENT",
+            "value": "INVALID_ARGUMENT",
+            "description": "The client specified an invalid argument. Note that this differs from `FAILED_PRECONDITION`. `INVALID_ARGUMENT` indicates arguments that are problematic regardless of the state of the system (e.g., a malformed file name). HTTP Mapping: 400 Bad Request"
+          },
+          {
+            "name": "DEADLINE_EXCEEDED",
+            "value": "DEADLINE_EXCEEDED",
+            "description": "The deadline expired before the operation could complete. For operations that change the state of the system, this error may be returned even if the operation has completed successfully. For example, a successful response from a server could have been delayed long enough for the deadline to expire. HTTP Mapping: 504 Gateway Timeout"
+          },
+          {
+            "name": "NOT_FOUND",
+            "value": "NOT_FOUND",
+            "description": "Some requested entity (e.g., file or directory) was not found. Note to server developers: if a request is denied for an entire class of users, such as gradual feature rollout or undocumented allowlist, `NOT_FOUND` may be used. If a request is denied for some users within a class of users, such as user-based access control, `PERMISSION_DENIED` must be used. HTTP Mapping: 404 Not Found"
+          },
+          {
+            "name": "ALREADY_EXISTS",
+            "value": "ALREADY_EXISTS",
+            "description": "The entity that a client attempted to create (e.g., file or directory) already exists. HTTP Mapping: 409 Conflict"
+          },
+          {
+            "name": "PERMISSION_DENIED",
+            "value": "PERMISSION_DENIED",
+            "description": "The caller does not have permission to execute the specified operation. `PERMISSION_DENIED` must not be used for rejections caused by exhausting some resource (use `RESOURCE_EXHAUSTED` instead for those errors). `PERMISSION_DENIED` must not be used if the caller can not be identified (use `UNAUTHENTICATED` instead for those errors). This error code does not imply the request is valid or the requested entity exists or satisfies other pre-conditions. HTTP Mapping: 403 Forbidden"
+          },
+          {
+            "name": "UNAUTHENTICATED",
+            "value": "UNAUTHENTICATED",
+            "description": "The request does not have valid authentication credentials for the operation. HTTP Mapping: 401 Unauthorized"
+          },
+          {
+            "name": "RESOURCE_EXHAUSTED",
+            "value": "RESOURCE_EXHAUSTED",
+            "description": "Some resource has been exhausted, perhaps a per-user quota, or perhaps the entire file system is out of space. HTTP Mapping: 429 Too Many Requests"
+          },
+          {
+            "name": "FAILED_PRECONDITION",
+            "value": "FAILED_PRECONDITION",
+            "description": "The operation was rejected because the system is not in a state required for the operation's execution. For example, the directory to be deleted is non-empty, an rmdir operation is applied to a non-directory, etc. Service implementors can use the following guidelines to decide between `FAILED_PRECONDITION`, `ABORTED`, and `UNAVAILABLE`: (a) Use `UNAVAILABLE` if the client can retry just the failing call. (b) Use `ABORTED` if the client should retry at a higher level. For example, when a client-specified test-and-set fails, indicating the client should restart a read-modify-write sequence. (c) Use `FAILED_PRECONDITION` if the client should not retry until the system state has been explicitly fixed. For example, if an \"rmdir\" fails because the directory is non-empty, `FAILED_PRECONDITION` should be returned since the client should not retry unless the files are deleted from the directory. HTTP Mapping: 400 Bad Request"
+          },
+          {
+            "name": "ABORTED",
+            "value": "ABORTED",
+            "description": "The operation was aborted, typically due to a concurrency issue such as a sequencer check failure or transaction abort. See the guidelines above for deciding between `FAILED_PRECONDITION`, `ABORTED`, and `UNAVAILABLE`. HTTP Mapping: 409 Conflict"
+          },
+          {
+            "name": "OUT_OF_RANGE",
+            "value": "OUT_OF_RANGE",
+            "description": "The operation was attempted past the valid range. E.g., seeking or reading past end-of-file. Unlike `INVALID_ARGUMENT`, this error indicates a problem that may be fixed if the system state changes. For example, a 32-bit file system will generate `INVALID_ARGUMENT` if asked to read at an offset that is not in the range [0,2^32-1], but it will generate `OUT_OF_RANGE` if asked to read from an offset past the current file size. There is a fair bit of overlap between `FAILED_PRECONDITION` and `OUT_OF_RANGE`. We recommend using `OUT_OF_RANGE` (the more specific error) when it applies so that callers who are iterating through a space can easily look for an `OUT_OF_RANGE` error to detect when they are done. HTTP Mapping: 400 Bad Request"
+          },
+          {
+            "name": "UNIMPLEMENTED",
+            "value": "UNIMPLEMENTED",
+            "description": "The operation is not implemented or is not supported/enabled in this service. HTTP Mapping: 501 Not Implemented"
+          },
+          {
+            "name": "INTERNAL",
+            "value": "INTERNAL",
+            "description": "Internal errors. This means that some invariants expected by the underlying system have been broken. This error code is reserved for serious errors. HTTP Mapping: 500 Internal Server Error"
+          },
+          {
+            "name": "UNAVAILABLE",
+            "value": "UNAVAILABLE",
+            "description": "The service is currently unavailable. This is most likely a transient condition, which can be corrected by retrying with a backoff. Note that it is not always safe to retry non-idempotent operations. See the guidelines above for deciding between `FAILED_PRECONDITION`, `ABORTED`, and `UNAVAILABLE`. HTTP Mapping: 503 Service Unavailable"
+          },
+          {
+            "name": "DATA_LOSS",
+            "value": "DATA_LOSS",
+            "description": "Unrecoverable data loss or corruption. HTTP Mapping: 500 Internal Server Error"
+          }
+        ]
+      }
+    },
     "CertificateAuthorityDomainConfig": {
       "type": "object",
       "description": "Configuration for issuance of mTLS keys and certificates to Kubernetes pods",
@@ -689,6 +839,36 @@
           "$ref": "#/definitions/GcpSecretManagerCertificateConfig",
           "description": "Google Secret Manager URI for the certificate authority certificate"
         }
+      }
+    },
+    "CgroupMode": {
+      "type": "string",
+      "description": "LinuxNodeConfig.cgroupMode values, as defined by the Google Cloud API.",
+      "enum": [
+        "CGROUP_MODE_UNSPECIFIED",
+        "CGROUP_MODE_V1",
+        "CGROUP_MODE_V2"
+      ],
+      "x-ms-enum": {
+        "name": "CgroupMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CGROUP_MODE_UNSPECIFIED",
+            "value": "CGROUP_MODE_UNSPECIFIED",
+            "description": "CGROUP_MODE_UNSPECIFIED is when unspecified cgroup configuration is used. The default for the GKE node OS image will be used."
+          },
+          {
+            "name": "CGROUP_MODE_V1",
+            "value": "CGROUP_MODE_V1",
+            "description": "CGROUP_MODE_V1 specifies to use cgroupv1 for the cgroup configuration on the node image."
+          },
+          {
+            "name": "CGROUP_MODE_V2",
+            "value": "CGROUP_MODE_V2",
+            "description": "CGROUP_MODE_V2 specifies to use cgroupv2 for the cgroup configuration on the node image."
+          }
+        ]
       }
     },
     "CidrBlock": {
@@ -733,22 +913,28 @@
       "type": "string",
       "description": "Load balancer type options for Cloud Run",
       "enum": [
-        "EXTERNAL",
-        "INTERNAL"
+        "LOAD_BALANCER_TYPE_UNSPECIFIED",
+        "LOAD_BALANCER_TYPE_EXTERNAL",
+        "LOAD_BALANCER_TYPE_INTERNAL"
       ],
       "x-ms-enum": {
         "name": "CloudRunLoadBalancerType",
         "modelAsString": true,
         "values": [
           {
-            "name": "EXTERNAL",
-            "value": "EXTERNAL",
-            "description": "External load balancer"
+            "name": "LOAD_BALANCER_TYPE_UNSPECIFIED",
+            "value": "LOAD_BALANCER_TYPE_UNSPECIFIED",
+            "description": "Load balancer type for Cloud Run is unspecified."
           },
           {
-            "name": "INTERNAL",
-            "value": "INTERNAL",
-            "description": "Internal load balancer"
+            "name": "LOAD_BALANCER_TYPE_EXTERNAL",
+            "value": "LOAD_BALANCER_TYPE_EXTERNAL",
+            "description": "Install external load balancer for Cloud Run."
+          },
+          {
+            "name": "LOAD_BALANCER_TYPE_INTERNAL",
+            "value": "LOAD_BALANCER_TYPE_INTERNAL",
+            "description": "Install internal load balancer for Cloud Run."
           }
         ]
       }
@@ -795,15 +981,8 @@
       "description": "Network performance configuration for the cluster",
       "properties": {
         "totalEgressBandwidthTier": {
-          "type": "string",
-          "description": "Total egress bandwidth tier for the cluster",
-          "enum": [
-            "TIER_UNSPECIFIED",
-            "TIER_1"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/TotalEgressBandwidthTier",
+          "description": "Total egress bandwidth tier for the cluster"
         }
       }
     },
@@ -968,8 +1147,9 @@
       "description": "Confidential instance type options",
       "enum": [
         "CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED",
-        "CONFIDENTIAL_VM",
-        "CONFIDENTIAL_SPACE"
+        "SEV",
+        "SEV_SNP",
+        "TDX"
       ],
       "x-ms-enum": {
         "name": "ConfidentialInstanceType",
@@ -978,17 +1158,22 @@
           {
             "name": "CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED",
             "value": "CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED",
-            "description": "Instance type is unspecified"
+            "description": "No type specified. Do not use this value."
           },
           {
-            "name": "CONFIDENTIAL_VM",
-            "value": "CONFIDENTIAL_VM",
-            "description": "Confidential VM"
+            "name": "SEV",
+            "value": "SEV",
+            "description": "AMD Secure Encrypted Virtualization."
           },
           {
-            "name": "CONFIDENTIAL_SPACE",
-            "value": "CONFIDENTIAL_SPACE",
-            "description": "Confidential Space"
+            "name": "SEV_SNP",
+            "value": "SEV_SNP",
+            "description": "AMD Secure Encrypted Virtualization - Secure Nested Paging."
+          },
+          {
+            "name": "TDX",
+            "value": "TDX",
+            "description": "Intel Trust Domain eXtension."
           }
         ]
       }
@@ -1015,6 +1200,48 @@
           "type": "boolean",
           "description": "Whether the Config Connector addon is enabled"
         }
+      }
+    },
+    "ConsumeReservationType": {
+      "type": "string",
+      "description": "ReservationAffinity.consumeReservationType values, as defined by the Google Cloud API.",
+      "enum": [
+        "UNSPECIFIED",
+        "NO_RESERVATION",
+        "ANY_RESERVATION",
+        "SPECIFIC_RESERVATION",
+        "ANY_RESERVATION_THEN_FAIL"
+      ],
+      "x-ms-enum": {
+        "name": "ConsumeReservationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UNSPECIFIED",
+            "value": "UNSPECIFIED",
+            "description": "Default value. This should not be used."
+          },
+          {
+            "name": "NO_RESERVATION",
+            "value": "NO_RESERVATION",
+            "description": "Do not consume from any reserved capacity."
+          },
+          {
+            "name": "ANY_RESERVATION",
+            "value": "ANY_RESERVATION",
+            "description": "Consume any reservation available."
+          },
+          {
+            "name": "SPECIFIC_RESERVATION",
+            "value": "SPECIFIC_RESERVATION",
+            "description": "Must consume from a specific reservation. Must specify key value fields for specifying the reservations."
+          },
+          {
+            "name": "ANY_RESERVATION_THEN_FAIL",
+            "value": "ANY_RESERVATION_THEN_FAIL",
+            "description": "Consume any reservation available. If no reservation is available, fail the node creation."
+          }
+        ]
       }
     },
     "ConsumptionMeteringConfig": {
@@ -1084,16 +1311,7 @@
             "accessTypes": {
               "type": "array",
               "items": {
-                "type": "string",
-                "enum": [
-                  "ACCESS_TYPE_UNSPECIFIED",
-                  "PUBLIC",
-                  "PRIVATE",
-                  "SERVERLESS"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": true
-                }
+                "$ref": "#/definitions/AccessTypes"
               }
             }
           }
@@ -1162,11 +1380,15 @@
       "description": "Database encryption current state options",
       "enum": [
         "CURRENT_STATE_UNSPECIFIED",
-        "CURRENT_STATE_ENCRYPTING",
         "CURRENT_STATE_ENCRYPTED",
-        "CURRENT_STATE_DECRYPTING",
         "CURRENT_STATE_DECRYPTED",
-        "CURRENT_STATE_ENCRYPTION_ERROR"
+        "CURRENT_STATE_ENCRYPTION_PENDING",
+        "CURRENT_STATE_ENCRYPTION_ERROR",
+        "CURRENT_STATE_DECRYPTION_PENDING",
+        "CURRENT_STATE_DECRYPTION_ERROR",
+        "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_ENABLED",
+        "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_PENDING",
+        "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_ERROR"
       ],
       "x-ms-enum": {
         "name": "DatabaseEncryptionCurrentState",
@@ -1175,32 +1397,52 @@
           {
             "name": "CURRENT_STATE_UNSPECIFIED",
             "value": "CURRENT_STATE_UNSPECIFIED",
-            "description": "Current state is unknown"
-          },
-          {
-            "name": "CURRENT_STATE_ENCRYPTING",
-            "value": "CURRENT_STATE_ENCRYPTING",
-            "description": "Encryption is being applied"
+            "description": "Should never be set"
           },
           {
             "name": "CURRENT_STATE_ENCRYPTED",
             "value": "CURRENT_STATE_ENCRYPTED",
-            "description": "Database is encrypted"
-          },
-          {
-            "name": "CURRENT_STATE_DECRYPTING",
-            "value": "CURRENT_STATE_DECRYPTING",
-            "description": "Decryption is being applied"
+            "description": "Secrets in etcd are encrypted."
           },
           {
             "name": "CURRENT_STATE_DECRYPTED",
             "value": "CURRENT_STATE_DECRYPTED",
-            "description": "Database is decrypted"
+            "description": "Secrets in etcd are stored in plain text (at etcd level) - this is unrelated to Compute Engine level full disk encryption."
+          },
+          {
+            "name": "CURRENT_STATE_ENCRYPTION_PENDING",
+            "value": "CURRENT_STATE_ENCRYPTION_PENDING",
+            "description": "Encryption (or re-encryption with a different CloudKMS key) of Secrets is in progress."
           },
           {
             "name": "CURRENT_STATE_ENCRYPTION_ERROR",
             "value": "CURRENT_STATE_ENCRYPTION_ERROR",
-            "description": "Encryption/decryption operation failed"
+            "description": "Encryption (or re-encryption with a different CloudKMS key) of Secrets in etcd encountered an error."
+          },
+          {
+            "name": "CURRENT_STATE_DECRYPTION_PENDING",
+            "value": "CURRENT_STATE_DECRYPTION_PENDING",
+            "description": "De-crypting Secrets to plain text in etcd is in progress."
+          },
+          {
+            "name": "CURRENT_STATE_DECRYPTION_ERROR",
+            "value": "CURRENT_STATE_DECRYPTION_ERROR",
+            "description": "De-crypting Secrets to plain text in etcd encountered an error."
+          },
+          {
+            "name": "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_ENABLED",
+            "value": "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_ENABLED",
+            "description": "Encryption of all objects in the storage is enabled. It does not guarantee that all objects in the storage are encrypted, but eventually they will be."
+          },
+          {
+            "name": "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_PENDING",
+            "value": "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_PENDING",
+            "description": "Enablement of the encryption of all objects in storage is pending."
+          },
+          {
+            "name": "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_ERROR",
+            "value": "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_ERROR",
+            "description": "Enabling encryption of all objects in storage encountered an error."
           }
         ]
       }
@@ -1211,7 +1453,8 @@
       "enum": [
         "UNKNOWN",
         "ENCRYPTED",
-        "DECRYPTED"
+        "DECRYPTED",
+        "ALL_OBJECTS_ENCRYPTION_ENABLED"
       ],
       "x-ms-enum": {
         "name": "DatabaseEncryptionState",
@@ -1220,17 +1463,22 @@
           {
             "name": "UNKNOWN",
             "value": "UNKNOWN",
-            "description": "Unknown encryption state"
+            "description": "Should never be set"
           },
           {
             "name": "ENCRYPTED",
             "value": "ENCRYPTED",
-            "description": "Database is encrypted"
+            "description": "Secrets in etcd are encrypted."
           },
           {
             "name": "DECRYPTED",
             "value": "DECRYPTED",
-            "description": "Database is decrypted"
+            "description": "Secrets in etcd are stored in plain text (at etcd level) - this is unrelated to Compute Engine level full disk encryption."
+          },
+          {
+            "name": "ALL_OBJECTS_ENCRYPTION_ENABLED",
+            "value": "ALL_OBJECTS_ENCRYPTION_ENABLED",
+            "description": "Encryption of all objects in the storage is enabled. There is no guarantee that all objects in the storage are encrypted, but eventually they will be."
           }
         ]
       }
@@ -1240,8 +1488,8 @@
       "description": "Datapath provider options",
       "enum": [
         "DATAPATH_PROVIDER_UNSPECIFIED",
-        "LEGACY",
-        "ADVANCED"
+        "LEGACY_DATAPATH",
+        "ADVANCED_DATAPATH"
       ],
       "x-ms-enum": {
         "name": "DatapathProvider",
@@ -1250,17 +1498,17 @@
           {
             "name": "DATAPATH_PROVIDER_UNSPECIFIED",
             "value": "DATAPATH_PROVIDER_UNSPECIFIED",
-            "description": "Legacy datapath provider"
+            "description": "Default value."
           },
           {
-            "name": "LEGACY",
-            "value": "LEGACY",
-            "description": "Legacy datapath provider"
+            "name": "LEGACY_DATAPATH",
+            "value": "LEGACY_DATAPATH",
+            "description": "Use the IPTables implementation based on kube-proxy."
           },
           {
-            "name": "ADVANCED",
-            "value": "ADVANCED",
-            "description": "Advanced datapath provider"
+            "name": "ADVANCED_DATAPATH",
+            "value": "ADVANCED_DATAPATH",
+            "description": "Use the eBPF based GKE Dataplane V2 with additional features. See the [GKE Dataplane V2 documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/dataplane-v2) for more."
           }
         ]
       }
@@ -1300,16 +1548,8 @@
       "description": "DNS configuration for the cluster",
       "properties": {
         "dnsScope": {
-          "type": "string",
-          "description": "DNS scope for the cluster",
-          "enum": [
-            "DNS_SCOPE_UNSPECIFIED",
-            "CLUSTER_SCOPE",
-            "VPC_SCOPE"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DnsScope",
+          "description": "DNS scope for the cluster"
         },
         "customDnsEndpoint": {
           "type": "string",
@@ -1322,6 +1562,108 @@
             "type": "string"
           }
         }
+      }
+    },
+    "DnsScope": {
+      "type": "string",
+      "description": "DnsConfig.dnsScope values, as defined by the Google Cloud API.",
+      "enum": [
+        "DNS_SCOPE_UNSPECIFIED",
+        "CLUSTER_SCOPE",
+        "VPC_SCOPE"
+      ],
+      "x-ms-enum": {
+        "name": "DnsScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DNS_SCOPE_UNSPECIFIED",
+            "value": "DNS_SCOPE_UNSPECIFIED",
+            "description": "Default value, will be inferred as cluster scope."
+          },
+          {
+            "name": "CLUSTER_SCOPE",
+            "value": "CLUSTER_SCOPE",
+            "description": "DNS records are accessible from within the cluster."
+          },
+          {
+            "name": "VPC_SCOPE",
+            "value": "VPC_SCOPE",
+            "description": "DNS records are accessible from within the VPC."
+          }
+        ]
+      }
+    },
+    "EnableComponents": {
+      "type": "string",
+      "description": "LoggingComponentConfig.enableComponents values, as defined by the Google Cloud API.",
+      "enum": [
+        "COMPONENT_UNSPECIFIED",
+        "SYSTEM_COMPONENTS",
+        "WORKLOADS",
+        "APISERVER",
+        "SCHEDULER",
+        "CONTROLLER_MANAGER",
+        "KCP_SSHD",
+        "KCP_CONNECTION",
+        "KCP_HPA",
+        "KCP_VPA"
+      ],
+      "x-ms-enum": {
+        "name": "EnableComponents",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "COMPONENT_UNSPECIFIED",
+            "value": "COMPONENT_UNSPECIFIED",
+            "description": "Default value. This shouldn't be used."
+          },
+          {
+            "name": "SYSTEM_COMPONENTS",
+            "value": "SYSTEM_COMPONENTS",
+            "description": "system components"
+          },
+          {
+            "name": "WORKLOADS",
+            "value": "WORKLOADS",
+            "description": "workloads"
+          },
+          {
+            "name": "APISERVER",
+            "value": "APISERVER",
+            "description": "kube-apiserver"
+          },
+          {
+            "name": "SCHEDULER",
+            "value": "SCHEDULER",
+            "description": "kube-scheduler"
+          },
+          {
+            "name": "CONTROLLER_MANAGER",
+            "value": "CONTROLLER_MANAGER",
+            "description": "kube-controller-manager"
+          },
+          {
+            "name": "KCP_SSHD",
+            "value": "KCP_SSHD",
+            "description": "kcp-sshd"
+          },
+          {
+            "name": "KCP_CONNECTION",
+            "value": "KCP_CONNECTION",
+            "description": "kcp connection logs"
+          },
+          {
+            "name": "KCP_HPA",
+            "value": "KCP_HPA",
+            "description": "horizontal pod autoscaler decision logs"
+          },
+          {
+            "name": "KCP_VPA",
+            "value": "KCP_VPA",
+            "description": "vertical pod autoscaler decision logs"
+          }
+        ]
       }
     },
     "EnterpriseConfig": {
@@ -1337,18 +1679,39 @@
           "description": "The enterprise project ID associated with this cluster"
         },
         "enterpriseTier": {
-          "type": "string",
-          "description": "The enterprise tier level",
-          "enum": [
-            "TIER_UNSPECIFIED",
-            "STANDARD",
-            "ADVANCED",
-            "PREMIUM"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/EnterpriseTier",
+          "description": "The enterprise tier level"
         }
+      }
+    },
+    "EnterpriseTier": {
+      "type": "string",
+      "description": "EnterpriseConfig.enterpriseTier values, as defined by the Google Cloud API.",
+      "enum": [
+        "CLUSTER_TIER_UNSPECIFIED",
+        "STANDARD",
+        "ENTERPRISE"
+      ],
+      "x-ms-enum": {
+        "name": "EnterpriseTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CLUSTER_TIER_UNSPECIFIED",
+            "value": "CLUSTER_TIER_UNSPECIFIED",
+            "description": "CLUSTER_TIER_UNSPECIFIED is when cluster_tier is not set."
+          },
+          {
+            "name": "STANDARD",
+            "value": "STANDARD",
+            "description": "STANDARD indicates a standard GKE cluster."
+          },
+          {
+            "name": "ENTERPRISE",
+            "value": "ENTERPRISE",
+            "description": "ENTERPRISE indicates a GKE Enterprise cluster."
+          }
+        ]
       }
     },
     "EphemeralStorageLocalSsdConfig": {
@@ -1360,6 +1723,36 @@
           "format": "int32",
           "description": "Number of local SSD disks to use to back ephemeral storage"
         }
+      }
+    },
+    "EvaluationMode": {
+      "type": "string",
+      "description": "BinaryAuthorization.evaluationMode values, as defined by the Google Cloud API.",
+      "enum": [
+        "EVALUATION_MODE_UNSPECIFIED",
+        "DISABLED",
+        "PROJECT_SINGLETON_POLICY_ENFORCE"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EVALUATION_MODE_UNSPECIFIED",
+            "value": "EVALUATION_MODE_UNSPECIFIED",
+            "description": "Default value"
+          },
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "Disable BinaryAuthorization"
+          },
+          {
+            "name": "PROJECT_SINGLETON_POLICY_ENFORCE",
+            "value": "PROJECT_SINGLETON_POLICY_ENFORCE",
+            "description": "Enforce Kubernetes admission requests with BinaryAuthorization using the project's singleton policy. This is equivalent to setting the enabled boolean to true."
+          }
+        ]
       }
     },
     "FastSocket": {
@@ -1380,18 +1773,51 @@
           "type": "array",
           "description": "Event types to include in the filter",
           "items": {
-            "type": "string",
-            "enum": [
-              "EVENT_TYPE_UNSPECIFIED",
-              "UPGRADE_AVAILABLE_EVENT",
-              "UPGRADE_EVENT",
-              "SECURITY_BULLETIN_EVENT"
-            ],
-            "x-ms-enum": {
-              "modelAsString": true
-            }
+            "$ref": "#/definitions/FilterEventType"
           }
         }
+      }
+    },
+    "FilterEventType": {
+      "type": "string",
+      "description": "Filter.eventType values, as defined by the Google Cloud API.",
+      "enum": [
+        "EVENT_TYPE_UNSPECIFIED",
+        "UPGRADE_AVAILABLE_EVENT",
+        "UPGRADE_EVENT",
+        "SECURITY_BULLETIN_EVENT",
+        "UPGRADE_INFO_EVENT"
+      ],
+      "x-ms-enum": {
+        "name": "FilterEventType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EVENT_TYPE_UNSPECIFIED",
+            "value": "EVENT_TYPE_UNSPECIFIED",
+            "description": "Not set, will be ignored."
+          },
+          {
+            "name": "UPGRADE_AVAILABLE_EVENT",
+            "value": "UPGRADE_AVAILABLE_EVENT",
+            "description": "Corresponds with UpgradeAvailableEvent."
+          },
+          {
+            "name": "UPGRADE_EVENT",
+            "value": "UPGRADE_EVENT",
+            "description": "Corresponds with UpgradeEvent."
+          },
+          {
+            "name": "SECURITY_BULLETIN_EVENT",
+            "value": "SECURITY_BULLETIN_EVENT",
+            "description": "Corresponds with SecurityBulletinEvent."
+          },
+          {
+            "name": "UPGRADE_INFO_EVENT",
+            "value": "UPGRADE_INFO_EVENT",
+            "description": "Corresponds with UpgradeInfoEvent."
+          }
+        ]
       }
     },
     "Fleet": {
@@ -1404,22 +1830,49 @@
         }
       }
     },
+    "GatewayApiChannel": {
+      "type": "string",
+      "description": "GatewayApiConfig.channel values, as defined by the Google Cloud API.",
+      "enum": [
+        "CHANNEL_UNSPECIFIED",
+        "CHANNEL_DISABLED",
+        "CHANNEL_EXPERIMENTAL",
+        "CHANNEL_STANDARD"
+      ],
+      "x-ms-enum": {
+        "name": "GatewayApiChannel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CHANNEL_UNSPECIFIED",
+            "value": "CHANNEL_UNSPECIFIED",
+            "description": "Default value."
+          },
+          {
+            "name": "CHANNEL_DISABLED",
+            "value": "CHANNEL_DISABLED",
+            "description": "Gateway API support is disabled"
+          },
+          {
+            "name": "CHANNEL_EXPERIMENTAL",
+            "value": "CHANNEL_EXPERIMENTAL",
+            "description": "Deprecated: use CHANNEL_STANDARD instead. Gateway API support is enabled, experimental CRDs are installed"
+          },
+          {
+            "name": "CHANNEL_STANDARD",
+            "value": "CHANNEL_STANDARD",
+            "description": "Gateway API support is enabled, standard CRDs are installed"
+          }
+        ]
+      }
+    },
     "GatewayApiConfig": {
       "type": "object",
       "description": "Gateway API configuration",
       "properties": {
         "channel": {
-          "type": "string",
-          "description": "The Gateway API release channel to subscribe to",
-          "enum": [
-            "CHANNEL_UNSPECIFIED",
-            "RAPID",
-            "REGULAR",
-            "STABLE"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/GatewayApiChannel",
+          "description": "The Gateway API release channel to subscribe to"
         }
       }
     },
@@ -1801,18 +2254,45 @@
       "description": "GPUDriverInstallationConfig specifies the version of GPU driver to be auto installed",
       "properties": {
         "gpuDriverVersion": {
-          "type": "string",
-          "description": "Mode for how the GPU driver is installed",
-          "enum": [
-            "GPU_DRIVER_VERSION_UNSPECIFIED",
-            "INSTALLATION_DISABLED",
-            "DEFAULT",
-            "LATEST"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/GpuDriverVersion",
+          "description": "Mode for how the GPU driver is installed"
         }
+      }
+    },
+    "GpuDriverVersion": {
+      "type": "string",
+      "description": "GpuDriverInstallationConfig.gpuDriverVersion values, as defined by the Google Cloud API.",
+      "enum": [
+        "GPU_DRIVER_VERSION_UNSPECIFIED",
+        "INSTALLATION_DISABLED",
+        "DEFAULT",
+        "LATEST"
+      ],
+      "x-ms-enum": {
+        "name": "GpuDriverVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GPU_DRIVER_VERSION_UNSPECIFIED",
+            "value": "GPU_DRIVER_VERSION_UNSPECIFIED",
+            "description": "Default value is to not install any GPU driver."
+          },
+          {
+            "name": "INSTALLATION_DISABLED",
+            "value": "INSTALLATION_DISABLED",
+            "description": "Disable GPU driver auto installation and needs manual installation"
+          },
+          {
+            "name": "DEFAULT",
+            "value": "DEFAULT",
+            "description": "\"Default\" GPU driver in COS and Ubuntu."
+          },
+          {
+            "name": "LATEST",
+            "value": "LATEST",
+            "description": "\"Latest\" GPU driver in COS."
+          }
+        ]
       }
     },
     "GpuSharingConfig": {
@@ -1820,21 +2300,43 @@
       "description": "GpuSharingConfig represents the GPU sharing configuration for Hardware Accelerators",
       "properties": {
         "gpuSharingStrategy": {
-          "type": "string",
-          "description": "The type of GPU sharing strategy to enable on the GPU node",
-          "enum": [
-            "GPU_SHARING_STRATEGY_UNSPECIFIED",
-            "TIME_SHARING",
-            "MPS"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/GpuSharingStrategy",
+          "description": "The type of GPU sharing strategy to enable on the GPU node"
         },
         "maxSharedClientsPerGpu": {
           "type": "string",
           "description": "The max number of containers that can share a physical GPU"
         }
+      }
+    },
+    "GpuSharingStrategy": {
+      "type": "string",
+      "description": "GpuSharingConfig.gpuSharingStrategy values, as defined by the Google Cloud API.",
+      "enum": [
+        "GPU_SHARING_STRATEGY_UNSPECIFIED",
+        "TIME_SHARING",
+        "MPS"
+      ],
+      "x-ms-enum": {
+        "name": "GpuSharingStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GPU_SHARING_STRATEGY_UNSPECIFIED",
+            "value": "GPU_SHARING_STRATEGY_UNSPECIFIED",
+            "description": "Default value."
+          },
+          {
+            "name": "TIME_SHARING",
+            "value": "TIME_SHARING",
+            "description": "GPUs are time-shared between containers."
+          },
+          {
+            "name": "MPS",
+            "value": "MPS",
+            "description": "GPUs are shared between containers with NVIDIA MPS."
+          }
+        ]
       }
     },
     "HighScaleCheckpointingConfig": {
@@ -1911,7 +2413,7 @@
       "type": "string",
       "description": "In-transit encryption configuration options",
       "enum": [
-        "IN_TRANSIT_ENCRYPTION_UNSPECIFIED",
+        "IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED",
         "IN_TRANSIT_ENCRYPTION_DISABLED",
         "IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT"
       ],
@@ -1920,19 +2422,19 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "IN_TRANSIT_ENCRYPTION_UNSPECIFIED",
-            "value": "IN_TRANSIT_ENCRYPTION_UNSPECIFIED",
-            "description": "Unspecified in-transit encryption"
+            "name": "IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED",
+            "value": "IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED",
+            "description": "Unspecified, will be inferred as default - IN_TRANSIT_ENCRYPTION_UNSPECIFIED."
           },
           {
             "name": "IN_TRANSIT_ENCRYPTION_DISABLED",
             "value": "IN_TRANSIT_ENCRYPTION_DISABLED",
-            "description": "In-transit encryption disabled"
+            "description": "In-transit encryption is disabled."
           },
           {
             "name": "IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT",
             "value": "IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT",
-            "description": "In-transit encryption with inter-node transparent encryption"
+            "description": "Data in-transit is encrypted using inter-node transparent encryption."
           }
         ]
       }
@@ -2077,16 +2579,8 @@
           }
         },
         "cgroupMode": {
-          "type": "string",
-          "description": "cgroup_mode specifies the cgroup mode to be used on the node",
-          "enum": [
-            "CGROUP_MODE_UNSPECIFIED",
-            "CGROUP_MODE_V1",
-            "CGROUP_MODE_V2"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/CgroupMode",
+          "description": "cgroup_mode specifies the cgroup mode to be used on the node"
         }
       }
     },
@@ -2169,15 +2663,7 @@
           "type": "array",
           "description": "Select components to collect logs. An empty set would disable all logging.",
           "items": {
-            "type": "string",
-            "enum": [
-              "COMPONENT_UNSPECIFIED",
-              "SYSTEM_COMPONENTS",
-              "WORKLOADS"
-            ],
-            "x-ms-enum": {
-              "modelAsString": true
-            }
+            "$ref": "#/definitions/EnableComponents"
           }
         }
       }
@@ -2197,17 +2683,39 @@
       "description": "LoggingVariantConfig specifies the behaviour of the logging agent",
       "properties": {
         "variant": {
-          "type": "string",
-          "description": "Logging variant deployed on nodes",
-          "enum": [
-            "VARIANT_UNSPECIFIED",
-            "DEFAULT",
-            "MAX_THROUGHPUT"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/LoggingVariantVariant",
+          "description": "Logging variant deployed on nodes"
         }
+      }
+    },
+    "LoggingVariantVariant": {
+      "type": "string",
+      "description": "LoggingVariantConfig.variant values, as defined by the Google Cloud API.",
+      "enum": [
+        "VARIANT_UNSPECIFIED",
+        "DEFAULT",
+        "MAX_THROUGHPUT"
+      ],
+      "x-ms-enum": {
+        "name": "LoggingVariantVariant",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "VARIANT_UNSPECIFIED",
+            "value": "VARIANT_UNSPECIFIED",
+            "description": "Default value. This shouldn't be used."
+          },
+          {
+            "name": "DEFAULT",
+            "value": "DEFAULT",
+            "description": "default logging variant."
+          },
+          {
+            "name": "MAX_THROUGHPUT",
+            "value": "MAX_THROUGHPUT",
+            "description": "maximum logging throughput variant."
+          }
+        ]
       }
     },
     "LustreCsiDriverConfig": {
@@ -2248,7 +2756,7 @@
       "type": "string",
       "description": "Scope of maintenance exclusions",
       "enum": [
-        "NO_EXCLUSIONS",
+        "NO_UPGRADES",
         "NO_MINOR_UPGRADES",
         "NO_MINOR_OR_NODE_UPGRADES"
       ],
@@ -2257,19 +2765,19 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "NO_EXCLUSIONS",
-            "value": "NO_EXCLUSIONS",
-            "description": "No exclusions"
+            "name": "NO_UPGRADES",
+            "value": "NO_UPGRADES",
+            "description": "NO_UPGRADES excludes all upgrades, including patch upgrades and minor upgrades across control planes and nodes. This is the default exclusion behavior."
           },
           {
             "name": "NO_MINOR_UPGRADES",
             "value": "NO_MINOR_UPGRADES",
-            "description": "Exclude minor upgrades"
+            "description": "NO_MINOR_UPGRADES excludes all minor upgrades for the cluster, only patches are allowed."
           },
           {
             "name": "NO_MINOR_OR_NODE_UPGRADES",
             "value": "NO_MINOR_OR_NODE_UPGRADES",
-            "description": "Exclude minor and node upgrades"
+            "description": "NO_MINOR_OR_NODE_UPGRADES excludes all minor upgrades for the cluster, and also exclude all node pool upgrades. Only control plane patches are allowed."
           }
         ]
       }
@@ -2397,17 +2905,111 @@
           "type": "array",
           "description": "Select components to collect metrics. An empty set would disable all monitoring.",
           "items": {
-            "type": "string",
-            "enum": [
-              "COMPONENT_UNSPECIFIED",
-              "SYSTEM_COMPONENTS",
-              "WORKLOADS"
-            ],
-            "x-ms-enum": {
-              "modelAsString": true
-            }
+            "$ref": "#/definitions/MonitoringComponentEnableComponents"
           }
         }
+      }
+    },
+    "MonitoringComponentEnableComponents": {
+      "type": "string",
+      "description": "MonitoringComponentConfig.enableComponents values, as defined by the Google Cloud API.",
+      "enum": [
+        "COMPONENT_UNSPECIFIED",
+        "SYSTEM_COMPONENTS",
+        "APISERVER",
+        "SCHEDULER",
+        "CONTROLLER_MANAGER",
+        "STORAGE",
+        "HPA",
+        "POD",
+        "DAEMONSET",
+        "DEPLOYMENT",
+        "STATEFULSET",
+        "CADVISOR",
+        "KUBELET",
+        "DCGM",
+        "JOBSET"
+      ],
+      "x-ms-enum": {
+        "name": "MonitoringComponentEnableComponents",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "COMPONENT_UNSPECIFIED",
+            "value": "COMPONENT_UNSPECIFIED",
+            "description": "Default value. This shouldn't be used."
+          },
+          {
+            "name": "SYSTEM_COMPONENTS",
+            "value": "SYSTEM_COMPONENTS",
+            "description": "system components"
+          },
+          {
+            "name": "APISERVER",
+            "value": "APISERVER",
+            "description": "kube-apiserver"
+          },
+          {
+            "name": "SCHEDULER",
+            "value": "SCHEDULER",
+            "description": "kube-scheduler"
+          },
+          {
+            "name": "CONTROLLER_MANAGER",
+            "value": "CONTROLLER_MANAGER",
+            "description": "kube-controller-manager"
+          },
+          {
+            "name": "STORAGE",
+            "value": "STORAGE",
+            "description": "Storage"
+          },
+          {
+            "name": "HPA",
+            "value": "HPA",
+            "description": "Horizontal Pod Autoscaling"
+          },
+          {
+            "name": "POD",
+            "value": "POD",
+            "description": "Pod"
+          },
+          {
+            "name": "DAEMONSET",
+            "value": "DAEMONSET",
+            "description": "DaemonSet"
+          },
+          {
+            "name": "DEPLOYMENT",
+            "value": "DEPLOYMENT",
+            "description": "Deployment"
+          },
+          {
+            "name": "STATEFULSET",
+            "value": "STATEFULSET",
+            "description": "Statefulset"
+          },
+          {
+            "name": "CADVISOR",
+            "value": "CADVISOR",
+            "description": "CADVISOR"
+          },
+          {
+            "name": "KUBELET",
+            "value": "KUBELET",
+            "description": "KUBELET"
+          },
+          {
+            "name": "DCGM",
+            "value": "DCGM",
+            "description": "NVIDIA Data Center GPU Manager (DCGM)"
+          },
+          {
+            "name": "JOBSET",
+            "value": "JOBSET",
+            "description": "JobSet"
+          }
+        ]
       }
     },
     "MonitoringConfig": {
@@ -2503,7 +3105,7 @@
           "description": "Whether network policy is enabled on the cluster"
         },
         "provider": {
-          "type": "string",
+          "$ref": "#/definitions/NetworkPolicyProvider",
           "description": "The selected network policy provider"
         }
       }
@@ -2516,6 +3118,30 @@
           "type": "boolean",
           "description": "Whether the Network Policy addon is disabled"
         }
+      }
+    },
+    "NetworkPolicyProvider": {
+      "type": "string",
+      "description": "NetworkPolicy.provider values, as defined by the Google Cloud API.",
+      "enum": [
+        "PROVIDER_UNSPECIFIED",
+        "CALICO"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkPolicyProvider",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PROVIDER_UNSPECIFIED",
+            "value": "PROVIDER_UNSPECIFIED",
+            "description": "Not set"
+          },
+          {
+            "name": "CALICO",
+            "value": "CALICO",
+            "description": "Tigera (Calico Felix)."
+          }
+        ]
       }
     },
     "NetworkTags": {
@@ -2540,16 +3166,8 @@
           "description": "Key for NodeAffinity"
         },
         "operator": {
-          "type": "string",
-          "description": "Operator for NodeAffinity",
-          "enum": [
-            "OPERATOR_UNSPECIFIED",
-            "IN",
-            "NOT_IN"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/NodeAffinityOperator",
+          "description": "Operator for NodeAffinity"
         },
         "values": {
           "type": "array",
@@ -2558,6 +3176,36 @@
             "type": "string"
           }
         }
+      }
+    },
+    "NodeAffinityOperator": {
+      "type": "string",
+      "description": "NodeAffinity.operator values, as defined by the Google Cloud API.",
+      "enum": [
+        "OPERATOR_UNSPECIFIED",
+        "IN",
+        "NOT_IN"
+      ],
+      "x-ms-enum": {
+        "name": "NodeAffinityOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OPERATOR_UNSPECIFIED",
+            "value": "OPERATOR_UNSPECIFIED",
+            "description": "Invalid or unspecified affinity operator."
+          },
+          {
+            "name": "IN",
+            "value": "IN",
+            "description": "Affinity operator."
+          },
+          {
+            "name": "NOT_IN",
+            "value": "NOT_IN",
+            "description": "Anti-affinity operator."
+          }
+        ]
       }
     },
     "NodeConfig": {
@@ -3076,18 +3724,45 @@
           "description": "Value for taint"
         },
         "effect": {
-          "type": "string",
-          "description": "Effect for taint",
-          "enum": [
-            "EFFECT_UNSPECIFIED",
-            "NO_SCHEDULE",
-            "PREFER_NO_SCHEDULE",
-            "NO_EXECUTE"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/NodeTaintEffect",
+          "description": "Effect for taint"
         }
+      }
+    },
+    "NodeTaintEffect": {
+      "type": "string",
+      "description": "NodeTaint.effect values, as defined by the Google Cloud API.",
+      "enum": [
+        "EFFECT_UNSPECIFIED",
+        "NO_SCHEDULE",
+        "PREFER_NO_SCHEDULE",
+        "NO_EXECUTE"
+      ],
+      "x-ms-enum": {
+        "name": "NodeTaintEffect",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EFFECT_UNSPECIFIED",
+            "value": "EFFECT_UNSPECIFIED",
+            "description": "Not set"
+          },
+          {
+            "name": "NO_SCHEDULE",
+            "value": "NO_SCHEDULE",
+            "description": "NoSchedule"
+          },
+          {
+            "name": "PREFER_NO_SCHEDULE",
+            "value": "PREFER_NO_SCHEDULE",
+            "description": "PreferNoSchedule"
+          },
+          {
+            "name": "NO_EXECUTE",
+            "value": "NO_EXECUTE",
+            "description": "NoExecute"
+          }
+        ]
       }
     },
     "NotificationConfig": {
@@ -3113,22 +3788,12 @@
           "description": "The name of the Google Compute Engine zone in which the operation resides."
         },
         "operationType": {
-          "type": "string",
+          "$ref": "#/definitions/OperationType",
           "description": "The operation type."
         },
         "status": {
-          "type": "string",
-          "description": "The current status of the operation.",
-          "enum": [
-            "STATUS_UNSPECIFIED",
-            "PENDING",
-            "RUNNING",
-            "DONE",
-            "ABORTING"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/OperationStatus",
+          "description": "The current status of the operation."
         },
         "detail": {
           "type": "string",
@@ -3172,6 +3837,174 @@
             "type": "string"
           }
         }
+      }
+    },
+    "OperationStatus": {
+      "type": "string",
+      "description": "Operation.status values, as defined by the Google Cloud API.",
+      "enum": [
+        "STATUS_UNSPECIFIED",
+        "PENDING",
+        "RUNNING",
+        "DONE",
+        "ABORTING"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "STATUS_UNSPECIFIED",
+            "value": "STATUS_UNSPECIFIED",
+            "description": "Not set."
+          },
+          {
+            "name": "PENDING",
+            "value": "PENDING",
+            "description": "The operation has been created."
+          },
+          {
+            "name": "RUNNING",
+            "value": "RUNNING",
+            "description": "The operation is currently running."
+          },
+          {
+            "name": "DONE",
+            "value": "DONE",
+            "description": "The operation is done, either cancelled or completed."
+          },
+          {
+            "name": "ABORTING",
+            "value": "ABORTING",
+            "description": "The operation is aborting."
+          }
+        ]
+      }
+    },
+    "OperationType": {
+      "type": "string",
+      "description": "Operation.operationType values, as defined by the Google Cloud API.",
+      "enum": [
+        "TYPE_UNSPECIFIED",
+        "CREATE_CLUSTER",
+        "DELETE_CLUSTER",
+        "UPGRADE_MASTER",
+        "UPGRADE_NODES",
+        "REPAIR_CLUSTER",
+        "UPDATE_CLUSTER",
+        "CREATE_NODE_POOL",
+        "DELETE_NODE_POOL",
+        "SET_NODE_POOL_MANAGEMENT",
+        "AUTO_REPAIR_NODES",
+        "AUTO_UPGRADE_NODES",
+        "SET_LABELS",
+        "SET_MASTER_AUTH",
+        "SET_NODE_POOL_SIZE",
+        "SET_NETWORK_POLICY",
+        "SET_MAINTENANCE_POLICY",
+        "RESIZE_CLUSTER",
+        "FLEET_FEATURE_UPGRADE"
+      ],
+      "x-ms-enum": {
+        "name": "OperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TYPE_UNSPECIFIED",
+            "value": "TYPE_UNSPECIFIED",
+            "description": "Not set."
+          },
+          {
+            "name": "CREATE_CLUSTER",
+            "value": "CREATE_CLUSTER",
+            "description": "The cluster is being created. The cluster should be assumed to be unusable until the operation finishes. In the event of the operation failing, the cluster will enter the ERROR state and eventually be deleted."
+          },
+          {
+            "name": "DELETE_CLUSTER",
+            "value": "DELETE_CLUSTER",
+            "description": "The cluster is being deleted. The cluster should be assumed to be unusable as soon as this operation starts. In the event of the operation failing, the cluster will enter the ERROR state and the deletion will be automatically retried until completed."
+          },
+          {
+            "name": "UPGRADE_MASTER",
+            "value": "UPGRADE_MASTER",
+            "description": "The cluster version is being updated. Note that this includes \"upgrades\" to the same version, which are simply a recreation. This also includes [auto-upgrades](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-upgrades#upgrading_automatically). For more details, see [documentation on cluster upgrades](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-upgrades#cluster_upgrades)."
+          },
+          {
+            "name": "UPGRADE_NODES",
+            "value": "UPGRADE_NODES",
+            "description": "A node pool is being updated. Despite calling this an \"upgrade\", this includes most forms of updates to node pools. This also includes [auto-upgrades](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades). This operation sets the progress field and may be canceled. The upgrade strategy depends on [node pool configuration](https://cloud.google.com/kubernetes-engine/docs/concepts/node-pool-upgrade-strategies). The nodes are generally still usable during this operation."
+          },
+          {
+            "name": "REPAIR_CLUSTER",
+            "value": "REPAIR_CLUSTER",
+            "description": "A problem has been detected with the control plane and is being repaired. This operation type is initiated by GKE. For more details, see [documentation on repairs](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#repairs)."
+          },
+          {
+            "name": "UPDATE_CLUSTER",
+            "value": "UPDATE_CLUSTER",
+            "description": "The cluster is being updated. This is a broad category of operations and includes operations that only change metadata as well as those that must recreate the entire cluster. If the control plane must be recreated, this will cause temporary downtime for zonal clusters. Some features require recreating the nodes as well. Those will be recreated as separate operations and the update may not be completely functional until the node pools recreations finish. Node recreations will generally follow [maintenance policies](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions). Some GKE-initiated operations use this type. This includes certain types of auto-upgrades and incident mitigations."
+          },
+          {
+            "name": "CREATE_NODE_POOL",
+            "value": "CREATE_NODE_POOL",
+            "description": "A node pool is being created. The node pool should be assumed to be unusable until this operation finishes. In the event of an error, the node pool may be partially created. If enabled, [node autoprovisioning](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-provisioning) may have automatically initiated such operations."
+          },
+          {
+            "name": "DELETE_NODE_POOL",
+            "value": "DELETE_NODE_POOL",
+            "description": "The node pool is being deleted. The node pool should be assumed to be unusable as soon as this operation starts."
+          },
+          {
+            "name": "SET_NODE_POOL_MANAGEMENT",
+            "value": "SET_NODE_POOL_MANAGEMENT",
+            "description": "The node pool's manamagent field is being updated. These operations only update metadata and may be concurrent with most other operations."
+          },
+          {
+            "name": "AUTO_REPAIR_NODES",
+            "value": "AUTO_REPAIR_NODES",
+            "description": "A problem has been detected with nodes and [they are being repaired](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-repair). This operation type is initiated by GKE, typically automatically. This operation may be concurrent with other operations and there may be multiple repairs occurring on the same node pool."
+          },
+          {
+            "name": "AUTO_UPGRADE_NODES",
+            "value": "AUTO_UPGRADE_NODES",
+            "description": "Unused. Automatic node upgrade uses UPGRADE_NODES."
+          },
+          {
+            "name": "SET_LABELS",
+            "value": "SET_LABELS",
+            "description": "Unused. Updating labels uses UPDATE_CLUSTER."
+          },
+          {
+            "name": "SET_MASTER_AUTH",
+            "value": "SET_MASTER_AUTH",
+            "description": "Unused. Updating master auth uses UPDATE_CLUSTER."
+          },
+          {
+            "name": "SET_NODE_POOL_SIZE",
+            "value": "SET_NODE_POOL_SIZE",
+            "description": "The node pool is being resized. With the exception of resizing to or from size zero, the node pool is generally usable during this operation."
+          },
+          {
+            "name": "SET_NETWORK_POLICY",
+            "value": "SET_NETWORK_POLICY",
+            "description": "Unused. Updating network policy uses UPDATE_CLUSTER."
+          },
+          {
+            "name": "SET_MAINTENANCE_POLICY",
+            "value": "SET_MAINTENANCE_POLICY",
+            "description": "Unused. Updating maintenance policy uses UPDATE_CLUSTER."
+          },
+          {
+            "name": "RESIZE_CLUSTER",
+            "value": "RESIZE_CLUSTER",
+            "description": "The control plane is being resized. This operation type is initiated by GKE. These operations are often performed preemptively to ensure that the control plane has sufficient resources and is not typically an indication of issues. For more details, see [documentation on resizes](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#repairs)."
+          },
+          {
+            "name": "FLEET_FEATURE_UPGRADE",
+            "value": "FLEET_FEATURE_UPGRADE",
+            "description": "Fleet features of GKE Enterprise are being upgraded. The cluster should be assumed to be blocked for other upgrades until the operation finishes."
+          }
+        ]
       }
     },
     "ParallelstoreCsiDriverConfig": {
@@ -3517,18 +4350,51 @@
       "description": "ReleaseChannel indicates which release channel a cluster is subscribed to",
       "properties": {
         "channel": {
-          "type": "string",
-          "description": "The release channel the cluster is subscribed to",
-          "enum": [
-            "UNSPECIFIED",
-            "RAPID",
-            "REGULAR",
-            "STABLE"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ReleaseChannelChannel",
+          "description": "The release channel the cluster is subscribed to"
         }
+      }
+    },
+    "ReleaseChannelChannel": {
+      "type": "string",
+      "description": "ReleaseChannel.channel values, as defined by the Google Cloud API.",
+      "enum": [
+        "UNSPECIFIED",
+        "RAPID",
+        "REGULAR",
+        "STABLE",
+        "EXTENDED"
+      ],
+      "x-ms-enum": {
+        "name": "ReleaseChannelChannel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UNSPECIFIED",
+            "value": "UNSPECIFIED",
+            "description": "Deprecated: No channel specified. it will be removed in the future, use RAPID, REGULAR, STABLE or EXTENDED instead."
+          },
+          {
+            "name": "RAPID",
+            "value": "RAPID",
+            "description": "RAPID channel is offered on an early access basis for customers who want to test new releases. WARNING: Versions available in the RAPID Channel may be subject to unresolved issues with no known workaround and are not subject to any SLAs."
+          },
+          {
+            "name": "REGULAR",
+            "value": "REGULAR",
+            "description": "Clusters subscribed to REGULAR receive versions that are considered GA quality. REGULAR is intended for production users who want to take advantage of new features."
+          },
+          {
+            "name": "STABLE",
+            "value": "STABLE",
+            "description": "Clusters subscribed to STABLE receive versions that are known to be stable and reliable in production."
+          },
+          {
+            "name": "EXTENDED",
+            "value": "EXTENDED",
+            "description": "Clusters subscribed to EXTENDED receive extended support and availability for versions which are known to be stable and reliable in production."
+          }
+        ]
       }
     },
     "ReservationAffinity": {
@@ -3536,17 +4402,8 @@
       "description": "ReservationAffinity is the configuration of desired reservation which instances could take capacity from",
       "properties": {
         "consumeReservationType": {
-          "type": "string",
-          "description": "Corresponds to the type of reservation consumption",
-          "enum": [
-            "UNSPECIFIED",
-            "NO_RESERVATION",
-            "ANY_RESERVATION",
-            "SPECIFIC_RESERVATION"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ConsumeReservationType",
+          "description": "Corresponds to the type of reservation consumption"
         },
         "key": {
           "type": "string",
@@ -3615,16 +4472,33 @@
       "description": "SandboxConfig contains configurations of the sandbox to use for the node",
       "properties": {
         "type": {
-          "type": "string",
-          "description": "Type of the sandbox to use for the node",
-          "enum": [
-            "UNSPECIFIED",
-            "GVISOR"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SandboxType",
+          "description": "Type of the sandbox to use for the node"
         }
+      }
+    },
+    "SandboxType": {
+      "type": "string",
+      "description": "SandboxConfig.type values, as defined by the Google Cloud API.",
+      "enum": [
+        "UNSPECIFIED",
+        "GVISOR"
+      ],
+      "x-ms-enum": {
+        "name": "SandboxType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UNSPECIFIED",
+            "value": "UNSPECIFIED",
+            "description": "Default value. This should not be used."
+          },
+          {
+            "name": "GVISOR",
+            "value": "GVISOR",
+            "description": "Run sandbox using gvisor."
+          }
+        ]
       }
     },
     "SecondaryBootDisk": {
@@ -3636,16 +4510,33 @@
           "description": "Fully-qualified resource ID for an existing disk image"
         },
         "mode": {
-          "type": "string",
-          "description": "Disk boot mode",
-          "enum": [
-            "MODE_UNSPECIFIED",
-            "CONTAINER_IMAGE_CACHE"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SecondaryBootDiskMode",
+          "description": "Disk boot mode"
         }
+      }
+    },
+    "SecondaryBootDiskMode": {
+      "type": "string",
+      "description": "SecondaryBootDisk.mode values, as defined by the Google Cloud API.",
+      "enum": [
+        "MODE_UNSPECIFIED",
+        "CONTAINER_IMAGE_CACHE"
+      ],
+      "x-ms-enum": {
+        "name": "SecondaryBootDiskMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MODE_UNSPECIFIED",
+            "value": "MODE_UNSPECIFIED",
+            "description": "MODE_UNSPECIFIED is when mode is not set."
+          },
+          {
+            "name": "CONTAINER_IMAGE_CACHE",
+            "value": "CONTAINER_IMAGE_CACHE",
+            "description": "CONTAINER_IMAGE_CACHE is for using the secondary boot disk as a container image cache."
+          }
+        ]
       }
     },
     "SecondaryBootDiskUpdateStrategy": {
@@ -3653,15 +4544,27 @@
       "description": "SecondaryBootDiskUpdateStrategy is a placeholder which will be extended in the future to define different options for updating secondary boot disks",
       "properties": {
         "strategy": {
-          "type": "string",
-          "description": "Update strategy for secondary boot disks",
-          "enum": [
-            "STRATEGY_UNSPECIFIED"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SecondaryBootDiskUpdateStrategyStrategy",
+          "description": "Update strategy for secondary boot disks"
         }
+      }
+    },
+    "SecondaryBootDiskUpdateStrategyStrategy": {
+      "type": "string",
+      "description": "SecondaryBootDiskUpdateStrategy.strategy values, as defined by the Google Cloud API.",
+      "enum": [
+        "STRATEGY_UNSPECIFIED"
+      ],
+      "x-ms-enum": {
+        "name": "SecondaryBootDiskUpdateStrategyStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "STRATEGY_UNSPECIFIED",
+            "value": "STRATEGY_UNSPECIFIED",
+            "description": "strategy unspecified"
+          }
+        ]
       }
     },
     "SecretManagerConfig": {
@@ -3679,17 +4582,45 @@
       "description": "Security posture configuration",
       "properties": {
         "mode": {
-          "type": "string",
-          "description": "Mode of the security posture",
-          "enum": [
-            "MODE_UNSPECIFIED",
-            "BASIC",
-            "STANDARD"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SecurityPostureMode",
+          "description": "Mode of the security posture"
         }
+      }
+    },
+    "SecurityPostureMode": {
+      "type": "string",
+      "description": "SecurityPostureConfig.mode values, as defined by the Google Cloud API.",
+      "enum": [
+        "MODE_UNSPECIFIED",
+        "DISABLED",
+        "BASIC",
+        "ENTERPRISE"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityPostureMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MODE_UNSPECIFIED",
+            "value": "MODE_UNSPECIFIED",
+            "description": "Default value not specified."
+          },
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "Disables Security Posture features on the cluster."
+          },
+          {
+            "name": "BASIC",
+            "value": "BASIC",
+            "description": "Applies Security Posture features on the cluster."
+          },
+          {
+            "name": "ENTERPRISE",
+            "value": "ENTERPRISE",
+            "description": "Deprecated: Security Posture Enterprise features are no longer supported. For more details, see https://cloud.google.com/kubernetes-engine/docs/deprecations/posture-management-deprecation. Applies the Security Posture off cluster Enterprise level features."
+          }
+        ]
       }
     },
     "ServiceExternalIpsConfig": {
@@ -3805,51 +4736,83 @@
       "description": "Cluster condition and state",
       "properties": {
         "code": {
-          "type": "string",
-          "description": "Machine-readable code indicating the condition state",
-          "enum": [
-            "UNKNOWN",
-            "GCE_STOCKOUT",
-            "GKE_SERVICE_ACCOUNT_DELETED",
-            "GCE_QUOTA_EXCEEDED",
-            "SET_BY_OPERATOR",
-            "CLOUD_KMS_KEY_ERROR",
-            "CA_EXPIRING"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/StatusConditionCode",
+          "description": "Machine-readable code indicating the condition state"
         },
         "message": {
           "type": "string",
           "description": "Human-readable message indicating details about the condition"
         },
         "canonicalCode": {
-          "type": "string",
-          "description": "Canonical code of the condition.",
-          "enum": [
-            "OK",
-            "CANCELLED",
-            "UNKNOWN",
-            "INVALID_ARGUMENT",
-            "DEADLINE_EXCEEDED",
-            "NOT_FOUND",
-            "ALREADY_EXISTS",
-            "PERMISSION_DENIED",
-            "UNAUTHENTICATED",
-            "RESOURCE_EXHAUSTED",
-            "FAILED_PRECONDITION",
-            "ABORTED",
-            "OUT_OF_RANGE",
-            "UNIMPLEMENTED",
-            "INTERNAL",
-            "UNAVAILABLE",
-            "DATA_LOSS"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/CanonicalCode",
+          "description": "Canonical code of the condition."
         }
+      }
+    },
+    "StatusConditionCode": {
+      "type": "string",
+      "description": "StatusCondition.code values, as defined by the Google Cloud API.",
+      "enum": [
+        "UNKNOWN",
+        "GCE_STOCKOUT",
+        "GKE_SERVICE_ACCOUNT_DELETED",
+        "GCE_QUOTA_EXCEEDED",
+        "SET_BY_OPERATOR",
+        "CLOUD_KMS_KEY_ERROR",
+        "CA_EXPIRING",
+        "NODE_SERVICE_ACCOUNT_MISSING_PERMISSIONS",
+        "CLOUD_KMS_KEY_DESTROYED"
+      ],
+      "x-ms-enum": {
+        "name": "StatusConditionCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UNKNOWN",
+            "value": "UNKNOWN",
+            "description": "UNKNOWN indicates a generic condition."
+          },
+          {
+            "name": "GCE_STOCKOUT",
+            "value": "GCE_STOCKOUT",
+            "description": "GCE_STOCKOUT indicates that Google Compute Engine resources are temporarily unavailable."
+          },
+          {
+            "name": "GKE_SERVICE_ACCOUNT_DELETED",
+            "value": "GKE_SERVICE_ACCOUNT_DELETED",
+            "description": "GKE_SERVICE_ACCOUNT_DELETED indicates that the user deleted their robot service account."
+          },
+          {
+            "name": "GCE_QUOTA_EXCEEDED",
+            "value": "GCE_QUOTA_EXCEEDED",
+            "description": "Google Compute Engine quota was exceeded."
+          },
+          {
+            "name": "SET_BY_OPERATOR",
+            "value": "SET_BY_OPERATOR",
+            "description": "Cluster state was manually changed by an SRE due to a system logic error."
+          },
+          {
+            "name": "CLOUD_KMS_KEY_ERROR",
+            "value": "CLOUD_KMS_KEY_ERROR",
+            "description": "Unable to perform an encrypt operation against the CloudKMS key used for etcd level encryption."
+          },
+          {
+            "name": "CA_EXPIRING",
+            "value": "CA_EXPIRING",
+            "description": "Cluster CA is expiring soon."
+          },
+          {
+            "name": "NODE_SERVICE_ACCOUNT_MISSING_PERMISSIONS",
+            "value": "NODE_SERVICE_ACCOUNT_MISSING_PERMISSIONS",
+            "description": "Node service account is missing permissions."
+          },
+          {
+            "name": "CLOUD_KMS_KEY_DESTROYED",
+            "value": "CLOUD_KMS_KEY_DESTROYED",
+            "description": "Cloud KMS key version used for etcd level encryption has been destroyed. This is a permanent error."
+          }
+        ]
       }
     },
     "TimeWindow": {
@@ -3864,6 +4827,30 @@
           "type": "string",
           "description": "The end time of the time window"
         }
+      }
+    },
+    "TotalEgressBandwidthTier": {
+      "type": "string",
+      "description": "ClusterNetworkPerformanceConfig.totalEgressBandwidthTier values, as defined by the Google Cloud API.",
+      "enum": [
+        "TIER_UNSPECIFIED",
+        "TIER_1"
+      ],
+      "x-ms-enum": {
+        "name": "TotalEgressBandwidthTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TIER_UNSPECIFIED",
+            "value": "TIER_UNSPECIFIED",
+            "description": "Default value"
+          },
+          {
+            "name": "TIER_1",
+            "value": "TIER_1",
+            "description": "Higher bandwidth, actual values based on VM size."
+          }
+        ]
       }
     },
     "UpdateInfo": {
@@ -3905,8 +4892,9 @@
       "description": "Upgrade strategy options.",
       "enum": [
         "NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED",
+        "BLUE_GREEN",
         "SURGE",
-        "BLUE_GREEN"
+        "SHORT_LIVED"
       ],
       "x-ms-enum": {
         "name": "UpgradeStrategy",
@@ -3915,17 +4903,22 @@
           {
             "name": "NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED",
             "value": "NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED",
-            "description": "Strategy is unspecified"
-          },
-          {
-            "name": "SURGE",
-            "value": "SURGE",
-            "description": "Use surge upgrade"
+            "description": "Default value if unset. GKE internally defaults the update strategy to SURGE for unspecified strategies."
           },
           {
             "name": "BLUE_GREEN",
             "value": "BLUE_GREEN",
-            "description": "Use blue-green upgrade"
+            "description": "blue-green upgrade."
+          },
+          {
+            "name": "SURGE",
+            "value": "SURGE",
+            "description": "SURGE is the traditional way of upgrade a node pool. max_surge and max_unavailable determines the level of upgrade parallelism."
+          },
+          {
+            "name": "SHORT_LIVED",
+            "value": "SHORT_LIVED",
+            "description": "SHORT_LIVED is the dedicated upgrade strategy for QueuedProvisioning and flex start node pools scaled up only by enqueueing to the Dynamic Workload Scheduler (DWS)."
           }
         ]
       }
@@ -3965,17 +4958,39 @@
       "description": "Parameters that can be configured on Windows nodes",
       "properties": {
         "osVersion": {
-          "type": "string",
-          "description": "OSVersion specifies the Windows node config to be used on the node",
-          "enum": [
-            "OS_VERSION_UNSPECIFIED",
-            "OS_VERSION_LTSC2019",
-            "OS_VERSION_LTSC2022"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/WindowsNodeOsVersion",
+          "description": "OSVersion specifies the Windows node config to be used on the node"
         }
+      }
+    },
+    "WindowsNodeOsVersion": {
+      "type": "string",
+      "description": "WindowsNodeConfig.osVersion values, as defined by the Google Cloud API.",
+      "enum": [
+        "OS_VERSION_UNSPECIFIED",
+        "OS_VERSION_LTSC2019",
+        "OS_VERSION_LTSC2022"
+      ],
+      "x-ms-enum": {
+        "name": "WindowsNodeOsVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OS_VERSION_UNSPECIFIED",
+            "value": "OS_VERSION_UNSPECIFIED",
+            "description": "When OSVersion is not specified."
+          },
+          {
+            "name": "OS_VERSION_LTSC2019",
+            "value": "OS_VERSION_LTSC2019",
+            "description": "LTSC2019 specifies to use LTSC2019 as the Windows Servercore Base Image."
+          },
+          {
+            "name": "OS_VERSION_LTSC2022",
+            "value": "OS_VERSION_LTSC2022",
+            "description": "LTSC2022 specifies to use LTSC2022 as the Windows Servercore Base Image."
+          }
+        ]
       }
     },
     "WorkloadIdentityConfig": {
@@ -3993,17 +5008,39 @@
       "description": "WorkloadMetadataConfig defines the metadata configuration to expose to workloads on the node pool",
       "properties": {
         "mode": {
-          "type": "string",
-          "description": "Mode is the configuration for how to expose metadata to workloads running on the node pool",
-          "enum": [
-            "MODE_UNSPECIFIED",
-            "GCE_METADATA",
-            "GKE_METADATA"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/WorkloadMetadataMode",
+          "description": "Mode is the configuration for how to expose metadata to workloads running on the node pool"
         }
+      }
+    },
+    "WorkloadMetadataMode": {
+      "type": "string",
+      "description": "WorkloadMetadataConfig.mode values, as defined by the Google Cloud API.",
+      "enum": [
+        "MODE_UNSPECIFIED",
+        "GCE_METADATA",
+        "GKE_METADATA"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadMetadataMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MODE_UNSPECIFIED",
+            "value": "MODE_UNSPECIFIED",
+            "description": "Not set."
+          },
+          {
+            "name": "GCE_METADATA",
+            "value": "GCE_METADATA",
+            "description": "Expose all Compute Engine metadata to pods."
+          },
+          {
+            "name": "GKE_METADATA",
+            "value": "GKE_METADATA",
+            "description": "Run the GKE Metadata Server on this node. The GKE Metadata Server exposes a metadata API to workloads that is compatible with the V1 Compute Metadata APIs exposed by the Compute Engine and App Engine Metadata Servers. This feature can only be enabled if Workload Identity is enabled at the cluster level."
+          }
+        ]
       }
     }
   },

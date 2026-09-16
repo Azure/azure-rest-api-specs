@@ -363,7 +363,7 @@ model IpMapping {
   /**
    * The type of this IP address.
    */
-  type?: string;
+  type?: IpMappingType;
 }
 
 /**
@@ -440,7 +440,7 @@ model Settings {
   /**
    * The activation policy specifies when the instance is activated.
    */
-  activationPolicy?: string;
+  activationPolicy?: ActivationPolicy;
 
   /**
    * Active Directory configuration.
@@ -455,7 +455,7 @@ model Settings {
   /**
    * Availability type.
    */
-  availabilityType?: string;
+  availabilityType?: AvailabilityType;
 
   /**
    * Database instance backup configuration.
@@ -480,7 +480,7 @@ model Settings {
   /**
    * The type of data disk.
    */
-  dataDiskType?: string;
+  dataDiskType?: DataDiskType;
 
   /**
    * The database flags passed to the instance at startup.
@@ -510,12 +510,12 @@ model Settings {
   /**
    * The pricing plan for this instance.
    */
-  pricingPlan?: string;
+  pricingPlan?: PricingPlan;
 
   /**
    * The type of replication this instance uses.
    */
-  replicationType?: string;
+  replicationType?: ReplicationType;
 
   /**
    * The version of instance settings.
@@ -611,7 +611,7 @@ model MaintenanceWindow {
   /**
    * Maintenance timing setting.
    */
-  updateTrack?: string;
+  updateTrack?: UpdateTrack;
 }
 
 /**
@@ -818,7 +818,7 @@ model BackupRetentionSettings {
   /**
    * The unit that 'retainedBackups' represents.
    */
-  retentionUnit?: string;
+  retentionUnit?: RetentionUnit;
 }
 
 /**
@@ -888,12 +888,12 @@ model Operation {
   /**
    * The type of the operation.
    */
-  operationType?: string;
+  operationType?: OperationType;
 
   /**
    * The status of the operation.
    */
-  status?: string;
+  status?: OperationStatus;
 
   /**
    * If errors occurred during processing of this operation, this field will be populated.
@@ -969,7 +969,7 @@ model PoolNodeConfig {
   /**
    * Current state of the node.
    */
-  state?: string;
+  state?: PoolNodeState;
 
   /**
    * IP address of the node.
@@ -1009,7 +1009,7 @@ model SqlOutOfDiskReport {
   /**
    * Current out of disk state.
    */
-  sqlOutOfDiskState?: string;
+  sqlOutOfDiskState?: SqlOutOfDiskState;
 }
 
 /**
@@ -1060,4 +1060,394 @@ interface SQLAdminInstances {
   delete is ArmResourceDeleteWithoutOkAsync<SQLAdminInstance>;
   listByResourceGroup is ArmResourceListByParent<SQLAdminInstance>;
   listBySubscription is ArmListBySubscription<SQLAdminInstance>;
+}
+
+/**
+ * Operation.operationType values, as defined by the Google Cloud API.
+ */
+union OperationType {
+  string,
+
+  /** Unknown operation type. */
+  SQL_OPERATION_TYPE_UNSPECIFIED: "SQL_OPERATION_TYPE_UNSPECIFIED",
+
+  /** Imports data into a Cloud SQL instance. */
+  IMPORT: "IMPORT",
+
+  /** Exports data from a Cloud SQL instance to a Cloud Storage bucket. */
+  EXPORT: "EXPORT",
+
+  /** Creates a new Cloud SQL instance. */
+  CREATE: "CREATE",
+
+  /** Updates the settings of a Cloud SQL instance. */
+  UPDATE: "UPDATE",
+
+  /** Deletes a Cloud SQL instance. */
+  DELETE: "DELETE",
+
+  /** Restarts the Cloud SQL instance. */
+  RESTART: "RESTART",
+
+  /** backup */
+  BACKUP: "BACKUP",
+
+  /** snapshot */
+  SNAPSHOT: "SNAPSHOT",
+
+  /** Performs instance backup. */
+  BACKUP_VOLUME: "BACKUP_VOLUME",
+
+  /** Deletes an instance backup. */
+  DELETE_VOLUME: "DELETE_VOLUME",
+
+  /** Restores an instance backup. */
+  RESTORE_VOLUME: "RESTORE_VOLUME",
+
+  /** Injects a privileged user in mysql for MOB instances. */
+  INJECT_USER: "INJECT_USER",
+
+  /** Clones a Cloud SQL instance. */
+  CLONE: "CLONE",
+
+  /** Stops replication on a Cloud SQL read replica instance. */
+  STOP_REPLICA: "STOP_REPLICA",
+
+  /** Starts replication on a Cloud SQL read replica instance. */
+  START_REPLICA: "START_REPLICA",
+
+  /** Promotes a Cloud SQL replica instance. */
+  PROMOTE_REPLICA: "PROMOTE_REPLICA",
+
+  /** Creates a Cloud SQL replica instance. */
+  CREATE_REPLICA: "CREATE_REPLICA",
+
+  /** Creates a new user in a Cloud SQL instance. */
+  CREATE_USER: "CREATE_USER",
+
+  /** Deletes a user from a Cloud SQL instance. */
+  DELETE_USER: "DELETE_USER",
+
+  /** Updates an existing user in a Cloud SQL instance. If a user with the specified username doesn't exist, a new user is created. */
+  UPDATE_USER: "UPDATE_USER",
+
+  /** Creates a database in the Cloud SQL instance. */
+  CREATE_DATABASE: "CREATE_DATABASE",
+
+  /** Deletes a database in the Cloud SQL instance. */
+  DELETE_DATABASE: "DELETE_DATABASE",
+
+  /** Updates a database in the Cloud SQL instance. */
+  UPDATE_DATABASE: "UPDATE_DATABASE",
+
+  /** Performs failover of an HA-enabled Cloud SQL failover replica. */
+  FAILOVER: "FAILOVER",
+
+  /** Deletes the backup taken by a backup run. */
+  DELETE_BACKUP: "DELETE_BACKUP",
+
+  /** recreate replica */
+  RECREATE_REPLICA: "RECREATE_REPLICA",
+
+  /** Truncates a general or slow log table in MySQL. */
+  TRUNCATE_LOG: "TRUNCATE_LOG",
+
+  /** Demotes the stand-alone instance to be a Cloud SQL read replica for an external database server. */
+  DEMOTE_MASTER: "DEMOTE_MASTER",
+
+  /** Indicates that the instance is currently in maintenance. Maintenance typically causes the instance to be unavailable for 1-3 minutes. */
+  MAINTENANCE: "MAINTENANCE",
+
+  /** This field is deprecated, and will be removed in future version of API. */
+  ENABLE_PRIVATE_IP: "ENABLE_PRIVATE_IP",
+
+  /** defer maintenance */
+  DEFER_MAINTENANCE: "DEFER_MAINTENANCE",
+
+  /** Creates clone instance. */
+  CREATE_CLONE: "CREATE_CLONE",
+
+  /** Reschedule maintenance to another time. */
+  RESCHEDULE_MAINTENANCE: "RESCHEDULE_MAINTENANCE",
+
+  /** Starts external sync of a Cloud SQL EM replica to an external primary instance. */
+  START_EXTERNAL_SYNC: "START_EXTERNAL_SYNC",
+
+  /** Recovers logs from an instance's old data disk. */
+  LOG_CLEANUP: "LOG_CLEANUP",
+
+  /** Performs auto-restart of an HA-enabled Cloud SQL database for auto recovery. */
+  AUTO_RESTART: "AUTO_RESTART",
+
+  /** Re-encrypts CMEK instances with latest key version. */
+  REENCRYPT: "REENCRYPT",
+
+  /** Switches the roles of the primary and replica pair. The target instance should be the replica. */
+  SWITCHOVER: "SWITCHOVER",
+
+  /** Update a backup. */
+  UPDATE_BACKUP: "UPDATE_BACKUP",
+
+  /** Acquire a lease for the setup of SQL Server Reporting Services (SSRS). */
+  ACQUIRE_SSRS_LEASE: "ACQUIRE_SSRS_LEASE",
+
+  /** Release a lease for the setup of SQL Server Reporting Services (SSRS). */
+  RELEASE_SSRS_LEASE: "RELEASE_SSRS_LEASE",
+
+  /** Reconfigures old primary after a promote replica operation. Effect of a promote operation to the old primary is executed in this operation, asynchronously from the promote replica operation executed to the replica. */
+  RECONFIGURE_OLD_PRIMARY: "RECONFIGURE_OLD_PRIMARY",
+
+  /** Indicates that the instance, its read replicas, and its cascading replicas are in maintenance. Maintenance typically gets initiated on groups of replicas first, followed by the primary instance. For each instance, maintenance typically causes the instance to be unavailable for 1-3 minutes. */
+  CLUSTER_MAINTENANCE: "CLUSTER_MAINTENANCE",
+
+  /** Indicates that the instance (and any of its replicas) are currently in maintenance. This is initiated as a self-service request by using SSM. Maintenance typically causes the instance to be unavailable for 1-3 minutes. */
+  SELF_SERVICE_MAINTENANCE: "SELF_SERVICE_MAINTENANCE",
+
+  /** Switches a primary instance to a replica. This operation runs as part of a switchover operation to the original primary instance. */
+  SWITCHOVER_TO_REPLICA: "SWITCHOVER_TO_REPLICA",
+
+  /** Updates the major version of a Cloud SQL instance. */
+  MAJOR_VERSION_UPGRADE: "MAJOR_VERSION_UPGRADE",
+
+  /** Deprecated: ADVANCED_BACKUP is deprecated. Use ENHANCED_BACKUP instead. */
+  ADVANCED_BACKUP: "ADVANCED_BACKUP",
+
+  /** Changes the BackupTier of a Cloud SQL instance. */
+  MANAGE_BACKUP: "MANAGE_BACKUP",
+
+  /** Creates a backup for an Enhanced BackupTier Cloud SQL instance. */
+  ENHANCED_BACKUP: "ENHANCED_BACKUP",
+
+  /** Repairs entire read pool or specified read pool nodes in the read pool. */
+  REPAIR_READ_POOL: "REPAIR_READ_POOL",
+
+  /** Creates a Cloud SQL read pool instance. */
+  CREATE_READ_POOL: "CREATE_READ_POOL",
+
+  /** Pre-checks the major version upgrade operation. */
+  PRE_CHECK_MAJOR_VERSION_UPGRADE: "PRE_CHECK_MAJOR_VERSION_UPGRADE",
+
+  /** This operation type represents individual steps in a multi-step setup migration workflow: including configuration, replication, switchover/back, and data reseeding, as defined by operation's intent. */
+  SETUP_MIGRATION: "SETUP_MIGRATION",
+
+  /** Creates a new Blue-Green deployment. */
+  CREATE_BLUE_GREEN_DEPLOYMENT: "CREATE_BLUE_GREEN_DEPLOYMENT",
+
+  /** Switches over a Blue-Green deployment. */
+  SWITCHOVER_BLUE_GREEN_DEPLOYMENT: "SWITCHOVER_BLUE_GREEN_DEPLOYMENT",
+
+  /** Deletes a Blue-Green deployment. */
+  DELETE_BLUE_GREEN_DEPLOYMENT: "DELETE_BLUE_GREEN_DEPLOYMENT",
+}
+
+/**
+ * Operation.status values, as defined by the Google Cloud API.
+ */
+union OperationStatus {
+  string,
+
+  /** The state of the operation is unknown. */
+  SQL_OPERATION_STATUS_UNSPECIFIED: "SQL_OPERATION_STATUS_UNSPECIFIED",
+
+  /** The operation has been queued, but has not started yet. */
+  PENDING: "PENDING",
+
+  /** The operation is running. */
+  RUNNING: "RUNNING",
+
+  /** The operation completed. */
+  DONE: "DONE",
+}
+
+/**
+ * IpMapping.type values, as defined by the Google Cloud API.
+ */
+union IpMappingType {
+  string,
+
+  /** This is an unknown IP address type. */
+  SQL_IP_ADDRESS_TYPE_UNSPECIFIED: "SQL_IP_ADDRESS_TYPE_UNSPECIFIED",
+
+  /** IP address the customer is supposed to connect to. Usually this is the load balancer's IP address */
+  PRIMARY: "PRIMARY",
+
+  /** Source IP address of the connection a read replica establishes to its external primary instance. This IP address can be allowlisted by the customer in case it has a firewall that filters incoming connection to its on premises primary instance. */
+  OUTGOING: "OUTGOING",
+
+  /** Private IP used when using private IPs and network peering. */
+  PRIVATE: "PRIVATE",
+
+  /** V1 IP of a migrated instance. We want the user to decommission this IP as soon as the migration is complete. Note: V1 instances with V1 ip addresses will be counted as PRIMARY. */
+  MIGRATED_1ST_GEN: "MIGRATED_1ST_GEN",
+}
+
+/**
+ * Settings.pricingPlan values, as defined by the Google Cloud API.
+ */
+union PricingPlan {
+  string,
+
+  /** This is an unknown pricing plan for this instance. */
+  SQL_PRICING_PLAN_UNSPECIFIED: "SQL_PRICING_PLAN_UNSPECIFIED",
+
+  /** The instance is billed at a monthly flat rate. */
+  PACKAGE: "PACKAGE",
+
+  /** The instance is billed per usage. */
+  PER_USE: "PER_USE",
+}
+
+/**
+ * Settings.replicationType values, as defined by the Google Cloud API.
+ */
+union ReplicationType {
+  string,
+
+  /** This is an unknown replication type for a Cloud SQL instance. */
+  SQL_REPLICATION_TYPE_UNSPECIFIED: "SQL_REPLICATION_TYPE_UNSPECIFIED",
+
+  /** The synchronous replication mode for First Generation instances. It is the default value. */
+  SYNCHRONOUS: "SYNCHRONOUS",
+
+  /** The asynchronous replication mode for First Generation instances. It provides a slight performance gain, but if an outage occurs while this option is set to asynchronous, you can lose up to a few seconds of updates to your data. */
+  ASYNCHRONOUS: "ASYNCHRONOUS",
+}
+
+/**
+ * Settings.availabilityType values, as defined by the Google Cloud API.
+ */
+union AvailabilityType {
+  string,
+
+  /** This is an unknown Availability type. */
+  SQL_AVAILABILITY_TYPE_UNSPECIFIED: "SQL_AVAILABILITY_TYPE_UNSPECIFIED",
+
+  /** Zonal available instance. */
+  ZONAL: "ZONAL",
+
+  /** Regional available instance. */
+  REGIONAL: "REGIONAL",
+}
+
+/**
+ * Settings.activationPolicy values, as defined by the Google Cloud API.
+ */
+union ActivationPolicy {
+  string,
+
+  /** Unknown activation plan. */
+  SQL_ACTIVATION_POLICY_UNSPECIFIED: "SQL_ACTIVATION_POLICY_UNSPECIFIED",
+
+  /** The instance is always up and running. */
+  ALWAYS: "ALWAYS",
+
+  /** The instance never starts. */
+  NEVER: "NEVER",
+
+  /** The instance starts upon receiving requests. */
+  ON_DEMAND: "ON_DEMAND",
+}
+
+/**
+ * Settings.dataDiskType values, as defined by the Google Cloud API.
+ */
+union DataDiskType {
+  string,
+
+  /** This is an unknown data disk type. */
+  SQL_DATA_DISK_TYPE_UNSPECIFIED: "SQL_DATA_DISK_TYPE_UNSPECIFIED",
+
+  /** An SSD data disk. */
+  PD_SSD: "PD_SSD",
+
+  /** An HDD data disk. */
+  PD_HDD: "PD_HDD",
+
+  /** This field is deprecated and will be removed from a future version of the API. */
+  OBSOLETE_LOCAL_SSD: "OBSOLETE_LOCAL_SSD",
+
+  /** A Hyperdisk Balanced data disk. */
+  HYPERDISK_BALANCED: "HYPERDISK_BALANCED",
+}
+
+/**
+ * MaintenanceWindow.updateTrack values, as defined by the Google Cloud API.
+ */
+union UpdateTrack {
+  string,
+
+  /** This is an unknown maintenance timing preference. */
+  SQL_UPDATE_TRACK_UNSPECIFIED: "SQL_UPDATE_TRACK_UNSPECIFIED",
+
+  /** For an instance with a scheduled maintenance window, this maintenance timing indicates that the maintenance update is scheduled 7 to 14 days after the notification is sent out. Also referred to as `Week 1` (Console) and `preview` (gcloud CLI). */
+  canary: "canary",
+
+  /** For an instance with a scheduled maintenance window, this maintenance timing indicates that the maintenance update is scheduled 15 to 21 days after the notification is sent out. Also referred to as `Week 2` (Console) and `production` (gcloud CLI). */
+  stable: "stable",
+
+  /** For instance with a scheduled maintenance window, this maintenance timing indicates that the maintenance update is scheduled 35 to 42 days after the notification is sent out. */
+  week5: "week5",
+}
+
+/**
+ * SqlOutOfDiskReport.sqlOutOfDiskState values, as defined by the Google Cloud API.
+ */
+union SqlOutOfDiskState {
+  string,
+
+  /** Unspecified state */
+  SQL_OUT_OF_DISK_STATE_UNSPECIFIED: "SQL_OUT_OF_DISK_STATE_UNSPECIFIED",
+
+  /** The instance has plenty space on data disk */
+  NORMAL: "NORMAL",
+
+  /** Data disk is almost used up. It is shutdown to prevent data corruption. */
+  SOFT_SHUTDOWN: "SOFT_SHUTDOWN",
+}
+
+/**
+ * BackupRetentionSettings.retentionUnit values, as defined by the Google Cloud API.
+ */
+union RetentionUnit {
+  string,
+
+  /** Backup retention unit is unspecified, will be treated as COUNT. */
+  RETENTION_UNIT_UNSPECIFIED: "RETENTION_UNIT_UNSPECIFIED",
+
+  /** Retention will be by count, eg. "retain the most recent 7 backups". */
+  COUNT: "COUNT",
+}
+
+/**
+ * PoolNodeConfig.state values, as defined by the Google Cloud API.
+ */
+union PoolNodeState {
+  string,
+
+  /** The state of the instance is unknown. */
+  SQL_INSTANCE_STATE_UNSPECIFIED: "SQL_INSTANCE_STATE_UNSPECIFIED",
+
+  /** The instance is running, or has been stopped by owner. */
+  RUNNABLE: "RUNNABLE",
+
+  /** The instance is not available, for example due to problems with billing. */
+  SUSPENDED: "SUSPENDED",
+
+  /** The instance is being deleted. */
+  PENDING_DELETE: "PENDING_DELETE",
+
+  /** The instance is being created. */
+  PENDING_CREATE: "PENDING_CREATE",
+
+  /** The instance is down for maintenance. */
+  MAINTENANCE: "MAINTENANCE",
+
+  /** The creation of the instance failed or a fatal error occurred during maintenance. */
+  FAILED: "FAILED",
+
+  /** Deprecated */
+  ONLINE_MAINTENANCE: "ONLINE_MAINTENANCE",
+
+  /** (Applicable to read pool nodes only.) The read pool node needs to be repaired. The database might be unavailable. */
+  REPAIRING: "REPAIRING",
 }

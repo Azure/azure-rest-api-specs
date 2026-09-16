@@ -123,18 +123,12 @@ model AllocationAggregateReservation {
   /**
    * The VM family that all instances scheduled against this reservation must belong to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  vmFamily?:
-    | "VM_FAMILY_CLOUD_TPU_LITE_DEVICE_CT5L"
-    | "VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT5LP"
-    | "VM_FAMILY_CLOUD_TPU_POD_SLICE_CT4P"
-    | string;
+  vmFamily?: AllocationAggregateReservationVmFamily;
 
   /**
    * The workload type of the instances that will target this reservation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  workloadType?: "BATCH" | "SERVING" | "UNSPECIFIED" | string;
+  workloadType?: WorkloadType;
 }
 
 /**
@@ -196,8 +190,7 @@ model AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk {
   /**
    * Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. The default is SCSI. For performance characteristics of SCSI over NVMe, see Local SSD performance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  `interface`?: "NVME" | "SCSI" | string;
+  `interface`?: ReservedDiskInterface;
 }
 
 /**
@@ -207,8 +200,7 @@ model AttachedDisk {
   /**
    * [Output Only] The architecture of the attached disk. Valid values are ARM64 or X86_64.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  architecture?: "ARCHITECTURE_UNSPECIFIED" | "ARM64" | "X86_64" | string;
+  architecture?: Architecture;
 
   /**
    * Specifies whether the disk will be auto-deleted when the instance is deleted (but not when the disk is detached from the instance).
@@ -259,8 +251,7 @@ model AttachedDisk {
   /**
    * Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. For most machine types, the default is SCSI. Local SSDs can use either NVME or SCSI. In certain configurations, persistent disks can use NVMe. For more information, see About persistent disks.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  `interface`?: "NVME" | "SCSI" | string;
+  `interface`?: AttachedDiskInterface;
 
   /**
    * [Output Only] Type of the resource. Always compute#attachedDisk for attached disks.
@@ -275,14 +266,12 @@ model AttachedDisk {
   /**
    * The mode in which to attach this disk, either READ_WRITE or READ_ONLY. If not specified, the default is to attach the disk in READ_WRITE mode.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  mode?: "READ_ONLY" | "READ_WRITE" | string;
+  mode?: AttachedDiskMode;
 
   /**
    * For LocalSSD disks on VM Instances in STOPPED or SUSPENDED state, this field is set to PRESERVED if the LocalSSD data has been saved to a persistent location by customer request. (see the discard_local_ssd option on Stop/Suspend). Read-only in the api.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  savedState?: "DISK_SAVED_STATE_UNSPECIFIED" | "PRESERVED" | string;
+  savedState?: SavedState;
 
   /**
    * [Output Only] shielded vm initial state stored on disk
@@ -297,8 +286,7 @@ model AttachedDisk {
   /**
    * Specifies the type of the disk, either SCRATCH or PERSISTENT. If not specified, the default is PERSISTENT.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  type?: "PERSISTENT" | "SCRATCH" | string;
+  type?: AttachedDiskType;
 }
 
 /**
@@ -308,8 +296,7 @@ model AttachedDiskInitializeParams {
   /**
    * The architecture of the attached disk. Valid values are arm64 or x86_64.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  architecture?: "ARCHITECTURE_UNSPECIFIED" | "ARM64" | "X86_64" | string;
+  architecture?: AttachedDiskInitializeParamsArchitecture;
 
   /**
    * An optional description. Provide this property when creating the disk.
@@ -350,12 +337,7 @@ model AttachedDiskInitializeParams {
   /**
    * Specifies which action to take on instance update with this disk. Default is to use the existing disk.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  onUpdateAction?:
-    | "RECREATE_DISK"
-    | "RECREATE_DISK_IF_SOURCE_CHANGED"
-    | "USE_EXISTING_DISK"
-    | string;
+  onUpdateAction?: OnUpdateAction;
 
   /**
    * Indicates how many IOPS to provision for the disk. This sets the number of I/O operations per second that the disk can handle. Values must be between 10,000 and 120,000. For more details, see the Extreme persistent disk documentation.
@@ -457,13 +439,7 @@ model ReservationAffinity {
   /**
    * Specifies the type of reservation from which this instance can consume resources: ANY_RESERVATION (default), SPECIFIC_RESERVATION, or NO_RESERVATION. See Consuming reserved instances for examples.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  consumeReservationType?:
-    | "ANY_RESERVATION"
-    | "NO_RESERVATION"
-    | "SPECIFIC_RESERVATION"
-    | "UNSPECIFIED"
-    | string;
+  consumeReservationType?: ConsumeReservationType;
 
   /**
    * Corresponds to the label key of a reservation resource. To target a SPECIFIC_RESERVATION by name, specify googleapis.com/reservation-name as the key and specify the name of your reservation as its value.
@@ -505,8 +481,7 @@ model SchedulingNodeAffinity {
   /**
    * Defines the operation of node selection. Valid operators are IN for affinity and NOT_IN for anti-affinity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  operator?: "IN" | "NOT_IN" | "OPERATOR_UNSPECIFIED" | string;
+  operator?: SchedulingNodeAffinityOperator;
 
   /**
    * Corresponds to the label values of Node resource.
@@ -541,12 +516,7 @@ model Scheduling {
   /**
    * Specifies the termination action for the instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  instanceTerminationAction?:
-    | "DELETE"
-    | "INSTANCE_TERMINATION_ACTION_UNSPECIFIED"
-    | "STOP"
-    | string;
+  instanceTerminationAction?: InstanceTerminationAction;
 
   /**
    * Specifies the maximum amount of time a Local Ssd Vm should wait while recovery of the Local Ssd state is attempted. Its value should be in between 0 and 168 hours with hour granularity and the default value being 1 hour.
@@ -572,8 +542,7 @@ model Scheduling {
   /**
    * Defines the maintenance behavior for this instance. For standard instances, the default behavior is MIGRATE. For preemptible instances, the default and only possible behavior is TERMINATE. For more information, see Set VM host maintenance policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  onHostMaintenance?: "MIGRATE" | "TERMINATE" | string;
+  onHostMaintenance?: OnHostMaintenance;
 
   /**
    * Defines whether the instance is preemptible. This can only be set during instance creation or while the instance is stopped and therefore, in a `TERMINATED` state. See Instance Life Cycle for more information on the possible instance states.
@@ -583,8 +552,7 @@ model Scheduling {
   /**
    * Specifies the provisioning model of the instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  provisioningModel?: "SPOT" | "STANDARD" | string;
+  provisioningModel?: ProvisioningModel;
 }
 
 /**
@@ -609,8 +577,7 @@ model BulkInsertOperationStatus {
   /**
    * [Output Only] Creation status of BulkInsert operation - information if the flow is rolling forward or rolling back.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  status?: "CREATING" | "DONE" | "ROLLING_BACK" | "STATUS_UNSPECIFIED" | string;
+  status?: BulkInsertOperationStatusStatus;
 
   /**
    * [Output Only] Count of VMs originally planned to be created.
@@ -655,14 +622,12 @@ model UpcomingMaintenance {
   /**
    * Maintenance Status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  maintenanceStatus?: "ONGOING" | "PENDING" | "UNKNOWN" | string;
+  maintenanceStatus?: MaintenanceStatus;
 
   /**
    * Defines the type of maintenance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  type?: "SCHEDULED" | "UNKNOWN_TYPE" | "UNSCHEDULED" | string;
+  type?: UpcomingMaintenanceType;
 
   /**
    * The time by which the maintenance disruption will be completed. This timestamp value is in RFC3339 text format.
@@ -740,13 +705,7 @@ model AccessConfig {
   /**
    * This signifies the networking tier used for configuring this access configuration and can only take the following values: PREMIUM, STANDARD. If an AccessConfig is specified without a valid external IP address, an ephemeral IP will be created with this networkTier. If an AccessConfig with a valid external IP address is specified, it must match that of the networkTier associated with the Address resource owning that IP.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  networkTier?:
-    | "FIXED_STANDARD"
-    | "PREMIUM"
-    | "STANDARD"
-    | "STANDARD_OVERRIDES_FIXED_STANDARD"
-    | string;
+  networkTier?: NetworkTier;
 
   /**
    * The DNS domain name for the public PTR record. You can set this field only if the `setPublicPtr` field is enabled in accessConfig. If this field is unspecified in ipv6AccessConfig, a default PTR record will be createc for first IP in associated external IPv6 range.
@@ -766,8 +725,7 @@ model AccessConfig {
   /**
    * The type of configuration. In accessConfigs (IPv4), the default and only option is ONE_TO_ONE_NAT. In ipv6AccessConfigs, the default and only option is DIRECT_IPV6.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  type?: "DIRECT_IPV6" | "ONE_TO_ONE_NAT" | string;
+  type?: AccessType;
 }
 
 /**
@@ -777,21 +735,7 @@ model GuestOsFeature {
   /**
    * The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_LIVE_MIGRATABLE - SEV_SNP_CAPABLE - TDX_CAPABLE - IDPF For more information, see Enabling guest operating system features.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  type?:
-    | "FEATURE_TYPE_UNSPECIFIED"
-    | "GVNIC"
-    | "IDPF"
-    | "MULTI_IP_SUBNET"
-    | "SECURE_BOOT"
-    | "SEV_CAPABLE"
-    | "SEV_LIVE_MIGRATABLE"
-    | "SEV_LIVE_MIGRATABLE_V2"
-    | "SEV_SNP_CAPABLE"
-    | "UEFI_COMPATIBLE"
-    | "VIRTIO_SCSI_MULTIQUEUE"
-    | "WINDOWS"
-    | string;
+  type?: GuestOsFeatureType;
 }
 
 /**
@@ -901,12 +845,7 @@ model GcpComputeInstanceProperties {
   /**
    * KeyRevocationActionType of the instance. Supported options are "STOP" and "NONE". The default value is "NONE" if it is not specified.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  keyRevocationActionType?:
-    | "KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED"
-    | "NONE"
-    | "STOP"
-    | string;
+  keyRevocationActionType?: KeyRevocationActionType;
 
   /**
    * [Output Only] Type of the resource. Always compute#instance for instances.
@@ -977,12 +916,7 @@ model GcpComputeInstanceProperties {
   /**
    * The private IPv6 google access type for the VM. If not specified, use INHERIT_FROM_SUBNETWORK as default.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  privateIpv6GoogleAccess?:
-    | "ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE"
-    | "ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE"
-    | "INHERIT_FROM_SUBNETWORK"
-    | string;
+  privateIpv6GoogleAccess?: PrivateIpv6GoogleAccess;
 
   /**
    * Specifies the reservations that this instance can consume from.
@@ -1053,19 +987,7 @@ model GcpComputeInstanceProperties {
   /**
    * [Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED, REPAIRING, and TERMINATED. For more information about the status of the instance, see Instance life cycle.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  status?:
-    | "DEPROVISIONING"
-    | "PROVISIONING"
-    | "REPAIRING"
-    | "RUNNING"
-    | "STAGING"
-    | "STOPPED"
-    | "STOPPING"
-    | "SUSPENDED"
-    | "SUSPENDING"
-    | "TERMINATED"
-    | string;
+  status?: GcpComputeInstanceStatus;
 
   /**
    * [Output Only] An optional, human-readable explanation of the status.
@@ -1155,8 +1077,7 @@ model NetworkInterface {
   /**
    * [Output Only] One of EXTERNAL, INTERNAL to indicate whether the IP can be accessed from the Internet. This field is always inherited from its subnetwork. Valid only if stackType is IPV4_IPV6.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  ipv6AccessType?: "EXTERNAL" | "INTERNAL" | string;
+  ipv6AccessType?: Ipv6AccessType;
 
   /**
    * An IPv6 internal network address for this network interface. To use a static internal IP address, it must be unused and in the same region as the instance's zone. If not specified, Google Cloud will automatically assign an internal IPv6 address from the instance's subnetwork.
@@ -1191,8 +1112,7 @@ model NetworkInterface {
   /**
    * The type of vNIC to be used on this interface. This may be gVNIC or VirtioNet.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  nicType?: "GVNIC" | "UNSPECIFIED_NIC_TYPE" | "VIRTIO_NET" | string;
+  nicType?: NetworkInterfaceNicType;
 
   /**
    * The networking queue count that's specified by users for the network interface. Both Rx and Tx queues will be set to this number. It'll be empty if not specified by the users.
@@ -1202,8 +1122,7 @@ model NetworkInterface {
   /**
    * The stack type for this network interface. To assign only IPv4 addresses, use IPV4_ONLY. To assign both IPv4 and IPv6 addresses, use IPV4_IPV6. If not specified, IPV4_ONLY is used. This field can be both set at instance creation and update network interface operations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  stackType?: "IPV4_IPV6" | "IPV4_ONLY" | string;
+  stackType?: NetworkInterfaceStackType;
 
   /**
    * The URL of the Subnetwork resource for this instance. If the network resource is in legacy mode, do not specify this field. If the network is in auto subnet mode, specifying the subnetwork is optional. If the network is in custom subnet mode, specifying the subnetwork is required. If you specify this field, you can specify the subnetwork as a full or partial URL. For example, the following are all valid URLs: - https://www.googleapis.com/compute/v1/projects/project/regions/region /subnetworks/subnetwork - regions/region/subnetworks/subnetwork
@@ -1305,8 +1224,7 @@ model NetworkPerformanceConfig {
   /**
    * Total Egress Bandwidth Tier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  totalEgressBandwidthTier?: "DEFAULT" | "TIER_1" | string;
+  totalEgressBandwidthTier?: TotalEgressBandwidthTier;
 }
 
 /**
@@ -1337,15 +1255,7 @@ model SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo {
   /**
    * [Output Only] Status of the action, which can be one of the following: `PROPAGATING`, `PROPAGATED`, `ABANDONED`, `FAILED`, or `DONE`.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  state?:
-    | "ABANDONED"
-    | "DONE"
-    | "FAILED"
-    | "PROPAGATED"
-    | "PROPAGATING"
-    | "UNSPECIFIED"
-    | string;
+  state?: PerLocationOperationInfoState;
 }
 
 /**
@@ -1360,8 +1270,7 @@ model FileContentBuffer {
   /**
    * The file type of source file.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  fileType?: "BIN" | "UNDEFINED" | "X509" | string;
+  fileType?: FileContentBufferFileType;
 }
 
 /**
@@ -1382,4 +1291,608 @@ interface ComputeInstances {
   createOrReplace is ArmResourceCreateOrReplaceAsync<ComputeInstance>;
   delete is ArmResourceDeleteWithoutOkAsync<ComputeInstance>;
   list is ArmResourceListByParent<ComputeInstance>;
+}
+
+/**
+ * AllocationAggregateReservation.vmFamily values, as defined by the Google Cloud API.
+ */
+union AllocationAggregateReservationVmFamily {
+  string,
+
+  /** vm family cloud tpu device ct3 */
+  VM_FAMILY_CLOUD_TPU_DEVICE_CT3: "VM_FAMILY_CLOUD_TPU_DEVICE_CT3",
+
+  /** vm family cloud tpu lite device ct5l */
+  VM_FAMILY_CLOUD_TPU_LITE_DEVICE_CT5L: "VM_FAMILY_CLOUD_TPU_LITE_DEVICE_CT5L",
+
+  /** vm family cloud tpu lite pod slice ct5lp */
+  VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT5LP: "VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT5LP",
+
+  /** vm family cloud tpu lite pod slice ct6e */
+  VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT6E: "VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT6E",
+
+  /** vm family cloud tpu pod slice ct3p */
+  VM_FAMILY_CLOUD_TPU_POD_SLICE_CT3P: "VM_FAMILY_CLOUD_TPU_POD_SLICE_CT3P",
+
+  /** vm family cloud tpu pod slice ct4p */
+  VM_FAMILY_CLOUD_TPU_POD_SLICE_CT4P: "VM_FAMILY_CLOUD_TPU_POD_SLICE_CT4P",
+
+  /** vm family cloud tpu pod slice ct5p */
+  VM_FAMILY_CLOUD_TPU_POD_SLICE_CT5P: "VM_FAMILY_CLOUD_TPU_POD_SLICE_CT5P",
+
+  /** vm family cloud tpu pod slice tpu7x */
+  VM_FAMILY_CLOUD_TPU_POD_SLICE_TPU7X: "VM_FAMILY_CLOUD_TPU_POD_SLICE_TPU7X",
+}
+
+/**
+ * AllocationAggregateReservation.workloadType values, as defined by the Google Cloud API.
+ */
+union WorkloadType {
+  string,
+
+  /** Reserved resources will be optimized for BATCH workloads, such as ML
+training. */
+  BATCH: "BATCH",
+
+  /** Reserved resources will be optimized for SERVING workloads, such as ML
+inference. */
+  SERVING: "SERVING",
+
+  /** unspecified */
+  UNSPECIFIED: "UNSPECIFIED",
+}
+
+/**
+ * AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk.interface values, as defined by the Google Cloud API.
+ */
+union ReservedDiskInterface {
+  string,
+
+  /** nvme */
+  NVME: "NVME",
+
+  /** scsi */
+  SCSI: "SCSI",
+}
+
+/**
+ * AttachedDisk.architecture values, as defined by the Google Cloud API.
+ */
+union Architecture {
+  string,
+
+  /** Default value indicating Architecture is not set. */
+  ARCHITECTURE_UNSPECIFIED: "ARCHITECTURE_UNSPECIFIED",
+
+  /** Machines with architecture ARM64 */
+  ARM64: "ARM64",
+
+  /** Machines with architecture X86_64 */
+  X86_64: "X86_64",
+}
+
+/**
+ * AttachedDisk.interface values, as defined by the Google Cloud API.
+ */
+union AttachedDiskInterface {
+  string,
+
+  /** nvme */
+  NVME: "NVME",
+
+  /** scsi */
+  SCSI: "SCSI",
+}
+
+/**
+ * AttachedDisk.mode values, as defined by the Google Cloud API.
+ */
+union AttachedDiskMode {
+  string,
+
+  /** Attaches this disk in read-only mode. Multiple virtual machines can use
+a disk in read-only mode at a time. */
+  READ_ONLY: "READ_ONLY",
+
+  /** *[Default]* Attaches this disk in read-write mode. Only one
+virtual machine at a time can be attached to a disk in read-write mode. */
+  READ_WRITE: "READ_WRITE",
+}
+
+/**
+ * AttachedDisk.savedState values, as defined by the Google Cloud API.
+ */
+union SavedState {
+  string,
+
+  /** *[Default]* Disk state has not been preserved. */
+  DISK_SAVED_STATE_UNSPECIFIED: "DISK_SAVED_STATE_UNSPECIFIED",
+
+  /** Disk state has been preserved. */
+  PRESERVED: "PRESERVED",
+}
+
+/**
+ * AttachedDisk.type values, as defined by the Google Cloud API.
+ */
+union AttachedDiskType {
+  string,
+
+  /** persistent */
+  PERSISTENT: "PERSISTENT",
+
+  /** scratch */
+  SCRATCH: "SCRATCH",
+}
+
+/**
+ * AttachedDiskInitializeParams.architecture values, as defined by the Google Cloud API.
+ */
+union AttachedDiskInitializeParamsArchitecture {
+  string,
+
+  /** Default value indicating Architecture is not set. */
+  ARCHITECTURE_UNSPECIFIED: "ARCHITECTURE_UNSPECIFIED",
+
+  /** Machines with architecture ARM64 */
+  ARM64: "ARM64",
+
+  /** Machines with architecture X86_64 */
+  X86_64: "X86_64",
+}
+
+/**
+ * AttachedDiskInitializeParams.onUpdateAction values, as defined by the Google Cloud API.
+ */
+union OnUpdateAction {
+  string,
+
+  /** Always recreate the disk. */
+  RECREATE_DISK: "RECREATE_DISK",
+
+  /** Recreate the disk if source (image, snapshot) of this disk is different
+from source of existing disk. */
+  RECREATE_DISK_IF_SOURCE_CHANGED: "RECREATE_DISK_IF_SOURCE_CHANGED",
+
+  /** Use the existing disk, this is the default behaviour. */
+  USE_EXISTING_DISK: "USE_EXISTING_DISK",
+}
+
+/**
+ * ReservationAffinity.consumeReservationType values, as defined by the Google Cloud API.
+ */
+union ConsumeReservationType {
+  string,
+
+  /** Consume any allocation available. */
+  ANY_RESERVATION: "ANY_RESERVATION",
+
+  /** Do not consume from any allocated capacity. */
+  NO_RESERVATION: "NO_RESERVATION",
+
+  /** Must consume from a specific reservation. Must specify key value fields
+for specifying the reservations. */
+  SPECIFIC_RESERVATION: "SPECIFIC_RESERVATION",
+
+  /** unspecified */
+  UNSPECIFIED: "UNSPECIFIED",
+}
+
+/**
+ * SchedulingNodeAffinity.operator values, as defined by the Google Cloud API.
+ */
+union SchedulingNodeAffinityOperator {
+  string,
+
+  /** Requires Compute Engine to seek for matched nodes. */
+  IN: "IN",
+
+  /** Requires Compute Engine to avoid certain nodes. */
+  NOT_IN: "NOT_IN",
+
+  /** operator unspecified */
+  OPERATOR_UNSPECIFIED: "OPERATOR_UNSPECIFIED",
+}
+
+/**
+ * Scheduling.instanceTerminationAction values, as defined by the Google Cloud API.
+ */
+union InstanceTerminationAction {
+  string,
+
+  /** Delete the VM. */
+  DELETE: "DELETE",
+
+  /** Default value. This value is unused. */
+  INSTANCE_TERMINATION_ACTION_UNSPECIFIED: "INSTANCE_TERMINATION_ACTION_UNSPECIFIED",
+
+  /** Stop the VM without storing in-memory content. default action. */
+  STOP: "STOP",
+}
+
+/**
+ * Scheduling.onHostMaintenance values, as defined by the Google Cloud API.
+ */
+union OnHostMaintenance {
+  string,
+
+  /** *[Default]* Allows Compute Engine to automatically migrate instances
+out of the way of maintenance events. */
+  MIGRATE: "MIGRATE",
+
+  /** Tells Compute Engine to terminate and (optionally) restart the instance
+away from the maintenance activity. If you would like your instance to be
+restarted, set the automaticRestart flag to true. Your
+instance may be restarted more than once, and it may be restarted outside
+the window of maintenance events. */
+  TERMINATE: "TERMINATE",
+}
+
+/**
+ * Scheduling.provisioningModel values, as defined by the Google Cloud API.
+ */
+union ProvisioningModel {
+  string,
+
+  /** Instance is provisioned using the Flex Start provisioning model and
+has a limited runtime. */
+  FLEX_START: "FLEX_START",
+
+  /** Bound to the lifecycle of the reservation in which it is provisioned. */
+  RESERVATION_BOUND: "RESERVATION_BOUND",
+
+  /** Heavily discounted, no guaranteed runtime. */
+  SPOT: "SPOT",
+
+  /** Standard provisioning with user controlled runtime, no discounts. */
+  STANDARD: "STANDARD",
+}
+
+/**
+ * BulkInsertOperationStatus.status values, as defined by the Google Cloud API.
+ */
+union BulkInsertOperationStatusStatus {
+  string,
+
+  /** Rolling forward - creating VMs. */
+  CREATING: "CREATING",
+
+  /** Done */
+  DONE: "DONE",
+
+  /** Rolling back - cleaning up after an error. */
+  ROLLING_BACK: "ROLLING_BACK",
+
+  /** status unspecified */
+  STATUS_UNSPECIFIED: "STATUS_UNSPECIFIED",
+}
+
+/**
+ * UpcomingMaintenance.maintenanceStatus values, as defined by the Google Cloud API.
+ */
+union MaintenanceStatus {
+  string,
+
+  /** There is ongoing maintenance on this VM. */
+  ONGOING: "ONGOING",
+
+  /** There is pending maintenance. */
+  PENDING: "PENDING",
+
+  /** Unknown maintenance status. Do not use this value. */
+  UNKNOWN: "UNKNOWN",
+}
+
+/**
+ * UpcomingMaintenance.type values, as defined by the Google Cloud API.
+ */
+union UpcomingMaintenanceType {
+  string,
+
+  /** Multiple maintenance types in one window.
+This is only intended to be used for groups. */
+  MULTIPLE: "MULTIPLE",
+
+  /** Scheduled maintenance (e.g. maintenance after uptime guarantee is
+complete). */
+  SCHEDULED: "SCHEDULED",
+
+  /** No type specified. Do not use this value. */
+  UNKNOWN_TYPE: "UNKNOWN_TYPE",
+
+  /** Unscheduled maintenance (e.g. emergency maintenance during
+uptime guarantee). */
+  UNSCHEDULED: "UNSCHEDULED",
+}
+
+/**
+ * AccessConfig.networkTier values, as defined by the Google Cloud API.
+ */
+union NetworkTier {
+  string,
+
+  /** Public internet quality with fixed bandwidth. */
+  FIXED_STANDARD: "FIXED_STANDARD",
+
+  /** High quality, Google-grade network tier, support for all networking
+products. */
+  PREMIUM: "PREMIUM",
+
+  /** Public internet quality, only limited support for other networking
+products. */
+  STANDARD: "STANDARD",
+
+  /** (Output only) Temporary tier for FIXED_STANDARD when fixed standard tier
+is expired or not configured. */
+  STANDARD_OVERRIDES_FIXED_STANDARD: "STANDARD_OVERRIDES_FIXED_STANDARD",
+}
+
+/**
+ * AccessConfig.type values, as defined by the Google Cloud API.
+ */
+union AccessType {
+  string,
+
+  /** direct ipv6 */
+  DIRECT_IPV6: "DIRECT_IPV6",
+
+  /** one to one nat */
+  ONE_TO_ONE_NAT: "ONE_TO_ONE_NAT",
+}
+
+/**
+ * GuestOsFeature.type values, as defined by the Google Cloud API.
+ */
+union GuestOsFeatureType {
+  string,
+
+  /** bare metal linux compatible */
+  BARE_METAL_LINUX_COMPATIBLE: "BARE_METAL_LINUX_COMPATIBLE",
+
+  /** Indicates the guest OS is capable of Bare Metal Secure AI (BMSAI)
+confidential computing. */
+  BMSAI_CAPABLE: "BMSAI_CAPABLE",
+
+  /** cca capable */
+  CCA_CAPABLE: "CCA_CAPABLE",
+
+  /** feature type unspecified */
+  FEATURE_TYPE_UNSPECIFIED: "FEATURE_TYPE_UNSPECIFIED",
+
+  /** gvnic */
+  GVNIC: "GVNIC",
+
+  /** idpf */
+  IDPF: "IDPF",
+
+  /** multi ip subnet */
+  MULTI_IP_SUBNET: "MULTI_IP_SUBNET",
+
+  /** secure boot */
+  SECURE_BOOT: "SECURE_BOOT",
+
+  /** sev capable */
+  SEV_CAPABLE: "SEV_CAPABLE",
+
+  /** sev live migratable */
+  SEV_LIVE_MIGRATABLE: "SEV_LIVE_MIGRATABLE",
+
+  /** sev live migratable v2 */
+  SEV_LIVE_MIGRATABLE_V2: "SEV_LIVE_MIGRATABLE_V2",
+
+  /** sev snp capable */
+  SEV_SNP_CAPABLE: "SEV_SNP_CAPABLE",
+
+  /** snp svsm capable */
+  SNP_SVSM_CAPABLE: "SNP_SVSM_CAPABLE",
+
+  /** Indicates the guest OS is safe for free page reporting (FPR) during
+suspend. */
+  SUSPEND_SAFE_FPR: "SUSPEND_SAFE_FPR",
+
+  /** tdx capable */
+  TDX_CAPABLE: "TDX_CAPABLE",
+
+  /** uefi compatible */
+  UEFI_COMPATIBLE: "UEFI_COMPATIBLE",
+
+  /** virtio scsi multiqueue */
+  VIRTIO_SCSI_MULTIQUEUE: "VIRTIO_SCSI_MULTIQUEUE",
+
+  /** windows */
+  WINDOWS: "WINDOWS",
+}
+
+/**
+ * GcpComputeInstanceProperties.keyRevocationActionType values, as defined by the Google Cloud API.
+ */
+union KeyRevocationActionType {
+  string,
+
+  /** Default value. This value is unused. */
+  KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED: "KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED",
+
+  /** Indicates user chose no operation. */
+  NONE: "NONE",
+
+  /** Indicates user chose to opt for VM shutdown on key revocation. */
+  STOP: "STOP",
+}
+
+/**
+ * GcpComputeInstanceProperties.privateIpv6GoogleAccess values, as defined by the Google Cloud API.
+ */
+union PrivateIpv6GoogleAccess {
+  string,
+
+  /** Bidirectional private IPv6 access to/from Google services. If
+specified, the subnetwork who is attached to the instance's default network
+interface will be assigned an internal IPv6 prefix if it doesn't have
+before. */
+  ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE: "ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE",
+
+  /** Outbound private IPv6 access from VMs in this subnet to Google services. If
+specified, the subnetwork who is attached to the instance's default network
+interface will be assigned an internal IPv6 prefix if it doesn't have
+before. */
+  ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE: "ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE",
+
+  /** Each network interface inherits PrivateIpv6GoogleAccess from its
+subnetwork. */
+  INHERIT_FROM_SUBNETWORK: "INHERIT_FROM_SUBNETWORK",
+}
+
+/**
+ * GcpComputeInstanceProperties.status values, as defined by the Google Cloud API.
+ */
+union GcpComputeInstanceStatus {
+  string,
+
+  /** The instance is halted and we are performing tear down tasks like network
+deprogramming, releasing quota, IP, tearing down disks etc. */
+  DEPROVISIONING: "DEPROVISIONING",
+
+  /** For Flex Start provisioning instance is waiting for available capacity
+from Dynamic Workload Scheduler (DWS). */
+  PENDING: "PENDING",
+
+  /** The instance is gracefully shutting down. */
+  PENDING_STOP: "PENDING_STOP",
+
+  /** Resources are being allocated for the instance. */
+  PROVISIONING: "PROVISIONING",
+
+  /** The instance is in repair. */
+  REPAIRING: "REPAIRING",
+
+  /** The instance is running. */
+  RUNNING: "RUNNING",
+
+  /** All required resources have been allocated and the instance
+is being started. */
+  STAGING: "STAGING",
+
+  /** The instance has stopped successfully. */
+  STOPPED: "STOPPED",
+
+  /** The instance is currently stopping (either being deleted or killed). */
+  STOPPING: "STOPPING",
+
+  /** The instance has suspended. */
+  SUSPENDED: "SUSPENDED",
+
+  /** The instance is suspending. */
+  SUSPENDING: "SUSPENDING",
+
+  /** The instance has stopped (either by explicit action or underlying
+failure). */
+  TERMINATED: "TERMINATED",
+}
+
+/**
+ * NetworkInterface.ipv6AccessType values, as defined by the Google Cloud API.
+ */
+union Ipv6AccessType {
+  string,
+
+  /** This network interface can have external IPv6. */
+  EXTERNAL: "EXTERNAL",
+
+  /** This network interface can have internal IPv6. */
+  INTERNAL: "INTERNAL",
+}
+
+/**
+ * NetworkInterface.nicType values, as defined by the Google Cloud API.
+ */
+union NetworkInterfaceNicType {
+  string,
+
+  /** GVNIC */
+  GVNIC: "GVNIC",
+
+  /** IDPF */
+  IDPF: "IDPF",
+
+  /** IRDMA */
+  IRDMA: "IRDMA",
+
+  /** MRDMA */
+  MRDMA: "MRDMA",
+
+  /** No type specified. */
+  UNSPECIFIED_NIC_TYPE: "UNSPECIFIED_NIC_TYPE",
+
+  /** VIRTIO */
+  VIRTIO_NET: "VIRTIO_NET",
+}
+
+/**
+ * NetworkInterface.stackType values, as defined by the Google Cloud API.
+ */
+union NetworkInterfaceStackType {
+  string,
+
+  /** The network interface can have both IPv4 and IPv6 addresses. */
+  IPV4_IPV6: "IPV4_IPV6",
+
+  /** The network interface will only be assigned IPv4 addresses. */
+  IPV4_ONLY: "IPV4_ONLY",
+
+  /** The network interface will only be assigned IPv6 addresses. */
+  IPV6_ONLY: "IPV6_ONLY",
+}
+
+/**
+ * NetworkPerformanceConfig.totalEgressBandwidthTier values, as defined by the Google Cloud API.
+ */
+union TotalEgressBandwidthTier {
+  string,
+
+  /** default */
+  DEFAULT: "DEFAULT",
+
+  /** tier 1 */
+  TIER_1: "TIER_1",
+}
+
+/**
+ * SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo.state values, as defined by the Google Cloud API.
+ */
+union PerLocationOperationInfoState {
+  string,
+
+  /** Operation not tracked in this location e.g. zone is marked as DOWN. */
+  ABANDONED: "ABANDONED",
+
+  /** Operation has completed successfully. */
+  DONE: "DONE",
+
+  /** Operation is in an error state. */
+  FAILED: "FAILED",
+
+  /** Operation is confirmed to be in the location. */
+  PROPAGATED: "PROPAGATED",
+
+  /** Operation is not yet confirmed to have been created in the location. */
+  PROPAGATING: "PROPAGATING",
+
+  /** unspecified */
+  UNSPECIFIED: "UNSPECIFIED",
+}
+
+/**
+ * FileContentBuffer.fileType values, as defined by the Google Cloud API.
+ */
+union FileContentBufferFileType {
+  string,
+
+  /** bin */
+  BIN: "BIN",
+
+  /** undefined */
+  UNDEFINED: "UNDEFINED",
+
+  /** x509 */
+  X509: "X509",
 }

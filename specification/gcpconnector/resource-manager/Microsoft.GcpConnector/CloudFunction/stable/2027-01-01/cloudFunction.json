@@ -398,16 +398,8 @@
           "description": "Output only. The Cloud Build name of the latest successful deployment of the function."
         },
         "dockerRegistry": {
-          "type": "string",
-          "description": "Docker Registry to use for this deployment. This configuration is only applicable to 1st Gen functions, 2nd Gen functions can only use Artifact Registry. If `docker_repository` field is specified, this field will be automatically set as `ARTIFACT_REGISTRY`. If unspecified, it currently defaults to `CONTAINER_REGISTRY`. This field may be overridden by the backend for eligible deployments.",
-          "enum": [
-            "DOCKER_REGISTRY_UNSPECIFIED",
-            "CONTAINER_REGISTRY",
-            "ARTIFACT_REGISTRY"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DockerRegistry",
+          "description": "Docker Registry to use for this deployment. This configuration is only applicable to 1st Gen functions, 2nd Gen functions can only use Artifact Registry. If `docker_repository` field is specified, this field will be automatically set as `ARTIFACT_REGISTRY`. If unspecified, it currently defaults to `CONTAINER_REGISTRY`. This field may be overridden by the backend for eligible deployments."
         },
         "dockerRepository": {
           "type": "string",
@@ -503,6 +495,66 @@
         }
       }
     },
+    "DockerRegistry": {
+      "type": "string",
+      "description": "BuildConfig.dockerRegistry values, as defined by the Google Cloud API.",
+      "enum": [
+        "DOCKER_REGISTRY_UNSPECIFIED",
+        "CONTAINER_REGISTRY",
+        "ARTIFACT_REGISTRY"
+      ],
+      "x-ms-enum": {
+        "name": "DockerRegistry",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DOCKER_REGISTRY_UNSPECIFIED",
+            "value": "DOCKER_REGISTRY_UNSPECIFIED",
+            "description": "Unspecified."
+          },
+          {
+            "name": "CONTAINER_REGISTRY",
+            "value": "CONTAINER_REGISTRY",
+            "description": "Docker images will be stored in multi-regional Container Registry repositories named `gcf`."
+          },
+          {
+            "name": "ARTIFACT_REGISTRY",
+            "value": "ARTIFACT_REGISTRY",
+            "description": "Docker images will be stored in regional Artifact Registry repositories. By default, GCF will create and use repositories named `gcf-artifacts` in every region in which a function is deployed. But the repository to use can also be specified by the user using the `docker_repository` field."
+          }
+        ]
+      }
+    },
+    "Environment": {
+      "type": "string",
+      "description": "GcpFunctionProperties.environment values, as defined by the Google Cloud API.",
+      "enum": [
+        "ENVIRONMENT_UNSPECIFIED",
+        "GEN_1",
+        "GEN_2"
+      ],
+      "x-ms-enum": {
+        "name": "Environment",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ENVIRONMENT_UNSPECIFIED",
+            "value": "ENVIRONMENT_UNSPECIFIED",
+            "description": "Unspecified"
+          },
+          {
+            "name": "GEN_1",
+            "value": "GEN_1",
+            "description": "Gen 1"
+          },
+          {
+            "name": "GEN_2",
+            "value": "GEN_2",
+            "description": "Gen 2"
+          }
+        ]
+      }
+    },
     "EventFilter": {
       "type": "object",
       "description": "Filters events based on exact matches on the CloudEvents attributes.",
@@ -546,16 +598,8 @@
           "description": "Optional. The name of a Pub/Sub topic in the same project that will be used as the transport topic for the event delivery. Format: `projects/{project}/topics/{topic}`. This is only valid for events of type `google.cloud.pubsub.topic.v1.messagePublished`. The topic provided here will not be deleted at function deletion."
         },
         "retryPolicy": {
-          "type": "string",
-          "description": "Optional. If unset, then defaults to ignoring failures (i.e. not retrying them).",
-          "enum": [
-            "RETRY_POLICY_UNSPECIFIED",
-            "RETRY_POLICY_DO_NOT_RETRY",
-            "RETRY_POLICY_RETRY"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/RetryPolicy",
+          "description": "Optional. If unset, then defaults to ignoring failures (i.e. not retrying them)."
         },
         "service": {
           "type": "string",
@@ -642,16 +686,8 @@
           "description": "User-provided description of a function."
         },
         "environment": {
-          "type": "string",
-          "description": "Describe whether the function is 1st Gen or 2nd Gen.",
-          "enum": [
-            "ENVIRONMENT_UNSPECIFIED",
-            "GEN_1",
-            "GEN_2"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/Environment",
+          "description": "Describe whether the function is 1st Gen or 2nd Gen."
         },
         "eventTrigger": {
           "$ref": "#/definitions/EventTrigger",
@@ -685,19 +721,8 @@
           "description": "Describes the Service being deployed. Currently deploys services to Cloud Run (fully managed)."
         },
         "state": {
-          "type": "string",
-          "description": "Output only. State of the function.",
-          "enum": [
-            "STATE_UNSPECIFIED",
-            "ACTIVE",
-            "FAILED",
-            "DEPLOYING",
-            "DELETING",
-            "UNKNOWN"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/GcpFunctionState",
+          "description": "Output only. State of the function."
         },
         "stateMessages": {
           "type": "array",
@@ -717,6 +742,66 @@
         }
       }
     },
+    "GcpFunctionState": {
+      "type": "string",
+      "description": "GcpFunctionProperties.state values, as defined by the Google Cloud API.",
+      "enum": [
+        "STATE_UNSPECIFIED",
+        "ACTIVE",
+        "FAILED",
+        "DEPLOYING",
+        "DELETING",
+        "UNKNOWN",
+        "DETACHING",
+        "DETACH_FAILED"
+      ],
+      "x-ms-enum": {
+        "name": "GcpFunctionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "STATE_UNSPECIFIED",
+            "value": "STATE_UNSPECIFIED",
+            "description": "Not specified. Invalid state."
+          },
+          {
+            "name": "ACTIVE",
+            "value": "ACTIVE",
+            "description": "Function has been successfully deployed and is serving."
+          },
+          {
+            "name": "FAILED",
+            "value": "FAILED",
+            "description": "Function deployment failed and the function is not serving."
+          },
+          {
+            "name": "DEPLOYING",
+            "value": "DEPLOYING",
+            "description": "Function is being created or updated."
+          },
+          {
+            "name": "DELETING",
+            "value": "DELETING",
+            "description": "Function is being deleted."
+          },
+          {
+            "name": "UNKNOWN",
+            "value": "UNKNOWN",
+            "description": "Function deployment failed and the function serving state is undefined. The function should be updated or deleted to move it out of this state."
+          },
+          {
+            "name": "DETACHING",
+            "value": "DETACHING",
+            "description": "Function is being detached."
+          },
+          {
+            "name": "DETACH_FAILED",
+            "value": "DETACH_FAILED",
+            "description": "Function detach failed and the function is still serving."
+          }
+        ]
+      }
+    },
     "GoogleCloudFunctionsV2StateMessage": {
       "type": "object",
       "description": "Informational messages about the state of the Cloud Function or Operation.",
@@ -726,22 +811,49 @@
           "description": "The message."
         },
         "severity": {
-          "type": "string",
-          "description": "Severity of the state message.",
-          "enum": [
-            "SEVERITY_UNSPECIFIED",
-            "ERROR",
-            "WARNING",
-            "INFO"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/StateMessageSeverity",
+          "description": "Severity of the state message."
         },
         "type": {
           "type": "string",
           "description": "One-word CamelCase type of the state message."
         }
+      }
+    },
+    "IngressSettings": {
+      "type": "string",
+      "description": "ServiceConfig.ingressSettings values, as defined by the Google Cloud API.",
+      "enum": [
+        "INGRESS_SETTINGS_UNSPECIFIED",
+        "ALLOW_ALL",
+        "ALLOW_INTERNAL_ONLY",
+        "ALLOW_INTERNAL_AND_GCLB"
+      ],
+      "x-ms-enum": {
+        "name": "IngressSettings",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "INGRESS_SETTINGS_UNSPECIFIED",
+            "value": "INGRESS_SETTINGS_UNSPECIFIED",
+            "description": "Unspecified."
+          },
+          {
+            "name": "ALLOW_ALL",
+            "value": "ALLOW_ALL",
+            "description": "Allow HTTP traffic from public and private sources."
+          },
+          {
+            "name": "ALLOW_INTERNAL_ONLY",
+            "value": "ALLOW_INTERNAL_ONLY",
+            "description": "Allow HTTP traffic from only private VPC sources."
+          },
+          {
+            "name": "ALLOW_INTERNAL_AND_GCLB",
+            "value": "ALLOW_INTERNAL_AND_GCLB",
+            "description": "Allow HTTP traffic from private VPC sources and through GCLB."
+          }
+        ]
       }
     },
     "OnDeployUpdatePolicy": {
@@ -839,6 +951,36 @@
         }
       }
     },
+    "RetryPolicy": {
+      "type": "string",
+      "description": "EventTrigger.retryPolicy values, as defined by the Google Cloud API.",
+      "enum": [
+        "RETRY_POLICY_UNSPECIFIED",
+        "RETRY_POLICY_DO_NOT_RETRY",
+        "RETRY_POLICY_RETRY"
+      ],
+      "x-ms-enum": {
+        "name": "RetryPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RETRY_POLICY_UNSPECIFIED",
+            "value": "RETRY_POLICY_UNSPECIFIED",
+            "description": "Not specified."
+          },
+          {
+            "name": "RETRY_POLICY_DO_NOT_RETRY",
+            "value": "RETRY_POLICY_DO_NOT_RETRY",
+            "description": "Do not retry."
+          },
+          {
+            "name": "RETRY_POLICY_RETRY",
+            "value": "RETRY_POLICY_RETRY",
+            "description": "Retry on any failure, retry up to 7 days with an exponential backoff (capped at 10 seconds)."
+          }
+        ]
+      }
+    },
     "SecretEnvVar": {
       "type": "object",
       "description": "Configuration for a secret environment variable. It has the information necessary to fetch the secret value from secret manager and expose it as an environment variable.",
@@ -901,6 +1043,36 @@
         }
       }
     },
+    "SecurityLevel": {
+      "type": "string",
+      "description": "ServiceConfig.securityLevel values, as defined by the Google Cloud API.",
+      "enum": [
+        "SECURITY_LEVEL_UNSPECIFIED",
+        "SECURE_ALWAYS",
+        "SECURE_OPTIONAL"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SECURITY_LEVEL_UNSPECIFIED",
+            "value": "SECURITY_LEVEL_UNSPECIFIED",
+            "description": "Unspecified."
+          },
+          {
+            "name": "SECURE_ALWAYS",
+            "value": "SECURE_ALWAYS",
+            "description": "Requests for a URL that match this handler that do not use HTTPS are automatically redirected to the HTTPS URL with the same path. Query parameters are reserved for the redirect."
+          },
+          {
+            "name": "SECURE_OPTIONAL",
+            "value": "SECURE_OPTIONAL",
+            "description": "Both HTTP and HTTPS requests with URLs that match the handler succeed without redirects. The application can examine the request to determine which protocol was used and respond accordingly."
+          }
+        ]
+      }
+    },
     "ServiceConfig": {
       "type": "object",
       "description": "Describes the Service being deployed. Currently Supported : Cloud Run (fully managed).",
@@ -925,17 +1097,8 @@
           }
         },
         "ingressSettings": {
-          "type": "string",
-          "description": "The ingress settings for the function, controlling what traffic can reach it.",
-          "enum": [
-            "INGRESS_SETTINGS_UNSPECIFIED",
-            "ALLOW_ALL",
-            "ALLOW_INTERNAL_ONLY",
-            "ALLOW_INTERNAL_AND_GCLB"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/IngressSettings",
+          "description": "The ingress settings for the function, controlling what traffic can reach it."
         },
         "maxInstanceCount": {
           "type": "integer",
@@ -973,16 +1136,8 @@
           "x-ms-identifiers": []
         },
         "securityLevel": {
-          "type": "string",
-          "description": "Security level configure whether the function only accepts https. This configuration is only applicable to 1st Gen functions with Http trigger. By default https is optional for 1st Gen functions; 2nd Gen functions are https ONLY.",
-          "enum": [
-            "SECURITY_LEVEL_UNSPECIFIED",
-            "SECURE_ALWAYS",
-            "SECURE_OPTIONAL"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SecurityLevel",
+          "description": "Security level configure whether the function only accepts https. This configuration is only applicable to 1st Gen functions with Http trigger. By default https is optional for 1st Gen functions; 2nd Gen functions are https ONLY."
         },
         "service": {
           "type": "string",
@@ -1006,16 +1161,8 @@
           "description": "The Serverless VPC Access connector that this cloud function can connect to. The format of this field is `projects/*/locations/*/connectors/*`."
         },
         "vpcConnectorEgressSettings": {
-          "type": "string",
-          "description": "The egress settings for the connector, controlling what traffic is diverted through it.",
-          "enum": [
-            "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED",
-            "PRIVATE_RANGES_ONLY",
-            "ALL_TRAFFIC"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/VpcConnectorEgressSettings",
+          "description": "The egress settings for the connector, controlling what traffic is diverted through it."
         }
       }
     },
@@ -1055,6 +1202,42 @@
         }
       }
     },
+    "StateMessageSeverity": {
+      "type": "string",
+      "description": "GoogleCloudFunctionsV2StateMessage.severity values, as defined by the Google Cloud API.",
+      "enum": [
+        "SEVERITY_UNSPECIFIED",
+        "ERROR",
+        "WARNING",
+        "INFO"
+      ],
+      "x-ms-enum": {
+        "name": "StateMessageSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SEVERITY_UNSPECIFIED",
+            "value": "SEVERITY_UNSPECIFIED",
+            "description": "Not specified. Invalid severity."
+          },
+          {
+            "name": "ERROR",
+            "value": "ERROR",
+            "description": "ERROR-level severity."
+          },
+          {
+            "name": "WARNING",
+            "value": "WARNING",
+            "description": "WARNING-level severity."
+          },
+          {
+            "name": "INFO",
+            "value": "INFO",
+            "description": "INFO-level severity."
+          }
+        ]
+      }
+    },
     "StorageSource": {
       "type": "object",
       "description": "Location of the source in an archive file in Google Cloud Storage.",
@@ -1071,6 +1254,36 @@
           "type": "string",
           "description": "Google Cloud Storage object containing the source. This object must be a gzipped archive file (`.tar.gz`) containing source to build."
         }
+      }
+    },
+    "VpcConnectorEgressSettings": {
+      "type": "string",
+      "description": "ServiceConfig.vpcConnectorEgressSettings values, as defined by the Google Cloud API.",
+      "enum": [
+        "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED",
+        "PRIVATE_RANGES_ONLY",
+        "ALL_TRAFFIC"
+      ],
+      "x-ms-enum": {
+        "name": "VpcConnectorEgressSettings",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED",
+            "value": "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED",
+            "description": "Unspecified."
+          },
+          {
+            "name": "PRIVATE_RANGES_ONLY",
+            "value": "PRIVATE_RANGES_ONLY",
+            "description": "Use the VPC Access Connector only for private IP space from RFC1918."
+          },
+          {
+            "name": "ALL_TRAFFIC",
+            "value": "ALL_TRAFFIC",
+            "description": "Force the use of VPC Access Connector for all egress traffic from the function."
+          }
+        ]
       }
     }
   },

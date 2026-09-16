@@ -890,14 +890,17 @@ model UpgradeSettings {
 union UpgradeStrategy {
   string,
 
-  /** Strategy is unspecified */
+  /** Default value if unset. GKE internally defaults the update strategy to SURGE for unspecified strategies. */
   NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED: "NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED",
 
-  /** Use surge upgrade */
+  /** blue-green upgrade. */
+  BLUE_GREEN: "BLUE_GREEN",
+
+  /** SURGE is the traditional way of upgrade a node pool. max_surge and max_unavailable determines the level of upgrade parallelism. */
   SURGE: "SURGE",
 
-  /** Use blue-green upgrade */
-  BLUE_GREEN: "BLUE_GREEN",
+  /** SHORT_LIVED is the dedicated upgrade strategy for QueuedProvisioning and flex start node pools scaled up only by enqueueing to the Dynamic Workload Scheduler (DWS). */
+  SHORT_LIVED: "SHORT_LIVED",
 }
 
 /**
@@ -1199,19 +1202,12 @@ model Operation {
   /**
    * The operation type.
    */
-  operationType?: string;
+  operationType?: OperationType;
 
   /**
    * The current status of the operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  status?:
-    | "STATUS_UNSPECIFIED"
-    | "PENDING"
-    | "RUNNING"
-    | "DONE"
-    | "ABORTING"
-    | string;
+  status?: OperationStatus;
 
   /**
    * Detailed operation progress, if available.
@@ -1500,11 +1496,14 @@ model LustreCsiDriverConfig {
 union CloudRunLoadBalancerType {
   string,
 
-  /** External load balancer */
-  EXTERNAL: "EXTERNAL",
+  /** Load balancer type for Cloud Run is unspecified. */
+  LOAD_BALANCER_TYPE_UNSPECIFIED: "LOAD_BALANCER_TYPE_UNSPECIFIED",
 
-  /** Internal load balancer */
-  INTERNAL: "INTERNAL",
+  /** Install external load balancer for Cloud Run. */
+  LOAD_BALANCER_TYPE_EXTERNAL: "LOAD_BALANCER_TYPE_EXTERNAL",
+
+  /** Install internal load balancer for Cloud Run. */
+  LOAD_BALANCER_TYPE_INTERNAL: "LOAD_BALANCER_TYPE_INTERNAL",
 }
 
 /**
@@ -1554,7 +1553,7 @@ model NetworkPolicy {
   /**
    * The selected network policy provider
    */
-  provider?: string;
+  provider?: NetworkPolicyProvider;
 }
 
 /**
@@ -1882,13 +1881,13 @@ model MaintenanceExclusionOptions {
 union MaintenanceExclusionScope {
   string,
 
-  /** No exclusions */
-  NO_EXCLUSIONS: "NO_EXCLUSIONS",
+  /** NO_UPGRADES excludes all upgrades, including patch upgrades and minor upgrades across control planes and nodes. This is the default exclusion behavior. */
+  NO_UPGRADES: "NO_UPGRADES",
 
-  /** Exclude minor upgrades */
+  /** NO_MINOR_UPGRADES excludes all minor upgrades for the cluster, only patches are allowed. */
   NO_MINOR_UPGRADES: "NO_MINOR_UPGRADES",
 
-  /** Exclude minor and node upgrades */
+  /** NO_MINOR_OR_NODE_UPGRADES excludes all minor upgrades for the cluster, and also exclude all node pool upgrades. Only control plane patches are allowed. */
   NO_MINOR_OR_NODE_UPGRADES: "NO_MINOR_OR_NODE_UPGRADES",
 }
 
@@ -1904,7 +1903,7 @@ model BinaryAuthorization {
   /**
    * Mode of operation for Binary Authorization policy evaluation
    */
-  evaluationMode?: string;
+  evaluationMode?: EvaluationMode;
 }
 
 /**
@@ -2346,8 +2345,7 @@ model ReleaseChannel {
   /**
    * The release channel the cluster is subscribed to
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  channel?: "UNSPECIFIED" | "RAPID" | "REGULAR" | "STABLE" | string;
+  channel?: ReleaseChannelChannel;
 }
 
 /**
@@ -2417,13 +2415,7 @@ model Filter {
   /**
    * Event types to include in the filter
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  eventType?: (
-    | "EVENT_TYPE_UNSPECIFIED"
-    | "UPGRADE_AVAILABLE_EVENT"
-    | "UPGRADE_EVENT"
-    | "SECURITY_BULLETIN_EVENT"
-    | string)[];
+  eventType?: FilterEventType[];
 }
 
 /**
@@ -2447,14 +2439,17 @@ model ConfidentialNodes {
 union ConfidentialInstanceType {
   string,
 
-  /** Instance type is unspecified */
+  /** No type specified. Do not use this value. */
   CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED: "CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED",
 
-  /** Confidential VM */
-  CONFIDENTIAL_VM: "CONFIDENTIAL_VM",
+  /** AMD Secure Encrypted Virtualization. */
+  SEV: "SEV",
 
-  /** Confidential Space */
-  CONFIDENTIAL_SPACE: "CONFIDENTIAL_SPACE",
+  /** AMD Secure Encrypted Virtualization - Secure Nested Paging. */
+  SEV_SNP: "SEV_SNP",
+
+  /** Intel Trust Domain eXtension. */
+  TDX: "TDX",
 }
 
 /**
@@ -2474,16 +2469,7 @@ model StatusCondition {
   /**
    * Machine-readable code indicating the condition state
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  code?:
-    | "UNKNOWN"
-    | "GCE_STOCKOUT"
-    | "GKE_SERVICE_ACCOUNT_DELETED"
-    | "GCE_QUOTA_EXCEEDED"
-    | "SET_BY_OPERATOR"
-    | "CLOUD_KMS_KEY_ERROR"
-    | "CA_EXPIRING"
-    | string;
+  code?: StatusConditionCode;
 
   /**
    * Human-readable message indicating details about the condition
@@ -2493,26 +2479,7 @@ model StatusCondition {
   /**
    * Canonical code of the condition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  canonicalCode?:
-    | "OK"
-    | "CANCELLED"
-    | "UNKNOWN"
-    | "INVALID_ARGUMENT"
-    | "DEADLINE_EXCEEDED"
-    | "NOT_FOUND"
-    | "ALREADY_EXISTS"
-    | "PERMISSION_DENIED"
-    | "UNAUTHENTICATED"
-    | "RESOURCE_EXHAUSTED"
-    | "FAILED_PRECONDITION"
-    | "ABORTED"
-    | "OUT_OF_RANGE"
-    | "UNIMPLEMENTED"
-    | "INTERNAL"
-    | "UNAVAILABLE"
-    | "DATA_LOSS"
-    | string;
+  canonicalCode?: CanonicalCode;
 }
 
 /**
@@ -2557,12 +2524,7 @@ model LoggingComponentConfig {
   /**
    * Select components to collect logs. An empty set would disable all logging.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  enableComponents?: (
-    | "COMPONENT_UNSPECIFIED"
-    | "SYSTEM_COMPONENTS"
-    | "WORKLOADS"
-    | string)[];
+  enableComponents?: EnableComponents[];
 }
 
 /**
@@ -2582,12 +2544,7 @@ model MonitoringComponentConfig {
   /**
    * Select components to collect metrics. An empty set would disable all monitoring.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  enableComponents?: (
-    | "COMPONENT_UNSPECIFIED"
-    | "SYSTEM_COMPONENTS"
-    | "WORKLOADS"
-    | string)[];
+  enableComponents?: MonitoringComponentEnableComponents[];
 }
 
 /**
@@ -2632,8 +2589,7 @@ model SecurityPostureConfig {
   /**
    * Mode of the security posture
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  mode?: "MODE_UNSPECIFIED" | "BASIC" | "STANDARD" | string;
+  mode?: SecurityPostureMode;
 }
 
 /**
@@ -2645,13 +2601,7 @@ model ControlPlaneEndpointsConfig {
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   networkAccess?: {
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-    accessTypes?: (
-      | "ACCESS_TYPE_UNSPECIFIED"
-      | "PUBLIC"
-      | "PRIVATE"
-      | "SERVERLESS"
-      | string)[];
+    accessTypes?: AccessTypes[];
   };
 }
 
@@ -2687,13 +2637,7 @@ model EnterpriseConfig {
   /**
    * The enterprise tier level
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  enterpriseTier?:
-    | "TIER_UNSPECIFIED"
-    | "STANDARD"
-    | "ADVANCED"
-    | "PREMIUM"
-    | string;
+  enterpriseTier?: EnterpriseTier;
 }
 
 /**
@@ -2787,14 +2731,14 @@ model DefaultSnatStatus {
 union DatapathProvider {
   string,
 
-  /** Legacy datapath provider */
+  /** Default value. */
   DATAPATH_PROVIDER_UNSPECIFIED: "DATAPATH_PROVIDER_UNSPECIFIED",
 
-  /** Legacy datapath provider */
-  LEGACY: "LEGACY",
+  /** Use the IPTables implementation based on kube-proxy. */
+  LEGACY_DATAPATH: "LEGACY_DATAPATH",
 
-  /** Advanced datapath provider */
-  ADVANCED: "ADVANCED",
+  /** Use the eBPF based GKE Dataplane V2 with additional features. See the [GKE Dataplane V2 documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/dataplane-v2) for more. */
+  ADVANCED_DATAPATH: "ADVANCED_DATAPATH",
 }
 
 /**
@@ -2823,8 +2767,7 @@ model DnsConfig {
   /**
    * DNS scope for the cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  dnsScope?: "DNS_SCOPE_UNSPECIFIED" | "CLUSTER_SCOPE" | "VPC_SCOPE" | string;
+  dnsScope?: DnsScope;
 
   /**
    * Custom DNS endpoint for the cluster
@@ -2844,8 +2787,7 @@ model GatewayApiConfig {
   /**
    * The Gateway API release channel to subscribe to
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  channel?: "CHANNEL_UNSPECIFIED" | "RAPID" | "REGULAR" | "STABLE" | string;
+  channel?: GatewayApiChannel;
 }
 
 /**
@@ -2855,8 +2797,7 @@ model ClusterNetworkPerformanceConfig {
   /**
    * Total egress bandwidth tier for the cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  totalEgressBandwidthTier?: "TIER_UNSPECIFIED" | "TIER_1" | string;
+  totalEgressBandwidthTier?: TotalEgressBandwidthTier;
 }
 
 /**
@@ -2865,13 +2806,13 @@ model ClusterNetworkPerformanceConfig {
 union InTransitEncryptionConfig {
   string,
 
-  /** Unspecified in-transit encryption */
-  IN_TRANSIT_ENCRYPTION_UNSPECIFIED: "IN_TRANSIT_ENCRYPTION_UNSPECIFIED",
+  /** Unspecified, will be inferred as default - IN_TRANSIT_ENCRYPTION_UNSPECIFIED. */
+  IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED: "IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED",
 
-  /** In-transit encryption disabled */
+  /** In-transit encryption is disabled. */
   IN_TRANSIT_ENCRYPTION_DISABLED: "IN_TRANSIT_ENCRYPTION_DISABLED",
 
-  /** In-transit encryption with inter-node transparent encryption */
+  /** Data in-transit is encrypted using inter-node transparent encryption. */
   IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT: "IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT",
 }
 
@@ -2901,14 +2842,17 @@ model ConsumptionMeteringConfig {
 union DatabaseEncryptionState {
   string,
 
-  /** Unknown encryption state */
+  /** Should never be set */
   UNKNOWN: "UNKNOWN",
 
-  /** Database is encrypted */
+  /** Secrets in etcd are encrypted. */
   ENCRYPTED: "ENCRYPTED",
 
-  /** Database is decrypted */
+  /** Secrets in etcd are stored in plain text (at etcd level) - this is unrelated to Compute Engine level full disk encryption. */
   DECRYPTED: "DECRYPTED",
+
+  /** Encryption of all objects in the storage is enabled. There is no guarantee that all objects in the storage are encrypted, but eventually they will be. */
+  ALL_OBJECTS_ENCRYPTION_ENABLED: "ALL_OBJECTS_ENCRYPTION_ENABLED",
 }
 
 /**
@@ -2917,23 +2861,35 @@ union DatabaseEncryptionState {
 union DatabaseEncryptionCurrentState {
   string,
 
-  /** Current state is unknown */
+  /** Should never be set */
   CURRENT_STATE_UNSPECIFIED: "CURRENT_STATE_UNSPECIFIED",
 
-  /** Encryption is being applied */
-  CURRENT_STATE_ENCRYPTING: "CURRENT_STATE_ENCRYPTING",
-
-  /** Database is encrypted */
+  /** Secrets in etcd are encrypted. */
   CURRENT_STATE_ENCRYPTED: "CURRENT_STATE_ENCRYPTED",
 
-  /** Decryption is being applied */
-  CURRENT_STATE_DECRYPTING: "CURRENT_STATE_DECRYPTING",
-
-  /** Database is decrypted */
+  /** Secrets in etcd are stored in plain text (at etcd level) - this is unrelated to Compute Engine level full disk encryption. */
   CURRENT_STATE_DECRYPTED: "CURRENT_STATE_DECRYPTED",
 
-  /** Encryption/decryption operation failed */
+  /** Encryption (or re-encryption with a different CloudKMS key) of Secrets is in progress. */
+  CURRENT_STATE_ENCRYPTION_PENDING: "CURRENT_STATE_ENCRYPTION_PENDING",
+
+  /** Encryption (or re-encryption with a different CloudKMS key) of Secrets in etcd encountered an error. */
   CURRENT_STATE_ENCRYPTION_ERROR: "CURRENT_STATE_ENCRYPTION_ERROR",
+
+  /** De-crypting Secrets to plain text in etcd is in progress. */
+  CURRENT_STATE_DECRYPTION_PENDING: "CURRENT_STATE_DECRYPTION_PENDING",
+
+  /** De-crypting Secrets to plain text in etcd encountered an error. */
+  CURRENT_STATE_DECRYPTION_ERROR: "CURRENT_STATE_DECRYPTION_ERROR",
+
+  /** Encryption of all objects in the storage is enabled. It does not guarantee that all objects in the storage are encrypted, but eventually they will be. */
+  CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_ENABLED: "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_ENABLED",
+
+  /** Enablement of the encryption of all objects in storage is pending. */
+  CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_PENDING: "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_PENDING",
+
+  /** Enabling encryption of all objects in storage encountered an error. */
+  CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_ERROR: "CURRENT_STATE_ALL_OBJECTS_ENCRYPTION_ERROR",
 }
 
 /**
@@ -2999,12 +2955,7 @@ model GpuSharingConfig {
   /**
    * The type of GPU sharing strategy to enable on the GPU node
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  gpuSharingStrategy?:
-    | "GPU_SHARING_STRATEGY_UNSPECIFIED"
-    | "TIME_SHARING"
-    | "MPS"
-    | string;
+  gpuSharingStrategy?: GpuSharingStrategy;
 
   /**
    * The max number of containers that can share a physical GPU
@@ -3019,13 +2970,7 @@ model GpuDriverInstallationConfig {
   /**
    * Mode for how the GPU driver is installed
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  gpuDriverVersion?:
-    | "GPU_DRIVER_VERSION_UNSPECIFIED"
-    | "INSTALLATION_DISABLED"
-    | "DEFAULT"
-    | "LATEST"
-    | string;
+  gpuDriverVersion?: GpuDriverVersion;
 }
 
 /**
@@ -3035,8 +2980,7 @@ model WorkloadMetadataConfig {
   /**
    * Mode is the configuration for how to expose metadata to workloads running on the node pool
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  mode?: "MODE_UNSPECIFIED" | "GCE_METADATA" | "GKE_METADATA" | string;
+  mode?: WorkloadMetadataMode;
 }
 
 /**
@@ -3057,13 +3001,7 @@ model NodeTaint {
   /**
    * Effect for taint
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  effect?:
-    | "EFFECT_UNSPECIFIED"
-    | "NO_SCHEDULE"
-    | "PREFER_NO_SCHEDULE"
-    | "NO_EXECUTE"
-    | string;
+  effect?: NodeTaintEffect;
 }
 
 /**
@@ -3073,8 +3011,7 @@ model SandboxConfig {
   /**
    * Type of the sandbox to use for the node
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  type?: "UNSPECIFIED" | "GVISOR" | string;
+  type?: SandboxType;
 }
 
 /**
@@ -3084,13 +3021,7 @@ model ReservationAffinity {
   /**
    * Corresponds to the type of reservation consumption
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  consumeReservationType?:
-    | "UNSPECIFIED"
-    | "NO_RESERVATION"
-    | "ANY_RESERVATION"
-    | "SPECIFIC_RESERVATION"
-    | string;
+  consumeReservationType?: ConsumeReservationType;
 
   /**
    * Corresponds to the label key of a reservation resource
@@ -3132,12 +3063,7 @@ model LinuxNodeConfig {
   /**
    * cgroup_mode specifies the cgroup mode to be used on the node
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  cgroupMode?:
-    | "CGROUP_MODE_UNSPECIFIED"
-    | "CGROUP_MODE_V1"
-    | "CGROUP_MODE_V2"
-    | string;
+  cgroupMode?: CgroupMode;
 }
 
 /**
@@ -3222,8 +3148,7 @@ model LoggingVariantConfig {
   /**
    * Logging variant deployed on nodes
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  variant?: "VARIANT_UNSPECIFIED" | "DEFAULT" | "MAX_THROUGHPUT" | string;
+  variant?: LoggingVariantVariant;
 }
 
 /**
@@ -3233,12 +3158,7 @@ model WindowsNodeConfig {
   /**
    * OSVersion specifies the Windows node config to be used on the node
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  osVersion?:
-    | "OS_VERSION_UNSPECIFIED"
-    | "OS_VERSION_LTSC2019"
-    | "OS_VERSION_LTSC2022"
-    | string;
+  osVersion?: WindowsNodeOsVersion;
 }
 
 /**
@@ -3285,8 +3205,7 @@ model NodeAffinity {
   /**
    * Operator for NodeAffinity
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  operator?: "OPERATOR_UNSPECIFIED" | "IN" | "NOT_IN" | string;
+  operator?: NodeAffinityOperator;
 
   /**
    * Values for NodeAffinity
@@ -3378,8 +3297,7 @@ model SecondaryBootDisk {
   /**
    * Disk boot mode
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  mode?: "MODE_UNSPECIFIED" | "CONTAINER_IMAGE_CACHE" | string;
+  mode?: SecondaryBootDiskMode;
 }
 
 /**
@@ -3399,8 +3317,7 @@ model SecondaryBootDiskUpdateStrategy {
   /**
    * Update strategy for secondary boot disks
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  strategy?: "STRATEGY_UNSPECIFIED" | string;
+  strategy?: SecondaryBootDiskUpdateStrategyStrategy;
 }
 
 /**
@@ -3427,4 +3344,638 @@ interface ContainerClusters {
   createOrReplace is ArmResourceCreateOrReplaceAsync<ContainerCluster>;
   delete is ArmResourceDeleteWithoutOkAsync<ContainerCluster>;
   list is ArmResourceListByParent<ContainerCluster>;
+}
+
+/**
+ * Operation.status values, as defined by the Google Cloud API.
+ */
+union OperationStatus {
+  string,
+
+  /** Not set. */
+  STATUS_UNSPECIFIED: "STATUS_UNSPECIFIED",
+
+  /** The operation has been created. */
+  PENDING: "PENDING",
+
+  /** The operation is currently running. */
+  RUNNING: "RUNNING",
+
+  /** The operation is done, either cancelled or completed. */
+  DONE: "DONE",
+
+  /** The operation is aborting. */
+  ABORTING: "ABORTING",
+}
+
+/**
+ * ReleaseChannel.channel values, as defined by the Google Cloud API.
+ */
+union ReleaseChannelChannel {
+  string,
+
+  /** Deprecated: No channel specified. it will be removed in the future, use RAPID, REGULAR, STABLE or EXTENDED instead. */
+  UNSPECIFIED: "UNSPECIFIED",
+
+  /** RAPID channel is offered on an early access basis for customers who want to test new releases. WARNING: Versions available in the RAPID Channel may be subject to unresolved issues with no known workaround and are not subject to any SLAs. */
+  RAPID: "RAPID",
+
+  /** Clusters subscribed to REGULAR receive versions that are considered GA quality. REGULAR is intended for production users who want to take advantage of new features. */
+  REGULAR: "REGULAR",
+
+  /** Clusters subscribed to STABLE receive versions that are known to be stable and reliable in production. */
+  STABLE: "STABLE",
+
+  /** Clusters subscribed to EXTENDED receive extended support and availability for versions which are known to be stable and reliable in production. */
+  EXTENDED: "EXTENDED",
+}
+
+/**
+ * Filter.eventType values, as defined by the Google Cloud API.
+ */
+union FilterEventType {
+  string,
+
+  /** Not set, will be ignored. */
+  EVENT_TYPE_UNSPECIFIED: "EVENT_TYPE_UNSPECIFIED",
+
+  /** Corresponds with UpgradeAvailableEvent. */
+  UPGRADE_AVAILABLE_EVENT: "UPGRADE_AVAILABLE_EVENT",
+
+  /** Corresponds with UpgradeEvent. */
+  UPGRADE_EVENT: "UPGRADE_EVENT",
+
+  /** Corresponds with SecurityBulletinEvent. */
+  SECURITY_BULLETIN_EVENT: "SECURITY_BULLETIN_EVENT",
+
+  /** Corresponds with UpgradeInfoEvent. */
+  UPGRADE_INFO_EVENT: "UPGRADE_INFO_EVENT",
+}
+
+/**
+ * StatusCondition.code values, as defined by the Google Cloud API.
+ */
+union StatusConditionCode {
+  string,
+
+  /** UNKNOWN indicates a generic condition. */
+  UNKNOWN: "UNKNOWN",
+
+  /** GCE_STOCKOUT indicates that Google Compute Engine resources are temporarily unavailable. */
+  GCE_STOCKOUT: "GCE_STOCKOUT",
+
+  /** GKE_SERVICE_ACCOUNT_DELETED indicates that the user deleted their robot service account. */
+  GKE_SERVICE_ACCOUNT_DELETED: "GKE_SERVICE_ACCOUNT_DELETED",
+
+  /** Google Compute Engine quota was exceeded. */
+  GCE_QUOTA_EXCEEDED: "GCE_QUOTA_EXCEEDED",
+
+  /** Cluster state was manually changed by an SRE due to a system logic error. */
+  SET_BY_OPERATOR: "SET_BY_OPERATOR",
+
+  /** Unable to perform an encrypt operation against the CloudKMS key used for etcd level encryption. */
+  CLOUD_KMS_KEY_ERROR: "CLOUD_KMS_KEY_ERROR",
+
+  /** Cluster CA is expiring soon. */
+  CA_EXPIRING: "CA_EXPIRING",
+
+  /** Node service account is missing permissions. */
+  NODE_SERVICE_ACCOUNT_MISSING_PERMISSIONS: "NODE_SERVICE_ACCOUNT_MISSING_PERMISSIONS",
+
+  /** Cloud KMS key version used for etcd level encryption has been destroyed. This is a permanent error. */
+  CLOUD_KMS_KEY_DESTROYED: "CLOUD_KMS_KEY_DESTROYED",
+}
+
+/**
+ * StatusCondition.canonicalCode values, as defined by the Google Cloud API.
+ */
+union CanonicalCode {
+  string,
+
+  /** Not an error; returned on success. HTTP Mapping: 200 OK */
+  OK: "OK",
+
+  /** The operation was cancelled, typically by the caller. HTTP Mapping: 499 Client Closed Request */
+  CANCELLED: "CANCELLED",
+
+  /** Unknown error. For example, this error may be returned when a `Status` value received from another address space belongs to an error space that is not known in this address space. Also errors raised by APIs that do not return enough error information may be converted to this error. HTTP Mapping: 500 Internal Server Error */
+  UNKNOWN: "UNKNOWN",
+
+  /** The client specified an invalid argument. Note that this differs from `FAILED_PRECONDITION`. `INVALID_ARGUMENT` indicates arguments that are problematic regardless of the state of the system (e.g., a malformed file name). HTTP Mapping: 400 Bad Request */
+  INVALID_ARGUMENT: "INVALID_ARGUMENT",
+
+  /** The deadline expired before the operation could complete. For operations that change the state of the system, this error may be returned even if the operation has completed successfully. For example, a successful response from a server could have been delayed long enough for the deadline to expire. HTTP Mapping: 504 Gateway Timeout */
+  DEADLINE_EXCEEDED: "DEADLINE_EXCEEDED",
+
+  /** Some requested entity (e.g., file or directory) was not found. Note to server developers: if a request is denied for an entire class of users, such as gradual feature rollout or undocumented allowlist, `NOT_FOUND` may be used. If a request is denied for some users within a class of users, such as user-based access control, `PERMISSION_DENIED` must be used. HTTP Mapping: 404 Not Found */
+  NOT_FOUND: "NOT_FOUND",
+
+  /** The entity that a client attempted to create (e.g., file or directory) already exists. HTTP Mapping: 409 Conflict */
+  ALREADY_EXISTS: "ALREADY_EXISTS",
+
+  /** The caller does not have permission to execute the specified operation. `PERMISSION_DENIED` must not be used for rejections caused by exhausting some resource (use `RESOURCE_EXHAUSTED` instead for those errors). `PERMISSION_DENIED` must not be used if the caller can not be identified (use `UNAUTHENTICATED` instead for those errors). This error code does not imply the request is valid or the requested entity exists or satisfies other pre-conditions. HTTP Mapping: 403 Forbidden */
+  PERMISSION_DENIED: "PERMISSION_DENIED",
+
+  /** The request does not have valid authentication credentials for the operation. HTTP Mapping: 401 Unauthorized */
+  UNAUTHENTICATED: "UNAUTHENTICATED",
+
+  /** Some resource has been exhausted, perhaps a per-user quota, or perhaps the entire file system is out of space. HTTP Mapping: 429 Too Many Requests */
+  RESOURCE_EXHAUSTED: "RESOURCE_EXHAUSTED",
+
+  /** The operation was rejected because the system is not in a state required for the operation's execution. For example, the directory to be deleted is non-empty, an rmdir operation is applied to a non-directory, etc. Service implementors can use the following guidelines to decide between `FAILED_PRECONDITION`, `ABORTED`, and `UNAVAILABLE`: (a) Use `UNAVAILABLE` if the client can retry just the failing call. (b) Use `ABORTED` if the client should retry at a higher level. For example, when a client-specified test-and-set fails, indicating the client should restart a read-modify-write sequence. (c) Use `FAILED_PRECONDITION` if the client should not retry until the system state has been explicitly fixed. For example, if an "rmdir" fails because the directory is non-empty, `FAILED_PRECONDITION` should be returned since the client should not retry unless the files are deleted from the directory. HTTP Mapping: 400 Bad Request */
+  FAILED_PRECONDITION: "FAILED_PRECONDITION",
+
+  /** The operation was aborted, typically due to a concurrency issue such as a sequencer check failure or transaction abort. See the guidelines above for deciding between `FAILED_PRECONDITION`, `ABORTED`, and `UNAVAILABLE`. HTTP Mapping: 409 Conflict */
+  ABORTED: "ABORTED",
+
+  /** The operation was attempted past the valid range. E.g., seeking or reading past end-of-file. Unlike `INVALID_ARGUMENT`, this error indicates a problem that may be fixed if the system state changes. For example, a 32-bit file system will generate `INVALID_ARGUMENT` if asked to read at an offset that is not in the range [0,2^32-1], but it will generate `OUT_OF_RANGE` if asked to read from an offset past the current file size. There is a fair bit of overlap between `FAILED_PRECONDITION` and `OUT_OF_RANGE`. We recommend using `OUT_OF_RANGE` (the more specific error) when it applies so that callers who are iterating through a space can easily look for an `OUT_OF_RANGE` error to detect when they are done. HTTP Mapping: 400 Bad Request */
+  OUT_OF_RANGE: "OUT_OF_RANGE",
+
+  /** The operation is not implemented or is not supported/enabled in this service. HTTP Mapping: 501 Not Implemented */
+  UNIMPLEMENTED: "UNIMPLEMENTED",
+
+  /** Internal errors. This means that some invariants expected by the underlying system have been broken. This error code is reserved for serious errors. HTTP Mapping: 500 Internal Server Error */
+  INTERNAL: "INTERNAL",
+
+  /** The service is currently unavailable. This is most likely a transient condition, which can be corrected by retrying with a backoff. Note that it is not always safe to retry non-idempotent operations. See the guidelines above for deciding between `FAILED_PRECONDITION`, `ABORTED`, and `UNAVAILABLE`. HTTP Mapping: 503 Service Unavailable */
+  UNAVAILABLE: "UNAVAILABLE",
+
+  /** Unrecoverable data loss or corruption. HTTP Mapping: 500 Internal Server Error */
+  DATA_LOSS: "DATA_LOSS",
+}
+
+/**
+ * LoggingComponentConfig.enableComponents values, as defined by the Google Cloud API.
+ */
+union EnableComponents {
+  string,
+
+  /** Default value. This shouldn't be used. */
+  COMPONENT_UNSPECIFIED: "COMPONENT_UNSPECIFIED",
+
+  /** system components */
+  SYSTEM_COMPONENTS: "SYSTEM_COMPONENTS",
+
+  /** workloads */
+  WORKLOADS: "WORKLOADS",
+
+  /** kube-apiserver */
+  APISERVER: "APISERVER",
+
+  /** kube-scheduler */
+  SCHEDULER: "SCHEDULER",
+
+  /** kube-controller-manager */
+  CONTROLLER_MANAGER: "CONTROLLER_MANAGER",
+
+  /** kcp-sshd */
+  KCP_SSHD: "KCP_SSHD",
+
+  /** kcp connection logs */
+  KCP_CONNECTION: "KCP_CONNECTION",
+
+  /** horizontal pod autoscaler decision logs */
+  KCP_HPA: "KCP_HPA",
+
+  /** vertical pod autoscaler decision logs */
+  KCP_VPA: "KCP_VPA",
+}
+
+/**
+ * MonitoringComponentConfig.enableComponents values, as defined by the Google Cloud API.
+ */
+union MonitoringComponentEnableComponents {
+  string,
+
+  /** Default value. This shouldn't be used. */
+  COMPONENT_UNSPECIFIED: "COMPONENT_UNSPECIFIED",
+
+  /** system components */
+  SYSTEM_COMPONENTS: "SYSTEM_COMPONENTS",
+
+  /** kube-apiserver */
+  APISERVER: "APISERVER",
+
+  /** kube-scheduler */
+  SCHEDULER: "SCHEDULER",
+
+  /** kube-controller-manager */
+  CONTROLLER_MANAGER: "CONTROLLER_MANAGER",
+
+  /** Storage */
+  STORAGE: "STORAGE",
+
+  /** Horizontal Pod Autoscaling */
+  HPA: "HPA",
+
+  /** Pod */
+  POD: "POD",
+
+  /** DaemonSet */
+  DAEMONSET: "DAEMONSET",
+
+  /** Deployment */
+  DEPLOYMENT: "DEPLOYMENT",
+
+  /** Statefulset */
+  STATEFULSET: "STATEFULSET",
+
+  /** CADVISOR */
+  CADVISOR: "CADVISOR",
+
+  /** KUBELET */
+  KUBELET: "KUBELET",
+
+  /** NVIDIA Data Center GPU Manager (DCGM) */
+  DCGM: "DCGM",
+
+  /** JobSet */
+  JOBSET: "JOBSET",
+}
+
+/**
+ * SecurityPostureConfig.mode values, as defined by the Google Cloud API.
+ */
+union SecurityPostureMode {
+  string,
+
+  /** Default value not specified. */
+  MODE_UNSPECIFIED: "MODE_UNSPECIFIED",
+
+  /** Disables Security Posture features on the cluster. */
+  DISABLED: "DISABLED",
+
+  /** Applies Security Posture features on the cluster. */
+  BASIC: "BASIC",
+
+  /** Deprecated: Security Posture Enterprise features are no longer supported. For more details, see https://cloud.google.com/kubernetes-engine/docs/deprecations/posture-management-deprecation. Applies the Security Posture off cluster Enterprise level features. */
+  ENTERPRISE: "ENTERPRISE",
+}
+
+/**
+ * ControlPlaneEndpointsConfig.accessTypes values, as defined by the Google Cloud API.
+ */
+union AccessTypes {
+  string,
+
+  /** access type unspecified */
+  ACCESS_TYPE_UNSPECIFIED: "ACCESS_TYPE_UNSPECIFIED",
+
+  /** public */
+  PUBLIC: "PUBLIC",
+
+  /** private */
+  PRIVATE: "PRIVATE",
+
+  /** serverless */
+  SERVERLESS: "SERVERLESS",
+}
+
+/**
+ * EnterpriseConfig.enterpriseTier values, as defined by the Google Cloud API.
+ */
+union EnterpriseTier {
+  string,
+
+  /** CLUSTER_TIER_UNSPECIFIED is when cluster_tier is not set. */
+  CLUSTER_TIER_UNSPECIFIED: "CLUSTER_TIER_UNSPECIFIED",
+
+  /** STANDARD indicates a standard GKE cluster. */
+  STANDARD: "STANDARD",
+
+  /** ENTERPRISE indicates a GKE Enterprise cluster. */
+  ENTERPRISE: "ENTERPRISE",
+}
+
+/**
+ * DnsConfig.dnsScope values, as defined by the Google Cloud API.
+ */
+union DnsScope {
+  string,
+
+  /** Default value, will be inferred as cluster scope. */
+  DNS_SCOPE_UNSPECIFIED: "DNS_SCOPE_UNSPECIFIED",
+
+  /** DNS records are accessible from within the cluster. */
+  CLUSTER_SCOPE: "CLUSTER_SCOPE",
+
+  /** DNS records are accessible from within the VPC. */
+  VPC_SCOPE: "VPC_SCOPE",
+}
+
+/**
+ * GatewayApiConfig.channel values, as defined by the Google Cloud API.
+ */
+union GatewayApiChannel {
+  string,
+
+  /** Default value. */
+  CHANNEL_UNSPECIFIED: "CHANNEL_UNSPECIFIED",
+
+  /** Gateway API support is disabled */
+  CHANNEL_DISABLED: "CHANNEL_DISABLED",
+
+  /** Deprecated: use CHANNEL_STANDARD instead. Gateway API support is enabled, experimental CRDs are installed */
+  CHANNEL_EXPERIMENTAL: "CHANNEL_EXPERIMENTAL",
+
+  /** Gateway API support is enabled, standard CRDs are installed */
+  CHANNEL_STANDARD: "CHANNEL_STANDARD",
+}
+
+/**
+ * ClusterNetworkPerformanceConfig.totalEgressBandwidthTier values, as defined by the Google Cloud API.
+ */
+union TotalEgressBandwidthTier {
+  string,
+
+  /** Default value */
+  TIER_UNSPECIFIED: "TIER_UNSPECIFIED",
+
+  /** Higher bandwidth, actual values based on VM size. */
+  TIER_1: "TIER_1",
+}
+
+/**
+ * GpuSharingConfig.gpuSharingStrategy values, as defined by the Google Cloud API.
+ */
+union GpuSharingStrategy {
+  string,
+
+  /** Default value. */
+  GPU_SHARING_STRATEGY_UNSPECIFIED: "GPU_SHARING_STRATEGY_UNSPECIFIED",
+
+  /** GPUs are time-shared between containers. */
+  TIME_SHARING: "TIME_SHARING",
+
+  /** GPUs are shared between containers with NVIDIA MPS. */
+  MPS: "MPS",
+}
+
+/**
+ * GpuDriverInstallationConfig.gpuDriverVersion values, as defined by the Google Cloud API.
+ */
+union GpuDriverVersion {
+  string,
+
+  /** Default value is to not install any GPU driver. */
+  GPU_DRIVER_VERSION_UNSPECIFIED: "GPU_DRIVER_VERSION_UNSPECIFIED",
+
+  /** Disable GPU driver auto installation and needs manual installation */
+  INSTALLATION_DISABLED: "INSTALLATION_DISABLED",
+
+  /** "Default" GPU driver in COS and Ubuntu. */
+  DEFAULT: "DEFAULT",
+
+  /** "Latest" GPU driver in COS. */
+  LATEST: "LATEST",
+}
+
+/**
+ * WorkloadMetadataConfig.mode values, as defined by the Google Cloud API.
+ */
+union WorkloadMetadataMode {
+  string,
+
+  /** Not set. */
+  MODE_UNSPECIFIED: "MODE_UNSPECIFIED",
+
+  /** Expose all Compute Engine metadata to pods. */
+  GCE_METADATA: "GCE_METADATA",
+
+  /** Run the GKE Metadata Server on this node. The GKE Metadata Server exposes a metadata API to workloads that is compatible with the V1 Compute Metadata APIs exposed by the Compute Engine and App Engine Metadata Servers. This feature can only be enabled if Workload Identity is enabled at the cluster level. */
+  GKE_METADATA: "GKE_METADATA",
+}
+
+/**
+ * NodeTaint.effect values, as defined by the Google Cloud API.
+ */
+union NodeTaintEffect {
+  string,
+
+  /** Not set */
+  EFFECT_UNSPECIFIED: "EFFECT_UNSPECIFIED",
+
+  /** NoSchedule */
+  NO_SCHEDULE: "NO_SCHEDULE",
+
+  /** PreferNoSchedule */
+  PREFER_NO_SCHEDULE: "PREFER_NO_SCHEDULE",
+
+  /** NoExecute */
+  NO_EXECUTE: "NO_EXECUTE",
+}
+
+/**
+ * SandboxConfig.type values, as defined by the Google Cloud API.
+ */
+union SandboxType {
+  string,
+
+  /** Default value. This should not be used. */
+  UNSPECIFIED: "UNSPECIFIED",
+
+  /** Run sandbox using gvisor. */
+  GVISOR: "GVISOR",
+}
+
+/**
+ * ReservationAffinity.consumeReservationType values, as defined by the Google Cloud API.
+ */
+union ConsumeReservationType {
+  string,
+
+  /** Default value. This should not be used. */
+  UNSPECIFIED: "UNSPECIFIED",
+
+  /** Do not consume from any reserved capacity. */
+  NO_RESERVATION: "NO_RESERVATION",
+
+  /** Consume any reservation available. */
+  ANY_RESERVATION: "ANY_RESERVATION",
+
+  /** Must consume from a specific reservation. Must specify key value fields for specifying the reservations. */
+  SPECIFIC_RESERVATION: "SPECIFIC_RESERVATION",
+
+  /** Consume any reservation available. If no reservation is available, fail the node creation. */
+  ANY_RESERVATION_THEN_FAIL: "ANY_RESERVATION_THEN_FAIL",
+}
+
+/**
+ * LinuxNodeConfig.cgroupMode values, as defined by the Google Cloud API.
+ */
+union CgroupMode {
+  string,
+
+  /** CGROUP_MODE_UNSPECIFIED is when unspecified cgroup configuration is used. The default for the GKE node OS image will be used. */
+  CGROUP_MODE_UNSPECIFIED: "CGROUP_MODE_UNSPECIFIED",
+
+  /** CGROUP_MODE_V1 specifies to use cgroupv1 for the cgroup configuration on the node image. */
+  CGROUP_MODE_V1: "CGROUP_MODE_V1",
+
+  /** CGROUP_MODE_V2 specifies to use cgroupv2 for the cgroup configuration on the node image. */
+  CGROUP_MODE_V2: "CGROUP_MODE_V2",
+}
+
+/**
+ * LoggingVariantConfig.variant values, as defined by the Google Cloud API.
+ */
+union LoggingVariantVariant {
+  string,
+
+  /** Default value. This shouldn't be used. */
+  VARIANT_UNSPECIFIED: "VARIANT_UNSPECIFIED",
+
+  /** default logging variant. */
+  DEFAULT: "DEFAULT",
+
+  /** maximum logging throughput variant. */
+  MAX_THROUGHPUT: "MAX_THROUGHPUT",
+}
+
+/**
+ * WindowsNodeConfig.osVersion values, as defined by the Google Cloud API.
+ */
+union WindowsNodeOsVersion {
+  string,
+
+  /** When OSVersion is not specified. */
+  OS_VERSION_UNSPECIFIED: "OS_VERSION_UNSPECIFIED",
+
+  /** LTSC2019 specifies to use LTSC2019 as the Windows Servercore Base Image. */
+  OS_VERSION_LTSC2019: "OS_VERSION_LTSC2019",
+
+  /** LTSC2022 specifies to use LTSC2022 as the Windows Servercore Base Image. */
+  OS_VERSION_LTSC2022: "OS_VERSION_LTSC2022",
+}
+
+/**
+ * NodeAffinity.operator values, as defined by the Google Cloud API.
+ */
+union NodeAffinityOperator {
+  string,
+
+  /** Invalid or unspecified affinity operator. */
+  OPERATOR_UNSPECIFIED: "OPERATOR_UNSPECIFIED",
+
+  /** Affinity operator. */
+  IN: "IN",
+
+  /** Anti-affinity operator. */
+  NOT_IN: "NOT_IN",
+}
+
+/**
+ * SecondaryBootDisk.mode values, as defined by the Google Cloud API.
+ */
+union SecondaryBootDiskMode {
+  string,
+
+  /** MODE_UNSPECIFIED is when mode is not set. */
+  MODE_UNSPECIFIED: "MODE_UNSPECIFIED",
+
+  /** CONTAINER_IMAGE_CACHE is for using the secondary boot disk as a container image cache. */
+  CONTAINER_IMAGE_CACHE: "CONTAINER_IMAGE_CACHE",
+}
+
+/**
+ * SecondaryBootDiskUpdateStrategy.strategy values, as defined by the Google Cloud API.
+ */
+union SecondaryBootDiskUpdateStrategyStrategy {
+  string,
+
+  /** strategy unspecified */
+  STRATEGY_UNSPECIFIED: "STRATEGY_UNSPECIFIED",
+}
+
+/**
+ * NetworkPolicy.provider values, as defined by the Google Cloud API.
+ */
+union NetworkPolicyProvider {
+  string,
+
+  /** Not set */
+  PROVIDER_UNSPECIFIED: "PROVIDER_UNSPECIFIED",
+
+  /** Tigera (Calico Felix). */
+  CALICO: "CALICO",
+}
+
+/**
+ * BinaryAuthorization.evaluationMode values, as defined by the Google Cloud API.
+ */
+union EvaluationMode {
+  string,
+
+  /** Default value */
+  EVALUATION_MODE_UNSPECIFIED: "EVALUATION_MODE_UNSPECIFIED",
+
+  /** Disable BinaryAuthorization */
+  DISABLED: "DISABLED",
+
+  /** Enforce Kubernetes admission requests with BinaryAuthorization using the project's singleton policy. This is equivalent to setting the enabled boolean to true. */
+  PROJECT_SINGLETON_POLICY_ENFORCE: "PROJECT_SINGLETON_POLICY_ENFORCE",
+}
+
+/**
+ * Operation.operationType values, as defined by the Google Cloud API.
+ */
+union OperationType {
+  string,
+
+  /** Not set. */
+  TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED",
+
+  /** The cluster is being created. The cluster should be assumed to be unusable until the operation finishes. In the event of the operation failing, the cluster will enter the ERROR state and eventually be deleted. */
+  CREATE_CLUSTER: "CREATE_CLUSTER",
+
+  /** The cluster is being deleted. The cluster should be assumed to be unusable as soon as this operation starts. In the event of the operation failing, the cluster will enter the ERROR state and the deletion will be automatically retried until completed. */
+  DELETE_CLUSTER: "DELETE_CLUSTER",
+
+  /** The cluster version is being updated. Note that this includes "upgrades" to the same version, which are simply a recreation. This also includes [auto-upgrades](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-upgrades#upgrading_automatically). For more details, see [documentation on cluster upgrades](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-upgrades#cluster_upgrades). */
+  UPGRADE_MASTER: "UPGRADE_MASTER",
+
+  /** A node pool is being updated. Despite calling this an "upgrade", this includes most forms of updates to node pools. This also includes [auto-upgrades](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades). This operation sets the progress field and may be canceled. The upgrade strategy depends on [node pool configuration](https://cloud.google.com/kubernetes-engine/docs/concepts/node-pool-upgrade-strategies). The nodes are generally still usable during this operation. */
+  UPGRADE_NODES: "UPGRADE_NODES",
+
+  /** A problem has been detected with the control plane and is being repaired. This operation type is initiated by GKE. For more details, see [documentation on repairs](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#repairs). */
+  REPAIR_CLUSTER: "REPAIR_CLUSTER",
+
+  /** The cluster is being updated. This is a broad category of operations and includes operations that only change metadata as well as those that must recreate the entire cluster. If the control plane must be recreated, this will cause temporary downtime for zonal clusters. Some features require recreating the nodes as well. Those will be recreated as separate operations and the update may not be completely functional until the node pools recreations finish. Node recreations will generally follow [maintenance policies](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions). Some GKE-initiated operations use this type. This includes certain types of auto-upgrades and incident mitigations. */
+  UPDATE_CLUSTER: "UPDATE_CLUSTER",
+
+  /** A node pool is being created. The node pool should be assumed to be unusable until this operation finishes. In the event of an error, the node pool may be partially created. If enabled, [node autoprovisioning](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-provisioning) may have automatically initiated such operations. */
+  CREATE_NODE_POOL: "CREATE_NODE_POOL",
+
+  /** The node pool is being deleted. The node pool should be assumed to be unusable as soon as this operation starts. */
+  DELETE_NODE_POOL: "DELETE_NODE_POOL",
+
+  /** The node pool's manamagent field is being updated. These operations only update metadata and may be concurrent with most other operations. */
+  SET_NODE_POOL_MANAGEMENT: "SET_NODE_POOL_MANAGEMENT",
+
+  /** A problem has been detected with nodes and [they are being repaired](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-repair). This operation type is initiated by GKE, typically automatically. This operation may be concurrent with other operations and there may be multiple repairs occurring on the same node pool. */
+  AUTO_REPAIR_NODES: "AUTO_REPAIR_NODES",
+
+  /** Unused. Automatic node upgrade uses UPGRADE_NODES. */
+  AUTO_UPGRADE_NODES: "AUTO_UPGRADE_NODES",
+
+  /** Unused. Updating labels uses UPDATE_CLUSTER. */
+  SET_LABELS: "SET_LABELS",
+
+  /** Unused. Updating master auth uses UPDATE_CLUSTER. */
+  SET_MASTER_AUTH: "SET_MASTER_AUTH",
+
+  /** The node pool is being resized. With the exception of resizing to or from size zero, the node pool is generally usable during this operation. */
+  SET_NODE_POOL_SIZE: "SET_NODE_POOL_SIZE",
+
+  /** Unused. Updating network policy uses UPDATE_CLUSTER. */
+  SET_NETWORK_POLICY: "SET_NETWORK_POLICY",
+
+  /** Unused. Updating maintenance policy uses UPDATE_CLUSTER. */
+  SET_MAINTENANCE_POLICY: "SET_MAINTENANCE_POLICY",
+
+  /** The control plane is being resized. This operation type is initiated by GKE. These operations are often performed preemptively to ensure that the control plane has sufficient resources and is not typically an indication of issues. For more details, see [documentation on resizes](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#repairs). */
+  RESIZE_CLUSTER: "RESIZE_CLUSTER",
+
+  /** Fleet features of GKE Enterprise are being upgraded. The cluster should be assumed to be blocked for other upgrades until the operation finishes. */
+  FLEET_FEATURE_UPGRADE: "FLEET_FEATURE_UPGRADE",
 }

@@ -235,7 +235,7 @@ model DatasetAccessEntry {
   /**
    * Which resources in the dataset this entry applies to. Currently, only views are supported, but additional target types may be added in the future.
    */
-  targetTypes?: string[];
+  targetTypes?: TargetTypes[];
 }
 
 @doc("Definition of DatasetAccess")
@@ -426,4 +426,20 @@ interface BigQueryDatasets {
   delete is ArmResourceDeleteWithoutOkAsync<BigQueryDataset>;
   listByResourceGroup is ArmResourceListByParent<BigQueryDataset>;
   listBySubscription is ArmListBySubscription<BigQueryDataset>;
+}
+
+/**
+ * DatasetAccessEntry.targetTypes values, as defined by the Google Cloud API.
+ */
+union TargetTypes {
+  string,
+
+  /** Do not use. You must set a target type explicitly. */
+  TARGET_TYPE_UNSPECIFIED: "TARGET_TYPE_UNSPECIFIED",
+
+  /** This entry applies to views in the dataset. */
+  VIEWS: "VIEWS",
+
+  /** This entry applies to routines in the dataset. */
+  ROUTINES: "ROUTINES",
 }

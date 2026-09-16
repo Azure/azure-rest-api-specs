@@ -79,12 +79,7 @@ model BuildConfig {
   /**
    * Docker Registry to use for this deployment. This configuration is only applicable to 1st Gen functions, 2nd Gen functions can only use Artifact Registry. If `docker_repository` field is specified, this field will be automatically set as `ARTIFACT_REGISTRY`. If unspecified, it currently defaults to `CONTAINER_REGISTRY`. This field may be overridden by the backend for eligible deployments.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  dockerRegistry?:
-    | "DOCKER_REGISTRY_UNSPECIFIED"
-    | "CONTAINER_REGISTRY"
-    | "ARTIFACT_REGISTRY"
-    | string;
+  dockerRegistry?: DockerRegistry;
 
   /**
    * Repository in Artifact Registry to which the function docker image will be pushed after it is built by Cloud Build. If specified by user, it is created and managed by user with a customer managed encryption key. Otherwise, GCF will create and use a repository named 'gcf-artifacts' for every deployed region. It must match the pattern `projects/{project}/locations/{location}/repositories/{repository}`. Cross-project repositories are not supported. Cross-location repositories are not supported. Repository format must be 'DOCKER'.
@@ -185,12 +180,7 @@ model EventTrigger {
   /**
    * Optional. If unset, then defaults to ignoring failures (i.e. not retrying them).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  retryPolicy?:
-    | "RETRY_POLICY_UNSPECIFIED"
-    | "RETRY_POLICY_DO_NOT_RETRY"
-    | "RETRY_POLICY_RETRY"
-    | string;
+  retryPolicy?: RetryPolicy;
 
   /**
    * Optional. The hostname of the service that 1st Gen function should be observed. If no string is provided, the default service implementing the API will be used. For example, `storage.googleapis.com` is the default for all event types in the `google.storage` namespace. The field is only applicable to 1st Gen functions.
@@ -233,8 +223,7 @@ model GcpFunctionProperties {
   /**
    * Describe whether the function is 1st Gen or 2nd Gen.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  environment?: "ENVIRONMENT_UNSPECIFIED" | "GEN_1" | "GEN_2" | string;
+  environment?: Environment;
 
   /**
    * An Eventarc trigger managed by Google Cloud Functions that fires events in response to a condition in another service.
@@ -273,15 +262,7 @@ model GcpFunctionProperties {
   /**
    * Output only. State of the function.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  state?:
-    | "STATE_UNSPECIFIED"
-    | "ACTIVE"
-    | "FAILED"
-    | "DEPLOYING"
-    | "DELETING"
-    | "UNKNOWN"
-    | string;
+  state?: GcpFunctionState;
 
   /**
    * Output only. State Messages for this Cloud Function.
@@ -312,8 +293,7 @@ model GoogleCloudFunctionsV2StateMessage {
   /**
    * Severity of the state message.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  severity?: "SEVERITY_UNSPECIFIED" | "ERROR" | "WARNING" | "INFO" | string;
+  severity?: StateMessageSeverity;
 
   /**
    * One-word CamelCase type of the state message.
@@ -462,13 +442,7 @@ model ServiceConfig {
   /**
    * The ingress settings for the function, controlling what traffic can reach it.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  ingressSettings?:
-    | "INGRESS_SETTINGS_UNSPECIFIED"
-    | "ALLOW_ALL"
-    | "ALLOW_INTERNAL_ONLY"
-    | "ALLOW_INTERNAL_AND_GCLB"
-    | string;
+  ingressSettings?: IngressSettings;
 
   /**
    * The limit on the maximum number of function instances that may coexist at a given time. In some cases, such as rapid traffic surges, Cloud Functions may, for a short period of time, create more instances than the specified max instances limit. If your function cannot tolerate this temporary behavior, you may want to factor in a safety margin and set a lower max instances value than your function can tolerate. See the [Max Instances](https://cloud.google.com/functions/docs/max-instances) Guide for more details.
@@ -505,12 +479,7 @@ model ServiceConfig {
   /**
    * Security level configure whether the function only accepts https. This configuration is only applicable to 1st Gen functions with Http trigger. By default https is optional for 1st Gen functions; 2nd Gen functions are https ONLY.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  securityLevel?:
-    | "SECURITY_LEVEL_UNSPECIFIED"
-    | "SECURE_ALWAYS"
-    | "SECURE_OPTIONAL"
-    | string;
+  securityLevel?: SecurityLevel;
 
   /**
    * Output only. Name of the service associated with a Function. The format of this field is `projects/{project}/locations/{region}/services/{service}`
@@ -536,12 +505,7 @@ model ServiceConfig {
   /**
    * The egress settings for the connector, controlling what traffic is diverted through it.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-  vpcConnectorEgressSettings?:
-    | "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED"
-    | "PRIVATE_RANGES_ONLY"
-    | "ALL_TRAFFIC"
-    | string;
+  vpcConnectorEgressSettings?: VpcConnectorEgressSettings;
 }
 
 /**
@@ -617,4 +581,153 @@ interface CloudFunctions {
   delete is ArmResourceDeleteWithoutOkAsync<CloudFunction>;
   listByResourceGroup is ArmResourceListByParent<CloudFunction>;
   listBySubscription is ArmListBySubscription<CloudFunction>;
+}
+
+/**
+ * BuildConfig.dockerRegistry values, as defined by the Google Cloud API.
+ */
+union DockerRegistry {
+  string,
+
+  /** Unspecified. */
+  DOCKER_REGISTRY_UNSPECIFIED: "DOCKER_REGISTRY_UNSPECIFIED",
+
+  /** Docker images will be stored in multi-regional Container Registry repositories named `gcf`. */
+  CONTAINER_REGISTRY: "CONTAINER_REGISTRY",
+
+  /** Docker images will be stored in regional Artifact Registry repositories. By default, GCF will create and use repositories named `gcf-artifacts` in every region in which a function is deployed. But the repository to use can also be specified by the user using the `docker_repository` field. */
+  ARTIFACT_REGISTRY: "ARTIFACT_REGISTRY",
+}
+
+/**
+ * EventTrigger.retryPolicy values, as defined by the Google Cloud API.
+ */
+union RetryPolicy {
+  string,
+
+  /** Not specified. */
+  RETRY_POLICY_UNSPECIFIED: "RETRY_POLICY_UNSPECIFIED",
+
+  /** Do not retry. */
+  RETRY_POLICY_DO_NOT_RETRY: "RETRY_POLICY_DO_NOT_RETRY",
+
+  /** Retry on any failure, retry up to 7 days with an exponential backoff (capped at 10 seconds). */
+  RETRY_POLICY_RETRY: "RETRY_POLICY_RETRY",
+}
+
+/**
+ * GcpFunctionProperties.environment values, as defined by the Google Cloud API.
+ */
+union Environment {
+  string,
+
+  /** Unspecified */
+  ENVIRONMENT_UNSPECIFIED: "ENVIRONMENT_UNSPECIFIED",
+
+  /** Gen 1 */
+  GEN_1: "GEN_1",
+
+  /** Gen 2 */
+  GEN_2: "GEN_2",
+}
+
+/**
+ * GcpFunctionProperties.state values, as defined by the Google Cloud API.
+ */
+union GcpFunctionState {
+  string,
+
+  /** Not specified. Invalid state. */
+  STATE_UNSPECIFIED: "STATE_UNSPECIFIED",
+
+  /** Function has been successfully deployed and is serving. */
+  ACTIVE: "ACTIVE",
+
+  /** Function deployment failed and the function is not serving. */
+  FAILED: "FAILED",
+
+  /** Function is being created or updated. */
+  DEPLOYING: "DEPLOYING",
+
+  /** Function is being deleted. */
+  DELETING: "DELETING",
+
+  /** Function deployment failed and the function serving state is undefined. The function should be updated or deleted to move it out of this state. */
+  UNKNOWN: "UNKNOWN",
+
+  /** Function is being detached. */
+  DETACHING: "DETACHING",
+
+  /** Function detach failed and the function is still serving. */
+  DETACH_FAILED: "DETACH_FAILED",
+}
+
+/**
+ * GoogleCloudFunctionsV2StateMessage.severity values, as defined by the Google Cloud API.
+ */
+union StateMessageSeverity {
+  string,
+
+  /** Not specified. Invalid severity. */
+  SEVERITY_UNSPECIFIED: "SEVERITY_UNSPECIFIED",
+
+  /** ERROR-level severity. */
+  ERROR: "ERROR",
+
+  /** WARNING-level severity. */
+  WARNING: "WARNING",
+
+  /** INFO-level severity. */
+  INFO: "INFO",
+}
+
+/**
+ * ServiceConfig.ingressSettings values, as defined by the Google Cloud API.
+ */
+union IngressSettings {
+  string,
+
+  /** Unspecified. */
+  INGRESS_SETTINGS_UNSPECIFIED: "INGRESS_SETTINGS_UNSPECIFIED",
+
+  /** Allow HTTP traffic from public and private sources. */
+  ALLOW_ALL: "ALLOW_ALL",
+
+  /** Allow HTTP traffic from only private VPC sources. */
+  ALLOW_INTERNAL_ONLY: "ALLOW_INTERNAL_ONLY",
+
+  /** Allow HTTP traffic from private VPC sources and through GCLB. */
+  ALLOW_INTERNAL_AND_GCLB: "ALLOW_INTERNAL_AND_GCLB",
+}
+
+/**
+ * ServiceConfig.securityLevel values, as defined by the Google Cloud API.
+ */
+union SecurityLevel {
+  string,
+
+  /** Unspecified. */
+  SECURITY_LEVEL_UNSPECIFIED: "SECURITY_LEVEL_UNSPECIFIED",
+
+  /** Requests for a URL that match this handler that do not use HTTPS are automatically redirected to the HTTPS URL with the same path. Query parameters are reserved for the redirect. */
+  SECURE_ALWAYS: "SECURE_ALWAYS",
+
+  /** Both HTTP and HTTPS requests with URLs that match the handler succeed without redirects. The application can examine the request to determine which protocol was used and respond accordingly. */
+  SECURE_OPTIONAL: "SECURE_OPTIONAL",
+}
+
+/**
+ * ServiceConfig.vpcConnectorEgressSettings values, as defined by the Google Cloud API.
+ */
+union VpcConnectorEgressSettings {
+  string,
+
+  /** Unspecified. */
+  VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED: "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED",
+
+  /** Use the VPC Access Connector only for private IP space from RFC1918. */
+  PRIVATE_RANGES_ONLY: "PRIVATE_RANGES_ONLY",
+
+  /** Force the use of VPC Access Connector for all egress traffic from the function. */
+  ALL_TRAFFIC: "ALL_TRAFFIC",
 }
