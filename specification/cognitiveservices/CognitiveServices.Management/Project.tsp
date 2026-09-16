@@ -117,13 +117,12 @@ interface Projects {
   )
   delete is ArmResourceDeleteWithoutOkAsync<
     Project,
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = void>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Response =
       | ArmDeletedResponse
-      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void>> & {
-          @bodyRoot
-          _: Project;
-        })
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
       | ArmDeletedNoContentResponse
   >;
 
