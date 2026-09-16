@@ -53,6 +53,14 @@ suppressions:
     reason: The skuMixPlacementScores singleton resource uses a custom path structure matching the existing Recommender pattern.
     from: RecommenderRP.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/skuMixPlacementScores/recommendations"]
+  - code: PathForResourceAction
+    reason: The computePlacementScore API uses a custom path structure matching the existing Recommender pattern.
+    from: RecommenderRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/regular/generate"]
+  - code: PathForNestedResource
+    reason: The computePlacementScore API uses a custom path structure matching the existing Recommender pattern.
+    from: RecommenderRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/regular"]
 ```
 
 ### Tag: package-2026-10-05-preview
