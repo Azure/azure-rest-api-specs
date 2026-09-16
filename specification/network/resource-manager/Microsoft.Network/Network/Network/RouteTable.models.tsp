@@ -8,23 +8,23 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Common;
+namespace Microsoft.Network;
 /**
- * Virtual Network Tap resource.
+ * Route table resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model VirtualNetworkTap extends Resource {
-  properties?: VirtualNetworkTapPropertiesFormat;
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model RouteTable extends Resource {
+  properties?: RouteTablePropertiesFormat;
 
   @visibility(Lifecycle.Read)
   @path
-  @key("tapName")
-  @segment("virtualNetworkTaps")
+  @key("routeTableName")
+  @segment("routeTables")
   name: string;
 
   /**
@@ -35,5 +35,5 @@ model VirtualNetworkTap extends Resource {
   etag?: string;
 }
 
-@@doc(VirtualNetworkTap.name, "The name of virtual network tap.");
-@@doc(VirtualNetworkTap.properties, "Virtual Network Tap Properties.");
+@@doc(RouteTable.name, "The name of the route table.");
+@@doc(RouteTable.properties, "Properties of the route table.");

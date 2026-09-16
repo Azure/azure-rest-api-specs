@@ -3,13 +3,12 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Common/PrivateEndpoint.tsp";
+import "./PrivateEndpoint.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 
@@ -47,7 +46,7 @@ interface PrivateEndpoints {
   @tag("PrivateEndpoints")
   @autoRoute
   get is ArmResourceRead<
-    Common.PrivateEndpoint,
+    PrivateEndpoint,
     Parameters = {
       /**
        * Expands referenced resources.
@@ -64,7 +63,7 @@ interface PrivateEndpoints {
   @tag("PrivateEndpoints")
   @autoRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Common.PrivateEndpoint,
+    PrivateEndpoint,
     Error = Error
   >;
 
@@ -75,7 +74,7 @@ interface PrivateEndpoints {
   @tag("PrivateEndpoints")
   @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
-    Common.PrivateEndpoint,
+    PrivateEndpoint,
     Response =
       | ArmDeletedResponse
       | ArmDeleteAcceptedLroResponse
@@ -88,17 +87,14 @@ interface PrivateEndpoints {
    */
   @tag("PrivateEndpoints")
   @autoRoute
-  list is ArmResourceListByParent<Common.PrivateEndpoint, Error = Error>;
+  list is ArmResourceListByParent<PrivateEndpoint, Error = Error>;
 
   /**
    * Gets all private endpoints in a subscription.
    */
   @tag("PrivateEndpoints")
   @autoRoute
-  listBySubscription is ArmListBySubscription<
-    Common.PrivateEndpoint,
-    Error = Error
-  >;
+  listBySubscription is ArmListBySubscription<PrivateEndpoint, Error = Error>;
 
   /**
    * Deletes the specified private dns zone group.
@@ -107,7 +103,7 @@ interface PrivateEndpoints {
   @delete
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}")
   privateDnsZoneGroupsDelete is PrivateDnsZoneGroupOps.ActionAsync<
-    Common.PrivateEndpoint,
+    PrivateEndpoint,
     void,
     void,
     Response =
@@ -127,7 +123,7 @@ interface PrivateEndpoints {
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}")
   privateDnsZoneGroupsGet is PrivateDnsZoneGroupOps.ActionSync<
-    Common.PrivateEndpoint,
+    PrivateEndpoint,
     void,
     Response = ArmResponse<PrivateDnsZoneGroup>,
     OverrideErrorType = CloudError
@@ -142,7 +138,7 @@ interface PrivateEndpoints {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}")
   privateDnsZoneGroupsCreateOrUpdate is PrivateDnsZoneGroupOps.ActionAsync<
-    Common.PrivateEndpoint,
+    PrivateEndpoint,
     PrivateDnsZoneGroup,
     void,
     Response =
@@ -164,15 +160,15 @@ interface PrivateEndpoints {
   @action("privateDnsZoneGroups")
   @autoRoute
   privateDnsZoneGroupsList is ArmResourceActionSync<
-    Common.PrivateEndpoint,
+    PrivateEndpoint,
     void,
     ArmResponse<PrivateDnsZoneGroupListResult>,
     Error = CloudError
   >;
 }
 
-@@doc(Common.PrivateEndpoint.name, "The name of the private endpoint.");
-@@doc(Common.PrivateEndpoint.properties, "Properties of the private endpoint.");
+@@doc(PrivateEndpoint.name, "The name of the private endpoint.");
+@@doc(PrivateEndpoint.properties, "Properties of the private endpoint.");
 @@doc(
   PrivateEndpoints.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update private endpoint operation."

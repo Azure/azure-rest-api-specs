@@ -8,24 +8,30 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Common;
+namespace Microsoft.Network;
 /**
- * Route table resource.
+ * Private link service resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model RouteTable extends Resource {
-  properties?: RouteTablePropertiesFormat;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model PrivateLinkService extends Resource {
+  properties?: PrivateLinkServiceProperties;
 
   @visibility(Lifecycle.Read)
   @path
-  @key("routeTableName")
-  @segment("routeTables")
+  @key("serviceName")
+  @segment("privateLinkServices")
   name: string;
+
+  /**
+   * The extended location of the load balancer.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  extendedLocation?: ExtendedLocation;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -35,5 +41,5 @@ model RouteTable extends Resource {
   etag?: string;
 }
 
-@@doc(RouteTable.name, "The name of the route table.");
-@@doc(RouteTable.properties, "Properties of the route table.");
+@@doc(PrivateLinkService.name, "The name of the private link service.");
+@@doc(PrivateLinkService.properties, "Properties of the private link service.");

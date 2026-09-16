@@ -4,14 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 /**
@@ -23,7 +22,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model BastionHost extends Common.Resource {
+model BastionHost extends Resource {
   properties?: BastionHostPropertiesFormat;
 
   @visibility(Lifecycle.Read)

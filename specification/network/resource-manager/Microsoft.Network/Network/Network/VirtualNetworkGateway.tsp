@@ -3,14 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
-using Common;
 
 namespace Microsoft.Network;
 /**
@@ -22,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model VirtualNetworkGateway extends Common.Resource {
+model VirtualNetworkGateway extends Resource {
   properties: VirtualNetworkGatewayPropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -48,7 +47,7 @@ model VirtualNetworkGateway extends Common.Resource {
    * The identity of the virtual network gateway, if configured.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  identity?: Common.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentity;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

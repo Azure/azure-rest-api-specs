@@ -2,32 +2,32 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Common;
+namespace Microsoft.Network;
 /**
- * Route resource.
+ * Network security rule.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@parentResource(RouteTable)
+@parentResource(NetworkSecurityGroup)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model Route extends SubResourceModel {
+model SecurityRule extends SubResourceModel {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: RoutePropertiesFormat;
+  properties?: SecurityRulePropertiesFormat;
 
   @visibility(Lifecycle.Read)
   @path
-  @key("routeName")
-  @segment("routes")
+  @key("securityRuleName")
+  @segment("securityRules")
   name: string;
 
   /**
@@ -39,7 +39,6 @@ model Route extends SubResourceModel {
 }
 
 @@doc(
-  Route.name,
+  SecurityRule.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(Route.type, "Resource type.");

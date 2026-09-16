@@ -4,13 +4,12 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./RouteTable.tsp";
-import "../Common/Route.tsp";
+import "./Route.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 

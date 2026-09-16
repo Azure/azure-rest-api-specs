@@ -2,51 +2,36 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./main.tsp";
-import "./NetworkInterface.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Common;
+namespace Microsoft.Network;
 /**
- * Public IP address resource.
+ * Frontend IP address of the load balancer.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@parentResource(NetworkInterface)
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
+@parentResource(LoadBalancer)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model PublicIPAddress extends Resource {
+model FrontendIPConfiguration extends SubResourceModel {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: PublicIPAddressPropertiesFormat;
+  properties?: FrontendIPConfigurationPropertiesFormat;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @path
-  @key("publicIpAddressName")
-  @segment("publicIPAddresses")
+  @key("frontendIPConfigurationName")
+  @segment("frontendIPConfigurations")
   name: string;
 
-  /**
-   * The extended location of the public ip address.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  extendedLocation?: ExtendedLocation;
-
-  /**
-   * The public IP address SKU.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  sku?: PublicIPAddressSku;
-
-  /**
-   * A unique read-only string that changes whenever the resource is updated.
-   */
+  /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;

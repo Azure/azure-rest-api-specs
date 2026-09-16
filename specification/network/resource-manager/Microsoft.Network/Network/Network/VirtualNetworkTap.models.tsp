@@ -8,23 +8,23 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Common;
+namespace Microsoft.Network;
 /**
- * Service End point policy resource.
+ * Virtual Network Tap resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model ServiceEndpointPolicy extends Resource {
-  properties?: ServiceEndpointPolicyPropertiesFormat;
+model VirtualNetworkTap extends Resource {
+  properties?: VirtualNetworkTapPropertiesFormat;
 
   @visibility(Lifecycle.Read)
   @path
-  @key("serviceEndpointPolicyName")
-  @segment("serviceEndpointPolicies")
+  @key("tapName")
+  @segment("virtualNetworkTaps")
   name: string;
 
   /**
@@ -33,17 +33,7 @@ model ServiceEndpointPolicy extends Resource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
-
-  /**
-   * Kind of service endpoint policy. This is metadata used for the Azure portal experience.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  kind?: string;
 }
 
-@@doc(ServiceEndpointPolicy.name, "The name of the service endpoint policy.");
-@@doc(
-  ServiceEndpointPolicy.properties,
-  "Properties of the service end point policy."
-);
+@@doc(VirtualNetworkTap.name, "The name of virtual network tap.");
+@@doc(VirtualNetworkTap.properties, "Virtual Network Tap Properties.");

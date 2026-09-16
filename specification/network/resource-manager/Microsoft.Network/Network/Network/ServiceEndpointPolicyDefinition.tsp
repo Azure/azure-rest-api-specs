@@ -4,13 +4,12 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ServiceEndpointPolicy.tsp";
-import "../Common/ServiceEndpointPolicyDefinition.tsp";
+import "./ServiceEndpointPolicyDefinition.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 

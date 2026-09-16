@@ -4,13 +4,12 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
 import "./ApplicationSecurityGroup.tsp";
-import "../Common/ApplicationSecurityGroup.tsp";
+import "./ApplicationSecurityGroup.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Common;
 
 namespace Microsoft.Network;
 

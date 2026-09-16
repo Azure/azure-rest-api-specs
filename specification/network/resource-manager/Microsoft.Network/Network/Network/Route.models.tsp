@@ -2,33 +2,32 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./LoadBalancer.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Common;
+namespace Microsoft.Network;
 /**
- * A load balancer probe.
+ * Route resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
-@parentResource(LoadBalancer)
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@parentResource(RouteTable)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model Probe extends SubResourceModel {
+model Route extends SubResourceModel {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: ProbePropertiesFormat;
+  properties?: RoutePropertiesFormat;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @path
-  @key("probeName")
-  @segment("probes")
+  @key("routeName")
+  @segment("routes")
   name: string;
 
   /**
@@ -38,3 +37,5 @@ model Probe extends SubResourceModel {
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+
+@@doc(Route.type, "Resource type.");

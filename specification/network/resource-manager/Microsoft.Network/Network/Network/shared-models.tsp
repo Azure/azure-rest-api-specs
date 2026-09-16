@@ -2,34 +2,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./NetworkInterface.tsp";
-import "./NetworkInterfaceIPConfiguration.tsp";
-import "./NetworkInterfaceTapConfiguration.tsp";
-import "./PublicIPAddress.tsp";
-import "./NetworkSecurityGroup.tsp";
-import "./ApplicationSecurityGroup.tsp";
-import "./RouteTable.tsp";
-import "./ServiceEndpointPolicy.tsp";
-import "./PrivateEndpoint.tsp";
-import "./NatGateway.tsp";
-import "./FlowLog.tsp";
-import "./VirtualNetworkTap.tsp";
-import "./PrivateLinkService.tsp";
-import "./Subnet.tsp";
-import "./BackendAddressPool.tsp";
-import "./FrontendIPConfiguration.tsp";
-import "./InboundNatRule.tsp";
-import "./Route.tsp";
-import "./SecurityRule.tsp";
-import "./ServiceEndpointPolicyDefinition.tsp";
-import "./PrivateEndpointConnection.tsp";
-import "./LoadBalancer.tsp";
-import "./LoadBalancingRule.tsp";
-import "./OutboundRule.tsp";
-import "./Probe.tsp";
-import "./VirtualNetwork.tsp";
-import "./VirtualNetworkPeering.tsp";
-import "./NetworkWatcher.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
@@ -39,85 +11,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.versioned(Versions)
-namespace Common;
-
-/**
- * The available API versions.
- */
-enum Versions {
-  /**
-   * The 2025-05-01 API version.
-   */
-  v2025_05_01: "2025-05-01",
-
-  /**
-   * The 2025-07-01 API version.
-   */
-  v2025_07_01: "2025-07-01",
-
-  /**
-   * The 2025-09-01 API version.
-   */
-  v2025_09_01: "2025-09-01",
-
-  /**
-   * The 2026-01-01 API version.
-   */
-  v2026_01_01: "2026-01-01",
-
-  /**
-   * The 2026-03-01 API version.
-   */
-  v2026_03_01: "2026-03-01",
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-enum Features {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  applicationGateway,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  expressRoute,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  firewall,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  loadBalancer,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  networkGateway,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  networkManager,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  networkSecurityPerimeter,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  networkWatcher,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  networkingOperations,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  virtualNetwork,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  virtualWAN,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  firewallPolicy,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  azureWebCategory,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  serviceGateway,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  virtualNetworkAppliance,
-
-  /** Interconnect group resource type for managing interconnect groups. */
-  @added(Versions.v2025_07_01)
-  interconnectGroup,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  @added(Versions.v2025_09_01)
-  firstPartyServiceTag,
-
-  /** Authentication policy resource type for managing identity integration policies. */
-  @added(Versions.v2026_01_01)
-  authenticationPolicy,
-}
+namespace Microsoft.Network;
 
 /**
  * The supported ExtendedLocation types. Currently only EdgeZone is supported in Microsoft.Network resources.
@@ -3799,27 +3693,6 @@ model PrivateLinkServiceConnectionProperties {
    * A collection of read-only information about the state of the connection to the remote resource.
    */
   privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
-
-  /**
-   * A reference to an existing approved private endpoint whose connection approval state should be inherited by this connection at creation time.
-   */
-  @added(Versions.v2026_01_01)
-  approvalReference?: ApprovalReference;
-}
-
-/**
- * Reference to an existing approved private endpoint used to inherit its connection approval state.
- */
-@added(Versions.v2026_01_01)
-model ApprovalReference {
-  /**
-   * The ARM resource id of an existing approved private endpoint whose approval state is inherited by this connection.
-   */
-  privateEndpointId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Network/privateEndpoints";
-    }
-  ]>;
 }
 
 /**

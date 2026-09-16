@@ -4,13 +4,12 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./NetworkWatcher.tsp";
-import "../Common/FlowLog.tsp";
+import "./FlowLog.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 

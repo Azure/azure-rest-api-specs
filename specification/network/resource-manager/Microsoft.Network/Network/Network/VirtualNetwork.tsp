@@ -4,14 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
-import "../Common/VirtualNetwork.tsp";
+import "./VirtualNetwork.models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 

@@ -2,15 +2,16 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "./LoadBalancer.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Common;
+namespace Microsoft.Network;
 /**
- * Inbound NAT rule of the load balancer.
+ * Pool of backend IP addresses.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -19,15 +20,15 @@ namespace Common;
 @Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 @parentResource(LoadBalancer)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model InboundNatRule extends SubResourceModel {
+model BackendAddressPool extends SubResourceModel {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: InboundNatRulePropertiesFormat;
+  properties?: BackendAddressPoolPropertiesFormat;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @path
-  @key("inboundNatRuleName")
-  @segment("inboundNatRules")
+  @key("backendAddressPoolName")
+  @segment("backendAddressPools")
   name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */

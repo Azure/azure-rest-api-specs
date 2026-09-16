@@ -4,13 +4,12 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./LoadBalancer.tsp";
-import "../Common/BackendAddressPool.tsp";
+import "./BackendAddressPool.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 

@@ -8,10 +8,9 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Common;
-
+namespace Microsoft.Network;
 /**
- * Virtual Network resource.
+ * NetworkSecurityGroup resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -19,28 +18,23 @@ namespace Common;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model VirtualNetwork extends Resource {
-  properties?: VirtualNetworkPropertiesFormat;
+model NetworkSecurityGroup extends Resource {
+  properties?: NetworkSecurityGroupPropertiesFormat;
 
   @visibility(Lifecycle.Read)
   @path
-  @key("virtualNetworkName")
-  @segment("virtualNetworks")
+  @key("networkSecurityGroupName")
+  @segment("networkSecurityGroups")
   name: string;
 
-  /**
-   * The extended location of the virtual network.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  extendedLocation?: ExtendedLocation;
-
-  /**
-   * A unique read-only string that changes whenever the resource is updated.
-   */
+  /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
 
-@@doc(VirtualNetwork.name, "The name of the virtual network.");
-@@doc(VirtualNetwork.properties, "Properties of the virtual network.");
+@@doc(NetworkSecurityGroup.name, "The name of the network security group.");
+@@doc(
+  NetworkSecurityGroup.properties,
+  "Properties of the network security group."
+);

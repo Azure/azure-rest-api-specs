@@ -2,14 +2,13 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "../Common/main.tsp";
-import "../Common/NetworkInterface.tsp";
+import "./shared-models.tsp";
+import "./NetworkInterface.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Compute;
 

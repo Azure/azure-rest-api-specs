@@ -143,7 +143,7 @@ import "./ServiceGateway.tsp";
 import "./InterconnectGroup.tsp";
 import "./FirstPartyServiceTag.tsp";
 import "./AddressPrefixSet.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -151,7 +151,6 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using Common;
 /**
  * APIs to manage Microsoft Azure network resources.
  */
@@ -169,19 +168,16 @@ enum Versions {
   /**
    * The 2025-05-01 API version.
    */
-  @useDependency(Common.Versions.v2025_05_01)
   v2025_05_01: "2025-05-01",
 
   /**
    * The 2025-07-01 API version.
    */
-  @useDependency(Common.Versions.v2025_07_01)
   v2025_07_01: "2025-07-01",
 
   /**
    * The 2025-09-01 API version.
    */
-  @useDependency(Common.Versions.v2025_09_01)
   v2025_09_01: "2025-09-01",
 
   /**
@@ -195,6 +191,49 @@ enum Versions {
    */
   @useDependency(Common.Versions.v2026_03_01)
   v2026_03_01: "2026-03-01",
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+enum Features {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  applicationGateway,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  expressRoute,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  firewall,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  loadBalancer,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  networkGateway,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  networkManager,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  networkSecurityPerimeter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  networkWatcher,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  networkingOperations,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  virtualNetwork,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  virtualWAN,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  firewallPolicy,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  azureWebCategory,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  serviceGateway,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  virtualNetworkAppliance,
+
+  /** Interconnect group resource type for managing interconnect groups. */
+  interconnectGroup,
+
+  vmssNetworkConfiguration,
+  vmssPublicIPAddress,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  firstPartyServiceTag,
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

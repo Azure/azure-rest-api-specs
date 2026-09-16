@@ -3,13 +3,12 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 /**
@@ -23,7 +22,7 @@ namespace Microsoft.Network;
 @subscriptionResource
 @summary("ExpressRoutePorts Peering Location")
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model ExpressRoutePortsLocation extends Common.Resource {
+model ExpressRoutePortsLocation extends Resource {
   properties?: ExpressRoutePortsLocationPropertiesFormat;
 
   @visibility(Lifecycle.Read)
