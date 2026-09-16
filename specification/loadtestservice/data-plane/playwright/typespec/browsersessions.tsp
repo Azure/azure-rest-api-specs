@@ -110,9 +110,9 @@ model PatchRequestBrowserSession {
 model BrowserSessionArtifacts {
   @doc("Indicates whether artifact collection is enabled for the browser session. When specified in a create or update request, this value overrides the workspace-level recording setting for the session.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  enabled: boolean;
+  enabled: boolean = false;
 
-  @doc("The URL of the blob container that stores the artifacts for the browser session.")
+  @doc("The shared access signature (SAS) URL of the blob container that stores the artifacts for the browser session.")
   @visibility(Lifecycle.Read)
   containerUrl?: url;
 
@@ -124,7 +124,7 @@ model BrowserSessionArtifacts {
 @added(Versions.v2026_10_01_preview)
 @doc("An artifact uploaded for a browser session.")
 model BrowserSessionArtifact {
-  @doc("The URL of the uploaded artifact.")
+  @doc("The URL of the individual artifact in the blob container.")
   @visibility(Lifecycle.Read)
   url: url;
 
