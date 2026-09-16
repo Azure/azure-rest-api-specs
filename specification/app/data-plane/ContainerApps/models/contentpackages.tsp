@@ -17,7 +17,7 @@ namespace ContainerAppsSandbox {
     id: ContentPackageId;
 
     /** size value. */
-    size: Bytes;
+    size: int64;
 
     /** labels value. */
     labels: Record<string>;

@@ -43,7 +43,7 @@ model Sandbox {
 
   /** Cold-storage size assigned by the service. */
   @encodedName("application/json", "coldStorageSizeInMB")
-  coldStorageSizeInMb?: MegaBytes;
+  coldStorageSizeInMb?: int64;
 
   /** Ports exposed on the sandbox. */
   ports?: SandboxPort[];
@@ -1267,9 +1267,6 @@ union LogColumnRef {
   /** Serialized LogColumnRef value. */
   ContainerName: "ContainerName",
 }
-
-/** MegaBytes wire value. */
-scalar MegaBytes extends string;
 
 /** Kubernetes-style memory resource quantity string (e.g. "256Mi", "1Gi", "2048"). */
 scalar MemoryQuantity extends string;

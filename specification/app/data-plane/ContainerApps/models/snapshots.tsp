@@ -63,5 +63,5 @@ model Snapshot {
   /** Snapshot size assigned by the service. */
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "sizeInMB")
-  sizeInMb?: MegaBytes;
+  sizeInMb?: int64;
 }

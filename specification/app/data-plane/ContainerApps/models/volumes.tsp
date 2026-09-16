@@ -25,7 +25,7 @@ namespace ContainerAppsSandbox {
   /** BlobVolumeUsage wire model. */
   model BlobVolumeUsage {
     /** usedBytes value. */
-    usedBytes: Bytes;
+    usedBytes: int64;
 
     /** itemCount value. */
     itemCount: int64;
@@ -37,10 +37,10 @@ namespace ContainerAppsSandbox {
   /** DataDiskVolumeUsage wire model. */
   model DataDiskVolumeUsage {
     /** compressedBlobSizeBytes value. */
-    compressedBlobSizeBytes: Bytes;
+    compressedBlobSizeBytes: int64;
 
     /** usedSizeBytes value. */
-    usedSizeBytes: Bytes;
+    usedSizeBytes: int64;
 
     /** lastUploadedAtUtc value. */
     lastUploadedAtUtc: utcDateTime;
@@ -123,7 +123,7 @@ namespace ContainerAppsSandbox {
     isDirectory: boolean;
 
     /** sizeBytes value. */
-    sizeBytes?: Bytes;
+    sizeBytes?: int64;
 
     /** lastModifiedUtc value. */
     lastModifiedUtc?: utcDateTime;

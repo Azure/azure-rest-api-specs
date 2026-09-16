@@ -1,9 +1,6 @@
 using Rest;
 
 namespace ContainerAppsSandbox {
-  /** A strongly-typed blob URI (with or without SAS token). */
-  scalar BlobUri extends string;
-
   /** ContainerImageUrlWithTag wire model. */
   scalar ContainerImageUrlWithTag extends string;
 
@@ -32,7 +29,7 @@ namespace ContainerAppsSandbox {
 
     /** blobSourceUri value. */
     @secret
-    blobSourceUri: BlobUri;
+    blobSourceUri: url;
   }
 
   /** CreateDiskImageSourceRegistrySource wire model. */
@@ -120,7 +117,7 @@ namespace ContainerAppsSandbox {
     /** Disk-image size assigned by the service. */
     @visibility(Lifecycle.Read)
     @encodedName("application/json", "sizeInMB")
-    sizeInMb?: MegaBytes;
+    sizeInMb?: int64;
   }
 
   /** DiskImageStatus wire model. */
