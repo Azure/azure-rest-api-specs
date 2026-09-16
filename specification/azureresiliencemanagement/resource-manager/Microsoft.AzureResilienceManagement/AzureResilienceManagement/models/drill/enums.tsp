@@ -515,12 +515,3 @@ union FaultEligibility {
   /** The resource does not satisfy the normal fault inclusion policy. */
   Ineligible: "Ineligible",
 }
-
-/** Reason requiring attention in a regional resource's normal fault eligibility evaluation. */
-@added(Versions.v2026_09_30_preview)
-union FaultEligibilityAttentionReason {
-  string,
-
-  /** The resource is not included in the recovery plan required by its normal fault inclusion policy. */
-  ResourceNotIncludedInRecoveryPlan: "ResourceNotIncludedInRecoveryPlan",
-}

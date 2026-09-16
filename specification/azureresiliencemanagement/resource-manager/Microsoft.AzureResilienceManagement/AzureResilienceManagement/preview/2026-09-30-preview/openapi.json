@@ -7246,24 +7246,6 @@
         ]
       }
     },
-    "FaultEligibilityAttentionReason": {
-      "type": "string",
-      "description": "Reason requiring attention in a regional resource's normal fault eligibility evaluation.",
-      "enum": [
-        "ResourceNotIncludedInRecoveryPlan"
-      ],
-      "x-ms-enum": {
-        "name": "FaultEligibilityAttentionReason",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ResourceNotIncludedInRecoveryPlan",
-            "value": "ResourceNotIncludedInRecoveryPlan",
-            "description": "The resource is not included in the recovery plan required by its normal fault inclusion policy."
-          }
-        ]
-      }
-    },
     "FaultProperties": {
       "type": "object",
       "description": "Fault Properties",
@@ -9969,14 +9951,6 @@
               }
             ]
           }
-        },
-        "faultEligibilityAttentionReason": {
-          "type": "array",
-          "description": "Reasons for the regional resource's normal fault eligibility result.\nPublished together with faultEligibility: empty when Eligible and nonempty when Ineligible.\nOmitted until evaluated. Binding and permission errors are reported separately.",
-          "items": {
-            "$ref": "#/definitions/FaultEligibilityAttentionReason"
-          },
-          "readOnly": true
         }
       },
       "allOf": [
