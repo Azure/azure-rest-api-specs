@@ -55,8 +55,7 @@ interface VmmServers {
       ...Foundations.BaseParameters<VmmServer>;
       ...QueryForceDelete;
     },
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = VmmServer> &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
   /** List of VmmServers in a resource group. */
   @summary("Implements GET VmmServers in a resource group.")
