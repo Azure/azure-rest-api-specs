@@ -4310,10 +4310,9 @@ model DbAgentProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: DbAgentProvisioningState;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service returns null while an enable or disable operation is in progress."
   @doc("The time when the database agent configuration was last modified.")
   @visibility(Lifecycle.Read)
-  lastModifiedTime?: utcDateTime | null;
+  lastModifiedTime?: utcDateTime;
 }
 
 @doc("A request to enable or disable the database agent.")
