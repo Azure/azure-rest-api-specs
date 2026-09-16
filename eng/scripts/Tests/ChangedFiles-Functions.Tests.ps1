@@ -18,7 +18,8 @@ Describe "Get-ChangedCoreFiles" {
         @{ path = "eng/scripts/Get-TypeSpec-Folders.ps1" },
         @{ path = "specification/common-types/resource-management/v6/types.json" },
         @{ path = "package.json" },
-        @{ path = "package-lock.json" }
+        @{ path = "pnpm-lock.yaml" },
+        @{ path = "pnpm-workspace.yaml" }
     ) {
         @(Get-ChangedCoreFiles @($path)) | Should -Be @($path)
     }
@@ -26,10 +27,11 @@ Describe "Get-ChangedCoreFiles" {
     It "preserves core changes in a mixed lease and core-file change" {
         $changedFiles = @(
             ".github/arm-leases/containerregistry/Microsoft.ContainerRegistry/Workflow/lease.yaml",
-            "package-lock.json"
+            "pnpm-lock.yaml",
+            "pnpm-workspace.yaml"
         )
 
-        @(Get-ChangedCoreFiles $changedFiles) | Should -Be @("package-lock.json")
+        @(Get-ChangedCoreFiles $changedFiles) | Should -Be @("pnpm-lock.yaml", "pnpm-workspace.yaml")
     }
 
     It "preserves scoped spec selection in a mixed lease and TypeSpec change" {
