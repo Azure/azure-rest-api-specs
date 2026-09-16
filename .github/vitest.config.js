@@ -14,7 +14,7 @@ export default defineConfig({
         ...(configDefaults.coverage.exclude ?? []),
 
         // Config files (not in defaults)
-        "**/eslint*.config.{js,ts}",
+        "**/eslint*.config.js",
 
         // Not worth testing CLI code
         "**/cmd/**",

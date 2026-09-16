@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
+import { execFile } from "../../../shared/src/exec.ts";
 import { parseCommentTable } from "../../src/package-name-approval/post-results.js";
 
 // Import only the pure functions we can test without heavy mocking
@@ -13,11 +14,11 @@ vi.mock("fs/promises", () => ({
   unlink: vi.fn(),
 }));
 
-vi.mock("../../../../shared/src/exec.js", () => ({
+vi.mock("../../../shared/src/exec.ts", () => ({
   execFile: vi.fn(),
 }));
 
-vi.mock("../../../../shared/src/github.js", () => ({
+vi.mock("../../../shared/src/github.ts", () => ({
   PER_PAGE_MAX: 100,
 }));
 
@@ -31,6 +32,10 @@ vi.mock("../../src/context.js", () => ({
 }));
 
 describe("post-results", () => {
+  it("mocks the shared TypeScript execution helper", () => {
+    expect(vi.isMockFunction(execFile)).toBe(true);
+  });
+
   describe("parseCommentTable", () => {
     it("should extract language, package name, and pending status from table rows", () => {
       const body = [

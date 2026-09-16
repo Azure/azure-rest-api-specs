@@ -3,10 +3,13 @@ import { defineConfig } from "eslint/config";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
-export function defineBaseConfig(options: {
-  projectService?: boolean | object;
-  tsconfigRootDir: string;
-}): import("eslint").Linter.Config[] {
+/**
+ * @param {object} options
+ * @param {boolean|object} [options.projectService]
+ * @param {string} options.tsconfigRootDir
+ * @returns {import('eslint').Linter.Config[]}
+ */
+export function defineBaseConfig(options) {
   const { projectService = true, tsconfigRootDir } = options;
 
   return defineConfig(

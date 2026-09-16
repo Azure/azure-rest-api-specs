@@ -1,4 +1,4 @@
-import { defineBaseConfig } from "./eslint.base.config.ts";
+import { defineBaseConfig } from "./eslint.base.config.js";
 
 export default defineBaseConfig({
   // ensures the tsconfig path resolves relative to this file (so cannot be defined in base file)

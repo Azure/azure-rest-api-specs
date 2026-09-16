@@ -15,13 +15,13 @@ applyTo:
 
 ## Shared package TypeScript migration
 
-`.github/shared` uses TypeScript, including its source, tests, CLI, benchmarks, and configuration.
-The JavaScript/JSDoc rules below apply only to workflow code outside that package.
+`.github/shared` uses TypeScript for its source, tests, CLI, benchmarks, and Vitest configuration.
+ESLint configurations remain JavaScript for now, including the shared base configuration.
+The JavaScript/JSDoc rules below apply to workflow code outside that package and to ESLint configs.
 For shared code, use `.ts` files, native type annotations, `import type`, and `.ts` relative imports.
 Node.js 24 runs the sources with native type stripping; `tsc` uses `noEmit`, `erasableSyntaxOnly`,
 and `verbatimModuleSyntax`. Do not introduce enums, parameter properties, or namespaces.
-Keep comments for documentation, not types. ESLint scripts use
-`--flag unstable_native_nodejs_ts_config` to load TypeScript configs without an extra loader.
+Keep comments for documentation, not types, except in the JavaScript ESLint configurations.
 See [the shared package guide](../shared/readme.md) for its development conventions.
 
 This file provides instructions for GitHub Copilot when working with GitHub Actions code in this repository. The GitHub Actions infrastructure is completely separate from the TypeSpec and OpenAPI specification work that makes up the majority of this repository.

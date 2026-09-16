@@ -8,7 +8,7 @@
     "./breaking-change": "./src/breaking-change.ts",
     "./changed-files": "./src/changed-files.ts",
     "./console": "./src/console.ts",
-    "./eslint-base-config": "./eslint.base.config.ts",
+    "./eslint-base-config": "./eslint.base.config.js",
     "./exec": "./src/exec.ts",
     "./git": "./src/git.ts",
     "./github": "./src/github.ts",
@@ -69,7 +69,7 @@
   "scripts": {
     "check": "pnpm test:ci && pnpm lint && pnpm format:check",
     "lint": "pnpm lint:eslint && pnpm lint:tsc",
-    "lint:eslint": "cross-env DEBUG=eslint:eslint,eslint:linter eslint --flag unstable_native_nodejs_ts_config",
+    "lint:eslint": "cross-env DEBUG=eslint:eslint,eslint:linter eslint",
     "lint:tsc": "tsc --build --verbose",
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",

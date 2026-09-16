@@ -175,8 +175,8 @@ Single source of truth for breaking-change and versioning approval label names a
 ├── test/     # Vitest unit tests + fixtures and test helpers
 ├── package.json        # Subpath "exports", "bin", scripts, dependencies
 ├── tsconfig.json       # Type-checking config (lint:tsc)
-├── eslint.base.config.ts # Shared ESLint config, exported as eslint-base-config
-├── eslint.config.ts    # Package ESLint config
+├── eslint.base.config.js # Shared ESLint config, exported as eslint-base-config
+├── eslint.config.js    # Package ESLint config
 └── vitest.config.ts    # Test + coverage config
 ```
 
@@ -191,8 +191,9 @@ Conventions:
 - Use `.ts` files with native TypeScript declarations, `.ts` relative imports, and `import type`
   for type-only dependencies. There is no emit/build step; `tsc` only checks types.
 - Use erasable syntax compatible with Node.js type stripping: no enums, parameter properties, or
-  namespaces. ESLint uses `--flag unstable_native_nodejs_ts_config` to load its TypeScript config
-  without adding a loader dependency.
+  namespaces.
+- ESLint configurations remain JavaScript with JSDoc typing. They are type-checked alongside the
+  TypeScript sources and do not require an experimental ESLint flag or loader dependency.
 - Runtime dependencies are kept to an absolute minimum (ideally zero transitive dependencies) for
   performance, and must be a subset of the parent [`../package.json`](../package.json).
 
