@@ -65,7 +65,7 @@ const METADATA_LANG_MAP = {
  *
  * @param {string} tspConfigDir - Absolute path to the directory containing tspconfig.yaml
  * @param {string} entrypoint - Absolute path to the TypeSpec entrypoint
- * @param {import("@actions/core")} core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} core
  * @returns {Promise<EmitterResult>}
  */
 async function runMetadataEmitter(tspConfigDir, entrypoint, core) {
@@ -149,7 +149,7 @@ function findTypeSpecEntrypoint(tspConfigDir) {
  *
  * @param {string} file - Relative path to tspconfig.yaml from repo root
  * @param {string} baseRefDir - Absolute path to the base branch checkout directory
- * @param {import("@actions/core")} core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} core
  * @returns {Promise<EmitterResult | null>} Null if base version doesn't exist or compile fails
  */
 async function compileBaseVersion(file, baseRefDir, core) {
@@ -183,7 +183,7 @@ async function compileBaseVersion(file, baseRefDir, core) {
  * @param {Record<string, string>} prPackageNames - Package names from PR head
  * @param {Record<string, string>} prNamespaces - Namespaces from PR head
  * @param {EmitterResult | null} baseResult - Emitter result from base branch (null = all new)
- * @param {import("@actions/core")} core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} core
  * @returns {{ packageNames: Record<string, string>, namespaces: Record<string, string> }}
  */
 function filterUnchanged(prPackageNames, prNamespaces, baseResult, core) {

@@ -119,7 +119,9 @@ From `package.json` comments:
 - **Runtime dependencies**: Must be kept to an absolute minimum for performance
 - **Transitive dependencies**: Ideally zero transitive dependencies for runtime
 - **Relationship**: `.github/package.json` must be a superset of `.github/shared/package.json`
-- **Updates**: When updating dependencies, update both files if the dependency is shared
+- **Versions**: Every external dependency uses `"catalog:"`, with its version defined once in the root `pnpm-workspace.yaml`. Internal packages use `"workspace:*"`.
+- **Updates**: Update the catalog entry to upgrade all consumers together. When adding a dependency to shared utilities, also add its `"catalog:"` reference to `.github/package.json`.
+- **Injected toolkit types**: Type the `core` parameter supplied by `actions/github-script` as `import("@actions/github-script").AsyncFunctionArguments["core"]`, not the separately installed `@actions/core`, whose version can differ from the action runtime.
 
 ### Key Dependencies
 
@@ -283,10 +285,10 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 
 ### Updating Dependencies
 
-1. Update `.github/package.json` (root)
-2. If dependency is used in shared utilities, update `.github/shared/package.json`
+1. Update the dependency's version in the root `pnpm-workspace.yaml` catalog.
+2. Keep `"catalog:"` references in `.github/package.json` and `.github/shared/package.json`. For a new dependency, add its catalog entry and the corresponding manifest references; `.github/package.json` must remain a superset of shared utilities.
 3. Run `pnpm install` once from the **repo root** — `.github` and `.github/shared` are pnpm workspace packages, so a single install updates the single root `pnpm-lock.yaml` for the whole workspace.
-4. Commit all modified `package.json` files and the root `pnpm-lock.yaml`
+4. Commit the root `pnpm-workspace.yaml`, `pnpm-lock.yaml`, and any modified `package.json` files.
 5. Test with `pnpm run check` in both directories
 
 ### Node.js Version Management

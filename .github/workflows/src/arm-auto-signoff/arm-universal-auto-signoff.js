@@ -46,7 +46,7 @@ export default async function getLabelAction({ github, context, core }) {
  * @param {string} params.head_sha
  * @param {number} params.issue_number
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
- * @param {typeof import("@actions/core")} params.core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} params.core
  * @returns {Promise<{headSha: string, issueNumber: number, labelActions: ManagedLabelActions}>}
  */
 export async function getLabelActionImpl({ owner, repo, head_sha, issue_number, github, core }) {
@@ -109,7 +109,7 @@ export async function getLabelActionImpl({ owner, repo, head_sha, issue_number, 
  * @param {string[]} params.labelNames
  * @param {boolean} params.hasAutoSignoff
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
- * @param {typeof import("@actions/core")} params.core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} params.core
  * @returns {Promise<LabelAction>}
  */
 async function getDesiredLabelAction({

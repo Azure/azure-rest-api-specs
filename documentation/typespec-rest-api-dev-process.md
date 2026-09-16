@@ -44,6 +44,13 @@ If you are developing within your own ADO repo first and then submitting into `a
      pnpm tsp --version
   ```
 
+- External dependencies for the root, `.github`, and `eng/tools` workspace packages use
+ `catalog:` in `package.json`. Their versions are defined once in the `catalog` section of
+ `pnpm-workspace.yaml`; update that entry and run `pnpm install` from the repository root
+ to upgrade a dependency everywhere. Keep internal package references as `workspace:*`.
+ `catalogMode: strict` makes `pnpm add` reuse the catalog and reject conflicting versions.
+ API examples and upstream-managed packages under `eng/common` are not workspace members.
+
 - One-time set up: Install TypeSpec VisualStudio or VS Code extensions to get syntex highlighting, tool tips in IDE:
   
   ```npm

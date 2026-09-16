@@ -46,7 +46,7 @@ export function parseExistingComments(comments, commentGroupName) {
  *
  *
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
- * @param {typeof import("@actions/core")} core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} core
  * @param {string} owner - The repository owner.
  * @param {string} repo - The repository name.
  * @param {number} issue_number - The issue or pull request number.

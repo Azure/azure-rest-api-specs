@@ -28,7 +28,7 @@ import { fetchWithRetry } from "./retries.js";
  * @param {string} params.ado_project_url
  * @param {string} params.artifactName
  * @param {string} params.artifactFileName
- * @param {typeof import("@actions/core")} params.core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} params.core
  * @param {import('./retries.js').RetryOptions} [params.retryOptions]
  * @param {boolean} [params.fallbackToFailedArtifact]
  * @param {string} [params.token]
@@ -140,7 +140,7 @@ export function getAdoBuildInfoFromUrl(buildUrl) {
  * @param {string} params.ado_build_id
  * @param {string} params.ado_project_url
  * @param {string} params.artifactName
- * @param {typeof import("@actions/core")} params.core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} params.core
  * @param {import('./retries.js').RetryOptions} [params.retryOptions]
  * @param {Object} [params.headers]
  * @returns {Promise<Response>}
