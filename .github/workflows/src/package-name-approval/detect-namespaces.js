@@ -64,10 +64,11 @@ const METADATA_LANG_MAP = {
  * package names and namespaces for all configured languages.
  *
  * @param {string} tspConfigDir - Absolute path to the directory containing tspconfig.yaml
+ * @param {string} entrypoint - Absolute path to the TypeSpec entrypoint
  * @param {import("@actions/core")} core
  * @returns {Promise<EmitterResult>}
  */
-async function runMetadataEmitter(tspConfigDir, core) {
+async function runMetadataEmitter(tspConfigDir, entrypoint, core) {
   /** @type {Record<string, string>} */
   const packageNames = {};
   /** @type {Record<string, string>} */
@@ -79,7 +80,7 @@ async function runMetadataEmitter(tspConfigDir, core) {
   const tspArgs = [
     "tsp",
     "compile",
-    tspConfigDir,
+    entrypoint,
     "--emit",
     "@azure-tools/typespec-metadata",
     "--output-dir",
@@ -122,6 +123,22 @@ async function runMetadataEmitter(tspConfigDir, core) {
   return { packageNames, namespaces, isMgmt, isDataPlane };
 }
 
+/**
+ * Prefer the standard project entrypoint, then fall back to an SDK client entrypoint.
+ *
+ * @param {string} tspConfigDir - Absolute path to the directory containing tspconfig.yaml
+ * @returns {string | null}
+ */
+function findTypeSpecEntrypoint(tspConfigDir) {
+  for (const filename of ["main.tsp", "client.tsp"]) {
+    const entrypoint = join(tspConfigDir, filename);
+    if (existsSync(entrypoint)) {
+      return entrypoint;
+    }
+  }
+  return null;
+}
+
 // ---------------------------------------------------------------------------
 // Base branch compilation
 // ---------------------------------------------------------------------------
@@ -143,9 +160,15 @@ async function compileBaseVersion(file, baseRefDir, core) {
   }
 
   const baseTspConfigDir = dirname(baseTspConfigPath);
+  const entrypoint = findTypeSpecEntrypoint(baseTspConfigDir);
+  if (!entrypoint) {
+    core.warning(`No main.tsp or client.tsp found for base version of ${file}, treating as new`);
+    return null;
+  }
+
   try {
     core.info(`Compiling base branch version: ${file}`);
-    return await runMetadataEmitter(baseTspConfigDir, core);
+    return await runMetadataEmitter(baseTspConfigDir, entrypoint, core);
   } catch (e) {
     core.warning(
       `Failed to compile base version of ${file}: ${/** @type {Error} */ (e).message}, treating as new`,
@@ -231,16 +254,34 @@ export default async function detectNamespaces({ context, core }) {
   const packageNamesFound = {};
   /** @type {Record<string, string>} */
   const namespacesFound = {};
+  /** @type {Record<string, string>} */
+  const allConfiguredPackageNames = {};
+  /** @type {Record<string, string>} */
+  const allConfiguredNamespaces = {};
   let isMgmt = false;
   let isDataPlane = false;
 
   for (const { file, basePath } of changedTspconfigs) {
     const tspConfigDir = dirname(join(cwd, file));
+    const entrypoint = findTypeSpecEntrypoint(tspConfigDir);
+    if (!entrypoint) {
+      core.warning(
+        `Skipping package name detection for ${file}: no main.tsp or client.tsp found in its directory`,
+      );
+      continue;
+    }
+
     core.info(`Running typespec-metadata emitter for: ${file}`);
 
-    const prResult = await runMetadataEmitter(tspConfigDir, core);
+    const prResult = await runMetadataEmitter(tspConfigDir, entrypoint, core);
     if (prResult.isMgmt) isMgmt = true;
     if (prResult.isDataPlane) isDataPlane = true;
+
+    // Track ALL configured package names from PR head (before filtering).
+    // Used by post-results.js to distinguish "configured but unchanged" from
+    // "not configured at all" when showing Tier 1 language approval table.
+    Object.assign(allConfiguredPackageNames, prResult.packageNames);
+    Object.assign(allConfiguredNamespaces, prResult.namespaces);
 
     // Compile base branch version for comparison (uses same emitter mechanism)
     const baseResult = basePath ? await compileBaseVersion(basePath, baseRefDir, core) : null;
@@ -280,6 +321,8 @@ export default async function detectNamespaces({ context, core }) {
   const results = {
     namespacesFound: packageNamesFound,
     namespaces: namespacesFound,
+    allConfiguredPackageNames,
+    allConfiguredNamespaces,
     formatResults,
     isMgmt,
     isDataPlane,

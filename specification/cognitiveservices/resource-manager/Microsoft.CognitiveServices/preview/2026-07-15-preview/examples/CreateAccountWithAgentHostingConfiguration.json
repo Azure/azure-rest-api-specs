@@ -1,0 +1,148 @@
+{
+  "operationId": "Accounts_Create",
+  "parameters": {
+    "account": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/account-control-plane": {}
+        }
+      },
+      "kind": "AIServices",
+      "location": "West US",
+      "properties": {
+        "agentHostingConfigurations": [
+          {
+            "name": "default",
+            "hostingType": "ManagedCluster",
+            "hostingManagementIdentityResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/account-control-plane",
+            "workloadIdentityResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/aks-workload",
+            "clusterResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/cluster1",
+            "storageAccountResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/storage1"
+          }
+        ]
+      },
+      "sku": {
+        "name": "S0"
+      }
+    },
+    "accountName": "foundryByocAccount",
+    "api-version": "2026-07-15-preview",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "title": "Create a Foundry account with customer-owned AKS hosting",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "foundryByocAccount",
+        "type": "Microsoft.CognitiveServices/accounts",
+        "etag": "W/\"datetime'2026-08-05T03%3A00%3A00.0000000Z'\"",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/foundryByocAccount",
+        "identity": {
+          "type": "UserAssigned",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/account-control-plane": {
+              "principalId": "b5cf119e-a5c2-42c7-802f-592e0efb169f",
+              "clientId": "2f7ee82a-3d7f-4a7f-b8de-3c43ad9478a2"
+            }
+          }
+        },
+        "kind": "AIServices",
+        "location": "West US",
+        "properties": {
+          "endpoint": "https://foundrybyocaccount.cognitiveservices.azure.com/",
+          "provisioningState": "Succeeded",
+          "agentHostingConfigurations": [
+            {
+              "name": "default",
+              "hostingType": "ManagedCluster",
+              "hostingManagementIdentityResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/account-control-plane",
+              "workloadIdentityResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/aks-workload",
+              "clusterResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/cluster1",
+              "storageAccountResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/storage1"
+            }
+          ]
+        },
+        "sku": {
+          "name": "S0"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "foundryByocAccount",
+        "type": "Microsoft.CognitiveServices/accounts",
+        "etag": "W/\"datetime'2026-08-05T03%3A00%3A00.0000000Z'\"",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/foundryByocAccount",
+        "identity": {
+          "type": "UserAssigned",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/account-control-plane": {
+              "principalId": "b5cf119e-a5c2-42c7-802f-592e0efb169f",
+              "clientId": "2f7ee82a-3d7f-4a7f-b8de-3c43ad9478a2"
+            }
+          }
+        },
+        "kind": "AIServices",
+        "location": "West US",
+        "properties": {
+          "endpoint": "https://foundrybyocaccount.cognitiveservices.azure.com/",
+          "provisioningState": "Succeeded",
+          "agentHostingConfigurations": [
+            {
+              "name": "default",
+              "hostingType": "ManagedCluster",
+              "hostingManagementIdentityResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/account-control-plane",
+              "workloadIdentityResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/aks-workload",
+              "clusterResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/cluster1",
+              "storageAccountResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/storage1"
+            }
+          ]
+        },
+        "sku": {
+          "name": "S0"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "foundryByocAccount",
+        "type": "Microsoft.CognitiveServices/accounts",
+        "etag": "W/\"datetime'2026-08-05T03%3A00%3A00.0000000Z'\"",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/foundryByocAccount",
+        "identity": {
+          "type": "UserAssigned",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/account-control-plane": {
+              "principalId": "b5cf119e-a5c2-42c7-802f-592e0efb169f",
+              "clientId": "2f7ee82a-3d7f-4a7f-b8de-3c43ad9478a2"
+            }
+          }
+        },
+        "kind": "AIServices",
+        "location": "West US",
+        "properties": {
+          "endpoint": "https://foundrybyocaccount.cognitiveservices.azure.com/",
+          "provisioningState": "Succeeded",
+          "agentHostingConfigurations": [
+            {
+              "name": "default",
+              "hostingType": "ManagedCluster",
+              "hostingManagementIdentityResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/account-control-plane",
+              "workloadIdentityResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/aks-workload",
+              "clusterResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/cluster1",
+              "storageAccountResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/storage1"
+            }
+          ]
+        },
+        "sku": {
+          "name": "S0"
+        }
+      }
+    }
+  }
+}

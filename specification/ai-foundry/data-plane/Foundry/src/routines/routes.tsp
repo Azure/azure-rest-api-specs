@@ -17,7 +17,7 @@ interface Routines {
   @route("/routines/{routine_name}")
   @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
   createOrUpdateRoutine is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.routines_v1_preview,
+    FoundryFeaturesOptInKeys.routines_v2_preview,
     CreateOrUpdateRoutineParameters,
     Routine
   >;
@@ -30,7 +30,7 @@ interface Routines {
   @route("/routines/{routine_name}")
   @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
   getRoutine is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.routines_v1_preview,
+    FoundryFeaturesOptInKeys.routines_v2_preview,
     GetRoutineParameters,
     Routine
   >;
@@ -43,7 +43,7 @@ interface Routines {
   @route("/routines/{routine_name}:enable")
   @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
   enableRoutine is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.routines_v1_preview,
+    FoundryFeaturesOptInKeys.routines_v2_preview,
     EnableRoutineParameters,
     Routine
   >;
@@ -56,7 +56,7 @@ interface Routines {
   @route("/routines/{routine_name}:disable")
   @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
   disableRoutine is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.routines_v1_preview,
+    FoundryFeaturesOptInKeys.routines_v2_preview,
     DisableRoutineParameters,
     Routine
   >;
@@ -70,9 +70,9 @@ interface Routines {
   @route("/routines")
   @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
   listRoutines is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.routines_v1_preview,
+    FoundryFeaturesOptInKeys.routines_v2_preview,
     ListRoutinesParameters,
-    AgentsPagedResult<Routine>
+    PagedResultWithNextLink<Routine>
   >;
 
   /** Deletes the specified routine. */
@@ -83,7 +83,7 @@ interface Routines {
   @route("/routines/{routine_name}")
   @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
   deleteRoutine is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.routines_v1_preview,
+    FoundryFeaturesOptInKeys.routines_v2_preview,
     DeleteRoutineParameters,
     NoContentResponse
   >;
@@ -97,9 +97,9 @@ interface Routines {
   @route("/routines/{routine_name}/runs")
   @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
   listRoutineRuns is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.routines_v1_preview,
+    FoundryFeaturesOptInKeys.routines_v2_preview,
     ListRoutineRunsParameters,
-    AgentsPagedResult<RoutineRun>
+    PagedResultWithNextLink<RoutineRun>
   >;
 
   /** Queues an asynchronous dispatch for the specified routine. */
@@ -110,7 +110,7 @@ interface Routines {
   @route("/routines/{routine_name}:dispatch_async")
   @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
   dispatchRoutineAsync is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.routines_v1_preview,
+    FoundryFeaturesOptInKeys.routines_v2_preview,
     DispatchRoutineAsyncParameters,
     DispatchRoutineResponse
   >;

@@ -227,10 +227,66 @@ describe("detect-namespaces (dual tsp compile)", () => {
     expect(core.setOutput).not.toHaveBeenCalled();
   });
 
+  it("should fall back to client.tsp when main.tsp is absent", async () => {
+    core = createMockCore();
+    context = createMockContext();
+    context.payload = { pull_request: { number: 46 }, action: "opened" };
+    const file = "specification/ai/HealthInsights/HealthInsights.RadiologyInsights/tspconfig.yaml";
+    mockFileStatuses([file]);
+
+    execFileMock.mockClear();
+    existsSyncMock.mockImplementation(
+      (/** @type {string} */ path) =>
+        !(path.includes("HealthInsights.RadiologyInsights") && path.endsWith("main.tsp")),
+    );
+    readFileMock.mockResolvedValue(
+      makeMetadataJson(
+        {
+          csharp: [
+            {
+              packageName: "Azure.Health.Insights.RadiologyInsights",
+              namespace: "Azure.Health.Insights.RadiologyInsights",
+            },
+          ],
+        },
+        "data",
+      ),
+    );
+
+    await detectNamespaces(args());
+
+    expect(execFileMock).toHaveBeenCalledTimes(2);
+    for (const call of execFileMock.mock.calls) {
+      expect(call[1][2]).toMatch(/[/\\]client\.tsp$/);
+    }
+    expect(core.setOutput).not.toHaveBeenCalled();
+  });
+
+  it("should skip a tspconfig whose directory has no supported entrypoint", async () => {
+    core = createMockCore();
+    context = createMockContext();
+    context.payload = { pull_request: { number: 47 }, action: "opened" };
+    const file = "specification/test/ClientOptions/tspconfig.yaml";
+    mockFileStatuses([file]);
+
+    execFileMock.mockClear();
+    existsSyncMock.mockImplementation(
+      (/** @type {string} */ path) => !(path.endsWith("main.tsp") || path.endsWith("client.tsp")),
+    );
+
+    await detectNamespaces(args());
+
+    expect(execFileMock).not.toHaveBeenCalled();
+    expect(core.warning).toHaveBeenCalledWith(
+      `Skipping package name detection for ${file}: no main.tsp or client.tsp found in its directory`,
+    );
+    expect(core.setOutput).not.toHaveBeenCalled();
+  });
+
   it("should filter unchanged package names using dual tsp compile", async () => {
     core = createMockCore();
     context = createMockContext();
-    context.payload = { pull_request: { number: 47 }, action: "synchronize" };
+    context.payload = { pull_request: { number: 48 }, action: "synchronize" };
     const file = "specification/compute/Compute.Management/tspconfig.yaml";
     mockFileStatuses([file]);
 
