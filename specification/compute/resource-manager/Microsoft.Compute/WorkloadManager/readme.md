@@ -15,6 +15,11 @@ title: WorkloadManagerManagementClient
 description: The Workload Manager resource management API.
 openapi-type: arm
 tag: package-2026-11-01-preview
+
+suppressions:
+  - code: OperationsAPIImplementation
+    reason: The Microsoft.Compute operations API is defined in the central Compute service specification and is not duplicated in this split subservice.
+    from: WorkloadManager.json
 ```
 
 ### Tag: package-2026-11-01-preview
