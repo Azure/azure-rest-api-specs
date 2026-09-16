@@ -4419,17 +4419,10 @@ model VectorEmbedding {
   embeddingSource?: EmbeddingSource;
 }
 
-/**
- * Represents the embedding source configuration for Integrated Embeddings.
- * When specified on a vector embedding, the service will automatically generate embeddings from source document fields.
- */
+/** Represents the embedding source configuration for Integrated Embeddings. When specified on a vector embedding, the service will automatically generate embeddings from source document fields. */
 @added(Versions.v2026_09_01_preview)
 model EmbeddingSource {
-  /**
-   * The non-empty list of top-level source paths in the document to generate
-   * embeddings from. A source path cannot be the same as the destination vector
-   * embedding path.
-   */
+  /** The non-empty list of top-level source paths in the document to generate embeddings from. A source path cannot be the same as the destination vector embedding path. */
   @minItems(1)
   sourcePaths: string[];
 
