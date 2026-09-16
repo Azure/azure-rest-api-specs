@@ -42,11 +42,59 @@ These precedents do not replace ARM review of Chaos lifecycle behavior.
 | PATCH with an empty CMK object | Retain an existing URL. Reject the request if no valid URL exists after merging. |
 | PATCH with only a null key URL | Reject the resulting CMK object without a URL. This is not removal of CMK. |
 
-The service merges PATCH with stored writable fields, then validates the complete
-result before it changes any resource or starts encryption work. In particular,
+The service merges PATCH with stored writable fields, then validates the syntax
+and completeness of the result before accepting the operation. Remote tenant
+verification is the first stage of the existing configuration LRO, as described
+below. In particular,
 deleting the key URL while its CMK object remains is invalid. An empty patch is
 not a request to reset encryption. Read-only `customerManagedKeyOnboarding` and
 `status` inputs are ignored.
+
+### Tenant verification
+
+The key vault must belong to the same Microsoft Entra tenant as the Workspace.
+Syntax, trusted cloud vault host, and key path are checked before acceptance.
+For an operation that supplies a customer key, tenant discovery is the first
+remote stage of the existing Workspace LRO. The operation can retain its input,
+but requested encryption state is not persisted until the tenant matches.
+No Azure Storage configuration or customer-data change occurs before that match.
+
+The service sends a credential-free HTTPS request to the validated Key Vault
+endpoint and reads the cloud authority and tenant from its documented
+`401 WWW-Authenticate` challenge. It compares this tenant with the persisted
+Workspace tenant. It does not obtain a token, make an authenticated retry,
+follow an arbitrary redirect, or fetch a URL from the challenge.
+This verifies tenant routing, not consent, key existence, grants, or key access.
+
+| Discovery result | Existing LRO result |
+| --- | --- |
+| Deterministic tenant mismatch or permanently invalid/non-verifiable endpoint | `Failed` with `InvalidEncryptionConfiguration`, targeting `properties.encryption.customerManagedKeyEncryption.keyEncryptionKeyUrl`. Correct the key URL or use a vault in the Workspace tenant. |
+| Transient timeout, throttling, or dependency 5xx | `Failed` with `EncryptionConfigurationFailed` and retry guidance. Honor `Retry-After` when provided. |
+
+Do not expose expected or observed tenant IDs in errors. An unknown tenant is
+not a match. Discovery failure leaves desired encryption, the active binding,
+and observed protection unchanged. It is reported through the existing
+operation-result error, not as a retrospective HTTP 400 from a status GET.
+Removal without a desired customer key does not require tenant discovery.
+
+For example, a tenant mismatch is reported by operation-status GET with HTTP
+200 and this body:
+
+```json
+{
+  "status": "Failed",
+  "error": {
+    "code": "InvalidEncryptionConfiguration",
+    "message": "The key vault belongs to a different Microsoft Entra tenant than this Workspace. Use a key vault in the Workspace tenant.",
+    "target": "properties.encryption.customerManagedKeyEncryption.keyEncryptionKeyUrl"
+  }
+}
+```
+
+A transient discovery failure uses the same envelope with
+`EncryptionConfigurationFailed` and the message: "Key vault tenant verification
+is temporarily unavailable. Retry the Workspace request after the indicated
+retry interval. No encryption or customer-data changes were made."
 
 The PATCH model uses `TypeSpec.Http.MergePatchUpdate<T>` on separate optional,
 default-free fields. Three property-scoped `no-nullable` suppressions permit
@@ -74,12 +122,33 @@ is suppressed.
 `customerManagedKeyEncryption.keyEncryptionKeyUrl` is the last accepted
 customer key, not proof that it protects active data. The read-only
 `customerManagedKeyOnboarding.applicationId` identifies the service application
-for customer consent. It is available before enrollment, including on a
+for customer consent. It is returned for existing Workspaces before enrollment, including on a
 Microsoft-managed Workspace. It is not a service principal object ID or a
 customer-supplied identity selector. The Workspace's top-level identity serves
 other features and does not select Storage CMK identity.
 No internal identity, storage account, scope, or anchor identifiers are exposed.
 There is no public `infrastructureEncryption` switch.
+
+### Onboarding before creation or enrollment
+
+For an existing Microsoft-managed Workspace, GET returns
+`customerManagedKeyOnboarding.applicationId` before enrollment, as shown in
+`Workspaces_Get_EncryptionNotConfigured.json`. Install or consent to that
+application and grant its local service principal access to the customer key,
+then use the PATCH in `Workspaces_Update_EnableCustomerKey.json`.
+
+To create a Workspace with customer-managed protection directly, first obtain
+the application name and client ID for the target cloud from the service
+onboarding documentation or Portal configuration. Consent and grant key access
+before sending the full PUT in `Workspaces_CreateOrUpdate_WithCustomerKey.json`.
+No temporary Microsoft-managed Workspace or failed create is needed.
+GET after creation must return that same application ID. The existing GET and
+born-CMK examples use the same illustrative ID; it is not a deployment constant.
+
+Published onboarding values, Portal deployment configuration, and the runtime
+GET value must come from the same service configuration. The application ID is
+not the customer-tenant service principal's object ID. No discovery API or
+customer-selectable encryption identity is added.
 
 The read-only `status` object contains `state`, optional `observedProtection`,
 optional `observedKeyEncryptionKeyUrl`, optional `lastCheckedAt`, and optional
@@ -105,8 +174,9 @@ an empty `202` with `Location`; its final result is the Workspace. Poll with the
 existing operation endpoints.
 
 An identical request with `Applied` status succeeds without a new operation.
-While a configuration operation runs, the existing Workspace conflict response
-applies, including for an identical request. After terminal failure, a valid
+While a configuration operation runs, HTTP 409 with the existing Workspace
+conflict code is required, including for an identical request. Returning the
+same operation is not an alternative. After terminal failure, a valid
 Workspace update can retry or replace the key. No repair or cancellation action
 is required.
 
@@ -121,16 +191,31 @@ available for at least 24 hours after rotation. Do not assume immediate adoption
 of a new version. Customer-key protection applies to active data; it does not
 retroactively protect retained pre-enable copies.
 
+### Workspace deletion
+
+Deletion uses the existing Workspace DELETE LRO. It closes admission for new
+customer-data writers and waits for previously admitted writers to finish
+before deleting their data. A timeout or uncertain drain is not successful
+deletion. The existing operation result reports completion or failure; there is
+no new deletion error code, drain field, route, or permission.
+Deletion failure is not an encryption-health observation. Existing retention
+and teardown rules still apply, and DELETE remains available through older
+supported API versions.
+
 ### Errors and older clients
 
 Errors use the existing Azure Resource Manager `ErrorResponse` envelope.
-Accepted-operation failures also appear in the operation result and
-`encryption.status.error`. These codes do not add routes or permissions.
+Accepted-operation failures appear in the operation result. Configuration or
+health failures after tenant verification can also appear in
+`encryption.status.error`; discovery failure leaves observed protection
+unchanged. These codes do not add routes or permissions.
 
 | HTTP status or result | Code | Corrective action |
 | --- | --- | --- |
 | 400 | `InvalidEncryptionConfiguration` | Supply a valid versionless key URL in a present CMK object, or correct the merged PATCH setting. No mutation occurs. |
 | 400 | `EncryptionNotSupportedForWorkspace` | Use a Workspace that supports customer-managed encryption. |
+| Failed tenant-discovery operation | `InvalidEncryptionConfiguration` | Correct the invalid/non-verifiable endpoint or use a vault in the Workspace tenant. No tenant IDs are disclosed. |
+| Failed tenant-discovery operation | `EncryptionConfigurationFailed` | Retry after a transient dependency failure; honor `Retry-After` when provided. No encryption or customer-data change occurred. |
 | 409 | Existing Workspace conflict code | Wait for the current operation to finish before another configuration request. |
 | 409 | `CmkEnrollmentDisabled` | New enrollment is unavailable. Retry when enrollment is available; existing key management remains supported. |
 | 503 | `CmkCapacityUnavailable` | Service capacity is unavailable. Retry later. |
@@ -212,6 +297,10 @@ Before customer activation, service and SDK tests must establish these results:
 | Concurrent enrollment and old-version PUT | No stale-state bypass of the compatibility check. |
 | Corrected GA template after enrollment | Succeed with the complete desired encryption setting. |
 | Invalid merged PATCH or invalid PUT | Return 400 before persistence or storage work. |
+| Tenant discovery mismatch or transient failure | Fail the accepted LRO with the corresponding documented code before persisting desired encryption or changing Storage/customer data. |
+| Born-CMK onboarding | Published per-cloud application ID, Portal configuration, and GET agree; consent and key grant precede PUT. |
+| Identical request during configuration | Return HTTP 409; do not return the same operation as an alternative. |
+| DELETE with admitted writers | Close admission, drain writers, and complete the existing deletion LRO only when deletion conditions hold. |
 | Removal, re-enable, and failure after a key change | Requested and observed values remain distinct and accurate. |
 
 The generated SDK, service implementation, and deployment tests must consume the

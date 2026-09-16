@@ -7370,7 +7370,7 @@
       "properties": {
         "keyEncryptionKeyUrl": {
           "$ref": "#/definitions/WorkspaceKeyEncryptionKeyUrl",
-          "description": "The versionless HTTPS Key Vault key URI in the supported cloud and Workspace\ntenant. A key version, query string, or fragment is not permitted.\nAzure Storage follows key versions automatically. Keep the previous version\navailable for at least 24 hours after rotation."
+          "description": "The versionless HTTPS Key Vault key URI in the supported cloud and Workspace\ntenant. The key vault must belong to the same Microsoft Entra tenant as\nthe Workspace. The service verifies the tenant as the first remote stage\nof the configuration operation, before persisting requested encryption\nstate or changing Azure Storage or customer data.\nA key version, query string, or fragment is not permitted.\nAzure Storage follows key versions automatically. Keep the previous version\navailable for at least 24 hours after rotation."
         }
       },
       "required": [
@@ -7394,7 +7394,7 @@
       "properties": {
         "applicationId": {
           "type": "string",
-          "description": "The Microsoft Entra application ID used for customer consent, available\nbefore enrollment. This is not a service principal object ID or an identity\nselector. The Workspace's top-level identity does not select this application.",
+          "description": "The Microsoft Entra application ID used for customer consent, returned for\nexisting Workspaces, including before customer-key enrollment. Before\ncreating a Workspace with a customer key, obtain the application name and\nID for the target cloud from the service onboarding documentation or Portal,\nthen consent and grant key access. GET returns the same application ID.\nThis is not a service principal object ID or an identity selector.\nThe Workspace's top-level identity does not select this application.",
           "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
           "readOnly": true
         }
@@ -7524,7 +7524,7 @@
         },
         "customerManagedKeyOnboarding": {
           "$ref": "#/definitions/WorkspaceCustomerManagedKeyOnboarding",
-          "description": "The service application used for customer consent, available before enrollment.",
+          "description": "The service application used for customer consent, returned for existing Workspaces before enrollment.",
           "readOnly": true
         },
         "status": {
