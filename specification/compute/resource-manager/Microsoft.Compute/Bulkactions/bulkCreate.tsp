@@ -71,7 +71,7 @@ alias BulkCreateSubscriptionParams = {
 //
 // Reuses the shared enums (ProvisioningState, CapacityType, ...), the
 // shared ComputeProfile, PriorityProfile, ZoneAllocationPolicy,
-// PartialFulfillmentPolicy, and RetryPolicy.
+// PartialFulfillmentPolicy, and ExecutionParameters.
 // ============================================================
 
 @added(Versions.`2026-09-06-preview`)
@@ -118,17 +118,6 @@ model BulkCreateVmSizeProfile {
 }
 
 @added(Versions.`2026-09-06-preview`)
-@doc("Extra parameters that control how a BulkCreate request is executed.")
-model BulkCreateExecutionParameters {
-  @doc("Retry policy the user can pass")
-  retryPolicy?: RetryPolicy;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form object used to pass additional parameters."
-  @doc("Additional parameters for the request.")
-  additionalParameters?: Record<unknown>;
-}
-
-@added(Versions.`2026-09-06-preview`)
 @doc("Details of the BulkCreate.")
 model BulkCreateProperties {
   @visibility(Lifecycle.Read)
@@ -172,7 +161,7 @@ model BulkCreateProperties {
   zoneAllocationPolicy?: ZoneAllocationPolicy;
 
   @doc("Extra parameters that control how the request is executed, including the retry policy.")
-  executionParameters?: BulkCreateExecutionParameters;
+  executionParameters?: ExecutionParameters;
 }
 
 @added(Versions.`2026-09-06-preview`)

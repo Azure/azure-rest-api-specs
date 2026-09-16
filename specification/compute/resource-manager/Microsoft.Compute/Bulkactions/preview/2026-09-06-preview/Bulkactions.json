@@ -3051,21 +3051,6 @@
         }
       }
     },
-    "BulkCreateCustomExecutionParameters": {
-      "type": "object",
-      "description": "Extra parameters that control how a BulkCreateCustom request is executed.",
-      "properties": {
-        "retryPolicy": {
-          "$ref": "#/definitions/RetryPolicy",
-          "description": "Retry policy the user can pass"
-        },
-        "additionalParameters": {
-          "type": "object",
-          "description": "Additional parameters for the request.",
-          "additionalProperties": {}
-        }
-      }
-    },
     "BulkCreateCustomListResult": {
       "type": "object",
       "description": "List of BulkCreateCustom resources.",
@@ -3255,7 +3240,7 @@
           ]
         },
         "executionParameters": {
-          "$ref": "#/definitions/BulkCreateCustomExecutionParameters",
+          "$ref": "#/definitions/ExecutionParameters",
           "description": "Extra parameters that control how the request is executed, including the retry policy."
         }
       },
@@ -3290,21 +3275,6 @@
         "zone": {
           "type": "string",
           "description": "The subscription-relative logical availability zone selected for the virtual machine."
-        }
-      }
-    },
-    "BulkCreateExecutionParameters": {
-      "type": "object",
-      "description": "Extra parameters that control how a BulkCreate request is executed.",
-      "properties": {
-        "retryPolicy": {
-          "$ref": "#/definitions/RetryPolicy",
-          "description": "Retry policy the user can pass"
-        },
-        "additionalParameters": {
-          "type": "object",
-          "description": "Additional parameters for the request.",
-          "additionalProperties": {}
         }
       }
     },
@@ -3404,7 +3374,7 @@
           "description": "Compute Profile to configure the Virtual Machines. Applied uniformly to every virtual machine created by the operation."
         },
         "executionParameters": {
-          "$ref": "#/definitions/BulkCreateExecutionParameters",
+          "$ref": "#/definitions/ExecutionParameters",
           "description": "Extra parameters that control how the request is executed, including the retry policy."
         }
       },
@@ -4437,6 +4407,11 @@
         "capacityRecommendationParameters": {
           "$ref": "#/definitions/CapacityRecommendationParameters",
           "description": "Capacity recommendation parameters for the request. When provided on an executeStart request, the service computes placement recommendations only if the VM fails to start due to an allocation failure; the recommendations for the desired sizes and locations are then surfaced in the operation's capacityRecommendation response."
+        },
+        "additionalParameters": {
+          "type": "object",
+          "description": "Additional parameters for the request.",
+          "additionalProperties": {}
         }
       }
     },

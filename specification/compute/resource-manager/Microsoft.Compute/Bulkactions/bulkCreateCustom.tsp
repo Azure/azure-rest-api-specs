@@ -218,17 +218,6 @@ model BulkCreateCustomZoneAllocationPolicy {
   zonePreferences?: Array<ZonePreference>;
 }
 
-@added(Versions.`2026-09-06-preview`)
-@doc("Extra parameters that control how a BulkCreateCustom request is executed.")
-model BulkCreateCustomExecutionParameters {
-  @doc("Retry policy the user can pass")
-  retryPolicy?: RetryPolicy;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form object used to pass additional parameters."
-  @doc("Additional parameters for the request.")
-  additionalParameters?: Record<unknown>;
-}
-
 @doc("Details of the BulkCreateCustom.")
 model BulkCreateCustomProperties {
   @visibility(Lifecycle.Read)
@@ -284,9 +273,8 @@ model BulkCreateCustomProperties {
   @doc("Per-VM overrides and the shared name prefix, specified when the operation is created.")
   overridesProfile?: BulkCreateCustomOverridesProfile;
 
-  @typeChangedFrom(Versions.`2026-09-06-preview`, ExecutionParameters)
   @doc("Extra parameters that control how the request is executed, including the retry policy.")
-  executionParameters?: BulkCreateCustomExecutionParameters;
+  executionParameters?: ExecutionParameters;
 }
 
 @doc("List of BulkCreateCustom resources.")

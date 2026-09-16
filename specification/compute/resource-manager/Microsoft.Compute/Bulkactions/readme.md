@@ -50,6 +50,12 @@ suppressions:
       passthrough API and will deliver the object as is to compute.
     from: Bulkactions.json
     where: $.definitions.BulkActionVmExtensionProperties.properties.protectedSettings
+  - code: AvoidAdditionalProperties
+    reason:
+      additionalParameters is a free-form bag of request parameters that bulkactions
+      delivers as is to compute, so its members cannot be modelled ahead of time.
+    from: Bulkactions.json
+    where: $.definitions.ExecutionParameters.properties.additionalParameters
 ```
 
 ### Tag: package-2026-09-06-preview
