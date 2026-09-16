@@ -42,6 +42,7 @@ export function ensureReleasePlan(
 
   const existingByPath = runGetReleasePlanByPath(
     context.tspProjectPath,
+    context.apiVersion,
     context.apiReleaseType,
     runner,
   );
@@ -97,14 +98,16 @@ function runGetReleasePlanByPr(prUrl: string, runner: AzsdkRunner): ReleasePlanD
 }
 
 /**
- * Retrieves release plan by TypeSpec project path and API release type.
+ * Retrieves release plan by TypeSpec project path, API version, and API release type.
  * @param tspProjectPath Path to TypeSpec project (relative to workspace)
+ * @param apiVersion API version to match
  * @param apiReleaseType API release type (Private Preview, Public Preview, or GA)
  * @param runner Function to execute azsdk commands
  * @returns Release plan object if found, null if not found or error occurred
  */
 function runGetReleasePlanByPath(
   tspProjectPath: string,
+  apiVersion: string,
   apiReleaseType: ApiReleaseType,
   runner: AzsdkRunner,
 ): ReleasePlanData | null {
@@ -113,6 +116,8 @@ function runGetReleasePlanByPath(
     "get",
     "--typespec-path",
     tspProjectPath,
+    "--api-version",
+    apiVersion,
     "--api-release-type",
     apiReleaseType,
     "--output",
