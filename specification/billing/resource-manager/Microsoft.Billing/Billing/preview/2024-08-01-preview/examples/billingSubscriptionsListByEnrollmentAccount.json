@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "billingAccountName": "6564892",
+    "enrollmentAccountName": "172988"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/6564892/billingSubscriptions/90000000-0000-0000-0000-000000000000",
+            "name": "90000000-0000-0000-0000-000000000000",
+            "properties": {
+              "billingFrequency": "P1M",
+              "consumptionCostCenter": "123",
+              "displayName": "TestSubscription",
+              "enrollmentAccountId": "172988",
+              "enrollmentAccountDisplayName": "billtest332211@outlook.com",
+              "enrollmentAccountSubscriptionDetails": {
+                "enrollmentAccountStartDate": "2023-01-04T00:00:00.0000000Z",
+                "subscriptionEnrollmentAccountStatus": "Active"
+              },
+              "offerId": "MS-AZR-0017P",
+              "status": "Other",
+              "operationStatus": "None",
+              "subscriptionId": "90000000-0000-0000-0000-000000000000"
+            },
+            "type": "Microsoft.Billing/billingAccounts/billingSubscriptions"
+          },
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/6564892/billingSubscriptions/90000000-0000-0000-0000-000000000001",
+            "name": "90000000-0000-0000-0000-000000000001",
+            "properties": {
+              "billingFrequency": "P1M",
+              "consumptionCostCenter": "",
+              "displayName": "Microsoft Azure Enterprise-1",
+              "enrollmentAccountId": "172988",
+              "enrollmentAccountDisplayName": "billtest332211@outlook.com",
+              "enrollmentAccountSubscriptionDetails": {
+                "enrollmentAccountStartDate": "2023-01-04T00:00:00.0000000Z",
+                "subscriptionEnrollmentAccountStatus": "Deleted"
+              },
+              "offerId": "MS-AZR-0136P",
+              "status": "Other",
+              "operationStatus": "None",
+              "subscriptionId": "90000000-0000-0000-0000-000000000001"
+            },
+            "type": "Microsoft.Billing/billingAccounts/billingSubscriptions"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "BillingSubscriptions_ListByEnrollmentAccount",
+  "title": "BillingSubscriptionsListByEnrollmentAccount"
+}

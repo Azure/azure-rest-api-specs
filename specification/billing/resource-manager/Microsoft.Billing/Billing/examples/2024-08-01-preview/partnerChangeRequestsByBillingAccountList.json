@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "billingAccountName": "1234567"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234567/partnerChangeRequests/3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "name": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "type": "Microsoft.Billing/billingAccounts/partnerChangeRequests",
+            "properties": {
+              "expirationTimeUTC": "2024-07-30T17:32:28Z",
+              "requestStatus": "InProgress",
+              "recipientEmailId": "user@partnercontoso.com",
+              "initiatorEmailId": "initiator@customercontoso.com",
+              "initiatorFirstName": "Initiator",
+              "initiatorLastName": "User",
+              "initiatedOnUTC": "2024-07-10T10:30:15Z",
+              "partnerType": "Reseller",
+              "effectiveDateUTC": "2024-07-15T00:00:00Z",
+              "canceledBy": null,
+              "partnerPrimaryContactEmailId": "primary@partnercontoso.com",
+              "sourcePartnerOrganizationPcn": "111222333",
+              "sourcePartnerOrganizationName": "Contoso Inc.",
+              "targetPartnerOrganizationPcn": "9876543210",
+              "targetPartnerOrganizationName": "Contoso Ltd.",
+              "customerOrganizationPcn": "555666777",
+              "customerOrganizationName": "Customer Org",
+              "partnerChangePackageId": "PKG123456",
+              "partnerChangeReasonCode": "UnsatisfactoryService",
+              "partnerChangeReason": "Service quality did not meet expectations."
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  },
+  "operationId": "PartnerChangeRequestsByBillingAccount_List",
+  "title": "PartnerChangeRequestsByBillingAccountList"
+}
