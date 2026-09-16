@@ -166,13 +166,15 @@ model RuntimeBindingReadOnlyProperties {
 model RuntimeBindingProperties {
   ...RuntimeBindingReadOnlyProperties;
 
-  /** The runtime technology represented by the binding. */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  kind: RuntimeBindingKind;
-
   /** Indicates whether Workload Manager owns or references the runtime. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
   provisioningMode: RuntimeBindingProvisioningMode;
+
+  /** The runtime identity configuration for a managed runtime. */
+  identityProfile?: RuntimeIdentityProfile;
+
+  /** The runtime network configuration for a managed runtime. */
+  networkProfile?: RuntimeNetworkProfile;
 }
 
 /** Properties of a runtime provisioned and owned by Workload Manager. */
@@ -182,12 +184,6 @@ model ManagedRuntimeBindingProperties extends RuntimeBindingProperties {
 
   /** The limited service-managed runtime configuration. */
   managedProfile: ManagedRuntimeProfile;
-
-  /** The runtime identity configuration. */
-  identityProfile?: RuntimeIdentityProfile;
-
-  /** The runtime network configuration. */
-  networkProfile?: RuntimeNetworkProfile;
 }
 
 /** Properties of a customer-owned runtime attached to a workload space. */
@@ -209,6 +205,7 @@ model RuntimeBinding is TrackedResource<RuntimeBindingProperties> {
     SegmentName = "runtimeBindings",
     NamePattern = "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
   >;
+  ...ResourceKindProperty<RuntimeBindingKind>;
 }
 
 /** Identity configuration used to integrate runtime bindings. */
@@ -280,10 +277,6 @@ model RuntimeLink is TrackedResource<RuntimeLinkProperties> {
 
 /** Properties of a capability enabled for a workload space. */
 model CapabilityProperties {
-  /** The capability to enable. */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  kind: CapabilityKind;
-
   /** The version selection policy for the capability. */
   versionPolicy: VersionPolicy;
 
@@ -305,6 +298,7 @@ model Capability is TrackedResource<CapabilityProperties> {
     SegmentName = "capabilities",
     NamePattern = "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
   >;
+  ...ResourceKindProperty<CapabilityKind>;
 }
 
 /** Mutable properties of a workload space. */
@@ -322,10 +316,32 @@ model RuntimeBindingUpdate is Azure.ResourceManager.Foundations.ResourceUpdateMo
 /** Binding-level configuration that may be updated without changing ownership. */
 model RuntimeBindingMutableProperties {
   /** The runtime identity configuration. */
-  identityProfile?: RuntimeIdentityProfile;
+  identityProfile?: RuntimeIdentityProfileUpdate;
 
   /** The runtime network configuration. */
   networkProfile?: RuntimeNetworkProfile;
+}
+
+/** Identity configuration that may be updated for a managed runtime. */
+model RuntimeIdentityProfileUpdate {
+  /** The identity made available to the execution runtime. */
+  executionIdentity?: ExecutionIdentityUpdate;
+}
+
+/** Execution identity configuration that may be updated. */
+model ExecutionIdentityUpdate {
+  /** Indicates whether the identity is managed by the service or supplied by the customer. */
+  provisioningMode?: ExecutionIdentityProvisioningMode;
+
+  /** The customer-provided user-assigned identity, when provisioningMode is Referenced. */
+  userAssignedIdentityResourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  /** The execution boundary across which the identity is shared. */
+  scope?: ExecutionIdentityScope;
 }
 
 /** Mutable properties of a runtime link. */
@@ -337,7 +353,18 @@ model RuntimeLinkUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel
 /** Runtime link configuration that may be updated in place. */
 model RuntimeLinkMutableProperties {
   /** The mutable capacity policy for the runtime composition. */
-  capacityProfile?: CapacityProfile;
+  capacityProfile?: CapacityProfileUpdate;
+}
+
+/** Capacity policy values that may be updated for the runtime composition. */
+model CapacityProfileUpdate {
+  /** The minimum number of execution nodes. */
+  @minValue(0)
+  minimumNodes?: int32;
+
+  /** The maximum number of execution nodes. */
+  @minValue(0)
+  maximumNodes?: int32;
 }
 
 /** Mutable properties of a capability. */

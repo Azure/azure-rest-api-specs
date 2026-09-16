@@ -1,17 +1,12 @@
 {
-  "title": "Update the Agent Sandbox version policy",
-  "operationId": "Capabilities_Update",
+  "title": "Get the Agent Sandbox capability",
+  "operationId": "Capabilities_Get",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg-workload",
     "spaceName": "managed-agents-prod",
     "capabilityName": "agentSandbox",
-    "api-version": "2026-11-01-preview",
-    "properties": {
-      "properties": {
-        "versionPolicy": "ServiceManaged"
-      }
-    }
+    "api-version": "2026-11-01-preview"
   },
   "responses": {
     "200": {
@@ -20,18 +15,12 @@
         "name": "agentSandbox",
         "type": "Microsoft.Compute/workloadSpaces/capabilities",
         "location": "eastus2",
+        "kind": "AgentSandbox",
         "properties": {
-          "kind": "AgentSandbox",
           "versionPolicy": "ServiceManaged",
           "effectiveVersion": "service-selected",
           "provisioningState": "Succeeded"
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus2/operationStatuses/00000000-0000-0000-0000-000000000003?api-version=2026-11-01-preview",
-        "Retry-After": 10
       }
     }
   }
