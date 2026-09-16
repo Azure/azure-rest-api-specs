@@ -25814,6 +25814,62 @@
         ]
       }
     },
+    "EmbeddingSource": {
+      "type": "object",
+      "description": "Represents the embedding source configuration for Integrated Embeddings. When specified on a vector embedding, the service will automatically generate embeddings from source document fields.",
+      "properties": {
+        "sourcePaths": {
+          "type": "array",
+          "description": "The non-empty list of top-level source paths in the document to generate embeddings from. A source path cannot be the same as the destination vector embedding path.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The endpoint URL of the AI model provider resource."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "The model deployment name used for generating embeddings."
+        },
+        "modelName": {
+          "type": "string",
+          "description": "The name of the embedding model."
+        },
+        "authType": {
+          "$ref": "#/definitions/EmbeddingSourceAuthenticationType",
+          "description": "The authentication type Azure Cosmos DB uses when calling the embedding model endpoint."
+        }
+      },
+      "required": [
+        "sourcePaths",
+        "endpoint",
+        "deploymentName",
+        "modelName",
+        "authType"
+      ]
+    },
+    "EmbeddingSourceAuthenticationType": {
+      "type": "string",
+      "description": "The type of authentication to use when calling the embedding provider API.",
+      "enum": [
+        "Entra"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingSourceAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Entra",
+            "value": "Entra",
+            "description": "Microsoft Entra ID based authentication."
+          }
+        ]
+      }
+    },
     "EnableFullTextQuery": {
       "type": "string",
       "description": "Describe the level of detail with which queries are to be logged.",
@@ -33873,6 +33929,10 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of dimensions in the vector."
+        },
+        "embeddingSource": {
+          "$ref": "#/definitions/EmbeddingSource",
+          "description": "The embedding source configuration to automatically generate embeddings at the configured paths."
         }
       },
       "required": [
