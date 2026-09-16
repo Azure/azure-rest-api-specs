@@ -2784,6 +2784,20 @@ model UsageListResult {
  */
 model Usage {
   /**
+   * Fully qualified resource ID for the usage. Ex - /subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/usages/{usageName}
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The type of the usage resource. E.g. "Microsoft.CognitiveServices/locations/usages"
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
    * The unit of the metric.
    */
   unit?: UnitType;
