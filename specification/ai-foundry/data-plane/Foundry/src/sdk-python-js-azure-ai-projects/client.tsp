@@ -357,11 +357,11 @@ using Azure.AI.Projects;
 @@clientName(AgentTelephony.listTelephonyCalls, "listCalls");
 @@clientName(
   TelephonyCallListTimeQueryParameters.started_before,
-  "started_time_before"
+  "started_before_time"
 );
 @@clientName(
   TelephonyCallListTimeQueryParameters.started_after,
-  "started_time_after"
+  "started_after_time"
 );
 @@clientName(AgentTelephony.getTelephonyCall, "getCall");
 @@clientName(AgentTelephony.transferTelephonyCall, "transferCall");
