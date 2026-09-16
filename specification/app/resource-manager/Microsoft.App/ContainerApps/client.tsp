@@ -199,6 +199,12 @@ union OpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
+@@alternateType(
+  ContainerAppNetworkingConfiguration.outboundVnetSubnetId,
+  armResourceIdentifier,
+  "csharp"
+);
+
 @@alternateType(OpenIdConnectConfig.certificationUri, url, "csharp");
 
 @@alternateType(SecretKeyVaultProperties.keyVaultUrl, url, "csharp");
