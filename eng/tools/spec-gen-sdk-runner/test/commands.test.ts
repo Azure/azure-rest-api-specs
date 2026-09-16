@@ -1098,8 +1098,7 @@ describe("generateSdkForBatchSpecs", () => {
   });
 
   test("should emit telemetry and runtime Markdown for sample TypeSpec packages", async () => {
-    const mockSpecPath =
-      "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml";
+    const mockSpecPath = "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml";
     const mockInput = {
       localSpecRepoPath: "/spec/path",
       workingFolder: "/working/folder",
