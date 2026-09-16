@@ -70,8 +70,8 @@ alias BulkCreateSubscriptionParams = {
 // through virtualMachinesGetOperationStatus instead.
 //
 // Reuses the shared enums (ProvisioningState, CapacityType, ...), the
-// shared ComputeProfile, PriorityType, EvictionPolicy, RetryPolicy, and
-// PartialFulfillmentPolicy.
+// shared ComputeProfile, PriorityProfile, ZoneAllocationPolicy,
+// PartialFulfillmentPolicy, and RetryPolicy.
 // ============================================================
 
 @added(Versions.`2026-09-06-preview`)
@@ -107,17 +107,14 @@ model LocationBasedBulkCreate
 }
 
 @added(Versions.`2026-09-06-preview`)
-@doc("Configuration options for Regular or Spot instances in BulkCreate.")
-model BulkCreatePriorityProfile {
-  @doc("The priority type for VM allocation")
-  type?: PriorityType;
+@doc("A VM size that the service may select for a BulkCreate operation.")
+model BulkCreateVmSizeProfile {
+  @doc("The name of the VM size, eg Standard_D2ads_v5")
+  @minLength(1)
+  name: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "maxPricePerVM has VM which does not follow camel casing"
-  @doc("Price per hour of each Spot VM will never exceed this.")
-  maxPricePerVM?: float32;
-
-  @doc("Eviction Policy to follow when evicting Spot VMs.")
-  evictionPolicy?: EvictionPolicy;
+  @doc("The rank of this VM size in the priority order, starting at 0, where a lower value is preferred. Used when priorityProfile.allocationStrategy is Prioritized.")
+  rank?: int32;
 }
 
 @added(Versions.`2026-09-06-preview`)
@@ -157,13 +154,22 @@ model BulkCreateProperties {
   partialFulfillmentPolicy?: PartialFulfillmentPolicy;
 
   @doc("Configuration Options for Regular or Spot instances in BulkCreate.")
-  priorityProfile: BulkCreatePriorityProfile;
+  priorityProfile: PriorityProfile;
 
   @doc("The VM size to use for every virtual machine created by the operation.")
   vmSize?: string;
 
+  @removed(Versions.`2026-09-06-preview`)
+  @identifiers(#[])
+  @doc("List of VM sizes supported for BulkCreate. Every virtual machine is created from the operation-level computeProfile regardless of the size selected, so no per-VM-size override can be supplied here.")
+  vmSizesProfile?: Array<BulkCreateVmSizeProfile>;
+
   @doc("Compute Profile to configure the Virtual Machines. Applied uniformly to every virtual machine created by the operation.")
   computeProfile: ComputeProfile;
+
+  @removed(Versions.`2026-09-06-preview`)
+  @doc("Zone Allocation Policy for launching instances.")
+  zoneAllocationPolicy?: ZoneAllocationPolicy;
 
   @doc("Extra parameters that control how the request is executed, including the retry policy.")
   executionParameters?: BulkCreateExecutionParameters;

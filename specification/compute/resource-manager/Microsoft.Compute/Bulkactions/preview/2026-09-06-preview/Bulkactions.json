@@ -3356,25 +3356,6 @@
         "results"
       ]
     },
-    "BulkCreatePriorityProfile": {
-      "type": "object",
-      "description": "Configuration options for Regular or Spot instances in BulkCreate.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/PriorityType",
-          "description": "The priority type for VM allocation"
-        },
-        "maxPricePerVM": {
-          "type": "number",
-          "format": "float",
-          "description": "Price per hour of each Spot VM will never exceed this."
-        },
-        "evictionPolicy": {
-          "$ref": "#/definitions/EvictionPolicy",
-          "description": "Eviction Policy to follow when evicting Spot VMs."
-        }
-      }
-    },
     "BulkCreateProperties": {
       "type": "object",
       "description": "Details of the BulkCreate.",
@@ -3411,7 +3392,7 @@
           "description": "Controls how partial fulfillment is handled for a BulkCreate request. When enabled, Azure creates only the VMs or vCPUs it has high confidence can be successfully allocated, instead of attempting the entire request and potentially returning allocation failures."
         },
         "priorityProfile": {
-          "$ref": "#/definitions/BulkCreatePriorityProfile",
+          "$ref": "#/definitions/PriorityProfile",
           "description": "Configuration Options for Regular or Spot instances in BulkCreate."
         },
         "vmSize": {
@@ -5951,6 +5932,25 @@
         "automaticByPlatformSettings": {
           "$ref": "#/definitions/WindowsVMGuestPatchAutomaticByPlatformSettings",
           "description": "Specifies additional settings for patch mode AutomaticByPlatform in VM Guest Patching on Windows."
+        }
+      }
+    },
+    "PriorityProfile": {
+      "type": "object",
+      "description": "The priority profile for flex VM creation",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PriorityType",
+          "description": "The priority type for VM allocation"
+        },
+        "maxPricePerVM": {
+          "type": "number",
+          "format": "float",
+          "description": "Price per hour of each Spot VM will never exceed this. Available from 2026-04-06-preview."
+        },
+        "evictionPolicy": {
+          "$ref": "#/definitions/EvictionPolicy",
+          "description": "Eviction Policy to follow when evicting Spot VMs. Available from 2026-04-06-preview."
         }
       }
     },
