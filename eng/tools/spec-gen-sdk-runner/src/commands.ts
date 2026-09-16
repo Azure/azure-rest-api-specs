@@ -611,6 +611,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   // Construct the spec-gen-sdk command
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
   const isTypeSpecBatch =
+    batchType === "sample-typespecs" ||
     batchType === "all-typespecs" ||
     batchType === "all-mgmtplane-typespecs" ||
     batchType === "all-dataplane-typespecs";
@@ -647,7 +648,9 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
       ? "management-plane"
       : batchType === "all-dataplane-typespecs"
         ? "data-plane"
-        : undefined;
+        : batchType === "sample-typespecs"
+          ? "sample"
+          : undefined;
 
   await installLanguageToolchain(commandInput);
 
@@ -856,7 +859,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   markdownContent += succeededCount ? `## Total Successful Specs\n ${succeededCount}\n` : "";
   markdownContent += `## Total Specs Count\n ${specConfigsArray.length}\n\n`;
 
-  // Emit structured telemetry for Kusto ingestion (only for mgmtplane/dataplane batch types)
+  // Emit structured telemetry for Kusto ingestion.
   if (telemetrySpecType) {
     const telemetry = {
       eventType: "SdkBatchGenerationSummary",

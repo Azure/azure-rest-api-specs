@@ -1097,6 +1097,59 @@ describe("generateSdkForBatchSpecs", () => {
     expect(markdownContent).toContain(`| ${mockSpecPath} | @azure/arm-vmware | succeeded | 1500 |`);
   });
 
+  test("should emit telemetry and runtime Markdown for sample TypeSpec packages", async () => {
+    const mockSpecPath =
+      "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml";
+    const mockInput = {
+      localSpecRepoPath: "/spec/path",
+      workingFolder: "/working/folder",
+      runMode: "batch",
+      localSdkRepoPath: "/sdk/path",
+      sdkRepoName: "azure-sdk-for-js",
+      sdkLanguage: SdkName.Js,
+      specCommitSha: "",
+      specRepoHttpsUrl: "",
+    };
+
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockInput);
+    vi.spyOn(commandHelpers, "getSpecPaths").mockReturnValue([{ tspconfigPath: mockSpecPath }]);
+    vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
+    vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
+    vi.spyOn(fs, "readFileSync").mockReturnValue(
+      JSON.stringify({
+        executionResult: "warning",
+        packages: [{ packageName: "@azure-rest/widget-manager" }],
+      }),
+    );
+    vi.spyOn(fs, "existsSync").mockReturnValue(false);
+    vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    const logSpy = vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(log, "vsoAddAttachment").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(performance, "now").mockReturnValueOnce(500).mockReturnValueOnce(2_000);
+
+    await generateSdkForBatchSpecs("sample-typespecs");
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        '##[SdkBatchGenerationSpecResult]{"eventType":"SdkBatchGenerationSpecResult"',
+      ),
+    );
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('"specType":"sample"'));
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining('##[SdkBatchGenerationSummary]{"eventType"'),
+    );
+    const markdownContent = String((fs.writeFileSync as Mock).mock.calls[0][1]);
+    expect(markdownContent).toContain(
+      `| ${mockSpecPath} | @azure-rest/widget-manager | warning | 1500 |`,
+    );
+  });
+
   test("should not emit runtime telemetry for a failed TypeSpec package", async () => {
     const mockInput = {
       localSpecRepoPath: "/spec/path",
