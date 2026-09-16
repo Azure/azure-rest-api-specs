@@ -184,28 +184,37 @@ async function handleLabeled({
   );
 
   if (botComment?.body) {
-    let body = botComment.body;
-    // Update the triggered language(s) first
-    for (const lang of langsToApprove) {
-      const rowRegex = new RegExp(
-        `(\\| ${lang}[^|]*\\|[^|]+\\|[^|]+\\|[^|]+\\|) ⏳ Pending (\\|)`,
-        "gi",
-      );
-      body = body.replace(rowRegex, `$1 ✅ Approved by @${actor} $2`);
-    }
+    // Update comment table using structural parsing (split by | to find Status column)
+    // rather than fragile regex that breaks when status text changes.
+    const lines = botComment.body.split("\n");
+    const langsToUpdate = new Set(langsToApprove.map((l) => l.toLowerCase()));
+
     // Also update any other languages that have approved labels but may have been
     // missed due to concurrent workflow runs (race condition between label events).
     const approvedLangs = labels
       .filter((label) => label.startsWith("package-name-") && label.endsWith("-approved"))
       .map((label) => label.replace("package-name-", "").replace("-approved", ""))
       .filter((lang) => lang !== "approved" && lang !== "all");
-    for (const lang of approvedLangs) {
-      const rowRegex = new RegExp(
-        `(\\| ${lang}[^|]*\\|[^|]+\\|[^|]+\\|[^|]+\\|) ⏳ Pending (\\|)`,
-        "gi",
-      );
-      body = body.replace(rowRegex, `$1 ✅ Approved $2`);
+    const langsToReconcile = new Set(approvedLangs.map((l) => l.toLowerCase()));
+
+    for (let i = 0; i < lines.length; i++) {
+      const cells = lines[i].split("|");
+      // Table rows have format: "" | Language | Package | Namespace | Format | Status | Approvers | ""
+      if (cells.length < 7) continue;
+      const langCell = cells[1].trim().toLowerCase();
+      const statusCell = cells[5];
+      if (!statusCell || statusCell.includes("Approved")) continue;
+
+      if (langsToUpdate.has(langCell)) {
+        cells[5] = ` ✅ Approved by @${actor} `;
+        lines[i] = cells.join("|");
+      } else if (langsToReconcile.has(langCell)) {
+        cells[5] = ` ✅ Approved `;
+        lines[i] = cells.join("|");
+      }
     }
+
+    const body = lines.join("\n");
     await github.rest.issues.updateComment({
       owner,
       repo,
