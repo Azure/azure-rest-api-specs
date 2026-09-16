@@ -1,18 +1,11 @@
 {
-  "title": "Update a Workspace to remove customer-managed encryption with null",
-  "operationId": "Workspaces_Update",
+  "title": "Get a Workspace when active encryption protection is unknown",
+  "operationId": "Workspaces_Get",
   "parameters": {
     "api-version": "2026-11-01",
     "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
     "resourceGroupName": "exampleRG",
-    "workspaceName": "exampleWorkspace",
-    "properties": {
-      "properties": {
-        "encryption": {
-          "customerManagedKeyEncryption": null
-        }
-      }
-    }
+    "workspaceName": "exampleWorkspace"
   },
   "responses": {
     "200": {
@@ -27,21 +20,18 @@
           ],
           "provisioningState": "Succeeded",
           "encryption": {
-            "status": {
-              "state": "Applied",
-              "observedProtection": "MicrosoftManaged",
-              "lastCheckedAt": "2026-11-01T12:00:00Z"
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyUrl": "https://contoso-vault.vault.azure.net/keys/replacement-key"
             },
             "customerManagedKeyOnboarding": {
               "applicationId": "00000000-0000-0000-0000-000000000001"
+            },
+            "status": {
+              "state": "Unknown",
+              "lastCheckedAt": "2026-11-01T12:00:00Z"
             }
           }
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "Location": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/providers/Microsoft.Chaos/locations/westus2/operationResults/4bdadd97-207c-4de8-9bba-08339ae099c7?api-version=2026-11-01"
       }
     }
   }

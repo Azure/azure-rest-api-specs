@@ -1,5 +1,5 @@
 {
-  "title": "Update Workspace tags without changing customer-managed encryption",
+  "title": "Update a Workspace with an empty CMK patch and retain its existing key URL",
   "operationId": "Workspaces_Update",
   "parameters": {
     "api-version": "2026-11-01",
@@ -7,8 +7,10 @@
     "resourceGroupName": "exampleRG",
     "workspaceName": "exampleWorkspace",
     "properties": {
-      "tags": {
-        "environment": "production"
+      "properties": {
+        "encryption": {
+          "customerManagedKeyEncryption": {}
+        }
       }
     }
   },
@@ -19,9 +21,6 @@
         "name": "exampleWorkspace",
         "type": "Microsoft.Chaos/workspaces",
         "location": "westus2",
-        "tags": {
-          "environment": "production"
-        },
         "properties": {
           "scopes": [
             "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG"
