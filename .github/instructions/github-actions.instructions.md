@@ -281,6 +281,8 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 4. Add workflow to `github-test.yaml` if it needs validation
 5. Run `pnpm run check` to validate
 
+The GitHub test workflow also runs for root workspace/install configuration and engineering package manifest changes. Its workflow-path regression tests read `eng/tools` manifests to verify that tool-test workflows include their transitive workspace dependencies. Keep `eng/tools` in its sparse checkout and preserve these trigger paths when changing the workflow.
+
 ### Updating Dependencies
 
 1. Update `.github/package.json` (root)

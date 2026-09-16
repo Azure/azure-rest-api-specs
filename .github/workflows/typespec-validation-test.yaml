@@ -7,15 +7,23 @@ on:
       - typespec-next
   pull_request:
     paths:
+      - .editorconfig
+      - .gitattributes
+      - .npmrc
       - pnpm-lock.yaml
       - pnpm-workspace.yaml
       - package.json
       - tsconfig.json
-      - .github/shared
+      - .github/actions/setup-node-install-deps/**
+      - .github/shared/**
       - .github/workflows/_reusable-eng-tools-test.yaml
       - .github/workflows/typespec-validation-test.yaml
       - eng/tools/package.json
       - eng/tools/tsconfig.json
+      - eng/tools/eslint.base.config.js
+      - eng/tools/vitest.base.config.js
+      - eng/tools/.prettierrc.yaml
+      - eng/tools/.prettierignore
       - eng/tools/suppressions/**
       - eng/tools/typespec-validation/**
   workflow_dispatch:

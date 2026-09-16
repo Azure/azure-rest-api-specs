@@ -221,7 +221,8 @@ Each tool is tested by a dedicated workflow (`.github/workflows/<tool>-test.yaml
 When adding a new tool:
 
 1. Add a `<tool>-test.yaml` workflow that calls `_reusable-eng-tools-test.yaml` with `package: <tool>` (and `lint: true` to enable linting).
-2. List the relevant `paths` filters (at minimum `eng/tools/package.json`, `eng/tools/tsconfig.json`, and `eng/tools/<tool>/**`) so the workflow runs when the tool changes.
+2. List the relevant `pull_request.paths` filters: root workspace/install configuration, `.github/actions/setup-node-install-deps/**`, `.github/shared/**`, the reusable workflow and the calling workflow itself, shared `eng/tools` configuration, and `eng/tools/<tool>/**`. Include `/**` paths for all transitive workspace dependencies, including dev dependencies. Mirror a sibling tool workflow and retain any tool-specific inputs.
+3. `.github/workflows/test/workflows.test.js` checks these filters against package manifests. When adding a workspace dependency, update the dependent tool's workflow paths as well as its manifest and lockfile.
 
 ## Common Tasks
 

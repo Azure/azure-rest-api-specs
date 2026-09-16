@@ -6,16 +6,25 @@ on:
       - main
   pull_request:
     paths:
+      - .editorconfig
+      - .gitattributes
+      - .npmrc
       - pnpm-lock.yaml
       - pnpm-workspace.yaml
       - package.json
       - tsconfig.json
-      - .github/shared
+      - .github/actions/setup-node-install-deps/**
+      - .github/shared/**
       - .github/workflows/_reusable-eng-tools-test.yaml
-      - .github/workflows/oav-runner-test.yaml
+      - .github/workflows/oav-runner-tests.yaml
       - eng/tools/package.json
       - eng/tools/tsconfig.json
+      - eng/tools/eslint.base.config.js
+      - eng/tools/vitest.base.config.js
+      - eng/tools/.prettierrc.yaml
+      - eng/tools/.prettierignore
       - eng/tools/oav-runner/**
+      - eng/tools/suppressions/**
   workflow_dispatch:
 
 permissions:

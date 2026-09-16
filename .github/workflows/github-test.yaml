@@ -5,10 +5,28 @@ on:
     branches:
       - main
     paths:
+      - .editorconfig
+      - .gitattributes
+      - .npmrc
+      - package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+      - tsconfig.json
       - .github/**
+      - eng/tools/package.json
+      - eng/tools/*/package.json
   pull_request:
     paths:
+      - .editorconfig
+      - .gitattributes
+      - .npmrc
+      - package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+      - tsconfig.json
       - .github/**
+      - eng/tools/package.json
+      - eng/tools/*/package.json
   workflow_dispatch:
 
 permissions:
@@ -34,6 +52,7 @@ jobs:
         with:
           sparse-checkout: |
             .github
+            eng/tools
 
       - if: ${{ github.event_name == 'pull_request' && matrix.folder == '.github' && matrix.os == 'ubuntu' }}
         name: Require compiled agentic workflow locks

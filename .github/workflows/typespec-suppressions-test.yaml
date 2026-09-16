@@ -6,15 +6,24 @@ on:
       - main
   pull_request:
     paths:
+      - .editorconfig
+      - .gitattributes
+      - .npmrc
       - pnpm-lock.yaml
       - pnpm-workspace.yaml
       - package.json
       - tsconfig.json
+      - .github/actions/setup-node-install-deps/**
+      - .github/shared/**
       - .github/workflows/_reusable-eng-tools-test.yaml
       - .github/workflows/typespec-suppressions-code.yaml
       - .github/workflows/typespec-suppressions-test.yaml
       - eng/tools/package.json
       - eng/tools/tsconfig.json
+      - eng/tools/eslint.base.config.js
+      - eng/tools/vitest.base.config.js
+      - eng/tools/.prettierrc.yaml
+      - eng/tools/.prettierignore
       - eng/tools/typespec-suppressions/**
   workflow_dispatch:
 
