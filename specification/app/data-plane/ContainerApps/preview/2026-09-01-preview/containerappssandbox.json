@@ -6843,16 +6843,13 @@
       ],
       "x-ms-discriminator-value": "AzureFileNfs"
     },
-    "BlobUri": {
-      "type": "string",
-      "description": "A strongly-typed blob URI (with or without SAS token)."
-    },
     "BlobVolumeUsage": {
       "type": "object",
       "description": "BlobVolumeUsage wire model.",
       "properties": {
         "usedBytes": {
-          "$ref": "#/definitions/Bytes",
+          "type": "integer",
+          "format": "int64",
           "description": "usedBytes value."
         },
         "itemCount": {
@@ -6871,11 +6868,6 @@
         "itemCount",
         "calculatedAtUtc"
       ]
-    },
-    "Bytes": {
-      "type": "string",
-      "format": "byte",
-      "description": "Bytes wire model."
     },
     "CommitSandboxContent": {
       "type": "object",
@@ -7508,7 +7500,8 @@
           ]
         },
         "size": {
-          "$ref": "#/definitions/Bytes",
+          "type": "integer",
+          "format": "int64",
           "description": "size value."
         },
         "labels": {
@@ -7756,7 +7749,7 @@
       "description": "CreateDiskImageSourceBlobSource wire model.",
       "properties": {
         "blobSourceUri": {
-          "$ref": "#/definitions/BlobUri",
+          "type": "string",
           "format": "password",
           "description": "blobSourceUri value.",
           "x-ms-secret": true
@@ -8127,11 +8120,13 @@
       "description": "DataDiskVolumeUsage wire model.",
       "properties": {
         "compressedBlobSizeBytes": {
-          "$ref": "#/definitions/Bytes",
+          "type": "integer",
+          "format": "int64",
           "description": "compressedBlobSizeBytes value."
         },
         "usedSizeBytes": {
-          "$ref": "#/definitions/Bytes",
+          "type": "integer",
+          "format": "int64",
           "description": "usedSizeBytes value."
         },
         "lastUploadedAtUtc": {
@@ -8215,7 +8210,8 @@
           "readOnly": true
         },
         "sizeInMB": {
-          "$ref": "#/definitions/MegaBytes",
+          "type": "integer",
+          "format": "int64",
           "description": "Disk-image size assigned by the service.",
           "readOnly": true,
           "x-ms-client-name": "sizeInMb"
@@ -10091,10 +10087,6 @@
         "patterns"
       ]
     },
-    "MegaBytes": {
-      "type": "string",
-      "description": "MegaBytes wire value."
-    },
     "MemoryQuantity": {
       "type": "string",
       "description": "Kubernetes-style memory resource quantity string (e.g. \"256Mi\", \"1Gi\", \"2048\")."
@@ -11341,7 +11333,8 @@
           "description": "Snapshot identifier assigned by the service."
         },
         "coldStorageSizeInMB": {
-          "$ref": "#/definitions/MegaBytes",
+          "type": "integer",
+          "format": "int64",
           "description": "Cold-storage size assigned by the service.",
           "x-ms-client-name": "coldStorageSizeInMb"
         },
@@ -12551,7 +12544,8 @@
           "readOnly": true
         },
         "sizeInMB": {
-          "$ref": "#/definitions/MegaBytes",
+          "type": "integer",
+          "format": "int64",
           "description": "Snapshot size assigned by the service.",
           "readOnly": true,
           "x-ms-client-name": "sizeInMb"
@@ -13497,7 +13491,8 @@
           "description": "isDirectory value."
         },
         "sizeBytes": {
-          "$ref": "#/definitions/Bytes",
+          "type": "integer",
+          "format": "int64",
           "description": "sizeBytes value."
         },
         "lastModifiedUtc": {
