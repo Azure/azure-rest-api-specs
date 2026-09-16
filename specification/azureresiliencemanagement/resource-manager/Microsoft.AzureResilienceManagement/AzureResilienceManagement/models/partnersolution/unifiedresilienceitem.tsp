@@ -170,13 +170,13 @@ model UnifiedResilienceItemRegionalAssessment {
 }
 
 @added(Versions.v2026_09_30_preview)
-@doc("Definition of the resilience assessments computed for the unified resilience item.")
-model UnifiedResilienceItemAssessments {
-  @doc("The zonal resiliency section of the resilience assessment.")
+@doc("Definition of the resiliency posture computed for the unified resilience item.")
+model UnifiedResilienceItemResiliencyPosture {
+  @doc("The zonal resiliency section of the resiliency posture.")
   zonalResiliency: UnifiedResilienceItemZonalAssessment;
 
-  @doc("The regional resiliency section of the resilience assessment.")
-  regionalResiliency: UnifiedResilienceItemRegionalAssessment;
+  @doc("The regional resiliency section of the resiliency posture.")
+  regionalResiliency?: UnifiedResilienceItemRegionalAssessment;
 }
 
 @added(Versions.v2026_09_30_preview)
@@ -213,9 +213,9 @@ model UnifiedResilienceItemProperties {
   @removed(Versions.v2026_09_30_preview)
   recommendations: RecommendationsData;
 
-  @doc("Resilience assessments computed for the service group.")
+  @doc("Resiliency posture computed for the service group.")
   @added(Versions.v2026_09_30_preview)
-  assessments: UnifiedResilienceItemAssessments;
+  resiliencyPosture: UnifiedResilienceItemResiliencyPosture;
 
   @doc("Usage plan and enrollment billing information for the service group.")
   @added(Versions.v2026_09_30_preview)
