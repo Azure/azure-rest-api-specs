@@ -3273,6 +3273,9 @@
           "ClusterJobs_Get_AddServerJob": {
             "$ref": "./examples/ClusterJobs_Get_AddServerJob.json"
           },
+          "ClusterJobs_Get_ConfigureArcGatewayJob": {
+            "$ref": "./examples/ClusterJobs_Get_ConfigureArcGatewayJob.json"
+          },
           "ClusterJobs_Get_ConfigureLocalAvailabilityZone": {
             "$ref": "./examples/ClusterJobs_Get_ConfigureLocalAvailabilityZoneJob.json"
           },
@@ -3371,6 +3374,9 @@
         "x-ms-examples": {
           "ClusterJobs_CreateOrUpdate_AddServerJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_AddServer.json"
+          },
+          "ClusterJobs_CreateOrUpdate_ConfigureArcGatewayJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureArcGateway.json"
           },
           "ClusterJobs_CreateOrUpdate_ConfigureCVMJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureCVM.json"
@@ -17038,6 +17044,16 @@
       ],
       "x-ms-discriminator-value": "CollectLog"
     },
+    "HciConfigureArcGatewayJobProperties": {
+      "type": "object",
+      "description": "Properties for configuring Arc Gateway for a cluster.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfigureArcGateway"
+    },
     "HciConfigureCvmJobProperties": {
       "type": "object",
       "description": "Defines the customer's intent for updating confidential VM properties",
@@ -17508,6 +17524,7 @@
       "enum": [
         "AddServer",
         "RepairServer",
+        "ConfigureArcGateway",
         "GpuCreatePartition",
         "GpuSwitchMode",
         "ConfigureCVM",
@@ -17529,6 +17546,11 @@
             "name": "RepairServer",
             "value": "RepairServer",
             "description": "Job to repair a server in the cluster."
+          },
+          {
+            "name": "ConfigureArcGateway",
+            "value": "ConfigureArcGateway",
+            "description": "Job to configure Arc Gateway for the cluster."
           },
           {
             "name": "GpuCreatePartition",
