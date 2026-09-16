@@ -2193,8 +2193,10 @@
       "properties": {
         "downloadSasUri": {
           "type": "string",
+          "format": "password",
           "description": "The read-only SAS URI from which the exported workload configuration CSV can be downloaded.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "expirationTime": {
           "type": "string",
@@ -3474,15 +3476,9 @@
           "description": "The terminal validation status.",
           "readOnly": true
         },
-        "sasUri": {
-          "type": "string",
-          "description": "The read-only SAS URI of the error CSV describing the validation findings. Present only when findings were produced.",
-          "readOnly": true
-        },
-        "expirationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The UTC expiration timestamp of the error CSV SAS URI. Present only when sasUri is present.",
+        "validationErrorFile": {
+          "$ref": "#/definitions/ValidationErrorFile",
+          "description": "Download access to the error CSV describing the validation findings. Present only when findings were produced.",
           "readOnly": true
         }
       },
@@ -3499,20 +3495,37 @@
           "description": "The terminal validation status.",
           "readOnly": true
         },
-        "sasUri": {
-          "type": "string",
-          "description": "The read-only SAS URI of the error CSV describing the validation findings. Present only when findings were produced.",
-          "readOnly": true
-        },
-        "expirationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The UTC expiration timestamp of the error CSV SAS URI. Present only when sasUri is present.",
+        "validationErrorFile": {
+          "$ref": "#/definitions/ValidationErrorFile",
+          "description": "Download access to the error CSV describing the validation findings. Present only when findings were produced.",
           "readOnly": true
         }
       },
       "required": [
         "status"
+      ]
+    },
+    "ValidationErrorFile": {
+      "type": "object",
+      "description": "Time-bound download access to the error CSV describing validation findings.",
+      "properties": {
+        "sasUri": {
+          "type": "string",
+          "format": "password",
+          "description": "The read-only SAS URI of the error CSV describing the validation findings.",
+          "readOnly": true,
+          "x-ms-secret": true
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC expiration timestamp of the error CSV SAS URI.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "sasUri",
+        "expirationTime"
       ]
     },
     "ValidationStatus": {

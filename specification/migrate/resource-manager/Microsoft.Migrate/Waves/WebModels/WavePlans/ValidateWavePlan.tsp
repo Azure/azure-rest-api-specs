@@ -2,6 +2,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../../Common/Enums/Enums.tsp";
+import "../../Common/ArmModels/ValidationErrorFile.tsp";
 
 using TypeSpec.Versioning;
 using Azure.Core;
@@ -47,11 +48,7 @@ model ValidateWavePlanResponse {
   @visibility(Lifecycle.Read)
   status: ValidationStatus;
 
-  @doc("The read-only SAS URI of the error CSV describing the validation findings. Present only when findings were produced.")
+  @doc("Download access to the error CSV describing the validation findings. Present only when findings were produced.")
   @visibility(Lifecycle.Read)
-  sasUri?: string;
-
-  @doc("The UTC expiration timestamp of the error CSV SAS URI. Present only when sasUri is present.")
-  @visibility(Lifecycle.Read)
-  expirationTime?: utcDateTime;
+  validationErrorFile?: ValidationErrorFile;
 }
