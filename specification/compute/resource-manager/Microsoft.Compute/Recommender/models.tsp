@@ -158,6 +158,8 @@ model PlacementScore {
    * Placement preference from 0 to 10 (inclusive). Higher is better.
    */
   @added(Versions.v2026_10_05_preview)
+  @minValue(0)
+  @maxValue(10)
   placementPreference?: int32;
 
   /**
