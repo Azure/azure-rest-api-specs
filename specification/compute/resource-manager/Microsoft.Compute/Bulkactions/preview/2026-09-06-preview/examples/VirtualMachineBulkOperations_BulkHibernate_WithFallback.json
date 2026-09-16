@@ -1,5 +1,5 @@
 {
-  "title": "Hibernate virtual machines and fallback to deallocation if hibernate is not successful",
+  "title": "02 - Hibernate virtual machines and fallback to deallocation if hibernate is not successful",
   "operationId": "VirtualMachineBulkOperations_BulkHibernate",
   "parameters": {
     "api-version": "2026-09-06-preview",
@@ -9,7 +9,6 @@
     "requestBody": {
       "executionParameters": {
         "retryPolicy": {
-          "retryCount": 2,
           "retryWindowInMinutes": 30,
           "onFailureAction": "Deallocate"
         }
@@ -41,7 +40,6 @@
               "state": "PendingScheduling",
               "timezone": "UTC",
               "retryPolicy": {
-                "retryCount": 2,
                 "retryWindowInMinutes": 30,
                 "onFailureAction": "Deallocate"
               }
@@ -59,7 +57,6 @@
               "state": "PendingScheduling",
               "timezone": "UTC",
               "retryPolicy": {
-                "retryCount": 2,
                 "retryWindowInMinutes": 30,
                 "onFailureAction": "Deallocate"
               }

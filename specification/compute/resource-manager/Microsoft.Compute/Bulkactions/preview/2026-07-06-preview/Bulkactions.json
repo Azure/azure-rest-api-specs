@@ -1673,7 +1673,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkReimage": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkReimage",
-        "description": "Reimage one or more virtual machines. Reimaging is destructive and can replace operating system disk contents. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates.",
+        "description": "(Preview) Reimage one or more virtual machines. Reimaging is destructive and can replace operating system disk contents. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -4618,11 +4618,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
-        },
-        "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithContext",
-          "description": "The target virtual machines with caller-provided context strings to include with the operation result notifications."
+          "description": "The target virtual machines."
         }
       },
       "required": [
@@ -4639,11 +4635,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
-        },
-        "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithContext",
-          "description": "The target virtual machines with caller-provided tracking context. Do not specify this property together with `resources`."
+          "description": "The target virtual machines."
         },
         "forceDeletion": {
           "type": "boolean",
@@ -4664,11 +4656,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
-        },
-        "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithContext",
-          "description": "The target virtual machines with caller-provided context strings to include with the operation result notifications."
+          "description": "The target virtual machines."
         }
       },
       "required": [
@@ -4685,11 +4673,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
-        },
-        "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithContext",
-          "description": "The target virtual machines with caller-provided context strings to include with the operation result notifications."
+          "description": "The target virtual machines."
         },
         "reimageParameters": {
           "$ref": "#/definitions/ReimagePayload",
@@ -4710,11 +4694,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
-        },
-        "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithContext",
-          "description": "The target virtual machines with caller-provided context strings to include with the operation result notifications."
+          "description": "The target virtual machines."
         }
       },
       "required": [
@@ -7379,32 +7359,6 @@
         ]
       }
     },
-    "ResourceWithContext": {
-      "type": "object",
-      "description": "A virtual machine and optional caller-provided context string to include with the operation result notification.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure resource ID of the target virtual machine.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Compute/virtualMachines"
-              }
-            ]
-          }
-        },
-        "resourceContext": {
-          "type": "string",
-          "description": "Caller-provided context string returned with the virtual machine operation result notification. Do not include secrets or personal data."
-        }
-      },
-      "required": [
-        "resourceId",
-        "resourceContext"
-      ]
-    },
     "Resources": {
       "type": "object",
       "description": "The virtual machines targeted by a bulk action.",
@@ -7428,25 +7382,6 @@
       },
       "required": [
         "ids"
-      ]
-    },
-    "ResourcesWithContext": {
-      "type": "object",
-      "description": "The virtual machines targeted by a bulk action, with caller-provided context strings to include with the operation result notifications.",
-      "properties": {
-        "resources": {
-          "type": "array",
-          "description": "The target virtual machines and their caller-provided context strings.",
-          "items": {
-            "$ref": "#/definitions/ResourceWithContext"
-          },
-          "x-ms-identifiers": [
-            "resourceId"
-          ]
-        }
-      },
-      "required": [
-        "resources"
       ]
     },
     "RetryPolicy": {

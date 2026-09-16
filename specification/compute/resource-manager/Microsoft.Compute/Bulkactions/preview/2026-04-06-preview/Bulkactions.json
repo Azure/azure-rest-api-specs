@@ -937,7 +937,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkReimage": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkReimage",
-        "description": "Reimage one or more virtual machines. Reimaging is destructive and can replace operating system disk contents. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates.",
+        "description": "(Preview) Reimage one or more virtual machines. Reimaging is destructive and can replace operating system disk contents. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2323,7 +2323,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
+          "description": "The target virtual machines."
         }
       },
       "required": [
@@ -2341,7 +2341,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
+          "description": "The target virtual machines."
         },
         "forceDeletion": {
           "type": "boolean",
@@ -2363,7 +2363,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
+          "description": "The target virtual machines."
         }
       },
       "required": [
@@ -2381,7 +2381,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
+          "description": "The target virtual machines."
         },
         "reimageParameters": {
           "$ref": "#/definitions/ReimagePayload",
@@ -2403,7 +2403,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
+          "description": "The target virtual machines."
         }
       },
       "required": [

@@ -105,27 +105,6 @@ model Resources {
   ]>>;
 }
 
-@added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-@doc("A virtual machine and optional caller-provided context string to include with the operation result notification.")
-model ResourceWithContext {
-  @doc("The Azure resource ID of the target virtual machine.")
-  resourceId: armResourceIdentifier<[
-    {
-      type: "Microsoft.Compute/virtualMachines";
-    }
-  ]>;
-
-  @doc("Caller-provided context string returned with the virtual machine operation result notification. Do not include secrets or personal data.")
-  resourceContext: string;
-}
-
-@doc("The virtual machines targeted by a bulk action, with caller-provided context strings to include with the operation result notifications.")
-@added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-model ResourcesWithContext {
-  @identifiers(#["resourceId"])
-  @doc("The target virtual machines and their caller-provided context strings.")
-  resources: Array<ResourceWithContext>;
-}
 
 @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
 @doc("Caller-provided context associated with a virtual machine operation.")
@@ -388,6 +367,7 @@ model ResourceProvisionVdiPayload {
 
 @doc("The retry settings for a bulk action.")
 model RetryPolicy {
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @doc("The maximum number of retry attempts.")
   retryCount?: int32;
 
@@ -746,13 +726,9 @@ model ExecuteDeallocateRequest {
   @doc("The execution settings for the bulk action.")
   executionParameters: ExecutionParameters;
 
-  @doc("The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both.")
+  @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
-
-  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The target virtual machines with caller-provided context strings to include with the operation result notifications.")
-  resourcesWithContext?: ResourcesWithContext;
 }
 
 @doc("The virtual machines and execution settings for a bulk hibernate action.")
@@ -760,13 +736,9 @@ model ExecuteHibernateRequest {
   @doc("The execution settings for the bulk action.")
   executionParameters: ExecutionParameters;
 
-  @doc("The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both.")
+  @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
-
-  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The target virtual machines with caller-provided context strings to include with the operation result notifications.")
-  resourcesWithContext?: ResourcesWithContext;
 }
 
 @doc("The virtual machines and execution settings for a bulk start action.")
@@ -774,13 +746,10 @@ model ExecuteStartRequest {
   @doc("The execution settings for the bulk action.")
   executionParameters: ExecutionParameters;
 
-  @doc("The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both.")
+  @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
 
-  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The target virtual machines with caller-provided context strings to include with the operation result notifications.")
-  resourcesWithContext?: ResourcesWithContext;
 }
 
 @doc("The virtual machine configuration and execution settings for a bulk create action.")
@@ -829,13 +798,10 @@ model ExecuteReimageRequest {
   @doc("The execution settings for the bulk action.")
   executionParameters: ExecutionParameters;
 
-  @doc("The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both.")
+  @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
 
-  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The target virtual machines with caller-provided context strings to include with the operation result notifications.")
-  resourcesWithContext?: ResourcesWithContext;
 
   @doc("The shared and per-virtual-machine reimage configuration.")
   reimageParameters?: ReimagePayload;
@@ -897,13 +863,10 @@ model ExecuteDeleteRequest {
   @doc("The execution settings for the bulk action.")
   executionParameters: ExecutionParameters;
 
-  @doc("The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both.")
+  @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
 
-  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The target virtual machines with caller-provided tracking context. Do not specify this property together with `resources`.")
-  resourcesWithContext?: ResourcesWithContext;
 
   @doc("Indicates whether Bulk Actions uses forced deletion for the target virtual machines.")
   forceDeletion?: boolean;

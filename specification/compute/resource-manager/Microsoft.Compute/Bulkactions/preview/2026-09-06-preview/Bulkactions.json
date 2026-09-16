@@ -169,11 +169,11 @@
           }
         },
         "x-ms-examples": {
-          "Operations_List_MaximumSet_Gen_Example": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_Minimum_Gen_Example": {
+          "01 - Operations_List_Minimum_Gen_Example": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          },
+          "02 - Operations_List_MaximumSet_Gen_Example": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1308,14 +1308,14 @@
           }
         },
         "x-ms-examples": {
-          "Cancel multiple operations": {
+          "01 - Cancel multiple operations": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_BasicSuccess.json"
           },
-          "Response with an unknown operation error during cancellation": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_OperationNotFoundError.json"
-          },
-          "Response with partially successful result": {
+          "02 - Response with partially successful result": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_PartialSuccess.json"
+          },
+          "03 - Response with an unknown operation error during cancellation": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_OperationNotFoundError.json"
           }
         }
       }
@@ -1367,10 +1367,10 @@
           }
         },
         "x-ms-examples": {
-          "Deallocate multiple virtual machines": {
+          "01 - Deallocate multiple virtual machines": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_BasicSuccess.json"
           },
-          "Response when a virtual machine does not exist": {
+          "02 - Response when a virtual machine does not exist": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_VmNotFoundError.json"
           }
         }
@@ -1423,13 +1423,16 @@
           }
         },
         "x-ms-examples": {
-          "Delete multiple virtual machines": {
+          "01 - Delete multiple virtual machines": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_BasicSuccess.json"
           },
-          "Delete multiple virtual machines (comprehensive)": {
+          "02 - Delete multiple virtual machines (comprehensive)": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_ComprehensiveSuccess.json"
           },
-          "Response when a virtual machine does not exist": {
+          "03 - Force delete multiple virtual machines": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_ForceDeleteSuccess.json"
+          },
+          "04 - Response when a virtual machine does not exist": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_VmNotFoundError.json"
           }
         }
@@ -1482,14 +1485,11 @@
           }
         },
         "x-ms-examples": {
-          "Get multiple operation statuses": {
+          "01 - Get the status of successfully completed operations": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_BasicSuccess.json"
           },
-          "Response with an operation not found error": {
+          "02 - Response with an operation not found error": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_OperationNotFoundError.json"
-          },
-          "Show a successful deallocation fallback after hibernation fails": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_DeallocateFallbackAfterHibernateFail.json"
           }
         }
       }
@@ -1541,13 +1541,16 @@
           }
         },
         "x-ms-examples": {
-          "Hibernate multiple virtual machines": {
+          "01 - Hibernate multiple virtual machines": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_Basic.json"
           },
-          "Hibernate virtual machines and fallback to deallocation if hibernate is not successful": {
+          "02 - Hibernate virtual machines and fallback to deallocation if hibernate is not successful": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_WithFallback.json"
           },
-          "Response when a virtual machine does not exist": {
+          "03 - Hibernate a virtual machine with a successful deallocation fallback": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_DeallocationFallbackSuccess.json"
+          },
+          "04 - Response when a virtual machine does not exist": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_VmNotFoundError.json"
           }
         }
@@ -1556,7 +1559,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkReimage": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkReimage",
-        "description": "Reimage one or more virtual machines. Reimaging is destructive and can replace operating system disk contents. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates.",
+        "description": "(Preview) Reimage one or more virtual machines. Reimaging is destructive and can replace operating system disk contents. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1600,13 +1603,13 @@
           }
         },
         "x-ms-examples": {
-          "Reimage multiple virtual machines": {
+          "01 - Reimage multiple virtual machines": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_BasicSuccess.json"
           },
-          "Reimage virtual machines with shared settings and a per-VM override": {
+          "02 - Reimage virtual machines with shared settings and a per-VM override": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_ComprehensiveSuccess.json"
           },
-          "Response when a virtual machine does not exist": {
+          "03 - Response when a virtual machine does not exist": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_VmNotFoundError.json"
           }
         }
@@ -1659,17 +1662,17 @@
           }
         },
         "x-ms-examples": {
-          "Response when a virtual machine does not exist": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_VmNotFoundError.json"
-          },
-          "Start a virtual machine with caller-provided context to include in the operation result notifications.": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_WithResourceContext.json"
-          },
-          "Start multiple virtual machines": {
+          "01 - Start multiple virtual machines": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_BasicSuccess.json"
           },
-          "Start virtual machines with retries, health verification, and capacity recommendations": {
+          "02 - Start virtual machines with retries, health verification, and capacity recommendations": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_ComprehensiveSuccess.json"
+          },
+          "03 - Start a single virtual machine": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_SingleVmSuccess.json"
+          },
+          "04 - Response when a virtual machine does not exist": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_VmNotFoundError.json"
           }
         }
       }
@@ -1757,10 +1760,10 @@
           }
         },
         "x-ms-examples": {
-          "Get a recurring scheduled action": {
+          "01 - Get a recurring scheduled action": {
             "$ref": "./examples/ScheduledActions_Get_BasicSuccess.json"
           },
-          "Get a recurring scheduled action with complete configuration": {
+          "02 - Get a recurring scheduled action with complete configuration": {
             "$ref": "./examples/ScheduledActions_Get_ComprehensiveSuccess.json"
           }
         }
@@ -1831,10 +1834,10 @@
           }
         },
         "x-ms-examples": {
-          "Create a new recurring scheduled action": {
+          "01 - Create a new recurring scheduled action": {
             "$ref": "./examples/ScheduledActions_CreateOrUpdate_BasicSuccess.json"
           },
-          "Create a recurring scheduled action with comprehensive settings": {
+          "02 - Create a recurring scheduled action with comprehensive settings": {
             "$ref": "./examples/ScheduledActions_CreateOrUpdate_ComprehensiveSuccess.json"
           }
         },
@@ -1911,11 +1914,11 @@
           }
         },
         "x-ms-examples": {
-          "Update a recurring scheduled action schedule": {
-            "$ref": "./examples/ScheduledActions_Update_ComprehensiveSuccess.json"
-          },
-          "Update the action type of a recurring scheduled action": {
+          "01 - Update the action type of a recurring scheduled action": {
             "$ref": "./examples/ScheduledActions_Update_BasicSuccess.json"
+          },
+          "02 - Update a recurring scheduled action schedule": {
+            "$ref": "./examples/ScheduledActions_Update_ComprehensiveSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2058,13 +2061,13 @@
           }
         },
         "x-ms-examples": {
-          "Attach resources to a recurring scheduled action": {
+          "01 - Attach resources to a recurring scheduled action": {
             "$ref": "./examples/ScheduledActions_AttachResources_BasicSuccess.json"
           },
-          "Attach resources to a recurring scheduled action with individual notification settings": {
+          "02 - Attach resources to a recurring scheduled action with individual notification settings": {
             "$ref": "./examples/ScheduledActions_AttachResources_ComprehensiveSuccess.json"
           },
-          "Response with partial results when attaching resources to a recurring scheduled action": {
+          "03 - Response with partial results when attaching resources to a recurring scheduled action": {
             "$ref": "./examples/ScheduledActions_AttachResources_PartialSuccess.json"
           }
         },
@@ -2143,13 +2146,13 @@
           }
         },
         "x-ms-examples": {
-          "Cancel all operations in the next recurring scheduled action occurrence": {
-            "$ref": "./examples/ScheduledActions_CancelNextOccurrence_EntireOccurrenceSuccess.json"
-          },
-          "Cancel the next recurring scheduled action occurrence for multiple resources": {
+          "01 - Cancel the next recurring scheduled action occurrence for multiple resources": {
             "$ref": "./examples/ScheduledActions_CancelNextOccurrence_BasicSuccess.json"
           },
-          "Response with partial results when canceling the next recurring scheduled action occurrence": {
+          "02 - Cancel all operations in the next recurring scheduled action occurrence": {
+            "$ref": "./examples/ScheduledActions_CancelNextOccurrence_EntireOccurrenceSuccess.json"
+          },
+          "03 - Response with partial results when canceling the next recurring scheduled action occurrence": {
             "$ref": "./examples/ScheduledActions_CancelNextOccurrence_PartialSuccess.json"
           }
         },
@@ -2228,10 +2231,10 @@
           }
         },
         "x-ms-examples": {
-          "Detach resources from a recurring scheduled action": {
+          "01 - Detach resources from a recurring scheduled action": {
             "$ref": "./examples/ScheduledActions_DetachResources_BasicSuccess.json"
           },
-          "Detach resources from a recurring scheduled action with partial success": {
+          "02 - Detach resources from a recurring scheduled action with partial success": {
             "$ref": "./examples/ScheduledActions_DetachResources_PartialSuccess.json"
           }
         },
@@ -2410,11 +2413,11 @@
           }
         },
         "x-ms-examples": {
-          "List a page of recurring scheduled action occurrences": {
-            "$ref": "./examples/Occurrences_ListByScheduledAction_PagedSuccess.json"
-          },
-          "List recurring scheduled action occurrences": {
+          "01 - List recurring scheduled action occurrences": {
             "$ref": "./examples/Occurrences_ListByScheduledAction_BasicSuccess.json"
+          },
+          "02 - List a page of recurring scheduled action occurrences": {
+            "$ref": "./examples/Occurrences_ListByScheduledAction_PagedSuccess.json"
           }
         },
         "x-ms-pageable": {
@@ -2471,10 +2474,10 @@
           }
         },
         "x-ms-examples": {
-          "Read a recurring scheduled action occurrence": {
+          "01 - Read a recurring scheduled action occurrence": {
             "$ref": "./examples/Occurrences_Get_BasicSuccess.json"
           },
-          "Read a recurring scheduled action occurrence with mixed results": {
+          "02 - Read a recurring scheduled action occurrence with mixed results": {
             "$ref": "./examples/Occurrences_Get_ComprehensiveSuccess.json"
           }
         }
@@ -2557,13 +2560,13 @@
           }
         },
         "x-ms-examples": {
-          "Cancel all operations in a recurring scheduled action occurrence": {
-            "$ref": "./examples/Occurrences_Cancel_EntireOccurrenceSuccess.json"
-          },
-          "Cancel operations in a recurring scheduled action occurrence": {
+          "01 - Cancel operations in a recurring scheduled action occurrence": {
             "$ref": "./examples/Occurrences_Cancel_BasicSuccess.json"
           },
-          "Response with partial results when canceling resources in a recurring scheduled action occurrence": {
+          "02 - Cancel all operations in a recurring scheduled action occurrence": {
+            "$ref": "./examples/Occurrences_Cancel_EntireOccurrenceSuccess.json"
+          },
+          "03 - Response with partial results when canceling resources in a recurring scheduled action occurrence": {
             "$ref": "./examples/Occurrences_Cancel_PartialSuccess.json"
           }
         },
@@ -2650,13 +2653,13 @@
           }
         },
         "x-ms-examples": {
-          "Delay all operations in a recurring scheduled action occurrence": {
-            "$ref": "./examples/Occurrences_Delay_EntireOccurrenceSuccess.json"
-          },
-          "Delay operations in a recurring scheduled action occurrence": {
+          "01 - Delay operations in a recurring scheduled action occurrence": {
             "$ref": "./examples/Occurrences_Delay_BasicSuccess.json"
           },
-          "Response with partial success results when delaying operations in a recurring scheduled action occurrence": {
+          "02 - Delay all operations in a recurring scheduled action occurrence": {
+            "$ref": "./examples/Occurrences_Delay_EntireOccurrenceSuccess.json"
+          },
+          "03 - Response with partial success results when delaying operations in a recurring scheduled action occurrence": {
             "$ref": "./examples/Occurrences_Delay_PartialSuccess.json"
           }
         },
@@ -2715,11 +2718,11 @@
           }
         },
         "x-ms-examples": {
-          "List a page of resources in a recurring scheduled action occurrence": {
-            "$ref": "./examples/Occurrences_ListResources_PagedSuccess.json"
-          },
-          "List resources in a recurring scheduled action occurrence": {
+          "01 - List resources in a recurring scheduled action occurrence": {
             "$ref": "./examples/Occurrences_ListResources_BasicSuccess.json"
+          },
+          "02 - List a page of resources in a recurring scheduled action occurrence": {
+            "$ref": "./examples/Occurrences_ListResources_PagedSuccess.json"
           }
         },
         "x-ms-pageable": {
@@ -2777,14 +2780,14 @@
           }
         },
         "x-ms-examples": {
-          "Response with partial results when updating recurring scheduled action resources": {
-            "$ref": "./examples/ScheduledActions_PatchResources_PartialSuccess.json"
+          "01 - Update settings for recurring scheduled action resources": {
+            "$ref": "./examples/ScheduledActions_PatchResources_BasicSuccess.json"
           },
-          "Update resource-specific notification settings for a recurring scheduled action": {
+          "02 - Update resource-specific notification settings for a recurring scheduled action": {
             "$ref": "./examples/ScheduledActions_PatchResources_ComprehensiveSuccess.json"
           },
-          "Update settings for recurring scheduled action resources": {
-            "$ref": "./examples/ScheduledActions_PatchResources_BasicSuccess.json"
+          "03 - Response with partial results when updating recurring scheduled action resources": {
+            "$ref": "./examples/ScheduledActions_PatchResources_PartialSuccess.json"
           }
         }
       }
@@ -4597,11 +4600,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
-        },
-        "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithContext",
-          "description": "The target virtual machines with caller-provided context strings to include with the operation result notifications."
+          "description": "The target virtual machines."
         }
       },
       "required": [
@@ -4618,11 +4617,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
-        },
-        "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithContext",
-          "description": "The target virtual machines with caller-provided tracking context. Do not specify this property together with `resources`."
+          "description": "The target virtual machines."
         },
         "forceDeletion": {
           "type": "boolean",
@@ -4643,11 +4638,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
-        },
-        "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithContext",
-          "description": "The target virtual machines with caller-provided context strings to include with the operation result notifications."
+          "description": "The target virtual machines."
         }
       },
       "required": [
@@ -4664,11 +4655,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
-        },
-        "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithContext",
-          "description": "The target virtual machines with caller-provided context strings to include with the operation result notifications."
+          "description": "The target virtual machines."
         },
         "reimageParameters": {
           "$ref": "#/definitions/ReimagePayload",
@@ -4689,11 +4676,7 @@
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines. Use only `resources` or `resourcesWithContext` within a single request, not both."
-        },
-        "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithContext",
-          "description": "The target virtual machines with caller-provided context strings to include with the operation result notifications."
+          "description": "The target virtual machines."
         }
       },
       "required": [
@@ -6899,32 +6882,6 @@
         ]
       }
     },
-    "ResourceWithContext": {
-      "type": "object",
-      "description": "A virtual machine and optional caller-provided context string to include with the operation result notification.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure resource ID of the target virtual machine.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Compute/virtualMachines"
-              }
-            ]
-          }
-        },
-        "resourceContext": {
-          "type": "string",
-          "description": "Caller-provided context string returned with the virtual machine operation result notification. Do not include secrets or personal data."
-        }
-      },
-      "required": [
-        "resourceId",
-        "resourceContext"
-      ]
-    },
     "Resources": {
       "type": "object",
       "description": "The virtual machines targeted by a bulk action.",
@@ -6950,34 +6907,10 @@
         "ids"
       ]
     },
-    "ResourcesWithContext": {
-      "type": "object",
-      "description": "The virtual machines targeted by a bulk action, with caller-provided context strings to include with the operation result notifications.",
-      "properties": {
-        "resources": {
-          "type": "array",
-          "description": "The target virtual machines and their caller-provided context strings.",
-          "items": {
-            "$ref": "#/definitions/ResourceWithContext"
-          },
-          "x-ms-identifiers": [
-            "resourceId"
-          ]
-        }
-      },
-      "required": [
-        "resources"
-      ]
-    },
     "RetryPolicy": {
       "type": "object",
       "description": "The retry settings for a bulk action.",
       "properties": {
-        "retryCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of retry attempts."
-        },
         "retryWindowInMinutes": {
           "type": "integer",
           "format": "int32",
@@ -7468,11 +7401,6 @@
       "type": "object",
       "description": "Retry settings for a scheduled action operation.",
       "properties": {
-        "retryCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of retry attempts."
-        },
         "retryWindowInMinutes": {
           "type": "integer",
           "format": "int32",

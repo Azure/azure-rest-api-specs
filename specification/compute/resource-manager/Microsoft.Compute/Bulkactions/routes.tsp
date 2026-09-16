@@ -236,7 +236,7 @@ interface VirtualMachineBulkOperations {
     body: CancelOperationsRequest,
   ): ArmResponse<CancelOperationsResponse> | ErrorResponse;
 
-  /** Reimage one or more virtual machines. Reimaging is destructive and can replace operating system disk contents. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates. */
+  /** (Preview) Reimage one or more virtual machines. Reimaging is destructive and can replace operating system disk contents. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates. */
   @removed(Versions.`2026-06-06`)
   @added(Versions.`2026-07-06-preview`)
   @post
