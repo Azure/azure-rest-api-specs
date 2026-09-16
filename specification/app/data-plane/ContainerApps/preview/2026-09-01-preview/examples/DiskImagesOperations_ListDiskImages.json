@@ -6,39 +6,39 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "example-resource-group",
     "sandboxGroupName": "example-sandbox-group",
-    "continuationToken": "example-continuation-token",
+    "skipToken": "example-skip-token",
     "labels": "environment=development,team=platform"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
-        {
-          "id": "disk-image-01",
-          "name": "development-image",
-          "labels": {
-            "environment": "development",
-            "team": "platform"
-          },
-          "image": {
-            "base": "mcr.microsoft.com/azurelinux/base/core:3.0",
-            "entrypoint": [
-              "/bin/sh"
-            ],
-            "cmd": [
-              "-c",
-              "echo ready"
-            ]
-          },
-          "status": {
-            "state": "Succeeded",
-            "createdAt": "2026-08-15T10:00:00Z",
-            "updatedAt": "2026-08-15T10:05:00Z"
-          },
-          "sizeInMB": 512
-        }
-      ],
-        "nextLink": "https://example.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resource-group/sandboxGroups/example-sandbox-group/diskimages?api-version=2026-09-01-preview&continuationToken=example-next-continuation-token"
+          {
+            "id": "disk-image-01",
+            "name": "development-image",
+            "labels": {
+              "environment": "development",
+              "team": "platform"
+            },
+            "image": {
+              "base": "mcr.microsoft.com/azurelinux/base/core:3.0",
+              "entrypoint": [
+                "/bin/sh"
+              ],
+              "cmd": [
+                "-c",
+                "echo ready"
+              ]
+            },
+            "status": {
+              "state": "Succeeded",
+              "createdAt": "2026-08-15T10:00:00Z",
+              "updatedAt": "2026-08-15T10:05:00Z"
+            },
+            "sizeInMB": 512
+          }
+        ],
+        "nextLink": "https://example.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resource-group/sandboxGroups/example-sandbox-group/diskimages?api-version=2026-09-01-preview&skipToken=example-next-skip-token"
       }
     },
     "401": {
