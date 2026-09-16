@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "EventGridManagementClient",
-    "version": "2025-11-15-preview",
+    "version": "2026-06-15-preview",
     "description": "Azure EventGrid Management Client",
     "x-typespec-generated": [
       {
@@ -13555,8 +13555,29 @@
           "readOnly": true
         },
         "minimumTlsVersionAllowed": {
-          "$ref": "#/definitions/TlsVersion",
-          "description": "Minimum TLS version of the publisher allowed to publish to this domain"
+          "type": "string",
+          "description": "Minimum TLS version of the publisher allowed to publish to this domain",
+          "default": "1.2",
+          "enum": [
+            "1.2",
+            "1.3"
+          ],
+          "x-ms-enum": {
+            "name": "TlsVersion",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "1.2",
+                "value": "1.2",
+                "description": "1.2"
+              },
+              {
+                "name": "1.3",
+                "value": "1.3",
+                "description": "1.3"
+              }
+            ]
+          }
         },
         "endpoint": {
           "type": "string",
@@ -14967,6 +14988,30 @@
         ]
       }
     },
+    "IpAddressType": {
+      "type": "string",
+      "description": "The IP address type of the namespace. This determines whether the namespace is reachable over IPv4 only, or over both IPv4 and IPv6.",
+      "enum": [
+        "IPv4",
+        "DualStack"
+      ],
+      "x-ms-enum": {
+        "name": "IpAddressType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "IPv4"
+          },
+          {
+            "name": "DualStack",
+            "value": "DualStack",
+            "description": "DualStack"
+          }
+        ]
+      }
+    },
     "IsNotNullAdvancedFilter": {
       "type": "object",
       "description": "IsNotNull Advanced Filter.",
@@ -15338,7 +15383,11 @@
         },
         "minimumTlsVersionAllowed": {
           "$ref": "#/definitions/TlsVersion",
-          "description": "Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported."
+          "description": "Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS versions 1.2 and 1.3 are supported."
+        },
+        "ipAddressType": {
+          "$ref": "#/definitions/IpAddressType",
+          "description": "The IP address type of the namespace. When set to DualStack, the namespace is reachable over both IPv4 and IPv6. Defaults to IPv4."
         },
         "autoScaleConfiguration": {
           "$ref": "#/definitions/AutoScaleConfiguration",
@@ -15692,6 +15741,10 @@
             "$ref": "#/definitions/InboundIpRule"
           },
           "x-ms-identifiers": []
+        },
+        "ipAddressType": {
+          "$ref": "#/definitions/IpAddressType",
+          "description": "The IP address type of the namespace. When set to DualStack, the namespace is reachable over both IPv4 and IPv6. Defaults to IPv4."
         },
         "autoScaleConfiguration": {
           "$ref": "#/definitions/UpdateAutoScaleConfiguration",
@@ -17059,8 +17112,29 @@
           "description": "The fully qualified ARM Id of the partner registration that should be associated with this partner namespace. This takes the following format:\n/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerRegistrations/{partnerRegistrationName}."
         },
         "minimumTlsVersionAllowed": {
-          "$ref": "#/definitions/TlsVersion",
-          "description": "Minimum TLS version of the publisher allowed to publish to this partner namespace"
+          "type": "string",
+          "description": "Minimum TLS version of the publisher allowed to publish to this partner namespace",
+          "default": "1.2",
+          "enum": [
+            "1.2",
+            "1.3"
+          ],
+          "x-ms-enum": {
+            "name": "TlsVersion",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "1.2",
+                "value": "1.2",
+                "description": "1.2"
+              },
+              {
+                "name": "1.3",
+                "value": "1.3",
+                "description": "1.3"
+              }
+            ]
+          }
         },
         "endpoint": {
           "type": "string",
@@ -19204,28 +19278,22 @@
       "type": "string",
       "description": "Minimum TLS version of the publisher allowed to publish to this domain",
       "enum": [
-        "1.0",
-        "1.1",
-        "1.2"
+        "1.2",
+        "1.3"
       ],
       "x-ms-enum": {
         "name": "TlsVersion",
         "modelAsString": true,
         "values": [
           {
-            "name": "1.0",
-            "value": "1.0",
-            "description": "1.0"
-          },
-          {
-            "name": "1.1",
-            "value": "1.1",
-            "description": "1.1"
-          },
-          {
             "name": "1.2",
             "value": "1.2",
             "description": "1.2"
+          },
+          {
+            "name": "1.3",
+            "value": "1.3",
+            "description": "1.3"
           }
         ]
       }
@@ -19310,8 +19378,29 @@
           "description": "Event Type Information for the user topic. This information is provided by the publisher and can be used by the\nsubscriber to view different types of events that are published."
         },
         "minimumTlsVersionAllowed": {
-          "$ref": "#/definitions/TlsVersion",
-          "description": "Minimum TLS version of the publisher allowed to publish to this topic"
+          "type": "string",
+          "description": "Minimum TLS version of the publisher allowed to publish to this topic",
+          "default": "1.2",
+          "enum": [
+            "1.2",
+            "1.3"
+          ],
+          "x-ms-enum": {
+            "name": "TlsVersion",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "1.2",
+                "value": "1.2",
+                "description": "1.2"
+              },
+              {
+                "name": "1.3",
+                "value": "1.3",
+                "description": "1.3"
+              }
+            ]
+          }
         },
         "inputSchema": {
           "type": "string",

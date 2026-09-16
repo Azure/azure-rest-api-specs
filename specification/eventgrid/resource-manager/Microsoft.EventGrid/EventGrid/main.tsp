@@ -61,10 +61,10 @@ namespace Microsoft.EventGrid;
  */
 enum Versions {
   /**
-   * The 2025-11-15-preview API version.
+   * The 2026-06-15-preview API version.
    */
   @previewVersion
-  v2025_11_15_preview: "2025-11-15-preview",
+  v2026_06_15_preview: "2026-06-15-preview",
 }
 
 interface Operations
