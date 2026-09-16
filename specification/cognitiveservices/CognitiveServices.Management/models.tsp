@@ -4038,11 +4038,6 @@ model RaiPolicyProperties {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
-<<<<<<< HEAD
-  @removed(Versions.v2026_09_01)
-  @added(Versions.v2026_09_15_preview)
-=======
->>>>>>> origin/swagger-agent/CogSvc-2026-09-15-preview-typespec
   egressPolicy?: RaiEgressPolicyConfig;
 }
 
@@ -7345,11 +7340,6 @@ model ManagedComputeCapacityListResult {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-<<<<<<< HEAD
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
-=======
->>>>>>> origin/swagger-agent/CogSvc-2026-09-15-preview-typespec
 union RaiEgressMode {
   string,
 
@@ -7370,11 +7360,6 @@ union RaiEgressMode {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-<<<<<<< HEAD
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
-=======
->>>>>>> origin/swagger-agent/CogSvc-2026-09-15-preview-typespec
 union RaiEgressDefaultAction {
   string,
 
@@ -7391,11 +7376,6 @@ union RaiEgressDefaultAction {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-<<<<<<< HEAD
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
-=======
->>>>>>> origin/swagger-agent/CogSvc-2026-09-15-preview-typespec
 union RaiEgressScheme {
   string,
 
@@ -7412,11 +7392,6 @@ union RaiEgressScheme {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-<<<<<<< HEAD
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
-=======
->>>>>>> origin/swagger-agent/CogSvc-2026-09-15-preview-typespec
 union RaiEgressRuleActionType {
   string,
 
@@ -7439,11 +7414,6 @@ union RaiEgressRuleActionType {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-<<<<<<< HEAD
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
-=======
->>>>>>> origin/swagger-agent/CogSvc-2026-09-15-preview-typespec
 union RaiEgressHeaderOperation {
   string,
 
@@ -7463,11 +7433,6 @@ union RaiEgressHeaderOperation {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-<<<<<<< HEAD
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
-=======
->>>>>>> origin/swagger-agent/CogSvc-2026-09-15-preview-typespec
 model RaiEgressSecretRef {
   /** Identifier of the secret to inject. */
   secretId: string;
@@ -7486,11 +7451,6 @@ model RaiEgressSecretRef {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-<<<<<<< HEAD
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
-=======
->>>>>>> origin/swagger-agent/CogSvc-2026-09-15-preview-typespec
 model RaiEgressManagedIdentityRef {
   /** The resource/audience the token is requested for. */
   resource: string;
@@ -7505,11 +7465,6 @@ model RaiEgressManagedIdentityRef {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-<<<<<<< HEAD
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
-=======
->>>>>>> origin/swagger-agent/CogSvc-2026-09-15-preview-typespec
 model RaiEgressHeaderValueRef {
   /** Resolve the value from a stored secret. */
   secretRef?: RaiEgressSecretRef;
@@ -7526,11 +7481,6 @@ model RaiEgressHeaderValueRef {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-<<<<<<< HEAD
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
-=======
->>>>>>> origin/swagger-agent/CogSvc-2026-09-15-preview-typespec
 model RaiEgressHeaderTransform {
   /** The operation to perform on this header. */
   operation: RaiEgressHeaderOperation;
@@ -7559,11 +7509,6 @@ model RaiEgressHeaderTransform {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-<<<<<<< HEAD
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
-=======
->>>>>>> origin/swagger-agent/CogSvc-2026-09-15-preview-typespec
 model RaiEgressRewriteTarget {
   /** Target scheme. Original scheme is kept if omitted. */
   scheme?: RaiEgressScheme;
@@ -7585,11 +7530,6 @@ model RaiEgressRewriteTarget {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-<<<<<<< HEAD
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
-=======
->>>>>>> origin/swagger-agent/CogSvc-2026-09-15-preview-typespec
 model RaiEgressRuleAction {
   /** The kind of action. */
   actionType: RaiEgressRuleActionType;
@@ -7611,11 +7551,6 @@ model RaiEgressRuleAction {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-<<<<<<< HEAD
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
-=======
->>>>>>> origin/swagger-agent/CogSvc-2026-09-15-preview-typespec
 union RaiEgressRuleType {
   string,
 
@@ -7633,11 +7568,6 @@ union RaiEgressRuleType {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-<<<<<<< HEAD
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
-=======
->>>>>>> origin/swagger-agent/CogSvc-2026-09-15-preview-typespec
 model RaiEgressRuleMatch {
   /**
    * Host pattern to match using DNS wildcard syntax (e.g., "\*.openai.com").
@@ -7659,11 +7589,6 @@ model RaiEgressRuleMatch {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-<<<<<<< HEAD
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
-=======
->>>>>>> origin/swagger-agent/CogSvc-2026-09-15-preview-typespec
 model RaiEgressRule {
   /**
    * Name of the rule. Must be unique within the policy.
@@ -7700,11 +7625,6 @@ model RaiEgressRule {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
-<<<<<<< HEAD
-@removed(Versions.v2026_09_01)
-@added(Versions.v2026_09_15_preview)
-=======
->>>>>>> origin/swagger-agent/CogSvc-2026-09-15-preview-typespec
 model RaiEgressPolicyConfig {
   /**
    * The enforcement mode for egress rules.
