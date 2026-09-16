@@ -37,20 +37,13 @@ jobs:
     name: ARM Auto SignOff - Set Status
 
     # workflow_run - already filtered by triggers above
-    # pull_request_target:labeled - filter to only the input and output labels
+    # pull_request_target:labeled - run on any label event to catch human-added labels
+    # (e.g. BreakingChange-*) since workflow-added labels can't trigger workflows
     if: |
       github.event_name == 'workflow_run' ||
       (github.event_name == 'pull_request_target' &&
        (github.event.action == 'labeled' ||
-        github.event.action == 'unlabeled') &&
-       (github.event.label.name == 'Approved-Suppression' ||
-        github.event.label.name == 'ARMAutoSignedOff' ||
-        github.event.label.name == 'ARMAutoSignedOff-IncrementalTSP' ||
-        github.event.label.name == 'ARMAutoSignedOff-Trivial' ||
-        github.event.label.name == 'ARMReview' ||
-        github.event.label.name == 'ARMSignedOff' ||
-        github.event.label.name == 'NotReadyForARMReview' ||
-        github.event.label.name == 'SuppressionReviewRequired'))
+        github.event.action == 'unlabeled'))
 
     runs-on: ubuntu-slim
 
