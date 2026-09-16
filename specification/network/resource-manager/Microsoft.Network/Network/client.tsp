@@ -13,6 +13,32 @@ using Microsoft.Network;
 using Microsoft.Compute;
 using Common;
 
+// Cloud Services is deprecated and no longer represented by the current C# Compute SDK.
+@@scope(
+  Microsoft.Network.NetworkInterfaces.getCloudServiceNetworkInterface,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Network.NetworkInterfaces.listCloudServiceRoleInstanceNetworkInterfaces,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Network.NetworkInterfacesOperationGroup.listCloudServiceNetworkInterfaces,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Network.PublicIPAddresses.getCloudServicePublicIPAddress,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Network.PublicIPAddresses.listCloudServiceRoleInstancePublicIPAddresses,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Network.PublicIPAddressesOperationGroup.listCloudServicePublicIPAddresses,
+  "!csharp"
+);
+
 // This empty namespace is the merged SDK client target used by later client
 // customizations such as @@clientName and @@clientLocation.
 #suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "CombineClient intentionally merges the Microsoft.Network and Microsoft.Compute (VMSS) services into a single SDK client surface via autoMergeService; the resulting multiple-service dependency is by design for this combined client target."
