@@ -4429,7 +4429,7 @@ model EmbeddingSource {
   /**
    * The endpoint URL of the AI model provider resource.
    */
-  endpoint: string;
+  endpoint: url;
 
   /**
    * The model deployment name used for generating embeddings.
