@@ -1735,8 +1735,7 @@ model DatabaseAccountGetProperties {
   enableMaterializedViews?: boolean;
 
   /**
-   * Flag to indicate whether Integrated Embeddings is enabled on the Cosmos DB
-   * account. This property is supported only for API for NoSQL accounts.
+   * Flag to indicate whether Integrated Embeddings is enabled on the Cosmos DB account. This property is supported only for API for NoSQL accounts.
    */
   @added(Versions.v2026_09_01_preview)
   enableEmbeddingGenerator?: boolean;
@@ -2552,10 +2551,7 @@ model DatabaseAccountUpdateProperties {
   enableMaterializedViews?: boolean;
 
   /**
-   * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB
-   * account. This property is supported only for existing API for NoSQL accounts
-   * with continuous backup and all versions and deletes change feed enabled.
-   * Integrated Embeddings cannot be disabled after it is enabled.
+   * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account. This property is supported only for existing API for NoSQL accounts with continuous backup and all versions and deletes change feed enabled. Integrated Embeddings cannot be disabled after it is enabled.
    */
   @added(Versions.v2026_09_01_preview)
   enableEmbeddingGenerator?: boolean;
@@ -2798,11 +2794,7 @@ model DatabaseAccountCreateUpdateProperties {
   enableMaterializedViews?: boolean;
 
   /**
-   * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB
-   * account. This property is supported only for API for NoSQL accounts and cannot
-   * be enabled during account creation. Enable it by updating an existing account
-   * that has continuous backup and all versions and deletes change feed enabled.
-   * Integrated Embeddings cannot be disabled after it is enabled.
+   * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account. This property is supported only for API for NoSQL accounts and cannot be enabled during account creation. Enable it by updating an existing account that has continuous backup and all versions and deletes change feed enabled. Integrated Embeddings cannot be disabled after it is enabled.
    */
   @added(Versions.v2026_09_01_preview)
   enableEmbeddingGenerator?: boolean;
