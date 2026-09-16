@@ -1509,5 +1509,29 @@ enum ProvisioningStateEnum {
 @@alternateType(
   Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
   Microsoft.Storage.UserAssignedIdentity,
+  "java,python"
+);
+
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  Microsoft.Storage.Identity,
+  "java"
+);
+
+@@alternateType(
+  ContextCache.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp,java,python,typescript,go"
+);
+
+@@alternateType(
+  ContextCacheUpdate.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp,java,python,typescript,go"
+);
+
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
+  Microsoft.Storage.UserAssignedIdentity,
   "java"
 );
