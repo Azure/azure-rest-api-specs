@@ -855,8 +855,10 @@ const rulesPri0dataPlane = [
     anyPrerequisiteLabels: ["data-plane-review-requested"],
     anyRequiredLabels: ["data-plane-review-signoff"],
     troubleshootingGuide:
-      `Your PR requires an API stewardship board review as it introduces a new API version (label: <code>new-api-version</code>). ` +
-      `Send an email to ${href("azureapirbcore@microsoft.com", "mailto:azureapirbcore@microsoft.com")} with your PR link for offline review.`,
+      `Your PR requires an API stewardship review as it introduces a new data-plane API version (label: <code>data-plane-review-requested</code>). ` +
+      `A data-plane API reviewer is assigned from the pool and unblocks merge by applying the protected <code>data-plane-review-signoff</code> label. ` +
+      `To request or expedite the ${href("offline REST API review", "https://eng.ms/docs/products/azure-developer-experience/design/api-review#requesting-an-offline-rest-api-review")}, ` +
+      `email ${href("azureapirbcore@microsoft.com", "mailto:azureapirbcore@microsoft.com")} with your PR link.`,
   },
 ];
 
@@ -918,8 +920,13 @@ const rulesPri0NotReadyForArmReview = [
         "This means it is introducing a new Resource Provider namespace or a new resource type. " +
         "New RPs and new resource types require a discussion with the ARM Modeling Review team before merging.<br/><br/>" +
         "<b>If you haven't discussed yet:</b><br/>" +
-        "Please schedule a meeting at " +
-        `${href("ARM API Modeling Office Hours", "https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true")}.<br/><br/>` +
+        "Please join the ARM API Modeling Review Office Hours - a drop-in, first-come, first-served session (no booking required):<br/>" +
+        "<ul>" +
+        "<li><b>When:</b> Every Tuesday and Thursday, 9:30-10:30 AM PST</li>" +
+        `<li><b>How to join:</b> ${href("Join via Teams", "https://aka.ms/apimodelingreview")}</li>` +
+        "<li>Come prepared with your questions and a design document (Word/PowerPoint is fine; TypeSpec/Swagger not required).</li>" +
+        `<li>For more details refer: ${href("API Review Workflow | ARM Wiki", "https://armwiki.azurewebsites.net/rp_onboarding/process/api_review.html#arm-api-modeling-review-office-hours")}</li>` +
+        "</ul>" +
         "<b>If <code>ARMModelingSignedOff</code> label was removed by automation:</b><br/>" +
         "This happens when the lease file is not found. Please check with the PM you discussed your design with " +
         "to confirm if the lease file PR has been merged. " +
