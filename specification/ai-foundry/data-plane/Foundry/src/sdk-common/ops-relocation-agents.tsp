@@ -6,6 +6,8 @@
 // It is imported by the client.tsp file, which is used for emitting the Python and JS clients.
 // See https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#move-all-operations-to-root-client
 
+import "./ops-relocation-voice-agents.tsp";
+
 using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects {
@@ -72,66 +74,9 @@ namespace Azure.AI.Projects.Beta {
   @@clientLocation(Azure.AI.Projects.MemoryStores.listMemories, MemoryStores);
   @@clientLocation(Azure.AI.Projects.MemoryStores.deleteMemory, MemoryStores);
 
-  interface Agents {}
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.create, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.get, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.cancel, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.delete, Agents);
-
-  // interface VoiceAgentWebSocket {}
-  // @@clientLocation(
-  //   Azure.AI.Projects.VoiceAgentWebSocket.connectVoiceAgent,
-  //   VoiceAgentWebSocket
-  // );
-
-  // interface AgentEndpointConversations {}
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.listAgentConversations,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.getAgentConversation,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.deleteAgentConversation,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.listAgentConversationResponses,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.getAgentConversationResponse,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.listAgentConversationResponseItems,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.listAgentConversationItems,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItem,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemAudio,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemAudioContent,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.getAgentConversationAudio,
-  //   AgentEndpointConversations
-  // );
-  // @@clientLocation(
-  //   Azure.AI.Projects.AgentEndpointConversations.getAgentConversationAudioContent,
-  //   AgentEndpointConversations
-  // );
 }
