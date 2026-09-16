@@ -1026,16 +1026,16 @@ union BlueGreenPhase {
   /** Green pool has been created */
   CREATING_GREEN_POOL: "CREATING_GREEN_POOL",
 
-  /** Cordoning blue pool */
+  /** `CORDONING_BLUE_POOL` - no description is provided for this value by the Google Cloud API. */
   CORDONING_BLUE_POOL: "CORDONING_BLUE_POOL",
 
-  /** Draining blue pool */
+  /** `DRAINING_BLUE_POOL` - no description is provided for this value by the Google Cloud API. */
   DRAINING_BLUE_POOL: "DRAINING_BLUE_POOL",
 
-  /** Node pool soaking */
+  /** `NODE_POOL_SOAKING` - no description is provided for this value by the Google Cloud API. */
   NODE_POOL_SOAKING: "NODE_POOL_SOAKING",
 
-  /** Deleting blue pool */
+  /** `DELETING_BLUE_POOL` - no description is provided for this value by the Google Cloud API. */
   DELETING_BLUE_POOL: "DELETING_BLUE_POOL",
 
   /** Rolling back blue-green upgrade */
@@ -2750,13 +2750,13 @@ union PrivateIPv6GoogleAccess {
   /** Unspecified private IPv6 Google access */
   PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED: "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED",
 
-  /** Private IPv6 Google access disabled */
+  /** `PRIVATE_IPV6_GOOGLE_ACCESS_DISABLED` - no description is provided for this value by the Google Cloud API. */
   PRIVATE_IPV6_GOOGLE_ACCESS_DISABLED: "PRIVATE_IPV6_GOOGLE_ACCESS_DISABLED",
 
   /** Private IPv6 Google access to Google only */
   PRIVATE_IPV6_GOOGLE_ACCESS_TO_GOOGLE: "PRIVATE_IPV6_GOOGLE_ACCESS_TO_GOOGLE",
 
-  /** Private IPv6 Google access bidirectional */
+  /** `PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL` - no description is provided for this value by the Google Cloud API. */
   PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL: "PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL",
 }
 
@@ -3513,10 +3513,10 @@ union EnableComponents {
   /** Default value. This shouldn't be used. */
   COMPONENT_UNSPECIFIED: "COMPONENT_UNSPECIFIED",
 
-  /** system components */
+  /** `SYSTEM_COMPONENTS` - no description is provided for this value by the Google Cloud API. */
   SYSTEM_COMPONENTS: "SYSTEM_COMPONENTS",
 
-  /** workloads */
+  /** `WORKLOADS` - no description is provided for this value by the Google Cloud API. */
   WORKLOADS: "WORKLOADS",
 
   /** kube-apiserver */
@@ -3528,7 +3528,7 @@ union EnableComponents {
   /** kube-controller-manager */
   CONTROLLER_MANAGER: "CONTROLLER_MANAGER",
 
-  /** kcp-sshd */
+  /** `KCP_SSHD` - no description is provided for this value by the Google Cloud API. */
   KCP_SSHD: "KCP_SSHD",
 
   /** kcp connection logs */
@@ -3550,7 +3550,7 @@ union MonitoringComponentEnableComponents {
   /** Default value. This shouldn't be used. */
   COMPONENT_UNSPECIFIED: "COMPONENT_UNSPECIFIED",
 
-  /** system components */
+  /** `SYSTEM_COMPONENTS` - no description is provided for this value by the Google Cloud API. */
   SYSTEM_COMPONENTS: "SYSTEM_COMPONENTS",
 
   /** kube-apiserver */
@@ -3562,34 +3562,34 @@ union MonitoringComponentEnableComponents {
   /** kube-controller-manager */
   CONTROLLER_MANAGER: "CONTROLLER_MANAGER",
 
-  /** Storage */
+  /** `STORAGE` - no description is provided for this value by the Google Cloud API. */
   STORAGE: "STORAGE",
 
   /** Horizontal Pod Autoscaling */
   HPA: "HPA",
 
-  /** Pod */
+  /** `POD` - no description is provided for this value by the Google Cloud API. */
   POD: "POD",
 
-  /** DaemonSet */
+  /** `DAEMONSET` - no description is provided for this value by the Google Cloud API. */
   DAEMONSET: "DAEMONSET",
 
-  /** Deployment */
+  /** `DEPLOYMENT` - no description is provided for this value by the Google Cloud API. */
   DEPLOYMENT: "DEPLOYMENT",
 
-  /** Statefulset */
+  /** `STATEFULSET` - no description is provided for this value by the Google Cloud API. */
   STATEFULSET: "STATEFULSET",
 
-  /** CADVISOR */
+  /** `CADVISOR` - no description is provided for this value by the Google Cloud API. */
   CADVISOR: "CADVISOR",
 
-  /** KUBELET */
+  /** `KUBELET` - no description is provided for this value by the Google Cloud API. */
   KUBELET: "KUBELET",
 
   /** NVIDIA Data Center GPU Manager (DCGM) */
   DCGM: "DCGM",
 
-  /** JobSet */
+  /** `JOBSET` - no description is provided for this value by the Google Cloud API. */
   JOBSET: "JOBSET",
 }
 
@@ -3618,16 +3618,16 @@ union SecurityPostureMode {
 union AccessTypes {
   string,
 
-  /** access type unspecified */
+  /** `ACCESS_TYPE_UNSPECIFIED` - no description is provided for this value by the Google Cloud API. */
   ACCESS_TYPE_UNSPECIFIED: "ACCESS_TYPE_UNSPECIFIED",
 
-  /** public */
+  /** `PUBLIC` - no description is provided for this value by the Google Cloud API. */
   PUBLIC: "PUBLIC",
 
-  /** private */
+  /** `PRIVATE` - no description is provided for this value by the Google Cloud API. */
   PRIVATE: "PRIVATE",
 
-  /** serverless */
+  /** `SERVERLESS` - no description is provided for this value by the Google Cloud API. */
   SERVERLESS: "SERVERLESS",
 }
 
@@ -3755,13 +3755,13 @@ union NodeTaintEffect {
   /** Not set */
   EFFECT_UNSPECIFIED: "EFFECT_UNSPECIFIED",
 
-  /** NoSchedule */
+  /** `NO_SCHEDULE` - no description is provided for this value by the Google Cloud API. */
   NO_SCHEDULE: "NO_SCHEDULE",
 
-  /** PreferNoSchedule */
+  /** `PREFER_NO_SCHEDULE` - no description is provided for this value by the Google Cloud API. */
   PREFER_NO_SCHEDULE: "PREFER_NO_SCHEDULE",
 
-  /** NoExecute */
+  /** `NO_EXECUTE` - no description is provided for this value by the Google Cloud API. */
   NO_EXECUTE: "NO_EXECUTE",
 }
 
@@ -3883,7 +3883,7 @@ union SecondaryBootDiskMode {
 union SecondaryBootDiskUpdateStrategyStrategy {
   string,
 
-  /** strategy unspecified */
+  /** `STRATEGY_UNSPECIFIED` - no description is provided for this value by the Google Cloud API. */
   STRATEGY_UNSPECIFIED: "STRATEGY_UNSPECIFIED",
 }
 

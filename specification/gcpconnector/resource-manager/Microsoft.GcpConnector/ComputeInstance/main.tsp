@@ -1299,28 +1299,28 @@ interface ComputeInstances {
 union AllocationAggregateReservationVmFamily {
   string,
 
-  /** vm family cloud tpu device ct3 */
+  /** `VM_FAMILY_CLOUD_TPU_DEVICE_CT3` - no description is provided for this value by the Google Cloud API. */
   VM_FAMILY_CLOUD_TPU_DEVICE_CT3: "VM_FAMILY_CLOUD_TPU_DEVICE_CT3",
 
-  /** vm family cloud tpu lite device ct5l */
+  /** `VM_FAMILY_CLOUD_TPU_LITE_DEVICE_CT5L` - no description is provided for this value by the Google Cloud API. */
   VM_FAMILY_CLOUD_TPU_LITE_DEVICE_CT5L: "VM_FAMILY_CLOUD_TPU_LITE_DEVICE_CT5L",
 
-  /** vm family cloud tpu lite pod slice ct5lp */
+  /** `VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT5LP` - no description is provided for this value by the Google Cloud API. */
   VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT5LP: "VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT5LP",
 
-  /** vm family cloud tpu lite pod slice ct6e */
+  /** `VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT6E` - no description is provided for this value by the Google Cloud API. */
   VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT6E: "VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT6E",
 
-  /** vm family cloud tpu pod slice ct3p */
+  /** `VM_FAMILY_CLOUD_TPU_POD_SLICE_CT3P` - no description is provided for this value by the Google Cloud API. */
   VM_FAMILY_CLOUD_TPU_POD_SLICE_CT3P: "VM_FAMILY_CLOUD_TPU_POD_SLICE_CT3P",
 
-  /** vm family cloud tpu pod slice ct4p */
+  /** `VM_FAMILY_CLOUD_TPU_POD_SLICE_CT4P` - no description is provided for this value by the Google Cloud API. */
   VM_FAMILY_CLOUD_TPU_POD_SLICE_CT4P: "VM_FAMILY_CLOUD_TPU_POD_SLICE_CT4P",
 
-  /** vm family cloud tpu pod slice ct5p */
+  /** `VM_FAMILY_CLOUD_TPU_POD_SLICE_CT5P` - no description is provided for this value by the Google Cloud API. */
   VM_FAMILY_CLOUD_TPU_POD_SLICE_CT5P: "VM_FAMILY_CLOUD_TPU_POD_SLICE_CT5P",
 
-  /** vm family cloud tpu pod slice tpu7x */
+  /** `VM_FAMILY_CLOUD_TPU_POD_SLICE_TPU7X` - no description is provided for this value by the Google Cloud API. */
   VM_FAMILY_CLOUD_TPU_POD_SLICE_TPU7X: "VM_FAMILY_CLOUD_TPU_POD_SLICE_TPU7X",
 }
 
@@ -1338,7 +1338,7 @@ training. */
 inference. */
   SERVING: "SERVING",
 
-  /** unspecified */
+  /** `UNSPECIFIED` - no description is provided for this value by the Google Cloud API. */
   UNSPECIFIED: "UNSPECIFIED",
 }
 
@@ -1348,10 +1348,10 @@ inference. */
 union ReservedDiskInterface {
   string,
 
-  /** nvme */
+  /** `NVME` - no description is provided for this value by the Google Cloud API. */
   NVME: "NVME",
 
-  /** scsi */
+  /** `SCSI` - no description is provided for this value by the Google Cloud API. */
   SCSI: "SCSI",
 }
 
@@ -1377,10 +1377,10 @@ union Architecture {
 union AttachedDiskInterface {
   string,
 
-  /** nvme */
+  /** `NVME` - no description is provided for this value by the Google Cloud API. */
   NVME: "NVME",
 
-  /** scsi */
+  /** `SCSI` - no description is provided for this value by the Google Cloud API. */
   SCSI: "SCSI",
 }
 
@@ -1418,10 +1418,10 @@ union SavedState {
 union AttachedDiskType {
   string,
 
-  /** persistent */
+  /** `PERSISTENT` - no description is provided for this value by the Google Cloud API. */
   PERSISTENT: "PERSISTENT",
 
-  /** scratch */
+  /** `SCRATCH` - no description is provided for this value by the Google Cloud API. */
   SCRATCH: "SCRATCH",
 }
 
@@ -1474,7 +1474,7 @@ union ConsumeReservationType {
 for specifying the reservations. */
   SPECIFIC_RESERVATION: "SPECIFIC_RESERVATION",
 
-  /** unspecified */
+  /** `UNSPECIFIED` - no description is provided for this value by the Google Cloud API. */
   UNSPECIFIED: "UNSPECIFIED",
 }
 
@@ -1490,7 +1490,7 @@ union SchedulingNodeAffinityOperator {
   /** Requires Compute Engine to avoid certain nodes. */
   NOT_IN: "NOT_IN",
 
-  /** operator unspecified */
+  /** `OPERATOR_UNSPECIFIED` - no description is provided for this value by the Google Cloud API. */
   OPERATOR_UNSPECIFIED: "OPERATOR_UNSPECIFIED",
 }
 
@@ -1557,13 +1557,13 @@ union BulkInsertOperationStatusStatus {
   /** Rolling forward - creating VMs. */
   CREATING: "CREATING",
 
-  /** Done */
+  /** `DONE` - no description is provided for this value by the Google Cloud API. */
   DONE: "DONE",
 
   /** Rolling back - cleaning up after an error. */
   ROLLING_BACK: "ROLLING_BACK",
 
-  /** status unspecified */
+  /** `STATUS_UNSPECIFIED` - no description is provided for this value by the Google Cloud API. */
   STATUS_UNSPECIFIED: "STATUS_UNSPECIFIED",
 }
 
@@ -1633,10 +1633,10 @@ is expired or not configured. */
 union AccessType {
   string,
 
-  /** direct ipv6 */
+  /** `DIRECT_IPV6` - no description is provided for this value by the Google Cloud API. */
   DIRECT_IPV6: "DIRECT_IPV6",
 
-  /** one to one nat */
+  /** `ONE_TO_ONE_NAT` - no description is provided for this value by the Google Cloud API. */
   ONE_TO_ONE_NAT: "ONE_TO_ONE_NAT",
 }
 
@@ -1646,60 +1646,60 @@ union AccessType {
 union GuestOsFeatureType {
   string,
 
-  /** bare metal linux compatible */
+  /** `BARE_METAL_LINUX_COMPATIBLE` - no description is provided for this value by the Google Cloud API. */
   BARE_METAL_LINUX_COMPATIBLE: "BARE_METAL_LINUX_COMPATIBLE",
 
   /** Indicates the guest OS is capable of Bare Metal Secure AI (BMSAI)
 confidential computing. */
   BMSAI_CAPABLE: "BMSAI_CAPABLE",
 
-  /** cca capable */
+  /** `CCA_CAPABLE` - no description is provided for this value by the Google Cloud API. */
   CCA_CAPABLE: "CCA_CAPABLE",
 
-  /** feature type unspecified */
+  /** `FEATURE_TYPE_UNSPECIFIED` - no description is provided for this value by the Google Cloud API. */
   FEATURE_TYPE_UNSPECIFIED: "FEATURE_TYPE_UNSPECIFIED",
 
-  /** gvnic */
+  /** `GVNIC` - no description is provided for this value by the Google Cloud API. */
   GVNIC: "GVNIC",
 
-  /** idpf */
+  /** `IDPF` - no description is provided for this value by the Google Cloud API. */
   IDPF: "IDPF",
 
-  /** multi ip subnet */
+  /** `MULTI_IP_SUBNET` - no description is provided for this value by the Google Cloud API. */
   MULTI_IP_SUBNET: "MULTI_IP_SUBNET",
 
-  /** secure boot */
+  /** `SECURE_BOOT` - no description is provided for this value by the Google Cloud API. */
   SECURE_BOOT: "SECURE_BOOT",
 
-  /** sev capable */
+  /** `SEV_CAPABLE` - no description is provided for this value by the Google Cloud API. */
   SEV_CAPABLE: "SEV_CAPABLE",
 
-  /** sev live migratable */
+  /** `SEV_LIVE_MIGRATABLE` - no description is provided for this value by the Google Cloud API. */
   SEV_LIVE_MIGRATABLE: "SEV_LIVE_MIGRATABLE",
 
-  /** sev live migratable v2 */
+  /** `SEV_LIVE_MIGRATABLE_V2` - no description is provided for this value by the Google Cloud API. */
   SEV_LIVE_MIGRATABLE_V2: "SEV_LIVE_MIGRATABLE_V2",
 
-  /** sev snp capable */
+  /** `SEV_SNP_CAPABLE` - no description is provided for this value by the Google Cloud API. */
   SEV_SNP_CAPABLE: "SEV_SNP_CAPABLE",
 
-  /** snp svsm capable */
+  /** `SNP_SVSM_CAPABLE` - no description is provided for this value by the Google Cloud API. */
   SNP_SVSM_CAPABLE: "SNP_SVSM_CAPABLE",
 
   /** Indicates the guest OS is safe for free page reporting (FPR) during
 suspend. */
   SUSPEND_SAFE_FPR: "SUSPEND_SAFE_FPR",
 
-  /** tdx capable */
+  /** `TDX_CAPABLE` - no description is provided for this value by the Google Cloud API. */
   TDX_CAPABLE: "TDX_CAPABLE",
 
-  /** uefi compatible */
+  /** `UEFI_COMPATIBLE` - no description is provided for this value by the Google Cloud API. */
   UEFI_COMPATIBLE: "UEFI_COMPATIBLE",
 
-  /** virtio scsi multiqueue */
+  /** `VIRTIO_SCSI_MULTIQUEUE` - no description is provided for this value by the Google Cloud API. */
   VIRTIO_SCSI_MULTIQUEUE: "VIRTIO_SCSI_MULTIQUEUE",
 
-  /** windows */
+  /** `WINDOWS` - no description is provided for this value by the Google Cloud API. */
   WINDOWS: "WINDOWS",
 }
 
@@ -1808,16 +1808,16 @@ union Ipv6AccessType {
 union NetworkInterfaceNicType {
   string,
 
-  /** GVNIC */
+  /** `GVNIC` - no description is provided for this value by the Google Cloud API. */
   GVNIC: "GVNIC",
 
-  /** IDPF */
+  /** `IDPF` - no description is provided for this value by the Google Cloud API. */
   IDPF: "IDPF",
 
-  /** IRDMA */
+  /** `IRDMA` - no description is provided for this value by the Google Cloud API. */
   IRDMA: "IRDMA",
 
-  /** MRDMA */
+  /** `MRDMA` - no description is provided for this value by the Google Cloud API. */
   MRDMA: "MRDMA",
 
   /** No type specified. */
@@ -1849,10 +1849,10 @@ union NetworkInterfaceStackType {
 union TotalEgressBandwidthTier {
   string,
 
-  /** default */
+  /** `DEFAULT` - no description is provided for this value by the Google Cloud API. */
   DEFAULT: "DEFAULT",
 
-  /** tier 1 */
+  /** `TIER_1` - no description is provided for this value by the Google Cloud API. */
   TIER_1: "TIER_1",
 }
 
@@ -1877,7 +1877,7 @@ union PerLocationOperationInfoState {
   /** Operation is not yet confirmed to have been created in the location. */
   PROPAGATING: "PROPAGATING",
 
-  /** unspecified */
+  /** `UNSPECIFIED` - no description is provided for this value by the Google Cloud API. */
   UNSPECIFIED: "UNSPECIFIED",
 }
 
@@ -1887,12 +1887,12 @@ union PerLocationOperationInfoState {
 union FileContentBufferFileType {
   string,
 
-  /** bin */
+  /** `BIN` - no description is provided for this value by the Google Cloud API. */
   BIN: "BIN",
 
-  /** undefined */
+  /** `UNDEFINED` - no description is provided for this value by the Google Cloud API. */
   UNDEFINED: "UNDEFINED",
 
-  /** x509 */
+  /** `X509` - no description is provided for this value by the Google Cloud API. */
   X509: "X509",
 }

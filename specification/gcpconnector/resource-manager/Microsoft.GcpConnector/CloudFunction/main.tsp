@@ -624,10 +624,10 @@ union Environment {
   /** Unspecified */
   ENVIRONMENT_UNSPECIFIED: "ENVIRONMENT_UNSPECIFIED",
 
-  /** Gen 1 */
+  /** `GEN_1` - no description is provided for this value by the Google Cloud API. */
   GEN_1: "GEN_1",
 
-  /** Gen 2 */
+  /** `GEN_2` - no description is provided for this value by the Google Cloud API. */
   GEN_2: "GEN_2",
 }
 

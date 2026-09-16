@@ -1089,10 +1089,10 @@ union OperationType {
   /** Restarts the Cloud SQL instance. */
   RESTART: "RESTART",
 
-  /** backup */
+  /** `BACKUP` - no description is provided for this value by the Google Cloud API. */
   BACKUP: "BACKUP",
 
-  /** snapshot */
+  /** `SNAPSHOT` - no description is provided for this value by the Google Cloud API. */
   SNAPSHOT: "SNAPSHOT",
 
   /** Performs instance backup. */
@@ -1146,7 +1146,7 @@ union OperationType {
   /** Deletes the backup taken by a backup run. */
   DELETE_BACKUP: "DELETE_BACKUP",
 
-  /** recreate replica */
+  /** `RECREATE_REPLICA` - no description is provided for this value by the Google Cloud API. */
   RECREATE_REPLICA: "RECREATE_REPLICA",
 
   /** Truncates a general or slow log table in MySQL. */
@@ -1161,7 +1161,7 @@ union OperationType {
   /** This field is deprecated, and will be removed in future version of API. */
   ENABLE_PRIVATE_IP: "ENABLE_PRIVATE_IP",
 
-  /** defer maintenance */
+  /** `DEFER_MAINTENANCE` - no description is provided for this value by the Google Cloud API. */
   DEFER_MAINTENANCE: "DEFER_MAINTENANCE",
 
   /** Creates clone instance. */
