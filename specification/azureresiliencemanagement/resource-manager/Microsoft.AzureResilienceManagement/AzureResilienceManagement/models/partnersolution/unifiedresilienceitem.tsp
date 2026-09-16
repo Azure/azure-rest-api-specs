@@ -129,8 +129,8 @@ model RecommendationsData {
 }
 
 @added(Versions.v2026_09_30_preview)
-@doc("Definition of the zonal resiliency assessment computed for the unified resilience item.")
-model UnifiedResilienceItemZonalAssessment {
+@doc("Definition of the zonal resiliency posture computed for the unified resilience item.")
+model UnifiedResilienceItemZonalResiliencyPosture {
   @doc("Count of resources that have zonal resiliency enabled.")
   enabledResourceCount?: int64;
 
@@ -143,13 +143,13 @@ model UnifiedResilienceItemZonalAssessment {
   @doc("Count of resources that require user confirmation for zonal resiliency.")
   userConfirmationNeededCount?: int64;
 
-  @doc("The date and time when the zonal resiliency assessment was last evaluated.")
+  @doc("The date and time when the zonal resiliency posture was last evaluated.")
   evaluationDateTime?: utcDateTime;
 }
 
 @added(Versions.v2026_09_30_preview)
-@doc("Definition of the regional resiliency assessment computed for the unified resilience item.")
-model UnifiedResilienceItemRegionalAssessment {
+@doc("Definition of the regional resiliency posture computed for the unified resilience item.")
+model UnifiedResilienceItemRegionalResiliencyPosture {
   @doc("Count of resources that have regional resiliency enabled.")
   enabledResourceCount?: int64;
 
@@ -162,7 +162,7 @@ model UnifiedResilienceItemRegionalAssessment {
   @doc("Count of resources that require user confirmation for regional resiliency.")
   userConfirmationNeededCount?: int64;
 
-  @doc("The date and time when the regional resiliency assessment was last evaluated.")
+  @doc("The date and time when the regional resiliency posture was last evaluated.")
   evaluationDateTime?: utcDateTime;
 
   @doc("The estimated recovery point objective computed for the service group, expressed as an ISO 8601 duration.")
@@ -173,10 +173,10 @@ model UnifiedResilienceItemRegionalAssessment {
 @doc("Definition of the resiliency posture computed for the unified resilience item.")
 model UnifiedResilienceItemResiliencyPosture {
   @doc("The zonal resiliency section of the resiliency posture.")
-  zonalResiliency: UnifiedResilienceItemZonalAssessment;
+  zonalResiliency: UnifiedResilienceItemZonalResiliencyPosture;
 
   @doc("The regional resiliency section of the resiliency posture.")
-  regionalResiliency?: UnifiedResilienceItemRegionalAssessment;
+  regionalResiliency?: UnifiedResilienceItemRegionalResiliencyPosture;
 }
 
 @added(Versions.v2026_09_30_preview)
