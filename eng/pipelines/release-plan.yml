@@ -132,7 +132,7 @@ stages:
   - stage: GenerateSdk
     displayName: "Stage : Generate SDK"
     dependsOn: ReleasePlanCreation
-    condition: and(succeeded(), ne(dependencies.ReleasePlanCreation.outputs['ReleasePlan.setReleasePlanArtifactState.SkipSDKGeneration'], 'true'))
+    condition: and(succeeded(), ne(variables['Build.Repository.Name'], 'Azure/azure-rest-api-specs-pr'), ne(dependencies.ReleasePlanCreation.outputs['ReleasePlan.setReleasePlanArtifactState.SkipSDKGeneration'], 'true'))
     jobs:
       - job: GenerateSdk
         displayName: Generate SDK from Release Plan
