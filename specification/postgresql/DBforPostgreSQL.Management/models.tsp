@@ -3128,6 +3128,20 @@ model Storage {
    */
   autoGrow?: StorageAutoGrow;
 
+  @doc("Maximum allocated storage size to which storage autogrow may grow, in MB. This value is not a disk-utilization trigger threshold and must be at least the effective current or requested storage size. Storage conversion uses 1 GB = 1,024 MB.")
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @minValue(1)
+  @maxValue(67108864)
+  autoGrowMaxThresholdMb?: int32;
+
+  @doc("Storage autogrow increment as a percentage of the current allocated storage size. This value is not an absolute size increment or a utilization threshold.")
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @minValue(1)
+  @maxValue(100)
+  autoGrowIncrementPercent?: int32;
+
   /**
    * Storage tier of a server.
    */

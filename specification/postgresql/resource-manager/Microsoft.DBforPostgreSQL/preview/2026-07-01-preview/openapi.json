@@ -10659,6 +10659,30 @@
           "$ref": "#/definitions/StorageAutoGrow",
           "description": "Flag to enable or disable the automatic growth of storage size of a server when available space is nearing zero and conditions allow for automatically growing storage size."
         },
+        "autoGrowMaxThresholdMb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum allocated storage size to which storage autogrow may grow, in MB. This value is not a disk-utilization trigger threshold and must be at least the effective current or requested storage size. Storage conversion uses 1 GB = 1,024 MB.",
+          "minimum": 1,
+          "maximum": 67108864,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "autoGrowIncrementPercent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Storage autogrow increment as a percentage of the current allocated storage size. This value is not an absolute size increment or a utilization threshold.",
+          "minimum": 1,
+          "maximum": 100,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "tier": {
           "$ref": "#/definitions/AzureManagedDiskPerformanceTier",
           "description": "Storage tier of a server."
