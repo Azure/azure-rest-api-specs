@@ -21,6 +21,7 @@ model ImportWavePlanConfigRequest {
   migrationPath: string;
 
   @doc("The storage-account SAS URI locating the staged wave-plan configuration document.")
+  @secret
   sasUri: string;
 }
 

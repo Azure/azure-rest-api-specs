@@ -148,13 +148,11 @@ interface Waves {
     ValidateWorkloadConfigurationResponse
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 202 + 204 is emitted, which is the shape the LintDiff PostResponseCodes rule requires."
   @added(ApiVersions.v2026_09_01_preview)
   @doc("Apply the validated workload configuration staged for a wave. Long-running operation.")
   @action("importWorkloadConfiguration")
-  importWorkloadConfiguration is ArmResourceActionNoResponseContentAsync<
-    Wave,
-    void
-  >;
+  importWorkloadConfiguration is ArmResourceActionNoContentAsync<Wave, void>;
 }
 
 @armResourceOperations

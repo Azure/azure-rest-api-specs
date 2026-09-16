@@ -25,7 +25,7 @@ union PlanSource {
 @added(ApiVersions.v2026_09_01_preview)
 union WavePlanOutdatedReason {
   @doc("A proposed workload was committed to an already-created wave.")
-  ProposedWorkloadCommited: "ProposedWorkloadCommited",
+  ProposedWorkloadCommitted: "ProposedWorkloadCommitted",
 
   @doc("A workload was removed from an already-created wave or from the assessment.")
   CommittedWorkloadRemoved: "CommittedWorkloadRemoved",

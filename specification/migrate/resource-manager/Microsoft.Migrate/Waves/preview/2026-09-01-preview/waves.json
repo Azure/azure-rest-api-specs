@@ -1931,6 +1931,9 @@
               }
             }
           },
+          "204": {
+            "description": "Action completed successfully."
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2391,7 +2394,9 @@
         },
         "sasUri": {
           "type": "string",
-          "description": "The storage-account SAS URI locating the staged wave-plan configuration document."
+          "format": "password",
+          "description": "The storage-account SAS URI locating the staged wave-plan configuration document.",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -3674,7 +3679,7 @@
       "type": "string",
       "description": "The reason a materialized wave plan is considered outdated.",
       "enum": [
-        "ProposedWorkloadCommited",
+        "ProposedWorkloadCommitted",
         "CommittedWorkloadRemoved",
         "CommittedWorkloadUpdated"
       ],
@@ -3683,8 +3688,8 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "ProposedWorkloadCommited",
-            "value": "ProposedWorkloadCommited",
+            "name": "ProposedWorkloadCommitted",
+            "value": "ProposedWorkloadCommitted",
             "description": "A proposed workload was committed to an already-created wave."
           },
           {
