@@ -27,7 +27,7 @@ The `eng/tools` directory contains a collection of standalone Node.js packages u
 
 The top-level `eng/tools` directory holds shared configuration that the individual packages extend:
 
-- `package.json` — aggregates every tool as a `file:` devDependency and provides a root `build` script
+- `package.json` — aggregates every tool as a `workspace:*` devDependency and provides a root `build` script
 - `tsconfig.json` — base TypeScript config plus the `include` list of every tool's `src`/`test` files
 - `eslint.base.config.js` — base ESLint config that each tool extends
 - `vitest.base.config.js` — base Vitest config that each tool extends
@@ -47,7 +47,7 @@ The top-level `eng/tools` directory holds shared configuration that the individu
 
 ```
 eng/tools/
-├── package.json               # Aggregates all tools as file: devDependencies; root "build"
+├── package.json               # Aggregates all tools as workspace:* devDependencies; root "build"
 ├── tsconfig.json              # Base TS config + include list for all tools
 ├── eslint.base.config.js      # Base ESLint config (extended per tool)
 ├── vitest.base.config.js      # Base Vitest config (extended per tool)
@@ -83,8 +83,8 @@ eng/tools/
 
 ### Shared Utilities
 
-- Reuse `@azure-tools/specs-shared` (referenced as `file:../../../.github/shared`) instead of duplicating helpers such as logging, git, or changed-file utilities.
-- Tools may depend on each other via `file:` references (for example `typespec-validation` depends on `suppressions`).
+- Reuse `@azure-tools/specs-shared` (referenced as `workspace:*`) instead of duplicating helpers such as logging, git, or changed-file utilities.
+- Tools may depend on each other via `workspace:*` references (for example `typespec-validation` depends on `suppressions`).
 
 ## Per-Tool Configuration
 
@@ -117,8 +117,8 @@ Every tool package is a thin extension of the shared `eng/tools` configuration. 
 }
 ```
 
-- Keep dependency/devDependency versions aligned with the other tools (for example `typescript ~6.0.2`, `eslint ^10.0.0`, `vitest ^4.1.0`, `prettier 3.8.3`).
-- Add the new package to the root `eng/tools/package.json` `devDependencies` as a `file:<tool>` entry.
+- Use `"catalog:"` for every external dependency/devDependency. Define its shared version in the root `pnpm-workspace.yaml` catalog; `catalogMode: strict` prevents `pnpm add` from introducing conflicting versions.
+- Add the new package to the root `eng/tools/package.json` `devDependencies` as a `workspace:*` entry.
 
 ### `tsconfig.json`
 
@@ -239,8 +239,8 @@ When adding a new tool:
 
 ### Updating Dependencies
 
-1. Update the tool's `package.json`.
-2. Keep shared tooling versions (TypeScript, ESLint, Vitest, Prettier) aligned across tools.
+1. Update the dependency's version in the root `pnpm-workspace.yaml` catalog.
+2. Keep `"catalog:"` references in workspace `package.json` files; use `"workspace:*"` for internal packages. For a new dependency, add its catalog entry and a `"catalog:"` reference in the tool's manifest.
 3. Run `pnpm install` and commit the updated lock file.
 4. Run `pnpm run check` to validate.
 

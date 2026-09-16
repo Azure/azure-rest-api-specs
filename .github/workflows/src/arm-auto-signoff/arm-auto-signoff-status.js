@@ -76,7 +76,7 @@ export default async function getLabelAction({ github, context, core }) {
  * @param {number} params.issue_number
  * @param {string} params.head_sha
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
- * @param {typeof import("@actions/core")} params.core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} params.core
  * @returns {Promise<{headSha: string, issueNumber: number, labelActions: ManagedLabelActions}>}
  */
 export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, github, core }) {

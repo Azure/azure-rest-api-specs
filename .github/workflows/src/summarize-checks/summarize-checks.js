@@ -301,7 +301,7 @@ export default async function summarizeChecks({ github, context, core }) {
 }
 
 /**
- * @param {typeof import("@actions/core")} core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} core
  * @param {CheckRunData[]} requiredCheckRuns
  * @param {CheckRunData[]} fyiCheckRuns
  */
@@ -324,7 +324,7 @@ export function outputRunDetails(core, requiredCheckRuns, fyiCheckRuns) {
 
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
- * @param {typeof import("@actions/core")} core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} core
  * @param {string} owner
  * @param {string} repo
  * @param {number} issue_number
@@ -461,7 +461,7 @@ export async function summarizeChecksImpl(
 /**
  * Updates or creates a commit status with the given status
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
- * @param {typeof import("@actions/core")} core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} core
  * @param {string} owner
  * @param {string} repo
  * @param {string} head_sha
@@ -587,7 +587,7 @@ export function getRequiredChecksFromBranchRuleOutput(checkResponseObj) {
 
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
- * @param {typeof import("@actions/core")} core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} core
  * @param {string} owner - The repository owner.
  * @param {string} repo - The repository name.
  * @param {string} head_sha - The commit SHA to check.
@@ -845,7 +845,7 @@ export function getCheckInfo(checkName) {
 // #region next steps
 /**
  *
- * @param {typeof import("@actions/core")} core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} core
  * @param {string} repo
  * @param {string[]} labels
  * @param {string|undefined} targetBranch
@@ -899,7 +899,7 @@ export function createNextStepsComment(
 }
 
 /**
- * @param {import("@actions/core")} core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} core
  * @param {string[]} labels
  * @param {string} targetBranch // this is in the format of "repo/branch"
  * @param {boolean} requiredCheckInfosPresent
@@ -1116,7 +1116,7 @@ function buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules) {
 /**
  * Downloads the job-summary artifact for a given workflow run.
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
- * @param {typeof import("@actions/core")} core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} core
  * @param {string} owner
  * @param {string} repo
  * @param {number} runId - The workflow run databaseId

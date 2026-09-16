@@ -8,9 +8,8 @@
  * - "[Breaking Change][PR Workflow] Use more granular labels for Breaking Changes approvals"
  *   https://github.com/Azure/azure-sdk-tools/issues/6374
  */
-import { readFileSync } from "node:fs";
-import { basename, dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
+import { basename } from "node:path";
 import {
   getVersionFromInputFile,
   sourceBranchHref,
@@ -19,17 +18,10 @@ import {
 import { ApiVersionLifecycleStage, type Context } from "./breaking-change.ts";
 import { type MessageLevel } from "./message.ts";
 
-let _packageJson: Record<string, unknown> | undefined;
-function getPackageJson(): Record<string, unknown> {
-  if (!_packageJson) {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = dirname(__filename);
-    _packageJson = JSON.parse(
-      readFileSync(join(__dirname, "../../package.json"), "utf-8"),
-    ) as Record<string, unknown>;
-  }
-  return _packageJson!;
-}
+const oadPackageJson: { version: string } = createRequire(import.meta.url)(
+  "@azure/oad/package.json",
+);
+
 /**
  * A type that represents AutoRest.Swagger.ComparisonMessage from OAD
  * after being transformed by ComparisonMessage.GetValidationMessagesAsJson().
@@ -103,8 +95,7 @@ export const setOadBaseBranch = (traceData: OadTraceData, branchName: string): O
  * Generates markdown content from OAD trace data
  */
 export const generateOadMarkdown = async (traceData: OadTraceData): Promise<string> => {
-  const oadVersion =
-    (getPackageJson() as any).dependencies?.["@azure/oad"]?.replace(/[\^~]/, "") || "unknown";
+  const oadVersion = oadPackageJson.version;
   if (traceData.traces.length === 0) {
     return "";
   }

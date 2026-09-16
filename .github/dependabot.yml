@@ -12,6 +12,8 @@ updates:
   - package-ecosystem: "npm"
     directories:
       - "/"
+      - "/.github"
+      - "/.github/shared"
       - "/eng/tools"
       - "/eng/tools/**"
     schedule:
@@ -49,25 +51,6 @@ updates:
       typespec:
         patterns:
           - "*typespec*"
-      eslint:
-        patterns:
-          - "*eslint*"
-    versioning-strategy: increase-if-necessary
-  - package-ecosystem: "npm"
-    directories:
-      - "/.github"
-      - "/.github/shared"
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 10 # default:5
-    cooldown:
-      default-days: 7
-    ignore:
-      # Updated manually to align with minimum supported Node version
-      - dependency-name: "@types/node"
-      # Points to "github:actions/github-script" since package isn't published to npmjs
-      - dependency-name: "@types/github-script"
-    groups:
       eslint:
         patterns:
           - "*eslint*"

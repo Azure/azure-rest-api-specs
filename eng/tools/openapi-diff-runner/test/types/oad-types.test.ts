@@ -1,4 +1,5 @@
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
+import { createRequire } from "node:module";
 import { describe, expect, it } from "vitest";
 import { type Context } from "../../src/types/breaking-change.ts";
 import {
@@ -72,7 +73,13 @@ describe("OAD Trace Functions", () => {
 
     const markdown = await generateOadMarkdown(traceData);
 
-    expect(markdown).toContain("| Compared specs");
+    const { version }: { version: string } = createRequire(import.meta.url)(
+      "@azure/oad/package.json",
+    );
+    expect(version).toMatch(/^\d+\.\d+\.\d+/);
+    expect(markdown).toContain(
+      `| Compared specs ([v${version}](https://www.npmjs.com/package/@azure/oad/v/${version}))`,
+    );
     expect(markdown).toContain("storage.json");
     expect(markdown).toContain("2021-09-01");
     expect(markdown).toContain("abc123");

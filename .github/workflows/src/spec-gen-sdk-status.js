@@ -43,7 +43,7 @@ export default async function setSpecGenSdkStatus({ github, context, core }) {
  * @param {string} params.target_url
  * @param {number} params.issue_number
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
- * @param {typeof import("@actions/core")} params.core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} params.core
  * @returns {Promise<void>}
  */
 export async function setSpecGenSdkStatusImpl({
@@ -131,7 +131,7 @@ export async function setSpecGenSdkStatusImpl({
 /**
  * @param {Object} params
  * @param {import("./github.js").CheckRuns} params.checkRuns
- * @param {typeof import("@actions/core")} params.core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} params.core
  * @returns {Promise<{state: CommitStatusState, description: string}>}
  */
 async function processResult({ checkRuns, core }) {

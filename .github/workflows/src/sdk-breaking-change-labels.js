@@ -55,7 +55,7 @@ export async function getLabelAndAction({ github, context, core }) {
 /**
  * @param {Object} params
  * @param {string} params.details_url
- * @param {typeof import("@actions/core")} params.core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} params.core
  * @param {import('./retries.js').RetryOptions} [params.retryOptions]
  * @returns {Promise<{labelName: string | undefined, labelAction: LabelAction, headSha: string, issueNumber: number}>}
  */

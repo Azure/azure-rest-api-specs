@@ -90,7 +90,7 @@ const MAX_SUPPRESSIONS_SHOWN = 5;
 /**
  * Downloads a text artifact for a given workflow run.
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
- * @param {typeof import("@actions/core")} core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} core
  * @param {string} owner
  * @param {string} repo
  * @param {number} runId
@@ -138,7 +138,7 @@ export async function downloadArtifactText(github, core, owner, repo, runId, art
 
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
- * @param {typeof import("@actions/core")} core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} core
  * @param {string} owner
  * @param {string} repo
  * @param {string} head_sha
@@ -423,7 +423,7 @@ export function renderSuppressionsCommentBody(
  * or no suppressions requiring review.
  *
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
- * @param {typeof import("@actions/core")} core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} core
  * @param {string} owner
  * @param {string} repo
  * @param {string} head_sha

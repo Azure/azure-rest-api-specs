@@ -30,7 +30,7 @@ const NamespaceResultsSchema = z.object({
 
 /**
  * @param {import("@actions/github-script").AsyncFunctionArguments["github"]} github
- * @param {import("@actions/core")} core
+ * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} core
  * @param {string} owner
  * @param {string} repo
  * @param {number} runId
