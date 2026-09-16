@@ -11,12 +11,12 @@ using TypeSpec.Rest;
 );
 
 @@clientLocation(
-  Microsoft.SerialConsole.SerialConsoleOperationGroup.disableConsole,
+  Microsoft.SerialConsole.disableConsole,
   Microsoft.SerialConsole,
   "go,javascript,python"
 );
 @@clientLocation(
-  Microsoft.SerialConsole.SerialConsoleOperationGroup.enableConsole,
+  Microsoft.SerialConsole.enableConsole,
   Microsoft.SerialConsole,
   "go,javascript,python"
 );

@@ -1,13 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Common;
 
 namespace ComputeGallery;
@@ -121,7 +119,6 @@ interface Galleries {
   /**
    * List soft-deleted resources of an artifact in the gallery, such as soft-deleted gallery image version of an image.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface"
@@ -129,7 +126,6 @@ interface Galleries {
   @action("versions")
   @list
   @tag("SoftDelete")
-  @operationId("SoftDeletedResource_ListByArtifactName")
   listByArtifactName is ComputeResourceActionSync<
     Gallery,
     void,
@@ -156,11 +152,9 @@ interface Galleries {
   /**
    * Update sharing profile of a gallery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
   @action("share")
   @tag("GallerySharingUpdate")
-  @operationId("GallerySharingProfile_Update")
   gallerySharingProfileUpdate is ComputeResourceActionAsyncBase<
     Gallery,
     SharingUpdate,

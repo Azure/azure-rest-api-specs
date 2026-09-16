@@ -1,7 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
@@ -14,7 +13,6 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
-using OpenAPI;
 
 namespace Microsoft.AppComplianceAutomation;
 /**
@@ -49,23 +47,17 @@ interface Webhook {
   /**
    * Get the AppComplianceAutomation webhook and its properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Webhook_Get")
   get is ArmResourceRead<WebhookResource>;
 
   /**
    * Create a new AppComplianceAutomation webhook or update an exiting AppComplianceAutomation webhook.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Webhook_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<WebhookResource>;
 
   /**
    * Update an exiting AppComplianceAutomation webhook.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
-  @operationId("Webhook_Update")
   update is ArmCustomPatchSync<
     WebhookResource,
     WebhookResourcePatch,
@@ -76,15 +68,11 @@ interface Webhook {
   /**
    * Delete an AppComplianceAutomation webhook.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Webhook_Delete")
   delete is ArmResourceDeleteSync<WebhookResource>;
 
   /**
    * Get the AppComplianceAutomation webhook list.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Webhook_List")
   list is ArmResourceListByParent<
     WebhookResource,
     {

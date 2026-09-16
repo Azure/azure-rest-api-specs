@@ -17,6 +17,7 @@ import "./Connection.tsp";
 import "./Pipeline.tsp";
 import "./Flow.tsp";
 import "./ProviderActions.tsp";
+import "./back-compatible.tsp";
 import "./client.tsp";
 
 using Azure.ResourceManager;

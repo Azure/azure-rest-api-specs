@@ -21,7 +21,6 @@ interface DecompileOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @autoRoute
   @action("decompileBicep")
-  @operationId("Decompile_Bicep")
   bicep is ArmProviderActionSync<
     Request = DecompileOperationRequest,
     Response = DecompileOperationSuccessResponse,

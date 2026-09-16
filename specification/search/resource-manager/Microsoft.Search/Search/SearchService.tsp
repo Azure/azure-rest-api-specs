@@ -455,7 +455,6 @@ interface SearchServices {
    * Gets a list of all supported private link resource types for the given service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
-  @operationId("PrivateLinkResources_ListSupported")
   @externalDocs("https://aka.ms/search-manage")
   @get
   @action("privateLinkResources")

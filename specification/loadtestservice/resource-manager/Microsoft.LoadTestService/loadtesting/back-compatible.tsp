@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 
 using Microsoft.LoadTestService;
@@ -35,4 +36,9 @@ using Microsoft.LoadTestService;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
   "autorest"
+);
+
+@@clientName(
+  LoadTests.outboundNetworkDependenciesEndpoints,
+  "listOutboundNetworkDependenciesEndpoints"
 );

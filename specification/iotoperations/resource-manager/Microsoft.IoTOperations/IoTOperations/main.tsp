@@ -20,6 +20,7 @@ import "./models/akri/connectorTemplate.tsp";
 import "./models/akri/connector.tsp";
 import "./models/akri/service.tsp";
 import "./client.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -125,7 +126,6 @@ interface Dataflow {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataflowResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DataflowResource>;
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Dataflow_ListByProfileResource")
   listByResourceGroup is ArmResourceListByParent<DataflowResource>;
 }
 

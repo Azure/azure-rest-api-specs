@@ -319,7 +319,6 @@ interface SoftDeletedDatabaseAccounts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}?softDeleteActionKind=RestoreSoftDeletedResource")
   @delete
-  @operationId("SoftDeletedDatabaseAccounts_Restore")
   restore(
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,
@@ -352,7 +351,6 @@ interface SoftDeletedDatabaseAccounts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}?softDeleteActionKind=PermanentDeleteResource")
   @delete
-  @operationId("SoftDeletedDatabaseAccounts_Purge")
   purge(
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,
@@ -450,7 +448,6 @@ interface SoftDeletedSqlDatabases {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}?softDeleteActionKind=RestoreSoftDeletedResource")
   @delete
-  @operationId("SoftDeletedSqlDatabases_Restore")
   restore(
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,
@@ -490,7 +487,6 @@ interface SoftDeletedSqlDatabases {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}?softDeleteActionKind=PermanentDeleteResource")
   @delete
-  @operationId("SoftDeletedSqlDatabases_Purge")
   purge(
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,
@@ -609,7 +605,6 @@ interface SoftDeletedSqlContainers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}/softDeletedSqlContainers/{containerName}?softDeleteActionKind=RestoreSoftDeletedResource")
   @delete
-  @operationId("SoftDeletedSqlContainers_Restore")
   restore(
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,
@@ -656,7 +651,6 @@ interface SoftDeletedSqlContainers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}/softDeletedSqlContainers/{containerName}?softDeleteActionKind=PermanentDeleteResource")
   @delete
-  @operationId("SoftDeletedSqlContainers_Purge")
   purge(
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,

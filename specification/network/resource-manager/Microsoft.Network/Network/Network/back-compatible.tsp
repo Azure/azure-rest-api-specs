@@ -2159,6 +2159,12 @@ using TypeSpec.Versioning;
 );
 @@clientName(IdpsQueryObject, "IDPSQueryObject");
 
+@@clientName(
+  ServiceGateways.updateAddressLocationsLro,
+  "UpdateAddressLocations"
+);
+@@clientName(ServiceGateways.updateServicesLro, "UpdateServices");
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServiceGateway.properties);
 

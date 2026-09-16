@@ -122,11 +122,7 @@ union AssociationEntityProvisioningState {
   "ApiManagementWorkspaceLinks",
   "java"
 );
-@@clientLocation(
-  Microsoft.ApiManagement.ApiManagementServiceResources.performConnectivityCheckAsync,
-  "ResourceProviders",
-  "java"
-);
+@@clientLocation(performConnectivityCheckAsync, "ResourceProviders", "java");
 
 @@clientName(
   CommonTypes.PrivateEndpointConnection,
@@ -152,7 +148,7 @@ union AssociationEntityProvisioningState {
 @@clientName(Microsoft.ApiManagement, "ApiManagementClient", "python");
 @@clientName(HttpCorrelationProtocol.W3C, "W3_C", "python");
 @@clientLocation(
-  ApiManagementServiceResources.performConnectivityCheckAsync,
+  performConnectivityCheckAsync,
   Microsoft.ApiManagement,
   "python"
 );
@@ -264,11 +260,7 @@ op replacePurge(
   "TagResourceContractProperties",
   "go"
 );
-@@clientLocation(
-  Microsoft.ApiManagement.ApiManagementServiceResources.performConnectivityCheckAsync,
-  "Client",
-  "go"
-);
+@@clientLocation(performConnectivityCheckAsync, "Client", "go");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
 @@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
   PolicyGetParameters.format,

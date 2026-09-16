@@ -10,10 +10,10 @@ namespace Customizations;
 
 @@clientName(Microsoft.App, "ContainerAppsAPIClient", "javascript,python");
 @@clientName(Microsoft.App, "ContainerAppsApiClient", "java");
-@@clientLocation(Jobs.jobExecution, Microsoft.App, "python");
+@@clientLocation(jobExecution, Microsoft.App, "python");
 
 @@clientLocation(getCustomDomainVerificationId, "ContainerAppsAPIClient", "go");
-@@clientLocation(Jobs.jobExecution, "ContainerAppsAPIClient", "go");
+@@clientLocation(jobExecution, "ContainerAppsAPIClient", "go");
 
 @@clientName(
   VnetConfiguration.platformReservedDnsIP,
@@ -33,7 +33,7 @@ namespace Customizations;
   "java"
 );
 
-@@clientLocation(Jobs.jobExecution, Microsoft.App, "java,javascript");
+@@clientLocation(jobExecution, Microsoft.App, "java,javascript");
 @@clientName(RuntimeJavaJavaAgent, "RuntimeJavaAgent", "go,python");
 @@clientName(
   RuntimeJavaJavaAgentLogging,

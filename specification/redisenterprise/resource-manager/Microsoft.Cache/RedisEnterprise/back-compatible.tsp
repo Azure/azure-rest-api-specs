@@ -55,5 +55,6 @@ using Microsoft.Cache;
 @@Legacy.flattenProperty(AccessPolicyAssignment.properties);
 
 @@clientName(Migrations.start::parameters.resource, "parameters");
+@@clientLocation(Migrations.validate, "Migrations");
 
 @@clientLocation(OperationsStatusOperationGroup.get, "OperationsStatus");

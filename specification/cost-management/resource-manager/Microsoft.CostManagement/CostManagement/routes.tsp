@@ -18,8 +18,6 @@ interface CostAllocationRulesOperationGroup {
   /**
    * Checks availability and correctness of a name for a cost allocation rule
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CostAllocationRules_CheckNameAvailability")
   @autoRoute
   @post
   @action("costAllocationRules/checkNameAvailability")
@@ -57,11 +55,10 @@ interface BenefitRecommendationsOperationGroup {
   /**
    * List of recommendations for purchasing savings plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BenefitRecommendations_List")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/CostManagement/")
   @get
   @list
@@ -103,11 +100,10 @@ interface BenefitUtilizationSummariesOperationGroup {
   /**
    * Lists savings plan utilization summaries for the enterprise agreement scope. Supported at grain values: 'Daily' and 'Monthly'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BenefitUtilizationSummaries_ListByBillingAccountId")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @autoRoute
   @get
   @action("benefitUtilizationSummaries")
@@ -147,11 +143,10 @@ interface BenefitUtilizationSummariesOperationGroup {
   /**
    * Lists savings plan utilization summaries for billing profile. Supported at grain values: 'Daily' and 'Monthly'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BenefitUtilizationSummaries_ListByBillingProfileId")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @autoRoute
   @get
   @action("benefitUtilizationSummaries")
@@ -198,11 +193,10 @@ interface BenefitUtilizationSummariesOperationGroup {
   /**
    * Lists the savings plan utilization summaries for daily or monthly grain.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BenefitUtilizationSummaries_ListBySavingsPlanOrder")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/cost-management/")
   @autoRoute
   @get
@@ -241,11 +235,10 @@ interface BenefitUtilizationSummariesOperationGroup {
   /**
    * Lists the savings plan utilization summaries for daily or monthly grain.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BenefitUtilizationSummaries_ListBySavingsPlanId")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/cost-management/")
   @autoRoute
   @get
@@ -295,8 +288,7 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
   /**
    * Triggers generation of a benefit utilization summaries report for the provided billing account. This API supports only enrollment accounts.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GenerateBenefitUtilizationSummariesReport_GenerateByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
   @autoRoute
   @action("generateBenefitUtilizationSummariesReport")
@@ -333,8 +325,7 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
   /**
    * Triggers generation of a benefit utilization summaries report for the provided billing account and billing profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GenerateBenefitUtilizationSummariesReport_GenerateByBillingProfile")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @autoRoute
   @action("generateBenefitUtilizationSummariesReport")
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
@@ -378,8 +369,7 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
   /**
    * Triggers generation of a benefit utilization summaries report for the provided reservation order.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GenerateBenefitUtilizationSummariesReport_GenerateByReservationOrderId")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
   @autoRoute
   @action("generateBenefitUtilizationSummariesReport")
@@ -416,8 +406,7 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
   /**
    * Triggers generation of a benefit utilization summaries report for the provided reservation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GenerateBenefitUtilizationSummariesReport_GenerateByReservationId")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
   @autoRoute
   @action("generateBenefitUtilizationSummariesReport")
@@ -460,8 +449,7 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
   /**
    * Triggers generation of a benefit utilization summaries report for the provided savings plan order.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GenerateBenefitUtilizationSummariesReport_GenerateBySavingsPlanOrderId")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
   @autoRoute
   @action("generateBenefitUtilizationSummariesReport")
@@ -497,8 +485,7 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
   /**
    * Triggers generation of a benefit utilization summaries report for the provided savings plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GenerateBenefitUtilizationSummariesReport_GenerateBySavingsPlanId")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
   @autoRoute
   @action("generateBenefitUtilizationSummariesReport")
@@ -545,8 +532,7 @@ interface GenerateCostDetailsReportOperationGroup {
   /**
    * This API is the replacement for all previously release Usage Details APIs. Request to generate a cost details report for the provided date range, billing period (Only enterprise customers) or Invoice Id asynchronously at a certain scope. The initial call to request a report will return a 202 with a 'Location' and 'Retry-After' header. The 'Location' header will provide the endpoint to poll to get the result of the report generation. The 'Retry-After' provides the duration to wait before polling for the generated report. A call to poll the report operation will provide a 202 response with a 'Location' header if the operation is still in progress. Once the report generation operation completes, the polling endpoint will provide a 200 response along with details on the report blob(s) that are available for download. The details on the file(s) available for download will be available in the polling response body. To Understand cost details (formerly known as usage details) fields found in files ,see https://learn.microsoft.com/en-us/azure/cost-management-billing/automate/understand-usage-details-fields
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GenerateCostDetailsReport_CreateOperation")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @post
   @autoRoute
   @action("generateCostDetailsReport")
@@ -579,8 +565,7 @@ interface GenerateDetailedCostReportOperationGroup {
   /**
    * Generates the detailed cost report for provided date range, billing period(only enterprise customers) or Invoice ID asynchronously at a certain scope. Call returns a 202 with header Azure-Consumption-AsyncOperation providing a link to the operation created. A call on the operation will provide the status and if the operation is completed the blob file where generated detailed cost report is being stored.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GenerateDetailedCostReport_CreateOperation")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @post
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   @autoRoute
@@ -618,8 +603,7 @@ interface AlertsOperationGroup {
   /**
    * Lists the Alerts for external cloud provider type defined.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Alerts_ListExternal")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   @autoRoute
   @get
@@ -648,8 +632,7 @@ interface ForecastOperationGroup {
   /**
    * Lists the forecast charges for scope defined.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Forecast_Usage")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   @post
   @action("forecast")
@@ -681,8 +664,7 @@ interface ForecastOperationGroup {
   /**
    * Lists the forecast charges for external cloud provider type defined.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Forecast_ExternalCloudProviderUsage")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   @autoRoute
   @action("forecast")
@@ -717,8 +699,7 @@ interface DimensionsOperationGroup {
   /**
    * Lists the dimensions by the defined scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Dimensions_List")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   @get
   @action("dimensions")
@@ -765,8 +746,7 @@ interface DimensionsOperationGroup {
   /**
    * Lists the dimensions by the external cloud provider type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Dimensions_ByExternalCloudProviderType")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   @autoRoute
   @get
@@ -822,8 +802,7 @@ interface QueryOperationGroup {
   /**
    * Query the usage data for scope defined.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Query_Usage")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @post
   @action("query")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
@@ -849,8 +828,7 @@ interface QueryOperationGroup {
   /**
    * Query the usage data for external cloud provider type defined.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Query_UsageByExternalCloudProviderType")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   @autoRoute
   @action("query")
@@ -879,8 +857,7 @@ interface GenerateReservationDetailsReportOperationGroup {
   /**
    * Generates the reservations details report for provided date range asynchronously based on enrollment id. The Reservation usage details can be viewed only by certain enterprise roles. For more details on the roles see, https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/understand-ea-roles#usage-and-costs-access-by-role
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GenerateReservationDetailsReport_ByBillingAccountId")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   @autoRoute
   @action("generateReservationDetailsReport")
@@ -922,8 +899,7 @@ interface GenerateReservationDetailsReportOperationGroup {
   /**
    * Generates the reservations details report for provided date range asynchronously by billing profile. The Reservation usage details can be viewed by only certain enterprise roles by default. For more details on the roles see, https://docs.microsoft.com/en-us/azure/cost-management-billing/reservations/reservation-utilization#view-utilization-in-the-azure-portal-with-azure-rbac-access
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GenerateReservationDetailsReport_ByBillingProfileId")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @autoRoute
   @action("generateReservationDetailsReport")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
@@ -976,8 +952,7 @@ interface PriceSheetOperationGroup {
   /**
    * Gets a URL to download the pricesheet for an invoice. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PriceSheet_DownloadByInvoice")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @autoRoute
   @action("pricesheets/default/download")
   @post
@@ -1033,8 +1008,7 @@ interface PriceSheetOperationGroup {
    *
    *  Due to Azure product growth, the Azure price sheet download experience in this preview version will be updated from a single csv/json file to a Zip file containing multiple csv/json files, each with max size of 75MB.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PriceSheet_DownloadByBillingProfile")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @autoRoute
   @action("pricesheets/default/download")
   @post
@@ -1093,8 +1067,7 @@ interface PriceSheetOperationGroup {
    *
    *  All versions of the Microsoft.Consumption Azure Price Sheet - Download by Billing Account (including 2022-06-01, 2021-10-01, 2020-01-01-preview, 2019-10-01, 2019-05-01) are scheduled to be retired on 01 June 2026 and will no longer be supported after this date.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PriceSheet_DownloadByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Retains existing externalDocs metadata."
   @autoRoute
   @post
   @action("pricesheets/default/download")
@@ -1135,8 +1108,6 @@ interface ScheduledActionsOperationGroup {
   /**
    * Checks availability and correctness of the name for a scheduled action.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ScheduledActions_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
@@ -1146,8 +1117,6 @@ interface ScheduledActionsOperationGroup {
   /**
    * Checks availability and correctness of the name for a scheduled action within the given scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ScheduledActions_CheckNameAvailabilityByScope")
   @route("/{scope}/providers/Microsoft.CostManagement/checkNameAvailability")
   @post
   checkNameAvailabilityByScope(

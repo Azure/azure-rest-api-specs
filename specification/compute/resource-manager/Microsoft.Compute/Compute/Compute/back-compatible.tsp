@@ -679,3 +679,7 @@ using Common;
   "TWO_THOUSAND_TWENTY_TWO11_01",
   "python"
 );
+@@clientName(
+  VirtualMachineScaleSetVMDiagnosticRunCommands.diagnosticList,
+  "List"
+);
