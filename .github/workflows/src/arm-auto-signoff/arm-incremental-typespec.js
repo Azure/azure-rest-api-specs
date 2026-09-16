@@ -8,9 +8,9 @@ import {
   readme,
   resourceManager,
   swagger,
-} from "../../../shared/src/changed-files.js";
-import { Readme } from "../../../shared/src/readme.js";
-import { Swagger } from "../../../shared/src/swagger.js";
+} from "../../../shared/src/changed-files.ts";
+import { Readme } from "../../../shared/src/readme.ts";
+import { Swagger } from "../../../shared/src/swagger.ts";
 import { CoreLogger } from "../core-logger.js";
 
 // Enable simple-git debug logging to improve console output

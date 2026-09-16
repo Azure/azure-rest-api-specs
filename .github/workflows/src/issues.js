@@ -4,7 +4,7 @@ import { inspect } from "util";
  * Retrieves the PR number associated with a specific commit SHA
  * @param {import('@actions/github-script').AsyncFunctionArguments["github"]} github - GitHub API client
  * @param {string} head_sha - The head_sha
- * @param {import('../../shared/src/logger.js').ILogger} [logger]
+ * @param {import('../../shared/src/logger.ts').ILogger} [logger]
  * @returns {Promise<{issueNumber: number}>} - The PR number or NaN if not found
  */
 export async function getIssueNumber(github, head_sha, logger) {

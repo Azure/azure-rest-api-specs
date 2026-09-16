@@ -1,5 +1,5 @@
 import { readdir } from "fs/promises";
-import { basename, join, normalize, sep } from "path";
+import { basename, join } from "path";
 import { pathToFileURL } from "url";
 import { inspect } from "util";
 
@@ -14,9 +14,18 @@ export default async function importAllModules({ core }) {
 
   const githubDir = join(workspace, ".github");
 
-  // find all files matching "**/src/**/*.js", sorted for readability
-  const scriptFiles = (await readdir(githubDir, { recursive: true }))
-    .filter((f) => normalize(f).split(sep).includes("src") && basename(f).endsWith(".js"))
+  // Search only repo-owned sources, not dependencies or generated coverage files.
+  const scriptFiles = (
+    await Promise.all(
+      ["shared/src", "workflows/src"].map(async (folder) =>
+        (await readdir(join(githubDir, folder), { recursive: true })).map((file) =>
+          join(folder, file),
+        ),
+      ),
+    )
+  )
+    .flat()
+    .filter((file) => /\.(?:js|ts)$/.test(basename(file)))
     .sort();
 
   core.info("Script Files:");

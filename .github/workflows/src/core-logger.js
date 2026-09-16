@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../../shared/src/logger.js').ILogger} ILogger
+ * @typedef {import('../../shared/src/logger.ts').ILogger} ILogger
  */
 
 /**

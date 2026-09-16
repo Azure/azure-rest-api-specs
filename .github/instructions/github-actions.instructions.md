@@ -13,6 +13,17 @@ applyTo:
 
 # GitHub Copilot Instructions for GitHub Actions Code
 
+## Shared package TypeScript migration
+
+`.github/shared` uses TypeScript, including its source, tests, CLI, benchmarks, and configuration.
+The JavaScript/JSDoc rules below apply only to workflow code outside that package.
+For shared code, use `.ts` files, native type annotations, `import type`, and `.ts` relative imports.
+Node.js 24 runs the sources with native type stripping; `tsc` uses `noEmit`, `erasableSyntaxOnly`,
+and `verbatimModuleSyntax`. Do not introduce enums, parameter properties, or namespaces.
+Keep comments for documentation, not types. ESLint scripts use
+`--flag unstable_native_nodejs_ts_config` to load TypeScript configs without an extra loader.
+See [the shared package guide](../shared/readme.md) for its development conventions.
+
 This file provides instructions for GitHub Copilot when working with GitHub Actions code in this repository. The GitHub Actions infrastructure is completely separate from the TypeSpec and OpenAPI specification work that makes up the majority of this repository.
 
 ## Overview
@@ -265,11 +276,11 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 
 ### Adding a New Shared Utility
 
-1. Create the module in `.github/shared/src/my-utility.js`
-2. Add JSDoc type annotations
+1. Create the module in `.github/shared/src/my-utility.ts`
+2. Add native TypeScript annotations and documentation comments where needed
 3. Export named functions
 4. Add exports to `.github/shared/package.json` under `exports` field
-5. Write tests in `.github/shared/test/my-utility.test.js`
+5. Write tests in `.github/shared/test/my-utility.test.ts`
 6. Run `pnpm run check` in `.github/shared/`
 7. Run `pnpm run check` in `.github/` (to ensure no breakage)
 

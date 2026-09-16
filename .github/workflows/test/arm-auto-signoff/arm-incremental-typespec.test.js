@@ -1,6 +1,6 @@
 import { relative, resolve } from "path";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { repoRoot } from "../../../shared/test/repo.js";
+import { repoRoot } from "../../../shared/test/repo.ts";
 
 const mockRaw = vi.hoisted(
   /** @returns {import("vitest").MockedFunction<import("simple-git").SimpleGit["raw"]>} */
@@ -20,12 +20,12 @@ vi.mock("simple-git", () => ({
 }));
 
 import { inspect } from "util";
-import * as changedFiles from "../../../shared/src/changed-files.js";
+import * as changedFiles from "../../../shared/src/changed-files.ts";
 import {
   contosoReadme,
   swaggerHandWritten,
   swaggerTypeSpecGenerated,
-} from "../../../shared/test/examples.js";
+} from "../../../shared/test/examples.ts";
 import { incrementalTypeSpec } from "../../src/arm-auto-signoff/arm-incremental-typespec.js";
 import { createMockCore } from "../mocks.js";
 

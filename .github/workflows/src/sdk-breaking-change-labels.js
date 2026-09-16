@@ -1,4 +1,4 @@
-import { SpecGenSdkArtifactInfoSchema, sdkLabels } from "../../shared/src/sdk-types.js";
+import { SpecGenSdkArtifactInfoSchema, sdkLabels } from "../../shared/src/sdk-types.ts";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.js";
 import { extractInputs } from "./context.js";
 import { LabelAction } from "./label.js";
@@ -6,7 +6,7 @@ import { LabelAction } from "./label.js";
 const SUPPORTED_TARGET_BRANCHES = new Set(["main", "RPSaaSMaster"]);
 
 /**
- * @typedef {import("../../shared/src/sdk-types.js").SdkName} SdkName
+ * @typedef {import("../../shared/src/sdk-types.ts").SdkName} SdkName
  */
 
 /**

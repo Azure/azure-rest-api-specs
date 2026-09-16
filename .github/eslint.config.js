@@ -1,5 +1,5 @@
 import { defineConfig } from "eslint/config";
-import { defineBaseConfig } from "./shared/eslint.base.config.js";
+import { defineBaseConfig } from "./shared/eslint.base.config.ts";
 
 export default defineConfig(
   defineBaseConfig({
