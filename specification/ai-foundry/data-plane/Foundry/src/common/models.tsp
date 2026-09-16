@@ -25,6 +25,14 @@ model ApiErrorResponse {
 
 alias ApiError = OpenAI.Error;
 
+@doc("A lowercase 64-character SHA-256 hexadecimal digest.")
+@pattern("^[0-9a-f]{64}$")
+scalar Sha256Hash extends string;
+
+@doc("A published evaluator version number represented as a decimal integer string.")
+@pattern("^[1-9][0-9]*$")
+scalar EvaluatorVersionNumber extends string;
+
 alias AcceptJsonHeader = {
   @header accept: "application/json";
 };
