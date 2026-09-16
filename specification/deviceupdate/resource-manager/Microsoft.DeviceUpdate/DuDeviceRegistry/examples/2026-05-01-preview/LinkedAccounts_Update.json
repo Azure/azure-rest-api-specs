@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "linkedAccountName": "contoso",
+    "properties": {
+      "tags": {
+        "tagKey": "tagValue"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "contoso",
+        "type": "Microsoft.DeviceUpdate/linkedAccounts",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/linkedAccounts/contoso",
+        "location": "eastus2",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-mi": {
+              "clientId": "12345678-4321-1234-1234-123456789012",
+              "principalId": "12345678-1234-4321-1234-123456789012"
+            }
+          }
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "serviceAddress": "contoso.api.adu.microsoft.com",
+          "deviceAddress": "contoso.device-api.adu.microsoft.com",
+          "legacyDeviceAddress": "contoso.device-api-legacy.adu.microsoft.com"
+        },
+        "tags": {
+          "tagKey": "tagValue"
+        }
+      }
+    }
+  },
+  "operationId": "LinkedAccounts_Update",
+  "title": "Updates Linked Account"
+}

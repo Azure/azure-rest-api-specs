@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2025-04-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "updateAccountName": "contoso"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "deviceClassHighestVersionUpdates": [
+          {
+            "deviceClassId": "ee13113a78e5f6029714911c6cbf5427fbcb9d9e",
+            "deviceCount": 100,
+            "updateId": {
+              "name": "name",
+              "provider": "provider",
+              "version": "1.0.0.0"
+            }
+          },
+          {
+            "deviceClassId": "ff13113a78e5f6029714911c6cbf5427fbcb9d9f",
+            "deviceCount": 42,
+            "updateId": {
+              "name": "name2",
+              "provider": "provider2",
+              "version": "1.2.3.4"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "UpdateAccounts_CalculateHighestVersionUpdates",
+  "title": "Calculates Highest Version Updates"
+}

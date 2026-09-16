@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2025-04-01-preview",
+    "deploymentName": "mydeployment",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "updateAccountName": "contoso"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "agentId": "agentId1",
+            "deviceState": "Succeeded",
+            "movedOnToNewDeployment": false,
+            "retryCount": 1
+          },
+          {
+            "agentId": "agentId2",
+            "deviceState": "Succeeded",
+            "movedOnToNewDeployment": false,
+            "retryCount": 1
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Deployments_CalculateDeviceStates",
+  "title": "Gets a list of devices in a Deployment"
+}

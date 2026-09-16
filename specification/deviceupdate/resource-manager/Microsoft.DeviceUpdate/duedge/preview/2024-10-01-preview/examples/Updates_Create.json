@@ -1,0 +1,154 @@
+{
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "update": {
+      "location": "westus2",
+      "properties": {
+        "description": "Fix for critical vulnerability",
+        "compatibility": [
+          {
+            "deviceManufacturer": "Microsoft",
+            "deviceModel": "Toaster"
+          }
+        ],
+        "createdDateTime": "2019-09-12T00:00:00.0000000+00:00",
+        "friendlyName": "Lab Sensor Update v1",
+        "importedDateTime": "2020-04-22T21:01:43.8408797+00:00",
+        "instructions": {
+          "steps": [
+            {
+              "description": "pre-install script",
+              "files": [
+                "configure.sh"
+              ],
+              "handler": "microsoft/script:1",
+              "handlerProperties": {
+                "arguments": "--pre-install"
+              }
+            },
+            {
+              "type": "reference",
+              "updateId": {
+                "name": "sensor",
+                "provider": "microsoft",
+                "version": "1.0"
+              }
+            }
+          ]
+        },
+        "manifestVersion": "5.0",
+        "updateId": {
+          "name": "adu",
+          "provider": "microsoft",
+          "version": "1.0.0.0"
+        }
+      }
+    },
+    "updateAccountName": "contoso",
+    "updateResourceName": "microsoft_adu_1.0.0.0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "microsoft_adu_1.0.0.0",
+        "type": "Microsoft.DeviceUpdate/updateAccounts/updates",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/updateAccounts/contoso/updates/microsoft_adu_1.0.0.0",
+        "location": "westus2",
+        "properties": {
+          "description": "Fix for critical vulnerability",
+          "provisioningState": "Succeeded",
+          "compatibility": [
+            {
+              "deviceManufacturer": "Microsoft",
+              "deviceModel": "Toaster"
+            }
+          ],
+          "createdDateTime": "2019-09-12T00:00:00.0000000+00:00",
+          "friendlyName": "Lab Sensor Update v1",
+          "importedDateTime": "2020-04-22T21:01:43.8408797+00:00",
+          "instructions": {
+            "steps": [
+              {
+                "description": "pre-install script",
+                "files": [
+                  "configure.sh"
+                ],
+                "handler": "microsoft/script:1",
+                "handlerProperties": {
+                  "arguments": "--pre-install"
+                }
+              },
+              {
+                "type": "reference",
+                "updateId": {
+                  "name": "sensor",
+                  "provider": "microsoft",
+                  "version": "1.0"
+                }
+              }
+            ]
+          },
+          "manifestVersion": "5.0",
+          "updateId": {
+            "name": "adu",
+            "provider": "microsoft",
+            "version": "1.0.0.0"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "microsoft_adu_1.0.0.0",
+        "type": "Microsoft.DeviceUpdate/updateAccounts/updates",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/updateAccounts/contoso/updates/microsoft_adu_1.0.0.0",
+        "location": "westus2",
+        "properties": {
+          "description": "Fix for critical vulnerability",
+          "provisioningState": "Accepted",
+          "compatibility": [
+            {
+              "deviceManufacturer": "Microsoft",
+              "deviceModel": "Toaster"
+            }
+          ],
+          "createdDateTime": "2019-09-12T00:00:00.0000000+00:00",
+          "friendlyName": "Lab Sensor Update v1",
+          "importedDateTime": "2020-04-22T21:01:43.8408797+00:00",
+          "instructions": {
+            "steps": [
+              {
+                "description": "pre-install script",
+                "files": [
+                  "configure.sh"
+                ],
+                "handler": "microsoft/script:1",
+                "handlerProperties": {
+                  "arguments": "--pre-install"
+                }
+              },
+              {
+                "type": "reference",
+                "updateId": {
+                  "name": "sensor",
+                  "provider": "microsoft",
+                  "version": "1.0"
+                }
+              }
+            ]
+          },
+          "manifestVersion": "5.0",
+          "updateId": {
+            "name": "adu",
+            "provider": "microsoft",
+            "version": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Updates_Create",
+  "title": "Creates an Update"
+}

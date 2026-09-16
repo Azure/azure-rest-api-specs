@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "updateAccountName": "contoso"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "mydeployment",
+            "type": "Microsoft.DeviceUpdate/updateaccounts/activeDeployment",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/updateaccounts/contoso/activeDeployemnts/mydeployment",
+            "location": "westus2",
+            "properties": {
+              "deploymentId": "mydeployment",
+              "deviceClassId": "ee13113a78e5f6029714911c6cbf5427fbcb9d9e",
+              "provisioningState": "Succeeded",
+              "startDateTime": "2020-04-22T12:12:12.0000000+00:00",
+              "updateManifest": "manifestdata",
+              "updateManifestSignature": "signatureblob",
+              "updateProtocol": {
+                "id": 1
+              },
+              "workflow": {
+                "action": "ApplyDeployment",
+                "id": "mydeployment"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ActiveDeployments_ListByUpdateAccount",
+  "title": "Gets list of Active Deployments by Update Account"
+}

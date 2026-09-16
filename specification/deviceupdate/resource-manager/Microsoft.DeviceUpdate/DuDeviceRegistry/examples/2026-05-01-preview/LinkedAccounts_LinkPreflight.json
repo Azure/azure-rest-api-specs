@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "linkedAccountName": "contoso",
+    "body": {
+      "namespaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceRegistry/namespaces/contoso-ns",
+      "namespaceUuid": "5d8b3e92-1f4c-4e1a-9b27-fe2a7b8d2a31",
+      "inboundCallerIdentity": {
+        "type": "SystemAssigned"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Ready",
+        "warnings": [
+          {
+            "code": "EdgeDevicesPresent",
+            "message": "Hub contains edge/module devices. Not first-class supported by ADR."
+          }
+        ],
+        "metadata": {
+          "deviceCount": 12500
+        }
+      }
+    }
+  },
+  "operationId": "LinkedAccounts_LinkPreflight",
+  "title": "Preflight check for account linking"
+}

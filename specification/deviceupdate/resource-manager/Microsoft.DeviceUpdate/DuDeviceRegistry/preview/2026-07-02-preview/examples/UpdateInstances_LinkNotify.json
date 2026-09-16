@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2026-07-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "updateInstanceName": "contoso",
+    "body": {
+      "action": "commit"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "linkingState": "Succeeded",
+        "namespaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceRegistry/namespaces/contoso-ns"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DeviceUpdate/locations/eastus2/operationStatuses/op123?api-version=2026-07-02-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DeviceUpdate/locations/eastus2/operationStatuses/op123?api-version=2026-07-02-preview",
+        "Retry-After": 10
+      }
+    }
+  },
+  "operationId": "UpdateInstances_LinkNotify",
+  "title": "Notify linking state change (commit)"
+}

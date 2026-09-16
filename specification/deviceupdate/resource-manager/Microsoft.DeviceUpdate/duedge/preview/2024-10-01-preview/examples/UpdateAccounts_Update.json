@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "updateAccountName": "contoso",
+    "updateAccountUpdatePayload": {
+      "tags": {
+        "tagKey": "tagValue"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "contoso",
+        "type": "Microsoft.DeviceUpdate/updateAccounts",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/updateAccounts/contoso",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "clientId": "12345678-4321-1234-1234-123456789012",
+              "principalId": "12345678-1234-4321-1234-123456789012"
+            }
+          }
+        },
+        "location": "westus2",
+        "properties": {
+          "deviceEnrollmentScope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg",
+          "locations": [
+            {
+              "name": "westus2",
+              "role": "Primary"
+            },
+            {
+              "name": "westcentralus",
+              "role": "Failover"
+            }
+          ],
+          "mqttBrokers": [
+            {
+              "type": "EventGrid",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.EventGrid/namespaces/mybroker"
+            }
+          ],
+          "deviceType": "DeviceRegistryDevice",
+          "provisioningState": "Succeeded",
+          "serviceManagedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1",
+          "sku": "Standard"
+        },
+        "tags": {
+          "tagKey": "tagValue"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/susbscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DeviceUpdate/locations/westus/operationStatuses/00000000-0000-0000-0000-000000000000",
+        "Retry-After": 20
+      }
+    }
+  },
+  "operationId": "UpdateAccounts_Update",
+  "title": "Updates Update Account"
+}

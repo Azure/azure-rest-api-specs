@@ -1,0 +1,1211 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Device Registry-linked device updating service under Microsoft.DeviceUpdate",
+    "version": "2026-06-01-preview",
+    "description": "Microsoft Device Update resource provider.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "LinkedAccounts"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.DeviceUpdate/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceUpdate/checkNameAvailability": {
+      "post": {
+        "operationId": "LinkedAccounts_CheckNameAvailability",
+        "tags": [
+          "LinkedAccounts"
+        ],
+        "description": "Check if the Linked Account name is available",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The CheckAvailability request",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check Linked Account name availability": {
+            "$ref": "./examples/LinkedAccounts_CheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceUpdate/linkedAccounts": {
+      "get": {
+        "operationId": "LinkedAccounts_ListBySubscription",
+        "tags": [
+          "LinkedAccounts"
+        ],
+        "description": "Returns list of Linked Accounts.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LinkedAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets list of Linked Accounts by Subscription": {
+            "$ref": "./examples/LinkedAccounts_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/linkedAccounts": {
+      "get": {
+        "operationId": "LinkedAccounts_ListByResourceGroup",
+        "tags": [
+          "LinkedAccounts"
+        ],
+        "description": "Returns list of Linked Accounts.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LinkedAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets list of Linked Accounts": {
+            "$ref": "./examples/LinkedAccounts_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/linkedAccounts/{linkedAccountName}": {
+      "get": {
+        "operationId": "LinkedAccounts_Get",
+        "tags": [
+          "LinkedAccounts"
+        ],
+        "description": "Returns linked account details for the given linked account name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "linkedAccountName",
+            "in": "path",
+            "description": "The user-chosen Linked Account name. Must be unique within the subscription and is used in the resource URL and ADU service routing. Allowed characters: alphanumeric and hyphens (not leading/trailing); length 3-36.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LinkedAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets Linked Account details": {
+            "$ref": "./examples/LinkedAccounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LinkedAccounts_Create",
+        "tags": [
+          "LinkedAccounts"
+        ],
+        "description": "Creates or updates a Linked Account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "linkedAccountName",
+            "in": "path",
+            "description": "The user-chosen Linked Account name. Must be unique within the subscription and is used in the resource URL and ADU service routing. Allowed characters: alphanumeric and hyphens (not leading/trailing); length 3-36.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Linked Account details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkedAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LinkedAccount' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LinkedAccount"
+            }
+          },
+          "201": {
+            "description": "Resource 'LinkedAccount' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LinkedAccount"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a Linked Account": {
+            "$ref": "./examples/LinkedAccounts_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LinkedAccounts_Update",
+        "tags": [
+          "LinkedAccounts"
+        ],
+        "description": "Updates linked account's patchable properties",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "linkedAccountName",
+            "in": "path",
+            "description": "The user-chosen Linked Account name. Must be unique within the subscription and is used in the resource URL and ADU service routing. Allowed characters: alphanumeric and hyphens (not leading/trailing); length 3-36.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Updated Linked Account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkedAccountUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LinkedAccount"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates Linked Account": {
+            "$ref": "./examples/LinkedAccounts_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "LinkedAccounts_Delete",
+        "tags": [
+          "LinkedAccounts"
+        ],
+        "description": "Deletes a linked account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "linkedAccountName",
+            "in": "path",
+            "description": "The user-chosen Linked Account name. Must be unique within the subscription and is used in the resource URL and ADU service routing. Allowed characters: alphanumeric and hyphens (not leading/trailing); length 3-36.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a linked account": {
+            "$ref": "./examples/LinkedAccounts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/linkedAccounts/{linkedAccountName}/linkInitiate": {
+      "post": {
+        "operationId": "LinkedAccounts_LinkInitiate",
+        "tags": [
+          "LinkedAccounts"
+        ],
+        "description": "Initiate account linking. Validates and persists binding, sets linkingState=InProgress.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "linkedAccountName",
+            "in": "path",
+            "description": "The user-chosen Linked Account name. Must be unique within the subscription and is used in the resource URL and ADU service routing. Allowed characters: alphanumeric and hyphens (not leading/trailing); length 3-36.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkInitiateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountLinking"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Initiate account linking": {
+            "$ref": "./examples/LinkedAccounts_LinkInitiate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/linkedAccounts/{linkedAccountName}/linkNotify": {
+      "post": {
+        "operationId": "LinkedAccounts_LinkNotify",
+        "tags": [
+          "LinkedAccounts"
+        ],
+        "description": "Notify linking state change (commit, fail, or namespaceDeleted).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "linkedAccountName",
+            "in": "path",
+            "description": "The user-chosen Linked Account name. Must be unique within the subscription and is used in the resource URL and ADU service routing. Allowed characters: alphanumeric and hyphens (not leading/trailing); length 3-36.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkNotifyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountLinking"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Notify linking state change (commit)": {
+            "$ref": "./examples/LinkedAccounts_LinkNotify.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/linkedAccounts/{linkedAccountName}/linkPreflight": {
+      "post": {
+        "operationId": "LinkedAccounts_LinkPreflight",
+        "tags": [
+          "LinkedAccounts"
+        ],
+        "description": "Preflight check for account linking readiness. No state change.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "linkedAccountName",
+            "in": "path",
+            "description": "The user-chosen Linked Account name. Must be unique within the subscription and is used in the resource URL and ADU service routing. Allowed characters: alphanumeric and hyphens (not leading/trailing); length 3-36.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkPreflightRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LinkPreflightResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Preflight check for account linking": {
+            "$ref": "./examples/LinkedAccounts_LinkPreflight.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/linkedAccounts/{linkedAccountName}/linkUpdate": {
+      "post": {
+        "operationId": "LinkedAccounts_LinkUpdate",
+        "tags": [
+          "LinkedAccounts"
+        ],
+        "description": "Update linking properties (e.g., identity rotation).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "linkedAccountName",
+            "in": "path",
+            "description": "The user-chosen Linked Account name. Must be unique within the subscription and is used in the resource URL and ADU service routing. Allowed characters: alphanumeric and hyphens (not leading/trailing); length 3-36.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LinkUpdateResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update linking properties": {
+            "$ref": "./examples/LinkedAccounts_LinkUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AccountLinking": {
+      "type": "object",
+      "description": "Account linking information. Present only after the first /link/initiate.",
+      "properties": {
+        "namespaceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the linked Azure Device Registry namespace.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DeviceRegistry/namespaces"
+              }
+            ]
+          }
+        },
+        "linkingState": {
+          "$ref": "#/definitions/AccountLinkingState",
+          "description": "The current linking state. Absent before any link attempt (logical NotLinked state).\nSee AccountLinkingState for the full state machine and transition rules."
+        }
+      },
+      "required": [
+        "namespaceResourceId",
+        "linkingState"
+      ]
+    },
+    "AccountLinkingState": {
+      "type": "string",
+      "description": "Account linking state.\n\nTracks the relationship between a linkable resource and an ADR namespace.\nThe property is absent before any link attempt; its presence indicates a link\nhas been initiated. NotLinked is a logical initial state, not a persisted value.",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Orphaned"
+      ],
+      "x-ms-enum": {
+        "name": "AccountLinkingState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Link in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Successfully linked to a namespace."
+          },
+          {
+            "name": "Orphaned",
+            "value": "Orphaned",
+            "description": "Was linked; namespace was deleted. ADR sent namespaceDeleted. Terminal state — no\nre-link is allowed. The resource is not auto-deleted; the customer must explicitly delete it."
+          }
+        ]
+      }
+    },
+    "InboundCallerIdentity": {
+      "type": "object",
+      "description": "Identity information for inbound calls from Azure Device Registry.",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity."
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "ARM resource ID of the user-assigned managed identity. Required when type is \"UserAssigned\"."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "LinkInitiateRequest": {
+      "type": "object",
+      "description": "Request body for /link/initiate.",
+      "properties": {
+        "namespaceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the namespace.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DeviceRegistry/namespaces"
+              }
+            ]
+          }
+        },
+        "namespaceUuid": {
+          "type": "string",
+          "description": "Globally unique namespace identifier for backend operations."
+        },
+        "dataAddress": {
+          "type": "string",
+          "description": "Data-plane address of the ADR namespace."
+        },
+        "inboundCallerIdentity": {
+          "$ref": "#/definitions/InboundCallerIdentity",
+          "description": "Managed Identity the resource should use for ADR communcation."
+        }
+      },
+      "required": [
+        "namespaceResourceId",
+        "namespaceUuid",
+        "dataAddress",
+        "inboundCallerIdentity"
+      ]
+    },
+    "LinkNotifyAction": {
+      "type": "string",
+      "description": "Link notify action type.",
+      "enum": [
+        "commit",
+        "fail",
+        "namespaceDeleted"
+      ],
+      "x-ms-enum": {
+        "name": "LinkNotifyAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "commit",
+            "value": "commit",
+            "description": "Commit the linking operation (InProgress → Succeeded). Resource starts\nlinked behavior."
+          },
+          {
+            "name": "fail",
+            "value": "fail",
+            "description": "Report that the linking operation failed."
+          },
+          {
+            "name": "namespaceDeleted",
+            "value": "namespaceDeleted",
+            "description": "The linked namespace was deleted (Succeeded → Orphaned). Terminal. Resource enters an\nunusable state: devices are wiped, linked behavior stops, no re-link allowed."
+          }
+        ]
+      }
+    },
+    "LinkNotifyRequest": {
+      "type": "object",
+      "description": "Request body for /link/notify. Idempotent: a duplicate notification matching the\nresource's current linkingState returns 200 with no further state change, making\nit safe for ADR to retry after transient failures.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/LinkNotifyAction",
+          "description": "The action to perform on the linking state."
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "Error code describing the failure. Required when action is \"fail\"; ignored otherwise.\nTracked on ADR's LRO for diagnostics."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Human-readable reason for the failure. Required when action is \"fail\"; ignored otherwise.\nTracked on ADR's LRO for diagnostics."
+        }
+      },
+      "required": [
+        "action"
+      ]
+    },
+    "LinkPreflightRequest": {
+      "type": "object",
+      "description": "Request body for /link/preflight.",
+      "properties": {
+        "namespaceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the namespace. Resource stores this for ARM property visibility and optional best-effort deletion notification.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DeviceRegistry/namespaces"
+              }
+            ]
+          }
+        },
+        "namespaceUuid": {
+          "type": "string",
+          "description": "Globally unique namespace identifier for backend operations."
+        },
+        "inboundCallerIdentity": {
+          "$ref": "#/definitions/InboundCallerIdentity",
+          "description": "Managed Identity the resource should use for ADR communication."
+        }
+      },
+      "required": [
+        "namespaceResourceId",
+        "namespaceUuid",
+        "inboundCallerIdentity"
+      ]
+    },
+    "LinkPreflightResponse": {
+      "type": "object",
+      "description": "Response body for /link/preflight.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/LinkPreflightStatus",
+          "description": "Ready if all readiness checks pass, NotReady if any blocking error exists."
+        },
+        "errors": {
+          "type": "array",
+          "description": "Array of blocking conditions when status is NotReady.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail"
+          },
+          "x-ms-identifiers": []
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Array of non-blocking conditions ADR surfaces to the customer (e.g., edge/module presence per C3). May appear with either Ready or NotReady.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail"
+          },
+          "x-ms-identifiers": []
+        },
+        "metadata": {
+          "$ref": "#/definitions/LinkedResourceMetadata",
+          "description": "Resource-defined sub-object for resource-internal data not available via ARM GET."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "LinkPreflightStatus": {
+      "type": "string",
+      "description": "Readiness status for preflight check.",
+      "enum": [
+        "Ready",
+        "NotReady"
+      ],
+      "x-ms-enum": {
+        "name": "LinkPreflightStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "All readiness checks pass."
+          },
+          {
+            "name": "NotReady",
+            "value": "NotReady",
+            "description": "One or more blocking errors exist."
+          }
+        ]
+      }
+    },
+    "LinkUpdateRequest": {
+      "type": "object",
+      "description": "Request body for /link/update. Acts as a PATCH — only provided properties are applied.",
+      "properties": {
+        "namespaceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the namespace.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DeviceRegistry/namespaces"
+              }
+            ]
+          }
+        },
+        "namespaceUuid": {
+          "type": "string",
+          "description": "Globally unique namespace identifier for backend operations."
+        },
+        "dataAddress": {
+          "type": "string",
+          "description": "ADR data-plane address for the namespace. Resource uses this for post-link runtime communication (device sync, provisioning)."
+        },
+        "inboundCallerIdentity": {
+          "$ref": "#/definitions/InboundCallerIdentity",
+          "description": "User or Managed Identity for inbound calls from Azure Device Registry."
+        }
+      }
+    },
+    "LinkUpdateResponse": {
+      "type": "object",
+      "description": "Response body for /link/update. Empty on success.",
+      "additionalProperties": {}
+    },
+    "LinkedAccount": {
+      "type": "object",
+      "description": "Device Update linked account details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LinkedAccountProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LinkedAccountListResult": {
+      "type": "object",
+      "description": "The response of a LinkedAccount list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LinkedAccount items on this page",
+          "items": {
+            "$ref": "#/definitions/LinkedAccount"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LinkedAccountProperties": {
+      "type": "object",
+      "description": "Linked Account properties.\n\nAll properties are read-only because resource state is managed exclusively\nthrough the internal link* action endpoints (linkNamespace, linkModuleGateway,\nlinkDevice, linkDeviceGroup).",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state.",
+          "readOnly": true
+        },
+        "serviceAddress": {
+          "type": "string",
+          "description": "Service-facing address for ADR→ADU communication.",
+          "readOnly": true
+        },
+        "deviceAddress": {
+          "type": "string",
+          "description": "Modern device-facing address.",
+          "readOnly": true
+        },
+        "legacyDeviceAddress": {
+          "type": "string",
+          "description": "Legacy SDK-facing device address.",
+          "readOnly": true
+        },
+        "linking": {
+          "$ref": "#/definitions/AccountLinking",
+          "description": "Account linking state. Absent until first /link/initiate.",
+          "readOnly": true
+        }
+      }
+    },
+    "LinkedAccountUpdate": {
+      "type": "object",
+      "description": "Request payload used to update an existing Linked Account.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "List of key value pairs that describe the resource. This will overwrite the existing tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The type of identity used for the resource."
+        }
+      }
+    },
+    "LinkedResourceMetadata": {
+      "type": "object",
+      "description": "Metadata returned by the preflight check.",
+      "properties": {
+        "deviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of devices in the hub."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Creating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Provisioning State Accepted"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Provisioning State Creating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Provisioning State Deleting"
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}
