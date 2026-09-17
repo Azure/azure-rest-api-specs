@@ -1,3 +1,7 @@
+import "@typespec/openapi";
+import "@azure-tools/openai-typespec/models/realtime";
+import "./agents.tsp";
+
 using TypeSpec.OpenAPI;
 using Azure.AI.Projects;
 
@@ -155,11 +159,6 @@ using Azure.AI.Projects;
 // Realtime conversation-item supporting types.
 @@extension(
   OpenAI.RealtimeConversationItemMessageType,
-  "x-ms-foundry-meta",
-  VoiceAgentRequiredPreview
-);
-@@extension(
-  RealtimeConversationItemObject,
   "x-ms-foundry-meta",
   VoiceAgentRequiredPreview
 );
