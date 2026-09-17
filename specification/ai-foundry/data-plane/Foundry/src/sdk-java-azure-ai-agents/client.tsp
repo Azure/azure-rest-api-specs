@@ -676,6 +676,325 @@ using Azure.AI.Projects;
   },
   "java"
 );
+
+// Reuse the remaining standalone Realtime shapes introduced with the voice-agent contract.
+
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.RealtimeAudioFormats.AudioPcm.Rate",
+  },
+  "java"
+)
+model OpenAIRealtimeAudioPcmRate {}
+
+@@alternateType(
+  OpenAI.RealtimeAudioFormatsAudioPcm.rate,
+  OpenAIRealtimeAudioPcmRate,
+  "java"
+);
+
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.RealtimeSessionCreateRequest.Model",
+  },
+  "java"
+)
+model OpenAIRealtimeSessionModel {}
+
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.RealtimeSessionCreateRequest.OutputModality",
+  },
+  "java"
+)
+model OpenAIRealtimeSessionOutputModality {}
+
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.RealtimeTruncationRetentionRatio",
+  },
+  "java"
+)
+model OpenAIRealtimeTruncationRetentionRatio {}
+
+union OpenAIRealtimeTruncationUnion {
+  auto: "auto",
+  disabled: "disabled",
+  retentionRatio: OpenAIRealtimeTruncationRetentionRatio,
+}
+
+@@alternateType(
+  OpenAI.RealtimeSessionCreateRequestGA.`model`,
+  OpenAIRealtimeSessionModel,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeSessionCreateRequestGA.output_modalities,
+  OpenAIRealtimeSessionOutputModality[],
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeSessionCreateRequestGA.truncation,
+  OpenAIRealtimeTruncationUnion,
+  "java"
+);
+
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.RealtimeConversationItemFunctionCall.Status",
+  },
+  "java"
+)
+model OpenAIRealtimeFunctionCallStatus {}
+
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.RealtimeConversationItemFunctionCallOutput.Status",
+  },
+  "java"
+)
+model OpenAIRealtimeFunctionCallOutputStatus {}
+
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.RealtimeConversationItemAssistantMessage.Status",
+  },
+  "java"
+)
+model OpenAIRealtimeAssistantMessageStatus {}
+
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.RealtimeConversationItemSystemMessage.Status",
+  },
+  "java"
+)
+model OpenAIRealtimeSystemMessageStatus {}
+
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.RealtimeConversationItemSystemMessage.Content.Type",
+  },
+  "java"
+)
+model OpenAIRealtimeSystemMessageContentType {}
+
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.RealtimeConversationItemUserMessage.Status",
+  },
+  "java"
+)
+model OpenAIRealtimeUserMessageStatus {}
+
+@@alternateType(
+  OpenAI.RealtimeConversationItemFunctionCall.status,
+  OpenAIRealtimeFunctionCallStatus,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeConversationItemFunctionCallOutput.status,
+  OpenAIRealtimeFunctionCallOutputStatus,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeConversationItemMessageAssistantContent,
+  {
+    identity: "com.openai.models.realtime.RealtimeConversationItemAssistantMessage.Content",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeConversationItemMessageAssistant.status,
+  OpenAIRealtimeAssistantMessageStatus,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeConversationItemMessageSystemContent,
+  {
+    identity: "com.openai.models.realtime.RealtimeConversationItemSystemMessage.Content",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeConversationItemMessageSystem.status,
+  OpenAIRealtimeSystemMessageStatus,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeConversationItemMessageSystemContent.type,
+  OpenAIRealtimeSystemMessageContentType,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeConversationItemMessageUserContent,
+  {
+    identity: "com.openai.models.realtime.RealtimeConversationItemUserMessage.Content",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeConversationItemMessageUser.status,
+  OpenAIRealtimeUserMessageStatus,
+  "java"
+);
+
+@@alternateType(
+  OpenAI.RealtimeServerEventErrorError,
+  {
+    identity: "com.openai.models.realtime.RealtimeError",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeServerEventConversationCreatedConversation,
+  {
+    identity: "com.openai.models.realtime.ConversationCreatedEvent.Conversation",
+  },
+  "java"
+);
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.ConversationCreatedEvent.Conversation.Object",
+  },
+  "java"
+)
+model OpenAIRealtimeConversationObject {}
+
+@@alternateType(
+  OpenAI.RealtimeServerEventConversationCreatedConversation.object,
+  OpenAIRealtimeConversationObject,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionFailedError,
+  {
+    identity: "com.openai.models.realtime.ConversationItemInputAudioTranscriptionFailedEvent.Error",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeServerEventRateLimitsUpdatedRateLimits,
+  {
+    identity: "com.openai.models.realtime.RateLimitsUpdatedEvent.RateLimit",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeServerEventResponseContentPartAddedPart,
+  {
+    identity: "com.openai.models.realtime.ResponseContentPartAddedEvent.Part",
+  },
+  "java"
+);
+
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.ResponseContentPartDoneEvent.Part.Type",
+  },
+  "java"
+)
+model OpenAIRealtimeContentPartDoneType {}
+
+@@alternateType(
+  OpenAI.RealtimeServerEventResponseContentPartDonePart.type,
+  OpenAIRealtimeContentPartDoneType,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeSessionCreateRequestGAAudioInputNoiseReduction,
+  {
+    identity: "com.openai.models.realtime.RealtimeAudioConfigInput.NoiseReduction",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudioInputNoiseReduction,
+  {
+    identity: "com.openai.models.realtime.RealtimeTranscriptionSessionAudioInput.NoiseReduction",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.TokenLimits,
+  {
+    identity: "com.openai.models.realtime.RealtimeTruncationRetentionRatio.TokenLimits",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.ToolChoiceOptions,
+  {
+    identity: "com.openai.models.responses.ToolChoiceOptions",
+  },
+  "java"
+);
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.AudioTranscription.Delay",
+  },
+  "java"
+)
+model OpenAIAudioTranscriptionDelay {}
+
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.RealtimeResponseCreateParams.Conversation",
+  },
+  "java"
+)
+model OpenAIRealtimeResponseConversation {}
+
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.RealtimeAudioInputTurnDetection.SemanticVad.Eagerness",
+  },
+  "java"
+)
+model OpenAISemanticVadEagerness {}
+
+@@alternateType(
+  OpenAI.AudioTranscription.delay,
+  OpenAIAudioTranscriptionDelay,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponseCreateParams.conversation,
+  OpenAIRealtimeResponseConversation,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeTurnDetectionSemanticVad.eagerness,
+  OpenAISemanticVadEagerness,
+  "java"
+);
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.RealtimeResponse.OutputModality",
+  },
+  "java"
+)
+model OpenAIRealtimeResponseOutputModality {}
+
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.RealtimeResponse.Status",
+  },
+  "java"
+)
+model OpenAIRealtimeResponseStatus {}
+
+@@alternateType(
+  OpenAI.RealtimeResponse.output_modalities,
+  OpenAIRealtimeResponseOutputModality[],
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeResponse.status,
+  OpenAIRealtimeResponseStatus,
+  "java"
+);
+
 // Do NOT map OpenAI.ToolChoiceFunction / OpenAI.ToolChoiceMCP to their openai-java equivalents
 // (com.openai.models.responses.ToolChoiceFunction / ToolChoiceMcp). Although both are field-for-field
 // duplicates, they are discriminated subtypes of `ToolChoiceParam` (@discriminator("type")). Substituting a
