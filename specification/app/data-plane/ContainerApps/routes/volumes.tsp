@@ -325,7 +325,7 @@ interface VolumesOperations {
   >;
 
   /** Upload a file to a volume. */
-  #suppress "@azure-tools/typespec-azure-core/byos" "The content is a byte stream, not a BYOS model."
+  #suppress "@azure-tools/typespec-azure-core/byos" "The content is a byte stream for uploading a file to the volume, not a BYOS model."
   @summary("Upload a file to a volume.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes/{volumeName}/files/upload")
   @put

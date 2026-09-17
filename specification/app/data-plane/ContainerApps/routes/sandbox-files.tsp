@@ -218,7 +218,7 @@ interface SandboxFilesOperations {
   >;
 
   /** Writes a file to a running sandbox. The file is streamed directly from the request body. */
-  #suppress "@azure-tools/typespec-azure-core/byos" "The content is a byte stream, not a BYOS model."
+  #suppress "@azure-tools/typespec-azure-core/byos" "The content is a byte stream for uploading a file into the sandbox, not a BYOS model."
   @summary("Writes a file to a running sandbox. The file is streamed directly from the request body.")
   @action("files")
   @actionSeparator("/")
