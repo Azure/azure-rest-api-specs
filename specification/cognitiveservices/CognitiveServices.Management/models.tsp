@@ -54,6 +54,7 @@ union ProvisioningState {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource is unreachable"
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   ExtensionUnreachable: "ExtensionUnreachable",
 }
 
@@ -502,6 +503,392 @@ union RaiPolicyMode {
 }
 
 /**
+ * The public representation used by a RAI policy body.
+ */
+@added(Versions.v2026_09_15_preview)
+union RaiPolicyFormat {
+  string,
+
+  /** A legacy content-filter policy. */
+  ContentFilters: "ContentFilters",
+
+  /** An Agent Control Specification policy. */
+  ACS: "ACS",
+}
+
+/**
+ * The transport encoding of reusable Rego source.
+ */
+@added(Versions.v2026_09_15_preview)
+union RaiRegoEncoding {
+  string,
+
+  /** The Rego property contains plain UTF-8 source. */
+  None: "None",
+
+  /** The Rego property contains Base64-encoded UTF-8 source. */
+  Base64: "Base64",
+}
+
+/** A customer-visible reference to a subscription-level external safety provider. */
+@added(Versions.v2026_09_15_preview)
+model RaiPolicyCustomExternalSafetyProviderReference {
+  /** The registered external safety-provider name. */
+  @minLength(1)
+  externalSafetyProviderName: string;
+
+  /** Optional managed identity used when invoking the external safety provider. */
+  managedIdentityResourceId?: Azure.Core.armResourceIdentifier;
+
+  /** The request stage at which the provider runs. */
+  source: RaiPolicyContentSource;
+
+  /** Whether a provider rejection blocks the request. */
+  blocking?: boolean;
+}
+
+/** The policy language supported by the Unified Moderate AACS host profile. */
+@added(Versions.v2026_09_15_preview)
+union RaiAcsPolicyDefinitionType {
+  string,
+
+  /** A policy evaluated by Rego. */
+  Rego: "rego",
+}
+
+/** The representation sent to AACS moderation capabilities. */
+@added(Versions.v2026_09_15_preview)
+union RaiAcsModerationSubjectFormat {
+  string,
+
+  /** Moderates the selected policy target as text. */
+  Text: "text",
+
+  /** Moderates the canonical JSON representation of the selected policy target. */
+  CanonicalJson: "canonical_json",
+}
+
+/** Harm categories supported by the Unified Moderate text profile. */
+@added(Versions.v2026_09_15_preview)
+union RaiAcsHarmCategory {
+  string,
+
+  /** Hate-related content. */
+  Hate: "Hate",
+
+  /** Self-harm-related content. */
+  SelfHarm: "SelfHarm",
+
+  /** Sexual content. */
+  Sexual: "Sexual",
+
+  /** Violent content. */
+  Violence: "Violence",
+
+  /** Prompt-injection content. */
+  PromptInjection: "PromptInjection",
+
+  /** Protected text material. */
+  ProtectedMaterialText: "ProtectedMaterialText",
+
+  /** Protected source-code material. */
+  ProtectedMaterialCode: "ProtectedMaterialCode",
+}
+
+/** A Rego policy definition in the Unified Moderate AACS host profile. */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsRegoPolicyDefinition {
+  /** The policy language. This profile supports only Rego. */
+  type: RaiAcsPolicyDefinitionType;
+
+  /** The fully qualified Rego query evaluated for this policy. */
+  @minLength(1)
+  query: string;
+}
+
+/** Selects one AACS harm-detector configuration. */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsHarmConfiguration {
+  /** The logical harm category exposed under input.snapshot.moderation.harm. */
+  category: RaiAcsHarmCategory;
+
+  /**
+   * The AACS detector configuration identifier. When supplied, it must be the
+   * configuration supported for the selected category.
+   */
+  @encodedName("application/json", "harm_config_id")
+  @minLength(1)
+  harmConfigId?: string;
+}
+
+/**
+ * AACS-specific moderation work performed before ACS evaluates the selected
+ * Rego query.
+ */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsModerationBindingExtension {
+  /** How the selected policy target is represented to moderation capabilities. */
+  @encodedName("application/json", "subject_format")
+  subjectFormat: RaiAcsModerationSubjectFormat;
+
+  /** Harm signals requested for this intervention point. */
+  @encodedName("application/json", "harm_configs")
+  @identifiers(#["category"])
+  harmConfigs: RaiAcsHarmConfiguration[];
+}
+
+/** An object that must contain no properties. */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "The AACS host profile permits these fields only when they are empty"
+@added(Versions.v2026_09_15_preview)
+model RaiAcsEmptyObject {}
+
+/** Static policy metadata for one ACS tool catalog entry. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS tool entries permit extensible policy metadata"
+@added(Versions.v2026_09_15_preview)
+model RaiAcsToolDefinition {
+  ...Record<unknown>;
+
+  /** Optional host-defined tool identifier. The catalog map key, not this value, controls tool lookup. */
+  @minLength(1)
+  id?: string;
+
+  /** Optional host-defined tool type. */
+  @minLength(1)
+  type?: string;
+
+  /** Human-readable policy metadata. */
+  description?: string;
+
+  /** Labels describing the sink or capability. */
+  @encodedName("application/json", "security_labels")
+  securityLabels?: string[];
+
+  /** Maximum sensitivity or host-defined clearance metadata. */
+  @minLength(1)
+  clearance?: string;
+}
+
+/**
+ * Identifies the logical policy evaluated at an ACS intervention point.
+ */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsPolicyBinding {
+  /** The logical policy identifier. */
+  @minLength(1)
+  id: string;
+
+  /** An optional intervention-specific Rego query override. */
+  @minLength(1)
+  query?: string;
+
+  /** Optional AACS moderation capabilities invoked before Rego evaluation. */
+  @encodedName("application/json", "aacs_moderation")
+  aacsModeration?: RaiAcsModerationBindingExtension;
+}
+
+/** Canonical policy targets supported by the Unified Moderate AACS host profile. */
+@added(Versions.v2026_09_15_preview)
+union RaiAcsPolicyTarget {
+  string,
+
+  /** Selects the incoming user input. */
+  Input: "$snap.input",
+
+  /** Selects the assistant output. */
+  Output: "$snap.output",
+
+  /** Selects tool-call arguments. */
+  ToolArguments: "$snap.tool_call.args",
+
+  /** Selects a tool result. */
+  ToolResult: "$snap.tool_result.value",
+}
+
+/** Canonical target kinds supported by the Unified Moderate AACS host profile. */
+@added(Versions.v2026_09_15_preview)
+union RaiAcsPolicyTargetKind {
+  string,
+
+  /** The target contains user input. */
+  UserInput: "user_input",
+
+  /** The target contains assistant output. */
+  AssistantOutput: "assistant_output",
+
+  /** The target contains tool-call arguments. */
+  ToolArguments: "tool_args",
+
+  /** The target contains a tool result. */
+  ToolResult: "tool_result",
+}
+
+/**
+ * Snapshot paths for selecting a tool catalog entry.
+ * The listed values are recognized by the Unified Moderate AACS host profile; other values are allowed for forward compatibility.
+ */
+@added(Versions.v2026_09_15_preview)
+union RaiAcsToolNameSelector {
+  string,
+
+  /** Selects the tool-call name from the canonical snapshot root. */
+  ToolCallName: "$snap.tool_call.name",
+
+  /** Selects the tool-call name through the snapshot-root alias. */
+  ToolCallNameAlias: "$.tool_call.name",
+}
+
+/**
+ * Binds one logical policy to an ACS intervention point.
+ */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsInterventionPoint {
+  /** The canonical Agent Hooks snapshot path projected as the policy target. */
+  @encodedName("application/json", "policy_target")
+  policyTarget: RaiAcsPolicyTarget;
+
+  /** The semantic kind of the projected policy target. */
+  @encodedName("application/json", "policy_target_kind")
+  policyTargetKind: RaiAcsPolicyTargetKind;
+
+  /** The logical policy evaluated at this intervention point. */
+  policy: RaiAcsPolicyBinding;
+
+  /** Standard ACS annotation bindings are disabled; when present, this object must be empty. */
+  annotations?: RaiAcsEmptyObject;
+}
+
+/** Binds one logical policy to a tool-call intervention point. */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsToolInterventionPoint {
+  ...RaiAcsInterventionPoint;
+
+  /** Selects the tool catalog key from the raw Agent Hooks snapshot using an extensible snapshot path. */
+  @encodedName("application/json", "tool_name_from")
+  toolNameFrom?: RaiAcsToolNameSelector;
+}
+
+/** Intervention points supported by the Unified Moderate AACS host profile. */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsInterventionPoints {
+  /** The policy evaluated for user input. */
+  input?: RaiAcsInterventionPoint;
+
+  /** The policy evaluated before a tool call. */
+  @encodedName("application/json", "pre_tool_call")
+  preToolCall?: RaiAcsToolInterventionPoint;
+
+  /** The policy evaluated after a tool call. */
+  @encodedName("application/json", "post_tool_call")
+  postToolCall?: RaiAcsToolInterventionPoint;
+
+  /** The policy evaluated for final output. */
+  output?: RaiAcsInterventionPoint;
+}
+
+/**
+ * The closed Rego-only Agent Control Specification profile supported by
+ * Unified Moderate.
+ */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsManifest {
+  /** The declared Agent Control Specification manifest version. */
+  @encodedName("application/json", "agent_control_specification_version")
+  agentControlSpecificationVersion: string;
+
+  /** Non-policy manifest metadata. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS metadata is an extensible JSON object"
+  metadata?: Record<unknown>;
+
+  /** Named Rego policies in this manifest. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS defines policies as a name-keyed map"
+  policies: Record<RaiAcsRegoPolicyDefinition>;
+
+  /** ACS intervention-point bindings. At least one intervention point is required. */
+  @encodedName("application/json", "intervention_points")
+  interventionPoints: RaiAcsInterventionPoints;
+
+  /**
+   * Static tool catalog keyed by canonical tool name. The catalog may be omitted or empty when no
+   * tool selector is configured. A tool selector requires a non-empty catalog, and an unknown
+   * selected key fails closed.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS defines tools as a name-keyed extensible map"
+  tools?: Record<RaiAcsToolDefinition>;
+
+  /** Standard ACS annotator dispatch is disabled; when present, this object must be empty. */
+  annotators?: RaiAcsEmptyObject;
+}
+
+/**
+ * References one reusable Rego resource on the same account.
+ */
+@added(Versions.v2026_09_15_preview)
+model RaiRegoReference {
+  /** The same-account Rego resource name. */
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]{1,63}$")
+  @minLength(2)
+  @maxLength(64)
+  regoName: string;
+}
+
+/**
+ * Properties of an account-scoped reusable Rego resource.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Reusable Rego resources are synchronously persisted and do not expose provisioningState"
+@added(Versions.v2026_09_15_preview)
+model RaiRegoProperties {
+  /** How the Rego source is encoded on the wire. The default is None. */
+  encoding?: RaiRegoEncoding = RaiRegoEncoding.None;
+
+  /** Rego source in the selected transport encoding. */
+  @minLength(1)
+  rego: string;
+}
+
+/**
+ * Properties of a binding from an Azure resource to an ACS policy.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "RAI bindings are synchronously persisted and do not expose provisioningState"
+@added(Versions.v2026_09_15_preview)
+model RaiBindingProperties {
+  /** A valid ARM resource ID of the resource to bind to the target RAI policy. */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  boundResourceId: Azure.Core.armResourceIdentifier;
+
+  /** The same-account ACS policy name targeted by the binding. */
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+  targetPolicyName: string;
+}
+
+/** Conditional headers supported by RAI resource PUT operations. */
+@added(Versions.v2026_09_15_preview)
+model RaiResourcePutConditionalHeaders {
+  /** Proceed only when the current resource ETag matches this value. */
+  @header("If-Match")
+  ifMatch?: string;
+
+  /** Proceed only when no current resource ETag matches this value. */
+  @header("If-None-Match")
+  ifNoneMatch?: string;
+}
+
+/** Conditional headers supported by RAI resource DELETE operations. */
+@added(Versions.v2026_09_15_preview)
+model RaiResourceDeleteConditionalHeaders {
+  /** Proceed only when the current resource ETag matches this value. */
+  @header("If-Match")
+  ifMatch?: string;
+}
+
+/** ETag response header returned by RAI resource GET and PUT operations. */
+@added(Versions.v2026_09_15_preview)
+model RaiResourceEtagResponseHeader {
+  /** The entity tag for the returned resource representation. */
+  @header("ETag")
+  etagHeader?: string;
+}
+
+/**
  * Level at which content is filtered.
  */
 union ContentLevel {
@@ -772,6 +1159,11 @@ union ConnectionCategory {
   GenericRest: "GenericRest",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Remote tool connection"
   RemoteTool: "RemoteTool",
+
+  /** Connection to an endpoint described by an OpenAPI specification. */
+  @added(Versions.v2026_09_15_preview)
+  OpenAPI: "OpenAPI",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Amazon Marketplace Web Service connection"
   AmazonMws: "AmazonMws",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Concur service connection"
@@ -1663,6 +2055,7 @@ model AccountProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   foundryAutoUpgrade?: FoundryAutoUpgrade;
 
   /**
@@ -1685,6 +2078,7 @@ model AccountProperties {
    */
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   capabilitySettings?: CapabilitySettings;
 
   /**
@@ -1692,6 +2086,7 @@ model AccountProperties {
    */
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minItems(1)
   @maxItems(1)
@@ -1704,6 +2099,7 @@ model AccountProperties {
  */
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model CapabilitySettings {
   /**
    * Azure resource ID of the document store used by agent runtime state.
@@ -1738,6 +2134,7 @@ model CapabilitySettings {
  */
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @discriminator("hostingType")
 model AgentHostingConfiguration {
   /**
@@ -1758,6 +2155,7 @@ model AgentHostingConfiguration {
  */
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedClusterAgentHostingConfiguration
   extends AgentHostingConfiguration {
   /**
@@ -1807,6 +2205,7 @@ model ManagedClusterAgentHostingConfiguration
  */
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union AgentHostingType {
   string,
 
@@ -1827,6 +2226,7 @@ union AgentHostingType {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union FoundryAutoUpgradeMode {
   string,
 
@@ -1853,6 +2253,7 @@ union FoundryAutoUpgradeMode {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model FoundryAutoUpgrade {
   /**
    * Gets or sets the auto-upgrade mode.
@@ -2443,6 +2844,20 @@ model UsageListResult {
  * The usage data for a usage request.
  */
 model Usage {
+  /**
+   * Fully qualified resource ID for the usage. Ex - /subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/usages/{usageName}
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The type of the usage resource. E.g. "Microsoft.CognitiveServices/locations/usages"
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read)
+  type?: string;
+
   /**
    * The unit of the metric.
    */
@@ -3253,6 +3668,7 @@ model DeploymentProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   speculativeDecoding?: DeploymentSpeculativeDecoding;
 
   /**
@@ -3339,6 +3755,7 @@ model DeploymentProperties {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model DeploymentSpeculativeDecoding {
   /**
    * Draft model used to generate speculative decoding tokens.
@@ -3461,6 +3878,7 @@ model SkuResource {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model PatchResourceSku {
   /**
    * The resource model definition representing SKU
@@ -3577,6 +3995,25 @@ model EncryptionScopeProperties extends Encryption {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state for 'RaiPolicyProperties' includes custom states beyond ARM standard values"
 model RaiPolicyProperties {
   /**
+   * The policy representation. Omission selects ContentFilters when creating a policy. ACS policy
+   * creation and replacement require ACS.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  format?: RaiPolicyFormat;
+
+  /** The ACS manifest. Required by service validation when format is ACS. */
+  @added(Versions.v2026_09_15_preview)
+  acs?: RaiAcsManifest;
+
+  /**
+   * Reusable same-account Rego resources loaded with the ACS manifest.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @identifiers(#["regoName"])
+  acsRegos?: RaiRegoReference[];
+
+  /**
    * Content Filters policy type.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "'type' is intentionally duplicated on 'RaiPolicyProperties' for backward compatibility"
@@ -3617,6 +4054,11 @@ model RaiPolicyProperties {
    */
   @identifiers(#[])
   safetyProviders?: SafetyProviderConfig[];
+
+  /** Optional external safety-provider references used by this policy. */
+  @added(Versions.v2026_09_15_preview)
+  @identifiers(#["externalSafetyProviderName", "source"])
+  customExternalSafetyProviders?: RaiPolicyCustomExternalSafetyProviderReference[];
 
   /**
    * Egress (outbound network) policy controlling which external endpoints sandboxed
@@ -4317,6 +4759,7 @@ model ProjectProperties {
    */
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   capabilitySettings?: CapabilitySettings;
 }
@@ -5884,7 +6327,148 @@ model RaiPolicyListResult {
   @identifiers(#["name"])
   value?: RaiPolicy[];
 }
+
+/**
+ * The list of account-scoped reusable Rego resources.
+ */
+@added(Versions.v2026_09_15_preview)
+model RaiRegoListResult {
+  /** The link used to get the next page. */
+  @nextLink
+  nextLink?: string;
+
+  /** The Rego resources in this page. */
+  @pageItems
+  @identifiers(#["name"])
+  value: RaiRego[];
+}
+
+/**
+ * The list of account-scoped RAI bindings.
+ */
+@added(Versions.v2026_09_15_preview)
+model RaiBindingListResult {
+  /** The link used to get the next page. */
+  @nextLink
+  nextLink?: string;
+
+  /** The RAI bindings in this page. */
+  @pageItems
+  @identifiers(#["name"])
+  value: RaiBinding[];
+}
 @@identifiers(ResourceSkuListResult.value, #["resourceType", "name", "kind"]);
+
+/**
+ * Properties of an adapter deployment.
+ */
+@added(Versions.v2026_09_15_preview)
+model AdapterDeploymentProperties {
+  /**
+   * The immutable Project Models version produced by Foundry fine-tuning.
+   * The identifier uses the Azure AI project model URI format.
+   * The service validates LoRA weight type, protected status, provenance,
+   * compatibility metadata, and registration state.
+   */
+  @pattern("^azure(?:ai)://accounts/[^/]+/projects/[^/]+/models/[^/]+/versions/[^/]+$")
+  sourceModelId: string;
+
+  /**
+   * The name of the compatible managed compute parent deployment.
+   * The service resolves this name within the adapter's owning account; full
+   * ARM resource IDs and cross-account references are not accepted. It cannot
+   * equal the adapter deployment's resource name. Updating this value
+   * re-targets the adapter while its source model remains unchanged.
+   */
+  targetDeploymentName: string;
+
+  /**
+   * The managed compute deployment currently serving the adapter.
+   * During re-targeting this remains the prior deployment until atomic cutover.
+   */
+  @visibility(Lifecycle.Read)
+  activeTargetDeploymentName?: string;
+
+  /**
+   * The provisioning state of the adapter deployment.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * Information about the most recently requested lifecycle operation.
+   */
+  @visibility(Lifecycle.Read)
+  lastOperation?: AdapterDeploymentLastOperation;
+}
+
+/**
+ * Lifecycle operation types reported by an adapter deployment.
+ */
+@added(Versions.v2026_09_15_preview)
+union AdapterDeploymentOperationType {
+  string,
+
+  /** Creates the adapter deployment. */
+  Create: "Create",
+
+  /** Re-targets the adapter deployment. */
+  Update: "Update",
+
+  /** Deletes the adapter deployment. */
+  Delete: "Delete",
+}
+
+/**
+ * Lifecycle operation states reported by an adapter deployment.
+ */
+@added(Versions.v2026_09_15_preview)
+union AdapterDeploymentOperationState {
+  string,
+
+  /** The operation was accepted. */
+  Accepted: "Accepted",
+
+  /** The operation is running. */
+  Running: "Running",
+
+  /** The operation completed successfully. */
+  Succeeded: "Succeeded",
+
+  /** The operation failed. */
+  Failed: "Failed",
+}
+
+/**
+ * The most recently requested adapter lifecycle operation.
+ */
+@added(Versions.v2026_09_15_preview)
+model AdapterDeploymentLastOperation {
+  /**
+   * The type of lifecycle operation.
+   */
+  type: AdapterDeploymentOperationType;
+
+  /**
+   * The current or terminal operation state.
+   */
+  status: AdapterDeploymentOperationState;
+
+  /**
+   * The target deployment requested by a create or re-target operation.
+   */
+  requestedTargetDeploymentName?: string;
+
+  /**
+   * The time at which the operation started.
+   */
+  startedAt: utcDateTime;
+
+  /**
+   * The time at which the operation reached a terminal state.
+   */
+  completedAt?: utcDateTime;
+}
 
 /**
  * The list of Cognitive Services RaiBlocklist Items Names.
@@ -5892,6 +6476,21 @@ model RaiPolicyListResult {
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'RaiBlocklistItemsBulkDeleteRequest' preserved for backward compatibility with existing API surface"
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
+
+/**
+ * Gated model access configuration for a managed compute deployment.
+ */
+@added(Versions.v2026_09_15_preview)
+model GatedModelAccessProperties {
+  /**
+   * The fully qualified Azure resource ID of the project connection used to authorize access to a gated model during deployment creation.
+   */
+  connectionId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.CognitiveServices/accounts/projects/connections";
+    }
+  ]>;
+}
 
 /**
  * Properties of a Cognitive Services managed compute deployment.
@@ -5902,6 +6501,7 @@ model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeDeploymentProperties {
   /**
    * AzureML Registry model asset URI. Required on creation; immutable after creation.
@@ -5931,6 +6531,13 @@ model ManagedComputeDeploymentProperties {
   versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
 
   /**
+   * Configuration used to authorize access to a gated model during deployment creation.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  gatedModelAccess?: GatedModelAccessProperties;
+
+  /**
    * Deployment capabilities represented as key-value pairs.
    * Example: { assetsV2: "true" }.
    */
@@ -5939,6 +6546,7 @@ model ManagedComputeDeploymentProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read)
   capabilities?: Record<string>;
 
@@ -5994,6 +6602,7 @@ model ManagedComputeDeploymentProperties {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeDeploymentProvisioningDetails {
   /**
    * A human-readable status message from the last provisioning operation.
@@ -6016,6 +6625,7 @@ model ManagedComputeDeploymentProvisioningDetails {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeDeploymentRoutes {
   /**
    * Relative path to the chat completions scoring endpoint.
@@ -6042,6 +6652,7 @@ model ManagedComputeDeploymentRoutes {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeDeploymentListResult {
   /**
    * The link used to get the next page of managed compute deployments.
@@ -6066,6 +6677,7 @@ model ManagedComputeDeploymentListResult {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union ComputeProvisioningState {
   string,
 
@@ -6112,6 +6724,7 @@ union ComputeProvisioningState {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union VmPriority {
   string,
 
@@ -6131,6 +6744,7 @@ union VmPriority {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model Pool {
   /**
    * The name of the pool.
@@ -6162,6 +6776,7 @@ model Pool {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union ComputeType {
   string,
 
@@ -6182,6 +6797,7 @@ union ComputeType {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @discriminator("computeType")
 model ComputeProperties {
   /**
@@ -6223,6 +6839,7 @@ model ComputeProperties {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ClusterComputeProperties extends ComputeProperties {
   /**
    * The type of compute resource.
@@ -6249,6 +6866,7 @@ model ClusterComputeProperties extends ComputeProperties {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ContainerInstanceComputeProperties extends ComputeProperties {
   /**
    * The type of compute resource.
@@ -6291,6 +6909,7 @@ model ContainerInstanceComputeProperties extends ComputeProperties {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model SshSettings {
   /**
    * The SSH public key for authenticating to the compute instance.
@@ -6312,6 +6931,7 @@ model SshSettings {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ConnectivityEndpoints {
   /**
    * The public IP address of the compute instance.
@@ -6336,6 +6956,7 @@ model ConnectivityEndpoints {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ComputeListResult {
   /**
    * The link used to get the next page of compute list.
@@ -6359,6 +6980,7 @@ model ComputeListResult {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model WorkbenchProperties {
   /**
    * ARM resource ID of the parent cluster that hosts this workbench.
@@ -6425,6 +7047,7 @@ model WorkbenchProperties {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model WorkbenchListResult {
   /**
    * The link used to get the next page of workbench list.
@@ -6448,6 +7071,7 @@ model WorkbenchListResult {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeDeploymentInfo {
   /**
    * Full ARM resource ID of the deployment.
@@ -6484,6 +7108,7 @@ model ManagedComputeDeploymentInfo {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeUsage {
   /**
    * Fully qualified resource ID for the managed compute usage.
@@ -6539,6 +7164,7 @@ model ManagedComputeUsage {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeUsageListResult {
   /**
    * The link used to get the next page of managed compute usages.
@@ -6563,6 +7189,7 @@ model ManagedComputeUsageListResult {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model EvaluateDeploymentPoliciesRequest {
   /**
    * The list of hypothetical deployments to evaluate against Azure Policy.
@@ -6579,6 +7206,7 @@ model EvaluateDeploymentPoliciesRequest {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model EvaluateDeploymentPoliciesDeployment {
   /**
    * The name of the hypothetical deployment.
@@ -6600,6 +7228,7 @@ model EvaluateDeploymentPoliciesDeployment {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model EvaluateDeploymentPoliciesDeploymentProperties {
   /**
    * The model to evaluate.
@@ -6621,6 +7250,7 @@ model EvaluateDeploymentPoliciesDeploymentProperties {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model EvaluateDeploymentPoliciesResponse {
   /**
    * Per-deployment policy evaluation results, keyed by deployment name.
@@ -6638,6 +7268,7 @@ model EvaluateDeploymentPoliciesResponse {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 union PolicyEvaluationOutcome {
   string,
 
@@ -6660,6 +7291,7 @@ union PolicyEvaluationOutcome {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model DeploymentPolicyEvaluationResult {
   /**
    * The evaluation outcome.
@@ -6687,6 +7319,7 @@ model DeploymentPolicyEvaluationResult {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model PolicyAssignmentEvaluationDetails {
   /**
    * The policy assignment ID.
@@ -6734,6 +7367,7 @@ model PolicyAssignmentEvaluationDetails {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model PolicyExpressionEvaluationDetails {
   /**
    * The policy expression.
@@ -6776,6 +7410,7 @@ model PolicyExpressionEvaluationDetails {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeCapacityProperties {
   /**
    * The type of accelerator (e.g., Azure.A100, Azure.H100).
@@ -6813,6 +7448,7 @@ model ManagedComputeCapacityProperties {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model DeploymentSizeCapacity {
   /**
    * The number of accelerators required per model instance.
@@ -6842,6 +7478,7 @@ model DeploymentSizeCapacity {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ManagedComputeCapacityListResult {
   /**
    * The link used to get the next page of managed compute capacities.
