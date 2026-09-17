@@ -1,6 +1,6 @@
 {
   "title": "03 - Hibernate a virtual machine with a successful deallocation fallback",
-  "description": "Starts hibernation with deallocation configured as the failure action. The operation documentation includes the subsequent status request and the response after the deallocation fallback succeeds.",
+  "description": "This BulkHibernate example sets `executionParameters.retryPolicy.onFailureAction` to `Deallocate` so BulkActions will attempt deallocation if hibernation fails. Use this fallback when releasing compute resources is more important than preserving in-memory state; deallocation does not preserve that state for resume. The initial response returns an operation ID. Query Bulk Get Operation Status using that operation ID to check the result. A successful fallback leaves the Hibernate operation in Failed state with the original error in `resourceOperationError`, while `fallbackOperationInfo` reports `lastOpType` Deallocate and status Succeeded. If deallocation also fails, its error is returned in `fallbackOperationInfo.error`.",
   "operationId": "VirtualMachineBulkOperations_BulkHibernate",
   "parameters": {
     "api-version": "2026-08-06-preview",
