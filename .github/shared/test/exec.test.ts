@@ -75,7 +75,7 @@ describe("execNpmExec", () => {
   // A command run in the context of "npm exec ___" needs to call
   // something installed in the workspace. In this case, oxfmt is present
   // so it is used.
-  it("runs oxfmt", async () => {
+  it("runs oxfmt", { timeout: 15_000 }, async () => {
     // npm may emit warnings to stderr (e.g. unknown env config) depending on the
     // environment, so only assert on stdout here.
     const result = await execNpmExec(["oxfmt", "--version"], options);

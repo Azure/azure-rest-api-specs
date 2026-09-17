@@ -10,6 +10,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const workflowsDir = resolve(__dirname, "..");
 
 interface Workflow {
+  name?: string;
   on?: {
     pull_request?: { paths?: string[] };
     push?: { paths?: string[] };
@@ -19,6 +20,7 @@ interface Workflow {
   jobs: Record<
     string,
     {
+      name?: string;
       strategy?: unknown;
       steps?: { run?: string; with?: Record<string, unknown> }[];
       with?: Record<string, unknown>;
@@ -83,7 +85,9 @@ describe("workflow files", () => {
     expect(workflow.on?.pull_request?.paths).toEqual(paths);
     expect(workflow.on?.push?.paths).toEqual(paths);
     expect(workflow.permissions).toEqual({ contents: "read" });
+    expect(workflow.name).toBe("Lint");
     expect(Object.keys(workflow.jobs)).toEqual(["lint"]);
+    expect(workflow.jobs.lint.name).toBe("Lint");
     expect(workflow.jobs.lint.steps?.[0].with?.["sparse-checkout"]).toBe(".github\neng/tools\n");
     expect(workflow.jobs.lint.steps?.[1].with?.["install-command"]).toBe("pnpm ci");
   });
