@@ -86,10 +86,10 @@ describe("agentic Azure OIDC", () => {
     const result = await runShellStep(await script(), {
       tool: "curl",
       env,
-      response: JSON.stringify({ value: "token%\r\nvalue" }),
+      response: JSON.stringify({ value: "token%\r\n-value" }),
     });
-    expect(result.stdout).toBe("::add-mask::token%25%0D%0Avalue\n");
-    expect(result.token).toBe("token%\r\nvalue");
+    expect(result.stdout).toBe("::add-mask::token%25%0D%0A-value\n");
+    expect(result.token).toBe("token%\r\n-value");
   });
 
   it.each(["{}", '{"value":""}', '{"value":null}', '{"value":12}', "invalid"])(

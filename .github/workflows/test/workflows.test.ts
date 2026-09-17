@@ -4,6 +4,8 @@ import { dirname, extname, resolve } from "path";
 import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
 
+// cspell:ignore agentics
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const workflowsDir = resolve(__dirname, "..");
 

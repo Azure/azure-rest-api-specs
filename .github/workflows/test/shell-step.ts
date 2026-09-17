@@ -6,6 +6,8 @@ import { join } from "node:path";
 import { promisify } from "node:util";
 import { isExecError } from "../../shared/src/exec.ts";
 
+// cspell:ignore noprofile norc
+
 export async function runShellStep(
   script: string,
   {
