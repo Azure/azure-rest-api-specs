@@ -763,11 +763,6 @@ namespace Microsoft.InsightsCombinedClient;
   "AutoscaleSettingPredicativeResult",
   "csharp"
 );
-@@clientName(
-  DataCollectionApi.DataCollectionEndpointResource.etag,
-  "ETag",
-  "csharp"
-);
 @@alternateType(
   DataCollectionApi.DataCollectionEndpointResource.etag,
   Azure.Core.eTag,
@@ -849,11 +844,6 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@alternateType(DataCollectionApi.AdxDestination.ingestionUri, url, "csharp");
-@@clientName(
-  DataCollectionApi.DataCollectionRuleAssociationProxyOnlyResource.etag,
-  "ETag",
-  "csharp"
-);
 @@clientName(
   ActivityLogAlertsApi.AlertRuleLeafCondition.equals,
   "EqualsValue",
