@@ -149,7 +149,7 @@ async function enforceLabelAuthorization({
     });
   } catch (e) {
     // 404 means label was already removed (race condition with another workflow)
-    if (typeof e === "object" && e !== null && "status" in e && e.status === 404) {
+    if ((e as { status?: number }).status === 404) {
       core.info(`Label "${labelName}" already removed (race condition), continuing`);
     } else {
       throw e;

@@ -1,21 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
+import { execFile } from "child_process";
 import { existsSync } from "fs";
 import { readFile, writeFile } from "fs/promises";
-import assert from "node:assert/strict";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi, type Mock, type MockedFunction } from "vitest";
 import { createMockContext, createMockCore } from "../mocks.ts";
-
-type ExecCallback = (error: Error | null, stdout: string, stderr: string) => void;
-const execFileMock = vi.hoisted(() =>
-  vi.fn<
-    (
-      command: string,
-      args: string[],
-      optionsOrCallback: object | ExecCallback,
-      callback?: ExecCallback,
-    ) => void
-  >(),
-);
 
 // Mock fs/promises for readFile (metadata JSON) and writeFile (results)
 vi.mock("fs/promises", async (importOriginal) => {
@@ -38,7 +26,7 @@ vi.mock("fs", async (importOriginal) => {
 
 // Mock child_process.execFile for npx tsp compile
 vi.mock("child_process", () => ({
-  execFile: execFileMock.mockImplementation(
+  execFile: vi.fn(
     (
       _cmd: string,
       _args: string[],
@@ -75,13 +63,15 @@ const { default: detectNamespaces } =
   await import("../../src/package-name-approval/detect-namespaces.ts");
 const { getChangedFilesStatuses } = await import("../../../shared/src/changed-files.ts");
 
-const readFileMock = vi.mocked(readFile);
+const readFileMock = readFile as Mock;
 
-const writeFileMock = vi.mocked(writeFile);
+const writeFileMock = writeFile as Mock;
 
-const getChangedFilesStatusesMock = vi.mocked(getChangedFilesStatuses);
+const getChangedFilesStatusesMock = getChangedFilesStatuses as Mock;
 
-const existsSyncMock = vi.mocked<(path: string) => boolean>(existsSync);
+const execFileMock: Mock = execFile as MockedFunction<typeof execFile>;
+
+const existsSyncMock = existsSync as Mock;
 
 let core: ReturnType<typeof createMockCore>;
 
@@ -170,8 +160,7 @@ describe("detect-namespaces (dual tsp compile)", () => {
     await detectNamespaces(args());
 
     expect(core.setOutput).toHaveBeenCalledWith("results", "true");
-    const writtenJson = writeFileMock.mock.lastCall?.[1];
-    assert(typeof writtenJson === "string");
+    const writtenJson = String(writeFileMock.mock.lastCall?.[1]);
     const results = JSON.parse(writtenJson);
     expect(results.isMgmt).toBe(true);
     expect(results.namespacesFound.dotnet).toBe("Azure.ResourceManager.Compute");
@@ -214,8 +203,7 @@ describe("detect-namespaces (dual tsp compile)", () => {
     await detectNamespaces(args());
 
     expect(core.setOutput).toHaveBeenCalledWith("results", "true");
-    const writtenJson = writeFileMock.mock.lastCall?.[1];
-    assert(typeof writtenJson === "string");
+    const writtenJson = String(writeFileMock.mock.lastCall?.[1]);
     const results = JSON.parse(writtenJson);
     expect(results.isDataPlane).toBe(true);
     expect(results.isMgmt).toBe(false);
@@ -391,8 +379,7 @@ describe("detect-namespaces (dual tsp compile)", () => {
     expect(core.info).toHaveBeenCalledWith(
       expect.stringContaining("Package name unchanged for dotnet"),
     );
-    const writtenJson = writeFileMock.mock.lastCall?.[1];
-    assert(typeof writtenJson === "string");
+    const writtenJson = String(writeFileMock.mock.lastCall?.[1]);
     const results = JSON.parse(writtenJson);
     expect(results.namespacesFound.typescript).toBe("@azure/arm-compute-v2");
     expect(results.namespacesFound.dotnet).toBeUndefined();
@@ -494,8 +481,7 @@ describe("detect-namespaces (dual tsp compile)", () => {
     await detectNamespaces(args());
 
     expect(core.setOutput).toHaveBeenCalledWith("results", "true");
-    const writtenJson = writeFileMock.mock.lastCall?.[1];
-    assert(typeof writtenJson === "string");
+    const writtenJson = String(writeFileMock.mock.lastCall?.[1]);
     const results = JSON.parse(writtenJson);
     expect(results.namespacesFound.dotnet).toBe("Azure.Test");
   });

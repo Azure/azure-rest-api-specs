@@ -19,7 +19,9 @@ const teamRequestedEvent = {
  * survives delegation swapping the team for an individual.
  */
 function setTimelineEvents(github: ReturnType<typeof createMockGithub>, events: object[]) {
-  github.rest.issues.listEvents.mockReset().mockResolvedValue({ data: events });
+  (github.rest.issues as Record<string, unknown>).listEvents = vi
+    .fn()
+    .mockResolvedValue({ data: events });
 }
 
 function createPayload({
@@ -83,7 +85,7 @@ function setPullRequest(
     requestedTeams = [],
   }: { state?: string; draft?: boolean; labels?: string[]; requestedTeams?: { slug: string }[] },
 ) {
-  github.rest.pulls.get.mockReset().mockResolvedValue({
+  (github.rest.pulls as Record<string, unknown>).get = vi.fn().mockResolvedValue({
     data: {
       state,
       draft,
@@ -116,7 +118,7 @@ describe("assign-reviewers", () => {
     core = createMockCore();
 
     // Method not present on the shared mock.
-    github.rest.pulls.requestReviewers.mockReset().mockResolvedValue({});
+    (github.rest.pulls as Record<string, unknown>).requestReviewers = vi.fn().mockResolvedValue({});
   });
 
   it("ignores labels other than the trigger label", async () => {

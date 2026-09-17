@@ -170,7 +170,8 @@ describe("checkLabel", () => {
     });
 
     it("handles 404 race condition on removeLabel gracefully", async () => {
-      const error = Object.assign(new Error("Not Found"), { status: 404 });
+      const error = new Error("Not Found");
+      (error as Error & { status: number }).status = 404;
       github.rest.issues.removeLabel.mockRejectedValue(error);
 
       context.payload = createLabeledPayload({
@@ -185,7 +186,8 @@ describe("checkLabel", () => {
     });
 
     it("rethrows non-404 errors from removeLabel", async () => {
-      const error = Object.assign(new Error("Server Error"), { status: 500 });
+      const error = new Error("Server Error");
+      (error as Error & { status: number }).status = 500;
       github.rest.issues.removeLabel.mockRejectedValue(error);
 
       context.payload = createLabeledPayload({

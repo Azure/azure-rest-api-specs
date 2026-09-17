@@ -90,10 +90,12 @@ describe("validate-approval", () => {
     context.eventName = "pull_request_target";
     core = createMockCore();
 
-    github.rest.issues.createComment.mockReset();
-    github.rest.issues.getLabel.mockReset();
-    github.rest.issues.createLabel.mockReset();
-    github.rest.issues.listComments.mockReset().mockResolvedValue({ data: [] });
+    (github.rest.issues as Record<string, unknown>).createComment = vi.fn();
+    (github.rest.issues as Record<string, unknown>).getLabel = vi.fn();
+    (github.rest.issues as Record<string, unknown>).createLabel = vi.fn();
+    (github.rest.issues as Record<string, unknown>).listComments = vi
+      .fn()
+      .mockResolvedValue({ data: [] });
   });
 
   describe("labeled - per-language approval", () => {
@@ -137,7 +139,9 @@ describe("validate-approval", () => {
       github.rest.pulls.get.mockResolvedValue({
         data: { labels: [{ name: "package-name-review-required" }] },
       });
-      github.rest.issues.listComments.mockReset().mockResolvedValue({ data: [] });
+      (github.rest.issues as Record<string, unknown>).listComments = vi
+        .fn()
+        .mockResolvedValue({ data: [] });
 
       await validateApproval(args());
 
@@ -157,7 +161,9 @@ describe("validate-approval", () => {
       github.rest.pulls.get.mockResolvedValue({
         data: { labels: [{ name: "package-name-review-required" }] },
       });
-      github.rest.issues.listComments.mockReset().mockResolvedValue({ data: [] });
+      (github.rest.issues as Record<string, unknown>).listComments = vi
+        .fn()
+        .mockResolvedValue({ data: [] });
 
       await validateApproval(args());
 
@@ -178,7 +184,9 @@ describe("validate-approval", () => {
       github.rest.pulls.get.mockResolvedValue({
         data: { labels: [{ name: "package-name-review-required" }] },
       });
-      github.rest.issues.listComments.mockReset().mockResolvedValue({ data: [] });
+      (github.rest.issues as Record<string, unknown>).listComments = vi
+        .fn()
+        .mockResolvedValue({ data: [] });
 
       await validateApproval(args());
 
@@ -205,7 +213,9 @@ describe("validate-approval", () => {
       github.rest.pulls.get.mockResolvedValue({
         data: { labels: [] },
       });
-      github.rest.issues.listComments.mockReset().mockResolvedValue({ data: [] });
+      (github.rest.issues as Record<string, unknown>).listComments = vi
+        .fn()
+        .mockResolvedValue({ data: [] });
 
       await validateApproval(args());
 

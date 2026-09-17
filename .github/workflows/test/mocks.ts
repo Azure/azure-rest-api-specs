@@ -1,5 +1,5 @@
 import { RequestError } from "@octokit/request-error";
-import { vi } from "vitest";
+import { vi, type Mock } from "vitest";
 
 export type Core = import("@actions/github-script").AsyncFunctionArguments["core"];
 
@@ -47,9 +47,7 @@ function createMockGithubImpl() {
       issues: {
         addLabels: vi.fn(),
         createComment: vi.fn(),
-        createLabel: vi.fn(),
         deleteComment: vi.fn(),
-        getLabel: vi.fn(),
         listComments: vi.fn().mockResolvedValue({ data: [] }),
         listEvents: vi.fn().mockResolvedValue({ data: [] }),
         listLabelsOnIssue: vi.fn().mockResolvedValue({ data: [] }),
@@ -58,7 +56,6 @@ function createMockGithubImpl() {
       },
       pulls: {
         get: vi.fn(),
-        requestReviewers: vi.fn(),
       },
       repos: {
         createCommitStatus: vi.fn(),
@@ -83,11 +80,9 @@ export function createMockCore(): Core & ReturnType<typeof createMockCoreImpl> {
 
 // Partial mock of `core` parameter passed into to github-script actions
 function createMockCoreImpl() {
-  const summary = {
-    addRaw: vi.fn(),
-    write: vi.fn().mockResolvedValue(undefined),
-  };
-  summary.addRaw.mockReturnValue(summary);
+  const summary = {} as { addRaw: Mock; write: Mock };
+  summary.addRaw = vi.fn().mockReturnValue(summary);
+  summary.write = vi.fn().mockResolvedValue(undefined);
 
   return {
     debug: vi.fn(console.debug),
