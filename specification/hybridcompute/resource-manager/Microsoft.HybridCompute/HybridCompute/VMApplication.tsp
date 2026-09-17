@@ -36,15 +36,17 @@ interface VmApplications {
   /**
    * Gets a VM application.
    */
-  get is ArmResourceRead<
+  get is ArmResourceRead<VmApplication>;
+
+  /**
+   * Gets the instance view of a VM application.
+   */
+  @get
+  @action("instanceView")
+  getInstanceView is ArmResourceActionSync<
     VmApplication,
-    Parameters = {
-      /**
-       * The expand expression to apply to the operation.
-       */
-      @query("$expand")
-      $expand?: string;
-    }
+    void,
+    ArmResponse<VmApplicationInstanceView>
   >;
 
   /**
