@@ -138,9 +138,17 @@ union EvaluatorImprovementStopReason {
 
   @doc("The next conservative model-inference reservation did not fit the approved USD limit.")
   max_cost_reached: "max_cost_reached",
+}
 
-  @doc("Independent confirmation was interrupted.")
-  confirmation_interrupted: "confirmation_interrupted",
+@added(Versions.PuPr)
+@removed(Versions.v1)
+@doc("Why an incomplete evaluator improvement result stopped before independent confirmation.")
+union EvaluatorImprovementIncompleteStopReason {
+  @doc("The approved candidate-attempt limit was reached.")
+  max_candidate_attempts_reached: "max_candidate_attempts_reached",
+
+  @doc("The next conservative model-inference reservation did not fit the approved USD limit.")
+  max_cost_reached: "max_cost_reached",
 }
 
 @added(Versions.PuPr)
@@ -1555,9 +1563,13 @@ model EvaluatorImprovementNoImprovementResult
 model EvaluatorImprovementInsufficientEvidenceResult
   extends EvaluatorImprovementJobResult {
   outcome: EvaluatorImprovementOutcome.insufficient_evidence;
+  confirmation_status: EvaluatorImprovementConfirmationStatus.completed;
 
-  @doc("The frozen finalist, when insufficiency was discovered during confirmation.")
-  candidate?: EvaluatorImprovementCandidateSnapshot;
+  @doc("The frozen finalist assessed by independent confirmation.")
+  candidate: EvaluatorImprovementCandidateSnapshot;
+
+  @doc("The completed independent confirmation assessment that established the evidence limitation.")
+  confirmation_assessment: EvaluatorImprovementAssessment;
 }
 
 @added(Versions.PuPr)
@@ -1566,6 +1578,8 @@ model EvaluatorImprovementInsufficientEvidenceResult
 model EvaluatorImprovementIncompleteResult
   extends EvaluatorImprovementJobResult {
   outcome: EvaluatorImprovementOutcome.incomplete;
+  confirmation_status: EvaluatorImprovementConfirmationStatus.not_run;
+  stop_reason: EvaluatorImprovementIncompleteStopReason;
 
   @doc("An eligible frozen finalist, when one existed before bounded work stopped.")
   candidate?: EvaluatorImprovementCandidateSnapshot;

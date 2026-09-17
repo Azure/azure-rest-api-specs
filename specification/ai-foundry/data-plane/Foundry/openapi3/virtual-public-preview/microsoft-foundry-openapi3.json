@@ -50574,7 +50574,9 @@
       "EvaluatorImprovementIncompleteResult": {
         "type": "object",
         "required": [
-          "outcome"
+          "outcome",
+          "confirmation_status",
+          "stop_reason"
         ],
         "properties": {
           "outcome": {
@@ -50582,6 +50584,15 @@
             "enum": [
               "incomplete"
             ]
+          },
+          "confirmation_status": {
+            "type": "string",
+            "enum": [
+              "not_run"
+            ]
+          },
+          "stop_reason": {
+            "$ref": "#/components/schemas/EvaluatorImprovementIncompleteStopReason"
           },
           "candidate": {
             "$ref": "#/components/schemas/EvaluatorImprovementCandidateSnapshot",
@@ -50595,10 +50606,21 @@
         ],
         "description": "A successful bounded result without a complete confirmation decision. It never represents confirmed no gain or missing labels by default."
       },
+      "EvaluatorImprovementIncompleteStopReason": {
+        "type": "string",
+        "enum": [
+          "max_candidate_attempts_reached",
+          "max_cost_reached"
+        ],
+        "description": "Why an incomplete evaluator improvement result stopped before independent confirmation."
+      },
       "EvaluatorImprovementInsufficientEvidenceResult": {
         "type": "object",
         "required": [
-          "outcome"
+          "outcome",
+          "confirmation_status",
+          "candidate",
+          "confirmation_assessment"
         ],
         "properties": {
           "outcome": {
@@ -50607,9 +50629,19 @@
               "insufficient_evidence"
             ]
           },
+          "confirmation_status": {
+            "type": "string",
+            "enum": [
+              "completed"
+            ]
+          },
           "candidate": {
             "$ref": "#/components/schemas/EvaluatorImprovementCandidateSnapshot",
-            "description": "The frozen finalist, when insufficiency was discovered during confirmation."
+            "description": "The frozen finalist assessed by independent confirmation."
+          },
+          "confirmation_assessment": {
+            "$ref": "#/components/schemas/EvaluatorImprovementAssessment",
+            "description": "The completed independent confirmation assessment that established the evidence limitation."
           }
         },
         "allOf": [
@@ -51865,8 +51897,7 @@
               "confirmed_no_improvement",
               "insufficient_evidence",
               "max_candidate_attempts_reached",
-              "max_cost_reached",
-              "confirmation_interrupted"
+              "max_cost_reached"
             ]
           }
         ],

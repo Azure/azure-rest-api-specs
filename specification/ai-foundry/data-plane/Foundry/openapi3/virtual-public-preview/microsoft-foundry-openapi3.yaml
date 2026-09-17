@@ -54974,29 +54974,53 @@ components:
       type: object
       required:
         - outcome
+        - confirmation_status
+        - stop_reason
       properties:
         outcome:
           type: string
           enum:
             - incomplete
+        confirmation_status:
+          type: string
+          enum:
+            - not_run
+        stop_reason:
+          $ref: '#/components/schemas/EvaluatorImprovementIncompleteStopReason'
         candidate:
           $ref: '#/components/schemas/EvaluatorImprovementCandidateSnapshot'
           description: An eligible frozen finalist, when one existed before bounded work stopped.
       allOf:
         - $ref: '#/components/schemas/EvaluatorImprovementJobResult'
       description: A successful bounded result without a complete confirmation decision. It never represents confirmed no gain or missing labels by default.
+    EvaluatorImprovementIncompleteStopReason:
+      type: string
+      enum:
+        - max_candidate_attempts_reached
+        - max_cost_reached
+      description: Why an incomplete evaluator improvement result stopped before independent confirmation.
     EvaluatorImprovementInsufficientEvidenceResult:
       type: object
       required:
         - outcome
+        - confirmation_status
+        - candidate
+        - confirmation_assessment
       properties:
         outcome:
           type: string
           enum:
             - insufficient_evidence
+        confirmation_status:
+          type: string
+          enum:
+            - completed
         candidate:
           $ref: '#/components/schemas/EvaluatorImprovementCandidateSnapshot'
-          description: The frozen finalist, when insufficiency was discovered during confirmation.
+          description: The frozen finalist assessed by independent confirmation.
+        confirmation_assessment:
+          $ref: '#/components/schemas/EvaluatorImprovementAssessment'
+          description: The completed independent confirmation assessment that established the evidence limitation.
       allOf:
         - $ref: '#/components/schemas/EvaluatorImprovementJobResult'
       description: A successful result where evidence could not support the selected validation profile.
@@ -55925,7 +55949,6 @@ components:
             - insufficient_evidence
             - max_candidate_attempts_reached
             - max_cost_reached
-            - confirmation_interrupted
       description: Why bounded evaluator improvement work stopped.
     EvaluatorImprovementStrategyDevelopmentEvidence:
       type: object
