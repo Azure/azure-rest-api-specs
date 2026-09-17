@@ -5,7 +5,7 @@
 */
 
 import * as z from "zod";
-import { includesEvery, includesNone } from "../../../shared/src/array.js";
+import { includesEvery, includesNone } from "../../../shared/src/array.ts";
 import {
   brchTsg,
   diagramTsg,

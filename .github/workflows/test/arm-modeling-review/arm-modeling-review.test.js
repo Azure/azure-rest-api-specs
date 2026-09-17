@@ -16,7 +16,7 @@ vi.mock("../../src/arm-modeling-review/detect-new-resource-types.js", () => ({
   detectNewResourceTypes: vi.fn().mockResolvedValue([]),
 }));
 
-import * as changedFiles from "../../../shared/src/changed-files.js";
+import * as changedFiles from "../../../shared/src/changed-files.ts";
 import armModelingReview from "../../src/arm-modeling-review/arm-modeling-review.js";
 import { checkLease } from "../../src/arm-modeling-review/detect-arm-leases.js";
 import { detectNewResourceTypes } from "../../src/arm-modeling-review/detect-new-resource-types.js";
