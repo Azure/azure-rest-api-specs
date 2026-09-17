@@ -5,7 +5,7 @@ using Azure.Core;
 namespace ContainerAppsSandbox;
 
 /** OK. */
-model GetSandboxEgressDecisions2Result {
+model GetSandboxEgressDecisionsResult {
   /** HTTP response status code. */
   @statusCode statusCode: 200;
 
@@ -13,8 +13,8 @@ model GetSandboxEgressDecisions2Result {
   @body body: EgressDecisionsResponse;
 }
 
-/** Errors returned by getSandboxEgressDecisions2. */
-alias GetSandboxEgressDecisions2Errors =
+/** Errors returned by getSandboxEgressDecisions. */
+alias GetSandboxEgressDecisionsErrors =
   | ErrorResult<401>
   | ErrorResult<404>
   | ErrorResult<409>
@@ -170,16 +170,16 @@ interface SandboxNetworkingOperations {
   @summary("Gets egress decisions for a sandbox.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}/egressDecisions")
   @get
-  getSandboxEgressDecisions2 is Foundations.Operation<
+  getSandboxEgressDecisions is Foundations.Operation<
     {
       ...AzureResourceScope;
 
       /** id parameter. */
       @path id: SandboxId;
     },
-    GetSandboxEgressDecisions2Result,
+    GetSandboxEgressDecisionsResult,
     DataPlaneStandardTraits,
-    GetSandboxEgressDecisions2Errors
+    GetSandboxEgressDecisionsErrors
   >;
 
   /** Gets the list of ports for a sandbox. */
