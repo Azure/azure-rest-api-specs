@@ -52,6 +52,18 @@ namespace Common {
      */
     type?: string;
   }
+
+}
+
+namespace Microsoft.Network {
+  /**
+   * Enable Only IPv6 Peering state retained for C# API compatibility.
+   */
+  union EnableOnlyIPv6PeeringState {
+    Enabled: "Enabled",
+    Disabled: "Disabled",
+    string,
+  }
 }
 
 @@clientLocation(
@@ -4023,6 +4035,36 @@ op replaceprivateDnsZoneGroupsList(
 @@clientName(
   Common.ManagedServiceIdentity,
   "NetworkManagedServiceIdentity",
+  "csharp"
+);
+
+@@alternateType(
+  Common.ManagedServiceIdentity.type,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
+  "csharp"
+);
+
+@@alternateType(
+  Common.HubVirtualNetworkConnectionProperties.enableOnlyIPv6Peering,
+  Microsoft.Network.EnableOnlyIPv6PeeringState,
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Network.Metric,
+  "ExpressRoutePeeringMetric",
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Network.PeeringStats.timestamp,
+  "CapturedAt",
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Network.PortMapping,
+  "ExpressRouteCircuitPortMapping",
   "csharp"
 );
 
