@@ -1426,11 +1426,11 @@
           "01 - Delete multiple virtual machines": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_BasicSuccess.json"
           },
-          "02 - Delete multiple virtual machines (comprehensive)": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_ComprehensiveSuccess.json"
-          },
-          "03 - Force delete multiple virtual machines": {
+          "02 - Force delete multiple virtual machines": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_ForceDeleteSuccess.json"
+          },
+          "03 - Delete multiple virtual machines (comprehensive)": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_ComprehensiveSuccess.json"
           },
           "04 - Response when a virtual machine does not exist": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_VmNotFoundError.json"
@@ -1556,10 +1556,7 @@
           "02 - Hibernate virtual machines and fallback to deallocation if hibernate is not successful": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_WithFallback.json"
           },
-          "03 - Hibernate a virtual machine with a successful deallocation fallback": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_DeallocationFallbackSuccess.json"
-          },
-          "04 - Response when a virtual machine does not exist": {
+          "03 - Response when a virtual machine does not exist": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_VmNotFoundError.json"
           }
         }
@@ -1568,7 +1565,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkReimage": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkReimage",
-        "description": "This feature is currently in private preview.\n\nReimage one or more virtual machines. Reimaging is destructive and can replace operating system disk contents. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates.",
+        "description": "This feature is currently in preview.\n\nReimage one or more virtual machines. Reimaging is destructive and can replace operating system disk contents. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1683,10 +1680,7 @@
           "03 - Start virtual machines with capacity recommendations": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_WithCapacityRecommendations.json"
           },
-          "04 - Start a single virtual machine": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_SingleVmSuccess.json"
-          },
-          "05 - Response when a virtual machine does not exist": {
+          "04 - Response when a virtual machine does not exist": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_VmNotFoundError.json"
           }
         }
