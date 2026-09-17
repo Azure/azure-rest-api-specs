@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoNetAppRg",
+    "externalClusterName": "contoso-external-cluster",
+    "peerId": "peerA",
+    "svmPeerId": "contoso-svm-peer-a",
+    "api-version": "2026-08-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contoso-external-cluster/clusterPeers/peerA/svmPeers/contoso-svm-peer-a",
+        "name": "contoso-svm-peer-a",
+        "type": "Microsoft.NetApp/externalClusters/clusterPeers/svmPeers",
+        "properties": {
+          "anfSvmName": "anf-svm",
+          "externalSvmResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contoso-external-cluster/externalSvms/contoso-svm",
+          "status": "Active",
+          "acceptCommand": "vserver peer accept -vserver contoso-svm -peer-vserver anf-svm",
+          "peerTypes": [
+            "Replication"
+          ],
+          "hybridReplicationResourceIds": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/hybridReplications/contosoHybridReplication"
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "SvmPeers_Get",
+  "title": "SvmPeers_Get"
+}
