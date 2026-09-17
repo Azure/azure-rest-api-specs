@@ -13,6 +13,7 @@ namespace Microsoft.RecoveryServices;
 /**
  * The resource storage details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Faithful migration: BackupResourceConfigResource carries a legacy optional 'location' and is modeled with Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation to reproduce the original envelope exactly. It is a singleton proxy resource, not a true tracked resource."
 @parentResource(VaultResource)
 @singleton("vaultstorageconfig")
 model BackupResourceConfigResource
@@ -31,6 +32,7 @@ model BackupResourceConfigResource
   eTag?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Faithful migration: BackupResourceConfigResource is a read-only/singleton proxy resource; the original stable/2023-01-15 contract intentionally has no delete operation."
 @tag("BackupResourceStorageConfigs")
 @armResourceOperations(#{ omitTags: true })
 interface BackupResourceConfigResources {

@@ -13,6 +13,8 @@ namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup copies. Workload-specific backup copies are derived from this class.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "Faithful migration: the frozen CRR recoveryPoints path nesting depth exceeds the ARM-standard limit; the legacy path shape must be preserved."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Faithful migration: RecoveryPointResource carries a legacy optional 'location' and is modeled with Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation to reproduce the original envelope exactly. It is a read-only proxy resource, not a true tracked resource."
 @parentResource(ProtectedItemVirtualResource)
 model RecoveryPointResource
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<RecoveryPoint> {

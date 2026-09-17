@@ -27,6 +27,7 @@ using TypeSpec.Versioning;
 /**
  * OpenAPI 2.0 specifications for the Azure Recovery Services Backup Cross Region Restore service
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Faithful migration: the CRR passive-stamp surface does not expose the standard Microsoft.RecoveryServices/operations list; that endpoint is owned by the main RecoveryServicesBackup spec, not this CRR-only project."
 @armProviderNamespace
 @service(#{ title: "Recovery Services Backup Passive Client" })
 @versioned(Versions)

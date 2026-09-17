@@ -183,6 +183,8 @@ interface BackupCrrJobsOperationGroup {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("CrrOperationResults")
 interface CrrOperationResultsOperationGroup {
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Faithful migration: the original CrrOperationResults_Get 202 response does not emit a Location header; adding one would change the frozen stable/2023-01-15 contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Faithful migration: the original CrrOperationResults_Get success response is body-less, matching the frozen stable/2023-01-15 contract."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CrrOperationResults_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrOperationResults/{operationId}")

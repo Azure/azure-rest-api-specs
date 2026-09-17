@@ -1206,6 +1206,7 @@ model NewErrorResponseError {
   /**
    * The error details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   @visibility(Lifecycle.Read)
   details?: NewErrorResponse[];
 
@@ -1840,6 +1841,7 @@ model KPIResourceHealthDetails {
   /**
    * Resource Health Status
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   resourceHealthDetails?: ResourceHealthDetails[];
 }
 
@@ -1993,6 +1995,7 @@ model AzureFileShareRestoreRequest extends RestoreRequest {
   /**
    * List of Source Files/Folders(which need to recover) and TargetFolderPath details
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   restoreFileSpecs?: RestoreFileSpecs[];
 
   /**
@@ -2089,6 +2092,7 @@ model AzureIaaSVMProtectedItem extends ProtectedItem {
   /**
    * Health details on this backup item.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   healthDetails?: AzureIaaSVMHealthDetails[];
 
   /**
@@ -2127,6 +2131,7 @@ model AzureIaaSVMProtectedItem extends ProtectedItem {
 /**
  * Azure IaaS VM workload-specific Health Details.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Faithful migration: AzureIaaSVMHealthDetails is an empty specialization in the frozen stable/2023-01-15 contract."
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model AzureIaaSVMHealthDetails extends ResourceHealthDetails {}
 
@@ -2232,6 +2237,7 @@ model AzureIaaSVMJob extends Job {
   /**
    * Error details on execution of this job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   errorDetails?: AzureIaaSVMErrorInfo[];
 
   /**
@@ -2257,6 +2263,7 @@ model AzureIaaSVMJobExtendedInfo {
   /**
    * List of tasks associated with this job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   tasksList?: AzureIaaSVMJobTaskDetails[];
 
   /**
@@ -2418,6 +2425,7 @@ model AzureStorageJob extends Job {
   /**
    * Error details on execution of this job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   errorDetails?: AzureStorageErrorInfo[];
 
   /**
@@ -2448,6 +2456,7 @@ model AzureStorageJobExtendedInfo {
   /**
    * List of tasks for this job
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   tasksList?: AzureStorageJobTaskDetails[];
 
   /**
@@ -2685,6 +2694,7 @@ model AzureWorkloadJob extends Job {
   /**
    * Error details on execution of this job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   errorDetails?: AzureWorkloadErrorInfo[];
 
   /**
@@ -2705,6 +2715,7 @@ model AzureWorkloadJobExtendedInfo {
   /**
    * List of tasks for this job
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   tasksList?: AzureWorkloadJobTaskDetails[];
 
   /**
@@ -2742,6 +2753,7 @@ model AzureWorkloadPointInTimeRecoveryPoint extends AzureWorkloadRecoveryPoint {
   /**
    * List of log ranges
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   timeRanges?: PointInTimeRange[];
 }
 
@@ -2783,6 +2795,7 @@ model AzureWorkloadRecoveryPoint extends RecoveryPoint {
   /**
    * Recovery point tier information.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   recoveryPointTierDetails?: RecoveryPointTierInformation[];
 
   /**
@@ -2949,6 +2962,7 @@ model AzureWorkloadSAPHanaPointInTimeRestoreRequest
 /**
  * AzureWorkload SAP Hana-specific restore.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Faithful migration: AzureWorkloadSAPHanaRestoreRequest is an empty specialization in the frozen stable/2023-01-15 contract."
 @extension("x-ms-discriminator-value", "AzureWorkloadSAPHanaRestoreRequest")
 model AzureWorkloadSAPHanaRestoreRequest extends AzureWorkloadRestoreRequest {}
 
@@ -2976,6 +2990,7 @@ model AzureWorkloadSQLPointInTimeRecoveryPoint
   /**
    * List of log ranges
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   timeRanges?: PointInTimeRange[];
 
   /**
@@ -3012,6 +3027,7 @@ model AzureWorkloadSQLRecoveryPointExtendedInfo {
   /**
    * List of data directory paths during restore operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   @visibility(Lifecycle.Read)
   dataDirectoryPaths?: SQLDataDirectory[];
 }
@@ -3076,6 +3092,7 @@ model AzureWorkloadSQLRestoreRequest extends AzureWorkloadRestoreRequest {
   /**
    * Data directory details
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   alternateDirectoryPaths?: SQLDataDirectoryMapping[];
 }
 
@@ -3275,6 +3292,7 @@ model DpmJob extends Job {
   /**
    * The errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   errorDetails?: DpmErrorInfo[];
 
   /**
@@ -3295,6 +3313,7 @@ model DpmJobExtendedInfo {
   /**
    * List of tasks associated with this job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   tasksList?: DpmJobTaskDetails[];
 
   /**
@@ -3606,6 +3625,7 @@ model IaasVMRecoveryPoint extends RecoveryPoint {
   /**
    * Recovery point tier information.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   recoveryPointTierDetails?: RecoveryPointTierInformation[];
 
   /**
@@ -3881,6 +3901,7 @@ model InstantItemRecoveryTarget {
   /**
    * List of client scripts.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   clientScripts?: ClientScriptForConnect[];
 }
 
@@ -4049,6 +4070,7 @@ model MabJob extends Job {
   /**
    * The errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   errorDetails?: MabErrorInfo[];
 
   /**
@@ -4069,6 +4091,7 @@ model MabJobExtendedInfo {
   /**
    * List of tasks for this job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   tasksList?: MabJobTaskDetails[];
 
   /**
