@@ -171,8 +171,10 @@ model AgentOptimizationJobResult {
 @doc("Agent optimization job resource — a long-running job that produces candidate changes to a Foundry agent configuration.")
 model AgentOptimizationJob is JobLike<
   AgentOptimizationJobResult,
-  AgentOptimizationJobInputs
+  never
 > {
+  ...AgentOptimizationJobInputs;
+
   @doc("The timestamp when the job was created, represented in Unix time.")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;

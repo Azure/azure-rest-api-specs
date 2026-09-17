@@ -46477,6 +46477,8 @@ components:
       required:
         - id
         - status
+        - optimization_model_configuration
+        - optimization_configuration
         - created_at
         - updated_at
       properties:
@@ -46484,9 +46486,6 @@ components:
           type: string
           description: Server-assigned unique identifier.
           readOnly: true
-        inputs:
-          $ref: '#/components/schemas/AgentOptimizationJobInputs'
-          description: Caller-supplied inputs.
         result:
           $ref: '#/components/schemas/AgentOptimizationJobResult'
           description: Result produced on success.
@@ -46499,6 +46498,18 @@ components:
           $ref: '#/components/schemas/OpenAI.Error'
           description: Error details — populated only on failure.
           readOnly: true
+        display_name:
+          type: string
+          description: Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics.
+        target_configuration:
+          $ref: '#/components/schemas/AgentOptimizationTargetConfiguration'
+          description: Foundry agent whose configuration is optimized. Omitted when the workflow does not target a registered Foundry agent.
+        optimization_model_configuration:
+          $ref: '#/components/schemas/AgentOptimizationModelConfiguration'
+          description: Model used to generate candidate changes. An existing deployment name is also accepted.
+        optimization_configuration:
+          $ref: '#/components/schemas/AgentOptimizationConfigurationBase'
+          description: Type-specific optimization configuration.
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The timestamp when the job was created, represented in Unix time.
