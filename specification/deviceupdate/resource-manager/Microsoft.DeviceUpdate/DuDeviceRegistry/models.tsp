@@ -338,5 +338,5 @@ model UpdateInstanceLinkUpdateResponse {
   /**
    * Placeholder state for the 200 response. This value is only a placeholder to satisfy the response contract and does not represent backend operation state.
    */
-  state: string = "Succeeded";
+  state: string;
 }
