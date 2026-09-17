@@ -6693,3 +6693,9 @@ op replaceprivateDnsZoneGroupsList(
   "captchaCookieExpirationInMins",
   "java"
 );
+
+@@clientName(
+  VirtualNetworkPeeringPropertiesFormat.enableOnlyIPv6Peering,
+  "enableOnlyIpv6Peering",
+  "python"
+);
