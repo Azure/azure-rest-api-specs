@@ -30,17 +30,17 @@
               {
                 "id": "completion_evidence",
                 "description": "The response explains whether the requested action completed.",
-                "weight": 4
+                "weight": 7
               },
               {
                 "id": "response_clarity",
                 "description": "The response clearly explains the outcome.",
-                "weight": 5
+                "weight": 9
               },
               {
                 "id": "general_quality",
                 "description": "The response is generally useful and correct.",
-                "weight": 2,
+                "weight": 4,
                 "always_applicable": true
               }
             ],
@@ -119,15 +119,17 @@
                 "type": "grid",
                 "dimension_id": "completion_evidence",
                 "allowed_values": [
-                  4,
-                  5
+                  7,
+                  8,
+                  9,
+                  10
                 ]
               },
               {
                 "type": "range",
                 "dimension_id": "response_clarity",
-                "minimum": 3,
-                "maximum": 5,
+                "minimum": 6,
+                "maximum": 9,
                 "step": 1
               }
             ],
@@ -507,17 +509,17 @@
                 {
                   "id": "completion_evidence",
                   "description": "Pass only when a completion claim matches the final tool result. An error, timeout, or missing result cannot be described as completed.",
-                  "weight": 5
+                  "weight": 10
                 },
                 {
                   "id": "response_clarity",
                   "description": "The response clearly explains the outcome.",
-                  "weight": 3
+                  "weight": 6
                 },
                 {
                   "id": "general_quality",
                   "description": "The response is generally useful and correct.",
-                  "weight": 2,
+                  "weight": 4,
                   "always_applicable": true
                 }
               ],
@@ -534,13 +536,13 @@
               "weight_changes": [
                 {
                   "dimension_id": "completion_evidence",
-                  "before": 4,
-                  "after": 5
+                  "before": 7,
+                  "after": 10
                 },
                 {
                   "dimension_id": "response_clarity",
-                  "before": 5,
-                  "after": 3
+                  "before": 9,
+                  "after": 6
                 }
               ],
               "pass_threshold_change": {
