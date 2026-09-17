@@ -106,6 +106,28 @@ model Resources {
 }
 
 @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+@doc("The resources needed for the user request with the resourceContext")
+model ResourceWithContext {
+  @doc("The resource ids used for the request")
+  resourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachines";
+    }
+  ]>;
+
+  @doc("The operational context of the resourceId")
+  resourceContext: string;
+}
+
+@doc("The resources needed for the user request with the context for tracking purposes")
+@added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+model ResourcesWithContext {
+  @identifiers(#["resourceId"])
+  @doc("The resource ids used for the request")
+  resources: Array<ResourceWithContext>;
+}
+
+@added(Microsoft.Compute.Versions.`2026-07-06-preview`)
 @doc("Caller-provided context associated with a virtual machine operation.")
 model ResourceNotificationDetails {
   @doc("Caller-provided context string returned with the virtual machine operation result notification. Do not include secrets or personal data.")
@@ -728,6 +750,10 @@ model ExecuteDeallocateRequest {
   @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  resourcesWithContext?: ResourcesWithContext;
 }
 
 @doc("The virtual machines and execution settings for a bulk hibernate action.")
@@ -738,6 +764,10 @@ model ExecuteHibernateRequest {
   @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  resourcesWithContext?: ResourcesWithContext;
 }
 
 @doc("The virtual machines and execution settings for a bulk start action.")
@@ -748,6 +778,10 @@ model ExecuteStartRequest {
   @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  resourcesWithContext?: ResourcesWithContext;
 }
 
 @doc("The virtual machine configuration and execution settings for a bulk create action.")
@@ -799,6 +833,10 @@ model ExecuteReimageRequest {
   @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  resourcesWithContext?: ResourcesWithContext;
 
   @doc("The shared and per-virtual-machine reimage configuration.")
   reimageParameters?: ReimagePayload;
@@ -863,6 +901,10 @@ model ExecuteDeleteRequest {
   @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  resourcesWithContext?: ResourcesWithContext;
 
   @doc("Indicates whether Bulk Actions uses forced deletion for the target virtual machines.")
   forceDeletion?: boolean;
