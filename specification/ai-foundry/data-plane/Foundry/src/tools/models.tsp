@@ -453,7 +453,6 @@ namespace Azure.AI.Projects {
   /**
    * Definition of input parameters for the Browser Automation Tool.
    */
-  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolParameters {
     /**
      * The project connection parameters associated with the Browser Automation Tool.
@@ -464,7 +463,6 @@ namespace Azure.AI.Projects {
   /**
    * Definition of input parameters for the connection used by the Browser Automation Tool.
    */
-  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolConnectionParameters {
     /**
      * The ID of the project connection to your Azure Playwright resource.
