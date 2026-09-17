@@ -13,7 +13,7 @@ Describe "Get-ChangedCoreFiles" {
 
     It "preserves the core-file trigger for <path>" -ForEach @(
         @{ path = ".github/workflows/typespec-validation.yaml" },
-        @{ path = ".github/shared/src/changed-files.js" },
+        @{ path = ".github/shared/src/changed-files.ts" },
         @{ path = ".github/arm-leases-other/lease.yaml" },
         @{ path = "eng/scripts/Get-TypeSpec-Folders.ps1" },
         @{ path = "specification/common-types/resource-management/v6/types.json" },

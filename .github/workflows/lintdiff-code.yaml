@@ -45,7 +45,7 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
-            const { getChangedFiles } = await import('${{ github.workspace }}/.github/shared/src/changed-files.js');
+            const { getChangedFiles } = await import('${{ github.workspace }}/.github/shared/src/changed-files.ts');
             const { writeFileSync } = await import('fs');
             const { join } = await import('path');
 

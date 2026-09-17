@@ -13,7 +13,7 @@
   comment and otherwise does nothing.
 */
 
-import { PER_PAGE_MAX } from "../../../shared/src/github.js";
+import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { commentOrUpdate, parseExistingComments } from "../comment.js";
 import { extractInputs } from "../context.js";
 import {

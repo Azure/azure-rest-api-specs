@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CommitStatusState } from "../../../shared/src/github.js";
+import { CommitStatusState } from "../../../shared/src/github.ts";
 import { ArmAutoSignoffLabel } from "../../src/arm-auto-signoff/arm-auto-signoff-labels.js";
 import { getLabelActionImpl } from "../../src/arm-auto-signoff/arm-universal-auto-signoff.js";
 import { LabelAction } from "../../src/label.js";

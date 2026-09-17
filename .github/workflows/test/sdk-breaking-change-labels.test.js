@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { sdkLabels } from "../../shared/src/sdk-types.js";
-import { createMockSpecGenSdkArtifactInfo } from "../../shared/test/sdk-types.js";
+import { sdkLabels } from "../../shared/src/sdk-types.ts";
+import { createMockSpecGenSdkArtifactInfo } from "../../shared/test/sdk-types.ts";
 import { LabelAction } from "../src/label.js";
 import {
   getLabelAndActionImpl,

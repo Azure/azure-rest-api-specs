@@ -13,9 +13,9 @@
   required "TypeSpec Suppressions" commit status instead.
 */
 
-import { execFile } from "../../../shared/src/exec.js";
-import { PER_PAGE_MAX } from "../../../shared/src/github.js";
-import { byDate, invert } from "../../../shared/src/sort.js";
+import { execFile } from "../../../shared/src/exec.ts";
+import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
+import { byDate, invert } from "../../../shared/src/sort.ts";
 
 import { createHash } from "crypto";
 import fs from "fs/promises";

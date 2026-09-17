@@ -1,5 +1,5 @@
 import { simpleGit } from "simple-git";
-import { getChangedFiles, resourceManager, swagger } from "../../../shared/src/changed-files.js";
+import { getChangedFiles, resourceManager, swagger } from "../../../shared/src/changed-files.ts";
 import { CoreLogger } from "../core-logger.js";
 import { LabelAction } from "../label.js";
 import { ArmLeaseValidationLabel } from "./arm-lease-validation-labels.js";

@@ -1,5 +1,5 @@
-import { CheckStatus, CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.js";
-import { SpecGenSdkArtifactInfoSchema } from "../../shared/src/sdk-types.js";
+import { CheckStatus, CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.ts";
+import { SpecGenSdkArtifactInfoSchema } from "../../shared/src/sdk-types.ts";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.js";
 import { extractInputs } from "./context.js";
 

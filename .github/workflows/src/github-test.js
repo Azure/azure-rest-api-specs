@@ -14,9 +14,14 @@ export default async function importAllModules({ core }) {
 
   const githubDir = join(workspace, ".github");
 
-  // find all files matching "**/src/**/*.js", sorted for readability
+  // Find source modules, excluding dependencies that Node cannot type-strip.
   const scriptFiles = (await readdir(githubDir, { recursive: true }))
-    .filter((f) => normalize(f).split(sep).includes("src") && basename(f).endsWith(".js"))
+    .filter(
+      (f) =>
+        normalize(f).split(sep).includes("src") &&
+        !normalize(f).split(sep).includes("node_modules") &&
+        /\.(?:js|ts)$/.test(basename(f)),
+    )
     .sort();
 
   core.info("Script Files:");

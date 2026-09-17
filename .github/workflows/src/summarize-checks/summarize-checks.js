@@ -17,10 +17,10 @@
 */
 
 // #region imports/constants
-import { execFile } from "../../../shared/src/exec.js";
-import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.js";
-import { intersect } from "../../../shared/src/set.js";
-import { byDate, invert } from "../../../shared/src/sort.js";
+import { execFile } from "../../../shared/src/exec.ts";
+import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.ts";
+import { intersect } from "../../../shared/src/set.ts";
+import { byDate, invert } from "../../../shared/src/sort.ts";
 import { commentOrUpdate } from "../comment.js";
 import { extractInputs } from "../context.js";
 import {
