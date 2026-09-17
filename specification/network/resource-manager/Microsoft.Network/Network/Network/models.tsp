@@ -22102,6 +22102,12 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
   enableBgp?: boolean;
 
   /**
+   * Whether Federal Information Processing Standards (FIPS) compliance is enabled for site-to-site VPN connections.
+   */
+  @added(Versions.v2025_07_01)
+  enableFipsCompliance?: boolean;
+
+  /**
    * GatewayCustomBgpIpAddresses to be used for virtual network gateway Connection.
    */
   @identifiers(#[])
@@ -23335,6 +23341,12 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
    * EnableBgp flag.
    */
   enableBgp?: boolean;
+
+  /**
+   * Whether Federal Information Processing Standards (FIPS) compliance is enabled for site-to-site VPN connections.
+   */
+  @added(Versions.v2025_07_01)
+  enableFipsCompliance?: boolean;
 
   /**
    * GatewayCustomBgpIpAddresses to be used for virtual network gateway Connection.
