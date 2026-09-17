@@ -5,4 +5,14 @@
     - SdkTspConfigValidation
   sub-rules:
     - options.@azure-tools/typespec-go.*
-  reason: "Go is not currently shipped for this service."
+    # JS SDK generation is intentionally not configured for Confidential Ledger.
+    # The @azure-tools/typespec-ts emitter block has been removed from
+    # tspconfig.yaml, so its emitter options are intentionally absent.
+    - options.@azure-tools/typespec-ts.*
+  reason: >
+    Go is not currently shipped for this service. JavaScript SDK generation is
+    also intentionally not configured: the @azure-tools/typespec-ts emitter
+    block has been removed from tspconfig.yaml because the shipped
+    @azure-rest/confidential-ledger RLC package requires a breaking RLC-to-modular
+    migration before it can regenerate from this TypeSpec. The suppression can be
+    removed once the JS SDK is migrated and the emitter is reconfigured.
