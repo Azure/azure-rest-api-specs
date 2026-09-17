@@ -51,7 +51,6 @@ model PutCredentialResult {
 alias PutCredentialErrors = BadRequestErrorResult;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, query parameters, and route shapes."
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
 @tag("credentials")
 interface CredentialsOperations {
   /** Deletes a credential in a sandbox group. */

@@ -768,71 +768,69 @@ model PodContentPackage {
 }
 
 /** A named pod volume that containers can mount. */
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "The existing API requires this polymorphic volume union."
-@discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
-union PodVolume {
+@discriminator("kind")
+model PodVolume {
+  /** The pod volume type. */
+  kind: PodVolumeKind;
+
+  /** The pod volume name. */
+  name: VolumeName;
+}
+
+/** The supported pod volume types. */
+union PodVolumeKind {
+  string,
+
   /** A service-managed Azure Blob volume. */
-  AzureBlob: AzureBlobPodVolume,
+  AzureBlob: "AzureBlob",
 
   /** A customer-owned Azure Blob container volume. */
-  AzureBlobByo: AzureBlobByoPodVolume,
+  AzureBlobByo: "AzureBlobByo",
 
   /** A local sandbox volume. */
-  Local: LocalPodVolume,
+  Local: "Local",
 
   /** A persistent data disk volume. */
-  DataDisk: DataDiskPodVolume,
+  DataDisk: "DataDisk",
 }
 
 /** Bring-your-own (BYO) Azure Blob container volume source, backed by blobfuse2. */
-model AzureBlobByoPodVolume {
+model AzureBlobByoPodVolume extends PodVolume {
   /** The pod volume type. */
-  kind?: "AzureBlobByo";
+  kind: "AzureBlobByo";
 
   /** The maximum local file cache size. */
   fileCacheSizeLimit: StorageQuantity;
 
   /** Whether the blob volume is read-only. */
   readOnly?: boolean = false;
-
-  /** The pod volume name. */
-  name: VolumeName;
 }
 
 /** Azure Blob Storage volume source, backed by blobfuse2. */
-model AzureBlobPodVolume {
+model AzureBlobPodVolume extends PodVolume {
   /** The pod volume type. */
-  kind?: "AzureBlob";
+  kind: "AzureBlob";
 
   /** The maximum local file cache size. */
   fileCacheSizeLimit: StorageQuantity;
 
   /** Whether the blob volume is read-only. */
   readOnly?: boolean = false;
-
-  /** The pod volume name. */
-  name: VolumeName;
 }
 
 /** Data disk volume source backed by a persistent ext4 block device in cluster storage. */
-model DataDiskPodVolume {
+model DataDiskPodVolume extends PodVolume {
   /** The pod volume type. */
-  kind?: "DataDisk";
-
-  /** The referenced data disk volume name. */
-  name: VolumeName;
+  kind: "DataDisk";
 }
 
 /** Local volume source backed by rootfs space. */
-model LocalPodVolume {
+model LocalPodVolume extends PodVolume {
   /** The pod volume type. */
-  kind?: "Local";
+  kind: "Local";
 
   /** The requested local volume size. */
   size: StorageQuantity;
-
-  /** The pod volume name. */
-  name: VolumeName;
 }
 
 /** Entra ID-specific auth configuration for a port. */
@@ -1220,29 +1218,36 @@ model LinuxCapabilities {
 }
 
 /** Defines a single column in a custom log output schema. Polymorphic on `kind` discriminator: `"Value"` or `"Ref"`. */
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "The existing API requires this polymorphic log-column union."
-@discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
-union LogColumnDef {
+@discriminator("kind")
+model LogColumnDef {
+  /** The log column type. */
+  kind: LogColumnDefKind;
+}
+
+/** The supported log column types. */
+union LogColumnDefKind {
+  string,
+
   /** A column containing a static value. */
-  Value: ValueLogColumnDef,
+  Value: "Value",
 
   /** A column resolved from a sandbox attribute. */
-  Ref: RefLogColumnDef,
+  Ref: "Ref",
 }
 
 /** A column whose value is resolved from a well-known Azure Container Apps Sandbox attribute at runtime. */
-model RefLogColumnDef {
+model RefLogColumnDef extends LogColumnDef {
   /** Identifies this as a referenced log column. */
-  kind?: "Ref";
+  kind: "Ref";
 
   /** The Azure Container Apps Sandbox attribute to resolve. */
   refName: LogColumnRef;
 }
 
 /** A column whose value is a literal string provided by the partner. */
-model ValueLogColumnDef {
+model ValueLogColumnDef extends LogColumnDef {
   /** Identifies this as a static-value log column. */
-  kind?: "Value";
+  kind: "Value";
 
   /** The static value injected into every log record. */
   value: string;
@@ -1587,29 +1592,36 @@ model TelemetryApplicationInsightsAuth {
 }
 
 /** Managed identity authentication for a telemetry endpoint. */
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "The existing API requires this polymorphic telemetry-authentication union."
-@discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
-union TelemetryAuth {
+@discriminator("kind")
+model TelemetryAuth {
+  /** The telemetry authentication type. */
+  kind: TelemetryAuthKind;
+}
+
+/** The supported telemetry authentication types. */
+union TelemetryAuthKind {
+  string,
+
   /** User-assigned managed identity authentication. */
-  ManagedIdentity: TelemetryManagedIdentityAuth,
+  ManagedIdentity: "ManagedIdentity",
 
   /** System-assigned managed identity authentication. */
-  SystemAssignedManagedIdentity: TelemetrySystemAssignedManagedIdentityAuth,
+  SystemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
 }
 
 /** User-assigned managed identity authentication for Log Analytics. */
-model TelemetryManagedIdentityAuth {
+model TelemetryManagedIdentityAuth extends TelemetryAuth {
   /** Identifies managed identity authentication. */
-  kind?: "ManagedIdentity";
+  kind: "ManagedIdentity";
 
   /** Azure resource ID of a user-assigned managed identity. */
   identity: string;
 }
 
 /** System-assigned managed identity authentication for Log Analytics. */
-model TelemetrySystemAssignedManagedIdentityAuth {
+model TelemetrySystemAssignedManagedIdentityAuth extends TelemetryAuth {
   /** Identifies system-assigned managed identity authentication. */
-  kind?: "SystemAssignedManagedIdentity";
+  kind: "SystemAssignedManagedIdentity";
 }
 
 /** Configures telemetry collection for a sandbox. Passed in sandbox creation requests. */
@@ -1640,29 +1652,10 @@ union TelemetryData {
 }
 
 /** Base type for telemetry endpoint configuration. Polymorphic on `kind` discriminator. */
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "The existing API requires this polymorphic telemetry-endpoint union."
-@discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
-union TelemetryEndpoint {
-  /** An OpenTelemetry Protocol endpoint. */
-  OTLP: OtlpTelemetryEndpoint,
-
-  /** An Application Insights endpoint. */
-  ApplicationInsights: ApplicationInsightsTelemetryEndpoint,
-
-  /** A Log Analytics endpoint using the Logs Ingestion API. */
-  LogAnalytics: LogAnalyticsTelemetryEndpoint,
-
-  /** A Log Analytics endpoint using the Data Collector API. */
-  LogAnalyticsLegacy: LogAnalyticsLegacyTelemetryEndpoint,
-}
-
-/** Application Insights telemetry endpoint configuration. Uses the connection string to derive the ingestion and live-metrics endpoints. */
-model ApplicationInsightsTelemetryEndpoint {
-  /** Identifies an Application Insights endpoint. */
-  kind?: "ApplicationInsights";
-
-  /** Authentication used for Application Insights. */
-  auth: TelemetryApplicationInsightsAuth;
+@discriminator("kind")
+model TelemetryEndpoint {
+  /** The telemetry endpoint type. */
+  kind: TelemetryEndpointKind;
 
   /** Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed. */
   data: TelemetryData[];
@@ -1674,10 +1667,36 @@ model ApplicationInsightsTelemetryEndpoint {
   dynamicJsonColumns?: boolean = false;
 }
 
+/** The supported telemetry endpoint types. */
+union TelemetryEndpointKind {
+  string,
+
+  /** An OpenTelemetry Protocol endpoint. */
+  OTLP: "OTLP",
+
+  /** An Application Insights endpoint. */
+  ApplicationInsights: "ApplicationInsights",
+
+  /** A Log Analytics endpoint using the Logs Ingestion API. */
+  LogAnalytics: "LogAnalytics",
+
+  /** A Log Analytics endpoint using the Data Collector API. */
+  LogAnalyticsLegacy: "LogAnalyticsLegacy",
+}
+
+/** Application Insights telemetry endpoint configuration. Uses the connection string to derive the ingestion and live-metrics endpoints. */
+model ApplicationInsightsTelemetryEndpoint extends TelemetryEndpoint {
+  /** Identifies an Application Insights endpoint. */
+  kind: "ApplicationInsights";
+
+  /** Authentication used for Application Insights. */
+  auth: TelemetryApplicationInsightsAuth;
+}
+
 /** Log Analytics Legacy (Data Collector API) telemetry endpoint configuration. */
-model LogAnalyticsLegacyTelemetryEndpoint {
+model LogAnalyticsLegacyTelemetryEndpoint extends TelemetryEndpoint {
   /** Identifies a legacy Log Analytics endpoint. */
-  kind?: "LogAnalyticsLegacy";
+  kind: "LogAnalyticsLegacy";
 
   /** The Log Analytics workspace ID. */
   workspaceId: string;
@@ -1687,21 +1706,12 @@ model LogAnalyticsLegacyTelemetryEndpoint {
 
   /** Secret containing the Log Analytics shared key. */
   auth: TelemetrySecretReference;
-
-  /** Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed. */
-  data: TelemetryData[];
-
-  /** Custom columns added to forwarded log records. */
-  columns?: Record<LogColumnDef>;
-
-  /** Whether to add top-level JSON fields from container logs as columns. */
-  dynamicJsonColumns?: boolean = false;
 }
 
 /** Azure Monitor Log Analytics endpoint configuration. */
-model LogAnalyticsTelemetryEndpoint {
+model LogAnalyticsTelemetryEndpoint extends TelemetryEndpoint {
   /** Identifies a Log Analytics endpoint. */
-  kind?: "LogAnalytics";
+  kind: "LogAnalytics";
 
   /** Data Collection Endpoint URL. */
   dceEndpoint: url;
@@ -1714,21 +1724,12 @@ model LogAnalyticsTelemetryEndpoint {
 
   /** Required managed identity authentication. The identity must be assigned to the sandbox group. */
   auth: TelemetryAuth;
-
-  /** Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed. */
-  data: TelemetryData[];
-
-  /** Custom columns added to forwarded log records. */
-  columns?: Record<LogColumnDef>;
-
-  /** Whether to add top-level JSON fields from container logs as columns. */
-  dynamicJsonColumns?: boolean = false;
 }
 
 /** OTLP telemetry endpoint configuration. */
-model OtlpTelemetryEndpoint {
+model OtlpTelemetryEndpoint extends TelemetryEndpoint {
   /** Identifies an OTLP endpoint. */
-  kind?: "OTLP";
+  kind: "OTLP";
 
   /** OTLP endpoint URL (e.g., "https://customer.monitor.azure.com/otlp"). */
   endpoint: url;
@@ -1738,15 +1739,6 @@ model OtlpTelemetryEndpoint {
 
   /** Optional headers used to authenticate to the endpoint. */
   auth?: TelemetryHeaderAuth;
-
-  /** Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed. */
-  data: TelemetryData[];
-
-  /** Custom columns added to forwarded log records. */
-  columns?: Record<LogColumnDef>;
-
-  /** Whether to add top-level JSON fields from container logs as columns. */
-  dynamicJsonColumns?: boolean = false;
 }
 
 /** HTTP header authentication for an OTLP telemetry endpoint. */
@@ -1773,27 +1765,37 @@ union TelemetryProtocol {
 }
 
 /** Base type for telemetry endpoint secret references. */
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "The existing API requires this polymorphic telemetry-secret union."
-@discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
-union TelemetrySecretReference {
+@discriminator("kind")
+model TelemetrySecretReference {
+  /** The secret-reference type. */
+  kind: TelemetrySecretReferenceKind;
+}
+
+/** The supported telemetry secret-reference types. */
+union TelemetrySecretReferenceKind {
+  string,
+
   /** References a sandbox-group GlobalSecret by identifier and key. */
-  GlobalSecret: TelemetrySandboxGroupSecretRef,
+  GlobalSecret: "GlobalSecret",
 
   /** References a secret in the parent artifact app's local secret bundle. */
-  AppSecret: TelemetryAppSecretRef,
+  AppSecret: "AppSecret",
 }
 
 /** Reference to a sandbox-group GlobalSecret. */
-model TelemetrySandboxGroupSecretRef {
+model TelemetrySandboxGroupSecretRef extends TelemetrySecretReference {
   /**
-   * Secret-reference kind. Optional for compatibility with legacy payloads, which predate the
-   * discriminator and are always interpreted as this shape.
+   * Secret-reference kind.
    *
    * The value stays "GlobalSecret" while the model is named for its scope: the server matches on
    * this exact literal (Adc.Contracts TelemetrySecretReferenceConverter), so changing it would be
    * a wire break. The model name and the discriminator diverging here is deliberate.
+   *
+   * Clients must always send this property. The service additionally accepts legacy payloads that
+   * omit it, interpreting them as this shape, but that fallback is not part of the published
+   * contract and must not be relied on by new callers.
    */
-  kind?: "GlobalSecret";
+  kind: "GlobalSecret";
 
   /** Identifier of the sandbox-group secret. */
   secretId: string;
@@ -1803,7 +1805,7 @@ model TelemetrySandboxGroupSecretRef {
 }
 
 /** Reference to a secret in the parent artifact app. */
-model TelemetryAppSecretRef {
+model TelemetryAppSecretRef extends TelemetrySecretReference {
   /** Secret-reference kind. */
   kind: "AppSecret";
 

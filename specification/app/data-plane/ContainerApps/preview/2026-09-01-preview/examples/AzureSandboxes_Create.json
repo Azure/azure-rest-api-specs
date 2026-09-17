@@ -180,7 +180,11 @@
             }
           ],
           "volumes": [
-            null
+            {
+              "kind": "Local",
+              "name": "wqf",
+              "size": "1Gi"
+            }
           ],
           "contentPackages": [
             {
@@ -597,7 +601,14 @@
       ],
       "telemetryConfig": {
         "endpoints": [
-          null
+          {
+            "kind": "OTLP",
+            "endpoint": "https://customer.monitor.azure.com/otlp",
+            "protocol": "Grpc",
+            "data": [
+              "ContainerStdoutStderr"
+            ]
+          }
         ],
         "metricsIntervalSeconds": 43
       },
@@ -778,7 +789,11 @@
               }
             ],
             "volumes": [
-              null
+              {
+                "kind": "Local",
+                "name": "wqf",
+                "size": "1Gi"
+              }
             ],
             "contentPackages": [
               {

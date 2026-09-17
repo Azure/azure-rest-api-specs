@@ -8263,44 +8263,20 @@
       "type": "object",
       "description": "Application Insights telemetry endpoint configuration. Uses the connection string to derive the ingestion and live-metrics endpoints.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Identifies an Application Insights endpoint.",
-          "enum": [
-            "ApplicationInsights"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "auth": {
           "$ref": "#/definitions/TelemetryApplicationInsightsAuth",
           "description": "Authentication used for Application Insights."
-        },
-        "data": {
-          "type": "array",
-          "description": "Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed.",
-          "items": {
-            "$ref": "#/definitions/TelemetryData"
-          }
-        },
-        "columns": {
-          "type": "object",
-          "description": "Custom columns added to forwarded log records.",
-          "additionalProperties": {
-            "$ref": "#/definitions/LogColumnDef"
-          }
-        },
-        "dynamicJsonColumns": {
-          "type": "boolean",
-          "description": "Whether to add top-level JSON fields from container logs as columns.",
-          "default": false
         }
       },
       "required": [
-        "auth",
-        "data"
-      ]
+        "auth"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TelemetryEndpoint"
+        }
+      ],
+      "x-ms-discriminator-value": "ApplicationInsights"
     },
     "ArmStorageContainerId": {
       "type": "string",
@@ -8401,16 +8377,6 @@
       "type": "object",
       "description": "Bring-your-own (BYO) Azure Blob container volume source, backed by blobfuse2.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The pod volume type.",
-          "enum": [
-            "AzureBlobByo"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "fileCacheSizeLimit": {
           "$ref": "#/definitions/StorageQuantity",
           "description": "The maximum local file cache size."
@@ -8419,16 +8385,17 @@
           "type": "boolean",
           "description": "Whether the blob volume is read-only.",
           "default": false
-        },
-        "name": {
-          "$ref": "#/definitions/VolumeName",
-          "description": "The pod volume name."
         }
       },
       "required": [
-        "fileCacheSizeLimit",
-        "name"
-      ]
+        "fileCacheSizeLimit"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PodVolume"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureBlobByo"
     },
     "AzureBlobByoVolume": {
       "type": "object",
@@ -8486,16 +8453,6 @@
       "type": "object",
       "description": "Azure Blob Storage volume source, backed by blobfuse2.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The pod volume type.",
-          "enum": [
-            "AzureBlob"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "fileCacheSizeLimit": {
           "$ref": "#/definitions/StorageQuantity",
           "description": "The maximum local file cache size."
@@ -8504,16 +8461,17 @@
           "type": "boolean",
           "description": "Whether the blob volume is read-only.",
           "default": false
-        },
-        "name": {
-          "$ref": "#/definitions/VolumeName",
-          "description": "The pod volume name."
         }
       },
       "required": [
-        "fileCacheSizeLimit",
-        "name"
-      ]
+        "fileCacheSizeLimit"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PodVolume"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureBlob"
     },
     "AzureBlobVolume": {
       "type": "object",
@@ -9774,25 +9732,12 @@
     "DataDiskPodVolume": {
       "type": "object",
       "description": "Data disk volume source backed by a persistent ext4 block device in cluster storage.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The pod volume type.",
-          "enum": [
-            "DataDisk"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "name": {
-          "$ref": "#/definitions/VolumeName",
-          "description": "The referenced data disk volume name."
+      "allOf": [
+        {
+          "$ref": "#/definitions/PodVolume"
         }
-      },
-      "required": [
-        "name"
-      ]
+      ],
+      "x-ms-discriminator-value": "DataDisk"
     },
     "DataDiskVolume": {
       "type": "object",
@@ -11422,44 +11367,25 @@
       "type": "object",
       "description": "Local volume source backed by rootfs space.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The pod volume type.",
-          "enum": [
-            "Local"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "size": {
           "$ref": "#/definitions/StorageQuantity",
           "description": "The requested local volume size."
-        },
-        "name": {
-          "$ref": "#/definitions/VolumeName",
-          "description": "The pod volume name."
         }
       },
       "required": [
-        "size",
-        "name"
-      ]
+        "size"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PodVolume"
+        }
+      ],
+      "x-ms-discriminator-value": "Local"
     },
     "LogAnalyticsLegacyTelemetryEndpoint": {
       "type": "object",
       "description": "Log Analytics Legacy (Data Collector API) telemetry endpoint configuration.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Identifies a legacy Log Analytics endpoint.",
-          "enum": [
-            "LogAnalyticsLegacy"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "workspaceId": {
           "type": "string",
           "description": "The Log Analytics workspace ID."
@@ -11471,48 +11397,24 @@
         "auth": {
           "$ref": "#/definitions/TelemetrySecretReference",
           "description": "Secret containing the Log Analytics shared key."
-        },
-        "data": {
-          "type": "array",
-          "description": "Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed.",
-          "items": {
-            "$ref": "#/definitions/TelemetryData"
-          }
-        },
-        "columns": {
-          "type": "object",
-          "description": "Custom columns added to forwarded log records.",
-          "additionalProperties": {
-            "$ref": "#/definitions/LogColumnDef"
-          }
-        },
-        "dynamicJsonColumns": {
-          "type": "boolean",
-          "description": "Whether to add top-level JSON fields from container logs as columns.",
-          "default": false
         }
       },
       "required": [
         "workspaceId",
         "tableName",
-        "auth",
-        "data"
-      ]
+        "auth"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TelemetryEndpoint"
+        }
+      ],
+      "x-ms-discriminator-value": "LogAnalyticsLegacy"
     },
     "LogAnalyticsTelemetryEndpoint": {
       "type": "object",
       "description": "Azure Monitor Log Analytics endpoint configuration.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Identifies a Log Analytics endpoint.",
-          "enum": [
-            "LogAnalytics"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "dceEndpoint": {
           "type": "string",
           "format": "uri",
@@ -11529,36 +11431,59 @@
         "auth": {
           "$ref": "#/definitions/TelemetryAuth",
           "description": "Required managed identity authentication. The identity must be assigned to the sandbox group."
-        },
-        "data": {
-          "type": "array",
-          "description": "Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed.",
-          "items": {
-            "$ref": "#/definitions/TelemetryData"
-          }
-        },
-        "columns": {
-          "type": "object",
-          "description": "Custom columns added to forwarded log records.",
-          "additionalProperties": {
-            "$ref": "#/definitions/LogColumnDef"
-          }
-        },
-        "dynamicJsonColumns": {
-          "type": "boolean",
-          "description": "Whether to add top-level JSON fields from container logs as columns.",
-          "default": false
         }
       },
       "required": [
         "dceEndpoint",
         "dcrImmutableId",
         "tableName",
-        "auth",
-        "data"
+        "auth"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TelemetryEndpoint"
+        }
+      ],
+      "x-ms-discriminator-value": "LogAnalytics"
+    },
+    "LogColumnDef": {
+      "type": "object",
+      "description": "Defines a single column in a custom log output schema. Polymorphic on `kind` discriminator: `\"Value\"` or `\"Ref\"`.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/LogColumnDefKind",
+          "description": "The log column type."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
       ]
     },
-    "LogColumnDef": {},
+    "LogColumnDefKind": {
+      "type": "string",
+      "description": "The supported log column types.",
+      "enum": [
+        "Value",
+        "Ref"
+      ],
+      "x-ms-enum": {
+        "name": "LogColumnDefKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Value",
+            "value": "Value",
+            "description": "A column containing a static value."
+          },
+          {
+            "name": "Ref",
+            "value": "Ref",
+            "description": "A column resolved from a sandbox attribute."
+          }
+        ]
+      }
+    },
     "LogColumnRef": {
       "type": "string",
       "description": "Well-known Azure Container Apps Sandbox attributes that can be referenced by custom columns.",
@@ -11833,16 +11758,6 @@
       "type": "object",
       "description": "OTLP telemetry endpoint configuration.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Identifies an OTLP endpoint.",
-          "enum": [
-            "OTLP"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "endpoint": {
           "type": "string",
           "format": "uri",
@@ -11855,32 +11770,18 @@
         "auth": {
           "$ref": "#/definitions/TelemetryHeaderAuth",
           "description": "Optional headers used to authenticate to the endpoint."
-        },
-        "data": {
-          "type": "array",
-          "description": "Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed.",
-          "items": {
-            "$ref": "#/definitions/TelemetryData"
-          }
-        },
-        "columns": {
-          "type": "object",
-          "description": "Custom columns added to forwarded log records.",
-          "additionalProperties": {
-            "$ref": "#/definitions/LogColumnDef"
-          }
-        },
-        "dynamicJsonColumns": {
-          "type": "boolean",
-          "description": "Whether to add top-level JSON fields from container logs as columns.",
-          "default": false
         }
       },
       "required": [
         "endpoint",
-        "protocol",
-        "data"
-      ]
+        "protocol"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TelemetryEndpoint"
+        }
+      ],
+      "x-ms-discriminator-value": "OTLP"
     },
     "PagedConnection": {
       "type": "object",
@@ -12138,7 +12039,61 @@
         }
       }
     },
-    "PodVolume": {},
+    "PodVolume": {
+      "type": "object",
+      "description": "A named pod volume that containers can mount.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/PodVolumeKind",
+          "description": "The pod volume type."
+        },
+        "name": {
+          "$ref": "#/definitions/VolumeName",
+          "description": "The pod volume name."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind",
+        "name"
+      ]
+    },
+    "PodVolumeKind": {
+      "type": "string",
+      "description": "The supported pod volume types.",
+      "enum": [
+        "AzureBlob",
+        "AzureBlobByo",
+        "Local",
+        "DataDisk"
+      ],
+      "x-ms-enum": {
+        "name": "PodVolumeKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureBlob",
+            "value": "AzureBlob",
+            "description": "A service-managed Azure Blob volume."
+          },
+          {
+            "name": "AzureBlobByo",
+            "value": "AzureBlobByo",
+            "description": "A customer-owned Azure Blob container volume."
+          },
+          {
+            "name": "Local",
+            "value": "Local",
+            "description": "A local sandbox volume."
+          },
+          {
+            "name": "DataDisk",
+            "value": "DataDisk",
+            "description": "A persistent data disk volume."
+          }
+        ]
+      }
+    },
     "PortActivationMode": {
       "type": "string",
       "description": "Ways a sandbox port can be activated.",
@@ -12944,16 +12899,6 @@
       "type": "object",
       "description": "A column whose value is resolved from a well-known Azure Container Apps Sandbox attribute at runtime.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Identifies this as a referenced log column.",
-          "enum": [
-            "Ref"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "refName": {
           "$ref": "#/definitions/LogColumnRef",
           "description": "The Azure Container Apps Sandbox attribute to resolve."
@@ -12961,7 +12906,13 @@
       },
       "required": [
         "refName"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LogColumnDef"
+        }
+      ],
+      "x-ms-discriminator-value": "Ref"
     },
     "RegistryAuthentication": {
       "type": "object",
@@ -14576,10 +14527,6 @@
         "secretRef": {
           "$ref": "#/definitions/EgressPolicySecretRef",
           "description": "A reference to the stored password or token."
-        },
-        "secret": {
-          "type": "string",
-          "description": "Resolved credential value, when included by the service."
         }
       },
       "required": [
@@ -14683,25 +14630,20 @@
       "type": "object",
       "description": "Reference to a secret in the parent artifact app.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Secret-reference kind.",
-          "enum": [
-            "AppSecret"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "secretRef": {
           "type": "string",
           "description": "Name of the secret in the parent artifact app's secret bundle."
         }
       },
       "required": [
-        "kind",
         "secretRef"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TelemetrySecretReference"
+        }
+      ],
+      "x-ms-discriminator-value": "AppSecret"
     },
     "TelemetryApplicationInsightsAuth": {
       "type": "object",
@@ -14721,7 +14663,44 @@
         "secretKey"
       ]
     },
-    "TelemetryAuth": {},
+    "TelemetryAuth": {
+      "type": "object",
+      "description": "Managed identity authentication for a telemetry endpoint.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/TelemetryAuthKind",
+          "description": "The telemetry authentication type."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "TelemetryAuthKind": {
+      "type": "string",
+      "description": "The supported telemetry authentication types.",
+      "enum": [
+        "ManagedIdentity",
+        "SystemAssignedManagedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "TelemetryAuthKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "User-assigned managed identity authentication."
+          },
+          {
+            "name": "SystemAssignedManagedIdentity",
+            "value": "SystemAssignedManagedIdentity",
+            "description": "System-assigned managed identity authentication."
+          }
+        ]
+      }
+    },
     "TelemetryConfig": {
       "type": "object",
       "description": "Configures telemetry collection for a sandbox. Passed in sandbox creation requests.",
@@ -14780,7 +14759,76 @@
         ]
       }
     },
-    "TelemetryEndpoint": {},
+    "TelemetryEndpoint": {
+      "type": "object",
+      "description": "Base type for telemetry endpoint configuration. Polymorphic on `kind` discriminator.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/TelemetryEndpointKind",
+          "description": "The telemetry endpoint type."
+        },
+        "data": {
+          "type": "array",
+          "description": "Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed.",
+          "items": {
+            "$ref": "#/definitions/TelemetryData"
+          }
+        },
+        "columns": {
+          "type": "object",
+          "description": "Custom columns added to forwarded log records.",
+          "additionalProperties": {
+            "$ref": "#/definitions/LogColumnDef"
+          }
+        },
+        "dynamicJsonColumns": {
+          "type": "boolean",
+          "description": "Whether to add top-level JSON fields from container logs as columns.",
+          "default": false
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind",
+        "data"
+      ]
+    },
+    "TelemetryEndpointKind": {
+      "type": "string",
+      "description": "The supported telemetry endpoint types.",
+      "enum": [
+        "OTLP",
+        "ApplicationInsights",
+        "LogAnalytics",
+        "LogAnalyticsLegacy"
+      ],
+      "x-ms-enum": {
+        "name": "TelemetryEndpointKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OTLP",
+            "value": "OTLP",
+            "description": "An OpenTelemetry Protocol endpoint."
+          },
+          {
+            "name": "ApplicationInsights",
+            "value": "ApplicationInsights",
+            "description": "An Application Insights endpoint."
+          },
+          {
+            "name": "LogAnalytics",
+            "value": "LogAnalytics",
+            "description": "A Log Analytics endpoint using the Logs Ingestion API."
+          },
+          {
+            "name": "LogAnalyticsLegacy",
+            "value": "LogAnalyticsLegacy",
+            "description": "A Log Analytics endpoint using the Data Collector API."
+          }
+        ]
+      }
+    },
     "TelemetryHeaderAuth": {
       "type": "object",
       "description": "HTTP header authentication for an OTLP telemetry endpoint.",
@@ -14808,16 +14856,6 @@
       "type": "object",
       "description": "User-assigned managed identity authentication for Log Analytics.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Identifies managed identity authentication.",
-          "enum": [
-            "ManagedIdentity"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "identity": {
           "type": "string",
           "description": "Azure resource ID of a user-assigned managed identity."
@@ -14825,7 +14863,13 @@
       },
       "required": [
         "identity"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TelemetryAuth"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedIdentity"
     },
     "TelemetryProtocol": {
       "type": "string",
@@ -14855,16 +14899,6 @@
       "type": "object",
       "description": "Reference to a sandbox-group GlobalSecret.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Secret-reference kind. Optional for compatibility with legacy payloads, which predate the\ndiscriminator and are always interpreted as this shape.\n\nThe value stays \"GlobalSecret\" while the model is named for its scope: the server matches on\nthis exact literal (Adc.Contracts TelemetrySecretReferenceConverter), so changing it would be\na wire break. The model name and the discriminator diverging here is deliberate.",
-          "enum": [
-            "GlobalSecret"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "secretId": {
           "type": "string",
           "description": "Identifier of the sandbox-group secret."
@@ -14877,24 +14911,61 @@
       "required": [
         "secretId",
         "secretKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TelemetrySecretReference"
+        }
+      ],
+      "x-ms-discriminator-value": "GlobalSecret"
+    },
+    "TelemetrySecretReference": {
+      "type": "object",
+      "description": "Base type for telemetry endpoint secret references.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/TelemetrySecretReferenceKind",
+          "description": "The secret-reference type."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
       ]
     },
-    "TelemetrySecretReference": {},
+    "TelemetrySecretReferenceKind": {
+      "type": "string",
+      "description": "The supported telemetry secret-reference types.",
+      "enum": [
+        "GlobalSecret",
+        "AppSecret"
+      ],
+      "x-ms-enum": {
+        "name": "TelemetrySecretReferenceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GlobalSecret",
+            "value": "GlobalSecret",
+            "description": "References a sandbox-group GlobalSecret by identifier and key."
+          },
+          {
+            "name": "AppSecret",
+            "value": "AppSecret",
+            "description": "References a secret in the parent artifact app's local secret bundle."
+          }
+        ]
+      }
+    },
     "TelemetrySystemAssignedManagedIdentityAuth": {
       "type": "object",
       "description": "System-assigned managed identity authentication for Log Analytics.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Identifies system-assigned managed identity authentication.",
-          "enum": [
-            "SystemAssignedManagedIdentity"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+      "allOf": [
+        {
+          "$ref": "#/definitions/TelemetryAuth"
         }
-      }
+      ],
+      "x-ms-discriminator-value": "SystemAssignedManagedIdentity"
     },
     "TenantId": {
       "type": "string",
@@ -15153,16 +15224,6 @@
       "type": "object",
       "description": "A column whose value is a literal string provided by the partner.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Identifies this as a static-value log column.",
-          "enum": [
-            "Value"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "value": {
           "type": "string",
           "description": "The static value injected into every log record."
@@ -15170,7 +15231,13 @@
       },
       "required": [
         "value"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LogColumnDef"
+        }
+      ],
+      "x-ms-discriminator-value": "Value"
     },
     "Volume": {
       "type": "object",

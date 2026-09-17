@@ -73,7 +73,6 @@ alias ContentPackageUploadOperations = ResourceOperations<
   PostContentPackageUploadErrors
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
 @tag("ContentPackages")
 interface ContentPackagesOperations {
   /** Deletes a content package by ID. */

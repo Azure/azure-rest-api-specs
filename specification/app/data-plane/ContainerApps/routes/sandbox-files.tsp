@@ -108,7 +108,6 @@ alias SandboxFileWriteOperations = ResourceOperations<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
 @tag("sandboxes")
 interface SandboxFilesOperations {
   /** Deletes a file or directory in a running sandbox. If the target is a directory, the `recursive` query parameter must be set to true to delete it and its contents. */

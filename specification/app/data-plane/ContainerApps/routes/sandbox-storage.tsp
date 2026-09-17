@@ -111,7 +111,6 @@ alias SandboxVolumeAddOperations = ResourceOperations<
   PostSandboxVolumeAddErrors
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
 @tag("sandboxes")
 interface SandboxStorageOperations {
   /** Commits a running sandbox as a new disk image. */
