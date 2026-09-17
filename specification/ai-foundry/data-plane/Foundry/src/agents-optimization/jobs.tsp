@@ -7,7 +7,6 @@ import "../common/servicepatterns.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -38,17 +37,6 @@ union AgentOptimizationJobTerminationReason {
 
   @doc("The candidate search stopped after the configured number of consecutive failed candidate screens.")
   candidate_screening_stalled: "candidate_screening_stalled",
-}
-
-/** Whether a candidate was evaluated against the job's evaluation configuration. */
-union AgentOptimizationCandidateEvaluationStatus {
-  string,
-
-  @doc("The candidate was evaluated and its evaluation-derived fields may be populated.")
-  evaluated: "evaluated",
-
-  @doc("The candidate was generated without comparative evaluation.")
-  not_evaluated: "not_evaluated",
 }
 
 /** Stage of optimization that consumed model resources. */
@@ -108,9 +96,6 @@ model AgentOptimizationJobProgress {
   @encode(DurationKnownEncoding.seconds, float64)
   elapsed_seconds: duration;
 
-  @removed(Versions.v1)
-  @doc("Promotion metadata. Omitted until a candidate from this job has been promoted.")
-  promotion?: PromotionInfo;
 }
 
 @doc("Aggregated token usage for one optimization stage and model.")
@@ -152,12 +137,8 @@ model AgentOptimizationJobLatency {
   call_count: int64;
 }
 
-@doc("Fields shared by evaluated and unevaluated optimization results.")
-@discriminator("evaluation_status")
+@doc("Partial or terminal result produced by an agent optimization job.")
 model AgentOptimizationJobResult {
-  @doc("Whether this job comparatively evaluates its candidates.")
-  evaluation_status: AgentOptimizationCandidateEvaluationStatus;
-
   @doc("Candidate ID of the original baseline. Omitted until the baseline candidate is available.")
   baseline_candidate_id?: string;
 
@@ -169,29 +150,17 @@ model AgentOptimizationJobResult {
 
   @doc("Aggregate latency per stage and model. Always present; empty when no server-measured latency is available.")
   latency_usage: AgentOptimizationJobLatency[];
-}
 
-@doc("Partial or terminal result for quality optimization.")
-model EvaluatedAgentOptimizationJobResult extends AgentOptimizationJobResult {
-  @doc("Result evaluation status.")
-  evaluation_status: "evaluated";
-
-  @doc("Candidate ID of the highest-scoring candidate. Omitted until a candidate has been selected.")
+  @doc("Candidate ID of the highest-scoring candidate. Omitted for jobs that do not comparatively evaluate candidates and until a candidate has been selected.")
   best_candidate_id?: string;
 
-  @doc("Outcome of comparative evaluation. Omitted until the evaluated job reaches a terminal state.")
+  @doc("Outcome of comparative evaluation. Omitted for jobs that do not comparatively evaluate candidates and until the job reaches a terminal state.")
   outcome?: AgentOptimizationJobOutcome;
 
-  @doc("Reason the candidate search terminated. Omitted until the evaluated job reaches a terminal state.")
+  @doc("Reason the candidate search terminated. Omitted for jobs that do not comparatively evaluate candidates and until the job reaches a terminal state.")
   termination_reason?: AgentOptimizationJobTerminationReason;
-}
 
-@doc("Partial or terminal result for a transformation job that does not comparatively evaluate candidates.")
-model UnevaluatedAgentOptimizationJobResult extends AgentOptimizationJobResult {
-  @doc("Result evaluation status.")
-  evaluation_status: "not_evaluated";
-
-  @doc("Candidate ID produced by the transformation. Omitted until the output candidate is available.")
+  @doc("Candidate ID produced by a transformation job that does not comparatively evaluate candidates. Omitted for evaluated jobs and until the output candidate is available.")
   output_candidate_id?: string;
 }
 

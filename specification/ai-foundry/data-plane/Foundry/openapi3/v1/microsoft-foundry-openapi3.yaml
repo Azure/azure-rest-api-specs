@@ -43582,14 +43582,6 @@ components:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: Timestamp when full candidate evaluation completed, represented in Unix time. Omitted when unavailable.
       description: Comparative evaluation summary for a candidate.
-    AgentOptimizationCandidateEvaluationStatus:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - evaluated
-            - not_evaluated
-      description: Whether a candidate was evaluated against the job's evaluation configuration.
     AgentOptimizationCandidateOutput:
       type: object
       required:
@@ -43996,13 +43988,9 @@ components:
     AgentOptimizationJobResult:
       type: object
       required:
-        - evaluation_status
         - token_usage
         - latency_usage
       properties:
-        evaluation_status:
-          $ref: '#/components/schemas/AgentOptimizationCandidateEvaluationStatus'
-          description: Whether this job comparatively evaluates its candidates.
         baseline_candidate_id:
           type: string
           description: Candidate ID of the original baseline. Omitted until the baseline candidate is available.
@@ -44021,12 +44009,19 @@ components:
           items:
             $ref: '#/components/schemas/AgentOptimizationJobLatency'
           description: Aggregate latency per stage and model. Always present; empty when no server-measured latency is available.
-      discriminator:
-        propertyName: evaluation_status
-        mapping:
-          evaluated: '#/components/schemas/EvaluatedAgentOptimizationJobResult'
-          not_evaluated: '#/components/schemas/UnevaluatedAgentOptimizationJobResult'
-      description: Fields shared by evaluated and unevaluated optimization results.
+        best_candidate_id:
+          type: string
+          description: Candidate ID of the highest-scoring candidate. Omitted for jobs that do not comparatively evaluate candidates and until a candidate has been selected.
+        outcome:
+          $ref: '#/components/schemas/AgentOptimizationJobOutcome'
+          description: Outcome of comparative evaluation. Omitted for jobs that do not comparatively evaluate candidates and until the job reaches a terminal state.
+        termination_reason:
+          $ref: '#/components/schemas/AgentOptimizationJobTerminationReason'
+          description: Reason the candidate search terminated. Omitted for jobs that do not comparatively evaluate candidates and until the job reaches a terminal state.
+        output_candidate_id:
+          type: string
+          description: Candidate ID produced by a transformation job that does not comparatively evaluate candidates. Omitted for evaluated jobs and until the output candidate is available.
+      description: Partial or terminal result produced by an agent optimization job.
     AgentOptimizationJobTerminationReason:
       anyOf:
         - type: string
@@ -48538,28 +48533,6 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Insights=V1Preview
-    EvaluatedAgentOptimizationJobResult:
-      type: object
-      required:
-        - evaluation_status
-      properties:
-        evaluation_status:
-          type: string
-          enum:
-            - evaluated
-          description: Result evaluation status.
-        best_candidate_id:
-          type: string
-          description: Candidate ID of the highest-scoring candidate. Omitted until a candidate has been selected.
-        outcome:
-          $ref: '#/components/schemas/AgentOptimizationJobOutcome'
-          description: Outcome of comparative evaluation. Omitted until the evaluated job reaches a terminal state.
-        termination_reason:
-          $ref: '#/components/schemas/AgentOptimizationJobTerminationReason'
-          description: Reason the candidate search terminated. Omitted until the evaluated job reaches a terminal state.
-      allOf:
-        - $ref: '#/components/schemas/AgentOptimizationJobResult'
-      description: Partial or terminal result for quality optimization.
     EvaluationAzureStandardVoiceModelConfiguration:
       type: object
       required:
@@ -84695,22 +84668,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    UnevaluatedAgentOptimizationJobResult:
-      type: object
-      required:
-        - evaluation_status
-      properties:
-        evaluation_status:
-          type: string
-          enum:
-            - not_evaluated
-          description: Result evaluation status.
-        output_candidate_id:
-          type: string
-          description: Candidate ID produced by the transformation. Omitted until the output candidate is available.
-      allOf:
-        - $ref: '#/components/schemas/AgentOptimizationJobResult'
-      description: Partial or terminal result for a transformation job that does not comparatively evaluate candidates.
     UpdateAgentFromManifestRequest:
       type: object
       required:
