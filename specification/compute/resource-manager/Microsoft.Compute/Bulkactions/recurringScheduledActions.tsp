@@ -338,7 +338,6 @@ union ScheduledActionsResourceOperationType {
 )
 @doc("Retry settings for a scheduled action operation.")
 model ScheduledActionsRetryPolicy {
-  @removed(Versions.`2026-09-06-preview`)
   @doc("The maximum number of retry attempts.")
   retryCount?: int32;
 

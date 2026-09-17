@@ -388,7 +388,6 @@ model ResourceProvisionVdiPayload {
 
 @doc("The retry settings for a bulk action.")
 model RetryPolicy {
-  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @doc("The maximum number of retry attempts.")
   retryCount?: int32;
 
