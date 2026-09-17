@@ -80,17 +80,4 @@ namespace Azure.AI.Projects.Beta.VoiceAgents {
   @@clientLocation(AgentTelephony.createTelephonyCallJob, Telephony);
   @@clientLocation(AgentTelephony.getTelephonyCallJob, Telephony);
   @@clientLocation(AgentTelephony.cancelTelephonyCallJob, Telephony);
-  @@clientLocation(AgentTelephony.createTelephonyCampaign, Telephony);
-  @@clientLocation(AgentTelephony.getTelephonyCampaign, Telephony);
-  @@clientLocation(AgentTelephony.importTelephonyCampaignRecipients, Telephony);
-  @@clientLocation(
-    AgentTelephony.getTelephonyCampaignRecipientImport,
-    Telephony
-  );
-  @@clientLocation(AgentTelephony.validateTelephonyCampaign, Telephony);
-  @@clientLocation(AgentTelephony.publishTelephonyCampaign, Telephony);
-  @@clientLocation(AgentTelephony.pauseTelephonyCampaign, Telephony);
-  @@clientLocation(AgentTelephony.resumeTelephonyCampaign, Telephony);
-  @@clientLocation(AgentTelephony.cancelTelephonyCampaign, Telephony);
-  @@clientLocation(AgentTelephony.getTelephonyOperation, Telephony);
 }

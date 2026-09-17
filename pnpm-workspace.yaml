@@ -4,9 +4,10 @@ packages:
   - "eng/tools"
   - "eng/tools/*"
 
-# Lowered from the pnpm 11 default of 1440 (24h) to unblock recently published
-# dependencies. Packages must be at least this many minutes old before install.
-minimumReleaseAge: 720
+minimumReleaseAge: 10080 # 7 days
+minimumReleaseAgeExclude:
+  - "@typespec/*"
+  - "@azure-tools/*"
 
 allowBuilds:
   # Git-hosted dependency (github:actions/github-script) that pnpm builds via its
