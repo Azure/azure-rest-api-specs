@@ -240,8 +240,6 @@ using Azure.AI.Projects;
   OpenAI.RealtimeServerEventResponseMCPCallInProgress,
   "RealtimeServerEventResponseMcpCallInProgress"
 );
-@@clientName(OpenAI.ToolChoiceMCP, "ToolChoiceMcp");
-
 @@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds");
 
 @@clientName(AgentObject.blueprint, "blueprintIdentity");
@@ -574,6 +572,70 @@ using Azure.AI.Projects;
 // is already exposed by the Stainless library. Currently there aren't any azure-isms.
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@changePropertyType(PromptAgentDefinition.tool_choice, string);
+
+// Structurally replace every emitted tool_choice property with an opaque union so Java exposes the wire value as
+// BinaryData. The Java emitter already emits these tool choice union as BinaryData, this type override makes the
+// tool choice discriminated hierarchy unreachable and prevents its emission in the generated Java code.
+union ToolChoiceValue {
+  string,
+  object: Record<unknown>,
+}
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(PromptAgentDefinition.tool_choice, ToolChoiceValue);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(VoiceAgentDefinition.tool_choice, ToolChoiceValue);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(
+  VoiceAgentLlmGeneratedGreetingConfig.tool_choice,
+  ToolChoiceValue
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(
+  VoiceAgentSessionUpdateConfig.tool_choice,
+  ToolChoiceValue
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(
+  VoiceAgentSessionResponseConfig.tool_choice,
+  ToolChoiceValue
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(
+  VoiceAgentResponseCreateParams.tool_choice,
+  ToolChoiceValue
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(
+  OpenAI.RealtimeBetaResponseCreateParams.tool_choice,
+  ToolChoiceValue
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(
+  OpenAI.RealtimeSessionCreateRequestGA.tool_choice,
+  ToolChoiceValue
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(
+  OpenAI.RealtimeResponseCreateParams.tool_choice,
+  ToolChoiceValue
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(
+  OpenAI.RealtimeSessionCreateResponseGA.tool_choice,
+  ToolChoiceValue
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(OpenAI.ResponseProperties.tool_choice, ToolChoiceValue);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(OpenAI.TokenCountsBody.tool_choice, ToolChoiceValue);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(OpenAI.BetaTokenCountsBody.tool_choice, ToolChoiceValue);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(
+  OpenAI.BetaResponseProperties.tool_choice,
+  ToolChoiceValue
+);
 
 // AI Tooling: openai-java de-dup
 // Suppress emission of standalone models that are exact duplicates of openai-java classes.
@@ -995,16 +1057,8 @@ model OpenAIRealtimeResponseStatus {}
   "java"
 );
 
-// Do NOT map OpenAI.ToolChoiceFunction / OpenAI.ToolChoiceMCP to their openai-java equivalents
-// (com.openai.models.responses.ToolChoiceFunction / ToolChoiceMcp). Although both are field-for-field
-// duplicates, they are discriminated subtypes of `ToolChoiceParam` (@discriminator("type")). Substituting a
-// subtype with an external identity type strips the discriminator the Java emitter needs, and generation
-// fails with:
-//   IllegalArgumentException: discriminator not found in type ToolChoiceFunction and its parents
-// This matches the general rule that members of a discriminator hierarchy are structural equivalents, not
-// actionable duplicates. Verified empirically against tsp-client update; do not re-attempt without emitter
-// support for external types in discriminated hierarchies.
-//   ConversationResource → com.openai.models.conversations.Conversation
+// Do not map ToolChoiceFunction or ToolChoiceMCP individually to their openai-java equivalents: external identity
+// types break their discriminator hierarchy. The property changes above remove all current uses instead.
 @@alternateType(
   OpenAI.ConversationResource,
   {
