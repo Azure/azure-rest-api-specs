@@ -222,6 +222,11 @@ jobs:
           path: repositories/azure-rest-api-specs
           persist-credentials: false
 
+      - name: Install specification repository dependencies
+        if: steps.resolve-trigger.outputs.should-run == 'true'
+        run: npm ci
+        working-directory: repositories/azure-rest-api-specs
+
       - name: Resolve target SDK repository
         if: steps.resolve-trigger.outputs.should-run == 'true'
         id: resolve-sdk-repository
@@ -411,15 +416,22 @@ jobs:
                   const breakingChange = String(details.breakingChange ?? change)
                     .trim()
                     .replaceAll("\r", "")
-                    .replaceAll("\n", " ");
-                  return [`- **${breakingChange}**: ${resolution.replaceAll("\r", "").replaceAll("\n", " ")}`];
+                    .replaceAll("\n", " ")
+                    .replaceAll("|", "\\|");
+                  const escapedResolution = resolution
+                    .replaceAll("\r", "")
+                    .replaceAll("\n", " ")
+                    .replaceAll("|", "\\|");
+                  return [`| ${breakingChange} | ${escapedResolution} |`];
                 });
                 return [
-                  `### ${project.typespecProjectPath}`,
+                  `* **Typespec Project:** ${project.typespecProjectPath}`,
                   "",
+                  "| Breaking change | Resolution |",
+                  "| --- | --- |",
                   ...(resolvedChanges.length
                     ? resolvedChanges
-                    : ["- No breaking changes with suggested resolutions were found."]),
+                    : ["| None | No suggested resolutions were found. |"]),
                 ];
               }),
             );
@@ -428,6 +440,7 @@ jobs:
             const report = [
               "## SDK breaking-change mitigation result",
               "",
+              "**Resolved Breaking Changes:**",
               ...projectReports.flatMap((projectReport) => [...projectReport, ""]),
               mitigationPullRequest
                 ? `**Mitigation pull request:** ${mitigationPullRequest}`
