@@ -1078,7 +1078,7 @@ describe("generateSdkForBatchSpecs", () => {
         specPath: mockSpecPath,
         packageName: "@azure/arm-compute",
         executionResult: "succeeded",
-        durationMs: 1_500,
+        durationSeconds: 1.5,
       }),
       expect.objectContaining({
         eventType: "SdkBatchGenerationSpecResult",
@@ -1086,15 +1086,13 @@ describe("generateSdkForBatchSpecs", () => {
         specPath: mockSpecPath,
         packageName: "@azure/arm-vmware",
         executionResult: "succeeded",
-        durationMs: 1_500,
+        durationSeconds: 1.5,
       }),
     ]);
     const markdownContent = String((fs.writeFileSync as Mock).mock.calls[0][1]);
     expect(markdownContent).toContain("## TypeSpec Package Run Times");
-    expect(markdownContent).toContain(
-      `| ${mockSpecPath} | @azure/arm-compute | succeeded | 1500 |`,
-    );
-    expect(markdownContent).toContain(`| ${mockSpecPath} | @azure/arm-vmware | succeeded | 1500 |`);
+    expect(markdownContent).toContain(`| ${mockSpecPath} | @azure/arm-compute | succeeded | 1.5 |`);
+    expect(markdownContent).toContain(`| ${mockSpecPath} | @azure/arm-vmware | succeeded | 1.5 |`);
   });
 
   test("should emit telemetry and runtime Markdown for sample TypeSpec packages", async () => {
@@ -1145,7 +1143,7 @@ describe("generateSdkForBatchSpecs", () => {
     );
     const markdownContent = String((fs.writeFileSync as Mock).mock.calls[0][1]);
     expect(markdownContent).toContain(
-      `| ${mockSpecPath} | @azure-rest/widget-manager | warning | 1500 |`,
+      `| ${mockSpecPath} | @azure-rest/widget-manager | warning | 1.5 |`,
     );
   });
 

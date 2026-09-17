@@ -794,10 +794,10 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
       const packageNames = executionReport.packages.length
         ? executionReport.packages.map((pkg) => pkg.packageName ?? "")
         : [""];
-      const durationMs = Math.round(performance.now() - specStartTime);
+      const durationSeconds = Math.round(performance.now() - specStartTime) / 1000;
       for (const packageName of packageNames) {
         runtimeMarkdownRows.push(
-          `| ${specConfigs.tspconfigPath} | ${packageName || "(not reported)"} | ${executionReport.executionResult} | ${durationMs} |`,
+          `| ${specConfigs.tspconfigPath} | ${packageName || "(not reported)"} | ${executionReport.executionResult} | ${durationSeconds} |`,
         );
         if (telemetrySpecType) {
           const telemetry = {
@@ -810,7 +810,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
             specPath: specConfigs.tspconfigPath,
             packageName,
             executionResult: executionReport.executionResult,
-            durationMs,
+            durationSeconds,
             buildId: process.env.BUILD_BUILDID ?? "",
             pipelineUrl: `${process.env.SYSTEM_COLLECTIONURI ?? ""}${process.env.SYSTEM_TEAMPROJECT ?? ""}/_build/results?buildId=${process.env.BUILD_BUILDID ?? ""}`,
           };
@@ -844,7 +844,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   }
   if (runtimeMarkdownRows.length > 0) {
     markdownContent += "## TypeSpec Package Run Times\n";
-    markdownContent += "| Spec Path | Package Name | Result | Run Time (ms) |\n";
+    markdownContent += "| Spec Path | Package Name | Result | Run Time (seconds) |\n";
     markdownContent += "| --- | --- | --- | ---: |\n";
     markdownContent += `${runtimeMarkdownRows.join("\n")}\n`;
   }
