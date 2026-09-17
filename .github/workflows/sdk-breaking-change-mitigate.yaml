@@ -3,9 +3,6 @@ name: SDK Breaking Change Mitigation
 on:
   issue_comment:
     types: [created, edited]
-  workflow_run:
-    workflows: ["SDK Breaking Change Analysis"]
-    types: [completed]
   workflow_dispatch:
     inputs:
       pr_number:
@@ -31,8 +28,6 @@ jobs:
       github.event.issue.pull_request != null &&
       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association) &&
       startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate')) ||
-      (github.event_name == 'workflow_run' &&
-      github.event.workflow_run.conclusion == 'success') ||
       github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     env:
@@ -78,35 +73,6 @@ jobs:
               sdkLanguage = parts[2];
               triggerCommentId = String(context.payload.comment.id);
               core.setOutput("should-run", "true");
-            } else {
-              const artifacts = await github.paginate(
-                github.rest.actions.listWorkflowRunArtifacts,
-                {
-                  ...context.repo,
-                  run_id: context.payload.workflow_run.id,
-                  per_page: 100,
-                },
-              );
-              const artifact = artifacts.find(
-                ({ name, expired }) => name === "sdk-breaking-change-results" && !expired,
-              );
-              if (!artifact) {
-                core.info("The completed workflow run has no SDK breaking-change result artifact.");
-                core.setOutput("should-run", "false");
-                return;
-              }
-              const download = await github.rest.actions.downloadArtifact({
-                ...context.repo,
-                artifact_id: artifact.id,
-                archive_format: "zip",
-              });
-              const fs = await import("node:fs/promises");
-              const path = await import("node:path");
-              const artifactPath = path.join(process.env.RUNNER_TEMP, "analysis-results.zip");
-              await fs.writeFile(artifactPath, Buffer.from(download.data));
-              core.setOutput("artifact-path", artifactPath);
-              core.setOutput("should-run", "true");
-              return;
             }
 
             core.setOutput("pull-number", pullNumber);
@@ -114,7 +80,7 @@ jobs:
             core.setOutput("trigger-comment-id", triggerCommentId);
 
       - name: Find analysis results from pull request comment
-        if: github.event_name != 'workflow_run' && steps.resolve-trigger.outputs.should-run == 'true'
+        if: steps.resolve-trigger.outputs.should-run == 'true'
         id: find-analysis-results
         uses: actions/github-script@v9
         env:
@@ -189,12 +155,11 @@ jobs:
         id: read-trigger
         shell: bash
         env:
-          ARTIFACT_PATH: ${{ steps.resolve-trigger.outputs.artifact-path || steps.find-analysis-results.outputs.artifact-path }}
+          ARTIFACT_PATH: ${{ steps.find-analysis-results.outputs.artifact-path }}
           RESULT_PATHS: ${{ steps.find-analysis-results.outputs.result-paths }}
           PR_NUMBER: ${{ steps.resolve-trigger.outputs.pull-number }}
           SDK_LANGUAGE: ${{ steps.resolve-trigger.outputs.sdk-language }}
           TRIGGER_COMMENT_ID: ${{ steps.resolve-trigger.outputs.trigger-comment-id }}
-          TRIGGER_NAME: ${{ github.event_name }}
         run: |
           set -euo pipefail
           results_dir="$RUNNER_TEMP/analysis-results"
@@ -212,9 +177,6 @@ jobs:
             echo "pull-number=$(jq -r '.pullNumber' "$trigger_path")" >> "$GITHUB_OUTPUT"
             echo "sdk-language=$(jq -r '.sdkLanguage' "$trigger_path")" >> "$GITHUB_OUTPUT"
             echo "trigger-comment-id=$(jq -r '.triggerCommentId' "$trigger_path")" >> "$GITHUB_OUTPUT"
-          elif [[ "$TRIGGER_NAME" == "workflow_run" ]]; then
-            echo "Analysis artifact does not contain trigger.json." >&2
-            exit 1
           else
             echo "pull-number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
             echo "sdk-language=$SDK_LANGUAGE" >> "$GITHUB_OUTPUT"
