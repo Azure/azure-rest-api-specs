@@ -217,7 +217,7 @@ model TelephonyCampaignProgress {
   execution: TelephonyCampaignExecutionProgress;
 }
 
-/** Business lifecycle of a Campaign; only preparation is an LRO. */
+/** Business lifecycle of a Campaign; only preparation is an LRO. Expiry is a recipient outcome, never a Campaign status. An executed Campaign completes when all recipient tasks are terminal, even if some expired. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCampaignStatus {
   string,
@@ -275,13 +275,11 @@ model TelephonyCampaign {
   @visibility(Lifecycle.Read) progress: TelephonyCampaignProgress;
 }
 
-/** Outcome of one imported row. */
+/** Execution outcome of one recipient. Validation belongs to the Campaign and row validation_error, not this status. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCampaignRecipientResultStatus {
   string,
-  /** No execution is allowed until the initial validation succeeds for all rows. */
-  validating: "validating",
-  invalid: "invalid",
+  /** Not executed, including unchecked or invalid input. Does not imply validation passed or dialing is authorized. */
   pending: "pending",
   active: "active",
   completed: "completed",
@@ -314,7 +312,7 @@ model TelephonyCampaignRecipientResult {
   /** Resolved earliest dispatch time. Absent for immediate mode or an invalid source value. */
   scheduled_at?: FoundryTimestamp;
 
-  /** Initial preparation outcome until preparation succeeds, then execution outcome. Agent revalidation errors do not replace pending/active/terminal execution states. */
+  /** Execution outcome only. Before initial execution, rows remain pending, including after preparation fails or is cancelled. Validation errors never replace execution state; Campaign admission controls dialing. */
   status: TelephonyCampaignRecipientResultStatus;
 
   /** Execution error; never includes secrets or raw source values. */
@@ -364,7 +362,7 @@ alias TelephonyCampaignFilters = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agent-contained named resources use FoundryDataPlanePreviewOperation with shared job envelopes and paging; shared job templates have fixed project-level ID parameters."
 @tag("TelephonyCampaigns")
 interface TelephonyCampaigns {
-  /** Starts pending work or continues a paused Campaign through required Agent-version checks. Never replays terminal recipients. With a current ETag, repeated start while running returns current state. Validating, cancelling and terminal Campaigns reject start with 409. */
+  /** Starts pending work or continues a paused Campaign through required Agent-version checks. Never replays terminal recipients. With a current ETag, repeated start while running returns current state. Any unfinished preparation or Agent validation rejects start with 409, including a paused Campaign with an in-flight check: it cannot authorize continuation or queue another check. Cancelling and terminal Campaigns also reject start. A stale If-Match returns 412 before state checks. */
   @post
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}:start")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
