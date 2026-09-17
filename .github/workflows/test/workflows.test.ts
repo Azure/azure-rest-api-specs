@@ -94,8 +94,10 @@ describe("workflow files", () => {
     try {
       await copyFile(resolve(root, ".oxlintrc.json"), resolve(folder, ".oxlintrc.json"));
       const included = [
+        ".github",
         ".github/shared",
         ".github/workflows",
+        "eng/tools",
         ...[
           "lint-diff",
           "oav-runner",
@@ -109,18 +111,26 @@ describe("workflow files", () => {
         ].map((name) => `eng/tools/${name}`),
       ];
       const excluded = [
-        "openapi-diff-runner",
-        "sdk-suppressions",
-        "summarize-impact",
-        "typespec-migration-validation",
-      ].map((name) => `eng/tools/${name}`);
+        ".",
+        ".config",
+        "specification",
+        "eng/common",
+        "eng/scripts",
+        "scripts",
+        ...[
+          "openapi-diff-runner",
+          "sdk-suppressions",
+          "summarize-impact",
+          "typespec-migration-validation",
+        ].map((name) => `eng/tools/${name}`),
+      ];
       for (const path of [...included, ...excluded]) {
         await mkdir(resolve(folder, path), { recursive: true });
         await writeFile(resolve(folder, path, "index.ts"), "export const value = 1;\n");
       }
       const { stdout } = await execFile(
         process.execPath,
-        [resolve(root, "node_modules/oxlint/bin/oxlint"), ".github", "eng/tools", "--debug=files"],
+        [resolve(root, "node_modules/oxlint/bin/oxlint"), ".", "--debug=files"],
         { cwd: folder },
       );
       expect(stdout.trim().replaceAll("\\", "/").split(/\r?\n/).sort()).toEqual(

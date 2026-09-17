@@ -45,7 +45,8 @@ Below are code convention we strive to follow in `eng` directory:
 
 - Run `pnpm lint` from the repository root to lint the previously linted packages
   in `.github` and `eng/tools` in one oxlint invocation. Use `pnpm lint:fix` to apply
-  safe fixes.
+  safe fixes. File selection lives in the root `.oxlintrc.json`, so the root command
+  is simply `oxlint .`; other repository folders and root-level files are excluded.
 - The root `.oxlintrc.json` is the single lint configuration. It preserves the previous
   ESLint recommended and TypeScript recommended type-checked rules, with type-aware
   linting provided by `oxlint-tsgolint`. Duplicate arguments and octal literals are
