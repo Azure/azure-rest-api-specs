@@ -52,7 +52,6 @@ namespace Common {
      */
     type?: string;
   }
-
 }
 
 namespace Microsoft.Network {
@@ -62,8 +61,10 @@ namespace Microsoft.Network {
   union EnableOnlyIPv6PeeringState {
     /** IPv6-only peering is enabled. */
     Enabled: "Enabled",
+
     /** IPv6-only peering is disabled. */
     Disabled: "Disabled",
+
     string,
   }
 }
@@ -4052,17 +4053,9 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 
-@@clientName(
-  Microsoft.Network.Metric,
-  "ExpressRoutePeeringMetric",
-  "csharp"
-);
+@@clientName(Microsoft.Network.Metric, "ExpressRoutePeeringMetric", "csharp");
 
-@@clientName(
-  Microsoft.Network.PeeringStats.timestamp,
-  "CapturedAt",
-  "csharp"
-);
+@@clientName(Microsoft.Network.PeeringStats.timestamp, "CapturedAt", "csharp");
 
 @@clientName(
   Microsoft.Network.PortMapping,
