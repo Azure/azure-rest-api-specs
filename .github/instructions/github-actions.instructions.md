@@ -110,6 +110,7 @@ export async function getChangedFiles(options: ChangedFilesOptions = {}): Promis
 
 ### TypeScript Integration
 
+- Shared compiler options live in `.github/tsconfig.base.json`, following the TypeSpec repo's ES2024/NodeNext baseline without an external preset. The two project configs extend it and define their own file selection.
 - TypeScript is configured with `noEmit`, `allowImportingTsExtensions`, `erasableSyntaxOnly`, and `verbatimModuleSyntax`
 - Run `pnpm run lint:tsc` to type-check the sources
 - Import types with `import type`; use frozen objects and value-union type aliases instead of enums
