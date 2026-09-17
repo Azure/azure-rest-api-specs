@@ -492,7 +492,7 @@
         "tags": [
           "Clusters"
         ],
-        "description": "Creates a new HorizonDB cluster or replaces an existing cluster. PointInTimeRestore creates the new Cluster resource and hydrates its service-owned database storage from an available source backup. It does not clone source pools, Pool-scoped endpoints, firewall rules, parameter-group associations, or other child resources. The new Cluster receives its service-generated Cluster-scoped Endpoint named cluster. PostgreSQL version is inherited from backup metadata; all other new-cluster configuration comes from the request or service defaults. Until cross-region point-in-time restore is supported, the target cluster location must match the source cluster location; a cross-region request is rejected synchronously with 400 CrossRegionPointInTimeRestoreNotSupported and does not create or modify a resource.",
+        "description": "Creates a new HorizonDB cluster or replaces an existing cluster. PointInTimeRestore creates the new Cluster resource and hydrates its service-owned database storage from an available source backup. It does not clone source pools, Pool-scoped endpoints, firewall rules, parameter-group associations, or other child resources. The new Cluster receives its service-generated Cluster-scoped Endpoint named cluster. For point-in-time restore, postgreSqlVersion must be omitted because the service obtains it from backup metadata; all other new-cluster configuration comes from the request or service defaults. For same-location point-in-time restore, creationSourceClusterLocation is optional. For cross-location point-in-time restore, creationSourceClusterLocation is required and must identify the source cluster's Azure location.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -519,7 +519,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Cluster"
+              "$ref": "#/definitions/ClusterCreateRequest"
             }
           }
         ],
@@ -566,11 +566,17 @@
           }
         },
         "x-ms-examples": {
+          "Create a HorizonDB cluster with customer-managed key data encryption": {
+            "$ref": "./examples/Clusters_CreateOrUpdateWithDataEncryption.json"
+          },
           "Create a PostgreSQL 18 HorizonDB cluster with minimum configuration and service defaults": {
             "$ref": "./examples/Clusters_CreateOrUpdateMinimumDefaults.json"
           },
           "Create or update a HorizonDB cluster": {
             "$ref": "./examples/Clusters_CreateOrUpdate.json"
+          },
+          "Restore a HorizonDB cluster across Azure regions to a point in time": {
+            "$ref": "./examples/Clusters_CreateOrUpdateCrossRegionPointInTimeRestore.json"
           },
           "Restore a HorizonDB cluster to a point in time": {
             "$ref": "./examples/Clusters_CreateOrUpdatePointInTimeRestore.json"
@@ -649,6 +655,9 @@
         "x-ms-examples": {
           "Rename the PostgreSQL administrator role and reset its password while updating a HorizonDB cluster": {
             "$ref": "./examples/Clusters_Update.json"
+          },
+          "Rotate the customer-managed keys used by a HorizonDB cluster": {
+            "$ref": "./examples/Clusters_UpdateDataEncryption.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2854,103 +2863,6 @@
             "$ref": "./examples/LogCaptureConfigurations_Get.json"
           }
         }
-      },
-      "put": {
-        "operationId": "LogCaptureConfigurations_CreateOrUpdate",
-        "tags": [
-          "LogCaptureConfigurations"
-        ],
-        "description": "Creates or replaces a log capture configuration for a HorizonDB cluster.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "logCaptureConfigurationName",
-            "in": "path",
-            "description": "The name of the LogCaptureConfiguration",
-            "required": true,
-            "type": "string",
-            "pattern": "^PostgreSqlServer$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LogCaptureConfiguration"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The response returned when an asynchronous HorizonDB resource replacement is accepted.",
-            "schema": {
-              "$ref": "#/definitions/LogCaptureConfiguration"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "201": {
-            "description": "Resource 'LogCaptureConfiguration' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/LogCaptureConfiguration"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Enable PostgreSQL server log capture": {
-            "$ref": "./examples/LogCaptureConfigurations_CreateOrUpdate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/LogCaptureConfiguration"
-        },
-        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "LogCaptureConfigurations_Update",
@@ -5841,6 +5753,10 @@
         ]
       }
     },
+    "Azure.Core.armResourceType": {
+      "type": "string",
+      "description": "Represents an Azure Resource Type."
+    },
     "Backup": {
       "type": "object",
       "description": "Represents an available backup for a HorizonDB cluster.",
@@ -7336,6 +7252,161 @@
         ]
       }
     },
+    "ClusterCreateProperties": {
+      "type": "object",
+      "description": "Properties accepted when creating or replacing a HorizonDB cluster.",
+      "properties": {
+        "creationMode": {
+          "$ref": "#/definitions/ClusterCreateMode",
+          "description": "The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must be omitted because it is obtained from the backup metadata, and creationSourceClusterLocation is required when the source and target cluster locations differ. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "pointInTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The requested point in time, in UTC, to restore from. This property is required when creationMode is PointInTimeRestore and must be absent for other creation modes or when creationMode is omitted. The service honors this value for same-location and cross-location restores. This property can only be specified during resource creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "creationSourceClusterResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the source HorizonDB cluster used by the selected creation mode. This property is required for PointInTimeRestore and other source-based creation modes, and must be absent when creationMode is Create or omitted. A source cluster does not need to have a pool to be restored, provided an available backup exists. This immutable creation-provenance value does not change after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HorizonDb/clusters"
+              }
+            ]
+          }
+        },
+        "creationSourceClusterLocation": {
+          "type": "string",
+          "description": "The Azure location of the source HorizonDB cluster used for point-in-time restore. This property is optional when the source and target cluster locations are the same. It is required when the source cluster location differs from the target cluster location and must identify the source cluster's location. This property must be absent for creation modes other than PointInTimeRestore or when creationMode is omitted. This immutable creation-provenance value does not change after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "network": {
+          "$ref": "#/definitions/Network",
+          "description": "The network configuration for the cluster. When this object is omitted, the service defaults it to publicAccess Disabled.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "backup": {
+          "$ref": "#/definitions/BackupProperties",
+          "description": "The backup configuration for the cluster.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "dataEncryption": {
+          "$ref": "#/definitions/HorizonDbClusterDataEncryption",
+          "description": "The data encryption configuration for the cluster. When omitted during cluster creation, the service uses SystemManaged encryption.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "state": {
+          "$ref": "#/definitions/ClusterState",
+          "description": "Current state of the cluster.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the cluster.",
+          "readOnly": true
+        },
+        "readWritePool": {
+          "$ref": "#/definitions/ReadWritePoolProperties",
+          "description": "The current designated read-write pool and read-write status for the cluster.",
+          "readOnly": true
+        },
+        "postgreSqlVersion": {
+          "$ref": "#/definitions/PostgreSqlVersion",
+          "description": "The PostgreSQL major version for the new cluster. This property is required for ordinary cluster creation and must be omitted when creationMode is PointInTimeRestore because the service obtains the version from the source backup metadata.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "state",
+        "provisioningState",
+        "readWritePool"
+      ]
+    },
+    "ClusterCreateRequest": {
+      "type": "object",
+      "description": "A request to create or replace a HorizonDB cluster.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.Core.armResourceType",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/HorizonDbClusterManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/ClusterCreateProperties",
+          "description": "The properties for the selected cluster creation mode."
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ]
+    },
     "ClusterFeatureCapability": {
       "type": "object",
       "description": "A HorizonDB Cluster feature supported in a location.",
@@ -7398,7 +7469,7 @@
       "properties": {
         "postgreSqlVersion": {
           "$ref": "#/definitions/PostgreSqlVersion",
-          "description": "The PostgreSQL major version used by the HorizonDB cluster. API version 2026-10-01-preview accepts 17 and 18 when creating a cluster. This property is required on every PUT and is immutable after creation. On replacement, resubmitting the cluster's current major version is accepted, but changing it, including from 17 to 18 or from 18 to 17, is rejected. This API version does not support in-place PostgreSQL major-version upgrades. For point-in-time restore, PostgreSQL version is the only new-cluster property inherited from the source backup metadata, and the value in the request must match that version. All other new-cluster configuration comes from the request or service defaults.",
+          "description": "The PostgreSQL major version used by the HorizonDB cluster. API version 2026-10-01-preview supports versions 17 and 18. For ordinary cluster creation, the version is supplied in the request and is immutable after creation. For point-in-time restore, the service obtains the version from the source backup metadata and the request must omit this property. This API version does not support in-place PostgreSQL major-version upgrades.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -7406,7 +7477,7 @@
         },
         "creationMode": {
           "$ref": "#/definitions/ClusterCreateMode",
-          "description": "The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must match the source backup's major version, and the target cluster location must match the source cluster location until cross-region point-in-time restore is supported. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.",
+          "description": "The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must be omitted because it is obtained from the backup metadata, and creationSourceClusterLocation is required when the source and target cluster locations differ. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -7415,7 +7486,7 @@
         "pointInTimeUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "The requested point in time, in UTC, to restore from. This property is required when creationMode is PointInTimeRestore and must be absent for other creation modes or when creationMode is omitted. The service honors this value for same-region restore. Until cross-region point-in-time restore is supported, the target cluster location must match the source cluster location; a cross-region request is rejected synchronously with 400 CrossRegionPointInTimeRestoreNotSupported and does not create or modify a resource. This property can only be specified during resource creation.",
+          "description": "The requested point in time, in UTC, to restore from. This property is required when creationMode is PointInTimeRestore and must be absent for other creation modes or when creationMode is omitted. The service honors this value for same-location and cross-location restores. This property can only be specified during resource creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -7424,7 +7495,7 @@
         "creationSourceClusterResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The Azure resource ID of the source HorizonDB cluster used by the selected creation mode. This property is required for PointInTimeRestore and other source-based creation modes, and must be absent when creationMode is Create or omitted. Until cross-region point-in-time restore is supported, PointInTimeRestore requires the target and source clusters to be in the same Azure region. A source cluster does not need to have a pool to be restored, provided an available backup exists. This immutable creation-provenance value does not change after creation.",
+          "description": "The Azure resource ID of the source HorizonDB cluster used by the selected creation mode. This property is required for PointInTimeRestore and other source-based creation modes, and must be absent when creationMode is Create or omitted. A source cluster does not need to have a pool to be restored, provided an available backup exists. This immutable creation-provenance value does not change after creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -7436,6 +7507,14 @@
               }
             ]
           }
+        },
+        "creationSourceClusterLocation": {
+          "type": "string",
+          "description": "The Azure location of the source HorizonDB cluster used for point-in-time restore. This property is optional when the source and target cluster locations are the same. It is required when the source cluster location differs from the target cluster location and must identify the source cluster's location. This property must be absent for creation modes other than PointInTimeRestore or when creationMode is omitted. This immutable creation-provenance value does not change after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "network": {
           "$ref": "#/definitions/Network",
@@ -7449,6 +7528,15 @@
         "backup": {
           "$ref": "#/definitions/BackupProperties",
           "description": "The backup configuration for the cluster.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "dataEncryption": {
+          "$ref": "#/definitions/HorizonDbClusterDataEncryption",
+          "description": "The data encryption configuration for the cluster. When omitted during cluster creation, the service uses SystemManaged encryption.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -7492,6 +7580,13 @@
         "backup": {
           "$ref": "#/definitions/BackupPropertiesForPatchUpdate",
           "description": "The backup configuration for the cluster.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "dataEncryption": {
+          "$ref": "#/definitions/HorizonDbClusterDataEncryptionForPatchUpdate",
+          "description": "The data encryption configuration to update for the cluster. Omitted properties preserve their current values.",
           "x-ms-mutability": [
             "update"
           ]
@@ -8042,6 +8137,188 @@
         ]
       }
     },
+    "HorizonDbClusterDataEncryption": {
+      "type": "object",
+      "description": "The Cluster-level data encryption configuration. For AzureKeyVault encryption, primaryKeyUri and primaryUserAssignedIdentityId are required. When geographically redundant backup is enabled, geoBackupKeyUri and geoBackupUserAssignedIdentityId are also required. Customer-managed key identities must also be assigned to the Cluster through its top-level identity property. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation. For SystemManaged encryption, key and identity properties must be omitted.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/HorizonDbClusterDataEncryptionType",
+          "description": "The type of data encryption used by the cluster.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "primaryKeyUri": {
+          "type": "string",
+          "description": "The Azure Key Vault key URI used to encrypt the cluster's primary storage. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "primaryUserAssignedIdentityId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "primaryEncryptionKeyStatus": {
+          "$ref": "#/definitions/HorizonDbClusterEncryptionKeyStatus",
+          "description": "The validation status of the primary encryption key. This property is returned for AzureKeyVault encryption and is absent for SystemManaged encryption.",
+          "readOnly": true
+        },
+        "geoBackupKeyUri": {
+          "type": "string",
+          "description": "The Azure Key Vault key URI used to encrypt geographically redundant backups. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "geoBackupUserAssignedIdentityId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the user-assigned managed identity used to access the geographically redundant backup encryption key. The identity must also be assigned to the Cluster through its top-level identity property.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "geoBackupEncryptionKeyStatus": {
+          "$ref": "#/definitions/HorizonDbClusterEncryptionKeyStatus",
+          "description": "The validation status of the geographically redundant backup encryption key. This property is returned for AzureKeyVault encryption when geographically redundant backup is enabled.",
+          "readOnly": true
+        }
+      }
+    },
+    "HorizonDbClusterDataEncryptionForPatchUpdate": {
+      "type": "object",
+      "description": "Properties for sparsely updating Cluster-level data encryption. Omitted properties preserve their current values.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/HorizonDbClusterDataEncryptionType",
+          "description": "The type of data encryption used by the cluster.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "primaryKeyUri": {
+          "type": "string",
+          "description": "The Azure Key Vault key URI used to encrypt the cluster's primary storage. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "primaryUserAssignedIdentityId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property.",
+          "x-ms-mutability": [
+            "update"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "geoBackupKeyUri": {
+          "type": "string",
+          "description": "The Azure Key Vault key URI used to encrypt geographically redundant backups. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "geoBackupUserAssignedIdentityId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the user-assigned managed identity used to access the geographically redundant backup encryption key. The identity must also be assigned to the Cluster through its top-level identity property.",
+          "x-ms-mutability": [
+            "update"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "HorizonDbClusterDataEncryptionType": {
+      "type": "string",
+      "description": "The type of data encryption used by a HorizonDB cluster.",
+      "enum": [
+        "SystemManaged",
+        "AzureKeyVault"
+      ],
+      "x-ms-enum": {
+        "name": "HorizonDbClusterDataEncryptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemManaged",
+            "value": "SystemManaged",
+            "description": "Data encryption is managed by Azure using platform-managed keys."
+          },
+          {
+            "name": "AzureKeyVault",
+            "value": "AzureKeyVault",
+            "description": "Data encryption uses customer-managed keys stored in Azure Key Vault."
+          }
+        ]
+      }
+    },
+    "HorizonDbClusterEncryptionKeyStatus": {
+      "type": "string",
+      "description": "The validation status of a customer-managed encryption key used by a HorizonDB cluster.",
+      "enum": [
+        "Valid",
+        "Invalid"
+      ],
+      "x-ms-enum": {
+        "name": "HorizonDbClusterEncryptionKeyStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Valid",
+            "value": "Valid",
+            "description": "The encryption key is valid and accessible to the configured user-assigned managed identity."
+          },
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "The encryption key is invalid or inaccessible to the configured user-assigned managed identity."
+          }
+        ]
+      }
+    },
     "HorizonDbClusterIdentityType": {
       "type": "string",
       "description": "The managed identity types supported by a HorizonDB cluster.",
@@ -8167,7 +8444,7 @@
     },
     "LogCaptureConfiguration": {
       "type": "object",
-      "description": "The configuration for capturing one type of HorizonDB log.",
+      "description": "A predefined log capture configuration created by the service for a HorizonDB cluster.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/LogCaptureConfigurationProperties",
@@ -8220,8 +8497,7 @@
           "description": "Specifies whether HorizonDB captures this type of log. Disabling capture stops the production of new log files; existing files remain available until their retention period expires.",
           "x-ms-mutability": [
             "read",
-            "update",
-            "create"
+            "update"
           ]
         },
         "retentionDays": {
@@ -8232,8 +8508,7 @@
           "maximum": 35,
           "x-ms-mutability": [
             "read",
-            "update",
-            "create"
+            "update"
           ]
         },
         "provisioningState": {

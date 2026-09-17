@@ -12,7 +12,7 @@ using Azure.ResourceManager;
 namespace Microsoft.HorizonDb;
 
 @added(Versions.v2026_10_01_preview)
-@doc("The configuration for capturing one type of HorizonDB log.")
+@doc("A predefined log capture configuration created by the service for a HorizonDB cluster.")
 @parentResource(Cluster)
 model LogCaptureConfiguration
   is Azure.ResourceManager.ProxyResource<LogCaptureConfigurationProperties> {
@@ -28,13 +28,13 @@ model LogCaptureConfiguration
 @doc("The settings for capturing a specific type of HorizonDB log.")
 model LogCaptureConfigurationProperties {
   @doc("Specifies whether HorizonDB captures this type of log. Disabling capture stops the production of new log files; existing files remain available until their retention period expires.")
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  @visibility(Lifecycle.Update, Lifecycle.Read)
   state: LogCaptureState;
 
   @doc("The number of days captured log files are retained.")
   @minValue(1)
   @maxValue(35)
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  @visibility(Lifecycle.Update, Lifecycle.Read)
   retentionDays: int32;
 
   @doc("The provisioning state of the log capture configuration.")
@@ -145,25 +145,14 @@ model LogFileDownloadUrl {
   expiresAtUtc: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "A log capture configuration is disabled through its state property rather than deleted."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-put-operation" "Log capture configurations are predefined and created by the service with the parent cluster. Customers can modify existing configurations but cannot create or replace them."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Log capture configurations are predefined service-created resources and cannot be deleted. Customers disable log capture through the state property."
 @added(Versions.v2026_10_01_preview)
 @doc("Operations for HorizonDB log capture configurations.")
 @armResourceOperations
 interface LogCaptureConfigurations {
   @doc("Gets a log capture configuration for a HorizonDB cluster.")
   get is ArmResourceRead<LogCaptureConfiguration>;
-
-  @doc("Creates or replaces a log capture configuration for a HorizonDB cluster.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    LogCaptureConfiguration,
-    LroHeaders = HorizonDbResourceLroHeaders<LogCaptureConfiguration>,
-    Response =
-      | HorizonDbResourceUpdatedLroResponse<LogCaptureConfiguration>
-      | ArmResourceCreatedResponse<
-          LogCaptureConfiguration,
-          HorizonDbResourceLroHeaders<LogCaptureConfiguration>
-        >
-  >;
 
   @doc("Updates a log capture configuration. Omitted properties preserve their current values.")
   update is ArmCustomPatchAsync<

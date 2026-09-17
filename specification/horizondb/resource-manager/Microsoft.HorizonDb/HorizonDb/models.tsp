@@ -292,7 +292,7 @@ model ClusterProperties {
   legacyPgVersion?: string;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The PostgreSQL major version used by the HorizonDB cluster. API version 2026-10-01-preview accepts 17 and 18 when creating a cluster. This property is required on every PUT and is immutable after creation. On replacement, resubmitting the cluster's current major version is accepted, but changing it, including from 17 to 18 or from 18 to 17, is rejected. This API version does not support in-place PostgreSQL major-version upgrades. For point-in-time restore, PostgreSQL version is the only new-cluster property inherited from the source backup metadata, and the value in the request must match that version. All other new-cluster configuration comes from the request or service defaults.")
+  @doc("The PostgreSQL major version used by the HorizonDB cluster. API version 2026-10-01-preview supports versions 17 and 18. For ordinary cluster creation, the version is supplied in the request and is immutable after creation. For point-in-time restore, the service obtains the version from the source backup metadata and the request must omit this property. This API version does not support in-place PostgreSQL major-version upgrades.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   postgreSqlVersion: PostgreSqlVersion;
 
@@ -302,7 +302,7 @@ model ClusterProperties {
   legacyCreateMode?: CreateModeCluster;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must match the source backup's major version, and the target cluster location must match the source cluster location until cross-region point-in-time restore is supported. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.")
+  @doc("The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must be omitted because it is obtained from the backup metadata, and creationSourceClusterLocation is required when the source and target cluster locations differ. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   creationMode?: ClusterCreateMode;
 
@@ -312,7 +312,7 @@ model ClusterProperties {
   legacyPointInTime?: utcDateTime;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The requested point in time, in UTC, to restore from. This property is required when creationMode is PointInTimeRestore and must be absent for other creation modes or when creationMode is omitted. The service honors this value for same-region restore. Until cross-region point-in-time restore is supported, the target cluster location must match the source cluster location; a cross-region request is rejected synchronously with 400 CrossRegionPointInTimeRestoreNotSupported and does not create or modify a resource. This property can only be specified during resource creation.")
+  @doc("The requested point in time, in UTC, to restore from. This property is required when creationMode is PointInTimeRestore and must be absent for other creation modes or when creationMode is omitted. The service honors this value for same-location and cross-location restores. This property can only be specified during resource creation.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   pointInTimeUtc?: utcDateTime;
 
@@ -322,13 +322,18 @@ model ClusterProperties {
   legacySourceClusterResourceId?: armResourceIdentifier;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The Azure resource ID of the source HorizonDB cluster used by the selected creation mode. This property is required for PointInTimeRestore and other source-based creation modes, and must be absent when creationMode is Create or omitted. Until cross-region point-in-time restore is supported, PointInTimeRestore requires the target and source clusters to be in the same Azure region. A source cluster does not need to have a pool to be restored, provided an available backup exists. This immutable creation-provenance value does not change after creation.")
+  @doc("The Azure resource ID of the source HorizonDB cluster used by the selected creation mode. This property is required for PointInTimeRestore and other source-based creation modes, and must be absent when creationMode is Create or omitted. A source cluster does not need to have a pool to be restored, provided an available backup exists. This immutable creation-provenance value does not change after creation.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   creationSourceClusterResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.HorizonDb/clusters";
     }
   ]>;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure location of the source HorizonDB cluster used for point-in-time restore. This property is optional when the source and target cluster locations are the same. It is required when the source cluster location differs from the target cluster location and must identify the source cluster's location. This property must be absent for creation modes other than PointInTimeRestore or when creationMode is omitted. This immutable creation-provenance value does not change after creation.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  creationSourceClusterLocation?: string;
 
   @removed(Versions.v2026_10_01_preview)
   @doc("The pool name for restore or replica operations.")
@@ -365,6 +370,11 @@ model ClusterProperties {
   @doc("The backup configuration for the cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   backup?: BackupProperties;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The data encryption configuration for the cluster. When omitted during cluster creation, the service uses SystemManaged encryption.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  dataEncryption?: HorizonDbClusterDataEncryption;
 
   @typeChangedFrom(Versions.v2026_10_01_preview, State)
   @madeRequired(Versions.v2026_10_01_preview)
@@ -613,6 +623,11 @@ model ClusterPropertiesForPatchUpdate {
   @doc("The backup configuration for the cluster.")
   @visibility(Lifecycle.Update)
   backup?: BackupPropertiesForPatchUpdate;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The data encryption configuration to update for the cluster. Omitted properties preserve their current values.")
+  @visibility(Lifecycle.Update)
+  dataEncryption?: HorizonDbClusterDataEncryptionForPatchUpdate;
 }
 
 @renamedFrom(Versions.v2026_10_01_preview, "HorizonDbClusterForPatchUpdate")
@@ -623,6 +638,26 @@ model ClusterForPatchUpdate {
 
   @doc("The properties that can be updated for a HorizonDB cluster.")
   properties?: ClusterPropertiesForPatchUpdate;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Properties accepted when creating or replacing a HorizonDB cluster.")
+model ClusterCreateProperties {
+  ...OmitProperties<ClusterProperties, "postgreSqlVersion">;
+
+  @doc("The PostgreSQL major version for the new cluster. This property is required for ordinary cluster creation and must be omitted when creationMode is PointInTimeRestore because the service obtains the version from the source backup metadata.")
+  @visibility(Lifecycle.Create)
+  postgreSqlVersion?: PostgreSqlVersion;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("A request to create or replace a HorizonDB cluster.")
+model ClusterCreateRequest {
+  ...Azure.ResourceManager.Foundations.TrackedResource;
+  ...HorizonDbClusterManagedServiceIdentityProperty;
+
+  @doc("The properties for the selected cluster creation mode.")
+  properties: ClusterCreateProperties;
 }
 
 @@added(Cluster.identity, Versions.v2026_05_01_preview);
@@ -1155,6 +1190,114 @@ model PasswordAuthenticationForPatchUpdate {
 model MicrosoftEntraAuthenticationForPatchUpdate {
   @doc("The Microsoft Entra authentication properties to update.")
   properties?: MicrosoftEntraAuthenticationPropertiesForPatchUpdate;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The type of data encryption used by a HorizonDB cluster.")
+union HorizonDbClusterDataEncryptionType {
+  string,
+
+  @doc("Data encryption is managed by Azure using platform-managed keys.")
+  SystemManaged: "SystemManaged",
+
+  @doc("Data encryption uses customer-managed keys stored in Azure Key Vault.")
+  AzureKeyVault: "AzureKeyVault",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The validation status of a customer-managed encryption key used by a HorizonDB cluster.")
+union HorizonDbClusterEncryptionKeyStatus {
+  string,
+
+  @doc("The encryption key is valid and accessible to the configured user-assigned managed identity.")
+  Valid: "Valid",
+
+  @doc("The encryption key is invalid or inaccessible to the configured user-assigned managed identity.")
+  Invalid: "Invalid",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The Cluster-level data encryption configuration. For AzureKeyVault encryption, primaryKeyUri and primaryUserAssignedIdentityId are required. When geographically redundant backup is enabled, geoBackupKeyUri and geoBackupUserAssignedIdentityId are also required. Customer-managed key identities must also be assigned to the Cluster through its top-level identity property. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation. For SystemManaged encryption, key and identity properties must be omitted.")
+model HorizonDbClusterDataEncryption {
+  @added(Versions.v2026_10_01_preview)
+  @doc("The type of data encryption used by the cluster.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  type?: HorizonDbClusterDataEncryptionType;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure Key Vault key URI used to encrypt the cluster's primary storage. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  primaryKeyUri?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  primaryUserAssignedIdentityId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The validation status of the primary encryption key. This property is returned for AzureKeyVault encryption and is absent for SystemManaged encryption.")
+  @visibility(Lifecycle.Read)
+  primaryEncryptionKeyStatus?: HorizonDbClusterEncryptionKeyStatus;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure Key Vault key URI used to encrypt geographically redundant backups. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  geoBackupKeyUri?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure resource ID of the user-assigned managed identity used to access the geographically redundant backup encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  geoBackupUserAssignedIdentityId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The validation status of the geographically redundant backup encryption key. This property is returned for AzureKeyVault encryption when geographically redundant backup is enabled.")
+  @visibility(Lifecycle.Read)
+  geoBackupEncryptionKeyStatus?: HorizonDbClusterEncryptionKeyStatus;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Properties for sparsely updating Cluster-level data encryption. Omitted properties preserve their current values.")
+model HorizonDbClusterDataEncryptionForPatchUpdate {
+  @added(Versions.v2026_10_01_preview)
+  @doc("The type of data encryption used by the cluster.")
+  @visibility(Lifecycle.Update)
+  type?: HorizonDbClusterDataEncryptionType;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure Key Vault key URI used to encrypt the cluster's primary storage. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.")
+  @visibility(Lifecycle.Update)
+  primaryKeyUri?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
+  @visibility(Lifecycle.Update)
+  primaryUserAssignedIdentityId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure Key Vault key URI used to encrypt geographically redundant backups. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.")
+  @visibility(Lifecycle.Update)
+  geoBackupKeyUri?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure resource ID of the user-assigned managed identity used to access the geographically redundant backup encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
+  @visibility(Lifecycle.Update)
+  geoBackupUserAssignedIdentityId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 @added(Versions.v2026_10_01_preview)
