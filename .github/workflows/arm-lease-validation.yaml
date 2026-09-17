@@ -38,5 +38,5 @@ jobs:
         with:
           script: |
             const { default: armLeaseValidation } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-lease-validation/arm-lease-validation.js');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-lease-validation/arm-lease-validation.ts');
             return await armLeaseValidation(core);

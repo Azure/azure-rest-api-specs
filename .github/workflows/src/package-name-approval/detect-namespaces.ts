@@ -1,0 +1,339 @@
+import { execFile as execFileCb } from "child_process";
+import { existsSync } from "fs";
+import { readFile, writeFile } from "fs/promises";
+import { dirname, join } from "path";
+import { promisify } from "util";
+import { getChangedFilesStatuses, tspconfig } from "../../../shared/src/changed-files.ts";
+import { loadFormatRules, validateAllNamespaces } from "./validate-format.ts";
+
+const execFileAsync = promisify(execFileCb);
+
+// ---------------------------------------------------------------------------
+// Metadata emitter language key mapping
+// ---------------------------------------------------------------------------
+
+/**
+ * Map typespec-metadata language keys to our normalized language keys.
+ * The emitter uses "csharp" but our labels use "dotnet".
+ */
+const METADATA_LANG_MAP: Record<string, string> = {
+  csharp: "dotnet",
+  "http-client-csharp": "dotnet",
+  "http-client-csharp-mgmt": "dotnet",
+  java: "java",
+  python: "python",
+  typescript: "typescript",
+  go: "go",
+  rust: "rust",
+};
+
+// ---------------------------------------------------------------------------
+// tsp compile with typespec-metadata emitter
+// ---------------------------------------------------------------------------
+
+export type LanguageMetadata = {
+  emitterName: string;
+  packageName: string;
+  namespace?: string;
+  outputDir?: string;
+  flavor?: string;
+  serviceDir?: string;
+};
+
+export type TypeSpecMetadata = {
+  emitterVersion: string;
+  generatedAt: string;
+  typespec: {
+    namespace: string;
+    documentation?: string;
+    type: "data" | "management";
+  };
+  languages: Record<string, LanguageMetadata[]>;
+  sourceConfigPath: string;
+};
+
+export type EmitterResult = {
+  packageNames: Record<string, string>;
+  namespaces: Record<string, string>;
+  isMgmt: boolean;
+  isDataPlane: boolean;
+};
+
+/**
+ * Run `tsp compile` with the `@azure-tools/typespec-metadata` emitter to extract
+ * package names and namespaces for all configured languages.
+ * @param tspConfigDir - Absolute path to the directory containing tspconfig.yaml
+ * @param entrypoint - Absolute path to the TypeSpec entrypoint
+ */
+async function runMetadataEmitter(
+  tspConfigDir: string,
+  entrypoint: string,
+  core: typeof import("@actions/core"),
+): Promise<EmitterResult> {
+  const packageNames: Record<string, string> = {};
+
+  const namespaces: Record<string, string> = {};
+
+  const metadataOutputDir = join(tspConfigDir, "@azure-tools", "typespec-metadata");
+  const jsonPath = join(metadataOutputDir, "typespec-metadata.json");
+
+  const tspArgs = [
+    "tsp",
+    "compile",
+    entrypoint,
+    "--emit",
+    "@azure-tools/typespec-metadata",
+    "--output-dir",
+    tspConfigDir,
+    "--option",
+    "@azure-tools/typespec-metadata.format=json",
+  ];
+
+  core.info(`Running: npx ${tspArgs.join(" ")}`);
+
+  const { stderr } = await execFileAsync("npx", tspArgs, {
+    cwd: tspConfigDir,
+    timeout: 120_000,
+  });
+
+  if (stderr) {
+    core.warning(`typespec-metadata emitter warnings: ${stderr}`);
+  }
+
+  if (!existsSync(jsonPath)) {
+    throw new Error(`typespec-metadata output not found at ${jsonPath}`);
+  }
+
+  const raw = await readFile(jsonPath, "utf8");
+
+  const metadata = JSON.parse(raw) as unknown as TypeSpecMetadata;
+
+  for (const [langKey, entries] of Object.entries(metadata.languages)) {
+    const normalizedLang = METADATA_LANG_MAP[langKey] || langKey;
+    if (!entries || entries.length === 0) continue;
+
+    const entry = entries[0];
+    if (entry.packageName) packageNames[normalizedLang] = entry.packageName;
+    if (entry.namespace) namespaces[normalizedLang] = entry.namespace;
+  }
+
+  const isMgmt = metadata.typespec?.type === "management";
+  const isDataPlane = metadata.typespec?.type === "data";
+
+  return { packageNames, namespaces, isMgmt, isDataPlane };
+}
+
+/**
+ * Prefer the standard project entrypoint, then fall back to an SDK client entrypoint.
+ * @param tspConfigDir - Absolute path to the directory containing tspconfig.yaml
+ */
+function findTypeSpecEntrypoint(tspConfigDir: string): string | null {
+  for (const filename of ["main.tsp", "client.tsp"]) {
+    const entrypoint = join(tspConfigDir, filename);
+    if (existsSync(entrypoint)) {
+      return entrypoint;
+    }
+  }
+  return null;
+}
+
+// ---------------------------------------------------------------------------
+// Base branch compilation
+// ---------------------------------------------------------------------------
+
+/**
+ * Compile the base branch version of a tspconfig to get its package names.
+ * Uses the base-ref checkout (separate directory) to avoid modifying the PR head.
+ * @param file - Relative path to tspconfig.yaml from repo root
+ * @param baseRefDir - Absolute path to the base branch checkout directory
+ * @returns Null if base version doesn't exist or compile fails
+ */
+async function compileBaseVersion(
+  file: string,
+  baseRefDir: string,
+  core: typeof import("@actions/core"),
+): Promise<EmitterResult | null> {
+  const baseTspConfigPath = join(baseRefDir, file);
+  if (!existsSync(baseTspConfigPath)) {
+    core.info(`File does not exist on base branch: ${file}`);
+    return null;
+  }
+
+  const baseTspConfigDir = dirname(baseTspConfigPath);
+  const entrypoint = findTypeSpecEntrypoint(baseTspConfigDir);
+  if (!entrypoint) {
+    core.warning(`No main.tsp or client.tsp found for base version of ${file}, treating as new`);
+    return null;
+  }
+
+  try {
+    core.info(`Compiling base branch version: ${file}`);
+    return await runMetadataEmitter(baseTspConfigDir, entrypoint, core);
+  } catch (e) {
+    core.warning(
+      `Failed to compile base version of ${file}: ${(e as Error).message}, treating as new`,
+    );
+    return null;
+  }
+}
+
+/**
+ * Compare PR package names against base branch package names and return only changed entries.
+ * @param prPackageNames - Package names from PR head
+ * @param prNamespaces - Namespaces from PR head
+ * @param baseResult - Emitter result from base branch (null = all new)
+ */
+function filterUnchanged(
+  prPackageNames: Record<string, string>,
+  prNamespaces: Record<string, string>,
+  baseResult: EmitterResult | null,
+  core: typeof import("@actions/core"),
+): { packageNames: Record<string, string>; namespaces: Record<string, string> } {
+  if (!baseResult) {
+    return { packageNames: { ...prPackageNames }, namespaces: { ...prNamespaces } };
+  }
+
+  const changedPackageNames: Record<string, string> = {};
+
+  const changedNamespaces: Record<string, string> = {};
+
+  for (const [lang, prPkg] of Object.entries(prPackageNames)) {
+    const basePkg = baseResult.packageNames[lang];
+    if (basePkg === prPkg) {
+      core.info(`Package name unchanged for ${lang}: "${prPkg}", skipping`);
+    } else {
+      changedPackageNames[lang] = prPkg;
+      if (prNamespaces[lang]) changedNamespaces[lang] = prNamespaces[lang];
+    }
+  }
+
+  return { packageNames: changedPackageNames, namespaces: changedNamespaces };
+}
+
+// ---------------------------------------------------------------------------
+// Main detection logic
+// ---------------------------------------------------------------------------
+
+/**
+ * Detect package name changes in a PR and write results to an artifact file.
+ * Compiles both PR head and base branch using tsp compile with the typespec-metadata
+ * emitter to reliably extract package names, then reports only changed entries.
+ */
+export default async function detectNamespaces({
+  context,
+  core,
+}: import("@actions/github-script").AsyncFunctionArguments) {
+  const payload = context.payload as import("@octokit/webhooks-types").PullRequestEvent;
+
+  const cwd = process.env.GITHUB_WORKSPACE ?? process.cwd();
+  const baseRefDir = process.env.BASE_REF_DIR ?? join(cwd, "..", "base-ref");
+  const statuses = await getChangedFilesStatuses({ cwd, paths: ["specification"] });
+
+  const changedTspconfigs: { file: string; basePath: string | null }[] = [];
+  for (const file of statuses.additions.filter(tspconfig)) {
+    changedTspconfigs.push({ file, basePath: null });
+  }
+  for (const file of statuses.modifications.filter(tspconfig)) {
+    changedTspconfigs.push({ file, basePath: file });
+  }
+  for (const rename of statuses.renames) {
+    if (tspconfig(rename.to)) {
+      changedTspconfigs.push({ file: rename.to, basePath: rename.from });
+    }
+  }
+
+  if (changedTspconfigs.length === 0) {
+    core.info("No tspconfig.yaml changes detected, skipping");
+    return;
+  }
+
+  core.info(`Found tspconfig.yaml changes: ${changedTspconfigs.map((c) => c.file).join(", ")}`);
+
+  const packageNamesFound: Record<string, string> = {};
+
+  const namespacesFound: Record<string, string> = {};
+
+  const allConfiguredPackageNames: Record<string, string> = {};
+
+  const allConfiguredNamespaces: Record<string, string> = {};
+  let isMgmt = false;
+  let isDataPlane = false;
+
+  for (const { file, basePath } of changedTspconfigs) {
+    const tspConfigDir = dirname(join(cwd, file));
+    const entrypoint = findTypeSpecEntrypoint(tspConfigDir);
+    if (!entrypoint) {
+      core.warning(
+        `Skipping package name detection for ${file}: no main.tsp or client.tsp found in its directory`,
+      );
+      continue;
+    }
+
+    core.info(`Running typespec-metadata emitter for: ${file}`);
+
+    const prResult = await runMetadataEmitter(tspConfigDir, entrypoint, core);
+    if (prResult.isMgmt) isMgmt = true;
+    if (prResult.isDataPlane) isDataPlane = true;
+
+    // Track ALL configured package names from PR head (before filtering).
+    // Used by post-results.js to distinguish "configured but unchanged" from
+    // "not configured at all" when showing Tier 1 language approval table.
+    Object.assign(allConfiguredPackageNames, prResult.packageNames);
+    Object.assign(allConfiguredNamespaces, prResult.namespaces);
+
+    // Compile base branch version for comparison (uses same emitter mechanism)
+    const baseResult = basePath ? await compileBaseVersion(basePath, baseRefDir, core) : null;
+
+    // Only keep package names that actually changed from the base branch
+    const { packageNames, namespaces } = filterUnchanged(
+      prResult.packageNames,
+      prResult.namespaces,
+      baseResult,
+      core,
+    );
+
+    Object.assign(packageNamesFound, packageNames);
+    Object.assign(namespacesFound, namespaces);
+  }
+
+  if (Object.keys(packageNamesFound).length === 0) {
+    core.info("No package name changes detected after comparing with base branch");
+    return;
+  }
+
+  // Validate package name formats against naming convention rules.
+  // Format validation only applies to management-plane package names. Data-plane package names
+  // follow language-specific conventions that vary too widely for regex-based rules.
+  const formatRules = await loadFormatRules(core);
+
+  let formatResults: import("./validate-format.ts").FormatValidationResult[] = [];
+  if (formatRules && isMgmt) {
+    formatResults = validateAllNamespaces(packageNamesFound, formatRules);
+    for (const r of formatResults) {
+      if (!r.valid) {
+        core.warning(`Format validation failed for ${r.language}: ${r.error}`);
+      }
+    }
+  }
+
+  const results = {
+    namespacesFound: packageNamesFound,
+    namespaces: namespacesFound,
+    allConfiguredPackageNames,
+    allConfiguredNamespaces,
+    formatResults,
+    isMgmt,
+    isDataPlane,
+    prNumber: payload.pull_request.number,
+    action: payload.action,
+  };
+
+  const runnerTemp = process.env.RUNNER_TEMP;
+  if (!runnerTemp) {
+    throw new Error("RUNNER_TEMP environment variable is required");
+  }
+  const resultsPath = join(runnerTemp, "package-name-results.json");
+  await writeFile(resultsPath, JSON.stringify(results, null, 2));
+  core.setOutput("results", "true");
+  core.setOutput("results_path", resultsPath);
+}
