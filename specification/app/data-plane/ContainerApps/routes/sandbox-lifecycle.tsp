@@ -14,7 +14,9 @@ model GetSandboxesCountResult {
 }
 
 /** Errors returned by getSandboxesCount. */
-alias GetSandboxesCountErrors = ErrorResult<401> | ErrorResult<500>;
+alias GetSandboxesCountErrors =
+  | UnauthorizedErrorResult
+  | InternalServerErrorResult;
 
 /** OK. */
 model GetSandboxStatsResult {
@@ -27,10 +29,10 @@ model GetSandboxStatsResult {
 
 /** Errors returned by getSandboxStats. */
 alias GetSandboxStatsErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** OK. */
 model PostSandboxDisableResult {
@@ -43,10 +45,10 @@ model PostSandboxDisableResult {
 
 /** Errors returned by postSandboxDisable. */
 alias PostSandboxDisableErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for disabling sandboxes. */
 alias SandboxDisableOperations = ResourceOperations<
@@ -65,9 +67,9 @@ model PostSandboxEnableResult {
 
 /** Errors returned by postSandboxEnable. */
 alias PostSandboxEnableErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for enabling sandboxes. */
 alias SandboxEnableOperations = ResourceOperations<
@@ -86,10 +88,10 @@ model PostSandboxExecuteCommandResult {
 
 /** Errors returned by postSandboxExecuteCommand. */
 alias PostSandboxExecuteCommandErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for executing sandbox commands. */
 alias SandboxExecuteCommandOperations = ResourceOperations<
@@ -108,10 +110,10 @@ model PostSandboxExecuteShellCommandResult {
 
 /** Errors returned by postSandboxExecuteShellCommand. */
 alias PostSandboxExecuteShellCommandErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for executing sandbox shell commands. */
 alias SandboxExecuteShellCommandOperations = ResourceOperations<
@@ -130,10 +132,10 @@ model PostSandboxLifecycleResult {
 
 /** Errors returned by postSandboxLifecycle. */
 alias PostSandboxLifecycleErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for setting sandbox lifecycle policies. */
 alias SandboxLifecyclePolicyOperations = ResourceOperations<
@@ -150,21 +152,14 @@ model PostSandboxResumeResult {
   @body body: Sandbox;
 }
 
-/** Service Unavailable. */
-@error
-model PostSandboxResumeError503 {
-  /** HTTP response status code. */
-  @statusCode statusCode: 503;
-}
-
 /** Errors returned by postSandboxResume. */
 alias PostSandboxResumeErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>
-  | PostSandboxResumeError503;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult
+  | ServiceUnavailableErrorResult;
 
 /** Standard resource operations for resuming sandboxes. */
 alias SandboxResumeOperations = ResourceOperations<
@@ -183,11 +178,11 @@ model PostSandboxStopResult {
 
 /** Errors returned by postSandboxStop. */
 alias PostSandboxStopErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for stopping sandboxes. */
 alias SandboxStopOperations = ResourceOperations<

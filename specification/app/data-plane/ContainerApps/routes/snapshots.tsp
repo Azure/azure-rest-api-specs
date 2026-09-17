@@ -6,7 +6,9 @@ using Azure.Core.Traits;
 namespace ContainerAppsSandbox;
 
 /** Errors returned by deleteSnapshot. */
-alias DeleteSnapshotErrors = ErrorResult<401> | ErrorResult<500>;
+alias DeleteSnapshotErrors =
+  | UnauthorizedErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for deleting snapshots. */
 alias SnapshotDeleteOperations = ResourceOperations<
@@ -15,7 +17,7 @@ alias SnapshotDeleteOperations = ResourceOperations<
 >;
 
 /** Errors returned by listSnapshots. */
-alias ListSnapshotErrors = ErrorResult<401> | ErrorResult<500>;
+alias ListSnapshotErrors = UnauthorizedErrorResult | InternalServerErrorResult;
 
 /** Query parameters for listing snapshots. */
 alias ListSnapshotTraits = QueryParametersTrait<
@@ -45,13 +47,15 @@ model GetSnapshotsCountResult {
 }
 
 /** Errors returned by getSnapshotsCount. */
-alias GetSnapshotsCountErrors = ErrorResult<401> | ErrorResult<500>;
+alias GetSnapshotsCountErrors =
+  | UnauthorizedErrorResult
+  | InternalServerErrorResult;
 
 /** Errors returned by getSnapshot. */
 alias GetSnapshotErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for reading snapshots. */
 alias SnapshotGetOperations = ResourceOperations<

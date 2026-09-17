@@ -6,9 +6,9 @@ namespace ContainerAppsSandbox;
 
 /** Errors returned by deleteSecret. */
 alias DeleteSecretErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for deleting secrets. */
 alias SecretDeleteOperations = ResourceOperations<
@@ -26,7 +26,7 @@ model GetSecretsResult {
 }
 
 /** Errors returned by getSecrets. */
-alias GetSecretsErrors = ErrorResult<401> | ErrorResult<500>;
+alias GetSecretsErrors = UnauthorizedErrorResult | InternalServerErrorResult;
 
 /** OK. */
 model GetSecretKeysResult {
@@ -39,9 +39,9 @@ model GetSecretKeysResult {
 
 /** Errors returned by getSecretKeys. */
 alias GetSecretKeysErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** OK. */
 model PostSecretPeekResult {
@@ -54,9 +54,9 @@ model PostSecretPeekResult {
 
 /** Errors returned by postSecretPeek. */
 alias PostSecretPeekErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for peeking secrets. */
 alias SecretPeekOperations = ResourceOperations<
@@ -86,7 +86,10 @@ model PutSecretResult201 {
 alias PutSecretResult = PutSecretResult200 | PutSecretResult201;
 
 /** Errors returned by putSecret. */
-alias PutSecretErrors = ErrorResult<400> | ErrorResult<401> | ErrorResult<500>;
+alias PutSecretErrors =
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | InternalServerErrorResult;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."

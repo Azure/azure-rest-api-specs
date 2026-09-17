@@ -7,9 +7,9 @@ namespace ContainerAppsSandbox;
 
 /** Errors returned by deleteEgressPolicy. */
 alias DeleteEgressPolicyErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for deleting named egress policies. */
 alias EgressPolicyDeleteOperations = ResourceOperations<
@@ -18,7 +18,9 @@ alias EgressPolicyDeleteOperations = ResourceOperations<
 >;
 
 /** Errors returned by listEgressPolicies. */
-alias ListEgressPolicyErrors = ErrorResult<401> | ErrorResult<500>;
+alias ListEgressPolicyErrors =
+  | UnauthorizedErrorResult
+  | InternalServerErrorResult;
 
 /** Query parameters for listing egress policies. */
 alias ListEgressPolicyTraits = QueryParametersTrait<
@@ -37,9 +39,9 @@ alias EgressPolicyListOperations = ResourceOperations<
 
 /** Errors returned by getEgressPolicy. */
 alias GetEgressPolicyErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for reading named egress policies. */
 alias EgressPolicyGetOperations = ResourceOperations<
@@ -72,9 +74,9 @@ alias PutEgressPolicyResult =
 
 /** Errors returned by putEgressPolicy. */
 alias PutEgressPolicyErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | InternalServerErrorResult;
 
 @tag("egressPolicies")
 interface EgressPoliciesOperations {

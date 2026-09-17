@@ -15,11 +15,11 @@ model PostSandboxCommitResult {
 
 /** Errors returned by postSandboxCommit. */
 alias PostSandboxCommitErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<429>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | TooManyRequestsErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for committing sandboxes. */
 alias SandboxCommitOperations = ResourceOperations<
@@ -35,11 +35,11 @@ model PostSandboxDownloadContentPackageResult {
 
 /** Errors returned by postSandboxDownloadContentPackage. */
 alias PostSandboxDownloadContentPackageErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for downloading sandbox content packages. */
 alias SandboxDownloadContentPackageOperations = ResourceOperations<
@@ -55,11 +55,11 @@ model PostSandboxPodVolumesAdd2Result {
 
 /** Errors returned by postSandboxPodVolumesAdd2. */
 alias PostSandboxPodVolumesAdd2Errors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for adding sandbox pod volumes. */
 alias SandboxPodVolumesAddOperations = ResourceOperations<
@@ -78,12 +78,12 @@ model PostSandboxSnapshotResult {
 
 /** Errors returned by postSandboxSnapshot. */
 alias PostSandboxSnapshotErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<429>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | TooManyRequestsErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for snapshotting sandboxes. */
 alias SandboxSnapshotOperations = ResourceOperations<
@@ -99,11 +99,11 @@ model PostSandboxVolumeAddResult {
 
 /** Errors returned by postSandboxVolumeAdd. */
 alias PostSandboxVolumeAddErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for adding sandbox volumes. */
 alias SandboxVolumeAddOperations = ResourceOperations<

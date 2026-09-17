@@ -147,22 +147,34 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "List Connections example": {
+          "Lists connections in a sandbox group.": {
             "$ref": "./examples/ConnectionsOperations_ListConnections.json"
           }
         },
@@ -214,29 +226,47 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Connection example": {
+          "Creates a new connection.": {
             "$ref": "./examples/ConnectionsOperations_PostConnection.json"
           }
         }
@@ -298,29 +328,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Connection example": {
+          "Gets a specific connection by ID.": {
             "$ref": "./examples/ConnectionsOperations_GetConnection.json"
           }
         }
@@ -377,36 +425,60 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Delete Connection example": {
+          "Deletes a connection by ID.": {
             "$ref": "./examples/ConnectionsOperations_DeleteConnection.json"
           }
         }
@@ -470,36 +542,60 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Connection Authorize example": {
+          "Authorizes a connection with parameter values.": {
             "$ref": "./examples/ConnectionsOperations_PostConnectionAuthorize.json"
           }
         }
@@ -563,29 +659,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Connection Consent Link example": {
+          "Generates a consent link for a connection.": {
             "$ref": "./examples/ConnectionsOperations_PostConnectionConsentLink.json"
           }
         }
@@ -637,36 +751,60 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Put Connection Policy Rules example": {
+          "Updates the policy rules and tool settings on a connection.": {
             "$ref": "./examples/ConnectionsOperations_PutConnectionPolicyRules.json"
           }
         }
@@ -728,29 +866,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Connection Refresh example": {
+          "Refreshes a connection's state from the upstream provider.": {
             "$ref": "./examples/ConnectionsOperations_PostConnectionRefresh.json"
           }
         }
@@ -812,22 +968,34 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "List Content Packages example": {
+          "Lists content packages for the sandbox group.": {
             "$ref": "./examples/ContentPackagesOperations_ListContentPackages.json"
           }
         },
@@ -885,29 +1053,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Content Package example": {
+          "Gets a specific content package by ID.": {
             "$ref": "./examples/ContentPackagesOperations_GetContentPackage.json"
           }
         }
@@ -957,22 +1143,34 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Delete Content Package example": {
+          "Deletes a content package by ID.": {
             "$ref": "./examples/ContentPackagesOperations_DeleteContentPackage.json"
           }
         }
@@ -1040,36 +1238,60 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "503": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when the service is unavailable.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ServiceUnavailableErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Content Package Upload example": {
+          "Uploads a content package.": {
             "$ref": "./examples/ContentPackagesOperations_PostContentPackageUpload.json"
           }
         }
@@ -1125,7 +1347,7 @@
           }
         },
         "x-ms-examples": {
-          "List Credentials example": {
+          "Lists all credentials in a sandbox group.": {
             "$ref": "./examples/CredentialsOperations_ListCredentials.json"
           }
         },
@@ -1183,15 +1405,21 @@
             }
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Credential example": {
+          "Gets a specific credential by name in a sandbox group.": {
             "$ref": "./examples/CredentialsOperations_GetCredential.json"
           }
         }
@@ -1241,15 +1469,21 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Put Credential example": {
+          "Creates or updates a credential in a sandbox group.\nIf the credential already exists, it will be updated; otherwise, a new credential will be created.": {
             "$ref": "./examples/CredentialsOperations_PutCredential.json"
           }
         }
@@ -1299,15 +1533,21 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Delete Credential example": {
+          "Deletes a credential in a sandbox group.": {
             "$ref": "./examples/CredentialsOperations_DeleteCredential.json"
           }
         }
@@ -1369,22 +1609,34 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "List disk images in a sandbox group": {
+          "Lists disk images in a sandbox group, with pagination support.": {
             "$ref": "./examples/DiskImagesOperations_ListDiskImages.json"
           }
         },
@@ -1430,36 +1682,60 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "429": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when too many requests are sent.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/TooManyRequestsErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Create a disk image from a container registry": {
+          "Creates a new disk image from an OCI image reference.": {
             "$ref": "./examples/DiskImagesOperations_PostDiskImage.json"
           }
         }
@@ -1514,29 +1790,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get a disk image": {
+          "Gets a specific disk image by ID.": {
             "$ref": "./examples/DiskImagesOperations_GetDiskImage.json"
           }
         }
@@ -1586,29 +1880,47 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Delete a disk image": {
+          "Deletes a disk image by ID.": {
             "$ref": "./examples/DiskImagesOperations_DeleteDiskImage.json"
           }
         }
@@ -1663,22 +1975,34 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "List public disk images": {
+          "Lists all public disk images available to the caller.": {
             "$ref": "./examples/DiskImagesOperations_ListDiskImagesPublic.json"
           }
         },
@@ -1736,29 +2060,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get a public disk image": {
+          "Gets a specific public disk image by name.": {
             "$ref": "./examples/DiskImagesOperations_GetDiskImagePublic.json"
           }
         }
@@ -1813,22 +2155,34 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "List Egress Policies example": {
+          "Lists all named egress policies in a sandbox group.": {
             "$ref": "./examples/EgressPoliciesOperations_ListEgressPolicies.json"
           }
         },
@@ -1886,29 +2240,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Egress Policy example": {
+          "Gets a specific named egress policy by ID.": {
             "$ref": "./examples/EgressPoliciesOperations_GetEgressPolicy.json"
           }
         }
@@ -1964,29 +2336,47 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Put Egress Policy example": {
+          "Creates or updates a named egress policy.": {
             "$ref": "./examples/EgressPoliciesOperations_PutEgressPolicy.json"
           }
         }
@@ -2036,29 +2426,47 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Delete Egress Policy example": {
+          "Deletes a named egress policy by ID.": {
             "$ref": "./examples/EgressPoliciesOperations_DeleteEgressPolicy.json"
           }
         }
@@ -2119,29 +2527,47 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "List example": {
+          "AzureSandboxes_List_MaximumSet": {
             "$ref": "./examples/AzureSandboxes_List.json"
           }
         },
@@ -2186,36 +2612,60 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "429": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when too many requests are sent.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/TooManyRequestsErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Create example": {
+          "AzureSandboxes_Create_MaximumSet": {
             "$ref": "./examples/AzureSandboxes_Create.json"
           }
         }
@@ -2269,29 +2719,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get example": {
+          "AzureSandboxes_Get_MaximumSet": {
             "$ref": "./examples/AzureSandboxes_Get.json"
           }
         }
@@ -2331,22 +2799,34 @@
             "description": "Successful Sandbox delete response with no content."
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Delete example": {
+          "AzureSandboxes_Delete_MaximumSet": {
             "$ref": "./examples/AzureSandboxes_Delete.json"
           }
         }
@@ -2410,43 +2890,73 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "429": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when too many requests are sent.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/TooManyRequestsErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox Commit example": {
+          "Commits a running sandbox as a new disk image.": {
             "$ref": "./examples/SandboxStorageOperations_PostSandboxCommit.json"
           }
         }
@@ -2510,43 +3020,73 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox Connection Add example": {
+          "Adds a connection to a sandbox.": {
             "$ref": "./examples/SandboxNetworkingOperations_PostSandboxConnectionAdd.json"
           }
         }
@@ -2601,36 +3141,60 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox Disable example": {
+          "Disables a sandbox, stopping it first if it is running.": {
             "$ref": "./examples/SandboxLifecycleOperations_PostSandboxDisable.json"
           }
         }
@@ -2691,43 +3255,73 @@
             "description": "The request has succeeded."
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox Download Content Package example": {
+          "Downloads a content package to a running sandbox.": {
             "$ref": "./examples/SandboxStorageOperations_PostSandboxDownloadContentPackage.json"
           }
         }
@@ -2770,36 +3364,60 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Sandbox Egress Decisions example": {
+          "Gets egress decisions for a sandbox.": {
             "$ref": "./examples/SandboxNetworkingOperations_GetSandboxEgressDecisions.json"
           }
         }
@@ -2863,43 +3481,73 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox Egress Policy example": {
+          "Sets the egress policy for a sandbox.": {
             "$ref": "./examples/SandboxNetworkingOperations_PostSandboxEgressPolicy.json"
           }
         }
@@ -2954,29 +3602,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox Enable example": {
+          "Enables a disabled sandbox.": {
             "$ref": "./examples/SandboxLifecycleOperations_PostSandboxEnable.json"
           }
         }
@@ -3031,7 +3697,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Sandbox Exec Stream example": {
+          "Starts an interactive exec session via WebSocket in a running sandbox.": {
             "$ref": "./examples/SandboxStreamsOperations_GetSandboxExecStream.json"
           }
         }
@@ -3102,36 +3768,60 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox Execute Command example": {
+          "Executes a command in a sandbox.": {
             "$ref": "./examples/SandboxLifecycleOperations_PostSandboxExecuteCommand.json"
           }
         }
@@ -3202,36 +3892,60 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox Execute Shell Command example": {
+          "Executes a shell command in a sandbox.": {
             "$ref": "./examples/SandboxLifecycleOperations_PostSandboxExecuteShellCommand.json"
           }
         }
@@ -3292,29 +4006,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Sandbox File example": {
+          "Reads a file from a running sandbox. The file is streamed directly to the response body.": {
             "$ref": "./examples/SandboxFilesOperations_GetSandboxFile.json"
           }
         }
@@ -3409,36 +4141,60 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "413": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when the request body is too large.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/RequestBodyTooLargeErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox File example": {
+          "Writes a file to a running sandbox. The file is streamed directly from the request body.": {
             "$ref": "./examples/SandboxFilesOperations_PostSandboxFile.json"
           }
         }
@@ -3500,29 +4256,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Delete Sandbox File example": {
+          "Deletes a file or directory in a running sandbox. If the target is a directory, the `recursive` query\nparameter must be set to true to delete it and its contents.": {
             "$ref": "./examples/SandboxFilesOperations_DeleteSandboxFile.json"
           }
         }
@@ -3579,29 +4353,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Sandbox Files List example": {
+          "Lists the contents of a directory in a running sandbox. The response includes file and directory names, sizes,\nand metadata.": {
             "$ref": "./examples/SandboxFilesOperations_GetSandboxFilesList.json"
           }
         }
@@ -3672,29 +4464,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox File Mkdir example": {
+          "Creates a directory in a running sandbox. If the `createParents` property is set to true,\nany missing parent directories will also be created.": {
             "$ref": "./examples/SandboxFilesOperations_PostSandboxFileMkdir.json"
           }
         }
@@ -3751,29 +4561,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Sandbox File Stat example": {
+          "Gets metadata for a file or directory in a running sandbox, including size, permissions, and timestamps.": {
             "$ref": "./examples/SandboxFilesOperations_GetSandboxFileStat.json"
           }
         }
@@ -3837,36 +4665,60 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox Lifecycle example": {
+          "Sets the lifecycle policy for a sandbox.": {
             "$ref": "./examples/SandboxLifecycleOperations_PostSandboxLifecycle.json"
           }
         }
@@ -3937,7 +4789,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Sandbox Log Stream example": {
+          "Streams logs from a running sandbox via WebSocket.\nThe logs are sent as a continuous stream of text or JSON objects, depending on the specified log format.": {
             "$ref": "./examples/SandboxStreamsOperations_GetSandboxLogStream.json"
           }
         }
@@ -3998,43 +4850,73 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox Pod Volumes Add2 example": {
+          "Adds pod volume mounts to a sandbox.": {
             "$ref": "./examples/SandboxStorageOperations_PostSandboxPodVolumesAdd2.json"
           }
         }
@@ -4077,36 +4959,60 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Sandbox Ports example": {
+          "Gets the list of ports for a sandbox.": {
             "$ref": "./examples/SandboxNetworkingOperations_GetSandboxPorts.json"
           }
         }
@@ -4156,43 +5062,73 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Put Sandbox Ports example": {
+          "Updates all ports for a sandbox.": {
             "$ref": "./examples/SandboxNetworkingOperations_PutSandboxPorts.json"
           }
         }
@@ -4242,43 +5178,73 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Patch Sandbox Port example": {
+          "Updates a single port on a sandbox (partial update).": {
             "$ref": "./examples/SandboxNetworkingOperations_PatchSandboxPort.json"
           }
         }
@@ -4342,43 +5308,73 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox Port Add example": {
+          "Adds a port to a sandbox.": {
             "$ref": "./examples/SandboxNetworkingOperations_PostSandboxPortAdd.json"
           }
         }
@@ -4442,43 +5438,73 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox Port Remove example": {
+          "Removes a port from a sandbox.": {
             "$ref": "./examples/SandboxNetworkingOperations_PostSandboxPortRemove.json"
           }
         }
@@ -4526,7 +5552,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Sandbox Processes Stream example": {
+          "Streams the process list from a running sandbox via WebSocket.\nThe process list is sent as a continuous stream of JSON objects.": {
             "$ref": "./examples/SandboxStreamsOperations_GetSandboxProcessesStream.json"
           }
         }
@@ -4581,47 +5607,86 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "503": {
-            "description": "Service Unavailable.",
+            "description": "A standard Azure error response when the service is unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailableErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox Resume example": {
+          "Resumes a stopped sandbox from a snapshot.": {
             "$ref": "./examples/SandboxLifecycleOperations_PostSandboxResume.json"
           }
         }
@@ -4685,50 +5750,86 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "429": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when too many requests are sent.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/TooManyRequestsErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox Snapshot example": {
+          "Takes a snapshot of a running sandbox.": {
             "$ref": "./examples/SandboxStorageOperations_PostSandboxSnapshot.json"
           }
         }
@@ -4771,36 +5872,60 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Sandbox Stats example": {
+          "Gets resource usage statistics for a sandbox.": {
             "$ref": "./examples/SandboxLifecycleOperations_GetSandboxStats.json"
           }
         }
@@ -4855,43 +5980,73 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox Stop example": {
+          "Stops a running sandbox and saves its state as a snapshot.": {
             "$ref": "./examples/SandboxLifecycleOperations_PostSandboxStop.json"
           }
         }
@@ -4959,43 +6114,73 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Sandbox Volume Add example": {
+          "Adds a volume mount to a sandbox.": {
             "$ref": "./examples/SandboxStorageOperations_PostSandboxVolumeAdd.json"
           }
         }
@@ -5031,22 +6216,34 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Sandboxes Count example": {
+          "Gets the total count of sandboxes.": {
             "$ref": "./examples/SandboxLifecycleOperations_GetSandboxesCount.json"
           }
         }
@@ -5082,22 +6279,34 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Secrets example": {
+          "Lists all secrets in the sandbox group.": {
             "$ref": "./examples/SecretsOperations_GetSecrets.json"
           }
         }
@@ -5155,29 +6364,47 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Put Secret example": {
+          "Upserts key-value pairs in a secret.": {
             "$ref": "./examples/SecretsOperations_PutSecret.json"
           }
         }
@@ -5227,29 +6454,47 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Delete Secret example": {
+          "Deletes an entire secret.": {
             "$ref": "./examples/SecretsOperations_DeleteSecret.json"
           }
         }
@@ -5292,29 +6537,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Secret Keys example": {
+          "Lists key names of a secret (values are not returned).": {
             "$ref": "./examples/SecretsOperations_GetSecretKeys.json"
           }
         }
@@ -5369,29 +6632,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Secret Peek example": {
+          "Peeks (retrieves) all secret values.": {
             "$ref": "./examples/SecretsOperations_PostSecretPeek.json"
           }
         }
@@ -5453,22 +6734,34 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "List Snapshots example": {
+          "Lists snapshots with pagination support.": {
             "$ref": "./examples/SnapshotsOperations_ListSnapshots.json"
           }
         },
@@ -5526,29 +6819,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Snapshot example": {
+          "Gets a specific snapshot by ID.": {
             "$ref": "./examples/SnapshotsOperations_GetSnapshot.json"
           }
         }
@@ -5598,22 +6909,34 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Delete Snapshot example": {
+          "Deletes a snapshot by ID.": {
             "$ref": "./examples/SnapshotsOperations_DeleteSnapshot.json"
           }
         }
@@ -5649,22 +6972,34 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Snapshots Count example": {
+          "Gets the total count of snapshots.": {
             "$ref": "./examples/SnapshotsOperations_GetSnapshotsCount.json"
           }
         }
@@ -5726,22 +7061,34 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "List Volumes example": {
+          "Lists volumes with pagination support.": {
             "$ref": "./examples/VolumesOperations_ListVolumes.json"
           }
         },
@@ -5799,29 +7146,47 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Volume example": {
+          "Gets a specific volume by name.": {
             "$ref": "./examples/VolumesOperations_GetVolume.json"
           }
         }
@@ -5871,36 +7236,60 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Put Volume example": {
+          "Creates a new volume.": {
             "$ref": "./examples/VolumesOperations_PutVolume.json"
           }
         }
@@ -5950,36 +7339,60 @@
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Delete Volume example": {
+          "Deletes a volume by name.": {
             "$ref": "./examples/VolumesOperations_DeleteVolume.json"
           }
         }
@@ -6029,36 +7442,60 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Volume Files example": {
+          "List directory contents within a volume.": {
             "$ref": "./examples/VolumesOperations_GetVolumeFiles.json"
           }
         }
@@ -6138,44 +7575,80 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "412": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a failed precondition.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/PreconditionFailedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
@@ -6233,43 +7706,73 @@
             "description": "No Content."
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Delete Volume File example": {
+          "Delete a file or directory from a volume.": {
             "$ref": "./examples/VolumesOperations_DeleteVolumeFile.json"
           }
         }
@@ -6323,36 +7826,60 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Volume File Download example": {
+          "Download a file from a volume.": {
             "$ref": "./examples/VolumesOperations_GetVolumeFileDownload.json"
           }
         }
@@ -6414,36 +7941,60 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Volume File Mkdir example": {
+          "Create a directory within a volume.": {
             "$ref": "./examples/VolumesOperations_PostVolumeFileMkdir.json"
           }
         }
@@ -6507,43 +8058,73 @@
             }
           },
           "400": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a bad request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "404": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response when a resource is not found.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "409": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for a resource conflict.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Post Volume Fork example": {
+          "Forks a data disk volume.": {
             "$ref": "./examples/VolumesOperations_PostVolumeFork.json"
           }
         }
@@ -6579,22 +8160,34 @@
             }
           },
           "401": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an unauthorized request.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           },
           "500": {
-            "description": "An error response with an HTTP status code and error body.",
+            "description": "A standard Azure error response for an internal server error.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Volumes Count example": {
+          "Gets the count of volumes, grouped by volume type.": {
             "$ref": "./examples/VolumesOperations_GetVolumesCount.json"
           }
         }
@@ -6749,6 +8342,53 @@
             "description": "Serialized AutoDeleteTrigger value."
           }
         ]
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
       }
     },
     "AzureBlobByoPodVolume": {
@@ -6906,6 +8546,19 @@
       ],
       "x-ms-discriminator-value": "AzureFileNfs"
     },
+    "BadRequestErrorResult": {
+      "type": "object",
+      "description": "A standard Azure error response for a bad request.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
     "BlobVolumeUsage": {
       "type": "object",
       "description": "BlobVolumeUsage wire model.",
@@ -6956,6 +8609,19 @@
       },
       "required": [
         "diskImage"
+      ]
+    },
+    "ConflictErrorResult": {
+      "type": "object",
+      "description": "A standard Azure error response for a resource conflict.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
       ]
     },
     "Connection": {
@@ -9635,6 +11301,19 @@
         ]
       }
     },
+    "InternalServerErrorResult": {
+      "type": "object",
+      "description": "A standard Azure error response for an internal server error.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
     "IpAccessControl": {
       "type": "object",
       "description": "IP access control configuration for a port. Rules are evaluated in priority order; first match wins.",
@@ -10130,6 +11809,19 @@
           "description": "txPackets value."
         }
       }
+    },
+    "NotFoundErrorResult": {
+      "type": "object",
+      "description": "A standard Azure error response when a resource is not found.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
     },
     "OtlpTelemetryEndpoint": {
       "type": "object",
@@ -10890,10 +12582,6 @@
         "body"
       ]
     },
-    "PostSandboxResumeError503": {
-      "type": "object",
-      "description": "Service Unavailable."
-    },
     "PostSandboxResumeResult": {
       "type": "object",
       "description": "OK.",
@@ -10987,6 +12675,19 @@
       },
       "required": [
         "body"
+      ]
+    },
+    "PreconditionFailedErrorResult": {
+      "type": "object",
+      "description": "A standard Azure error response for a failed precondition.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
       ]
     },
     "PresetSandboxType": {
@@ -11101,33 +12802,6 @@
       "required": [
         "port"
       ]
-    },
-    "ProblemDetails": {
-      "type": "object",
-      "description": "Azure Dev Compute error object.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "A URI reference identifying the problem type."
-        },
-        "title": {
-          "type": "string",
-          "description": "A short summary of the problem."
-        },
-        "status": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The HTTP status code generated by the origin server."
-        },
-        "detail": {
-          "type": "string",
-          "description": "A human-readable explanation of the problem."
-        },
-        "instance": {
-          "type": "string",
-          "description": "A URI reference identifying the specific problem occurrence."
-        }
-      }
     },
     "ProjectId": {
       "type": "string",
@@ -11331,6 +13005,19 @@
           "description": "port value."
         }
       }
+    },
+    "RequestBodyTooLargeErrorResult": {
+      "type": "object",
+      "description": "A standard Azure error response when the request body is too large.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
     },
     "ResourceGroupScope": {
       "type": "object",
@@ -12556,6 +14243,19 @@
         "values"
       ]
     },
+    "ServiceUnavailableErrorResult": {
+      "type": "object",
+      "description": "A standard Azure error response when the service is unavailable.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
     "Snapshot": {
       "type": "object",
       "description": "Customer-facing snapshot resource returned by the service.",
@@ -13215,6 +14915,19 @@
         }
       }
     },
+    "TooManyRequestsErrorResult": {
+      "type": "object",
+      "description": "A standard Azure error response when too many requests are sent.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
     "TrafficInspection": {
       "type": "string",
       "description": "Controls the scope of TLS inspection for the egress proxy on a per-sandbox basis.",
@@ -13324,6 +15037,19 @@
           }
         ]
       }
+    },
+    "UnauthorizedErrorResult": {
+      "type": "object",
+      "description": "A standard Azure error response for an unauthorized request.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
     },
     "UpdatePolicyRulesContent": {
       "type": "object",
