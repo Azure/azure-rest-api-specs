@@ -7,6 +7,7 @@ import "@typespec/http";
 
 import "../agents/routes.tsp";
 import "../voice-agents/routes.tsp";
+import "./preview-model-augmentations.tsp";
 import "../memory-stores/routes.tsp";
 import "../toolboxes/routes.tsp";
 import "../agents-session-files/routes.tsp";

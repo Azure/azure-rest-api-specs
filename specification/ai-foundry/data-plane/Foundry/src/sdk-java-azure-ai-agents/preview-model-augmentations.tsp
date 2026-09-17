@@ -1,0 +1,523 @@
+using TypeSpec.OpenAPI;
+using Azure.AI.Projects;
+
+// The OpenAI models below are exposed by the preview voice-agent surface, but
+// their upstream definitions cannot carry Foundry-specific preview metadata.
+
+// Audio transcription models used by realtime events.
+@@extension(
+  OpenAI.AudioTranscription,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.CreateTranscriptionResponseJsonUsage,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.CreateTranscriptionResponseJsonUsageType,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.TranscriptTextUsageDuration,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.TranscriptTextUsageTokens,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.TranscriptTextUsageTokensInputTokenDetails,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.TranscriptionLanguage,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+
+// MCP tool descriptions exposed by realtime MCP events.
+@@extension(
+  OpenAI.MCPListToolsTool,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.MCPListToolsToolAnnotations,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.MCPListToolsToolInputSchema,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+
+// Realtime audio formats.
+@@extension(
+  OpenAI.RealtimeAudioFormats,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeAudioFormatsAudioPcm,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeAudioFormatsAudioPcma,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeAudioFormatsAudioPcmu,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeAudioFormatsType,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+
+// Realtime client events.
+@@extension(
+  OpenAI.RealtimeClientEvent,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeClientEventConversationItemCreate,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeClientEventConversationItemDelete,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeClientEventConversationItemRetrieve,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeClientEventConversationItemTruncate,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeClientEventInputAudioBufferAppend,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeClientEventInputAudioBufferClear,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeClientEventInputAudioBufferCommit,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeClientEventOutputAudioBufferClear,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeClientEventResponseCancel,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeClientEventResponseCreate,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeClientEventSessionUpdate,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeClientEventType,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+
+// Realtime conversation-item supporting types.
+@@extension(
+  OpenAI.RealtimeConversationItemMessageType,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  RealtimeConversationItemObject,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeConversationItemType,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+
+// Realtime MCP errors.
+@@extension(
+  OpenAI.RealtimeMCPError,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeMcpErrorType,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeMCPHTTPError,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeMCPProtocolError,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeMCPToolExecutionError,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+
+// Realtime server events.
+@@extension(
+  OpenAI.RealtimeServerEvent,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventConversationCreated,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventConversationItemAdded,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventConversationItemCreated,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventConversationItemDeleted,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventConversationItemDone,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionDelta,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionFailed,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionSegment,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventConversationItemRetrieved,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventConversationItemTruncated,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventRealtimeServerEventError,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventInputAudioBufferCleared,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventInputAudioBufferCommitted,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventInputAudioBufferDtmfEventReceived,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventInputAudioBufferSpeechStarted,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventInputAudioBufferSpeechStopped,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventInputAudioBufferTimeoutTriggered,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventMCPListToolsCompleted,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventMCPListToolsFailed,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventMCPListToolsInProgress,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventOutputAudioBufferCleared,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventOutputAudioBufferStarted,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventOutputAudioBufferStopped,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventRateLimitsUpdated,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseAudioDelta,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseAudioDone,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseAudioTranscriptDelta,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseAudioTranscriptDone,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseContentPartAdded,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseContentPartDone,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseContentPartDonePart,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseCreated,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseDone,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDelta,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDone,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseMCPCallArgumentsDelta,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseMCPCallArgumentsDone,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseMCPCallCompleted,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseMCPCallFailed,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseMCPCallInProgress,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseOutputItemAdded,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseOutputItemDone,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseTextDelta,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventResponseTextDone,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventSessionCreated,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventSessionUpdated,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeServerEventType,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+
+// Realtime session and turn-detection models.
+@@extension(
+  OpenAI.RealtimeSessionCreateRequestGA,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeSessionCreateRequestGAAudio,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeSessionCreateRequestGAAudioInput,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeSessionCreateRequestGAAudioOutput,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeSessionCreateRequestGATracing,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeSessionCreateRequestUnion,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeSessionCreateRequestUnionType,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeTranscriptionSessionCreateRequestGA,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudio,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudioInput,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeTurnDetection,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeTurnDetectionSemanticVad,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeTurnDetectionServerVad,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.RealtimeTurnDetectionType,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+
+// Shared voice identifier used by realtime audio output.
+@@extension(
+  OpenAI.VoiceIdsShared,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
