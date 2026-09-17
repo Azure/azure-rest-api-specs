@@ -138,6 +138,9 @@ union ConnectionType {
 
   @doc("OpenAPI connection")
   OpenAPI: "OpenAPI",
+
+  @doc("Remote agent-to-agent (A2A) connection")
+  RemoteA2A: "RemoteA2A",
 }
 
 @doc("The credential type used by the connection")
