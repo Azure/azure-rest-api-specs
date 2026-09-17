@@ -123,7 +123,7 @@ interface SandboxFilesOperations {
       @path id: SandboxId;
 
       /** path parameter. */
-      @query path?: string;
+      @query path: string;
 
       /** recursive parameter. */
       @query recursive?: boolean;

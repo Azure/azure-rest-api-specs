@@ -422,7 +422,11 @@ namespace ContainerAppsSandbox {
   );
   @@clientLocation(VolumesOperations.postVolumeFork, Group.Volumes, "csharp");
   @@clientLocation(VolumesOperations.putVolume, Group.Volumes, "csharp");
-  @@clientLocation(VolumesOperations.postVolumeFile, Group.Volumes, "csharp");
+  @@clientLocation(
+    VolumesOperations.createOrReplaceVolumeFile,
+    Group.Volumes,
+    "csharp"
+  );
 
   // Client names
   // The C# emitter prefixes nested clients with their parent names.
@@ -643,7 +647,11 @@ namespace ContainerAppsSandbox {
   );
   @@clientName(VolumesOperations.postVolumeFork, "forkVolume", "csharp");
   @@clientName(VolumesOperations.putVolume, "createVolume", "csharp");
-  @@clientName(VolumesOperations.postVolumeFile, "uploadVolumeFile", "csharp");
+  @@clientName(
+    VolumesOperations.createOrReplaceVolumeFile,
+    "uploadVolumeFile",
+    "csharp"
+  );
 
   // Model customizations
   @@alternateType(
