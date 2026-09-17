@@ -44,10 +44,10 @@ union AgentOptimizationGoal {
 /** Logical row formats supported by optimization datasets. */
 union AgentOptimizationDatasetInputType {
   @doc("Independent single-turn queries evaluated against each candidate.")
-  singleTurn: "single_turn",
+  targetCompletion: "target_completion",
 
   @doc("Scenarios used to simulate conversations against each candidate.")
-  conversation: "conversation",
+  userConversationSimulation: "user_conversation_simulation",
 }
 
 /** Base discriminated model for an optimization dataset. */
@@ -58,51 +58,43 @@ model AgentOptimizationDatasetInput {
 }
 
 /** Dataset containing independent single-turn evaluation inputs. */
-model AgentOptimizationSingleTurnDatasetInput
+model AgentOptimizationTargetCompletionDatasetInput
   extends AgentOptimizationDatasetInput {
-  @doc("Single-turn dataset discriminator.")
-  type: AgentOptimizationDatasetInputType.singleTurn;
+  @doc("Target-completion dataset discriminator.")
+  type: AgentOptimizationDatasetInputType.targetCompletion;
 
-  @doc("Inline rows or an explicitly versioned registered Foundry dataset.")
-  #suppress "@azure-tools/typespec-autorest/union-unsupported" "The source is a discriminated union of inline content and a registered dataset reference."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keep the source union local to the dataset model instead of generating a redundant SDK type."
-  source:
-    | AgentOptimizationSingleTurnInlineDatasetSource
-    | AgentOptimizationReferenceDatasetSource;
+  @doc("Registered Foundry dataset containing target-completion test cases. Exactly one of reference_dataset and inline_data must be provided.")
+  reference_dataset?: AgentOptimizationReferenceDatasetSource;
+
+  @doc("Target-completion test cases supplied directly in the request. Exactly one of reference_dataset and inline_data must be provided.")
+  inline_data?: AgentOptimizationTargetCompletionInlineDatasetSource;
 }
 
 /** Dataset containing scenarios for simulated conversations. */
-model AgentOptimizationConversationDatasetInput
+model AgentOptimizationUserConversationSimulationDatasetInput
   extends AgentOptimizationDatasetInput {
-  @doc("Conversation dataset discriminator.")
-  type: AgentOptimizationDatasetInputType.conversation;
+  @doc("User-conversation-simulation dataset discriminator.")
+  type: AgentOptimizationDatasetInputType.userConversationSimulation;
 
-  @doc("Inline test cases or an explicitly versioned registered Foundry dataset.")
-  #suppress "@azure-tools/typespec-autorest/union-unsupported" "The source is a discriminated union of inline content and a registered dataset reference."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keep the source union local to the dataset model instead of generating a redundant SDK type."
-  source:
-    | AgentOptimizationConversationInlineDatasetSource
-    | AgentOptimizationReferenceDatasetSource;
+  @doc("Registered Foundry dataset containing user-conversation simulation test cases. Exactly one of reference_dataset and inline_data must be provided.")
+  reference_dataset?: AgentOptimizationReferenceDatasetSource;
+
+  @doc("User-conversation simulation test cases supplied directly in the request. Exactly one of reference_dataset and inline_data must be provided.")
+  inline_data?: AgentOptimizationUserConversationSimulationInlineDatasetSource;
 
   @doc("Defaults applied to every scenario. A test case's simulation_configuration overrides corresponding properties.")
   default_simulation_configuration?: UserConversationSimulationConfiguration;
 }
 
 /** Supplies single-turn rows directly in the optimization request. */
-model AgentOptimizationSingleTurnInlineDatasetSource {
-  @doc("Inline source discriminator.")
-  type: "inline";
-
-  @doc("Single-turn dataset items.")
+model AgentOptimizationTargetCompletionInlineDatasetSource {
+  @doc("Target-completion test cases.")
   @minItems(1)
-  items: AgentOptimizationDatasetItem[];
+  test_cases: AgentOptimizationTargetCompletionTestCase[];
 }
 
 /** Supplies Evals user-conversation simulation test cases directly in the optimization request. */
-model AgentOptimizationConversationInlineDatasetSource {
-  @doc("Inline source discriminator.")
-  type: "inline";
-
+model AgentOptimizationUserConversationSimulationInlineDatasetSource {
   @doc("Conversation test scenarios.")
   @minItems(1)
   test_cases: UserConversationSimulationTestCase[];
@@ -110,9 +102,6 @@ model AgentOptimizationConversationInlineDatasetSource {
 
 /** References an explicitly versioned registered Foundry dataset. */
 model AgentOptimizationReferenceDatasetSource {
-  @doc("Registered dataset source discriminator.")
-  type: "reference";
-
   @doc("Registered dataset name.")
   @minLength(1)
   name: string;
@@ -123,7 +112,7 @@ model AgentOptimizationReferenceDatasetSource {
 }
 
 /** A single item in an inline dataset. */
-model AgentOptimizationDatasetItem {
+model AgentOptimizationTargetCompletionTestCase {
   @doc("The user query / prompt.")
   @minLength(1)
   query: string;

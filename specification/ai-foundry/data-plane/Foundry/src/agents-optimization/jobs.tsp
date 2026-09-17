@@ -83,23 +83,29 @@ model AgentOptimizationInProgressCandidateInfo {
   stage: AgentOptimizationCandidateProgressStage;
 }
 
-@doc("In-flight progress. Preserved on terminal states (with in_progress_candidate omitted).")
-model AgentOptimizationJobProgress {
+@doc("Progress of candidate generation and evaluation.")
+model AgentOptimizationCandidatesProgress {
   @doc("Number of candidates whose evaluation has completed so far.")
   candidates_completed: int32;
 
   @doc("Score of the baseline (un-optimized) evaluation. Omitted until the baseline eval completes.")
-  baseline_score?: float64;
+  baseline_candidate_score?: float64;
 
   @doc("Best score observed so far across all candidates. Omitted until at least one score is available.")
-  best_score?: float64;
+  best_candidate_score?: float64;
+
+  @doc("Metadata for the candidate currently under evaluation. Omitted when no candidate is active and on terminal states.")
+  in_progress_candidate?: AgentOptimizationInProgressCandidateInfo;
+}
+
+@doc("In-flight progress. Preserved on terminal states with the nested in_progress_candidate omitted.")
+model AgentOptimizationJobProgress {
+  @doc("Candidate generation and evaluation progress.")
+  candidates_progress: AgentOptimizationCandidatesProgress;
 
   @doc("Wall-clock time elapsed since the job began executing. Wire representation: seconds as a float.")
   @encode(DurationKnownEncoding.seconds, float64)
   elapsed_seconds: duration;
-
-  @doc("Metadata for the candidate currently under evaluation. Omitted when no candidate is active and on terminal states.")
-  in_progress_candidate?: AgentOptimizationInProgressCandidateInfo;
 
   @doc("Promotion metadata. Omitted until a candidate from this job has been promoted.")
   promotion?: PromotionInfo;

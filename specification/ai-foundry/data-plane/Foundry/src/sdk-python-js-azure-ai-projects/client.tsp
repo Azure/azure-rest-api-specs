@@ -297,13 +297,6 @@ using Azure.AI.Projects;
   "promoteOptimizationCandidate"
 );
 
-// All emitted Python classes already have "items" in the base class, so we need to pick another name
-@@clientName(
-  AgentOptimizationSingleTurnInlineDatasetSource.items,
-  "dataset_items",
-  "python"
-);
-
 // --------------------------------------------------------------------------------
 // Class renames related to Responses
 // --------------------------------------------------------------------------------

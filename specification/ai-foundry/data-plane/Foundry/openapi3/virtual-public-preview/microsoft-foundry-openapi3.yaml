@@ -46233,6 +46233,27 @@ components:
           description: Maximum number of consecutive proposed candidates that may fail screening before the search stops early. Defaults to 5 when omitted.
           default: 5
       description: Candidate search settings.
+    AgentOptimizationCandidatesProgress:
+      type: object
+      required:
+        - candidates_completed
+      properties:
+        candidates_completed:
+          type: integer
+          format: int32
+          description: Number of candidates whose evaluation has completed so far.
+        baseline_candidate_score:
+          type: number
+          format: double
+          description: Score of the baseline (un-optimized) evaluation. Omitted until the baseline eval completes.
+        best_candidate_score:
+          type: number
+          format: double
+          description: Best score observed so far across all candidates. Omitted until at least one score is available.
+        in_progress_candidate:
+          $ref: '#/components/schemas/AgentOptimizationInProgressCandidateInfo'
+          description: Metadata for the candidate currently under evaluation. Omitted when no candidate is active and on terminal states.
+      description: Progress of candidate generation and evaluation.
     AgentOptimizationConfiguration:
       type: object
       required:
@@ -46279,46 +46300,6 @@ components:
           agent_optimization: '#/components/schemas/AgentOptimizationConfiguration'
           prompt_optimization: '#/components/schemas/PromptOptimizationConfiguration'
       description: Base model for type-specific optimization configuration.
-    AgentOptimizationConversationDatasetInput:
-      type: object
-      required:
-        - type
-        - source
-      properties:
-        type:
-          type: string
-          enum:
-            - conversation
-          description: Conversation dataset discriminator.
-        source:
-          anyOf:
-            - $ref: '#/components/schemas/AgentOptimizationConversationInlineDatasetSource'
-            - $ref: '#/components/schemas/AgentOptimizationReferenceDatasetSource'
-          description: Inline test cases or an explicitly versioned registered Foundry dataset.
-        default_simulation_configuration:
-          $ref: '#/components/schemas/UserConversationSimulationConfiguration'
-          description: Defaults applied to every scenario. A test case's simulation_configuration overrides corresponding properties.
-      allOf:
-        - $ref: '#/components/schemas/AgentOptimizationDatasetInput'
-      description: Dataset containing scenarios for simulated conversations.
-    AgentOptimizationConversationInlineDatasetSource:
-      type: object
-      required:
-        - type
-        - test_cases
-      properties:
-        type:
-          type: string
-          enum:
-            - inline
-          description: Inline source discriminator.
-        test_cases:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserConversationSimulationTestCase'
-          minItems: 1
-          description: Conversation test scenarios.
-      description: Supplies Evals user-conversation simulation test cases directly in the optimization request.
     AgentOptimizationCostEstimate:
       type: object
       required:
@@ -46351,28 +46332,15 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          single_turn: '#/components/schemas/AgentOptimizationSingleTurnDatasetInput'
-          conversation: '#/components/schemas/AgentOptimizationConversationDatasetInput'
+          target_completion: '#/components/schemas/AgentOptimizationTargetCompletionDatasetInput'
+          user_conversation_simulation: '#/components/schemas/AgentOptimizationUserConversationSimulationDatasetInput'
       description: Base discriminated model for an optimization dataset.
     AgentOptimizationDatasetInputType:
       type: string
       enum:
-        - single_turn
-        - conversation
+        - target_completion
+        - user_conversation_simulation
       description: Logical row formats supported by optimization datasets.
-    AgentOptimizationDatasetItem:
-      type: object
-      required:
-        - query
-      properties:
-        query:
-          type: string
-          minLength: 1
-          description: The user query / prompt.
-        ground_truth:
-          type: string
-          description: Expected ground truth answer. Omitted when no ground truth is supplied.
-      description: A single item in an inline dataset.
     AgentOptimizationDeploymentName:
       type: string
       minLength: 1
@@ -46610,32 +46578,20 @@ components:
     AgentOptimizationJobProgress:
       type: object
       required:
-        - candidates_completed
+        - candidates_progress
         - elapsed_seconds
       properties:
-        candidates_completed:
-          type: integer
-          format: int32
-          description: Number of candidates whose evaluation has completed so far.
-        baseline_score:
-          type: number
-          format: double
-          description: Score of the baseline (un-optimized) evaluation. Omitted until the baseline eval completes.
-        best_score:
-          type: number
-          format: double
-          description: Best score observed so far across all candidates. Omitted until at least one score is available.
+        candidates_progress:
+          $ref: '#/components/schemas/AgentOptimizationCandidatesProgress'
+          description: Candidate generation and evaluation progress.
         elapsed_seconds:
           type: number
           format: double
           description: 'Wall-clock time elapsed since the job began executing. Wire representation: seconds as a float.'
-        in_progress_candidate:
-          $ref: '#/components/schemas/AgentOptimizationInProgressCandidateInfo'
-          description: Metadata for the candidate currently under evaluation. Omitted when no candidate is active and on terminal states.
         promotion:
           $ref: '#/components/schemas/PromotionInfo'
           description: Promotion metadata. Omitted until a candidate from this job has been promoted.
-      description: In-flight progress. Preserved on terminal states (with in_progress_candidate omitted).
+      description: In-flight progress. Preserved on terminal states with the nested in_progress_candidate omitted.
     AgentOptimizationJobResult:
       type: object
       required:
@@ -46766,15 +46722,9 @@ components:
     AgentOptimizationReferenceDatasetSource:
       type: object
       required:
-        - type
         - name
         - version
       properties:
-        type:
-          type: string
-          enum:
-            - reference
-          description: Registered dataset source discriminator.
         name:
           type: string
           minLength: 1
@@ -46784,43 +46734,6 @@ components:
           minLength: 1
           description: Registered dataset version.
       description: References an explicitly versioned registered Foundry dataset.
-    AgentOptimizationSingleTurnDatasetInput:
-      type: object
-      required:
-        - type
-        - source
-      properties:
-        type:
-          type: string
-          enum:
-            - single_turn
-          description: Single-turn dataset discriminator.
-        source:
-          anyOf:
-            - $ref: '#/components/schemas/AgentOptimizationSingleTurnInlineDatasetSource'
-            - $ref: '#/components/schemas/AgentOptimizationReferenceDatasetSource'
-          description: Inline rows or an explicitly versioned registered Foundry dataset.
-      allOf:
-        - $ref: '#/components/schemas/AgentOptimizationDatasetInput'
-      description: Dataset containing independent single-turn evaluation inputs.
-    AgentOptimizationSingleTurnInlineDatasetSource:
-      type: object
-      required:
-        - type
-        - items
-      properties:
-        type:
-          type: string
-          enum:
-            - inline
-          description: Inline source discriminator.
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentOptimizationDatasetItem'
-          minItems: 1
-          description: Single-turn dataset items.
-      description: Supplies single-turn rows directly in the optimization request.
     AgentOptimizationSkill:
       type: object
       required:
@@ -46896,6 +46809,50 @@ components:
           $ref: '#/components/schemas/AgentOptimizationEstimateBand'
           description: Estimated values for calls that generate candidate changes.
       description: Estimated values grouped by optimization stage.
+    AgentOptimizationTargetCompletionDatasetInput:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - target_completion
+          description: Target-completion dataset discriminator.
+        reference_dataset:
+          $ref: '#/components/schemas/AgentOptimizationReferenceDatasetSource'
+          description: Registered Foundry dataset containing target-completion test cases. Exactly one of reference_dataset and inline_data must be provided.
+        inline_data:
+          $ref: '#/components/schemas/AgentOptimizationTargetCompletionInlineDatasetSource'
+          description: Target-completion test cases supplied directly in the request. Exactly one of reference_dataset and inline_data must be provided.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationDatasetInput'
+      description: Dataset containing independent single-turn evaluation inputs.
+    AgentOptimizationTargetCompletionInlineDatasetSource:
+      type: object
+      required:
+        - test_cases
+      properties:
+        test_cases:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationTargetCompletionTestCase'
+          minItems: 1
+          description: Target-completion test cases.
+      description: Supplies single-turn rows directly in the optimization request.
+    AgentOptimizationTargetCompletionTestCase:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          minLength: 1
+          description: The user query / prompt.
+        ground_truth:
+          type: string
+          description: Expected ground truth answer. Omitted when no ground truth is supplied.
+      description: A single item in an inline dataset.
     AgentOptimizationTargetConfiguration:
       type: object
       required:
@@ -46934,6 +46891,40 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentOptimizationMutation'
       description: Tool mutations.
+    AgentOptimizationUserConversationSimulationDatasetInput:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - user_conversation_simulation
+          description: User-conversation-simulation dataset discriminator.
+        reference_dataset:
+          $ref: '#/components/schemas/AgentOptimizationReferenceDatasetSource'
+          description: Registered Foundry dataset containing user-conversation simulation test cases. Exactly one of reference_dataset and inline_data must be provided.
+        inline_data:
+          $ref: '#/components/schemas/AgentOptimizationUserConversationSimulationInlineDatasetSource'
+          description: User-conversation simulation test cases supplied directly in the request. Exactly one of reference_dataset and inline_data must be provided.
+        default_simulation_configuration:
+          $ref: '#/components/schemas/UserConversationSimulationConfiguration'
+          description: Defaults applied to every scenario. A test case's simulation_configuration overrides corresponding properties.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationDatasetInput'
+      description: Dataset containing scenarios for simulated conversations.
+    AgentOptimizationUserConversationSimulationInlineDatasetSource:
+      type: object
+      required:
+        - test_cases
+      properties:
+        test_cases:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserConversationSimulationTestCase'
+          minItems: 1
+          description: Conversation test scenarios.
+      description: Supplies Evals user-conversation simulation test cases directly in the optimization request.
     AgentReference:
       type: object
       required:
