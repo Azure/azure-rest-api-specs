@@ -1591,6 +1591,10 @@ model TelephonyCallJob {
   @doc("The name of the voice agent used at execution time.")
   agent_name: string;
 
+  @doc("The owning Campaign name under this Agent. Absent for independently created call jobs; callers cannot set Campaign ownership on direct creation.")
+  @visibility(Lifecycle.Read)
+  campaign_name?: string;
+
   @doc("The current call-job lifecycle status.")
   status: TelephonyCallJobStatus;
 
