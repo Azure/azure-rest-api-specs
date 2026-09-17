@@ -40,6 +40,12 @@ using PaloAltoNetworks.Cloudngfw;
 );
 @@clientName(FirewallResource, "PaloAltoNetworksFirewall", "csharp");
 @@clientName(
+  CustomCaptureConfigurationsFirewallResource,
+  "CustomCaptureConfigurationsFirewall",
+  "csharp"
+);
+@@clientName(LogIngestionSettingsResource, "LogIngestionSettings", "csharp");
+@@clientName(
   FirewallStatusResource,
   "PaloAltoNetworksFirewallStatus",
   "csharp"
@@ -175,9 +181,11 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(LogType.WILDFIRE, "Wildfire", "csharp");
 @@clientName(LogType.AUDIT, "Audit", "csharp");
 @@clientName(LogType.DLP, "Dlp", "csharp");
+@@clientName(LogDestinationV2, "PaloAltoNetworksDcrLogDestination", "csharp");
 @@clientName(MarketplaceDetails, "PanFirewallMarketplaceDetails", "csharp");
 @@clientName(MonitorLog, "MonitorLogConfiguration", "csharp");
 @@alternateType(MonitorLog.id, Azure.Core.armResourceIdentifier, "csharp");
+@@clientName(MonitorLogV2, "PaloAltoNetworksMonitorDcrLog", "csharp");
 @@clientName(NetworkProfile, "FirewallNetworkProfile", "csharp");
 @@clientName(NetworkProfile.publicIps, "PublicIPs", "csharp");
 @@clientName(NetworkProfile.egressNatIp, "EgressNatIP", "csharp");
@@ -304,6 +312,11 @@ using PaloAltoNetworks.Cloudngfw;
 @@alternateType(
   FirewallDeploymentProperties.panEtag,
   Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  CustomCaptureConfigurationsProperties.storageAccountResourceId,
+  Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@clientName(FirewallDeploymentProperties.panEtag, "PanETag", "csharp");
