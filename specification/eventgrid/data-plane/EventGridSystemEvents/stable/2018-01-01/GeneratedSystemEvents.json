@@ -9016,6 +9016,180 @@
         "completionStatus"
       ]
     },
+    "StorageOperationFailedForReplicationEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.Replication.OperationFailedForReplication event.",
+      "properties": {
+        "api": {
+          "type": "string",
+          "description": "The name of the source storage API operation that failed to replicate."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "The source storage event type associated with the replication operation."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the source storage event occurred. This property is omitted for bootstrap replication."
+        },
+        "blobVersion": {
+          "type": "string",
+          "description": "The version identifier of the source blob."
+        },
+        "policyId": {
+          "type": "string",
+          "description": "The object replication policy identifier."
+        },
+        "destinationBlob": {
+          "type": "string",
+          "description": "The destination blob path, formatted as account/container/blob."
+        },
+        "failureReason": {
+          "$ref": "#/definitions/StorageOperationFailedForReplicationReason",
+          "description": "The reason the replication operation failed."
+        }
+      },
+      "required": [
+        "api",
+        "eventType",
+        "policyId",
+        "destinationBlob",
+        "failureReason"
+      ]
+    },
+    "StorageOperationFailedForReplicationReason": {
+      "type": "string",
+      "description": "The reason an object replication operation failed.",
+      "enum": [
+        "UncategorizedFailure",
+        "DstContainerPolicyConflict",
+        "DstAccountNotFound",
+        "SrcContainerNotFound",
+        "DstContainerNotFound",
+        "SrcContainerBeingDeleted",
+        "DstContainerBeingDeleted",
+        "SrcBlobArchived",
+        "DstBlobArchived",
+        "SrcBlobNotFound",
+        "DstBlobNotFound",
+        "SrcBlobEncryptedWithCPK",
+        "DstBlobImmutable",
+        "DstBlobSnapshotsPresent",
+        "DstContainerLeased",
+        "DstBlobLeased",
+        "DstDirectoryNotEmpty",
+        "DstRenameSourceNotFound",
+        "DstRenameDestinationAlreadyExists",
+        "DstRenameDestinationParentPathNotFound"
+      ],
+      "x-ms-enum": {
+        "name": "StorageOperationFailedForReplicationReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UncategorizedFailure",
+            "value": "UncategorizedFailure",
+            "description": "The replication failure could not be categorized."
+          },
+          {
+            "name": "DstContainerPolicyConflict",
+            "value": "DstContainerPolicyConflict",
+            "description": "The destination container has a conflicting object replication policy."
+          },
+          {
+            "name": "DstAccountNotFound",
+            "value": "DstAccountNotFound",
+            "description": "The destination account was not found."
+          },
+          {
+            "name": "SrcContainerNotFound",
+            "value": "SrcContainerNotFound",
+            "description": "The source container was not found."
+          },
+          {
+            "name": "DstContainerNotFound",
+            "value": "DstContainerNotFound",
+            "description": "The destination container was not found."
+          },
+          {
+            "name": "SrcContainerBeingDeleted",
+            "value": "SrcContainerBeingDeleted",
+            "description": "The source container is being deleted."
+          },
+          {
+            "name": "DstContainerBeingDeleted",
+            "value": "DstContainerBeingDeleted",
+            "description": "The destination container is being deleted."
+          },
+          {
+            "name": "SrcBlobArchived",
+            "value": "SrcBlobArchived",
+            "description": "The source blob is archived."
+          },
+          {
+            "name": "DstBlobArchived",
+            "value": "DstBlobArchived",
+            "description": "The destination blob is archived."
+          },
+          {
+            "name": "SrcBlobNotFound",
+            "value": "SrcBlobNotFound",
+            "description": "The source blob was not found."
+          },
+          {
+            "name": "DstBlobNotFound",
+            "value": "DstBlobNotFound",
+            "description": "The destination blob was not found."
+          },
+          {
+            "name": "SrcBlobEncryptedWithCPK",
+            "value": "SrcBlobEncryptedWithCPK",
+            "description": "The source blob is encrypted with a customer-provided key."
+          },
+          {
+            "name": "DstBlobImmutable",
+            "value": "DstBlobImmutable",
+            "description": "The destination blob is immutable."
+          },
+          {
+            "name": "DstBlobSnapshotsPresent",
+            "value": "DstBlobSnapshotsPresent",
+            "description": "The destination blob has snapshots."
+          },
+          {
+            "name": "DstContainerLeased",
+            "value": "DstContainerLeased",
+            "description": "The destination container is leased."
+          },
+          {
+            "name": "DstBlobLeased",
+            "value": "DstBlobLeased",
+            "description": "The destination blob is leased."
+          },
+          {
+            "name": "DstDirectoryNotEmpty",
+            "value": "DstDirectoryNotEmpty",
+            "description": "The destination directory is not empty."
+          },
+          {
+            "name": "DstRenameSourceNotFound",
+            "value": "DstRenameSourceNotFound",
+            "description": "The source path of the destination rename operation was not found."
+          },
+          {
+            "name": "DstRenameDestinationAlreadyExists",
+            "value": "DstRenameDestinationAlreadyExists",
+            "description": "The destination path of the destination rename operation already exists."
+          },
+          {
+            "name": "DstRenameDestinationParentPathNotFound",
+            "value": "DstRenameDestinationParentPathNotFound",
+            "description": "The parent of the destination path of the destination rename operation was not found."
+          }
+        ]
+      }
+    },
     "StorageTaskAssignmentCompletedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskAssignmentCompleted event.",

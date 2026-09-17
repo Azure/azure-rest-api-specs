@@ -1,4 +1,5 @@
 import "@typespec/versioning";
+import "./StorageExamples.tsp";
 using TypeSpec.Versioning;
 /** Describes the schema of the Azure Storage events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents {
@@ -371,6 +372,96 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** The summary report blob url for a storage task */
     summaryReportBlobUrl: url;
+  }
+
+  /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.Replication.OperationFailedForReplication event. */
+  @example(StorageOperationFailedForReplicationExample)
+  model StorageOperationFailedForReplicationEventData {
+    /** The name of the source storage API operation that failed to replicate. */
+    api: string;
+
+    /** The source storage event type associated with the replication operation. */
+    eventType: string;
+
+    /** The time at which the source storage event occurred. This property is omitted for bootstrap replication. */
+    timestamp?: utcDateTime;
+
+    /** The version identifier of the source blob. */
+    blobVersion?: string;
+
+    /** The object replication policy identifier. */
+    policyId: string;
+
+    /** The destination blob path, formatted as account/container/blob. */
+    destinationBlob: string;
+
+    /** The reason the replication operation failed. */
+    failureReason: StorageOperationFailedForReplicationReason;
+  }
+
+  /** The reason an object replication operation failed. */
+  union StorageOperationFailedForReplicationReason {
+    string,
+
+    /** The replication failure could not be categorized. */
+    UncategorizedFailure: "UncategorizedFailure",
+
+    /** The destination container has a conflicting object replication policy. */
+    DstContainerPolicyConflict: "DstContainerPolicyConflict",
+
+    /** The destination account was not found. */
+    DstAccountNotFound: "DstAccountNotFound",
+
+    /** The source container was not found. */
+    SrcContainerNotFound: "SrcContainerNotFound",
+
+    /** The destination container was not found. */
+    DstContainerNotFound: "DstContainerNotFound",
+
+    /** The source container is being deleted. */
+    SrcContainerBeingDeleted: "SrcContainerBeingDeleted",
+
+    /** The destination container is being deleted. */
+    DstContainerBeingDeleted: "DstContainerBeingDeleted",
+
+    /** The source blob is archived. */
+    SrcBlobArchived: "SrcBlobArchived",
+
+    /** The destination blob is archived. */
+    DstBlobArchived: "DstBlobArchived",
+
+    /** The source blob was not found. */
+    SrcBlobNotFound: "SrcBlobNotFound",
+
+    /** The destination blob was not found. */
+    DstBlobNotFound: "DstBlobNotFound",
+
+    /** The source blob is encrypted with a customer-provided key. */
+    SrcBlobEncryptedWithCPK: "SrcBlobEncryptedWithCPK",
+
+    /** The destination blob is immutable. */
+    DstBlobImmutable: "DstBlobImmutable",
+
+    /** The destination blob has snapshots. */
+    DstBlobSnapshotsPresent: "DstBlobSnapshotsPresent",
+
+    /** The destination container is leased. */
+    DstContainerLeased: "DstContainerLeased",
+
+    /** The destination blob is leased. */
+    DstBlobLeased: "DstBlobLeased",
+
+    /** The destination directory is not empty. */
+    DstDirectoryNotEmpty: "DstDirectoryNotEmpty",
+
+    /** The source path of the destination rename operation was not found. */
+    DstRenameSourceNotFound: "DstRenameSourceNotFound",
+
+    /** The destination path of the destination rename operation already exists. */
+    DstRenameDestinationAlreadyExists: "DstRenameDestinationAlreadyExists",
+
+    /** The parent of the destination path of the destination rename operation was not found. */
+    DstRenameDestinationParentPathNotFound: "DstRenameDestinationParentPathNotFound",
   }
 
   /** The status for a LCM policy. */
