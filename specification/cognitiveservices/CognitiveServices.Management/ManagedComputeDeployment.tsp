@@ -74,7 +74,7 @@ interface ManagedComputeDeployments {
        * A project must be specified through this header or configured as the account default.
        */
       @added(Versions.v2026_09_15_preview)
-      @header("x-ms-foundry-project-name")
+      @header("azureai-project")
       foundryProjectName?: string;
     }
   >;
