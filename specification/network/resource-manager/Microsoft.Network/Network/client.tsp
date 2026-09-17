@@ -6705,7 +6705,7 @@ op replaceprivateDnsZoneGroupsList(
 );
 
 @@clientName(
-  VirtualNetworkPeeringPropertiesFormat.enableOnlyIPv6Peering,
+  HubVirtualNetworkConnectionProperties.enableOnlyIPv6Peering,
   "enableOnlyIpv6Peering",
   "python"
 );
