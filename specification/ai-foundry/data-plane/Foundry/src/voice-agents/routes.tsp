@@ -2,6 +2,7 @@ import "../common/models.tsp";
 import "../agents/models.tsp";
 import "./models.tsp";
 import "./protocol.tsp";
+import "./campaign-jobs.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -708,6 +709,46 @@ interface AgentTelephony {
       @body body: CreateTelephonyCallJobRequest;
     },
     TelephonyCallJobAcceptedResponse
+  >;
+
+  /** Lists direct and campaign-created call jobs owned by the route Agent. Deleted jobs are omitted. Status-filtered pages are live views, not a snapshot across requests. */
+  @summary("List outbound telephony call jobs")
+  @get
+  @list
+  @route("/agents/{agent_name}/telephony/call_jobs")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  listTelephonyCallJobs is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The owning voice agent. Authorization is applied before pagination. */
+      @path agent_name: string;
+
+      ...CommonPageQueryParameters;
+
+      /** Optional lifecycle filter. */
+      @query status?: TelephonyCallJobStatus;
+
+      /** Restrict results to the named Campaign under this Agent. Omit to include both direct and Campaign-created jobs. */
+      @query campaign_name?: string;
+    },
+    AgentsPagedResult<TelephonyCallJob>
+  >;
+
+  /** Deletes a terminal, fully reconciled call-job record. Nonterminal jobs or unresolved provider attempts return 409. Does not cancel a call or remove Campaign outcomes, conversations, recordings, or deduplication safeguards. A deleted job returns 404 on subsequent reads; repeated deletion returns 204. A retained creation replay key returns 409 call_job_deleted rather than originating a replacement call. */
+  @summary("Delete an outbound telephony call job")
+  @delete
+  @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  deleteTelephonyCallJob is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The owning voice agent. */
+      @path agent_name: string;
+
+      /** The call-job identifier. */
+      @path call_job_id: TelephonyCallJobId;
+    },
+    NoContentResponse
   >;
 
   /** Retrieves a durable direct or campaign-created outbound call job. */
