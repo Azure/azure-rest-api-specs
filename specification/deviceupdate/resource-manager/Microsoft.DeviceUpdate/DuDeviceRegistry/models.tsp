@@ -272,7 +272,6 @@ model LinkInitiateRequest {
   /**
    * Managed Identity the resource should use for ADR communication.
    */
-  @added(Versions.v2026_11_02_preview)
   inboundCallerIdentity: InboundCallerIdentity;
 }
 
