@@ -7,6 +7,7 @@ import "../common/servicepatterns.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -107,6 +108,7 @@ model AgentOptimizationJobProgress {
   @encode(DurationKnownEncoding.seconds, float64)
   elapsed_seconds: duration;
 
+  @removed(Versions.v1)
   @doc("Promotion metadata. Omitted until a candidate from this job has been promoted.")
   promotion?: PromotionInfo;
 }

@@ -35129,10 +35129,6 @@
             "type": "number",
             "format": "double",
             "description": "Wall-clock time elapsed since the job began executing. Wire representation: seconds as a float."
-          },
-          "promotion": {
-            "$ref": "#/components/schemas/PromotionInfo",
-            "description": "Promotion metadata. Omitted until a candidate from this job has been promoted."
           }
         },
         "description": "In-flight progress. Preserved on terminal states with the nested in_progress_candidate omitted."
@@ -85227,16 +85223,11 @@
       "PromotionInfo": {
         "type": "object",
         "required": [
-          "candidate_id",
           "promoted_at",
           "agent_name",
           "created_new_version"
         ],
         "properties": {
-          "candidate_id": {
-            "type": "string",
-            "description": "Server-assigned candidate identifier that was promoted."
-          },
           "promoted_at": {
             "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "Timestamp when promotion occurred, represented in Unix time."

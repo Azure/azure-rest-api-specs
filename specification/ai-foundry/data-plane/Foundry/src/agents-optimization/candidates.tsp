@@ -6,6 +6,7 @@ import "@azure-tools/openai-typespec/models/chat";
 
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -135,6 +136,7 @@ union AgentOptimizationCandidateExpand {
 
 @doc("Promotion metadata recorded for a candidate. Prompt-agent promotion creates a new version; hosted-agent promotion currently records metadata without deploying a new version.")
 model PromotionInfo {
+  @removed(Versions.v1)
   @doc("Server-assigned candidate identifier that was promoted.")
   candidate_id: string;
 
