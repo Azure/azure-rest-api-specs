@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { CheckConclusion, CheckStatus, CommitStatusState } from "../../shared/src/github.js";
-import { fullGitSha } from "../../shared/test/examples.js";
+import { CheckConclusion, CheckStatus, CommitStatusState } from "../../shared/src/github.ts";
+import { fullGitSha } from "../../shared/test/examples.ts";
 import { setStatusImpl } from "../src/set-status.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 

@@ -42,7 +42,7 @@ vi.mock("child_process", () => ({
 }));
 
 // Mock getChangedFilesStatuses
-vi.mock("../../../shared/src/changed-files.js", () => ({
+vi.mock("../../../shared/src/changed-files.ts", () => ({
   getChangedFilesStatuses: vi.fn().mockResolvedValue({
     additions: [],
     modifications: [],
@@ -63,7 +63,7 @@ vi.mock("../../src/package-name-approval/validate-format.js", () => ({
 // Import after mocks
 const { default: detectNamespaces } =
   await import("../../src/package-name-approval/detect-namespaces.js");
-const { getChangedFilesStatuses } = await import("../../../shared/src/changed-files.js");
+const { getChangedFilesStatuses } = await import("../../../shared/src/changed-files.ts");
 
 /** @type {import("vitest").Mock} */
 const readFileMock = /** @type {any} */ (readFile);

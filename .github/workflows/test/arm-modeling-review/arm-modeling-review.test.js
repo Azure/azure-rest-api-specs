@@ -16,7 +16,7 @@ vi.mock("../../src/arm-modeling-review/detect-new-resource-types.js", () => ({
   detectNewResourceTypes: vi.fn().mockResolvedValue([]),
 }));
 
-import * as changedFiles from "../../../shared/src/changed-files.js";
+import * as changedFiles from "../../../shared/src/changed-files.ts";
 import armModelingReview from "../../src/arm-modeling-review/arm-modeling-review.js";
 import { checkLease } from "../../src/arm-modeling-review/detect-arm-leases.js";
 import { detectNewResourceTypes } from "../../src/arm-modeling-review/detect-new-resource-types.js";
@@ -83,7 +83,7 @@ describe("armModelingReview", () => {
     expect(result.labelActions.ARMModelingAutoSignedOff).toBe("remove");
     expect(core.setFailed).toHaveBeenCalledTimes(1);
     expect(core.setFailed).toHaveBeenCalledWith(
-      expect.stringContaining("ARM API Modeling Office Hours"),
+      expect.stringContaining("ARM API Modeling Review Office Hours"),
     );
     expect(core.error).toHaveBeenCalledWith(expect.stringContaining("Microsoft.BadService"));
   });

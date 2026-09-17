@@ -4,7 +4,7 @@ import YAML from "js-yaml";
 import { resolve } from "path";
 import { inspect } from "util";
 import * as z from "zod";
-import { getChangedFilesStatuses } from "../../../shared/src/changed-files.js";
+import { getChangedFilesStatuses } from "../../../shared/src/changed-files.ts";
 import { CoreLogger } from "../core-logger.js";
 
 // ============================================

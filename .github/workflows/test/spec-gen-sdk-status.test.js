@@ -1,7 +1,7 @@
 import fs from "fs";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { SdkName } from "../../shared/src/sdk-types.js";
-import { createMockSpecGenSdkArtifactInfo } from "../../shared/test/sdk-types.js";
+import { SdkName } from "../../shared/src/sdk-types.ts";
+import { createMockSpecGenSdkArtifactInfo } from "../../shared/test/sdk-types.ts";
 import * as artifacts from "../src/artifacts.js";
 import { setSpecGenSdkStatusImpl } from "../src/spec-gen-sdk-status.js";
 import { createMockCore, createMockGithub } from "./mocks.js";

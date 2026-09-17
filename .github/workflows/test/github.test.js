@@ -1,6 +1,6 @@
 import { afterEach } from "node:test";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { add, Duration } from "../../shared/src/time.js";
+import { add, Duration } from "../../shared/src/time.ts";
 import { createLogHook, createRateLimitHook } from "../src/github.js";
 import { createMockLogger } from "./mocks.js";
 
