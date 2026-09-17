@@ -1,3 +1,4 @@
+import type { Core } from "../github.ts";
 /*
   This file is a github script. It will be called directly from a github-script action. This code is a simplified
   amalgamation of logic that previously resided in the `PR Summary` check and various events within the `pipelinebot`.
@@ -293,7 +294,7 @@ export default async function summarizeChecks({
 }
 
 export function outputRunDetails(
-  core: typeof import("@actions/core"),
+  core: Core,
   requiredCheckRuns: CheckRunData[],
   fyiCheckRuns: CheckRunData[],
 ) {
@@ -315,7 +316,7 @@ export function outputRunDetails(
 
 export async function summarizeChecksImpl(
   github: import("@actions/github-script").AsyncFunctionArguments["github"],
-  core: typeof import("@actions/core"),
+  core: Core,
   owner: string,
   repo: string,
   issue_number: number,
@@ -441,7 +442,7 @@ export async function summarizeChecksImpl(
  */
 export async function updateCommitStatus(
   github: import("@actions/github-script").AsyncFunctionArguments["github"],
-  core: typeof import("@actions/core"),
+  core: Core,
   owner: string,
   repo: string,
   head_sha: string,
@@ -563,7 +564,7 @@ export function getRequiredChecksFromBranchRuleOutput(
  */
 export async function getCheckRunTuple(
   github: import("@actions/github-script").AsyncFunctionArguments["github"],
-  core: typeof import("@actions/core"),
+  core: Core,
   owner: string,
   repo: string,
   head_sha: string,
@@ -809,7 +810,7 @@ export function getCheckInfo(checkName: string): CheckMetadata {
 // #region next steps
 
 export function createNextStepsComment(
-  core: typeof import("@actions/core"),
+  core: Core,
   repo: string,
   labels: string[],
   targetBranch: string | undefined,
@@ -855,7 +856,7 @@ export function createNextStepsComment(
  * @param targetBranch // this is in the format of "repo/branch"
  */
 function buildNextStepsToMergeCommentBody(
-  core: typeof import("@actions/core"),
+  core: Core,
   labels: string[],
   targetBranch: string,
   requiredCheckInfosPresent: boolean,
@@ -1071,7 +1072,7 @@ function buildViolatedLabelRulesNextStepsText(
  */
 export async function getImpactAssessment(
   github: import("@actions/github-script").AsyncFunctionArguments["github"],
-  core: typeof import("@actions/core"),
+  core: Core,
   owner: string,
   repo: string,
   runId: number,

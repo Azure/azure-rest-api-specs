@@ -6,6 +6,7 @@ import { inspect } from "util";
 import * as z from "zod";
 import { getChangedFilesStatuses } from "../../../shared/src/changed-files.ts";
 import { CoreLogger } from "../core-logger.ts";
+import type { Core } from "../github.ts";
 
 // ============================================
 // Configuration
@@ -228,7 +229,7 @@ export async function validateLeaseContent(
  * @returns Validation result
  */
 export default async function validateArmLeases(
-  core: import("@actions/github-script").AsyncFunctionArguments["core"],
+  core: Core,
 ): Promise<{ status: string; errors: number }> {
   const cwd = process.env.GITHUB_WORKSPACE || process.cwd();
   let hasErrors = false;

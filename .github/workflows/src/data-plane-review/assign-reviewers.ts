@@ -1,4 +1,5 @@
 import { extractInputs } from "../context.ts";
+import type { Core } from "../github.ts";
 
 /**
  * Intake label for data-plane stewardship review. The merge gate keys off the same label
@@ -118,7 +119,7 @@ async function requestReviewerTeam({
   prNumber,
 }: {
   github: import("@actions/github-script").AsyncFunctionArguments["github"];
-  core: import("@actions/github-script").AsyncFunctionArguments["core"];
+  core: Core;
   owner: string;
   repo: string;
   prNumber: number;

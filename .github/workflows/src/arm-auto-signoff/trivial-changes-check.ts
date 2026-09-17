@@ -1,3 +1,4 @@
+import type { Core } from "../github.ts";
 // For now, treat all paths as posix, since this is the format returned from git commands
 import debug from "debug";
 import { simpleGit } from "simple-git";
@@ -40,9 +41,7 @@ const NON_FUNCTIONAL_PROPERTIES = new Set([
  * Analyzes a PR to determine what types of changes it contains
  * @returns Object with categorized change types
  */
-export async function checkTrivialChanges(
-  core: import("@actions/github-script").AsyncFunctionArguments["core"],
-): Promise<PullRequestChangesType> {
+export async function checkTrivialChanges(core: Core): Promise<PullRequestChangesType> {
   // Create result object once at the top
   const changes = new PullRequestChanges();
 
@@ -130,7 +129,7 @@ function hasSignificantFileOperations(
     deletions: string[];
     renames: { from: string; to: string }[];
   },
-  core: import("@actions/github-script").AsyncFunctionArguments["core"],
+  core: Core,
 ): boolean {
   // New spec files (non-example JSON) are non-trivial
   const newSpecFiles = changedFilesStatuses.additions.filter(swagger);
@@ -182,7 +181,7 @@ function hasSignificantFileOperations(
 async function analyzeAndUpdatePullRequestChanges(
   changedFiles: string[],
   git: import("simple-git").SimpleGit,
-  core: import("@actions/github-script").AsyncFunctionArguments["core"],
+  core: Core,
   changes: PullRequestChangesType,
 ): Promise<void> {
   // Categorize files by type
@@ -252,7 +251,7 @@ async function analyzeAndUpdatePullRequestChanges(
 async function hasFunctionalChangesInSpecFile(
   file: string,
   git: import("simple-git").SimpleGit,
-  core: import("@actions/github-script").AsyncFunctionArguments["core"],
+  core: Core,
 ): Promise<boolean> {
   let baseContent, headContent;
 
@@ -336,7 +335,7 @@ function hasFunctionalDifferences(
   baseObj: unknown,
   headObj: unknown,
   path: string,
-  core: import("@actions/github-script").AsyncFunctionArguments["core"],
+  core: Core,
 ): boolean {
   // If types differ, it's a functional change
   if (typeof baseObj !== typeof headObj) {
