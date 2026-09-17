@@ -38,41 +38,80 @@ union AgentOptimizationGoal {
 }
 
 // ---------------------------------------------------------------------------
-// Dataset input — discriminated union (inline items or registered reference)
+// Dataset input — row semantics and source are discriminated independently
 // ---------------------------------------------------------------------------
 
-/** Discriminator values for the dataset input union. */
+/** Logical row formats supported by optimization datasets. */
 union AgentOptimizationDatasetInputType {
-  @doc("Inline dataset — items are provided directly in the request body.")
-  inline: "inline",
+  @doc("Independent single-turn queries evaluated against each candidate.")
+  singleTurn: "single_turn",
 
-  @doc("Reference to a registered Foundry dataset by name and version.")
-  reference: "reference",
+  @doc("Scenarios used to simulate conversations against each candidate.")
+  conversation: "conversation",
 }
 
-/** Base discriminated model for dataset input. Either inline items or a registered reference. */
+/** Base discriminated model for an optimization dataset. */
 @discriminator("type")
 model AgentOptimizationDatasetInput {
-  @doc("Dataset input type discriminator.")
+  @doc("Logical format of the dataset rows.")
   type: AgentOptimizationDatasetInputType;
 }
 
-/** Inline dataset — items supplied directly in the request body. */
-model AgentOptimizationInlineDatasetInput
+/** Dataset containing independent single-turn evaluation inputs. */
+model AgentOptimizationSingleTurnDatasetInput
   extends AgentOptimizationDatasetInput {
-  @doc("Dataset input type discriminator.")
-  type: AgentOptimizationDatasetInputType.inline;
+  @doc("Single-turn dataset discriminator.")
+  type: AgentOptimizationDatasetInputType.singleTurn;
 
-  @doc("Dataset items.")
+  @doc("Inline rows or an explicitly versioned registered Foundry dataset.")
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "The source is a discriminated union of inline content and a registered dataset reference."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keep the source union local to the dataset model instead of generating a redundant SDK type."
+  source:
+    | AgentOptimizationSingleTurnInlineDatasetSource
+    | AgentOptimizationReferenceDatasetSource;
+}
+
+/** Dataset containing scenarios for simulated conversations. */
+model AgentOptimizationConversationDatasetInput
+  extends AgentOptimizationDatasetInput {
+  @doc("Conversation dataset discriminator.")
+  type: AgentOptimizationDatasetInputType.conversation;
+
+  @doc("Inline test cases or an explicitly versioned registered Foundry dataset.")
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "The source is a discriminated union of inline content and a registered dataset reference."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keep the source union local to the dataset model instead of generating a redundant SDK type."
+  source:
+    | AgentOptimizationConversationInlineDatasetSource
+    | AgentOptimizationReferenceDatasetSource;
+
+  @doc("Defaults applied to every scenario. A test case's simulation_configuration overrides corresponding properties.")
+  default_simulation_configuration?: UserConversationSimulationConfiguration;
+}
+
+/** Supplies single-turn rows directly in the optimization request. */
+model AgentOptimizationSingleTurnInlineDatasetSource {
+  @doc("Inline source discriminator.")
+  type: "inline";
+
+  @doc("Single-turn dataset items.")
   @minItems(1)
   items: AgentOptimizationDatasetItem[];
 }
 
-/** Reference to a registered Foundry dataset. */
-model AgentOptimizationReferenceDatasetInput
-  extends AgentOptimizationDatasetInput {
-  @doc("Dataset input type discriminator.")
-  type: AgentOptimizationDatasetInputType.reference;
+/** Supplies Evals user-conversation simulation test cases directly in the optimization request. */
+model AgentOptimizationConversationInlineDatasetSource {
+  @doc("Inline source discriminator.")
+  type: "inline";
+
+  @doc("Conversation test scenarios.")
+  @minItems(1)
+  test_cases: UserConversationSimulationTestCase[];
+}
+
+/** References an explicitly versioned registered Foundry dataset. */
+model AgentOptimizationReferenceDatasetSource {
+  @doc("Registered dataset source discriminator.")
+  type: "reference";
 
   @doc("Registered dataset name.")
   @minLength(1)
@@ -81,7 +120,6 @@ model AgentOptimizationReferenceDatasetInput
   @doc("Registered dataset version.")
   @minLength(1)
   version: string;
-
 }
 
 /** A single item in an inline dataset. */
@@ -92,25 +130,6 @@ model AgentOptimizationDatasetItem {
 
   @doc("Expected ground truth answer. Omitted when no ground truth is supplied.")
   ground_truth?: string;
-
-  @doc("Desired number of conversation turns for conversation evaluation. Defaults to 10 when omitted and is ignored for single-turn evaluation.")
-  @minValue(1)
-  @maxValue(20)
-  desired_num_turns?: int32 = 10;
-
-  @doc("Per-item evaluation criteria. Omitted when the item has no custom criteria.")
-  criteria?: AgentOptimizationDatasetCriterion[];
-}
-
-/** Evaluation criterion: a name + instruction pair used for per-item scoring. */
-model AgentOptimizationDatasetCriterion {
-  @doc("Criterion name.")
-  @minLength(1)
-  name: string;
-
-  @doc("Criterion instruction / description.")
-  @minLength(1)
-  instruction: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -231,11 +250,8 @@ model AgentOptimizationEvaluationConfiguration {
   @maxItems(20)
   evaluators: AgentOptimizationEvaluator[];
 
-  @doc("Model used by model-based evaluators. An existing deployment name is also accepted.")
-  evaluation_model: AgentOptimizationModelConfiguration;
-
-  @doc("Level at which each dataset item is evaluated. Defaults to turn when omitted; use conversation for multi-turn simulation.")
-  evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
+  @doc("Model configuration used by model-based evaluators and conversation simulation.")
+  evaluation_model: EvaluationModelConfiguration;
 
   @doc("Maximum number of target-agent runs executed concurrently during each single-turn evaluation. Defaults to 1 when omitted. Conversation evaluation supports only 1.")
   @minValue(1)
