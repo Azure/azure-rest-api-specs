@@ -62,6 +62,15 @@ suppressions:
       Authentication resource model.
   - code: PutRequestResponseSchemeArm
     from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}"].put
+    reason: >-
+      The PUT operation uses ClusterCreateRequest because postgreSqlVersion is
+      required for ordinary creation but must be omitted for point-in-time
+      restore. The Cluster response always returns the resolved PostgreSQL
+      version and other service-owned read-only properties. Mutable cluster
+      properties are supported by the PATCH operation on the same resource.
+  - code: PutRequestResponseSchemeArm
+    from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/microsoftEntraAdministrators/{objectId}"].put
     reason: >-
       The administrator create (PUT) accepts a dedicated add model
