@@ -37,30 +37,32 @@ on:
   steps:
     - name: Resolve target pull request
       id: resolve_target_pr
-      uses: actions/github-script@v9
       env:
         TARGET_PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}
-      with:
-        script: |
-          const value = process.env.TARGET_PR_NUMBER ?? "";
-          if (!/^[1-9]\d*$/.test(value)) {
-            throw new Error(`Invalid or missing pull request number: ${JSON.stringify(value)}`);
-          }
-
-          if (context.eventName === "issue_comment" && !context.payload.issue?.pull_request) {
-            throw new Error(`Issue #${value} is not a pull request`);
-          }
-
-          const pullNumber = Number(value);
-          if (!Number.isSafeInteger(pullNumber)) {
-            throw new Error(`Pull request number is outside the safe integer range: ${value}`);
-          }
-
-          const { data: pull } = await github.rest.pulls.get({
-            ...context.repo,
-            pull_number: pullNumber,
-          });
-          core.setOutput("target_pr_number", String(pull.number));
+        GH_TOKEN: ${{ github.token }}
+      shell: bash
+      run: |
+        set -euo pipefail
+        value="${TARGET_PR_NUMBER:-}"
+        if [[ ! "$value" =~ ^[1-9][0-9]*$ ]]; then
+          echo "::error::Invalid or missing pull request number"
+          exit 1
+        fi
+        if [[ ${#value} -gt 16 || ( ${#value} -eq 16 && "$value" > "9007199254740991" ) ]]; then
+          echo "::error::Pull request number is outside the safe integer range"
+          exit 1
+        fi
+        if [[ "$GITHUB_EVENT_NAME" == "issue_comment" ]] &&
+           ! jq -e '.issue.pull_request != null' "$GITHUB_EVENT_PATH" > /dev/null; then
+          echo "::error::Issue #$value is not a pull request"
+          exit 1
+        fi
+        target=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$value" --jq '.number')
+        if [[ ! "$target" =~ ^[1-9][0-9]*$ ]]; then
+          echo "::error::GitHub returned an invalid pull request number"
+          exit 1
+        fi
+        printf 'target_pr_number=%s\n' "$target" >> "$GITHUB_OUTPUT"
   # Only users with write access (or above) may trigger the workflow. With
   # `forks: ["*"]` enabled above, this `roles` gate is the primary guard that
   # keeps externally-authored fork PRs from auto-triggering a review and blocks
@@ -83,7 +85,7 @@ jobs:
       target_pr_number: ${{ steps.resolve_target_pr.outputs.target_pr_number }}
 # Gate at the trigger level so the expensive agent job never starts for
 # ineligible events. Label / draft / comment gating that used to live in a
-# custom github-script step is expressed here declaratively; the remaining
+# custom script step is expressed here declaratively; the remaining
 # per-PR checks (skip-arm-review label, specification/ scope, size cap) are
 # done by the agent in natural language (see "Trigger Validation" below).
 if: >

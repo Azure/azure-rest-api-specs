@@ -1,8 +1,8 @@
 import { readFile, readdir } from "fs/promises";
 import { load } from "js-yaml";
 import { join } from "path";
-import { beforeAll, describe, expect, it, vi } from "vitest";
-import { runInNewContext } from "vm";
+import { beforeAll, describe, expect, it } from "vitest";
+import { runShellStep } from "./shell-step.ts";
 
 // cspell:ignore REPOST vally
 
@@ -19,50 +19,10 @@ export type WorkflowFrontmatter = {
   on?: {
     steps?: Array<{
       id?: string;
-      with?: {
-        script?: string;
-      };
+      run?: string;
     }>;
   };
 };
-
-function createResolverHarness(
-  script: string,
-  {
-    value,
-    eventName = "workflow_dispatch",
-    payload = {},
-  }: { value: string; eventName?: string; payload?: Record<string, unknown> },
-) {
-  const get = vi.fn();
-  const setOutput = vi.fn();
-  const context = {
-    eventName,
-    payload,
-    repo: { owner: "Azure", repo: "azure-rest-api-specs" },
-  };
-  const resolverValue = runInNewContext(
-    `(async ({ github, context, core, process }) => {${script}\n})`,
-  ) as unknown;
-  const resolver = resolverValue as (args: {
-    github: unknown;
-    context: unknown;
-    core: unknown;
-    process: unknown;
-  }) => Promise<void>;
-
-  return {
-    get,
-    setOutput,
-    run: () =>
-      resolver({
-        github: { rest: { pulls: { get } } },
-        context,
-        core: { setOutput },
-        process: { env: { TARGET_PR_NUMBER: value } },
-      }),
-  };
-}
 
 /**
  * Collapse runs of whitespace so prose assertions do not depend on where
@@ -140,7 +100,7 @@ beforeAll(async () => {
 
   const frontmatter = load(match[1]) as WorkflowFrontmatter;
   const resolver = frontmatter.on?.steps?.find((step) => step.id === "resolve_target_pr");
-  resolverScript = resolver?.with?.script ?? "";
+  resolverScript = resolver?.run ?? "";
   if (!resolverScript) {
     throw new Error("Resolve target pull request script was not found");
   }
@@ -152,8 +112,8 @@ describe("ARM API review workflow", () => {
 
     expect(source).toContain("- name: Resolve target pull request");
     expect(source).toContain(`TARGET_PR_NUMBER: ${TARGET_EXPRESSION}`);
-    expect(source).toContain("const { data: pull } = await github.rest.pulls.get({");
-    expect(source).toContain('core.setOutput("target_pr_number", String(pull.number))');
+    expect(source).toContain('gh api "repos/$GITHUB_REPOSITORY/pulls/$value"');
+    expect(source).toContain(`printf 'target_pr_number=%s\\n' "$target" >> "$GITHUB_OUTPUT"`);
     expect(source).toContain(
       "target_pr_number: ${{ steps.resolve_target_pr.outputs.target_pr_number }}",
     );
@@ -183,73 +143,90 @@ describe("ARM API review workflow", () => {
 
   describe("target PR resolver", () => {
     it("resolves a workflow-dispatch target and publishes the canonical PR number", async () => {
-      const harness = createResolverHarness(resolverScript, { value: "44499" });
-      harness.get.mockResolvedValue({ data: { number: 44499 } });
-
-      await harness.run();
-
-      expect(harness.get).toHaveBeenCalledOnce();
-      expect(harness.get).toHaveBeenCalledWith({
-        owner: "Azure",
-        repo: "azure-rest-api-specs",
-        pull_number: 44499,
+      const result = await runShellStep(resolverScript, {
+        env: { TARGET_PR_NUMBER: "44499" },
+        response: "44500",
       });
-      expect(harness.setOutput).toHaveBeenCalledWith("target_pr_number", "44499");
+      expect(result.code).toBe(0);
+      expect(result.args).toEqual([
+        "api",
+        "repos/Azure/azure-rest-api-specs/pulls/44499",
+        "--jq",
+        ".number",
+      ]);
+      expect(result.output).toBe("target_pr_number=44500\n");
     });
 
     it("accepts an issue-shaped pull request comment payload", async () => {
-      const harness = createResolverHarness(resolverScript, {
-        value: "44499",
-        eventName: "issue_comment",
+      const result = await runShellStep(resolverScript, {
+        env: { TARGET_PR_NUMBER: "44499", GITHUB_EVENT_NAME: "issue_comment" },
         payload: { issue: { pull_request: { url: "https://api.github.com/pulls/44499" } } },
+        response: "44499",
       });
-      harness.get.mockResolvedValue({ data: { number: 44499 } });
-
-      await harness.run();
-
-      expect(harness.get).toHaveBeenCalledWith(expect.objectContaining({ pull_number: 44499 }));
-      expect(harness.setOutput).toHaveBeenCalledWith("target_pr_number", "44499");
+      expect(result.code).toBe(0);
+      expect(result.output).toBe("target_pr_number=44499\n");
     });
 
     it("rejects an issue comment that is not attached to a pull request", async () => {
-      const harness = createResolverHarness(resolverScript, {
-        value: "44499",
-        eventName: "issue_comment",
+      const result = await runShellStep(resolverScript, {
+        env: { TARGET_PR_NUMBER: "44499", GITHUB_EVENT_NAME: "issue_comment" },
         payload: { issue: {} },
       });
-
-      await expect(harness.run()).rejects.toThrow("Issue #44499 is not a pull request");
-      expect(harness.get).not.toHaveBeenCalled();
-      expect(harness.setOutput).not.toHaveBeenCalled();
+      expect(result.code).not.toBe(0);
+      expect(result.stdout).toContain("Issue #44499 is not a pull request");
+      expect(result.args).toEqual([]);
+      expect(result.output).toBe("");
     });
 
     it.each(["", "0", "-1", "1.5", " 44499", "abc"])(
       "rejects malformed target %j before calling GitHub",
       async (value) => {
-        const harness = createResolverHarness(resolverScript, { value });
-
-        await expect(harness.run()).rejects.toThrow("Invalid or missing pull request number");
-        expect(harness.get).not.toHaveBeenCalled();
-        expect(harness.setOutput).not.toHaveBeenCalled();
+        const result = await runShellStep(resolverScript, { env: { TARGET_PR_NUMBER: value } });
+        expect(result.code).not.toBe(0);
+        expect(result.stdout).toContain("Invalid or missing pull request number");
+        expect(result.args).toEqual([]);
+        expect(result.output).toBe("");
       },
     );
 
-    it("rejects a target outside the JavaScript safe integer range", async () => {
-      const harness = createResolverHarness(resolverScript, { value: "9007199254740992" });
+    it.each(["9007199254740992", "99999999999999999"])(
+      "rejects unsafe target %s",
+      async (value) => {
+        const result = await runShellStep(resolverScript, { env: { TARGET_PR_NUMBER: value } });
+        expect(result.code).not.toBe(0);
+        expect(result.stdout).toContain("Pull request number is outside the safe integer range");
+        expect(result.args).toEqual([]);
+        expect(result.output).toBe("");
+      },
+    );
 
-      await expect(harness.run()).rejects.toThrow(
-        "Pull request number is outside the safe integer range",
-      );
-      expect(harness.get).not.toHaveBeenCalled();
-      expect(harness.setOutput).not.toHaveBeenCalled();
+    it("accepts the largest safe integer", async () => {
+      const result = await runShellStep(resolverScript, {
+        env: { TARGET_PR_NUMBER: "9007199254740991" },
+        response: "9007199254740991",
+      });
+      expect(result.code).toBe(0);
+      expect(result.output).toBe("target_pr_number=9007199254740991\n");
     });
 
     it("propagates a GitHub API failure without publishing a target", async () => {
-      const harness = createResolverHarness(resolverScript, { value: "44499" });
-      harness.get.mockRejectedValue(new Error("GitHub API unavailable"));
+      const result = await runShellStep(resolverScript, {
+        env: { TARGET_PR_NUMBER: "44499" },
+        fail: true,
+      });
+      expect(result.code).not.toBe(0);
+      expect(result.stderr).toContain("API unavailable");
+      expect(result.output).toBe("");
+    });
 
-      await expect(harness.run()).rejects.toThrow("GitHub API unavailable");
-      expect(harness.setOutput).not.toHaveBeenCalled();
+    it("rejects an invalid API response without publishing a target", async () => {
+      const result = await runShellStep(resolverScript, {
+        env: { TARGET_PR_NUMBER: "44499" },
+        response: "null",
+      });
+      expect(result.code).not.toBe(0);
+      expect(result.stdout).toContain("GitHub returned an invalid pull request number");
+      expect(result.output).toBe("");
     });
   });
 

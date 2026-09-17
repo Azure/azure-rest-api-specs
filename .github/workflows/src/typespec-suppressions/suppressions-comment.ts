@@ -84,7 +84,7 @@ const MAX_SUPPRESSIONS_SHOWN = 5;
  * Downloads a text artifact for a given workflow run.
  */
 export async function downloadArtifactText(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: import("../github.ts").WorkflowArguments["github"],
   core: Core,
   owner: string,
   repo: string,
@@ -130,7 +130,7 @@ export async function downloadArtifactText(
 }
 
 export async function getLatestTypeSpecSuppressionsWorkflowRun(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: import("../github.ts").WorkflowArguments["github"],
   core: Core,
   owner: string,
   repo: string,
@@ -373,7 +373,7 @@ export function renderSuppressionsCommentBody(
  * @param labelNames - Current PR labels, used to reflect approval status.
  */
 export async function buildSuppressionsComment(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: import("../github.ts").WorkflowArguments["github"],
   core: Core,
   owner: string,
   repo: string,

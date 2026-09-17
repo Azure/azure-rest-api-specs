@@ -37,7 +37,7 @@ export default async function assignReviewers({
   github,
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+}: import("../github.ts").WorkflowArguments) {
   if (context.eventName === "workflow_run") {
     return await assignFromWorkflowRun({ github, context, core });
   }
@@ -68,7 +68,7 @@ async function assignFromWorkflowRun({
   github,
   context,
   core,
-}: Pick<import("@actions/github-script").AsyncFunctionArguments, "github" | "context" | "core">) {
+}: Pick<import("../github.ts").WorkflowArguments, "github" | "context" | "core">) {
   const { owner, repo, issue_number } = await extractInputs(github, context, core);
   if (!issue_number) {
     core.info("No pull request resolved from the workflow_run event; nothing to assign.");
@@ -118,7 +118,7 @@ async function requestReviewerTeam({
   repo,
   prNumber,
 }: {
-  github: import("@actions/github-script").AsyncFunctionArguments["github"];
+  github: import("../github.ts").WorkflowArguments["github"];
   core: Core;
   owner: string;
   repo: string;

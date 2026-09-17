@@ -36,15 +36,13 @@ jobs:
           sparse-checkout: |
             .github
 
+      - uses: ./.github/actions/install-workflow-deps
+
       - id: get-label-actions
         name: Get Label Actions
-        uses: actions/github-script@v8
-        with:
-          script: |
-            const { default: getLabelActions } =
-              await import('${{ github.workspace }}/.github/workflows/src/breaking-change-add-label-artifacts.ts');
-            return await getLabelActions({ github, context, core });
-
+        run: node "${{ github.workspace }}/.github/workflows/cmd/breaking-change-add-label-artifacts.ts"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       # Upload artifact for 'BreakingChangeReviewRequired' label
       - if: |
           always() && 

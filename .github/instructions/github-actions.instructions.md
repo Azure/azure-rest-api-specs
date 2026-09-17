@@ -51,7 +51,7 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 .github/
 ├── actions/                    # Reusable composite actions
 │   ├── setup-node-install-deps/
-│   ├── install-deps-github-script/
+│   ├── install-workflow-deps/
 │   └── ...
 ├── workflows/                  # Workflow YAML files and their scripts
 │   ├── src/                   # TypeScript modules for workflows
@@ -113,9 +113,9 @@ export async function getChangedFiles(options: ChangedFilesOptions = {}): Promis
 - TypeScript is configured with `noEmit`, `allowImportingTsExtensions`, `erasableSyntaxOnly`, and `verbatimModuleSyntax`
 - Run `pnpm run lint:tsc` to type-check the sources
 - Import types with `import type`; use frozen objects and value-union type aliases instead of enums
-- Type injected `github`, `context`, and `core` values using `AsyncFunctionArguments` from `@actions/github-script`
+- Type injected `github`, `context`, and `core` values using `WorkflowArguments` from `workflows/src/github.ts`; use `Pick` when only some fields are needed
 - For helpers that take `core` separately, import the shared `Core` type from `workflows/src/github.ts`
-- Inline `actions/github-script` YAML snippets remain JavaScript; they dynamically import the `.ts` modules
+- Run TypeScript command entry points directly with Node 24; keep imported source modules free of command-line side effects
 
 ### YAML Style for Actions/Workflows
 
@@ -138,7 +138,7 @@ From `package.json` comments:
 
 ### Key Dependencies
 
-- `@actions/github-script`: GitHub Actions toolkit (devDependency)
+- `@actions/core`, `@actions/github`: GitHub Actions toolkit (runtime dependencies)
 - `@octokit/rest`, `@octokit/types`: GitHub REST API client
 - `simple-git`: Git operations
 - `js-yaml`: YAML parsing
@@ -234,22 +234,33 @@ Composite actions are defined in `.github/actions/*/action.yaml`. Key patterns:
 
 ### Workflow TypeScript
 
-Scripts in `.github/workflows/src/` are typically used with `actions/github-script@v8`:
+Keep testable logic in `.github/workflows/src/` and invoke it from thin `.ts` entry points in
+`.github/workflows/cmd/`. Set up Node and production dependencies before running them:
 
 ```yaml
-- uses: actions/github-script@v8
-  with:
-    script: |
-      const { myFunction } = await import("${{ github.workspace }}/.github/workflows/src/my-script.ts");
-      await myFunction({ github, context, core });
+- uses: ./.github/actions/install-workflow-deps
+- run: node "${{ github.workspace }}/.github/workflows/cmd/my-script.ts"
+  env:
+    GITHUB_TOKEN: ${{ github.token }}
 ```
+
+Use `createWorkflowArguments()` from `workflows/src/workflow-runtime.ts` for API commands.
+Commands that only need `core` or `context` import those values without constructing a client or
+requiring a token. Wrap the command with `runWorkflow()` to report unexpected failures and publish
+its JSON-encoded `result` output. Preserve explicit `core.setOutput()` contracts as well.
+
+Pass inputs through step environment variables, not interpolation into executable script text.
+Keep privileged workflows on trusted base/default-branch code, including dependency manifests.
+For small no-checkout agentic steps, use shell and `gh` instead of adding checkout and installation.
+Edit agentic Markdown sources and regenerate their locks with `gh aw compile`; compiler-owned
+`actions/github-script` uses in generated workflows are allowed, but do not add hand-written uses.
 
 ### Common Patterns
 
 - **GitHub API calls**: Use `github.rest.*` methods with proper error handling
 - **Logging**: Use `core.info()`, `core.warning()`, `core.error()`, `core.debug()`
 - **Outputs**: Use `core.setOutput()` or append to `$GITHUB_OUTPUT` file
-- **Context**: Always accept `github`, `context`, `core` as parameters from github-script
+- **Context**: Accept toolkit values as parameters so workflow logic remains independently testable
 - **Pagination**: Use `PER_PAGE_MAX` constant for API pagination
 - **Rate limiting**: Workflows implement rate limit logging hooks
 

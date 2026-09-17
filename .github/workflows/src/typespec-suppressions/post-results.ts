@@ -28,7 +28,7 @@ export default async function postSuppressionsResults({
   github,
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+}: import("../github.ts").WorkflowArguments) {
   const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
 
   const { data: pr } = await github.rest.pulls.get({

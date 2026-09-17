@@ -7,7 +7,7 @@ export default async function updateLabels({
   github,
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+}: import("./github.ts").WorkflowArguments) {
   const { owner, repo, head_sha, issue_number, run_id } = await extractInputs(
     github,
     context,

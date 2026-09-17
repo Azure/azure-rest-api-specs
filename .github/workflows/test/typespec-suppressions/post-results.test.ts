@@ -30,12 +30,12 @@ describe("post-results", () => {
 
   function args(
     github: import("../mocks.ts").GitHub,
-  ): import("@actions/github-script").AsyncFunctionArguments {
+  ): import("../../src/github.ts").WorkflowArguments {
     return {
       github,
       context,
       core: mockCore,
-    } as unknown as import("@actions/github-script").AsyncFunctionArguments;
+    };
   }
 
   beforeEach(() => {

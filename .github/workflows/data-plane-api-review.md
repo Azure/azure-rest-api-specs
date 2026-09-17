@@ -16,18 +16,15 @@ on:
     - name: Remove trigger label
       id: remove_label
       if: github.event_name == 'pull_request_target' && github.event.label.name == 'data-plane-api-review-needed'
-      uses: actions/github-script@v9
-      with:
-        script: |
-          try {
-            await github.rest.issues.removeLabel({
-              ...context.repo,
-              issue_number: context.payload.pull_request.number,
-              name: 'data-plane-api-review-needed'
-            });
-          } catch (e) {
-            core.warning(`Could not remove label: ${e.message}`);
-          }
+      env:
+        GH_TOKEN: ${{ github.token }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+      shell: bash
+      run: |
+        set -euo pipefail
+        if ! gh api --method DELETE "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/labels/data-plane-api-review-needed"; then
+          echo "::warning::Could not remove trigger label"
+        fi
 if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'data-plane-api-review-needed'
 permissions:
   contents: read

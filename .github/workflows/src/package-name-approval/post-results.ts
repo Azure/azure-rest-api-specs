@@ -30,7 +30,7 @@ const NamespaceResultsSchema = z.object({
 });
 
 async function downloadNamespaceResults(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: import("../github.ts").WorkflowArguments["github"],
   core: Core,
   owner: string,
   repo: string,
@@ -234,7 +234,7 @@ export default async function postResults({
   github,
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+}: import("../github.ts").WorkflowArguments) {
   const { owner, repo, issue_number, run_id } = await extractInputs(github, context, core);
   const approversConfig = await loadApproversConfig();
   const results = await downloadNamespaceResults(github, core, owner, repo, run_id);

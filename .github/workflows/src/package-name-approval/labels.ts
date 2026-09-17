@@ -2,7 +2,7 @@
  * Remove a label from an issue/PR, ignoring 404 (label not present).
  */
 export async function removeLabelIfPresent(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: import("../github.ts").WorkflowArguments["github"],
   owner: string,
   repo: string,
   issueNumber: number,

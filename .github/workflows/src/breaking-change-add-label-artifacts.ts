@@ -11,7 +11,7 @@ export default async function getLabelActions({
   github,
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments): Promise<void> {
+}: import("./github.ts").WorkflowArguments): Promise<void> {
   const { owner, repo, head_sha, issue_number } = await extractInputs(github, context, core);
 
   core.setOutput("head_sha", head_sha);

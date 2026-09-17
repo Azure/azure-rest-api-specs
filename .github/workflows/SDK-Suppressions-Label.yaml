@@ -32,18 +32,8 @@ jobs:
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Get GitHub PullRequest Context
-        uses: actions/github-script@v8
+        run: node "${{ github.workspace }}/.github/workflows/cmd/sdk-suppressions-context.ts"
         id: fetch-pullRequest-context
-        with:
-          script: |
-            const pr = context.payload.pull_request;
-            if (!pr) {
-              throw new Error("This workflow must run in the context of a pull request.");
-            }
-            console.log("This action trigger by", context.eventName);
-            core.setOutput("prLabels", pr.labels.map(label => label.name));
-          result-encoding: string
-
       - name: Run Get suppressions Label Script
         id: run-suppressions-script
         env:

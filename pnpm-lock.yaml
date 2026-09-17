@@ -211,9 +211,6 @@ catalogs:
     '@actions/github':
       specifier: ^9.1.1
       version: 9.1.1
-    '@actions/github-script':
-      specifier: github:actions/github-script
-      version: 9.0.0
     '@apidevtools/json-schema-ref-parser':
       specifier: ^15.1.3
       version: 15.3.5
@@ -618,6 +615,12 @@ importers:
 
   .github:
     dependencies:
+      '@actions/core':
+        specifier: 'catalog:'
+        version: 3.0.1
+      '@actions/github':
+        specifier: 'catalog:'
+        version: 9.1.1
       '@apidevtools/json-schema-ref-parser':
         specifier: 'catalog:'
         version: 15.3.5(@types/json-schema@7.0.15)
@@ -649,12 +652,6 @@ importers:
         specifier: 'catalog:'
         version: 4.4.3
     devDependencies:
-      '@actions/github':
-        specifier: 'catalog:'
-        version: 9.1.1
-      '@actions/github-script':
-        specifier: 'catalog:'
-        version: https://codeload.github.com/actions/github-script/tar.gz/3a2844b7e9c422d3c10d287c895573f7108da1b3
       '@eslint/js':
         specifier: 'catalog:'
         version: 10.0.1(eslint@10.4.1)
@@ -1468,40 +1465,20 @@ importers:
 
 packages:
 
-  '@actions/core@1.11.1':
-    resolution: {integrity: sha512-hXJCSrkwfA46Vd9Z3q4cpEpHB1rL5NG04+/rbqW9d3+CSvtB1tYe8UTpAlixa1vj0m/ULglfEK2UKxMGxCxv5A==}
-
   '@actions/core@3.0.1':
     resolution: {integrity: sha512-a6d/Nwahm9fliVGRhdhofo40HjHQasUPusmc7vBfyky+7Z+P2A1J68zyFVaNcEclc/Se+eO595oAr5nwEIoIUA==}
-
-  '@actions/exec@1.1.1':
-    resolution: {integrity: sha512-+sCcHHbVdk93a0XT19ECtO/gIXoxvdsgQLzb2fE2/5sIZmWQuluYyjPQtrtTHdU1YzTZ7bAPN4sITq2xi1679w==}
 
   '@actions/exec@3.0.0':
     resolution: {integrity: sha512-6xH/puSoNBXb72VPlZVm7vQ+svQpFyA96qdDBvhB8eNZOE8LtPf9L4oAsfzK/crCL8YZ+19fKYVnM63Sl+Xzlw==}
 
-  '@actions/github-script@https://codeload.github.com/actions/github-script/tar.gz/3a2844b7e9c422d3c10d287c895573f7108da1b3':
-    resolution: {gitHosted: true, integrity: sha512-8ycuXIPYjTQtJUUbjlRvrrdRRyGI06dMCDM/akxV3gEqGUOlhi9v9o4MrpwNFsdRJ1n6umPYJaseE5Wl0x7kkg==, tarball: https://codeload.github.com/actions/github-script/tar.gz/3a2844b7e9c422d3c10d287c895573f7108da1b3}
-    version: 9.0.0
-    engines: {node: '>=24'}
-
   '@actions/github@9.1.1':
     resolution: {integrity: sha512-tL5JbYOBZHc0ngEnCsaDcryUizIUIlQyIMwy1Wkx93H5HzbBJ7TbiPx2PnFjBwZW0Vh05JmfFZhecE6gglYegA==}
-
-  '@actions/glob@0.4.0':
-    resolution: {integrity: sha512-+eKIGFhsFa4EBwaf/GMyzCdWrXWymGXfFmZU3FHQvYS8mPcHtTtZONbkcqqUMzw9mJ/pImEBFET1JNifhqGsAQ==}
-
-  '@actions/http-client@2.2.3':
-    resolution: {integrity: sha512-mx8hyJi/hjFvbPokCg4uRd4ZX78t+YyRPtnKWwIl+RzNaVuFpQHfmlGVfsKEJN8LwTCvL+DfVgAM04XaHkm6bA==}
 
   '@actions/http-client@3.0.2':
     resolution: {integrity: sha512-JP38FYYpyqvUsz+Igqlc/JG6YO9PaKuvqjM3iGvaLqFnJ7TFmcLyy2IDrY0bI0qCQug8E9K+elv5ZNfw62ZJzA==}
 
   '@actions/http-client@4.0.1':
     resolution: {integrity: sha512-+Nvd1ImaOZBSoPbsUtEhv+1z99H12xzncCkz0a3RuehINE81FZSe2QTj3uvAPTcJX/SCzUQHQ0D1GrPMbrPitg==}
-
-  '@actions/io@1.1.3':
-    resolution: {integrity: sha512-wi9JjgKLYS7U/z8PPbco+PvTb/nRWjeoFlJ1Qer83k/3C5PHQi28hiVdeE2kHXmIL99mQFawx8qt/JPjZilJ8Q==}
 
   '@actions/io@3.0.2':
     resolution: {integrity: sha512-nRBchcMM+QK1pdjO7/idu86rbJI5YHUKCvKs0KxnSYbVe3F51UfGxuZX4Qy/fWlp6l7gWFwIkrOzN+oUK03kfw==}
@@ -2204,12 +2181,6 @@ packages:
     engines: {node: '>= 20'}
     peerDependencies:
       '@octokit/core': '>=6'
-
-  '@octokit/plugin-retry@8.1.0':
-    resolution: {integrity: sha512-O1FZgXeiGb2sowEr/hYTr6YunGdSAFWnr2fyW39Ah85H8O33ELASQxcvOFF5LE6Tjekcyu2ms4qAzJVhSaJxTw==}
-    engines: {node: '>= 20'}
-    peerDependencies:
-      '@octokit/core': '>=7'
 
   '@octokit/request-error@7.1.0':
     resolution: {integrity: sha512-KMQIfq5sOPpkQYajXHwnhjCC0slzCNScLHs9JafXc4RAJI+9f+jNDlBNaIMTvazOPLgb4BnlhGJOTbnN0wIjPw==}
@@ -2933,9 +2904,6 @@ packages:
 
   bluebird@3.7.2:
     resolution: {integrity: sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==}
-
-  bottleneck@2.19.5:
-    resolution: {integrity: sha512-VHiNCbI1lKdl44tGrhNfU3lup0Tj/ZBMJB5/2ZbNXRCPuRCO7ed2mgcK4r17y+KB2EfuYuRaVlwNbAeaWGSpbw==}
 
   brace-expansion@1.1.15:
     resolution: {integrity: sha512-EwOCDEex4quD37XhqM3omwtMoJjr//isUZz1JopUNWms+4Z2ViyM/k1YIRePpoVNnQhENnxtFjLaxNHrT7xIUg==}
@@ -4767,35 +4735,14 @@ packages:
 
 snapshots:
 
-  '@actions/core@1.11.1':
-    dependencies:
-      '@actions/exec': 1.1.1
-      '@actions/http-client': 2.2.3
-
   '@actions/core@3.0.1':
     dependencies:
       '@actions/exec': 3.0.0
       '@actions/http-client': 4.0.1
 
-  '@actions/exec@1.1.1':
-    dependencies:
-      '@actions/io': 1.1.3
-
   '@actions/exec@3.0.0':
     dependencies:
       '@actions/io': 3.0.2
-
-  '@actions/github-script@https://codeload.github.com/actions/github-script/tar.gz/3a2844b7e9c422d3c10d287c895573f7108da1b3':
-    dependencies:
-      '@actions/core': 1.11.1
-      '@actions/exec': 1.1.1
-      '@actions/github': 9.1.1
-      '@actions/glob': 0.4.0
-      '@actions/io': 1.1.3
-      '@octokit/core': 7.0.6
-      '@octokit/plugin-request-log': 6.0.0(@octokit/core@7.0.6)
-      '@octokit/plugin-retry': 8.1.0(@octokit/core@7.0.6)
-      '@types/node': 24.13.1
 
   '@actions/github@9.1.1':
     dependencies:
@@ -4807,16 +4754,6 @@ snapshots:
       '@octokit/request-error': 7.1.0
       undici: 6.26.0
 
-  '@actions/glob@0.4.0':
-    dependencies:
-      '@actions/core': 1.11.1
-      minimatch: 3.1.5
-
-  '@actions/http-client@2.2.3':
-    dependencies:
-      tunnel: 0.0.6
-      undici: 6.26.0
-
   '@actions/http-client@3.0.2':
     dependencies:
       tunnel: 0.0.6
@@ -4826,8 +4763,6 @@ snapshots:
     dependencies:
       tunnel: 0.0.6
       undici: 6.26.0
-
-  '@actions/io@1.1.3': {}
 
   '@actions/io@3.0.2': {}
 
@@ -5654,13 +5589,6 @@ snapshots:
     dependencies:
       '@octokit/core': 7.0.6
       '@octokit/types': 16.0.0
-
-  '@octokit/plugin-retry@8.1.0(@octokit/core@7.0.6)':
-    dependencies:
-      '@octokit/core': 7.0.6
-      '@octokit/request-error': 7.1.0
-      '@octokit/types': 16.0.0
-      bottleneck: 2.19.5
 
   '@octokit/request-error@7.1.0':
     dependencies:
@@ -6507,8 +6435,6 @@ snapshots:
   before-after-hook@4.0.0: {}
 
   bluebird@3.7.2: {}
-
-  bottleneck@2.19.5: {}
 
   brace-expansion@1.1.15:
     dependencies:

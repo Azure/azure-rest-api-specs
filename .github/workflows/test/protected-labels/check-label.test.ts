@@ -12,8 +12,8 @@ import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import checkLabel from "../../src/protected-labels/check-label.ts";
 
-function invokeCheckLabel(args: Partial<import("@actions/github-script").AsyncFunctionArguments>) {
-  return checkLabel(args as import("@actions/github-script").AsyncFunctionArguments);
+function invokeCheckLabel(args: Partial<import("../../src/github.ts").WorkflowArguments>) {
+  return checkLabel(args as import("../../src/github.ts").WorkflowArguments);
 }
 
 const protectedLabelsConfig = {

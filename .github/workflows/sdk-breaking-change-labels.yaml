@@ -39,18 +39,14 @@ jobs:
           ADO_TOKEN=$(az account get-access-token --resource "499b84ac-1321-427f-aa17-267ca6975798" --query "accessToken" -o tsv)
           echo "ADO_TOKEN=$ADO_TOKEN" >> "$GITHUB_ENV"
 
-      - name: Install dependencies for github-script actions
-        uses: ./.github/actions/install-deps-github-script
+      - name: Install workflow dependencies
+        uses: ./.github/actions/install-workflow-deps
 
       - name: Get label and action
         id: get-label-and-action
-        uses: actions/github-script@v8
-        with:
-          script: |
-            const { getLabelAndAction } =
-              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change-labels.ts');
-            return await getLabelAndAction({ github, context, core });
-
+        run: node "${{ github.workspace }}/.github/workflows/cmd/sdk-breaking-change-labels.ts"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       - if: |
           (fromJson(steps.get-label-and-action.outputs.result).labelAction == 'add' ||
           fromJson(steps.get-label-and-action.outputs.result).labelAction == 'remove')

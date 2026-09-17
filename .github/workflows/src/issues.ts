@@ -7,7 +7,7 @@ import { inspect } from "util";
  * @returns - The PR number or NaN if not found
  */
 export async function getIssueNumber(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: import("./github.ts").WorkflowArguments["github"],
   head_sha: string,
   logger?: import("../../shared/src/logger.ts").ILogger,
 ): Promise<{ issueNumber: number }> {

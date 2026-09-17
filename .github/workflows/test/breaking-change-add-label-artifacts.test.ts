@@ -12,12 +12,8 @@ vi.mock("../src/context.ts", () => ({
   extractInputs: vi.fn(),
 }));
 
-function getLabelActions(
-  asyncFunctionArgs: Partial<import("@actions/github-script").AsyncFunctionArguments>,
-) {
-  return getLabelActionsImpl(
-    asyncFunctionArgs as import("@actions/github-script").AsyncFunctionArguments,
-  );
+function getLabelActions(asyncFunctionArgs: Partial<import("../src/github.ts").WorkflowArguments>) {
+  return getLabelActionsImpl(asyncFunctionArgs as import("../src/github.ts").WorkflowArguments);
 }
 
 describe("breaking-change-add-label-artifacts", () => {

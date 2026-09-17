@@ -43,15 +43,9 @@ jobs:
 
       - name: Detect package name changes
         id: detect
-        uses: actions/github-script@v8
+        run: node "${{ github.workspace }}/.github/workflows/cmd/detect-namespaces.ts"
         env:
           BASE_REF_DIR: ${{ github.workspace }}/base-ref
-        with:
-          script: |
-            const { default: detectNamespaces } =
-              await import('${{ github.workspace }}/.github/workflows/src/package-name-approval/detect-namespaces.ts');
-            await detectNamespaces({ github, context, core });
-
       - name: Upload package name results
         if: always() && steps.detect.outputs.results
         uses: actions/upload-artifact@v7

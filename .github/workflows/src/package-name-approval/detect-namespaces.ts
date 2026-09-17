@@ -223,7 +223,7 @@ function filterUnchanged(
 export default async function detectNamespaces({
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+}: Pick<import("../github.ts").WorkflowArguments, "context" | "core">) {
   const payload = context.payload as import("@octokit/webhooks-types").PullRequestEvent;
 
   const cwd = process.env.GITHUB_WORKSPACE ?? process.cwd();

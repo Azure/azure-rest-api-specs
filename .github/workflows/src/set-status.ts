@@ -14,7 +14,7 @@ import type { Core } from "./github.ts";
 /* v8 ignore start */
 
 export default async function setStatus(
-  { github, context, core }: import("@actions/github-script").AsyncFunctionArguments,
+  { github, context, core }: import("./github.ts").WorkflowArguments,
   monitoredWorkflowName: string,
   requiredStatusName: string,
   overridingLabel: string,

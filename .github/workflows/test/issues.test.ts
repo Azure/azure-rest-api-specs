@@ -3,7 +3,7 @@ import { defaultLogger } from "../../shared/src/logger.ts";
 import { getIssueNumber } from "../src/issues.ts";
 import { createMockGithub, createMockLogger } from "./mocks.ts";
 
-export type GitHub = import("@actions/github-script").AsyncFunctionArguments["github"];
+export type GitHub = import("../src/github.ts").WorkflowArguments["github"];
 
 const mockGithub = createMockGithub();
 

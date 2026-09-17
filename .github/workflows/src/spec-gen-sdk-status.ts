@@ -8,7 +8,7 @@ export default async function setSpecGenSdkStatus({
   github,
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments): Promise<void> {
+}: import("./github.ts").WorkflowArguments): Promise<void> {
   const inputs = await extractInputs(github, context, core);
   const head_sha = inputs.head_sha;
   const details_url = inputs.details_url;

@@ -68,18 +68,13 @@ jobs:
           TRAVIS_PULL_REQUEST_SHA: ${{ github.sha }}
 
       - if: ${{ always() && (steps.run-avocado.outputs.output-file) }}
-        name: Install dependencies for github-script actions
-        uses: ./.github/actions/install-deps-github-script
+        name: Install workflow dependencies
+        uses: ./.github/actions/install-workflow-deps
 
       - if: ${{ always() && (steps.run-avocado.outputs.output-file) }}
         name: Generate job summary
         id: generate-job-summary
-        uses: actions/github-script@v8
-        with:
-          script: |
-            const { default: generateJobSummary } =
-              await import('${{ github.workspace }}/.github/workflows/src/avocado-code.ts');
-            return await generateJobSummary({ core });
+        run: node "${{ github.workspace }}/.github/workflows/cmd/avocado-code.ts"
         env:
           AVOCADO_OUTPUT_FILE: ${{ steps.run-avocado.outputs.output-file }}
 

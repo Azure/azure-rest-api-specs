@@ -15,18 +15,15 @@ on:
     - name: Remove trigger label
       id: remove_label
       if: github.event_name == 'pull_request_target' && github.event.label.name == 'hero-scenarios-needed'
-      uses: actions/github-script@v9
-      with:
-        script: |
-          try {
-            await github.rest.issues.removeLabel({
-              ...context.repo,
-              issue_number: context.payload.pull_request.number,
-              name: 'hero-scenarios-needed'
-            });
-          } catch (e) {
-            core.warning(`Could not remove label: ${e.message}`);
-          }
+      env:
+        GH_TOKEN: ${{ github.token }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+      shell: bash
+      run: |
+        set -euo pipefail
+        if ! gh api --method DELETE "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/labels/hero-scenarios-needed"; then
+          echo "::warning::Could not remove trigger label"
+        fi
 if: github.event.label.name == 'hero-scenarios-needed'
 description: "Hero Scenarios: Suggest hero scenarios for API specifications"
 permissions:

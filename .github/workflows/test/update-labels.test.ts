@@ -5,9 +5,7 @@ import updateLabelsSrc, { updateLabelsImpl } from "../src/update-labels.ts";
 import { createMockCore, createMockGithub, createMockRequestError } from "./mocks.ts";
 
 function updateLabels(asyncFunctionArgs: unknown) {
-  return updateLabelsSrc(
-    asyncFunctionArgs as import("@actions/github-script").AsyncFunctionArguments,
-  );
+  return updateLabelsSrc(asyncFunctionArgs as import("../src/github.ts").WorkflowArguments);
 }
 
 describe("updateLabels", () => {

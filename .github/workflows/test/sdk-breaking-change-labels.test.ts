@@ -23,11 +23,9 @@ const mockContext = createMockContext();
 const mockCore = createMockCore();
 
 function getLabelAndAction(
-  asyncFunctionArgs: Partial<import("@actions/github-script").AsyncFunctionArguments>,
+  asyncFunctionArgs: Partial<import("../src/github.ts").WorkflowArguments>,
 ) {
-  return getLabelAndActionSrc(
-    asyncFunctionArgs as import("@actions/github-script").AsyncFunctionArguments,
-  );
+  return getLabelAndActionSrc(asyncFunctionArgs as import("../src/github.ts").WorkflowArguments);
 }
 
 describe("sdk-breaking-change-labels", () => {

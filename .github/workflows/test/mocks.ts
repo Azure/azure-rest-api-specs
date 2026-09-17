@@ -4,9 +4,9 @@ import type { Core } from "../src/github.ts";
 
 export type { Core };
 
-export type Context = import("@actions/github-script").AsyncFunctionArguments["context"];
+export type Context = import("../src/github.ts").WorkflowArguments["context"];
 
-export type GitHub = import("@actions/github-script").AsyncFunctionArguments["github"];
+export type GitHub = import("../src/github.ts").WorkflowArguments["github"];
 
 export function createMockGithub(): GitHub & ReturnType<typeof createMockGithubImpl> {
   return createMockGithubImpl() as GitHub & ReturnType<typeof createMockGithubImpl>;
@@ -18,7 +18,7 @@ export function createMockGithub(): GitHub & ReturnType<typeof createMockGithubI
  */
 export type MockGithub = ReturnType<typeof createMockGithub>;
 
-// Partial mock of `github` parameter passed into github-script actions
+// Partial mock of `github` parameter passed into workflow commands
 function createMockGithubImpl() {
   return {
     hook: {
@@ -57,6 +57,7 @@ function createMockGithubImpl() {
       },
       pulls: {
         get: vi.fn(),
+        listFiles: vi.fn().mockResolvedValue({ data: [] }),
       },
       repos: {
         createCommitStatus: vi.fn(),
@@ -79,7 +80,7 @@ export function createMockCore(): Core & ReturnType<typeof createMockCoreImpl> {
   return createMockCoreImpl() as Core & ReturnType<typeof createMockCoreImpl>;
 }
 
-// Partial mock of `core` parameter passed into to github-script actions
+// Partial mock of `core` parameter passed into to workflow commands
 function createMockCoreImpl() {
   const summary = {} as { addRaw: Mock; write: Mock };
   summary.addRaw = vi.fn().mockReturnValue(summary);
@@ -109,7 +110,7 @@ export function createMockContext(): Context & ReturnType<typeof createMockConte
   return createMockContextImpl() as Context & ReturnType<typeof createMockContextImpl>;
 }
 
-// Partial mock of `context` parameter passed into github-script actions
+// Partial mock of `context` parameter passed into workflow commands
 function createMockContextImpl() {
   return {
     payload: {},

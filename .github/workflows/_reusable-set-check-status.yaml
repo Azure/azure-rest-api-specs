@@ -54,20 +54,16 @@ jobs:
           sparse-checkout: |
             .github
 
-      - name: "Set Status"
-        uses: actions/github-script@v8
-        id: set-status
-        with:
-          script: |
-            const { default: setStatus } =
-                await import('${{ github.workspace }}/.github/workflows/src/set-status.ts');
-            return await setStatus(
-              { github, context, core },
-              '${{ inputs.monitored_workflow_name }}',
-              '${{ inputs.required_check_name }}',
-              '${{ inputs.overriding_label }}'
-            );
+      - uses: ./.github/actions/install-workflow-deps
 
+      - name: "Set Status"
+        run: node "${{ github.workspace }}/.github/workflows/cmd/set-status.ts"
+        env:
+          MONITORED_WORKFLOW_NAME: ${{ inputs.monitored_workflow_name }}
+          REQUIRED_CHECK_NAME: ${{ inputs.required_check_name }}
+          OVERRIDING_LABEL: ${{ inputs.overriding_label }}
+          GITHUB_TOKEN: ${{ github.token }}
+        id: set-status
       - if: ${{ always() && steps.set-status.outputs.head_sha }}
         name: Upload artifact with head SHA
         uses: ./.github/actions/add-empty-artifact

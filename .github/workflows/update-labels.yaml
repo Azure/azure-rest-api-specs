@@ -35,15 +35,13 @@ jobs:
           sparse-checkout: |
             .github
 
+      - uses: ./.github/actions/install-workflow-deps
+
       - name: Update Labels
         id: update-labels
-        uses: actions/github-script@v8
-        with:
-          script: |
-            const { default: updateLabels } =
-              await import('${{ github.workspace }}/.github/workflows/src/update-labels.ts');
-            await updateLabels({ github, context, core });
-
+        run: node "${{ github.workspace }}/.github/workflows/cmd/update-labels.ts"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       - if: ${{ always() && steps.update-labels.outputs.head_sha }}
         name: Upload artifact with head SHA
         uses: ./.github/actions/add-empty-artifact

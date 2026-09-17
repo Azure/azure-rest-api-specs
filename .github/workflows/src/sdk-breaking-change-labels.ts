@@ -20,7 +20,7 @@ export async function getLabelAndAction({
   github,
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments): Promise<{
+}: import("./github.ts").WorkflowArguments): Promise<{
   labelName: string | undefined;
   labelAction: LabelAction;
   issueNumber: number;

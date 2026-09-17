@@ -77,8 +77,8 @@ let core: ReturnType<typeof createMockCore>;
 
 let context: ReturnType<typeof createMockContext>;
 
-function args(): import("@actions/github-script").AsyncFunctionArguments {
-  return { context, core } as unknown as import("@actions/github-script").AsyncFunctionArguments;
+function args(): import("../../src/github.ts").WorkflowArguments {
+  return { context, core } as unknown as import("../../src/github.ts").WorkflowArguments;
 }
 
 /**

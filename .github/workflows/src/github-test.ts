@@ -5,7 +5,7 @@ import { inspect } from "util";
 
 export default async function importAllModules({
   core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+}: Pick<import("./github.ts").WorkflowArguments, "core">) {
   const workspace = process.env.GITHUB_WORKSPACE;
   if (!workspace) {
     throw new Error("Env var GITHUB_WORKSPACE must be set");

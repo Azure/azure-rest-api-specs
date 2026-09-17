@@ -1,5 +1,5 @@
-name: Install dependencies for github-script actions
-description: Installs dependencies for github-script actions
+name: Install workflow dependencies
+description: Sets up Node.js and installs production dependencies for workflow commands
 
 runs:
   using: composite
@@ -7,7 +7,7 @@ runs:
   steps:
     - uses: ./.github/actions/setup-node-install-deps
       with:
-        # actions/github-script@v8 uses Node 24
+        # Workflow TypeScript runs directly with native type stripping.
         node-version: 24.x
         # --config.trust-lockfile=true trusts the already-vetted committed lockfile and
         # skips pnpm's per-install supply-chain re-verification, which is cold on every CI
@@ -15,7 +15,7 @@ runs:
         # to this command: pnpm does not read trustLockfile from the npm_config_* env, and
         # the full installs in other workflows should keep verifying.
         install-command: "pnpm install --frozen-lockfile --prod --prefer-offline --config.trust-lockfile=true --filter=azure-rest-api-specs-github..."
-        # Minimal prod-only install (~22 packages). Skip the pnpm store cache: in CI
+        # Filtered prod-only install. Skip the pnpm store cache: in CI
         # the store starts empty each run anyway, and the cache restore/save round-trip
         # (plus the "pnpm store path" probe) costs more than just downloading the few
         # packages directly.

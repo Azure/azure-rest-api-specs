@@ -18,7 +18,7 @@ const outputFile = "avocado.ndjson";
 describe("generateJobSummary", () => {
   function generateJobSummary(asyncFunctionArgs: unknown) {
     return generateJobSummaryImpl(
-      asyncFunctionArgs as import("@actions/github-script").AsyncFunctionArguments,
+      asyncFunctionArgs as import("../src/github.ts").WorkflowArguments,
     );
   }
 

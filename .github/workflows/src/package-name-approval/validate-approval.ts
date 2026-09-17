@@ -4,8 +4,8 @@ import { loadApproversConfig } from "./approvers.ts";
 import { removeLabelIfPresent } from "./labels.ts";
 
 export type ValidateContext = {
-  github: import("@actions/github-script").AsyncFunctionArguments["github"];
-  context: import("@actions/github-script").AsyncFunctionArguments["context"];
+  github: import("../github.ts").WorkflowArguments["github"];
+  context: import("../github.ts").WorkflowArguments["context"];
   core: Core;
   approversConfig: import("./approvers.ts").ApproversConfig;
   owner: string;
@@ -248,7 +248,7 @@ export default async function validateApproval({
   github,
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+}: import("../github.ts").WorkflowArguments) {
   const approversConfig = await loadApproversConfig();
 
   const { owner, repo, issue_number } = await extractInputs(github, context, core);

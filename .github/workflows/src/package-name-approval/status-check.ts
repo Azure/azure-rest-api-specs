@@ -7,7 +7,7 @@ export default async function statusCheck({
   github,
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+}: import("../github.ts").WorkflowArguments) {
   const { owner, repo, issue_number } = await extractInputs(github, context, core);
   const { data: pr } = await github.rest.pulls.get({
     owner,

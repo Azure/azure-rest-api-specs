@@ -54,7 +54,7 @@ export function parseExistingComments(
  * @returns Resolves when the comment is created or updated.
  */
 export async function commentOrUpdate(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: import("./github.ts").WorkflowArguments["github"],
   core: Core,
   owner: string,
   repo: string,

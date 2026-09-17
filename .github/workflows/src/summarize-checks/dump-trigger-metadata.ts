@@ -1,7 +1,7 @@
 export default function dumpTriggerMetadata({
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+}: Pick<import("../github.ts").WorkflowArguments, "context" | "core">) {
   core.info(`Event name: ${context.eventName}`);
   core.info(`Action: ${context.payload.action}`);
 

@@ -74,12 +74,12 @@ describe("validate-approval", () => {
 
   let core: ReturnType<typeof createMockCore>;
 
-  function args(): import("@actions/github-script").AsyncFunctionArguments {
+  function args(): import("../../src/github.ts").WorkflowArguments {
     return {
       github,
       context,
       core,
-    } as unknown as import("@actions/github-script").AsyncFunctionArguments;
+    };
   }
 
   beforeEach(() => {

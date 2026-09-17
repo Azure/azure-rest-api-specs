@@ -252,7 +252,7 @@ export default async function summarizeChecks({
   github,
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments): Promise<void> {
+}: import("../github.ts").WorkflowArguments): Promise<void> {
   const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
 
   if (!issue_number) {
@@ -315,7 +315,7 @@ export function outputRunDetails(
 }
 
 export async function summarizeChecksImpl(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: import("../github.ts").WorkflowArguments["github"],
   core: Core,
   owner: string,
   repo: string,
@@ -441,7 +441,7 @@ export async function summarizeChecksImpl(
  * Updates or creates a commit status with the given status
  */
 export async function updateCommitStatus(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: import("../github.ts").WorkflowArguments["github"],
   core: Core,
   owner: string,
   repo: string,
@@ -479,7 +479,7 @@ export async function updateCommitStatus(
 }
 
 export async function getExistingLabels(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: import("../github.ts").WorkflowArguments["github"],
   owner: string,
   repo: string,
   issue_number: number,
@@ -563,7 +563,7 @@ export function getRequiredChecksFromBranchRuleOutput(
  * @param prNumber - The pull request number.
  */
 export async function getCheckRunTuple(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: import("../github.ts").WorkflowArguments["github"],
   core: Core,
   owner: string,
   repo: string,
@@ -1071,7 +1071,7 @@ function buildViolatedLabelRulesNextStepsText(
  * @returns The parsed job summary data
  */
 export async function getImpactAssessment(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: import("../github.ts").WorkflowArguments["github"],
   core: Core,
   owner: string,
   repo: string,

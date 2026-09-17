@@ -22,13 +22,10 @@ jobs:
           sparse-checkout: |
             .github/
 
-      - name: Install dependencies for github-script actions
-        uses: ./.github/actions/install-deps-github-script
+      - name: Install workflow dependencies
+        uses: ./.github/actions/install-workflow-deps
 
       - name: Validate label authorization
-        uses: actions/github-script@v8
-        with:
-          script: |
-            const { default: checkLabel } =
-              await import('${{ github.workspace }}/.github/workflows/src/protected-labels/check-label.ts');
-            await checkLabel({ github, context, core });
+        run: node "${{ github.workspace }}/.github/workflows/cmd/protected-labels.ts"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

@@ -79,15 +79,13 @@ jobs:
       #     'ARMAutoSignedOff-Trivial': 'none'|'add'|'remove'
       #   }
       # }
+      - uses: ./.github/actions/install-workflow-deps
+
       - id: get-label-action
         name: ARM Auto SignOff - Set Status
-        uses: actions/github-script@v8
-        with:
-          script: |
-            const { default: getLabelAction } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-auto-signoff-status.ts');
-            return await getLabelAction({ github, context, core });
-
+        run: node "${{ github.workspace }}/.github/workflows/cmd/arm-auto-signoff-status.ts"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         # Add/remove specific auto sign-off labels based on analysis results.
         # The action is explicit: 'add' | 'remove' | 'none'.
       - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMSignedOff'] != 'none'

@@ -24,7 +24,7 @@ export default async function getLabelAction({
   github,
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments): Promise<{
+}: import("../github.ts").WorkflowArguments): Promise<{
   headSha: string;
   issueNumber: number;
   labelActions: ManagedLabelActions;

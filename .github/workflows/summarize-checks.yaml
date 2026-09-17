@@ -57,27 +57,17 @@ jobs:
           sparse-checkout: |
             .github
 
-      - name: Install dependencies for github-script actions
-        uses: ./.github/actions/install-deps-github-script
+      - name: Install workflow dependencies
+        uses: ./.github/actions/install-workflow-deps
 
       - id: dump-trigger-metadata
         name: Dump Trigger Metadata
-        uses: actions/github-script@v8
-        with:
-          script: |
-            const { default: dumpTriggerMetadata } =
-              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/dump-trigger-metadata.ts');
-            return await dumpTriggerMetadata({ context, core });
-
+        run: node "${{ github.workspace }}/.github/workflows/cmd/dump-trigger-metadata.ts"
       - id: summarize-checks
         name: Summarize Checks
-        uses: actions/github-script@v8
-        with:
-          script: |
-            const { default: summarizeChecks } =
-              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/summarize-checks.ts');
-            return await summarizeChecks({ github, context, core });
-
+        run: node "${{ github.workspace }}/.github/workflows/cmd/summarize-checks.ts"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       # May be used by downstream workflows
       - name: Set job-summary artifact
         if: ${{ always() && steps.summarize-checks.outputs.summary }}

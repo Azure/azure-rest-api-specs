@@ -1,4 +1,3 @@
-import type { AsyncFunctionArguments } from "@actions/github-script";
 import { afterEach } from "node:test";
 import { beforeEach, describe, expect, expectTypeOf, it, vi } from "vitest";
 import { add, Duration } from "../../shared/src/time.ts";
@@ -6,8 +5,8 @@ import { createLogHook, createRateLimitHook, type Core } from "../src/github.ts"
 import { createMockLogger } from "./mocks.ts";
 
 describe("Core", () => {
-  it("matches the toolkit provided by GitHub Script", () => {
-    expectTypeOf<Core>().toEqualTypeOf<AsyncFunctionArguments["core"]>();
+  it("matches the toolkit provided by the workflow runtime", () => {
+    expectTypeOf<Core>().toEqualTypeOf<typeof import("@actions/core")>();
   });
 });
 

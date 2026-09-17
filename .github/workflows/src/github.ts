@@ -1,8 +1,15 @@
-import type { AsyncFunctionArguments } from "@actions/github-script";
 import { toPercent } from "../../shared/src/math.ts";
 import { Duration, formatDuration, getDuration, subtract } from "../../shared/src/time.ts";
 
-export type Core = AsyncFunctionArguments["core"];
+export type Core = typeof import("@actions/core");
+export type GitHub = ReturnType<typeof import("@actions/github").getOctokit>;
+export type Context = typeof import("@actions/github").context;
+
+export interface WorkflowArguments {
+  github: GitHub;
+  context: Context;
+  core: Core;
+}
 
 export type CommitStatuses =
   RestEndpointMethodTypes["repos"]["listCommitStatusesForRef"]["response"]["data"];
