@@ -53,49 +53,23 @@ union AgentOptimizationStage {
   optimization: "optimization",
 }
 
-/** Current activity for a candidate under construction or evaluation. */
-union AgentOptimizationCandidateProgressStage {
-  generating: "generating",
-  evaluating: "evaluating",
-}
-
 // ---------------------------------------------------------------------------
-// Progress / result models
+// Result models
 // ---------------------------------------------------------------------------
 
-@doc("Metadata for the candidate currently under evaluation. Omitted unless a job is in progress with an active candidate.")
-model AgentOptimizationInProgressCandidateInfo {
-  @doc("Timestamp when the current candidate began evaluation, represented in Unix time. Omitted when the start time is unavailable.")
-  created_at?: FoundryTimestamp;
+@doc("Lightweight lifecycle state for a candidate produced by an optimization job.")
+model AgentOptimizationJobCandidateState {
+  @doc("Candidate resource identifier. The resource is available through candidate GET throughout its lifecycle.")
+  candidate_id: string;
 
-  @doc("Current candidate activity.")
-  stage: AgentOptimizationCandidateProgressStage;
-}
+  @doc("The candidate's immutable role in the optimization job.")
+  role: AgentOptimizationCandidateRole;
 
-@doc("Progress of candidate generation and evaluation.")
-model AgentOptimizationCandidatesProgress {
-  @doc("Number of candidates whose evaluation has completed so far.")
-  candidates_completed: int32;
+  @doc("The candidate's current lifecycle state.")
+  status: AgentOptimizationCandidateStatus;
 
-  @doc("Score of the baseline (un-optimized) evaluation. Omitted until the baseline eval completes.")
-  baseline_candidate_score?: float64;
-
-  @doc("Best score observed so far across all candidates. Omitted until at least one score is available.")
-  best_candidate_score?: float64;
-
-  @doc("Metadata for the candidate currently under evaluation. Omitted when no candidate is active and on terminal states.")
-  in_progress_candidate?: AgentOptimizationInProgressCandidateInfo;
-}
-
-@doc("In-flight progress. Preserved on terminal states with the nested in_progress_candidate omitted.")
-model AgentOptimizationJobProgress {
-  @doc("Candidate generation and evaluation progress.")
-  candidates_progress: AgentOptimizationCandidatesProgress;
-
-  @doc("Wall-clock time elapsed since the job began executing. Wire representation: seconds as a float.")
-  @encode(DurationKnownEncoding.seconds, float64)
-  elapsed_seconds: duration;
-
+  @doc("Timestamp when work on this candidate slot began, represented in Unix time.")
+  started_at: FoundryTimestamp;
 }
 
 @doc("Aggregated token usage for one optimization stage and model.")
@@ -142,8 +116,14 @@ model AgentOptimizationJobResult {
   @doc("Candidate ID of the original baseline. Omitted until the baseline candidate is available.")
   baseline_candidate_id?: string;
 
-  @doc("All candidate IDs produced by this job, in evaluation order. Omitted until at least one candidate is available. Use GET /candidates/{id} for the mutation payload and file manifest, or GET /candidates for a paginated summary listing.")
-  candidate_ids?: string[];
+  @doc("Lightweight candidate lifecycle states in candidate-slot order. The first entry is the baseline. Use candidate GET or LIST for full candidate details.")
+  candidates?: AgentOptimizationJobCandidateState[];
+
+  @doc("Score of the baseline candidate. Omitted until baseline evaluation completes.")
+  baseline_score?: float64;
+
+  @doc("Best score observed across completed candidates. Omitted until a candidate completes evaluation.")
+  best_score?: float64;
 
   @doc("Aggregate token usage per stage and model. Always present; empty array when no calls were measured.")
   token_usage: AgentOptimizationJobTokenUsage[];
@@ -182,10 +162,6 @@ model AgentOptimizationJob is JobLike<
   @doc("The timestamp when the job was last updated, represented in Unix time.")
   @visibility(Lifecycle.Read)
   updated_at: FoundryTimestamp;
-
-  @doc("Progress snapshot. Omitted before progress is available; preserved on terminal states with in_progress_candidate omitted.")
-  @visibility(Lifecycle.Read)
-  progress?: AgentOptimizationJobProgress;
 
   @doc("Non-fatal warnings emitted during optimization. Omitted when no warnings were produced.")
   @visibility(Lifecycle.Read)

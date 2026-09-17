@@ -43527,7 +43527,9 @@ components:
         - candidate_id
         - job_id
         - name
-        - output
+        - role
+        - status
+        - started_at
       properties:
         candidate_id:
           type: string
@@ -43538,18 +43540,24 @@ components:
         name:
           type: string
           description: Display name of the candidate (e.g., 'baseline', 'instruction-v2').
+        role:
+          $ref: '#/components/schemas/AgentOptimizationCandidateRole'
+          description: The candidate's immutable role in the optimization job.
+        status:
+          $ref: '#/components/schemas/AgentOptimizationCandidateStatus'
+          description: The candidate's current lifecycle state.
+        started_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp when work on this candidate slot began, represented in Unix time.
         output:
           $ref: '#/components/schemas/AgentOptimizationCandidateOutput'
-          description: Generated agent configuration changes.
+          description: Generated agent configuration changes. Omitted until a configuration is available.
         rationale:
           type: string
           description: Human-readable explanation of why the optimizer produced this candidate. Populated on candidate GET when available and omitted from LIST.
         agent_version:
           type: string
           description: Foundry agent version associated with this candidate. Omitted when no temporary or evaluated agent version was created.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: Timestamp when the candidate was created, represented in Unix time.
         evaluation:
           $ref: '#/components/schemas/AgentOptimizationCandidateEvaluation'
           description: Comparative evaluation summary. Omitted when this candidate was not comparatively evaluated.
@@ -43598,12 +43606,14 @@ components:
             $ref: '#/components/schemas/AgentOptimizationMutation'
           description: Typed configuration mutations applied to the baseline. Omitted for the baseline candidate. LIST without `expand=mutations` returns mutation items with only `type`; expanded LIST and candidate GET populate each mutation's `value`.
       description: Agent configuration changes generated for a candidate.
-    AgentOptimizationCandidateProgressStage:
-      type: string
-      enum:
-        - generating
-        - evaluating
-      description: Current activity for a candidate under construction or evaluation.
+    AgentOptimizationCandidateRole:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - baseline
+            - generated
+      description: The candidate's immutable role in its optimization job.
     AgentOptimizationCandidateSearchConfiguration:
       type: object
       properties:
@@ -43629,27 +43639,16 @@ components:
           description: Maximum number of consecutive proposed candidates that may fail screening before the search stops early. Defaults to 5 when omitted.
           default: 5
       description: Candidate search settings.
-    AgentOptimizationCandidatesProgress:
-      type: object
-      required:
-        - candidates_completed
-      properties:
-        candidates_completed:
-          type: integer
-          format: int32
-          description: Number of candidates whose evaluation has completed so far.
-        baseline_candidate_score:
-          type: number
-          format: double
-          description: Score of the baseline (un-optimized) evaluation. Omitted until the baseline eval completes.
-        best_candidate_score:
-          type: number
-          format: double
-          description: Best score observed so far across all candidates. Omitted until at least one score is available.
-        in_progress_candidate:
-          $ref: '#/components/schemas/AgentOptimizationInProgressCandidateInfo'
-          description: Metadata for the candidate currently under evaluation. Omitted when no candidate is active and on terminal states.
-      description: Progress of candidate generation and evaluation.
+    AgentOptimizationCandidateStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - generating
+            - evaluating
+            - completed
+            - failed
+      description: The candidate's lifecycle state.
     AgentOptimizationConfiguration:
       type: object
       required:
@@ -43849,18 +43848,6 @@ components:
       enum:
         - improve_quality
       description: Goal for an agent-optimization job.
-    AgentOptimizationInProgressCandidateInfo:
-      type: object
-      required:
-        - stage
-      properties:
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: Timestamp when the current candidate began evaluation, represented in Unix time. Omitted when the start time is unavailable.
-        stage:
-          $ref: '#/components/schemas/AgentOptimizationCandidateProgressStage'
-          description: Current candidate activity.
-      description: Metadata for the candidate currently under evaluation. Omitted unless a job is in progress with an active candidate.
     AgentOptimizationInstructionMutation:
       type: object
       required:
@@ -43922,10 +43909,6 @@ components:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The timestamp when the job was last updated, represented in Unix time.
           readOnly: true
-        progress:
-          $ref: '#/components/schemas/AgentOptimizationJobProgress'
-          description: Progress snapshot. Omitted before progress is available; preserved on terminal states with in_progress_candidate omitted.
-          readOnly: true
         warnings:
           type: array
           items:
@@ -43933,6 +43916,27 @@ components:
           description: Non-fatal warnings emitted during optimization. Omitted when no warnings were produced.
           readOnly: true
       description: Agent optimization job resource — a long-running job that produces candidate changes to a Foundry agent configuration.
+    AgentOptimizationJobCandidateState:
+      type: object
+      required:
+        - candidate_id
+        - role
+        - status
+        - started_at
+      properties:
+        candidate_id:
+          type: string
+          description: Candidate resource identifier. The resource is available through candidate GET throughout its lifecycle.
+        role:
+          $ref: '#/components/schemas/AgentOptimizationCandidateRole'
+          description: The candidate's immutable role in the optimization job.
+        status:
+          $ref: '#/components/schemas/AgentOptimizationCandidateStatus'
+          description: The candidate's current lifecycle state.
+        started_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp when work on this candidate slot began, represented in Unix time.
+      description: Lightweight lifecycle state for a candidate produced by an optimization job.
     AgentOptimizationJobInputs:
       type: object
       required:
@@ -43982,20 +43986,6 @@ components:
             - improved
             - no_improvement
       description: Outcome of an optimization job that evaluated candidates against a baseline.
-    AgentOptimizationJobProgress:
-      type: object
-      required:
-        - candidates_progress
-        - elapsed_seconds
-      properties:
-        candidates_progress:
-          $ref: '#/components/schemas/AgentOptimizationCandidatesProgress'
-          description: Candidate generation and evaluation progress.
-        elapsed_seconds:
-          type: number
-          format: double
-          description: 'Wall-clock time elapsed since the job began executing. Wire representation: seconds as a float.'
-      description: In-flight progress. Preserved on terminal states with the nested in_progress_candidate omitted.
     AgentOptimizationJobResult:
       type: object
       required:
@@ -44005,11 +43995,19 @@ components:
         baseline_candidate_id:
           type: string
           description: Candidate ID of the original baseline. Omitted until the baseline candidate is available.
-        candidate_ids:
+        candidates:
           type: array
           items:
-            type: string
-          description: All candidate IDs produced by this job, in evaluation order. Omitted until at least one candidate is available. Use GET /candidates/{id} for the mutation payload and file manifest, or GET /candidates for a paginated summary listing.
+            $ref: '#/components/schemas/AgentOptimizationJobCandidateState'
+          description: Lightweight candidate lifecycle states in candidate-slot order. The first entry is the baseline. Use candidate GET or LIST for full candidate details.
+        baseline_score:
+          type: number
+          format: double
+          description: Score of the baseline candidate. Omitted until baseline evaluation completes.
+        best_score:
+          type: number
+          format: double
+          description: Best score observed across completed candidates. Omitted until a candidate completes evaluation.
         token_usage:
           type: array
           items:
