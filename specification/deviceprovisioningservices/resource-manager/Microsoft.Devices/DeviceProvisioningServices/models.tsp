@@ -555,10 +555,9 @@ model IotHubDefinitionDescription {
   connectionString?: string;
 
   /**
-   * The system-derived connection profile that the linked IoT hub uses for device connections. This property is not user-settable and is not present until the capability has been resolved. Defaults to 'Classic'.
+   * The connection profile to use for device connections to the linked IoT hub. Customers can set this property to select the profile. Defaults to 'Classic' when omitted.
    */
   @added(Versions.v2026_11_02_preview)
-  @visibility(Lifecycle.Read)
   connectionProfile?: ConnectionProfile = ConnectionProfile.Classic;
 
   /**

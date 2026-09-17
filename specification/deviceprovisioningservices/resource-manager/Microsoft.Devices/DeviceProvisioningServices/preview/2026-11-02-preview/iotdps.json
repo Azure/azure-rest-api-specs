@@ -2136,7 +2136,7 @@
         },
         "connectionProfile": {
           "type": "string",
-          "description": "The system-derived connection profile that the linked IoT hub uses for device connections. This property is not user-settable and is not present until the capability has been resolved. Defaults to 'Classic'.",
+          "description": "The connection profile to use for device connections to the linked IoT hub. Customers can set this property to select the profile. Defaults to 'Classic' when omitted.",
           "default": "Classic",
           "enum": [
             "Classic",
@@ -2157,8 +2157,7 @@
                 "description": "MQTT v5 connection profile."
               }
             ]
-          },
-          "readOnly": true
+          }
         },
         "location": {
           "type": "string",
