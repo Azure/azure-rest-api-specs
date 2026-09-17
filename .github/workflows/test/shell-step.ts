@@ -63,6 +63,8 @@ export async function runShellStep(
       process.platform === "win32"
         ? join(process.env.ProgramFiles ?? "C:/Program Files", "Git", "bin", "bash.exe")
         : "bash";
+    // Native jq.exe otherwise rewrites embedded LF characters to CRLF.
+    const jq = process.platform === "win32" ? 'jq() { command jq --binary "$@"; }\n' : "";
     try {
       ({ stdout, stderr } = await promisify(execFile)(
         bash,
@@ -71,7 +73,7 @@ export async function runShellStep(
           "--norc",
           "-c",
           // Git Bash prepends its own curl directory to PATH, so bind the stub explicitly.
-          `${tool}() { bash "$MOCK_TOOL_PATH" "$@"; }\n${script}`,
+          `${tool}() { bash "$MOCK_TOOL_PATH" "$@"; }\n${jq}${script}`,
         ],
         { env: environment },
       ));
