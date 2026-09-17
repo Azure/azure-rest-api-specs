@@ -3,7 +3,7 @@ import { existsSync } from "fs";
 import { readFile, writeFile } from "fs/promises";
 import { dirname, join } from "path";
 import { promisify } from "util";
-import { getChangedFilesStatuses, tspconfig } from "../../../shared/src/changed-files.js";
+import { getChangedFilesStatuses, tspconfig } from "../../../shared/src/changed-files.ts";
 import { loadFormatRules, validateAllNamespaces } from "./validate-format.js";
 
 const execFileAsync = promisify(execFileCb);

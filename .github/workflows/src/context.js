@@ -1,6 +1,6 @@
 import { inspect } from "util";
-import { isFullGitSha } from "../../shared/src/git.js";
-import { PER_PAGE_MAX } from "../../shared/src/github.js";
+import { isFullGitSha } from "../../shared/src/git.ts";
+import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { CoreLogger } from "./core-logger.js";
 import { createLogHook, createRateLimitHook } from "./github.js";
 import { getIssueNumber } from "./issues.js";
