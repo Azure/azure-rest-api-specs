@@ -67,13 +67,18 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
+  Microsoft.HorizonDb.ClusterCreateRequest,
+  "HorizonDBClusterCreateContent",
+  "csharp"
+);
+@@clientName(
   Microsoft.HorizonDb.ClusterReplaceAcceptedResponse,
-  "ClusterReplaceAcceptedResult",
+  "HorizonDBClusterReplaceAcceptedResult",
   "csharp"
 );
 @@clientName(
   Microsoft.HorizonDb.ClusterCreateAcceptedResponse,
-  "ClusterCreateAcceptedResult",
+  "HorizonDBClusterCreateAcceptedResult",
   "csharp"
 );
 @@clientName(
@@ -140,7 +145,7 @@ using Azure.ClientGenerator.Core;
 @@clientName(Microsoft.HorizonDb.Pool, "HorizonDBPool", "csharp");
 @@clientName(
   Microsoft.HorizonDb.PoolCreateAcceptedResponse,
-  "PoolCreateAcceptedResult",
+  "HorizonDBPoolCreateAcceptedResult",
   "csharp"
 );
 @@clientName(
@@ -228,17 +233,17 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.HorizonDb.ActivateChangeDataCaptureIdentityRequest,
-  "ActivateChangeDataCaptureIdentityContent",
+  "HorizonDBActivateChangeDataCaptureIdentityContent",
   "csharp"
 );
 @@clientName(
   Microsoft.HorizonDb.MaintenanceEventRescheduleRequest,
-  "MaintenanceEventRescheduleContent",
+  "HorizonDBMaintenanceEventRescheduleContent",
   "csharp"
 );
 @@clientName(
   Microsoft.HorizonDb.MaintenanceEventActionResponse,
-  "MaintenanceEventActionResult",
+  "HorizonDBMaintenanceEventActionResult",
   "csharp"
 );
 @@clientName(
