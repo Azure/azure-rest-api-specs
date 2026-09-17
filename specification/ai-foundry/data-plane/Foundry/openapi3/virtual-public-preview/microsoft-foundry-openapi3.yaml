@@ -5386,81 +5386,9 @@ paths:
         required_previews:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony/campaigns:
-    post:
-      operationId: TelephonyCampaigns_create
-      description: Accepts immutable inputs. Same Operation-Id replays the creation receipt; an existing Campaign name with a different Operation-Id conflicts.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: Owning Agent; never overridden in recipient inputs.
-          schema:
-            type: string
-        - name: Operation-Id
-          in: header
-          required: false
-          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '201':
-          description: The request has succeeded and a new resource has been created as a result.
-          headers:
-            Location:
-              required: true
-              description: URI of the Campaign business resource.
-              schema:
-                type: string
-            Operation-Location:
-              required: true
-              description: URI of the automatically created preparation monitor, not the Campaign execution state.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TelephonyCampaign'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - TelephonyCampaigns
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TelephonyCampaignCreate'
-        description: Complete immutable Campaign definition.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     get:
       operationId: TelephonyCampaigns_list
+      summary: List telephony campaigns
       description: Lists Agent-owned Campaigns without embedding recipient sources or arrays. Campaign names serve as paging IDs; ordering uses created_at and name.
       parameters:
         - name: Foundry-Features
@@ -5575,8 +5503,149 @@ paths:
         required_previews:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony/campaigns/{campaign_name}:
+    put:
+      operationId: TelephonyCampaigns_create
+      summary: Create a telephony campaign
+      description: Creates an immutable named Campaign and its preparation monitor. Returns 201 on first creation and 200 with the existing resource for identical inputs; differing inputs return 409 campaign_inputs_conflict. Retries never restart preparation or dialing. Operation-Id collisions with a different request return 409 operation_id_conflict. The monitor completes after initial validation, before any manual start or scheduled call.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: Owning Agent; never overridden in recipient inputs.
+          schema:
+            type: string
+        - name: campaign_name
+          in: path
+          required: true
+          description: Immutable name chosen by the caller; existing resources cannot be overwritten.
+          schema:
+            $ref: '#/components/schemas/TelephonyCampaignName'
+        - name: Operation-Id
+          in: header
+          required: false
+          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            Location:
+              required: true
+              description: URI of the Campaign business resource.
+              schema:
+                type: string
+                format: uri
+            Operation-Location:
+              required: true
+              description: URI of the automatically created preparation monitor, not the Campaign execution state.
+              schema:
+                type: string
+                format: uri
+            Operation-Id:
+              required: true
+              description: ID of the one initial preparation monitor; preserved on idempotent retries.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyCampaign'
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Location:
+              required: true
+              description: URI of the Campaign business resource.
+              schema:
+                type: string
+                format: uri
+            Operation-Location:
+              required: true
+              description: URI of the automatically created preparation monitor, not the Campaign execution state.
+              schema:
+                type: string
+                format: uri
+            Operation-Id:
+              required: true
+              description: ID of the one initial preparation monitor; preserved on idempotent retries.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelephonyCampaign'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - TelephonyCampaigns
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTelephonyCampaignRequest'
+            examples:
+              Prepare calls with a per-recipient time column:
+                summary: Prepare calls with a per-recipient time column
+                value:
+                  inputs:
+                    connection_name: contoso-phone-provider
+                    source: '+14255550100'
+                    recipients:
+                      type: dataset
+                    schedule:
+                      type: recipient
+              Prepare calls with a common scheduled time:
+                summary: Prepare calls with a common scheduled time
+                value:
+                  inputs:
+                    connection_name: contoso-phone-provider
+                    source: '+14255550100'
+                    recipients:
+                      type: dataset
+                    schedule:
+                      type: scheduled
+              Prepare immediate calls without dialing:
+                summary: Prepare immediate calls without dialing
+                value:
+                  inputs:
+                    connection_name: contoso-phone-provider
+                    source: '+14255550100'
+                    recipients:
+                      type: inline
+        description: Complete immutable Campaign definition.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     get:
       operationId: TelephonyCampaigns_get
+      summary: Get a telephony campaign
       description: Gets an Agent-owned Campaign without embedding its recipient source or array.
       parameters:
         - name: Foundry-Features
@@ -5598,7 +5667,7 @@ paths:
           required: true
           description: Immutable Campaign name.
           schema:
-            type: string
+            $ref: '#/components/schemas/TelephonyCampaignName'
         - name: api-version
           in: query
           required: true
@@ -5632,6 +5701,7 @@ paths:
           - VoiceAgents=V1Preview
     delete:
       operationId: TelephonyCampaigns_delete
+      summary: Delete a telephony campaign
       description: Deletes a terminal, quiescent Campaign; otherwise returns 409. Repeated deletion returns 204. Retained replay safeguards prevent accidental recreation. Does not delete conversations or recordings.
       parameters:
         - name: Foundry-Features
@@ -5653,7 +5723,7 @@ paths:
           required: true
           description: Immutable Campaign name.
           schema:
-            type: string
+            $ref: '#/components/schemas/TelephonyCampaignName'
         - name: api-version
           in: query
           required: true
@@ -5684,7 +5754,8 @@ paths:
   /agents/{agent_name}/telephony/campaigns/{campaign_name}/preparation:
     get:
       operationId: TelephonyCampaigns_getPreparation
-      description: Polls the one preparation operation created automatically with the Campaign. There is no separate import/validate submission API. Succeeded contains the prepared Campaign, not final call outcomes.
+      summary: Get campaign preparation status
+      description: Polls the preparation operation created with the Campaign. Nonterminal responses include Retry-After. On success, retrieve the Campaign with GET; on failure, error contains the cause. There is no separate import/validate submission and no call-outcome result in this monitor.
       parameters:
         - name: Foundry-Features
           in: header
@@ -5705,7 +5776,7 @@ paths:
           required: true
           description: Immutable Campaign name.
           schema:
-            type: string
+            $ref: '#/components/schemas/TelephonyCampaignName'
         - name: api-version
           in: query
           required: true
@@ -5727,6 +5798,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TelephonyCampaignPreparation'
+              examples:
+                Validation failed without dialing:
+                  summary: Validation failed without dialing
+                  value:
+                    id: prepare-appointment-reminders
+                    status: failed
+                    created_at: 1789632000
+                    finished_at: 1789632060
+                    error:
+                      code: campaign_validation_failed
+                      message: Recipient validation failed. Inspect recipient_results, correct the inputs, and create a new Campaign.
+                      param: inputs.recipients
+                Preparation finished before manual start:
+                  summary: Preparation finished before manual start
+                  value:
+                    id: prepare-appointment-reminders
+                    status: succeeded
+                    created_at: 1789632000
+                    finished_at: 1789632060
+                Preparation is still validating recipients:
+                  summary: Preparation is still validating recipients
+                  value:
+                    id: prepare-appointment-reminders
+                    status: in_progress
+                    created_at: 1789632000
         4XX:
           description: Client error
           content:
@@ -5747,6 +5843,7 @@ paths:
   /agents/{agent_name}/telephony/campaigns/{campaign_name}/recipient_results:
     get:
       operationId: TelephonyCampaigns_listRecipientResults
+      summary: List campaign recipient results
       description: Lists recipients and their current validation/execution outcomes in any Campaign state. Stable IDs and ordering, but no snapshot guarantee across requests; a new validation does not invalidate cursors.
       parameters:
         - name: Foundry-Features
@@ -5768,7 +5865,7 @@ paths:
           required: true
           description: Immutable Campaign name.
           schema:
-            type: string
+            $ref: '#/components/schemas/TelephonyCampaignName'
         - name: limit
           in: query
           required: false
@@ -5876,6 +5973,7 @@ paths:
   /agents/{agent_name}/telephony/campaigns/{campaign_name}:cancel:
     post:
       operationId: TelephonyCampaigns_cancel
+      summary: Cancel a telephony campaign
       description: Stops all future dispatch and retries; drains admitted calls before terminal cancellation.
       parameters:
         - name: Foundry-Features
@@ -5897,7 +5995,7 @@ paths:
           required: true
           description: Immutable Campaign name.
           schema:
-            type: string
+            $ref: '#/components/schemas/TelephonyCampaignName'
         - name: api-version
           in: query
           required: true
@@ -5932,6 +6030,7 @@ paths:
   /agents/{agent_name}/telephony/campaigns/{campaign_name}:pause:
     post:
       operationId: TelephonyCampaigns_pause
+      summary: Pause a telephony campaign
       description: Stops new attempts for running work or an execution-time validation. Already admitted calls and an in-flight check may finish but cannot undo this pause. Pending/initially validating/terminal Campaigns reject pause with 409. Pausing paused work returns its current state with a current ETag.
       parameters:
         - name: Foundry-Features
@@ -5953,7 +6052,7 @@ paths:
           required: true
           description: Immutable Campaign name.
           schema:
-            type: string
+            $ref: '#/components/schemas/TelephonyCampaignName'
         - name: If-Match
           in: header
           required: true
@@ -5994,6 +6093,7 @@ paths:
   /agents/{agent_name}/telephony/campaigns/{campaign_name}:start:
     post:
       operationId: TelephonyCampaigns_start
+      summary: Start a telephony campaign
       description: 'Starts pending work or continues a paused Campaign through required Agent-version checks. Never replays terminal recipients. With a current ETag, repeated start while running returns current state. Any unfinished preparation or Agent validation rejects start with 409, including a paused Campaign with an in-flight check: it cannot authorize continuation or queue another check. Cancelling and terminal Campaigns also reject start. A stale If-Match returns 412 before state checks.'
       parameters:
         - name: Foundry-Features
@@ -6015,7 +6115,7 @@ paths:
           required: true
           description: Immutable Campaign name.
           schema:
-            type: string
+            $ref: '#/components/schemas/TelephonyCampaignName'
         - name: If-Match
           in: header
           required: true
@@ -49410,6 +49510,18 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    CreateTelephonyCampaignRequest:
+      type: object
+      required:
+        - inputs
+      properties:
+        inputs:
+          $ref: '#/components/schemas/TelephonyCampaignInputsCreateOrUpdate'
+          description: Complete immutable configuration and recipient source.
+      description: Inputs accepted when creating the name-addressed Campaign. Server state and the path name cannot be supplied in the body.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     CreateTwilioTelephonyBindingRequest:
       type: object
       required:
@@ -53467,6 +53579,8 @@ components:
       allOf:
         - $ref: '#/components/schemas/TelephonyCampaignSchedule'
       description: Dispatch as soon as capacity permits after explicit start.
+      examples:
+        - type: immediate
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -84055,6 +84169,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/TelephonyCampaignSchedule'
       description: Read a separate earliest dispatch time for every recipient.
+      examples:
+        - type: recipient
+          column: call_at
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -85005,6 +85122,10 @@ components:
       allOf:
         - $ref: '#/components/schemas/TelephonyCampaignSchedule'
       description: Apply the same earliest dispatch time to every recipient. A past time means eligible now, not an error.
+      examples:
+        - type: scheduled
+          scheduled_at: 1790816400
+          expires_at: 1790902800
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -86772,11 +86893,9 @@ components:
           description: Initial preparation failure when failed, or a recoverable validation/runtime blocker when paused. Cleared after successful recovery. Never contains secrets or raw recipient values.
           readOnly: true
         name:
-          type: string
-          minLength: 1
-          maxLength: 64
-          pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$
+          $ref: '#/components/schemas/TelephonyCampaignName'
           description: Immutable customer-chosen name, unique within the project and Agent.
+          readOnly: true
         inputs:
           $ref: '#/components/schemas/TelephonyCampaignInputs'
           description: Immutable configuration. Read responses omit the recipient source and array; use listRecipientResults to inspect recipients.
@@ -86808,31 +86927,14 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    TelephonyCampaignCreate:
-      type: object
-      required:
-        - name
-        - inputs
-      properties:
-        name:
-          type: string
-          minLength: 1
-          maxLength: 64
-          pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$
-          description: Immutable customer-chosen name, unique within the project and Agent.
-        inputs:
-          $ref: '#/components/schemas/TelephonyCampaignInputsCreate'
-          description: Immutable configuration. Read responses omit the recipient source and array; use listRecipientResults to inspect recipients.
-      description: One immutable campaign execution. No configuration update, publish, republish, or campaign version exists.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyCampaignDatasetFormat:
-      type: string
-      enum:
-        - csv
-        - json
-        - jsonl
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - csv
+            - json
+            - jsonl
       description: Supported Dataset file encodings.
       x-ms-foundry-meta:
         required_previews:
@@ -86884,7 +86986,10 @@ components:
     TelephonyCampaignInputValue:
       anyOf:
         - type: string
-        - $ref: '#/components/schemas/numeric'
+        - type: number
+          format: double
+        - type: integer
+          format: int64
         - type: boolean
       description: Scalar template values. Objects, arrays, and null are not accepted.
       x-ms-foundry-meta:
@@ -86914,7 +87019,7 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    TelephonyCampaignInputsCreate:
+    TelephonyCampaignInputsCreateOrUpdate:
       type: object
       required:
         - connection_name
@@ -86942,6 +87047,15 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    TelephonyCampaignName:
+      type: string
+      minLength: 1
+      maxLength: 64
+      pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$
+      description: Immutable customer-chosen Campaign name within a project and Agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     TelephonyCampaignPreparation:
       type: object
       required:
@@ -86952,10 +87066,6 @@ components:
         id:
           type: string
           description: Server-assigned unique identifier.
-          readOnly: true
-        result:
-          $ref: '#/components/schemas/TelephonyCampaign'
-          description: Result produced on success.
           readOnly: true
         status:
           $ref: '#/components/schemas/JobStatus'
@@ -86973,7 +87083,7 @@ components:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: Completion time; succeeded means the entire recipient snapshot was validated and saved.
           readOnly: true
-      description: The single server-created import-and-validate operation for a Campaign. Its completion does not wait for scheduled or active calls.
+      description: 'The initial resource-creation status monitor. No result payload: after preparation succeeds the SDK retrieves the Campaign through the final GET operation. Its completion never waits for scheduled or active calls.'
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -87111,10 +87221,12 @@ components:
         required_previews:
           - VoiceAgents=V1Preview
     TelephonyCampaignRecipientSourceType:
-      type: string
-      enum:
-        - inline
-        - dataset
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - inline
+            - dataset
       description: How the recipient set is supplied.
       x-ms-foundry-meta:
         required_previews:
@@ -87141,11 +87253,13 @@ components:
         required_previews:
           - VoiceAgents=V1Preview
     TelephonyCampaignScheduleType:
-      type: string
-      enum:
-        - immediate
-        - scheduled
-        - recipient
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - immediate
+            - scheduled
+            - recipient
       description: Mutually exclusive ways to determine each recipient's earliest dispatch time.
       x-ms-foundry-meta:
         required_previews:
@@ -90696,9 +90810,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationTarget'
       description: Evaluation target for generating responses using a given model and dataset.
-    numeric:
-      type: number
-      format: double
   securitySchemes:
     OAuth2Auth:
       type: oauth2
