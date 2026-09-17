@@ -4045,7 +4045,7 @@ op replaceprivateDnsZoneGroupsList(
 );
 
 @@alternateType(
-  Common.HubVirtualNetworkConnectionProperties.enableOnlyIPv6Peering,
+  Microsoft.Network.HubVirtualNetworkConnectionProperties.enableOnlyIPv6Peering,
   Microsoft.Network.EnableOnlyIPv6PeeringState,
   "csharp"
 );
