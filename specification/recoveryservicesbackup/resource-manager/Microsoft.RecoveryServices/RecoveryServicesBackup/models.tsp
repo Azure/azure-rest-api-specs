@@ -5244,78 +5244,6 @@ model SnapshotRestoreParameters {
 }
 
 /**
- * Type of filesystem identifier that clashed between source (snapshot RP) and target.
- */
-@added(Versions.v2026_10_01)
-union FilesystemClashType {
-  string,
-
-  /** Invalid clash type. */
-  Invalid: "Invalid",
-
-  /** Storage pool unique ID clashed. */
-  StoragePoolUniqueId: "StoragePoolUniqueId",
-
-  /** Virtual disk unique ID clashed. */
-  VirtualDiskUniqueId: "VirtualDiskUniqueId",
-
-  /** Disk GUID clashed. */
-  DiskGuid: "DiskGuid",
-
-  /** Volume GUID clashed. */
-  VolumeGuid: "VolumeGuid",
-}
-
-/**
- * File system clash info object.
- */
-@added(Versions.v2026_10_01)
-model FilesystemClash {
-  /**
-   * Which identifier kind clashed.
-   */
-  clashType: FilesystemClashType;
-
-  /**
-   * The identifier value (GUID / unique id) present on both source and target.
-   */
-  clashedId: string;
-
-  /**
-   * Source-side volume that owns the clashing identifier (when known).
-   */
-  volumeGuid?: string;
-
-  /**
-   * Target-side managed disk ARM IDs that own the clashing identifier (when known).
-   */
-  managedDiskIds?: string[];
-
-  /**
-   * Human-readable description of the clash.
-   */
-  message?: string;
-}
-
-/**
- * AzureWorkload-specific filesystem clash validation result. Carries aggregated
- * managed disk IDs and the list of all detected clashes in a single error response.
- */
-@added(Versions.v2026_10_01)
-model AzureWorkloadFilesystemClashValidationResult {
-  /**
-   * Unique managed disk ARM IDs collated from all filesystem clashes.
-   */
-  disksToDetachOnClash?: string[];
-
-  /**
-   * List of all detected filesystem clashes between source and target.
-   */
-  @identifiers(#[])
-  filesystemClashes?: FilesystemClash[];
-}
-
-/**
  * Recovery point specific to PointInTime in SAPHana
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
@@ -5599,7 +5527,8 @@ model StorageSpaceInfo {
 }
 
 /**
- * Identifiers for a physical disk that backs a volume.
+ * Metadata for a physical disk that backs a filesystem volume or Storage Spaces pool.
+ * Unlike DiskInformation, this model describes storage topology; DiskInformation only identifies disks included in or excluded from a virtual machine recovery point.
  */
 @added(Versions.v2026_10_01)
 model DiskInfo {
@@ -7580,7 +7509,8 @@ model ValidateRestoreOperationRequest extends ValidateOperationRequest {
 }
 
 /**
- * Validate restore request for AzureWorkload (SQL/HANA/SAP ASE/AnyDatabase).
+ * Restore validation request for Azure Workload backups.
+ * This subtype provides the distinct objectType discriminator used for Azure Workload (SQL/HANA/SAP ASE/AnyDatabase) restore validation.
  */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_10_01)
