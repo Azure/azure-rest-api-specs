@@ -6027,11 +6027,6 @@ union ConfigReferenceSource {
   "csharp"
 );
 @@alternateType(
-  StaticSiteLinkedBackend.backendResourceId,
-  armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(
   SwiftVirtualNetworkProperties.subnetResourceId,
   armResourceIdentifier,
   "csharp"
