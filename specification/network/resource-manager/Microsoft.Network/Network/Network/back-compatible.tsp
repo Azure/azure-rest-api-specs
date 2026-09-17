@@ -171,6 +171,9 @@ using TypeSpec.Versioning;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DdosDetectionRule.properties);
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The existing SDK surface flattens Network child-resource properties."
+@@Legacy.flattenProperty(DdosMitigationRule.properties);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpressRouteServiceProvider.properties);
 

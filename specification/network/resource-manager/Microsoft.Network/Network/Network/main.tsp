@@ -170,6 +170,12 @@ enum Versions {
    */
   @useDependency(Common.Versions.v2025_07_01)
   v2025_07_01: "2025-07-01",
+
+  /**
+   * The 2026-03-01 API version.
+   */
+  @useDependency(Common.Versions.v2026_03_01)
+  v2026_03_01: "2026-03-01",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

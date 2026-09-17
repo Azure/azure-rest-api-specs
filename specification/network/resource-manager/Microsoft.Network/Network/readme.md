@@ -28,32 +28,32 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2025-07-01
+tag: package-2026-03-01
 ```
 
-### Tag: package-2025-07-01
+### Tag: package-2026-03-01
 
-These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
+These settings apply only when `--tag=package-2026-03-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-07-01'
+```yaml $(tag) == 'package-2026-03-01'
 input-file:
-  - stable/2025-07-01/applicationGateway.json
-  - stable/2025-07-01/azureWebCategory.json
-  - stable/2025-07-01/common.json
-  - stable/2025-07-01/expressRoute.json
-  - stable/2025-07-01/firewall.json
-  - stable/2025-07-01/firewallPolicy.json
-  - stable/2025-07-01/interconnectGroup.json
-  - stable/2025-07-01/loadBalancer.json
-  - stable/2025-07-01/networkGateway.json
-  - stable/2025-07-01/networkingOperations.json
-  - stable/2025-07-01/networkManager.json
-  - stable/2025-07-01/networkSecurityPerimeter.json
-  - stable/2025-07-01/networkWatcher.json
-  - stable/2025-07-01/serviceGateway.json
-  - stable/2025-07-01/virtualNetwork.json
-  - stable/2025-07-01/virtualNetworkAppliance.json
-  - stable/2025-07-01/virtualWan.json
+  - stable/2026-03-01/applicationGateway.json
+  - stable/2026-03-01/azureWebCategory.json
+  - stable/2026-03-01/common.json
+  - stable/2026-03-01/expressRoute.json
+  - stable/2026-03-01/firewall.json
+  - stable/2026-03-01/firewallPolicy.json
+  - stable/2026-03-01/interconnectGroup.json
+  - stable/2026-03-01/loadBalancer.json
+  - stable/2026-03-01/networkGateway.json
+  - stable/2026-03-01/networkingOperations.json
+  - stable/2026-03-01/networkManager.json
+  - stable/2026-03-01/networkSecurityPerimeter.json
+  - stable/2026-03-01/networkWatcher.json
+  - stable/2026-03-01/serviceGateway.json
+  - stable/2026-03-01/virtualNetwork.json
+  - stable/2026-03-01/virtualNetworkAppliance.json
+  - stable/2026-03-01/virtualWan.json
   - stable/2018-10-01/vmssNetwork.json
 suppressions:
   - code: ParametersInPointGet

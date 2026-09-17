@@ -1,0 +1,216 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01",
+    "ddosCustomPolicyName": "test-ddos-custom-policy",
+    "parameters": {
+      "location": "centraluseuap",
+      "properties": {
+        "mitigationRules": [
+          {
+            "name": "mitigationRuleTcp",
+            "properties": {
+              "trafficScope": "Tcp",
+              "tcpDefaultMitigations": {
+                "perSourceRateLimiting": {
+                  "packetsPerSecond": 5000
+                },
+                "perSourceConnectionRateLimiting": {
+                  "connectionsPerSecond": 2000
+                }
+              },
+              "sourcePolicyOverrides": [
+                {
+                  "policyAction": {
+                    "actionType": "Deny"
+                  },
+                  "conditions": {
+                    "ipPrefixes": [
+                      "10.0.0.0/24",
+                      "2001:db8::/48"
+                    ]
+                  }
+                },
+                {
+                  "policyAction": {
+                    "actionType": "Bypass"
+                  },
+                  "conditions": {
+                    "geoMatches": [
+                      {
+                        "continent": "Europe",
+                        "countryCode": "FR"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "mitigationRuleUdp",
+            "properties": {
+              "trafficScope": "Udp",
+              "udpDefaultMitigations": {
+                "perSourceRateLimiting": {
+                  "packetsPerSecond": 3000
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-ddos-custom-policy",
+        "type": "Microsoft.Network/ddosCustomPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy",
+        "location": "centraluseuap",
+        "properties": {
+          "mitigationRules": [
+            {
+              "name": "mitigationRuleTcp",
+              "type": "Microsoft.Network/ddosCustomPolicies/ddosMitigationRules",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy/ddosMitigationRules/mitigationRuleTcp",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "trafficScope": "Tcp",
+                "tcpDefaultMitigations": {
+                  "perSourceRateLimiting": {
+                    "packetsPerSecond": 5000
+                  },
+                  "perSourceConnectionRateLimiting": {
+                    "connectionsPerSecond": 2000
+                  }
+                },
+                "sourcePolicyOverrides": [
+                  {
+                    "policyAction": {
+                      "actionType": "Deny"
+                    },
+                    "conditions": {
+                      "ipPrefixes": [
+                        "10.0.0.0/24",
+                        "2001:db8::/48"
+                      ]
+                    }
+                  },
+                  {
+                    "policyAction": {
+                      "actionType": "Bypass"
+                    },
+                    "conditions": {
+                      "geoMatches": [
+                        {
+                          "continent": "Europe",
+                          "countryCode": "FR"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "mitigationRuleUdp",
+              "type": "Microsoft.Network/ddosCustomPolicies/ddosMitigationRules",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy/ddosMitigationRules/mitigationRuleUdp",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "trafficScope": "Udp",
+                "udpDefaultMitigations": {
+                  "perSourceRateLimiting": {
+                    "packetsPerSecond": 3000
+                  }
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "test-ddos-custom-policy",
+        "type": "Microsoft.Network/ddosCustomPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy",
+        "location": "centraluseuap",
+        "properties": {
+          "mitigationRules": [
+            {
+              "name": "mitigationRuleTcp",
+              "type": "Microsoft.Network/ddosCustomPolicies/ddosMitigationRules",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy/ddosMitigationRules/mitigationRuleTcp",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "trafficScope": "Tcp",
+                "tcpDefaultMitigations": {
+                  "perSourceRateLimiting": {
+                    "packetsPerSecond": 5000
+                  },
+                  "perSourceConnectionRateLimiting": {
+                    "connectionsPerSecond": 2000
+                  }
+                },
+                "sourcePolicyOverrides": [
+                  {
+                    "policyAction": {
+                      "actionType": "Deny"
+                    },
+                    "conditions": {
+                      "ipPrefixes": [
+                        "10.0.0.0/24",
+                        "2001:db8::/48"
+                      ]
+                    }
+                  },
+                  {
+                    "policyAction": {
+                      "actionType": "Bypass"
+                    },
+                    "conditions": {
+                      "geoMatches": [
+                        {
+                          "continent": "Europe",
+                          "countryCode": "FR"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "mitigationRuleUdp",
+              "type": "Microsoft.Network/ddosCustomPolicies/ddosMitigationRules",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy/ddosMitigationRules/mitigationRuleUdp",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "trafficScope": "Udp",
+                "udpDefaultMitigations": {
+                  "perSourceRateLimiting": {
+                    "packetsPerSecond": 3000
+                  }
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000"
+        }
+      }
+    }
+  },
+  "operationId": "DdosCustomPolicies_CreateOrUpdate",
+  "title": "Create DDoS custom policy with mitigation rules"
+}
