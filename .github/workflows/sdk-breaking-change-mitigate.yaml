@@ -400,6 +400,7 @@ jobs:
           RESULTS_PATH: ${{ runner.temp }}/analysis-results
           MANIFEST_PATH: ${{ runner.temp }}/analysis-results/projects.json
           PR_NUMBER: ${{ steps.resolve-trigger.outputs.pull-number || steps.read-trigger.outputs.pull-number }}
+          SDK_LANGUAGE: ${{ steps.resolve-trigger.outputs.sdk-language || steps.read-trigger.outputs.sdk-language }}
           TRIGGER_COMMENT_ID: ${{ steps.resolve-trigger.outputs.trigger-comment-id || steps.read-trigger.outputs.trigger-comment-id }}
           MITIGATION_PR_URL: ${{ steps.create-mitigation-pull-request.outputs.pull-request-url }}
         with:
@@ -451,6 +452,20 @@ jobs:
                 : "**Mitigation pull request:** Not created because no file changes were produced.",
             ].join("\n");
 
+            await core.summary
+              .addRaw(
+                [
+                  `**Pull request:** #${pullNumber}`,
+                  "",
+                  `**SDK language:** ${process.env.SDK_LANGUAGE || "not specified"}`,
+                  "",
+                  `**Trigger comment:** ${process.env.TRIGGER_COMMENT_ID || "not available"}`,
+                  "",
+                  report,
+                ].join("\n"),
+              )
+              .write();
+
             const triggerCommentId = Number(process.env.TRIGGER_COMMENT_ID);
             if (Number.isSafeInteger(triggerCommentId) && triggerCommentId > 0) {
               const { data: comment } = await github.rest.issues.getComment({
@@ -478,24 +493,3 @@ jobs:
               issue_number: pullNumber,
               body: report,
             });
-
-      - name: Record mitigation request
-        if: steps.resolve-trigger.outputs.should-run == 'true'
-        shell: bash
-        env:
-          PULL_NUMBER: ${{ steps.resolve-trigger.outputs.pull-number || steps.read-trigger.outputs.pull-number }}
-          SDK_LANGUAGE: ${{ steps.resolve-trigger.outputs.sdk-language || steps.read-trigger.outputs.sdk-language }}
-          TRIGGER_COMMENT_ID: ${{ steps.resolve-trigger.outputs.trigger-comment-id || steps.read-trigger.outputs.trigger-comment-id }}
-          MITIGATION_PR_URL: ${{ steps.create-mitigation-pull-request.outputs.pull-request-url }}
-        run: |
-          {
-            echo "## SDK breaking-change mitigation"
-            echo
-            echo "**Pull request:** #$PULL_NUMBER"
-            echo
-            echo "**SDK language:** ${SDK_LANGUAGE:-not specified}"
-            echo
-            echo "**Trigger comment:** ${TRIGGER_COMMENT_ID:-not available}"
-            echo
-            echo "**Mitigation pull request:** ${MITIGATION_PR_URL:-not created}"
-          } >> "$GITHUB_STEP_SUMMARY"
