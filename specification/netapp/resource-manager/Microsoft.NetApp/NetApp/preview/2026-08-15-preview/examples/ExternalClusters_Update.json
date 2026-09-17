@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoNetAppRg",
+    "externalClusterName": "contoso-external-cluster",
+    "api-version": "2026-08-15-preview",
+    "properties": {
+      "properties": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contoso-external-cluster",
+        "name": "contoso-external-cluster",
+        "type": "Microsoft.NetApp/externalClusters",
+        "location": "eastus",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contosoIdentity1": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "interclusterLifsIpAddresses": [
+            "10.0.1.100",
+            "10.0.1.101"
+          ],
+          "clusterPeerPassphraseKeyVault": {
+            "keyVaultUri": "https://contoso-vault.vault.azure.net/",
+            "secretName": "cluster-passphrase",
+            "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contosoIdentity1"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-08-15-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-08-15-preview",
+        "Retry-After": 60
+      }
+    }
+  },
+  "operationId": "ExternalClusters_Update",
+  "title": "ExternalClusters_Update"
+}
