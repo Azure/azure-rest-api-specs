@@ -221,6 +221,10 @@ jobs:
           ref: ${{ steps.resolve-pr-source.outputs.ref }}
           path: repositories/azure-rest-api-specs
           persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24.x"
 
       - name: Install specification repository dependencies
         if: steps.resolve-trigger.outputs.should-run == 'true'
