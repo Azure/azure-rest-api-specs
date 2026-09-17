@@ -1,7 +1,7 @@
 import { Octokit } from "@octokit/rest";
 import { strToU8, zipSync } from "fflate";
 import { describe, expect, it } from "vitest";
-import { execFile } from "../../../shared/src/exec.js";
+import { execFile } from "../../../shared/src/exec.ts";
 import {
   createNextStepsComment,
   getCheckInfo,

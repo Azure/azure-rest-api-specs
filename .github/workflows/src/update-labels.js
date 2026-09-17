@@ -1,5 +1,5 @@
-import { isFullGitSha } from "../../shared/src/git.js";
-import { PER_PAGE_MAX } from "../../shared/src/github.js";
+import { isFullGitSha } from "../../shared/src/git.ts";
+import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { extractInputs } from "../src/context.js";
 
 /**

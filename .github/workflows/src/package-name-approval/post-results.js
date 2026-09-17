@@ -1,8 +1,8 @@
 import { unlink, writeFile } from "fs/promises";
 import { join } from "path";
 import { z } from "zod";
-import { execFile } from "../../../shared/src/exec.js";
-import { PER_PAGE_MAX } from "../../../shared/src/github.js";
+import { execFile } from "../../../shared/src/exec.ts";
+import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { commentOrUpdate, parseExistingComments } from "../comment.js";
 import { extractInputs } from "../context.js";
 import { loadApproversConfig } from "./approvers.js";
