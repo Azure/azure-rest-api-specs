@@ -105,24 +105,13 @@ interface Projects {
   /**
    * Deletes a Cognitive Services project from the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Project deletion can complete synchronously with 200 or 204, or asynchronously with 202 and long-running operation headers."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes match existing service endpoint behavior — Projects_Delete always completes synchronously (HTTP 200)"
   @tag("CognitiveServicesProjects")
-  @returnTypeChangedFrom(
-    Versions.v2026_09_15_preview,
-
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
-      | ErrorResponse
-  )
   delete is ArmResourceDeleteWithoutOkAsync<
     Project,
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader,
     Response =
       | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
-          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeleteAcceptedLroResponse
       | ArmDeletedNoContentResponse
   >;
 
