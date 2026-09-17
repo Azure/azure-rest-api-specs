@@ -10,8 +10,10 @@ import {
   getBuildFailedInfo,
   getRequiredSettingValue,
   getSpecPaths,
+  isBreakingChangeDetectionEnabled,
   logIssuesToPipeline,
   parseArguments,
+  prepareAzsdkDetectBreakingChangeCommand,
   prepareSpecGenSdkCommand,
   selectGenerationTool,
   setBuildFailedLabelVariable,
@@ -808,5 +810,25 @@ describe("commands.ts", () => {
       const result = selectGenerationTool(undefined, undefined, SdkName.Rust);
       expect(result).toBe("spec-gen-sdk");
     });
+  });
+});
+
+describe("prepareAzsdkDetectBreakingChangeCommand", () => {
+  test("includes package path, changes-only, and json output", () => {
+    expect(prepareAzsdkDetectBreakingChangeCommand("/pkg/path")).toEqual([
+      "pkg",
+      "detect-breaking-change",
+      "--package-path",
+      "/pkg/path",
+      "--changes-only",
+      "--output",
+      "json",
+    ]);
+  });
+});
+
+describe("isBreakingChangeDetectionEnabled", () => {
+  test("is disabled by default (code-level feature flag)", () => {
+    expect(isBreakingChangeDetectionEnabled()).toBe(false);
   });
 });
