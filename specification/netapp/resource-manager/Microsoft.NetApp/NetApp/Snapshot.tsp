@@ -8,6 +8,7 @@ import "./Volume.tsp";
 using Rest;
 using Azure.ResourceManager;
 using Http;
+using Versioning;
 
 namespace Microsoft.NetApp;
 /**
@@ -62,6 +63,12 @@ model SnapshotProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
+
+  /**
+   * The retention label of the snapshot, used to categorize it for Extended Snapshot Retention Policy rules.
+   */
+  @added(Versions.v2026_08_15_preview)
+  retentionLabel?: RetentionLabel;
 }
 
 /**
@@ -86,6 +93,41 @@ model SnapshotRestoreFiles {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model SnapshotPatch {}
+
+/**
+ * Retention Label.
+ * This label is used on snapshots that are part of an Extended Snapshot Retention replication to categorize them
+ * according to the retention rules defined in the Extended Snapshot Retention Policy.
+ */
+@added(Versions.v2026_08_15_preview)
+union RetentionLabel {
+  string,
+
+  /**
+   * Hourly retention label - snapshot is retained according to the hourly rule in the Extended Snapshot Retention Policy
+   */
+  Hourly: "Hourly",
+
+  /**
+   * Daily retention label - snapshot is retained according to the daily rule in the Extended Snapshot Retention Policy
+   */
+  Daily: "Daily",
+
+  /**
+   * Weekly retention label - snapshot is retained according to the weekly rule in the Extended Snapshot Retention Policy
+   */
+  Weekly: "Weekly",
+
+  /**
+   * Monthly retention label - snapshot is retained according to the monthly rule in the Extended Snapshot Retention Policy
+   */
+  Monthly: "Monthly",
+
+  /**
+   * Yearly retention label - snapshot is retained according to the yearly rule in the Extended Snapshot Retention Policy
+   */
+  Yearly: "Yearly",
+}
 
 @armResourceOperations
 interface Snapshots {
