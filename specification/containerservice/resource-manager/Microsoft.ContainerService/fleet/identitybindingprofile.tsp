@@ -43,6 +43,17 @@ model IdentityBindingProfileProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   memberSelector?: MemberSelector;
 
+  @doc("The identity binding properties applied to each selected fleet member.")
+  identityBindingProperties: IdentityBindingProperties;
+
+  @doc("The identity binding profile status.")
+  @visibility(Lifecycle.Read)
+  status?: IdentityBindingProfileStatus;
+}
+
+@doc("The properties of the identity bindings created on each selected fleet member.")
+@added(Versions.v2026_11_02_preview)
+model IdentityBindingProperties {
   @doc("Managed identity profile for the identity binding.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   managedIdentity: IdentityBindingManagedIdentityProfile;
@@ -62,10 +73,6 @@ model IdentityBindingProfileProperties {
   @doc("The OIDC issuer profile of the identity binding profile.")
   @visibility(Lifecycle.Read)
   oidcIssuer?: IdentityBindingOidcIssuerProfile;
-
-  @doc("The identity binding profile status.")
-  @visibility(Lifecycle.Read)
-  status?: IdentityBindingProfileStatus;
 }
 
 @doc("The provisioning state of the identity binding profile resource.")

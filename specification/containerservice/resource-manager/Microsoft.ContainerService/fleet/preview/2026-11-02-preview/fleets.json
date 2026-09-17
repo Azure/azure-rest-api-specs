@@ -5649,27 +5649,9 @@
             "create"
           ]
         },
-        "managedIdentity": {
-          "$ref": "#/definitions/IdentityBindingManagedIdentityProfile",
-          "description": "Managed identity profile for the identity binding.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "allowedSubjects": {
-          "type": "array",
-          "description": "Optional list of subjects authorized to use this identity binding for\ntoken exchange. Each entry pairs a required namespace label selector\nwith an optional service account label selector; selectors within an\nentry are AND'd, and multiple entries are OR'd. When omitted or empty,\nauthorization falls back exclusively to ClusterRole/ClusterRoleBinding\nevaluation. Maximum 100 entries.",
-          "maxItems": 100,
-          "items": {
-            "$ref": "#/definitions/AllowedSubject"
-          },
-          "x-ms-identifiers": []
-        },
-        "oidcIssuer": {
-          "$ref": "#/definitions/IdentityBindingOidcIssuerProfile",
-          "description": "The OIDC issuer profile of the identity binding profile.",
-          "readOnly": true
+        "identityBindingProperties": {
+          "$ref": "#/definitions/IdentityBindingProperties",
+          "description": "The identity binding properties applied to each selected fleet member."
         },
         "status": {
           "$ref": "#/definitions/IdentityBindingProfileStatus",
@@ -5678,7 +5660,7 @@
         }
       },
       "required": [
-        "managedIdentity"
+        "identityBindingProperties"
       ]
     },
     "IdentityBindingProfileProvisioningState": {
@@ -5733,6 +5715,37 @@
           "readOnly": true
         }
       }
+    },
+    "IdentityBindingProperties": {
+      "type": "object",
+      "description": "The properties of the identity bindings created on each selected fleet member.",
+      "properties": {
+        "managedIdentity": {
+          "$ref": "#/definitions/IdentityBindingManagedIdentityProfile",
+          "description": "Managed identity profile for the identity binding.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "allowedSubjects": {
+          "type": "array",
+          "description": "Optional list of subjects authorized to use this identity binding for\ntoken exchange. Each entry pairs a required namespace label selector\nwith an optional service account label selector; selectors within an\nentry are AND'd, and multiple entries are OR'd. When omitted or empty,\nauthorization falls back exclusively to ClusterRole/ClusterRoleBinding\nevaluation. Maximum 100 entries.",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/AllowedSubject"
+          },
+          "x-ms-identifiers": []
+        },
+        "oidcIssuer": {
+          "$ref": "#/definitions/IdentityBindingOidcIssuerProfile",
+          "description": "The OIDC issuer profile of the identity binding profile.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "managedIdentity"
+      ]
     },
     "KubernetesVersion": {
       "type": "string"

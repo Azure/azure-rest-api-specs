@@ -13,39 +13,9 @@
         "memberSelector": {
           "byLabel": "env=production"
         },
-        "managedIdentity": {
-          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
-        },
-        "allowedSubjects": [
-          {
-            "namespaceSelector": {
-              "matchLabels": [
-                "kubernetes.io/metadata.name=prod"
-              ]
-            },
-            "serviceAccountSelector": {
-              "matchLabels": [
-                "app=payments"
-              ]
-            }
-          }
-        ]
-      }
-    }
-  },
-  "responses": {
-    "200": {
-      "body": {
-        "properties": {
-          "provisioningState": "Succeeded",
-          "memberSelector": {
-            "byLabel": "env=production"
-          },
+        "identityBindingProperties": {
           "managedIdentity": {
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1",
-            "objectId": "00000000-0000-0000-0000-000000000000",
-            "clientId": "00000000-0000-0000-0000-000000000000",
-            "tenantId": "00000000-0000-0000-0000-000000000000"
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
           },
           "allowedSubjects": [
             {
@@ -60,9 +30,43 @@
                 ]
               }
             }
-          ],
-          "oidcIssuer": {
-            "oidcIssuerUrl": "https://oidc-endpoint"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "memberSelector": {
+            "byLabel": "env=production"
+          },
+          "identityBindingProperties": {
+            "managedIdentity": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1",
+              "objectId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000"
+            },
+            "allowedSubjects": [
+              {
+                "namespaceSelector": {
+                  "matchLabels": [
+                    "kubernetes.io/metadata.name=prod"
+                  ]
+                },
+                "serviceAccountSelector": {
+                  "matchLabels": [
+                    "app=payments"
+                  ]
+                }
+              }
+            ],
+            "oidcIssuer": {
+              "oidcIssuerUrl": "https://oidc-endpoint"
+            }
           },
           "status": {
             "lastOperationId": "12345678-1234-1234-1234-123456789012"
@@ -89,28 +93,30 @@
           "memberSelector": {
             "byLabel": "env=production"
           },
-          "managedIdentity": {
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1",
-            "objectId": "00000000-0000-0000-0000-000000000000",
-            "clientId": "00000000-0000-0000-0000-000000000000",
-            "tenantId": "00000000-0000-0000-0000-000000000000"
-          },
-          "allowedSubjects": [
-            {
-              "namespaceSelector": {
-                "matchLabels": [
-                  "kubernetes.io/metadata.name=prod"
-                ]
-              },
-              "serviceAccountSelector": {
-                "matchLabels": [
-                  "app=payments"
-                ]
+          "identityBindingProperties": {
+            "managedIdentity": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1",
+              "objectId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000"
+            },
+            "allowedSubjects": [
+              {
+                "namespaceSelector": {
+                  "matchLabels": [
+                    "kubernetes.io/metadata.name=prod"
+                  ]
+                },
+                "serviceAccountSelector": {
+                  "matchLabels": [
+                    "app=payments"
+                  ]
+                }
               }
+            ],
+            "oidcIssuer": {
+              "oidcIssuerUrl": "https://oidc-endpoint"
             }
-          ],
-          "oidcIssuer": {
-            "oidcIssuerUrl": "https://oidc-endpoint"
           }
         },
         "eTag": "\"EtagValue\"",
