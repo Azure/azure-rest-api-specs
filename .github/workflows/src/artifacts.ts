@@ -1,3 +1,4 @@
+import type { Core } from "./github.ts";
 import { fetchWithRetry } from "./retries.ts";
 
 export type ArtifactResource = {
@@ -32,7 +33,7 @@ export async function getAzurePipelineArtifact({
   ado_project_url: string;
   artifactName: string;
   artifactFileName: string;
-  core: typeof import("@actions/core");
+  core: Core;
   retryOptions?: import("./retries.ts").RetryOptions;
   fallbackToFailedArtifact?: boolean;
   token?: string;
@@ -137,7 +138,7 @@ export async function fetchFailedArtifact({
   ado_build_id: string;
   ado_project_url: string;
   artifactName: string;
-  core: typeof import("@actions/core");
+  core: Core;
   retryOptions?: import("./retries.ts").RetryOptions;
   headers?: object;
 }): Promise<Response> {

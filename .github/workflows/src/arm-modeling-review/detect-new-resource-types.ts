@@ -1,3 +1,4 @@
+import type { Core } from "../github.ts";
 /**
  * Detect new ARM resource types in PRs by parsing swagger paths.
  *
@@ -227,7 +228,7 @@ export async function detectNewResourceTypes({
   core,
 }: {
   rmFiles: string[];
-  core: typeof import("@actions/core");
+  core: Core;
 }): Promise<
   Array<{
     rpNamespace: string;

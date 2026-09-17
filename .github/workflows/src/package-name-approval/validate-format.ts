@@ -1,5 +1,6 @@
 import { readFile } from "fs/promises";
 import yaml from "js-yaml";
+import type { Core } from "../github.ts";
 
 export type FormatRule = {
   pattern: string;
@@ -14,7 +15,7 @@ const DEFAULT_RULES_PATH = ".github/package-name-format-rules.yml";
  * Load format rules from YAML config.
  */
 export async function loadFormatRules(
-  core: typeof import("@actions/core"),
+  core: Core,
   rulesPath: string = DEFAULT_RULES_PATH,
 ): Promise<FormatRulesConfig | null> {
   try {

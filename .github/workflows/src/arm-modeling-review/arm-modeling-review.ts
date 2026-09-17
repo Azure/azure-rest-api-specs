@@ -1,6 +1,7 @@
 import { simpleGit } from "simple-git";
 import { getChangedFiles, resourceManager, swagger } from "../../../shared/src/changed-files.ts";
 import { CoreLogger } from "../core-logger.ts";
+import type { Core } from "../github.ts";
 import { LabelAction } from "../label.ts";
 import { ArmLeaseValidationLabel } from "./arm-lease-validation-labels.ts";
 import { checkLease } from "./detect-arm-leases.ts";
@@ -44,7 +45,7 @@ async function resourceProviderExistsInCommit(
   git: import("simple-git").SimpleGit,
   commitish: string,
   namespace: string,
-  core: import("@actions/github-script").AsyncFunctionArguments["core"],
+  core: Core,
 ): Promise<boolean> {
   let output: string;
   try {
@@ -126,7 +127,7 @@ function extractResourceProviders(
 export default async function armModelingReview({
   core,
 }: {
-  core: import("@actions/github-script").AsyncFunctionArguments["core"];
+  core: Core;
 }): Promise<{ status: string; labelActions: ManagedLabelActions }> {
   const options = {
     cwd: process.env.GITHUB_WORKSPACE,
@@ -287,7 +288,7 @@ export default async function armModelingReview({
  */
 async function checkNewResourceTypes(
   rmFiles: string[],
-  core: import("@actions/github-script").AsyncFunctionArguments["core"],
+  core: Core,
 ): Promise<{ status: string; labelActions: ManagedLabelActions }> {
   const newRtResults = await detectNewResourceTypes({
     rmFiles,

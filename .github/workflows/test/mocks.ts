@@ -1,7 +1,8 @@
 import { RequestError } from "@octokit/request-error";
 import { vi, type Mock } from "vitest";
+import type { Core } from "../src/github.ts";
 
-export type Core = import("@actions/github-script").AsyncFunctionArguments["core"];
+export type { Core };
 
 export type Context = import("@actions/github-script").AsyncFunctionArguments["context"];
 
