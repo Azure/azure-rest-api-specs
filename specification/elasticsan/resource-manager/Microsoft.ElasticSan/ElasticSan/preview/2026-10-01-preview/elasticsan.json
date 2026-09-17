@@ -1802,6 +1802,13 @@
                 }
               ]
             }
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Optional, filters the volumes that are returned. Supported filters are creationData/sourceId and creationData/createSource, combined with the and operator, for example `creationData/sourceId eq '<source volume resource id>' and creationData/createSource eq 'Volume'`. creationData/sourceId must be specified when this parameter is used and the source volume must be in the same volume group. Use this to list the clones of a volume.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1819,6 +1826,9 @@
           }
         },
         "x-ms-examples": {
+          "Volumes_ListByVolumeGroup_FilterByCloneSource": {
+            "$ref": "./examples/Volumes_ListByVolumeGroup_FilterByCloneSource.json"
+          },
           "Volumes_ListByVolumeGroup_MaximumSet_Gen": {
             "$ref": "./examples/Volumes_ListByVolumeGroup_MaximumSet_Gen.json"
           },
