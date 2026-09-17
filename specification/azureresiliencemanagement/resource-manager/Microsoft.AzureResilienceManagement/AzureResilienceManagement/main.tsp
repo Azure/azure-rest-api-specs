@@ -44,6 +44,11 @@ enum Versions {
   @doc("Microsoft.AzureResilienceManagement Resource Provider management API version 2026-08-31-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_08_31_preview: "2026-08-31-preview",
+
+  @doc("Microsoft.AzureResilienceManagement Resource Provider management API version 2026-09-30-preview.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @Azure.Core.previewVersion
+  v2026_09_30_preview: "2026-09-30-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

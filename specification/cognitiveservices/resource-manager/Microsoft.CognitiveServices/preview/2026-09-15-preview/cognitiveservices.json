@@ -133,6 +133,9 @@
       "name": "ManagedComputeDeployments"
     },
     {
+      "name": "AdapterDeployments"
+    },
+    {
       "name": "ComputeOperations"
     },
     {
@@ -2024,6 +2027,276 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/adapterDeployments": {
+      "get": {
+        "operationId": "AdapterDeployments_List",
+        "tags": [
+          "AdapterDeployments"
+        ],
+        "description": "Lists adapter deployments associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AdapterDeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListAdapterDeployments": {
+            "$ref": "./examples/ListAdapterDeployments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/adapterDeployments/{adapterDeploymentName}": {
+      "get": {
+        "operationId": "AdapterDeployments_Get",
+        "tags": [
+          "AdapterDeployments"
+        ],
+        "description": "Gets an adapter deployment by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "adapterDeploymentName",
+            "in": "path",
+            "description": "The account-unique adapter deployment name and inference identity.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AdapterDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAdapterDeployment": {
+            "$ref": "./examples/GetAdapterDeployment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AdapterDeployments_CreateOrUpdate",
+        "tags": [
+          "AdapterDeployments"
+        ],
+        "description": "Creates an adapter deployment or re-targets it to another compatible\nmanaged compute deployment. The source model ID is immutable.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "adapterDeploymentName",
+            "in": "path",
+            "description": "The account-unique adapter deployment name and inference identity.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The complete adapter deployment resource to create or re-target.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AdapterDeployment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AdapterDeployment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AdapterDeployment"
+            }
+          },
+          "201": {
+            "description": "Resource 'AdapterDeployment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AdapterDeployment"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateAdapterDeployment": {
+            "$ref": "./examples/CreateOrUpdateAdapterDeployment.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AdapterDeployment"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AdapterDeployments_Delete",
+        "tags": [
+          "AdapterDeployments"
+        ],
+        "description": "Drains requests and deletes an adapter deployment and its serving snapshot.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "adapterDeploymentName",
+            "in": "path",
+            "description": "The account-unique adapter deployment name and inference identity.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteAdapterDeployment": {
+            "$ref": "./examples/DeleteAdapterDeployment.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/arcDeployments": {
       "get": {
         "operationId": "ArcDeployments_List",
@@ -3491,7 +3764,9 @@
             "description": "Friendly name of the connection",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
           }
         ],
         "responses": {
@@ -3547,7 +3822,9 @@
             "description": "Friendly name of the connection",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
           },
           {
             "name": "connection",
@@ -3612,7 +3889,9 @@
             "description": "Friendly name of the connection",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
           },
           {
             "name": "connection",
@@ -3677,7 +3956,9 @@
             "description": "Friendly name of the connection",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
           }
         ],
         "responses": {
@@ -8801,7 +9082,9 @@
             "description": "Friendly name of the connection",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
           }
         ],
         "responses": {
@@ -8867,7 +9150,9 @@
             "description": "Friendly name of the connection",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
           },
           {
             "name": "connection",
@@ -8942,7 +9227,9 @@
             "description": "Friendly name of the connection",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
           },
           {
             "name": "connection",
@@ -9017,7 +9304,9 @@
             "description": "Friendly name of the connection",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
           }
         ],
         "responses": {
@@ -10833,6 +11122,9 @@
         "x-ms-examples": {
           "Create an ACS policy with optional policy dependencies": {
             "$ref": "./examples/PutRaiPolicyAcs.json"
+          },
+          "Create an ACS policy without a tool catalog": {
+            "$ref": "./examples/PutRaiPolicyAcsWithoutTools.json"
           },
           "PutRaiPolicy": {
             "$ref": "./examples/PutRaiPolicy.json"
@@ -13036,6 +13328,181 @@
           }
         ]
       }
+    },
+    "AdapterDeployment": {
+      "type": "object",
+      "description": "An independently managed LoRA adapter attached to a managed compute deployment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdapterDeploymentProperties",
+          "description": "Properties of the Cognitive Services adapter deployment."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The concurrency token for this adapter deployment.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AdapterDeploymentLastOperation": {
+      "type": "object",
+      "description": "The most recently requested adapter lifecycle operation.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AdapterDeploymentOperationType",
+          "description": "The type of lifecycle operation."
+        },
+        "status": {
+          "$ref": "#/definitions/AdapterDeploymentOperationState",
+          "description": "The current or terminal operation state."
+        },
+        "requestedTargetDeploymentName": {
+          "type": "string",
+          "description": "The target deployment requested by a create or re-target operation."
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation started."
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation reached a terminal state."
+        }
+      },
+      "required": [
+        "type",
+        "status",
+        "startedAt"
+      ]
+    },
+    "AdapterDeploymentListResult": {
+      "type": "object",
+      "description": "A paginated collection of adapter deployments.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Adapter deployments in this page.",
+          "items": {
+            "$ref": "#/definitions/AdapterDeployment"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL used to retrieve the next page, when one exists."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AdapterDeploymentOperationState": {
+      "type": "string",
+      "description": "Lifecycle operation states reported by an adapter deployment.",
+      "enum": [
+        "Accepted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "AdapterDeploymentOperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The operation was accepted."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is running."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "AdapterDeploymentOperationType": {
+      "type": "string",
+      "description": "Lifecycle operation types reported by an adapter deployment.",
+      "enum": [
+        "Create",
+        "Update",
+        "Delete"
+      ],
+      "x-ms-enum": {
+        "name": "AdapterDeploymentOperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Create",
+            "value": "Create",
+            "description": "Creates the adapter deployment."
+          },
+          {
+            "name": "Update",
+            "value": "Update",
+            "description": "Re-targets the adapter deployment."
+          },
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "Deletes the adapter deployment."
+          }
+        ]
+      }
+    },
+    "AdapterDeploymentProperties": {
+      "type": "object",
+      "description": "Properties of an adapter deployment.",
+      "properties": {
+        "sourceModelId": {
+          "type": "string",
+          "description": "The immutable Project Models version produced by Foundry fine-tuning.\nThe identifier uses the Azure AI project model URI format.\nThe service validates LoRA weight type, protected status, provenance,\ncompatibility metadata, and registration state.",
+          "pattern": "^azure(?:ai)://accounts/[^/]+/projects/[^/]+/models/[^/]+/versions/[^/]+$"
+        },
+        "targetDeploymentName": {
+          "type": "string",
+          "description": "The name of the compatible managed compute parent deployment.\nThe service resolves this name within the adapter's owning account; full\nARM resource IDs and cross-account references are not accepted. It cannot\nequal the adapter deployment's resource name. Updating this value\nre-targets the adapter while its source model remains unchanged."
+        },
+        "activeTargetDeploymentName": {
+          "type": "string",
+          "description": "The managed compute deployment currently serving the adapter.\nDuring re-targeting this remains the prior deployment until atomic cutover.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the adapter deployment.",
+          "readOnly": true
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/AdapterDeploymentLastOperation",
+          "description": "Information about the most recently requested lifecycle operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "sourceModelId",
+        "targetDeploymentName"
+      ]
     },
     "AgentApplication": {
       "type": "object",
@@ -15516,6 +15983,7 @@
         "Odbc",
         "GenericRest",
         "RemoteTool",
+        "OpenAPI",
         "AmazonMws",
         "Concur",
         "Dynamics",
@@ -15865,6 +16333,11 @@
           {
             "name": "RemoteTool",
             "value": "RemoteTool"
+          },
+          {
+            "name": "OpenAPI",
+            "value": "OpenAPI",
+            "description": "Connection to an endpoint described by an OpenAPI specification."
           },
           {
             "name": "AmazonMws",
@@ -17937,6 +18410,27 @@
       ],
       "x-ms-discriminator-value": "FQDN"
     },
+    "GatedModelAccessProperties": {
+      "type": "object",
+      "description": "Gated model access configuration for a managed compute deployment.",
+      "properties": {
+        "connectionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified Azure resource ID of the project connection used to authorize access to a gated model during deployment creation.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.CognitiveServices/accounts/projects/connections"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "connectionId"
+      ]
+    },
     "HostedAgentDeployment": {
       "type": "object",
       "description": "Represents a hosted agent deployment where the underlying infrastructure is owned by the platform.",
@@ -18476,6 +18970,14 @@
         "versionUpgradeOption": {
           "$ref": "#/definitions/DeploymentModelVersionUpgradeOption",
           "description": "Template auto-upgrade policy. Defaults to OnceNewDefaultVersionAvailable.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "gatedModelAccess": {
+          "$ref": "#/definitions/GatedModelAccessProperties",
+          "description": "Configuration used to authorize access to a gated model during deployment creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -20599,12 +21101,12 @@
           "description": "The policy evaluated for user input."
         },
         "pre_tool_call": {
-          "$ref": "#/definitions/RaiAcsInterventionPoint",
+          "$ref": "#/definitions/RaiAcsToolInterventionPoint",
           "description": "The policy evaluated before a tool call.",
           "x-ms-client-name": "preToolCall"
         },
         "post_tool_call": {
-          "$ref": "#/definitions/RaiAcsInterventionPoint",
+          "$ref": "#/definitions/RaiAcsToolInterventionPoint",
           "description": "The policy evaluated after a tool call.",
           "x-ms-client-name": "postToolCall"
         },
@@ -20641,8 +21143,11 @@
           "x-ms-client-name": "interventionPoints"
         },
         "tools": {
-          "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Tool catalogs are disabled; when present, this object must be empty."
+          "type": "object",
+          "description": "Static tool catalog keyed by canonical tool name. The catalog may be omitted or empty when no\ntool selector is configured. A tool selector requires a non-empty catalog, and an unknown\nselected key fails closed.",
+          "additionalProperties": {
+            "$ref": "#/definitions/RaiAcsToolDefinition"
+          }
         },
         "annotators": {
           "$ref": "#/definitions/RaiAcsEmptyObject",
@@ -20837,6 +21342,98 @@
         "type",
         "query"
       ]
+    },
+    "RaiAcsToolDefinition": {
+      "type": "object",
+      "description": "Static policy metadata for one ACS tool catalog entry.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Optional host-defined tool identifier. The catalog map key, not this value, controls tool lookup.",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "description": "Optional host-defined tool type.",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable policy metadata."
+        },
+        "security_labels": {
+          "type": "array",
+          "description": "Labels describing the sink or capability.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "securityLabels"
+        },
+        "clearance": {
+          "type": "string",
+          "description": "Maximum sensitivity or host-defined clearance metadata.",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": {}
+    },
+    "RaiAcsToolInterventionPoint": {
+      "type": "object",
+      "description": "Binds one logical policy to a tool-call intervention point.",
+      "properties": {
+        "policy_target": {
+          "$ref": "#/definitions/RaiAcsPolicyTarget",
+          "description": "The canonical Agent Hooks snapshot path projected as the policy target.",
+          "x-ms-client-name": "policyTarget"
+        },
+        "policy_target_kind": {
+          "$ref": "#/definitions/RaiAcsPolicyTargetKind",
+          "description": "The semantic kind of the projected policy target.",
+          "x-ms-client-name": "policyTargetKind"
+        },
+        "policy": {
+          "$ref": "#/definitions/RaiAcsPolicyBinding",
+          "description": "The logical policy evaluated at this intervention point."
+        },
+        "annotations": {
+          "$ref": "#/definitions/RaiAcsEmptyObject",
+          "description": "Standard ACS annotation bindings are disabled; when present, this object must be empty."
+        },
+        "tool_name_from": {
+          "$ref": "#/definitions/RaiAcsToolNameSelector",
+          "description": "Selects the tool catalog key from the raw Agent Hooks snapshot using an extensible snapshot path.",
+          "x-ms-client-name": "toolNameFrom"
+        }
+      },
+      "required": [
+        "policy_target",
+        "policy_target_kind",
+        "policy"
+      ]
+    },
+    "RaiAcsToolNameSelector": {
+      "type": "string",
+      "description": "Snapshot paths for selecting a tool catalog entry.\nThe listed values are recognized by the Unified Moderate AACS host profile; other values are allowed for forward compatibility.",
+      "enum": [
+        "$snap.tool_call.name",
+        "$.tool_call.name"
+      ],
+      "x-ms-enum": {
+        "name": "RaiAcsToolNameSelector",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ToolCallName",
+            "value": "$snap.tool_call.name",
+            "description": "Selects the tool-call name from the canonical snapshot root."
+          },
+          {
+            "name": "ToolCallNameAlias",
+            "value": "$.tool_call.name",
+            "description": "Selects the tool-call name through the snapshot-root alias."
+          }
+        ]
+      }
     },
     "RaiActionType": {
       "type": "string",

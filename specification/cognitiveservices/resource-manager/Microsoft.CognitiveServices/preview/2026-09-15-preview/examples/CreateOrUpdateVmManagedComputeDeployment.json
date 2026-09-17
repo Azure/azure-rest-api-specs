@@ -12,7 +12,10 @@
         "model": "azureml://registries/azureml-openai-oss/models/gpt-oss-120b/versions/4",
         "deploymentTemplate": "projects/my-project/deploymentTemplates/gpt-oss-120b-vllm-tuned/versions/2",
         "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
-        "priority": "High"
+        "priority": "High",
+        "gatedModelAccess": {
+          "connectionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/projects/my-project/connections/my-hf-connection"
+        }
       },
       "sku": {
         "name": "VmManagedCompute",
@@ -33,6 +36,9 @@
           "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
           "priority": "High",
           "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
+          "gatedModelAccess": {
+            "connectionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/projects/my-project/connections/my-hf-connection"
+          },
           "capabilities": {
             "assetsV2": "true"
           },
@@ -53,8 +59,9 @@
     },
     "201": {
       "headers": {
-        "azure-asyncoperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000002?api-version=2026-03-15-preview",
-        "retry-after": "30"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000002?api-version=2026-09-15-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000002?operationResultResponseType=Location&api-version=2026-09-15-preview",
+        "Retry-After": "30"
       },
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/gpt-oss-120b-byoc",
@@ -65,6 +72,9 @@
           "deploymentTemplate": "projects/my-project/deploymentTemplates/gpt-oss-120b-vllm-tuned/versions/2",
           "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
           "priority": "High",
+          "gatedModelAccess": {
+            "connectionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/projects/my-project/connections/my-hf-connection"
+          },
           "provisioningState": "Accepted"
         },
         "sku": {
