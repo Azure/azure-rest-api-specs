@@ -4414,6 +4414,84 @@ model VectorEmbedding {
 }
 
 /**
+ * The package used for full text processing.
+ */
+union FullTextPackageType {
+  /**
+   * Legacy package behavior.
+   */
+  Legacy: "legacy",
+
+  /**
+   * Standard package behavior.
+   */
+  Standard: "standard",
+
+  string,
+}
+
+/**
+ * The tokenizer used for full text processing.
+ */
+union FullTextTokenizerType {
+  /**
+   * Word tokenizer.
+   */
+  Word: "word",
+
+  string,
+}
+
+/**
+ * A filter applied during full text analysis.
+ */
+union FullTextFilterType {
+  /**
+   * Lowercase filter.
+   */
+  Lowercase: "lowercase",
+
+  /**
+   * ASCII normalization filter.
+   */
+  Ascii: "ascii",
+
+  /**
+   * Stop word filter.
+   */
+  Stop: "stop",
+
+  /**
+   * Stem filter.
+   */
+  Stem: "stem",
+
+  string,
+}
+
+/**
+ * The stop word list kind used for full text analysis.
+ */
+union StopWordListKindType {
+  /**
+   * No built-in stop word list.
+   */
+  None: "none",
+
+  /**
+   * Extended built-in stop word list.
+   */
+  Extended: "extended",
+
+  /**
+   * Basic built-in stop word list.
+   */
+  Basic: "basic",
+
+  string,
+}
+
+/**
  * Cosmos DB FullText Policy
  */
 model FullTextPolicy {
@@ -4426,7 +4504,7 @@ model FullTextPolicy {
    * The full text package type.
    */
   @added(Versions.v2026_09_01_preview)
-  package?: string;
+  package?: FullTextPackageType;
 
   /**
    * The default full text analysis specification inherited by full text paths that omit these settings.
@@ -4459,19 +4537,19 @@ model FullTextPath {
    * The tokenizer method for this path.
    */
   @added(Versions.v2026_09_01_preview)
-  tokenizer?: string;
+  tokenizer?: FullTextTokenizerType;
 
   /**
    * The filter pipeline applied to this path.
    */
   @added(Versions.v2026_09_01_preview)
-  filters?: string[];
+  filters?: FullTextFilterType[];
 
   /**
    * The stop word list kind for this path.
    */
   @added(Versions.v2026_09_01_preview)
-  stopWordListKind?: string;
+  stopWordListKind?: StopWordListKindType;
 
   /**
    * Custom words to add to the stop word list for this path.
@@ -4499,17 +4577,17 @@ model FullTextSpec {
   /**
    * The tokenizer method of the full text analysis.
    */
-  tokenizer?: string;
+  tokenizer?: FullTextTokenizerType;
 
   /**
    * The filter pipeline of the full text analysis.
    */
-  filters?: string[];
+  filters?: FullTextFilterType[];
 
   /**
    * The stop word list kind of the full text analysis.
    */
-  stopWordListKind?: string;
+  stopWordListKind?: StopWordListKindType;
 
   /**
    * Custom words to add to the stop word list.
