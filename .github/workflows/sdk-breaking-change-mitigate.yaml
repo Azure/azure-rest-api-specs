@@ -29,6 +29,25 @@ jobs:
       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association) &&
       startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate')) ||
       github.event_name == 'workflow_dispatch'
+    concurrency:
+      group: >-
+        sdk-breaking-mitigate-${{ github.event.issue.number || inputs.pr_number }}-${{
+        inputs.sdk_language ||
+        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate javascript') && 'JavaScript') ||
+        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate typescript') && 'JavaScript') ||
+        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate dotnet') && 'DotNet') ||
+        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate csharp') && 'DotNet') ||
+        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate .net') && 'DotNet') ||
+        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate android') && 'Android') ||
+        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate cpp') && 'Cpp') ||
+        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate java') && 'Java') ||
+        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate python') && 'Python') ||
+        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate rust') && 'Rust') ||
+        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate go') && 'Go') ||
+        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate js') && 'JavaScript') ||
+        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate ts') && 'JavaScript') ||
+        'unknown' }}
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     env:
       AZSDK_CLI_PATH: /tmp/bin
