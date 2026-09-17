@@ -9,7 +9,7 @@ import {
   resourceManager,
   swagger,
   typespec,
-} from "../../../shared/src/changed-files.js";
+} from "../../../shared/src/changed-files.ts";
 import { CoreLogger } from "../core-logger.js";
 import { PullRequestChanges } from "./pr-changes.js";
 

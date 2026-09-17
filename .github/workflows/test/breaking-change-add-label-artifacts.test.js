@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { REVIEW_REQUIRED_LABELS } from "../../shared/src/breaking-change.js";
-import { PER_PAGE_MAX } from "../../shared/src/github.js";
+import { REVIEW_REQUIRED_LABELS } from "../../shared/src/breaking-change.ts";
+import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import getLabelActionsImpl, {
   CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME,
   SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME,

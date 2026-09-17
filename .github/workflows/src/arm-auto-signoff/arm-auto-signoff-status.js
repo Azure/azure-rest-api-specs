@@ -1,7 +1,7 @@
 import { inspect } from "util";
-import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.js";
-import { equals } from "../../../shared/src/set.js";
-import { byDate, invert } from "../../../shared/src/sort.js";
+import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
+import { equals } from "../../../shared/src/set.ts";
+import { byDate, invert } from "../../../shared/src/sort.ts";
 import { extractInputs } from "../context.js";
 import { LabelAction } from "../label.js";
 import { ArmAutoSignoffLabel } from "./arm-auto-signoff-labels.js";

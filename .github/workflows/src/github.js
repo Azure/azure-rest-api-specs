@@ -1,5 +1,5 @@
-import { toPercent } from "../../shared/src/math.js";
-import { Duration, formatDuration, getDuration, subtract } from "../../shared/src/time.js";
+import { toPercent } from "../../shared/src/math.ts";
+import { Duration, formatDuration, getDuration, subtract } from "../../shared/src/time.ts";
 
 /**
  * @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes
@@ -10,7 +10,7 @@ import { Duration, formatDuration, getDuration, subtract } from "../../shared/sr
 
 /**
  * @param {import("@octokit/endpoint").endpoint} endpoint
- * @param {import('../../shared/src/logger.js').ILogger} logger
+ * @param {import('../../shared/src/logger.ts').ILogger} logger
  * @returns {(options: import("@octokit/types").RequestParameters & {url: string, method: string}) => void}
  */
 export function createLogHook(endpoint, logger) {
@@ -28,7 +28,7 @@ export function createLogHook(endpoint, logger) {
 }
 
 /**
- * @param {import('../../shared/src/logger.js').ILogger} logger
+ * @param {import('../../shared/src/logger.ts').ILogger} logger
  * @returns {(response: import("@octokit/types").OctokitResponse<any>) => void}
  */
 export function createRateLimitHook(logger) {

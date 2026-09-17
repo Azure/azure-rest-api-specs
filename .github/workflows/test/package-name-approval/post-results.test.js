@@ -13,11 +13,11 @@ vi.mock("fs/promises", () => ({
   unlink: vi.fn(),
 }));
 
-vi.mock("../../../../shared/src/exec.js", () => ({
+vi.mock("../../../shared/src/exec.ts", () => ({
   execFile: vi.fn(),
 }));
 
-vi.mock("../../../../shared/src/github.js", () => ({
+vi.mock("../../../shared/src/github.ts", () => ({
   PER_PAGE_MAX: 100,
 }));
 
