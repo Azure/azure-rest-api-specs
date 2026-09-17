@@ -55,6 +55,24 @@ jobs:
       AZSDK_CLI_PATH: /tmp/bin
 
     steps:
+      - name: Mark analysis in progress
+        if: github.event_name == 'issue_comment'
+        uses: actions/github-script@v9
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const command = context.payload.comment.body.split(/\r?\n/, 1)[0].trim();
+            try {
+              await github.rest.issues.updateComment({
+                ...context.repo,
+                comment_id: context.payload.comment.id,
+                body: `${command}\n\nAnalyzing ...`,
+              });
+            } catch (error) {
+              if (error.status !== 403) throw error;
+              core.warning("The workflow token cannot update the trigger comment with analysis status.");
+            }
+
       - name: Checkout workflow repository
         uses: actions/checkout@v7
         with:
