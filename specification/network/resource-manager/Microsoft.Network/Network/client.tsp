@@ -60,7 +60,9 @@ namespace Microsoft.Network {
    * Enable Only IPv6 Peering state retained for C# API compatibility.
    */
   union EnableOnlyIPv6PeeringState {
+    /** IPv6-only peering is enabled. */
     Enabled: "Enabled",
+    /** IPv6-only peering is disabled. */
     Disabled: "Disabled",
     string,
   }
