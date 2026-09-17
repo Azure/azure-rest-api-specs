@@ -117,7 +117,8 @@ Every tool package is a thin extension of the shared `eng/tools` configuration. 
 }
 ```
 
-- Keep dependency/devDependency versions aligned with the other tools (for example `typescript ~6.0.2`, `eslint ^10.0.0`, `vitest ^4.1.0`, `prettier 3.8.3`).
+- Reference external dependency versions with `catalog:`. Define their versions in the default `catalog` in the root `pnpm-workspace.yaml`, including dependencies used by only one tool.
+- Keep internal package references as `workspace:*`; do not put workspace links in the catalog.
 - Add the new package to the root `eng/tools/package.json` `devDependencies` as a `file:<tool>` entry.
 
 ### `tsconfig.json`
@@ -239,10 +240,13 @@ When adding a new tool:
 
 ### Updating Dependencies
 
-1. Update the tool's `package.json`.
-2. Keep shared tooling versions (TypeScript, ESLint, Vitest, Prettier) aligned across tools.
-3. Run `pnpm install` and commit the updated lock file.
-4. Run `pnpm run check` to validate.
+1. Update the dependency's version in the root `pnpm-workspace.yaml` catalog, leaving the tool's `package.json` reference as `catalog:`. Preserve exact pins where used.
+2. For a new dependency, add a catalog entry and reference it with `catalog:` in the appropriate dependency section. Reuse an existing entry rather than adding a second version.
+3. Run `pnpm install` from the repository root and include the generated `pnpm-lock.yaml` with the catalog change. Preserve overrides, release-age settings, and build allowlists.
+4. Run the affected tools' checks, including consumers of shared dependencies. Tools without a `check` script need their available build, lint, formatting, and test commands run explicitly.
+5. Separate mechanical catalog changes from version upgrades that require source changes or alter output. Review resolved and transitive lockfile changes, not just manifest ranges.
+
+Only use catalog references in projects included in `pnpm-workspace.yaml`.
 
 ## For AI Agents
 

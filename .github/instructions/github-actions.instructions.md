@@ -132,7 +132,8 @@ From `package.json` comments:
 - **Runtime dependencies**: Must be kept to an absolute minimum for performance
 - **Transitive dependencies**: Ideally zero transitive dependencies for runtime
 - **Relationship**: `.github/package.json` must be a superset of `.github/shared/package.json`
-- **Updates**: When updating dependencies, update both files if the dependency is shared
+- **Versions**: Reference external dependencies with `catalog:` and define their versions in the root `pnpm-workspace.yaml` catalog. Keep internal links as `workspace:*`.
+- **Updates**: Update the shared catalog entry once; keep both manifests referencing it
 
 ### Key Dependencies
 
@@ -296,11 +297,11 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 
 ### Updating Dependencies
 
-1. Update `.github/package.json` (root)
-2. If dependency is used in shared utilities, update `.github/shared/package.json`
+1. Update the dependency's entry in the root `pnpm-workspace.yaml` catalog.
+2. For a new dependency, add or reuse its catalog entry and add `catalog:` references to the appropriate manifest sections.
 3. Run `pnpm install` once from the **repo root** — `.github` and `.github/shared` are pnpm workspace packages, so a single install updates the single root `pnpm-lock.yaml` for the whole workspace.
-4. Commit all modified `package.json` files and the root `pnpm-lock.yaml`
-5. Test with `pnpm run check` in both directories
+4. Include the catalog, affected manifests, and generated lockfile together. Review actual dependency resolutions and isolate impactful upgrades from mechanical catalog conversions.
+5. Test with `pnpm run check` in both directories and check affected engineering consumers.
 
 ### Node.js Version Management
 
