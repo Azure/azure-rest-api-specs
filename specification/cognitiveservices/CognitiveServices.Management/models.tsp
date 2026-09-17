@@ -642,6 +642,32 @@ model RaiAcsModerationBindingExtension {
 @added(Versions.v2026_09_15_preview)
 model RaiAcsEmptyObject {}
 
+/** Static policy metadata for one ACS tool catalog entry. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS tool entries permit extensible policy metadata"
+@added(Versions.v2026_09_15_preview)
+model RaiAcsToolDefinition {
+  ...Record<unknown>;
+
+  /** Optional host-defined tool identifier. The catalog map key, not this value, controls tool lookup. */
+  @minLength(1)
+  id?: string;
+
+  /** Optional host-defined tool type. */
+  @minLength(1)
+  type?: string;
+
+  /** Human-readable policy metadata. */
+  description?: string;
+
+  /** Labels describing the sink or capability. */
+  @encodedName("application/json", "security_labels")
+  securityLabels?: string[];
+
+  /** Maximum sensitivity or host-defined clearance metadata. */
+  @minLength(1)
+  clearance?: string;
+}
+
 /**
  * Identifies the logical policy evaluated at an ACS intervention point.
  */
@@ -697,6 +723,21 @@ union RaiAcsPolicyTargetKind {
 }
 
 /**
+ * Snapshot paths for selecting a tool catalog entry.
+ * The listed values are recognized by the Unified Moderate AACS host profile; other values are allowed for forward compatibility.
+ */
+@added(Versions.v2026_09_15_preview)
+union RaiAcsToolNameSelector {
+  string,
+
+  /** Selects the tool-call name from the canonical snapshot root. */
+  ToolCallName: "$snap.tool_call.name",
+
+  /** Selects the tool-call name through the snapshot-root alias. */
+  ToolCallNameAlias: "$.tool_call.name",
+}
+
+/**
  * Binds one logical policy to an ACS intervention point.
  */
 @added(Versions.v2026_09_15_preview)
@@ -716,6 +757,16 @@ model RaiAcsInterventionPoint {
   annotations?: RaiAcsEmptyObject;
 }
 
+/** Binds one logical policy to a tool-call intervention point. */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsToolInterventionPoint {
+  ...RaiAcsInterventionPoint;
+
+  /** Selects the tool catalog key from the raw Agent Hooks snapshot using an extensible snapshot path. */
+  @encodedName("application/json", "tool_name_from")
+  toolNameFrom?: RaiAcsToolNameSelector;
+}
+
 /** Intervention points supported by the Unified Moderate AACS host profile. */
 @added(Versions.v2026_09_15_preview)
 model RaiAcsInterventionPoints {
@@ -724,11 +775,11 @@ model RaiAcsInterventionPoints {
 
   /** The policy evaluated before a tool call. */
   @encodedName("application/json", "pre_tool_call")
-  preToolCall?: RaiAcsInterventionPoint;
+  preToolCall?: RaiAcsToolInterventionPoint;
 
   /** The policy evaluated after a tool call. */
   @encodedName("application/json", "post_tool_call")
-  postToolCall?: RaiAcsInterventionPoint;
+  postToolCall?: RaiAcsToolInterventionPoint;
 
   /** The policy evaluated for final output. */
   output?: RaiAcsInterventionPoint;
@@ -756,8 +807,13 @@ model RaiAcsManifest {
   @encodedName("application/json", "intervention_points")
   interventionPoints: RaiAcsInterventionPoints;
 
-  /** Tool catalogs are disabled; when present, this object must be empty. */
-  tools?: RaiAcsEmptyObject;
+  /**
+   * Static tool catalog keyed by canonical tool name. The catalog may be omitted or empty when no
+   * tool selector is configured. A tool selector requires a non-empty catalog, and an unknown
+   * selected key fails closed.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS defines tools as a name-keyed extensible map"
+  tools?: Record<RaiAcsToolDefinition>;
 
   /** Standard ACS annotator dispatch is disabled; when present, this object must be empty. */
   annotators?: RaiAcsEmptyObject;
@@ -1103,6 +1159,11 @@ union ConnectionCategory {
   GenericRest: "GenericRest",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Remote tool connection"
   RemoteTool: "RemoteTool",
+
+  /** Connection to an endpoint described by an OpenAPI specification. */
+  @added(Versions.v2026_09_15_preview)
+  OpenAPI: "OpenAPI",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Amazon Marketplace Web Service connection"
   AmazonMws: "AmazonMws",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Concur service connection"
@@ -2783,6 +2844,20 @@ model UsageListResult {
  * The usage data for a usage request.
  */
 model Usage {
+  /**
+   * Fully qualified resource ID for the usage. Ex - /subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/usages/{usageName}
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The type of the usage resource. E.g. "Microsoft.CognitiveServices/locations/usages"
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read)
+  type?: string;
+
   /**
    * The unit of the metric.
    */
@@ -6285,11 +6360,137 @@ model RaiBindingListResult {
 @@identifiers(ResourceSkuListResult.value, #["resourceType", "name", "kind"]);
 
 /**
+ * Properties of an adapter deployment.
+ */
+@added(Versions.v2026_09_15_preview)
+model AdapterDeploymentProperties {
+  /**
+   * The immutable Project Models version produced by Foundry fine-tuning.
+   * The identifier uses the Azure AI project model URI format.
+   * The service validates LoRA weight type, protected status, provenance,
+   * compatibility metadata, and registration state.
+   */
+  @pattern("^azure(?:ai)://accounts/[^/]+/projects/[^/]+/models/[^/]+/versions/[^/]+$")
+  sourceModelId: string;
+
+  /**
+   * The name of the compatible managed compute parent deployment.
+   * The service resolves this name within the adapter's owning account; full
+   * ARM resource IDs and cross-account references are not accepted. It cannot
+   * equal the adapter deployment's resource name. Updating this value
+   * re-targets the adapter while its source model remains unchanged.
+   */
+  targetDeploymentName: string;
+
+  /**
+   * The managed compute deployment currently serving the adapter.
+   * During re-targeting this remains the prior deployment until atomic cutover.
+   */
+  @visibility(Lifecycle.Read)
+  activeTargetDeploymentName?: string;
+
+  /**
+   * The provisioning state of the adapter deployment.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * Information about the most recently requested lifecycle operation.
+   */
+  @visibility(Lifecycle.Read)
+  lastOperation?: AdapterDeploymentLastOperation;
+}
+
+/**
+ * Lifecycle operation types reported by an adapter deployment.
+ */
+@added(Versions.v2026_09_15_preview)
+union AdapterDeploymentOperationType {
+  string,
+
+  /** Creates the adapter deployment. */
+  Create: "Create",
+
+  /** Re-targets the adapter deployment. */
+  Update: "Update",
+
+  /** Deletes the adapter deployment. */
+  Delete: "Delete",
+}
+
+/**
+ * Lifecycle operation states reported by an adapter deployment.
+ */
+@added(Versions.v2026_09_15_preview)
+union AdapterDeploymentOperationState {
+  string,
+
+  /** The operation was accepted. */
+  Accepted: "Accepted",
+
+  /** The operation is running. */
+  Running: "Running",
+
+  /** The operation completed successfully. */
+  Succeeded: "Succeeded",
+
+  /** The operation failed. */
+  Failed: "Failed",
+}
+
+/**
+ * The most recently requested adapter lifecycle operation.
+ */
+@added(Versions.v2026_09_15_preview)
+model AdapterDeploymentLastOperation {
+  /**
+   * The type of lifecycle operation.
+   */
+  type: AdapterDeploymentOperationType;
+
+  /**
+   * The current or terminal operation state.
+   */
+  status: AdapterDeploymentOperationState;
+
+  /**
+   * The target deployment requested by a create or re-target operation.
+   */
+  requestedTargetDeploymentName?: string;
+
+  /**
+   * The time at which the operation started.
+   */
+  startedAt: utcDateTime;
+
+  /**
+   * The time at which the operation reached a terminal state.
+   */
+  completedAt?: utcDateTime;
+}
+
+/**
  * The list of Cognitive Services RaiBlocklist Items Names.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'RaiBlocklistItemsBulkDeleteRequest' preserved for backward compatibility with existing API surface"
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
+
+/**
+ * Gated model access configuration for a managed compute deployment.
+ */
+@added(Versions.v2026_09_15_preview)
+model GatedModelAccessProperties {
+  /**
+   * The fully qualified Azure resource ID of the project connection used to authorize access to a gated model during deployment creation.
+   */
+  connectionId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.CognitiveServices/accounts/projects/connections";
+    }
+  ]>;
+}
 
 /**
  * Properties of a Cognitive Services managed compute deployment.
@@ -6328,6 +6529,13 @@ model ManagedComputeDeploymentProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
+
+  /**
+   * Configuration used to authorize access to a gated model during deployment creation.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  gatedModelAccess?: GatedModelAccessProperties;
 
   /**
    * Deployment capabilities represented as key-value pairs.
