@@ -501,7 +501,19 @@ union DrillReportFinalizationState {
   Finalized: "Finalized",
 }
 
-/** Normal fault eligibility of a regional drill resource, independent of inclusion and readiness. */
+/** Regional resiliency posture reported by the selected protection solution. */
+@added(Versions.v2026_09_30_preview)
+union RegionalResiliencyStatus {
+  string,
+
+  /** The available protection-solution posture reports the resource as regionally resilient. */
+  Resilient: "Resilient",
+
+  /** The available protection-solution posture reports the resource as not regionally resilient. */
+  NotResilient: "NotResilient",
+}
+
+/** Normal fault eligibility of a drill resource, independent of inclusion and readiness. */
 @added(Versions.v2026_09_30_preview)
 union FaultEligibility {
   string,
@@ -518,7 +530,7 @@ union FaultEligibility {
 
 /** Reason requiring attention for a resource that requires recovery-plan participation and has no independent fault eligibility path. */
 @added(Versions.v2026_09_30_preview)
-union FaultEligibilityAttentionReason {
+union FaultIneligibleReason {
   string,
 
   /** The parent drill has no associated recovery plan required by the resource's normal fault inclusion policy. */

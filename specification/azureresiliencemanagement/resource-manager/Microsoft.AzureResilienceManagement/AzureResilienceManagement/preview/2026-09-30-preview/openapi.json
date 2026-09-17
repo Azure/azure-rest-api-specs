@@ -6188,6 +6188,16 @@
           "$ref": "#/definitions/DrillType",
           "description": "The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.",
           "readOnly": true
+        },
+        "faultEligibility": {
+          "$ref": "#/definitions/FaultEligibility",
+          "description": "Normal fault eligibility for a drill resource. Currently populated for regional resources only.\nOmitted until evaluated. Eligibility does not indicate inclusion or readiness,\nand force inclusion does not change this value.",
+          "readOnly": true
+        },
+        "faultIneligibleReason": {
+          "$ref": "#/definitions/FaultIneligibleReason",
+          "description": "Reason the resource is ineligible under normal fault inclusion policy. Currently populated for regional resources only.\nContains the single applicable recovery-plan reason when Ineligible.\nOmitted when Eligible, Unknown, or not yet evaluated. Failed or incomplete recovery-plan reads do not establish non-inclusion.\nBinding and permission errors are reported separately in attentionReason and error fields.",
+          "readOnly": true
         }
       },
       "discriminator": "drillType",
@@ -7218,7 +7228,7 @@
     },
     "FaultEligibility": {
       "type": "string",
-      "description": "Normal fault eligibility of a regional drill resource, independent of inclusion and readiness.",
+      "description": "Normal fault eligibility of a drill resource, independent of inclusion and readiness.",
       "enum": [
         "Unknown",
         "Eligible",
@@ -7246,7 +7256,7 @@
         ]
       }
     },
-    "FaultEligibilityAttentionReason": {
+    "FaultIneligibleReason": {
       "type": "string",
       "description": "Reason requiring attention for a resource that requires recovery-plan participation and has no independent fault eligibility path.",
       "enum": [
@@ -7254,7 +7264,7 @@
         "ResourceNotIncludedInRecoveryPlan"
       ],
       "x-ms-enum": {
-        "name": "FaultEligibilityAttentionReason",
+        "name": "FaultIneligibleReason",
         "modelAsString": true,
         "values": [
           {
@@ -9948,14 +9958,9 @@
       "type": "object",
       "description": "Properties of a resource in a regional Resiliency Drill.",
       "properties": {
-        "faultEligibility": {
-          "$ref": "#/definitions/FaultEligibility",
-          "description": "Normal fault eligibility for a regional drill resource. Omitted until evaluated.\nEligibility does not indicate inclusion or readiness, and force inclusion does not change this value.",
-          "readOnly": true
-        },
-        "isRegionallyResilient": {
-          "type": "boolean",
-          "description": "Whether the selected regional protection solution reports the resource as regionally resilient.\nOmitted when the posture is unknown or unavailable; an unavailable posture is not reported as false.",
+        "regionalResiliencyStatus": {
+          "$ref": "#/definitions/RegionalResiliencyStatus",
+          "description": "Regional resiliency status reported by the selected regional protection solution.\nResilient corresponds to an available true posture value; NotResilient corresponds to an available false value.\nOmitted when the posture is unknown or unavailable; unavailable data is not reported as NotResilient.",
           "readOnly": true
         },
         "replicationMode": {
@@ -9975,14 +9980,6 @@
               }
             ]
           }
-        },
-        "faultEligibilityAttentionReason": {
-          "type": "array",
-          "description": "Reasons for the regional resource's normal fault eligibility result.\nEmpty when Eligible; only the applicable recovery-plan reason when Ineligible.\nOmitted until evaluated. Failed or incomplete recovery-plan reads do not establish non-inclusion.\nBinding and permission errors are reported separately in attentionReason and error fields.",
-          "items": {
-            "$ref": "#/definitions/FaultEligibilityAttentionReason"
-          },
-          "readOnly": true
         }
       },
       "allOf": [
@@ -10022,6 +10019,30 @@
           "$ref": "#/definitions/IsoDuration",
           "description": "Target regional recovery time objective. eg, PT1H for 1 hour."
         }
+      }
+    },
+    "RegionalResiliencyStatus": {
+      "type": "string",
+      "description": "Regional resiliency posture reported by the selected protection solution.",
+      "enum": [
+        "Resilient",
+        "NotResilient"
+      ],
+      "x-ms-enum": {
+        "name": "RegionalResiliencyStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Resilient",
+            "value": "Resilient",
+            "description": "The available protection-solution posture reports the resource as regionally resilient."
+          },
+          {
+            "name": "NotResilient",
+            "value": "NotResilient",
+            "description": "The available protection-solution posture reports the resource as not regionally resilient."
+          }
+        ]
       }
     },
     "RelativeResourceCompositionState": {

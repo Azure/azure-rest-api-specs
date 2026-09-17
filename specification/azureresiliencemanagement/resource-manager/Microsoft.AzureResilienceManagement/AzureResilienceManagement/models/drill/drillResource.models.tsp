@@ -160,6 +160,23 @@ model DrillResourceProperties {
   @doc("The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.")
   @visibility(Lifecycle.Read)
   drillType: DrillType;
+
+  /**
+   * Normal fault eligibility for a drill resource. Currently populated for regional resources only.
+   * Omitted until evaluated. Eligibility does not indicate inclusion or readiness,
+   * and force inclusion does not change this value.
+   */
+  @visibility(Lifecycle.Read)
+  faultEligibility?: FaultEligibility;
+
+  /**
+   * Reason the resource is ineligible under normal fault inclusion policy. Currently populated for regional resources only.
+   * Contains the single applicable recovery-plan reason when Ineligible.
+   * Omitted when Eligible, Unknown, or not yet evaluated. Failed or incomplete recovery-plan reads do not establish non-inclusion.
+   * Binding and permission errors are reported separately in attentionReason and error fields.
+   */
+  @visibility(Lifecycle.Read)
+  faultIneligibleReason?: FaultIneligibleReason;
 }
 
 @doc("Properties of a resource in a zonal Resiliency Drill.")
@@ -186,18 +203,12 @@ model RegionalDrillResourceProperties extends DrillResourceProperties {
   drillType: DrillType.Regional;
 
   /**
-   * Normal fault eligibility for a regional drill resource. Omitted until evaluated.
-   * Eligibility does not indicate inclusion or readiness, and force inclusion does not change this value.
+   * Regional resiliency status reported by the selected regional protection solution.
+   * Resilient corresponds to an available true posture value; NotResilient corresponds to an available false value.
+   * Omitted when the posture is unknown or unavailable; unavailable data is not reported as NotResilient.
    */
   @visibility(Lifecycle.Read)
-  faultEligibility?: FaultEligibility;
-
-  /**
-   * Whether the selected regional protection solution reports the resource as regionally resilient.
-   * Omitted when the posture is unknown or unavailable; an unavailable posture is not reported as false.
-   */
-  @visibility(Lifecycle.Read)
-  isRegionallyResilient?: boolean;
+  regionalResiliencyStatus?: RegionalResiliencyStatus;
 
   /**
    * Replication mode of the selected regional protection solution.
@@ -217,15 +228,6 @@ model RegionalDrillResourceProperties extends DrillResourceProperties {
       type: "Microsoft.Advisor/recommendations";
     }
   ]>;
-
-  /**
-   * Reasons for the regional resource's normal fault eligibility result.
-   * Empty when Eligible; only the applicable recovery-plan reason when Ineligible.
-   * Omitted until evaluated. Failed or incomplete recovery-plan reads do not establish non-inclusion.
-   * Binding and permission errors are reported separately in attentionReason and error fields.
-   */
-  @visibility(Lifecycle.Read)
-  faultEligibilityAttentionReason?: FaultEligibilityAttentionReason[];
 }
 
 @doc("Reason why the Drill resource is in NeedsAttention state.")
