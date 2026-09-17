@@ -17,9 +17,9 @@ const EvaluatorImprovementRequiredPreviews = #{
 
 @added(Versions.PuPr)
 @removed(Versions.v1)
-@doc("An exact non-negative USD decimal. The service accepts at most six fractional digits and uses integer micro-USD internally.")
-@minValue(0)
-scalar EvaluatorImprovementUsdAmount extends decimal128;
+@doc("An exact non-negative USD decimal encoded as a JSON string with at most six fractional digits. The service converts this value to integer micro-USD internally.")
+@pattern("^(0|[1-9][0-9]*)(\\.[0-9]{1,6})?$")
+scalar EvaluatorImprovementUsdAmount extends string;
 
 @added(Versions.PuPr)
 @removed(Versions.v1)
@@ -137,7 +137,7 @@ union EvaluatorImprovementStopReason {
   max_candidate_attempts_reached: "max_candidate_attempts_reached",
 
   @doc("The next conservative model-inference reservation did not fit the approved USD limit.")
-  max_inference_cost_usd_reached: "max_inference_cost_usd_reached",
+  max_cost_reached: "max_cost_reached",
 
   @doc("Independent confirmation was interrupted.")
   confirmation_interrupted: "confirmation_interrupted",
@@ -534,7 +534,7 @@ model EvaluatorImprovementBudget {
   max_candidate_attempts: int32;
 
   @doc("The exact maximum USD amount for model inference. It excludes ACA, storage, networking, deterministic analysis, and human review.")
-  max_inference_cost_usd: EvaluatorImprovementUsdAmount;
+  max_cost_usd: EvaluatorImprovementUsdAmount;
 
   @doc("An approved rate override reference required only when the authoritative service catalog does not cover the selected configuration.")
   approved_rate_override?: EvaluatorImprovementApprovedRateOverrideReference;
@@ -1083,10 +1083,10 @@ model EvaluatorImprovementProgress {
 
 @added(Versions.PuPr)
 @removed(Versions.v1)
-@doc("Exact model-inference budget progress. `spent_usd + reserved_usd + remaining_usd` equals `max_inference_cost_usd`. `reconciled_usd` and `uncertain_usd` are identified subsets of `spent_usd` and must not be added to it.")
+@doc("Exact model-inference budget progress. `spent_usd + reserved_usd + remaining_usd` equals `max_cost_usd`. `reconciled_usd` and `uncertain_usd` are identified subsets of `spent_usd` and must not be added to it.")
 model EvaluatorImprovementCostProgress {
   @doc("The exact approved model-inference USD limit.")
-  max_inference_cost_usd: EvaluatorImprovementUsdAmount;
+  max_cost_usd: EvaluatorImprovementUsdAmount;
 
   @doc("The current best-known model-inference cost already debited.")
   spent_usd: EvaluatorImprovementUsdAmount;
@@ -1100,7 +1100,7 @@ model EvaluatorImprovementCostProgress {
   @doc("The conservative maximum cost held for admitted but unfinished model calls.")
   reserved_usd: EvaluatorImprovementUsdAmount;
 
-  @doc("The uncommitted amount: `max_inference_cost_usd - spent_usd - reserved_usd`.")
+  @doc("The uncommitted amount: `max_cost_usd - spent_usd - reserved_usd`.")
   remaining_usd: EvaluatorImprovementUsdAmount;
 
   @doc("The frozen authoritative price schedule.")
