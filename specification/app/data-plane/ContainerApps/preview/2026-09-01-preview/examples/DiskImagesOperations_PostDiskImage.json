@@ -1,73 +1,98 @@
 {
-  "title": "Create a disk image from a container registry",
+  "title": "Creates a new disk image from an OCI image reference.",
   "operationId": "DiskImagesOperations_PostDiskImage",
   "parameters": {
     "api-version": "2026-09-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "example-resource-group",
-    "sandboxGroupName": "example-sandbox-group",
+    "subscriptionId": "0D2FA3BC-BD17-4E02-A9EF-7AC1EE26E816",
+    "resourceGroupName": "rgcontainerappssandbox",
+    "sandboxGroupName": "lpuvcbxvgliuutdukpqulz",
     "body": {
       "source": {
-        "kind": "registry",
-        "imageUrl": "mcr.microsoft.com/azurelinux/base/core:3.0"
+        "kind": "CreateDiskImageSource"
       },
-      "name": "development-image",
+      "name": "dwyhfzculvovvmkq",
       "labels": {
-        "environment": "development",
-        "team": "platform"
+        "key1349": "nvjzaiakxhvsahufv"
       },
-      "vnetConnectionName": "example-vnet-connection"
+      "vnetConnectionName": "accbtjz"
     }
   },
   "responses": {
     "201": {
       "body": {
-        "id": "disk-image-01",
-        "name": "development-image",
+        "id": "ayazmdukcol",
+        "name": "tmhwfjphtullcpklugqllysooldqt",
         "labels": {
-          "environment": "development",
-          "team": "platform"
+          "key7912": "qfekjg"
         },
         "image": {
-          "base": "mcr.microsoft.com/azurelinux/base/core:3.0",
+          "base": "rokudutth",
           "entrypoint": [
-            "/bin/sh"
+            "fnjispdvobceoyzs"
+          ],
+          "cmd": [
+            "pbqmhtfkicdngjzutx"
           ]
         },
         "status": {
-          "state": "Succeeded",
-          "createdAt": "2026-08-15T10:00:00Z",
-          "updatedAt": "2026-08-15T10:05:00Z"
+          "state": "opbfqxrkeykgxaxldgonakqni",
+          "errorMessage": "eemlsbqplnrzuvncks",
+          "createdAt": "2026-09-17T06:50:47.499Z",
+          "updatedAt": "2026-09-17T06:50:47.499Z"
         },
-        "sizeInMB": 512
+        "sizeInMB": 10
       }
     },
     "400": {
       "body": {
-        "title": "Bad Request",
-        "status": 400,
-        "detail": "The disk image request is invalid."
+        "error": {
+          "code": "qtcwixgiojleodjfmpvxicvzhlw",
+          "message": "qofhevlvuedkqvsupcdiariqdueaaz",
+          "target": "wlhrz",
+          "details": [],
+          "innererror": {
+            "code": "ajgsjlzsqxvoovtfvfiiaktg"
+          }
+        }
       }
     },
     "401": {
       "body": {
-        "title": "Unauthorized",
-        "status": 401,
-        "detail": "The request does not contain valid authentication credentials."
+        "error": {
+          "code": "qtcwixgiojleodjfmpvxicvzhlw",
+          "message": "qofhevlvuedkqvsupcdiariqdueaaz",
+          "target": "wlhrz",
+          "details": [],
+          "innererror": {
+            "code": "ajgsjlzsqxvoovtfvfiiaktg"
+          }
+        }
       }
     },
     "429": {
       "body": {
-        "title": "Too Many Requests",
-        "status": 429,
-        "detail": "The disk image creation rate limit has been exceeded."
+        "error": {
+          "code": "qtcwixgiojleodjfmpvxicvzhlw",
+          "message": "qofhevlvuedkqvsupcdiariqdueaaz",
+          "target": "wlhrz",
+          "details": [],
+          "innererror": {
+            "code": "ajgsjlzsqxvoovtfvfiiaktg"
+          }
+        }
       }
     },
     "500": {
       "body": {
-        "title": "Internal Server Error",
-        "status": 500,
-        "detail": "An unexpected error occurred while creating the disk image."
+        "error": {
+          "code": "qtcwixgiojleodjfmpvxicvzhlw",
+          "message": "qofhevlvuedkqvsupcdiariqdueaaz",
+          "target": "wlhrz",
+          "details": [],
+          "innererror": {
+            "code": "ajgsjlzsqxvoovtfvfiiaktg"
+          }
+        }
       }
     }
   }

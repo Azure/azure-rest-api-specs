@@ -7,10 +7,10 @@ namespace ContainerAppsSandbox;
 
 /** Errors returned by deleteConnection. */
 alias DeleteConnectionErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** Query parameters for deleting a connection. */
 alias DeleteConnectionTraits = QueryParametersTrait<
@@ -28,7 +28,9 @@ alias ConnectionDeleteOperations = ResourceOperations<
 >;
 
 /** Errors returned by listConnections. */
-alias ListConnectionErrors = ErrorResult<401> | ErrorResult<500>;
+alias ListConnectionErrors =
+  | UnauthorizedErrorResult
+  | InternalServerErrorResult;
 
 /** Query parameters for listing connections. */
 alias ListConnectionTraits = QueryParametersTrait<
@@ -53,9 +55,9 @@ alias ConnectionListOperations = ResourceOperations<
 
 /** Errors returned by getConnection. */
 alias GetConnectionErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Query parameters for reading a connection. */
 alias GetConnectionTraits = QueryParametersTrait<
@@ -95,9 +97,9 @@ alias PostConnectionResult = PostConnectionResult200 | PostConnectionResult201;
 
 /** Errors returned by postConnection. */
 alias PostConnectionErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | InternalServerErrorResult;
 
 /** OK. */
 model PostConnectionAuthorizeResult {
@@ -110,10 +112,10 @@ model PostConnectionAuthorizeResult {
 
 /** Errors returned by postConnectionAuthorize. */
 alias PostConnectionAuthorizeErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for authorizing connections. */
 alias ConnectionAuthorizeOperations = ResourceOperations<
@@ -132,9 +134,9 @@ model PostConnectionConsentLinkResult {
 
 /** Errors returned by postConnectionConsentLink. */
 alias PostConnectionConsentLinkErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for generating connection consent links. */
 alias ConnectionConsentLinkOperations = ResourceOperations<
@@ -153,9 +155,9 @@ model PostConnectionRefreshResult {
 
 /** Errors returned by postConnectionRefresh. */
 alias PostConnectionRefreshErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for refreshing connections. */
 alias ConnectionRefreshOperations = ResourceOperations<
@@ -174,10 +176,10 @@ model PutConnectionPolicyRulesResult {
 
 /** Errors returned by putConnectionPolicyRules. */
 alias PutConnectionPolicyRulesErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 @tag("connections")
 interface ConnectionsOperations {

@@ -15,9 +15,9 @@ model DeleteSandboxFileResult {
 
 /** Errors returned by deleteSandboxFile. */
 alias DeleteSandboxFileErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult;
 
 /** OK. */
 model GetSandboxFileResult {
@@ -30,9 +30,9 @@ model GetSandboxFileResult {
 
 /** Errors returned by getSandboxFile. */
 alias GetSandboxFileErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult;
 
 /** OK. */
 model GetSandboxFilesListResult {
@@ -45,9 +45,9 @@ model GetSandboxFilesListResult {
 
 /** Errors returned by getSandboxFilesList. */
 alias GetSandboxFilesListErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult;
 
 /** OK. */
 model GetSandboxFileStatResult {
@@ -60,9 +60,9 @@ model GetSandboxFileStatResult {
 
 /** Errors returned by getSandboxFileStat. */
 alias GetSandboxFileStatErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult;
 
 /** OK. */
 model PostSandboxFileMkdirResult {
@@ -75,9 +75,9 @@ model PostSandboxFileMkdirResult {
 
 /** Errors returned by postSandboxFileMkdir. */
 alias PostSandboxFileMkdirErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult;
 
 /** Standard resource operations for creating sandbox directories. */
 alias SandboxFileMkdirOperations = ResourceOperations<
@@ -96,10 +96,10 @@ model PostSandboxFileResult {
 
 /** Errors returned by postSandboxFile. */
 alias PostSandboxFileErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<413>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | RequestBodyTooLargeErrorResult;
 
 /** Standard resource operations for writing sandbox files. */
 alias SandboxFileWriteOperations = ResourceOperations<

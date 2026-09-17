@@ -15,10 +15,10 @@ model GetSandboxEgressDecisionsResult {
 
 /** Errors returned by getSandboxEgressDecisions. */
 alias GetSandboxEgressDecisionsErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** OK. */
 model GetSandboxPortsResult {
@@ -31,10 +31,10 @@ model GetSandboxPortsResult {
 
 /** Errors returned by getSandboxPorts. */
 alias GetSandboxPortsErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** OK. */
 model PatchSandboxPortResult {
@@ -47,11 +47,11 @@ model PatchSandboxPortResult {
 
 /** Errors returned by patchSandboxPort. */
 alias PatchSandboxPortErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** OK. */
 model PostSandboxConnectionAddResult {
@@ -64,11 +64,11 @@ model PostSandboxConnectionAddResult {
 
 /** Errors returned by postSandboxConnectionAdd. */
 alias PostSandboxConnectionAddErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for adding sandbox connections. */
 alias SandboxConnectionAddOperations = ResourceOperations<
@@ -87,11 +87,11 @@ model PostSandboxEgressPolicyResult {
 
 /** Errors returned by postSandboxEgressPolicy. */
 alias PostSandboxEgressPolicyErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for setting sandbox egress policies. */
 alias SandboxEgressPolicyOperations = ResourceOperations<
@@ -110,11 +110,11 @@ model PostSandboxPortAddResult {
 
 /** Errors returned by postSandboxPortAdd. */
 alias PostSandboxPortAddErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for adding sandbox ports. */
 alias SandboxPortAddOperations = ResourceOperations<
@@ -133,11 +133,11 @@ model PostSandboxPortRemoveResult {
 
 /** Errors returned by postSandboxPortRemove. */
 alias PostSandboxPortRemoveErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for removing sandbox ports. */
 alias SandboxPortRemoveOperations = ResourceOperations<
@@ -156,11 +156,11 @@ model PutSandboxPortsResult {
 
 /** Errors returned by putSandboxPorts. */
 alias PutSandboxPortsErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."

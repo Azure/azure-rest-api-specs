@@ -1,58 +1,69 @@
 {
-  "title": "List disk images in a sandbox group",
+  "title": "Lists disk images in a sandbox group, with pagination support.",
   "operationId": "DiskImagesOperations_ListDiskImages",
   "parameters": {
     "api-version": "2026-09-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "example-resource-group",
-    "sandboxGroupName": "example-sandbox-group",
-    "skipToken": "example-skip-token",
-    "labels": "environment=development,team=platform"
+    "subscriptionId": "F627A25C-79B6-4DBD-B7AC-1293B91CB342",
+    "resourceGroupName": "rgcontainerappssandbox",
+    "sandboxGroupName": "kcijjueffvrgurryfflcmiurkvpn",
+    "skipToken": "qcejhowuonbabqzgwfl",
+    "labels": "wophrbiimmjzemfifsvihcb"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "disk-image-01",
-            "name": "development-image",
+            "id": "ayazmdukcol",
+            "name": "tmhwfjphtullcpklugqllysooldqt",
             "labels": {
-              "environment": "development",
-              "team": "platform"
+              "key7912": "qfekjg"
             },
             "image": {
-              "base": "mcr.microsoft.com/azurelinux/base/core:3.0",
+              "base": "rokudutth",
               "entrypoint": [
-                "/bin/sh"
+                "fnjispdvobceoyzs"
               ],
               "cmd": [
-                "-c",
-                "echo ready"
+                "pbqmhtfkicdngjzutx"
               ]
             },
             "status": {
-              "state": "Succeeded",
-              "createdAt": "2026-08-15T10:00:00Z",
-              "updatedAt": "2026-08-15T10:05:00Z"
+              "state": "opbfqxrkeykgxaxldgonakqni",
+              "errorMessage": "eemlsbqplnrzuvncks",
+              "createdAt": "2026-09-17T06:50:47.499Z",
+              "updatedAt": "2026-09-17T06:50:47.499Z"
             },
-            "sizeInMB": 512
+            "sizeInMB": 10
           }
         ],
-        "nextLink": "https://example.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resource-group/sandboxGroups/example-sandbox-group/diskimages?api-version=2026-09-01-preview&skipToken=example-next-skip-token"
+        "nextLink": "https://microsoft.com/a"
       }
     },
     "401": {
       "body": {
-        "title": "Unauthorized",
-        "status": 401,
-        "detail": "The request does not contain valid authentication credentials."
+        "error": {
+          "code": "qtcwixgiojleodjfmpvxicvzhlw",
+          "message": "qofhevlvuedkqvsupcdiariqdueaaz",
+          "target": "wlhrz",
+          "details": [],
+          "innererror": {
+            "code": "ajgsjlzsqxvoovtfvfiiaktg"
+          }
+        }
       }
     },
     "500": {
       "body": {
-        "title": "Internal Server Error",
-        "status": 500,
-        "detail": "An unexpected error occurred while listing disk images."
+        "error": {
+          "code": "qtcwixgiojleodjfmpvxicvzhlw",
+          "message": "qofhevlvuedkqvsupcdiariqdueaaz",
+          "target": "wlhrz",
+          "details": [],
+          "innererror": {
+            "code": "ajgsjlzsqxvoovtfvfiiaktg"
+          }
+        }
       }
     }
   }

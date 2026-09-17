@@ -6,7 +6,9 @@ using Azure.Core.Traits;
 namespace ContainerAppsSandbox;
 
 /** Errors returned by deleteContentPackage. */
-alias DeleteContentPackageErrors = ErrorResult<401> | ErrorResult<500>;
+alias DeleteContentPackageErrors =
+  | UnauthorizedErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for deleting content packages. */
 alias ContentPackageDeleteOperations = ResourceOperations<
@@ -15,7 +17,9 @@ alias ContentPackageDeleteOperations = ResourceOperations<
 >;
 
 /** Errors returned by listContentPackages. */
-alias ListContentPackageErrors = ErrorResult<401> | ErrorResult<500>;
+alias ListContentPackageErrors =
+  | UnauthorizedErrorResult
+  | InternalServerErrorResult;
 
 /** Query parameters for listing content packages. */
 alias ListContentPackageTraits = QueryParametersTrait<
@@ -37,9 +41,9 @@ alias ContentPackageListOperations = ResourceOperations<
 
 /** Errors returned by getContentPackage. */
 alias GetContentPackageErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for reading content packages. */
 alias ContentPackageGetOperations = ResourceOperations<
@@ -58,10 +62,10 @@ model PostContentPackageUploadResult {
 
 /** Errors returned by postContentPackageUpload. */
 alias PostContentPackageUploadErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<500>
-  | ErrorResult<503>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | InternalServerErrorResult
+  | ServiceUnavailableErrorResult;
 
 /** Standard resource operations for uploading content packages. */
 alias ContentPackageUploadOperations = ResourceOperations<

@@ -6,7 +6,7 @@ using Azure.Core.Traits;
 namespace ContainerAppsSandbox;
 
 /** Errors returned by deleteCredential. */
-alias DeleteCredentialErrors = ErrorResult<404>;
+alias DeleteCredentialErrors = NotFoundErrorResult;
 
 /** Standard resource operations for deleting credentials. */
 alias CredentialDeleteOperations = ResourceOperations<
@@ -30,7 +30,7 @@ alias CredentialListOperations = ResourceOperations<
 >;
 
 /** Errors returned by getCredential. */
-alias GetCredentialErrors = ErrorResult<404>;
+alias GetCredentialErrors = NotFoundErrorResult;
 
 /** Standard resource operations for reading credentials. */
 alias CredentialGetOperations = ResourceOperations<
@@ -48,7 +48,7 @@ model PutCredentialResult {
 }
 
 /** Errors returned by putCredential. */
-alias PutCredentialErrors = ErrorResult<400>;
+alias PutCredentialErrors = BadRequestErrorResult;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, query parameters, and route shapes."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."

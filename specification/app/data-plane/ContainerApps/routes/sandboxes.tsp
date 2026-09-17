@@ -26,20 +26,26 @@ namespace ContainerAppsSandbox {
   }
 
   /** Errors returned when listing sandboxes. */
-  alias ListErrors = ErrorResult<400> | ErrorResult<401> | ErrorResult<500>;
+  alias ListErrors =
+    | BadRequestErrorResult
+    | UnauthorizedErrorResult
+    | InternalServerErrorResult;
 
   /** Errors returned when creating a sandbox. */
   alias CreateErrors =
-    | ErrorResult<400>
-    | ErrorResult<401>
-    | ErrorResult<429>
-    | ErrorResult<500>;
+    | BadRequestErrorResult
+    | UnauthorizedErrorResult
+    | TooManyRequestsErrorResult
+    | InternalServerErrorResult;
 
   /** Errors returned when getting a sandbox. */
-  alias GetErrors = ErrorResult<401> | ErrorResult<404> | ErrorResult<500>;
+  alias GetErrors =
+    | UnauthorizedErrorResult
+    | NotFoundErrorResult
+    | InternalServerErrorResult;
 
   /** Errors returned when deleting a sandbox. */
-  alias DeleteErrors = ErrorResult<401> | ErrorResult<500>;
+  alias DeleteErrors = UnauthorizedErrorResult | InternalServerErrorResult;
 
   /** Standard resource operations for reading sandboxes. */
   alias SandboxGetOperations = ResourceOperations<

@@ -7,9 +7,9 @@ namespace ContainerAppsSandbox;
 
 /** Errors returned by deleteDiskImage. */
 alias DeleteDiskImageErrors =
-  | ErrorResult<401>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for deleting disk images. */
 alias DiskImageDeleteOperations = ResourceOperations<
@@ -18,7 +18,7 @@ alias DiskImageDeleteOperations = ResourceOperations<
 >;
 
 /** Errors returned by listDiskImages. */
-alias ListDiskImageErrors = ErrorResult<401> | ErrorResult<500>;
+alias ListDiskImageErrors = UnauthorizedErrorResult | InternalServerErrorResult;
 
 /** Query parameters for listing disk images. */
 alias ListDiskImageTraits = QueryParametersTrait<
@@ -39,7 +39,9 @@ alias DiskImageListOperations = ResourceOperations<
 >;
 
 /** Errors returned by listDiskImagesPublic. */
-alias ListPublicDiskImageErrors = ErrorResult<401> | ErrorResult<500>;
+alias ListPublicDiskImageErrors =
+  | UnauthorizedErrorResult
+  | InternalServerErrorResult;
 
 /** Query parameters for listing public disk images. */
 alias ListPublicDiskImageTraits = QueryParametersTrait<
@@ -58,9 +60,9 @@ alias PublicDiskImageListOperations = ResourceOperations<
 
 /** Errors returned by getDiskImagePublic. */
 alias GetDiskImagePublicErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for reading public disk images. */
 alias PublicDiskImageGetOperations = ResourceOperations<
@@ -70,9 +72,9 @@ alias PublicDiskImageGetOperations = ResourceOperations<
 
 /** Errors returned by getDiskImage. */
 alias GetDiskImageErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for reading disk images. */
 alias DiskImageGetOperations = ResourceOperations<
@@ -91,10 +93,10 @@ model PostDiskImageResult {
 
 /** Errors returned by postDiskImage. */
 alias PostDiskImageErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<429>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | TooManyRequestsErrorResult
+  | InternalServerErrorResult;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, query parameters, and route shapes."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."

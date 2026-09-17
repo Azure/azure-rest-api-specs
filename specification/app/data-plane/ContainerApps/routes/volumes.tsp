@@ -7,10 +7,10 @@ namespace ContainerAppsSandbox;
 
 /** Errors returned by deleteVolume. */
 alias DeleteVolumeErrors =
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for deleting volumes. */
 alias VolumeDeleteOperations = ResourceOperations<
@@ -26,14 +26,14 @@ model DeleteVolumeFileResult {
 
 /** Errors returned by deleteVolumeFile. */
 alias DeleteVolumeFileErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** Errors returned by listVolumes. */
-alias ListVolumeErrors = ErrorResult<401> | ErrorResult<500>;
+alias ListVolumeErrors = UnauthorizedErrorResult | InternalServerErrorResult;
 
 /** Query parameters for listing volumes. */
 alias ListVolumeTraits = QueryParametersTrait<
@@ -63,10 +63,15 @@ model GetVolumesCountResult {
 }
 
 /** Errors returned by getVolumesCount. */
-alias GetVolumesCountErrors = ErrorResult<401> | ErrorResult<500>;
+alias GetVolumesCountErrors =
+  | UnauthorizedErrorResult
+  | InternalServerErrorResult;
 
 /** Errors returned by getVolume. */
-alias GetVolumeErrors = ErrorResult<401> | ErrorResult<404> | ErrorResult<500>;
+alias GetVolumeErrors =
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for reading volumes. */
 alias VolumeGetOperations = ResourceOperations<
@@ -85,10 +90,10 @@ model GetVolumeFilesResult {
 
 /** Errors returned by getVolumeFiles. */
 alias GetVolumeFilesErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** OK. */
 model GetVolumeFileDownloadResult {
@@ -101,10 +106,10 @@ model GetVolumeFileDownloadResult {
 
 /** Errors returned by getVolumeFileDownload. */
 alias GetVolumeFileDownloadErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Created. */
 model PostVolumeFileMkdirResult {
@@ -117,10 +122,10 @@ model PostVolumeFileMkdirResult {
 
 /** Errors returned by postVolumeFileMkdir. */
 alias PostVolumeFileMkdirErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for creating volume directories. */
 alias VolumeFileMkdirOperations = ResourceOperations<
@@ -139,11 +144,11 @@ model PostVolumeForkResult {
 
 /** Errors returned by postVolumeFork. */
 alias PostVolumeForkErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for forking volumes. */
 alias VolumeForkOperations = ResourceOperations<
@@ -162,10 +167,10 @@ model PutVolumeResult {
 
 /** Errors returned by putVolume. */
 alias PutVolumeErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<409>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | ConflictErrorResult
+  | InternalServerErrorResult;
 
 /** Created. */
 model PostVolumeFileResult {
@@ -178,12 +183,12 @@ model PostVolumeFileResult {
 
 /** Errors returned by postVolumeFile. */
 alias PostVolumeFileErrors =
-  | ErrorResult<400>
-  | ErrorResult<401>
-  | ErrorResult<404>
-  | ErrorResult<409>
-  | ErrorResult<412>
-  | ErrorResult<500>;
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | PreconditionFailedErrorResult
+  | InternalServerErrorResult;
 
 /** Standard resource operations for uploading volume files. */
 alias VolumeFileUploadOperations = ResourceOperations<
