@@ -108,10 +108,38 @@
             },
             "fullTextPolicy": {
               "defaultLanguage": "1033",
+              "package": "standard",
+              "defaultSpec": {
+                "language": "en-US",
+                "tokenizer": "word",
+                "filters": [
+                  "lowercase",
+                  "stop"
+                ],
+                "stopWordListKind": "basic",
+                "addStopWords": [
+                  "cosmos"
+                ],
+                "removeStopWords": [
+                  "is",
+                  "the"
+                ]
+              },
               "fullTextPaths": [
                 {
                   "path": "/ftPath1",
-                  "language": "en-US"
+                  "language": "en-US",
+                  "tokenizer": "word",
+                  "filters": [
+                    "lowercase"
+                  ],
+                  "stopWordListKind": "basic",
+                  "addStopWords": [
+                    "cosmos"
+                  ],
+                  "removeStopWords": [
+                    "is"
+                  ]
                 },
                 {
                   "path": "/ftPath2",

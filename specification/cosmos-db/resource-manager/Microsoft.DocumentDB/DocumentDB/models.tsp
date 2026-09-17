@@ -4477,6 +4477,84 @@ union EmbeddingSourceAuthenticationType {
 }
 
 /**
+ * The package used for full text processing.
+ */
+union FullTextPackageType {
+  /**
+   * Legacy package behavior.
+   */
+  Legacy: "legacy",
+
+  /**
+   * Standard package behavior.
+   */
+  Standard: "standard",
+
+  string,
+}
+
+/**
+ * The tokenizer used for full text processing.
+ */
+union FullTextTokenizerType {
+  /**
+   * Word tokenizer.
+   */
+  Word: "word",
+
+  string,
+}
+
+/**
+ * A filter applied during full text analysis.
+ */
+union FullTextFilterType {
+  /**
+   * Lowercase filter.
+   */
+  Lowercase: "lowercase",
+
+  /**
+   * ASCII normalization filter.
+   */
+  Ascii: "ascii",
+
+  /**
+   * Stop word filter.
+   */
+  Stop: "stop",
+
+  /**
+   * Stem filter.
+   */
+  Stem: "stem",
+
+  string,
+}
+
+/**
+ * The stop word list kind used for full text analysis.
+ */
+union StopWordListKindType {
+  /**
+   * No built-in stop word list.
+   */
+  None: "none",
+
+  /**
+   * Extended built-in stop word list.
+   */
+  Extended: "extended",
+
+  /**
+   * Basic built-in stop word list.
+   */
+  Basic: "basic",
+
+  string,
+}
+
+/**
  * Cosmos DB FullText Policy
  */
 model FullTextPolicy {
@@ -4484,6 +4562,18 @@ model FullTextPolicy {
    * The default language for a full text paths.
    */
   defaultLanguage?: string;
+
+  /**
+   * The full text package type.
+   */
+  @added(Versions.v2026_09_01_preview)
+  package?: FullTextPackageType;
+
+  /**
+   * The default full text analysis specification inherited by full text paths that omit these settings.
+   */
+  @added(Versions.v2026_09_01_preview)
+  defaultSpec?: FullTextSpec;
 
   /**
    * List of FullText Paths
@@ -4505,6 +4595,72 @@ model FullTextPath {
    * The language of the full text field in the document.
    */
   language?: string;
+
+  /**
+   * The tokenizer method for this path.
+   */
+  @added(Versions.v2026_09_01_preview)
+  tokenizer?: FullTextTokenizerType;
+
+  /**
+   * The filter pipeline applied to this path.
+   */
+  @added(Versions.v2026_09_01_preview)
+  filters?: FullTextFilterType[];
+
+  /**
+   * The stop word list kind for this path.
+   */
+  @added(Versions.v2026_09_01_preview)
+  stopWordListKind?: StopWordListKindType;
+
+  /**
+   * Custom words to add to the stop word list for this path.
+   */
+  @added(Versions.v2026_09_01_preview)
+  addStopWords?: string[];
+
+  /**
+   * Words to remove from the built-in stop word list for this path.
+   */
+  @added(Versions.v2026_09_01_preview)
+  removeStopWords?: string[];
+}
+
+/**
+ * The default full text analysis specification for a full text policy.
+ */
+@added(Versions.v2026_09_01_preview)
+model FullTextSpec {
+  /**
+   * The language of the full text analysis.
+   */
+  language?: string;
+
+  /**
+   * The tokenizer method of the full text analysis.
+   */
+  tokenizer?: FullTextTokenizerType;
+
+  /**
+   * The filter pipeline of the full text analysis.
+   */
+  filters?: FullTextFilterType[];
+
+  /**
+   * The stop word list kind of the full text analysis.
+   */
+  stopWordListKind?: StopWordListKindType;
+
+  /**
+   * Custom words to add to the stop word list.
+   */
+  addStopWords?: string[];
+
+  /**
+   * Words to remove from the built-in stop word list.
+   */
+  removeStopWords?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -26308,6 +26308,42 @@
         }
       }
     },
+    "FullTextFilterType": {
+      "type": "string",
+      "description": "A filter applied during full text analysis.",
+      "enum": [
+        "lowercase",
+        "ascii",
+        "stop",
+        "stem"
+      ],
+      "x-ms-enum": {
+        "name": "FullTextFilterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Lowercase",
+            "value": "lowercase",
+            "description": "Lowercase filter."
+          },
+          {
+            "name": "Ascii",
+            "value": "ascii",
+            "description": "ASCII normalization filter."
+          },
+          {
+            "name": "Stop",
+            "value": "stop",
+            "description": "Stop word filter."
+          },
+          {
+            "name": "Stem",
+            "value": "stem",
+            "description": "Stem filter."
+          }
+        ]
+      }
+    },
     "FullTextIndexPath": {
       "type": "object",
       "description": "Represents the full text index path.",
@@ -26321,6 +26357,30 @@
         "path"
       ]
     },
+    "FullTextPackageType": {
+      "type": "string",
+      "description": "The package used for full text processing.",
+      "enum": [
+        "legacy",
+        "standard"
+      ],
+      "x-ms-enum": {
+        "name": "FullTextPackageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Legacy",
+            "value": "legacy",
+            "description": "Legacy package behavior."
+          },
+          {
+            "name": "Standard",
+            "value": "standard",
+            "description": "Standard package behavior."
+          }
+        ]
+      }
+    },
     "FullTextPath": {
       "type": "object",
       "description": "Represents the full text path specification.",
@@ -26332,6 +26392,35 @@
         "language": {
           "type": "string",
           "description": "The language of the full text field in the document."
+        },
+        "tokenizer": {
+          "$ref": "#/definitions/FullTextTokenizerType",
+          "description": "The tokenizer method for this path."
+        },
+        "filters": {
+          "type": "array",
+          "description": "The filter pipeline applied to this path.",
+          "items": {
+            "$ref": "#/definitions/FullTextFilterType"
+          }
+        },
+        "stopWordListKind": {
+          "$ref": "#/definitions/StopWordListKindType",
+          "description": "The stop word list kind for this path."
+        },
+        "addStopWords": {
+          "type": "array",
+          "description": "Custom words to add to the stop word list for this path.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "removeStopWords": {
+          "type": "array",
+          "description": "Words to remove from the built-in stop word list for this path.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -26346,6 +26435,14 @@
           "type": "string",
           "description": "The default language for a full text paths."
         },
+        "package": {
+          "$ref": "#/definitions/FullTextPackageType",
+          "description": "The full text package type."
+        },
+        "defaultSpec": {
+          "$ref": "#/definitions/FullTextSpec",
+          "description": "The default full text analysis specification inherited by full text paths that omit these settings."
+        },
         "fullTextPaths": {
           "type": "array",
           "description": "List of FullText Paths",
@@ -26354,6 +26451,63 @@
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "FullTextSpec": {
+      "type": "object",
+      "description": "The default full text analysis specification for a full text policy.",
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "The language of the full text analysis."
+        },
+        "tokenizer": {
+          "$ref": "#/definitions/FullTextTokenizerType",
+          "description": "The tokenizer method of the full text analysis."
+        },
+        "filters": {
+          "type": "array",
+          "description": "The filter pipeline of the full text analysis.",
+          "items": {
+            "$ref": "#/definitions/FullTextFilterType"
+          }
+        },
+        "stopWordListKind": {
+          "$ref": "#/definitions/StopWordListKindType",
+          "description": "The stop word list kind of the full text analysis."
+        },
+        "addStopWords": {
+          "type": "array",
+          "description": "Custom words to add to the stop word list.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "removeStopWords": {
+          "type": "array",
+          "description": "Words to remove from the built-in stop word list.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FullTextTokenizerType": {
+      "type": "string",
+      "description": "The tokenizer used for full text processing.",
+      "enum": [
+        "word"
+      ],
+      "x-ms-enum": {
+        "name": "FullTextTokenizerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Word",
+            "value": "word",
+            "description": "Word tokenizer."
+          }
+        ]
       }
     },
     "GarnetAuthenticationType": {
@@ -32994,6 +33148,36 @@
           {
             "name": "Creating",
             "value": "Creating"
+          }
+        ]
+      }
+    },
+    "StopWordListKindType": {
+      "type": "string",
+      "description": "The stop word list kind used for full text analysis.",
+      "enum": [
+        "none",
+        "extended",
+        "basic"
+      ],
+      "x-ms-enum": {
+        "name": "StopWordListKindType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "none",
+            "description": "No built-in stop word list."
+          },
+          {
+            "name": "Extended",
+            "value": "extended",
+            "description": "Extended built-in stop word list."
+          },
+          {
+            "name": "Basic",
+            "value": "basic",
+            "description": "Basic built-in stop word list."
           }
         ]
       }
