@@ -4,21 +4,21 @@ namespace ContainerAppsSandbox {
   /** Represents a validated secret identifier. Must be 3-64 characters, containing only ASCII letters (upper/lower), digits, and hyphens. */
   scalar SecretId extends string;
 
-  /** Secret keys response body. */
+  /** Keys stored in a secret. */
   model SecretKeysResponse {
-    /** keys value. */
+    /** The key names stored in the secret. */
     keys: string[];
   }
 
-  /** Secret list response body. */
+  /** Secrets available in a sandbox group. */
   model SecretListResponse {
-    /** secrets value. */
+    /** The secrets in the sandbox group. */
     secrets: Secret[];
   }
 
-  /** Secret peek response body. */
+  /** Selected values from a secret. */
   model SecretPeekResponse {
-    /** values value. */
+    /** The sensitive key-value pairs stored in the secret. */
     values: Record<string>;
   }
 

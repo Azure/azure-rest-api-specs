@@ -10,19 +10,19 @@ namespace ContainerAppsSandbox {
     @visibility(Lifecycle.Read)
     id: string;
 
-    /** name value. */
+    /** The policy name. */
     name: string;
 
-    /** description value. */
+    /** A description of the policy. */
     description?: string;
 
-    /** defaultAction value. */
+    /** The action applied when no rule matches. */
     defaultAction: EgressPolicyAction;
 
-    /** enforcementMode value. */
+    /** Whether policy decisions are enforced or only audited. */
     enforcementMode?: EgressPolicyEnforcementMode;
 
-    /** rules value. */
+    /** Ordered egress rules evaluated by the policy. */
     rules?: EgressPolicyRule[];
 
     /** Creation timestamp assigned by the service. */

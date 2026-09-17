@@ -1,46 +1,46 @@
 namespace ContainerAppsSandbox {
-  /** AddPodVolumeMountsContent wire model. */
+  /** Pod volumes and container mounts to add to a sandbox. */
   model AddPodVolumeMountsContent {
-    /** volumes value. */
+    /** The pod-level volume definitions. */
     volumes: PodVolume[];
 
-    /** containerMounts value. */
+    /** Volume mounts grouped by container. */
     containerMounts: ContainerVolumeMounts[];
   }
 
-  /** AddVolumeMountContent wire model. */
+  /** A data volume mount to add to a sandbox. */
   model AddVolumeMountContent {
-    /** volumeMount value. */
+    /** The volume and mount path to add. */
     volumeMount: SandboxVolume;
   }
 
-  /** CommitSandboxContent wire model. */
+  /** Options for creating a disk image from a sandbox. */
   model CommitSandboxContent {
-    /** labels value. */
+    /** Labels to assign to the new disk image. */
     labels?: Record<string>;
   }
 
-  /** Commit-sandbox response body. */
+  /** Disk image created from a running sandbox. */
   model CommitSandboxResponse {
-    /** diskImage value. */
+    /** The disk image created from the sandbox. */
     diskImage: DiskImage;
   }
 
   /** Per-container grouping of volume mounts for the add operation. */
   model ContainerVolumeMounts {
-    /** containerName value. */
+    /** The container that receives the mounts. */
     containerName: PodContainerName;
 
-    /** volumeMounts value. */
+    /** The volume mounts to add to the container. */
     volumeMounts: ContainerVolumeMount[];
   }
 
-  /** DownloadContentPackageToSandboxContent wire model. */
+  /** A content package to download into a sandbox. */
   model DownloadContentPackageToSandboxContent {
-    /** contentPackageId value. */
+    /** The content package identifier. */
     contentPackageId: ContentPackageId;
 
-    /** targetPath value. */
+    /** The destination file path in the sandbox. */
     targetPath: AbsoluteFilePath;
   }
 }

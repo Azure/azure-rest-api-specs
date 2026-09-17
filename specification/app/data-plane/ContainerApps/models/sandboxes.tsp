@@ -14,7 +14,7 @@ model Sandbox {
   @visibility(Lifecycle.Read)
   id: SandboxId;
 
-  /** labels value. */
+  /** Customer-defined labels for the disk image. */
   labels?: Record<string>;
 
   /** Entrypoint override for the sandbox container. */
@@ -97,93 +97,93 @@ model Sandbox {
   containerStatuses?: ContainerStatus[];
 }
 
-/** AutoDeleteTrigger values. */
+/** Events that can start automatic sandbox deletion. */
 union AutoDeleteTrigger {
   string,
 
-  /** Serialized AutoDeleteTrigger value. */
+  /** Starts the deletion timer when the sandbox is suspended. */
   AfterSuspend: "AfterSuspend",
 
-  /** Serialized AutoDeleteTrigger value. */
+  /** Starts the deletion timer when the sandbox is created. */
   AfterCreation: "AfterCreation",
 }
 
 /** Probe configuration for checking a container's startup, liveness, or readiness state. */
 model ContainerProbe {
-  /** httpGet value. */
+  /** An HTTP GET probe handler. */
   httpGet?: ProbeHttpGetAction;
 
-  /** exec value. */
+  /** A command probe handler. */
   exec?: ProbeExecAction;
 
-  /** tcpSocket value. */
+  /** A TCP socket probe handler. */
   tcpSocket?: ProbeTcpSocketAction;
 
-  /** initialDelaySeconds value. */
+  /** The delay in seconds before the first probe. */
   initialDelaySeconds?: int32;
 
-  /** periodSeconds value. */
+  /** The interval in seconds between probes. */
   periodSeconds?: int32;
 
-  /** timeoutSeconds value. */
+  /** The number of seconds before a probe times out. */
   timeoutSeconds?: int32;
 
-  /** failureThreshold value. */
+  /** Consecutive failures required for the probe to fail. */
   failureThreshold?: int32;
 
-  /** successThreshold value. */
+  /** Consecutive successes required for the probe to succeed. */
   successThreshold?: int32;
 
-  /** terminationGracePeriodSeconds value. */
+  /** The grace period in seconds before terminating the container after probe failure. */
   terminationGracePeriodSeconds?: int32;
 }
 
-/** ContainerProbeResult values. */
+/** Possible results of a container probe. */
 union ContainerProbeResult {
   string,
 
-  /** Serialized ContainerProbeResult value. */
+  /** The probe succeeded. */
   Success: "Success",
 
-  /** Serialized ContainerProbeResult value. */
+  /** The probe failed. */
   Failure: "Failure",
 
-  /** Serialized ContainerProbeResult value. */
+  /** The probe result is not known. */
   Unknown: "Unknown",
 }
 
 /** Runtime status for a configured container probe. */
 model ContainerProbeStatus {
-  /** lastResult value. */
+  /** The most recent probe result. */
   lastResult?: ContainerProbeResult;
 
-  /** consecutiveFailures value. */
+  /** The number of consecutive probe failures. */
   consecutiveFailures?: int32 = 0;
 
-  /** consecutiveSuccesses value. */
+  /** The number of consecutive probe successes. */
   consecutiveSuccesses?: int32 = 0;
 
-  /** lastCheckedAt value. */
+  /** The time when the probe last ran. */
   lastCheckedAt?: utcDateTime;
 
-  /** lastTransitionAt value. */
+  /** The time when the probe result last changed. */
   lastTransitionAt?: utcDateTime;
 
-  /** message value. */
+  /** Details about the latest probe result. */
   message?: string;
 }
 
-/** ContainerRestartPolicy values. */
+/** Policies for restarting a stopped container. */
 union ContainerRestartPolicy {
   string,
 
-  /** Serialized ContainerRestartPolicy value. */
+  /** Always restart a stopped container. */
   Always: "Always",
 
-  /** Serialized ContainerRestartPolicy value. */
+  /** Restart a container only after a failure. */
   OnFailure: "OnFailure",
 
-  /** Serialized ContainerRestartPolicy value. */
+  /** Do not restart a stopped container. */
   Never: "Never",
 }
 
@@ -191,99 +191,99 @@ union ContainerRestartPolicy {
 union ContainerRuntimeState {
   string,
 
-  /** Serialized ContainerRuntimeState value. */
+  /** The container state is not known. */
   Unknown: "Unknown",
 
-  /** Serialized ContainerRuntimeState value. */
+  /** The container is waiting to start. */
   Waiting: "Waiting",
 
-  /** Serialized ContainerRuntimeState value. */
+  /** The container is running. */
   Running: "Running",
 
-  /** Serialized ContainerRuntimeState value. */
+  /** The container has terminated. */
   Terminated: "Terminated",
 }
 
 /** Container-level security context — overrides pod-level settings where applicable. Follows Kubernetes container securityContext semantics. */
 model ContainerSecurityContext {
-  /** runAsUser value. */
+  /** The user ID used to run the container process. */
   runAsUser?: int32;
 
-  /** runAsGroup value. */
+  /** The group ID used to run the container process. */
   runAsGroup?: int32;
 
-  /** runAsNonRoot value. */
+  /** Whether the container must run as a non-root user. */
   runAsNonRoot?: boolean;
 
-  /** privileged value. */
+  /** Whether the container runs in privileged mode. */
   privileged?: boolean = false;
 
-  /** capabilities value. */
+  /** Linux capabilities to add or drop. */
   capabilities?: LinuxCapabilities;
 
-  /** allowPrivilegeEscalation value. */
+  /** Whether the process can gain additional privileges. */
   allowPrivilegeEscalation?: boolean = true;
 
-  /** readOnlyRootFilesystem value. */
+  /** Whether the container root filesystem is read-only. */
   readOnlyRootFilesystem?: boolean = false;
 
-  /** seccompProfile value. */
+  /** The seccomp profile applied to the container. */
   seccompProfile?: SeccompProfile;
 }
 
-/** ContainerStatusReason values. */
+/** Reasons reported for a container status. */
 union ContainerStatusReason {
   string,
 
-  /** Serialized ContainerStatusReason value. */
+  /** The container completed successfully. */
   Completed: "Completed",
 
-  /** Serialized ContainerStatusReason value. */
+  /** The container terminated with an error. */
   Error: "Error",
 
-  /** Serialized ContainerStatusReason value. */
+  /** The container is repeatedly failing and restarting. */
   CrashLoopBackOff: "CrashLoopBackOff",
 
-  /** Serialized ContainerStatusReason value. */
+  /** A root filesystem reset is pending. */
   RootfsResetPending: "RootfsResetPending",
 
-  /** Serialized ContainerStatusReason value. */
+  /** A root filesystem reset failed. */
   RootfsResetFailed: "RootfsResetFailed",
 }
 
 /** Runtime status for one pod container. */
 model ContainerStatus {
-  /** name value. */
+  /** The container name. */
   name: PodContainerName;
 
-  /** state value. */
+  /** The current runtime state. */
   state: ContainerRuntimeState;
 
-  /** ready value. */
+  /** Whether the container is ready to receive traffic. */
   ready: boolean;
 
-  /** started value. */
+  /** Whether the container has started. */
   started: boolean;
 
-  /** restartCount value. */
+  /** The number of times the container has restarted. */
   restartCount: int32;
 
-  /** reason value. */
+  /** The reason for the current state. */
   reason?: ContainerStatusReason;
 
-  /** message value. */
+  /** Details about the current state. */
   message?: string;
 
-  /** lastExitCode value. */
+  /** The exit code from the most recently terminated process. */
   lastExitCode?: int32;
 
-  /** lastStartedAt value. */
+  /** The time when the container last started. */
   lastStartedAt?: utcDateTime;
 
-  /** lastFinishedAt value. */
+  /** The time when the container last stopped. */
   lastFinishedAt?: utcDateTime;
 
-  /** probes value. */
+  /** Runtime status keyed by probe type. */
   probes?: Record<ContainerProbeStatus>;
 }
 
@@ -291,47 +291,47 @@ model ContainerStatus {
 union ContentPackageAction {
   string,
 
-  /** Serialized ContentPackageAction value. */
+  /** Downloads the package contents into the container. */
   Download: "Download",
 
-  /** Serialized ContentPackageAction value. */
+  /** Mounts the package in the container. */
   Mount: "Mount",
 }
 
-/** ContentPackageId wire value. */
+/** A content package identifier. */
 scalar ContentPackageId extends string;
 
 /** Kubernetes-style CPU resource quantity string (e.g. "500m", "2", "0.5"). */
 scalar CpuQuantity extends string;
 
-/** DiskImageId wire value. */
+/** A disk image identifier. */
 scalar DiskImageId extends string;
 
 /** Types of actions that an egress policy rule can take. */
 union EgressPolicyActionType {
   string,
 
-  /** Serialized EgressPolicyActionType value. */
+  /** Allows matching traffic. */
   Allow: "Allow",
 
-  /** Serialized EgressPolicyActionType value. */
+  /** Denies matching traffic. */
   Deny: "Deny",
 
-  /** Serialized EgressPolicyActionType value. */
+  /** Applies header transformations to matching traffic. */
   Transform: "Transform",
 
-  /** Serialized EgressPolicyActionType value. */
+  /** Rewrites the destination of matching traffic. */
   Rewrite: "Rewrite",
 }
 
-/** EgressPolicyEnforcementMode values. */
+/** Modes for enforcing an egress policy. */
 union EgressPolicyEnforcementMode {
   string,
 
-  /** Serialized EgressPolicyEnforcementMode value. */
+  /** Applies policy decisions to traffic. */
   Enforced: "Enforced",
 
-  /** Serialized EgressPolicyEnforcementMode value. */
+  /** Records policy decisions without blocking traffic. */
   Audit: "Audit",
 }
 
@@ -339,142 +339,142 @@ union EgressPolicyEnforcementMode {
 union EgressPolicyHeaderOperation {
   string,
 
-  /** Serialized EgressPolicyHeaderOperation value. */
+  /** Replaces the header value. */
   Set: "Set",
 
-  /** Serialized EgressPolicyHeaderOperation value. */
+  /** Adds another value for the header. */
   Insert: "Insert",
 
-  /** Serialized EgressPolicyHeaderOperation value. */
+  /** Removes the header. */
   Remove: "Remove",
 }
 
 /** Describes a header transformation to apply to matching requests. */
 model EgressPolicyHeaderTransform {
-  /** operation value. */
+  /** The header operation to apply. */
   operation: EgressPolicyHeaderOperation;
 
-  /** name value. */
+  /** The header name. */
   name: string;
 
-  /** value value. */
+  /** A static header value. */
   value?: string;
 
-  /** valueRef value. */
+  /** A dynamic source for the header value. */
   valueRef?: EgressPolicyValueRef;
 }
 
-/** What the egress proxy should do when a webhook invocation fails (timeout, non-2xx, invalid payload, SSRF-rejected URL, etc.). */
+/** Action to take when an egress policy webhook fails. */
 union EgressPolicyHookFailBehavior {
   string,
 
-  /** Serialized EgressPolicyHookFailBehavior value. */
+  /** Denies the request when the webhook fails. */
   Deny: "Deny",
 
-  /** Serialized EgressPolicyHookFailBehavior value. */
+  /** Allows the request when the webhook fails. */
   Allow: "Allow",
 }
 
-/** Configures a webhook called at request time for rules whose static decision cannot be expressed declaratively. When a rule's EgressPolicyHookRef? EgressPolicyRule.HookRef is set, the egress proxy POSTs a request-context payload to string EgressPolicyHookRef.Endpoint and applies the returned decision (Allow / Deny / Transform / Rewrite) in place of the rule's static Action.  EgressRuleRoutingMode EgressPolicyHookRef.RoutingMode controls how the egress proxy reaches the webhook endpoint itself: EgressRuleRoutingMode.Vnet binds the outbound socket to the sandbox's customer VNET IP (so the hook host can be a private service reachable only from inside the VNET), EgressRuleRoutingMode.Platform forces the node's platform egress, and EgressRuleRoutingMode.Default uses the sandbox-level routing. The webhook response itself can also carry a `routingMode` field that overrides routing for the downstream upstream call when the decision is Rewrite. */
+/** A webhook that dynamically decides how matching egress traffic is handled. */
 model EgressPolicyHookRef {
-  /** endpoint value. */
+  /** The webhook endpoint. */
   endpoint: string;
 
-  /** failBehavior value. */
+  /** The action to take when the webhook fails. */
   failBehavior?: EgressPolicyHookFailBehavior;
 
-  /** requestHeaders value. */
+  /** Request headers included in the webhook payload. */
   requestHeaders?: string[];
 
-  /** authHeaders value. */
+  /** Authentication headers added to the webhook request. */
   authHeaders?: EgressPolicyHeaderTransform[];
 
-  /** timeoutMs value. */
+  /** The webhook timeout in milliseconds. */
   timeoutMs?: int32;
 
-  /** routingMode value. */
+  /** How the webhook request is routed. */
   routingMode?: EgressRuleRoutingMode;
 }
 
-/** References a managed identity token to be fetched and injected as a header value. EgressPolicyManagedIdentityType? EgressPolicyManagedIdentityRef.Type must be set to specify which identity to use. */
+/** A managed identity token used as a dynamic header value. */
 model EgressPolicyManagedIdentityRef {
-  /** resource value. */
+  /** The token audience or resource. */
   resource: string;
 
-  /** format value. */
+  /** An optional format applied to the token value. */
   format?: string;
 
-  /** type value. */
+  /** The managed identity type. */
   type?: EgressPolicyManagedIdentityType;
 
-  /** identityResourceId value. */
+  /** The resource ID of the user-assigned managed identity. */
   identityResourceId?: string;
 }
 
-/** EgressPolicyManagedIdentityType values. */
+/** Managed identity types supported by an egress rule. */
 union EgressPolicyManagedIdentityType {
   string,
 
-  /** Serialized EgressPolicyManagedIdentityType value. */
+  /** Uses the sandbox group's system-assigned managed identity. */
   SystemAssigned: "SystemAssigned",
 
-  /** Serialized EgressPolicyManagedIdentityType value. */
+  /** Uses a user-assigned managed identity. */
   UserAssigned: "UserAssigned",
 }
 
-/** EgressPolicyMatchScheme values. */
+/** URI schemes that an egress rule can match. */
 union EgressPolicyMatchScheme {
   string,
 
-  /** Serialized EgressPolicyMatchScheme value. */
+  /** Matches HTTP requests. */
   http: "http",
 
-  /** Serialized EgressPolicyMatchScheme value. */
+  /** Matches HTTPS requests. */
   https: "https",
 
-  /** Serialized EgressPolicyMatchScheme value. */
+  /** Matches HTTP or HTTPS requests. */
   any: "any",
 }
 
-/** A single egress policy rule. Rules are evaluated in order; first match wins. A rule has either a static EgressPolicyRuleAction? EgressPolicyRule.Action or a dynamic EgressPolicyHookRef? EgressPolicyRule.HookRef, never both. When EgressPolicyHookRef? EgressPolicyRule.HookRef is set, the proxy calls the configured webhook at request time and applies the returned decision in place of EgressPolicyRuleAction? EgressPolicyRule.Action. */
+/** An egress rule evaluated in order until the first match. */
 model EgressPolicyRule {
-  /** name value. */
+  /** The rule name. */
   name: string;
 
-  /** match value. */
+  /** The request criteria matched by the rule. */
   match: EgressPolicyRuleMatch;
 
-  /** action value. */
+  /** The static action applied to matching traffic. */
   action?: EgressPolicyRuleAction;
 
-  /** proxyActions value. */
+  /** Additional proxy actions applied to matching traffic. */
   proxyActions?: string[];
 
-  /** source value. */
+  /** The source that supplied the rule. */
   source?: string;
 
-  /** hookRef value. */
+  /** A webhook that dynamically determines the action. */
   hookRef?: EgressPolicyHookRef;
 }
 
-/** The action to take when a rule matches. For Rewrite actions, Scheme/Host/Path specify the destination to rewrite the request to, and EgressRuleRoutingMode EgressPolicyRuleAction.RoutingMode optionally overrides the sandbox-level egress routing for this rule. */
+/** The action applied when an HTTP egress rule matches. */
 model EgressPolicyRuleAction {
-  /** type value. */
+  /** The action type. */
   type: EgressPolicyActionType;
 
-  /** headers value. */
+  /** Header transformations applied to the request. */
   headers?: EgressPolicyHeaderTransform[];
 
-  /** scheme value. */
+  /** The replacement URI scheme for a rewrite. */
   scheme?: string;
 
-  /** host value. */
+  /** The replacement host for a rewrite. */
   host?: string;
 
-  /** path value. */
+  /** The replacement path for a rewrite. */
   path?: string;
 
-  /** routingMode value. */
+  /** How rewritten traffic is routed. */
   routingMode?: EgressRuleRoutingMode;
 
   /** Controls how matching traffic is forwarded. */
@@ -507,70 +507,70 @@ model EgressForwardProxy {
   ca?: string;
 }
 
-/** Request matching criteria for an egress policy rule. All specified conditions must match (AND logic). EgressPolicyMatchScheme? EgressPolicyRuleMatch.Scheme is nullable; null means the author did not specify a scheme and the effective default is resolved per rule polarity at evaluation time. A static Deny defaults to EgressPolicyMatchScheme.Any so a block is not silently scoped to HTTPS and bypassed over HTTP. Every other rule — including positive rules (Allow / Transform / Rewrite) and dynamic EgressPolicyHookRef? EgressPolicyRule.HookRef rules (whose outcome can be Allow/Transform/Rewrite or fail open) — defaults to EgressPolicyMatchScheme.Https: on plaintext HTTP there is no SNI, so matching uses the sandbox-controlled Host header with no certificate validation, and a positive or hook match there would let a sandbox reach a non-allowlisted IP while spoofing an allowlisted Host. Set EgressPolicyMatchScheme.Any explicitly to match both schemes, or EgressPolicyMatchScheme.Http / EgressPolicyMatchScheme.Https to pin a single scheme. For IP-based match hosts, scheme matching is ignored (no TLS certificate validation applies to IPs anyway).bool? EgressPolicyRuleMatch.NormalizePath controls whether the request path is decoded and normalized (encoded-slash decode, slash merging, and ./.. dot-segment removal) before it is matched against string? EgressPolicyRuleMatch.Path. It defaults to enabled (null is treated as true) to prevent path-confusion bypasses where an encoded path such as /allowed%2F.. matches an allow rule but the upstream server resolves it to a different path. Set to false only for upstreams that require the raw, un-normalized path. */
+/** Request criteria for an egress rule. All specified criteria must match. */
 model EgressPolicyRuleMatch {
-  /** host value. */
+  /** The host pattern to match. */
   host: string;
 
-  /** path value. */
+  /** The path pattern to match. */
   path?: string;
 
-  /** methods value. */
+  /** The HTTP methods to match. */
   methods?: string[];
 
-  /** scheme value. */
+  /** The URI scheme to match. */
   scheme?: EgressPolicyMatchScheme;
 
-  /** normalizePath value. */
+  /** Whether to decode and normalize the request path before matching. Defaults to true. */
   normalizePath?: boolean;
 }
 
 /** References a secret stored via the Secrets API for header value injection. */
 model EgressPolicySecretRef {
-  /** secretId value. */
+  /** The secret identifier. */
   secretId: string;
 
-  /** secretKey value. */
+  /** The key within the secret. */
   secretKey?: string;
 
-  /** format value. */
+  /** An optional format applied to the secret value. */
   format?: string;
 }
 
 /** A dynamic value reference for header transforms. Exactly one of the ref fields should be set. */
 model EgressPolicyValueRef {
-  /** secretRef value. */
+  /** A value loaded from a sandbox-group secret. */
   secretRef?: EgressPolicySecretRef;
 
-  /** managedIdentityRef value. */
+  /** A value obtained from a managed identity token. */
   managedIdentityRef?: EgressPolicyManagedIdentityRef;
 }
 
-/** Per-rule override of how the egress proxy creates the upstream socket. Today only honored on EgressPolicyActionType.Rewrite rules. */
+/** Controls how matching egress traffic reaches its destination. */
 union EgressRuleRoutingMode {
   string,
 
-  /** Serialized EgressRuleRoutingMode value. */
+  /** Uses the sandbox's default egress routing. */
   Default: "Default",
 
-  /** Serialized EgressRuleRoutingMode value. */
+  /** Routes through the sandbox virtual network. */
   Vnet: "Vnet",
 
-  /** Serialized EgressRuleRoutingMode value. */
+  /** Routes through the platform network. */
   Platform: "Platform",
 }
 
-/** FsGroupChangePolicy values. */
+/** Policies for changing mounted-volume ownership. */
 union FsGroupChangePolicy {
   string,
 
-  /** Serialized FsGroupChangePolicy value. */
+  /** Changes ownership only when the root directory does not match. */
   OnRootMismatch: "OnRootMismatch",
 
-  /** Serialized FsGroupChangePolicy value. */
+  /** Always changes volume ownership. */
   Always: "Always",
 
-  /** Serialized FsGroupChangePolicy value. */
+  /** Does not change volume ownership. */
   None: "None",
 }
 
@@ -602,7 +602,7 @@ model GatewayAuthentication {
 
 /** Customer-facing AI Gateway connection associated with a sandbox. */
 model GatewayConnection {
-  /** ARM resource ID of the AI Gateway MCP server config or connection. Format: /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Web/aiGateways/{gw}/mcpServerConfigs/{config} or: /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Web/connectorGateways/{gw}/connections/{conn} */
+  /** Azure resource ID of an AI Gateway server configuration or connection. */
   resourceId: string;
 
   /** Optional user-friendly name resolved by the service. */
@@ -624,11 +624,11 @@ model GatewayConnection {
 
 /** AI Gateway connection reference used when creating a sandbox. */
 model CreateSandboxGatewayConnectionContent {
-  /** ARM resource ID of the AI Gateway MCP server config or connection. */
+  /** Azure resource ID of an AI Gateway server configuration or connection. */
   resourceId: string;
 }
 
-/** Per-container resource configuration. CPU and Memory set cgroup limits inside the VM. Disk controls writable layer sizing. */
+/** CPU, memory, and writable disk requested for a container. */
 model ContainerResources {
   /** Kubernetes-style CPU resource quantity string (e.g. "500m", "2", "0.5"). */
   cpu?: CpuQuantity;
@@ -642,7 +642,7 @@ model ContainerResources {
 
 /** Per-container specification within a pod source. */
 model ContainerSpec {
-  /** name value. */
+  /** The container name. */
   name: PodContainerName;
 
   /** Optional disk image used as the container source. */
@@ -651,84 +651,84 @@ model ContainerSpec {
   /** Optional artifact version used as the container source. */
   artifactVersion?: SandboxSourceArtifactVersion;
 
-  /** command value. */
+  /** The command that replaces the image entrypoint. */
   command?: string[];
 
-  /** args value. */
+  /** Arguments passed to the container command. */
   args?: string[];
 
-  /** env value. */
+  /** Environment variables for the container. */
   env?: Record<string>;
 
-  /** resources value. */
+  /** CPU, memory, and disk allocated to the container. */
   resources?: ContainerResources;
 
-  /** volumeMounts value. */
+  /** Volumes mounted in the container. */
   volumeMounts?: ContainerVolumeMount[];
 
-  /** contentPackageDownloads value. */
+  /** Content packages downloaded into the container. */
   contentPackageDownloads?: SandboxContentPackageDownload[];
 
-  /** securityContext value. */
+  /** Security settings for the container. */
   securityContext?: ContainerSecurityContext;
 
-  /** startupProbe value. */
+  /** Probe that determines when the container has started. */
   startupProbe?: ContainerProbe;
 
-  /** livenessProbe value. */
+  /** Probe that determines whether the container should be restarted. */
   livenessProbe?: ContainerProbe;
 
-  /** readinessProbe value. */
+  /** Probe that determines whether the container can receive traffic. */
   readinessProbe?: ContainerProbe;
 }
 
 /** Per-container volume mount specifying which volume to mount and where. */
 model ContainerVolumeMount {
-  /** name value. */
+  /** The referenced pod volume name. */
   name: VolumeName;
 
-  /** mountPath value. */
+  /** The absolute path where the volume is mounted. */
   mountPath: string;
 
-  /** readOnly value. */
+  /** Whether the volume is mounted read-only. */
   readOnly?: boolean = false;
 }
 
-/** EgressHostRule wire model. */
+/** A host pattern and the egress action applied to matching traffic. */
 model EgressHostRule {
-  /** pattern value. */
+  /** The host glob pattern to match. */
   pattern: string;
 
-  /** action value. */
+  /** The action applied to matching hosts. */
   action?: EgressPolicyAction;
 }
 
-/** EgressPolicyAction values. */
+/** Actions applied to matching egress traffic. */
 union EgressPolicyAction {
   string,
 
-  /** Serialized EgressPolicyAction value. */
+  /** Allows matching traffic. */
   Allow: "Allow",
 
-  /** Serialized EgressPolicyAction value. */
+  /** Denies matching traffic. */
   Deny: "Deny",
 }
 
-/** The HTTP section of a sandbox egress policy. This is the canonical way to configure HTTP egress and is a sibling to TdsEgressSection? SandboxEgressPolicy.Tds and TransportEgressSection? SandboxEgressPolicy.TransportRules. It carries the same fields the policy view historically exposed at the top level. */
+/** HTTP and HTTPS egress policy settings. */
 model HttpEgressSection {
   /** The default action applied when no rule matches. Required: a request that sends an `http` section must specify a default action. */
   defaultAction: EgressPolicyAction;
 
-  /** hostRules value. */
+  /** Host-based allow and deny rules. */
   hostRules?: EgressHostRule[];
 
-  /** Rich egress policy rules supporting Allow, Deny, and Transform actions with header mutations. Rules are evaluated after connector-generated rules, in order (first match wins). */
+  /** Ordered egress rules for allow, deny, transform, and header actions. The first match wins. */
   rules?: EgressPolicyRule[];
 
   /** Controls the scope of TLS inspection for the egress proxy. Defaults to Full. */
   trafficInspection?: TrafficInspection;
 
-  /** enforcementMode value. */
+  /** Whether policy decisions are enforced or only audited. */
   enforcementMode?: EgressPolicyEnforcementMode;
 
   /** The default proxy used to forward egress traffic. */
@@ -737,101 +737,101 @@ model HttpEgressSection {
 
 /** A single IP access control rule. */
 model IpAccessControlRule {
-  /** name value. */
+  /** The rule name. */
   name: string;
 
-  /** action value. */
+  /** The action applied to matching source addresses. */
   action: IpAccessControlAction;
 
-  /** priority value. */
+  /** The rule priority. Lower values are evaluated first. */
   @minValue(0)
   @maxValue(1000)
   priority: int32;
 
-  /** sourceCidrs value. */
+  /** The source CIDR ranges matched by the rule. */
   sourceCidrs: string[];
 }
 
 /** IP access control configuration for a port. Rules are evaluated in priority order; first match wins. */
 model IpAccessControl {
-  /** defaultAction value. */
+  /** The action applied when no access-control rule matches. */
   defaultAction: IpAccessControlAction;
 
-  /** rules value. */
+  /** IP access-control rules evaluated by priority. */
   rules?: IpAccessControlRule[];
 }
 
-/** Pod-level content package declaration. Declares a content package that the pod uses. Per-container downloads reference content packages by ContentPackageId PodContentPackage.ContentPackageId. */
+/** Declares a content package available to containers in the pod. */
 model PodContentPackage {
-  /** contentPackageId value. */
+  /** The referenced content package identifier. */
   contentPackageId: ContentPackageId;
 }
 
-/** Pod-level volume declaration. Declares a named volume source that can be referenced by containers via ContainerVolumeMount. */
+/** A named pod volume that containers can mount. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "The existing API requires this polymorphic volume union."
 @discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
 union PodVolume {
-  /** AzureBlob variant. */
+  /** A service-managed Azure Blob volume. */
   AzureBlob: AzureBlobPodVolume,
 
-  /** AzureBlobByo variant. */
+  /** A customer-owned Azure Blob container volume. */
   AzureBlobByo: AzureBlobByoPodVolume,
 
-  /** Local variant. */
+  /** A local sandbox volume. */
   Local: LocalPodVolume,
 
-  /** DataDisk variant. */
+  /** A persistent data disk volume. */
   DataDisk: DataDiskPodVolume,
 }
 
 /** Bring-your-own (BYO) Azure Blob container volume source, backed by blobfuse2. */
 model AzureBlobByoPodVolume {
-  /** kind value. */
+  /** The pod volume type. */
   kind?: "AzureBlobByo";
 
-  /** fileCacheSizeLimit value. */
+  /** The maximum local file cache size. */
   fileCacheSizeLimit: StorageQuantity;
 
-  /** readOnly value. */
+  /** Whether the blob volume is read-only. */
   readOnly?: boolean = false;
 
-  /** name value. */
+  /** The pod volume name. */
   name: VolumeName;
 }
 
 /** Azure Blob Storage volume source, backed by blobfuse2. */
 model AzureBlobPodVolume {
-  /** kind value. */
+  /** The pod volume type. */
   kind?: "AzureBlob";
 
-  /** fileCacheSizeLimit value. */
+  /** The maximum local file cache size. */
   fileCacheSizeLimit: StorageQuantity;
 
-  /** readOnly value. */
+  /** Whether the blob volume is read-only. */
   readOnly?: boolean = false;
 
-  /** name value. */
+  /** The pod volume name. */
   name: VolumeName;
 }
 
 /** Data disk volume source backed by a persistent ext4 block device in cluster storage. */
 model DataDiskPodVolume {
-  /** kind value. */
+  /** The pod volume type. */
   kind?: "DataDisk";
 
-  /** name value. */
+  /** The referenced data disk volume name. */
   name: VolumeName;
 }
 
 /** Local volume source backed by rootfs space. */
 model LocalPodVolume {
-  /** kind value. */
+  /** The pod volume type. */
   kind?: "Local";
 
-  /** size value. */
+  /** The requested local volume size. */
   size: StorageQuantity;
 
-  /** name value. */
+  /** The pod volume name. */
   name: VolumeName;
 }
 
@@ -840,16 +840,16 @@ model PortAuthConfigEntraId {
   /** Whether Entra ID authentication is enabled. */
   enabled?: boolean;
 
-  /** List of allowed email addresses (exact match). Empty means any authenticated Entra ID user can access. Combined with emailSuffixes, objectIds, and tenantIds, maximum 100 entries allowed. */
+  /** Allowed email addresses. A maximum of 100 identity filters can be configured. */
   emails?: string[];
 
-  /** List of allowed email domain suffixes (e.g., "@microsoft.com"). Matches any email ending with the suffix. Combined with emails, objectIds, and tenantIds, maximum 100 entries allowed. */
+  /** Allowed email domain suffixes. A maximum of 100 identity filters can be configured. */
   emailSuffixes?: string[];
 
-  /** List of allowed Entra ID object IDs (user or group GUIDs). Combined with emails, emailSuffixes, and tenantIds, maximum 100 entries allowed. */
+  /** Allowed Microsoft Entra user or group object IDs. A maximum of 100 identity filters can be configured. */
   objectIds?: string[];
 
-  /** List of allowed Entra ID tenant IDs (directory GUIDs). Matches any user from the specified tenant. Combined with emails, emailSuffixes, and objectIds, maximum 100 entries allowed. */
+  /** Allowed Microsoft Entra tenant IDs. A maximum of 100 identity filters can be configured. */
   tenantIds?: string[];
 }
 
@@ -858,46 +858,46 @@ model PortAuthConfigGithub {
   /** Whether GitHub authentication is enabled. */
   enabled?: boolean;
 
-  /** List of allowed email addresses (exact match). Empty means any @microsoft.com or @github.com user can access. Combined with emailSuffixes, usernames, and usernameSuffixes, maximum 100 entries allowed. */
+  /** Allowed email addresses. A maximum of 100 identity filters can be configured. */
   emails?: string[];
 
-  /** List of allowed email domain suffixes (e.g., "@microsoft.com"). Matches any email ending with the suffix. Combined with emails, usernames, and usernameSuffixes, maximum 100 entries allowed. */
+  /** Allowed email domain suffixes. A maximum of 100 identity filters can be configured. */
   emailSuffixes?: string[];
 
-  /** List of allowed GitHub usernames (exact match). Empty means any authenticated GitHub user can access. Combined with emails, emailSuffixes, and usernameSuffixes, maximum 100 entries allowed. */
+  /** Allowed GitHub usernames. A maximum of 100 identity filters can be configured. */
   usernames?: string[];
 
-  /** List of allowed username suffixes (e.g., "_microsoft" for EMU accounts). Matches any username ending with the suffix. Combined with emails, emailSuffixes, and usernames, maximum 100 entries allowed. */
+  /** Allowed GitHub username suffixes. A maximum of 100 identity filters can be configured. */
   usernameSuffixes?: string[];
 }
 
 /** Auth configuration for a port. Each provider can be independently enabled/disabled without removing configuration. */
 model PortAuthConfig {
-  /** anonymous value. */
+  /** Whether unauthenticated access is allowed. */
   anonymous?: boolean;
 
-  /** github value. */
+  /** GitHub authentication settings. */
   github?: PortAuthConfigGithub;
 
-  /** entraId value. */
+  /** Microsoft Entra ID authentication settings. */
   entraId?: PortAuthConfigEntraId;
 }
 
 /** CORS configuration for a sandbox port. */
 model PortCorsConfig {
-  /** allowOrigins value. */
+  /** Origins allowed to access the port. */
   allowOrigins?: string[];
 
-  /** allowMethods value. */
+  /** HTTP methods allowed in cross-origin requests. */
   allowMethods?: string[];
 
-  /** allowHeaders value. */
+  /** Request headers allowed in cross-origin requests. */
   allowHeaders?: string[];
 
-  /** allowCredentials value. */
+  /** Whether cross-origin requests may include credentials. */
   allowCredentials?: boolean;
 
-  /** maxAge value. */
+  /** The preflight response cache duration in seconds. */
   maxAge?: int32;
 }
 
@@ -909,37 +909,37 @@ model SandboxContentPackageDownload {
   /** The target path in the sandbox where the content package will be downloaded. Must be an absolute path. Parent directories will be created if they don't exist. */
   targetPath: string;
 
-  /** How the content package should be delivered: Download (default) or Mount. Mount presents the package contents as a read-only FUSE filesystem at the target path. Currently only supported for zip content packages. */
+  /** How to deliver the package. Mount exposes a zip package as a read-only file system. */
   action?: ContentPackageAction;
 }
 
-/** Sandbox egress policy wire model. */
+/** Egress policy applied to a sandbox. */
 model SandboxEgressPolicy {
-  /** http value. */
+  /** HTTP and HTTPS egress policy. */
   http?: HttpEgressSection;
 
-  /** defaultAction value. */
+  /** The default HTTP egress action. */
   defaultAction?: EgressPolicyAction;
 
-  /** hostRules value. */
+  /** Host-based HTTP egress rules. */
   hostRules?: EgressHostRule[];
 
-  /** Rich egress policy rules supporting Allow, Deny, and Transform actions with header mutations. Rules are evaluated after connector-generated rules, in order (first match wins). */
+  /** Ordered egress rules for allow, deny, transform, and header actions. The first match wins. */
   rules?: EgressPolicyRule[];
 
-  /** tds value. */
+  /** TDS database egress policy. */
   tds?: TdsEgressSection;
 
-  /** transportRules value. */
+  /** Raw TCP and UDP egress policy. */
   transportRules?: TransportEgressSection;
 
-  /** Controls the scope of TLS inspection for the egress proxy. Defaults to Full (all HTTPS is MITM'd and non-HTTP TCP/UDP is blocked). Legacy is no longer accepted on sandbox creation (issue #6420) but remains valid as a stored value for sandboxes created before the deprecation. */
+  /** Controls TLS inspection and handling of non-HTTP traffic. Defaults to Full. */
   trafficInspection?: TrafficInspection;
 
-  /** enforcementMode value. */
+  /** Whether policy decisions are enforced or only audited. */
   enforcementMode?: EgressPolicyEnforcementMode;
 
-  /** validationWarnings value. */
+  /** Warnings found while validating the policy. */
   validationWarnings?: ValidationWarning[];
 }
 
@@ -955,19 +955,19 @@ model SandboxPort {
   @visibility(Lifecycle.Read)
   url: url;
 
-  /** auth value. */
+  /** Authentication required to access the port. */
   auth?: PortAuthConfig;
 
-  /** activationMode value. */
+  /** When the port becomes active. */
   activationMode?: PortActivationMode;
 
   /** The HTTP protocol version to use when forwarding requests to this port. Defaults to Http (HTTP/1.1). */
   protocol?: PortProtocol;
 
-  /** ipAccessControl value. */
+  /** Source IP access-control settings. */
   ipAccessControl?: IpAccessControl;
 
-  /** cors value. */
+  /** Cross-origin request settings. */
   cors?: PortCorsConfig;
 }
 
@@ -1003,7 +1003,7 @@ model SandboxPresetProperties {
 
 /** Request body for creating a sandbox. */
 model CreateSandboxContent {
-  /** labels value. */
+  /** Customer-defined labels for the sandbox. */
   labels?: Record<string>;
 
   /** Entrypoint override for the sandbox container. */
@@ -1077,21 +1077,21 @@ model CreateSandboxContent {
   projectId?: ProjectId;
 }
 
-/** SandboxResources wire model. */
+/** CPU, memory, and disk allocated to a sandbox. */
 model SandboxResources {
-  /** cpu value. */
+  /** The CPU allocation. */
   cpu: CpuQuantity;
 
-  /** memory value. */
+  /** The memory allocation. */
   memory: MemoryQuantity;
 
-  /** disk value. */
+  /** The disk allocation. */
   disk?: StorageQuantity;
 }
 
-/** Sandbox source disk image wire model. */
+/** A disk image used to create a sandbox. */
 model SandboxSourceDiskImage {
-  /** id value. */
+  /** The identifier of a sandbox-group disk image. */
   id?: DiskImageId;
 
   /** Disk image name for public disk images (e.g., "nginx", "python3.12"). Mutually exclusive with Id. */
@@ -1103,37 +1103,37 @@ model SandboxSourceDiskImage {
 
 /** Pod source for sandbox creation. */
 model SandboxSourcePod {
-  /** containers value. */
+  /** The containers in the pod. */
   containers: ContainerSpec[];
 
-  /** volumes value. */
+  /** Pod-level volume definitions. */
   volumes?: PodVolume[];
 
-  /** contentPackages value. */
+  /** Content packages available to the pod. */
   contentPackages?: PodContentPackage[];
 
-  /** securityContext value. */
+  /** Security settings shared by all pod containers. */
   securityContext?: PodSecurityContext;
 
-  /** restartPolicy value. */
+  /** The container restart policy. */
   restartPolicy?: ContainerRestartPolicy;
 }
 
-/** Sandbox source snapshot wire model. */
+/** A snapshot used to restore a sandbox. */
 model SandboxSourceSnapshot {
-  /** id value. */
+  /** The snapshot identifier. */
   id: string;
 }
 
-/** SandboxSource wire model. */
+/** The source configuration used to create a sandbox. */
 model SandboxSource {
-  /** diskImage value. */
+  /** A disk image source. */
   diskImage?: SandboxSourceDiskImage;
 
-  /** snapshot value. */
+  /** A snapshot source. */
   snapshot?: SandboxSourceSnapshot;
 
-  /** pod value. */
+  /** An inline pod definition. */
   pod?: SandboxSourcePod;
 
   /** The artifact version used as the sandbox source. */
@@ -1157,28 +1157,28 @@ model SandboxSourceAuth {
 
 /** Volume configuration for a sandbox. */
 model SandboxVolume {
-  /** volumeName value. */
+  /** The volume name. */
   volumeName: VolumeName;
 
-  /** mountpoint value. */
+  /** The path where the volume is mounted. */
   mountpoint: string;
 
-  /** readOnly value. */
+  /** Whether the mount is read-only. */
   readOnly?: boolean = false;
 }
 
-/** ValidationWarning wire model. */
+/** A non-fatal policy validation warning. */
 model ValidationWarning {
-  /** code value. */
+  /** A machine-readable warning code. */
   code: string;
 
-  /** message value. */
+  /** A human-readable warning message. */
   message: string;
 }
 
 /** Per-identity availability setting on a sandbox. Allows explicit control over which identities from the group are served to the sandbox. */
 model IdentitySetting {
-  /** The identity reference — ARM resource ID for user-assigned, "system" for system-assigned, or a client ID. */
+  /** Managed identity resource ID, system-assigned identity marker, or client ID. */
   identity: string;
 
   /** Lifecycle phase gating for this identity. */
@@ -1189,33 +1189,33 @@ model IdentitySetting {
 union IdentitySettingLifecycle {
   string,
 
-  /** Serialized IdentitySettingLifecycle value. */
+  /** The identity is not available to the sandbox. */
   None: "None",
 
-  /** Serialized IdentitySettingLifecycle value. */
+  /** The identity is available only during the main sandbox lifecycle. */
   Main: "Main",
 
-  /** Serialized IdentitySettingLifecycle value. */
+  /** The identity is available throughout the sandbox lifecycle. */
   All: "All",
 }
 
-/** IpAccessControlAction values. */
+/** Actions applied to matching source addresses. */
 union IpAccessControlAction {
   string,
 
-  /** Serialized IpAccessControlAction value. */
+  /** Allows traffic from matching addresses. */
   Allow: "Allow",
 
-  /** Serialized IpAccessControlAction value. */
+  /** Denies traffic from matching addresses. */
   Deny: "Deny",
 }
 
 /** Linux capabilities to add or drop from the container's default capability set. */
 model LinuxCapabilities {
-  /** add value. */
+  /** Linux capabilities added to the container. */
   add?: string[];
 
-  /** drop value. */
+  /** Linux capabilities removed from the container. */
   drop?: string[];
 }
 
@@ -1223,16 +1223,16 @@ model LinuxCapabilities {
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "The existing API requires this polymorphic log-column union."
 @discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
 union LogColumnDef {
-  /** Value variant. */
+  /** A column containing a static value. */
   Value: ValueLogColumnDef,
 
-  /** Ref variant. */
+  /** A column resolved from a sandbox attribute. */
   Ref: RefLogColumnDef,
 }
 
 /** A column whose value is resolved from a well-known Azure Container Apps Sandbox attribute at runtime. */
 model RefLogColumnDef {
-  /** kind value. */
+  /** Identifies this as a referenced log column. */
   kind?: "Ref";
 
   /** The Azure Container Apps Sandbox attribute to resolve. */
@@ -1241,7 +1241,7 @@ model RefLogColumnDef {
 
 /** A column whose value is a literal string provided by the partner. */
 model ValueLogColumnDef {
-  /** kind value. */
+  /** Identifies this as a static-value log column. */
   kind?: "Value";
 
   /** The static value injected into every log record. */
@@ -1252,19 +1252,19 @@ model ValueLogColumnDef {
 union LogColumnRef {
   string,
 
-  /** Serialized LogColumnRef value. */
+  /** Inserts the log message content. */
   LogContent: "LogContent",
 
-  /** Serialized LogColumnRef value. */
+  /** Inserts the log stream name. */
   LogStream: "LogStream",
 
-  /** Serialized LogColumnRef value. */
+  /** Inserts the sandbox identifier. */
   SandboxId: "SandboxId",
 
-  /** Serialized LogColumnRef value. */
+  /** Inserts the Azure region. */
   Region: "Region",
 
-  /** Serialized LogColumnRef value. */
+  /** Inserts the container name. */
   ContainerName: "ContainerName",
 }
 
@@ -1276,33 +1276,33 @@ scalar PodContainerName extends string;
 
 /** Pod-level security context — applies to all containers unless overridden at the container level. Follows Kubernetes pod securityContext semantics. */
 model PodSecurityContext {
-  /** runAsUser value. */
+  /** The default user ID for pod containers. */
   runAsUser?: int32;
 
-  /** runAsGroup value. */
+  /** The default group ID for pod containers. */
   runAsGroup?: int32;
 
-  /** runAsNonRoot value. */
+  /** Whether pod containers must run as non-root users. */
   runAsNonRoot?: boolean;
 
-  /** supplementalGroups value. */
+  /** Supplemental group IDs assigned to pod processes. */
   supplementalGroups?: int32[];
 
-  /** fsGroup value. */
+  /** The group ID applied to mounted volumes. */
   fsGroup?: int32;
 
-  /** fsGroupChangePolicy value. */
+  /** When ownership is changed on mounted volumes. */
   fsGroupChangePolicy?: FsGroupChangePolicy;
 }
 
-/** PortActivationMode values. */
+/** Ways a sandbox port can be activated. */
 union PortActivationMode {
   string,
 
-  /** Serialized PortActivationMode value. */
+  /** The port is activated explicitly. */
   Manual: "Manual",
 
-  /** Serialized PortActivationMode value. */
+  /** The port activates when traffic arrives. */
   OnDemand: "OnDemand",
 }
 
@@ -1310,70 +1310,70 @@ union PortActivationMode {
 union PortProtocol {
   string,
 
-  /** Serialized PortProtocol value. */
+  /** Forwards traffic using HTTP/1.1. */
   Http: "Http",
 
-  /** Serialized PortProtocol value. */
+  /** Forwards traffic using HTTP/2. */
   Http2: "Http2",
 }
 
-/** PresetSandboxType values. */
+/** Preset configurations available for a sandbox. */
 union PresetSandboxType {
   string,
 
-  /** Serialized PresetSandboxType value. */
+  /** Does not apply a preset sandbox configuration. */
   None: "None",
 
-  /** Serialized PresetSandboxType value. */
+  /** Applies the GitHub Copilot sandbox preset. */
   GitHubCopilot: "GitHubCopilot",
 
-  /** Serialized PresetSandboxType value. */
+  /** Applies the Claude sandbox preset. */
   Claude: "Claude",
 }
 
 /** Exec probe handler that runs a command in the container. */
 model ProbeExecAction {
-  /** command value. */
+  /** The command and arguments executed by the probe. */
   command: string[];
 }
 
 /** HTTP GET probe handler executed from inside the container VM. */
 model ProbeHttpGetAction {
-  /** port value. */
+  /** The port used by the HTTP probe. */
   port: SandboxPortNumber;
 
-  /** path value. */
+  /** The HTTP request path. */
   path?: string;
 
-  /** host value. */
+  /** The host header sent by the probe. */
   host?: string;
 
-  /** scheme value. */
+  /** The URI scheme used by the probe. */
   scheme?: string;
 
-  /** httpHeaders value. */
+  /** Additional HTTP headers sent by the probe. */
   httpHeaders?: ProbeHttpHeader[];
 }
 
 /** HTTP header sent with a probe HTTP GET request. */
 model ProbeHttpHeader {
-  /** name value. */
+  /** The HTTP header name. */
   name: string;
 
-  /** value value. */
+  /** The HTTP header value. */
   value: string;
 }
 
 /** TCP socket probe handler that checks whether a port accepts connections. */
 model ProbeTcpSocketAction {
-  /** port value. */
+  /** The port checked by the TCP probe. */
   port: SandboxPortNumber;
 
-  /** host value. */
+  /** The host checked by the TCP probe. */
   host?: string;
 }
 
-/** ProjectId wire value. */
+/** A project identifier. */
 scalar ProjectId extends string;
 
 /** Reference to an agent identity for assigning to a sandbox. */
@@ -1385,39 +1385,39 @@ model SandboxAgentIdentityRef {
   agentId: string;
 }
 
-/** SandboxAutoDeletePolicy wire model. */
+/** Automatic deletion settings for a sandbox. */
 model SandboxAutoDeletePolicy {
-  /** enabled value. */
+  /** Whether automatic deletion is enabled. */
   enabled: boolean;
 
-  /** deleteIntervalInDays value. */
+  /** The deletion delay in days. */
   deleteIntervalInDays?: int32;
 
-  /** deleteIntervalInSeconds value. */
+  /** The deletion delay in seconds. */
   deleteIntervalInSeconds?: int64;
 
-  /** trigger value. */
+  /** The event that starts the deletion timer. */
   trigger?: AutoDeleteTrigger;
 }
 
-/** SandboxAutoSuspendPolicy wire model. */
+/** Automatic suspension settings for a sandbox. */
 model SandboxAutoSuspendPolicy {
-  /** enabled value. */
+  /** Whether automatic suspension is enabled. */
   enabled: boolean;
 
-  /** interval value. */
+  /** The idle interval before suspension. */
   interval?: int32;
 
-  /** mode value. */
+  /** How sandbox state is preserved during suspension. */
   mode?: SandboxSuspendMode;
 }
 
-/** SandboxLifecyclePolicy wire model. */
+/** Automatic suspension and deletion settings for a sandbox. */
 model SandboxLifecyclePolicy {
-  /** autoSuspendPolicy value. */
+  /** Automatic suspension settings. */
   autoSuspendPolicy: SandboxAutoSuspendPolicy;
 
-  /** autoDeletePolicy value. */
+  /** Automatic deletion settings. */
   autoDeletePolicy: SandboxAutoDeletePolicy;
 }
 
@@ -1426,30 +1426,30 @@ model SandboxLifecyclePolicy {
 @maxValue(65535)
 scalar SandboxPortNumber extends int32;
 
-/** SandboxState values. */
+/** Possible runtime states of a sandbox. */
 union SandboxState {
   string,
 
-  /** Serialized SandboxState value. */
+  /** The sandbox is running. */
   Running: "Running",
 
-  /** Serialized SandboxState value. */
+  /** The sandbox is stopped. */
   Stopped: "Stopped",
 
-  /** Serialized SandboxState value. */
+  /** The sandbox is idle. */
   Idle: "Idle",
 
-  /** Serialized SandboxState value. */
+  /** The sandbox is being created. */
   Creating: "Creating",
 
-  /** Serialized SandboxState value. */
+  /** The sandbox is stopping. */
   Stopping: "Stopping",
 
-  /** Serialized SandboxState value. */
+  /** The sandbox could not be stopped. */
   StopFailed: "StopFailed",
 }
 
-/** Companion document to SandboxState. Populated when a sandbox transitions to SandboxState.Stopped; null on SandboxState.Running sandboxes (and on legacy stopped documents written before this field existed). */
+/** Details recorded when a sandbox enters the stopped state. */
 model SandboxStateDetails {
   /** Why the sandbox is stopped. */
   stoppedReason: StoppedReason;
@@ -1458,23 +1458,23 @@ model SandboxStateDetails {
   stoppedAt: utcDateTime;
 }
 
-/** SandboxSuspendMode values. */
+/** Ways to preserve a suspended sandbox. */
 union SandboxSuspendMode {
   string,
 
-  /** Serialized SandboxSuspendMode value. */
+  /** Preserves the sandbox in memory. */
   Memory: "Memory",
 
-  /** Serialized SandboxSuspendMode value. */
+  /** Persists the sandbox state to disk. */
   Disk: "Disk",
 
-  /** Serialized SandboxSuspendMode value. */
+  /** Does not preserve sandbox state. */
   None: "None",
 }
 
 /** Seccomp profile configuration for a container. */
 model SeccompProfile {
-  /** type value. */
+  /** The seccomp profile type. */
   type: SeccompProfileType;
 }
 
@@ -1482,105 +1482,105 @@ model SeccompProfile {
 union SeccompProfileType {
   string,
 
-  /** Serialized SeccompProfileType value. */
+  /** Uses the container runtime's default seccomp profile. */
   RuntimeDefault: "RuntimeDefault",
 
-  /** Serialized SeccompProfileType value. */
+  /** Disables seccomp filtering. */
   Unconfined: "Unconfined",
 }
 
-/** Reason a sandbox is in SandboxState.Stopped. Carried inside SandboxStateDetails. Distinguishes operator policy (StoppedReason.Disabled) from system-driven idle suspends (StoppedReason.Idle) and user-initiated stops (StoppedReason.UserStopped). Used by the OnDemand auto-resume gate: only StoppedReason.Disabled blocks auto-resume. */
+/** Reason a sandbox entered the stopped state. */
 union StoppedReason {
   string,
 
-  /** Serialized StoppedReason value. */
+  /** The sandbox stopped after becoming idle. */
   Idle: "Idle",
 
-  /** Serialized StoppedReason value. */
+  /** The sandbox was administratively disabled. */
   Disabled: "Disabled",
 
-  /** Serialized StoppedReason value. */
+  /** The sandbox was stopped by a user request. */
   UserStopped: "UserStopped",
 }
 
 /** Kubernetes-style storage/disk resource quantity string (e.g. "256Mi", "1Gi", "2048"). */
 scalar StorageQuantity extends string;
 
-/** Credential kind for a TDS egress connection. Managed identity is deferred (v1). */
+/** Authentication method for a TDS egress connection. */
 union TdsAuthKind {
   string,
 
-  /** Serialized TdsAuthKind value. */
+  /** Uses a SQL username and password. */
   SqlPassword: "SqlPassword",
 
-  /** Serialized TdsAuthKind value. */
+  /** Uses a Microsoft Entra access token. */
   EntraToken: "EntraToken",
 }
 
-/** A declared TDS credential. string TdsCredential.Name uniquely identifies the credential within its TdsEgressSection and is what rules (string? TdsEgressAction.Credential) and webhook responses reference. On the API/contract path EgressPolicySecretRef? TdsCredential.SecretRef is set and string? TdsCredential.Secret is null. On the runtime path (after Global API resolution) string? TdsCredential.Secret holds the resolved material and flows (encrypted) to NodeAgent. */
+/** A named credential used by TDS egress rules. */
 model TdsCredential {
-  /** name value. */
+  /** The credential name referenced by rules. */
   name: string;
 
-  /** kind value. */
+  /** The authentication method. */
   kind: TdsAuthKind;
 
-  /** username value. */
+  /** The SQL username. */
   username?: string;
 
-  /** secretRef value. */
+  /** A reference to the stored password or token. */
   secretRef?: EgressPolicySecretRef;
 
-  /** secret value. */
+  /** Resolved credential value, when included by the service. */
   secret?: string;
 }
 
-/** Static action for a TDS rule. EgressPolicyActionType TdsEgressAction.Type must be Allow or Deny (Transform/Rewrite are HTTP-only and rejected by validation). string? TdsEgressAction.Credential names a declared credential and is only valid on Allow. */
+/** The allow or deny action applied by a TDS rule. */
 model TdsEgressAction {
-  /** type value. */
+  /** The action type. */
   type: EgressPolicyActionType;
 
-  /** credential value. */
+  /** The credential used for an allowed connection. */
   credential?: string;
 }
 
-/** Match criteria for a TDS egress rule (AND logic). Host is a glob over the SNI / original-dst server. */
+/** Match criteria for a TDS egress rule. All specified criteria must match. */
 model TdsEgressMatch {
-  /** host value. */
+  /** The database server host pattern. */
   host: string;
 
-  /** databases value. */
+  /** The database names to match. */
   databases?: string[];
 }
 
-/** A single TDS egress rule. Rules are evaluated in order; first match wins. A rule has exactly one of TdsEgressAction? TdsEgressRule.Action (static) or EgressPolicyHookRef? TdsEgressRule.HookRef (dynamic webhook), never both — same XOR as HTTP. */
+/** A TDS egress rule evaluated in order until the first match. */
 model TdsEgressRule {
-  /** name value. */
+  /** The rule name. */
   name: string;
 
-  /** match value. */
+  /** The database traffic matched by the rule. */
   match: TdsEgressMatch;
 
-  /** action value. */
+  /** The static action applied to matching traffic. */
   action?: TdsEgressAction;
 
-  /** hookRef value. */
+  /** A webhook that dynamically determines the action. */
   hookRef?: EgressPolicyHookRef;
 }
 
-/** The TDS section of an egress policy. IReadOnlyList&lt;TdsCredential&gt; TdsEgressSection.Credentials is a list of named credentials (each string TdsCredential.Name unique within the section), declared once and referenced by name from static rules and webhook responses. The array-of-named-objects shape matches the rest of the Azure Container Apps Sandbox API (for example Connections); the runtime resolves it into a by-name map. On the runtime path each credential's string? TdsCredential.Secret is resolved. */
+/** TDS database egress rules and credentials. */
 model TdsEgressSection {
-  /** defaultAction value. */
+  /** The action applied when no TDS rule matches. */
   defaultAction: EgressPolicyActionType;
 
-  /** credentials value. */
+  /** Named credentials referenced by TDS rules. */
   credentials: TdsCredential[];
 
-  /** rules value. */
+  /** TDS rules evaluated in order. */
   rules: TdsEgressRule[];
 }
 
-/** Authentication for an ApplicationInsights telemetry endpoint via secret reference. The connection string is resolved at runtime from the referenced user-managed secret. */
+/** Secret-based authentication for an Application Insights endpoint. */
 model TelemetryApplicationInsightsAuth {
   /** Reference to a user-managed secret containing key-value pairs. */
   secretId: string;
@@ -1589,29 +1589,29 @@ model TelemetryApplicationInsightsAuth {
   secretKey: string;
 }
 
-/** Base type for telemetry authentication that uses a `kind` discriminator. Supports user-assigned and system-assigned managed identity; designed for future auth kinds (e.g., workload identity). */
+/** Managed identity authentication for a telemetry endpoint. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "The existing API requires this polymorphic telemetry-authentication union."
 @discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
 union TelemetryAuth {
-  /** ManagedIdentity variant. */
+  /** User-assigned managed identity authentication. */
   ManagedIdentity: TelemetryManagedIdentityAuth,
 
-  /** SystemAssignedManagedIdentity variant. */
+  /** System-assigned managed identity authentication. */
   SystemAssignedManagedIdentity: TelemetrySystemAssignedManagedIdentityAuth,
 }
 
-/** User-assigned managed identity authentication for a Log Analytics telemetry endpoint. The egress proxy acquires a bearer token via Identity Proxy using the specified user-assigned MI. */
+/** User-assigned managed identity authentication for Log Analytics. */
 model TelemetryManagedIdentityAuth {
-  /** kind value. */
+  /** Identifies managed identity authentication. */
   kind?: "ManagedIdentity";
 
-  /** Full ARM resource ID of a user-assigned managed identity (e.g., /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{name}). */
+  /** Azure resource ID of a user-assigned managed identity. */
   identity: string;
 }
 
-/** System-assigned managed identity authentication for a Log Analytics telemetry endpoint. The egress proxy acquires a bearer token via Identity Proxy using the sandbox group's system-assigned MI. No explicit identity resource ID is needed - the Identity Proxy defaults to the system-assigned identity. */
+/** System-assigned managed identity authentication for Log Analytics. */
 model TelemetrySystemAssignedManagedIdentityAuth {
-  /** kind value. */
+  /** Identifies system-assigned managed identity authentication. */
   kind?: "SystemAssignedManagedIdentity";
 }
 
@@ -1629,16 +1629,16 @@ model TelemetryConfig {
 union TelemetryData {
   string,
 
-  /** Serialized TelemetryData value. */
+  /** Routes container standard output and standard error logs. */
   ContainerStdoutStderr: "ContainerStdoutStderr",
 
-  /** Serialized TelemetryData value. */
+  /** Routes OpenTelemetry data emitted by containers. */
   ContainerOtel: "ContainerOtel",
 
-  /** Serialized TelemetryData value. */
+  /** Routes sandbox metrics. */
   Metrics: "Metrics",
 
-  /** Serialized TelemetryData value. */
+  /** Routes network egress decision logs. */
   NetworkEgressDecisions: "NetworkEgressDecisions",
 }
 
@@ -1646,40 +1646,40 @@ union TelemetryData {
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "The existing API requires this polymorphic telemetry-endpoint union."
 @discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
 union TelemetryEndpoint {
-  /** OTLP variant. */
+  /** An OpenTelemetry Protocol endpoint. */
   OTLP: OtlpTelemetryEndpoint,
 
-  /** ApplicationInsights variant. */
+  /** An Application Insights endpoint. */
   ApplicationInsights: ApplicationInsightsTelemetryEndpoint,
 
-  /** LogAnalytics variant. */
+  /** A Log Analytics endpoint using the Logs Ingestion API. */
   LogAnalytics: LogAnalyticsTelemetryEndpoint,
 
-  /** LogAnalyticsLegacy variant. */
+  /** A Log Analytics endpoint using the Data Collector API. */
   LogAnalyticsLegacy: LogAnalyticsLegacyTelemetryEndpoint,
 }
 
 /** Application Insights telemetry endpoint configuration. Uses the connection string to derive the ingestion and live-metrics endpoints. */
 model ApplicationInsightsTelemetryEndpoint {
-  /** kind value. */
+  /** Identifies an Application Insights endpoint. */
   kind?: "ApplicationInsights";
 
-  /** auth value. */
+  /** Authentication used for Application Insights. */
   auth: TelemetryApplicationInsightsAuth;
 
   /** Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed. */
   data: TelemetryData[];
 
-  /** Optional custom column schema. When set, log records are projected through this schema before being forwarded. Supported on all endpoint kinds for `ContainerStdoutStderr` data. Per-kind semantics: OTLP - columns become log record attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern - columns become the DCR stream record fields; LogAnalyticsLegacy - columns become the HTTP Data Collector API record fields. */
+  /** Custom columns added to forwarded log records. */
   columns?: Record<LogColumnDef>;
 
-  /** When true, JSON log lines are parsed and their top-level keys are merged into the output record. Reserved keys (`message`, `time`, `TimeGenerated`, anything starting with `adc.`) and any key already produced by an explicit LogColumnDef are preserved (the parsed JSON does not override them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data. */
+  /** Whether to add top-level JSON fields from container logs as columns. */
   dynamicJsonColumns?: boolean = false;
 }
 
 /** Log Analytics Legacy (Data Collector API) telemetry endpoint configuration. */
 model LogAnalyticsLegacyTelemetryEndpoint {
-  /** kind value. */
+  /** Identifies a legacy Log Analytics endpoint. */
   kind?: "LogAnalyticsLegacy";
 
   /** The Log Analytics workspace ID. */
@@ -1688,22 +1688,22 @@ model LogAnalyticsLegacyTelemetryEndpoint {
   /** The custom log table name (e.g., "ContainerAppConsoleLogs"). */
   tableName: string;
 
-  /** Polymorphic secret reference for the shared key. Resolved at runtime from Key Vault. May be a TelemetrySandboxGroupSecretRef (sandboxGroup-scoped legacy secret) or a TelemetryAppSecretRef (artifactApp-local inline secret). */
+  /** Secret containing the Log Analytics shared key. */
   auth: TelemetrySecretReference;
 
   /** Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed. */
   data: TelemetryData[];
 
-  /** Optional custom column schema. When set, log records are projected through this schema before being forwarded. Supported on all endpoint kinds for `ContainerStdoutStderr` data. Per-kind semantics: OTLP - columns become log record attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern - columns become the DCR stream record fields; LogAnalyticsLegacy - columns become the HTTP Data Collector API record fields. */
+  /** Custom columns added to forwarded log records. */
   columns?: Record<LogColumnDef>;
 
-  /** When true, JSON log lines are parsed and their top-level keys are merged into the output record. Reserved keys (`message`, `time`, `TimeGenerated`, anything starting with `adc.`) and any key already produced by an explicit LogColumnDef are preserved (the parsed JSON does not override them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data. */
+  /** Whether to add top-level JSON fields from container logs as columns. */
   dynamicJsonColumns?: boolean = false;
 }
 
-/** Azure Monitor Log Analytics telemetry endpoint configuration. Uses the Logs Ingestion API via Data Collection Endpoint (DCE) and Data Collection Rule (DCR). Authentication is handled by the customer's managed identity (user-assigned or system-assigned) via Identity Proxy. */
+/** Azure Monitor Log Analytics endpoint configuration. */
 model LogAnalyticsTelemetryEndpoint {
-  /** kind value. */
+  /** Identifies a Log Analytics endpoint. */
   kind?: "LogAnalytics";
 
   /** Data Collection Endpoint URL. */
@@ -1721,16 +1721,16 @@ model LogAnalyticsTelemetryEndpoint {
   /** Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed. */
   data: TelemetryData[];
 
-  /** Optional custom column schema. When set, log records are projected through this schema before being forwarded. Supported on all endpoint kinds for `ContainerStdoutStderr` data. Per-kind semantics: OTLP - columns become log record attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern - columns become the DCR stream record fields; LogAnalyticsLegacy - columns become the HTTP Data Collector API record fields. */
+  /** Custom columns added to forwarded log records. */
   columns?: Record<LogColumnDef>;
 
-  /** When true, JSON log lines are parsed and their top-level keys are merged into the output record. Reserved keys (`message`, `time`, `TimeGenerated`, anything starting with `adc.`) and any key already produced by an explicit LogColumnDef are preserved (the parsed JSON does not override them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data. */
+  /** Whether to add top-level JSON fields from container logs as columns. */
   dynamicJsonColumns?: boolean = false;
 }
 
 /** OTLP telemetry endpoint configuration. */
 model OtlpTelemetryEndpoint {
-  /** kind value. */
+  /** Identifies an OTLP endpoint. */
   kind?: "OTLP";
 
   /** OTLP endpoint URL (e.g., "https://customer.monitor.azure.com/otlp"). */
@@ -1739,20 +1739,20 @@ model OtlpTelemetryEndpoint {
   /** `Grpc` or `Http`. */
   protocol: TelemetryProtocol;
 
-  /** auth value. */
+  /** Optional headers used to authenticate to the endpoint. */
   auth?: TelemetryHeaderAuth;
 
   /** Which telemetry data to route: `sandbox`, `system`. If empty, all data is routed. */
   data: TelemetryData[];
 
-  /** Optional custom column schema. When set, log records are projected through this schema before being forwarded. Supported on all endpoint kinds for `ContainerStdoutStderr` data. Per-kind semantics: OTLP - columns become log record attributes (the `LogContent` ref also remains the OTLP body), and additionally, for an OTLP endpoint routing `Metrics`, the `Value` columns and the resource-constant `Ref` columns (`SandboxId`, `Region`) become OTLP metrics resource attributes (`ResourceMetrics.Resource.Attributes`); LogAnalytics modern - columns become the DCR stream record fields; LogAnalyticsLegacy - columns become the HTTP Data Collector API record fields. */
+  /** Custom columns added to forwarded log records. */
   columns?: Record<LogColumnDef>;
 
-  /** When true, JSON log lines are parsed and their top-level keys are merged into the output record. Reserved keys (`message`, `time`, `TimeGenerated`, anything starting with `adc.`) and any key already produced by an explicit LogColumnDef are preserved (the parsed JSON does not override them). Requires `ContainerStdoutStderr` in IReadOnlyList&lt;TelemetryData&gt; TelemetryEndpoint.Data. */
+  /** Whether to add top-level JSON fields from container logs as columns. */
   dynamicJsonColumns?: boolean = false;
 }
 
-/** Authentication configuration for an OTLP telemetry endpoint. The egress proxy injects the resolved secret value as an HTTP header. */
+/** HTTP header authentication for an OTLP telemetry endpoint. */
 model TelemetryHeaderAuth {
   /** HTTP header to inject (e.g., "x-api-key", "Authorization"). */
   headerName: string;
@@ -1768,10 +1768,10 @@ model TelemetryHeaderAuth {
 union TelemetryProtocol {
   string,
 
-  /** Serialized TelemetryProtocol value. */
+  /** Sends telemetry using OTLP over gRPC. */
   Grpc: "Grpc",
 
-  /** Serialized TelemetryProtocol value. */
+  /** Sends telemetry using OTLP over HTTP. */
   Http: "Http",
 }
 
@@ -1814,47 +1814,47 @@ model TelemetryAppSecretRef {
   secretRef: string;
 }
 
-/** TenantId wire value. */
+/** A Microsoft Entra tenant identifier. */
 scalar TenantId extends string;
 
 /** Controls the scope of TLS inspection for the egress proxy on a per-sandbox basis. */
 union TrafficInspection {
   string,
 
-  /** Serialized TrafficInspection value. */
+  /** Uses the legacy inspection behavior. */
   Legacy: "Legacy",
 
-  /** Serialized TrafficInspection value. */
+  /** Inspects supported HTTP traffic. */
   Partial: "Partial",
 
-  /** Serialized TrafficInspection value. */
+  /** Inspects all supported egress traffic. */
   Full: "Full",
 
-  /** Serialized TrafficInspection value. */
+  /** Disables traffic inspection. */
   None: "None",
 }
 
-/** A single L3/L4 transport egress rule. Rules are evaluated in declared order; first match wins. EgressPolicyActionType TransportEgressRule.Action must be Allow or Deny (Transform/Rewrite are HTTP-only and rejected by validation). string TransportEgressRule.Destination is an IPv4 CIDR (v1). int? TransportEgressRule.Port is a single destination port (`1..65535`) or `null` to match every port on the destination (any-port wildcard). */
+/** A TCP or UDP egress rule evaluated in order until the first match. */
 model TransportEgressRule {
-  /** action value. */
+  /** The allow or deny action. */
   action: EgressPolicyActionType;
 
-  /** protocol value. */
+  /** The transport protocol to match. */
   protocol: TransportProtocol;
 
-  /** destination value. */
+  /** The destination IPv4 CIDR to match. */
   destination: string;
 
-  /** port value. */
+  /** The destination port to match. */
   port: int32;
 }
 
-/** The transport (L3/L4 TCP/UDP) section of an egress policy. Distinct from HTTP and TDS policy and enforced by NodeAgent at the network layer (`iptables`). EgressPolicyActionType TransportEgressSection.DefaultAction is the terminal action applied to raw TCP/UDP flows that match no rule; IReadOnlyList&lt;TransportEgressRule&gt; TransportEgressSection.Rules is capped at 10 entries. DNS (port 53) is always carved out and never constrained by these rules in v1. */
+/** TCP and UDP egress rules for a sandbox. */
 model TransportEgressSection {
-  /** defaultAction value. */
+  /** The action applied when no transport rule matches. */
   defaultAction: EgressPolicyActionType;
 
-  /** rules value. */
+  /** Transport rules evaluated in order. */
   rules: TransportEgressRule[];
 }
 
@@ -1862,12 +1862,12 @@ model TransportEgressSection {
 union TransportProtocol {
   string,
 
-  /** Serialized TransportProtocol value. */
+  /** Matches TCP traffic. */
   Tcp: "Tcp",
 
-  /** Serialized TransportProtocol value. */
+  /** Matches UDP traffic. */
   Udp: "Udp",
 }
 
-/** VolumeName wire value. */
+/** A volume name. */
 scalar VolumeName extends string;

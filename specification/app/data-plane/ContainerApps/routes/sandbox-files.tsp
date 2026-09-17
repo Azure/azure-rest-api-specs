@@ -4,104 +4,104 @@ using Azure.Core;
 
 namespace ContainerAppsSandbox;
 
-/** OK. */
+/** The HTTP 200 response for the deleteSandboxFile operation. */
 model DeleteSandboxFileResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned file operation result. */
   @body body: FileOpStatusResponse;
 }
 
-/** Errors returned by deleteSandboxFile. */
+/** Error responses for the deleteSandboxFile operation. */
 alias DeleteSandboxFileErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | ConflictErrorResult;
 
-/** OK. */
+/** The HTTP 200 response for the getSandboxFile operation. */
 model GetSandboxFileResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The requested file content. */
   @body body: bytes;
 }
 
-/** Errors returned by getSandboxFile. */
+/** Error responses for the getSandboxFile operation. */
 alias GetSandboxFileErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | ConflictErrorResult;
 
-/** OK. */
+/** The HTTP 200 response for the getSandboxFilesList operation. */
 model GetSandboxFilesListResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned directory listing. */
   @body body: DirListingResponse;
 }
 
-/** Errors returned by getSandboxFilesList. */
+/** Error responses for the getSandboxFilesList operation. */
 alias GetSandboxFilesListErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | ConflictErrorResult;
 
-/** OK. */
+/** The HTTP 200 response for the getSandboxFileStat operation. */
 model GetSandboxFileStatResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned file metadata. */
   @body body: FileInfo;
 }
 
-/** Errors returned by getSandboxFileStat. */
+/** Error responses for the getSandboxFileStat operation. */
 alias GetSandboxFileStatErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | ConflictErrorResult;
 
-/** OK. */
+/** The HTTP 200 response for the postSandboxFileMkdir operation. */
 model PostSandboxFileMkdirResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned file operation result. */
   @body body: FileOpStatusResponse;
 }
 
-/** Errors returned by postSandboxFileMkdir. */
+/** Error responses for the postSandboxFileMkdir operation. */
 alias PostSandboxFileMkdirErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | ConflictErrorResult;
 
-/** Standard resource operations for creating sandbox directories. */
+/** Shared operation traits for creating sandbox directories. */
 alias SandboxFileMkdirOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxFileMkdirErrors
 >;
 
-/** Created. */
+/** The HTTP 201 response for the postSandboxFile operation. */
 model PostSandboxFileResult {
-  /** HTTP response status code. */
+  /** The HTTP 201 status code. */
   @statusCode statusCode: 201;
 
-  /** Response body. */
+  /** The returned file write result. */
   @body body: WriteFileResponse;
 }
 
-/** Errors returned by postSandboxFile. */
+/** Error responses for the postSandboxFile operation. */
 alias PostSandboxFileErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | ConflictErrorResult
   | RequestBodyTooLargeErrorResult;
 
-/** Standard resource operations for writing sandbox files. */
+/** Shared operation traits for writing sandbox files. */
 alias SandboxFileWriteOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxFileErrors
@@ -119,16 +119,16 @@ interface SandboxFilesOperations {
     {
       ...AzureResourceScope;
 
-      /** id parameter. */
+      /** The sandbox identifier. */
       @path id: SandboxId;
 
-      /** path parameter. */
+      /** The file or directory path to delete. */
       @query path: string;
 
-      /** recursive parameter. */
+      /** Whether to delete a directory and all of its contents. */
       @query recursive?: boolean;
 
-      /** containerName parameter. */
+      /** The target container name. */
       @query containerName?: string;
     },
     DeleteSandboxFileResult,
@@ -144,13 +144,13 @@ interface SandboxFilesOperations {
     {
       ...AzureResourceScope;
 
-      /** id parameter. */
+      /** The sandbox identifier. */
       @path id: SandboxId;
 
-      /** path parameter. */
+      /** The file path to download. */
       @query path: string;
 
-      /** containerName parameter. */
+      /** The target container name. */
       @query containerName?: string;
     },
     GetSandboxFileResult,
@@ -166,13 +166,13 @@ interface SandboxFilesOperations {
     {
       ...AzureResourceScope;
 
-      /** id parameter. */
+      /** The sandbox identifier. */
       @path id: SandboxId;
 
-      /** path parameter. */
+      /** The directory path to list. */
       @query path: string;
 
-      /** containerName parameter. */
+      /** The target container name. */
       @query containerName?: string;
     },
     GetSandboxFilesListResult,
@@ -188,13 +188,13 @@ interface SandboxFilesOperations {
     {
       ...AzureResourceScope;
 
-      /** id parameter. */
+      /** The sandbox identifier. */
       @path id: SandboxId;
 
-      /** path parameter. */
+      /** The file or directory path to inspect. */
       @query path: string;
 
-      /** containerName parameter. */
+      /** The target container name. */
       @query containerName?: string;
     },
     GetSandboxFileStatResult,
@@ -209,10 +209,10 @@ interface SandboxFilesOperations {
   postSandboxFileMkdir is SandboxFileMkdirOperations.ResourceAction<
     Sandbox,
     {
-      /** containerName parameter. */
+      /** The target container name. */
       @query containerName?: string;
 
-      /** Request body. */
+      /** The directory path and creation options. */
       @body body: MkDirContent;
     },
     PostSandboxFileMkdirResult
@@ -229,19 +229,19 @@ interface SandboxFilesOperations {
       /** contentType header. */
       @header contentType: "application/octet-stream";
 
-      /** Request body. */
+      /** The file content to upload. */
       @body content: bytes;
 
-      /** path parameter. */
+      /** The destination file path. */
       @query path: string;
 
-      /** createDirs parameter. */
+      /** Whether to create missing parent directories. */
       @query createDirs?: boolean;
 
-      /** mode parameter. */
+      /** The Unix mode for the uploaded file. */
       @query mode?: int32;
 
-      /** containerName parameter. */
+      /** The target container name. */
       @query containerName?: string;
     },
     PostSandboxFileResult

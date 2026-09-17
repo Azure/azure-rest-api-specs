@@ -1,73 +1,73 @@
 namespace ContainerAppsSandbox {
-  /** Directory-listing response body. */
+  /** Files and directories returned for a directory listing. */
   model DirListingResponse {
-    /** path value. */
+    /** The directory path that was listed. */
     path: string;
 
-    /** entries value. */
+    /** Files and directories contained in the path. */
     entries: FileInfo[];
   }
 
-  /** FileInfo wire model. */
+  /** Metadata for a file or directory in a sandbox. */
   model FileInfo {
-    /** name value. */
+    /** The file or directory name. */
     name: string;
 
-    /** path value. */
+    /** The full path in the sandbox. */
     path: string;
 
-    /** size value. */
+    /** The size in bytes. */
     size: int64;
 
-    /** mode value. */
+    /** The Unix file mode. */
     mode: int32;
 
-    /** isDir value. */
+    /** Whether the path is a directory. */
     isDir: boolean;
 
-    /** isSymlink value. */
+    /** Whether the path is a symbolic link. */
     isSymlink: boolean;
 
-    /** symlinkTarget value. */
+    /** The symbolic link target, when applicable. */
     symlinkTarget: string;
 
-    /** modifiedTime value. */
+    /** The last modification time as a Unix timestamp. */
     modifiedTime: int64;
   }
 
-  /** File-operation response body. */
+  /** Result of a sandbox file operation. */
   model FileOpStatusResponse {
-    /** success value. */
+    /** Whether the file operation succeeded. */
     success: boolean;
 
-    /** error value. */
+    /** The error message when the operation failed. */
     error?: string;
 
-    /** message value. */
+    /** Additional information about the operation. */
     message?: string;
   }
 
-  /** MkDirContent wire model. */
+  /** Options for creating a directory in a sandbox. */
   model MkDirContent {
-    /** path value. */
+    /** The directory path to create. */
     path: string;
 
-    /** createParents value. */
+    /** Whether to create missing parent directories. */
     createParents?: boolean;
 
-    /** mode value. */
+    /** The Unix mode for the new directory. */
     mode?: int32;
   }
 
-  /** Write-file response body. */
+  /** Result of writing a sandbox file. */
   model WriteFileResponse {
-    /** success value. */
+    /** Whether the file was written successfully. */
     success: boolean;
 
-    /** error value. */
+    /** The error message when the write failed. */
     error?: string;
 
-    /** bytesWritten value. */
+    /** The number of bytes written. */
     bytesWritten?: int64;
   }
 }

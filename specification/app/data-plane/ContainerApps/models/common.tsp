@@ -19,7 +19,7 @@ model CountResponse {
 /** A standard Azure error response for a bad request. */
 @error
 model BadRequestErrorResult {
-  /** HTTP response status code. */
+  /** The HTTP 400 status code. */
   @statusCode statusCode: 400;
 
   ...Foundations.ErrorResponse;
@@ -28,7 +28,7 @@ model BadRequestErrorResult {
 /** A standard Azure error response for an unauthorized request. */
 @error
 model UnauthorizedErrorResult {
-  /** HTTP response status code. */
+  /** The HTTP 401 status code. */
   @statusCode statusCode: 401;
 
   ...Foundations.ErrorResponse;
@@ -37,7 +37,7 @@ model UnauthorizedErrorResult {
 /** A standard Azure error response when a resource is not found. */
 @error
 model NotFoundErrorResult {
-  /** HTTP response status code. */
+  /** The HTTP 404 status code. */
   @statusCode statusCode: 404;
 
   ...Foundations.ErrorResponse;
@@ -46,7 +46,7 @@ model NotFoundErrorResult {
 /** A standard Azure error response for a resource conflict. */
 @error
 model ConflictErrorResult {
-  /** HTTP response status code. */
+  /** The HTTP 409 status code. */
   @statusCode statusCode: 409;
 
   ...Foundations.ErrorResponse;
@@ -55,7 +55,7 @@ model ConflictErrorResult {
 /** A standard Azure error response for a failed precondition. */
 @error
 model PreconditionFailedErrorResult {
-  /** HTTP response status code. */
+  /** The HTTP 412 status code. */
   @statusCode statusCode: 412;
 
   ...Foundations.ErrorResponse;
@@ -64,7 +64,7 @@ model PreconditionFailedErrorResult {
 /** A standard Azure error response when the request body is too large. */
 @error
 model RequestBodyTooLargeErrorResult {
-  /** HTTP response status code. */
+  /** The HTTP 413 status code. */
   @statusCode statusCode: 413;
 
   ...Foundations.ErrorResponse;
@@ -73,7 +73,7 @@ model RequestBodyTooLargeErrorResult {
 /** A standard Azure error response when too many requests are sent. */
 @error
 model TooManyRequestsErrorResult {
-  /** HTTP response status code. */
+  /** The HTTP 429 status code. */
   @statusCode statusCode: 429;
 
   ...Foundations.ErrorResponse;
@@ -82,7 +82,7 @@ model TooManyRequestsErrorResult {
 /** A standard Azure error response for an internal server error. */
 @error
 model InternalServerErrorResult {
-  /** HTTP response status code. */
+  /** The HTTP 500 status code. */
   @statusCode statusCode: 500;
 
   ...Foundations.ErrorResponse;
@@ -91,7 +91,7 @@ model InternalServerErrorResult {
 /** A standard Azure error response when the service is unavailable. */
 @error
 model ServiceUnavailableErrorResult {
-  /** HTTP response status code. */
+  /** The HTTP 503 status code. */
   @statusCode statusCode: 503;
 
   ...Foundations.ErrorResponse;
@@ -138,41 +138,41 @@ model SandboxGroupScope {
   sandboxGroupName: string;
 }
 
-/** EntityTagHeaderValue wire model. */
+/** An HTTP entity tag and its comparison strength. */
 model EntityTagHeaderValue {
-  /** tag value. */
+  /** The entity tag value. */
   tag?: StringSegment;
 
-  /** isWeak value. */
+  /** Whether the entity tag uses weak comparison. */
   isWeak?: boolean;
 }
 
-/** AbsoluteDirectoryPath wire model. */
+/** An absolute directory path within a sandbox. */
 scalar AbsoluteDirectoryPath extends string;
 
-/** AbsoluteFilePath wire model. */
+/** An absolute file path within a sandbox. */
 scalar AbsoluteFilePath extends string;
 
-/** Strongly-typed connection identifier. ConnectionId is intentionally string-based rather than Guid-based because existing Cosmos DB documents contain connection IDs in mixed formats — some with hyphens (Guid "D" format: a1b2c3d4-e5f6-...) and some without (Guid "N" format: a1b2c3d4e5f6...). Converting to a Guid-backed typed ID would normalize all lookups to the "D" format via Guid.ToString(), breaking reads/deletes of documents stored with the "N" format since Cosmos DB performs exact string matching on document IDs. */
+/** A connection identifier. */
 scalar ConnectionId extends string;
 
-/** SandboxId wire model. */
+/** A sandbox identifier. */
 scalar SandboxId extends string;
 
-/** StringSegment wire model. */
+/** A segment of a string. */
 model StringSegment {
-  /** buffer value. */
+  /** The source string. */
   buffer?: string;
 
-  /** offset value. */
+  /** The zero-based start position in the source string. */
   offset?: int32;
 
-  /** length value. */
+  /** The number of characters in the segment. */
   length?: int32;
 
-  /** value value. */
+  /** The segment value. */
   value?: string;
 
-  /** hasValue value. */
+  /** Whether the segment contains a value. */
   hasValue?: boolean;
 }

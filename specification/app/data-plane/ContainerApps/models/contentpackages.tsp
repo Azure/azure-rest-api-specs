@@ -1,25 +1,25 @@
 using Rest;
 
 namespace ContainerAppsSandbox {
-  /** ContentPackage wire model. */
+  /** A binary content package available to sandboxes in a sandbox group. */
   @resource("contentpackages")
   @parentResource(SandboxGroupScope)
   model ContentPackage {
-    /** id value. */
+    /** The content package identifier. */
     @key("id")
     @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
     id: ContentPackageId;
 
-    /** size value. */
+    /** The package size in bytes. */
     size: int64;
 
-    /** labels value. */
+    /** Customer-defined labels for the package. */
     labels: Record<string>;
 
-    /** contentType value. */
+    /** The media type of the uploaded content. */
     contentType?: string;
 
-    /** createdOn value. */
+    /** The time when the package was created. */
     createdOn?: utcDateTime;
   }
 }

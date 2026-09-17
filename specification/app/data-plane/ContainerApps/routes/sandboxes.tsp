@@ -6,7 +6,7 @@ using Azure.Core.Traits;
 namespace ContainerAppsSandbox {
   /** Successful Sandbox create response. */
   model SandboxCreatedResult {
-    /** HTTP response status code. */
+    /** The HTTP 201 status code. */
     @statusCode statusCode: 201;
 
     /** Created sandbox. */
@@ -15,13 +15,13 @@ namespace ContainerAppsSandbox {
 
   /** Successful Sandbox delete response with an empty 200 body. */
   model SandboxDeletedResult {
-    /** HTTP response status code. */
+    /** The HTTP 200 status code. */
     @statusCode statusCode: 200;
   }
 
   /** Successful Sandbox delete response with no content. */
   model SandboxDeletedNoContentResult {
-    /** HTTP response status code. */
+    /** The HTTP 204 status code. */
     @statusCode statusCode: 204;
   }
 
@@ -47,7 +47,7 @@ namespace ContainerAppsSandbox {
   /** Errors returned when deleting a sandbox. */
   alias DeleteErrors = UnauthorizedErrorResult | InternalServerErrorResult;
 
-  /** Standard resource operations for reading sandboxes. */
+  /** Shared operation traits for reading sandboxes. */
   alias SandboxGetOperations = ResourceOperations<
     DataPlaneStandardTraits,
     GetErrors
@@ -65,7 +65,7 @@ namespace ContainerAppsSandbox {
     TraitContext.List
   >;
 
-  /** Standard resource operations for listing sandboxes. */
+  /** Shared operation traits for listing sandboxes. */
   alias SandboxListOperations = ResourceOperations<
     DataPlaneStandardTraits,
     ListErrors

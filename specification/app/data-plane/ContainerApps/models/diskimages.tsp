@@ -1,7 +1,7 @@
 using Rest;
 
 namespace ContainerAppsSandbox {
-  /** ContainerImageUrlWithTag wire model. */
+  /** A container image reference including an optional registry and tag. */
   scalar ContainerImageUrlWithTag extends string;
 
   /** The supported disk image source types. */
@@ -15,29 +15,29 @@ namespace ContainerAppsSandbox {
     Blob: "blob",
   }
 
-  /** CreateDiskImageSource wire model. */
+  /** The source used to create a disk image. */
   @discriminator("kind")
   model CreateDiskImageSource {
     /** The disk image source type. */
     kind: CreateDiskImageSourceKind;
   }
 
-  /** CreateDiskImageSourceBlobSource wire model. */
+  /** A disk image source stored in Azure Blob Storage. */
   model CreateDiskImageSourceBlobSource extends CreateDiskImageSource {
     /** The blob source type. */
     kind: "blob";
 
-    /** blobSourceUri value. */
+    /** A URI that grants access to the source blob. */
     @secret
     blobSourceUri: url;
   }
 
-  /** CreateDiskImageSourceRegistrySource wire model. */
+  /** A disk image source pulled from a container registry. */
   model CreateDiskImageSourceRegistrySource extends CreateDiskImageSource {
     /** The container registry source type. */
     kind: "registry";
 
-    /** imageUrl value. */
+    /** The container image reference to import. */
     imageUrl: ContainerImageUrlWithTag;
 
     /** Authentication used to access the registry. */
@@ -54,25 +54,25 @@ namespace ContainerAppsSandbox {
     identity?: ManagedIdentityAuthentication;
   }
 
-  /** PublicDiskImage wire model. */
+  /** A service-managed disk image shared across sandbox groups. */
   @resource("diskimages/public")
   @parentResource(SandboxGroupScope)
   model PublicDiskImage {
-    /** name value. */
+    /** The public image name. */
     @key("name")
     @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
     name: string;
 
-    /** status value. */
+    /** The current status of the public image. */
     status: DiskImageStatus;
   }
 
-  /** RegistryCredentials wire model. */
+  /** Username and token credentials for a container registry. */
   model RegistryCredentials {
-    /** username value. */
+    /** The registry username. */
     username: string;
 
-    /** token value. */
+    /** The registry access token or password. */
     token: string;
   }
 
@@ -120,30 +120,30 @@ namespace ContainerAppsSandbox {
     sizeInMb?: int64;
   }
 
-  /** DiskImageStatus wire model. */
+  /** The provisioning status of a disk image. */
   model DiskImageStatus {
-    /** state value. */
+    /** The current provisioning state. */
     state: string;
 
-    /** errorMessage value. */
+    /** The failure message when provisioning did not succeed. */
     errorMessage?: string;
 
-    /** createdAt value. */
+    /** The time when provisioning started. */
     createdAt: utcDateTime;
 
-    /** updatedAt value. */
+    /** The time when the status was last updated. */
     updatedAt: utcDateTime;
   }
 
-  /** DiskImageImage wire model. */
+  /** Resolved container image metadata for a disk image. */
   model DiskImageImage {
-    /** base value. */
+    /** The resolved base image reference. */
     base: string;
 
-    /** entrypoint value. */
+    /** The container entrypoint. */
     entrypoint?: string[];
 
-    /** cmd value. */
+    /** The default command arguments. */
     cmd?: string[];
   }
 }

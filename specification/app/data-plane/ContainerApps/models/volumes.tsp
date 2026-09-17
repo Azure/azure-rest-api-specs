@@ -1,57 +1,57 @@
 using Rest;
 
 namespace ContainerAppsSandbox {
-  /** ARM resource ID for an Azure Storage blob container. */
+  /** Azure resource ID of a Blob Storage container. */
   scalar ArmStorageContainerId extends string;
 
-  /** ARM resource ID for an Azure user-assigned managed identity. */
+  /** Azure resource ID of a user-assigned managed identity. */
   scalar ArmUserAssignedIdentityId extends string;
 
-  /** Authentication for a bring-your-own (BYO) Azure Blob container volume: how ADC obtains credentials to access the customer-owned container. */
+  /** Authentication used to access a customer-owned Blob Storage container. */
   union AzureBlobByoVolumeAuth {
-    /** AzureBlobByoVolumeAuthAzureBlobByoIdentityAuth variant. */
+    /** Uses a managed identity assigned to the sandbox group. */
     AzureBlobByoVolumeAuthAzureBlobByoIdentityAuth: AzureBlobByoVolumeAuthAzureBlobByoIdentityAuth,
   }
 
-  /** Managed-identity authentication for a BYO blob volume. ADC accesses the container with a managed identity already on the sandbox group. */
+  /** Managed identity authentication for a customer-owned blob volume. */
   model AzureBlobByoVolumeAuthAzureBlobByoIdentityAuth {
     /** The managed-identity authentication type. */
     kind: "ManagedIdentity";
 
-    /** identity value. */
+    /** The managed identity to use. */
     identity: SandboxGroupIdentitySelector;
   }
 
-  /** BlobVolumeUsage wire model. */
+  /** Usage statistics for a blob-backed volume. */
   model BlobVolumeUsage {
-    /** usedBytes value. */
+    /** The used storage in bytes. */
     usedBytes: int64;
 
-    /** itemCount value. */
+    /** The number of items in the volume. */
     itemCount: int64;
 
-    /** calculatedAtUtc value. */
+    /** The time when the usage was calculated. */
     calculatedAtUtc: utcDateTime;
   }
 
-  /** DataDiskVolumeUsage wire model. */
+  /** Usage statistics for a data disk volume. */
   model DataDiskVolumeUsage {
-    /** compressedBlobSizeBytes value. */
+    /** The compressed backup size in bytes. */
     compressedBlobSizeBytes: int64;
 
-    /** usedSizeBytes value. */
+    /** The used disk space in bytes. */
     usedSizeBytes: int64;
 
-    /** lastUploadedAtUtc value. */
+    /** The time when the disk was last uploaded. */
     lastUploadedAtUtc: utcDateTime;
   }
 
-  /** ForkDataDiskVolumeContent wire model. */
+  /** Options for creating a fork of a data disk volume. */
   model ForkDataDiskVolumeContent {
-    /** destinationVolumeName value. */
+    /** The name of the new volume. */
     destinationVolumeName: VolumeName;
 
-    /** labels value. */
+    /** Labels to assign to the new volume. */
     labels?: Record<string>;
   }
 
@@ -80,55 +80,55 @@ namespace ContainerAppsSandbox {
     kind: "SystemAssigned";
   }
 
-  /** Selects a specific user-assigned managed identity by its ARM resource ID. */
+  /** Selects a user-assigned managed identity by resource ID. */
   model SandboxGroupIdentitySelectorUserAssignedIdentitySelector
     extends SandboxGroupIdentitySelector {
     /** The user-assigned managed identity selector type. */
     kind: "UserAssigned";
 
-    /** resourceId value. */
+    /** The resource ID of the user-assigned managed identity. */
     resourceId: ArmUserAssignedIdentityId;
   }
 
-  /** Volume-count response body. */
+  /** Volume counts grouped by type. */
   model VolumeCountResponse {
-    /** counts value. */
+    /** Volume counts grouped by type. */
     counts: VolumeTypeCount[];
   }
 
-  /** VolumeItemName wire model. */
+  /** The name of a file or directory in a volume. */
   scalar VolumeItemName extends string;
 
-  /** Volume-directory-listing response body. */
+  /** Files and directories returned from a volume path. */
   model VolumeListDirectoryResponse {
-    /** path value. */
+    /** The directory path that was listed. */
     path: VolumePath;
 
-    /** items value. */
+    /** Files and directories contained in the path. */
     items: VolumePathItem[];
   }
 
-  /** VolumePath wire model. */
+  /** A path within a volume. */
   scalar VolumePath extends string;
 
-  /** VolumePathItem wire model. */
+  /** Metadata for a file or directory in a volume. */
   model VolumePathItem {
-    /** itemName value. */
+    /** The file or directory name. */
     itemName: VolumeItemName;
 
-    /** path value. */
+    /** The full path in the volume. */
     path: VolumePath;
 
-    /** isDirectory value. */
+    /** Whether the item is a directory. */
     isDirectory: boolean;
 
-    /** sizeBytes value. */
+    /** The file size in bytes. */
     sizeBytes?: int64;
 
-    /** lastModifiedUtc value. */
+    /** The time when the item was last modified. */
     lastModifiedUtc?: utcDateTime;
 
-    /** contentType value. */
+    /** The media type of the file. */
     contentType?: string;
 
     /** An HTTP entity tag used for optimistic concurrency, as defined by RFC 9110. */
@@ -170,7 +170,7 @@ namespace ContainerAppsSandbox {
     @visibility(Lifecycle.Read)
     volumeName: VolumeName;
 
-    /** labels value. */
+    /** Customer-defined labels for the volume. */
     labels?: Record<string>;
 
     /** Current provisioning state assigned by the service. */
@@ -178,46 +178,46 @@ namespace ContainerAppsSandbox {
     provisioningState: VolumeProvisioningState;
   }
 
-  /** AzureBlobByoVolume wire model. */
+  /** A volume backed by a customer-owned Azure Blob container. */
   model AzureBlobByoVolume extends Volume {
     /** Represents the type of volume. */
     type: "AzureBlobByo";
 
-    /** storageContainerResourceId value. */
+    /** The Azure resource ID of the blob container. */
     storageContainerResourceId: ArmStorageContainerId;
 
-    /** auth value. */
+    /** Authentication used to access the blob container. */
     auth: AzureBlobByoVolumeAuth;
   }
 
-  /** AzureBlobVolume wire model. */
+  /** A service-managed Azure Blob volume. */
   model AzureBlobVolume extends Volume {
     /** Represents the type of volume. */
     type: "AzureBlob";
 
-    /** usage value. */
+    /** Current volume usage. */
     @visibility(Lifecycle.Read)
     usage?: BlobVolumeUsage;
   }
 
-  /** AzureFileCifsVolume wire model. */
+  /** A volume backed by Azure Files over SMB. */
   model AzureFileCifsVolume extends Volume {
     /** Represents the type of volume. */
     type: "AzureFileCifs";
   }
 
-  /** AzureFileNfsVolume wire model. */
+  /** A volume backed by Azure Files over NFS. */
   model AzureFileNfsVolume extends Volume {
     /** Represents the type of volume. */
     type: "AzureFileNfs";
   }
 
-  /** DataDiskVolume wire model. */
+  /** A persistent data disk volume. */
   model DataDiskVolume extends Volume {
     /** Represents the type of volume. */
     type: "DataDisk";
 
-    /** size value. */
+    /** The requested disk size. */
     size: StorageQuantity;
 
     /** Whether the volume is currently attached. */
@@ -228,11 +228,11 @@ namespace ContainerAppsSandbox {
     @visibility(Lifecycle.Read)
     clusterId?: string;
 
-    /** attachedSandboxId value. */
+    /** The identifier of the attached sandbox. */
     @visibility(Lifecycle.Read)
     attachedSandboxId?: string;
 
-    /** usage value. */
+    /** Current disk usage and upload status. */
     @visibility(Lifecycle.Read)
     usage?: DataDiskVolumeUsage;
   }
@@ -252,34 +252,34 @@ namespace ContainerAppsSandbox {
 
   /** Represents the type of volume. */
   union VolumeType {
-    /** StringValue variant. */
+    /** An unrecognized volume type returned by the service. */
     StringValue: string,
 
-    /** AzureBlob variant. */
+    /** A service-managed Azure Blob volume. */
     AzureBlob: "AzureBlob",
 
-    /** AzureBlobByo variant. */
+    /** A customer-owned Azure Blob container volume. */
     AzureBlobByo: "AzureBlobByo",
 
-    /** AzureFileCifs variant. */
+    /** An Azure Files volume using SMB. */
     AzureFileCifs: "AzureFileCifs",
 
-    /** AzureFileNfs variant. */
+    /** An Azure Files volume using NFS. */
     AzureFileNfs: "AzureFileNfs",
 
-    /** DataDisk variant. */
+    /** A persistent data disk volume. */
     DataDisk: "DataDisk",
 
-    /** Elastic SAN variant. */
+    /** An Elastic SAN volume. */
     Esan: "Esan",
   }
 
-  /** VolumeTypeCount wire model. */
+  /** The number of volumes of one type. */
   model VolumeTypeCount {
-    /** type value. */
+    /** The volume type. */
     type: VolumeType;
 
-    /** count value. */
+    /** The number of volumes. */
     count: int32;
   }
 }

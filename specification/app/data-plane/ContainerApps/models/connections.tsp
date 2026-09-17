@@ -1,9 +1,9 @@
 using Rest;
 
 namespace ContainerAppsSandbox {
-  /** AuthorizeConnectionContent wire model. */
+  /** Parameters used to authorize a connection. */
   model AuthorizeConnectionContent {
-    /** parameterValues value. */
+    /** Provider-specific authorization parameters. */
     parameterValues: Record<string>;
   }
 
@@ -73,15 +73,15 @@ namespace ContainerAppsSandbox {
     enabledToolGroups?: string[];
   }
 
-  /** GenerateConsentLinkContent wire model. */
+  /** Options for generating a connection consent link. */
   model GenerateConsentLinkContent {
-    /** redirectUrl value. */
+    /** The URI to redirect to after consent completes. */
     redirectUrl?: string;
   }
 
-  /** Consent-link response body. */
+  /** Consent link generated for connection authorization. */
   model GenerateConsentLinkResponse {
-    /** consentLink value. */
+    /** The URL where a user grants consent for the connection. */
     consentLink: string;
   }
 
@@ -90,16 +90,16 @@ namespace ContainerAppsSandbox {
     /** References string PolicyHookBinding.Id on a tool. Must match a declared hook. */
     hookId: string;
 
-    /** Glob patterns to match against extracted field values. For PolicyHookType.FieldValueDenyList: if ANY value matches ANY pattern, the call is blocked. For PolicyHookType.FieldValueAllowList: if ANY value matches NO pattern, the call is blocked. */
+    /** Glob patterns used to allow or deny calls based on extracted field values. */
     patterns: string[];
   }
 
-  /** UpdatePolicyRulesContent wire model. */
+  /** Policy and tool settings to apply to a connection. */
   model UpdatePolicyRulesContent {
-    /** policyRules value. */
+    /** Runtime policy rules for connection tool calls. */
     policyRules: McpPolicyRule[];
 
-    /** enabledToolGroups value. */
+    /** Tool groups enabled for the connection. */
     enabledToolGroups?: string[];
   }
 }

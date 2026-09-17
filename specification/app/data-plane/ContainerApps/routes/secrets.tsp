@@ -4,88 +4,88 @@ using Azure.Core;
 
 namespace ContainerAppsSandbox;
 
-/** Errors returned by deleteSecret. */
+/** Error responses for the deleteSecret operation. */
 alias DeleteSecretErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for deleting secrets. */
+/** Shared operation traits for deleting secrets. */
 alias SecretDeleteOperations = ResourceOperations<
   DataPlaneStandardTraits,
   DeleteSecretErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the getSecrets operation. */
 model GetSecretsResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned secrets. */
   @body body: SecretListResponse;
 }
 
-/** Errors returned by getSecrets. */
+/** Error responses for the getSecrets operation. */
 alias GetSecretsErrors = UnauthorizedErrorResult | InternalServerErrorResult;
 
-/** OK. */
+/** The HTTP 200 response for the getSecretKeys operation. */
 model GetSecretKeysResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned secret keys. */
   @body body: SecretKeysResponse;
 }
 
-/** Errors returned by getSecretKeys. */
+/** Error responses for the getSecretKeys operation. */
 alias GetSecretKeysErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** OK. */
+/** The HTTP 200 response for the postSecretPeek operation. */
 model PostSecretPeekResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned secret values. */
   @body body: SecretPeekResponse;
 }
 
-/** Errors returned by postSecretPeek. */
+/** Error responses for the postSecretPeek operation. */
 alias PostSecretPeekErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for peeking secrets. */
+/** Shared operation traits for peeking secrets. */
 alias SecretPeekOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSecretPeekErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the putSecret operation. */
 model PutSecretResult200 {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned secret. */
   @body body: Secret;
 }
 
-/** Created. */
+/** The HTTP 201 response for the putSecret operation. */
 model PutSecretResult201 {
-  /** HTTP response status code. */
+  /** The HTTP 201 status code. */
   @statusCode statusCode: 201;
 
-  /** Response body. */
+  /** The returned secret. */
   @body body: Secret;
 }
 
-/** Successful responses returned by putSecret. */
+/** Successful responses for the putSecret operation. */
 alias PutSecretResult = PutSecretResult200 | PutSecretResult201;
 
-/** Errors returned by putSecret. */
+/** Error responses for the putSecret operation. */
 alias PutSecretErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -120,7 +120,7 @@ interface SecretsOperations {
     {
       ...AzureResourceScope;
 
-      /** secretId parameter. */
+      /** The secret identifier. */
       @path secretId: string;
     },
     GetSecretKeysResult,
@@ -146,10 +146,10 @@ interface SecretsOperations {
     {
       ...AzureResourceScope;
 
-      /** secretId parameter. */
+      /** The secret identifier. */
       @path secretId: string;
 
-      /** Request body. */
+      /** The secret key-value pairs to store. */
       @body body: CreateSecretContent;
     },
     PutSecretResult,

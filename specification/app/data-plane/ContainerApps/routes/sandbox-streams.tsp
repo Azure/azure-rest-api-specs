@@ -3,21 +3,21 @@ using Azure.Core;
 
 namespace ContainerAppsSandbox;
 
-/** OK. */
+/** The HTTP 200 response for the getSandboxExecStream operation. */
 model GetSandboxExecStreamResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 }
 
-/** OK. */
+/** The HTTP 200 response for the getSandboxLogStream operation. */
 model GetSandboxLogStreamResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 }
 
-/** OK. */
+/** The HTTP 200 response for the getSandboxProcessesStream operation. */
 model GetSandboxProcessesStreamResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 }
 
@@ -32,13 +32,13 @@ interface SandboxStreamsOperations {
     {
       ...AzureResourceScope;
 
-      /** id parameter. */
+      /** The sandbox identifier. */
       @path id: SandboxId;
 
-      /** containerName parameter. */
+      /** The container where the interactive session runs. */
       @query containerName?: string;
 
-      /** user parameter. */
+      /** The user for the interactive session. */
       @query user?: string;
     },
     GetSandboxExecStreamResult,
@@ -54,19 +54,19 @@ interface SandboxStreamsOperations {
     {
       ...AzureResourceScope;
 
-      /** id parameter. */
+      /** The sandbox identifier. */
       @path id: SandboxId;
 
-      /** tailLines parameter. */
+      /** The number of recent log lines to return. */
       @query tailLines?: int32;
 
-      /** logFormat parameter. */
+      /** The format of streamed log records. */
       @query logFormat?: LogFormat;
 
-      /** follow parameter. */
+      /** Whether to continue streaming new log records. */
       @query follow?: boolean;
 
-      /** containerName parameter. */
+      /** The container whose logs are streamed. */
       @query containerName?: string;
     },
     GetSandboxLogStreamResult,
@@ -82,10 +82,10 @@ interface SandboxStreamsOperations {
     {
       ...AzureResourceScope;
 
-      /** id parameter. */
+      /** The sandbox identifier. */
       @path id: SandboxId;
 
-      /** containerName parameter. */
+      /** The container whose processes are streamed. */
       @query containerName?: string;
     },
     GetSandboxProcessesStreamResult,

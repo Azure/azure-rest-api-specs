@@ -4,48 +4,48 @@ using Azure.Core;
 
 namespace ContainerAppsSandbox;
 
-/** OK. */
+/** The HTTP 200 response for the getSandboxEgressDecisions operation. */
 model GetSandboxEgressDecisionsResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned egress decisions. */
   @body body: EgressDecisionsResponse;
 }
 
-/** Errors returned by getSandboxEgressDecisions. */
+/** Error responses for the getSandboxEgressDecisions operation. */
 alias GetSandboxEgressDecisionsErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** OK. */
+/** The HTTP 200 response for the getSandboxPorts operation. */
 model GetSandboxPortsResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned configured ports. */
   @body body: PortsListResponse;
 }
 
-/** Errors returned by getSandboxPorts. */
+/** Error responses for the getSandboxPorts operation. */
 alias GetSandboxPortsErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** OK. */
+/** The HTTP 200 response for the patchSandboxPort operation. */
 model PatchSandboxPortResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned configured ports. */
   @body body: PortsListResponse;
 }
 
-/** Errors returned by patchSandboxPort. */
+/** Error responses for the patchSandboxPort operation. */
 alias PatchSandboxPortErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -53,16 +53,16 @@ alias PatchSandboxPortErrors =
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** OK. */
+/** The HTTP 200 response for the postSandboxConnectionAdd operation. */
 model PostSandboxConnectionAddResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned attached connections. */
   @body body: ConnectionsListResponse;
 }
 
-/** Errors returned by postSandboxConnectionAdd. */
+/** Error responses for the postSandboxConnectionAdd operation. */
 alias PostSandboxConnectionAddErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -70,22 +70,22 @@ alias PostSandboxConnectionAddErrors =
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for adding sandbox connections. */
+/** Shared operation traits for adding sandbox connections. */
 alias SandboxConnectionAddOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxConnectionAddErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the postSandboxEgressPolicy operation. */
 model PostSandboxEgressPolicyResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned egress policy. */
   @body body: SandboxEgressPolicy;
 }
 
-/** Errors returned by postSandboxEgressPolicy. */
+/** Error responses for the postSandboxEgressPolicy operation. */
 alias PostSandboxEgressPolicyErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -93,22 +93,22 @@ alias PostSandboxEgressPolicyErrors =
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for setting sandbox egress policies. */
+/** Shared operation traits for setting sandbox egress policies. */
 alias SandboxEgressPolicyOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxEgressPolicyErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the postSandboxPortAdd operation. */
 model PostSandboxPortAddResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned configured ports. */
   @body body: PortsListResponse;
 }
 
-/** Errors returned by postSandboxPortAdd. */
+/** Error responses for the postSandboxPortAdd operation. */
 alias PostSandboxPortAddErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -116,22 +116,22 @@ alias PostSandboxPortAddErrors =
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for adding sandbox ports. */
+/** Shared operation traits for adding sandbox ports. */
 alias SandboxPortAddOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxPortAddErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the postSandboxPortRemove operation. */
 model PostSandboxPortRemoveResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned configured ports. */
   @body body: PortsListResponse;
 }
 
-/** Errors returned by postSandboxPortRemove. */
+/** Error responses for the postSandboxPortRemove operation. */
 alias PostSandboxPortRemoveErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -139,22 +139,22 @@ alias PostSandboxPortRemoveErrors =
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for removing sandbox ports. */
+/** Shared operation traits for removing sandbox ports. */
 alias SandboxPortRemoveOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxPortRemoveErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the putSandboxPorts operation. */
 model PutSandboxPortsResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned configured ports. */
   @body body: PortsListResponse;
 }
 
-/** Errors returned by putSandboxPorts. */
+/** Error responses for the putSandboxPorts operation. */
 alias PutSandboxPortsErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -174,7 +174,7 @@ interface SandboxNetworkingOperations {
     {
       ...AzureResourceScope;
 
-      /** id parameter. */
+      /** The sandbox identifier. */
       @path id: SandboxId;
     },
     GetSandboxEgressDecisionsResult,
@@ -190,7 +190,7 @@ interface SandboxNetworkingOperations {
     {
       ...AzureResourceScope;
 
-      /** id parameter. */
+      /** The sandbox identifier. */
       @path id: SandboxId;
     },
     GetSandboxPortsResult,
@@ -206,10 +206,10 @@ interface SandboxNetworkingOperations {
     {
       ...AzureResourceScope;
 
-      /** id parameter. */
+      /** The sandbox identifier. */
       @path id: SandboxId;
 
-      /** Request body. */
+      /** The fields to update on the port. */
       @body body: UpdateSandboxPortContent;
     },
     PatchSandboxPortResult,
@@ -224,7 +224,7 @@ interface SandboxNetworkingOperations {
   postSandboxConnectionAdd is SandboxConnectionAddOperations.ResourceAction<
     Sandbox,
     {
-      /** Request body. */
+      /** The connection to attach to the sandbox. */
       @body body: AddConnectionContent;
     },
     PostSandboxConnectionAddResult
@@ -237,7 +237,7 @@ interface SandboxNetworkingOperations {
   postSandboxEgressPolicy is SandboxEgressPolicyOperations.ResourceAction<
     Sandbox,
     {
-      /** Request body. */
+      /** The egress policy to apply to the sandbox. */
       @body body: SandboxEgressPolicy;
     },
     PostSandboxEgressPolicyResult
@@ -250,7 +250,7 @@ interface SandboxNetworkingOperations {
   postSandboxPortAdd is SandboxPortAddOperations.ResourceAction<
     Sandbox,
     {
-      /** Request body. */
+      /** The port configuration to add. */
       @body body: CreateSandboxPortContent;
     },
     PostSandboxPortAddResult
@@ -263,7 +263,7 @@ interface SandboxNetworkingOperations {
   postSandboxPortRemove is SandboxPortRemoveOperations.ResourceAction<
     Sandbox,
     {
-      /** Request body. */
+      /** The name or number of the port to remove. */
       @body body: RemovePortContent;
     },
     PostSandboxPortRemoveResult
@@ -277,10 +277,10 @@ interface SandboxNetworkingOperations {
     {
       ...AzureResourceScope;
 
-      /** id parameter. */
+      /** The sandbox identifier. */
       @path id: SandboxId;
 
-      /** Request body. */
+      /** The complete port configuration for the sandbox. */
       @body body: UpdatePortsContent;
     },
     PutSandboxPortsResult,

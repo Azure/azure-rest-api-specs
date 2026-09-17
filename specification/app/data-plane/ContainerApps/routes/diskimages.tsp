@@ -5,19 +5,19 @@ using Azure.Core.Traits;
 
 namespace ContainerAppsSandbox;
 
-/** Errors returned by deleteDiskImage. */
+/** Error responses for the deleteDiskImage operation. */
 alias DeleteDiskImageErrors =
   | UnauthorizedErrorResult
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for deleting disk images. */
+/** Shared operation traits for deleting disk images. */
 alias DiskImageDeleteOperations = ResourceOperations<
   DataPlaneStandardTraits,
   DeleteDiskImageErrors
 >;
 
-/** Errors returned by listDiskImages. */
+/** Error responses for the listDiskImage operation. */
 alias ListDiskImageErrors = UnauthorizedErrorResult | InternalServerErrorResult;
 
 /** Query parameters for listing disk images. */
@@ -26,19 +26,19 @@ alias ListDiskImageTraits = QueryParametersTrait<
     /** Continuation token for paginated results. */
     @query @continuationToken skipToken?: string;
 
-    /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
+    /** Comma-separated key=value labels that all resources must match. */
     @query labels?: string;
   },
   TraitContext.List
 >;
 
-/** Standard resource operations for listing disk images. */
+/** Shared operation traits for listing disk images. */
 alias DiskImageListOperations = ResourceOperations<
   DataPlaneStandardTraits,
   ListDiskImageErrors
 >;
 
-/** Errors returned by listDiskImagesPublic. */
+/** Error responses for the listPublicDiskImage operation. */
 alias ListPublicDiskImageErrors =
   | UnauthorizedErrorResult
   | InternalServerErrorResult;
@@ -52,46 +52,46 @@ alias ListPublicDiskImageTraits = QueryParametersTrait<
   TraitContext.List
 >;
 
-/** Standard resource operations for listing public disk images. */
+/** Shared operation traits for listing public disk images. */
 alias PublicDiskImageListOperations = ResourceOperations<
   DataPlaneStandardTraits,
   ListPublicDiskImageErrors
 >;
 
-/** Errors returned by getDiskImagePublic. */
+/** Error responses for the getDiskImagePublic operation. */
 alias GetDiskImagePublicErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for reading public disk images. */
+/** Shared operation traits for reading public disk images. */
 alias PublicDiskImageGetOperations = ResourceOperations<
   DataPlaneStandardTraits,
   GetDiskImagePublicErrors
 >;
 
-/** Errors returned by getDiskImage. */
+/** Error responses for the getDiskImage operation. */
 alias GetDiskImageErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for reading disk images. */
+/** Shared operation traits for reading disk images. */
 alias DiskImageGetOperations = ResourceOperations<
   DataPlaneStandardTraits,
   GetDiskImageErrors
 >;
 
-/** Created. */
+/** The HTTP 201 response for the postDiskImage operation. */
 model PostDiskImageResult {
-  /** HTTP response status code. */
+  /** The HTTP 201 status code. */
   @statusCode statusCode: 201;
 
-  /** Response body. */
+  /** The returned disk image. */
   @body body: DiskImage;
 }
 
-/** Errors returned by postDiskImage. */
+/** Error responses for the postDiskImage operation. */
 alias PostDiskImageErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -137,7 +137,7 @@ interface DiskImagesOperations {
     {
       ...AzureResourceScope;
 
-      /** Request body. */
+      /** The source and metadata for the new disk image. */
       @body body: CreateDiskImageContent;
     },
     PostDiskImageResult,
