@@ -22,6 +22,10 @@ union HciJobType {
   /** Job to repair a server in the cluster. */
   RepairServer: "RepairServer",
 
+  /** Job to configure Arc Gateway for the cluster. */
+  @added(Versions.v2026_10_15_preview)
+  ConfigureArcGateway: "ConfigureArcGateway",
+
   /** Job to create GPU partitions for the cluster. */
   @added(Versions.v2026_10_15_preview)
   GpuCreatePartition: "GpuCreatePartition",
@@ -9216,6 +9220,13 @@ model ClusterJobProperties {
  */
 @added(Versions.v2026_10_01)
 model ClusterJobListResult is Azure.Core.Page<ClusterJob>;
+
+/** Properties for configuring Arc Gateway for a cluster. */
+@added(Versions.v2026_10_15_preview)
+model HciConfigureArcGatewayJobProperties extends ClusterJobProperties {
+  /** ClusterJob Type to support polymorphic resource. */
+  jobType: HciJobType.ConfigureArcGateway;
+}
 
 ////////////////////////////////////////////////////////////////
 ////////////////////// OS Image Models //////////////////////
