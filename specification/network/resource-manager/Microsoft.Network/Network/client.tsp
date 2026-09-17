@@ -4035,21 +4035,51 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 
-@@clientName(
-  Common.ManagedServiceIdentity,
-  "NetworkManagedServiceIdentity",
-  "csharp"
-);
-
-@@alternateType(
-  Common.ManagedServiceIdentity.type,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
-  "csharp"
-);
-
 @@alternateType(
   Microsoft.Network.HubVirtualNetworkConnectionProperties.enableOnlyIPv6Peering,
   Microsoft.Network.EnableOnlyIPv6PeeringState,
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Network.AzureFirewallPropertiesFormat.aiSecurityAddOn,
+  "EnableAiSecurityAddOn",
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Network.OnUnauthenticatedRequest,
+  "UnauthenticatedRequestAction",
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Network.AuthenticationPolicy,
+  "IdentityIntegrationAuthenticationPolicy",
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.AuthenticationPolicy.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.AuthenticationPolicyUpdateParameters.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.BastionHost.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.BastionHostUpdate.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 
