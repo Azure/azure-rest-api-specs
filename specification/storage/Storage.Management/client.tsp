@@ -156,6 +156,21 @@ using Microsoft.Storage;
   "csharp"
 );
 @@clientName(
+  BlobAccessPointConnectionTestResponse,
+  "BlobAccessPointConnectionTestResult",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointProposedConnectionTestRequest,
+  "BlobAccessPointProposedConnectionTestContent",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointConnectionTestRequest,
+  "BlobAccessPointConnectionTestContent",
+  "csharp"
+);
+@@clientName(
   ActiveDirectoryProperties,
   "StorageActiveDirectoryProperties",
   "csharp"
@@ -1486,7 +1501,7 @@ enum ProvisioningStateEnum {
 @@alternateType(
   Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
   Microsoft.Storage.UserAssignedIdentity,
-  "java,python"
+  "java,python,javascript"
 );
 
 @@alternateType(

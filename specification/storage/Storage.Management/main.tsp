@@ -38,6 +38,7 @@ import "./StorageConnector.tsp";
 import "./StorageDataShare.tsp";
 import "./StorageContextCache.tsp";
 import "./StorageContextCacheContainer.tsp";
+import "./BlobAccessPointConfiguration.tsp";
 import "./AdvancedPlatformMetrics.tsp";
 import "./routes.tsp";
 import "./client.tsp";
@@ -80,6 +81,11 @@ enum Versions {
    * The 2026-06-01 API version.
    */
   v2026_06_01: "2026-06-01",
+
+  /**
+   * The 2026-09-01 API version.
+   */
+  v2026_09_01: "2026-09-01",
 }
 
 interface Operations
