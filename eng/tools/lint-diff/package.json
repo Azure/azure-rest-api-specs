@@ -10,9 +10,8 @@
     "build": "tsc --noEmit",
     "check": "pnpm build && pnpm lint && pnpm format:check && pnpm test:ci",
     "clean": "rm -rf dist && rm -rf node_modules",
-    "format": "prettier . --ignore-path ../.prettierignore --write",
-    "format:check": "prettier . --ignore-path ../.prettierignore --check",
-    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
     "lint": "oxlint .",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
@@ -36,8 +35,6 @@
     "@vitest/coverage-v8": "catalog:",
     "execa": "catalog:",
     "memfs": "catalog:",
-    "prettier": "catalog:",
-    "prettier-plugin-organize-imports": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },

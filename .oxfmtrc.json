@@ -1,0 +1,57 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 80,
+  "sortPackageJson": false,
+  "ignorePatterns": [
+    "**/*.tsp",
+    "specification/**/*.json",
+    ".github/**/coverage/**",
+    ".github/**/fixtures/**",
+    ".github/**/specification/**",
+    ".github/**/*.lock.yml",
+    ".github/workflows/agentics-maintenance.yml",
+    ".github/**/*instructions.md",
+    ".github/chatmodes/**",
+    ".github/ISSUE_TEMPLATE/**",
+    ".github/policies/**",
+    ".github/prompts/**",
+    ".github/PULL_REQUEST_TEMPLATE/**",
+    ".github/workflows/post-apiview.yml",
+    ".github/skills/azsdk-common-*/**",
+    ".github/skills/evals/*/results/**",
+    ".github/skills/evals/*/session-state/**",
+    "eng/tools/**/coverage/**",
+    "eng/tools/**/dist/**",
+    "eng/tools/**/fixtures/**",
+    "eng/tools/**/specification/**"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "**/*.json"
+      ],
+      "options": {
+        "printWidth": 20
+      }
+    },
+    {
+      "files": [
+        "**/*.ts"
+      ],
+      "options": {
+        "printWidth": 100,
+        "endOfLine": "lf"
+      }
+    },
+    {
+      "files": [
+        ".github/**",
+        "eng/tools/**"
+      ],
+      "options": {
+        "printWidth": 100,
+        "endOfLine": "lf"
+      }
+    }
+  ]
+}

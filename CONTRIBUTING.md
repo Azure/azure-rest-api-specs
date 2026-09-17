@@ -79,7 +79,7 @@ Every PR in this repo will go through a series of PR checks, including:
 - PoliCheck -
 - CredScan -
 - SpellCheck -
-- PrettierCheck - 
+- Format - checks formatting of repository tooling in `.github` and `eng/tools` using Oxfmt. Run `pnpm format` from the repository root to fix issues. Specification JSON is not formatted.
 - SDK Breaking Change -
 
 When any of these PR checks fails it will post a comment to the PR with links to information on how to resolve the problem.

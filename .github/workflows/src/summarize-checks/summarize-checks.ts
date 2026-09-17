@@ -93,12 +93,7 @@ export type CommitStatus = import("../github.ts").CommitStatuses[0];
 export type CheckRun = import("../github.ts").CheckRuns[0];
 
 // Placing these configuration items here until we decide another way to pull them in.
-const FYI_CHECK_NAMES = [
-  "Swagger LintDiff",
-  "SDK Validation Status",
-  "Swagger BreakingChange",
-  "Swagger PrettierCheck",
-];
+const FYI_CHECK_NAMES = ["Swagger LintDiff", "SDK Validation Status", "Swagger BreakingChange"];
 const AUTOMATED_CHECK_NAME = "Automated merging requirements met";
 const IMPACT_CHECK_NAME = "Summarize PR Impact";
 const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge";
@@ -137,12 +132,6 @@ const CHECK_METADATA: CheckMetadata[] = [
   {
     precedence: 1,
     name: "Swagger SpellCheck",
-    suppressionLabels: [],
-    troubleshootingGuide: defaultTsg,
-  },
-  {
-    precedence: 1,
-    name: "Swagger PrettierCheck",
     suppressionLabels: [],
     troubleshootingGuide: defaultTsg,
   },
