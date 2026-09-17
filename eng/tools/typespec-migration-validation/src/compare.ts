@@ -13,7 +13,9 @@ import { getCommonTypeDefinition } from "./commonType.ts";
 import { getOriginalParameter } from "./parameter.ts";
 
 interface Diff {
+  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   before: any;
+  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   after: any;
   level: "warning" | "error";
 }
@@ -100,6 +102,7 @@ function getPathDiffMessage(diff: PathDiff): string {
     case "externalDocs":
       return `The external docs for operation "${diff.operationId}" changed:`;
     default:
+      // oxlint-disable-next-line typescript/restrict-template-expressions -- Existing lint debt
       return `The ${diff.type} for operation "${diff.operationId}" changed:`;
   }
 }
@@ -259,11 +262,15 @@ function compareDefinitionProperty(
   const diffs: DefinitionDiff[] = [];
 
   // Compare x-ms-client-flatten
+  // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
   const oldFlatten = (oldProperty as any)["x-ms-client-flatten"] ?? false;
+  // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
   const newFlatten = (newProperty as any)["x-ms-client-flatten"] ?? false;
   if (oldFlatten !== newFlatten) {
     diffs.push({
+      // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
       before: oldFlatten,
+      // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
       after: newFlatten,
       name: modelName,
       propertyName,
@@ -428,7 +435,9 @@ function compareBodyParameter(
   }
 
   // Compare schema references
+  // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
   const oldSchema = (oldBodyParam as any).schema;
+  // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
   const newSchema = (newBodyParam as any).schema;
 
   if (oldSchema && newSchema) {
@@ -635,7 +644,9 @@ function compareResponse(
   newResponse: Refable<OpenAPI2Response> | undefined,
   operationId: string,
 ): PathDiff[] {
+  // oxlint-disable-next-line eslint/prefer-const -- Existing lint debt
   let oldSchema = getResponseSchema(oldResponse);
+  // oxlint-disable-next-line eslint/prefer-const -- Existing lint debt
   let newSchema = getResponseSchema(newResponse);
   if (oldSchema !== newSchema) {
     return [
@@ -730,9 +741,12 @@ function getResponseSchema(response: Refable<OpenAPI2Response> | undefined): str
   if (
     response &&
     (response as OpenAPI2Response).schema &&
+    // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
     ((response as OpenAPI2Response).schema as any).$ref
   ) {
+    // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
     const refPath = ((response as OpenAPI2Response).schema as any).$ref;
+    // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access, typescript/no-unsafe-return -- Existing lint debt
     return refPath.split("/").pop();
   }
 

@@ -113,6 +113,7 @@ function parseCliArguments(): ParsedCliArguments {
       prTargetBranch: values["pr-target-branch"] as string,
     };
   } catch (error) {
+    // oxlint-disable-next-line typescript/restrict-template-expressions -- Existing lint debt
     logError(`Error parsing arguments: ${error}`);
     showHelp();
     exit(1);
@@ -171,6 +172,7 @@ export async function main() {
   // Create context from parsed arguments
   const context = createContextFromParsedArgs(parsedArgs, workingFolder, logFileFolder);
   await buildPrInfo(context);
+  // oxlint-disable-next-line eslint/no-useless-assignment -- Existing lint debt
   let statusCode = 0;
   statusCode = await validateBreakingChange(context);
 

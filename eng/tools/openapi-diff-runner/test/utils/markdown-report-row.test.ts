@@ -47,6 +47,7 @@ describe("markdown-report-row", () => {
     message: string,
     paths: Array<{ tag: string; path: string; jsonPath: string }> = [],
     id = IDS.test,
+    // oxlint-disable typescript/no-unnecessary-type-assertion -- Existing lint debt
   ): ResultMessageRecord =>
     ({
       type: "Result",
@@ -56,7 +57,9 @@ describe("markdown-report-row", () => {
       time: DATE,
       paths,
     }) as ResultMessageRecord;
+  // oxlint-enable typescript/no-unnecessary-type-assertion
 
+  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   const createRawMessage = (message: string, extra: Record<string, any> = {}): BrChMsgRecord => ({
     type: "Raw",
     level: "Error",
@@ -81,7 +84,9 @@ describe("markdown-report-row", () => {
     if (expectedLength > 0) {
       expect(result[0]).toMatchObject({
         index: 1,
+        // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
         msg: expect.any(Object),
+        // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
         description: expect.any(String),
       });
     }

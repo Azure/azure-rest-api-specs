@@ -13,8 +13,7 @@ Below are code convention we strive to follow in `eng` directory:
 - We align `package.json` dependencies versions across all `package.json` files.
 - We align `package.json` dependencies numbers with [microsoft/typespec package.json].
   In few cases we allow more frequent update cadence.
-- We avoid doing package overrides. For example, we use `v8` of `eslint` instead of `v9` to avoid an override.
-  [See this comment for details][eslint override].
+- We avoid doing package overrides where possible.
 - We order `package.json` keys as follows: `name private type main bin scripts engines dependencies devDependencies`.
 
 ### pnpm and the lock file
@@ -42,17 +41,44 @@ Below are code convention we strive to follow in `eng` directory:
 - CI installs the pinned pnpm version via `.github/actions/setup-node-install-deps`
   (which reads the `packageManager` field) and runs `pnpm ci`.
 
-## Linting and prettier
+## Linting and formatting
 
-- We make eslint-based linting rules and prettier mandatory in CI for all projects.
-- We use strict rulesets as baseline.
-- We discuss any desired rule divergences from the strict ruleset
-  and apply rule modifications to the configs with explanation for our decision.
-- We align `prettier` rules with [microsoft/typespec .prettierrc.json].
+- Run `pnpm lint` from the repository root to lint all code in `.github` and `eng/tools`
+  in one oxlint invocation. Use `pnpm lint:fix` to apply safe fixes.
+- The root `.oxlintrc.json` is the single lint configuration. It preserves the previous
+  ESLint recommended and TypeScript recommended type-checked rules, with type-aware
+  linting provided by `oxlint-tsgolint`. Duplicate arguments and octal literals are
+  rejected by strict-mode parsing instead of separate lint rules.
+- `.github/workflows/lint.yaml` runs linting once on Linux for all packages, outside
+  the package/OS test matrices. Package workflows still run type checks and tests;
+  they must not invoke code linting again. Package-local `pnpm lint` scripts
+  remain available for development.
+- Existing violations in the previously unlinted `openapi-diff-runner`, `sdk-suppressions`,
+  `summarize-impact`, and `typespec-migration-validation` packages are baselined with
+  rule-specific `oxlint-disable-next-line` comments, or scoped disable/enable pairs for
+  multiline expressions, marked `Existing lint debt`. These suppress only the existing
+  locations, not entire packages. Remove each suppression when fixing the underlying
+  violation; unused suppressions fail linting. Do not extend the baseline to new code.
+  Pre-existing suppressions in other
+  packages are retained.
+- Discuss any desired rule divergences and explain them in the configuration.
+- Run `pnpm format` or `pnpm format:check` from the repository root to format or
+  check `.github` and `eng/tools` in one Oxfmt invocation. Package-local commands
+  remain available and inherit the root `.oxfmtrc.json`.
+- `.github/workflows/format.yaml` checks formatting once on Linux, outside the
+  package/OS test matrices. Do not add formatting steps to individual package CI jobs.
+- Tooling uses a line width of 100 with the existing fixture, generated-file, and
+  unmanaged-content exclusions. Import organization and package.json sorting are
+  intentionally disabled; lint/type checks still report unused imports.
+- Swagger/OpenAPI definitions and examples under `specification/**/*.json` are
+  excluded from formatting, including editor and explicit CLI requests.
+  TypeSpec validation retains `tsp format` for `.tsp` files and uses Oxfmt for
+  `tspconfig.yaml` with a line width of 80.
+- Install the recommended Oxc VS Code extension for tooling formatting, and retain
+  the TypeSpec extension for `.tsp` files. Prettier can still appear as an upstream
+  dependency or bundled implementation detail; it is not a repository formatter.
 
 [pnpm]: https://pnpm.io
 [Design guidelines for spec repos validation tooling]: https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/1153/Design-guidelines-for-spec-repos-validation-tooling
-[eslint override]: https://github.com/Azure/azure-rest-api-specs/pull/29820#pullrequestreview-2177045580
-[microsoft/typespec .prettierrc.json]: https://github.com/microsoft/typespec/blob/main/.prettierrc.json
 [microsoft/typespec package.json]: https://github.com/microsoft/typespec/blob/main/package.json
 [npm/cli #7384]: https://github.com/npm/cli/issues/7384

@@ -193,6 +193,7 @@ export async function checkCrossVersionBreakingChange(
       swaggerPath,
     );
     logMessage(`checkCrossVersionBreakingChange: absoluteSwaggerPath: ${absoluteSwaggerPath}`);
+    // oxlint-disable-next-line typescript/await-thenable -- Existing lint debt
     const specModel = await getSpecModel(
       detectionContext.context.prInfo!.tempRepoFolder,
       swaggerPath,
@@ -485,6 +486,7 @@ export function getSpecModel(specRepoFolder: string, swaggerPath: string): SpecM
 export async function checkAPIsBeingMovedToANewSpec(
   context: Context,
   swaggerPath: string,
+  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   availableSwaggers: any[],
 ) {
   const absoluteSwaggerPath = path.resolve(context.localSpecRepoPath, swaggerPath);
@@ -504,6 +506,7 @@ export async function checkAPIsBeingMovedToANewSpec(
   const targetOperations = await targetSwagger.getOperations();
 
   // use absoluteSwaggerPath as it will need to it will fall back to use the version info in the swagger content
+  // oxlint-disable-next-line typescript/no-unsafe-argument -- Existing lint debt
   const movedApis = await getExistedVersionOperations(absoluteSwaggerPath, availableSwaggers, [
     ...targetOperations.values(),
   ]);
@@ -515,6 +518,7 @@ export async function checkAPIsBeingMovedToANewSpec(
       `The swagger ${swaggerPath} has no previous version being found, but its APIs were found in other swaggers. It means that you are moving some APIs to this new swagger file.`,
     );
     for (const [swaggerFile, operations] of movedApis) {
+      // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access, typescript/no-unsafe-return -- Existing lint debt
       const operationIds = operations.map((op: any) => op.id).join(",");
       appendFileSync(
         logFileName,

@@ -24,6 +24,7 @@ export function processIgnoreList(
       const realPath = path.replace(/__deleted$/, "");
       deleteElementByJsonPath(sortedOldFile, realPath);
     } else {
+      // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
       const oldValue = getElementByJsonPath(sortedOldFile, path);
       if (oldValue !== undefined) {
         setElementByJsonPath(sortedNewFile, path, oldValue);
@@ -116,9 +117,11 @@ function parseJsonPath(path: string): string[] {
  * @param obj The object to modify
  * @param path The path to the element to delete (e.g., "paths./users.get")
  */
+// oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
 function deleteElementByJsonPath(obj: any, path: string): void {
   const segments = parseJsonPath(path);
 
+  // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
   let current = obj;
 
   // Navigate to the parent of the element to delete
@@ -132,19 +135,25 @@ function deleteElementByJsonPath(obj: any, path: string): void {
       const arrayIndex = parseInt(arrayMatch[2], 10);
 
       if (
+        // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
         !current[arrayName] ||
+        // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
         !Array.isArray(current[arrayName]) ||
+        // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
         arrayIndex >= current[arrayName].length
       ) {
         // Path doesn't exist, nothing to delete
         return;
       }
+      // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
       current = current[arrayName][arrayIndex];
     } else {
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       if (!current[segment] || typeof current[segment] !== "object") {
         // Path doesn't exist, nothing to delete
         return;
       }
+      // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
       current = current[segment];
     }
   }
@@ -159,13 +168,18 @@ function deleteElementByJsonPath(obj: any, path: string): void {
     const arrayIndex = parseInt(arrayMatch[2], 10);
 
     if (
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       current[arrayName] &&
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       Array.isArray(current[arrayName]) &&
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       arrayIndex < current[arrayName].length
     ) {
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       current[arrayName].splice(arrayIndex, 1);
     }
   } else {
+    // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
     delete current[lastSegment];
   }
 }
@@ -176,8 +190,10 @@ function deleteElementByJsonPath(obj: any, path: string): void {
  * @param path The path to the element (e.g., "paths./users.get")
  * @returns The value at the specified path or undefined if not found
  */
+// oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
 function getElementByJsonPath(obj: any, path: string): any {
   const parts = parseJsonPath(path);
+  // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
   let current = obj;
 
   for (const part of parts) {
@@ -188,17 +204,23 @@ function getElementByJsonPath(obj: any, path: string): any {
       const arrayIndex = parseInt(arrayMatch[2], 10);
 
       if (
+        // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
         !current[arrayName] ||
+        // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
         !Array.isArray(current[arrayName]) ||
+        // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
         arrayIndex >= current[arrayName].length
       ) {
         return undefined;
       }
+      // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
       current = current[arrayName][arrayIndex];
     } else {
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       if (current[part] === undefined) {
         return undefined;
       }
+      // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
       current = current[part];
     }
   }
@@ -212,8 +234,10 @@ function getElementByJsonPath(obj: any, path: string): any {
  * @param path The path where to set the element (e.g., "paths./users.get")
  * @param value The value to set
  */
+// oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
 function setElementByJsonPath(obj: any, path: string, value: any): void {
   const parts = parseJsonPath(path);
+  // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
   let current = obj;
 
   // Navigate to the parent of where we want to set the value
@@ -227,21 +251,29 @@ function setElementByJsonPath(obj: any, path: string, value: any): void {
       const arrayIndex = parseInt(arrayMatch[2], 10);
 
       // Ensure the array exists
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       if (!current[arrayName]) {
+        // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
         current[arrayName] = [];
       }
 
       // Ensure the array is long enough
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       while (current[arrayName].length <= arrayIndex) {
+        // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
         current[arrayName].push({});
       }
 
+      // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
       current = current[arrayName][arrayIndex];
     } else {
       // Ensure the object exists
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       if (!current[part]) {
+        // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
         current[part] = {};
       }
+      // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
       current = current[part];
     }
   }
@@ -256,17 +288,23 @@ function setElementByJsonPath(obj: any, path: string, value: any): void {
     const arrayIndex = parseInt(arrayMatch[2], 10);
 
     // Ensure the array exists
+    // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
     if (!current[arrayName]) {
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       current[arrayName] = [];
     }
 
     // Ensure the array is long enough
+    // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
     while (current[arrayName].length <= arrayIndex) {
+      // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
       current[arrayName].push(undefined);
     }
 
+    // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
     current[arrayName][arrayIndex] = value;
   } else {
+    // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
     current[lastPart] = value;
   }
 }

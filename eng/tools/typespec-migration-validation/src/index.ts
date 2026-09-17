@@ -43,6 +43,7 @@ function parseArguments() {
           });
       },
       (argv) => {
+        // oxlint-disable-next-line typescript/no-unnecessary-type-assertion -- Existing lint debt
         handleAddIgnore(argv.path as string, argv.outputFolder as string);
       },
     )
@@ -113,9 +114,11 @@ function parseArguments() {
 
       const positional = argv._;
       if (!argv.oldPath && positional.length > 0) {
+        // oxlint-disable-next-line typescript/no-unnecessary-type-assertion -- Existing lint debt
         argv.oldPath = positional[0]!.toString();
       }
       if (!argv.newPath && positional.length > 1) {
+        // oxlint-disable-next-line typescript/no-unnecessary-type-assertion -- Existing lint debt
         argv.newPath = positional[1]!.toString();
       }
 
@@ -155,6 +158,7 @@ function handleAddIgnore(path: string, outputFolder: string) {
 
   // Read existing ignore file if present
   if (fs.existsSync(ignoreFilePath)) {
+    // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
     ignoreList = JSON.parse(fs.readFileSync(ignoreFilePath, "utf-8"));
   }
 
@@ -175,12 +179,16 @@ function handleAddIgnore(path: string, outputFolder: string) {
  * @param document OpenAPI document to sort definitions for
  * @returns Document with case-insensitively sorted definitions
  */
+// oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
 function sortDefinitionsCaseInsensitive(document: any): any {
+  // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
   if (!document.definitions) {
     return document;
   }
 
+  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   const sortedDefinitions: any = {};
+  // oxlint-disable-next-line typescript/no-unsafe-argument, typescript/no-unsafe-member-access -- Existing lint debt
   const definitionKeys = Object.keys(document.definitions);
 
   // Sort keys case-insensitively
@@ -188,11 +196,13 @@ function sortDefinitionsCaseInsensitive(document: any): any {
 
   // Rebuild definitions object with sorted keys
   for (const key of sortedKeys) {
+    // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
     sortedDefinitions[key] = document.definitions[key];
   }
 
   return {
     ...document,
+    // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
     definitions: sortedDefinitions,
   };
 }
@@ -224,14 +234,18 @@ export async function main() {
   const processedOldFile = processDocument(mergedOldfile);
   let sortedOldFile = sortOpenAPIDocument(processedOldFile);
   if (configuration.ignoreDefinitionCase) {
+    // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
     sortedOldFile = sortDefinitionsCaseInsensitive(sortedOldFile);
   }
 
   logHeader(`Processing new swagger from: ${newPath}...`);
+  // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
   const newFile = JSON.parse(readFileContent(newPath!).toString());
+  // oxlint-disable-next-line typescript/no-unsafe-argument -- Existing lint debt
   const processedNewFile = processDocument(newFile);
   let sortedNewFile = sortOpenAPIDocument(processedNewFile);
   if (configuration.ignoreDefinitionCase) {
+    // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
     sortedNewFile = sortDefinitionsCaseInsensitive(sortedNewFile);
   }
 
@@ -240,8 +254,10 @@ export async function main() {
     const ignoreFilePath = `${outputFolder}/ignore.json`;
     if (fs.existsSync(ignoreFilePath)) {
       logHeader(`Processing ignore file...`);
+      // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
       const ignoreFileContent = JSON.parse(fs.readFileSync(ignoreFilePath, "utf-8"));
       for (const path of ignoreFileContent) {
+        // oxlint-disable-next-line typescript/no-unsafe-argument -- Existing lint debt
         addIgnorePath(path);
       }
 
@@ -260,6 +276,7 @@ export async function main() {
   logHeader("Comparing finished.");
 
   let outputMarkdown = "";
+  // oxlint-disable-next-line typescript/no-unsafe-argument -- Existing lint debt
   const compareResult = compareDocuments(mergedOldfile, newFile);
   if (compareResult.length === 0) {
     logHeader("No differences found.");
@@ -274,7 +291,9 @@ export async function main() {
 
   if (outputFolder) {
     let report: string = "";
+    // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
     const diffForFile = diff(sortedOldFile, sortedNewFile);
+    // oxlint-disable-next-line typescript/no-unsafe-argument -- Existing lint debt
     if (diffForFile === undefined || Object.keys(diffForFile).length === 0) {
       return;
     }

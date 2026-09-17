@@ -25,6 +25,7 @@ export async function main() {
     const headCommitHash: string = args[1];
     const lables: string = args[2];
     const outputFile = process.env.OUTPUT_FILE as string;
+    // oxlint-disable-next-line typescript/no-wrapper-object-types -- Existing lint debt
     const changedLabels: { labelsToAdd: String[]; labelsToRemove: String[] } =
       await updateSdkSuppressionsLabels(baseCommitHash, headCommitHash, lables, outputFile);
     console.log(JSON.stringify(changedLabels));

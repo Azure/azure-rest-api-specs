@@ -115,13 +115,17 @@ export async function getVersionFromInputFile(
     }
   }
 
+  // oxlint-disable-next-line eslint/no-useless-assignment -- Existing lint debt
   let version = "";
   // If no regex match found, try to read version from file content
   try {
     const fileContent = await readFile(filePath, "utf8");
+    // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
     const parsedContent = JSON.parse(fileContent);
+    // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
     version = parsedContent?.info?.version;
   } catch (error) {
+    // oxlint-disable-next-line eslint/preserve-caught-error, typescript/restrict-template-expressions -- Existing lint debt
     throw new Error(`Failed to read version from file:${filePath}, cause: ${error}`);
   }
   if (!version) {
@@ -163,6 +167,7 @@ export function processOadRuntimeErrorMessage(
   message: string,
   stackTraceMaxLength: number,
 ): string {
+  // oxlint-disable-next-line eslint/no-useless-assignment -- Existing lint debt
   let outputMsg: string = "";
 
   // Example "message" string, truncated with cutoffMsg():
@@ -173,6 +178,7 @@ export function processOadRuntimeErrorMessage(
     message.startsWith("Command failed: node") && message.includes("autorest/dist/app.js");
 
   if (oadAutorestInvocationRuntimeError) {
+    // oxlint-disable-next-line eslint/prefer-const -- Existing lint debt
     let lines: string[] = message.split(/[\r\n]+/);
 
     const introLine: string =

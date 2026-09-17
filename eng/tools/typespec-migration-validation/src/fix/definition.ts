@@ -59,6 +59,7 @@ export function handleDeleted(diff: {
         };
       }
     } else if (originalKey === "x-ms-client-flatten") {
+      // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
       if ((value as any) === true && property) {
         const [definitionName, propertyName] = property;
         const suggestion = `@@flattenProperty(${definitionName}.${propertyName});`;
@@ -80,6 +81,7 @@ export function handleDeleted(diff: {
         };
       }
     } else if (originalKey === "x-nullable") {
+      // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
       if ((value as any) === true && property) {
         const [definitionName, propertyName] = property;
         return {
@@ -88,6 +90,7 @@ export function handleDeleted(diff: {
         };
       }
     } else if (originalKey === "readOnly") {
+      // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
       if ((value as any) === true && property) {
         const [definitionName, propertyName] = property;
         return {
@@ -96,6 +99,7 @@ export function handleDeleted(diff: {
         };
       }
     } else if (originalKey === "x-ms-secret") {
+      // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
       if ((value as any) === true && property) {
         const [definitionName, propertyName] = property;
         return {

@@ -9,9 +9,11 @@ import {
 } from "../../src/utils/spec.ts";
 
 // Type definitions for tests (extending the base interfaces if needed)
+// oxlint-disable typescript/no-empty-object-type -- Existing lint debt
 interface MockSwagger extends Swagger {
   // Can add test-specific properties if needed
 }
+// oxlint-enable typescript/no-empty-object-type
 
 describe("Helper functions for version analysis", () => {
   // Helper function to create mock operations
@@ -25,10 +27,12 @@ describe("Helper functions for version analysis", () => {
   const createMockSwagger = (
     path: string,
     versionKind?: ApiVersionLifecycleStage,
+    // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
     operations?: Map<string, any>,
   ): MockSwagger => ({
     path,
     ...(versionKind && { versionKind }),
+    // oxlint-disable-next-line typescript/require-await -- Existing lint debt
     ...(operations && { getOperations: async () => operations }),
   });
 
@@ -44,10 +48,13 @@ describe("Helper functions for version analysis", () => {
   };
 
   // Helper function to expect standard result structure
+  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   const expectResultStructure = (result: any, stable?: string, preview?: string) => {
     expect(result).toHaveProperty("stable");
     expect(result).toHaveProperty("preview");
+    // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
     if (stable !== undefined) expect(result.stable).toBe(stable);
+    // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
     if (preview !== undefined) expect(result.preview).toBe(preview);
   };
 

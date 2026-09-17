@@ -35,6 +35,7 @@ export async function getSdkSuppressionsSdkNames(
     `Will compare base commit: ${baseCommitHash} and head commit: ${headCommitHash} to get different SDK.`,
   );
   console.log(`The pr origin changed files: ${prChangeFiles.join(", ")}`);
+  // oxlint-disable-next-line eslint/prefer-const -- Existing lint debt
   let suppressionFileList = filterSuppressionList(prChangeFiles);
   console.log(`Will compare sdk-suppression.yaml files: ${suppressionFileList.join(", ")}`);
   let sdkNameList: SdkName[] = [];
@@ -71,6 +72,7 @@ export async function getSdkSuppressionsSdkNames(
           `${JSON.stringify(headSuppressionContent)} to get different SDK.`,
       );
 
+      // oxlint-disable-next-line eslint/prefer-const -- Existing lint debt
       let _sdkNameList = getSdkNamesWithChangedSuppressions(
         headSuppressionContent as SdkSuppressionsYml,
         baseSuppressionContent as SdkSuppressionsYml,
@@ -94,6 +96,7 @@ export async function getSdkSuppressionsFileContent(
     console.log(`Found content in ${ref}#${path}`);
     return parseYamlContent(suppressionFileContent, path).result;
   } catch (error) {
+    // oxlint-disable-next-line typescript/restrict-template-expressions -- Existing lint debt
     console.log(`Not found content in ${ref}#${path}, Error: ${error}`);
     return null;
   }
@@ -141,6 +144,7 @@ export function getSdkNamesWithChangedSuppressions(
   const differentSdkNamesWithChangedSuppressions = _.xorWith(
     headSdksWithSuppressions,
     baseSdksWithSuppressions,
+    // oxlint-disable-next-line typescript/unbound-method -- Existing lint debt
     _.isEqual,
   );
   if (differentSdkNamesWithChangedSuppressions.length > 0) {
@@ -167,6 +171,7 @@ export function getSdkNamesWithChangedSuppressions(
     const differentPackageNamesWithChangedSuppressions = _.xorWith(
       headSdkPackageSuppressionsEntry.map((entry) => entry.package),
       baseSdkPackageSuppressionsEntry.map((entry) => entry.package),
+      // oxlint-disable-next-line typescript/unbound-method -- Existing lint debt
       _.isEqual,
     );
     if (differentPackageNamesWithChangedSuppressions.length > 0) {
@@ -208,6 +213,7 @@ export async function updateSdkSuppressionsLabels(
   headCommitHash: string,
   prLabels: string,
   outputFile?: string,
+  // oxlint-disable-next-line typescript/no-wrapper-object-types -- Existing lint debt
 ): Promise<{ labelsToAdd: String[]; labelsToRemove: String[] }> {
   try {
     const result = await simpleGit().raw("status");
@@ -254,10 +260,13 @@ export async function updateSdkSuppressionsLabels(
 export function processLabels(
   presentLabels: string[],
   sdkNames: string[],
+  // oxlint-disable-next-line typescript/no-wrapper-object-types -- Existing lint debt
 ): { labelsToAdd: String[]; labelsToRemove: String[] } {
   // The sdkNames indicates whether any suppression files have been modified. If it is empty
   // then check if the suppression label was previously applied and remove it if so. Otherwise, no action is needed.
+  // oxlint-disable-next-line eslint/prefer-const -- Existing lint debt
   let addSdkSuppressionsLabels: string[] = [];
+  // oxlint-disable-next-line eslint/prefer-const -- Existing lint debt
   let removeSdkSuppressionsLabels: string[] = [];
   sdkNames.forEach((sdkName) => {
     const sdk = sdkLabels[sdkName as SdkName];
@@ -313,16 +322,20 @@ export function processLabels(
  * filter data-plane for swagger suppression and tsp suppression for each service
  */
 export function filterSuppressionList(filesChangedPaths: string[]): string[] {
+  // oxlint-disable-next-line eslint/prefer-const -- Existing lint debt
   let initialSuppressionFiles = filesChangedPaths.filter((suppressionFile) =>
     suppressionFile.split("/").includes(sdkSuppressionsFileName),
   );
+  // oxlint-disable-next-line eslint/prefer-const -- Existing lint debt
   let tspSuppressionFileList = initialSuppressionFiles.filter((suppressionFile) =>
     suppressionFile.split("/").some((suppressionFile) => suppressionFile.endsWith(".Management")),
   );
+  // oxlint-disable-next-line eslint/prefer-const -- Existing lint debt
   let swaggerSuppressionFileList = initialSuppressionFiles.filter((suppressionFile) =>
     suppressionFile.split("/").includes("resource-manager"),
   );
 
+  // oxlint-disable-next-line eslint/prefer-const -- Existing lint debt
   let filterSuppressionFileList = [...tspSuppressionFileList, ...swaggerSuppressionFileList];
 
   const groupedSuppressionFileList = filterSuppressionFileList.reduce(
@@ -340,7 +353,9 @@ export function filterSuppressionList(filesChangedPaths: string[]): string[] {
 
   let suppressionFileList: string[] = [];
   for (const serviceName in groupedSuppressionFileList) {
+    // oxlint-disable-next-line eslint/no-prototype-builtins -- Existing lint debt
     if (groupedSuppressionFileList.hasOwnProperty(serviceName)) {
+      // oxlint-disable-next-line eslint/prefer-const -- Existing lint debt
       let serviceSuppressionList = groupedSuppressionFileList[serviceName];
       if (
         serviceSuppressionList.some((suppressionFile) =>

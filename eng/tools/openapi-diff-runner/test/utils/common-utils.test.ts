@@ -95,6 +95,7 @@ describe("common-utils", () => {
     swaggerDirs: ["specification"],
     baseBranch: "main",
     headCommit: "abc123",
+    // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unnecessary-type-assertion, typescript/no-unsafe-assignment -- Existing lint debt
     runType: "SameVersion" as any,
     checkName: "test",
     targetRepo: "owner/repo",
@@ -579,13 +580,20 @@ describe("common-utils", () => {
         "TestError",
         "This is a test error message",
       );
+      // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
       const parsed = JSON.parse(result);
 
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsed.type).toBe("Raw");
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsed.level).toBe("Error");
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsed.message).toBe("TestError");
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsed.extra.details).toBe("This is a test error message");
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsed.time).toBeDefined();
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsed.extra.location).toBeUndefined();
     });
 
@@ -596,11 +604,16 @@ describe("common-utils", () => {
         "This is a warning",
         "Warning",
       );
+      // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
       const parsed = JSON.parse(result);
 
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsed.type).toBe("Raw");
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsed.level).toBe("Warning");
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsed.message).toBe("TestWarning");
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsed.extra.details).toBe("This is a warning");
     });
 
@@ -612,12 +625,18 @@ describe("common-utils", () => {
         "Error",
         "specification/test/test.json",
       );
+      // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
       const parsed = JSON.parse(result);
 
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsed.type).toBe("Raw");
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsed.level).toBe("Error");
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsed.message).toBe("TestError");
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsed.extra.details).toBe("Error with location");
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsed.extra.location).toBe(
         "https://github.com/owner/repo/blob/main/specification/test/test.json",
       );
@@ -625,16 +644,20 @@ describe("common-utils", () => {
 
     it("should handle empty error message", () => {
       const result = convertRawErrorToUnifiedMsg(mockContext, "EmptyError", "");
+      // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
       const parsed = JSON.parse(result);
 
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsed.extra.details).toBe("");
     });
 
     it("should handle special characters in error message", () => {
       const errorMsg = 'Error with "quotes" and \n newlines \t tabs';
       const result = convertRawErrorToUnifiedMsg(mockContext, "SpecialCharsError", errorMsg);
+      // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
       const parsed = JSON.parse(result);
 
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsed.extra.details).toBe(errorMsg);
     });
   });

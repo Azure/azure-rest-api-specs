@@ -39,8 +39,11 @@ export type ReviewApprovalPrefixLabel = "Versioning-Approved-*" | "BreakingChang
 
 export type SpecsBreakingChangesLabel =
   | ReviewRequiredLabel
+  // oxlint-disable-next-line typescript/no-redundant-type-constituents -- Existing lint debt
   | ReviewApprovalPrefixLabel
+  // oxlint-disable-next-line typescript/no-duplicate-type-constituents -- Existing lint debt
   | ValidBreakingChangeApproval
+  // oxlint-disable-next-line typescript/no-duplicate-type-constituents -- Existing lint debt
   | ValidVersioningApproval;
 
 /** Corresponds to specs in "*\preview\*" or "*\stable\*" directories in the specs repos.

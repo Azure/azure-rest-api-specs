@@ -1,7 +1,7 @@
 ---
 applyTo:
   - ".github/*.config.{js,ts}"
-  - ".github/.prettier*"
+  - ".oxfmtrc.json"
   - ".github/cspell.yaml"
   - ".github/package*.json"
   - ".github/tsconfig.json"
@@ -16,11 +16,10 @@ applyTo:
 ## TypeScript execution
 
 Both `.github` and `.github/shared` use TypeScript for source, tests, CLI, benchmarks, and Vitest configuration.
-ESLint configurations remain JavaScript for now, including the shared base configuration.
 Use `.ts` files, native type annotations, `import type`, and `.ts` relative imports.
 Node.js 24 runs the sources with native type stripping; `tsc` uses `noEmit`, `erasableSyntaxOnly`,
 and `verbatimModuleSyntax`. Do not introduce enums, parameter properties, or namespaces.
-Keep comments for documentation, not types, except in the JavaScript ESLint configurations.
+Keep comments for documentation, not types.
 See [the shared package guide](../shared/readme.md) for its development conventions.
 
 This file provides instructions for GitHub Copilot when working with GitHub Actions code in this repository. The GitHub Actions infrastructure is completely separate from the TypeSpec and OpenAPI specification work that makes up the majority of this repository.
@@ -33,7 +32,7 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 - **Workflows**: Workflow files in `.github/workflows/`
 - **Shared utilities**: Common TypeScript modules in `.github/shared/src/`
 - **Tests**: Test files in `.github/workflows/test/` and `.github/shared/test/`
-- **Configuration**: ESLint, Prettier, TypeScript, and Vitest configs
+- **Configuration**: Root oxlint, Oxfmt, TypeScript, and Vitest configs
 
 ## Technology Stack
 
@@ -41,8 +40,8 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 - **Runtime**: Node.js 24.x (on GitHub Actions runners)
 - **Type Checking**: `tsc --noEmit`; Node.js executes the `.ts` sources directly
 - **Testing**: Vitest for unit and integration tests
-- **Linting**: ESLint with TypeScript-aware rules
-- **Formatting**: Prettier with organize-imports plugin
+- **Linting**: oxlint with type-aware rules from `oxlint-tsgolint`, configured in the root `.oxlintrc.json`
+- **Formatting**: Oxfmt using the root `.oxfmtrc.json`; import organization and package.json sorting are disabled
 - **Package Manager**: pnpm workspaces (`pnpm ci` for clean installs)
 
 ## Project Structure
@@ -61,26 +60,23 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 ├── shared/                    # Shared utilities used across workflows
 │   ├── src/                   # Core utility modules
 │   ├── test/                  # Tests for shared utilities
-│   ├── eslint.base.config.js  # Base ESLint config
 │   └── package.json
 ├── matchers/                  # Problem matchers for CI output
 ├── package.json               # Root dependencies (superset of shared/)
-├── eslint.config.js           # ESLint configuration
 ├── tsconfig.json              # TypeScript config (type-checking only)
-├── vitest.config.ts           # Vitest test configuration
-└── .prettierrc.yaml           # Prettier formatting rules
+└── vitest.config.ts           # Vitest test configuration
 ```
 
 ## Coding Standards
 
 ### TypeScript Style
 
-- **File extension**: Use `.ts` for source, tests, CLI entry points, and Vitest configuration; keep ESLint configs in `.js`
+- **File extension**: Use `.ts` for source, tests, CLI entry points, and Vitest configuration
 - **Module system**: ES modules (`import`/`export`), not CommonJS
-- **Type annotations**: Use native TypeScript declarations, except for JSDoc typing in JavaScript ESLint configs. Keep other comments for documentation, not types
-- **Indentation**: 2 spaces (enforced by Prettier)
-- **Quote style**: Double quotes for strings (enforced by Prettier)
-- **Line length**: Max 100 characters (enforced by Prettier)
+- **Type annotations**: Use native TypeScript declarations. Keep comments for documentation, not types
+- **Indentation**: 2 spaces (enforced by Oxfmt)
+- **Quote style**: Double quotes for strings (enforced by Oxfmt)
+- **Line length**: Max 100 characters (enforced by Oxfmt)
 - **Naming conventions**:
   - Functions and variables: `camelCase`
   - Constants: `UPPER_SNAKE_CASE` for true constants
@@ -120,7 +116,7 @@ export async function getChangedFiles(options: ChangedFilesOptions = {}): Promis
 ### YAML Style for Actions/Workflows
 
 - **Indentation**: 2 spaces
-- **String values**: Use double quotes (e.g., `cache: "pnpm"`) per Prettier conventions
+- **String values**: Use double quotes (e.g., `cache: "pnpm"`) per Oxfmt conventions
 - **Descriptions**: All inputs must have clear descriptions
 - **naming**: Use kebab-case for YAML keys (e.g., `working-directory`, not `workingDirectory`)
 
@@ -144,8 +140,9 @@ From `package.json` comments:
 - `js-yaml`: YAML parsing
 - `debug`: Debug logging
 - `vitest`: Testing framework
-- `eslint`, `typescript-eslint`: Linting and type checking
-- `prettier`: Code formatting
+- `oxlint`, `oxlint-tsgolint`: Root development dependencies for linting
+- `typescript`: Type checking
+- `oxfmt`: Code formatting
 
 ## Build, Test, and Validation
 
@@ -155,12 +152,11 @@ In `.github/` directory:
 
 ```bash
 pnpm run check           # Run all checks (lint + format:check + test:ci)
-pnpm run lint            # Run both ESLint and TypeScript checks
-pnpm run lint:eslint     # Run ESLint only
+pnpm run lint            # Run both oxlint and TypeScript checks
+pnpm run lint:oxlint     # Run oxlint only
 pnpm run lint:tsc        # Run TypeScript type checking only
-pnpm run format          # Format code with Prettier
+pnpm run format          # Format code with Oxfmt
 pnpm run format:check    # Check formatting without modifying files
-pnpm run format:check:ci # Check formatting with verbose debug output (for CI)
 pnpm run test            # Run tests in watch mode
 pnpm run test:ci         # Run tests once with coverage report
 pnpm run validate        # Alias for 'check' (legacy)
@@ -170,13 +166,22 @@ In `.github/shared/` directory:
 
 ```bash
 pnpm run check           # Run all checks
-pnpm run lint            # Run ESLint and TypeScript checks
-pnpm run format          # Format code with Prettier
+pnpm run lint            # Run oxlint and TypeScript checks
+pnpm run format          # Format code with Oxfmt
 pnpm run format:check    # Check formatting
 pnpm run test            # Run tests in watch mode
 pnpm run test:ci         # Run tests once with coverage report
 pnpm run perf            # Run performance benchmarks
 ```
+
+CI runs `pnpm lint` once from the repository root in `lint.yaml`, covering `.github`
+and `eng/tools`. Do not add lint steps to package/OS test matrices. `github-test.yaml`
+retains `pnpm lint:tsc`, tests, and actionlint for workflow YAML.
+`.github/workflows/format.yaml` runs `pnpm format:check` once from the repository
+root for `.github` and `eng/tools`. Do not add formatting steps to package/OS
+test matrices. Package-local format commands inherit the root `.oxfmtrc.json`,
+including fixture, generated-file, and unmanaged-content exclusions.
+See [the engineering guide](../../eng/README.md#linting-and-formatting) for the lint baseline policy.
 
 ### Before Committing
 
@@ -215,7 +220,6 @@ describe("myFunction", () => {
 
 Per `vitest.config.ts`, coverage excludes:
 
-- `**/eslint*.config.js`
 - `**/cmd/**` (CLI code)
 - `**/coverage/**`
 - `**/test/**`
@@ -386,7 +390,7 @@ When modifying GitHub Actions code:
 
 ### Critical Don'ts
 
-- ❌ Don't add JavaScript files or JSDoc type declarations outside ESLint configurations
+- ❌ Don't add JavaScript files or JSDoc type declarations
 - ❌ Don't use default exports (use named exports)
 - ❌ Don't use non-erasable TypeScript features or emit JavaScript
 - ❌ Don't commit without running `pnpm run check`
@@ -410,4 +414,4 @@ When modifying GitHub Actions code:
 - Other instruction files: [`.github/instructions/`](.)
 - GitHub Actions docs: https://docs.github.com/en/actions
 - Vitest docs: https://vitest.dev/
-- ESLint docs: https://eslint.org/
+- oxlint docs: https://oxc.rs/docs/guide/usage/linter

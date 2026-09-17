@@ -52,6 +52,7 @@ export function processDocument(document: OpenAPI2Document): OpenAPI2Document {
   }
 
   for (const route in document.paths) {
+    // oxlint-disable-next-line typescript/no-unnecessary-type-assertion -- Existing lint debt
     const path = document.paths[route] as OpenAPI2PathItem;
     const processedPath = processPath(path);
     if (configuration.ignorePathCase) {
@@ -72,6 +73,7 @@ export function processDocument(document: OpenAPI2Document): OpenAPI2Document {
   }
 
   for (const definitionName in document.definitions) {
+    // oxlint-disable-next-line typescript/no-unnecessary-type-assertion -- Existing lint debt
     const definition = document.definitions[definitionName] as OpenAPI2Schema;
     if (definition.enum) {
       delete newDocument.definitions![definitionName];
@@ -204,26 +206,35 @@ function processParameter(parameter: Refable<OpenAPI2Parameter>): Refable<OpenAP
     if (originalParameter) return processParameter(originalParameter);
   } else {
     const inlineParameter = parameter as OpenAPI2Parameter;
+    // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
     if ((parameter as any).enum && (newParameter as any)["x-ms-enum"]?.["values"]) {
+      // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
       delete (newParameter as any)["x-ms-enum"]["values"];
     }
+    // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
     if (configuration.enumNameToCamelCase && (newParameter as any)["x-ms-enum"]?.["name"]) {
+      // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
       const enumName = (newParameter as any)["x-ms-enum"]["name"] as string;
       const camelCaseName = enumName.charAt(0).toUpperCase() + enumName.slice(1);
+      // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
       (newParameter as any)["x-ms-enum"]["name"] = camelCaseName;
     }
 
     for (const key in parameter) {
       if (key === "x-ms-client-flatten") {
+        // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
         delete (newParameter as any)[key];
       }
       if (key === "required" && inlineParameter[key] !== true) {
+        // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
         delete (newParameter as any)[key];
       }
       if (key === "description") {
+        // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
         delete (newParameter as any)[key];
       }
       if (key === "x-ms-parameter-location" && inlineParameter[key] === "method") {
+        // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
         delete (newParameter as any)[key];
       }
     }
@@ -234,6 +245,7 @@ function processParameter(parameter: Refable<OpenAPI2Parameter>): Refable<OpenAP
 function processDefinition(definition: OpenAPI2Schema): OpenAPI2Schema {
   const newDefinition: OpenAPI2Schema = deepCopy(definition);
   for (const propertyName in definition.properties) {
+    // oxlint-disable-next-line typescript/no-unnecessary-type-assertion -- Existing lint debt
     const property = definition.properties[propertyName] as OpenAPI2SchemaProperty;
     const processedProperty = processProperty(property);
     newDefinition.properties ??= {};
@@ -274,12 +286,16 @@ function processDefinition(definition: OpenAPI2Schema): OpenAPI2Schema {
   }
   if (configuration.ignoreDescription) {
     delete newDefinition.description;
+    // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
     if ((newDefinition.items as any)?.description) {
+      // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
       delete (newDefinition.items as any).description;
     }
   }
 
+  // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
   if ((newDefinition as any)["x-ms-azure-resource"]) {
+    // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
     delete (newDefinition as any)["x-ms-azure-resource"];
   }
 
@@ -303,15 +319,19 @@ function processProperty(property: OpenAPI2SchemaProperty): OpenAPI2SchemaProper
       if (originalDefinition && originalDefinition.enum) {
         const processedDefinition = processDefinition(originalDefinition);
         for (const key in processedDefinition) {
+          // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unnecessary-type-assertion, typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
           (newProperty as any)[key] = (processedDefinition as any)[key as string];
         }
+        // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
         delete (newProperty as any).$ref;
       } else if (
         originalDefinition?.type &&
         ["boolean", "integer", "number", "string"].includes(originalDefinition.type)
       ) {
+        // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
         delete (newProperty as any).$ref;
         for (const key in originalDefinition) {
+          // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
           (newProperty as any)[key] = (originalDefinition as any)[key];
         }
       }
@@ -326,8 +346,10 @@ function processProperty(property: OpenAPI2SchemaProperty): OpenAPI2SchemaProper
           if (originalDefinition && originalDefinition.enum) {
             const processedDefinition = processDefinition(originalDefinition);
             for (const key in processedDefinition) {
+              // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unnecessary-type-assertion, typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
               (newProperty.items as any)[key] = (processedDefinition as any)[key as string];
             }
+            // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
             delete (newProperty.items as any).$ref;
           }
         }
@@ -345,8 +367,10 @@ function processProperty(property: OpenAPI2SchemaProperty): OpenAPI2SchemaProper
     }
   }
 
+  // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
   const identifiers = (newProperty as any)["x-ms-identifiers"];
   if (identifiers && Array.isArray(identifiers) && identifiers.length === 0) {
+    // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
     delete (newProperty as any)["x-ms-identifiers"];
   }
   if ((newProperty as OpenAPI2Schema).uniqueItems === false) {
@@ -357,13 +381,17 @@ function processProperty(property: OpenAPI2SchemaProperty): OpenAPI2SchemaProper
       a.localeCompare(b),
     );
   }
+  // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
   if ((newProperty as any)["uniqueItems"] === false) {
+    // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
     delete (newProperty as any)["uniqueItems"];
   }
 
   if (configuration.ignoreDescription) {
     delete newProperty.description;
+    // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
     if ((newProperty as any).items?.description) {
+      // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
       delete (newProperty as any).items?.description;
     }
   }
@@ -377,6 +405,7 @@ function processEnumInplace(enumDefinition: OpenAPI2Schema) {
     delete enumDefinition["x-ms-enum"].values;
   }
   if (configuration.enumNameToCamelCase && enumDefinition["x-ms-enum"]?.name) {
+    // oxlint-disable-next-line typescript/no-unnecessary-type-assertion -- Existing lint debt
     const enumName = enumDefinition["x-ms-enum"].name as string;
     const camelCaseName = enumName.charAt(0).toUpperCase() + enumName.slice(1);
     enumDefinition["x-ms-enum"].name = camelCaseName;
@@ -402,9 +431,12 @@ function processPageModel(definition: OpenAPI2Schema): OpenAPI2Schema {
   }
 
   newDefinition.description = "[Placeholder] Discription for page model";
+  // oxlint-disable-next-line typescript/no-unnecessary-type-assertion -- Existing lint debt
   newDefinition.properties!["value"]!.description = "[Placeholder] Discription for value property";
+  // oxlint-disable-next-line typescript/no-unnecessary-type-assertion -- Existing lint debt
   newDefinition.properties!["nextLink"]!.description =
     "[Placeholder] Discription for nextLink property";
+  // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
   (newDefinition.properties!["nextLink"] as any)["format"] = "uri";
   if (newDefinition.properties!["nextLink"]?.readOnly) {
     delete newDefinition.properties!["nextLink"]?.readOnly;
@@ -427,12 +459,15 @@ function deepCopy<T>(value: T): T {
   }
 
   if (Array.isArray(value)) {
+    // oxlint-disable-next-line typescript/no-unsafe-return -- Existing lint debt
     return value.map((item) => deepCopy(item)) as unknown as T;
   }
 
+  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   const result: Record<string, any> = {};
   for (const key in value) {
     if (Object.prototype.hasOwnProperty.call(value, key)) {
+      // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-assignment -- Existing lint debt
       result[key] = deepCopy((value as Record<string, any>)[key]);
     }
   }

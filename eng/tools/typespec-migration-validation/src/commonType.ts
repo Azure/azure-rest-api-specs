@@ -77,6 +77,7 @@ function readCommonTypeFile(filePath: string): OpenAPI2Document {
     return commonTypeFileCache[filePath];
   }
   const fileContent = readFileContent(filePath);
+  // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
   const jsonContent: OpenAPI2Document = JSON.parse(fileContent);
   commonTypeFileCache[filePath] = jsonContent;
   return jsonContent;

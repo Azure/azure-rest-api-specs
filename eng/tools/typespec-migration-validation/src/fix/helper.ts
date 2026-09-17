@@ -1,4 +1,5 @@
 export function checkElementAddedOrDeleted(
+  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   jsonObj: any,
   currentPath: string = "",
 ): Array<{ path: string; value: string; key: string }> {
@@ -19,13 +20,16 @@ export function checkElementAddedOrDeleted(
       // Store both the path and the value
       results.push({
         path: currentPath, // Use parent path since we're interested in the property that has this extension
+        // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
         value: jsonObj[key],
         key: key,
       });
     }
 
     // If value is an object or array, recursively search it
+    // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
     if (jsonObj[key] && typeof jsonObj[key] === "object") {
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       const nestedResults = checkElementAddedOrDeleted(jsonObj[key], newPath);
       results.push(...nestedResults);
     }
@@ -35,6 +39,7 @@ export function checkElementAddedOrDeleted(
 }
 
 export function checkElementChanged(
+  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   jsonObj: any,
   currentPath: string = "",
 ): Array<{ path: string; oldValue: string; newValue: string; key: string }> {
@@ -52,21 +57,28 @@ export function checkElementChanged(
     const newPath = currentPath ? `${currentPath}.${key}` : key;
 
     if (
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       typeof jsonObj[key] === "object" &&
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       jsonObj[key]["__old"] !== undefined &&
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       jsonObj[key]["__new"] !== undefined
     ) {
       // Store the path, old value and new value
       results.push({
         path: currentPath, // Use parent path since we're interested in the property that has this extension
+        // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
         oldValue: jsonObj[key]["__old"],
+        // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
         newValue: jsonObj[key]["__new"],
         key: key,
       });
     }
 
     // If value is an object or array, recursively search it
+    // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
     if (jsonObj[key] && typeof jsonObj[key] === "object") {
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       const nestedResults = checkElementChanged(jsonObj[key], newPath);
       results.push(...nestedResults);
     }
@@ -77,6 +89,7 @@ export function checkElementChanged(
 
 export function checkPropertyAttributeDeleted(
   checkKey: string,
+  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   jsonObj: any,
   currentPath: string = "",
 ): Array<{ path: string; value: string; key: string }> {
@@ -97,13 +110,16 @@ export function checkPropertyAttributeDeleted(
       // Store both the path and the value
       results.push({
         path: currentPath, // Use parent path since we're interested in the property that has this extension
+        // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
         value: jsonObj[key],
         key: key,
       });
     }
 
     // If value is an object or array, recursively search it
+    // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
     if (jsonObj[key] && typeof jsonObj[key] === "object") {
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       const nestedResults = checkPropertyAttributeDeleted(checkKey, jsonObj[key], newPath);
       results.push(...nestedResults);
     }
@@ -114,6 +130,7 @@ export function checkPropertyAttributeDeleted(
 
 export function checkPropertyAttributeAdded(
   checkKey: string,
+  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   jsonObj: any,
   currentPath: string = "",
 ): Array<{ path: string; value: string; key: string }> {
@@ -130,12 +147,15 @@ export function checkPropertyAttributeAdded(
       // Store both the path and the value
       results.push({
         path: currentPath, // Use parent path since we're interested in the property that has this extension
+        // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
         value: jsonObj[key],
         key: key,
       });
     }
 
+    // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
     if (jsonObj[key] && typeof jsonObj[key] === "object") {
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       const nestedResults = checkPropertyAttributeAdded(checkKey, jsonObj[key], newPath);
       results.push(...nestedResults);
     }
@@ -145,6 +165,7 @@ export function checkPropertyAttributeAdded(
 
 export function checkPropertyAttributeChanged(
   checkKey: string,
+  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   jsonObj: any,
   currentPath: string = "",
 ): Array<{ path: string; oldValue: string; newValue: string }> {
@@ -163,20 +184,27 @@ export function checkPropertyAttributeChanged(
 
     if (
       key === checkKey &&
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       typeof jsonObj[key] === "object" &&
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       jsonObj[key]["__old"] !== undefined &&
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       jsonObj[key]["__new"] !== undefined
     ) {
       // Store the path, old value and new value
       results.push({
         path: currentPath, // Use parent path since we're interested in the property that has this extension
+        // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
         oldValue: jsonObj[key]["__old"],
+        // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
         newValue: jsonObj[key]["__new"],
       });
     }
 
     // If value is an object or array, recursively search it
+    // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
     if (jsonObj[key] && typeof jsonObj[key] === "object") {
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       const nestedResults = checkPropertyAttributeChanged(checkKey, jsonObj[key], newPath);
       results.push(...nestedResults);
     }

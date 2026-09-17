@@ -34,16 +34,22 @@ vi.mock("node:fs", async (importOriginal) => {
 
 // Mock specific functions but keep getSpecModel as real implementation
 vi.mock("../src/detect-breaking-change.ts", async () => {
+  // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-assignment -- Existing lint debt
   const original = await vi.importActual<any>("../src/detect-breaking-change.ts");
+  // oxlint-disable typescript/no-unsafe-return -- Existing lint debt
   return {
     ...original,
     createBreakingChangeDetectionContext: vi
       .fn()
       .mockImplementation(
         (context, existingVersionSwaggers, newVersionSwaggers, newVersionChangedSwaggers) => ({
+          // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
           context,
+          // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
           existingVersionSwaggers,
+          // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
           newVersionSwaggers,
+          // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
           newVersionChangedSwaggers,
           msgs: [],
           runtimeErrors: [],
@@ -53,6 +59,7 @@ vi.mock("../src/detect-breaking-change.ts", async () => {
         }),
       ),
   };
+  // oxlint-enable typescript/no-unsafe-return
 });
 
 vi.mock("../src/utils/common-utils.ts", () => ({
@@ -60,6 +67,7 @@ vi.mock("../src/utils/common-utils.ts", () => ({
   specIsPreview: vi.fn().mockReturnValue(false),
   blobHref: vi.fn().mockReturnValue("https://github.com/test/test.json"),
   branchHref: vi.fn().mockReturnValue("https://github.com/test/test.json"),
+  // oxlint-disable-next-line typescript/no-unsafe-return -- Existing lint debt
   getRelativeSwaggerPathToRepo: vi.fn().mockImplementation((path) => path),
   processOadRuntimeErrorMessage: vi.fn(),
 }));
@@ -94,6 +102,7 @@ vi.mock("../src/utils/apply-rules.ts", () => ({
 describe("detect-breaking-change", () => {
   let mockContext: Context;
   let mockDetectionContext: BreakingChangeDetectionContext;
+  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   let detectionModule: any;
 
   // Test constants
@@ -122,21 +131,27 @@ describe("detect-breaking-change", () => {
 
   // Test data factories
   const TestFixtures = {
+    // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
     createMockSpecModel: (folder = TEST_CONSTANTS.FOLDERS.mockFolder, swaggers: any[] = []) => ({
       getSwaggers: vi.fn().mockResolvedValue(swaggers || []),
       folder,
       logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn() },
+      // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
       readmes: [] as any[],
     }),
 
     createSpyManager: () => {
+      // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
       const spies: Array<any> = [];
       return {
+        // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
         add: (spy: any) => {
           spies.push(spy);
+          // oxlint-disable-next-line typescript/no-unsafe-return -- Existing lint debt
           return spy;
         },
         restoreAll: () => {
+          // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access, typescript/no-unsafe-return -- Existing lint debt
           spies.forEach((spy) => spy.mockRestore());
           spies.length = 0;
         },
@@ -174,6 +189,7 @@ describe("detect-breaking-change", () => {
         swaggerDirs: ["specification"],
         baseBranch: "main",
         headCommit: "abc123",
+        // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unnecessary-type-assertion, typescript/no-unsafe-assignment -- Existing lint debt
         runType: "SAME_VERSION" as any,
         checkName: "test-check",
         targetRepo: "Azure/azure-rest-api-specs",
@@ -212,6 +228,7 @@ describe("detect-breaking-change", () => {
         ...overrides,
       }) as Context,
 
+    // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
     createMockSwagger: (pathOverride?: string, operationsOverride?: Map<string, any>) => ({
       path: pathOverride || `${TEST_CONSTANTS.FOLDERS.tempRepo}/${TEST_CONSTANTS.PATHS.storage}`,
       getOperations: vi
@@ -231,12 +248,15 @@ describe("detect-breaking-change", () => {
       });
     },
 
+    // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
     setupSpecModelMock: (mockInstance?: any) => {
       if (mockInstance) {
         // Use the provided instance
         vi.mocked(SpecModel).mockImplementation(function () {
+          // oxlint-disable-next-line typescript/no-unnecessary-type-assertion -- Existing lint debt
           return mockInstance as unknown as SpecModel;
         });
+        // oxlint-disable-next-line typescript/no-unsafe-return -- Existing lint debt
         return mockInstance;
       } else {
         // Create different instances based on folder path
@@ -272,10 +292,17 @@ describe("detect-breaking-change", () => {
       const testPath = TEST_CONSTANTS.PATHS.network;
 
       // Mock existsSync to return true only for the resource-manager level
+      // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
       vi.mocked(existsSync).mockImplementation((pathArg: any) => {
-        return pathArg
-          .toString()
-          .endsWith(path.join("specification", "network", "resource-manager", "readme.md"));
+        // oxlint-disable typescript/no-unsafe-call, typescript/no-unsafe-return -- Existing lint debt
+        return (
+          pathArg
+            // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
+            .toString()
+            // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
+            .endsWith(path.join("specification", "network", "resource-manager", "readme.md"))
+        );
+        // oxlint-enable typescript/no-unsafe-call, typescript/no-unsafe-return
       });
 
       const result = getReadmeFolder(testPath);
@@ -286,10 +313,17 @@ describe("detect-breaking-change", () => {
       const testPath =
         "specification/cognitiveservices/data-plane/TextAnalytics/preview/v3.1/textanalytics.json";
 
+      // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
       vi.mocked(existsSync).mockImplementation((pathArg: any) => {
-        return pathArg
-          .toString()
-          .endsWith(path.join("specification", "cognitiveservices", "data-plane", "readme.md"));
+        // oxlint-disable typescript/no-unsafe-call, typescript/no-unsafe-return -- Existing lint debt
+        return (
+          pathArg
+            // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
+            .toString()
+            // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
+            .endsWith(path.join("specification", "cognitiveservices", "data-plane", "readme.md"))
+        );
+        // oxlint-enable typescript/no-unsafe-call, typescript/no-unsafe-return
       });
 
       const result = getReadmeFolder(testPath);
@@ -319,10 +353,17 @@ describe("detect-breaking-change", () => {
       const testPath =
         "dev/network/resource-manager/Microsoft.Network/stable/2019-11-01/network.json";
 
+      // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
       vi.mocked(existsSync).mockImplementation((pathArg: any) => {
-        return pathArg
-          .toString()
-          .endsWith(path.join("specification", "network", "resource-manager", "readme.md"));
+        // oxlint-disable typescript/no-unsafe-call, typescript/no-unsafe-return -- Existing lint debt
+        return (
+          pathArg
+            // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
+            .toString()
+            // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
+            .endsWith(path.join("specification", "network", "resource-manager", "readme.md"))
+        );
+        // oxlint-enable typescript/no-unsafe-call, typescript/no-unsafe-return
       });
 
       const result = getReadmeFolder(testPath);
@@ -339,10 +380,17 @@ describe("detect-breaking-change", () => {
       const testPath =
         "specification\\network\\resource-manager\\Microsoft.Network\\stable\\2019-11-01\\network.json";
 
+      // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
       vi.mocked(existsSync).mockImplementation((pathArg: any) => {
-        return pathArg
-          .toString()
-          .endsWith(path.join("specification", "network", "resource-manager", "readme.md"));
+        // oxlint-disable typescript/no-unsafe-call, typescript/no-unsafe-return -- Existing lint debt
+        return (
+          pathArg
+            // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
+            .toString()
+            // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
+            .endsWith(path.join("specification", "network", "resource-manager", "readme.md"))
+        );
+        // oxlint-enable typescript/no-unsafe-call, typescript/no-unsafe-return
       });
 
       const result = getReadmeFolder(testPath);
@@ -354,8 +402,11 @@ describe("detect-breaking-change", () => {
         "specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/network.json";
 
       // Simulate readme.md at Microsoft.Network level (within search range)
+      // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
       vi.mocked(existsSync).mockImplementation((pathArg: any) => {
+        // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
         const pathStr = pathArg.toString();
+        // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access, typescript/no-unsafe-return -- Existing lint debt
         return pathStr.includes(path.join("Microsoft.Network", "readme.md"));
       });
 
@@ -386,15 +437,20 @@ describe("detect-breaking-change", () => {
 
     // Helper function to create consistent folder existence mocks
     const createFolderExistenceMock = (existingFolders: string[], readmeFolders: string[] = []) => {
+      // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
       return vi.mocked(existsSync).mockImplementation((pathArg: any) => {
+        // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
         const pathStr = pathArg.toString().replace(/\\/g, "/"); // Normalize to forward slashes for comparison
 
         // Check for readme.md files (used by getReadmeFolder)
+        // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
         if (pathStr.endsWith("readme.md")) {
+          // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
           return readmeFolders.some((folder) => pathStr.includes(`${folder}/readme.md`));
         }
 
         // Check for folder existence (used by getSpecModel) - normalize both paths for comparison
+        // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
         return existingFolders.some((folder) => pathStr.endsWith(folder.replace(/\\/g, "/")));
       });
     };
@@ -502,13 +558,17 @@ describe("detect-breaking-change", () => {
       const mockSpecModelInstance = TestFixtures.createMockSpecModel();
       MockSetup.setupSpecModelMock(mockSpecModelInstance);
 
+      // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
       vi.mocked(existsSync).mockImplementation((pathArg: any) => {
+        // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
         const pathStr = pathArg.toString().replace(/\\/g, "/"); // Normalize path separators
 
         // getReadmeFolder finds readme.md at resource-manager level (boundary fallback)
+        // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
         if (pathStr.includes("resource-manager/readme.md")) return true;
 
         // resource-manager folder exists (this is what getReadmeFolder returned)
+        // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
         if (pathStr.endsWith("specification/network/resource-manager")) return true;
 
         return false;
@@ -546,18 +606,24 @@ describe("detect-breaking-change", () => {
 
       // getReadmeFolder returns Microsoft.Network level, but that folder doesn't exist
       // However, resource-manager level has readme.md during upward search
+      // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
       vi.mocked(existsSync).mockImplementation((pathArg: any) => {
+        // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
         const pathStr = pathArg.toString().replace(/\\/g, "/"); // Normalize path separators
 
         // getReadmeFolder finds Microsoft.Network level
+        // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
         if (pathStr.includes("Microsoft.Network/readme.md")) return true;
 
         // Microsoft.Network folder doesn't exist
+        // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
         if (pathStr.endsWith("specification/network/resource-manager/Microsoft.Network"))
           return false;
 
         // resource-manager folder exists and has readme.md
+        // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
         if (pathStr.endsWith("specification/network/resource-manager")) return true;
+        // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
         if (pathStr.endsWith("specification/network/resource-manager/readme.md")) return true;
 
         return false;
@@ -646,12 +712,17 @@ describe("detect-breaking-change", () => {
       const mockOperationsArray = TestFixtures.createMockOperationsArray();
       const mockTargetOperations = TestFixtures.createMockOperations();
 
+      // oxlint-disable typescript/no-unsafe-assignment -- Existing lint debt
       const checkAPIsBeingMovedToANewSpecSpy = spyManager.add(
         vi.spyOn(detectionModule, "checkAPIsBeingMovedToANewSpec"),
       );
+      // oxlint-enable typescript/no-unsafe-assignment
 
+      // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
       checkAPIsBeingMovedToANewSpecSpy.mockImplementation(
+        // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
         async (_context: any, swaggerPath: any, _availableSwaggers: any) => {
+          // oxlint-disable-next-line typescript/no-unsafe-argument -- Existing lint debt
           await getExistedVersionOperations(swaggerPath, [], [...mockTargetOperations.values()]);
           return;
         },
@@ -660,6 +731,7 @@ describe("detect-breaking-change", () => {
       vi.mocked(getExistedVersionOperations).mockResolvedValue(mockOperationsArray);
       const testContext = TestFixtures.createTestContext();
 
+      // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
       await detectionModule.checkAPIsBeingMovedToANewSpec(
         testContext,
         TEST_CONSTANTS.PATHS.networkStable,
@@ -686,12 +758,17 @@ describe("detect-breaking-change", () => {
 
       const mockTargetOperations = TestFixtures.createMockOperations();
 
+      // oxlint-disable typescript/no-unsafe-assignment -- Existing lint debt
       const checkAPIsBeingMovedToANewSpecSpy = spyManager.add(
         vi.spyOn(detectionModule, "checkAPIsBeingMovedToANewSpec"),
       );
+      // oxlint-enable typescript/no-unsafe-assignment
 
+      // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
       checkAPIsBeingMovedToANewSpecSpy.mockImplementation(
+        // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
         async (_context: any, swaggerPath: any, _availableSwaggers: any) => {
+          // oxlint-disable-next-line typescript/no-unsafe-argument -- Existing lint debt
           await getExistedVersionOperations(swaggerPath, [], [...mockTargetOperations.values()]);
           return;
         },
@@ -700,6 +777,7 @@ describe("detect-breaking-change", () => {
       vi.mocked(getExistedVersionOperations).mockResolvedValue(new Map());
       const testContext = TestFixtures.createTestContext();
 
+      // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
       await detectionModule.checkAPIsBeingMovedToANewSpec(
         testContext,
         TEST_CONSTANTS.PATHS.storage,
@@ -722,8 +800,10 @@ describe("detect-breaking-change", () => {
   });
 
   describe("checkCrossVersionBreakingChange", () => {
+    // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
     let mockSpecModelInstance: any;
 
+    // oxlint-disable-next-line typescript/require-await -- Existing lint debt
     beforeEach(async () => {
       mockSpecModelInstance = TestFixtures.createMockSpecModel("/mock/folder", [
         { path: "/test/swagger1.json" },
@@ -731,6 +811,7 @@ describe("detect-breaking-change", () => {
       ]);
 
       vi.mocked(SpecModel).mockImplementation(function () {
+        // oxlint-disable-next-line typescript/no-unsafe-return -- Existing lint debt
         return mockSpecModelInstance;
       });
       vi.mocked(getPrecedingSwaggers).mockResolvedValue({
@@ -742,6 +823,7 @@ describe("detect-breaking-change", () => {
     it("should process new version swaggers", async () => {
       const detectionModule = await import("../src/detect-breaking-change.ts");
       const getSpecModelSpy = vi.spyOn(detectionModule, "getSpecModel");
+      // oxlint-disable-next-line typescript/no-unsafe-argument -- Existing lint debt
       getSpecModelSpy.mockReturnValue(mockSpecModelInstance);
 
       mockDetectionContext.newVersionSwaggers = [TEST_CONSTANTS.PATHS.networkStable];
@@ -779,6 +861,7 @@ describe("detect-breaking-change", () => {
         getSwaggers: vi.fn().mockResolvedValue([mockTargetSwagger]),
         folder: "/test/working/dir/specification/storage/resource-manager",
         logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn() },
+        // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
         readmes: [] as any[],
       };
 
@@ -824,38 +907,59 @@ describe("detect-breaking-change", () => {
   });
 
   describe("createBreakingChangeDetectionContext", () => {
+    // oxlint-disable-next-line typescript/require-await -- Existing lint debt
     it("should create context with all required properties", async () => {
+      // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
       vi.mocked(detectionModule.createBreakingChangeDetectionContext).mockImplementation(
         (
+          // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
           context: any,
+          // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
           existingVersionSwaggers: any,
+          // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
           newVersionSwaggers: any,
+          // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
           newVersionChangedSwaggers: any,
+          // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
           oadTracer: any,
         ) => ({
+          // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
           context,
+          // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
           existingVersionSwaggers,
+          // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
           newVersionSwaggers,
+          // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
           newVersionChangedSwaggers,
           msgs: [],
           runtimeErrors: [],
           tempTagName: "oad-default-tag",
+          // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
           oadTracer,
         }),
       );
 
+      // oxlint-disable typescript/no-unsafe-assignment -- Existing lint debt
+      // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
       const context = detectionModule.createBreakingChangeDetectionContext(
         mockContext,
         ["existing1.json"],
         ["new1.json"],
         ["changed1.json"],
+        // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
         {} as any,
       );
+      // oxlint-enable typescript/no-unsafe-assignment
 
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(detectionModule.createBreakingChangeDetectionContext).toHaveBeenCalled();
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(context.context).toBe(mockContext);
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(context.existingVersionSwaggers).toEqual(["existing1.json"]);
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(context.newVersionSwaggers).toEqual(["new1.json"]);
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(context.newVersionChangedSwaggers).toEqual(["changed1.json"]);
     });
   });
@@ -909,24 +1013,31 @@ describe("detect-breaking-change", () => {
     const mockOldSpec = "/old/spec/path.json";
     const mockNewSpec =
       "specification/test/resource-manager/Microsoft.Test/stable/2021-05-01/test.json";
+    // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
     let mockCheckout: any;
 
     beforeEach(() => {
       mockDetectionContext.msgs = [];
       mockDetectionContext.runtimeErrors = [];
       mockCheckout = vi.fn().mockResolvedValue(undefined);
+      // oxlint-disable typescript/no-unsafe-assignment -- Existing lint debt
       mockDetectionContext.context = {
         ...mockContext,
         prInfo: { ...mockContext.prInfo, checkout: mockCheckout },
+        // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
       } as any;
+      // oxlint-enable typescript/no-unsafe-assignment
     });
 
     it("should successfully detect breaking changes", async () => {
       const result = await doBreakingChangeDetection(
         mockDetectionContext,
         mockOldSpec,
+        // oxlint-disable typescript/no-unnecessary-type-assertion -- Existing lint debt
         mockNewSpec,
+        // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-argument -- Existing lint debt
         "SAME_VERSION" as any,
+        // oxlint-enable typescript/no-unnecessary-type-assertion
         ApiVersionLifecycleStage.STABLE,
       );
 
@@ -941,8 +1052,11 @@ describe("detect-breaking-change", () => {
       const result = await doBreakingChangeDetection(
         mockDetectionContext,
         mockOldSpec,
+        // oxlint-disable typescript/no-unnecessary-type-assertion -- Existing lint debt
         mockNewSpec,
+        // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-argument -- Existing lint debt
         "CROSS_VERSION" as any,
+        // oxlint-enable typescript/no-unnecessary-type-assertion
         ApiVersionLifecycleStage.PREVIEW,
       );
 
@@ -952,6 +1066,7 @@ describe("detect-breaking-change", () => {
     });
 
     it("should handle runtime errors gracefully", async () => {
+      // oxlint-disable typescript/no-unsafe-assignment -- Existing lint debt
       const errorDetectionContext = {
         ...mockDetectionContext,
         context: {
@@ -961,18 +1076,25 @@ describe("detect-breaking-change", () => {
             checkout: vi.fn().mockRejectedValue(new Error("Checkout failed")),
           },
         },
+        // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
       } as any;
+      // oxlint-enable typescript/no-unsafe-assignment
 
       const result = await doBreakingChangeDetection(
+        // oxlint-disable-next-line typescript/no-unsafe-argument -- Existing lint debt
         errorDetectionContext,
         mockOldSpec,
+        // oxlint-disable typescript/no-unnecessary-type-assertion -- Existing lint debt
         mockNewSpec,
+        // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-argument -- Existing lint debt
         "SAME_VERSION" as any,
+        // oxlint-enable typescript/no-unnecessary-type-assertion
         ApiVersionLifecycleStage.STABLE,
       );
 
       expect(result).toBeDefined();
       expect(result.errorCnt).toBeGreaterThan(0);
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(errorDetectionContext.runtimeErrors.length).toBeGreaterThan(0);
     });
 
@@ -983,8 +1105,11 @@ describe("detect-breaking-change", () => {
       await doBreakingChangeDetection(
         mockDetectionContext,
         mockOldSpec,
+        // oxlint-disable typescript/no-unnecessary-type-assertion -- Existing lint debt
         mockNewSpec,
+        // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-argument -- Existing lint debt
         "SAME_VERSION" as any,
+        // oxlint-enable typescript/no-unnecessary-type-assertion
         ApiVersionLifecycleStage.STABLE,
       );
 
@@ -996,8 +1121,11 @@ describe("detect-breaking-change", () => {
       const stableResult = await doBreakingChangeDetection(
         mockDetectionContext,
         mockOldSpec,
+        // oxlint-disable typescript/no-unnecessary-type-assertion -- Existing lint debt
         mockNewSpec,
+        // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-argument -- Existing lint debt
         "SAME_VERSION" as any,
+        // oxlint-enable typescript/no-unnecessary-type-assertion
         ApiVersionLifecycleStage.STABLE,
       );
 
@@ -1006,8 +1134,11 @@ describe("detect-breaking-change", () => {
       const previewResult = await doBreakingChangeDetection(
         mockDetectionContext,
         mockOldSpec,
+        // oxlint-disable typescript/no-unnecessary-type-assertion -- Existing lint debt
         mockNewSpec,
+        // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-argument -- Existing lint debt
         "SAME_VERSION" as any,
+        // oxlint-enable typescript/no-unnecessary-type-assertion
         ApiVersionLifecycleStage.PREVIEW,
       );
 

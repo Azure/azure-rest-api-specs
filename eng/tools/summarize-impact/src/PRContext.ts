@@ -151,6 +151,7 @@ export class PRContext {
 
   async getPossibleParentConfigurations(): Promise<string[]> {
     console.log("ENTER definition getPossibleParentConfigurations");
+    // oxlint-disable-next-line typescript/await-thenable -- Existing lint debt
     const changedFiles = await this.getChangedFiles();
     console.log(`Detect changes in the PR:\n${JSON.stringify(changedFiles, null, 2)}`);
     const readmes = changedFiles.filter((f) => readme(f));
@@ -193,6 +194,7 @@ export class PRContext {
     return [...allTags];
   }
 
+  // oxlint-disable-next-line typescript/require-await -- Existing lint debt
   async getInputFiles(readMeContent: string, tag: string) {
     // todo: we should refactor this to use spec model, but I haven't had time to isolate exactly what
     // openapi-markdown is doing here, so I'm just going to use the same logic for now
@@ -235,6 +237,7 @@ export class PRContext {
       // const allAffectedInputFiles = await this.getRealAffectedSwagger(readme)
       // talk to Mike and ask him how we could get all affected swagger files from a readme path.
       // I want to say that readme(readme).specModel.getAffectedSwaggerFiles will work?
+      // oxlint-disable-next-line typescript/await-thenable -- Existing lint debt
       const allAffectedInputFiles = await (await this.getChangedFiles()).filter((f) => swagger(f));
       console.log(`all affected swagger files in ${readme} are:`);
       console.log(JSON.stringify(allAffectedInputFiles, null, 2));
@@ -273,12 +276,14 @@ export class PRContext {
     // const readmeDeletions = this.fileList?.deletions.filter(file => readme(file));
     //const changedFiles: DiffFileResult | undefined = await this.localPRContext?.getChangingFiles();
 
+    // oxlint-disable-next-line typescript/await-thenable -- Existing lint debt
     const changedFiles = await this.fileList;
     const tagDiffs = (await this.getChangingTags()) || [];
 
     const readmeTagDiffs = tagDiffs
       ?.filter((tagDiff: TagDiff) => readme(tagDiff.readme))
       .map((tagDiff: TagDiff) => {
+        // oxlint-disable typescript/no-unnecessary-type-assertion -- Existing lint debt
         return {
           readme: tagDiff.readme,
           tags: {
@@ -287,6 +292,7 @@ export class PRContext {
             additions: tagDiff.insertions,
           },
         } as ReadmeTag;
+        // oxlint-enable typescript/no-unnecessary-type-assertion
       });
 
     const readmeTagDiffsInAddedReadmeFiles: ReadmeTag[] = readmeTagDiffs.filter(

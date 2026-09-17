@@ -3,10 +3,12 @@ import { getOriginalDocument } from "./document.ts";
 
 const apiVersionAlias: string[] = ["api-version", "apiVersion", "apiVersionParameter"];
 
+// oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
 export function isApiVersionParameter(obj: Record<string, any>) {
   if (obj["$ref"] !== undefined) {
     const commonTypePattern =
       /^\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/common-types\/resource-management\/v[1-6]\/types.json#\/parameters\/ApiVersionParameter$/;
+    // oxlint-disable-next-line typescript/no-unsafe-argument -- Existing lint debt
     if (commonTypePattern.test(obj["$ref"])) return true;
 
     if (
@@ -16,6 +18,7 @@ export function isApiVersionParameter(obj: Record<string, any>) {
     )
       return true;
 
+    // oxlint-disable-next-line typescript/no-unsafe-argument -- Existing lint debt
     const originalParameter = getOriginalParameter(obj["$ref"]);
     if (
       originalParameter?.name === "api-version" &&
@@ -24,6 +27,7 @@ export function isApiVersionParameter(obj: Record<string, any>) {
     )
       return true;
   } else if (obj["name"] !== undefined) {
+    // oxlint-disable-next-line typescript/no-unsafe-argument, typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
     if (apiVersionAlias.map((a) => a.toLowerCase()).includes(obj["name"].toLowerCase()))
       return true;
   }
@@ -37,10 +41,12 @@ const subscriptionIdAlias: string[] = [
   "subscriptionIdParameter",
 ];
 
+// oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
 export function isSubscriptionIdParameter(obj: Record<string, any>) {
   if (obj["$ref"] !== undefined) {
     const commonTypePattern =
       /^\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/common-types\/resource-management\/v[1-6]\/types\.json#\/parameters\/SubscriptionIdParameter$/;
+    // oxlint-disable-next-line typescript/no-unsafe-argument -- Existing lint debt
     if (commonTypePattern.test(obj["$ref"])) return true;
 
     if (
@@ -50,6 +56,7 @@ export function isSubscriptionIdParameter(obj: Record<string, any>) {
     )
       return true;
 
+    // oxlint-disable-next-line typescript/no-unsafe-argument -- Existing lint debt
     const originalParameter = getOriginalParameter(obj["$ref"]);
     if (
       originalParameter?.name === "subscriptionId" &&
@@ -58,6 +65,7 @@ export function isSubscriptionIdParameter(obj: Record<string, any>) {
     )
       return true;
   } else if (obj["name"] !== undefined) {
+    // oxlint-disable-next-line typescript/no-unsafe-argument, typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
     if (subscriptionIdAlias.map((a) => a.toLowerCase()).includes(obj["name"].toLowerCase()))
       return true;
   }
@@ -74,10 +82,12 @@ const resourceGroupNameAlias: string[] = [
   "resourceGroupParameter",
 ];
 
+// oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
 export function isResourceGroupNameParameter(obj: Record<string, any>) {
   if (obj["$ref"] !== undefined) {
     const commonTypePattern =
       /^\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/common-types\/resource-management\/v[1-6]\/types\.json#\/parameters\/ResourceGroupNameParameter$/;
+    // oxlint-disable-next-line typescript/no-unsafe-argument -- Existing lint debt
     if (commonTypePattern.test(obj["$ref"])) return true;
 
     if (
@@ -87,6 +97,7 @@ export function isResourceGroupNameParameter(obj: Record<string, any>) {
     )
       return true;
 
+    // oxlint-disable-next-line typescript/no-unsafe-argument -- Existing lint debt
     const originalParameter = getOriginalParameter(obj["$ref"]);
     if (
       originalParameter?.name === "resourceGroupName" &&
@@ -95,6 +106,7 @@ export function isResourceGroupNameParameter(obj: Record<string, any>) {
     )
       return true;
   } else if (obj["name"] !== undefined) {
+    // oxlint-disable-next-line typescript/no-unsafe-argument, typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
     if (resourceGroupNameAlias.map((a) => a.toLowerCase()).includes(obj["name"].toLowerCase()))
       return true;
   }

@@ -103,6 +103,7 @@ const TEST_CONSTANTS = {
 
 // Factory functions for commonly used mock objects
 function createMockContext(overrides = {}): Context {
+  // oxlint-disable typescript/no-unnecessary-type-assertion -- Existing lint debt
   return {
     localSpecRepoPath: TEST_CONSTANTS.PATHS.SPEC_REPO,
     workingFolder: TEST_CONSTANTS.PATHS.WORKING_FOLDER,
@@ -125,6 +126,7 @@ function createMockContext(overrides = {}): Context {
     prUrl: TEST_CONSTANTS.PR.URL,
     ...overrides,
   } as Context;
+  // oxlint-enable typescript/no-unnecessary-type-assertion
 }
 
 function createMockPrInfo(overrides = {}) {
@@ -364,6 +366,7 @@ describe("command-helpers", () => {
         baseCommitish: TEST_CONSTANTS.BRANCHES.MAIN,
         cwd: TEST_CONSTANTS.PATHS.TEST_PATH,
         headCommitish: TEST_CONSTANTS.COMMITS.HEAD,
+        // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
         logger: expect.anything(),
         paths: ["specification"],
       });
@@ -447,6 +450,7 @@ describe("command-helpers", () => {
         baseCommitish: undefined,
         cwd: undefined,
         headCommitish: undefined,
+        // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
         logger: expect.anything(),
         paths: ["specification"],
       });
@@ -672,11 +676,17 @@ describe("command-helpers", () => {
 
       // Verify the dummy swagger content
       const writeCall = mockWriteFileSync.mock.calls[0];
+      // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
       const writtenContent = JSON.parse(writeCall[1] as string);
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(writtenContent.paths).toEqual({});
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(writtenContent["x-ms-paths"]).toEqual({});
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(writtenContent["x-ms-parameterized-host"]).toBeUndefined();
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(writtenContent.parameters).toEqual({});
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(writtenContent.definitions).toEqual({});
     });
 
@@ -728,9 +738,13 @@ describe("command-helpers", () => {
 
       expect(mockWriteFileSync).toHaveBeenCalled();
       const writeCall = mockWriteFileSync.mock.calls[0];
+      // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
       const writtenContent = JSON.parse(writeCall[1] as string);
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(writtenContent.paths).toEqual({});
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(writtenContent["x-ms-paths"]).toBeUndefined();
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(writtenContent["x-ms-parameterized-host"]).toBeUndefined();
     });
   });

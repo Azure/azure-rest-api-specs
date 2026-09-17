@@ -30,11 +30,15 @@ export function parseYamlContent(
   let content = undefined;
   // if yaml file is not a valid yaml, catch error and return undefined
   try {
+    // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
     content = yamlParse(yamlContent);
   } catch (error) {
+    // oxlint-disable-next-line typescript/restrict-template-expressions -- Existing lint debt
     console.error(`The file parsing failed in the ${path}. Details: ${error}`);
     return {
+      // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
       result: content,
+      // oxlint-disable-next-line typescript/restrict-template-expressions -- Existing lint debt
       message: `The file parsing failed in the ${path}. Details: ${error}`,
     };
   }
@@ -50,6 +54,7 @@ export function parseYamlContent(
   }
 
   return {
+    // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
     result: content,
     message: "The file has been successfully parsed.",
   };

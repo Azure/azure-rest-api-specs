@@ -86,6 +86,7 @@ function createMockOadMessage(overrides: Partial<OadMessage> = {}): OadMessage {
 }
 
 function createMockContext(): Context {
+  // oxlint-disable typescript/no-unnecessary-type-assertion -- Existing lint debt
   return {
     sourceRepo: TEST_CONSTANTS.REPO,
     headCommit: TEST_CONSTANTS.COMMIT,
@@ -107,6 +108,7 @@ function createMockContext(): Context {
     },
     prUrl: TEST_CONSTANTS.PR_URL,
   } as Context;
+  // oxlint-enable typescript/no-unnecessary-type-assertion
 }
 
 function createProcessorContext(
@@ -182,6 +184,7 @@ describe("oad-message-processor", () => {
         code: TEST_CONSTANTS.RULES.REMOVED_PROPERTY,
         id: "test-id",
         docUrl: `https://docs.example.com/rules/${TEST_CONSTANTS.RULES.REMOVED_PROPERTY}`,
+        // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
         time: expect.any(Date),
         groupName: "stable",
         extra: {
@@ -380,6 +383,7 @@ describe("oad-message-processor", () => {
 
       expect(mockAppendFileSync).toHaveBeenCalledTimes(2);
       const appendedContent = mockAppendFileSync.mock.calls[0][1] as string;
+      // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
       const parsedContent = JSON.parse(appendedContent);
 
       expect(parsedContent).toEqual({
@@ -387,6 +391,7 @@ describe("oad-message-processor", () => {
         mode: "append",
         level: "Error",
         message: TEST_CONSTANTS.MESSAGES.ERROR,
+        // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
         time: expect.any(String),
       });
     });
@@ -397,8 +402,10 @@ describe("oad-message-processor", () => {
       await appendMarkdownToLog(context, TEST_CONSTANTS.MESSAGES.WARNING, "Warning");
 
       const appendedContent = mockAppendFileSync.mock.calls[0][1] as string;
+      // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
       const parsedContent = JSON.parse(appendedContent);
 
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       expect(parsedContent.level).toBe("Warning");
     });
   });

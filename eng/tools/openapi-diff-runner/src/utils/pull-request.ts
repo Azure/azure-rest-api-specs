@@ -75,14 +75,18 @@ export const createPullRequestProperties = async (
       } else {
         logMessage(`Branch ${branchName} already exists, skipping creation`);
       }
+      // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
     } catch (error: any) {
       // If the error is about branch already existing, that's fine - continue
       if (
+        // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
         error.message?.includes("already exists") ||
+        // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
         error.message?.includes("fatal: a branch named")
       ) {
         logMessage(`Branch ${branchName} already exists (caught during creation), continuing`);
       } else {
+        // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
         logError(`Failed to create branch ${branchName}: ${error.message}`);
         throw error;
       }
@@ -113,16 +117,20 @@ export const createPullRequestProperties = async (
   // Check if origin remote already exists, if not add it
   try {
     const remotes = await workingGitRepository.getRemotes();
+    // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-member-access -- Existing lint debt
     const originExists = remotes.some((remote: any) => remote.name === "origin");
     if (!originExists) {
       await workingGitRepository.addRemote("origin", context.localSpecRepoPath);
     }
+    // oxlint-disable-next-line eslint/no-unused-vars -- Existing lint debt
   } catch (error) {
     // If getting remotes fails, try to add origin anyway and catch the error
     try {
       await workingGitRepository.addRemote("origin", context.localSpecRepoPath);
+      // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
     } catch (addRemoteError: any) {
       // Ignore the error if remote already exists
+      // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
       if (!addRemoteError?.message?.includes("remote origin already exists")) {
         throw addRemoteError;
       }
@@ -142,12 +150,15 @@ export const createPullRequestProperties = async (
     targetBranch: context.prTargetBranch,
     sourceBranch,
     tempRepoFolder,
+    // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
     checkout: async function (this: any, branch: string) {
+      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       if (this.currentBranch !== branch) {
         await workingGitRepository.checkout([branch]);
         logMessage(
           `checkout to ${branch} in ${tempRepoFolder}\n Current working directory: ${process.cwd()}`,
         );
+        // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
         this.currentBranch = branch;
       }
     },

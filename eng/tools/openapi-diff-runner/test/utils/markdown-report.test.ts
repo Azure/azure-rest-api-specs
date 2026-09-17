@@ -54,6 +54,7 @@ describe("markdown-report", () => {
   };
 
   // Helper functions for creating messages
+  // oxlint-disable typescript/no-unnecessary-type-assertion -- Existing lint debt
   const createResultMessage = (overrides: Partial<ResultMessageRecord> = {}): ResultMessageRecord =>
     ({
       type: "Result",
@@ -72,6 +73,7 @@ describe("markdown-report", () => {
       ],
       ...overrides,
     }) as ResultMessageRecord;
+  // oxlint-enable typescript/no-unnecessary-type-assertion
 
   const createRawMessage = (overrides: Partial<BrChMsgRecord> = {}) =>
     ({
