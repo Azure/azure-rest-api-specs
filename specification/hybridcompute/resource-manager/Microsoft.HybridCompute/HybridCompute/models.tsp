@@ -4006,7 +4006,7 @@ model VmApplicationInstanceView {
   /**
    * The recent actions performed for the application.
    */
-  @identifiers(#["operation"])
+  @identifiers(#[])
   actionsPerformed?: VmApplicationInstanceViewAction[];
 }
 
