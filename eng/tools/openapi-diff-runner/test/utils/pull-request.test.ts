@@ -66,102 +66,64 @@ function createMockContext(overrides: Partial<Context> = {}): Context {
   };
 }
 
-// oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
 function setupBasicGitMocks(mockGitRepo: any) {
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.branch.mockResolvedValue({
     all: [TEST_CONSTANTS.BRANCHES.MAIN, TEST_CONSTANTS.BRANCHES.SOURCE],
   });
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.getRemotes.mockResolvedValue([{ name: "origin" }]);
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.init.mockResolvedValue(undefined);
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.addRemote.mockResolvedValue(undefined);
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.pull.mockResolvedValue(undefined);
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.fetch.mockResolvedValue(undefined);
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.checkout.mockResolvedValue(undefined);
 }
 
-// oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
 function setupCustomBranchMocks(mockGitRepo: any, branches: string[]) {
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.branch.mockResolvedValue({ all: branches });
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.getRemotes.mockResolvedValue([{ name: "origin" }]);
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.init.mockResolvedValue(undefined);
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.addRemote.mockResolvedValue(undefined);
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.pull.mockResolvedValue(undefined);
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.fetch.mockResolvedValue(undefined);
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.checkout.mockResolvedValue(undefined);
 }
 
-// oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
 function setupGitErrorMocks(mockGitRepo: any, errorType: string) {
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.branch.mockResolvedValue({
     all: [TEST_CONSTANTS.BRANCHES.MAIN, TEST_CONSTANTS.BRANCHES.SOURCE],
   });
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.getRemotes.mockRejectedValue(new Error(errorType));
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.init.mockResolvedValue(undefined);
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.pull.mockResolvedValue(undefined);
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.fetch.mockResolvedValue(undefined);
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockGitRepo.checkout.mockResolvedValue(undefined);
 }
 
-// oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
 function setupPathMocks(mockPath: any, mockExistsSync: any, exists: boolean = true) {
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockExistsSync.mockReturnValue(exists);
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockPath.resolve.mockReturnValue(TEST_CONSTANTS.PATHS.RESOLVED_WORKING_DIR);
-  // oxlint-disable-next-line typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
   mockPath.join.mockImplementation((...paths: string[]) => paths.join("/"));
 }
 
-// oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
 function expectPullRequestResult(result: any, expectedProps: Partial<any>) {
   expect(result).toBeDefined();
-  // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
   if (expectedProps.baseBranch) expect(result!.baseBranch).toBe(expectedProps.baseBranch);
-  // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
   if (expectedProps.targetBranch) expect(result!.targetBranch).toBe(expectedProps.targetBranch);
-  // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
   if (expectedProps.sourceBranch) expect(result!.sourceBranch).toBe(expectedProps.sourceBranch);
   if (expectedProps.tempRepoFolder)
-    // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
     expect(result!.tempRepoFolder).toBe(expectedProps.tempRepoFolder);
-  // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
   if (expectedProps.currentBranch) expect(result!.currentBranch).toBe(expectedProps.currentBranch);
-  // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
   if (expectedProps.hasCheckout) expect(typeof result!.checkout).toBe("function");
 }
 
-// oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
 function expectGitOperationCalls(mockGitRepo: any, operations: string[]) {
   operations.forEach((operation) => {
-    // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
     expect(mockGitRepo[operation]).toHaveBeenCalled();
   });
 }
 
-// oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
 function expectCheckoutResult(result: any, expectedBranch: string) {
   expect(result).toBeDefined();
-  // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
   expect(result!.currentBranch).toBe(expectedBranch);
 }
 
@@ -191,7 +153,6 @@ describe("pull-request", () => {
     vi.clearAllMocks();
 
     // Setup default mocks
-    // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-argument -- Existing lint debt
     mockSimpleGit.mockReturnValue(mockGitRepo as any);
     mockPath.resolve.mockImplementation((...paths: string[]) => paths.join("/"));
     mockPath.join.mockImplementation((...paths: string[]) => paths.join("/"));
@@ -454,13 +415,11 @@ describe("pull-request", () => {
 
       const result = await createPullRequestProperties(context, prefix);
 
-      // oxlint-disable-next-line typescript/unbound-method -- Existing lint debt
       expect(mockPath.join).toHaveBeenCalledWith(
         TEST_CONSTANTS.PATHS.CURRENT_WORKING_DIR,
         "..",
         "custom-prefix-c93b354fd9c14905bb574a8834c4d69b",
       );
-      // oxlint-disable-next-line typescript/unbound-method -- Existing lint debt
       expect(mockPath.resolve).toHaveBeenCalledWith(TEST_CONSTANTS.PATHS.CUSTOM_PREFIX_PATH);
       expect(result!.tempRepoFolder).toBe(TEST_CONSTANTS.PATHS.RESOLVED_WORKING_DIR);
     });
@@ -481,7 +440,6 @@ describe("pull-request", () => {
       });
 
       expect(mockSimpleGit).toHaveBeenCalledWith({
-        // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
         baseDir: expect.any(String), // working directory
         binary: "git",
         maxConcurrentProcesses: 1,

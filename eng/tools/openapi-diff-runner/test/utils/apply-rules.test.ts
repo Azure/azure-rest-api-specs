@@ -60,7 +60,6 @@ const createTestOadMessage = (
   id: string = "1001",
 ): OadMessage => ({
   type: "Info",
-  // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-assignment -- Existing lint debt
   code: code as any,
   id,
   message: `Test message for ${code}`,
@@ -84,7 +83,6 @@ describe("apply-rules", () => {
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Error");
       expect(result[0].groupName).toBe(ApiVersionLifecycleStage.STABLE);
-      // oxlint-disable-next-line typescript/unbound-method -- Existing lint debt
       expect(BreakingChangeLabelsToBeAdded.add).toHaveBeenCalledWith(
         "BreakingChangeReviewRequired",
       );
@@ -98,7 +96,6 @@ describe("apply-rules", () => {
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Error");
       expect(result[0].groupName).toBe(ApiVersionLifecycleStage.STABLE);
-      // oxlint-disable-next-line typescript/unbound-method -- Existing lint debt
       expect(BreakingChangeLabelsToBeAdded.add).toHaveBeenCalledWith(
         "BreakingChangeReviewRequired",
       );
@@ -116,7 +113,6 @@ describe("apply-rules", () => {
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Warning");
       expect(result[0].groupName).toBe(ApiVersionLifecycleStage.PREVIEW);
-      // oxlint-disable-next-line typescript/unbound-method -- Existing lint debt
       expect(BreakingChangeLabelsToBeAdded.add).not.toHaveBeenCalled();
     });
 
@@ -128,7 +124,6 @@ describe("apply-rules", () => {
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Error");
       expect(result[0].groupName).toBe(ApiVersionLifecycleStage.PREVIEW);
-      // oxlint-disable-next-line typescript/unbound-method -- Existing lint debt
       expect(BreakingChangeLabelsToBeAdded.add).toHaveBeenCalledWith("VersioningReviewRequired");
     });
 
@@ -140,7 +135,6 @@ describe("apply-rules", () => {
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Warning");
       expect(result[0].groupName).toBe(ApiVersionLifecycleStage.STABLE);
-      // oxlint-disable-next-line typescript/unbound-method -- Existing lint debt
       expect(BreakingChangeLabelsToBeAdded.add).not.toHaveBeenCalled();
     });
 
@@ -170,9 +164,7 @@ describe("apply-rules", () => {
       expect(result[0].groupName).toBe(ApiVersionLifecycleStage.STABLE);
       expect(result[1].type).toBe("Warning");
       expect(result[1].groupName).toBe(ApiVersionLifecycleStage.STABLE);
-      // oxlint-disable-next-line typescript/unbound-method -- Existing lint debt
       expect(BreakingChangeLabelsToBeAdded.add).toHaveBeenCalledTimes(1);
-      // oxlint-disable-next-line typescript/unbound-method -- Existing lint debt
       expect(BreakingChangeLabelsToBeAdded.add).toHaveBeenCalledWith(
         "BreakingChangeReviewRequired",
       );

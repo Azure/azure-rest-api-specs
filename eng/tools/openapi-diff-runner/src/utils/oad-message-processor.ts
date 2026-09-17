@@ -45,7 +45,6 @@ export function convertOadMessagesToResultMessageRecords(
         jsonPath: oadMessage.old?.path,
       });
     }
-    // oxlint-disable typescript/no-unnecessary-type-assertion -- Existing lint debt
     return {
       type: "Result",
       level: oadMessage.type as MessageLevel,
@@ -60,7 +59,6 @@ export function convertOadMessagesToResultMessageRecords(
       },
       paths: paths,
     } as ResultMessageRecord;
-    // oxlint-enable typescript/no-unnecessary-type-assertion
   });
 }
 

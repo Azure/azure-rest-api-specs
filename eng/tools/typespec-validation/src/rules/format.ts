@@ -23,7 +23,10 @@ export class FormatRule implements Rule {
     stdOutput += stdout;
     errorOutput += stderr;
 
-    [err, stdout, stderr] = await runPnpm(["exec", "oxfmt", "--write", "tspconfig.yaml"], folder);
+    [err, stdout, stderr] = await runPnpm(
+      ["exec", "prettier", "--write", "tspconfig.yaml"],
+      folder,
+    );
     if (err) {
       success = false;
       errorOutput += err.message;
@@ -37,7 +40,7 @@ export class FormatRule implements Rule {
       if (!gitDiffResult.success) {
         success = false;
         errorOutput += gitDiffResult.errorOutput;
-        errorOutput += `\nFiles have been changed by formatting. Run \`pnpm exec tsp format "../**/*.tsp"\` and \`pnpm exec oxfmt --write tspconfig.yaml\` from the project folder and include the changes.`;
+        errorOutput += `\nFiles have been changed after \`tsp format\`. Run \`tsp format\` and ensure all files are included in your change.`;
       }
     }
 

@@ -168,13 +168,9 @@ export async function validateBreakingChange(context: Context): Promise<number> 
       oadTracer,
     );
 
-    // oxlint-disable-next-line eslint/no-useless-assignment -- Existing lint debt
     let msgs: ResultMessageRecord[] = [];
-    // oxlint-disable-next-line eslint/no-useless-assignment -- Existing lint debt
     let runtimeErrors: RawMessageRecord[] = [];
-    // oxlint-disable-next-line eslint/no-useless-assignment -- Existing lint debt
     let oadViolationsCnt: number = 0;
-    // oxlint-disable-next-line eslint/no-useless-assignment -- Existing lint debt
     let errorCnt: number = 0;
 
     if (context.runType === BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION) {
@@ -194,10 +190,8 @@ export async function validateBreakingChange(context: Context): Promise<number> 
     // output breaking change label variables only when the PR targets a production branch
     logMessage(
       `Evaluate breaking change labels: targetRepo: ${context.targetRepo}, ` +
-        // oxlint-disable-next-line typescript/no-unnecessary-type-assertion -- Existing lint debt
         `targetBranch: ${context.prInfo!.targetBranch}`,
     );
-    // oxlint-disable-next-line typescript/no-unnecessary-type-assertion -- Existing lint debt
     if (checkPrTargetsProductionBranch(context.targetRepo, context.prInfo!.targetBranch)) {
       outputBreakingChangeLabelVariables();
     }

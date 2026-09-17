@@ -2,7 +2,6 @@ import { jsonOutput, type Suggestion } from "../jsonOutput.ts";
 import { handleAdded, handleChanged, handleDeleted } from "./definition.ts";
 import { checkElementAddedOrDeleted, checkElementChanged } from "./helper.ts";
 
-// oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
 export function generatePrompts(jsonObj: any): string[] {
   const suggestedFixes: Suggestion[] = [];
 

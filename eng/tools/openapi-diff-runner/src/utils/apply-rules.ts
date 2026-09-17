@@ -36,7 +36,6 @@ export async function applyRules(
   previousApiVersionLifecycleStage: ApiVersionLifecycleStage,
 ): Promise<OadMessage[]> {
   logMessage("ENTER definition applyRules");
-  // oxlint-disable-next-line eslint/prefer-const -- Existing lint debt
   let outputOadMessages: OadMessage[] = [];
   let outputOadMessage: OadMessage;
 

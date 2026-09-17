@@ -28,6 +28,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`Swagger LintDiff` for TypeSpec: troubleshooting guides](#swagger-lintdiff-for-typespec-troubleshooting-guides)
   - [`Swagger ModelValidation`](#swagger-modelvalidation)
   - [`Swagger PrettierCheck`](#swagger-prettiercheck)
+    - [Prettier reference](#prettier-reference)
   - [`Swagger SemanticValidation`](#swagger-semanticvalidation)
   - [Spell Check](#spell-check)
   - [`TypeSpec Validation`](#typespec-validation)
@@ -178,27 +179,34 @@ Refer to [Swagger-Example-Generation](https://github.com/Azure/oav/blob/develop/
 
 ## `Swagger PrettierCheck`
 
-This check has been retired. Swagger/OpenAPI definitions and examples under
-`specification/**/*.json` are no longer formatted.
+First, ensure you have fulfilled `Prerequisites` as explained above.
 
-The **Format** GitHub Actions check covers repository tooling in `.github` and
-`eng/tools`. To reproduce and fix a formatting failure, run from the repository root:
+To update all the spec files for a given service run the following:
 
 ``` powershell
+# To fix all the files in the repo run from the root of the repo
+cd <local_repo_clone_root>
+
+# OPTIONAL STEP: To fix a particular service OpenAPI spec cd to that directory like
+cd specification/contosowidgetmanager
+
+# Install the dependencies to the local 'node_modules' folder.
 pnpm install
-pnpm format:check
-pnpm format
+
+# Run 'prettier --check' to verify the problems can be reproduced locally
+pnpm prettier --check **/*.json
+
+# Run 'prettier --write' to fix the problems.
+pnpm prettier --write **/*.json
 ```
 
-TypeSpec validation still formats `.tsp` files with `tsp format` and `tspconfig.yaml`
-with Oxfmt. From the TypeSpec project directory, run
-`pnpm exec tsp format "../**/*.tsp"` and `pnpm exec oxfmt --write tspconfig.yaml`.
+Then please commit and push changes made by prettier.
 
-Maintainers must disable the old Azure DevOps pipeline (definition `6405`) and
-remove its triggers and any required-status references when rolling out this
-change. Deleting the repository pipeline file does not retire externally configured
-checks. Do not require the tooling-only Format check on specification-only PRs
-without accounting for its workflow path filters.
+### Prettier reference
+
+- [`prettier` npm package](https://www.npmjs.com/package/prettier)
+- [Source: Swagger-Prettier-Check.ps1](https://github.com/Azure/azure-rest-api-specs/blob/main/eng/scripts/Swagger-Prettier-Check.ps1)
+- [Pipeline: Swagger PrettierCheck](https://dev.azure.com/azure-sdk/public/_build?definitionId=6405)
 
 ## `Swagger SemanticValidation`
 

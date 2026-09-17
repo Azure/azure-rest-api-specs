@@ -111,7 +111,6 @@ export async function main() {
     isDraft,
   });
 
-  // oxlint-disable-next-line eslint/prefer-const -- Existing lint debt
   let impact = await evaluateImpact(prContext, labelContext, mainSpecFolders);
 
   console.log("Evaluated impact: ", JSON.stringify(impact, null, 2));

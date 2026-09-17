@@ -2,16 +2,14 @@
   "name": "TypeSpec Dev Container",
   "image": "mcr.microsoft.com/devcontainers/typescript-node:24",
   // Default is 2 cores which is too slow for this codebase
-  "hostRequirements": {
-    "cpus": 4
-  },
+  "hostRequirements": {"cpus": 4},
   "postCreateCommand": "npm run install-pnpm && pnpm ci",
   "customizations": {
     "vscode": {
       // Keep in sync with .vscode/extensions.json
       "extensions": [
         "EditorConfig.EditorConfig",
-        "oxc.oxc-vscode",
+        "esbenp.prettier-vscode",
         "typespec.typespec-vscode",
         "docsmsft.docs-authoring-pack"
       ]

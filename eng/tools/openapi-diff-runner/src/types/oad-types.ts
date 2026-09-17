@@ -28,7 +28,6 @@ function getPackageJson(): Record<string, unknown> {
       readFileSync(join(__dirname, "../../package.json"), "utf-8"),
     ) as Record<string, unknown>;
   }
-  // oxlint-disable-next-line typescript/no-unnecessary-type-assertion -- Existing lint debt
   return _packageJson!;
 }
 /**
@@ -86,13 +85,11 @@ export const addOadTrace = (
   traceData: OadTraceData,
   oldSwagger: string,
   newSwagger: string,
-  // oxlint-disable typescript/no-unnecessary-type-assertion -- Existing lint debt
 ): OadTraceData =>
   ({
     ...traceData,
     traces: [...traceData.traces, { old: oldSwagger, new: newSwagger }],
   }) as OadTraceData;
-// oxlint-enable typescript/no-unnecessary-type-assertion
 
 /**
  * Sets the base branch for the OAD trace data
@@ -106,11 +103,8 @@ export const setOadBaseBranch = (traceData: OadTraceData, branchName: string): O
  * Generates markdown content from OAD trace data
  */
 export const generateOadMarkdown = async (traceData: OadTraceData): Promise<string> => {
-  // oxlint-disable typescript/no-unsafe-assignment -- Existing lint debt
   const oadVersion =
-    // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Existing lint debt
     (getPackageJson() as any).dependencies?.["@azure/oad"]?.replace(/[\^~]/, "") || "unknown";
-  // oxlint-enable typescript/no-unsafe-assignment
   if (traceData.traces.length === 0) {
     return "";
   }

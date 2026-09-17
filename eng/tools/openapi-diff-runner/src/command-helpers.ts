@@ -190,7 +190,6 @@ export async function getSwaggerDiffs(
         filteredRenames.length,
     };
   } catch (error) {
-    // oxlint-disable-next-line typescript/restrict-template-expressions -- Existing lint debt
     logError(`Error getting categorized changed files: ${error}`);
     // Return empty result on error
     return {
@@ -267,25 +266,16 @@ export function createDummySwagger(fromSwagger: string, toSwagger: string): void
     mkdirSync(path.dirname(toSwagger), { recursive: true });
   }
   const content = readFileSync(fromSwagger).toString();
-  // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
   const swaggerJson = JSON.parse(content);
-  // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
   swaggerJson.paths = {};
-  // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
   if (swaggerJson["x-ms-paths"]) {
-    // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
     swaggerJson["x-ms-paths"] = {};
   }
-  // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
   if (swaggerJson["x-ms-parameterized-host"]) {
-    // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
     delete swaggerJson["x-ms-parameterized-host"];
   }
-  // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
   swaggerJson.responses = {};
-  // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
   swaggerJson.parameters = {};
-  // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
   swaggerJson.definitions = {};
   writeFileSync(toSwagger, JSON.stringify(swaggerJson, null, 2));
   createdDummySwagger.push(toSwagger);

@@ -90,14 +90,12 @@ async function getCommentData(
   return commentData;
 }
 
-// oxlint-disable-next-line typescript/require-await -- Existing lint debt
 async function getReportsAsString(
   checkName: string,
   msgs: BrChMsgRecord[],
   textPrefixLength: number,
   maxCommentDataLength: number,
 ): Promise<string> {
-  // oxlint-disable-next-line eslint/prefer-const -- Existing lint debt
   let [stableReports, previewReports, maxRowCountAcrossKeys] = getReports(msgs);
   let currentMaxRowCount = maxRowCountAcrossKeys;
 
@@ -137,9 +135,7 @@ function getReports(
   const msgsByKey: Record<string, BrChMsgRecord[]> = groupMsgsByKey(msgs);
 
   let maxRowCount = 0;
-  // oxlint-disable-next-line eslint/prefer-const -- Existing lint debt
   let stableReports: BreakingChangeMdReport[] = [];
-  // oxlint-disable-next-line eslint/prefer-const -- Existing lint debt
   let previewReports: BreakingChangeMdReport[] = [];
 
   Object.entries(msgsByKey).forEach(([, msgs]) => {

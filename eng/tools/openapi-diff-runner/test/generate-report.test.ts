@@ -71,7 +71,6 @@ describe("generate-report", () => {
     vi.stubEnv("GITHUB_STEP_SUMMARY", TEST_CONSTANTS.PATHS.SUMMARY);
 
     // Setup default mock implementations
-    // oxlint-disable typescript/no-unnecessary-type-assertion -- Existing lint debt
     mockCreateBreakingChangeMdReport.mockReturnValue({
       msgs: [],
       rows: [],
@@ -79,7 +78,6 @@ describe("generate-report", () => {
       level: "Error",
       rawMessage: "Test report",
     } as BreakingChangeMdReport);
-    // oxlint-enable typescript/no-unnecessary-type-assertion
 
     mockReportToString.mockReturnValue("Mock report string");
     mockSortBreakingChangeMdReports.mockImplementation((reports) => reports);
@@ -242,7 +240,6 @@ describe("generate-report", () => {
         createMockResultMessage({ level: "Error", groupName: "preview" }),
       ];
 
-      // oxlint-disable typescript/no-unnecessary-type-assertion -- Existing lint debt
       mockCreateBreakingChangeMdReport.mockReturnValue({
         msgs: [],
         rows: [],
@@ -250,7 +247,6 @@ describe("generate-report", () => {
         level: "Error",
         rawMessage: "Test report with messages",
       } as BreakingChangeMdReport);
-      // oxlint-enable typescript/no-unnecessary-type-assertion
 
       await callGenerateBreakingChangeResultSummary({ messages });
 

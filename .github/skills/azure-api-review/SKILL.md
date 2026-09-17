@@ -366,9 +366,9 @@ consumption.
   with that skill's maintainers. A rule flagged by the reviewer agent
   should not contradict guidance given by the authoring agent.
 - **Formatting:** After editing any `.md` file under `skills/` or
-  `agents/`, run `pnpm format` from the `.github/` directory
-  (Oxfmt). Note: instruction files (`*instructions.md`) are excluded
-  via the root `.oxfmtrc.json` and do not need formatting.
+  `agents/`, run `npm run format` from the `.github/` directory
+  (Prettier). Note: instruction files (`*instructions.md`) are excluded
+  from Prettier via `.prettierignore` and do not need formatting.
 
 ## Repository Documentation
 

@@ -89,6 +89,8 @@ jobs:
 
       - run: pnpm run lint:tsc
 
+      - run: pnpm run format:check:ci
+
       # Content copied from https://raw.githubusercontent.com/rhysd/actionlint/2ab3a12c7848f6c15faca9a92612ef4261d0e370/.github/actionlint-matcher.json
       - if: ${{ matrix.folder == '.github' && matrix.os == 'ubuntu'}}
         name: Add ActionLint Problem Matcher

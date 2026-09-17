@@ -63,7 +63,6 @@ export function mergeFiles(folderPath: string): OpenAPI2Document {
 
   for (const file of files) {
     const fileContent = readFileContent(file).replace(/^\uFEFF/, "");
-    // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
     const jsonContent: OpenAPI2Document = JSON.parse(fileContent);
     mergedContent.info = jsonContent.info;
 

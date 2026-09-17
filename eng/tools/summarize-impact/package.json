@@ -8,8 +8,9 @@
   },
   "scripts": {
     "build": "tsc --noEmit",
-    "format": "oxfmt . --write",
-    "format:check": "oxfmt . --check",
+    "format": "prettier . --ignore-path ../.prettierignore --write",
+    "format:check": "prettier . --ignore-path ../.prettierignore --check",
+    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
     "test": "vitest --run",
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
@@ -30,6 +31,8 @@
     "@types/lodash": "catalog:",
     "@types/node": "catalog:",
     "@vitest/coverage-v8": "catalog:",
+    "prettier": "catalog:",
+    "prettier-plugin-organize-imports": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:",
     "@types/js-yaml": "catalog:"

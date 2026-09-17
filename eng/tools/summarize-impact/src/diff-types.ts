@@ -17,7 +17,6 @@ export type PRChange = {
   fileType: FileTypes;
   changeType: ChangeTypes;
   filePath: string;
-  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   additionalInfo?: any;
 };
 
@@ -28,11 +27,8 @@ export type ReadmeTag = {
 
 export type TagConfigDiff = {
   name: string;
-  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   oldConfig?: any;
-  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   newConfig?: any;
-  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   difference?: any;
   changedInputFiles?: string[];
 };

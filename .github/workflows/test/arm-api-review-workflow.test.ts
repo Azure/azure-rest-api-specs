@@ -66,7 +66,7 @@ function createResolverHarness(
 
 /**
  * Collapse runs of whitespace so prose assertions do not depend on where
- * the formatter happens to wrap a Markdown paragraph.
+ * Prettier happens to wrap a Markdown paragraph.
  */
 function collapseWhitespace(text: string) {
   return text.replace(/\s+/g, " ");

@@ -7,7 +7,6 @@ import { dirname, join, resolve } from "path";
 import * as commonmark from "commonmark";
 import yaml from "js-yaml";
 import pkg from "lodash";
-// oxlint-disable-next-line typescript/unbound-method -- Existing lint debt
 const { isEqual } = pkg;
 
 import {
@@ -166,7 +165,6 @@ export function isDataPlanePR(filePaths: string[]): boolean {
 
 export function getAllApiVersionFromRPFolder(rpFolder: string): string[] {
   const allSwaggerFilesFromRPFolder = glob.sync(`${rpFolder}/**/*.json`);
-  // oxlint-disable-next-line typescript/restrict-template-expressions -- Existing lint debt
   console.log(`allSwaggerFilesFromRPFolder: ${allSwaggerFilesFromRPFolder}`);
 
   const apiVersions: Set<string> = new Set();
@@ -184,11 +182,8 @@ export function getAllApiVersionFromRPFolder(rpFolder: string): string[] {
 
 export function getApiVersionFromSwaggerFile(swaggerFile: string): string | undefined {
   const swagger = readFileSync(swaggerFile).toString();
-  // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
   const swaggerObject = JSON.parse(swagger);
-  // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
   if (swaggerObject["info"] && swaggerObject["info"]["version"]) {
-    // oxlint-disable-next-line typescript/no-unsafe-member-access, typescript/no-unsafe-return -- Existing lint debt
     return swaggerObject["info"]["version"];
   }
   return undefined;
@@ -201,9 +196,7 @@ export function getRPFolderFromSwaggerFile(swaggerFile: string): string | undefi
     return undefined;
   }
 
-  // oxlint-disable-next-line typescript/no-unnecessary-type-assertion -- Existing lint debt
   const lastIdx = swaggerFile.lastIndexOf(resourceProvider!);
-  // oxlint-disable-next-line typescript/no-unnecessary-type-assertion -- Existing lint debt
   return swaggerFile.substring(0, lastIdx + resourceProvider!.length);
 }
 
@@ -249,7 +242,6 @@ async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Prom
   typeSpecLabel.shouldBePresent = false;
   const handlers: ChangeHandler[] = [];
   const typeSpecFileHandler = () => {
-    // oxlint-disable-next-line eslint/no-unused-vars -- Existing lint debt
     return (_: PRChange) => {
       // Note: this code will be executed if the PR has a diff on a TypeSpec file,
       // as defined in public/swagger-validation-common/src/context.ts/defaultFilePatterns/typespec
@@ -279,7 +271,6 @@ async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Prom
 
 function isSwaggerGeneratedByTypeSpec(swaggerFilePath: string): boolean {
   try {
-    // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
     return !!JSON.parse(readFileSync(swaggerFilePath).toString())?.info["x-typespec-generated"];
   } catch {
     return false;
@@ -292,7 +283,6 @@ export async function processPrChanges(ctx: PRContext, Handlers: ChangeHandler[]
   prChanges.forEach((prChange) => {
     Handlers.forEach((handler) => {
       if (prChange.fileType in handler) {
-        // oxlint-disable-next-line typescript/no-floating-promises -- Existing lint debt
         handler?.[prChange.fileType]?.(prChange);
       }
     });
@@ -323,7 +313,6 @@ export async function getPRChanges(ctx: PRContext): Promise<PRChange[]> {
     fileType: FileTypes,
     changeType: ChangeTypes,
     filePath?: string,
-    // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
     additionalInfo?: any,
   ) {
     if (filePath) {
@@ -331,7 +320,6 @@ export async function getPRChanges(ctx: PRContext): Promise<PRChange[]> {
         filePath,
         fileType,
         changeType,
-        // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
         additionalInfo,
       });
     }
@@ -500,7 +488,6 @@ function getSuppressions(readmePath: string) {
     }
     return result;
   };
-  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   let suppressionResult: any[] = [];
   try {
     const readme = readFileSync(readmePath).toString();
@@ -508,26 +495,19 @@ function getSuppressions(readmePath: string) {
     for (const block of codeBlocks) {
       if (block.literal) {
         try {
-          // oxlint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-assignment -- Existing lint debt
           const blockObject = yaml.load(block.literal) as any;
-          // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
           const directives = blockObject?.["directive"];
           if (directives && Array.isArray(directives)) {
-            // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
             suppressionResult = suppressionResult.concat(directives.filter((s) => s.suppress));
           }
-          // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
           const suppressions = blockObject?.["suppressions"];
           if (suppressions && Array.isArray(suppressions)) {
             suppressionResult = suppressionResult.concat(suppressions);
           }
-          // oxlint-disable-next-line eslint/no-empty, eslint/no-unused-vars -- Existing lint debt
         } catch (e) {}
       }
     }
-    // oxlint-disable-next-line eslint/no-empty, eslint/no-unused-vars -- Existing lint debt
   } catch (e) {}
-  // oxlint-disable-next-line typescript/no-unsafe-return -- Existing lint debt
   return suppressionResult;
 }
 
@@ -539,13 +519,11 @@ export function diffSuppression(readmeBefore: string, readmeAfter: string) {
     const properties = ["suppress", "from", "where", "code", "reason"];
     if (
       -1 ===
-      // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
       beforeSuppressions.findIndex((s) => properties.every((p) => isEqual(s[p], suppression[p])))
     ) {
       newSuppressions.push(suppression);
     }
   }
-  // oxlint-disable-next-line typescript/no-unsafe-return -- Existing lint debt
   return newSuppressions;
 }
 
@@ -580,9 +558,7 @@ async function processRPaaS(
 }
 
 async function isRPSaaS(readmeFilePath: string) {
-  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   const config: any = await new Readme(readmeFilePath).getGlobalConfig();
-  // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
   return config["openapi-subtype"] === "rpaas" || config["openapi-subtype"] === "providerHub";
 }
 
@@ -639,7 +615,6 @@ async function processNewRPNamespace(
 // CODESYNC:
 // - see entries for related labels in https://github.com/Azure/azure-rest-api-specs/blob/main/.github/comment.yml
 // - requiredLabelsRules.ts / requiredLabelsRules
-// oxlint-disable-next-line typescript/require-await -- Existing lint debt
 async function processNewRpNamespaceWithoutRpaasLabel(
   context: PRContext,
   labelContext: LabelContext,
@@ -706,7 +681,6 @@ export const getRPaaSFolderList = (targetDirectory: string): string[] => {
       `Found ${armLeasesFolders.length} arm-lease folders: ${armLeasesFolders.join(", ")}`,
     );
   } catch (error) {
-    // oxlint-disable-next-line typescript/restrict-template-expressions -- Existing lint debt
     console.log(`Failed to get folder list from ${armLeasesFolder}: ${error}`);
   }
 
@@ -761,7 +735,6 @@ async function processRpaasRpNotInPrivateRepoLabel(
   }
 
   if (!skip) {
-    // oxlint-disable-next-line typescript/restrict-template-expressions -- Existing lint debt
     console.log(`RPaaS RP folder list: ${rpFolderNames}`);
 
     const handlers: ChangeHandler[] = [];
@@ -781,7 +754,6 @@ async function processRpaasRpNotInPrivateRepoLabel(
 
           if (!rpFolderNames.includes(rpFolderName)) {
             console.log(
-              // oxlint-disable-next-line typescript/restrict-template-expressions -- Existing lint debt
               `This RP is RPSaaS RP but could not find rpFolderName: ${rpFolderName} in RPFolderNames: ${rpFolderNames}. ` +
                 `Label 'CI-RpaaSRPNotInPrivateRepo' should be present.`,
             );

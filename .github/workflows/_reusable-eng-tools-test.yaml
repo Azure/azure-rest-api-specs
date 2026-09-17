@@ -50,3 +50,7 @@ jobs:
       - name: Test
         run: pnpm run test:ci
         working-directory: ./eng/tools/${{ inputs.package }}
+
+      - name: Check Formatting
+        run: pnpm run format:check:ci
+        working-directory: ./eng/tools/${{ inputs.package }}

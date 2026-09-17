@@ -23,7 +23,6 @@ export type MessageContext = {
 };
 
 export type Extra = {
-  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   [key: string]: any;
 };
 

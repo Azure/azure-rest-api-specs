@@ -5,7 +5,6 @@ import { jsonOutput } from "./jsonOutput.ts";
  */
 export interface ValueChangeInfo {
   /** Map of JSON paths to their values where this key was found */
-  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   paths: Map<string, any>;
 }
 
@@ -26,10 +25,8 @@ export interface ModifiedValueInfo {
   /** The path to the modified value */
   path: string;
   /** The old value */
-  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   oldValue: any;
   /** The new value */
-  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   newValue: any;
 }
 
@@ -41,7 +38,6 @@ export interface ModifiedValueInfo {
  * @returns A Map with keys as result keys and values as sets of JSON paths
  */
 export function findDifferences(
-  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   jsonObj: any,
   currentPath: string = "",
 ): Map<string, ValueChangeInfo> {
@@ -59,13 +55,11 @@ export function findDifferences(
 
     // Use bracket notation for keys with dots
     const newPath = constructJsonPath(currentPath, key);
-    // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
     const value = jsonObj[key];
 
     if (key.endsWith("__added") || key.endsWith("__deleted")) {
       if (!results.has(key)) {
         results.set(key, {
-          // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
           paths: new Map<string, any>(),
         });
       }
@@ -85,7 +79,6 @@ export function findDifferences(
             nestedResults.forEach((ValueChangeInfo, nestedKey) => {
               if (!results.has(nestedKey)) {
                 results.set(nestedKey, {
-                  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
                   paths: new Map<string, any>(),
                 });
               }
@@ -104,7 +97,6 @@ export function findDifferences(
         nestedResults.forEach((ValueChangeInfo, nestedKey) => {
           if (!results.has(nestedKey)) {
             results.set(nestedKey, {
-              // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
               paths: new Map<string, any>(),
             });
           }
@@ -155,20 +147,16 @@ export function constructJsonPath(currentPath: string, key: string): string {
  * @param jsonObject The JSON object containing a "paths" property to search
  * @returns Array of PathChangeInfo objects sorted alphabetically by path
  */
-// oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
 export function findChangedPaths(jsonObject: any): PathChangeInfo[] {
   const results: PathChangeInfo[] = [];
 
   // Check if jsonObject and paths property exist
-  // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
   if (!jsonObject || !jsonObject.paths || typeof jsonObject.paths !== "object") {
     return results;
   }
 
   // Iterate through all keys in the paths object
-  // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
   for (const pathKey in jsonObject.paths) {
-    // oxlint-disable-next-line typescript/no-unsafe-member-access -- Existing lint debt
     if (!Object.prototype.hasOwnProperty.call(jsonObject.paths, pathKey)) {
       continue;
     }
@@ -205,7 +193,6 @@ export function formatDifferenceReport(keyPathsMap: Map<string, ValueChangeInfo>
   let report = "## Swagger Changes\n\n";
 
   // Group by keys
-  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   const keyGroups: Map<string, Map<string, ["added" | "deleted", any]>> = new Map();
 
   keyPathsMap.forEach((valueChangeInfo, key) => {
@@ -233,7 +220,6 @@ export function formatDifferenceReport(keyPathsMap: Map<string, ValueChangeInfo>
     );
 
     sortedPaths.forEach((path) => {
-      // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
       const [changeType, value] = pathsMap.get(path)!;
       const formattedValue =
         typeof value === "object"
@@ -284,11 +270,8 @@ export function formatChangedPathsReport(changedPaths: PathChangeInfo[]): string
  * @param currentPath The current path in the JSON object (used for recursion)
  * @returns Array of ModifiedValueInfo objects containing paths and old/new values
  */
-// oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
 export function findModifiedValues(jsonObj: any, currentPath: string = ""): ModifiedValueInfo[] {
-  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   const oldValues = new Map<string, { path: string; value: any }>();
-  // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
   const newValues = new Map<string, { path: string; value: any }>();
   const results: ModifiedValueInfo[] = [];
 
@@ -302,18 +285,15 @@ export function findModifiedValues(jsonObj: any, currentPath: string = ""): Modi
       continue;
     }
 
-    // oxlint-disable-next-line typescript/no-unsafe-assignment, typescript/no-unsafe-member-access -- Existing lint debt
     const value = jsonObj[key];
     const newPath = constructJsonPath(currentPath, key);
 
     // Check for __old and __new keys
     if (key.endsWith("__old")) {
       const basePath = newPath.replace(/.__old$/, "");
-      // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
       oldValues.set(basePath, { path: newPath, value });
     } else if (key.endsWith("__new")) {
       const basePath = newPath.replace(/.__new$/, "");
-      // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
       newValues.set(basePath, { path: newPath, value });
     }
 
@@ -338,9 +318,7 @@ export function findModifiedValues(jsonObj: any, currentPath: string = ""): Modi
     if (newInfo) {
       results.push({
         path: basePath,
-        // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
         oldValue: oldInfo.value,
-        // oxlint-disable-next-line typescript/no-unsafe-assignment -- Existing lint debt
         newValue: newInfo.value,
       });
     }
@@ -366,7 +344,6 @@ export function formatModifiedValuesReport(modifiedValues: ModifiedValueInfo[]):
   modifiedValues.sort((a, b) => a.path.toLowerCase().localeCompare(b.path.toLowerCase()));
 
   modifiedValues.forEach(({ path, oldValue, newValue }) => {
-    // oxlint-disable-next-line typescript/no-explicit-any -- Existing lint debt
     const formatValue = (value: any): string => {
       if (value === undefined) return "`undefined`";
       if (value === null) return "`null`";
