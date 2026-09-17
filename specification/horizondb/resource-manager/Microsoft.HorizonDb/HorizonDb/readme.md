@@ -26,7 +26,7 @@ These are the global settings for the HorizonDb API.
 
 ```yaml
 title: HorizonDbManagementClient
-description: The Microsoft HorizonDb Management API provides Azure Resource Manager operations for managing HorizonDb clusters, pools, replicas, and firewall rules.
+description: The Microsoft HorizonDb Management API provides Azure Resource Manager operations for managing HorizonDb clusters, pools, endpoints, nodes, and firewall rules.
 openapi-type: arm
 tag: package-horizondb-2026-10-01-preview
 ```
@@ -60,6 +60,15 @@ suppressions:
       administratorLogin and administratorLoginPassword are write-only
       credentials accepted only by PATCH and are never returned in the
       Authentication resource model.
+  - code: PutRequestResponseSchemeArm
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}"].put
+    reason: >-
+      The PUT operation uses ClusterCreateRequest because postgreSqlVersion is
+      required for ordinary creation but must be omitted for point-in-time
+      restore. The Cluster response always returns the resolved PostgreSQL
+      version and other service-owned read-only properties. Mutable cluster
+      properties are supported by the PATCH operation on the same resource.
   - code: PutRequestResponseSchemeArm
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/microsoftEntraAdministrators/{objectId}"].put

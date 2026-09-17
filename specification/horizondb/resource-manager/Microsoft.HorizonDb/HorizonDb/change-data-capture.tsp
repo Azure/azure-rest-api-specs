@@ -553,11 +553,11 @@ model ChangeDataCaptureDestinationDetails {
 model FabricDestinationDetails extends ChangeDataCaptureDestinationDetails {
   @doc("Specifies a Microsoft Fabric destination.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  destinationType: "Fabric";
+  destinationType: ChangeDataCaptureDestinationType.Fabric;
 
   @doc("Specifies the Microsoft Fabric native destination protocol.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  protocol: "Native";
+  protocol: ChangeDataCaptureProtocol.Native;
 
   @doc("The opaque identifier of the Microsoft Fabric workspace that owns the destination artifact.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
