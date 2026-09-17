@@ -582,8 +582,6 @@ union ToolChoiceValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@changePropertyType(PromptAgentDefinition.tool_choice, ToolChoiceValue);
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@changePropertyType(VoiceAgentDefinition.tool_choice, ToolChoiceValue);
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@changePropertyType(
