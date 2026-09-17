@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2025-03-30",
+    "artifactManifestName": "TestManifest",
+    "artifactStoreName": "TestArtifactStore",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "artifacts": [
+          {
+            "artifactName": "fed-rbac",
+            "artifactType": "OCIArtifact",
+            "artifactVersion": "1.0.0"
+          },
+          {
+            "artifactName": "nginx",
+            "artifactType": "OCIArtifact",
+            "artifactVersion": "v1"
+          }
+        ]
+      }
+    },
+    "publisherName": "TestPublisher",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestManifest",
+        "type": "microsoft.hybridnetwork/publishers/artifactStores/artifactManifests",
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/microsoft.hybridnetwork/publishers/UnityCloud/artifactStores/TestArtifactStore/artifactManifests/TestManifest",
+        "location": "eastus",
+        "properties": {
+          "artifactManifestState": "Uploaded",
+          "artifacts": [
+            {
+              "artifactName": "fed-rbac",
+              "artifactType": "OCIArtifact",
+              "artifactVersion": "1.0.0"
+            },
+            {
+              "artifactName": "nginx",
+              "artifactType": "OCIArtifact",
+              "artifactVersion": "v1"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "TestManifest",
+        "type": "microsoft.hybridnetwork/publishers/artifactStores/artifactManifests",
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/microsoft.hybridnetwork/publishers/UnityCloud/artifactStores/TestArtifactStore/artifactManifests/TestManifest",
+        "location": "eastus",
+        "properties": {
+          "artifactManifestState": "Uploading",
+          "artifacts": [
+            {
+              "artifactName": "fed-rbac",
+              "artifactType": "OCIArtifact",
+              "artifactVersion": "1.0.0"
+            },
+            {
+              "artifactName": "nginx",
+              "artifactType": "OCIArtifact",
+              "artifactVersion": "v1"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "ArtifactManifests_CreateOrUpdate",
+  "title": "Create or update the artifact manifest resource"
+}

@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2025-03-30",
+    "networkFunctionName": "testNf",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://microsoft.com/a",
+        "value": [
+          {
+            "name": "testComponent",
+            "type": "Microsoft.HybridNetwork/networkFunctions/components",
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/networkFunctions/testNf/components/testComponent",
+            "properties": {
+              "deploymentProfile": "{\"chart\":{\"name\":\"testChartName\",\"version\":\"v1.0.0\"},\"releaseName\":\"testReleaseName\",\"targetNamespace\":\"testTargetNameSpace\",\"values\":{\".repoBase\":\"testrepo.azurecr.io/\"}}",
+              "deploymentStatus": {
+                "nextExpectedUpdateAt": "2023-07-10T02:06:01.116+00:00",
+                "resources": {
+                  "deployments": [
+                    {
+                      "name": "nginix",
+                      "available": 3,
+                      "creationTime": "2023-07-10T02:05:01.116+00:00",
+                      "desired": 3,
+                      "namespace": "core",
+                      "ready": 3,
+                      "upToDate": 3
+                    }
+                  ],
+                  "pods": [
+                    {
+                      "name": "nginix",
+                      "creationTime": "2023-07-10T02:05:01.116+00:00",
+                      "desired": 3,
+                      "events": [
+                        {
+                          "type": "Normal",
+                          "lastSeenTime": "2023-07-10T02:06:01.116+00:00",
+                          "message": "Pulling image nginx",
+                          "reason": "Pulling"
+                        }
+                      ],
+                      "namespace": "core",
+                      "ready": 3,
+                      "status": "Succeeded"
+                    }
+                  ]
+                },
+                "status": "Installing"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Components_ListByNetworkFunction",
+  "title": "List components in network function"
+}

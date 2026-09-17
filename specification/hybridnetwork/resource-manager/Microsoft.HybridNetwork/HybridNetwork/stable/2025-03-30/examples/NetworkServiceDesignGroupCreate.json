@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2025-03-30",
+    "networkServiceDesignGroupName": "TestNetworkServiceDesignGroupName",
+    "parameters": {
+      "location": "eastus"
+    },
+    "publisherName": "TestPublisher",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestNetworkServiceDesignGroupName",
+        "type": "Microsoft.HybridNetwork/publishers/networkServiceDesignGroups",
+        "id": "/subscriptions/subid/resourcegroups/rg/rgproviders/Microsoft.HybridNetwork/publishers/TestPublisher/networkServiceDesignGroups/TestNetworkServiceDesignGroupName",
+        "location": "eastus",
+        "properties": {
+          "description": "Test NSD group"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "TestNetworkServiceDesignGroupName",
+        "type": "Microsoft.HybridNetwork/publishers/networkServiceDesignGroups",
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher/networkServiceDesignGroups/TestNetworkServiceDesignGroupName",
+        "location": "eastus",
+        "properties": {
+          "description": "Test NSD group"
+        }
+      }
+    }
+  },
+  "operationId": "NetworkServiceDesignGroups_CreateOrUpdate",
+  "title": "Create or update the network service design group"
+}
