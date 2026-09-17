@@ -420,7 +420,7 @@ jobs:
             echo "## SDK breaking-change analysis"
             echo
             if [[ -n "$ANALYZED_SHA" ]]; then
-              printf '**Analyzed commit:** `%s`\n\n' "$ANALYZED_SHA"
+              printf '%s\n\n' "**Analyzed commit:** \`$ANALYZED_SHA\`"
             fi
             if [[ "$JOB_STATUS" == "failure" ]]; then
               echo "Breaking change analysis failed."

@@ -193,14 +193,19 @@ jobs:
             exit 1
           fi
           if [[ -f "$trigger_path" ]]; then
-            echo "pull-number=$(jq -r '.pullNumber' "$trigger_path")" >> "$GITHUB_OUTPUT"
-            echo "sdk-language=$(jq -r '.sdkLanguage' "$trigger_path")" >> "$GITHUB_OUTPUT"
-            echo "trigger-comment-id=$(jq -r '.triggerCommentId' "$trigger_path")" >> "$GITHUB_OUTPUT"
+            pull_number="$(jq -r '.pullNumber' "$trigger_path")"
+            sdk_language="$(jq -r '.sdkLanguage' "$trigger_path")"
+            trigger_comment_id="$(jq -r '.triggerCommentId' "$trigger_path")"
           else
-            echo "pull-number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
-            echo "sdk-language=$SDK_LANGUAGE" >> "$GITHUB_OUTPUT"
-            echo "trigger-comment-id=$TRIGGER_COMMENT_ID" >> "$GITHUB_OUTPUT"
+            pull_number="$PR_NUMBER"
+            sdk_language="$SDK_LANGUAGE"
+            trigger_comment_id="$TRIGGER_COMMENT_ID"
           fi
+          {
+            echo "pull-number=$pull_number"
+            echo "sdk-language=$sdk_language"
+            echo "trigger-comment-id=$trigger_comment_id"
+          } >> "$GITHUB_OUTPUT"
           if [[ -n "$RESULT_PATHS" ]]; then
             jq --argjson resultPaths "$RESULT_PATHS" \
               'map(. as $project | select($resultPaths | index($project.resultsPath + "/breaking-changes.json")))' \
