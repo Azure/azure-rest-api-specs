@@ -1,5 +1,6 @@
 {
-  "title": "02 - Start virtual machines with retries, health verification, and capacity recommendations",
+  "title": "03 - Start virtual machines with capacity recommendations",
+  "description": "Use capacityRecommendationParameters to request placement recommendations for selected VM sizes, regions, and availability zones. Recommendations are generated only if a VM fails to start because of an allocation failure. Use Get Operation Status to view capacityRecommendation.",
   "operationId": "VirtualMachineBulkOperations_BulkStart",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -12,7 +13,17 @@
           "retryCount": 3,
           "retryWindowInMinutes": 30
         },
-        "verifyVmAgentHealth": true
+        "capacityRecommendationParameters": {
+          "desiredLocations": [
+            "eastus",
+            "westus2"
+          ],
+          "desiredSizes": [
+            "Standard_D2s_v5",
+            "Standard_D4s_v5"
+          ],
+          "availabilityZones": true
+        }
       },
       "resources": {
         "ids": [

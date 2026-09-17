@@ -1,14 +1,16 @@
 {
-  "title": "02 - Start virtual machines with retries, health verification, and capacity recommendations",
+  "title": "02 - Start virtual machines with VM agent health verification",
+  "description": "Set verifyVmAgentHealth to true to check guest agent health after each VM starts. This option is supported only for Start. Use the returned operation IDs with Get Operation Status to check completion.",
   "operationId": "VirtualMachineBulkOperations_BulkStart",
   "parameters": {
-    "api-version": "2026-09-06-preview",
+    "api-version": "2026-08-06-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "example-rg",
     "location": "eastus",
     "requestBody": {
       "executionParameters": {
         "retryPolicy": {
+          "retryCount": 3,
           "retryWindowInMinutes": 30
         },
         "verifyVmAgentHealth": true
@@ -40,26 +42,9 @@
               "state": "PendingScheduling",
               "timezone": "UTC",
               "retryPolicy": {
+                "retryCount": 3,
                 "retryWindowInMinutes": 30,
                 "onFailureAction": "Start"
-              },
-              "capacityRecommendation": {
-                "status": "NotInitiated",
-                "details": {
-                  "desiredLocations": [
-                    "eastus",
-                    "westus2"
-                  ],
-                  "desiredSizes": [
-                    {
-                      "sku": "Standard_D2s_v5"
-                    },
-                    {
-                      "sku": "Standard_D4s_v5"
-                    }
-                  ],
-                  "availabilityZones": true
-                }
               }
             }
           },
@@ -75,26 +60,9 @@
               "state": "PendingScheduling",
               "timezone": "UTC",
               "retryPolicy": {
+                "retryCount": 3,
                 "retryWindowInMinutes": 30,
                 "onFailureAction": "Start"
-              },
-              "capacityRecommendation": {
-                "status": "NotInitiated",
-                "details": {
-                  "desiredLocations": [
-                    "eastus",
-                    "westus2"
-                  ],
-                  "desiredSizes": [
-                    {
-                      "sku": "Standard_D2s_v5"
-                    },
-                    {
-                      "sku": "Standard_D4s_v5"
-                    }
-                  ],
-                  "availabilityZones": true
-                }
               }
             }
           }
