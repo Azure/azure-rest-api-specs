@@ -37,10 +37,10 @@ These settings apply only when `--tag=package-2023-04` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-04'
 input-file:
-  - Microsoft.Workloads/stable/2023-04-01/SAPVirtualInstance.json
-  - Microsoft.Workloads/stable/2023-04-01/commonTypes.json
-  - Microsoft.Workloads/stable/2023-04-01/monitors.json
-  - Microsoft.Workloads/stable/2023-04-01/operations.json
+  - stable/2023-04-01/SAPVirtualInstance.json
+  - stable/2023-04-01/commonTypes.json
+  - stable/2023-04-01/monitors.json
+  - stable/2023-04-01/operations.json
 ```
 ### Tag: package-preview-2022-11
 
@@ -48,10 +48,10 @@ These settings apply only when `--tag=package-preview-2022-11` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-11'
 input-file:
-  - Microsoft.Workloads/preview/2022-11-01-preview/SAPVirtualInstance.json
-  - Microsoft.Workloads/preview/2022-11-01-preview/commonTypes.json
-  - Microsoft.Workloads/preview/2022-11-01-preview/monitors.json
-  - Microsoft.Workloads/preview/2022-11-01-preview/operations.json
+  - preview/2022-11-01-preview/SAPVirtualInstance.json
+  - preview/2022-11-01-preview/commonTypes.json
+  - preview/2022-11-01-preview/monitors.json
+  - preview/2022-11-01-preview/operations.json
 ```
 
 ### Tag: package-2021-12-01-preview
@@ -60,11 +60,11 @@ These settings apply only when `--tag=package-2021-12-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-12-01-preview'
 input-file:
-  - Microsoft.Workloads/preview/2021-12-01-preview/phpWorkloads.json
-  - Microsoft.Workloads/preview/2021-12-01-preview/SAPVirtualInstance.json
-  - Microsoft.Workloads/preview/2021-12-01-preview/operations.json
-  - Microsoft.Workloads/preview/2021-12-01-preview/monitors.json
-  - Microsoft.Workloads/preview/2021-12-01-preview/skus.json
+  - preview/2021-12-01-preview/phpWorkloads.json
+  - preview/2021-12-01-preview/SAPVirtualInstance.json
+  - preview/2021-12-01-preview/operations.json
+  - preview/2021-12-01-preview/monitors.json
+  - preview/2021-12-01-preview/skus.json
 ```
 
 ---
