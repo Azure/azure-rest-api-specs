@@ -566,6 +566,9 @@
           }
         },
         "x-ms-examples": {
+          "Create a HorizonDB cluster with customer-managed key data encryption": {
+            "$ref": "./examples/Clusters_CreateOrUpdateWithDataEncryption.json"
+          },
           "Create a PostgreSQL 18 HorizonDB cluster with minimum configuration and service defaults": {
             "$ref": "./examples/Clusters_CreateOrUpdateMinimumDefaults.json"
           },
@@ -652,6 +655,9 @@
         "x-ms-examples": {
           "Rename the PostgreSQL administrator role and reset its password while updating a HorizonDB cluster": {
             "$ref": "./examples/Clusters_Update.json"
+          },
+          "Rotate the customer-managed keys used by a HorizonDB cluster": {
+            "$ref": "./examples/Clusters_UpdateDataEncryption.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7369,6 +7375,15 @@
             "create"
           ]
         },
+        "dataEncryption": {
+          "$ref": "#/definitions/HorizonDbClusterDataEncryption",
+          "description": "The data encryption configuration for the cluster. When omitted during cluster creation, the service uses SystemManaged encryption.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "state": {
           "$ref": "#/definitions/ClusterState",
           "description": "Current state of the cluster.",
@@ -7406,6 +7421,13 @@
         "backup": {
           "$ref": "#/definitions/BackupPropertiesForPatchUpdate",
           "description": "The backup configuration for the cluster.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "dataEncryption": {
+          "$ref": "#/definitions/HorizonDbClusterDataEncryptionForPatchUpdate",
+          "description": "The data encryption configuration to update for the cluster. Omitted properties preserve their current values.",
           "x-ms-mutability": [
             "update"
           ]
@@ -7952,6 +7974,188 @@
             "name": "Disabled",
             "value": "Disabled",
             "description": "Geo-redundancy is disabled"
+          }
+        ]
+      }
+    },
+    "HorizonDbClusterDataEncryption": {
+      "type": "object",
+      "description": "The Cluster-level data encryption configuration. For AzureKeyVault encryption, primaryKeyUri and primaryUserAssignedIdentityId are required. When geographically redundant backup is enabled, geoBackupKeyUri and geoBackupUserAssignedIdentityId are also required. Customer-managed key identities must also be assigned to the Cluster through its top-level identity property. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation. For SystemManaged encryption, key and identity properties must be omitted.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/HorizonDbClusterDataEncryptionType",
+          "description": "The type of data encryption used by the cluster.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "primaryKeyUri": {
+          "type": "string",
+          "description": "The Azure Key Vault key URI used to encrypt the cluster's primary storage. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "primaryUserAssignedIdentityId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "primaryEncryptionKeyStatus": {
+          "$ref": "#/definitions/HorizonDbClusterEncryptionKeyStatus",
+          "description": "The validation status of the primary encryption key. This property is returned for AzureKeyVault encryption and is absent for SystemManaged encryption.",
+          "readOnly": true
+        },
+        "geoBackupKeyUri": {
+          "type": "string",
+          "description": "The Azure Key Vault key URI used to encrypt geographically redundant backups. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "geoBackupUserAssignedIdentityId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the user-assigned managed identity used to access the geographically redundant backup encryption key. The identity must also be assigned to the Cluster through its top-level identity property.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "geoBackupEncryptionKeyStatus": {
+          "$ref": "#/definitions/HorizonDbClusterEncryptionKeyStatus",
+          "description": "The validation status of the geographically redundant backup encryption key. This property is returned for AzureKeyVault encryption when geographically redundant backup is enabled.",
+          "readOnly": true
+        }
+      }
+    },
+    "HorizonDbClusterDataEncryptionForPatchUpdate": {
+      "type": "object",
+      "description": "Properties for sparsely updating Cluster-level data encryption. Omitted properties preserve their current values.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/HorizonDbClusterDataEncryptionType",
+          "description": "The type of data encryption used by the cluster.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "primaryKeyUri": {
+          "type": "string",
+          "description": "The Azure Key Vault key URI used to encrypt the cluster's primary storage. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "primaryUserAssignedIdentityId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property.",
+          "x-ms-mutability": [
+            "update"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "geoBackupKeyUri": {
+          "type": "string",
+          "description": "The Azure Key Vault key URI used to encrypt geographically redundant backups. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "geoBackupUserAssignedIdentityId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the user-assigned managed identity used to access the geographically redundant backup encryption key. The identity must also be assigned to the Cluster through its top-level identity property.",
+          "x-ms-mutability": [
+            "update"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "HorizonDbClusterDataEncryptionType": {
+      "type": "string",
+      "description": "The type of data encryption used by a HorizonDB cluster.",
+      "enum": [
+        "SystemManaged",
+        "AzureKeyVault"
+      ],
+      "x-ms-enum": {
+        "name": "HorizonDbClusterDataEncryptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemManaged",
+            "value": "SystemManaged",
+            "description": "Data encryption is managed by Azure using platform-managed keys."
+          },
+          {
+            "name": "AzureKeyVault",
+            "value": "AzureKeyVault",
+            "description": "Data encryption uses customer-managed keys stored in Azure Key Vault."
+          }
+        ]
+      }
+    },
+    "HorizonDbClusterEncryptionKeyStatus": {
+      "type": "string",
+      "description": "The validation status of a customer-managed encryption key used by a HorizonDB cluster.",
+      "enum": [
+        "Valid",
+        "Invalid"
+      ],
+      "x-ms-enum": {
+        "name": "HorizonDbClusterEncryptionKeyStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Valid",
+            "value": "Valid",
+            "description": "The encryption key is valid and accessible to the configured user-assigned managed identity."
+          },
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "The encryption key is invalid or inaccessible to the configured user-assigned managed identity."
           }
         ]
       }

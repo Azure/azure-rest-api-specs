@@ -371,6 +371,11 @@ model ClusterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   backup?: BackupProperties;
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("The data encryption configuration for the cluster. When omitted during cluster creation, the service uses SystemManaged encryption.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  dataEncryption?: HorizonDbClusterDataEncryption;
+
   @typeChangedFrom(Versions.v2026_10_01_preview, State)
   @madeRequired(Versions.v2026_10_01_preview)
   @doc("Current state of the cluster.")
@@ -618,6 +623,11 @@ model ClusterPropertiesForPatchUpdate {
   @doc("The backup configuration for the cluster.")
   @visibility(Lifecycle.Update)
   backup?: BackupPropertiesForPatchUpdate;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The data encryption configuration to update for the cluster. Omitted properties preserve their current values.")
+  @visibility(Lifecycle.Update)
+  dataEncryption?: HorizonDbClusterDataEncryptionForPatchUpdate;
 }
 
 @renamedFrom(Versions.v2026_10_01_preview, "HorizonDbClusterForPatchUpdate")
@@ -1160,6 +1170,114 @@ model PasswordAuthenticationForPatchUpdate {
 model MicrosoftEntraAuthenticationForPatchUpdate {
   @doc("The Microsoft Entra authentication properties to update.")
   properties?: MicrosoftEntraAuthenticationPropertiesForPatchUpdate;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The type of data encryption used by a HorizonDB cluster.")
+union HorizonDbClusterDataEncryptionType {
+  string,
+
+  @doc("Data encryption is managed by Azure using platform-managed keys.")
+  SystemManaged: "SystemManaged",
+
+  @doc("Data encryption uses customer-managed keys stored in Azure Key Vault.")
+  AzureKeyVault: "AzureKeyVault",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The validation status of a customer-managed encryption key used by a HorizonDB cluster.")
+union HorizonDbClusterEncryptionKeyStatus {
+  string,
+
+  @doc("The encryption key is valid and accessible to the configured user-assigned managed identity.")
+  Valid: "Valid",
+
+  @doc("The encryption key is invalid or inaccessible to the configured user-assigned managed identity.")
+  Invalid: "Invalid",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The Cluster-level data encryption configuration. For AzureKeyVault encryption, primaryKeyUri and primaryUserAssignedIdentityId are required. When geographically redundant backup is enabled, geoBackupKeyUri and geoBackupUserAssignedIdentityId are also required. Customer-managed key identities must also be assigned to the Cluster through its top-level identity property. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation. For SystemManaged encryption, key and identity properties must be omitted.")
+model HorizonDbClusterDataEncryption {
+  @added(Versions.v2026_10_01_preview)
+  @doc("The type of data encryption used by the cluster.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  type?: HorizonDbClusterDataEncryptionType;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure Key Vault key URI used to encrypt the cluster's primary storage. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  primaryKeyUri?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  primaryUserAssignedIdentityId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The validation status of the primary encryption key. This property is returned for AzureKeyVault encryption and is absent for SystemManaged encryption.")
+  @visibility(Lifecycle.Read)
+  primaryEncryptionKeyStatus?: HorizonDbClusterEncryptionKeyStatus;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure Key Vault key URI used to encrypt geographically redundant backups. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  geoBackupKeyUri?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure resource ID of the user-assigned managed identity used to access the geographically redundant backup encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  geoBackupUserAssignedIdentityId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The validation status of the geographically redundant backup encryption key. This property is returned for AzureKeyVault encryption when geographically redundant backup is enabled.")
+  @visibility(Lifecycle.Read)
+  geoBackupEncryptionKeyStatus?: HorizonDbClusterEncryptionKeyStatus;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Properties for sparsely updating Cluster-level data encryption. Omitted properties preserve their current values.")
+model HorizonDbClusterDataEncryptionForPatchUpdate {
+  @added(Versions.v2026_10_01_preview)
+  @doc("The type of data encryption used by the cluster.")
+  @visibility(Lifecycle.Update)
+  type?: HorizonDbClusterDataEncryptionType;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure Key Vault key URI used to encrypt the cluster's primary storage. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.")
+  @visibility(Lifecycle.Update)
+  primaryKeyUri?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
+  @visibility(Lifecycle.Update)
+  primaryUserAssignedIdentityId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure Key Vault key URI used to encrypt geographically redundant backups. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.")
+  @visibility(Lifecycle.Update)
+  geoBackupKeyUri?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The Azure resource ID of the user-assigned managed identity used to access the geographically redundant backup encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
+  @visibility(Lifecycle.Update)
+  geoBackupUserAssignedIdentityId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 @added(Versions.v2026_10_01_preview)
