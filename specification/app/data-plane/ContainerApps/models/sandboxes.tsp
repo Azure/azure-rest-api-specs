@@ -1530,9 +1530,6 @@ model TdsCredential {
 
   /** A reference to the stored password or token. */
   secretRef?: EgressPolicySecretRef;
-
-  /** Resolved credential value, when included by the service. */
-  secret?: string;
 }
 
 /** The allow or deny action applied by a TDS rule. */
