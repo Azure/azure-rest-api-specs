@@ -5610,16 +5610,14 @@ model BootDiagnosticsInstanceView {
 }
 
 /**
- * Specifies a FlexProfile for VM size. Azure may deploy a compatible alternative VM size based on
- * capacity and placement considerations. The deployed size is returned in hardwareProfile.vmSize.
+ * Specifies a FlexProfile for VM size. Azure may deploy a compatible alternative VM size based on capacity and placement considerations. The deployed size is returned in hardwareProfile.vmSize.
  */
 @added(Versions.v2026_09_01)
 model FlexProfile {
   /**
-   * Specifies the preferred VM size. Azure may deploy a compatible alternative size based on capacity
-   * and placement considerations. Supported VM families for FlexProfile may vary by region.
+   * Specifies the preferred VM size, for example Standard_D4s_v3. Azure may deploy a compatible alternative size based on capacity and placement considerations. Supported VM families for FlexProfile may vary by region. The recommended way to get the list of available sizes is using these APIs: [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes), [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/resourceskus/list), [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes).
    */
-  preferredVMSize: VirtualMachineSizeTypes;
+  preferredVMSize: string;
 }
 
 /**
@@ -6745,13 +6743,7 @@ model VirtualMachineProperties {
   hardwareProfile?: HardwareProfile;
 
   /**
-   * Specifies a FlexProfile for VM size. Create and update requests that include flexProfile must omit
-   * hardwareProfile.vmSize, even when it matches the currently deployed size. Azure may deploy a
-   * compatible alternative VM size based on capacity and placement considerations. Responses for a VM
-   * with FlexProfile include both flexProfile.preferredVMSize, which records the requested preferred size,
-   * and hardwareProfile.vmSize, which reports the deployed size. When using a GET response to construct
-   * a PUT or PATCH request, remove hardwareProfile.vmSize if the request includes flexProfile.
-   * FlexProfile may not be supported with VM properties that constrain placement.
+   * Specifies a FlexProfile for VM size. Create and update requests that include flexProfile must omit hardwareProfile.vmSize, even when it matches the currently deployed size. Requests that set both are rejected with an InvalidParameter error. Azure may deploy a compatible alternative VM size based on capacity and placement considerations. Responses for a VM with FlexProfile include both flexProfile.preferredVMSize, which records the requested preferred size, and hardwareProfile.vmSize, which reports the deployed size. When using a GET response to construct a PUT or PATCH request, remove hardwareProfile.vmSize if the request includes flexProfile. FlexProfile may not be supported with VM properties that constrain placement.
    */
   @added(Versions.v2026_09_01)
   flexProfile?: FlexProfile;
