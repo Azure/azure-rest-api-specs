@@ -10,12 +10,6 @@ namespace ContainerAppsSandbox {
     keys: string[];
   }
 
-  /** Secrets available in a sandbox group. */
-  model SecretListResponse {
-    /** The secrets in the sandbox group. */
-    secrets: Secret[];
-  }
-
   /** Selected values from a secret. */
   model SecretPeekResponse {
     /** The sensitive key-value pairs stored in the secret. */

@@ -49,34 +49,17 @@ alias EgressPolicyGetOperations = ResourceOperations<
   GetEgressPolicyErrors
 >;
 
-/** The HTTP 200 response for the putEgressPolicy operation. */
-model PutEgressPolicyResult200 {
-  /** The HTTP 200 status code. */
-  @statusCode statusCode: 200;
-
-  /** The returned egress policy. */
-  @body body: NamedEgressPolicy;
-}
-
-/** The HTTP 201 response for the putEgressPolicy operation. */
-model PutEgressPolicyResult201 {
-  /** The HTTP 201 status code. */
-  @statusCode statusCode: 201;
-
-  /** The returned egress policy. */
-  @body body: NamedEgressPolicy;
-}
-
-/** Successful responses for the putEgressPolicy operation. */
-alias PutEgressPolicyResult =
-  | PutEgressPolicyResult200
-  | PutEgressPolicyResult201;
-
 /** Error responses for the putEgressPolicy operation. */
 alias PutEgressPolicyErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
   | InternalServerErrorResult;
+
+/** Shared operation traits for creating or replacing named egress policies. */
+alias EgressPolicyPutOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PutEgressPolicyErrors
+>;
 
 @tag("egressPolicies")
 interface EgressPoliciesOperations {
@@ -96,23 +79,7 @@ interface EgressPoliciesOperations {
   getEgressPolicy is EgressPolicyGetOperations.ResourceRead<NamedEgressPolicy>;
 
   /** Creates or updates a named egress policy. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The custom PUT operation preserves the established 200 response and error status shapes, which Azure.Core ResourceOperations.ResourceCreateOrReplace cannot represent without changing the wire contract."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The established operation name is retained to keep generated client names deterministic."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The established putEgressPolicy name is retained to keep generated client names deterministic; the operation itself uses the standard Azure.Core ResourceCreateOrReplace signature."
   @summary("Creates or updates a named egress policy.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/egressPolicies/{policyId}")
-  @put
-  putEgressPolicy is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-
-      /** The egress policy identifier. */
-      @path policyId: string;
-
-      /** The named egress policy to create or replace. */
-      @body body: NamedEgressPolicy;
-    },
-    PutEgressPolicyResult,
-    DataPlaneStandardTraits,
-    PutEgressPolicyErrors
-  >;
+  putEgressPolicy is EgressPolicyPutOperations.ResourceCreateOrReplace<NamedEgressPolicy>;
 }

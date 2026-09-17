@@ -1,6 +1,7 @@
 using Http;
 using Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 
 namespace ContainerAppsSandbox;
 
@@ -16,17 +17,23 @@ alias SecretDeleteOperations = ResourceOperations<
   DeleteSecretErrors
 >;
 
-/** The HTTP 200 response for the getSecrets operation. */
-model GetSecretsResult {
-  /** The HTTP 200 status code. */
-  @statusCode statusCode: 200;
+/** Query parameters for listing secrets. */
+alias ListSecretTraits = QueryParametersTrait<
+  {
+    /** Continuation token for paginated results. */
+    @query @continuationToken skipToken?: string;
+  },
+  TraitContext.List
+>;
 
-  /** The returned secrets. */
-  @body body: SecretListResponse;
-}
+/** Error responses for the listSecrets operation. */
+alias ListSecretsErrors = UnauthorizedErrorResult | InternalServerErrorResult;
 
-/** Error responses for the getSecrets operation. */
-alias GetSecretsErrors = UnauthorizedErrorResult | InternalServerErrorResult;
+/** Shared operation traits for listing secrets. */
+alias SecretListOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  ListSecretsErrors
+>;
 
 /** The HTTP 200 response for the getSecretKeys operation. */
 model GetSecretKeysResult {
@@ -101,16 +108,7 @@ interface SecretsOperations {
 
   /** Lists all secrets in the sandbox group. */
   @summary("Lists all secrets in the sandbox group.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/secrets")
-  @get
-  getSecrets is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-    },
-    GetSecretsResult,
-    DataPlaneStandardTraits,
-    GetSecretsErrors
-  >;
+  listSecrets is SecretListOperations.ResourceList<Secret, ListSecretTraits>;
 
   /** Lists key names of a secret (values are not returned). */
   @summary("Lists key names of a secret (values are not returned).")

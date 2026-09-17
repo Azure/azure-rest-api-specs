@@ -382,7 +382,7 @@ namespace ContainerAppsSandbox {
   );
 
   @@clientLocation(SecretsOperations.deleteSecret, Group.Secrets, "csharp");
-  @@clientLocation(SecretsOperations.getSecrets, Group.Secrets, "csharp");
+  @@clientLocation(SecretsOperations.listSecrets, Group.Secrets, "csharp");
   @@clientLocation(SecretsOperations.getSecretKeys, Group.Secrets, "csharp");
   @@clientLocation(SecretsOperations.postSecretPeek, Group.Secrets, "csharp");
   @@clientLocation(SecretsOperations.putSecret, Group.Secrets, "csharp");
@@ -700,7 +700,6 @@ namespace ContainerAppsSandbox {
   );
   @@clientName(SandboxStatsResponse, "SandboxStatsResult", "csharp");
   @@clientName(SecretKeysResponse, "SecretKeysResult", "csharp");
-  @@clientName(SecretListResponse, "SecretListResult", "csharp");
   @@clientName(SecretPeekResponse, "SecretPeekResult", "csharp");
   @@clientName(CountResponse, "CountResult", "csharp");
   @@clientName(SandboxCountResponse, "SandboxCountResult", "csharp");

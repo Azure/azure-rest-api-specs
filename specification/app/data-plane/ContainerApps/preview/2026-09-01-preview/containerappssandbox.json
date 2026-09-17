@@ -2297,25 +2297,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
-          },
-          {
-            "name": "policyId",
+            "name": "subscriptionId",
             "in": "path",
-            "description": "The egress policy identifier.",
+            "description": "Azure subscription identifier.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policyId",
+            "in": "path",
+            "description": "Policy identifier assigned by the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
             "in": "body",
-            "description": "The named egress policy to create or replace.",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NamedEgressPolicy"
@@ -2324,13 +2336,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The HTTP 200 response for the putEgressPolicy operation.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/NamedEgressPolicy"
             }
           },
           "201": {
-            "description": "The HTTP 201 response for the putEgressPolicy operation.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/NamedEgressPolicy"
             }
@@ -6251,7 +6263,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/secrets": {
       "get": {
-        "operationId": "SecretsOperations_GetSecrets",
+        "operationId": "SecretsOperations_ListSecrets",
         "tags": [
           "secrets"
         ],
@@ -6262,20 +6274,39 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "description": "Continuation token for paginated results.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The HTTP 200 response for the getSecrets operation.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SecretListResponse"
+              "$ref": "#/definitions/PagedSecret"
             }
           },
           "401": {
@@ -6307,8 +6338,11 @@
         },
         "x-ms-examples": {
           "Lists all secrets in the sandbox group.": {
-            "$ref": "./examples/SecretsOperations_GetSecrets.json"
+            "$ref": "./examples/SecretsOperations_ListSecrets.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -11100,19 +11134,6 @@
         "body"
       ]
     },
-    "GetSecretsResult": {
-      "type": "object",
-      "description": "The HTTP 200 response for the getSecrets operation.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/SecretListResponse",
-          "description": "The returned secrets."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "GetSnapshotsCountResult": {
       "type": "object",
       "description": "The HTTP 200 response for the getSnapshotsCount operation.",
@@ -11918,6 +11939,27 @@
           "description": "The SandboxGroupCredential items on this page",
           "items": {
             "$ref": "#/definitions/SandboxGroupCredential"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedSecret": {
+      "type": "object",
+      "description": "Paged collection of Secret items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Secret items on this page",
+          "items": {
+            "$ref": "#/definitions/Secret"
           }
         },
         "nextLink": {
@@ -12798,32 +12840,6 @@
         "body": {
           "$ref": "#/definitions/SandboxGroupCredential",
           "description": "The returned credential."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "PutEgressPolicyResult200": {
-      "type": "object",
-      "description": "The HTTP 200 response for the putEgressPolicy operation.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NamedEgressPolicy",
-          "description": "The returned egress policy."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "PutEgressPolicyResult201": {
-      "type": "object",
-      "description": "The HTTP 201 response for the putEgressPolicy operation.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NamedEgressPolicy",
-          "description": "The returned egress policy."
         }
       },
       "required": [
@@ -14166,22 +14182,6 @@
       },
       "required": [
         "keys"
-      ]
-    },
-    "SecretListResponse": {
-      "type": "object",
-      "description": "Secrets available in a sandbox group.",
-      "properties": {
-        "secrets": {
-          "type": "array",
-          "description": "The secrets in the sandbox group.",
-          "items": {
-            "$ref": "#/definitions/Secret"
-          }
-        }
-      },
-      "required": [
-        "secrets"
       ]
     },
     "SecretPeekResponse": {
