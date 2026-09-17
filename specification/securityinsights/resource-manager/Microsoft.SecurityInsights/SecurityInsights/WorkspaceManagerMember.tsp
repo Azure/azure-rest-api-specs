@@ -1,4 +1,4 @@
-﻿import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -94,5 +94,5 @@ interface WorkspaceManagerMembers {
   "The workspace manager member object"
 );
 
-@@added(WorkspaceManagerMember, Versions.v2025_10_01_preview);
-@@added(WorkspaceManagerMembers, Versions.v2025_10_01_preview);
+@@added(WorkspaceManagerMember, Versions.v2026_08_01_preview);
+@@added(WorkspaceManagerMembers, Versions.v2026_08_01_preview);

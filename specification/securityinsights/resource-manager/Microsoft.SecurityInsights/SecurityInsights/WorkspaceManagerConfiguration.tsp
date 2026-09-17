@@ -103,5 +103,5 @@ interface WorkspaceManagerConfigurations {
   "The workspace manager configuration"
 );
 
-@@added(WorkspaceManagerConfiguration, Versions.v2025_10_01_preview);
-@@added(WorkspaceManagerConfigurations, Versions.v2025_10_01_preview);
+@@added(WorkspaceManagerConfiguration, Versions.v2026_08_01_preview);
+@@added(WorkspaceManagerConfigurations, Versions.v2026_08_01_preview);
