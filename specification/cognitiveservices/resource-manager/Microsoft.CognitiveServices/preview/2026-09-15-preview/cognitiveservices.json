@@ -5250,14 +5250,6 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
           },
           {
-            "name": "azureai-project",
-            "in": "header",
-            "description": "Foundry project used when creating a VmManagedCompute deployment. If omitted, the account's default project is used.\nA project must be specified through this header or configured as the account default.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "foundryProjectName"
-          },
-          {
             "name": "resource",
             "in": "body",
             "description": "The managed compute deployment properties.",
@@ -5304,9 +5296,6 @@
           },
           "CreateOrUpdateVmManagedComputeDeployment": {
             "$ref": "./examples/CreateOrUpdateVmManagedComputeDeployment.json"
-          },
-          "CreateOrUpdateVmManagedComputeDeploymentWithRegistryAssets": {
-            "$ref": "./examples/CreateOrUpdateVmManagedComputeDeploymentWithRegistryAssets.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5476,9 +5465,6 @@
         "x-ms-examples": {
           "DeleteManagedComputeDeployment": {
             "$ref": "./examples/DeleteManagedComputeDeployment.json"
-          },
-          "DeleteVmManagedComputeDeployment": {
-            "$ref": "./examples/DeleteVmManagedComputeDeployment.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -18005,7 +17991,7 @@
     },
     "ManagedComputeDeployment": {
       "type": "object",
-      "description": "Cognitive Services account deployment backed by accelerator-managed compute or a VM compute resource.",
+      "description": "Cognitive Services account managed compute deployment, backed by managed compute (GPU) resources.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ManagedComputeDeploymentProperties",
@@ -18013,7 +17999,7 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The deployment SKU. Use VmManagedCompute for a deployment on a VM compute resource.\nThe SKU name cannot change after creation. Capacity is the number of deployment instances and must be positive on creation."
+          "description": "The resource model definition representing SKU. Use VmManagedCompute for VM-backed managed compute deployments."
         },
         "etag": {
           "type": "string",
@@ -18096,7 +18082,7 @@
         },
         "acceleratorType": {
           "type": "string",
-          "description": "Accelerator type (e.g., H100_80GB). Optional on creation; immutable after creation.\nMust not be specified for VmManagedCompute deployments.",
+          "description": "Accelerator type (e.g., H100_80GB). Optional on creation; immutable after creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -18128,7 +18114,7 @@
         },
         "computeId": {
           "type": "string",
-          "description": "Foundry compute ARM resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.\nMust not be specified for accelerator-managed compute deployments.",
+          "description": "Foundry compute ARM resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.",
           "x-ms-mutability": [
             "read",
             "create"

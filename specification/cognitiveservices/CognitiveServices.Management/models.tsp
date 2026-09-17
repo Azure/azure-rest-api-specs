@@ -6520,7 +6520,6 @@ model ManagedComputeDeploymentProperties {
 
   /**
    * Accelerator type (e.g., H100_80GB). Optional on creation; immutable after creation.
-   * Must not be specified for VmManagedCompute deployments.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   acceleratorType?: string;
@@ -6553,7 +6552,6 @@ model ManagedComputeDeploymentProperties {
 
   /**
    * Foundry compute ARM resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.
-   * Must not be specified for accelerator-managed compute deployments.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   computeId?: string;

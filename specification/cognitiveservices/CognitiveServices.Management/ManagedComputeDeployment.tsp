@@ -15,7 +15,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.CognitiveServices;
 
 /**
- * Cognitive Services account deployment backed by accelerator-managed compute or a VM compute resource.
+ * Cognitive Services account managed compute deployment, backed by managed compute (GPU) resources.
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
@@ -35,8 +35,7 @@ model ManagedComputeDeployment
   >;
 
   /**
-   * The deployment SKU. Use VmManagedCompute for a deployment on a VM compute resource.
-   * The SKU name cannot change after creation. Capacity is the number of deployment instances and must be positive on creation.
+   * The resource model definition representing SKU. Use VmManagedCompute for VM-backed managed compute deployments.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc defines its own Sku model — using ResourceSkuProperty causes duplicate-client-name errors in Java/Python SDK generation due to collision with ARM common-type Sku"
   sku?: Sku;
@@ -66,18 +65,7 @@ interface ManagedComputeDeployments {
   /**
    * Creates or updates a managed compute deployment associated with the Cognitive Services account.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    ManagedComputeDeployment,
-    Parameters = {
-      /**
-       * Foundry project used when creating a VmManagedCompute deployment. If omitted, the account's default project is used.
-       * A project must be specified through this header or configured as the account default.
-       */
-      @added(Versions.v2026_09_15_preview)
-      @header("azureai-project")
-      foundryProjectName?: string;
-    }
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ManagedComputeDeployment>;
 
   /**
    * Updates the specified managed compute deployment associated with the Cognitive Services account.
