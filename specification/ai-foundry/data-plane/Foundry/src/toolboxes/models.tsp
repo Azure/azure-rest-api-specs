@@ -107,8 +107,6 @@ union ToolboxToolType {
   a2a: ToolboxA2AToolType,
   shell: ToolboxShellToolType,
   web_iq_preview: ToolboxWebIQPreviewToolType,
-
-  @removed(Versions.v1)
   browser_automation: ToolboxBrowserAutomationToolType,
 }
 
@@ -285,7 +283,6 @@ model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
 /**
  * A browser automation tool stored in a toolbox.
  */
-@removed(Versions.v1)
 model BrowserAutomationToolboxTool extends ToolboxTool {
   type: ToolboxBrowserAutomationToolType;
   ...ToolFields<BrowserAutomationTool>;
