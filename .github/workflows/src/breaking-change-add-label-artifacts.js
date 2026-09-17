@@ -1,6 +1,6 @@
-import { REVIEW_REQUIRED_LABELS } from "../../shared/src/breaking-change.js";
-import { PER_PAGE_MAX } from "../../shared/src/github.js";
-import { byDate, invert } from "../../shared/src/sort.js";
+import { REVIEW_REQUIRED_LABELS } from "../../shared/src/breaking-change.ts";
+import { PER_PAGE_MAX } from "../../shared/src/github.ts";
+import { byDate, invert } from "../../shared/src/sort.ts";
 import { extractInputs } from "./context.js";
 
 export const SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME = "Swagger BreakingChange - Analyze Code";
