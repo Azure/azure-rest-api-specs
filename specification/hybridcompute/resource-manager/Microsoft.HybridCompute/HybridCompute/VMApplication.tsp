@@ -39,17 +39,6 @@ interface VmApplications {
   get is ArmResourceRead<VmApplication>;
 
   /**
-   * Gets the instance view of a VM application.
-   */
-  @get
-  @action("instanceView")
-  getInstanceView is ArmResourceActionSync<
-    VmApplication,
-    void,
-    ArmResponse<VmApplicationInstanceView>
-  >;
-
-  /**
    * Creates or updates a VM application.
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<VmApplication>;

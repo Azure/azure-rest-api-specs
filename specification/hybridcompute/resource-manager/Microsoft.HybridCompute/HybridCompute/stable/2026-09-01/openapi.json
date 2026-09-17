@@ -2276,63 +2276,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/applications/{applicationName}/instanceView": {
-      "get": {
-        "operationId": "VmApplications_GetInstanceView",
-        "tags": [
-          "VmApplications"
-        ],
-        "description": "Gets the instance view of a VM application.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "description": "The name of the hybrid machine.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 54,
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
-          },
-          {
-            "name": "applicationName",
-            "in": "path",
-            "description": "The name of the VM application. When creating the resource, this name must match the application name in the selected gallery reference.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,78}[A-Za-z0-9_-])?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VmApplicationInstanceView"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get the instance view of a VM application": {
-            "$ref": "./examples/application/VMApplications_GetInstanceView.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}/assessPatches": {
       "post": {
         "operationId": "Machines_AssessPatches",
