@@ -1656,10 +1656,6 @@ model EvaluatorImprovementJobListItem {
 model PublishEvaluatorImprovementCandidateRequest {
   @doc("The exact candidate snapshot identifier returned by the improvement job.")
   candidate_snapshot_id: string;
-
-  @doc("An optional bounded review note.")
-  @maxLength(2000)
-  review_note?: string;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "The public contract uses the Request suffix."
