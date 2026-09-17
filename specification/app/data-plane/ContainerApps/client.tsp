@@ -745,7 +745,7 @@ namespace ContainerAppsSandbox {
   );
 }
 
-@clientNamespace("Azure.Containers.ContainerApps.Sandbox", "csharp")
+@clientNamespace("Azure.Containers.Apps.Sandbox", "csharp")
 namespace ContainerAppsSandboxClientModels {
   /** Authentication mechanisms for accessing a user-provided blob container. */
   union BlobVolumeAuthenticationKind {
