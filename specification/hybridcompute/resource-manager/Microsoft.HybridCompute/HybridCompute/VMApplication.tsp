@@ -85,12 +85,6 @@ interface VmApplications {
        */
       @query("$skipToken")
       $skipToken?: string;
-
-      /**
-       * The expand expression to apply to the operation.
-       */
-      @query("$expand")
-      $expand?: string;
     },
     Response = VmApplicationsListResult
   >;
