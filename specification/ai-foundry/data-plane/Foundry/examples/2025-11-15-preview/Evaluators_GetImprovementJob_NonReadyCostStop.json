@@ -1,0 +1,239 @@
+{
+  "title": "Evaluators_GetImprovementJob_NonReadyCostStop",
+  "operationId": "Evaluators_getImprovementJob",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "support_quality",
+    "job_id": "evalimprove_cost_001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "evalimprove_cost_001",
+        "status": "succeeded",
+        "created_at": "2026-09-17T17:00:00Z",
+        "started_at": "2026-09-17T17:01:00Z",
+        "finished_at": "2026-09-17T17:18:00Z",
+        "phase": "completed",
+        "baseline": {
+          "subject": {
+            "type": "current_capture",
+            "evaluator_name": "support_quality",
+            "snapshot_id": "current_snapshot_012",
+            "incarnation_id": "incarnation_004",
+            "captured_etag": "\"current-12\""
+          },
+          "definition": {
+            "type": "rubric",
+            "dimensions": [
+              {
+                "id": "completion_evidence",
+                "description": "The response explains whether the requested action completed.",
+                "weight": 4
+              },
+              {
+                "id": "response_clarity",
+                "description": "The response clearly explains the outcome.",
+                "weight": 5
+              },
+              {
+                "id": "general_quality",
+                "description": "The response is generally useful and correct.",
+                "weight": 2,
+                "always_applicable": true
+              }
+            ],
+            "pass_threshold": 0.6
+          }
+        },
+        "configuration": {
+          "development_source": {
+            "dataset": {
+              "name": "support-development-references",
+              "version": "3",
+              "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "schema_version": "binary-criterion-v1",
+              "mapping_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+            },
+            "reference_manifest": {
+              "id": "support-development-manifest",
+              "version": "3",
+              "content_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+            },
+            "guidance": {
+              "id": "support-reference-guidance",
+              "version": "2",
+              "content_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+            }
+          },
+          "confirmation_source": {
+            "dataset": {
+              "name": "support-confirmation-references",
+              "version": "1",
+              "content_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+              "schema_version": "binary-criterion-v1",
+              "mapping_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+            },
+            "reference_manifest": {
+              "id": "support-confirmation-manifest",
+              "version": "1",
+              "content_hash": "1111111111111111111111111111111111111111111111111111111111111111"
+            },
+            "guidance": {
+              "id": "support-reference-guidance",
+              "version": "2",
+              "content_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+            }
+          },
+          "guidance_sources": [],
+          "generator": {
+            "deployment_name": "rubric-improver",
+            "model_name": "gpt-5.4",
+            "model_version": "2026-08-15",
+            "region": "eastus2",
+            "deployment_type": "global_standard"
+          },
+          "judge": {
+            "deployment_name": "rubric-judge",
+            "model_name": "gpt-5.4",
+            "model_version": "2026-08-15",
+            "region": "eastus2",
+            "deployment_type": "global_standard"
+          },
+          "judge_configuration": {
+            "id": "binary-rubric-judge",
+            "version": "4",
+            "content_hash": "2222222222222222222222222222222222222222222222222222222222222222"
+          },
+          "validation_profile": {
+            "id": "binary_criterion_validity",
+            "version": "1"
+          },
+          "edit_scope": {
+            "description_dimension_ids": [
+              "completion_evidence"
+            ],
+            "weight_constraints": [
+              {
+                "type": "grid",
+                "dimension_id": "completion_evidence",
+                "allowed_values": [
+                  4,
+                  5
+                ]
+              }
+            ],
+            "pass_threshold_constraint": {
+              "type": "grid",
+              "allowed_values": [
+                0.6,
+                0.65
+              ]
+            }
+          },
+          "software": {
+            "service_version": "raisvc-2026.09.17.1",
+            "engine_version": "evaluator-improvement-1",
+            "worker_image_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+            "candidate_schema_version": "1"
+          }
+        },
+        "strategy": {
+          "id": "tool_evidence",
+          "display_name": "Ground completion claims in final tool evidence",
+          "version": "1",
+          "source": "fixed",
+          "action": "clarify_and_calibrate_completion_evidence",
+          "selection_reason": "Development disagreements cluster on unsupported completion claims while preserved dimensions remain stable.",
+          "rationale": "Require final tool evidence before a completion claim can pass.",
+          "development_evidence": [
+            {
+              "code": "unsupported_completion_claims",
+              "summary": "Development references show completion claims that disagree with final tool outcomes."
+            }
+          ]
+        },
+        "progress": {
+          "candidate_attempts_started": 8,
+          "candidate_attempts_completed": 8,
+          "candidate_attempts_rejected": 2,
+          "max_candidate_attempts": 8,
+          "finalist_selected": false,
+          "search_closed": true,
+          "confirmation_status": "not_run"
+        },
+        "cost": {
+          "max_inference_cost_usd": 10.0,
+          "spent_usd": 8.2,
+          "reconciled_usd": 7.7,
+          "uncertain_usd": 0.5,
+          "reserved_usd": 0.0,
+          "remaining_usd": 1.8,
+          "price_snapshot": {
+            "id": "price_snapshot_20260917",
+            "source": "service_catalog",
+            "source_id": "foundry-model-prices",
+            "source_version": "2026-09-17",
+            "captured_at": "2026-09-17T17:00:00Z",
+            "currency": "USD",
+            "scope": "model_inference_only",
+            "model_prices": [
+              {
+                "resolved_model": {
+                  "deployment_name": "rubric-improver",
+                  "model_name": "gpt-5.4",
+                  "model_version": "2026-08-15",
+                  "region": "eastus2",
+                  "deployment_type": "global_standard"
+                },
+                "input_usd_per_million_tokens": 2.5,
+                "output_usd_per_million_tokens": 10.0
+              },
+              {
+                "resolved_model": {
+                  "deployment_name": "rubric-judge",
+                  "model_name": "gpt-5.4",
+                  "model_version": "2026-08-15",
+                  "region": "eastus2",
+                  "deployment_type": "global_standard"
+                },
+                "input_usd_per_million_tokens": 2.5,
+                "output_usd_per_million_tokens": 10.0
+              }
+            ],
+            "excluded_cost_categories": [
+              "aca",
+              "storage",
+              "networking",
+              "deterministic_analysis",
+              "human_review"
+            ],
+            "invoice_guarantee": false
+          }
+        },
+        "result": {
+          "outcome": "incomplete",
+          "confirmation_status": "not_run",
+          "stop_reason": "max_inference_cost_usd_reached",
+          "limitations": [
+            "Independent confirmation did not run."
+          ],
+          "tradeoffs": [
+            "The next worst-case model request did not fit the remaining inference budget."
+          ]
+        },
+        "review": {
+          "state": "not_available",
+          "publication_eligibility": "blocked",
+          "blocking_reasons": [
+            {
+              "code": "confirmation_not_run",
+              "message": "The next conservative model request did not fit the remaining budget, no eligible finalist was available, and the unused confirmation holdback was released."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

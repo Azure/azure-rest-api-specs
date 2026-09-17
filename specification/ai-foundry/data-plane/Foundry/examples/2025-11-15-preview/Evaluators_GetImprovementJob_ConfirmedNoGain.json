@@ -1,0 +1,500 @@
+{
+  "title": "Evaluators_GetImprovementJob_ConfirmedNoGain",
+  "operationId": "Evaluators_getImprovementJob",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "support_quality",
+    "job_id": "evalimprove_no_gain_001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "evalimprove_no_gain_001",
+        "status": "succeeded",
+        "created_at": "2026-09-17T15:00:00Z",
+        "started_at": "2026-09-17T15:01:00Z",
+        "finished_at": "2026-09-17T15:20:00Z",
+        "phase": "completed",
+        "baseline": {
+          "subject": {
+            "type": "current_capture",
+            "evaluator_name": "support_quality",
+            "snapshot_id": "current_snapshot_012",
+            "incarnation_id": "incarnation_004",
+            "captured_etag": "\"current-12\""
+          },
+          "definition": {
+            "type": "rubric",
+            "dimensions": [
+              {
+                "id": "completion_evidence",
+                "description": "The response explains whether the requested action completed.",
+                "weight": 4
+              },
+              {
+                "id": "response_clarity",
+                "description": "The response clearly explains the outcome.",
+                "weight": 5
+              },
+              {
+                "id": "general_quality",
+                "description": "The response is generally useful and correct.",
+                "weight": 2,
+                "always_applicable": true
+              }
+            ],
+            "pass_threshold": 0.6
+          }
+        },
+        "configuration": {
+          "development_source": {
+            "dataset": {
+              "name": "support-development-references",
+              "version": "3",
+              "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "schema_version": "binary-criterion-v1",
+              "mapping_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+            },
+            "reference_manifest": {
+              "id": "support-development-manifest",
+              "version": "3",
+              "content_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+            },
+            "guidance": {
+              "id": "support-reference-guidance",
+              "version": "2",
+              "content_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+            }
+          },
+          "confirmation_source": {
+            "dataset": {
+              "name": "support-confirmation-references",
+              "version": "1",
+              "content_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+              "schema_version": "binary-criterion-v1",
+              "mapping_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+            },
+            "reference_manifest": {
+              "id": "support-confirmation-manifest",
+              "version": "1",
+              "content_hash": "1111111111111111111111111111111111111111111111111111111111111111"
+            },
+            "guidance": {
+              "id": "support-reference-guidance",
+              "version": "2",
+              "content_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+            }
+          },
+          "guidance_sources": [],
+          "generator": {
+            "deployment_name": "rubric-improver",
+            "model_name": "gpt-5.4",
+            "model_version": "2026-08-15",
+            "region": "eastus2",
+            "deployment_type": "global_standard"
+          },
+          "judge": {
+            "deployment_name": "rubric-judge",
+            "model_name": "gpt-5.4",
+            "model_version": "2026-08-15",
+            "region": "eastus2",
+            "deployment_type": "global_standard"
+          },
+          "judge_configuration": {
+            "id": "binary-rubric-judge",
+            "version": "4",
+            "content_hash": "2222222222222222222222222222222222222222222222222222222222222222"
+          },
+          "validation_profile": {
+            "id": "binary_criterion_validity",
+            "version": "1"
+          },
+          "edit_scope": {
+            "description_dimension_ids": [
+              "completion_evidence"
+            ],
+            "weight_constraints": []
+          },
+          "software": {
+            "service_version": "raisvc-2026.09.17.1",
+            "engine_version": "evaluator-improvement-1",
+            "worker_image_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+            "candidate_schema_version": "1"
+          }
+        },
+        "strategy": {
+          "id": "tool_evidence",
+          "display_name": "Ground completion claims in final tool evidence",
+          "version": "1",
+          "source": "fixed",
+          "action": "clarify_completion_evidence",
+          "selection_reason": "Development references showed a possible wording improvement.",
+          "rationale": "Require final tool evidence before a completion claim can pass.",
+          "development_evidence": [
+            {
+              "code": "development_match_gain",
+              "summary": "The candidate improved the registered development match rate."
+            }
+          ]
+        },
+        "progress": {
+          "candidate_attempts_started": 2,
+          "candidate_attempts_completed": 2,
+          "candidate_attempts_rejected": 0,
+          "max_candidate_attempts": 4,
+          "finalist_selected": true,
+          "search_closed": true,
+          "confirmation_status": "completed"
+        },
+        "cost": {
+          "max_inference_cost_usd": 25.0,
+          "spent_usd": 9.1,
+          "reconciled_usd": 9.1,
+          "uncertain_usd": 0.0,
+          "reserved_usd": 0.0,
+          "remaining_usd": 15.9,
+          "price_snapshot": {
+            "id": "price_snapshot_20260917",
+            "source": "service_catalog",
+            "source_id": "foundry-model-prices",
+            "source_version": "2026-09-17",
+            "captured_at": "2026-09-17T15:00:00Z",
+            "currency": "USD",
+            "scope": "model_inference_only",
+            "model_prices": [
+              {
+                "resolved_model": {
+                  "deployment_name": "rubric-improver",
+                  "model_name": "gpt-5.4",
+                  "model_version": "2026-08-15",
+                  "region": "eastus2",
+                  "deployment_type": "global_standard"
+                },
+                "input_usd_per_million_tokens": 2.5,
+                "output_usd_per_million_tokens": 10.0
+              },
+              {
+                "resolved_model": {
+                  "deployment_name": "rubric-judge",
+                  "model_name": "gpt-5.4",
+                  "model_version": "2026-08-15",
+                  "region": "eastus2",
+                  "deployment_type": "global_standard"
+                },
+                "input_usd_per_million_tokens": 2.5,
+                "output_usd_per_million_tokens": 10.0
+              }
+            ],
+            "excluded_cost_categories": [
+              "aca",
+              "storage",
+              "networking",
+              "deterministic_analysis",
+              "human_review"
+            ],
+            "invoice_guarantee": false
+          }
+        },
+        "result": {
+          "outcome": "no_improvement",
+          "confirmation_status": "completed",
+          "stop_reason": "confirmed_no_improvement",
+          "development_assessment": {
+            "type": "development",
+            "source": {
+              "dataset": {
+                "name": "support-development-references",
+                "version": "3",
+                "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "schema_version": "binary-criterion-v1",
+                "mapping_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+              },
+              "reference_manifest": {
+                "id": "support-development-manifest",
+                "version": "3",
+                "content_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+              },
+              "guidance": {
+                "id": "support-reference-guidance",
+                "version": "2",
+                "content_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+              }
+            },
+            "readiness": {
+              "profile": {
+                "id": "binary_criterion_validity",
+                "version": "1"
+              },
+              "reference_family": "binary_criterion_satisfaction",
+              "adapter_id": "binary-criterion-reference-adapter",
+              "adapter_version": "2",
+              "decision_mapping": "criterion_satisfied_to_evaluator_pass",
+              "evaluation_level": "turn",
+              "scoring_contract": {
+                "id": "binary-criterion-scoring",
+                "version": "1",
+                "content_hash": "4444444444444444444444444444444444444444444444444444444444444444"
+              },
+              "status": "ready",
+              "units": {
+                "selected_cases": 80,
+                "eligible_cases": 80,
+                "selected_response_pairs": 0,
+                "eligible_response_pairs": 0,
+                "case_dimension_comparisons": 240,
+                "reviewer_judgments": 80,
+                "independent_clusters": 80,
+                "comparable_references": 80,
+                "excluded_references": 0
+              },
+              "exclusions": [],
+              "class_support": [
+                {
+                  "label": "reference_pass",
+                  "count": 56
+                },
+                {
+                  "label": "reference_fail",
+                  "count": 24
+                }
+              ],
+              "supported_metric_ids": [
+                "reference_match_rate"
+              ],
+              "unsupported_metric_ids": [],
+              "requirements": [
+                {
+                  "id": "registered_class_support",
+                  "unit": "comparable_references",
+                  "status": "met",
+                  "observed_count": 80
+                }
+              ],
+              "limitations": [
+                "Development evidence may guide finalist selection."
+              ]
+            },
+            "metric_family": "binary_criterion_satisfaction_error",
+            "metrics": [
+              {
+                "metric_id": "reference_match_rate",
+                "baseline": {
+                  "status": "assessed",
+                  "value": 0.75,
+                  "numerator": 60,
+                  "denominator": 80,
+                  "sample_count": 80
+                },
+                "candidate": {
+                  "status": "assessed",
+                  "value": 0.8,
+                  "numerator": 64,
+                  "denominator": 80,
+                  "sample_count": 80
+                },
+                "delta": 0.05
+              }
+            ],
+            "conclusion": "improvement_supported",
+            "limitations": [
+              "The development gain required independent confirmation."
+            ]
+          },
+          "confirmation_assessment": {
+            "type": "confirmation",
+            "source": {
+              "dataset": {
+                "name": "support-confirmation-references",
+                "version": "1",
+                "content_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                "schema_version": "binary-criterion-v1",
+                "mapping_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+              },
+              "reference_manifest": {
+                "id": "support-confirmation-manifest",
+                "version": "1",
+                "content_hash": "1111111111111111111111111111111111111111111111111111111111111111"
+              },
+              "guidance": {
+                "id": "support-reference-guidance",
+                "version": "2",
+                "content_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+              }
+            },
+            "readiness": {
+              "profile": {
+                "id": "binary_criterion_validity",
+                "version": "1"
+              },
+              "reference_family": "binary_criterion_satisfaction",
+              "adapter_id": "binary-criterion-reference-adapter",
+              "adapter_version": "2",
+              "decision_mapping": "criterion_satisfied_to_evaluator_pass",
+              "evaluation_level": "turn",
+              "scoring_contract": {
+                "id": "binary-criterion-scoring",
+                "version": "1",
+                "content_hash": "4444444444444444444444444444444444444444444444444444444444444444"
+              },
+              "status": "ready",
+              "units": {
+                "selected_cases": 100,
+                "eligible_cases": 100,
+                "selected_response_pairs": 0,
+                "eligible_response_pairs": 0,
+                "case_dimension_comparisons": 300,
+                "reviewer_judgments": 100,
+                "independent_clusters": 100,
+                "comparable_references": 100,
+                "excluded_references": 0
+              },
+              "exclusions": [],
+              "class_support": [
+                {
+                  "label": "reference_pass",
+                  "count": 70
+                },
+                {
+                  "label": "reference_fail",
+                  "count": 30
+                }
+              ],
+              "supported_metric_ids": [
+                "reference_match_rate"
+              ],
+              "unsupported_metric_ids": [],
+              "requirements": [
+                {
+                  "id": "registered_precision",
+                  "unit": "comparable_references",
+                  "status": "met",
+                  "observed_count": 100
+                }
+              ],
+              "limitations": []
+            },
+            "metric_family": "binary_criterion_satisfaction_error",
+            "metrics": [
+              {
+                "metric_id": "reference_match_rate",
+                "baseline": {
+                  "status": "assessed",
+                  "value": 0.82,
+                  "numerator": 82,
+                  "denominator": 100,
+                  "sample_count": 100,
+                  "lower_bound": 0.73,
+                  "upper_bound": 0.88
+                },
+                "candidate": {
+                  "status": "assessed",
+                  "value": 0.82,
+                  "numerator": 82,
+                  "denominator": 100,
+                  "sample_count": 100,
+                  "lower_bound": 0.73,
+                  "upper_bound": 0.88
+                },
+                "delta": 0.0
+              }
+            ],
+            "conclusion": "no_improvement",
+            "limitations": [
+              "Independent confirmation found no qualifying gain."
+            ]
+          },
+          "limitations": [
+            "The development improvement did not replicate on independent confirmation evidence."
+          ],
+          "tradeoffs": [],
+          "candidate": {
+            "subject": {
+              "type": "improvement_candidate",
+              "evaluator_name": "support_quality",
+              "job_id": "evalimprove_no_gain_001",
+              "candidate_id": "candidate_002",
+              "snapshot_id": "candidate_snapshot_002",
+              "incarnation_id": "incarnation_004"
+            },
+            "execution_reference": "evaluator-improvement://evalimprove_no_gain_001/candidates/candidate_snapshot_002",
+            "definition": {
+              "type": "rubric",
+              "dimensions": [
+                {
+                  "id": "completion_evidence",
+                  "description": "A completion claim must be consistent with the final tool result.",
+                  "weight": 4
+                },
+                {
+                  "id": "response_clarity",
+                  "description": "The response clearly explains the outcome.",
+                  "weight": 5
+                },
+                {
+                  "id": "general_quality",
+                  "description": "The response is generally useful and correct.",
+                  "weight": 2,
+                  "always_applicable": true
+                }
+              ],
+              "pass_threshold": 0.6
+            },
+            "change": {
+              "description_changes": [
+                {
+                  "dimension_id": "completion_evidence",
+                  "before": "The response explains whether the requested action completed.",
+                  "after": "A completion claim must be consistent with the final tool result."
+                }
+              ],
+              "weight_changes": [],
+              "preserved_constraints": [
+                "dimension_ids",
+                "dimension_order",
+                "dimension_weights",
+                "pass_threshold",
+                "always_applicable",
+                "ownership",
+                "applicability",
+                "vetoes",
+                "schemas",
+                "model_bindings",
+                "validation_profile_acceptance_thresholds"
+              ]
+            },
+            "rationale": "Clarify the evidence requirement without changing calibration.",
+            "expected_benefit": "Reduce ambiguous completion judgments.",
+            "provenance": {
+              "attempt_number": 2,
+              "created_at": "2026-09-17T15:10:00Z",
+              "generator": {
+                "deployment_name": "rubric-improver",
+                "model_name": "gpt-5.4",
+                "model_version": "2026-08-15",
+                "region": "eastus2",
+                "deployment_type": "global_standard"
+              },
+              "strategy_id": "tool_evidence",
+              "strategy_version": "1",
+              "validation_profile": {
+                "id": "binary_criterion_validity",
+                "version": "1"
+              }
+            }
+          }
+        },
+        "review": {
+          "state": "not_available",
+          "publication_eligibility": "blocked",
+          "blocking_reasons": [
+            {
+              "code": "no_confirmed_improvement",
+              "message": "Independent confirmation completed with adequate evidence and found no qualifying gain."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

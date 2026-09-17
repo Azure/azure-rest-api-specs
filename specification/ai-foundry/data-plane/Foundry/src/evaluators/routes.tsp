@@ -1,11 +1,13 @@
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
 import "./diagnostic-jobs-models.tsp";
+import "./improvement-jobs-models.tsp";
 import "./models.tsp";
 
 namespace Azure.AI.Projects;
 using Http;
 using OpenAPI;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 alias ListEvaluatorsParameters = {
@@ -76,6 +78,50 @@ alias EvaluatorDiagnosticJobIdentifierParameter = {
   @path
   jobId: string;
 };
+
+alias ListEvaluatorImprovementJobsParameters = {
+  @doc("Filter jobs by standard lifecycle status.")
+  @query
+  status?: JobStatus;
+
+  @doc("Filter jobs by successful result outcome.")
+  @query
+  outcome?: EvaluatorImprovementOutcome;
+
+  @doc("Filter jobs by durable review state.")
+  @query
+  review_state?: EvaluatorImprovementReviewState;
+};
+
+alias EvaluatorImprovementScopeParameters = {
+  @doc("The evaluator name.")
+  @path
+  name: string;
+};
+
+alias EvaluatorImprovementJobIdentifierParameter = {
+  @doc("The evaluator improvement job identifier.")
+  @path
+  job_id: string;
+};
+
+alias EvaluatorImprovementRequiredIfMatchHeader = {
+  @doc("The ETag of the unnumbered current evaluator to capture as this job's immutable baseline.")
+  @header("If-Match")
+  if_match: string;
+};
+
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling is represented by Operation-Location and @pollingOperation on create."
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Evaluator improvement lifecycle operations return job or published evaluator bodies."
+#suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "The approved contract distinguishes 409 lifecycle conflicts from 412 stale baseline preconditions while retaining the standard default ApiError envelope."
+op EvaluatorImprovementRequiredPreviewOperation<
+  Params extends TypeSpec.Reflection.Model,
+  Response
+>(
+  ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>,
+  ...Params,
+  ...FoundryDataPlaneApiVersionParameter,
+): Response | AzureRangeErrorResponse<ApiErrorResponse>;
 
 @tag("Evaluators")
 interface Evaluators {
@@ -191,6 +237,8 @@ interface Evaluators {
    * diagnostics appear only after the source job succeeds.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Evaluator diagnostics are immutable completed resources with custom evaluator-scoped filtering."
+  @added(Versions.PuPr)
+  @removed(Versions.v1)
   @summary("List evaluator diagnostics")
   @route("/evaluators/{name}/diagnostics")
   @get
@@ -210,6 +258,8 @@ interface Evaluators {
 
   /** Returns one completed evaluator diagnostic by its stable identifier. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Evaluator diagnostics use an evaluator-scoped immutable read route."
+  @added(Versions.PuPr)
+  @removed(Versions.v1)
   @summary("Get an evaluator diagnostic")
   @route("/evaluators/{name}/diagnostics/{diagnostic_id}")
   @get
@@ -334,6 +384,154 @@ interface Evaluators {
     },
     AssetCredentialResponse
   >;
+
+  /** Returns evaluator-specific eligibility, profile, edit-scope, permission, and pricing options. Create and publish recheck every prerequisite. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Evaluator-scoped preview options use the Foundry required-preview operation envelope."
+  @added(Versions.PuPr)
+  @removed(Versions.v1)
+  @summary("Get evaluator improvement options")
+  @get
+  @route("/evaluators/{name}/improvement_options")
+  @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
+  getImprovementOptions is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorImprovementScopeParameters,
+    EvaluatorImprovementOptions
+  >;
+
+  /** Creates a durable bounded improvement job after capturing the current evaluator under the required ETag. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The evaluator-scoped job create operation requires If-Match and supports Operation-Id in addition to the Foundry preview envelope."
+  #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "409 distinguishes an idempotency conflict and 412 distinguishes a stale captured evaluator precondition."
+  @added(Versions.PuPr)
+  @removed(Versions.v1)
+  @summary("Create an evaluator improvement job")
+  @post
+  @route("/evaluators/{name}/improvement_jobs")
+  @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
+  @pollingOperation(Evaluators.getImprovementJob)
+  createImprovementJob is EvaluatorImprovementRequiredPreviewOperation<
+    {
+      ...EvaluatorImprovementScopeParameters;
+      ...EvaluatorImprovementRequiredIfMatchHeader;
+      ...WithOperationId;
+
+      @doc("The bounded evaluator improvement request.")
+      @body
+      request: EvaluatorImprovementJobRequest;
+    },
+    | JobCreatedResponse<EvaluatorImprovementJob>
+    | EvaluatorImprovementConflictResponse
+    | EvaluatorImprovementPreconditionFailedResponse
+  >;
+
+  /** Returns one authoritative evaluator improvement job, including result, cost, and review state. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The evaluator-scoped job route composes evaluator and job identifiers with the Foundry required-preview envelope."
+  @added(Versions.PuPr)
+  @removed(Versions.v1)
+  @summary("Get an evaluator improvement job")
+  @get
+  @route("/evaluators/{name}/improvement_jobs/{job_id}")
+  @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
+  getImprovementJob is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorImprovementScopeParameters &
+      EvaluatorImprovementJobIdentifierParameter,
+    JobStatusResponse<EvaluatorImprovementJob>
+  >;
+
+  /** Lists evaluator improvement jobs using cursor pagination. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The evaluator-scoped job list adds evaluator containment and domain filters to standard cursor paging."
+  @added(Versions.PuPr)
+  @removed(Versions.v1)
+  @summary("List evaluator improvement jobs")
+  @get
+  @list
+  @route("/evaluators/{name}/improvement_jobs")
+  @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
+  listImprovementJobs is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorImprovementScopeParameters &
+      CommonPageQueryParameters &
+      ListEvaluatorImprovementJobsParameters,
+    AgentsPagedResult<EvaluatorImprovementJobListItem>
+  >;
+
+  /** Cancels queued or in-progress work while preserving incurred, reserved, and uncertain model-inference cost. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The evaluator-scoped cancel action uses the Foundry required-preview envelope."
+  @added(Versions.PuPr)
+  @removed(Versions.v1)
+  @summary("Cancel an evaluator improvement job")
+  @post
+  @route("/evaluators/{name}/improvement_jobs/{job_id}:cancel")
+  @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
+  cancelImprovementJob is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorImprovementScopeParameters &
+      EvaluatorImprovementJobIdentifierParameter,
+    OkResponse & EvaluatorImprovementJob
+  >;
+
+  /** Deletes a terminal evaluator improvement job under the service retention policy. Tombstones and late cost reconciliation cannot revive a result. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The evaluator-scoped delete operation uses the Foundry required-preview envelope."
+  @added(Versions.PuPr)
+  @removed(Versions.v1)
+  @summary("Delete an evaluator improvement job")
+  @delete
+  @route("/evaluators/{name}/improvement_jobs/{job_id}")
+  @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
+  deleteImprovementJob is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorImprovementScopeParameters &
+      EvaluatorImprovementJobIdentifierParameter,
+    NoContentResponse
+  >;
+
+  /** Records authenticated approval and publishes the exact stored finalist as a numbered evaluator version. The request cannot replace candidate content or the original baseline ETag. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Publishing the exact stored finalist is a service-specific evaluator action."
+  #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "409 distinguishes a review or publication conflict and 412 distinguishes a stale captured evaluator precondition."
+  @added(Versions.PuPr)
+  @removed(Versions.v1)
+  @summary("Publish an evaluator improvement candidate")
+  @post
+  @route("/evaluators/{name}/improvement_jobs/{job_id}:publish")
+  @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
+  publishImprovementCandidate is EvaluatorImprovementRequiredPreviewOperation<
+    {
+      ...EvaluatorImprovementScopeParameters;
+      ...EvaluatorImprovementJobIdentifierParameter;
+      ...WithOperationId;
+
+      @doc("The exact stored candidate to publish.")
+      @body
+      request: PublishEvaluatorImprovementCandidateRequest;
+    },
+    | Azure.Core.Foundations.ResourceCreatedResponse<EvaluatorVersion>
+    | EvaluatorImprovementConflictResponse
+    | EvaluatorImprovementPreconditionFailedResponse
+  >;
+
+  /** Records an authenticated rejection of the exact stored finalist without changing current or published evaluator state. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Rejecting the exact stored finalist is a service-specific evaluator action."
+  #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "409 distinguishes a review race or an already completed review action."
+  @added(Versions.PuPr)
+  @removed(Versions.v1)
+  @summary("Reject an evaluator improvement candidate")
+  @post
+  @route("/evaluators/{name}/improvement_jobs/{job_id}:reject")
+  @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
+  rejectImprovementCandidate is EvaluatorImprovementRequiredPreviewOperation<
+    {
+      ...EvaluatorImprovementScopeParameters;
+      ...EvaluatorImprovementJobIdentifierParameter;
+      ...WithOperationId;
+
+      @doc("The exact stored candidate to reject.")
+      @body
+      request: RejectEvaluatorImprovementCandidateRequest;
+    },
+    | (OkResponse & EvaluatorImprovementJob)
+    | EvaluatorImprovementConflictResponse
+  >;
 }
 
 // ============================================================================
@@ -343,6 +541,8 @@ interface Evaluators {
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @tag("EvaluatorDiagnosticJobs")
+@added(Versions.PuPr)
+@removed(Versions.v1)
 interface EvaluatorDiagnosticJobs {
   /** Creates an evaluator diagnostic job and returns the queued job. */
   @summary("Create an evaluator diagnostic job")

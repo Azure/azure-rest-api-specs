@@ -10735,6 +10735,611 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
+  /evaluators/{name}/improvement_jobs:
+    post:
+      operationId: Evaluators_createImprovementJob
+      summary: Create an evaluator improvement job
+      description: Creates a durable bounded improvement job after capturing the current evaluator under the required ETag.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The evaluator name.
+          schema:
+            type: string
+        - name: If-Match
+          in: header
+          required: true
+          description: The ETag of the unnumbered current evaluator to capture as this job's immutable baseline.
+          schema:
+            type: string
+        - name: Operation-Id
+          in: header
+          required: false
+          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Operation-Location:
+              required: true
+              description: URL to poll for the job status.
+              schema:
+                type: string
+            Location:
+              required: true
+              description: URL of the created job resource.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluatorImprovementJob'
+        '409':
+          description: A conflict response for an Operation-Id mismatch, review race, or already rejected or published job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '412':
+          description: A precondition-failed response when the captured current-evaluator ETag or incarnation is no longer current.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Evaluators
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluatorImprovementJobRequest'
+        description: The bounded evaluator improvement request.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    get:
+      operationId: Evaluators_listImprovementJobs
+      summary: List evaluator improvement jobs
+      description: Lists evaluator improvement jobs using cursor pagination.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The evaluator name.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: status
+          in: query
+          required: false
+          description: Filter jobs by standard lifecycle status.
+          schema:
+            $ref: '#/components/schemas/JobStatus'
+          explode: false
+        - name: outcome
+          in: query
+          required: false
+          description: Filter jobs by successful result outcome.
+          schema:
+            $ref: '#/components/schemas/EvaluatorImprovementOutcome'
+          explode: false
+        - name: review_state
+          in: query
+          required: false
+          description: Filter jobs by durable review state.
+          schema:
+            $ref: '#/components/schemas/EvaluatorImprovementReviewState'
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EvaluatorImprovementJobListItem'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Evaluators
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+  /evaluators/{name}/improvement_jobs/{job_id}:
+    get:
+      operationId: Evaluators_getImprovementJob
+      summary: Get an evaluator improvement job
+      description: Returns one authoritative evaluator improvement job, including result, cost, and review state.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The evaluator name.
+          schema:
+            type: string
+        - name: job_id
+          in: path
+          required: true
+          description: The evaluator improvement job identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            Retry-After:
+              required: false
+              description: Recommended number of seconds to wait before polling again.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluatorImprovementJob'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Evaluators
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    delete:
+      operationId: Evaluators_deleteImprovementJob
+      summary: Delete an evaluator improvement job
+      description: Deletes a terminal evaluator improvement job under the service retention policy. Tombstones and late cost reconciliation cannot revive a result.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The evaluator name.
+          schema:
+            type: string
+        - name: job_id
+          in: path
+          required: true
+          description: The evaluator improvement job identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Evaluators
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+  /evaluators/{name}/improvement_jobs/{job_id}:cancel:
+    post:
+      operationId: Evaluators_cancelImprovementJob
+      summary: Cancel an evaluator improvement job
+      description: Cancels queued or in-progress work while preserving incurred, reserved, and uncertain model-inference cost.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The evaluator name.
+          schema:
+            type: string
+        - name: job_id
+          in: path
+          required: true
+          description: The evaluator improvement job identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluatorImprovementJob'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Evaluators
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+  /evaluators/{name}/improvement_jobs/{job_id}:publish:
+    post:
+      operationId: Evaluators_publishImprovementCandidate
+      summary: Publish an evaluator improvement candidate
+      description: Records authenticated approval and publishes the exact stored finalist as a numbered evaluator version. The request cannot replace candidate content or the original baseline ETag.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The evaluator name.
+          schema:
+            type: string
+        - name: job_id
+          in: path
+          required: true
+          description: The evaluator improvement job identifier.
+          schema:
+            type: string
+        - name: Operation-Id
+          in: header
+          required: false
+          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluatorVersion'
+        '409':
+          description: A conflict response for an Operation-Id mismatch, review race, or already rejected or published job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '412':
+          description: A precondition-failed response when the captured current-evaluator ETag or incarnation is no longer current.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Evaluators
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishEvaluatorImprovementCandidateRequest'
+        description: The exact stored candidate to publish.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+  /evaluators/{name}/improvement_jobs/{job_id}:reject:
+    post:
+      operationId: Evaluators_rejectImprovementCandidate
+      summary: Reject an evaluator improvement candidate
+      description: Records an authenticated rejection of the exact stored finalist without changing current or published evaluator state.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The evaluator name.
+          schema:
+            type: string
+        - name: job_id
+          in: path
+          required: true
+          description: The evaluator improvement job identifier.
+          schema:
+            type: string
+        - name: Operation-Id
+          in: header
+          required: false
+          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluatorImprovementJob'
+        '409':
+          description: A conflict response for an Operation-Id mismatch, review race, or already rejected or published job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Evaluators
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RejectEvaluatorImprovementCandidateRequest'
+        description: The exact stored candidate to reject.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+  /evaluators/{name}/improvement_options:
+    get:
+      operationId: Evaluators_getImprovementOptions
+      summary: Get evaluator improvement options
+      description: Returns evaluator-specific eligibility, profile, edit-scope, permission, and pricing options. Create and publish recheck every prerequisite.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The evaluator name.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluatorImprovementOptions'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Evaluators
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
   /evaluators/{name}/startPendingUpload:
     post:
       operationId: Evaluators_startPendingUpload
@@ -52912,6 +53517,32 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
+    EvaluatorAnalysisSubjectReference:
+      type: object
+      required:
+        - type
+        - evaluator_name
+      properties:
+        type:
+          $ref: '#/components/schemas/EvaluatorAnalysisSubjectType'
+          description: The snapshot kind.
+        evaluator_name:
+          type: string
+          description: The evaluator name.
+      discriminator:
+        propertyName: type
+        mapping:
+          current_capture: '#/components/schemas/EvaluatorCurrentCaptureAnalysisSubjectReference'
+          published_version: '#/components/schemas/PublishedEvaluatorAnalysisSubjectReference'
+          improvement_candidate: '#/components/schemas/ImprovementCandidateAnalysisSubjectReference'
+      description: Base reference to an evaluator snapshot used for analysis.
+    EvaluatorAnalysisSubjectType:
+      type: string
+      enum:
+        - published_version
+        - current_capture
+        - improvement_candidate
+      description: The kind of evaluator snapshot referenced for analysis.
     EvaluatorApplicabilitySupport:
       type: object
       required:
@@ -52983,6 +53614,30 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
+    EvaluatorCurrentCaptureAnalysisSubjectReference:
+      type: object
+      required:
+        - type
+        - snapshot_id
+        - incarnation_id
+        - captured_etag
+      properties:
+        type:
+          type: string
+          enum:
+            - current_capture
+        snapshot_id:
+          type: string
+          description: The immutable job-owned snapshot identifier.
+        incarnation_id:
+          type: string
+          description: The evaluator resource incarnation captured at job acceptance.
+        captured_etag:
+          type: string
+          description: The current evaluator ETag supplied in the create request's `If-Match` header and captured by the service.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorAnalysisSubjectReference'
+      description: A reference to the unnumbered current evaluator captured under an ETag and incarnation.
     EvaluatorDefinition:
       type: object
       required:
@@ -53007,9 +53662,9 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          rubric: '#/components/schemas/RubricBasedEvaluatorDefinition'
           code: '#/components/schemas/CodeBasedEvaluatorDefinition'
           prompt: '#/components/schemas/PromptBasedEvaluatorDefinition'
-          rubric: '#/components/schemas/RubricBasedEvaluatorDefinition'
           endpoint: '#/components/schemas/EndpointBasedEvaluatorDefinition'
       description: Base evaluator configuration with discriminator
       x-ms-foundry-meta:
@@ -53645,6 +54300,1809 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
+    EvaluatorImprovementActor:
+      type: object
+      required:
+        - type
+        - id
+      properties:
+        type:
+          $ref: '#/components/schemas/EvaluatorImprovementActorType'
+          description: The actor type.
+        id:
+          type: string
+          description: A stable opaque principal or service identifier.
+      description: The authenticated actor recorded for a review action.
+    EvaluatorImprovementActorType:
+      type: string
+      enum:
+        - user
+        - service
+      description: The authenticated actor type recorded for an evaluator improvement review action.
+    EvaluatorImprovementApprovedRateOverrideReference:
+      type: object
+      required:
+        - id
+        - version
+      properties:
+        id:
+          type: string
+          description: The approved override identifier.
+        version:
+          type: string
+          description: The immutable approved override version.
+      description: A reference to a pre-approved immutable rate override. The caller cannot supply rates or assert approval.
+    EvaluatorImprovementArtifactReference:
+      type: object
+      required:
+        - id
+        - version
+      properties:
+        id:
+          type: string
+          description: The artifact identifier.
+        version:
+          type: string
+          description: The immutable artifact version.
+      description: An immutable reference to a versioned improvement artifact.
+    EvaluatorImprovementArtifactSnapshot:
+      type: object
+      required:
+        - id
+        - version
+        - content_hash
+      properties:
+        id:
+          type: string
+          description: The artifact identifier.
+        version:
+          type: string
+          description: The immutable artifact version.
+        content_hash:
+          $ref: '#/components/schemas/Sha256Hash'
+          description: The lowercase SHA-256 content hash.
+      description: An immutable captured artifact with content identity.
+    EvaluatorImprovementAssessment:
+      type: object
+      required:
+        - type
+        - source
+        - readiness
+        - metric_family
+        - metrics
+        - conclusion
+        - limitations
+      properties:
+        type:
+          $ref: '#/components/schemas/EvaluatorImprovementAssessmentType'
+          description: Whether this is development or independent confirmation evidence.
+        source:
+          $ref: '#/components/schemas/EvaluatorImprovementEvidenceSourceSnapshot'
+          description: The frozen evidence source.
+        readiness:
+          $ref: '#/components/schemas/EvaluatorImprovementEvidenceReadiness'
+          description: Profile-specific readiness and support.
+        metric_family:
+          type: string
+          description: The metric family actually used.
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementMetricComparison'
+          description: Baseline-versus-finalist metric comparisons.
+        conclusion:
+          $ref: '#/components/schemas/EvaluatorImprovementAssessmentConclusion'
+          description: The immutable profile's conclusion.
+        limitations:
+          type: array
+          items:
+            type: string
+          description: Bounded interpretation limitations.
+      description: A development or independent-confirmation assessment. Development evidence may guide search; confirmation evidence may not.
+    EvaluatorImprovementAssessmentConclusion:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - improvement_supported
+            - no_improvement
+            - insufficient_evidence
+            - not_assessed
+      description: The profile conclusion for one assessment.
+    EvaluatorImprovementAssessmentType:
+      type: string
+      enum:
+        - development
+        - confirmation
+      description: The role of an assessment in the improvement workflow.
+    EvaluatorImprovementBaselineSnapshot:
+      type: object
+      required:
+        - subject
+        - definition
+      properties:
+        subject:
+          $ref: '#/components/schemas/EvaluatorCurrentCaptureAnalysisSubjectReference'
+          description: The non-publishing captured-current subject identity.
+        definition:
+          $ref: '#/components/schemas/RubricBasedEvaluatorDefinition'
+          description: The exact captured rubric evaluator definition.
+      description: The exact current rubric evaluator captured as the baseline.
+    EvaluatorImprovementBlockingReason:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: A stable machine-readable reason code.
+        message:
+          type: string
+          description: A bounded user-facing explanation.
+      description: A stable reason that an improvement option or action is unavailable.
+    EvaluatorImprovementBudget:
+      type: object
+      required:
+        - max_candidate_attempts
+        - max_inference_cost_usd
+      properties:
+        max_candidate_attempts:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The maximum number of proposed candidate configurations, including structurally rejected proposals and deterministic calibration variants.
+        max_inference_cost_usd:
+          $ref: '#/components/schemas/EvaluatorImprovementUsdAmount'
+          description: The exact maximum USD amount for model inference. It excludes ACA, storage, networking, deterministic analysis, and human review.
+        approved_rate_override:
+          $ref: '#/components/schemas/EvaluatorImprovementApprovedRateOverrideReference'
+          description: An approved rate override reference required only when the authoritative service catalog does not cover the selected configuration.
+      description: The customer-visible bounds for one improvement job.
+    EvaluatorImprovementCandidateChange:
+      type: object
+      required:
+        - description_changes
+        - weight_changes
+        - preserved_constraints
+      properties:
+        description_changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementDescriptionChange'
+          description: Approved description changes.
+        weight_changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementWeightChange'
+          description: Approved integer-weight changes.
+        pass_threshold_change:
+          $ref: '#/components/schemas/EvaluatorImprovementPassThresholdChange'
+          description: An approved evaluator decision-threshold calibration, when supported by the profile's decision mapping.
+        preserved_constraints:
+          type: array
+          items:
+            type: string
+          description: Stable paths or constraint identifiers verified unchanged, including IDs, order, ownership, applicability, vetoes, schemas, model bindings, and validation-profile rules.
+      description: The exact allowlisted difference between the captured current evaluator and the finalist.
+    EvaluatorImprovementCandidateProvenance:
+      type: object
+      required:
+        - attempt_number
+        - created_at
+        - generator
+        - strategy_id
+        - strategy_version
+        - validation_profile
+      properties:
+        attempt_number:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The one-based candidate-attempt number.
+        created_at:
+          type: string
+          format: date-time
+          description: When the candidate snapshot was created.
+        generator:
+          $ref: '#/components/schemas/EvaluatorImprovementModelSnapshot'
+          description: The frozen generator deployment.
+        strategy_id:
+          type: string
+          description: The selected immutable strategy identifier.
+        strategy_version:
+          type: string
+          description: The selected immutable strategy version.
+        validation_profile:
+          $ref: '#/components/schemas/EvaluatorImprovementProfileReference'
+          description: The immutable validation profile.
+      description: Immutable provenance for a job-owned candidate.
+    EvaluatorImprovementCandidateSnapshot:
+      type: object
+      required:
+        - subject
+        - execution_reference
+        - definition
+        - change
+        - rationale
+        - expected_benefit
+        - provenance
+      properties:
+        subject:
+          $ref: '#/components/schemas/ImprovementCandidateAnalysisSubjectReference'
+          description: The non-publishing candidate subject identity.
+        execution_reference:
+          type: string
+          description: An opaque permission-checked reference for executing or inspecting this exact private candidate.
+        definition:
+          $ref: '#/components/schemas/RubricBasedEvaluatorDefinition'
+          description: The complete exact rubric evaluator definition stored for the candidate.
+        change:
+          $ref: '#/components/schemas/EvaluatorImprovementCandidateChange'
+          description: The exact allowlisted difference from the captured current evaluator.
+        rationale:
+          type: string
+          description: A bounded explanation of the intended repair. This is not measured evidence.
+        expected_benefit:
+          type: string
+          description: The expected benefit stated before independent confirmation.
+        provenance:
+          $ref: '#/components/schemas/EvaluatorImprovementCandidateProvenance'
+          description: Immutable candidate provenance.
+      description: The exact immutable non-publishing finalist. Publication always reloads this stored snapshot; the client cannot replace its content.
+    EvaluatorImprovementClassSupport:
+      type: object
+      required:
+        - label
+        - count
+      properties:
+        label:
+          type: string
+          description: The class or score identifier from the registered scoring contract.
+        count:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The number of compatible observations.
+      description: Observed support for one registered class, ordinal score, preference label, or applicability state.
+    EvaluatorImprovementConfigurationSnapshot:
+      type: object
+      required:
+        - development_source
+        - confirmation_source
+        - guidance_sources
+        - generator
+        - judge
+        - judge_configuration
+        - validation_profile
+        - edit_scope
+        - software
+      properties:
+        development_source:
+          $ref: '#/components/schemas/EvaluatorImprovementEvidenceSourceSnapshot'
+          description: The development evidence available to search.
+        confirmation_source:
+          $ref: '#/components/schemas/EvaluatorImprovementEvidenceSourceSnapshot'
+          description: The independent evidence reserved for the single frozen finalist.
+        guidance_sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementArtifactSnapshot'
+          description: Immutable guidance artifacts made available to candidate generation.
+        generator:
+          $ref: '#/components/schemas/EvaluatorImprovementModelSnapshot'
+          description: The resolved generator deployment.
+        judge:
+          $ref: '#/components/schemas/EvaluatorImprovementModelSnapshot'
+          description: The resolved judge deployment.
+        judge_configuration:
+          $ref: '#/components/schemas/EvaluatorImprovementArtifactSnapshot'
+          description: The immutable judge configuration and scoring-contract snapshot.
+        validation_profile:
+          $ref: '#/components/schemas/EvaluatorImprovementProfileReference'
+          description: The immutable validation profile.
+        edit_scope:
+          $ref: '#/components/schemas/EvaluatorImprovementEditScope'
+          description: The effective edit and evaluator-threshold calibration scope after intersecting caller approval with service restrictions.
+        software:
+          $ref: '#/components/schemas/EvaluatorImprovementSoftwareProvenance'
+          description: Frozen service and worker versions.
+      description: The server-frozen configuration used by an evaluator improvement job.
+    EvaluatorImprovementConfirmationStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - not_run
+            - in_progress
+            - completed
+            - interrupted
+            - failed
+      description: The independent-confirmation state for the single frozen finalist.
+    EvaluatorImprovementCostProgress:
+      type: object
+      required:
+        - max_inference_cost_usd
+        - spent_usd
+        - reconciled_usd
+        - uncertain_usd
+        - reserved_usd
+        - remaining_usd
+        - price_snapshot
+      properties:
+        max_inference_cost_usd:
+          $ref: '#/components/schemas/EvaluatorImprovementUsdAmount'
+          description: The exact approved model-inference USD limit.
+        spent_usd:
+          $ref: '#/components/schemas/EvaluatorImprovementUsdAmount'
+          description: The current best-known model-inference cost already debited.
+        reconciled_usd:
+          $ref: '#/components/schemas/EvaluatorImprovementUsdAmount'
+          description: The subset of `spent_usd` finalized from returned usage.
+        uncertain_usd:
+          $ref: '#/components/schemas/EvaluatorImprovementUsdAmount'
+          description: The subset of `spent_usd` conservatively retained for possibly transmitted calls without final usage.
+        reserved_usd:
+          $ref: '#/components/schemas/EvaluatorImprovementUsdAmount'
+          description: The conservative maximum cost held for admitted but unfinished model calls.
+        remaining_usd:
+          $ref: '#/components/schemas/EvaluatorImprovementUsdAmount'
+          description: 'The uncommitted amount: `max_inference_cost_usd - spent_usd - reserved_usd`.'
+        price_snapshot:
+          $ref: '#/components/schemas/EvaluatorImprovementPriceSnapshot'
+          description: The frozen authoritative price schedule.
+      description: Exact model-inference budget progress. `spent_usd + reserved_usd + remaining_usd` equals `max_inference_cost_usd`. `reconciled_usd` and `uncertain_usd` are identified subsets of `spent_usd` and must not be added to it.
+    EvaluatorImprovementDatasetReference:
+      type: object
+      required:
+        - name
+        - version
+      properties:
+        name:
+          type: string
+          description: The dataset name.
+        version:
+          type: string
+          description: The exact immutable dataset version. Aliases and `latest` are not accepted.
+      description: An immutable reference to a registered Foundry dataset.
+    EvaluatorImprovementDatasetSnapshot:
+      type: object
+      required:
+        - name
+        - version
+        - content_hash
+        - schema_version
+        - mapping_hash
+      properties:
+        name:
+          type: string
+          description: The dataset name.
+        version:
+          type: string
+          description: The exact immutable dataset version.
+        content_hash:
+          $ref: '#/components/schemas/Sha256Hash'
+          description: The lowercase SHA-256 dataset content hash.
+        schema_version:
+          type: string
+          description: The registered dataset or reference schema version.
+        mapping_hash:
+          $ref: '#/components/schemas/Sha256Hash'
+          description: The lowercase SHA-256 hash of the stable item and field mapping.
+      description: A registered dataset snapshot frozen for evaluator improvement.
+    EvaluatorImprovementDescriptionChange:
+      type: object
+      required:
+        - dimension_id
+        - before
+        - after
+      properties:
+        dimension_id:
+          type: string
+          description: The stable existing dimension identifier.
+        before:
+          type: string
+          description: The captured description.
+        after:
+          type: string
+          description: The proposed description.
+      description: One approved description change on an existing model-owned rubric dimension.
+    EvaluatorImprovementDimensionWeight:
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 10
+      description: A rubric dimension weight accepted by the current evaluator contract.
+    EvaluatorImprovementEditScope:
+      type: object
+      required:
+        - description_dimension_ids
+        - weight_constraints
+      properties:
+        description_dimension_ids:
+          type: array
+          items:
+            type: string
+          description: Existing model-owned dimension identifiers whose descriptions may be changed.
+        weight_constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementWeightConstraint'
+          description: Approved weight ranges or grids for selected existing model-owned dimensions.
+        pass_threshold_constraint:
+          $ref: '#/components/schemas/EvaluatorImprovementPassThresholdConstraint'
+          description: Optional approved calibration of the evaluator definition's `pass_threshold`. Pairwise profiles omit this unless they define a separate compatible binary decision mapping.
+      description: The caller-approved edit and scoring-calibration scope. The service intersects this scope with profile and evaluator restrictions.
+    EvaluatorImprovementEditableDimensionField:
+      type: string
+      enum:
+        - description
+        - weight
+      description: An editable field on an existing model-owned rubric dimension.
+    EvaluatorImprovementEditableDimensionOption:
+      type: object
+      required:
+        - dimension_id
+        - fields
+        - current_weight
+        - weight_constraints
+      properties:
+        dimension_id:
+          type: string
+          description: The stable existing dimension identifier.
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementEditableDimensionField'
+          description: The fields currently available for selection.
+        current_weight:
+          $ref: '#/components/schemas/EvaluatorImprovementDimensionWeight'
+          description: The current integer dimension weight.
+        weight_constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementWeightConstraint'
+          description: The approved weight constraints.
+      description: Editable fields and weight choices for one existing model-owned dimension.
+    EvaluatorImprovementEvidenceExclusion:
+      type: object
+      required:
+        - reason
+        - count
+      properties:
+        reason:
+          $ref: '#/components/schemas/EvaluatorImprovementEvidenceExclusionReason'
+          description: The stable exclusion category.
+        count:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The number of excluded evidence units.
+        message:
+          type: string
+          description: A bounded explanation or remediation hint.
+      description: A counted evidence exclusion.
+    EvaluatorImprovementEvidenceExclusionReason:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - missing_reference
+            - incompatible_reference
+            - reference_error
+            - duplicate_reference
+            - abstention
+            - development_confirmation_overlap
+      description: A stable exclusion category for selected reference evidence.
+    EvaluatorImprovementEvidenceReadiness:
+      type: object
+      required:
+        - profile
+        - reference_family
+        - adapter_id
+        - adapter_version
+        - evaluation_level
+        - scoring_contract
+        - status
+        - units
+        - exclusions
+        - class_support
+        - supported_metric_ids
+        - unsupported_metric_ids
+        - requirements
+        - limitations
+      properties:
+        profile:
+          $ref: '#/components/schemas/EvaluatorImprovementProfileReference'
+          description: The immutable validation profile.
+        reference_family:
+          type: string
+          description: The reference family, such as binary criterion satisfaction or paired-choice correctness.
+        adapter_id:
+          type: string
+          description: The immutable adapter identifier.
+        adapter_version:
+          type: string
+          description: The immutable adapter version.
+        decision_mapping:
+          type: string
+          description: The registered decision mapping, when the profile has one.
+        evaluation_level:
+          $ref: '#/components/schemas/EvaluationLevel'
+          description: The resolved evaluation level.
+        scoring_contract:
+          $ref: '#/components/schemas/EvaluatorImprovementArtifactSnapshot'
+          description: The immutable scoring-contract identity.
+        status:
+          $ref: '#/components/schemas/EvaluatorImprovementEvidenceReadinessStatus'
+          description: The readiness result.
+        units:
+          $ref: '#/components/schemas/EvaluatorImprovementEvidenceUnits'
+          description: Explicit evidence-unit counts.
+        exclusions:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementEvidenceExclusion'
+          description: Counted missing, incompatible, error, duplicate, abstention, and overlap exclusions.
+        class_support:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementClassSupport'
+          description: Observed class, score, preference, or applicability support.
+        supported_metric_ids:
+          type: array
+          items:
+            type: string
+          description: Metric identifiers supported by this evidence and profile.
+        unsupported_metric_ids:
+          type: array
+          items:
+            type: string
+          description: Metric identifiers that cannot be interpreted for this evidence.
+        requirements:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementProfileRequirement'
+          description: Profile-specific requirements and their observed status.
+        limitations:
+          type: array
+          items:
+            type: string
+          description: Bounded readiness limitations and remediation guidance.
+      description: Profile-specific compatibility, support, estimability, and precision for one frozen evidence source.
+    EvaluatorImprovementEvidenceReadinessStatus:
+      type: string
+      enum:
+        - ready
+        - ready_with_limitations
+        - not_ready
+      description: The readiness of one frozen evidence source for the selected validation profile.
+    EvaluatorImprovementEvidenceSourceReference:
+      type: object
+      required:
+        - dataset
+        - reference_manifest
+        - guidance
+      properties:
+        dataset:
+          $ref: '#/components/schemas/EvaluatorImprovementDatasetReference'
+          description: The immutable registered dataset.
+        reference_manifest:
+          $ref: '#/components/schemas/EvaluatorImprovementArtifactReference'
+          description: The immutable manifest defining item identities, reference semantics, mappings, split membership, and permitted metrics.
+        guidance:
+          $ref: '#/components/schemas/EvaluatorImprovementArtifactReference'
+          description: The immutable annotation or verifier guidance used to interpret the references.
+      description: One development or confirmation evidence source. The service freezes the dataset, reference manifest, mapping, and guidance before model work starts.
+    EvaluatorImprovementEvidenceSourceSnapshot:
+      type: object
+      required:
+        - dataset
+        - reference_manifest
+        - guidance
+      properties:
+        dataset:
+          $ref: '#/components/schemas/EvaluatorImprovementDatasetSnapshot'
+          description: The immutable registered dataset snapshot.
+        reference_manifest:
+          $ref: '#/components/schemas/EvaluatorImprovementArtifactSnapshot'
+          description: The immutable reference manifest snapshot.
+        guidance:
+          $ref: '#/components/schemas/EvaluatorImprovementArtifactSnapshot'
+          description: The immutable interpretation-guidance snapshot.
+      description: A development or confirmation source frozen at job acceptance.
+    EvaluatorImprovementEvidenceUnits:
+      type: object
+      required:
+        - selected_cases
+        - eligible_cases
+        - selected_response_pairs
+        - eligible_response_pairs
+        - case_dimension_comparisons
+        - reviewer_judgments
+        - independent_clusters
+        - comparable_references
+        - excluded_references
+      properties:
+        selected_cases:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Selected cases.
+        eligible_cases:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Cases eligible after source and mapping validation.
+        selected_response_pairs:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Selected response pairs for a pairwise source.
+        eligible_response_pairs:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Eligible response pairs for a pairwise source.
+        case_dimension_comparisons:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Comparable case-dimension reference judgments.
+        reviewer_judgments:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Individual reviewer judgments.
+        independent_clusters:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Independent sampling clusters or question families.
+        comparable_references:
+          type: integer
+          format: int32
+          minimum: 0
+          description: References comparable under the selected profile.
+        excluded_references:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Selected references excluded from comparison.
+      description: Counts of explicit evidence units. Zero is valid. No field defines a universal minimum.
+    EvaluatorImprovementIncompleteResult:
+      type: object
+      required:
+        - outcome
+      properties:
+        outcome:
+          type: string
+          enum:
+            - incomplete
+        candidate:
+          $ref: '#/components/schemas/EvaluatorImprovementCandidateSnapshot'
+          description: An eligible frozen finalist, when one existed before bounded work stopped.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorImprovementJobResult'
+      description: A successful bounded result without a complete confirmation decision. It never represents confirmed no gain or missing labels by default.
+    EvaluatorImprovementInsufficientEvidenceResult:
+      type: object
+      required:
+        - outcome
+      properties:
+        outcome:
+          type: string
+          enum:
+            - insufficient_evidence
+        candidate:
+          $ref: '#/components/schemas/EvaluatorImprovementCandidateSnapshot'
+          description: The frozen finalist, when insufficiency was discovered during confirmation.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorImprovementJobResult'
+      description: A successful result where evidence could not support the selected validation profile.
+    EvaluatorImprovementJob:
+      type: object
+      required:
+        - id
+        - status
+        - created_at
+        - phase
+        - baseline
+        - configuration
+        - strategy
+        - progress
+        - cost
+        - review
+      properties:
+        id:
+          type: string
+          description: Server-assigned unique identifier.
+          readOnly: true
+        inputs:
+          $ref: '#/components/schemas/EvaluatorImprovementJobRequest'
+          description: Caller-supplied inputs.
+        result:
+          $ref: '#/components/schemas/EvaluatorImprovementJobResult'
+          description: Result produced on success.
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/JobStatus'
+          description: Current lifecycle status.
+          readOnly: true
+        error:
+          $ref: '#/components/schemas/OpenAI.Error'
+          description: Error details — populated only on failure.
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          description: When the job was created.
+          readOnly: true
+        started_at:
+          type: string
+          format: date-time
+          description: When model or evidence work started.
+          readOnly: true
+        finished_at:
+          type: string
+          format: date-time
+          description: When the job reached a terminal state.
+          readOnly: true
+        phase:
+          $ref: '#/components/schemas/EvaluatorImprovementPhase'
+          description: The current improvement phase.
+          readOnly: true
+        baseline:
+          $ref: '#/components/schemas/EvaluatorImprovementBaselineSnapshot'
+          description: The exact unnumbered current evaluator captured under the required `If-Match` header and server-side incarnation.
+          readOnly: true
+        configuration:
+          $ref: '#/components/schemas/EvaluatorImprovementConfigurationSnapshot'
+          description: The server-frozen sources, model identities, profile, edit scope, and software provenance.
+          readOnly: true
+        strategy:
+          $ref: '#/components/schemas/EvaluatorImprovementStrategySnapshot'
+          description: The immutable strategy selected by the service.
+          readOnly: true
+        progress:
+          $ref: '#/components/schemas/EvaluatorImprovementProgress'
+          description: Bounded attempt and confirmation progress.
+          readOnly: true
+        cost:
+          $ref: '#/components/schemas/EvaluatorImprovementCostProgress'
+          description: Exact USD reservation and reconciliation progress.
+          readOnly: true
+        review:
+          $ref: '#/components/schemas/EvaluatorImprovementReview'
+          description: Human review state and current publication eligibility.
+          readOnly: true
+      description: A durable evaluator improvement job. Failure and cancellation retain the standard `JobStatus` and `ApiError` semantics.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    EvaluatorImprovementJobListItem:
+      type: object
+      required:
+        - id
+        - status
+        - phase
+        - confirmation_status
+        - review_state
+        - created_at
+      properties:
+        id:
+          type: string
+          description: The server-assigned job identifier.
+        status:
+          $ref: '#/components/schemas/JobStatus'
+          description: The standard job lifecycle status.
+        phase:
+          $ref: '#/components/schemas/EvaluatorImprovementPhase'
+          description: The current improvement phase.
+        outcome:
+          $ref: '#/components/schemas/EvaluatorImprovementOutcome'
+          description: The successful result outcome, when available.
+        confirmation_status:
+          $ref: '#/components/schemas/EvaluatorImprovementConfirmationStatus'
+          description: The independent-confirmation status.
+        review_state:
+          $ref: '#/components/schemas/EvaluatorImprovementReviewState'
+          description: The durable review state.
+        created_at:
+          type: string
+          format: date-time
+          description: When the job was created.
+        finished_at:
+          type: string
+          format: date-time
+          description: When the job reached a terminal state.
+      description: A compact evaluator improvement job representation returned by list operations.
+    EvaluatorImprovementJobRequest:
+      type: object
+      required:
+        - generator
+        - judge
+        - development_source
+        - confirmation_source
+        - edit_scope
+        - validation_profile
+        - budget
+      properties:
+        generator:
+          $ref: '#/components/schemas/EvaluatorImprovementModelConfiguration'
+          description: The model deployment used to generate and revise candidate rubric content.
+        judge:
+          $ref: '#/components/schemas/EvaluatorImprovementModelConfiguration'
+          description: The model deployment used to score the baseline and candidates.
+        development_source:
+          $ref: '#/components/schemas/EvaluatorImprovementEvidenceSourceReference'
+          description: Evidence available to candidate search and selection.
+        confirmation_source:
+          $ref: '#/components/schemas/EvaluatorImprovementEvidenceSourceReference'
+          description: Independent evidence reserved for exactly one frozen finalist. It cannot guide another candidate attempt.
+        guidance_sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorGenerationJobSource'
+          description: Optional existing evaluator-generation guidance sources. Confirmation evidence and references cannot be used as guidance.
+        edit_scope:
+          $ref: '#/components/schemas/EvaluatorImprovementEditScope'
+          description: The explicit caller-approved edit and evaluator-threshold calibration scope.
+        validation_profile:
+          $ref: '#/components/schemas/EvaluatorImprovementProfileReference'
+          description: The immutable service-owned validation profile.
+        budget:
+          $ref: '#/components/schemas/EvaluatorImprovementBudget'
+          description: The candidate-attempt and exact model-inference USD limits.
+      description: The request for a bounded evaluator improvement job.
+    EvaluatorImprovementJobResult:
+      type: object
+      required:
+        - outcome
+        - confirmation_status
+        - stop_reason
+        - limitations
+        - tradeoffs
+      properties:
+        outcome:
+          $ref: '#/components/schemas/EvaluatorImprovementOutcome'
+          description: The scientific and product outcome.
+        confirmation_status:
+          $ref: '#/components/schemas/EvaluatorImprovementConfirmationStatus'
+          description: The independent-confirmation status.
+        stop_reason:
+          $ref: '#/components/schemas/EvaluatorImprovementStopReason'
+          description: Why bounded work stopped.
+        development_assessment:
+          $ref: '#/components/schemas/EvaluatorImprovementAssessment'
+          description: The development assessment, when completed.
+        confirmation_assessment:
+          $ref: '#/components/schemas/EvaluatorImprovementAssessment'
+          description: The independent confirmation assessment, when completed.
+        limitations:
+          type: array
+          items:
+            type: string
+          description: Bounded result limitations.
+        tradeoffs:
+          type: array
+          items:
+            type: string
+          description: Bounded quality, cost, coverage, or operational tradeoffs for review.
+      discriminator:
+        propertyName: outcome
+        mapping:
+          ready_for_review: '#/components/schemas/EvaluatorImprovementReadyForReviewResult'
+          no_improvement: '#/components/schemas/EvaluatorImprovementNoImprovementResult'
+          insufficient_evidence: '#/components/schemas/EvaluatorImprovementInsufficientEvidenceResult'
+          incomplete: '#/components/schemas/EvaluatorImprovementIncompleteResult'
+      description: Base successful result for bounded evaluator improvement.
+    EvaluatorImprovementMetricComparison:
+      type: object
+      required:
+        - metric_id
+        - baseline
+        - candidate
+      properties:
+        metric_id:
+          type: string
+          description: The metric identifier defined by the immutable validation profile.
+        baseline:
+          $ref: '#/components/schemas/EvaluatorImprovementMetricEstimate'
+          description: The captured current evaluator estimate.
+        candidate:
+          $ref: '#/components/schemas/EvaluatorImprovementMetricEstimate'
+          description: The exact finalist estimate.
+        delta:
+          type: number
+          format: double
+          description: Candidate minus baseline when defined for the metric.
+      description: A baseline-versus-candidate metric computed on one frozen evidence source.
+    EvaluatorImprovementMetricEstimate:
+      type: object
+      required:
+        - status
+        - sample_count
+      properties:
+        status:
+          $ref: '#/components/schemas/EvaluatorImprovementMetricStatus'
+          description: Whether the estimate is interpretable.
+        value:
+          type: number
+          format: double
+          description: The point estimate.
+        numerator:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The metric numerator when the metric is a ratio.
+        denominator:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The metric denominator when the metric is a ratio.
+        sample_count:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The number of comparable evidence units used by the estimate.
+        lower_bound:
+          type: number
+          format: double
+          description: The registered lower uncertainty bound.
+        upper_bound:
+          type: number
+          format: double
+          description: The registered upper uncertainty bound.
+      description: One metric estimate with explicit support and uncertainty.
+    EvaluatorImprovementMetricStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - assessed
+            - not_assessed
+            - non_estimable
+            - single_class
+            - insufficient_support
+            - insufficient_precision
+            - incompatible_semantics
+      description: Whether one profile metric can be interpreted.
+    EvaluatorImprovementModelConfiguration:
+      type: object
+      required:
+        - deployment_name
+      properties:
+        deployment_name:
+          type: string
+          description: The Foundry model deployment name.
+        model:
+          type: string
+          description: The expected model name when the caller needs to constrain deployment resolution.
+      description: A customer-selected model deployment used by the improvement workflow. Pricing and resolved model identity remain server-authoritative.
+    EvaluatorImprovementModelPrice:
+      type: object
+      required:
+        - resolved_model
+        - input_usd_per_million_tokens
+        - output_usd_per_million_tokens
+      properties:
+        resolved_model:
+          $ref: '#/components/schemas/EvaluatorImprovementModelSnapshot'
+          description: The resolved deployment.
+        input_usd_per_million_tokens:
+          $ref: '#/components/schemas/EvaluatorImprovementUsdAmount'
+          description: USD per one million input tokens.
+        output_usd_per_million_tokens:
+          $ref: '#/components/schemas/EvaluatorImprovementUsdAmount'
+          description: USD per one million output tokens.
+        cached_input_usd_per_million_tokens:
+          $ref: '#/components/schemas/EvaluatorImprovementUsdAmount'
+          description: USD per one million cached-input tokens, when separately billed.
+        cache_write_usd_per_million_tokens:
+          $ref: '#/components/schemas/EvaluatorImprovementUsdAmount'
+          description: USD per one million cache-write tokens, when separately billed.
+      description: Frozen token rates for one resolved model deployment. Every value is exact USD per one million tokens.
+    EvaluatorImprovementModelSnapshot:
+      type: object
+      required:
+        - deployment_name
+        - model_name
+        - region
+        - deployment_type
+      properties:
+        deployment_name:
+          type: string
+          description: The Foundry model deployment name.
+        model_name:
+          type: string
+          description: The resolved model identifier.
+        model_version:
+          type: string
+          description: The resolved immutable model version or snapshot, when supplied by the provider.
+        region:
+          type: string
+          description: The resolved Azure region.
+        deployment_type:
+          type: string
+          description: The resolved deployment type or billing tier.
+      description: A resolved model deployment frozen at job acceptance.
+    EvaluatorImprovementNoImprovementResult:
+      type: object
+      required:
+        - outcome
+        - confirmation_status
+        - candidate
+        - development_assessment
+        - confirmation_assessment
+      properties:
+        outcome:
+          type: string
+          enum:
+            - no_improvement
+        confirmation_status:
+          type: string
+          enum:
+            - completed
+        candidate:
+          $ref: '#/components/schemas/EvaluatorImprovementCandidateSnapshot'
+          description: The one frozen finalist that was independently confirmed. It is not publication-eligible.
+        development_assessment:
+          $ref: '#/components/schemas/EvaluatorImprovementAssessment'
+          description: The completed development assessment.
+        confirmation_assessment:
+          $ref: '#/components/schemas/EvaluatorImprovementAssessment'
+          description: The completed independent confirmation assessment.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorImprovementJobResult'
+      description: A successful result where adequate independent confirmation found no qualifying gain.
+    EvaluatorImprovementOptions:
+      type: object
+      required:
+        - enabled
+        - permissions
+        - profiles
+        - strategy
+        - generators
+        - judge
+        - editable_dimensions
+        - pass_threshold
+        - default_budget
+        - pricing
+        - blocking_reasons
+      properties:
+        enabled:
+          type: boolean
+          description: Whether at least one improvement configuration is currently available.
+        permissions:
+          $ref: '#/components/schemas/EvaluatorImprovementPermissions'
+          description: Current caller permissions.
+        profiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementProfileOption'
+          description: Selectable service-owned validation profiles.
+        strategy:
+          $ref: '#/components/schemas/EvaluatorImprovementStrategyOption'
+          description: The read-only strategy currently applicable to newly accepted jobs. This API does not select, train, or upload strategies.
+        generators:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementModelConfiguration'
+          description: Supported candidate-generation deployments.
+        judge:
+          $ref: '#/components/schemas/EvaluatorImprovementModelConfiguration'
+          description: The frozen judge deployment used for development and confirmation.
+        editable_dimensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementEditableDimensionOption'
+          description: Existing model-owned dimensions available for description or weight changes.
+        pass_threshold:
+          $ref: '#/components/schemas/EvaluatorImprovementPassThresholdOption'
+          description: Evaluator pass-threshold calibration availability.
+        default_budget:
+          $ref: '#/components/schemas/EvaluatorImprovementBudget'
+          description: The default candidate-attempt and model-inference USD limits.
+        pricing:
+          $ref: '#/components/schemas/EvaluatorImprovementPricingAvailability'
+          description: Authoritative model-inference pricing availability.
+        blocking_reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementBlockingReason'
+          description: Stable reasons improvement is unavailable.
+      description: Evaluator-specific options for starting a bounded improvement job. Create and publish recheck every permission and authority.
+    EvaluatorImprovementOutcome:
+      type: string
+      enum:
+        - ready_for_review
+        - no_improvement
+        - insufficient_evidence
+        - incomplete
+      description: The successful scientific and product outcome of an evaluator improvement job.
+    EvaluatorImprovementPassThreshold:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 1
+      description: A rubric evaluator decision threshold. This is distinct from validation-profile acceptance thresholds.
+    EvaluatorImprovementPassThresholdChange:
+      type: object
+      required:
+        - before
+        - after
+      properties:
+        before:
+          $ref: '#/components/schemas/EvaluatorImprovementPassThreshold'
+          description: The captured evaluator pass threshold.
+        after:
+          $ref: '#/components/schemas/EvaluatorImprovementPassThreshold'
+          description: The proposed evaluator pass threshold.
+      description: An approved calibration change to the evaluator definition's `pass_threshold`. This is not a validation-profile acceptance-threshold change.
+    EvaluatorImprovementPassThresholdConstraint:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/EvaluatorImprovementPassThresholdConstraintType'
+          description: The constraint kind.
+      discriminator:
+        propertyName: type
+        mapping:
+          range: '#/components/schemas/EvaluatorImprovementPassThresholdRangeConstraint'
+          grid: '#/components/schemas/EvaluatorImprovementPassThresholdGridConstraint'
+      description: Base model for approved calibration of the evaluator definition's `pass_threshold`. This never changes validation-profile acceptance thresholds.
+    EvaluatorImprovementPassThresholdConstraintType:
+      type: string
+      enum:
+        - range
+        - grid
+      description: The kind of an approved evaluator pass-threshold calibration constraint.
+    EvaluatorImprovementPassThresholdGridConstraint:
+      type: object
+      required:
+        - type
+        - allowed_values
+      properties:
+        type:
+          type: string
+          enum:
+            - grid
+        allowed_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementPassThreshold'
+          minItems: 1
+          description: The approved evaluator pass-threshold values.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorImprovementPassThresholdConstraint'
+      description: An explicit finite grid of approved evaluator pass-threshold values.
+    EvaluatorImprovementPassThresholdOption:
+      type: object
+      required:
+        - enabled
+        - current_value
+        - blocking_reasons
+      properties:
+        enabled:
+          type: boolean
+          description: Whether at least one profile supports evaluator pass-threshold calibration.
+        current_value:
+          $ref: '#/components/schemas/EvaluatorImprovementPassThreshold'
+          description: The current evaluator pass threshold.
+        constraint:
+          $ref: '#/components/schemas/EvaluatorImprovementPassThresholdConstraint'
+          description: The maximum available calibration constraint when enabled.
+        blocking_reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementBlockingReason'
+          description: Stable reasons threshold calibration is unavailable.
+      description: Evaluator pass-threshold calibration availability.
+    EvaluatorImprovementPassThresholdRangeConstraint:
+      type: object
+      required:
+        - type
+        - minimum
+        - maximum
+        - step
+      properties:
+        type:
+          type: string
+          enum:
+            - range
+        minimum:
+          $ref: '#/components/schemas/EvaluatorImprovementPassThreshold'
+          description: The inclusive minimum approved evaluator pass threshold.
+        maximum:
+          $ref: '#/components/schemas/EvaluatorImprovementPassThreshold'
+          description: The inclusive maximum approved evaluator pass threshold.
+        step:
+          type: number
+          format: float
+          minimum: 0.000001
+          description: The positive step between approved threshold values.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorImprovementPassThresholdConstraint'
+      description: An inclusive stepped range of approved evaluator pass-threshold values.
+    EvaluatorImprovementPermissions:
+      type: object
+      required:
+        - can_start
+        - can_reject
+        - can_publish
+      properties:
+        can_start:
+          type: boolean
+          description: Whether the caller may start an improvement job.
+        can_reject:
+          type: boolean
+          description: Whether the caller may reject an eligible finalist.
+        can_publish:
+          type: boolean
+          description: Whether the caller may publish an eligible finalist.
+      description: Current caller permissions relevant to evaluator improvement. Publish and reject reuse the existing evaluator asset-write permission in this preview.
+    EvaluatorImprovementPhase:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - preparing
+            - assessing_evidence
+            - searching
+            - confirming
+            - completed
+      description: The current phase of an evaluator improvement job.
+    EvaluatorImprovementPriceSnapshot:
+      type: object
+      required:
+        - id
+        - source
+        - source_id
+        - source_version
+        - captured_at
+        - currency
+        - scope
+        - model_prices
+        - excluded_cost_categories
+        - invoice_guarantee
+      properties:
+        id:
+          type: string
+          description: The price snapshot identifier.
+        source:
+          $ref: '#/components/schemas/EvaluatorImprovementPriceSource'
+          description: The price authority.
+        source_id:
+          type: string
+          description: The authoritative catalog or approved-override identifier.
+        source_version:
+          type: string
+          description: The immutable catalog or approved-override version.
+        captured_at:
+          type: string
+          format: date-time
+          description: When the price schedule was captured.
+        currency:
+          type: string
+          enum:
+            - USD
+          description: The currency. The initial value is `USD`.
+        scope:
+          type: string
+          enum:
+            - model_inference_only
+          description: The budget scope. The initial value is `model_inference_only`.
+        model_prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementModelPrice'
+          description: Frozen model rates used for reservation and reconciliation.
+        excluded_cost_categories:
+          type: array
+          items:
+            type: string
+          description: Costs excluded from the customer limit, including ACA, storage, networking, deterministic analysis, and human review.
+        invoice_guarantee:
+          type: boolean
+          enum:
+            - false
+          description: This estimate is not a guarantee of the customer's Azure invoice.
+      description: The authoritative immutable price schedule captured before model work starts.
+    EvaluatorImprovementPriceSource:
+      type: string
+      enum:
+        - service_catalog
+        - approved_override
+      description: The authority that supplied a frozen model-inference price schedule.
+    EvaluatorImprovementPricingAvailability:
+      type: object
+      required:
+        - status
+        - scope
+        - invoice_guarantee
+        - blocking_reasons
+      properties:
+        status:
+          $ref: '#/components/schemas/EvaluatorImprovementPricingStatus'
+          description: Whether the selected or default model configuration has authoritative pricing.
+        catalog_version:
+          type: string
+          description: The applicable service price-catalog version, when available.
+        scope:
+          type: string
+          enum:
+            - model_inference_only
+          description: The pricing scope. The initial value is `model_inference_only`.
+        invoice_guarantee:
+          type: boolean
+          enum:
+            - false
+          description: Pricing is an inference estimate under captured service rates and is not a guarantee of the customer's Azure invoice.
+        blocking_reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementBlockingReason'
+          description: Stable reasons that authoritative pricing is unavailable or requires an approved override.
+      description: Authoritative pricing availability for a prospective improvement job.
+    EvaluatorImprovementPricingStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - available
+            - approved_override_required
+            - unavailable
+      description: The availability of authoritative model-inference pricing.
+    EvaluatorImprovementProfileOption:
+      type: object
+      required:
+        - profile
+        - display_name
+        - description
+        - supported_metric_families
+        - available_edit_scope
+        - enabled
+        - blocking_reasons
+      properties:
+        profile:
+          $ref: '#/components/schemas/EvaluatorImprovementProfileReference'
+          description: The immutable validation profile.
+        display_name:
+          type: string
+          description: A human-friendly profile name.
+        description:
+          type: string
+          description: A bounded explanation of the profile's reference family, metrics, and decision semantics.
+        supported_metric_families:
+          type: array
+          items:
+            type: string
+          description: Metric families supported by the profile.
+        available_edit_scope:
+          $ref: '#/components/schemas/EvaluatorImprovementEditScope'
+          description: The maximum edit and scoring-calibration scope currently available under this profile. A create request selects an explicit subset.
+        enabled:
+          type: boolean
+          description: Whether the profile is currently selectable.
+        blocking_reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementBlockingReason'
+          description: Stable reasons the profile is unavailable.
+      description: One validation-profile option and the evaluator fields it currently permits the caller to select.
+    EvaluatorImprovementProfileReference:
+      type: object
+      required:
+        - id
+        - version
+      properties:
+        id:
+          type: string
+          description: The validation-profile identifier.
+        version:
+          type: string
+          description: The immutable validation-profile version.
+      description: An immutable validation-profile reference. Profile acceptance and science thresholds are service-owned and cannot be edited by this job.
+    EvaluatorImprovementProfileRequirement:
+      type: object
+      required:
+        - id
+        - unit
+        - status
+      properties:
+        id:
+          type: string
+          description: The stable profile requirement identifier.
+        unit:
+          type: string
+          description: The evidence unit used by the requirement.
+        status:
+          $ref: '#/components/schemas/EvaluatorImprovementRequirementStatus'
+          description: Whether the requirement was met.
+        observed_count:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The observed non-negative count or measurement, when represented as a count.
+        message:
+          type: string
+          description: A bounded explanation or remediation hint.
+      description: One immutable validation-profile requirement and its observed status. These requirements are not editable candidate fields.
+    EvaluatorImprovementProgress:
+      type: object
+      required:
+        - candidate_attempts_started
+        - candidate_attempts_completed
+        - candidate_attempts_rejected
+        - max_candidate_attempts
+        - finalist_selected
+        - search_closed
+        - confirmation_status
+      properties:
+        candidate_attempts_started:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The number of candidate configurations allocated, including rejected proposals and deterministic calibration variants.
+        candidate_attempts_completed:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The number of candidate attempts that reached a terminal attempt state.
+        candidate_attempts_rejected:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The number of structurally invalid or out-of-scope candidate attempts.
+        max_candidate_attempts:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The approved maximum number of candidate configurations.
+        finalist_selected:
+          type: boolean
+          description: Whether exactly one finalist has been frozen.
+        search_closed:
+          type: boolean
+          description: Whether candidate search is permanently closed. It becomes true before confirmation starts and cannot return to false.
+        confirmation_status:
+          $ref: '#/components/schemas/EvaluatorImprovementConfirmationStatus'
+          description: The independent-confirmation status.
+      description: Progress for bounded candidate search and independent confirmation.
+    EvaluatorImprovementPublicationEligibility:
+      type: string
+      enum:
+        - eligible
+        - blocked
+      description: Whether the current caller and current authority permit publication.
+    EvaluatorImprovementReadyForReviewResult:
+      type: object
+      required:
+        - outcome
+        - confirmation_status
+        - candidate
+        - development_assessment
+        - confirmation_assessment
+      properties:
+        outcome:
+          type: string
+          enum:
+            - ready_for_review
+        confirmation_status:
+          type: string
+          enum:
+            - completed
+        candidate:
+          $ref: '#/components/schemas/EvaluatorImprovementCandidateSnapshot'
+          description: The exact stored finalist.
+        development_assessment:
+          $ref: '#/components/schemas/EvaluatorImprovementAssessment'
+          description: The completed development assessment.
+        confirmation_assessment:
+          $ref: '#/components/schemas/EvaluatorImprovementAssessment'
+          description: The completed independent confirmation assessment.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorImprovementJobResult'
+      description: A successful result with one independently confirmed finalist available for explicit review.
+    EvaluatorImprovementRequirementStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - met
+            - not_met
+            - not_assessed
+      description: Whether one validation-profile requirement was met.
+    EvaluatorImprovementReview:
+      type: object
+      required:
+        - state
+        - publication_eligibility
+        - blocking_reasons
+      properties:
+        state:
+          $ref: '#/components/schemas/EvaluatorImprovementReviewState'
+          description: The durable review state.
+        publication_eligibility:
+          $ref: '#/components/schemas/EvaluatorImprovementPublicationEligibility'
+          description: Whether the exact stored finalist is currently eligible for publication.
+        blocking_reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementReviewBlockingReason'
+          description: Stable current blocking reasons.
+        action:
+          $ref: '#/components/schemas/EvaluatorImprovementReviewActionRecord'
+          description: The accepted reject or publish action, when one exists.
+      description: Human review and current publication eligibility. Eligibility is recomputed without rewriting historical evidence.
+    EvaluatorImprovementReviewActionRecord:
+      type: object
+      required:
+        - action
+        - candidate_snapshot_id
+        - actor
+        - recorded_at
+      properties:
+        action:
+          $ref: '#/components/schemas/EvaluatorImprovementReviewActionType'
+          description: The explicit action.
+        candidate_snapshot_id:
+          type: string
+          description: The exact candidate snapshot reviewed.
+        actor:
+          $ref: '#/components/schemas/EvaluatorImprovementActor'
+          description: The authenticated actor.
+        recorded_at:
+          type: string
+          format: date-time
+          description: When the action was durably recorded.
+        note:
+          type: string
+          description: A bounded reviewer note.
+        published_version:
+          $ref: '#/components/schemas/EvaluatorVersionNumber'
+          description: The numbered evaluator version created by publication.
+      description: An immutable audit record for an explicit reject or publish action.
+    EvaluatorImprovementReviewActionType:
+      type: string
+      enum:
+        - reject
+        - publish
+      description: An explicit evaluator improvement review action.
+    EvaluatorImprovementReviewBlockingReason:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: A stable machine-readable reason code, such as `confirmation_not_completed`, `baseline_etag_changed`, `incarnation_changed`, `permission_denied`, `reference_authority_changed`, `profile_authority_changed`, or `strategy_authority_changed`.
+        message:
+          type: string
+          description: A bounded user-facing explanation.
+      description: A stable reason that publication is currently blocked.
+    EvaluatorImprovementReviewState:
+      type: string
+      enum:
+        - not_available
+        - pending
+        - rejected
+        - publishing
+        - published
+      description: The current human-review state for an evaluator improvement job.
+    EvaluatorImprovementSoftwareProvenance:
+      type: object
+      required:
+        - service_version
+        - engine_version
+        - worker_image_digest
+        - candidate_schema_version
+      properties:
+        service_version:
+          type: string
+          description: The RAISvc build or deployment version.
+        engine_version:
+          type: string
+          description: The evaluator-improvement engine version.
+        worker_image_digest:
+          type: string
+          description: The immutable worker image digest.
+        candidate_schema_version:
+          type: string
+          description: The candidate schema version.
+      description: Service and worker versions frozen for reproducibility.
+    EvaluatorImprovementStopReason:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - candidate_confirmed
+            - confirmed_no_improvement
+            - insufficient_evidence
+            - max_candidate_attempts_reached
+            - max_inference_cost_usd_reached
+            - confirmation_interrupted
+      description: Why bounded evaluator improvement work stopped.
+    EvaluatorImprovementStrategyDevelopmentEvidence:
+      type: object
+      required:
+        - code
+        - summary
+      properties:
+        code:
+          type: string
+          description: A stable signal code.
+        summary:
+          type: string
+          description: A bounded explanation that does not expose raw evidence content.
+      description: One bounded development signal used to explain strategy selection. This is rationale, not independent confirmation.
+    EvaluatorImprovementStrategyOption:
+      type: object
+      required:
+        - id
+        - display_name
+        - version
+        - source
+      properties:
+        id:
+          type: string
+          description: The strategy identifier.
+        display_name:
+          type: string
+          description: A human-friendly strategy name.
+        version:
+          type: string
+          description: The immutable strategy version.
+        source:
+          $ref: '#/components/schemas/EvaluatorImprovementStrategySource'
+          description: Whether the strategy is fixed or separately trained and approved.
+        approved_artifact:
+          $ref: '#/components/schemas/EvaluatorImprovementArtifactReference'
+          description: The immutable approved strategy artifact, when the strategy is learned.
+      description: A read-only approved strategy offered for future evaluator improvement jobs.
+    EvaluatorImprovementStrategySnapshot:
+      type: object
+      required:
+        - id
+        - display_name
+        - version
+        - source
+        - action
+        - selection_reason
+        - rationale
+        - development_evidence
+      properties:
+        id:
+          type: string
+          description: The strategy identifier.
+        display_name:
+          type: string
+          description: A human-friendly strategy name.
+        version:
+          type: string
+          description: The immutable strategy version.
+        source:
+          $ref: '#/components/schemas/EvaluatorImprovementStrategySource'
+          description: Whether the strategy is fixed or separately trained and approved.
+        action:
+          type: string
+          description: The allowlisted repair or calibration action selected by the strategy.
+        selection_reason:
+          type: string
+          description: Why the strategy and action were selected for this job.
+        rationale:
+          type: string
+          description: A bounded explanation of the intended repair mechanism. This is not measured evidence.
+        development_evidence:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementStrategyDevelopmentEvidence'
+          description: Development-only signals supporting the selection explanation.
+        approved_artifact:
+          $ref: '#/components/schemas/EvaluatorImprovementArtifactSnapshot'
+          description: The approved immutable strategy artifact. Required when `source` is `approved_learned` and omitted for a built-in fixed strategy.
+      description: The immutable strategy selected by the service for this job. Customers cannot upload or train strategies through this API.
+    EvaluatorImprovementStrategySource:
+      type: string
+      enum:
+        - fixed
+        - approved_learned
+      description: The provenance class of an evaluator improvement strategy.
+    EvaluatorImprovementUsdAmount:
+      type: number
+      format: decimal128
+      minimum: 0
+      description: An exact non-negative USD decimal. The service accepts at most six fractional digits and uses integer micro-USD internally.
+    EvaluatorImprovementWeightChange:
+      type: object
+      required:
+        - dimension_id
+        - before
+        - after
+      properties:
+        dimension_id:
+          type: string
+          description: The stable existing dimension identifier.
+        before:
+          $ref: '#/components/schemas/EvaluatorImprovementDimensionWeight'
+          description: The captured weight.
+        after:
+          $ref: '#/components/schemas/EvaluatorImprovementDimensionWeight'
+          description: The proposed weight.
+      description: One approved integer-weight change on an existing model-owned rubric dimension.
+    EvaluatorImprovementWeightConstraint:
+      type: object
+      required:
+        - type
+        - dimension_id
+      properties:
+        type:
+          $ref: '#/components/schemas/EvaluatorImprovementWeightConstraintType'
+          description: The constraint kind.
+        dimension_id:
+          type: string
+          description: The stable existing rubric dimension identifier.
+      discriminator:
+        propertyName: type
+        mapping:
+          range: '#/components/schemas/EvaluatorImprovementWeightRangeConstraint'
+          grid: '#/components/schemas/EvaluatorImprovementWeightGridConstraint'
+      description: Base model for an approved weight constraint on one existing model-owned rubric dimension.
+    EvaluatorImprovementWeightConstraintType:
+      type: string
+      enum:
+        - range
+        - grid
+      description: The kind of an approved dimension-weight constraint.
+    EvaluatorImprovementWeightGridConstraint:
+      type: object
+      required:
+        - type
+        - allowed_values
+      properties:
+        type:
+          type: string
+          enum:
+            - grid
+        allowed_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorImprovementDimensionWeight'
+          minItems: 1
+          description: The approved weight values.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorImprovementWeightConstraint'
+      description: An explicit finite grid of approved integer weights for one existing dimension.
+    EvaluatorImprovementWeightRangeConstraint:
+      type: object
+      required:
+        - type
+        - minimum
+        - maximum
+        - step
+      properties:
+        type:
+          type: string
+          enum:
+            - range
+        minimum:
+          $ref: '#/components/schemas/EvaluatorImprovementDimensionWeight'
+          description: The inclusive minimum approved weight.
+        maximum:
+          $ref: '#/components/schemas/EvaluatorImprovementDimensionWeight'
+          description: The inclusive maximum approved weight.
+        step:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The positive step between approved weights.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorImprovementWeightConstraint'
+      description: An inclusive stepped range of approved integer weights for one existing dimension.
     EvaluatorLineageDiagnosticBase:
       type: object
       required:
@@ -55273,6 +57731,34 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    ImprovementCandidateAnalysisSubjectReference:
+      type: object
+      required:
+        - type
+        - job_id
+        - candidate_id
+        - snapshot_id
+        - incarnation_id
+      properties:
+        type:
+          type: string
+          enum:
+            - improvement_candidate
+        job_id:
+          type: string
+          description: The parent improvement job identifier.
+        candidate_id:
+          type: string
+          description: The immutable candidate identifier.
+        snapshot_id:
+          type: string
+          description: The immutable candidate snapshot identifier.
+        incarnation_id:
+          type: string
+          description: The evaluator resource incarnation inherited from the captured current evaluator.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorAnalysisSubjectReference'
+      description: A reference to an immutable job-owned candidate. Candidates have no evaluator version and no ETag.
     Index:
       type: object
       required:
@@ -85652,6 +88138,19 @@ components:
             - rejected
             - no_approval_needed
       description: The Microsoft Agent Certification review status of the Microsoft 365 store title published for an agent.
+    PublishEvaluatorImprovementCandidateRequest:
+      type: object
+      required:
+        - candidate_snapshot_id
+      properties:
+        candidate_snapshot_id:
+          type: string
+          description: The exact candidate snapshot identifier returned by the improvement job.
+        review_note:
+          type: string
+          maxLength: 2000
+          description: An optional bounded review note.
+      description: Publish the exact stored finalist. The request cannot replace evaluator content or the original baseline ETag.
     PublishTelephonyCampaignRequest:
       type: object
       required:
@@ -85664,6 +88163,22 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    PublishedEvaluatorAnalysisSubjectReference:
+      type: object
+      required:
+        - type
+        - version
+      properties:
+        type:
+          type: string
+          enum:
+            - published_version
+        version:
+          $ref: '#/components/schemas/EvaluatorVersionNumber'
+          description: The immutable evaluator version.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorAnalysisSubjectReference'
+      description: A reference to an immutable numbered evaluator version.
     RaiConfig:
       type: object
       required:
@@ -85984,6 +88499,19 @@ components:
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
       description: Represents the parameters for red team taxonomy item generation.
+    RejectEvaluatorImprovementCandidateRequest:
+      type: object
+      required:
+        - candidate_snapshot_id
+      properties:
+        candidate_snapshot_id:
+          type: string
+          description: The exact candidate snapshot identifier returned by the improvement job.
+        reason:
+          type: string
+          maxLength: 2000
+          description: An optional bounded rejection reason.
+      description: Reject the exact stored finalist without changing current or published evaluator state.
     ReminderPreviewToolboxTool:
       type: object
       required:

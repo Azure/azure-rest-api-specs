@@ -1,0 +1,64 @@
+{
+  "title": "Evaluators_PublishImprovementCandidate",
+  "operationId": "Evaluators_publishImprovementCandidate",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "support_quality",
+    "job_id": "evalimprove_ready_001",
+    "Operation-Id": "bb109932-345c-4f63-8756-6cc0e172eb0f",
+    "request": {
+      "candidate_snapshot_id": "candidate_snapshot_003",
+      "review_note": "Approved after reviewing the exact stored candidate and independent confirmation."
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "display_name": "Support quality",
+        "metadata": {
+          "owner": "support-evaluations"
+        },
+        "evaluator_type": "custom",
+        "categories": [
+          "quality"
+        ],
+        "supported_evaluation_levels": [
+          "turn"
+        ],
+        "definition": {
+          "type": "rubric",
+          "dimensions": [
+            {
+              "id": "completion_evidence",
+              "description": "Pass only when a completion claim matches the final tool result. An error, timeout, or missing result cannot be described as completed.",
+              "weight": 5
+            },
+            {
+              "id": "response_clarity",
+              "description": "The response clearly explains the outcome.",
+              "weight": 3
+            },
+            {
+              "id": "general_quality",
+              "description": "The response is generally useful and correct.",
+              "weight": 2,
+              "always_applicable": true
+            }
+          ],
+          "pass_threshold": 0.65
+        },
+        "created_by": "00000000-0000-0000-0000-000000000001",
+        "created_at": "2026-09-17T18:28:00Z",
+        "modified_at": "2026-09-17T18:28:00Z",
+        "description": "Scores support response quality.",
+        "tags": {
+          "environment": "development"
+        },
+        "id": "azureai://accounts/account_1/projects/project_1/evaluators/support_quality/versions/4",
+        "name": "support_quality",
+        "version": "4"
+      }
+    }
+  }
+}

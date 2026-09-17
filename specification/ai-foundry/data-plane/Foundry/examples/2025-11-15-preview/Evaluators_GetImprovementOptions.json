@@ -1,0 +1,141 @@
+{
+  "title": "Evaluators_GetImprovementOptions",
+  "operationId": "Evaluators_getImprovementOptions",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "support_quality"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "enabled": true,
+        "permissions": {
+          "can_start": true,
+          "can_reject": true,
+          "can_publish": true
+        },
+        "profiles": [
+          {
+            "profile": {
+              "id": "binary_criterion_validity",
+              "version": "1"
+            },
+            "display_name": "Binary criterion validity",
+            "description": "Uses registered binary criterion-satisfaction references and frozen support, uncertainty, decision-mapping, and regression rules.",
+            "supported_metric_families": [
+              "binary_criterion_satisfaction_error"
+            ],
+            "available_edit_scope": {
+              "description_dimension_ids": [
+                "completion_evidence",
+                "response_clarity"
+              ],
+              "weight_constraints": [
+                {
+                  "type": "grid",
+                  "dimension_id": "completion_evidence",
+                  "allowed_values": [
+                    4,
+                    5
+                  ]
+                },
+                {
+                  "type": "range",
+                  "dimension_id": "response_clarity",
+                  "minimum": 3,
+                  "maximum": 5,
+                  "step": 1
+                }
+              ],
+              "pass_threshold_constraint": {
+                "type": "grid",
+                "allowed_values": [
+                  0.6,
+                  0.65
+                ]
+              }
+            },
+            "enabled": true,
+            "blocking_reasons": []
+          }
+        ],
+        "strategy": {
+          "id": "tool_evidence",
+          "display_name": "Ground completion claims in final tool evidence",
+          "version": "1",
+          "source": "fixed"
+        },
+        "generators": [
+          {
+            "deployment_name": "rubric-improver"
+          }
+        ],
+        "judge": {
+          "deployment_name": "rubric-judge"
+        },
+        "editable_dimensions": [
+          {
+            "dimension_id": "completion_evidence",
+            "fields": [
+              "description",
+              "weight"
+            ],
+            "current_weight": 4,
+            "weight_constraints": [
+              {
+                "type": "grid",
+                "dimension_id": "completion_evidence",
+                "allowed_values": [
+                  4,
+                  5
+                ]
+              }
+            ]
+          },
+          {
+            "dimension_id": "response_clarity",
+            "fields": [
+              "description",
+              "weight"
+            ],
+            "current_weight": 5,
+            "weight_constraints": [
+              {
+                "type": "range",
+                "dimension_id": "response_clarity",
+                "minimum": 3,
+                "maximum": 5,
+                "step": 1
+              }
+            ]
+          }
+        ],
+        "pass_threshold": {
+          "enabled": true,
+          "current_value": 0.6,
+          "constraint": {
+            "type": "grid",
+            "allowed_values": [
+              0.6,
+              0.65
+            ]
+          },
+          "blocking_reasons": []
+        },
+        "default_budget": {
+          "max_candidate_attempts": 8,
+          "max_inference_cost_usd": 25.0
+        },
+        "pricing": {
+          "status": "available",
+          "catalog_version": "2026-09-17",
+          "scope": "model_inference_only",
+          "invoice_guarantee": false,
+          "blocking_reasons": []
+        },
+        "blocking_reasons": []
+      }
+    }
+  }
+}

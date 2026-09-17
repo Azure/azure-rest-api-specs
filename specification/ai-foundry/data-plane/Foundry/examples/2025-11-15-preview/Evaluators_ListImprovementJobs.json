@@ -1,0 +1,42 @@
+{
+  "title": "Evaluators_ListImprovementJobs",
+  "operationId": "Evaluators_listImprovementJobs",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "support_quality",
+    "limit": 20,
+    "order": "desc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": [
+          {
+            "id": "evalimprove_ready_001",
+            "status": "succeeded",
+            "phase": "completed",
+            "outcome": "ready_for_review",
+            "confirmation_status": "completed",
+            "review_state": "pending",
+            "created_at": "2026-09-17T18:00:00Z",
+            "finished_at": "2026-09-17T18:24:00Z"
+          },
+          {
+            "id": "evalimprove_cost_001",
+            "status": "succeeded",
+            "phase": "completed",
+            "outcome": "incomplete",
+            "confirmation_status": "not_run",
+            "review_state": "not_available",
+            "created_at": "2026-09-17T17:00:00Z",
+            "finished_at": "2026-09-17T17:18:00Z"
+          }
+        ],
+        "first_id": "evalimprove_ready_001",
+        "last_id": "evalimprove_cost_001",
+        "has_more": false
+      }
+    }
+  }
+}

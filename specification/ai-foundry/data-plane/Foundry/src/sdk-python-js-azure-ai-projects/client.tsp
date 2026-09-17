@@ -475,6 +475,31 @@ using Azure.AI.Projects;
 @@clientName(EvaluatorDiagnosticJobs.cancel, "cancelDiagnosticJob");
 @@clientName(EvaluatorDiagnosticJobs.delete, "deleteDiagnosticJob");
 
+// Evaluator improvement jobs and explicit review actions.
+@@access(Evaluators.getImprovementOptions, Access.public);
+@@access(Evaluators.createImprovementJob, Access.public);
+@@access(Evaluators.getImprovementJob, Access.public);
+@@access(Evaluators.listImprovementJobs, Access.public);
+@@access(Evaluators.cancelImprovementJob, Access.public);
+@@access(Evaluators.deleteImprovementJob, Access.public);
+@@access(Evaluators.publishImprovementCandidate, Access.public);
+@@access(Evaluators.rejectImprovementCandidate, Access.public);
+
+@@clientName(Evaluators.getImprovementOptions, "getImprovementOptions");
+@@clientName(Evaluators.createImprovementJob, "createImprovementJob");
+@@clientName(Evaluators.getImprovementJob, "getImprovementJob");
+@@clientName(Evaluators.listImprovementJobs, "listImprovementJobs");
+@@clientName(Evaluators.cancelImprovementJob, "cancelImprovementJob");
+@@clientName(Evaluators.deleteImprovementJob, "deleteImprovementJob");
+@@clientName(
+  Evaluators.publishImprovementCandidate,
+  "publishImprovementCandidate"
+);
+@@clientName(
+  Evaluators.rejectImprovementCandidate,
+  "rejectImprovementCandidate"
+);
+
 // Evaluator pending upload
 @@clientName(Evaluators.startPendingUpload, "pendingUpload");
 
