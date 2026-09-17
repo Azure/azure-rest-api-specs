@@ -189,7 +189,7 @@ namespace ContainerAppsSandbox {
   );
 
   @@clientLocation(
-    SandboxNetworkingOperations.getSandboxEgressDecisions2,
+    SandboxNetworkingOperations.getSandboxEgressDecisions,
     Group.Resource.Networking,
     "csharp"
   );
@@ -532,7 +532,7 @@ namespace ContainerAppsSandbox {
     "csharp"
   );
   @@clientName(
-    SandboxNetworkingOperations.getSandboxEgressDecisions2,
+    SandboxNetworkingOperations.getSandboxEgressDecisions,
     "getEgressDecisions",
     "csharp"
   );
