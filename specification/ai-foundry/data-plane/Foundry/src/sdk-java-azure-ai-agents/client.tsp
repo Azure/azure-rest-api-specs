@@ -1122,6 +1122,22 @@ union ToolChoiceValue {
   "java"
 );
 
+// Scope this mapping to the Realtime property. Mapping MCPListToolsTool globally collides with the
+// unrelated OpenAI.Tool hierarchy.
+@alternateType(
+  {
+    identity: "com.openai.models.realtime.RealtimeMcpListTools.Tool",
+  },
+  "java"
+)
+model OpenAIRealtimeMcpListToolsTool {}
+
+@@alternateType(
+  OpenAI.RealtimeMCPListTools.tools,
+  OpenAIRealtimeMcpListToolsTool[],
+  "java"
+);
+
 // Reuse standalone Responses and Realtime models from openai-java. Models that participate in the
 // RealtimeClientEvent, RealtimeServerEvent, RealtimeConversationItem, or other discriminator hierarchies remain
 // generated so Java's polymorphic deserialization can dispatch to their concrete subtypes.
