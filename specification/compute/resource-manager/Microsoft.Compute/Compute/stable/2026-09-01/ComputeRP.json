@@ -16090,11 +16090,11 @@
     },
     "FlexProfile": {
       "type": "object",
-      "description": "Specifies a FlexProfile for VM size. Azure may deploy a compatible alternative VM size based on capacity and placement considerations. The deployed size is returned in hardwareProfile.vmSize.",
+      "description": "Specifies a FlexProfile for VM size. Create and update requests that include flexProfile must omit hardwareProfile.vmSize. Requests that set both are rejected with an InvalidParameter error. Azure may deploy a compatible alternative VM size based on capacity and placement considerations. The deployed size is returned in hardwareProfile.vmSize.",
       "properties": {
         "preferredVMSize": {
           "type": "string",
-          "description": "Specifies the preferred VM size, for example Standard_D4s_v3. Azure may deploy a compatible alternative size based on capacity and placement considerations. Supported VM families for FlexProfile may vary by region. The recommended way to get the list of available sizes is using these APIs: [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes), [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/resourceskus/list), [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes)."
+          "description": "Specifies the preferred VM size, for example Standard_D4s_v3. Requests that also set hardwareProfile.vmSize are rejected with an InvalidParameter error. Azure may deploy a compatible alternative size based on capacity and placement considerations. Supported VM families for FlexProfile may vary by region. The recommended way to get the list of available sizes is using these APIs: [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes), [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/resourceskus/list), [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes)."
         }
       },
       "required": [
