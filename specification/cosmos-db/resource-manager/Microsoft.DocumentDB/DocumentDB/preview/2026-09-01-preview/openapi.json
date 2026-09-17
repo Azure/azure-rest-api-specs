@@ -24984,6 +24984,10 @@
           "type": "boolean",
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account"
         },
+        "enableEmbeddingGenerator": {
+          "type": "boolean",
+          "description": "Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account. This property is supported only for API for NoSQL accounts and cannot be enabled during account creation. Enable it by updating an existing account that has continuous backup and all versions and deletes change feed enabled. Integrated Embeddings cannot be disabled after it is enabled."
+        },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
           "description": "This property is ignored during the update/create operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.",
@@ -25258,6 +25262,10 @@
         "enableMaterializedViews": {
           "type": "boolean",
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account"
+        },
+        "enableEmbeddingGenerator": {
+          "type": "boolean",
+          "description": "Flag to indicate whether Integrated Embeddings is enabled on the Cosmos DB account. This property is supported only for API for NoSQL accounts."
         },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
@@ -25636,6 +25644,10 @@
         "enableMaterializedViews": {
           "type": "boolean",
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account"
+        },
+        "enableEmbeddingGenerator": {
+          "type": "boolean",
+          "description": "Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account. This property is supported only for existing API for NoSQL accounts with continuous backup and all versions and deletes change feed enabled. Integrated Embeddings cannot be disabled after it is enabled."
         },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
