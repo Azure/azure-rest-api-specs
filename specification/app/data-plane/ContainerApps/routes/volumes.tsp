@@ -5,26 +5,26 @@ using Azure.Core.Traits;
 
 namespace ContainerAppsSandbox;
 
-/** Errors returned by deleteVolume. */
+/** Error responses for the deleteVolume operation. */
 alias DeleteVolumeErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for deleting volumes. */
+/** Shared operation traits for deleting volumes. */
 alias VolumeDeleteOperations = ResourceOperations<
   DataPlaneStandardTraits,
   DeleteVolumeErrors
 >;
 
-/** No Content. */
+/** The HTTP 204 response for the deleteVolumeFile operation. */
 model DeleteVolumeFileResult {
-  /** HTTP response status code. */
+  /** The HTTP 204 status code. */
   @statusCode statusCode: 204;
 }
 
-/** Errors returned by deleteVolumeFile. */
+/** Error responses for the deleteVolumeFile operation. */
 alias DeleteVolumeFileErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -32,7 +32,7 @@ alias DeleteVolumeFileErrors =
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** Errors returned by listVolumes. */
+/** Error responses for the listVolume operation. */
 alias ListVolumeErrors = UnauthorizedErrorResult | InternalServerErrorResult;
 
 /** Query parameters for listing volumes. */
@@ -41,108 +41,108 @@ alias ListVolumeTraits = QueryParametersTrait<
     /** Continuation token for paginated results. */
     @query @continuationToken skipToken?: string;
 
-    /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
+    /** Comma-separated key=value labels that all resources must match. */
     @query labels?: string;
   },
   TraitContext.List
 >;
 
-/** Standard resource operations for listing volumes. */
+/** Shared operation traits for listing volumes. */
 alias VolumeListOperations = ResourceOperations<
   DataPlaneStandardTraits,
   ListVolumeErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the getVolumesCount operation. */
 model GetVolumesCountResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned volume count. */
   @body body: VolumeCountResponse;
 }
 
-/** Errors returned by getVolumesCount. */
+/** Error responses for the getVolumesCount operation. */
 alias GetVolumesCountErrors =
   | UnauthorizedErrorResult
   | InternalServerErrorResult;
 
-/** Errors returned by getVolume. */
+/** Error responses for the getVolume operation. */
 alias GetVolumeErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for reading volumes. */
+/** Shared operation traits for reading volumes. */
 alias VolumeGetOperations = ResourceOperations<
   DataPlaneStandardTraits,
   GetVolumeErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the getVolumeFiles operation. */
 model GetVolumeFilesResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned directory listing. */
   @body body: VolumeListDirectoryResponse;
 }
 
-/** Errors returned by getVolumeFiles. */
+/** Error responses for the getVolumeFiles operation. */
 alias GetVolumeFilesErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** OK. */
+/** The HTTP 200 response for the getVolumeFileDownload operation. */
 model GetVolumeFileDownloadResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The requested file content. */
   @body body: bytes;
 }
 
-/** Errors returned by getVolumeFileDownload. */
+/** Error responses for the getVolumeFileDownload operation. */
 alias GetVolumeFileDownloadErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** Created. */
+/** The HTTP 201 response for the postVolumeFileMkdir operation. */
 model PostVolumeFileMkdirResult {
-  /** HTTP response status code. */
+  /** The HTTP 201 status code. */
   @statusCode statusCode: 201;
 
-  /** Response body. */
+  /** The returned file or directory metadata. */
   @body body: VolumePathItem;
 }
 
-/** Errors returned by postVolumeFileMkdir. */
+/** Error responses for the postVolumeFileMkdir operation. */
 alias PostVolumeFileMkdirErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for creating volume directories. */
+/** Shared operation traits for creating volume directories. */
 alias VolumeFileMkdirOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostVolumeFileMkdirErrors
 >;
 
-/** Created. */
+/** The HTTP 201 response for the postVolumeFork operation. */
 model PostVolumeForkResult {
-  /** HTTP response status code. */
+  /** The HTTP 201 status code. */
   @statusCode statusCode: 201;
 
-  /** Response body. */
+  /** The returned volume. */
   @body body: Volume;
 }
 
-/** Errors returned by postVolumeFork. */
+/** Error responses for the postVolumeFork operation. */
 alias PostVolumeForkErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -150,38 +150,38 @@ alias PostVolumeForkErrors =
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for forking volumes. */
+/** Shared operation traits for creating volume forks. */
 alias VolumeForkOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostVolumeForkErrors
 >;
 
-/** Created. */
+/** The HTTP 201 response for the putVolume operation. */
 model PutVolumeResult {
-  /** HTTP response status code. */
+  /** The HTTP 201 status code. */
   @statusCode statusCode: 201;
 
-  /** Response body. */
+  /** The returned volume. */
   @body body: Volume;
 }
 
-/** Errors returned by putVolume. */
+/** Error responses for the putVolume operation. */
 alias PutVolumeErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** Created. */
+/** The HTTP 201 response for the putVolumeFile operation. */
 model PutVolumeFileResult {
-  /** HTTP response status code. */
+  /** The HTTP 201 status code. */
   @statusCode statusCode: 201;
 
-  /** Response body. */
+  /** The returned file or directory metadata. */
   @body body: VolumePathItem;
 }
 
-/** Errors returned by putVolumeFile. */
+/** Error responses for the putVolumeFile operation. */
 alias PutVolumeFileErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -205,13 +205,13 @@ interface VolumesOperations {
     {
       ...AzureResourceScope;
 
-      /** volumeName parameter. */
+      /** The volume name. */
       @path volumeName: string;
 
-      /** path parameter. */
+      /** The file or directory path to delete. */
       @query path: string;
 
-      /** recursive parameter. */
+      /** Whether to delete a directory and all of its contents. */
       @query recursive?: boolean;
     },
     DeleteVolumeFileResult,
@@ -248,10 +248,10 @@ interface VolumesOperations {
     {
       ...AzureResourceScope;
 
-      /** volumeName parameter. */
+      /** The volume name. */
       @path volumeName: string;
 
-      /** path parameter. */
+      /** The directory path to list. */
       @query path?: string;
     },
     GetVolumeFilesResult,
@@ -267,10 +267,10 @@ interface VolumesOperations {
     {
       ...AzureResourceScope;
 
-      /** volumeName parameter. */
+      /** The volume name. */
       @path volumeName: string;
 
-      /** path parameter. */
+      /** The file path to download. */
       @query path: string;
     },
     GetVolumeFileDownloadResult,
@@ -285,7 +285,7 @@ interface VolumesOperations {
   postVolumeFileMkdir is VolumeFileMkdirOperations.ResourceAction<
     Volume,
     {
-      /** path parameter. */
+      /** The directory path to create. */
       @query path: string;
     },
     PostVolumeFileMkdirResult
@@ -298,7 +298,7 @@ interface VolumesOperations {
   postVolumeFork is VolumeForkOperations.ResourceAction<
     Volume,
     {
-      /** Request body. */
+      /** The destination name and labels for the forked volume. */
       @body body: ForkDataDiskVolumeContent;
     },
     PostVolumeForkResult
@@ -313,10 +313,10 @@ interface VolumesOperations {
     {
       ...AzureResourceScope;
 
-      /** volumeName parameter. */
+      /** The volume name. */
       @path volumeName: string;
 
-      /** Request body. */
+      /** The volume configuration to create. */
       @body body: Volume;
     },
     PutVolumeResult,
@@ -333,16 +333,16 @@ interface VolumesOperations {
     {
       ...AzureResourceScope;
 
-      /** volumeName parameter. */
+      /** The volume name. */
       @path volumeName: string;
 
-      /** content parameter. */
+      /** The file content to upload. */
       @body content: bytes;
 
-      /** path parameter. */
+      /** The destination file path. */
       @query path: string;
 
-      /** overwrite parameter. */
+      /** Whether to replace an existing file. */
       @query overwrite?: boolean;
 
       /** Entity tag required for the request to be applied. */

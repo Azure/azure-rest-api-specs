@@ -4,155 +4,155 @@ using Azure.Core;
 
 namespace ContainerAppsSandbox;
 
-/** OK. */
+/** The HTTP 200 response for the getSandboxesCount operation. */
 model GetSandboxesCountResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned sandbox count. */
   @body body: SandboxCountResponse;
 }
 
-/** Errors returned by getSandboxesCount. */
+/** Error responses for the getSandboxesCount operation. */
 alias GetSandboxesCountErrors =
   | UnauthorizedErrorResult
   | InternalServerErrorResult;
 
-/** OK. */
+/** The HTTP 200 response for the getSandboxStats operation. */
 model GetSandboxStatsResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned sandbox statistics. */
   @body body: SandboxStatsResponse;
 }
 
-/** Errors returned by getSandboxStats. */
+/** Error responses for the getSandboxStats operation. */
 alias GetSandboxStatsErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** OK. */
+/** The HTTP 200 response for the postSandboxDisable operation. */
 model PostSandboxDisableResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned sandbox. */
   @body body: Sandbox;
 }
 
-/** Errors returned by postSandboxDisable. */
+/** Error responses for the postSandboxDisable operation. */
 alias PostSandboxDisableErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for disabling sandboxes. */
+/** Shared operation traits for disabling sandboxes. */
 alias SandboxDisableOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxDisableErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the postSandboxEnable operation. */
 model PostSandboxEnableResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned sandbox. */
   @body body: Sandbox;
 }
 
-/** Errors returned by postSandboxEnable. */
+/** Error responses for the postSandboxEnable operation. */
 alias PostSandboxEnableErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for enabling sandboxes. */
+/** Shared operation traits for enabling sandboxes. */
 alias SandboxEnableOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxEnableErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the postSandboxExecuteCommand operation. */
 model PostSandboxExecuteCommandResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned command result. */
   @body body: SandboxExecuteCommandResponse;
 }
 
-/** Errors returned by postSandboxExecuteCommand. */
+/** Error responses for the postSandboxExecuteCommand operation. */
 alias PostSandboxExecuteCommandErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for executing sandbox commands. */
+/** Shared operation traits for executing sandbox commands. */
 alias SandboxExecuteCommandOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxExecuteCommandErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the postSandboxExecuteShellCommand operation. */
 model PostSandboxExecuteShellCommandResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned shell command result. */
   @body body: SandboxExecuteShellCommandResponse;
 }
 
-/** Errors returned by postSandboxExecuteShellCommand. */
+/** Error responses for the postSandboxExecuteShellCommand operation. */
 alias PostSandboxExecuteShellCommandErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for executing sandbox shell commands. */
+/** Shared operation traits for executing sandbox shell commands. */
 alias SandboxExecuteShellCommandOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxExecuteShellCommandErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the postSandboxLifecycle operation. */
 model PostSandboxLifecycleResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned sandbox. */
   @body body: Sandbox;
 }
 
-/** Errors returned by postSandboxLifecycle. */
+/** Error responses for the postSandboxLifecycle operation. */
 alias PostSandboxLifecycleErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for setting sandbox lifecycle policies. */
+/** Shared operation traits for setting sandbox lifecycle policies. */
 alias SandboxLifecyclePolicyOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxLifecycleErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the postSandboxResume operation. */
 model PostSandboxResumeResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned sandbox. */
   @body body: Sandbox;
 }
 
-/** Errors returned by postSandboxResume. */
+/** Error responses for the postSandboxResume operation. */
 alias PostSandboxResumeErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -161,22 +161,22 @@ alias PostSandboxResumeErrors =
   | InternalServerErrorResult
   | ServiceUnavailableErrorResult;
 
-/** Standard resource operations for resuming sandboxes. */
+/** Shared operation traits for resuming sandboxes. */
 alias SandboxResumeOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxResumeErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the postSandboxStop operation. */
 model PostSandboxStopResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned snapshot. */
   @body body: Snapshot;
 }
 
-/** Errors returned by postSandboxStop. */
+/** Error responses for the postSandboxStop operation. */
 alias PostSandboxStopErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -184,7 +184,7 @@ alias PostSandboxStopErrors =
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for stopping sandboxes. */
+/** Shared operation traits for stopping sandboxes. */
 alias SandboxStopOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxStopErrors
@@ -214,7 +214,7 @@ interface SandboxLifecycleOperations {
     {
       ...AzureResourceScope;
 
-      /** id parameter. */
+      /** The sandbox identifier. */
       @path id: SandboxId;
     },
     GetSandboxStatsResult,
@@ -249,10 +249,10 @@ interface SandboxLifecycleOperations {
   postSandboxExecuteCommand is SandboxExecuteCommandOperations.ResourceAction<
     Sandbox,
     {
-      /** containerName parameter. */
+      /** The container where the command runs. */
       @query containerName?: string;
 
-      /** Request body. */
+      /** The executable, arguments, and execution options. */
       @body body: ExecuteSandboxCommandContent;
     },
     PostSandboxExecuteCommandResult
@@ -265,10 +265,10 @@ interface SandboxLifecycleOperations {
   postSandboxExecuteShellCommand is SandboxExecuteShellCommandOperations.ResourceAction<
     Sandbox,
     {
-      /** containerName parameter. */
+      /** The container where the shell command runs. */
       @query containerName?: string;
 
-      /** Request body. */
+      /** The shell command and execution options. */
       @body body: ExecuteSandboxShellCommandContent;
     },
     PostSandboxExecuteShellCommandResult
@@ -281,7 +281,7 @@ interface SandboxLifecycleOperations {
   postSandboxLifecycle is SandboxLifecyclePolicyOperations.ResourceAction<
     Sandbox,
     {
-      /** Request body. */
+      /** The automatic suspension and deletion settings. */
       @body body: SandboxLifecyclePolicy;
     },
     PostSandboxLifecycleResult

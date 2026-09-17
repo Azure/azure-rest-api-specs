@@ -12,72 +12,72 @@ namespace ContainerAppsSandbox {
     UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
   }
 
-  /** Represents the state of a connection. */
+  /** The provisioning state of a credential or connection. */
   union ConnectionState {
-    /** StringValue variant. */
+    /** An unrecognized state returned by the service. */
     StringValue: string,
 
-    /** Creating variant. */
+    /** The resource is being created. */
     Creating: "Creating",
 
-    /** Ready variant. */
+    /** The resource is ready for use. */
     Ready: "Ready",
 
-    /** Error variant. */
+    /** The resource could not be provisioned. */
     Error: "Error",
   }
 
-  /** Authentication configuration for a gateway connection (CosmosDB storage). */
+  /** Managed identity authentication for a gateway connection. */
   model GatewayConnectionAuthRecord {
-    /** type value. */
+    /** The managed identity type. */
     type: GatewayConnectionAuthType;
 
-    /** identityResourceId value. */
+    /** The resource ID of the user-assigned managed identity. */
     identityResourceId?: string;
   }
 
   /** Connector Namespace reference details required by egress HookRef resolution. */
   model SandboxGroupCredentialConnectionRefDetails {
-    /** authentication value. */
+    /** Authentication used by the referenced connection. */
     authentication: GatewayConnectionAuthRecord;
 
-    /** tokenExchangeEndpoint value. */
+    /** The endpoint used to exchange tokens for the connection. */
     tokenExchangeEndpoint: string;
   }
 
-  /** SandboxGroupCredentialOrigin wire model. */
+  /** The service feature that created the credential. */
   union SandboxGroupCredentialOrigin {
-    /** StringValue variant. */
+    /** An unrecognized origin returned by the service. */
     StringValue: string,
 
-    /** Credentials variant. */
+    /** The credential was created through the credentials API. */
     Credentials: "Credentials",
 
-    /** Connections variant. */
+    /** The credential was created for a connection. */
     Connections: "Connections",
   }
 
   /** Supported provider credential kinds. */
   union SandboxGroupCredentialProvider {
-    /** StringValue variant. */
+    /** An unrecognized provider returned by the service. */
     StringValue: string,
 
-    /** GitHubCopilot variant. */
+    /** A GitHub Copilot credential. */
     GitHubCopilot: "GitHubCopilot",
 
-    /** Claude variant. */
+    /** A Claude credential. */
     Claude: "Claude",
   }
 
   /** Request body for creating or updating a sandbox-group credential. */
   model CreateSandboxGroupCredentialContent {
-    /** displayName value. */
+    /** A display name for the credential. */
     displayName?: string;
 
-    /** provider value. */
+    /** The provider that uses the credential. */
     provider: SandboxGroupCredentialProvider;
 
-    /** source value. */
+    /** The source of the credential material. */
     source: SandboxGroupCredentialSource;
   }
 
@@ -90,17 +90,17 @@ namespace ContainerAppsSandbox {
     @visibility(Lifecycle.Read)
     name: string;
 
-    /** displayName value. */
+    /** The credential display name. */
     displayName?: string;
 
-    /** provider value. */
+    /** The provider that uses the credential. */
     provider: SandboxGroupCredentialProvider;
 
     /** Current credential state. */
     @visibility(Lifecycle.Read)
     state: ConnectionState;
 
-    /** source value. */
+    /** The source metadata for the credential. */
     source: SandboxGroupCredentialSource;
 
     /** Origin of the credential. */
@@ -110,45 +110,45 @@ namespace ContainerAppsSandbox {
 
   /** Stored source metadata for a sandbox group credential. */
   model SandboxGroupCredentialSource {
-    /** kind value. */
+    /** The credential source type. */
     kind: SandboxGroupCredentialSourceKind;
 
-    /** connectionResourceId value. */
+    /** The Azure resource ID of the referenced connection. */
     connectionResourceId?: string;
 
-    /** connectionRefDetails value. */
+    /** Authentication details for the referenced gateway connection. */
     connectionRefDetails?: SandboxGroupCredentialConnectionRefDetails;
 
-    /** parameterValues value. */
+    /** Sensitive provider parameters for the credential. */
     @secret
     @visibility(Lifecycle.Create, Lifecycle.Update)
     parameterValues?: Record<string>;
 
-    /** connectionId value. */
+    /** The identifier of an existing connection. */
     connectionId?: ConnectionId;
 
-    /** connectionType value. */
+    /** The type of the referenced connection. */
     connectionType?: string;
 
-    /** connectionName value. */
+    /** The name of the referenced connection. */
     connectionName?: string;
   }
 
   /** Supported credential source kinds. */
   union SandboxGroupCredentialSourceKind {
-    /** StringValue variant. */
+    /** An unrecognized source kind returned by the service. */
     StringValue: string,
 
-    /** Pat variant. */
+    /** A personal access token supplied directly. */
     Pat: "Pat",
 
-    /** SecretRef variant. */
+    /** A reference to a stored secret. */
     SecretRef: "SecretRef",
 
-    /** GatewayConnectionRef variant. */
+    /** A reference to a gateway connection. */
     GatewayConnectionRef: "GatewayConnectionRef",
 
-    /** ExistingAdcConnection variant. */
+    /** A reference to an existing sandbox connection. */
     ExistingAdcConnection: "ExistingAdcConnection",
   }
 }

@@ -5,24 +5,24 @@ namespace ContainerAppsSandbox;
 /** Response containing the total number of snapshots in a scope. */
 model SnapshotCountResponse is CountResponse;
 
-/** SnapshotPodContainer wire model. */
+/** A container captured in a sandbox snapshot. */
 model SnapshotPodContainer {
-  /** name value. */
+  /** The container name. */
   name: PodContainerName;
 
-  /** diskImageId value. */
+  /** The disk image created for the container. */
   diskImageId: DiskImageId;
 }
 
-/** SnapshotResources wire model. */
+/** Resources captured in a sandbox snapshot. */
 model SnapshotResources {
-  /** cpu value. */
+  /** The captured CPU allocation. */
   cpu?: CpuQuantity;
 
-  /** memory value. */
+  /** The captured memory allocation. */
   memory?: MemoryQuantity;
 
-  /** disk value. */
+  /** The captured disk allocation. */
   disk?: StorageQuantity;
 }
 

@@ -5,18 +5,18 @@ using Azure.Core.Traits;
 
 namespace ContainerAppsSandbox;
 
-/** Errors returned by deleteContentPackage. */
+/** Error responses for the deleteContentPackage operation. */
 alias DeleteContentPackageErrors =
   | UnauthorizedErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for deleting content packages. */
+/** Shared operation traits for deleting content packages. */
 alias ContentPackageDeleteOperations = ResourceOperations<
   DataPlaneStandardTraits,
   DeleteContentPackageErrors
 >;
 
-/** Errors returned by listContentPackages. */
+/** Error responses for the listContentPackage operation. */
 alias ListContentPackageErrors =
   | UnauthorizedErrorResult
   | InternalServerErrorResult;
@@ -27,47 +27,47 @@ alias ListContentPackageTraits = QueryParametersTrait<
     /** Continuation token for paginated results. */
     @query @continuationToken skipToken?: string;
 
-    /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
+    /** Comma-separated key=value labels that all resources must match. */
     @query labels?: string;
   },
   TraitContext.List
 >;
 
-/** Standard resource operations for listing content packages. */
+/** Shared operation traits for listing content packages. */
 alias ContentPackageListOperations = ResourceOperations<
   DataPlaneStandardTraits,
   ListContentPackageErrors
 >;
 
-/** Errors returned by getContentPackage. */
+/** Error responses for the getContentPackage operation. */
 alias GetContentPackageErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for reading content packages. */
+/** Shared operation traits for reading content packages. */
 alias ContentPackageGetOperations = ResourceOperations<
   DataPlaneStandardTraits,
   GetContentPackageErrors
 >;
 
-/** Created. */
+/** The HTTP 201 response for the postContentPackageUpload operation. */
 model PostContentPackageUploadResult {
-  /** HTTP response status code. */
+  /** The HTTP 201 status code. */
   @statusCode statusCode: 201;
 
-  /** Response body. */
+  /** The returned content package. */
   @body body: ContentPackage;
 }
 
-/** Errors returned by postContentPackageUpload. */
+/** Error responses for the postContentPackageUpload operation. */
 alias PostContentPackageUploadErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
   | InternalServerErrorResult
   | ServiceUnavailableErrorResult;
 
-/** Standard resource operations for uploading content packages. */
+/** Shared operation traits for uploading content packages. */
 alias ContentPackageUploadOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostContentPackageUploadErrors
@@ -91,7 +91,7 @@ interface ContentPackagesOperations {
   @summary("Gets a specific content package by ID.")
   getContentPackage is ContentPackageGetOperations.ResourceRead<ContentPackage>;
 
-  /** Creates a content package by uploading binary content. The request body should contain the binary content of the package, and optional labels can be provided as query parameters. The response will include details of the created content package. */
+  /** Creates a content package from uploaded binary content and optional labels. */
   @summary("Uploads a content package.")
   @action("upload")
   @actionSeparator("/")
@@ -104,7 +104,7 @@ interface ContentPackagesOperations {
       /** Binary content of the package. */
       @body content: bytes;
 
-      /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
+      /** Comma-separated key=value labels that all resources must match. */
       @query labels?: string;
     },
     PostContentPackageUploadResult

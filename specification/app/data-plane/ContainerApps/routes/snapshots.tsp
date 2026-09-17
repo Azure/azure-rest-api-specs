@@ -5,18 +5,18 @@ using Azure.Core.Traits;
 
 namespace ContainerAppsSandbox;
 
-/** Errors returned by deleteSnapshot. */
+/** Error responses for the deleteSnapshot operation. */
 alias DeleteSnapshotErrors =
   | UnauthorizedErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for deleting snapshots. */
+/** Shared operation traits for deleting snapshots. */
 alias SnapshotDeleteOperations = ResourceOperations<
   DataPlaneStandardTraits,
   DeleteSnapshotErrors
 >;
 
-/** Errors returned by listSnapshots. */
+/** Error responses for the listSnapshot operation. */
 alias ListSnapshotErrors = UnauthorizedErrorResult | InternalServerErrorResult;
 
 /** Query parameters for listing snapshots. */
@@ -25,39 +25,39 @@ alias ListSnapshotTraits = QueryParametersTrait<
     /** Continuation token for paginated results. */
     @query @continuationToken skipToken?: string;
 
-    /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
+    /** Comma-separated key=value labels that all resources must match. */
     @query labels?: string;
   },
   TraitContext.List
 >;
 
-/** Standard resource operations for listing snapshots. */
+/** Shared operation traits for listing snapshots. */
 alias SnapshotListOperations = ResourceOperations<
   DataPlaneStandardTraits,
   ListSnapshotErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the getSnapshotsCount operation. */
 model GetSnapshotsCountResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned snapshot count. */
   @body body: SnapshotCountResponse;
 }
 
-/** Errors returned by getSnapshotsCount. */
+/** Error responses for the getSnapshotsCount operation. */
 alias GetSnapshotsCountErrors =
   | UnauthorizedErrorResult
   | InternalServerErrorResult;
 
-/** Errors returned by getSnapshot. */
+/** Error responses for the getSnapshot operation. */
 alias GetSnapshotErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for reading snapshots. */
+/** Shared operation traits for reading snapshots. */
 alias SnapshotGetOperations = ResourceOperations<
   DataPlaneStandardTraits,
   GetSnapshotErrors

@@ -5,10 +5,10 @@ using Azure.Core.Traits;
 
 namespace ContainerAppsSandbox;
 
-/** Errors returned by deleteCredential. */
+/** Error responses for the deleteCredential operation. */
 alias DeleteCredentialErrors = NotFoundErrorResult;
 
-/** Standard resource operations for deleting credentials. */
+/** Shared operation traits for deleting credentials. */
 alias CredentialDeleteOperations = ResourceOperations<
   DataPlaneStandardTraits,
   DeleteCredentialErrors
@@ -23,31 +23,31 @@ alias ListCredentialTraits = QueryParametersTrait<
   TraitContext.List
 >;
 
-/** Standard resource operations for listing credentials. */
+/** Shared operation traits for listing credentials. */
 alias CredentialListOperations = ResourceOperations<
   DataPlaneStandardTraits,
   never
 >;
 
-/** Errors returned by getCredential. */
+/** Error responses for the getCredential operation. */
 alias GetCredentialErrors = NotFoundErrorResult;
 
-/** Standard resource operations for reading credentials. */
+/** Shared operation traits for reading credentials. */
 alias CredentialGetOperations = ResourceOperations<
   DataPlaneStandardTraits,
   GetCredentialErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the putCredential operation. */
 model PutCredentialResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned credential. */
   @body body: SandboxGroupCredential;
 }
 
-/** Errors returned by putCredential. */
+/** Error responses for the putCredential operation. */
 alias PutCredentialErrors = BadRequestErrorResult;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, query parameters, and route shapes."
@@ -78,10 +78,10 @@ interface CredentialsOperations {
     {
       ...AzureResourceScope;
 
-      /** credentialName parameter. */
+      /** The credential name. */
       @path credentialName: string;
 
-      /** Request body. */
+      /** The credential configuration to store. */
       @body body: CreateSandboxGroupCredentialContent;
     },
     PutCredentialResult,

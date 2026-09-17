@@ -5,7 +5,7 @@ using Azure.Core.Traits;
 
 namespace ContainerAppsSandbox;
 
-/** Errors returned by deleteConnection. */
+/** Error responses for the deleteConnection operation. */
 alias DeleteConnectionErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
@@ -21,13 +21,13 @@ alias DeleteConnectionTraits = QueryParametersTrait<
   TraitContext.Delete
 >;
 
-/** Standard resource operations for deleting connections. */
+/** Shared operation traits for deleting connections. */
 alias ConnectionDeleteOperations = ResourceOperations<
   DataPlaneStandardTraits,
   DeleteConnectionErrors
 >;
 
-/** Errors returned by listConnections. */
+/** Error responses for the listConnection operation. */
 alias ListConnectionErrors =
   | UnauthorizedErrorResult
   | InternalServerErrorResult;
@@ -38,7 +38,7 @@ alias ListConnectionTraits = QueryParametersTrait<
     /** Whether to include sandbox identifiers using each connection. */
     @query includeSandboxIds?: boolean;
 
-    /** Label selector for filtering resources. Accepts comma-separated key=value pairs(e.g., "env=prod,team=backend"). Returns only resources that have all specified labels with matching values. */
+    /** Comma-separated key=value labels that all resources must match. */
     @query labels?: string;
 
     /** Continuation token for paginated results. */
@@ -47,13 +47,13 @@ alias ListConnectionTraits = QueryParametersTrait<
   TraitContext.List
 >;
 
-/** Standard resource operations for listing connections. */
+/** Shared operation traits for listing connections. */
 alias ConnectionListOperations = ResourceOperations<
   DataPlaneStandardTraits,
   ListConnectionErrors
 >;
 
-/** Errors returned by getConnection. */
+/** Error responses for the getConnection operation. */
 alias GetConnectionErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
@@ -68,113 +68,113 @@ alias GetConnectionTraits = QueryParametersTrait<
   TraitContext.Read
 >;
 
-/** Standard resource operations for reading connections. */
+/** Shared operation traits for reading connections. */
 alias ConnectionGetOperations = ResourceOperations<
   DataPlaneStandardTraits,
   GetConnectionErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the postConnection operation. */
 model PostConnectionResult200 {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned connection. */
   @body body: Connection;
 }
 
-/** Created. */
+/** The HTTP 201 response for the postConnection operation. */
 model PostConnectionResult201 {
-  /** HTTP response status code. */
+  /** The HTTP 201 status code. */
   @statusCode statusCode: 201;
 
-  /** Response body. */
+  /** The returned connection. */
   @body body: Connection;
 }
 
-/** Successful responses returned by postConnection. */
+/** Successful responses for the postConnection operation. */
 alias PostConnectionResult = PostConnectionResult200 | PostConnectionResult201;
 
-/** Errors returned by postConnection. */
+/** Error responses for the postConnection operation. */
 alias PostConnectionErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
   | InternalServerErrorResult;
 
-/** OK. */
+/** The HTTP 200 response for the postConnectionAuthorize operation. */
 model PostConnectionAuthorizeResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned connection. */
   @body body: Connection;
 }
 
-/** Errors returned by postConnectionAuthorize. */
+/** Error responses for the postConnectionAuthorize operation. */
 alias PostConnectionAuthorizeErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for authorizing connections. */
+/** Shared operation traits for authorizing connections. */
 alias ConnectionAuthorizeOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostConnectionAuthorizeErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the postConnectionConsentLink operation. */
 model PostConnectionConsentLinkResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned consent link. */
   @body body: GenerateConsentLinkResponse;
 }
 
-/** Errors returned by postConnectionConsentLink. */
+/** Error responses for the postConnectionConsentLink operation. */
 alias PostConnectionConsentLinkErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for generating connection consent links. */
+/** Shared operation traits for generating connection consent links. */
 alias ConnectionConsentLinkOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostConnectionConsentLinkErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the postConnectionRefresh operation. */
 model PostConnectionRefreshResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned connection. */
   @body body: Connection;
 }
 
-/** Errors returned by postConnectionRefresh. */
+/** Error responses for the postConnectionRefresh operation. */
 alias PostConnectionRefreshErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for refreshing connections. */
+/** Shared operation traits for refreshing connections. */
 alias ConnectionRefreshOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostConnectionRefreshErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the putConnectionPolicyRules operation. */
 model PutConnectionPolicyRulesResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned connection. */
   @body body: Connection;
 }
 
-/** Errors returned by putConnectionPolicyRules. */
+/** Error responses for the putConnectionPolicyRules operation. */
 alias PutConnectionPolicyRulesErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -213,7 +213,7 @@ interface ConnectionsOperations {
     {
       ...AzureResourceScope;
 
-      /** Request body. */
+      /** The connection configuration to create. */
       @body body: CreateConnectionContent;
     },
     PostConnectionResult,
@@ -228,7 +228,7 @@ interface ConnectionsOperations {
   postConnectionAuthorize is ConnectionAuthorizeOperations.ResourceAction<
     Connection,
     {
-      /** Request body. */
+      /** Provider-specific authorization parameters. */
       @body body: AuthorizeConnectionContent;
     },
     PostConnectionAuthorizeResult
@@ -241,7 +241,7 @@ interface ConnectionsOperations {
   postConnectionConsentLink is ConnectionConsentLinkOperations.ResourceAction<
     Connection,
     {
-      /** Request body. */
+      /** Options for the generated consent link. */
       @body body?: GenerateConsentLinkContent;
     },
     PostConnectionConsentLinkResult
@@ -254,7 +254,7 @@ interface ConnectionsOperations {
   postConnectionRefresh is ConnectionRefreshOperations.ResourceAction<
     Connection,
     {
-      /** includeSandboxIds parameter. */
+      /** Whether to include identifiers of sandboxes using the connection. */
       @query includeSandboxIds?: boolean;
     },
     PostConnectionRefreshResult
@@ -270,10 +270,10 @@ interface ConnectionsOperations {
     {
       ...AzureResourceScope;
 
-      /** id parameter. */
+      /** The connection identifier. */
       @path id: string;
 
-      /** Request body. */
+      /** The policy rules and enabled tool groups to apply. */
       @body body: UpdatePolicyRulesContent;
     },
     PutConnectionPolicyRulesResult,

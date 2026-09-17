@@ -4,16 +4,16 @@ using Azure.Core;
 
 namespace ContainerAppsSandbox;
 
-/** OK. */
+/** The HTTP 200 response for the postSandboxCommit operation. */
 model PostSandboxCommitResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned created disk image. */
   @body body: CommitSandboxResponse;
 }
 
-/** Errors returned by postSandboxCommit. */
+/** Error responses for the postSandboxCommit operation. */
 alias PostSandboxCommitErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
@@ -21,19 +21,19 @@ alias PostSandboxCommitErrors =
   | TooManyRequestsErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for committing sandboxes. */
+/** Shared operation traits for committing sandboxes. */
 alias SandboxCommitOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxCommitErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the postSandboxDownloadContentPackage operation. */
 model PostSandboxDownloadContentPackageResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 }
 
-/** Errors returned by postSandboxDownloadContentPackage. */
+/** Error responses for the postSandboxDownloadContentPackage operation. */
 alias PostSandboxDownloadContentPackageErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -41,19 +41,19 @@ alias PostSandboxDownloadContentPackageErrors =
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for downloading sandbox content packages. */
+/** Shared operation traits for downloading sandbox content packages. */
 alias SandboxDownloadContentPackageOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxDownloadContentPackageErrors
 >;
 
-/** No Content. */
+/** The HTTP 204 response for the postSandboxPodVolumesAdd2 operation. */
 model PostSandboxPodVolumesAdd2Result {
-  /** HTTP response status code. */
+  /** The HTTP 204 status code. */
   @statusCode statusCode: 204;
 }
 
-/** Errors returned by postSandboxPodVolumesAdd2. */
+/** Error responses for the postSandboxPodVolumesAdd2 operation. */
 alias PostSandboxPodVolumesAdd2Errors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -61,22 +61,22 @@ alias PostSandboxPodVolumesAdd2Errors =
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for adding sandbox pod volumes. */
+/** Shared operation traits for adding sandbox pod volumes. */
 alias SandboxPodVolumesAddOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxPodVolumesAdd2Errors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the postSandboxSnapshot operation. */
 model PostSandboxSnapshotResult {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned snapshot. */
   @body body: Snapshot;
 }
 
-/** Errors returned by postSandboxSnapshot. */
+/** Error responses for the postSandboxSnapshot operation. */
 alias PostSandboxSnapshotErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -85,19 +85,19 @@ alias PostSandboxSnapshotErrors =
   | TooManyRequestsErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for snapshotting sandboxes. */
+/** Shared operation traits for snapshotting sandboxes. */
 alias SandboxSnapshotOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxSnapshotErrors
 >;
 
-/** No Content. */
+/** The HTTP 204 response for the postSandboxVolumeAdd operation. */
 model PostSandboxVolumeAddResult {
-  /** HTTP response status code. */
+  /** The HTTP 204 status code. */
   @statusCode statusCode: 204;
 }
 
-/** Errors returned by postSandboxVolumeAdd. */
+/** Error responses for the postSandboxVolumeAdd operation. */
 alias PostSandboxVolumeAddErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -105,7 +105,7 @@ alias PostSandboxVolumeAddErrors =
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for adding sandbox volumes. */
+/** Shared operation traits for adding sandbox volumes. */
 alias SandboxVolumeAddOperations = ResourceOperations<
   DataPlaneStandardTraits,
   PostSandboxVolumeAddErrors
@@ -121,7 +121,7 @@ interface SandboxStorageOperations {
   postSandboxCommit is SandboxCommitOperations.ResourceAction<
     Sandbox,
     {
-      /** Request body. */
+      /** Optional labels for the new disk image. */
       @body body?: CommitSandboxContent;
     },
     PostSandboxCommitResult
@@ -134,7 +134,7 @@ interface SandboxStorageOperations {
   postSandboxDownloadContentPackage is SandboxDownloadContentPackageOperations.ResourceAction<
     Sandbox,
     {
-      /** Request body. */
+      /** The content package and destination path. */
       @body body: DownloadContentPackageToSandboxContent;
     },
     PostSandboxDownloadContentPackageResult
@@ -147,7 +147,7 @@ interface SandboxStorageOperations {
   postSandboxPodVolumesAdd2 is SandboxPodVolumesAddOperations.ResourceAction<
     Sandbox,
     {
-      /** Request body. */
+      /** The pod volumes and container mounts to add. */
       @body body: AddPodVolumeMountsContent;
     },
     PostSandboxPodVolumesAdd2Result
@@ -160,7 +160,7 @@ interface SandboxStorageOperations {
   postSandboxSnapshot is SandboxSnapshotOperations.ResourceAction<
     Sandbox,
     {
-      /** Request body. */
+      /** Labels for the new snapshot. */
       @body body: CreateSnapshotContent;
     },
     PostSandboxSnapshotResult
@@ -173,10 +173,10 @@ interface SandboxStorageOperations {
   postSandboxVolumeAdd is SandboxVolumeAddOperations.ResourceAction<
     Sandbox,
     {
-      /** containerName parameter. */
+      /** The container that receives the mount. */
       @query containerName?: string;
 
-      /** Request body. */
+      /** The volume mount to add. */
       @body body: AddVolumeMountContent;
     },
     PostSandboxVolumeAddResult

@@ -5,19 +5,19 @@ using Azure.Core.Traits;
 
 namespace ContainerAppsSandbox;
 
-/** Errors returned by deleteEgressPolicy. */
+/** Error responses for the deleteEgressPolicy operation. */
 alias DeleteEgressPolicyErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for deleting named egress policies. */
+/** Shared operation traits for deleting named egress policies. */
 alias EgressPolicyDeleteOperations = ResourceOperations<
   DataPlaneStandardTraits,
   DeleteEgressPolicyErrors
 >;
 
-/** Errors returned by listEgressPolicies. */
+/** Error responses for the listEgressPolicy operation. */
 alias ListEgressPolicyErrors =
   | UnauthorizedErrorResult
   | InternalServerErrorResult;
@@ -31,48 +31,48 @@ alias ListEgressPolicyTraits = QueryParametersTrait<
   TraitContext.List
 >;
 
-/** Standard resource operations for listing egress policies. */
+/** Shared operation traits for listing egress policies. */
 alias EgressPolicyListOperations = ResourceOperations<
   DataPlaneStandardTraits,
   ListEgressPolicyErrors
 >;
 
-/** Errors returned by getEgressPolicy. */
+/** Error responses for the getEgressPolicy operation. */
 alias GetEgressPolicyErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | InternalServerErrorResult;
 
-/** Standard resource operations for reading named egress policies. */
+/** Shared operation traits for reading named egress policies. */
 alias EgressPolicyGetOperations = ResourceOperations<
   DataPlaneStandardTraits,
   GetEgressPolicyErrors
 >;
 
-/** OK. */
+/** The HTTP 200 response for the putEgressPolicy operation. */
 model PutEgressPolicyResult200 {
-  /** HTTP response status code. */
+  /** The HTTP 200 status code. */
   @statusCode statusCode: 200;
 
-  /** Response body. */
+  /** The returned egress policy. */
   @body body: NamedEgressPolicy;
 }
 
-/** Created. */
+/** The HTTP 201 response for the putEgressPolicy operation. */
 model PutEgressPolicyResult201 {
-  /** HTTP response status code. */
+  /** The HTTP 201 status code. */
   @statusCode statusCode: 201;
 
-  /** Response body. */
+  /** The returned egress policy. */
   @body body: NamedEgressPolicy;
 }
 
-/** Successful responses returned by putEgressPolicy. */
+/** Successful responses for the putEgressPolicy operation. */
 alias PutEgressPolicyResult =
   | PutEgressPolicyResult200
   | PutEgressPolicyResult201;
 
-/** Errors returned by putEgressPolicy. */
+/** Error responses for the putEgressPolicy operation. */
 alias PutEgressPolicyErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
@@ -105,10 +105,10 @@ interface EgressPoliciesOperations {
     {
       ...AzureResourceScope;
 
-      /** policyId parameter. */
+      /** The egress policy identifier. */
       @path policyId: string;
 
-      /** Request body. */
+      /** The named egress policy to create or replace. */
       @body body: NamedEgressPolicy;
     },
     PutEgressPolicyResult,

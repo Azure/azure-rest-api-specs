@@ -1,13 +1,13 @@
 namespace ContainerAppsSandbox {
-  /** AddConnectionContent wire model. */
+  /** Identifies a connection to attach to a sandbox. */
   model AddConnectionContent {
-    /** connectionId value. */
+    /** The connection identifier. */
     connectionId: ConnectionId;
   }
 
-  /** Connection-list response body. */
+  /** Connections currently attached to a sandbox. */
   model ConnectionsListResponse {
-    /** connectionIds value. */
+    /** The identifiers of connections attached to the sandbox. */
     connectionIds: string[];
   }
 
@@ -28,7 +28,7 @@ namespace ContainerAppsSandbox {
     /** Scheme (http, https). */
     scheme?: string;
 
-    /** connectionId value. */
+    /** The connection associated with the request, when applicable. */
     connectionId?: ConnectionId;
 
     /** Connection display name if this is an API Hub connector call. */
@@ -38,15 +38,15 @@ namespace ContainerAppsSandbox {
     matchedRule?: string;
   }
 
-  /** Egress-decisions response body. */
+  /** Recent network egress decisions for a sandbox. */
   model EgressDecisionsResponse {
     /** HTTP egress decisions. */
     http: NetworkEgressDecisions;
 
-    /** statefulTcp value. */
+    /** Recent stateful TCP connection decisions. */
     statefulTcp?: StatefulTcpEgress;
 
-    /** lastUpdated value. */
+    /** The time when the decision data was last updated. */
     lastUpdated: utcDateTime;
   }
 
@@ -61,50 +61,50 @@ namespace ContainerAppsSandbox {
 
   /** Partial update for one sandbox port. */
   model UpdateSandboxPortContent {
-    /** port value. */
+    /** The port number to update. */
     port?: int32;
 
-    /** name value. */
+    /** The port name to update. */
     name?: string;
 
-    /** auth value. */
+    /** The replacement authentication configuration. */
     auth?: PortAuthConfig;
 
-    /** activationMode value. */
+    /** The replacement activation mode. */
     activationMode?: PortActivationMode;
 
-    /** protocol value. */
+    /** The replacement forwarding protocol. */
     protocol?: PortProtocol;
 
-    /** ipAccessControl value. */
+    /** The replacement IP access-control configuration. */
     ipAccessControl?: IpAccessControl;
 
-    /** cors value. */
+    /** The replacement CORS configuration. */
     cors?: PortCorsConfig;
   }
 
-  /** Port-list response body. */
+  /** Ports configured on a sandbox. */
   model PortsListResponse {
-    /** ports value. */
+    /** The sandbox ports. */
     ports: SandboxPort[];
   }
 
-  /** RemovePortContent wire model. */
+  /** Identifies a sandbox port to remove. */
   model RemovePortContent {
-    /** name value. */
+    /** The port name. */
     name?: string;
 
-    /** port value. */
+    /** The port number. */
     port?: int32;
   }
 
-  /** Stateful-TCP (TDS) egress connection audit entries. A single recent-connections list carries both lifecycle phases (Established, Closed); consumers pair them by string? DataPlaneStatefulTcpEntry.CorrelationId. */
+  /** Recent stateful TCP connection events. */
   model StatefulTcpEgress {
     /** Last 50 stateful-TCP connection audit entries (most recent first). */
     connections?: StatefulTcpEntry[];
   }
 
-  /** Single stateful-TCP (TDS) connection audit entry (one lifecycle phase of a connection). */
+  /** An event from a stateful TCP connection. */
   model StatefulTcpEntry {
     /** When this phase event was emitted. */
     timestamp: utcDateTime;
@@ -127,13 +127,13 @@ namespace ContainerAppsSandbox {
     /** Target database (informational). */
     database?: string;
 
-    /** SQL login used after proxy injection, masked to a prefix before it reaches this customer-facing view (never the connector's full username). */
+    /** Masked SQL login used for the connection. */
     proxyLoginName?: string;
 
     /** Live client source IP of the sandbox connection. */
     sourceIp?: string;
 
-    /** Short per-connection correlation id; identical across a connection's two phase entries. */
+    /** Identifier shared by events for the same connection. */
     correlationId?: string;
 
     /** Bytes received from the sandbox (final only on the Closed phase). */
@@ -152,9 +152,9 @@ namespace ContainerAppsSandbox {
     startedAt?: utcDateTime;
   }
 
-  /** UpdatePortsContent wire model. */
+  /** The complete set of ports to configure on a sandbox. */
   model UpdatePortsContent {
-    /** ports value. */
+    /** The ports that replace the current configuration. */
     ports: SandboxPortUpdate[];
   }
 
