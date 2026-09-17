@@ -6161,6 +6161,41 @@ union ConfigReferenceSource {
   armResourceIdentifier,
   "csharp"
 );
+// Align C# scalar semantics with the existing management and provisioning APIs.
+@@alternateType(AzureBlobStorageApplicationLogsConfig.sasUrl, url, "csharp");
+@@alternateType(AzureBlobStorageHttpLogsConfig.sasUrl, url, "csharp");
+@@alternateType(
+  IpSecurityRestriction.vnetSubnetResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(SkuDescription.locations, azureLocation[], "csharp");
+@@alternateType(CloningInfo.correlationId, uuid, "csharp");
+@@alternateType(CloningInfo.sourceWebAppLocation, azureLocation, "csharp");
+@@alternateType(GitHubActionContainerConfiguration.serverUrl, url, "csharp");
+@@alternateType(OpenIdConnectConfig.certificationUri, url, "csharp");
+@@alternateType(
+  PrivateAccessVirtualNetwork.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(RampUpRule.changeDecisionCallbackUrl, url, "csharp");
+@@alternateType(
+  ResponseMessageEnvelopeRemotePrivateEndpointConnection.location,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(
+  ResponseMessageEnvelopeRemotePrivateEndpointConnection.error,
+  Azure.Core.Foundations.Error,
+  "csharp"
+);
+@@alternateType(
+  DatabaseConnectionOverview.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(StaticSiteTemplateOptions.templateRepositoryUrl, url, "csharp");
 @@alternateType(SiteProperties.inProgressOperationId, uuid, "csharp");
 @@alternateType(
   SitePatchResourceProperties.inProgressOperationId,
