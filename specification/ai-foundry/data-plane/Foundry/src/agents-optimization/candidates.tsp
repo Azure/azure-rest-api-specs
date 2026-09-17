@@ -143,12 +143,23 @@ model PromotionInfo {
   @doc("Timestamp when promotion occurred, represented in Unix time.")
   promoted_at: FoundryTimestamp;
 
+  @removed(Versions.v1)
   @doc("Name of the Foundry agent associated with the recorded promotion.")
   agent_name: string;
 
+  @removed(Versions.v1)
   @doc("Version of the Foundry agent created or associated with the recorded promotion. Omitted when no version was created or recorded.")
   agent_version?: string;
 
+  @removed(Versions.v1)
   @doc("Whether promotion created a new Foundry agent version.")
   created_new_version: boolean;
+
+  @added(Versions.v1)
+  @doc("Resolved agent reference used as the optimization baseline. Omitted when unavailable for a legacy candidate.")
+  baseline_agent?: AgentReference;
+
+  @added(Versions.v1)
+  @doc("Agent reference associated with the completed promotion.")
+  promoted_agent: AgentReference;
 }

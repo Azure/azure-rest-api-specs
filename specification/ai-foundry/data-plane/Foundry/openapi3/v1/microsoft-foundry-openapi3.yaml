@@ -80313,21 +80313,17 @@ components:
       type: object
       required:
         - promoted_at
-        - agent_name
-        - created_new_version
+        - promoted_agent
       properties:
         promoted_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: Timestamp when promotion occurred, represented in Unix time.
-        agent_name:
-          type: string
-          description: Name of the Foundry agent associated with the recorded promotion.
-        agent_version:
-          type: string
-          description: Version of the Foundry agent created or associated with the recorded promotion. Omitted when no version was created or recorded.
-        created_new_version:
-          type: boolean
-          description: Whether promotion created a new Foundry agent version.
+        baseline_agent:
+          $ref: '#/components/schemas/AgentReference'
+          description: Resolved agent reference used as the optimization baseline. Omitted when unavailable for a legacy candidate.
+        promoted_agent:
+          $ref: '#/components/schemas/AgentReference'
+          description: Agent reference associated with the completed promotion.
       description: Promotion metadata recorded for a candidate. Prompt-agent promotion creates a new version; hosted-agent promotion currently records metadata without deploying a new version.
     PromptAgentDefinition:
       type: object
