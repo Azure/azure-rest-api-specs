@@ -27,7 +27,7 @@ interface Clusters {
 
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The AutoRest emitter infers final-state-via from polling metadata. Marking this standard ARM PUT as an LRO without polling decorators emits x-ms-long-running-operation while intentionally omitting x-ms-long-running-operation-options."
   @added(Versions.v2026_10_01_preview)
-  @doc("Creates a new HorizonDB cluster or replaces an existing cluster. PointInTimeRestore creates the new Cluster resource and hydrates its service-owned database storage from an available source backup. It does not clone source pools, Pool-scoped endpoints, firewall rules, parameter-group associations, or other child resources. The new Cluster receives its service-generated Cluster-scoped Endpoint named cluster. PostgreSQL version is inherited from backup metadata; all other new-cluster configuration comes from the request or service defaults. For same-location point-in-time restore, creationSourceClusterLocation is optional. For cross-location point-in-time restore, creationSourceClusterLocation is required and must identify the source cluster's Azure location.")
+  @doc("Creates a new HorizonDB cluster or replaces an existing cluster. PointInTimeRestore creates the new Cluster resource and hydrates its service-owned database storage from an available source backup. It does not clone source pools, Pool-scoped endpoints, firewall rules, parameter-group associations, or other child resources. The new Cluster receives its service-generated Cluster-scoped Endpoint named cluster. For point-in-time restore, postgreSqlVersion must be omitted because the service obtains it from backup metadata; all other new-cluster configuration comes from the request or service defaults. For same-location point-in-time restore, creationSourceClusterLocation is optional. For cross-location point-in-time restore, creationSourceClusterLocation is required and must identify the source cluster's Azure location.")
   @sharedRoute
   @Azure.ClientGenerator.Core.Legacy.markAsLro
   @autoRoute
@@ -35,7 +35,7 @@ interface Clusters {
   @put
   createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<Cluster>,
-    Cluster,
+    ClusterCreateRequest,
     ClusterReplaceAcceptedResponse | ClusterCreateAcceptedResponse,
     ErrorResponse
   >;

@@ -292,7 +292,7 @@ model ClusterProperties {
   legacyPgVersion?: string;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The PostgreSQL major version used by the HorizonDB cluster. API version 2026-10-01-preview accepts 17 and 18 when creating a cluster. This property is required on every PUT and is immutable after creation. On replacement, resubmitting the cluster's current major version is accepted, but changing it, including from 17 to 18 or from 18 to 17, is rejected. This API version does not support in-place PostgreSQL major-version upgrades. For point-in-time restore, PostgreSQL version is the only new-cluster property inherited from the source backup metadata, and the value in the request must match that version. All other new-cluster configuration comes from the request or service defaults.")
+  @doc("The PostgreSQL major version used by the HorizonDB cluster. API version 2026-10-01-preview supports versions 17 and 18. For ordinary cluster creation, the version is supplied in the request and is immutable after creation. For point-in-time restore, the service obtains the version from the source backup metadata and the request must omit this property. This API version does not support in-place PostgreSQL major-version upgrades.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   postgreSqlVersion: PostgreSqlVersion;
 
@@ -302,7 +302,7 @@ model ClusterProperties {
   legacyCreateMode?: CreateModeCluster;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must match the source backup's major version, and creationSourceClusterLocation is required when the source and target cluster locations differ. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.")
+  @doc("The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must be omitted because it is obtained from the backup metadata, and creationSourceClusterLocation is required when the source and target cluster locations differ. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   creationMode?: ClusterCreateMode;
 
@@ -638,6 +638,26 @@ model ClusterForPatchUpdate {
 
   @doc("The properties that can be updated for a HorizonDB cluster.")
   properties?: ClusterPropertiesForPatchUpdate;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Properties accepted when creating or replacing a HorizonDB cluster.")
+model ClusterCreateProperties {
+  ...OmitProperties<ClusterProperties, "postgreSqlVersion">;
+
+  @doc("The PostgreSQL major version for the new cluster. This property is required for ordinary cluster creation and must be omitted when creationMode is PointInTimeRestore because the service obtains the version from the source backup metadata.")
+  @visibility(Lifecycle.Create)
+  postgreSqlVersion?: PostgreSqlVersion;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("A request to create or replace a HorizonDB cluster.")
+model ClusterCreateRequest {
+  ...Azure.ResourceManager.Foundations.TrackedResource;
+  ...HorizonDbClusterManagedServiceIdentityProperty;
+
+  @doc("The properties for the selected cluster creation mode.")
+  properties: ClusterCreateProperties;
 }
 
 @@added(Cluster.identity, Versions.v2026_05_01_preview);
