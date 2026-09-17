@@ -7700,17 +7700,6 @@
           "description": "Description of what the template does, and what resilience question it answers.",
           "readOnly": true
         },
-        "resourceSelectors": {
-          "type": "array",
-          "description": "The resource selectors the template's actions target. Each selector names a group of\nresources of a single Azure resource type, and is referenced from an action through the\n`%%\\{resourceSelectors.\\<name\\>\\}%%` macro.",
-          "items": {
-            "$ref": "#/definitions/ScenarioTemplateResourceSelector"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
         "parameters": {
           "type": "array",
           "description": "Parameter definitions the template accepts. Values are supplied when the scenario created\nfrom this template is configured, and are referenced from an action through the\n`%%\\{parameters.\\<name\\>\\}%%` macro.",
@@ -7724,7 +7713,7 @@
         },
         "actions": {
           "type": "array",
-          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nFour macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceSelectors.\\<name\\>\\}%%` — resolves to the resources discovered for that\nselector. The accepted names are declared by `resourceSelectors`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.",
+          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nThree macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ScenarioAction"
@@ -7738,26 +7727,6 @@
       "required": [
         "latestVersion",
         "actions"
-      ]
-    },
-    "ScenarioTemplateResourceSelector": {
-      "type": "object",
-      "description": "Model that represents a named group of resources of a single Azure resource type that a\nscenario template's actions target.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the selector, as referenced by the `%%\\{resourceSelectors.\\<name\\>\\}%%` macro.",
-          "minLength": 1
-        },
-        "resourceType": {
-          "type": "string",
-          "description": "The Azure resource type the selector matches, for example\n`Microsoft.Compute/virtualMachines`.",
-          "minLength": 1
-        }
-      },
-      "required": [
-        "name",
-        "resourceType"
       ]
     },
     "ScenarioTemplateVersion": {
@@ -7813,17 +7782,6 @@
           "description": "Description of what the template does, and what resilience question it answers.",
           "readOnly": true
         },
-        "resourceSelectors": {
-          "type": "array",
-          "description": "The resource selectors the template's actions target. Each selector names a group of\nresources of a single Azure resource type, and is referenced from an action through the\n`%%\\{resourceSelectors.\\<name\\>\\}%%` macro.",
-          "items": {
-            "$ref": "#/definitions/ScenarioTemplateResourceSelector"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
         "parameters": {
           "type": "array",
           "description": "Parameter definitions the template accepts. Values are supplied when the scenario created\nfrom this template is configured, and are referenced from an action through the\n`%%\\{parameters.\\<name\\>\\}%%` macro.",
@@ -7837,7 +7795,7 @@
         },
         "actions": {
           "type": "array",
-          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nFour macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceSelectors.\\<name\\>\\}%%` — resolves to the resources discovered for that\nselector. The accepted names are declared by `resourceSelectors`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.",
+          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nThree macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ScenarioAction"
