@@ -4230,7 +4230,7 @@
             "name": "path",
             "in": "query",
             "description": "path parameter.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
@@ -7500,165 +7500,6 @@
           }
         }
       },
-      "post": {
-        "operationId": "VolumesOperations_PostVolumeFile",
-        "tags": [
-          "volumes"
-        ],
-        "summary": "Upload a file to a volume.",
-        "description": "Upload a file to a volume.",
-        "consumes": [
-          "application/octet-stream"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Azure subscription identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Azure resource group name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "sandboxGroupName",
-            "in": "path",
-            "description": "Sandbox group name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "volumeName",
-            "in": "path",
-            "description": "Volume name assigned from the route by the service.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "path",
-            "in": "query",
-            "description": "path parameter.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "overwrite",
-            "in": "query",
-            "description": "overwrite parameter.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "content",
-            "in": "body",
-            "description": "content parameter.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "binary"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/VolumePathItem"
-            }
-          },
-          "400": {
-            "description": "A standard Azure error response for a bad request.",
-            "schema": {
-              "$ref": "#/definitions/BadRequestErrorResult"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "A standard Azure error response for an unauthorized request.",
-            "schema": {
-              "$ref": "#/definitions/UnauthorizedErrorResult"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "A standard Azure error response when a resource is not found.",
-            "schema": {
-              "$ref": "#/definitions/NotFoundErrorResult"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "A standard Azure error response for a resource conflict.",
-            "schema": {
-              "$ref": "#/definitions/ConflictErrorResult"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "412": {
-            "description": "A standard Azure error response for a failed precondition.",
-            "schema": {
-              "$ref": "#/definitions/PreconditionFailedErrorResult"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "A standard Azure error response for an internal server error.",
-            "schema": {
-              "$ref": "#/definitions/InternalServerErrorResult"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Post Volume File example": {
-            "$ref": "./examples/VolumesOperations_PostVolumeFile.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "VolumesOperations_DeleteVolumeFile",
         "tags": [
@@ -7690,7 +7531,7 @@
             "name": "path",
             "in": "query",
             "description": "path parameter.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
@@ -7814,7 +7655,7 @@
             "name": "path",
             "in": "query",
             "description": "path parameter.",
-            "required": false,
+            "required": true,
             "type": "string"
           }
         ],
@@ -7929,7 +7770,7 @@
             "name": "path",
             "in": "query",
             "description": "path parameter.",
-            "required": false,
+            "required": true,
             "type": "string"
           }
         ],
@@ -7996,6 +7837,171 @@
         "x-ms-examples": {
           "Create a directory within a volume.": {
             "$ref": "./examples/VolumesOperations_PostVolumeFileMkdir.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes/{volumeName}/files/upload": {
+      "put": {
+        "operationId": "VolumesOperations_CreateOrReplaceVolumeFile",
+        "tags": [
+          "volumes"
+        ],
+        "summary": "Upload a file to a volume.",
+        "description": "Upload a file to a volume.",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "volumeName parameter.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "description": "path parameter.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "overwrite",
+            "in": "query",
+            "description": "overwrite parameter.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Entity tag required for the request to be applied.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Entity tag required for the request to be applied when no current representation exists.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "content",
+            "in": "body",
+            "description": "content parameter.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/VolumePathItem"
+            }
+          },
+          "400": {
+            "description": "A standard Azure error response for a bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "A standard Azure error response for an unauthorized request.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "A standard Azure error response when a resource is not found.",
+            "schema": {
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "A standard Azure error response for a resource conflict.",
+            "schema": {
+              "$ref": "#/definitions/ConflictErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "412": {
+            "description": "A standard Azure error response for a failed precondition.",
+            "schema": {
+              "$ref": "#/definitions/PreconditionFailedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "A standard Azure error response for an internal server error.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Create or replace volume file example": {
+            "$ref": "./examples/VolumesOperations_PostVolumeFile.json"
           }
         }
       }
@@ -9308,42 +9314,42 @@
       "properties": {
         "user": {
           "type": "integer",
-          "format": "int32",
+          "format": "uint64",
           "description": "user value."
         },
         "nice": {
           "type": "integer",
-          "format": "int32",
+          "format": "uint64",
           "description": "nice value."
         },
         "system": {
           "type": "integer",
-          "format": "int32",
+          "format": "uint64",
           "description": "system value."
         },
         "idle": {
           "type": "integer",
-          "format": "int32",
+          "format": "uint64",
           "description": "idle value."
         },
         "iowait": {
           "type": "integer",
-          "format": "int32",
+          "format": "uint64",
           "description": "iowait value."
         },
         "irq": {
           "type": "integer",
-          "format": "int32",
+          "format": "uint64",
           "description": "irq value."
         },
         "softirq": {
           "type": "integer",
-          "format": "int32",
+          "format": "uint64",
           "description": "softirq value."
         },
         "steal": {
           "type": "integer",
-          "format": "int32",
+          "format": "uint64",
           "description": "steal value."
         },
         "loadAvg1": {
@@ -12651,19 +12657,6 @@
         "body"
       ]
     },
-    "PostVolumeFileResult": {
-      "type": "object",
-      "description": "Created.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/VolumePathItem",
-          "description": "Response body."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "PostVolumeForkResult": {
       "type": "object",
       "description": "Created.",
@@ -12914,6 +12907,19 @@
       "properties": {
         "body": {
           "$ref": "#/definitions/Secret",
+          "description": "Response body."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "PutVolumeFileResult": {
+      "type": "object",
+      "description": "Created.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/VolumePathItem",
           "description": "Response body."
         }
       },

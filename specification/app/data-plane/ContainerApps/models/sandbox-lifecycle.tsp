@@ -2,28 +2,28 @@ namespace ContainerAppsSandbox {
   /** CPU usage counters and load averages. */
   model CpuStats {
     /** user value. */
-    user?: int32;
+    user?: uint64;
 
     /** nice value. */
-    nice?: int32;
+    nice?: uint64;
 
     /** system value. */
-    system?: int32;
+    system?: uint64;
 
     /** idle value. */
-    idle?: int32;
+    idle?: uint64;
 
     /** iowait value. */
-    iowait?: int32;
+    iowait?: uint64;
 
     /** irq value. */
-    irq?: int32;
+    irq?: uint64;
 
     /** softirq value. */
-    softirq?: int32;
+    softirq?: uint64;
 
     /** steal value. */
-    steal?: int32;
+    steal?: uint64;
 
     /** loadAvg1 value. */
     loadAvg1?: float64;

@@ -173,7 +173,7 @@ alias PutVolumeErrors =
   | InternalServerErrorResult;
 
 /** Created. */
-model PostVolumeFileResult {
+model PutVolumeFileResult {
   /** HTTP response status code. */
   @statusCode statusCode: 201;
 
@@ -181,20 +181,14 @@ model PostVolumeFileResult {
   @body body: VolumePathItem;
 }
 
-/** Errors returned by postVolumeFile. */
-alias PostVolumeFileErrors =
+/** Errors returned by putVolumeFile. */
+alias PutVolumeFileErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
   | NotFoundErrorResult
   | ConflictErrorResult
   | PreconditionFailedErrorResult
   | InternalServerErrorResult;
-
-/** Standard resource operations for uploading volume files. */
-alias VolumeFileUploadOperations = ResourceOperations<
-  DataPlaneStandardTraits,
-  PostVolumeFileErrors
->;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
 @tag("volumes")
@@ -215,7 +209,7 @@ interface VolumesOperations {
       @path volumeName: string;
 
       /** path parameter. */
-      @query path?: string;
+      @query path: string;
 
       /** recursive parameter. */
       @query recursive?: boolean;
@@ -277,7 +271,7 @@ interface VolumesOperations {
       @path volumeName: string;
 
       /** path parameter. */
-      @query path?: string;
+      @query path: string;
     },
     GetVolumeFileDownloadResult,
     DataPlaneStandardTraits,
@@ -292,7 +286,7 @@ interface VolumesOperations {
     Volume,
     {
       /** path parameter. */
-      @query path?: string;
+      @query path: string;
     },
     PostVolumeFileMkdirResult
   >;
@@ -332,25 +326,33 @@ interface VolumesOperations {
 
   /** Upload a file to a volume. */
   #suppress "@azure-tools/typespec-azure-core/byos" "The content is a byte stream, not a BYOS model."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
   @summary("Upload a file to a volume.")
-  @action("files")
-  @actionSeparator("/")
-  postVolumeFile is VolumeFileUploadOperations.ResourceAction<
-    Volume,
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes/{volumeName}/files/upload")
+  @put
+  createOrReplaceVolumeFile is Foundations.Operation<
     {
-      /** contentType parameter. */
-      @header contentType: "application/octet-stream";
+      ...AzureResourceScope;
+
+      /** volumeName parameter. */
+      @path volumeName: string;
 
       /** content parameter. */
       @body content: bytes;
 
       /** path parameter. */
-      @query path?: string;
+      @query path: string;
 
       /** overwrite parameter. */
       @query overwrite?: boolean;
+
+      /** Entity tag required for the request to be applied. */
+      @header("If-Match") ifMatch?: string;
+
+      /** Entity tag required for the request to be applied when no current representation exists. */
+      @header("If-None-Match") ifNoneMatch?: string;
     },
-    PostVolumeFileResult
+    PutVolumeFileResult,
+    DataPlaneStandardTraits,
+    PutVolumeFileErrors
   >;
 }
