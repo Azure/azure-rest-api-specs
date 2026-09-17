@@ -14,7 +14,6 @@ namespace Microsoft.AzureResilienceManagement;
 
 @doc("Job Statuses")
 union JobStatus {
-  @added(Versions.v2026_03_01_preview)
   @doc("The job status is not applicable.")
   NotApplicable: "NotApplicable",
 
@@ -62,14 +61,11 @@ union JobTriggeredBy {
   string,
 }
 
-@added(Versions.v2026_03_01_preview)
 @doc("The type of user comment.")
 union CommentType {
-  @added(Versions.v2026_03_01_preview)
   @doc("A general description comment.")
   Description: "Description",
 
-  @added(Versions.v2026_03_01_preview)
   @doc("A comment indicating the reason for resuming a job.")
   ResumeReason: "ResumeReason",
 
@@ -78,7 +74,6 @@ union CommentType {
 
 @doc("Job User's Comment.")
 model JobUserComment {
-  @added(Versions.v2026_03_01_preview)
   @doc("The type of the user comment.")
   @visibility(Lifecycle.Read)
   commentType?: CommentType;
@@ -118,7 +113,6 @@ model JobTaskDetail {
   @visibility(Lifecycle.Read)
   subTasksList?: JobTaskDetail[];
 
-  @added(Versions.v2026_03_01_preview)
   @identifiers(#[])
   @doc("Retry details of the task.")
   @visibility(Lifecycle.Read)
@@ -159,7 +153,6 @@ model JobRetryDetails {
   @doc("The retry attempt number of the job.")
   retryAttempt: int32;
 
-  @added(Versions.v2026_03_01_preview)
   @identifiers(#[])
   @doc("User Comments.")
   @visibility(Lifecycle.Read)
@@ -224,7 +217,6 @@ model JobProperties {
   @visibility(Lifecycle.Read)
   jobType?: JobType;
 
-  @added(Versions.v2026_03_01_preview)
   @doc("Execution configurations for the job.")
   @visibility(Lifecycle.Read)
   executionConfigurations?: ExecutionConfigurations;

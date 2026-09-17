@@ -46,7 +46,6 @@ union ProvisioningState {
   @doc("Change accepted for processing")
   Accepted: "Accepted",
 
-  @added(Versions.v2026_08_31_preview)
   @doc("The resource needs attention from the user.")
   NeedsAttention: "NeedsAttention",
 }
@@ -150,7 +149,6 @@ union ResourceProtectionStatus {
   @doc("A state indicating that the resource is not protected by any recovery solution.")
   NotProtected: "NotProtected",
 
-  @added(Versions.v2026_03_01_preview)
   @doc("A state indicating that the resource is protected by the highly available recovery solution.")
   HighlyAvailable: "HighlyAvailable",
 
@@ -165,24 +163,8 @@ union JobType {
   @doc("Recovery Orchestration Plan created job.")
   RecoveryPlan: "RecoveryPlan",
 
-  @doc("Recovery Orchestration Plan child created job.")
-  @removed(Versions.v2026_04_01_preview)
-  RecoveryPlanChild: "RecoveryPlanChild",
-
   @doc("Drill Oober job which represents a given instance of Drill.")
   DrillRun: "DrillRun",
-
-  @doc("Drill Run child job.")
-  @removed(Versions.v2026_04_01_preview)
-  DrillRunChild: "DrillRunChild",
-
-  @doc("Chaos job created by Drill to represent a Experiment Run.")
-  @removed(Versions.v2026_04_01_preview)
-  ChaosExperiment: "ChaosExperiment",
-
-  @doc("Chaos job's child job.")
-  @removed(Versions.v2026_04_01_preview)
-  ChaosExperimentChild: "ChaosExperimentChild",
 
   string,
 }
@@ -195,32 +177,20 @@ union JobResourceType {
   @doc("Recovery Orchestration Plan created job resource.")
   RecoveryPlan: "RecoveryPlan",
 
-  @doc("Recovery Orchestration Plan child created job resource.")
-  @removed(Versions.v2026_04_01_preview)
-  RecoveryPlanChild: "RecoveryPlanChild",
-
   @doc("Drill Run job resource.")
   DrillRun: "DrillRun",
-
-  @doc("Chaos job resource created by Drill to represent a Experiment Run.")
-  @removed(Versions.v2026_04_01_preview)
-  ChaosExperiment: "ChaosExperiment",
 
   string,
 }
 
-@added(Versions.v2026_03_01_preview)
 @doc("An action task type indicates the type of action task.")
 union ActionTask {
-  @added(Versions.v2026_03_01_preview)
   @doc("No action task.")
   None: "None",
 
-  @added(Versions.v2026_03_01_preview)
   @doc("Pre-action task.")
   PreActionTask: "PreActionTask",
 
-  @added(Versions.v2026_03_01_preview)
   @doc("Post-action task.")
   PostActionTask: "PostActionTask",
 
@@ -235,7 +205,6 @@ union FailoverDirectionTypes {
   string,
 }
 
-@added(Versions.v2026_03_01_preview)
 @doc("User consent for performing recovery action.")
 union UserConsent {
   @doc("User consent is not specified for the operation.")
@@ -247,10 +216,8 @@ union UserConsent {
   string,
 }
 
-@added(Versions.v2026_03_01_preview)
 @doc("Execution configurations for recovery action.")
 model ExecutionConfigurations {
-  @added(Versions.v2026_03_01_preview)
   @doc("User consent for performing recovery action.")
   userConsent: UserConsent;
 }
@@ -260,11 +227,9 @@ model FailoverRequestProperties {
   @doc("Source locations from where resources to be failed-over.")
   sourceLocations: string[];
 
-  @added(Versions.v2026_03_01_preview)
   @doc("Selected recovery resource Ids to be processed. If not provided, all qualified resources based on the source location(s) will be processed.")
   selectedResourceIds?: armResourceIdentifier[];
 
-  @added(Versions.v2026_03_01_preview)
   @doc("Execution configurations for the recovery action.")
   executionConfigurations?: ExecutionConfigurations;
 }
@@ -278,18 +243,14 @@ model FailoverRequest {
   failoverRequestProperties?: FailoverRequestProperties;
 }
 
-@added(Versions.v2026_03_01_preview)
 @doc("Additional properties for Reprotect.")
 model ReprotectRequestProperties {
-  @added(Versions.v2026_03_01_preview)
   @doc("Selected recovery resource Ids to be processed. If not provided, all qualified resources will be processed.")
   selectedResourceIds?: armResourceIdentifier[];
 }
 
-@added(Versions.v2026_03_01_preview)
 @doc("Reprotect post action request.")
 model ReprotectRequest {
-  @added(Versions.v2026_03_01_preview)
   @doc("Additional properties for Reprotect.")
   reprotectRequestProperties?: ReprotectRequestProperties;
 }

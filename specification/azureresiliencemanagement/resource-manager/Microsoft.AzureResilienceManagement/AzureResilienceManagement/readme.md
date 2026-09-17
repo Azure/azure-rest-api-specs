@@ -28,7 +28,16 @@ These are the global settings for the AzureResilienceManagement.
 title: AzureResilienceManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-09-30-preview
+tag: package-2026-10-01
+```
+
+### Tag: package-2026-10-01
+
+These settings apply only when `--tag=package-2026-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-10-01'
+input-file:
+  - stable/2026-10-01/openapi.json
 ```
 
 ### Tag: package-2026-09-30-preview
@@ -38,51 +47,6 @@ These settings apply only when `--tag=package-2026-09-30-preview` is specified o
 ```yaml $(tag) == 'package-2026-09-30-preview'
 input-file:
   - preview/2026-09-30-preview/openapi.json
-```
-
-### Tag: package-2026-08-31-preview
-
-These settings apply only when `--tag=package-2026-08-31-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-08-31-preview'
-input-file:
-  - preview/2026-08-31-preview/openapi.json
-```
-
-### Tag: package-2026-06-01-preview
-
-These settings apply only when `--tag=package-2026-06-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-06-01-preview'
-input-file:
-  - preview/2026-06-01-preview/openapi.json
-```
-
-### Tag: package-2026-04-01-preview
-
-These settings apply only when `--tag=package-2026-04-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-04-01-preview'
-input-file:
-  - preview/2026-04-01-preview/openapi.json
-```
-
-### Tag: package-2026-03-01-preview
-
-These settings apply only when `--tag=package-2026-03-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-03-01-preview'
-input-file:
-  - preview/2026-03-01-preview/openapi.json
-```
-
-### Tag: package-2025-02-01-preview
-
-These settings apply only when `--tag=package-2025-02-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-02-01-preview'
-input-file:
-  - preview/2025-02-01-preview/openapi.json
 ```
 
 ### Suppression

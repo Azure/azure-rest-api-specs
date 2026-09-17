@@ -99,12 +99,10 @@ model ResourceProtectionSolutionSettings {
   activeLocation?: string;
 
   @doc("Active locations of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   activeLocations?: string[];
 
   @doc("Active Resource location and physical zones of Azure Resource.")
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   activePhysicalZones?: string[];
 
@@ -313,16 +311,13 @@ model ResourceSiteRecoveryProtectionSetting
 }
 
 @doc("Definition of recovery orchestration resource protection with cross-zone (zonally resilient) VM recovery.")
-@added(Versions.v2026_08_31_preview)
 model ResourceCrossZoneVmRecoveryProtectionSetting
   extends ResourceBaseProtectionSolutionSetting {
   protectionSolutionType: ResourceProtectionSolutionType.CrossZoneVMRecovery;
 
-  @added(Versions.v2026_08_31_preview)
   @doc("Customer-requested logical target availability zone for zonal failover (a positive availability-zone id, e.g. \"1\", \"2\", \"3\"; additional zones are accepted where the region exposes them). Always optional; when omitted the service selects a healthy zone. Immutable per failover.")
   targetZone?: string;
 
-  @added(Versions.v2026_08_31_preview)
   @doc("ARM resource ID of the Capacity Reservation Group (in the same subscription as the VM) to use when moving the VM to the target zone.")
   capacityReservationGroupId?: armResourceIdentifier<[
     {

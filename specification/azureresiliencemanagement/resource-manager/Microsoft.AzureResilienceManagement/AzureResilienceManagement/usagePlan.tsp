@@ -15,7 +15,6 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
 
-@added(Versions.v2026_03_01_preview)
 @armResourceOperations
 interface UsagePlans {
   get is ArmResourceRead<UsagePlan>;
@@ -31,7 +30,6 @@ interface UsagePlans {
   listBySubscription is ArmListBySubscription<UsagePlan>;
 }
 
-@added(Versions.v2026_03_01_preview)
 @armResourceOperations
 interface Enrollments {
   @doc("Get an Enrollment.")

@@ -16,10 +16,8 @@ using Azure.ResourceManager;
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
 
-@added(Versions.v2026_03_01_preview)
 @doc("Definition of enrollment properties.")
 model EnrollmentProperties {
-  @added(Versions.v2026_03_01_preview)
   @doc("ARM resource identifier of the service group associated with this usage plan.")
   serviceGroupId: armResourceIdentifier<[
     {
@@ -27,18 +25,15 @@ model EnrollmentProperties {
     }
   ]>;
 
-  @added(Versions.v2026_03_01_preview)
   @doc("Provisioning state of the enrollment.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   @doc("Details of any errors encountered during Enrollment create or update.")
   errorDetails?: CommonTypes.ErrorDetail;
 }
 
-@added(Versions.v2026_03_01_preview)
 @parentResource(UsagePlan)
 @doc("An enrollment that links a usage plan to a service group.")
 model Enrollment is Azure.ResourceManager.ProxyResource<EnrollmentProperties> {

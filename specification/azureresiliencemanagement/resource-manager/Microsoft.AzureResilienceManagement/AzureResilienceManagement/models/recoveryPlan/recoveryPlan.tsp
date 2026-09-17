@@ -107,7 +107,6 @@ model RecoveryPlanProperties {
   @visibility(Lifecycle.Read)
   latestValidationStatus?: RecoveryPlanOperationStatus;
 
-  @added(Versions.v2026_03_01_preview)
   @doc("Error details associated with the resource.")
   @visibility(Lifecycle.Read)
   errorDetails?: CommonTypes.ErrorDetail;

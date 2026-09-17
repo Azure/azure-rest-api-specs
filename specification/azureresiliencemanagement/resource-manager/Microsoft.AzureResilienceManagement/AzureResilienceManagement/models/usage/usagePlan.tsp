@@ -16,25 +16,20 @@ using Azure.ResourceManager;
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
 
-@added(Versions.v2026_03_01_preview)
 @doc("Definition of usage plan properties.")
 model UsagePlanProperties {
-  @added(Versions.v2026_03_01_preview)
   @doc("The type of the usage plan.")
   planType?: UsagePlanType;
 
-  @added(Versions.v2026_03_01_preview)
   @doc("Provisioning state of the usage plan.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   @doc("Details of any errors encountered during Usage Plan create or update.")
   errorDetails?: CommonTypes.ErrorDetail;
 }
 
-@added(Versions.v2026_03_01_preview)
 @doc("A usage plan resource for Resiliency feature billing.")
 model UsagePlan is TrackedResource<UsagePlanProperties> {
   @doc("The name of the usage plan.")

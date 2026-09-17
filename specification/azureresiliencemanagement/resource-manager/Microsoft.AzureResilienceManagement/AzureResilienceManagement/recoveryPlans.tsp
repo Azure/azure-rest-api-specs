@@ -141,20 +141,6 @@ interface RecoveryPlanActions {
   @route(ServiceGroupRoute)
   @post
   @doc("This action checks if the recovery orchestration plan is eligible for reprotect operation, ensuring it meets the necessary criteria and provides a list of qualified and unqualified resources.")
-  @removed(Versions.v2026_03_01_preview)
-  @renamedFrom(Versions.v2026_03_01_preview, "validateForReprotect")
-  @sharedRoute
-  validateForReprotectOld is ArmResourceActionAsync<
-    RecoveryPlan,
-    void,
-    ValidateForRecoveryOperationBaseResponse,
-    ServiceGroupAndRequestHeadersParameters
-  >;
-
-  @route(ServiceGroupRoute)
-  @post
-  @doc("This action checks if the recovery orchestration plan is eligible for reprotect operation, ensuring it meets the necessary criteria and provides a list of qualified and unqualified resources.")
-  @added(Versions.v2026_03_01_preview)
   @sharedRoute
   validateForReprotect is ArmResourceActionAsync<
     RecoveryPlan,
@@ -200,20 +186,6 @@ interface RecoveryPlanActions {
   @route(ServiceGroupRoute)
   @post
   @doc("This action triggers the reprotect operation on the recovery orchestration plan for the qualified resources.")
-  @removed(Versions.v2026_03_01_preview)
-  @renamedFrom(Versions.v2026_03_01_preview, "reprotect")
-  @sharedRoute
-  reprotectOld is ArmResourceActionAsync<
-    RecoveryPlan,
-    void,
-    RecoveryPlanActionBaseResponse,
-    ServiceGroupAndRequestHeadersParameters
-  >;
-
-  @route(ServiceGroupRoute)
-  @post
-  @doc("This action triggers the reprotect operation on the recovery orchestration plan for the qualified resources.")
-  @added(Versions.v2026_03_01_preview)
   @sharedRoute
   reprotect is ArmResourceActionAsync<
     RecoveryPlan,
@@ -268,20 +240,6 @@ interface RecoveryJobs {
   @route(ServiceGroupRoute)
   @post
   @doc("This action attempts to cancel the ongoing recovery orchestration job.")
-  @removed(Versions.v2026_03_01_preview)
-  @renamedFrom(Versions.v2026_03_01_preview, "cancel")
-  @sharedRoute
-  cancelOld is ArmResourceActionAsync<
-    RecoveryJob,
-    void,
-    ArmResponse<Azure.ResourceManager.ErrorResponse>,
-    ServiceGroupAndRequestHeadersParameters
-  >;
-
-  @route(ServiceGroupRoute)
-  @post
-  @doc("This action attempts to cancel the ongoing recovery orchestration job.")
-  @added(Versions.v2026_03_01_preview)
   @sharedRoute
   cancel is ArmResourceActionAsync<
     RecoveryJob,
@@ -293,20 +251,6 @@ interface RecoveryJobs {
   @route(ServiceGroupRoute)
   @post
   @doc("This action resumes the ongoing recovery orchestration job that was paused for required user intervention.")
-  @removed(Versions.v2026_03_01_preview)
-  @renamedFrom(Versions.v2026_03_01_preview, "resume")
-  @sharedRoute
-  resumeOld is ArmResourceActionAsync<
-    RecoveryJob,
-    void,
-    ArmResponse<Azure.ResourceManager.ErrorResponse>,
-    ServiceGroupAndRequestHeadersParameters
-  >;
-
-  @route(ServiceGroupRoute)
-  @post
-  @doc("This action resumes the ongoing recovery orchestration job that was paused for required user intervention.")
-  @added(Versions.v2026_03_01_preview)
   @sharedRoute
   resume is ArmResourceActionAsync<
     RecoveryJob,
@@ -324,21 +268,6 @@ interface RecoveryJobs {
     ArmResponse<Azure.ResourceManager.ErrorResponse>,
     ServiceGroupAndRequestHeadersParameters
   >;
-}
-
-@armResourceOperations
-@doc("Operations for managing recovery child jobs.")
-@removed(Versions.v2026_04_01_preview)
-interface RecoveryChildJobs {
-  #deprecated "RecoveryChildJob is deprecated and removed in 2026-04-01-preview."
-  @doc("Gets a recovery child job. Deprecated: the RecoveryChildJob resource type is deprecated and is removed in 2026-04-01-preview. Use the recoveryJobResources child of the recovery job (RecoveryJobResources) instead.")
-  @route(ServiceGroupRoute)
-  get is ArmResourceRead<RecoveryChildJob, ServiceGroupParameters>;
-
-  #deprecated "RecoveryChildJob is deprecated and removed in 2026-04-01-preview."
-  @doc("Lists the recovery child jobs of a recovery job. Deprecated: the RecoveryChildJob resource type is deprecated and is removed in 2026-04-01-preview. Use the recoveryJobResources child of the recovery job (RecoveryJobResources) instead.")
-  @route(ServiceGroupRoute)
-  list is ArmResourceListByParent<RecoveryChildJob, ServiceGroupParameters>;
 }
 
 @armResourceOperations
