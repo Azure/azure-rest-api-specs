@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoNetAppRg",
+    "externalClusterName": "contoso-external-cluster",
+    "externalSvmName": "contoso-svm",
+    "api-version": "2026-08-15-preview",
+    "properties": {
+      "properties": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contoso-external-cluster/externalSvms/contoso-svm",
+        "name": "contoso-svm",
+        "type": "Microsoft.NetApp/externalClusters/externalSvms",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "ontapSvmName": "contoso-svm",
+          "svmPeerResourceIds": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contoso-external-cluster/clusterPeers/peerA/svmPeers/svm-peerA"
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-08-15-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-08-15-preview",
+        "Retry-After": 60
+      }
+    }
+  },
+  "operationId": "ExternalSvms_Update",
+  "title": "ExternalSvms_Update"
+}
