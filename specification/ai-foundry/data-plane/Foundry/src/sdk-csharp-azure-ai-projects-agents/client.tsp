@@ -1247,11 +1247,6 @@ namespace Azure.AI.Projects {
     "csharp"
   );
 
-  @@clientName(
-    AgentOptimizationDatasetItem.desired_num_turns,
-    "DesiredTurnCount"
-  );
-
   // --------------------------------------------------------------------------------
   // AgentTelephony sub‐client
   // --------------------------------------------------------------------------------

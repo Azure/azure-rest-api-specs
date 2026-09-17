@@ -197,10 +197,6 @@ using Azure.AI.Projects;
   AgentOptimizationCandidateEvaluation.eval_run_id,
   "evaluationRunId"
 );
-@@clientName(
-  AgentOptimizationDatasetItem.desired_num_turns,
-  "desiredNumberTurns"
-);
 @@clientName(AgentOptimizationEvaluator, "AgentOptimizationEvaluatorReference");
 @@clientName(AgentOptimizationJobProgress.elapsed_seconds, "elapsed");
 
