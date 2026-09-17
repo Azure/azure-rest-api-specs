@@ -57,21 +57,6 @@ union AgentOptimizationStage {
 // Result models
 // ---------------------------------------------------------------------------
 
-@doc("Lightweight lifecycle state for a candidate produced by an optimization job.")
-model AgentOptimizationJobCandidateState {
-  @doc("Candidate resource identifier. The resource is available through candidate GET throughout its lifecycle.")
-  candidate_id: string;
-
-  @doc("The candidate's immutable role in the optimization job.")
-  role: AgentOptimizationCandidateRole;
-
-  @doc("The candidate's current lifecycle state.")
-  status: AgentOptimizationCandidateStatus;
-
-  @doc("Timestamp when work on this candidate slot began, represented in Unix time.")
-  started_at: FoundryTimestamp;
-}
-
 @doc("Aggregated token usage for one optimization stage and model.")
 model AgentOptimizationJobTokenUsage {
   @doc("Optimization stage that generated these calls.")
@@ -116,8 +101,8 @@ model AgentOptimizationJobResult {
   @doc("Candidate ID of the original baseline. Omitted until the baseline candidate is available.")
   baseline_candidate_id?: string;
 
-  @doc("Lightweight candidate lifecycle states in candidate-slot order. The first entry is the baseline. Use candidate GET or LIST for full candidate details.")
-  candidates?: AgentOptimizationJobCandidateState[];
+  @doc("Stable candidate resource IDs, populated progressively in candidate-slot order. The baseline candidate is always first. Use candidate GET or LIST for lifecycle and full candidate details.")
+  candidate_ids?: string[];
 
   @doc("Score of the baseline candidate. Omitted until baseline evaluation completes.")
   baseline_score?: float64;

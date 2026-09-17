@@ -43916,27 +43916,6 @@ components:
           description: Non-fatal warnings emitted during optimization. Omitted when no warnings were produced.
           readOnly: true
       description: Agent optimization job resource — a long-running job that produces candidate changes to a Foundry agent configuration.
-    AgentOptimizationJobCandidateState:
-      type: object
-      required:
-        - candidate_id
-        - role
-        - status
-        - started_at
-      properties:
-        candidate_id:
-          type: string
-          description: Candidate resource identifier. The resource is available through candidate GET throughout its lifecycle.
-        role:
-          $ref: '#/components/schemas/AgentOptimizationCandidateRole'
-          description: The candidate's immutable role in the optimization job.
-        status:
-          $ref: '#/components/schemas/AgentOptimizationCandidateStatus'
-          description: The candidate's current lifecycle state.
-        started_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: Timestamp when work on this candidate slot began, represented in Unix time.
-      description: Lightweight lifecycle state for a candidate produced by an optimization job.
     AgentOptimizationJobInputs:
       type: object
       required:
@@ -43995,11 +43974,11 @@ components:
         baseline_candidate_id:
           type: string
           description: Candidate ID of the original baseline. Omitted until the baseline candidate is available.
-        candidates:
+        candidate_ids:
           type: array
           items:
-            $ref: '#/components/schemas/AgentOptimizationJobCandidateState'
-          description: Lightweight candidate lifecycle states in candidate-slot order. The first entry is the baseline. Use candidate GET or LIST for full candidate details.
+            type: string
+          description: Stable candidate resource IDs, populated progressively in candidate-slot order. The baseline candidate is always first. Use candidate GET or LIST for lifecycle and full candidate details.
         baseline_score:
           type: number
           format: double
