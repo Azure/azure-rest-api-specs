@@ -217,6 +217,15 @@ model RegionalDrillResourceProperties extends DrillResourceProperties {
       type: "Microsoft.Advisor/recommendations";
     }
   ]>;
+
+  /**
+   * Reasons for the regional resource's normal fault eligibility result.
+   * Empty when Eligible; only the applicable recovery-plan reason when Ineligible.
+   * Omitted until evaluated. Failed or incomplete recovery-plan reads do not establish non-inclusion.
+   * Binding and permission errors are reported separately in attentionReason and error fields.
+   */
+  @visibility(Lifecycle.Read)
+  faultEligibilityAttentionReason?: FaultEligibilityAttentionReason[];
 }
 
 @doc("Reason why the Drill resource is in NeedsAttention state.")

@@ -7246,6 +7246,30 @@
         ]
       }
     },
+    "FaultEligibilityAttentionReason": {
+      "type": "string",
+      "description": "Reason requiring attention for a resource that requires recovery-plan participation and has no independent fault eligibility path.",
+      "enum": [
+        "RecoveryPlanNotConfigured",
+        "ResourceNotIncludedInRecoveryPlan"
+      ],
+      "x-ms-enum": {
+        "name": "FaultEligibilityAttentionReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RecoveryPlanNotConfigured",
+            "value": "RecoveryPlanNotConfigured",
+            "description": "The parent drill has no associated recovery plan required by the resource's normal fault inclusion policy."
+          },
+          {
+            "name": "ResourceNotIncludedInRecoveryPlan",
+            "value": "ResourceNotIncludedInRecoveryPlan",
+            "description": "The associated recovery plan's complete membership collection was successfully read and the resource is absent or explicitly Excluded."
+          }
+        ]
+      }
+    },
     "FaultProperties": {
       "type": "object",
       "description": "Fault Properties",
@@ -9951,6 +9975,14 @@
               }
             ]
           }
+        },
+        "faultEligibilityAttentionReason": {
+          "type": "array",
+          "description": "Reasons for the regional resource's normal fault eligibility result.\nEmpty when Eligible; only the applicable recovery-plan reason when Ineligible.\nOmitted until evaluated. Failed or incomplete recovery-plan reads do not establish non-inclusion.\nBinding and permission errors are reported separately in attentionReason and error fields.",
+          "items": {
+            "$ref": "#/definitions/FaultEligibilityAttentionReason"
+          },
+          "readOnly": true
         }
       },
       "allOf": [

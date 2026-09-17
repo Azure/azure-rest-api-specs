@@ -515,3 +515,15 @@ union FaultEligibility {
   /** The resource does not satisfy the normal fault inclusion policy. */
   Ineligible: "Ineligible",
 }
+
+/** Reason requiring attention for a resource that requires recovery-plan participation and has no independent fault eligibility path. */
+@added(Versions.v2026_09_30_preview)
+union FaultEligibilityAttentionReason {
+  string,
+
+  /** The parent drill has no associated recovery plan required by the resource's normal fault inclusion policy. */
+  RecoveryPlanNotConfigured: "RecoveryPlanNotConfigured",
+
+  /** The associated recovery plan's complete membership collection was successfully read and the resource is absent or explicitly Excluded. */
+  ResourceNotIncludedInRecoveryPlan: "ResourceNotIncludedInRecoveryPlan",
+}
