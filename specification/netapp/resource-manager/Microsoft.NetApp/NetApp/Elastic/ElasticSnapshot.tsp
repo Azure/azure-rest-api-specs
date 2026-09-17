@@ -26,8 +26,8 @@ namespace Microsoft.NetApp;
 @added(Versions.v2026_04_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_06_01)
-@added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_08_01)
+@added(Versions.v2026_08_15_preview)
 @parentResource(ElasticVolume)
 model ElasticSnapshot is ProxyResource<ElasticSnapshotProperties> {
   ...ResourceNameParameter<
@@ -50,8 +50,8 @@ model ElasticSnapshot is ProxyResource<ElasticSnapshotProperties> {
 @added(Versions.v2026_04_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_06_01)
-@added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_08_01)
+@added(Versions.v2026_08_15_preview)
 model ElasticSnapshotProperties {
   /** Azure lifecycle management. */
   @visibility(Lifecycle.Read)
@@ -69,8 +69,8 @@ interface ElasticSnapshots {
   @added(Versions.v2026_04_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
-  @removed(Versions.v2026_06_01)
-  @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
   get is ArmResourceRead<ElasticSnapshot>;
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
@@ -81,8 +81,8 @@ interface ElasticSnapshots {
   @added(Versions.v2026_04_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
-  @removed(Versions.v2026_06_01)
-  @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticSnapshot>;
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
@@ -93,8 +93,8 @@ interface ElasticSnapshots {
   @added(Versions.v2026_04_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
-  @removed(Versions.v2026_06_01)
-  @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticSnapshot>;
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
@@ -105,8 +105,8 @@ interface ElasticSnapshots {
   @added(Versions.v2026_04_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
-  @removed(Versions.v2026_06_01)
-  @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
   listByElasticVolume is ArmResourceListByParent<ElasticSnapshot>;
 }
 
