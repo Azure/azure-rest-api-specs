@@ -150,6 +150,7 @@ model Dimension {
 @doc("Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
+  /** The evaluator definition type, which is always `rubric`. */
   type: EvaluatorDefinitionType.rubric;
 
   @doc("The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure.")
@@ -163,6 +164,7 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
 
 @doc("Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.")
 model EndpointBasedEvaluatorDefinition extends EvaluatorDefinition {
+  /** The evaluator definition type, which is always `endpoint`. */
   type: EvaluatorDefinitionType.endpoint;
 
   @doc("Name of the Project Connection that stores the endpoint URL and credentials. The connection must exist on the project and have a non-empty target URL. Supported auth types: ApiKey (sends `api-key` header) and AAD/Entra ID (acquires a bearer token via the project's Managed Identity).")
