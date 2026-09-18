@@ -13,18 +13,6 @@ namespace ContainerAppsSandbox {
     @body body: Sandbox;
   }
 
-  /** Successful Sandbox delete response with an empty 200 body. */
-  model SandboxDeletedResult {
-    /** The HTTP 200 status code. */
-    @statusCode statusCode: 200;
-  }
-
-  /** Successful Sandbox delete response with no content. */
-  model SandboxDeletedNoContentResult {
-    /** The HTTP 204 status code. */
-    @statusCode statusCode: 204;
-  }
-
   /** Errors returned when listing sandboxes. */
   alias ListErrors =
     | BadRequestErrorResult
@@ -51,6 +39,12 @@ namespace ContainerAppsSandbox {
   alias SandboxCreateOperations = ResourceOperations<
     DataPlaneStandardTraits,
     CreateErrors
+  >;
+
+  /** Shared operation traits for deleting sandboxes. */
+  alias SandboxDeleteOperations = ResourceOperations<
+    DataPlaneStandardTraits,
+    DeleteErrors
   >;
 
   /** Shared operation traits for reading sandboxes. */
@@ -101,20 +95,7 @@ namespace ContainerAppsSandbox {
     @doc("Gets a sandbox by identifier.")
     get is SandboxGetOperations.ResourceRead<Sandbox>;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "DELETE /sandboxes/{id} is implemented with both 200 and 204 empty success responses."
     @doc("Deletes a sandbox by identifier.")
-    @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}")
-    @delete
-    delete is Foundations.Operation<
-      {
-        ...AzureResourceScope;
-
-        /** Sandbox identifier. */
-        @path id: SandboxId;
-      },
-      SandboxDeletedResult | SandboxDeletedNoContentResult,
-      DataPlaneStandardTraits,
-      DeleteErrors
-    >;
+    delete is SandboxDeleteOperations.ResourceDelete<Sandbox>;
   }
 }

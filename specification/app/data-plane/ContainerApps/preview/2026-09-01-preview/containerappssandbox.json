@@ -2811,28 +2811,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "id",
             "in": "path",
-            "description": "Sandbox identifier.",
+            "description": "Sandbox identifier assigned by the service.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successful Sandbox delete response with an empty 200 body."
-          },
           "204": {
-            "description": "Successful Sandbox delete response with no content."
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "401": {
             "description": "A standard Azure error response for an unauthorized request.",
@@ -7153,16 +7162,14 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes/{volumeName}": {
-      "get": {
-        "operationId": "VolumesOperations_GetVolume",
+      },
+      "post": {
+        "operationId": "VolumesOperations_PostVolume",
         "tags": [
           "volumes"
         ],
-        "summary": "Gets a specific volume by name.",
-        "description": "Gets a specific volume by name.",
+        "summary": "Creates a new volume.",
+        "description": "Creates a new volume.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -7189,94 +7196,6 @@
             "type": "string"
           },
           {
-            "name": "volumeName",
-            "in": "path",
-            "description": "Volume name assigned from the route by the service.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Volume"
-            }
-          },
-          "401": {
-            "description": "A standard Azure error response for an unauthorized request.",
-            "schema": {
-              "$ref": "#/definitions/UnauthorizedErrorResult"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "A standard Azure error response when a resource is not found.",
-            "schema": {
-              "$ref": "#/definitions/NotFoundErrorResult"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "A standard Azure error response for an internal server error.",
-            "schema": {
-              "$ref": "#/definitions/InternalServerErrorResult"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Gets a specific volume by name.": {
-            "$ref": "./examples/VolumesOperations_GetVolume.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "VolumesOperations_PutVolume",
-        "tags": [
-          "volumes"
-        ],
-        "summary": "Creates a new volume.",
-        "description": "Creates a new volume.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
-          },
-          {
-            "name": "volumeName",
-            "in": "path",
-            "description": "The volume name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "The volume configuration to create.",
@@ -7288,7 +7207,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The HTTP 201 response for the putVolume operation.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Volume"
             }
@@ -7348,7 +7267,102 @@
         },
         "x-ms-examples": {
           "Creates a new volume.": {
-            "$ref": "./examples/VolumesOperations_PutVolume.json"
+            "$ref": "./examples/VolumesOperations_PostVolume.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes/{volumeName}": {
+      "get": {
+        "operationId": "VolumesOperations_GetVolume",
+        "tags": [
+          "volumes"
+        ],
+        "summary": "Gets a specific volume by name.",
+        "description": "Gets a specific volume by name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "The volume name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "401": {
+            "description": "A standard Azure error response for an unauthorized request.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "A standard Azure error response when a resource is not found.",
+            "schema": {
+              "$ref": "#/definitions/NotFoundErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "A standard Azure error response for an internal server error.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorResult"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Gets a specific volume by name.": {
+            "$ref": "./examples/VolumesOperations_GetVolume.json"
           }
         }
       },
@@ -7387,7 +7401,7 @@
           {
             "name": "volumeName",
             "in": "path",
-            "description": "Volume name assigned from the route by the service.",
+            "description": "The volume name.",
             "required": true,
             "type": "string"
           }
@@ -7820,7 +7834,7 @@
           {
             "name": "volumeName",
             "in": "path",
-            "description": "Volume name assigned from the route by the service.",
+            "description": "The volume name.",
             "required": true,
             "type": "string"
           },
@@ -8100,7 +8114,7 @@
           {
             "name": "volumeName",
             "in": "path",
-            "description": "Volume name assigned from the route by the service.",
+            "description": "The volume name.",
             "required": true,
             "type": "string"
           },
@@ -12691,6 +12705,19 @@
         "body"
       ]
     },
+    "PostVolumeResult": {
+      "type": "object",
+      "description": "The HTTP 201 response for the putVolume operation.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/Volume",
+          "description": "The returned volume."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
     "PreconditionFailedErrorResult": {
       "type": "object",
       "description": "A standard Azure error response for a failed precondition.",
@@ -12916,19 +12943,6 @@
         "body": {
           "$ref": "#/definitions/VolumePathItem",
           "description": "The returned file or directory metadata."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "PutVolumeResult": {
-      "type": "object",
-      "description": "The HTTP 201 response for the putVolume operation.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Volume",
-          "description": "The returned volume."
         }
       },
       "required": [
@@ -13308,14 +13322,6 @@
       "required": [
         "body"
       ]
-    },
-    "SandboxDeletedNoContentResult": {
-      "type": "object",
-      "description": "Successful Sandbox delete response with no content."
-    },
-    "SandboxDeletedResult": {
-      "type": "object",
-      "description": "Successful Sandbox delete response with an empty 200 body."
     },
     "SandboxEgressPolicy": {
       "type": "object",
@@ -15273,8 +15279,11 @@
         },
         "volumeName": {
           "$ref": "#/definitions/VolumeName",
-          "description": "Volume name assigned from the route by the service.",
-          "readOnly": true
+          "description": "The volume name.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "labels": {
           "type": "object",
