@@ -83,7 +83,34 @@ Microsoft.Logic/automationProjects/myAutomationProject
 
 ## API Version
 
-New preview API version: `2026-04-01-preview`
+API version: `2026-04-01-preview`.
+
+## Customer networking
+
+Set the optional `properties.networking.subnetResourceId` when creating the
+project. The subnet must be in the project's region and customer tenant and
+delegated to `Microsoft.App/environments`. Another subscription in that tenant is
+allowed; service-owned backing resources may be in a separate service tenant.
+The caller needs subnet `Microsoft.Network/virtualNetworks/subnets/join/action`
+in addition to project write permission. Egress policy remains service-owned.
+
+Networking is create/read-only, matching ACA Express's create-time subnet
+selection. A project created without a subnet cannot attach one later. Omitted
+networking or an empty object preserves the current selection on update;
+resubmitting the same normalized resource ID is idempotent. A changed ID,
+explicit null, or late attachment must fail synchronously with an immutable-property
+client error, before starting an LRO. GET omits `networking` when no subnet is set.
+Subnet migration and detach are not supported in this version.
+
+Project PATCH still updates existing mutable fields, but its model does not expose
+networking. Project DELETE remains supported and asynchronous through backing-app
+and subnet association/IP cleanup. Backend enforcement and the Microsoft.Logic
+manifest linked access check are owned by AzureUX-BPM and must precede enablement;
+the application-level network authorization decision remains a release dependency.
+
+Examples reuse the existing CRUD coverage, plus one create-without-networking
+example. This extends `2026-04-01-preview`; same-version `Versioning-Approved-*`
+approval remains required before merge.
 
 ## Directory Structure
 

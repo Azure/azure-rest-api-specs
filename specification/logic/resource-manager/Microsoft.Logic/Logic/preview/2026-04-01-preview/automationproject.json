@@ -280,6 +280,9 @@
           }
         },
         "x-ms-examples": {
+          "Create Automation Project without customer networking": {
+            "$ref": "./examples/AutomationProjects_CreateOrUpdate_WithoutNetworking.json"
+          },
           "Create or Update Automation Project": {
             "$ref": "./examples/AutomationProjects_CreateOrUpdate.json"
           }
@@ -470,6 +473,29 @@
         "value"
       ]
     },
+    "AutomationProjectNetworking": {
+      "type": "object",
+      "description": "Customer-owned network used by the automation project's backing applications.",
+      "properties": {
+        "subnetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID of a subnet in the same region and customer tenant as the\nautomation project. The subnet may be in another subscription in that customer tenant.\nService-owned backing resources may be in a different service tenant and subscription.\nThe subnet must be delegated to Microsoft.App/environments. The caller must have\nMicrosoft.Network/virtualNetworks/subnets/join/action on the supplied subnet in addition\nto permission to write the project. Omit the subnet to create a project without customer\nnetworking; it cannot be attached later. On update, omission preserves the subnet and\nresubmitting the same resource ID is idempotent. A different ID or null is rejected\nsynchronously without starting a long-running operation.",
+          "minLength": 1,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        }
+      }
+    },
     "AutomationProjectProperties": {
       "type": "object",
       "description": "The properties of the automation project resource.",
@@ -483,6 +509,14 @@
           "type": "string",
           "description": "A description of the automation project.",
           "maxLength": 1024
+        },
+        "networking": {
+          "$ref": "#/definitions/AutomationProjectNetworking",
+          "description": "Optional customer networking selected when the automation project is created.\nNetworking cannot be added, changed, or removed after creation. Omitted networking\npreserves the existing configuration on update.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
