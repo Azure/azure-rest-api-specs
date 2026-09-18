@@ -84,6 +84,16 @@ namespace Common {
   "ArmErrorResponse",
   "javascript,python"
 );
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "ArmProxyResource",
+  "javascript"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Resource,
+  "ArmResource",
+  "javascript"
+);
 
 // Java naming mitigations
 @@clientName(
@@ -6692,4 +6702,10 @@ op replaceprivateDnsZoneGroupsList(
   Microsoft.Network.PolicySettings.captchaExpirationInMins,
   "captchaCookieExpirationInMins",
   "java"
+);
+
+@@clientName(
+  HubVirtualNetworkConnectionProperties.enableOnlyIPv6Peering,
+  "enableOnlyIpv6Peering",
+  "python"
 );
