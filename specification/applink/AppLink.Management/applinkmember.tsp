@@ -223,7 +223,7 @@ interface AppLinkMembers {
   @doc("Get a member of an Azure Kubernetes Application Network resource.")
   get is ArmResourceRead<AppLinkMember>;
   @doc("Create a member of an Azure Kubernetes Application Network resource.")
-  createOrReplace is ArmResourceCreateOrReplaceAsync<AppLinkMember>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<AppLinkMember>;
   @doc("Update a member of an Azure Kubernetes Application Network resource.")
   @removed(Versions.v2026_08_01_preview)
   @renamedFrom(Versions.v2026_08_01_preview, "update")
