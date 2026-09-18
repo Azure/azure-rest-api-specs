@@ -7413,7 +7413,7 @@
           "description": "The detailed result of the precheck operation."
         },
         "targetVersion": {
-          "$ref": "#/definitions/PostgresMajorVersion",
+          "type": "string",
           "description": "The target PostgreSQL major version for the upgrade."
         },
         "policyDetails": {
@@ -8785,66 +8785,6 @@
         ]
       }
     },
-    "PostgresMajorVersion": {
-      "type": "string",
-      "description": "Major version of PostgreSQL database engine.",
-      "enum": [
-        "18",
-        "17",
-        "16",
-        "15",
-        "14",
-        "13",
-        "12",
-        "11"
-      ],
-      "x-ms-enum": {
-        "name": "PostgresMajorVersion",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "18",
-            "value": "18",
-            "description": "PostgreSQL 18."
-          },
-          {
-            "name": "17",
-            "value": "17",
-            "description": "PostgreSQL 17."
-          },
-          {
-            "name": "16",
-            "value": "16",
-            "description": "PostgreSQL 16."
-          },
-          {
-            "name": "15",
-            "value": "15",
-            "description": "PostgreSQL 15."
-          },
-          {
-            "name": "14",
-            "value": "14",
-            "description": "PostgreSQL 14."
-          },
-          {
-            "name": "13",
-            "value": "13",
-            "description": "PostgreSQL 13."
-          },
-          {
-            "name": "12",
-            "value": "12",
-            "description": "PostgreSQL 12."
-          },
-          {
-            "name": "11",
-            "value": "11",
-            "description": "PostgreSQL 11."
-          }
-        ]
-      }
-    },
     "PrecheckErrorInfo": {
       "type": "object",
       "description": "Error information from precheck validation.",
@@ -9398,7 +9338,7 @@
           "x-ms-secret": true
         },
         "version": {
-          "$ref": "#/definitions/PostgresMajorVersion",
+          "type": "string",
           "description": "Major version of PostgreSQL database engine."
         },
         "minorVersion": {
@@ -9545,7 +9485,7 @@
           "x-ms-secret": true
         },
         "version": {
-          "$ref": "#/definitions/PostgresMajorVersion",
+          "type": "string",
           "description": "Major version of PostgreSQL database engine."
         },
         "storage": {
@@ -10151,7 +10091,7 @@
       "description": "Request model for starting a major version upgrade precheck.",
       "properties": {
         "targetVersion": {
-          "$ref": "#/definitions/PostgresMajorVersion",
+          "type": "string",
           "description": "The target major version to upgrade to."
         }
       },
@@ -10514,11 +10454,11 @@
       "description": "Upgrade sequence information.",
       "properties": {
         "sourceVersion": {
-          "$ref": "#/definitions/PostgresMajorVersion",
+          "type": "string",
           "description": "The source PostgreSQL version."
         },
         "targetVersion": {
-          "$ref": "#/definitions/PostgresMajorVersion",
+          "type": "string",
           "description": "The target PostgreSQL version."
         }
       }
