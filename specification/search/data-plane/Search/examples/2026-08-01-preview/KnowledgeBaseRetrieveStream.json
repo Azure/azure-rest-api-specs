@@ -1,0 +1,41 @@
+{
+  "operationId": "KnowledgeRetrieval_RetrieveStream",
+  "title": "KnowledgeBaseRetrieveStream",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "knowledgeBaseName": "base-preview-test",
+    "api-version": "2026-08-01-preview",
+    "Accept": "text/event-stream",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "x-ms-query-source-authorization": null,
+    "x-ms-query-work-iq-source-authorization": null,
+    "retrievalRequest": {
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "text": "hello world",
+              "type": "text"
+            }
+          ]
+        }
+      ],
+      "includeActivity": true,
+      "outputMode": "answerSynthesis",
+      "knowledgeSourceParams": [
+        {
+          "knowledgeSourceName": "ks-preview-test",
+          "includeReferences": true,
+          "includeReferenceSourceData": true,
+          "kind": "searchIndex"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": "event: retrieval.started\ndata: {\"requestId\":\"00000000-0000-0000-0000-000000000001\",\"knowledgeBaseName\":\"base-preview-test\",\"outputMode\":\"answerSynthesis\",\"reasoningEffort\":{\"kind\":\"auto\"}}\n\nevent: activity.started\ndata: {\"id\":0,\"type\":\"searchIndex\",\"startedAt\":\"2025-01-01T00:08:44.000Z\",\"knowledgeSourceName\":\"ks-preview-test\"}\n\nevent: activity.completed\ndata: {\"type\":\"searchIndex\",\"id\":0,\"knowledgeSourceName\":\"ks-preview-test\",\"queryTime\":\"2025-01-01T00:08:45.045Z\",\"count\":2,\"startedAt\":\"2025-01-01T00:08:44.000Z\",\"completedAt\":\"2025-01-01T00:08:45.045Z\",\"elapsedMs\":1234,\"searchIndexArguments\":{\"search\":\"hello world\",\"filter\":null,\"semanticConfigurationName\":\"testconfig\",\"sourceDataFields\":[{\"name\":\"category\"},{\"name\":\"id\"}],\"searchFields\":[]}}\n\nevent: activity.started\ndata: {\"id\":1,\"type\":\"agenticReasoning\",\"startedAt\":\"2025-01-01T00:08:45.045Z\"}\n\nevent: activity.completed\ndata: {\"type\":\"agenticReasoning\",\"id\":1,\"startedAt\":\"2025-01-01T00:08:45.045Z\",\"completedAt\":\"2025-01-01T00:08:45.400Z\",\"reasoningTokens\":39,\"retrievalReasoningEffort\":{\"kind\":\"auto\"},\"logicalReasoningEffort\":{\"kind\":\"auto\"}}\n\nevent: activity.started\ndata: {\"id\":2,\"type\":\"modelAnswerSynthesis\",\"startedAt\":\"2025-01-01T00:08:45.400Z\"}\n\nevent: activity.completed\ndata: {\"type\":\"modelAnswerSynthesis\",\"id\":2,\"startedAt\":\"2025-01-01T00:08:45.400Z\",\"completedAt\":\"2025-01-01T00:08:45.900Z\",\"inputTokens\":11,\"outputTokens\":22,\"elapsedMs\":500,\"model\":{\"modelName\":\"gpt-4o\",\"deploymentId\":\"gpt-4o-deployment\"}}\n\nevent: answer.completed\ndata: {\"messageIndex\":0,\"message\":{\"content\":[{\"type\":\"text\",\"text\":\"Hello! How can I help you today?\"}]}}\n\nevent: references.completed\ndata: [{\"type\":\"searchIndex\",\"id\":\"83dd7d40\",\"activitySource\":0,\"sourceData\":{\"id\":\"myDocKey1\",\"title\":\"high_doc\",\"content\":\"hello world\"},\"rerankerScore\":4,\"docKey\":\"myDocKey1\",\"citationUrl\":\"https://previewexampleservice.search.windows.net/indexes/preview-test/docs/myDocKey1?$select=category%2Cid&api-version=2026-08-01-preview\"}]\n\nevent: response.completed\ndata: {\"statusCode\":200,\"response\":{\"response\":[{\"content\":[{\"type\":\"text\",\"text\":\"Hello! How can I help you today?\"}]}],\"activity\":[{\"type\":\"searchIndex\",\"id\":0,\"knowledgeSourceName\":\"ks-preview-test\",\"queryTime\":\"2025-01-01T00:08:45.045Z\",\"count\":2,\"startedAt\":\"2025-01-01T00:08:44.000Z\",\"completedAt\":\"2025-01-01T00:08:45.045Z\",\"elapsedMs\":1234,\"searchIndexArguments\":{\"search\":\"hello world\",\"filter\":null,\"semanticConfigurationName\":\"testconfig\",\"sourceDataFields\":[{\"name\":\"category\"},{\"name\":\"id\"}],\"searchFields\":[]}},{\"type\":\"agenticReasoning\",\"id\":1,\"startedAt\":\"2025-01-01T00:08:45.045Z\",\"completedAt\":\"2025-01-01T00:08:45.400Z\",\"reasoningTokens\":39,\"retrievalReasoningEffort\":{\"kind\":\"auto\"},\"logicalReasoningEffort\":{\"kind\":\"auto\"}},{\"type\":\"modelAnswerSynthesis\",\"id\":2,\"startedAt\":\"2025-01-01T00:08:45.400Z\",\"completedAt\":\"2025-01-01T00:08:45.900Z\",\"inputTokens\":11,\"outputTokens\":22,\"elapsedMs\":500,\"model\":{\"modelName\":\"gpt-4o\",\"deploymentId\":\"gpt-4o-deployment\"}}],\"references\":[{\"type\":\"searchIndex\",\"id\":\"83dd7d40\",\"activitySource\":0,\"sourceData\":{\"id\":\"myDocKey1\",\"title\":\"high_doc\",\"content\":\"hello world\"},\"rerankerScore\":4,\"docKey\":\"myDocKey1\",\"citationUrl\":\"https://previewexampleservice.search.windows.net/indexes/preview-test/docs/myDocKey1?$select=category%2Cid&api-version=2026-08-01-preview\"}]}}\n\n"
+    }
+  }
+}

@@ -138,6 +138,11 @@ namespace Microsoft.HybridConnectivity;
   armResourceIdentifier,
   "csharp"
 );
+@@clientName(
+  GenerateGcpTemplateRequest,
+  "GenerateGcpTemplateContent",
+  "csharp"
+);
 @@clientName(ListCredentialsRequest, "ListCredentialsContent", "csharp");
 @@clientName(
   ListIngressGatewayCredentialsRequest,
@@ -146,6 +151,7 @@ namespace Microsoft.HybridConnectivity;
 );
 @@clientName(ManagedProxyRequest, "ManagedProxyContent", "csharp");
 @@clientName(HostType.AWS, "Aws", "csharp");
+@@clientName(HostType.GCP, "Gcp", "csharp");
 @@clientName(InventoryProperties, "PublicCloudInventoryProperties", "csharp");
 @@alternateType(
   InventoryProperties.azureResourceId,
@@ -205,6 +211,11 @@ namespace Microsoft.HybridConnectivity;
 @@clientName(
   GenerateAwsTemplateResponse,
   "GenerateAwsTemplateResult",
+  "csharp"
+);
+@@clientName(
+  GenerateGcpTemplateResponse,
+  "GenerateGcpTemplateResult",
   "csharp"
 );
 

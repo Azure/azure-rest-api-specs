@@ -317,6 +317,12 @@ stages:
             }
             Write-Host "Branch name is set to: $sdkPrBranchName"
             Write-Host "##vso[task.setvariable variable=SdkPullRequestSourceBranch]$sdkPrBranchName"
+
+            $specRepoSourceBranch = '$(Build.SourceBranch)'
+            Write-Host "Spec repo source branch: '$specRepoSourceBranch'"
+            $openAsDraft = ($specRepoSourceBranch -ne 'refs/heads/main') -or $${{ not(endsWith(parameters.TriggerSource, '-release')) }}
+            Write-Host "Open SDK pull request as draft: $openAsDraft"
+            Write-Host "##vso[task.setvariable variable=OpenSdkPullRequestAsDraft]$openAsDraft"
           workingDirectory: $(SdkRepoDirectory)
           displayName: "Create SDK PR branch variable"
 
@@ -370,13 +376,13 @@ stages:
               -AuthToken "$(GH_TOKEN)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
               -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
-              -OpenAsDraft $${{ not(endsWith(parameters.TriggerSource, '-release')) }}
+              -OpenAsDraft $$(OpenSdkPullRequestAsDraft)
               -UpdateExistingPullRequest $true
 
         - ${{ if endsWith(parameters.TriggerSource, '-release') }}:
           - task: PowerShell@2
             displayName: Add auto-release label
-            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
+            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(endsWith(variables['SdkRepoName'], '-pr')))
             inputs:
               pwsh: true
               workingDirectory: $(SdkRepoDirectory)
@@ -393,7 +399,7 @@ stages:
               $prUrl = "https://github.com/Azure/$(SdkRepoName)/pull/$(Submitted.PullRequest.Number)"
               Write-Host "Pull request created: $prUrl"
               Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
-              $prStatus = "${{ iif(endsWith(parameters.TriggerSource, '-release'), 'ready for review', 'draft') }}"
+              $prStatus = if ($$(OpenSdkPullRequestAsDraft)) { 'draft' } else { 'ready for review' }
               Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
             condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
             displayName: "Set pull request URL variable"

@@ -257,6 +257,16 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "accessTierChangedOn",
   "javascript"
 );
+@@clientName(
+  AccessTierChangeTimeResponseHeader.accessTierChangeTime,
+  "accessTierChangedOn",
+  "javascript"
+);
+@@clientName(
+  AccessTierChangeTimeResponseHeaderV2026_10_06.accessTierChangeTime,
+  "accessTierChangedOn",
+  "javascript"
+);
 @@clientName(BlobProperties.creationTime, "createdOn", "javascript");
 @@clientName(
   CreationTimeResponseHeader.creationTime,
@@ -345,6 +355,16 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 );
 
 @@clientName(ContentMd5ResponseHeader.contentMd5, "contentMD5", "javascript");
+@@clientName(
+  ContentCrc64ResponseHeader.contentCrc64,
+  "xMsContentCrc64",
+  "javascript"
+);
+@@clientName(
+  ContentCrc64ResponseHeaderV2026_10_06.contentCrc64,
+  "xMsContentCrc64",
+  "javascript"
+);
 
 @@alternateType(BlobProperties.contentLength, uint64, "rust");
 @@alternateType(BlobContentLengthRequired.size, uint64, "rust");

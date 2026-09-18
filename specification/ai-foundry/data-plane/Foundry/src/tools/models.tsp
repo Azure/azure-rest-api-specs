@@ -28,6 +28,7 @@ namespace Azure.AI.Projects {
 
   // General availability tools:
   union _AgentToolType {
+    a2a: "a2a",
     azure_ai_search: "azure_ai_search",
     azure_function: "azure_function",
     bing_grounding: "bing_grounding",
@@ -781,16 +782,16 @@ namespace Azure.AI.Projects {
     outputs: StructuredOutputDefinition;
   }
 
-  /**
-   * An agent implementing the A2A protocol.
-   */
-  @extension("x-ms-foundry-meta", PreviewTool)
-  model A2APreviewTool extends OpenAI.Tool {
-    /**
-     * The type of the tool. Always `"a2a_preview`.
-     */
-    type: "a2a_preview";
+  /** Supported A2A protocol versions. */
+  union A2AProtocolVersion {
+    string,
 
+    /** A2A protocol version 1.0. */
+    v1_0: "1.0",
+  }
+
+  /** Common configuration for an agent implementing the A2A protocol. */
+  model A2AToolBase {
     /**
      * Base URL of the agent.
      */
@@ -814,6 +815,36 @@ namespace Azure.AI.Projects {
      * specified by the caller (anonymous fetch).
      */
     send_credentials_for_agent_card?: boolean = false;
+  }
+
+  /**
+   * An agent implementing the A2A protocol.
+   */
+  @extension("x-ms-foundry-meta", PreviewTool)
+  model A2APreviewTool extends OpenAI.Tool {
+    /**
+     * The type of the tool. Always `"a2a_preview`.
+     */
+    type: "a2a_preview";
+
+    ...A2AToolBase;
+  }
+
+  /**
+   * An agent implementing the A2A protocol.
+   */
+  model A2ATool extends OpenAI.Tool {
+    /**
+     * The type of the tool. Always `"a2a"`.
+     */
+    type: "a2a";
+
+    ...A2AToolBase;
+
+    /**
+     * The A2A protocol version supported by the agent.
+     */
+    a2a_version: A2AProtocolVersion;
   }
 
   /**
@@ -885,11 +916,6 @@ namespace Azure.AI.Projects {
      * The label of the WebIQ MCP server to connect to.
      */
     server_label?: string;
-
-    /**
-     * The URL of the WebIQ MCP server. If not provided, the URL from the project connection will be used.
-     */
-    server_url?: url;
 
     /**
      * Whether the agent requires approval before executing actions. Default is always.
@@ -1237,7 +1263,6 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("An Azure Function tool call.")
-  @extension("x-ms-foundry-meta", PreviewTool)
   model AzureFunctionToolCall extends OpenAI.OutputItem {
     type: "azure_function_call";
 

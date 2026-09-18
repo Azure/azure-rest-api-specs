@@ -2373,6 +2373,7 @@ op protectionPolicyOperationStatusesGet(
 );
 @@clientName(Job, "BackupGenericJob", "csharp");
 @@clientName(ProtectionContainer, "BackupGenericProtectionContainer", "csharp");
+@@alternateType(ProtectionContainer.sourceLocation, azureLocation, "csharp");
 @@clientName(ProtectionIntent, "BackupGenericProtectionIntent", "csharp");
 @@alternateType(ProtectionIntent.itemId, armResourceIdentifier, "csharp");
 @@alternateType(ProtectionIntent.policyId, armResourceIdentifier, "csharp");
@@ -2717,6 +2718,11 @@ op protectionPolicyOperationStatusesGet(
   "csharp"
 );
 @@clientName(
+  IaasVMRestoreRequestProperties.securedVMDetails,
+  "SecuredVmDetails",
+  "csharp"
+);
+@@clientName(
   IaasVMRestoreWithRehydrationRequest,
   "IaasVmRestoreWithRehydrationContent",
   "csharp"
@@ -2974,6 +2980,11 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(ProtectionPolicyResource, "BackupProtectionPolicy", "csharp");
 @@clientName(RecoveryPointResource, "BackupRecoveryPoint", "csharp");
 @@clientName(RecoveryPoint, "BackupGenericRecoveryPoint", "csharp");
+@@clientName(
+  ProtectedItemConfigureSourceScanRequest,
+  "BackupProtectedItemConfigureSourceScanContent",
+  "csharp"
+);
 @@clientName(ResourceGuardProxyBaseResource, "ResourceGuardProxy", "csharp");
 @@clientName(ResourceGuardProxyBase, "ResourceGuardProxyProperties", "csharp");
 @@clientName(ResourceGuardProxyBase.lastUpdatedTime, "LastUpdatedOn", "csharp");
@@ -3069,6 +3080,7 @@ op protectionPolicyOperationStatusesGet(
   "SourceVmStorageType",
   "csharp"
 );
+@@clientName(SecuredVMDetails, "SecuredVmDetails", "csharp");
 @@clientName(
   SecuredVMDetails.securedVMOsDiskEncryptionSetId,
   "SecuredVmOSDiskEncryptionSetId",
@@ -3140,32 +3152,32 @@ op protectionPolicyOperationStatusesGet(
 );
 @@clientName(
   AzureIaaSVMProtectedItemExtendedInfo.oldestRecoveryPointInVault,
-  "OldestRecoverOnInVault",
+  "OldestRecoveryPointInVaultOn",
   "csharp"
 );
 @@clientName(
   AzureVmWorkloadProtectedItemExtendedInfo.oldestRecoveryPointInVault,
-  "OldestRecoverOnInVault",
+  "OldestRecoveryPointInVaultOn",
   "csharp"
 );
 @@clientName(
   AzureIaaSVMProtectedItemExtendedInfo.oldestRecoveryPointInArchive,
-  "OldestRecoverOnInArchive",
+  "OldestRecoveryPointInArchiveOn",
   "csharp"
 );
 @@clientName(
   AzureVmWorkloadProtectedItemExtendedInfo.oldestRecoveryPointInArchive,
-  "OldestRecoverOnInArchive",
+  "OldestRecoveryPointInArchiveOn",
   "csharp"
 );
 @@clientName(
   AzureIaaSVMProtectedItemExtendedInfo.newestRecoveryPointInArchive,
-  "NewestRecoverOnInArchive",
+  "NewestRecoveryPointInArchiveOn",
   "csharp"
 );
 @@clientName(
   AzureVmWorkloadProtectedItemExtendedInfo.newestRecoveryPointInArchive,
-  "NewestRecoverOnInArchive",
+  "NewestRecoveryPointInArchiveOn",
   "csharp"
 );
 @@clientName(
@@ -3357,6 +3369,7 @@ op protectionPolicyOperationStatusesGet(
   armResourceIdentifier,
   "csharp"
 );
+@@alternateType(ProtectedItem.sourceLocation, azureLocation, "csharp");
 @@alternateType(ContainerIdentityInfo.aadTenantId, uuid, "csharp");
 @@clientName(
   DPMProtectedItemExtendedInfo.oldestRecoveryPoint,

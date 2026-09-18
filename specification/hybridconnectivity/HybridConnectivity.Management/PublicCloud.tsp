@@ -28,6 +28,26 @@ model GenerateAwsTemplateRequest {
   solutionTypes?: Array<SolutionTypeSettings>;
 }
 
+//------------------- Generate Gcp Template -------------------
+
+@added(Versions.v2027_01_01)
+@doc("ConnectorId and SolutionTypes and their properties to Generate GCP Access Control Template.")
+model GenerateGcpTemplateRequest {
+  @doc("The name of public cloud connector")
+  connectorId: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
+  @doc("The list of solution types and their settings")
+  @identifiers(#[])
+  solutionTypes?: Array<SolutionTypeSettings>;
+
+  @doc("The GCP cloud profile.")
+  gcpCloudProfile?: GcpCloudProfile;
+
+  @doc("Optional template output format. Defaults to 'terraform' if not provided")
+  gcpTemplateFormat?: GcpTemplateFormat;
+}
+
 @doc("The properties of Solution Type")
 model SolutionTypeSettings {
   @doc("The type of the solution")
@@ -94,6 +114,12 @@ model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
   @path
   @segment("publicCloudConnectors")
   name: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "'kind' is a valid ARM envelope property, but is not included in TrackedResource. It is declared at the envelope level to identify which public cloud the connector targets."
+  @added(Versions.v2027_01_01)
+  @doc("The kind of the public cloud connector.")
+  @visibility(Lifecycle.Read)
+  kind?: HostType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
@@ -117,6 +143,10 @@ model TrackedResourceUpdate extends Azure.ResourceManager.CommonTypes.Resource {
 model PublicCloudConnectorPropertiesUpdate {
   @doc("Cloud profile for AWS.")
   awsCloudProfile?: AwsCloudProfileUpdate;
+
+  @added(Versions.v2027_01_01)
+  @doc("Cloud profile for GCP.")
+  gcpCloudProfile?: GcpCloudProfileUpdate;
 }
 
 @doc("cloud profile for AWS.")
@@ -125,10 +155,32 @@ model AwsCloudProfileUpdate {
   excludedAccounts?: string[];
 }
 
+@added(Versions.v2027_01_01)
+@doc("cloud profile for GCP.")
+model GcpCloudProfileUpdate {
+  @doc("The organization properties of the GCP organization.")
+  organizationProperties?: GcpOrganizationPropertiesUpdate;
+}
+
+@added(Versions.v2027_01_01)
+@doc("GCP organization properties for update.")
+model GcpOrganizationPropertiesUpdate {
+  @doc("List of GCP projects which need to be excluded.")
+  excludedProjectNumbers?: string[];
+
+  @doc("List of GCP folders which need to be excluded.")
+  excludedFolderIds?: string[];
+}
+
 @doc("Properties of public cloud connectors.")
 model PublicCloudConnectorProperties {
+  @madeOptional(Versions.v2027_01_01)
   @doc("Cloud profile for AWS.")
-  awsCloudProfile: AwsCloudProfile;
+  awsCloudProfile?: AwsCloudProfile;
+
+  @added(Versions.v2027_01_01)
+  @doc("Cloud profile for GCP.")
+  gcpCloudProfile?: GcpCloudProfile;
 
   @doc("Host cloud the public cloud connector.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -149,6 +201,10 @@ union HostType {
 
   @doc("AWS state")
   AWS: "AWS",
+
+  @added(Versions.v2027_01_01)
+  @doc("GCP state")
+  GCP: "GCP",
 }
 
 @doc("cloud profile for AWS.")
@@ -163,6 +219,54 @@ model AwsCloudProfile {
   @doc("Boolean value that indicates whether the account is organizational or not. True represents organization account, whereas false represents a single account.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   isOrganizationalAccount?: boolean = false;
+}
+
+@added(Versions.v2027_01_01)
+@doc("cloud profile for GCP.")
+model GcpCloudProfile {
+  @doc("The project properties of the GCP project.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  projectProperties?: GcpProjectProperties;
+
+  @doc("The organization properties of the GCP organization.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  organizationProperties?: GcpOrganizationProperties;
+}
+
+@added(Versions.v2027_01_01)
+@doc("GCP project properties.")
+model GcpProjectProperties {
+  @doc("The project number of the GCP project.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  projectNumber: string;
+
+  @doc("The project id of the GCP project.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  projectId: string;
+}
+
+@added(Versions.v2027_01_01)
+@doc("GCP organization properties.")
+model GcpOrganizationProperties {
+  @doc("The organization id of the GCP organization.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  organizationId: string;
+
+  @doc("The project number of the management project under the GCP organization.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  managementProjectNumber: string;
+
+  @doc("The project Id of the management project under the GCP organization.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  managementProjectId: string;
+
+  @doc("List of GCP projects which need to be excluded.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  excludedProjectNumbers?: string[];
+
+  @doc("List of GCP folders which need to be excluded.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  excludedFolderIds?: string[];
 }
 
 //------------------- Solution Configuration -------------------
@@ -263,6 +367,10 @@ model SolutionTypeProperties {
   @doc("The locations this solution is supported in.")
   supportedAzureRegions?: string[];
 
+  @added(Versions.v2027_01_01)
+  @doc("The supported host types for the current solution type.")
+  hostTypes?: HostType[];
+
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Array of solution settings and its description.")
   @identifiers(#[])
@@ -285,6 +393,10 @@ model SolutionTypeSettingsProperties {
 
   @doc("Array of allowed values for this solution settings property.")
   allowedValues: string[];
+
+  @added(Versions.v2027_01_01)
+  @doc("The supported host types for the current solution setting")
+  hostTypes: HostType[];
 
   @doc("Default value for this solution settings property.")
   defaultValue: string;
@@ -371,6 +483,47 @@ interface GenerateAwsTemplate {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
 model GenerateAwsTemplateResponse {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
+@added(Versions.v2027_01_01)
+@route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/")
+interface GenerateGcpTemplate {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
+  @route("generateGcpTemplate")
+  @post
+  @action
+  @tag("GenerateGcpTemplate")
+  @doc("Retrieve GCP Access Control template")
+  post(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+
+    @doc("ConnectorId and SolutionTypes and their properties to Generate GCP Access Control Template.")
+    @body
+    generateGcpTemplateRequest: GenerateGcpTemplateRequest,
+  ):
+    | Azure.ResourceManager.ArmResponse<GenerateGcpTemplateResponse>
+    | ErrorResponse;
+}
+
+@doc("GCP template format.")
+union GcpTemplateFormat {
+  string,
+
+  @doc("Terraform template format")
+  Terraform: "terraform",
+
+  @doc("Shell script template format")
+  ShellScript: "shellscript",
+}
+
+/**
+ * The HybridConnectivity post operation response
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "This API version acknowledges successful GCP template generation with an empty response object and does not return generated template content."
+@added(Versions.v2027_01_01)
+model GenerateGcpTemplateResponse {}
 
 @armResourceOperations
 interface PublicCloudConnectors {

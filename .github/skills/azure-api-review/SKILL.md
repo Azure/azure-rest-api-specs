@@ -61,16 +61,12 @@ must not load the other plane's files** -- see "Anti-inheritance" below.
 
 ### Data-plane only
 
-| Reference                                                                               | Rule Area                                                                        | Key Rule IDs             |
-| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------ |
-| [data-plane-linter-rule-coverage.md](references/data-plane-linter-rule-coverage.md)     | `typespec-azure-core` rule → agent-behavior interlock (**read this first**)      | --                       |
-| [data-plane-report-format.md](references/data-plane-report-format.md)                   | Finding syntax, severity glyphs, document shape (**authoritative**)              | --                       |
-| [data-plane-resource-modeling.md](references/data-plane-resource-modeling.md)           | Addressability, actions-vs-CRUD, operation symmetry, versioning/breaking changes | DP-MODEL-_, DP-VERSION-_ |
-| [data-plane-lro-and-paging.md](references/data-plane-lro-and-paging.md)                 | Status-monitor contract, polling linkage, paging shape and consistency           | DP-LRO-_, DP-PAGE-_      |
-| [data-plane-error-design.md](references/data-plane-error-design.md)                     | Stable `code` values, `target`, actionable messages, `innererror`                | DP-ERR-\*                |
-| [data-plane-naming-and-docs.md](references/data-plane-naming-and-docs.md)               | Naming **clarity** (not casing) and documentation quality beyond presence        | DP-NAME-_, DP-DOC-_      |
-| [data-plane-visibility-and-secrets.md](references/data-plane-visibility-and-secrets.md) | `@visibility(Lifecycle.*)` consistency, write-only properties, secret exposure   | DP-VIS-\*                |
-| [data-plane-design-decisions.md](references/data-plane-design-decisions.md)             | Grey-area data-plane trade-off frameworks (6 decision matrices)                  | DDP-001–DDP-006          |
+| Reference                                                                               | Rule Area                                                                  | Key Rule IDs             |
+| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------ |
+| [data-plane-resource-modeling.md](references/data-plane-resource-modeling.md)           | Addressability, actions-vs-CRUD, and stable-version compatibility          | DP-MODEL-_, DP-VERSION-_ |
+| [data-plane-lro-and-paging.md](references/data-plane-lro-and-paging.md)                 | Status-monitor semantics, polling linkage, and paging consistency          | DP-LRO-_, DP-PAGE-_      |
+| [data-plane-error-design.md](references/data-plane-error-design.md)                     | Stable error codes, targets, actionable messages, and consistent envelopes | DP-ERR-\*                |
+| [data-plane-visibility-and-secrets.md](references/data-plane-visibility-and-secrets.md) | Lifecycle visibility, model reachability, and credential exposure          | DP-VIS-\*                |
 
 ### Anti-inheritance
 
@@ -92,7 +88,7 @@ One cross-cutting reference is scoped by consumer rather than by plane:
   posting and deferred gh-aw `safe-outputs` have different post-post
   verification mechanics, but they share the same canonical finding,
   cross-session deduplication, and contradiction-clarification contract. The
-  data-plane reviewer uses its own report and reconciliation contracts.
+  data-plane reviewer is advisory and does not use ARM reconciliation.
 
 ## ARM cross-session reconciliation
 
@@ -322,28 +318,11 @@ the Guidelines, unless it explicitly says otherwise. So:
   saying `**MUST**` does not make the rule `DO`-level, and does not license
   Blocking. Read the field.
 - **Quote the upstream verb rather than inventing one.** Where a reference
-  restates a Guideline, it should cite the anchor and quote the tag, as
-  `DP-PAGE-01` and the extensible-enum guidance now do. Where a rule is our own
-  synthesis of vague upstream direction — `DO focus heavily on clear &
-consistent naming` cannot tell you whether `cfg` is too opaque — the rule
-  should say so, so its `**MUST**` is not mistaken for a sourced requirement.
+  restates a Guideline, it should cite the anchor and quote the tag. Where a rule
+  is reviewer synthesis, it should say so rather than presenting that synthesis
+  as sourced requirement text.
 - **Never escalate on the strength of a reference-body verb.** If the field says
   Warning and the body says `MUST`, the answer is Warning.
-
-Rules currently wording themselves `MUST` at Warning severity without citing an
-upstream anchor: `DP-ERR-05`, `DP-LRO-01`, `DP-PAGE-02`, `DP-NAME-02`,
-`DP-NAME-04`, `DP-DOC-02`, `DP-MODEL-01`, `DP-VERSION-03`. Most do have a
-genuine upstream `DO` behind them — `DP-MODEL-01` restates
-`DO NOT use an action operation when the operation behavior could reasonably be
-defined as one of the standard REST … operations`, and `DP-NAME-02` restates
-`DO … include the time unit` — but until each carries its citation, treat the
-field as authoritative and the verb as emphasis.
-
-`DP-ERR-01` was on that list and has been rewritten: its enumeration trigger is
-now narrow and capped at Question, and it carries the
-`rest-error-use-default-response` citation that pushes **against** the stronger
-reading. It is the worked example of why the list matters — an uncited `MUST`
-turned out to fire on `Azure.Core.Foundations.Error` itself.
 
 ## Maintenance & Upstream Alignment
 
@@ -368,11 +347,10 @@ consumption.
   instruction file **MUST** be updated to match. The upstream document
   always takes precedence.
 - Rules that overlap with existing linter checks are annotated with
-  `(Also enforced by: ...)`. The review agent should check CI results
-  before flagging these to avoid duplicating linter findings. For the
-  data plane this soft convention is replaced by a hard interlock --
-  [`data-plane-linter-rule-coverage.md`](references/data-plane-linter-rule-coverage.md),
-  whose header pin is enforced by the `data-plane-review-alignment` CI check.
+  `(Also enforced by: ...)`. Review agents should check CI results before
+  flagging these to avoid duplicate findings. The data-plane reviewer uses a
+  positive semantic scope: anything outside its retained references, already
+  reported by CI, or of uncertain mechanical ownership is dropped.
 - To avoid conflicts with the
   [azure-typespec-author](../../skills/azure-typespec-author/SKILL.md)
   skill (used for TypeSpec code generation), coordinate rule changes

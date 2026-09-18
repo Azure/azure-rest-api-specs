@@ -212,6 +212,26 @@ namespace Microsoft.Compute;
 // =====================================================================
 // .NET naming convention fixes (C# only)
 // =====================================================================
+@@clientName(
+  BulkCreateCustomResource,
+  "BulkCreateCustomResolvedItem",
+  "csharp"
+);
+@@clientName(
+  CapacityRecommendationParameters.availabilityZones,
+  "isAvailabilityZoneEnabled",
+  "csharp"
+);
+@@clientName(
+  CapacityRecommendationDetails.availabilityZones,
+  "isSplitByAvailabilityZone",
+  "csharp"
+);
+@@clientName(
+  CapacityRecommendationDetails.recommendationRequestedAtUtc,
+  "recommendationRequestedAt",
+  "csharp"
+);
 // Expand "Op" abbreviation to "Operation".
 @@clientName(ResourceOperationDetails.opType, "operationKind", "csharp");
 @@clientName(FallbackOperationInfo.lastOpType, "lastOperationKind", "csharp");

@@ -116,6 +116,14 @@ model DrillProperties {
   @added(Versions.v2026_03_01_preview)
   monitoringProperties?: MonitoringPropertiesOfDrill;
 
+  @doc("Azure Health Model monitoring properties of the Drill.")
+  @added(Versions.v2026_08_31_preview)
+  healthModelMonitoringProperties?: HealthModelMonitoringProperties;
+
+  @doc("SLI monitoring properties of the Drill.")
+  @added(Versions.v2026_08_31_preview)
+  sliMonitoringProperties?: SliMonitoringProperties;
+
   @added(Versions.v2026_03_01_preview)
   @doc("Error details associated with the resource.")
   @visibility(Lifecycle.Read)
@@ -268,6 +276,89 @@ model MonitoringPropertiesOfDrill {
       type: "Microsoft.Insights/dataCollectionEndpoints";
     }
   ]>;
+}
+
+/**
+ * Model that represents the Azure Health Model monitoring properties of a Drill.
+ */
+@doc("Azure Health Model monitoring properties of a Drill. Exactly one Health Model may be selected per Drill.")
+@added(Versions.v2026_08_31_preview)
+model HealthModelMonitoringProperties {
+  @doc("Identity that the Drill uses to read the Azure Health Model. The Drill is granted Reader on the Health Model for this identity.")
+  identity: AssociatedIdentity;
+
+  @doc("Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is the only identifier accepted on the wire.")
+  discoveryRuleId: armResourceIdentifier<[
+    {
+      type: "Microsoft.CloudHealth/healthmodels/discoveryrules";
+    }
+  ]>;
+}
+
+/**
+ * Model that represents the SLI monitoring properties of a Drill.
+ */
+@doc("SLI monitoring properties of a Drill. At most two SLIs may be selected: at most one Availability and one Latency.")
+@added(Versions.v2026_08_31_preview)
+model SliMonitoringProperties {
+  @doc("Identity that the Drill uses to read evaluated SLI results from each SLI's destination Azure Monitor Workspace. The Drill is granted Monitoring Reader on every destination AMW of every selected SLI for this identity.")
+  identity: AssociatedIdentity;
+
+  @doc("The SLIs selected for Drill monitoring. Maximum of two entries: at most one Availability and one Latency. Duplicate types or duplicate SLI Ids are rejected.")
+  @identifiers(#[])
+  @minItems(1)
+  @maxItems(2)
+  slis: SliSelection[];
+}
+
+/**
+ * Model that represents a single SLI selected for Drill monitoring.
+ */
+@doc("A single SLI selected for Drill monitoring.")
+@added(Versions.v2026_08_31_preview)
+model SliSelection {
+  @doc("Full ARM Id of the SLI.")
+  sliId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Monitor/slis";
+    }
+  ]>;
+
+  @doc("User-declared category of the SLI. Must be unique across the selected SLIs.")
+  type: SliType;
+}
+
+/**
+ * Model that represents the per-SLI attention status of a Drill.
+ */
+@doc("Per-SLI attention status of a Drill.")
+@added(Versions.v2026_08_31_preview)
+model SliAttentionStatus {
+  @doc("Full ARM Id of the SLI this status refers to.")
+  sliId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Monitor/slis";
+    }
+  ]>;
+
+  @doc("User-declared category of the SLI.")
+  type: SliType;
+
+  @doc("Whether the selected SLI still exists.")
+  @visibility(Lifecycle.Read)
+  exists?: ExtensionObjectState;
+
+  @doc("Whether the user-declared SLI type matches the SLI's actual category.")
+  @visibility(Lifecycle.Read)
+  typeMatch?: SliTypeMatchState;
+
+  @doc("Rolled-up RBAC state: NotSet if the Drill identity is missing Monitoring Reader on any of the SLI's destination Azure Monitor Workspaces.")
+  @visibility(Lifecycle.Read)
+  drillRbacOnDestinationAmw?: RBACState;
+
+  @doc("The destination Azure Monitor Workspaces that are still missing the Monitoring Reader grant for the Drill identity.")
+  @visibility(Lifecycle.Read)
+  rbacNeededOnDestinationAmws?: string[];
 }
 
 /**
@@ -522,6 +613,35 @@ model AttentionReason {
   @doc("List of required required Azure resource providers that are not registered in the subscription specified for chaos resource.")
   @added(Versions.v2026_03_01_preview)
   missingRequiredResourceProviders?: string[];
+
+  @doc("Neither an Azure Health Model nor an SLI is configured for the Drill. Execution is blocked until a monitoring source is configured.")
+  @added(Versions.v2026_08_31_preview)
+  monitoringSourceNotConfigured?: boolean;
+
+  @doc("Whether the selected Azure Health Model still exists.")
+  @added(Versions.v2026_08_31_preview)
+  healthModelExists?: ExtensionObjectState;
+
+  @doc("Whether the selected discovery rule still exists.")
+  @added(Versions.v2026_08_31_preview)
+  discoveryRuleExists?: ExtensionObjectState;
+
+  @doc("Whether the Drill identity has the necessary RBAC (Reader) to read the selected Azure Health Model.")
+  @added(Versions.v2026_08_31_preview)
+  drillRbacOnHealthModel?: RBACState;
+
+  @doc("Permissions needed by the Drill identity to read the selected Azure Health Model.")
+  @added(Versions.v2026_08_31_preview)
+  rbacNeededForDrillOnHealthModel?: string[];
+
+  @doc("Rolled-up RBAC state: NotSet if the Drill identity is missing the necessary RBAC to read any selected SLI.")
+  @added(Versions.v2026_08_31_preview)
+  drillRbacOnSli?: RBACState;
+
+  @doc("Per-SLI attention status for each SLI selected for Drill monitoring.")
+  @identifiers(#[])
+  @added(Versions.v2026_08_31_preview)
+  sliAttentionStatuses?: SliAttentionStatus[];
 }
 
 @doc("Internal System Metadata, to be used by internal components only.")
@@ -689,6 +809,16 @@ model DrillPatchProperties {
   @doc("Monitoring properties of the Drill.")
   @added(Versions.v2026_03_01_preview)
   monitoringProperties?: MonitoringPropertiesOfDrill;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null is required so a PATCH can clear the Health Model monitoring selection."
+  @doc("Azure Health Model monitoring properties of the Drill. Send null to clear the selection.")
+  @added(Versions.v2026_08_31_preview)
+  healthModelMonitoringProperties?: HealthModelMonitoringProperties | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null is required so a PATCH can clear the SLI monitoring selection."
+  @doc("SLI monitoring properties of the Drill. Send null to clear the selection; the submitted slis array is the new desired state.")
+  @added(Versions.v2026_08_31_preview)
+  sliMonitoringProperties?: SliMonitoringProperties | null;
 }
 
 @doc("Additional properties for Failover.")
