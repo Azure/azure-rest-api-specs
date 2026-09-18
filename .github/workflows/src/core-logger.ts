@@ -1,9 +1,10 @@
+import type { Core } from "./github.ts";
 export type ILogger = import("../../shared/src/logger.ts").ILogger;
 
 export class CoreLogger implements ILogger {
-  #core: import("@actions/github-script").AsyncFunctionArguments["core"];
+  #core: Core;
 
-  constructor(core: import("@actions/github-script").AsyncFunctionArguments["core"]) {
+  constructor(core: Core) {
     this.#core = core;
   }
 

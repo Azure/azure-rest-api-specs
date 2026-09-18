@@ -1,3 +1,4 @@
+import type { Core } from "../github.ts";
 // For now, treat all paths as posix, since this is the format returned from git commands
 import debug from "debug";
 import { dirname, join, relative, resolve } from "path";
@@ -16,9 +17,7 @@ import { CoreLogger } from "../core-logger.ts";
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
 
-export async function incrementalTypeSpec(
-  core: import("@actions/github-script").AsyncFunctionArguments["core"],
-): Promise<boolean> {
+export async function incrementalTypeSpec(core: Core): Promise<boolean> {
   const options = {
     cwd: process.env.GITHUB_WORKSPACE,
     paths: ["specification"],

@@ -1,3 +1,4 @@
+import type { Core } from "../github.ts";
 /*
     This file covers two areas of enforcement:
     1. It calculates what set of label rules has been violated by the current PR, for the purposes of updating next steps to merge.
@@ -1130,7 +1131,7 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri3Blockers);
 
 export function getPresentBlockingLabelsAndMissingRequiredLabels(
-  core: typeof import("@actions/core"),
+  core: Core,
   repo: string,
   owner: string,
   existingLabels: string[],
@@ -1166,7 +1167,7 @@ export function getPresentBlockingLabelsAndMissingRequiredLabels(
  * @param targetBranch This function uses a special format {repo/branch}, e.g. "azure-rest-api-specs/main".
  */
 export function getViolatedRequiredLabelsRules(
-  core: typeof import("@actions/core"),
+  core: Core,
   labels: string[],
   targetBranch: string,
 ): RequiredLabelRule[] {
@@ -1180,7 +1181,7 @@ export function getViolatedRequiredLabelsRules(
 }
 
 export function requiredLabelRuleViolated(
-  core: typeof import("@actions/core"),
+  core: Core,
   presentLabels: string[],
   targetBranch: string,
   rule: RequiredLabelRule,

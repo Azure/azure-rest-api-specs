@@ -2,6 +2,7 @@ import { inspect } from "util";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { extractInputs } from "../context.ts";
+import type { Core } from "../github.ts";
 import { LabelAction } from "../label.ts";
 import { ArmAutoSignoffLabel } from "./arm-auto-signoff-labels.ts";
 
@@ -57,7 +58,7 @@ export async function getLabelActionImpl({
     import("@octokit/plugin-rest-endpoint-methods").Api & {
       paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
     };
-  core: typeof import("@actions/core");
+  core: Core;
 }): Promise<{ headSha: string; issueNumber: number; labelActions: ManagedLabelActions }> {
   const noneResult = {
     headSha: head_sha,
@@ -127,7 +128,7 @@ async function getDesiredLabelAction({
     import("@octokit/plugin-rest-endpoint-methods").Api & {
       paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
     };
-  core: typeof import("@actions/core");
+  core: Core;
 }): Promise<LabelAction> {
   const labelsAllowSignoff =
     labelNames.includes("ARMReview") &&

@@ -4,6 +4,7 @@ import { readFile, writeFile } from "fs/promises";
 import { dirname, join } from "path";
 import { promisify } from "util";
 import { getChangedFilesStatuses, tspconfig } from "../../../shared/src/changed-files.ts";
+import type { Core } from "../github.ts";
 import { loadFormatRules, validateAllNamespaces } from "./validate-format.ts";
 
 const execFileAsync = promisify(execFileCb);
@@ -68,7 +69,7 @@ export type EmitterResult = {
 async function runMetadataEmitter(
   tspConfigDir: string,
   entrypoint: string,
-  core: typeof import("@actions/core"),
+  core: Core,
 ): Promise<EmitterResult> {
   const packageNames: Record<string, string> = {};
 
@@ -151,7 +152,7 @@ function findTypeSpecEntrypoint(tspConfigDir: string): string | null {
 async function compileBaseVersion(
   file: string,
   baseRefDir: string,
-  core: typeof import("@actions/core"),
+  core: Core,
 ): Promise<EmitterResult | null> {
   const baseTspConfigPath = join(baseRefDir, file);
   if (!existsSync(baseTspConfigPath)) {
@@ -187,7 +188,7 @@ function filterUnchanged(
   prPackageNames: Record<string, string>,
   prNamespaces: Record<string, string>,
   baseResult: EmitterResult | null,
-  core: typeof import("@actions/core"),
+  core: Core,
 ): { packageNames: Record<string, string>; namespaces: Record<string, string> } {
   if (!baseResult) {
     return { packageNames: { ...prPackageNames }, namespaces: { ...prNamespaces } };

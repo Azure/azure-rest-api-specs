@@ -8,9 +8,9 @@ export function mockFsPromises() {
   }));
 }
 
-export function mockGlobby() {
-  vi.mock("globby", () => ({
-    globby: vi.fn().mockResolvedValue([]),
+export function mockGlobFiles() {
+  vi.mock("../src/glob.ts", () => ({
+    globFiles: vi.fn().mockResolvedValue([]),
   }));
 }
 
@@ -29,6 +29,6 @@ export function mockSimpleGit() {
 
 export function mockAll() {
   mockFsPromises();
-  mockGlobby();
+  mockGlobFiles();
   mockSimpleGit();
 }

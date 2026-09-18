@@ -1,5 +1,8 @@
+import type { AsyncFunctionArguments } from "@actions/github-script";
 import { toPercent } from "../../shared/src/math.ts";
 import { Duration, formatDuration, getDuration, subtract } from "../../shared/src/time.ts";
+
+export type Core = AsyncFunctionArguments["core"];
 
 export type CommitStatuses =
   RestEndpointMethodTypes["repos"]["listCommitStatusesForRef"]["response"]["data"];
