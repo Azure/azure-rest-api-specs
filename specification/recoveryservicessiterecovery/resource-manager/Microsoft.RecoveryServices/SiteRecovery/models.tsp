@@ -648,6 +648,43 @@ union RecoveryPointSyncType {
 }
 
 /**
+ * The IP version (address family) of an ip-config.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Matches the existing IPConfigDetails / IPConfigInputDetails naming in this specification."
+@added(Versions.v2026_10_01)
+union IPVersion {
+  string,
+
+  /**
+   * The ip-config carries an IPv4 address.
+   */
+  IPv4: "IPv4",
+
+  /**
+   * The ip-config carries an IPv6 address.
+   */
+  IPv6: "IPv6",
+}
+
+/**
+ * The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine.
+ */
+@added(Versions.v2026_10_01)
+union RecoveryNetworkConfigAutoSyncPolicy {
+  string,
+
+  /**
+   * Automatic synchronization of the recovery network configuration is turned off. Recovery NIC settings are changed only through an explicit update operation.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Automatic synchronization of the recovery network configuration is turned on. Recovery NIC settings are refreshed from the source virtual machine as its network configuration changes.
+   */
+  Enabled: "Enabled",
+}
+
+/**
  * A value indicating whether the auto update is enabled.
  */
 union AgentAutoUpdateStatus {
@@ -3507,6 +3544,12 @@ model IPConfigInputDetails {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tfoLBBackendAddressPoolIds?: string[];
+
+  /**
+   * The IP version (IPv4 / IPv6) of the ip-config. Orthogonal to the allocation type (static / dynamic); a missing value is treated as IPv4.
+   */
+  @added(Versions.v2026_10_01)
+  ipVersion?: IPVersion;
 }
 
 /**
@@ -6444,6 +6487,12 @@ model VaultSettingProperties {
    * VMware to Azure provider type.
    */
   vmwareToAzureProviderType?: string;
+
+  /**
+   * The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine.
+   */
+  @added(Versions.v2026_10_01)
+  recoveryNetworkConfigAutoSync?: RecoveryNetworkConfigAutoSyncPolicy;
 }
 
 /**
@@ -6469,6 +6518,12 @@ model VaultSettingCreationInputProperties {
    * VMware to Azure provider type.
    */
   vmwareToAzureProviderType?: string;
+
+  /**
+   * The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine. An omitted value leaves the stored policy unchanged.
+   */
+  @added(Versions.v2026_10_01)
+  recoveryNetworkConfigAutoSync?: RecoveryNetworkConfigAutoSyncPolicy;
 }
 
 /**
@@ -8498,6 +8553,12 @@ model IPConfigDetails {
   tfoPublicIPAddressId?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tfoLBBackendAddressPoolIds?: string[];
+
+  /**
+   * The IP version (IPv4 / IPv6) of the ip-config. Orthogonal to the allocation type (static / dynamic); a missing value is treated as IPv4.
+   */
+  @added(Versions.v2026_10_01)
+  ipVersion?: IPVersion;
 }
 
 /**

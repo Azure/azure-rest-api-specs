@@ -3785,7 +3785,7 @@
           }
         },
         "x-ms-examples": {
-          "Add disk(s) for protection.": {
+          "Adds a confidential data disk to an A2A protected confidential VM.": {
             "$ref": "./examples/ReplicationProtectedItems_AddDisks.json"
           }
         },
@@ -17941,6 +17941,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "ipVersion": {
+          "$ref": "#/definitions/IPVersion",
+          "description": "The IP version (IPv4 / IPv6) of the ip-config. Orthogonal to the allocation type (static / dynamic); a missing value is treated as IPv4."
         }
       }
     },
@@ -17985,7 +17989,35 @@
           "items": {
             "type": "string"
           }
+        },
+        "ipVersion": {
+          "$ref": "#/definitions/IPVersion",
+          "description": "The IP version (IPv4 / IPv6) of the ip-config. Orthogonal to the allocation type (static / dynamic); a missing value is treated as IPv4."
         }
+      }
+    },
+    "IPVersion": {
+      "type": "string",
+      "description": "The IP version (address family) of an ip-config.",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "IPVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "The ip-config carries an IPv4 address."
+          },
+          {
+            "name": "IPv6",
+            "value": "IPv6",
+            "description": "The ip-config carries an IPv6 address."
+          }
+        ]
       }
     },
     "IdentityProviderDetails": {
@@ -25124,6 +25156,30 @@
         "resourceType"
       ]
     },
+    "RecoveryNetworkConfigAutoSyncPolicy": {
+      "type": "string",
+      "description": "The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "RecoveryNetworkConfigAutoSyncPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Automatic synchronization of the recovery network configuration is turned off. Recovery NIC settings are changed only through an explicit update operation."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Automatic synchronization of the recovery network configuration is turned on. Recovery NIC settings are refreshed from the source virtual machine as its network configuration changes."
+          }
+        ]
+      }
+    },
     "RecoveryPlan": {
       "type": "object",
       "description": "Recovery plan details.",
@@ -30746,6 +30802,10 @@
         "vmwareToAzureProviderType": {
           "type": "string",
           "description": "VMware to Azure provider type."
+        },
+        "recoveryNetworkConfigAutoSync": {
+          "$ref": "#/definitions/RecoveryNetworkConfigAutoSyncPolicy",
+          "description": "The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine. An omitted value leaves the stored policy unchanged."
         }
       }
     },
@@ -30760,6 +30820,10 @@
         "vmwareToAzureProviderType": {
           "type": "string",
           "description": "VMware to Azure provider type."
+        },
+        "recoveryNetworkConfigAutoSync": {
+          "$ref": "#/definitions/RecoveryNetworkConfigAutoSyncPolicy",
+          "description": "The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine."
         }
       }
     },
