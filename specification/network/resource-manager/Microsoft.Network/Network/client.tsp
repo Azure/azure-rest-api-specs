@@ -3042,6 +3042,20 @@ union ProvisioningStateUnion {
   #{ isAzureResource: true }
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy while retaining the complete AdminRuleCollection wire model."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.AdminRuleCollection,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Retain ARM resource generation after rebasing the legacy custom resource hierarchy."
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Retain ARM resource generation after rebasing the legacy custom resource hierarchy."
+@@Azure.ResourceManager.Legacy.customAzureResource(
+  Microsoft.Network.AdminRuleCollection,
+  #{ isAzureResource: true }
+);
+
 @@clientName(
   FirewallPolicyPropertiesFormat.explicitProxy,
   "ExplicitProxySettings",
