@@ -1777,6 +1777,11 @@ union MigrationRollbackReason {
   Stability: "stability",
 
   /**
+   * Data was lost during or after the migration.
+   */
+  DataLoss: "dataLoss",
+
+  /**
    * The migration is being undone for a reason not covered by the other values.
    */
   Other: "other",
