@@ -1716,13 +1716,6 @@ model MigrationProperties {
   lastModifiedTime?: utcDateTime;
 
   /**
-   * The timestamp when the migrated endpoint was unlinked from the cluster.
-   */
-  @added(Versions.v2026_09_01)
-  @visibility(Lifecycle.Read)
-  unlinkedTime?: utcDateTime;
-
-  /**
    * The timestamp until which a successful migration remains eligible to be undone (rolled back) to the source cache. This property is only returned while the migration is in the Succeeded state, and is calculated from the time the migration succeeded plus the rollback window. After this time the source cache is released and the migration can no longer be undone.
    */
   @added(Versions.v2026_09_01)
@@ -1801,12 +1794,12 @@ model AzureCacheForRedisMigrationProperties extends MigrationProperties {
   ]>;
 
   /**
-   * Whether to switch the source cache DNS name to the target cache automatically after migration completes. When true, clients using the source cache DNS name are redirected to the target cache.
+   * Sets whether the DNS is switched automatically after the data is transferred from the source cache to the target cache. This property must be true during the preview.
    */
   switchDns: boolean;
 
   /**
-   * Whether to skip copying data from the source cache to the target cache. Set to false to copy data during migration; set to true to migrate without copying data.
+   * Sets whether the data is migrated from source to target or not. This property must be true during the preview.
    */
   skipDataMigration: boolean;
 
