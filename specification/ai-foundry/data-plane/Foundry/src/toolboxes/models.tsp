@@ -130,7 +130,9 @@ model ToolboxTool {
  * A code interpreter tool stored in a toolbox.
  */
 model CodeInterpreterToolboxTool extends ToolboxTool {
+  /** The tool type, which is always `code_interpreter`. */
   type: ToolboxCodeInterpreterToolType;
+
   ...ToolFields<OpenAI.CodeInterpreterTool>;
 }
 
@@ -138,7 +140,9 @@ model CodeInterpreterToolboxTool extends ToolboxTool {
  * A file search tool stored in a toolbox.
  */
 model FileSearchToolboxTool extends ToolboxTool {
+  /** The tool type, which is always `file_search`. */
   type: ToolboxFileSearchToolType;
+
   ...WithFieldsOptional<ToolFields<OpenAI.FileSearchTool>, "vector_store_ids">;
 }
 
@@ -146,7 +150,9 @@ model FileSearchToolboxTool extends ToolboxTool {
  * A web search tool stored in a toolbox.
  */
 model WebSearchToolboxTool extends ToolboxTool {
+  /** The tool type, which is always `web_search`. */
   type: ToolboxWebSearchToolType;
+
   ...ToolFields<OpenAI.WebSearchTool>;
 }
 
@@ -236,7 +242,9 @@ model ShellToolboxTool extends ToolboxTool {
  * An MCP tool stored in a toolbox.
  */
 model MCPToolboxTool extends ToolboxTool {
+  /** The tool type, which is always `mcp`. */
   type: ToolboxMCPToolType;
+
   ...ToolFields<OpenAI.MCPTool>;
 }
 
@@ -244,7 +252,9 @@ model MCPToolboxTool extends ToolboxTool {
  * An Azure AI Search tool stored in a toolbox.
  */
 model AzureAISearchToolboxTool extends ToolboxTool {
+  /** The tool type, which is always `azure_ai_search`. */
   type: ToolboxAzureAISearchToolType;
+
   ...ToolFields<AzureAISearchTool>;
 }
 
@@ -252,7 +262,9 @@ model AzureAISearchToolboxTool extends ToolboxTool {
  * An OpenAPI tool stored in a toolbox.
  */
 model OpenApiToolboxTool extends ToolboxTool {
+  /** The tool type, which is always `openapi`. */
   type: ToolboxOpenApiToolType;
+
   ...ToolFields<OpenApiTool>;
 }
 
@@ -260,7 +272,9 @@ model OpenApiToolboxTool extends ToolboxTool {
  * An A2A tool stored in a toolbox.
  */
 model A2AToolboxTool extends ToolboxTool {
+  /** The tool type, which is always `a2a`. */
   type: ToolboxA2AToolType;
+
   ...ToolFields<A2ATool>;
 }
 
@@ -269,7 +283,9 @@ model A2AToolboxTool extends ToolboxTool {
  */
 @extension("x-ms-foundry-meta", PreviewTool)
 model A2APreviewToolboxTool extends ToolboxTool {
+  /** The tool type, which is always `a2a_preview`. */
   type: ToolboxA2APreviewToolType;
+
   ...ToolFields<A2APreviewTool>;
 }
 
@@ -278,7 +294,9 @@ model A2APreviewToolboxTool extends ToolboxTool {
  */
 @extension("x-ms-foundry-meta", PreviewTool)
 model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
+  /** The tool type, which is always `browser_automation_preview`. */
   type: ToolboxBrowserAutomationPreviewToolType;
+
   ...ToolFields<BrowserAutomationPreviewTool>;
 }
 
@@ -296,6 +314,7 @@ model BrowserAutomationToolboxTool extends ToolboxTool {
  */
 @extension("x-ms-foundry-meta", PreviewTool)
 model ReminderPreviewToolboxTool extends ToolboxTool {
+  /** The tool type, which is always `reminder_preview`. */
   type: ToolboxReminderPreviewToolType;
 }
 
@@ -304,7 +323,9 @@ model ReminderPreviewToolboxTool extends ToolboxTool {
  */
 @extension("x-ms-foundry-meta", PreviewTool)
 model WorkIQPreviewToolboxTool extends ToolboxTool {
+  /** The tool type, which is always `work_iq_preview`. */
   type: ToolboxWorkIQPreviewToolType;
+
   ...ToolFields<WorkIQPreviewTool>;
 }
 
@@ -313,7 +334,9 @@ model WorkIQPreviewToolboxTool extends ToolboxTool {
  */
 @extension("x-ms-foundry-meta", PreviewTool)
 model FabricIQPreviewToolboxTool extends ToolboxTool {
+  /** The tool type, which is always `fabric_iq_preview`. */
   type: ToolboxFabricIQPreviewToolType;
+
   ...ToolFields<FabricIQPreviewTool>;
 }
 
@@ -322,7 +345,9 @@ model FabricIQPreviewToolboxTool extends ToolboxTool {
  */
 @extension("x-ms-foundry-meta", PreviewTool)
 model WebIQPreviewToolboxTool extends ToolboxTool {
+  /** The tool type, which is always `web_iq_preview`. */
   type: ToolboxWebIQPreviewToolType;
+
   ...ToolFields<WebIQPreviewTool>;
 }
 

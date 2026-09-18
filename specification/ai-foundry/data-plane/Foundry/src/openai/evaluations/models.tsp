@@ -384,6 +384,7 @@ model AzureAIAgentTarget extends FoundryEvaluationTarget {
   /** The parameters used to control the sampling behavior of the agent during text generation. */
   tool_descriptions?: ToolDescription[];
 
+  /** The tools available to the agent during evaluation. */
   tools?: OpenAI.Tool[];
 }
 

@@ -193,9 +193,13 @@ model VoiceAgentAnimationConfig {
 @doc("An ICE server used for avatar WebRTC negotiation.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentAvatarIceServer {
+  /** The STUN or TURN server URLs used for ICE negotiation. */
   urls: url[];
+
+  /** The username used to authenticate with the ICE server. */
   username?: string | null;
 
+  /** The credential used to authenticate with the ICE server. */
   @secret
   credential?: string | null;
 }
@@ -204,6 +208,7 @@ model VoiceAgentAvatarIceServer {
 @doc("Avatar settings accepted by the stable voice-agent WebSocket contract.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSessionAvatarConfig extends VoiceAgentAvatarConfig {
+  /** The ICE servers used to establish the avatar's WebRTC connection. */
   ice_servers?: VoiceAgentAvatarIceServer[] | null;
 }
 
@@ -611,8 +616,13 @@ model VoiceAgentServerEventRtcCallError extends OpenAI.RealtimeServerEvent {
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventWarningDetails {
+  /** A description of the warning. */
   message: string;
+
+  /** The machine-readable warning code. */
   code?: string;
+
+  /** The request parameter associated with the warning, if any. */
   param?: string;
 }
 
@@ -620,8 +630,13 @@ model VoiceAgentServerEventWarningDetails {
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventWarning extends OpenAI.RealtimeServerEvent {
+  /** The event type, which is always `warning`. */
   type: "warning";
+
+  /** The unique ID of this server event. */
   event_id: string;
+
+  /** Details of the non-fatal warning. */
   warning: VoiceAgentServerEventWarningDetails;
 }
 
@@ -630,7 +645,10 @@ model VoiceAgentServerEventWarning extends OpenAI.RealtimeServerEvent {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventSessionAvatarConnecting
   extends OpenAI.RealtimeServerEvent {
+  /** The event type, which is always `session.avatar.connecting`. */
   type: "session.avatar.connecting";
+
+  /** The unique ID of this server event. */
   event_id: string;
 
   @doc("The server's SDP answer for avatar media negotiation.")
@@ -642,8 +660,13 @@ model VoiceAgentServerEventSessionAvatarConnecting
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventSessionAvatarSwitchToSpeaking
   extends OpenAI.RealtimeServerEvent {
+  /** The event type, which is always `session.avatar.switch_to_speaking`. */
   type: "session.avatar.switch_to_speaking";
+
+  /** The unique ID of this server event. */
   event_id: string;
+
+  /** The ID of the turn associated with this avatar state change. */
   turn_id?: string;
 }
 
@@ -652,8 +675,13 @@ model VoiceAgentServerEventSessionAvatarSwitchToSpeaking
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventSessionAvatarSwitchToIdle
   extends OpenAI.RealtimeServerEvent {
+  /** The event type, which is always `session.avatar.switch_to_idle`. */
   type: "session.avatar.switch_to_idle";
+
+  /** The unique ID of this server event. */
   event_id: string;
+
+  /** The ID of the turn associated with this avatar state change. */
   turn_id?: string;
 }
 
@@ -662,15 +690,34 @@ model VoiceAgentServerEventSessionAvatarSwitchToIdle
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventResponseAudioTimestampDelta
   extends OpenAI.RealtimeServerEvent {
+  /** The event type, which is always `response.audio_timestamp.delta`. */
   type: "response.audio_timestamp.delta";
+
+  /** The unique ID of this server event. */
   event_id: string;
+
+  /** The ID of the response containing the audio. */
   response_id: string;
+
+  /** The ID of the conversation item containing the audio. */
   item_id: string;
+
+  /** The index of the output item within the response. */
   output_index: int32;
+
+  /** The index of the audio content part within the item. */
   content_index: int32;
+
+  /** The offset of the word within the generated audio, in milliseconds. */
   audio_offset_ms: FoundryDurationMilliseconds;
+
+  /** The duration of the word's audio, in milliseconds. */
   audio_duration_ms: FoundryDurationMilliseconds;
+
+  /** The word associated with this audio timestamp. */
   text: string;
+
+  /** The timestamp granularity, which is always `word`. */
   timestamp_type: "word";
 }
 
@@ -679,11 +726,22 @@ model VoiceAgentServerEventResponseAudioTimestampDelta
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventResponseAudioTimestampDone
   extends OpenAI.RealtimeServerEvent {
+  /** The event type, which is always `response.audio_timestamp.done`. */
   type: "response.audio_timestamp.done";
+
+  /** The unique ID of this server event. */
   event_id: string;
+
+  /** The ID of the response whose audio timestamps have finished streaming. */
   response_id: string;
+
+  /** The ID of the conversation item containing the audio. */
   item_id: string;
+
+  /** The index of the output item within the response. */
   output_index: int32;
+
+  /** The index of the audio content part within the item. */
   content_index: int32;
 }
 
@@ -692,11 +750,22 @@ model VoiceAgentServerEventResponseAudioTimestampDone
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventResponseAnimationBlendshapesDelta
   extends OpenAI.RealtimeServerEvent {
+  /** The event type, which is always `response.animation_blendshapes.delta`. */
   type: "response.animation_blendshapes.delta";
+
+  /** The unique ID of this server event. */
   event_id: string;
+
+  /** The ID of the response containing the animation. */
   response_id: string;
+
+  /** The ID of the conversation item containing the animation. */
   item_id: string;
+
+  /** The index of the output item within the response. */
   output_index: int32;
+
+  /** The index of the content part associated with the animation. */
   content_index: int32;
 
   @doc("Animation frames as numeric blendshape weights.")
@@ -711,10 +780,19 @@ model VoiceAgentServerEventResponseAnimationBlendshapesDelta
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventResponseAnimationBlendshapesDone
   extends OpenAI.RealtimeServerEvent {
+  /** The event type, which is always `response.animation_blendshapes.done`. */
   type: "response.animation_blendshapes.done";
+
+  /** The unique ID of this server event. */
   event_id: string;
+
+  /** The ID of the response whose blendshape animation has finished streaming. */
   response_id: string;
+
+  /** The ID of the conversation item containing the animation. */
   item_id: string;
+
+  /** The index of the output item within the response. */
   output_index: int32;
 }
 
@@ -723,13 +801,28 @@ model VoiceAgentServerEventResponseAnimationBlendshapesDone
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventResponseAnimationVisemeDelta
   extends OpenAI.RealtimeServerEvent {
+  /** The event type, which is always `response.animation_viseme.delta`. */
   type: "response.animation_viseme.delta";
+
+  /** The unique ID of this server event. */
   event_id: string;
+
+  /** The ID of the response containing the animation. */
   response_id: string;
+
+  /** The ID of the conversation item containing the animation. */
   item_id: string;
+
+  /** The index of the output item within the response. */
   output_index: int32;
+
+  /** The index of the content part associated with the animation. */
   content_index: int32;
+
+  /** The offset of the viseme within the generated audio, in milliseconds. */
   audio_offset_ms: FoundryDurationMilliseconds;
+
+  /** The identifier of the mouth shape to display for this viseme. */
   viseme_id: int32;
 }
 
@@ -738,11 +831,22 @@ model VoiceAgentServerEventResponseAnimationVisemeDelta
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventResponseAnimationVisemeDone
   extends OpenAI.RealtimeServerEvent {
+  /** The event type, which is always `response.animation_viseme.done`. */
   type: "response.animation_viseme.done";
+
+  /** The unique ID of this server event. */
   event_id: string;
+
+  /** The ID of the response whose viseme animation has finished streaming. */
   response_id: string;
+
+  /** The ID of the conversation item containing the animation. */
   item_id: string;
+
+  /** The index of the output item within the response. */
   output_index: int32;
+
+  /** The index of the content part associated with the animation. */
   content_index: int32;
 }
 
@@ -751,9 +855,16 @@ model VoiceAgentServerEventResponseAnimationVisemeDone
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventResponseVideoDelta
   extends OpenAI.RealtimeServerEvent {
+  /** The event type, which is always `response.video.delta`. */
   type: "response.video.delta";
+
+  /** The unique ID of this server event. */
   event_id: string;
+
+  /** The index of the output item within the response. */
   output_index: int32;
+
+  /** The codec used to encode the video frames in this event. */
   codec: string;
 
   @doc("The base64-encoded video frame data.")
