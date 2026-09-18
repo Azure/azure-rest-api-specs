@@ -1,10 +1,12 @@
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./common.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Azure.Batch;
 
@@ -68,6 +70,7 @@ interface Pools {
     times of the last aggregation interval currently available; that is, only the
     last aggregation interval is returned.
     """)
+  @removed(Versions.v2026_08_01)
   @route("/poolusagemetrics")
   @list
   listPoolUsageMetrics is ListOperation<
