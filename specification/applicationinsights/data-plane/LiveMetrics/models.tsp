@@ -253,7 +253,7 @@ model MetricPoint {
 }
 
 /**
- * Base class of the specific document types.
+ * A document of a specific type: Request, RemoteDependency, Exception, Event, or Trace.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
 @discriminator("DocumentType")
