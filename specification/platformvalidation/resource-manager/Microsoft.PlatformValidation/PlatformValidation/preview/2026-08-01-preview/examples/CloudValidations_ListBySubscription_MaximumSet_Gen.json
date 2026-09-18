@@ -1,0 +1,52 @@
+{
+  "title": "CloudValidations_ListBySubscription_MaximumSet",
+  "operationId": "CloudValidations_ListBySubscription",
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "top": 22,
+    "skip": 26,
+    "maxpagesize": 9,
+    "orderby": [
+      "name asc"
+    ],
+    "filter": "audience eq 'Public'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "description": "Cloud validation that groups platform validation execution plans for the target subscription.",
+              "provisioningState": "Succeeded",
+              "managedOnBehalfOfConfiguration": {
+                "moboBrokerResources": [
+                  {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgvalidate/providers/Microsoft.PlatformValidation/cloudValidations/cvtest01"
+                  }
+                ]
+              }
+            },
+            "tags": {
+              "environment": "production"
+            },
+            "location": "southcentralus",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgvalidate/providers/Microsoft.PlatformValidation/cloudValidations/cvtest01",
+            "name": "cvtest01",
+            "type": "Microsoft.PlatformValidation/cloudValidations",
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2026-06-01T11:52:22.926Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-06-01T11:52:22.926Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.PlatformValidation/validationTests?api-version=2026-08-01-preview&$skiptoken=cD0yMDI2LTA3LTAx"
+      }
+    }
+  }
+}
