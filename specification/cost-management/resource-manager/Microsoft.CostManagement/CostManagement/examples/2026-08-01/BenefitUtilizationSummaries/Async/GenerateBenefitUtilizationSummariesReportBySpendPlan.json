@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2026-08-01",
+    "benefitUtilizationSummariesRequest": {
+      "endDate": "2026-08-31T00:00:00Z",
+      "grain": "Daily",
+      "startDate": "2026-06-01T00:00:00Z"
+    },
+    "spendPlanId": "00000000-0000-0000-0000-000000000000",
+    "spendPlanOrderId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "input": {
+          "benefitId": "00000000-0000-0000-0000-000000000000",
+          "benefitOrderId": "00000000-0000-0000-0000-000000000000",
+          "endDate": "2026-08-31T00:00:00Z",
+          "grain": "Fullterm",
+          "kind": "FlexSpendPlan",
+          "startDate": "2026-06-01T00:00:00Z"
+        },
+        "properties": {
+          "reportUrl": "https://storage.blob.core.windows.net/details/20260611/00000000-0000-0000-0000-000000000000?sv=2016-05-31&sr=b&sig=jep8HT2aphfUkyERRZa5LRfd9RPzjXbzB%2F9TNiQ",
+          "secondaryReportUrl": "https://storage-secondary.blob.core.windows.net/details/20260611/00000000-0000-0000-0000-000000000000?sv=2016-05-31&sr=b&sig=jep8HT2aphfUkyERRZa5LRfd9RPzjXbzB%2F9TNiQ",
+          "validUntil": "2026-06-12T02:56:55.5021869Z"
+        },
+        "status": "Complete"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.BillingBenefits/spendPlanOrders/00000000-0000-0000-0000-000000000000/spendPlans/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/benefitUtilizationSummariesOperationResults/cf9f95c9-af6b-41dd-a622-e6f4fc60c3ee?api-version=2026-08-01",
+        "Retry-After": "60"
+      }
+    }
+  },
+  "operationId": "GenerateBenefitUtilizationSummariesReport_GenerateBySpendPlanId",
+  "title": "GenerateBenefitUtilizationSummariesReportBySpendPlan"
+}

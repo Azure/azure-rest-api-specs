@@ -4658,6 +4658,288 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/providers/Microsoft.BillingBenefits/spendPlans/{spendPlanOrderId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries": {
+      "get": {
+        "operationId": "BenefitUtilizationSummaries_ListBySpendPlanOrder",
+        "description": "Lists the spend plan utilization summaries for fullterm grain.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Supports filtering by properties/usageDate.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "grainParameter",
+            "in": "query",
+            "description": "Grain.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "FullTerm"
+            ],
+            "x-ms-enum": {
+              "name": "GrainParameter",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "FullTerm",
+                  "value": "FullTerm",
+                  "description": "FullTerm grain corresponds to value for the full term."
+                }
+              ]
+            }
+          },
+          {
+            "name": "spendPlanOrderId",
+            "in": "path",
+            "description": "Spend plan order ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FlexSpendPlanUtilizationSummaries": {
+            "$ref": "./examples/BenefitUtilizationSummaries/FlexSpendPlan-SpendPlanOrderId.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/spendPlans/{spendPlanOrderId}/terms/{spendPlanId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries": {
+      "get": {
+        "operationId": "BenefitUtilizationSummaries_ListBySpendPlanOrderAndSpendPlan",
+        "description": "Lists the spend plan utilization summaries for fullterm grain.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Supports filtering by properties/usageDate.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "grainParameter",
+            "in": "query",
+            "description": "Grain.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "FullTerm"
+            ],
+            "x-ms-enum": {
+              "name": "GrainParameter",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "FullTerm",
+                  "value": "FullTerm",
+                  "description": "FullTerm grain corresponds to value for the full term."
+                }
+              ]
+            }
+          },
+          {
+            "name": "spendPlanOrderId",
+            "in": "path",
+            "description": "Spend plan order ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "spendPlanId",
+            "in": "path",
+            "description": "Spend plan ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FlexSpendPlanUtilizationSummariesDaily": {
+            "$ref": "./examples/BenefitUtilizationSummaries/FlexSpendPlan-SpendPlanOrderId.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/spendPlans/{spendPlanOrderId}/providers/Microsoft.CostManagement/generateBenefitUtilizationSummariesReport": {
+      "post": {
+        "operationId": "GenerateBenefitUtilizationSummariesReport_GenerateBySpendPlanOrderId",
+        "description": "Triggers generation of a benefit utilization summaries report for the provided spend plan order.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "spendPlanOrderId",
+            "in": "path",
+            "description": "Spend Plan Order ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "benefitUtilizationSummariesRequest",
+            "in": "body",
+            "description": "Async Benefit Utilization Summary report to be created.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesOperationStatus"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateUtilizationSummariesReportBySpendPlanOrder": {
+            "$ref": "./examples/BenefitUtilizationSummaries/Async/GenerateBenefitUtilizationSummariesReportBySpendPlanOrder.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/BenefitUtilizationSummariesOperationStatus"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/spendPlans/{spendPlanOrderId}/terms/{spendPlanId}/providers/Microsoft.CostManagement/generateBenefitUtilizationSummariesReport": {
+      "post": {
+        "operationId": "GenerateBenefitUtilizationSummariesReport_GenerateBySpendPlanId",
+        "description": "Triggers generation of a benefit utilization summaries report for the provided spend plan.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "spendPlanOrderId",
+            "in": "path",
+            "description": "Spend Plan Order ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "spendPlanId",
+            "in": "path",
+            "description": "Spend Plan ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "benefitUtilizationSummariesRequest",
+            "in": "body",
+            "description": "Async Benefit Utilization Summary report to be created.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesOperationStatus"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateUtilizationSummariesReportBySpendPlan": {
+            "$ref": "./examples/BenefitUtilizationSummaries/Async/GenerateBenefitUtilizationSummariesReportBySpendPlan.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/BenefitUtilizationSummariesOperationStatus"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -5436,7 +5718,7 @@
     },
     "BenefitUtilizationSummaryReportSchema": {
       "type": "string",
-      "description": "The CSV file from the reportUrl and secondaryReportUrl blob link will consist of the following columns of benefit utilization data. UtilizedPercentage will be 0 for savings plans reports and non data bricks reservations. Utilization percentages will be 0 for data bricks reservations.",
+      "description": "The CSV file from the reportUrl and secondaryReportUrl blob link will consist of the following columns of benefit utilization data. UtilizedPercentage will be 0 for savings plans reports and non data bricks reservations. Utilization percentages will be 0 for data bricks reservations. UtilizationPercentageByHour will be present for versions > 2023-06-01. UsedQuantity will be present for benefit type 'FlexSpendPlan'",
       "enum": [
         "Kind",
         "AvgUtilizationPercentage",
@@ -5446,7 +5728,9 @@
         "MaxUtilizationPercentage",
         "MinUtilizationPercentage",
         "UsageDate",
-        "UtilizedPercentage"
+        "UtilizedPercentage",
+        "UtilizationPercentageByHour",
+        "UsedQuantity"
       ],
       "x-ms-enum": {
         "name": "BenefitUtilizationSummaryReportSchema",
@@ -5487,6 +5771,14 @@
           {
             "name": "UtilizedPercentage",
             "value": "UtilizedPercentage"
+          },
+          {
+            "name": "UtilizationPercentageByHour",
+            "value": "UtilizationPercentageByHour"
+          },
+          {
+            "name": "UsedQuantity",
+            "value": "UsedQuantity"
           }
         ]
       }
@@ -9602,12 +9894,6 @@
       "type": "object",
       "description": "Flex spend plan utilization summary properties.",
       "properties": {
-        "utilizationPercentage": {
-          "type": "number",
-          "format": "double",
-          "description": "This is the utilized percentage for the benefit ID.",
-          "readOnly": true
-        },
         "usedQuantity": {
           "type": "number",
           "format": "double",
