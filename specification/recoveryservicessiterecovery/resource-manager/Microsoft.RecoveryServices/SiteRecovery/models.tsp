@@ -648,6 +648,43 @@ union RecoveryPointSyncType {
 }
 
 /**
+ * The IP version (address family) of an ip-config.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Matches the existing IPConfigDetails / IPConfigInputDetails naming in this specification."
+@added(Versions.v2026_10_01)
+union IPVersion {
+  string,
+
+  /**
+   * The ip-config carries an IPv4 address.
+   */
+  IPv4: "IPv4",
+
+  /**
+   * The ip-config carries an IPv6 address.
+   */
+  IPv6: "IPv6",
+}
+
+/**
+ * The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine.
+ */
+@added(Versions.v2026_10_01)
+union RecoveryNetworkConfigAutoSyncPolicy {
+  string,
+
+  /**
+   * Automatic synchronization of the recovery network configuration is turned off. Recovery NIC settings are changed only through an explicit update operation.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Automatic synchronization of the recovery network configuration is turned on. Recovery NIC settings are refreshed from the source virtual machine as its network configuration changes.
+   */
+  Enabled: "Enabled",
+}
+
+/**
  * A value indicating whether the auto update is enabled.
  */
 union AgentAutoUpdateStatus {
@@ -3507,6 +3544,12 @@ model IPConfigInputDetails {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tfoLBBackendAddressPoolIds?: string[];
+
+  /**
+   * The IP version (IPv4 / IPv6) of the ip-config. Orthogonal to the allocation type (static / dynamic); a missing value is treated as IPv4.
+   */
+  @added(Versions.v2026_10_01)
+  ipVersion?: IPVersion;
 }
 
 /**
@@ -6444,6 +6487,12 @@ model VaultSettingProperties {
    * VMware to Azure provider type.
    */
   vmwareToAzureProviderType?: string;
+
+  /**
+   * The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine.
+   */
+  @added(Versions.v2026_10_01)
+  recoveryNetworkConfigAutoSync?: RecoveryNetworkConfigAutoSyncPolicy;
 }
 
 /**
@@ -6469,6 +6518,12 @@ model VaultSettingCreationInputProperties {
    * VMware to Azure provider type.
    */
   vmwareToAzureProviderType?: string;
+
+  /**
+   * The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine. An omitted value leaves the stored policy unchanged.
+   */
+  @added(Versions.v2026_10_01)
+  recoveryNetworkConfigAutoSync?: RecoveryNetworkConfigAutoSyncPolicy;
 }
 
 /**
@@ -6610,6 +6665,12 @@ model A2AVmManagedDiskInputDetails {
    */
   @added(Versions.v2026_02_01)
   recoveryPublicNetworkAccess?: DiskPublicNetworkAccess;
+
+  /**
+   * The confidential disk encryption info for the managed disk. Applicable to CMK confidential VMs.
+   */
+  @added(Versions.v2026_10_01)
+  confidentialDiskEncryptionInfo?: ConfidentialDiskEncryptionInfo;
 }
 
 /**
@@ -6655,6 +6716,45 @@ model KeyEncryptionKeyInfo {
    * The KeyVault resource ARM Id for key.
    */
   keyVaultResourceArmId?: string;
+}
+
+/**
+ * Confidential disk encryption info for a CMK confidential VM managed disk.
+ */
+@added(Versions.v2026_10_01)
+model ConfidentialDiskEncryptionInfo {
+  /**
+   * The confidential disk encryption set ARM Id used for the replica disk. Applicable to CMK confidential VMs.
+   */
+  recoveryReplicaConfidentialDiskEncryptionSetId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/diskEncryptionSets";
+    }
+  ]>;
+
+  /**
+   * The confidential disk encryption set ARM Id used for the target disk after failover. Applicable to CMK confidential VMs.
+   */
+  recoveryTargetConfidentialDiskEncryptionSetId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/diskEncryptionSets";
+    }
+  ]>;
+}
+
+/**
+ * Confidential disk encryption info used while updating replication of a CMK confidential VM managed disk.
+ */
+@added(Versions.v2026_10_01)
+model UpdateConfidentialDiskEncryptionInfo {
+  /**
+   * The confidential disk encryption set ARM Id used for the target disk after failover. Applicable to CMK confidential VMs.
+   */
+  recoveryTargetConfidentialDiskEncryptionSetId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/diskEncryptionSets";
+    }
+  ]>;
 }
 
 /**
@@ -7273,6 +7373,16 @@ model A2AEnableProtectionInput extends EnableProtectionProviderSpecificInput {
   autoProtectionOfDataDisk?: AutoProtectionOfDataDisk;
 
   /**
+   * The confidential data disk encryption user-assigned identity ARM Id. Applicable to CMK confidential VM data disks.
+   */
+  @added(Versions.v2026_10_01)
+  recoveryConfidentialDataDiskEncryptionIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  /**
    * The class type.
    */
   instanceType: "A2A";
@@ -7825,6 +7935,12 @@ model A2AProtectedManagedDiskDetails {
    */
   @added(Versions.v2026_02_01)
   recoveryPublicNetworkAccess?: DiskPublicNetworkAccess;
+
+  /**
+   * The confidential disk encryption info for the managed disk. Applicable to CMK confidential VMs.
+   */
+  @added(Versions.v2026_10_01)
+  confidentialDiskEncryptionInfo?: ConfidentialDiskEncryptionInfo;
 }
 
 /**
@@ -8272,6 +8388,16 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
   platformFaultDomain?: int32;
 
   /**
+   * The confidential data disk encryption user-assigned identity ARM Id. Applicable to CMK confidential VM data disks.
+   */
+  @added(Versions.v2026_10_01)
+  recoveryConfidentialDataDiskEncryptionIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  /**
    * Gets the Instance type.
    */
   instanceType: "A2A";
@@ -8427,6 +8553,12 @@ model IPConfigDetails {
   tfoPublicIPAddressId?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tfoLBBackendAddressPoolIds?: string[];
+
+  /**
+   * The IP version (IPv4 / IPv6) of the ip-config. Orthogonal to the allocation type (static / dynamic); a missing value is treated as IPv4.
+   */
+  @added(Versions.v2026_10_01)
+  ipVersion?: IPVersion;
 }
 
 /**
@@ -8948,6 +9080,16 @@ model A2ASwitchProtectionInput extends SwitchProtectionProviderSpecificInput {
   diskEncryptionInfo?: DiskEncryptionInfo;
 
   /**
+   * The confidential data disk encryption user-assigned identity ARM Id. Applicable to CMK confidential VM data disks.
+   */
+  @added(Versions.v2026_10_01)
+  recoveryConfidentialDataDiskEncryptionIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  /**
    * Gets the Instance type.
    */
   instanceType: "A2A";
@@ -9085,6 +9227,16 @@ model A2AUpdateReplicationProtectedItemInput
   platformFaultDomain?: int32;
 
   /**
+   * The confidential data disk encryption user-assigned identity ARM Id. Applicable to CMK confidential VM data disks.
+   */
+  @added(Versions.v2026_10_01)
+  recoveryConfidentialDataDiskEncryptionIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  /**
    * The class type.
    */
   instanceType: "A2A";
@@ -9124,6 +9276,12 @@ model A2AVmManagedDiskUpdateDetails {
    * The target disk name for test failover operation.
    */
   tfoDiskName?: string;
+
+  /**
+   * The confidential disk encryption info to update for the managed disk. Only the recovery target confidential disk encryption set can be updated after protection is enabled; the replica confidential disk encryption set is immutable. Applicable to CMK confidential VMs.
+   */
+  @added(Versions.v2026_10_01)
+  confidentialDiskEncryptionInfo?: UpdateConfidentialDiskEncryptionInfo;
 }
 
 /**
