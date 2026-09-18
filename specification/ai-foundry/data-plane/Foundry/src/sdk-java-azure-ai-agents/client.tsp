@@ -505,7 +505,7 @@ using Azure.AI.Projects;
   "VoiceAgentLlmInterimResponseConfiguration"
 );
 @@clientName(VoiceAgentMcpTool.tool_configs, "toolConfigurations");
-@@clientName(VoiceAgentResponseCreateParams, "VoiceAgentResponseCreateOptions");
+@@clientName(VoiceAgentResponseCreateParams, "VoiceAgentResponseCreateOptions", "java");
 
 // Put Event at the end of concrete voice-agent client and server event names.
 @@clientName(
