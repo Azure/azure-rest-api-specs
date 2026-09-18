@@ -44,111 +44,6 @@
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/operationResults/{operationId}": {
-      "get": {
-        "operationId": "ServiceEntitlementSettings_GetOperationResult",
-        "tags": [
-          "ServiceEntitlementSettings"
-        ],
-        "description": "Gets the result of a long-running operation. Returns no content while pending, the updated resource after PATCH completes, or no content after DELETE completes.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ServiceEntitlementSetting"
-            }
-          },
-          "202": {
-            "description": "The operation is in progress.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The URL to poll for the operation result."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "The delete operation completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the result of a service entitlement setting operation": {
-            "$ref": "./examples/ServiceEntitlementSettings/GetServiceEntitlementSettingOperationResult.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/operationStatuses/{operationId}": {
-      "get": {
-        "operationId": "ServiceEntitlementSettings_GetOperationStatus",
-        "tags": [
-          "ServiceEntitlementSettings"
-        ],
-        "description": "Gets the status of a long-running operation, including after the service entitlement setting has been deleted.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "The operation ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ServiceEntitlementSettingOperationStatus"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the status of a long-running operation on a service entitlement setting": {
-            "$ref": "./examples/ServiceEntitlementSettings/GetServiceEntitlementSettingOperationStatus.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/serviceEntitlementSettings": {
       "get": {
         "operationId": "ServiceEntitlementSettings_ListBySubscription",
@@ -540,6 +435,113 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlementSettings/{serviceEntitlementSettingName}/operationResults/{operationId}": {
+      "get": {
+        "operationId": "ServiceEntitlementSettings_GetOperationResult",
+        "tags": [
+          "ServiceEntitlementSettings"
+        ],
+        "description": "Gets the result of a long-running operation. Returns no content while pending, the updated resource after PATCH completes, or no content after DELETE completes.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceEntitlementSettingOperationParameters.serviceEntitlementSettingName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceEntitlementSetting"
+            }
+          },
+          "202": {
+            "description": "The operation is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to poll for the operation result."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "The delete operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the result of a service entitlement setting operation": {
+            "$ref": "./examples/ServiceEntitlementSettings/GetServiceEntitlementSettingOperationResult.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlementSettings/{serviceEntitlementSettingName}/operationStatuses/{operationId}": {
+      "get": {
+        "operationId": "ServiceEntitlementSettings_GetOperationStatus",
+        "tags": [
+          "ServiceEntitlementSettings"
+        ],
+        "description": "Gets the status of a long-running operation, including after the service entitlement setting has been deleted.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceEntitlementSettingOperationParameters.serviceEntitlementSettingName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceEntitlementSettingOperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the status of a long-running operation on a service entitlement setting": {
+            "$ref": "./examples/ServiceEntitlementSettings/GetServiceEntitlementSettingOperationStatus.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -762,5 +764,29 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "ServiceEntitlementSettingOperationParameters.serviceEntitlementSettingName": {
+      "name": "serviceEntitlementSettingName",
+      "in": "path",
+      "description": "The singleton service entitlement setting name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^default$",
+      "enum": [
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceEntitlementSettingName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "default",
+            "description": "The singleton service entitlement setting."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

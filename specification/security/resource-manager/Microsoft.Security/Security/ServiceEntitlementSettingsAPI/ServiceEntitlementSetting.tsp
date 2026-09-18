@@ -23,6 +23,20 @@ model ServiceEntitlementSetting
   >;
 }
 
+/** Parameters identifying a long-running operation on a service entitlement setting. */
+model ServiceEntitlementSettingOperationParameters {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+
+  /** The singleton service entitlement setting name. */
+  @path
+  @pattern("^default$")
+  serviceEntitlementSettingName: ServiceEntitlementSettingName;
+
+  ...Azure.ResourceManager.CommonTypes.OperationIdParameter;
+}
+
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface ServiceEntitlementSettings {
   /** Gets a service entitlement setting. */
@@ -57,20 +71,16 @@ interface ServiceEntitlementSettings {
   listBySubscription is ArmListBySubscription<ServiceEntitlementSetting>;
 
   /** Gets the status of a long-running operation, including after the service entitlement setting has been deleted. */
-  getOperationStatus is Azure.ResourceManager.GetResourceOperationStatus<
-    ServiceEntitlementSettingOperationStatus,
-    SubscriptionLocationActionScope
-  >;
+  @get
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlementSettings/{serviceEntitlementSettingName}/operationStatuses/{operationId}")
+  getOperationStatus(...ServiceEntitlementSettingOperationParameters):
+    | ArmResponse<ServiceEntitlementSettingOperationStatus>
+    | ErrorResponse;
 
   /** Gets the result of a long-running operation. Returns no content while pending, the updated resource after PATCH completes, or no content after DELETE completes. */
   @get
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/operationResults/{operationId}")
-  getOperationResult(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...LocationResourceParameter,
-    ...Azure.ResourceManager.CommonTypes.OperationIdParameter,
-  ):
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlementSettings/{serviceEntitlementSettingName}/operationResults/{operationId}")
+  getOperationResult(...ServiceEntitlementSettingOperationParameters):
     | ArmResponse<ServiceEntitlementSetting>
     | ArmAcceptedResponse<
         "The operation is in progress.",

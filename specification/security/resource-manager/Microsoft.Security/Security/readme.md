@@ -91,18 +91,14 @@ suppressions:
   - code: AllTrackedResourcesMustHaveDelete
     from: serviceEntitlementSettings.json
     where: $.definitions.ServiceEntitlementSetting
-    reason: The resource-group-scoped resource has DELETE. The location-scoped operationResults GET returns the same resource as an LRO final result, not as a second tracked resource.
+    reason: The resource has DELETE. Its operationResults GET returns the same resource as an LRO final result, not as a second tracked resource.
   - code: TrackedResourcePatchOperation
     from: serviceEntitlementSettings.json
     where: $.definitions.ServiceEntitlementSetting
-    reason: The resource-group-scoped resource has PATCH with tags support. The location-scoped operationResults GET returns the same resource as an LRO final result, not as a second tracked resource.
-  - code: PathForTrackedResourceTypes
-    from: serviceEntitlementSettings.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/operationResults/{operationId}"]
-    reason: This is the Location polling endpoint, not a resource GET. It must remain available independently of the resource after DELETE and returns the tracked resource only when PATCH completes.
+    reason: The resource has PATCH with tags support. Its operationResults GET returns the same resource as an LRO final result, not as a second tracked resource.
   - code: GetResponseCodes
     from: serviceEntitlementSettings.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/operationResults/{operationId}"].get
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlementSettings/{serviceEntitlementSettingName}/operationResults/{operationId}"].get
     reason: The Location polling endpoint returns 202 while pending, 200 with the resource after PATCH, and 204 after DELETE. The 204 response is intentional for an operation with no final response body.
   - code: ResourceNameRestriction
     from: Microsoft.Security\stable\2024-01-01\pricings.json
@@ -814,10 +810,11 @@ input-file:
 
 These settings apply only when `--tag=package-composite-v3` is specified on the command line.
 
-The service entitlement settings polling operations share URLs with the older provider-wide
-operations. For this composite only, `x-ms-paths` distinguishes the new operations by their
-API version, preserving both operation groups and the typed service entitlement setting result.
-The standalone Swagger retains its original paths.
+Service entitlement settings uses resource-scoped `operationResults` and `operationStatuses`
+paths, following the resource-scoped polling pattern of `ServiceEntitlementsAPI`. These paths
+are distinct from the provider-wide operations, so no composite path transformation is needed.
+The service must keep both polling endpoints accessible after deleting the setting; ARM review
+approval for this resource-scoped placement is required.
 
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
@@ -857,27 +854,6 @@ input-file:
 - stable/2026-08-01/datascanners.json
 - preview/2026-09-01-preview/serviceEntitlements.json
 - preview/2026-09-16-preview/serviceEntitlementSettings.json
-
-directive:
-  - from: serviceEntitlementSettings.json
-    where: $
-    transform: |
-      const pollingPaths = [
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/operationResults/{operationId}",
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/operationStatuses/{operationId}"
-      ];
-      if ($.swagger === "2.0" && $.info.version === "2026-09-16-preview") {
-        $["x-ms-paths"] = $["x-ms-paths"] || {};
-        for (const path of pollingPaths) {
-          const versionedPath = path + "?api-version=" + $.info.version;
-          if ($.paths[path]) {
-            $["x-ms-paths"][versionedPath] = $.paths[path];
-            delete $.paths[path];
-          } else if (!$["x-ms-paths"][versionedPath]) {
-            throw new Error("Missing service entitlement settings polling path: " + path);
-          }
-        }
-      }
 
 # Autorest suppressions
 suppressions:
