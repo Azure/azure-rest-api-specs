@@ -4059,6 +4059,18 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 
+@@clientName(
+  Common.ManagedServiceIdentity,
+  "InternalNetworkManagedServiceIdentity",
+  "csharp"
+);
+
+@@access(
+  Common.ManagedServiceIdentity,
+  Azure.ClientGenerator.Core.Access.internal,
+  "csharp"
+);
+
 @@alternateType(
   Microsoft.Network.AuthenticationPolicy.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
