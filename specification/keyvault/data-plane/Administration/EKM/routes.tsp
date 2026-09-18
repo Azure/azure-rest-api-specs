@@ -129,11 +129,11 @@ op getEkmPrivateEndpointOperationStatus is KeyVaultOperation<
 op createEkmPrivateEndpoint is KeyVaultOperation<
   {
     /**
-     * The name of the private endpoint. Must be 2-24 characters, start and end with an alphanumeric character, and contain only alphanumeric characters and hyphens.
+     * The name of the private endpoint. Must be 1-24 characters, start and end with an alphanumeric character, and contain only alphanumeric characters and hyphens.
      */
     @path
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{0,22}[a-zA-Z0-9]$")
-    @minLength(2)
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{0,22}[a-zA-Z0-9]$|^[a-zA-Z0-9]$")
+    @minLength(1)
     @maxLength(24)
     peName: string;
 
@@ -182,8 +182,8 @@ op deleteEkmPrivateEndpoint is KeyVaultOperation<
      * The name of the private endpoint to delete.
      */
     @path
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{0,22}[a-zA-Z0-9]$")
-    @minLength(2)
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{0,22}[a-zA-Z0-9]$|^[a-zA-Z0-9]$")
+    @minLength(1)
     @maxLength(24)
     peName: string;
   },
@@ -223,8 +223,8 @@ op getEkmPrivateEndpoint is KeyVaultOperation<
      * The name of the private endpoint to get.
      */
     @path
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{0,22}[a-zA-Z0-9]$")
-    @minLength(2)
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{0,22}[a-zA-Z0-9]$|^[a-zA-Z0-9]$")
+    @minLength(1)
     @maxLength(24)
     peName: string;
   },
