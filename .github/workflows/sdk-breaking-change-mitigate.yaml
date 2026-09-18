@@ -236,6 +236,20 @@ jobs:
             core.setOutput("repository", pull.head.repo.full_name);
             core.setOutput("ref", pull.head.sha);
             core.setOutput("branch", pull.head.ref);
+            core.setOutput("pushed-at", pull.updated_at);
+
+      - name: Verify pull request was not updated after the trigger
+        if: github.event_name == 'issue_comment'
+        shell: bash
+        env:
+          COMMENTED_AT: ${{ github.event.comment.updated_at }}
+          PUSHED_AT: ${{ steps.resolve-pr-source.outputs.pushed-at }}
+        run: |
+          set -euo pipefail
+          if [[ "$(date -d "$PUSHED_AT" +%s)" -gt "$(date -d "$COMMENTED_AT" +%s)" ]]; then
+            echo "The pull request was updated after the mitigation command. Skip this mitigation." >&2
+            exit 1
+          fi
 
       - name: Checkout specification PR source
         if: steps.resolve-trigger.outputs.should-run == 'true'

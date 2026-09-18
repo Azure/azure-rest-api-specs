@@ -55,24 +55,6 @@ jobs:
       AZSDK_CLI_PATH: /tmp/bin
 
     steps:
-      - name: Mark analysis in progress
-        if: github.event_name == 'issue_comment'
-        uses: actions/github-script@v9
-        with:
-          github-token: ${{ github.token }}
-          script: |
-            const command = context.payload.comment.body.split(/\r?\n/, 1)[0].trim();
-            try {
-              await github.rest.issues.updateComment({
-                ...context.repo,
-                comment_id: context.payload.comment.id,
-                body: `${command}\n\nAnalyzing ...`,
-              });
-            } catch (error) {
-              if (error.status !== 403) throw error;
-              core.warning("The workflow token cannot update the trigger comment with analysis status.");
-            }
-
       - name: Checkout workflow repository
         uses: actions/checkout@v7
         with:
@@ -171,10 +153,42 @@ jobs:
 
             core.setOutput("repository", pull.head.repo.full_name);
             core.setOutput("ref", pull.head.sha);
+            core.setOutput("pushed-at", pull.updated_at);
             core.setOutput("sdk-repository", languageConfig.repository);
             core.setOutput("sdk-language", languageConfig.language);
             core.setOutput("tsp-config-path", tspConfigPath ?? "");
             core.setOutput("changed-typespec-files", JSON.stringify(changedTypespecFiles));
+
+      - name: Verify pull request was not updated after the trigger
+        if: github.event_name == 'issue_comment'
+        shell: bash
+        env:
+          COMMENTED_AT: ${{ github.event.comment.updated_at }}
+          PUSHED_AT: ${{ steps.resolve-source.outputs.pushed-at }}
+        run: |
+          set -euo pipefail
+          if [[ "$(date -d "$PUSHED_AT" +%s)" -gt "$(date -d "$COMMENTED_AT" +%s)" ]]; then
+            echo "The pull request was updated after the analysis command. Skip this analysis." >&2
+            exit 1
+          fi
+
+      - name: Mark analysis in progress
+        if: github.event_name == 'issue_comment'
+        uses: actions/github-script@v9
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const command = context.payload.comment.body.split(/\r?\n/, 1)[0].trim();
+            try {
+              await github.rest.issues.updateComment({
+                ...context.repo,
+                comment_id: context.payload.comment.id,
+                body: `${command}\n\nAnalyzing ...`,
+              });
+            } catch (error) {
+              if (error.status !== 403) throw error;
+              core.warning("The workflow token cannot update the trigger comment with analysis status.");
+            }
 
       - name: Checkout specification PR source
         uses: actions/checkout@v7
