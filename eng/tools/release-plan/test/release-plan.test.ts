@@ -69,7 +69,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: JSON.stringify({ id: 101, apiVersion: "2026-06-01-preview" }),
@@ -88,12 +88,12 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",
         },
-      "release-plan create --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --release-month July 2026 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --force false --test-release false --output json":
+      "release-plan create --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --release-month July 2026 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --test-release false --output json":
         {
           code: 0,
           out: JSON.stringify({ id: 999, release_plan_link: "https://example.test/999" }),
@@ -113,12 +113,12 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",
         },
-      "release-plan create --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --release-month July 2026 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --force false --test-release true --output json":
+      "release-plan create --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --release-month July 2026 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --test-release true --output json":
         {
           code: 0,
           out: JSON.stringify({ id: 1000, release_plan_link: "https://example.test/1000" }),
@@ -160,12 +160,12 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",
         },
-      "release-plan create --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --release-month July 2026 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --force false --test-release false --output json":
+      "release-plan create --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --release-month July 2026 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --test-release false --output json":
         {
           code: 0,
           out: "{ broken json",
@@ -182,12 +182,12 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",
         },
-      "release-plan create --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --release-month July 2026 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --force false --test-release false --output json":
+      "release-plan create --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --release-month July 2026 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --test-release false --output json":
         {
           code: 1,
           out: "",
@@ -206,12 +206,12 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",
         },
-      "release-plan create --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --release-month December 2025 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --force false --test-release false --output json":
+      "release-plan create --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --release-month December 2025 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --test-release false --output json":
         {
           code: 0,
           out: JSON.stringify({ id: 500 }),
@@ -244,7 +244,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",

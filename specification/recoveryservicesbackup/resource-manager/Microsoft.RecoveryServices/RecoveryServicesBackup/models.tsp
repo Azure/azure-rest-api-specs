@@ -3162,6 +3162,17 @@ model ILRRequest {
 }
 
 /**
+ * Parameters for the listInstantItemRecoveryOperationResult action.
+ */
+@added(Versions.v2026_08_01)
+model InstantItemRecoveryOperationResultRequest {
+  /**
+   * Operation ID returned by the prior provisionInstantItemRecovery action whose iSCSI mount scripts are to be retrieved.
+   */
+  provisionInstantItemRecoveryOperationId: string;
+}
+
+/**
  * List of WorkloadProtectableItem resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -8459,6 +8470,7 @@ model ClientScriptForConnect {
   /**
    * File content of the client script for file / folder restore.
    */
+  @secret
   scriptContent?: string;
 
   /**
