@@ -4097,11 +4097,35 @@ op replaceprivateDnsZoneGroupsList(
 
 @@clientName(Microsoft.Network.Metric, "ExpressRoutePeeringMetric", "csharp");
 
+@@clientName(
+  Microsoft.Network.PeeringHealth,
+  "ExpressRouteCircuitPeeringHealth",
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Network.PeeringStats,
+  "ExpressRouteCircuitPeeringStats",
+  "csharp"
+);
+
 @@clientName(Microsoft.Network.PeeringStats.timestamp, "CapturedOn", "csharp");
 
 @@clientName(
   Microsoft.Network.PortMapping,
   "ExpressRouteCircuitPortMapping",
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.MigrateExpressRouteCircuitRequest.targetPeeringLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.MigrateExpressRouteCircuitValidateAndHealthCheckRequest.targetPeeringLocation,
+  Azure.Core.azureLocation,
   "csharp"
 );
 
