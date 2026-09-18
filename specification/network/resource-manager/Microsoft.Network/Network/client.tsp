@@ -54,21 +54,6 @@ namespace Common {
   }
 }
 
-namespace Microsoft.Network {
-  /**
-   * Enable Only IPv6 Peering state retained for C# API compatibility.
-   */
-  union EnableOnlyIPv6PeeringState {
-    /** IPv6-only peering is enabled. */
-    Enabled: "Enabled",
-
-    /** IPv6-only peering is disabled. */
-    Disabled: "Disabled",
-
-    string,
-  }
-}
-
 @@clientLocation(
   Microsoft.Compute.NetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
   Microsoft.Network.NetworkInterfaces,
@@ -4032,12 +4017,6 @@ op replaceprivateDnsZoneGroupsList(
 @@clientName(
   Common.LoadBalancingRulePropertiesFormat,
   "LoadBalancingRuleProperties",
-  "csharp"
-);
-
-@@alternateType(
-  Microsoft.Network.HubVirtualNetworkConnectionProperties.enableOnlyIPv6Peering,
-  Microsoft.Network.EnableOnlyIPv6PeeringState,
   "csharp"
 );
 
