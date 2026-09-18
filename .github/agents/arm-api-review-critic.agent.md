@@ -982,7 +982,7 @@ auto-invalidates if the underlying rule moves.
   required on tracked resources, not on proxy or extension resources.
   Anchor: `arm-api-review.instructions.md`, provisioning-state section.
 - **Enum value additions inside `x-ms-enum.modelAsString: true`.** Not a
-  breaking change. Anchor: `documentation/Breaking changes guidelines.md`.
+  breaking change. Anchor: [Azure Breaking Changes Policy](https://aka.ms/AzBreakingChangesPolicy).
 - **Collection GET paging parameters `$top` and `$skipToken`.** These are
   RPC-defined paging parameters and are allowed alongside `api-version` and
   `$filter`. Drop a finding whose only claim is that either parameter is
