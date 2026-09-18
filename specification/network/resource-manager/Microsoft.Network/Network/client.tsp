@@ -4043,7 +4043,7 @@ op replaceprivateDnsZoneGroupsList(
 
 @@clientName(
   Microsoft.Network.AzureFirewallPropertiesFormat.aiSecurityAddOn,
-  "EnableAISecurityAddOn",
+  "IsAISecurityAddOnEnabled",
   "csharp"
 );
 
@@ -4097,7 +4097,7 @@ op replaceprivateDnsZoneGroupsList(
 
 @@clientName(Microsoft.Network.Metric, "ExpressRoutePeeringMetric", "csharp");
 
-@@clientName(Microsoft.Network.PeeringStats.timestamp, "CapturedAt", "csharp");
+@@clientName(Microsoft.Network.PeeringStats.timestamp, "CapturedOn", "csharp");
 
 @@clientName(
   Microsoft.Network.PortMapping,
