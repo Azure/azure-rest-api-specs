@@ -165,9 +165,9 @@ namespace ContainerAppsSandbox {
     /** Represents the type of volume. */
     type: VolumeType;
 
-    /** Volume name assigned from the route by the service. */
+    /** The volume name. */
     @key("volumeName")
-    @visibility(Lifecycle.Read)
+    @visibility(Lifecycle.Create, Lifecycle.Read)
     volumeName: VolumeName;
 
     /** Customer-defined labels for the volume. */
