@@ -214,13 +214,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The successful response for the postConnection operation.",
+            "description": "The HTTP 200 response for the postConnection operation.",
             "schema": {
               "$ref": "#/definitions/Connection"
             }
           },
           "201": {
-            "description": "The successful response for the postConnection operation.",
+            "description": "The HTTP 201 response for the postConnection operation.",
             "schema": {
               "$ref": "#/definitions/Connection"
             }
@@ -12393,9 +12393,22 @@
         "body"
       ]
     },
-    "PostConnectionResult": {
+    "PostConnectionResult200": {
       "type": "object",
-      "description": "The successful response for the postConnection operation.",
+      "description": "The HTTP 200 response for the postConnection operation.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/Connection",
+          "description": "The returned connection."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "PostConnectionResult201": {
+      "type": "object",
+      "description": "The HTTP 201 response for the postConnection operation.",
       "properties": {
         "body": {
           "$ref": "#/definitions/Connection",
