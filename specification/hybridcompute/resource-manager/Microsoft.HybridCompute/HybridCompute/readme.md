@@ -26,7 +26,7 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-07-15
+tag: package-2026-09-01
 directive:
   - from: HybridCompute.json
     where: $.definitions.MachineInstallPatchesParameters.properties.maximumDuration
@@ -76,6 +76,15 @@ directive:
   # we don't want enable PATCH for run command
   - remove-operation: MachineRunCommands_Update
 
+```
+
+### Tag: package-2026-09-01
+
+These settings apply only when `--tag=package-2026-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-09-01'
+input-file:
+  - stable/2026-09-01/openapi.json
 ```
 
 ### Tag: package-2026-07-15

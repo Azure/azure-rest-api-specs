@@ -3931,6 +3931,116 @@ model MachineExtensionsListResult is Azure.Core.Page<MachineExtension>;
 
 model MachineRunCommandsListResult is Azure.Core.Page<MachineRunCommand>;
 
+/**
+ * The properties of a VM application. Exactly one gallery application reference must be specified when creating or replacing the resource.
+ */
+@added(Versions.v2026_09_01)
+model VmApplicationProperties {
+  /**
+   * The order in which the application is installed.
+   */
+  order?: int32;
+
+  /**
+   * The resource ID of the gallery application version. The version name can be `latest` or a specific version. This property is mutually exclusive with sharedGalleryApplicationId and communityGalleryApplicationId.
+   */
+  packageReferenceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/galleries/applications/versions";
+    }
+  ]>;
+
+  /**
+   * The identifier of a direct shared gallery application version. Use `/sharedGalleries/{sharedGalleryUniqueName}/applications/{applicationName}/versions/{versionName}`, where the version name can be `latest` or a specific version. This property is mutually exclusive with packageReferenceId and communityGalleryApplicationId.
+   */
+  sharedGalleryApplicationId?: string;
+
+  /**
+   * The identifier of a community gallery application version. Use `/communityGalleries/{communityGalleryPublicName}/applications/{applicationName}/versions/{versionName}`, where the version name can be `latest` or a specific version. This property is mutually exclusive with packageReferenceId and sharedGalleryApplicationId.
+   */
+  communityGalleryApplicationId?: string;
+
+  /**
+   * The URI of configuration data that replaces the package's default configuration.
+   */
+  configurationReference?: url;
+
+  /**
+   * Indicates whether an application operation failure causes the deployment to fail.
+   */
+  treatFailureAsDeploymentFailure?: boolean;
+
+  /**
+   * The provisioning state of the VM application.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * The instance view of the VM application.
+   */
+  @visibility(Lifecycle.Read)
+  instanceView?: VmApplicationInstanceView;
+}
+
+/**
+ * The instance view of a VM application.
+ */
+@added(Versions.v2026_09_01)
+model VmApplicationInstanceView {
+  /**
+   * The application name.
+   */
+  name?: string;
+
+  /**
+   * The application version.
+   */
+  version?: string;
+
+  /**
+   * The current installation result.
+   */
+  result?: string;
+
+  /**
+   * The recent actions performed for the application.
+   */
+  @identifiers(#[])
+  actionsPerformed?: VmApplicationInstanceViewAction[];
+}
+
+/**
+ * An action recently performed for a VM application.
+ */
+@added(Versions.v2026_09_01)
+model VmApplicationInstanceViewAction {
+  /**
+   * The operation that was performed.
+   */
+  operation?: string;
+
+  /**
+   * The result of the operation.
+   */
+  result?: string;
+}
+
+/**
+ * The update request for a VM application.
+ */
+@added(Versions.v2026_09_01)
+model VmApplicationUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel<
+  VmApplication,
+  VmApplicationProperties
+>;
+
+/**
+ * A page of VM applications.
+ */
+@added(Versions.v2026_09_01)
+model VmApplicationsListResult is Azure.Core.Page<VmApplication>;
+
 model LicensesListResult is Azure.Core.Page<License>;
 
 model LicenseProfilesListResult is Azure.Core.Page<LicenseProfile>;
