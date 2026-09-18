@@ -1,5 +1,4 @@
-import { mockFolder, mockSimpleGit } from "./mocks.ts";
-mockSimpleGit();
+import { mockFolder } from "./mocks.ts";
 
 import * as simpleGit from "simple-git";
 
