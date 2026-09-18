@@ -9451,56 +9451,6 @@
         ]
       }
     },
-    "AfdUrlSigningAction": {
-      "type": "object",
-      "description": "Defines the url signing action for the delivery rule.",
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/AfdUrlSigningActionParameters",
-          "description": "Defines the parameters for the action."
-        }
-      },
-      "required": [
-        "parameters"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeliveryRuleAction"
-        }
-      ],
-      "x-ms-discriminator-value": "AfdUrlSigning"
-    },
-    "AfdUrlSigningActionParameters": {
-      "type": "object",
-      "description": "Defines the parameters for the Url Signing action.",
-      "properties": {
-        "typeName": {
-          "$ref": "#/definitions/TypeName"
-        },
-        "keyGroupReference": {
-          "$ref": "#/definitions/ResourceReference",
-          "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/keyGroups/{keyGroupName}"
-        },
-        "algorithm": {
-          "$ref": "#/definitions/Algorithm",
-          "description": "Algorithm to use for URL signing"
-        },
-        "parameterNameOverride": {
-          "type": "array",
-          "description": "Defines which query string parameters in the url to be considered for expires, key id etc.",
-          "items": {
-            "$ref": "#/definitions/UrlSigningParamIdentifier"
-          },
-          "x-ms-identifiers": [
-            "paramName"
-          ]
-        }
-      },
-      "required": [
-        "typeName",
-        "keyGroupReference"
-      ]
-    },
     "Algorithm": {
       "type": "string",
       "description": "Algorithm to use for URL signing",
@@ -11298,8 +11248,7 @@
         "UrlSigning",
         "OriginGroupOverride",
         "RouteConfigurationOverride",
-        "EdgeAction",
-        "AfdUrlSigning"
+        "EdgeAction"
       ],
       "x-ms-enum": {
         "name": "DeliveryRuleActionName",
@@ -11344,10 +11293,6 @@
           {
             "name": "EdgeAction",
             "value": "EdgeAction"
-          },
-          {
-            "name": "AfdUrlSigning",
-            "value": "AfdUrlSigning"
           }
         ]
       }
@@ -17952,22 +17897,6 @@
           {
             "name": "RemoveNulls",
             "value": "RemoveNulls"
-          }
-        ]
-      }
-    },
-    "TypeName": {
-      "type": "string",
-      "enum": [
-        "DeliveryRuleAfdUrlSigningActionParameters"
-      ],
-      "x-ms-enum": {
-        "name": "TypeName",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "DeliveryRuleAfdUrlSigningActionParameters",
-            "value": "DeliveryRuleAfdUrlSigningActionParameters"
           }
         ]
       }

@@ -645,6 +645,8 @@ union DeliveryRuleActionName {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_08_01_preview)
   AfdUrlSigning: "AfdUrlSigning",
 }
 
@@ -1580,6 +1582,8 @@ union CertificateRevocationCheckEnabledState {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_01_preview)
 union TypeName {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -6997,6 +7001,8 @@ model AfdSecretMtlsCertificateChain extends SecretParameters {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_01_preview)
 model AfdUrlSigningAction extends DeliveryRuleAction {
   /**
    * Defines the parameters for the action.
@@ -7015,6 +7021,8 @@ model AfdUrlSigningAction extends DeliveryRuleAction {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_01_preview)
 model AfdUrlSigningActionParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   typeName: TypeName;
