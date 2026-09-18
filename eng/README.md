@@ -34,8 +34,18 @@ Below are code convention we strive to follow in `eng` directory:
 - Install dependencies from the repo root with `pnpm install`. There is a single
   top-level `pnpm-lock.yaml`; do not add other lock files.
 - We maintain a single `pnpm-workspace.yaml` at the root that lists workspace packages
-  and a shared dependency `catalog:`. Align dependency versions through the catalog
-  rather than per-package version strings where possible.
+  and a shared dependency `catalog:`. All external dependencies must reference the
+  catalog with `catalog:` (or `catalog:<name>` for a named catalog); use `workspace:`
+  for local workspace dependencies.
+- Run `pnpm check:catalog` from the repo root to validate catalog usage.
+  The Workspace Validation workflow runs this check in CI using
+  `node ./.github/workflows/cmd/check-catalog.ts` to avoid pnpm's automatic dependency
+  installation when running scripts. The validator only needs Node.js and pnpm.
+  It checks `dependencies`, `devDependencies`, `peerDependencies`, and
+  `optionalDependencies` in the root and all packages selected by pnpm. Manifests
+  outside the workspace, including test fixtures and specification projects, are
+  not checked. pnpm validates catalog entries themselves during installation.
+  `catalogMode: strict` only controls `pnpm add`, so it does not replace this check.
 - When you add, modify, or remove `package.json` dependencies, run `pnpm install` and
   commit the resulting `pnpm-lock.yaml` changes so the lock file stays in sync and free
   of unused dependencies.
