@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2026-10-01",
+    "fabricName": "Azure",
+    "operationId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "testVault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;testRG;testvmName/protectedItems/VM;iaasvmcontainerv2;testRG;testvmName/recoveryPoints/348916168024334",
+            "name": "348916168024334",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints",
+            "properties": {
+              "objectType": "IaasVMRPExtendedInfo",
+              "osDisk": {
+                "diskSizeInGB": 127,
+                "lun": -1,
+                "name": "testvmName_OsDisk_1",
+                "storageType": "Premium_LRS"
+              },
+              "dataDisks": [
+                {
+                  "diskSizeInGB": 1024,
+                  "lun": 0,
+                  "name": "testvmName_DataDisk_0",
+                  "storageType": "StandardSSD_LRS"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2026-10-01",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/getRPExtendedInfoOperationResult/00000000-0000-0000-0000-000000000000?api-version=2026-10-01",
+        "Retry-After": 10
+      }
+    }
+  },
+  "operationId": "RecoveryPoints_GetRPExtendedInfoOperationResult",
+  "title": "Get RP Extended Info Operation Result"
+}
