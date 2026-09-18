@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sample-rg",
+    "name": "sample-func",
+    "versionName": "release-2026-10-03",
+    "api-version": "2026-10-01-preview",
+    "resource": {
+      "properties": {
+        "functionAppVersionConfig": {
+          "runtime": {
+            "name": "custom",
+            "version": "1"
+          },
+          "deployment": {
+            "appArtifact": {
+              "type": "containerImage",
+              "reference": "sample.azurecr.io/functions/sample@sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+            }
+          },
+          "appSettings": {
+            "FUNCTIONS_WORKER_RUNTIME": "custom"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-2026-10-03",
+        "name": "release-2026-10-03",
+        "type": "Microsoft.Web/sites/functionAppVersions",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "versionState": "Ready",
+          "functionAppVersionConfig": {
+            "runtime": {
+              "name": "custom",
+              "version": "1"
+            },
+            "deployment": {
+              "appArtifact": {
+                "type": "containerImage",
+                "reference": "sample.azurecr.io/functions/sample@sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+              }
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Web/locations/westus/functionAppVersionOperations/22222222-2222-2222-2222-222222222222?api-version=2026-10-01-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-2026-10-03",
+        "name": "release-2026-10-03",
+        "type": "Microsoft.Web/sites/functionAppVersions",
+        "properties": {
+          "provisioningState": "Creating",
+          "versionState": "Validating",
+          "functionAppVersionConfig": {
+            "runtime": {
+              "name": "custom",
+              "version": "1"
+            },
+            "deployment": {
+              "appArtifact": {
+                "type": "containerImage",
+                "reference": "sample.azurecr.io/functions/sample@sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "FunctionAppVersions_CreateOrUpdate",
+  "title": "Create a container Function App version"
+}

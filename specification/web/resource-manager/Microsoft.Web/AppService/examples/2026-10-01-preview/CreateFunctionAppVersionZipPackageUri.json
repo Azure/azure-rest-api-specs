@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sample-rg",
+    "name": "sample-func",
+    "versionName": "release-2026-10-02",
+    "api-version": "2026-10-01-preview",
+    "resource": {
+      "properties": {
+        "functionAppVersionConfig": {
+          "runtime": {
+            "name": "python",
+            "version": "3.12"
+          },
+          "deployment": {
+            "appArtifact": {
+              "type": "zipPackage"
+            },
+            "packageUri": "https://storage.example.net/packages/release.zip?<redacted>",
+            "remoteBuild": true
+          },
+          "appSettings": {
+            "SampleSetting": "sample-value"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-2026-10-02",
+        "name": "release-2026-10-02",
+        "type": "Microsoft.Web/sites/functionAppVersions",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "versionState": "Ready",
+          "functionAppVersionConfig": {
+            "runtime": {
+              "name": "python",
+              "version": "3.12"
+            },
+            "deployment": {
+              "appArtifact": {
+                "type": "zipPackage"
+              }
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Web/locations/westus/functionAppVersionOperations/11111111-1111-1111-1111-111111111111?api-version=2026-10-01-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-2026-10-02",
+        "name": "release-2026-10-02",
+        "type": "Microsoft.Web/sites/functionAppVersions",
+        "properties": {
+          "provisioningState": "Creating",
+          "versionState": "Building",
+          "functionAppVersionConfig": {
+            "runtime": {
+              "name": "python",
+              "version": "3.12"
+            },
+            "deployment": {
+              "appArtifact": {
+                "type": "zipPackage"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "FunctionAppVersions_CreateOrUpdate",
+  "title": "Create a Function App version from a ZIP package URI"
+}
