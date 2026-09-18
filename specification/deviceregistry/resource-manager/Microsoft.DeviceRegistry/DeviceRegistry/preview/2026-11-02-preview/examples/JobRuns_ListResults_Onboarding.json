@@ -1,0 +1,54 @@
+{
+  "title": "List Results for an Onboarding Update Job Run",
+  "description": "Browse the results of an OnboardingUpdate job run. Onboarding devices have no ADR device resource, so each entry is identified by resourceType 'Microsoft.DeviceRegistry/namespaces/onboardingDevices' and the onboarding device identifier (externalDeviceId).",
+  "operationId": "JobRuns_ListResults",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "body": {},
+    "jobName": "adr-job-onboarding-01",
+    "namespaceName": "namespace-1",
+    "resourceGroupName": "myResourceGroup",
+    "runName": "7f1c0b2a-3d4e-4f5a-9b6c-1d2e3f4a5b6c",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceExternalId": "contoso-device-000123",
+            "resourceType": "Microsoft.DeviceRegistry/namespaces/onboardingDevices",
+            "status": "Succeeded"
+          },
+          {
+            "installResult": {
+              "failureOrigin": "DEVICE",
+              "outcome": "FAILED",
+              "resultCode": -7,
+              "extendedResultCodes": "c00e6101",
+              "resultDetails": "Insufficient storage to apply the onboarding update.",
+              "stepResults": [
+                {
+                  "failureOrigin": "DEVICE",
+                  "outcome": "FAILED",
+                  "resultCode": -7,
+                  "extendedResultCodes": "c00e6101",
+                  "resultDetails": "Apply step failed: not enough free space.",
+                  "updateId": {
+                    "name": "onboarding-firmware",
+                    "provider": "contoso",
+                    "version": "1.4.2"
+                  }
+                }
+              ]
+            },
+            "reason": "APPLY_FAILED",
+            "resourceExternalId": "contoso-device-000456",
+            "resourceType": "Microsoft.DeviceRegistry/namespaces/onboardingDevices",
+            "status": "Failed"
+          }
+        ]
+      }
+    }
+  }
+}

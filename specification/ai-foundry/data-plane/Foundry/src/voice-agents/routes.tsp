@@ -468,6 +468,15 @@ interface AgentEndpointConversations {
   >;
 }
 
+/** Time filters for listing durable inbound telephony calls. */
+alias TelephonyCallListTimeQueryParameters = {
+  /** Includes calls that started at or after this Unix timestamp in seconds. */
+  @query started_after?: FoundryTimestamp;
+
+  /** Includes calls that started at or before this Unix timestamp in seconds. */
+  @query started_before?: FoundryTimestamp;
+};
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This interface combines agent-contained binding and call resources, call actions, and a singleton transfer-target collection, so it does not map to one standard resource operation template."
 @tag("Agent Telephony")
 interface AgentTelephony {
@@ -592,12 +601,7 @@ interface AgentTelephony {
       /** Filters calls by lifecycle status. */
       @query status?: TelephonyCallStatus;
 
-      /** Includes calls that started at or after this Unix timestamp in seconds. */
-      @query started_after?: FoundryTimestamp;
-
-      /** Includes calls that started at or before this Unix timestamp in seconds. */
-      @query started_before?: FoundryTimestamp;
-
+      ...TelephonyCallListTimeQueryParameters;
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<TelephonyCallSummary>
