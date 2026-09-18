@@ -4043,7 +4043,7 @@ op replaceprivateDnsZoneGroupsList(
 
 @@clientName(
   Microsoft.Network.AzureFirewallPropertiesFormat.aiSecurityAddOn,
-  "EnableAiSecurityAddOn",
+  "EnableAISecurityAddOn",
   "csharp"
 );
 
