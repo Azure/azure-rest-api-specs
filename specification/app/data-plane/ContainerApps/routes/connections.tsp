@@ -80,15 +80,26 @@ alias ConnectionGetOperations = ResourceOperations<
   GetConnectionErrors
 >;
 
-/** The successful response for the postConnection operation. */
-model PostConnectionResult {
-  /** The HTTP success status code. */
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The implementation returns only 200 or 201 on success: 201 when createResult.IsNew is true, otherwise 200."
-  @statusCode statusCode: 200 | 201;
+/** The HTTP 200 response for the postConnection operation. */
+model PostConnectionResult200 {
+  /** The HTTP 200 status code. */
+  @statusCode statusCode: 200;
 
   /** The returned connection. */
   @body body: Connection;
 }
+
+/** The HTTP 201 response for the postConnection operation. */
+model PostConnectionResult201 {
+  /** The HTTP 201 status code. */
+  @statusCode statusCode: 201;
+
+  /** The returned connection. */
+  @body body: Connection;
+}
+
+/** Successful responses for the postConnection operation. */
+alias PostConnectionResult = PostConnectionResult200 | PostConnectionResult201;
 
 /** Error responses for the postConnection operation. */
 alias PostConnectionErrors =
