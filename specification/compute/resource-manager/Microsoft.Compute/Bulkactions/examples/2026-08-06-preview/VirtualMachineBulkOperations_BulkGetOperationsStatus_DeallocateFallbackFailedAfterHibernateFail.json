@@ -1,5 +1,5 @@
 {
-  "title": "05 - Failed deallocation fallback after hibernation fails",
+  "title": "05 - Response with failed deallocation fallback after hibernation fails",
   "description": "A prior bulk Hibernate request set executionParameters.retryPolicy.onFailureAction to Deallocate. Bulk Actions attempted hibernation, which failed with OperationNotAllowed because the virtual machine was not configured for hibernation. It then attempted the configured Deallocate fallback, which also failed, with InternalOperationError from the Compute service. This example queries Get Operation Status using the original Hibernate operation ID after both attempts completed. HTTP 200 means the status lookup succeeded, not that either operation succeeded. The original operation remains Hibernate with state Failed and its error in resourceOperationError. The fallbackOperationInfo object separately records Deallocate with status Failed and the deallocation error in fallbackOperationInfo.error.",
   "operationId": "VirtualMachineBulkOperations_BulkGetOperationsStatus",
   "parameters": {
