@@ -4,6 +4,7 @@ namespace ContainerAppsSandbox {
   /** Parameters used to authorize a connection. */
   model AuthorizeConnectionContent {
     /** Provider-specific authorization parameters. */
+    @secret
     parameterValues: Record<string>;
   }
 
@@ -76,13 +77,13 @@ namespace ContainerAppsSandbox {
   /** Options for generating a connection consent link. */
   model GenerateConsentLinkContent {
     /** The URI to redirect to after consent completes. */
-    redirectUrl?: string;
+    redirectUrl?: url;
   }
 
   /** Consent link generated for connection authorization. */
   model GenerateConsentLinkResponse {
     /** The URL where a user grants consent for the connection. */
-    consentLink: string;
+    consentLink: url;
   }
 
   /** A runtime policy rule that activates a declared PolicyHookBinding. Supplied per-sandbox at creation time (e.g., "block mail to ceo@corp.com"). */

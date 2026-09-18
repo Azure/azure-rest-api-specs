@@ -51,6 +51,12 @@ alias GetSnapshotsCountErrors =
   | UnauthorizedErrorResult
   | InternalServerErrorResult;
 
+/** Shared operation traits for counting snapshots. */
+alias SnapshotCountOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  GetSnapshotsCountErrors
+>;
+
 /** Error responses for the getSnapshot operation. */
 alias GetSnapshotErrors =
   | UnauthorizedErrorResult
@@ -63,7 +69,6 @@ alias SnapshotGetOperations = ResourceOperations<
   GetSnapshotErrors
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The controller exposes a /count route, and DELETE may return either 202 or 204."
 @tag("snapshots")
 interface SnapshotsOperations {
   /** Deletes a snapshot by ID. */
@@ -79,15 +84,12 @@ interface SnapshotsOperations {
 
   /** Gets the total count of snapshots. */
   @summary("Gets the total count of snapshots.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/snapshots/count")
-  @get
-  getSnapshotsCount is Foundations.Operation<
-    {
-      ...AzureResourceScope;
-    },
-    GetSnapshotsCountResult,
-    DataPlaneStandardTraits,
-    GetSnapshotsCountErrors
+  @action("count")
+  @actionSeparator("/")
+  getSnapshotsCount is SnapshotCountOperations.ResourceCollectionAction<
+    Snapshot,
+    {},
+    GetSnapshotsCountResult
   >;
 
   /** Gets a specific snapshot by ID. */

@@ -2645,6 +2645,13 @@
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Sandbox"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the created sandbox."
+              }
             }
           },
           "400": {
@@ -7010,7 +7017,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/snapshots/count": {
-      "get": {
+      "post": {
         "operationId": "SnapshotsOperations_GetSnapshotsCount",
         "tags": [
           "snapshots"
@@ -7022,18 +7029,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The HTTP 200 response for the getSnapshotsCount operation.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SnapshotCountResponse"
             }
@@ -7210,6 +7229,13 @@
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Volume"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the created volume."
+              }
             }
           },
           "400": {
@@ -8364,10 +8390,12 @@
       "properties": {
         "parameterValues": {
           "type": "object",
+          "format": "password",
           "description": "Provider-specific authorization parameters.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -11038,6 +11066,7 @@
       "properties": {
         "redirectUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The URI to redirect to after consent completes."
         }
       }
@@ -11048,6 +11077,7 @@
       "properties": {
         "consentLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL where a user grants consent for the connection."
         }
       },

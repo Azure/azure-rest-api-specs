@@ -9,6 +9,9 @@ namespace ContainerAppsSandbox {
     /** The HTTP 201 status code. */
     @statusCode statusCode: 201;
 
+    /** URL of the created sandbox. */
+    @header("Location") location: ResourceLocation<Sandbox>;
+
     /** Created sandbox. */
     @body body: Sandbox;
   }

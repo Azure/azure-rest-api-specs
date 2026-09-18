@@ -13,6 +13,7 @@ namespace ContainerAppsSandbox {
   /** Selected values from a secret. */
   model SecretPeekResponse {
     /** The sensitive key-value pairs stored in the secret. */
+    @secret
     values: Record<string>;
   }
 

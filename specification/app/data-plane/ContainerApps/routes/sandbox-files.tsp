@@ -218,7 +218,7 @@ interface SandboxFilesOperations {
   >;
 
   /** Writes a file to a running sandbox. The file is streamed directly from the request body. */
-  #suppress "@azure-tools/typespec-azure-core/byos" "PUT /sandboxes/{id}/files reads raw file bytes directly from Request.Body."
+  #suppress "@azure-tools/typespec-azure-core/byos" "POST /sandboxes/{id}/files reads raw file bytes directly from Request.Body."
   @summary("Writes a file to a running sandbox. The file is streamed directly from the request body.")
   @action("files")
   @actionSeparator("/")
