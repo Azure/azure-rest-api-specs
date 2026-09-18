@@ -5,7 +5,7 @@
     "api-version": "2025-11-15-preview",
     "Foundry-Features": "Evaluations=V1Preview",
     "name": "support_quality",
-    "jobId": "evalimprove_cost_001"
+    "job_id": "evalimprove_cost_001"
   },
   "responses": {
     "200": {
@@ -166,12 +166,12 @@
           "confirmation_status": "not_run"
         },
         "cost": {
-          "max_cost_usd": 10.000000,
-          "spent_usd": 8.200000,
-          "reconciled_usd": 7.700000,
-          "uncertain_usd": 0.500000,
-          "reserved_usd": 0.000000,
-          "remaining_usd": 1.800000,
+          "max_inference_cost_usd": 10.0,
+          "spent_usd": 8.2,
+          "reconciled_usd": 7.7,
+          "uncertain_usd": 0.5,
+          "reserved_usd": 0.0,
+          "remaining_usd": 1.8,
           "price_snapshot": {
             "id": "price_snapshot_20260917",
             "source": "service_catalog",
@@ -189,8 +189,8 @@
                   "region": "eastus2",
                   "deployment_type": "global_standard"
                 },
-                "input_usd_per_million_tokens": 2.500000,
-                "output_usd_per_million_tokens": 10.000000
+                "input_usd_per_million_tokens": 2.5,
+                "output_usd_per_million_tokens": 10.0
               },
               {
                 "resolved_model": {
@@ -200,8 +200,8 @@
                   "region": "eastus2",
                   "deployment_type": "global_standard"
                 },
-                "input_usd_per_million_tokens": 2.500000,
-                "output_usd_per_million_tokens": 10.000000
+                "input_usd_per_million_tokens": 2.5,
+                "output_usd_per_million_tokens": 10.0
               }
             ],
             "excluded_cost_categories": [
@@ -217,7 +217,7 @@
         "result": {
           "outcome": "incomplete",
           "confirmation_status": "not_run",
-          "stop_reason": "max_cost_reached",
+          "stop_reason": "max_inference_cost_usd_reached",
           "limitations": [
             "Independent confirmation did not run."
           ],
