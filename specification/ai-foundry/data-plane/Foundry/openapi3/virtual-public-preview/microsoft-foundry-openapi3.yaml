@@ -10958,7 +10958,7 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-  /evaluators/{name}/improvement_jobs/{jobId}:
+  /evaluators/{name}/improvement_jobs/{job_id}:
     get:
       operationId: Evaluators_getImprovementJob
       summary: Get an evaluator improvement job
@@ -10978,7 +10978,7 @@ paths:
           description: The evaluator name.
           schema:
             type: string
-        - name: jobId
+        - name: job_id
           in: path
           required: true
           description: The evaluator improvement job identifier.
@@ -11041,7 +11041,7 @@ paths:
           description: The evaluator name.
           schema:
             type: string
-        - name: jobId
+        - name: job_id
           in: path
           required: true
           description: The evaluator improvement job identifier.
@@ -11074,7 +11074,7 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-  /evaluators/{name}/improvement_jobs/{jobId}:cancel:
+  /evaluators/{name}/improvement_jobs/{job_id}:cancel:
     post:
       operationId: Evaluators_cancelImprovementJob
       summary: Cancel an evaluator improvement job
@@ -11094,7 +11094,7 @@ paths:
           description: The evaluator name.
           schema:
             type: string
-        - name: jobId
+        - name: job_id
           in: path
           required: true
           description: The evaluator improvement job identifier.
@@ -11131,7 +11131,7 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-  /evaluators/{name}/improvement_jobs/{jobId}:publish:
+  /evaluators/{name}/improvement_jobs/{job_id}:publish:
     post:
       operationId: Evaluators_publishImprovementCandidate
       summary: Publish an evaluator improvement candidate
@@ -11151,7 +11151,7 @@ paths:
           description: The evaluator name.
           schema:
             type: string
-        - name: jobId
+        - name: job_id
           in: path
           required: true
           description: The evaluator improvement job identifier.
@@ -11213,7 +11213,7 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-  /evaluators/{name}/improvement_jobs/{jobId}:reject:
+  /evaluators/{name}/improvement_jobs/{job_id}:reject:
     post:
       operationId: Evaluators_rejectImprovementCandidate
       summary: Reject an evaluator improvement candidate
@@ -11233,7 +11233,7 @@ paths:
           description: The evaluator name.
           schema:
             type: string
-        - name: jobId
+        - name: job_id
           in: path
           required: true
           description: The evaluator improvement job identifier.
@@ -54445,14 +54445,14 @@ components:
       type: object
       required:
         - max_candidate_attempts
-        - max_cost_usd
+        - max_inference_cost_usd
       properties:
         max_candidate_attempts:
           type: integer
           format: int32
           minimum: 1
           description: The maximum number of proposed candidate configurations, including structurally rejected proposals and deterministic calibration variants.
-        max_cost_usd:
+        max_inference_cost_usd:
           $ref: '#/components/schemas/EvaluatorImprovementUsdAmount'
           description: The exact maximum USD amount for model inference. It excludes ACA, storage, networking, deterministic analysis, and human review.
         approved_rate_override:
@@ -54622,7 +54622,7 @@ components:
     EvaluatorImprovementCostProgress:
       type: object
       required:
-        - max_cost_usd
+        - max_inference_cost_usd
         - spent_usd
         - reconciled_usd
         - uncertain_usd
@@ -54630,7 +54630,7 @@ components:
         - remaining_usd
         - price_snapshot
       properties:
-        max_cost_usd:
+        max_inference_cost_usd:
           $ref: '#/components/schemas/EvaluatorImprovementUsdAmount'
           description: The exact approved model-inference USD limit.
         spent_usd:
@@ -54647,11 +54647,11 @@ components:
           description: The conservative maximum cost held for admitted but unfinished model calls.
         remaining_usd:
           $ref: '#/components/schemas/EvaluatorImprovementUsdAmount'
-          description: 'The uncommitted amount: `max_cost_usd - spent_usd - reserved_usd`.'
+          description: 'The uncommitted amount: `max_inference_cost_usd - spent_usd - reserved_usd`.'
         price_snapshot:
           $ref: '#/components/schemas/EvaluatorImprovementPriceSnapshot'
           description: The frozen authoritative price schedule.
-      description: Exact model-inference budget progress. `spent_usd + reserved_usd + remaining_usd` equals `max_cost_usd`. `reconciled_usd` and `uncertain_usd` are identified subsets of `spent_usd` and must not be added to it.
+      description: Exact model-inference budget progress. `spent_usd + reserved_usd + remaining_usd` equals `max_inference_cost_usd`. `reconciled_usd` and `uncertain_usd` are identified subsets of `spent_usd` and must not be added to it.
     EvaluatorImprovementDatasetReference:
       type: object
       required:
@@ -54974,53 +54974,29 @@ components:
       type: object
       required:
         - outcome
-        - confirmation_status
-        - stop_reason
       properties:
         outcome:
           type: string
           enum:
             - incomplete
-        confirmation_status:
-          type: string
-          enum:
-            - not_run
-        stop_reason:
-          $ref: '#/components/schemas/EvaluatorImprovementIncompleteStopReason'
         candidate:
           $ref: '#/components/schemas/EvaluatorImprovementCandidateSnapshot'
           description: An eligible frozen finalist, when one existed before bounded work stopped.
       allOf:
         - $ref: '#/components/schemas/EvaluatorImprovementJobResult'
       description: A successful bounded result without a complete confirmation decision. It never represents confirmed no gain or missing labels by default.
-    EvaluatorImprovementIncompleteStopReason:
-      type: string
-      enum:
-        - max_candidate_attempts_reached
-        - max_cost_reached
-      description: Why an incomplete evaluator improvement result stopped before independent confirmation.
     EvaluatorImprovementInsufficientEvidenceResult:
       type: object
       required:
         - outcome
-        - confirmation_status
-        - candidate
-        - confirmation_assessment
       properties:
         outcome:
           type: string
           enum:
             - insufficient_evidence
-        confirmation_status:
-          type: string
-          enum:
-            - completed
         candidate:
           $ref: '#/components/schemas/EvaluatorImprovementCandidateSnapshot'
-          description: The frozen finalist assessed by independent confirmation.
-        confirmation_assessment:
-          $ref: '#/components/schemas/EvaluatorImprovementAssessment'
-          description: The completed independent confirmation assessment that established the evidence limitation.
+          description: The frozen finalist, when insufficiency was discovered during confirmation.
       allOf:
         - $ref: '#/components/schemas/EvaluatorImprovementJobResult'
       description: A successful result where evidence could not support the selected validation profile.
@@ -55948,7 +55924,8 @@ components:
             - confirmed_no_improvement
             - insufficient_evidence
             - max_candidate_attempts_reached
-            - max_cost_reached
+            - max_inference_cost_usd_reached
+            - confirmation_interrupted
       description: Why bounded evaluator improvement work stopped.
     EvaluatorImprovementStrategyDevelopmentEvidence:
       type: object
@@ -56036,9 +56013,10 @@ components:
         - approved_learned
       description: The provenance class of an evaluator improvement strategy.
     EvaluatorImprovementUsdAmount:
-      type: string
-      pattern: ^(0|[1-9][0-9]*)(\.[0-9]{1,6})?$
-      description: An exact non-negative USD decimal encoded as a JSON string with at most six fractional digits. The service converts this value to integer micro-USD internally.
+      type: number
+      format: decimal128
+      minimum: 0
+      description: An exact non-negative USD decimal. The service accepts at most six fractional digits and uses integer micro-USD internally.
     EvaluatorImprovementWeightChange:
       type: object
       required:
