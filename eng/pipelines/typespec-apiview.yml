@@ -26,6 +26,10 @@ jobs:
 
   - template: /eng/pipelines/templates/steps/use-node-version.yml
 
+  - script: npm run install-pnpm
+    displayName: Install pnpm
+    workingDirectory: $(Build.SourcesDirectory)
+
   - pwsh: |
       . $(Build.SourcesDirectory)/eng/scripts/Create-APIView.ps1
       New-TypeSpecAPIViewTokens `

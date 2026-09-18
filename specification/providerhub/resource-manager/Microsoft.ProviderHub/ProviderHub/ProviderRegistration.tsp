@@ -115,17 +115,6 @@ interface ProviderRegistrations {
       resourceActionName: string;
     }
   >;
-
-  /**
-   * Generates the new region frontload manifest.
-   */
-  @action("generateNewRegionFrontloadManifest")
-  newRegionFrontloadReleaseGenerateManifest is ArmResourceActionSync<
-    ProviderRegistration,
-    FrontloadPayload,
-    ArmResponse<ResourceProviderManifest>,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
 }
 
 @@doc(
@@ -144,8 +133,4 @@ interface ProviderRegistrations {
 @@doc(
   ProviderRegistrations.deleteResources::parameters.body,
   "The properties supplied to the DeleteResources operation."
-);
-@@doc(
-  ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest::parameters.body,
-  ""
 );
