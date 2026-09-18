@@ -1,9 +1,12 @@
 // TODO: Rename this file to "relocate-operations.tsp" (or similar), as it now contains both
 // GA and beta (preview) operations .
 
-// Relocates GA operations to stable subclients and preview operations under
-// Azure.AI.Projects.Beta.
+// This file moves all beta operations (preview routes) from the Azure.AI.Projects namespace to
+// a new namespace Azure.AI.Projects.Beta, thus creating a sub-client ".beta" in the emitted SDKs.
+// It is imported by the client.tsp file, which is used for emitting the Python and JS clients.
 // See https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#move-all-operations-to-root-client
+
+import "./ops-relocation-voice-agents.tsp";
 
 using Azure.ClientGenerator.Core;
 
@@ -89,160 +92,4 @@ namespace Azure.AI.Projects.Beta {
   @@clientLocation(Azure.AI.Projects.MemoryStores.listMemories, MemoryStores);
   @@clientLocation(Azure.AI.Projects.MemoryStores.deleteMemory, MemoryStores);
 
-  interface Agents {}
-  // Keep Voice Agent telephony management on the existing Agents sub-client.
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.createTelephonyBinding,
-    Agents
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.listTelephonyBindings,
-    Agents
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.getTelephonyBinding,
-    Agents
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.updateTelephonyBinding,
-    Agents
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.deleteTelephonyBinding,
-    Agents
-  );
-  @@clientLocation(Azure.AI.Projects.AgentTelephony.listTelephonyCalls, Agents);
-  @@clientLocation(Azure.AI.Projects.AgentTelephony.getTelephonyCall, Agents);
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.transferTelephonyCall,
-    Agents
-  );
-  @@clientLocation(Azure.AI.Projects.AgentTelephony.endTelephonyCall, Agents);
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.getTelephonyTransferTargets,
-    Agents
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.replaceTelephonyTransferTargets,
-    Agents
-  );
-  @@clientLocation(Azure.AI.Projects.Agents.generateAgent, Agents);
-
-  interface AgentTelephony {}
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.createTelephonyCallJob,
-    AgentTelephony
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.getTelephonyCallJob,
-    AgentTelephony
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.cancelTelephonyCallJob,
-    AgentTelephony
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.createTelephonyCampaign,
-    AgentTelephony
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.getTelephonyCampaign,
-    AgentTelephony
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.importTelephonyCampaignRecipients,
-    AgentTelephony
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.getTelephonyCampaignRecipientImport,
-    AgentTelephony
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.validateTelephonyCampaign,
-    AgentTelephony
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.publishTelephonyCampaign,
-    AgentTelephony
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.pauseTelephonyCampaign,
-    AgentTelephony
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.resumeTelephonyCampaign,
-    AgentTelephony
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.cancelTelephonyCampaign,
-    AgentTelephony
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentTelephony.getTelephonyOperation,
-    AgentTelephony
-  );
-
-  interface VoiceAgentWebSocket {}
-  @@clientLocation(
-    Azure.AI.Projects.VoiceAgentWebSocket.connectVoiceAgent,
-    VoiceAgentWebSocket
-  );
-
-  interface AgentEndpointConversations {}
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.listAgentConversations,
-    AgentEndpointConversations
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversation,
-    AgentEndpointConversations
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.deleteAgentConversation,
-    AgentEndpointConversations
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationResponses,
-    AgentEndpointConversations
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationResponse,
-    AgentEndpointConversations
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationResponseItems,
-    AgentEndpointConversations
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationItems,
-    AgentEndpointConversations
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItem,
-    AgentEndpointConversations
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemAudio,
-    AgentEndpointConversations
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemAudioContent,
-    AgentEndpointConversations
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationAudio,
-    AgentEndpointConversations
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationAudioContent,
-    AgentEndpointConversations
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemGeneratedAudioContent,
-    AgentEndpointConversations
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemGeneratedAudio,
-    AgentEndpointConversations
-  );
 }

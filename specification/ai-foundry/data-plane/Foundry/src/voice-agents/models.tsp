@@ -105,6 +105,7 @@ model VoiceResponseAudio {
 }
 
 @doc("Properties shared by persisted voice responses.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceResponseBase {
   ...OmitProperties<
     OpenAI.RealtimeResponse,
@@ -336,7 +337,7 @@ union VoiceAudioCodec {
   `/audio/content` route.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceItemAudioResponse {
+model VoiceAudioItem {
   @doc("The id of the conversation the item belongs to.")
   conversation_id: string;
 
@@ -371,7 +372,7 @@ model VoiceItemAudioResponse {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAudioStreamResponse {
+model VoiceAudioStream {
   @doc("The content type of the streamed audio.")
   @header("Content-Type")
   contentType: "audio/wav";
@@ -402,7 +403,7 @@ model VoiceRecordingChannelLayout {
   `/audio/content` route instead.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceRecordingResponse {
+model VoiceRecording {
   @doc("The id of the conversation this recording belongs to.")
   conversation_id: string;
 
@@ -432,17 +433,20 @@ model VoiceRecordingResponse {
 @doc("A service-generated telephony binding identifier.")
 @minLength(1)
 @maxLength(128)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyBindingId extends string;
 
 @doc("A service-generated telephony call identifier.")
 @minLength(1)
 @maxLength(128)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyCallId extends string;
 
 @doc("The unique name of a telephony transfer target.")
 @minLength(1)
 @maxLength(64)
 @pattern("^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyTransferTargetName extends string;
 
 @doc("A telephony provider supported by an agent binding. Known values are stable; additional values may be added over time.")
@@ -1352,18 +1356,6 @@ alias TelephonyTransferTargetsResponse = TelephonyTransferTargets & {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyCallJobId extends string;
 
-@doc("A service-generated outbound campaign identifier.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-scalar TelephonyCampaignId extends string;
-
-@doc("A service-generated outbound campaign recipient-import identifier.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-scalar TelephonyCampaignRecipientImportId extends string;
-
-@doc("A service-generated outbound telephony operation identifier.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-scalar TelephonyOperationId extends string;
-
 @doc("The type of destination for an outbound call.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyOutboundDestinationType {
@@ -1406,36 +1398,11 @@ model TelephonyOutboundRetryPolicy {
   max_attempts?: int32 = 1;
 }
 
-@doc("A retry policy with a fixed interval between outbound call attempts.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyOutboundFixedIntervalRetryPolicy
-  extends TelephonyOutboundRetryPolicy {
-  @doc("The fixed-interval retry strategy.")
-  type: TelephonyOutboundRetryPolicyType.fixed_interval;
-
-  @doc("The fixed delay in seconds between attempts. It must be 0 when `max_attempts` is 1, and from 60 through 86400 when retries are enabled.")
-  interval?: FoundryDurationSeconds;
-}
-
-@doc("The frozen retry policy returned for an outbound call or campaign.")
-@discriminator("type")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("TelephonyOutboundRetryPolicyResult", "csharp")
-model TelephonyOutboundRetryPolicyResponse {
-  @doc("The retry strategy.")
-  type: TelephonyOutboundRetryPolicyType;
-
-  @doc("The maximum number of provider attempts, including the first attempt.")
-  @minValue(1)
-  @maxValue(5)
-  max_attempts: int32;
-}
-
 @doc("The frozen fixed-interval retry policy returned for an outbound call or campaign.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("TelephonyOutboundFixedIntervalRetryPolicyResult", "csharp")
-model TelephonyOutboundFixedIntervalRetryPolicyResponse
-  extends TelephonyOutboundRetryPolicyResponse {
+model TelephonyOutboundFixedIntervalRetryPolicy
+  extends TelephonyOutboundRetryPolicy {
   @doc("The fixed-interval retry strategy.")
   type: TelephonyOutboundRetryPolicyType.fixed_interval;
 
@@ -1631,7 +1598,7 @@ model TelephonyCallJob {
   cancellation?: TelephonyCallJobCancellation;
 
   @doc("The frozen provider-attempt retry policy.")
-  retry_policy: TelephonyOutboundRetryPolicyResponse;
+  retry_policy: TelephonyOutboundRetryPolicy;
 
   @doc("The number of provider attempts created so far.")
   @minValue(0)
@@ -1664,320 +1631,3 @@ alias TelephonyCallJobAcceptedResponse = TypeSpec.Http.Response<202> &
     @header("Location") location: string;
     @header("Retry-After") retry_after: FoundryDurationSeconds;
   };
-
-@doc("When a published outbound campaign becomes eligible to dispatch calls.")
-union TelephonyCampaignScheduleType {
-  string,
-
-  @doc("Calls are eligible immediately after publication.")
-  immediate: "immediate",
-
-  @doc("Calls are eligible at the scheduled start instant.")
-  scheduled: "scheduled",
-}
-
-@doc("The schedule for an outbound campaign.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignSchedule {
-  @doc("Whether calls are eligible immediately after publication or at a future instant.")
-  type: TelephonyCampaignScheduleType;
-
-  @doc("The scheduled start instant. Required only when `type` is `scheduled`.")
-  start_at?: FoundryTimestamp;
-}
-
-@doc("Customer-controlled configuration for an outbound campaign.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignConfiguration {
-  @doc("A customer-visible name for the campaign.")
-  @minLength(1)
-  display_name: string;
-
-  @doc("The Foundry connection name in the current project used to originate campaign calls. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required.")
-  @minLength(1)
-  @maxLength(256)
-  connection_name: string;
-
-  @doc("The caller identity used to originate campaign calls. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.")
-  @minLength(1)
-  source: TelephonyOutboundSource;
-
-  @doc("An optional customer-declared purpose for campaign calls.")
-  @minLength(1)
-  purpose?: string;
-
-  @doc("When the published campaign becomes eligible to dispatch calls.")
-  schedule?: TelephonyCampaignSchedule;
-}
-
-@doc("A request to create a draft outbound campaign.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("CreateTelephonyCampaignContent", "csharp")
-@example(#{
-  display_name: "Twilio renewal reminders",
-  connection_name: "telephony-twilio",
-  source: "+14255550100",
-})
-@example(#{
-  display_name: "Teams Phone renewal reminders",
-  connection_name: "telephony-acs",
-  source: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-})
-model CreateTelephonyCampaignRequest {
-  ...TelephonyCampaignConfiguration;
-
-  @doc("The provider-attempt retry policy inherited by every materialized call job.")
-  retry_policy?: TelephonyOutboundRetryPolicy;
-}
-
-@doc("The immutable-configuration lifecycle status of an outbound campaign.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyCampaignConfigurationStatus {
-  string,
-  draft: "draft",
-  importing: "importing",
-  validating: "validating",
-  publishing: "publishing",
-  published: "published",
-  publish_failed: "publish_failed",
-}
-
-@doc("The execution lifecycle status of a published outbound campaign.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyCampaignExecutionStatus {
-  string,
-  none: "none",
-  scheduled: "scheduled",
-  running: "running",
-  paused: "paused",
-  completed: "completed",
-  failed: "failed",
-  cancelled: "cancelled",
-}
-
-@doc("Aggregate call-job counts for an outbound campaign.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignCallJobCounts {
-  total: int64;
-  pending: int64;
-  in_progress: int64;
-  completed: int64;
-  failed: int64;
-  blocked: int64;
-  cancelled: int64;
-  expired: int64;
-}
-
-@doc("A durable outbound campaign owned by a voice agent.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaign {
-  ...TelephonyCampaignConfiguration;
-  id: TelephonyCampaignId;
-  object: "telephony.campaign";
-  agent_name: string;
-  configuration_status: TelephonyCampaignConfigurationStatus;
-  execution_status: TelephonyCampaignExecutionStatus;
-  retry_policy: TelephonyOutboundRetryPolicyResponse;
-  latest_successful_validation_id?: string;
-  active_validation_id?: string;
-  active_recipient_import_id?: TelephonyCampaignRecipientImportId;
-  published_at?: FoundryTimestamp;
-  call_job_counts: TelephonyCampaignCallJobCounts;
-  created_at: FoundryTimestamp;
-  updated_at: FoundryTimestamp;
-}
-
-alias TelephonyCampaignCreatedResponse = TypeSpec.Http.Response<201> &
-  TelephonyCampaign & {
-    @header("Location") location: string;
-  };
-
-@doc("A Dataset source for campaign recipient import.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignRecipientImportSource {
-  type: "dataset";
-  @minLength(1) dataset_name: string;
-  @minLength(1) dataset_version: string;
-
-  @doc("A relative path to a CSV, JSON array, or JSONL file in the Dataset version.")
-  @minLength(1)
-  file_name: string;
-
-  format: TelephonyCampaignRecipientImportFormat;
-}
-
-@doc("A supported Dataset recipient file format.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyCampaignRecipientImportFormat {
-  string,
-
-  @doc("A comma-separated values file.")
-  csv: "csv",
-
-  @doc("A JSON file containing an array of recipient objects.")
-  json: "json",
-
-  @doc("A JSON Lines file containing one recipient object per line.")
-  jsonl: "jsonl",
-}
-
-@doc("Source fields or CSV columns mapped into each campaign recipient. Every unmapped CSV column or JSON/JSONL top-level property becomes a same-named structured input. CSV cells are preserved as strings until Agent-declared inputs are parsed according to their schemas; additional inputs remain strings.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignRecipientMapping {
-  @doc("The source field containing the destination E.164 phone number. Defaults to `destination`. The source field is required for each recipient.")
-  @minLength(1)
-  destination: string = "destination";
-
-  @doc("The source field containing the recipient key. Defaults to `recipient_key`. The source field is required for each recipient.")
-  @minLength(1)
-  recipient_key: string = "recipient_key";
-
-  @doc("The source field containing the recipient item key. Defaults to `recipient_item_key`. The source field is required when `duplicate_handling` is `keep_each`; otherwise it may be absent.")
-  recipient_item_key?: string = "recipient_item_key";
-
-  @doc("The source field containing the earliest dispatch time as a Unix timestamp in seconds. Defaults to `not_before`. If the source field is absent, no per-recipient start bound is applied.")
-  not_before?: string = "not_before";
-
-  @doc("The source field containing the expiry time as a Unix timestamp in seconds. Defaults to `expires_at`. If the source field is absent, no per-recipient expiry bound is applied.")
-  expires_at?: string = "expires_at";
-}
-
-@doc("Optional source-field mappings for a recipient import. Each omitted entry uses its same-named source field.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("TelephonyCampaignRecipientMappingContent", "csharp")
-model TelephonyCampaignRecipientMappingRequest
-  is OptionalProperties<TelephonyCampaignRecipientMapping>;
-
-@doc("How duplicate recipient keys in an import are handled.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyCampaignDuplicateHandling {
-  string,
-
-  @doc("Reject duplicate recipient keys.")
-  reject: "reject",
-
-  @doc("Keep each recipient entry, distinguishing duplicates by recipient item key.")
-  keep_each: "keep_each",
-
-  @doc("Merge entries with the same recipient key.")
-  merge: "merge",
-}
-
-@doc("A request to import campaign recipients from a Dataset CSV, JSON array, or JSONL file. Imported Agent-declared structured inputs follow the Agent definition's schema, required, and default-value semantics.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("ImportTelephonyCampaignRecipientsContent", "csharp")
-model ImportTelephonyCampaignRecipientsRequest {
-  source: TelephonyCampaignRecipientImportSource;
-
-  @doc("Mappings from recipient properties to source fields or columns. Omit this property or an individual entry to use same-named source fields. Destination and recipient-key source fields are required. Optional source fields may be absent, except the recipient item key when `duplicate_handling` is `keep_each`.")
-  mapping?: TelephonyCampaignRecipientMappingRequest = #{};
-
-  duplicate_handling?: TelephonyCampaignDuplicateHandling = TelephonyCampaignDuplicateHandling.reject;
-}
-
-@doc("The lifecycle status of a campaign recipient import.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyCampaignRecipientImportStatus {
-  string,
-  running: "running",
-  succeeded: "succeeded",
-  failed: "failed",
-}
-
-@doc("A durable campaign recipient-import record.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignRecipientImport {
-  id: TelephonyCampaignRecipientImportId;
-  object: "telephony.campaign.recipient_import";
-  campaign_id: TelephonyCampaignId;
-  status: TelephonyCampaignRecipientImportStatus;
-  source: TelephonyCampaignRecipientImportSource;
-  mapping?: TelephonyCampaignRecipientMapping;
-  duplicate_handling: TelephonyCampaignDuplicateHandling;
-  @minValue(0) rows_processed: int64;
-  @minValue(0) eligible_recipient_count: int64;
-  @minValue(0) invalid_recipient_count: int64;
-  error_code?: string;
-  error_message?: string;
-  created_at: FoundryTimestamp;
-  updated_at: FoundryTimestamp;
-}
-
-@doc("A request to publish a validated outbound campaign draft.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("PublishTelephonyCampaignContent", "csharp")
-model PublishTelephonyCampaignRequest {
-  @minLength(1)
-  validation_id: string;
-}
-
-@doc("The kind of asynchronous outbound campaign operation.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyCampaignOperationKind {
-  string,
-  recipient_import: "recipient_import",
-  validation: "validation",
-  publish: "publish",
-}
-
-@doc("The lifecycle status of an outbound telephony operation.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyOperationStatus {
-  string,
-  not_started: "not_started",
-  running: "running",
-
-  @lroSucceeded
-  succeeded: "succeeded",
-
-  @lroFailed
-  failed: "failed",
-
-  @lroCanceled
-  cancelled: "cancelled",
-
-  unknown_status: "unknown",
-}
-
-@doc("An accepted outbound campaign operation.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignOperation {
-  id: TelephonyOperationId;
-  object: "telephony.campaign.operation";
-  kind: TelephonyCampaignOperationKind;
-  status: TelephonyOperationStatus;
-  campaign_id: TelephonyCampaignId;
-  recipient_import_id?: TelephonyCampaignRecipientImportId;
-  created_at?: FoundryTimestamp;
-}
-
-alias TelephonyCampaignOperationAcceptedResponse = TypeSpec.Http.Response<202> & {
-  @bodyRoot body: TelephonyCampaignOperation;
-  @header("Operation-Location") operation_location: string;
-  @header("Retry-After") retry_after: FoundryDurationSeconds;
-};
-
-@doc("A resource produced by a successful outbound telephony operation.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyOperationResource {
-  id: string;
-  type: string;
-}
-
-@doc("An asynchronous outbound telephony operation.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyOperation {
-  id: TelephonyOperationId;
-  object: "telephony.operation";
-
-  @lroStatus
-  status: TelephonyOperationStatus;
-
-  created_at?: FoundryTimestamp;
-
-  @lroErrorResult
-  error?: ApiError;
-
-  @lroResult
-  resource?: TelephonyOperationResource;
-}

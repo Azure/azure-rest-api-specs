@@ -39,7 +39,22 @@ using Azure.AI.Projects;
 @@alternateType(OpenAI.Metadata, Record<string>, "java");
 @@clientName(
   OpenAI.RealtimeServerEventError,
+  "RealtimeServerEventErrorPayload",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventRealtimeServerEventError,
   "RealtimeServerEventError",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventErrorError,
+  "RealtimeServerErrorDetails",
+  "java"
+);
+@@clientName(
+  PSTNTelephonyTransferDestination,
+  "PstnTelephonyTransferDestination",
   "java"
 );
 
@@ -183,6 +198,49 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.MCPToolFilter, "McpToolFilter");
 @@clientName(OpenAI.MCPToolRequireApproval, "McpToolRequireApproval");
 @@clientName(MCPToolboxTool, "McpToolboxTool");
+@@clientName(OpenAI.RealtimeMCPApprovalRequest, "RealtimeMcpApprovalRequest");
+@@clientName(OpenAI.RealtimeMCPApprovalResponse, "RealtimeMcpApprovalResponse");
+@@clientName(OpenAI.RealtimeMCPError, "RealtimeMcpError");
+@@clientName(OpenAI.RealtimeMCPListTools, "RealtimeMcpListTools");
+@@clientName(OpenAI.RealtimeMCPProtocolError, "RealtimeMcpProtocolError");
+@@clientName(OpenAI.RealtimeMCPToolCall, "RealtimeMcpToolCall");
+@@clientName(
+  OpenAI.RealtimeMCPToolExecutionError,
+  "RealtimeMcpToolExecutionError"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventMCPListToolsCompleted,
+  "RealtimeServerEventMcpListToolsCompleted"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventMCPListToolsFailed,
+  "RealtimeServerEventMcpListToolsFailed"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventMCPListToolsInProgress,
+  "RealtimeServerEventMcpListToolsInProgress"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseMCPCallArgumentsDelta,
+  "RealtimeServerEventResponseMcpCallArgumentsDelta"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseMCPCallArgumentsDone,
+  "RealtimeServerEventResponseMcpCallArgumentsDone"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseMCPCallCompleted,
+  "RealtimeServerEventResponseMcpCallCompleted"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseMCPCallFailed,
+  "RealtimeServerEventResponseMcpCallFailed"
+);
+@@clientName(
+  OpenAI.RealtimeServerEventResponseMCPCallInProgress,
+  "RealtimeServerEventResponseMcpCallInProgress"
+);
+@@clientName(OpenAI.ToolChoiceMCP, "ToolChoiceMcp");
 
 @@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds");
 
@@ -198,7 +256,6 @@ using Azure.AI.Projects;
   "evaluationRunId"
 );
 @@clientName(AgentOptimizationEvaluator, "AgentOptimizationEvaluatorReference");
-@@clientName(AgentOptimizationJobProgress.elapsed_seconds, "elapsed");
 
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
 @@clientName(Microsoft365PublishResponse, "Microsoft365PublishResult");
@@ -307,6 +364,28 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "java");
 
+// Voice Agent Renames
+@@clientName(
+  Azure.AI.Projects.Agents.generateAgent,
+  "createAgentFromPrompt",
+  "java"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationAudioItemContent,
+  "downloadAgentConversationAudioItem",
+  "java"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationGeneratedAudioItemContent,
+  "downloadAgentConversationGeneratedAudioItem",
+  "java"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationAudioContent,
+  "downloadAgentConversationAudio",
+  "java"
+);
+
 @@clientName(UploadSessionFileParams.agent_session_id, "sessionId", "java");
 @@clientName(DownloadSessionFileParams.agent_session_id, "sessionId", "java");
 @@clientName(ListSessionFilesParams.agent_session_id, "sessionId", "java");
@@ -315,6 +394,10 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
+
+// Java's HTTP pipeline cannot expose the upgraded WebSocket connection or exchange frames.
+// Exclude this operation until the Java SDK has a supported WebSocket transport implementation.
+@@scope(Azure.AI.Projects.VoiceAgentWebSocket.connectVoiceAgent, "!java");
 
 @@access(Agents.createAgent, Access.internal);
 @@access(Agents.updateAgent, Access.internal);
@@ -634,17 +717,6 @@ model TimeZoneType {}
 @@alternateType(
   OpenAI.WebSearchApproximateLocation.timezone,
   TimeZoneType,
-  "java"
-);
-
-// Java-only helper scalar so `elapsed_seconds` (wire = fractional seconds as float64)
-// is exposed to callers as java.time.Duration while keeping the wire format unchanged.
-@encode(DurationKnownEncoding.seconds, float64)
-scalar DurationInFloatSeconds extends duration;
-
-@@alternateType(
-  AgentOptimizationJobProgress.elapsed_seconds,
-  DurationInFloatSeconds,
   "java"
 );
 

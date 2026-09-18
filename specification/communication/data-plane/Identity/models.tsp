@@ -14,6 +14,9 @@ namespace Azure.Communication.Identity;
 enum Versions {
   @doc("Communication Identity 2025-06-30 api version")
   c2025_06_30: "2025-06-30",
+
+  @doc("Communication Identity 2026-09-23 api version")
+  c2026_09_23: "2026-09-23",
 }
 
 alias IdentityOperation<

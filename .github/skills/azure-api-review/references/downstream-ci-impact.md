@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-05-31
+     Upstream alignment: 2026-08-15
      Source of truth for the downstream-CI impact-check procedure shared
      between Reviewer Step 4.5 and Critic Re-validation step 4.5. Both
      agents reference this file; do not restate the procedure in either
