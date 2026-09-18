@@ -1,9 +1,12 @@
-import { dirname } from "path";
+import { mkdir, mkdtemp, realpath, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { dirname, join } from "path";
 import semver from "semver";
 import { fileURLToPath } from "url";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import {
   execFile,
+  execNodeBin,
   execNpm,
   execNpmExec,
   execPnpm,
@@ -42,6 +45,103 @@ describe("execFile", () => {
       stderr: "",
       code: "ERR_CHILD_PROCESS_STDIO_MAXBUFFER",
     });
+  });
+});
+
+describe("execNodeBin", () => {
+  let root: string;
+
+  beforeEach(async () => {
+    root = await mkdtemp(join(tmpdir(), "node-bin-test-"));
+  });
+
+  afterEach(async () => {
+    await rm(root, { recursive: true, force: true });
+  });
+
+  async function installCli(
+    folder: string,
+    bin: string | Record<string, string> = { cli: "cli.cjs" },
+    source = "console.log(JSON.stringify({ args: process.argv.slice(2), cwd: process.cwd(), node: process.execPath }))",
+  ) {
+    const packageDir = join(folder, "node_modules", "@test", "cli");
+    await mkdir(packageDir, { recursive: true });
+    await writeFile(
+      join(packageDir, "package.json"),
+      JSON.stringify({ name: "@test/cli", exports: { "./package.json": "./package.json" }, bin }),
+    );
+    await writeFile(join(packageDir, "cli.cjs"), source);
+  }
+
+  it("runs an installed binary using the default working directory", async () => {
+    const result = await execNodeBin("prettier", ["prettier", "--version"], options);
+    expect(semver.valid(result.stdout.trim())).not.toBeNull();
+    expect(result.stderr).toBe("");
+  });
+
+  it.each([{ cli: "cli.cjs" }, "cli.cjs"])(
+    "resolves ancestor packages and preserves cwd and arguments with bin %j",
+    async (bin) => {
+      await installCli(root, bin);
+      const cwd = join(root, "project with spaces");
+      await mkdir(cwd);
+      const args = ["a b", '{"value":"quoted"}', "../**/*.tsp", "", "--", "a&b|c"];
+      const result = await execNodeBin("@test/cli", ["cli", ...args], { cwd });
+      const output = JSON.parse(result.stdout) as {
+        args: string[];
+        cwd: string;
+        node: string;
+      };
+      // Windows can report the same directory through its short (8.3) path.
+      expect({ ...output, cwd: await realpath(output.cwd) }).toEqual({
+        args,
+        cwd: await realpath(cwd),
+        node: process.execPath,
+      });
+    },
+  );
+
+  it("uses the dependency from the requested checkout, not the helper's checkout", async () => {
+    const otherCheckout = join(root, "other-checkout");
+    await installCli(root, "cli.cjs", "console.log('outer')");
+    await installCli(otherCheckout, "cli.cjs", "console.log('other')");
+    await expect(execNodeBin("@test/cli", ["cli"], { cwd: otherCheckout })).resolves.toEqual({
+      stdout: "other\n",
+      stderr: "",
+    });
+  });
+
+  it("does not install a missing package or fall back to PATH", async () => {
+    await expect(execNodeBin("@test/missing", ["node"], { cwd: root })).rejects.toMatchObject({
+      code: "MODULE_NOT_FOUND",
+    });
+  });
+
+  it.each([{ cli: "cli.cjs" }, "cli.cjs"])("rejects an unknown binary with bin %j", async (bin) => {
+    await installCli(root, bin);
+    await expect(execNodeBin("@test/cli", ["unknown"], { cwd: root })).rejects.toThrow(
+      'Package "@test/cli" does not define the binary "unknown".',
+    );
+  });
+
+  it("preserves nonzero exit codes and captured output", async () => {
+    await installCli(
+      root,
+      "cli.cjs",
+      "process.stdout.write('output'); process.stderr.write('diagnostic'); process.exit(7)",
+    );
+    await expect(execNodeBin("@test/cli", ["cli"], { cwd: root })).rejects.toMatchObject({
+      code: 7,
+      stdout: "output",
+      stderr: "diagnostic",
+    });
+  });
+
+  it("enforces the caller's output limit", async () => {
+    await installCli(root, "cli.cjs", "console.log('too much output')");
+    await expect(
+      execNodeBin("@test/cli", ["cli"], { cwd: root, maxBuffer: 1 }),
+    ).rejects.toMatchObject({ code: "ERR_CHILD_PROCESS_STDIO_MAXBUFFER" });
   });
 });
 

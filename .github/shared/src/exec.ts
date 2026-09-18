@@ -1,7 +1,10 @@
 import child_process from "child_process";
 import spawn from "cross-spawn";
-import { dirname, join } from "path";
+import { readFile } from "node:fs/promises";
+import { createRequire } from "node:module";
+import { basename, dirname, join, resolve } from "path";
 import { promisify } from "util";
+import * as z from "zod";
 const execFileImpl = promisify(child_process.execFile);
 
 export interface ExecOptions {
@@ -72,6 +75,37 @@ export async function execFile(
 
     throw error;
   }
+}
+
+const nodeBinSchema = z.object({
+  bin: z.union([z.string(), z.record(z.string(), z.string())]),
+});
+
+/**
+ * Runs an installed package's Node.js binary without a package-manager or shell shim.
+ * Resolves the package from options.cwd (or process.cwd()), including ancestor node_modules.
+ * The package must expose package.json; args starts with the name of its binary.
+ * @throws {ExecError}
+ */
+export async function execNodeBin(
+  packageName: string,
+  [binary, ...args]: [string, ...string[]],
+  options: ExecOptions = {},
+): Promise<ExecResult> {
+  const require = createRequire(resolve(options.cwd ?? process.cwd(), "package.json"));
+  const packageJsonPath = require.resolve(`${packageName}/package.json`);
+  const { bin } = nodeBinSchema.parse(JSON.parse(await readFile(packageJsonPath, "utf8")));
+  const entrypoint =
+    typeof bin === "string" ? (binary === basename(packageName) ? bin : undefined) : bin[binary];
+  if (!entrypoint) {
+    throw new Error(`Package "${packageName}" does not define the binary "${binary}".`);
+  }
+
+  return await execFile(
+    process.execPath,
+    [join(dirname(packageJsonPath), entrypoint), ...args],
+    options,
+  );
 }
 
 /**
