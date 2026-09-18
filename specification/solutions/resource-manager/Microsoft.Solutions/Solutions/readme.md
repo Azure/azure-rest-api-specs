@@ -30,10 +30,6 @@ openapi-subtype: rpaas
 tag: package-managedapplications-2023-12-01-preview
 ```
 
-```yaml $(package-managedapplications)
-tag: package-managedapplications-2023-12-01-preview
-```
-
 ### Tag: package-managedapplications-2023-12-01-preview
 
 These settings apply only when `--tag=package-managedapplications-2023-12-01-preview` is specified on the command line.
