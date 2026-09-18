@@ -187,32 +187,20 @@
         "tags": [
           "connections"
         ],
-        "summary": "Creates or updates a connection.",
+        "summary": "Creates a new connection.",
         "description": "Creates a new connection.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Azure subscription identifier.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Azure resource group name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
           },
           {
-            "name": "sandboxGroupName",
-            "in": "path",
-            "description": "Sandbox group name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
           },
           {
             "name": "body",
@@ -226,13 +214,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "The successful response for the postConnection operation.",
             "schema": {
               "$ref": "#/definitions/Connection"
             }
           },
           "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+            "description": "The successful response for the postConnection operation.",
             "schema": {
               "$ref": "#/definitions/Connection"
             }

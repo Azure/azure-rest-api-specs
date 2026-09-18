@@ -83,7 +83,7 @@ alias ConnectionGetOperations = ResourceOperations<
 /** The successful response for the postConnection operation. */
 model PostConnectionResult {
   /** The HTTP success status code. */
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "POST /connections is implemented with both 200 and 201 success responses."
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The implementation returns only 200 or 201 on success: 201 when createResult.IsNew is true, otherwise 200."
   @statusCode statusCode: 200 | 201;
 
   /** The returned connection. */
@@ -200,16 +200,20 @@ interface ConnectionsOperations {
   >;
 
   /** Creates a new connection. */
-  @summary("Creates or updates a connection.")
-  @action("connections")
-  @actionSeparator("/")
-  postConnection is ConnectionCreateOperations.ResourceAction<
-    SandboxGroupScope,
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "CreateConnectionAsync is a custom POST operation with a DataPlaneConnectionCreateRequest body and implementation-specific 200-or-201 behavior based on whether a connection was newly created."
+  @summary("Creates a new connection.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/connections")
+  @post
+  postConnection is Foundations.Operation<
     {
+      ...AzureResourceScope;
+
       /** The connection configuration to create. */
       @body body: CreateConnectionContent;
     },
-    PostConnectionResult
+    PostConnectionResult,
+    DataPlaneStandardTraits,
+    PostConnectionErrors
   >;
 
   /** Authorizes a connection with parameter values. */
@@ -252,8 +256,8 @@ interface ConnectionsOperations {
   >;
 
   /** Updates the policy rules and tool settings on a connection. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The existing client method mirrors PUT /connections/{id}/policyRules and is intentionally named putConnectionPolicyRules."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "PUT /connections/{id}/policyRules accepts policy settings and returns the updated connection with operation-specific errors."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "PUT {id}/policyRules is a custom policyRules subresource update endpoint, so the operation name intentionally mirrors the HTTP method and route."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "UpdatePolicyRulesAsync is a custom PUT subresource operation that accepts UpdatePolicyRulesRequest, returns the updated connection with 200, maps policy and tool validation failures to 400, and returns 404 when the connection is not found."
   @summary("Updates the policy rules and tool settings on a connection.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/connections/{id}/policyRules")
   @put
