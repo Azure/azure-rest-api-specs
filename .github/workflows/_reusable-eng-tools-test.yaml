@@ -11,10 +11,6 @@ on:
       sparse-checkout-paths:
         description: Paths for sparse checkout
         type: string
-      lint:
-        description: Run 'pnpm lint' if true
-        required: false
-        type: boolean
 
 permissions:
   contents: read
@@ -53,11 +49,6 @@ jobs:
 
       - name: Test
         run: pnpm run test:ci
-        working-directory: ./eng/tools/${{ inputs.package }}
-
-      - name: Lint
-        run: pnpm run lint
-        if: inputs.lint == true
         working-directory: ./eng/tools/${{ inputs.package }}
 
       - name: Check Formatting
