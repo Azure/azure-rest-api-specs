@@ -1707,7 +1707,7 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@clientName(
   MaterializedViewDefinition,
-  "CosmosDBMaterializedViewDefinition",
+  "CosmosDBMaterializedViewConfiguration",
   "csharp"
 );
 @@clientName(
@@ -1748,6 +1748,36 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "csharp"
 );
 @@clientName(
+  DatabaseAccountRegenerateKeyParameters.skipAccountKeysLastUsageCheck,
+  "isAccountKeysLastUsageCheckSkipped",
+  "csharp"
+);
+@@clientName(
+  GarnetClusterResourcePatchProperties.persistence,
+  "isPersistenceEnabled",
+  "csharp"
+);
+@@clientName(
+  GarnetClusterResourceProperties.persistence,
+  "isPersistenceEnabled",
+  "csharp"
+);
+@@clientName(
+  SoftDeleteConfiguration.softDeletionEnabled,
+  "isSoftDeletionEnabled",
+  "csharp"
+);
+@@clientName(
+  CosmosDBMongoCollection,
+  "CosmosDBMongoCollectionInfo",
+  "csharp"
+);
+@@clientName(
+  CosmosDBMongoVCoreCollection,
+  "CosmosDBMongoVCoreCollectionInfo",
+  "csharp"
+);
+@@clientName(
   CapacityModeChangeTransitionState.capacityModeTransitionBeginTimestamp,
   "capacityModeTransitionBeganOn",
   "csharp"
@@ -1766,6 +1796,21 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 @@clientName(BackupResource.backupStopTimestamp, "backupStoppedOn", "csharp");
 @@clientName(BackupResource.backupExpiryTimestamp, "backupExpiresOn", "csharp");
 @@clientName(GraphResource.id, "graphName", "csharp");
+
+@@doc(
+  SoftDeletedDatabaseAccountGetResult,
+  "An Azure Cosmos DB soft-deleted database account."
+);
+@@doc(
+  GraphResourceGetProperties,
+  "The properties of an Azure Cosmos DB graph."
+);
+
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 
 @@responseAsBool(DatabaseAccountsOperationGroup.checkNameExists, "csharp");
 
