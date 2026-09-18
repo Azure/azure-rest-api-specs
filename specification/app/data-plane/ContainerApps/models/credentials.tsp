@@ -42,7 +42,7 @@ namespace ContainerAppsSandbox {
     authentication: GatewayConnectionAuthRecord;
 
     /** The endpoint used to exchange tokens for the connection. */
-    tokenExchangeEndpoint: string;
+    tokenExchangeEndpoint: url;
   }
 
   /** The service feature that created the credential. */

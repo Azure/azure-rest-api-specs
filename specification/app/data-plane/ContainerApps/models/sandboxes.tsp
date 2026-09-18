@@ -70,10 +70,10 @@ model Sandbox {
   lifecycle?: SandboxLifecyclePolicy;
 
   /** The apps domain URL for sandboxes with type=app label. */
-  appUrl?: string;
+  appUrl?: url;
 
   /** The base URL for data plane operations. */
-  managementUrl?: string;
+  managementUrl?: url;
 
   /** Agent identity assigned to the sandbox. */
   agentIdentity?: SandboxAgentIdentityRef;
@@ -501,7 +501,7 @@ union EgressForwardMode {
 /** Proxy configuration for forwarded egress traffic. */
 model EgressForwardProxy {
   /** The proxy URL. */
-  url: string;
+  url: url;
 
   /** The certificate authority data used to validate the proxy. */
   ca?: string;
@@ -611,11 +611,11 @@ model GatewayConnection {
 
   /** MCP server endpoint URL resolved by the service. */
   @visibility(Lifecycle.Read)
-  mcpRuntimeUrl?: string;
+  mcpRuntimeUrl?: url;
 
   /** Direct connection endpoint URL resolved by the service. */
   @visibility(Lifecycle.Read)
-  connectionRuntimeUrl?: string;
+  connectionRuntimeUrl?: url;
 
   /** Authentication resolved by the service. */
   @visibility(Lifecycle.Read)
