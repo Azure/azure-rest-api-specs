@@ -165,6 +165,14 @@ Single source of truth for breaking-change and versioning approval label names a
   validate its JSON output, and clean up its temporary output.
 - `TypeSpecMetadataSchema`, `TypeSpecLanguageMetadataSchema` — zod schemas for metadata output.
 
+### `yaml` — YAML configuration parsing
+
+- `parseYaml(content, options?)` — parse one document and return an `unknown` value. The default
+  core schema supports merge keys and timestamps. Use `{ schema: "failsafe" }` for README blocks
+  and leases, keeping scalars such as dates, booleans, and numbers as strings.
+- Omitted values remain `null`, quoted empty strings remain strings, and empty input returns
+  `undefined`. Invalid YAML and unresolved tags throw rather than returning partial configuration.
+
 ## Folder structure & contributing
 
 ```

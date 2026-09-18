@@ -1,6 +1,6 @@
+import { parseYaml } from "@azure-tools/specs-shared/yaml";
 import { Temporal } from "@js-temporal/polyfill";
 import { readFile } from "fs/promises";
-import yaml from "js-yaml";
 import { resolve } from "path";
 import * as z from "zod";
 
@@ -61,7 +61,7 @@ function buildLeasePath(
 export function parseLease(content: string): { valid: boolean; reason: string } {
   let rawParsed: unknown;
   try {
-    rawParsed = yaml.load(content, { schema: yaml.FAILSAFE_SCHEMA });
+    rawParsed = parseYaml(content, { schema: "failsafe" });
   } catch {
     return { valid: false, reason: "YAML parse error" };
   }

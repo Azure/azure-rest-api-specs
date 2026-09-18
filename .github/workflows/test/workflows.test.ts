@@ -1,5 +1,5 @@
+import { parseYaml } from "@azure-tools/specs-shared/yaml";
 import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "fs/promises";
-import { load } from "js-yaml";
 import { tmpdir } from "os";
 import { dirname, extname, resolve } from "path";
 import { fileURLToPath } from "url";
@@ -29,7 +29,7 @@ interface Workflow {
 }
 
 async function readWorkflow(file: string): Promise<Workflow> {
-  return load(await readFile(resolve(workflowsDir, file), "utf8")) as Workflow;
+  return parseYaml(await readFile(resolve(workflowsDir, file), "utf8")) as Workflow;
 }
 
 describe("workflow files", () => {

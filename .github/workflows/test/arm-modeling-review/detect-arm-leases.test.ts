@@ -74,6 +74,17 @@ describe("detect-arm-leases", () => {
       expect(result.valid).toBe(true);
     });
 
+    it("preserves an unquoted start date as a string", () => {
+      const result = parseLease(`lease:\n  startdate: ${daysAgo(30)}\n  duration: P90D\n`);
+      expect(result.valid).toBe(true);
+    });
+
+    it("rejects unresolved tags rather than validating their scalar value", () => {
+      expect(
+        parseLease(`lease:\n  startdate: ${daysAgo(30)}\n  duration: !unknown P90D\n`),
+      ).toEqual({ valid: false, reason: "YAML parse error" });
+    });
+
     it("returns invalid when lease has expired", () => {
       const result = parseLease(leaseYaml(daysAgo(100), "P90D"));
       expect(result.valid).toBe(false);

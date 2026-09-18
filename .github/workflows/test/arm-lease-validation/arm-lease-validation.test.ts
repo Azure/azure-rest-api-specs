@@ -147,6 +147,27 @@ describe("validate-arm-leases", () => {
       expect(result.errors).toHaveLength(0);
     });
 
+    it("validates an unquoted start date without converting it to a Date", async () => {
+      mockReadFile.mockResolvedValue(validYaml.replace('"2027-06-01"', "2027-06-01"));
+      const result = await validateLeaseContent(
+        "/repo/lease.yaml",
+        ".github/arm-leases/testservice/Microsoft.Test/lease.yaml",
+      );
+      expect(result.errors).toEqual([]);
+    });
+
+    it("rejects unresolved tags as invalid YAML", async () => {
+      mockReadFile.mockResolvedValue(
+        validYaml.replace("duration: P90D", "duration: !unknown P90D"),
+      );
+      const result = await validateLeaseContent(
+        "/repo/lease.yaml",
+        ".github/arm-leases/testservice/Microsoft.Test/lease.yaml",
+      );
+      expect(result.errors).toHaveLength(1);
+      expect(result.errors[0]).toContain("Invalid YAML");
+    });
+
     it("detects resource provider mismatch", async () => {
       mockReadFile.mockResolvedValue(validYaml.replace("Microsoft.Test", "Microsoft.Other"));
       const result = await validateLeaseContent(
