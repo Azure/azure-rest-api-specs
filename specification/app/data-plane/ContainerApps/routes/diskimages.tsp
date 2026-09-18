@@ -92,6 +92,9 @@ alias DiskImageGetOperations = ResourceOperations<
 model PostDiskImageResult {
   /** The HTTP 201 status code. */
   @statusCode statusCode: 201;
+  
+  /** URL of the created disk image. */
+  @header("Location") location: ResourceLocation<DiskImage>;
 
   /** The returned disk image. */
   @body body: DiskImage;
