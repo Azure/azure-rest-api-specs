@@ -181,21 +181,9 @@ using Microsoft.ServiceNetworking;
   "csharp"
 );
 
-@@clientName(
-  Versions.v2023_11_01,
-  "$DO_NOT_NORMALIZE$V2023_11_01",
-  "javascript"
-);
-@@clientName(
-  Versions.v2025_05_01,
-  "$DO_NOT_NORMALIZE$V2025_05_01",
-  "javascript"
-);
-@@clientName(
-  Versions.v2026_03_01,
-  "$DO_NOT_NORMALIZE$V2026_03_01",
-  "javascript"
-);
+@@clientName(Versions.v2023_11_01, exact("V2023_11_01"), "javascript");
+@@clientName(Versions.v2025_05_01, exact("V2025_05_01"), "javascript");
+@@clientName(Versions.v2026_03_01, exact("V2026_03_01"), "javascript");
 
 // we add this model in this namespace in order to replace some models with this model via alternateType decorator
 namespace Azure.ResourceManager.Models {

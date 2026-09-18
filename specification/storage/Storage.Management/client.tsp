@@ -374,7 +374,7 @@ union CSharpBlobInventoryPolicyName {
 @@clientName(SKUCapability, "SkuCapability", "java");
 @@clientName(IPRule, "IpRule", "java");
 @@clientName(IPRule.value, "ipAddressOrRange", "java");
-@@clientName(IPRule.value, "$DO_NOT_NORMALIZE$iPAddressOrRange", "javascript");
+@@clientName(IPRule.value, exact("iPAddressOrRange"), "javascript");
 @@clientName(StorageAccounts.listAccountSAS, "listAccountSas", "java");
 @@clientName(StorageAccounts.listServiceSAS, "listServiceSas", "java");
 // C# SAS casing: new generator preserves uppercase SAS, prior GA used Sas
@@ -385,7 +385,7 @@ union CSharpBlobInventoryPolicyName {
 @@clientName(AccountSasParameters.signedIp, "ipAddressOrRange", "java");
 @@clientName(
   AccountSasParameters.signedIp,
-  "$DO_NOT_NORMALIZE$iPAddressOrRange",
+  exact("iPAddressOrRange"),
   "javascript"
 );
 @@clientName(AccountLimits.maxProvisionedIOPS, "maxProvisionedIops", "java");
@@ -396,7 +396,7 @@ union CSharpBlobInventoryPolicyName {
 @@clientName(ServiceSasParameters.signedIp, "ipAddressOrRange", "java");
 @@clientName(
   ServiceSasParameters.signedIp,
-  "$DO_NOT_NORMALIZE$iPAddressOrRange",
+  exact("iPAddressOrRange"),
   "javascript"
 );
 

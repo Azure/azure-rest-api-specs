@@ -107,11 +107,11 @@ namespace Azure.ResourceManager.Models {
 );
 @@clientName(
   Microsoft.StandbyPool.Versions.`2024-03-01`,
-  "$DO_NOT_NORMALIZE$_20240301",
+  exact("_20240301"),
   "javascript"
 );
 @@clientName(
   Microsoft.StandbyPool.Versions.`2025-03-01`,
-  "$DO_NOT_NORMALIZE$_20250301",
+  exact("_20250301"),
   "javascript"
 );
