@@ -8,10 +8,12 @@ import "./applink.tsp";
 using TypeSpec.Rest;
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
+using TypeSpec.Http;
 
 namespace Microsoft.AppLink;
 
-@doc("AppLink Member resource")
+@doc("A member of an Azure Kubernetes Application Network resource.")
 @parentResource(AppLink)
 model AppLinkMember is TrackedResource<AppLinkMemberProperties> {
   ...ResourceNameParameter<AppLinkMember>;
@@ -114,6 +116,10 @@ model ConnectivityProfile {
 
   @doc("Private connect profile.")
   privateConnect?: PrivateConnectProfile;
+
+  @doc("AppNetMember network name.")
+  @added(Microsoft.AppLink.Versions.v2026_08_01_preview)
+  network?: string;
 }
 
 @doc("AppLinkMember private connect profile.")
@@ -147,23 +153,102 @@ union EastWestGatewayVisibility {
   External: "External",
 }
 
+@doc("The updatable properties of the AppLinkMember.")
+@added(Microsoft.AppLink.Versions.v2026_08_01_preview)
+model AppLinkMemberUpdateProperties {
+  @doc("Upgrade profile.")
+  upgradeProfile?: UpgradeProfileUpdate;
+
+  @doc("Connectivity profile.")
+  connectivityProfile?: ConnectivityProfileUpdate;
+}
+
+@doc("The updatable AppLinkMember upgrade profile.")
+@added(Microsoft.AppLink.Versions.v2026_08_01_preview)
+model UpgradeProfileUpdate {
+  @doc("Upgrade mode.")
+  mode?: UpgradeMode;
+
+  @doc("Fully managed upgrade profile.")
+  fullyManagedUpgradeProfile?: FullyManagedUpgradeProfileUpdate;
+
+  @doc("Self managed upgrade profile.")
+  selfManagedUpgradeProfile?: SelfManagedUpgradeProfileUpdate;
+}
+
+@doc("The updatable AppLinkMember fully managed upgrade profile.")
+@added(Microsoft.AppLink.Versions.v2026_08_01_preview)
+model FullyManagedUpgradeProfileUpdate {
+  @doc("Release channel")
+  releaseChannel?: UpgradeReleaseChannel;
+}
+
+@doc("The updatable AppLinkMember self managed upgrade profile.")
+@added(Microsoft.AppLink.Versions.v2026_08_01_preview)
+model SelfManagedUpgradeProfileUpdate {
+  @doc("Istio version")
+  version?: string;
+}
+
+@doc("The updatable AppLinkMember connectivity profile.")
+@added(Microsoft.AppLink.Versions.v2026_08_01_preview)
+model ConnectivityProfileUpdate {
+  @doc("East-West gateway profile.")
+  eastWestGateway?: EastWestGatewayProfileUpdate;
+
+  @doc("AppNetMember network name.")
+  network?: string;
+}
+
+@doc("The updatable AppLinkMember east-west gateway profile.")
+@added(Microsoft.AppLink.Versions.v2026_08_01_preview)
+model EastWestGatewayProfileUpdate {
+  @doc("East-West gateway visibility.")
+  visibility?: EastWestGatewayVisibility;
+}
+
+@doc("The type used for update operations of the AppLinkMember.")
+@added(Microsoft.AppLink.Versions.v2026_08_01_preview)
+model AppLinkMemberUpdate {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Updating dictionary of tags"
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The resource-specific properties for this resource.")
+  properties?: AppLinkMemberUpdateProperties;
+}
+
 @armResourceOperations
 interface AppLinkMembers {
-  @doc("Get an AppLinkMember.")
+  @doc("Get a member of an Azure Kubernetes Application Network resource.")
   get is ArmResourceRead<AppLinkMember>;
-  @doc("Create an AppLinkMember.")
+  @doc("Create a member of an Azure Kubernetes Application Network resource.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<AppLinkMember>;
-  @doc("Update an AppLinkMember.")
+  @doc("Update a member of an Azure Kubernetes Application Network resource.")
+  @removed(Versions.v2026_08_01_preview)
+  @renamedFrom(Versions.v2026_08_01_preview, "update")
+  @sharedRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  update is ArmResourcePatchAsync<
+  updateLegacy is ArmResourcePatchAsync<
     AppLinkMember,
     AppLinkMemberProperties,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = AppLinkMember> &
       ArmLroLocationHeader<FinalResult = AppLinkMember> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
-  @doc("Delete an AppLinkMember.")
+  @doc("Update a member of an Azure Kubernetes Application Network resource.")
+  @added(Versions.v2026_08_01_preview)
+  @sharedRoute
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  update is ArmCustomPatchAsync<
+    AppLinkMember,
+    AppLinkMemberUpdate,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = AppLinkMember> &
+      ArmLroLocationHeader<FinalResult = AppLinkMember> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+  @doc("Remove a member from an Azure Kubernetes Application Network resource.")
   delete is ArmResourceDeleteWithoutOkAsync<AppLinkMember>;
-  @doc("List AppLinkMember resources by AppLink.")
+  @doc("List the members of an Azure Kubernetes Application Network resource.")
   listByAppLink is ArmResourceListByParent<AppLinkMember>;
 }
