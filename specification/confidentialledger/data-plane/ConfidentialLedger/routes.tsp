@@ -1,9 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/openapi";
 import "./models.tsp";
 import "./common.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
+using OpenAPI;
 
 namespace ConfidentialLedger;
 
@@ -60,6 +63,26 @@ op listCollections is ConfidentialLedgerCommon.LedgerOperation<
 >;
 
 /**
+ * Retrieves the tags associated with a collection.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+@added(Versions.v2026_02_23)
+@summary("Gets a list of tags for a collection.")
+@route("/app/collections/tags")
+@list
+op listTags is ConfidentialLedgerCommon.LedgerOperation<
+  {
+    /**
+     * The collection id.
+     */
+    @query("collectionId")
+    collectionId?: string;
+  },
+  PagedTags
+>;
+
+/**
  * A collection id may optionally be specified. Only entries in the specified (or
  * default) collection will be returned.
  */
@@ -101,7 +124,57 @@ op listLedgerEntries is ConfidentialLedgerCommon.LedgerOperation<
  * A collection id may optionally be specified.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@removed(Versions.v2026_07_31_preview)
+@renamedFrom(Versions.v2026_07_31_preview, "createLedgerEntry")
 @summary("Writes a ledger entry.")
+@sharedRoute
+@route("/app/transactions")
+@post
+op createLedgerEntryAsync is ConfidentialLedgerCommon.LedgerOperation<
+  {
+    /**
+     * The collection id.
+     */
+    @query("collectionId")
+    collectionId?: string;
+
+    /**
+     * Comma separated tags.
+     */
+    @query("tags")
+    tags?: string;
+
+    /**
+     * Ledger entry.
+     */
+    @bodyRoot
+    entry: LedgerEntry;
+  },
+  LedgerWriteResult
+>;
+
+/**
+ * A collection id may optionally be specified. By default, the operation
+ * returns after local commit with an `x-ms-ccf-transaction-id` that callers can
+ * use with the `/app/transactions/{transactionId}/status` and
+ * `/app/transactions/{transactionId}/receipt` endpoints, including after
+ * reconnecting.
+ *
+ * When `waitForCommit` is true, the response is held until the transaction is
+ * globally committed. If the connection is lost before the response is
+ * received, the caller might not receive the transaction ID and cannot
+ * uniquely recover the specific write. Clients that require unambiguous
+ * per-request recovery should use the default behavior and poll using the
+ * returned transaction ID.
+ *
+ * For more information, see [Azure Confidential Ledger write transaction
+ * receipts](https://learn.microsoft.com/azure/confidential-ledger/write-transaction-receipts).
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The versioned ledger write route requires both the service default error and a 503 TransactionRolledBack response."
+@added(Versions.v2026_07_31_preview)
+@summary("Writes a ledger entry.")
+@returnsDoc("Returned as a result of writing to the Confidential Ledger.")
+@sharedRoute
 @route("/app/transactions")
 @post
 op createLedgerEntry is ConfidentialLedgerCommon.LedgerOperation<
@@ -123,8 +196,20 @@ op createLedgerEntry is ConfidentialLedgerCommon.LedgerOperation<
      */
     @bodyRoot
     entry: LedgerEntry;
+
+    /**
+     * Whether to wait for the transaction to be globally committed before
+     * returning. When true, the response includes the transaction receipt, but
+     * a disconnect before the response is received can prevent recovery of the
+     * specific write. Use the default behavior and poll the transaction status
+     * or receipt endpoints when unambiguous per-request recovery is required.
+     */
+    @query("waitForCommit")
+    waitForCommit?: boolean = false;
   },
-  LedgerWriteResult
+  LedgerWriteResult,
+  | ConfidentialLedgerCommon.ConfidentialLedgerError
+  | TransactionRolledBackErrorResponse
 >;
 
 /**
@@ -415,11 +500,38 @@ op getRuntimeOptions is ConfidentialLedgerCommon.LedgerOperation<
  */
 #suppress "@typespec/http/patch-implicit-optional" "Irrelevant linter warning"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@removed(Versions.v2026_02_23)
 @summary("Runtime options for user defined endpoints.")
+@sharedRoute
 @route("/app/userDefinedEndpoints/runtimeOptions")
 @patch
 op updateRuntimeOptions is ConfidentialLedgerCommon.LedgerOperation<
   {
+    /** JS Runtime options */
+    @bodyRoot
+    jsRuntimeOptions: JsRuntimeOptions;
+  },
+  JsRuntimeOptions
+>;
+
+/**
+ * Updates the runtime options.
+ */
+#suppress "@typespec/http/patch-implicit-optional" "Irrelevant linter warning"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to match preview operationId"
+@added(Versions.v2026_02_23)
+@operationId("UpdateRuntimeOptions")
+@summary("Runtime options for user defined endpoints.")
+@sharedRoute
+@route("/app/userDefinedEndpoints/runtimeOptions")
+@patch
+op updateRuntimeOptionsStable is ConfidentialLedgerCommon.LedgerOperation<
+  {
+    /** Content type */
+    @header("Content-Type")
+    contentType: "application/merge-patch+json";
+
     /** JS Runtime options */
     @bodyRoot
     jsRuntimeOptions: JsRuntimeOptions;
@@ -570,7 +682,9 @@ op getUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@removed(Versions.v2026_02_23)
 @summary("Creates new roles and their actions")
+@sharedRoute
 @route("/app/roles")
 @put
 op createUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
@@ -586,12 +700,38 @@ op createUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
 /**
  * User defined roles allow users to define and manage app specific AuthZ policy.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to match preview operationId"
+@added(Versions.v2026_02_23)
+@operationId("CreateUserDefinedRole")
+@summary("Creates new roles and their actions")
+@sharedRoute
+@route("/app/roles")
+@put
+op createUserDefinedRoleStable is ConfidentialLedgerCommon.LedgerOperation<
+  {
+    /** Request body */
+    #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API contract"
+    @bodyRoot
+    body: UserDefinedRoles;
+  },
+  {
+    @bodyRoot body: UserDefinedRoles;
+  }
+>;
+
+/**
+ * User defined roles allow users to define and manage app specific AuthZ policy.
+ */
 #suppress "@typespec/http/patch-implicit-optional" "Irrelevant linter warning"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@removed(Versions.v2026_02_23)
 @summary("""
   Patch replaces the allowed action on existing roles,if the desire is to remove
   an existing action, the role must be deleted and recreated.
   """)
+@sharedRoute
 @route("/app/roles")
 @patch
 op updateUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
@@ -605,11 +745,44 @@ op updateUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
 >;
 
 /**
+ * User defined roles allow users to define and manage app specific AuthZ policy.
+ */
+#suppress "@typespec/http/patch-implicit-optional" "Irrelevant linter warning"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to match preview operationId"
+@added(Versions.v2026_02_23)
+@operationId("UpdateUserDefinedRole")
+@summary("""
+  Patch replaces the allowed action on existing roles,if the desire is to remove
+  an existing action, the role must be deleted and recreated.
+  """)
+@sharedRoute
+@route("/app/roles")
+@patch
+op updateUserDefinedRoleStable is ConfidentialLedgerCommon.LedgerOperation<
+  {
+    /** Content type */
+    @header("Content-Type")
+    contentType: "application/merge-patch+json";
+
+    /** Request body */
+    #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API contract"
+    @bodyRoot
+    body: UserDefinedRoles;
+  },
+  {
+    @bodyRoot body: UserDefinedRoles;
+  }
+>;
+
+/**
  * A user defined role allows the users to create and manage their own role
  * actions using the API.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@removed(Versions.v2026_02_23)
 @summary("Deletes user defined roles")
+@sharedRoute
 @route("/app/roles")
 @delete
 op deleteUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
@@ -621,4 +794,27 @@ op deleteUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
     roleName: string;
   },
   {}
+>;
+
+/**
+ * A user defined role allows the users to create and manage their own role
+ * actions using the API.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to match preview operationId"
+@added(Versions.v2026_02_23)
+@operationId("DeleteUserDefinedRole")
+@summary("Deletes user defined roles")
+@sharedRoute
+@route("/app/roles")
+@delete
+op deleteUserDefinedRoleStable is ConfidentialLedgerCommon.LedgerOperation<
+  {
+    /**
+     * user defined role name
+     */
+    @query("roleName")
+    roleName: string;
+  },
+  void
 >;

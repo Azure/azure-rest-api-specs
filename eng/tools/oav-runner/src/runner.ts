@@ -13,22 +13,42 @@ import {
 } from "@azure-tools/specs-shared/changed-files";
 import { untilLastSegment } from "@azure-tools/specs-shared/path";
 import { Swagger } from "@azure-tools/specs-shared/swagger";
+import { SWAGGER_SUPPRESSION_TOOLS } from "@azure-tools/specs-shared/swagger-suppressions";
+import { getSuppressionsForTools } from "@azure-tools/suppressions";
 import { inspect } from "util";
 import { type ReportableOavError } from "./formatting.ts";
 
 export async function preCheckFiltering(
   rootDirectory: string,
+  suppressionTool: string,
   fileList?: string[],
 ): Promise<string[]> {
   const changedFiles =
     fileList ?? (await getChangedFiles({ cwd: rootDirectory, paths: ["specification"] }));
 
   const swaggerFiles = await processFilesToSpecificationList(rootDirectory, changedFiles);
+  const unsuppressedSwaggerFiles: string[] = [];
+
+  for (const swaggerFile of swaggerFiles) {
+    const suppressions = await getSuppressionsForTools(
+      [suppressionTool, SWAGGER_SUPPRESSION_TOOLS.all],
+      path.join(rootDirectory, swaggerFile),
+    );
+    const isSuppressed = suppressions.some(
+      (suppression) => !suppression.rules?.length && !suppression.subRules?.length,
+    );
+
+    if (isSuppressed) {
+      console.log(`Skipping suppressed Swagger file: ${swaggerFile}`);
+    } else {
+      unsuppressedSwaggerFiles.push(swaggerFile);
+    }
+  }
 
   console.log("oav-runner is checking the following specification rooted files:");
-  swaggerFiles.forEach((file) => console.log(`- ${file}`));
+  unsuppressedSwaggerFiles.forEach((file) => console.log(`- ${file}`));
 
-  return swaggerFiles;
+  return unsuppressedSwaggerFiles;
 }
 
 export async function checkExamples(
@@ -37,7 +57,11 @@ export async function checkExamples(
 ): Promise<[number, string[], ReportableOavError[]]> {
   const errors: ReportableOavError[] = [];
 
-  const swaggerFiles = await preCheckFiltering(rootDirectory, fileList);
+  const swaggerFiles = await preCheckFiltering(
+    rootDirectory,
+    SWAGGER_SUPPRESSION_TOOLS.modelValidation,
+    fileList,
+  );
 
   for (const swaggerFile of swaggerFiles) {
     try {
@@ -58,13 +82,13 @@ export async function checkExamples(
         errors.push({
           message: e.message,
           file: swaggerFile,
-        } as ReportableOavError);
+        });
       } else {
         console.log(`Error validating examples for ${swaggerFile}: ${inspect(e)}`);
         errors.push({
           message: `Unhandled error validating ${swaggerFile}: ${inspect(e)}`,
           file: swaggerFile,
-        } as ReportableOavError);
+        });
       }
     }
   }
@@ -81,7 +105,11 @@ export async function checkSpecs(
 ): Promise<[number, string[], ReportableOavError[]]> {
   const errors: ReportableOavError[] = [];
 
-  const swaggerFiles = await preCheckFiltering(rootDirectory, fileList);
+  const swaggerFiles = await preCheckFiltering(
+    rootDirectory,
+    SWAGGER_SUPPRESSION_TOOLS.semanticValidation,
+    fileList,
+  );
 
   for (const swaggerFile of swaggerFiles) {
     try {
@@ -94,7 +122,7 @@ export async function checkSpecs(
             file: swaggerFile,
             line: error.position?.line,
             column: error.position?.column,
-          } as ReportableOavError);
+          });
         }
       }
     } catch (e) {
@@ -103,13 +131,13 @@ export async function checkSpecs(
         errors.push({
           message: e.message,
           file: swaggerFile,
-        } as ReportableOavError);
+        });
       } else {
         console.log(`Error validating ${swaggerFile}: ${inspect(e)}`);
         errors.push({
           message: `Unhandled error validating ${swaggerFile}: ${inspect(e)}`,
           file: swaggerFile,
-        } as ReportableOavError);
+        });
       }
     }
   }

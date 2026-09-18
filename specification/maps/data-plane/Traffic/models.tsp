@@ -78,6 +78,7 @@ union FeaturesItemTypeEnum {
  * A GeoJSON feature collection object that contains a list of traffic incidents
  * features.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TrafficIncidentResponse {
   /**
    * Specifies the `GeoJSON` type. The only supported object type is
@@ -218,6 +219,7 @@ model TrafficIncidentFeatureProperties {
  * details for failed operations. (This also follows the OData error response
  * format.).
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**

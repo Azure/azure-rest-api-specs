@@ -2,6 +2,7 @@ import "../memory-stores/models.tsp";
 
 using Azure.Core.Experimental;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 namespace Azure.AI.Projects {
@@ -20,19 +21,25 @@ namespace Azure.AI.Projects {
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
     toolbox_search_preview: "toolbox_search_preview",
+    web_iq_preview: "web_iq_preview",
+    github_copilot_toolset_preview: "github_copilot_toolset_preview",
   }
 
   // General availability tools:
   union _AgentToolType {
+    a2a: "a2a",
     azure_ai_search: "azure_ai_search",
     azure_function: "azure_function",
     bing_grounding: "bing_grounding",
+    browser_automation: "browser_automation",
     capture_structured_outputs: "capture_structured_outputs",
     openapi: "openapi",
 
     @removed(Versions.v1)
     memory_search: "memory_search",
   }
+
+  const PreviewTool = #{ required_previews: #["preview_tool"] };
 
   @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._PreviewAgentToolType);
   @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._AgentToolType);
@@ -45,21 +52,82 @@ namespace Azure.AI.Projects {
   @@copyVariants(OpenAI.IncludeEnum, Azure.AI.Projects._AgentIncludable);
 
   /**
-   * Per-tool configuration that controls tool visibility and search behavior.
+   * Deprecated name and description fields retained for SDK backward compatibility.
    */
-  model ToolConfig {
+  alias DeprecatedToolNameAndDescriptionExtension = {
     /**
-     * When true, the tool is always included in agent context and visible in `tools/list`.
-     * When false (default), the tool is hidden from `tools/list` and only discoverable via `tool_search`.
+     * Deprecated. This property is deprecated and will be removed in a future version.
      */
-    pin?: boolean;
+    #deprecated "This property is deprecated and will be removed in a future version."
+    name?: string;
 
     /**
-     * Additional text indexed for tool_search. Supplements the native tool description
-     * to improve discoverability. Does not alter `tools/list` output.
+     * Deprecated. This property is deprecated and will be removed in a future version.
      */
-    @maxLength(1000)
-    additional_search_text?: string;
+    #deprecated "This property is deprecated and will be removed in a future version."
+    description?: string;
+  };
+
+  /**
+   * Deprecated tool_configs field retained for SDK backward compatibility.
+   */
+  alias DeprecatedToolConfigExtension = {
+    /**
+     * Deprecated. This property is deprecated and will be removed in a future version.
+     */
+    #deprecated "This property is deprecated and will be removed in a future version."
+    tool_configs?: Record<ToolConfig>;
+  };
+
+  @doc("A customer-configurable GitHub Copilot built-in tool.")
+  union GitHubCopilotBuiltInTool {
+    @doc("Read and search files in the harness workspace.")
+    filesystem_read: "filesystem_read",
+
+    @doc("Create and modify files in the harness workspace.")
+    filesystem_write: "filesystem_write",
+
+    @doc("Execute operating-system commands.")
+    shell: "shell",
+
+    @doc("Fetch content and search external network resources.")
+    web: "web",
+
+    @doc("Delegate work to additional agents.")
+    subagents: "subagents",
+  }
+
+  @doc("The default enablement setting for GitHub Copilot built-in tools.")
+  model GitHubCopilotToolsetDefaultConfig {
+    @doc("Whether built-in tools are enabled by default. Defaults to true.")
+    enabled?: boolean = true;
+  }
+
+  @doc("An enablement override for a GitHub Copilot built-in tool.")
+  model GitHubCopilotToolsetConfig {
+    @doc("The built-in tool to configure.")
+    name: GitHubCopilotBuiltInTool;
+
+    @doc("Whether the built-in tool is enabled. If omitted, the toolset default applies.")
+    enabled?: boolean;
+  }
+
+  @doc("Configuration overrides for GitHub Copilot built-in tools.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview],
+    }
+  )
+  model GitHubCopilotToolsetPreview extends OpenAI.Tool {
+    @doc("The type of the toolset. Always `github_copilot_toolset_preview`.")
+    type: "github_copilot_toolset_preview";
+
+    @doc("The default configuration for built-in tools. If omitted, built-in tools are enabled by default.")
+    default_config?: GitHubCopilotToolsetDefaultConfig;
+
+    @doc("Per-tool configuration overrides. Duplicate built-in tool names are not allowed.")
+    configs?: GitHubCopilotToolsetConfig[];
   }
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
@@ -71,7 +139,7 @@ namespace Azure.AI.Projects {
        */
       project_connection_id?: string,
 
-      ...ToolConfigExtension,
+      ...DeprecatedToolConfigExtension,
     }
   );
 
@@ -79,8 +147,8 @@ namespace Azure.AI.Projects {
   @@copyProperties(
     OpenAI.WebSearchTool,
     {
-      ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
 
       /**
        * The project connections attached to this tool. There can be a maximum of 1 connection
@@ -94,8 +162,8 @@ namespace Azure.AI.Projects {
   @@copyProperties(
     OpenAI.CodeInterpreterTool,
     {
-      ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
     }
   );
 
@@ -103,8 +171,8 @@ namespace Azure.AI.Projects {
   @@copyProperties(
     OpenAI.ImageGenTool,
     {
-      ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
     }
   );
 
@@ -112,8 +180,8 @@ namespace Azure.AI.Projects {
   @@copyProperties(
     OpenAI.LocalShellToolParam,
     {
-      ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
     }
   );
 
@@ -121,8 +189,8 @@ namespace Azure.AI.Projects {
   @@copyProperties(
     OpenAI.FunctionShellToolParam,
     {
-      ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
     }
   );
 
@@ -130,8 +198,8 @@ namespace Azure.AI.Projects {
   @@copyProperties(
     OpenAI.FileSearchTool,
     {
-      ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
     }
   );
 
@@ -151,33 +219,6 @@ namespace Azure.AI.Projects {
   }
 
   /**
-   * Optional name and description fields for tool definitions and nested tool configurations.
-   */
-  alias ToolNameAndDescriptionExtension = {
-    /**
-     * Optional user-defined name for this tool or configuration.
-     */
-    name?: string;
-
-    /**
-     * Optional user-defined description for this tool or configuration.
-     */
-    description?: string;
-  };
-
-  /**
-   * Optional tool configuration extension for controlling tool visibility and search behavior.
-   */
-  alias ToolConfigExtension = {
-    /**
-     * Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-     * Resolution order: exact tool name match takes priority over `*`.
-     * Unknown tool names are silently ignored at runtime.
-     */
-    tool_configs?: Record<ToolConfig>;
-  };
-
-  /**
    * The input definition information for a bing grounding search tool as used to configure an agent.
    */
   model BingGroundingTool extends OpenAI.Tool {
@@ -186,8 +227,8 @@ namespace Azure.AI.Projects {
      */
     type: "bing_grounding";
 
-    ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
+    ...DeprecatedToolNameAndDescriptionExtension;
+    ...DeprecatedToolConfigExtension;
 
     /**
      * The bing grounding search tool parameters.
@@ -198,6 +239,7 @@ namespace Azure.AI.Projects {
   /**
    * The fabric data agent tool parameters.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model FabricDataAgentToolParameters {
     /**
      * The project connections attached to this tool. There can be a maximum of 1 connection
@@ -210,14 +252,12 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for a Microsoft Fabric tool as used to configure an agent.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model MicrosoftFabricPreviewTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'fabric_dataagent_preview'.
      */
     type: "fabric_dataagent_preview";
-
-    ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The fabric data agent tool parameters.
@@ -228,6 +268,7 @@ namespace Azure.AI.Projects {
   /**
    * The sharepoint grounding tool parameters.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model SharepointGroundingToolParameters {
     /**
      * The project connections attached to this tool. There can be a maximum of 1 connection
@@ -240,14 +281,12 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for a sharepoint tool as used to configure an agent.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model SharepointPreviewTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'sharepoint_grounding_preview'.
      */
     type: "sharepoint_grounding_preview";
-
-    ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The sharepoint grounding tool parameters.
@@ -264,8 +303,8 @@ namespace Azure.AI.Projects {
      */
     type: "azure_ai_search";
 
-    ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
+    ...DeprecatedToolNameAndDescriptionExtension;
+    ...DeprecatedToolConfigExtension;
 
     /**
      * The azure ai search index resource.
@@ -356,25 +395,23 @@ namespace Azure.AI.Projects {
      */
     type: "openapi";
 
+    ...DeprecatedToolConfigExtension;
+
     /**
      * The openapi function definition.
      */
     openapi: OpenApiFunctionDefinition;
-
-    ...ToolConfigExtension;
   }
 
   /**
    * The input definition information for a Bing custom search tool as used to configure an agent.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BingCustomSearchPreviewTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'bing_custom_search_preview'.
      */
     type: "bing_custom_search_preview";
-
-    ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The bing custom search tool parameters.
@@ -385,14 +422,12 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for a Browser Automation Tool, as used to configure an Agent.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationPreviewTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'browser_automation_preview'.
      */
     type: "browser_automation_preview";
-
-    ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The Browser Automation Tool parameters.
@@ -401,8 +436,25 @@ namespace Azure.AI.Projects {
   }
 
   /**
+   * The input definition information for a Browser Automation Tool, as used to configure an Agent.
+   */
+  @removed(Versions.v1)
+  model BrowserAutomationTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'browser_automation'.
+     */
+    type: "browser_automation";
+
+    /**
+     * The Browser Automation Tool parameters.
+     */
+    browser_automation: BrowserAutomationToolParameters;
+  }
+
+  /**
    * Definition of input parameters for the Browser Automation Tool.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolParameters {
     /**
      * The project connection parameters associated with the Browser Automation Tool.
@@ -413,6 +465,7 @@ namespace Azure.AI.Projects {
   /**
    * Definition of input parameters for the connection used by the Browser Automation Tool.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolConnectionParameters {
     /**
      * The ID of the project connection to your Azure Playwright resource.
@@ -429,12 +482,12 @@ namespace Azure.AI.Projects {
      */
     type: "azure_function";
 
+    ...DeprecatedToolConfigExtension;
+
     /**
      * The Azure Function Tool definition.
      */
     azure_function: AzureFunctionDefinition;
-
-    ...ToolConfigExtension;
   }
 
   /**
@@ -444,6 +497,7 @@ namespace Azure.AI.Projects {
     /**
      * The definition of azure function and its parameters.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
     function: {
       /**
        * The name of the function to be called.
@@ -676,6 +730,7 @@ namespace Azure.AI.Projects {
   /**
    * The bing custom search tool parameters.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BingCustomSearchToolParameters {
     /**
      * The project connections attached to this tool. There can be a maximum of 1 connection
@@ -688,6 +743,7 @@ namespace Azure.AI.Projects {
   /**
    * A bing custom search configuration.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BingCustomSearchConfiguration {
     /**
      * Project connection id for grounding with bing search
@@ -784,8 +840,8 @@ namespace Azure.AI.Projects {
      */
     type: "capture_structured_outputs";
 
-    ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
+    ...DeprecatedToolNameAndDescriptionExtension;
+    ...DeprecatedToolConfigExtension;
 
     /**
      * The structured outputs to capture from the model.
@@ -793,18 +849,16 @@ namespace Azure.AI.Projects {
     outputs: StructuredOutputDefinition;
   }
 
-  /**
-   * An agent implementing the A2A protocol.
-   */
-  model A2APreviewTool extends OpenAI.Tool {
-    /**
-     * The type of the tool. Always `"a2a_preview`.
-     */
-    type: "a2a_preview";
+  /** Supported A2A protocol versions. */
+  union A2AProtocolVersion {
+    string,
 
-    ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
+    /** A2A protocol version 1.0. */
+    v1_0: "1.0",
+  }
 
+  /** Common configuration for an agent implementing the A2A protocol. */
+  model A2AToolBase {
     /**
      * Base URL of the agent.
      */
@@ -821,11 +875,49 @@ namespace Azure.AI.Projects {
      * The connection stores authentication and other connection details needed to connect to the A2A server.
      */
     project_connection_id?: string;
+
+    /**
+     * When `true`, Foundry sends its credentials when fetching the remote
+     * agent's Agent Card. The service defaults to `false` if a value is not
+     * specified by the caller (anonymous fetch).
+     */
+    send_credentials_for_agent_card?: boolean = false;
+  }
+
+  /**
+   * An agent implementing the A2A protocol.
+   */
+  @extension("x-ms-foundry-meta", PreviewTool)
+  model A2APreviewTool extends OpenAI.Tool {
+    /**
+     * The type of the tool. Always `"a2a_preview`.
+     */
+    type: "a2a_preview";
+
+    ...A2AToolBase;
+  }
+
+  /**
+   * An agent implementing the A2A protocol.
+   */
+  model A2ATool extends OpenAI.Tool {
+    /**
+     * The type of the tool. Always `"a2a"`.
+     */
+    type: "a2a";
+
+    ...A2AToolBase;
+
+    /**
+     * The A2A protocol version supported by the agent.
+     */
+    a2a_version: A2AProtocolVersion;
   }
 
   /**
    * A WorkIQ server-side tool.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model WorkIQPreviewTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'work_iq_preview'.
@@ -836,14 +928,12 @@ namespace Azure.AI.Projects {
      * The ID of the WorkIQ project connection.
      */
     project_connection_id: string;
-
-    ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
   }
 
   /**
    * A FabricIQ server-side tool.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model FabricIQPreviewTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'fabric_iq_preview'.
@@ -869,24 +959,47 @@ namespace Azure.AI.Projects {
      * (Optional) Whether the agent requires approval before executing actions. Default is always.
      */
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
+  }
 
-    ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
+  /**
+   * A WebIQ server-side tool.
+   */
+  @extension("x-ms-foundry-meta", PreviewTool)
+  model WebIQPreviewTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'web_iq_preview'.
+     */
+    type: "web_iq_preview";
+
+    /**
+     * The ID of the WebIQ project connection.
+     */
+    project_connection_id: string;
+
+    /**
+     * The label of the WebIQ MCP server to connect to. When omitted, the service defaults to connection name extracted from project_connection_id.
+     */
+    server_label?: string;
+
+    /**
+     * Whether the agent requires approval before executing actions. When omitted, the service defaults to "always".
+     */
+    #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
+    require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
   }
 
   /**
    * A tool for integrating memories into the agent.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model MemorySearchPreviewTool extends OpenAI.Tool {
     /**
      * The type of the tool. Always `memory_search_preview`.
      */
     type: "memory_search_preview";
-
-    ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The name of the memory store to use.
@@ -921,9 +1034,6 @@ namespace Azure.AI.Projects {
      */
     type: "memory_search";
 
-    ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
-
     /**
      * The name of the memory store to use.
      */
@@ -947,21 +1057,6 @@ namespace Azure.AI.Projects {
     update_delay?: int32 = 300;
   }
 
-  /**
-   * A tool for searching over the agent's toolbox.
-   * When present, deferred tools are hidden from `tools/list` and only
-   * discoverable via `search_tools` queries at runtime.
-   */
-  model ToolboxSearchPreviewTool extends OpenAI.Tool {
-    /**
-     * The type of the tool. Always `toolbox_search_preview`.
-     */
-    type: "toolbox_search_preview";
-
-    ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
-  }
-
   // ==============================================================================
   // Grounding Tool Call Status and Document Models
   // ==============================================================================
@@ -978,7 +1073,7 @@ namespace Azure.AI.Projects {
   // Tool Call Output Content Type
   // ==============================================================================
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Output can be multiple types"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Output can be multiple types"
   @doc("The output content from a tool call, which can be a dictionary, string, or array.")
   union ToolCallOutputContent {
     @doc("A dictionary/object output.")
@@ -1028,6 +1123,7 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("A SharePoint grounding tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model SharepointGroundingToolCall extends OpenAI.OutputItem {
     type: "sharepoint_grounding_preview_call";
 
@@ -1042,6 +1138,7 @@ namespace Azure.AI.Projects {
   }
 
   @doc("The output of a SharePoint grounding tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model SharepointGroundingToolCallOutput extends OpenAI.OutputItem {
     type: "sharepoint_grounding_preview_call_output";
 
@@ -1092,6 +1189,7 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("A Bing custom search tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BingCustomSearchToolCall extends OpenAI.OutputItem {
     type: "bing_custom_search_preview_call";
 
@@ -1106,6 +1204,7 @@ namespace Azure.AI.Projects {
   }
 
   @doc("The output of a Bing custom search tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BingCustomSearchToolCallOutput extends OpenAI.OutputItem {
     type: "bing_custom_search_preview_call_output";
 
@@ -1162,6 +1261,7 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("A browser automation tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolCall extends OpenAI.OutputItem {
     type: "browser_automation_preview_call";
 
@@ -1176,6 +1276,7 @@ namespace Azure.AI.Projects {
   }
 
   @doc("The output of a browser automation tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolCallOutput extends OpenAI.OutputItem {
     type: "browser_automation_preview_call_output";
 
@@ -1194,6 +1295,7 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("A Fabric data agent tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model FabricDataAgentToolCall extends OpenAI.OutputItem {
     type: "fabric_dataagent_preview_call";
 
@@ -1208,6 +1310,7 @@ namespace Azure.AI.Projects {
   }
 
   @doc("The output of a Fabric data agent tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model FabricDataAgentToolCallOutput extends OpenAI.OutputItem {
     type: "fabric_dataagent_preview_call_output";
 
@@ -1264,6 +1367,7 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("An A2A (Agent-to-Agent) tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model A2AToolCall extends OpenAI.OutputItem {
     type: "a2a_preview_call";
 
@@ -1281,6 +1385,7 @@ namespace Azure.AI.Projects {
   }
 
   @doc("The output of an A2A (Agent-to-Agent) tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model A2AToolCallOutput extends OpenAI.OutputItem {
     type: "a2a_preview_call_output";
 
@@ -1302,6 +1407,7 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("A memory search tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model MemorySearchToolCall extends OpenAI.OutputItem {
     type: "memory_search_call";
 
@@ -1313,6 +1419,7 @@ namespace Azure.AI.Projects {
   }
 
   @doc("A memory command tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model MemoryCommandToolCall extends OpenAI.OutputItem {
     type: "memory_command_preview_call";
 
@@ -1327,6 +1434,7 @@ namespace Azure.AI.Projects {
   }
 
   @doc("The output of a memory command tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model MemoryCommandToolCallOutput extends OpenAI.OutputItem {
     type: "memory_command_preview_call_output";
 

@@ -39,6 +39,14 @@ interface TopologyResources {
   /**
    * Gets a specific topology component.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve existing stable swagger operationId."
+  @operationId("Topology_Get")
+  @OpenAPI.extension(
+    "x-ms-examples",
+    #{
+      `Get topology`: #{ $ref: "./examples/Topology/GetTopology_example.json" },
+    }
+  )
   get is ArmResourceRead<
     TopologyResource,
     BaseParameters = {
@@ -56,6 +64,16 @@ interface TopologyResources {
   /**
    * Gets a list that allows to build a topology view of a subscription and location.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve existing stable swagger operationId."
+  @operationId("Topology_ListByHomeRegion")
+  @OpenAPI.extension(
+    "x-ms-examples",
+    #{
+      `Get topology on a subscription from security data location`: #{
+        $ref: "./examples/Topology/GetTopologySubscriptionLocation_example.json",
+      },
+    }
+  )
   listByHomeRegion is Azure.ResourceManager.Extension.ListByTarget<
     Azure.ResourceManager.Extension.Subscription,
     TopologyResource,

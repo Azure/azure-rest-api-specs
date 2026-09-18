@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -40,4 +41,8 @@ namespace ContentSafety;
 enum Versions {
   v2023_10_01: "2023-10-01",
   v2024_09_01: "2024-09-01",
+
+  @doc("Public preview that adds the synchronous Unified Moderate operation.")
+  @Azure.Core.previewVersion
+  v2026_09_01_preview: "2026-09-01-preview",
 }

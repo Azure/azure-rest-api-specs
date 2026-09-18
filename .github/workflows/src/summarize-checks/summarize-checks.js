@@ -233,6 +233,12 @@ const CHECK_METADATA = [
     troubleshootingGuide: checkAndDiagramTsg(3),
   },
   {
+    precedence: 1,
+    name: "Package Name Approval",
+    suppressionLabels: [],
+    troubleshootingGuide: defaultTsg,
+  },
+  {
     precedence: 10,
     name: AUTOMATED_CHECK_NAME,
     suppressionLabels: [],
@@ -259,6 +265,15 @@ export default async function summarizeChecks({ github, context, core }) {
   if (!issue_number) {
     core.warning(`No issue number found for this event. Exiting summarize-checks.js early.`);
     return;
+  }
+
+  // Publish PR identity as step outputs so the workflow can upload issue-number / head-sha
+  // handoff artifacts. Downstream workflow_run consumers (e.g. data-plane review assignment)
+  // resolve the PR from these via extractInputs, since labels applied below use the default
+  // token and are invisible to `labeled` triggers.
+  core.setOutput("issue_number", issue_number);
+  if (head_sha) {
+    core.setOutput("head_sha", head_sha);
   }
 
   const targetBranch =

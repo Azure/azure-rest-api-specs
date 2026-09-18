@@ -11,6 +11,7 @@ using Azure.Core.Foundations;
 
 namespace Microsoft.PlanetaryComputer;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Generic paged response model")
 @friendlyName("{name}PagedResponse", T)
 model Page<T> {
@@ -131,9 +132,11 @@ model IngestionDefinition {
   @doc("Ingestion name")
   displayName?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Source catalog URL. Required for StaticCatalog ingestion type")
   sourceCatalogUrl?: url;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @added(Versions.v2026_04_15)
   @doc("Parquet catalog URL. Required for StacGeoparquet ingestion type")
   stacGeoparquetUrl?: url;
@@ -238,6 +241,7 @@ model IngestionRun {
   @doc("Creation time")
   creationTime: utcDateTime;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("URL of the source catalog")
   sourceCatalogUrl?: url;
 
@@ -442,7 +446,7 @@ interface StacItems {
      * This union allows the request body to accept either a single Item or a collection of Items.
      */
     #suppress "@azure-tools/typespec-autorest/union-unsupported" ""
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Backcompatibility with existing clients"
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backcompatibility with existing clients"
     @body
     body: StacItemOrStacItemCollection,
   ):

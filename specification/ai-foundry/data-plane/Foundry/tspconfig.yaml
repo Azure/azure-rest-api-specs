@@ -12,20 +12,6 @@ options:
     omit-unreachable-types: true
     openapi-versions:
       - "3.2.0"
-  "@azure-tools/typespec-java":
-    api-version: "v1"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-projects"
-    namespace: "com.azure.ai.projects"
-    service-name: "AIProjects"
-    partial-update: true
-    enable-sync-stack: true
-    generate-tests: false
-    generate-samples: false
-    custom-types-subpackage: "implementation.models"
-    customization-class: customizations/src/main/java/ProjectsCustomizations.java
-    rename-model:
-      FilesFileDetails: SkillFileDetails
-    flavor: azure
   "@typespec/json-schema":
     emitAllModels: true
     emitAllRefs: false
@@ -43,6 +29,7 @@ imports:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
   disable:
     "@azure-tools/typespec-azure-core/casing-style": "Since we have many names in the form XxxxAIXxxx"
     "@azure-tools/typespec-azure-core/no-string-discriminator": "Use an extensible union instead of a plain string"

@@ -11,6 +11,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SecurityInsights;
 
@@ -26,6 +27,7 @@ model EntityResource {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_10_01_preview)
 interface DataConnectorsCheckRequirementsOperationGroup {
   /**
    * Get requirements state for a data connector type.
@@ -60,10 +62,13 @@ interface DataConnectorsCheckRequirementsOperationGroup {
  * Get geodata for a single IP address
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/enrichment/{enrichmentType}/listGeodataByIp")
 @post
 @tag("Enrichment")
+@added(Versions.v2025_10_01_preview)
 op listGeodataByIp(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -87,6 +92,7 @@ op listGeodataByIp(
   /**
    * IP address (v4 or v6) to be enriched
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @bodyRoot
   ipAddressBody: EnrichmentIpAddressBody,
 ): ArmResponse<EnrichmentIpGeodata> | CloudError;
@@ -94,10 +100,13 @@ op listGeodataByIp(
 /**
  * Get whois information for a single domain name
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/enrichment/{enrichmentType}/listWhoisByDomain")
 @post
 @tag("Enrichment")
+@added(Versions.v2025_10_01_preview)
 op listWhoisByDomain(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -131,7 +140,9 @@ interface SourceControlOperationGroup {
    * Gets a list of repositories metadata.
    */
   // Due to TypeSpec provider action limitation: https://github.com/Azure/typespec-azure/issues/3224#issuecomment-3257368342
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @list
@@ -233,6 +244,7 @@ interface ThreatIntelligenceIndicatorMetricsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_10_01_preview)
 interface ThreatIntelligenceOperationGroup {
   /**
    * Gets the count of all TI objects for the workspace.

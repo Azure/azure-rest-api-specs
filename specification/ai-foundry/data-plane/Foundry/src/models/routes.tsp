@@ -12,10 +12,6 @@ alias ModelsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptI
 
 alias ListModelVersionsParameters = {};
 
-const ModelsRequiredPreviews = #{
-  required_previews: #[FoundryFeaturesOptInKeys.models_v1_preview],
-};
-
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @tag("Models")
 interface Models
@@ -46,7 +42,6 @@ interface Models
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Delete returns 200 with no body by service design"
   @summary("Delete a model version")
-  @doc("Delete the specific version of the ModelVersion. The service returns 200 OK if the ModelVersion was deleted successfully or if the ModelVersion does not exist.")
   @delete
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
   deleteVersion is FoundryResourceOperation<
@@ -69,10 +64,6 @@ interface Models
   /** Updates an existing model version identified by its version ID. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
   @summary("Update a model version")
-  @doc(
-    "Update an existing ModelVersion with the given version id",
-    ModelVersion
-  )
   @operationId("Models_updateVersion")
   @patch
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
@@ -126,6 +117,7 @@ interface Models
       @path
       version: string;
 
+      /** The pending upload request request body. */
       @bodyRoot
       pending_upload_request: ModelPendingUploadRequest;
     },
@@ -150,6 +142,7 @@ interface Models
       @path
       version: string;
 
+      /** The credential request request body. */
       @bodyRoot
       credential_request: ModelCredentialRequest;
     },

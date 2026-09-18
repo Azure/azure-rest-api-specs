@@ -29,12 +29,32 @@ using Microsoft.ContainerRegistry;
 
 @@usage(Webhook, Usage.input | Usage.output, "java");
 
-@@clientName(MyPrivateLinkResource, "PrivateLinkResource", "java");
+@@clientName(
+  MyPrivateLinkResource,
+  "PrivateLinkResource",
+  "java,javascript,go,python"
+);
 
 @@clientName(IPRule.value, "$DO_NOT_NORMALIZE$iPAddressOrRange", "javascript");
 
 // C# configurations for backward compatibility and naming conventions.
 // These settings restore the public API surface of the previous autorest-based SDK to avoid breaking changes.
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
+@@clientOption(
+  Registry,
+  "resource-rbac-roles",
+  #{
+    AcrDelete: "c2f4ef07-c644-48eb-af81-4b1b4947fb11",
+    AcrImageSigner: "6cef56e8-d556-48e5-a04f-b8e64114680f",
+    AcrPull: "7f951dda-4ed3-4680-a7ca-43fe172d538d",
+    AcrPush: "8311e382-0749-4cb8-b61a-304f252e45ec",
+    AcrQuarantineReader: "cdda3590-29a3-44f6-95f2-9f980659eb04",
+    AcrQuarantineWriter: "c8d4ff99-41c3-41a8-9f60-21dfdad59608",
+  },
+  "csharp"
+);
 
 // ContainerRegistryResourceTypeExtensible is a custom extensible union wrapping the original enum,
 // allowing the RegistryNameCheckRequest.type property to accept both known enum values and arbitrary strings,
@@ -159,6 +179,11 @@ namespace Microsoft.ContainerRegistry {
   "ActionsRequiredForPrivateLinkServiceConsumer",
   "csharp"
 );
+@@clientName(
+  AdditionalAuthenticationProperties,
+  "ContainerRegistryCacheAuthentication",
+  "csharp"
+);
 @@clientName(Archive, "ContainerRegistryArchive", "csharp");
 @@clientName(
   ArchivePackageSourceProperties,
@@ -257,6 +282,11 @@ namespace Microsoft.ContainerRegistry {
   "csharp"
 );
 @@clientName(
+  GarAuthenticationProperties,
+  "GoogleArtifactRegistryCacheAuthentication",
+  "csharp"
+);
+@@clientName(
   GenerateCredentialsParameters,
   "ContainerRegistryGenerateCredentialsContent",
   "csharp"
@@ -309,7 +339,7 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(MetadataSearch, "ContainerRegistryMetadataSearch", "csharp");
 @@clientName(
   WritableCacheRepos,
-  "ContainerRegistryWritableCacheRepos",
+  "ContainerRegistryWritableCacheRepositories",
   "csharp"
 );
 @@clientName(
@@ -327,7 +357,7 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(PackageSourceType, "ContainerRegistryPackageSourceType", "csharp");
 @@clientName(ParentProperties, "ConnectedRegistryParent", "csharp");
 @@clientName(PasswordName, "ContainerRegistryPasswordName", "csharp");
-@@clientName(PipelineOptions, "PipelineOption", "csharp");
+@@clientName(PipelineOptions, "ContainerRegistryPipelineOption", "csharp");
 @@clientName(PipelineRun, "ContainerRegistryPipelineRun", "csharp");
 @@clientName(
   PipelineRunRequest,
@@ -373,7 +403,7 @@ namespace Microsoft.ContainerRegistry {
 );
 @@clientName(
   PipelineSourceTriggerDescriptor.timestamp,
-  "SourceTriggerTimestamp",
+  "SourceTriggerOn",
   "csharp"
 );
 @@clientName(PipelineSourceTriggerProperties.status, "Status", "csharp");
@@ -411,7 +441,11 @@ namespace Microsoft.ContainerRegistry {
   "ContainerRegistryCredentialRegenerateContent",
   "csharp"
 );
-@@clientName(RegionalEndpoints, "RegionalEndpoint", "csharp");
+@@clientName(
+  RegionalEndpoints,
+  "ContainerRegistryRegionalEndpointStatus",
+  "csharp"
+);
 @@clientName(
   Registries.checkNameAvailability,
   "CheckContainerRegistryNameAvailability",
@@ -555,6 +589,11 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(TrustPolicy, "ContainerRegistryTrustPolicy", "csharp");
 @@clientName(TrustPolicy.type, "PolicyType", "csharp");
 @@clientName(TrustPolicyType, "ContainerRegistryTrustPolicyType", "csharp");
+@@clientName(
+  VirtualNetworkRule,
+  "ContainerRegistryVirtualNetworkRule",
+  "csharp"
+);
 @@clientName(Webhook, "ContainerRegistryWebhook", "csharp");
 @@clientName(WebhookAction, "ContainerRegistryWebhookAction", "csharp");
 @@clientName(

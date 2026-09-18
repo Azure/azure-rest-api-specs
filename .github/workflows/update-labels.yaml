@@ -9,6 +9,7 @@ on:
     workflows:
       [
         "ARM Auto SignOff - Set Status",
+        "ARM Universal Auto SignOff",
         "ARM Modeling Review",
         "SDK Breaking Change Labels",
         "SDK Suppressions",
@@ -29,7 +30,7 @@ jobs:
     runs-on: ubuntu-slim
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           sparse-checkout: |
             .github

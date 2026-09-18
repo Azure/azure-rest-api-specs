@@ -14,6 +14,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
 import "./Extension.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

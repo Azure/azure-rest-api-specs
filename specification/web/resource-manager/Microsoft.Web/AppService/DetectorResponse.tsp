@@ -52,7 +52,8 @@ interface DetectorResponseOps
         @segment("detectors")
         @key
         detectorName: string,
-      }
+      },
+      ResourceName = "HostingEnvironmentDetector"
     > {}
 
 @tag("Diagnostics")
@@ -118,7 +119,8 @@ interface DiagnosticOps
         @segment("detectors")
         @key
         detectorName: string,
-      }
+      },
+      ResourceName = "SiteDetector"
     > {}
 
 @armResourceOperations
@@ -189,7 +191,8 @@ interface DetectorResponseOperationGroupOps
         @segment("detectors")
         @key
         detectorName: string,
-      }
+      },
+      ResourceName = "SiteSlotDetector"
     > {}
 
 @tag("Diagnostics")

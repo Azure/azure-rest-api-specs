@@ -192,6 +192,33 @@ using Microsoft.StorageCache;
 @@clientName(ImportJobsListResult, "StorageCacheImportJobsResult", "csharp");
 @@clientName(ExpansionJob, "AmlFileSystemExpansionJob", "csharp");
 @@clientName(ExpansionJobUpdate, "AmlFileSystemExpansionJobPatch", "csharp");
+@@clientName(RebalanceJob, "StorageCacheRebalanceJob", "csharp");
+@@clientName(
+  RebalanceJobAdminStatus,
+  "StorageCacheRebalanceJobAdminStatus",
+  "csharp"
+);
+@@clientName(
+  RebalanceJobProperties,
+  "StorageCacheRebalanceJobProperties",
+  "csharp"
+);
+@@clientName(
+  RebalanceJobPropertiesProvisioningState,
+  "StorageCacheRebalanceJobPropertiesProvisioningState",
+  "csharp"
+);
+@@clientName(
+  RebalanceJobPropertiesStatus,
+  "StorageCacheRebalanceJobPropertiesStatus",
+  "csharp"
+);
+@@clientName(
+  RebalanceJobStatusType,
+  "StorageCacheRebalanceJobStatusType",
+  "csharp"
+);
+@@clientName(RebalanceJobUpdate, "StorageCacheRebalanceJobPatch", "csharp");
 @@clientName(
   KeyVaultKeyReference,
   "StorageCacheEncryptionKeyVaultKeyReference",
@@ -241,6 +268,17 @@ using Microsoft.StorageCache;
 @@clientName(ExpansionJobPropertiesStatus.startTimeUTC, "StartedOn", "csharp");
 @@clientName(
   ExpansionJobPropertiesStatus.completionTimeUTC,
+  "CompletedOn",
+  "csharp"
+);
+@@clientName(
+  ExpansionJobProperties.runRebalanceJob,
+  "ShouldRunRebalanceJob",
+  "csharp"
+);
+@@clientName(RebalanceJobPropertiesStatus.startTimeUTC, "StartedOn", "csharp");
+@@clientName(
+  RebalanceJobPropertiesStatus.completionTimeUTC,
   "CompletedOn",
   "csharp"
 );
@@ -356,9 +394,6 @@ using Microsoft.StorageCache;
   "csharp"
 );
 @@alternateType(StorageTarget.location, Azure.Core.azureLocation, "csharp");
-
-@@visibility(CacheProperties.primingJobs, Lifecycle.Read);
-@@visibility(AutoExportJobProperties.status, Lifecycle.Read, Lifecycle.Create);
 
 @@clientName(Caches.spaceAllocation, "UpdateSpaceAllocation", "csharp");
 @@clientName(Caches.debugInfo, "EnableDebugInfo", "csharp");

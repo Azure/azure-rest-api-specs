@@ -29,3 +29,8 @@ using Microsoft.ComputeLimit;
 );
 @@clientName(VmFamily, "ComputeLimitVmFamily", "csharp");
 @@clientName(VmFamilyProperties, "ComputeLimitVmFamilyProperties", "csharp");
+@@clientName(
+  SetMemberCapOverridesRequest,
+  "ComputeLimitSetMemberCapOverridesContent",
+  "csharp"
+);

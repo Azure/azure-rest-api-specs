@@ -17,8 +17,10 @@ namespace Microsoft.Resources;
  * Resource information.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-model GenericResource
-  is Azure.ResourceManager.Legacy.GenericResource<unknown, true> {
+model GenericResource is Azure.ResourceManager.Legacy.GenericResource<
+  unknown,
+  true
+> {
   /**
    * The plan of the resource.
    */
@@ -90,17 +92,20 @@ interface Resources {
   /**
    * Checks by ID whether a resource exists. This API currently works only for a limited set of Resource providers. In the event that a Resource provider does not implement this API, ARM will respond with a 405. The alternative then is to use the GET API to check for the existence of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "For backward compatibility"
   checkExistenceById is genericOps.CheckExistence<GenericResource>;
 
   /**
    * Gets a resource by ID.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "For backward compatibility"
   getById is genericOps.Read<GenericResource>;
 
   /**
    * Create a resource by ID.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "For backward compatibility"
   createOrUpdateById is genericOps.CreateOrUpdateAsync<
     GenericResource,
     Response =
@@ -116,11 +121,13 @@ interface Resources {
   /**
    * Update a resource by ID.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "For backward compatibility"
   updateById is genericOps.CustomPatchAsync<GenericResource, GenericResource>;
 
   /**
    * Deletes a resource by ID.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "For backward compatibility"
   deleteById is genericOps.DeleteWithoutOkAsync<
     GenericResource,
     Response =
@@ -174,18 +181,21 @@ alias specificResourcesOps = Azure.ResourceManager.Legacy.LegacyOperations<
 @armResourceOperations(#{ omitTags: true })
 interface SpecificResources {
   /** Checks whether a resource exists. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "For backward compatibility"
   @tag("Resources")
   checkExistence is specificResourcesOps.CheckExistence<GenericResource>;
 
   /**
    * Gets a resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "For backward compatibility"
   @tag("Resources")
   get is specificResourcesOps.Read<GenericResource>;
 
   /**
    * Creates a resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @tag("Resources")
   createOrUpdate is specificResourcesOps.CreateOrUpdateAsync<
@@ -203,6 +213,7 @@ interface SpecificResources {
   /**
    * Updates a resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "For backward compatibility"
   @tag("Resources")
   update is specificResourcesOps.CustomPatchAsync<
     GenericResource,
@@ -212,6 +223,7 @@ interface SpecificResources {
   /**
    * Deletes a resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "For backward compatibility"
   @tag("Resources")
   delete is specificResourcesOps.DeleteWithoutOkAsync<
     GenericResource,

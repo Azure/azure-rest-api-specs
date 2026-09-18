@@ -11,8 +11,6 @@ namespace Azure.AI.Projects;
 @@usage(UpdateToolboxRequest, Usage.input);
 @@access(UpdateToolboxRequest, Access.public);
 
-alias ToolboxesPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.toolboxes_v1_preview>;
-
 @tag("Toolboxes")
 interface Toolboxes {
   /** Creates a new toolbox version, provisioning the toolbox itself if it does not already exist. */
@@ -21,9 +19,8 @@ interface Toolboxes {
   @operationId("createToolboxVersion")
   @post
   @route("/toolboxes/{name}/versions")
-  @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   createToolboxVersion is FoundryDataPlaneOperation<
-    CreateToolboxVersionRequest & ToolboxesPreviewHeader,
+    CreateToolboxVersionRequest,
     ToolboxVersionObject
   >;
 
@@ -33,11 +30,7 @@ interface Toolboxes {
   @operationId("getToolbox")
   @get
   @route("/toolboxes/{name}")
-  @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
-  getToolbox is FoundryDataPlaneOperation<
-    GetToolboxRequest & ToolboxesPreviewHeader,
-    ToolboxObject
-  >;
+  getToolbox is FoundryDataPlaneOperation<GetToolboxRequest, ToolboxObject>;
 
   /** Returns the toolboxes available in the current project. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -46,9 +39,8 @@ interface Toolboxes {
   @get
   @list
   @route("/toolboxes")
-  @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   listToolboxes is FoundryDataPlaneOperation<
-    ListToolboxesRequest & ToolboxesPreviewHeader,
+    ListToolboxesRequest,
     AgentsPagedResult<ToolboxObject>
   >;
 
@@ -59,9 +51,8 @@ interface Toolboxes {
   @get
   @list
   @route("/toolboxes/{name}/versions")
-  @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   listToolboxVersions is FoundryDataPlaneOperation<
-    ListToolboxVersionsRequest & ToolboxesPreviewHeader,
+    ListToolboxVersionsRequest,
     AgentsPagedResult<ToolboxVersionObject>
   >;
 
@@ -71,10 +62,37 @@ interface Toolboxes {
   @operationId("getToolboxVersion")
   @get
   @route("/toolboxes/{name}/versions/{version}")
-  @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   getToolboxVersion is FoundryDataPlaneOperation<
-    GetToolboxVersionRequest & ToolboxesPreviewHeader,
+    GetToolboxVersionRequest,
     ToolboxVersionObject
+  >;
+
+  /** Invokes the latest version of the specified toolbox through its MCP endpoint. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Invoke the latest toolbox version through MCP")
+  @operationId("invokeLatestToolboxMcp")
+  @post
+  @route("/toolboxes/{name}:invoke_mcp")
+  invokeLatestToolboxMcp is FoundryDataPlaneOperation<
+    {
+      /** The name of the toolbox. */
+      @path name: string;
+
+      /** The content type of the MCP request body. */
+      @header contentType: string;
+
+      /** The MCP request body. */
+      @alternateType(unknown, "java")
+      @body
+      request: Record<unknown>;
+    },
+    {
+      /** The content type of the MCP response body. */
+      @header contentType: string;
+
+      /** The MCP response body. */
+      @body response: unknown;
+    }
   >;
 
   /** Updates the toolbox's default version pointer to the specified version. */
@@ -83,9 +101,8 @@ interface Toolboxes {
   @operationId("updateToolbox")
   @patch
   @route("/toolboxes/{name}")
-  @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   updateToolbox is FoundryDataPlaneOperation<
-    UpdateToolboxRequest & ToolboxesPreviewHeader,
+    UpdateToolboxRequest,
     ToolboxObject
   >;
 
@@ -95,11 +112,7 @@ interface Toolboxes {
   @operationId("deleteToolbox")
   @delete
   @route("/toolboxes/{name}")
-  @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
-  deleteToolbox is FoundryDataPlaneOperation<
-    DeleteToolboxRequest & ToolboxesPreviewHeader,
-    void
-  >;
+  deleteToolbox is FoundryDataPlaneOperation<DeleteToolboxRequest, void>;
 
   /** Removes the specified version of a toolbox. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -107,9 +120,8 @@ interface Toolboxes {
   @operationId("deleteToolboxVersion")
   @delete
   @route("/toolboxes/{name}/versions/{version}")
-  @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   deleteToolboxVersion is FoundryDataPlaneOperation<
-    DeleteToolboxVersionRequest & ToolboxesPreviewHeader,
+    DeleteToolboxVersionRequest,
     void
   >;
 }

@@ -1,4 +1,5 @@
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
@@ -12,6 +13,7 @@ const SkillsRequiredPreviews = #{
 };
 
 @doc("Inline content for defining a simple skill without uploading files. Follows the agentskills.io SKILL.md specification.")
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model SkillInlineContent {
   @doc("A human-readable description of what the skill does and when to use it.")
   @maxLength(1024)
@@ -35,6 +37,7 @@ model SkillInlineContent {
 }
 
 @doc("Multipart request body for creating a skill version from files. Accepts either a single zip file or multiple individual skill files (directory upload). For zip uploads, the server extracts and validates contents. For directory uploads, files are validated as-is.")
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model CreateSkillVersionFromFilesBody {
   @doc("Skill files to upload. Upload a single zip file or multiple individual files with relative paths.")
   files: HttpPart<File>[];
@@ -60,6 +63,7 @@ alias DeleteSkillRequest = {
 };
 
 @doc("A skill resource.")
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model Skill {
   @doc("The unique identifier of the skill.")
   id: string;
@@ -82,6 +86,7 @@ model Skill {
 }
 
 @doc("A specific version of a skill.")
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model SkillVersion {
   @doc("The unique identifier of the skill version.")
   id: string;
@@ -168,7 +173,9 @@ alias DeleteSkillVersionRequest = {
   version: string;
 };
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A deleted skill.")
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model DeleteSkillResponse {
   @doc("The unique identifier of the deleted skill.")
   id: string;
@@ -180,7 +187,9 @@ model DeleteSkillResponse {
   deleted: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("A deleted skill version.")
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model DeleteSkillVersionResponse {
   @doc("The unique identifier of the deleted skill version.")
   id: string;
@@ -195,7 +204,9 @@ model DeleteSkillVersionResponse {
   version: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The response body for downloading a skill package.")
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model DownloadSkillResponse {
   @doc("The media type of the returned package content.")
   @header("Content-Type")

@@ -19,6 +19,7 @@ import "./JoinRequestDetails.tsp";
 import "./StudentDetails.tsp";
 import "./StudentLabDetails.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

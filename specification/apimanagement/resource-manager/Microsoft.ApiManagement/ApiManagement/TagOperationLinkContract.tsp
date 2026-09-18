@@ -61,7 +61,8 @@ interface TagOperationLinkContractOps
         @minLength(1)
         @maxLength(80)
         operationLinkId: string,
-      }
+      },
+      ResourceName = "ServiceTagOperationLink"
     > {}
 
 @armResourceOperations
@@ -164,7 +165,8 @@ interface WorkspaceTagOperationLinkOps
         @minLength(1)
         @maxLength(80)
         operationLinkId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceTagOperationLink"
     > {}
 
 @armResourceOperations

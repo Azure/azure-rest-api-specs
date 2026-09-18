@@ -4,13 +4,348 @@ import "../agents/models.tsp";
 import "../skills/models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-const ToolboxesRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.toolboxes_v1_preview],
+/**
+ * Per-tool configuration that controls tool visibility and search behavior.
+ */
+model ToolConfig {
+  /**
+   * When true, the tool is always included in agent context and visible in `tools/list`.
+   * When false (default), the tool is hidden from `tools/list` and only discoverable via `tool_search`.
+   */
+  pin?: boolean;
+
+  /**
+   * Additional text indexed for tool_search. Supplements the native tool description
+   * to improve discoverability. Does not alter `tools/list` output.
+   */
+  @maxLength(1000)
+  additional_search_text?: string;
+}
+
+/**
+ * Optional tool configuration extension for controlling tool visibility and search behavior.
+ */
+alias ToolConfigExtension = {
+  /**
+   * Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+   * Resolution order: exact tool name match takes priority over `*`.
+   * Unknown tool names are silently ignored at runtime.
+   */
+  tool_configs?: Record<ToolConfig>;
 };
 
+/**
+ * Optional name and description fields for tool definitions and nested tool configurations.
+ */
+alias ToolNameAndDescriptionExtension = {
+  /**
+   * Optional user-defined name for this tool or configuration.
+   */
+  name?: string;
+
+  /**
+   * Optional user-defined description for this tool or configuration.
+   */
+  description?: string;
+};
+
+/**
+ * Spreads `Source`, changing the selected properties to optional.
+ */
+model WithFieldsOptional<Source, Keys extends string> {
+  ...OmitProperties<Source, Keys>;
+  ...PickProperties<OptionalProperties<Source>, Keys>;
+}
+
+/**
+ * Spreads tool-specific fields from `Source`, excluding fields owned by `ToolboxTool`.
+ */
+alias ToolFields<Source> = {
+  ...OmitProperties<Source, "name" | "description" | "type" | "tool_configs">;
+};
+
+alias ToolboxCodeInterpreterToolType = "code_interpreter";
+alias ToolboxFileSearchToolType = "file_search";
+alias ToolboxWebSearchToolType = "web_search";
+alias ToolboxShellToolType = "shell";
+alias ToolboxMCPToolType = "mcp";
+alias ToolboxAzureAISearchToolType = "azure_ai_search";
+alias ToolboxOpenApiToolType = "openapi";
+alias ToolboxA2AToolType = "a2a";
+alias ToolboxA2APreviewToolType = "a2a_preview";
+alias ToolboxBrowserAutomationPreviewToolType = "browser_automation_preview";
+alias ToolboxBrowserAutomationToolType = "browser_automation";
+alias ToolboxReminderPreviewToolType = "reminder_preview";
+alias ToolboxWorkIQPreviewToolType = "work_iq_preview";
+alias ToolboxFabricIQPreviewToolType = "fabric_iq_preview";
+alias ToolboxWebIQPreviewToolType = "web_iq_preview";
+alias ToolboxSearchToolType = "toolbox_search";
+alias ToolboxSearchPreviewToolType = "toolbox_search_preview";
+
+/**
+ * Supported tool types for tools stored in a toolbox.
+ */
+union ToolboxToolType {
+  code_interpreter: ToolboxCodeInterpreterToolType,
+  file_search: ToolboxFileSearchToolType,
+  web_search: ToolboxWebSearchToolType,
+  mcp: ToolboxMCPToolType,
+  azure_ai_search: ToolboxAzureAISearchToolType,
+  openapi: ToolboxOpenApiToolType,
+  a2a_preview: ToolboxA2APreviewToolType,
+  browser_automation_preview: ToolboxBrowserAutomationPreviewToolType,
+  reminder_preview: ToolboxReminderPreviewToolType,
+  work_iq_preview: ToolboxWorkIQPreviewToolType,
+  fabric_iq_preview: ToolboxFabricIQPreviewToolType,
+  toolbox_search: ToolboxSearchToolType,
+  toolbox_search_preview: ToolboxSearchPreviewToolType,
+  a2a: ToolboxA2AToolType,
+  shell: ToolboxShellToolType,
+  web_iq_preview: ToolboxWebIQPreviewToolType,
+
+  @removed(Versions.v1)
+  browser_automation: ToolboxBrowserAutomationToolType,
+}
+
+/**
+ * An abstract representation of a tool stored in a toolbox.
+ */
+@discriminator("type")
+model ToolboxTool {
+  /**
+   * The type of tool.
+   */
+  type: ToolboxToolType;
+
+  ...ToolNameAndDescriptionExtension;
+  ...ToolConfigExtension;
+}
+
+/**
+ * A code interpreter tool stored in a toolbox.
+ */
+model CodeInterpreterToolboxTool extends ToolboxTool {
+  type: ToolboxCodeInterpreterToolType;
+  ...ToolFields<OpenAI.CodeInterpreterTool>;
+}
+
+/**
+ * A file search tool stored in a toolbox.
+ */
+model FileSearchToolboxTool extends ToolboxTool {
+  type: ToolboxFileSearchToolType;
+  ...WithFieldsOptional<ToolFields<OpenAI.FileSearchTool>, "vector_store_ids">;
+}
+
+/**
+ * A web search tool stored in a toolbox.
+ */
+model WebSearchToolboxTool extends ToolboxTool {
+  type: ToolboxWebSearchToolType;
+  ...ToolFields<OpenAI.WebSearchTool>;
+}
+
+/**
+ * An execution environment for a shell tool stored in a toolbox. This environment model is scoped to toolbox configuration and does not modify the OpenAI shell environment contract.
+ */
+@discriminator("type")
+model ToolboxShellEnvironment {
+  /**
+   * The type of the shell execution environment.
+   */
+  type: string;
+}
+
+/**
+ * Network access policy for an automatically provisioned toolbox shell container.
+ */
+@discriminator("type")
+model ToolboxShellNetworkPolicy {
+  /**
+   * The type of network access policy.
+   */
+  type: string;
+}
+
+/**
+ * A network policy that disables outbound access from a toolbox shell container.
+ */
+model ToolboxShellNetworkPolicyDisabled extends ToolboxShellNetworkPolicy {
+  /**
+   * The type of network access policy. Always `disabled`.
+   */
+  type: "disabled";
+}
+
+/**
+ * An automatically provisioned container environment for a shell tool stored in a toolbox.
+ */
+model ToolboxShellContainerAutoEnvironment extends ToolboxShellEnvironment {
+  /**
+   * The type of the shell execution environment. Always `container_auto`.
+   */
+  type: "container_auto";
+
+  ...OmitProperties<OpenAI.ContainerAutoParam, "type" | "network_policy">;
+
+  /**
+   * The network access policy for the container. When omitted, the service defaults to disabled outbound network access.
+   */
+  network_policy?: ToolboxShellNetworkPolicy;
+}
+
+/**
+ * An existing container environment for a shell tool stored in a toolbox.
+ */
+model ToolboxShellContainerReferenceEnvironment
+  extends ToolboxShellEnvironment {
+  /**
+   * The type of the shell execution environment. Always `container_reference`.
+   */
+  type: "container_reference";
+
+  ...OmitProperties<
+    OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam,
+    "type"
+  >;
+}
+
+/**
+ * A shell tool stored in a toolbox. This model is additive to toolbox configuration and does not modify the OpenAI tool contract or existing toolbox tool definitions.
+ */
+model ShellToolboxTool extends ToolboxTool {
+  /**
+   * The type of the tool. Always `shell`.
+   */
+  type: ToolboxShellToolType;
+
+  ...OmitProperties<ToolFields<OpenAI.FunctionShellToolParam>, "environment">;
+
+  /**
+   * The environment in which shell commands are executed. Specify an automatically provisioned container or an existing container.
+   */
+  environment: ToolboxShellEnvironment;
+}
+
+/**
+ * An MCP tool stored in a toolbox.
+ */
+model MCPToolboxTool extends ToolboxTool {
+  type: ToolboxMCPToolType;
+  ...ToolFields<OpenAI.MCPTool>;
+}
+
+/**
+ * An Azure AI Search tool stored in a toolbox.
+ */
+model AzureAISearchToolboxTool extends ToolboxTool {
+  type: ToolboxAzureAISearchToolType;
+  ...ToolFields<AzureAISearchTool>;
+}
+
+/**
+ * An OpenAPI tool stored in a toolbox.
+ */
+model OpenApiToolboxTool extends ToolboxTool {
+  type: ToolboxOpenApiToolType;
+  ...ToolFields<OpenApiTool>;
+}
+
+/**
+ * An A2A tool stored in a toolbox.
+ */
+model A2AToolboxTool extends ToolboxTool {
+  type: ToolboxA2AToolType;
+  ...ToolFields<A2ATool>;
+}
+
+/**
+ * An A2A tool stored in a toolbox.
+ */
+@extension("x-ms-foundry-meta", PreviewTool)
+model A2APreviewToolboxTool extends ToolboxTool {
+  type: ToolboxA2APreviewToolType;
+  ...ToolFields<A2APreviewTool>;
+}
+
+/**
+ * A browser automation tool stored in a toolbox.
+ */
+@extension("x-ms-foundry-meta", PreviewTool)
+model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
+  type: ToolboxBrowserAutomationPreviewToolType;
+  ...ToolFields<BrowserAutomationPreviewTool>;
+}
+
+/**
+ * A browser automation tool stored in a toolbox.
+ */
+@removed(Versions.v1)
+model BrowserAutomationToolboxTool extends ToolboxTool {
+  type: ToolboxBrowserAutomationToolType;
+  ...ToolFields<BrowserAutomationTool>;
+}
+
+/**
+ * A reminder tool stored in a toolbox.
+ */
+@extension("x-ms-foundry-meta", PreviewTool)
+model ReminderPreviewToolboxTool extends ToolboxTool {
+  type: ToolboxReminderPreviewToolType;
+}
+
+/**
+ * A WorkIQ tool stored in a toolbox.
+ */
+@extension("x-ms-foundry-meta", PreviewTool)
+model WorkIQPreviewToolboxTool extends ToolboxTool {
+  type: ToolboxWorkIQPreviewToolType;
+  ...ToolFields<WorkIQPreviewTool>;
+}
+
+/**
+ * A FabricIQ tool stored in a toolbox.
+ */
+@extension("x-ms-foundry-meta", PreviewTool)
+model FabricIQPreviewToolboxTool extends ToolboxTool {
+  type: ToolboxFabricIQPreviewToolType;
+  ...ToolFields<FabricIQPreviewTool>;
+}
+
+/**
+ * A WebIQ tool stored in a toolbox.
+ */
+@extension("x-ms-foundry-meta", PreviewTool)
+model WebIQPreviewToolboxTool extends ToolboxTool {
+  type: ToolboxWebIQPreviewToolType;
+  ...ToolFields<WebIQPreviewTool>;
+}
+
+/**
+ * A toolbox search tool stored in a toolbox.
+ */
+@extension("x-ms-foundry-meta", PreviewTool)
+model ToolboxSearchPreviewToolboxTool extends ToolboxTool {
+  /**
+   * The type of the tool. Always `toolbox_search_preview`.
+   */
+  type: ToolboxSearchPreviewToolType;
+}
+
+/**
+ * A toolbox search tool stored in a toolbox.
+ */
+model ToolSearchToolboxTool extends ToolboxTool {
+  /**
+   * The type of the tool. Always `toolbox_search`.
+   */
+  type: ToolboxSearchToolType;
+}
 @doc("Policy configuration for a toolbox, including content safety and other governance settings.")
 model ToolboxPolicies {
   @doc("Responsible AI content filtering configuration.")
@@ -36,6 +371,12 @@ model ToolboxSkillReference extends ToolboxSkill {
   version?: string;
 }
 
+@doc("The versions associated with a toolbox.")
+model ToolboxVersions {
+  @doc("The latest version of the toolbox.")
+  latest: ToolboxVersionObject;
+}
+
 @doc("A toolbox that stores reusable tool definitions for agents.")
 model ToolboxObject {
   @doc("The unique identifier of the toolbox.")
@@ -44,6 +385,12 @@ model ToolboxObject {
   @doc("The name of the toolbox.")
   @maxLength(256)
   name: string;
+
+  @doc("The Unix timestamp (seconds) when the toolbox was last updated. This value changes when a new toolbox version is created or the toolbox is updated.")
+  updated_at: FoundryTimestamp;
+
+  @doc("The versions associated with the toolbox.")
+  versions: ToolboxVersions;
 
   @doc("The version identifier that the toolbox currently points to. Defaults to the latest version. Can be changed via updateToolbox.")
   default_version: string;
@@ -72,7 +419,7 @@ model ToolboxVersionObject {
   created_at: utcDateTime;
 
   @doc("The list of tools contained in this toolbox version.")
-  tools: OpenAI.Tool[];
+  tools: ToolboxTool[];
 
   @doc("The list of skill sources included in this toolbox version.")
   skills?: ToolboxSkill[];
@@ -95,7 +442,7 @@ alias CreateToolboxVersionRequest = {
   metadata?: Record<string>;
 
   @doc("The list of tools to include in this version.")
-  tools: OpenAI.Tool[];
+  tools: ToolboxTool[];
 
   @doc("The list of skill sources to include in this version. A skill reference specifies a skill name and optionally a version. If version is omitted, the skill's default version is used.")
   skills?: ToolboxSkill[];
@@ -138,6 +485,7 @@ alias DeleteToolboxRequest = {
   name: string;
 };
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateToolboxRequest {
   @doc("The name of the toolbox to update.")
   @path

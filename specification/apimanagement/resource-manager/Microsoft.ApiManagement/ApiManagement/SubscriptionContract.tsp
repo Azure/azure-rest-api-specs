@@ -51,7 +51,8 @@ interface SubscriptionContractOps
         @pattern("^[^*#&+:<>?]+$")
         @maxLength(256)
         sid: string,
-      }
+      },
+      ResourceName = "ApiManagementSubscription"
     > {}
 
 @armResourceOperations
@@ -278,7 +279,8 @@ interface UserSubscriptionOps
         @pattern("^[^*#&+:<>?]+$")
         @maxLength(256)
         sid: string,
-      }
+      },
+      ResourceName = "ApiManagementUserSubscription"
     > {}
 
 @armResourceOperations
@@ -361,7 +363,8 @@ interface WorkspaceSubscriptionOps
         @pattern("^[^*#&+:<>?]+$")
         @maxLength(256)
         sid: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceSubscription"
     > {}
 
 @armResourceOperations

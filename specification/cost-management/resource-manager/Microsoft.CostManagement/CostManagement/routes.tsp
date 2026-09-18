@@ -58,7 +58,9 @@ interface BenefitRecommendationsOperationGroup {
    * List of recommendations for purchasing savings plan.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BenefitRecommendations_List")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/CostManagement/")
   @get
@@ -102,7 +104,9 @@ interface BenefitUtilizationSummariesOperationGroup {
    * Lists savings plan utilization summaries for the enterprise agreement scope. Supported at grain values: 'Daily' and 'Monthly'.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BenefitUtilizationSummaries_ListByBillingAccountId")
   @autoRoute
   @get
@@ -144,7 +148,9 @@ interface BenefitUtilizationSummariesOperationGroup {
    * Lists savings plan utilization summaries for billing profile. Supported at grain values: 'Daily' and 'Monthly'.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BenefitUtilizationSummaries_ListByBillingProfileId")
   @autoRoute
   @get
@@ -193,7 +199,9 @@ interface BenefitUtilizationSummariesOperationGroup {
    * Lists the savings plan utilization summaries for daily or monthly grain.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BenefitUtilizationSummaries_ListBySavingsPlanOrder")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/cost-management/")
   @autoRoute
@@ -234,7 +242,9 @@ interface BenefitUtilizationSummariesOperationGroup {
    * Lists the savings plan utilization summaries for daily or monthly grain.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BenefitUtilizationSummaries_ListBySavingsPlanId")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/cost-management/")
   @autoRoute
@@ -286,7 +296,6 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
    * Triggers generation of a benefit utilization summaries report for the provided billing account. This API supports only enrollment accounts.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GenerateBenefitUtilizationSummariesReport_GenerateByBillingAccount")
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
   @autoRoute
@@ -324,7 +333,6 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
   /**
    * Triggers generation of a benefit utilization summaries report for the provided billing account and billing profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GenerateBenefitUtilizationSummariesReport_GenerateByBillingProfile")
   @autoRoute
@@ -371,7 +379,6 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
    * Triggers generation of a benefit utilization summaries report for the provided reservation order.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GenerateBenefitUtilizationSummariesReport_GenerateByReservationOrderId")
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
   @autoRoute
@@ -409,7 +416,6 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
   /**
    * Triggers generation of a benefit utilization summaries report for the provided reservation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GenerateBenefitUtilizationSummariesReport_GenerateByReservationId")
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
@@ -455,7 +461,6 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
    * Triggers generation of a benefit utilization summaries report for the provided savings plan order.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GenerateBenefitUtilizationSummariesReport_GenerateBySavingsPlanOrderId")
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
   @autoRoute
@@ -492,7 +497,6 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
   /**
    * Triggers generation of a benefit utilization summaries report for the provided savings plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GenerateBenefitUtilizationSummariesReport_GenerateBySavingsPlanId")
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")

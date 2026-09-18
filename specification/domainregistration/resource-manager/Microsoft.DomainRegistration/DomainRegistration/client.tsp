@@ -122,3 +122,9 @@ model DomainPatch extends Azure.ResourceManager.CommonTypes.Resource {
 }
 @@alternateType(DomainPatchResource, DomainPatch, "csharp");
 @@clientName(DomainPatch, "AppServiceDomainPatch", "csharp");
+@@alternateType(DomainProperties.dnsZoneId, armResourceIdentifier, "csharp");
+@@alternateType(
+  DomainPatchResourceProperties.dnsZoneId,
+  armResourceIdentifier,
+  "csharp"
+);

@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
@@ -8,6 +9,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ContainerInstance;
 
@@ -15,6 +17,7 @@ namespace Microsoft.ContainerInstance;
  * Response for network dependencies, always empty list.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NetworkDependenciesResponse is string[];
 
 /**
@@ -1268,6 +1271,7 @@ model ImageRegistryCredential {
   /**
    * The identity URL for the private registry.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   identityUrl?: string;
 }
 
@@ -1345,13 +1349,13 @@ model Volume {
   emptyDir?: unknown;
 
   /**
-   * The secret volume.
+   * Defines files for a secret volume. Dictionary keys are file names and values are Base64-encoded secret data used as file contents. The values are sensitive, and the service does not return the contents of this property in GET responses.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   secret?: Record<string>;
 
   /**
-   * The secret reference volume.
+   * Defines files for a secret reference volume. Dictionary keys are file names and values identify entries in the container group's secretReferences collection. This property contains reference names rather than secret values.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   secretReference?: Record<string>;
@@ -1391,6 +1395,12 @@ model AzureFileVolume {
    * The reference to the storage account access key used to access the Azure File share.
    */
   storageAccountKeyReference?: string;
+
+  /**
+   * The client id of the user-assigned managed identity that has access to the Azure File share.
+   */
+  @added(Versions.v2026_07_01)
+  userAssignedIdentityClientId?: string;
 }
 
 /**
@@ -1498,6 +1508,7 @@ model EncryptionProperties {
   /**
    * The keyvault base url.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   vaultBaseUrl: string;
 
   /**

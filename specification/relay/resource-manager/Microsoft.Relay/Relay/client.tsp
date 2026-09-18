@@ -4,6 +4,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Relay;
 
+@@clientName(Microsoft.Relay, "RelayAPIMgmtClient", "python");
+
 // Preserve existing "WcfRelays" client name (was "WCFRelays" in TypeSpec)
 @@clientName(WCFRelays, "WcfRelays", "java");
 
@@ -64,6 +66,9 @@ using Microsoft.Relay;
 @@clientName(UnavailableReason, "RelayNameUnavailableReason", "csharp");
 @@clientName(KeyType, "RelayAccessKeyType", "csharp");
 @@clientName(HybridConnection, "RelayHybridConnection", "csharp");
+@@clientName(RelayClusterSkuUpdate, "RelayClusterSkuPatch", "csharp");
+@@clientName(RelayClusterProperties.zoneRedundant, "IsZoneRedundant", "csharp");
+@@clientName(TlsVersion, "RelayTlsVersion", "csharp");
 
 // Acronym mapping: Ip -> IP (directive + acronym-mapping from autorest.md)
 @@clientName(NWRuleSetIpRules, "RelayNetworkRuleSetIPRule", "csharp");
@@ -84,6 +89,11 @@ using Microsoft.Relay;
 
 // Back-compat: location properties were AzureLocation? in the old autorest SDK
 @@alternateType(AuthorizationRule.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(
+  AvailableRelayClusterRegion.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@alternateType(HybridConnection.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(
   PrivateEndpointConnection.location,
@@ -147,3 +157,4 @@ model RelayUpdateParametersReplacement
   PrivateLinkResources.list,
   "csharp"
 );
+@@clientName(WCFRelays, "$DO_NOT_NORMALIZE$wCFRelays", "javascript");

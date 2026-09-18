@@ -29,6 +29,7 @@ import "./Microsoft.ResourceNotifications/Resources.tsp";
 import "./Microsoft.ResourceNotifications/ContainerServiceEventResources.tsp";
 
 import "./propertyNameOverride.tsp";
+import "./client.tsp";
 
 /** Azure Messaging EventGrid SystemEvents */
 #suppress "@azure-tools/typespec-azure-core/auth-required" "!!FIXME!!"

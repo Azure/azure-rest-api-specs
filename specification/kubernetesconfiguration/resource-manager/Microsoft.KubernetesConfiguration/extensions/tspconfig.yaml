@@ -45,6 +45,11 @@ options:
   "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.KubernetesConfiguration.Extensions"
     emitter-output-dir: "{output-dir}/sdk/kubernetesconfiguration/{namespace}"
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.KubernetesConfiguration.Extensions"
+    emitter-output-dir: "{output-dir}/sdk/kubernetesconfiguration/{namespace}"
+    api-version: "2025-03-01"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

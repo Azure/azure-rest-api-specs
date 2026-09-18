@@ -210,6 +210,18 @@ union VariableName {
    * None
    */
   None: "None",
+
+  /**
+   * Autonomous System Number
+   */
+  @added(Versions.v2026_04_01)
+  Asn: "Asn",
+
+  /**
+   * JA4 TLS fingerprint
+   */
+  @added(Versions.v2026_04_01)
+  Ja4: "Ja4",
 }
 
 /**
@@ -556,6 +568,62 @@ union SensitivityType {
    * High Sensitivity - triggers the rule by smaller spikes in traffic
    */
   High: "High",
+}
+
+/**
+ * Status of a managed rule set.
+ */
+@added(Versions.v2026_04_01)
+union ManagedRuleSetStatus {
+  string,
+
+  /**
+   * The managed rule set is in preview.
+   */
+  Preview: "Preview",
+
+  /**
+   * The managed rule set is generally available.
+   */
+  GA: "GA",
+
+  /**
+   * The managed rule set is deprecated.
+   */
+  Deprecated: "Deprecated",
+
+  /**
+   * The managed rule set is supported.
+   */
+  Supported: "Supported",
+}
+
+/**
+ * OWASP CRS paranoia level of a managed rule. Applicable only for DRS rules.
+ */
+@added(Versions.v2026_04_01)
+union ParanoiaLevel {
+  string,
+
+  /**
+   * Paranoia level 1.
+   */
+  PL1: "PL1",
+
+  /**
+   * Paranoia level 2.
+   */
+  PL2: "PL2",
+
+  /**
+   * Paranoia level 3.
+   */
+  PL3: "PL3",
+
+  /**
+   * Paranoia level 4.
+   */
+  PL4: "PL4",
 }
 
 /**
@@ -1589,6 +1657,7 @@ model PolicySettings {
   /**
    * If action type is redirect, this field represents redirect URL for the client.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   redirectUrl?: string;
 
   /**
@@ -2252,6 +2321,7 @@ model ResourcewithSettableName {
 /**
  * Error response indicates Front Door service is not able to process the incoming request. The reason is provided in the error message.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -2270,6 +2340,7 @@ model ErrorResponse {
 /**
  * Error response indicates Front Door service is not able to process the incoming request. The reason is provided in the error message.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model DefaultErrorResponse {
   /**
@@ -2358,6 +2429,20 @@ model ManagedRuleSetDefinitionProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   ruleGroups?: ManagedRuleGroupDefinition[];
+
+  /**
+   * Human-readable display name for the managed rule set version (e.g., 'Default Ruleset 2.2 (Latest, Recommended)').
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  /**
+   * Describes the lifecycle status of the managed rule set version.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  status?: ManagedRuleSetStatus;
 }
 
 /**
@@ -2417,6 +2502,13 @@ model ManagedRuleDefinition {
    */
   @visibility(Lifecycle.Read)
   description?: string;
+
+  /**
+   * Describes the paranoia level of the managed rule. Applicable only for DRS rules. Omitted for Bot Manager, DDoS, and AI rules.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  paranoiaLevel?: ParanoiaLevel;
 }
 
 /**

@@ -217,9 +217,18 @@ model IndividualEnrollment {
 
   /**
    * Linked Azure Device Registry credential policy name (optional).
+   * @deprecated Use certificatePolicyResourceId instead.
    */
+  #suppress "deprecated" "Preserving for backward compatibility until CMS public preview deprecation"
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2026_07_01_preview)
   credentialPolicyName?: string;
+
+  /**
+   * Azure Device Registry certificate policy resource ID.
+   */
+  @added(Versions.v2026_07_01_preview)
+  certificatePolicyResourceId?: string;
 
   /**
    * Current registration status.
@@ -776,9 +785,18 @@ model EnrollmentGroup {
 
   /**
    * Linked Azure Device Registry credential policy name (optional).
+   * @deprecated Use certificatePolicyResourceId instead.
    */
+  #suppress "deprecated" "Preserving for backward compatibility until CMS public preview deprecation"
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2026_07_01_preview)
   credentialPolicyName?: string;
+
+  /**
+   * Azure Device Registry certificate policy resource ID.
+   */
+  @added(Versions.v2026_07_01_preview)
+  certificatePolicyResourceId?: string;
 
   /**
    * Initial device twin.

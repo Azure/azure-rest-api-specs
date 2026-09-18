@@ -16,11 +16,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Registry)
-model EnvironmentContainer
-  is Azure.ResourceManager.ProxyResource<
-    EnvironmentContainerProperties,
-    false
-  > {
+model EnvironmentContainer is Azure.ResourceManager.ProxyResource<
+  EnvironmentContainerProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = EnvironmentContainer,
     KeyName = "environmentName",
@@ -52,7 +51,9 @@ interface EnvironmentContainerOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
         environmentName: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryEnvironmentContainer"
     > {}
 
 @armResourceOperations
@@ -148,7 +149,9 @@ interface EnvironmentContainerOperationGroupOps
         @segment("environments")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningEnvironmentContainer"
     > {}
 
 @armResourceOperations

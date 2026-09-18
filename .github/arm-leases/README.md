@@ -6,6 +6,12 @@ This directory contains lease files that establish a time-limited design discuss
 
 **Important**: Only Product Managers (PMs) are authorized to add lease.yaml files to this directory. Lease files should be added after conducting office hours discussions with RP owners. The reviewer field should contain the GitHub alias of a PM who has reviewed and approved the lease.
 
+## Where Leases Take Effect
+
+Leases are only ever read from the `main` branch of the public [Azure/azure-rest-api-specs](https://github.com/Azure/azure-rest-api-specs) repository. The ARM Modeling Review check checks out that branch separately, so a lease merged to public `main` immediately applies to pull requests in every repository and branch, including the private `RPSaaSMaster` and `RPSaaSDev` branches.
+
+This means leases do **not** need to be synced into other branches, and any lease files present in a pull request's own branch are ignored.
+
 ## Code Owners and Contribution Guidelines
 
 This directory is intended to be governed via CODEOWNERS to ensure proper governance:

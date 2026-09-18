@@ -67,6 +67,8 @@ Single source of truth for breaking-change and versioning approval label names a
 - `execFile(file, args, options)` — promisified `child_process.execFile`.
 - `execNpm(args, options)` — run an `npm` command.
 - `execNpmExec(args, options)` — run an `npm exec` command.
+- `execPnpm(args, options)` — run a `pnpm` command (via `cross-spawn`).
+- `execPnpmExec(args, options)` — run a `pnpm exec` command (via `cross-spawn`).
 
 ### `git` — git helpers
 
@@ -156,6 +158,12 @@ Single source of truth for breaking-change and versioning approval label names a
 - `add(date, ms)` / `subtract(date, ms)` — date arithmetic.
 - `formatDuration(ms)` — human-readable duration string.
 - `getDuration(from, to)` — milliseconds between two dates.
+
+### `typespec-metadata` — TypeSpec SDK metadata
+
+- `generateTypeSpecMetadata(folder, options)` — run the `@azure-tools/typespec-metadata` emitter,
+  validate its JSON output, and clean up its temporary output.
+- `TypeSpecMetadataSchema`, `TypeSpecLanguageMetadataSchema` — zod schemas for metadata output.
 
 ## Folder structure & contributing
 
