@@ -30,13 +30,13 @@ openapi-type: arm
 tag: package-2026-06-01
 ```
 
-### Tag: package-2026-11-01-preview
+### Tag: package-2026-11-02-preview
 
-These settings apply only when `--tag=package-2026-11-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2026-11-02-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-11-01-preview'
+```yaml $(tag) == 'package-2026-11-02-preview'
 input-file:
-  - preview/2026-11-01-preview/fleets.json
+  - preview/2026-11-02-preview/fleets.json
 suppressions:
   - code: AvoidAdditionalProperties
     from: fleets.json
