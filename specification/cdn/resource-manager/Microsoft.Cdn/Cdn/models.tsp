@@ -6836,6 +6836,8 @@ model SecurityPolicyWebApplicationFirewallParameters
    * Indicates if this is a profile-level WAF policy.
    */
   @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_08_01_preview)
   isProfileLevel?: boolean;
 
   /**
