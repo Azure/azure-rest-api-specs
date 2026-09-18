@@ -13,6 +13,12 @@ using Microsoft.Network;
 using Microsoft.Compute;
 using Common;
 
+@@clientName(
+  Microsoft.Network.HubVirtualNetworkConnectionProperties.enableOnlyIPv6Peering,
+  "IsOnlyIPv6PeeringEnabled",
+  "csharp"
+);
+
 // This empty namespace is the merged SDK client target used by later client
 // customizations such as @@clientName and @@clientLocation.
 #suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "CombineClient intentionally merges the Microsoft.Network and Microsoft.Compute (VMSS) services into a single SDK client surface via autoMergeService; the resulting multiple-service dependency is by design for this combined client target."
@@ -3021,6 +3027,21 @@ union ProvisioningStateUnion {
   armResourceIdentifier,
   "csharp"
 );
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy while retaining the complete NetworkManagerConnection wire model."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.NetworkManagerConnection,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Retain ARM resource generation after rebasing the legacy custom resource hierarchy."
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Retain ARM resource generation after rebasing the legacy custom resource hierarchy."
+@@Azure.ResourceManager.Legacy.customAzureResource(
+  Microsoft.Network.NetworkManagerConnection,
+  #{ isAzureResource: true }
+);
+
 @@clientName(
   FirewallPolicyPropertiesFormat.explicitProxy,
   "ExplicitProxySettings",
@@ -6609,12 +6630,6 @@ op replaceprivateDnsZoneGroupsList(
 @@clientName(
   Microsoft.Network.ConnectionSharedKeyResult,
   "VpnLinkConnectionSharedKey",
-  "csharp"
-);
-
-@@clientName(
-  Microsoft.Network.NetworkManagerConnection,
-  "SubscriptionNetworkManagerConnection",
   "csharp"
 );
 
