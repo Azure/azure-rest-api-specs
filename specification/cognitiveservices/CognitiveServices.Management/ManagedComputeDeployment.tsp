@@ -35,10 +35,26 @@ model ManagedComputeDeployment
   >;
 
   /**
-   * The resource model definition representing SKU. Use VmManagedCompute for VM-backed managed compute deployments.
+   * The resource model definition representing SKU
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc defines its own Sku model — using ResourceSkuProperty causes duplicate-client-name errors in Java/Python SDK generation due to collision with ARM common-type Sku"
   sku?: Sku;
+
+  /**
+   * Identity for the managed compute deployment. For VmManagedCompute, specify a user-assigned identity attached to the selected Foundry project.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Cognitive Services uses its existing Identity contract for managed compute deployments"
+  @added(Versions.v2026_09_15_preview)
+  identity?: Identity;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Cognitive Services supports tags on this proxy resource"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> preserves the existing Cognitive Services tag shape"
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
 
   /**
    * Resource Etag.
@@ -46,6 +62,15 @@ model ManagedComputeDeployment
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc uses lowercase 'etag' field name — EntityTagProperty uses 'eTag' which would be a breaking change"
   @visibility(Lifecycle.Read)
   etag?: string;
+}
+
+/**
+ * Properties to update the tags and SKU of a managed compute deployment.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "The managed compute PATCH contract updates tags and SKU; deployment identity is supplied through PUT."
+@added(Versions.v2026_09_15_preview)
+model ManagedComputeDeploymentPatch {
+  ...PatchResourceTagsAndSku;
 }
 
 @added(Versions.v2026_03_15_preview)
@@ -65,11 +90,50 @@ interface ManagedComputeDeployments {
   /**
    * Creates or updates a managed compute deployment associated with the Cognitive Services account.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ManagedComputeDeployment>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ManagedComputeDeployment,
+    Parameters = {
+      /**
+       * Foundry project used when creating a VmManagedCompute deployment. If omitted, the account's default project is used.
+       * A project must be specified through this header or configured as the account default.
+       * For an existing deployment, the project resolved at creation is retained.
+       */
+      @added(Versions.v2026_09_15_preview)
+      @header("azureai-project")
+      azureAiProject?: string;
+    }
+  >;
 
   /**
    * Updates the specified managed compute deployment associated with the Cognitive Services account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Earlier API versions retain the existing SKU-only PATCH contract."
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_15_preview, "update")
+  @sharedRoute
+  @patch(#{ implicitOptionality: false })
+  updateLegacy is ArmCustomPatchAsync<
+    ManagedComputeDeployment,
+    LroHeaders = ArmLroLocationHeader<
+      Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+      ManagedComputeDeployment,
+      string
+    > &
+      Azure.Core.Foundations.RetryAfterHeader &
+      ArmAsyncOperationHeader,
+    PatchModel = PatchResourceSku
+  >;
+
+  /**
+   * Updates the specified managed compute deployment associated with the Cognitive Services account.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @sharedRoute
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ManagedComputeDeployment,
@@ -80,7 +144,7 @@ interface ManagedComputeDeployments {
     > &
       Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader,
-    PatchModel = PatchResourceSku
+    PatchModel = ManagedComputeDeploymentPatch
   >;
 
   /**
@@ -122,6 +186,10 @@ interface ManagedComputeDeployments {
 @@doc(
   ManagedComputeDeployments.createOrUpdate::parameters.resource,
   "The managed compute deployment properties."
+);
+@@doc(
+  ManagedComputeDeployments.updateLegacy::parameters.properties,
+  "The managed compute deployment patch properties."
 );
 @@doc(
   ManagedComputeDeployments.update::parameters.properties,
