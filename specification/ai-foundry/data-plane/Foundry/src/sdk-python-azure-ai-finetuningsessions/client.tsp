@@ -8,7 +8,7 @@ using TypeSpec.Http;
 // Select the session operations from the shared Foundry service, without
 // generating a second Projects client or importing unrelated Foundry routes.
 @client({ service: Azure.AI.Projects, name: "FineTuningSessionClient" })
-@clientNamespace("azure.ai.finetuning_sessions", "python")
+@clientNamespace("azure.ai.finetuningsessions", "python")
 namespace Azure.AI.FineTuning.Sessions;
 
 @client
@@ -51,10 +51,17 @@ interface Operations {
 	get is Azure.AI.Projects.SessionFineTuning.Operations.get;
 }
 
-@@clientNamespace(Azure.AI.Projects, "azure.ai.finetuning_sessions", "python");
-@@clientNamespace(Azure.AI.Projects.SessionFineTuning, "azure.ai.finetuning_sessions", "python");
-@@clientNamespace(OpenAI, "azure.ai.finetuning_sessions", "python");
+@@clientNamespace(Azure.AI.Projects, "azure.ai.finetuningsessions", "python");
+@@clientNamespace(Azure.AI.Projects.SessionFineTuning, "azure.ai.finetuningsessions", "python");
+@@clientNamespace(OpenAI, "azure.ai.finetuningsessions", "python");
 @@clientName(OpenAI.Error, "ApiError", "python");
+
+// Keep the error-model imports exposed by earlier SDK previews, even when an
+// operation's default error handling uses Azure Core exceptions instead.
+@@usage(OpenAI.Error, Usage.input | Usage.output | Usage.json, "python");
+@@access(OpenAI.Error, Access.public, "python");
+@@usage(Azure.AI.Projects.ApiErrorResponse, Usage.input | Usage.output | Usage.json, "python");
+@@access(Azure.AI.Projects.ApiErrorResponse, Access.public, "python");
 
 @@clientName(FineTuningSessionStatus, "SessionStatus", "python");
 @@clientName(FineTuningSessionType, "SessionType", "python");
