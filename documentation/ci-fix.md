@@ -28,7 +28,6 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`Swagger LintDiff` for TypeSpec: troubleshooting guides](#swagger-lintdiff-for-typespec-troubleshooting-guides)
   - [`Swagger ModelValidation`](#swagger-modelvalidation)
   - [`Swagger PrettierCheck`](#swagger-prettiercheck)
-    - [Prettier reference](#prettier-reference)
   - [`Swagger SemanticValidation`](#swagger-semanticvalidation)
   - [Spell Check](#spell-check)
   - [`TypeSpec Validation`](#typespec-validation)
@@ -179,34 +178,15 @@ Refer to [Swagger-Example-Generation](https://github.com/Azure/oav/blob/develop/
 
 ## `Swagger PrettierCheck`
 
-First, ensure you have fulfilled `Prerequisites` as explained above.
+This check has been retired. Formatting is no longer enforced by this CI check
+for Swagger/OpenAPI definitions or examples under `specification/**/*.json`.
+Local formatting remains available through Prettier and the repository's custom
+JSON plugin, which preserves numeric literals such as `100.00`.
 
-To update all the spec files for a given service run the following:
-
-``` powershell
-# To fix all the files in the repo run from the root of the repo
-cd <local_repo_clone_root>
-
-# OPTIONAL STEP: To fix a particular service OpenAPI spec cd to that directory like
-cd specification/contosowidgetmanager
-
-# Install the dependencies to the local 'node_modules' folder.
-pnpm install
-
-# Run 'prettier --check' to verify the problems can be reproduced locally
-pnpm prettier --check **/*.json
-
-# Run 'prettier --write' to fix the problems.
-pnpm prettier --write **/*.json
-```
-
-Then please commit and push changes made by prettier.
-
-### Prettier reference
-
-- [`prettier` npm package](https://www.npmjs.com/package/prettier)
-- [Source: Swagger-Prettier-Check.ps1](https://github.com/Azure/azure-rest-api-specs/blob/main/eng/scripts/Swagger-Prettier-Check.ps1)
-- [Pipeline: Swagger PrettierCheck](https://dev.azure.com/azure-sdk/public/_build?definitionId=6405)
+During rollout, maintainers must disable the
+[Swagger PrettierCheck Azure DevOps pipeline](https://dev.azure.com/azure-sdk/public/_build?definitionId=6405)
+and remove its triggers and required-status references. Deleting the pipeline YAML
+does not disable the externally configured pipeline.
 
 ## `Swagger SemanticValidation`
 
