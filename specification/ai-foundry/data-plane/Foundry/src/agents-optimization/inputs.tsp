@@ -33,6 +33,8 @@ union TargetAttribute {
 
 /** Goal for an agent-optimization job. */
 union AgentOptimizationGoal {
+  string,
+
   @doc("Search for agent configurations that improve measured evaluation quality.")
   improve_quality: "improve_quality",
 }
@@ -43,11 +45,13 @@ union AgentOptimizationGoal {
 
 /** Logical row formats supported by optimization datasets. */
 union AgentOptimizationDatasetInputType {
+  string,
+
   @doc("Independent single-turn queries evaluated against each candidate.")
-  targetCompletion: "target_completion",
+  target_completion: "target_completion",
 
   @doc("Scenarios used to simulate conversations against each candidate.")
-  userConversationSimulation: "user_conversation_simulation",
+  user_conversation_simulation: "user_conversation_simulation",
 }
 
 /** Base discriminated model for an optimization dataset. */
@@ -61,7 +65,7 @@ model AgentOptimizationDatasetInput {
 model AgentOptimizationTargetCompletionDatasetInput
   extends AgentOptimizationDatasetInput {
   @doc("Target-completion dataset discriminator.")
-  type: AgentOptimizationDatasetInputType.targetCompletion;
+  type: AgentOptimizationDatasetInputType.target_completion;
 
   @doc("Registered Foundry dataset containing target-completion test cases. Exactly one of reference_dataset and inline_data must be provided.")
   reference_dataset?: AgentOptimizationReferenceDatasetSource;
@@ -74,7 +78,7 @@ model AgentOptimizationTargetCompletionDatasetInput
 model AgentOptimizationUserConversationSimulationDatasetInput
   extends AgentOptimizationDatasetInput {
   @doc("User-conversation-simulation dataset discriminator.")
-  type: AgentOptimizationDatasetInputType.userConversationSimulation;
+  type: AgentOptimizationDatasetInputType.user_conversation_simulation;
 
   @doc("Registered Foundry dataset containing user-conversation simulation test cases. Exactly one of reference_dataset and inline_data must be provided.")
   reference_dataset?: AgentOptimizationReferenceDatasetSource;
@@ -90,6 +94,7 @@ model AgentOptimizationUserConversationSimulationDatasetInput
 model AgentOptimizationTargetCompletionInlineDatasetSource {
   @doc("Target-completion test cases.")
   @minItems(1)
+  @maxItems(2000)
   test_cases: AgentOptimizationTargetCompletionTestCase[];
 }
 
@@ -97,6 +102,7 @@ model AgentOptimizationTargetCompletionInlineDatasetSource {
 model AgentOptimizationUserConversationSimulationInlineDatasetSource {
   @doc("Conversation test scenarios.")
   @minItems(1)
+  @maxItems(2000)
   test_cases: UserConversationSimulationTestCase[];
 }
 
@@ -316,6 +322,7 @@ model PromptOptimizationConfiguration
 @doc("Caller-supplied inputs for an optimization job.")
 model AgentOptimizationJobInputs {
   @doc("Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics.")
+  @maxLength(256)
   display_name?: string;
 
   @doc("Foundry agent whose configuration is optimized. Omitted when the workflow does not target a registered Foundry agent.")

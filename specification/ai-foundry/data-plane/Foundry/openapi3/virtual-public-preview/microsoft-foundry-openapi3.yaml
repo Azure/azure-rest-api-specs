@@ -1390,7 +1390,7 @@ paths:
     get:
       operationId: AgentOptimizationJobCandidates_getCandidate
       summary: Get a candidate for an agent optimization job
-      description: Retrieves a single candidate. Mutation values are always included when a client hits the GET endpoint directly; the `expand` parameter exists for consistency with LIST but is optional here.
+      description: Retrieves a single candidate. Mutation values are always included.
       parameters:
         - name: jobId
           in: path
@@ -1404,13 +1404,6 @@ paths:
           description: The candidate identifier.
           schema:
             type: string
-        - name: expand
-          in: query
-          required: false
-          description: Comma-separated list of expand keys. Provided for consistency with LIST; mutations values are populated on this endpoint regardless of the parameter.
-          schema:
-            type: string
-          explode: false
         - name: api-version
           in: query
           required: true
@@ -46123,7 +46116,6 @@ components:
         - candidate_id
         - job_id
         - name
-        - role
         - status
         - started_at
       properties:
@@ -46136,9 +46128,6 @@ components:
         name:
           type: string
           description: Display name of the candidate (e.g., 'baseline', 'instruction-v2').
-        role:
-          $ref: '#/components/schemas/AgentOptimizationCandidateRole'
-          description: The candidate's immutable role in the optimization job.
         status:
           $ref: '#/components/schemas/AgentOptimizationCandidateStatus'
           description: The candidate's current lifecycle state.
@@ -46202,14 +46191,6 @@ components:
             $ref: '#/components/schemas/AgentOptimizationMutation'
           description: Typed configuration mutations applied to the baseline. Omitted for the baseline candidate. LIST without `expand=mutations` returns mutation items with only `type`; expanded LIST and candidate GET populate each mutation's `value`.
       description: Agent configuration changes generated for a candidate.
-    AgentOptimizationCandidateRole:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - baseline
-            - generated
-      description: The candidate's immutable role in its optimization job.
     AgentOptimizationCandidateSearchConfiguration:
       type: object
       properties:
@@ -46327,10 +46308,12 @@ components:
           user_conversation_simulation: '#/components/schemas/AgentOptimizationUserConversationSimulationDatasetInput'
       description: Base discriminated model for an optimization dataset.
     AgentOptimizationDatasetInputType:
-      type: string
-      enum:
-        - target_completion
-        - user_conversation_simulation
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - target_completion
+            - user_conversation_simulation
       description: Logical row formats supported by optimization datasets.
     AgentOptimizationDeploymentName:
       type: string
@@ -46440,9 +46423,11 @@ components:
           description: Parameters passed to the evaluator at initialization. Omitted when the evaluator requires no initialization parameters.
       description: Reference to a named evaluator, optionally pinned to a version.
     AgentOptimizationGoal:
-      type: string
-      enum:
-        - improve_quality
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - improve_quality
       description: Goal for an agent-optimization job.
     AgentOptimizationInstructionMutation:
       type: object
@@ -46487,6 +46472,7 @@ components:
           readOnly: true
         display_name:
           type: string
+          maxLength: 256
           description: Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics.
         target_configuration:
           $ref: '#/components/schemas/AgentOptimizationTargetConfiguration'
@@ -46520,6 +46506,7 @@ components:
       properties:
         display_name:
           type: string
+          maxLength: 256
           description: Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics.
         target_configuration:
           $ref: '#/components/schemas/AgentOptimizationTargetConfiguration'
@@ -46614,7 +46601,7 @@ components:
             - completed
             - budget_exhausted
             - candidate_screening_stalled
-      description: Reason an evaluated candidate search terminated.
+      description: Reason an evaluated candidate search ended. These values describe successful search completion and do not indicate job failure.
     AgentOptimizationJobTokenUsage:
       type: object
       required:
@@ -46818,6 +46805,7 @@ components:
           items:
             $ref: '#/components/schemas/AgentOptimizationTargetCompletionTestCase'
           minItems: 1
+          maxItems: 2000
           description: Target-completion test cases.
       description: Supplies single-turn rows directly in the optimization request.
     AgentOptimizationTargetCompletionTestCase:
@@ -46903,6 +46891,7 @@ components:
           items:
             $ref: '#/components/schemas/UserConversationSimulationTestCase'
           minItems: 1
+          maxItems: 2000
           description: Conversation test scenarios.
       description: Supplies Evals user-conversation simulation test cases directly in the optimization request.
     AgentReference:
@@ -84105,27 +84094,19 @@ components:
     PromotionInfo:
       type: object
       required:
-        - candidate_id
         - promoted_at
-        - agent_name
-        - created_new_version
+        - promoted_agent
       properties:
-        candidate_id:
-          type: string
-          description: Server-assigned candidate identifier that was promoted.
         promoted_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: Timestamp when promotion occurred, represented in Unix time.
-        agent_name:
-          type: string
-          description: Name of the Foundry agent associated with the recorded promotion.
-        agent_version:
-          type: string
-          description: Version of the Foundry agent created or associated with the recorded promotion. Omitted when no version was created or recorded.
-        created_new_version:
-          type: boolean
-          description: Whether promotion created a new Foundry agent version.
-      description: Promotion metadata recorded for a candidate. Prompt-agent promotion creates a new version; hosted-agent promotion currently records metadata without deploying a new version.
+        baseline_agent:
+          $ref: '#/components/schemas/AgentReference'
+          description: Resolved agent reference used as the optimization baseline. Omitted when unavailable for a legacy candidate.
+        promoted_agent:
+          $ref: '#/components/schemas/AgentReference'
+          description: Agent reference associated with the completed promotion.
+      description: Promotion metadata recorded for a candidate.
     PromptAgentDefinition:
       type: object
       required:
