@@ -2129,9 +2129,6 @@
               }
             }
           },
-          "204": {
-            "description": "Action completed successfully."
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2539,9 +2536,6 @@
               }
             }
           },
-          "204": {
-            "description": "Action completed successfully."
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2769,11 +2763,11 @@
         },
         "switchDns": {
           "type": "boolean",
-          "description": "Whether to switch the source cache DNS name to the target cache automatically after migration completes. When true, clients using the source cache DNS name are redirected to the target cache."
+          "description": "Sets whether the DNS is switched automatically after the data is transferred from the source cache to the target cache. This property must be true during the preview."
         },
         "skipDataMigration": {
           "type": "boolean",
-          "description": "Whether to skip copying data from the source cache to the target cache. Set to false to copy data during migration; set to true to migrate without copying data."
+          "description": "Sets whether the data is migrated from source to target or not. This property must be true during the preview."
         },
         "forceMigrate": {
           "type": "boolean",
@@ -3794,12 +3788,6 @@
           "type": "string",
           "format": "date-time",
           "description": "The timestamp when the migration operation was last updated.",
-          "readOnly": true
-        },
-        "unlinkedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp when the migrated endpoint was unlinked from the cluster.",
           "readOnly": true
         },
         "rollbackEligibleUntil": {
