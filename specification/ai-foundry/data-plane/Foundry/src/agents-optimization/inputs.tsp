@@ -387,9 +387,6 @@ model AgentOptimizationCostEstimate {
 
 @doc("Response body for :estimate.")
 model AgentOptimizationEstimateResponse {
-  @doc("Validation-set size (in rows) the estimate was computed against. This is the server-resolved input used by the estimator; useful for clients that did not supply or know the row count when validation_set was passed as a registered dataset reference.")
-  validation_set_rows: int32;
-
   @doc("Estimated model-call counts grouped by optimization stage. Typical values are calibrated expectations and may be fractional.")
   call_counts?: AgentOptimizationStageEstimate;
 

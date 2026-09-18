@@ -45724,13 +45724,7 @@ components:
       description: Inputs for estimating an agent-optimization job.
     AgentOptimizationEstimateResponse:
       type: object
-      required:
-        - validation_set_rows
       properties:
-        validation_set_rows:
-          type: integer
-          format: int32
-          description: Validation-set size (in rows) the estimate was computed against. This is the server-resolved input used by the estimator; useful for clients that did not supply or know the row count when validation_set was passed as a registered dataset reference.
         call_counts:
           $ref: '#/components/schemas/AgentOptimizationStageEstimate'
           description: Estimated model-call counts grouped by optimization stage. Typical values are calibrated expectations and may be fractional.
