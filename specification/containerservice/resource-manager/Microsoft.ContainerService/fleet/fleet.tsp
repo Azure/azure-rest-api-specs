@@ -187,6 +187,28 @@ model FleetCredentialResults {
 }
 
 @added(Versions.v2026_11_02_preview)
+@doc("One managed namespace credential result item.")
+model FleetManagedNamespaceCredentialResult {
+  @visibility(Lifecycle.Read)
+  @doc("The name of the credential.")
+  name?: string;
+
+  @secret
+  @visibility(Lifecycle.Read)
+  @doc("Base64-encoded Kubernetes configuration file.")
+  value?: bytes;
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("The managed namespace credential results.")
+model FleetManagedNamespaceCredentialResults {
+  @visibility(Lifecycle.Read)
+  @doc("Array of base64-encoded Kubernetes configuration files.")
+  @identifiers(#["name"])
+  kubeconfigs?: FleetManagedNamespaceCredentialResult[];
+}
+
+@added(Versions.v2026_11_02_preview)
 @doc("The status of a Fleet member credential request.")
 union FleetMemberCredentialStatus {
   @doc("The credential request succeeded.")

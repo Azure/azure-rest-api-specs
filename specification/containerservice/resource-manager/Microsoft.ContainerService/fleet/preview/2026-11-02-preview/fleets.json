@@ -2003,7 +2003,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/FleetCredentialResults"
+              "$ref": "#/definitions/FleetManagedNamespaceCredentialResults"
             }
           },
           "default": {
@@ -4139,6 +4139,41 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "FleetManagedNamespaceCredentialResult": {
+      "type": "object",
+      "description": "One managed namespace credential result item.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the credential.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "format": "password",
+          "description": "Base64-encoded Kubernetes configuration file.",
+          "readOnly": true,
+          "x-ms-secret": true
+        }
+      }
+    },
+    "FleetManagedNamespaceCredentialResults": {
+      "type": "object",
+      "description": "The managed namespace credential results.",
+      "properties": {
+        "kubeconfigs": {
+          "type": "array",
+          "description": "Array of base64-encoded Kubernetes configuration files.",
+          "items": {
+            "$ref": "#/definitions/FleetManagedNamespaceCredentialResult"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
     },
     "FleetManagedNamespaceListResult": {
       "type": "object",
