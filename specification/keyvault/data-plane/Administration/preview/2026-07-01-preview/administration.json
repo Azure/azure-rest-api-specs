@@ -768,9 +768,9 @@
             "description": "The name of the private endpoint to get.",
             "required": true,
             "type": "string",
-            "minLength": 2,
+            "minLength": 1,
             "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{0,22}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{0,22}[a-zA-Z0-9]$|^[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -804,12 +804,12 @@
           {
             "name": "peName",
             "in": "path",
-            "description": "The name of the private endpoint. Must be 2-24 characters, start and end with an alphanumeric character, and contain only alphanumeric characters and hyphens.",
+            "description": "The name of the private endpoint. Must be 1-24 characters, start and end with an alphanumeric character, and contain only alphanumeric characters and hyphens.",
             "required": true,
             "type": "string",
-            "minLength": 2,
+            "minLength": 1,
             "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{0,22}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{0,22}[a-zA-Z0-9]$|^[a-zA-Z0-9]$"
           },
           {
             "name": "parameters",
@@ -870,9 +870,9 @@
             "description": "The name of the private endpoint to delete.",
             "required": true,
             "type": "string",
-            "minLength": 2,
+            "minLength": 1,
             "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{0,22}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{0,22}[a-zA-Z0-9]$|^[a-zA-Z0-9]$"
           }
         ],
         "responses": {
