@@ -439,6 +439,7 @@ describe("Swagger suppressions", () => {
       "specification/contoso/preview/three.json",
       "specification/contoso/rules/rule-scoped.json",
       "specification/contoso/deleted/removed.json",
+      "specification/contoso/head-deleted/removed.json",
     ]);
 
     expect(result).toEqual(["specification/contoso/rules/rule-scoped.json"]);

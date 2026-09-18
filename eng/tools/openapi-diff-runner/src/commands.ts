@@ -6,7 +6,7 @@
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { SWAGGER_SUPPRESSION_TOOLS } from "@azure-tools/specs-shared/swagger-suppressions";
 import { getSuppressionsForTools } from "@azure-tools/suppressions";
-import { existsSync } from "node:fs";
+import { existsSync, mkdirSync, rmSync, rmdirSync, writeFileSync } from "node:fs";
 import * as path from "node:path";
 import {
   changeBaseBranch,
@@ -271,16 +271,55 @@ export async function excludeSuppressedSwaggers(
   const result = [];
   for (const swaggerPath of swaggers) {
     const headPath = path.resolve(context.localSpecRepoPath, swaggerPath);
-    const swaggerPathToCheck = existsSync(headPath)
-      ? headPath
-      : path.resolve(context.prInfo!.tempRepoFolder, swaggerPath);
+    const basePath = path.resolve(context.prInfo!.tempRepoFolder, swaggerPath);
+    const isSuppressedInHead = await isSwaggerSuppressedWithPlaceholder(
+      tool,
+      headPath,
+      swaggerPath,
+    );
+    const isSuppressedInBase =
+      !isSuppressedInHead &&
+      !existsSync(headPath) &&
+      (await isSwaggerSuppressed(tool, basePath, swaggerPath));
 
-    if (!(await isSwaggerSuppressed(tool, swaggerPathToCheck, swaggerPath))) {
+    if (!isSuppressedInHead && !isSuppressedInBase) {
       result.push(swaggerPath);
     }
   }
 
   return result;
+}
+
+async function isSwaggerSuppressedWithPlaceholder(
+  tool: string,
+  absoluteSwaggerPath: string,
+  displayPath: string,
+): Promise<boolean> {
+  if (existsSync(absoluteSwaggerPath)) {
+    return await isSwaggerSuppressed(tool, absoluteSwaggerPath, displayPath);
+  }
+
+  const createdDirectories: string[] = [];
+  let directory = path.dirname(absoluteSwaggerPath);
+  while (!existsSync(directory)) {
+    createdDirectories.push(directory);
+    directory = path.dirname(directory);
+  }
+
+  try {
+    mkdirSync(path.dirname(absoluteSwaggerPath), { recursive: true });
+    writeFileSync(absoluteSwaggerPath, "");
+    return await isSwaggerSuppressed(tool, absoluteSwaggerPath, displayPath);
+  } finally {
+    rmSync(absoluteSwaggerPath, { force: true });
+    for (const directory of createdDirectories) {
+      try {
+        rmdirSync(directory);
+      } catch {
+        break;
+      }
+    }
+  }
 }
 
 async function isSwaggerSuppressed(
