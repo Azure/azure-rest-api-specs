@@ -90,20 +90,6 @@ interface Workspaces {
    */
   @tag("Workspaces")
   listBySubscription is ArmListBySubscription<Workspace, Error = ErrorResponse>;
-
-  /**
-   * Gets the list of endpoints that VNET Injected Workspace calls Azure Databricks Control Plane. You must configure outbound access with these endpoints. For more information, see https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/udr
-   */
-  @tag("OutboundNetworkDependenciesEndpoints")
-  @summary("Gets a list of egress endpoints (network endpoints of all outbound dependencies) in the specified Workspace.")
-  @get
-  @action("outboundNetworkDependenciesEndpoints")
-  list is ArmResourceActionSync<
-    Workspace,
-    void,
-    ArmResponse<OutboundEnvironmentEndpointCollection>,
-    Error = ErrorResponse
-  >;
 }
 
 alias WorkspaceDeleteParameters = {
