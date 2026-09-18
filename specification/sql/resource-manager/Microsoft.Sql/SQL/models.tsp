@@ -2,12 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 
@@ -1195,6 +1196,24 @@ union SeedingModeType {
 }
 
 /**
+ * Specifies whether the link operates in single-database or multi-database mode.
+ */
+@added(Versions.v2025_08_01_preview)
+union LinkModeType {
+  string,
+
+  /**
+   * The link operates in single-database mode.
+   */
+  SingleDatabase: "SingleDatabase",
+
+  /**
+   * The link operates in multi-database mode.
+   */
+  MultiDatabase: "MultiDatabase",
+}
+
+/**
  * Link health state
  */
 union ReplicaSynchronizationHealth {
@@ -2261,6 +2280,29 @@ union ManagedInstanceAdministratorType {
   ActiveDirectory: "ActiveDirectory",
 }
 
+/**
+ * Principal type of the managed instance administrator.
+ */
+@added(Versions.v2025_08_01_preview)
+union ManagedInstanceAdministratorPrincipalType {
+  string,
+
+  /**
+   * Indicates that the principal is a user.
+   */
+  User: "User",
+
+  /**
+   * Indicates that the principal is a group.
+   */
+  Group: "Group",
+
+  /**
+   * Indicates that the principal is an application.
+   */
+  Application: "Application",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AdministratorName {
   string,
@@ -2749,17 +2791,38 @@ union PrivateEndpointProvisioningState {
   /**
    * Approving
    */
+  @removed(Versions.v2025_08_01_preview)
   Approving: "Approving",
+
+  /**
+   * Provisioning Created
+   */
+  @added(Versions.v2025_08_01_preview)
+  Created: "Created",
 
   /**
    * Ready
    */
+  @removed(Versions.v2025_08_01_preview)
   Ready: "Ready",
+
+  /**
+   * Provisioning InProgress
+   */
+  @added(Versions.v2025_08_01_preview)
+  InProgress: "InProgress",
 
   /**
    * Dropping
    */
+  @removed(Versions.v2025_08_01_preview)
   Dropping: "Dropping",
+
+  /**
+   * Provisioning Succeeded
+   */
+  @added(Versions.v2025_08_01_preview)
+  Succeeded: "Succeeded",
 
   /**
    * Failed
@@ -2769,7 +2832,14 @@ union PrivateEndpointProvisioningState {
   /**
    * Rejecting
    */
+  @removed(Versions.v2025_08_01_preview)
   Rejecting: "Rejecting",
+
+  /**
+   * Provisioning Canceled
+   */
+  @added(Versions.v2025_08_01_preview)
+  Canceled: "Canceled",
 }
 
 /**
@@ -2959,6 +3029,11 @@ union ServerNetworkAccessFlag {
    * Disabled
    */
   Disabled: "Disabled",
+
+  /**
+   * SecuredByPerimeter
+   */
+  SecuredByPerimeter: "SecuredByPerimeter",
 }
 
 /**
@@ -4214,6 +4289,19 @@ model BackupShortTermRetentionPolicyProperties {
    * The differential backup interval in hours. This is how many interval hours between each differential backup will be supported. This is only applicable to live databases but not dropped databases.
    */
   diffBackupIntervalInHours?: DiffBackupIntervalInHours;
+
+  /**
+   * Whether to lock the immutability of the backups governed by this short term retention policy.
+   */
+  @added(Versions.v2026_08_01_preview)
+  lockImmutability?: boolean;
+
+  /**
+   * The immutability status of the backups governed by this short term retention policy.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  immutabilityStatus?: ImmutabilityStatus;
 }
 
 /**
@@ -4339,6 +4427,15 @@ model ServerBlobAuditingPolicyProperties {
    * Specifies whether Managed Identity is used to access blob storage
    */
   isManagedIdentityInUse?: boolean;
+
+  /**
+   * Specifies the required fields to include in audit events (optional).
+   * Each item must be a valid audit_event field name.
+   * Can only be specified when isAzureMonitorTargetEnabled is true.
+   * For the complete list of valid field names, see the audit_event table schema documentation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  requiredFields?: string[];
 
   /**
    * Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.
@@ -4477,6 +4574,15 @@ model DatabaseBlobAuditingPolicyProperties {
    * Specifies whether Managed Identity is used to access blob storage
    */
   isManagedIdentityInUse?: boolean;
+
+  /**
+   * Specifies the required fields to include in audit events (optional).
+   * Each item must be a valid audit_event field name.
+   * Can only be specified when isAzureMonitorTargetEnabled is true.
+   * For the complete list of valid field names, see the audit_event table schema documentation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  requiredFields?: string[];
 
   /**
    * Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.
@@ -4620,6 +4726,15 @@ model ExtendedDatabaseBlobAuditingPolicyProperties {
    * Specifies whether Managed Identity is used to access blob storage
    */
   isManagedIdentityInUse?: boolean;
+
+  /**
+   * Specifies the required fields to include in audit events (optional).
+   * Each item must be a valid audit_event field name.
+   * Can only be specified when isAzureMonitorTargetEnabled is true.
+   * For the complete list of valid field names, see the audit_event table schema documentation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  requiredFields?: string[];
 
   /**
    * Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.
@@ -4778,6 +4893,15 @@ model ExtendedServerBlobAuditingPolicyProperties {
    * Specifies whether Managed Identity is used to access blob storage
    */
   isManagedIdentityInUse?: boolean;
+
+  /**
+   * Specifies the required fields to include in audit events (optional).
+   * Each item must be a valid audit_event field name.
+   * Can only be specified when isAzureMonitorTargetEnabled is true.
+   * For the complete list of valid field names, see the audit_event table schema documentation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  requiredFields?: string[];
 
   /**
    * Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.
@@ -5178,6 +5302,7 @@ model DatabaseAutomaticTuningProperties {
  * Automatic tuning properties for individual advisors.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseAutomaticTuning)
 model AutomaticTuningOptions {
   /**
@@ -7440,7 +7565,7 @@ model DataWarehouseUserActivitiesProperties {
 /**
  * The properties of a deleted server.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "DeletedServer is a read-only proxy resource that represents a deleted server record. It has no provisioning lifecycle and does not support provisioning state."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DeletedServers)
 model DeletedServerProperties {
@@ -7454,7 +7579,6 @@ model DeletedServerProperties {
    * The deletion time of the deleted server.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletionTime?: utcDateTime;
 
   /**
@@ -7464,10 +7588,24 @@ model DeletedServerProperties {
   originalId?: string;
 
   /**
+   * The resource group of the original server before deletion.
+   */
+  @added(Versions.v2025_08_01_preview)
+  @visibility(Lifecycle.Read)
+  originalResourceGroup?: string;
+
+  /**
    * The fully qualified domain name of the server.
    */
   @visibility(Lifecycle.Read)
   fullyQualifiedDomainName?: string;
+
+  /**
+   * The date and time when the deleted server will be permanently deleted (purged).
+   */
+  @added(Versions.v2025_08_01_preview)
+  @visibility(Lifecycle.Read)
+  scheduledPurgeTime?: utcDateTime;
 }
 
 /**
@@ -7530,6 +7668,33 @@ model DistributedAvailabilityGroupProperties {
    * Database seeding mode – can be Automatic (default), or Manual for supported scenarios.
    */
   seedingMode?: SeedingModeType;
+
+  /**
+   * Specifies whether the link operates in single-database or multi-database mode.
+   */
+  @added(Versions.v2025_08_01_preview)
+  linkMode?: LinkModeType;
+
+  /**
+   * Most recent error code for the distributed availability group.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  mostRecentError?: string;
+
+  /**
+   * Time of the most recent error for the distributed availability group.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  mostRecentErrorTime?: utcDateTime;
+
+  /**
+   * Most recent error message for the distributed availability group.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  mostRecentErrorMessage?: string;
 
   /**
    * Databases in the distributed availability group
@@ -8078,6 +8243,30 @@ model EncryptionProtectorProperties {
 model EndpointCertificateProperties {
   /**
    * The certificate public blob
+   */
+  publicBlob?: string;
+
+  /**
+   * Trusted root certificates required to validate the instance certificate
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_08_01_preview)
+  trustedRootCertificates?: EndpointTrustedRootCertificateInfo[];
+}
+
+/**
+ * Trusted root certificate required to validate the instance certificate
+ */
+@added(Versions.v2025_08_01_preview)
+model EndpointTrustedRootCertificateInfo {
+  /**
+   * Root certificate subject name
+   */
+  subject?: string;
+
+  /**
+   * Root certificate public blob as DER encoded hex string
    */
   publicBlob?: string;
 }
@@ -9051,6 +9240,7 @@ model JobStepOutput {
  * The execution options of a job step.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 model JobStepExecutionOptions {
   /**
@@ -10797,6 +10987,34 @@ model ManagedInstanceLongTermRetentionBackupProperties {
    */
   @visibility(Lifecycle.Read)
   backupStorageAccessTier?: BackupStorageAccessTier;
+
+  /**
+   * The setting whether the LTR backup is immutable
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_08_01_preview)
+  isBackupImmutable?: boolean;
+
+  /**
+   * The setting for whether or not time-based immutability is enabled for the LTR backup. When time-based immutability is enabled and locked, the backup cannot be deleted until BackupExpirationTime.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_08_01_preview)
+  timeBasedImmutability?: TimeBasedImmutability;
+
+  /**
+   * The time-based immutability mode. Only applicable if time-based immutability is enabled.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_08_01_preview)
+  timeBasedImmutabilityMode?: TimeBasedImmutabilityMode;
+
+  /**
+   * The setting for whether LegalHold is enabled or disabled on the LTR backup. When LegalHold is enabled, the backup cannot be deleted until the LegalHold is removed.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_08_01_preview)
+  legalHoldImmutability?: SetLegalHoldImmutability;
 }
 
 /**
@@ -10914,6 +11132,29 @@ model MaintenanceWindowsProperties {
 }
 
 /**
+ * The immutability status of the backups governed by this short term retention policy.
+ */
+@added(Versions.v2026_08_01_preview)
+union ImmutabilityStatus {
+  string,
+
+  /**
+   * Disabled
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Enabled
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Locked
+   */
+  Locked: "Locked",
+}
+
+/**
  * Properties of a short term retention policy
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -10922,6 +11163,20 @@ model ManagedBackupShortTermRetentionPolicyProperties {
    * The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
    */
   retentionDays?: int32;
+
+  /**
+   * Whether to lock the immutability of the backups governed by this short term retention policy.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  lockImmutability?: boolean;
+
+  /**
+   * The immutability status of the backups governed by this short term retention policy.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  immutabilityStatus?: ImmutabilityStatus;
 }
 
 /**
@@ -12001,6 +12256,12 @@ model ManagedInstanceAdministratorProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tenantId?: Azure.Core.uuid;
+
+  /**
+   * Principal type of the managed instance administrator.
+   */
+  @added(Versions.v2025_08_01_preview)
+  principalType?: ManagedInstanceAdministratorPrincipalType;
 }
 
 /**
@@ -12203,6 +12464,18 @@ model ManagedInstanceLongTermRetentionPolicyProperties {
    * The BackupStorageAccessTier for the LTR backups
    */
   backupStorageAccessTier?: BackupStorageAccessTier;
+
+  /**
+   * The setting for whether to enable time-based immutability for future backups. When set, future backups will have TimeBasedImmutability enabled.
+   */
+  @added(Versions.v2026_08_01_preview)
+  timeBasedImmutability?: TimeBasedImmutability;
+
+  /**
+   * The setting for time-based immutability mode for future backup (Value can be either Locked or UnLocked. Only effective if TimeBasedImmutability is enabled). Caution: Immutability of LTR backup cannot be removed if TimeBasedImmutabilityMode is Locked.
+   */
+  @added(Versions.v2026_08_01_preview)
+  timeBasedImmutabilityMode?: TimeBasedImmutabilityMode;
 
   /**
    * The weekly retention policy for an LTR backup in an ISO 8601 format.
@@ -13855,6 +14128,7 @@ model AutomaticTuningServerProperties {
  * Automatic tuning properties for individual advisors.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.ServerAutomaticTuning)
 model AutomaticTuningServerOptions {
   /**
@@ -14214,6 +14488,7 @@ model CheckNameAvailabilityRequest {
  * The result of a name availability check.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
 model CheckNameAvailabilityResponse {
   /**
@@ -14663,6 +14938,18 @@ model ServerUsageProperties {
    */
   @visibility(Lifecycle.Read)
   unit?: string;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  resourceName?: string;
+
+  /**
+   * The next reset time for the metric (ISO8601 format).
+   */
+  @visibility(Lifecycle.Read)
+  nextResetTime?: utcDateTime;
 }
 
 /**

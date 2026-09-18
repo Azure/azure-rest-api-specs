@@ -15,11 +15,10 @@ namespace Microsoft.ApiManagement;
  * A single API Management gateway resource in List or Get response.
  */
 @parentResource(ApiManagementGatewayResource)
-model ApiManagementGatewayConfigConnectionResource
-  is Azure.ResourceManager.ProxyResource<
-    GatewayConfigConnectionBaseProperties,
-    false
-  > {
+model ApiManagementGatewayConfigConnectionResource is Azure.ResourceManager.ProxyResource<
+  GatewayConfigConnectionBaseProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ApiManagementGatewayConfigConnectionResource,
     KeyName = "configConnectionName",

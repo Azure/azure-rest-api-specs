@@ -52,7 +52,8 @@ interface FunctionEnvelopeOps
         @segment("functions")
         @key
         functionName: string,
-      }
+      },
+      ResourceName = "SiteFunction"
     > {}
 
 alias FunctionEnvelopesOps = Azure.ResourceManager.Legacy.RoutedOperations<
@@ -112,7 +113,8 @@ interface FunctionEnvelopeSlotOperationGroupOps
         @segment("keys")
         @key
         keyName: string,
-      }
+      },
+      ResourceName = "SiteSlotFunctionKey"
     > {}
 
 @armResourceOperations
@@ -142,7 +144,8 @@ interface FunctionEnvelopeSlotOperationWithoutKeysGroupOps
         @segment("functions")
         @key
         functionName: string,
-      }
+      },
+      ResourceName = "SiteSlotFunction"
     > {}
 
 @tag("WebApps")
@@ -282,7 +285,8 @@ interface FunctionEnvelopeOperationGroupOps
         @segment("functions")
         @key
         functionName: string,
-      }
+      },
+      ResourceName = "SiteSlotFunction"
     > {}
 
 @tag("WebApps")
@@ -338,7 +342,9 @@ interface FunctionEnvelopeOperationGroup {
   /**
    * Description for Add or update a function secret.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @summary("Add or update a function secret.")
   createOrUpdateFunctionSecretSlot is FunctionEnvelopeSlotOperationGroupOps.CreateOrUpdateAsync<
@@ -353,7 +359,9 @@ interface FunctionEnvelopeOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a function secret.")
   @delete
   deleteFunctionSecretSlot is FunctionEnvelopeSlotOperationGroupOps.DeleteSync<

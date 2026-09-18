@@ -70,7 +70,8 @@ interface WorkflowVersionsOps
         @segment("versions")
         @key
         versionId: string,
-      }
+      },
+      ResourceName = "WorkflowVersion"
     > {}
 
 @armResourceOperations

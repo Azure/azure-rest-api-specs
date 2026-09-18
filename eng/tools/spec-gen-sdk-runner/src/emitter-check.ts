@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { inspect } from "node:util";
-import { LogLevel, logMessage } from "./log.js";
-import { execAsync } from "./utils.js";
+import { LogLevel, logMessage } from "./log.ts";
+import { execAsync } from "./utils.ts";
 
 /**
  * Metadata output from the @azure-tools/typespec-metadata emitter.
@@ -81,9 +81,9 @@ export async function checkEmitterEnabled(
     // Run tsp compile with the typespec-metadata emitter using default options.
     // Override output-dir to tspConfigDir so the metadata file lands in a
     // predictable location regardless of the tspconfig.yaml output-dir setting.
-    // Use npx to resolve the locally-installed tsp binary from node_modules/.bin.
+    // Use pnpm exec to resolve the locally-installed tsp binary from node_modules/.bin.
     const tspCommand = [
-      "npx tsp compile",
+      "pnpm exec tsp compile",
       `"${tspConfigDir}"`,
       '--emit "@azure-tools/typespec-metadata"',
       `--output-dir "${tspConfigDir}"`,

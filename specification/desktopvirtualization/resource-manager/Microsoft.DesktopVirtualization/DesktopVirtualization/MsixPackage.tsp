@@ -16,8 +16,10 @@ namespace Microsoft.DesktopVirtualization;
 // Manually switched@subscriptionResource
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
 @parentResource(HostPool)
-model MSIXPackage
-  is Azure.ResourceManager.ProxyResource<MSIXPackageProperties, false> {
+model MSIXPackage is Azure.ResourceManager.ProxyResource<
+  MSIXPackageProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = MSIXPackage,
     KeyName = "msixPackageFullName",

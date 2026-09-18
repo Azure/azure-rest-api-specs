@@ -346,6 +346,7 @@ model ExecuteTypeRequest {
   correlationid: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Common model for operation response")
 model OperationResponse {
   @doc("The description of the operation response")

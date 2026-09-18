@@ -25,6 +25,7 @@ options:
     namespace: "com.azure.resourcemanager.devtestlabs"
     service-name: "DevTestLabs"
     payload-flattening-threshold: 1
+    use-object-for-unknown: true
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-devtestlabs"
@@ -46,3 +47,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

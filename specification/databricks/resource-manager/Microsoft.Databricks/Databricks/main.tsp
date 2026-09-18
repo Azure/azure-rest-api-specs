@@ -18,6 +18,7 @@ import "./GroupIdInformation.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./VirtualNetworkPeering.tsp";
 import "./AccessConnector.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

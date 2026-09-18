@@ -2,12 +2,12 @@
   "name": "@azure-tools/summarize-impact",
   "private": true,
   "type": "module",
-  "main": "dist/src/main.js",
+  "main": "src/main.ts",
   "bin": {
     "summarize-impact": "cmd/summarize-impact.js"
   },
   "scripts": {
-    "build": "tsc --build",
+    "build": "tsc --noEmit",
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
     "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
@@ -15,28 +15,27 @@
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
   "dependencies": {
-    "@actions/core": "^3.0.0",
-    "@azure-tools/openapi-tools-common": "^1.2.2",
-    "@azure-tools/specs-shared": "file:../../../.github/shared",
-    "@azure/openapi-markdown": "0.9.4",
-    "@octokit/rest": "^22.0.0",
-    "commonmark": "0.31.2",
-    "glob": "^13.0.0",
-    "js-yaml": "^4.1.0",
-    "lodash": "^4.17.20",
-    "simple-git": "^3.36.0"
+    "@actions/core": "catalog:",
+    "@azure-tools/openapi-tools-common": "catalog:",
+    "@azure-tools/specs-shared": "workspace:*",
+    "@azure/openapi-markdown": "catalog:",
+    "@octokit/rest": "catalog:",
+    "commonmark": "catalog:",
+    "js-yaml": "catalog:",
+    "simple-git": "catalog:"
   },
   "devDependencies": {
-    "@types/commonmark": "0.27.10",
-    "@types/lodash": "^4.14.161",
-    "@types/node": "^20.0.0",
-    "@vitest/coverage-v8": "^4.1.0",
-    "prettier": "3.8.3",
-    "prettier-plugin-organize-imports": "^4.2.0",
-    "typescript": "~6.0.2",
-    "vitest": "^4.1.0"
+    "@types/commonmark": "catalog:",
+    "@types/node": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "prettier": "catalog:",
+    "prettier-plugin-organize-imports": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:",
+    "@types/js-yaml": "catalog:"
   },
   "engines": {
-    "node": ">=20.0.0"
-  }
+    "node": ">=24.14.1"
+  },
+  "version": "0.0.0"
 }

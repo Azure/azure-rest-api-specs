@@ -241,7 +241,8 @@ interface WorkspaceApiOperationOps
         @minLength(1)
         @maxLength(80)
         operationId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceApiOperation"
     > {}
 
 @armResourceOperations

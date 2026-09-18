@@ -1,12 +1,12 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
 import { readFile } from "fs/promises";
-import { globby } from "globby";
 import path, { basename, dirname, normalize } from "path";
 import pc from "picocolors";
 import stripAnsi from "strip-ansi";
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNpm } from "../utils.js";
+import { globFiles } from "../glob.ts";
+import { type RuleResult } from "../rule-result.ts";
+import { type Rule } from "../rule.ts";
+import { fileExists, getSuppressions, gitDiffTopSpecFolder, runPnpm } from "../utils.ts";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
@@ -18,10 +18,8 @@ export class CompileRule implements Rule {
     let errorOutput = "";
 
     if (await fileExists(path.join(folder, "main.tsp"))) {
-      const [err, stdout, stderr] = await runNpm([
+      const [err, stdout, stderr] = await runPnpm([
         "exec",
-        "--no",
-        "--",
         "tsp",
         "compile",
         "--list-files",
@@ -79,10 +77,9 @@ export class CompileRule implements Rule {
             // Filter to only specs matching the folder and filename extracted from the first output-file.
             // Necessary to handle multi-project specs like keyvault.
             //
-            // Globby only accepts patterns like posix paths.
+            // Glob patterns use forward slashes on all platforms.
             const pattern = path.posix.join(...outputFolder.split(path.sep), "**", outputFilename);
-            const allSwaggers = (await globby(pattern, { ignore: ["**/examples/**"] })).map(
-              // Globby always returns posix paths
+            const allSwaggers = (await globFiles(pattern, { exclude: ["**/examples/**"] })).map(
               (p) => normalize(p),
             );
 
@@ -165,27 +162,25 @@ export class CompileRule implements Rule {
 
               let isOnlyOlderPreviews = false;
               if (allArePreview) {
-                // Get all preview versions from tspGeneratedSwaggers
-                const previewVersions = tspGeneratedSwaggers
-                  .filter((s) => {
-                    const posixPath = s.split(path.sep).join(path.posix.sep);
-                    return posixPath.includes("/preview/");
-                  })
+                // Get all versions (preview and stable) from tspGeneratedSwaggers.
+                // A later preview *or* stable version is allowed to supersede an older
+                // preview, leaving the older preview's swagger in place.
+                const generatedVersions = tspGeneratedSwaggers
                   .map(extractVersion)
                   .filter((v): v is string => v !== null);
 
-                if (previewVersions.length > 0) {
-                  // Find the latest preview version (sort descending)
-                  const sortedVersions = [...new Set(previewVersions)].sort().reverse();
-                  const latestPreview = sortedVersions[0];
+                if (generatedVersions.length > 0) {
+                  // Find the latest generated version (sort descending)
+                  const sortedVersions = [...new Set(generatedVersions)].sort().reverse();
+                  const latestGeneratedVersion = sortedVersions[0];
 
-                  // Check if any extraSwagger is from the latest preview
-                  const hasLatestPreview = extraSwaggers.some((s) => {
+                  // Check if any extraSwagger is from the latest generated version
+                  const hasLatestVersion = extraSwaggers.some((s) => {
                     const version = extractVersion(s);
-                    return version === latestPreview;
+                    return version === latestGeneratedVersion;
                   });
 
-                  isOnlyOlderPreviews = !hasLatestPreview;
+                  isOnlyOlderPreviews = !hasLatestVersion;
                 }
               }
 
@@ -200,7 +195,7 @@ export class CompileRule implements Rule {
                 errorOutput += pc.red(extraSwaggers.join("\n") + "\n");
               } else {
                 stdOutput += pc.yellow(
-                  `\nNote: Found extra preview swaggers from older versions (not the latest preview). ` +
+                  `\nNote: Found extra preview swaggers from older versions (not the latest version). ` +
                     `These are allowed to remain:\n`,
                 );
                 stdOutput += pc.yellow(extraSwaggers.join("\n") + "\n");
@@ -216,10 +211,8 @@ export class CompileRule implements Rule {
 
     const clientTsp = path.join(folder, "client.tsp");
     if (await fileExists(clientTsp)) {
-      const [err, stdout, stderr] = await runNpm([
+      const [err, stdout, stderr] = await runPnpm([
         "exec",
-        "--no",
-        "--",
         "tsp",
         "compile",
         "--no-emit",

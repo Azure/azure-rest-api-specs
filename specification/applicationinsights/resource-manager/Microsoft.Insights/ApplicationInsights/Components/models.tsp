@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -106,6 +108,29 @@ union PurgeState {
    * completed
    */
   completed: "completed",
+}
+
+/**
+ * Indicates the state of the OpenTelemetry ingestion into the Azure Monitor workspace that is linked to the Application Insights component.
+ */
+@added(Versions.v2025_01_23_preview)
+union AzureMonitorWorkspaceIngestionMode {
+  string,
+
+  /**
+   * The component has not been opted in to Azure Monitor workspace ingestion. Clients may specify this value on create to decline Azure Monitor workspace ingestion.
+   */
+  NotOptedIn: "NotOptedIn",
+
+  /**
+   * Azure Monitor workspace ingestion is enabled for the component. Clients may specify this value to opt in. Opting back out after ingestion has been enabled is not supported.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Azure Monitor workspace ingestion is disabled for the component because the link to the Azure Monitor workspace is broken. This value is set only by the service and is rejected if specified by a client.
+   */
+  Disabled: "Disabled",
 }
 
 /**
@@ -225,6 +250,7 @@ model ApplicationInsightsComponentProperties {
    * Disable IP masking.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   DisableIpMasking?: boolean;
 
   /**
@@ -282,6 +308,52 @@ model ApplicationInsightsComponentProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ForceCustomerStorageForProfiler?: boolean;
+
+  /**
+   * Resource Id of the Azure Monitor workspace which the OpenTelemetry data will be ingested to.
+   */
+  @added(Versions.v2025_01_23_preview)
+  @encodedName("application/json", "AzureMonitorWorkspaceResourceId")
+  azureMonitorWorkspaceResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Indicates the state of the OpenTelemetry ingestion into the linked Azure Monitor workspace. Clients may set this to `NotOptedIn` or `Enabled`; `Disabled` is set only by the service when the link to the Azure Monitor workspace is broken.
+   */
+  @added(Versions.v2025_01_23_preview)
+  @encodedName("application/json", "AzureMonitorWorkspaceIngestionMode")
+  azureMonitorWorkspaceIngestionMode?: AzureMonitorWorkspaceIngestionMode;
+
+  /**
+   * Resource Id of the data collection rule that routes the OpenTelemetry data ingested through the OTLP endpoints of this component.
+   */
+  @added(Versions.v2025_01_23_preview)
+  @encodedName("application/json", "DataCollectionRuleResourceId")
+  @visibility(Lifecycle.Read)
+  dataCollectionRuleResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The OTLP endpoint to which OpenTelemetry metrics for this component are sent.
+   */
+  @added(Versions.v2025_01_23_preview)
+  @encodedName("application/json", "OTLPMetricsEndpoint")
+  @visibility(Lifecycle.Read)
+  otlpMetricsEndpoint?: url;
+
+  /**
+   * The OTLP endpoint to which OpenTelemetry logs for this component are sent.
+   */
+  @added(Versions.v2025_01_23_preview)
+  @encodedName("application/json", "OTLPLogsEndpoint")
+  @visibility(Lifecycle.Read)
+  otlpLogsEndpoint?: url;
+
+  /**
+   * The OTLP endpoint to which OpenTelemetry traces for this component are sent.
+   */
+  @added(Versions.v2025_01_23_preview)
+  @encodedName("application/json", "OTLPTracesEndpoint")
+  @visibility(Lifecycle.Read)
+  otlpTracesEndpoint?: url;
 }
 
 /**
@@ -411,6 +483,7 @@ model ComponentPurgeBodyFilters {
 /**
  * Response containing operationId for a specific purge action.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ComponentPurgeResponse {
   /**
    * Id to use when querying for status for a particular purge operation.
@@ -421,6 +494,7 @@ model ComponentPurgeResponse {
 /**
  * Response containing status for a specific purge operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ComponentPurgeStatusResponse {
   /**
    * Status of the operation represented by the requested Id.

@@ -1,22 +1,22 @@
-import { mockAll, mockFolder } from "./mocks.js";
+import { mockAll, mockFolder } from "./mocks.ts";
 mockAll();
 
-import { afterEach, beforeEach, describe, expect, it, MockInstance, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 
 import * as fsPromises from "fs/promises";
-import * as globby from "globby";
 import path from "path";
-import { RuleResult } from "../src/rule-result.js";
-import { CompileRule } from "../src/rules/compile.js";
+import * as nativeGlob from "../src/glob.ts";
+import { type RuleResult } from "../src/rule-result.ts";
+import { CompileRule } from "../src/rules/compile.ts";
 
-import * as utils from "../src/utils.js";
+import * as utils from "../src/utils.ts";
 
 const swaggerPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 const handwrittenSwaggerPath = "data-plane/Azure.Foo/preview/2021-11-01-preview/foo.json";
 
 describe("compile", function () {
   let gitDiffTopSpecFolderSpy: MockInstance;
-  let runNpmSpy: MockInstance;
+  let runPnpmSpy: MockInstance;
 
   beforeEach(() => {
     vi.spyOn(utils, "fileExists").mockResolvedValue(true);
@@ -28,10 +28,10 @@ describe("compile", function () {
         errorOutput: "",
       }),
     );
-    runNpmSpy = vi
-      .spyOn(utils, "runNpm")
+    runPnpmSpy = vi
+      .spyOn(utils, "runPnpm")
       .mockImplementation((args, cwd) =>
-        Promise.resolve([null, `runNpm ${args.join(" ")} at ${cwd}`, ""]),
+        Promise.resolve([null, `runPnpm ${args.join(" ")} at ${cwd}`, ""]),
       );
   });
 
@@ -54,12 +54,12 @@ describe("compile", function () {
       // ensure examples are skipped
       `${swaggerPath.replace("foo.json", "examples/example.json")}\n`;
 
-    runNpmSpy.mockImplementation(
+    runPnpmSpy.mockImplementation(
       (): Promise<[Error | null, string, string]> => Promise.resolve([null, compileOutput, ""]),
     );
 
     // ensure handwritten swaggers are ignored
-    vi.mocked(globby.globby).mockImplementation(() =>
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
       Promise.resolve([swaggerPath, handwrittenSwaggerPath]),
     );
     vi.mocked(fsPromises.readFile).mockImplementation((path) =>
@@ -72,7 +72,7 @@ describe("compile", function () {
   });
 
   it("should succeed if output has no generated swaggers", async function () {
-    runNpmSpy.mockImplementation(
+    runPnpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> =>
         Promise.resolve([null, "not-swagger", ""]),
     );
@@ -84,12 +84,12 @@ describe("compile", function () {
   });
 
   it("should fail if extra swaggers", async function () {
-    runNpmSpy.mockImplementation(
+    runPnpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, swaggerPath, ""]),
     );
 
     // Simulate extra swagger
-    vi.mocked(globby.globby).mockImplementation(() =>
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
       Promise.resolve([
         swaggerPath,
         swaggerPath.replace("2022", "2023"),
@@ -114,13 +114,13 @@ describe("compile", function () {
     const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
     const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 
-    runNpmSpy.mockImplementation(
+    runPnpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> =>
         Promise.resolve([null, latestPreviewPath, ""]),
     );
 
-    // Simulate extra older preview swagger (globby always returns posix paths)
-    vi.mocked(globby.globby).mockImplementation(() =>
+    // Simulate extra older preview swagger (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
       Promise.resolve([latestPreviewPath, olderPreviewPath]),
     );
 
@@ -139,13 +139,13 @@ describe("compile", function () {
     const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
     const anotherLatestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/bar.json";
 
-    runNpmSpy.mockImplementation(
+    runPnpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> =>
         Promise.resolve([null, latestPreviewPath, ""]),
     );
 
-    // Simulate extra swagger from the latest preview (globby always returns posix paths)
-    vi.mocked(globby.globby).mockImplementation(() =>
+    // Simulate extra swagger from the latest preview (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
       Promise.resolve([latestPreviewPath, anotherLatestPreviewPath]),
     );
 
@@ -163,12 +163,65 @@ describe("compile", function () {
     const previewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
     const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
 
-    runNpmSpy.mockImplementation(
+    runPnpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, previewPath, ""]),
     );
 
-    // Simulate extra stable swagger (globby always returns posix paths)
-    vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([previewPath, stablePath]));
+    // Simulate extra stable swagger (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
+      Promise.resolve([previewPath, stablePath]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+      success: false,
+      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+    });
+  });
+
+  it("should succeed if an older preview is superseded by a later stable version", async function () {
+    // Current TypeSpec only generates the stable 2024-03-01 version, but the older
+    // preview swagger is left in place. This should be allowed.
+    const stablePath = "data-plane/Azure.Foo/stable/2024-03-01/foo.json";
+    const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+
+    runPnpmSpy.mockImplementation(
+      async (): Promise<[Error | null, string, string]> => Promise.resolve([null, stablePath, ""]),
+    );
+
+    // Simulate extra older preview swagger (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
+      Promise.resolve([stablePath, olderPreviewPath]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    const result = await new CompileRule().execute(mockFolder);
+    expect(result).toMatchObject({
+      success: true,
+      stdOutput: expect.stringContaining("older versions") as unknown,
+    });
+  });
+
+  it("should fail if a preview is newer than the latest stable version", async function () {
+    // Current TypeSpec only generates the stable 2023-01-01 version, but a *newer*
+    // preview swagger is left in place. This is a genuine mismatch and should fail.
+    const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
+    const newerPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+
+    runPnpmSpy.mockImplementation(
+      async (): Promise<[Error | null, string, string]> => Promise.resolve([null, stablePath, ""]),
+    );
+
+    // Simulate extra newer preview swagger (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
+      Promise.resolve([stablePath, newerPreviewPath]),
+    );
 
     vi.mocked(fsPromises.readFile).mockImplementation(() =>
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
@@ -185,13 +238,13 @@ describe("compile", function () {
     const olderPreview1Path = "data-plane/Azure.Foo/preview/2023-01-01-preview/foo.json";
     const olderPreview2Path = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 
-    runNpmSpy.mockImplementation(
+    runPnpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> =>
         Promise.resolve([null, latestPreviewPath, ""]),
     );
 
-    // Simulate multiple extra older preview swaggers (globby always returns posix paths)
-    vi.mocked(globby.globby).mockImplementation(() =>
+    // Simulate multiple extra older preview swaggers (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
       Promise.resolve([latestPreviewPath, olderPreview1Path, olderPreview2Path]),
     );
 
@@ -211,12 +264,12 @@ describe("compile", function () {
     const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
     const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
 
-    runNpmSpy.mockImplementation(
+    runPnpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, previewPath, ""]),
     );
 
-    // Simulate extra swaggers with mix of preview and stable (globby always returns posix paths)
-    vi.mocked(globby.globby).mockImplementation(() =>
+    // Simulate extra swaggers with mix of preview and stable (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
       Promise.resolve([previewPath, olderPreviewPath, stablePath]),
     );
 
@@ -231,12 +284,12 @@ describe("compile", function () {
   });
 
   it("supports suppressions", async function () {
-    runNpmSpy.mockImplementation(
+    runPnpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, swaggerPath, ""]),
     );
 
     // Simulate extra swagger
-    vi.mocked(globby.globby).mockImplementation(() =>
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
       Promise.resolve([
         swaggerPath,
         swaggerPath.replace("2022", "2023"),
@@ -270,7 +323,7 @@ describe("compile", function () {
   });
 
   it("throws on invalid suppressions", async function () {
-    runNpmSpy.mockImplementation(
+    runPnpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, swaggerPath, ""]),
     );
 
@@ -290,7 +343,7 @@ describe("compile", function () {
   });
 
   it("should skip git diff check if compile fails", async function () {
-    runNpmSpy.mockImplementation(
+    runPnpmSpy.mockImplementation(
       async (args: string[]): Promise<[Error | null, string, string]> => {
         if (args.join(" ").includes("tsp compile")) {
           return Promise.resolve([
@@ -310,11 +363,11 @@ describe("compile", function () {
   });
 
   it("should fail if git diff fails", async function () {
-    runNpmSpy.mockImplementation(
+    runPnpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, swaggerPath, ""]),
     );
 
-    vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([swaggerPath]));
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() => Promise.resolve([swaggerPath]));
 
     gitDiffTopSpecFolderSpy.mockImplementation((folder: string): Promise<RuleResult> => {
       const stdOut = `Running git diff on folder ${folder}`;
@@ -333,11 +386,11 @@ describe("compile", function () {
   });
 
   it("should succeed if git diff succeeds", async function () {
-    runNpmSpy.mockImplementation(
+    runPnpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, swaggerPath, ""]),
     );
 
-    vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([swaggerPath]));
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() => Promise.resolve([swaggerPath]));
 
     gitDiffTopSpecFolderSpy.mockImplementation((folder: string): Promise<RuleResult> => {
       const stdOut = `Running git diff on folder ${folder}`;

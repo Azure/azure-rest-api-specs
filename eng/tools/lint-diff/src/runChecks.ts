@@ -1,10 +1,14 @@
-import { execNpmExec, isExecError } from "@azure-tools/specs-shared/exec";
+import { execPnpmExec, isExecError } from "@azure-tools/specs-shared/exec";
 import { debugLogger } from "@azure-tools/specs-shared/logger";
 import { join } from "path";
 
-import { AutoRestMessage, AutorestRunResult, ReadmeAffectedTags } from "./lintdiff-types.js";
-import { getOpenapiType } from "./markdown-utils.js";
-import { getPathToDependency, isFailure } from "./util.js";
+import {
+  type AutoRestMessage,
+  type AutorestRunResult,
+  type ReadmeAffectedTags,
+} from "./lintdiff-types.ts";
+import { getOpenapiType } from "./markdown-utils.ts";
+import { getPathToDependency, isFailure } from "./util.ts";
 
 const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
 
@@ -55,12 +59,12 @@ export async function runChecks(
         autorestArgs.push(`--tag=${tag}`);
       }
       autorestArgs.push(changedFilePath);
-      const autorestCommand = `npm exec -- ${autorestArgs.join(" ")}`;
+      const autorestCommand = `pnpm exec ${autorestArgs.join(" ")}`;
       console.log(`\tAutorest command: ${autorestCommand}`);
 
       let lintDiffResult: AutorestRunResult;
       try {
-        const executionResult = await execNpmExec(autorestArgs, {
+        const executionResult = await execPnpmExec(autorestArgs, {
           maxBuffer: MAX_EXEC_BUFFER,
           logger: debugLogger,
         });

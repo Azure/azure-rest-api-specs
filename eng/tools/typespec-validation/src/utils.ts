@@ -1,22 +1,25 @@
-import { execNpm, isExecError } from "@azure-tools/specs-shared/exec";
+import { execPnpm, isExecError } from "@azure-tools/specs-shared/exec";
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
+import {
+  getSuppressions as getSuppressionsImpl,
+  type Suppression,
+} from "@azure-tools/suppressions";
 import debug from "debug";
 import { access, readdir, readFile } from "fs/promises";
-import defaultPath, { basename, dirname, join, PlatformPath } from "path";
+import defaultPath, { basename, dirname, join, relative, type PlatformPath } from "path";
 import { simpleGit } from "simple-git";
-import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
-import { context } from "./index.js";
+import { context } from "./index.ts";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
 
-// Wraps execNpm() to return error (and coalesce stdout and stderr) instead of throwing
-export async function runNpm(
+// Wraps execPnpm() to return error (and coalesce stdout and stderr) instead of throwing
+export async function runPnpm(
   args: string[],
   cwd?: string,
 ): Promise<[Error | null, string, string]> {
   try {
-    const { stdout, stderr } = await execNpm(args, {
+    const { stdout, stderr } = await execPnpm(args, {
       logger: new ConsoleLogger(),
       maxBuffer: 64 * 1024 * 1024,
       cwd,
@@ -64,6 +67,23 @@ export function normalizePathImpl(folder: string, path: PlatformPath = defaultPa
     .split(path.sep)
     .join("/")
     .replace(/^([a-z]):/, (_match, driveLetter: string) => driveLetter.toUpperCase() + ":");
+}
+
+export async function readFileAtCommit(
+  folder: string,
+  commitish: string,
+  file: string,
+): Promise<string | undefined> {
+  const git = simpleGit(folder);
+  await git.revparse(["--verify", `${commitish}^{commit}`]);
+  const repositoryRoot = (await git.revparse(["--show-toplevel"])).trim();
+  const repositoryPath = relative(repositoryRoot, file).split(defaultPath.sep).join("/");
+
+  try {
+    return await git.show([`${commitish}:${repositoryPath}`]);
+  } catch {
+    return undefined;
+  }
 }
 
 export async function gitDiffTopSpecFolder(folder: string) {

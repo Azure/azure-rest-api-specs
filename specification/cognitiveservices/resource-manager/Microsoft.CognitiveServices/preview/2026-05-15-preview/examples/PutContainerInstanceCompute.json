@@ -1,0 +1,38 @@
+{
+  "operationId": "Computes_CreateOrUpdate",
+  "title": "PutContainerInstanceCompute",
+  "parameters": {
+    "api-version": "2026-05-15-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "rgcognitiveservices",
+    "accountName": "myAccount",
+    "computeName": "myContainerInstance",
+    "resource": {
+      "properties": {
+        "computeType": "ContainerInstance",
+        "location": "eastus",
+        "targetClusterId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.CognitiveServices/accounts/myAccount/computes/myCluster",
+        "imageLink": "mcr.microsoft.com/azureml/curated/pytorch-gpu:latest",
+        "idleTimeBeforeShutdown": "PT30M",
+        "sshSettings": {
+          "sshPublicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQ...",
+          "adminEnabled": true
+        }
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CognitiveServices/locations/eastus/computeOperations/00000000-0000-0000-0000-000000000000?api-version=2026-05-15-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CognitiveServices/locations/eastus/computeOperations/00000000-0000-0000-0000-000000000000?api-version=2026-05-15-preview"
+      }
+    }
+  }
+}

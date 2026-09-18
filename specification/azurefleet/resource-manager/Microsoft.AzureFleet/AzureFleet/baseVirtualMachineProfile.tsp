@@ -389,6 +389,7 @@ model WinRMListener {
    * or the [Azure Key Vault virtual machine extension for
    * Windows](https://learn.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   certificateUrl?: url;
 }
 
@@ -557,6 +558,7 @@ model VaultCertificate {
    * or the [Azure Key Vault virtual machine extension for
    * Windows](https://learn.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   certificateUrl?: url;
 
   /**
@@ -1443,6 +1445,7 @@ model VirtualMachineScaleSetExtensionProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Converted legacy object to typespec https://github.com/Azure/azure-rest-api-specs/blob/d715112415eb08572ee96cc4bd77217aa44dedf1/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json#L5002C1-L5009C11"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Needed to mark as secret without changing format"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-secret' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to the @secret decorator."
   @visibility(Lifecycle.Create, Lifecycle.Update)
   @OpenAPI.extension("x-ms-secret", true)
   protectedSettings?: Record<unknown>;
@@ -1480,6 +1483,7 @@ model KeyVaultSecretReference {
   /**
    * The URL referencing a secret in a Key Vault.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   secretUrl: url;
 
   /**

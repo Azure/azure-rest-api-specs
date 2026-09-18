@@ -4,6 +4,9 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.EdgeOrder;
 
+// Preserve the existing Python SDK client name to avoid breaking changes
+@@clientName(Microsoft.EdgeOrder, "EdgeOrderManagementClient", "python");
+
 // csharp
 @@clientName(AddressUpdateParameter, "EdgeOrderAddressPatch", "csharp");
 @@clientName(

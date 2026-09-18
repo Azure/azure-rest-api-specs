@@ -7,6 +7,7 @@ import "./personDirectoryRoutes.tsp";
 import "./models.tsp";
 import "./documentContent.tsp";
 import "./audioVisualContent.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -26,8 +27,10 @@ using TypeSpec.Versioning;
 namespace ContentUnderstanding;
 
 @doc("Key-based authentication using the access key of the Azure resource.")
-model AzureKey
-  is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
+model AzureKey is ApiKeyAuth<
+  ApiKeyLocation.header,
+  "Ocp-Apim-Subscription-Key"
+>;
 
 @doc("Microsoft Entra ID OAuth2 authentication using an access token.")
 model EntraIdToken
@@ -43,4 +46,8 @@ enum Versions {
 
   @doc("The 2025-11-01 version of the Content Understanding service.")
   v2025_11_01: "2025-11-01",
+
+  @doc("The 2026-06-01-preview version of the Content Understanding service.")
+  @Azure.Core.previewVersion
+  v2026_06_01_preview: "2026-06-01-preview",
 }

@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "resourceGroupName": "testrg",
+    "sqlServerInstanceName": "testsqlServerInstance",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testsqlServerInstance",
+        "type": "Microsoft.AzureArcData/SqlServerInstances",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/SqlServerInstances/testsqlServerInstance",
+        "location": "northeurope",
+        "properties": {
+          "alwaysOnRole": "FailoverClusterInstance",
+          "azureDefenderStatus": "Protected",
+          "azureDefenderStatusLastUpdated": "2020-01-02T17:18:19.1234567Z",
+          "backupPolicy": {
+            "differentialBackupHours": 12,
+            "fullBackupDays": 1,
+            "retentionPeriodDays": 1,
+            "transactionLogBackupMinutes": 30
+          },
+          "collation": "collation",
+          "containerResourceId": "Resource id of hosting Arc Machine",
+          "cores": "4",
+          "createTime": "01/01/2020 01:01:01",
+          "currentVersion": "2012",
+          "dbMasterKeyExists": true,
+          "edition": "Developer",
+          "failoverCluster": {
+            "hostIPAddresses": [
+              {
+                "ipAddress": "10.20.11.23",
+                "subnetMask": "255.255.255.0"
+              },
+              {
+                "ipAddress": "10.20.11.24",
+                "subnetMask": "255.255.255.0"
+              }
+            ],
+            "hostNames": [
+              "DEV-HOSTNAME1",
+              "DEV-HOSTNAME2"
+            ],
+            "id": "f836af7e-85ed-4ea4-91fb-67709b34e323",
+            "networkName": "networkNameOfSQLFCI",
+            "sqlInstanceIds": [
+              "/subscriptions/dummySub/resourceGroups/dummyRG/providers/Microsoft.AzureArcData/SqlServerInstances/sqlServer1",
+              "/subscriptions/dummySub/resourceGroups/dummyRG/providers/Microsoft.AzureArcData/SqlServerInstances/sqlServer2"
+            ]
+          },
+          "hostType": "Physical Server",
+          "instanceName": "name of instance",
+          "isDigiCertPkiCertTrustConfigured": true,
+          "isHadrEnabled": true,
+          "isMicrosoftPkiCertTrustConfigured": true,
+          "lastInventoryUploadTime": "2023-03-29T14:13:12Z",
+          "licenseType": "Free",
+          "maxServerMemoryMB": 4096,
+          "patchLevel": "patchlevel",
+          "productId": "sql id",
+          "serviceType": "Engine",
+          "status": "Registered",
+          "tcpDynamicPorts": "1433",
+          "tcpStaticPorts": "1433",
+          "traceFlags": [
+            1800,
+            9567
+          ],
+          "upgradeLockedUntil": "2022-05-05T16:26:33.883Z",
+          "vCore": "4",
+          "version": "SQL Server 2012",
+          "vmId": "12345678-1234-1234-1234-123456789123"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "mytag": "myval"
+        }
+      }
+    }
+  },
+  "operationId": "SqlServerInstances_postUpgrade",
+  "title": "Post AUM Upgrade to complete SQL Instance Upgrade Process"
+}

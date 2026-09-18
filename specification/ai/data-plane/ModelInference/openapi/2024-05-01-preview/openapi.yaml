@@ -1,6 +1,11 @@
 openapi: 3.0.0
 info:
   title: AI Model Inference
+  description: |-
+    **Deprecated**: The Azure AI Model Inference API is deprecated and will be retired in the future.
+    Migrate to the OpenAI API, which provides equivalent functionality with broader model support and
+    unified SDK access. For migration guidance, see
+    [How to migrate from Azure AI Inference SDK to OpenAI SDK](https://learn.microsoft.com/azure/foundry/how-to/model-inference-to-openai-migration).
   version: 2024-05-01-preview
 tags: []
 paths:
@@ -12,6 +17,9 @@ paths:
         Completions support a wide variety of tasks and generate text that continues from or "completes"
         provided prompt data. The method makes a REST API call to the `/chat/completions` route
         on the given endpoint.
+
+        **Deprecated**: This API is deprecated. Use the OpenAI API instead.
+        See [migration guide](https://learn.microsoft.com/azure/foundry/how-to/model-inference-to-openai-migration).
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: extra-parameters
@@ -55,6 +63,9 @@ paths:
       description: |-
         Return the embedding vectors for given text prompts.
         The method makes a REST API call to the `/embeddings` route on the given endpoint.
+
+        **Deprecated**: This API is deprecated. Use the OpenAI API instead.
+        See [migration guide](https://learn.microsoft.com/azure/foundry/how-to/model-inference-to-openai-migration).
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: extra-parameters
@@ -98,6 +109,9 @@ paths:
       description: |-
         Return the embedding vectors for given images.
         The method makes a REST API call to the `/images/embeddings` route on the given endpoint.
+
+        **Deprecated**: This API is deprecated. Use the OpenAI API instead.
+        See [migration guide](https://learn.microsoft.com/azure/foundry/how-to/model-inference-to-openai-migration).
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: extra-parameters
@@ -141,8 +155,11 @@ paths:
       description: |-
         Returns information about the AI model deployed.
         The method makes a REST API call to the `/info` route on the given endpoint.
-        This method will only work when using Serverless API, Managed Compute, or Model .
-        inference endpoint. Azure OpenAI endpoints don't support i.
+        This method will only work when using Serverless API, Managed Compute, or Model
+        Inference endpoints. Azure OpenAI endpoints don't support it.
+
+        **Deprecated**: This API is deprecated. Use the OpenAI API instead.
+        See [migration guide](https://learn.microsoft.com/azure/foundry/how-to/model-inference-to-openai-migration).
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
       responses:
@@ -250,7 +267,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CompletionsFinishReason'
           nullable: true
-          description: The reason that this chat completions choice completed its generated.
+          description: The reason that this chat completions choice completed its generation.
           readOnly: true
         message:
           allOf:
@@ -477,7 +494,7 @@ components:
           minItems: 1
           description: |-
             A list of tools the model may request to call. Currently, only functions are supported as a tool. The model
-            may response with a function call request and provide the input arguments in JSON format for that function.
+            may respond with a function call request and provide the input arguments in JSON format for that function.
         tool_choice:
           anyOf:
             - $ref: '#/components/schemas/ChatCompletionsToolChoicePreset'
@@ -498,7 +515,7 @@ components:
             $ref: '#/components/schemas/ChatCompletionsModality'
           description: |-
             The modalities that the model is allowed to use for the chat completions response. The default modality
-            is `text`. Indicating an unsupported modality combination results in an 422 error.
+            is `text`.     Indicating an unsupported modality combination results in a 422 error.
       additionalProperties: {}
       description: |-
         The configuration information for a chat completions request.
@@ -650,7 +667,7 @@ components:
           type: string
           enum:
             - audio_url
-          description: "The discriminated object type: always 'image_url' for this type."
+          description: "The discriminated object type: always 'audio_url' for this type."
         audio_url:
           allOf:
             - $ref: '#/components/schemas/ChatMessageAudioUrl'
@@ -666,7 +683,7 @@ components:
         url:
           type: string
           description: The URL of the audio.
-      description: An internet location from which the model may retrieve an audio.
+      description: An internet location from which the model may retrieve audio.
     ChatMessageContentItem:
       type: object
       required:
@@ -697,7 +714,7 @@ components:
         image_url:
           allOf:
             - $ref: '#/components/schemas/ChatMessageImageUrl'
-          description: An internet location, which must be accessible to the model,from which the image may be retrieved.
+          description: An internet location, which must be accessible to the model, from which the image may be retrieved.
       allOf:
         - $ref: '#/components/schemas/ChatMessageContentItem'
       description: A structured chat content item containing an image reference.
@@ -1006,7 +1023,7 @@ components:
         Specifies the types of embeddings to generate. Compressed embeddings types like `uint8`, `int8`, `ubinary` and 
         `binary`, may reduce storage costs without sacrificing the integrity of the data. Returns a 422 error if the
         model doesn't support the value or parameter. Read the model's documentation to know the values supported by
-        the your model.
+        your model.
     EmbeddingInputType:
       anyOf:
         - type: string
@@ -1217,8 +1234,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/EmbeddingEncodingFormat'
           description: |-
-            Optional. The number of dimensions the resulting output embeddings should have.
-            Passing null causes the model to use its default value.
+            Optional. The desired format for the returned embeddings.
             Returns a 422 error if the model doesn't support the value or parameter.
         input_type:
           allOf:
@@ -1292,7 +1308,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CompletionsFinishReason'
           nullable: true
-          description: The reason that this chat completions choice completed its generated.
+          description: The reason that this chat completions choice completed its generation.
           readOnly: true
         delta:
           allOf:

@@ -1,7 +1,7 @@
 import path from "node:path";
 import { inspect } from "node:util";
-import { logMessage } from "./log.js";
-import { SpecGenSdkCmdInput } from "./types.js";
+import { logMessage } from "./log.ts";
+import { type SpecGenSdkCmdInput } from "./types.ts";
 import {
   createCombinedSpecs,
   getChangedFiles,
@@ -13,7 +13,7 @@ import {
   type ChangedSpecs,
   type SpecConfigs,
   type SpecResults,
-} from "./utils.js";
+} from "./utils.ts";
 
 export const readmeMdRegex = /^readme.md$/;
 export const typespecProjectRegex = /^tspconfig.yaml$/;

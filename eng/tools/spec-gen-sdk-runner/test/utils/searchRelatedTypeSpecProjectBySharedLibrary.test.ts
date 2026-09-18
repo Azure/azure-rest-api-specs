@@ -1,7 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, test } from "vitest";
-import { searchRelatedTypeSpecProjectBySharedLibrary } from "../../src/utils.js";
+import { searchRelatedTypeSpecProjectBySharedLibrary } from "../../src/utils.ts";
 
 describe("searchRelatedTypeSpecProjectBySharedLibrary", () => {
   // Get the absolute path to the repo root

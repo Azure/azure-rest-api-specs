@@ -4,6 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Support;
 
+@@clientName(Microsoft.Support, "SupportMgmtClient", "python");
 @@clientName(CommunicationDetails, "SupportTicketCommunication", "csharp");
 @@clientName(
   CommunicationDirection,

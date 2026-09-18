@@ -22,7 +22,9 @@ import "./View.tsp";
 import "./Alert.tsp";
 import "./ScheduledAction.tsp";
 import "./Setting.tsp";
+import "./MarkupRule.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -47,6 +49,11 @@ enum Versions {
    * The 2025-03-01 API version.
    */
   v2025_03_01: "2025-03-01",
+
+  /**
+   * The 2026-06-01 API version.
+   */
+  v2026_06_01: "2026-06-01",
 }
 
 interface Operations

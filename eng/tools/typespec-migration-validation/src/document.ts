@@ -1,23 +1,23 @@
 import {
-  HttpMethod,
-  OpenAPI2Document,
-  OpenAPI2Operation,
-  OpenAPI2Parameter,
-  OpenAPI2PathItem,
-  OpenAPI2Response,
-  OpenAPI2Schema,
-  OpenAPI2SchemaProperty,
-  OpenAPI2SchemaRefProperty,
-  Ref,
-  Refable,
+  type HttpMethod,
+  type OpenAPI2Document,
+  type OpenAPI2Operation,
+  type OpenAPI2Parameter,
+  type OpenAPI2PathItem,
+  type OpenAPI2Response,
+  type OpenAPI2Schema,
+  type OpenAPI2SchemaProperty,
+  type OpenAPI2SchemaRefProperty,
+  type Ref,
+  type Refable,
 } from "@azure-tools/typespec-autorest";
-import { configuration } from "./configuration.js";
+import { configuration } from "./configuration.ts";
 import {
   getOriginalParameter,
   isApiVersionParameter,
   isResourceGroupNameParameter,
   isSubscriptionIdParameter,
-} from "./parameter.js";
+} from "./parameter.ts";
 
 let originalDocument: OpenAPI2Document | undefined = undefined;
 

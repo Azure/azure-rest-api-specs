@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "activeOnly": true,
+    "agentPoolName": "agentpool1",
+    "api-version": "2026-06-02-preview",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "d11edb09-6e27-429f-9fe5-17baf773bc4a",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1/operations/d11edb09-6e27-429f-9fe5-17baf773bc4a",
+            "status": "ScalingAgentPool: 3/5 nodes completed",
+            "percentComplete": 60,
+            "startTime": "2026-05-06T10:05:00Z",
+            "operationType": "PatchAgentPool",
+            "subOperationType": "Scaling"
+          },
+          {
+            "name": "a22fdc10-7e38-530f-a6f6-28cbe884cd5b",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1/operations/a22fdc10-7e38-530f-a6f6-28cbe884cd5b",
+            "status": "UpgradingNodes: 8/20 nodes completed",
+            "percentComplete": 40,
+            "startTime": "2026-05-06T10:00:00Z",
+            "operationType": "PutAgentPool",
+            "subOperationType": "Upgrading"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "OperationStatusResult_ListByAgentPool",
+  "title": "List Active Operations on Agent Pool"
+}

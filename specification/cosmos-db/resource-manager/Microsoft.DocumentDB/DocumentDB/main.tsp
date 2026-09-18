@@ -63,6 +63,7 @@ import "./FleetspaceResource.tsp";
 import "./FleetspaceAccountResource.tsp";
 import "./SoftDeletedResources.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

@@ -1,18 +1,20 @@
 import { describe, expect, test } from "vitest";
 
-import { ReadmeAffectedTags } from "../src/lintdiff-types.js";
+import { type ReadmeAffectedTags } from "../src/lintdiff-types.ts";
 import {
   buildState,
   getAffectedServices,
   getChangedSwaggers,
   getService,
   reconcileChangedFilesAndTags,
-} from "../src/processChanges.js";
+} from "../src/processChanges.ts";
 
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { Tag } from "@azure-tools/specs-shared/tag";
-import { resolve } from "node:path";
-import { isWindows } from "./test-util.js";
+import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join, resolve } from "node:path";
+import { isWindows } from "./test-util.ts";
 
 declare module "vitest" {
   interface Assertion {
@@ -355,6 +357,46 @@ describe("reconcileChangedFilesAndTags", () => {
 });
 
 describe("getChangedSwaggers", () => {
+  test.each([false, true])("compares circular schema references (changed=%s)", async (changed) => {
+    const folder = await mkdtemp(join(tmpdir(), "lint-diff-equality-"));
+    try {
+      const before = join(folder, "before");
+      const after = join(folder, "after");
+      await mkdir(before);
+      await mkdir(after);
+      const original = {
+        definitions: {
+          Node: {
+            type: "object",
+            properties: {
+              value: { type: "string" },
+              next: { $ref: "#/definitions/Node" },
+            },
+          },
+        },
+      };
+      const updated = {
+        definitions: {
+          Node: {
+            properties: {
+              next: { $ref: "#/definitions/Node" },
+              value: { type: changed ? "integer" : "string" },
+            },
+            type: "object",
+          },
+        },
+      };
+      await writeFile(join(before, "swagger.json"), JSON.stringify(original));
+      await writeFile(join(after, "swagger.json"), JSON.stringify(updated));
+
+      await expect(getChangedSwaggers(before, after, new Set(["swagger.json"]))).resolves.toEqual(
+        new Set(changed ? ["swagger.json"] : []),
+      );
+    } finally {
+      await rm(folder, { recursive: true, force: true });
+    }
+  });
+
   test("returns an empty set if no swaggers are changed", async () => {
     await expect(
       getChangedSwaggers(

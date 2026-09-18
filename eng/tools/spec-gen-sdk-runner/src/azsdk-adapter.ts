@@ -1,5 +1,9 @@
-import { EmitterCheckResult } from "./emitter-check.js";
-import { ExecutionReport, ExecutionReportPackage, ExecutionResult } from "./types.js";
+import { type EmitterCheckResult } from "./emitter-check.ts";
+import {
+  type ExecutionReport,
+  type ExecutionReportPackage,
+  type ExecutionResult,
+} from "./types.ts";
 
 /**
  * Response shape from `azsdk pkg generate --output json`.
@@ -46,6 +50,52 @@ export interface AzsdkPackResponse {
   response_error?: string;
   response_errors?: string[];
   duration?: number;
+}
+
+/**
+ * Result payload from `azsdk pkg detect-breaking-change` when the tool produced
+ * a result.
+ */
+export interface AzsdkBreakingChangeResult {
+  hasBreakingChange?: boolean;
+  breakingChanges?: unknown[];
+  changes?: string;
+}
+
+/**
+ * Response shape from `azsdk pkg detect-breaking-change --output json`.
+ *
+ * `result` is polymorphic: a definitive run yields an {@link AzsdkBreakingChangeResult}
+ * object; a failed run yields the string `"failed"`.
+ */
+export interface AzsdkDetectBreakingChangeResponse {
+  result?: string | AzsdkBreakingChangeResult;
+  message?: string;
+  package_name?: string;
+  language?: string;
+  response_error?: string;
+  response_errors?: string[];
+}
+
+/**
+ * Extract a definitive breaking-change signal from a detect-breaking-change response.
+ *
+ * Returns a boolean only when the tool produced a result carrying a
+ * `hasBreakingChange` value. Any error shape (no result, `result === "failed"`, a
+ * response error, or a missing `hasBreakingChange`) yields `undefined` so the caller
+ * preserves the existing label instead of overriding it.
+ */
+export function getBreakingChangeSignal(
+  response: AzsdkDetectBreakingChangeResponse,
+): boolean | undefined {
+  if (response.response_error || (response.response_errors?.length ?? 0) > 0) {
+    return undefined;
+  }
+  const result = response.result;
+  if (result && typeof result === "object" && typeof result.hasBreakingChange === "boolean") {
+    return result.hasBreakingChange;
+  }
+  return undefined;
 }
 
 /**

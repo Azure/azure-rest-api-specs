@@ -62,10 +62,13 @@ alias ReplicationProtectionContainersOps = Azure.ResourceManager.Legacy.LegacyOp
   }
 >;
 
-model ProtectionContainerAcceptedLroResponse<FinalResult extends
-  | TypeSpec.Reflection.Model
-  | unknown
-  | void = ProtectionContainer>
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+model ProtectionContainerAcceptedLroResponse<
+  FinalResult extends
+    | TypeSpec.Reflection.Model
+    | unknown
+    | void = ProtectionContainer
+>
   is ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FinalResult> &
     Azure.Core.Foundations.RetryAfterHeader>;
 
@@ -153,11 +156,10 @@ interface ProtectionContainers {
   switchProtection is ArmResourceActionAsyncBase<
     ProtectionContainer,
     SwitchProtectionInput,
-
-      | ArmResponse<ProtectionContainer>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainer> &
-          ArmAsyncOperationHeader<FinalResult = ProtectionContainer> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    | ArmResponse<ProtectionContainer>
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainer> &
+        ArmAsyncOperationHeader<FinalResult = ProtectionContainer> &
+        Azure.Core.Foundations.RetryAfterHeader>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ProtectionContainer>,
     Error = never
   >;
