@@ -45619,6 +45619,30 @@ components:
             - completed
             - failed
       description: The candidate's lifecycle state.
+    AgentOptimizationCandidateSummary:
+      type: object
+      required:
+        - completed_candidate_count
+      properties:
+        completed_candidate_count:
+          type: integer
+          format: int32
+          description: Number of candidates whose evaluation completed, including the baseline once completed.
+        baseline_candidate_id:
+          type: string
+          description: Candidate ID of the original baseline. Omitted until the baseline candidate is available.
+        best_candidate_id:
+          type: string
+          description: Candidate ID of the highest-scoring completed candidate. Omitted until a candidate has been selected.
+        baseline_score:
+          type: number
+          format: double
+          description: Score of the baseline candidate. Omitted until baseline evaluation completes.
+        best_score:
+          type: number
+          format: double
+          description: Best score observed across completed candidates. Omitted until a candidate completes evaluation.
+      description: Summary of the candidates evaluated by an agent optimization job.
     AgentOptimizationConfiguration:
       type: object
       required:
@@ -45929,36 +45953,15 @@ components:
           format: int64
           description: Total number of calls contributing to this entry.
       description: Average latency for one optimization stage and model.
-    AgentOptimizationJobOutcome:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - improved
-            - no_improvement
-      description: Outcome of an optimization job that evaluated candidates against a baseline.
     AgentOptimizationJobResult:
       type: object
       required:
         - token_usage
         - latency_usage
       properties:
-        baseline_candidate_id:
-          type: string
-          description: Candidate ID of the original baseline. Omitted until the baseline candidate is available.
-        candidate_ids:
-          type: array
-          items:
-            type: string
-          description: Stable candidate resource IDs, populated progressively in candidate-slot order. The baseline candidate is always first. Use candidate GET or LIST for lifecycle and full candidate details.
-        baseline_score:
-          type: number
-          format: double
-          description: Score of the baseline candidate. Omitted until baseline evaluation completes.
-        best_score:
-          type: number
-          format: double
-          description: Best score observed across completed candidates. Omitted until a candidate completes evaluation.
+        candidate_summary:
+          $ref: '#/components/schemas/AgentOptimizationCandidateSummary'
+          description: Summary of evaluated candidates. Omitted for jobs that do not comparatively evaluate candidates and until candidate processing begins.
         token_usage:
           type: array
           items:
@@ -45969,12 +45972,6 @@ components:
           items:
             $ref: '#/components/schemas/AgentOptimizationJobLatency'
           description: Aggregate latency per stage and model. Always present; empty when no server-measured latency is available.
-        best_candidate_id:
-          type: string
-          description: Candidate ID of the highest-scoring candidate. Omitted for jobs that do not comparatively evaluate candidates and until a candidate has been selected.
-        outcome:
-          $ref: '#/components/schemas/AgentOptimizationJobOutcome'
-          description: Outcome of comparative evaluation. Omitted for jobs that do not comparatively evaluate candidates and until the job reaches a terminal state.
         termination_reason:
           $ref: '#/components/schemas/AgentOptimizationTerminationReason'
           description: Reason the candidate search terminated. Omitted for jobs that do not comparatively evaluate candidates and until the job reaches a terminal state.

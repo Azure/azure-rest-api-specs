@@ -14,17 +14,6 @@ namespace Azure.AI.Projects;
 // Job and result enums / unions
 // ---------------------------------------------------------------------------
 
-/** Outcome of an optimization job that evaluated candidates against a baseline. */
-union AgentOptimizationJobOutcome {
-  string,
-
-  @doc("Best candidate exceeded the baseline score.")
-  improved: "improved",
-
-  @doc("Optimization completed but no candidate outperformed the baseline.")
-  no_improvement: "no_improvement",
-}
-
 /** Reason the optimization process ended. Early termination reasons still indicate a successful job; completed candidates remain available. */
 union AgentOptimizationTerminationReason {
   string,
@@ -96,31 +85,34 @@ model AgentOptimizationJobLatency {
   call_count: int64;
 }
 
-@doc("Partial or terminal result produced by an agent optimization job.")
-model AgentOptimizationJobResult {
+@doc("Summary of the candidates evaluated by an agent optimization job.")
+model AgentOptimizationCandidateSummary {
+  @doc("Number of candidates whose evaluation completed, including the baseline once completed.")
+  completed_candidate_count: int32;
+
   @doc("Candidate ID of the original baseline. Omitted until the baseline candidate is available.")
   baseline_candidate_id?: string;
 
-  @doc("Stable candidate resource IDs, populated progressively in candidate-slot order. The baseline candidate is always first. Use candidate GET or LIST for lifecycle and full candidate details.")
-  candidate_ids?: string[];
+  @doc("Candidate ID of the highest-scoring completed candidate. Omitted until a candidate has been selected.")
+  best_candidate_id?: string;
 
   @doc("Score of the baseline candidate. Omitted until baseline evaluation completes.")
   baseline_score?: float64;
 
   @doc("Best score observed across completed candidates. Omitted until a candidate completes evaluation.")
   best_score?: float64;
+}
+
+@doc("Partial or terminal result produced by an agent optimization job.")
+model AgentOptimizationJobResult {
+  @doc("Summary of evaluated candidates. Omitted for jobs that do not comparatively evaluate candidates and until candidate processing begins.")
+  candidate_summary?: AgentOptimizationCandidateSummary;
 
   @doc("Aggregate token usage per stage and model. Always present; empty array when no calls were measured.")
   token_usage: AgentOptimizationJobTokenUsage[];
 
   @doc("Aggregate latency per stage and model. Always present; empty when no server-measured latency is available.")
   latency_usage: AgentOptimizationJobLatency[];
-
-  @doc("Candidate ID of the highest-scoring candidate. Omitted for jobs that do not comparatively evaluate candidates and until a candidate has been selected.")
-  best_candidate_id?: string;
-
-  @doc("Outcome of comparative evaluation. Omitted for jobs that do not comparatively evaluate candidates and until the job reaches a terminal state.")
-  outcome?: AgentOptimizationJobOutcome;
 
   @doc("Reason the candidate search terminated. Omitted for jobs that do not comparatively evaluate candidates and until the job reaches a terminal state.")
   termination_reason?: AgentOptimizationTerminationReason;
