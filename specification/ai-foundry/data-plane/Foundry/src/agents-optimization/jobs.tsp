@@ -25,17 +25,17 @@ union AgentOptimizationJobOutcome {
   no_improvement: "no_improvement",
 }
 
-/** Reason an evaluated candidate search terminated. */
-union AgentOptimizationJobTerminationReason {
+/** Reason the optimization process ended. Early termination reasons still indicate a successful job; completed candidates remain available. */
+union AgentOptimizationTerminationReason {
   string,
 
-  @doc("The candidate search completed normally.")
+  @doc("The optimization process completed normally.")
   completed: "completed",
 
-  @doc("The candidate search exhausted its evaluation budget.")
+  @doc("The job succeeded with its completed candidates, but stopped before producing more candidates because its bounded evaluation-call budget was consumed.")
   budget_exhausted: "budget_exhausted",
 
-  @doc("The candidate search stopped after the configured number of consecutive failed candidate screens.")
+  @doc("The job succeeded with its completed candidates, but stopped after the configured number of consecutive proposed candidates failed screening.")
   candidate_screening_stalled: "candidate_screening_stalled",
 }
 
@@ -123,7 +123,7 @@ model AgentOptimizationJobResult {
   outcome?: AgentOptimizationJobOutcome;
 
   @doc("Reason the candidate search terminated. Omitted for jobs that do not comparatively evaluate candidates and until the job reaches a terminal state.")
-  termination_reason?: AgentOptimizationJobTerminationReason;
+  termination_reason?: AgentOptimizationTerminationReason;
 
   @doc("Candidate ID produced by a transformation job that does not comparatively evaluate candidates. Omitted for evaluated jobs and until the output candidate is available.")
   output_candidate_id?: string;
@@ -138,7 +138,18 @@ model AgentOptimizationJob is JobLike<
   AgentOptimizationJobResult,
   never
 > {
-  ...AgentOptimizationJobInputs;
+  @doc("Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics.")
+  @maxLength(256)
+  display_name?: string;
+
+  @doc("Foundry agent whose configuration is optimized. Omitted when the workflow does not target a registered Foundry agent.")
+  target_configuration?: AgentOptimizationTargetConfiguration;
+
+  @doc("Model used to generate candidate changes. An existing deployment name is also accepted.")
+  optimization_model_configuration: AgentOptimizationModelConfiguration;
+
+  @doc("Type-specific optimization configuration.")
+  optimization_configuration: AgentOptimizationConfigurationBase;
 
   @doc("The timestamp when the job was created, represented in Unix time.")
   @visibility(Lifecycle.Read)
@@ -152,3 +163,12 @@ model AgentOptimizationJob is JobLike<
   @visibility(Lifecycle.Read)
   warnings?: string[];
 }
+
+@doc("Configuration used to create an agent optimization job.")
+model AgentOptimizationJobCreate is PickProperties<
+  AgentOptimizationJob,
+  "display_name"
+    | "target_configuration"
+    | "optimization_model_configuration"
+    | "optimization_configuration"
+>;

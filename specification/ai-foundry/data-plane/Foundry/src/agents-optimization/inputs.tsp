@@ -18,21 +18,23 @@ namespace Azure.AI.Projects;
 union TargetAttribute {
   string,
 
-  @doc("Instruction-tuning — rewrites agent system prompts.")
-  instruction: "instruction",
+  @doc("Rewrites agent instructions.")
+  instructions: "instructions",
 
   @doc("Model selection from optimization_configuration.agent_optimization_space.model_search_space.")
   `model`: "model",
 
-  @doc("Skill-tuning — generates or modifies agent skill descriptions.")
-  skill: "skill",
+  @doc("Generates or modifies agent skill descriptions and bodies.")
+  skills: "skills",
 
-  @doc("Tool-tuning — optimizes function tool descriptions and parameter descriptions.")
-  tool: "tool",
+  @doc("Optimizes function tool descriptions and parameter descriptions.")
+  tools: "tools",
 }
 
 /** Goal for an agent-optimization job. */
 union AgentOptimizationGoal {
+  string,
+
   @doc("Search for agent configurations that improve measured evaluation quality.")
   improve_quality: "improve_quality",
 }
@@ -43,11 +45,13 @@ union AgentOptimizationGoal {
 
 /** Logical row formats supported by optimization datasets. */
 union AgentOptimizationDatasetInputType {
+  string,
+
   @doc("Independent single-turn queries evaluated against each candidate.")
-  targetCompletion: "target_completion",
+  target_completion: "target_completion",
 
   @doc("Scenarios used to simulate conversations against each candidate.")
-  userConversationSimulation: "user_conversation_simulation",
+  user_conversation_simulation: "user_conversation_simulation",
 }
 
 /** Base discriminated model for an optimization dataset. */
@@ -61,26 +65,20 @@ model AgentOptimizationDatasetInput {
 model AgentOptimizationTargetCompletionDatasetInput
   extends AgentOptimizationDatasetInput {
   @doc("Target-completion dataset discriminator.")
-  type: AgentOptimizationDatasetInputType.targetCompletion;
+  type: AgentOptimizationDatasetInputType.target_completion;
 
-  @doc("Registered Foundry dataset containing target-completion test cases. Exactly one of reference_dataset and inline_data must be provided.")
-  reference_dataset?: AgentOptimizationReferenceDatasetSource;
-
-  @doc("Target-completion test cases supplied directly in the request. Exactly one of reference_dataset and inline_data must be provided.")
-  inline_data?: AgentOptimizationTargetCompletionInlineDatasetSource;
+  @doc("Inline test cases or an explicitly versioned registered Foundry dataset.")
+  source: AgentOptimizationTargetCompletionDatasetSource;
 }
 
 /** Dataset containing scenarios for simulated conversations. */
 model AgentOptimizationUserConversationSimulationDatasetInput
   extends AgentOptimizationDatasetInput {
   @doc("User-conversation-simulation dataset discriminator.")
-  type: AgentOptimizationDatasetInputType.userConversationSimulation;
+  type: AgentOptimizationDatasetInputType.user_conversation_simulation;
 
-  @doc("Registered Foundry dataset containing user-conversation simulation test cases. Exactly one of reference_dataset and inline_data must be provided.")
-  reference_dataset?: AgentOptimizationReferenceDatasetSource;
-
-  @doc("User-conversation simulation test cases supplied directly in the request. Exactly one of reference_dataset and inline_data must be provided.")
-  inline_data?: AgentOptimizationUserConversationSimulationInlineDatasetSource;
+  @doc("Inline test cases or an explicitly versioned registered Foundry dataset.")
+  source: AgentOptimizationUserConversationSimulationDatasetSource;
 
   @doc("Defaults applied to every scenario. A test case's simulation_configuration overrides corresponding properties.")
   default_simulation_configuration?: UserConversationSimulationConfiguration;
@@ -88,20 +86,31 @@ model AgentOptimizationUserConversationSimulationDatasetInput
 
 /** Supplies single-turn rows directly in the optimization request. */
 model AgentOptimizationTargetCompletionInlineDatasetSource {
+  @doc("Inline source discriminator.")
+  type: "inline";
+
   @doc("Target-completion test cases.")
   @minItems(1)
+  @maxItems(2000)
   test_cases: AgentOptimizationTargetCompletionTestCase[];
 }
 
 /** Supplies Evals user-conversation simulation test cases directly in the optimization request. */
 model AgentOptimizationUserConversationSimulationInlineDatasetSource {
+  @doc("Inline source discriminator.")
+  type: "inline";
+
   @doc("Conversation test scenarios.")
   @minItems(1)
+  @maxItems(2000)
   test_cases: UserConversationSimulationTestCase[];
 }
 
 /** References an explicitly versioned registered Foundry dataset. */
 model AgentOptimizationReferenceDatasetSource {
+  @doc("Registered dataset source discriminator.")
+  type: "reference";
+
   @doc("Registered dataset name.")
   @minLength(1)
   name: string;
@@ -109,6 +118,18 @@ model AgentOptimizationReferenceDatasetSource {
   @doc("Registered dataset version.")
   @minLength(1)
   version: string;
+}
+
+/** Source for a target-completion optimization dataset. */
+union AgentOptimizationTargetCompletionDatasetSource {
+  inline: AgentOptimizationTargetCompletionInlineDatasetSource,
+  reference: AgentOptimizationReferenceDatasetSource,
+}
+
+/** Source for a user-conversation-simulation optimization dataset. */
+union AgentOptimizationUserConversationSimulationDatasetSource {
+  inline: AgentOptimizationUserConversationSimulationInlineDatasetSource,
+  reference: AgentOptimizationReferenceDatasetSource,
 }
 
 /** A single item in an inline dataset. */
@@ -145,7 +166,7 @@ model AgentOptimizationEvaluator {
 
 @doc("A non-empty Foundry model name or existing deployment name.")
 @minLength(1)
-scalar AgentOptimizationDeploymentName extends string;
+scalar AgentOptimizationModelName extends string;
 
 @doc("Identifies the Foundry agent that owns the configuration being optimized.")
 model AgentOptimizationTargetConfiguration {
@@ -165,7 +186,7 @@ model AgentOptimizationTargetConfiguration {
 @doc("Identifies a model used by an optimization or evaluation step.")
 model AgentOptimizationModelConfiguration {
   @doc("Model name or existing deployment name in the Foundry project.")
-  `model`: AgentOptimizationDeploymentName;
+  `model`: AgentOptimizationModelName;
 }
 
 @doc("A skill in the manually supplied agent optimization surface.")
@@ -188,7 +209,7 @@ model AgentOptimizationBaselineAgentConfiguration {
   system_prompt?: string;
 
   @doc("Current model name. An existing deployment name is also accepted. Omitted to resolve the model from the target.")
-  current_model?: AgentOptimizationDeploymentName;
+  current_model?: AgentOptimizationModelName;
 
   @doc("Skills available for optimization. Omitted when no manual skill surface is supplied.")
   skills?: AgentOptimizationSkill[];
@@ -199,13 +220,13 @@ model AgentOptimizationBaselineAgentConfiguration {
 
 @doc("The agent attributes and alternative values available to an agent-optimization search.")
 model AgentOptimizationSpace {
-  @doc("Agent attributes the optimizer may change. Defaults to instruction when omitted.")
+  @doc("Agent attributes the optimizer may change. Defaults to instructions when omitted.")
   @minItems(1)
-  target_attributes?: TargetAttribute[] = #[TargetAttribute.instruction];
+  target_attributes?: TargetAttribute[] = #[TargetAttribute.instructions];
 
   @doc("Alternative model names or existing deployment names available when model is an optimization target.")
   @minItems(1)
-  model_search_space?: AgentOptimizationDeploymentName[];
+  model_search_space?: AgentOptimizationModelName[];
 }
 
 /** Candidate search settings. */
@@ -218,7 +239,7 @@ model AgentOptimizationCandidateSearchConfiguration {
   @doc("Number of training-dataset rows sampled to screen each proposed candidate before full validation. Defaults to 3 when omitted.")
   @minValue(1)
   @maxValue(100)
-  candidate_screening_sample_size?: int32 = 3;
+  candidate_screening_dataset_batch_size?: int32 = 3;
 
   @doc("Maximum number of consecutive proposed candidates that may fail screening before the search stops early. Defaults to 5 when omitted.")
   @minValue(1)
@@ -228,10 +249,10 @@ model AgentOptimizationCandidateSearchConfiguration {
 
 /** Reusable quality-measurement configuration. */
 model AgentOptimizationEvaluationConfiguration {
-  @doc("Dataset used to guide the optimization search.")
+  @doc("Dataset used to guide the optimization search. Inline data supports up to 2,000 test cases when a separate validation dataset is supplied; otherwise it is also used for validation and is limited to 500.")
   training_dataset: AgentOptimizationDatasetInput;
 
-  @doc("Held-out dataset used for full candidate evaluation. The training dataset is reused when omitted.")
+  @doc("Held-out dataset used for full candidate evaluation, limited to 500 inline test cases. The training dataset is reused and subject to the same 500-test-case validation limit when omitted.")
   validation_dataset?: AgentOptimizationDatasetInput;
 
   @doc("Evaluator references used to score candidate quality.")
@@ -311,21 +332,6 @@ model PromptOptimizationConfiguration
   @doc("Context used to steer prompt optimization. Omitted when no context is supplied.")
   @minItems(1)
   context?: OptimizationContext[];
-}
-
-@doc("Caller-supplied inputs for an optimization job.")
-model AgentOptimizationJobInputs {
-  @doc("Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics.")
-  display_name?: string;
-
-  @doc("Foundry agent whose configuration is optimized. Omitted when the workflow does not target a registered Foundry agent.")
-  target_configuration?: AgentOptimizationTargetConfiguration;
-
-  @doc("Model used to generate candidate changes. An existing deployment name is also accepted.")
-  optimization_model_configuration: AgentOptimizationModelConfiguration;
-
-  @doc("Type-specific optimization configuration.")
-  optimization_configuration: AgentOptimizationConfigurationBase;
 }
 
 @doc("Inputs for estimating an agent-optimization job.")

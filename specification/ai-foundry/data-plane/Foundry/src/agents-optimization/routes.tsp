@@ -22,7 +22,7 @@ interface AgentOptimizationJobs {
       ...WithOperationId;
 
       /** The optimization job inputs. */
-      @body body: AgentOptimizationJobInputs;
+      @body body: AgentOptimizationJobCreate;
     },
     JobCreatedResponse<AgentOptimizationJob>
   >;
@@ -107,7 +107,7 @@ interface AgentOptimizationJobCandidates {
   >;
 
   /**
-   * Retrieves a single candidate. Mutation values are always included when a client hits the GET endpoint directly; the `expand` parameter exists for consistency with LIST but is optional here.
+   * Retrieves a single candidate. Mutation values are always included.
    */
   @summary("Get a candidate for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}")
@@ -119,8 +119,6 @@ interface AgentOptimizationJobCandidates {
       /** The candidate identifier. */
       @path candidateId: string;
 
-      /** Comma-separated list of expand keys. Provided for consistency with LIST; mutations values are populated on this endpoint regardless of the parameter. */
-      @query expand?: string;
     },
     AgentOptimizationCandidate
   >;

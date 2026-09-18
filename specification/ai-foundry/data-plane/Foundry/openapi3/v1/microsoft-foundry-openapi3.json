@@ -1707,7 +1707,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AgentOptimizationJobInputs"
+                "$ref": "#/components/schemas/AgentOptimizationJobCreate"
               }
             }
           },
@@ -2127,7 +2127,7 @@
       "get": {
         "operationId": "AgentOptimizationJobCandidates_getCandidate",
         "summary": "Get a candidate for an agent optimization job",
-        "description": "Retrieves a single candidate. Mutation values are always included when a client hits the GET endpoint directly; the `expand` parameter exists for consistency with LIST but is optional here.",
+        "description": "Retrieves a single candidate. Mutation values are always included.",
         "parameters": [
           {
             "name": "jobId",
@@ -2146,16 +2146,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "expand",
-            "in": "query",
-            "required": false,
-            "description": "Comma-separated list of expand keys. Provided for consistency with LIST; mutations values are populated on this endpoint regardless of the parameter.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
           },
           {
             "name": "api-version",
@@ -34468,7 +34458,7 @@
             "description": "Caller-supplied baseline system prompt. Omitted to resolve the baseline from the target; a prompt agent's stored definition is authoritative."
           },
           "current_model": {
-            "$ref": "#/components/schemas/AgentOptimizationDeploymentName",
+            "$ref": "#/components/schemas/AgentOptimizationModelName",
             "description": "Current model name. An existing deployment name is also accepted. Omitted to resolve the model from the target."
           },
           "skills": {
@@ -34494,7 +34484,6 @@
           "candidate_id",
           "job_id",
           "name",
-          "role",
           "status",
           "started_at"
         ],
@@ -34510,10 +34499,6 @@
           "name": {
             "type": "string",
             "description": "Display name of the candidate (e.g., 'baseline', 'instruction-v2')."
-          },
-          "role": {
-            "$ref": "#/components/schemas/AgentOptimizationCandidateRole",
-            "description": "The candidate's immutable role in the optimization job."
           },
           "status": {
             "$ref": "#/components/schemas/AgentOptimizationCandidateStatus",
@@ -34602,21 +34587,6 @@
         },
         "description": "Agent configuration changes generated for a candidate."
       },
-      "AgentOptimizationCandidateRole": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "baseline",
-              "generated"
-            ]
-          }
-        ],
-        "description": "The candidate's immutable role in its optimization job."
-      },
       "AgentOptimizationCandidateSearchConfiguration": {
         "type": "object",
         "properties": {
@@ -34628,7 +34598,7 @@
             "description": "Maximum number of non-baseline candidates to fully evaluate. Defaults to 2 when omitted.",
             "default": 2
           },
-          "candidate_screening_sample_size": {
+          "candidate_screening_dataset_batch_size": {
             "type": "integer",
             "format": "int32",
             "minimum": 1,
@@ -34779,17 +34749,19 @@
         "description": "Base discriminated model for an optimization dataset."
       },
       "AgentOptimizationDatasetInputType": {
-        "type": "string",
-        "enum": [
-          "target_completion",
-          "user_conversation_simulation"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "target_completion",
+              "user_conversation_simulation"
+            ]
+          }
         ],
         "description": "Logical row formats supported by optimization datasets."
-      },
-      "AgentOptimizationDeploymentName": {
-        "type": "string",
-        "minLength": 1,
-        "description": "A non-empty Foundry model name or existing deployment name."
       },
       "AgentOptimizationEstimateBand": {
         "type": "object",
@@ -34875,11 +34847,11 @@
         "properties": {
           "training_dataset": {
             "$ref": "#/components/schemas/AgentOptimizationDatasetInput",
-            "description": "Dataset used to guide the optimization search."
+            "description": "Dataset used to guide the optimization search. Inline data supports up to 2,000 test cases when a separate validation dataset is supplied; otherwise it is also used for validation and is limited to 500."
           },
           "validation_dataset": {
             "$ref": "#/components/schemas/AgentOptimizationDatasetInput",
-            "description": "Held-out dataset used for full candidate evaluation. The training dataset is reused when omitted."
+            "description": "Held-out dataset used for full candidate evaluation, limited to 500 inline test cases. The training dataset is reused and subject to the same 500-test-case validation limit when omitted."
           },
           "evaluators": {
             "type": "array",
@@ -34929,13 +34901,20 @@
         "description": "Reference to a named evaluator, optionally pinned to a version."
       },
       "AgentOptimizationGoal": {
-        "type": "string",
-        "enum": [
-          "improve_quality"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "improve_quality"
+            ]
+          }
         ],
         "description": "Goal for an agent-optimization job."
       },
-      "AgentOptimizationInstructionMutation": {
+      "AgentOptimizationInstructionsMutation": {
         "type": "object",
         "required": [
           "type"
@@ -34944,7 +34923,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "instruction"
+              "instructions"
             ]
           },
           "value": {
@@ -34957,7 +34936,7 @@
             "$ref": "#/components/schemas/AgentOptimizationMutation"
           }
         ],
-        "description": "Instruction mutation."
+        "description": "Instructions mutation."
       },
       "AgentOptimizationJob": {
         "type": "object",
@@ -34992,6 +34971,7 @@
           },
           "display_name": {
             "type": "string",
+            "maxLength": 256,
             "description": "Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics."
           },
           "target_configuration": {
@@ -35027,7 +35007,7 @@
         },
         "description": "Agent optimization job resource — a long-running job that produces candidate changes to a Foundry agent configuration."
       },
-      "AgentOptimizationJobInputs": {
+      "AgentOptimizationJobCreate": {
         "type": "object",
         "required": [
           "optimization_model_configuration",
@@ -35036,6 +35016,7 @@
         "properties": {
           "display_name": {
             "type": "string",
+            "maxLength": 256,
             "description": "Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics."
           },
           "target_configuration": {
@@ -35051,7 +35032,7 @@
             "description": "Type-specific optimization configuration."
           }
         },
-        "description": "Caller-supplied inputs for an optimization job."
+        "description": "Configuration used to create an agent optimization job."
       },
       "AgentOptimizationJobLatency": {
         "type": "object",
@@ -35148,7 +35129,7 @@
             "description": "Outcome of comparative evaluation. Omitted for jobs that do not comparatively evaluate candidates and until the job reaches a terminal state."
           },
           "termination_reason": {
-            "$ref": "#/components/schemas/AgentOptimizationJobTerminationReason",
+            "$ref": "#/components/schemas/AgentOptimizationTerminationReason",
             "description": "Reason the candidate search terminated. Omitted for jobs that do not comparatively evaluate candidates and until the job reaches a terminal state."
           },
           "output_candidate_id": {
@@ -35157,22 +35138,6 @@
           }
         },
         "description": "Partial or terminal result produced by an agent optimization job."
-      },
-      "AgentOptimizationJobTerminationReason": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "completed",
-              "budget_exhausted",
-              "candidate_screening_stalled"
-            ]
-          }
-        ],
-        "description": "Reason an evaluated candidate search terminated."
       },
       "AgentOptimizationJobTokenUsage": {
         "type": "object",
@@ -35225,7 +35190,7 @@
         ],
         "properties": {
           "model": {
-            "$ref": "#/components/schemas/AgentOptimizationDeploymentName",
+            "$ref": "#/components/schemas/AgentOptimizationModelName",
             "description": "Model name or existing deployment name in the Foundry project."
           }
         },
@@ -35244,7 +35209,7 @@
             ]
           },
           "value": {
-            "$ref": "#/components/schemas/AgentOptimizationDeploymentName",
+            "$ref": "#/components/schemas/AgentOptimizationModelName",
             "description": "Selected model name or deployment name. Omitted on LIST unless `expand=mutations` is specified."
           }
         },
@@ -35255,6 +35220,11 @@
         ],
         "description": "Model mutation."
       },
+      "AgentOptimizationModelName": {
+        "type": "string",
+        "minLength": 1,
+        "description": "A non-empty Foundry model name or existing deployment name."
+      },
       "AgentOptimizationMutation": {
         "type": "object",
         "required": [
@@ -35262,14 +35232,14 @@
         ],
         "properties": {
           "type": {
-            "$ref": "#/components/schemas/AgentOptimizationMutationType",
+            "$ref": "#/components/schemas/TargetAttribute",
             "description": "Attribute changed by this mutation."
           }
         },
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "instruction": "#/components/schemas/AgentOptimizationInstructionMutation",
+            "instructions": "#/components/schemas/AgentOptimizationInstructionsMutation",
             "model": "#/components/schemas/AgentOptimizationModelMutation",
             "skills": "#/components/schemas/AgentOptimizationSkillsMutation",
             "tools": "#/components/schemas/AgentOptimizationToolsMutation"
@@ -35277,30 +35247,21 @@
         },
         "description": "Base candidate mutation."
       },
-      "AgentOptimizationMutationType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "instruction",
-              "model",
-              "skills",
-              "tools"
-            ]
-          }
-        ],
-        "description": "Candidate mutation type. Additional mutation types may be added in future API versions."
-      },
       "AgentOptimizationReferenceDatasetSource": {
         "type": "object",
         "required": [
+          "type",
           "name",
           "version"
         ],
         "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "reference"
+            ],
+            "description": "Registered dataset source discriminator."
+          },
           "name": {
             "type": "string",
             "minLength": 1,
@@ -35374,15 +35335,15 @@
               "$ref": "#/components/schemas/TargetAttribute"
             },
             "minItems": 1,
-            "description": "Agent attributes the optimizer may change. Defaults to instruction when omitted.",
+            "description": "Agent attributes the optimizer may change. Defaults to instructions when omitted.",
             "default": [
-              "instruction"
+              "instructions"
             ]
           },
           "model_search_space": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/AgentOptimizationDeploymentName"
+              "$ref": "#/components/schemas/AgentOptimizationModelName"
             },
             "minItems": 1,
             "description": "Alternative model names or existing deployment names available when model is an optimization target."
@@ -35427,7 +35388,8 @@
       "AgentOptimizationTargetCompletionDatasetInput": {
         "type": "object",
         "required": [
-          "type"
+          "type",
+          "source"
         ],
         "properties": {
           "type": {
@@ -35437,13 +35399,9 @@
             ],
             "description": "Target-completion dataset discriminator."
           },
-          "reference_dataset": {
-            "$ref": "#/components/schemas/AgentOptimizationReferenceDatasetSource",
-            "description": "Registered Foundry dataset containing target-completion test cases. Exactly one of reference_dataset and inline_data must be provided."
-          },
-          "inline_data": {
-            "$ref": "#/components/schemas/AgentOptimizationTargetCompletionInlineDatasetSource",
-            "description": "Target-completion test cases supplied directly in the request. Exactly one of reference_dataset and inline_data must be provided."
+          "source": {
+            "$ref": "#/components/schemas/AgentOptimizationTargetCompletionDatasetSource",
+            "description": "Inline test cases or an explicitly versioned registered Foundry dataset."
           }
         },
         "allOf": [
@@ -35453,18 +35411,38 @@
         ],
         "description": "Dataset containing independent single-turn evaluation inputs."
       },
+      "AgentOptimizationTargetCompletionDatasetSource": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationTargetCompletionInlineDatasetSource"
+          },
+          {
+            "$ref": "#/components/schemas/AgentOptimizationReferenceDatasetSource"
+          }
+        ],
+        "description": "Source for a target-completion optimization dataset."
+      },
       "AgentOptimizationTargetCompletionInlineDatasetSource": {
         "type": "object",
         "required": [
+          "type",
           "test_cases"
         ],
         "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "inline"
+            ],
+            "description": "Inline source discriminator."
+          },
           "test_cases": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AgentOptimizationTargetCompletionTestCase"
             },
             "minItems": 1,
+            "maxItems": 2000,
             "description": "Target-completion test cases."
           }
         },
@@ -35516,6 +35494,22 @@
         },
         "description": "Identifies the Foundry agent that owns the configuration being optimized."
       },
+      "AgentOptimizationTerminationReason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "completed",
+              "budget_exhausted",
+              "candidate_screening_stalled"
+            ]
+          }
+        ],
+        "description": "Reason the optimization process ended. Early termination reasons still indicate a successful job; completed candidates remain available."
+      },
       "AgentOptimizationToolsMutation": {
         "type": "object",
         "required": [
@@ -35546,7 +35540,8 @@
       "AgentOptimizationUserConversationSimulationDatasetInput": {
         "type": "object",
         "required": [
-          "type"
+          "type",
+          "source"
         ],
         "properties": {
           "type": {
@@ -35556,13 +35551,9 @@
             ],
             "description": "User-conversation-simulation dataset discriminator."
           },
-          "reference_dataset": {
-            "$ref": "#/components/schemas/AgentOptimizationReferenceDatasetSource",
-            "description": "Registered Foundry dataset containing user-conversation simulation test cases. Exactly one of reference_dataset and inline_data must be provided."
-          },
-          "inline_data": {
-            "$ref": "#/components/schemas/AgentOptimizationUserConversationSimulationInlineDatasetSource",
-            "description": "User-conversation simulation test cases supplied directly in the request. Exactly one of reference_dataset and inline_data must be provided."
+          "source": {
+            "$ref": "#/components/schemas/AgentOptimizationUserConversationSimulationDatasetSource",
+            "description": "Inline test cases or an explicitly versioned registered Foundry dataset."
           },
           "default_simulation_configuration": {
             "$ref": "#/components/schemas/UserConversationSimulationConfiguration",
@@ -35576,18 +35567,38 @@
         ],
         "description": "Dataset containing scenarios for simulated conversations."
       },
+      "AgentOptimizationUserConversationSimulationDatasetSource": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationUserConversationSimulationInlineDatasetSource"
+          },
+          {
+            "$ref": "#/components/schemas/AgentOptimizationReferenceDatasetSource"
+          }
+        ],
+        "description": "Source for a user-conversation-simulation optimization dataset."
+      },
       "AgentOptimizationUserConversationSimulationInlineDatasetSource": {
         "type": "object",
         "required": [
+          "type",
           "test_cases"
         ],
         "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "inline"
+            ],
+            "description": "Inline source discriminator."
+          },
           "test_cases": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UserConversationSimulationTestCase"
             },
             "minItems": 1,
+            "maxItems": 2000,
             "description": "Conversation test scenarios."
           }
         },
@@ -85176,16 +85187,12 @@
             "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "Timestamp when promotion occurred, represented in Unix time."
           },
-          "baseline_agent": {
-            "$ref": "#/components/schemas/AgentReference",
-            "description": "Resolved agent reference used as the optimization baseline. Omitted when unavailable for a legacy candidate."
-          },
           "promoted_agent": {
             "$ref": "#/components/schemas/AgentReference",
             "description": "Agent reference associated with the completed promotion."
           }
         },
-        "description": "Promotion metadata recorded for a candidate. Prompt-agent promotion creates a new version; hosted-agent promotion currently records metadata without deploying a new version."
+        "description": "Promotion metadata recorded for a candidate."
       },
       "PromptAgentDefinition": {
         "type": "object",
@@ -87956,10 +87963,10 @@
           {
             "type": "string",
             "enum": [
-              "instruction",
+              "instructions",
               "model",
-              "skill",
-              "tool"
+              "skills",
+              "tools"
             ]
           }
         ],
