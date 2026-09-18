@@ -27,7 +27,6 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`Swagger LintDiff` and `Swagger Lint(RPaaS)`](#swagger-lintdiff-and-swagger-lintrpaas)
   - [`Swagger LintDiff` for TypeSpec: troubleshooting guides](#swagger-lintdiff-for-typespec-troubleshooting-guides)
   - [`Swagger ModelValidation`](#swagger-modelvalidation)
-  - [`Swagger PrettierCheck`](#swagger-prettiercheck)
   - [`Swagger SemanticValidation`](#swagger-semanticvalidation)
   - [Spell Check](#spell-check)
   - [`TypeSpec Validation`](#typespec-validation)
@@ -175,18 +174,6 @@ oav validate-example <openapi-spec-path>
 Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e561dec5212e77253/README.md) for how to install or run tool in details.
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 Refer to [Swagger-Example-Generation](https://github.com/Azure/oav/blob/develop/documentation/example-generation.md) for example automatic generation.
-
-## `Swagger PrettierCheck`
-
-This check has been retired. Formatting is no longer enforced by this CI check
-for Swagger/OpenAPI definitions or examples under `specification/**/*.json`.
-Local formatting remains available through Prettier and the repository's custom
-JSON plugin, which preserves numeric literals such as `100.00`.
-
-During rollout, maintainers must disable the
-[Swagger PrettierCheck Azure DevOps pipeline](https://dev.azure.com/azure-sdk/public/_build?definitionId=6405)
-and remove its triggers and required-status references. Deleting the pipeline YAML
-does not disable the externally configured pipeline.
 
 ## `Swagger SemanticValidation`
 

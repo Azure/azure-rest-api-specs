@@ -129,33 +129,6 @@ describe("Summarize Checks Integration Tests", () => {
 });
 
 describe("Summarize Checks Unit Tests", () => {
-  it("does not surface the retired Swagger PrettierCheck as an FYI check", async () => {
-    const github = createMockGithub();
-    github.rest.checks.listForRef.mockResolvedValue({
-      data: {
-        check_runs: [
-          { name: "Swagger PrettierCheck", status: "completed", conclusion: "failure" },
-          { name: "Swagger LintDiff", status: "completed", conclusion: "success" },
-        ],
-      },
-    });
-    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({ data: [] });
-
-    const [required, fyi] = await getCheckRunTuple(
-      github,
-      createMockCore(),
-      "Azure",
-      "azure-rest-api-specs",
-      "head-sha",
-      1,
-      [],
-    );
-
-    expect(required).toEqual([]);
-    expect(fyi.map((check) => check.name)).toEqual(["Swagger LintDiff"]);
-    expect(getCheckInfo("Swagger PrettierCheck").precedence).toBe(1000);
-  });
-
   describe("check result processing", () => {
     it("should generate success summary for no matched check suites (completed impactAssessment)", () => {
       const repo = "azure-rest-api-specs";
