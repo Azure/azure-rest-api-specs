@@ -7,7 +7,7 @@ import "./routes.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-@service(#{ title: "Azure App Configuration" })
+@service(#{ title: "Azure App Configuration Feature Flag" })
 @versioned(Versions)
 @useAuth(
 
@@ -27,20 +27,12 @@ using TypeSpec.Versioning;
     endpoint: url,
   }
 )
-@doc("Azure App Configuration REST API")
-namespace AzureAppConfiguration;
+@doc("Azure App Configuration Feature Flag REST API")
+namespace AppConfigurationFeatureFlag;
 
 @doc("Service API versions")
 enum Versions {
-  @doc("The 2023-11-01 API version")
-  v2023_11_01: "2023-11-01",
-
-  @doc("The 2024-09-01 API version")
-  v2024_09_01: "2024-09-01",
-
-  @doc("The 2026-04-01 API version")
-  v2026_04_01: "2026-04-01",
-
+  @Azure.Core.previewVersion
   @doc("The 2026-05-01-preview API version")
   v2026_05_01_preview: "2026-05-01-preview",
 }

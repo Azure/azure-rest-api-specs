@@ -1,0 +1,48 @@
+# cspell:ignore azappconfigfeaturemanagement
+
+parameters:
+  "service-dir":
+    default: "sdk/appconfiguration"
+  "dependencies":
+    default: ""
+options:
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-appconfiguration-featuremanagement"
+    generation-subdir: "_generated"
+    namespace: "azure.appconfiguration.featuremanagement"
+    package-name: "azure-appconfiguration-featuremanagement"
+    package-pprint-name: "App Configuration Feature Management"
+    package-mode: dataplane
+    flavor: azure
+    generate-test: true
+    generate-sample: false
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Data.AppConfiguration.FeatureManagement
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/app-configuration-featuremanagement"
+    generate-metadata: false
+    is-modular-library: true
+    package-details:
+      name: "@azure/app-configuration-featuremanagement"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-data-appconfiguration-featuremanagement"
+    namespace: com.azure.data.appconfiguration.featuremanagement
+    models-subpackage: "implementation.models"
+    flavor: azure
+    generate-tests: true
+    generate-samples: false
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/sdk/data/azappconfigfeaturemanagement"
+    service-dir: "sdk/data"
+    emitter-output-dir: "{output-dir}/{service-dir}/azappconfigfeaturemanagement"
+    slice-elements-byval: true
+    generate-fakes: false
+    inject-spans: false
+    file-prefix: "zz_"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

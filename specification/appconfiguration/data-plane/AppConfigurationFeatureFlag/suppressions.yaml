@@ -1,0 +1,8 @@
+- tool: TypeSpecValidation
+  rules: [EmitAutorest]
+  reason: >-
+    AppConfigurationFeatureFlag is a client-generation-only project that duplicates the Feature
+    Flag contract from the canonical AppConfiguration service specification to produce separate
+    SDK packages. The canonical project remains responsible for emitting the OpenAPI document.
+  paths:
+    - .
