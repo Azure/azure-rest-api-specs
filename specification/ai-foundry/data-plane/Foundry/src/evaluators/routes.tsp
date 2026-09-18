@@ -111,6 +111,12 @@ alias EvaluatorImprovementRequiredIfMatchHeader = {
   if_match: string;
 };
 
+alias EvaluatorImprovementRequiredOperationIdHeader = {
+  @doc("A client-generated identifier required for idempotent create, publish, and reject retries.")
+  @header("Operation-Id")
+  operationId: string;
+};
+
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling is represented by Operation-Location and @pollingOperation on create."
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Evaluator improvement lifecycle operations return job or published evaluator bodies."
 #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "The approved contract distinguishes 409 lifecycle conflicts from 412 stale baseline preconditions while retaining the standard default ApiError envelope."
@@ -413,7 +419,7 @@ interface Evaluators {
     {
       ...EvaluatorImprovementScopeParameters;
       ...EvaluatorImprovementRequiredIfMatchHeader;
-      ...WithOperationId;
+      ...EvaluatorImprovementRequiredOperationIdHeader;
 
       @doc("The bounded evaluator improvement request.")
       @body
@@ -499,7 +505,7 @@ interface Evaluators {
     {
       ...EvaluatorImprovementScopeParameters;
       ...EvaluatorImprovementJobIdentifierParameter;
-      ...WithOperationId;
+      ...EvaluatorImprovementRequiredOperationIdHeader;
 
       @doc("The exact stored candidate to publish.")
       @body
@@ -523,7 +529,7 @@ interface Evaluators {
     {
       ...EvaluatorImprovementScopeParameters;
       ...EvaluatorImprovementJobIdentifierParameter;
-      ...WithOperationId;
+      ...EvaluatorImprovementRequiredOperationIdHeader;
 
       @doc("The exact stored candidate to reject.")
       @body
