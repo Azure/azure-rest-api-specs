@@ -2,12 +2,14 @@
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
@@ -636,6 +638,13 @@ interface ReservationRecommendationDetailsOperationGroup {
      */
     @query("$filter")
     $filter?: string,
+
+    /**
+     * Specify the management group ID. Required when recommendation scope is 'ManagementGroup'.
+     */
+    @added(Versions.v2026_06_01)
+    @query("managementGroupId")
+    managementGroupId?: string,
   ):
     | ReservationRecommendationDetailsModel
     | NoContentResponse

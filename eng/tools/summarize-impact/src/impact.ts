@@ -1,13 +1,11 @@
 #!/usr/bin/env node
 
-import { existsSync, readdirSync, readFileSync, statSync } from "fs";
-import { glob } from "glob";
+import { existsSync, globSync, readdirSync, readFileSync, statSync } from "node:fs";
+import { isDeepStrictEqual } from "node:util";
 import { dirname, join, resolve } from "path";
 
 import * as commonmark from "commonmark";
 import yaml from "js-yaml";
-import pkg from "lodash";
-const { isEqual } = pkg;
 
 import {
   type ChangeHandler,
@@ -164,7 +162,9 @@ export function isDataPlanePR(filePaths: string[]): boolean {
 }
 
 export function getAllApiVersionFromRPFolder(rpFolder: string): string[] {
-  const allSwaggerFilesFromRPFolder = glob.sync(`${rpFolder}/**/*.json`);
+  const allSwaggerFilesFromRPFolder = globSync("**/*.json", { cwd: rpFolder }).map((file) =>
+    join(rpFolder, file),
+  );
   console.log(`allSwaggerFilesFromRPFolder: ${allSwaggerFilesFromRPFolder}`);
 
   const apiVersions: Set<string> = new Set();
@@ -519,7 +519,9 @@ export function diffSuppression(readmeBefore: string, readmeAfter: string) {
     const properties = ["suppress", "from", "where", "code", "reason"];
     if (
       -1 ===
-      beforeSuppressions.findIndex((s) => properties.every((p) => isEqual(s[p], suppression[p])))
+      beforeSuppressions.findIndex((s) =>
+        properties.every((p) => isDeepStrictEqual(s[p], suppression[p])),
+      )
     ) {
       newSuppressions.push(suppression);
     }

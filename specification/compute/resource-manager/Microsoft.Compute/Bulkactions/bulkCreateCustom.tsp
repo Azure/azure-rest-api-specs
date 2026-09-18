@@ -93,6 +93,7 @@ model BulkCreateCustomResource {
 @doc("Envelope properties shared by BulkCreateCustom. Used as the @listsResource target to avoid collision with the interface name.")
 model BulkCreateCustomEnvelope {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Zones is a valid envelope property for this resource."
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("Zones in which the BulkCreateCustom is available")
   zones?: Array<string>;
 
@@ -337,10 +338,11 @@ interface BulkCreateCustom {
 
   @added(Versions.`2026-08-06-preview`)
   @doc("Gets the operation status for virtual machines in a BulkCreateCustom operation.")
+  @list
   virtualMachinesGetOperationStatus is ArmResourceActionSync<
     Resource = LocationBasedBulkCreateCustom,
     Request = void,
-    Response = ArmResponse<GetOperationStatusResponse>,
+    Response = ArmResponse<BulkCreateCustomOperationStatusListResult>,
     Parameters = BulkCreateCustomId
   >;
 

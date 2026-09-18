@@ -1,16 +1,17 @@
 {
-  "title": "Occurrences_Delay_MaximumSet",
+  "title": "Delay resources in a scheduled action occurrence",
   "operationId": "Occurrences_Delay",
   "parameters": {
     "api-version": "2026-08-06-preview",
     "subscriptionId": "CB26D7CB-3E27-465F-99C8-EAF7A4118245",
     "resourceGroupName": "rgcompute",
     "scheduledActionName": "myScheduledAction",
-    "occurrenceId": "CB26D7CB-3E27-465F-99C8-EAF7A4118245",
+    "occurrenceId": "67b5bada-4772-43fc-8dbb-402476d98a45",
     "body": {
-      "delay": "2025-05-22T17:00:00.000-07:00",
+      "delay": "2026-08-05T17:00:00.000-07:00",
       "resourceIds": [
-        "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm"
+        "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm",
+        "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm2"
       ]
     }
   },
@@ -22,11 +23,15 @@
     },
     "200": {
       "body": {
-        "totalResources": 11,
+        "totalResources": 2,
         "resourcesStatuses": [
           {
-            "resourceId": "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm",
-            "status": "Succeeded",
+            "resourceId": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm",
+            "status": "Succeeded"
+          },
+          {
+            "resourceId": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm2",
+            "status": "Failed",
             "error": {
               "code": "InternalServerError",
               "message": "An internal error occurred.",

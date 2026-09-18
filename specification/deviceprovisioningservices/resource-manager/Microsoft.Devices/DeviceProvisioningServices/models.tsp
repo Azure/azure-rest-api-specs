@@ -387,6 +387,7 @@ model IotDpsPropertiesDescription {
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_08_31)
   @maxItems(1)
   @identifiers(#["namespaceUuid"])
   deviceRegistryNamespaces?: DeviceRegistryNamespaceDescription[];
@@ -602,24 +603,28 @@ model DeviceRegistryNamespaceDescription {
    * Unique identifier of the linked Device Registry namespace.
    */
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_08_31)
   namespaceUuid?: string;
 
   /**
    * The data plane address of the linked Azure Device Registry namespace.
    */
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_08_31)
   dataAddress?: string;
 
   /**
    * Azure location of the linked Device Registry namespace.
    */
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_08_31)
   location?: Azure.Core.azureLocation;
 
   /**
    * The linking state of this namespace.
    */
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_08_31)
   linkingState?: LinkingState;
 }
 
@@ -993,6 +998,7 @@ model CertificateBodyDescription {
  * The state of ADR linking for a provisioning service.
  */
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_08_31)
 union LinkingState {
   string,
 
