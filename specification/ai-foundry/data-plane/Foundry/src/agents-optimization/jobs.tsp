@@ -86,15 +86,15 @@ model AgentOptimizationJobLatency {
 }
 
 @doc("Summary of the candidates evaluated by an agent optimization job.")
-model AgentOptimizationCandidateSummary {
+model AgentOptimizationResultCandidateSummary {
   @doc("Number of candidates whose evaluation completed, including the baseline once completed.")
   completed_candidate_count: int32;
 
   @doc("Candidate ID of the original baseline. Omitted until the baseline candidate is available.")
-  baseline_candidate_id?: string;
+  baseline_id?: string;
 
   @doc("Candidate ID of the highest-scoring completed candidate. Omitted until a candidate has been selected.")
-  best_candidate_id?: string;
+  best_id?: string;
 
   @doc("Score of the baseline candidate. Omitted until baseline evaluation completes.")
   baseline_score?: float64;
@@ -106,7 +106,7 @@ model AgentOptimizationCandidateSummary {
 @doc("Partial or terminal result produced by an agent optimization job.")
 model AgentOptimizationJobResult {
   @doc("Summary of evaluated candidates. Omitted for jobs that do not comparatively evaluate candidates and until candidate processing begins.")
-  candidate_summary?: AgentOptimizationCandidateSummary;
+  candidate_summary?: AgentOptimizationResultCandidateSummary;
 
   @doc("Aggregate token usage per stage and model. Always present; empty array when no calls were measured.")
   token_usage: AgentOptimizationJobTokenUsage[];
@@ -116,9 +116,6 @@ model AgentOptimizationJobResult {
 
   @doc("Reason the candidate search terminated. Omitted for jobs that do not comparatively evaluate candidates and until the job reaches a terminal state.")
   termination_reason?: AgentOptimizationTerminationReason;
-
-  @doc("Candidate ID produced by a transformation job that does not comparatively evaluate candidates. Omitted for evaluated jobs and until the output candidate is available.")
-  output_candidate_id?: string;
 }
 
 // ---------------------------------------------------------------------------

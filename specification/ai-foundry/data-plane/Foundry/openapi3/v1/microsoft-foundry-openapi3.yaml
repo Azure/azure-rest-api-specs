@@ -43023,30 +43023,6 @@ components:
             - completed
             - failed
       description: The candidate's lifecycle state.
-    AgentOptimizationCandidateSummary:
-      type: object
-      required:
-        - completed_candidate_count
-      properties:
-        completed_candidate_count:
-          type: integer
-          format: int32
-          description: Number of candidates whose evaluation completed, including the baseline once completed.
-        baseline_candidate_id:
-          type: string
-          description: Candidate ID of the original baseline. Omitted until the baseline candidate is available.
-        best_candidate_id:
-          type: string
-          description: Candidate ID of the highest-scoring completed candidate. Omitted until a candidate has been selected.
-        baseline_score:
-          type: number
-          format: double
-          description: Score of the baseline candidate. Omitted until baseline evaluation completes.
-        best_score:
-          type: number
-          format: double
-          description: Best score observed across completed candidates. Omitted until a candidate completes evaluation.
-      description: Summary of the candidates evaluated by an agent optimization job.
     AgentOptimizationConfiguration:
       type: object
       required:
@@ -43364,7 +43340,7 @@ components:
         - latency_usage
       properties:
         candidate_summary:
-          $ref: '#/components/schemas/AgentOptimizationCandidateSummary'
+          $ref: '#/components/schemas/AgentOptimizationResultCandidateSummary'
           description: Summary of evaluated candidates. Omitted for jobs that do not comparatively evaluate candidates and until candidate processing begins.
         token_usage:
           type: array
@@ -43379,9 +43355,6 @@ components:
         termination_reason:
           $ref: '#/components/schemas/AgentOptimizationTerminationReason'
           description: Reason the candidate search terminated. Omitted for jobs that do not comparatively evaluate candidates and until the job reaches a terminal state.
-        output_candidate_id:
-          type: string
-          description: Candidate ID produced by a transformation job that does not comparatively evaluate candidates. Omitted for evaluated jobs and until the output candidate is available.
       description: Partial or terminal result produced by an agent optimization job.
     AgentOptimizationJobTokenUsage:
       type: object
@@ -43482,6 +43455,30 @@ components:
           minLength: 1
           description: Registered dataset version.
       description: References an explicitly versioned registered Foundry dataset.
+    AgentOptimizationResultCandidateSummary:
+      type: object
+      required:
+        - completed_candidate_count
+      properties:
+        completed_candidate_count:
+          type: integer
+          format: int32
+          description: Number of candidates whose evaluation completed, including the baseline once completed.
+        baseline_id:
+          type: string
+          description: Candidate ID of the original baseline. Omitted until the baseline candidate is available.
+        best_id:
+          type: string
+          description: Candidate ID of the highest-scoring completed candidate. Omitted until a candidate has been selected.
+        baseline_score:
+          type: number
+          format: double
+          description: Score of the baseline candidate. Omitted until baseline evaluation completes.
+        best_score:
+          type: number
+          format: double
+          description: Best score observed across completed candidates. Omitted until a candidate completes evaluation.
+      description: Summary of the candidates evaluated by an agent optimization job.
     AgentOptimizationSkill:
       type: object
       required:
