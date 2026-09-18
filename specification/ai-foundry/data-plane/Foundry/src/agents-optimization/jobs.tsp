@@ -25,17 +25,17 @@ union AgentOptimizationJobOutcome {
   no_improvement: "no_improvement",
 }
 
-/** Reason an evaluated candidate search ended. These values describe successful search completion and do not indicate job failure. */
+/** Reason an evaluated candidate search terminated. */
 union AgentOptimizationJobTerminationReason {
   string,
 
   @doc("The candidate search completed normally.")
   completed: "completed",
 
-  @doc("The successful job stopped early after exhausting its evaluation budget.")
+  @doc("The candidate search exhausted its evaluation budget.")
   budget_exhausted: "budget_exhausted",
 
-  @doc("The successful job stopped early after the configured number of consecutive failed candidate screens.")
+  @doc("The candidate search stopped after the configured number of consecutive failed candidate screens.")
   candidate_screening_stalled: "candidate_screening_stalled",
 }
 
