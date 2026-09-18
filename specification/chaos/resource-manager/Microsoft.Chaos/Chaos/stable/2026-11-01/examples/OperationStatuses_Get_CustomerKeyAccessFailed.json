@@ -1,0 +1,26 @@
+{
+  "title": "Get a failed Workspace encryption operation status",
+  "operationId": "OperationStatuses_Get",
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "location": "westus2",
+    "operationId": "4bdadd97-207c-4de8-9bba-08339ae099c7"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/providers/Microsoft.Chaos/locations/westus2/operationStatuses/4bdadd97-207c-4de8-9bba-08339ae099c7",
+        "name": "4bdadd97-207c-4de8-9bba-08339ae099c7",
+        "status": "Failed",
+        "startTime": "2026-11-01T11:59:00Z",
+        "endTime": "2026-11-01T12:00:00Z",
+        "error": {
+          "code": "CustomerKeyAccessFailed",
+          "message": "Azure Storage could not use the customer key. Restore key access and retry the Workspace update. Removing customer-key protection does not bypass an inaccessible key.",
+          "target": "properties.encryption.customerManagedKeyEncryption.keyEncryptionKeyUrl"
+        }
+      }
+    }
+  }
+}

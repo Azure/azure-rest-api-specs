@@ -1,0 +1,73 @@
+{
+  "title": "Create or replace a Workspace with the Microsoft-managed encryption default",
+  "operationId": "Workspaces_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resourceGroupName": "exampleRG",
+    "workspaceName": "exampleWorkspace",
+    "resource": {
+      "location": "westus2",
+      "properties": {
+        "scopes": [
+          "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/providers/Microsoft.Chaos/locations/westus2/operationStatuses/4bdadd97-207c-4de8-9bba-08339ae099c7?api-version=2026-11-01"
+      },
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace",
+        "name": "exampleWorkspace",
+        "type": "Microsoft.Chaos/workspaces",
+        "location": "westus2",
+        "properties": {
+          "scopes": [
+            "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG"
+          ],
+          "provisioningState": "Updating",
+          "encryption": {
+            "status": {
+              "state": "Pending",
+              "observedProtection": "CustomerManaged",
+              "observedKeyEncryptionKeyUrl": "https://contoso-vault.vault.azure.net/keys/workspace-key/0123456789abcdef0123456789abcdef",
+              "lastCheckedAt": "2026-11-01T11:00:00Z"
+            },
+            "customerManagedKeyOnboarding": {
+              "applicationId": "00000000-0000-0000-0000-000000000001"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/providers/Microsoft.Chaos/locations/westus2/operationStatuses/4bdadd97-207c-4de8-9bba-08339ae099c7?api-version=2026-11-01"
+      },
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace",
+        "name": "exampleWorkspace",
+        "type": "Microsoft.Chaos/workspaces",
+        "location": "westus2",
+        "properties": {
+          "scopes": [
+            "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG"
+          ],
+          "provisioningState": "Creating",
+          "encryption": {
+            "status": {
+              "state": "NotConfigured"
+            },
+            "customerManagedKeyOnboarding": {
+              "applicationId": "00000000-0000-0000-0000-000000000001"
+            }
+          }
+        }
+      }
+    }
+  }
+}

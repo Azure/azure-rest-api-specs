@@ -1,0 +1,38 @@
+{
+  "title": "Get a Workspace when active encryption protection is unknown",
+  "operationId": "Workspaces_Get",
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resourceGroupName": "exampleRG",
+    "workspaceName": "exampleWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace",
+        "name": "exampleWorkspace",
+        "type": "Microsoft.Chaos/workspaces",
+        "location": "westus2",
+        "properties": {
+          "scopes": [
+            "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG"
+          ],
+          "provisioningState": "Succeeded",
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyUrl": "https://contoso-vault.vault.azure.net/keys/replacement-key"
+            },
+            "customerManagedKeyOnboarding": {
+              "applicationId": "00000000-0000-0000-0000-000000000001"
+            },
+            "status": {
+              "state": "Unknown",
+              "lastCheckedAt": "2026-11-01T12:00:00Z"
+            }
+          }
+        }
+      }
+    }
+  }
+}

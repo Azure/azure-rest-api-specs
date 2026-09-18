@@ -1,0 +1,45 @@
+{
+  "title": "Get a Workspace after a customer key replacement fails",
+  "operationId": "Workspaces_Get",
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resourceGroupName": "exampleRG",
+    "workspaceName": "exampleWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace",
+        "name": "exampleWorkspace",
+        "type": "Microsoft.Chaos/workspaces",
+        "location": "westus2",
+        "properties": {
+          "scopes": [
+            "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG"
+          ],
+          "provisioningState": "Failed",
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyUrl": "https://contoso-vault.vault.azure.net/keys/replacement-key"
+            },
+            "customerManagedKeyOnboarding": {
+              "applicationId": "00000000-0000-0000-0000-000000000001"
+            },
+            "status": {
+              "state": "Failed",
+              "observedProtection": "CustomerManaged",
+              "observedKeyEncryptionKeyUrl": "https://contoso-vault.vault.azure.net/keys/workspace-key/0123456789abcdef0123456789abcdef",
+              "lastCheckedAt": "2026-11-01T12:00:00Z",
+              "error": {
+                "code": "CustomerKeyAccessFailed",
+                "message": "Azure Storage could not use the requested key. Check key availability, service application access, and Key Vault network rules. Restore access, then retry the Workspace update.",
+                "target": "properties.encryption.customerManagedKeyEncryption.keyEncryptionKeyUrl"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
