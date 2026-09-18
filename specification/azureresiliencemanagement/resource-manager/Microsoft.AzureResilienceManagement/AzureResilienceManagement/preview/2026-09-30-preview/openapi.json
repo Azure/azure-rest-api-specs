@@ -5213,6 +5213,11 @@
         "recoveryPlan": {
           "$ref": "#/definitions/ExtensionObjectState",
           "description": "Recovery plan not present."
+        },
+        "healthModelAssociatedWithServiceGroup": {
+          "$ref": "#/definitions/ExtensionObjectState",
+          "description": "Indicates whether any entity in the selected Azure Health Model references the Drill Service Group through properties.signalGroups.azureResource.azureResourceId.",
+          "readOnly": true
         }
       }
     },
@@ -7558,14 +7563,14 @@
           "$ref": "#/definitions/AssociatedIdentity",
           "description": "Identity that the Drill uses to read the Azure Health Model. The Drill is granted Reader on the Health Model for this identity."
         },
-        "discoveryRuleId": {
+        "healthModelId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is the only identifier accepted on the wire.",
+          "description": "Full ARM Id of the Azure Health Model selected for Drill monitoring.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.CloudHealth/healthmodels/discoveryrules"
+                "type": "Microsoft.CloudHealth/healthmodels"
               }
             ]
           }
@@ -7573,7 +7578,7 @@
       },
       "required": [
         "identity",
-        "discoveryRuleId"
+        "healthModelId"
       ]
     },
     "HealthModelMonitoringPropertiesUpdate": {
@@ -7584,14 +7589,14 @@
           "$ref": "#/definitions/AssociatedIdentityUpdate",
           "description": "Identity that the Drill uses to read the Azure Health Model. The Drill is granted Reader on the Health Model for this identity."
         },
-        "discoveryRuleId": {
+        "healthModelId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is the only identifier accepted on the wire.",
+          "description": "Full ARM Id of the Azure Health Model selected for Drill monitoring.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.CloudHealth/healthmodels/discoveryrules"
+                "type": "Microsoft.CloudHealth/healthmodels"
               }
             ]
           }
