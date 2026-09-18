@@ -12,12 +12,6 @@ alias DeleteConnectionErrors =
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-/** Shared operation traits for creating connections. */
-alias ConnectionCreateOperations = ResourceOperations<
-  DataPlaneStandardTraits,
-  PostConnectionErrors
->;
-
 /** Query parameters for deleting a connection. */
 alias DeleteConnectionTraits = QueryParametersTrait<
   {
