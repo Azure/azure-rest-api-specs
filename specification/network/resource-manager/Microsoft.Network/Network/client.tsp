@@ -54,6 +54,21 @@ namespace Common {
   }
 }
 
+namespace Microsoft.Network {
+  /**
+   * Enable Only IPv6 Peering state retained for C# API compatibility.
+   */
+  union EnableOnlyIPv6PeeringState {
+    /** IPv6-only peering is enabled. */
+    Enabled: "Enabled",
+
+    /** IPv6-only peering is disabled. */
+    Disabled: "Disabled",
+
+    string,
+  }
+}
+
 @@clientLocation(
   Microsoft.Compute.NetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
   Microsoft.Network.NetworkInterfaces,
@@ -4020,9 +4035,97 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 
+@@alternateType(
+  Microsoft.Network.HubVirtualNetworkConnectionProperties.enableOnlyIPv6Peering,
+  Microsoft.Network.EnableOnlyIPv6PeeringState,
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Network.AzureFirewallPropertiesFormat.aiSecurityAddOn,
+  "IsAISecurityAddOnEnabled",
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Network.OnUnauthenticatedRequest,
+  "UnauthenticatedRequestAction",
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Network.AuthenticationPolicy,
+  "IdentityIntegrationAuthenticationPolicy",
+  "csharp"
+);
+
 @@clientName(
   Common.ManagedServiceIdentity,
-  "NetworkManagedServiceIdentity",
+  "InternalNetworkManagedServiceIdentity",
+  "csharp"
+);
+
+@@access(
+  Common.ManagedServiceIdentity,
+  Azure.ClientGenerator.Core.Access.internal,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.AuthenticationPolicy.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.AuthenticationPolicyUpdateParameters.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.BastionHost.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.BastionHostUpdate.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
+@@clientName(Microsoft.Network.Metric, "ExpressRoutePeeringMetric", "csharp");
+
+@@clientName(
+  Microsoft.Network.PeeringHealth,
+  "ExpressRouteCircuitPeeringHealth",
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Network.PeeringStats,
+  "ExpressRouteCircuitPeeringStats",
+  "csharp"
+);
+
+@@clientName(Microsoft.Network.PeeringStats.timestamp, "CapturedOn", "csharp");
+
+@@clientName(
+  Microsoft.Network.PortMapping,
+  "ExpressRouteCircuitPortMapping",
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.MigrateExpressRouteCircuitRequest.targetPeeringLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.MigrateExpressRouteCircuitValidateAndHealthCheckRequest.targetPeeringLocation,
+  Azure.Core.azureLocation,
   "csharp"
 );
 
