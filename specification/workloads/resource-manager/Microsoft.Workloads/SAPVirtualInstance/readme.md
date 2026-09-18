@@ -56,7 +56,7 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 ``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - preview/2023-10-01-preview/SAPVirtualInstance.json
-  - ../common-types/v1/commonTypes.json
+  - preview/2023-10-01-preview/common-types/v1/commonTypes.json
   - ../operations/preview/2023-10-01-preview/operations.json
 ```
 ---

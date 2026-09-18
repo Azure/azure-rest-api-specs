@@ -3,7 +3,7 @@
   "info": {
     "title": "Workloads Client",
     "description": "The workload SAP monitor Client.",
-    "version": "2023-10-01-preview"
+    "version": "2023-04-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -37,7 +37,7 @@
         "description": "Gets a list of SAP monitors in the specified subscription. The operations returns various properties of each SAP monitor.",
         "x-ms-examples": {
           "List all SAP monitors in a subscription": {
-            "$ref": "./examples/Monitors/monitors_List.json"
+            "$ref": "./examples/workloadmonitor/monitors_List.json"
           }
         },
         "parameters": [
@@ -77,7 +77,7 @@
         "description": "Gets a list of SAP monitors in the specified resource group.",
         "x-ms-examples": {
           "List all SAP monitors in a resource group": {
-            "$ref": "./examples/Monitors/monitors_ListByRG.json"
+            "$ref": "./examples/workloadmonitor/monitors_ListByRG.json"
           }
         },
         "parameters": [
@@ -120,7 +120,7 @@
         "description": "Gets properties of a SAP monitor for the specified subscription, resource group, and resource name.",
         "x-ms-examples": {
           "Get properties of a SAP monitor": {
-            "$ref": "./examples/Monitors/monitors_Get.json"
+            "$ref": "./examples/workloadmonitor/monitors_Get.json"
           }
         },
         "produces": [
@@ -168,13 +168,7 @@
         "description": "Creates a SAP monitor for the specified subscription, resource group, and resource name.",
         "x-ms-examples": {
           "Create a SAP monitor": {
-            "$ref": "./examples/Monitors/monitors_Create.json"
-          },
-          "Create a SAP monitor with system assigned identity": {
-            "$ref": "./examples/Monitors/monitors_Create_Identity.json"
-          },
-          "Create a SAP monitor with user assigned identity": {
-            "$ref": "./examples/Monitors/monitors_Create_UserAssignedIdentity.json"
+            "$ref": "./examples/workloadmonitor/monitors_Create.json"
           }
         },
         "parameters": [
@@ -228,7 +222,7 @@
         "description": "Deletes a SAP monitor with the specified subscription, resource group, and SAP monitor name.",
         "x-ms-examples": {
           "Deletes a SAP monitor": {
-            "$ref": "./examples/Monitors/monitors_Delete.json"
+            "$ref": "./examples/workloadmonitor/monitors_Delete.json"
           }
         },
         "parameters": [
@@ -246,13 +240,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Deleting SAP monitor",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
+          "200": {
+            "description": "Delete SAP monitor",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
             }
+          },
+          "202": {
+            "description": "Deleting SAP monitor"
           },
           "204": {
             "description": "No SAP monitor to delete"
@@ -274,10 +269,10 @@
         "description": "Patches the Tags field of a SAP monitor for the specified subscription, resource group, and SAP monitor name.",
         "x-ms-examples": {
           "Update Tags field of a SAP monitor": {
-            "$ref": "./examples/Monitors/monitors_PatchTags.json"
+            "$ref": "./examples/workloadmonitor/monitors_PatchTags.json"
           },
           "Delete Tags field of a SAP monitor": {
-            "$ref": "./examples/Monitors/monitors_PatchTags_Delete.json"
+            "$ref": "./examples/workloadmonitor/monitors_PatchTags_Delete.json"
           }
         },
         "parameters": [
@@ -329,7 +324,7 @@
         "description": "Gets a list of provider instances in the specified SAP monitor. The operations returns various properties of each provider instances.",
         "x-ms-examples": {
           "List all SAP monitors providers in a subscription": {
-            "$ref": "./examples/ProviderInstances/ProviderInstances_List.json"
+            "$ref": "./examples/workloadmonitor/ProviderInstances_List.json"
           }
         },
         "parameters": [
@@ -378,22 +373,22 @@
         "description": "Gets properties of a provider instance for the specified subscription, resource group, SAP monitor name, and resource name.",
         "x-ms-examples": {
           "Get properties of a SAP monitor Hana provider": {
-            "$ref": "./examples/ProviderInstances/ProviderInstances_Get.json"
+            "$ref": "./examples/workloadmonitor/ProviderInstances_Get.json"
           },
           "Get properties of a SAP monitor NetWeaver provider": {
-            "$ref": "./examples/NetWeaverProviderInstances/NetWeaverProviderInstances_Get.json"
+            "$ref": "./examples/workloadmonitor/NetWeaverProviderInstances_Get.json"
           },
           "Get properties of a OS provider": {
-            "$ref": "./examples/PrometheusOSProviderInstances/PrometheusOSProviderInstances_Get.json"
+            "$ref": "./examples/workloadmonitor/PrometheusOSProviderInstances_Get.json"
           },
           "Get properties of a Db2 provider": {
-            "$ref": "./examples/Db2ProviderInstances/Db2ProviderInstances_Get.json"
+            "$ref": "./examples/workloadmonitor/Db2ProviderInstances_Get.json"
           },
           "Get properties of a MsSqlServer provider": {
-            "$ref": "./examples/MsSqlServerProviderInstance/MsSqlServerProviderInstance_Get.json"
+            "$ref": "./examples/workloadmonitor/MsSqlServerProviderInstance_Get.json"
           },
           "Get properties of a PrometheusHaCluster provider": {
-            "$ref": "./examples/PrometheusHaClusterProviderInstances/PrometheusHaClusterProviderInstances_Get.json"
+            "$ref": "./examples/workloadmonitor/PrometheusHaClusterProviderInstances_Get.json"
           }
         },
         "produces": [
@@ -444,40 +439,40 @@
         "description": "Creates a provider instance for the specified subscription, resource group, SAP monitor name, and resource name.",
         "x-ms-examples": {
           "Create a SAP monitor Hana provider": {
-            "$ref": "./examples/ProviderInstances/ProviderInstances_Create.json"
+            "$ref": "./examples/workloadmonitor/ProviderInstances_Create.json"
           },
           "Create a SAP monitor NetWeaver provider": {
-            "$ref": "./examples/NetWeaverProviderInstances/NetWeaverProviderInstances_Create.json"
+            "$ref": "./examples/workloadmonitor/NetWeaverProviderInstances_Create.json"
           },
           "Create a OS provider": {
-            "$ref": "./examples/PrometheusOSProviderInstances/PrometheusOSProviderInstances_Create.json"
+            "$ref": "./examples/workloadmonitor/PrometheusOSProviderInstances_Create.json"
           },
           "Create a Db2 provider": {
-            "$ref": "./examples/Db2ProviderInstances/Db2ProviderInstances_Create.json"
+            "$ref": "./examples/workloadmonitor/Db2ProviderInstances_Create.json"
           },
           "Create a MsSqlServer provider": {
-            "$ref": "./examples/MsSqlServerProviderInstance/MsSqlServerProviderInstance_Create.json"
+            "$ref": "./examples/workloadmonitor/MsSqlServerProviderInstance_Create.json"
           },
           "Create a PrometheusHaCluster provider": {
-            "$ref": "./examples/PrometheusHaClusterProviderInstances/PrometheusHaClusterProviderInstances_Create.json"
+            "$ref": "./examples/workloadmonitor/PrometheusHaClusterProviderInstances_Create.json"
           },
           "Create a SAP monitor Hana provider with Root Certificate": {
-            "$ref": "./examples/ProviderInstances/ProviderInstances_Create_Root_Certificate.json"
+            "$ref": "./examples/workloadmonitor/ProviderInstances_Create_Root_Certificate.json"
           },
           "Create a SAP monitor NetWeaver provider with Root Certificate": {
-            "$ref": "./examples/NetWeaverProviderInstances/NetWeaverProviderInstances_Create_Root_Certificate.json"
+            "$ref": "./examples/workloadmonitor/NetWeaverProviderInstances_Create_Root_Certificate.json"
           },
           "Create a OS provider with Root Certificate": {
-            "$ref": "./examples/PrometheusOSProviderInstances/PrometheusOSProviderInstances_Create_Root_Certificate.json"
+            "$ref": "./examples/workloadmonitor/PrometheusOSProviderInstances_Create_Root_Certificate.json"
           },
           "Create a Db2 provider with Root Certificate": {
-            "$ref": "./examples/Db2ProviderInstances/Db2ProviderInstances_Create_Root_Certificate.json"
+            "$ref": "./examples/workloadmonitor/Db2ProviderInstances_Create_Root_Certificate.json"
           },
           "Create a MsSqlServer provider with Root Certificate": {
-            "$ref": "./examples/MsSqlServerProviderInstance/MsSqlServerProviderInstance_Create_Root_Certificate.json"
+            "$ref": "./examples/workloadmonitor/MsSqlServerProviderInstance_Create_Root_Certificate.json"
           },
           "Create a PrometheusHaCluster provider with Root Certificate": {
-            "$ref": "./examples/PrometheusHaClusterProviderInstances/PrometheusHaClusterProviderInstances_Create_Root_Certificate.json"
+            "$ref": "./examples/workloadmonitor/PrometheusHaClusterProviderInstances_Create_Root_Certificate.json"
           }
         },
         "parameters": [
@@ -534,7 +529,7 @@
         "description": "Deletes a provider instance for the specified subscription, resource group, SAP monitor name, and resource name.",
         "x-ms-examples": {
           "Deletes a SAP monitor provider": {
-            "$ref": "./examples/ProviderInstances/ProviderInstances_Delete.json"
+            "$ref": "./examples/workloadmonitor/ProviderInstances_Delete.json"
           }
         },
         "parameters": [
@@ -555,13 +550,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Deleting provider instance",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
+          "200": {
+            "description": "Deleted provider instance",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
             }
+          },
+          "202": {
+            "description": "Deleting provider instance"
           },
           "204": {
             "description": "No provider instance to delete"
@@ -585,7 +581,7 @@
         "description": "Gets configuration values for Single Pane Of Glass for SAP monitor for the specified subscription, resource group, and resource name.",
         "x-ms-examples": {
           "Get properties of a SAP monitor": {
-            "$ref": "./examples/SapLandscapeMonitor/SapLandscapeMonitor_Get.json"
+            "$ref": "./examples/workloadmonitor/SapLandscapeMonitor_Get.json"
           }
         },
         "produces": [
@@ -629,7 +625,7 @@
         "description": "Creates a SAP Landscape Monitor Dashboard for the specified subscription, resource group, and resource name.",
         "x-ms-examples": {
           "Create for SAP Landscape monitor Dashboard": {
-            "$ref": "./examples/SapLandscapeMonitor/SapLandscapeMonitor_Create.json"
+            "$ref": "./examples/workloadmonitor/SapLandscapeMonitor_Create.json"
           }
         },
         "parameters": [
@@ -679,7 +675,7 @@
         "description": "Deletes a SAP Landscape Monitor Dashboard with the specified subscription, resource group, and SAP monitor name.",
         "x-ms-examples": {
           "Deletes SAP monitor": {
-            "$ref": "./examples/SapLandscapeMonitor/SapLandscapeMonitor_Delete.json"
+            "$ref": "./examples/workloadmonitor/SapLandscapeMonitor_Delete.json"
           }
         },
         "parameters": [
@@ -720,7 +716,7 @@
         "description": "Patches the SAP Landscape Monitor Dashboard for the specified subscription, resource group, and SAP monitor name.",
         "x-ms-examples": {
           "Update SAP monitor": {
-            "$ref": "./examples/SapLandscapeMonitor/SapLandscapeMonitor_Update.json"
+            "$ref": "./examples/workloadmonitor/SapLandscapeMonitor_Update.json"
           }
         },
         "parameters": [
@@ -766,7 +762,7 @@
         "description": "Gets configuration values for Single Pane Of Glass for SAP monitor for the specified subscription, resource group, and resource name.",
         "x-ms-examples": {
           "Get properties of a SAP monitor": {
-            "$ref": "./examples/SapLandscapeMonitor/SapLandscapeMonitor_List.json"
+            "$ref": "./examples/workloadmonitor/SapLandscapeMonitor_List.json"
           }
         },
         "produces": [
@@ -804,35 +800,6 @@
     }
   },
   "definitions": {
-    "HealthState": {
-      "readOnly": true,
-      "type": "string",
-      "enum": [
-        "Healthy",
-        "Degraded",
-        "Unavailable",
-        "Unknown"
-      ],
-      "x-ms-enum": {
-        "name": "WorkloadProviderInstanceHealthState",
-        "modelAsString": true
-      },
-      "description": "State of health of the provider instance"
-    },
-    "Health": {
-      "type": "object",
-      "properties": {
-        "healthState": {
-          "$ref": "#/definitions/HealthState"
-        },
-        "impactingReasons": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Reasons impacting health state"
-        }
-      },
-      "description": "Resource health details"
-    },
     "SslPreference": {
       "description": "Gets or sets certificate preference if secure communication is enabled.",
       "type": "string",
@@ -1048,7 +1015,8 @@
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "./common-types/v2/commonTypes.json#/definitions/ManagedServiceIdentity"
+          "$ref": "./commonTypes.json#/definitions/UserAssignedServiceIdentity",
+          "description": "[currently not in use] Managed service identity(user assigned identities)"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1076,8 +1044,7 @@
             "Failed",
             "Succeeded",
             "Deleting",
-            "Migrating",
-            "Canceled"
+            "Migrating"
           ],
           "x-ms-enum": {
             "name": "WorkloadMonitorProvisioningState",
@@ -1151,7 +1118,8 @@
           }
         },
         "identity": {
-          "$ref": "./common-types/v2/commonTypes.json#/definitions/ManagedServiceIdentity"
+          "$ref": "./commonTypes.json#/definitions/UserAssignedServiceIdentity",
+          "description": "[currently not in use] Managed service identity(user assigned identities)"
         }
       }
     },
@@ -1175,6 +1143,10 @@
     "ProviderInstance": {
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "./commonTypes.json#/definitions/UserAssignedServiceIdentity",
+          "description": "[currently not in use] Managed service identity(user assigned identities)"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProviderInstanceProperties",
@@ -1488,20 +1460,13 @@
             "Failed",
             "Succeeded",
             "Deleting",
-            "Migrating",
-            "Canceled"
+            "Migrating"
           ],
           "x-ms-enum": {
             "name": "WorkloadMonitorProvisioningState",
             "modelAsString": true
           },
           "description": "State of provisioning of the provider instance"
-        },
-        "health": {
-          "readOnly": true,
-          "type": "object",
-          "description": "Resource health details",
-          "$ref": "#/definitions/Health"
         },
         "errors": {
           "description": "Defines the provider instance errors.",
@@ -1660,7 +1625,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9-_]+$",
       "description": "Name of the SAP monitor resource.",
       "x-ms-parameter-location": "method"
     },
@@ -1669,7 +1633,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9-]+$",
       "description": "Name of the provider instance.",
       "x-ms-parameter-location": "method"
     },
@@ -1690,7 +1653,8 @@
       "schema": {
         "$ref": "#/definitions/ProviderInstance"
       },
-      "description": "Request body representing a provider instance associated with a SAP monitor."
+      "description": "Request body representing a provider instance",
+      "x-ms-parameter-location": "method"
     },
     "SapLandscapeMonitorParameter": {
       "name": "sapLandscapeMonitorParameter",
