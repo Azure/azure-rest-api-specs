@@ -65,6 +65,10 @@ Single source of truth for breaking-change and versioning approval label names a
 
 - `isExecError(error)` — type guard for errors thrown by the exec helpers.
 - `execFile(file, args, options)` — promisified `child_process.execFile`.
+- `execNodeBin(packageName, [binary, ...args], options)` — run an installed Node.js CLI directly
+  with the current Node executable, without starting npm/pnpm or a shell shim. Resolves the package
+  from `options.cwd` (or the current directory), reads its `package.json` `bin` entry, and preserves
+  the exec helpers' logging, output limits, and error handling. The package must expose `package.json`.
 - `execNpm(args, options)` — run an `npm` command.
 - `execNpmExec(args, options)` — run an `npm exec` command.
 - `execPnpm(args, options)` — run a `pnpm` command (via `cross-spawn`).
