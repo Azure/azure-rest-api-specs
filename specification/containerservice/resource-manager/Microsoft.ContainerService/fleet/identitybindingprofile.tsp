@@ -154,7 +154,7 @@ model AllowedSubject {
     `kubernetes.io/metadata.name` label to target specific namespaces by
     name.
     """)
-  namespaceSelector: LabelSelector;
+  namespaceSelector: IdentityBindingLabelSelector;
 
   @doc("""
     Optional label selector matching the service accounts (within the
@@ -162,29 +162,29 @@ model AllowedSubject {
     When omitted, all service accounts in matching namespaces are
     authorized. When provided, it must be non-empty.
     """)
-  serviceAccountSelector?: LabelSelector;
+  serviceAccountSelector?: IdentityBindingLabelSelector;
 }
 
 @doc("A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.")
 @added(Versions.v2026_11_02_preview)
-model LabelSelector {
+model IdentityBindingLabelSelector {
   @doc("matchLabels is an array of {key=value} pairs. A single {key=value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is `key`, the operator is `In`, and the values array contains only `value`. The requirements are ANDed.")
   matchLabels?: string[];
 
   @doc("matchExpressions is a list of label selector requirements. The requirements are ANDed.")
   @identifiers(#[])
-  matchExpressions?: LabelSelectorRequirement[];
+  matchExpressions?: IdentityBindingLabelSelectorRequirement[];
 }
 
 @doc("A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.")
 @added(Versions.v2026_11_02_preview)
-model LabelSelectorRequirement {
+model IdentityBindingLabelSelectorRequirement {
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The 'key' property refers to a Kubernetes label selector key, not a secret or credential."
   @doc("key is the label key that the selector applies to.")
   key?: string;
 
   @doc("operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.")
-  operator?: Operator;
+  operator?: IdentityBindingLabelSelectorOperator;
 
   @doc("values is an array of string values, the values array must be non-empty.")
   values?: string[];
@@ -192,7 +192,7 @@ model LabelSelectorRequirement {
 
 @doc("operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.")
 @added(Versions.v2026_11_02_preview)
-union Operator {
+union IdentityBindingLabelSelectorOperator {
   string,
 
   @doc("The value of the key should be in the given list.")

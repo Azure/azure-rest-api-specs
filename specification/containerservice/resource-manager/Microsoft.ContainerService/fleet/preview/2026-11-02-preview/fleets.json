@@ -3811,11 +3811,11 @@
       "description": "A subject authorized to use the identity binding for token exchange.\nThe namespace selector is required and must be non-empty. The service\naccount selector is optional; when omitted, all service accounts in\nmatching namespaces are authorized. Selectors within a single\nAllowedSubject are AND'd; multiple AllowedSubjects on an identity\nbinding profile are OR'd.",
       "properties": {
         "namespaceSelector": {
-          "$ref": "#/definitions/LabelSelector",
+          "$ref": "#/definitions/IdentityBindingLabelSelector",
           "description": "Label selector matching the namespaces in which this identity may be\nused. Must be non-empty: an empty selector would match every namespace\nand is rejected to prevent overly permissive bindings. Use the built-in\n`kubernetes.io/metadata.name` label to target specific namespaces by\nname."
         },
         "serviceAccountSelector": {
-          "$ref": "#/definitions/LabelSelector",
+          "$ref": "#/definitions/IdentityBindingLabelSelector",
           "description": "Optional label selector matching the service accounts (within the\nnamespaces matched by `namespaceSelector`) that may use this identity.\nWhen omitted, all service accounts in matching namespaces are\nauthorized. When provided, it must be non-empty."
         }
       },
@@ -5595,6 +5595,84 @@
         "id"
       ]
     },
+    "IdentityBindingLabelSelector": {
+      "type": "object",
+      "description": "A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.",
+      "properties": {
+        "matchLabels": {
+          "type": "array",
+          "description": "matchLabels is an array of {key=value} pairs. A single {key=value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is `key`, the operator is `In`, and the values array contains only `value`. The requirements are ANDed.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "matchExpressions": {
+          "type": "array",
+          "description": "matchExpressions is a list of label selector requirements. The requirements are ANDed.",
+          "items": {
+            "$ref": "#/definitions/IdentityBindingLabelSelectorRequirement"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "IdentityBindingLabelSelectorOperator": {
+      "type": "string",
+      "description": "operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.",
+      "enum": [
+        "In",
+        "NotIn",
+        "Exists",
+        "DoesNotExist"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityBindingLabelSelectorOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "In",
+            "value": "In",
+            "description": "The value of the key should be in the given list."
+          },
+          {
+            "name": "NotIn",
+            "value": "NotIn",
+            "description": "The value of the key should not be in the given list."
+          },
+          {
+            "name": "Exists",
+            "value": "Exists",
+            "description": "The value of the key should exist."
+          },
+          {
+            "name": "DoesNotExist",
+            "value": "DoesNotExist",
+            "description": "The value of the key should not exist."
+          }
+        ]
+      }
+    },
+    "IdentityBindingLabelSelectorRequirement": {
+      "type": "object",
+      "description": "A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "key is the label key that the selector applies to."
+        },
+        "operator": {
+          "$ref": "#/definitions/IdentityBindingLabelSelectorOperator",
+          "description": "operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist."
+        },
+        "values": {
+          "type": "array",
+          "description": "values is an array of string values, the values array must be non-empty.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "IdentityBindingManagedIdentityProfile": {
       "type": "object",
       "description": "Managed identity profile for the identity binding.",
@@ -5808,48 +5886,6 @@
     },
     "KubernetesVersion": {
       "type": "string"
-    },
-    "LabelSelector": {
-      "type": "object",
-      "description": "A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.",
-      "properties": {
-        "matchLabels": {
-          "type": "array",
-          "description": "matchLabels is an array of {key=value} pairs. A single {key=value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is `key`, the operator is `In`, and the values array contains only `value`. The requirements are ANDed.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "matchExpressions": {
-          "type": "array",
-          "description": "matchExpressions is a list of label selector requirements. The requirements are ANDed.",
-          "items": {
-            "$ref": "#/definitions/LabelSelectorRequirement"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "LabelSelectorRequirement": {
-      "type": "object",
-      "description": "A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "key is the label key that the selector applies to."
-        },
-        "operator": {
-          "$ref": "#/definitions/Operator",
-          "description": "operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist."
-        },
-        "values": {
-          "type": "array",
-          "description": "values is an array of string values, the values array must be non-empty.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "ManagedClusterUpdate": {
       "type": "object",
@@ -6309,42 +6345,6 @@
           "description": "The image version to upgrade the nodes to (e.g., 'AKSUbuntu-1804gen2containerd-2022.12.13').",
           "readOnly": true
         }
-      }
-    },
-    "Operator": {
-      "type": "string",
-      "description": "operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.",
-      "enum": [
-        "In",
-        "NotIn",
-        "Exists",
-        "DoesNotExist"
-      ],
-      "x-ms-enum": {
-        "name": "Operator",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "In",
-            "value": "In",
-            "description": "The value of the key should be in the given list."
-          },
-          {
-            "name": "NotIn",
-            "value": "NotIn",
-            "description": "The value of the key should not be in the given list."
-          },
-          {
-            "name": "Exists",
-            "value": "Exists",
-            "description": "The value of the key should exist."
-          },
-          {
-            "name": "DoesNotExist",
-            "value": "DoesNotExist",
-            "description": "The value of the key should not exist."
-          }
-        ]
       }
     },
     "Placement.V1.Affinity": {
