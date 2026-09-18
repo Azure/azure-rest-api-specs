@@ -83,7 +83,7 @@ interface SqlResources {
   /**
    * Merges the partitions of a SQL database
    */
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_09_01_preview)
   @action("partitionMerge")
   sqlDatabasePartitionMerge is ArmResourceActionAsyncBase<
     SqlDatabaseGetResults,
