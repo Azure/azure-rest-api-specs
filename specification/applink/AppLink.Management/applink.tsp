@@ -52,7 +52,7 @@ interface AppLinks {
   @doc("Get the details of an Azure Kubernetes Application Network.")
   get is ArmResourceRead<AppLink>;
   @doc("Create an Azure Kubernetes Application Network resource.")
-  createOrReplace is ArmResourceCreateOrReplaceAsync<AppLink>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<AppLink>;
   @doc("Update an Azure Kubernetes Application Network resource.")
   @removed(Versions.v2026_08_01_preview)
   @renamedFrom(Versions.v2026_08_01_preview, "update")
