@@ -190,7 +190,7 @@ alias SandboxStopOperations = ResourceOperations<
   PostSandboxStopErrors
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The controller exposes /count and /stats GET routes plus POST actions with operation-specific bodies and results."
 @tag("sandboxes")
 interface SandboxLifecycleOperations {
   /** Gets the total count of sandboxes. */

@@ -79,7 +79,7 @@ interface EgressPoliciesOperations {
   getEgressPolicy is EgressPolicyGetOperations.ResourceRead<NamedEgressPolicy>;
 
   /** Creates or updates a named egress policy. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The established putEgressPolicy name is retained to keep generated client names deterministic; the operation itself uses the standard Azure.Core ResourceCreateOrReplace signature."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The existing client method mirrors PUT /egressPolicies/{policyId} and is intentionally named putEgressPolicy."
   @summary("Creates or updates a named egress policy.")
   putEgressPolicy is EgressPolicyPutOperations.ResourceCreateOrReplace<NamedEgressPolicy>;
 }

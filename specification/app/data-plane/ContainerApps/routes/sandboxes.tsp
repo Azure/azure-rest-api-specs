@@ -47,6 +47,12 @@ namespace ContainerAppsSandbox {
   /** Errors returned when deleting a sandbox. */
   alias DeleteErrors = UnauthorizedErrorResult | InternalServerErrorResult;
 
+  /** Shared operation traits for creating sandboxes. */
+  alias SandboxCreateOperations = ResourceOperations<
+    DataPlaneStandardTraits,
+    CreateErrors
+  >;
+
   /** Shared operation traits for reading sandboxes. */
   alias SandboxGetOperations = ResourceOperations<
     DataPlaneStandardTraits,
@@ -80,26 +86,22 @@ namespace ContainerAppsSandbox {
     @doc("Lists sandboxes in a scope.")
     list is SandboxListOperations.ResourceList<Sandbox, SandboxListTraits>;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The established wire contract uses POST with CreateSandboxContent and returns the created Sandbox in a 201 response body."
     @doc("Creates a sandbox in a scope.")
-    @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes")
-    @post
-    create is Foundations.Operation<
+    @action("sandboxes")
+    @actionSeparator("/")
+    create is SandboxCreateOperations.ResourceAction<
+      SandboxGroupScope,
       {
-        ...AzureResourceScope;
-
         /** Sandbox create request. */
         @body content: CreateSandboxContent;
       },
-      SandboxCreatedResult,
-      DataPlaneStandardTraits,
-      CreateErrors
+      SandboxCreatedResult
     >;
 
     @doc("Gets a sandbox by identifier.")
     get is SandboxGetOperations.ResourceRead<Sandbox>;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The established wire contract allows both empty 200 and 204 success responses."
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "DELETE /sandboxes/{id} is implemented with both 200 and 204 empty success responses."
     @doc("Deletes a sandbox by identifier.")
     @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes/{id}")
     @delete

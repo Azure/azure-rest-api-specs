@@ -162,8 +162,8 @@ alias PutSandboxPortsErrors =
   | ConflictErrorResult
   | InternalServerErrorResult;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The controller exposes GET, PATCH, PUT, and POST routes for ports, connections, egress policy, and decisions with distinct results."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names mirror implemented routes such as /ports/add, /connections/add, and /egresspolicy."
 @tag("sandboxes")
 interface SandboxNetworkingOperations {
   /** Gets egress decisions for a sandbox. */

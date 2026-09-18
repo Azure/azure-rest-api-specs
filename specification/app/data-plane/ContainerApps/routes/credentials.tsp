@@ -50,7 +50,6 @@ model PutCredentialResult {
 /** Error responses for the putCredential operation. */
 alias PutCredentialErrors = BadRequestErrorResult;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, query parameters, and route shapes."
 @tag("credentials")
 interface CredentialsOperations {
   /** Deletes a credential in a sandbox group. */
@@ -69,7 +68,8 @@ interface CredentialsOperations {
   getCredential is CredentialGetOperations.ResourceRead<SandboxGroupCredential>;
 
   /** Creates or updates a credential in a sandbox group. If the credential already exists, it will be updated; otherwise, a new credential will be created. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The existing client method mirrors PUT /credentials/{credentialName} and is intentionally named putCredential."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "PUT /credentials/{credentialName} accepts credential settings and always returns 200 with the stored credential."
   @summary("Creates or updates a credential in a sandbox group.\nIf the credential already exists, it will be updated; otherwise, a new credential will be created.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/credentials/{credentialName}")
   @put

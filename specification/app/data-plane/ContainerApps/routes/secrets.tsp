@@ -98,8 +98,8 @@ alias PutSecretErrors =
   | UnauthorizedErrorResult
   | InternalServerErrorResult;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The controller exposes /keys and /peek subroutes, while PUT may return either 200 or 201."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names mirror the implemented /keys, /peek, and PUT secret endpoints."
 @tag("secrets")
 interface SecretsOperations {
   /** Deletes an entire secret. */

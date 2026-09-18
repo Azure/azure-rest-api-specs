@@ -205,7 +205,7 @@ interface ConnectionsOperations {
   >;
 
   /** Creates a new connection. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core standard operations cannot preserve the existing POST route, request body, 200 and 201 responses, and custom error status shapes without changing the established wire contract."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "CreateConnectionAsync is a custom POST operation with a DataPlaneConnectionCreateRequest body and implementation-specific 200-or-201 behavior based on whether a connection was newly created."
   @summary("Creates a new connection.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/connections")
   @post
@@ -261,8 +261,8 @@ interface ConnectionsOperations {
   >;
 
   /** Updates the policy rules and tool settings on a connection. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This connection subresource operation uses the approved putConnectionPolicyRules name instead of the standard replace prefix."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core standard operations cannot preserve this existing policy-rules route, request body, and custom success/error response shapes without changing the established wire contract."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "PUT {id}/policyRules is a custom policyRules subresource update endpoint, so the operation name intentionally mirrors the HTTP method and route."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "UpdatePolicyRulesAsync is a custom PUT subresource operation that accepts UpdatePolicyRulesRequest, returns the updated connection with 200, maps policy and tool validation failures to 400, and returns 404 when the connection is not found."
   @summary("Updates the policy rules and tool settings on a connection.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/connections/{id}/policyRules")
   @put

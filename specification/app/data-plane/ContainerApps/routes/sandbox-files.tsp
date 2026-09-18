@@ -107,7 +107,7 @@ alias SandboxFileWriteOperations = ResourceOperations<
   PostSandboxFileErrors
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The controller uses path query parameters on shared /files routes, streams file content, and returns operation-specific file results."
 @tag("sandboxes")
 interface SandboxFilesOperations {
   /** Deletes a file or directory in a running sandbox. If the target is a directory, the `recursive` query parameter must be set to true to delete it and its contents. */
@@ -218,7 +218,7 @@ interface SandboxFilesOperations {
   >;
 
   /** Writes a file to a running sandbox. The file is streamed directly from the request body. */
-  #suppress "@azure-tools/typespec-azure-core/byos" "The content is a byte stream for uploading a file into the sandbox, not a BYOS model."
+  #suppress "@azure-tools/typespec-azure-core/byos" "PUT /sandboxes/{id}/files reads raw file bytes directly from Request.Body."
   @summary("Writes a file to a running sandbox. The file is streamed directly from the request body.")
   @action("files")
   @actionSeparator("/")

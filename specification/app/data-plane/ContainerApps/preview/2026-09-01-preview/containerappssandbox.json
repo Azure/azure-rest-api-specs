@@ -1656,13 +1656,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "body",
@@ -1676,7 +1688,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The HTTP 201 response for the postDiskImage operation.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/DiskImage"
             }
@@ -2598,13 +2610,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "content",
@@ -2618,7 +2642,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Successful Sandbox create response.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Sandbox"
             }
