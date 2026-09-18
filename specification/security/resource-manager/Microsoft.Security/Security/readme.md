@@ -77,6 +77,29 @@ directive:
 
 ``` yaml
 suppressions:
+  - code: OperationsAPIImplementation
+    from: serviceEntitlementSettings.json
+    reason: The provider-wide Microsoft.Security operations endpoint is defined by the separate OperationsAPI project and included in package-composite-v3.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: serviceEntitlementSettings.json
+    where: $.definitions.ServiceEntitlementSettingOperationStatus
+    reason: This is the standard ArmOperationStatus LRO status monitor, not an ARM resource. Its status, timing, progress, and error fields follow the polling contract.
+  - code: BodyTopLevelProperties
+    from: serviceEntitlementSettings.json
+    where: $.definitions.ServiceEntitlementSettingOperationStatus
+    reason: This is the standard ArmOperationStatus LRO status monitor, not an ARM resource. Its status, timing, progress, and error fields follow the polling contract.
+  - code: AllTrackedResourcesMustHaveDelete
+    from: serviceEntitlementSettings.json
+    where: $.definitions.ServiceEntitlementSetting
+    reason: The resource has DELETE. Its operationResults GET returns the same resource as an LRO final result, not as a second tracked resource.
+  - code: TrackedResourcePatchOperation
+    from: serviceEntitlementSettings.json
+    where: $.definitions.ServiceEntitlementSetting
+    reason: The resource has PATCH with tags support. Its operationResults GET returns the same resource as an LRO final result, not as a second tracked resource.
+  - code: GetResponseCodes
+    from: serviceEntitlementSettings.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlementSettings/{serviceEntitlementSettingName}/operationResults/{operationId}"].get
+    reason: The Location polling endpoint returns 202 while pending, 200 with the resource after PATCH, and 204 after DELETE. The 204 response is intentional for an operation with no final response body.
   - code: ResourceNameRestriction
     from: Microsoft.Security\stable\2024-01-01\pricings.json
     reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
@@ -774,9 +797,24 @@ override-info:
   title: SecurityCenter
 ```
 
+### Tag: package-preview-2026-09-16
+
+These settings select the service entitlement settings API without the other Security API versions.
+
+``` yaml $(tag) == 'package-preview-2026-09-16'
+input-file:
+- preview/2026-09-16-preview/serviceEntitlementSettings.json
+```
+
 ### Tag: package-composite-v3
 
 These settings apply only when `--tag=package-composite-v3` is specified on the command line.
+
+Service entitlement settings uses resource-scoped `operationResults` and `operationStatuses`
+paths, following the resource-scoped polling pattern of `ServiceEntitlementsAPI`. These paths
+are distinct from the provider-wide operations, so no composite path transformation is needed.
+The service must keep both polling endpoints accessible after deleting the setting; ARM review
+approval for this resource-scoped placement is required.
 
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
@@ -815,6 +853,7 @@ input-file:
 - stable/2026-01-01/privateLinks.json
 - stable/2026-08-01/datascanners.json
 - preview/2026-09-01-preview/serviceEntitlements.json
+- preview/2026-09-16-preview/serviceEntitlementSettings.json
 
 # Autorest suppressions
 suppressions:
