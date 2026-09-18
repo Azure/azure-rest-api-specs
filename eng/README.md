@@ -71,12 +71,12 @@ Below are code convention we strive to follow in `eng` directory:
   unmanaged-content exclusions. Import organization and package.json sorting are
   intentionally disabled; lint/type checks still report unused imports.
 - Swagger/OpenAPI definitions and examples under `specification/**/*.json` are
-  excluded from formatting, including editor and explicit CLI requests.
+  excluded from Oxfmt. The existing Swagger PrettierCheck and custom Prettier
+  plugin remain unchanged; Prettier is retained at the root for these JSON files.
   TypeSpec validation retains `tsp format` for `.tsp` files and uses Oxfmt for
   `tspconfig.yaml` with a line width of 80.
 - Install the recommended Oxc VS Code extension for tooling formatting, and retain
-  the TypeSpec extension for `.tsp` files. Prettier can still appear as an upstream
-  dependency or bundled implementation detail; it is not a repository formatter.
+  the TypeSpec extension for `.tsp` files.
 
 [pnpm]: https://pnpm.io
 [Design guidelines for spec repos validation tooling]: https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/1153/Design-guidelines-for-spec-repos-validation-tooling

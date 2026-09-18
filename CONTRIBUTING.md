@@ -68,6 +68,7 @@ If you want to contribute to the repository, follow these steps:
 
 Every PR in this repo will go through a series of PR checks, including:
 
+- Format - checks formatting of repository tooling in `.github` and `eng/tools` using Oxfmt. Run `pnpm format` from the repository root to fix issues.
 - Breaking Changes - checks for incompatible changes in an existing api-version
 - Breaking Changes (Cross-Version) - checks for changes in a new api-version that are incompatible with prior versions
 - LintDiff - checks the new or changed portions of the API for compliance with the Azure REST API Guidelines and API Style Guide
@@ -79,7 +80,7 @@ Every PR in this repo will go through a series of PR checks, including:
 - PoliCheck -
 - CredScan -
 - SpellCheck -
-- Format - checks formatting of repository tooling in `.github` and `eng/tools` using Oxfmt. Run `pnpm format` from the repository root to fix issues. Specification JSON is not formatted.
+- PrettierCheck - 
 - SDK Breaking Change -
 
 When any of these PR checks fails it will post a comment to the PR with links to information on how to resolve the problem.
