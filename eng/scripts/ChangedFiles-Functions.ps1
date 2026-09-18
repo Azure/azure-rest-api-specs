@@ -49,7 +49,7 @@ function Get-ChangedFilesUnderSpecification($changedFiles = (Get-ChangedFiles)) 
 function Get-ChangedCoreFiles($changedFiles = (Get-ChangedFiles)) {
   $rootFiles = @(
     ".gitattributes",
-    ".prettierrc.json",
+    ".oxfmtrc.json",
     "pnpm-lock.yaml",
     "pnpm-workspace.yaml",
     "package.json",

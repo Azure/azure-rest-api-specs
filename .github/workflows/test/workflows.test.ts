@@ -144,4 +144,42 @@ describe("workflow files", () => {
       await rm(folder, { recursive: true, force: true });
     }
   });
+
+  it("runs formatting once, outside the package test matrices", async () => {
+    const files = (await readdir(workflowsDir)).filter((file) => /\.ya?ml$/.test(file));
+    const formatSteps: string[] = [];
+    for (const file of files) {
+      const workflow = await readWorkflow(file);
+      for (const [name, job] of Object.entries(workflow.jobs)) {
+        for (const step of job.steps ?? []) {
+          if (/\bpnpm\s+(?:run\s+)?format(?::check(?::ci)?)?\b/.test(step.run ?? "")) {
+            formatSteps.push(`${file}/${name}`);
+            expect(job.strategy).toBeUndefined();
+            expect(step.run).toBe("pnpm run format:check");
+          }
+        }
+      }
+    }
+    expect(formatSteps).toEqual(["format.yaml/format"]);
+  });
+
+  it("triggers shared formatting for all package and formatter configuration changes", async () => {
+    const workflow = await readWorkflow("format.yaml");
+    const paths = [
+      ".github/**",
+      "eng/tools/**",
+      ".oxfmtrc.json",
+      ".editorconfig",
+      ".gitignore",
+      "package.json",
+      "pnpm-lock.yaml",
+      "pnpm-workspace.yaml",
+    ];
+    expect(workflow.on?.pull_request?.paths).toEqual(paths);
+    expect(workflow.on?.push?.paths).toEqual(paths);
+    expect(workflow.permissions).toEqual({ contents: "read" });
+    expect(Object.keys(workflow.jobs)).toEqual(["format"]);
+    expect(workflow.jobs.format.steps?.[0].with?.["sparse-checkout"]).toBe(".github\neng/tools\n");
+    expect(workflow.jobs.format.steps?.[1].with?.["install-command"]).toBe("pnpm ci");
+  });
 });
