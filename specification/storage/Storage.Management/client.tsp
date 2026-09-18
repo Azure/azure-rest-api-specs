@@ -1486,7 +1486,7 @@ enum ProvisioningStateEnum {
 @@alternateType(
   Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
   Microsoft.Storage.UserAssignedIdentity,
-  "java,python"
+  "java,python,javascript,go"
 );
 
 @@alternateType(
