@@ -87,7 +87,13 @@ describe("execNodeBin", () => {
       await mkdir(cwd);
       const args = ["a b", '{"value":"quoted"}', "../**/*.tsp", "", "--", "a&b|c"];
       const result = await execNodeBin("@test/cli", ["cli", ...args], { cwd });
-      expect(JSON.parse(result.stdout)).toEqual({
+      const output = JSON.parse(result.stdout) as {
+        args: string[];
+        cwd: string;
+        node: string;
+      };
+      // Windows can report the same directory through its short (8.3) path.
+      expect({ ...output, cwd: await realpath(output.cwd) }).toEqual({
         args,
         cwd: await realpath(cwd),
         node: process.execPath,
