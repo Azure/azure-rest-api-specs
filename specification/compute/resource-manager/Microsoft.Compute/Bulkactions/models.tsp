@@ -261,6 +261,7 @@ model PriorityProfile {
   @doc("Eviction Policy to follow when evicting Spot VMs. Available from 2026-04-06-preview.")
   evictionPolicy?: EvictionPolicy;
 
+  @removed(Microsoft.Compute.Versions.`2026-10-06-preview`)
   @doc("The allocation strategy for VM size selection")
   allocationStrategy?: AllocationStrategy;
 }
@@ -415,6 +416,10 @@ model ExecutionParameters {
   @added(Microsoft.Compute.Versions.`2026-08-06-preview`)
   @doc("Capacity recommendation parameters for the request. When provided on an executeStart request, the service computes placement recommendations only if the VM fails to start due to an allocation failure; the recommendations for the desired sizes and locations are then surfaced in the operation's capacityRecommendation response.")
   capacityRecommendationParameters?: CapacityRecommendationParameters;
+
+  @added(Microsoft.Compute.Versions.`2026-10-06-preview`)
+  @doc("Additional parameters for the request.")
+  additionalCreateParameters?: string;
 }
 
 @added(Microsoft.Compute.Versions.`2026-08-06-preview`)
