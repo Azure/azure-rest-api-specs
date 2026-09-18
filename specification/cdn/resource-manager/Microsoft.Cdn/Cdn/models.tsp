@@ -62,6 +62,8 @@ union SecretType {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_08_01_preview)
   MtlsCertificateChain: "MtlsCertificateChain",
 }
 
@@ -381,6 +383,8 @@ union AfdCustomizedCipherSuiteForTls13 {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_01_preview)
 union MtlsScenarioType {
   string,
   ClientCertificateRequiredAndValidated: "ClientCertificateRequiredAndValidated",
@@ -437,6 +441,8 @@ union EnabledState {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_01_preview)
 union EnforceMtlsEnabledState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2784,6 +2790,8 @@ model AFDDomainUpdatePropertiesParameters {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_08_01_preview)
   mtlsSettings?: AFDDomainMtlsParameters;
 
   /**
@@ -2863,6 +2871,8 @@ model AFDDomainHttpsCustomizedCipherSuiteSet {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_01_preview)
 @discriminator("scenario")
 model AFDDomainMtlsParameters {
   /**
@@ -2943,6 +2953,8 @@ model AFDEndpointPropertiesUpdateParameters {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_08_01_preview)
   enforceMtls?: EnforceMtlsEnabledState;
 }
 
@@ -6646,6 +6658,8 @@ scalar Fqdn extends string;
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_01_preview)
 model ClientCertificateRequiredAndValidatedAdvancedSettings
   extends AFDDomainMtlsParameters {
   /**
@@ -6675,6 +6689,8 @@ model ClientCertificateRequiredAndValidatedAdvancedSettings
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_01_preview)
 model ClientCertificateRequiredAndOriginValidatesAdvancedSettings
   extends AFDDomainMtlsParameters {
   /**
@@ -6689,6 +6705,8 @@ model ClientCertificateRequiredAndOriginValidatesAdvancedSettings
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_01_preview)
 model ClientCertificateValidatedIfPresentedAdvancedSettings
   extends AFDDomainMtlsParameters {
   /**
@@ -6718,6 +6736,8 @@ model ClientCertificateValidatedIfPresentedAdvancedSettings
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_01_preview)
 model CompleteMtlsPassthroughToOriginAdvancedSettings
   extends AFDDomainMtlsParameters {
   /**
@@ -6971,6 +6991,8 @@ model AzureFirstPartyManagedCertificateParameters extends SecretParameters {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_01_preview)
 model AfdSecretMtlsCertificateChain extends SecretParameters {
   /**
    * Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/secrets/{secretName}
