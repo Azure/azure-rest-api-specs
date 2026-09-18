@@ -86,6 +86,28 @@ model FleetManagedNamespaceStatus {
   lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
+@added(Versions.v2026_11_02_preview)
+@doc("One managed namespace credential result item.")
+model FleetManagedNamespaceCredentialResult {
+  @visibility(Lifecycle.Read)
+  @doc("The name of the credential.")
+  name?: string;
+
+  @secret
+  @visibility(Lifecycle.Read)
+  @doc("Base64-encoded Kubernetes configuration file.")
+  value?: bytes;
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("The managed namespace credential results.")
+model FleetManagedNamespaceCredentialResults {
+  @visibility(Lifecycle.Read)
+  @doc("Array of base64-encoded Kubernetes configuration files.")
+  @identifiers(#["name"])
+  kubeconfigs?: FleetManagedNamespaceCredentialResult[];
+}
+
 @doc("The namespace properties for the fleet managed namespace.")
 @added(Versions.v2025_08_01_preview)
 model ManagedNamespaceProperties {
