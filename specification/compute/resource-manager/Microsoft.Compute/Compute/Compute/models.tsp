@@ -5610,12 +5610,12 @@ model BootDiagnosticsInstanceView {
 }
 
 /**
- * Specifies a FlexProfile for VM size. Create and update requests that include flexProfile must omit hardwareProfile.vmSize. Requests that set both are rejected with an InvalidParameter error. Azure may deploy a compatible alternative VM size based on capacity and placement considerations. The deployed size is returned in hardwareProfile.vmSize.
+ * Specifies the FlexProfile for a virtual machine. When set, Azure may deploy a compatible alternative VM size based on capacity and placement considerations, and the deployed size is returned in hardwareProfile.vmSize. See the properties.flexProfile description for the full usage rules, including mutual exclusion with hardwareProfile.vmSize.
  */
 @added(Versions.v2026_09_01)
 model FlexProfile {
   /**
-   * Specifies the preferred VM size, for example Standard_D4s_v3. Requests that also set hardwareProfile.vmSize are rejected with an InvalidParameter error. Azure may deploy a compatible alternative size based on capacity and placement considerations. Supported VM families for FlexProfile may vary by region. The recommended way to get the list of available sizes is using these APIs: [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes), [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/resourceskus/list), [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes).
+   * Specifies the preferred VM size, for example Standard_D4s_v3. Azure may deploy a compatible alternative size based on capacity and placement considerations. Supported VM families for FlexProfile may vary by region. The recommended way to get the list of available sizes is using these APIs: [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes), [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/resourceskus/list), [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes).
    */
   preferredVMSize: string;
 }
@@ -6743,7 +6743,7 @@ model VirtualMachineProperties {
   hardwareProfile?: HardwareProfile;
 
   /**
-   * Specifies a FlexProfile for VM size. Create and update requests that include flexProfile must omit hardwareProfile.vmSize, even when it matches the currently deployed size. Requests that set both are rejected with an InvalidParameter error. Azure may deploy a compatible alternative VM size based on capacity and placement considerations. Responses for a VM with FlexProfile include both flexProfile.preferredVMSize, which records the requested preferred size, and hardwareProfile.vmSize, which reports the deployed size. When using a GET response to construct a PUT or PATCH request, remove hardwareProfile.vmSize if the request includes flexProfile. FlexProfile may not be supported with VM properties that constrain placement.
+   * Specifies a FlexProfile for VM size. Create and update requests that include flexProfile must omit hardwareProfile.vmSize, even when it matches the currently deployed size. Requests that set both are rejected with an InvalidParameter error. Azure may deploy a compatible alternative VM size based on capacity and placement considerations. Responses for a VM with FlexProfile include both flexProfile.preferredVMSize, which records the requested preferred size, and hardwareProfile.vmSize, which reports the deployed size. When using a GET response to construct a PUT or PATCH request, remove hardwareProfile.vmSize if the request includes flexProfile. To stop using FlexProfile, submit a PATCH request that sets hardwareProfile.vmSize and omits flexProfile. This clears flexProfile and pins the virtual machine to the specified size. If that size differs from the currently deployed size, normal resize behavior applies and the virtual machine may be restarted. FlexProfile may not be supported with VM properties that constrain placement.
    */
   @added(Versions.v2026_09_01)
   flexProfile?: FlexProfile;
