@@ -56,8 +56,7 @@ pnpm format:check
 pnpm format
 ```
 
-Tooling formatting uses Oxfmt and excludes Swagger JSON. See
-[`Swagger PrettierCheck`](#swagger-prettiercheck) for the separate Swagger CI policy.
+Tooling formatting uses Oxfmt and excludes Swagger JSON.
 
 ## `CredScan`
 
