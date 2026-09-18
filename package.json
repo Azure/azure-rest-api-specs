@@ -2,7 +2,9 @@
   "name": "azure-rest-api-specs",
   "packageManager": "pnpm@11.8.0",
   "scripts": {
-    "install-pnpm": "node ./eng/scripts/install-pnpm.mts"
+    "install-pnpm": "node ./eng/scripts/install-pnpm.mts",
+    "lint": "oxlint .",
+    "lint:fix": "pnpm lint --fix"
   },
   "devDependencies": {
     "@autorest/openapi-to-typespec": "catalog:",
@@ -45,6 +47,8 @@
     "@typespec/versioning": "catalog:",
     "@typespec/xml": "catalog:",
     "oav": "catalog:",
+    "oxlint": "catalog:",
+    "oxlint-tsgolint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
