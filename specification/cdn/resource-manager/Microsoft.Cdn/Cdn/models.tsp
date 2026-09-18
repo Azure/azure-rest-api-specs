@@ -645,6 +645,8 @@ union DeliveryRuleActionName {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_08_01_preview)
   EdgeAction: "EdgeAction",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1685,6 +1687,8 @@ union DeliveryRuleActionParametersType {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_08_01_preview)
   DeliveryRuleEdgeActionParameters: "DeliveryRuleEdgeActionParameters",
 }
 
@@ -2195,6 +2199,8 @@ union DestinationProtocol {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_01_preview)
 union InvocationPoint {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -8196,6 +8202,8 @@ model OriginGroupOverrideActionParameters extends DeliveryRuleActionParameters {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_01_preview)
 model EdgeAction extends DeliveryRuleAction {
   /**
    * Defines the parameters for the action.
@@ -8214,6 +8222,8 @@ model EdgeAction extends DeliveryRuleAction {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_01_preview)
 model DeliveryRuleEdgeActionParameters extends DeliveryRuleActionParameters {
   /**
    * defines the edge action that will be invoked.
