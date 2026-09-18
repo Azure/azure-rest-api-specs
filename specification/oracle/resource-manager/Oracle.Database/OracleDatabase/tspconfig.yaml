@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/oracledatabase"
+    default: "sdk/oracle"
   "dependencies":
     default: ""
 
@@ -17,7 +17,7 @@ options:
     output-file: "{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-oracledatabase"
+    emitter-output-dir: "{output-dir}/sdk/oracledatabase/arm-oracledatabase"
     package-details:
       name: "@azure/arm-oracledatabase"
     flavor: azure
@@ -25,7 +25,7 @@ options:
     additionalDirectories:
       - "specification/oracle/resource-manager/Oracle.Database/OracleDatabase/models"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-oracledatabase"
+    emitter-output-dir: "{output-dir}/sdk/oracledatabase/azure-resourcemanager-oracledatabase"
     namespace: "com.azure.resourcemanager.oracledatabase"
     service-name: "Oracle Database"
     flavor: azure
@@ -40,7 +40,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-oracledatabase"
+    emitter-output-dir: "{output-dir}/sdk/oracledatabase/azure-mgmt-oracledatabase"
     namespace: azure.mgmt.oracledatabase
     generate-test: true
     generate-sample: true

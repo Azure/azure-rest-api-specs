@@ -6,17 +6,14 @@ on:
       - main
     paths:
       - .github/**
-      # Root package.json pins TypeSpec Azure packages verified by .github alignment tests.
-      - package.json
   pull_request:
     paths:
       - .github/**
-      # Root package.json pins TypeSpec Azure packages verified by .github alignment tests.
-      - package.json
   workflow_dispatch:
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
   test:
@@ -38,6 +35,35 @@ jobs:
           sparse-checkout: |
             .github
 
+      - if: ${{ github.event_name == 'pull_request' && matrix.folder == '.github' && matrix.os == 'ubuntu' }}
+        name: Require compiled agentic workflow locks
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              ...context.repo,
+              pull_number: context.payload.pull_request.number,
+              per_page: 100,
+            });
+            const changed = new Map(files.map(({ filename, status }) => [filename, status]));
+            const sources = files.filter(({ filename }) =>
+              /^\.github\/workflows\/[^/]+\.md$/.test(filename),
+            );
+            const invalid = sources.filter(({ filename, status }) => {
+              const lockStatus = changed.get(filename.replace(/\.md$/, ".lock.yml"));
+              return status === "removed"
+                ? lockStatus !== "removed"
+                : !lockStatus || lockStatus === "removed";
+            });
+
+            if (invalid.length > 0) {
+              core.setFailed(
+                `Update the compiled lock for each changed agentic workflow source:\n${invalid
+                  .map(({ filename, status }) => `  - ${filename} (${status})`)
+                  .join("\n")}`,
+              );
+            }
+
       - if: ${{ matrix.folder == '.github' }}
         name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
@@ -49,7 +75,7 @@ jobs:
           script: |
             const { join } = await import("path");
             const { pathToFileURL } = await import("url");
-            const fullPath = join(process.env.GITHUB_WORKSPACE, ".github", "workflows", "src", "github-test.js");
+            const fullPath = join(process.env.GITHUB_WORKSPACE, ".github", "workflows", "src", "github-test.ts");
             const { default: importAllModules } = await import(pathToFileURL(fullPath).href);
             await importAllModules({ core });
 
@@ -58,13 +84,12 @@ jobs:
         with:
           # actions/github-script@v8 uses Node 24
           node-version: 24.x
-          working-directory: ./${{ matrix.folder }}
 
-      - run: npm run test:ci
+      - run: pnpm run test:ci
 
-      - run: npm run lint
+      - run: pnpm run lint
 
-      - run: npm run format:check:ci
+      - run: pnpm run format:check:ci
 
       # Content copied from https://raw.githubusercontent.com/rhysd/actionlint/2ab3a12c7848f6c15faca9a92612ef4261d0e370/.github/actionlint-matcher.json
       - if: ${{ matrix.folder == '.github' && matrix.os == 'ubuntu'}}
