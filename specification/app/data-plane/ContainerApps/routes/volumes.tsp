@@ -190,7 +190,7 @@ alias PutVolumeFileErrors =
   | PreconditionFailedErrorResult
   | InternalServerErrorResult;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The controller exposes /count, /fork, and file subroutes with streamed content, query paths, and operation-specific statuses."
 @tag("volumes")
 interface VolumesOperations {
   /** Deletes a volume by name. */
@@ -305,7 +305,7 @@ interface VolumesOperations {
   >;
 
   /** Creates a new volume. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names are derived from the established source routes to keep generated names deterministic."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The existing client method mirrors PUT /volumes/{volumeName} and is intentionally named putVolume."
   @summary("Creates a new volume.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes/{volumeName}")
   @put
@@ -325,7 +325,7 @@ interface VolumesOperations {
   >;
 
   /** Upload a file to a volume. */
-  #suppress "@azure-tools/typespec-azure-core/byos" "The content is a byte stream for uploading a file to the volume, not a BYOS model."
+  #suppress "@azure-tools/typespec-azure-core/byos" "PUT /volumes/{volumeName}/files/upload reads raw file bytes directly from Request.Body."
   @summary("Upload a file to a volume.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes/{volumeName}/files/upload")
   @put

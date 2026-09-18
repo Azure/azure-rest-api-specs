@@ -187,20 +187,32 @@
         "tags": [
           "connections"
         ],
-        "summary": "Creates a new connection.",
+        "summary": "Creates or updates a connection.",
         "description": "Creates a new connection.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "body",
@@ -214,13 +226,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The HTTP 200 response for the postConnection operation.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Connection"
             }
           },
           "201": {
-            "description": "The HTTP 201 response for the postConnection operation.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Connection"
             }
@@ -1656,13 +1668,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "body",
@@ -1676,7 +1700,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The HTTP 201 response for the postDiskImage operation.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/DiskImage"
             }
@@ -2598,13 +2622,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure subscription identifier.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "Sandbox group name.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "content",
@@ -2618,7 +2654,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Successful Sandbox create response.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Sandbox"
             }
@@ -12369,22 +12405,9 @@
         "body"
       ]
     },
-    "PostConnectionResult200": {
+    "PostConnectionResult": {
       "type": "object",
-      "description": "The HTTP 200 response for the postConnection operation.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Connection",
-          "description": "The returned connection."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "PostConnectionResult201": {
-      "type": "object",
-      "description": "The HTTP 201 response for the postConnection operation.",
+      "description": "The successful response for the postConnection operation.",
       "properties": {
         "body": {
           "$ref": "#/definitions/Connection",

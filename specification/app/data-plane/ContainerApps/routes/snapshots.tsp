@@ -63,7 +63,7 @@ alias SnapshotGetOperations = ResourceOperations<
   GetSnapshotErrors
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The controller exposes a /count route, and DELETE may return either 202 or 204."
 @tag("snapshots")
 interface SnapshotsOperations {
   /** Deletes a snapshot by ID. */

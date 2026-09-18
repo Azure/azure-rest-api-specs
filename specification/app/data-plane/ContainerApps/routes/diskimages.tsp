@@ -11,6 +11,12 @@ alias DeleteDiskImageErrors =
   | ConflictErrorResult
   | InternalServerErrorResult;
 
+/** Shared operation traits for creating disk images. */
+alias DiskImageCreateOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostDiskImageErrors
+>;
+
 /** Shared operation traits for deleting disk images. */
 alias DiskImageDeleteOperations = ResourceOperations<
   DataPlaneStandardTraits,
@@ -98,7 +104,6 @@ alias PostDiskImageErrors =
   | TooManyRequestsErrorResult
   | InternalServerErrorResult;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, query parameters, and route shapes."
 @tag("DiskImages")
 interface DiskImagesOperations {
   /** Deletes a disk image by ID. */
@@ -129,17 +134,14 @@ interface DiskImagesOperations {
 
   /** Creates a new disk image from an OCI image reference. */
   @summary("Creates a new disk image from an OCI image reference.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages")
-  @post
-  postDiskImage is Foundations.Operation<
+  @action("diskimages")
+  @actionSeparator("/")
+  postDiskImage is DiskImageCreateOperations.ResourceAction<
+    SandboxGroupScope,
     {
-      ...AzureResourceScope;
-
       /** The source and metadata for the new disk image. */
       @body body: CreateDiskImageContent;
     },
-    PostDiskImageResult,
-    DataPlaneStandardTraits,
-    PostDiskImageErrors
+    PostDiskImageResult
   >;
 }

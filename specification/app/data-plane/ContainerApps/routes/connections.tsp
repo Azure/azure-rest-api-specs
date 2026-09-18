@@ -12,6 +12,12 @@ alias DeleteConnectionErrors =
   | ConflictErrorResult
   | InternalServerErrorResult;
 
+/** Shared operation traits for creating connections. */
+alias ConnectionCreateOperations = ResourceOperations<
+  DataPlaneStandardTraits,
+  PostConnectionErrors
+>;
+
 /** Query parameters for deleting a connection. */
 alias DeleteConnectionTraits = QueryParametersTrait<
   {
@@ -74,26 +80,15 @@ alias ConnectionGetOperations = ResourceOperations<
   GetConnectionErrors
 >;
 
-/** The HTTP 200 response for the postConnection operation. */
-model PostConnectionResult200 {
-  /** The HTTP 200 status code. */
-  @statusCode statusCode: 200;
+/** The successful response for the postConnection operation. */
+model PostConnectionResult {
+  /** The HTTP success status code. */
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "POST /connections is implemented with both 200 and 201 success responses."
+  @statusCode statusCode: 200 | 201;
 
   /** The returned connection. */
   @body body: Connection;
 }
-
-/** The HTTP 201 response for the postConnection operation. */
-model PostConnectionResult201 {
-  /** The HTTP 201 status code. */
-  @statusCode statusCode: 201;
-
-  /** The returned connection. */
-  @body body: Connection;
-}
-
-/** Successful responses for the postConnection operation. */
-alias PostConnectionResult = PostConnectionResult200 | PostConnectionResult201;
 
 /** Error responses for the postConnection operation. */
 alias PostConnectionErrors =
@@ -205,20 +200,16 @@ interface ConnectionsOperations {
   >;
 
   /** Creates a new connection. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core standard operations cannot preserve the existing POST route, request body, 200 and 201 responses, and custom error status shapes without changing the established wire contract."
-  @summary("Creates a new connection.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/connections")
-  @post
-  postConnection is Foundations.Operation<
+  @summary("Creates or updates a connection.")
+  @action("connections")
+  @actionSeparator("/")
+  postConnection is ConnectionCreateOperations.ResourceAction<
+    SandboxGroupScope,
     {
-      ...AzureResourceScope;
-
       /** The connection configuration to create. */
       @body body: CreateConnectionContent;
     },
-    PostConnectionResult,
-    DataPlaneStandardTraits,
-    PostConnectionErrors
+    PostConnectionResult
   >;
 
   /** Authorizes a connection with parameter values. */
@@ -261,8 +252,8 @@ interface ConnectionsOperations {
   >;
 
   /** Updates the policy rules and tool settings on a connection. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This connection subresource operation uses the approved putConnectionPolicyRules name instead of the standard replace prefix."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core standard operations cannot preserve this existing policy-rules route, request body, and custom success/error response shapes without changing the established wire contract."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The existing client method mirrors PUT /connections/{id}/policyRules and is intentionally named putConnectionPolicyRules."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "PUT /connections/{id}/policyRules accepts policy settings and returns the updated connection with operation-specific errors."
   @summary("Updates the policy rules and tool settings on a connection.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/connections/{id}/policyRules")
   @put

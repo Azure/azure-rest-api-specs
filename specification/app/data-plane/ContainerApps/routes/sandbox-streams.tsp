@@ -21,7 +21,7 @@ model GetSandboxProcessesStreamResult {
   @statusCode statusCode: 200;
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operations preserve the source OpenAPI response status codes, bare arrays, and route shapes."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "These GET routes upgrade to WebSocket streams and do not return standard resource representations."
 @tag("sandboxes")
 interface SandboxStreamsOperations {
   /** Starts an interactive exec session via WebSocket in a running sandbox. */
