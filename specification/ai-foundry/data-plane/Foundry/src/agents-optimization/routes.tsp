@@ -28,7 +28,7 @@ interface AgentOptimizationJobs {
   >;
 
   /**
-   * Estimates validation dataset rows, per-stage model call volumes, and cost bands without submitting the job.
+   * Estimates validation-set rows, per-stage model call volumes, and cost bands without submitting the job.
    */
   @summary("Estimate an agent optimization job")
   @route("agent_optimization_jobs:estimate")
