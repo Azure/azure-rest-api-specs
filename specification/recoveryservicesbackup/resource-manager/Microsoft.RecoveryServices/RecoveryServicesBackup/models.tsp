@@ -1543,16 +1543,21 @@ enum ProtectableContainerType {
 /**
  * Recovery point tier type.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum RecoveryPointTierType {
-  Invalid,
-  InstantRP,
-  HardenedRP,
-  ArchivedRP,
+union RecoveryPointTierType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  "Invalid",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  "InstantRP",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  "HardenedRP",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  "ArchivedRP",
 
   /** Instant Access snapshot tier, retained for the policy's instantAccessDurationMinutes. */
   @added(Versions.v2026_10_01)
-  IASnapshotRP,
+  "IASnapshotRP",
+
+  string,
 }
 
 /**
