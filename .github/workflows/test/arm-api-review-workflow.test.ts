@@ -84,17 +84,16 @@ function parseJsonRecord(content: string): Record<string, unknown> {
   return parsed;
 }
 
-/**
- * @param {string} content
- * @returns {{ primary: string; threatDetection: string }}
- */
-function parseArmApiReviewerModels(content) {
+function parseArmApiReviewerModels(content: string): {
+  primary: string;
+  threatDetection: string;
+} {
   const match = /^---\r?\n([\s\S]*?)\r?\n---/.exec(content);
   if (!match) {
     throw new Error(`Expected workflow frontmatter in ${SOURCE_FILE}`);
   }
 
-  const frontmatter = /** @type {unknown} */ (load(match[1]));
+  const frontmatter = /** @type {unknown} */ load(match[1]);
   if (!isRecord(frontmatter)) {
     throw new Error(`Expected workflow frontmatter object in ${SOURCE_FILE}`);
   }
