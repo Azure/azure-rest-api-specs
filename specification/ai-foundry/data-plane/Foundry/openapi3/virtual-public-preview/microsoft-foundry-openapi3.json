@@ -16346,7 +16346,7 @@
         }
       }
     },
-    "/evaluators/{name}/improvement_jobs/{job_id}": {
+    "/evaluators/{name}/improvement_jobs/{jobId}": {
       "get": {
         "operationId": "Evaluators_getImprovementJob",
         "summary": "Get an evaluator improvement job",
@@ -16374,7 +16374,7 @@
             }
           },
           {
-            "name": "job_id",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "description": "The evaluator improvement job identifier.",
@@ -16471,7 +16471,7 @@
             }
           },
           {
-            "name": "job_id",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "description": "The evaluator improvement job identifier.",
@@ -16525,7 +16525,7 @@
         }
       }
     },
-    "/evaluators/{name}/improvement_jobs/{job_id}:cancel": {
+    "/evaluators/{name}/improvement_jobs/{jobId}:cancel": {
       "post": {
         "operationId": "Evaluators_cancelImprovementJob",
         "summary": "Cancel an evaluator improvement job",
@@ -16553,7 +16553,7 @@
             }
           },
           {
-            "name": "job_id",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "description": "The evaluator improvement job identifier.",
@@ -16614,7 +16614,7 @@
         }
       }
     },
-    "/evaluators/{name}/improvement_jobs/{job_id}:publish": {
+    "/evaluators/{name}/improvement_jobs/{jobId}:publish": {
       "post": {
         "operationId": "Evaluators_publishImprovementCandidate",
         "summary": "Publish an evaluator improvement candidate",
@@ -16642,7 +16642,7 @@
             }
           },
           {
-            "name": "job_id",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "description": "The evaluator improvement job identifier.",
@@ -16743,7 +16743,7 @@
         }
       }
     },
-    "/evaluators/{name}/improvement_jobs/{job_id}:reject": {
+    "/evaluators/{name}/improvement_jobs/{jobId}:reject": {
       "post": {
         "operationId": "Evaluators_rejectImprovementCandidate",
         "summary": "Reject an evaluator improvement candidate",
@@ -16771,7 +16771,7 @@
             }
           },
           {
-            "name": "job_id",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "description": "The evaluator improvement job identifier.",
@@ -49874,7 +49874,7 @@
         "type": "object",
         "required": [
           "max_candidate_attempts",
-          "max_inference_cost_usd"
+          "max_cost_usd"
         ],
         "properties": {
           "max_candidate_attempts": {
@@ -49883,7 +49883,7 @@
             "minimum": 1,
             "description": "The maximum number of proposed candidate configurations, including structurally rejected proposals and deterministic calibration variants."
           },
-          "max_inference_cost_usd": {
+          "max_cost_usd": {
             "$ref": "#/components/schemas/EvaluatorImprovementUsdAmount",
             "description": "The exact maximum USD amount for model inference. It excludes ACA, storage, networking, deterministic analysis, and human review."
           },
@@ -50111,7 +50111,7 @@
       "EvaluatorImprovementCostProgress": {
         "type": "object",
         "required": [
-          "max_inference_cost_usd",
+          "max_cost_usd",
           "spent_usd",
           "reconciled_usd",
           "uncertain_usd",
@@ -50120,7 +50120,7 @@
           "price_snapshot"
         ],
         "properties": {
-          "max_inference_cost_usd": {
+          "max_cost_usd": {
             "$ref": "#/components/schemas/EvaluatorImprovementUsdAmount",
             "description": "The exact approved model-inference USD limit."
           },
@@ -50142,14 +50142,14 @@
           },
           "remaining_usd": {
             "$ref": "#/components/schemas/EvaluatorImprovementUsdAmount",
-            "description": "The uncommitted amount: `max_inference_cost_usd - spent_usd - reserved_usd`."
+            "description": "The uncommitted amount: `max_cost_usd - spent_usd - reserved_usd`."
           },
           "price_snapshot": {
             "$ref": "#/components/schemas/EvaluatorImprovementPriceSnapshot",
             "description": "The frozen authoritative price schedule."
           }
         },
-        "description": "Exact model-inference budget progress. `spent_usd + reserved_usd + remaining_usd` equals `max_inference_cost_usd`. `reconciled_usd` and `uncertain_usd` are identified subsets of `spent_usd` and must not be added to it."
+        "description": "Exact model-inference budget progress. `spent_usd + reserved_usd + remaining_usd` equals `max_cost_usd`. `reconciled_usd` and `uncertain_usd` are identified subsets of `spent_usd` and must not be added to it."
       },
       "EvaluatorImprovementDatasetReference": {
         "type": "object",
@@ -50574,7 +50574,9 @@
       "EvaluatorImprovementIncompleteResult": {
         "type": "object",
         "required": [
-          "outcome"
+          "outcome",
+          "confirmation_status",
+          "stop_reason"
         ],
         "properties": {
           "outcome": {
@@ -50582,6 +50584,15 @@
             "enum": [
               "incomplete"
             ]
+          },
+          "confirmation_status": {
+            "type": "string",
+            "enum": [
+              "not_run"
+            ]
+          },
+          "stop_reason": {
+            "$ref": "#/components/schemas/EvaluatorImprovementIncompleteStopReason"
           },
           "candidate": {
             "$ref": "#/components/schemas/EvaluatorImprovementCandidateSnapshot",
@@ -50595,10 +50606,21 @@
         ],
         "description": "A successful bounded result without a complete confirmation decision. It never represents confirmed no gain or missing labels by default."
       },
+      "EvaluatorImprovementIncompleteStopReason": {
+        "type": "string",
+        "enum": [
+          "max_candidate_attempts_reached",
+          "max_cost_reached"
+        ],
+        "description": "Why an incomplete evaluator improvement result stopped before independent confirmation."
+      },
       "EvaluatorImprovementInsufficientEvidenceResult": {
         "type": "object",
         "required": [
-          "outcome"
+          "outcome",
+          "confirmation_status",
+          "candidate",
+          "confirmation_assessment"
         ],
         "properties": {
           "outcome": {
@@ -50607,9 +50629,19 @@
               "insufficient_evidence"
             ]
           },
+          "confirmation_status": {
+            "type": "string",
+            "enum": [
+              "completed"
+            ]
+          },
           "candidate": {
             "$ref": "#/components/schemas/EvaluatorImprovementCandidateSnapshot",
-            "description": "The frozen finalist, when insufficiency was discovered during confirmation."
+            "description": "The frozen finalist assessed by independent confirmation."
+          },
+          "confirmation_assessment": {
+            "$ref": "#/components/schemas/EvaluatorImprovementAssessment",
+            "description": "The completed independent confirmation assessment that established the evidence limitation."
           }
         },
         "allOf": [
@@ -51865,8 +51897,7 @@
               "confirmed_no_improvement",
               "insufficient_evidence",
               "max_candidate_attempts_reached",
-              "max_inference_cost_usd_reached",
-              "confirmation_interrupted"
+              "max_cost_reached"
             ]
           }
         ],

@@ -102,7 +102,7 @@ alias EvaluatorImprovementScopeParameters = {
 alias EvaluatorImprovementJobIdentifierParameter = {
   @doc("The evaluator improvement job identifier.")
   @path
-  job_id: string;
+  jobId: string;
 };
 
 alias EvaluatorImprovementRequiredIfMatchHeader = {
@@ -430,7 +430,7 @@ interface Evaluators {
   @removed(Versions.v1)
   @summary("Get an evaluator improvement job")
   @get
-  @route("/evaluators/{name}/improvement_jobs/{job_id}")
+  @route("/evaluators/{name}/improvement_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
   getImprovementJob is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
@@ -462,7 +462,7 @@ interface Evaluators {
   @removed(Versions.v1)
   @summary("Cancel an evaluator improvement job")
   @post
-  @route("/evaluators/{name}/improvement_jobs/{job_id}:cancel")
+  @route("/evaluators/{name}/improvement_jobs/{jobId}:cancel")
   @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
   cancelImprovementJob is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
@@ -477,7 +477,7 @@ interface Evaluators {
   @removed(Versions.v1)
   @summary("Delete an evaluator improvement job")
   @delete
-  @route("/evaluators/{name}/improvement_jobs/{job_id}")
+  @route("/evaluators/{name}/improvement_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
   deleteImprovementJob is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
@@ -493,7 +493,7 @@ interface Evaluators {
   @removed(Versions.v1)
   @summary("Publish an evaluator improvement candidate")
   @post
-  @route("/evaluators/{name}/improvement_jobs/{job_id}:publish")
+  @route("/evaluators/{name}/improvement_jobs/{jobId}:publish")
   @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
   publishImprovementCandidate is EvaluatorImprovementRequiredPreviewOperation<
     {
@@ -517,7 +517,7 @@ interface Evaluators {
   @removed(Versions.v1)
   @summary("Reject an evaluator improvement candidate")
   @post
-  @route("/evaluators/{name}/improvement_jobs/{job_id}:reject")
+  @route("/evaluators/{name}/improvement_jobs/{jobId}:reject")
   @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
   rejectImprovementCandidate is EvaluatorImprovementRequiredPreviewOperation<
     {
