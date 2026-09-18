@@ -5,7 +5,6 @@ import { isDeepStrictEqual } from "node:util";
 import { dirname, join, resolve } from "path";
 
 import * as commonmark from "commonmark";
-import yaml from "js-yaml";
 
 import {
   type ChangeHandler,
@@ -23,6 +22,7 @@ import { PRContext } from "./PRContext.ts";
 
 import { dataPlane, resourceManager } from "@azure-tools/specs-shared/changed-files";
 import { Readme } from "@azure-tools/specs-shared/readme";
+import { parseYaml } from "@azure-tools/specs-shared/yaml";
 
 // todo: we need to populate this so that we can tell if it's a new APIVersion down stream
 // TODO: move to .github/shared
@@ -495,7 +495,10 @@ function getSuppressions(readmePath: string) {
     for (const block of codeBlocks) {
       if (block.literal) {
         try {
-          const blockObject = yaml.load(block.literal) as any;
+          const blockObject = parseYaml(block.literal) as
+            | Record<string, unknown>
+            | null
+            | undefined;
           const directives = blockObject?.["directive"];
           if (directives && Array.isArray(directives)) {
             suppressionResult = suppressionResult.concat(directives.filter((s) => s.suppress));

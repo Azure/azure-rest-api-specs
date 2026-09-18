@@ -1,5 +1,5 @@
+import { parseYaml } from "@azure-tools/specs-shared/yaml";
 import { readFile } from "fs/promises";
-import yaml from "js-yaml";
 
 export type ApproversConfig = {
   "data-plane"?: Record<string, string[]>;
@@ -26,7 +26,7 @@ export async function loadApproversConfig(
   path: string = PROTECTED_LABELS_PATH,
 ): Promise<ApproversConfig> {
   const content = await readFile(path, "utf8");
-  const config = yaml.load(content) as Record<string, unknown>;
+  const config = parseYaml(content) as Record<string, unknown>;
 
   const dataPlane: Record<string, string[]> = {};
 

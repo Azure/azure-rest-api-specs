@@ -9,8 +9,8 @@ import type { Core } from "../github.ts";
 //   Flat:  LabelName: [user1, user2]
 //   Plane: LabelName: { management-plane: [user1], data-plane: [user2] }
 
+import { parseYaml } from "@azure-tools/specs-shared/yaml";
 import { readFile } from "fs/promises";
-import yaml from "js-yaml";
 import { join } from "path";
 import { extractInputs } from "../context.ts";
 
@@ -40,7 +40,7 @@ async function loadConfig(): Promise<{
 }> {
   const configPath = join(process.cwd(), ".github", "protected-labels.yml");
   const content = await readFile(configPath, "utf8");
-  const raw = yaml.load(content) as Record<string, unknown>;
+  const raw = parseYaml(content) as Record<string, unknown>;
 
   if (!raw || typeof raw !== "object") {
     throw new Error("Invalid protected-labels.yml: expected a YAML object");

@@ -1,5 +1,4 @@
 import { readFile } from "fs/promises";
-import yaml from "js-yaml";
 import { marked } from "marked";
 import { dirname, normalize, relative } from "path";
 import { inspect } from "util";
@@ -9,6 +8,7 @@ import { resolvePairCached } from "./path.ts";
 import { SpecModelError } from "./spec-model-error.ts";
 import { embedError } from "./spec-model.ts";
 import { Tag } from "./tag.ts";
+import { parseYaml } from "./yaml.ts";
 
 export type ErrorJSON = import("./spec-model.ts").ErrorJSON;
 
@@ -132,7 +132,7 @@ export class Readme {
       const globalConfigYamlBlocks = yamlBlocks.filter((token) => token.lang === "yaml");
 
       const globalConfig = globalConfigYamlBlocks.reduce(
-        (obj, token) => Object.assign(obj, yaml.load(token.text, { schema: yaml.FAILSAFE_SCHEMA })),
+        (obj, token) => Object.assign(obj, parseYaml(token.text, { schema: "failsafe" })),
         {},
       );
 
@@ -145,7 +145,7 @@ export class Readme {
           continue;
         }
 
-        const obj: unknown = yaml.load(block.text, { schema: yaml.FAILSAFE_SCHEMA });
+        const obj = parseYaml(block.text, { schema: "failsafe" });
 
         if (!obj) {
           this.#logger?.debug(`No YAML object found for tag ${tagName} in ${this.#path}`);

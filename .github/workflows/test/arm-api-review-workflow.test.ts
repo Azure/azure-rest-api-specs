@@ -1,5 +1,5 @@
+import { parseYaml } from "@azure-tools/specs-shared/yaml";
 import { readFile, readdir } from "fs/promises";
-import { load } from "js-yaml";
 import { join } from "path";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import { runInNewContext } from "vm";
@@ -138,7 +138,7 @@ beforeAll(async () => {
     throw new Error("ARM API review workflow frontmatter was not found");
   }
 
-  const frontmatter = load(match[1]) as WorkflowFrontmatter;
+  const frontmatter = parseYaml(match[1]) as WorkflowFrontmatter;
   const resolver = frontmatter.on?.steps?.find((step) => step.id === "resolve_target_pr");
   resolverScript = resolver?.with?.script ?? "";
   if (!resolverScript) {
@@ -1517,7 +1517,7 @@ describe("ARM paging and example enum calibration", () => {
     let stimulusCount = 0;
 
     for (const file of evalFiles) {
-      const parsed = load(await readFile(join(evalDir, file), "utf8")) as {
+      const parsed = parseYaml(await readFile(join(evalDir, file), "utf8")) as {
         stimuli?: unknown[];
       };
       stimulusCount += parsed.stimuli?.length ?? 0;
@@ -1552,7 +1552,7 @@ describe("ARM paging and example enum calibration", () => {
   }, 15_000);
 
   it("covers ARM LRO header customization in the TypeSpec eval", async () => {
-    const evalSpec = load(
+    const evalSpec = parseYaml(
       await readFile(
         join(ROOT, ".github/skills/evals/arm-api-reviewer/vally/eval-typespec.yaml"),
         "utf8",
@@ -1590,7 +1590,7 @@ describe("ARM paging and example enum calibration", () => {
   });
 
   it("maps every EX-PAYLOAD example reference into each enum eval workspace", async () => {
-    const evalSpec = load(
+    const evalSpec = parseYaml(
       await readFile(
         join(ROOT, ".github/skills/evals/arm-api-reviewer/vally/eval-examples.yaml"),
         "utf8",
@@ -1942,7 +1942,7 @@ describe("ARM Reviewer alignment and dependency consistency", () => {
   });
 
   it("keeps EX-PAYLOAD fixtures isolated from title violations", async () => {
-    const evalSpec = load(
+    const evalSpec = parseYaml(
       await readFile(
         join(ROOT, ".github/skills/evals/arm-api-reviewer/vally/eval-examples.yaml"),
         "utf8",

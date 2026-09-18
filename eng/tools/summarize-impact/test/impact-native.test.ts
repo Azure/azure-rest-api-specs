@@ -1,8 +1,8 @@
-import yaml from "js-yaml";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { stringify } from "yaml";
 import { diffSuppression, getAllApiVersionFromRPFolder } from "../src/impact.ts";
 
 describe("native impact utilities", () => {
@@ -49,14 +49,58 @@ describe("native impact utilities", () => {
       where: { options: { count: 2, enabled: true }, paths: ["a", "b"] },
       suppress: "Rule",
     };
-    await writeFile(before, "```yaml\n" + yaml.dump({ suppressions: [original] }) + "```\n");
-    await writeFile(after, "```yaml\n" + yaml.dump({ suppressions: [reordered] }) + "```\n");
+    await writeFile(before, "```yaml\n" + stringify({ suppressions: [original] }) + "```\n");
+    await writeFile(after, "```yaml\n" + stringify({ suppressions: [reordered] }) + "```\n");
 
     expect(diffSuppression(before, after)).toEqual([]);
 
     const changed = { ...reordered, where: { ...reordered.where, paths: ["b", "a"] } };
-    await writeFile(after, "```yaml\n" + yaml.dump({ suppressions: [changed] }) + "```\n");
+    await writeFile(after, "```yaml\n" + stringify({ suppressions: [changed] }) + "```\n");
 
     expect(diffSuppression(before, after)).toEqual([changed]);
+  });
+
+  it("preserves merged suppression fields", async () => {
+    const before = join(folder, "before.md");
+    const after = join(folder, "after.md");
+    await writeFile(
+      before,
+      `\`\`\`yaml
+defaults: &defaults
+  suppress: Rule
+  from: [foo.json]
+suppressions:
+  - <<: *defaults
+    reason: existing reason
+\`\`\`
+`,
+    );
+    await writeFile(
+      after,
+      `\`\`\`yaml
+suppressions:
+  - suppress: Rule
+    from: [foo.json]
+    reason: existing reason
+\`\`\`
+`,
+    );
+
+    expect(diffSuppression(before, after)).toEqual([]);
+  });
+
+  it("distinguishes timestamp values from quoted date strings", async () => {
+    const before = join(folder, "before.md");
+    const after = join(folder, "after.md");
+    const yaml = `\`\`\`yaml
+suppressions:
+  - suppress: Rule
+    reason: 2026-09-18
+\`\`\`
+`;
+    await writeFile(before, yaml);
+    await writeFile(after, yaml.replace("2026-09-18", '"2026-09-18"'));
+
+    expect(diffSuppression(before, after)).toEqual([{ suppress: "Rule", reason: "2026-09-18" }]);
   });
 });

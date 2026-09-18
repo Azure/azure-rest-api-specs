@@ -139,7 +139,7 @@ From `package.json` comments:
 - `@actions/github-script`: GitHub Actions toolkit (devDependency)
 - `@octokit/rest`, `@octokit/types`: GitHub REST API client
 - `simple-git`: Git operations
-- `js-yaml`: YAML parsing
+- `yaml`: YAML parsing; shared `parseYaml` preserves configuration schemas and rejects unresolved tags
 - `debug`: Debug logging
 - `vitest`: Testing framework
 - `oxlint`, `oxlint-tsgolint`: Root development dependencies for linting

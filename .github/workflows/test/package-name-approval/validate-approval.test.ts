@@ -4,15 +4,15 @@ import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts
 vi.mock("fs/promises", () => ({
   readFile: vi.fn(),
 }));
-vi.mock("js-yaml", () => ({
-  default: { load: vi.fn() },
+vi.mock("@azure-tools/specs-shared/yaml", () => ({
+  parseYaml: vi.fn(),
 }));
 
+import { parseYaml } from "@azure-tools/specs-shared/yaml";
 import { readFile } from "fs/promises";
-import yaml from "js-yaml";
 import validateApproval from "../../src/package-name-approval/validate-approval.ts";
 
-/** Mock protected-labels.yml content (as yaml.load would return) */
+/** Mock parsed protected-labels.yml content. */
 const protectedLabelsYaml = {
   "global-approvers": ["global-admin1", "global-admin2"],
   "BreakingChange-Approved-Benign": ["someone"],
@@ -36,7 +36,7 @@ const protectedLabelsYaml = {
 
 function setupMocks() {
   (readFile as ReturnType<typeof vi.fn>).mockResolvedValue("yaml-content");
-  (yaml.load as ReturnType<typeof vi.fn>).mockReturnValue(protectedLabelsYaml);
+  vi.mocked(parseYaml).mockReturnValue(protectedLabelsYaml);
 }
 
 function createPRLabeledPayload({

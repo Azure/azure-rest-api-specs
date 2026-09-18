@@ -4,12 +4,12 @@ import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts
 vi.mock("fs/promises", () => ({
   readFile: vi.fn(),
 }));
-vi.mock("js-yaml", () => ({
-  default: { load: vi.fn() },
+vi.mock("@azure-tools/specs-shared/yaml", () => ({
+  parseYaml: vi.fn(),
 }));
 
+import { parseYaml } from "@azure-tools/specs-shared/yaml";
 import { readFile } from "fs/promises";
-import yaml from "js-yaml";
 import checkLabel from "../../src/protected-labels/check-label.ts";
 
 function invokeCheckLabel(args: Partial<import("@actions/github-script").AsyncFunctionArguments>) {
@@ -31,7 +31,7 @@ const protectedLabelsConfig = {
 
 function setupMocks() {
   (readFile as ReturnType<typeof vi.fn>).mockResolvedValue("yaml-content");
-  (yaml.load as ReturnType<typeof vi.fn>).mockReturnValue(protectedLabelsConfig);
+  vi.mocked(parseYaml).mockReturnValue(protectedLabelsConfig);
 }
 
 function createLabeledPayload({
@@ -201,7 +201,7 @@ describe("checkLabel", () => {
 
   describe("config validation", () => {
     it("throws on invalid config (not an object)", async () => {
-      (yaml.load as ReturnType<typeof vi.fn>).mockReturnValue(null);
+      vi.mocked(parseYaml).mockReturnValue(null);
 
       context.payload = createLabeledPayload({
         labelName: "BreakingChange-Approved-Benign",
@@ -214,7 +214,7 @@ describe("checkLabel", () => {
     });
 
     it("throws on invalid entry (not an array)", async () => {
-      (yaml.load as ReturnType<typeof vi.fn>).mockReturnValue({
+      vi.mocked(parseYaml).mockReturnValue({
         "BreakingChange-Approved-Benign": "not-an-array",
       });
 

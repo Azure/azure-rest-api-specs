@@ -1,6 +1,6 @@
+import { parseYaml } from "@azure-tools/specs-shared/yaml";
 import { Temporal } from "@js-temporal/polyfill";
 import { readFile, stat } from "fs/promises";
-import YAML from "js-yaml";
 import { resolve } from "path";
 import { inspect } from "util";
 import * as z from "zod";
@@ -140,10 +140,10 @@ export async function validateLeaseContent(
     return { file: leaseFile, errors: [`Error reading file: ${inspect(error)}`] };
   }
 
-  // Use FAILSAFE_SCHEMA to keep all values as strings (prevents YAML Date auto-parsing)
+  // The failsafe schema keeps scalars as strings, including unquoted dates.
   let raw: unknown;
   try {
-    raw = YAML.load(content, { schema: YAML.FAILSAFE_SCHEMA });
+    raw = parseYaml(content, { schema: "failsafe" });
   } catch (error) {
     return { file: leaseFile, errors: [`Invalid YAML: ${inspect(error)}`] };
   }

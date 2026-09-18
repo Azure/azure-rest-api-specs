@@ -1,5 +1,5 @@
+import { parseYaml } from "@azure-tools/specs-shared/yaml";
 import { readFile } from "fs/promises";
-import yaml from "js-yaml";
 import type { Core } from "../github.ts";
 
 export type FormatRule = {
@@ -20,7 +20,7 @@ export async function loadFormatRules(
 ): Promise<FormatRulesConfig | null> {
   try {
     const content = await readFile(rulesPath, "utf8");
-    return yaml.load(content) as FormatRulesConfig;
+    return parseYaml(content) as FormatRulesConfig;
   } catch (e) {
     core.warning(
       `Format rules not found at ${rulesPath}, skipping format validation: ${String(e)}`,

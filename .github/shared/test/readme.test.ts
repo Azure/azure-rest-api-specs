@@ -162,6 +162,57 @@ input-file:
     // Ensures code doesn't try to read file `/fake/readme.md` which would throw
     expect(tags.size).toBe(0);
   });
+
+  it("preserves failsafe scalars and omitted values in README configuration", async () => {
+    const readme = new Readme("/fake/readme.md", {
+      content: `
+\`\`\`yaml
+tag: 2026-09-18
+enabled: true
+count: 42
+empty:
+quoted-empty: ""
+\`\`\`
+\`\`\`yaml $(tag) == '2026-09-18'
+input-file: 2026-09-18.json
+\`\`\`
+`,
+    });
+
+    expect(await readme.getGlobalConfig()).toEqual({
+      tag: "2026-09-18",
+      enabled: "true",
+      count: "42",
+      empty: null,
+      "quoted-empty": "",
+    });
+    const tag = (await readme.getTags()).get("2026-09-18");
+    expect(tag?.inputFiles.size).toBe(1);
+    expect(tag?.inputFiles.has(resolve("/fake/2026-09-18.json"))).toBe(true);
+  });
+
+  it.each(["tag: first\ntag: second", "tag: !unknown package"])(
+    "rejects invalid YAML blocks: %s",
+    async (yaml) => {
+      const readme = new Readme("/fake/readme.md", {
+        content: `\`\`\`yaml\n${yaml}\n\`\`\`\n`,
+      });
+      await expect(readme.getGlobalConfig()).rejects.toThrow();
+    },
+  );
+
+  it.each(["", "# one comment", "# first comment\n# second comment"])(
+    "ignores empty and comment-only YAML blocks: %s",
+    async (yaml) => {
+      const readme = new Readme("/fake/readme.md", {
+        content:
+          `\`\`\`yaml\n${yaml}\n\`\`\`\n` +
+          `\`\`\`yaml $(tag) == 'package-empty'\n${yaml}\n\`\`\`\n`,
+      });
+      expect(await readme.getGlobalConfig()).toEqual({});
+      expect(await readme.getTags()).toEqual(new Map());
+    },
+  );
 });
 
 describe("TagMatchRegex", () => {
