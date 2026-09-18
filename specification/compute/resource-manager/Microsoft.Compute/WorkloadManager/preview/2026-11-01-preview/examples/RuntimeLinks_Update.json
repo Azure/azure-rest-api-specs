@@ -1,0 +1,44 @@
+{
+  "title": "Update runtime link capacity",
+  "operationId": "RuntimeLinks_Update",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-workload",
+    "spaceName": "managed-agents-prod",
+    "linkName": "default",
+    "api-version": "2026-11-01-preview",
+    "properties": {
+      "properties": {
+        "capacityProfile": {
+          "minimumNodes": 2,
+          "maximumNodes": 150
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeLinks/default",
+        "name": "default",
+        "type": "Microsoft.Compute/workloadSpaces/runtimeLinks",
+        "location": "eastus2",
+        "properties": {
+          "orchestratorBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/kubernetes-default",
+          "executionBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default",
+          "capacityProfile": {
+            "minimumNodes": 2,
+            "maximumNodes": 150
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus2/operationStatuses/00000000-0000-0000-0000-000000000007?api-version=2026-11-01-preview",
+        "Retry-After": 10
+      }
+    }
+  }
+}
