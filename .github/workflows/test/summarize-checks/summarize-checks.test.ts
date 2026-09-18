@@ -251,12 +251,6 @@ describe("Summarize Checks Unit Tests", () => {
           conclusion: "SUCCESS",
           checkInfo: getCheckInfo("license/cla"),
         },
-        {
-          name: "Swagger PrettierCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger PrettierCheck"),
-        },
       ];
 
       const output = createNextStepsComment(
@@ -676,12 +670,6 @@ describe("Summarize Checks Unit Tests", () => {
           conclusion: "SUCCESS",
           checkInfo: getCheckInfo("license/cla"),
         },
-        {
-          name: "Swagger PrettierCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger PrettierCheck"),
-        },
       ];
 
       const output = createNextStepsComment(
@@ -874,12 +862,6 @@ describe("Summarize Checks Unit Tests", () => {
           checkInfo: getCheckInfo("license/cla"),
         },
         {
-          name: "Swagger PrettierCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger PrettierCheck"),
-        },
-        {
           name: "TypeSpec Validation",
           status: "COMPLETED",
           conclusion: "SUCCESS",
@@ -1068,12 +1050,6 @@ describe("Summarize Checks Unit Tests", () => {
           status: "COMPLETED",
           conclusion: "SUCCESS",
           checkInfo: getCheckInfo("license/cla"),
-        },
-        {
-          name: "Swagger PrettierCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger PrettierCheck"),
         },
       ];
 
