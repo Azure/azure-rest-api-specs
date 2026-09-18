@@ -5,6 +5,7 @@ import { execFile } from "../../../shared/src/exec.ts";
 import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { commentOrUpdate, parseExistingComments } from "../comment.ts";
 import { extractInputs } from "../context.ts";
+import type { Core } from "../github.ts";
 import { loadApproversConfig } from "./approvers.ts";
 import { removeLabelIfPresent } from "./labels.ts";
 
@@ -30,7 +31,7 @@ const NamespaceResultsSchema = z.object({
 
 async function downloadNamespaceResults(
   github: import("@actions/github-script").AsyncFunctionArguments["github"],
-  core: typeof import("@actions/core"),
+  core: Core,
   owner: string,
   repo: string,
   runId: number,

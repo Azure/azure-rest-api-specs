@@ -2,6 +2,7 @@ import { CheckStatus, CommitStatusState, PER_PAGE_MAX } from "../../shared/src/g
 import { SpecGenSdkArtifactInfoSchema } from "../../shared/src/sdk-types.ts";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.ts";
 import { extractInputs } from "./context.ts";
+import type { Core } from "./github.ts";
 
 export default async function setSpecGenSdkStatus({
   github,
@@ -53,7 +54,7 @@ export async function setSpecGenSdkStatusImpl({
     import("@octokit/plugin-rest-endpoint-methods").Api & {
       paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
     };
-  core: typeof import("@actions/core");
+  core: Core;
 }): Promise<void> {
   const statusName = "SDK Validation Status";
   core.setOutput("head_sha", head_sha);
@@ -133,7 +134,7 @@ async function processResult({
   core,
 }: {
   checkRuns: import("./github.ts").CheckRuns;
-  core: typeof import("@actions/core");
+  core: Core;
 }): Promise<{ state: CommitStatusState; description: string }> {
   let state: CommitStatusState = CommitStatusState.SUCCESS;
   let specGenSdkFailedRequiredLanguages = "";

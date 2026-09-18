@@ -1,3 +1,4 @@
+import type { Core } from "../github.ts";
 // Protected Labels Enforcement
 // Entry point for .github/workflows/protected-labels.yaml
 //
@@ -123,7 +124,7 @@ async function enforceLabelAuthorization({
   authorizedUsers,
 }: {
   github: import("@actions/github-script").AsyncFunctionArguments["github"];
-  core: typeof import("@actions/core");
+  core: Core;
   owner: string;
   repo: string;
   issueNumber: number;

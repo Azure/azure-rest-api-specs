@@ -8,6 +8,7 @@ import {
 } from "../../shared/src/github.ts";
 import { byDate, invert } from "../../shared/src/sort.ts";
 import { extractInputs } from "./context.ts";
+import type { Core } from "./github.ts";
 
 // TODO: Add tests
 /* v8 ignore start */
@@ -61,7 +62,7 @@ export async function setStatusImpl({
     import("@octokit/plugin-rest-endpoint-methods").Api & {
       paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
     };
-  core: typeof import("@actions/core");
+  core: Core;
   monitoredWorkflowName: string;
   requiredStatusName: string;
   overridingLabel: string;

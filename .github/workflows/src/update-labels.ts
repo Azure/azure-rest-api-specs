@@ -1,6 +1,7 @@
 import { isFullGitSha } from "../../shared/src/git.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { extractInputs } from "../src/context.ts";
+import type { Core } from "./github.ts";
 
 export default async function updateLabels({
   github,
@@ -33,7 +34,7 @@ export async function updateLabelsImpl({
     import("@octokit/plugin-rest-endpoint-methods").Api & {
       paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
     };
-  core: typeof import("@actions/core");
+  core: Core;
 }) {
   if (isFullGitSha(head_sha)) {
     core.setOutput("head_sha", head_sha);

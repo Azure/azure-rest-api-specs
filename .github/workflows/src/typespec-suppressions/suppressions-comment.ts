@@ -1,3 +1,4 @@
+import type { Core } from "../github.ts";
 /*
   Rendering for the dedicated "TypeSpec Suppressions Review" pull request comment.
 
@@ -84,7 +85,7 @@ const MAX_SUPPRESSIONS_SHOWN = 5;
  */
 export async function downloadArtifactText(
   github: import("@actions/github-script").AsyncFunctionArguments["github"],
-  core: typeof import("@actions/core"),
+  core: Core,
   owner: string,
   repo: string,
   runId: number,
@@ -130,7 +131,7 @@ export async function downloadArtifactText(
 
 export async function getLatestTypeSpecSuppressionsWorkflowRun(
   github: import("@actions/github-script").AsyncFunctionArguments["github"],
-  core: typeof import("@actions/core"),
+  core: Core,
   owner: string,
   repo: string,
   head_sha: string,
@@ -373,7 +374,7 @@ export function renderSuppressionsCommentBody(
  */
 export async function buildSuppressionsComment(
   github: import("@actions/github-script").AsyncFunctionArguments["github"],
-  core: typeof import("@actions/core"),
+  core: Core,
   owner: string,
   repo: string,
   head_sha: string,

@@ -1,11 +1,12 @@
 import { extractInputs } from "../context.ts";
+import type { Core } from "../github.ts";
 import { loadApproversConfig } from "./approvers.ts";
 import { removeLabelIfPresent } from "./labels.ts";
 
 export type ValidateContext = {
   github: import("@actions/github-script").AsyncFunctionArguments["github"];
   context: import("@actions/github-script").AsyncFunctionArguments["context"];
-  core: import("@actions/github-script").AsyncFunctionArguments["core"];
+  core: Core;
   approversConfig: import("./approvers.ts").ApproversConfig;
   owner: string;
   repo: string;
