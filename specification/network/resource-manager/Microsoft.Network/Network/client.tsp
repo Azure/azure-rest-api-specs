@@ -3042,6 +3042,230 @@ union ProvisioningStateUnion {
   "csharp"
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for BaseAdminRule."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.BaseAdminRule,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for ConnectivityConfiguration."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.ConnectivityConfiguration,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for NetworkGroup."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.NetworkGroup,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for StaticMember."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.StaticMember,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for NetworkManagerRoutingConfiguration."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.NetworkManagerRoutingConfiguration,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for RoutingRule."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.RoutingRule,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for RoutingRuleCollection."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.RoutingRuleCollection,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for SecurityUserConfiguration."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.SecurityUserConfiguration,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for SecurityUserRule."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.SecurityUserRule,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for SecurityUserRuleCollection."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.SecurityUserRuleCollection,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for ReachabilityAnalysisIntent."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.ReachabilityAnalysisIntent,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for ReachabilityAnalysisRun."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.ReachabilityAnalysisRun,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for ScopeConnection."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.ScopeConnection,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for SecurityAdminConfiguration."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.SecurityAdminConfiguration,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for AvailableDelegation."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.AvailableDelegation,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for AvailablePrivateEndpointType."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.AvailablePrivateEndpointType,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for AvailableServiceAlias."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.AvailableServiceAlias,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for PerimeterAssociableResource."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.PerimeterAssociableResource,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for ServiceTagsListResult."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.ServiceTagsListResult,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for ApplicationGatewayWafDynamicManifestResult."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.ApplicationGatewayWafDynamicManifestResult,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for AzureWebCategory."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.AzureWebCategory,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for ConnectionMonitorResult."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.ConnectionMonitorResult,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for SwapResource."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.SwapResource,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for NspAccessRule."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.NspAccessRule,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for NspAssociation."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.NspAssociation,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for NspLink."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.NspLink,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for NspLinkReference."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.NspLinkReference,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for NspLoggingConfiguration."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.NspLoggingConfiguration,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for NspProfile."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.NspProfile,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for PacketCaptureResult."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.PacketCaptureResult,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for RouteMap."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.RouteMap,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy for StaticCidr."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.StaticCidr,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Experiment with retaining ARM resource generation through the shared legacy hierarchy target."
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Experiment with retaining ARM resource generation through the shared legacy hierarchy target."
 @@Azure.ResourceManager.Legacy.customAzureResource(
@@ -6314,13 +6538,6 @@ op replaceprivateDnsZoneGroupsList(
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  Microsoft.Network.PacketCaptureResult,
-  Common.SubResourceModel,
-  "csharp"
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Microsoft.Network.PrivateDnsZoneGroup,
   Common.SubResourceModel,
   "csharp"
@@ -6343,13 +6560,6 @@ op replaceprivateDnsZoneGroupsList(
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Microsoft.Network.VpnConnection,
-  Common.SubResourceModel,
-  "csharp"
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  Microsoft.Network.ApplicationGatewayWafDynamicManifestResult,
   Common.SubResourceModel,
   "csharp"
 );
