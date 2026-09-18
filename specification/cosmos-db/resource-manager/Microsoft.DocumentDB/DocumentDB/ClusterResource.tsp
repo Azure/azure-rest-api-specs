@@ -127,95 +127,6 @@ interface ClusterResources {
   >;
 
   /**
-   * Invoke a command like nodetool for cassandra maintenance asynchronously
-   */
-  @added(Versions.v2026_04_01_preview)
-  invokeCommandAsync is ArmResourceActionAsyncBase<
-    ClusterResource,
-    CommandAsyncPostBody,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<CommandPublicResource>,
-    Response =
-      | ArmResponse<CommandPublicResource>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CommandPublicResource> &
-          Azure.Core.Foundations.RetryAfterHeader>,
-    Error = Azure.ResourceManager.CommonTypes.ErrorResponse
-  >;
-
-  /**
-   * List all commands currently running on ring info
-   */
-  @added(Versions.v2026_04_01_preview)
-  @list
-  @get
-  @action("commands")
-  listCommand is ArmResourceActionSync<
-    ClusterResource,
-    void,
-    ArmResponse<ListCommands>,
-    Error = CloudError
-  >;
-
-  /**
-   * Get details about a specified command that was run asynchronously.
-   */
-  @added(Versions.v2026_04_01_preview)
-  @get
-  getCommandAsync is ArmResourceRead<
-    ClusterResource,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ClusterResource>,
-    Response = ArmResponse<CommandPublicResource>,
-    Parameters = {
-      /**
-       * Managed Cassandra cluster command id.
-       */
-      @maxLength(100)
-      @minLength(1)
-      @pattern("^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$")
-      @path
-      @segment("commands")
-      commandId: string;
-    },
-    Error = CloudError
-  >;
-
-  /**
-   * List the backups of this cluster that are available to restore.
-   */
-  @added(Versions.v2026_04_01_preview)
-  @list
-  @get
-  @action("backups")
-  listBackups is ArmResourceActionSync<
-    ClusterResource,
-    void,
-    ArmResponse<ListBackups>,
-    Error = CloudError
-  >;
-
-  /**
-   * Get the properties of an individual backup of this cluster that is available to restore.
-   */
-  @added(Versions.v2026_04_01_preview)
-  @get
-  getBackup is ArmResourceRead<
-    ClusterResource,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ClusterResource>,
-    Response = ArmResponse<BackupResource>,
-    Parameters = {
-      /**
-       * Id of a restorable backup of a Cassandra cluster.
-       */
-      @maxLength(15)
-      @minLength(1)
-      @pattern("^[0-9]+$")
-      @path
-      @segment("backups")
-      backupId: string;
-    },
-    Error = CloudError
-  >;
-
-  /**
    * Deallocate the Managed Cassandra Cluster and Associated Data Centers. Deallocation will deallocate the host virtual machine of this cluster, and reserved the data disk. This won't do anything on an already deallocated cluster. Use Start to restart the cluster.
    */
   deallocate is ArmResourceActionAsyncBase<
@@ -264,10 +175,6 @@ interface ClusterResources {
 );
 @@doc(
   ClusterResources.invokeCommand::parameters.body,
-  "Specification which command to run where"
-);
-@@doc(
-  ClusterResources.invokeCommandAsync::parameters.body,
   "Specification which command to run where"
 );
 @@visibility(
