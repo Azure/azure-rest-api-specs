@@ -7,16 +7,18 @@ on:
     paths:
       - "**/package.json"
       - pnpm-workspace.yaml
+      - pnpm-lock.yaml
+      - .github/actions/setup-node-install-deps/**
       - .github/workflows/workspace-validation.yaml
-      - .github/workflows/src/check-catalog.ts
-      - .github/workflows/cmd/check-catalog.ts
+      - .github/workflows/src/validate-workspace.ts
   pull_request:
     paths:
       - "**/package.json"
       - pnpm-workspace.yaml
+      - pnpm-lock.yaml
+      - .github/actions/setup-node-install-deps/**
       - .github/workflows/workspace-validation.yaml
-      - .github/workflows/src/check-catalog.ts
-      - .github/workflows/cmd/check-catalog.ts
+      - .github/workflows/src/validate-workspace.ts
   workflow_dispatch:
 
 permissions:
@@ -33,15 +35,15 @@ jobs:
           sparse-checkout: |
             package.json
             /pnpm-workspace.yaml
-            /.github/workflows/src/check-catalog.ts
-            /.github/workflows/cmd/check-catalog.ts
+            /pnpm-lock.yaml
+            /.github/actions/setup-node-install-deps/
+            /.github/shared/
+            /.github/workflows/src/validate-workspace.ts
 
-      - uses: actions/setup-node@v6
+      - uses: ./.github/actions/setup-node-install-deps
         with:
-          node-version: 24.x
-          package-manager-cache: false
+          install-command: "pnpm install --frozen-lockfile --prod --prefer-offline --filter=azure-rest-api-specs-github..."
+          cache-name: workspace-validation
 
-      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
-
-      # Run Node directly so pnpm run does not auto-install workspace dependencies.
-      - run: node ./.github/workflows/cmd/check-catalog.ts
+      # Avoid pnpm run auto-installing the rest of the workspace.
+      - run: node ./.github/workflows/src/validate-workspace.ts
