@@ -116,6 +116,7 @@ interface Clusters {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "HorizonDB pools cannot be deleted independently; their lifecycle is managed through the parent cluster."
 @renamedFrom(Versions.v2026_10_01_preview, "HorizonDbPools")
 @armResourceOperations
 interface Pools {
@@ -142,16 +143,6 @@ interface Pools {
     PoolForPatchUpdate,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = Pool> &
       Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  @added(Versions.v2026_10_01_preview)
-  @doc("Deletes a HorizonDB pool together with its FirewallRule children and the Pool-scoped Endpoint whose associatedResourceId identifies that Pool. Neither the FirewallRules nor the Endpoint can outlive the Pool or be deleted independently from it.")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    Pool,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
   >;
 
   @doc("Lists all HorizonDB pools in a cluster.")
