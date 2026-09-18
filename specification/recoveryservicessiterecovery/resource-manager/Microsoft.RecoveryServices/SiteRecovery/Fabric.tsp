@@ -54,9 +54,10 @@ alias FabricOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-model FabricAcceptedLroResponse<
-  FinalResult extends TypeSpec.Reflection.Model | unknown | void = Fabric
->
+model FabricAcceptedLroResponse<FinalResult extends
+  | TypeSpec.Reflection.Model
+  | unknown
+  | void = Fabric>
   is ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FinalResult> &
     Azure.Core.Foundations.RetryAfterHeader>;
 

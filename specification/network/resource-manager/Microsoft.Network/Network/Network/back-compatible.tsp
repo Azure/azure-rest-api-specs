@@ -723,6 +723,41 @@ using TypeSpec.Versioning;
   BastionHosts.disconnectActiveSessions::parameters.body,
   "sessionIds"
 );
+@@clientLocation(
+  ExpressRouteProviderPorts.expressRouteProviderPort,
+  Microsoft.Network,
+  "autorest"
+);
+@@clientLocation(
+  NetworkManagers.listActiveSecurityAdminRules,
+  Microsoft.Network,
+  "autorest"
+);
+@@clientLocation(
+  NetworkManagers.listActiveSecurityAdminRules,
+  Microsoft.Network,
+  "autorest"
+);
+@@clientLocation(
+  CheckDnsNameAvailability.checkDnsNameAvailability,
+  Microsoft.Network,
+  "autorest"
+);
+@@clientLocation(
+  VirtualWans.supportedSecurityProviders,
+  Microsoft.Network,
+  "autorest"
+);
+@@clientLocation(
+  EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations,
+  Microsoft.Network,
+  "autorest"
+);
+@@clientLocation(
+  EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules,
+  Microsoft.Network,
+  "autorest"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BastionHost.properties);
 

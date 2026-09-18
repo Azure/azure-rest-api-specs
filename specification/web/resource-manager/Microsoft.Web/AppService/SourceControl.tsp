@@ -1,13 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Web;
 /**
@@ -36,9 +34,7 @@ interface SourceControls {
   /**
    * Description for Gets source control token
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets source control token")
-  @operationId("GetSourceControl")
   getSourceControl is ArmResourceRead<
     SourceControl,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -48,10 +44,8 @@ interface SourceControls {
   /**
    * Description for Updates source control token
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Updates source control token")
-  @operationId("UpdateSourceControl")
   updateSourceControl is ArmResourceCreateOrReplaceSync<
     SourceControl,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -62,9 +56,7 @@ interface SourceControls {
   /**
    * Description for Gets the source controls available for Azure websites.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the source controls available for Azure websites.")
-  @operationId("ListSourceControls")
   listSourceControls is ArmResourceListByParent<
     SourceControl,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
