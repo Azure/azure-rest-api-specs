@@ -1,4 +1,4 @@
-﻿import "@typespec/rest";
+import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -819,31 +819,37 @@ union AzureOpenAIModelName {
   TextEmbedding3Small: "text-embedding-3-small",
 
   /** Gpt4o model. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   Gpt4o: "gpt-4o",
 
   /** Gpt4oMini model. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   Gpt4oMini: "gpt-4o-mini",
 
   /** Gpt41 model. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   Gpt41: "gpt-4.1",
 
   /** Gpt41Mini model. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   Gpt41Mini: "gpt-4.1-mini",
 
   /** Gpt41Nano model. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   Gpt41Nano: "gpt-4.1-nano",
 
   /** Gpt5 model. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   Gpt5: "gpt-5",
@@ -855,14 +861,17 @@ union AzureOpenAIModelName {
   Gpt5Nano: "gpt-5-nano",
 
   /** Gpt51 model. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   Gpt51: "gpt-5.1",
 
   /** Gpt52 model. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   Gpt52: "gpt-5.2",
 
   /** Gpt54 model. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   Gpt54: "gpt-5.4",
 
@@ -875,18 +884,22 @@ union AzureOpenAIModelName {
   Gpt54Nano: "gpt-5.4-nano",
 
   /** Gpt55 model. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   Gpt55: "gpt-5.5",
 
   /** Gpt56Sol model. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   Gpt56Sol: "gpt-5.6-sol",
 
   /** Gpt56Terra model. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   Gpt56Terra: "gpt-5.6-terra",
 
   /** Gpt56Luna model. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   Gpt56Luna: "gpt-5.6-luna",
 }
@@ -3181,6 +3194,7 @@ model SearchIndexerDataSource {
 
   /** A specific type of the data source, in case the resource is capable of different modalities. For example, 'MongoDb' for certain 'cosmosDb' accounts. */
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   subType?: string;
@@ -3274,6 +3288,7 @@ model SearchResourceEncryptionKey {
   identity?: SearchIndexerDataIdentity | null;
 
   /** An optional value indicating whether this key is a service-level key. Default is false. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   isServiceLevelKey?: boolean = false;
 }
@@ -3357,6 +3372,7 @@ model SearchIndexer {
 
   /** Adds caching to an enrichment pipeline to allow for incremental modification steps without having to rebuild the index every time. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   cache?: SearchIndexerCache | null;
@@ -3452,6 +3468,10 @@ model IndexingParametersConfiguration {
 
   /** Increases the timeout beyond the 5-minute default for Azure SQL database data sources, specified in the format "hh:mm:ss". */
   queryTimeout?: string = "00:05:00";
+
+  /** For ADLS Gen2 data sources that ingest permissions, indicates whether the indexer refreshes the access control lists of documents whose content has not changed. Changing a file's permissions does not change its last-modified time, so without this the index keeps serving stale permissions. The refresh runs at most once every 24 hours, and only updates permission metadata: content and enriched fields are left as they are. Set to false to disable. */
+  @added(Versions.v2026_10_01)
+  refreshAllAcls?: boolean = true;
 }
 
 /** Defines a mapping between a field in a data source and a target field in an index. */
@@ -3479,6 +3499,7 @@ model FieldMappingFunction {
 }
 
 /** The type of the cache. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model SearchIndexerCache {
@@ -3523,6 +3544,7 @@ model SearchIndexerStatus {
   status: IndexerStatus;
 
   /** Snapshot of the indexer's cumulative runtime consumption for the service over the current UTC period. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
@@ -3541,6 +3563,7 @@ model SearchIndexerStatus {
   limits: SearchIndexerLimits;
 
   /** All of the state that defines and dictates the indexer's current execution. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
@@ -3554,12 +3577,14 @@ model IndexerExecutionResult {
   status: IndexerExecutionStatus;
 
   /** The outcome of this indexer execution. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   statusDetail?: IndexerExecutionStatusDetail;
 
   /** The mode the indexer is running in. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
@@ -3827,6 +3852,7 @@ model SearchIndexerKnowledgeStore {
 
   /** A dictionary of knowledge store-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   parameters?: SearchIndexerKnowledgeStoreParameters;
@@ -4048,6 +4074,7 @@ model SearchIndex {
 
   /** A value indicating whether Purview is enabled for the index. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   purviewEnabled?: boolean | null;
@@ -4124,9 +4151,14 @@ model SearchIndexResponse {
 
   /** A value indicating whether Purview is enabled for the index. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   purviewEnabled?: boolean | null;
+
+  /** Configures a SharePoint connector app registration for the index, enabling document-level permissions from SharePoint. If provided, the applicationId and federatedCredentialId properties are required. */
+  @added(Versions.v2026_10_01)
+  sharePointConnectorAppRegistration?: SharePointConnectorAppRegistration;
 
   /** The ETag of the index. */
   @encodedName("application/json", "@odata.etag")
@@ -4174,14 +4206,17 @@ model SearchField {
   sensitivityLabel?: boolean | null;
 
   /** A value indicating whether the field should be used for sensitivity label ID filtering. This enables document-level filtering based on Microsoft Purview sensitivity label IDs. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   sensitivityLabelId?: boolean;
 
   /** A value indicating whether the field contains the name of a Microsoft Purview sensitivity label applied to the document. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   sensitivityLabelName?: boolean;
 
   /** A value indicating whether the field contains the source document identifier used for Purview audit tracking. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   sourceDocumentId?: boolean;
 
@@ -4379,6 +4414,7 @@ model SemanticConfiguration {
   rankingOrder?: RankingOrder | null;
 
   /** Determines which semantic or query rewrite models to use during model flighting/upgrades. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   flightingOptIn?: boolean = false;
@@ -4493,6 +4529,7 @@ model ListIndexesResult {
   /** The total count of indexes in the service, or null if the count was not requested. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   `@odata.count`?: int64;
 
@@ -4514,6 +4551,7 @@ model ListIndexesSelectedResult {
   /** The total count of indexes in the service, or null if the count was not requested. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   `@odata.count`?: int64;
 
@@ -4654,6 +4692,7 @@ model KnowledgeBase {
   description?: string;
 
   /** User-defined key-value pairs for categorizing the knowledge base and attributing its usage and costs. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   tags?: Record<string>;
 
@@ -4672,11 +4711,13 @@ model KnowledgeBase {
   corsOptions?: CorsOptions;
 
   /** Persisted request-wide retrieve defaults for this knowledge base. These values apply to retrieve requests that omit the corresponding fields; request-time values take precedence when present. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   retrieveDefaults?: KnowledgeBaseRetrieveDefaults;
 }
 
 /** Persisted request-wide defaults for knowledge base retrieve requests. Each value provides the default for the matching retrieve-request field; service defaults apply when unset, and request-time values take precedence when present. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseRetrieveDefaults {
   /** The default maximum runtime in seconds for a retrieve request. */
@@ -4735,10 +4776,12 @@ model KnowledgeSourceReference {
   name: string;
 
   /** Indicates whether image serving should be enabled for this knowledge source. When true, images extracted during ingestion are delivered to downstream models at query time. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   enableImageServing?: boolean;
 
   /** Indicates whether freshness-aware retrieval should be enabled for this knowledge source. When true, a freshness scoring profile is applied during retrieval to bias results toward newer documents. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   enableFreshness?: boolean;
 }
@@ -4777,6 +4820,7 @@ model KnowledgeSource {
   kind: KnowledgeSourceKind;
 
   /** Controls whether results from this knowledge source are reranked before they are included in the final result set. Defaults to 'rerank' when not specified. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   resultsProcessing?: KnowledgeSourceResultsProcessing;
 
@@ -4790,6 +4834,7 @@ model KnowledgeSource {
 }
 
 /** Controls whether a knowledge source's results are reranked. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 union KnowledgeSourceResultsProcessing {
   string,
@@ -4827,11 +4872,13 @@ union KnowledgeSourceKind {
   Web: "web",
 
   /** A knowledge source that reads data from remote SharePoint. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   RemoteSharePoint: "remoteSharePoint",
 
   /** A knowledge source that reads data from work IQ */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   WorkIQ: "workIQ",
 
@@ -4840,14 +4887,17 @@ union KnowledgeSourceKind {
   File: "file",
 
   /** A knowledge source backed by an MCP (Model Context Protocol) server. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   McpServer: "mcpServer",
 
   /** A knowledge source that retrieves data from a Fabric Data Agent. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   FabricDataAgent: "fabricDataAgent",
 
   /** A knowledge source that retrieves data from Microsoft Fabric Ontology ontologies. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   FabricOntology: "fabricOntology",
 }
@@ -4879,11 +4929,13 @@ model SearchIndexKnowledgeSourceParameters {
   baseFilter?: string;
 
   /** Default hints that guide query planning toward useful filters and boosts for this search index knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   queryHints?: SearchIndexKnowledgeSourceQueryHints;
 }
 
 /** Hints that guide query planning toward useful filters and boosts for a search index knowledge source. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 model SearchIndexKnowledgeSourceQueryHints {
   /** Filter hints that identify fields and representative values the query planner can use when constructing filters. */
@@ -4894,6 +4946,7 @@ model SearchIndexKnowledgeSourceQueryHints {
 }
 
 /** A hint that identifies a field and representative values the query planner can use when constructing a filter. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 model SearchIndexKnowledgeSourceFilterHint {
   /** The name of the filterable search index field. */
@@ -4911,6 +4964,7 @@ model SearchIndexKnowledgeSourceFilterHint {
 /** A hint that identifies a condition the query planner can use to influence document ranking. */
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "The boost kind is extensible."
 @discriminator("kind")
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 model SearchIndexKnowledgeSourceBoost {
   /** The kind of boost hint. */
@@ -4921,6 +4975,7 @@ model SearchIndexKnowledgeSourceBoost {
 }
 
 /** The kind of boost hint for a search index knowledge source. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 union SearchIndexKnowledgeSourceBoostKind {
   string,
@@ -4933,6 +4988,7 @@ union SearchIndexKnowledgeSourceBoostKind {
 }
 
 /** A hint that boosts documents based on a field value. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 model SearchIndexKnowledgeSourceFieldValueBoost
   extends SearchIndexKnowledgeSourceBoost {
@@ -4951,6 +5007,7 @@ model SearchIndexKnowledgeSourceFieldValueBoost
 }
 
 /** A hint that boosts documents based on a multi-word expression. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 model SearchIndexKnowledgeSourceMultiWordExpressionBoost
   extends SearchIndexKnowledgeSourceBoost {
@@ -4999,6 +5056,7 @@ model AzureBlobKnowledgeSourceParameters {
   ingestionParameters?: KnowledgeSourceIngestionParameters | null;
 
   /** Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   queryHints?: SearchIndexKnowledgeSourceQueryHints;
 
@@ -5036,6 +5094,7 @@ model IndexedSharePointKnowledgeSourceParameters {
   ingestionParameters?: KnowledgeSourceIngestionParameters | null;
 
   /** Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   queryHints?: SearchIndexKnowledgeSourceQueryHints;
 
@@ -5068,6 +5127,7 @@ model IndexedOneLakeKnowledgeSourceParameters {
   ingestionParameters?: KnowledgeSourceIngestionParameters;
 
   /** Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   queryHints?: SearchIndexKnowledgeSourceQueryHints;
 
@@ -5108,6 +5168,7 @@ model IndexedSqlKnowledgeSourceParameters {
   ingestionParameters?: KnowledgeSourceIngestionParameters;
 
   /** Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   queryHints?: SearchIndexKnowledgeSourceQueryHints;
 
@@ -5160,6 +5221,7 @@ model FileKnowledgeSourceParameters {
   ingestionParameters?: KnowledgeSourceIngestionParameters;
 
   /** Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   queryHints?: SearchIndexKnowledgeSourceQueryHints;
 
@@ -5326,6 +5388,7 @@ model WebKnowledgeSourceDomain {
 }
 
 /** Configuration for remote SharePoint knowledge source. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model RemoteSharePointKnowledgeSource extends KnowledgeSource {
@@ -5336,6 +5399,7 @@ model RemoteSharePointKnowledgeSource extends KnowledgeSource {
 }
 
 /** Parameters for remote SharePoint knowledge source. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model RemoteSharePointKnowledgeSourceParameters {
@@ -5351,6 +5415,7 @@ model RemoteSharePointKnowledgeSourceParameters {
 
 /** Configuration for WorkIQ knowledge source. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model WorkIQKnowledgeSource extends KnowledgeSource {
   /** The discriminator value. */
@@ -5358,12 +5423,14 @@ model WorkIQKnowledgeSource extends KnowledgeSource {
 
   /** The parameters for the WorkIQ knowledge source, including the customer-owned Entra app configuration used for on-behalf-of authentication. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   workIQParameters: WorkIQKnowledgeSourceParameters;
 }
 
 /** Parameters for a WorkIQ knowledge source. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 model WorkIQKnowledgeSourceParameters {
   /** The customer-owned Microsoft Entra app registration configuration used for on-behalf-of authentication to the Work IQ API. The customer registers a tenant-owned Entra app, grants it the WorkIQAgent.Ask delegated permission, and configures a federated credential so Azure AI Search can authenticate as that app without a stored client secret. */
@@ -5371,6 +5438,7 @@ model WorkIQKnowledgeSourceParameters {
 }
 
 /** Configuration for a customer-owned Microsoft Entra app registration used for federated credential-based on-behalf-of authentication. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 model EntraAppAuthentication {
   /** The application (client) ID of the customer-owned Entra app registration. */
@@ -5384,6 +5452,7 @@ model EntraAppAuthentication {
 }
 
 /** Configuration for a knowledge source backed by an MCP (Model Context Protocol) server. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model McpServerKnowledgeSource extends KnowledgeSource {
   /** The discriminator value. */
@@ -5394,6 +5463,7 @@ model McpServerKnowledgeSource extends KnowledgeSource {
 }
 
 /** Parameters for an MCP server knowledge source. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model McpServerKnowledgeSourceParameters {
   /** The URL of the MCP server endpoint. */
@@ -5410,6 +5480,7 @@ model McpServerKnowledgeSourceParameters {
 /** Authentication configuration for an MCP server knowledge source. */
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @discriminator("kind")
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model McpServerAuthentication {
   /** The kind of authentication to use. */
@@ -5417,6 +5488,7 @@ model McpServerAuthentication {
 }
 
 /** The kind of authentication for an MCP server. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 union McpServerAuthenticationKind {
   string,
@@ -5429,6 +5501,7 @@ union McpServerAuthenticationKind {
 }
 
 /** Authentication using an Azure AI Foundry connection. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model McpServerFoundryConnectionAuthentication extends McpServerAuthentication {
   /** The discriminator value. */
@@ -5439,6 +5512,7 @@ model McpServerFoundryConnectionAuthentication extends McpServerAuthentication {
 }
 
 /** Authentication using stored HTTP headers. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model McpServerStoredHeadersAuthentication extends McpServerAuthentication {
   /** The discriminator value. */
@@ -5449,6 +5523,7 @@ model McpServerStoredHeadersAuthentication extends McpServerAuthentication {
 }
 
 /** Parameters for Foundry connection authentication. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model McpServerFoundryConnectionParameters {
   /** The Azure AI Foundry connection identifier. */
@@ -5456,6 +5531,7 @@ model McpServerFoundryConnectionParameters {
 }
 
 /** Parameters for stored headers authentication. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model McpServerStoredHeadersParameters {
   /** The stored HTTP headers to include in MCP server requests. */
@@ -5463,12 +5539,14 @@ model McpServerStoredHeadersParameters {
 }
 
 /** A dictionary of HTTP header names and values. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model McpServerHeaders {
   ...Record<string>;
 }
 
 /** Represents a single tool within an MCP server knowledge source. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model McpServerTool {
   /** The name of the MCP tool to invoke. */
@@ -5482,6 +5560,7 @@ model McpServerTool {
   inclusionMode?: McpServerToolInclusionMode;
 
   /** Controls whether the parsed results from this tool are reranked. Defaults to 'rerank' when not specified. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   resultsProcessing?: KnowledgeSourceResultsProcessing;
 
@@ -5505,6 +5584,7 @@ union McpServerToolInclusionMode {
 /** Output parsing configuration for an MCP server tool. */
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @discriminator("kind")
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model McpServerOutputParsing {
   /** The kind of output parsing to apply. */
@@ -5512,6 +5592,7 @@ model McpServerOutputParsing {
 }
 
 /** The kind of output parsing for an MCP server tool. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 union McpServerOutputParsingKind {
   string,
@@ -5530,6 +5611,7 @@ union McpServerOutputParsingKind {
 }
 
 /** Automatically detect the output format and parse accordingly. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model McpServerAutoOutputParsing extends McpServerOutputParsing {
   /** The discriminator value. */
@@ -5537,6 +5619,7 @@ model McpServerAutoOutputParsing extends McpServerOutputParsing {
 }
 
 /** Parse the output as a JSON document using the configured JSON parameters. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model McpServerJsonOutputParsing extends McpServerOutputParsing {
   /** The discriminator value. */
@@ -5547,6 +5630,7 @@ model McpServerJsonOutputParsing extends McpServerOutputParsing {
 }
 
 /** Split the output into pages using the configured split parameters. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model McpServerSplitOutputParsing extends McpServerOutputParsing {
   /** The discriminator value. */
@@ -5557,6 +5641,7 @@ model McpServerSplitOutputParsing extends McpServerOutputParsing {
 }
 
 /** Treat the output as a single block without any parsing. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model McpServerNoneOutputParsing extends McpServerOutputParsing {
   /** The discriminator value. */
@@ -5564,6 +5649,7 @@ model McpServerNoneOutputParsing extends McpServerOutputParsing {
 }
 
 /** Parameters for JSON output parsing. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model McpServerOutputParsingJsonParameters {
   /** The JSON path to the array of documents in the tool output. */
@@ -5574,6 +5660,7 @@ model McpServerOutputParsingJsonParameters {
 }
 
 /** Parameters for split output parsing. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model McpServerOutputParsingSplitParameters {
   /** The text split mode to use. */
@@ -5593,6 +5680,7 @@ model McpServerOutputParsingSplitParameters {
 }
 
 /** Configuration for Fabric Data Agent knowledge source. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model FabricDataAgentKnowledgeSource extends KnowledgeSource {
   /** The discriminator value. */
@@ -5603,6 +5691,7 @@ model FabricDataAgentKnowledgeSource extends KnowledgeSource {
 }
 
 /** Parameters for Fabric Data Agent knowledge source. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model FabricDataAgentKnowledgeSourceParameters {
   /** Fabric workspace ID. */
@@ -5613,6 +5702,7 @@ model FabricDataAgentKnowledgeSourceParameters {
 }
 
 /** Configuration for Fabric Ontology knowledge source. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model FabricOntologyKnowledgeSource extends KnowledgeSource {
   /** The discriminator value. */
@@ -5623,6 +5713,7 @@ model FabricOntologyKnowledgeSource extends KnowledgeSource {
 }
 
 /** Parameters for Fabric Ontology knowledge source. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 model FabricOntologyKnowledgeSourceParameters {
   /** The Fabric workspace ID containing the ontology. */
@@ -5660,6 +5751,7 @@ model SearchServiceStatistics {
   limits: SearchServiceLimits;
 
   /** Service level indexer runtime consumption. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   indexersRuntime: ServiceIndexersRuntime;
@@ -5695,10 +5787,12 @@ model SearchServiceCounters {
   vectorIndexSize: ResourceCounter;
 
   /** Total number of knowledge bases. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   knowledgeBasesCount: ResourceCounter;
 
   /** Total number of knowledge sources. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   knowledgeSourcesCount: ResourceCounter;
 }
@@ -5741,6 +5835,7 @@ model SearchServiceLimits {
 
   /** The maximum vector index size (vector memory quota) allowed per index in bytes. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   maxVectorIndexSizePerIndexInBytes?: int64 | null;
 }
@@ -6604,6 +6699,7 @@ model WebApiVectorizerParameters {
 
 /** Clears the identity property of a datasource. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model AIServicesVisionVectorizer extends VectorSearchVectorizer {
@@ -7132,6 +7228,7 @@ model SplitSkill extends SearchIndexerSkill {
 
   /** Only applies if textSplitMode is set to pages. There are two possible values. The choice of the values will decide the length (maximumPageLength and pageOverlapLength) measurement. The default is 'characters', which means the length will be measured by character. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   unit?: SplitSkillUnit | null;
@@ -7139,6 +7236,7 @@ model SplitSkill extends SearchIndexerSkill {
   /** Only applies if the unit is set to azureOpenAITokens. If specified, the splitSkill will use these parameters when performing the tokenization. The parameters are a valid 'encoderModelName' and an optional 'allowedSpecialTokens' property. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   azureOpenAITokenizerParameters?: AzureOpenAITokenizerParameters | null;
@@ -7296,6 +7394,7 @@ model WebApiSkill extends SearchIndexerSkill {
 }
 
 /** The AML skill allows you to extend AI enrichment with a custom Azure Machine Learning (AML) model. Once an AML model is trained and deployed, an AML skill integrates it into AI enrichment. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model AzureMachineLearningSkill extends SearchIndexerSkill {
@@ -7343,6 +7442,7 @@ model AzureOpenAIEmbeddingSkill extends SearchIndexerSkill {
 }
 
 /** Allows you to generate a vector embedding for a given image or text input using the Azure AI Services Vision Vectorize API. */
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model VisionVectorizeSkill extends SearchIndexerSkill {
@@ -7364,6 +7464,14 @@ model ContentUnderstandingSkill extends SearchIndexerSkill {
   /** Controls the cardinality for chunking the content. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   chunkingProperties?: ContentUnderstandingSkillChunkingProperties | null;
+
+  /** The name of the chat-completion model used for image description. Must be provided together with modelDeployment. */
+  @added(Versions.v2026_05_01_preview)
+  modelName?: string;
+
+  /** The deployment name of the chat-completion model used for image description. Must be provided together with modelName. */
+  @added(Versions.v2026_05_01_preview)
+  modelDeployment?: string;
 
   /** A URI fragment specifying the type of skill. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
@@ -7587,6 +7695,7 @@ model ListIndexStatsSummary {
   /** The total count of index statistics in the service, or null if the count was not requested. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   `@odata.count`?: int64;
 

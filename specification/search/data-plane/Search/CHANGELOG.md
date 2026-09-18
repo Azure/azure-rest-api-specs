@@ -8,6 +8,126 @@ It is maintained for internal engineering reference and API Stewardship Board re
 
 ---
 
+## 2026-10-01
+
+**Summary**: Built on top of the 2026-04-01 GA. Promotes File, Indexed SQL, and Indexed SharePoint
+knowledge sources, indexed-reference citation URLs, server-sent-event knowledge retrieval, and
+knowledge-base CORS options to stable, building on GA agentic planning and answer synthesis.
+Adds File multipart management and capacity reporting, Indexed SharePoint list/page containers
+and ingestion settings; promotes Content Understanding semantic chunking and image verbalization
+to stable. File listing reuses the shared server-driven listing pagination contract.
+
+### GA-to-GA Changes (2026-04-01 -> 2026-10-01)
+
+#### Breaking Changes
+
+No wire-level breaking changes from these promotions. The existing JSON retrieve route and content negotiation are unchanged.
+
+The merged upstream list-operation search/paging changes trigger `ChangedParameterOrder` (`1042`, 46 findings) across `/aliases`, `/datasources`, `/indexers`, `/skillsets`, `/synonymmaps`, `/indexes`, `/knowledgebases`, and `/knowledgesources`: new optional query parameters (`search`, `pageSize`, `searchType`, and related listing/pagination fields) are spread in ahead of existing parameters in the TypeSpec operation signatures, so every parameter declared after them — including `x-ms-client-request-id` and, on writes, trailing path/body parameters — shifts to a higher positional index in the generated OpenAPI `parameters` array. It is not caused by the citation, streaming, or CORS promotions.
+
+This is wire-compatible, not a breaking change: HTTP header parameters (RFC 7230 §3.2) and query-string parameters (RFC 3986) are both unordered name/value pairs, and REST clients / OpenAPI-generated SDKs bind by parameter name, not array index. The same rule fired identically for the 2026-05-01-preview promotion (see that version's entry below) and was accepted there for the same reason. The only residual, non-blocking risk is a generated SDK that binds these operations via positional (non-named) method parameters, where a reordered signature could change caller-visible overload resolution — a per-language codegen concern to verify, not a service/wire compatibility issue.
+
+#### Non-Breaking Changes
+
+- **Indexed citations**: optional `citationUrl` on `KnowledgeBaseSearchIndexReference`, `KnowledgeBaseAzureBlobReference`, `KnowledgeBaseIndexedOneLakeReference`, `KnowledgeBaseFileReference`, `KnowledgeBaseIndexedSqlReference`, and `KnowledgeBaseIndexedSharePointReference` points to the backing document on the Search service. The URL uses the request's API version.
+- **Streaming retrieval**: `KnowledgeRetrieval_RetrieveStream` uses POST `.../knowledgebases('{knowledgeBaseName}')/retrieve` with `Accept: text/event-stream`. It preserves the preview event contract: `retrieval.started`, `activity.started`, `activity.completed`, `answer.completed`, `references.completed`, and either terminal `response.completed` or `error`. `response.completed` carries the completed response and semantic status (`200` or `206`); preflight errors remain JSON. Streaming accepts the same GA messages/intents, output modes, and `minimal`/`low`/`medium` reasoning settings as JSON retrieval; answer synthesis emits `answer.completed`. The `auto` reasoning mode remains preview-only.
+- **Activity timing**: optional `KnowledgeBaseActivityRecord.startedAt` and `completedAt` are available in both JSON responses and streaming event payloads.
+- **CORS**: optional `KnowledgeBase.corsOptions` and `FileKnowledgeSource.corsOptions` configure allowed browser origins and preflight cache duration, using the existing `CorsOptions` contract.
+- **SDK representation**: the existing SSE event payload models are available in the stable SDK. OpenAPI 2.0 still represents the stream body as a string, and generated C# exposes a buffered protocol response rather than typed incremental event parsing. This promotion does not add typed streaming SDK support.
+
+**New stable knowledge source types**:
+
+- `file`, `indexedSql`, and `indexedSharePoint`, including their create/update models, runtime
+  parameters, activity records, and reference types.
+- Indexed SharePoint adds the named extensible-container values `allSiteLists`, `allSitePages`,
+  and `allSiteContent`.
+
+**File knowledge source management**:
+
+- Multipart `KnowledgeSources_UploadFileMultipart` and `KnowledgeSources_UpdateFile`, plus
+  `KnowledgeSources_ListFiles` and `KnowledgeSources_DeleteFile`.
+- Multipart upload and update require structured `metadata` and binary `content` parts.
+- `FileUploadMetadata.fileName` remains optional in every API version.
+- `KnowledgeSourceFile` includes `prefix`, custom `metadata`, service-selected `parsingMode`, and
+  service-selected `extractionMode`.
+- File listing supports `prefix` and server-driven pagination and returns an opaque
+  `@odata.nextLink`.
+- `KnowledgeSourceStatus.fileCapacity` reports `maxFileCount`, `remainingFileCount`, and
+  `maxFileSizeBytes` only for File sources; other kinds omit it. The existing status contract
+  remains non-discriminated to preserve GA compatibility.
+- Shared listing query parameters (`search`, `pageSize`, `searchType`) and the corresponding
+  list response `@odata.nextLink` are retained in GA so File listings use the existing alias.
+
+**Shared knowledge-source capabilities**:
+
+- `KnowledgeSourceIngestionParameters` adds `ingestionPermissionOptions` and
+  `networkAccessMode`. Permission values remain extensible; Indexed SharePoint uses `userIds` and
+  `groupIds`, where `groupIds` represents both Entra and SharePoint groups.
+
+**Content Understanding skill**:
+
+- `ContentUnderstandingSkill.modelName` and `modelDeployment` configure the chat-completion model
+  used for image descriptions.
+- `ContentUnderstandingSkillChunkingProperties.method` supports `fixedSize` and `semantic`.
+- `ContentUnderstandingSkillChunkingUnit` adds `tokens` for semantic chunking.
+
+### Preview-to-GA Changes (2026-08-01-preview -> 2026-10-01)
+
+#### Breaking Changes
+
+No breaking changes to the promoted citation, streaming, or knowledge-base CORS contracts. The
+items below existed in `2026-08-01-preview` and are cut (not promoted) at this GA, so they are
+breaking only relative to that preview baseline — not relative to the `2026-04-01` GA above.
+
+- The top-level raw `application/octet-stream` File upload operation is not promoted. GA callers
+  must use multipart upload; the multipart binary `content` part may still use
+  `application/octet-stream`.
+- Generic stored `resultsProcessing` and runtime `neverQuerySource`,
+  `failOnError`, `resultsProcessing`, and `maxOutputDocuments` remain preview-only.
+- `queryHints` and `queryHintOverrides` are not promoted for File, Indexed SQL, or Indexed
+  SharePoint knowledge sources.
+- `assetStore`, `freshnessPolicy`, sensitivity-label ingestion, and image-serving-only surface are
+  not promoted as part of these stable knowledge source contracts.
+- **Query rewrites, hybrid search, and semantic debug info**: `queryRewrites`, `queryLanguage`,
+  `speller`, `semanticFields`, `debugInfo` and its nested breakdown models (`QueryRewritesDebugInfo`,
+  `SemanticDebugInfo`, `avg`/`min`/`max`/`sum`/`cardinality`/`facets`), and `hybridSearch`
+  (`threshold`, `filterOverride`, `perDocumentVectorLimit`) remain preview-only across all
+  affected request/response models.
+- **New knowledge source connectors not promoted**: `remoteSharePoint`, `workIQ`,
+  `fabricDataAgent`, `fabricOntology`, and `mcpServer` knowledge sources — including their
+  create/update parameter models, authentication kinds (`EntraAppAuthentication`,
+  `McpServerFoundryConnectionAuthentication`, `McpServerStoredHeadersAuthentication`), output
+  parsing (`McpServerOutputParsing` and its variants), `queryHints`/`queryHintOverrides`/boost
+  types, and their activity/reference record types — are not promoted.
+- **Indexer cache is not promoted**: `SearchIndexerCache`, the indexer `cache` property,
+  `disableCacheReprocessingChangeDetection`, `skipIndexerResetRequirementForCache`, and the
+  `resetDocs`/`resetSkills` selective-reset operations remain preview-only.
+- **Newer chat-completion model catalog entries are not promoted**: `AzureOpenAIModelName` values
+  `gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `gpt-4.1-nano`, `gpt-5`, `gpt-5.1`, `gpt-5.2`,
+  `gpt-5.4`, `gpt-5.5`, `gpt-5.6-sol`, `gpt-5.6-terra`, and `gpt-5.6-luna` remain preview-only; GA
+  retains `gpt-5-mini`/`nano` and the `gpt-5.4-mini`/`nano` GA baseline models.
+- **Miscellaneous preview-only fields not promoted**: `SearchService.subType`,
+  `isServiceLevelKey`, `flightingOptIn`, `purviewEnabled`, `sensitivityLabelId`,
+  `sensitivityLabelName`, `sourceDocumentId`, `KnowledgeBase.tags`, `retrieveDefaults`
+  (`KnowledgeBaseRetrieveDefaults`), `indexersRuntime`, `knowledgeBasesCount`,
+  `knowledgeSourcesCount`, `maxVectorIndexSizePerIndexInBytes`, and
+  `queryWorkIQSourceAuthorization`.
+- **New vectorizer/skill types not promoted**: `AIServicesVisionVectorizer`,
+  `AzureMachineLearningSkill`, `VisionVectorizeSkill`, and `AzureOpenAITokenizerParameters.unit`.
+
+#### Non-Breaking Changes
+
+The citation URLs, activity timestamps, streaming operation/event types, and knowledge-base CORS options described above retain their preview shapes in GA. Ordinary `application/json` retrieval and earlier API versions retain their existing behavior.
+
+- The promoted multipart File operations and the retained File, Indexed SQL, and Indexed
+  SharePoint models preserve their August preview wire names.
+- File capacity reporting and the Indexed SharePoint list/page/content container values are
+  additive relative to the August preview.
+- The existing semantic chunking and image verbalization contract is promoted without changing its
+  preview wire names or behavior.
+
+---
+
 
 ## 2026-08-01-preview
 

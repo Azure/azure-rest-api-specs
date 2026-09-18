@@ -143,6 +143,7 @@ alias querySourceAuthorizationHeader = {
 alias queryWorkIQSourceAuthorizationHeader = {
   /** User assertion token for a customer-owned Entra app registration configured on a Work IQ knowledge source. Used for on-behalf-of authentication to the Work IQ API. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   @secret
   @header("x-ms-query-work-iq-source-authorization")
