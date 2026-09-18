@@ -3,15 +3,11 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "@eslint/js": "catalog:",
     "@types/node": "catalog:",
-    "cross-env": "catalog:",
-    "eslint": "catalog:",
-    "execa": "^10.0.0",
+    "execa": "catalog:",
     "prettier": "catalog:",
     "prettier-plugin-organize-imports": "catalog:",
     "typescript": "catalog:",
-    "typescript-eslint": "catalog:",
     "vitest": "catalog:"
   },
   "scripts": {
@@ -20,7 +16,7 @@
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
     "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
-    "lint": "cross-env DEBUG=eslint:eslint,eslint:linter eslint",
+    "lint": "oxlint .",
     "test": "vitest",
     "test:ci": "vitest run --reporter=verbose"
   },

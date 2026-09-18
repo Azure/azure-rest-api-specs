@@ -12,7 +12,7 @@
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
     "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
-    "lint": "cross-env DEBUG=eslint:eslint,eslint:linter eslint",
+    "lint": "oxlint .",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
@@ -20,21 +20,17 @@
     "node": ">=24.14.1"
   },
   "dependencies": {
-    "minimatch": "^10.0.1",
-    "yaml": "^2.4.2",
+    "minimatch": "catalog:",
+    "yaml": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@azure-tools/specs-shared": "workspace:*",
-    "@eslint/js": "catalog:",
     "@types/node": "catalog:",
     "@vitest/coverage-v8": "catalog:",
-    "cross-env": "catalog:",
-    "eslint": "catalog:",
     "prettier": "catalog:",
     "prettier-plugin-organize-imports": "catalog:",
     "typescript": "catalog:",
-    "typescript-eslint": "catalog:",
     "vitest": "catalog:"
   },
   "version": "0.0.0"
