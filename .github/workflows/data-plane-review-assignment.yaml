@@ -62,5 +62,5 @@ jobs:
         with:
           script: |
             const { default: assignReviewers } =
-              await import('${{ github.workspace }}/.github/workflows/src/data-plane-review/assign-reviewers.js');
+              await import('${{ github.workspace }}/.github/workflows/src/data-plane-review/assign-reviewers.ts');
             await assignReviewers({ github, context, core });
