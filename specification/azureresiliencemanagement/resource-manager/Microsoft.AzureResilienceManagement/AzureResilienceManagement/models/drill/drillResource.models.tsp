@@ -30,8 +30,16 @@ model DrillResource is ProxyResource<DrillResourceProperties> {
   name: string;
 }
 
+@@typeChangedFrom(
+  DrillResource.properties,
+  Versions.v2026_09_30_preview,
+  LegacyDrillResourceProperties
+);
+
 @doc("Properties of the Resiliency Drill Resource")
-model DrillResourceProperties {
+@removed(Versions.v2026_09_30_preview)
+@renamedFrom(Versions.v2026_09_30_preview, "DrillResourceProperties")
+model LegacyDrillResourceProperties {
   @doc("ARM Id of the underlying resource.")
   resourceId: armResourceIdentifier<[]>;
 
@@ -132,6 +140,94 @@ model DrillResourceProperties {
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+@doc("Properties of the Resiliency Drill Resource")
+@added(Versions.v2026_09_30_preview)
+@discriminator("drillType")
+model DrillResourceProperties {
+  // Retired fields remain in the legacy model but must not reappear in the new base.
+  ...OmitProperties<
+    LegacyDrillResourceProperties,
+    | "activePhysicalZones"
+    | "recoveryPhysicalZones"
+    | "haStatus"
+    | "advisorHaRecommendationId"
+    | "targetAndCapabilityAssignmentError"
+    | "targetResourceAssignmentError"
+  >;
+
+  @doc("The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.")
+  @visibility(Lifecycle.Read)
+  drillType: DrillType;
+
+  /**
+   * Normal fault eligibility for a drill resource. Currently populated for regional resources only.
+   * Omitted until evaluated. Eligibility does not indicate inclusion or readiness,
+   * and force inclusion does not change this value.
+   */
+  @visibility(Lifecycle.Read)
+  faultEligibility?: FaultEligibility;
+
+  /**
+   * Reason the resource is ineligible under normal fault inclusion policy. Currently populated for regional resources only.
+   * Contains the single applicable recovery-plan reason when Ineligible.
+   * Omitted when Eligible, Unknown, or not yet evaluated. Failed or incomplete recovery-plan reads do not establish non-inclusion.
+   * Binding and permission errors are reported separately in attentionReason and error fields.
+   */
+  @visibility(Lifecycle.Read)
+  faultIneligibleReason?: FaultIneligibleReason;
+}
+
+@doc("Properties of a resource in a zonal Resiliency Drill.")
+@added(Versions.v2026_09_30_preview)
+model ZonalDrillResourceProperties extends DrillResourceProperties {
+  @doc("The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.")
+  @visibility(Lifecycle.Read)
+  drillType: DrillType.Zonal;
+
+  ...PickProperties<
+    LegacyDrillResourceProperties,
+    | "activePhysicalZones"
+    | "recoveryPhysicalZones"
+    | "haStatus"
+    | "advisorHaRecommendationId"
+  >;
+}
+
+@doc("Properties of a resource in a regional Resiliency Drill.")
+@added(Versions.v2026_09_30_preview)
+model RegionalDrillResourceProperties extends DrillResourceProperties {
+  @doc("The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.")
+  @visibility(Lifecycle.Read)
+  drillType: DrillType.Regional;
+
+  /**
+   * Regional resiliency status reported by the selected regional protection solution.
+   * Resilient corresponds to an available true posture value; NotResilient corresponds to an available false value.
+   * Omitted when the posture is unknown or unavailable; unavailable data is not reported as NotResilient.
+   */
+  @visibility(Lifecycle.Read)
+  regionalResiliencyStatus?: RegionalResiliencyStatus;
+
+  /**
+   * Replication mode of the selected regional protection solution.
+   * Omitted when no applicable mode is available.
+   */
+  @visibility(Lifecycle.Read)
+  replicationMode?: ReplicationMode;
+
+  /**
+   * Azure resource ID of the matching regional Advisor recommendation instance.
+   * The recommendation type is identified separately by advisorRecommendationTypeId.
+   * Omitted when no matching recommendation exists.
+   */
+  @visibility(Lifecycle.Read)
+  advisorRegionalRecommendationId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Advisor/recommendations";
+    }
+  ]>;
 }
 
 @doc("Reason why the Drill resource is in NeedsAttention state.")
