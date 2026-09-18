@@ -22,9 +22,10 @@ scalar LegacyClusterName extends string;
 @maxLength(63)
 scalar ClusterName extends string;
 
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The Cluster identity contract intentionally permits only None and UserAssigned so unsupported system-assigned identity values are rejected by the API schema."
 @doc("The managed identity types supported by a HorizonDB cluster.")
 union HorizonDbClusterIdentityType {
+  string,
+
   @doc("No managed identity is assigned.")
   None: "None",
 
