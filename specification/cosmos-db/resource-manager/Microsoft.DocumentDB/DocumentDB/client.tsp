@@ -1396,6 +1396,20 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 
 @@clientName(LocationGetResult, "CosmosDBLocation", "csharp");
 @@clientName(DatabaseAccountGetResults, "CosmosDBAccount", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
+@@clientOption(
+  DatabaseAccountGetResults,
+  "resource-rbac-roles",
+  #{
+    CosmosDBAccountReaderRole: "fbdf93bf-df7d-467e-a4d2-9458aa1360c8",
+    CosmosDBOperator: "230815da-be43-4aae-9cb4-875f7bd000aa",
+    CosmosBackupOperator: "db7b14f2-5adf-42da-9f96-f2ee17bab5cb",
+    CosmosRestoreOperator: "5432c526-bc82-444a-b7ba-57c5b0b5b34f",
+    DocumentDBAccountContributor: "5bd9cd88-fe45-4216-938b-f97437e15450",
+  },
+  "csharp"
+);
 @@clientName(ThroughputSettingsGetResults, "ThroughputSetting", "csharp");
 @@clientName(
   ThroughputSettingsGetProperties,
