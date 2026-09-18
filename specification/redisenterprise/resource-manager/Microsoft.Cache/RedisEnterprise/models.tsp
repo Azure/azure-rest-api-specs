@@ -1473,15 +1473,33 @@ model AccessPolicyAssignmentProperties {
   /**
    * **Deprecated.** This property always returns "default". Use `accessString` to configure custom Redis ACL permissions instead.
    */
+  @removed(Versions.v2026_05_01_preview)
+  @renamedFrom(Versions.v2026_05_01_preview, "accessPolicyName")
+  @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
+  accessPolicyNameBeforeCustomAccessString: string;
+
+  /**
+   * **Deprecated.** This property always returns "default". Use `accessString` to configure custom Redis ACL permissions instead.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "accessPolicyName")
   #deprecated "`accessPolicyName` is being deprecated. Use `accessString` to configure custom Redis ACL permissions instead."
   @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
-  @madeOptional(Versions.v2026_05_01_preview)
-  accessPolicyName?: string;
+  accessPolicyNameWithCustomAccessString?: string;
+
+  /**
+   * Name of access policy under specific access policy assignment. Only "default" policy is supported for now.
+   */
+  @added(Versions.v2026_09_01)
+  @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
+  accessPolicyName: string;
 
   /**
    * The Redis ACL permissions string applied to this assignment, for example `+@read ~cache:*`. Defaults to `+@all ~*` if not specified.
    */
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_09_01)
   accessString?: string;
 
   /**
@@ -1489,6 +1507,7 @@ model AccessPolicyAssignmentProperties {
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_09_01)
   provisioningError?: AccessPolicyAssignmentProvisioningError;
 
   /**
@@ -1511,6 +1530,7 @@ model AccessPolicyAssignmentPropertiesUser {
  * Error details for access policy assignment provisioning failures.
  */
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_09_01)
 model AccessPolicyAssignmentProvisioningError {
   /**
    * Machine-readable error code (e.g., "InvalidAccessString").
