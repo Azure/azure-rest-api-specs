@@ -62,10 +62,8 @@ interface Clusters {
   @sharedRoute
   deleteLegacy is ArmResourceDeleteWithoutOkAsync<
     Cluster,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   @added(Versions.v2026_10_01_preview)
@@ -73,10 +71,8 @@ interface Clusters {
   @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   @doc("Lists all HorizonDB clusters in a resource group.")
@@ -116,6 +112,7 @@ interface Clusters {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "HorizonDB supports a single default compute pool that cannot be deleted independently of its parent cluster."
 @renamedFrom(Versions.v2026_10_01_preview, "HorizonDbPools")
 @armResourceOperations
 interface Pools {
@@ -144,16 +141,6 @@ interface Pools {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @added(Versions.v2026_10_01_preview)
-  @doc("Deletes a HorizonDB pool together with its FirewallRule children and the Pool-scoped Endpoint whose associatedResourceId identifies that Pool. Neither the FirewallRules nor the Endpoint can outlive the Pool or be deleted independently from it.")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    Pool,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
-  >;
-
   @doc("Lists all HorizonDB pools in a cluster.")
   list is ArmResourceListByParent<Pool>;
 
@@ -163,13 +150,12 @@ interface Pools {
   start is ArmResourceActionAsyncBase<
     Pool,
     void,
-    | ArmAcceptedLroResponse<
-        "Resource operation accepted.",
-        LroHeaders = ArmLroLocationHeader &
-          ArmAsyncOperationHeader &
-          Azure.Core.Foundations.RetryAfterHeader
-      >
-    | ArmResponse<Pool>,
+    ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      LroHeaders = ArmLroLocationHeader &
+        ArmAsyncOperationHeader &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmResponse<Pool>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Pool>
   >;
 
@@ -179,13 +165,12 @@ interface Pools {
   stop is ArmResourceActionAsyncBase<
     Pool,
     void,
-    | ArmAcceptedLroResponse<
-        "Resource operation accepted.",
-        LroHeaders = ArmLroLocationHeader &
-          ArmAsyncOperationHeader &
-          Azure.Core.Foundations.RetryAfterHeader
-      >
-    | ArmResponse<Pool>,
+    ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      LroHeaders = ArmLroLocationHeader &
+        ArmAsyncOperationHeader &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmResponse<Pool>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Pool>
   >;
 
@@ -195,13 +180,12 @@ interface Pools {
   restart is ArmResourceActionAsyncBase<
     Pool,
     void,
-    | ArmAcceptedLroResponse<
-        "Resource operation accepted.",
-        LroHeaders = ArmLroLocationHeader &
-          ArmAsyncOperationHeader &
-          Azure.Core.Foundations.RetryAfterHeader
-      >
-    | ArmResponse<Pool>,
+    ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      LroHeaders = ArmLroLocationHeader &
+        ArmAsyncOperationHeader &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmResponse<Pool>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Pool>
   >;
 }
@@ -228,10 +212,8 @@ interface HorizonDbReplicas {
   @doc("Deletes a HorizonDB replica.")
   delete is ArmResourceDeleteWithoutOkAsync<
     HorizonDbReplica,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 }
 
@@ -255,10 +237,8 @@ interface HorizonDbFirewallRules {
   @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     LegacyHorizonDbFirewallRule,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 }
 
@@ -279,12 +259,10 @@ interface FirewallRules {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FirewallRule,
     LroHeaders = HorizonDbResourceLroHeaders<FirewallRule>,
-    Response =
-      | HorizonDbResourceUpdatedLroResponse<FirewallRule>
-      | ArmResourceCreatedResponse<
-          FirewallRule,
-          HorizonDbResourceLroHeaders<FirewallRule>
-        >
+    Response = HorizonDbResourceUpdatedLroResponse<FirewallRule> | ArmResourceCreatedResponse<
+      FirewallRule,
+      HorizonDbResourceLroHeaders<FirewallRule>
+    >
   >;
 
   @doc("Updates selected properties of a HorizonDB pool firewall rule. Omitted properties preserve their current values.")
@@ -294,10 +272,8 @@ interface FirewallRules {
   @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     FirewallRule,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 }
 
@@ -350,10 +326,8 @@ interface PrivateEndpointConnections {
   delete is PrivateEndpointOperations.DeleteAsync<
     Cluster,
     PrivateEndpointConnectionResource,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 }
 
@@ -394,10 +368,8 @@ interface ParameterGroups {
   @doc("Deletes a HorizonDB parameter group.")
   deleteV1 is ArmResourceDeleteWithoutOkAsync<
     ParameterGroup,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   @added(Versions.v2026_10_01_preview)
@@ -405,10 +377,8 @@ interface ParameterGroups {
   @doc("Deletes a HorizonDB parameter group. Deletion fails with a conflict when the parameter group is associated with one or more pools.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ParameterGroup,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   @doc("Lists all HorizonDB parameter groups in a resource group.")
@@ -423,9 +393,7 @@ interface ParameterGroups {
   @action("connections")
   @returnTypeChangedFrom(
     Versions.v2026_10_01_preview,
-
-      | ArmResponse<Azure.ResourceManager.ResourceListResult<ParameterGroupConnectionProperties>>
-      | ErrorResponse
+    ArmResponse<Azure.ResourceManager.ResourceListResult<ParameterGroupConnectionProperties>> | ErrorResponse
   )
   listConnections is ArmResourceActionSync<
     ParameterGroup,
@@ -477,10 +445,8 @@ interface HorizonDbAdministrators {
   @doc("Deletes a HorizonDB administrator.")
   delete is ArmResourceDeleteWithoutOkAsync<
     HorizonDbAdministrator,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   @doc("Lists all HorizonDB administrators in a cluster.")
@@ -500,21 +466,17 @@ interface MicrosoftEntraAdministrators {
     MicrosoftEntraAdministrator,
     Request = MicrosoftEntraAdministratorAdd,
     LroHeaders = HorizonDbResourceLroHeaders<MicrosoftEntraAdministrator>,
-    Response =
-      | HorizonDbResourceUpdatedLroResponse<MicrosoftEntraAdministrator>
-      | ArmResourceCreatedResponse<
-          MicrosoftEntraAdministrator,
-          HorizonDbResourceLroHeaders<MicrosoftEntraAdministrator>
-        >
+    Response = HorizonDbResourceUpdatedLroResponse<MicrosoftEntraAdministrator> | ArmResourceCreatedResponse<
+      MicrosoftEntraAdministrator,
+      HorizonDbResourceLroHeaders<MicrosoftEntraAdministrator>
+    >
   >;
 
   @doc("Deletes a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
   delete is ArmResourceDeleteWithoutOkAsync<
     MicrosoftEntraAdministrator,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   @doc("Lists the PostgreSQL roles in a cluster that are members of azure_pg_admin and mapped to Microsoft Entra principals.")
