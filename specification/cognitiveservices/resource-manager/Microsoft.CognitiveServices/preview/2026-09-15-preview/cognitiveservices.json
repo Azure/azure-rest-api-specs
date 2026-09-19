@@ -5352,7 +5352,7 @@
             "description": "The managed compute deployment patch properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedComputeDeploymentPatch"
+              "$ref": "#/definitions/PatchResourceSku"
             }
           }
         ],
@@ -18083,28 +18083,6 @@
         }
       }
     },
-    "ManagedComputeDeploymentPatch": {
-      "type": "object",
-      "description": "Properties to update the tags and SKU of a managed compute deployment.",
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The resource model definition representing SKU"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      }
-    },
     "ManagedComputeDeploymentProperties": {
       "type": "object",
       "description": "Properties of a Cognitive Services managed compute deployment.",
@@ -19331,6 +19309,18 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The resource model definition representing SKU"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },

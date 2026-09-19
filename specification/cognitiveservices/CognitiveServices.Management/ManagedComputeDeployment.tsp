@@ -64,15 +64,6 @@ model ManagedComputeDeployment
   etag?: string;
 }
 
-/**
- * Properties to update the tags and SKU of a managed compute deployment.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "The managed compute PATCH contract updates tags and SKU; deployment identity is supplied through PUT."
-@added(Versions.v2026_09_15_preview)
-model ManagedComputeDeploymentPatch {
-  ...PatchResourceTagsAndSku;
-}
-
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
@@ -107,33 +98,6 @@ interface ManagedComputeDeployments {
   /**
    * Updates the specified managed compute deployment associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Earlier API versions retain the existing SKU-only PATCH contract."
-  @added(Versions.v2026_03_15_preview)
-  @removed(Versions.v2026_05_01)
-  @added(Versions.v2026_05_15_preview)
-  @removed(Versions.v2026_07_01)
-  @added(Versions.v2026_07_15_preview)
-  @removed(Versions.v2026_09_01)
-  @renamedFrom(Versions.v2026_09_15_preview, "update")
-  @sharedRoute
-  @patch(#{ implicitOptionality: false })
-  updateLegacy is ArmCustomPatchAsync<
-    ManagedComputeDeployment,
-    LroHeaders = ArmLroLocationHeader<
-      Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
-      ManagedComputeDeployment,
-      string
-    > &
-      Azure.Core.Foundations.RetryAfterHeader &
-      ArmAsyncOperationHeader,
-    PatchModel = PatchResourceSku
-  >;
-
-  /**
-   * Updates the specified managed compute deployment associated with the Cognitive Services account.
-   */
-  @added(Versions.v2026_09_15_preview)
-  @sharedRoute
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ManagedComputeDeployment,
@@ -144,7 +108,7 @@ interface ManagedComputeDeployments {
     > &
       Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader,
-    PatchModel = ManagedComputeDeploymentPatch
+    PatchModel = PatchResourceSku
   >;
 
   /**
@@ -186,10 +150,6 @@ interface ManagedComputeDeployments {
 @@doc(
   ManagedComputeDeployments.createOrUpdate::parameters.resource,
   "The managed compute deployment properties."
-);
-@@doc(
-  ManagedComputeDeployments.updateLegacy::parameters.properties,
-  "The managed compute deployment patch properties."
 );
 @@doc(
   ManagedComputeDeployments.update::parameters.properties,
