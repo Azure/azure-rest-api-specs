@@ -101,7 +101,7 @@ interface AgentOptimizationJobCandidates {
       /** Comma-separated list of expand keys. Pass `mutations` to populate mutation `value` fields; omit to receive mutation items containing only `type`. Additional expand keys may be added in future previews. */
       @query expand?: string;
 
-      ...CommonPageQueryParameters;
+      ...AgentOptimizationCandidatePageQueryParameters;
     },
     AgentsPagedResult<AgentOptimizationCandidate>
   >;
@@ -140,3 +140,16 @@ interface AgentOptimizationJobCandidates {
     AgentOptimizationCandidate
   >;
 }
+
+alias AgentOptimizationCandidatePageQueryParameters = {
+  ...PageLimitQueryParameter;
+
+  /** Sort order by the candidate `started_at` timestamp. */
+  @query order?: PageOrder;
+
+  /** Candidate-ID cursor identifying the last item from the previous page. */
+  @query @continuationToken after?: string;
+
+  /** Candidate-ID cursor identifying the first item from the following page. */
+  @query before?: string;
+};

@@ -2029,7 +2029,7 @@
             "name": "order",
             "in": "query",
             "required": false,
-            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "description": "Sort order by the candidate `started_at` timestamp.",
             "schema": {
               "$ref": "#/components/schemas/PageOrder"
             },
@@ -2039,7 +2039,7 @@
             "name": "after",
             "in": "query",
             "required": false,
-            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "description": "Candidate-ID cursor identifying the last item from the previous page.",
             "schema": {
               "type": "string"
             },
@@ -2049,7 +2049,7 @@
             "name": "before",
             "in": "query",
             "required": false,
-            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "Candidate-ID cursor identifying the first item from the following page.",
             "schema": {
               "type": "string"
             },
