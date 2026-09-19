@@ -137,46 +137,10 @@ union EvaluatorImprovementStopReason {
   max_candidate_attempts_reached: "max_candidate_attempts_reached",
 
   @doc("The next conservative model-inference reservation did not fit the approved USD limit.")
-  max_cost_reached: "max_cost_reached",
+  max_inference_cost_usd_reached: "max_inference_cost_usd_reached",
 
   @doc("Independent confirmation was interrupted.")
   confirmation_interrupted: "confirmation_interrupted",
-}
-
-@added(Versions.PuPr)
-@removed(Versions.v1)
-@doc("The confirmation state allowed for an incomplete evaluator improvement result.")
-union EvaluatorImprovementIncompleteConfirmationStatus {
-  @doc("Confirmation did not start.")
-  not_run: EvaluatorImprovementConfirmationStatus.not_run,
-
-  @doc("Confirmation started but did not complete.")
-  interrupted: EvaluatorImprovementConfirmationStatus.interrupted,
-}
-
-@added(Versions.PuPr)
-@removed(Versions.v1)
-@doc("The confirmation state allowed for an insufficient-evidence result.")
-union EvaluatorImprovementInsufficientEvidenceConfirmationStatus {
-  @doc("Evidence readiness was insufficient before confirmation started.")
-  not_run: EvaluatorImprovementConfirmationStatus.not_run,
-
-  @doc("Confirmation completed and established that the evidence could not support the selected profile.")
-  completed: EvaluatorImprovementConfirmationStatus.completed,
-}
-
-@added(Versions.PuPr)
-@removed(Versions.v1)
-@doc("Why an incomplete evaluator improvement result stopped.")
-union EvaluatorImprovementIncompleteStopReason {
-  @doc("The approved candidate-attempt limit was reached.")
-  max_candidate_attempts_reached: EvaluatorImprovementStopReason.max_candidate_attempts_reached,
-
-  @doc("The next conservative model-inference reservation did not fit the approved USD limit.")
-  max_cost_reached: EvaluatorImprovementStopReason.max_cost_reached,
-
-  @doc("Independent confirmation was interrupted.")
-  confirmation_interrupted: EvaluatorImprovementStopReason.confirmation_interrupted,
 }
 
 @added(Versions.PuPr)
@@ -538,7 +502,7 @@ model EvaluatorImprovementPassThresholdGridConstraint
 
 @added(Versions.PuPr)
 @removed(Versions.v1)
-@doc("The caller-approved edit and scoring-calibration scope. The service intersects this scope with profile and evaluator restrictions. Dimensions cannot be added, removed, or reordered, and dimension identity, ownership, applicability, veto semantics, schemas, model bindings, and validation-profile acceptance rules remain unchanged.")
+@doc("The caller-approved edit and scoring-calibration scope. The service intersects this scope with profile and evaluator restrictions.")
 model EvaluatorImprovementEditScope {
   @doc("Existing model-owned dimension identifiers whose descriptions may be changed.")
   description_dimension_ids: string[];
@@ -570,7 +534,7 @@ model EvaluatorImprovementBudget {
   max_candidate_attempts: int32;
 
   @doc("The exact maximum USD amount for model inference. It excludes ACA, storage, networking, deterministic analysis, and human review.")
-  max_cost_usd: EvaluatorImprovementUsdAmount;
+  max_inference_cost_usd: EvaluatorImprovementUsdAmount;
 
   @doc("An approved rate override reference required only when the authoritative service catalog does not cover the selected configuration.")
   approved_rate_override?: EvaluatorImprovementApprovedRateOverrideReference;
@@ -584,7 +548,7 @@ model EvaluatorImprovementJobRequest {
   @doc("The model deployment used to generate and revise candidate rubric content.")
   generator: EvaluatorImprovementModelConfiguration;
 
-  @doc("The judge model deployment whose scoring configuration is resolved and frozen before development or confirmation work starts.")
+  @doc("The model deployment used to score the baseline and candidates.")
   judge: EvaluatorImprovementModelConfiguration;
 
   @doc("Evidence available to candidate search and selection.")
@@ -1119,10 +1083,10 @@ model EvaluatorImprovementProgress {
 
 @added(Versions.PuPr)
 @removed(Versions.v1)
-@doc("Exact model-inference budget progress. `spent_usd + reserved_usd + remaining_usd` equals `max_cost_usd`. `reconciled_usd` and `uncertain_usd` are identified subsets of `spent_usd` and must not be added to it.")
+@doc("Exact model-inference budget progress. `spent_usd + reserved_usd + remaining_usd` equals `max_inference_cost_usd`. `reconciled_usd` and `uncertain_usd` are identified subsets of `spent_usd` and must not be added to it.")
 model EvaluatorImprovementCostProgress {
   @doc("The exact approved model-inference USD limit.")
-  max_cost_usd: EvaluatorImprovementUsdAmount;
+  max_inference_cost_usd: EvaluatorImprovementUsdAmount;
 
   @doc("The current best-known model-inference cost already debited.")
   spent_usd: EvaluatorImprovementUsdAmount;
@@ -1136,7 +1100,7 @@ model EvaluatorImprovementCostProgress {
   @doc("The conservative maximum cost held for admitted but unfinished model calls.")
   reserved_usd: EvaluatorImprovementUsdAmount;
 
-  @doc("The uncommitted amount: `max_cost_usd - spent_usd - reserved_usd`.")
+  @doc("The uncommitted amount: `max_inference_cost_usd - spent_usd - reserved_usd`.")
   remaining_usd: EvaluatorImprovementUsdAmount;
 
   @doc("The frozen authoritative price schedule.")
@@ -1441,6 +1405,9 @@ model EvaluatorImprovementCandidateSnapshot {
   @doc("The non-publishing candidate subject identity.")
   subject: ImprovementCandidateAnalysisSubjectReference;
 
+  @doc("An opaque permission-checked reference for executing or inspecting this exact private candidate.")
+  execution_reference: string;
+
   @doc("The complete exact rubric evaluator definition stored for the candidate.")
   definition: RubricBasedEvaluatorDefinition;
 
@@ -1553,7 +1520,6 @@ model EvaluatorImprovementReadyForReviewResult
   extends EvaluatorImprovementJobResult {
   outcome: EvaluatorImprovementOutcome.ready_for_review;
   confirmation_status: EvaluatorImprovementConfirmationStatus.completed;
-  stop_reason: EvaluatorImprovementStopReason.candidate_confirmed;
 
   @doc("The exact stored finalist.")
   candidate: EvaluatorImprovementCandidateSnapshot;
@@ -1572,7 +1538,6 @@ model EvaluatorImprovementNoImprovementResult
   extends EvaluatorImprovementJobResult {
   outcome: EvaluatorImprovementOutcome.no_improvement;
   confirmation_status: EvaluatorImprovementConfirmationStatus.completed;
-  stop_reason: EvaluatorImprovementStopReason.confirmed_no_improvement;
 
   @doc("The one frozen finalist that was independently confirmed. It is not publication-eligible.")
   candidate: EvaluatorImprovementCandidateSnapshot;
@@ -1590,8 +1555,6 @@ model EvaluatorImprovementNoImprovementResult
 model EvaluatorImprovementInsufficientEvidenceResult
   extends EvaluatorImprovementJobResult {
   outcome: EvaluatorImprovementOutcome.insufficient_evidence;
-  confirmation_status: EvaluatorImprovementInsufficientEvidenceConfirmationStatus;
-  stop_reason: EvaluatorImprovementStopReason.insufficient_evidence;
 
   @doc("The frozen finalist, when insufficiency was discovered during confirmation.")
   candidate?: EvaluatorImprovementCandidateSnapshot;
@@ -1599,14 +1562,12 @@ model EvaluatorImprovementInsufficientEvidenceResult
 
 @added(Versions.PuPr)
 @removed(Versions.v1)
-@doc("A successful bounded result without a complete confirmation decision. It never represents confirmed no gain or missing labels by default, and it is never publication-eligible.")
+@doc("A successful bounded result without a complete confirmation decision. It never represents confirmed no gain or missing labels by default.")
 model EvaluatorImprovementIncompleteResult
   extends EvaluatorImprovementJobResult {
   outcome: EvaluatorImprovementOutcome.incomplete;
-  confirmation_status: EvaluatorImprovementIncompleteConfirmationStatus;
-  stop_reason: EvaluatorImprovementIncompleteStopReason;
 
-  @doc("A non-publishable frozen finalist, when one existed before bounded work stopped.")
+  @doc("An eligible frozen finalist, when one existed before bounded work stopped.")
   candidate?: EvaluatorImprovementCandidateSnapshot;
 }
 
