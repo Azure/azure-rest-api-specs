@@ -1284,7 +1284,7 @@ paths:
     get:
       operationId: AgentOptimizationJobCandidates_listCandidates
       summary: List candidates for an agent optimization job
-      description: Lists candidates for the given optimization job with cursor pagination. Each `output.mutations` item identifies a changed attribute by `type`; mutation `value` fields are omitted unless the client passes `expand=mutations`.
+      description: Lists candidates for the given optimization job with cursor pagination, including the original baseline and generated candidates. Each `output.mutations` item identifies a changed attribute by `type`; mutation `value` fields are omitted unless the client passes `expand=mutations`.
       parameters:
         - name: jobId
           in: path
@@ -45909,7 +45909,7 @@ components:
       properties:
         candidate_summary:
           $ref: '#/components/schemas/AgentOptimizationResultCandidateSummary'
-          description: Summary of evaluated candidates. Omitted for jobs that do not comparatively evaluate candidates and until candidate processing begins.
+          description: Summary of candidates produced by the job. Omitted until candidate processing begins.
         token_usage:
           type: array
           items:
@@ -46031,22 +46031,22 @@ components:
         completed_candidate_count:
           type: integer
           format: int32
-          description: Number of candidates whose evaluation completed, including the baseline once completed.
+          description: Number of completed candidates, including the baseline once completed.
         baseline_id:
           type: string
           description: Candidate ID of the original baseline. Omitted until the baseline candidate is available.
         best_id:
           type: string
-          description: Candidate ID of the highest-scoring completed candidate. Omitted until a candidate has been selected.
+          description: Candidate ID of the highest-scoring candidate for evaluated jobs, or the selected transformed output for non-comparative jobs. Omitted until a candidate has been selected.
         baseline_score:
           type: number
           format: double
-          description: Score of the baseline candidate. Omitted until baseline evaluation completes.
+          description: Score of the baseline candidate for a comparatively evaluated job. Omitted otherwise and until baseline evaluation completes.
         best_score:
           type: number
           format: double
-          description: Best score observed across completed candidates. Omitted until a candidate completes evaluation.
-      description: Summary of the candidates evaluated by an agent optimization job.
+          description: Best score observed for a comparatively evaluated job. Omitted otherwise and until a candidate completes evaluation.
+      description: Summary of candidates produced by an agent optimization job.
     AgentOptimizationSetInput:
       type: object
       required:

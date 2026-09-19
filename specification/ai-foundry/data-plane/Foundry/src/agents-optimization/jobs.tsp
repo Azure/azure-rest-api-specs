@@ -85,27 +85,27 @@ model AgentOptimizationJobLatency {
   call_count: int64;
 }
 
-@doc("Summary of the candidates evaluated by an agent optimization job.")
+@doc("Summary of candidates produced by an agent optimization job.")
 model AgentOptimizationResultCandidateSummary {
-  @doc("Number of candidates whose evaluation completed, including the baseline once completed.")
+  @doc("Number of completed candidates, including the baseline once completed.")
   completed_candidate_count: int32;
 
   @doc("Candidate ID of the original baseline. Omitted until the baseline candidate is available.")
   baseline_id?: string;
 
-  @doc("Candidate ID of the highest-scoring completed candidate. Omitted until a candidate has been selected.")
+  @doc("Candidate ID of the highest-scoring candidate for evaluated jobs, or the selected transformed output for non-comparative jobs. Omitted until a candidate has been selected.")
   best_id?: string;
 
-  @doc("Score of the baseline candidate. Omitted until baseline evaluation completes.")
+  @doc("Score of the baseline candidate for a comparatively evaluated job. Omitted otherwise and until baseline evaluation completes.")
   baseline_score?: float64;
 
-  @doc("Best score observed across completed candidates. Omitted until a candidate completes evaluation.")
+  @doc("Best score observed for a comparatively evaluated job. Omitted otherwise and until a candidate completes evaluation.")
   best_score?: float64;
 }
 
 @doc("Partial or terminal result produced by an agent optimization job.")
 model AgentOptimizationJobResult {
-  @doc("Summary of evaluated candidates. Omitted for jobs that do not comparatively evaluate candidates and until candidate processing begins.")
+  @doc("Summary of candidates produced by the job. Omitted until candidate processing begins.")
   candidate_summary?: AgentOptimizationResultCandidateSummary;
 
   @doc("Aggregate token usage per stage and model. Always present; empty array when no calls were measured.")

@@ -88,7 +88,7 @@ interface AgentOptimizationJobs {
 @tag("AgentOptimizationJobs")
 interface AgentOptimizationJobCandidates {
   /**
-   * Lists candidates for the given optimization job with cursor pagination. Each `output.mutations` item identifies a changed attribute by `type`; mutation `value` fields are omitted unless the client passes `expand=mutations`.
+   * Lists candidates for the given optimization job with cursor pagination, including the original baseline and generated candidates. Each `output.mutations` item identifies a changed attribute by `type`; mutation `value` fields are omitted unless the client passes `expand=mutations`.
    */
   @summary("List candidates for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates")
