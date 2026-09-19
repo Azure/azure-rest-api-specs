@@ -161,8 +161,8 @@ model PostVolumeResult {
   /** The HTTP 201 status code. */
   @statusCode statusCode: 201;
 
-    /** URL of the created volume. */
-    @header("Location") location: ResourceLocation<Volume>;
+  /** URL of the created volume. */
+  @header("Location") location: ResourceLocation<Volume>;
 
   /** The returned volume. */
   @body body: Volume;
