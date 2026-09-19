@@ -1,0 +1,54 @@
+{
+  "operationId": "EdgeActionVersions_Create",
+  "title": "CreateEdgeActionVersion",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-10-01",
+    "edgeActionName": "edgeAction1",
+    "version": "version2",
+    "resource": {
+      "location": "global",
+      "properties": {
+        "deploymentType": "zip"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1/versions/version2",
+        "name": "version2",
+        "type": "Microsoft.Cdn/edgeActions/versions",
+        "location": "global",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentType": "zip",
+          "validationStatus": "Succeeded",
+          "isDefaultVersion": true,
+          "lastPackageUpdateTime": "2024-05-25T16:19:23Z",
+          "deploymentStatus": "NotStarted"
+        }
+      },
+      "headers": {
+        "azure-async-operation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActionOperations/operationId?api-version=2026-10-01"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1/versions/version2",
+        "name": "version2",
+        "type": "Microsoft.Cdn/edgeActions/versions",
+        "location": "global",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentType": "zip",
+          "validationStatus": "Succeeded",
+          "isDefaultVersion": true,
+          "lastPackageUpdateTime": "2024-05-25T16:19:23Z",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    }
+  }
+}

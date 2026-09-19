@@ -21,9 +21,19 @@ using Microsoft.Cdn;
 @@clientName(ProvisioningState, "EdgeActionProvisioningState", "csharp");
 @@clientName(SkuType, "EdgeActionSkuType", "csharp");
 @@clientName(VersionCode, "EdgeActionVersionCode", "csharp");
+@@clientName(
+  VersionCodeDeploymentRequest,
+  "EdgeActionVersionCodeDeployment",
+  "csharp"
+);
 @@clientName(EdgeActions.addAttachment::parameters.body, "content", "csharp");
 @@clientName(
   EdgeActions.deleteAttachment::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(
+  EdgeActionVersions.deployVersionCodePreview::parameters.body,
   "content",
   "csharp"
 );

@@ -25,6 +25,7 @@ namespace Microsoft.Cdn;
 enum Versions {
   `2025-09-01-preview`,
   `2025-12-01-preview`,
+  `2026-10-01`,
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "SKU property required at envelope level for backwards compatibility with 2024-07-22-preview"
@@ -90,10 +91,47 @@ model EdgeActionExecutionFilter
 @armResourceOperations
 interface EdgeActions {
   get is ArmResourceRead<EdgeAction>;
-  create is ArmResourceCreateOrUpdateAsync<EdgeAction>;
-  update is ArmCustomPatchAsync<EdgeAction, EdgeActionUpdate>;
+
+  @sharedRoute
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "create")
+  createPreview is ArmResourceCreateOrUpdateAsync<EdgeAction>;
+
+  @sharedRoute
+  @added(Versions.`2026-10-01`)
+  create is ArmResourceCreateOrReplaceAsync<
+    EdgeAction,
+    LroHeaders = EdgeActionPutLroHeaders<EdgeAction>,
+    Response =
+      | EdgeActionResourceUpdatedLroResponse<EdgeAction>
+      | ArmResourceCreatedResponse<
+          EdgeAction,
+          EdgeActionPutLroHeaders<EdgeAction>
+        >
+  >;
+
+  @sharedRoute
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "update")
+  updatePreview is ArmCustomPatchAsync<EdgeAction, EdgeActionUpdate>;
+
+  @sharedRoute
+  @added(Versions.`2026-10-01`)
+  update is ArmCustomPatchAsync<
+    EdgeAction,
+    Azure.ResourceManager.Foundations.TagsUpdateModel<EdgeAction>,
+    LroHeaders = ArmCombinedLroHeaders<
+      EdgeActionOperationProperties,
+      EdgeAction
+    > &
+      EdgeActionRetryAfterHeader
+  >;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Service returns 200 for successful delete operations"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  @sharedRoute
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "delete")
+  deletePreview is ArmResourceDeleteWithoutOkAsync<
     EdgeAction,
     Azure.ResourceManager.Foundations.BaseParameters<EdgeAction>,
     ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
@@ -102,6 +140,28 @@ interface EdgeActions {
     | ArmDeleteAcceptedLroResponse
     | ArmDeletedNoContentResponse
   >;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The EdgeActions contract preserves synchronous 200 alongside asynchronous 202 and idempotent 204 delete responses."
+  @sharedRoute
+  @added(Versions.`2026-10-01`)
+  delete is ArmResourceDeleteWithoutOkAsync<
+    EdgeAction,
+    Azure.ResourceManager.Foundations.BaseParameters<EdgeAction>,
+    ArmCombinedLroHeaders<
+      StatusMonitor = EdgeActionOperationProperties,
+      FinalResult = void
+    > &
+      EdgeActionRetryAfterHeader,
+    {},
+    | ArmDeletedResponse
+    | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<
+        StatusMonitor = EdgeActionOperationProperties,
+        FinalResult = void
+      > &
+        EdgeActionRetryAfterHeader>
+    | ArmDeletedNoContentResponse
+  >;
+
   listByResourceGroup is ArmResourceListByParent<EdgeAction>;
   listBySubscription is ArmListBySubscription<EdgeAction>;
 
@@ -125,16 +185,53 @@ interface EdgeActions {
 @armResourceOperations
 interface EdgeActionVersions {
   get is ArmResourceRead<EdgeActionVersion>;
-  create is ArmResourceCreateOrUpdateAsync<EdgeActionVersion>;
-  update is ArmCustomPatchAsync<
+
+  @sharedRoute
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "create")
+  createPreview is ArmResourceCreateOrUpdateAsync<EdgeActionVersion>;
+
+  @sharedRoute
+  @added(Versions.`2026-10-01`)
+  create is ArmResourceCreateOrReplaceAsync<
+    EdgeActionVersion,
+    LroHeaders = EdgeActionPutLroHeaders<EdgeActionVersion>,
+    Response =
+      | EdgeActionResourceUpdatedLroResponse<EdgeActionVersion>
+      | ArmResourceCreatedResponse<
+          EdgeActionVersion,
+          EdgeActionPutLroHeaders<EdgeActionVersion>
+        >
+  >;
+
+  @sharedRoute
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "update")
+  updatePreview is ArmCustomPatchAsync<
     EdgeActionVersion,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       EdgeActionVersion,
       EdgeActionVersionProperties
     >
   >;
+
+  @sharedRoute
+  @added(Versions.`2026-10-01`)
+  update is ArmCustomPatchAsync<
+    EdgeActionVersion,
+    Azure.ResourceManager.Foundations.TagsUpdateModel<EdgeActionVersion>,
+    LroHeaders = ArmCombinedLroHeaders<
+      StatusMonitor = EdgeActionOperationProperties,
+      FinalResult = EdgeActionVersion
+    > &
+      EdgeActionRetryAfterHeader
+  >;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Service returns 200 for successful delete operations"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  @sharedRoute
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "delete")
+  deletePreview is ArmResourceDeleteWithoutOkAsync<
     EdgeActionVersion,
     Azure.ResourceManager.Foundations.BaseParameters<EdgeActionVersion>,
     ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
@@ -143,17 +240,60 @@ interface EdgeActionVersions {
     | ArmDeleteAcceptedLroResponse
     | ArmDeletedNoContentResponse
   >;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The EdgeActions contract preserves synchronous 200 alongside asynchronous 202 and idempotent 204 delete responses."
+  @sharedRoute
+  @added(Versions.`2026-10-01`)
+  delete is ArmResourceDeleteWithoutOkAsync<
+    EdgeActionVersion,
+    Azure.ResourceManager.Foundations.BaseParameters<EdgeActionVersion>,
+    ArmCombinedLroHeaders<
+      StatusMonitor = EdgeActionOperationProperties,
+      FinalResult = void
+    > &
+      EdgeActionRetryAfterHeader,
+    {},
+    | ArmDeletedResponse
+    | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<
+        StatusMonitor = EdgeActionOperationProperties,
+        FinalResult = void
+      > &
+        EdgeActionRetryAfterHeader>
+    | ArmDeletedNoContentResponse
+  >;
+
   listByEdgeAction is ArmResourceListByParent<EdgeActionVersion>;
+
   @doc("A long-running resource action.")
-  deployVersionCode is ArmResourceActionAsync<
+  @sharedRoute
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "deployVersionCode")
+  deployVersionCodePreview is ArmResourceActionAsync<
     EdgeActionVersion,
     VersionCode,
     EdgeActionVersionProperties
   >;
 
+  /** Deploys code to an edge action version. */
+  @sharedRoute
+  @added(Versions.`2026-10-01`)
+  deployVersionCode is ArmResourceActionAsync<
+    EdgeActionVersion,
+    VersionCodeDeploymentRequest,
+    EdgeActionVersionProperties,
+    LroHeaders = ArmCombinedLroHeaders<
+      StatusMonitor = EdgeActionOperationProperties,
+      FinalResult = EdgeActionVersionProperties
+    > &
+      EdgeActionRetryAfterHeader
+  >;
+
   /** Get the version code for the edge action version. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Explicitly set content type for POST operations - expected by service"
-  getVersionCode is ArmResourceActionAsync<
+  @sharedRoute
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "getVersionCode")
+  getVersionCodePreview is ArmResourceActionAsync<
     EdgeActionVersion,
     void,
     VersionCode,
@@ -163,31 +303,98 @@ interface EdgeActionVersions {
     }
   >;
 
+  /** Gets the deployed code for an edge action version. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This GET retrieves version-code content from an action route rather than reading the EdgeActionVersion resource."
+  @autoRoute
+  @armResourceAction(EdgeActionVersion)
+  @get
+  @sharedRoute
+  @added(Versions.`2026-10-01`)
+  getVersionCode(
+    ...Azure.ResourceManager.ResourceInstanceParameters<EdgeActionVersion>,
+  ): ArmResponse<VersionCode> | ErrorResponse;
+
   /** Swap the default version for the edge action. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Explicitly set content type for POST operations - expected by service"
-  swapDefault is ArmResourceActionNoContentAsync<
+  @sharedRoute
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "swapDefault")
+  swapDefaultPreview is ArmResourceActionNoContentAsync<
     EdgeActionVersion,
     void,
     Parameters = {
       /** Content type */
       @header contentType: "application/json";
     }
+  >;
+
+  /** Swaps the default edge action version. */
+  @sharedRoute
+  @added(Versions.`2026-10-01`)
+  swapDefault is ArmResourceActionNoResponseContentAsync<
+    EdgeActionVersion,
+    void,
+    LroHeaders = ArmCombinedLroHeaders<
+      StatusMonitor = EdgeActionOperationProperties,
+      FinalResult = void
+    > &
+      EdgeActionRetryAfterHeader
   >;
 }
 
 @armResourceOperations
 interface EdgeActionExecutionFilters {
   get is ArmResourceRead<EdgeActionExecutionFilter>;
-  create is ArmResourceCreateOrUpdateAsync<EdgeActionExecutionFilter>;
-  update is ArmCustomPatchAsync<
+
+  @sharedRoute
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "create")
+  createPreview is ArmResourceCreateOrUpdateAsync<EdgeActionExecutionFilter>;
+
+  @sharedRoute
+  @added(Versions.`2026-10-01`)
+  create is ArmResourceCreateOrReplaceAsync<
+    EdgeActionExecutionFilter,
+    LroHeaders = EdgeActionPutLroHeaders<EdgeActionExecutionFilter>,
+    Response =
+      | EdgeActionResourceUpdatedLroResponse<EdgeActionExecutionFilter>
+      | ArmResourceCreatedResponse<
+          EdgeActionExecutionFilter,
+          EdgeActionPutLroHeaders<EdgeActionExecutionFilter>
+        >
+  >;
+
+  @sharedRoute
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "update")
+  updatePreview is ArmCustomPatchAsync<
     EdgeActionExecutionFilter,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       EdgeActionExecutionFilter,
       EdgeActionExecutionFilterProperties
     >
   >;
+
+  @sharedRoute
+  @added(Versions.`2026-10-01`)
+  update is ArmCustomPatchAsync<
+    EdgeActionExecutionFilter,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      EdgeActionExecutionFilter,
+      EdgeActionExecutionFilterPropertiesUpdate
+    >,
+    LroHeaders = ArmCombinedLroHeaders<
+      StatusMonitor = EdgeActionOperationProperties,
+      FinalResult = EdgeActionExecutionFilter
+    > &
+      EdgeActionRetryAfterHeader
+  >;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Service returns 200 for successful delete operations"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  @sharedRoute
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "delete")
+  deletePreview is ArmResourceDeleteWithoutOkAsync<
     EdgeActionExecutionFilter,
     Azure.ResourceManager.Foundations.BaseParameters<EdgeActionExecutionFilter>,
     ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
@@ -196,5 +403,41 @@ interface EdgeActionExecutionFilters {
     | ArmDeleteAcceptedLroResponse
     | ArmDeletedNoContentResponse
   >;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The EdgeActions contract preserves synchronous 200 alongside asynchronous 202 and idempotent 204 delete responses."
+  @sharedRoute
+  @added(Versions.`2026-10-01`)
+  delete is ArmResourceDeleteWithoutOkAsync<
+    EdgeActionExecutionFilter,
+    Azure.ResourceManager.Foundations.BaseParameters<EdgeActionExecutionFilter>,
+    ArmCombinedLroHeaders<
+      StatusMonitor = EdgeActionOperationProperties,
+      FinalResult = void
+    > &
+      EdgeActionRetryAfterHeader,
+    {},
+    | ArmDeletedResponse
+    | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<
+        StatusMonitor = EdgeActionOperationProperties,
+        FinalResult = void
+      > &
+        EdgeActionRetryAfterHeader>
+    | ArmDeletedNoContentResponse
+  >;
   listByEdgeAction is ArmResourceListByParent<EdgeActionExecutionFilter>;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "The existing EdgeAction-RP operation status endpoint is a custom polling resource without an ARM id/name/type envelope."
+@added(Versions.`2026-10-01`)
+interface EdgeActionOperations {
+  /** Gets the status of an edge action operation. */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActionOperations/{operationId}")
+  @get
+  get(
+    ...Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
+
+    /** The opaque identifier of the operation. */
+    @path
+    operationId: string,
+  ): ArmResponse<EdgeActionOperationProperties> | ErrorResponse;
 }
