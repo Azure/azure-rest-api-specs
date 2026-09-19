@@ -248,19 +248,14 @@ using Azure.AI.Projects;
 
 @@clientName(CodeConfiguration.content_hash, "contentSha256");
 
-@@clientName(AgentOptimizationCandidate.avg_score, "averageScore");
-@@clientName(AgentOptimizationCandidate.avg_tokens, "averageTokens");
-@@clientName(AgentOptimizationCandidate.eval_id, "evaluationId");
-@@clientName(AgentOptimizationCandidate.eval_run_id, "evaluationRunId");
+@@clientName(AgentOptimizationCandidateEvaluation.score, "averageScore");
+@@clientName(AgentOptimizationCandidateEvaluation.avg_tokens, "averageTokens");
+@@clientName(AgentOptimizationCandidateEvaluation.eval_id, "evaluationId");
 @@clientName(
-  AgentOptimizationDatasetItem.desired_num_turns,
-  "desiredNumberTurns"
+  AgentOptimizationCandidateEvaluation.eval_run_id,
+  "evaluationRunId"
 );
-@@clientName(
-  AgentOptimizationEvaluatorRef,
-  "AgentOptimizationEvaluatorReference"
-);
-@@clientName(AgentOptimizationJobProgress.elapsed_seconds, "elapsed");
+@@clientName(AgentOptimizationEvaluator, "AgentOptimizationEvaluatorReference");
 
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
 @@clientName(Microsoft365PublishResponse, "Microsoft365PublishResult");
@@ -722,17 +717,6 @@ model TimeZoneType {}
 @@alternateType(
   OpenAI.WebSearchApproximateLocation.timezone,
   TimeZoneType,
-  "java"
-);
-
-// Java-only helper scalar so `elapsed_seconds` (wire = fractional seconds as float64)
-// is exposed to callers as java.time.Duration while keeping the wire format unchanged.
-@encode(DurationKnownEncoding.seconds, float64)
-scalar DurationInFloatSeconds extends duration;
-
-@@alternateType(
-  AgentOptimizationJobProgress.elapsed_seconds,
-  DurationInFloatSeconds,
   "java"
 );
 

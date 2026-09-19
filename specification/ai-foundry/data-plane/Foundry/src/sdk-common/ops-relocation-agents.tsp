@@ -28,6 +28,24 @@ namespace Azure.AI.Projects {
     Azure.AI.Projects.AgentSessionFiles.deleteSessionFile,
     Agents
   );
+  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.create, Agents);
+  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.get, Agents);
+  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, Agents);
+  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.cancel, Agents);
+  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.delete, Agents);
+  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.estimate, Agents);
+  @@clientLocation(
+    Azure.AI.Projects.AgentOptimizationJobCandidates.listCandidates,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentOptimizationJobCandidates.getCandidate,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentOptimizationJobCandidates.promoteCandidate,
+    Agents
+  );
   @@clientLocation(
     Azure.AI.Projects.Microsoft365Publishing.publishAgentToMicrosoft365,
     Agents
@@ -74,9 +92,4 @@ namespace Azure.AI.Projects.Beta {
   @@clientLocation(Azure.AI.Projects.MemoryStores.listMemories, MemoryStores);
   @@clientLocation(Azure.AI.Projects.MemoryStores.deleteMemory, MemoryStores);
 
-  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.create, Agents);
-  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.get, Agents);
-  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, Agents);
-  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.cancel, Agents);
-  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.delete, Agents);
 }
