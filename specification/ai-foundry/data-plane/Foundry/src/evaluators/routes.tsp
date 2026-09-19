@@ -102,13 +102,19 @@ alias EvaluatorImprovementScopeParameters = {
 alias EvaluatorImprovementJobIdentifierParameter = {
   @doc("The evaluator improvement job identifier.")
   @path
-  job_id: string;
+  jobId: string;
 };
 
 alias EvaluatorImprovementRequiredIfMatchHeader = {
   @doc("The ETag of the unnumbered current evaluator to capture as this job's immutable baseline.")
   @header("If-Match")
   if_match: string;
+};
+
+alias EvaluatorImprovementRequiredOperationIdHeader = {
+  @doc("A client-generated identifier required for idempotent create, publish, and reject retries.")
+  @header("Operation-Id")
+  operationId: string;
 };
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling is represented by Operation-Location and @pollingOperation on create."
@@ -400,7 +406,7 @@ interface Evaluators {
   >;
 
   /** Creates a durable bounded improvement job after capturing the current evaluator under the required ETag. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The evaluator-scoped job create operation requires If-Match and supports Operation-Id in addition to the Foundry preview envelope."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The evaluator-scoped job create operation requires If-Match and Operation-Id in addition to the Foundry preview envelope."
   #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "409 distinguishes an idempotency conflict and 412 distinguishes a stale captured evaluator precondition."
   @added(Versions.PuPr)
   @removed(Versions.v1)
@@ -413,7 +419,7 @@ interface Evaluators {
     {
       ...EvaluatorImprovementScopeParameters;
       ...EvaluatorImprovementRequiredIfMatchHeader;
-      ...WithOperationId;
+      ...EvaluatorImprovementRequiredOperationIdHeader;
 
       @doc("The bounded evaluator improvement request.")
       @body
@@ -430,7 +436,7 @@ interface Evaluators {
   @removed(Versions.v1)
   @summary("Get an evaluator improvement job")
   @get
-  @route("/evaluators/{name}/improvement_jobs/{job_id}")
+  @route("/evaluators/{name}/improvement_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
   getImprovementJob is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
@@ -462,7 +468,7 @@ interface Evaluators {
   @removed(Versions.v1)
   @summary("Cancel an evaluator improvement job")
   @post
-  @route("/evaluators/{name}/improvement_jobs/{job_id}:cancel")
+  @route("/evaluators/{name}/improvement_jobs/{jobId}:cancel")
   @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
   cancelImprovementJob is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
@@ -477,7 +483,7 @@ interface Evaluators {
   @removed(Versions.v1)
   @summary("Delete an evaluator improvement job")
   @delete
-  @route("/evaluators/{name}/improvement_jobs/{job_id}")
+  @route("/evaluators/{name}/improvement_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
   deleteImprovementJob is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
@@ -493,13 +499,13 @@ interface Evaluators {
   @removed(Versions.v1)
   @summary("Publish an evaluator improvement candidate")
   @post
-  @route("/evaluators/{name}/improvement_jobs/{job_id}:publish")
+  @route("/evaluators/{name}/improvement_jobs/{jobId}:publish")
   @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
   publishImprovementCandidate is EvaluatorImprovementRequiredPreviewOperation<
     {
       ...EvaluatorImprovementScopeParameters;
       ...EvaluatorImprovementJobIdentifierParameter;
-      ...WithOperationId;
+      ...EvaluatorImprovementRequiredOperationIdHeader;
 
       @doc("The exact stored candidate to publish.")
       @body
@@ -517,13 +523,13 @@ interface Evaluators {
   @removed(Versions.v1)
   @summary("Reject an evaluator improvement candidate")
   @post
-  @route("/evaluators/{name}/improvement_jobs/{job_id}:reject")
+  @route("/evaluators/{name}/improvement_jobs/{jobId}:reject")
   @extension("x-ms-foundry-meta", EvaluatorImprovementRequiredPreviews)
   rejectImprovementCandidate is EvaluatorImprovementRequiredPreviewOperation<
     {
       ...EvaluatorImprovementScopeParameters;
       ...EvaluatorImprovementJobIdentifierParameter;
-      ...WithOperationId;
+      ...EvaluatorImprovementRequiredOperationIdHeader;
 
       @doc("The exact stored candidate to reject.")
       @body

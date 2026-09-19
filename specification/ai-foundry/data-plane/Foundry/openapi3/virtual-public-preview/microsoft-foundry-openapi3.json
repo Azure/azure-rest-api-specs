@@ -16064,8 +16064,8 @@
           {
             "name": "Operation-Id",
             "in": "header",
-            "required": false,
-            "description": "Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.",
+            "required": true,
+            "description": "A client-generated identifier required for idempotent create, publish, and reject retries.",
             "schema": {
               "type": "string"
             }
@@ -16346,7 +16346,7 @@
         }
       }
     },
-    "/evaluators/{name}/improvement_jobs/{job_id}": {
+    "/evaluators/{name}/improvement_jobs/{jobId}": {
       "get": {
         "operationId": "Evaluators_getImprovementJob",
         "summary": "Get an evaluator improvement job",
@@ -16374,7 +16374,7 @@
             }
           },
           {
-            "name": "job_id",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "description": "The evaluator improvement job identifier.",
@@ -16471,7 +16471,7 @@
             }
           },
           {
-            "name": "job_id",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "description": "The evaluator improvement job identifier.",
@@ -16525,7 +16525,7 @@
         }
       }
     },
-    "/evaluators/{name}/improvement_jobs/{job_id}:cancel": {
+    "/evaluators/{name}/improvement_jobs/{jobId}:cancel": {
       "post": {
         "operationId": "Evaluators_cancelImprovementJob",
         "summary": "Cancel an evaluator improvement job",
@@ -16553,7 +16553,7 @@
             }
           },
           {
-            "name": "job_id",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "description": "The evaluator improvement job identifier.",
@@ -16614,7 +16614,7 @@
         }
       }
     },
-    "/evaluators/{name}/improvement_jobs/{job_id}:publish": {
+    "/evaluators/{name}/improvement_jobs/{jobId}:publish": {
       "post": {
         "operationId": "Evaluators_publishImprovementCandidate",
         "summary": "Publish an evaluator improvement candidate",
@@ -16642,7 +16642,7 @@
             }
           },
           {
-            "name": "job_id",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "description": "The evaluator improvement job identifier.",
@@ -16653,8 +16653,8 @@
           {
             "name": "Operation-Id",
             "in": "header",
-            "required": false,
-            "description": "Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.",
+            "required": true,
+            "description": "A client-generated identifier required for idempotent create, publish, and reject retries.",
             "schema": {
               "type": "string"
             }
@@ -16743,7 +16743,7 @@
         }
       }
     },
-    "/evaluators/{name}/improvement_jobs/{job_id}:reject": {
+    "/evaluators/{name}/improvement_jobs/{jobId}:reject": {
       "post": {
         "operationId": "Evaluators_rejectImprovementCandidate",
         "summary": "Reject an evaluator improvement candidate",
@@ -16771,7 +16771,7 @@
             }
           },
           {
-            "name": "job_id",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "description": "The evaluator improvement job identifier.",
@@ -16782,8 +16782,8 @@
           {
             "name": "Operation-Id",
             "in": "header",
-            "required": false,
-            "description": "Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.",
+            "required": true,
+            "description": "A client-generated identifier required for idempotent create, publish, and reject retries.",
             "schema": {
               "type": "string"
             }
@@ -49874,7 +49874,7 @@
         "type": "object",
         "required": [
           "max_candidate_attempts",
-          "max_inference_cost_usd"
+          "max_cost_usd"
         ],
         "properties": {
           "max_candidate_attempts": {
@@ -49883,7 +49883,7 @@
             "minimum": 1,
             "description": "The maximum number of proposed candidate configurations, including structurally rejected proposals and deterministic calibration variants."
           },
-          "max_inference_cost_usd": {
+          "max_cost_usd": {
             "$ref": "#/components/schemas/EvaluatorImprovementUsdAmount",
             "description": "The exact maximum USD amount for model inference. It excludes ACA, storage, networking, deterministic analysis, and human review."
           },
@@ -49975,7 +49975,6 @@
         "type": "object",
         "required": [
           "subject",
-          "execution_reference",
           "definition",
           "change",
           "rationale",
@@ -49986,10 +49985,6 @@
           "subject": {
             "$ref": "#/components/schemas/ImprovementCandidateAnalysisSubjectReference",
             "description": "The non-publishing candidate subject identity."
-          },
-          "execution_reference": {
-            "type": "string",
-            "description": "An opaque permission-checked reference for executing or inspecting this exact private candidate."
           },
           "definition": {
             "$ref": "#/components/schemas/RubricBasedEvaluatorDefinition",
@@ -50111,7 +50106,7 @@
       "EvaluatorImprovementCostProgress": {
         "type": "object",
         "required": [
-          "max_inference_cost_usd",
+          "max_cost_usd",
           "spent_usd",
           "reconciled_usd",
           "uncertain_usd",
@@ -50120,7 +50115,7 @@
           "price_snapshot"
         ],
         "properties": {
-          "max_inference_cost_usd": {
+          "max_cost_usd": {
             "$ref": "#/components/schemas/EvaluatorImprovementUsdAmount",
             "description": "The exact approved model-inference USD limit."
           },
@@ -50142,14 +50137,14 @@
           },
           "remaining_usd": {
             "$ref": "#/components/schemas/EvaluatorImprovementUsdAmount",
-            "description": "The uncommitted amount: `max_inference_cost_usd - spent_usd - reserved_usd`."
+            "description": "The uncommitted amount: `max_cost_usd - spent_usd - reserved_usd`."
           },
           "price_snapshot": {
             "$ref": "#/components/schemas/EvaluatorImprovementPriceSnapshot",
             "description": "The frozen authoritative price schedule."
           }
         },
-        "description": "Exact model-inference budget progress. `spent_usd + reserved_usd + remaining_usd` equals `max_inference_cost_usd`. `reconciled_usd` and `uncertain_usd` are identified subsets of `spent_usd` and must not be added to it."
+        "description": "Exact model-inference budget progress. `spent_usd + reserved_usd + remaining_usd` equals `max_cost_usd`. `reconciled_usd` and `uncertain_usd` are identified subsets of `spent_usd` and must not be added to it."
       },
       "EvaluatorImprovementDatasetReference": {
         "type": "object",
@@ -50258,7 +50253,7 @@
             "description": "Optional approved calibration of the evaluator definition's `pass_threshold`. Pairwise profiles omit this unless they define a separate compatible binary decision mapping."
           }
         },
-        "description": "The caller-approved edit and scoring-calibration scope. The service intersects this scope with profile and evaluator restrictions."
+        "description": "The caller-approved edit and scoring-calibration scope. The service intersects this scope with profile and evaluator restrictions. Dimensions cannot be added, removed, or reordered, and dimension identity, ownership, applicability, veto semantics, schemas, model bindings, and validation-profile acceptance rules remain unchanged."
       },
       "EvaluatorImprovementEditableDimensionField": {
         "type": "string",
@@ -50571,10 +50566,29 @@
         },
         "description": "Counts of explicit evidence units. Zero is valid. No field defines a universal minimum."
       },
+      "EvaluatorImprovementIncompleteConfirmationStatus": {
+        "anyOf": [
+          {
+            "type": "string",
+            "enum": [
+              "not_run"
+            ]
+          },
+          {
+            "type": "string",
+            "enum": [
+              "interrupted"
+            ]
+          }
+        ],
+        "description": "The confirmation state allowed for an incomplete evaluator improvement result."
+      },
       "EvaluatorImprovementIncompleteResult": {
         "type": "object",
         "required": [
-          "outcome"
+          "outcome",
+          "confirmation_status",
+          "stop_reason"
         ],
         "properties": {
           "outcome": {
@@ -50583,9 +50597,15 @@
               "incomplete"
             ]
           },
+          "confirmation_status": {
+            "$ref": "#/components/schemas/EvaluatorImprovementIncompleteConfirmationStatus"
+          },
+          "stop_reason": {
+            "$ref": "#/components/schemas/EvaluatorImprovementIncompleteStopReason"
+          },
           "candidate": {
             "$ref": "#/components/schemas/EvaluatorImprovementCandidateSnapshot",
-            "description": "An eligible frozen finalist, when one existed before bounded work stopped."
+            "description": "A non-publishable frozen finalist, when one existed before bounded work stopped."
           }
         },
         "allOf": [
@@ -50593,15 +50613,66 @@
             "$ref": "#/components/schemas/EvaluatorImprovementJobResult"
           }
         ],
-        "description": "A successful bounded result without a complete confirmation decision. It never represents confirmed no gain or missing labels by default."
+        "description": "A successful bounded result without a complete confirmation decision. It never represents confirmed no gain or missing labels by default, and it is never publication-eligible."
+      },
+      "EvaluatorImprovementIncompleteStopReason": {
+        "anyOf": [
+          {
+            "type": "string",
+            "enum": [
+              "max_candidate_attempts_reached"
+            ]
+          },
+          {
+            "type": "string",
+            "enum": [
+              "max_cost_reached"
+            ]
+          },
+          {
+            "type": "string",
+            "enum": [
+              "confirmation_interrupted"
+            ]
+          }
+        ],
+        "description": "Why an incomplete evaluator improvement result stopped."
+      },
+      "EvaluatorImprovementInsufficientEvidenceConfirmationStatus": {
+        "anyOf": [
+          {
+            "type": "string",
+            "enum": [
+              "not_run"
+            ]
+          },
+          {
+            "type": "string",
+            "enum": [
+              "completed"
+            ]
+          }
+        ],
+        "description": "The confirmation state allowed for an insufficient-evidence result."
       },
       "EvaluatorImprovementInsufficientEvidenceResult": {
         "type": "object",
         "required": [
-          "outcome"
+          "outcome",
+          "confirmation_status",
+          "stop_reason"
         ],
         "properties": {
           "outcome": {
+            "type": "string",
+            "enum": [
+              "insufficient_evidence"
+            ]
+          },
+          "confirmation_status": {
+            "$ref": "#/components/schemas/EvaluatorImprovementInsufficientEvidenceConfirmationStatus"
+          },
+          "stop_reason": {
             "type": "string",
             "enum": [
               "insufficient_evidence"
@@ -50785,7 +50856,7 @@
           },
           "judge": {
             "$ref": "#/components/schemas/EvaluatorImprovementModelConfiguration",
-            "description": "The model deployment used to score the baseline and candidates."
+            "description": "The judge model deployment whose scoring configuration is resolved and frozen before development or confirmation work starts."
           },
           "development_source": {
             "$ref": "#/components/schemas/EvaluatorImprovementEvidenceSourceReference",
@@ -51053,6 +51124,7 @@
         "required": [
           "outcome",
           "confirmation_status",
+          "stop_reason",
           "candidate",
           "development_assessment",
           "confirmation_assessment"
@@ -51068,6 +51140,12 @@
             "type": "string",
             "enum": [
               "completed"
+            ]
+          },
+          "stop_reason": {
+            "type": "string",
+            "enum": [
+              "confirmed_no_improvement"
             ]
           },
           "candidate": {
@@ -51668,6 +51746,7 @@
         "required": [
           "outcome",
           "confirmation_status",
+          "stop_reason",
           "candidate",
           "development_assessment",
           "confirmation_assessment"
@@ -51683,6 +51762,12 @@
             "type": "string",
             "enum": [
               "completed"
+            ]
+          },
+          "stop_reason": {
+            "type": "string",
+            "enum": [
+              "candidate_confirmed"
             ]
           },
           "candidate": {
@@ -51865,7 +51950,7 @@
               "confirmed_no_improvement",
               "insufficient_evidence",
               "max_candidate_attempts_reached",
-              "max_inference_cost_usd_reached",
+              "max_cost_reached",
               "confirmation_interrupted"
             ]
           }
