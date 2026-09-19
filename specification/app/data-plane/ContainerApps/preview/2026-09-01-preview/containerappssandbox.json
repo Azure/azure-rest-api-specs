@@ -1691,6 +1691,13 @@
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/DiskImage"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the created disk image."
+              }
             }
           },
           "400": {
@@ -10200,6 +10207,7 @@
       "properties": {
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The proxy URL."
         },
         "ca": {
@@ -11001,11 +11009,13 @@
         },
         "mcpRuntimeUrl": {
           "type": "string",
+          "format": "uri",
           "description": "MCP server endpoint URL resolved by the service.",
           "readOnly": true
         },
         "connectionRuntimeUrl": {
           "type": "string",
+          "format": "uri",
           "description": "Direct connection endpoint URL resolved by the service.",
           "readOnly": true
         },
@@ -13181,10 +13191,12 @@
         },
         "appUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The apps domain URL for sandboxes with type=app label."
         },
         "managementUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The base URL for data plane operations."
         },
         "agentIdentity": {
@@ -13514,6 +13526,7 @@
         },
         "tokenExchangeEndpoint": {
           "type": "string",
+          "format": "uri",
           "description": "The endpoint used to exchange tokens for the connection."
         }
       },
