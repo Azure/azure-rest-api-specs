@@ -8,12 +8,9 @@ options:
     output-file: "{version-status}/{version}/openapi.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.CleanRoom"
-    clear-output-folder: true
-    model-namespace: false
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.CleanRoom"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-go":
     service-dir: sdk/resourcemanager/cleanroom
     emitter-output-dir: "{output-dir}/{service-dir}/armcleanroom"
@@ -45,6 +42,7 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 parameters:
   service-dir:
     default: sdk/cleanroom

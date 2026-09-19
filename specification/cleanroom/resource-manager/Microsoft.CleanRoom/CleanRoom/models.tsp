@@ -358,6 +358,7 @@ model ReadonlyKubeConfigResult {
   /**
    * The readonly kubeconfig for the collaboration.
    */
+  @secret
   kubeconfig: string;
 }
 
