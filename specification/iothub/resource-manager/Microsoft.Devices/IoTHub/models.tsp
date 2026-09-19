@@ -745,6 +745,7 @@ model ErrorDetails {
  * The connection profile that the IoT hub uses for device connections.
  */
 @added(Versions.v2026_10_01_preview)
+@removed(Versions.v2026_11_01)
 union ConnectionProfile {
   string,
 
@@ -763,6 +764,7 @@ union ConnectionProfile {
  * Settings for an Event Grid-backed MQTT v5 IoT hub.
  */
 @added(Versions.v2026_10_01_preview)
+@removed(Versions.v2026_11_01)
 model MqttV5Settings {
   /**
    * The customer-defined groups of topic templates that devices publish to.
@@ -775,6 +777,7 @@ model MqttV5Settings {
  * A named set of topic templates for an Event Grid-backed MQTT v5 IoT hub.
  */
 @added(Versions.v2026_10_01_preview)
+@removed(Versions.v2026_11_01)
 model TopicGroup {
   /**
    * The customer-supplied identifier used to reconcile the topic group during updates.
@@ -960,12 +963,14 @@ model IotHubProperties {
    * The connection profile that the IoT hub uses for device connections. Defaults to 'Classic'.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   connectionProfile?: ConnectionProfile = ConnectionProfile.Classic;
 
   /**
    * The custom topic configuration for an Event Grid-backed MQTT v5 IoT hub. This property is valid only when connectionProfile is 'MqttV5'.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   mqttV5Settings?: MqttV5Settings;
 
   /**
@@ -1247,6 +1252,7 @@ model RoutingEndpoints {
  * The supported formats for message payloads delivered to routing endpoints.
  */
 @added(Versions.v2026_10_01_preview)
+@removed(Versions.v2026_11_01)
 union MessagePayloadFormat {
   string,
 
@@ -1317,6 +1323,7 @@ model RoutingEventStreamProperties {
    * The format of the message payload delivered to this endpoint.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   messagePayloadFormat?: MessagePayloadFormat;
 }
 
@@ -1375,6 +1382,7 @@ model RoutingServiceBusQueueEndpointProperties {
    * The format of the message payload delivered to this endpoint.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   messagePayloadFormat?: MessagePayloadFormat;
 }
 
@@ -1443,6 +1451,7 @@ model RoutingServiceBusTopicEndpointProperties {
    * The format of the message payload delivered to this endpoint.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   messagePayloadFormat?: MessagePayloadFormat;
 }
 
@@ -1501,6 +1510,7 @@ model RoutingEventHubProperties {
    * The format of the message payload delivered to this endpoint.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   messagePayloadFormat?: MessagePayloadFormat;
 }
 
@@ -1583,6 +1593,7 @@ model RoutingStorageContainerProperties {
    * The format of the message payload delivered to this endpoint.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   messagePayloadFormat?: MessagePayloadFormat;
 }
 
@@ -1664,6 +1675,7 @@ model RoutingCosmosDBSqlApiProperties {
    * The format of the message payload delivered to this endpoint.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   messagePayloadFormat?: MessagePayloadFormat;
 }
 
@@ -1691,6 +1703,7 @@ model RouteProperties {
    * The data schema reference that is used to interpret the message body.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   dataSchema?: string;
 
   /**
