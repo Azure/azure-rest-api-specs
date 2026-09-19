@@ -1,5 +1,5 @@
-/* eslint-disable */
-// TODO: Enable eslint, fix errors
+/* oxlint-disable */
+// TODO: Enable oxlint, fix errors
 
 import { type Suppression } from "@azure-tools/suppressions";
 import { join } from "path";

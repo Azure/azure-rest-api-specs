@@ -13,8 +13,7 @@ Below are code convention we strive to follow in `eng` directory:
 - We align `package.json` dependencies versions across all `package.json` files.
 - We align `package.json` dependencies numbers with [microsoft/typespec package.json].
   In few cases we allow more frequent update cadence.
-- We avoid doing package overrides. For example, we use `v8` of `eslint` instead of `v9` to avoid an override.
-  [See this comment for details][eslint override].
+- We avoid doing package overrides where possible.
 - We order `package.json` keys as follows: `name private type main bin scripts engines dependencies devDependencies`.
 
 ### pnpm and the lock file
@@ -44,15 +43,29 @@ Below are code convention we strive to follow in `eng` directory:
 
 ## Linting and prettier
 
-- We make eslint-based linting rules and prettier mandatory in CI for all projects.
-- We use strict rulesets as baseline.
-- We discuss any desired rule divergences from the strict ruleset
-  and apply rule modifications to the configs with explanation for our decision.
+- Run `pnpm lint` from the repository root to lint the previously linted packages
+  in `.github` and `eng/tools` in one oxlint invocation. Use `pnpm lint:fix` to apply
+  safe fixes. File selection lives in the root `.oxlintrc.json`, so the root command
+  is simply `oxlint .`; other repository folders and root-level files are excluded.
+- The root `.oxlintrc.json` is the single lint configuration. It preserves the previous
+  ESLint recommended and TypeScript recommended type-checked rules, with type-aware
+  linting provided by `oxlint-tsgolint`. Duplicate arguments and octal literals are
+  rejected by strict-mode parsing instead of separate lint rules.
+- `.github/workflows/lint.yaml` runs linting once on Linux for all packages, outside
+  the package/OS test matrices. Package workflows still run type checks, tests, and
+  Prettier; they must not invoke code linting again. Package-local `pnpm lint` scripts
+  remain available for development.
+- `openapi-diff-runner`, `sdk-suppressions`, `summarize-impact`, and
+  `typespec-migration-validation` did not previously run ESLint and remain excluded
+  in the root configuration. Enabling linting for these packages is a separate
+  change, not part of the linter migration. Their type checks, tests,
+  and formatting are unchanged. Existing suppressions in linted packages are
+  retained; unused suppressions fail linting.
+- Discuss any desired rule divergences and explain them in the configuration.
 - We align `prettier` rules with [microsoft/typespec .prettierrc.json].
 
 [pnpm]: https://pnpm.io
 [Design guidelines for spec repos validation tooling]: https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/1153/Design-guidelines-for-spec-repos-validation-tooling
-[eslint override]: https://github.com/Azure/azure-rest-api-specs/pull/29820#pullrequestreview-2177045580
 [microsoft/typespec .prettierrc.json]: https://github.com/microsoft/typespec/blob/main/.prettierrc.json
 [microsoft/typespec package.json]: https://github.com/microsoft/typespec/blob/main/package.json
 [npm/cli #7384]: https://github.com/npm/cli/issues/7384
