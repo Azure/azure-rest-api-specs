@@ -1481,10 +1481,10 @@ model AccessPolicyAssignmentProperties {
   /**
    * **Deprecated.** This property always returns "default". Use `accessString` to configure custom Redis ACL permissions instead.
    */
+  #deprecated "`accessPolicyName` is being deprecated. Use `accessString` to configure custom Redis ACL permissions instead."
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_09_01)
   @renamedFrom(Versions.v2026_09_01, "accessPolicyName")
-  #deprecated "`accessPolicyName` is being deprecated. Use `accessString` to configure custom Redis ACL permissions instead."
   @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
   accessPolicyNameWithCustomAccessString?: string;
 
