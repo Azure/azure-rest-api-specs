@@ -41,6 +41,22 @@ model ManagedComputeDeployment
   sku?: Sku;
 
   /**
+   * Identity for the managed compute deployment. For VmManagedCompute, specify a user-assigned identity attached to the selected Foundry project.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Cognitive Services uses its existing Identity contract for managed compute deployments"
+  @added(Versions.v2026_09_15_preview)
+  identity?: Identity;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Cognitive Services supports tags on this proxy resource"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> preserves the existing Cognitive Services tag shape"
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
+
+  /**
    * Resource Etag.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc uses lowercase 'etag' field name — EntityTagProperty uses 'eTag' which would be a breaking change"
@@ -65,7 +81,19 @@ interface ManagedComputeDeployments {
   /**
    * Creates or updates a managed compute deployment associated with the Cognitive Services account.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ManagedComputeDeployment>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ManagedComputeDeployment,
+    Parameters = {
+      /**
+       * Foundry project used when creating a VmManagedCompute deployment. If omitted, the account's default project is used.
+       * A project must be specified through this header or configured as the account default.
+       * For an existing deployment, the project resolved at creation is retained.
+       */
+      @added(Versions.v2026_09_15_preview)
+      @header("azureai-project")
+      azureAiProject?: string;
+    }
+  >;
 
   /**
    * Updates the specified managed compute deployment associated with the Cognitive Services account.

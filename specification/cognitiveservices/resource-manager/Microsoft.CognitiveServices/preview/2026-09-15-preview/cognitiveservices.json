@@ -5250,6 +5250,14 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
           },
           {
+            "name": "azureai-project",
+            "in": "header",
+            "description": "Foundry project used when creating a VmManagedCompute deployment. If omitted, the account's default project is used.\nA project must be specified through this header or configured as the account default.\nFor an existing deployment, the project resolved at creation is retained.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "azureAiProject"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "The managed compute deployment properties.",
@@ -18001,6 +18009,22 @@
           "$ref": "#/definitions/Sku",
           "description": "The resource model definition representing SKU"
         },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity for the managed compute deployment. For VmManagedCompute, specify a user-assigned identity attached to the selected Foundry project."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "etag": {
           "type": "string",
           "description": "Resource Etag.",
@@ -19285,6 +19309,18 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The resource model definition representing SKU"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },

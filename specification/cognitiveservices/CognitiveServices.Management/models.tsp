@@ -3872,6 +3872,7 @@ model SkuResource {
 /**
  * The object being used to update sku of a resource, in general used for PATCH operations.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "The managed compute PATCH contract updates tags and SKU; deployment identity is supplied through PUT."
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
@@ -3884,6 +3885,14 @@ model PatchResourceSku {
    * The resource model definition representing SKU
    */
   sku?: Sku;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> preserves the existing Cognitive Services tag shape"
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
 }
 
 /**
