@@ -4,11 +4,10 @@
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "testrg",
-    "api-version": "2025-12-01-preview",
+    "api-version": "2026-10-01",
     "edgeActionName": "edgeAction1",
     "version": "version2",
     "body": {
-      "name": "zippedFile",
       "content": "UEsDBBQAAAAIAI1NzkQAAAAABQAAAA=="
     }
   },
@@ -18,13 +17,15 @@
         "provisioningState": "Succeeded",
         "deploymentType": "zip",
         "validationStatus": "Succeeded",
-        "isDefaultVersion": "True",
-        "lastPackageUpdateTime": "2024-05-25T16:19:23Z"
+        "isDefaultVersion": true,
+        "lastPackageUpdateTime": "2024-05-25T16:19:23Z",
+        "deploymentStatus": "Succeeded"
       }
     },
     "202": {
       "headers": {
-        "location": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-09-01-preview"
+        "location": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2026-10-01",
+        "azure-async-operation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActionOperations/operationId?api-version=2026-10-01"
       }
     }
   }
