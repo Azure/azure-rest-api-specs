@@ -4,9 +4,9 @@ import { devNull } from "node:os";
 import path, { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { createDummySwagger } from "../src/command-helpers.js";
-import { validateBreakingChange } from "../src/commands.js";
-import { runOad } from "../src/run-oad.js";
+import { createDummySwagger } from "../src/command-helpers.ts";
+import { excludeSuppressedSwaggers, validateBreakingChange } from "../src/commands.ts";
+import { runOad } from "../src/run-oad.ts";
 
 const serviceParent = "specification/foo/data-plane/";
 
@@ -18,12 +18,12 @@ vi.mock("@azure-tools/specs-shared/changed-files", async () => {
   };
 });
 
-vi.mock("../src/run-oad.js", () => ({
+vi.mock("../src/run-oad.ts", () => ({
   runOad: vi.fn(),
 }));
 
-vi.mock("../src/command-helpers.js", async () => {
-  const actual = await vi.importActual("../src/command-helpers.js");
+vi.mock("../src/command-helpers.ts", async () => {
+  const actual = await vi.importActual("../src/command-helpers.ts");
   return {
     ...actual,
     createDummySwagger: vi.fn(),
@@ -418,6 +418,53 @@ describe("validateBreakingChange", () => {
       }
     },
   );
+});
+
+describe("Swagger suppressions", () => {
+  it("filters every file in suppressed directories and keeps rule-scoped files", async () => {
+    const fixtureRoot = resolve(__dirname, "suppression-fixtures");
+    const testContext = {
+      ...context,
+      localSpecRepoPath: resolve(fixtureRoot, "head"),
+      runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
+      prInfo: {
+        ...context.prInfo,
+        tempRepoFolder: resolve(fixtureRoot, "base"),
+      },
+    };
+
+    const result = await excludeSuppressedSwaggers(testContext, [
+      "specification/contoso/stable/one.json",
+      "specification/contoso/stable/two.json",
+      "specification/contoso/preview/three.json",
+      "specification/contoso/rules/rule-scoped.json",
+      "specification/contoso/deleted/removed.json",
+    ]);
+
+    expect(result).toEqual(["specification/contoso/rules/rule-scoped.json"]);
+  });
+
+  it("uses the cross-version suppression name independently", async () => {
+    const fixtureRoot = resolve(__dirname, "suppression-fixtures");
+    const result = await excludeSuppressedSwaggers(
+      {
+        ...context,
+        localSpecRepoPath: resolve(fixtureRoot, "head"),
+        runType: BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
+        prInfo: {
+          ...context.prInfo,
+          tempRepoFolder: resolve(fixtureRoot, "base"),
+        },
+      },
+      [
+        "specification/contoso/stable/one.json",
+        "specification/contoso/preview/three.json",
+        "specification/contoso/cross/four.json",
+      ],
+    );
+
+    expect(result).toEqual(["specification/contoso/stable/one.json"]);
+  });
 });
 
 function prependParentFolder(

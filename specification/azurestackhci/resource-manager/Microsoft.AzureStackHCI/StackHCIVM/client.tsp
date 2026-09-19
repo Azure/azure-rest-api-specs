@@ -1,6 +1,8 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
+// cspell:ignore SEVSNP Sevsnp
+
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.AzureStackHCI;
@@ -15,6 +17,7 @@ using Microsoft.AzureStackHCI;
 
 @@clientName(Route, "HciVmNetworkingRoute", "csharp");
 @@clientName(RouteTable, "HciVmNetworkingRouteTable", "csharp");
+@@alternateType(RouteTable.etag, eTag, "csharp");
 @@clientName(Subnet, "HciVmNetworkingSubnet", "csharp");
 @@clientName(Status, "HciVmOperationStatus", "csharp");
 @@clientName(StatusTypes, "HybridMachineAgentInstallationStatusType", "csharp");
@@ -67,12 +70,18 @@ using Microsoft.AzureStackHCI;
   "HciVmNetworkInterfacePatchProperties",
   "csharp"
 );
+@@clientName(
+  NetworkInterfaceProperties.createFromLocal,
+  "IsCreatingFromLocal",
+  "csharp"
+);
 @@clientName(NetworkSecurityGroup, "HciVmNetworkSecurityGroup", "csharp");
 @@clientName(
   NetworkSecurityGroupProperties,
   "HciVmNetworkSecurityGroupProperties",
   "csharp"
 );
+@@alternateType(NetworkSecurityGroup.eTag, eTag, "csharp");
 @@clientName(SecurityRule, "HciVmSecurityRule", "csharp");
 @@clientName(SecurityRuleProperties, "HciVmSecurityRuleProperties", "csharp");
 @@clientName(StorageContainer, "HciVmStorageContainer", "csharp");
@@ -120,6 +129,7 @@ using Microsoft.AzureStackHCI;
   "csharp"
 );
 @@alternateType(VirtualHardDiskProperties.downloadUrl, url, "csharp");
+@@clientName(VirtualHardDiskProperties.dynamic, "IsDynamic", "csharp");
 @@clientName(
   VirtualHardDiskProperties.createFromLocal,
   "IsCreatingFromLocal",
@@ -151,6 +161,7 @@ using Microsoft.AzureStackHCI;
 @@clientName(AttestHWPlatformEnum.SEVSNP, "Sevsnp", "csharp");
 @@clientName(AttestSecureBootPropertyEnum, "AttestSecureBootStatus", "csharp");
 @@clientName(DiskFileFormat, "HciVmDiskFileFormat", "csharp");
+@@clientName(CreationData, "HciVmCreationContent", "csharp");
 @@clientName(ExtendedLocation, "HciVmExtendedLocation", "csharp");
 @@clientName(ExtendedLocationTypes, "HciVmExtendedLocationType", "csharp");
 @@clientName(GalleryImageIdentifier, "HciVmGalleryImageIdentifier", "csharp");
@@ -171,7 +182,7 @@ using Microsoft.AzureStackHCI;
 );
 @@clientName(
   HardwareProfileUpdate,
-  "HciVmInstanceHardwareProfileUpdate",
+  "HciVmInstanceHardwareProfilePatch",
   "csharp"
 );
 @@clientName(HardwareProfileUpdate.memoryMB, "MemoryInMB", "csharp");
@@ -370,6 +381,16 @@ using Microsoft.AzureStackHCI;
   "csharp"
 );
 @@clientName(
+  VirtualMachineInstancePropertiesPlacementProfile.strictPlacementPolicy,
+  "IsStrictPlacementPolicyEnabled",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineInstancePropertiesSecurityProfileUefiSettings.secureBootEnabled,
+  "IsSecureBootEnabled",
+  "csharp"
+);
+@@clientName(
   VirtualMachineInstancePropertiesStorageProfile,
   "HciVmInstanceStorageProfile",
   "csharp"
@@ -398,42 +419,42 @@ using Microsoft.AzureStackHCI;
 );
 @@clientName(
   VirtualMachineInstancePropertiesOsProfileLinuxConfiguration.provisionVMAgent,
-  "ProvisionVmAgent",
+  "ShouldProvisionVmAgent",
   "csharp"
 );
 @@clientName(
   VirtualMachineInstancePropertiesOsProfileLinuxConfiguration.provisionVMConfigAgent,
-  "ProvisionVmConfigAgent",
+  "ShouldProvisionVmConfigAgent",
   "csharp"
 );
 @@clientName(
   VirtualMachineInstancePropertiesOsProfileWindowsConfiguration.provisionVMAgent,
-  "ProvisionVmAgent",
+  "ShouldProvisionVmAgent",
   "csharp"
 );
 @@clientName(
   VirtualMachineInstancePropertiesOsProfileWindowsConfiguration.provisionVMConfigAgent,
-  "ProvisionVmConfigAgent",
+  "ShouldProvisionVmConfigAgent",
   "csharp"
 );
 @@clientName(
   OsProfileUpdateLinuxConfiguration.provisionVMAgent,
-  "ProvisionVmAgent",
+  "ShouldProvisionVmAgent",
   "csharp"
 );
 @@clientName(
   OsProfileUpdateLinuxConfiguration.provisionVMConfigAgent,
-  "ProvisionVmConfigAgent",
+  "ShouldProvisionVmConfigAgent",
   "csharp"
 );
 @@clientName(
   OsProfileUpdateWindowsConfiguration.provisionVMAgent,
-  "ProvisionVmAgent",
+  "ShouldProvisionVmAgent",
   "csharp"
 );
 @@clientName(
   OsProfileUpdateWindowsConfiguration.provisionVMConfigAgent,
-  "ProvisionVmConfigAgent",
+  "ShouldProvisionVmConfigAgent",
   "csharp"
 );
 @@alternateType(

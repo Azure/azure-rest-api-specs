@@ -2,7 +2,7 @@
 applyTo: "specification/**/*.tsp"
 ---
 
-<!-- Upstream alignment: 2026-04-15
+<!-- Upstream alignment: 2026-08-15
      This date is for maintainers of this file only -- it records when
      rules were last verified against upstream docs. No action is needed
      by spec authors or PR reviewers. The upstream documents always take
@@ -10,7 +10,7 @@ applyTo: "specification/**/*.tsp"
 
      Rules derived from:
        - Azure Resource Provider Contract (RPC) v1.0
-         https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0
+         https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10
        - Azure REST API Guidelines (vNext)
          https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
        - TypeSpec Azure library docs
@@ -75,7 +75,7 @@ the link from the heading's anchor icon.
 
 <a id="reviewer-posted-parity"></a>
 
-See the canonical contract in [`.github/skills/azure-api-review/references/reviewer-posted-parity.md`](../skills/azure-api-review/references/reviewer-posted-parity.md). The hard rules, post-post verification procedure, and worked examples live there; this section is a pointer so the three instruction files cannot drift.
+See the canonical contract in [`.github/skills/azure-api-review/references/reviewer-posted-parity.md`](../skills/azure-api-review/references/reviewer-posted-parity.md). It defines the two **review modes** (interactive, where findings are presented to a human who decides what to post; and autonomous, where the agreed finding set is posted and addressed threads are resolved without a human gate), the hard rules, the post-post verification procedure, and worked examples. This section is a pointer so the three instruction files cannot drift.
 
 ---
 
@@ -130,6 +130,17 @@ See the canonical contract in [`.github/skills/azure-api-review/references/revie
   set, and prevention of leading special characters.
   Example: `@pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")`
   (Also enforced by: `@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern`)
+- `@pattern` decorator values and `NamePattern` constraints **MUST**
+  use allowlist (positive character class) syntax. Denylist (negated
+  character class `[^...]`) syntax **MUST NOT** be used as the primary
+  character-matching construct (`OAPI-PATTERN-ALLOWLIST`). A negative
+  lookahead (`(?!...)`) used alongside a positive class is acceptable
+  (e.g., `@pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")`). Severity:
+  **Blocking** for new properties/parameters; **Warning** for existing
+  ones carried forward from a prior API version. See
+  [`.github/skills/azure-api-review/references/pattern-validation.md`](../skills/azure-api-review/references/pattern-validation.md)
+  for detection guidance, severity matrix, fix examples, and
+  regression-risk notes.
 - Properties representing UTC timestamps **SHOULD** include a `Utc`
   suffix in the name (e.g., `lastModifiedTimeUtc`).
 - Properties named `<something>Id` **MUST** be specific about what kind
@@ -174,6 +185,19 @@ See the canonical contract in [`.github/skills/azure-api-review/references/revie
 - Nested resources **MUST** define a list operation under their parent.
 - **DO NOT** embed nested resource data inline in the parent resource
   model.
+
+### 2.5a Check Name Availability (CNA-002, CNA-003, CNA-004)
+
+- Prefer the standard `checkGlobalNameAvailability`,
+  `checkLocalNameAvailability`, or `checkNameAvailability` ARM templates.
+- The request contract includes `name` and fully qualified resource `type`; the
+  response includes `nameAvailable`, with `reason` and `message` when the name
+  is unavailable.
+- Standard template/common-type reuse is a Suggestion, not a requirement, when
+  a custom request and response are shape-compatible (CNA-003).
+- A custom request `name` string must carry validation equivalent to the target
+  resource name rules, including an allowlist pattern and maximum length
+  (CNA-004).
 
 ### 2.6 ARM POST Actions
 
@@ -264,7 +288,7 @@ Flag these issues when found:
 - **`@flattenProperty` on new APIs** — do not add new `@flattenProperty` decorators. Flattening creates SDK-breaking issues and is discouraged for new resource types and properties. Existing flattened properties may remain for backward compatibility.
 - **Spread-only model types as full models** — a model type used only for spreading (`...`) into other types **SHOULD** be declared as an `alias` instead. Using `model` for types that are only spread generates unnecessary types in the output. See [TypeSpec alias documentation](https://typespec.io/docs/language-basics/alias) (TypeSpec-BestPractice-01).
 - **Empty model literal `{}` as POST action body** -- when an `ArmResourceActionAsync` or `ArmResourceActionSync` POST action does not need a request body, use `void` instead of `{}`. An empty model literal triggers the `no-empty-model` lint rule, and suppressing it is the wrong fix. Use `void` and remove the suppression.
-- **`@extension(...)` in TypeSpec source** -- never add `@extension(...)` decorators to TypeSpec source for any reason. This includes `@extension("x-ms-identifiers", ...)`, `@extension("x-ms-mutability", ...)`, and any other OpenAPI extension. `@extension` bypasses TypeSpec's type system and emitter conventions. Use the appropriate built-in decorator instead: `@identifiers` / `@key` for `x-ms-identifiers`, `@visibility` for mutability, `@secret` for secret data, etc. (see TSP-ARRAY-IDENTIFIERS for the `x-ms-identifiers` case).
+- **Raw client-altering OpenAPI extensions (TSP-NO-RAW-CLIENT-EXTENSIONS)** -- do not add or restore `@OpenAPI.extension(...)` / `@extension(...)` for client-altering `x-ms-*` metadata, and do not suppress `@azure-tools/typespec-azure-core/no-openapi-client-extensions`. Express the behavior in the semantic TypeSpec model so every emitter sees it. This remains true when reviewing an already-published API version: preserving generated Swagger is not a reason to reintroduce a prohibited raw decorator. A genuinely emitter-only, non-client-altering custom extension with no native representation requires a concrete explanation and should be confirmed with the TypeSpec library owners rather than generalized into an exception. See [`typespec-openapi-extensions.md`](../skills/azure-api-review/references/typespec-openapi-extensions.md) for native mappings and generated-diff triage.
 
 ---
 
@@ -336,6 +360,11 @@ Use one of the following built-in TypeSpec decorators instead:
 
 When reviewing a new `missing-x-ms-identifiers` suppression, propose `@identifiers` or `@key` as the fix. **Never** suggest `@extension("x-ms-identifiers", ...)`.
 
+The same rule applies to every client-altering extension: never suggest a raw
+OpenAPI decorator or a `no-openapi-client-extensions` suppression as a
+compatibility fix. Use the mapping in
+[`typespec-openapi-extensions.md`](../skills/azure-api-review/references/typespec-openapi-extensions.md).
+
 ---
 
 ## 7. `tspconfig.yaml` Additional Validation
@@ -367,7 +396,7 @@ When reviewing a new `missing-x-ms-identifiers` suppression, propose `@identifie
 ### 8.2 Validation
 
 - The conversion should be validated using `tsp-client compare` (or equivalent diff tool) to confirm the generated OpenAPI matches the original.
-- Common post-conversion issues to watch for: `date-time` format inconsistencies, property name casing drift, and missing `x-ms-*` extensions.
+- Common post-conversion issues to watch for: `date-time` format inconsistencies, property name casing drift, and missing semantics that should be emitted from native TypeSpec constructs. Do not require raw `x-ms-*` metadata parity when the difference is only legacy emitter metadata; apply [`typespec-openapi-extensions.md`](../skills/azure-api-review/references/typespec-openapi-extensions.md) before classifying the diff.
 
 ### 8.3 SDK Generation Cutover
 
@@ -382,8 +411,11 @@ When reviewing a new `missing-x-ms-identifiers` suppression, propose `@identifie
 
 - TypeSpec with the Azure TypeSpec libraries (`@azure-tools/typespec-azure-core`, `@azure-tools/typespec-azure-resource-manager`, and related packages) is **required** for all new API versions, both control plane and data plane. The full rule definition is in [`openapi-review.instructions.md` §2A](./openapi-review.instructions.md) (rule ID `TSP-REQUIRED-V1`).
 - Brownfield services were required to complete migration to TypeSpec by March 30, 2026.
-- Updates to handwritten OpenAPI inside **existing** API version directories remain permitted; only new API versions must use TypeSpec.
-- A deterministic CI check to block non-compliant PRs is in development (PR [#42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)). Until that check ships, this rule is enforced by the ARM API Reviewer agent.
+- Existing handwritten OpenAPI directories are out of scope for
+  `TSP-REQUIRED-V1`, but remain subject to published-version immutability and
+  compatibility rules.
+- Current CI does not deterministically enforce this exact new-version
+  condition, so the ARM API Reviewer applies it directly.
 
 ---
 
@@ -425,7 +457,7 @@ When reviewing TypeSpec files, verify:
 - ✅ `@added` version targeting is correct — features don't leak into earlier API version outputs
 - ✅ TypeSpec conversion PRs: no API changes (horizontal only); generated OpenAPI matches original
 - ✅ TypeSpec conversion PRs: `swagger-to-sdk` entries removed; `readme.{language}.md` files deleted
-- ✅ New API versions use TypeSpec source (TSP-REQUIRED-V1) — updates to existing handwritten OpenAPI remain permitted
+- ✅ New API versions use TypeSpec source (TSP-REQUIRED-V1); existing handwritten directories remain subject to normal immutability and compatibility rules
 - ✅ No polymorphic-format properties — use separate typed properties or discriminated unions
 - ✅ Numeric properties use numeric types, not string (TSP-NUMERIC-TYPE)
 - ✅ No `Record<>` usage when typed models can be defined
@@ -444,3 +476,4 @@ When reviewing TypeSpec files, verify:
 - ✅ No bearer/OAuth tokens passed in ARM request bodies -- use managed identity or Key Vault
 - ✅ Generated OpenAPI files match `tsp compile .` output
 - ✅ Example files present for all operations, with realistic descriptive values (EX-DESCRIPTIVE-VALUES)
+- ✅ All `@pattern` and `NamePattern` constraints use allowlist (positive character class) syntax — no denylist (`[^...]`) as the primary construct (`OAPI-PATTERN-ALLOWLIST`): Blocking for new properties/parameters, Warning for existing ones

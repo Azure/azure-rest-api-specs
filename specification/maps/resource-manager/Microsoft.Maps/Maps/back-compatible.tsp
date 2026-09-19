@@ -3,6 +3,26 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Maps;
 
+// Remove namespace qualification from CommonTypes encryption types for OpenAPI compatibility
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption,
+  "CustomerManagedKeyEncryption"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.Encryption, "Encryption");
+@@clientName(
+  Azure.ResourceManager.CommonTypes.InfrastructureEncryption,
+  "InfrastructureEncryption"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
+  "KeyEncryptionKeyIdentity"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
+  "KeyEncryptionKeyIdentityType"
+);
+@@clientName(Azure.Core.uuid, "uuid");
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MapsAccountUpdateParameters.properties);
 

@@ -11,10 +11,6 @@ on:
       sparse-checkout-paths:
         description: Paths for sparse checkout
         type: string
-      lint:
-        description: Run 'npm run lint' if true
-        required: false
-        type: boolean
 
 permissions:
   contents: read
@@ -25,7 +21,7 @@ jobs:
       matrix:
         include:
           - os: ubuntu
-            node-version: 22
+            node-version: 24
           - os: windows
             node-version: 24
 
@@ -35,7 +31,7 @@ jobs:
       - if: runner.os == 'Windows'
         run: git config --global core.longpaths true
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           sparse-checkout: |
             .github
@@ -48,18 +44,13 @@ jobs:
           node-version: ${{ matrix.node-version }}.x
 
       - name: Build
-        run: npm run build
+        run: pnpm run build
         working-directory: ./eng/tools/${{ inputs.package }}
 
       - name: Test
-        run: npm run test:ci
-        working-directory: ./eng/tools/${{ inputs.package }}
-
-      - name: Lint
-        run: npm run lint
-        if: inputs.lint == true
+        run: pnpm run test:ci
         working-directory: ./eng/tools/${{ inputs.package }}
 
       - name: Check Formatting
-        run: npm run format:check:ci
+        run: pnpm run format:check:ci
         working-directory: ./eng/tools/${{ inputs.package }}

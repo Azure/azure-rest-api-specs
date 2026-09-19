@@ -673,6 +673,7 @@ model HardwareProfile {
 /**
  * The Linux operation systems profile.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model OsProfile {
   /**
    * The Linux OS profile.
@@ -2900,6 +2901,7 @@ model HostInfo {
   /**
    * The effective disk encryption key URL used by the host
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   effectiveDiskEncryptionKeyUrl?: string;
 }
 

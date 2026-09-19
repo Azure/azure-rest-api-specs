@@ -15,8 +15,10 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Represents a scaling plan definition.
  */
-model ScalingPlan
-  is Azure.ResourceManager.TrackedResource<ScalingPlanProperties, false> {
+model ScalingPlan is Azure.ResourceManager.TrackedResource<
+  ScalingPlanProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ScalingPlan,
     KeyName = "scalingPlanName",

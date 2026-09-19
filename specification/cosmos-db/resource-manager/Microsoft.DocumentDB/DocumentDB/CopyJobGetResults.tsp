@@ -18,8 +18,10 @@ namespace Microsoft.DocumentDB;
  */
 @parentResource(DatabaseAccountGetResults)
 @added(Versions.v2026_04_01_preview)
-model CopyJobGetResults
-  is Azure.ResourceManager.ProxyResource<CopyJobProperties, false> {
+model CopyJobGetResults is Azure.ResourceManager.ProxyResource<
+  CopyJobProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = CopyJobGetResults,
     KeyName = "jobName",

@@ -15,6 +15,7 @@ import "./common/common.tsp";
 
 // Import the main administration definitions (for compatibility)
 import "./administration.tsp";
+import "./client.tsp";
 
 // Import client customizations
 

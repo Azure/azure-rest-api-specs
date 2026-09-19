@@ -422,3 +422,120 @@ union ResourceTypeCategories {
   @added(Versions.v2026_03_01_preview)
   AzureSiteRecoveryVMsPresent: "AzureSiteRecoveryVMsPresent",
 }
+
+/**
+ * Enum for the category of an SLI selected for Drill monitoring.
+ */
+@doc("Category of an SLI selected for Drill monitoring.")
+@added(Versions.v2026_08_31_preview)
+union SliType {
+  string,
+
+  @doc("Availability SLI.")
+  Availability: "Availability",
+
+  @doc("Latency SLI.")
+  Latency: "Latency",
+}
+
+/**
+ * Enum for AttentionReason - whether the user-declared SLI type matches the SLI's actual category.
+ */
+@doc("Whether the user-declared SLI type matches the SLI's actual category.")
+@added(Versions.v2026_08_31_preview)
+union SliTypeMatchState {
+  string,
+
+  @doc("Declared type matches the SLI's actual category.")
+  Matched: "Matched",
+
+  @doc("Declared type does not match the SLI's actual category.")
+  Mismatched: "Mismatched",
+}
+
+/**
+ * Enum for the report generation status of a Drill Run report.
+ */
+@doc("Report generation status.")
+@added(Versions.v2026_08_31_preview)
+union DrillReportGenerationStatus {
+  string,
+
+  @doc("Report generation has not been attempted yet.")
+  NotStarted: "NotStarted",
+
+  @doc("Report generation is currently running.")
+  InProgress: "InProgress",
+
+  @doc("Report generation completed successfully.")
+  Succeeded: "Succeeded",
+
+  @doc("Report generation failed. Details are captured in the lastError field.")
+  Failed: "Failed",
+}
+
+/**
+ * Enum for the formats a Drill Run report can be downloaded in.
+ */
+@doc("Format of a Drill Run report.")
+@added(Versions.v2026_08_31_preview)
+union DrillReportFormat {
+  string,
+
+  @doc("Human readable HTML report.")
+  Html: "Html",
+}
+
+/**
+ * Enum for the finalization state of a Drill Run report.
+ */
+@doc("Finalization state of a Drill Run report.")
+@added(Versions.v2026_08_31_preview)
+union DrillReportFinalizationState {
+  string,
+
+  @doc("The report is not finalized and may still change.")
+  NotFinalized: "NotFinalized",
+
+  @doc("The report is finalized and immutable.")
+  Finalized: "Finalized",
+}
+
+/** Regional resiliency posture reported by the selected protection solution. */
+@added(Versions.v2026_09_30_preview)
+union RegionalResiliencyStatus {
+  string,
+
+  /** The available protection-solution posture reports the resource as regionally resilient. */
+  Resilient: "Resilient",
+
+  /** The available protection-solution posture reports the resource as not regionally resilient. */
+  NotResilient: "NotResilient",
+}
+
+/** Normal fault eligibility of a drill resource, independent of inclusion and readiness. */
+@added(Versions.v2026_09_30_preview)
+union FaultEligibility {
+  string,
+
+  /** The available information is insufficient to determine normal fault eligibility. */
+  Unknown: "Unknown",
+
+  /** The resource satisfies the normal fault inclusion policy. */
+  Eligible: "Eligible",
+
+  /** The resource does not satisfy the normal fault inclusion policy. */
+  Ineligible: "Ineligible",
+}
+
+/** Reason requiring attention for a resource that requires recovery-plan participation and has no independent fault eligibility path. */
+@added(Versions.v2026_09_30_preview)
+union FaultIneligibleReason {
+  string,
+
+  /** The parent drill has no associated recovery plan required by the resource's normal fault inclusion policy. */
+  RecoveryPlanNotConfigured: "RecoveryPlanNotConfigured",
+
+  /** The associated recovery plan's complete membership collection was successfully read and the resource is absent or explicitly Excluded. */
+  ResourceNotIncludedInRecoveryPlan: "ResourceNotIncludedInRecoveryPlan",
+}

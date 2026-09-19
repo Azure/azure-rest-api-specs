@@ -1,10 +1,10 @@
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { strict as assert } from "node:assert";
-import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
-import { FlavorAzureRule } from "../src/rules/flavor-azure.js";
+import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
+import { FlavorAzureRule } from "../src/rules/flavor-azure.ts";
 
-import * as utils from "../src/utils.js";
-import { mockFolder } from "./mocks.js";
+import * as utils from "../src/utils.ts";
+import { mockFolder } from "./mocks.ts";
 
 describe("flavor-azure", function () {
   let readTspConfigSpy: MockInstance;

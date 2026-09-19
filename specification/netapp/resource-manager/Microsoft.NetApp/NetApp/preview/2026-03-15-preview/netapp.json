@@ -10988,6 +10988,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_List": {
             "$ref": "./examples/Subvolumes_List.json"
@@ -11068,6 +11069,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Get": {
             "$ref": "./examples/Subvolumes_Get.json"
@@ -11079,7 +11081,7 @@
         "tags": [
           "SubvolumeInfos"
         ],
-        "description": "Creates a subvolume in the path or clones the subvolume mentioned in the parentPath",
+        "description": "Creates a subvolume in the path or clones the subvolume mentioned in the parentPath\nDeprecated. This operation will be removed in a future API version.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -11183,6 +11185,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Create": {
             "$ref": "./examples/Subvolumes_Create.json"
@@ -11286,6 +11289,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Update": {
             "$ref": "./examples/Subvolumes_Update.json"
@@ -11380,6 +11384,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Delete": {
             "$ref": "./examples/Subvolumes_Delete.json"
@@ -11475,6 +11480,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Metadata": {
             "$ref": "./examples/Subvolumes_Metadata.json"
@@ -13165,13 +13171,13 @@
           "description": "Domain for NFSv4 user ID mapping. This property will be set for all NetApp accounts in the subscription and region and only affect non ldap NFSv4 volumes.",
           "x-nullable": true
         },
-        "ldapConfiguration": {
-          "$ref": "#/definitions/LdapConfiguration",
-          "description": "LDAP Configuration for the account."
-        },
         "entraIdConfig": {
           "$ref": "#/definitions/EntraIdConfigPatch",
           "description": "Entra ID configuration for the account."
+        },
+        "ldapConfiguration": {
+          "$ref": "#/definitions/LdapConfigurationPatch",
+          "description": "LDAP Configuration for the account."
         }
       }
     },
@@ -18306,6 +18312,43 @@
         }
       }
     },
+    "LdapConfigurationPatch": {
+      "type": "object",
+      "description": "LDAP configuration for PATCH operations (no default values)",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Name of the LDAP configuration domain",
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$"
+        },
+        "ldapServers": {
+          "type": "array",
+          "description": "List of LDAP server IP addresses (IPv4 only) for the LDAP domain.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.ipV4Address"
+          }
+        },
+        "ldapOverTLS": {
+          "type": "boolean",
+          "description": "Specifies whether or not the LDAP traffic needs to be secured via TLS."
+        },
+        "serverCACertificate": {
+          "type": "string",
+          "format": "password",
+          "description": "When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded ldap servers CA certificate.",
+          "minLength": 1,
+          "maxLength": 10240,
+          "x-ms-secret": true
+        },
+        "certificateCNHost": {
+          "type": "string",
+          "description": "The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.",
+          "maxLength": 255,
+          "x-nullable": true
+        }
+      }
+    },
     "LdapSearchScopeOpt": {
       "type": "object",
       "description": "LDAP search scope",
@@ -20839,7 +20882,7 @@
     },
     "SubvolumeInfo": {
       "type": "object",
-      "description": "Subvolume Information properties",
+      "description": "Subvolume Information properties\nDeprecated. This resource type will be removed in a future API version.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SubvolumeProperties",
@@ -22045,7 +22088,7 @@
         },
         "protocolTypes": {
           "type": "array",
-          "description": "Set of protocol types, default NFSv3, CIFS for SMB protocol",
+          "description": "Specify the protocol types for the volume. Supported values are NFSv3, NFSv4.1, and CIFS. For SMB volumes, specify CIFS.\nThe value SMB isn't supported in the protocolTypes property. Default: NFSv3",
           "items": {
             "type": "string"
           }
@@ -22163,7 +22206,7 @@
           "description": "A unique file path for the volume. Used when creating mount targets",
           "minLength": 1,
           "maxLength": 80,
-          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]{0,79}$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -22226,7 +22269,7 @@
         },
         "protocolTypes": {
           "type": "array",
-          "description": "Set of protocol types, default NFSv3, CIFS for SMB protocol",
+          "description": "Specify the protocol types for the volume. Supported values are NFSv3, NFSv4.1, and CIFS. For SMB volumes, specify CIFS.\nThe value SMB isn't supported in the protocolTypes property. Default: NFSv3",
           "items": {
             "type": "string"
           }
@@ -22686,7 +22729,7 @@
         },
         "enableSubvolumes": {
           "type": "string",
-          "description": "Flag indicating whether subvolume operations are enabled on the volume",
+          "description": "Flag indicating whether subvolume operations are enabled on the volume\nDeprecated. Subvolume operations and this flag will be removed in a future API version.",
           "default": "Disabled",
           "enum": [
             "Enabled",

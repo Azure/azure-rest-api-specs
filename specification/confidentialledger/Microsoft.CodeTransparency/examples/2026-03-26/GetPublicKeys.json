@@ -1,0 +1,57 @@
+{
+  "title": "GetPublicKeys",
+  "operationId": "GetPublicKeys",
+  "parameters": {
+    "api-version": "2026-03-26"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "keys": [
+          {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "service-signing-key-1",
+            "kty": "EC",
+            "use": "sig",
+            "x": "f83OJ3D2xF4WfPZrQFbnjKJvBf7vY5H5XzX7Q2x4g4A",
+            "y": "x_FEzRu9m36HLNFY2R9w7q7lW11Q9Lq6X5AU2E8YbV0"
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    },
+    "404": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    },
+    "429": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    },
+    "500": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    },
+    "503": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    }
+  }
+}

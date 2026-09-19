@@ -3,6 +3,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
 import "./models.tsp";
+import "./client.tsp";
 
 using TypeSpec.Versioning;
 
@@ -24,4 +25,7 @@ enum Versions {
 
   /** Version 2026-06-01-preview. */
   v2026_06_01_preview: "2026-06-01-preview",
+
+  /** Version 2026-07-15. */
+  v2026_07_15: "2026-07-15",
 }

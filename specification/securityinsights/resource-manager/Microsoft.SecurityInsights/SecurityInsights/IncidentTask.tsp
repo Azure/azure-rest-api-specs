@@ -15,8 +15,10 @@ namespace Microsoft.SecurityInsights;
  * Describes incident task properties
  */
 @parentResource(Incident)
-model IncidentTask
-  is Azure.ResourceManager.ProxyResource<IncidentTaskProperties, false> {
+model IncidentTask is Azure.ResourceManager.ProxyResource<
+  IncidentTaskProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = IncidentTask,
     KeyName = "incidentTaskId",

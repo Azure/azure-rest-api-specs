@@ -6,6 +6,8 @@ using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.App;
 
+namespace Customizations;
+
 @@clientName(Microsoft.App, "ContainerAppsAPIClient", "javascript,python");
 @@clientName(Microsoft.App, "ContainerAppsApiClient", "java");
 @@clientLocation(Jobs.jobExecution, Microsoft.App, "python");
@@ -39,6 +41,36 @@ using Microsoft.App;
   "go,python"
 );
 @@clientName(RuntimeJavaJavaAgent, "ContainerAppRuntimeJavaAgent", "csharp");
+@@clientName(
+  CheckMigrationEligibilityRequest,
+  "ContainerAppManagedEnvironmentMigrationEligibilityContent",
+  "csharp"
+);
+@@clientName(
+  CheckMigrationEligibilityResponse,
+  "ContainerAppManagedEnvironmentMigrationEligibilityResult",
+  "csharp"
+);
+@@clientName(
+  MigrationEligibilityFailureReason,
+  "ContainerAppManagedEnvironmentMigrationEligibilityFailureReason",
+  "csharp"
+);
+@@clientName(
+  AvailableEnvironmentMode,
+  "ContainerAppAvailableEnvironmentMode",
+  "csharp"
+);
+@@clientName(
+  AvailableEnvironmentModeProperties,
+  "ContainerAppAvailableEnvironmentModeProperties",
+  "csharp"
+);
+@@clientName(
+  AvailableEnvironmentModesOperationGroup.list,
+  "GetAvailableEnvironmentModes",
+  "csharp"
+);
 @@clientName(
   RuntimeJavaJavaAgentLogging.loggerSettings,
   "LoggerSettings",
@@ -157,11 +189,47 @@ union OpenIdConnectClientCredentialMethod {
 
 @@alternateType(ManagedEnvironmentProperties.staticIp, ipV4Address, "csharp");
 
-@@alternateType(RegistryInfo.registryUrl, url, "csharp");
+@@alternateType(AppLocationParameter.location, azureLocation, "csharp");
+
+@@alternateType(AvailableEnvironmentMode.location, azureLocation, "csharp");
+
+@@alternateType(
+  BlobStorageTokenStore.managedIdentityResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+
+@@alternateType(
+  ContainerAppNetworkingConfiguration.outboundVnetSubnetId,
+  armResourceIdentifier,
+  "csharp"
+);
+
+@@alternateType(OpenIdConnectConfig.certificationUri, url, "csharp");
+
+@@alternateType(SecretKeyVaultProperties.keyVaultUrl, url, "csharp");
+
+@@alternateType(
+  VnetConfiguration.infrastructureSubnetId,
+  armResourceIdentifier,
+  "csharp"
+);
+
+@@alternateType(AzureCredentials.tenantId, uuid, "csharp");
+
+@@alternateType(CustomDomain.certificateId, armResourceIdentifier, "csharp");
+
+@@alternateType(ServiceBind.serviceId, armResourceIdentifier, "csharp");
+
+@@alternateType(Secret.keyVaultUrl, url, "csharp");
 
 @@alternateType(SourceControlProperties.repoUrl, url, "csharp");
 
 // C# @@clientName customizations.
+@@clientName(Affinity, "StickySessionAffinity", "csharp");
+
+@@clientName(IngressStickySessions.affinity, "StickySessionAffinity", "csharp");
+
 @@clientName(
   AvailableWorkloadProfilesOperationGroup.get,
   "GetAvailableWorkloadProfiles",
@@ -179,6 +247,40 @@ union OpenIdConnectClientCredentialMethod {
 @@clientName(BuildCollection, "BuildList", "csharp");
 
 @@clientName(BuildToken.expires, "ExpiresOn", "csharp");
+
+@@clientName(Header, "ContainerAppOtlpHeader", "csharp");
+
+@@clientName(
+  DestinationsConfiguration,
+  "ContainerAppOpenTelemetryDestinationsConfiguration",
+  "csharp"
+);
+
+@@clientName(
+  MetricsConfiguration,
+  "ContainerAppOpenTelemetryMetricsConfiguration",
+  "csharp"
+);
+
+@@clientName(
+  TracesConfiguration,
+  "ContainerAppOpenTelemetryTracesConfiguration",
+  "csharp"
+);
+
+@@clientName(JobRunningState, "ContainerAppJobRunningState", "csharp");
+
+@@clientName(
+  ReplicaExecutionStatus,
+  "ContainerAppJobExecutionReplicaStatus",
+  "csharp"
+);
+
+@@clientName(
+  ContainerExecutionStatus,
+  "ContainerAppJobExecutionContainerStatus",
+  "csharp"
+);
 
 @@clientName(
   ManagedEnvironments.list,
@@ -204,6 +306,11 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(
   ContainerAppsLabelHistory.listLabelHistory,
+  "ListLabelHistory",
+  "csharp"
+);
+@@clientName(
+  ContainerAppsLabelHistoryPreview.listLabelHistory,
   "ListLabelHistory",
   "csharp"
 );
@@ -946,6 +1053,12 @@ union OpenIdConnectClientCredentialMethod {
 );
 
 @@clientName(
+  ContainerAppPrivateEndpointConnections,
+  "ContainerAppContainerPrivateEndpointConnections",
+  "csharp"
+);
+
+@@clientName(
   PrivateEndpointConnectionProvisioningState,
   "ContainerAppPrivateEndpointConnectionProvisioningState",
   "csharp"
@@ -994,6 +1107,28 @@ union OpenIdConnectClientCredentialMethod {
 @@clientName(LabelHistoryRecordItem.start, "StartedOn", "csharp");
 
 @@clientName(LabelHistoryRecordItem.stop, "StoppedOn", "csharp");
+
+@@clientName(
+  LabelHistoryRecordItem,
+  "ContainerAppLabelHistoryRecordItem",
+  "csharp"
+);
+
+@@clientName(Status, "ContainerAppLabelHistoryStatus", "csharp");
+
+@@clientName(VnetConnection, "SandboxGroupVnetConnection", "csharp");
+
+@@clientName(
+  VnetConnectionProperties,
+  "SandboxGroupVnetConnectionProperties",
+  "csharp"
+);
+
+@@clientName(
+  VnetConnectionProvisioningState,
+  "SandboxGroupVnetConnectionProvisioningState",
+  "csharp"
+);
 
 @@clientName(MetricsConfiguration.includeKeda, "IsKedaIncluded", "csharp");
 
@@ -1205,6 +1340,7 @@ union OpenIdConnectClientCredentialMethod {
 
 // C# @@scope customizations.
 @@scope(ContainerAppsLabelHistory.listLabelHistory, "!csharp");
+@@scope(ContainerAppsLabelHistoryPreview.listLabelHistory, "!csharp");
 
 // C# @@usage customizations.
 @@usage(LogicAppProperties, Azure.ClientGenerator.Core.Usage.input, "csharp");
@@ -1337,26 +1473,43 @@ union OpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
-// C# @@doc customizations.
-@@doc(
+// C# @@clientDoc customizations. Use clientDoc (DocumentationMode.replace) so
+// these descriptions apply to generated clients only and do not change the
+// service swagger output.
+@@clientDoc(
   JobPatchProperties.properties,
-  "Container Apps Job patch resource properties."
+  "Container Apps Job patch resource properties.",
+  DocumentationMode.replace
 );
 
-@@doc(JobPatchPropertiesProperties, "Container Apps Job patch properties.");
+@@clientDoc(
+  JobPatchPropertiesProperties,
+  "Container Apps Job patch properties.",
+  DocumentationMode.replace
+);
 
-@@doc(LogicAppsProxyMethod, "HTTP method used by the Logic Apps proxy.");
+@@clientDoc(
+  LogicAppsProxyMethod,
+  "HTTP method used by the Logic Apps proxy.",
+  DocumentationMode.replace
+);
 
-@@doc(TemplateUpdateStatus, "Session pool template update status.");
+@@clientDoc(
+  TemplateUpdateStatus,
+  "Session pool template update status.",
+  DocumentationMode.replace
+);
 
-@@doc(
+@@clientDoc(
   ActiveRevisionsMode,
-  "Controls how active revisions are handled for the Container app."
+  "Controls how active revisions are handled for the Container app.",
+  DocumentationMode.replace
 );
 
-@@doc(
+@@clientDoc(
   Configuration.activeRevisionsMode,
-  "Controls how active revisions are handled for the Container app."
+  "Controls how active revisions are handled for the Container app.",
+  DocumentationMode.replace
 );
 
 // C# @@flattenProperty customizations.
@@ -1371,3 +1524,26 @@ union OpenIdConnectClientCredentialMethod {
 #suppress "deprecated" "Preserve the previous flattened C# token store property during MPG migration"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous flattened C# token store property during MPG migration"
 @@flattenProperty(TokenStore.azureBlobStorage, "csharp");
+
+// Preserve provisioning resource metadata from the reflection-based generator.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  ContainerApp,
+  "resource-name-constraint",
+  #{ minLength: 2, maxLength: 32, pattern: "^[a-zA-Z0-9-]+$" },
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning compatibility"
+@@clientOption(
+  ManagedEnvironment,
+  "resource-rbac-roles",
+  #{
+    Contributor: "b24988ac-6180-42a0-ab88-20f7382dd24c",
+    Owner: "8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+    Reader: "acdd72a7-3385-48ef-bd42-f606fba81ae7",
+  },
+  "csharp"
+);

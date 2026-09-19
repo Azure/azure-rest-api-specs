@@ -52,7 +52,8 @@ interface SiteExtensionInfoOps
         @segment("siteextensions")
         @key
         siteExtensionId: string,
-      }
+      },
+      ResourceName = "WebSiteExtension"
     > {}
 
 @tag("WebApps")
@@ -138,7 +139,8 @@ interface SiteExtensionInfoOperationGroupOps
         @segment("siteextensions")
         @key
         siteExtensionId: string,
-      }
+      },
+      ResourceName = "WebSiteSlotExtension"
     > {}
 
 @tag("WebApps")

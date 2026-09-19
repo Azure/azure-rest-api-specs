@@ -186,8 +186,26 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RecommendedAction.properties);
 
-@@clientLocation(DatabaseAutomaticTunings.get, "DatabaseAutomaticTuning");
-@@clientLocation(DatabaseAutomaticTunings.update, "DatabaseAutomaticTuning");
+@@clientLocation(
+  DatabaseAutomaticTunings.get,
+  "DatabaseAutomaticTuning",
+  "!javascript"
+);
+@@clientLocation(
+  DatabaseAutomaticTunings.update,
+  "DatabaseAutomaticTuning",
+  "!javascript"
+);
+@@clientLocation(
+  DatabaseAutomaticTunings.get,
+  "DatabaseAutomaticTuningOperations",
+  "javascript"
+);
+@@clientLocation(
+  DatabaseAutomaticTunings.update,
+  "DatabaseAutomaticTuningOperations",
+  "javascript"
+);
 @@clientName(
   DatabaseAutomaticTunings.update::parameters.properties,
   "parameters"
@@ -200,19 +218,37 @@ using Microsoft.Sql;
 
 @@clientLocation(
   ImportExportExtensionsOperationResults.get,
-  "DatabaseExtensions"
+  "DatabaseExtensions",
+  "!javascript"
 );
 @@clientLocation(
   ImportExportExtensionsOperationResults.createOrUpdate,
-  "DatabaseExtensions"
+  "DatabaseExtensions",
+  "!javascript"
+);
+@@clientLocation(
+  ImportExportExtensionsOperationResults.listByDatabase,
+  "DatabaseExtensions",
+  "!javascript"
+);
+@@clientLocation(
+  ImportExportExtensionsOperationResults.get,
+  "DatabaseExtensionsOperations",
+  "javascript"
+);
+@@clientLocation(
+  ImportExportExtensionsOperationResults.createOrUpdate,
+  "DatabaseExtensionsOperations",
+  "javascript"
+);
+@@clientLocation(
+  ImportExportExtensionsOperationResults.listByDatabase,
+  "DatabaseExtensionsOperations",
+  "javascript"
 );
 @@clientName(
   ImportExportExtensionsOperationResults.createOrUpdate::parameters.resource,
   "parameters"
-);
-@@clientLocation(
-  ImportExportExtensionsOperationResults.listByDatabase,
-  "DatabaseExtensions"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ImportExportExtensionsOperationResult.properties);
@@ -422,11 +458,23 @@ using Microsoft.Sql;
 
 @@clientLocation(
   DataWarehouseUserActivitiesOperationGroup.get,
-  "DataWarehouseUserActivities"
+  "DataWarehouseUserActivities",
+  "!javascript"
 );
 @@clientLocation(
   DataWarehouseUserActivitiesOperationGroup.listByDatabase,
-  "DataWarehouseUserActivities"
+  "DataWarehouseUserActivities",
+  "!javascript"
+);
+@@clientLocation(
+  DataWarehouseUserActivitiesOperationGroup.get,
+  "DataWarehouseUserActivitiesOperations",
+  "javascript"
+);
+@@clientLocation(
+  DataWarehouseUserActivitiesOperationGroup.listByDatabase,
+  "DataWarehouseUserActivitiesOperations",
+  "javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DataWarehouseUserActivities.properties);
@@ -557,22 +605,49 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(JobTargetGroup.properties);
 
-@@clientLocation(LedgerDigestUploadsOperationGroup.get, "LedgerDigestUploads");
+@@clientLocation(
+  LedgerDigestUploadsOperationGroup.get,
+  "LedgerDigestUploads",
+  "!javascript"
+);
 @@clientLocation(
   LedgerDigestUploadsOperationGroup.createOrUpdate,
-  "LedgerDigestUploads"
+  "LedgerDigestUploads",
+  "!javascript"
+);
+@@clientLocation(
+  LedgerDigestUploadsOperationGroup.listByDatabase,
+  "LedgerDigestUploads",
+  "!javascript"
+);
+@@clientLocation(
+  LedgerDigestUploadsOperationGroup.disable,
+  "LedgerDigestUploads",
+  "!javascript"
+);
+@@clientLocation(
+  LedgerDigestUploadsOperationGroup.get,
+  "LedgerDigestUploadsOperations",
+  "javascript"
+);
+@@clientLocation(
+  LedgerDigestUploadsOperationGroup.createOrUpdate,
+  "LedgerDigestUploadsOperations",
+  "javascript"
+);
+@@clientLocation(
+  LedgerDigestUploadsOperationGroup.listByDatabase,
+  "LedgerDigestUploadsOperations",
+  "javascript"
+);
+@@clientLocation(
+  LedgerDigestUploadsOperationGroup.disable,
+  "LedgerDigestUploadsOperations",
+  "javascript"
 );
 @@clientName(
   LedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
   "parameters"
-);
-@@clientLocation(
-  LedgerDigestUploadsOperationGroup.listByDatabase,
-  "LedgerDigestUploads"
-);
-@@clientLocation(
-  LedgerDigestUploadsOperationGroup.disable,
-  "LedgerDigestUploads"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(LedgerDigestUploads.properties);
@@ -662,15 +737,36 @@ using Microsoft.Sql;
 
 @@clientLocation(
   MaintenanceWindowOptionsOperationGroup.get,
-  "MaintenanceWindowOptions"
+  "MaintenanceWindowOptions",
+  "!javascript"
+);
+@@clientLocation(
+  MaintenanceWindowOptionsOperationGroup.get,
+  "MaintenanceWindowOptionsOperations",
+  "javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MaintenanceWindowOptions.properties);
 
-@@clientLocation(MaintenanceWindowsOperationGroup.get, "MaintenanceWindows");
+@@clientLocation(
+  MaintenanceWindowsOperationGroup.get,
+  "MaintenanceWindows",
+  "!javascript"
+);
 @@clientLocation(
   MaintenanceWindowsOperationGroup.createOrUpdate,
-  "MaintenanceWindows"
+  "MaintenanceWindows",
+  "!javascript"
+);
+@@clientLocation(
+  MaintenanceWindowsOperationGroup.get,
+  "MaintenanceWindowsOperations",
+  "javascript"
+);
+@@clientLocation(
+  MaintenanceWindowsOperationGroup.createOrUpdate,
+  "MaintenanceWindowsOperations",
+  "javascript"
 );
 @@clientName(
   MaintenanceWindowsOperationGroup.createOrUpdate::parameters.resource,
@@ -968,23 +1064,47 @@ using Microsoft.Sql;
 
 @@clientLocation(
   ManagedLedgerDigestUploadsOperationGroup.get,
-  "ManagedLedgerDigestUploads"
+  "ManagedLedgerDigestUploads",
+  "!javascript"
 );
 @@clientLocation(
   ManagedLedgerDigestUploadsOperationGroup.createOrUpdate,
-  "ManagedLedgerDigestUploads"
+  "ManagedLedgerDigestUploads",
+  "!javascript"
+);
+@@clientLocation(
+  ManagedLedgerDigestUploadsOperationGroup.listByDatabase,
+  "ManagedLedgerDigestUploads",
+  "!javascript"
+);
+@@clientLocation(
+  ManagedLedgerDigestUploadsOperationGroup.disable,
+  "ManagedLedgerDigestUploads",
+  "!javascript"
+);
+@@clientLocation(
+  ManagedLedgerDigestUploadsOperationGroup.get,
+  "ManagedLedgerDigestUploadsOperations",
+  "javascript"
+);
+@@clientLocation(
+  ManagedLedgerDigestUploadsOperationGroup.createOrUpdate,
+  "ManagedLedgerDigestUploadsOperations",
+  "javascript"
+);
+@@clientLocation(
+  ManagedLedgerDigestUploadsOperationGroup.listByDatabase,
+  "ManagedLedgerDigestUploadsOperations",
+  "javascript"
+);
+@@clientLocation(
+  ManagedLedgerDigestUploadsOperationGroup.disable,
+  "ManagedLedgerDigestUploadsOperations",
+  "javascript"
 );
 @@clientName(
   ManagedLedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
   "parameters"
-);
-@@clientLocation(
-  ManagedLedgerDigestUploadsOperationGroup.listByDatabase,
-  "ManagedLedgerDigestUploads"
-);
-@@clientLocation(
-  ManagedLedgerDigestUploadsOperationGroup.disable,
-  "ManagedLedgerDigestUploads"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedLedgerDigestUploads.properties);
@@ -1059,8 +1179,26 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerAdvancedThreatProtection.properties);
 
-@@clientLocation(ServerAutomaticTunings.get, "ServerAutomaticTuning");
-@@clientLocation(ServerAutomaticTunings.update, "ServerAutomaticTuning");
+@@clientLocation(
+  ServerAutomaticTunings.get,
+  "ServerAutomaticTuning",
+  "!javascript"
+);
+@@clientLocation(
+  ServerAutomaticTunings.update,
+  "ServerAutomaticTuning",
+  "!javascript"
+);
+@@clientLocation(
+  ServerAutomaticTunings.get,
+  "ServerAutomaticTuningOperations",
+  "javascript"
+);
+@@clientLocation(
+  ServerAutomaticTunings.update,
+  "ServerAutomaticTuningOperations",
+  "javascript"
+);
 @@clientName(
   ServerAutomaticTunings.update::parameters.properties,
   "parameters"

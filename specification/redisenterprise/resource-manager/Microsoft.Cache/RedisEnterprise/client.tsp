@@ -29,6 +29,11 @@ using Microsoft.Cache;
   "IsSkipDataMigration",
   "csharp"
 );
+@@clientName(
+  AzureCacheForRedisMigrationProperties.forceMigrate,
+  "IsForceMigrate",
+  "csharp"
+);
 @@clientName(AofFrequency, "PersistenceSettingAofFrequency", "csharp");
 @@clientName(Cluster, "RedisEnterpriseCluster", "csharp");
 @@clientName(ClusteringPolicy, "RedisEnterpriseClusteringPolicy", "csharp");
@@ -59,8 +64,8 @@ using Microsoft.Cache;
 @@clientName(EvictionPolicy, "RedisEnterpriseEvictionPolicy", "csharp");
 @@clientName(EvictionPolicy.AllKeysLFU, "AllKeysLfu", "csharp");
 @@clientName(EvictionPolicy.AllKeysLRU, "AllKeysLru", "csharp");
-@@clientName(EvictionPolicy.VolatileLRU, "VolatileLfu", "csharp");
-@@clientName(EvictionPolicy.VolatileLFU, "VolatileLru", "csharp");
+@@clientName(EvictionPolicy.VolatileLRU, "VolatileLru", "csharp");
+@@clientName(EvictionPolicy.VolatileLFU, "VolatileLfu", "csharp");
 @@clientName(EvictionPolicy.VolatileTTL, "VolatileTtl", "csharp");
 @@clientName(
   ExportClusterParameters,
@@ -105,6 +110,41 @@ using Microsoft.Cache;
   "RedisEnterpriseMigrationProvisioningState",
   "csharp"
 );
+@@clientName(
+  MigrationValidationRequest,
+  "RedisEnterpriseMigrationValidationRequestContent",
+  "csharp"
+);
+@@clientName(
+  MigrationValidationResponse,
+  "RedisEnterpriseMigrationValidationResponseResult",
+  "csharp"
+);
+@@clientName(
+  MigrationValidationRequest.skipDataMigration,
+  "IsSkipDataMigration",
+  "csharp"
+);
+@@clientName(
+  MigrationValidationRequest.forceMigrate,
+  "IsForceMigrate",
+  "csharp"
+);
+@@clientName(
+  MigrationValidationDisparity,
+  "RedisEnterpriseMigrationValidationDisparity",
+  "csharp"
+);
+@@clientName(
+  MigrationValidationError,
+  "RedisEnterpriseMigrationValidationError",
+  "csharp"
+);
+@@clientName(
+  MigrationValidationWarning,
+  "RedisEnterpriseMigrationValidationWarning",
+  "csharp"
+);
 @@clientName(OperationStatus, "RedisEnterpriseOperationStatus", "csharp");
 @@clientName(OperationStatus.error, "ErrorResponse", "csharp");
 @@clientName(OperationStatus.startTime, "StartOn", "csharp");
@@ -146,6 +186,21 @@ using Microsoft.Cache;
 @@clientName(SkuDetails, "RedisEnterpriseSkuDetails", "csharp");
 @@clientName(SkuDetailsList, "RedisEnterpriseSkuDetailsList", "csharp");
 @@clientName(TlsVersion, "RedisEnterpriseTlsVersion", "csharp");
+@@clientName(
+  TlsVersion.One0,
+  Azure.ClientGenerator.Core.exact("Tls1_0"),
+  "csharp"
+);
+@@clientName(
+  TlsVersion.One1,
+  Azure.ClientGenerator.Core.exact("Tls1_1"),
+  "csharp"
+);
+@@clientName(
+  TlsVersion.One2,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
 @@clientName(
   OperationsStatusOperationGroup.get,
   "GetRedisEnterpriseOperationsStatus",
@@ -198,6 +253,35 @@ using Microsoft.Cache;
   "RedisEnterpriseCluster",
   "csharp"
 );
+
+// Preserve provisioning metadata from the reflection-based generator.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  Cluster,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 60, pattern: "^[a-zA-Z0-9-]+$" },
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  Database,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 60, pattern: "^[a-zA-Z0-9-]+$" },
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  AccessPolicyAssignment,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 60, pattern: "^[a-zA-Z0-9]+$" },
+  "csharp"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(
   Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
@@ -228,10 +312,35 @@ using Microsoft.Cache;
 @@clientName(
   Azure.ResourceManager.Legacy.ManagedServiceIdentityType.SystemAndUserAssigned,
   "SystemAssignedUserAssigned",
-  "javascript"
+  "javascript,go"
 );
 @@clientName(
   Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
   "ManagedServiceIdentity",
-  "javascript"
+  "javascript,python,go"
+);
+
+// java compatibility mitigations
+@@clientName(
+  Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
+  "ManagedServiceIdentity",
+  "java"
+);
+@@clientName(ClusterCreateProperties, "ClusterProperties", "java");
+@@clientName(ClusterProperties, "ClusterCommonProperties", "java");
+@@clientName(DatabaseProperties, "DatabaseCommonProperties", "java");
+@@clientName(ClusterProperties.hostName, "hostname", "java");
+@@clientName(TlsVersion.One0, "ONE_ZERO", "java");
+@@clientName(TlsVersion.One1, "ONE_ONE", "java");
+@@clientName(TlsVersion.One2, "ONE_TWO", "java");
+@@clientName(RdbFrequency.TwelveH, "ONE_TWOH", "java");
+@@clientName(
+  Azure.ResourceManager.Legacy.ManagedServiceIdentityType.SystemAndUserAssigned,
+  "SYSTEM_ASSIGNED_USER_ASSIGNED",
+  "java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+@@Legacy.flattenProperty(
+  Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
+  "java"
 );

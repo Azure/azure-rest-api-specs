@@ -113,6 +113,7 @@ model GarnetClusterResourceProperties {
 /** Endpoint for clients to connect to the cluster. */
 model GarnetClusterResourcePropertiesEndPointsItem {
   /** Ipv4 address of the endpoint. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddress?: string;
 
   /** Port number. */
@@ -1369,6 +1370,7 @@ enum RoleDefinitionType {
  * Chaos Fault List Response.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_04_01_preview)
 model chaosFaultListResponse is Azure.Core.Page<chaosFaultResource>;
 
@@ -5194,6 +5196,7 @@ model TableResource {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TableGetPropertiesOptions extends OptionsResource {}
 
 /**
@@ -8611,8 +8614,13 @@ model FleetResourceProperties {
 /**
  * Represents a fleet resource for updates.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FleetResourceUpdate {
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Standard ARM resource tags use Record<string>."
+  tags?: Record<string>;
+
   /**
    * Properties to update Azure Cosmos DB fleet resource.
    */
@@ -8772,6 +8780,7 @@ model AzureBlobSourceSinkDetails {
   /**
    * Azure Blob container endpoint.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @pattern("^https?://[^/$.?# ]+.[^ ]*$")
   endpointUrl: string;
 }
@@ -9264,6 +9273,7 @@ model AzureBlobDataTransferDataSourceSink extends DataTransferDataSourceSink {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   containerName: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   endpointUrl?: string;
   component: DataTransferComponent.AzureBlobStorage;
 }

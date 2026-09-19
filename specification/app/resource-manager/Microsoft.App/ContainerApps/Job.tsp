@@ -28,6 +28,8 @@ model Job is Azure.ResourceManager.TrackedResource<JobProperties> {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_03_02_preview)
+  @removed(Versions.v2026_07_01)
   extendedLocation?: ExtendedLocation;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -135,10 +137,9 @@ interface Jobs {
   start is ArmResourceActionAsyncBase<
     Job,
     JobExecutionTemplate,
-
-      | ArmResponse<JobExecutionBase>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = JobExecutionBase> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    | ArmResponse<JobExecutionBase>
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = JobExecutionBase> &
+        Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>,
     OptionalRequestBody = true,
     Error = DefaultErrorResponse
@@ -153,10 +154,9 @@ interface Jobs {
   stopMultipleExecutions is ArmResourceActionAsyncBase<
     Job,
     void,
-
-      | ArmResponse<ContainerAppJobExecutions>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ContainerAppJobExecutions> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    | ArmResponse<ContainerAppJobExecutions>
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ContainerAppJobExecutions> &
+        Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>,
     Error = DefaultErrorResponse
   >;
@@ -174,38 +174,38 @@ interface Jobs {
   >;
 
   /**
-   * Resumes a suspended job
+   * Resumes execution for a suspended Container Apps job.
    */
   @tag("Jobs")
   @summary("Resumes a suspended job")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_03_02_preview)
   resume is ArmResourceActionAsyncBase<
     Job,
     void,
-
-      | ArmResponse<Job>
-      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Job> &
-          ArmLroLocationHeader<FinalResult = Job> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    | ArmResponse<Job>
+    | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Job> &
+        ArmLroLocationHeader<FinalResult = Job> &
+        Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>
   >;
 
   /**
-   * Suspends a job
+   * Suspends execution for a running Container Apps job.
    */
   @tag("Jobs")
   @summary("Suspends a job")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_03_02_preview)
   suspend is ArmResourceActionAsyncBase<
     Job,
     void,
-
-      | ArmResponse<Job>
-      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Job> &
-          ArmLroLocationHeader<FinalResult = Job> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    | ArmResponse<Job>
+    | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Job> &
+        ArmLroLocationHeader<FinalResult = Job> &
+        Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>
   >;
 
@@ -245,10 +245,9 @@ interface Jobs {
   stopExecution is ArmResourceActionAsyncBase<
     JobExecution,
     void,
-
-      | OkResponse
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    | OkResponse
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+        Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>,
     Error = DefaultErrorResponse
   >;
@@ -259,18 +258,7 @@ interface Jobs {
   @tag("Jobs")
   @tag("Diagnostics")
   @summary("Get the properties of a Container App Job.")
-  proxyGet is ArmResourceRead<
-    Job,
-    Parameters = {
-      /** Proxy API Name for Container App Job. */
-      @path
-      @segment("detectorProperties")
-      @key
-      @pattern("^[-\\w\\._]+$")
-      apiName: string;
-    },
-    Error = DefaultErrorResponse
-  >;
+  proxyGet is JobDetectorPropertyOps.Read<Job, Response = ArmResponse<Job>>;
 
   /**
    * Get the list of diagnostics for a Container App Job.

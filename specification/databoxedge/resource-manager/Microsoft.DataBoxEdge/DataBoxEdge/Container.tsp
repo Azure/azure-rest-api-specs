@@ -15,8 +15,10 @@ namespace Microsoft.DataBoxEdge;
  * Represents a container on the  Data Box Edge/Gateway device.
  */
 @parentResource(StorageAccount)
-model Container
-  is Azure.ResourceManager.ProxyResource<ContainerProperties, false> {
+model Container is Azure.ResourceManager.ProxyResource<
+  ContainerProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Container,
     KeyName = "containerName",

@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SecurityInsights;
 // FIXME: EntityQuery has no properties property
@@ -122,3 +123,7 @@ interface EntityQueries {
   EntityQueries.createOrUpdate::parameters.resource,
   "The entity query we want to create or update"
 );
+
+@@added(EntityQuery, Versions.v2025_10_01_preview);
+@@added(EntityQueriesOps, Versions.v2025_10_01_preview);
+@@added(EntityQueries, Versions.v2025_10_01_preview);

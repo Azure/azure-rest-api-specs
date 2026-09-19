@@ -1,16 +1,16 @@
 import { sdkLabels, SdkName } from "@azure-tools/specs-shared/sdk-types";
 import debug from "debug";
 import { writeFileSync } from "fs";
-import _ from "lodash";
+import { isDeepStrictEqual } from "node:util";
 import { simpleGit } from "simple-git";
-import { getSDKSuppressionsChangedFiles, parseYamlContent } from "./common.js";
+import { getSDKSuppressionsChangedFiles, parseYamlContent } from "./common.ts";
 import {
-  SdkPackageSuppressionsEntry,
+  type SdkPackageSuppressionsEntry,
   sdkSuppressionsFileName,
-  SdkSuppressionsSection,
-  SdkSuppressionsYml,
+  type SdkSuppressionsSection,
+  type SdkSuppressionsYml,
   validateSdkSuppressionsFile,
-} from "./sdkSuppressions.js";
+} from "./sdkSuppressions.ts";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -100,7 +100,7 @@ export async function getSdkSuppressionsFileContent(
 }
 
 function getSdksWithSuppressionsDefined(suppressions: SdkSuppressionsSection): SdkName[] {
-  return _.keys(suppressions) as SdkName[];
+  return Object.keys(suppressions) as SdkName[];
 }
 
 /**
@@ -138,11 +138,10 @@ export function getSdkNamesWithChangedSuppressions(
   }
 
   // 1. If modify Sdk in SdkSuppressionsSection, add SdkName to sdkNamesWithChangedSuppressions
-  const differentSdkNamesWithChangedSuppressions = _.xorWith(
-    headSdksWithSuppressions,
-    baseSdksWithSuppressions,
-    _.isEqual,
-  );
+  const differentSdkNamesWithChangedSuppressions = [
+    ...headSdksWithSuppressions.filter((sdkName) => !baseSdksWithSuppressions.includes(sdkName)),
+    ...baseSdksWithSuppressions.filter((sdkName) => !headSdksWithSuppressions.includes(sdkName)),
+  ];
   if (differentSdkNamesWithChangedSuppressions.length > 0) {
     sdkNamesWithChangedSuppressions = [
       ...sdkNamesWithChangedSuppressions,
@@ -152,9 +151,8 @@ export function getSdkNamesWithChangedSuppressions(
 
   // 2. If modify SdkPackageSuppressionsEntry in SdkSuppressionsSection include package name and breaking changes
   //    add SdkName to sdkNamesWithChangedSuppressions
-  const similarSdkNamesWithChangedSuppressions = _.intersectionWith(
-    headSdksWithSuppressions,
-    baseSdksWithSuppressions,
+  const similarSdkNamesWithChangedSuppressions = headSdksWithSuppressions.filter((sdkName) =>
+    baseSdksWithSuppressions.includes(sdkName),
   );
   similarSdkNamesWithChangedSuppressions.forEach((sdkName: SdkName) => {
     const headSdkPackageSuppressionsEntry = headSdkSuppressionsSection[
@@ -164,12 +162,12 @@ export function getSdkNamesWithChangedSuppressions(
       sdkName
     ] as SdkPackageSuppressionsEntry[];
     // Determine whether packageName has changed
-    const differentPackageNamesWithChangedSuppressions = _.xorWith(
-      headSdkPackageSuppressionsEntry.map((entry) => entry.package),
-      baseSdkPackageSuppressionsEntry.map((entry) => entry.package),
-      _.isEqual,
-    );
-    if (differentPackageNamesWithChangedSuppressions.length > 0) {
+    const headPackageNames = new Set(headSdkPackageSuppressionsEntry.map((entry) => entry.package));
+    const basePackageNames = new Set(baseSdkPackageSuppressionsEntry.map((entry) => entry.package));
+    if (
+      [...headPackageNames].some((name) => !basePackageNames.has(name)) ||
+      [...basePackageNames].some((name) => !headPackageNames.has(name))
+    ) {
       sdkNamesWithChangedSuppressions = [...sdkNamesWithChangedSuppressions, sdkName];
       return;
     }
@@ -182,7 +180,12 @@ export function getSdkNamesWithChangedSuppressions(
         sdkNamesWithChangedSuppressions = [...sdkNamesWithChangedSuppressions, sdkName];
         return;
       }
-      if (!_.isEqual(headEntry["breaking-changes"].sort(), baseEntry["breaking-changes"].sort())) {
+      if (
+        !isDeepStrictEqual(
+          headEntry["breaking-changes"].sort(),
+          baseEntry["breaking-changes"].sort(),
+        )
+      ) {
         sdkNamesWithChangedSuppressions = [...sdkNamesWithChangedSuppressions, sdkName];
         return;
       }

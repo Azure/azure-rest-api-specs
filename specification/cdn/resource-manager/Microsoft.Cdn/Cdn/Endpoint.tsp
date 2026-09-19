@@ -88,12 +88,11 @@ interface Endpoints {
   start is Azure.ResourceManager.ArmResourceActionAsyncBase<
     Endpoint,
     void,
-
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> & {
-          @bodyRoot
-          _: Endpoint;
-        })
-      | ArmResponse<Endpoint>,
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> & {
+        @bodyRoot
+        _: Endpoint;
+      })
+    | ArmResponse<Endpoint>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Endpoint>
   >;
 
@@ -104,12 +103,11 @@ interface Endpoints {
   stop is Azure.ResourceManager.ArmResourceActionAsyncBase<
     Endpoint,
     void,
-
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> & {
-          @bodyRoot
-          _: Endpoint;
-        })
-      | ArmResponse<Endpoint>,
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> & {
+        @bodyRoot
+        _: Endpoint;
+      })
+    | ArmResponse<Endpoint>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Endpoint>
   >;
 

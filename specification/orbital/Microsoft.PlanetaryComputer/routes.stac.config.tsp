@@ -9,6 +9,7 @@ using TypeSpec.Http;
 namespace Microsoft.PlanetaryComputer;
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC queryable definitions contain mixed types (objects, booleans, strings)"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Queryable definitions response.")
 model QueryableDefinitionsResponse is Record<unknown>;
 
@@ -144,14 +145,13 @@ interface StacCollectionThumbnails {
       @pattern(".*")
       collectionId: string;
     },
-
-      | ImagePngResponse
-      | ImageJpegResponse
-      | ImageJpgResponse
-      | ImageWebpResponse
-      | ImageJp2Response
-      | ImageTiffResponse
-      | ApplicationXbinaryResponse
+    | ImagePngResponse
+    | ImageJpegResponse
+    | ImageJpgResponse
+    | ImageWebpResponse
+    | ImageJp2Response
+    | ImageTiffResponse
+    | ApplicationXbinaryResponse
   >;
 }
 

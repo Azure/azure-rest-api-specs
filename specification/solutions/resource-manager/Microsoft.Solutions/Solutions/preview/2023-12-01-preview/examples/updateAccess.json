@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "applicationName": "myManagedApplication",
+    "parameters": {
+      "Approver": "amauser",
+      "Metadata": {
+        "originRequestId": "originRequestId",
+        "requestorId": "RequestorId",
+        "subjectDisplayName": "SubjectDisplayName",
+        "tenantDisplayName": "TenantDisplayName"
+      },
+      "Status": "Elevate",
+      "SubStatus": "Approved"
+    },
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "body": {
+        "Approver": "amauser",
+        "Metadata": {
+          "originRequestId": "originRequestId",
+          "requestorId": "RequestorId",
+          "subjectDisplayName": "SubjectDisplayName",
+          "tenantDisplayName": "TenantDisplayName"
+        },
+        "Status": "Elevate",
+        "SubStatus": "Approved"
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Solutions/pathToOperationResult"
+      }
+    }
+  },
+  "operationId": "Applications_UpdateAccess",
+  "title": "Update access for application"
+}

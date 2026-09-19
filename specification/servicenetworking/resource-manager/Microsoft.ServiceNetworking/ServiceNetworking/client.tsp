@@ -32,31 +32,26 @@ using Microsoft.ServiceNetworking;
 
 // csharp
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Frontend.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Association.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   AssociationUpdate.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   TrafficController.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   SecurityPolicy.properties,
   "csharp"
@@ -143,6 +138,48 @@ using Microsoft.ServiceNetworking;
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
+@@alternateType(
+  TrafficControllerProperties.privateEndpointConnections,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
+@@alternateType(
+  FrontendAssociation.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnection.properties,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkResource.properties,
+  "csharp"
+);
+
+@@clientName(
+  PrivateEndpointConnection,
+  "ServiceNetworkingPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(
+  PrivateLinkResource,
+  "ServiceNetworkingPrivateLinkResource",
+  "csharp"
+);
+@@clientName(
+  PublicNetworkAccess,
+  "TrafficControllerPublicNetworkAccess",
+  "csharp"
+);
+@@clientName(
+  PrivateLinkServiceConnectionStatus,
+  "ServiceNetworkingPrivateLinkServiceConnectionStatus",
+  "csharp"
+);
 
 @@clientName(
   Versions.v2023_11_01,
@@ -152,6 +189,11 @@ using Microsoft.ServiceNetworking;
 @@clientName(
   Versions.v2025_05_01,
   "$DO_NOT_NORMALIZE$V2025_05_01",
+  "javascript"
+);
+@@clientName(
+  Versions.v2026_03_01,
+  "$DO_NOT_NORMALIZE$V2026_03_01",
   "javascript"
 );
 

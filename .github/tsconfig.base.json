@@ -1,0 +1,21 @@
+// Sources are executed directly by Node.js using type stripping.
+{
+  "compilerOptions": {
+    "target": "es2024",
+    "lib": ["es2024"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "types": ["node"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "checkJs": true,
+    "allowImportingTsExtensions": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    // Avoid generating tsconfig.tsbuildinfo file, which isn't useful for our scenario
+    "incremental": false,
+    "noEmit": true,
+  },
+}

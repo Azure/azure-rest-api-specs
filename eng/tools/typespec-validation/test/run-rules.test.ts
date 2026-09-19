@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
-import { runRules } from "../src/index.js";
-import { RuleResult } from "../src/rule-result.js";
-import { Rule } from "../src/rule.js";
+import { runRules } from "../src/index.ts";
+import { type RuleResult } from "../src/rule-result.ts";
+import { type Rule } from "../src/rule.ts";
 
 function createRule(
   name: string,

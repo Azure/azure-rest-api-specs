@@ -16,14 +16,14 @@ import {
   logFullOadMessagesList,
   outputBreakingChangeLabelVariables,
   type ParsedCliArguments,
-} from "../src/command-helpers.js";
-import { LogLevel } from "../src/log.js";
+} from "../src/command-helpers.ts";
+import { LogLevel } from "../src/log.ts";
 import {
   BreakingChangeReviewRequiredLabel,
-  Context,
+  type Context,
   VersioningReviewRequiredLabel,
-} from "../src/types/breaking-change.js";
-import { ResultMessageRecord } from "../src/types/message.js";
+} from "../src/types/breaking-change.ts";
+import { type ResultMessageRecord } from "../src/types/message.ts";
 
 // Test constants
 const TEST_CONSTANTS = {
@@ -186,10 +186,10 @@ function setupCommonMocks() {
 // Mock dependencies
 vi.mock("node:fs");
 vi.mock("node:url");
-vi.mock("../src/utils/common-utils.js");
-vi.mock("../src/utils/oad-message-processor.js");
-vi.mock("../src/utils/pull-request.js");
-vi.mock("../src/log.js");
+vi.mock("../src/utils/common-utils.ts");
+vi.mock("../src/utils/oad-message-processor.ts");
+vi.mock("../src/utils/pull-request.ts");
+vi.mock("../src/log.ts");
 vi.mock("@azure-tools/specs-shared/changed-files", async () => {
   const actual = await vi.importActual("@azure-tools/specs-shared/changed-files");
   return {
@@ -245,7 +245,7 @@ describe("command-helpers", () => {
     });
 
     it("should create context with default values", async () => {
-      const { createOadMessageProcessor } = await import("../src/utils/oad-message-processor.js");
+      const { createOadMessageProcessor } = await import("../src/utils/oad-message-processor.ts");
       const { mockOadMessageProcessor } = setupCommonMocks();
       vi.mocked(createOadMessageProcessor).mockReturnValue(mockOadMessageProcessor);
 
@@ -268,7 +268,7 @@ describe("command-helpers", () => {
     });
 
     it("should use custom values when provided", async () => {
-      const { createOadMessageProcessor } = await import("../src/utils/oad-message-processor.js");
+      const { createOadMessageProcessor } = await import("../src/utils/oad-message-processor.ts");
       vi.mocked(createOadMessageProcessor).mockReturnValue({
         logFilePath: TEST_CONSTANTS.PATHS.LOG_FILE,
         prUrl: TEST_CONSTANTS.PR.CUSTOM_URL,
@@ -302,7 +302,7 @@ describe("command-helpers", () => {
     });
 
     it("should create proper URL and context structure", async () => {
-      const { createOadMessageProcessor } = await import("../src/utils/oad-message-processor.js");
+      const { createOadMessageProcessor } = await import("../src/utils/oad-message-processor.ts");
       const { mockOadMessageProcessor } = setupCommonMocks();
       vi.mocked(createOadMessageProcessor).mockReturnValue(mockOadMessageProcessor);
 
@@ -496,7 +496,7 @@ describe("command-helpers", () => {
 
   describe("buildPrInfo", () => {
     it("should build PR info successfully", async () => {
-      const { createPullRequestProperties } = await import("../src/utils/pull-request.js");
+      const { createPullRequestProperties } = await import("../src/utils/pull-request.ts");
       const mockContext = createMockContext();
       const mockPrInfo = createMockPrInfo();
 
@@ -509,7 +509,7 @@ describe("command-helpers", () => {
     });
 
     it("should use cross-version prefix for CrossVersion run type", async () => {
-      const { createPullRequestProperties } = await import("../src/utils/pull-request.js");
+      const { createPullRequestProperties } = await import("../src/utils/pull-request.ts");
       const mockContext = createMockContext({ runType: "CrossVersion" });
       const mockPrInfo = createMockPrInfo();
 
@@ -521,7 +521,7 @@ describe("command-helpers", () => {
     });
 
     it("should throw error when PR info creation fails", async () => {
-      const { createPullRequestProperties } = await import("../src/utils/pull-request.js");
+      const { createPullRequestProperties } = await import("../src/utils/pull-request.ts");
       const mockContext = createMockContext();
 
       vi.mocked(createPullRequestProperties).mockResolvedValue(undefined);
@@ -530,7 +530,7 @@ describe("command-helpers", () => {
     });
 
     it("should throw error when PR info has no target branch", async () => {
-      const { createPullRequestProperties } = await import("../src/utils/pull-request.js");
+      const { createPullRequestProperties } = await import("../src/utils/pull-request.ts");
       const mockContext = createMockContext();
       const mockPrInfo = createMockPrInfo({ targetBranch: "" }); // Empty target branch
 
@@ -542,7 +542,7 @@ describe("command-helpers", () => {
 
   describe("changeBaseBranch", () => {
     it("should change base branch when different from target and not whitelisted", async () => {
-      const { logMessage } = await import("../src/log.js");
+      const { logMessage } = await import("../src/log.ts");
       const mockContext = createMockContext({
         prTargetBranch: TEST_CONSTANTS.BRANCHES.DEVELOP,
         prInfo: createMockPrInfo({
@@ -587,7 +587,7 @@ describe("command-helpers", () => {
     });
 
     it("should change base branch for CrossVersion run type when different from target", async () => {
-      const { logMessage } = await import("../src/log.js");
+      const { logMessage } = await import("../src/log.ts");
       const mockContext = createMockContext({
         runType: "CrossVersion", // CrossVersion type
         prTargetBranch: TEST_CONSTANTS.BRANCHES.DEVELOP, // Different from baseBranch
@@ -608,7 +608,7 @@ describe("command-helpers", () => {
 
   describe("logFullOadMessagesList", () => {
     it("should log all messages individually", async () => {
-      const { logMessage, logMessageAsync } = await import("../src/log.js");
+      const { logMessage, logMessageAsync } = await import("../src/log.ts");
       const msgs = createMockMessages();
 
       await logFullOadMessagesList(msgs);
@@ -625,7 +625,7 @@ describe("command-helpers", () => {
     });
 
     it("should handle empty message list", async () => {
-      const { logMessage } = await import("../src/log.js");
+      const { logMessage } = await import("../src/log.ts");
 
       await logFullOadMessagesList([]);
 
@@ -641,7 +641,7 @@ describe("command-helpers", () => {
 
   describe("createDummySwagger", () => {
     it("should create dummy swagger file successfully", async () => {
-      const { logMessage } = await import("../src/log.js");
+      const { logMessage } = await import("../src/log.ts");
 
       const fromSwagger = "/path/to/source.json";
       const toSwagger = "/path/to/target.json";
@@ -828,7 +828,7 @@ describe("command-helpers", () => {
     });
 
     it("should set both labels to false when no labels need to be added", async () => {
-      const { setOutput } = await import("../src/log.js");
+      const { setOutput } = await import("../src/log.ts");
 
       outputBreakingChangeLabelVariables();
 
@@ -845,7 +845,7 @@ describe("command-helpers", () => {
     });
 
     it("should set BreakingChangeReviewRequired to true when present in labels set", async () => {
-      const { setOutput } = await import("../src/log.js");
+      const { setOutput } = await import("../src/log.ts");
 
       BreakingChangeLabelsToBeAdded.add(BreakingChangeReviewRequiredLabel);
 
@@ -863,7 +863,7 @@ describe("command-helpers", () => {
     });
 
     it("should set VersioningReviewRequired to true when present in labels set", async () => {
-      const { setOutput } = await import("../src/log.js");
+      const { setOutput } = await import("../src/log.ts");
 
       BreakingChangeLabelsToBeAdded.add(VersioningReviewRequiredLabel);
 
@@ -881,7 +881,7 @@ describe("command-helpers", () => {
     });
 
     it("should set both labels to true when both are present in labels set", async () => {
-      const { setOutput } = await import("../src/log.js");
+      const { setOutput } = await import("../src/log.ts");
 
       BreakingChangeLabelsToBeAdded.add(BreakingChangeReviewRequiredLabel);
       BreakingChangeLabelsToBeAdded.add(VersioningReviewRequiredLabel);
@@ -900,7 +900,7 @@ describe("command-helpers", () => {
     });
 
     it("should handle labels set with non-review labels", async () => {
-      const { setOutput } = await import("../src/log.js");
+      const { setOutput } = await import("../src/log.ts");
 
       BreakingChangeLabelsToBeAdded.add("SomeOtherLabel");
 
@@ -918,7 +918,7 @@ describe("command-helpers", () => {
     });
 
     it("should handle mixed labels including one review label", async () => {
-      const { setOutput } = await import("../src/log.js");
+      const { setOutput } = await import("../src/log.ts");
 
       BreakingChangeLabelsToBeAdded.add("SomeOtherLabel");
       BreakingChangeLabelsToBeAdded.add(BreakingChangeReviewRequiredLabel);
