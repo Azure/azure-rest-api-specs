@@ -103,7 +103,7 @@ interface RecoveryPointGetAccessToken {
   @action("accessToken")
   getAccessToken is ArmResourceActionSync<
     RecoveryPointResource,
-    AADPropertiesResource,
+    AadPropertiesResource,
     | ArmResponse<CrrAccessTokenResource>
     | RecoveryPointGetAccessTokenBadRequest,
     Error = NewErrorResponse

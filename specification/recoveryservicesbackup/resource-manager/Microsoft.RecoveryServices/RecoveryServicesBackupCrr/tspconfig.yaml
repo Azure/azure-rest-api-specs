@@ -48,8 +48,6 @@ linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
   disable:
-    "@azure-tools/typespec-azure-core/casing-style": "Faithful migration of the frozen stable/2023-01-15 CRR contract. The original hand-written swagger uses model/property/interface names that are not PascalCase/camelCase (e.g. KEKDetails, IaasVMRestoreRequest, OperationStatusProvisionILRExtendedInfo, deferredDeleteSyncTimeInUTC, BackupUsageSummariesCRR). These names are part of the published wire contract and must be preserved byte-for-byte."
     "@azure-tools/typespec-azure-core/composition-over-inheritance": "Faithful migration. The original swagger models a discriminated type hierarchy via allOf/extends (RestoreRequest, ProtectedItem, Job, OperationStatusExtendedInfo, etc.). Preserving the inheritance shape is required to emit an identical bms.json."
-    "@azure-tools/typespec-azure-core/documentation-required": "Faithful migration. A few frozen 2023-01-15 operations (e.g. AadProperties_Get, vaultstorageconfig reads) do not carry descriptions in the original contract; adding docs would change the emitted swagger."
     "@azure-tools/typespec-azure-core/no-openapi-client-extensions": "Faithful migration. The original CRR list operations emit x-ms-pageable with nextLinkName:null. This is reproduced via @@extension to keep the generated bms.json identical to stable/2023-01-15."
     "@azure-tools/typespec-azure-core/no-string-discriminator": "Faithful migration. The original contract uses plain-string discriminators (objectType, jobType, protectedItemType). Converting to an extensible union would alter the emitted schema."

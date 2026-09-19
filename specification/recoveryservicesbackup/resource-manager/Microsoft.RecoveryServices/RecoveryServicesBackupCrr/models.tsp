@@ -1219,15 +1219,15 @@ model NewErrorResponseError {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model AADPropertiesResource extends Resource {
+model AadPropertiesResource extends Resource {
   /**
    * AADPropertiesResource properties
    */
-  properties?: AADProperties;
+  properties?: AadProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model AADProperties {
+model AadProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   servicePrincipalClientId?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -1409,6 +1409,7 @@ model CrrAccessToken {
   /**
    * Recovery point information: Original SA option
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: this property name is part of the published stable/2023-01-15 wire contract and must be preserved (property casing is API surface)."
   rpOriginalSAOption?: boolean;
 
   /**
@@ -1419,11 +1420,13 @@ model CrrAccessToken {
   /**
    * Recovery point information: VM size description
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: this property name is part of the published stable/2023-01-15 wire contract and must be preserved (property casing is API surface)."
   rpVMSizeDescription?: string;
 
   /**
    * Active region name of BMS Stamp
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: this property name is part of the published stable/2023-01-15 wire contract and must be preserved (property casing is API surface)."
   bMSActiveRegion?: string;
 }
 
@@ -1739,6 +1742,7 @@ model ProtectedItem {
    * Time for deferred deletion in UTC
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: this property name is part of the published stable/2023-01-15 wire contract and must be preserved (property casing is API surface)."
   deferredDeleteTimeInUTC?: utcDateTime;
 
   /**
@@ -1770,7 +1774,7 @@ model ProtectedItem {
 /**
  * Query parameters to fetch backup summaries.
  */
-model BMSBackupSummariesQueryObject {
+model BmsBackupSummariesQueryObject {
   /**
    * Backup management type for this container.
    */
@@ -1816,7 +1820,7 @@ model AzureFileshareProtectedItem extends ProtectedItem {
    * Health details of different KPIs
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  kpisHealths?: Record<KPIResourceHealthDetails>;
+  kpisHealths?: Record<KpiResourceHealthDetails>;
 
   /**
    * Additional information with this backup item.
@@ -1832,7 +1836,7 @@ model AzureFileshareProtectedItem extends ProtectedItem {
 /**
  * KPI Resource Health Details
  */
-model KPIResourceHealthDetails {
+model KpiResourceHealthDetails {
   /**
    * Resource Health Status
    */
@@ -1934,6 +1938,7 @@ model AzureFileShareRecoveryPoint extends RecoveryPoint {
   /**
    * Contains recovery point size
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: this property name is part of the published stable/2023-01-15 wire contract and must be preserved (property casing is API surface)."
   @visibility(Lifecycle.Read)
   recoveryPointSizeInGB?: int32;
 
@@ -2001,7 +2006,7 @@ model AzureFileShareRestoreRequest extends RestoreRequest {
   /**
    * Target File Share Details
    */
-  targetDetails?: TargetAFSRestoreInfo;
+  targetDetails?: TargetAfsRestoreInfo;
 
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -2032,7 +2037,7 @@ model RestoreFileSpecs {
 /**
  * Target Azure File Share Info.
  */
-model TargetAFSRestoreInfo {
+model TargetAfsRestoreInfo {
   /**
    * File share name
    */
@@ -2051,7 +2056,7 @@ model TargetAFSRestoreInfo {
   "x-ms-discriminator-value",
   "Microsoft.ClassicCompute/virtualMachines"
 )
-model AzureIaaSClassicComputeVMProtectedItem extends AzureIaaSVMProtectedItem {
+model AzureIaasClassicComputeVmProtectedItem extends AzureIaasVmProtectedItem {
   /**
    * backup item type.
    */
@@ -2063,7 +2068,7 @@ model AzureIaaSClassicComputeVMProtectedItem extends AzureIaaSVMProtectedItem {
  * IaaS VM workload-specific backup item.
  */
 @extension("x-ms-discriminator-value", "AzureIaaSVMProtectedItem")
-model AzureIaaSVMProtectedItem extends ProtectedItem {
+model AzureIaasVmProtectedItem extends ProtectedItem {
   /**
    * Friendly name of the VM represented by this backup item.
    */
@@ -2093,13 +2098,13 @@ model AzureIaaSVMProtectedItem extends ProtectedItem {
    * Health details on this backup item.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
-  healthDetails?: AzureIaaSVMHealthDetails[];
+  healthDetails?: AzureIaasVmHealthDetails[];
 
   /**
    * Health details of different KPIs
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  kpisHealths?: Record<KPIResourceHealthDetails>;
+  kpisHealths?: Record<KpiResourceHealthDetails>;
 
   /**
    * Last backup operation status.
@@ -2120,7 +2125,7 @@ model AzureIaaSVMProtectedItem extends ProtectedItem {
   /**
    * Additional information for this backup item.
    */
-  extendedInfo?: AzureIaaSVMProtectedItemExtendedInfo;
+  extendedInfo?: AzureIaasVmProtectedItemExtendedInfo;
 
   /**
    * Extended Properties for Azure IaasVM Backup.
@@ -2131,14 +2136,14 @@ model AzureIaaSVMProtectedItem extends ProtectedItem {
 /**
  * Azure IaaS VM workload-specific Health Details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Faithful migration: AzureIaaSVMHealthDetails is an empty specialization in the frozen stable/2023-01-15 contract."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Faithful migration: AzureIaasVmHealthDetails is an empty specialization in the frozen stable/2023-01-15 contract."
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model AzureIaaSVMHealthDetails extends ResourceHealthDetails {}
+model AzureIaasVmHealthDetails extends ResourceHealthDetails {}
 
 /**
  * Additional information on Azure IaaS VM specific backup item.
  */
-model AzureIaaSVMProtectedItemExtendedInfo {
+model AzureIaasVmProtectedItemExtendedInfo {
   /**
    * The oldest backup copy available for this backup item.
    */
@@ -2183,7 +2188,7 @@ model DiskExclusionProperties {
  * IaaS VM workload-specific backup item representing the Azure Resource Manager VM.
  */
 @extension("x-ms-discriminator-value", "Microsoft.Compute/virtualMachines")
-model AzureIaaSComputeVMProtectedItem extends AzureIaaSVMProtectedItem {
+model AzureIaasComputeVmProtectedItem extends AzureIaasVmProtectedItem {
   /**
    * backup item type.
    */
@@ -2194,7 +2199,7 @@ model AzureIaaSComputeVMProtectedItem extends AzureIaaSVMProtectedItem {
 /**
  * Azure IaaS VM workload-specific error information.
  */
-model AzureIaaSVMErrorInfo {
+model AzureIaasVmErrorInfo {
   /**
    * Error code.
    */
@@ -2238,7 +2243,7 @@ model AzureIaaSVMJob extends Job {
    * Error details on execution of this job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
-  errorDetails?: AzureIaaSVMErrorInfo[];
+  errorDetails?: AzureIaasVmErrorInfo[];
 
   /**
    * Specifies whether the backup item is a Classic or an Azure Resource Manager VM.
@@ -2248,7 +2253,7 @@ model AzureIaaSVMJob extends Job {
   /**
    * Additional information for this job.
    */
-  extendedInfo?: AzureIaaSVMJobExtendedInfo;
+  extendedInfo?: AzureIaasVmJobExtendedInfo;
 
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -2259,12 +2264,12 @@ model AzureIaaSVMJob extends Job {
 /**
  * Azure IaaS VM workload-specific additional information for job.
  */
-model AzureIaaSVMJobExtendedInfo {
+model AzureIaasVmJobExtendedInfo {
   /**
    * List of tasks associated with this job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
-  tasksList?: AzureIaaSVMJobTaskDetails[];
+  tasksList?: AzureIaasVmJobTaskDetails[];
 
   /**
    * Job properties.
@@ -2297,7 +2302,7 @@ model AzureIaaSVMJobExtendedInfo {
 /**
  * Azure IaaS VM workload-specific job task details.
  */
-model AzureIaaSVMJobTaskDetails {
+model AzureIaasVmJobTaskDetails {
   /**
    * The task display name.
    */
@@ -2556,7 +2561,7 @@ model AzureVmWorkloadProtectedItem extends ProtectedItem {
    * Health details of different KPIs
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  kpisHealths?: Record<KPIResourceHealthDetails>;
+  kpisHealths?: Record<KpiResourceHealthDetails>;
 }
 
 /**
@@ -2607,7 +2612,7 @@ model AzureVmWorkloadProtectedItemExtendedInfo {
  * Azure VM workload-specific protected item representing SAP ASE Database.
  */
 @extension("x-ms-discriminator-value", "AzureVmWorkloadSAPAseDatabase")
-model AzureVmWorkloadSAPAseDatabaseProtectedItem
+model AzureVmWorkloadSapAseDatabaseProtectedItem
   extends AzureVmWorkloadProtectedItem {
   /**
    * backup item type.
@@ -2620,7 +2625,7 @@ model AzureVmWorkloadSAPAseDatabaseProtectedItem
  * Azure VM workload-specific protected item representing SAP HANA Database.
  */
 @extension("x-ms-discriminator-value", "AzureVmWorkloadSAPHanaDatabase")
-model AzureVmWorkloadSAPHanaDatabaseProtectedItem
+model AzureVmWorkloadSapHanaDatabaseProtectedItem
   extends AzureVmWorkloadProtectedItem {
   /**
    * backup item type.
@@ -2633,7 +2638,7 @@ model AzureVmWorkloadSAPHanaDatabaseProtectedItem
  * Azure VM workload-specific protected item representing SQL Database.
  */
 @extension("x-ms-discriminator-value", "AzureVmWorkloadSQLDatabase")
-model AzureVmWorkloadSQLDatabaseProtectedItem
+model AzureVmWorkloadSqlDatabaseProtectedItem
   extends AzureVmWorkloadProtectedItem {
   /**
    * backup item type.
@@ -2784,6 +2789,7 @@ model AzureWorkloadRecoveryPoint extends RecoveryPoint {
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: this property name is part of the published stable/2023-01-15 wire contract and must be preserved (property casing is API surface)."
   recoveryPointTimeInUTC?: utcDateTime;
 
   /**
@@ -2928,7 +2934,7 @@ model TargetRestoreInfo {
   "x-ms-discriminator-value",
   "AzureWorkloadSAPHanaPointInTimeRecoveryPoint"
 )
-model AzureWorkloadSAPHanaPointInTimeRecoveryPoint
+model AzureWorkloadSapHanaPointInTimeRecoveryPoint
   extends AzureWorkloadPointInTimeRecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -2944,8 +2950,8 @@ model AzureWorkloadSAPHanaPointInTimeRecoveryPoint
   "x-ms-discriminator-value",
   "AzureWorkloadSAPHanaPointInTimeRestoreRequest"
 )
-model AzureWorkloadSAPHanaPointInTimeRestoreRequest
-  extends AzureWorkloadSAPHanaRestoreRequest {
+model AzureWorkloadSapHanaPointInTimeRestoreRequest
+  extends AzureWorkloadSapHanaRestoreRequest {
   /**
    * PointInTime value
    */
@@ -2964,13 +2970,13 @@ model AzureWorkloadSAPHanaPointInTimeRestoreRequest
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Faithful migration: AzureWorkloadSAPHanaRestoreRequest is an empty specialization in the frozen stable/2023-01-15 contract."
 @extension("x-ms-discriminator-value", "AzureWorkloadSAPHanaRestoreRequest")
-model AzureWorkloadSAPHanaRestoreRequest extends AzureWorkloadRestoreRequest {}
+model AzureWorkloadSapHanaRestoreRequest extends AzureWorkloadRestoreRequest {}
 
 /**
  * SAPHana specific recoverypoint, specifically encapsulates full/diff recoverypoints
  */
 @extension("x-ms-discriminator-value", "AzureWorkloadSAPHanaRecoveryPoint")
-model AzureWorkloadSAPHanaRecoveryPoint extends AzureWorkloadRecoveryPoint {
+model AzureWorkloadSapHanaRecoveryPoint extends AzureWorkloadRecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
@@ -2985,8 +2991,8 @@ model AzureWorkloadSAPHanaRecoveryPoint extends AzureWorkloadRecoveryPoint {
   "x-ms-discriminator-value",
   "AzureWorkloadSQLPointInTimeRecoveryPoint"
 )
-model AzureWorkloadSQLPointInTimeRecoveryPoint
-  extends AzureWorkloadSQLRecoveryPoint {
+model AzureWorkloadSqlPointInTimeRecoveryPoint
+  extends AzureWorkloadSqlRecoveryPoint {
   /**
    * List of log ranges
    */
@@ -3004,24 +3010,25 @@ model AzureWorkloadSQLPointInTimeRecoveryPoint
  * SQL specific recoverypoint, specifically encapsulates full/diff recoverypoint along with extended info
  */
 @extension("x-ms-discriminator-value", "AzureWorkloadSQLRecoveryPoint")
-model AzureWorkloadSQLRecoveryPoint extends AzureWorkloadRecoveryPoint {
+model AzureWorkloadSqlRecoveryPoint extends AzureWorkloadRecoveryPoint {
   /**
    * Extended Info that provides data directory details. Will be populated in two cases:
    * When a specific recovery point is accessed using GetRecoveryPoint
    * Or when ListRecoveryPoints is called for Log RP only with ExtendedInfo query filter
    */
-  extendedInfo?: AzureWorkloadSQLRecoveryPointExtendedInfo;
+  extendedInfo?: AzureWorkloadSqlRecoveryPointExtendedInfo;
 }
 
 /**
  * Extended info class details
  */
-model AzureWorkloadSQLRecoveryPointExtendedInfo {
+model AzureWorkloadSqlRecoveryPointExtendedInfo {
   /**
    * UTC time at which data directory info was captured
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: this property name is part of the published stable/2023-01-15 wire contract and must be preserved (property casing is API surface)."
   dataDirectoryTimeInUTC?: utcDateTime;
 
   /**
@@ -3029,13 +3036,13 @@ model AzureWorkloadSQLRecoveryPointExtendedInfo {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   @visibility(Lifecycle.Read)
-  dataDirectoryPaths?: SQLDataDirectory[];
+  dataDirectoryPaths?: SqlDataDirectory[];
 }
 
 /**
  * SQLDataDirectory info
  */
-model SQLDataDirectory {
+model SqlDataDirectory {
   /**
    * Type of data directory mapping
    */
@@ -3059,8 +3066,8 @@ model SQLDataDirectory {
   "x-ms-discriminator-value",
   "AzureWorkloadSQLPointInTimeRestoreRequest"
 )
-model AzureWorkloadSQLPointInTimeRestoreRequest
-  extends AzureWorkloadSQLRestoreRequest {
+model AzureWorkloadSqlPointInTimeRestoreRequest
+  extends AzureWorkloadSqlRestoreRequest {
   /**
    * PointInTime value
    */
@@ -3078,7 +3085,7 @@ model AzureWorkloadSQLPointInTimeRestoreRequest
  * AzureWorkload SQL -specific restore. Specifically for full/diff restore
  */
 @extension("x-ms-discriminator-value", "AzureWorkloadSQLRestoreRequest")
-model AzureWorkloadSQLRestoreRequest extends AzureWorkloadRestoreRequest {
+model AzureWorkloadSqlRestoreRequest extends AzureWorkloadRestoreRequest {
   /**
    * Default option set to true. If this is set to false, alternate data directory must be provided
    */
@@ -3093,13 +3100,13 @@ model AzureWorkloadSQLRestoreRequest extends AzureWorkloadRestoreRequest {
    * Data directory details
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
-  alternateDirectoryPaths?: SQLDataDirectoryMapping[];
+  alternateDirectoryPaths?: SqlDataDirectoryMapping[];
 }
 
 /**
  * Encapsulates information regarding data directory
  */
-model SQLDataDirectoryMapping {
+model SqlDataDirectoryMapping {
   /**
    * Type of data directory mapping
    */
@@ -3124,7 +3131,7 @@ model SQLDataDirectoryMapping {
 /**
  * BEK is bitlocker encryption key.
  */
-model BEKDetails {
+model BekDetails {
   /**
    * Secret is BEK.
    */
@@ -3144,8 +3151,7 @@ model BEKDetails {
 /**
  * Filters to list backup copies.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the historical Swagger definition name"
-model BMSRPQueryObject {
+model BmsrpQueryObject {
   /**
    * Backup copies created after this time.
    */
@@ -3171,11 +3177,13 @@ model BMSRPQueryObject {
   /**
    * Whether the RP can be moved to another tier
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: preserving the established wire property name from the RecoveryServicesBackup contract; renaming would be a breaking change."
   moveReadyRPOnly?: boolean;
 
   /**
    * Flag to indicate whether Soft Deleted RPs should be included/excluded from result.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: preserving the established wire property name from the RecoveryServicesBackup contract; renaming would be a breaking change."
   includeSoftDeletedRP?: boolean;
 }
 
@@ -3363,7 +3371,7 @@ model DpmJobTaskDetails {
 /**
  * Additional information on Backup engine specific backup item.
  */
-model DPMProtectedItem extends ProtectedItem {
+model DpmProtectedItem extends ProtectedItem {
   /**
    * Friendly name of the managed item
    */
@@ -3382,7 +3390,7 @@ model DPMProtectedItem extends ProtectedItem {
   /**
    * Extended info of the backup item.
    */
-  extendedInfo?: DPMProtectedItemExtendedInfo;
+  extendedInfo?: DpmProtectedItemExtendedInfo;
 
   /**
    * backup item type.
@@ -3393,7 +3401,7 @@ model DPMProtectedItem extends ProtectedItem {
 /**
  * Additional information of DPM Protected item.
  */
-model DPMProtectedItemExtendedInfo {
+model DpmProtectedItemExtendedInfo {
   /**
    * Attribute to provide information on various DBs.
    */
@@ -3580,7 +3588,7 @@ model GenericRecoveryPoint extends RecoveryPoint {
 /**
  * IaaS VM workload specific backup copy.
  */
-model IaasVMRecoveryPoint extends RecoveryPoint {
+model IaasVmRecoveryPoint extends RecoveryPoint {
   /**
    * Type of the backup copy.
    */
@@ -3603,12 +3611,14 @@ model IaasVMRecoveryPoint extends RecoveryPoint {
   /**
    * Storage type of the VM whose backup copy is created.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: this property name is part of the published stable/2023-01-15 wire contract and must be preserved (property casing is API surface)."
   @visibility(Lifecycle.Read)
   sourceVMStorageType?: string;
 
   /**
    * Identifies whether the VM was encrypted when the backup copy is created.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: this property name is part of the published stable/2023-01-15 wire contract and must be preserved (property casing is API surface)."
   @visibility(Lifecycle.Read)
   isSourceVMEncrypted?: boolean;
 
@@ -3688,12 +3698,12 @@ model KeyAndSecretDetails {
   /**
    * KEK is encryption key for BEK.
    */
-  kekDetails?: KEKDetails;
+  kekDetails?: KekDetails;
 
   /**
    * BEK is bitlocker encryption key.
    */
-  bekDetails?: BEKDetails;
+  bekDetails?: BekDetails;
 
   /**
    * Encryption mechanism: None/ SinglePass/ DoublePass
@@ -3704,7 +3714,7 @@ model KeyAndSecretDetails {
 /**
  * KEK is encryption key for BEK.
  */
-model KEKDetails {
+model KekDetails {
   /**
    * Key is KEK.
    */
@@ -3749,7 +3759,7 @@ model RecoveryPointDiskConfiguration {
 /**
  * IaaS VM workload-specific restore.
  */
-model IaasVMRestoreRequest extends RestoreRequest {
+model IaasVmRestoreRequest extends RestoreRequest {
   /**
    * ID of the backup copy to be recovered.
    */
@@ -3908,8 +3918,7 @@ model InstantItemRecoveryTarget {
 /**
  * Filters to list backup items.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the historical Swagger definition name"
-model BMSAADPropertiesQueryObject {
+model BmsAadPropertiesQueryObject {
   /**
    * Backup management type for the backed up item.
    */
@@ -4003,6 +4012,7 @@ model MabFileFolderProtectedItem extends ProtectedItem {
   /**
    * Sync time for deferred deletion in UTC
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: this property name is part of the published stable/2023-01-15 wire contract and must be preserved (property casing is API surface)."
   deferredDeleteSyncTimeInUTC?: int64;
 
   /**
@@ -4177,7 +4187,7 @@ model OperationStatusJobsExtendedInfo extends OperationStatusExtendedInfo {
 /**
  * Operation status extended info for ILR provision action.
  */
-model OperationStatusProvisionILRExtendedInfo
+model OperationStatusProvisionIlrExtendedInfo
   extends OperationStatusExtendedInfo {
   /**
    * Target details for file / folder restore.

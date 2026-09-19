@@ -15,7 +15,7 @@ namespace Microsoft.RecoveryServices;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("BackupUsageSummaries_CRR")
-interface BackupUsageSummariesCRROperationGroup {
+interface BackupUsageSummariesCrrOperationGroup {
   /**
    * Fetches the backup management usage summaries of the vault.
    */
@@ -64,7 +64,7 @@ interface AadPropertiesOperationGroup {
   @get
   @action("backupAadProperties")
   get is ArmProviderActionSync<
-    Response = AADPropertiesResource,
+    Response = AadPropertiesResource,
     Scope = SubscriptionActionScope,
     Parameters = {
       /**
@@ -183,6 +183,9 @@ interface BackupCrrJobsOperationGroup {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("CrrOperationResults")
 interface CrrOperationResultsOperationGroup {
+  /**
+   * Gets the operation result of a cross-region-restore operation for the given operation ID and Azure region.
+   */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Faithful migration: the original CrrOperationResults_Get 202 response does not emit a Location header; adding one would change the frozen stable/2023-01-15 contract."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Faithful migration: the original CrrOperationResults_Get success response is body-less, matching the frozen stable/2023-01-15 contract."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
@@ -209,6 +212,9 @@ interface CrrOperationResultsOperationGroup {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("CrrOperationStatus")
 interface CrrOperationStatusOperationGroup {
+  /**
+   * Gets the status of a cross-region-restore operation for the given operation ID and Azure region.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CrrOperationStatus_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrOperationsStatus/{operationId}")
@@ -269,7 +275,7 @@ interface BackupProtectedItemsCrrOperationGroup {
 }
 
 @@TypeSpec.OpenAPI.extension(
-  BackupUsageSummariesCRROperationGroup.list,
+  BackupUsageSummariesCrrOperationGroup.list,
   "x-ms-odata",
   "#/definitions/BMSBackupSummariesQueryObject"
 );
@@ -279,7 +285,7 @@ interface BackupProtectedItemsCrrOperationGroup {
   "#/definitions/BMSAADPropertiesQueryObject"
 );
 @@TypeSpec.OpenAPI.extension(
-  BackupUsageSummariesCRROperationGroup.list,
+  BackupUsageSummariesCrrOperationGroup.list,
   "x-ms-pageable",
   #{ nextLinkName: null }
 );

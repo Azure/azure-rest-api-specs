@@ -34,7 +34,7 @@ using Microsoft.RecoveryServices;
 );
 
 @@clientLocation(
-  BackupUsageSummariesCRROperationGroup.list,
+  BackupUsageSummariesCrrOperationGroup.list,
   "BackupUsageSummariesCRR"
 );
 
@@ -65,4 +65,85 @@ using Microsoft.RecoveryServices;
 @@clientLocation(
   BackupProtectedItemsCrrOperationGroup.list,
   "BackupProtectedItemsCrr"
+);
+
+// Preserve original SDK model names after PascalCase spec renames (casing-style).
+// Spec names favor standard TypeSpec casing; these mappings keep SDK/wire-adjacent
+// names identical to the shipped RecoveryServicesBackup contract to avoid SDK breaks.
+@@clientName(AadPropertiesResource, "AADPropertiesResource");
+@@clientName(AadProperties, "AADProperties");
+@@clientName(BmsBackupSummariesQueryObject, "BMSBackupSummariesQueryObject");
+@@clientName(KpiResourceHealthDetails, "KPIResourceHealthDetails");
+@@clientName(TargetAfsRestoreInfo, "TargetAFSRestoreInfo");
+@@clientName(
+  AzureIaasClassicComputeVmProtectedItem,
+  "AzureIaaSClassicComputeVMProtectedItem"
+);
+@@clientName(AzureIaasVmHealthDetails, "AzureIaaSVMHealthDetails");
+@@clientName(
+  AzureIaasVmProtectedItemExtendedInfo,
+  "AzureIaaSVMProtectedItemExtendedInfo"
+);
+@@clientName(AzureIaasComputeVmProtectedItem, "AzureIaaSComputeVMProtectedItem");
+@@clientName(AzureIaasVmErrorInfo, "AzureIaaSVMErrorInfo");
+@@clientName(AzureIaasVmJobExtendedInfo, "AzureIaaSVMJobExtendedInfo");
+@@clientName(AzureIaasVmJobTaskDetails, "AzureIaaSVMJobTaskDetails");
+@@clientName(
+  AzureVmWorkloadSapAseDatabaseProtectedItem,
+  "AzureVmWorkloadSAPAseDatabaseProtectedItem"
+);
+@@clientName(
+  AzureVmWorkloadSapHanaDatabaseProtectedItem,
+  "AzureVmWorkloadSAPHanaDatabaseProtectedItem"
+);
+@@clientName(
+  AzureVmWorkloadSqlDatabaseProtectedItem,
+  "AzureVmWorkloadSQLDatabaseProtectedItem"
+);
+@@clientName(
+  AzureWorkloadSqlRecoveryPointExtendedInfo,
+  "AzureWorkloadSQLRecoveryPointExtendedInfo"
+);
+@@clientName(SqlDataDirectory, "SQLDataDirectory");
+@@clientName(SqlDataDirectoryMapping, "SQLDataDirectoryMapping");
+@@clientName(BekDetails, "BEKDetails");
+@@clientName(BmsrpQueryObject, "BMSRPQueryObject");
+@@clientName(DpmProtectedItemExtendedInfo, "DPMProtectedItemExtendedInfo");
+@@clientName(KekDetails, "KEKDetails");
+@@clientName(BmsAadPropertiesQueryObject, "BMSAADPropertiesQueryObject");
+
+// Group-2 models whose original name is also the wire x-ms-discriminator-value.
+// The spec symbol is renamed to PascalCase; the discriminator string literals
+// (objectType and x-ms-discriminator-value) are left verbatim, and these mappings
+// keep the emitted definition key / SDK name identical to the original contract.
+@@clientName(AzureIaasVmProtectedItem, "AzureIaaSVMProtectedItem");
+@@clientName(DpmProtectedItem, "DPMProtectedItem");
+@@clientName(IaasVmRecoveryPoint, "IaasVMRecoveryPoint");
+@@clientName(IaasVmRestoreRequest, "IaasVMRestoreRequest");
+@@clientName(
+  OperationStatusProvisionIlrExtendedInfo,
+  "OperationStatusProvisionILRExtendedInfo"
+);
+@@clientName(AzureWorkloadSapHanaRecoveryPoint, "AzureWorkloadSAPHanaRecoveryPoint");
+@@clientName(
+  AzureWorkloadSapHanaRestoreRequest,
+  "AzureWorkloadSAPHanaRestoreRequest"
+);
+@@clientName(
+  AzureWorkloadSapHanaPointInTimeRecoveryPoint,
+  "AzureWorkloadSAPHanaPointInTimeRecoveryPoint"
+);
+@@clientName(
+  AzureWorkloadSapHanaPointInTimeRestoreRequest,
+  "AzureWorkloadSAPHanaPointInTimeRestoreRequest"
+);
+@@clientName(AzureWorkloadSqlRecoveryPoint, "AzureWorkloadSQLRecoveryPoint");
+@@clientName(AzureWorkloadSqlRestoreRequest, "AzureWorkloadSQLRestoreRequest");
+@@clientName(
+  AzureWorkloadSqlPointInTimeRecoveryPoint,
+  "AzureWorkloadSQLPointInTimeRecoveryPoint"
+);
+@@clientName(
+  AzureWorkloadSqlPointInTimeRestoreRequest,
+  "AzureWorkloadSQLPointInTimeRestoreRequest"
 );
