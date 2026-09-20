@@ -129,6 +129,185 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
 // Dimensions + Rubric-based Evaluator Definition
 // ============================================================================
 
+@doc("How quality dimensions contribute to the aggregate rubric score.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union RubricWeighting {
+  string,
+
+  @doc("Every quality dimension has weight 1. Explicit unequal weights are rejected.")
+  equal: "equal",
+
+  @doc("Use each quality dimension's positive integer weight, from 1 through 10.")
+  custom: "custom",
+}
+
+@doc("Explicit opt-in to explainable rubric scoring and caller-approved requirements. Omission of the policy preserves legacy scoring.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model RubricScoringPolicy {
+  @doc("Version of the scoring and acceptance rules. Only v1 is currently supported.")
+  policy_version: "v1";
+
+  @doc("Quality weighting mode. Requirements never participate in the quality average.")
+  weighting?: RubricWeighting = RubricWeighting.equal;
+}
+
+@doc("A caller-approved must-pass acceptance condition, separate from graded quality dimensions. Generation does not add or rewrite requirements.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model RubricRequirement {
+  @doc("Stable snake_case identifier, unique across both quality dimensions and requirements.")
+  @minLength(1)
+  @maxLength(128)
+  @pattern("^[a-z][a-z0-9_]*$")
+  id: string;
+
+  @doc("The behavior required for acceptance. Missing required behavior is a violation, not a reason to skip the requirement.")
+  @minLength(1)
+  description: string;
+
+  @doc("Optional condition determining whether the requirement is relevant. Omission makes the requirement unconditional. An unconditional requirement cannot be marked not_applicable.")
+  @minLength(1)
+  applies_when?: string;
+}
+
+@doc("Concise authoring explanation, grounded in the evaluation specification rather than private model reasoning. Not an empirical claim that the weight is calibrated.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model RubricDimensionExplanation {
+  @doc("Why the dimension is relevant to the requested evaluation.")
+  @minLength(1)
+  rationale: string;
+
+  @doc("Why the weight was selected, including whether equal weighting was requested.")
+  @minLength(1)
+  weight_rationale?: string;
+
+  @doc("Short supporting quotation from the generated evaluation specification.")
+  @minLength(1)
+  source_excerpt?: string;
+}
+
+@doc("The judgment of an explicit rubric requirement.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union RubricRequirementVerdict {
+  string,
+
+  @doc("The available evidence establishes that the requirement was met.")
+  satisfied: "satisfied",
+
+  @doc("The available evidence establishes a violation, including an omitted required action.")
+  violated: "violated",
+
+  @doc("The requirement's explicit applicability condition is false.")
+  not_applicable: "not_applicable",
+
+  @doc("The available evidence cannot establish satisfaction or violation.")
+  insufficient_evidence: "insufficient_evidence",
+}
+
+@doc("The deterministic overall rubric acceptance decision.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union RubricScoringDecision {
+  string,
+
+  @doc("Quality meets the threshold and all applicable requirements are satisfied.")
+  pass: "pass",
+
+  @doc("Quality is below the threshold or at least one requirement is violated.")
+  fail: "fail",
+
+  @doc("No quality dimension applies and no known failure establishes rejection.")
+  not_applicable: "not_applicable",
+
+  @doc("No known failure establishes rejection, but requirement evidence is insufficient.")
+  indeterminate: "indeterminate",
+}
+
+@doc("An explicit requirement judgment and its supporting explanation.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model RubricRequirementResult {
+  @doc("Identifier of the requirement in the evaluator definition.")
+  id: string;
+
+  @doc("Requirement judgment. Insufficient evidence is never treated as satisfaction.")
+  verdict: RubricRequirementVerdict;
+
+  @doc("Brief explanation of the observed behavior or missing evidence.")
+  reason: string;
+}
+
+@doc("The reproducible contribution of one quality dimension to the normalized score.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model RubricDimensionContribution {
+  @doc("Identifier of the quality dimension.")
+  id: string;
+
+  @doc("Whether this dimension was scored for the evaluated response.")
+  applicable: boolean;
+
+  @doc("Raw quality grade. Absent when the dimension is not applicable.")
+  @minValue(1)
+  @maxValue(5)
+  raw_score?: int32;
+
+  @doc("Configured quality weight; always 1 in equal mode.")
+  @minValue(1)
+  @maxValue(10)
+  weight: int32;
+
+  @doc("Weight divided by the sum of applicable quality weights. Absent for N/A dimensions.")
+  @minValue(0)
+  @maxValue(1)
+  effective_weight?: float64;
+
+  @doc("Effective weight multiplied by (raw_score - 1) / 4. Absent for N/A dimensions.")
+  @minValue(0)
+  @maxValue(1)
+  contribution?: float64;
+}
+
+@doc("Explainable quality and acceptance results for an explicitly opted-in rubric. A high quality score does not compensate for a violated requirement.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model RubricScoringResult {
+  @doc("Scoring policy version used for this result.")
+  policy_version: "v1";
+
+  @doc("Quality weighting mode used for this result.")
+  weighting: RubricWeighting;
+
+  @doc("Normalized quality score, equal to the top-level score when available. Absent when no quality dimension applies.")
+  @minValue(0)
+  @maxValue(1)
+  quality_score?: float64;
+
+  @doc("Whether the quality score meets its threshold. Absent when quality is unavailable.")
+  quality_passed?: boolean;
+
+  @doc("The configured quality acceptance threshold.")
+  @minValue(0)
+  @maxValue(1)
+  quality_threshold: float32;
+
+  @doc("False when any requirement is violated; true when all applicable requirements are satisfied, including an empty set. Absent when evidence is insufficient and no violation is established.")
+  requirements_passed?: boolean;
+
+  @doc("Overall decision, computed from quality and explicit requirements.")
+  decision: RubricScoringDecision;
+
+  @doc("Quality grades, exclusions, effective weights, and contributions.")
+  dimension_contributions: RubricDimensionContribution[];
+
+  @doc("Judgments of all configured requirements, including N/A and insufficient-evidence results.")
+  requirement_results: RubricRequirementResult[];
+}
+
 @doc("A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model Dimension {
@@ -139,9 +318,21 @@ model Dimension {
   description: string;
 
   @doc("Relative weight of this dimension (1-10). The generation pipeline assigns exactly one dimension weight 8-10; all others use 1-6. User edits are not constrained by this heuristic.")
+  @removed(Versions.v1)
+  @renamedFrom(Versions.v1, "weight")
   @minValue(1)
   @maxValue(10)
-  weight: int32;
+  legacy_weight: int32;
+
+  @doc("Relative quality weight, defaulting to 1. Equal weighting requires weight 1 for every dimension. Without a scoring policy, existing generated-weight behavior is unchanged.")
+  @added(Versions.v1)
+  @minValue(1)
+  @maxValue(10)
+  weight?: int32 = 1;
+
+  @doc("Optional authoring explanation. Generated for opted-in scoring; manual definitions may omit it.")
+  @added(Versions.v1)
+  explanation?: RubricDimensionExplanation;
 
   @doc("When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.")
   always_applicable?: boolean = false;
@@ -155,10 +346,18 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   @doc("The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure.")
   dimensions: Dimension[];
 
-  @doc("Pass/fail threshold for the aggregate rubric score, on the same normalized 0.0-1.0 scale as the emitted `score`. When the runtime weighted average meets or exceeds this value, the result is `pass`. Defaults to 0.5 (equivalent to a raw 1-5 weighted average of 3.0). The 'any dimension scored 1 → fail' rule still applies regardless of this threshold.")
+  @doc("Quality threshold on the same normalized 0.0-1.0 scale as the emitted score. Defaults to 0.5, equivalent to a raw weighted grade of 3.0. Without a scoring policy, score >= threshold determines pass/fail; there is no implicit score-1 veto. With policy v1, explicit requirements must also be satisfied.")
   @minValue(0.0)
   @maxValue(1.0)
   pass_threshold?: float32 = 0.5;
+
+  @doc("Explicit opt-in to versioned explainable scoring. Omission preserves legacy scoring, including the absence of hard requirements.")
+  @added(Versions.v1)
+  scoring_policy?: RubricScoringPolicy;
+
+  @doc("Caller-approved must-pass requirements. Requires a scoring policy. IDs are unique across requirements and quality dimensions; the combined count is subject to the configured dimension limit, normally 20. An empty list imposes no additional acceptance gates.")
+  @added(Versions.v1)
+  requirements?: RubricRequirement[];
 }
 
 @doc("Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.")
@@ -279,6 +478,14 @@ model EvaluatorGenerationInputs {
 
   @doc("Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.")
   evaluator_description?: string;
+
+  @doc("Scoring policy for the generated evaluator. On regeneration, omission inherits the prior evaluator's policy. On first creation, omission preserves legacy generation. Equal mode generates weight 1 for every quality dimension.")
+  @added(Versions.v1)
+  scoring_policy?: RubricScoringPolicy;
+
+  @doc("Explicit caller-approved requirements, preserved unchanged during generation. Omission inherits prior requirements on regeneration; an empty list explicitly clears them. Generation never invents hard requirements. Requires an effective scoring policy.")
+  @added(Versions.v1)
+  requirements?: RubricRequirement[];
 }
 
 @doc("Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.")

@@ -912,7 +912,50 @@ union EvalRunOutputItemResultStatus {
   }
 );
 
-model EvalRunOutputItemResult is OpenAI.EvalRunOutputItemResult;
+/** A single grader result for an evaluation run output item. */
+@summary("EvalRunOutputItemResult")
+model EvalRunOutputItemResult {
+  ...Record<unknown>;
+
+  /** The name of the grader. */
+  name: string;
+
+  /** The grader type (for example, "string-check-grader"). */
+  type?: string;
+
+  /** The numeric score produced by the grader. */
+  @typeChangedFrom(Versions.v1, OpenAI.numeric)
+  score: float64 | null;
+
+  /** Whether the grader considered the output a pass. */
+  @madeOptional(Versions.v1)
+  passed?: boolean;
+
+  /** Optional sample or intermediate data produced by the grader. */
+  sample?: Record<unknown> | null;
+
+  /** The evaluation status for this result item. Values: "completed", "errored", "skipped". Null if not provided by evaluator. When status is skipped, passed/score can be ignored. */
+  status?: EvalRunOutputItemResultStatus;
+
+  /** The name of the metric (e.g., "fluency", "f1_score"). */
+  metric?: string;
+
+  /** The label associated with the test criteria metric (e.g., "pass", "fail", "good", "bad"). */
+  label?: string;
+
+  /** The threshold used to determine pass/fail for this test criteria, if it is numerical. */
+  threshold?: float32;
+
+  /** The reason for the test criteria metric. */
+  reason?: string;
+
+  /** Additional details about the test criteria metric. */
+  properties?: Record<string>;
+
+  /** Reproducible quality calculation and explicit requirement judgments. Present only for rubric scoring policy v1. */
+  @added(Versions.v1)
+  rubric_scoring?: RubricScoringResult;
+}
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@changePropertyType(
