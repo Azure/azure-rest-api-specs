@@ -152,7 +152,7 @@ jobs:
             }
 
             core.setOutput("repository", pull.head.repo.full_name);
-            core.setOutput("ref", pull.head.sha);
+            core.setOutput("sha", pull.head.sha);
             core.setOutput("sdk-repository", languageConfig.repository);
             core.setOutput("sdk-language", languageConfig.language);
             core.setOutput("tsp-config-path", tspConfigPath ?? "");
@@ -163,7 +163,7 @@ jobs:
         uses: actions/github-script@v9
         env:
           PR_NUMBER: ${{ github.event.issue.number }}
-          EXPECTED_SHA: ${{ steps.resolve-source.outputs.ref }}
+          EXPECTED_SHA: ${{ steps.resolve-source.outputs.sha }}
         with:
           github-token: ${{ github.token }}
           script: |
@@ -200,7 +200,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           repository: ${{ steps.resolve-source.outputs.repository }}
-          ref: ${{ steps.resolve-source.outputs.ref }}
+          ref: ${{ steps.resolve-source.outputs.sha }}
           path: repositories/azure-rest-api-specs
           persist-credentials: false
 
@@ -433,7 +433,7 @@ jobs:
         env:
           JOB_STATUS: ${{ job.status }}
           ANALYSIS_OUTCOME: ${{ steps.analyze-sdk-projects.outcome }}
-          ANALYZED_SHA: ${{ steps.resolve-source.outputs.ref }}
+          ANALYZED_SHA: ${{ steps.resolve-source.outputs.sha }}
           JOB_LOG_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ job.check_run_id }}
         run: |
           {
@@ -492,12 +492,12 @@ jobs:
           retention-days: 7
 
       - name: Check analysis freshness
-        if: always() && steps.resolve-source.outputs.ref != ''
+        if: always() && steps.resolve-source.outputs.sha != ''
         id: check-analysis-freshness
         uses: actions/github-script@v9
         env:
           PR_NUMBER: ${{ github.event.issue.number || inputs.pr_number }}
-          ANALYZED_SHA: ${{ steps.resolve-source.outputs.ref }}
+          ANALYZED_SHA: ${{ steps.resolve-source.outputs.sha }}
         with:
           github-token: ${{ github.token }}
           script: |
@@ -533,7 +533,7 @@ jobs:
           RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-results
           PR_NUMBER: ${{ github.event.issue.number || inputs.pr_number }}
           SDK_LANGUAGE: ${{ steps.resolve-source.outputs.sdk-language }}
-          ANALYZED_SHA: ${{ steps.resolve-source.outputs.ref }}
+          ANALYZED_SHA: ${{ steps.resolve-source.outputs.sha }}
           TRIGGER_NAME: ${{ github.event_name }}
         with:
           github-token: ${{ github.token }}
@@ -624,14 +624,14 @@ jobs:
       - name: Report breaking-change analysis failure
         if: >-
           failure() &&
-          (steps.resolve-source.outputs.ref == '' ||
+          (steps.resolve-source.outputs.sha == '' ||
           steps.check-analysis-freshness.outputs.is-current == 'true')
         uses: actions/github-script@v9
         env:
           PR_NUMBER: ${{ github.event.issue.number || inputs.pr_number }}
           TRIGGER_NAME: ${{ github.event_name }}
           ANALYSIS_OUTCOME: ${{ steps.analyze-sdk-projects.outcome }}
-          ANALYZED_SHA: ${{ steps.resolve-source.outputs.ref }}
+          ANALYZED_SHA: ${{ steps.resolve-source.outputs.sha }}
           RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-results
           JOB_LOG_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ job.check_run_id }}
         with:
