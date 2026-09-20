@@ -88,11 +88,6 @@ using Microsoft.CertificateRegistration;
   "csharp"
 );
 @@clientName(
-  AppServiceCertificateOrderPatchResourceProperties.expirationTime,
-  "ExpireOn",
-  "csharp"
-);
-@@clientName(
   AppServiceCertificateOrderProperties.lastCertificateIssuanceTime,
   "LastCertificateIssuedOn",
   "csharp"
