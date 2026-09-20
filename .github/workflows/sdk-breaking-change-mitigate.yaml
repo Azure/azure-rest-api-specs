@@ -139,7 +139,11 @@ jobs:
             });
             const expectedCommand = `/azsdk sdk-breaking-analysis ${sdkLanguage}`;
             const analysisComment = comments
-              .filter(({ body }) => body?.split(/\r?\n/, 1)[0].trim() === expectedCommand)
+              .filter(
+                ({ body }) =>
+                  body?.split(/\r?\n/, 1)[0].trim().toLowerCase() ===
+                  expectedCommand.toLowerCase(),
+              )
               .sort((left, right) => right.id - left.id)[0];
             if (!analysisComment) {
               throw new Error(`No pull request comment starts with: ${expectedCommand}`);
