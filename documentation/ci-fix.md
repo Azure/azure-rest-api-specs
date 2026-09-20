@@ -16,7 +16,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`CredScan`](#credscan)
   - [`PoliCheck`](#policheck)
   - [`SDK Validation *` checks, like `SDK Validation - Go`](#sdk-validation--checks-like-sdk-validation---go)
-  - [`SDK Breaking Change Review`](#sdk-breaking-change-review)
+  - [`SDK Breaking Change Mitigation and Review`](#sdk-breaking-change-mitigation-and-review)
   - [`Swagger APIView`](#swagger-apiview)
     - [If an expected APIView was not generated, follow the step below to troubleshoot.](#if-an-expected-apiview-was-not-generated-follow-the-step-below-to-troubleshoot)
     - [Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)](#diagnosing-apiview-failure-for-sdk-language-not-swagger-or-typespec)
@@ -82,16 +82,24 @@ Do the following:
 2. If your investigation denotes this is likely a bug in the check itself and not your PR, reach out
   to the owner of the check per the aforementioned table.
 
-## `SDK Breaking Change Review`
+## `SDK Breaking Change Mitigation and Review`
 
 > [!IMPORTANT]
 >
-> - If your PR is flagged with any label that matches the pattern `BreakingChange-{Language}-Sdk`, the SDK breaking
-     changes will be reviewed by SDK reviewers around two business days after the completion of the first two review steps
-     in PR review workflow, i.e. REST API breaking change review and ARM review.
-> - If you need to suppress the SDK breaking changes, refer to [SDK Suppressions](https://aka.ms/azsdk/sdk-suppression).
+> If your PR has a label matching `BreakingChange-{Language}-Sdk`, complete these steps in
+> order:
+>
+> 1. **Mitigate the breaking changes.** The PR owner must follow the
+>    [SDK mitigation process](../.github/workflows/src/sdk-breaking-change/SDK-BREAKING-CHANGE-PROCESS.md#mitigation)
+>    and resolve each breaking change that can be mitigated.
+> 2. **Suppress accepted breaking changes.** If a breaking change is intentional and cannot be
+>    mitigated, follow the [SDK suppression process](https://aka.ms/azsdk/sdk-suppression).
+> 3. **Wait for SDK review.** After mitigation is complete, SDK reviewers review the remaining
+>    accepted breaking changes. This review typically occurs within two business days after the
+>    REST API breaking change review and ARM review are complete.
 
-If the SDK breaking changes haven't been reviewed after two additional business days, you may reach out to the reviewers:
+If the SDK breaking changes have not been reviewed within that period, contact the appropriate
+reviewer:
 
 | Language        | Reviewer        | GitHub login                                                  |
 |-----------------|-----------------| ------------------------------------------------------------- |
