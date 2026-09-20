@@ -88,6 +88,11 @@ using Microsoft.CertificateRegistration;
   "csharp"
 );
 @@clientName(
+  AppServiceCertificateOrderPatchResourceProperties.expirationTime,
+  "ExpireOn",
+  "csharp"
+);
+@@clientName(
   AppServiceCertificateOrderProperties.lastCertificateIssuanceTime,
   "LastCertificateIssuedOn",
   "csharp"
@@ -130,6 +135,7 @@ using Microsoft.CertificateRegistration;
 @@clientName(NameIdentifier, "AppServiceDomainNameIdentifier", "csharp");
 @@clientName(Rendering, "DiagnosticDataRendering", "csharp");
 @@clientName(RenderingType, "DiagnosticDataRenderingType", "csharp");
+@@clientName(RenderingType.Guage, "Gauge", "csharp");
 @@clientName(
   ResourceNotRenewableReason,
   "AppServiceCertificateNotRenewableReason",
