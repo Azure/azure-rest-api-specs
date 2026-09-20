@@ -1621,6 +1621,33 @@ enum GatewayRegenerateKeyType {
   Azure.Core.azureLocation,
   "csharp"
 );
+@@alternateType(
+  AdditionalLocation.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(AdditionalLocation.gatewayRegionalUrl, url, "csharp");
+@@alternateType(
+  AdditionalLocation.publicIPAddresses,
+  Azure.Core.ipV4Address[],
+  "csharp"
+);
+@@alternateType(
+  AdditionalLocation.privateIPAddresses,
+  Azure.Core.ipV4Address[],
+  "csharp"
+);
+@@alternateType(ApiContactInformation.url, url, "csharp");
+@@alternateType(ApiLicenseInformation.url, url, "csharp");
+@@alternateType(
+  ApiEntityBaseContract.apiVersionSetId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(AuthorizationProviderOAuth2Settings.redirectUrl, url, "csharp");
+@@alternateType(BackendProxyContract.url, url, "csharp");
+@@alternateType(HostnameConfiguration.keyVaultId, url, "csharp");
+@@alternateType(PortalConfigDelegationProperties.delegationUrl, url, "csharp");
 
 // BackendSubnetConfiguration.id -> SubnetId (ResourceIdentifier) to match old SDK surface
 @@clientName(BackendSubnetConfiguration.id, "SubnetId", "csharp");

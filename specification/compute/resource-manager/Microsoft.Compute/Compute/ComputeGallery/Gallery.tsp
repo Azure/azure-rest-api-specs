@@ -125,6 +125,7 @@ interface Galleries {
   @get
   @action("versions")
   @list
+  @armResourceList(GallerySoftDeletedResourceList)
   @tag("SoftDelete")
   listByArtifactName is ComputeResourceActionSync<
     Gallery,
