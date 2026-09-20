@@ -116,9 +116,11 @@ union FoundryFeaturesOptInKeys {
   model_router_controls_v1_preview: "ModelRouterControls=V1Preview",
 }
 
-alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends
-  | FoundryFeaturesOptInKeys
-  | AgentDefinitionOptInKeys> = {
+alias WithRequiredFoundryPreviewHeader<
+  RequiredPreviewOptInHeader extends
+    | FoundryFeaturesOptInKeys
+    | AgentDefinitionOptInKeys
+> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
