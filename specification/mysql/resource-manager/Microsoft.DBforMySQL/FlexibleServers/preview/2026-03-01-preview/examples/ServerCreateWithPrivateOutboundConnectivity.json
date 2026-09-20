@@ -1,0 +1,111 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "parameters": {
+      "location": "southeastasia",
+      "properties": {
+        "administratorLogin": "cloudsa",
+        "administratorLoginPassword": "your_password",
+        "availabilityZone": "1",
+        "createMode": "Default",
+        "highAvailability": {
+          "mode": "Disabled"
+        },
+        "privateOutboundSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/pocvnet/subnets/pocsubnet",
+        "storage": {
+          "autoGrow": "Enabled",
+          "iops": 500,
+          "storageRedundancy": "LocalRedundancy",
+          "storageSizeGB": 128
+        },
+        "version": "8.4"
+      },
+      "sku": {
+        "name": "Standard_D8ds_v4",
+        "tier": "GeneralPurpose"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "serverName": "mysqlpocserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mysqlpocserver",
+        "type": "Microsoft.DBforMySQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqlpocserver",
+        "location": "southeastasia",
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "availabilityZone": "1",
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "privateOutboundSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/pocvnet/subnets/pocsubnet",
+          "state": "Ready",
+          "storage": {
+            "autoGrow": "Enabled",
+            "iops": 500,
+            "storageRedundancy": "LocalRedundancy",
+            "storageSizeGB": 128,
+            "storageSku": "Premium_LRS"
+          },
+          "version": "8.4"
+        },
+        "sku": {
+          "name": "Standard_D8ds_v4",
+          "tier": "GeneralPurpose"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "mysqlpocserver",
+        "type": "Microsoft.DBforMySQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqlpocserver",
+        "location": "southeastasia",
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "availabilityZone": "1",
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "privateOutboundSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/pocvnet/subnets/pocsubnet",
+          "state": "Ready",
+          "storage": {
+            "autoGrow": "Enabled",
+            "iops": 500,
+            "storageRedundancy": "LocalRedundancy",
+            "storageSizeGB": 128,
+            "storageSku": "Premium_LRS"
+          },
+          "version": "8.4"
+        },
+        "sku": {
+          "name": "Standard_D8ds_v4",
+          "tier": "GeneralPurpose"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2026-03-01-preview"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2026-03-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2026-03-01-preview"
+      }
+    }
+  },
+  "operationId": "Servers_Create",
+  "title": "Create a server with private outbound connectivity"
+}

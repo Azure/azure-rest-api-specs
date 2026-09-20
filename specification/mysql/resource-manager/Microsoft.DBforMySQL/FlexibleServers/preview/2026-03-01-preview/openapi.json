@@ -120,6 +120,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetPrivateDnsZoneSuffix": {
+            "$ref": "./examples/GetPrivateDnsZoneSuffix.json"
+          }
         }
       }
     },
@@ -147,6 +152,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "./examples/OperationsList.json"
           }
         },
         "x-ms-pageable": {
@@ -188,6 +198,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Check name availability": {
+            "$ref": "./examples/CheckNameAvailabilityWithoutLocation.json"
+          }
         }
       }
     },
@@ -218,6 +233,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List servers in a subscription": {
+            "$ref": "./examples/ServersList.json"
           }
         },
         "x-ms-pageable": {
@@ -252,6 +272,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CapabilitiesList": {
+            "$ref": "./examples/CapabilitiesByLocationList.json"
           }
         },
         "x-ms-pageable": {
@@ -289,6 +314,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CapabilitySetsResult": {
+            "$ref": "./examples/CapabilitySetListByLocation.json"
           }
         },
         "x-ms-pageable": {
@@ -336,6 +366,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "CapabilityResult": {
+            "$ref": "./examples/CapabilitySetByLocation.json"
+          }
         }
       }
     },
@@ -375,6 +410,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Check name availability": {
+            "$ref": "./examples/CheckNameAvailability.json"
           }
         }
       }
@@ -416,6 +456,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "CheckVirtualNetworkSubnetUsage": {
+            "$ref": "./examples/CheckVirtualNetworkSubnetUsage.json"
+          }
         }
       }
     },
@@ -450,6 +495,14 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "OperationProgress_Get BackupAndExport": {
+            "$ref": "./examples/OperationProgress_Get_BackupAndExport.json"
+          },
+          "OperationProgress_Get ImportFromStorage": {
+            "$ref": "./examples/OperationProgress_Get_ImportFromStorage.json"
           }
         }
       }
@@ -486,6 +539,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "OperationResults_Get": {
+            "$ref": "./examples/OperationResults_Get.json"
+          }
         }
       }
     },
@@ -519,6 +577,14 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List servers in a resource group": {
+            "$ref": "./examples/ServersListByResourceGroup.json"
+          },
+          "List servers sharing a private outbound subnet": {
+            "$ref": "./examples/ServersListByResourceGroupWithSharedPrivateOutboundSubnet.json"
           }
         },
         "x-ms-pageable": {
@@ -566,6 +632,17 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a server": {
+            "$ref": "./examples/ServerGet.json"
+          },
+          "Get a server with private outbound connectivity": {
+            "$ref": "./examples/ServerGetWithPrivateOutboundConnectivity.json"
+          },
+          "Get a server with vnet": {
+            "$ref": "./examples/ServerGetWithVnet.json"
           }
         }
       },
@@ -650,6 +727,38 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create a new server": {
+            "$ref": "./examples/ServerCreate.json"
+          },
+          "Create a replica server": {
+            "$ref": "./examples/ServerCreateReplica.json"
+          },
+          "Create a server as a point in time restore": {
+            "$ref": "./examples/ServerCreateWithPointInTimeRestore.json"
+          },
+          "Create a server with byok": {
+            "$ref": "./examples/ServerCreateWithBYOK.json"
+          },
+          "Create a server with lower case table names": {
+            "$ref": "./examples/ServerCreateWithLowerCaseTableNames.json"
+          },
+          "Create a server with non-default database port": {
+            "$ref": "./examples/ServerCreateWithDatabasePort.json"
+          },
+          "Create a server with private outbound connectivity": {
+            "$ref": "./examples/ServerCreateWithPrivateOutboundConnectivity.json"
+          },
+          "Create a server with private outbound connectivity and same-zone high availability": {
+            "$ref": "./examples/ServerCreateWithPrivateOutboundConnectivityAndHighAvailability.json"
+          },
+          "Restore a server to a point in time with an explicit private outbound subnet": {
+            "$ref": "./examples/ServerCreateWithPointInTimeRestoreAndPrivateOutboundConnectivity.json"
+          },
+          "rename server": {
+            "$ref": "./examples/ServerRename.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/Server"
@@ -720,6 +829,26 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Enable private outbound connectivity on an existing server": {
+            "$ref": "./examples/ServerUpdateWithPrivateOutboundConnectivity.json"
+          },
+          "Update a server": {
+            "$ref": "./examples/ServerUpdate.json"
+          },
+          "Update server customer maintenance window": {
+            "$ref": "./examples/ServerUpdateWithCustomerMaintenanceWindow.json"
+          },
+          "Update server to opt in virtual canary": {
+            "$ref": "./examples/MaintenancePolicyPatchOptInVirtualCanary.json"
+          },
+          "Update server to opt out virtual canary": {
+            "$ref": "./examples/MaintenancePolicyPatchOptOutVirtualCanary.json"
+          },
+          "Update server with byok": {
+            "$ref": "./examples/ServerUpdateWithBYOK.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/Server"
@@ -781,6 +910,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a server": {
+            "$ref": "./examples/ServerDelete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -827,6 +961,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Azure AD administrators in a server": {
+            "$ref": "./examples/AzureADAdministratorsListByServer.json"
           }
         },
         "x-ms-pageable": {
@@ -894,6 +1033,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get an azure ad administrator": {
+            "$ref": "./examples/AzureADAdministratorGet.json"
           }
         }
       },
@@ -998,6 +1142,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create an azure ad administrator": {
+            "$ref": "./examples/AzureADAdministratorCreate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/AzureADAdministrator"
@@ -1079,6 +1228,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete an azure ad administrator": {
+            "$ref": "./examples/AzureADAdministratorDelete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1125,6 +1279,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of server's Advanced Threat Protection settings": {
+            "$ref": "./examples/AdvancedThreatProtectionSettingsList.json"
           }
         },
         "x-ms-pageable": {
@@ -1192,6 +1351,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a server's Advanced Threat Protection settings.": {
+            "$ref": "./examples/AdvancedThreatProtectionSettingsGet.json"
           }
         }
       },
@@ -1296,6 +1460,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Disable a server's Advanced Threat Protection settings with all parameters using PUT": {
+            "$ref": "./examples/AdvancedThreatProtectionSettingsPutDisabled.json"
+          },
+          "Enable a server's Advanced Threat Protection settings using PUT": {
+            "$ref": "./examples/AdvancedThreatProtectionSettingsPutEnabled.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/AdvancedThreatProtection"
@@ -1386,6 +1558,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Disable a server's Advanced Threat Protection settings with all parameters": {
+            "$ref": "./examples/AdvancedThreatProtectionSettingsPatchDisabled.json"
+          },
+          "Enable a server's Advanced Threat Protection settings": {
+            "$ref": "./examples/AdvancedThreatProtectionSettingsPatchEnabled.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/AdvancedThreatProtection"
@@ -1458,6 +1638,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create and Export Backup": {
+            "$ref": "./examples/BackupAndExport.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/BackupAndExportResponse"
@@ -1505,6 +1690,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List backups for a server": {
+            "$ref": "./examples/BackupsListByServer.json"
           }
         },
         "x-ms-pageable": {
@@ -1561,6 +1751,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a backup for a server": {
+            "$ref": "./examples/BackupGet.json"
+          }
         }
       },
       "put": {
@@ -1611,6 +1806,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create backup for a server": {
+            "$ref": "./examples/BackupPut.json"
+          }
         }
       }
     },
@@ -1654,6 +1854,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List backups for a server": {
+            "$ref": "./examples/LongRunningBackupsListByServer.json"
           }
         },
         "x-ms-pageable": {
@@ -1709,6 +1914,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a backup for a server": {
+            "$ref": "./examples/LongRunningBackupGet.json"
           }
         }
       },
@@ -1797,6 +2007,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create backup for a server": {
+            "$ref": "./examples/LongRunningBackup.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/ServerBackupV2"
@@ -1861,6 +2076,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete backup for a server": {
+            "$ref": "./examples/LongRunningBackupDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1941,6 +2161,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List all configurations for a server": {
+            "$ref": "./examples/ConfigurationsListByServer.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1993,6 +2218,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a configuration": {
+            "$ref": "./examples/ConfigurationGet.json"
           }
         }
       },
@@ -2065,6 +2295,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationCreateOrUpdate": {
+            "$ref": "./examples/ConfigurationCreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2144,6 +2379,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update a user configuration": {
+            "$ref": "./examples/ConfigurationUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/Configuration"
@@ -2206,6 +2446,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Cutover migration for MySQL import": {
+            "$ref": "./examples/CutoverMigration.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Server"
@@ -2253,6 +2498,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List databases in a server": {
+            "$ref": "./examples/DatabasesListByServer.json"
           }
         },
         "x-ms-pageable": {
@@ -2307,6 +2557,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a database": {
+            "$ref": "./examples/DatabaseGet.json"
           }
         }
       },
@@ -2398,6 +2653,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create a database": {
+            "$ref": "./examples/DatabaseCreate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/Database"
@@ -2464,6 +2724,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a database": {
+            "$ref": "./examples/DatabaseDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2536,6 +2801,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Detach VNet on a server": {
+            "$ref": "./examples/ServerDetachVNet.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Server"
@@ -2583,6 +2853,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List a server's Fabric Mirroring settings.": {
+            "$ref": "./examples/FabricMirroringSettingsList.json"
           }
         }
       }
@@ -2648,6 +2923,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a server's Fabric Mirroring settings.": {
+            "$ref": "./examples/FabricMirroringSettingsGet.json"
           }
         }
       },
@@ -2753,6 +3033,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create Or Update a server's Fabric Mirroring settings.": {
+            "$ref": "./examples/FabricMirroringSettingsPut.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/FabricMirroringSetting"
@@ -2812,6 +3097,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Restart a server": {
+            "$ref": "./examples/ServerFailover.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2858,6 +3148,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List all firewall rules in a server": {
+            "$ref": "./examples/FirewallRulesListByServer.json"
           }
         },
         "x-ms-pageable": {
@@ -2913,6 +3208,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a firewall rule": {
+            "$ref": "./examples/FirewallRuleGet.json"
           }
         }
       },
@@ -3005,6 +3305,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create a firewall rule": {
+            "$ref": "./examples/FirewallRuleCreate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/FirewallRule"
@@ -3074,6 +3379,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a firewall rule": {
+            "$ref": "./examples/FirewallRuleDelete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -3122,6 +3432,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List all server log files for a server": {
+            "$ref": "./examples/LogFilesListByServer.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -3167,6 +3482,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List maintenances on a server": {
+            "$ref": "./examples/MaintenancesListByServer.json"
           }
         },
         "x-ms-pageable": {
@@ -3222,6 +3542,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Read a maintenance": {
+            "$ref": "./examples/MaintenanceRead.json"
           }
         }
       },
@@ -3297,6 +3622,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update maintenance on a server": {
+            "$ref": "./examples/MaintenanceUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/Maintenance"
@@ -3345,6 +3675,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets list of private endpoint connections on a server.": {
+            "$ref": "./examples/PrivateEndpointConnectionList.json"
+          }
         }
       }
     },
@@ -3391,6 +3726,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/PrivateEndpointConnectionGet.json"
           }
         }
       },
@@ -3474,6 +3814,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Approve or reject a private endpoint connection with a given name.": {
+            "$ref": "./examples/PrivateEndpointConnectionUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
@@ -3538,6 +3883,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Deletes a private endpoint connection with a given name.": {
+            "$ref": "./examples/PrivateEndpointConnectionDelete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -3584,6 +3934,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private link resources for MySQL.": {
+            "$ref": "./examples/PrivateLinkResourcesList.json"
           }
         }
       }
@@ -3637,6 +3992,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets a private link resource for MySQL.": {
+            "$ref": "./examples/PrivateLinkResourcesGet.json"
+          }
         }
       }
     },
@@ -3680,6 +4040,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List replicas for a server": {
+            "$ref": "./examples/ReplicasListByServer.json"
           }
         },
         "x-ms-pageable": {
@@ -3746,6 +4111,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Reset GTID on a server": {
+            "$ref": "./examples/ServerResetGtid.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3815,6 +4185,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Restart a server": {
+            "$ref": "./examples/ServerRestart.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -3873,6 +4248,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Start a server": {
+            "$ref": "./examples/ServerStart.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -3929,6 +4309,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Stop a server": {
+            "$ref": "./examples/ServerStop.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4001,6 +4386,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ConfigurationList": {
+            "$ref": "./examples/ConfigurationsBatchUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/ConfigurationListResult"
@@ -4048,6 +4438,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Validate Backup": {
+            "$ref": "./examples/ValidateBackup.json"
           }
         }
       }
@@ -4101,6 +4496,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Validate a validation and estimation of high availability.": {
+            "$ref": "./examples/ServerValidateEstimateHighAvailability.json"
           }
         }
       }
@@ -6722,7 +7122,7 @@
         },
         "privateOutboundSubnetResourceId": {
           "type": "string",
-          "description": "Resource ID of the customer subnet for private outbound connectivity.",
+          "description": "The fully qualified Azure resource ID of the subnet for private outbound connectivity. Specify this property when creating or restoring a server, or to enable private outbound connectivity on an existing server. Once configured, the subnet cannot be changed or removed. Multiple servers can share a subnet. Cannot be used with network.delegatedSubnetResourceId.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -6779,7 +7179,7 @@
         },
         "privateOutboundSubnetResourceId": {
           "type": "string",
-          "description": "Resource ID of the customer subnet for private outbound connectivity."
+          "description": "The fully qualified Azure resource ID of the subnet to enable private outbound connectivity on an existing server. Once configured, the subnet cannot be changed or removed. Omitting this property preserves the existing configuration. Multiple servers can share a subnet. Cannot be used with network.delegatedSubnetResourceId."
         }
       }
     },
