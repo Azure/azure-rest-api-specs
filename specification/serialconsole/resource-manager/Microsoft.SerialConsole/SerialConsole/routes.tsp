@@ -44,36 +44,33 @@ alias ConsoleServiceDefaultParameter = {
   default: string;
 };
 
-/**
- * Disables the Serial Console service for all VMs and VM scale sets in the provided subscription
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "The operation is top-level to preserve the existing DisableConsole operationId without using @operationId."
-@summary("Disable Serial Console for a subscription")
-@route("/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/{default}/disableConsole")
-@post
-@tag("SerialConsole")
-op disableConsole(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ConsoleServiceDefaultParameter,
-):
-  | DisableSerialConsoleResult
-  | GetSerialConsoleSubscriptionNotFoundError
-  | CloudError;
+@armResourceOperations(#{ omitTags: true })
+interface SerialConsoleOperationGroup {
+  /**
+   * Disables the Serial Console service for all VMs and VM scale sets in the provided subscription
+   */
+  @summary("Disable Serial Console for a subscription")
+  @tag("SerialConsole")
+  disableConsole is ArmProviderActionSync<
+    Response =
+      | DisableSerialConsoleResult
+      | GetSerialConsoleSubscriptionNotFoundError,
+    Scope = SubscriptionActionScope,
+    Parameters = ConsoleServiceDefaultParameter,
+    Error = CloudError
+  >;
 
-/**
- * Enables the Serial Console service for all VMs and VM scale sets in the provided subscription
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "The operation is top-level to preserve the existing EnableConsole operationId without using @operationId."
-@summary("Enable Serial Console for a subscription")
-@route("/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/{default}/enableConsole")
-@post
-@tag("SerialConsole")
-op enableConsole(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ConsoleServiceDefaultParameter,
-):
-  | EnableSerialConsoleResult
-  | GetSerialConsoleSubscriptionNotFoundError
-  | CloudError;
+  /**
+   * Enables the Serial Console service for all VMs and VM scale sets in the provided subscription
+   */
+  @summary("Enable Serial Console for a subscription")
+  @tag("SerialConsole")
+  enableConsole is ArmProviderActionSync<
+    Response =
+      | EnableSerialConsoleResult
+      | GetSerialConsoleSubscriptionNotFoundError,
+    Scope = SubscriptionActionScope,
+    Parameters = ConsoleServiceDefaultParameter,
+    Error = CloudError
+  >;
+}

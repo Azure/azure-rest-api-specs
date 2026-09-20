@@ -210,6 +210,13 @@ interface Jobs {
   >;
 
   /**
+   * Get details of a single job execution
+   */
+  @tag("Jobs")
+  @summary("Get details of a single job execution")
+  jobExecution is ArmResourceRead<JobExecution, Error = DefaultErrorResponse>;
+
+  /**
    * Get a Container Apps Job's executions
    */
   @tag("Jobs")
@@ -273,13 +280,6 @@ interface Jobs {
     Response = ArmResponse<Diagnostics>
   >;
 }
-
-/**
- * Get details of a single job execution
- */
-@tag("Jobs")
-@summary("Get details of a single job execution")
-op jobExecution is ArmResourceRead<JobExecution, Error = DefaultErrorResponse>;
 
 @@doc(Job.name, "Job Name");
 @@doc(Job.properties, "Container Apps Job resource specific properties.");

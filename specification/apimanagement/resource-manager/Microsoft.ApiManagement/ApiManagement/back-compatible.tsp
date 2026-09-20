@@ -864,8 +864,13 @@ using Microsoft.ApiManagement;
 @@clientLocation(ApiManagementServiceResources.list, "ApiManagementService");
 @@clientLocation(ApiManagementServiceResources.listByService, "AllPolicies");
 @@clientLocation(ApiManagementServiceResources.listByTags, "Api");
+@@clientLocation(
+  ApiManagementServiceResources.performConnectivityCheckAsync,
+  Microsoft.ApiManagement,
+  "autorest"
+);
 @@clientName(
-  performConnectivityCheckAsync::parameters.body,
+  ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
   "connectivityCheckRequestParams"
 );
 @@clientLocation(
