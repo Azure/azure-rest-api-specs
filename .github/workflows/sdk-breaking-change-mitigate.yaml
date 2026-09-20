@@ -357,6 +357,8 @@ jobs:
           export PATH="$AZSDK_CLI_PATH:$PATH"
 
           manifest="$ANALYSIS_RESULTS_PATH/projects.json"
+          mitigation_results="$RUNNER_TEMP/sdk-breaking-change-mitigation-results.json"
+          echo '[]' > "$mitigation_results"
           test -f "$manifest"
           while IFS= read -r project; do
             typespec_project_path="$(jq -r '.typespecProjectPath' <<< "$project")"
@@ -393,16 +395,65 @@ jobs:
 
             breaking_change_number=0
             while IFS= read -r breaking_change; do
+              mitigation_result="$RUNNER_TEMP/sdk-mitigation-result-$breaking_change_number.json"
               breaking_change_number="$((breaking_change_number + 1))"
               echo "Mitigating SDK breaking change $breaking_change_number of $breaking_change_count for $typespec_project_path."
               customization_request="Resolve this SDK breaking change: $breaking_change"
-              azsdk typespec client customized-update \
-                --tsp-project-path "$tsp_project_path" \
-                --package-path "$package_path" \
-                --customization-request "$customization_request" \
-                --edit-scope 2
+              mitigation_succeeded=true
+              if ! azsdk typespec client customized-update \
+                  --tsp-project-path "$tsp_project_path" \
+                  --package-path "$package_path" \
+                  --customization-request "$customization_request" \
+                  --edit-scope 2 \
+                  --output json | tee "$mitigation_result"; then
+                mitigation_succeeded=false
+              fi
+
+              if [[ "$mitigation_succeeded" == "true" ]] && jq -e . "$mitigation_result" > /dev/null; then
+                clean_result="$(
+                  jq -c \
+                    --argjson breakingChange "$breaking_change" \
+                    '(.result // .) as $result |
+                    ($result.success // false) as $isResolved | {
+                      breakingChange: ($breakingChange.breakingChange // $breakingChange),
+                      isResolved: $isResolved,
+                      Resolution: ($result.Resolution // $result.resolution // $breakingChange.resolution // "")
+                    } + if $isResolved then {
+                      TypeSpecChangesSummary: ($result.TypeSpecChangesSummary // $result.typeSpecChangesSummary // "")
+                    } else {} end' \
+                    "$mitigation_result"
+                )"
+              else
+                clean_result="$(
+                  jq -cn \
+                    --argjson breakingChange "$breaking_change" \
+                    '{
+                      breakingChange: ($breakingChange.breakingChange // $breakingChange),
+                      isResolved: false,
+                      Resolution: ($breakingChange.resolution // "")
+                    }'
+                )"
+              fi
+              jq --argjson result "$clean_result" '. + [$result]' \
+                "$mitigation_results" > "$mitigation_results.tmp"
+              mv "$mitigation_results.tmp" "$mitigation_results"
+              if [[ "$mitigation_succeeded" != "true" ]]; then
+                exit 1
+              fi
             done < <(jq -c '.result.breakingChanges[]' "$breaking_changes_path")
           done < <(jq -c '.[]' "$manifest")
+
+          jq '.' "$mitigation_results" > "$mitigation_results.tmp"
+          mv "$mitigation_results.tmp" "$mitigation_results"
+
+      - name: Upload mitigation results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: sdk-breaking-change-mitigation-results
+          path: ${{ runner.temp }}/sdk-breaking-change-mitigation-results.json
+          if-no-files-found: warn
+          retention-days: 7
 
       - name: Commit mitigation changes
         if: steps.resolve-trigger.outputs.should-run == 'true'
@@ -539,8 +590,7 @@ jobs:
         uses: actions/github-script@v9
         env:
           WORKFLOW_SUMMARY_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}#summary-${{ job.check_run_id }}
-          RESULTS_PATH: ${{ runner.temp }}/analysis-results
-          MANIFEST_PATH: ${{ runner.temp }}/analysis-results/projects.json
+          MITIGATION_RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-mitigation-results.json
           PR_NUMBER: ${{ steps.resolve-trigger.outputs.pull-number || steps.read-trigger.outputs.pull-number }}
           SDK_LANGUAGE: ${{ steps.resolve-trigger.outputs.sdk-language || steps.read-trigger.outputs.sdk-language }}
           TRIGGER_COMMENT_ID: ${{ steps.resolve-trigger.outputs.trigger-comment-id || steps.read-trigger.outputs.trigger-comment-id }}
@@ -551,38 +601,33 @@ jobs:
           script: |
             const fs = await import("node:fs/promises");
             const pullNumber = Number(process.env.PR_NUMBER);
-            const projects = JSON.parse(await fs.readFile(process.env.MANIFEST_PATH, "utf8"));
-            const projectReports = await Promise.all(
-              projects.map(async (project) => {
-                const resultPath = `${process.env.RESULTS_PATH}/${project.resultsPath}/breaking-changes.json`;
-                const response = JSON.parse(await fs.readFile(resultPath, "utf8"));
-                const changes = response?.result?.breakingChanges ?? [];
-                const resolvedChanges = changes.flatMap((change) => {
-                  const details = typeof change === "object" && change !== null ? change : {};
-                  const resolution = String(details.resolution ?? "").trim();
-                  if (!resolution) return [];
-                  const breakingChange = String(details.breakingChange ?? change)
-                    .trim()
-                    .replaceAll("\r", "")
-                    .replaceAll("\n", " ")
-                    .replaceAll("|", "\\|");
-                  const escapedResolution = resolution
-                    .replaceAll("\r", "")
-                    .replaceAll("\n", " ")
-                    .replaceAll("|", "\\|");
-                  return [`| ${breakingChange} | ${escapedResolution} |`];
-                });
-                return [
-                  `* **Typespec Project:** ${project.typespecProjectPath}`,
-                  "",
-                  "| Breaking change | Resolution |",
-                  "| --- | --- |",
-                  ...(resolvedChanges.length
-                    ? resolvedChanges
-                    : ["| None | No suggested resolutions were found. |"]),
-                ];
-              }),
+            const mitigationResults = JSON.parse(
+              await fs.readFile(process.env.MITIGATION_RESULTS_PATH, "utf8"),
             );
+            const escapeTableCell = (value, fallback = "-") => {
+              const text = String(value ?? "").trim();
+              return text
+                ? text.replaceAll("\r", "").replaceAll("\n", "<br>").replaceAll("|", "\\|")
+                : fallback;
+            };
+            const resolvedChanges = mitigationResults
+              .filter((result) => result?.isResolved === true)
+              .map(
+                (result) =>
+                  `| ${escapeTableCell(result.breakingChange)} | ${escapeTableCell(result.Resolution)} | ${escapeTableCell(result.TypeSpecChangesSummary)} |`,
+              );
+            const resolvedChangeRows = resolvedChanges.length
+              ? resolvedChanges
+              : ["| None | No SDK breaking changes were resolved. | - |"];
+            const unresolvedChanges = mitigationResults
+              .filter((result) => result?.isResolved !== true)
+              .map(
+                (result) =>
+                  `| ${escapeTableCell(result.breakingChange)} | ${escapeTableCell(result.Resolution)} |`,
+              );
+            const unresolvedChangeRows = unresolvedChanges.length
+              ? unresolvedChanges
+              : ["| None | All SDK breaking changes were resolved. |"];
 
             const mitigationPullRequest = process.env.MITIGATION_PR_URL?.trim();
             const changedCode = process.env.MITIGATION_CHANGED_CODE?.trim();
@@ -590,7 +635,17 @@ jobs:
               "## SDK breaking-change mitigation result",
               "",
               "**Resolved Breaking Changes:**",
-              ...projectReports.flatMap((projectReport) => [...projectReport, ""]),
+              "",
+              "| Breaking change | Resolution | TypeSpec changes |",
+              "| --- | --- | --- |",
+              ...resolvedChangeRows,
+              "",
+              "**Unresolved Breaking Changes:**",
+              "",
+              "| Breaking change | Suggested resolution |",
+              "| --- | --- |",
+              ...unresolvedChangeRows,
+              "",
               "**Customization code:**",
               "",
               changedCode
