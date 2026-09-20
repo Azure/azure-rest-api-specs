@@ -13,6 +13,32 @@ using Microsoft.Network;
 using Microsoft.Compute;
 using Common;
 
+// Cloud Services is deprecated and no longer represented by the current C# Compute SDK.
+@@scope(
+  Microsoft.Network.NetworkInterfaces.getCloudServiceNetworkInterface,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Network.NetworkInterfaces.listCloudServiceRoleInstanceNetworkInterfaces,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Network.NetworkInterfacesOperationGroup.listCloudServiceNetworkInterfaces,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Network.PublicIPAddresses.getCloudServicePublicIPAddress,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Network.PublicIPAddresses.listCloudServiceRoleInstancePublicIPAddresses,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Network.PublicIPAddressesOperationGroup.listCloudServicePublicIPAddresses,
+  "!csharp"
+);
+
 @@clientName(
   Microsoft.Network.HubVirtualNetworkConnectionProperties.enableOnlyIPv6Peering,
   "IsOnlyIPv6PeeringEnabled",
