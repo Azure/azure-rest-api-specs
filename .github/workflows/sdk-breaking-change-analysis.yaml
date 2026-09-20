@@ -153,7 +153,6 @@ jobs:
 
             core.setOutput("repository", pull.head.repo.full_name);
             core.setOutput("ref", pull.head.sha);
-            core.setOutput("pushed-at", pull.updated_at);
             core.setOutput("sdk-repository", languageConfig.repository);
             core.setOutput("sdk-language", languageConfig.language);
             core.setOutput("tsp-config-path", tspConfigPath ?? "");
@@ -161,16 +160,23 @@ jobs:
 
       - name: Verify pull request was not updated after the trigger
         if: github.event_name == 'issue_comment'
-        shell: bash
+        uses: actions/github-script@v9
         env:
-          COMMENTED_AT: ${{ github.event.comment.updated_at }}
-          PUSHED_AT: ${{ steps.resolve-source.outputs.pushed-at }}
-        run: |
-          set -euo pipefail
-          if [[ "$(date -d "$PUSHED_AT" +%s)" -gt "$(date -d "$COMMENTED_AT" +%s)" ]]; then
-            echo "The pull request was updated after the analysis command. Skip this analysis." >&2
-            exit 1
-          fi
+          PR_NUMBER: ${{ github.event.issue.number }}
+          EXPECTED_SHA: ${{ steps.resolve-source.outputs.ref }}
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const pullNumber = Number(process.env.PR_NUMBER);
+            const { data: pull } = await github.rest.pulls.get({
+              ...context.repo,
+              pull_number: pullNumber,
+            });
+            if (pull.head.sha !== process.env.EXPECTED_SHA) {
+              throw new Error(
+                `The pull request head changed from ${process.env.EXPECTED_SHA} to ${pull.head.sha}. Skip this analysis.`,
+              );
+            }
 
       - name: Mark analysis in progress
         if: github.event_name == 'issue_comment'
@@ -658,12 +664,12 @@ jobs:
               .filter(Boolean)
               .join("\n");
             if (process.env.TRIGGER_NAME === "issue_comment") {
-              const { data: comment } = await github.rest.issues.getComment({
-                ...context.repo,
-                comment_id: context.payload.comment.id,
-              });
-              const command = comment.body.split(/\r?\n/, 1)[0].trim();
               try {
+                const { data: comment } = await github.rest.issues.getComment({
+                  ...context.repo,
+                  comment_id: context.payload.comment.id,
+                });
+                const command = comment.body.split(/\r?\n/, 1)[0].trim();
                 await github.rest.issues.updateComment({
                   ...context.repo,
                   comment_id: context.payload.comment.id,
@@ -671,9 +677,9 @@ jobs:
                 });
                 return;
               } catch (error) {
-                if (error.status !== 403) throw error;
+                if (![403, 404].includes(error.status)) throw error;
                 core.warning(
-                  "The workflow token cannot edit the trigger comment; posting the failure as a new PR comment instead.",
+                  "The workflow token cannot read or edit the trigger comment; posting the failure as a new PR comment instead.",
                 );
               }
             }

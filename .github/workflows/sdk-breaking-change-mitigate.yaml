@@ -254,27 +254,33 @@ jobs:
             core.setOutput("repository", pull.head.repo.full_name);
             core.setOutput("ref", pull.head.sha);
             core.setOutput("branch", pull.head.ref);
-            core.setOutput("pushed-at", pull.updated_at);
 
       - name: Verify pull request was not updated after the trigger
         if: github.event_name == 'issue_comment'
-        shell: bash
+        uses: actions/github-script@v9
         env:
-          COMMENTED_AT: ${{ github.event.comment.updated_at }}
-          PUSHED_AT: ${{ steps.resolve-pr-source.outputs.pushed-at }}
-        run: |
-          set -euo pipefail
-          if [[ "$(date -d "$PUSHED_AT" +%s)" -gt "$(date -d "$COMMENTED_AT" +%s)" ]]; then
-            echo "The pull request was updated after the mitigation command. Skip this mitigation." >&2
-            exit 1
-          fi
+          PR_NUMBER: ${{ steps.resolve-trigger.outputs.pull-number }}
+          EXPECTED_SHA: ${{ steps.resolve-pr-source.outputs.ref }}
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const pullNumber = Number(process.env.PR_NUMBER);
+            const { data: pull } = await github.rest.pulls.get({
+              ...context.repo,
+              pull_number: pullNumber,
+            });
+            if (pull.head.sha !== process.env.EXPECTED_SHA) {
+              throw new Error(
+                `The pull request head changed from ${process.env.EXPECTED_SHA} to ${pull.head.sha}. Skip this mitigation.`,
+              );
+            }
 
       - name: Checkout specification PR source
         if: steps.resolve-trigger.outputs.should-run == 'true'
         uses: actions/checkout@v7
         with:
           repository: ${{ steps.resolve-pr-source.outputs.repository }}
-          ref: ${{ steps.resolve-pr-source.outputs.ref }}
+          ref: ${{ steps.resolve-pr-source.outputs.branch }}
           path: repositories/azure-rest-api-specs
           persist-credentials: false
       - name: Set up Node.js
@@ -337,6 +343,7 @@ jobs:
           echo "path=$copilot_path" >> "$GITHUB_OUTPUT"
 
       - name: Mitigate SDK breaking changes
+        id: mitigate-sdk-breaking-changes
         if: steps.resolve-trigger.outputs.should-run == 'true'
         shell: bash
         env:
@@ -347,6 +354,8 @@ jobs:
           SPEC_REPOSITORY_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs
         run: |
           set -euo pipefail
+          mitigation_log="$RUNNER_TEMP/sdk-breaking-change-mitigation.log"
+          exec > >(tee "$mitigation_log") 2>&1
           echo "$AZSDK_CLI_PATH" >> "$GITHUB_PATH"
           export PATH="$AZSDK_CLI_PATH:$PATH"
 
@@ -617,4 +626,76 @@ jobs:
               ...context.repo,
               issue_number: pullNumber,
               body: report,
+            });
+
+      - name: Report breaking-change mitigation failure
+        if: failure()
+        uses: actions/github-script@v9
+        env:
+          PR_NUMBER: ${{ steps.resolve-trigger.outputs.pull-number || github.event.issue.number || inputs.pr_number }}
+          TRIGGER_COMMENT_ID: ${{ steps.resolve-trigger.outputs.trigger-comment-id || github.event.comment.id }}
+          TRIGGER_NAME: ${{ github.event_name }}
+          MITIGATION_OUTCOME: ${{ steps.mitigate-sdk-breaking-changes.outcome }}
+          MITIGATION_LOG_PATH: ${{ runner.temp }}/sdk-breaking-change-mitigation.log
+          JOB_LOG_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ job.check_run_id }}
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const fs = await import("node:fs/promises");
+            let errorDetails = "";
+            if (process.env.MITIGATION_OUTCOME === "failure") {
+              try {
+                const mitigationLog = await fs.readFile(
+                  process.env.MITIGATION_LOG_PATH,
+                  "utf8",
+                );
+                errorDetails = mitigationLog
+                  .trim()
+                  .split(/\r?\n/)
+                  .slice(-30)
+                  .map((line) => `    ${line}`)
+                  .join("\n");
+              } catch (error) {
+                core.warning(`Unable to read the mitigation error log: ${error.message}`);
+              }
+            }
+
+            const failureReport = [
+              "> [!CAUTION]\n> SDK breaking-change mitigation failed",
+              errorDetails && `\n### Error log\n\n${errorDetails}`,
+              `\n[See failed step](${process.env.JOB_LOG_URL})`,
+            ]
+              .filter(Boolean)
+              .join("\n");
+
+            const triggerCommentId = Number(process.env.TRIGGER_COMMENT_ID);
+            if (
+              process.env.TRIGGER_NAME === "issue_comment" &&
+              Number.isSafeInteger(triggerCommentId) &&
+              triggerCommentId > 0
+            ) {
+              try {
+                const { data: comment } = await github.rest.issues.getComment({
+                  ...context.repo,
+                  comment_id: triggerCommentId,
+                });
+                const command = comment.body.split(/\r?\n/, 1)[0].trim();
+                await github.rest.issues.updateComment({
+                  ...context.repo,
+                  comment_id: triggerCommentId,
+                  body: `${command}\n\n${failureReport}`,
+                });
+                return;
+              } catch (error) {
+                if (![403, 404].includes(error.status)) throw error;
+                core.warning(
+                  "The workflow token cannot read or edit the trigger comment; posting the failure as a new PR comment instead.",
+                );
+              }
+            }
+
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: Number(process.env.PR_NUMBER),
+              body: failureReport,
             });
