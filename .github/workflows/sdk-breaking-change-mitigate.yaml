@@ -283,15 +283,12 @@ jobs:
           ref: ${{ steps.resolve-pr-source.outputs.branch }}
           path: repositories/azure-rest-api-specs
           persist-credentials: false
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: "24.x"
 
-      - name: Install specification repository dependencies
+      - name: Set up Node.js and install specification repository dependencies
         if: steps.resolve-trigger.outputs.should-run == 'true'
-        run: npm ci
-        working-directory: repositories/azure-rest-api-specs
+        uses: ./repositories/workflow-repository/.github/actions/setup-node-install-deps
+        with:
+          working-directory: repositories/azure-rest-api-specs
 
       - name: Resolve target SDK repository
         if: steps.resolve-trigger.outputs.should-run == 'true'
