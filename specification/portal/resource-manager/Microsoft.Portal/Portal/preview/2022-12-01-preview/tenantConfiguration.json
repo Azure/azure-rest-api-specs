@@ -1,0 +1,260 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "portal",
+    "version": "2022-12-01-preview",
+    "description": "Allows creation and deletion of Azure Shared Dashboards.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "TenantConfigurations"
+    },
+    {
+      "name": "ListTenantConfigurationViolationsOperations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Portal/listTenantConfigurationViolations": {
+      "post": {
+        "operationId": "ListTenantConfigurationViolations_List",
+        "tags": [
+          "ListTenantConfigurationViolationsOperations"
+        ],
+        "description": "Gets list of items that violate tenant's configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ViolationsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Tenant configuration Violations": {
+            "$ref": "./examples/ListTenantConfigurationViolations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Portal/tenantConfigurations": {
+      "get": {
+        "operationId": "TenantConfigurations_List",
+        "tags": [
+          "TenantConfigurations"
+        ],
+        "description": "Gets list of the tenant configurations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of Tenant configurations": {
+            "$ref": "./examples/TenantConfigurations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Portal/tenantConfigurations/{configurationName}": {
+      "get": {
+        "operationId": "TenantConfigurations_Get",
+        "tags": [
+          "TenantConfigurations"
+        ],
+        "description": "Gets the tenant configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Configuration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Tenant configuration": {
+            "$ref": "./examples/TenantConfigurations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TenantConfigurations_Create",
+        "tags": [
+          "TenantConfigurations"
+        ],
+        "description": "Create the tenant configuration. If configuration already exists - update it. User has to be a Tenant Admin for this operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "tenantConfiguration",
+            "in": "body",
+            "description": "The parameters required to create or update tenant configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/Configuration"
+            },
+            "x-ms-client-name": "resource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Configuration' update operation succeeded",
+            "schema": {
+              "$ref": "./common.json#/definitions/Configuration"
+            }
+          },
+          "201": {
+            "description": "Resource 'Configuration' create operation succeeded",
+            "schema": {
+              "$ref": "./common.json#/definitions/Configuration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update Tenant configuration": {
+            "$ref": "./examples/TenantConfigurations_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TenantConfigurations_Delete",
+        "tags": [
+          "TenantConfigurations"
+        ],
+        "description": "Delete the tenant configuration. User has to be a Tenant Admin for this operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Tenant configuration": {
+            "$ref": "./examples/TenantConfigurations_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {}
+}

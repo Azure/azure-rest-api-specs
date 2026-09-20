@@ -1,0 +1,347 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "portal",
+    "version": "2022-12-01-preview",
+    "description": "Allows creation and deletion of Azure Shared Dashboards.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Dashboards"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Portal/dashboards": {
+      "get": {
+        "operationId": "Dashboards_ListBySubscription",
+        "tags": [
+          "Dashboards"
+        ],
+        "description": "Gets all the dashboards within a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/DashboardListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all custom resource providers on the subscription": {
+            "$ref": "./examples/Dashboards_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Portal/dashboards": {
+      "get": {
+        "operationId": "Dashboards_ListByResourceGroup",
+        "tags": [
+          "Dashboards"
+        ],
+        "description": "Gets all the Dashboards within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/DashboardListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all custom resource providers on the resourceGroup": {
+            "$ref": "./examples/Dashboards_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Portal/dashboards/{dashboardName}": {
+      "get": {
+        "operationId": "Dashboards_Get",
+        "tags": [
+          "Dashboards"
+        ],
+        "description": "Gets the Dashboard.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dashboardName",
+            "in": "path",
+            "description": "The name of the dashboard.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Dashboard"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Dashboard": {
+            "$ref": "./examples/Dashboards_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Dashboards_CreateOrUpdate",
+        "tags": [
+          "Dashboards"
+        ],
+        "description": "Creates or updates a Dashboard.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dashboardName",
+            "in": "path",
+            "description": "The name of the dashboard.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dashboard",
+            "in": "body",
+            "description": "The parameters required to create or update a dashboard.",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/Dashboard"
+            },
+            "x-ms-client-name": "resource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Dashboard' update operation succeeded",
+            "schema": {
+              "$ref": "./common.json#/definitions/Dashboard"
+            }
+          },
+          "201": {
+            "description": "Resource 'Dashboard' create operation succeeded",
+            "schema": {
+              "$ref": "./common.json#/definitions/Dashboard"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a Dashboard": {
+            "$ref": "./examples/Dashboards_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Dashboards_Update",
+        "tags": [
+          "Dashboards"
+        ],
+        "description": "Updates an existing Dashboard.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dashboardName",
+            "in": "path",
+            "description": "The name of the dashboard.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dashboard",
+            "in": "body",
+            "description": "The updatable fields of a Dashboard.",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/PatchableDashboard"
+            },
+            "x-ms-client-name": "properties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Dashboard"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a Dashboard": {
+            "$ref": "./examples/Dashboards_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Dashboards_Delete",
+        "tags": [
+          "Dashboards"
+        ],
+        "description": "Deletes the Dashboard.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dashboardName",
+            "in": "path",
+            "description": "The name of the dashboard.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Dashboard": {
+            "$ref": "./examples/Dashboards_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {}
+}
