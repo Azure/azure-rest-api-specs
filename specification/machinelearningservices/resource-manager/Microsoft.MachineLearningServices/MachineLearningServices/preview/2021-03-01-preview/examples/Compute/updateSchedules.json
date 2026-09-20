@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "workspaceName": "workspaces123",
+    "computeName": "compute123",
+    "api-version": "2021-03-01-preview",
+    "parameters": {
+      "computeStartStop": [
+        {
+          "status": "Enabled",
+          "action": "Start",
+          "triggerType": "Recurrence",
+          "recurrence": {
+            "frequency": "Day",
+            "interval": 1,
+            "startTime": "2021-04-23T01:30:00",
+            "timeZone": "Pacific Standard Time",
+            "schedule": {
+              "hours": [
+                18
+              ],
+              "minutes": [
+                30
+              ],
+              "weekDays": null
+            }
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {}
+  }
+}

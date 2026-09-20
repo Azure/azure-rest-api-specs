@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "test-rg",
+    "workspaceName": "my-aml-workspace",
+    "name": "string",
+    "api-version": "2022-02-01-preview",
+    "$orderBy": "string",
+    "$top": 1,
+    "$skipToken": "string"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "string",
+            "name": "string",
+            "type": "string",
+            "properties": {
+              "description": "string",
+              "tags": {
+                "string": "string"
+              },
+              "properties": {
+                "string": "string"
+              },
+              "isAnonymous": false,
+              "environmentType": "Curated",
+              "image": "docker.io/tensorflow/serving:latest",
+              "condaFile": "string",
+              "build": {
+                "contextUri": "https://storage-account.blob.core.windows.net/azureml/DockerBuildContext/95ddede6b9b8c4e90472db3acd0a8d28/",
+                "dockerfilePath": "prod/Dockerfile"
+              },
+              "inferenceConfig": {
+                "livenessRoute": {
+                  "path": "string",
+                  "port": 1
+                },
+                "readinessRoute": {
+                  "path": "string",
+                  "port": 1
+                },
+                "scoringRoute": {
+                  "path": "string",
+                  "port": 1
+                }
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T12:34:56.999Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            }
+          }
+        ],
+        "nextLink": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "region": "eastus",
+    "dnsSuffix": "api.azureml.ms",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "demo_resource_group",
+    "workspaceName": "demo_workspace",
+    "experimentName": "demo_experiment",
+    "definition": {
+      "snapshotId": "00000000-0000-0000-0000-000000000000",
+      "configuration": {
+        "script": "findsquare.py",
+        "arguments": [
+          "234"
+        ],
+        "framework": "Python",
+        "communicator": "None",
+        "target": "batchai",
+        "maxRunDurationSeconds": 1200,
+        "nodeCount": 1,
+        "environment": {
+          "python": {
+            "interpreterPath": "python",
+            "userManagedDependencies": false,
+            "condaDependencies": {
+              "name": "project_environment",
+              "dependencies": [
+                "python=3.6.2",
+                {
+                  "pip": [
+                    "azureml-defaults"
+                  ]
+                }
+              ]
+            }
+          },
+          "docker": {
+            "baseImage": "mcr.microsoft.com/azureml/base:0.2.2"
+          }
+        },
+        "history": {}
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "runId": "demorun_15501234342_0"
+      }
+    }
+  }
+}

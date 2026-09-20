@@ -1,0 +1,925 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-08-01",
+    "title": "Azure Machine Learning Datastore Management Client"
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/datastore/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores": {
+      "get": {
+        "tags": [
+          "DataStore"
+        ],
+        "summary": "Get Datastores list.",
+        "description": "Get the list of Datastores attached to the workspace.",
+        "operationId": "List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "dataStoreNames",
+            "in": "query",
+            "description": "List of Datastore names.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "uniqueItems": false
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "The Continuation Token.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "Count of Datastores to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "includeSecret",
+            "in": "query",
+            "description": "Whether to include the datastore secret in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of Datastores are returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedDataStoreList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "tags": [
+          "DataStore"
+        ],
+        "summary": "Create or update a Datastore.",
+        "description": "Create or update a Datastore in the given workspace.",
+        "operationId": "Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "dto",
+            "in": "body",
+            "description": "The Datastore details.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/DataStore"
+            }
+          },
+          {
+            "name": "createIfNotExists",
+            "in": "query",
+            "description": "If set to true, the call will create an Datastore if it doesn't exist.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "skipValidation",
+            "in": "query",
+            "description": "If set to true, the call will skip Datastore validation.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Datastore is created/updated successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataStore"
+        ],
+        "summary": "Delete all Datastores.",
+        "description": "Delete all Datastores in the workspace.",
+        "operationId": "DeleteAll",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All the Datastores in the workspace are deleted successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/datastore/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}": {
+      "get": {
+        "tags": [
+          "DataStore"
+        ],
+        "summary": "Get Datastore details.",
+        "description": "Get details of a Datastore with a specific name.",
+        "operationId": "Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The Datastore name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Datastore details are returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataStore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataStore"
+        ],
+        "summary": "Update or create a Datastore.",
+        "description": "Update or create a Datastore in the given workspace.",
+        "operationId": "Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The Datastore name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dto",
+            "in": "body",
+            "description": "The Datastore details.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/DataStore"
+            }
+          },
+          {
+            "name": "createIfNotExists",
+            "in": "query",
+            "description": "If set to true, the call will create an Datastore if it doesn't exist.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "skipValidation",
+            "in": "query",
+            "description": "If set to true, the call will skip Datastore validation.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Datastore is created/updated successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataStore"
+        ],
+        "summary": "Delete a Datastore.",
+        "description": "Delete a Datastore with a specific name.",
+        "operationId": "Delete",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The Datastore name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Datastore is deleted successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/datastore/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/default/{name}": {
+      "put": {
+        "tags": [
+          "DataStoreDefault"
+        ],
+        "summary": "Set a default Datastore.",
+        "description": "Set a default Datastore in the workspace.",
+        "operationId": "SetDefault",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The Datastore name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The default Datastore is set successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/datastore/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/default": {
+      "get": {
+        "tags": [
+          "DataStoreDefault"
+        ],
+        "summary": "Get the default Datastore.",
+        "description": "Get the default Datastore in the workspace.",
+        "operationId": "GetDefault",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The default Datastore is returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataStore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PaginatedDataStoreList": {
+      "description": "A paginated list of DataStores.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type DataStore.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataStore"
+          }
+        },
+        "continuationToken": {
+          "description": "The token used in retrieving the next page.  If null, there are no additional pages.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
+          "type": "string"
+        }
+      }
+    },
+    "DataStore": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the datastore",
+          "type": "string"
+        },
+        "dataStoreType": {
+          "description": "The Azure storage service this datastore points to.",
+          "enum": [
+            "AzureBlob",
+            "AzureFile",
+            "AzureDataLake",
+            "AzureSqlDatabase",
+            "AzurePostgreSql",
+            "DBFS",
+            "AzureDataLakeGen2",
+            "GlusterFs"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataStoreType",
+            "modelAsString": false
+          }
+        },
+        "hasBeenValidated": {
+          "description": "A read only property that denotes whether the service datastore has been validated with credentials.",
+          "type": "boolean"
+        },
+        "tags": {
+          "description": "Tags to datastore",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "azureStorageSection": {
+          "$ref": "#/definitions/AzureStorage",
+          "description": "Data specific to azure storage"
+        },
+        "azureDataLakeSection": {
+          "$ref": "#/definitions/AzureDataLake",
+          "description": "Data Specific to azure data lake"
+        },
+        "azureSqlDatabaseSection": {
+          "$ref": "#/definitions/AzureSqlDatabase",
+          "description": "Data specific to azure SQL database"
+        },
+        "azurePostgreSqlSection": {
+          "$ref": "#/definitions/AzurePostgreSql",
+          "description": "Data specific to azure PostgreSQL"
+        },
+        "glusterFsSection": {
+          "$ref": "#/definitions/GlusterFs",
+          "description": "Data specific to GlusterFS"
+        }
+      }
+    },
+    "AzureStorage": {
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "description": "Storage Account Name",
+          "type": "string"
+        },
+        "containerName": {
+          "description": "The storage container name",
+          "type": "string"
+        },
+        "endpoint": {
+          "description": "The host of the container",
+          "type": "string"
+        },
+        "protocol": {
+          "description": "The protocol to use. Defaults to https",
+          "type": "string"
+        },
+        "credentialType": {
+          "description": "The credential type",
+          "enum": [
+            "None",
+            "Sas",
+            "AccountKey",
+            "ClientCredentials"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AzureStorageCredentialTypes",
+            "modelAsString": false
+          }
+        },
+        "credential": {
+          "description": "The credential",
+          "type": "string"
+        },
+        "clientCredentials": {
+          "$ref": "#/definitions/ClientCredentials",
+          "description": "Service principal credential when credential type is Microsoft.MachineLearning.DataStore.Contracts.AzureStorageCredentialTypes.ClientCredentials"
+        },
+        "blobCacheTimeout": {
+          "format": "int32",
+          "description": "If this is an Microsoft.MachineLearning.DataStore.Contracts.DataStoreType.AzureBlob, the length of time (in seconds) to cache files locally after they are accessed (downloaded).",
+          "type": "integer"
+        },
+        "isSas": {
+          "description": "Indicate if we are using SAS token or Account Key (Deprecated)",
+          "type": "boolean"
+        },
+        "accountKey": {
+          "description": "Storage Account Key (Deprecated)",
+          "type": "string"
+        },
+        "sasToken": {
+          "description": "SAS Token for the container (Deprecated)",
+          "type": "string"
+        },
+        "areWorkspaceManagedIdentitiesAllowed": {
+          "description": "Indicate if we are using Workspace ManagedIdentities/MSI token",
+          "type": "boolean"
+        },
+        "subscriptionId": {
+          "format": "uuid",
+          "description": "Subscription Id",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource Group Name",
+          "type": "string"
+        }
+      }
+    },
+    "AzureDataLake": {
+      "type": "object",
+      "properties": {
+        "storeName": {
+          "description": "The Azure Data Lake store name",
+          "type": "string"
+        },
+        "clientId": {
+          "format": "uuid",
+          "description": "The Client ID/Application ID",
+          "type": "string"
+        },
+        "tenantId": {
+          "format": "uuid",
+          "description": "The ID of the tenant the service principal/app belongs to",
+          "type": "string"
+        },
+        "isCertAuth": {
+          "description": "Is it using certificate to authenticate. If false then use client secret",
+          "type": "boolean"
+        },
+        "certificate": {
+          "description": "The content of the certificate used for authentication",
+          "type": "string"
+        },
+        "thumbprint": {
+          "description": "The thumbprint of the certificate above",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "The client secret",
+          "type": "string"
+        },
+        "authorityUrl": {
+          "description": "The authority URL used for authentication",
+          "type": "string"
+        },
+        "resourceUri": {
+          "description": "The resource the service principal/app has access to",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "format": "uuid",
+          "description": "Subscription Id",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource Group Name",
+          "type": "string"
+        }
+      }
+    },
+    "AzureSqlDatabase": {
+      "type": "object",
+      "properties": {
+        "serverName": {
+          "description": "The Azure SQL server name",
+          "type": "string"
+        },
+        "databaseName": {
+          "description": "The Azure SQL database name",
+          "type": "string"
+        },
+        "endpoint": {
+          "description": "The server host endpoint",
+          "type": "string"
+        },
+        "clientId": {
+          "format": "uuid",
+          "description": "The Client ID/Application ID",
+          "type": "string"
+        },
+        "tenantId": {
+          "format": "uuid",
+          "description": "The ID of the tenant the service principal/app belongs to",
+          "type": "string"
+        },
+        "isCertAuth": {
+          "description": "Is it using certificate to authenticate. If false then use client secret",
+          "type": "boolean"
+        },
+        "certificate": {
+          "description": "The content of the certificate used for authentication",
+          "type": "string"
+        },
+        "thumbprint": {
+          "description": "The thumbprint of the certificate above",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "The client secret",
+          "type": "string"
+        },
+        "authorityUrl": {
+          "description": "The authority URL used for authentication",
+          "type": "string"
+        },
+        "resourceUri": {
+          "description": "The resource the service principal/app has access to",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "format": "uuid",
+          "description": "Subscription Id",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource Group Name",
+          "type": "string"
+        }
+      }
+    },
+    "AzurePostgreSql": {
+      "type": "object",
+      "properties": {
+        "serverName": {
+          "description": "The Azure PostgreSQL server name",
+          "type": "string"
+        },
+        "databaseName": {
+          "description": "The Azure PostgreSQL database name",
+          "type": "string"
+        },
+        "userId": {
+          "description": "The Azure PostgreSQL user id",
+          "type": "string"
+        },
+        "userPassword": {
+          "description": "The Azure PostgreSQL user password",
+          "type": "string"
+        },
+        "portNumber": {
+          "description": "The Azure PostgreSQL port number",
+          "type": "string"
+        },
+        "endpoint": {
+          "description": "The Azure PostgreSQL server host endpoint",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "format": "uuid",
+          "description": "Subscription Id",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource Group Name",
+          "type": "string"
+        }
+      }
+    },
+    "GlusterFs": {
+      "type": "object",
+      "properties": {
+        "serverAddress": {
+          "description": "The server address of one of the servers that hosts the GlusterFS. Can be either the IP address\r\nor server name.",
+          "type": "string"
+        },
+        "volumeName": {
+          "description": "The name of the created GlusterFS volume.",
+          "type": "string"
+        }
+      }
+    },
+    "ClientCredentials": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "format": "uuid",
+          "description": "The Client ID/Application ID",
+          "type": "string"
+        },
+        "tenantId": {
+          "format": "uuid",
+          "description": "The ID of the tenant the service principal/app belongs to",
+          "type": "string"
+        },
+        "isCertAuth": {
+          "description": "Is it using certificate to authenticate. If false then use client secret",
+          "type": "boolean"
+        },
+        "certificate": {
+          "description": "The content of the certificate used for authentication",
+          "type": "string"
+        },
+        "thumbprint": {
+          "description": "The thumbprint of the certificate above",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "The client secret",
+          "type": "string"
+        },
+        "authorityUrl": {
+          "description": "The authority URL used for authentication",
+          "type": "string"
+        },
+        "resourceUri": {
+          "description": "The resource the service principal/app has access to",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "format": "uuid",
+          "description": "Subscription Id",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource Group Name",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "The error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/RootError",
+          "description": "The top level error that occurred."
+        },
+        "correlation": {
+          "description": "Dictionary containing correlation details for the error.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "environment": {
+          "description": "The hosting environment.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The Azure region.",
+          "type": "string"
+        },
+        "time": {
+          "format": "date-time",
+          "description": "The time in UTC.",
+          "type": "string"
+        }
+      }
+    },
+    "RootError": {
+      "description": "The root error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The service-defined error code. Supported error codes: ServiceError, UserError, ValidationError, AzureStorageError, TransientError, RequestThrottled.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human-readable representation of the error.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the error (e.g., the name of the property in error).",
+          "type": "string"
+        },
+        "details": {
+          "description": "The related errors that occurred during the request.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          }
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerErrorResponse",
+          "description": "A nested list of inner errors. When evaluating errors, clients MUST traverse through all of the nested “innerErrors” and choose the deepest one that they understand."
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the error (e.g., the name of the property in error).",
+          "type": "string"
+        }
+      }
+    },
+    "InnerErrorResponse": {
+      "description": "A nested structure of errors.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string"
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerErrorResponse",
+          "description": "A nested list of inner errors. When evaluating errors, clients MUST traverse through all of the nested “innerErrors” and choose the deepest one that they understand."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Azure Subscription ID.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The Name of the resource group in which the workspace is located.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "workspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "description": "The name of the workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "tags": []
+}
