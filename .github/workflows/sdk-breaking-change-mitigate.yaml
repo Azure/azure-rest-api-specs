@@ -365,15 +365,12 @@ jobs:
             breaking_changes_path="$ANALYSIS_RESULTS_PATH/$results_path/breaking-changes.json"
             test -f "$breaking_changes_path"
 
-            customization_request="$(
-              jq -r \
-                '[.result.breakingChanges[]?.resolution | strings | select(length > 0)] | unique | join("\n")' \
-                "$breaking_changes_path"
-            )"
-            if [[ -z "$customization_request" ]]; then
-              echo "No breaking-change resolutions found for $typespec_project_path."
+            breaking_change_count="$(jq '.result.breakingChanges | length' "$breaking_changes_path")"
+            if [[ "$breaking_change_count" -eq 0 ]]; then
+              echo "No SDK breaking changes found for $typespec_project_path."
               continue
             fi
+            customization_request="resolve sdk breaking changes: $(jq -c '.result.breakingChanges' "$breaking_changes_path")"
 
             tsp_project_path="$(realpath "$SPEC_REPOSITORY_PATH/$typespec_project_path")"
             if [[ ! -d "$tsp_project_path" || "$tsp_project_path" != "$SPEC_REPOSITORY_PATH"/specification/* ]]; then
@@ -407,6 +404,9 @@ jobs:
         id: commit-changes
         shell: bash
         working-directory: repositories/azure-rest-api-specs
+        env:
+          PR_NUMBER: ${{ steps.resolve-trigger.outputs.pull-number || steps.read-trigger.outputs.pull-number }}
+          SDK_LANGUAGE: ${{ steps.resolve-trigger.outputs.sdk-language || steps.read-trigger.outputs.sdk-language }}
         run: |
           set -euo pipefail
           if [[ -z "$(git status --porcelain)" ]]; then
@@ -415,7 +415,8 @@ jobs:
             exit 0
           fi
 
-          branch="sdk-breaking-change-mitigation-${GITHUB_RUN_ID}"
+          sdk_language="$(tr '[:upper:]' '[:lower:]' <<< "$SDK_LANGUAGE" | sed 's/[^a-z0-9-]/-/g')"
+          branch="sdk-breaking-change-mitigation-pr-${PR_NUMBER}-${sdk_language}-${GITHUB_RUN_ID}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -c "$branch"
