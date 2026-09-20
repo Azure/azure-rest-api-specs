@@ -370,7 +370,6 @@ jobs:
               echo "No SDK breaking changes found for $typespec_project_path."
               continue
             fi
-            customization_request="resolve sdk breaking changes: $(jq -c '.result.breakingChanges' "$breaking_changes_path")"
 
             tsp_project_path="$(realpath "$SPEC_REPOSITORY_PATH/$typespec_project_path")"
             if [[ ! -d "$tsp_project_path" || "$tsp_project_path" != "$SPEC_REPOSITORY_PATH"/specification/* ]]; then
@@ -392,11 +391,17 @@ jobs:
             fi
             package_path="${package_paths[0]}"
 
-            azsdk typespec client customized-update \
-              --tsp-project-path "$tsp_project_path" \
-              --package-path "$package_path" \
-              --customization-request "$customization_request" \
-              --edit-scope 2
+            breaking_change_number=0
+            while IFS= read -r breaking_change; do
+              breaking_change_number="$((breaking_change_number + 1))"
+              echo "Mitigating SDK breaking change $breaking_change_number of $breaking_change_count for $typespec_project_path."
+              customization_request="Resolve this SDK breaking change: $breaking_change"
+              azsdk typespec client customized-update \
+                --tsp-project-path "$tsp_project_path" \
+                --package-path "$package_path" \
+                --customization-request "$customization_request" \
+                --edit-scope 2
+            done < <(jq -c '.result.breakingChanges[]' "$breaking_changes_path")
           done < <(jq -c '.[]' "$manifest")
 
       - name: Commit mitigation changes
