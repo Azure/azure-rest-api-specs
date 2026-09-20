@@ -208,6 +208,9 @@ namespace Azure.AI.Projects;
 
 @@clientName(AgentInsightHighlightedTrace.duration_ms, "Duration");
 
+// Preserve name on GA'd model
+@@clientName(FoundryEvaluationTarget, "Target");
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
