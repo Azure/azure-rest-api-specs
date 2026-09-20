@@ -564,9 +564,9 @@ op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperatio
 /** Delete a job (preview). Returns 204 No Content. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
 @delete
-op deleteJobPreview<AreaPreviewLabel extends
-  | FoundryFeaturesOptInKeys
-  | AgentDefinitionOptInKeys> is FoundryDataPlanePreviewOperation<
+op deleteJobPreview<
+  AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys
+> is FoundryDataPlanePreviewOperation<
   AreaPreviewLabel,
   {
     /** The ID of the job to delete. */
