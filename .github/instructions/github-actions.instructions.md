@@ -16,11 +16,10 @@ applyTo:
 ## TypeScript execution
 
 Both `.github` and `.github/shared` use TypeScript for source, tests, CLI, benchmarks, and Vitest configuration.
-ESLint configurations remain JavaScript for now, including the shared base configuration.
 Use `.ts` files, native type annotations, `import type`, and `.ts` relative imports.
 Node.js 24 runs the sources with native type stripping; `tsc` uses `noEmit`, `erasableSyntaxOnly`,
 and `verbatimModuleSyntax`. Do not introduce enums, parameter properties, or namespaces.
-Keep comments for documentation, not types, except in the JavaScript ESLint configurations.
+Keep comments for documentation, not types.
 See [the shared package guide](../shared/readme.md) for its development conventions.
 
 This file provides instructions for GitHub Copilot when working with GitHub Actions code in this repository. The GitHub Actions infrastructure is completely separate from the TypeSpec and OpenAPI specification work that makes up the majority of this repository.
@@ -33,7 +32,7 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 - **Workflows**: Workflow files in `.github/workflows/`
 - **Shared utilities**: Common TypeScript modules in `.github/shared/src/`
 - **Tests**: Test files in `.github/workflows/test/` and `.github/shared/test/`
-- **Configuration**: ESLint, Prettier, TypeScript, and Vitest configs
+- **Configuration**: Root oxlint, Prettier, TypeScript, and Vitest configs
 
 ## Technology Stack
 
@@ -41,7 +40,7 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 - **Runtime**: Node.js 24.x (on GitHub Actions runners)
 - **Type Checking**: `tsc --noEmit`; Node.js executes the `.ts` sources directly
 - **Testing**: Vitest for unit and integration tests
-- **Linting**: ESLint with TypeScript-aware rules
+- **Linting**: oxlint with type-aware rules from `oxlint-tsgolint`, configured in the root `.oxlintrc.json`
 - **Formatting**: Prettier with organize-imports plugin
 - **Package Manager**: pnpm workspaces (`pnpm ci` for clean installs)
 
@@ -61,11 +60,9 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 ├── shared/                    # Shared utilities used across workflows
 │   ├── src/                   # Core utility modules
 │   ├── test/                  # Tests for shared utilities
-│   ├── eslint.base.config.js  # Base ESLint config
 │   └── package.json
 ├── matchers/                  # Problem matchers for CI output
 ├── package.json               # Root dependencies (superset of shared/)
-├── eslint.config.js           # ESLint configuration
 ├── tsconfig.json              # TypeScript config (type-checking only)
 ├── vitest.config.ts           # Vitest test configuration
 └── .prettierrc.yaml           # Prettier formatting rules
@@ -75,9 +72,9 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 
 ### TypeScript Style
 
-- **File extension**: Use `.ts` for source, tests, CLI entry points, and Vitest configuration; keep ESLint configs in `.js`
+- **File extension**: Use `.ts` for source, tests, CLI entry points, and Vitest configuration
 - **Module system**: ES modules (`import`/`export`), not CommonJS
-- **Type annotations**: Use native TypeScript declarations, except for JSDoc typing in JavaScript ESLint configs. Keep other comments for documentation, not types
+- **Type annotations**: Use native TypeScript declarations. Keep comments for documentation, not types
 - **Indentation**: 2 spaces (enforced by Prettier)
 - **Quote style**: Double quotes for strings (enforced by Prettier)
 - **Line length**: Max 100 characters (enforced by Prettier)
@@ -110,6 +107,7 @@ export async function getChangedFiles(options: ChangedFilesOptions = {}): Promis
 
 ### TypeScript Integration
 
+- Shared compiler options live in `.github/tsconfig.base.json`, following the TypeSpec repo's ES2024/NodeNext baseline without an external preset. The two project configs extend it and define their own file selection.
 - TypeScript is configured with `noEmit`, `allowImportingTsExtensions`, `erasableSyntaxOnly`, and `verbatimModuleSyntax`
 - Run `pnpm run lint:tsc` to type-check the sources
 - Import types with `import type`; use frozen objects and value-union type aliases instead of enums
@@ -144,7 +142,8 @@ From `package.json` comments:
 - `js-yaml`: YAML parsing
 - `debug`: Debug logging
 - `vitest`: Testing framework
-- `eslint`, `typescript-eslint`: Linting and type checking
+- `oxlint`, `oxlint-tsgolint`: Root development dependencies for linting
+- `typescript`: Type checking
 - `prettier`: Code formatting
 
 ## Build, Test, and Validation
@@ -155,8 +154,8 @@ In `.github/` directory:
 
 ```bash
 pnpm run check           # Run all checks (lint + format:check + test:ci)
-pnpm run lint            # Run both ESLint and TypeScript checks
-pnpm run lint:eslint     # Run ESLint only
+pnpm run lint            # Run both oxlint and TypeScript checks
+pnpm run lint:oxlint     # Run oxlint only
 pnpm run lint:tsc        # Run TypeScript type checking only
 pnpm run format          # Format code with Prettier
 pnpm run format:check    # Check formatting without modifying files
@@ -170,13 +169,19 @@ In `.github/shared/` directory:
 
 ```bash
 pnpm run check           # Run all checks
-pnpm run lint            # Run ESLint and TypeScript checks
+pnpm run lint            # Run oxlint and TypeScript checks
 pnpm run format          # Format code with Prettier
 pnpm run format:check    # Check formatting
 pnpm run test            # Run tests in watch mode
 pnpm run test:ci         # Run tests once with coverage report
 pnpm run perf            # Run performance benchmarks
 ```
+
+CI runs `pnpm lint` once from the repository root in `lint.yaml`, covering `.github`
+and `eng/tools`. Do not add lint steps to package/OS test matrices. `github-test.yaml`
+retains `pnpm lint:tsc`, tests, formatting, and actionlint for workflow YAML.
+See [the engineering guide](../../eng/README.md#linting-and-prettier) for package
+exclusions that preserve the previous ESLint coverage.
 
 ### Before Committing
 
@@ -215,7 +220,6 @@ describe("myFunction", () => {
 
 Per `vitest.config.ts`, coverage excludes:
 
-- `**/eslint*.config.js`
 - `**/cmd/**` (CLI code)
 - `**/coverage/**`
 - `**/test/**`
@@ -386,7 +390,7 @@ When modifying GitHub Actions code:
 
 ### Critical Don'ts
 
-- ❌ Don't add JavaScript files or JSDoc type declarations outside ESLint configurations
+- ❌ Don't add JavaScript files or JSDoc type declarations
 - ❌ Don't use default exports (use named exports)
 - ❌ Don't use non-erasable TypeScript features or emit JavaScript
 - ❌ Don't commit without running `pnpm run check`
@@ -410,4 +414,4 @@ When modifying GitHub Actions code:
 - Other instruction files: [`.github/instructions/`](.)
 - GitHub Actions docs: https://docs.github.com/en/actions
 - Vitest docs: https://vitest.dev/
-- ESLint docs: https://eslint.org/
+- oxlint docs: https://oxc.rs/docs/guide/usage/linter

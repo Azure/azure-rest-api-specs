@@ -125,7 +125,6 @@ eng/tools/suppressions
 ├── test/     # Vitest unit + end-to-end tests and fixtures
 ├── package.json        # "bin", scripts, dependencies
 ├── tsconfig.json       # Type-checking / build config
-├── eslint.config.js    # ESLint config
 └── vitest.config.ts    # Test + coverage config
 ```
 
@@ -165,7 +164,7 @@ Useful scripts (run from `eng/tools/suppressions`):
 | `pnpm run build`        | Compile TypeScript to `dist/`.                            |
 | `pnpm test`             | Run tests in watch mode (vitest).                         |
 | `pnpm run test:ci`      | Run tests once with coverage.                             |
-| `pnpm run lint`         | Run ESLint.                                               |
+| `pnpm run lint`         | Run oxlint with the repository-root configuration.        |
 | `pnpm run format`       | Auto-format with prettier.                                |
 | `pnpm run format:check` | Check formatting without writing.                         |
 | `pnpm run check`        | Run build, lint, format check, and tests (the full gate). |
