@@ -53,7 +53,7 @@ Below are code convention we strive to follow in `eng` directory:
 - CI installs the pinned pnpm version via `.github/actions/setup-node-install-deps`
   (which reads the `packageManager` field) and runs `pnpm ci`.
 
-## Linting and prettier
+## Linting and formatting
 
 - Run `pnpm lint` from the repository root to lint the previously linted packages
   in `.github` and `eng/tools` in one oxlint invocation. Use `pnpm lint:fix` to apply
@@ -64,20 +64,38 @@ Below are code convention we strive to follow in `eng` directory:
   linting provided by `oxlint-tsgolint`. Duplicate arguments and octal literals are
   rejected by strict-mode parsing instead of separate lint rules.
 - `.github/workflows/lint.yaml` runs linting once on Linux for all packages, outside
-  the package/OS test matrices. Package workflows still run type checks, tests, and
-  Prettier; they must not invoke code linting again. Package-local `pnpm lint` scripts
+  the package/OS test matrices. Package workflows still run type checks and tests;
+  they must not invoke code linting again. Package-local `pnpm lint` scripts
   remain available for development.
 - `openapi-diff-runner`, `sdk-suppressions`, `summarize-impact`, and
   `typespec-migration-validation` did not previously run ESLint and remain excluded
   in the root configuration. Enabling linting for these packages is a separate
-  change, not part of the linter migration. Their type checks, tests,
-  and formatting are unchanged. Existing suppressions in linted packages are
+  change, not part of the linter migration. Their type checks and tests are
+  unchanged. Existing suppressions in linted packages are
   retained; unused suppressions fail linting.
 - Discuss any desired rule divergences and explain them in the configuration.
-- We align `prettier` rules with [microsoft/typespec .prettierrc.json].
+- Run `pnpm format` or `pnpm format:check` from the repository root to format or
+  check `.github` and `eng/tools` in one Oxfmt invocation. Package-local commands
+  remain available and inherit the root `.oxfmtrc.json`.
+- `.github/workflows/format.yaml` checks formatting once on Linux, outside the
+  package/OS test matrices. Do not add formatting steps to individual package CI jobs.
+- Tooling uses a line width of 100 with the existing fixture, generated-file, and
+  unmanaged-content exclusions. Import organization and package.json sorting are
+  intentionally disabled; lint/type checks still report unused imports.
+- Swagger/OpenAPI definitions and examples under `specification/**/*.json` are
+  excluded from Oxfmt. The custom Prettier plugin and root Prettier dependency
+  remain in use for these JSON files, preserving numeric literals such as `100.00`.
+  The existing Swagger PrettierCheck pipeline and root `.prettierrc.json` are
+  unchanged. Run `pnpm exec prettier --write <path-to-example.json>` to format an
+  example.
+  TypeSpec validation retains `tsp format` for `.tsp` files and uses Oxfmt for
+  `tspconfig.yaml` with a line width of 80.
+- Install the recommended Oxc VS Code extension for tooling formatting, Prettier
+  for Swagger/example JSON, and the TypeSpec extension for `.tsp` files. For JSON
+  excluded from Oxfmt, use **Format Document With... > Prettier** without changing
+  the default formatter for tooling files.
 
 [pnpm]: https://pnpm.io
 [Design guidelines for spec repos validation tooling]: https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/1153/Design-guidelines-for-spec-repos-validation-tooling
-[microsoft/typespec .prettierrc.json]: https://github.com/microsoft/typespec/blob/main/.prettierrc.json
 [microsoft/typespec package.json]: https://github.com/microsoft/typespec/blob/main/package.json
 [npm/cli #7384]: https://github.com/npm/cli/issues/7384
