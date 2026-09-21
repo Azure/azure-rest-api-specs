@@ -20,7 +20,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`SDK Breaking Change Review`](#sdk-breaking-change-review)
   - [`Swagger APIView`](#swagger-apiview)
     - [If an expected APIView was not generated, follow the step below to troubleshoot.](#if-an-expected-apiview-was-not-generated-follow-the-step-below-to-troubleshoot)
-    - [Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)](#diagnosing-apiview-failure-for-sdk-language-not-swagger-or-typespec)
+    - [Diagnosing APIView failure for SDK Language (not Swagger)](#diagnosing-apiview-failure-for-sdk-language-not-swagger)
   - [`Swagger ApiDocPreview`](#swagger-apidocpreview)
   - [`Swagger Avocado`](#swagger-avocado)
   - [`Swagger BreakingChange` and `BreakingChange(Cross-Version)`](#swagger-breakingchange-and-breakingchangecross-version)
