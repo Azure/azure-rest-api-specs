@@ -27,6 +27,7 @@ const clientEmitters = [
   "@azure-tools/typespec-java",
   "@azure-tools/typespec-ts",
   "@azure-tools/typespec-go",
+  "@azure-tools/typespec-rust",
 ];
 
 export class LinterRulesetRule implements Rule {
