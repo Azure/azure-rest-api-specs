@@ -12,7 +12,7 @@ using TypeSpec.Http;
 namespace Azure.AI.FineTuning.Sessions;
 
 @client
-@route("/fine_tuning_sessions")
+@route("/fine_tuning/sessions")
 interface Sessions {
 	create is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.create;
 	list is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.list;
@@ -23,7 +23,7 @@ interface Sessions {
 }
 
 @client
-@route("/fine_tuning_sessions/{sessionId}")
+@route("/fine_tuning/sessions/{sessionId}")
 interface Training {
 	forwardBackward is Azure.AI.Projects.SessionFineTuning.Training.forwardBackward;
 	forward is Azure.AI.Projects.SessionFineTuning.Training.forward;
@@ -31,7 +31,7 @@ interface Training {
 }
 
 @client
-@route("/fine_tuning_sessions/{sessionId}")
+@route("/fine_tuning/sessions/{sessionId}")
 interface Checkpoints {
 	save is Azure.AI.Projects.SessionFineTuning.Checkpoints.save;
 	saveSamplerWeights is Azure.AI.Projects.SessionFineTuning.Checkpoints.saveSamplerWeights;
@@ -40,13 +40,13 @@ interface Checkpoints {
 }
 
 @client
-@route("/fine_tuning_sessions/{sessionId}")
+@route("/fine_tuning/sessions/{sessionId}")
 interface Sampling {
 	sample is Azure.AI.Projects.SessionFineTuning.Sampling.sample;
 }
 
 @client
-@route("/fine_tuning_sessions/{sessionId}/request/{requestId}")
+@route("/fine_tuning/sessions/{sessionId}/request/{requestId}")
 interface Operations {
 	get is Azure.AI.Projects.SessionFineTuning.Operations.get;
 }

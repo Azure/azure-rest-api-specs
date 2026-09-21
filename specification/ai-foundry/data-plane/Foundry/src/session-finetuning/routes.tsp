@@ -25,7 +25,7 @@ op FineTuningSessionOperation<
 // ─── Fine-tuning sessions ─────────────────────────────────────────────────────
 
 /** Creates and manages fine-tuning sessions in the project. */
-@route("/fine_tuning_sessions")
+@route("/fine_tuning/sessions")
 @tag("FineTuningSessions")
 interface FineTuningSessions {
   /**
@@ -124,7 +124,7 @@ interface FineTuningSessions {
 // ─── Training ─────────────────────────────────────────────────────────────────
 
 /** Submits training requests for a fine-tuning session. */
-@route("/fine_tuning_sessions/{sessionId}")
+@route("/fine_tuning/sessions/{sessionId}")
 @tag("Training")
 interface Training {
   /**
@@ -186,7 +186,7 @@ interface Training {
 // ─── Checkpoints ──────────────────────────────────────────────────────────────
 
 /** Saves and retrieves checkpoints associated with a fine-tuning session. */
-@route("/fine_tuning_sessions/{sessionId}")
+@route("/fine_tuning/sessions/{sessionId}")
 @tag("Checkpoints")
 interface Checkpoints {
   /**
@@ -257,7 +257,7 @@ interface Checkpoints {
 // ─── Sampling ─────────────────────────────────────────────────────────────────
 
 /** Generates completions using sampler checkpoints from a fine-tuning session. */
-@route("/fine_tuning_sessions/{sessionId}")
+@route("/fine_tuning/sessions/{sessionId}")
 @tag("Sampling")
 interface Sampling {
   /**
@@ -286,7 +286,7 @@ interface Sampling {
 // ─── Request-status polling ───────────────────────────────────────────────────
 
 /** Retrieves the raw processing status of a fine-tuning request. */
-@route("/fine_tuning_sessions/{sessionId}/request/{requestId}")
+@route("/fine_tuning/sessions/{sessionId}/request/{requestId}")
 @tag("Operations")
 interface Operations {
   /**

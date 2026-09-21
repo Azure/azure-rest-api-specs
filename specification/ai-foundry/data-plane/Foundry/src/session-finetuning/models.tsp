@@ -345,7 +345,7 @@ model FineTuningSessionModelData {
   model_name?: string | null;
 }
 
-/** Response from GET /fine_tuning_sessions/{sessionId}. */
+/** Response from GET /fine_tuning/sessions/{sessionId}. */
 model FineTuningSession {
   /** Unique identifier for this fine-tuning session. */
   @visibility(Lifecycle.Read)
@@ -362,7 +362,7 @@ model FineTuningSession {
   model_data: FineTuningSessionModelData;
 }
 
-/** Summary item returned in the paginated GET /fine_tuning_sessions list. */
+/** Summary item returned in the paginated GET /fine_tuning/sessions list. */
 model FineTuningSessionSummary {
   /** Unique identifier for this fine-tuning session. */
   @visibility(Lifecycle.Read)
@@ -399,7 +399,7 @@ model FineTuningCursor {
 
 // ─── Checkpoint resource ──────────────────────────────────────────────────────
 
-/** A checkpoint item returned in GET /fine_tuning_sessions/{sessionId}/checkpoints. */
+/** A checkpoint item returned in GET /fine_tuning/sessions/{sessionId}/checkpoints. */
 model FineTuningCheckpoint {
   /** Identifier of the saved checkpoint within the session. */
   @visibility(Lifecycle.Read)
@@ -450,7 +450,7 @@ model FineTuningFromCheckpoint {
   checkpoint_id: string;
 }
 
-/** Request body for POST /fine_tuning_sessions. */
+/** Request body for POST /fine_tuning/sessions. */
 model CreateFineTuningSessionRequest {
   /** The session type. */
   type: FineTuningSessionType;
@@ -475,7 +475,7 @@ model CreateFineTuningSessionRequest {
 }
 
 /**
- * Response from POST /fine_tuning_sessions.
+ * Response from POST /fine_tuning/sessions.
  * Poll the returned request identifier to track session initialization.
  */
 model CreateFineTuningSessionResponse {
@@ -519,7 +519,7 @@ model ForwardBackwardInput {
   loss_fn_config?: LossFnConfig;
 }
 
-/** Request body for POST /fine_tuning_sessions/{sessionId}/forward_backward. */
+/** Request body for POST /fine_tuning/sessions/{sessionId}/forward_backward. */
 model ForwardBackwardRequest {
   /** Batch inputs for the combined forward and backward pass. */
   forward_backward_input: ForwardBackwardInput;
@@ -533,19 +533,19 @@ model ForwardInput {
   ...ForwardBackwardInput;
 }
 
-/** Request body for POST /fine_tuning_sessions/{sessionId}/forward. */
+/** Request body for POST /fine_tuning/sessions/{sessionId}/forward. */
 model ForwardRequest {
   /** Batch inputs for the forward-only pass. */
   forward_input: ForwardInput;
 }
 
-/** Request body for POST /fine_tuning_sessions/{sessionId}/optim_step. */
+/** Request body for POST /fine_tuning/sessions/{sessionId}/optim_step. */
 model OptimStepRequest {
   /** Adam optimizer parameters used to apply accumulated gradients. */
   adam_params: AdamParams;
 }
 
-/** Request body for POST /fine_tuning_sessions/{sessionId}/checkpoint. */
+/** Request body for POST /fine_tuning/sessions/{sessionId}/checkpoint. */
 model SaveCheckpointRequest {
   /**
    * User-supplied checkpoint identifier.
@@ -564,7 +564,7 @@ model SaveCheckpointRequest {
 }
 
 /**
- * Request body for POST /fine_tuning_sessions/{sessionId}/checkpoint_sample.
+ * Request body for POST /fine_tuning/sessions/{sessionId}/checkpoint_sample.
  * Supply either path or both sampling_session_seq_id and seq_id. The service
  * validates this requirement at runtime.
  */
@@ -584,7 +584,7 @@ model SaveSamplerWeightsRequest {
   type?: "save_weights_for_sampler" = "save_weights_for_sampler";
 }
 
-/** Request body for POST /fine_tuning_sessions/{sessionId}/sample. */
+/** Request body for POST /fine_tuning/sessions/{sessionId}/sample. */
 model FineTuningSampleRequest {
   /** Number of independent completions to generate. Default 1. */
   num_samples?: int32 = 1;
@@ -629,7 +629,7 @@ model FineTuningCheckpointList {
   checkpoints: FineTuningCheckpoint[];
 }
 
-/** Response from POST /fine_tuning_sessions/{sessionId}/complete. */
+/** Response from POST /fine_tuning/sessions/{sessionId}/complete. */
 model FineTuningCompleteResponse {
   /** Identifier of the session being unloaded. */
   session_id: string;
@@ -638,7 +638,7 @@ model FineTuningCompleteResponse {
   request_id: string;
 }
 
-/** Response from DELETE /fine_tuning_sessions/{sessionId}. */
+/** Response from DELETE /fine_tuning/sessions/{sessionId}. */
 model FineTuningDeleteSessionResponse {
   /** Identifier of the session targeted for deletion. */
   session_id: string;
@@ -650,7 +650,7 @@ model FineTuningDeleteSessionResponse {
   type: "delete_session";
 }
 
-/** Response from POST /fine_tuning_sessions/{sessionId}/heartbeat. */
+/** Response from POST /fine_tuning/sessions/{sessionId}/heartbeat. */
 model FineTuningHeartbeatResponse {
   /** Identifier of the session whose heartbeat was refreshed. */
   session_id: string;
