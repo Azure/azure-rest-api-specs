@@ -81,21 +81,6 @@ interface SqlContainerGetResultsOperationGroup {
   >;
 
   /**
-   * Merges the partitions of a SQL Container
-   */
-  @added(Versions.v2026_04_01_preview)
-  @action("partitionMerge")
-  listSqlContainerPartitionMerge is ArmResourceActionAsyncBase<
-    SqlContainerGetResults,
-    MergeParameters,
-    Response =
-      | ArmResponse<PhysicalPartitionStorageInfoCollection>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionStorageInfoCollection>>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SqlContainerGetResults>,
-    Error = CloudError
-  >;
-
-  /**
    * Retrieves continuous backup information for a container resource.
    */
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
@@ -114,10 +99,6 @@ interface SqlContainerGetResultsOperationGroup {
 @@doc(
   SqlContainerGetResultsOperationGroup.createUpdateSqlContainer::parameters.resource,
   "The parameters to provide for the current SQL container."
-);
-@@doc(
-  SqlContainerGetResultsOperationGroup.listSqlContainerPartitionMerge::parameters.body,
-  "The parameters for the merge operation."
 );
 @@doc(
   SqlContainerGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,

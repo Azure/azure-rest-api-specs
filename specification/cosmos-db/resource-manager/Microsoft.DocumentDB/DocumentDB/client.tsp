@@ -85,17 +85,6 @@ namespace Customizations;
   "java"
 );
 
-@@clientName(
-  ClusterResources.invokeCommandAsync,
-  "invokeCommandAsyncResource",
-  "java"
-);
-@@clientName(
-  ClusterResources.getCommandAsync,
-  "getCommandAsyncResource",
-  "java"
-);
-
 @@clientName(ServerVersion.Three2, "THREE_TWO", "java");
 @@clientName(ServerVersion.Three6, "THREE_SIX", "java");
 @@clientName(ServerVersion.Four0, "FOUR_ZERO", "java");
@@ -609,7 +598,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 @@clientName(CompositePath, "CosmosDBCompositePath", "csharp");
 @@clientName(ConnectionError, "CassandraConnectionError", "csharp");
 @@clientName(ContainerPartitionKey, "CosmosDBContainerPartitionKey", "csharp");
-@@clientName(CopyJobProperties.error, "ErrorResponse", "csharp");
 @@clientName(CreateMode, "CosmosDBAccountCreateMode", "csharp");
 @@clientName(
   DatabaseAccountConnectionString,
@@ -1255,12 +1243,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "csharp"
 );
 @@clientName(
-  ThroughputPoolAccountResource,
-  "CosmosDBThroughputPoolAccount",
-  "csharp"
-);
-@@clientName(ThroughputPoolResource, "CosmosDBThroughputPool", "csharp");
-@@clientName(
   ThroughputSettingsResource,
   "ThroughputSettingsResourceInfo",
   "csharp"
@@ -1565,12 +1547,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "csharp"
 );
 @@clientName(CommandPublicResource.readWrite, "isReadWrite", "csharp");
-@@clientName(SupportedActions, "CosmosDBChaosFaultSupportedActions", "csharp");
-@@clientName(chaosFaultResource, "ChaosFault", "csharp");
-@@clientName(GraphResourceGetResults, "CosmosDBGraph", "csharp");
-@@clientName(CassandraViewGetResults, "CassandraView", "csharp");
-@@clientName(CopyJobGetResults, "CosmosDBCopyJob", "csharp");
-@@clientName(DataTransferJobGetResults, "DataTransferJob", "csharp");
 @@clientName(
   PrivateEndpointConnection,
   "CosmosDBPrivateEndpointConnection",
@@ -1596,8 +1572,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 @@clientName(GremlinRoleDefinitionResource, "GremlinRoleDefinition", "csharp");
 @@clientName(MongoMIRoleAssignmentResource, "MongoMIRoleAssignment", "csharp");
 @@clientName(MongoMIRoleDefinitionResource, "MongoMIRoleDefinition", "csharp");
-@@clientName(GarnetClusterResource, "GarnetCluster", "csharp");
-@@clientName(FleetAnalyticsResource, "FleetAnalytics", "csharp");
 @@clientName(
   ThroughputSettingsGetResultsOperationGroup,
   "CosmosDBSqlDatabaseThroughputSetting",
@@ -1616,11 +1590,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 @@clientName(
   CassandraResourcesThroughputSettingsGetResultsOperationGroup,
   "CassandraTableThroughputSetting",
-  "csharp"
-);
-@@clientName(
-  ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup,
-  "CassandraViewThroughputSetting",
   "csharp"
 );
 @@clientName(
@@ -1681,37 +1650,11 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "csharp"
 );
 @@clientName(
-  GraphResourceCreateUpdateParameters,
-  "CosmosDBGraphCreateOrUpdateContent",
-  "csharp"
-);
-@@clientName(
   NotebookWorkspaceCreateUpdateParameters,
   "NotebookWorkspaceCreateOrUpdateContent",
   "csharp"
 );
-@@clientName(
-  RetrieveThroughputParameters,
-  "RetrieveThroughputContent",
-  "csharp"
-);
-@@clientName(
-  RedistributeThroughputParameters,
-  "RedistributeThroughputContent",
-  "csharp"
-);
 @@clientName(MergeParameters, "MergeContent", "csharp");
-@@clientName(CreateJobRequest, "CosmosDBJobCreateContent", "csharp");
-@@clientName(
-  GraphResourceGetPropertiesOptions,
-  "CosmosDBGraphConfig",
-  "csharp"
-);
-@@clientName(
-  CassandraViewGetPropertiesOptions,
-  "CassandraViewConfig",
-  "csharp"
-);
 @@clientName(ARMProxyResource, "CosmosDBProxyResource", "csharp");
 @@clientName(ARMResourceProperties, "ArmResourceProperties", "csharp");
 @@clientName(
@@ -1731,10 +1674,8 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@clientName(CommandAsyncPostBody, "CassandraAsyncCommandContent", "csharp");
 @@clientName(EnableFullTextQuery, "CosmosDBFullTextQueryState", "csharp");
-@@clientName(CopyJobProperties, "CosmosDBCopyJobProperties", "csharp");
 @@clientName(BaseCopyJobProperties, "CosmosDBCopyJobBaseProperties", "csharp");
 @@clientName(BaseCopyJobTask, "CosmosDBCopyJobBaseTask", "csharp");
-@@clientName(PhysicalPartitionId, "CosmosDBPhysicalPartitionId", "csharp");
 @@clientName(
   physicalPartitionStorageInfo,
   "CosmosDBPhysicalPartitionStorageInfo",
@@ -1750,17 +1691,7 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "CosmosDBPhysicalPartitionThroughputInfo",
   "csharp"
 );
-@@clientName(
-  PhysicalPartitionThroughputInfoResult,
-  "CosmosDBPhysicalPartitionThroughputResult",
-  "csharp"
-);
 @@clientName(CommandAsyncPostBody.readWrite, "isReadWrite", "csharp");
-@@clientName(
-  GarnetClusterResourceProperties.availabilityZone,
-  "isAvailabilityZoneEnabled",
-  "csharp"
-);
 @@clientName(
   CapacityModeChangeTransitionState.capacityModeTransitionBeginTimestamp,
   "capacityModeTransitionBeganOn",
@@ -1779,8 +1710,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 @@clientName(BackupResource.backupStartTimestamp, "backupStartedOn", "csharp");
 @@clientName(BackupResource.backupStopTimestamp, "backupStoppedOn", "csharp");
 @@clientName(BackupResource.backupExpiryTimestamp, "backupExpiresOn", "csharp");
-@@clientName(GraphResource.id, "graphName", "csharp");
-
 @@responseAsBool(DatabaseAccountsOperationGroup.checkNameExists, "csharp");
 
 @@alternateType(
@@ -1790,11 +1719,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@alternateType(
   GremlinGraphGetResults.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp"
-);
-@@alternateType(
-  GraphResourceGetResults.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -1840,11 +1764,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@alternateType(
   CassandraTableGetResults.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp"
-);
-@@alternateType(
-  CassandraViewGetResults.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -1910,11 +1829,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@alternateType(
   ClusterResourceProperties.delegatedManagementSubnetId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(
-  ThroughputPoolAccountProperties.accountResourceIdentifier,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -1985,16 +1899,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@alternateType(
   CassandraTableGetResults.location,
-  Azure.Core.azureLocation,
-  "csharp"
-);
-@@alternateType(
-  CassandraViewGetResults.location,
-  Azure.Core.azureLocation,
-  "csharp"
-);
-@@alternateType(
-  GraphResourceGetResults.location,
   Azure.Core.azureLocation,
   "csharp"
 );
@@ -2130,12 +2034,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(
-  ThroughputPoolAccountProperties.accountLocation,
-  Azure.Core.azureLocation,
-  "csharp"
-);
-
 @@usage(
   SqlDedicatedGatewayServiceResourceProperties,
   Azure.ClientGenerator.Core.Usage.input,
@@ -2478,18 +2376,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.hierarchyBuilding(
-  CassandraViewGetResults,
-  Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.hierarchyBuilding(
-  GraphResourceGetResults,
-  Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.hierarchyBuilding(
   GremlinDatabaseGetResults,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
@@ -2781,19 +2667,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@usage(
   CassandraTableCreateUpdateParameters,
-
-    | Azure.ClientGenerator.Core.Usage.input
-    | Azure.ClientGenerator.Core.Usage.output,
-  "csharp"
-);
-
-@@clientName(
-  CassandraViewCreateUpdateParameters,
-  "CassandraViewCreateOrUpdateContent",
-  "csharp"
-);
-@@usage(
-  CassandraViewCreateUpdateParameters,
 
     | Azure.ClientGenerator.Core.Usage.input
     | Azure.ClientGenerator.Core.Usage.output,

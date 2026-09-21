@@ -125,38 +125,6 @@ interface ThroughputSettingsGetResultsOperationGroup {
           Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
-
-  /**
-   * Retrieve throughput distribution for an Azure Cosmos DB SQL database
-   */
-  @added(Versions.v2026_04_01_preview)
-  @action("retrieveThroughputDistribution")
-  sqlDatabaseRetrieveThroughputDistribution is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
-    ThroughputSettingsGetResults,
-    RetrieveThroughputParameters,
-    PhysicalPartitionThroughputInfoResult,
-    Response =
-      | ArmResponse<PhysicalPartitionThroughputInfoResult>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
-          Azure.Core.Foundations.RetryAfterHeader>,
-    OverrideErrorType = CloudError
-  >;
-
-  /**
-   * Redistribute throughput for an Azure Cosmos DB SQL database
-   */
-  @added(Versions.v2026_04_01_preview)
-  @action("redistributeThroughput")
-  sqlDatabaseRedistributeThroughput is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
-    ThroughputSettingsGetResults,
-    RedistributeThroughputParameters,
-    PhysicalPartitionThroughputInfoResult,
-    Response =
-      | ArmResponse<PhysicalPartitionThroughputInfoResult>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
-          Azure.Core.Foundations.RetryAfterHeader>,
-    OverrideErrorType = CloudError
-  >;
 }
 alias SqlResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
@@ -242,36 +210,6 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
     Response =
       | ArmResponse<ThroughputSettingsGetResults>
       | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults>>,
-    OverrideErrorType = CloudError
-  >;
-
-  /**
-   * Retrieve throughput distribution for an Azure Cosmos DB SQL container
-   */
-  @added(Versions.v2026_04_01_preview)
-  @action("retrieveThroughputDistribution")
-  sqlContainerRetrieveThroughputDistribution is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
-    ThroughputSettingsGetResults,
-    RetrieveThroughputParameters,
-    PhysicalPartitionThroughputInfoResult,
-    Response =
-      | ArmResponse<PhysicalPartitionThroughputInfoResult>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult>>,
-    OverrideErrorType = CloudError
-  >;
-
-  /**
-   * Redistribute throughput for an Azure Cosmos DB SQL container
-   */
-  @added(Versions.v2026_04_01_preview)
-  @action("redistributeThroughput")
-  sqlContainerRedistributeThroughput is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
-    ThroughputSettingsGetResults,
-    RedistributeThroughputParameters,
-    PhysicalPartitionThroughputInfoResult,
-    Response =
-      | ArmResponse<PhysicalPartitionThroughputInfoResult>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult>>,
     OverrideErrorType = CloudError
   >;
 }
@@ -361,38 +299,6 @@ interface MongoDBResources {
           Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
-
-  /**
-   * Retrieve throughput distribution for an Azure Cosmos DB MongoDB database
-   */
-  @added(Versions.v2026_04_01_preview)
-  @action("retrieveThroughputDistribution")
-  mongoDBDatabaseRetrieveThroughputDistribution is MongoDBResourceOps.ActionAsync<
-    ThroughputSettingsGetResults,
-    RetrieveThroughputParameters,
-    PhysicalPartitionThroughputInfoResult,
-    Response =
-      | ArmResponse<PhysicalPartitionThroughputInfoResult>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
-          Azure.Core.Foundations.RetryAfterHeader>,
-    OverrideErrorType = CloudError
-  >;
-
-  /**
-   * Redistribute throughput for an Azure Cosmos DB MongoDB database
-   */
-  @added(Versions.v2026_04_01_preview)
-  @action("redistributeThroughput")
-  mongoDBDatabaseRedistributeThroughput is MongoDBResourceOps.ActionAsync<
-    ThroughputSettingsGetResults,
-    RedistributeThroughputParameters,
-    PhysicalPartitionThroughputInfoResult,
-    Response =
-      | ArmResponse<PhysicalPartitionThroughputInfoResult>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
-          Azure.Core.Foundations.RetryAfterHeader>,
-    OverrideErrorType = CloudError
-  >;
 }
 alias MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
@@ -453,39 +359,6 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
       | ArmResourceUpdatedResponse<ThroughputSettingsGetResults>
       | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
           Azure.Core.Foundations.RetryAfterHeader>
-  >;
-
-  /**
-   * Retrieve throughput distribution for an Azure Cosmos DB MongoDB container
-   */
-  @added(Versions.v2026_04_01_preview)
-  @action("retrieveThroughputDistribution")
-  mongoDBContainerRetrieveThroughputDistribution is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
-    ThroughputSettingsGetResults,
-    RetrieveThroughputParameters,
-    PhysicalPartitionThroughputInfoResult,
-    Response =
-      | ArmResponse<PhysicalPartitionThroughputInfoResult>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
-          Azure.Core.Foundations.RetryAfterHeader>,
-    OverrideErrorType = CloudError
-  >;
-
-  /**
-   * Redistribute throughput for an Azure Cosmos DB MongoDB container
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2026_04_01_preview)
-  @action("redistributeThroughput")
-  mongoDBContainerRedistributeThroughput is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
-    ThroughputSettingsGetResults,
-    RedistributeThroughputParameters,
-    PhysicalPartitionThroughputInfoResult,
-    Response =
-      | ArmResponse<PhysicalPartitionThroughputInfoResult>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
-          Azure.Core.Foundations.RetryAfterHeader>,
-    OverrideErrorType = CloudError
   >;
 
   /**
@@ -813,58 +686,6 @@ alias ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps = Azur
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "CassandraViewThroughputSetting"
 >;
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_04_01_preview)
-@armResourceOperations(#{ omitTags: true })
-interface ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup {
-  /**
-   * Gets the RUs per second of the Cassandra view under an existing Azure Cosmos DB database account with the provided name.
-   */
-  getCassandraViewThroughput is ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps.Read<ThroughputSettingsGetResults>;
-
-  /**
-   * Update RUs per second of an Azure Cosmos DB Cassandra view
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  updateCassandraViewThroughput is ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
-    ThroughputSettingsGetResults,
-    Request = ThroughputSettingsUpdateParameters,
-    Response =
-      | ArmResourceUpdatedResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>
-  >;
-
-  /**
-   * Migrate an Azure Cosmos DB Cassandra view from manual throughput to autoscale
-   */
-  @action("migrateToAutoscale")
-  migrateCassandraViewToAutoscale is ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
-    ThroughputSettingsGetResults,
-    void,
-    ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
-    OverrideErrorType = CloudError
-  >;
-
-  /**
-   * Migrate an Azure Cosmos DB Cassandra view from autoscale to manual throughput
-   */
-  @action("migrateToManualThroughput")
-  migrateCassandraViewToManualThroughput is ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
-    ThroughputSettingsGetResults,
-    void,
-    ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
-    OverrideErrorType = CloudError
-  >;
-}
 alias GremlinResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -1049,48 +870,16 @@ interface GremlinResourcesThroughputSettingsGetResultsOperationGroup {
   "The parameters to provide for the RUs per second of the current SQL database."
 );
 @@doc(
-  ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRetrieveThroughputDistribution::parameters.body,
-  "The parameters to provide for retrieving throughput distribution for the current SQL database."
-);
-@@doc(
-  ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRedistributeThroughput::parameters.body,
-  "The parameters to provide for redistributing throughput for the current SQL database."
-);
-@@doc(
   SqlResourcesThroughputSettingsGetResultsOperationGroup.updateSqlContainerThroughput::parameters.resource,
   "The parameters to provide for the RUs per second of the current SQL container."
-);
-@@doc(
-  SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRetrieveThroughputDistribution::parameters.body,
-  "The parameters to provide for retrieving throughput distribution for the current SQL container."
-);
-@@doc(
-  SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRedistributeThroughput::parameters.body,
-  "The parameters to provide for redistributing throughput for the current SQL container."
 );
 @@doc(
   MongoDBResources.updateMongoDBDatabaseThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current MongoDB database."
 );
 @@doc(
-  MongoDBResources.mongoDBDatabaseRetrieveThroughputDistribution::parameters.body,
-  "The parameters to provide for retrieving throughput distribution for the current MongoDB database."
-);
-@@doc(
-  MongoDBResources.mongoDBDatabaseRedistributeThroughput::parameters.body,
-  "The parameters to provide for redistributing throughput for the current MongoDB database."
-);
-@@doc(
   MongoDBResourcesThroughputSettingsGetResultsOperationGroup.updateMongoDBCollectionThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current MongoDB collection."
-);
-@@doc(
-  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRetrieveThroughputDistribution::parameters.body,
-  "The parameters to provide for retrieving throughput distribution for the current MongoDB container."
-);
-@@doc(
-  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRedistributeThroughput::parameters.body,
-  "The parameters to provide for redistributing throughput for the current MongoDB container."
 );
 @@doc(
   TableResources.updateTableThroughput::parameters.resource,
@@ -1103,10 +892,6 @@ interface GremlinResourcesThroughputSettingsGetResultsOperationGroup {
 @@doc(
   CassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraTableThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current Cassandra table."
-);
-@@doc(
-  ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraViewThroughput::parameters.resource,
-  "The RUs per second of the parameters to provide for the current Cassandra view."
 );
 @@doc(
   GremlinResources.updateGremlinDatabaseThroughput::parameters.resource,
