@@ -1,0 +1,476 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TypeSpec Assessment",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "comparison",
+    "confidence",
+    "safety",
+    "dimensions",
+    "blockers"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "pullRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["number", "url"],
+      "properties": {
+        "number": { "type": "integer", "minimum": 1 },
+        "url": { "type": "string", "format": "uri" }
+      }
+    },
+    "comparison": {
+      "type": "object",
+      "required": ["baseRef", "baseCommit", "headCommit", "workingTree"],
+      "properties": {
+        "baseRef": { "type": "string" },
+        "baseCommit": { "type": "string" },
+        "headCommit": { "type": "string" },
+        "workingTree": { "type": "object" }
+      }
+    },
+    "confidence": { "enum": ["high", "medium", "low"] },
+    "safety": {
+      "type": "object",
+      "required": ["scope", "status"],
+      "properties": {
+        "scope": { "const": "rest-and-downstream-only" },
+        "status": { "enum": ["passed", "failed", "not-assessed"] }
+      }
+    },
+    "dimensions": {
+      "type": "object",
+      "required": [
+        "semantic",
+        "rest",
+        "downstream",
+        "compliance",
+        "documentQuality"
+      ],
+      "properties": {
+        "semantic": {
+          "type": "object",
+          "properties": {
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "referenceCategories": { "$ref": "compliance-search-evidence.schema.json#/$defs/referenceCategories" },
+                  "referenceCategoryEvidence": { "type": "array", "items": { "type": "object" } }
+                }
+              }
+            }
+          }
+        },
+        "compliance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "summary",
+            "coverage",
+            "intentAssessments",
+            "findings",
+            "retrievalFailures",
+            "blockers"
+          ],
+          "properties": {
+            "status": { "enum": ["passed", "failed", "not-assessed"] },
+            "summary": { "type": "string", "minLength": 1 },
+            "coverage": {
+              "type": "object",
+              "required": [
+                "semanticIntentCount",
+                "assessedIntentCount",
+                "selectedDocumentCount",
+                "unassessedIntentIds"
+              ]
+            },
+            "intentAssessments": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["semanticIntentId", "referenceCategories", "requiredCatalogIds", "selectedCatalogIds", "reviewedCatalogIds", "guidanceRouting", "queryProfile", "decision", "blockers"],
+                "properties": {
+                  "referenceCategories": { "$ref": "compliance-search-evidence.schema.json#/$defs/referenceCategories" },
+                  "requiredCatalogIds": { "$ref": "agent-decisions.schema.json#/$defs/catalogIds" },
+                  "selectedCatalogIds": { "$ref": "agent-decisions.schema.json#/$defs/catalogIds" },
+                  "reviewedCatalogIds": { "$ref": "agent-decisions.schema.json#/$defs/catalogIds" },
+                  "guidanceRouting": { "type": "object", "required": ["mandatoryCatalogIds", "selections", "discoveryRequests"] },
+                  "queryProfile": { "type": "object" },
+                  "decision": { "enum": ["applicable-pass", "applicable-fail", "no-applicable-guidance", "not-assessed"] },
+                  "blockers": { "type": "array", "items": { "type": "string" } }
+                }
+              }
+            },
+            "sharedSearch": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["documents", "documentSelections", "discoveryResults", "additionalSelections"],
+              "properties": {
+                "documents": { "type": "array", "items": { "type": "object", "required": ["catalogId", "catalogOrder", "title", "canonicalUrl", "retrieval", "retrievedAt", "contentHash", "retrievalSource", "bytes", "guidance", "noRelevantGuidance"], "properties": { "retrieval": { "$ref": "compliance-search-evidence.schema.json#/$defs/document/properties/retrieval" } } } },
+                "documentSelections": { "$ref": "compliance-search-evidence.schema.json#/properties/documentSelections" },
+                "discoveryResults": { "$ref": "agent-decisions.schema.json#/properties/discoveryResults" },
+                "additionalSelections": { "$ref": "agent-decisions.schema.json#/properties/additionalSelections" }
+              }
+            },
+            "findings": { "type": "array" },
+            "retrievalFailures": { "type": "array" },
+            "blockers": { "type": "array" }
+          }
+        },
+        "documentQuality": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["status", "summary"],
+              "properties": {
+                "status": { "const": "not-assessed" },
+                "summary": { "$ref": "#/$defs/nonemptyString" }
+              }
+            },
+            { "$ref": "#/$defs/documentQuality" },
+            { "$ref": "#/$defs/documentCompleteness" }
+          ]
+        }
+      }
+    },
+    "blockers": { "type": "array" }
+  },
+  "$defs": {
+    "nonemptyString": { "type": "string", "pattern": "\\S" },
+    "ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/nonemptyString" }
+    },
+    "documentSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["doc", "declaration", "source"],
+      "properties": {
+        "doc": { "type": "string" },
+        "documentationOrigin": { "const": "inherited" },
+        "declaration": { "$ref": "#/$defs/nonemptyString" },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "revision", "startLine", "endLine"],
+          "properties": {
+            "path": { "$ref": "#/$defs/nonemptyString" },
+            "revision": { "enum": ["base", "current"] },
+            "startLine": { "type": "integer", "minimum": 1 },
+            "endLine": { "type": "integer", "minimum": 1 }
+          }
+        }
+      }
+    },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "sourceChangeId", "qualifiedName", "kind", "before", "after"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^document-" },
+        "sourceChangeId": { "type": "string", "pattern": "^source-" },
+        "qualifiedName": { "$ref": "#/$defs/nonemptyString" },
+        "kind": { "$ref": "#/$defs/nonemptyString" },
+        "before": {
+          "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/documentSnapshot" }]
+        },
+        "after": {
+          "$ref": "#/$defs/documentSnapshot",
+          "properties": { "doc": { "$ref": "#/$defs/nonemptyString" } }
+        }
+      }
+    },
+    "documentCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reviewUnitId", "documentId", "check", "decision", "rationale"],
+      "properties": {
+        "reviewUnitId": { "type": "string", "pattern": "^semantic-" },
+        "documentId": { "type": "string", "pattern": "^document-" },
+        "check": { "enum": ["description", "correctness", "meaning"] },
+        "decision": { "enum": ["pass", "fail", "not-assessed"] },
+        "rationale": { "$ref": "#/$defs/nonemptyString" },
+        "title": { "$ref": "#/$defs/nonemptyString" },
+        "expected": { "$ref": "#/$defs/nonemptyString" },
+        "docQuote": { "$ref": "#/$defs/nonemptyString" }
+      },
+      "allOf": [{
+        "if": { "properties": { "decision": { "const": "fail" } } },
+        "then": { "required": ["title", "expected", "docQuote"] }
+      }]
+    },
+    "documentFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "reviewUnitId", "documentId", "check", "title", "expected",
+        "actual", "rationale", "docQuote", "semanticIntentIds", "sources", "document"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^document-finding-" },
+        "reviewUnitId": { "type": "string", "pattern": "^semantic-" },
+        "documentId": { "type": "string", "pattern": "^document-" },
+        "check": { "enum": ["description", "correctness", "meaning"] },
+        "title": { "$ref": "#/$defs/nonemptyString" },
+        "expected": { "$ref": "#/$defs/nonemptyString" },
+        "actual": { "type": "string" },
+        "rationale": { "$ref": "#/$defs/nonemptyString" },
+        "docQuote": { "$ref": "#/$defs/nonemptyString" },
+        "semanticIntentIds": { "$ref": "#/$defs/ids", "minItems": 1, "maxItems": 1 },
+        "sources": { "type": "array", "minItems": 1, "maxItems": 1, "items": { "type": "object" } },
+        "document": { "$ref": "#/$defs/document" }
+      }
+    },
+    "documentationDeclaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "declarationId",
+        "qualifiedName",
+        "kind",
+        "documentationPresent",
+        "source",
+        "sourceChangeId"
+      ],
+      "properties": {
+        "declarationId": { "type": "string", "pattern": "^declaration-" },
+        "qualifiedName": { "$ref": "#/$defs/nonemptyString" },
+        "kind": { "$ref": "#/$defs/nonemptyString" },
+        "documentationPresent": { "type": "boolean" },
+        "sourceChangeId": { "type": "string", "pattern": "^source-" },
+        "source": { "type": "object" }
+      }
+    },
+    "documentCompletenessFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "reviewUnitId",
+        "declarationId",
+        "title",
+        "expected",
+        "actual",
+        "rationale",
+        "semanticIntentIds",
+        "sources",
+        "declaration"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^document-finding-" },
+        "reviewUnitId": { "type": "string", "pattern": "^semantic-" },
+        "declarationId": { "type": "string", "pattern": "^declaration-" },
+        "title": { "$ref": "#/$defs/nonemptyString" },
+        "expected": { "$ref": "#/$defs/nonemptyString" },
+        "actual": { "$ref": "#/$defs/nonemptyString" },
+        "rationale": { "$ref": "#/$defs/nonemptyString" },
+        "semanticIntentIds": {
+          "$ref": "#/$defs/ids",
+          "minItems": 1,
+          "maxItems": 1
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": { "type": "object" }
+        },
+        "declaration": { "$ref": "#/$defs/documentationDeclaration" }
+      }
+    },
+    "documentCompleteness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assessmentVersion",
+        "status",
+        "summary",
+        "coverage",
+        "intentAssessments",
+        "findings",
+        "blockers"
+      ],
+      "properties": {
+        "assessmentVersion": { "const": 4 },
+        "status": {
+          "enum": ["passed", "failed", "not-assessed", "not-applicable"]
+        },
+        "summary": { "$ref": "#/$defs/nonemptyString" },
+        "coverage": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "semanticIntentCount",
+            "assessedIntentCount",
+            "declarationCount",
+            "documentedDeclarationCount",
+            "missingDeclarationCount",
+            "unassessedIntentIds",
+            "notApplicableIntentIds"
+          ],
+          "properties": {
+            "semanticIntentCount": { "type": "integer", "minimum": 0 },
+            "assessedIntentCount": { "type": "integer", "minimum": 0 },
+            "declarationCount": { "type": "integer", "minimum": 0 },
+            "documentedDeclarationCount": { "type": "integer", "minimum": 0 },
+            "missingDeclarationCount": { "type": "integer", "minimum": 0 },
+            "unassessedIntentIds": { "$ref": "#/$defs/ids" },
+            "notApplicableIntentIds": { "$ref": "#/$defs/ids" }
+          }
+        },
+        "intentAssessments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["reviewUnitId", "status", "declarations"],
+            "properties": {
+              "reviewUnitId": { "type": "string", "pattern": "^semantic-" },
+              "status": {
+                "enum": ["passed", "failed", "not-assessed", "not-applicable"]
+              },
+              "reason": { "$ref": "#/$defs/nonemptyString" },
+              "declarations": {
+                "type": "array",
+                "items": { "$ref": "#/$defs/documentationDeclaration" }
+              }
+            }
+          }
+        },
+        "findings": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/documentCompletenessFinding" }
+        },
+        "blockers": { "type": "array" }
+      }
+    },
+    "documentQuality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "summary", "coverage", "intentAssessments", "findings", "blockers"],
+      "properties": {
+        "assessmentVersion": { "enum": [2, 3] },
+        "status": { "enum": ["passed", "failed", "not-assessed", "not-applicable"] },
+        "summary": { "$ref": "#/$defs/nonemptyString" },
+        "coverage": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "semanticIntentCount", "assessedIntentCount", "documentCount",
+            "assessedDocumentCount", "checkCount", "assessedCheckCount",
+            "unassessedIntentIds", "notApplicableIntentIds"
+          ],
+          "properties": {
+            "semanticIntentCount": { "type": "integer", "minimum": 0 },
+            "assessedIntentCount": { "type": "integer", "minimum": 0 },
+            "documentCount": { "type": "integer", "minimum": 0 },
+            "assessedDocumentCount": { "type": "integer", "minimum": 0 },
+            "checkCount": { "type": "integer", "minimum": 0 },
+            "assessedCheckCount": { "type": "integer", "minimum": 0 },
+            "inheritedDocumentCount": { "type": "integer", "minimum": 0 },
+            "unassessedIntentIds": { "$ref": "#/$defs/ids" },
+            "notApplicableIntentIds": { "$ref": "#/$defs/ids" }
+          }
+        },
+        "intentAssessments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["reviewUnitId", "status", "documents", "checks"],
+            "properties": {
+              "reviewUnitId": { "type": "string", "pattern": "^semantic-" },
+              "status": { "enum": ["passed", "failed", "not-assessed", "not-applicable"] },
+              "reason": { "$ref": "#/$defs/nonemptyString" },
+              "documents": { "type": "array", "items": { "$ref": "#/$defs/document" } },
+              "inheritedDocumentIds": { "$ref": "#/$defs/ids", "minItems": 1 },
+              "checks": { "type": "array", "items": { "$ref": "#/$defs/documentCheck" } }
+            },
+            "allOf": [
+              {
+                "if": { "properties": { "status": { "const": "not-applicable" } } },
+                "then": {
+                  "required": ["reason"],
+                  "properties": {
+                    "documents": { "maxItems": 0 },
+                    "checks": { "maxItems": 0 }
+                  }
+                }
+              },
+              {
+                "if": { "properties": { "checks": { "maxItems": 0 } } },
+                "then": { "required": ["reason"] }
+              }
+            ]
+          }
+        },
+        "findings": { "type": "array", "items": { "$ref": "#/$defs/documentFinding" } },
+        "blockers": { "type": "array" }
+      },
+      "allOf": [{
+        "if": { "required": ["assessmentVersion"] },
+        "then": {
+          "properties": {
+            "intentAssessments": { "items": { "properties": {
+              "checks": { "items": { "properties": { "check": { "const": "description" } } } }
+            } } },
+            "findings": { "items": { "properties": { "check": { "const": "description" } } } }
+          }
+        },
+        "else": {
+          "properties": {
+            "status": { "enum": ["passed", "failed", "not-assessed"] },
+            "intentAssessments": { "items": { "properties": {
+              "checks": { "items": { "properties": { "check": { "enum": ["correctness", "meaning"] } } } }
+            } } },
+            "findings": { "items": { "properties": { "check": { "enum": ["correctness", "meaning"] } } } }
+          }
+        }
+      }, {
+        "if": {
+          "required": ["assessmentVersion"],
+          "properties": { "assessmentVersion": { "const": 3 } }
+        },
+        "then": {
+          "properties": {
+            "coverage": { "required": ["inheritedDocumentCount"] },
+            "intentAssessments": { "items": { "properties": {
+              "documents": { "items": { "properties": {
+                "after": { "not": { "required": ["documentationOrigin"] } }
+              } } }
+            } } },
+            "findings": { "items": { "properties": {
+              "document": { "properties": {
+                "after": { "not": { "required": ["documentationOrigin"] } }
+              } }
+            } } }
+          }
+        },
+        "else": {
+          "properties": {
+            "coverage": { "not": { "required": ["inheritedDocumentCount"] } },
+            "intentAssessments": { "items": { "not": { "required": ["inheritedDocumentIds"] }, "properties": {
+              "documents": { "items": { "$ref": "#/$defs/localDocument" } }
+            } } },
+            "findings": { "items": { "properties": {
+              "document": { "$ref": "#/$defs/localDocument" }
+            } } }
+          }
+        }
+      }]
+    },
+    "localDocument": {
+      "properties": {
+        "before": { "not": { "type": "object", "required": ["documentationOrigin"] } },
+        "after": { "not": { "required": ["documentationOrigin"] } }
+      }
+    }
+  }
+}

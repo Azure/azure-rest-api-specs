@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Intent-scoped Azure Guidelines Search Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "queryProfiles", "documentSelections", "documents", "discoveryResults", "additionalSelections", "retrievalAttempts", "blockers", "inputAccounting"],
+  "properties": {
+    "schemaVersion": { "const": 3 },
+    "queryProfiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["reviewUnitId", "queryProfile"],
+        "properties": {
+          "reviewUnitId": { "$ref": "#/$defs/intentId" },
+          "queryProfile": { "type": "object" }
+        }
+      }
+    },
+    "documentSelections": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/documentSelection" }
+    },
+    "documents": { "type": "array", "items": { "$ref": "#/$defs/document" } },
+    "discoveryResults": {
+      "type": "array",
+      "items": { "$ref": "agent-decisions.schema.json#/$defs/discoveryResult" }
+    },
+    "additionalSelections": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "agent-decisions.schema.json#/$defs/additionalSelection" }
+    },
+    "retrievalAttempts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["catalogId", "canonicalUrl", "status", "error"],
+        "properties": {
+          "catalogId": { "$ref": "#/$defs/catalogId" },
+          "canonicalUrl": { "type": "string", "format": "uri" },
+          "status": { "const": "failed" },
+          "error": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "blockers": { "$ref": "agent-decisions.schema.json#/properties/searchBlockers" },
+    "inputAccounting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["documentSelectionCount", "uniqueDocumentsSelected", "documentsFetched", "documentsReused", "documentBytesFetched", "documentBytesProcessed", "discoveryOutcomeCount", "guidanceExcerptsRetained", "guidanceExcerptBytesRetained"],
+      "properties": {
+        "documentSelectionCount": { "$ref": "#/$defs/count" },
+        "uniqueDocumentsSelected": { "$ref": "#/$defs/count" },
+        "documentsFetched": { "$ref": "#/$defs/count" },
+        "documentsReused": { "$ref": "#/$defs/count" },
+        "documentBytesFetched": { "$ref": "#/$defs/count" },
+        "documentBytesProcessed": { "$ref": "#/$defs/count" },
+        "discoveryOutcomeCount": { "$ref": "#/$defs/count" },
+        "guidanceExcerptsRetained": { "$ref": "#/$defs/count" },
+        "guidanceExcerptBytesRetained": { "$ref": "#/$defs/count" }
+      }
+    }
+  },
+  "$defs": {
+    "intentId": { "type": "string", "pattern": "^semantic-" },
+    "catalogId": { "type": "string", "pattern": "^catalog-entry-[0-9a-f]{12}$" },
+    "count": { "type": "integer", "minimum": 0 },
+    "referenceCategories": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "enum": ["arm-resource-type", "arm-resource-operation", "api-versioning", "long-running-operation", "paging", "models-and-enums", "decorators", "warnings"] }
+    },
+    "documentSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reviewUnitId", "catalogId", "basis"],
+      "properties": {
+        "reviewUnitId": { "$ref": "#/$defs/intentId" },
+        "catalogId": { "$ref": "#/$defs/catalogId" },
+        "basis": { "enum": ["category-rule", "discovery", "linked-reference"] },
+        "category": { "enum": ["arm-resource-type", "arm-resource-operation", "api-versioning", "long-running-operation", "paging", "models-and-enums", "decorators", "warnings"] },
+        "ruleId": { "type": "string", "minLength": 1 },
+        "evidenceSetId": { "type": "string", "minLength": 1 },
+        "requestId": { "type": "string", "pattern": "^discovery-request-" },
+        "trigger": { "type": "string", "minLength": 1 },
+        "rationale": { "type": "string", "minLength": 1 },
+        "sourceCatalogId": { "$ref": "#/$defs/catalogId" },
+        "sourceSection": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "basis": { "const": "category-rule" } } },
+          "then": { "required": ["category", "ruleId"] }
+        },
+        {
+          "if": { "properties": { "basis": { "const": "discovery" } } },
+          "then": { "required": ["requestId", "trigger", "rationale"] }
+        },
+        {
+          "if": { "properties": { "basis": { "const": "linked-reference" } } },
+          "then": { "required": ["sourceCatalogId", "sourceSection", "trigger", "rationale"] }
+        }
+      ]
+    },
+    "guidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["section", "excerpt", "queryTerms", "examples", "applicableDeclarationIds"],
+      "properties": {
+        "section": { "type": "string", "minLength": 1 },
+        "excerpt": { "type": "string", "minLength": 1 },
+        "queryTerms": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "examples": { "type": "array", "maxItems": 2, "items": { "type": "string", "minLength": 1 } },
+        "applicableDeclarationIds": {
+          "description": "Derived only from citing intent judgments. Empty for retained discovery context that is not normative evidence.",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^declaration-" }
+        }
+      }
+    },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["catalogId", "catalogOrder", "title", "canonicalUrl", "retrieval", "guidance", "noRelevantGuidance"],
+      "properties": {
+        "catalogId": { "$ref": "#/$defs/catalogId" },
+        "catalogOrder": { "type": "integer", "minimum": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "canonicalUrl": { "type": "string", "format": "uri" },
+        "retrieval": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "retrievedAt", "contentHash", "retrievalSource", "bytes"],
+          "properties": {
+            "status": { "const": "fetched" },
+            "retrievedAt": { "type": "string", "format": "date-time" },
+            "contentHash": { "type": "string", "pattern": "^sha256:[0-9a-fA-F]{64}$" },
+            "retrievalSource": { "enum": ["network", "session-reuse"] },
+            "bytes": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "guidance": { "type": "array", "items": { "$ref": "#/$defs/guidance" } },
+        "noRelevantGuidance": { "type": "boolean" }
+      },
+      "allOf": [{
+        "if": { "properties": { "noRelevantGuidance": { "const": true } } },
+        "then": { "properties": { "guidance": { "maxItems": 0 } } },
+        "else": { "properties": { "guidance": { "minItems": 1 } } }
+      }]
+    }
+  }
+}

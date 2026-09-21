@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TypeSpec Assessment Inference",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "results"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "requestId",
+          "reviewUnitId",
+          "hunkId",
+          "decision",
+          "rationale",
+          "candidates"
+        ],
+        "properties": {
+          "requestId": { "type": "string", "pattern": "^inference-request-" },
+          "reviewUnitId": { "type": "string", "pattern": "^semantic-" },
+          "hunkId": { "type": "string", "pattern": "^hunk-" },
+          "decision": {
+            "enum": ["candidates", "no-impact", "blocked"]
+          },
+          "rationale": { "type": "string", "minLength": 1 },
+          "candidates": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/candidate" }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": { "decision": { "const": "candidates" } }
+            },
+            "then": {
+              "properties": { "candidates": { "minItems": 1 } }
+            },
+            "else": {
+              "properties": { "candidates": { "maxItems": 0 } }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "dimension",
+        "rule",
+        "defaultSeverity",
+        "actual",
+        "expected",
+        "sourceChangeIds",
+        "hunkIds",
+        "operationIds",
+        "evidenceFactIds",
+        "reviewRequired"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^inferred-(rest|downstream)-"
+        },
+        "dimension": { "enum": ["rest", "downstream"] },
+        "rule": { "type": "string", "minLength": 1 },
+        "defaultSeverity": { "enum": ["high", "medium", "low"] },
+        "actual": { "type": "string", "minLength": 1 },
+        "expected": { "type": "string", "minLength": 1 },
+        "crossLanguageDefinitionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceChangeIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^source-" }
+        },
+        "hunkIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^hunk-" }
+        },
+        "operationIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "evidenceFactIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "reviewRequired": { "const": true }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "dimension": { "const": "downstream" } }
+          },
+          "then": { "required": ["crossLanguageDefinitionId"] }
+        }
+      ]
+    }
+  }
+}
