@@ -1,5 +1,7 @@
 # Contributing
 
+<!-- cspell:ignore Poli tocstop -->
+
 This file provides general guidance for developers that are creating or updating REST API definitions for Azure.
 
 ## Table of Contents

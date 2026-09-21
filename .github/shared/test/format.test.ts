@@ -79,6 +79,7 @@ describe("shared formatter", () => {
       ".github/shared/test/specification/input.json",
       ".github/shared/coverage/output.json",
       ".github/workflows/example.lock.yml",
+      // cspell:ignore agentics
       ".github/workflows/agentics-maintenance.yml",
       ".github/workflows/post-apiview.yml",
       ".github/instructions/example.instructions.md",
