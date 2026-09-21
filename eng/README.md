@@ -53,14 +53,6 @@ Below are code convention we strive to follow in `eng` directory:
 - CI installs the pinned pnpm version via `.github/actions/setup-node-install-deps`
   (which reads the `packageManager` field) and runs `pnpm ci`.
 
-## Type checking
-
-Tooling uses TypeScript 7's native compiler through the existing `tsc` command.
-Run `pnpm -C eng/tools build` to type-check all engineering tools and
-`pnpm -C .github lint:tsc` to type-check workflow scripts and shared utilities.
-These checks do not emit JavaScript; Node.js still executes the TypeScript sources
-directly using type stripping.
-
 ## Linting and formatting
 
 - Run `pnpm lint` from the repository root to lint the previously linted packages
