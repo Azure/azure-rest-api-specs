@@ -463,107 +463,25 @@ jobs:
           if-no-files-found: warn
           retention-days: 7
 
-      - name: Commit mitigation changes
+      - name: Get mitigation changed code
         if: steps.resolve-trigger.outputs.should-run == 'true'
-        id: commit-changes
+        id: get-changed-code
         shell: bash
         working-directory: repositories/azure-rest-api-specs
-        env:
-          PR_NUMBER: ${{ steps.resolve-trigger.outputs.pull-number || steps.read-trigger.outputs.pull-number }}
-          SDK_LANGUAGE: ${{ steps.resolve-trigger.outputs.sdk-language || steps.read-trigger.outputs.sdk-language }}
         run: |
           set -euo pipefail
-          if [[ -z "$(git status --porcelain)" ]]; then
-            echo "No mitigation changes were produced."
-            echo "has-changes=false" >> "$GITHUB_OUTPUT"
-            exit 0
+          git add --intent-to-add --all
+          changed_code="$(git diff --no-ext-diff --no-color)"
+          max_snippet_length=12000
+          if [[ ${#changed_code} -gt $max_snippet_length ]]; then
+            changed_code="${changed_code:0:$max_snippet_length}"$'\n... diff truncated.'
           fi
-
-          sdk_language="$(tr '[:upper:]' '[:lower:]' <<< "$SDK_LANGUAGE" | sed 's/[^a-z0-9-]/-/g')"
-          branch="sdk-breaking-change-mitigation-pr-${PR_NUMBER}-${sdk_language}-${GITHUB_RUN_ID}"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git switch -c "$branch"
-          git add --all
-          git commit -m "Mitigate SDK breaking changes"
-
-          echo "branch=$branch" >> "$GITHUB_OUTPUT"
-          echo "has-changes=true" >> "$GITHUB_OUTPUT"
-
-      - name: Create remote mitigation branch
-        if: steps.commit-changes.outputs.has-changes == 'true'
-        uses: actions/github-script@v9
-        env:
-          SOURCE_REPOSITORY: ${{ steps.resolve-pr-source.outputs.repository }}
-          SOURCE_SHA: ${{ steps.resolve-pr-source.outputs.sha }}
-          MITIGATION_BRANCH: ${{ steps.commit-changes.outputs.branch }}
-        with:
-          github-token: ${{ github.token }}
-          script: |
-            const [owner, repo] = process.env.SOURCE_REPOSITORY.split("/");
-            await github.rest.git.createRef({
-              owner,
-              repo,
-              ref: `refs/heads/${process.env.MITIGATION_BRANCH}`,
-              sha: process.env.SOURCE_SHA,
-            });
-
-      - name: Push mitigation changes
-        if: steps.commit-changes.outputs.has-changes == 'true'
-        shell: bash
-        working-directory: repositories/azure-rest-api-specs
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          SOURCE_REPOSITORY: ${{ steps.resolve-pr-source.outputs.repository }}
-          MITIGATION_BRANCH: ${{ steps.commit-changes.outputs.branch }}
-        run: |
-          set -euo pipefail
-          authorization="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w 0)"
-          git -c http.https://github.com/.extraheader="AUTHORIZATION: basic $authorization" \
-            push "https://github.com/$SOURCE_REPOSITORY.git" "HEAD:refs/heads/$MITIGATION_BRANCH"
-
-      - name: Create mitigation pull request
-        if: steps.commit-changes.outputs.has-changes == 'true'
-        id: create-mitigation-pull-request
-        uses: actions/github-script@v9
-        env:
-          SOURCE_REPOSITORY: ${{ steps.resolve-pr-source.outputs.repository }}
-          SOURCE_BRANCH: ${{ steps.resolve-pr-source.outputs.branch }}
-          MITIGATION_BRANCH: ${{ steps.commit-changes.outputs.branch }}
-          ISSUED_PR_NUMBER: ${{ steps.resolve-trigger.outputs.pull-number || steps.read-trigger.outputs.pull-number }}
-        with:
-          github-token: ${{ github.token }}
-          script: |
-            const [owner, repo] = process.env.SOURCE_REPOSITORY.split("/");
-            const { data: pull } = await github.rest.pulls.create({
-              owner,
-              repo,
-              base: process.env.SOURCE_BRANCH,
-              head: process.env.MITIGATION_BRANCH,
-              title: `Mitigate SDK breaking changes for #${process.env.ISSUED_PR_NUMBER}`,
-              body: `Automated SDK breaking-change mitigation for ${context.repo.owner}/${context.repo.repo}#${process.env.ISSUED_PR_NUMBER}.`,
-            });
-            const files = await github.paginate(github.rest.pulls.listFiles, {
-              owner,
-              repo,
-              pull_number: pull.number,
-              per_page: 100,
-            });
-            const changedCode = files
-              .map(({ filename, patch }) =>
-                patch
-                  ? [`diff --git a/${filename} b/${filename}`, patch].join("\n")
-                  : `${filename}: Diff unavailable; view the mitigation pull request.`,
-              )
-              .join("\n");
-            const maxSnippetLength = 12000;
-            const changedCodeSnippet =
-              changedCode.length > maxSnippetLength
-                ? `${changedCode.slice(0, maxSnippetLength)}\n... diff truncated; view the mitigation pull request for the complete changes.`
-                : changedCode;
-            core.info(`Created mitigation pull request: ${pull.html_url}`);
-            core.setOutput("changed-code", changedCodeSnippet);
-            core.setOutput("pull-request-url", pull.html_url);
+          delimiter="changed_code_${RANDOM}_${RANDOM}"
+          {
+            echo "changed-code<<$delimiter"
+            printf '%s\n' "$changed_code"
+            echo "$delimiter"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Publish mitigation summary
         if: steps.resolve-trigger.outputs.should-run == 'true'
@@ -572,8 +490,7 @@ jobs:
           PR_NUMBER: ${{ steps.resolve-trigger.outputs.pull-number || steps.read-trigger.outputs.pull-number }}
           SDK_LANGUAGE: ${{ steps.resolve-trigger.outputs.sdk-language || steps.read-trigger.outputs.sdk-language }}
           MITIGATION_COMMIT: ${{ steps.resolve-pr-source.outputs.sha }}
-          MITIGATION_CHANGED_CODE: ${{ steps.create-mitigation-pull-request.outputs.changed-code }}
-          MITIGATION_PR_URL: ${{ steps.create-mitigation-pull-request.outputs.pull-request-url }}
+          MITIGATION_CHANGED_CODE: ${{ steps.get-changed-code.outputs.changed-code }}
         run: |
           {
             echo "## SDK breaking-change mitigation"
@@ -581,9 +498,6 @@ jobs:
             printf '%s\n\n' "**Pull request:** #$PR_NUMBER"
             printf '%s\n\n' "**SDK language:** $SDK_LANGUAGE"
             printf '%s\n\n' "**Mitigation upon commit:** \`$MITIGATION_COMMIT\`"
-            if [[ -n "$MITIGATION_PR_URL" ]]; then
-              printf '%s\n\n' "**Mitigation pull request:** $MITIGATION_PR_URL"
-            fi
             echo "## Changed code"
             echo
             if [[ -n "$MITIGATION_CHANGED_CODE" ]]; then
@@ -591,7 +505,7 @@ jobs:
               printf '%s\n' "$MITIGATION_CHANGED_CODE"
               echo '````'
             else
-              echo "No changed code was found in the mitigation pull request."
+              echo "No mitigation changes were produced."
             fi
           } >> "$GITHUB_STEP_SUMMARY"
 
@@ -606,8 +520,7 @@ jobs:
           SDK_LANGUAGE: ${{ steps.resolve-trigger.outputs.sdk-language || steps.read-trigger.outputs.sdk-language }}
           MITIGATION_COMMIT: ${{ steps.resolve-pr-source.outputs.sha }}
           TRIGGER_COMMENT_ID: ${{ steps.resolve-trigger.outputs.trigger-comment-id || steps.read-trigger.outputs.trigger-comment-id }}
-          MITIGATION_CHANGED_CODE: ${{ steps.create-mitigation-pull-request.outputs.changed-code }}
-          MITIGATION_PR_URL: ${{ steps.create-mitigation-pull-request.outputs.pull-request-url }}
+          MITIGATION_CHANGED_CODE: ${{ steps.get-changed-code.outputs.changed-code }}
         with:
           github-token: ${{ github.token }}
           script: |
@@ -678,7 +591,6 @@ jobs:
               ];
             });
 
-            const mitigationPullRequest = process.env.MITIGATION_PR_URL?.trim();
             const changedCode = process.env.MITIGATION_CHANGED_CODE?.trim();
             const report = [
               "## SDK breaking-change mitigation result",
@@ -690,12 +602,8 @@ jobs:
               "",
               changedCode
                 ? ["````diff", changedCode, "````"].join("\n")
-                : "No changed code was found in the mitigation pull request.",
+                : "No mitigation changes were produced.",
               `[View changed code in the workflow summary](${process.env.WORKFLOW_SUMMARY_URL})`,
-              "",
-              mitigationPullRequest
-                ? `**Mitigation pull request:** ${mitigationPullRequest}`
-                : "**Mitigation pull request:** Not created because no file changes were produced.",
             ].join("\n");
 
             const triggerCommentId = Number(process.env.TRIGGER_COMMENT_ID);
