@@ -4401,8 +4401,9 @@
           "description": "Capacity recommendation parameters for the request. When provided on an executeStart request, the service computes placement recommendations only if the VM fails to start due to an allocation failure; the recommendations for the desired sizes and locations are then surfaced in the operation's capacityRecommendation response."
         },
         "additionalCreateParameters": {
-          "type": "string",
-          "description": "Additional parameters for the request."
+          "type": "object",
+          "description": "Additional configuration for Create.",
+          "additionalProperties": {}
         }
       }
     },
