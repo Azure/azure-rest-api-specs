@@ -148,7 +148,7 @@ root for `.github` and `eng/tools`. Do not add formatting steps to package/OS
 test matrices. Package-local format commands inherit the root `.oxfmtrc.json`,
 including fixture, generated-file, and unmanaged-content exclusions.
 See [the engineering guide](../../eng/README.md#linting-and-formatting) for package
-exclusions that preserve the previous ESLint coverage.
+exclusions for packages not yet linted.
 
 ### Before Committing
 

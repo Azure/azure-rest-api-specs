@@ -92,7 +92,7 @@ describe("workflow files", () => {
     expect(workflow.jobs.lint.steps?.[1].with?.["install-command"]).toBe("pnpm ci");
   });
 
-  it("preserves the previous lint coverage", async () => {
+  it("lints enabled tooling packages and excludes unmanaged paths", async () => {
     const root = resolve(workflowsDir, "../..");
     const folder = await mkdtemp(resolve(tmpdir(), "specs-lint-"));
     try {
@@ -106,6 +106,7 @@ describe("workflow files", () => {
           "lint-diff",
           "oav-runner",
           "release-plan",
+          "sdk-suppressions",
           "spec-gen-sdk-runner",
           "suppressions",
           "tsp-client-tests",
@@ -121,12 +122,9 @@ describe("workflow files", () => {
         "eng/common",
         "eng/scripts",
         "scripts",
-        ...[
-          "openapi-diff-runner",
-          "sdk-suppressions",
-          "summarize-impact",
-          "typespec-migration-validation",
-        ].map((name) => `eng/tools/${name}`),
+        ...["openapi-diff-runner", "summarize-impact", "typespec-migration-validation"].map(
+          (name) => `eng/tools/${name}`,
+        ),
       ];
       for (const path of [...included, ...excluded]) {
         await mkdir(resolve(folder, path), { recursive: true });
