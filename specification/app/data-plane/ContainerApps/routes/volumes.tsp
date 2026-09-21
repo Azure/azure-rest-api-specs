@@ -156,30 +156,21 @@ alias VolumeForkOperations = ResourceOperations<
   PostVolumeForkErrors
 >;
 
-/** The HTTP 201 response for the putVolume operation. */
-model PostVolumeResult {
+/** The HTTP 201 response for the createVolume operation. */
+model CreateVolumeResult {
   /** The HTTP 201 status code. */
   @statusCode statusCode: 201;
-
-  /** URL of the created volume. */
-  @header("Location") location: ResourceLocation<Volume>;
 
   /** The returned volume. */
   @body body: Volume;
 }
 
-/** Error responses for the postVolume operation. */
-alias PostVolumeErrors =
+/** Error responses for the createVolume operation. */
+alias CreateVolumeErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
   | ConflictErrorResult
   | InternalServerErrorResult;
-
-/** Shared operation traits for creating volumes. */
-alias VolumeCreateOperations = ResourceOperations<
-  DataPlaneStandardTraits,
-  PostVolumeErrors
->;
 
 /** The HTTP 201 response for the putVolumeFile operation. */
 model PutVolumeFileResult {
@@ -315,15 +306,21 @@ interface VolumesOperations {
 
   /** Creates a new volume. */
   @summary("Creates a new volume.")
-  @action("volumes")
-  @actionSeparator("/")
-  postVolume is VolumeCreateOperations.ResourceAction<
-    SandboxGroupScope,
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes/{volumeName}")
+  @put
+  createVolume is Foundations.Operation<
     {
+      ...AzureResourceScope;
+
+      /** The volume name. */
+      @path volumeName: string;
+
       /** The volume configuration to create. */
       @body body: Volume;
     },
-    PostVolumeResult
+    CreateVolumeResult,
+    DataPlaneStandardTraits,
+    CreateVolumeErrors
   >;
 
   /** Upload a file to a volume. */

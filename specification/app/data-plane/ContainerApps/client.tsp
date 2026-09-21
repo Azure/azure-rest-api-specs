@@ -421,7 +421,7 @@ namespace ContainerAppsSandbox {
     "csharp"
   );
   @@clientLocation(VolumesOperations.postVolumeFork, Group.Volumes, "csharp");
-  @@clientLocation(VolumesOperations.postVolume, Group.Volumes, "csharp");
+  @@clientLocation(VolumesOperations.createVolume, Group.Volumes, "csharp");
   @@clientLocation(
     VolumesOperations.createOrReplaceVolumeFile,
     Group.Volumes,
@@ -646,7 +646,6 @@ namespace ContainerAppsSandbox {
     "csharp"
   );
   @@clientName(VolumesOperations.postVolumeFork, "forkVolume", "csharp");
-  @@clientName(VolumesOperations.postVolume, "createVolume", "csharp");
   @@clientName(
     VolumesOperations.createOrReplaceVolumeFile,
     "uploadVolumeFile",
