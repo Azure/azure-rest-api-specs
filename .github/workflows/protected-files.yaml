@@ -33,7 +33,7 @@ jobs:
         if: ${{ env.user-allowed == 'true' }}
         run: echo "Account '${{ github.event.pull_request.user.login }}' is allowed to update protected files"
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         if: ${{ env.user-allowed != 'true' }}
         with:
           # Required since "HEAD^" is passed to Get-ChangedFiles
@@ -45,7 +45,7 @@ jobs:
           . eng/scripts/ChangedFiles-Functions.ps1
 
           # powershell glob syntax
-          $protectedFiles = @(".gitignore", "cspell.json", "cspell.yaml", "package.json", "package-lock.json", ".github/*", ".github/azsdk-common-*", ".vscode/*", "eng/*")
+          $protectedFiles = @(".gitignore", "cspell.json", "cspell.yaml", "package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", ".github/*", ".github/azsdk-common-*", ".vscode/*", "eng/*")
           # regex syntax, for files synced from Azure/azure-sdk-tools
           $azureSdkToolsFiles = @('^\.github/skills/azsdk-common-[^/]+(/.*)?$', '^eng/common(/.*)?$')
           # regex syntax, to support protected paths within larger excluded paths

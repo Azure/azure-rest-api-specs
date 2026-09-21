@@ -12,8 +12,10 @@ namespace Microsoft.NotificationHubs;
 /**
  * Notification Hubs Namespace Resource.
  */
-model NamespaceResource
-  is Azure.ResourceManager.TrackedResource<NamespaceProperties, true> {
+model NamespaceResource is Azure.ResourceManager.TrackedResource<
+  NamespaceProperties,
+  true
+> {
   ...ResourceNameParameter<
     Resource = NamespaceResource,
     KeyName = "namespaceName",

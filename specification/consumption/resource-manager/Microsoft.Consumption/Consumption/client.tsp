@@ -19,7 +19,7 @@ using Azure.Core;
 @@clientName(EventSummary.eTag, "etag", "java");
 @@clientName(Budget.eTag, "etag", "java");
 @@clientName(TagsResult.eTag, "etag", "java");
-@@clientName(CreditSummary.eTag, "etag", "java,go");
+@@clientName(CreditSummary.eTag, "etag", "java,go,python");
 @@clientName(EventProperties.eTag, "etag", "java");
 @@clientName(LotProperties.eTag, "etag", "java");
 @@clientName(CreditSummaryProperties.eTag, "etag", "java");
@@ -348,6 +348,24 @@ using Azure.Core;
   armResourceIdentifier,
   "csharp"
 );
+// managementGroupId holds a full ARM resource id
+// ('/providers/Microsoft.Management/managementGroups/{name}'), so surface it as
+// ResourceIdentifier rather than a plain string, matching the other id fields.
+@@alternateType(
+  ReservationRecommendationDetailsProperties.managementGroupId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  LegacyManagementGroupScopeReservationRecommendationProperties.managementGroupId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ModernManagementGroupScopeReservationRecommendationProperties.managementGroupId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(
   ReservationRecommendationDetailsModel.location,
   azureLocation,
@@ -514,3 +532,11 @@ model ConsumptionModernReservationRecommendation
   ModernChargeSummary.properties,
   "csharp"
 );
+
+// Preserve Java enum value names from the released SDK.
+@@clientName(Metrictype.ActualCostMetricType, "ACTUALCOST", "java");
+@@clientName(Metrictype.AmortizedCostMetricType, "AMORTIZEDCOST", "java");
+@@clientName(Metrictype.UsageMetricType, "USAGE", "java");
+@@clientName(Datagrain.DailyGrain, "DAILY", "java");
+@@clientName(Datagrain.MonthlyGrain, "MONTHLY", "java");
+@@clientName(LookBackPeriod.Last07Days, "LAST7DAYS", "java");

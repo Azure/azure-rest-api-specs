@@ -197,7 +197,6 @@ alias SqlResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Resource
   "CosmosDBSqlContainerThroughputSetting"
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   /**

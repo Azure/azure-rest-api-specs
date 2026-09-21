@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "applicationSecurityGroupName": "test-asg"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationSecurityGroups/test-asg/addressPrefixSets/test-prefix-set1",
+            "name": "test-prefix-set1",
+            "type": "Microsoft.Network/applicationSecurityGroups/addressPrefixSets",
+            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "properties": {
+              "addressPrefixes": [
+                "10.0.0.0/16",
+                "192.168.1.0/24"
+              ],
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationSecurityGroups/test-asg/addressPrefixSets/test-prefix-set2",
+            "name": "test-prefix-set2",
+            "type": "Microsoft.Network/applicationSecurityGroups/addressPrefixSets",
+            "etag": "W/\"00000000-0000-0000-0000-000000000001\"",
+            "properties": {
+              "addressPrefixes": [
+                "172.16.0.0/12",
+                "2001:db8::/32"
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AddressPrefixSets_List",
+  "title": "List address prefix sets"
+}

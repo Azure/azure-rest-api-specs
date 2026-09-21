@@ -13,8 +13,10 @@ namespace Microsoft.EdgeOrder;
 /**
  * Address Resource.
  */
-model AddressResource
-  is Azure.ResourceManager.TrackedResource<AddressProperties, false> {
+model AddressResource is Azure.ResourceManager.TrackedResource<
+  AddressProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = AddressResource,
     KeyName = "addressName",

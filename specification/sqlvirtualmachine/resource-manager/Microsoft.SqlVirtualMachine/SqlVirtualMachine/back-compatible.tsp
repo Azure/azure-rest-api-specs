@@ -16,7 +16,6 @@ using Microsoft.SqlVirtualMachine;
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   AvailabilityGroupListener.properties
 );
@@ -30,7 +29,6 @@ using Microsoft.SqlVirtualMachine;
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   SqlVirtualMachineGroup.properties
 );
@@ -47,7 +45,6 @@ using Microsoft.SqlVirtualMachine;
 @@clientName(SqlVirtualMachines.troubleshoot::parameters.body, "parameters");
 @@clientName(Operation, "Info", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   SqlVirtualMachine.properties
 );

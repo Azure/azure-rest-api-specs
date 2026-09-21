@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SecurityInsights;
 // FIXME: Settings has no properties property
@@ -81,3 +82,6 @@ interface ProductSettings {
   "The setting name. Supports - Anomalies, EyesOn, EntityAnalytics, Ueba"
 );
 @@doc(ProductSettings.update::parameters.resource, "The setting");
+
+@@added(Settings, Versions.v2025_10_01_preview);
+@@added(ProductSettings, Versions.v2025_10_01_preview);

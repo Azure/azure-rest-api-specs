@@ -58,7 +58,8 @@ interface VnetGatewayOps
         @segment("gateways")
         @key
         gatewayName: string,
-      }
+      },
+      ResourceName = "AppServicePlanVirtualNetworkConnectionGateway"
     > {}
 
 @tag("AppServicePlans")
@@ -117,7 +118,8 @@ interface VnetGatewayOperationGroupOps
         @segment("gateways")
         @key
         gatewayName: string,
-      }
+      },
+      ResourceName = "SiteSlotVirtualNetworkConnectionGateway"
     > {}
 
 @tag("WebApps")
@@ -182,7 +184,8 @@ interface VnetConnectionGatewayOperationGroupOps
         @segment("gateways")
         @key
         gatewayName: string,
-      }
+      },
+      ResourceName = "SiteVirtualNetworkConnectionGateway"
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

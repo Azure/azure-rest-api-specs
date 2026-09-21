@@ -52,7 +52,8 @@ interface HostNameBindingOps
         @segment("hostNameBindings")
         @key
         hostName: string,
-      }
+      },
+      ResourceName = "SiteHostNameBinding"
     > {}
 
 @tag("WebApps")
@@ -124,7 +125,8 @@ interface HostNameBindingOperationGroupOps
         @segment("hostNameBindings")
         @key
         hostName: string,
-      }
+      },
+      ResourceName = "SiteSlotHostNameBinding"
     > {}
 
 @tag("WebApps")

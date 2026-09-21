@@ -7,6 +7,7 @@ namespace Azure.OpenAI;
 using TypeSpec.Versioning;
 
 /** The request body of an upload creation operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_08_01_Preview)
 model CreateUploadRequest {
   /** The name of the file to upload. */
@@ -18,7 +19,7 @@ model CreateUploadRequest {
    *
    * Use 'assistants' for Assistants and Message files, 'vision' for Assistants image file inputs, 'batch' for Batch API, and 'fine-tune' for Fine-tuning.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Backwards compatibility with existing clients."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility with existing clients."
   purpose: string | "assistants" | "batch" | "fine-tune" | "vision";
 
   /** The number of bytes in the file you are uploading. */
@@ -34,6 +35,7 @@ model CreateUploadRequest {
 }
 
 /** The multipart/form-data request body of a data part addition request for an upload. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_08_01_Preview)
 model AddUploadPartRequest {
   /** The chunk of bytes for this Part. */
@@ -41,6 +43,7 @@ model AddUploadPartRequest {
 }
 
 /** The request body of an upload completion request. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_08_01_Preview)
 model CompleteUploadRequest {
   /** The ordered list of Part IDs. */
@@ -71,7 +74,7 @@ model Upload {
 
   // Reference: https://platform.openai.com/docs/api-reference/files/object#files/object-purpose
   /** The intended purpose of the file. */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Backwards compatibility with existing clients."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility with existing clients."
   purpose:
     | string
     | "batch"
@@ -83,7 +86,7 @@ model Upload {
     | "vision";
 
   /** The status of the Upload. */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Backwards compatibility with existing clients."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility with existing clients."
   status: string | "pending" | "completed" | "cancelled" | "expired";
 
   // Tool customization: 'created' and fields ending in '_at' are Unix encoded utcDateTime

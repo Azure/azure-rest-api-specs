@@ -1,0 +1,31 @@
+{
+  "title": "Entities_IngestHealthReport",
+  "operationId": "Entities_IngestHealthReport",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "resourceGroupName": "online-store-rg",
+    "healthModelName": "online-store",
+    "entityName": "orders-api",
+    "body": {
+      "signalName": "error-rate",
+      "healthState": "Unhealthy",
+      "value": 6.5,
+      "evaluationRules": {
+        "degradedRule": {
+          "operator": "GreaterThan",
+          "threshold": 1
+        },
+        "unhealthyRule": {
+          "operator": "GreaterThan",
+          "threshold": 5
+        }
+      },
+      "expiresInMinutes": 60,
+      "additionalContext": "Elevated 5xx error rate during the checkout traffic spike."
+    }
+  },
+  "responses": {
+    "204": {}
+  }
+}

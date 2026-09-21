@@ -35,7 +35,7 @@ interface PrivateEndpointConnections {
   /**
    * Approve or reject a private endpoint connection with a given name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
     Response =
@@ -47,7 +47,7 @@ interface PrivateEndpointConnections {
   /**
    * Deletes a private endpoint connection with a given name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
     Response =

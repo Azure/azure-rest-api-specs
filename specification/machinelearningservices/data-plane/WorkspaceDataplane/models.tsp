@@ -82,6 +82,7 @@ model ComputeRuntimeDto {
 }
 
 /** CosmosDB settings. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model CosmosDbSettings {
   /** Collections throughput. */
   collectionsThroughput?: int32;
@@ -90,6 +91,7 @@ model CosmosDbSettings {
 /** Encryption configuration. */
 model EncryptionProperty {
   /** The byok cosmosdb account that customer brings to store customer's data with encryption. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   cosmosDbResourceId?: string;
 
   /** Identity to be used with the keyVault. */
@@ -236,6 +238,7 @@ model PrivateLinkServiceConnectionState {
 /** Service managed resources settings. */
 model ServiceManagedResourcesSettings {
   /** CosmosDB settings. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   cosmosDb?: CosmosDbSettings;
 }
 
@@ -316,6 +319,7 @@ model WorkspaceProperties {
   description?: string;
 
   /** Url for the discovery service to identify regional endpoints for machine learning experimentation services. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   discoveryUrl?: string;
 
   /** Whether data isolation is enabled. */

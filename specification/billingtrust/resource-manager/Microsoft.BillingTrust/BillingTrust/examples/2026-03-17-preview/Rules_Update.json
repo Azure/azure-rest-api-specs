@@ -1,0 +1,49 @@
+{
+  "operationId": "Rules_Update",
+  "title": "Update an eduQualification rule with supplemental documents when actionRequired",
+  "parameters": {
+    "resourceUri": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/billing-edu-rg/providers/Microsoft.Program/educationEnrollments/default",
+    "ruleName": "Qualify_Edu",
+    "api-version": "2026-03-17-preview",
+    "properties": {
+      "kind": "eduQualification",
+      "supplementalDocuments": [
+        "https://trust.svc.cloud.microsoft/v1/documents/55555555-5555-5555-5555-555555555555"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/billing-edu-rg/providers/Microsoft.Program/educationEnrollments/default/providers/Microsoft.BillingTrust/assessments/default/rules/Qualify_Edu",
+        "name": "Qualify_Edu",
+        "type": "Microsoft.BillingTrust/assessments/rules",
+        "properties": {
+          "kind": "eduQualification",
+          "evaluationState": "underReview",
+          "provisioningState": "Succeeded",
+          "domains": [
+            {
+              "domainNames": [
+                "students.contoso.edu"
+              ],
+              "tenantId": "11111111-1111-1111-1111-111111111111",
+              "state": "actionRequired"
+            }
+          ],
+          "supplementalDocuments": [
+            "https://trust.svc.cloud.microsoft/v1/documents/55555555-5555-5555-5555-555555555555"
+          ]
+        },
+        "systemData": {
+          "createdBy": "edu-admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-17T10:00:00.000Z",
+          "lastModifiedBy": "edu-admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-17T11:30:00.000Z"
+        }
+      }
+    }
+  }
+}

@@ -2,8 +2,10 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Consumption;
 
@@ -239,6 +241,12 @@ union Scope {
   Single: "Single",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Shared: "Shared",
+
+  /**
+   * Management group scoped recommendation.
+   */
+  @added(Versions.v2026_06_01)
+  ManagementGroup: "ManagementGroup",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -388,6 +396,7 @@ model PricesheetDownloadProperties {
   /**
    * The link (url) to download the pricesheet.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   downloadUrl?: string;
 
@@ -1427,6 +1436,27 @@ model ReservationRecommendationDetailsProperties {
    */
   @visibility(Lifecycle.Read)
   usage?: ReservationRecommendationDetailsUsageProperties;
+
+  /**
+   * Management group id associated with management group scoped recommendation.
+   */
+  @added(Versions.v2026_06_01)
+  @visibility(Lifecycle.Read)
+  managementGroupId?: string;
+
+  /**
+   * The tenant ID associated with the management group. Populated only when managementGroupId is populated.
+   */
+  @added(Versions.v2026_06_01)
+  @visibility(Lifecycle.Read)
+  tenantId?: string;
+
+  /**
+   * Projected usage details used for generating the recommendation.
+   */
+  @added(Versions.v2026_06_01)
+  @visibility(Lifecycle.Read)
+  projectedUsage?: ReservationRecommendationDetailsProjectedUsageProperties;
 }
 
 /**
@@ -1593,6 +1623,19 @@ model ReservationRecommendationDetailsUsageProperties {
 }
 
 /**
+ * Details about projected usage data that has been used for computing the recommendation.
+ */
+@added(Versions.v2026_06_01)
+model ReservationRecommendationDetailsProjectedUsageProperties {
+  /**
+   * Total projected retail usage in commitment units (CUs).
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "CUs is an accepted abbreviation for Commitment Units"
+  @visibility(Lifecycle.Read)
+  totalRetailUsageInCUs?: float32;
+}
+
+/**
  * Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
  *
  * Some Error responses:
@@ -1601,6 +1644,7 @@ model ReservationRecommendationDetailsUsageProperties {
  *
  *  * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model HighCasedErrorResponse {
   /**
@@ -3743,6 +3787,30 @@ model LegacySharedScopeReservationRecommendationProperties
 }
 
 /**
+ * The properties of the legacy reservation recommendation for management group scope.
+ */
+@added(Versions.v2026_06_01)
+model LegacyManagementGroupScopeReservationRecommendationProperties
+  extends LegacyReservationRecommendationProperties {
+  /**
+   * Management group id associated with management group scoped recommendation.
+   */
+  @visibility(Lifecycle.Read)
+  managementGroupId: string;
+
+  /**
+   * The tenant ID associated with the management group.
+   */
+  @visibility(Lifecycle.Read)
+  tenantId: string;
+
+  /**
+   * Shared or single recommendation.
+   */
+  scope: "ManagementGroup";
+}
+
+/**
  * Modern reservation recommendation.
  */
 model ModernReservationRecommendation extends ReservationRecommendation {
@@ -3914,6 +3982,30 @@ model ModernSharedScopeReservationRecommendationProperties
 }
 
 /**
+ * The properties of the modern reservation recommendation for management group scope.
+ */
+@added(Versions.v2026_06_01)
+model ModernManagementGroupScopeReservationRecommendationProperties
+  extends ModernReservationRecommendationProperties {
+  /**
+   * Management group id associated with management group scoped recommendation.
+   */
+  @visibility(Lifecycle.Read)
+  managementGroupId: string;
+
+  /**
+   * The tenant ID associated with the management group.
+   */
+  @visibility(Lifecycle.Read)
+  tenantId: string;
+
+  /**
+   * Shared or single recommendation.
+   */
+  scope: "ManagementGroup";
+}
+
+/**
  * Legacy Reservation transaction resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3932,6 +4024,7 @@ model DownloadProperties {
   /**
    * The link (url) to download the pricesheet.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   downloadUrl?: string;
 

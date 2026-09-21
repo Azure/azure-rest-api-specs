@@ -1,0 +1,745 @@
+import "../common/models.tsp";
+import "../agents/models.tsp";
+import "./models.tsp";
+import "./protocol.tsp";
+
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
+using Azure.Core;
+
+namespace Azure.AI.Projects;
+
+const VoiceAgentConversationRequiredPreviews = #{
+  required_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview],
+};
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for consistency with VoiceAudioItemResponse."
+@doc("""
+  Metadata for a conversation item's generated audio. For bring-your-own-storage (BYOS), the response includes
+  `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
+  credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
+  `/audio/generated/content` route.
+  """)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceGeneratedAudioItem {
+  ...OmitProperties<VoiceAudioItem, "blob_uri">;
+
+  @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the generated audio in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/generated/content` route instead.")
+  blob_uri?: url;
+}
+
+/**
+ * Establishes a service-terminated WebSocket for a voice-agent session. The service applies the persisted
+ * agent definition, resolves configured tools, sends the initial session configuration, and then exchanges
+ * OpenAI Realtime GA JSON events with the client. Audio bytes are base64-encoded in JSON event fields.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "A WebSocket protocol upgrade does not match a standard resource operation template."
+@tag("Voice Agent WebSocket")
+interface VoiceAgentWebSocket {
+  /**
+   * Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`
+   * headers. The optional `realtime` subprotocol is the only accepted subprotocol value. Supply the
+   * `VoiceAgents=V1Preview` opt-in through either the `Foundry-Features` header or the `foundry_features`
+   * query parameter.
+   *
+   * Handshake failures are evaluated in the following order, independent of the requested `transport`:
+   *
+   * 1. Agent enablement (any transport): if the target agent is disabled, the handshake fails before the
+   *    `101 Switching Protocols` upgrade with `409 Conflict`, using the shared Foundry `ApiErrorResponse` shape
+   *    with `error.code = agent_disabled`. This failure is terminal until the caller enables the agent, and it
+   *    takes precedence over the WebRTC-specific checks below.
+   * 2. WebRTC availability (only when `transport=webrtc`, and only once the agent itself is enabled): the agent
+   *    must have the WebRTC transport capability configured. If the agent is enabled but WebRTC is not available
+   *    for it, the handshake fails with `404 Not Found`. This is distinct from the `409 agent_disabled` case
+   *    above, which concerns the agent itself rather than its WebRTC capability.
+   * 3. WebRTC compatibility (only when `transport=webrtc`): WebRTC does not support bring-your-own-model (BYOM)
+   *    or hosted-agent voice agents; those requests fail with `400 Bad Request`.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "A successful WebSocket 101 protocol switch has no HTTP entity body; messages begin as WebSocket frames after the upgrade."
+  @summary("Connect to a voice agent")
+  @get
+  @sharedRoute
+  @route("/agents/{agent_name}/endpoint/protocols/voice")
+  connectVoiceAgent is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent. */
+      @path agent_name: string;
+
+      /**
+       * A query alternative to the `Foundry-Features` header for clients that cannot set headers during a
+       * WebSocket handshake. Set this to `VoiceAgents=V1Preview`. Either this query parameter or the header is
+       * required.
+       */
+      @query("foundry_features")
+      foundry_features_query?: AgentDefinitionOptInKeys.voice_agents_v1_preview;
+
+      /**
+       * Selects the connection transport. Omit or send `websocket` for the default, where signaling and audio are
+       * exchanged as JSON events over this WebSocket. Send `webrtc` to negotiate a WebRTC connection: the WebSocket
+       * then carries only SDP signaling (`rtc.call.sdp.create` / `rtc.call.sdp.created`) while media and the data
+       * channel are peer-to-peer.
+       */
+      @query transport?: VoiceAgentTransport;
+
+      /**
+       * Whether to persist the conversation created by this WebSocket session. If omitted, the service honors the
+       * persisted voice agent definition's configured `store` value. If supplied, this value overrides the
+       * definition's `store` setting for this session only.
+       */
+      @query store?: boolean;
+
+      /**
+       * Per-session values for the voice agent's declared `structured_inputs`, serialized as a JSON object and
+       * URL-encoded as this query parameter. Supplied values override definition defaults when rendering the
+       * agent's instructions and session-start greeting for this session only. The decoded value must be a JSON
+       * object no larger than 32 KiB with a maximum nesting depth of 16.
+       */
+      @query structured_input?: string;
+
+      /** Selects a specific version of the voice agent for this session. */
+      @query("x-agent-version-override") agent_version_override?: string;
+
+      /** The requested WebSocket subprotocol. Omit this header or request exactly `realtime`. */
+      @header("Sec-WebSocket-Protocol")
+      websocket_subprotocol?: VoiceAgentWebSocketSubprotocol;
+    },
+    VoiceAgentWebSocketUpgradeResponse
+  >;
+}
+
+/**
+ * Read-only, endpoint-scoped retrieval of the conversations, responses, transcript items, per-turn
+ * metrics, and audio recorded by a voice agent. For a `voice` agent, the service is the sole writer of
+ * responses and items, so only
+ * reads plus a cascading conversation delete are exposed — there are no response/item create, update, or
+ * delete routes. All persistence is governed by the definition's `store` flag: when `store = false` (the
+ * default) nothing is persisted, so these routes return `404`. The merged-recording routes additionally
+ * require the session to have ended and return `409` while it is still in progress.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The endpoint-scoped, read-only voice conversation projection and its nested response, item, and audio routes do not match a standard resource operation template."
+@tag("Agent Conversations")
+interface AgentEndpointConversations {
+  /**
+   * Returns the conversations persisted for the specified voice agent endpoint.
+   * Conversations are present when the session's effective `store` setting is `true`, whether inherited from the
+   * agent definition or enabled by the WebSocket session override.
+   */
+  @summary("List voice agent conversations")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations")
+  @list
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  listAgentConversations is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<VoiceConversation>
+  >;
+
+  /**
+   * Retrieves a single conversation recorded for the specified voice agent endpoint by its id.
+   * Returns `404` when the conversation was not persisted (`store = false`) or does not exist.
+   */
+  @summary("Get a voice agent conversation")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getAgentConversation is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation to retrieve. */
+      @path conversation_id: string;
+    },
+    VoiceConversation
+  >;
+
+  /**
+   * Deletes a conversation and all of its stored data — responses, items, and any audio (cascade). This is
+   * the customer's explicit data-deletion control for voice conversations.
+   */
+  @summary("Delete a voice agent conversation")
+  @delete
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  deleteAgentConversation is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation to delete. */
+      @path conversation_id: string;
+    },
+    NoContentResponse
+  >;
+
+  /**
+   * Returns a paged collection of the responses (model inference turns) recorded for the specified
+   * conversation. The per-response `output` projection may be omitted here; use the response-items route
+   * for the canonical paged output. Returns `404` when the conversation was not persisted (`store = false`).
+   */
+  @summary("List responses in a voice agent conversation")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses")
+  @list
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  listAgentConversationResponses is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation whose responses are listed. */
+      @path conversation_id: string;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<VoiceResponse>
+  >;
+
+  /**
+   * Retrieves a single response from the specified conversation by its id, including its `output` items,
+   * `usage`, and status. Returns `404` when the conversation or response was not persisted (`store = false`).
+   */
+  @summary("Get a voice agent conversation response")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getAgentConversationResponse is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation that contains the response. */
+      @path conversation_id: string;
+
+      /** The id of the response to retrieve. */
+      @path response_id: string;
+    },
+    VoiceResponse
+  >;
+
+  /**
+   * Returns a paged collection of the output items produced by a specific response (the response's output
+   * projection). For the complete ordered conversation history — including user input and client-created
+   * tool outputs — use the conversation items route instead. Returns `404` when the conversation or
+   * response was not persisted (`store = false`).
+   */
+  @summary("List items produced by a voice agent conversation response")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}/items")
+  @list
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  listAgentConversationResponseItems is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation that contains the response. */
+      @path conversation_id: string;
+
+      /** The id of the response whose output items are listed. */
+      @path response_id: string;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<OpenAI.RealtimeConversationItem>
+  >;
+
+  /**
+   * Returns a paged collection of items — the complete ordered conversation history, including user input,
+   * assistant output, and client-created tool outputs (transcripts + tool events). Returns `404` when the
+   * conversation was not persisted (`store = false`).
+   */
+  @summary("List items in a voice agent conversation")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items")
+  @list
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  listAgentConversationItems is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation whose items are listed. */
+      @path conversation_id: string;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<OpenAI.RealtimeConversationItem>
+  >;
+
+  /**
+   * Retrieves a single item from the specified conversation by its id, including its transcript. An
+   * `input_audio`/`output_audio` content part indicates that audio is available for the item; the canonical per-item
+   * audio metadata is the `/items/{item_id}/audio` resource, and the bytes are streamed by
+   * `/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted
+   * (`store = false`).
+   */
+  @summary("Get a voice agent conversation item")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getAgentConversationItem is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation that contains the item. */
+      @path conversation_id: string;
+
+      /** The id of the conversation item to retrieve. */
+      @path item_id: string;
+    },
+    OpenAI.RealtimeConversationItem
+  >;
+
+  /**
+   * Returns metadata for a single conversation item's audio segment, including the common playback facts
+   * (role, format/codec, sample rate, channels, offset, duration) for both Foundry-managed and
+   * bring-your-own-storage (BYOS) recordings; for BYOS the response additionally includes `blob_uri`, the URI
+   * of the recording in the customer's own storage (no SAS) that the customer downloads with their own credentials.
+   * Requires the conversation to have persisted audio (`store = true`); returns `404` when the conversation,
+   * item, or its audio was not persisted.
+   */
+  @summary("Get a voice agent conversation item's audio metadata")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getAgentConversationAudioItem is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation that contains the item. */
+      @path conversation_id: string;
+
+      /** The id of the conversation item whose audio metadata is retrieved. */
+      @path item_id: string;
+    },
+    VoiceAudioItem
+  >;
+
+  /**
+   * Streams a single conversation item's audio as a WAV (`audio/wav`) byte stream through the service (no SAS
+   * URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS) recordings the
+   * bytes are not proxied — the caller must download directly from customer storage using the `blob_uri`
+   * returned by the item's `/audio` metadata route — so this route returns `409 Conflict` for BYOS recordings.
+   * Returns `404` when the conversation, item, or its audio was not persisted (`store = false`).
+   */
+  @summary("Stream a voice agent conversation item's audio")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getAgentConversationAudioItemContent is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation that contains the item. */
+      @path conversation_id: string;
+
+      /** The id of the conversation item whose audio is streamed. */
+      @path item_id: string;
+    },
+    VoiceAudioStream
+  >;
+
+  /**
+   * Returns metadata for a conversation item's generated audio. This subordinate artifact is separate from the
+   * canonical heard-audio segment and exists only when playback was interrupted and the service rendered more audio
+   * than the listener heard, including when the response ends as cancelled. Returns `404` when the conversation or
+   * item was not persisted, or when no generated audio exists beyond the heard segment.
+   */
+  @summary("Get a voice agent conversation item's generated audio metadata")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getAgentConversationGeneratedAudioItem is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation that contains the item. */
+      @path conversation_id: string;
+
+      /** The id of the conversation item whose generated audio metadata is retrieved. */
+      @path item_id: string;
+    },
+    VoiceGeneratedAudioItem
+  >;
+
+  /**
+   * Streams a conversation item's generated audio as a WAV (`audio/wav`) byte stream through the service. This
+   * subordinate artifact exists only when playback was interrupted and the service rendered more audio than the
+   * listener heard, including when the response ends as cancelled. This route serves Foundry-managed storage only.
+   * For bring-your-own-storage (BYOS) recordings the bytes are not proxied, so this route returns `409 Conflict`.
+   * Returns `404` when the conversation or item was not persisted, or when no generated audio exists beyond the
+   * heard segment.
+   */
+  @summary("Stream a voice agent conversation item's generated audio")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated/content")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getAgentConversationGeneratedAudioItemContent is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation that contains the item. */
+      @path conversation_id: string;
+
+      /** The id of the conversation item whose generated audio is streamed. */
+      @path item_id: string;
+    },
+    VoiceAudioStream
+  >;
+
+  /**
+   * Returns metadata for the whole-call merged stereo recording (user audio on the left channel, agent audio
+   * on the right). The common metadata (format, sample rate, channels, channel layout, duration) is returned
+   * for both Foundry-managed and bring-your-own-storage (BYOS) recordings; for BYOS the response additionally
+   * includes `blob_uri`, the URI of the recording in the customer's own storage (no SAS) that the customer downloads
+   * with their own credentials. The recording is built once from the per-turn segments after persistence
+   * finalization succeeds. While the conversation is `in_progress`, this route returns retriable `409 Conflict`
+   * with `error.code = recording_not_ready` and a `Retry-After` header when retry guidance is available. When the
+   * conversation is `failed`, it returns terminal `409 Conflict` with `error.code = recording_unavailable`.
+   * For a `completed` conversation, metadata is available subject to the existing BYOS behavior. Requires the
+   * conversation to have persisted audio (`store = true`); otherwise returns `404`.
+   */
+  @summary("Get a voice agent conversation's merged recording metadata")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getAgentConversationAudio is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation whose merged recording metadata is retrieved. */
+      @path conversation_id: string;
+    },
+    VoiceRecording
+  >;
+
+  /**
+   * Streams the whole-call merged stereo recording as a WAV (`audio/wav`) byte stream through the service
+   * (no SAS URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS)
+   * recordings the bytes are not proxied — the caller must download directly from customer storage using the
+   * `blob_uri` returned by the metadata route — so this route returns `409 Conflict` for BYOS recordings.
+   * While the conversation is `in_progress`, this route returns retriable `409 Conflict` with
+   * `error.code = recording_not_ready` and a `Retry-After` header when retry guidance is available. When the
+   * conversation is `failed`, it returns terminal `409 Conflict` with `error.code = recording_unavailable`.
+   * For a `completed` conversation, content is available subject to the existing BYOS behavior. A conversation
+   * without persisted audio (`store = false`) returns `404`.
+   */
+  @summary("Stream a voice agent conversation's merged recording")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio/content")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getAgentConversationAudioContent is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation whose merged recording is streamed. */
+      @path conversation_id: string;
+    },
+    VoiceAudioStream
+  >;
+}
+
+/** Time filters for listing durable inbound telephony calls. */
+alias TelephonyCallListTimeQueryParameters = {
+  /** Includes calls that started at or after this Unix timestamp in seconds. */
+  @query started_after?: FoundryTimestamp;
+
+  /** Includes calls that started at or before this Unix timestamp in seconds. */
+  @query started_before?: FoundryTimestamp;
+};
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This interface combines agent-contained binding and call resources, call actions, and a singleton transfer-target collection, so it does not map to one standard resource operation template."
+@tag("Agent Telephony")
+interface AgentTelephony {
+  /** Creates a telephony binding for the voice agent named in the path. */
+  @summary("Create an agent telephony binding")
+  @post
+  @route("/agents/{agent_name}/telephony/bindings")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  createTelephonyBinding is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the binding. */
+      @path agent_name: string;
+
+      ...Azure.Core.RepeatabilityRequestHeaders;
+
+      /** The provider-specific binding to create. */
+      @body telephony_binding: CreateTelephonyBindingRequest;
+    },
+    TelephonyBindingCreatedResponse
+  >;
+
+  /** Returns the telephony bindings owned by the voice agent named in the path. */
+  @summary("List agent telephony bindings")
+  @get
+  @list
+  @route("/agents/{agent_name}/telephony/bindings")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  listTelephonyBindings is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent whose bindings are listed. */
+      @path agent_name: string;
+
+      /** Filters bindings by provider. */
+      @query provider?: TelephonyProvider;
+
+      /** Filters bindings by lifecycle status. */
+      @query status?: TelephonyBindingStatus;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<TelephonyBindingListItem>
+  >;
+
+  /** Retrieves a telephony binding owned by the voice agent named in the path. */
+  @summary("Get an agent telephony binding")
+  @get
+  @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  getTelephonyBinding is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the binding. */
+      @path agent_name: string;
+
+      /** The service-generated binding identifier. */
+      @path binding_id: TelephonyBindingId;
+    },
+    TelephonyBindingResponse
+  >;
+
+  /** Updates a telephony binding owned by the voice agent named in the path. */
+  @summary("Update an agent telephony binding")
+  @patch
+  @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  updateTelephonyBinding is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the binding. */
+      @path agent_name: string;
+
+      /** The service-generated binding identifier. */
+      @path binding_id: TelephonyBindingId;
+
+      /** The content type for the JSON Merge Patch body. */
+      @header("Content-Type") contentType: "application/merge-patch+json";
+
+      ...TelephonyIfMatchHeader;
+
+      /** The binding properties to update. */
+      @body body: UpdateTelephonyBindingRequest;
+    },
+    TelephonyBindingResponse
+  >;
+
+  /** Deletes a telephony binding owned by the voice agent named in the path. */
+  @summary("Delete an agent telephony binding")
+  @delete
+  @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  deleteTelephonyBinding is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the binding. */
+      @path agent_name: string;
+
+      /** The service-generated binding identifier. */
+      @path binding_id: TelephonyBindingId;
+
+      ...TelephonyIfMatchHeader;
+    },
+    NoContentResponse
+  >;
+
+  /** Returns the durable inbound call history for the voice agent named in the path. */
+  @summary("List agent telephony calls")
+  @get
+  @list
+  @route("/agents/{agent_name}/telephony/calls")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  listTelephonyCalls is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent whose calls are listed. */
+      @path agent_name: string;
+
+      /** Filters calls by provider. */
+      @query provider?: TelephonyProvider;
+
+      /** Filters calls by lifecycle status. */
+      @query status?: TelephonyCallStatus;
+
+      ...TelephonyCallListTimeQueryParameters;
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<TelephonyCallSummary>
+  >;
+
+  /** Retrieves a durable inbound call record owned by the voice agent named in the path. */
+  @summary("Get an agent telephony call")
+  @get
+  @route("/agents/{agent_name}/telephony/calls/{call_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  getTelephonyCall is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the call record. */
+      @path agent_name: string;
+
+      /** The service-generated call identifier. */
+      @path call_id: TelephonyCallId;
+    },
+    TelephonyCallRecord
+  >;
+
+  /** Transfers an active inbound call to a configured target for the voice agent named in the path. */
+  @summary("Transfer an active agent telephony call")
+  @post
+  @route("/agents/{agent_name}/telephony/calls/{call_id}:transfer")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  transferTelephonyCall is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the active call. */
+      @path agent_name: string;
+
+      /** The service-generated call identifier. */
+      @path call_id: TelephonyCallId;
+
+      ...TelephonyCallTransferRequest;
+    },
+    TelephonyCallRecord
+  >;
+
+  /** Ends an active inbound call owned by the voice agent named in the path. */
+  @summary("End an active agent telephony call")
+  @post
+  @route("/agents/{agent_name}/telephony/calls/{call_id}:end")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  endTelephonyCall is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that owns the active call. */
+      @path agent_name: string;
+
+      /** The service-generated call identifier. */
+      @path call_id: TelephonyCallId;
+    },
+    TelephonyCallRecord
+  >;
+
+  /** Returns all transfer targets configured for the voice agent named in the path. */
+  @summary("Get agent telephony transfer targets")
+  @get
+  @route("/agents/{agent_name}/telephony/transfer_targets")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  getTelephonyTransferTargets is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent whose transfer targets are retrieved. */
+      @path agent_name: string;
+    },
+    TelephonyTransferTargetsResponse
+  >;
+
+  /** Replaces all transfer targets configured for the voice agent named in the path. */
+  @summary("Replace agent telephony transfer targets")
+  @put
+  @route("/agents/{agent_name}/telephony/transfer_targets")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  replaceTelephonyTransferTargets is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent whose transfer targets are replaced. */
+      @path agent_name: string;
+
+      ...TelephonyIfMatchHeader;
+      ...TelephonyTransferTargets;
+    },
+    TelephonyTransferTargetsResponse
+  >;
+
+  /** Creates one durable direct outbound call job. The latest agent definition is resolved when each attempt executes. */
+  @summary("Create an outbound telephony call job")
+  @post
+  @route("/agents/{agent_name}/telephony/call_jobs")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  createTelephonyCallJob is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent that executes the call. */
+      @path agent_name: string;
+
+      /** A customer-generated idempotency key. Reusing it with an equivalent request returns the same call job. */
+      @header("Idempotency-Key")
+      @minLength(1)
+      @maxLength(256)
+      idempotency_key: string;
+
+      /** The direct outbound call to create. */
+      @body body: CreateTelephonyCallJobRequest;
+    },
+    TelephonyCallJobAcceptedResponse
+  >;
+
+  /** Retrieves a durable direct or campaign-created outbound call job. */
+  @summary("Get an outbound telephony call job")
+  @get
+  @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  getTelephonyCallJob is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @path agent_name: string;
+      @path call_job_id: TelephonyCallJobId;
+    },
+    TelephonyCallJobResponse
+  >;
+
+  /** Requests cancellation of a durable outbound call job. A connected call is allowed to finish. */
+  @summary("Cancel an outbound telephony call job")
+  @post
+  @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}:cancel")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  cancelTelephonyCallJob is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      @path agent_name: string;
+      @path call_job_id: TelephonyCallJobId;
+      ...TelephonyIfMatchHeader;
+    },
+    TelephonyCallJobResponse | TelephonyCallJobAcceptedResponse
+  >;
+}

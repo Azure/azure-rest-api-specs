@@ -7168,8 +7168,7 @@
           "maximum": 59,
           "x-nullable": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "CustomInfoPatchProperties": {
       "type": "object",
@@ -7348,10 +7347,10 @@
     },
     "DiffDiskPlacement": {
       "type": "string",
-      "description": "Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise ResourceDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'ResourceDisk'.",
+      "description": "Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise TempDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'TempDisk'.",
       "enum": [
         "CacheDisk",
-        "ResourceDisk"
+        "TempDisk"
       ],
       "x-ms-enum": {
         "name": "DiffDiskPlacement",
@@ -7363,9 +7362,9 @@
             "description": "Cache disk placement"
           },
           {
-            "name": "ResourceDisk",
-            "value": "ResourceDisk",
-            "description": "Resource disk placement"
+            "name": "TempDisk",
+            "value": "TempDisk",
+            "description": "Temp disk placement"
           }
         ]
       }
@@ -7380,7 +7379,7 @@
         },
         "placement": {
           "$ref": "#/definitions/DiffDiskPlacement",
-          "description": "Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise ResourceDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'ResourceDisk'."
+          "description": "Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise TempDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'TempDisk'."
         }
       }
     },
@@ -10251,7 +10250,8 @@
         },
         "createDelete": {
           "$ref": "#/definitions/CreateDeleteProperties",
-          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts."
+          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.",
+          "x-nullable": true
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
@@ -10375,7 +10375,8 @@
         },
         "createDelete": {
           "$ref": "#/definitions/CreateDeleteProperties",
-          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts."
+          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.",
+          "x-nullable": true
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
@@ -10573,7 +10574,8 @@
         },
         "createDelete": {
           "$ref": "#/definitions/CreateDeleteProperties",
-          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts."
+          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.",
+          "x-nullable": true
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
