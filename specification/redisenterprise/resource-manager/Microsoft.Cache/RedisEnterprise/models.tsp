@@ -1756,48 +1756,47 @@ model MigrationUndoRequest {
 /**
  * The reason a migration operation is being undone (rolled back).
  */
-union MigrationRollbackReason {
-  string,
-
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Closed set: `Other` is the catch-all, and the property is request-only, so clients are never handed a value they cannot parse."
+enum MigrationRollbackReason {
   /**
    * The target cache did not meet the expected performance characteristics.
    */
-  Performance: "performance",
+  Performance: "Performance",
 
   /**
    * The target cache was not compatible with the client application or workload.
    */
-  Compatibility: "compatibility",
+  Compatibility: "Compatibility",
 
   /**
    * The client application was unable to connect to the target cache.
    */
-  ClientConnection: "clientConnection",
+  ClientConnection: "ClientConnection",
 
   /**
    * The target cache did not meet the expected cost characteristics.
    */
-  Cost: "cost",
+  Cost: "Cost",
 
   /**
    * The migration was performed as a test and is being reverted.
    */
-  Testing: "testing",
+  Testing: "Testing",
 
   /**
    * The target cache did not meet the expected stability characteristics.
    */
-  Stability: "stability",
+  Stability: "Stability",
 
   /**
    * Data was lost during or after the migration.
    */
-  DataLoss: "dataLoss",
+  DataLoss: "DataLoss",
 
   /**
    * The migration is being undone for a reason not covered by the other values.
    */
-  Other: "other",
+  Other: "Other",
 }
 
 /**

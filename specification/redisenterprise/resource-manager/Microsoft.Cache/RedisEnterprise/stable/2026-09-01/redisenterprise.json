@@ -2123,9 +2123,6 @@
               }
             }
           },
-          "204": {
-            "description": "Action completed successfully."
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2532,9 +2529,6 @@
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
-          },
-          "204": {
-            "description": "Action completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3854,57 +3848,57 @@
       "type": "string",
       "description": "The reason a migration operation is being undone (rolled back).",
       "enum": [
-        "performance",
-        "compatibility",
-        "clientConnection",
-        "cost",
-        "testing",
-        "stability",
-        "dataLoss",
-        "other"
+        "Performance",
+        "Compatibility",
+        "ClientConnection",
+        "Cost",
+        "Testing",
+        "Stability",
+        "DataLoss",
+        "Other"
       ],
       "x-ms-enum": {
         "name": "MigrationRollbackReason",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Performance",
-            "value": "performance",
+            "value": "Performance",
             "description": "The target cache did not meet the expected performance characteristics."
           },
           {
             "name": "Compatibility",
-            "value": "compatibility",
+            "value": "Compatibility",
             "description": "The target cache was not compatible with the client application or workload."
           },
           {
             "name": "ClientConnection",
-            "value": "clientConnection",
+            "value": "ClientConnection",
             "description": "The client application was unable to connect to the target cache."
           },
           {
             "name": "Cost",
-            "value": "cost",
+            "value": "Cost",
             "description": "The target cache did not meet the expected cost characteristics."
           },
           {
             "name": "Testing",
-            "value": "testing",
+            "value": "Testing",
             "description": "The migration was performed as a test and is being reverted."
           },
           {
             "name": "Stability",
-            "value": "stability",
+            "value": "Stability",
             "description": "The target cache did not meet the expected stability characteristics."
           },
           {
             "name": "DataLoss",
-            "value": "dataLoss",
+            "value": "DataLoss",
             "description": "Data was lost during or after the migration."
           },
           {
             "name": "Other",
-            "value": "other",
+            "value": "Other",
             "description": "The migration is being undone for a reason not covered by the other values."
           }
         ]
