@@ -1,9 +1,18 @@
-import { dump } from "js-yaml";
 import { spawnSync } from "node:child_process";
-import { cpSync, mkdirSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
+import {
+  cpSync,
+  mkdirSync,
+  mkdtempSync,
+  realpathSync,
+  rmSync,
+  symlinkSync,
+  writeFileSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
-import { dirname, join, resolve } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { stringify } from "yaml";
 import { checkCatalogUsage, checkLockfile } from "../src/validate-workspace.ts";
 
 describe("workspace validation", () => {
@@ -12,16 +21,19 @@ describe("workspace validation", () => {
   function writeManifest(path: string, manifest: object) {
     const fullPath = join(repoRoot, path, "package.json");
     mkdirSync(dirname(fullPath), { recursive: true });
-    writeFileSync(fullPath, JSON.stringify(manifest));
+    writeFileSync(fullPath, JSON.stringify({ type: "module", ...manifest }));
   }
 
   function runCli() {
     const destination = join(repoRoot, ".github/workflows/src/validate-workspace.ts");
     mkdirSync(dirname(destination), { recursive: true });
     cpSync(join(import.meta.dirname, "../src/validate-workspace.ts"), destination);
+    const nodeModules = join(repoRoot, ".github/node_modules");
+    mkdirSync(nodeModules, { recursive: true });
+    // Link the package itself: pnpm's relative package links can break through a Windows junction.
     symlinkSync(
-      resolve(import.meta.dirname, "../../node_modules"),
-      join(repoRoot, ".github/node_modules"),
+      realpathSync.native(dirname(fileURLToPath(import.meta.resolve("yaml/package.json")))),
+      join(nodeModules, "yaml"),
       "junction",
     );
     return spawnSync(process.execPath, [destination], {
@@ -33,12 +45,15 @@ describe("workspace validation", () => {
   function writeWorkspace(config: object = {}) {
     writeFileSync(
       join(repoRoot, "pnpm-workspace.yaml"),
-      dump({ packages: [".github", "packages/*", "!packages/excluded"], ...config }),
+      stringify({ packages: [".github", "packages/*", "!packages/excluded"], ...config }),
     );
   }
 
   function writeLockfile(packages: object = {}) {
-    writeFileSync(join(repoRoot, "pnpm-lock.yaml"), dump({ lockfileVersion: "9.0", packages }));
+    writeFileSync(
+      join(repoRoot, "pnpm-lock.yaml"),
+      stringify({ lockfileVersion: "9.0", packages }),
+    );
   }
 
   beforeEach(() => {
@@ -145,6 +160,7 @@ describe("workspace validation", () => {
     const result = runCli();
 
     expect(result.status, result.stderr).toBe(0);
+    expect(result.stderr).toBe("");
     expect(result.stdout).toContain("Workspace dependency and lockfile checks passed.");
   });
 
@@ -318,7 +334,7 @@ packages:
 
   it("checks every document in a pnpm 11 lockfile", () => {
     const documents = ["tool@1.0.0", "workspace-dependency@1.0.0"].map((name) =>
-      dump({
+      stringify({
         lockfileVersion: "9.0",
         packages: { [name]: { resolution: { tarball: "https://proxy.example/package.tgz" } } },
       }),

@@ -1,7 +1,7 @@
-import { load, loadAll } from "js-yaml";
 import { execSync } from "node:child_process";
 import { readFileSync, realpathSync } from "node:fs";
 import { join, relative, resolve, sep } from "node:path";
+import { parse, parseAllDocuments } from "yaml";
 
 const dependencyTypes = [
   "dependencies",
@@ -22,8 +22,9 @@ interface Lockfile {
 }
 
 export function checkCatalogUsage(repoRoot: string): { errors: string[]; warnings: string[] } {
-  repoRoot = realpathSync(repoRoot);
-  const config = (load(readFileSync(join(repoRoot, "pnpm-workspace.yaml"), "utf8")) ??
+  // Native realpath also expands Windows 8.3 paths to match pnpm's package paths.
+  repoRoot = realpathSync.native(repoRoot);
+  const config = (parse(readFileSync(join(repoRoot, "pnpm-workspace.yaml"), "utf8")) ??
     {}) as WorkspaceConfig;
   const catalogs = { ...config.catalogs };
   if (config.catalog) {
@@ -35,7 +36,7 @@ export function checkCatalogUsage(repoRoot: string): { errors: string[]; warning
   });
   const packages = JSON.parse(output) as { path: string }[];
   // Include the root even if pnpm's recursive workspace settings exclude it.
-  const packagePaths = new Set([repoRoot, ...packages.map((pkg) => realpathSync(pkg.path))]);
+  const packagePaths = new Set([repoRoot, ...packages.map((pkg) => realpathSync.native(pkg.path))]);
   const errors: string[] = [];
   const warnings: string[] = [];
   const usedEntries = new Map<string, Set<string>>();
@@ -81,10 +82,14 @@ export function checkCatalogUsage(repoRoot: string): { errors: string[]; warning
 }
 
 export function checkLockfile(repoRoot: string): string[] {
-  const lockfiles = loadAll(readFileSync(join(repoRoot, "pnpm-lock.yaml"), "utf8")) as Lockfile[];
+  const documents = parseAllDocuments(readFileSync(join(repoRoot, "pnpm-lock.yaml"), "utf8"));
   const errors: string[] = [];
   // pnpm 11 uses separate YAML documents for tool dependencies and workspace dependencies.
-  for (const lockfile of lockfiles) {
+  for (const document of documents) {
+    if (document.errors.length > 0) {
+      throw document.errors[0];
+    }
+    const lockfile = document.toJS() as Lockfile;
     for (const [name, { resolution }] of Object.entries(lockfile.packages ?? {})) {
       // Git-hosted dependencies need their tarball URL; registry packages should be integrity-only.
       if (resolution?.tarball !== undefined && resolution.gitHosted !== true) {
