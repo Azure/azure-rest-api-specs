@@ -6,6 +6,7 @@ namespace Microsoft.ContainerService;
 @doc("Select members of a fleet.")
 @added(Versions.v2026_03_02_preview)
 @removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_02_preview)
 model MemberSelector {
   @doc("Kubernetes-style label selector for selecting Fleet members, e.g. `env=production`.")
   @maxLength(512)
