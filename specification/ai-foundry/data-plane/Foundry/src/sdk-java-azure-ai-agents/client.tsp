@@ -1101,6 +1101,11 @@ using Azure.AI.Projects;
   FoundryTimestamp,
   "java"
 );
+@@alternateType(
+  VoiceAgentServerEventResponseAnimationBlendshapesDone.output_index,
+  int64,
+  "java"
+);
 
 // Expose millisecond-valued VAD properties as Duration
 @@alternateType(
