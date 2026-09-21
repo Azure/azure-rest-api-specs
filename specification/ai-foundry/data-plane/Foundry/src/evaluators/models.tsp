@@ -142,15 +142,44 @@ union RubricWeighting {
   custom: "custom",
 }
 
+@doc("Versioned rubric scoring semantics.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union RubricScoringPolicyVersion {
+  string,
+
+  @doc("Original 1-5 rating policy.")
+  v1: "v1",
+
+  @doc("Boolean-default policy with an explicit 1-5 rating alternative.")
+  v2: "v2",
+}
+
+@doc("The quality-scoring mode selected for an entire rubric.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union RubricScoringMode {
+  string,
+
+  @doc("Every applicable quality check must pass. Weights and thresholds are not accepted.")
+  boolean: "boolean",
+
+  @doc("Grade applicable quality dimensions from 1 through 5, with optional relative weights.")
+  likert: "likert",
+}
+
 @doc("Explicit opt-in to explainable rubric scoring and caller-approved requirements. Omission of the policy preserves legacy scoring.")
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model RubricScoringPolicy {
-  @doc("Version of the scoring and acceptance rules. Only v1 is currently supported.")
-  policy_version: "v1";
+  @doc("Version of scoring and acceptance rules. v1 retains rating semantics; v2 defaults to Boolean.")
+  policy_version: RubricScoringPolicyVersion;
 
-  @doc("Quality weighting mode. Requirements never participate in the quality average.")
-  weighting?: RubricWeighting = RubricWeighting.equal;
+  @doc("Rubric-level mode, supported only by policy v2. Omission in v2 selects Boolean and the service persists that selection. Policy v1 does not accept this field.")
+  mode?: RubricScoringMode;
+
+  @doc("Optional rating weights, defaulting to equal for v1 or v2 Likert. Boolean mode rejects this field. Requirements never participate in an average.")
+  weighting?: RubricWeighting;
 }
 
 @doc("A caller-approved must-pass acceptance condition, separate from graded quality dimensions. Generation does not add or rewrite requirements.")
@@ -305,12 +334,15 @@ model RubricDimensionContribution {
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model RubricScoringResult {
   @doc("Scoring policy version used for this result.")
-  policy_version: "v1";
+  policy_version: RubricScoringPolicyVersion;
 
-  @doc("Quality weighting mode used for this result.")
-  weighting: RubricWeighting;
+  @doc("The resolved scoring mode. Present for policy v2; absent for v1 compatibility.")
+  mode?: RubricScoringMode;
 
-  @doc("Normalized quality score, equal to the top-level score when available. Absent when no quality dimension applies.")
+  @doc("Rating weighting mode. Required for rating and absent for Boolean.")
+  weighting?: RubricWeighting;
+
+  @doc("Quality score, equal to the top-level score when known. Rating uses a normalized 0-1 value; Boolean uses 1 for quality pass and 0 for quality fail, never a fraction of passed checks. Absent for unknown or N/A quality.")
   @minValue(0)
   @maxValue(1)
   quality_score?: float64;
@@ -318,10 +350,10 @@ model RubricScoringResult {
   @doc("Whether the quality score meets its threshold. Absent when quality is unavailable.")
   quality_passed?: boolean;
 
-  @doc("The configured quality acceptance threshold.")
+  @doc("The configured rating threshold. Required for rating and absent for Boolean.")
   @minValue(0)
   @maxValue(1)
-  quality_threshold: float32;
+  quality_threshold?: float32;
 
   @doc("False when any requirement is violated; true when all applicable requirements are satisfied, including an empty set. Absent when evidence is insufficient and no violation is established.")
   requirements_passed?: boolean;
@@ -329,11 +361,31 @@ model RubricScoringResult {
   @doc("Overall decision, computed from quality and explicit requirements.")
   decision: RubricScoringDecision;
 
-  @doc("Quality grades, exclusions, effective weights, and contributions.")
-  dimension_contributions: RubricDimensionContribution[];
+  @doc("Rating grades, exclusions, effective weights, and contributions. Required for rating and absent for Boolean.")
+  dimension_contributions?: RubricDimensionContribution[];
+
+  @doc("Typed Boolean quality judgments. Required for Boolean and absent for rating.")
+  dimension_results?: RubricBooleanDimensionResult[];
 
   @doc("Judgments of all configured requirements, including N/A and insufficient-evidence results.")
   requirement_results: RubricRequirementResult[];
+}
+
+@doc("One Boolean quality judgment, with explicit applicability and missing-evidence semantics.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model RubricBooleanDimensionResult {
+  @doc("Identifier of the configured quality dimension.")
+  id: string;
+
+  @doc("Whether the quality check applies to the evaluated response.")
+  applicable: boolean;
+
+  @doc("A known pass/fail judgment. Absent when not applicable or when evidence is insufficient; applicability distinguishes those states.")
+  passed?: boolean;
+
+  @doc("Brief evidence-based explanation.")
+  reason: string;
 }
 
 @doc("A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.")
@@ -352,11 +404,11 @@ model Dimension {
   @maxValue(10)
   legacy_weight: int32;
 
-  @doc("Relative quality weight, defaulting to 1. Equal weighting requires weight 1 for every dimension. Without a scoring policy, existing generated-weight behavior is unchanged.")
+  @doc("Optional rating weight, interpreted as 1 when omitted. Boolean mode rejects weights, including an explicitly supplied 1. No schema default is emitted so SDKs do not insert rating settings into Boolean requests.")
   @added(Versions.v1)
   @minValue(1)
   @maxValue(10)
-  weight?: int32 = 1;
+  weight?: int32;
 
   @doc("Optional authoring explanation. Generated for opted-in scoring; manual definitions may omit it.")
   @added(Versions.v1)
@@ -371,13 +423,21 @@ model Dimension {
 model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.rubric;
 
-  @doc("The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure.")
+  @doc("The quality checks or grading criteria. Rating generation includes a service residual; Boolean generation does not inject a generic residual. Existing v1 and legacy definitions retain their behavior.")
   dimensions: Dimension[];
 
   @doc("Quality threshold on the same normalized 0.0-1.0 scale as the emitted score. Defaults to 0.5, equivalent to a raw weighted grade of 3.0. Without a scoring policy, score >= threshold determines pass/fail; there is no implicit score-1 veto. With policy v1, explicit requirements must also be satisfied.")
+  @removed(Versions.v1)
+  @renamedFrom(Versions.v1, "pass_threshold")
   @minValue(0.0)
   @maxValue(1.0)
-  pass_threshold?: float32 = 0.5;
+  legacy_pass_threshold?: float32 = 0.5;
+
+  @doc("Optional rating threshold on the normalized 0-1 scale, interpreted as 0.5 when omitted. Boolean mode rejects this field. Explicit requirements remain independent acceptance gates.")
+  @added(Versions.v1)
+  @minValue(0.0)
+  @maxValue(1.0)
+  pass_threshold?: float32;
 
   @doc("Explicit opt-in to versioned explainable scoring. Omission preserves legacy scoring, including the absence of hard requirements.")
   @added(Versions.v1)

@@ -38393,8 +38393,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 10,
-            "description": "Relative quality weight, defaulting to 1. Equal weighting requires weight 1 for every dimension. Without a scoring policy, existing generated-weight behavior is unchanged.",
-            "default": 1
+            "description": "Optional rating weight, interpreted as 1 when omitted. Boolean mode rejects weights, including an explicitly supplied 1. No schema default is emitted so SDKs do not insert rating settings into Boolean requests."
           },
           "explanation": {
             "$ref": "#/components/schemas/RubricDimensionExplanation",
@@ -85057,15 +85056,14 @@
             "items": {
               "$ref": "#/components/schemas/Dimension"
             },
-            "description": "The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure."
+            "description": "The quality checks or grading criteria. Rating generation includes a service residual; Boolean generation does not inject a generic residual. Existing v1 and legacy definitions retain their behavior."
           },
           "pass_threshold": {
             "type": "number",
             "format": "float",
             "minimum": 0,
             "maximum": 1,
-            "description": "Quality threshold on the same normalized 0.0-1.0 scale as the emitted score. Defaults to 0.5, equivalent to a raw weighted grade of 3.0. Without a scoring policy, score >= threshold determines pass/fail; there is no implicit score-1 veto. With policy v1, explicit requirements must also be satisfied.",
-            "default": 0.5
+            "description": "Optional rating threshold on the normalized 0-1 scale, interpreted as 0.5 when omitted. Boolean mode rejects this field. Explicit requirements remain independent acceptance gates."
           },
           "scoring_policy": {
             "$ref": "#/components/schemas/RubricScoringPolicy",
@@ -85085,6 +85083,38 @@
           }
         ],
         "description": "Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "RubricBooleanDimensionResult": {
+        "type": "object",
+        "required": [
+          "id",
+          "applicable",
+          "reason"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the configured quality dimension."
+          },
+          "applicable": {
+            "type": "boolean",
+            "description": "Whether the quality check applies to the evaluated response."
+          },
+          "passed": {
+            "type": "boolean",
+            "description": "A known pass/fail judgment. Absent when not applicable or when evidence is insufficient; applicability distinguishes those states."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Brief evidence-based explanation."
+          }
+        },
+        "description": "One Boolean quality judgment, with explicit applicability and missing-evidence semantics.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Evaluations=V1Preview"
@@ -85386,6 +85416,26 @@
           ]
         }
       },
+      "RubricScoringMode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "boolean",
+              "likert"
+            ]
+          }
+        ],
+        "description": "The quality-scoring mode selected for an entire rubric.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "RubricScoringPolicy": {
         "type": "object",
         "required": [
@@ -85393,19 +85443,39 @@
         ],
         "properties": {
           "policy_version": {
-            "type": "string",
-            "enum": [
-              "v1"
-            ],
-            "description": "Version of the scoring and acceptance rules. Only v1 is currently supported."
+            "$ref": "#/components/schemas/RubricScoringPolicyVersion",
+            "description": "Version of scoring and acceptance rules. v1 retains rating semantics; v2 defaults to Boolean."
+          },
+          "mode": {
+            "$ref": "#/components/schemas/RubricScoringMode",
+            "description": "Rubric-level mode, supported only by policy v2. Omission in v2 selects Boolean and the service persists that selection. Policy v1 does not accept this field."
           },
           "weighting": {
             "$ref": "#/components/schemas/RubricWeighting",
-            "description": "Quality weighting mode. Requirements never participate in the quality average.",
-            "default": "equal"
+            "description": "Optional rating weights, defaulting to equal for v1 or v2 Likert. Boolean mode rejects this field. Requirements never participate in an average."
           }
         },
         "description": "Explicit opt-in to explainable rubric scoring and caller-approved requirements. Omission of the policy preserves legacy scoring.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "RubricScoringPolicyVersion": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "v1",
+              "v2"
+            ]
+          }
+        ],
+        "description": "Versioned rubric scoring semantics.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Evaluations=V1Preview"
@@ -85416,30 +85486,28 @@
         "type": "object",
         "required": [
           "policy_version",
-          "weighting",
-          "quality_threshold",
           "decision",
-          "dimension_contributions",
           "requirement_results"
         ],
         "properties": {
           "policy_version": {
-            "type": "string",
-            "enum": [
-              "v1"
-            ],
+            "$ref": "#/components/schemas/RubricScoringPolicyVersion",
             "description": "Scoring policy version used for this result."
+          },
+          "mode": {
+            "$ref": "#/components/schemas/RubricScoringMode",
+            "description": "The resolved scoring mode. Present for policy v2; absent for v1 compatibility."
           },
           "weighting": {
             "$ref": "#/components/schemas/RubricWeighting",
-            "description": "Quality weighting mode used for this result."
+            "description": "Rating weighting mode. Required for rating and absent for Boolean."
           },
           "quality_score": {
             "type": "number",
             "format": "double",
             "minimum": 0,
             "maximum": 1,
-            "description": "Normalized quality score, equal to the top-level score when available. Absent when no quality dimension applies."
+            "description": "Quality score, equal to the top-level score when known. Rating uses a normalized 0-1 value; Boolean uses 1 for quality pass and 0 for quality fail, never a fraction of passed checks. Absent for unknown or N/A quality."
           },
           "quality_passed": {
             "type": "boolean",
@@ -85450,7 +85518,7 @@
             "format": "float",
             "minimum": 0,
             "maximum": 1,
-            "description": "The configured quality acceptance threshold."
+            "description": "The configured rating threshold. Required for rating and absent for Boolean."
           },
           "requirements_passed": {
             "type": "boolean",
@@ -85465,7 +85533,14 @@
             "items": {
               "$ref": "#/components/schemas/RubricDimensionContribution"
             },
-            "description": "Quality grades, exclusions, effective weights, and contributions."
+            "description": "Rating grades, exclusions, effective weights, and contributions. Required for rating and absent for Boolean."
+          },
+          "dimension_results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RubricBooleanDimensionResult"
+            },
+            "description": "Typed Boolean quality judgments. Required for Boolean and absent for rating."
           },
           "requirement_results": {
             "type": "array",

@@ -84059,7 +84059,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Dimension'
-          description: "The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure."
+          description: The quality checks or grading criteria. Rating generation includes a service residual; Boolean generation does not inject a generic residual. Existing v1 and legacy definitions retain their behavior.
         pass_threshold:
           type: number
           format: float
