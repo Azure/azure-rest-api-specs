@@ -37,7 +37,7 @@ Below are code convention we strive to follow in `eng` directory:
   catalog with `catalog:` (or `catalog:<name>` for a named catalog); use `workspace:`
   for local workspace dependencies.
 - Run `pnpm check:workspace` from the repo root to validate catalog usage and lockfile
-  portability. The [Engineering workflow](../.github/workflows/eng.yml) runs these checks in CI.
+  portability. The [Eng workflow](../.github/workflows/eng.yml) runs these checks in CI.
   It checks `dependencies`, `devDependencies`, `peerDependencies`, and
   `optionalDependencies` in the root and all packages selected by pnpm. Manifests
   outside the workspace, including test fixtures and specification projects, are
