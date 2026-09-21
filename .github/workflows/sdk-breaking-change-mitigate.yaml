@@ -646,7 +646,7 @@ jobs:
                 .filter((result) => result?.isResolved === true)
                 .map(
                   (result) =>
-                    `| ${escapeTableCell(result.breakingChange)} | ${escapeTableCell(result.Resolution)} | ${escapeTableCell(result.TypeSpecChangesSummary)} |`,
+                    `| ${escapeTableCell(result.breakingChange)} | ${escapeTableCell(result.Resolution)} | ${escapeTableCell(result.TypeSpecChangesSummary?.[0])} |`,
                 );
               const unresolvedChanges = results
                 .filter((result) => result?.isResolved !== true)
