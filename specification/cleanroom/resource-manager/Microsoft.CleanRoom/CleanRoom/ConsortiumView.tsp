@@ -16,8 +16,10 @@ namespace Microsoft.CleanRoom;
  * Defines the consortium view.
  */
 @added(Versions.v2025_10_31_preview)
-model ConsortiumView
-  is Azure.ResourceManager.TrackedResource<ConsortiumViewProperties, false> {
+model ConsortiumView is Azure.ResourceManager.TrackedResource<
+  ConsortiumViewProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ConsortiumView,
     KeyName = "consortiumViewName",

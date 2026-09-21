@@ -15,8 +15,10 @@ namespace Microsoft.CleanRoom;
 /**
  * Defines the consortium.
  */
-model Consortium
-  is Azure.ResourceManager.TrackedResource<ConsortiumProperties, false> {
+model Consortium is Azure.ResourceManager.TrackedResource<
+  ConsortiumProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Consortium,
     KeyName = "consortiumName",

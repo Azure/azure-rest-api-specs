@@ -19,8 +19,10 @@ namespace Microsoft.CleanRoom;
  */
 @parentResource(Collaboration)
 @removed(Versions.v2025_10_31_preview)
-model Contract
-  is Azure.ResourceManager.ProxyResource<ContractProperties, false> {
+model Contract is Azure.ResourceManager.ProxyResource<
+  ContractProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Contract,
     KeyName = "contractName",

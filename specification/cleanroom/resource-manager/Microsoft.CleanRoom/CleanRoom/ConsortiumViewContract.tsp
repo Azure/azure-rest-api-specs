@@ -18,8 +18,10 @@ namespace Microsoft.CleanRoom;
  */
 @parentResource(ConsortiumView)
 @added(Versions.v2025_10_31_preview)
-model ConsortiumViewContract
-  is Azure.ResourceManager.ProxyResource<ContractProperties, false> {
+model ConsortiumViewContract is Azure.ResourceManager.ProxyResource<
+  ContractProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ConsortiumViewContract,
     KeyName = "contractName",

@@ -15,8 +15,16 @@ namespace Microsoft.CleanRoom;
 /**
  * Defines the collaboration.
  */
-model Collaboration
-  is Azure.ResourceManager.TrackedResource<CollaborationProperties, true> {
+model Collaboration is Azure.ResourceManager.TrackedResource<
+  CollaborationProperties,
+  true
+> {
+  /** Resource properties. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This January 2025-only property is emitted as properties via renamedFrom; later versions use the inherited optional properties bag."
+  @removed(Versions.v2025_10_31_preview)
+  @renamedFrom(Versions.v2025_10_31_preview, "properties")
+  legacyProperties: CollaborationProperties;
+
   ...ResourceNameParameter<
     Resource = Collaboration,
     KeyName = "collaborationName",
@@ -160,6 +168,7 @@ interface Collaborations {
 }
 
 @@doc(Collaboration.name, "Name of the collaboration.");
+@@added(Collaboration.properties, Versions.v2025_10_31_preview);
 @@doc(Collaboration.properties, "Resource properties.");
 @@doc(
   Collaborations.create::parameters.resource,

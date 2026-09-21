@@ -2,6 +2,12 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Microsoft.CleanRoom;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve January 2025 properties flattening."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Collaboration.legacyProperties,
+  "autorest"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Collaboration.properties,

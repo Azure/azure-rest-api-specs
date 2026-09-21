@@ -4,6 +4,12 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.CleanRoom;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve January 2025 properties flattening."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Collaboration.legacyProperties,
+  "!autorest"
+);
+
 @@clientName(Collaborations.create::parameters.resource, "body", "!autorest");
 @@clientName(Collaborations.update::parameters.properties, "body", "!autorest");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
