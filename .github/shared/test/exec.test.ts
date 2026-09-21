@@ -73,13 +73,13 @@ describe("execNpm", () => {
 
 describe("execNpmExec", () => {
   // A command run in the context of "npm exec ___" needs to call
-  // something referenced in package.json. In this case, prettier is present
+  // something installed in the workspace. In this case, oxfmt is present
   // so it is used.
-  it("runs prettier", async () => {
+  it("runs oxfmt", { timeout: 15_000 }, async () => {
     // npm may emit warnings to stderr (e.g. unknown env config) depending on the
     // environment, so only assert on stdout here.
-    const result = await execNpmExec(["prettier", "--version"], options);
-    expect(semver.valid(result.stdout.trim())).not.toBeNull();
+    const result = await execNpmExec(["oxfmt", "--version"], options);
+    expect(result.stdout.trim()).toMatch(/^Version: \d+\.\d+\.\d+$/);
   });
 });
 
@@ -136,13 +136,12 @@ describe("execPnpm", () => {
 
 describe("execPnpmExec", () => {
   // A command run in the context of "pnpm exec ___" needs to call
-  // something referenced in package.json. In this case, prettier is present
+  // something installed in the workspace. In this case, oxfmt is present
   // so it is used.
-  it("runs prettier", async () => {
-    await expect(execPnpmExec(["prettier", "--version"], options)).resolves.toMatchObject({
-      stdout: expect.toSatisfy((v) => semver.valid(String(v)) !== null) as unknown,
-      stderr: "",
-    });
+  it("runs oxfmt", async () => {
+    const result = await execPnpmExec(["oxfmt", "--version"], options);
+    expect(result.stdout.trim()).toMatch(/^Version: \d+\.\d+\.\d+$/);
+    expect(result.stderr).toBe("");
   });
 });
 
